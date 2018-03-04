@@ -1,0 +1,24 @@
+{
+  "__symbolic": "module",
+  "version": 3,
+  "metadata": {},
+  "exports": [
+    {
+      "from": "./core"
+    },
+    {
+      "from": "./button"
+    },
+    {
+      "from": "./divider"
+    },
+    {
+      "from": "./list"
+    },
+    {
+      "from": "./typings/index"
+    }
+  ],
+  "flatModuleIndexRedirect": true,
+  "importAs": "@ptsecurity/mosaic"
+}
