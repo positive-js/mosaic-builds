@@ -837,12 +837,12 @@ exports.McList = McList;
 exports.McListSubheaderCssStyler = McListSubheaderCssStyler;
 exports.McListItemBase = McListItemBase;
 exports.McListItem = McListItem;
-exports.ɵb3 = MC_SELECTION_LIST_VALUE_ACCESSOR;
-exports.ɵc3 = McListOption;
-exports.ɵa3 = McListOptionBase;
-exports.ɵf3 = McListSelection;
-exports.ɵd3 = McListSelectionBase;
-exports.ɵe3 = _McListSelectionMixinBase;
+exports.ɵb4 = MC_SELECTION_LIST_VALUE_ACCESSOR;
+exports.ɵc4 = McListOption;
+exports.ɵa4 = McListOptionBase;
+exports.ɵf4 = McListSelection;
+exports.ɵd4 = McListSelectionBase;
+exports.ɵe4 = _McListSelectionMixinBase;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

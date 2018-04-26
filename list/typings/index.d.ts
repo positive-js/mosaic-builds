@@ -2,4 +2,4 @@
  * Generated bundle index. Do not edit.
  */
 export * from './public-api';
-export { MC_SELECTION_LIST_VALUE_ACCESSOR as ɵb3, McListOption as ɵc3, McListOptionBase as ɵa3, McListSelection as ɵf3, McListSelectionBase as ɵd3, _McListSelectionMixinBase as ɵe3 } from './list-selection.component';
+export { MC_SELECTION_LIST_VALUE_ACCESSOR as ɵb4, McListOption as ɵc4, McListOptionBase as ɵa4, McListSelection as ɵf4, McListSelectionBase as ɵd4, _McListSelectionMixinBase as ɵe4 } from './list-selection.component';
