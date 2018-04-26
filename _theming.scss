@@ -1,4 +1,26 @@
 // Import all the theming
+@mixin cdk-a11y {
+
+    .cdk-visually-hidden {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+
+        // Avoid browsers rendering the focus ring in some cases.
+        outline: 0;
+
+        // Avoid some cases where the browser will still render the native controls (see #9049).
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+}
+
+
 * { box-sizing: border-box; }
 
 //html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address,
@@ -316,7 +338,7 @@ $mc-red: (
 );
 
 $mc-grey: (
-    40: #f6fbf4,
+    40: #f5f5f5,
     60: #f0f0f0,
     100: #e6e6e6,
     200: #cccccc,
@@ -447,11 +469,7 @@ $mc-dark-theme-background: (
 
 
 
-// TODO: Its only for testing colors
-
-
-
-@keyframes progress-bar-stripes {
+@keyframes mc-progress {
     from {
         background-position: 0 0;
     }
@@ -460,8 +478,38 @@ $mc-dark-theme-background: (
     }
 }
 
+.mc-progress {
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        $lighter: transparent;
+        $darker: rgba(0, 0, 0, .05);
+        background: linear-gradient(
+                135deg,
+                $darker 10px, $lighter 10px,
+                $lighter 20px, $darker 20px,
+                $darker 30px, $lighter 30px
+        ) repeat;
+        background-size: 29px 29px;
+        animation: mc-progress 1s linear infinite;
+    }
+}
+
+
+// TODO: Its only for testing colors
+
+
+
 @mixin _mc-button-primary-color($palette) {
-    $hover-opacity: 0.8;
+    $hover-lighten: 5%;
 
     color: mc-contrast($palette, 500);
 
@@ -471,19 +519,22 @@ $mc-dark-theme-background: (
     &:hover,
     &.mc-hover {
         background-image: linear-gradient(
-                to bottom, mc-color($palette, 500, $hover-opacity), mc-color($palette, 560, $hover-opacity)
+            to bottom,
+            lighten(mc-color($palette, 500), $hover-lighten),
+            lighten(mc-color($palette, 560), $hover-lighten)
         );
     }
 
     &:not([disabled]):active,
     &:not([disabled]).mc-active {
-        border-color: mc-color($palette, 700);
-        background-image: linear-gradient(to top, mc-color($palette, 600), mc-color($palette, 560));
+        background-image: linear-gradient(to bottom, mc-color($palette, 600), mc-color($palette, 560));
 
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                    to bottom, mc-color($palette, 600, $hover-opacity), mc-color($palette, 560, $hover-opacity)
+                to bottom,
+                lighten(mc-color($palette, 600), $hover-lighten),
+                lighten(mc-color($palette, 560), $hover-lighten)
             );
         }
     }
@@ -497,7 +548,7 @@ $mc-dark-theme-background: (
 }
 
 @mixin _mc-button-second-color($palette) {
-    $hover-opacity: 0.5;
+    $hover-darken: 5%;
 
     color: mc-contrast($palette, 500);
 
@@ -507,19 +558,20 @@ $mc-dark-theme-background: (
     &:hover,
     &.mc-hover {
         background-image: linear-gradient(
-                to bottom, mc-color($palette, 40, $hover-opacity), mc-color($palette, 100, $hover-opacity)
+            to bottom, darken(mc-color($palette, 40), $hover-darken), darken(mc-color($palette, 100), $hover-darken)
         );
     }
 
     &:not([disabled]):active,
     &:not([disabled]).mc-active {
-        border-color: mc-color($palette, 400);
-        background-image: linear-gradient(to top, mc-color($palette, 200), mc-color($palette, 100));
+        background-image: linear-gradient(to bottom, mc-color($palette, 200), mc-color($palette, 100));
 
         &:hover,
         &.mc-hover {
             background-image: linear-gradient(
-                    to bottom, mc-color($palette, 200, $hover-opacity), mc-color($palette, 100, $hover-opacity)
+                to bottom,
+                darken(mc-color($palette, 200), $hover-darken),
+                darken(mc-color($palette, 100), $hover-darken)
             );
         }
     }
@@ -529,6 +581,45 @@ $mc-dark-theme-background: (
 
         border-color: mc-color($palette, 200);
         background-image: linear-gradient(to bottom, mc-color($palette, 40, 1), mc-color($palette, 60));
+    }
+}
+
+@mixin _mc-button-warn-color($secondPalette, $warnPalette) {
+    $hover-darken: 5%;
+
+    color: mc-color($warnPalette, 500);
+
+    border-color: mc-color($secondPalette, 300);
+    background-image: linear-gradient(to bottom, mc-color($secondPalette, 40, 1), mc-color($secondPalette, 100));
+
+    &:hover,
+    &.mc-hover {
+        background-image: linear-gradient(
+            to bottom,
+            darken(mc-color($secondPalette, 40), $hover-darken),
+            darken(mc-color($secondPalette, 100), $hover-darken)
+        );
+    }
+
+    &:not([disabled]):active,
+    &:not([disabled]).mc-active {
+        background-image: linear-gradient(to bottom, mc-color($secondPalette, 200), mc-color($secondPalette, 100));
+
+        &:hover,
+        &.mc-hover {
+            background-image: linear-gradient(
+                to bottom,
+                darken(mc-color($secondPalette, 200), $hover-darken),
+                darken(mc-color($secondPalette, 100), $hover-darken)
+            );
+        }
+    }
+
+    &[disabled] {
+        color: mc-color($secondPalette, 200);
+
+        border-color: mc-color($secondPalette, 200);
+        background-image: linear-gradient(to bottom, mc-color($secondPalette, 40, 1), mc-color($secondPalette, 60));
     }
 }
 
@@ -549,63 +640,35 @@ $mc-dark-theme-background: (
         @include _mc-button-second-color($second);
     }
 
-    //&.mc-warn {
-    //    @include _mc-button-primary-color($warn);
-    //}
+    &.mc-warn {
+        @include _mc-button-warn-color($second, $warn);
+    }
 
     &.mc-primary,
     &.mc-second,
     &.mc-warn {
+
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0 0 2px mc-color($primary, A200);
-        }
-    }
-
-    &.mc-progress {
-        &:after {
-            content: '';
-
-            position: absolute;
-
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-            $lighter: transparent;
-            $darker: rgba(0, 0, 0, .05);
-            background: linear-gradient(
-                135deg,
-                $darker 10px, $lighter 10px,
-                $lighter 20px, $darker 20px,
-                $darker 30px, $lighter 30px
-            ) repeat;
-            background-size: 29px 29px;
-
-            animation: progress-bar-stripes 2s linear infinite;
+            box-shadow: 0 0 0 1px mc-color($primary, 500);
         }
     }
 }
 
 @mixin mc-button-theme($theme) {
+
     .mc-button,
     .mc-xs-button,
     .mc-sm-button,
     .mc-lg-button,
-    .mc-xl-button {
-        @include _mc-button-theme-color($theme);
-    }
-
+    .mc-xl-button,
     .mc-icon-button {
-
+        @include _mc-button-theme-color($theme);
     }
 }
 
 @mixin mc-button-typography($config) {
+
     .mc-button {
         font: {
             size:   mc-font-size($config, button);
@@ -621,6 +684,8 @@ $mc-dark-theme-background: (
 
 
 // TODO: Its only for testing colors
+
+
 
 // This mixin will ensure that lines that overflow the container will hide the overflow and
 // truncate neatly with an ellipsis.
@@ -673,6 +738,7 @@ $mc-dark-theme-background: (
 }
 
 
+
 @mixin mc-list-theme($theme) {
     $primary: map-get($theme, primary);
 
@@ -704,7 +770,7 @@ $mc-dark-theme-background: (
                 background-color: mc-color($primary, 100);
             }
 
-            &.mc-disabled {
+            &[disabled] {
                 background-color: transparent;
 
                 color: mc-color($foreground, disabled-text);
@@ -750,6 +816,59 @@ $mc-dark-theme-background: (
 
 
 
+
+
+@mixin _mc-radio-color($palette) {
+
+    .mc-radio-outer-circle {
+        border-color: mc-color($palette, 300);
+    }
+}
+
+@mixin mc-radio-theme($theme) {
+
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $warn: map-get($theme, warn);
+
+    .mc-radio-button {
+
+        &.mc-primary {
+            @include _mc-radio-color($primary);
+        }
+
+        &.mc-second {
+            @include _mc-radio-color($second);
+
+            &.mc-radio-checked .mc-radio-outer-circle {
+                border-color: mc-color($primary, 600);
+            }
+
+            &.mc-radio-checked .mc-radio-inner-circle {
+                background-color: mc-color($primary, 500);
+
+                &:before {
+                    background-color: white;
+                }
+            }
+
+        }
+
+        &.mc-warn {
+            @include _mc-radio-color($warn);
+        }
+    }
+}
+
+@mixin mc-radio-typography($config) {
+
+    .mc-radio-button {
+        font-family: mc-font-family($config);
+    }
+}
+
+
+
 @mixin mosaic-typography($config: null) {
     @if $config == null {
         $config: mc-typography-config();
@@ -759,17 +878,33 @@ $mc-dark-theme-background: (
 
     @include mc-button-typography($config);
     @include mc-list-typography($config);
+    @include mc-radio-typography($config);
 }
 
 
 // TODO: Create flex layout classes
 // 
 
+// Mixin that renders all of the core styles that are not theme-dependent.
+@mixin mc-core($typography-config: null) {
+
+    @include mosaic-typography($typography-config);
+    @include cdk-a11y();
+}
+
+// Mixin that renders all of the core styles that depend on the theme.
+@mixin mat-core-theme($theme) {
+
+}
+
+
 
 
 
 
 @mixin mosaic-theme($theme) {
+
     @include mc-button-theme($theme);
     @include mc-list-theme($theme);
+    @include mc-radio-theme($theme);
 }

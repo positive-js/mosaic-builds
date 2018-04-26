@@ -69,7 +69,6 @@ var McDivider = /** @class */ (function () {
                 },] },
     ];
     /** @nocollapse */
-    McDivider.ctorParameters = function () { return []; };
     McDivider.propDecorators = {
         "vertical": [{ type: Input },],
         "inset": [{ type: Input },],
@@ -99,8 +98,6 @@ var McDividerModule = /** @class */ (function () {
                     ]
                 },] },
     ];
-    /** @nocollapse */
-    McDividerModule.ctorParameters = function () { return []; };
     return McDividerModule;
 }());
 

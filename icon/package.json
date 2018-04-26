@@ -1,0 +1,7 @@
+{
+  "name": "@ptsecurity/mosaic/icon",
+  "typings": "../icon.d.ts",
+  "main": "../bundles/mosaic-icon.umd.js",
+  "module": "../esm5/icon.es5.js",
+  "es2015": "../esm2015/icon.js"
+}

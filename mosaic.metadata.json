@@ -7,13 +7,19 @@
       "from": "./core"
     },
     {
-      "from": "./button"
+      "from": "./icon"
     },
     {
       "from": "./divider"
     },
     {
       "from": "./list"
+    },
+    {
+      "from": "./radio"
+    },
+    {
+      "from": "./button"
     },
     {
       "from": "./typings/index"

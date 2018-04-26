@@ -6,6 +6,8 @@
  */
 export * from './typings/index';
 export * from './core';
-export * from './button';
+export * from './icon';
 export * from './divider';
 export * from './list';
+export * from './radio';
+export * from './button';

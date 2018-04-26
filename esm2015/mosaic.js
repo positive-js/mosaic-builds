@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { Version } from '@angular/core';
-export { McButtonModule, McButtonCSSStyler, McXSButtonCSSStyler, McSMButtonCSSStyler, McLGButtonCSSStyler, McXLButtonCSSStyler, McButtonBase, _McButtonMixinBase, McButton, McAnchor } from '@ptsecurity/mosaic/button';
+export { McButtonModule, McButtonCSSStyler, McXSButtonCSSStyler, McSMButtonCSSStyler, McLGButtonCSSStyler, McXLButtonCSSStyler, McIconButtonCSSStyler, McButtonBase, _McButtonMixinBase, McButton, McAnchor, McIconButton } from '@ptsecurity/mosaic/button';
 
 /**
  * @fileoverview added by tsickle

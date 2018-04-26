@@ -62,7 +62,6 @@ McDivider.decorators = [
             },] },
 ];
 /** @nocollapse */
-McDivider.ctorParameters = () => [];
 McDivider.propDecorators = {
     "vertical": [{ type: Input },],
     "inset": [{ type: Input },],
@@ -89,8 +88,6 @@ McDividerModule.decorators = [
                 ]
             },] },
 ];
-/** @nocollapse */
-McDividerModule.ctorParameters = () => [];
 
 /**
  * @fileoverview added by tsickle
