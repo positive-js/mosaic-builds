@@ -1,22 +1,14 @@
-import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
+import { AfterContentInit, ElementRef, EventEmitter, QueryList, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { CanDisable, HasTabIndex, McLine } from '@ptsecurity/mosaic/core';
-export declare class McListOptionBase {
-}
-export declare const MC_SELECTION_LIST_VALUE_ACCESSOR: any;
-export declare class McListSelectionChange {
-    source: McListSelection;
-    option: McListOption;
-    constructor(source: McListSelection, option: McListOption);
-}
+import { McLine, CanDisable } from '@ptsecurity/mosaic/core';
 /**
  * Component for list-options of selection-list. Each list-option can automatically
  * generate a checkbox and can put current item into the selectionModel of selection-list
  * if the current item is selected.
  */
-export declare class McListOption extends McListOptionBase implements AfterContentInit, OnDestroy, OnInit, IFocusableOption {
+export declare class McListOption implements AfterContentInit, OnDestroy, OnInit, IFocusableOption {
     private _element;
     private _changeDetector;
     listSelection: McListSelection;
@@ -34,28 +26,36 @@ export declare class McListOption extends McListOptionBase implements AfterConte
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
-    _getHeight(): number;
     toggle(): void;
     focus(): void;
     getLabel(): any;
+    setSelected(selected: boolean): void;
+    _getHeight(): number;
     _handleClick(): void;
     _handleFocus(): void;
     _handleBlur(): void;
     _getHostElement(): HTMLElement;
-    _setSelected(selected: boolean): void;
+}
+export declare const MC_SELECTION_LIST_VALUE_ACCESSOR: any;
+export declare class McListSelectionChange {
+    source: McListSelection;
+    option: McListOption;
+    constructor(source: McListSelection, option: McListOption);
 }
 export declare class McListSelectionBase {
 }
-export declare const _McListSelectionMixinBase: (new (...args: any[]) => HasTabIndex) & (new (...args: any[]) => CanDisable) & typeof McListSelectionBase;
-export declare class McListSelection extends _McListSelectionMixinBase implements IFocusableOption, CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor {
+export declare const _McListSelectionMixinBase: (new (...args: any[]) => CanDisable) & typeof McListSelectionBase;
+export declare class McListSelection extends _McListSelectionMixinBase implements IFocusableOption, CanDisable, AfterContentInit, ControlValueAccessor {
     private _element;
     _keyManager: FocusKeyManager<McListOption>;
     options: QueryList<McListOption>;
     horizontal: boolean;
     multiple: boolean;
+    selectOnFocus: boolean;
+    tabIndex: number;
     readonly selectionChange: EventEmitter<McListSelectionChange>;
     selectedOptions: SelectionModel<McListOption>;
-    onResize(): void;
+    private _scrollSize;
     private _tempValues;
     private _modelChanges;
     constructor(_element: ElementRef, tabIndex: string);
@@ -64,22 +64,22 @@ export declare class McListSelection extends _McListSelectionMixinBase implement
     focus(): void;
     selectAll(): void;
     deselectAll(): void;
-    _updateScrollSize(): void;
-    _getHeight(): number;
-    _onTouched: () => void;
-    _setFocusedOption(option: McListOption): void;
-    _removeOptionFromList(option: McListOption): void;
-    _keydown(event: KeyboardEvent): void;
-    _reportValueChange(): void;
-    _emitChangeEvent(option: McListOption): void;
+    updateScrollSize(): void;
+    setFocusedOption(option: McListOption): void;
     writeValue(values: string[]): void;
     registerOnChange(fn: (value: any) => void): void;
     registerOnTouched(fn: () => void): void;
     setDisabledState(isDisabled: boolean): void;
+    getSelectedOptionValues(): string[];
+    toggleFocusedOption(): void;
+    _getHeight(): number;
+    _onTouched: () => void;
+    _removeOptionFromList(option: McListOption): void;
+    _onKeyDown(event: KeyboardEvent): void;
+    _reportValueChange(): void;
+    _emitChangeEvent(option: McListOption): void;
     private _getOptionByValue(value);
     private _setOptionsFromValues(values);
-    private _getSelectedOptionValues();
-    private _toggleSelectOnFocusedOption();
     /**
      * Utility to ensure all indexes are valid.
      * @param index The index to be checked.
