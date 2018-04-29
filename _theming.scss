@@ -650,7 +650,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0 0 1px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-e3a4ec4px mc-color($primary, 500);
         }
     }
 }
