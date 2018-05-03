@@ -61,7 +61,7 @@ $typography-font-weight-values: (
 // TODO add caption-height
 $fonts: (
     base: (
-        font-family: #{Roboto, 'Helvetica Neue', sans-serif}
+        font-family: #{Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", 'Helvetica Neue', Arial, sans-serif}
     ),
     monospace: (
         font-family: #{Monaco, Consolas, 'Lucida Console', monospace}
@@ -650,7 +650,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-fa0d37bpx mc-color($primary, 500);
+            box-shadow: 0 0.0.1-6b18106px mc-color($primary, 500);
         }
     }
 }
