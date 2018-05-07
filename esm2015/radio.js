@@ -312,7 +312,11 @@ class McRadioButton extends _McRadioButtonMixinBase {
         return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
     }
     set disabled(value) {
-        this._disabled = toBoolean(value);
+        const newDisabledState = toBoolean(value);
+        if (this._disabled !== newDisabledState) {
+            this._disabled = newDisabledState;
+            this._changeDetector.markForCheck();
+        }
     }
     /** Whether the radio button is required. */
     get required() {

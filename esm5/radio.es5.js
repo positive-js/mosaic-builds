@@ -421,7 +421,11 @@ var McRadioButton = /** @class */ (function (_super) {
             return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
         },
         set: function (value) {
-            this._disabled = toBoolean(value);
+            var newDisabledState = toBoolean(value);
+            if (this._disabled !== newDisabledState) {
+                this._disabled = newDisabledState;
+                this._changeDetector.markForCheck();
+            }
         },
         enumerable: true,
         configurable: true
