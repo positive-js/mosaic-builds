@@ -1,13 +1,13 @@
 {
     "name": "@ptsecurity/mosaic",
-    "version": "0.0.1-a8b79c6",
+    "version": "0.0.1-8f725dd",
     "main": "./bundles/mosaic.umd.js",
     "module": "./esm5/mosaic.es5.js",
     "es2015": "./esm2015/mosaic.js",
     "typings": "./mosaic.d.ts",
     "license": "MIT",
     "peerDependencies": {
-        "@ptsecurity/cdk": "0.0.1-a8b79c6",
+        "@ptsecurity/cdk": "0.0.1-8f725dd",
         "@angular/core": "^6.0.0",
         "@angular/common": "^6.0.0"
     },
