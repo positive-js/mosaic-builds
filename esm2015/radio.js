@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, Optional, Output, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { UniqueSelectionDispatcher, UNIQUE_SELECTION_DISPATCHER_PROVIDER } from '@ptsecurity/cdk/collections';
+import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
 import { mixinColor, mixinDisabled, mixinTabIndex, toBoolean, McCommonModule } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 
@@ -449,7 +449,6 @@ McRadioModule.decorators = [
     { type: NgModule, args: [{
                 imports: [CommonModule, A11yModule, McCommonModule],
                 exports: [McRadioGroup, McRadioButton, McCommonModule],
-                providers: [UNIQUE_SELECTION_DISPATCHER_PROVIDER],
                 declarations: [McRadioGroup, McRadioButton]
             },] },
 ];

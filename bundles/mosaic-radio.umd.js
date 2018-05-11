@@ -617,7 +617,6 @@ var McRadioModule = /** @class */ (function () {
         { type: core.NgModule, args: [{
                     imports: [common.CommonModule, a11y.A11yModule, core$1.McCommonModule],
                     exports: [McRadioGroup, McRadioButton, core$1.McCommonModule],
-                    providers: [collections.UNIQUE_SELECTION_DISPATCHER_PROVIDER],
                     declarations: [McRadioGroup, McRadioButton]
                 },] },
     ];
