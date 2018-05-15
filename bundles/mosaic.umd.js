@@ -563,7 +563,7 @@ var McButtonModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var /** @type {?} */ VERSION = new core.Version('0.0.1-9436383');
+var /** @type {?} */ VERSION = new core.Version('0.0.1-6ed5311');
 
 exports.VERSION = VERSION;
 exports.McButtonModule = McButtonModule;
