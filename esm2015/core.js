@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Component, ViewEncapsulation, Input, ChangeDetectionStrategy } from '@angular/core';
+import { BidiModule } from '@ptsecurity/cdk/bidi';
 
 /**
  * @fileoverview added by tsickle
@@ -38,7 +39,16 @@ function toBoolean(value) {
  * @suppress {checkTypes} checked by tsc
  */
 // Injection token that configures whether the Mosaic sanity checks are enabled.
-const /** @type {?} */ MС_SANITY_CHECKS = new InjectionToken('mc-sanity-checks');
+const /** @type {?} */ MС_SANITY_CHECKS = new InjectionToken('mc-sanity-checks', {
+    providedIn: 'root',
+    factory: MC_SANITY_CHECKS_FACTORY
+});
+/**
+ * @return {?}
+ */
+function MC_SANITY_CHECKS_FACTORY() {
+    return true;
+}
 /**
  * Module that captures anything that should be loaded and/or run for *all* Mosaic
  * components. This includes Bidi, etc.
@@ -52,7 +62,6 @@ class McCommonModule {
     constructor(_sanityChecksEnabled) {
         this._sanityChecksEnabled = _sanityChecksEnabled;
         this._hasDoneGlobalChecks = false;
-        this._hasCheckedHammer = false;
         this._document = typeof document === 'object' && document ? document : null;
         this._window = typeof window === 'object' && window ? window : null;
         if (this._areChecksEnabled() && !this._hasDoneGlobalChecks) {
@@ -102,26 +111,11 @@ class McCommonModule {
             this._document.body.removeChild(testElement);
         }
     }
-    /**
-     * @return {?}
-     */
-    _checkHammerIsAvailable() {
-        if (this._hasCheckedHammer || !this._window) {
-            return;
-        }
-        if (this._areChecksEnabled() && !this._window['Hammer']) {
-            console.warn('Could not find HammerJS. Certain Mosaic components may not work correctly.');
-        }
-        this._hasCheckedHammer = true;
-    }
 }
 McCommonModule.decorators = [
     { type: NgModule, args: [{
-                imports: [],
-                exports: [],
-                providers: [{
-                        provide: MС_SANITY_CHECKS, useValue: true
-                    }]
+                imports: [BidiModule],
+                exports: [BidiModule]
             },] },
 ];
 /** @nocollapse */
@@ -405,5 +399,5 @@ McPseudoCheckboxModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 
-export { isBoolean, toBoolean, McCommonModule, MС_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, McLine, McLineSetter, McLineModule, McPseudoCheckboxModule, McPseudoCheckbox };
+export { isBoolean, toBoolean, McCommonModule, MС_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, McLine, McLineSetter, McLineModule, McPseudoCheckboxModule, McPseudoCheckbox, MC_SANITY_CHECKS_FACTORY as ɵa0 };
 //# sourceMappingURL=core.js.map

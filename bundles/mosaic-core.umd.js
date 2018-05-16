@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/core'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}),global.ng.core));
-}(this, (function (exports,core) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/core', '@ptsecurity/cdk/bidi'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}),global.ng.core,global.ng.cdk.bidi));
+}(this, (function (exports,core,bidi) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -68,7 +68,16 @@ function toBoolean(value) {
  * @suppress {checkTypes} checked by tsc
  */
 // Injection token that configures whether the Mosaic sanity checks are enabled.
-var /** @type {?} */ MС_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks');
+var /** @type {?} */ MС_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
+    providedIn: 'root',
+    factory: MC_SANITY_CHECKS_FACTORY
+});
+/**
+ * @return {?}
+ */
+function MC_SANITY_CHECKS_FACTORY() {
+    return true;
+}
 /**
  * Module that captures anything that should be loaded and/or run for *all* Mosaic
  * components. This includes Bidi, etc.
@@ -79,7 +88,6 @@ var McCommonModule = /** @class */ (function () {
     function McCommonModule(_sanityChecksEnabled) {
         this._sanityChecksEnabled = _sanityChecksEnabled;
         this._hasDoneGlobalChecks = false;
-        this._hasCheckedHammer = false;
         this._document = typeof document === 'object' && document ? document : null;
         this._window = typeof window === 'object' && window ? window : null;
         if (this._areChecksEnabled() && !this._hasDoneGlobalChecks) {
@@ -141,29 +149,10 @@ var McCommonModule = /** @class */ (function () {
             this._document.body.removeChild(testElement);
         }
     };
-    // Checks whether HammerJS is available.
-    /**
-     * @return {?}
-     */
-    McCommonModule.prototype._checkHammerIsAvailable = /**
-     * @return {?}
-     */
-    function () {
-        if (this._hasCheckedHammer || !this._window) {
-            return;
-        }
-        if (this._areChecksEnabled() && !this._window['Hammer']) {
-            console.warn('Could not find HammerJS. Certain Mosaic components may not work correctly.');
-        }
-        this._hasCheckedHammer = true;
-    };
     McCommonModule.decorators = [
         { type: core.NgModule, args: [{
-                    imports: [],
-                    exports: [],
-                    providers: [{
-                            provide: MС_SANITY_CHECKS, useValue: true
-                        }]
+                    imports: [bidi.BidiModule],
+                    exports: [bidi.BidiModule]
                 },] },
     ];
     /** @nocollapse */
@@ -503,6 +492,7 @@ exports.McLineSetter = McLineSetter;
 exports.McLineModule = McLineModule;
 exports.McPseudoCheckboxModule = McPseudoCheckboxModule;
 exports.McPseudoCheckbox = McPseudoCheckbox;
+exports.ɵa0 = MC_SANITY_CHECKS_FACTORY;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

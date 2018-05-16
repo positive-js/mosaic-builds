@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform));
-}(this, (function (exports,core,common,a11y,platform) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform));
+}(this, (function (exports,core,bidi,common,a11y,platform) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -59,7 +59,16 @@ function toBoolean(value) {
  * @suppress {checkTypes} checked by tsc
  */
 // Injection token that configures whether the Mosaic sanity checks are enabled.
-var /** @type {?} */ MС_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks');
+var /** @type {?} */ MС_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
+    providedIn: 'root',
+    factory: MC_SANITY_CHECKS_FACTORY
+});
+/**
+ * @return {?}
+ */
+function MC_SANITY_CHECKS_FACTORY() {
+    return true;
+}
 
 /**
  * @fileoverview added by tsickle
@@ -563,7 +572,7 @@ var McButtonModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var /** @type {?} */ VERSION = new core.Version('0.0.1-611413d');
+var /** @type {?} */ VERSION = new core.Version('0.0.1-89b6d23');
 
 exports.VERSION = VERSION;
 exports.McButtonModule = McButtonModule;

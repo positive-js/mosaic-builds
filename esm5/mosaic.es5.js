@@ -11,7 +11,7 @@ export { McButtonModule, McButtonCSSStyler, McXSButtonCSSStyler, McSMButtonCSSSt
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var /** @type {?} */ VERSION = new Version('0.0.1-611413d');
+var /** @type {?} */ VERSION = new Version('0.0.1-89b6d23');
 
 /**
  * @fileoverview added by tsickle
