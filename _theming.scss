@@ -627,7 +627,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-dae9f41px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-2cba28apx mc-color($primary, 500);
         }
     }
 }
@@ -724,13 +724,14 @@ $mc-dark-theme-background: (
 
     .mc-list,
     .mc-list-selection {
+
         .mc-list-item {
             color: mc-color($foreground, text);
         }
 
         .mc-list-option {
             outline: none;
-            border: 1px solid transparent;
+            border: 2px solid transparent;
 
             color: mc-color($foreground, text);
 
@@ -740,7 +741,7 @@ $mc-dark-theme-background: (
             }
 
             &.mc-focused {
-                border: 1px solid mc-color($primary, 400);
+                border: 2px solid mc-color($primary, 500);
             }
 
             &.mc-selected {
@@ -768,9 +769,9 @@ $mc-dark-theme-background: (
         font-family: $font-family;
     }
 
-    // Default list
     .mc-list,
     .mc-list-selection {
+
         .mc-list-item {
             font-size: mc-font-size($config, subheading-2);
 
