@@ -212,7 +212,7 @@ var McListOption = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.disabled || this.listSelection.selectOnFocus) {
+        if (this.disabled || this.listSelection.autoSelect) {
             return;
         }
         this.toggle();
@@ -307,13 +307,10 @@ var McListSelectionBase = /** @class */ (function () {
 var /** @type {?} */ _McListSelectionMixinBase = core$1.mixinDisabled(McListSelectionBase);
 var McListSelection = /** @class */ (function (_super) {
     __extends(McListSelection, _super);
-    function McListSelection(_element, tabIndex) {
+    function McListSelection(_element, tabIndex, autoSelect, noUnselect, multiple) {
         var _this = _super.call(this) || this;
         _this._element = _element;
         _this.horizontal = false;
-        _this.multiple = false;
-        _this.selectOnFocus = false;
-        _this.tabIndex = 0;
         // Emits a change event whenever the selected state of an option changes.
         _this.selectionChange = new core.EventEmitter();
         _this.selectedOptions = new collections.SelectionModel(true);
@@ -322,6 +319,9 @@ var McListSelection = /** @class */ (function (_super) {
         // View to model callback that should be called if the list or its options lost focus.
         _this._onTouched = function () { };
         _this._onChange = function (_) { };
+        _this.autoSelect = autoSelect === null ? true : core$1.toBoolean(autoSelect);
+        _this.multiple = multiple === null ? true : core$1.toBoolean(multiple);
+        _this.noUnselect = noUnselect === null ? true : core$1.toBoolean(noUnselect);
         _this.tabIndex = parseInt(tabIndex) || 0;
         return _this;
     }
@@ -333,8 +333,6 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function () {
         this.horizontal = core$1.toBoolean(this.horizontal);
-        this.multiple = core$1.toBoolean(this.multiple);
-        this.selectOnFocus = core$1.toBoolean(this.selectOnFocus);
         this._keyManager = new a11y.FocusKeyManager(this.options)
             .withTypeAhead()
             .withHorizontalOrientation(this.horizontal ? 'ltr' : null)
@@ -414,10 +412,8 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function (option) {
         this._keyManager.updateActiveItemIndex(this._getOptionIndex(option));
-        if (this.selectOnFocus) {
-            if (!this.multiple) {
-                this.options.forEach(function (item) { return item.setSelected(false); });
-            }
+        if (this.autoSelect) {
+            this.options.forEach(function (item) { return item.setSelected(false); });
             option.setSelected(true);
             this._emitChangeEvent(option);
             this._reportValueChange();
@@ -495,6 +491,9 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
+        if (this.noUnselect && this.selectedOptions.selected.length === 1) {
+            return;
+        }
         var /** @type {?} */ focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             var /** @type {?} */ focusedOption = this.options.toArray()[focusedIndex];
@@ -682,13 +681,13 @@ var McListSelection = /** @class */ (function (_super) {
     McListSelection.ctorParameters = function () { return [
         { type: core.ElementRef, },
         { type: undefined, decorators: [{ type: core.Attribute, args: ['tabindex',] },] },
+        { type: undefined, decorators: [{ type: core.Attribute, args: ['auto-select',] },] },
+        { type: undefined, decorators: [{ type: core.Attribute, args: ['no-unselect',] },] },
+        { type: undefined, decorators: [{ type: core.Attribute, args: ['multiple',] },] },
     ]; };
     McListSelection.propDecorators = {
         "options": [{ type: core.ContentChildren, args: [McListOption,] },],
         "horizontal": [{ type: core.Input },],
-        "multiple": [{ type: core.Input },],
-        "selectOnFocus": [{ type: core.Input },],
-        "tabIndex": [{ type: core.Input },],
         "selectionChange": [{ type: core.Output },],
     };
     return McListSelection;

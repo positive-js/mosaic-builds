@@ -190,7 +190,7 @@ var McListOption = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.disabled || this.listSelection.selectOnFocus) {
+        if (this.disabled || this.listSelection.autoSelect) {
             return;
         }
         this.toggle();
@@ -285,13 +285,10 @@ var McListSelectionBase = /** @class */ (function () {
 var /** @type {?} */ _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
 var McListSelection = /** @class */ (function (_super) {
     __extends(McListSelection, _super);
-    function McListSelection(_element, tabIndex) {
+    function McListSelection(_element, tabIndex, autoSelect, noUnselect, multiple) {
         var _this = _super.call(this) || this;
         _this._element = _element;
         _this.horizontal = false;
-        _this.multiple = false;
-        _this.selectOnFocus = false;
-        _this.tabIndex = 0;
         // Emits a change event whenever the selected state of an option changes.
         _this.selectionChange = new EventEmitter();
         _this.selectedOptions = new SelectionModel(true);
@@ -300,6 +297,9 @@ var McListSelection = /** @class */ (function (_super) {
         // View to model callback that should be called if the list or its options lost focus.
         _this._onTouched = function () { };
         _this._onChange = function (_) { };
+        _this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
+        _this.multiple = multiple === null ? true : toBoolean(multiple);
+        _this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
         _this.tabIndex = parseInt(tabIndex) || 0;
         return _this;
     }
@@ -311,8 +311,6 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function () {
         this.horizontal = toBoolean(this.horizontal);
-        this.multiple = toBoolean(this.multiple);
-        this.selectOnFocus = toBoolean(this.selectOnFocus);
         this._keyManager = new FocusKeyManager(this.options)
             .withTypeAhead()
             .withHorizontalOrientation(this.horizontal ? 'ltr' : null)
@@ -392,10 +390,8 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function (option) {
         this._keyManager.updateActiveItemIndex(this._getOptionIndex(option));
-        if (this.selectOnFocus) {
-            if (!this.multiple) {
-                this.options.forEach(function (item) { return item.setSelected(false); });
-            }
+        if (this.autoSelect) {
+            this.options.forEach(function (item) { return item.setSelected(false); });
             option.setSelected(true);
             this._emitChangeEvent(option);
             this._reportValueChange();
@@ -473,6 +469,9 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
+        if (this.noUnselect && this.selectedOptions.selected.length === 1) {
+            return;
+        }
         var /** @type {?} */ focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             var /** @type {?} */ focusedOption = this.options.toArray()[focusedIndex];
@@ -660,13 +659,13 @@ var McListSelection = /** @class */ (function (_super) {
     McListSelection.ctorParameters = function () { return [
         { type: ElementRef, },
         { type: undefined, decorators: [{ type: Attribute, args: ['tabindex',] },] },
+        { type: undefined, decorators: [{ type: Attribute, args: ['auto-select',] },] },
+        { type: undefined, decorators: [{ type: Attribute, args: ['no-unselect',] },] },
+        { type: undefined, decorators: [{ type: Attribute, args: ['multiple',] },] },
     ]; };
     McListSelection.propDecorators = {
         "options": [{ type: ContentChildren, args: [McListOption,] },],
         "horizontal": [{ type: Input },],
-        "multiple": [{ type: Input },],
-        "selectOnFocus": [{ type: Input },],
-        "tabIndex": [{ type: Input },],
         "selectionChange": [{ type: Output },],
     };
     return McListSelection;

@@ -156,7 +156,7 @@ class McListOption {
      * @return {?}
      */
     _handleClick() {
-        if (this.disabled || this.listSelection.selectOnFocus) {
+        if (this.disabled || this.listSelection.autoSelect) {
             return;
         }
         this.toggle();
@@ -243,14 +243,14 @@ class McListSelection extends _McListSelectionMixinBase {
     /**
      * @param {?} _element
      * @param {?} tabIndex
+     * @param {?} autoSelect
+     * @param {?} noUnselect
+     * @param {?} multiple
      */
-    constructor(_element, tabIndex) {
+    constructor(_element, tabIndex, autoSelect, noUnselect, multiple) {
         super();
         this._element = _element;
         this.horizontal = false;
-        this.multiple = false;
-        this.selectOnFocus = false;
-        this.tabIndex = 0;
         // Emits a change event whenever the selected state of an option changes.
         this.selectionChange = new EventEmitter();
         this.selectedOptions = new SelectionModel(true);
@@ -259,6 +259,9 @@ class McListSelection extends _McListSelectionMixinBase {
         // View to model callback that should be called if the list or its options lost focus.
         this._onTouched = () => { };
         this._onChange = (_) => { };
+        this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
+        this.multiple = multiple === null ? true : toBoolean(multiple);
+        this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
         this.tabIndex = parseInt(tabIndex) || 0;
     }
     /**
@@ -266,8 +269,6 @@ class McListSelection extends _McListSelectionMixinBase {
      */
     ngAfterContentInit() {
         this.horizontal = toBoolean(this.horizontal);
-        this.multiple = toBoolean(this.multiple);
-        this.selectOnFocus = toBoolean(this.selectOnFocus);
         this._keyManager = new FocusKeyManager(this.options)
             .withTypeAhead()
             .withHorizontalOrientation(this.horizontal ? 'ltr' : null)
@@ -327,10 +328,8 @@ class McListSelection extends _McListSelectionMixinBase {
      */
     setFocusedOption(option) {
         this._keyManager.updateActiveItemIndex(this._getOptionIndex(option));
-        if (this.selectOnFocus) {
-            if (!this.multiple) {
-                this.options.forEach((item) => item.setSelected(false));
-            }
+        if (this.autoSelect) {
+            this.options.forEach((item) => item.setSelected(false));
             option.setSelected(true);
             this._emitChangeEvent(option);
             this._reportValueChange();
@@ -381,6 +380,9 @@ class McListSelection extends _McListSelectionMixinBase {
      * @return {?}
      */
     toggleFocusedOption() {
+        if (this.noUnselect && this.selectedOptions.selected.length === 1) {
+            return;
+        }
         const /** @type {?} */ focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             const /** @type {?} */ focusedOption = this.options.toArray()[focusedIndex];
@@ -530,13 +532,13 @@ McListSelection.decorators = [
 McListSelection.ctorParameters = () => [
     { type: ElementRef, },
     { type: undefined, decorators: [{ type: Attribute, args: ['tabindex',] },] },
+    { type: undefined, decorators: [{ type: Attribute, args: ['auto-select',] },] },
+    { type: undefined, decorators: [{ type: Attribute, args: ['no-unselect',] },] },
+    { type: undefined, decorators: [{ type: Attribute, args: ['multiple',] },] },
 ];
 McListSelection.propDecorators = {
     "options": [{ type: ContentChildren, args: [McListOption,] },],
     "horizontal": [{ type: Input },],
-    "multiple": [{ type: Input },],
-    "selectOnFocus": [{ type: Input },],
-    "tabIndex": [{ type: Input },],
     "selectionChange": [{ type: Output },],
 };
 
