@@ -655,7 +655,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-e2f8bb6px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-7e4f73cpx mc-color($primary, 500);
         }
     }
 }
@@ -797,18 +797,14 @@ $mc-dark-theme-background: (
 
     .mc-list,
     .mc-list-selection {
-        .mc-list-item {
-            font-size: mc-font-size($config, subheading);
-
-            @include mc-line-base(mc-font-size($config, body));
-        }
-
+        .mc-list-item,
         .mc-list-option {
             font-size: mc-font-size($config, subheading);
 
             @include mc-line-base(mc-font-size($config, body));
         }
 
+        // todo now we are not use it
         .mc-subheader {
             font-family: mc-font-family($config, subheading);
             font-size: mc-font-size($config, subheading);
