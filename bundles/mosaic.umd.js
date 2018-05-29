@@ -1813,8 +1813,18 @@ var McListSelection = /** @class */ (function (_super) {
         // непонятна целесообразность сего
         // Sync external changes to the model back to the options.
         this._modelChanges = /** @type {?} */ ((this.selectedOptions.onChange)).subscribe(function (event) {
-            event.added.forEach(function (item) { item.selected = true; });
-            event.removed.forEach(function (item) { item.selected = false; });
+            if (event.added) {
+                for (var _i = 0, _a = event.added; _i < _a.length; _i++) {
+                    var item = _a[_i];
+                    item.selected = true;
+                }
+            }
+            if (event.removed) {
+                for (var _b = 0, _c = event.removed; _b < _c.length; _b++) {
+                    var item = _c[_b];
+                    item.selected = false;
+                }
+            }
         });
         this.updateScrollSize();
     };
@@ -2311,7 +2321,7 @@ var McListModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var /** @type {?} */ VERSION = new core.Version('0.0.1-8f9cc6d');
+var /** @type {?} */ VERSION = new core.Version('0.0.1-0b6a135');
 
 exports.VERSION = VERSION;
 exports.McButtonModule = McButtonModule;
