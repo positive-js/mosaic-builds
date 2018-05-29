@@ -15,7 +15,7 @@ export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemB
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-const /** @type {?} */ VERSION = new Version('0.0.1-e2022cf');
+const /** @type {?} */ VERSION = new Version('0.0.1-5d2df39');
 
 /**
  * @fileoverview added by tsickle

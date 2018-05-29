@@ -50,8 +50,7 @@ var McIcon = /** @class */ (function (_super) {
         return this._elementRef.nativeElement;
     };
     McIcon.decorators = [
-        { type: Component, args: [{
-                    selector: "[mc-icon]",
+        { type: Component, args: [{selector: "[mc-icon]",
                     template: '<ng-content></ng-content>',
                     styles: [""],
                     changeDetection: ChangeDetectionStrategy.OnPush,

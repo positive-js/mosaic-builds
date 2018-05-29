@@ -48,8 +48,7 @@ class McIcon extends _McIconMixinBase {
     }
 }
 McIcon.decorators = [
-    { type: Component, args: [{
-                selector: `[mc-icon]`,
+    { type: Component, args: [{selector: `[mc-icon]`,
                 template: '<ng-content></ng-content>',
                 styles: [""],
                 changeDetection: ChangeDetectionStrategy.OnPush,
