@@ -45,7 +45,8 @@ class McDivider {
     }
 }
 McDivider.decorators = [
-    { type: Component, args: [{selector: 'mc-divider',
+    { type: Component, args: [{
+                selector: 'mc-divider',
                 host: {
                     class: 'mc-divider',
                     role: 'separator',

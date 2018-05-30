@@ -149,7 +149,8 @@ class McButton extends _McButtonMixinBase {
     }
 }
 McButton.decorators = [
-    { type: Component, args: [{selector: `
+    { type: Component, args: [{
+                selector: `
         button[mc-button],
         button[mc-xs-button],
         button[mc-sm-button],

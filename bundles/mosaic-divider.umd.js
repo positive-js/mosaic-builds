@@ -54,7 +54,8 @@ var McDivider = /** @class */ (function () {
         configurable: true
     });
     McDivider.decorators = [
-        { type: core.Component, args: [{selector: 'mc-divider',
+        { type: core.Component, args: [{
+                    selector: 'mc-divider',
                     host: {
                         class: 'mc-divider',
                         role: 'separator',
