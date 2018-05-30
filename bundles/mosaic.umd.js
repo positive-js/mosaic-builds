@@ -479,6 +479,21 @@ var McPseudoCheckboxModule = /** @class */ (function () {
     return McPseudoCheckboxModule;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var McIconCSSStyler = /** @class */ (function () {
+    function McIconCSSStyler() {
+    }
+    McIconCSSStyler.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mc-icon]',
+                    host: { class: 'mc-icon mc' }
+                },] },
+    ];
+    return McIconCSSStyler;
+}());
 var McIconBase = /** @class */ (function () {
     function McIconBase(_elementRef) {
         this._elementRef = _elementRef;
@@ -517,6 +532,33 @@ var McIcon = /** @class */ (function (_super) {
     ]; };
     return McIcon;
 }(_McIconMixinBase));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var McIconModule = /** @class */ (function () {
+    function McIconModule() {
+    }
+    McIconModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        a11y.A11yModule,
+                        platform.PlatformModule
+                    ],
+                    exports: [
+                        McIcon,
+                        McIconCSSStyler
+                    ],
+                    declarations: [
+                        McIcon,
+                        McIconCSSStyler
+                    ]
+                },] },
+    ];
+    return McIconModule;
+}());
 
 /**
  * @fileoverview added by tsickle
@@ -2313,7 +2355,7 @@ var McListModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var /** @type {?} */ VERSION = new core.Version('0.0.1-5d2df39');
+var /** @type {?} */ VERSION = new core.Version('0.0.1-ff0364a');
 
 exports.VERSION = VERSION;
 exports.McButtonModule = McButtonModule;
@@ -2342,6 +2384,11 @@ exports.McLineSetter = McLineSetter;
 exports.McLineModule = McLineModule;
 exports.McPseudoCheckboxModule = McPseudoCheckboxModule;
 exports.McPseudoCheckbox = McPseudoCheckbox;
+exports.McIconModule = McIconModule;
+exports.McIconCSSStyler = McIconCSSStyler;
+exports.McIconBase = McIconBase;
+exports._McIconMixinBase = _McIconMixinBase;
+exports.McIcon = McIcon;
 exports.McDivider = McDivider;
 exports.McDividerModule = McDividerModule;
 exports.McRadioModule = McRadioModule;
