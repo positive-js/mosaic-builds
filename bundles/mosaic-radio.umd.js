@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/mosaic/core'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/radio', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/collections', '@ptsecurity/mosaic/core', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.radio = {}),global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.collections,global.ng.mosaic.core,global.ng.common));
-}(this, (function (exports,core,forms,a11y,collections,core$1,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/mosaic/core'), require('@angular/common'), require('@ptsecurity/cdk/a11y')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/radio', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/collections', '@ptsecurity/mosaic/core', '@angular/common', '@ptsecurity/cdk/a11y'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.radio = {}),global.ng.core,global.ng.forms,global.ng.cdk.collections,global.ng.mosaic.core,global.ng.common,global.ng.cdk.a11y));
+}(this, (function (exports,core,forms,collections,core$1,common,a11y) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -364,10 +364,9 @@ McRadioButtonBase = /** @class */ (function () {
 var _McRadioButtonMixinBase = core$1.mixinColor(core$1.mixinTabIndex(McRadioButtonBase));
 var McRadioButton = /** @class */ (function (_super) {
     __extends(McRadioButton, _super);
-    function McRadioButton(radioGroup, elementRef, _changeDetector, _focusMonitor, _radioDispatcher) {
+    function McRadioButton(radioGroup, elementRef, _changeDetector, _radioDispatcher) {
         var _this = _super.call(this, elementRef) || this;
         _this._changeDetector = _changeDetector;
-        _this._focusMonitor = _focusMonitor;
         _this._radioDispatcher = _radioDispatcher;
         _this._uniqueId = "mc-radio-" + ++nextUniqueId;
         /* tslint:disable:member-ordering */
@@ -379,6 +378,7 @@ var McRadioButton = /** @class */ (function (_super) {
              * the radio button (the same behavior as `<input type-"radio">`).
              */
         _this.change = new core.EventEmitter();
+        _this.isFocused = false;
         /** Whether this radio is checked. */
         _this._checked = false;
         /** Value assigned to this radio. */
@@ -491,22 +491,14 @@ var McRadioButton = /** @class */ (function (_super) {
             this.name = this.radioGroup.name;
         }
     };
-    McRadioButton.prototype.ngAfterViewInit = function () {
-        var _this = this;
-        this._focusMonitor
-            .monitor(this._inputElement.nativeElement)
-            .subscribe(function (focusOrigin) { return _this.onInputFocusChange(focusOrigin); });
-    };
+    McRadioButton.prototype.ngAfterViewInit = function () { };
     McRadioButton.prototype.ngOnDestroy = function () {
-        this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
         this.removeUniqueSelectionListener();
     };
     /** Focuses the radio button. */
     /** Focuses the radio button. */
     McRadioButton.prototype.focus = /** Focuses the radio button. */
-    function () {
-        this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
-    };
+    function () { };
     /**
      * Marks the radio button as needing checking for change detection.
      * This method is exposed because the parent radio group will directly
@@ -559,21 +551,14 @@ var McRadioButton = /** @class */ (function (_super) {
     function () {
         this.change.emit(new McRadioChange(this, this._value));
     };
-    /** Function is called whenever the focus changes for the input element. */
-    /** Function is called whenever the focus changes for the input element. */
-    McRadioButton.prototype.onInputFocusChange = /** Function is called whenever the focus changes for the input element. */
-    function (focusOrigin) {
-        if (!focusOrigin && this.radioGroup) {
-            this.radioGroup.touch();
-        }
-    };
     McRadioButton.decorators = [
         { type: core.Component, args: [{
                     selector: 'mc-radio-button',
-                    template: "<label [attr.for]=\"inputId\" class=\"mc-radio-label\" #label><div class=\"mc-radio-container\"><div class=\"mc-radio-inner-circle\"></div><div class=\"mc-radio-outer-circle\"></div></div><input #input class=\"mc-radio-input cdk-visually-hidden\" type=\"radio\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [attr.name]=\"name\" [required]=\"required\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-describedby]=\"ariaDescribedby\" (change)=\"onInputChange($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></div></label>",
-                    styles: [".mc-radio-button{display:inline-block}.mc-radio-label{cursor:pointer;display:inline-flex;align-items:center;white-space:nowrap;vertical-align:middle}.mc-radio-container{box-sizing:border-box;display:inline-block;position:relative;width:16px;height:16px;flex-shrink:0}.mc-radio-outer-circle{box-sizing:border-box;height:16px;left:0;position:absolute;top:0;width:16px;border-width:1px;border-style:solid;border-radius:50%}.mc-radio-inner-circle{border-radius:50%;box-sizing:border-box;height:16px;left:0;position:absolute;top:0;width:16px}.mc-radio-checked .mc-radio-inner-circle:before{content:'';display:block;position:absolute;width:6px;height:6px;margin-left:5px;margin-top:5px;border-radius:50%}.mc-radio-label-content{display:inline-block;order:0;line-height:inherit;padding-left:8px;padding-right:0}[dir=rtl] .mc-radio-label-content{padding-right:8px;padding-left:0}.mc-radio-disabled,.mc-radio-disabled .mc-radio-label{cursor:default}"],
+                    template: "<label [attr.for]=\"inputId\" class=\"mc-radio-label\" #label><input #input class=\"mc-radio-input cdk-visually-hidden\" type=\"radio\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [attr.name]=\"name\" [required]=\"required\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-describedby]=\"ariaDescribedby\" (change)=\"onInputChange($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></div></label>",
+                    styles: [".mc-radio-button{display:inline-block}.mc-radio-label{cursor:pointer;display:inline-flex;align-items:center;white-space:nowrap;vertical-align:middle}.mc-radio-label-content{display:inline-block;order:0;line-height:inherit;padding-right:0}[dir=rtl] .mc-radio-label-content{padding-right:26px;padding-left:0}.mc-radio-input{position:absolute;outline:0;opacity:0}.mc-radio-input+.mc-radio-label-content{position:relative;cursor:pointer;padding-left:26px}.mc-radio-input+.mc-radio-label-content:before{position:absolute;left:0;top:-1px;content:'';background:#fff;width:16px;height:16px;display:block;box-shadow:inset 1px 1px 1px 0 rgba(0,0,0,.2);border-width:1px;border-style:solid;border-radius:50%;border-color:#b3b3b3}.mc-radio-input+.mc-radio-label-content:after{background:#333;content:'';top:5px;left:6px;width:6px;height:6px;border-radius:50%;position:absolute;color:#333;opacity:0}.mc-radio-input:hover+.mc-radio-label-content:before{background-color:rgba(0,0,0,.06)}.mc-radio-input:checked+.mc-radio-label-content:after{opacity:1;background:#fff}.mc-radio-input:checked+.mc-radio-label-content:before{box-shadow:unset;background:#338fcc;border-color:#206ea2}.mc-radio-input:focus+.mc-radio-label-content:before{top:-2px;left:-1px;border-width:2px;border-color:green}.mc-radio-input[disabled]{cursor:default}.mc-radio-input[disabled]+.mc-radio-label-content{cursor:default}.mc-radio-input[disabled]+.mc-radio-label-content:before{background:#f5f5f5;border-color:#e6e6e6}.mc-radio-input[disabled]+.mc-radio-label-content:after{background:#ccc}"],
                     inputs: ['color', 'tabIndex'],
                     encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
                     exportAs: 'mcRadioButton',
                     host: {
                         'class': 'mc-radio-button',
@@ -581,8 +566,7 @@ var McRadioButton = /** @class */ (function (_super) {
                         '[class.mc-radio-checked]': 'checked',
                         '[class.mc-radio-disabled]': 'disabled',
                         '(focus)': '_inputElement.nativeElement.focus()'
-                    },
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                    }
                 },] },
     ];
     /** @nocollapse */
@@ -590,7 +574,6 @@ var McRadioButton = /** @class */ (function (_super) {
         { type: McRadioGroup, decorators: [{ type: core.Optional },] },
         { type: core.ElementRef, },
         { type: core.ChangeDetectorRef, },
-        { type: a11y.FocusMonitor, },
         { type: collections.UniqueSelectionDispatcher, },
     ]; };
     McRadioButton.propDecorators = {
@@ -606,6 +589,7 @@ var McRadioButton = /** @class */ (function (_super) {
         "labelPosition": [{ type: core.Input },],
         "_inputElement": [{ type: core.ViewChild, args: ['input',] },],
         "change": [{ type: core.Output },],
+        "isFocused": [{ type: core.Input },],
     };
     return McRadioButton;
 }(_McRadioButtonMixinBase));

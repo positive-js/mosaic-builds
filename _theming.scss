@@ -663,7 +663,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-d432765px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-50c0125px mc-color($primary, 500);
         }
     }
 }
@@ -906,6 +906,7 @@ $mc-dark-theme-background: (
 
     .mc-radio-button {
         font-family: mc-font-family($config);
+        font-size: mc-font-size($config, subheading);
     }
 }
 

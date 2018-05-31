@@ -1,6 +1,5 @@
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
 import { CanColor, CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
 /** Change event object emitted by McRadio. */
@@ -123,7 +122,6 @@ export declare class McRadioButtonBase {
 export declare const _McRadioButtonMixinBase: (new (...args: any[]) => CanColor) & (new (...args: any[]) => HasTabIndex) & typeof McRadioButtonBase;
 export declare class McRadioButton extends _McRadioButtonMixinBase implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
     private _changeDetector;
-    private _focusMonitor;
     private _radioDispatcher;
     private _uniqueId;
     /** The unique ID for the radio button. */
@@ -157,6 +155,7 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     readonly change: EventEmitter<McRadioChange>;
     /** The parent radio group. May or may not be present. */
     radioGroup: McRadioGroup;
+    isFocused: boolean;
     /** ID of the native input element inside `<mc-radio-button>` */
     readonly inputId: string;
     /** Whether this radio is checked. */
@@ -169,7 +168,7 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     private _value;
     /** Unregister function for _radioDispatcher */
     private removeUniqueSelectionListener;
-    constructor(radioGroup: McRadioGroup, elementRef: ElementRef, _changeDetector: ChangeDetectorRef, _focusMonitor: FocusMonitor, _radioDispatcher: UniqueSelectionDispatcher);
+    constructor(radioGroup: McRadioGroup, elementRef: ElementRef, _changeDetector: ChangeDetectorRef, _radioDispatcher: UniqueSelectionDispatcher);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
@@ -185,6 +184,4 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     onInputChange(event: Event): void;
     /** Dispatch change event with current value. */
     private emitChangeEvent();
-    /** Function is called whenever the focus changes for the input element. */
-    private onInputFocusChange(focusOrigin);
 }
