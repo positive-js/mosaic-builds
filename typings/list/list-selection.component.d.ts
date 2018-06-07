@@ -17,6 +17,7 @@ export declare class McListOption implements AfterContentInit, OnDestroy, OnInit
     _text: ElementRef;
     checkboxPosition: 'before' | 'after';
     value: any;
+    private _focusHandlerInProgress;
     disabled: any;
     selected: boolean;
     private _lineSetter;
@@ -53,10 +54,11 @@ export declare class McListSelection extends _McListSelectionMixinBase implement
     autoSelect: boolean;
     noUnselect: boolean;
     multiple: boolean;
+    withShift: boolean;
+    withCtrl: boolean;
     horizontal: boolean;
     readonly selectionChange: EventEmitter<McListSelectionChange>;
     selectedOptions: SelectionModel<McListOption>;
-    private _scrollSize;
     private _tempValues;
     private _modelChanges;
     constructor(_element: ElementRef, tabIndex: string, autoSelect: string, noUnselect: string, multiple: string);
@@ -73,6 +75,7 @@ export declare class McListSelection extends _McListSelectionMixinBase implement
     setDisabledState(isDisabled: boolean): void;
     getSelectedOptionValues(): string[];
     toggleFocusedOption(): void;
+    _canUnselectLast(listOption: McListOption): boolean;
     _getHeight(): number;
     _onTouched: () => void;
     _removeOptionFromList(option: McListOption): void;
