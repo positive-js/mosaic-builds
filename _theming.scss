@@ -567,7 +567,7 @@ $mc-dark-theme-background: (
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-2cb9ca9px mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-40c658dpx mc-color($second, 300);
         }
 
         &__light {
@@ -770,7 +770,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-2cb9ca9px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-40c658dpx mc-color($primary, 500);
         }
     }
 }
