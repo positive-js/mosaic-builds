@@ -567,7 +567,7 @@ $mc-dark-theme-background: (
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-dff9bcfpx mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-e8cb61fpx mc-color($second, 300);
         }
 
         &__light {
@@ -770,7 +770,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-dff9bcfpx mc-color($primary, 500);
+            box-shadow: 0 0.0.1-e8cb61fpx mc-color($primary, 500);
         }
     }
 }
@@ -1034,6 +1034,72 @@ $mc-dark-theme-background: (
 
 
 
+
+
+
+@mixin _mc-navbar-theme-color($theme) {
+    $palette: map-get($theme, primary);
+
+    background-color: mc-color($palette, 700);
+
+    mc-navbar-item.mc-navbar-item-active {
+        background-color: mc-color($palette, 800);
+    }
+
+    mc-navbar-item[disabled] {
+        > mc-navbar-title, .mc-navbar-title, [mc-icon] {
+            opacity: 0.3;
+        }
+    }
+
+    mc-navbar-item, .mc-navbar-item, .mc-navbar-title {
+        color: mc-color($palette, 100);
+    }
+
+    mc-navbar-item, .mc-navbar-item {
+        border: 1px solid transparent;
+
+        &.cdk-focused {
+            border-color: mc-color($palette, 500);
+            box-shadow: 0 0.0.1-e8cb61fpx mc-color($palette, 500);
+            z-index: 1;
+
+            > .mc-navbar-item {
+                outline: 0;
+            }
+        }
+    }
+
+    mc-navbar-item:hover:not([disabled]):not(.mc-progress) {
+        background-color: mc-color($palette, 800);
+    }
+
+    mc-navbar-item.mc-progress:hover:not([disabled]) {
+        $bg-lighten: 15%;
+        background-color: lighten(mc-color($palette, 800), $bg-lighten);
+    }
+}
+
+@mixin mc-navbar-theme($theme) {
+    .mc-navbar {
+        @include _mc-navbar-theme-color($theme);
+    }
+}
+
+@mixin mc-navbar-typography($config) {
+    .mc-navbar {
+        @include mc-typography-level-to-styles($config, body);
+    }
+
+    .mc-navbar-left, .mc-navbar-right, .mc-navbar-brand {
+        > mc-navbar-title > .mc-navbar-title, > .mc-navbar-title {
+            @include mc-typography-level-to-styles($config, title);
+        }
+    }
+}
+
+
+
 @mixin mosaic-typography($config: null) {
     @if $config == null {
         $config: mc-typography-config();
@@ -1045,6 +1111,7 @@ $mc-dark-theme-background: (
     @include mc-button-typography($config);
     @include mc-list-typography($config);
     @include mc-radio-typography($config);
+    @include mc-navbar-typography($config);
 }
 
 
@@ -1069,10 +1136,13 @@ $mc-dark-theme-background: (
 
 
 
+
 @mixin mosaic-theme($theme) {
 
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
     @include mc-list-theme($theme);
     @include mc-radio-theme($theme);
+    @include mc-navbar-theme($theme);
+
 }

@@ -16,6 +16,9 @@
       "from": "./list"
     },
     {
+      "from": "./navbar"
+    },
+    {
       "from": "./radio"
     },
     {

@@ -9,5 +9,6 @@ export * from './core';
 export * from './icon';
 export * from './divider';
 export * from './list';
+export * from './navbar';
 export * from './radio';
 export * from './button';
