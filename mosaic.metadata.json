@@ -10,6 +10,9 @@
       "from": "./icon"
     },
     {
+      "from": "./checkbox"
+    },
+    {
       "from": "./divider"
     },
     {

@@ -422,8 +422,8 @@ $mc-light-theme-foreground: (
 
 // Background palette for light themes.
 $mc-light-theme-background: (
-    hover: rgba(black, 0.04), // TODO(kara): check style with Material Design UX
-    background: #808080,
+    hover: rgba(black, 0.05),
+    background: white,
     disabled-button: $black-12-opacity,
     focused-button: $black-6-opacity,
     disabled-list-option: #CCC
@@ -567,7 +567,7 @@ $mc-dark-theme-background: (
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-a61fb90px mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-edab661px mc-color($second, 300);
         }
 
         &__light {
@@ -770,7 +770,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-a61fb90px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-edab661px mc-color($primary, 500);
         }
     }
 }
@@ -1036,6 +1036,136 @@ $mc-dark-theme-background: (
 
 
 
+@mixin mc-checkbox-theme($theme) {
+    $hover-lighten: 5%;
+    // main
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    // focus inset shadow color
+    $focus-border-box-shadow: inset 0 0.0.1-edab661px map-get($background, background);
+
+    // background
+    $toggle-background-unchecked: $background;
+    $toggle-background-checked: map-get($primary, 500);
+    $toggle-background-checked-hover: lighten($toggle-background-checked, $hover-lighten);
+    $toggle-background-disabled: map-get($second, 40);
+    $toggle-background-hover: map-get($background, hover);
+
+    // border
+    $toggle-border-color-checked: map-get($primary, 600);
+    $toggle-border-color-checked-hover: lighten($toggle-border-color-checked, $hover-lighten);
+    $toggle-border-color-unchecked: map-get($second, 300);
+    $toggle-border-color-focus: map-get($primary, 500);
+    $toggle-border-color-disabled: map-get($second, 100);
+
+    // icon
+    $icon-color-checked: map-get($background, background);
+    $icon-color-disabled: map-get($second, 200);
+
+    // label
+    $label-color-disabled: map-get($foreground, disabled-text);
+    $label-color: map-get($foreground, text);
+
+    .mc-checkbox-label {
+        color: $label-color;
+    }
+
+    .mc-checkbox-frame {
+        border-color: $toggle-border-color-unchecked;
+    }
+
+    .mc-checkbox-checkmark,
+    .mc-checkbox-mixedmark {
+        color: $icon-color-checked;
+    }
+
+    .mc-checkbox:not(.mc-checkbox-disabled) {
+        .mc-checkbox-input {
+            &:hover {
+                + .mc-checkbox-frame {
+                    background-color: $toggle-background-hover;
+                }
+            }
+
+            &:focus {
+                + .mc-checkbox-frame {
+                    border-color: $toggle-border-color-focus;
+                }
+            }
+        }
+
+        &.mc-checkbox-checked,
+        &.mc-checkbox-indeterminate {
+            .mc-checkbox-input {
+                &:focus {
+                    + .mc-checkbox-frame {
+                        border-color: $toggle-border-color-focus;
+                        box-shadow: $focus-border-box-shadow;
+                    }
+                }
+            }
+        }
+    }
+
+    .mc-checkbox-checked:not(.mc-checkbox-disabled),
+    .mc-checkbox-indeterminate:not(.mc-checkbox-disabled) {
+        .mc-checkbox-frame {
+            background: $toggle-background-checked;
+            border-color: $toggle-border-color-checked;
+        }
+        .mc-checkbox-input {
+            &:hover {
+                + .mc-checkbox-frame {
+                    background: $toggle-background-checked-hover;
+                    border-color: $toggle-border-color-checked-hover;
+                }
+            }
+            &:focus:hover {
+                + .mc-checkbox-frame {
+                    border-color: $toggle-border-color-focus;
+                    box-shadow: $focus-border-box-shadow;
+                }
+            }
+        }
+    }
+
+    .mc-checkbox-disabled {
+        .mc-checkbox-frame {
+            border-color: $toggle-border-color-disabled;
+            background-color: $toggle-background-disabled;
+        }
+
+        .mc-checkbox-label {
+            color: $label-color-disabled;
+        }
+
+        .mc-checkbox-checkmark,
+        .mc-checkbox-mixedmark {
+            color: $icon-color-disabled;
+        }
+    }
+}
+
+@mixin mc-checkbox-typography($config) {
+    .mc-checkbox {
+        font-family: mc-font-family($config);
+        font-size: mc-font-size($config, body);
+        line-height: mc-line-height($config, body);
+    }
+
+    .mc-checkbox-layout .mc-checkbox-label {
+        line-height: mc-line-height($config, body);
+        font-size: mc-font-size($config, body);
+    }
+}
+
+
+
+
+
 
 @mixin _mc-navbar-theme-color($theme) {
     $palette: map-get($theme, primary);
@@ -1061,7 +1191,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-a61fb90px mc-color($palette, 500);
+            box-shadow: 0 0.0.1-edab661px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1111,6 +1241,7 @@ $mc-dark-theme-background: (
     @include mc-button-typography($config);
     @include mc-list-typography($config);
     @include mc-radio-typography($config);
+    @include mc-checkbox-typography($config);
     @include mc-navbar-typography($config);
 }
 
@@ -1137,12 +1268,14 @@ $mc-dark-theme-background: (
 
 
 
+
 @mixin mosaic-theme($theme) {
 
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
     @include mc-list-theme($theme);
     @include mc-radio-theme($theme);
+    @include mc-checkbox-theme($theme);
     @include mc-navbar-theme($theme);
 
 }

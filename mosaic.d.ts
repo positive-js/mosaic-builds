@@ -7,6 +7,7 @@
 export * from './typings/index';
 export * from './core';
 export * from './icon';
+export * from './checkbox';
 export * from './divider';
 export * from './list';
 export * from './navbar';
