@@ -11,5 +11,6 @@ export * from './checkbox';
 export * from './divider';
 export * from './list';
 export * from './navbar';
+export * from './progress-bar';
 export * from './radio';
 export * from './button';

@@ -2794,6 +2794,79 @@ var McCheckboxModule = /** @class */ (function () {
     return McCheckboxModule;
 }());
 
+var idIterator = 0;
+var MIN_PERCENT = 0;
+var MAX_PERCENT = 100;
+var McProgressBarBase = /** @class */ (function () {
+    function McProgressBarBase(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+    return McProgressBarBase;
+}());
+var _McProgressBarMixinBase = mixinColor(McProgressBarBase);
+var McProgressBar = /** @class */ (function (_super) {
+    __extends(McProgressBar, _super);
+    function McProgressBar(elementRef) {
+        var _this = _super.call(this, elementRef) || this;
+        _this.id = "mc-progress-bar-" + idIterator++;
+        _this.value = 0;
+        _this.mode = 'determinate';
+        _this.color = ThemePalette.Primary;
+        return _this;
+    }
+    Object.defineProperty(McProgressBar.prototype, "percentage", {
+        get: function () {
+            return Math.max(MIN_PERCENT, Math.min(MAX_PERCENT, this.value)) / MAX_PERCENT;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McProgressBar.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-progress-bar',
+                    template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
+                    styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.65,.815,.735,.395) infinite}"],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core.ViewEncapsulation.None,
+                    host: {
+                        class: 'mc-progress-bar',
+                        '[attr.id]': 'id'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McProgressBar.ctorParameters = function () { return [
+        { type: core.ElementRef, },
+    ]; };
+    McProgressBar.propDecorators = {
+        "id": [{ type: core.Input },],
+        "value": [{ type: core.Input },],
+        "mode": [{ type: core.Input },],
+        "color": [{ type: core.Input },],
+    };
+    return McProgressBar;
+}(_McProgressBarMixinBase));
+
+var McProgressBarModule = /** @class */ (function () {
+    function McProgressBarModule() {
+    }
+    McProgressBarModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        platform.PlatformModule
+                    ],
+                    exports: [
+                        McProgressBar
+                    ],
+                    declarations: [
+                        McProgressBar
+                    ]
+                },] },
+    ];
+    return McProgressBarModule;
+}());
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -2865,6 +2938,10 @@ exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
 exports.McCheckboxModule = McCheckboxModule;
 exports.MC_CHECKBOX_REQUIRED_VALIDATOR = MC_CHECKBOX_REQUIRED_VALIDATOR;
 exports.McCheckboxRequiredValidator = McCheckboxRequiredValidator;
+exports.McProgressBarModule = McProgressBarModule;
+exports.McProgressBarBase = McProgressBarBase;
+exports._McProgressBarMixinBase = _McProgressBarMixinBase;
+exports.McProgressBar = McProgressBar;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

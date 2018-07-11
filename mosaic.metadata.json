@@ -22,6 +22,9 @@
       "from": "./navbar"
     },
     {
+      "from": "./progress-bar"
+    },
+    {
       "from": "./radio"
     },
     {
