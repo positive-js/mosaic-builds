@@ -21,8 +21,6 @@
 }
 
 
-* { box-sizing: border-box; }
-
 
 $typography-font-weight-values: (
     thin: 100,
@@ -45,23 +43,6 @@ $fonts: (
 );
 
 $base-font-size: 15px !default;
-
-
-
-body {
-    font-family: map-get(map-get($fonts, 'base'), font-family);
-
-    // Helps fonts on OSX looks more consistent with other systems
-    // Isn't currently in button styles due to performance concerns
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-text-size-adjust: 100%;
-
-    -ms-text-size-adjust: 100%;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 
 
 
@@ -567,7 +548,7 @@ $mc-dark-theme-background: (
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-f9ee054px mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-0d3294dpx mc-color($second, 300);
         }
 
         &__light {
@@ -770,7 +751,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-f9ee054px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-0d3294dpx mc-color($primary, 500);
         }
     }
 }
@@ -1045,7 +1026,7 @@ $mc-dark-theme-background: (
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-f9ee054px map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-0d3294dpx map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1191,7 +1172,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-f9ee054px mc-color($palette, 500);
+            box-shadow: 0 0.0.1-0d3294dpx mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1246,8 +1227,6 @@ $mc-dark-theme-background: (
 }
 
 
-// TODO: Create flex layout classes
-// 
 
 // Mixin that renders all of the core styles that are not theme-dependent.
 @mixin mc-core($typography-config: null) {
