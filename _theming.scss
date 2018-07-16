@@ -548,7 +548,7 @@ $mc-dark-theme-background: (
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-2d42d29px mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-a726b4dpx mc-color($second, 300);
         }
 
         &__light {
@@ -751,7 +751,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-2d42d29px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-a726b4dpx mc-color($primary, 500);
         }
     }
 }
@@ -1026,7 +1026,7 @@ $mc-dark-theme-background: (
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-2d42d29px map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-a726b4dpx map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1172,7 +1172,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-2d42d29px mc-color($palette, 500);
+            box-shadow: 0 0.0.1-a726b4dpx mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
