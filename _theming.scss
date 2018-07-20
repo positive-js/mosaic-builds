@@ -548,7 +548,7 @@ $mc-dark-theme-background: (
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-c9fcdcfpx mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-ee127e7px mc-color($second, 300);
         }
 
         &__light {
@@ -751,7 +751,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-c9fcdcfpx mc-color($primary, 500);
+            box-shadow: 0 0.0.1-ee127e7px mc-color($primary, 500);
         }
     }
 }
@@ -1026,7 +1026,7 @@ $mc-dark-theme-background: (
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-c9fcdcfpx map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-ee127e7px map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1172,7 +1172,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-c9fcdcfpx mc-color($palette, 500);
+            box-shadow: 0 0.0.1-ee127e7px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1271,6 +1271,29 @@ $mc-dark-theme-background: (
 
 
 
+@mixin mc-progress-spinner-theme($theme) {
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $warn: map-get($theme, warn);
+
+    .mc-progress-spinner {
+        &.mc-primary &__circle {
+            stroke: mc-color($primary, 500);
+        }
+
+        &.mc-second &__circle {
+            stroke: mc-color($second, 500);
+        }
+
+        &.mc-warn &__circle {
+            stroke: mc-color($warn, 500);
+        }
+    }
+}
+
+
+
+
 
 
 @mixin mosaic-theme($theme) {
@@ -1279,6 +1302,7 @@ $mc-dark-theme-background: (
     @include mc-button-theme($theme);
     @include mc-list-theme($theme);
     @include mc-progress-bar-theme($theme);
+    @include mc-progress-spinner-theme($theme);
     @include mc-radio-theme($theme);
     @include mc-checkbox-theme($theme);
     @include mc-navbar-theme($theme);

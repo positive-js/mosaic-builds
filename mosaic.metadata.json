@@ -25,6 +25,9 @@
       "from": "./progress-bar"
     },
     {
+      "from": "./progress-spinner"
+    },
+    {
       "from": "./radio"
     },
     {

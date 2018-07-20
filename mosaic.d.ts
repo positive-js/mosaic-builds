@@ -12,5 +12,6 @@ export * from './divider';
 export * from './list';
 export * from './navbar';
 export * from './progress-bar';
+export * from './progress-spinner';
 export * from './radio';
 export * from './button';
