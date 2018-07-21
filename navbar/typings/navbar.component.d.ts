@@ -21,19 +21,30 @@ export declare class McNavbarItem extends _McNavbarMixinBase implements OnInit, 
     constructor(elementRef: ElementRef, _focusMonitor: FocusMonitor);
     ngOnInit(): void;
     ngOnDestroy(): void;
-    private _denyClickIfDisabled();
+    private denyClickIfDisabled();
 }
 export declare class McNavbarContainer {
     position: McNavbarContainerPositionType;
-    readonly getCssClasses: string;
+    readonly cssClasses: string;
 }
-export declare class McNavbar implements AfterViewInit {
+export declare class McNavbar implements AfterViewInit, OnDestroy {
     private _elementRef;
-    private readonly collapsedClass;
+    private readonly forceRecalculateItemsWidth;
+    private readonly resizeDebounceInterval;
     private readonly firstLevelElement;
     private readonly secondLevelElements;
+    private _totalItemsWidths;
+    private _itemsWidths;
+    private readonly maxAllowedWidth;
+    private readonly itemsWidths;
+    private readonly totalItemsWidth;
+    private _resizeSubscription;
     constructor(_elementRef: ElementRef);
-    collapse(): void;
+    updateCollapsed(): void;
     ngAfterViewInit(): void;
-    private _uncollapseAll();
+    ngOnDestroy(): void;
+    private calculateAndCacheTotalItemsWidth();
+    private getOuterElementWidth(element);
+    private calculateAndCacheItemsWidth();
+    private getItemsForCollapse(element);
 }

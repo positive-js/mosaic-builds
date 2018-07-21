@@ -24,13 +24,6 @@ function isBoolean(val) { return typeof val === 'boolean'; }
 function toBoolean(value) {
     return value != null && "" + value !== 'false';
 }
-/**
- * @param {?} value
- * @return {?}
- */
-function isNotNil(value) {
-    return value !== 'undefined' && value !== null;
-}
 
 /**
  * @fileoverview added by tsickle
@@ -468,5 +461,5 @@ var McPseudoCheckboxModule = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 
-export { isBoolean, toBoolean, isNotNil, McCommonModule, MС_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, McLine, McLineSetter, McLineModule, McPseudoCheckboxModule, McPseudoCheckbox, MC_SANITY_CHECKS_FACTORY as ɵa0 };
+export { isBoolean, toBoolean, McCommonModule, MС_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, McLine, McLineSetter, McLineModule, McPseudoCheckboxModule, McPseudoCheckbox, MC_SANITY_CHECKS_FACTORY as ɵa0 };
 //# sourceMappingURL=core.es5.js.map

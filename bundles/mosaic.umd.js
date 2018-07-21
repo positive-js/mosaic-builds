@@ -55,13 +55,6 @@ function isBoolean(val) { return typeof val === 'boolean'; }
 function toBoolean(value) {
     return value != null && "" + value !== 'false';
 }
-/**
- * @param {?} value
- * @return {?}
- */
-function isNotNil(value) {
-    return value !== 'undefined' && value !== null;
-}
 
 /**
  * @fileoverview added by tsickle
@@ -2970,7 +2963,6 @@ exports.McIconButton = McIconButton;
 exports.ɵa0 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
-exports.isNotNil = isNotNil;
 exports.McCommonModule = McCommonModule;
 exports.MС_SANITY_CHECKS = MС_SANITY_CHECKS;
 exports.mixinDisabled = mixinDisabled;
