@@ -6,13 +6,15 @@
  */
 import { Version } from '@angular/core';
 export { McButtonModule, McButtonCSSStyler, McXSButtonCSSStyler, McSMButtonCSSStyler, McLGButtonCSSStyler, McXLButtonCSSStyler, McIconButtonCSSStyler, McButtonBase, _McButtonMixinBase, McButton, McAnchor, McIconButton } from '@ptsecurity/mosaic/button';
-export { ɵa0, isBoolean, toBoolean, McCommonModule, MС_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, McLine, McLineSetter, McLineModule, McPseudoCheckboxModule, McPseudoCheckbox } from '@ptsecurity/mosaic/core';
+export { ɵa0, isBoolean, toBoolean, McCommonModule, MС_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox } from '@ptsecurity/mosaic/core';
 export { McIconModule, McIconCSSStyler, McIconBase, _McIconMixinBase, McIcon } from '@ptsecurity/mosaic/icon';
 export { McDivider, McDividerModule } from '@ptsecurity/mosaic/divider';
 export { McRadioModule, McRadioChange, McRadioGroupBase, _McRadioGroupMixinBase, MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioGroup, McRadioButtonBase, _McRadioButtonMixinBase, McRadioButton } from '@ptsecurity/mosaic/radio';
 export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, _McListSelectionMixinBase, McListSelection } from '@ptsecurity/mosaic/list';
 export { MC_CHECKBOX_CONTROL_VALUE_ACCESSOR, TransitionCheckState, McCheckboxChange, McCheckboxBase, _McCheckboxMixinBase, McCheckbox, MC_CHECKBOX_CLICK_ACTION, McCheckboxModule, MC_CHECKBOX_REQUIRED_VALIDATOR, McCheckboxRequiredValidator } from '@ptsecurity/mosaic/checkbox';
+export { ɵa11, McInputModule, McInputBase, _McInputMixinBase, McInput, McInputMono } from '@ptsecurity/mosaic/input';
 export { McProgressBarModule, McProgressBarBase, _McProgressBarMixinBase, McProgressBar } from '@ptsecurity/mosaic/progress-bar';
+export { McFormFieldModule, McFormFieldBase, McFormField, McFormFieldWithoutBorders, McFormFieldControl, getMcFormFieldMissingControlError, McHint, McSuffix, McPrefix, McCleaner } from '@ptsecurity/mosaic/form-field';
 export { McProgressSpinnerModule, McProgressSpinnerBase, _McProgressPinnerMixinBase, McProgressSpinner } from '@ptsecurity/mosaic/progress-spinner';
 export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar } from '@ptsecurity/mosaic/navbar';
 

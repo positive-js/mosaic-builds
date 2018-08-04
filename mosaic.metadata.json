@@ -7,7 +7,10 @@
       "from": "./core"
     },
     {
-      "from": "./icon"
+      "from": "./radio"
+    },
+    {
+      "from": "./progress-spinner"
     },
     {
       "from": "./checkbox"
@@ -16,22 +19,25 @@
       "from": "./divider"
     },
     {
+      "from": "./progress-bar"
+    },
+    {
+      "from": "./icon"
+    },
+    {
       "from": "./list"
     },
     {
       "from": "./navbar"
     },
     {
-      "from": "./progress-bar"
-    },
-    {
-      "from": "./progress-spinner"
-    },
-    {
-      "from": "./radio"
+      "from": "./form-field"
     },
     {
       "from": "./button"
+    },
+    {
+      "from": "./input"
     },
     {
       "from": "./typings/index"

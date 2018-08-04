@@ -4,8 +4,9 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Component, ViewEncapsulation, Input, ChangeDetectionStrategy } from '@angular/core';
+import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, defineInjectable } from '@angular/core';
 import { BidiModule } from '@ptsecurity/cdk/bidi';
+import { Subject } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
@@ -249,6 +250,51 @@ function mixinTabIndex(base, defaultTabIndex = 0) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * Mixin to augment a directive with updateErrorState method.
+ * For component with `errorState` and need to update `errorState`.
+ * @template T
+ * @param {?} base
+ * @return {?}
+ */
+function mixinErrorState(base) {
+    return class extends base {
+        /**
+         * @param {...?} args
+         */
+        constructor(...args) {
+            super(...args);
+            /**
+             * Whether the component is in an error state.
+             */
+            this.errorState = false;
+            /**
+             * Stream that emits whenever the state of the input changes such that the wrapping
+             * `MсFormField` needs to run change detection.
+             */
+            this.stateChanges = new Subject();
+        }
+        /**
+         * @return {?}
+         */
+        updateErrorState() {
+            const /** @type {?} */ oldState = this.errorState;
+            const /** @type {?} */ parent = this._parentFormGroup || this._parentForm;
+            const /** @type {?} */ matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
+            const /** @type {?} */ control = this.ngControl ? /** @type {?} */ (this.ngControl.control) : null;
+            const /** @type {?} */ newState = matcher.isErrorState(control, parent);
+            if (newState !== oldState) {
+                this.errorState = newState;
+                this.stateChanges.next();
+            }
+        }
+    };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -334,6 +380,44 @@ McLineModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * Error state matcher that matches when a control is invalid and dirty.
+ */
+class ShowOnDirtyErrorStateMatcher {
+    /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    isErrorState(control, form) {
+        return !!(control && control.invalid && (control.dirty || (form && form.submitted)));
+    }
+}
+ShowOnDirtyErrorStateMatcher.decorators = [
+    { type: Injectable },
+];
+/**
+ * Provider that defines how form controls behave with regards to displaying error messages.
+ */
+class ErrorStateMatcher {
+    /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    isErrorState(control, form) {
+        return !!(control && control.invalid && (control.touched || (form && form.submitted)));
+    }
+}
+ErrorStateMatcher.decorators = [
+    { type: Injectable, args: [{ providedIn: 'root' },] },
+];
+/** @nocollapse */ ErrorStateMatcher.ngInjectableDef = defineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
  * Component that shows a simplified checkbox without including any kind of "real" checkbox.
  * Meant to be used when the checkbox is purely decorative and a large number of them will be
  * included, such as for the options in a multi-select. Uses no SVGs or complex animations.
@@ -399,5 +483,5 @@ McPseudoCheckboxModule.decorators = [
  * @suppress {checkTypes} checked by tsc
  */
 
-export { isBoolean, toBoolean, McCommonModule, MС_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, McLine, McLineSetter, McLineModule, McPseudoCheckboxModule, McPseudoCheckbox, MC_SANITY_CHECKS_FACTORY as ɵa0 };
+export { isBoolean, toBoolean, McCommonModule, MС_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, MC_SANITY_CHECKS_FACTORY as ɵa0 };
 //# sourceMappingURL=core.js.map

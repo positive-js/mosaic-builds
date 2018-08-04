@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('@angular/forms'), require('@ptsecurity/cdk/collections'), require('rxjs'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', '@angular/forms', '@ptsecurity/cdk/collections', 'rxjs', '@ptsecurity/cdk/keycodes', 'rxjs/operators'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform,global.ng.forms,global.ng.cdk.collections,global.rxjs,global.ng.cdk.keycodes,global.rxjs.operators));
-}(this, (function (exports,core,bidi,common,a11y,platform,forms,collections,rxjs,keycodes,operators) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('@angular/forms'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@ptsecurity/cdk/coercion')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', 'rxjs', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', '@angular/forms', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@ptsecurity/cdk/coercion'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.rxjs,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform,global.ng.forms,global.ng.cdk.collections,global.ng.cdk.keycodes,global.rxjs.operators,global.ng.cdk.coercion));
+}(this, (function (exports,core,bidi,rxjs,common,a11y,platform,forms,collections,keycodes,operators,coercion) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -318,6 +318,58 @@ function mixinTabIndex(base, defaultTabIndex) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * Mixin to augment a directive with updateErrorState method.
+ * For component with `errorState` and need to update `errorState`.
+ * @template T
+ * @param {?} base
+ * @return {?}
+ */
+function mixinErrorState(base) {
+    return /** @class */ (function (_super) {
+        __extends(class_1, _super);
+        function class_1() {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var _this = _super.apply(this, args) || this;
+            /**
+             * Whether the component is in an error state.
+             */
+            _this.errorState = false;
+            /**
+             * Stream that emits whenever the state of the input changes such that the wrapping
+             * `MсFormField` needs to run change detection.
+             */
+            _this.stateChanges = new rxjs.Subject();
+            return _this;
+        }
+        /**
+         * @return {?}
+         */
+        class_1.prototype.updateErrorState = /**
+         * @return {?}
+         */
+        function () {
+            var /** @type {?} */ oldState = this.errorState;
+            var /** @type {?} */ parent = this._parentFormGroup || this._parentForm;
+            var /** @type {?} */ matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
+            var /** @type {?} */ control = this.ngControl ? /** @type {?} */ (this.ngControl.control) : null;
+            var /** @type {?} */ newState = matcher.isErrorState(control, parent);
+            if (newState !== oldState) {
+                this.errorState = newState;
+                this.stateChanges.next();
+            }
+        };
+        return class_1;
+    }(base));
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -416,6 +468,60 @@ var McLineModule = /** @class */ (function () {
                 },] },
     ];
     return McLineModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Error state matcher that matches when a control is invalid and dirty.
+ */
+var ShowOnDirtyErrorStateMatcher = /** @class */ (function () {
+    function ShowOnDirtyErrorStateMatcher() {
+    }
+    /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    ShowOnDirtyErrorStateMatcher.prototype.isErrorState = /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    function (control, form) {
+        return !!(control && control.invalid && (control.dirty || (form && form.submitted)));
+    };
+    ShowOnDirtyErrorStateMatcher.decorators = [
+        { type: core.Injectable },
+    ];
+    return ShowOnDirtyErrorStateMatcher;
+}());
+/**
+ * Provider that defines how form controls behave with regards to displaying error messages.
+ */
+var ErrorStateMatcher = /** @class */ (function () {
+    function ErrorStateMatcher() {
+    }
+    /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    ErrorStateMatcher.prototype.isErrorState = /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    function (control, form) {
+        return !!(control && control.invalid && (control.touched || (form && form.submitted)));
+    };
+    ErrorStateMatcher.decorators = [
+        { type: core.Injectable, args: [{ providedIn: 'root' },] },
+    ];
+    /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core.defineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+    return ErrorStateMatcher;
 }());
 
 /**
@@ -2787,6 +2893,581 @@ var McCheckboxModule = /** @class */ (function () {
     return McCheckboxModule;
 }());
 
+var McCleaner = /** @class */ (function () {
+    function McCleaner() {
+    }
+    McCleaner.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-cleaner',
+                    template: '<i mc-icon="mc-close-M_16" class="mc-cleaner__icon"></i>'
+                },] },
+    ];
+    return McCleaner;
+}());
+
+/** An interface which allows a control to work inside of a `MсFormField`. */
+var   /** An interface which allows a control to work inside of a `MсFormField`. */
+McFormFieldControl = /** @class */ (function () {
+    function McFormFieldControl() {
+    }
+    return McFormFieldControl;
+}());
+
+function getMcFormFieldMissingControlError() {
+    return Error('mc-form-field must contain a McFormFieldControl.');
+}
+
+var nextUniqueId$2 = 0;
+var McHint = /** @class */ (function () {
+    function McHint() {
+        this.id = "mc-hint-" + nextUniqueId$2++;
+    }
+    McHint.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-hint',
+                    host: {
+                        class: 'mc-hint',
+                        '[attr.id]': 'id'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McHint.propDecorators = {
+        "id": [{ type: core.Input },],
+    };
+    return McHint;
+}());
+
+var McPrefix = /** @class */ (function () {
+    function McPrefix() {
+    }
+    McPrefix.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mcPrefix]'
+                },] },
+    ];
+    return McPrefix;
+}());
+
+var McSuffix = /** @class */ (function () {
+    function McSuffix() {
+    }
+    McSuffix.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mcSuffix]'
+                },] },
+    ];
+    return McSuffix;
+}());
+
+var McFormFieldBase = /** @class */ (function () {
+    function McFormFieldBase(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+    return McFormFieldBase;
+}());
+var McFormField = /** @class */ (function (_super) {
+    __extends(McFormField, _super);
+    function McFormField(_elementRef, _changeDetectorRef) {
+        var _this = _super.call(this, _elementRef) || this;
+        _this._elementRef = _elementRef;
+        _this._changeDetectorRef = _changeDetectorRef;
+        return _this;
+    }
+    McFormField.prototype.ngAfterContentInit = function () {
+        var _this = this;
+        this._validateControlChild();
+        if (this._control.controlType) {
+            this._elementRef.nativeElement.classList
+                .add("mc-form-field-type-" + this._control.controlType);
+        }
+        // Subscribe to changes in the child control state in order to update the form field UI.
+        this._control.stateChanges.pipe(operators.startWith()).subscribe(function () {
+            _this._changeDetectorRef.markForCheck();
+        });
+        // Run change detection if the value changes.
+        var valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || rxjs.EMPTY;
+        rxjs.merge(valueChanges)
+            .subscribe(function () { return _this._changeDetectorRef.markForCheck(); });
+    };
+    McFormField.prototype.ngAfterContentChecked = function () {
+        this._validateControlChild();
+    };
+    McFormField.prototype.ngAfterViewInit = function () {
+        // Avoid animations on load.
+        this._changeDetectorRef.detectChanges();
+    };
+    McFormField.prototype.clearValue = function ($event) {
+        $event.stopPropagation();
+        if (this._control && this._control.ngControl) {
+            this._control.ngControl.reset();
+        }
+    };
+    McFormField.prototype.onContainerClick = function ($event) {
+        return this._control.onContainerClick && this._control.onContainerClick($event);
+    };
+    /** Determines whether a class from the NgControl should be forwarded to the host element. */
+    /** Determines whether a class from the NgControl should be forwarded to the host element. */
+    McFormField.prototype._shouldForward = /** Determines whether a class from the NgControl should be forwarded to the host element. */
+    function (prop) {
+        var ngControl = this._control ? this._control.ngControl : null;
+        return ngControl && ngControl[prop];
+    };
+    /** Throws an error if the form field's control is missing. */
+    /** Throws an error if the form field's control is missing. */
+    McFormField.prototype._validateControlChild = /** Throws an error if the form field's control is missing. */
+    function () {
+        if (!this._control) {
+            throw getMcFormFieldMissingControlError();
+        }
+    };
+    Object.defineProperty(McFormField.prototype, "hasHint", {
+        get: function () {
+            return this._hint && this._hint.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "hasSuffix", {
+        get: function () {
+            return this._suffix && this._suffix.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "hasPrefix", {
+        get: function () {
+            return this._prefix && this._prefix.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "canShowCleaner", {
+        get: function () {
+            return this._cleaner && this._cleaner.length > 0 &&
+                this._control && this._control.ngControl
+                ? this._control.ngControl.value && !this._control.disabled
+                : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McFormField.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-form-field',
+                    exportAs: 'mcFormField',
+                    template: "<div class=\"mc-form-field__wrapper\"><div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div></div>",
+                    // McInput is a directive and can't have styles, so we need to include its styles here.
+                    // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
+                    // aren't using McInput.
+                    styles: [".mc-form-field{display:inline-block;position:relative}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;top:0;bottom:0;right:0;width:32px;cursor:pointer;display:flex;flex-direction:row;justify-content:center;align-items:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
+                    host: {
+                        class: 'mc-form-field',
+                        '[class.mc-form-field_invalid]': '_control.errorState',
+                        '[class.mc-form-field_disabled]': '_control.disabled',
+                        '[class.mc-form-field_has-prefix]': 'hasPrefix',
+                        '[class.mc-form-field_has-suffix]': 'hasSuffix',
+                        '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
+                        '[class.mc-focused]': '_control.focused',
+                        '[class.ng-untouched]': '_shouldForward("untouched")',
+                        '[class.ng-touched]': '_shouldForward("touched")',
+                        '[class.ng-pristine]': '_shouldForward("pristine")',
+                        '[class.ng-dirty]': '_shouldForward("dirty")',
+                        '[class.ng-valid]': '_shouldForward("valid")',
+                        '[class.ng-invalid]': '_shouldForward("invalid")',
+                        '[class.ng-pending]': '_shouldForward("pending")'
+                    },
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    McFormField.ctorParameters = function () { return [
+        { type: core.ElementRef, },
+        { type: core.ChangeDetectorRef, },
+    ]; };
+    McFormField.propDecorators = {
+        "_control": [{ type: core.ContentChild, args: [McFormFieldControl,] },],
+        "_hint": [{ type: core.ContentChildren, args: [McHint,] },],
+        "_suffix": [{ type: core.ContentChildren, args: [McSuffix,] },],
+        "_prefix": [{ type: core.ContentChildren, args: [McPrefix,] },],
+        "_cleaner": [{ type: core.ContentChildren, args: [McCleaner,] },],
+    };
+    return McFormField;
+}(McFormFieldBase));
+var McFormFieldWithoutBorders = /** @class */ (function () {
+    function McFormFieldWithoutBorders() {
+    }
+    McFormFieldWithoutBorders.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-form-field[mcFormFieldWithoutBorders]',
+                    exportAs: 'mcFormFieldWithoutBorders',
+                    host: { class: 'mc-form-field_without-borders' }
+                },] },
+    ];
+    return McFormFieldWithoutBorders;
+}());
+
+var McFormFieldModule = /** @class */ (function () {
+    function McFormFieldModule() {
+    }
+    McFormFieldModule.decorators = [
+        { type: core.NgModule, args: [{
+                    declarations: [
+                        McFormField,
+                        McFormFieldWithoutBorders,
+                        McHint,
+                        McPrefix,
+                        McSuffix,
+                        McCleaner
+                    ],
+                    imports: [common.CommonModule, McIconModule],
+                    exports: [
+                        McFormField,
+                        McFormFieldWithoutBorders,
+                        McHint,
+                        McPrefix,
+                        McSuffix,
+                        McCleaner
+                    ]
+                },] },
+    ];
+    return McFormFieldModule;
+}());
+
+function getMcInputUnsupportedTypeError(inputType) {
+    return Error("Input type \"" + inputType + "\" isn't supported by mcInput.");
+}
+
+var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
+
+var MC_INPUT_INVALID_TYPES = [
+    'button',
+    'checkbox',
+    'file',
+    'hidden',
+    'image',
+    'radio',
+    'range',
+    'reset',
+    'submit'
+];
+var nextUniqueId$3 = 0;
+var McInputBase = /** @class */ (function () {
+    function McInputBase(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) {
+        this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
+        this._parentForm = _parentForm;
+        this._parentFormGroup = _parentFormGroup;
+        this.ngControl = ngControl;
+    }
+    return McInputBase;
+}());
+var _McInputMixinBase = mixinErrorState(McInputBase);
+var McInput = /** @class */ (function (_super) {
+    __extends(McInput, _super);
+    function McInput(_elementRef, _platform, ngControl, _parentForm, _parentFormGroup, _defaultErrorStateMatcher, inputValueAccessor) {
+        var _this = _super.call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) || this;
+        _this._elementRef = _elementRef;
+        _this._platform = _platform;
+        _this.ngControl = ngControl;
+        /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        _this.focused = false;
+        /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        _this.stateChanges = new rxjs.Subject();
+        /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        _this.controlType = 'mc-input';
+        _this._uid = "mc-input-" + nextUniqueId$3++;
+        _this._disabled = false;
+        _this._required = false;
+        _this._type = 'text';
+        _this._neverEmptyInputTypes = [
+            'date',
+            'datetime',
+            'datetime-local',
+            'month',
+            'time',
+            'week'
+        ].filter(function (t) { return platform.getSupportedInputTypes().has(t); });
+        // If no input value accessor was explicitly specified, use the element as the input value
+        // accessor.
+        // If no input value accessor was explicitly specified, use the element as the input value
+        // accessor.
+        _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
+        _this._previousNativeValue = _this.value;
+        // Force setter to be called in case id was not specified.
+        // Force setter to be called in case id was not specified.
+        _this.id = _this.id;
+        return _this;
+    }
+    Object.defineProperty(McInput.prototype, "disabled", {
+        get: /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            if (this.ngControl && this.ngControl.disabled !== null) {
+                return this.ngControl.disabled;
+            }
+            return this._disabled;
+        },
+        set: function (value) {
+            this._disabled = coercion.coerceBooleanProperty(value);
+            // Browsers may not fire the blur event if the input is disabled too quickly.
+            // Reset from here to ensure that the element doesn't become stuck.
+            if (this.focused) {
+                this.focused = false;
+                this.stateChanges.next();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McInput.prototype, "id", {
+        get: /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            return this._id;
+        },
+        set: function (value) {
+            this._id = value || this._uid;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McInput.prototype, "required", {
+        get: /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            return this._required;
+        },
+        set: function (value) {
+            this._required = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McInput.prototype, "type", {
+        get: 
+        // tslint:disable no-reserved-keywords
+        /** Input type of the element. */
+        function () {
+            return this._type;
+        },
+        set: function (value) {
+            this._type = value || 'text';
+            this._validateType();
+            // When using Angular inputs, developers are no longer able to set the properties on the native
+            // input element. To ensure that bindings for `type` work, we need to sync the setter
+            // with the native property. Textarea elements don't support the type property or attribute.
+            if (platform.getSupportedInputTypes().has(this._type)) {
+                this._elementRef.nativeElement.type = this._type;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McInput.prototype, "value", {
+        get: 
+        // tslint:enable no-reserved-keywords
+        /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            return this._inputValueAccessor.value;
+        },
+        set: function (value) {
+            if (value !== this.value) {
+                this._inputValueAccessor.value = value;
+                this.stateChanges.next();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McInput.prototype.ngOnChanges = function () {
+        this.stateChanges.next();
+    };
+    McInput.prototype.ngOnDestroy = function () {
+        this.stateChanges.complete();
+    };
+    McInput.prototype.ngDoCheck = function () {
+        if (this.ngControl) {
+            // We need to re-evaluate this on every change detection cycle, because there are some
+            // error triggers that we can't subscribe to (e.g. parent form submissions). This means
+            // that whatever logic is in here has to be super lean or we risk destroying the performance.
+            this.updateErrorState();
+        }
+        // We need to dirty-check the native element's value, because there are some cases where
+        // we won't be notified when it changes (e.g. the consumer isn't using forms or they're
+        // updating the value using `emitEvent: false`).
+        this._dirtyCheckNativeValue();
+    };
+    /** Focuses the input. */
+    /** Focuses the input. */
+    McInput.prototype.focus = /** Focuses the input. */
+    function () {
+        this._elementRef.nativeElement.focus();
+    };
+    /** Callback for the cases where the focused state of the input changes. */
+    /** Callback for the cases where the focused state of the input changes. */
+    McInput.prototype._focusChanged = /** Callback for the cases where the focused state of the input changes. */
+    function (isFocused) {
+        if (isFocused !== this.focused) {
+            this.focused = isFocused;
+            this.stateChanges.next();
+        }
+    };
+    McInput.prototype._onInput = function () {
+        // This is a noop function and is used to let Angular know whenever the value changes.
+        // Angular will run a new change detection each time the `input` event has been dispatched.
+        // It's necessary that Angular recognizes the value change, because when floatingLabel
+        // is set to false and Angular forms aren't used, the placeholder won't recognize the
+        // value changes and will not disappear.
+        // Listening to the input event wouldn't be necessary when the input is using the
+        // FormsModule or ReactiveFormsModule, because Angular forms also listens to input events.
+    };
+    Object.defineProperty(McInput.prototype, "empty", {
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            return !this._isNeverEmpty() && !this._elementRef.nativeElement.value && !this._isBadInput();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+    McInput.prototype.onContainerClick = /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+    function () {
+        this.focus();
+    };
+    /** Does some manual dirty checking on the native input `value` property. */
+    /** Does some manual dirty checking on the native input `value` property. */
+    McInput.prototype._dirtyCheckNativeValue = /** Does some manual dirty checking on the native input `value` property. */
+    function () {
+        var newValue = this.value;
+        if (this._previousNativeValue !== newValue) {
+            this._previousNativeValue = newValue;
+            this.stateChanges.next();
+        }
+    };
+    /** Make sure the input is a supported type. */
+    /** Make sure the input is a supported type. */
+    McInput.prototype._validateType = /** Make sure the input is a supported type. */
+    function () {
+        if (MC_INPUT_INVALID_TYPES.indexOf(this._type) > -1) {
+            throw getMcInputUnsupportedTypeError(this._type);
+        }
+    };
+    /** Checks whether the input type is one of the types that are never empty. */
+    /** Checks whether the input type is one of the types that are never empty. */
+    McInput.prototype._isNeverEmpty = /** Checks whether the input type is one of the types that are never empty. */
+    function () {
+        return this._neverEmptyInputTypes.indexOf(this._type) > -1;
+    };
+    /** Checks whether the input is invalid based on the native validation. */
+    /** Checks whether the input is invalid based on the native validation. */
+    McInput.prototype._isBadInput = /** Checks whether the input is invalid based on the native validation. */
+    function () {
+        // The `validity` property won't be present on platform-server.
+        var validity = this._elementRef.nativeElement.validity;
+        return validity && validity.badInput;
+    };
+    McInput.decorators = [
+        { type: core.Directive, args: [{
+                    selector: "input[mcInput]",
+                    exportAs: 'mcInput',
+                    host: {
+                        'class': 'mc-input',
+                        // Native input properties that are overwritten by Angular inputs need to be synced with
+                        // the native input element. Otherwise property bindings for those don't work.
+                        '[attr.id]': 'id',
+                        '[attr.placeholder]': 'placeholder',
+                        '[disabled]': 'disabled',
+                        '[required]': 'required',
+                        '(blur)': '_focusChanged(false)',
+                        '(focus)': '_focusChanged(true)',
+                        '(input)': '_onInput()'
+                    },
+                    providers: [{ provide: McFormFieldControl, useExisting: McInput }]
+                },] },
+    ];
+    /** @nocollapse */
+    McInput.ctorParameters = function () { return [
+        { type: core.ElementRef, },
+        { type: platform.Platform, },
+        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self },] },
+        { type: forms.NgForm, decorators: [{ type: core.Optional },] },
+        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional },] },
+        { type: ErrorStateMatcher, },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_INPUT_VALUE_ACCESSOR,] },] },
+    ]; };
+    McInput.propDecorators = {
+        "errorStateMatcher": [{ type: core.Input },],
+        "disabled": [{ type: core.Input },],
+        "id": [{ type: core.Input },],
+        "placeholder": [{ type: core.Input },],
+        "required": [{ type: core.Input },],
+        "type": [{ type: core.Input },],
+        "value": [{ type: core.Input },],
+    };
+    return McInput;
+}(_McInputMixinBase));
+var McInputMono = /** @class */ (function () {
+    function McInputMono() {
+    }
+    McInputMono.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'input[mcInputMonospace]',
+                    exportAs: 'McInputMonospace',
+                    host: { class: 'mc-input_monospace' }
+                },] },
+    ];
+    return McInputMono;
+}());
+
+var McInputModule = /** @class */ (function () {
+    function McInputModule() {
+    }
+    McInputModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule, a11y.A11yModule, McCommonModule, forms.FormsModule],
+                    exports: [McInput, McInputMono],
+                    declarations: [McInput, McInputMono]
+                },] },
+    ];
+    return McInputModule;
+}());
+
 var idIterator = 0;
 var MIN_PERCENT = 0;
 var MAX_PERCENT = 100;
@@ -3445,9 +4126,12 @@ exports.mixinDisabled = mixinDisabled;
 exports.mixinColor = mixinColor;
 exports.ThemePalette = ThemePalette;
 exports.mixinTabIndex = mixinTabIndex;
+exports.mixinErrorState = mixinErrorState;
 exports.McLine = McLine;
 exports.McLineSetter = McLineSetter;
 exports.McLineModule = McLineModule;
+exports.ShowOnDirtyErrorStateMatcher = ShowOnDirtyErrorStateMatcher;
+exports.ErrorStateMatcher = ErrorStateMatcher;
 exports.McPseudoCheckboxModule = McPseudoCheckboxModule;
 exports.McPseudoCheckbox = McPseudoCheckbox;
 exports.McIconModule = McIconModule;
@@ -3487,10 +4171,26 @@ exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
 exports.McCheckboxModule = McCheckboxModule;
 exports.MC_CHECKBOX_REQUIRED_VALIDATOR = MC_CHECKBOX_REQUIRED_VALIDATOR;
 exports.McCheckboxRequiredValidator = McCheckboxRequiredValidator;
+exports.ɵa11 = MC_INPUT_VALUE_ACCESSOR;
+exports.McInputModule = McInputModule;
+exports.McInputBase = McInputBase;
+exports._McInputMixinBase = _McInputMixinBase;
+exports.McInput = McInput;
+exports.McInputMono = McInputMono;
 exports.McProgressBarModule = McProgressBarModule;
 exports.McProgressBarBase = McProgressBarBase;
 exports._McProgressBarMixinBase = _McProgressBarMixinBase;
 exports.McProgressBar = McProgressBar;
+exports.McFormFieldModule = McFormFieldModule;
+exports.McFormFieldBase = McFormFieldBase;
+exports.McFormField = McFormField;
+exports.McFormFieldWithoutBorders = McFormFieldWithoutBorders;
+exports.McFormFieldControl = McFormFieldControl;
+exports.getMcFormFieldMissingControlError = getMcFormFieldMissingControlError;
+exports.McHint = McHint;
+exports.McSuffix = McSuffix;
+exports.McPrefix = McPrefix;
+exports.McCleaner = McCleaner;
 exports.McProgressSpinnerModule = McProgressSpinnerModule;
 exports.McProgressSpinnerBase = McProgressSpinnerBase;
 exports._McProgressPinnerMixinBase = _McProgressPinnerMixinBase;
