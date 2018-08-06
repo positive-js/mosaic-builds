@@ -548,7 +548,7 @@ $mc-dark-theme-background: (
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-846e58epx mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-c2673bdpx mc-color($second, 300);
         }
 
         &__light {
@@ -751,7 +751,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-846e58epx mc-color($primary, 500);
+            box-shadow: 0 0.0.1-c2673bdpx mc-color($primary, 500);
         }
     }
 }
@@ -1030,7 +1030,7 @@ $mc-dark-theme-background: (
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-846e58epx map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-c2673bdpx map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1188,7 +1188,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-846e58epx mc-color($palette, 500);
+            box-shadow: 0 0.0.1-c2673bdpx mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1307,7 +1307,7 @@ $mc-dark-theme-background: (
                 border: {
                     color: mc-color($primary, 500);
                 }
-                box-shadow: 0 0.0.1-846e58epx mc-color($primary, 500);
+                box-shadow: 0 0.0.1-c2673bdpx mc-color($primary, 500);
             }
 
             &.ng-invalid {
@@ -1330,7 +1330,7 @@ $mc-dark-theme-background: (
                 border: {
                     color: mc-color($mc-red, 400);
                 }
-                box-shadow: 0 0.0.1-846e58epx mc-color($mc-red, 400);
+                box-shadow: 0 0.0.1-c2673bdpx mc-color($mc-red, 400);
             }
         }
 
@@ -1342,10 +1342,12 @@ $mc-dark-theme-background: (
             color: mc-color($second, 400);
         }
 
-        mc-cleaner .mc-cleaner__icon {
-            color: mc-color($second, 200);
+        mc-cleaner  {
+            .mc-cleaner__icon {
+                color: mc-color($second, 200);
+            }
 
-            &:hover {
+            &:hover .mc-cleaner__icon {
                 color: darken(mc-color($second, 200), $hover-darken);
             }
         }
