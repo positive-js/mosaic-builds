@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/formField', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.formField = {}),global.ng.core,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.mosaic.icon));
-}(this, (function (exports,core,rxjs,operators,common,icon) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/formField', ['exports', '@angular/core', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.formField = {}),global.ng.core,global.ng.cdk.keycodes,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.mosaic.icon));
+}(this, (function (exports,core,keycodes,rxjs,operators,common,icon) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -152,6 +152,16 @@ var McFormField = /** @class */ (function (_super) {
     McFormField.prototype.onContainerClick = function ($event) {
         return this._control.onContainerClick && this._control.onContainerClick($event);
     };
+    McFormField.prototype.onKeyDown = function (e) {
+        if (e.keyCode === keycodes.ESCAPE &&
+            this._control.focused &&
+            this.hasCleaner) {
+            if (this._control && this._control.ngControl) {
+                this._control.ngControl.reset();
+            }
+            e.preventDefault();
+        }
+    };
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     McFormField.prototype._shouldForward = /** Determines whether a class from the NgControl should be forwarded to the host element. */
@@ -188,9 +198,16 @@ var McFormField = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McFormField.prototype, "hasCleaner", {
+        get: function () {
+            return this._cleaner && this._cleaner.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McFormField.prototype, "canShowCleaner", {
         get: function () {
-            return this._cleaner && this._cleaner.length > 0 &&
+            return this.hasCleaner &&
                 this._control && this._control.ngControl
                 ? this._control.ngControl.value && !this._control.disabled
                 : false;
@@ -221,7 +238,8 @@ var McFormField = /** @class */ (function (_super) {
                         '[class.ng-dirty]': '_shouldForward("dirty")',
                         '[class.ng-valid]': '_shouldForward("valid")',
                         '[class.ng-invalid]': '_shouldForward("invalid")',
-                        '[class.ng-pending]': '_shouldForward("pending")'
+                        '[class.ng-pending]': '_shouldForward("pending")',
+                        '(keydown)': 'onKeyDown($event)'
                     },
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush

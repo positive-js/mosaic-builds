@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { Component, Directive, Input, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, ContentChildren, ElementRef, ViewEncapsulation, NgModule } from '@angular/core';
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
@@ -105,6 +106,16 @@ class McFormField extends McFormFieldBase {
     onContainerClick($event) {
         return this._control.onContainerClick && this._control.onContainerClick($event);
     }
+    onKeyDown(e) {
+        if (e.keyCode === ESCAPE &&
+            this._control.focused &&
+            this.hasCleaner) {
+            if (this._control && this._control.ngControl) {
+                this._control.ngControl.reset();
+            }
+            e.preventDefault();
+        }
+    }
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     _shouldForward(prop) {
         const ngControl = this._control ? this._control.ngControl : null;
@@ -125,8 +136,11 @@ class McFormField extends McFormFieldBase {
     get hasPrefix() {
         return this._prefix && this._prefix.length > 0;
     }
+    get hasCleaner() {
+        return this._cleaner && this._cleaner.length > 0;
+    }
     get canShowCleaner() {
-        return this._cleaner && this._cleaner.length > 0 &&
+        return this.hasCleaner &&
             this._control && this._control.ngControl
             ? this._control.ngControl.value && !this._control.disabled
             : false;
@@ -155,7 +169,8 @@ McFormField.decorators = [
                     '[class.ng-dirty]': '_shouldForward("dirty")',
                     '[class.ng-valid]': '_shouldForward("valid")',
                     '[class.ng-invalid]': '_shouldForward("invalid")',
-                    '[class.ng-pending]': '_shouldForward("pending")'
+                    '[class.ng-pending]': '_shouldForward("pending")',
+                    '(keydown)': 'onKeyDown($event)'
                 },
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush

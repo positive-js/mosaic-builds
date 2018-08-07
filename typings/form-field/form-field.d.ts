@@ -22,6 +22,7 @@ export declare class McFormField extends McFormFieldBase implements AfterContent
     ngAfterViewInit(): void;
     clearValue($event: any): void;
     onContainerClick($event: any): void;
+    onKeyDown(e: KeyboardEvent): void;
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     _shouldForward(prop: string): boolean;
     /** Throws an error if the form field's control is missing. */
@@ -29,6 +30,7 @@ export declare class McFormField extends McFormFieldBase implements AfterContent
     readonly hasHint: boolean;
     readonly hasSuffix: boolean;
     readonly hasPrefix: boolean;
+    readonly hasCleaner: boolean;
     readonly canShowCleaner: boolean;
 }
 export declare class McFormFieldWithoutBorders {

@@ -6,6 +6,7 @@
  */
 import { Component, Directive, Input, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, ContentChildren, ElementRef, ViewEncapsulation, NgModule } from '@angular/core';
 import { __extends } from 'tslib';
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
@@ -124,6 +125,16 @@ var McFormField = /** @class */ (function (_super) {
     McFormField.prototype.onContainerClick = function ($event) {
         return this._control.onContainerClick && this._control.onContainerClick($event);
     };
+    McFormField.prototype.onKeyDown = function (e) {
+        if (e.keyCode === ESCAPE &&
+            this._control.focused &&
+            this.hasCleaner) {
+            if (this._control && this._control.ngControl) {
+                this._control.ngControl.reset();
+            }
+            e.preventDefault();
+        }
+    };
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     McFormField.prototype._shouldForward = /** Determines whether a class from the NgControl should be forwarded to the host element. */
@@ -160,9 +171,16 @@ var McFormField = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McFormField.prototype, "hasCleaner", {
+        get: function () {
+            return this._cleaner && this._cleaner.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McFormField.prototype, "canShowCleaner", {
         get: function () {
-            return this._cleaner && this._cleaner.length > 0 &&
+            return this.hasCleaner &&
                 this._control && this._control.ngControl
                 ? this._control.ngControl.value && !this._control.disabled
                 : false;
@@ -193,7 +211,8 @@ var McFormField = /** @class */ (function (_super) {
                         '[class.ng-dirty]': '_shouldForward("dirty")',
                         '[class.ng-valid]': '_shouldForward("valid")',
                         '[class.ng-invalid]': '_shouldForward("invalid")',
-                        '[class.ng-pending]': '_shouldForward("pending")'
+                        '[class.ng-pending]': '_shouldForward("pending")',
+                        '(keydown)': 'onKeyDown($event)'
                     },
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush
