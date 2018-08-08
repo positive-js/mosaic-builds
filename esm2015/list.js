@@ -191,7 +191,6 @@ McListOption.decorators = [
                     class: 'mc-list-option',
                     '[class.mc-selected]': 'selected',
                     '[class.mc-focused]': '_hasFocus',
-                    '[class.mc-list-option-disabled]': 'disabled',
                     '(focus)': '_handleFocus()',
                     '(blur)': '_handleBlur()',
                     '(click)': '_handleClick()'
@@ -352,8 +351,8 @@ class McListSelection extends _McListSelectionMixinBase {
         else {
             if (this.autoSelect) {
                 this.options.forEach((item) => item.setSelected(false));
+                option.setSelected(true);
             }
-            option.setSelected(true);
         }
         this._emitChangeEvent(option);
         this._reportValueChange();

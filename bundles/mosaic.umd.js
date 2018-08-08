@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('@angular/forms'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@ptsecurity/cdk/coercion')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', 'rxjs', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', '@angular/forms', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@ptsecurity/cdk/coercion'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.rxjs,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform,global.ng.forms,global.ng.cdk.collections,global.ng.cdk.keycodes,global.rxjs.operators,global.ng.cdk.coercion));
-}(this, (function (exports,core,bidi,rxjs,common,a11y,platform,forms,collections,keycodes,operators,coercion) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('@angular/forms'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/tree')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', 'rxjs', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', '@angular/forms', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/tree'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.rxjs,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform,global.ng.forms,global.ng.cdk.keycodes,global.rxjs.operators,global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.cdk.tree));
+}(this, (function (exports,core,bidi,rxjs,common,a11y,platform,forms,keycodes,operators,coercion,collections,tree) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -71,7 +71,7 @@ function toBoolean(value) {
  * @suppress {checkTypes} checked by tsc
  */
 // Injection token that configures whether the Mosaic sanity checks are enabled.
-var /** @type {?} */ MС_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
+var /** @type {?} */ MC_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
     factory: MC_SANITY_CHECKS_FACTORY
 });
@@ -160,7 +160,7 @@ var McCommonModule = /** @class */ (function () {
     ];
     /** @nocollapse */
     McCommonModule.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MС_SANITY_CHECKS,] },] },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_SANITY_CHECKS,] },] },
     ]; };
     return McCommonModule;
 }());
@@ -462,8 +462,8 @@ var McLineModule = /** @class */ (function () {
     }
     McLineModule.decorators = [
         { type: core.NgModule, args: [{
-                    imports: [McCommonModule],
-                    exports: [McLine, McCommonModule],
+                    imports: [],
+                    exports: [McLine],
                     declarations: [McLine]
                 },] },
     ];
@@ -598,7 +598,7 @@ var McIconCSSStyler = /** @class */ (function () {
     McIconCSSStyler.decorators = [
         { type: core.Directive, args: [{
                     selector: '[mc-icon]',
-                    host: { class: 'mc-icon mc' }
+                    host: { class: 'mc mc-icon' }
                 },] },
     ];
     return McIconCSSStyler;
@@ -679,8 +679,8 @@ var McButtonCSSStyler = /** @class */ (function () {
     }
     McButtonCSSStyler.decorators = [
         { type: core.Directive, args: [{
-                    selector: 'button[mc-button], a[mc-button]',
-                    host: { class: 'mc-button' }
+                    selector: 'button, a[mc-button]',
+                    host: { class: 'mc-button mc-olololo' }
                 },] },
     ];
     return McButtonCSSStyler;
@@ -976,6 +976,429 @@ var McButtonModule = /** @class */ (function () {
 }());
 
 /**
+ * Injection token that can be used to specify the checkbox click behavior.
+ */
+var MC_CHECKBOX_CLICK_ACTION = new core.InjectionToken('mc-checkbox-click-action');
+
+// Increasing integer for generating unique ids for checkbox components.
+var nextUniqueId = 0;
+/**
+ * Provider Expression that allows mc-checkbox to register as a ControlValueAccessor.
+ * This allows it to support [(ngModel)].
+ * @docs-private
+ */
+var MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
+    provide: forms.NG_VALUE_ACCESSOR,
+    useExisting: core.forwardRef(function () { return McCheckbox; }),
+    multi: true
+};
+/**
+ * Represents the different states that require custom transitions between them.
+ * @docs-private
+ */
+/**
+ * Represents the different states that require custom transitions between them.
+ * @docs-private
+ */
+
+/**
+ * Represents the different states that require custom transitions between them.
+ * @docs-private
+ */
+(function (TransitionCheckState) {
+    /** The initial state of the component before any user interaction. */
+    TransitionCheckState[TransitionCheckState["Init"] = 0] = "Init";
+    /** The state representing the component when it's becoming checked. */
+    TransitionCheckState[TransitionCheckState["Checked"] = 1] = "Checked";
+    /** The state representing the component when it's becoming unchecked. */
+    TransitionCheckState[TransitionCheckState["Unchecked"] = 2] = "Unchecked";
+    /** The state representing the component when it's becoming indeterminate. */
+    TransitionCheckState[TransitionCheckState["Indeterminate"] = 3] = "Indeterminate";
+})(exports.TransitionCheckState || (exports.TransitionCheckState = {}));
+/** Change event object emitted by McCheckbox. */
+var   /** Change event object emitted by McCheckbox. */
+McCheckboxChange = /** @class */ (function () {
+    function McCheckboxChange() {
+    }
+    return McCheckboxChange;
+}());
+// Boilerplate for applying mixins to McCheckbox.
+/** @docs-private */
+var   
+// Boilerplate for applying mixins to McCheckbox.
+/** @docs-private */
+McCheckboxBase = /** @class */ (function () {
+    function McCheckboxBase(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+    return McCheckboxBase;
+}());
+var _McCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
+/**
+ * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
+ * and exposes a similar API. A McCheckbox can be either checked, unchecked, indeterminate, or
+ * disabled. Note that all additional accessibility attributes are taken care of by the component,
+ * so there is no need to provide them yourself. However, if you want to omit a label and still
+ * have the checkbox be accessible, you may supply an [aria-label] input.
+ */
+var McCheckbox = /** @class */ (function (_super) {
+    __extends(McCheckbox, _super);
+    function McCheckbox(elementRef, _changeDetectorRef, _focusMonitor, tabIndex, _clickAction) {
+        var _this = _super.call(this, elementRef) || this;
+        _this._changeDetectorRef = _changeDetectorRef;
+        _this._focusMonitor = _focusMonitor;
+        _this._clickAction = _clickAction;
+        /**
+             * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will
+             * take precedence so this may be omitted.
+             */
+        _this.ariaLabel = '';
+        /**
+             * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+             */
+        _this.ariaLabelledby = null;
+        _this._uniqueId = "mc-checkbox-" + ++nextUniqueId;
+        /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
+        _this.id = _this._uniqueId;
+        /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
+        _this.labelPosition = 'after';
+        /** Name value will be applied to the input element if present */
+        _this.name = null;
+        /** Event emitted when the checkbox's `checked` value changes. */
+        _this.change = new core.EventEmitter();
+        /** Event emitted when the checkbox's `indeterminate` value changes. */
+        _this.indeterminateChange = new core.EventEmitter();
+        /**
+             * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+             * @docs-private
+             */
+        _this._onTouched = function () {
+        };
+        _this._currentAnimationClass = '';
+        _this._currentCheckState = exports.TransitionCheckState.Init;
+        _this._controlValueAccessorChangeFn = function () {
+        };
+        _this._checked = false;
+        _this._disabled = false;
+        _this._indeterminate = false;
+        _this.tabIndex = parseInt(tabIndex) || 0;
+        return _this;
+    }
+    Object.defineProperty(McCheckbox.prototype, "inputId", {
+        /** Returns the unique id for the visual hidden input. */
+        get: /** Returns the unique id for the visual hidden input. */
+        function () {
+            return (this.id || this._uniqueId) + "-input";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McCheckbox.prototype, "required", {
+        get: /** Whether the checkbox is required. */
+        function () {
+            return this._required;
+        },
+        set: function (value) {
+            this._required = toBoolean(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McCheckbox.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this._focusMonitor
+            .monitor(this._inputElement.nativeElement)
+            .subscribe(function (focusOrigin) { return _this._onInputFocusChange(focusOrigin); });
+    };
+    McCheckbox.prototype.ngOnDestroy = function () {
+        this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
+    };
+    Object.defineProperty(McCheckbox.prototype, "checked", {
+        get: /**
+             * Whether the checkbox is checked.
+             */
+        function () {
+            return this._checked;
+        },
+        set: function (value) {
+            if (value != this.checked) {
+                this._checked = value;
+                this._changeDetectorRef.markForCheck();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McCheckbox.prototype, "disabled", {
+        get: /**
+             * Whether the checkbox is disabled. This fully overrides the implementation provided by
+             * mixinDisabled, but the mixin is still required because mixinTabIndex requires it.
+             */
+        function () {
+            return this._disabled;
+        },
+        set: function (value) {
+            if (value != this.disabled) {
+                this._disabled = value;
+                this._changeDetectorRef.markForCheck();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McCheckbox.prototype, "indeterminate", {
+        get: /**
+             * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
+             * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
+             * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
+             * set to false.
+             */
+        function () {
+            return this._indeterminate;
+        },
+        set: function (value) {
+            var changed = value != this._indeterminate;
+            this._indeterminate = value;
+            if (changed) {
+                if (this._indeterminate) {
+                    this._transitionCheckState(exports.TransitionCheckState.Indeterminate);
+                }
+                else {
+                    this._transitionCheckState(this.checked ? exports.TransitionCheckState.Checked : exports.TransitionCheckState.Unchecked);
+                }
+                this.indeterminateChange.emit(this._indeterminate);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /** Method being called whenever the label text changes. */
+    /** Method being called whenever the label text changes. */
+    McCheckbox.prototype._onLabelTextChange = /** Method being called whenever the label text changes. */
+    function () {
+        // This method is getting called whenever the label of the checkbox changes.
+        // Since the checkbox uses the OnPush strategy we need to notify it about the change
+        // that has been recognized by the cdkObserveContent directive.
+        this._changeDetectorRef.markForCheck();
+    };
+    // Implemented as part of ControlValueAccessor.
+    // Implemented as part of ControlValueAccessor.
+    McCheckbox.prototype.writeValue = 
+    // Implemented as part of ControlValueAccessor.
+    function (value) {
+        this.checked = !!value;
+    };
+    // Implemented as part of ControlValueAccessor.
+    // Implemented as part of ControlValueAccessor.
+    McCheckbox.prototype.registerOnChange = 
+    // Implemented as part of ControlValueAccessor.
+    function (fn) {
+        this._controlValueAccessorChangeFn = fn;
+    };
+    // Implemented as part of ControlValueAccessor.
+    // Implemented as part of ControlValueAccessor.
+    McCheckbox.prototype.registerOnTouched = 
+    // Implemented as part of ControlValueAccessor.
+    function (fn) {
+        this._onTouched = fn;
+    };
+    // Implemented as part of ControlValueAccessor.
+    // Implemented as part of ControlValueAccessor.
+    McCheckbox.prototype.setDisabledState = 
+    // Implemented as part of ControlValueAccessor.
+    function (isDisabled) {
+        this.disabled = isDisabled;
+    };
+    McCheckbox.prototype._getAriaChecked = function () {
+        return this.checked ? 'true' : (this.indeterminate ? 'mixed' : 'false');
+    };
+    McCheckbox.prototype._transitionCheckState = function (newState) {
+        var oldState = this._currentCheckState;
+        var element = this._elementRef.nativeElement;
+        if (oldState === newState) {
+            return;
+        }
+        if (this._currentAnimationClass.length > 0) {
+            element.classList.remove(this._currentAnimationClass);
+        }
+        this._currentCheckState = newState;
+        if (this._currentAnimationClass.length > 0) {
+            element.classList.add(this._currentAnimationClass);
+        }
+    };
+    McCheckbox.prototype._emitChangeEvent = function () {
+        var event = new McCheckboxChange();
+        event.source = this;
+        event.checked = this.checked;
+        this._controlValueAccessorChangeFn(this.checked);
+        this.change.emit(event);
+    };
+    /** Function is called whenever the focus changes for the input element. */
+    /** Function is called whenever the focus changes for the input element. */
+    McCheckbox.prototype._onInputFocusChange = /** Function is called whenever the focus changes for the input element. */
+    function (focusOrigin) {
+        if (focusOrigin) {
+            this._onTouched();
+        }
+    };
+    /** Toggles the `checked` state of the checkbox. */
+    /** Toggles the `checked` state of the checkbox. */
+    McCheckbox.prototype.toggle = /** Toggles the `checked` state of the checkbox. */
+    function () {
+        this.checked = !this.checked;
+    };
+    /**
+     * Event handler for checkbox input element.
+     * Toggles checked state if element is not disabled.
+     * Do not toggle on (change) event since IE doesn't fire change event when
+     *   indeterminate checkbox is clicked.
+     * @param event
+     */
+    /**
+         * Event handler for checkbox input element.
+         * Toggles checked state if element is not disabled.
+         * Do not toggle on (change) event since IE doesn't fire change event when
+         *   indeterminate checkbox is clicked.
+         * @param event
+         */
+    McCheckbox.prototype._onInputClick = /**
+         * Event handler for checkbox input element.
+         * Toggles checked state if element is not disabled.
+         * Do not toggle on (change) event since IE doesn't fire change event when
+         *   indeterminate checkbox is clicked.
+         * @param event
+         */
+    function (event) {
+        var _this = this;
+        // We have to stop propagation for click events on the visual hidden input element.
+        // By default, when a user clicks on a label element, a generated click event will be
+        // dispatched on the associated input element. Since we are using a label element as our
+        // root container, the click event on the `checkbox` will be executed twice.
+        // The real click event will bubble up, and the generated click event also tries to bubble up.
+        // This will lead to multiple click events.
+        // Preventing bubbling for the second event will solve that issue.
+        event.stopPropagation();
+        // If resetIndeterminate is false, and the current state is indeterminate, do nothing on click
+        if (!this.disabled && this._clickAction !== 'noop') {
+            // When user manually click on the checkbox, `indeterminate` is set to false.
+            if (this.indeterminate && this._clickAction !== 'check') {
+                Promise.resolve().then(function () {
+                    _this._indeterminate = false;
+                    _this.indeterminateChange.emit(_this._indeterminate);
+                });
+            }
+            this.toggle();
+            this._transitionCheckState(this._checked ? exports.TransitionCheckState.Checked : exports.TransitionCheckState.Unchecked);
+            // Emit our custom change event if the native input emitted one.
+            // It is important to only emit it, if the native input triggered one, because
+            // we don't want to trigger a change event, when the `checked` variable changes for example.
+            this._emitChangeEvent();
+        }
+        else if (!this.disabled && this._clickAction === 'noop') {
+            // Reset native input when clicked with noop. The native checkbox becomes checked after
+            // click, reset it to be align with `checked` value of `mc-checkbox`.
+            this._inputElement.nativeElement.checked = this.checked;
+            this._inputElement.nativeElement.indeterminate = this.indeterminate;
+        }
+    };
+    /** Focuses the checkbox. */
+    /** Focuses the checkbox. */
+    McCheckbox.prototype.focus = /** Focuses the checkbox. */
+    function () {
+        this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
+    };
+    McCheckbox.prototype._onInteractionEvent = function (event) {
+        // We always have to stop propagation on the change event.
+        // Otherwise the change event, from the input element, will bubble up and
+        // emit its event object to the `change` output.
+        event.stopPropagation();
+    };
+    McCheckbox.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-checkbox',
+                    template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input class=\"mc-checkbox-input cdk-visually-hidden\" type=\"checkbox\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"></div><div class=\"mc-checkbox-background\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></span></label>",
+                    styles: [".mc-checkbox-checkmark,.mc-checkbox-mixedmark{width:calc(100% - 2px)}.mc-checkbox-background,.mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-background{align-items:center;display:inline-flex;justify-content:center}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{top:0;left:0;right:0;bottom:0;position:absolute;width:100%;opacity:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}.mc-checkbox-checked .mc-checkbox-checkmark{opacity:1}.mc-checkbox-checked .mc-checkbox-mixedmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-checkmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-mixedmark{opacity:1}.mc-checkbox-unchecked .mc-checkbox-background{background-color:transparent}.mc-checkbox-disabled{cursor:default}.mc-checkbox-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-input{bottom:0;left:50%}.mc-checkbox-input:focus+.mc-checkbox-frame{top:-1px;left:-1px;border-width:2px;width:18px;height:18px}"],
+                    exportAs: 'mcCheckbox',
+                    host: {
+                        class: 'mc-checkbox',
+                        '[id]': 'id',
+                        '[attr.id]': 'id',
+                        '[class.mc-checkbox-indeterminate]': 'indeterminate',
+                        '[class.mc-checkbox-checked]': 'checked',
+                        '[class.mc-checkbox-disabled]': 'disabled',
+                        '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
+                    },
+                    providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],
+                    inputs: ['color', 'tabIndex'],
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    McCheckbox.ctorParameters = function () { return [
+        { type: core.ElementRef, },
+        { type: core.ChangeDetectorRef, },
+        { type: a11y.FocusMonitor, },
+        { type: undefined, decorators: [{ type: core.Attribute, args: ['tabindex',] },] },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_CHECKBOX_CLICK_ACTION,] },] },
+    ]; };
+    McCheckbox.propDecorators = {
+        "ariaLabel": [{ type: core.Input, args: ['aria-label',] },],
+        "ariaLabelledby": [{ type: core.Input, args: ['aria-labelledby',] },],
+        "id": [{ type: core.Input },],
+        "required": [{ type: core.Input },],
+        "labelPosition": [{ type: core.Input },],
+        "name": [{ type: core.Input },],
+        "change": [{ type: core.Output },],
+        "indeterminateChange": [{ type: core.Output },],
+        "value": [{ type: core.Input },],
+        "_inputElement": [{ type: core.ViewChild, args: ['input',] },],
+        "checked": [{ type: core.Input },],
+        "disabled": [{ type: core.Input },],
+        "indeterminate": [{ type: core.Input },],
+    };
+    return McCheckbox;
+}(_McCheckboxMixinBase));
+
+var MC_CHECKBOX_REQUIRED_VALIDATOR = {
+    provide: forms.NG_VALIDATORS,
+    useExisting: core.forwardRef(function () { return McCheckboxRequiredValidator; }),
+    multi: true
+};
+/**
+ * Validator for Mosaic checkbox's required attribute in template-driven checkbox.
+ * Current CheckboxRequiredValidator only work with `input type=checkbox` and does not
+ * work with `mc-checkbox`.
+ */
+var McCheckboxRequiredValidator = /** @class */ (function (_super) {
+    __extends(McCheckboxRequiredValidator, _super);
+    function McCheckboxRequiredValidator() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    McCheckboxRequiredValidator.decorators = [
+        { type: core.Directive, args: [{
+                    selector: "mc-checkbox[required][formControlName],\n             mc-checkbox[required][formControl], mc-checkbox[required][ngModel]",
+                    providers: [MC_CHECKBOX_REQUIRED_VALIDATOR],
+                    host: { '[attr.required]': 'required ? "" : null' }
+                },] },
+    ];
+    return McCheckboxRequiredValidator;
+}(forms.CheckboxRequiredValidator));
+
+var McCheckboxModule = /** @class */ (function () {
+    function McCheckboxModule() {
+    }
+    McCheckboxModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule, McCommonModule],
+                    exports: [McCheckbox, McCheckboxRequiredValidator, McCommonModule],
+                    declarations: [McCheckbox, McCheckboxRequiredValidator]
+                },] },
+    ];
+    return McCheckboxModule;
+}());
+
+/**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
@@ -1068,575 +1491,597 @@ var McDividerModule = /** @class */ (function () {
     return McDividerModule;
 }());
 
-// Increasing integer for generating unique ids for radio components.
-var nextUniqueId = 0;
-/** Change event object emitted by McRadio. */
-var   /** Change event object emitted by McRadio. */
-McRadioChange = /** @class */ (function () {
-    function McRadioChange(/** The McRadioButton that emits the change event. */
-    source, /** The value of the McRadioButton. */
-    value) {
-        this.source = source;
-        this.value = value;
+var McCleaner = /** @class */ (function () {
+    function McCleaner() {
     }
-    return McRadioChange;
+    McCleaner.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-cleaner',
+                    template: '<i mc-icon="mc-close-M_16" class="mc-cleaner__icon"></i>'
+                },] },
+    ];
+    return McCleaner;
 }());
-// Boilerplate for applying mixins to McRadioGroup.
-/** @docs-private */
-var   
-// Boilerplate for applying mixins to McRadioGroup.
-/** @docs-private */
-McRadioGroupBase = /** @class */ (function () {
-    function McRadioGroupBase() {
+
+/** An interface which allows a control to work inside of a `MсFormField`. */
+var   /** An interface which allows a control to work inside of a `MсFormField`. */
+McFormFieldControl = /** @class */ (function () {
+    function McFormFieldControl() {
     }
-    return McRadioGroupBase;
+    return McFormFieldControl;
 }());
-var _McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
-/**
- * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
- * allows it to support [(ngModel)] and ngControl.
- * @docs-private
- */
-var MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
-    provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McRadioGroup; }),
-    multi: true
-};
-var McRadioGroup = /** @class */ (function (_super) {
-    __extends(McRadioGroup, _super);
-    function McRadioGroup(_changeDetector) {
-        var _this = _super.call(this) || this;
-        _this._changeDetector = _changeDetector;
-        /**
-             * Event emitted when the group value changes.
-             * Change events are only emitted when the value changes due to user interaction with
-             * a radio button (the same behavior as `<input type-"radio">`).
-             */
-        _this.change = new core.EventEmitter();
-        /**
-             * Selected value for group. Should equal the value of the selected radio button if there *is*
-             * a corresponding radio button with a matching value. If there is *not* such a corresponding
-             * radio button, this value persists to be applied in case a new radio button is added with a
-             * matching value.
-             */
-        _this._value = null;
-        /** The HTML name attribute applied to radio buttons in this group. */
-        _this._name = "mc-radio-group-" + nextUniqueId++;
-        /** The currently selected radio button. Should match value. */
-        _this._selected = null;
-        /** Whether the `value` has been set to its initial value. */
-        _this._isInitialized = false;
-        /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
-        _this._labelPosition = 'after';
-        /** Whether the radio group is disabled. */
-        _this._disabled = false;
-        /** Whether the radio group is required. */
-        _this._required = false;
-        /** The method to be called in order to update ngModel */
-        _this.controlValueAccessorChangeFn = function () { };
-        /**
-             * onTouch function registered via registerOnTouch (ControlValueAccessor).
-             * @docs-private
-             */
-        _this.onTouched = function () { };
-        return _this;
+
+function getMcFormFieldMissingControlError() {
+    return Error('mc-form-field must contain a McFormFieldControl.');
+}
+
+var nextUniqueId$1 = 0;
+var McHint = /** @class */ (function () {
+    function McHint() {
+        this.id = "mc-hint-" + nextUniqueId$1++;
     }
-    Object.defineProperty(McRadioGroup.prototype, "name", {
-        get: /** Name of the radio button group. All radio buttons inside this group will use this name. */
-        function () { return this._name; },
-        set: function (value) {
-            this._name = value;
-            this.updateRadioButtonNames();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McRadioGroup.prototype, "labelPosition", {
-        get: /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
-        function () {
-            return this._labelPosition;
-        },
-        set: function (v) {
-            this._labelPosition = v === 'before' ? 'before' : 'after';
-            this.markRadiosForCheck();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McRadioGroup.prototype, "value", {
-        get: /** Value of the radio button. */
-        function () { return this._value; },
-        set: function (newValue) {
-            if (this._value !== newValue) {
-                // Set this before proceeding to ensure no circular loop occurs with selection.
-                this._value = newValue;
-                this.updateSelectedRadioFromValue();
-                this.checkSelectedRadioButton();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    McRadioGroup.prototype.checkSelectedRadioButton = function () {
-        if (this._selected && !this._selected.checked) {
-            this._selected.checked = true;
-        }
-    };
-    Object.defineProperty(McRadioGroup.prototype, "selected", {
-        get: /** Whether the radio button is selected. */
-        function () { return this._selected; },
-        set: function (selected) {
-            this._selected = selected;
-            this.value = selected ? selected.value : null;
-            this.checkSelectedRadioButton();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McRadioGroup.prototype, "disabled", {
-        get: /** Whether the radio group is disabled */
-        function () { return this._disabled; },
-        set: function (value) {
-            this._disabled = toBoolean(value);
-            this.markRadiosForCheck();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McRadioGroup.prototype, "required", {
-        get: /** Whether the radio group is required */
-        function () { return this._required; },
-        set: function (value) {
-            this._required = toBoolean(value);
-            this.markRadiosForCheck();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Initialize properties once content children are available.
-     * This allows us to propagate relevant attributes to associated buttons.
-     */
-    /**
-         * Initialize properties once content children are available.
-         * This allows us to propagate relevant attributes to associated buttons.
-         */
-    McRadioGroup.prototype.ngAfterContentInit = /**
-         * Initialize properties once content children are available.
-         * This allows us to propagate relevant attributes to associated buttons.
-         */
-    function () {
-        // Mark this component as initialized in AfterContentInit because the initial value can
-        // possibly be set by NgModel on McRadioGroup, and it is possible that the OnInit of the
-        // NgModel occurs *after* the OnInit of the McRadioGroup.
-        this._isInitialized = true;
-    };
-    /**
-     * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
-     * radio buttons upon their blur.
-     */
-    /**
-         * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
-         * radio buttons upon their blur.
-         */
-    McRadioGroup.prototype.touch = /**
-         * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
-         * radio buttons upon their blur.
-         */
-    function () {
-        if (this.onTouched) {
-            this.onTouched();
-        }
-    };
-    /** Dispatch change event with current selection and group value. */
-    /** Dispatch change event with current selection and group value. */
-    McRadioGroup.prototype.emitChangeEvent = /** Dispatch change event with current selection and group value. */
-    function () {
-        if (this._isInitialized) {
-            this.change.emit(new McRadioChange((this._selected), this._value));
-        }
-    };
-    McRadioGroup.prototype.markRadiosForCheck = function () {
-        if (this._radios) {
-            this._radios.forEach(function (radio) { return radio.markForCheck(); });
-        }
-    };
-    /**
-     * Sets the model value. Implemented as part of ControlValueAccessor.
-     * @param value
-     */
-    /**
-         * Sets the model value. Implemented as part of ControlValueAccessor.
-         * @param value
-         */
-    McRadioGroup.prototype.writeValue = /**
-         * Sets the model value. Implemented as part of ControlValueAccessor.
-         * @param value
-         */
-    function (value) {
-        this.value = value;
-        this._changeDetector.markForCheck();
-    };
-    /**
-     * Registers a callback to be triggered when the model value changes.
-     * Implemented as part of ControlValueAccessor.
-     * @param fn Callback to be registered.
-     */
-    /**
-         * Registers a callback to be triggered when the model value changes.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    McRadioGroup.prototype.registerOnChange = /**
-         * Registers a callback to be triggered when the model value changes.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    function (fn) {
-        this.controlValueAccessorChangeFn = fn;
-    };
-    /**
-     * Registers a callback to be triggered when the control is touched.
-     * Implemented as part of ControlValueAccessor.
-     * @param fn Callback to be registered.
-     */
-    /**
-         * Registers a callback to be triggered when the control is touched.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    McRadioGroup.prototype.registerOnTouched = /**
-         * Registers a callback to be triggered when the control is touched.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    function (fn) {
-        this.onTouched = fn;
-    };
-    /**
-     * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
-     * @param isDisabled Whether the control should be disabled.
-     */
-    /**
-         * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
-         * @param isDisabled Whether the control should be disabled.
-         */
-    McRadioGroup.prototype.setDisabledState = /**
-         * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
-         * @param isDisabled Whether the control should be disabled.
-         */
-    function (isDisabled) {
-        this.disabled = isDisabled;
-        this._changeDetector.markForCheck();
-    };
-    McRadioGroup.prototype.updateRadioButtonNames = function () {
-        var _this = this;
-        if (this._radios) {
-            this._radios.forEach(function (radio) {
-                radio.name = _this.name;
-            });
-        }
-    };
-    /** Updates the `selected` radio button from the internal _value state. */
-    /** Updates the `selected` radio button from the internal _value state. */
-    McRadioGroup.prototype.updateSelectedRadioFromValue = /** Updates the `selected` radio button from the internal _value state. */
-    function () {
-        var _this = this;
-        // If the value already matches the selected radio, do nothing.
-        var isAlreadySelected = this._selected != null && this._selected.value === this._value;
-        if (this._radios != null && !isAlreadySelected) {
-            this._selected = null;
-            this._radios.forEach(function (radio) {
-                radio.checked = _this.value === radio.value;
-                if (radio.checked) {
-                    _this._selected = radio;
-                }
-            });
-        }
-    };
-    McRadioGroup.decorators = [
+    McHint.decorators = [
         { type: core.Directive, args: [{
-                    selector: 'mc-radio-group',
-                    exportAs: 'mcRadioGroup',
-                    providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR],
+                    selector: 'mc-hint',
                     host: {
-                        'role': 'radiogroup',
-                        'class': 'mc-radio-group'
-                    },
-                    inputs: ['disabled']
+                        class: 'mc-hint',
+                        '[attr.id]': 'id'
+                    }
                 },] },
     ];
     /** @nocollapse */
-    McRadioGroup.ctorParameters = function () { return [
-        { type: core.ChangeDetectorRef, },
-    ]; };
-    McRadioGroup.propDecorators = {
-        "change": [{ type: core.Output },],
-        "_radios": [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] },],
-        "name": [{ type: core.Input },],
-        "labelPosition": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "selected": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
+    McHint.propDecorators = {
+        "id": [{ type: core.Input },],
     };
-    return McRadioGroup;
-}(_McRadioGroupMixinBase));
-// Boilerplate for applying mixins to McRadioButton.
-/** @docs-private */
-var   
-// Boilerplate for applying mixins to McRadioButton.
-/** @docs-private */
-McRadioButtonBase = /** @class */ (function () {
-    function McRadioButtonBase(_elementRef) {
+    return McHint;
+}());
+
+var McPrefix = /** @class */ (function () {
+    function McPrefix() {
+    }
+    McPrefix.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mcPrefix]'
+                },] },
+    ];
+    return McPrefix;
+}());
+
+var McSuffix = /** @class */ (function () {
+    function McSuffix() {
+    }
+    McSuffix.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mcSuffix]'
+                },] },
+    ];
+    return McSuffix;
+}());
+
+var McFormFieldBase = /** @class */ (function () {
+    function McFormFieldBase(_elementRef) {
         this._elementRef = _elementRef;
     }
-    return McRadioButtonBase;
+    return McFormFieldBase;
 }());
-var _McRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
-var McRadioButton = /** @class */ (function (_super) {
-    __extends(McRadioButton, _super);
-    function McRadioButton(radioGroup, elementRef, _changeDetector, _radioDispatcher) {
-        var _this = _super.call(this, elementRef) || this;
-        _this._changeDetector = _changeDetector;
-        _this._radioDispatcher = _radioDispatcher;
-        _this._uniqueId = "mc-radio-" + ++nextUniqueId;
-        /* tslint:disable:member-ordering */
-        /** The unique ID for the radio button. */
-        _this.id = _this._uniqueId;
-        /**
-             * Event emitted when the checked state of this radio button changes.
-             * Change events are only emitted when the value changes due to user interaction with
-             * the radio button (the same behavior as `<input type-"radio">`).
-             */
-        _this.change = new core.EventEmitter();
-        _this.isFocused = false;
-        /** Whether this radio is checked. */
-        _this._checked = false;
-        /** Value assigned to this radio. */
-        _this._value = null;
-        /** Unregister function for _radioDispatcher */
-        _this.removeUniqueSelectionListener = function () { };
-        _this.radioGroup = radioGroup;
-        _this.removeUniqueSelectionListener =
-            _radioDispatcher.listen(function (id, name) {
-                if (id !== _this.id && name === _this.name) {
-                    _this.checked = false;
-                }
-            });
+var McFormField = /** @class */ (function (_super) {
+    __extends(McFormField, _super);
+    function McFormField(_elementRef, _changeDetectorRef) {
+        var _this = _super.call(this, _elementRef) || this;
+        _this._elementRef = _elementRef;
+        _this._changeDetectorRef = _changeDetectorRef;
         return _this;
     }
-    Object.defineProperty(McRadioButton.prototype, "checked", {
-        get: /** Whether this radio button is checked. */
-        function () { return this._checked; },
-        set: function (value) {
-            var newCheckedState = toBoolean(value);
-            if (this._checked !== newCheckedState) {
-                this._checked = newCheckedState;
-                if (newCheckedState && this.radioGroup && this.radioGroup.value !== this.value) {
-                    this.radioGroup.selected = this;
-                }
-                else if (!newCheckedState && this.radioGroup && this.radioGroup.value === this.value) {
-                    // When unchecking the selected radio button, update the selected radio
-                    // property on the group.
-                    this.radioGroup.selected = null;
-                }
-                if (newCheckedState) {
-                    // Notify all radio buttons with the same name to un-check.
-                    this._radioDispatcher.notify(this.id, this.name);
-                }
-                this._changeDetector.markForCheck();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McRadioButton.prototype, "value", {
-        get: /** The value of this radio button. */
-        function () { return this._value; },
-        set: function (value) {
-            if (this._value !== value) {
-                this._value = value;
-                if (this.radioGroup != null) {
-                    if (!this.checked) {
-                        // Update checked when the value changed to match the radio group's value
-                        this.checked = this.radioGroup.value === value;
-                    }
-                    if (this.checked) {
-                        this.radioGroup.selected = this;
-                    }
-                }
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McRadioButton.prototype, "disabled", {
-        get: /** Whether the radio button is disabled. */
-        function () {
-            return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
-        },
-        set: function (value) {
-            var newDisabledState = toBoolean(value);
-            if (this._disabled !== newDisabledState) {
-                this._disabled = newDisabledState;
-                this._changeDetector.markForCheck();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McRadioButton.prototype, "required", {
-        get: /** Whether the radio button is required. */
-        function () {
-            return this._required || (this.radioGroup && this.radioGroup.required);
-        },
-        set: function (value) {
-            this._required = toBoolean(value);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McRadioButton.prototype, "labelPosition", {
-        get: /** Whether the label should appear after or before the radio button. Defaults to 'after' */
-        function () {
-            return this._labelPosition || (this.radioGroup && this.radioGroup.labelPosition) || 'after';
-        },
-        set: function (value) {
-            this._labelPosition = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McRadioButton.prototype, "inputId", {
-        /** ID of the native input element inside `<mc-radio-button>` */
-        get: /** ID of the native input element inside `<mc-radio-button>` */
-        function () { return (this.id || this._uniqueId) + "-input"; },
-        enumerable: true,
-        configurable: true
-    });
-    McRadioButton.prototype.ngOnInit = function () {
-        if (this.radioGroup) {
-            // If the radio is inside a radio group, determine if it should be checked
-            this.checked = this.radioGroup.value === this._value;
-            // Copy name from parent radio group
-            this.name = this.radioGroup.name;
+    McFormField.prototype.ngAfterContentInit = function () {
+        var _this = this;
+        this._validateControlChild();
+        if (this._control.controlType) {
+            this._elementRef.nativeElement.classList
+                .add("mc-form-field-type-" + this._control.controlType);
+        }
+        // Subscribe to changes in the child control state in order to update the form field UI.
+        this._control.stateChanges.pipe(operators.startWith()).subscribe(function () {
+            _this._changeDetectorRef.markForCheck();
+        });
+        // Run change detection if the value changes.
+        var valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || rxjs.EMPTY;
+        rxjs.merge(valueChanges)
+            .subscribe(function () { return _this._changeDetectorRef.markForCheck(); });
+    };
+    McFormField.prototype.ngAfterContentChecked = function () {
+        this._validateControlChild();
+    };
+    McFormField.prototype.ngAfterViewInit = function () {
+        // Avoid animations on load.
+        this._changeDetectorRef.detectChanges();
+    };
+    McFormField.prototype.clearValue = function ($event) {
+        $event.stopPropagation();
+        if (this._control && this._control.ngControl) {
+            this._control.ngControl.reset();
         }
     };
-    McRadioButton.prototype.ngAfterViewInit = function () { };
-    McRadioButton.prototype.ngOnDestroy = function () {
-        this.removeUniqueSelectionListener();
+    McFormField.prototype.onContainerClick = function ($event) {
+        return this._control.onContainerClick && this._control.onContainerClick($event);
     };
-    /** Focuses the radio button. */
-    /** Focuses the radio button. */
-    McRadioButton.prototype.focus = /** Focuses the radio button. */
-    function () { };
-    /**
-     * Marks the radio button as needing checking for change detection.
-     * This method is exposed because the parent radio group will directly
-     * update bound properties of the radio button.
-     */
-    /**
-         * Marks the radio button as needing checking for change detection.
-         * This method is exposed because the parent radio group will directly
-         * update bound properties of the radio button.
-         */
-    McRadioButton.prototype.markForCheck = /**
-         * Marks the radio button as needing checking for change detection.
-         * This method is exposed because the parent radio group will directly
-         * update bound properties of the radio button.
-         */
-    function () {
-        // When group value changes, the button will not be notified. Use `markForCheck` to explicit
-        // update radio button's status
-        this._changeDetector.markForCheck();
-    };
-    McRadioButton.prototype.onInputClick = function (event) {
-        // We have to stop propagation for click events on the visual hidden input element.
-        // By default, when a user clicks on a label element, a generated click event will be
-        // dispatched on the associated input element. Since we are using a label element as our
-        // root container, the click event on the `radio-button` will be executed twice.
-        // The real click event will bubble up, and the generated click event also tries to bubble up.
-        // This will lead to multiple click events.
-        // Preventing bubbling for the second event will solve that issue.
-        event.stopPropagation();
-    };
-    McRadioButton.prototype.onInputChange = function (event) {
-        // We always have to stop propagation on the change event.
-        // Otherwise the change event, from the input element, will bubble up and
-        // emit its event object to the `change` output.
-        event.stopPropagation();
-        var groupValueChanged = this.radioGroup && this.value !== this.radioGroup.value;
-        this.checked = true;
-        this.emitChangeEvent();
-        if (this.radioGroup) {
-            this.radioGroup.controlValueAccessorChangeFn(this.value);
-            this.radioGroup.touch();
-            if (groupValueChanged) {
-                this.radioGroup.emitChangeEvent();
+    McFormField.prototype.onKeyDown = function (e) {
+        if (e.keyCode === keycodes.ESCAPE &&
+            this._control.focused &&
+            this.hasCleaner) {
+            if (this._control && this._control.ngControl) {
+                this._control.ngControl.reset();
             }
+            e.preventDefault();
         }
     };
-    /** Dispatch change event with current value. */
-    /** Dispatch change event with current value. */
-    McRadioButton.prototype.emitChangeEvent = /** Dispatch change event with current value. */
-    function () {
-        this.change.emit(new McRadioChange(this, this._value));
+    /** Determines whether a class from the NgControl should be forwarded to the host element. */
+    /** Determines whether a class from the NgControl should be forwarded to the host element. */
+    McFormField.prototype._shouldForward = /** Determines whether a class from the NgControl should be forwarded to the host element. */
+    function (prop) {
+        var ngControl = this._control ? this._control.ngControl : null;
+        return ngControl && ngControl[prop];
     };
-    McRadioButton.decorators = [
+    /** Throws an error if the form field's control is missing. */
+    /** Throws an error if the form field's control is missing. */
+    McFormField.prototype._validateControlChild = /** Throws an error if the form field's control is missing. */
+    function () {
+        if (!this._control) {
+            throw getMcFormFieldMissingControlError();
+        }
+    };
+    Object.defineProperty(McFormField.prototype, "hasHint", {
+        get: function () {
+            return this._hint && this._hint.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "hasSuffix", {
+        get: function () {
+            return this._suffix && this._suffix.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "hasPrefix", {
+        get: function () {
+            return this._prefix && this._prefix.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "hasCleaner", {
+        get: function () {
+            return this._cleaner && this._cleaner.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "canShowCleaner", {
+        get: function () {
+            return this.hasCleaner &&
+                this._control && this._control.ngControl
+                ? this._control.ngControl.value && !this._control.disabled
+                : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McFormField.decorators = [
         { type: core.Component, args: [{
-                    selector: 'mc-radio-button',
-                    template: "<label [attr.for]=\"inputId\" class=\"mc-radio-label\" #label><input #input class=\"mc-radio-input cdk-visually-hidden\" type=\"radio\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [attr.name]=\"name\" [required]=\"required\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-describedby]=\"ariaDescribedby\" (change)=\"onInputChange($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></div></label>",
-                    styles: [".mc-radio-button{display:inline-block}.mc-radio-label{cursor:pointer;display:inline-flex;align-items:center;white-space:nowrap;vertical-align:middle}.mc-radio-label-content{display:inline-block;order:0;line-height:inherit;padding-right:0}[dir=rtl] .mc-radio-label-content{padding-right:26px;padding-left:0}.mc-radio-input{position:absolute;outline:0;opacity:0}.mc-radio-input+.mc-radio-label-content{position:relative;cursor:pointer;padding-left:26px}.mc-radio-input+.mc-radio-label-content:before{position:absolute;left:0;top:-1px;content:'';background:#fff;width:14px;height:14px;display:block;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2);border-width:1px;border-style:solid;border-radius:50%}.mc-radio-input+.mc-radio-label-content:after{content:'';top:4px;left:5px;width:6px;height:6px;border-radius:50%;position:absolute;opacity:0}.mc-radio-input:checked+.mc-radio-label-content:before{box-shadow:unset}.mc-radio-input:checked:hover+.mc-radio-label-content:after{opacity:1}.mc-radio-input:focus+.mc-radio-label-content:before{top:-2px;left:-1px;box-shadow:inset 0 0 0 1px #fff;border-width:2px}.mc-radio-input[disabled]{cursor:default}.mc-radio-input[disabled]+.mc-radio-label-content{cursor:default}"],
-                    inputs: ['color', 'tabIndex'],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    exportAs: 'mcRadioButton',
+                    selector: 'mc-form-field',
+                    exportAs: 'mcFormField',
+                    template: "<div class=\"mc-form-field__wrapper\"><div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div></div>",
+                    // McInput is a directive and can't have styles, so we need to include its styles here.
+                    // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
+                    // aren't using McInput.
+                    styles: [".mc-form-field{display:inline-block;position:relative}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;top:0;bottom:0;right:0;width:32px;cursor:pointer;display:flex;flex-direction:row;justify-content:center;align-items:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
                     host: {
-                        'class': 'mc-radio-button',
-                        '[attr.id]': 'id',
-                        '[class.mc-radio-checked]': 'checked',
-                        '[class.mc-radio-disabled]': 'disabled',
-                        '(focus)': '_inputElement.nativeElement.focus()'
-                    }
+                        class: 'mc-form-field',
+                        '[class.mc-form-field_invalid]': '_control.errorState',
+                        '[class.mc-form-field_disabled]': '_control.disabled',
+                        '[class.mc-form-field_has-prefix]': 'hasPrefix',
+                        '[class.mc-form-field_has-suffix]': 'hasSuffix',
+                        '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
+                        '[class.mc-focused]': '_control.focused',
+                        '[class.ng-untouched]': '_shouldForward("untouched")',
+                        '[class.ng-touched]': '_shouldForward("touched")',
+                        '[class.ng-pristine]': '_shouldForward("pristine")',
+                        '[class.ng-dirty]': '_shouldForward("dirty")',
+                        '[class.ng-valid]': '_shouldForward("valid")',
+                        '[class.ng-invalid]': '_shouldForward("invalid")',
+                        '[class.ng-pending]': '_shouldForward("pending")',
+                        '(keydown)': 'onKeyDown($event)'
+                    },
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    McRadioButton.ctorParameters = function () { return [
-        { type: McRadioGroup, decorators: [{ type: core.Optional },] },
+    McFormField.ctorParameters = function () { return [
         { type: core.ElementRef, },
         { type: core.ChangeDetectorRef, },
-        { type: collections.UniqueSelectionDispatcher, },
     ]; };
-    McRadioButton.propDecorators = {
-        "id": [{ type: core.Input },],
-        "name": [{ type: core.Input },],
-        "ariaLabel": [{ type: core.Input, args: ['aria-label',] },],
-        "ariaLabelledby": [{ type: core.Input, args: ['aria-labelledby',] },],
-        "ariaDescribedby": [{ type: core.Input, args: ['aria-describedby',] },],
-        "checked": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
-        "labelPosition": [{ type: core.Input },],
-        "_inputElement": [{ type: core.ViewChild, args: ['input',] },],
-        "change": [{ type: core.Output },],
-        "isFocused": [{ type: core.Input },],
+    McFormField.propDecorators = {
+        "_control": [{ type: core.ContentChild, args: [McFormFieldControl,] },],
+        "_hint": [{ type: core.ContentChildren, args: [McHint,] },],
+        "_suffix": [{ type: core.ContentChildren, args: [McSuffix,] },],
+        "_prefix": [{ type: core.ContentChildren, args: [McPrefix,] },],
+        "_cleaner": [{ type: core.ContentChildren, args: [McCleaner,] },],
     };
-    return McRadioButton;
-}(_McRadioButtonMixinBase));
-
-var McRadioModule = /** @class */ (function () {
-    function McRadioModule() {
+    return McFormField;
+}(McFormFieldBase));
+var McFormFieldWithoutBorders = /** @class */ (function () {
+    function McFormFieldWithoutBorders() {
     }
-    McRadioModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, a11y.A11yModule, McCommonModule],
-                    exports: [McRadioGroup, McRadioButton, McCommonModule],
-                    declarations: [McRadioGroup, McRadioButton]
+    McFormFieldWithoutBorders.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-form-field[mcFormFieldWithoutBorders]',
+                    exportAs: 'mcFormFieldWithoutBorders',
+                    host: { class: 'mc-form-field_without-borders' }
                 },] },
     ];
-    return McRadioModule;
+    return McFormFieldWithoutBorders;
+}());
+
+var McFormFieldModule = /** @class */ (function () {
+    function McFormFieldModule() {
+    }
+    McFormFieldModule.decorators = [
+        { type: core.NgModule, args: [{
+                    declarations: [
+                        McFormField,
+                        McFormFieldWithoutBorders,
+                        McHint,
+                        McPrefix,
+                        McSuffix,
+                        McCleaner
+                    ],
+                    imports: [common.CommonModule, McIconModule],
+                    exports: [
+                        McFormField,
+                        McFormFieldWithoutBorders,
+                        McHint,
+                        McPrefix,
+                        McSuffix,
+                        McCleaner
+                    ]
+                },] },
+    ];
+    return McFormFieldModule;
+}());
+
+function getMcInputUnsupportedTypeError(inputType) {
+    return Error("Input type \"" + inputType + "\" isn't supported by mcInput.");
+}
+
+var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
+
+var MC_INPUT_INVALID_TYPES = [
+    'button',
+    'checkbox',
+    'file',
+    'hidden',
+    'image',
+    'radio',
+    'range',
+    'reset',
+    'submit'
+];
+var nextUniqueId$2 = 0;
+var McInputBase = /** @class */ (function () {
+    function McInputBase(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) {
+        this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
+        this._parentForm = _parentForm;
+        this._parentFormGroup = _parentFormGroup;
+        this.ngControl = ngControl;
+    }
+    return McInputBase;
+}());
+var _McInputMixinBase = mixinErrorState(McInputBase);
+var McInput = /** @class */ (function (_super) {
+    __extends(McInput, _super);
+    function McInput(_elementRef, _platform, ngControl, _parentForm, _parentFormGroup, _defaultErrorStateMatcher, inputValueAccessor) {
+        var _this = _super.call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) || this;
+        _this._elementRef = _elementRef;
+        _this._platform = _platform;
+        _this.ngControl = ngControl;
+        /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        _this.focused = false;
+        /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        _this.stateChanges = new rxjs.Subject();
+        /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        _this.controlType = 'mc-input';
+        _this._uid = "mc-input-" + nextUniqueId$2++;
+        _this._disabled = false;
+        _this._required = false;
+        _this._type = 'text';
+        _this._neverEmptyInputTypes = [
+            'date',
+            'datetime',
+            'datetime-local',
+            'month',
+            'time',
+            'week'
+        ].filter(function (t) { return platform.getSupportedInputTypes().has(t); });
+        // If no input value accessor was explicitly specified, use the element as the input value
+        // accessor.
+        // If no input value accessor was explicitly specified, use the element as the input value
+        // accessor.
+        _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
+        _this._previousNativeValue = _this.value;
+        // Force setter to be called in case id was not specified.
+        // Force setter to be called in case id was not specified.
+        _this.id = _this.id;
+        return _this;
+    }
+    Object.defineProperty(McInput.prototype, "disabled", {
+        get: /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            if (this.ngControl && this.ngControl.disabled !== null) {
+                return this.ngControl.disabled;
+            }
+            return this._disabled;
+        },
+        set: function (value) {
+            this._disabled = coercion.coerceBooleanProperty(value);
+            // Browsers may not fire the blur event if the input is disabled too quickly.
+            // Reset from here to ensure that the element doesn't become stuck.
+            if (this.focused) {
+                this.focused = false;
+                this.stateChanges.next();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McInput.prototype, "id", {
+        get: /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            return this._id;
+        },
+        set: function (value) {
+            this._id = value || this._uid;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McInput.prototype, "required", {
+        get: /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            return this._required;
+        },
+        set: function (value) {
+            this._required = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McInput.prototype, "type", {
+        get: 
+        // tslint:disable no-reserved-keywords
+        /** Input type of the element. */
+        function () {
+            return this._type;
+        },
+        set: function (value) {
+            this._type = value || 'text';
+            this._validateType();
+            // When using Angular inputs, developers are no longer able to set the properties on the native
+            // input element. To ensure that bindings for `type` work, we need to sync the setter
+            // with the native property. Textarea elements don't support the type property or attribute.
+            if (platform.getSupportedInputTypes().has(this._type)) {
+                this._elementRef.nativeElement.type = this._type;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McInput.prototype, "value", {
+        get: 
+        // tslint:enable no-reserved-keywords
+        /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            return this._inputValueAccessor.value;
+        },
+        set: function (value) {
+            if (value !== this.value) {
+                this._inputValueAccessor.value = value;
+                this.stateChanges.next();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McInput.prototype.ngOnChanges = function () {
+        this.stateChanges.next();
+    };
+    McInput.prototype.ngOnDestroy = function () {
+        this.stateChanges.complete();
+    };
+    McInput.prototype.ngDoCheck = function () {
+        if (this.ngControl) {
+            // We need to re-evaluate this on every change detection cycle, because there are some
+            // error triggers that we can't subscribe to (e.g. parent form submissions). This means
+            // that whatever logic is in here has to be super lean or we risk destroying the performance.
+            this.updateErrorState();
+        }
+        // We need to dirty-check the native element's value, because there are some cases where
+        // we won't be notified when it changes (e.g. the consumer isn't using forms or they're
+        // updating the value using `emitEvent: false`).
+        this._dirtyCheckNativeValue();
+    };
+    /** Focuses the input. */
+    /** Focuses the input. */
+    McInput.prototype.focus = /** Focuses the input. */
+    function () {
+        this._elementRef.nativeElement.focus();
+    };
+    /** Callback for the cases where the focused state of the input changes. */
+    /** Callback for the cases where the focused state of the input changes. */
+    McInput.prototype._focusChanged = /** Callback for the cases where the focused state of the input changes. */
+    function (isFocused) {
+        if (isFocused !== this.focused) {
+            this.focused = isFocused;
+            this.stateChanges.next();
+        }
+    };
+    McInput.prototype._onInput = function () {
+        // This is a noop function and is used to let Angular know whenever the value changes.
+        // Angular will run a new change detection each time the `input` event has been dispatched.
+        // It's necessary that Angular recognizes the value change, because when floatingLabel
+        // is set to false and Angular forms aren't used, the placeholder won't recognize the
+        // value changes and will not disappear.
+        // Listening to the input event wouldn't be necessary when the input is using the
+        // FormsModule or ReactiveFormsModule, because Angular forms also listens to input events.
+    };
+    Object.defineProperty(McInput.prototype, "empty", {
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+        function () {
+            return !this._isNeverEmpty() && !this._elementRef.nativeElement.value && !this._isBadInput();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+    McInput.prototype.onContainerClick = /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+    function () {
+        this.focus();
+    };
+    /** Does some manual dirty checking on the native input `value` property. */
+    /** Does some manual dirty checking on the native input `value` property. */
+    McInput.prototype._dirtyCheckNativeValue = /** Does some manual dirty checking on the native input `value` property. */
+    function () {
+        var newValue = this.value;
+        if (this._previousNativeValue !== newValue) {
+            this._previousNativeValue = newValue;
+            this.stateChanges.next();
+        }
+    };
+    /** Make sure the input is a supported type. */
+    /** Make sure the input is a supported type. */
+    McInput.prototype._validateType = /** Make sure the input is a supported type. */
+    function () {
+        if (MC_INPUT_INVALID_TYPES.indexOf(this._type) > -1) {
+            throw getMcInputUnsupportedTypeError(this._type);
+        }
+    };
+    /** Checks whether the input type is one of the types that are never empty. */
+    /** Checks whether the input type is one of the types that are never empty. */
+    McInput.prototype._isNeverEmpty = /** Checks whether the input type is one of the types that are never empty. */
+    function () {
+        return this._neverEmptyInputTypes.indexOf(this._type) > -1;
+    };
+    /** Checks whether the input is invalid based on the native validation. */
+    /** Checks whether the input is invalid based on the native validation. */
+    McInput.prototype._isBadInput = /** Checks whether the input is invalid based on the native validation. */
+    function () {
+        // The `validity` property won't be present on platform-server.
+        var validity = this._elementRef.nativeElement.validity;
+        return validity && validity.badInput;
+    };
+    McInput.decorators = [
+        { type: core.Directive, args: [{
+                    selector: "input[mcInput]",
+                    exportAs: 'mcInput',
+                    host: {
+                        'class': 'mc-input',
+                        // Native input properties that are overwritten by Angular inputs need to be synced with
+                        // the native input element. Otherwise property bindings for those don't work.
+                        '[attr.id]': 'id',
+                        '[attr.placeholder]': 'placeholder',
+                        '[disabled]': 'disabled',
+                        '[required]': 'required',
+                        '(blur)': '_focusChanged(false)',
+                        '(focus)': '_focusChanged(true)',
+                        '(input)': '_onInput()'
+                    },
+                    providers: [{ provide: McFormFieldControl, useExisting: McInput }]
+                },] },
+    ];
+    /** @nocollapse */
+    McInput.ctorParameters = function () { return [
+        { type: core.ElementRef, },
+        { type: platform.Platform, },
+        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self },] },
+        { type: forms.NgForm, decorators: [{ type: core.Optional },] },
+        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional },] },
+        { type: ErrorStateMatcher, },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_INPUT_VALUE_ACCESSOR,] },] },
+    ]; };
+    McInput.propDecorators = {
+        "errorStateMatcher": [{ type: core.Input },],
+        "disabled": [{ type: core.Input },],
+        "id": [{ type: core.Input },],
+        "placeholder": [{ type: core.Input },],
+        "required": [{ type: core.Input },],
+        "type": [{ type: core.Input },],
+        "value": [{ type: core.Input },],
+    };
+    return McInput;
+}(_McInputMixinBase));
+var McInputMono = /** @class */ (function () {
+    function McInputMono() {
+    }
+    McInputMono.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'input[mcInputMonospace]',
+                    exportAs: 'McInputMonospace',
+                    host: { class: 'mc-input_monospace' }
+                },] },
+    ];
+    return McInputMono;
+}());
+
+var McInputModule = /** @class */ (function () {
+    function McInputModule() {
+    }
+    McInputModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule, a11y.A11yModule, McCommonModule, forms.FormsModule],
+                    exports: [McInput, McInputMono],
+                    declarations: [McInput, McInputMono]
+                },] },
+    ];
+    return McInputModule;
 }());
 
 /**
@@ -1858,7 +2303,6 @@ var McListOption = /** @class */ (function () {
                         class: 'mc-list-option',
                         '[class.mc-selected]': 'selected',
                         '[class.mc-focused]': '_hasFocus',
-                        '[class.mc-list-option-disabled]': 'disabled',
                         '(focus)': '_handleFocus()',
                         '(blur)': '_handleBlur()',
                         '(click)': '_handleClick()'
@@ -2041,8 +2485,8 @@ var McListSelection = /** @class */ (function (_super) {
         else {
             if (this.autoSelect) {
                 this.options.forEach(function (item) { return item.setSelected(false); });
+                option.setSelected(true);
             }
-            option.setSelected(true);
         }
         this._emitChangeEvent(option);
         this._reportValueChange();
@@ -2468,1176 +2912,6 @@ var McListModule = /** @class */ (function () {
                 },] },
     ];
     return McListModule;
-}());
-
-/**
- * Injection token that can be used to specify the checkbox click behavior.
- */
-var MC_CHECKBOX_CLICK_ACTION = new core.InjectionToken('mc-checkbox-click-action');
-
-// Increasing integer for generating unique ids for checkbox components.
-var nextUniqueId$1 = 0;
-/**
- * Provider Expression that allows mc-checkbox to register as a ControlValueAccessor.
- * This allows it to support [(ngModel)].
- * @docs-private
- */
-var MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
-    provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McCheckbox; }),
-    multi: true
-};
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
-
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
-(function (TransitionCheckState) {
-    /** The initial state of the component before any user interaction. */
-    TransitionCheckState[TransitionCheckState["Init"] = 0] = "Init";
-    /** The state representing the component when it's becoming checked. */
-    TransitionCheckState[TransitionCheckState["Checked"] = 1] = "Checked";
-    /** The state representing the component when it's becoming unchecked. */
-    TransitionCheckState[TransitionCheckState["Unchecked"] = 2] = "Unchecked";
-    /** The state representing the component when it's becoming indeterminate. */
-    TransitionCheckState[TransitionCheckState["Indeterminate"] = 3] = "Indeterminate";
-})(exports.TransitionCheckState || (exports.TransitionCheckState = {}));
-/** Change event object emitted by McCheckbox. */
-var   /** Change event object emitted by McCheckbox. */
-McCheckboxChange = /** @class */ (function () {
-    function McCheckboxChange() {
-    }
-    return McCheckboxChange;
-}());
-// Boilerplate for applying mixins to McCheckbox.
-/** @docs-private */
-var   
-// Boilerplate for applying mixins to McCheckbox.
-/** @docs-private */
-McCheckboxBase = /** @class */ (function () {
-    function McCheckboxBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McCheckboxBase;
-}());
-var _McCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
-/**
- * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
- * and exposes a similar API. A McCheckbox can be either checked, unchecked, indeterminate, or
- * disabled. Note that all additional accessibility attributes are taken care of by the component,
- * so there is no need to provide them yourself. However, if you want to omit a label and still
- * have the checkbox be accessible, you may supply an [aria-label] input.
- */
-var McCheckbox = /** @class */ (function (_super) {
-    __extends(McCheckbox, _super);
-    function McCheckbox(elementRef, _changeDetectorRef, _focusMonitor, tabIndex, _clickAction) {
-        var _this = _super.call(this, elementRef) || this;
-        _this._changeDetectorRef = _changeDetectorRef;
-        _this._focusMonitor = _focusMonitor;
-        _this._clickAction = _clickAction;
-        /**
-             * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will
-             * take precedence so this may be omitted.
-             */
-        _this.ariaLabel = '';
-        /**
-             * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-             */
-        _this.ariaLabelledby = null;
-        _this._uniqueId = "mc-checkbox-" + ++nextUniqueId$1;
-        /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
-        _this.id = _this._uniqueId;
-        /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
-        _this.labelPosition = 'after';
-        /** Name value will be applied to the input element if present */
-        _this.name = null;
-        /** Event emitted when the checkbox's `checked` value changes. */
-        _this.change = new core.EventEmitter();
-        /** Event emitted when the checkbox's `indeterminate` value changes. */
-        _this.indeterminateChange = new core.EventEmitter();
-        /**
-             * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-             * @docs-private
-             */
-        _this._onTouched = function () {
-        };
-        _this._currentAnimationClass = '';
-        _this._currentCheckState = exports.TransitionCheckState.Init;
-        _this._controlValueAccessorChangeFn = function () {
-        };
-        _this._checked = false;
-        _this._disabled = false;
-        _this._indeterminate = false;
-        _this.tabIndex = parseInt(tabIndex) || 0;
-        return _this;
-    }
-    Object.defineProperty(McCheckbox.prototype, "inputId", {
-        /** Returns the unique id for the visual hidden input. */
-        get: /** Returns the unique id for the visual hidden input. */
-        function () {
-            return (this.id || this._uniqueId) + "-input";
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McCheckbox.prototype, "required", {
-        get: /** Whether the checkbox is required. */
-        function () {
-            return this._required;
-        },
-        set: function (value) {
-            this._required = toBoolean(value);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    McCheckbox.prototype.ngAfterViewInit = function () {
-        var _this = this;
-        this._focusMonitor
-            .monitor(this._inputElement.nativeElement)
-            .subscribe(function (focusOrigin) { return _this._onInputFocusChange(focusOrigin); });
-    };
-    McCheckbox.prototype.ngOnDestroy = function () {
-        this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
-    };
-    Object.defineProperty(McCheckbox.prototype, "checked", {
-        get: /**
-             * Whether the checkbox is checked.
-             */
-        function () {
-            return this._checked;
-        },
-        set: function (value) {
-            if (value != this.checked) {
-                this._checked = value;
-                this._changeDetectorRef.markForCheck();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McCheckbox.prototype, "disabled", {
-        get: /**
-             * Whether the checkbox is disabled. This fully overrides the implementation provided by
-             * mixinDisabled, but the mixin is still required because mixinTabIndex requires it.
-             */
-        function () {
-            return this._disabled;
-        },
-        set: function (value) {
-            if (value != this.disabled) {
-                this._disabled = value;
-                this._changeDetectorRef.markForCheck();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McCheckbox.prototype, "indeterminate", {
-        get: /**
-             * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
-             * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
-             * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
-             * set to false.
-             */
-        function () {
-            return this._indeterminate;
-        },
-        set: function (value) {
-            var changed = value != this._indeterminate;
-            this._indeterminate = value;
-            if (changed) {
-                if (this._indeterminate) {
-                    this._transitionCheckState(exports.TransitionCheckState.Indeterminate);
-                }
-                else {
-                    this._transitionCheckState(this.checked ? exports.TransitionCheckState.Checked : exports.TransitionCheckState.Unchecked);
-                }
-                this.indeterminateChange.emit(this._indeterminate);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /** Method being called whenever the label text changes. */
-    /** Method being called whenever the label text changes. */
-    McCheckbox.prototype._onLabelTextChange = /** Method being called whenever the label text changes. */
-    function () {
-        // This method is getting called whenever the label of the checkbox changes.
-        // Since the checkbox uses the OnPush strategy we need to notify it about the change
-        // that has been recognized by the cdkObserveContent directive.
-        this._changeDetectorRef.markForCheck();
-    };
-    // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.writeValue = 
-    // Implemented as part of ControlValueAccessor.
-    function (value) {
-        this.checked = !!value;
-    };
-    // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.registerOnChange = 
-    // Implemented as part of ControlValueAccessor.
-    function (fn) {
-        this._controlValueAccessorChangeFn = fn;
-    };
-    // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.registerOnTouched = 
-    // Implemented as part of ControlValueAccessor.
-    function (fn) {
-        this._onTouched = fn;
-    };
-    // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.setDisabledState = 
-    // Implemented as part of ControlValueAccessor.
-    function (isDisabled) {
-        this.disabled = isDisabled;
-    };
-    McCheckbox.prototype._getAriaChecked = function () {
-        return this.checked ? 'true' : (this.indeterminate ? 'mixed' : 'false');
-    };
-    McCheckbox.prototype._transitionCheckState = function (newState) {
-        var oldState = this._currentCheckState;
-        var element = this._elementRef.nativeElement;
-        if (oldState === newState) {
-            return;
-        }
-        if (this._currentAnimationClass.length > 0) {
-            element.classList.remove(this._currentAnimationClass);
-        }
-        this._currentCheckState = newState;
-        if (this._currentAnimationClass.length > 0) {
-            element.classList.add(this._currentAnimationClass);
-        }
-    };
-    McCheckbox.prototype._emitChangeEvent = function () {
-        var event = new McCheckboxChange();
-        event.source = this;
-        event.checked = this.checked;
-        this._controlValueAccessorChangeFn(this.checked);
-        this.change.emit(event);
-    };
-    /** Function is called whenever the focus changes for the input element. */
-    /** Function is called whenever the focus changes for the input element. */
-    McCheckbox.prototype._onInputFocusChange = /** Function is called whenever the focus changes for the input element. */
-    function (focusOrigin) {
-        if (focusOrigin) {
-            this._onTouched();
-        }
-    };
-    /** Toggles the `checked` state of the checkbox. */
-    /** Toggles the `checked` state of the checkbox. */
-    McCheckbox.prototype.toggle = /** Toggles the `checked` state of the checkbox. */
-    function () {
-        this.checked = !this.checked;
-    };
-    /**
-     * Event handler for checkbox input element.
-     * Toggles checked state if element is not disabled.
-     * Do not toggle on (change) event since IE doesn't fire change event when
-     *   indeterminate checkbox is clicked.
-     * @param event
-     */
-    /**
-         * Event handler for checkbox input element.
-         * Toggles checked state if element is not disabled.
-         * Do not toggle on (change) event since IE doesn't fire change event when
-         *   indeterminate checkbox is clicked.
-         * @param event
-         */
-    McCheckbox.prototype._onInputClick = /**
-         * Event handler for checkbox input element.
-         * Toggles checked state if element is not disabled.
-         * Do not toggle on (change) event since IE doesn't fire change event when
-         *   indeterminate checkbox is clicked.
-         * @param event
-         */
-    function (event) {
-        var _this = this;
-        // We have to stop propagation for click events on the visual hidden input element.
-        // By default, when a user clicks on a label element, a generated click event will be
-        // dispatched on the associated input element. Since we are using a label element as our
-        // root container, the click event on the `checkbox` will be executed twice.
-        // The real click event will bubble up, and the generated click event also tries to bubble up.
-        // This will lead to multiple click events.
-        // Preventing bubbling for the second event will solve that issue.
-        event.stopPropagation();
-        // If resetIndeterminate is false, and the current state is indeterminate, do nothing on click
-        if (!this.disabled && this._clickAction !== 'noop') {
-            // When user manually click on the checkbox, `indeterminate` is set to false.
-            if (this.indeterminate && this._clickAction !== 'check') {
-                Promise.resolve().then(function () {
-                    _this._indeterminate = false;
-                    _this.indeterminateChange.emit(_this._indeterminate);
-                });
-            }
-            this.toggle();
-            this._transitionCheckState(this._checked ? exports.TransitionCheckState.Checked : exports.TransitionCheckState.Unchecked);
-            // Emit our custom change event if the native input emitted one.
-            // It is important to only emit it, if the native input triggered one, because
-            // we don't want to trigger a change event, when the `checked` variable changes for example.
-            this._emitChangeEvent();
-        }
-        else if (!this.disabled && this._clickAction === 'noop') {
-            // Reset native input when clicked with noop. The native checkbox becomes checked after
-            // click, reset it to be align with `checked` value of `mc-checkbox`.
-            this._inputElement.nativeElement.checked = this.checked;
-            this._inputElement.nativeElement.indeterminate = this.indeterminate;
-        }
-    };
-    /** Focuses the checkbox. */
-    /** Focuses the checkbox. */
-    McCheckbox.prototype.focus = /** Focuses the checkbox. */
-    function () {
-        this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
-    };
-    McCheckbox.prototype._onInteractionEvent = function (event) {
-        // We always have to stop propagation on the change event.
-        // Otherwise the change event, from the input element, will bubble up and
-        // emit its event object to the `change` output.
-        event.stopPropagation();
-    };
-    McCheckbox.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-checkbox',
-                    template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input class=\"mc-checkbox-input cdk-visually-hidden\" type=\"checkbox\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"></div><div class=\"mc-checkbox-background\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></span></label>",
-                    styles: [".mc-checkbox-checkmark,.mc-checkbox-mixedmark{width:calc(100% - 2px)}.mc-checkbox-background,.mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-background{align-items:center;display:inline-flex;justify-content:center}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{top:0;left:0;right:0;bottom:0;position:absolute;width:100%;opacity:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}.mc-checkbox-checked .mc-checkbox-checkmark{opacity:1}.mc-checkbox-checked .mc-checkbox-mixedmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-checkmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-mixedmark{opacity:1}.mc-checkbox-unchecked .mc-checkbox-background{background-color:transparent}.mc-checkbox-disabled{cursor:default}.mc-checkbox-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-input{bottom:0;left:50%}.mc-checkbox-input:focus+.mc-checkbox-frame{top:-1px;left:-1px;border-width:2px;width:18px;height:18px}"],
-                    exportAs: 'mcCheckbox',
-                    host: {
-                        class: 'mc-checkbox',
-                        '[id]': 'id',
-                        '[attr.id]': 'id',
-                        '[class.mc-checkbox-indeterminate]': 'indeterminate',
-                        '[class.mc-checkbox-checked]': 'checked',
-                        '[class.mc-checkbox-disabled]': 'disabled',
-                        '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
-                    },
-                    providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],
-                    inputs: ['color', 'tabIndex'],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McCheckbox.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: core.ChangeDetectorRef, },
-        { type: a11y.FocusMonitor, },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['tabindex',] },] },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_CHECKBOX_CLICK_ACTION,] },] },
-    ]; };
-    McCheckbox.propDecorators = {
-        "ariaLabel": [{ type: core.Input, args: ['aria-label',] },],
-        "ariaLabelledby": [{ type: core.Input, args: ['aria-labelledby',] },],
-        "id": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
-        "labelPosition": [{ type: core.Input },],
-        "name": [{ type: core.Input },],
-        "change": [{ type: core.Output },],
-        "indeterminateChange": [{ type: core.Output },],
-        "value": [{ type: core.Input },],
-        "_inputElement": [{ type: core.ViewChild, args: ['input',] },],
-        "checked": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "indeterminate": [{ type: core.Input },],
-    };
-    return McCheckbox;
-}(_McCheckboxMixinBase));
-
-var MC_CHECKBOX_REQUIRED_VALIDATOR = {
-    provide: forms.NG_VALIDATORS,
-    useExisting: core.forwardRef(function () { return McCheckboxRequiredValidator; }),
-    multi: true
-};
-/**
- * Validator for Mosaic checkbox's required attribute in template-driven checkbox.
- * Current CheckboxRequiredValidator only work with `input type=checkbox` and does not
- * work with `mc-checkbox`.
- */
-var McCheckboxRequiredValidator = /** @class */ (function (_super) {
-    __extends(McCheckboxRequiredValidator, _super);
-    function McCheckboxRequiredValidator() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    McCheckboxRequiredValidator.decorators = [
-        { type: core.Directive, args: [{
-                    selector: "mc-checkbox[required][formControlName],\n             mc-checkbox[required][formControl], mc-checkbox[required][ngModel]",
-                    providers: [MC_CHECKBOX_REQUIRED_VALIDATOR],
-                    host: { '[attr.required]': 'required ? "" : null' }
-                },] },
-    ];
-    return McCheckboxRequiredValidator;
-}(forms.CheckboxRequiredValidator));
-
-var McCheckboxModule = /** @class */ (function () {
-    function McCheckboxModule() {
-    }
-    McCheckboxModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, McCommonModule],
-                    exports: [McCheckbox, McCheckboxRequiredValidator, McCommonModule],
-                    declarations: [McCheckbox, McCheckboxRequiredValidator]
-                },] },
-    ];
-    return McCheckboxModule;
-}());
-
-var McCleaner = /** @class */ (function () {
-    function McCleaner() {
-    }
-    McCleaner.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-cleaner',
-                    template: '<i mc-icon="mc-close-M_16" class="mc-cleaner__icon"></i>'
-                },] },
-    ];
-    return McCleaner;
-}());
-
-/** An interface which allows a control to work inside of a `MсFormField`. */
-var   /** An interface which allows a control to work inside of a `MсFormField`. */
-McFormFieldControl = /** @class */ (function () {
-    function McFormFieldControl() {
-    }
-    return McFormFieldControl;
-}());
-
-function getMcFormFieldMissingControlError() {
-    return Error('mc-form-field must contain a McFormFieldControl.');
-}
-
-var nextUniqueId$2 = 0;
-var McHint = /** @class */ (function () {
-    function McHint() {
-        this.id = "mc-hint-" + nextUniqueId$2++;
-    }
-    McHint.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-hint',
-                    host: {
-                        class: 'mc-hint',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McHint.propDecorators = {
-        "id": [{ type: core.Input },],
-    };
-    return McHint;
-}());
-
-var McPrefix = /** @class */ (function () {
-    function McPrefix() {
-    }
-    McPrefix.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcPrefix]'
-                },] },
-    ];
-    return McPrefix;
-}());
-
-var McSuffix = /** @class */ (function () {
-    function McSuffix() {
-    }
-    McSuffix.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcSuffix]'
-                },] },
-    ];
-    return McSuffix;
-}());
-
-var McFormFieldBase = /** @class */ (function () {
-    function McFormFieldBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McFormFieldBase;
-}());
-var McFormField = /** @class */ (function (_super) {
-    __extends(McFormField, _super);
-    function McFormField(_elementRef, _changeDetectorRef) {
-        var _this = _super.call(this, _elementRef) || this;
-        _this._elementRef = _elementRef;
-        _this._changeDetectorRef = _changeDetectorRef;
-        return _this;
-    }
-    McFormField.prototype.ngAfterContentInit = function () {
-        var _this = this;
-        this._validateControlChild();
-        if (this._control.controlType) {
-            this._elementRef.nativeElement.classList
-                .add("mc-form-field-type-" + this._control.controlType);
-        }
-        // Subscribe to changes in the child control state in order to update the form field UI.
-        this._control.stateChanges.pipe(operators.startWith()).subscribe(function () {
-            _this._changeDetectorRef.markForCheck();
-        });
-        // Run change detection if the value changes.
-        var valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || rxjs.EMPTY;
-        rxjs.merge(valueChanges)
-            .subscribe(function () { return _this._changeDetectorRef.markForCheck(); });
-    };
-    McFormField.prototype.ngAfterContentChecked = function () {
-        this._validateControlChild();
-    };
-    McFormField.prototype.ngAfterViewInit = function () {
-        // Avoid animations on load.
-        this._changeDetectorRef.detectChanges();
-    };
-    McFormField.prototype.clearValue = function ($event) {
-        $event.stopPropagation();
-        if (this._control && this._control.ngControl) {
-            this._control.ngControl.reset();
-        }
-    };
-    McFormField.prototype.onContainerClick = function ($event) {
-        return this._control.onContainerClick && this._control.onContainerClick($event);
-    };
-    McFormField.prototype.onKeyDown = function (e) {
-        if (e.keyCode === keycodes.ESCAPE &&
-            this._control.focused &&
-            this.hasCleaner) {
-            if (this._control && this._control.ngControl) {
-                this._control.ngControl.reset();
-            }
-            e.preventDefault();
-        }
-    };
-    /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    McFormField.prototype._shouldForward = /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    function (prop) {
-        var ngControl = this._control ? this._control.ngControl : null;
-        return ngControl && ngControl[prop];
-    };
-    /** Throws an error if the form field's control is missing. */
-    /** Throws an error if the form field's control is missing. */
-    McFormField.prototype._validateControlChild = /** Throws an error if the form field's control is missing. */
-    function () {
-        if (!this._control) {
-            throw getMcFormFieldMissingControlError();
-        }
-    };
-    Object.defineProperty(McFormField.prototype, "hasHint", {
-        get: function () {
-            return this._hint && this._hint.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "hasSuffix", {
-        get: function () {
-            return this._suffix && this._suffix.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "hasPrefix", {
-        get: function () {
-            return this._prefix && this._prefix.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "hasCleaner", {
-        get: function () {
-            return this._cleaner && this._cleaner.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "canShowCleaner", {
-        get: function () {
-            return this.hasCleaner &&
-                this._control && this._control.ngControl
-                ? this._control.ngControl.value && !this._control.disabled
-                : false;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    McFormField.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-form-field',
-                    exportAs: 'mcFormField',
-                    template: "<div class=\"mc-form-field__wrapper\"><div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div></div>",
-                    // McInput is a directive and can't have styles, so we need to include its styles here.
-                    // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
-                    // aren't using McInput.
-                    styles: [".mc-form-field{display:inline-block;position:relative}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;top:0;bottom:0;right:0;width:32px;cursor:pointer;display:flex;flex-direction:row;justify-content:center;align-items:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
-                    host: {
-                        class: 'mc-form-field',
-                        '[class.mc-form-field_invalid]': '_control.errorState',
-                        '[class.mc-form-field_disabled]': '_control.disabled',
-                        '[class.mc-form-field_has-prefix]': 'hasPrefix',
-                        '[class.mc-form-field_has-suffix]': 'hasSuffix',
-                        '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
-                        '[class.mc-focused]': '_control.focused',
-                        '[class.ng-untouched]': '_shouldForward("untouched")',
-                        '[class.ng-touched]': '_shouldForward("touched")',
-                        '[class.ng-pristine]': '_shouldForward("pristine")',
-                        '[class.ng-dirty]': '_shouldForward("dirty")',
-                        '[class.ng-valid]': '_shouldForward("valid")',
-                        '[class.ng-invalid]': '_shouldForward("invalid")',
-                        '[class.ng-pending]': '_shouldForward("pending")',
-                        '(keydown)': 'onKeyDown($event)'
-                    },
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McFormField.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: core.ChangeDetectorRef, },
-    ]; };
-    McFormField.propDecorators = {
-        "_control": [{ type: core.ContentChild, args: [McFormFieldControl,] },],
-        "_hint": [{ type: core.ContentChildren, args: [McHint,] },],
-        "_suffix": [{ type: core.ContentChildren, args: [McSuffix,] },],
-        "_prefix": [{ type: core.ContentChildren, args: [McPrefix,] },],
-        "_cleaner": [{ type: core.ContentChildren, args: [McCleaner,] },],
-    };
-    return McFormField;
-}(McFormFieldBase));
-var McFormFieldWithoutBorders = /** @class */ (function () {
-    function McFormFieldWithoutBorders() {
-    }
-    McFormFieldWithoutBorders.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-form-field[mcFormFieldWithoutBorders]',
-                    exportAs: 'mcFormFieldWithoutBorders',
-                    host: { class: 'mc-form-field_without-borders' }
-                },] },
-    ];
-    return McFormFieldWithoutBorders;
-}());
-
-var McFormFieldModule = /** @class */ (function () {
-    function McFormFieldModule() {
-    }
-    McFormFieldModule.decorators = [
-        { type: core.NgModule, args: [{
-                    declarations: [
-                        McFormField,
-                        McFormFieldWithoutBorders,
-                        McHint,
-                        McPrefix,
-                        McSuffix,
-                        McCleaner
-                    ],
-                    imports: [common.CommonModule, McIconModule],
-                    exports: [
-                        McFormField,
-                        McFormFieldWithoutBorders,
-                        McHint,
-                        McPrefix,
-                        McSuffix,
-                        McCleaner
-                    ]
-                },] },
-    ];
-    return McFormFieldModule;
-}());
-
-function getMcInputUnsupportedTypeError(inputType) {
-    return Error("Input type \"" + inputType + "\" isn't supported by mcInput.");
-}
-
-var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
-
-var MC_INPUT_INVALID_TYPES = [
-    'button',
-    'checkbox',
-    'file',
-    'hidden',
-    'image',
-    'radio',
-    'range',
-    'reset',
-    'submit'
-];
-var nextUniqueId$3 = 0;
-var McInputBase = /** @class */ (function () {
-    function McInputBase(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) {
-        this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
-        this._parentForm = _parentForm;
-        this._parentFormGroup = _parentFormGroup;
-        this.ngControl = ngControl;
-    }
-    return McInputBase;
-}());
-var _McInputMixinBase = mixinErrorState(McInputBase);
-var McInput = /** @class */ (function (_super) {
-    __extends(McInput, _super);
-    function McInput(_elementRef, _platform, ngControl, _parentForm, _parentFormGroup, _defaultErrorStateMatcher, inputValueAccessor) {
-        var _this = _super.call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) || this;
-        _this._elementRef = _elementRef;
-        _this._platform = _platform;
-        _this.ngControl = ngControl;
-        /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        _this.focused = false;
-        /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        _this.stateChanges = new rxjs.Subject();
-        /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        _this.controlType = 'mc-input';
-        _this._uid = "mc-input-" + nextUniqueId$3++;
-        _this._disabled = false;
-        _this._required = false;
-        _this._type = 'text';
-        _this._neverEmptyInputTypes = [
-            'date',
-            'datetime',
-            'datetime-local',
-            'month',
-            'time',
-            'week'
-        ].filter(function (t) { return platform.getSupportedInputTypes().has(t); });
-        // If no input value accessor was explicitly specified, use the element as the input value
-        // accessor.
-        // If no input value accessor was explicitly specified, use the element as the input value
-        // accessor.
-        _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
-        _this._previousNativeValue = _this.value;
-        // Force setter to be called in case id was not specified.
-        // Force setter to be called in case id was not specified.
-        _this.id = _this.id;
-        return _this;
-    }
-    Object.defineProperty(McInput.prototype, "disabled", {
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
-            if (this.ngControl && this.ngControl.disabled !== null) {
-                return this.ngControl.disabled;
-            }
-            return this._disabled;
-        },
-        set: function (value) {
-            this._disabled = coercion.coerceBooleanProperty(value);
-            // Browsers may not fire the blur event if the input is disabled too quickly.
-            // Reset from here to ensure that the element doesn't become stuck.
-            if (this.focused) {
-                this.focused = false;
-                this.stateChanges.next();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McInput.prototype, "id", {
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
-            return this._id;
-        },
-        set: function (value) {
-            this._id = value || this._uid;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McInput.prototype, "required", {
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
-            return this._required;
-        },
-        set: function (value) {
-            this._required = coercion.coerceBooleanProperty(value);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McInput.prototype, "type", {
-        get: 
-        // tslint:disable no-reserved-keywords
-        /** Input type of the element. */
-        function () {
-            return this._type;
-        },
-        set: function (value) {
-            this._type = value || 'text';
-            this._validateType();
-            // When using Angular inputs, developers are no longer able to set the properties on the native
-            // input element. To ensure that bindings for `type` work, we need to sync the setter
-            // with the native property. Textarea elements don't support the type property or attribute.
-            if (platform.getSupportedInputTypes().has(this._type)) {
-                this._elementRef.nativeElement.type = this._type;
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McInput.prototype, "value", {
-        get: 
-        // tslint:enable no-reserved-keywords
-        /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
-            return this._inputValueAccessor.value;
-        },
-        set: function (value) {
-            if (value !== this.value) {
-                this._inputValueAccessor.value = value;
-                this.stateChanges.next();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    McInput.prototype.ngOnChanges = function () {
-        this.stateChanges.next();
-    };
-    McInput.prototype.ngOnDestroy = function () {
-        this.stateChanges.complete();
-    };
-    McInput.prototype.ngDoCheck = function () {
-        if (this.ngControl) {
-            // We need to re-evaluate this on every change detection cycle, because there are some
-            // error triggers that we can't subscribe to (e.g. parent form submissions). This means
-            // that whatever logic is in here has to be super lean or we risk destroying the performance.
-            this.updateErrorState();
-        }
-        // We need to dirty-check the native element's value, because there are some cases where
-        // we won't be notified when it changes (e.g. the consumer isn't using forms or they're
-        // updating the value using `emitEvent: false`).
-        this._dirtyCheckNativeValue();
-    };
-    /** Focuses the input. */
-    /** Focuses the input. */
-    McInput.prototype.focus = /** Focuses the input. */
-    function () {
-        this._elementRef.nativeElement.focus();
-    };
-    /** Callback for the cases where the focused state of the input changes. */
-    /** Callback for the cases where the focused state of the input changes. */
-    McInput.prototype._focusChanged = /** Callback for the cases where the focused state of the input changes. */
-    function (isFocused) {
-        if (isFocused !== this.focused) {
-            this.focused = isFocused;
-            this.stateChanges.next();
-        }
-    };
-    McInput.prototype._onInput = function () {
-        // This is a noop function and is used to let Angular know whenever the value changes.
-        // Angular will run a new change detection each time the `input` event has been dispatched.
-        // It's necessary that Angular recognizes the value change, because when floatingLabel
-        // is set to false and Angular forms aren't used, the placeholder won't recognize the
-        // value changes and will not disappear.
-        // Listening to the input event wouldn't be necessary when the input is using the
-        // FormsModule or ReactiveFormsModule, because Angular forms also listens to input events.
-    };
-    Object.defineProperty(McInput.prototype, "empty", {
-        /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
-            return !this._isNeverEmpty() && !this._elementRef.nativeElement.value && !this._isBadInput();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Implemented as part of McFormFieldControl.
-     * @docs-private
-     */
-    /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
-    McInput.prototype.onContainerClick = /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
-    function () {
-        this.focus();
-    };
-    /** Does some manual dirty checking on the native input `value` property. */
-    /** Does some manual dirty checking on the native input `value` property. */
-    McInput.prototype._dirtyCheckNativeValue = /** Does some manual dirty checking on the native input `value` property. */
-    function () {
-        var newValue = this.value;
-        if (this._previousNativeValue !== newValue) {
-            this._previousNativeValue = newValue;
-            this.stateChanges.next();
-        }
-    };
-    /** Make sure the input is a supported type. */
-    /** Make sure the input is a supported type. */
-    McInput.prototype._validateType = /** Make sure the input is a supported type. */
-    function () {
-        if (MC_INPUT_INVALID_TYPES.indexOf(this._type) > -1) {
-            throw getMcInputUnsupportedTypeError(this._type);
-        }
-    };
-    /** Checks whether the input type is one of the types that are never empty. */
-    /** Checks whether the input type is one of the types that are never empty. */
-    McInput.prototype._isNeverEmpty = /** Checks whether the input type is one of the types that are never empty. */
-    function () {
-        return this._neverEmptyInputTypes.indexOf(this._type) > -1;
-    };
-    /** Checks whether the input is invalid based on the native validation. */
-    /** Checks whether the input is invalid based on the native validation. */
-    McInput.prototype._isBadInput = /** Checks whether the input is invalid based on the native validation. */
-    function () {
-        // The `validity` property won't be present on platform-server.
-        var validity = this._elementRef.nativeElement.validity;
-        return validity && validity.badInput;
-    };
-    McInput.decorators = [
-        { type: core.Directive, args: [{
-                    selector: "input[mcInput]",
-                    exportAs: 'mcInput',
-                    host: {
-                        'class': 'mc-input',
-                        // Native input properties that are overwritten by Angular inputs need to be synced with
-                        // the native input element. Otherwise property bindings for those don't work.
-                        '[attr.id]': 'id',
-                        '[attr.placeholder]': 'placeholder',
-                        '[disabled]': 'disabled',
-                        '[required]': 'required',
-                        '(blur)': '_focusChanged(false)',
-                        '(focus)': '_focusChanged(true)',
-                        '(input)': '_onInput()'
-                    },
-                    providers: [{ provide: McFormFieldControl, useExisting: McInput }]
-                },] },
-    ];
-    /** @nocollapse */
-    McInput.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: platform.Platform, },
-        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self },] },
-        { type: forms.NgForm, decorators: [{ type: core.Optional },] },
-        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional },] },
-        { type: ErrorStateMatcher, },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_INPUT_VALUE_ACCESSOR,] },] },
-    ]; };
-    McInput.propDecorators = {
-        "errorStateMatcher": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "id": [{ type: core.Input },],
-        "placeholder": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
-        "type": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-    };
-    return McInput;
-}(_McInputMixinBase));
-var McInputMono = /** @class */ (function () {
-    function McInputMono() {
-    }
-    McInputMono.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'input[mcInputMonospace]',
-                    exportAs: 'McInputMonospace',
-                    host: { class: 'mc-input_monospace' }
-                },] },
-    ];
-    return McInputMono;
-}());
-
-var McInputModule = /** @class */ (function () {
-    function McInputModule() {
-    }
-    McInputModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, a11y.A11yModule, McCommonModule, forms.FormsModule],
-                    exports: [McInput, McInputMono],
-                    declarations: [McInput, McInputMono]
-                },] },
-    ];
-    return McInputModule;
-}());
-
-var idIterator = 0;
-var MIN_PERCENT = 0;
-var MAX_PERCENT = 100;
-var McProgressBarBase = /** @class */ (function () {
-    function McProgressBarBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McProgressBarBase;
-}());
-var _McProgressBarMixinBase = mixinColor(McProgressBarBase);
-var McProgressBar = /** @class */ (function (_super) {
-    __extends(McProgressBar, _super);
-    function McProgressBar(elementRef) {
-        var _this = _super.call(this, elementRef) || this;
-        _this.id = "mc-progress-bar-" + idIterator++;
-        _this.value = 0;
-        _this.mode = 'determinate';
-        _this.color = ThemePalette.Primary;
-        return _this;
-    }
-    Object.defineProperty(McProgressBar.prototype, "percentage", {
-        get: function () {
-            return Math.max(MIN_PERCENT, Math.min(MAX_PERCENT, this.value)) / MAX_PERCENT;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    McProgressBar.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-progress-bar',
-                    template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
-                    styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    host: {
-                        class: 'mc-progress-bar',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McProgressBar.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-    ]; };
-    McProgressBar.propDecorators = {
-        "id": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "mode": [{ type: core.Input },],
-        "color": [{ type: core.Input },],
-    };
-    return McProgressBar;
-}(_McProgressBarMixinBase));
-
-var McProgressBarModule = /** @class */ (function () {
-    function McProgressBarModule() {
-    }
-    McProgressBarModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McProgressBar
-                    ],
-                    declarations: [
-                        McProgressBar
-                    ]
-                },] },
-    ];
-    return McProgressBarModule;
-}());
-
-var idIterator$1 = 0;
-var MIN_PERCENT$1 = 0;
-var MAX_PERCENT$1 = 100;
-var McProgressSpinnerBase = /** @class */ (function () {
-    function McProgressSpinnerBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McProgressSpinnerBase;
-}());
-var _McProgressPinnerMixinBase = mixinColor(McProgressSpinnerBase);
-var MAX_DASH_ARRAY = 273;
-var McProgressSpinner = /** @class */ (function (_super) {
-    __extends(McProgressSpinner, _super);
-    function McProgressSpinner(elementRef) {
-        var _this = _super.call(this, elementRef) || this;
-        _this.id = "mc-progress-spinner-" + idIterator$1++;
-        _this.value = 0;
-        _this.mode = 'determinate';
-        _this.color = ThemePalette.Primary;
-        return _this;
-    }
-    Object.defineProperty(McProgressSpinner.prototype, "percentage", {
-        get: function () {
-            return Math.max(MIN_PERCENT$1, Math.min(MAX_PERCENT$1, this.value)) / MAX_PERCENT$1;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McProgressSpinner.prototype, "dashOffsetPercent", {
-        get: function () {
-            return MAX_DASH_ARRAY - this.percentage * MAX_DASH_ARRAY + "%";
-        },
-        enumerable: true,
-        configurable: true
-    });
-    McProgressSpinner.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-progress-spinner',
-                    template: "<div class=\"mc-progress-spinner__inner\" [ngClass]=\"{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}\"><svg focusable=\"false\" preserveAspectRatio=\"xMidYMid meet\" viewBox=\"0 0 100 100\" class=\"mc-progress-spinner__svg\"><circle cx=\"50%\" cy=\"50%\" r=\"42.5%\" class=\"mc-progress-spinner__circle\" [ngStyle]=\"{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}\"></circle></svg></div>",
-                    styles: ["@keyframes mc-progress-spinner-indeterminate{100%{transform:rotateZ(270deg)}}.mc-progress-spinner{display:inline-block;width:16px;height:16px;overflow:hidden}.mc-progress-spinner__inner{width:100%;height:100%;transform:rotateZ(-90deg)}.mc-progress-spinner__inner--indeterminate{animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite}.mc-progress-spinner__inner--indeterminate .mc-progress-spinner__circle{stroke-dashoffset:80%}.mc-progress-spinner__svg{width:100%;height:100%}.mc-progress-spinner__circle{fill:none;stroke:#000;stroke-dasharray:273%;stroke-width:13%;transition:stroke-dashoffset .3s;transform-origin:center center}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    host: {
-                        class: 'mc-progress-spinner',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McProgressSpinner.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-    ]; };
-    McProgressSpinner.propDecorators = {
-        "id": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "mode": [{ type: core.Input },],
-        "color": [{ type: core.Input },],
-    };
-    return McProgressSpinner;
-}(_McProgressPinnerMixinBase));
-
-var McProgressSpinnerModule = /** @class */ (function () {
-    function McProgressSpinnerModule() {
-    }
-    McProgressSpinnerModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McProgressSpinner
-                    ],
-                    declarations: [
-                        McProgressSpinner
-                    ]
-                },] },
-    ];
-    return McProgressSpinnerModule;
 }());
 
 /**
@@ -4116,6 +3390,1575 @@ var McNavbarModule = /** @class */ (function () {
     return McNavbarModule;
 }());
 
+var idIterator = 0;
+var MIN_PERCENT = 0;
+var MAX_PERCENT = 100;
+var McProgressBarBase = /** @class */ (function () {
+    function McProgressBarBase(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+    return McProgressBarBase;
+}());
+var _McProgressBarMixinBase = mixinColor(McProgressBarBase);
+var McProgressBar = /** @class */ (function (_super) {
+    __extends(McProgressBar, _super);
+    function McProgressBar(elementRef) {
+        var _this = _super.call(this, elementRef) || this;
+        _this.id = "mc-progress-bar-" + idIterator++;
+        _this.value = 0;
+        _this.mode = 'determinate';
+        _this.color = ThemePalette.Primary;
+        return _this;
+    }
+    Object.defineProperty(McProgressBar.prototype, "percentage", {
+        get: function () {
+            return Math.max(MIN_PERCENT, Math.min(MAX_PERCENT, this.value)) / MAX_PERCENT;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McProgressBar.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-progress-bar',
+                    template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
+                    styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core.ViewEncapsulation.None,
+                    host: {
+                        class: 'mc-progress-bar',
+                        '[attr.id]': 'id'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McProgressBar.ctorParameters = function () { return [
+        { type: core.ElementRef, },
+    ]; };
+    McProgressBar.propDecorators = {
+        "id": [{ type: core.Input },],
+        "value": [{ type: core.Input },],
+        "mode": [{ type: core.Input },],
+        "color": [{ type: core.Input },],
+    };
+    return McProgressBar;
+}(_McProgressBarMixinBase));
+
+var McProgressBarModule = /** @class */ (function () {
+    function McProgressBarModule() {
+    }
+    McProgressBarModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        platform.PlatformModule
+                    ],
+                    exports: [
+                        McProgressBar
+                    ],
+                    declarations: [
+                        McProgressBar
+                    ]
+                },] },
+    ];
+    return McProgressBarModule;
+}());
+
+var idIterator$1 = 0;
+var MIN_PERCENT$1 = 0;
+var MAX_PERCENT$1 = 100;
+var McProgressSpinnerBase = /** @class */ (function () {
+    function McProgressSpinnerBase(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+    return McProgressSpinnerBase;
+}());
+var _McProgressPinnerMixinBase = mixinColor(McProgressSpinnerBase);
+var MAX_DASH_ARRAY = 273;
+var McProgressSpinner = /** @class */ (function (_super) {
+    __extends(McProgressSpinner, _super);
+    function McProgressSpinner(elementRef) {
+        var _this = _super.call(this, elementRef) || this;
+        _this.id = "mc-progress-spinner-" + idIterator$1++;
+        _this.value = 0;
+        _this.mode = 'determinate';
+        _this.color = ThemePalette.Primary;
+        return _this;
+    }
+    Object.defineProperty(McProgressSpinner.prototype, "percentage", {
+        get: function () {
+            return Math.max(MIN_PERCENT$1, Math.min(MAX_PERCENT$1, this.value)) / MAX_PERCENT$1;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McProgressSpinner.prototype, "dashOffsetPercent", {
+        get: function () {
+            return MAX_DASH_ARRAY - this.percentage * MAX_DASH_ARRAY + "%";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McProgressSpinner.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-progress-spinner',
+                    template: "<div class=\"mc-progress-spinner__inner\" [ngClass]=\"{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}\"><svg focusable=\"false\" preserveAspectRatio=\"xMidYMid meet\" viewBox=\"0 0 100 100\" class=\"mc-progress-spinner__svg\"><circle cx=\"50%\" cy=\"50%\" r=\"42.5%\" class=\"mc-progress-spinner__circle\" [ngStyle]=\"{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}\"></circle></svg></div>",
+                    styles: ["@keyframes mc-progress-spinner-indeterminate{100%{transform:rotateZ(270deg)}}.mc-progress-spinner{display:inline-block;width:16px;height:16px;overflow:hidden}.mc-progress-spinner__inner{width:100%;height:100%;transform:rotateZ(-90deg)}.mc-progress-spinner__inner--indeterminate{animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite}.mc-progress-spinner__inner--indeterminate .mc-progress-spinner__circle{stroke-dashoffset:80%}.mc-progress-spinner__svg{width:100%;height:100%}.mc-progress-spinner__circle{fill:none;stroke:#000;stroke-dasharray:273%;stroke-width:13%;transition:stroke-dashoffset .3s;transform-origin:center center}"],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core.ViewEncapsulation.None,
+                    host: {
+                        class: 'mc-progress-spinner',
+                        '[attr.id]': 'id'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McProgressSpinner.ctorParameters = function () { return [
+        { type: core.ElementRef, },
+    ]; };
+    McProgressSpinner.propDecorators = {
+        "id": [{ type: core.Input },],
+        "value": [{ type: core.Input },],
+        "mode": [{ type: core.Input },],
+        "color": [{ type: core.Input },],
+    };
+    return McProgressSpinner;
+}(_McProgressPinnerMixinBase));
+
+var McProgressSpinnerModule = /** @class */ (function () {
+    function McProgressSpinnerModule() {
+    }
+    McProgressSpinnerModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        platform.PlatformModule
+                    ],
+                    exports: [
+                        McProgressSpinner
+                    ],
+                    declarations: [
+                        McProgressSpinner
+                    ]
+                },] },
+    ];
+    return McProgressSpinnerModule;
+}());
+
+// Increasing integer for generating unique ids for radio components.
+var nextUniqueId$3 = 0;
+/** Change event object emitted by McRadio. */
+var   /** Change event object emitted by McRadio. */
+McRadioChange = /** @class */ (function () {
+    function McRadioChange(/** The McRadioButton that emits the change event. */
+    source, /** The value of the McRadioButton. */
+    value) {
+        this.source = source;
+        this.value = value;
+    }
+    return McRadioChange;
+}());
+// Boilerplate for applying mixins to McRadioGroup.
+/** @docs-private */
+var   
+// Boilerplate for applying mixins to McRadioGroup.
+/** @docs-private */
+McRadioGroupBase = /** @class */ (function () {
+    function McRadioGroupBase() {
+    }
+    return McRadioGroupBase;
+}());
+var _McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
+/**
+ * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
+ * allows it to support [(ngModel)] and ngControl.
+ * @docs-private
+ */
+var MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
+    provide: forms.NG_VALUE_ACCESSOR,
+    useExisting: core.forwardRef(function () { return McRadioGroup; }),
+    multi: true
+};
+var McRadioGroup = /** @class */ (function (_super) {
+    __extends(McRadioGroup, _super);
+    function McRadioGroup(_changeDetector) {
+        var _this = _super.call(this) || this;
+        _this._changeDetector = _changeDetector;
+        /**
+             * Event emitted when the group value changes.
+             * Change events are only emitted when the value changes due to user interaction with
+             * a radio button (the same behavior as `<input type-"radio">`).
+             */
+        _this.change = new core.EventEmitter();
+        /**
+             * Selected value for group. Should equal the value of the selected radio button if there *is*
+             * a corresponding radio button with a matching value. If there is *not* such a corresponding
+             * radio button, this value persists to be applied in case a new radio button is added with a
+             * matching value.
+             */
+        _this._value = null;
+        /** The HTML name attribute applied to radio buttons in this group. */
+        _this._name = "mc-radio-group-" + nextUniqueId$3++;
+        /** The currently selected radio button. Should match value. */
+        _this._selected = null;
+        /** Whether the `value` has been set to its initial value. */
+        _this._isInitialized = false;
+        /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
+        _this._labelPosition = 'after';
+        /** Whether the radio group is disabled. */
+        _this._disabled = false;
+        /** Whether the radio group is required. */
+        _this._required = false;
+        /** The method to be called in order to update ngModel */
+        _this.controlValueAccessorChangeFn = function () { };
+        /**
+             * onTouch function registered via registerOnTouch (ControlValueAccessor).
+             * @docs-private
+             */
+        _this.onTouched = function () { };
+        return _this;
+    }
+    Object.defineProperty(McRadioGroup.prototype, "name", {
+        get: /** Name of the radio button group. All radio buttons inside this group will use this name. */
+        function () { return this._name; },
+        set: function (value) {
+            this._name = value;
+            this.updateRadioButtonNames();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McRadioGroup.prototype, "labelPosition", {
+        get: /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
+        function () {
+            return this._labelPosition;
+        },
+        set: function (v) {
+            this._labelPosition = v === 'before' ? 'before' : 'after';
+            this.markRadiosForCheck();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McRadioGroup.prototype, "value", {
+        get: /** Value of the radio button. */
+        function () { return this._value; },
+        set: function (newValue) {
+            if (this._value !== newValue) {
+                // Set this before proceeding to ensure no circular loop occurs with selection.
+                this._value = newValue;
+                this.updateSelectedRadioFromValue();
+                this.checkSelectedRadioButton();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McRadioGroup.prototype.checkSelectedRadioButton = function () {
+        if (this._selected && !this._selected.checked) {
+            this._selected.checked = true;
+        }
+    };
+    Object.defineProperty(McRadioGroup.prototype, "selected", {
+        get: /** Whether the radio button is selected. */
+        function () { return this._selected; },
+        set: function (selected) {
+            this._selected = selected;
+            this.value = selected ? selected.value : null;
+            this.checkSelectedRadioButton();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McRadioGroup.prototype, "disabled", {
+        get: /** Whether the radio group is disabled */
+        function () { return this._disabled; },
+        set: function (value) {
+            this._disabled = toBoolean(value);
+            this.markRadiosForCheck();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McRadioGroup.prototype, "required", {
+        get: /** Whether the radio group is required */
+        function () { return this._required; },
+        set: function (value) {
+            this._required = toBoolean(value);
+            this.markRadiosForCheck();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Initialize properties once content children are available.
+     * This allows us to propagate relevant attributes to associated buttons.
+     */
+    /**
+         * Initialize properties once content children are available.
+         * This allows us to propagate relevant attributes to associated buttons.
+         */
+    McRadioGroup.prototype.ngAfterContentInit = /**
+         * Initialize properties once content children are available.
+         * This allows us to propagate relevant attributes to associated buttons.
+         */
+    function () {
+        // Mark this component as initialized in AfterContentInit because the initial value can
+        // possibly be set by NgModel on McRadioGroup, and it is possible that the OnInit of the
+        // NgModel occurs *after* the OnInit of the McRadioGroup.
+        this._isInitialized = true;
+    };
+    /**
+     * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
+     * radio buttons upon their blur.
+     */
+    /**
+         * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
+         * radio buttons upon their blur.
+         */
+    McRadioGroup.prototype.touch = /**
+         * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
+         * radio buttons upon their blur.
+         */
+    function () {
+        if (this.onTouched) {
+            this.onTouched();
+        }
+    };
+    /** Dispatch change event with current selection and group value. */
+    /** Dispatch change event with current selection and group value. */
+    McRadioGroup.prototype.emitChangeEvent = /** Dispatch change event with current selection and group value. */
+    function () {
+        if (this._isInitialized) {
+            this.change.emit(new McRadioChange((this._selected), this._value));
+        }
+    };
+    McRadioGroup.prototype.markRadiosForCheck = function () {
+        if (this._radios) {
+            this._radios.forEach(function (radio) { return radio.markForCheck(); });
+        }
+    };
+    /**
+     * Sets the model value. Implemented as part of ControlValueAccessor.
+     * @param value
+     */
+    /**
+         * Sets the model value. Implemented as part of ControlValueAccessor.
+         * @param value
+         */
+    McRadioGroup.prototype.writeValue = /**
+         * Sets the model value. Implemented as part of ControlValueAccessor.
+         * @param value
+         */
+    function (value) {
+        this.value = value;
+        this._changeDetector.markForCheck();
+    };
+    /**
+     * Registers a callback to be triggered when the model value changes.
+     * Implemented as part of ControlValueAccessor.
+     * @param fn Callback to be registered.
+     */
+    /**
+         * Registers a callback to be triggered when the model value changes.
+         * Implemented as part of ControlValueAccessor.
+         * @param fn Callback to be registered.
+         */
+    McRadioGroup.prototype.registerOnChange = /**
+         * Registers a callback to be triggered when the model value changes.
+         * Implemented as part of ControlValueAccessor.
+         * @param fn Callback to be registered.
+         */
+    function (fn) {
+        this.controlValueAccessorChangeFn = fn;
+    };
+    /**
+     * Registers a callback to be triggered when the control is touched.
+     * Implemented as part of ControlValueAccessor.
+     * @param fn Callback to be registered.
+     */
+    /**
+         * Registers a callback to be triggered when the control is touched.
+         * Implemented as part of ControlValueAccessor.
+         * @param fn Callback to be registered.
+         */
+    McRadioGroup.prototype.registerOnTouched = /**
+         * Registers a callback to be triggered when the control is touched.
+         * Implemented as part of ControlValueAccessor.
+         * @param fn Callback to be registered.
+         */
+    function (fn) {
+        this.onTouched = fn;
+    };
+    /**
+     * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
+     * @param isDisabled Whether the control should be disabled.
+     */
+    /**
+         * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
+         * @param isDisabled Whether the control should be disabled.
+         */
+    McRadioGroup.prototype.setDisabledState = /**
+         * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
+         * @param isDisabled Whether the control should be disabled.
+         */
+    function (isDisabled) {
+        this.disabled = isDisabled;
+        this._changeDetector.markForCheck();
+    };
+    McRadioGroup.prototype.updateRadioButtonNames = function () {
+        var _this = this;
+        if (this._radios) {
+            this._radios.forEach(function (radio) {
+                radio.name = _this.name;
+            });
+        }
+    };
+    /** Updates the `selected` radio button from the internal _value state. */
+    /** Updates the `selected` radio button from the internal _value state. */
+    McRadioGroup.prototype.updateSelectedRadioFromValue = /** Updates the `selected` radio button from the internal _value state. */
+    function () {
+        var _this = this;
+        // If the value already matches the selected radio, do nothing.
+        var isAlreadySelected = this._selected != null && this._selected.value === this._value;
+        if (this._radios != null && !isAlreadySelected) {
+            this._selected = null;
+            this._radios.forEach(function (radio) {
+                radio.checked = _this.value === radio.value;
+                if (radio.checked) {
+                    _this._selected = radio;
+                }
+            });
+        }
+    };
+    McRadioGroup.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-radio-group',
+                    exportAs: 'mcRadioGroup',
+                    providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR],
+                    host: {
+                        'role': 'radiogroup',
+                        'class': 'mc-radio-group'
+                    },
+                    inputs: ['disabled']
+                },] },
+    ];
+    /** @nocollapse */
+    McRadioGroup.ctorParameters = function () { return [
+        { type: core.ChangeDetectorRef, },
+    ]; };
+    McRadioGroup.propDecorators = {
+        "change": [{ type: core.Output },],
+        "_radios": [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] },],
+        "name": [{ type: core.Input },],
+        "labelPosition": [{ type: core.Input },],
+        "value": [{ type: core.Input },],
+        "selected": [{ type: core.Input },],
+        "disabled": [{ type: core.Input },],
+        "required": [{ type: core.Input },],
+    };
+    return McRadioGroup;
+}(_McRadioGroupMixinBase));
+// Boilerplate for applying mixins to McRadioButton.
+/** @docs-private */
+var   
+// Boilerplate for applying mixins to McRadioButton.
+/** @docs-private */
+McRadioButtonBase = /** @class */ (function () {
+    function McRadioButtonBase(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+    return McRadioButtonBase;
+}());
+var _McRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
+var McRadioButton = /** @class */ (function (_super) {
+    __extends(McRadioButton, _super);
+    function McRadioButton(radioGroup, elementRef, _changeDetector, _radioDispatcher) {
+        var _this = _super.call(this, elementRef) || this;
+        _this._changeDetector = _changeDetector;
+        _this._radioDispatcher = _radioDispatcher;
+        _this._uniqueId = "mc-radio-" + ++nextUniqueId$3;
+        /* tslint:disable:member-ordering */
+        /** The unique ID for the radio button. */
+        _this.id = _this._uniqueId;
+        /**
+             * Event emitted when the checked state of this radio button changes.
+             * Change events are only emitted when the value changes due to user interaction with
+             * the radio button (the same behavior as `<input type-"radio">`).
+             */
+        _this.change = new core.EventEmitter();
+        _this.isFocused = false;
+        /** Whether this radio is checked. */
+        _this._checked = false;
+        /** Value assigned to this radio. */
+        _this._value = null;
+        /** Unregister function for _radioDispatcher */
+        _this.removeUniqueSelectionListener = function () { };
+        _this.radioGroup = radioGroup;
+        _this.removeUniqueSelectionListener =
+            _radioDispatcher.listen(function (id, name) {
+                if (id !== _this.id && name === _this.name) {
+                    _this.checked = false;
+                }
+            });
+        return _this;
+    }
+    Object.defineProperty(McRadioButton.prototype, "checked", {
+        get: /** Whether this radio button is checked. */
+        function () { return this._checked; },
+        set: function (value) {
+            var newCheckedState = toBoolean(value);
+            if (this._checked !== newCheckedState) {
+                this._checked = newCheckedState;
+                if (newCheckedState && this.radioGroup && this.radioGroup.value !== this.value) {
+                    this.radioGroup.selected = this;
+                }
+                else if (!newCheckedState && this.radioGroup && this.radioGroup.value === this.value) {
+                    // When unchecking the selected radio button, update the selected radio
+                    // property on the group.
+                    this.radioGroup.selected = null;
+                }
+                if (newCheckedState) {
+                    // Notify all radio buttons with the same name to un-check.
+                    this._radioDispatcher.notify(this.id, this.name);
+                }
+                this._changeDetector.markForCheck();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McRadioButton.prototype, "value", {
+        get: /** The value of this radio button. */
+        function () { return this._value; },
+        set: function (value) {
+            if (this._value !== value) {
+                this._value = value;
+                if (this.radioGroup != null) {
+                    if (!this.checked) {
+                        // Update checked when the value changed to match the radio group's value
+                        this.checked = this.radioGroup.value === value;
+                    }
+                    if (this.checked) {
+                        this.radioGroup.selected = this;
+                    }
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McRadioButton.prototype, "disabled", {
+        get: /** Whether the radio button is disabled. */
+        function () {
+            return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
+        },
+        set: function (value) {
+            var newDisabledState = toBoolean(value);
+            if (this._disabled !== newDisabledState) {
+                this._disabled = newDisabledState;
+                this._changeDetector.markForCheck();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McRadioButton.prototype, "required", {
+        get: /** Whether the radio button is required. */
+        function () {
+            return this._required || (this.radioGroup && this.radioGroup.required);
+        },
+        set: function (value) {
+            this._required = toBoolean(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McRadioButton.prototype, "labelPosition", {
+        get: /** Whether the label should appear after or before the radio button. Defaults to 'after' */
+        function () {
+            return this._labelPosition || (this.radioGroup && this.radioGroup.labelPosition) || 'after';
+        },
+        set: function (value) {
+            this._labelPosition = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McRadioButton.prototype, "inputId", {
+        /** ID of the native input element inside `<mc-radio-button>` */
+        get: /** ID of the native input element inside `<mc-radio-button>` */
+        function () { return (this.id || this._uniqueId) + "-input"; },
+        enumerable: true,
+        configurable: true
+    });
+    McRadioButton.prototype.ngOnInit = function () {
+        if (this.radioGroup) {
+            // If the radio is inside a radio group, determine if it should be checked
+            this.checked = this.radioGroup.value === this._value;
+            // Copy name from parent radio group
+            this.name = this.radioGroup.name;
+        }
+    };
+    McRadioButton.prototype.ngAfterViewInit = function () { };
+    McRadioButton.prototype.ngOnDestroy = function () {
+        this.removeUniqueSelectionListener();
+    };
+    /** Focuses the radio button. */
+    /** Focuses the radio button. */
+    McRadioButton.prototype.focus = /** Focuses the radio button. */
+    function () { };
+    /**
+     * Marks the radio button as needing checking for change detection.
+     * This method is exposed because the parent radio group will directly
+     * update bound properties of the radio button.
+     */
+    /**
+         * Marks the radio button as needing checking for change detection.
+         * This method is exposed because the parent radio group will directly
+         * update bound properties of the radio button.
+         */
+    McRadioButton.prototype.markForCheck = /**
+         * Marks the radio button as needing checking for change detection.
+         * This method is exposed because the parent radio group will directly
+         * update bound properties of the radio button.
+         */
+    function () {
+        // When group value changes, the button will not be notified. Use `markForCheck` to explicit
+        // update radio button's status
+        this._changeDetector.markForCheck();
+    };
+    McRadioButton.prototype.onInputClick = function (event) {
+        // We have to stop propagation for click events on the visual hidden input element.
+        // By default, when a user clicks on a label element, a generated click event will be
+        // dispatched on the associated input element. Since we are using a label element as our
+        // root container, the click event on the `radio-button` will be executed twice.
+        // The real click event will bubble up, and the generated click event also tries to bubble up.
+        // This will lead to multiple click events.
+        // Preventing bubbling for the second event will solve that issue.
+        event.stopPropagation();
+    };
+    McRadioButton.prototype.onInputChange = function (event) {
+        // We always have to stop propagation on the change event.
+        // Otherwise the change event, from the input element, will bubble up and
+        // emit its event object to the `change` output.
+        event.stopPropagation();
+        var groupValueChanged = this.radioGroup && this.value !== this.radioGroup.value;
+        this.checked = true;
+        this.emitChangeEvent();
+        if (this.radioGroup) {
+            this.radioGroup.controlValueAccessorChangeFn(this.value);
+            this.radioGroup.touch();
+            if (groupValueChanged) {
+                this.radioGroup.emitChangeEvent();
+            }
+        }
+    };
+    /** Dispatch change event with current value. */
+    /** Dispatch change event with current value. */
+    McRadioButton.prototype.emitChangeEvent = /** Dispatch change event with current value. */
+    function () {
+        this.change.emit(new McRadioChange(this, this._value));
+    };
+    McRadioButton.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-radio-button',
+                    template: "<label [attr.for]=\"inputId\" class=\"mc-radio-label\" #label><input #input class=\"mc-radio-input cdk-visually-hidden\" type=\"radio\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [attr.name]=\"name\" [required]=\"required\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-describedby]=\"ariaDescribedby\" (change)=\"onInputChange($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></div></label>",
+                    styles: [".mc-radio-button{display:inline-block}.mc-radio-label{cursor:pointer;display:inline-flex;align-items:center;white-space:nowrap;vertical-align:middle}.mc-radio-label-content{display:inline-block;order:0;line-height:inherit;padding-right:0}[dir=rtl] .mc-radio-label-content{padding-right:26px;padding-left:0}.mc-radio-input{position:absolute;outline:0;opacity:0}.mc-radio-input+.mc-radio-label-content{position:relative;cursor:pointer;padding-left:26px}.mc-radio-input+.mc-radio-label-content:before{position:absolute;left:0;top:-1px;content:'';background:#fff;width:14px;height:14px;display:block;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2);border-width:1px;border-style:solid;border-radius:50%}.mc-radio-input+.mc-radio-label-content:after{content:'';top:4px;left:5px;width:6px;height:6px;border-radius:50%;position:absolute;opacity:0}.mc-radio-input:checked+.mc-radio-label-content:before{box-shadow:unset}.mc-radio-input:checked:hover+.mc-radio-label-content:after{opacity:1}.mc-radio-input:focus+.mc-radio-label-content:before{top:-2px;left:-1px;box-shadow:inset 0 0 0 1px #fff;border-width:2px}.mc-radio-input[disabled]{cursor:default}.mc-radio-input[disabled]+.mc-radio-label-content{cursor:default}"],
+                    inputs: ['color', 'tabIndex'],
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    exportAs: 'mcRadioButton',
+                    host: {
+                        class: 'mc-radio-button',
+                        '[attr.id]': 'id',
+                        '[class.mc-radio-checked]': 'checked',
+                        '[class.mc-radio-disabled]': 'disabled',
+                        '(focus)': '_inputElement.nativeElement.focus()'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McRadioButton.ctorParameters = function () { return [
+        { type: McRadioGroup, decorators: [{ type: core.Optional },] },
+        { type: core.ElementRef, },
+        { type: core.ChangeDetectorRef, },
+        { type: collections.UniqueSelectionDispatcher, },
+    ]; };
+    McRadioButton.propDecorators = {
+        "id": [{ type: core.Input },],
+        "name": [{ type: core.Input },],
+        "ariaLabel": [{ type: core.Input, args: ['aria-label',] },],
+        "ariaLabelledby": [{ type: core.Input, args: ['aria-labelledby',] },],
+        "ariaDescribedby": [{ type: core.Input, args: ['aria-describedby',] },],
+        "checked": [{ type: core.Input },],
+        "value": [{ type: core.Input },],
+        "disabled": [{ type: core.Input },],
+        "required": [{ type: core.Input },],
+        "labelPosition": [{ type: core.Input },],
+        "_inputElement": [{ type: core.ViewChild, args: ['input',] },],
+        "change": [{ type: core.Output },],
+        "isFocused": [{ type: core.Input },],
+    };
+    return McRadioButton;
+}(_McRadioButtonMixinBase));
+
+var McRadioModule = /** @class */ (function () {
+    function McRadioModule() {
+    }
+    McRadioModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule, a11y.A11yModule, McCommonModule],
+                    exports: [McRadioGroup, McRadioButton, McCommonModule],
+                    declarations: [McRadioGroup, McRadioButton]
+                },] },
+    ];
+    return McRadioModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @template T
+ */
+var McTreeNodeDef = /** @class */ (function (_super) {
+    __extends(McTreeNodeDef, _super);
+    function McTreeNodeDef() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    McTreeNodeDef.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mcTreeNodeDef]',
+                    inputs: ['when: mcTreeNodeDefWhen'],
+                    providers: [{ provide: tree.CdkTreeNodeDef, useExisting: McTreeNodeDef }]
+                },] },
+    ];
+    /** @nocollapse */
+    McTreeNodeDef.propDecorators = {
+        "data": [{ type: core.Input, args: ['mcTreeNode',] },],
+    };
+    return McTreeNodeDef;
+}(tree.CdkTreeNodeDef));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Wrapper for the CdkTree padding with Material design styles.
+ * @template T
+ */
+var McTreeNodePadding = /** @class */ (function (_super) {
+    __extends(McTreeNodePadding, _super);
+    function McTreeNodePadding() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     * @return {?}
+     */
+    McTreeNodePadding.prototype._paddingIndent = /**
+     * @return {?}
+     */
+    function () {
+        var /** @type {?} */ nodeLevel = (this._treeNode.data && this._tree.treeControl.getLevel)
+            ? this._tree.treeControl.getLevel(this._treeNode.data)
+            : null;
+        var /** @type {?} */ level = this._level || nodeLevel;
+        return level ? (level * this._indent) + 8 + "px" : '8px';
+    };
+    McTreeNodePadding.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mcTreeNodePadding]',
+                    providers: [{ provide: tree.CdkTreeNodePadding, useExisting: McTreeNodePadding }]
+                },] },
+    ];
+    /** @nocollapse */
+    McTreeNodePadding.propDecorators = {
+        "level": [{ type: core.Input, args: ['mcTreeNodePadding',] },],
+        "indent": [{ type: core.Input, args: ['matTreeNodePaddingIndent',] },],
+    };
+    return McTreeNodePadding;
+}(tree.CdkTreeNodePadding));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Wrapper for the CdkTree node with Material design styles.
+ * @template T
+ */
+var McTreeNodeOption = /** @class */ (function (_super) {
+    __extends(McTreeNodeOption, _super);
+    function McTreeNodeOption(_elementRef, treeSelection) {
+        var _this = _super.call(this, _elementRef, treeSelection) || this;
+        _this._elementRef = _elementRef;
+        _this.treeSelection = treeSelection;
+        _this.role = 'treeitem';
+        _this._hasFocus = false;
+        _this._disabled = false;
+        _this._selected = false;
+        return _this;
+    }
+    Object.defineProperty(McTreeNodeOption.prototype, "disabled", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._disabled;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            var /** @type {?} */ newValue = toBoolean(value);
+            if (newValue !== this._disabled) {
+                this._disabled = newValue;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeNodeOption.prototype, "selected", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.treeSelection.selectedOptions && this.treeSelection.selectedOptions.isSelected(this) || false;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            var /** @type {?} */ isSelected = toBoolean(value);
+            if (isSelected !== this._selected) {
+                this.setSelected(isSelected);
+                // this.treeSelection._reportValueChange();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    McTreeNodeOption.prototype.focus = /**
+     * @return {?}
+     */
+    function () {
+        this._elementRef.nativeElement.focus();
+        this.treeSelection.setFocusedOption(this);
+    };
+    /**
+     * @return {?}
+     */
+    McTreeNodeOption.prototype.toggle = /**
+     * @return {?}
+     */
+    function () {
+        this.selected = !this.selected;
+    };
+    /**
+     * @param {?} selected
+     * @return {?}
+     */
+    McTreeNodeOption.prototype.setSelected = /**
+     * @param {?} selected
+     * @return {?}
+     */
+    function (selected) {
+        if (this._selected === selected || !this.treeSelection.selectedOptions) {
+            return;
+        }
+        this._selected = selected;
+        if (selected) {
+            this.treeSelection.selectedOptions.select(this);
+        }
+        else {
+            this.treeSelection.selectedOptions.deselect(this);
+        }
+        // this._changeDetector.markForCheck();
+    };
+    /**
+     * @return {?}
+     */
+    McTreeNodeOption.prototype._handleFocus = /**
+     * @return {?}
+     */
+    function () {
+        if (this.disabled || this._hasFocus) {
+            return;
+        }
+        this._hasFocus = true;
+    };
+    /**
+     * @return {?}
+     */
+    McTreeNodeOption.prototype._handleBlur = /**
+     * @return {?}
+     */
+    function () {
+        this._hasFocus = false;
+    };
+    /**
+     * @return {?}
+     */
+    McTreeNodeOption.prototype._handleClick = /**
+     * @return {?}
+     */
+    function () {
+        if (this.disabled) {
+            return;
+        }
+        this.treeSelection.setFocusedOption(this);
+    };
+    McTreeNodeOption.decorators = [
+        { type: core.Directive, args: [{
+                    exportAs: 'mcTreeNodeOption',
+                    selector: 'mc-tree-node-option',
+                    host: {
+                        tabindex: '-1',
+                        '[class.mc-selected]': 'selected',
+                        '[class.mc-focused]': '_hasFocus',
+                        '[attr.aria-expanded]': 'isExpanded',
+                        '[attr.aria-level]': 'role === "treeitem" ? level : null',
+                        class: 'mc-tree-node',
+                        '(focus)': '_handleFocus()',
+                        '(blur)': '_handleBlur()',
+                        '(click)': '_handleClick()'
+                    },
+                    providers: [
+                        { provide: tree.CdkTreeNode, useExisting: McTreeNodeOption }
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    McTreeNodeOption.ctorParameters = function () { return [
+        { type: core.ElementRef, },
+        { type: McTreeSelection, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McTreeSelection; }),] },] },
+    ]; };
+    McTreeNodeOption.propDecorators = {
+        "role": [{ type: core.Input },],
+        "disabled": [{ type: core.Input },],
+        "selected": [{ type: core.Input },],
+    };
+    return McTreeNodeOption;
+}(tree.CdkTreeNode));
+var /** @type {?} */ _McTreeSelectionBase = mixinTabIndex(mixinDisabled(tree.CdkTree));
+var McTreeNavigationChange = /** @class */ (function () {
+    function McTreeNavigationChange(source, option) {
+        this.source = source;
+        this.option = option;
+    }
+    return McTreeNavigationChange;
+}());
+var McTreeSelectionChange = /** @class */ (function () {
+    function McTreeSelectionChange(source, option) {
+        this.source = source;
+        this.option = option;
+    }
+    return McTreeSelectionChange;
+}());
+/**
+ * @template T
+ */
+var McTreeSelection = /** @class */ (function (_super) {
+    __extends(McTreeSelection, _super);
+    function McTreeSelection(_differs, _changeDetectorRef, tabIndex, multiple, autoSelect) {
+        var _this = _super.call(this, _differs, _changeDetectorRef) || this;
+        _this._disabled = false;
+        _this.navigationChange = new core.EventEmitter();
+        _this.selectionChange = new core.EventEmitter();
+        _this.tabIndex = parseInt(tabIndex) || 0;
+        _this.multiple = multiple === null ? true : toBoolean(multiple);
+        _this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
+        _this.selectedOptions = new collections.SelectionModel(_this.multiple);
+        return _this;
+    }
+    Object.defineProperty(McTreeSelection.prototype, "disabled", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._disabled;
+        },
+        set: /**
+         * @param {?} rawValue
+         * @return {?}
+         */
+        function (rawValue) {
+            var /** @type {?} */ value = toBoolean(rawValue);
+            if (this._disabled !== value) {
+                this._disabled = value;
+                if (this._disabled) {
+                    console.log('need disable all options');
+                }
+                else {
+                    console.log('need enable all options');
+                }
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McTreeSelection.prototype._onKeyDown = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        var /** @type {?} */ keyCode = event.keyCode;
+        switch (keyCode) {
+            case keycodes.LEFT_ARROW:
+                if (this._keyManager.activeItem) {
+                    this.treeControl.collapse(this._keyManager.activeItem.data);
+                }
+                event.preventDefault();
+                break;
+            case keycodes.RIGHT_ARROW:
+                if (this._keyManager.activeItem) {
+                    this.treeControl.expand(this._keyManager.activeItem.data);
+                }
+                event.preventDefault();
+                break;
+            case keycodes.SPACE:
+            case keycodes.ENTER:
+                this.toggleFocusedOption();
+                event.preventDefault();
+                break;
+            case keycodes.HOME:
+                console.log('need set focus on first node');
+                event.preventDefault();
+                break;
+            case keycodes.END:
+                console.log('need set focus on last node');
+                event.preventDefault();
+                break;
+            case keycodes.PAGE_UP:
+                console.log('need do scroll page and set focus on first in viewport');
+                event.preventDefault();
+                break;
+            case keycodes.PAGE_DOWN:
+                console.log('need do scroll page and set focus on last in viewport');
+                event.preventDefault();
+                break;
+            default:
+                this._keyManager.onKeydown(event);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    McTreeSelection.prototype.ngAfterContentInit = /**
+     * @return {?}
+     */
+    function () {
+        this._keyManager = new a11y.FocusKeyManager(this.options)
+            .withTypeAhead()
+            .withVerticalOrientation(true)
+            .withHorizontalOrientation(null);
+    };
+    /**
+     * @param {?} option
+     * @return {?}
+     */
+    McTreeSelection.prototype.setFocusedOption = /**
+     * @param {?} option
+     * @return {?}
+     */
+    function (option) {
+        this._keyManager.updateActiveItem(option);
+        if (this.autoSelect) {
+            this.options.forEach(function (item) { return item.setSelected(false); });
+            option.setSelected(true);
+        }
+        this._emitNavigationEvent(option);
+    };
+    // Toggles the selected state of the currently focused option.
+    /**
+     * @return {?}
+     */
+    McTreeSelection.prototype.toggleFocusedOption = /**
+     * @return {?}
+     */
+    function () {
+        var /** @type {?} */ focusedIndex = this._keyManager.activeItemIndex;
+        if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
+            var /** @type {?} */ focusedOption = this.options.toArray()[focusedIndex];
+            if (focusedOption && this._canUnselectLast(focusedOption)) {
+                focusedOption.toggle();
+                // Emit a change event because the focused option changed its state through user interaction.
+                this._emitChangeEvent(focusedOption);
+            }
+        }
+    };
+    /**
+     * @param {?} data
+     * @param {?=} dataDiffer
+     * @param {?=} viewContainer
+     * @param {?=} parentData
+     * @return {?}
+     */
+    McTreeSelection.prototype.renderNodeChanges = /**
+     * @param {?} data
+     * @param {?=} dataDiffer
+     * @param {?=} viewContainer
+     * @param {?=} parentData
+     * @return {?}
+     */
+    function (data, dataDiffer, viewContainer, parentData) {
+        if (dataDiffer === void 0) { dataDiffer = this._dataDiffer; }
+        if (viewContainer === void 0) { viewContainer = this._nodeOutlet.viewContainer; }
+        _super.prototype.renderNodeChanges.call(this, data, dataDiffer, viewContainer, parentData);
+        var /** @type {?} */ arrayOfInstances = [];
+        viewContainer._embeddedViews.forEach(function (view) {
+            var /** @type {?} */ viewDef = view.def;
+            viewDef.nodes.forEach(function (node) {
+                if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
+                    var /** @type {?} */ nodeData = view.nodes[node.nodeIndex];
+                    arrayOfInstances.push(/** @type {?} */ (nodeData.instance));
+                }
+            });
+        });
+        if (this.options) {
+            this.options.reset(arrayOfInstances);
+            this.options.notifyOnChanges();
+        }
+    };
+    /**
+     * @param {?} option
+     * @return {?}
+     */
+    McTreeSelection.prototype._emitNavigationEvent = /**
+     * @param {?} option
+     * @return {?}
+     */
+    function (option) {
+        this.navigationChange.emit(new McTreeNavigationChange(this, option));
+    };
+    /**
+     * @param {?} option
+     * @return {?}
+     */
+    McTreeSelection.prototype._emitChangeEvent = /**
+     * @param {?} option
+     * @return {?}
+     */
+    function (option) {
+        this.selectionChange.emit(new McTreeNavigationChange(this, option));
+    };
+    /**
+     * Utility to ensure all indexes are valid.
+     * @param {?} index The index to be checked.
+     * @return {?} True if the index is valid for our list of options.
+     */
+    McTreeSelection.prototype._isValidIndex = /**
+     * Utility to ensure all indexes are valid.
+     * @param {?} index The index to be checked.
+     * @return {?} True if the index is valid for our list of options.
+     */
+    function (index) {
+        return index >= 0 && index < this.options.length;
+    };
+    /**
+     * @param {?} _option
+     * @return {?}
+     */
+    McTreeSelection.prototype._canUnselectLast = /**
+     * @param {?} _option
+     * @return {?}
+     */
+    function (_option) {
+        return true;
+        // return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
+    };
+    McTreeSelection.decorators = [
+        { type: core.Component, args: [{
+                    exportAs: 'mcTreeSelection',
+                    selector: 'mc-tree-selection',
+                    template: "<ng-container cdkTreeNodeOutlet></ng-container>",
+                    host: {
+                        '[tabIndex]': 'tabIndex',
+                        class: 'mc-tree',
+                        role: 'tree-selection',
+                        '(keydown)': '_onKeyDown($event)'
+                    },
+                    styles: [".mc-tree{display:block;border:1px solid bisque}.mc-tree-nested-node{display:block}.mc-tree-node{display:flex;align-items:center;height:32px;word-wrap:break-word}.mc-tree-node>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-node:focus{outline:0}.tree-invisible{display:none}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    providers: [{ provide: tree.CdkTree, useExisting: McTreeSelection }]
+                },] },
+    ];
+    /** @nocollapse */
+    McTreeSelection.ctorParameters = function () { return [
+        { type: core.IterableDiffers, },
+        { type: core.ChangeDetectorRef, },
+        { type: undefined, decorators: [{ type: core.Attribute, args: ['tabindex',] },] },
+        { type: undefined, decorators: [{ type: core.Attribute, args: ['multiple',] },] },
+        { type: undefined, decorators: [{ type: core.Attribute, args: ['auto-select',] },] },
+    ]; };
+    McTreeSelection.propDecorators = {
+        "_nodeOutlet": [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet,] },],
+        "options": [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McTreeNodeOption; }),] },],
+        "disabled": [{ type: core.Input },],
+        "navigationChange": [{ type: core.Output },],
+        "selectionChange": [{ type: core.Output },],
+    };
+    return McTreeSelection;
+}(_McTreeSelectionBase));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var /** @type {?} */ MC_TREE_DIRECTIVES = [
+    McTreeNodeDef,
+    McTreeNodePadding,
+    McTreeSelection,
+    McTreeNodeOption
+];
+var McTreeModule = /** @class */ (function () {
+    function McTreeModule() {
+    }
+    McTreeModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule, tree.CdkTreeModule],
+                    exports: MC_TREE_DIRECTIVES,
+                    declarations: MC_TREE_DIRECTIVES
+                },] },
+    ];
+    return McTreeModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Tree flattener to convert a normal type of node to node with children & level information.
+ * Transform nested nodes of type `T` to flattened nodes of type `F`.
+ *
+ * For example, the input data of type `T` is nested, and contains its children data:
+ *   SomeNode: {
+ *     key: 'Fruits',
+ *     children: [
+ *       NodeOne: {
+ *         key: 'Apple',
+ *       },
+ *       NodeTwo: {
+ *        key: 'Pear',
+ *      }
+ *    ]
+ *  }
+ *  After flattener flatten the tree, the structure will become
+ *  SomeNode: {
+ *    key: 'Fruits',
+ *    expandable: true,
+ *    level: 1
+ *  },
+ *  NodeOne: {
+ *    key: 'Apple',
+ *    expandable: false,
+ *    level: 2
+ *  },
+ *  NodeTwo: {
+ *   key: 'Pear',
+ *   expandable: false,
+ *   level: 2
+ * }
+ * and the output flattened type is `F` with additional information.
+ * @template T, F
+ */
+var   /**
+ * Tree flattener to convert a normal type of node to node with children & level information.
+ * Transform nested nodes of type `T` to flattened nodes of type `F`.
+ *
+ * For example, the input data of type `T` is nested, and contains its children data:
+ *   SomeNode: {
+ *     key: 'Fruits',
+ *     children: [
+ *       NodeOne: {
+ *         key: 'Apple',
+ *       },
+ *       NodeTwo: {
+ *        key: 'Pear',
+ *      }
+ *    ]
+ *  }
+ *  After flattener flatten the tree, the structure will become
+ *  SomeNode: {
+ *    key: 'Fruits',
+ *    expandable: true,
+ *    level: 1
+ *  },
+ *  NodeOne: {
+ *    key: 'Apple',
+ *    expandable: false,
+ *    level: 2
+ *  },
+ *  NodeTwo: {
+ *   key: 'Pear',
+ *   expandable: false,
+ *   level: 2
+ * }
+ * and the output flattened type is `F` with additional information.
+ * @template T, F
+ */
+McTreeFlattener = /** @class */ (function () {
+    function McTreeFlattener(transformFunction, getLevel, isExpandable, getChildren) {
+        this.transformFunction = transformFunction;
+        this.getLevel = getLevel;
+        this.isExpandable = isExpandable;
+        this.getChildren = getChildren;
+    }
+    /**
+     * @param {?} node
+     * @param {?} level
+     * @param {?} resultNodes
+     * @param {?} parentMap
+     * @return {?}
+     */
+    McTreeFlattener.prototype._flattenNode = /**
+     * @param {?} node
+     * @param {?} level
+     * @param {?} resultNodes
+     * @param {?} parentMap
+     * @return {?}
+     */
+    function (node, level, resultNodes, parentMap) {
+        var _this = this;
+        var /** @type {?} */ flatNode = this.transformFunction(node, level);
+        resultNodes.push(flatNode);
+        if (this.isExpandable(flatNode)) {
+            this.getChildren(node).pipe(operators.take(1)).subscribe(function (children) {
+                children.forEach(function (child, index) {
+                    var /** @type {?} */ childParentMap = parentMap.slice();
+                    childParentMap.push(index !== children.length - 1);
+                    _this._flattenNode(child, level + 1, resultNodes, childParentMap);
+                });
+            });
+        }
+        return resultNodes;
+    };
+    /**
+     * Flatten a list of node type T to flattened version of node F.
+     * Please note that type T may be nested, and the length of `structuredData` may be different
+     * from that of returned list `F[]`.
+     */
+    /**
+     * Flatten a list of node type T to flattened version of node F.
+     * Please note that type T may be nested, and the length of `structuredData` may be different
+     * from that of returned list `F[]`.
+     * @param {?} structuredData
+     * @return {?}
+     */
+    McTreeFlattener.prototype.flattenNodes = /**
+     * Flatten a list of node type T to flattened version of node F.
+     * Please note that type T may be nested, and the length of `structuredData` may be different
+     * from that of returned list `F[]`.
+     * @param {?} structuredData
+     * @return {?}
+     */
+    function (structuredData) {
+        var _this = this;
+        var /** @type {?} */ resultNodes = [];
+        structuredData.forEach(function (node) { return _this._flattenNode(node, 0, resultNodes, []); });
+        return resultNodes;
+    };
+    /**
+     * Expand flattened node with current expansion status.
+     * The returned list may have different length.
+     */
+    /**
+     * Expand flattened node with current expansion status.
+     * The returned list may have different length.
+     * @param {?} nodes
+     * @param {?} treeControl
+     * @return {?}
+     */
+    McTreeFlattener.prototype.expandFlattenedNodes = /**
+     * Expand flattened node with current expansion status.
+     * The returned list may have different length.
+     * @param {?} nodes
+     * @param {?} treeControl
+     * @return {?}
+     */
+    function (nodes, treeControl) {
+        var _this = this;
+        var /** @type {?} */ results = [];
+        var /** @type {?} */ currentExpand = [];
+        currentExpand[0] = true;
+        nodes.forEach(function (node) {
+            var /** @type {?} */ expand = true;
+            for (var /** @type {?} */ i = 0; i <= _this.getLevel(node); i++) {
+                expand = expand && currentExpand[i];
+            }
+            if (expand) {
+                results.push(node);
+            }
+            if (_this.isExpandable(node)) {
+                currentExpand[_this.getLevel(node) + 1] = treeControl.isExpanded(node);
+            }
+        });
+        return results;
+    };
+    return McTreeFlattener;
+}());
+/**
+ * Data source for flat tree.
+ * The data source need to handle expansion/collapsion of the tree node and change the data feed
+ * to `McTree`.
+ * The nested tree nodes of type `T` are flattened through `MсTreeFlattener`, and converted
+ * to type `F` for `McTree` to consume.
+ * @template T, F
+ */
+var   /**
+ * Data source for flat tree.
+ * The data source need to handle expansion/collapsion of the tree node and change the data feed
+ * to `McTree`.
+ * The nested tree nodes of type `T` are flattened through `MсTreeFlattener`, and converted
+ * to type `F` for `McTree` to consume.
+ * @template T, F
+ */
+McTreeFlatDataSource = /** @class */ (function (_super) {
+    __extends(McTreeFlatDataSource, _super);
+    function McTreeFlatDataSource(treeControl, treeFlattener, initialData) {
+        if (initialData === void 0) { initialData = []; }
+        var _this = _super.call(this) || this;
+        _this.treeControl = treeControl;
+        _this.treeFlattener = treeFlattener;
+        _this._flattenedData = new rxjs.BehaviorSubject([]);
+        _this._expandedData = new rxjs.BehaviorSubject([]);
+        _this._data = new rxjs.BehaviorSubject(initialData);
+        return _this;
+    }
+    Object.defineProperty(McTreeFlatDataSource.prototype, "data", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._data.value;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._data.next(value);
+            this._flattenedData.next(this.treeFlattener.flattenNodes(this.data));
+            this.treeControl.dataNodes = this._flattenedData.value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} collectionViewer
+     * @return {?}
+     */
+    McTreeFlatDataSource.prototype.connect = /**
+     * @param {?} collectionViewer
+     * @return {?}
+     */
+    function (collectionViewer) {
+        var _this = this;
+        var /** @type {?} */ changes = [
+            collectionViewer.viewChange,
+            /** @type {?} */ ((this.treeControl.expansionModel.onChange)),
+            this._flattenedData
+        ];
+        return rxjs.merge.apply(void 0, changes).pipe(operators.map(function () {
+            _this._expandedData.next(_this.treeFlattener.expandFlattenedNodes(_this._flattenedData.value, _this.treeControl));
+            return _this._expandedData.value;
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    McTreeFlatDataSource.prototype.disconnect = /**
+     * @return {?}
+     */
+    function () {
+        // no op
+    };
+    return McTreeFlatDataSource;
+}(collections.DataSource));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Data source for nested tree.
+ *
+ * The data source for nested tree doesn't have to consider node flattener, or the way to expand
+ * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
+ * @template T
+ */
+var   /**
+ * Data source for nested tree.
+ *
+ * The data source for nested tree doesn't have to consider node flattener, or the way to expand
+ * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
+ * @template T
+ */
+McTreeNestedDataSource = /** @class */ (function (_super) {
+    __extends(McTreeNestedDataSource, _super);
+    function McTreeNestedDataSource() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._data = new rxjs.BehaviorSubject([]);
+        return _this;
+    }
+    Object.defineProperty(McTreeNestedDataSource.prototype, "data", {
+        /**
+         * Data for the nested tree
+         */
+        get: /**
+         * Data for the nested tree
+         * @return {?}
+         */
+        function () {
+            return this._data.value;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._data.next(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} collectionViewer
+     * @return {?}
+     */
+    McTreeNestedDataSource.prototype.connect = /**
+     * @param {?} collectionViewer
+     * @return {?}
+     */
+    function (collectionViewer) {
+        var _this = this;
+        return rxjs.merge.apply(void 0, [collectionViewer.viewChange, this._data]).pipe(operators.map(function () { return _this.data; }));
+    };
+    /**
+     * @return {?}
+     */
+    McTreeNestedDataSource.prototype.disconnect = /**
+     * @return {?}
+     */
+    function () {
+        // no op
+    };
+    return McTreeNestedDataSource;
+}(collections.DataSource));
+
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
@@ -4135,11 +4978,20 @@ exports._McButtonMixinBase = _McButtonMixinBase;
 exports.McButton = McButton;
 exports.McAnchor = McAnchor;
 exports.McIconButton = McIconButton;
+exports.MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = MC_CHECKBOX_CONTROL_VALUE_ACCESSOR;
+exports.McCheckboxChange = McCheckboxChange;
+exports.McCheckboxBase = McCheckboxBase;
+exports._McCheckboxMixinBase = _McCheckboxMixinBase;
+exports.McCheckbox = McCheckbox;
+exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
+exports.McCheckboxModule = McCheckboxModule;
+exports.MC_CHECKBOX_REQUIRED_VALIDATOR = MC_CHECKBOX_REQUIRED_VALIDATOR;
+exports.McCheckboxRequiredValidator = McCheckboxRequiredValidator;
 exports.ɵa0 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
-exports.MС_SANITY_CHECKS = MС_SANITY_CHECKS;
+exports.MC_SANITY_CHECKS = MC_SANITY_CHECKS;
 exports.mixinDisabled = mixinDisabled;
 exports.mixinColor = mixinColor;
 exports.ThemePalette = ThemePalette;
@@ -4152,22 +5004,29 @@ exports.ShowOnDirtyErrorStateMatcher = ShowOnDirtyErrorStateMatcher;
 exports.ErrorStateMatcher = ErrorStateMatcher;
 exports.McPseudoCheckboxModule = McPseudoCheckboxModule;
 exports.McPseudoCheckbox = McPseudoCheckbox;
+exports.McDivider = McDivider;
+exports.McDividerModule = McDividerModule;
+exports.McFormFieldModule = McFormFieldModule;
+exports.McFormFieldBase = McFormFieldBase;
+exports.McFormField = McFormField;
+exports.McFormFieldWithoutBorders = McFormFieldWithoutBorders;
+exports.McFormFieldControl = McFormFieldControl;
+exports.getMcFormFieldMissingControlError = getMcFormFieldMissingControlError;
+exports.McHint = McHint;
+exports.McSuffix = McSuffix;
+exports.McPrefix = McPrefix;
+exports.McCleaner = McCleaner;
 exports.McIconModule = McIconModule;
 exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.McDivider = McDivider;
-exports.McDividerModule = McDividerModule;
-exports.McRadioModule = McRadioModule;
-exports.McRadioChange = McRadioChange;
-exports.McRadioGroupBase = McRadioGroupBase;
-exports._McRadioGroupMixinBase = _McRadioGroupMixinBase;
-exports.MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR;
-exports.McRadioGroup = McRadioGroup;
-exports.McRadioButtonBase = McRadioButtonBase;
-exports._McRadioButtonMixinBase = _McRadioButtonMixinBase;
-exports.McRadioButton = McRadioButton;
+exports.ɵa12 = MC_INPUT_VALUE_ACCESSOR;
+exports.McInputModule = McInputModule;
+exports.McInputBase = McInputBase;
+exports._McInputMixinBase = _McInputMixinBase;
+exports.McInput = McInput;
+exports.McInputMono = McInputMono;
 exports.McListModule = McListModule;
 exports.McListBase = McListBase;
 exports.McList = McList;
@@ -4180,39 +5039,6 @@ exports.McListSelectionChange = McListSelectionChange;
 exports.McListSelectionBase = McListSelectionBase;
 exports._McListSelectionMixinBase = _McListSelectionMixinBase;
 exports.McListSelection = McListSelection;
-exports.MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = MC_CHECKBOX_CONTROL_VALUE_ACCESSOR;
-exports.McCheckboxChange = McCheckboxChange;
-exports.McCheckboxBase = McCheckboxBase;
-exports._McCheckboxMixinBase = _McCheckboxMixinBase;
-exports.McCheckbox = McCheckbox;
-exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
-exports.McCheckboxModule = McCheckboxModule;
-exports.MC_CHECKBOX_REQUIRED_VALIDATOR = MC_CHECKBOX_REQUIRED_VALIDATOR;
-exports.McCheckboxRequiredValidator = McCheckboxRequiredValidator;
-exports.ɵa11 = MC_INPUT_VALUE_ACCESSOR;
-exports.McInputModule = McInputModule;
-exports.McInputBase = McInputBase;
-exports._McInputMixinBase = _McInputMixinBase;
-exports.McInput = McInput;
-exports.McInputMono = McInputMono;
-exports.McProgressBarModule = McProgressBarModule;
-exports.McProgressBarBase = McProgressBarBase;
-exports._McProgressBarMixinBase = _McProgressBarMixinBase;
-exports.McProgressBar = McProgressBar;
-exports.McFormFieldModule = McFormFieldModule;
-exports.McFormFieldBase = McFormFieldBase;
-exports.McFormField = McFormField;
-exports.McFormFieldWithoutBorders = McFormFieldWithoutBorders;
-exports.McFormFieldControl = McFormFieldControl;
-exports.getMcFormFieldMissingControlError = getMcFormFieldMissingControlError;
-exports.McHint = McHint;
-exports.McSuffix = McSuffix;
-exports.McPrefix = McPrefix;
-exports.McCleaner = McCleaner;
-exports.McProgressSpinnerModule = McProgressSpinnerModule;
-exports.McProgressSpinnerBase = McProgressSpinnerBase;
-exports._McProgressPinnerMixinBase = _McProgressPinnerMixinBase;
-exports.McProgressSpinner = McProgressSpinner;
 exports.McNavbarModule = McNavbarModule;
 exports.McNavbarLogo = McNavbarLogo;
 exports.McNavbarBrand = McNavbarBrand;
@@ -4222,6 +5048,34 @@ exports._McNavbarMixinBase = _McNavbarMixinBase;
 exports.McNavbarItem = McNavbarItem;
 exports.McNavbarContainer = McNavbarContainer;
 exports.McNavbar = McNavbar;
+exports.McProgressBarModule = McProgressBarModule;
+exports.McProgressBarBase = McProgressBarBase;
+exports._McProgressBarMixinBase = _McProgressBarMixinBase;
+exports.McProgressBar = McProgressBar;
+exports.McProgressSpinnerModule = McProgressSpinnerModule;
+exports.McProgressSpinnerBase = McProgressSpinnerBase;
+exports._McProgressPinnerMixinBase = _McProgressPinnerMixinBase;
+exports.McProgressSpinner = McProgressSpinner;
+exports.McRadioModule = McRadioModule;
+exports.McRadioChange = McRadioChange;
+exports.McRadioGroupBase = McRadioGroupBase;
+exports._McRadioGroupMixinBase = _McRadioGroupMixinBase;
+exports.MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR;
+exports.McRadioGroup = McRadioGroup;
+exports.McRadioButtonBase = McRadioButtonBase;
+exports._McRadioButtonMixinBase = _McRadioButtonMixinBase;
+exports.McRadioButton = McRadioButton;
+exports.McTreeModule = McTreeModule;
+exports.McTreeNodeDef = McTreeNodeDef;
+exports.McTreeNodePadding = McTreeNodePadding;
+exports.McTreeNodeOption = McTreeNodeOption;
+exports._McTreeSelectionBase = _McTreeSelectionBase;
+exports.McTreeNavigationChange = McTreeNavigationChange;
+exports.McTreeSelectionChange = McTreeSelectionChange;
+exports.McTreeSelection = McTreeSelection;
+exports.McTreeFlattener = McTreeFlattener;
+exports.McTreeFlatDataSource = McTreeFlatDataSource;
+exports.McTreeNestedDataSource = McTreeNestedDataSource;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

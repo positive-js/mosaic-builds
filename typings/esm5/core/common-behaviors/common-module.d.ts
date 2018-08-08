@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-export declare const MС_SANITY_CHECKS: InjectionToken<boolean>;
+export declare const MC_SANITY_CHECKS: InjectionToken<boolean>;
 export declare function MC_SANITY_CHECKS_FACTORY(): boolean;
 /**
  * Module that captures anything that should be loaded and/or run for *all* Mosaic

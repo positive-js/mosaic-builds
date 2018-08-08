@@ -7,10 +7,10 @@
       "from": "./core"
     },
     {
-      "from": "./radio"
+      "from": "./tree"
     },
     {
-      "from": "./progress-spinner"
+      "from": "./radio"
     },
     {
       "from": "./checkbox"
@@ -19,7 +19,7 @@
       "from": "./divider"
     },
     {
-      "from": "./progress-bar"
+      "from": "./progress-spinner"
     },
     {
       "from": "./icon"
@@ -29,6 +29,9 @@
     },
     {
       "from": "./navbar"
+    },
+    {
+      "from": "./progress-bar"
     },
     {
       "from": "./form-field"

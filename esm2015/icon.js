@@ -19,7 +19,7 @@ class McIconCSSStyler {
 McIconCSSStyler.decorators = [
     { type: Directive, args: [{
                 selector: '[mc-icon]',
-                host: { class: 'mc-icon mc' }
+                host: { class: 'mc mc-icon' }
             },] },
 ];
 class McIconBase {

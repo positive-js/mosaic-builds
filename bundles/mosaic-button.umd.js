@@ -48,8 +48,8 @@ var McButtonCSSStyler = /** @class */ (function () {
     }
     McButtonCSSStyler.decorators = [
         { type: core.Directive, args: [{
-                    selector: 'button[mc-button], a[mc-button]',
-                    host: { class: 'mc-button' }
+                    selector: 'button, a[mc-button]',
+                    host: { class: 'mc-button mc-olololo' }
                 },] },
     ];
     return McButtonCSSStyler;

@@ -258,7 +258,6 @@ var McListOption = /** @class */ (function () {
                         class: 'mc-list-option',
                         '[class.mc-selected]': 'selected',
                         '[class.mc-focused]': '_hasFocus',
-                        '[class.mc-list-option-disabled]': 'disabled',
                         '(focus)': '_handleFocus()',
                         '(blur)': '_handleBlur()',
                         '(click)': '_handleClick()'
@@ -441,8 +440,8 @@ var McListSelection = /** @class */ (function (_super) {
         else {
             if (this.autoSelect) {
                 this.options.forEach(function (item) { return item.setSelected(false); });
+                option.setSelected(true);
             }
-            option.setSelected(true);
         }
         this._emitChangeEvent(option);
         this._reportValueChange();

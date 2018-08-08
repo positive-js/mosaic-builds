@@ -41,7 +41,7 @@ function toBoolean(value) {
  * @suppress {checkTypes} checked by tsc
  */
 // Injection token that configures whether the Mosaic sanity checks are enabled.
-var /** @type {?} */ MС_SANITY_CHECKS = new InjectionToken('mc-sanity-checks', {
+var /** @type {?} */ MC_SANITY_CHECKS = new InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
     factory: MC_SANITY_CHECKS_FACTORY
 });
@@ -130,7 +130,7 @@ var McCommonModule = /** @class */ (function () {
     ];
     /** @nocollapse */
     McCommonModule.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MС_SANITY_CHECKS,] },] },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_SANITY_CHECKS,] },] },
     ]; };
     return McCommonModule;
 }());
@@ -432,8 +432,8 @@ var McLineModule = /** @class */ (function () {
     }
     McLineModule.decorators = [
         { type: NgModule, args: [{
-                    imports: [McCommonModule],
-                    exports: [McLine, McCommonModule],
+                    imports: [],
+                    exports: [McLine],
                     declarations: [McLine]
                 },] },
     ];
@@ -568,5 +568,5 @@ var McPseudoCheckboxModule = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 
-export { isBoolean, toBoolean, McCommonModule, MС_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, MC_SANITY_CHECKS_FACTORY as ɵa0 };
+export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, MC_SANITY_CHECKS_FACTORY as ɵa0 };
 //# sourceMappingURL=core.es5.js.map

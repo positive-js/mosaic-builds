@@ -6,14 +6,15 @@
  */
 export * from './typings/index';
 export * from './core';
+export * from './tree';
 export * from './radio';
-export * from './progress-spinner';
 export * from './checkbox';
 export * from './divider';
-export * from './progress-bar';
+export * from './progress-spinner';
 export * from './icon';
 export * from './list';
 export * from './navbar';
+export * from './progress-bar';
 export * from './form-field';
 export * from './button';
 export * from './input';

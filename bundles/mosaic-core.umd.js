@@ -71,7 +71,7 @@ function toBoolean(value) {
  * @suppress {checkTypes} checked by tsc
  */
 // Injection token that configures whether the Mosaic sanity checks are enabled.
-var /** @type {?} */ MС_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
+var /** @type {?} */ MC_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
     factory: MC_SANITY_CHECKS_FACTORY
 });
@@ -160,7 +160,7 @@ var McCommonModule = /** @class */ (function () {
     ];
     /** @nocollapse */
     McCommonModule.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MС_SANITY_CHECKS,] },] },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_SANITY_CHECKS,] },] },
     ]; };
     return McCommonModule;
 }());
@@ -462,8 +462,8 @@ var McLineModule = /** @class */ (function () {
     }
     McLineModule.decorators = [
         { type: core.NgModule, args: [{
-                    imports: [McCommonModule],
-                    exports: [McLine, McCommonModule],
+                    imports: [],
+                    exports: [McLine],
                     declarations: [McLine]
                 },] },
     ];
@@ -591,7 +591,7 @@ var McPseudoCheckboxModule = /** @class */ (function () {
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
-exports.MС_SANITY_CHECKS = MС_SANITY_CHECKS;
+exports.MC_SANITY_CHECKS = MC_SANITY_CHECKS;
 exports.mixinDisabled = mixinDisabled;
 exports.mixinColor = mixinColor;
 exports.ThemePalette = ThemePalette;

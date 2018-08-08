@@ -564,7 +564,7 @@ var McRadioButton = /** @class */ (function (_super) {
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     exportAs: 'mcRadioButton',
                     host: {
-                        'class': 'mc-radio-button',
+                        class: 'mc-radio-button',
                         '[attr.id]': 'id',
                         '[class.mc-radio-checked]': 'checked',
                         '[class.mc-radio-disabled]': 'disabled',
