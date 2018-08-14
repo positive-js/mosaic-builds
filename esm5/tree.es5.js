@@ -5,8 +5,9 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
-import { Directive, Input, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, forwardRef, IterableDiffers, Output, ViewChild, ViewEncapsulation, ElementRef, Inject, NgModule } from '@angular/core';
+import { Directive, Input, ContentChild, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, forwardRef, IterableDiffers, Output, ViewChild, ViewEncapsulation, ElementRef, Inject, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNode, CdkTree, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
+import { McIcon } from '@ptsecurity/mosaic/icon';
 import { SelectionModel, DataSource } from '@ptsecurity/cdk/collections';
 import { mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
@@ -52,8 +53,22 @@ var McTreeNodeDef = /** @class */ (function (_super) {
 var McTreeNodePadding = /** @class */ (function (_super) {
     __extends(McTreeNodePadding, _super);
     function McTreeNodePadding() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._baseLeftPadding = 6;
+        _this._iconWidth = 20;
+        _this._indent = 16;
+        return _this;
     }
+    Object.defineProperty(McTreeNodePadding.prototype, "leftPadding", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return (this._innerIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -65,7 +80,16 @@ var McTreeNodePadding = /** @class */ (function (_super) {
             ? this._tree.treeControl.getLevel(this._treeNode.data)
             : null;
         var /** @type {?} */ level = this._level || nodeLevel;
-        return level ? (level * this._indent) + 8 + "px" : '8px';
+        return level ? (level * this._indent) + this.leftPadding + "px" : this._baseLeftPadding + "px";
+    };
+    /**
+     * @return {?}
+     */
+    McTreeNodePadding.prototype.ngAfterContentInit = /**
+     * @return {?}
+     */
+    function () {
+        this._setPadding();
     };
     McTreeNodePadding.decorators = [
         { type: Directive, args: [{
@@ -77,6 +101,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     McTreeNodePadding.propDecorators = {
         "level": [{ type: Input, args: ['mcTreeNodePadding',] },],
         "indent": [{ type: Input, args: ['matTreeNodePaddingIndent',] },],
+        "_innerIcon": [{ type: ContentChild, args: [McIcon,] },],
     };
     return McTreeNodePadding;
 }(CdkTreeNodePadding));
@@ -489,7 +514,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                         role: 'tree-selection',
                         '(keydown)': '_onKeyDown($event)'
                     },
-                    styles: [".mc-tree{display:block;border:1px solid bisque}.mc-tree-nested-node{display:block}.mc-tree-node{display:flex;align-items:center;height:32px;word-wrap:break-word}.mc-tree-node>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-node:focus{outline:0}.tree-invisible{display:none}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
+                    styles: [".mc-tree{display:block;border:1px solid red}.mc-tree-node{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-node>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-node:focus{outline:0}.mc-tree-node:not([disabled]){cursor:pointer}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     providers: [{ provide: CdkTree, useExisting: McTreeSelection }]
