@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Directive, Input, ContentChild, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, forwardRef, IterableDiffers, Output, ViewChild, ViewEncapsulation, ElementRef, Inject, NgModule } from '@angular/core';
+import { Directive, Input, ViewChild, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, forwardRef, IterableDiffers, Output, ViewEncapsulation, ElementRef, Inject, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNode, CdkTree, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { SelectionModel, DataSource } from '@ptsecurity/cdk/collections';
@@ -70,7 +70,7 @@ class McTreeNodePadding extends CdkTreeNodePadding {
     /**
      * @return {?}
      */
-    ngAfterContentInit() {
+    ngAfterViewInit() {
         this._setPadding();
     }
 }
@@ -84,7 +84,7 @@ McTreeNodePadding.decorators = [
 McTreeNodePadding.propDecorators = {
     "level": [{ type: Input, args: ['mcTreeNodePadding',] },],
     "indent": [{ type: Input, args: ['matTreeNodePaddingIndent',] },],
-    "_innerIcon": [{ type: ContentChild, args: [McIcon,] },],
+    "_innerIcon": [{ type: ViewChild, args: [McIcon,] },],
 };
 
 /**

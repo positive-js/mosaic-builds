@@ -4184,7 +4184,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
-    McTreeNodePadding.prototype.ngAfterContentInit = /**
+    McTreeNodePadding.prototype.ngAfterViewInit = /**
      * @return {?}
      */
     function () {
@@ -4200,7 +4200,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     McTreeNodePadding.propDecorators = {
         "level": [{ type: core.Input, args: ['mcTreeNodePadding',] },],
         "indent": [{ type: core.Input, args: ['matTreeNodePaddingIndent',] },],
-        "_innerIcon": [{ type: core.ContentChild, args: [McIcon,] },],
+        "_innerIcon": [{ type: core.ViewChild, args: [McIcon,] },],
     };
     return McTreeNodePadding;
 }(tree.CdkTreeNodePadding));

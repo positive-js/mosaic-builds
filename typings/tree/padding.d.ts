@@ -1,10 +1,10 @@
-import { AfterContentInit } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
 import { CdkTreeNodePadding } from '@ptsecurity/cdk/tree';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 /**
  * Wrapper for the CdkTree padding with Material design styles.
  */
-export declare class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implements AfterContentInit {
+export declare class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implements AfterViewInit {
     readonly leftPadding: number;
     _baseLeftPadding: number;
     _iconWidth: number;
@@ -15,5 +15,5 @@ export declare class McTreeNodePadding<T> extends CdkTreeNodePadding<T> implemen
     indent: number;
     _innerIcon: McIcon;
     _paddingIndent(): string | null;
-    ngAfterContentInit(): void;
+    ngAfterViewInit(): void;
 }
