@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/icon'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('@angular/common'), require('rxjs'), require('rxjs/operators')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/icon', '@ptsecurity/cdk/collections', '@ptsecurity/mosaic/core', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', '@angular/common', 'rxjs', 'rxjs/operators'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.ng.mosaic.icon,global.ng.cdk.collections,global.ng.mosaic.core,global.ng.cdk.a11y,global.ng.cdk.keycodes,global.ng.common,global.rxjs,global.rxjs.operators));
-}(this, (function (exports,core,tree,icon,collections,core$1,a11y,keycodes,common,rxjs,operators) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('@angular/common'), require('rxjs'), require('rxjs/operators')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/cdk/collections', '@ptsecurity/mosaic/core', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', '@angular/common', 'rxjs', 'rxjs/operators'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.ng.cdk.collections,global.ng.mosaic.core,global.ng.cdk.a11y,global.ng.cdk.keycodes,global.ng.common,global.rxjs,global.rxjs.operators));
+}(this, (function (exports,core,tree,collections,core$1,a11y,keycodes,common,rxjs,operators) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -70,7 +70,6 @@ var McTreeNodeDef = /** @class */ (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * Wrapper for the CdkTree padding with Material design styles.
  * @template T
  */
 var McTreeNodePadding = /** @class */ (function (_super) {
@@ -87,7 +86,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return (this._innerIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
+            return (this._withIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
         },
         enumerable: true,
         configurable: true
@@ -108,10 +107,11 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
-    McTreeNodePadding.prototype.ngAfterViewInit = /**
+    McTreeNodePadding.prototype.ngOnInit = /**
      * @return {?}
      */
     function () {
+        this._withIcon = this._tree.treeControl.isExpandable(this._treeNode.data);
         this._setPadding();
     };
     McTreeNodePadding.decorators = [
@@ -123,8 +123,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     /** @nocollapse */
     McTreeNodePadding.propDecorators = {
         "level": [{ type: core.Input, args: ['mcTreeNodePadding',] },],
-        "indent": [{ type: core.Input, args: ['matTreeNodePaddingIndent',] },],
-        "_innerIcon": [{ type: core.ViewChild, args: [icon.McIcon,] },],
+        "indent": [{ type: core.Input, args: ['mcTreeNodePaddingIndent',] },],
     };
     return McTreeNodePadding;
 }(tree.CdkTreeNodePadding));

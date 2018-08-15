@@ -4382,7 +4382,6 @@ var McTreeNodeDef = /** @class */ (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * Wrapper for the CdkTree padding with Material design styles.
  * @template T
  */
 var McTreeNodePadding = /** @class */ (function (_super) {
@@ -4399,7 +4398,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return (this._innerIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
+            return (this._withIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
         },
         enumerable: true,
         configurable: true
@@ -4420,10 +4419,11 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
-    McTreeNodePadding.prototype.ngAfterViewInit = /**
+    McTreeNodePadding.prototype.ngOnInit = /**
      * @return {?}
      */
     function () {
+        this._withIcon = this._tree.treeControl.isExpandable(this._treeNode.data);
         this._setPadding();
     };
     McTreeNodePadding.decorators = [
@@ -4435,8 +4435,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     /** @nocollapse */
     McTreeNodePadding.propDecorators = {
         "level": [{ type: core.Input, args: ['mcTreeNodePadding',] },],
-        "indent": [{ type: core.Input, args: ['matTreeNodePaddingIndent',] },],
-        "_innerIcon": [{ type: core.ViewChild, args: [McIcon,] },],
+        "indent": [{ type: core.Input, args: ['mcTreeNodePaddingIndent',] },],
     };
     return McTreeNodePadding;
 }(tree.CdkTreeNodePadding));

@@ -5,9 +5,8 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
-import { Directive, Input, ViewChild, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, forwardRef, IterableDiffers, Output, ViewEncapsulation, ElementRef, Inject, NgModule } from '@angular/core';
+import { Directive, Input, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, forwardRef, IterableDiffers, Output, ViewChild, ViewEncapsulation, ElementRef, Inject, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNode, CdkTree, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { McIcon } from '@ptsecurity/mosaic/icon';
 import { SelectionModel, DataSource } from '@ptsecurity/cdk/collections';
 import { mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
@@ -47,7 +46,6 @@ var McTreeNodeDef = /** @class */ (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * Wrapper for the CdkTree padding with Material design styles.
  * @template T
  */
 var McTreeNodePadding = /** @class */ (function (_super) {
@@ -64,7 +62,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return (this._innerIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
+            return (this._withIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
         },
         enumerable: true,
         configurable: true
@@ -85,10 +83,11 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
-    McTreeNodePadding.prototype.ngAfterViewInit = /**
+    McTreeNodePadding.prototype.ngOnInit = /**
      * @return {?}
      */
     function () {
+        this._withIcon = this._tree.treeControl.isExpandable(this._treeNode.data);
         this._setPadding();
     };
     McTreeNodePadding.decorators = [
@@ -100,8 +99,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     /** @nocollapse */
     McTreeNodePadding.propDecorators = {
         "level": [{ type: Input, args: ['mcTreeNodePadding',] },],
-        "indent": [{ type: Input, args: ['matTreeNodePaddingIndent',] },],
-        "_innerIcon": [{ type: ViewChild, args: [McIcon,] },],
+        "indent": [{ type: Input, args: ['mcTreeNodePaddingIndent',] },],
     };
     return McTreeNodePadding;
 }(CdkTreeNodePadding));
