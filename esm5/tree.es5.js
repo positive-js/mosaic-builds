@@ -17,7 +17,7 @@ import { map, take } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -34,16 +34,15 @@ var McTreeNodeDef = /** @class */ (function (_super) {
                     providers: [{ provide: CdkTreeNodeDef, useExisting: McTreeNodeDef }]
                 },] },
     ];
-    /** @nocollapse */
     McTreeNodeDef.propDecorators = {
-        "data": [{ type: Input, args: ['mcTreeNode',] },],
+        data: [{ type: Input, args: ['mcTreeNode',] }]
     };
     return McTreeNodeDef;
 }(CdkTreeNodeDef));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -74,10 +73,12 @@ var McTreeNodePadding = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ nodeLevel = (this._treeNode.data && this._tree.treeControl.getLevel)
+        /** @type {?} */
+        var nodeLevel = (this._treeNode.data && this._tree.treeControl.getLevel)
             ? this._tree.treeControl.getLevel(this._treeNode.data)
             : null;
-        var /** @type {?} */ level = this._level || nodeLevel;
+        /** @type {?} */
+        var level = this._level || nodeLevel;
         return level ? (level * this._indent) + this.leftPadding + "px" : this._baseLeftPadding + "px";
     };
     /**
@@ -96,17 +97,16 @@ var McTreeNodePadding = /** @class */ (function (_super) {
                     providers: [{ provide: CdkTreeNodePadding, useExisting: McTreeNodePadding }]
                 },] },
     ];
-    /** @nocollapse */
     McTreeNodePadding.propDecorators = {
-        "level": [{ type: Input, args: ['mcTreeNodePadding',] },],
-        "indent": [{ type: Input, args: ['mcTreeNodePaddingIndent',] },],
+        level: [{ type: Input, args: ['mcTreeNodePadding',] }],
+        indent: [{ type: Input, args: ['mcTreeNodePaddingIndent',] }]
     };
     return McTreeNodePadding;
 }(CdkTreeNodePadding));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Wrapper for the CdkTree node with Material design styles.
@@ -136,7 +136,8 @@ var McTreeNodeOption = /** @class */ (function (_super) {
          * @return {?}
          */
         function (value) {
-            var /** @type {?} */ newValue = toBoolean(value);
+            /** @type {?} */
+            var newValue = toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
             }
@@ -156,7 +157,8 @@ var McTreeNodeOption = /** @class */ (function (_super) {
          * @return {?}
          */
         function (value) {
-            var /** @type {?} */ isSelected = toBoolean(value);
+            /** @type {?} */
+            var isSelected = toBoolean(value);
             if (isSelected !== this._selected) {
                 this.setSelected(isSelected);
                 // this.treeSelection._reportValueChange();
@@ -260,17 +262,18 @@ var McTreeNodeOption = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McTreeNodeOption.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: McTreeSelection, decorators: [{ type: Inject, args: [forwardRef(function () { return McTreeSelection; }),] },] },
+        { type: ElementRef },
+        { type: McTreeSelection, decorators: [{ type: Inject, args: [forwardRef(function () { return McTreeSelection; }),] }] }
     ]; };
     McTreeNodeOption.propDecorators = {
-        "role": [{ type: Input },],
-        "disabled": [{ type: Input },],
-        "selected": [{ type: Input },],
+        role: [{ type: Input }],
+        disabled: [{ type: Input }],
+        selected: [{ type: Input }]
     };
     return McTreeNodeOption;
 }(CdkTreeNode));
-var /** @type {?} */ _McTreeSelectionBase = mixinTabIndex(mixinDisabled(CdkTree));
+/** @type {?} */
+var _McTreeSelectionBase = mixinTabIndex(mixinDisabled(CdkTree));
 var McTreeNavigationChange = /** @class */ (function () {
     function McTreeNavigationChange(source, option) {
         this.source = source;
@@ -313,7 +316,8 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function (rawValue) {
-            var /** @type {?} */ value = toBoolean(rawValue);
+            /** @type {?} */
+            var value = toBoolean(rawValue);
             if (this._disabled !== value) {
                 this._disabled = value;
                 if (this._disabled) {
@@ -336,7 +340,8 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (event) {
-        var /** @type {?} */ keyCode = event.keyCode;
+        /** @type {?} */
+        var keyCode = event.keyCode;
         switch (keyCode) {
             case LEFT_ARROW:
                 if (this._keyManager.activeItem) {
@@ -411,9 +416,11 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ focusedIndex = this._keyManager.activeItemIndex;
+        /** @type {?} */
+        var focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
-            var /** @type {?} */ focusedOption = this.options.toArray()[focusedIndex];
+            /** @type {?} */
+            var focusedOption = this.options.toArray()[focusedIndex];
             if (focusedOption && this._canUnselectLast(focusedOption)) {
                 focusedOption.toggle();
                 // Emit a change event because the focused option changed its state through user interaction.
@@ -439,12 +446,15 @@ var McTreeSelection = /** @class */ (function (_super) {
         if (dataDiffer === void 0) { dataDiffer = this._dataDiffer; }
         if (viewContainer === void 0) { viewContainer = this._nodeOutlet.viewContainer; }
         _super.prototype.renderNodeChanges.call(this, data, dataDiffer, viewContainer, parentData);
-        var /** @type {?} */ arrayOfInstances = [];
+        /** @type {?} */
+        var arrayOfInstances = [];
         viewContainer._embeddedViews.forEach(function (view) {
-            var /** @type {?} */ viewDef = view.def;
+            /** @type {?} */
+            var viewDef = view.def;
             viewDef.nodes.forEach(function (node) {
                 if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
-                    var /** @type {?} */ nodeData = view.nodes[node.nodeIndex];
+                    /** @type {?} */
+                    var nodeData = view.nodes[node.nodeIndex];
                     arrayOfInstances.push(/** @type {?} */ (nodeData.instance));
                 }
             });
@@ -520,27 +530,28 @@ var McTreeSelection = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McTreeSelection.ctorParameters = function () { return [
-        { type: IterableDiffers, },
-        { type: ChangeDetectorRef, },
-        { type: undefined, decorators: [{ type: Attribute, args: ['tabindex',] },] },
-        { type: undefined, decorators: [{ type: Attribute, args: ['multiple',] },] },
-        { type: undefined, decorators: [{ type: Attribute, args: ['auto-select',] },] },
+        { type: IterableDiffers },
+        { type: ChangeDetectorRef },
+        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
+        { type: String, decorators: [{ type: Attribute, args: ['multiple',] }] },
+        { type: String, decorators: [{ type: Attribute, args: ['auto-select',] }] }
     ]; };
     McTreeSelection.propDecorators = {
-        "_nodeOutlet": [{ type: ViewChild, args: [CdkTreeNodeOutlet,] },],
-        "options": [{ type: ContentChildren, args: [forwardRef(function () { return McTreeNodeOption; }),] },],
-        "disabled": [{ type: Input },],
-        "navigationChange": [{ type: Output },],
-        "selectionChange": [{ type: Output },],
+        _nodeOutlet: [{ type: ViewChild, args: [CdkTreeNodeOutlet,] }],
+        options: [{ type: ContentChildren, args: [forwardRef(function () { return McTreeNodeOption; }),] }],
+        disabled: [{ type: Input }],
+        navigationChange: [{ type: Output }],
+        selectionChange: [{ type: Output }]
     };
     return McTreeSelection;
 }(_McTreeSelectionBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-var /** @type {?} */ MC_TREE_DIRECTIVES = [
+/** @type {?} */
+var MC_TREE_DIRECTIVES = [
     McTreeNodeDef,
     McTreeNodePadding,
     McTreeSelection,
@@ -561,7 +572,7 @@ var McTreeModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Tree flattener to convert a normal type of node to node with children & level information.
@@ -656,12 +667,14 @@ McTreeFlattener = /** @class */ (function () {
      */
     function (node, level, resultNodes, parentMap) {
         var _this = this;
-        var /** @type {?} */ flatNode = this.transformFunction(node, level);
+        /** @type {?} */
+        var flatNode = this.transformFunction(node, level);
         resultNodes.push(flatNode);
         if (this.isExpandable(flatNode)) {
             this.getChildren(node).pipe(take(1)).subscribe(function (children) {
                 children.forEach(function (child, index) {
-                    var /** @type {?} */ childParentMap = parentMap.slice();
+                    /** @type {?} */
+                    var childParentMap = parentMap.slice();
                     childParentMap.push(index !== children.length - 1);
                     _this._flattenNode(child, level + 1, resultNodes, childParentMap);
                 });
@@ -690,7 +703,8 @@ McTreeFlattener = /** @class */ (function () {
      */
     function (structuredData) {
         var _this = this;
-        var /** @type {?} */ resultNodes = [];
+        /** @type {?} */
+        var resultNodes = [];
         structuredData.forEach(function (node) { return _this._flattenNode(node, 0, resultNodes, []); });
         return resultNodes;
     };
@@ -714,12 +728,15 @@ McTreeFlattener = /** @class */ (function () {
      */
     function (nodes, treeControl) {
         var _this = this;
-        var /** @type {?} */ results = [];
-        var /** @type {?} */ currentExpand = [];
+        /** @type {?} */
+        var results = [];
+        /** @type {?} */
+        var currentExpand = [];
         currentExpand[0] = true;
         nodes.forEach(function (node) {
-            var /** @type {?} */ expand = true;
-            for (var /** @type {?} */ i = 0; i <= _this.getLevel(node); i++) {
+            /** @type {?} */
+            var expand = true;
+            for (var i = 0; i <= _this.getLevel(node); i++) {
                 expand = expand && currentExpand[i];
             }
             if (expand) {
@@ -790,7 +807,8 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
      */
     function (collectionViewer) {
         var _this = this;
-        var /** @type {?} */ changes = [
+        /** @type {?} */
+        var changes = [
             collectionViewer.viewChange,
             /** @type {?} */ ((this.treeControl.expansionModel.onChange)),
             this._flattenedData
@@ -814,7 +832,7 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Data source for nested tree.
@@ -884,12 +902,12 @@ McTreeNestedDataSource = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeOption, _McTreeSelectionBase, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };

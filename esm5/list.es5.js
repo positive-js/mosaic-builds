@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Component for list-options of selection-list. Each list-option can automatically
@@ -46,7 +46,8 @@ var McListOption = /** @class */ (function () {
          * @return {?}
          */
         function (value) {
-            var /** @type {?} */ newValue = toBoolean(value);
+            /** @type {?} */
+            var newValue = toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
                 this._changeDetector.markForCheck();
@@ -67,7 +68,8 @@ var McListOption = /** @class */ (function () {
          * @return {?}
          */
         function (value) {
-            var /** @type {?} */ isSelected = toBoolean(value);
+            /** @type {?} */
+            var isSelected = toBoolean(value);
             if (isSelected !== this._selected) {
                 this.setSelected(isSelected);
                 this.listSelection._reportValueChange();
@@ -85,12 +87,8 @@ var McListOption = /** @class */ (function () {
     function () {
         var _this = this;
         if (this._selected) {
-            // List options that are selected at initialization can't be reported properly to the form
-            // control. This is because it takes some time until the selection-list knows about all
-            // available options. Also it can happen that the ControlValueAccessor has an initial value
-            // that should be used instead. Deferring the value change report to the next tick ensures
-            // that the form control value is not being overwritten.
-            var /** @type {?} */ wasSelected_1 = this._selected;
+            /** @type {?} */
+            var wasSelected_1 = this._selected;
             Promise.resolve().then(function () {
                 if (_this._selected || wasSelected_1) {
                     _this.selected = true;
@@ -245,21 +243,22 @@ var McListOption = /** @class */ (function () {
     ];
     /** @nocollapse */
     McListOption.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: ChangeDetectorRef, },
-        { type: McListSelection, decorators: [{ type: Inject, args: [forwardRef(function () { return McListSelection; }),] },] },
+        { type: ElementRef },
+        { type: ChangeDetectorRef },
+        { type: McListSelection, decorators: [{ type: Inject, args: [forwardRef(function () { return McListSelection; }),] }] }
     ]; };
     McListOption.propDecorators = {
-        "_lines": [{ type: ContentChildren, args: [McLine,] },],
-        "_text": [{ type: ViewChild, args: ['text',] },],
-        "checkboxPosition": [{ type: Input },],
-        "value": [{ type: Input },],
-        "disabled": [{ type: Input },],
-        "selected": [{ type: Input },],
+        _lines: [{ type: ContentChildren, args: [McLine,] }],
+        _text: [{ type: ViewChild, args: ['text',] }],
+        checkboxPosition: [{ type: Input }],
+        value: [{ type: Input }],
+        disabled: [{ type: Input }],
+        selected: [{ type: Input }]
     };
     return McListOption;
 }());
-var /** @type {?} */ MC_SELECTION_LIST_VALUE_ACCESSOR = {
+/** @type {?} */
+var MC_SELECTION_LIST_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(function () { return McListSelection; }),
     multi: true
@@ -276,7 +275,8 @@ var McListSelectionBase = /** @class */ (function () {
     }
     return McListSelectionBase;
 }());
-var /** @type {?} */ _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
+/** @type {?} */
+var _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
 var McListSelection = /** @class */ (function (_super) {
     __extends(McListSelection, _super);
     function McListSelection(_element, tabIndex, autoSelect, noUnselect, multiple) {
@@ -387,8 +387,10 @@ var McListSelection = /** @class */ (function (_super) {
     function (option) {
         this._keyManager.updateActiveItem(option);
         if (this.withShift && this.multiple) {
-            var /** @type {?} */ previousIndex_1 = this._keyManager.previousActiveItemIndex;
-            var /** @type {?} */ activeIndex_1 = this._keyManager.activeItemIndex;
+            /** @type {?} */
+            var previousIndex_1 = this._keyManager.previousActiveItemIndex;
+            /** @type {?} */
+            var activeIndex_1 = this._keyManager.activeItemIndex;
             if (previousIndex_1 < activeIndex_1) {
                 this.options.forEach(function (item, index) {
                     if (index >= previousIndex_1 && index <= activeIndex_1) {
@@ -493,9 +495,11 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ focusedIndex = this._keyManager.activeItemIndex;
+        /** @type {?} */
+        var focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
-            var /** @type {?} */ focusedOption = this.options.toArray()[focusedIndex];
+            /** @type {?} */
+            var focusedOption = this.options.toArray()[focusedIndex];
             if (focusedOption && this._canUnselectLast(focusedOption)) {
                 focusedOption.toggle();
                 // Emit a change event because the focused option changed its state through user interaction.
@@ -534,7 +538,8 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function (option) {
         if (option._hasFocus) {
-            var /** @type {?} */ optionIndex = this._getOptionIndex(option);
+            /** @type {?} */
+            var optionIndex = this._getOptionIndex(option);
             // Check whether the option is the last item
             if (optionIndex > 0) {
                 this._keyManager.setPreviousItemActive();
@@ -553,7 +558,8 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (event) {
-        var /** @type {?} */ keyCode = event.keyCode;
+        /** @type {?} */
+        var keyCode = event.keyCode;
         this.withShift = event.shiftKey;
         this.withCtrl = event.ctrlKey;
         switch (keyCode) {
@@ -684,23 +690,23 @@ var McListSelection = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McListSelection.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: undefined, decorators: [{ type: Attribute, args: ['tabindex',] },] },
-        { type: undefined, decorators: [{ type: Attribute, args: ['auto-select',] },] },
-        { type: undefined, decorators: [{ type: Attribute, args: ['no-unselect',] },] },
-        { type: undefined, decorators: [{ type: Attribute, args: ['multiple',] },] },
+        { type: ElementRef },
+        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
+        { type: String, decorators: [{ type: Attribute, args: ['auto-select',] }] },
+        { type: String, decorators: [{ type: Attribute, args: ['no-unselect',] }] },
+        { type: String, decorators: [{ type: Attribute, args: ['multiple',] }] }
     ]; };
     McListSelection.propDecorators = {
-        "options": [{ type: ContentChildren, args: [McListOption,] },],
-        "horizontal": [{ type: Input },],
-        "selectionChange": [{ type: Output },],
+        options: [{ type: ContentChildren, args: [McListOption,] }],
+        horizontal: [{ type: Input }],
+        selectionChange: [{ type: Output }]
     };
     return McListSelection;
 }(_McListSelectionMixinBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McListBase = /** @class */ (function () {
     function McListBase() {
@@ -803,17 +809,17 @@ var McListItem = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McListItem.ctorParameters = function () { return [
-        { type: ElementRef, },
+        { type: ElementRef }
     ]; };
     McListItem.propDecorators = {
-        "_lines": [{ type: ContentChildren, args: [McLine,] },],
+        _lines: [{ type: ContentChildren, args: [McLine,] }]
     };
     return McListItem;
 }(McListItemBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McListModule = /** @class */ (function () {
     function McListModule() {
@@ -846,12 +852,12 @@ var McListModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, _McListSelectionMixinBase, McListSelection };

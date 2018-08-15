@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McDivider {
     constructor() {
@@ -61,15 +61,14 @@ McDivider.decorators = [
                 preserveWhitespaces: false
             },] },
 ];
-/** @nocollapse */
 McDivider.propDecorators = {
-    "vertical": [{ type: Input },],
-    "inset": [{ type: Input },],
+    vertical: [{ type: Input }],
+    inset: [{ type: Input }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McDividerModule {
 }
@@ -91,12 +90,12 @@ McDividerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { McDivider, McDividerModule };

@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McButtonCSSStyler {
 }
@@ -72,10 +72,13 @@ class McIconButtonCSSStyler {
      * @return {?}
      */
     _addClassModificatorForIcons() {
-        const /** @type {?} */ twoIcons = 2;
-        const /** @type {?} */ icons = this.contentChildren.map((item) => item._elementRef.nativeElement);
+        /** @type {?} */
+        const twoIcons = 2;
+        /** @type {?} */
+        const icons = this.contentChildren.map((item) => item._elementRef.nativeElement);
         if (icons.length === 1) {
-            const /** @type {?} */ iconElement = icons[0];
+            /** @type {?} */
+            const iconElement = icons[0];
             if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
                 if (iconElement.nextSibling) {
                     iconElement.classList.add('mc-icon_left');
@@ -88,8 +91,10 @@ class McIconButtonCSSStyler {
             }
         }
         else if (icons.length === twoIcons) {
-            const /** @type {?} */ firstIconElement = icons[0];
-            const /** @type {?} */ secondIconElement = icons[1];
+            /** @type {?} */
+            const firstIconElement = icons[0];
+            /** @type {?} */
+            const secondIconElement = icons[1];
             firstIconElement.classList.add('mc-icon_left');
             secondIconElement.classList.add('mc-icon_right');
         }
@@ -106,7 +111,7 @@ McIconButtonCSSStyler.decorators = [
 ];
 /** @nocollapse */
 McIconButtonCSSStyler.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 class McButtonBase {
     /**
@@ -116,7 +121,8 @@ class McButtonBase {
         this._elementRef = _elementRef;
     }
 }
-const /** @type {?} */ _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
+/** @type {?} */
+const _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
 class McButton extends _McButtonMixinBase {
     /**
      * @param {?} elementRef
@@ -169,9 +175,9 @@ McButton.decorators = [
 ];
 /** @nocollapse */
 McButton.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Platform, },
-    { type: FocusMonitor, },
+    { type: ElementRef },
+    { type: Platform },
+    { type: FocusMonitor }
 ];
 class McAnchor extends McButton {
     /**
@@ -210,9 +216,9 @@ McAnchor.decorators = [
 ];
 /** @nocollapse */
 McAnchor.ctorParameters = () => [
-    { type: Platform, },
-    { type: FocusMonitor, },
-    { type: ElementRef, },
+    { type: Platform },
+    { type: FocusMonitor },
+    { type: ElementRef }
 ];
 class McIconButton extends McButton {
     /**
@@ -250,14 +256,14 @@ McIconButton.decorators = [
 ];
 /** @nocollapse */
 McIconButton.ctorParameters = () => [
-    { type: Platform, },
-    { type: FocusMonitor, },
-    { type: ElementRef, },
+    { type: Platform },
+    { type: FocusMonitor },
+    { type: ElementRef }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McButtonModule {
 }
@@ -295,12 +301,12 @@ McButtonModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { McButtonModule, McButtonCSSStyler, McXSButtonCSSStyler, McSMButtonCSSStyler, McLGButtonCSSStyler, McXLButtonCSSStyler, McIconButtonCSSStyler, McButtonBase, _McButtonMixinBase, McButton, McAnchor, McIconButton };

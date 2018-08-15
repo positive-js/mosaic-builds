@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McButtonCSSStyler = /** @class */ (function () {
     function McButtonCSSStyler() {
@@ -91,10 +91,13 @@ var McIconButtonCSSStyler = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ twoIcons = 2;
-        var /** @type {?} */ icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
+        /** @type {?} */
+        var twoIcons = 2;
+        /** @type {?} */
+        var icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
         if (icons.length === 1) {
-            var /** @type {?} */ iconElement = icons[0];
+            /** @type {?} */
+            var iconElement = icons[0];
             if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
                 if (iconElement.nextSibling) {
                     iconElement.classList.add('mc-icon_left');
@@ -107,8 +110,10 @@ var McIconButtonCSSStyler = /** @class */ (function () {
             }
         }
         else if (icons.length === twoIcons) {
-            var /** @type {?} */ firstIconElement = icons[0];
-            var /** @type {?} */ secondIconElement = icons[1];
+            /** @type {?} */
+            var firstIconElement = icons[0];
+            /** @type {?} */
+            var secondIconElement = icons[1];
             firstIconElement.classList.add('mc-icon_left');
             secondIconElement.classList.add('mc-icon_right');
         }
@@ -124,7 +129,7 @@ var McIconButtonCSSStyler = /** @class */ (function () {
     ];
     /** @nocollapse */
     McIconButtonCSSStyler.ctorParameters = function () { return [
-        { type: ElementRef, },
+        { type: ElementRef }
     ]; };
     return McIconButtonCSSStyler;
 }());
@@ -134,7 +139,8 @@ var McButtonBase = /** @class */ (function () {
     }
     return McButtonBase;
 }());
-var /** @type {?} */ _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
+/** @type {?} */
+var _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
 var McButton = /** @class */ (function (_super) {
     __extends(McButton, _super);
     function McButton(elementRef, _platform, _focusMonitor) {
@@ -186,9 +192,9 @@ var McButton = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McButton.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: Platform, },
-        { type: FocusMonitor, },
+        { type: ElementRef },
+        { type: Platform },
+        { type: FocusMonitor }
     ]; };
     return McButton;
 }(_McButtonMixinBase));
@@ -228,9 +234,9 @@ var McAnchor = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McAnchor.ctorParameters = function () { return [
-        { type: Platform, },
-        { type: FocusMonitor, },
-        { type: ElementRef, },
+        { type: Platform },
+        { type: FocusMonitor },
+        { type: ElementRef }
     ]; };
     return McAnchor;
 }(McButton));
@@ -269,16 +275,16 @@ var McIconButton = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McIconButton.ctorParameters = function () { return [
-        { type: Platform, },
-        { type: FocusMonitor, },
-        { type: ElementRef, },
+        { type: Platform },
+        { type: FocusMonitor },
+        { type: ElementRef }
     ]; };
     return McIconButton;
 }(McButton));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McButtonModule = /** @class */ (function () {
     function McButtonModule() {
@@ -319,12 +325,12 @@ var McButtonModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { McButtonModule, McButtonCSSStyler, McXSButtonCSSStyler, McSMButtonCSSStyler, McLGButtonCSSStyler, McXLButtonCSSStyler, McIconButtonCSSStyler, McButtonBase, _McButtonMixinBase, McButton, McAnchor, McIconButton };

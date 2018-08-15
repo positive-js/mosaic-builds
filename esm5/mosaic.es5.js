@@ -21,18 +21,19 @@ export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeOption, _McTr
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-var /** @type {?} */ VERSION = new Version('0.0.1');
+/** @type {?} */
+var VERSION = new Version('0.0.1');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { VERSION };

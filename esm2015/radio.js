@@ -15,8 +15,10 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 let nextUniqueId = 0;
 /** Change event object emitted by McRadio. */
 class McRadioChange {
-    constructor(/** The McRadioButton that emits the change event. */
-    source, /** The value of the McRadioButton. */
+    constructor(
+    /** The McRadioButton that emits the change event. */
+    source, 
+    /** The value of the McRadioButton. */
     value) {
         this.source = source;
         this.value = value;
@@ -42,17 +44,17 @@ class McRadioGroup extends _McRadioGroupMixinBase {
         super();
         this._changeDetector = _changeDetector;
         /**
-             * Event emitted when the group value changes.
-             * Change events are only emitted when the value changes due to user interaction with
-             * a radio button (the same behavior as `<input type-"radio">`).
-             */
+         * Event emitted when the group value changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * a radio button (the same behavior as `<input type-"radio">`).
+         */
         this.change = new EventEmitter();
         /**
-             * Selected value for group. Should equal the value of the selected radio button if there *is*
-             * a corresponding radio button with a matching value. If there is *not* such a corresponding
-             * radio button, this value persists to be applied in case a new radio button is added with a
-             * matching value.
-             */
+         * Selected value for group. Should equal the value of the selected radio button if there *is*
+         * a corresponding radio button with a matching value. If there is *not* such a corresponding
+         * radio button, this value persists to be applied in case a new radio button is added with a
+         * matching value.
+         */
         this._value = null;
         /** The HTML name attribute applied to radio buttons in this group. */
         this._name = `mc-radio-group-${nextUniqueId++}`;
@@ -69,9 +71,9 @@ class McRadioGroup extends _McRadioGroupMixinBase {
         /** The method to be called in order to update ngModel */
         this.controlValueAccessorChangeFn = () => { };
         /**
-             * onTouch function registered via registerOnTouch (ControlValueAccessor).
-             * @docs-private
-             */
+         * onTouch function registered via registerOnTouch (ControlValueAccessor).
+         * @docs-private
+         */
         this.onTouched = () => { };
     }
     /** Name of the radio button group. All radio buttons inside this group will use this name. */
@@ -123,9 +125,9 @@ class McRadioGroup extends _McRadioGroupMixinBase {
         this.markRadiosForCheck();
     }
     /**
-         * Initialize properties once content children are available.
-         * This allows us to propagate relevant attributes to associated buttons.
-         */
+     * Initialize properties once content children are available.
+     * This allows us to propagate relevant attributes to associated buttons.
+     */
     ngAfterContentInit() {
         // Mark this component as initialized in AfterContentInit because the initial value can
         // possibly be set by NgModel on McRadioGroup, and it is possible that the OnInit of the
@@ -133,9 +135,9 @@ class McRadioGroup extends _McRadioGroupMixinBase {
         this._isInitialized = true;
     }
     /**
-         * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
-         * radio buttons upon their blur.
-         */
+     * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
+     * radio buttons upon their blur.
+     */
     touch() {
         if (this.onTouched) {
             this.onTouched();
@@ -144,7 +146,7 @@ class McRadioGroup extends _McRadioGroupMixinBase {
     /** Dispatch change event with current selection and group value. */
     emitChangeEvent() {
         if (this._isInitialized) {
-            this.change.emit(new McRadioChange((this._selected), this._value));
+            this.change.emit(new McRadioChange(this._selected, this._value));
         }
     }
     markRadiosForCheck() {
@@ -153,33 +155,33 @@ class McRadioGroup extends _McRadioGroupMixinBase {
         }
     }
     /**
-         * Sets the model value. Implemented as part of ControlValueAccessor.
-         * @param value
-         */
+     * Sets the model value. Implemented as part of ControlValueAccessor.
+     * @param value
+     */
     writeValue(value) {
         this.value = value;
         this._changeDetector.markForCheck();
     }
     /**
-         * Registers a callback to be triggered when the model value changes.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
+     * Registers a callback to be triggered when the model value changes.
+     * Implemented as part of ControlValueAccessor.
+     * @param fn Callback to be registered.
+     */
     registerOnChange(fn) {
         this.controlValueAccessorChangeFn = fn;
     }
     /**
-         * Registers a callback to be triggered when the control is touched.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
+     * Registers a callback to be triggered when the control is touched.
+     * Implemented as part of ControlValueAccessor.
+     * @param fn Callback to be registered.
+     */
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
     /**
-         * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
-         * @param isDisabled Whether the control should be disabled.
-         */
+     * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
+     * @param isDisabled Whether the control should be disabled.
+     */
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
         this._changeDetector.markForCheck();
@@ -220,17 +222,17 @@ McRadioGroup.decorators = [
 ];
 /** @nocollapse */
 McRadioGroup.ctorParameters = () => [
-    { type: ChangeDetectorRef, },
+    { type: ChangeDetectorRef }
 ];
 McRadioGroup.propDecorators = {
-    "change": [{ type: Output },],
-    "_radios": [{ type: ContentChildren, args: [forwardRef(() => McRadioButton), { descendants: true },] },],
-    "name": [{ type: Input },],
-    "labelPosition": [{ type: Input },],
-    "value": [{ type: Input },],
-    "selected": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "required": [{ type: Input },],
+    change: [{ type: Output }],
+    _radios: [{ type: ContentChildren, args: [forwardRef(() => McRadioButton), { descendants: true },] }],
+    name: [{ type: Input }],
+    labelPosition: [{ type: Input }],
+    value: [{ type: Input }],
+    selected: [{ type: Input }],
+    disabled: [{ type: Input }],
+    required: [{ type: Input }]
 };
 // Boilerplate for applying mixins to McRadioButton.
 /** @docs-private */
@@ -250,10 +252,10 @@ class McRadioButton extends _McRadioButtonMixinBase {
         /** The unique ID for the radio button. */
         this.id = this._uniqueId;
         /**
-             * Event emitted when the checked state of this radio button changes.
-             * Change events are only emitted when the value changes due to user interaction with
-             * the radio button (the same behavior as `<input type-"radio">`).
-             */
+         * Event emitted when the checked state of this radio button changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * the radio button (the same behavior as `<input type-"radio">`).
+         */
         this.change = new EventEmitter();
         this.isFocused = false;
         /** Whether this radio is checked. */
@@ -349,10 +351,10 @@ class McRadioButton extends _McRadioButtonMixinBase {
     /** Focuses the radio button. */
     focus() { }
     /**
-         * Marks the radio button as needing checking for change detection.
-         * This method is exposed because the parent radio group will directly
-         * update bound properties of the radio button.
-         */
+     * Marks the radio button as needing checking for change detection.
+     * This method is exposed because the parent radio group will directly
+     * update bound properties of the radio button.
+     */
     markForCheck() {
         // When group value changes, the button will not be notified. Use `markForCheck` to explicit
         // update radio button's status
@@ -409,25 +411,25 @@ McRadioButton.decorators = [
 ];
 /** @nocollapse */
 McRadioButton.ctorParameters = () => [
-    { type: McRadioGroup, decorators: [{ type: Optional },] },
-    { type: ElementRef, },
-    { type: ChangeDetectorRef, },
-    { type: UniqueSelectionDispatcher, },
+    { type: McRadioGroup, decorators: [{ type: Optional }] },
+    { type: ElementRef },
+    { type: ChangeDetectorRef },
+    { type: UniqueSelectionDispatcher }
 ];
 McRadioButton.propDecorators = {
-    "id": [{ type: Input },],
-    "name": [{ type: Input },],
-    "ariaLabel": [{ type: Input, args: ['aria-label',] },],
-    "ariaLabelledby": [{ type: Input, args: ['aria-labelledby',] },],
-    "ariaDescribedby": [{ type: Input, args: ['aria-describedby',] },],
-    "checked": [{ type: Input },],
-    "value": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "required": [{ type: Input },],
-    "labelPosition": [{ type: Input },],
-    "_inputElement": [{ type: ViewChild, args: ['input',] },],
-    "change": [{ type: Output },],
-    "isFocused": [{ type: Input },],
+    id: [{ type: Input }],
+    name: [{ type: Input }],
+    ariaLabel: [{ type: Input, args: ['aria-label',] }],
+    ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
+    ariaDescribedby: [{ type: Input, args: ['aria-describedby',] }],
+    checked: [{ type: Input }],
+    value: [{ type: Input }],
+    disabled: [{ type: Input }],
+    required: [{ type: Input }],
+    labelPosition: [{ type: Input }],
+    _inputElement: [{ type: ViewChild, args: ['input',] }],
+    change: [{ type: Output }],
+    isFocused: [{ type: Input }]
 };
 
 class McRadioModule {

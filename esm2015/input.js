@@ -48,19 +48,19 @@ class McInput extends _McInputMixinBase {
         this._platform = _platform;
         this.ngControl = ngControl;
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
         this.focused = false;
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
         this.stateChanges = new Subject();
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
         this.controlType = 'mc-input';
         this._uid = `mc-input-${nextUniqueId++}`;
         this._disabled = false;
@@ -82,9 +82,9 @@ class McInput extends _McInputMixinBase {
         this.id = this.id;
     }
     /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
     get disabled() {
         if (this.ngControl && this.ngControl.disabled !== null) {
             return this.ngControl.disabled;
@@ -101,9 +101,9 @@ class McInput extends _McInputMixinBase {
         }
     }
     /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
     get id() {
         return this._id;
     }
@@ -111,9 +111,9 @@ class McInput extends _McInputMixinBase {
         this._id = value || this._uid;
     }
     /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
     get required() {
         return this._required;
     }
@@ -137,9 +137,9 @@ class McInput extends _McInputMixinBase {
     }
     // tslint:enable no-reserved-keywords
     /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
     get value() {
         return this._inputValueAccessor.value;
     }
@@ -188,16 +188,16 @@ class McInput extends _McInputMixinBase {
         // FormsModule or ReactiveFormsModule, because Angular forms also listens to input events.
     }
     /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
     get empty() {
         return !this._isNeverEmpty() && !this._elementRef.nativeElement.value && !this._isBadInput();
     }
     /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
     onContainerClick() {
         this.focus();
     }
@@ -247,22 +247,22 @@ McInput.decorators = [
 ];
 /** @nocollapse */
 McInput.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: Platform, },
-    { type: NgControl, decorators: [{ type: Optional }, { type: Self },] },
-    { type: NgForm, decorators: [{ type: Optional },] },
-    { type: FormGroupDirective, decorators: [{ type: Optional },] },
-    { type: ErrorStateMatcher, },
-    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [MC_INPUT_VALUE_ACCESSOR,] },] },
+    { type: ElementRef },
+    { type: Platform },
+    { type: NgControl, decorators: [{ type: Optional }, { type: Self }] },
+    { type: NgForm, decorators: [{ type: Optional }] },
+    { type: FormGroupDirective, decorators: [{ type: Optional }] },
+    { type: ErrorStateMatcher },
+    { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [MC_INPUT_VALUE_ACCESSOR,] }] }
 ];
 McInput.propDecorators = {
-    "errorStateMatcher": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "id": [{ type: Input },],
-    "placeholder": [{ type: Input },],
-    "required": [{ type: Input },],
-    "type": [{ type: Input },],
-    "value": [{ type: Input },],
+    errorStateMatcher: [{ type: Input }],
+    disabled: [{ type: Input }],
+    id: [{ type: Input }],
+    placeholder: [{ type: Input }],
+    required: [{ type: Input }],
+    type: [{ type: Input }],
+    value: [{ type: Input }]
 };
 class McInputMono {
 }

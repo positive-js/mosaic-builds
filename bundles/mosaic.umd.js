@@ -41,7 +41,7 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @param {?} val
@@ -58,20 +58,20 @@ function toBoolean(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-// Injection token that configures whether the Mosaic sanity checks are enabled.
-var /** @type {?} */ MC_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
+/** @type {?} */
+var MC_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
     factory: MC_SANITY_CHECKS_FACTORY
 });
@@ -137,10 +137,12 @@ var McCommonModule = /** @class */ (function () {
      */
     function () {
         if (this._document && typeof getComputedStyle === 'function') {
-            var /** @type {?} */ testElement = this._document.createElement('div');
+            /** @type {?} */
+            var testElement = this._document.createElement('div');
             testElement.classList.add('mc-theme-loaded-marker');
             this._document.body.appendChild(testElement);
-            var /** @type {?} */ computedStyle = getComputedStyle(testElement);
+            /** @type {?} */
+            var computedStyle = getComputedStyle(testElement);
             // In some situations, the computed style of the test element can be null. For example in
             // Firefox, the computed style is null if an application is running inside of a hidden iframe.
             // See: https://bugzilla.mozilla.org/show_bug.cgi?id=548397
@@ -160,14 +162,14 @@ var McCommonModule = /** @class */ (function () {
     ];
     /** @nocollapse */
     McCommonModule.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_SANITY_CHECKS,] },] },
+        { type: Boolean, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_SANITY_CHECKS,] }] }
     ]; };
     return McCommonModule;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -209,7 +211,7 @@ function mixinDisabled(base) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @enum {string} */
 var ThemePalette = {
@@ -252,7 +254,8 @@ function mixinColor(base, defaultColor) {
              * @return {?}
              */
             function (value) {
-                var /** @type {?} */ colorPalette = value || defaultColor;
+                /** @type {?} */
+                var colorPalette = value || defaultColor;
                 if (colorPalette !== this._color) {
                     if (this._color) {
                         this._elementRef.nativeElement.classList.remove("mc-" + this._color);
@@ -272,7 +275,7 @@ function mixinColor(base, defaultColor) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -316,7 +319,7 @@ function mixinTabIndex(base, defaultTabIndex) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Mixin to augment a directive with updateErrorState method.
@@ -352,11 +355,16 @@ function mixinErrorState(base) {
          * @return {?}
          */
         function () {
-            var /** @type {?} */ oldState = this.errorState;
-            var /** @type {?} */ parent = this._parentFormGroup || this._parentForm;
-            var /** @type {?} */ matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
-            var /** @type {?} */ control = this.ngControl ? /** @type {?} */ (this.ngControl.control) : null;
-            var /** @type {?} */ newState = matcher.isErrorState(control, parent);
+            /** @type {?} */
+            var oldState = this.errorState;
+            /** @type {?} */
+            var parent = this._parentFormGroup || this._parentForm;
+            /** @type {?} */
+            var matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
+            /** @type {?} */
+            var control = this.ngControl ? /** @type {?} */ (this.ngControl.control) : null;
+            /** @type {?} */
+            var newState = matcher.isErrorState(control, parent);
             if (newState !== oldState) {
                 this.errorState = newState;
                 this.stateChanges.next();
@@ -368,12 +376,12 @@ function mixinErrorState(base) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Shared directive to count lines inside a text area, such as a list item.
@@ -472,7 +480,7 @@ var McLineModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Error state matcher that matches when a control is invalid and dirty.
@@ -526,7 +534,7 @@ var ErrorStateMatcher = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Component that shows a simplified checkbox without including any kind of "real" checkbox.
@@ -564,17 +572,16 @@ var McPseudoCheckbox = /** @class */ (function () {
                     }
                 },] },
     ];
-    /** @nocollapse */
     McPseudoCheckbox.propDecorators = {
-        "state": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
+        state: [{ type: core.Input }],
+        disabled: [{ type: core.Input }]
     };
     return McPseudoCheckbox;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McPseudoCheckboxModule = /** @class */ (function () {
     function McPseudoCheckboxModule() {
@@ -590,7 +597,7 @@ var McPseudoCheckboxModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconCSSStyler = /** @class */ (function () {
     function McIconCSSStyler() {
@@ -609,7 +616,8 @@ var McIconBase = /** @class */ (function () {
     }
     return McIconBase;
 }());
-var /** @type {?} */ _McIconMixinBase = mixinColor(McIconBase);
+/** @type {?} */
+var _McIconMixinBase = mixinColor(McIconBase);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {
@@ -637,15 +645,15 @@ var McIcon = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McIcon.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['mc-icon',] },] },
+        { type: core.ElementRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
     ]; };
     return McIcon;
 }(_McIconMixinBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconModule = /** @class */ (function () {
     function McIconModule() {
@@ -672,7 +680,7 @@ var McIconModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McButtonCSSStyler = /** @class */ (function () {
     function McButtonCSSStyler() {
@@ -749,10 +757,13 @@ var McIconButtonCSSStyler = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ twoIcons = 2;
-        var /** @type {?} */ icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
+        /** @type {?} */
+        var twoIcons = 2;
+        /** @type {?} */
+        var icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
         if (icons.length === 1) {
-            var /** @type {?} */ iconElement = icons[0];
+            /** @type {?} */
+            var iconElement = icons[0];
             if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
                 if (iconElement.nextSibling) {
                     iconElement.classList.add('mc-icon_left');
@@ -765,8 +776,10 @@ var McIconButtonCSSStyler = /** @class */ (function () {
             }
         }
         else if (icons.length === twoIcons) {
-            var /** @type {?} */ firstIconElement = icons[0];
-            var /** @type {?} */ secondIconElement = icons[1];
+            /** @type {?} */
+            var firstIconElement = icons[0];
+            /** @type {?} */
+            var secondIconElement = icons[1];
             firstIconElement.classList.add('mc-icon_left');
             secondIconElement.classList.add('mc-icon_right');
         }
@@ -782,7 +795,7 @@ var McIconButtonCSSStyler = /** @class */ (function () {
     ];
     /** @nocollapse */
     McIconButtonCSSStyler.ctorParameters = function () { return [
-        { type: core.ElementRef, },
+        { type: core.ElementRef }
     ]; };
     return McIconButtonCSSStyler;
 }());
@@ -792,7 +805,8 @@ var McButtonBase = /** @class */ (function () {
     }
     return McButtonBase;
 }());
-var /** @type {?} */ _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
+/** @type {?} */
+var _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
 var McButton = /** @class */ (function (_super) {
     __extends(McButton, _super);
     function McButton(elementRef, _platform, _focusMonitor) {
@@ -844,9 +858,9 @@ var McButton = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McButton.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: platform.Platform, },
-        { type: a11y.FocusMonitor, },
+        { type: core.ElementRef },
+        { type: platform.Platform },
+        { type: a11y.FocusMonitor }
     ]; };
     return McButton;
 }(_McButtonMixinBase));
@@ -886,9 +900,9 @@ var McAnchor = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McAnchor.ctorParameters = function () { return [
-        { type: platform.Platform, },
-        { type: a11y.FocusMonitor, },
-        { type: core.ElementRef, },
+        { type: platform.Platform },
+        { type: a11y.FocusMonitor },
+        { type: core.ElementRef }
     ]; };
     return McAnchor;
 }(McButton));
@@ -927,16 +941,16 @@ var McIconButton = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McIconButton.ctorParameters = function () { return [
-        { type: platform.Platform, },
-        { type: a11y.FocusMonitor, },
-        { type: core.ElementRef, },
+        { type: platform.Platform },
+        { type: a11y.FocusMonitor },
+        { type: core.ElementRef }
     ]; };
     return McIconButton;
 }(McButton));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McButtonModule = /** @class */ (function () {
     function McButtonModule() {
@@ -996,15 +1010,7 @@ var MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
  * Represents the different states that require custom transitions between them.
  * @docs-private
  */
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
 
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
 (function (TransitionCheckState) {
     /** The initial state of the component before any user interaction. */
     TransitionCheckState[TransitionCheckState["Init"] = 0] = "Init";
@@ -1016,18 +1022,14 @@ var MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     TransitionCheckState[TransitionCheckState["Indeterminate"] = 3] = "Indeterminate";
 })(exports.TransitionCheckState || (exports.TransitionCheckState = {}));
 /** Change event object emitted by McCheckbox. */
-var   /** Change event object emitted by McCheckbox. */
-McCheckboxChange = /** @class */ (function () {
+var McCheckboxChange = /** @class */ (function () {
     function McCheckboxChange() {
     }
     return McCheckboxChange;
 }());
 // Boilerplate for applying mixins to McCheckbox.
 /** @docs-private */
-var   
-// Boilerplate for applying mixins to McCheckbox.
-/** @docs-private */
-McCheckboxBase = /** @class */ (function () {
+var McCheckboxBase = /** @class */ (function () {
     function McCheckboxBase(_elementRef) {
         this._elementRef = _elementRef;
     }
@@ -1049,13 +1051,13 @@ var McCheckbox = /** @class */ (function (_super) {
         _this._focusMonitor = _focusMonitor;
         _this._clickAction = _clickAction;
         /**
-             * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will
-             * take precedence so this may be omitted.
-             */
+         * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will
+         * take precedence so this may be omitted.
+         */
         _this.ariaLabel = '';
         /**
-             * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-             */
+         * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+         */
         _this.ariaLabelledby = null;
         _this._uniqueId = "mc-checkbox-" + ++nextUniqueId;
         /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
@@ -1069,9 +1071,9 @@ var McCheckbox = /** @class */ (function (_super) {
         /** Event emitted when the checkbox's `indeterminate` value changes. */
         _this.indeterminateChange = new core.EventEmitter();
         /**
-             * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-             * @docs-private
-             */
+         * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+         * @docs-private
+         */
         _this._onTouched = function () {
         };
         _this._currentAnimationClass = '';
@@ -1086,16 +1088,15 @@ var McCheckbox = /** @class */ (function (_super) {
     }
     Object.defineProperty(McCheckbox.prototype, "inputId", {
         /** Returns the unique id for the visual hidden input. */
-        get: /** Returns the unique id for the visual hidden input. */
-        function () {
+        get: function () {
             return (this.id || this._uniqueId) + "-input";
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McCheckbox.prototype, "required", {
-        get: /** Whether the checkbox is required. */
-        function () {
+        /** Whether the checkbox is required. */
+        get: function () {
             return this._required;
         },
         set: function (value) {
@@ -1114,10 +1115,10 @@ var McCheckbox = /** @class */ (function (_super) {
         this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
     };
     Object.defineProperty(McCheckbox.prototype, "checked", {
-        get: /**
-             * Whether the checkbox is checked.
-             */
-        function () {
+        /**
+         * Whether the checkbox is checked.
+         */
+        get: function () {
             return this._checked;
         },
         set: function (value) {
@@ -1130,11 +1131,11 @@ var McCheckbox = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McCheckbox.prototype, "disabled", {
-        get: /**
-             * Whether the checkbox is disabled. This fully overrides the implementation provided by
-             * mixinDisabled, but the mixin is still required because mixinTabIndex requires it.
-             */
-        function () {
+        /**
+         * Whether the checkbox is disabled. This fully overrides the implementation provided by
+         * mixinDisabled, but the mixin is still required because mixinTabIndex requires it.
+         */
+        get: function () {
             return this._disabled;
         },
         set: function (value) {
@@ -1147,13 +1148,13 @@ var McCheckbox = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McCheckbox.prototype, "indeterminate", {
-        get: /**
-             * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
-             * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
-             * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
-             * set to false.
-             */
-        function () {
+        /**
+         * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
+         * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
+         * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
+         * set to false.
+         */
+        get: function () {
             return this._indeterminate;
         },
         set: function (value) {
@@ -1173,40 +1174,26 @@ var McCheckbox = /** @class */ (function (_super) {
         configurable: true
     });
     /** Method being called whenever the label text changes. */
-    /** Method being called whenever the label text changes. */
-    McCheckbox.prototype._onLabelTextChange = /** Method being called whenever the label text changes. */
-    function () {
+    McCheckbox.prototype._onLabelTextChange = function () {
         // This method is getting called whenever the label of the checkbox changes.
         // Since the checkbox uses the OnPush strategy we need to notify it about the change
         // that has been recognized by the cdkObserveContent directive.
         this._changeDetectorRef.markForCheck();
     };
     // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.writeValue = 
-    // Implemented as part of ControlValueAccessor.
-    function (value) {
+    McCheckbox.prototype.writeValue = function (value) {
         this.checked = !!value;
     };
     // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.registerOnChange = 
-    // Implemented as part of ControlValueAccessor.
-    function (fn) {
+    McCheckbox.prototype.registerOnChange = function (fn) {
         this._controlValueAccessorChangeFn = fn;
     };
     // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.registerOnTouched = 
-    // Implemented as part of ControlValueAccessor.
-    function (fn) {
+    McCheckbox.prototype.registerOnTouched = function (fn) {
         this._onTouched = fn;
     };
     // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.setDisabledState = 
-    // Implemented as part of ControlValueAccessor.
-    function (isDisabled) {
+    McCheckbox.prototype.setDisabledState = function (isDisabled) {
         this.disabled = isDisabled;
     };
     McCheckbox.prototype._getAriaChecked = function () {
@@ -1234,17 +1221,13 @@ var McCheckbox = /** @class */ (function (_super) {
         this.change.emit(event);
     };
     /** Function is called whenever the focus changes for the input element. */
-    /** Function is called whenever the focus changes for the input element. */
-    McCheckbox.prototype._onInputFocusChange = /** Function is called whenever the focus changes for the input element. */
-    function (focusOrigin) {
+    McCheckbox.prototype._onInputFocusChange = function (focusOrigin) {
         if (focusOrigin) {
             this._onTouched();
         }
     };
     /** Toggles the `checked` state of the checkbox. */
-    /** Toggles the `checked` state of the checkbox. */
-    McCheckbox.prototype.toggle = /** Toggles the `checked` state of the checkbox. */
-    function () {
+    McCheckbox.prototype.toggle = function () {
         this.checked = !this.checked;
     };
     /**
@@ -1254,21 +1237,7 @@ var McCheckbox = /** @class */ (function (_super) {
      *   indeterminate checkbox is clicked.
      * @param event
      */
-    /**
-         * Event handler for checkbox input element.
-         * Toggles checked state if element is not disabled.
-         * Do not toggle on (change) event since IE doesn't fire change event when
-         *   indeterminate checkbox is clicked.
-         * @param event
-         */
-    McCheckbox.prototype._onInputClick = /**
-         * Event handler for checkbox input element.
-         * Toggles checked state if element is not disabled.
-         * Do not toggle on (change) event since IE doesn't fire change event when
-         *   indeterminate checkbox is clicked.
-         * @param event
-         */
-    function (event) {
+    McCheckbox.prototype._onInputClick = function (event) {
         var _this = this;
         // We have to stop propagation for click events on the visual hidden input element.
         // By default, when a user clicks on a label element, a generated click event will be
@@ -1302,9 +1271,7 @@ var McCheckbox = /** @class */ (function (_super) {
         }
     };
     /** Focuses the checkbox. */
-    /** Focuses the checkbox. */
-    McCheckbox.prototype.focus = /** Focuses the checkbox. */
-    function () {
+    McCheckbox.prototype.focus = function () {
         this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
     };
     McCheckbox.prototype._onInteractionEvent = function (event) {
@@ -1336,26 +1303,26 @@ var McCheckbox = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McCheckbox.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: core.ChangeDetectorRef, },
-        { type: a11y.FocusMonitor, },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['tabindex',] },] },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_CHECKBOX_CLICK_ACTION,] },] },
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef },
+        { type: a11y.FocusMonitor },
+        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_CHECKBOX_CLICK_ACTION,] }] }
     ]; };
     McCheckbox.propDecorators = {
-        "ariaLabel": [{ type: core.Input, args: ['aria-label',] },],
-        "ariaLabelledby": [{ type: core.Input, args: ['aria-labelledby',] },],
-        "id": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
-        "labelPosition": [{ type: core.Input },],
-        "name": [{ type: core.Input },],
-        "change": [{ type: core.Output },],
-        "indeterminateChange": [{ type: core.Output },],
-        "value": [{ type: core.Input },],
-        "_inputElement": [{ type: core.ViewChild, args: ['input',] },],
-        "checked": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "indeterminate": [{ type: core.Input },],
+        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
+        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
+        id: [{ type: core.Input }],
+        required: [{ type: core.Input }],
+        labelPosition: [{ type: core.Input }],
+        name: [{ type: core.Input }],
+        change: [{ type: core.Output }],
+        indeterminateChange: [{ type: core.Output }],
+        value: [{ type: core.Input }],
+        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
+        checked: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        indeterminate: [{ type: core.Input }]
     };
     return McCheckbox;
 }(_McCheckboxMixinBase));
@@ -1400,7 +1367,7 @@ var McCheckboxModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McDivider = /** @class */ (function () {
     function McDivider() {
@@ -1408,6 +1375,7 @@ var McDivider = /** @class */ (function () {
         this._inset = false;
     }
     Object.defineProperty(McDivider.prototype, "vertical", {
+        // Whether the divider is vertically aligned.
         get: /**
          * @return {?}
          */
@@ -1425,6 +1393,7 @@ var McDivider = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(McDivider.prototype, "inset", {
+        // Whether the divider is an inset divider.
         get: /**
          * @return {?}
          */
@@ -1458,17 +1427,16 @@ var McDivider = /** @class */ (function () {
                     preserveWhitespaces: false
                 },] },
     ];
-    /** @nocollapse */
     McDivider.propDecorators = {
-        "vertical": [{ type: core.Input },],
-        "inset": [{ type: core.Input },],
+        vertical: [{ type: core.Input }],
+        inset: [{ type: core.Input }]
     };
     return McDivider;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McDividerModule = /** @class */ (function () {
     function McDividerModule() {
@@ -1504,8 +1472,7 @@ var McCleaner = /** @class */ (function () {
 }());
 
 /** An interface which allows a control to work inside of a `MсFormField`. */
-var   /** An interface which allows a control to work inside of a `MсFormField`. */
-McFormFieldControl = /** @class */ (function () {
+var McFormFieldControl = /** @class */ (function () {
     function McFormFieldControl() {
     }
     return McFormFieldControl;
@@ -1529,9 +1496,8 @@ var McHint = /** @class */ (function () {
                     }
                 },] },
     ];
-    /** @nocollapse */
     McHint.propDecorators = {
-        "id": [{ type: core.Input },],
+        id: [{ type: core.Input }]
     };
     return McHint;
 }());
@@ -1615,16 +1581,12 @@ var McFormField = /** @class */ (function (_super) {
         }
     };
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    McFormField.prototype._shouldForward = /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    function (prop) {
+    McFormField.prototype._shouldForward = function (prop) {
         var ngControl = this._control ? this._control.ngControl : null;
         return ngControl && ngControl[prop];
     };
     /** Throws an error if the form field's control is missing. */
-    /** Throws an error if the form field's control is missing. */
-    McFormField.prototype._validateControlChild = /** Throws an error if the form field's control is missing. */
-    function () {
+    McFormField.prototype._validateControlChild = function () {
         if (!this._control) {
             throw getMcFormFieldMissingControlError();
         }
@@ -1699,15 +1661,15 @@ var McFormField = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McFormField.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: core.ChangeDetectorRef, },
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef }
     ]; };
     McFormField.propDecorators = {
-        "_control": [{ type: core.ContentChild, args: [McFormFieldControl,] },],
-        "_hint": [{ type: core.ContentChildren, args: [McHint,] },],
-        "_suffix": [{ type: core.ContentChildren, args: [McSuffix,] },],
-        "_prefix": [{ type: core.ContentChildren, args: [McPrefix,] },],
-        "_cleaner": [{ type: core.ContentChildren, args: [McCleaner,] },],
+        _control: [{ type: core.ContentChild, args: [McFormFieldControl,] }],
+        _hint: [{ type: core.ContentChildren, args: [McHint,] }],
+        _suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
+        _prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
+        _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }]
     };
     return McFormField;
 }(McFormFieldBase));
@@ -1787,19 +1749,19 @@ var McInput = /** @class */ (function (_super) {
         _this._platform = _platform;
         _this.ngControl = ngControl;
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
         _this.focused = false;
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
         _this.stateChanges = new rxjs.Subject();
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
         _this.controlType = 'mc-input';
         _this._uid = "mc-input-" + nextUniqueId$2++;
         _this._disabled = false;
@@ -1815,21 +1777,18 @@ var McInput = /** @class */ (function (_super) {
         ].filter(function (t) { return platform.getSupportedInputTypes().has(t); });
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
-        // If no input value accessor was explicitly specified, use the element as the input value
-        // accessor.
         _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
         _this._previousNativeValue = _this.value;
-        // Force setter to be called in case id was not specified.
         // Force setter to be called in case id was not specified.
         _this.id = _this.id;
         return _this;
     }
     Object.defineProperty(McInput.prototype, "disabled", {
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: function () {
             if (this.ngControl && this.ngControl.disabled !== null) {
                 return this.ngControl.disabled;
             }
@@ -1848,11 +1807,11 @@ var McInput = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McInput.prototype, "id", {
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: function () {
             return this._id;
         },
         set: function (value) {
@@ -1862,11 +1821,11 @@ var McInput = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McInput.prototype, "required", {
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: function () {
             return this._required;
         },
         set: function (value) {
@@ -1876,10 +1835,9 @@ var McInput = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McInput.prototype, "type", {
-        get: 
         // tslint:disable no-reserved-keywords
         /** Input type of the element. */
-        function () {
+        get: function () {
             return this._type;
         },
         set: function (value) {
@@ -1896,13 +1854,12 @@ var McInput = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McInput.prototype, "value", {
-        get: 
         // tslint:enable no-reserved-keywords
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: function () {
             return this._inputValueAccessor.value;
         },
         set: function (value) {
@@ -1933,15 +1890,11 @@ var McInput = /** @class */ (function (_super) {
         this._dirtyCheckNativeValue();
     };
     /** Focuses the input. */
-    /** Focuses the input. */
-    McInput.prototype.focus = /** Focuses the input. */
-    function () {
+    McInput.prototype.focus = function () {
         this._elementRef.nativeElement.focus();
     };
     /** Callback for the cases where the focused state of the input changes. */
-    /** Callback for the cases where the focused state of the input changes. */
-    McInput.prototype._focusChanged = /** Callback for the cases where the focused state of the input changes. */
-    function (isFocused) {
+    McInput.prototype._focusChanged = function (isFocused) {
         if (isFocused !== this.focused) {
             this.focused = isFocused;
             this.stateChanges.next();
@@ -1961,11 +1914,7 @@ var McInput = /** @class */ (function (_super) {
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+        get: function () {
             return !this._isNeverEmpty() && !this._elementRef.nativeElement.value && !this._isBadInput();
         },
         enumerable: true,
@@ -1975,21 +1924,11 @@ var McInput = /** @class */ (function (_super) {
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
-    McInput.prototype.onContainerClick = /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
-    function () {
+    McInput.prototype.onContainerClick = function () {
         this.focus();
     };
     /** Does some manual dirty checking on the native input `value` property. */
-    /** Does some manual dirty checking on the native input `value` property. */
-    McInput.prototype._dirtyCheckNativeValue = /** Does some manual dirty checking on the native input `value` property. */
-    function () {
+    McInput.prototype._dirtyCheckNativeValue = function () {
         var newValue = this.value;
         if (this._previousNativeValue !== newValue) {
             this._previousNativeValue = newValue;
@@ -1997,23 +1936,17 @@ var McInput = /** @class */ (function (_super) {
         }
     };
     /** Make sure the input is a supported type. */
-    /** Make sure the input is a supported type. */
-    McInput.prototype._validateType = /** Make sure the input is a supported type. */
-    function () {
+    McInput.prototype._validateType = function () {
         if (MC_INPUT_INVALID_TYPES.indexOf(this._type) > -1) {
             throw getMcInputUnsupportedTypeError(this._type);
         }
     };
     /** Checks whether the input type is one of the types that are never empty. */
-    /** Checks whether the input type is one of the types that are never empty. */
-    McInput.prototype._isNeverEmpty = /** Checks whether the input type is one of the types that are never empty. */
-    function () {
+    McInput.prototype._isNeverEmpty = function () {
         return this._neverEmptyInputTypes.indexOf(this._type) > -1;
     };
     /** Checks whether the input is invalid based on the native validation. */
-    /** Checks whether the input is invalid based on the native validation. */
-    McInput.prototype._isBadInput = /** Checks whether the input is invalid based on the native validation. */
-    function () {
+    McInput.prototype._isBadInput = function () {
         // The `validity` property won't be present on platform-server.
         var validity = this._elementRef.nativeElement.validity;
         return validity && validity.badInput;
@@ -2039,22 +1972,22 @@ var McInput = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McInput.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: platform.Platform, },
-        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self },] },
-        { type: forms.NgForm, decorators: [{ type: core.Optional },] },
-        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional },] },
-        { type: ErrorStateMatcher, },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_INPUT_VALUE_ACCESSOR,] },] },
+        { type: core.ElementRef },
+        { type: platform.Platform },
+        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
+        { type: forms.NgForm, decorators: [{ type: core.Optional }] },
+        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
+        { type: ErrorStateMatcher },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_INPUT_VALUE_ACCESSOR,] }] }
     ]; };
     McInput.propDecorators = {
-        "errorStateMatcher": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "id": [{ type: core.Input },],
-        "placeholder": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
-        "type": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
+        errorStateMatcher: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        id: [{ type: core.Input }],
+        placeholder: [{ type: core.Input }],
+        required: [{ type: core.Input }],
+        type: [{ type: core.Input }],
+        value: [{ type: core.Input }]
     };
     return McInput;
 }(_McInputMixinBase));
@@ -2086,7 +2019,7 @@ var McInputModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Component for list-options of selection-list. Each list-option can automatically
@@ -2116,7 +2049,8 @@ var McListOption = /** @class */ (function () {
          * @return {?}
          */
         function (value) {
-            var /** @type {?} */ newValue = toBoolean(value);
+            /** @type {?} */
+            var newValue = toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
                 this._changeDetector.markForCheck();
@@ -2137,7 +2071,8 @@ var McListOption = /** @class */ (function () {
          * @return {?}
          */
         function (value) {
-            var /** @type {?} */ isSelected = toBoolean(value);
+            /** @type {?} */
+            var isSelected = toBoolean(value);
             if (isSelected !== this._selected) {
                 this.setSelected(isSelected);
                 this.listSelection._reportValueChange();
@@ -2155,12 +2090,8 @@ var McListOption = /** @class */ (function () {
     function () {
         var _this = this;
         if (this._selected) {
-            // List options that are selected at initialization can't be reported properly to the form
-            // control. This is because it takes some time until the selection-list knows about all
-            // available options. Also it can happen that the ControlValueAccessor has an initial value
-            // that should be used instead. Deferring the value change report to the next tick ensures
-            // that the form control value is not being overwritten.
-            var /** @type {?} */ wasSelected_1 = this._selected;
+            /** @type {?} */
+            var wasSelected_1 = this._selected;
             Promise.resolve().then(function () {
                 if (_this._selected || wasSelected_1) {
                     _this.selected = true;
@@ -2315,21 +2246,22 @@ var McListOption = /** @class */ (function () {
     ];
     /** @nocollapse */
     McListOption.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: core.ChangeDetectorRef, },
-        { type: McListSelection, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McListSelection; }),] },] },
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef },
+        { type: McListSelection, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McListSelection; }),] }] }
     ]; };
     McListOption.propDecorators = {
-        "_lines": [{ type: core.ContentChildren, args: [McLine,] },],
-        "_text": [{ type: core.ViewChild, args: ['text',] },],
-        "checkboxPosition": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "selected": [{ type: core.Input },],
+        _lines: [{ type: core.ContentChildren, args: [McLine,] }],
+        _text: [{ type: core.ViewChild, args: ['text',] }],
+        checkboxPosition: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        selected: [{ type: core.Input }]
     };
     return McListOption;
 }());
-var /** @type {?} */ MC_SELECTION_LIST_VALUE_ACCESSOR = {
+/** @type {?} */
+var MC_SELECTION_LIST_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return McListSelection; }),
     multi: true
@@ -2346,7 +2278,8 @@ var McListSelectionBase = /** @class */ (function () {
     }
     return McListSelectionBase;
 }());
-var /** @type {?} */ _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
+/** @type {?} */
+var _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
 var McListSelection = /** @class */ (function (_super) {
     __extends(McListSelection, _super);
     function McListSelection(_element, tabIndex, autoSelect, noUnselect, multiple) {
@@ -2457,8 +2390,10 @@ var McListSelection = /** @class */ (function (_super) {
     function (option) {
         this._keyManager.updateActiveItem(option);
         if (this.withShift && this.multiple) {
-            var /** @type {?} */ previousIndex_1 = this._keyManager.previousActiveItemIndex;
-            var /** @type {?} */ activeIndex_1 = this._keyManager.activeItemIndex;
+            /** @type {?} */
+            var previousIndex_1 = this._keyManager.previousActiveItemIndex;
+            /** @type {?} */
+            var activeIndex_1 = this._keyManager.activeItemIndex;
             if (previousIndex_1 < activeIndex_1) {
                 this.options.forEach(function (item, index) {
                     if (index >= previousIndex_1 && index <= activeIndex_1) {
@@ -2563,9 +2498,11 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ focusedIndex = this._keyManager.activeItemIndex;
+        /** @type {?} */
+        var focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
-            var /** @type {?} */ focusedOption = this.options.toArray()[focusedIndex];
+            /** @type {?} */
+            var focusedOption = this.options.toArray()[focusedIndex];
             if (focusedOption && this._canUnselectLast(focusedOption)) {
                 focusedOption.toggle();
                 // Emit a change event because the focused option changed its state through user interaction.
@@ -2604,7 +2541,8 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function (option) {
         if (option._hasFocus) {
-            var /** @type {?} */ optionIndex = this._getOptionIndex(option);
+            /** @type {?} */
+            var optionIndex = this._getOptionIndex(option);
             // Check whether the option is the last item
             if (optionIndex > 0) {
                 this._keyManager.setPreviousItemActive();
@@ -2623,7 +2561,8 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (event) {
-        var /** @type {?} */ keyCode = event.keyCode;
+        /** @type {?} */
+        var keyCode = event.keyCode;
         this.withShift = event.shiftKey;
         this.withCtrl = event.ctrlKey;
         switch (keyCode) {
@@ -2754,23 +2693,23 @@ var McListSelection = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McListSelection.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['tabindex',] },] },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['auto-select',] },] },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['no-unselect',] },] },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['multiple',] },] },
+        { type: core.ElementRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
+        { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
+        { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] },
+        { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] }
     ]; };
     McListSelection.propDecorators = {
-        "options": [{ type: core.ContentChildren, args: [McListOption,] },],
-        "horizontal": [{ type: core.Input },],
-        "selectionChange": [{ type: core.Output },],
+        options: [{ type: core.ContentChildren, args: [McListOption,] }],
+        horizontal: [{ type: core.Input }],
+        selectionChange: [{ type: core.Output }]
     };
     return McListSelection;
 }(_McListSelectionMixinBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McListBase = /** @class */ (function () {
     function McListBase() {
@@ -2873,17 +2812,17 @@ var McListItem = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McListItem.ctorParameters = function () { return [
-        { type: core.ElementRef, },
+        { type: core.ElementRef }
     ]; };
     McListItem.propDecorators = {
-        "_lines": [{ type: core.ContentChildren, args: [McLine,] },],
+        _lines: [{ type: core.ContentChildren, args: [McLine,] }]
     };
     return McListItem;
 }(McListItemBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McListModule = /** @class */ (function () {
     function McListModule() {
@@ -2916,7 +2855,7 @@ var McListModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconCSSStyler$1 = /** @class */ (function () {
     function McIconCSSStyler() {
@@ -2935,7 +2874,8 @@ var McIconBase$1 = /** @class */ (function () {
     }
     return McIconBase;
 }());
-var /** @type {?} */ _McIconMixinBase$1 = mixinColor(McIconBase$1);
+/** @type {?} */
+var _McIconMixinBase$1 = mixinColor(McIconBase$1);
 var McIcon$1 = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {
@@ -2963,15 +2903,15 @@ var McIcon$1 = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McIcon.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['mc-icon',] },] },
+        { type: core.ElementRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
     ]; };
     return McIcon;
 }(_McIconMixinBase$1));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconModule$1 = /** @class */ (function () {
     function McIconModule() {
@@ -2998,16 +2938,24 @@ var McIconModule$1 = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-var /** @type {?} */ COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
-var /** @type {?} */ MC_ICON = 'mc-icon';
-var /** @type {?} */ MC_NAVBAR = 'mc-navbar';
-var /** @type {?} */ MC_NAVBAR_CONTAINER = 'mc-navbar-container';
-var /** @type {?} */ MC_NAVBAR_ITEM = 'mc-navbar-item';
-var /** @type {?} */ MC_NAVBAR_BRAND = 'mc-navbar-brand';
-var /** @type {?} */ MC_NAVBAR_TITLE = 'mc-navbar-title';
-var /** @type {?} */ MC_NAVBAR_LOGO = 'mc-navbar-logo';
+/** @type {?} */
+var COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
+/** @type {?} */
+var MC_ICON = 'mc-icon';
+/** @type {?} */
+var MC_NAVBAR = 'mc-navbar';
+/** @type {?} */
+var MC_NAVBAR_CONTAINER = 'mc-navbar-container';
+/** @type {?} */
+var MC_NAVBAR_ITEM = 'mc-navbar-item';
+/** @type {?} */
+var MC_NAVBAR_BRAND = 'mc-navbar-brand';
+/** @type {?} */
+var MC_NAVBAR_TITLE = 'mc-navbar-title';
+/** @type {?} */
+var MC_NAVBAR_LOGO = 'mc-navbar-logo';
 var McNavbarLogo = /** @class */ (function () {
     function McNavbarLogo() {
     }
@@ -3053,7 +3001,8 @@ var McNavbarItemBase = /** @class */ (function () {
     }
     return McNavbarItemBase;
 }());
-var /** @type {?} */ _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
+/** @type {?} */
+var _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
 var McNavbarItem = /** @class */ (function (_super) {
     __extends(McNavbarItem, _super);
     function McNavbarItem(elementRef, _focusMonitor, _platform, _cdRef) {
@@ -3167,7 +3116,8 @@ var McNavbarItem = /** @class */ (function (_super) {
      * @return {?}
      */
     function ($event) {
-        var /** @type {?} */ isNavbarItem = (/** @type {?} */ ($event.target)).classList.contains(MC_NAVBAR_ITEM);
+        /** @type {?} */
+        var isNavbarItem = (/** @type {?} */ ($event.target)).classList.contains(MC_NAVBAR_ITEM);
         if (this.hasDropdownContent && $event.keyCode === keycodes.SPACE && isNavbarItem) {
             this.toggleDropdown();
         }
@@ -3246,7 +3196,8 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        var /** @type {?} */ events = this.elementRef.nativeElement.eventListeners('click');
+        /** @type {?} */
+        var events = this.elementRef.nativeElement.eventListeners('click');
         events.forEach(function (event) { return _this.elementRef.nativeElement.removeEventListener('click', event); });
         this.elementRef.nativeElement.addEventListener('click', function (event) {
             if (_this.elementRef.nativeElement.hasAttribute('disabled')) {
@@ -3270,17 +3221,17 @@ var McNavbarItem = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McNavbarItem.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: a11y.FocusMonitor, },
-        { type: platform.Platform, },
-        { type: core.ChangeDetectorRef, },
+        { type: core.ElementRef },
+        { type: a11y.FocusMonitor },
+        { type: platform.Platform },
+        { type: core.ChangeDetectorRef }
     ]; };
     McNavbarItem.propDecorators = {
-        "tabIndex": [{ type: core.Input },],
-        "dropdownItems": [{ type: core.Input },],
-        "collapsedTitle": [{ type: core.Input },],
-        "dropdownItemTmpl": [{ type: core.ContentChild, args: ['dropdownItemTmpl', { read: core.TemplateRef },] },],
-        "dropdownContent": [{ type: core.ViewChild, args: ['dropdownContent', { read: core.ElementRef },] },],
+        tabIndex: [{ type: core.Input }],
+        dropdownItems: [{ type: core.Input }],
+        collapsedTitle: [{ type: core.Input }],
+        dropdownItemTmpl: [{ type: core.ContentChild, args: ['dropdownItemTmpl', { read: core.TemplateRef },] }],
+        dropdownContent: [{ type: core.ViewChild, args: ['dropdownContent', { read: core.ElementRef },] }]
     };
     return McNavbarItem;
 }(_McNavbarMixinBase));
@@ -3303,10 +3254,9 @@ var McNavbarContainer = /** @class */ (function () {
                     selector: MC_NAVBAR_CONTAINER
                 },] },
     ];
-    /** @nocollapse */
     McNavbarContainer.propDecorators = {
-        "position": [{ type: core.Input },],
-        "cssClasses": [{ type: core.HostBinding, args: ['class',] },],
+        position: [{ type: core.Input }],
+        cssClasses: [{ type: core.HostBinding, args: ['class',] }]
     };
     return McNavbarContainer;
 }());
@@ -3406,7 +3356,8 @@ var CachedItemWidth = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ computedTitle = this.element.getAttribute('computedTitle');
+        /** @type {?} */
+        var computedTitle = this.element.getAttribute('computedTitle');
         return computedTitle
             ? decodeURI(computedTitle)
             : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
@@ -3440,7 +3391,8 @@ var McNavbar = /** @class */ (function () {
             MC_NAVBAR_BRAND,
             MC_NAVBAR_TITLE
         ];
-        var /** @type {?} */ resizeObserver = rxjs.fromEvent(window, 'resize')
+        /** @type {?} */
+        var resizeObserver = rxjs.fromEvent(window, 'resize')
             .pipe(operators.debounceTime(this.resizeDebounceInterval));
         this._resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
     }
@@ -3489,9 +3441,11 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
-        for (var /** @type {?} */ i = this.itemsWidths.length - 1; i >= 0; i--) {
-            var /** @type {?} */ item = this.itemsWidths[i];
+        /** @type {?} */
+        var collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
+        for (var i = this.itemsWidths.length - 1; i >= 0; i--) {
+            /** @type {?} */
+            var item = this.itemsWidths[i];
             if (!item.canCollapse) {
                 continue;
             }
@@ -3539,9 +3493,12 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function (element) {
-        var /** @type {?} */ baseWidth = element.getBoundingClientRect().width;
-        var /** @type {?} */ marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
-        var /** @type {?} */ marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
+        /** @type {?} */
+        var baseWidth = element.getBoundingClientRect().width;
+        /** @type {?} */
+        var marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
+        /** @type {?} */
+        var marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
         return baseWidth + marginRight + marginLeft;
     };
     /**
@@ -3552,9 +3509,11 @@ var McNavbar = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        var /** @type {?} */ allItemsSelector = this.secondLevelElements
+        /** @type {?} */
+        var allItemsSelector = this.secondLevelElements
             .map(function (e) { return _this.firstLevelElement + ">" + e; });
-        var /** @type {?} */ allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
+        /** @type {?} */
+        var allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
         this._itemsWidths = allItems
             .map(function (el) { return new CachedItemWidth(el, _this.getOuterElementWidth(el), _this.getItemsForCollapse(el)); });
     };
@@ -3567,7 +3526,8 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function (element) {
-        var /** @type {?} */ icon = element.querySelector("[" + MC_ICON + "]," + MC_NAVBAR_LOGO + ",[" + MC_NAVBAR_LOGO + "]");
+        /** @type {?} */
+        var icon = element.querySelector("[" + MC_ICON + "]," + MC_NAVBAR_LOGO + ",[" + MC_NAVBAR_LOGO + "]");
         if (!icon) {
             return [];
         }
@@ -3585,14 +3545,14 @@ var McNavbar = /** @class */ (function () {
     ];
     /** @nocollapse */
     McNavbar.ctorParameters = function () { return [
-        { type: core.ElementRef, },
+        { type: core.ElementRef }
     ]; };
     return McNavbar;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McNavbarModule = /** @class */ (function () {
     function McNavbarModule() {
@@ -3668,13 +3628,13 @@ var McProgressBar = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McProgressBar.ctorParameters = function () { return [
-        { type: core.ElementRef, },
+        { type: core.ElementRef }
     ]; };
     McProgressBar.propDecorators = {
-        "id": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "mode": [{ type: core.Input },],
-        "color": [{ type: core.Input },],
+        id: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        mode: [{ type: core.Input }],
+        color: [{ type: core.Input }]
     };
     return McProgressBar;
 }(_McProgressBarMixinBase));
@@ -3749,13 +3709,13 @@ var McProgressSpinner = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McProgressSpinner.ctorParameters = function () { return [
-        { type: core.ElementRef, },
+        { type: core.ElementRef }
     ]; };
     McProgressSpinner.propDecorators = {
-        "id": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "mode": [{ type: core.Input },],
-        "color": [{ type: core.Input },],
+        id: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        mode: [{ type: core.Input }],
+        color: [{ type: core.Input }]
     };
     return McProgressSpinner;
 }(_McProgressPinnerMixinBase));
@@ -3783,10 +3743,11 @@ var McProgressSpinnerModule = /** @class */ (function () {
 // Increasing integer for generating unique ids for radio components.
 var nextUniqueId$3 = 0;
 /** Change event object emitted by McRadio. */
-var   /** Change event object emitted by McRadio. */
-McRadioChange = /** @class */ (function () {
-    function McRadioChange(/** The McRadioButton that emits the change event. */
-    source, /** The value of the McRadioButton. */
+var McRadioChange = /** @class */ (function () {
+    function McRadioChange(
+    /** The McRadioButton that emits the change event. */
+    source, 
+    /** The value of the McRadioButton. */
     value) {
         this.source = source;
         this.value = value;
@@ -3795,10 +3756,7 @@ McRadioChange = /** @class */ (function () {
 }());
 // Boilerplate for applying mixins to McRadioGroup.
 /** @docs-private */
-var   
-// Boilerplate for applying mixins to McRadioGroup.
-/** @docs-private */
-McRadioGroupBase = /** @class */ (function () {
+var McRadioGroupBase = /** @class */ (function () {
     function McRadioGroupBase() {
     }
     return McRadioGroupBase;
@@ -3820,17 +3778,17 @@ var McRadioGroup = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this._changeDetector = _changeDetector;
         /**
-             * Event emitted when the group value changes.
-             * Change events are only emitted when the value changes due to user interaction with
-             * a radio button (the same behavior as `<input type-"radio">`).
-             */
+         * Event emitted when the group value changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * a radio button (the same behavior as `<input type-"radio">`).
+         */
         _this.change = new core.EventEmitter();
         /**
-             * Selected value for group. Should equal the value of the selected radio button if there *is*
-             * a corresponding radio button with a matching value. If there is *not* such a corresponding
-             * radio button, this value persists to be applied in case a new radio button is added with a
-             * matching value.
-             */
+         * Selected value for group. Should equal the value of the selected radio button if there *is*
+         * a corresponding radio button with a matching value. If there is *not* such a corresponding
+         * radio button, this value persists to be applied in case a new radio button is added with a
+         * matching value.
+         */
         _this._value = null;
         /** The HTML name attribute applied to radio buttons in this group. */
         _this._name = "mc-radio-group-" + nextUniqueId$3++;
@@ -3847,15 +3805,15 @@ var McRadioGroup = /** @class */ (function (_super) {
         /** The method to be called in order to update ngModel */
         _this.controlValueAccessorChangeFn = function () { };
         /**
-             * onTouch function registered via registerOnTouch (ControlValueAccessor).
-             * @docs-private
-             */
+         * onTouch function registered via registerOnTouch (ControlValueAccessor).
+         * @docs-private
+         */
         _this.onTouched = function () { };
         return _this;
     }
     Object.defineProperty(McRadioGroup.prototype, "name", {
-        get: /** Name of the radio button group. All radio buttons inside this group will use this name. */
-        function () { return this._name; },
+        /** Name of the radio button group. All radio buttons inside this group will use this name. */
+        get: function () { return this._name; },
         set: function (value) {
             this._name = value;
             this.updateRadioButtonNames();
@@ -3864,8 +3822,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioGroup.prototype, "labelPosition", {
-        get: /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
-        function () {
+        /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
+        get: function () {
             return this._labelPosition;
         },
         set: function (v) {
@@ -3876,8 +3834,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioGroup.prototype, "value", {
-        get: /** Value of the radio button. */
-        function () { return this._value; },
+        /** Value of the radio button. */
+        get: function () { return this._value; },
         set: function (newValue) {
             if (this._value !== newValue) {
                 // Set this before proceeding to ensure no circular loop occurs with selection.
@@ -3895,8 +3853,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         }
     };
     Object.defineProperty(McRadioGroup.prototype, "selected", {
-        get: /** Whether the radio button is selected. */
-        function () { return this._selected; },
+        /** Whether the radio button is selected. */
+        get: function () { return this._selected; },
         set: function (selected) {
             this._selected = selected;
             this.value = selected ? selected.value : null;
@@ -3906,8 +3864,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioGroup.prototype, "disabled", {
-        get: /** Whether the radio group is disabled */
-        function () { return this._disabled; },
+        /** Whether the radio group is disabled */
+        get: function () { return this._disabled; },
         set: function (value) {
             this._disabled = toBoolean(value);
             this.markRadiosForCheck();
@@ -3916,8 +3874,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioGroup.prototype, "required", {
-        get: /** Whether the radio group is required */
-        function () { return this._required; },
+        /** Whether the radio group is required */
+        get: function () { return this._required; },
         set: function (value) {
             this._required = toBoolean(value);
             this.markRadiosForCheck();
@@ -3929,15 +3887,7 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Initialize properties once content children are available.
      * This allows us to propagate relevant attributes to associated buttons.
      */
-    /**
-         * Initialize properties once content children are available.
-         * This allows us to propagate relevant attributes to associated buttons.
-         */
-    McRadioGroup.prototype.ngAfterContentInit = /**
-         * Initialize properties once content children are available.
-         * This allows us to propagate relevant attributes to associated buttons.
-         */
-    function () {
+    McRadioGroup.prototype.ngAfterContentInit = function () {
         // Mark this component as initialized in AfterContentInit because the initial value can
         // possibly be set by NgModel on McRadioGroup, and it is possible that the OnInit of the
         // NgModel occurs *after* the OnInit of the McRadioGroup.
@@ -3947,25 +3897,15 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
      * radio buttons upon their blur.
      */
-    /**
-         * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
-         * radio buttons upon their blur.
-         */
-    McRadioGroup.prototype.touch = /**
-         * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
-         * radio buttons upon their blur.
-         */
-    function () {
+    McRadioGroup.prototype.touch = function () {
         if (this.onTouched) {
             this.onTouched();
         }
     };
     /** Dispatch change event with current selection and group value. */
-    /** Dispatch change event with current selection and group value. */
-    McRadioGroup.prototype.emitChangeEvent = /** Dispatch change event with current selection and group value. */
-    function () {
+    McRadioGroup.prototype.emitChangeEvent = function () {
         if (this._isInitialized) {
-            this.change.emit(new McRadioChange((this._selected), this._value));
+            this.change.emit(new McRadioChange(this._selected, this._value));
         }
     };
     McRadioGroup.prototype.markRadiosForCheck = function () {
@@ -3977,15 +3917,7 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Sets the model value. Implemented as part of ControlValueAccessor.
      * @param value
      */
-    /**
-         * Sets the model value. Implemented as part of ControlValueAccessor.
-         * @param value
-         */
-    McRadioGroup.prototype.writeValue = /**
-         * Sets the model value. Implemented as part of ControlValueAccessor.
-         * @param value
-         */
-    function (value) {
+    McRadioGroup.prototype.writeValue = function (value) {
         this.value = value;
         this._changeDetector.markForCheck();
     };
@@ -3994,17 +3926,7 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Implemented as part of ControlValueAccessor.
      * @param fn Callback to be registered.
      */
-    /**
-         * Registers a callback to be triggered when the model value changes.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    McRadioGroup.prototype.registerOnChange = /**
-         * Registers a callback to be triggered when the model value changes.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    function (fn) {
+    McRadioGroup.prototype.registerOnChange = function (fn) {
         this.controlValueAccessorChangeFn = fn;
     };
     /**
@@ -4012,32 +3934,14 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Implemented as part of ControlValueAccessor.
      * @param fn Callback to be registered.
      */
-    /**
-         * Registers a callback to be triggered when the control is touched.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    McRadioGroup.prototype.registerOnTouched = /**
-         * Registers a callback to be triggered when the control is touched.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    function (fn) {
+    McRadioGroup.prototype.registerOnTouched = function (fn) {
         this.onTouched = fn;
     };
     /**
      * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
      * @param isDisabled Whether the control should be disabled.
      */
-    /**
-         * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
-         * @param isDisabled Whether the control should be disabled.
-         */
-    McRadioGroup.prototype.setDisabledState = /**
-         * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
-         * @param isDisabled Whether the control should be disabled.
-         */
-    function (isDisabled) {
+    McRadioGroup.prototype.setDisabledState = function (isDisabled) {
         this.disabled = isDisabled;
         this._changeDetector.markForCheck();
     };
@@ -4050,9 +3954,7 @@ var McRadioGroup = /** @class */ (function (_super) {
         }
     };
     /** Updates the `selected` radio button from the internal _value state. */
-    /** Updates the `selected` radio button from the internal _value state. */
-    McRadioGroup.prototype.updateSelectedRadioFromValue = /** Updates the `selected` radio button from the internal _value state. */
-    function () {
+    McRadioGroup.prototype.updateSelectedRadioFromValue = function () {
         var _this = this;
         // If the value already matches the selected radio, do nothing.
         var isAlreadySelected = this._selected != null && this._selected.value === this._value;
@@ -4080,26 +3982,23 @@ var McRadioGroup = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McRadioGroup.ctorParameters = function () { return [
-        { type: core.ChangeDetectorRef, },
+        { type: core.ChangeDetectorRef }
     ]; };
     McRadioGroup.propDecorators = {
-        "change": [{ type: core.Output },],
-        "_radios": [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] },],
-        "name": [{ type: core.Input },],
-        "labelPosition": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "selected": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
+        change: [{ type: core.Output }],
+        _radios: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] }],
+        name: [{ type: core.Input }],
+        labelPosition: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        selected: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        required: [{ type: core.Input }]
     };
     return McRadioGroup;
 }(_McRadioGroupMixinBase));
 // Boilerplate for applying mixins to McRadioButton.
 /** @docs-private */
-var   
-// Boilerplate for applying mixins to McRadioButton.
-/** @docs-private */
-McRadioButtonBase = /** @class */ (function () {
+var McRadioButtonBase = /** @class */ (function () {
     function McRadioButtonBase(_elementRef) {
         this._elementRef = _elementRef;
     }
@@ -4117,10 +4016,10 @@ var McRadioButton = /** @class */ (function (_super) {
         /** The unique ID for the radio button. */
         _this.id = _this._uniqueId;
         /**
-             * Event emitted when the checked state of this radio button changes.
-             * Change events are only emitted when the value changes due to user interaction with
-             * the radio button (the same behavior as `<input type-"radio">`).
-             */
+         * Event emitted when the checked state of this radio button changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * the radio button (the same behavior as `<input type-"radio">`).
+         */
         _this.change = new core.EventEmitter();
         _this.isFocused = false;
         /** Whether this radio is checked. */
@@ -4139,8 +4038,8 @@ var McRadioButton = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(McRadioButton.prototype, "checked", {
-        get: /** Whether this radio button is checked. */
-        function () { return this._checked; },
+        /** Whether this radio button is checked. */
+        get: function () { return this._checked; },
         set: function (value) {
             var newCheckedState = toBoolean(value);
             if (this._checked !== newCheckedState) {
@@ -4164,8 +4063,8 @@ var McRadioButton = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioButton.prototype, "value", {
-        get: /** The value of this radio button. */
-        function () { return this._value; },
+        /** The value of this radio button. */
+        get: function () { return this._value; },
         set: function (value) {
             if (this._value !== value) {
                 this._value = value;
@@ -4184,8 +4083,8 @@ var McRadioButton = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioButton.prototype, "disabled", {
-        get: /** Whether the radio button is disabled. */
-        function () {
+        /** Whether the radio button is disabled. */
+        get: function () {
             return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
         },
         set: function (value) {
@@ -4199,8 +4098,8 @@ var McRadioButton = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioButton.prototype, "required", {
-        get: /** Whether the radio button is required. */
-        function () {
+        /** Whether the radio button is required. */
+        get: function () {
             return this._required || (this.radioGroup && this.radioGroup.required);
         },
         set: function (value) {
@@ -4210,8 +4109,8 @@ var McRadioButton = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioButton.prototype, "labelPosition", {
-        get: /** Whether the label should appear after or before the radio button. Defaults to 'after' */
-        function () {
+        /** Whether the label should appear after or before the radio button. Defaults to 'after' */
+        get: function () {
             return this._labelPosition || (this.radioGroup && this.radioGroup.labelPosition) || 'after';
         },
         set: function (value) {
@@ -4222,8 +4121,7 @@ var McRadioButton = /** @class */ (function (_super) {
     });
     Object.defineProperty(McRadioButton.prototype, "inputId", {
         /** ID of the native input element inside `<mc-radio-button>` */
-        get: /** ID of the native input element inside `<mc-radio-button>` */
-        function () { return (this.id || this._uniqueId) + "-input"; },
+        get: function () { return (this.id || this._uniqueId) + "-input"; },
         enumerable: true,
         configurable: true
     });
@@ -4240,25 +4138,13 @@ var McRadioButton = /** @class */ (function (_super) {
         this.removeUniqueSelectionListener();
     };
     /** Focuses the radio button. */
-    /** Focuses the radio button. */
-    McRadioButton.prototype.focus = /** Focuses the radio button. */
-    function () { };
+    McRadioButton.prototype.focus = function () { };
     /**
      * Marks the radio button as needing checking for change detection.
      * This method is exposed because the parent radio group will directly
      * update bound properties of the radio button.
      */
-    /**
-         * Marks the radio button as needing checking for change detection.
-         * This method is exposed because the parent radio group will directly
-         * update bound properties of the radio button.
-         */
-    McRadioButton.prototype.markForCheck = /**
-         * Marks the radio button as needing checking for change detection.
-         * This method is exposed because the parent radio group will directly
-         * update bound properties of the radio button.
-         */
-    function () {
+    McRadioButton.prototype.markForCheck = function () {
         // When group value changes, the button will not be notified. Use `markForCheck` to explicit
         // update radio button's status
         this._changeDetector.markForCheck();
@@ -4290,9 +4176,7 @@ var McRadioButton = /** @class */ (function (_super) {
         }
     };
     /** Dispatch change event with current value. */
-    /** Dispatch change event with current value. */
-    McRadioButton.prototype.emitChangeEvent = /** Dispatch change event with current value. */
-    function () {
+    McRadioButton.prototype.emitChangeEvent = function () {
         this.change.emit(new McRadioChange(this, this._value));
     };
     McRadioButton.decorators = [
@@ -4315,25 +4199,25 @@ var McRadioButton = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McRadioButton.ctorParameters = function () { return [
-        { type: McRadioGroup, decorators: [{ type: core.Optional },] },
-        { type: core.ElementRef, },
-        { type: core.ChangeDetectorRef, },
-        { type: collections.UniqueSelectionDispatcher, },
+        { type: McRadioGroup, decorators: [{ type: core.Optional }] },
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef },
+        { type: collections.UniqueSelectionDispatcher }
     ]; };
     McRadioButton.propDecorators = {
-        "id": [{ type: core.Input },],
-        "name": [{ type: core.Input },],
-        "ariaLabel": [{ type: core.Input, args: ['aria-label',] },],
-        "ariaLabelledby": [{ type: core.Input, args: ['aria-labelledby',] },],
-        "ariaDescribedby": [{ type: core.Input, args: ['aria-describedby',] },],
-        "checked": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
-        "labelPosition": [{ type: core.Input },],
-        "_inputElement": [{ type: core.ViewChild, args: ['input',] },],
-        "change": [{ type: core.Output },],
-        "isFocused": [{ type: core.Input },],
+        id: [{ type: core.Input }],
+        name: [{ type: core.Input }],
+        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
+        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
+        ariaDescribedby: [{ type: core.Input, args: ['aria-describedby',] }],
+        checked: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        required: [{ type: core.Input }],
+        labelPosition: [{ type: core.Input }],
+        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
+        change: [{ type: core.Output }],
+        isFocused: [{ type: core.Input }]
     };
     return McRadioButton;
 }(_McRadioButtonMixinBase));
@@ -4353,7 +4237,7 @@ var McRadioModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -4370,16 +4254,15 @@ var McTreeNodeDef = /** @class */ (function (_super) {
                     providers: [{ provide: tree.CdkTreeNodeDef, useExisting: McTreeNodeDef }]
                 },] },
     ];
-    /** @nocollapse */
     McTreeNodeDef.propDecorators = {
-        "data": [{ type: core.Input, args: ['mcTreeNode',] },],
+        data: [{ type: core.Input, args: ['mcTreeNode',] }]
     };
     return McTreeNodeDef;
 }(tree.CdkTreeNodeDef));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -4410,10 +4293,12 @@ var McTreeNodePadding = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ nodeLevel = (this._treeNode.data && this._tree.treeControl.getLevel)
+        /** @type {?} */
+        var nodeLevel = (this._treeNode.data && this._tree.treeControl.getLevel)
             ? this._tree.treeControl.getLevel(this._treeNode.data)
             : null;
-        var /** @type {?} */ level = this._level || nodeLevel;
+        /** @type {?} */
+        var level = this._level || nodeLevel;
         return level ? (level * this._indent) + this.leftPadding + "px" : this._baseLeftPadding + "px";
     };
     /**
@@ -4432,17 +4317,16 @@ var McTreeNodePadding = /** @class */ (function (_super) {
                     providers: [{ provide: tree.CdkTreeNodePadding, useExisting: McTreeNodePadding }]
                 },] },
     ];
-    /** @nocollapse */
     McTreeNodePadding.propDecorators = {
-        "level": [{ type: core.Input, args: ['mcTreeNodePadding',] },],
-        "indent": [{ type: core.Input, args: ['mcTreeNodePaddingIndent',] },],
+        level: [{ type: core.Input, args: ['mcTreeNodePadding',] }],
+        indent: [{ type: core.Input, args: ['mcTreeNodePaddingIndent',] }]
     };
     return McTreeNodePadding;
 }(tree.CdkTreeNodePadding));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Wrapper for the CdkTree node with Material design styles.
@@ -4472,7 +4356,8 @@ var McTreeNodeOption = /** @class */ (function (_super) {
          * @return {?}
          */
         function (value) {
-            var /** @type {?} */ newValue = toBoolean(value);
+            /** @type {?} */
+            var newValue = toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
             }
@@ -4492,7 +4377,8 @@ var McTreeNodeOption = /** @class */ (function (_super) {
          * @return {?}
          */
         function (value) {
-            var /** @type {?} */ isSelected = toBoolean(value);
+            /** @type {?} */
+            var isSelected = toBoolean(value);
             if (isSelected !== this._selected) {
                 this.setSelected(isSelected);
                 // this.treeSelection._reportValueChange();
@@ -4596,17 +4482,18 @@ var McTreeNodeOption = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McTreeNodeOption.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: McTreeSelection, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McTreeSelection; }),] },] },
+        { type: core.ElementRef },
+        { type: McTreeSelection, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McTreeSelection; }),] }] }
     ]; };
     McTreeNodeOption.propDecorators = {
-        "role": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "selected": [{ type: core.Input },],
+        role: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        selected: [{ type: core.Input }]
     };
     return McTreeNodeOption;
 }(tree.CdkTreeNode));
-var /** @type {?} */ _McTreeSelectionBase = mixinTabIndex(mixinDisabled(tree.CdkTree));
+/** @type {?} */
+var _McTreeSelectionBase = mixinTabIndex(mixinDisabled(tree.CdkTree));
 var McTreeNavigationChange = /** @class */ (function () {
     function McTreeNavigationChange(source, option) {
         this.source = source;
@@ -4649,7 +4536,8 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function (rawValue) {
-            var /** @type {?} */ value = toBoolean(rawValue);
+            /** @type {?} */
+            var value = toBoolean(rawValue);
             if (this._disabled !== value) {
                 this._disabled = value;
                 if (this._disabled) {
@@ -4672,7 +4560,8 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (event) {
-        var /** @type {?} */ keyCode = event.keyCode;
+        /** @type {?} */
+        var keyCode = event.keyCode;
         switch (keyCode) {
             case keycodes.LEFT_ARROW:
                 if (this._keyManager.activeItem) {
@@ -4747,9 +4636,11 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ focusedIndex = this._keyManager.activeItemIndex;
+        /** @type {?} */
+        var focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
-            var /** @type {?} */ focusedOption = this.options.toArray()[focusedIndex];
+            /** @type {?} */
+            var focusedOption = this.options.toArray()[focusedIndex];
             if (focusedOption && this._canUnselectLast(focusedOption)) {
                 focusedOption.toggle();
                 // Emit a change event because the focused option changed its state through user interaction.
@@ -4775,12 +4666,15 @@ var McTreeSelection = /** @class */ (function (_super) {
         if (dataDiffer === void 0) { dataDiffer = this._dataDiffer; }
         if (viewContainer === void 0) { viewContainer = this._nodeOutlet.viewContainer; }
         _super.prototype.renderNodeChanges.call(this, data, dataDiffer, viewContainer, parentData);
-        var /** @type {?} */ arrayOfInstances = [];
+        /** @type {?} */
+        var arrayOfInstances = [];
         viewContainer._embeddedViews.forEach(function (view) {
-            var /** @type {?} */ viewDef = view.def;
+            /** @type {?} */
+            var viewDef = view.def;
             viewDef.nodes.forEach(function (node) {
                 if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
-                    var /** @type {?} */ nodeData = view.nodes[node.nodeIndex];
+                    /** @type {?} */
+                    var nodeData = view.nodes[node.nodeIndex];
                     arrayOfInstances.push(/** @type {?} */ (nodeData.instance));
                 }
             });
@@ -4856,27 +4750,28 @@ var McTreeSelection = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McTreeSelection.ctorParameters = function () { return [
-        { type: core.IterableDiffers, },
-        { type: core.ChangeDetectorRef, },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['tabindex',] },] },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['multiple',] },] },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['auto-select',] },] },
+        { type: core.IterableDiffers },
+        { type: core.ChangeDetectorRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
+        { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] },
+        { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] }
     ]; };
     McTreeSelection.propDecorators = {
-        "_nodeOutlet": [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet,] },],
-        "options": [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McTreeNodeOption; }),] },],
-        "disabled": [{ type: core.Input },],
-        "navigationChange": [{ type: core.Output },],
-        "selectionChange": [{ type: core.Output },],
+        _nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet,] }],
+        options: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McTreeNodeOption; }),] }],
+        disabled: [{ type: core.Input }],
+        navigationChange: [{ type: core.Output }],
+        selectionChange: [{ type: core.Output }]
     };
     return McTreeSelection;
 }(_McTreeSelectionBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-var /** @type {?} */ MC_TREE_DIRECTIVES = [
+/** @type {?} */
+var MC_TREE_DIRECTIVES = [
     McTreeNodeDef,
     McTreeNodePadding,
     McTreeSelection,
@@ -4897,7 +4792,7 @@ var McTreeModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Tree flattener to convert a normal type of node to node with children & level information.
@@ -4992,12 +4887,14 @@ McTreeFlattener = /** @class */ (function () {
      */
     function (node, level, resultNodes, parentMap) {
         var _this = this;
-        var /** @type {?} */ flatNode = this.transformFunction(node, level);
+        /** @type {?} */
+        var flatNode = this.transformFunction(node, level);
         resultNodes.push(flatNode);
         if (this.isExpandable(flatNode)) {
             this.getChildren(node).pipe(operators.take(1)).subscribe(function (children) {
                 children.forEach(function (child, index) {
-                    var /** @type {?} */ childParentMap = parentMap.slice();
+                    /** @type {?} */
+                    var childParentMap = parentMap.slice();
                     childParentMap.push(index !== children.length - 1);
                     _this._flattenNode(child, level + 1, resultNodes, childParentMap);
                 });
@@ -5026,7 +4923,8 @@ McTreeFlattener = /** @class */ (function () {
      */
     function (structuredData) {
         var _this = this;
-        var /** @type {?} */ resultNodes = [];
+        /** @type {?} */
+        var resultNodes = [];
         structuredData.forEach(function (node) { return _this._flattenNode(node, 0, resultNodes, []); });
         return resultNodes;
     };
@@ -5050,12 +4948,15 @@ McTreeFlattener = /** @class */ (function () {
      */
     function (nodes, treeControl) {
         var _this = this;
-        var /** @type {?} */ results = [];
-        var /** @type {?} */ currentExpand = [];
+        /** @type {?} */
+        var results = [];
+        /** @type {?} */
+        var currentExpand = [];
         currentExpand[0] = true;
         nodes.forEach(function (node) {
-            var /** @type {?} */ expand = true;
-            for (var /** @type {?} */ i = 0; i <= _this.getLevel(node); i++) {
+            /** @type {?} */
+            var expand = true;
+            for (var i = 0; i <= _this.getLevel(node); i++) {
                 expand = expand && currentExpand[i];
             }
             if (expand) {
@@ -5126,7 +5027,8 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
      */
     function (collectionViewer) {
         var _this = this;
-        var /** @type {?} */ changes = [
+        /** @type {?} */
+        var changes = [
             collectionViewer.viewChange,
             /** @type {?} */ ((this.treeControl.expansionModel.onChange)),
             this._flattenedData
@@ -5150,7 +5052,7 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Data source for nested tree.
@@ -5220,9 +5122,10 @@ McTreeNestedDataSource = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-var /** @type {?} */ VERSION = new core.Version('0.0.1');
+/** @type {?} */
+var VERSION = new core.Version('0.0.1');
 
 exports.VERSION = VERSION;
 exports.McButtonModule = McButtonModule;

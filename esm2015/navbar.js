@@ -15,7 +15,7 @@ import { SPACE } from '@ptsecurity/cdk/keycodes';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McIconCSSStyler {
 }
@@ -33,7 +33,8 @@ class McIconBase {
         this._elementRef = _elementRef;
     }
 }
-const /** @type {?} */ _McIconMixinBase = mixinColor(McIconBase);
+/** @type {?} */
+const _McIconMixinBase = mixinColor(McIconBase);
 class McIcon extends _McIconMixinBase {
     /**
      * @param {?} elementRef
@@ -61,13 +62,13 @@ McIcon.decorators = [
 ];
 /** @nocollapse */
 McIcon.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Attribute, args: ['mc-icon',] },] },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Attribute, args: ['mc-icon',] }] }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McIconModule {
 }
@@ -91,16 +92,24 @@ McIconModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-const /** @type {?} */ COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
-const /** @type {?} */ MC_ICON = 'mc-icon';
-const /** @type {?} */ MC_NAVBAR = 'mc-navbar';
-const /** @type {?} */ MC_NAVBAR_CONTAINER = 'mc-navbar-container';
-const /** @type {?} */ MC_NAVBAR_ITEM = 'mc-navbar-item';
-const /** @type {?} */ MC_NAVBAR_BRAND = 'mc-navbar-brand';
-const /** @type {?} */ MC_NAVBAR_TITLE = 'mc-navbar-title';
-const /** @type {?} */ MC_NAVBAR_LOGO = 'mc-navbar-logo';
+/** @type {?} */
+const COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
+/** @type {?} */
+const MC_ICON = 'mc-icon';
+/** @type {?} */
+const MC_NAVBAR = 'mc-navbar';
+/** @type {?} */
+const MC_NAVBAR_CONTAINER = 'mc-navbar-container';
+/** @type {?} */
+const MC_NAVBAR_ITEM = 'mc-navbar-item';
+/** @type {?} */
+const MC_NAVBAR_BRAND = 'mc-navbar-brand';
+/** @type {?} */
+const MC_NAVBAR_TITLE = 'mc-navbar-title';
+/** @type {?} */
+const MC_NAVBAR_LOGO = 'mc-navbar-logo';
 class McNavbarLogo {
 }
 McNavbarLogo.decorators = [
@@ -139,7 +148,8 @@ class McNavbarItemBase {
         this._elementRef = _elementRef;
     }
 }
-const /** @type {?} */ _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
+/** @type {?} */
+const _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
 class McNavbarItem extends _McNavbarMixinBase {
     /**
      * @param {?} elementRef
@@ -225,7 +235,8 @@ class McNavbarItem extends _McNavbarMixinBase {
      * @return {?}
      */
     handleKeydown($event) {
-        const /** @type {?} */ isNavbarItem = (/** @type {?} */ ($event.target)).classList.contains(MC_NAVBAR_ITEM);
+        /** @type {?} */
+        const isNavbarItem = (/** @type {?} */ ($event.target)).classList.contains(MC_NAVBAR_ITEM);
         if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {
             this.toggleDropdown();
         }
@@ -279,7 +290,8 @@ class McNavbarItem extends _McNavbarMixinBase {
      * @return {?}
      */
     denyClickIfDisabled() {
-        const /** @type {?} */ events = this.elementRef.nativeElement.eventListeners('click');
+        /** @type {?} */
+        const events = this.elementRef.nativeElement.eventListeners('click');
         events.forEach((event) => this.elementRef.nativeElement.removeEventListener('click', event));
         this.elementRef.nativeElement.addEventListener('click', (event) => {
             if (this.elementRef.nativeElement.hasAttribute('disabled')) {
@@ -336,17 +348,17 @@ McNavbarItem.decorators = [
 ];
 /** @nocollapse */
 McNavbarItem.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: FocusMonitor, },
-    { type: Platform, },
-    { type: ChangeDetectorRef, },
+    { type: ElementRef },
+    { type: FocusMonitor },
+    { type: Platform },
+    { type: ChangeDetectorRef }
 ];
 McNavbarItem.propDecorators = {
-    "tabIndex": [{ type: Input },],
-    "dropdownItems": [{ type: Input },],
-    "collapsedTitle": [{ type: Input },],
-    "dropdownItemTmpl": [{ type: ContentChild, args: ['dropdownItemTmpl', { read: TemplateRef },] },],
-    "dropdownContent": [{ type: ViewChild, args: ['dropdownContent', { read: ElementRef },] },],
+    tabIndex: [{ type: Input }],
+    dropdownItems: [{ type: Input }],
+    collapsedTitle: [{ type: Input }],
+    dropdownItemTmpl: [{ type: ContentChild, args: ['dropdownItemTmpl', { read: TemplateRef },] }],
+    dropdownContent: [{ type: ViewChild, args: ['dropdownContent', { read: ElementRef },] }]
 };
 class McNavbarContainer {
     constructor() {
@@ -364,10 +376,9 @@ McNavbarContainer.decorators = [
                 selector: MC_NAVBAR_CONTAINER
             },] },
 ];
-/** @nocollapse */
 McNavbarContainer.propDecorators = {
-    "position": [{ type: Input },],
-    "cssClasses": [{ type: HostBinding, args: ['class',] },],
+    position: [{ type: Input }],
+    cssClasses: [{ type: HostBinding, args: ['class',] }]
 };
 class CollapsibleItem {
     /**
@@ -447,7 +458,8 @@ class CachedItemWidth {
      * @return {?}
      */
     getTitle() {
-        const /** @type {?} */ computedTitle = this.element.getAttribute('computedTitle');
+        /** @type {?} */
+        const computedTitle = this.element.getAttribute('computedTitle');
         return computedTitle
             ? decodeURI(computedTitle)
             : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
@@ -479,7 +491,8 @@ class McNavbar {
             MC_NAVBAR_BRAND,
             MC_NAVBAR_TITLE
         ];
-        const /** @type {?} */ resizeObserver = fromEvent(window, 'resize')
+        /** @type {?} */
+        const resizeObserver = fromEvent(window, 'resize')
             .pipe(debounceTime(this.resizeDebounceInterval));
         this._resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
     }
@@ -513,9 +526,11 @@ class McNavbar {
      * @return {?}
      */
     updateCollapsed() {
-        let /** @type {?} */ collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
-        for (let /** @type {?} */ i = this.itemsWidths.length - 1; i >= 0; i--) {
-            const /** @type {?} */ item = this.itemsWidths[i];
+        /** @type {?} */
+        let collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
+        for (let i = this.itemsWidths.length - 1; i >= 0; i--) {
+            /** @type {?} */
+            const item = this.itemsWidths[i];
             if (!item.canCollapse) {
                 continue;
             }
@@ -549,18 +564,23 @@ class McNavbar {
      * @return {?}
      */
     getOuterElementWidth(element) {
-        const /** @type {?} */ baseWidth = element.getBoundingClientRect().width;
-        const /** @type {?} */ marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
-        const /** @type {?} */ marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
+        /** @type {?} */
+        const baseWidth = element.getBoundingClientRect().width;
+        /** @type {?} */
+        const marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
+        /** @type {?} */
+        const marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
         return baseWidth + marginRight + marginLeft;
     }
     /**
      * @return {?}
      */
     calculateAndCacheItemsWidth() {
-        const /** @type {?} */ allItemsSelector = this.secondLevelElements
+        /** @type {?} */
+        const allItemsSelector = this.secondLevelElements
             .map((e) => `${this.firstLevelElement}>${e}`);
-        const /** @type {?} */ allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
+        /** @type {?} */
+        const allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
         this._itemsWidths = allItems
             .map((el) => new CachedItemWidth(el, this.getOuterElementWidth(el), this.getItemsForCollapse(el)));
     }
@@ -569,7 +589,8 @@ class McNavbar {
      * @return {?}
      */
     getItemsForCollapse(element) {
-        const /** @type {?} */ icon = element.querySelector(`[${MC_ICON}],${MC_NAVBAR_LOGO},[${MC_NAVBAR_LOGO}]`);
+        /** @type {?} */
+        const icon = element.querySelector(`[${MC_ICON}],${MC_NAVBAR_LOGO},[${MC_NAVBAR_LOGO}]`);
         if (!icon) {
             return [];
         }
@@ -592,12 +613,12 @@ McNavbar.decorators = [
 ];
 /** @nocollapse */
 McNavbar.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McNavbarModule {
 }
@@ -630,12 +651,12 @@ McNavbarModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar, McIcon as ɵe8, McIconBase as ɵc8, McIconCSSStyler as ɵb8, _McIconMixinBase as ɵd8, McIconModule as ɵa8 };

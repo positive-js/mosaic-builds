@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @param {?} val
@@ -27,20 +27,20 @@ function toBoolean(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-// Injection token that configures whether the Mosaic sanity checks are enabled.
-const /** @type {?} */ MC_SANITY_CHECKS = new InjectionToken('mc-sanity-checks', {
+/** @type {?} */
+const MC_SANITY_CHECKS = new InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
     factory: MC_SANITY_CHECKS_FACTORY
 });
@@ -97,10 +97,12 @@ class McCommonModule {
      */
     _checkThemeIsPresent() {
         if (this._document && typeof getComputedStyle === 'function') {
-            const /** @type {?} */ testElement = this._document.createElement('div');
+            /** @type {?} */
+            const testElement = this._document.createElement('div');
             testElement.classList.add('mc-theme-loaded-marker');
             this._document.body.appendChild(testElement);
-            const /** @type {?} */ computedStyle = getComputedStyle(testElement);
+            /** @type {?} */
+            const computedStyle = getComputedStyle(testElement);
             // In some situations, the computed style of the test element can be null. For example in
             // Firefox, the computed style is null if an application is running inside of a hidden iframe.
             // See: https://bugzilla.mozilla.org/show_bug.cgi?id=548397
@@ -121,12 +123,12 @@ McCommonModule.decorators = [
 ];
 /** @nocollapse */
 McCommonModule.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_SANITY_CHECKS,] },] },
+    { type: Boolean, decorators: [{ type: Optional }, { type: Inject, args: [MC_SANITY_CHECKS,] }] }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -160,7 +162,7 @@ function mixinDisabled(base) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const ThemePalette = {
@@ -189,7 +191,8 @@ function mixinColor(base, defaultColor = ThemePalette.Default) {
          * @return {?}
          */
         set color(value) {
-            const /** @type {?} */ colorPalette = value || defaultColor;
+            /** @type {?} */
+            const colorPalette = value || defaultColor;
             if (colorPalette !== this._color) {
                 if (this._color) {
                     this._elementRef.nativeElement.classList.remove(`mc-${this._color}`);
@@ -213,7 +216,7 @@ function mixinColor(base, defaultColor = ThemePalette.Default) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -248,7 +251,7 @@ function mixinTabIndex(base, defaultTabIndex = 0) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Mixin to augment a directive with updateErrorState method.
@@ -278,11 +281,16 @@ function mixinErrorState(base) {
          * @return {?}
          */
         updateErrorState() {
-            const /** @type {?} */ oldState = this.errorState;
-            const /** @type {?} */ parent = this._parentFormGroup || this._parentForm;
-            const /** @type {?} */ matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
-            const /** @type {?} */ control = this.ngControl ? /** @type {?} */ (this.ngControl.control) : null;
-            const /** @type {?} */ newState = matcher.isErrorState(control, parent);
+            /** @type {?} */
+            const oldState = this.errorState;
+            /** @type {?} */
+            const parent = this._parentFormGroup || this._parentForm;
+            /** @type {?} */
+            const matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
+            /** @type {?} */
+            const control = this.ngControl ? /** @type {?} */ (this.ngControl.control) : null;
+            /** @type {?} */
+            const newState = matcher.isErrorState(control, parent);
             if (newState !== oldState) {
                 this.errorState = newState;
                 this.stateChanges.next();
@@ -293,12 +301,12 @@ function mixinErrorState(base) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Shared directive to count lines inside a text area, such as a list item.
@@ -377,7 +385,7 @@ McLineModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Error state matcher that matches when a control is invalid and dirty.
@@ -415,7 +423,7 @@ ErrorStateMatcher.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Component that shows a simplified checkbox without including any kind of "real" checkbox.
@@ -454,15 +462,14 @@ McPseudoCheckbox.decorators = [
                 }
             },] },
 ];
-/** @nocollapse */
 McPseudoCheckbox.propDecorators = {
-    "state": [{ type: Input },],
-    "disabled": [{ type: Input },],
+    state: [{ type: Input }],
+    disabled: [{ type: Input }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McPseudoCheckboxModule {
 }
@@ -475,12 +482,12 @@ McPseudoCheckboxModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, MC_SANITY_CHECKS_FACTORY as ɵa0 };

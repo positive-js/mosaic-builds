@@ -52,8 +52,7 @@ var McCleaner = /** @class */ (function () {
 }());
 
 /** An interface which allows a control to work inside of a `MсFormField`. */
-var   /** An interface which allows a control to work inside of a `MсFormField`. */
-McFormFieldControl = /** @class */ (function () {
+var McFormFieldControl = /** @class */ (function () {
     function McFormFieldControl() {
     }
     return McFormFieldControl;
@@ -77,9 +76,8 @@ var McHint = /** @class */ (function () {
                     }
                 },] },
     ];
-    /** @nocollapse */
     McHint.propDecorators = {
-        "id": [{ type: core.Input },],
+        id: [{ type: core.Input }]
     };
     return McHint;
 }());
@@ -163,16 +161,12 @@ var McFormField = /** @class */ (function (_super) {
         }
     };
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    McFormField.prototype._shouldForward = /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    function (prop) {
+    McFormField.prototype._shouldForward = function (prop) {
         var ngControl = this._control ? this._control.ngControl : null;
         return ngControl && ngControl[prop];
     };
     /** Throws an error if the form field's control is missing. */
-    /** Throws an error if the form field's control is missing. */
-    McFormField.prototype._validateControlChild = /** Throws an error if the form field's control is missing. */
-    function () {
+    McFormField.prototype._validateControlChild = function () {
         if (!this._control) {
             throw getMcFormFieldMissingControlError();
         }
@@ -247,15 +241,15 @@ var McFormField = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McFormField.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: core.ChangeDetectorRef, },
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef }
     ]; };
     McFormField.propDecorators = {
-        "_control": [{ type: core.ContentChild, args: [McFormFieldControl,] },],
-        "_hint": [{ type: core.ContentChildren, args: [McHint,] },],
-        "_suffix": [{ type: core.ContentChildren, args: [McSuffix,] },],
-        "_prefix": [{ type: core.ContentChildren, args: [McPrefix,] },],
-        "_cleaner": [{ type: core.ContentChildren, args: [McCleaner,] },],
+        _control: [{ type: core.ContentChild, args: [McFormFieldControl,] }],
+        _hint: [{ type: core.ContentChildren, args: [McHint,] }],
+        _suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
+        _prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
+        _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }]
     };
     return McFormField;
 }(McFormFieldBase));

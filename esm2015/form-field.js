@@ -43,9 +43,8 @@ McHint.decorators = [
                 }
             },] },
 ];
-/** @nocollapse */
 McHint.propDecorators = {
-    "id": [{ type: Input },],
+    id: [{ type: Input }]
 };
 
 class McPrefix {
@@ -178,15 +177,15 @@ McFormField.decorators = [
 ];
 /** @nocollapse */
 McFormField.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: ChangeDetectorRef, },
+    { type: ElementRef },
+    { type: ChangeDetectorRef }
 ];
 McFormField.propDecorators = {
-    "_control": [{ type: ContentChild, args: [McFormFieldControl,] },],
-    "_hint": [{ type: ContentChildren, args: [McHint,] },],
-    "_suffix": [{ type: ContentChildren, args: [McSuffix,] },],
-    "_prefix": [{ type: ContentChildren, args: [McPrefix,] },],
-    "_cleaner": [{ type: ContentChildren, args: [McCleaner,] },],
+    _control: [{ type: ContentChild, args: [McFormFieldControl,] }],
+    _hint: [{ type: ContentChildren, args: [McHint,] }],
+    _suffix: [{ type: ContentChildren, args: [McSuffix,] }],
+    _prefix: [{ type: ContentChildren, args: [McPrefix,] }],
+    _cleaner: [{ type: ContentChildren, args: [McCleaner,] }]
 };
 class McFormFieldWithoutBorders {
 }

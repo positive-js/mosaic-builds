@@ -32,15 +32,7 @@ var MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
  * Represents the different states that require custom transitions between them.
  * @docs-private
  */
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
 var TransitionCheckState;
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
 (function (TransitionCheckState) {
     /** The initial state of the component before any user interaction. */
     TransitionCheckState[TransitionCheckState["Init"] = 0] = "Init";
@@ -52,18 +44,14 @@ var TransitionCheckState;
     TransitionCheckState[TransitionCheckState["Indeterminate"] = 3] = "Indeterminate";
 })(TransitionCheckState || (TransitionCheckState = {}));
 /** Change event object emitted by McCheckbox. */
-var  /** Change event object emitted by McCheckbox. */
-McCheckboxChange = /** @class */ (function () {
+var McCheckboxChange = /** @class */ (function () {
     function McCheckboxChange() {
     }
     return McCheckboxChange;
 }());
 // Boilerplate for applying mixins to McCheckbox.
 /** @docs-private */
-var  
-// Boilerplate for applying mixins to McCheckbox.
-/** @docs-private */
-McCheckboxBase = /** @class */ (function () {
+var McCheckboxBase = /** @class */ (function () {
     function McCheckboxBase(_elementRef) {
         this._elementRef = _elementRef;
     }
@@ -85,13 +73,13 @@ var McCheckbox = /** @class */ (function (_super) {
         _this._focusMonitor = _focusMonitor;
         _this._clickAction = _clickAction;
         /**
-             * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will
-             * take precedence so this may be omitted.
-             */
+         * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will
+         * take precedence so this may be omitted.
+         */
         _this.ariaLabel = '';
         /**
-             * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-             */
+         * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+         */
         _this.ariaLabelledby = null;
         _this._uniqueId = "mc-checkbox-" + ++nextUniqueId;
         /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
@@ -105,9 +93,9 @@ var McCheckbox = /** @class */ (function (_super) {
         /** Event emitted when the checkbox's `indeterminate` value changes. */
         _this.indeterminateChange = new EventEmitter();
         /**
-             * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-             * @docs-private
-             */
+         * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+         * @docs-private
+         */
         _this._onTouched = function () {
         };
         _this._currentAnimationClass = '';
@@ -122,16 +110,15 @@ var McCheckbox = /** @class */ (function (_super) {
     }
     Object.defineProperty(McCheckbox.prototype, "inputId", {
         /** Returns the unique id for the visual hidden input. */
-        get: /** Returns the unique id for the visual hidden input. */
-        function () {
+        get: function () {
             return (this.id || this._uniqueId) + "-input";
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McCheckbox.prototype, "required", {
-        get: /** Whether the checkbox is required. */
-        function () {
+        /** Whether the checkbox is required. */
+        get: function () {
             return this._required;
         },
         set: function (value) {
@@ -150,10 +137,10 @@ var McCheckbox = /** @class */ (function (_super) {
         this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
     };
     Object.defineProperty(McCheckbox.prototype, "checked", {
-        get: /**
-             * Whether the checkbox is checked.
-             */
-        function () {
+        /**
+         * Whether the checkbox is checked.
+         */
+        get: function () {
             return this._checked;
         },
         set: function (value) {
@@ -166,11 +153,11 @@ var McCheckbox = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McCheckbox.prototype, "disabled", {
-        get: /**
-             * Whether the checkbox is disabled. This fully overrides the implementation provided by
-             * mixinDisabled, but the mixin is still required because mixinTabIndex requires it.
-             */
-        function () {
+        /**
+         * Whether the checkbox is disabled. This fully overrides the implementation provided by
+         * mixinDisabled, but the mixin is still required because mixinTabIndex requires it.
+         */
+        get: function () {
             return this._disabled;
         },
         set: function (value) {
@@ -183,13 +170,13 @@ var McCheckbox = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McCheckbox.prototype, "indeterminate", {
-        get: /**
-             * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
-             * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
-             * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
-             * set to false.
-             */
-        function () {
+        /**
+         * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
+         * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
+         * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
+         * set to false.
+         */
+        get: function () {
             return this._indeterminate;
         },
         set: function (value) {
@@ -209,40 +196,26 @@ var McCheckbox = /** @class */ (function (_super) {
         configurable: true
     });
     /** Method being called whenever the label text changes. */
-    /** Method being called whenever the label text changes. */
-    McCheckbox.prototype._onLabelTextChange = /** Method being called whenever the label text changes. */
-    function () {
+    McCheckbox.prototype._onLabelTextChange = function () {
         // This method is getting called whenever the label of the checkbox changes.
         // Since the checkbox uses the OnPush strategy we need to notify it about the change
         // that has been recognized by the cdkObserveContent directive.
         this._changeDetectorRef.markForCheck();
     };
     // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.writeValue = 
-    // Implemented as part of ControlValueAccessor.
-    function (value) {
+    McCheckbox.prototype.writeValue = function (value) {
         this.checked = !!value;
     };
     // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.registerOnChange = 
-    // Implemented as part of ControlValueAccessor.
-    function (fn) {
+    McCheckbox.prototype.registerOnChange = function (fn) {
         this._controlValueAccessorChangeFn = fn;
     };
     // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.registerOnTouched = 
-    // Implemented as part of ControlValueAccessor.
-    function (fn) {
+    McCheckbox.prototype.registerOnTouched = function (fn) {
         this._onTouched = fn;
     };
     // Implemented as part of ControlValueAccessor.
-    // Implemented as part of ControlValueAccessor.
-    McCheckbox.prototype.setDisabledState = 
-    // Implemented as part of ControlValueAccessor.
-    function (isDisabled) {
+    McCheckbox.prototype.setDisabledState = function (isDisabled) {
         this.disabled = isDisabled;
     };
     McCheckbox.prototype._getAriaChecked = function () {
@@ -270,17 +243,13 @@ var McCheckbox = /** @class */ (function (_super) {
         this.change.emit(event);
     };
     /** Function is called whenever the focus changes for the input element. */
-    /** Function is called whenever the focus changes for the input element. */
-    McCheckbox.prototype._onInputFocusChange = /** Function is called whenever the focus changes for the input element. */
-    function (focusOrigin) {
+    McCheckbox.prototype._onInputFocusChange = function (focusOrigin) {
         if (focusOrigin) {
             this._onTouched();
         }
     };
     /** Toggles the `checked` state of the checkbox. */
-    /** Toggles the `checked` state of the checkbox. */
-    McCheckbox.prototype.toggle = /** Toggles the `checked` state of the checkbox. */
-    function () {
+    McCheckbox.prototype.toggle = function () {
         this.checked = !this.checked;
     };
     /**
@@ -290,21 +259,7 @@ var McCheckbox = /** @class */ (function (_super) {
      *   indeterminate checkbox is clicked.
      * @param event
      */
-    /**
-         * Event handler for checkbox input element.
-         * Toggles checked state if element is not disabled.
-         * Do not toggle on (change) event since IE doesn't fire change event when
-         *   indeterminate checkbox is clicked.
-         * @param event
-         */
-    McCheckbox.prototype._onInputClick = /**
-         * Event handler for checkbox input element.
-         * Toggles checked state if element is not disabled.
-         * Do not toggle on (change) event since IE doesn't fire change event when
-         *   indeterminate checkbox is clicked.
-         * @param event
-         */
-    function (event) {
+    McCheckbox.prototype._onInputClick = function (event) {
         var _this = this;
         // We have to stop propagation for click events on the visual hidden input element.
         // By default, when a user clicks on a label element, a generated click event will be
@@ -338,9 +293,7 @@ var McCheckbox = /** @class */ (function (_super) {
         }
     };
     /** Focuses the checkbox. */
-    /** Focuses the checkbox. */
-    McCheckbox.prototype.focus = /** Focuses the checkbox. */
-    function () {
+    McCheckbox.prototype.focus = function () {
         this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
     };
     McCheckbox.prototype._onInteractionEvent = function (event) {
@@ -372,26 +325,26 @@ var McCheckbox = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McCheckbox.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: ChangeDetectorRef, },
-        { type: FocusMonitor, },
-        { type: undefined, decorators: [{ type: Attribute, args: ['tabindex',] },] },
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_CHECKBOX_CLICK_ACTION,] },] },
+        { type: ElementRef },
+        { type: ChangeDetectorRef },
+        { type: FocusMonitor },
+        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_CHECKBOX_CLICK_ACTION,] }] }
     ]; };
     McCheckbox.propDecorators = {
-        "ariaLabel": [{ type: Input, args: ['aria-label',] },],
-        "ariaLabelledby": [{ type: Input, args: ['aria-labelledby',] },],
-        "id": [{ type: Input },],
-        "required": [{ type: Input },],
-        "labelPosition": [{ type: Input },],
-        "name": [{ type: Input },],
-        "change": [{ type: Output },],
-        "indeterminateChange": [{ type: Output },],
-        "value": [{ type: Input },],
-        "_inputElement": [{ type: ViewChild, args: ['input',] },],
-        "checked": [{ type: Input },],
-        "disabled": [{ type: Input },],
-        "indeterminate": [{ type: Input },],
+        ariaLabel: [{ type: Input, args: ['aria-label',] }],
+        ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
+        id: [{ type: Input }],
+        required: [{ type: Input }],
+        labelPosition: [{ type: Input }],
+        name: [{ type: Input }],
+        change: [{ type: Output }],
+        indeterminateChange: [{ type: Output }],
+        value: [{ type: Input }],
+        _inputElement: [{ type: ViewChild, args: ['input',] }],
+        checked: [{ type: Input }],
+        disabled: [{ type: Input }],
+        indeterminate: [{ type: Input }]
     };
     return McCheckbox;
 }(_McCheckboxMixinBase));

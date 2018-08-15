@@ -49,13 +49,13 @@ McProgressSpinner.decorators = [
 ];
 /** @nocollapse */
 McProgressSpinner.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 McProgressSpinner.propDecorators = {
-    "id": [{ type: Input },],
-    "value": [{ type: Input },],
-    "mode": [{ type: Input },],
-    "color": [{ type: Input },],
+    id: [{ type: Input }],
+    value: [{ type: Input }],
+    mode: [{ type: Input }],
+    color: [{ type: Input }]
 };
 
 class McProgressSpinnerModule {

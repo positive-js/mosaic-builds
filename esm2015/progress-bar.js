@@ -45,13 +45,13 @@ McProgressBar.decorators = [
 ];
 /** @nocollapse */
 McProgressBar.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 McProgressBar.propDecorators = {
-    "id": [{ type: Input },],
-    "value": [{ type: Input },],
-    "mode": [{ type: Input },],
-    "color": [{ type: Input },],
+    id: [{ type: Input }],
+    value: [{ type: Input }],
+    mode: [{ type: Input }],
+    color: [{ type: Input }]
 };
 
 class McProgressBarModule {

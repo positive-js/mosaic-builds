@@ -60,13 +60,13 @@ var McProgressSpinner = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McProgressSpinner.ctorParameters = function () { return [
-        { type: ElementRef, },
+        { type: ElementRef }
     ]; };
     McProgressSpinner.propDecorators = {
-        "id": [{ type: Input },],
-        "value": [{ type: Input },],
-        "mode": [{ type: Input },],
-        "color": [{ type: Input },],
+        id: [{ type: Input }],
+        value: [{ type: Input }],
+        mode: [{ type: Input }],
+        color: [{ type: Input }]
     };
     return McProgressSpinner;
 }(_McProgressPinnerMixinBase));

@@ -42,10 +42,11 @@ function __extends(d, b) {
 // Increasing integer for generating unique ids for radio components.
 var nextUniqueId = 0;
 /** Change event object emitted by McRadio. */
-var   /** Change event object emitted by McRadio. */
-McRadioChange = /** @class */ (function () {
-    function McRadioChange(/** The McRadioButton that emits the change event. */
-    source, /** The value of the McRadioButton. */
+var McRadioChange = /** @class */ (function () {
+    function McRadioChange(
+    /** The McRadioButton that emits the change event. */
+    source, 
+    /** The value of the McRadioButton. */
     value) {
         this.source = source;
         this.value = value;
@@ -54,10 +55,7 @@ McRadioChange = /** @class */ (function () {
 }());
 // Boilerplate for applying mixins to McRadioGroup.
 /** @docs-private */
-var   
-// Boilerplate for applying mixins to McRadioGroup.
-/** @docs-private */
-McRadioGroupBase = /** @class */ (function () {
+var McRadioGroupBase = /** @class */ (function () {
     function McRadioGroupBase() {
     }
     return McRadioGroupBase;
@@ -79,17 +77,17 @@ var McRadioGroup = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this._changeDetector = _changeDetector;
         /**
-             * Event emitted when the group value changes.
-             * Change events are only emitted when the value changes due to user interaction with
-             * a radio button (the same behavior as `<input type-"radio">`).
-             */
+         * Event emitted when the group value changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * a radio button (the same behavior as `<input type-"radio">`).
+         */
         _this.change = new core.EventEmitter();
         /**
-             * Selected value for group. Should equal the value of the selected radio button if there *is*
-             * a corresponding radio button with a matching value. If there is *not* such a corresponding
-             * radio button, this value persists to be applied in case a new radio button is added with a
-             * matching value.
-             */
+         * Selected value for group. Should equal the value of the selected radio button if there *is*
+         * a corresponding radio button with a matching value. If there is *not* such a corresponding
+         * radio button, this value persists to be applied in case a new radio button is added with a
+         * matching value.
+         */
         _this._value = null;
         /** The HTML name attribute applied to radio buttons in this group. */
         _this._name = "mc-radio-group-" + nextUniqueId++;
@@ -106,15 +104,15 @@ var McRadioGroup = /** @class */ (function (_super) {
         /** The method to be called in order to update ngModel */
         _this.controlValueAccessorChangeFn = function () { };
         /**
-             * onTouch function registered via registerOnTouch (ControlValueAccessor).
-             * @docs-private
-             */
+         * onTouch function registered via registerOnTouch (ControlValueAccessor).
+         * @docs-private
+         */
         _this.onTouched = function () { };
         return _this;
     }
     Object.defineProperty(McRadioGroup.prototype, "name", {
-        get: /** Name of the radio button group. All radio buttons inside this group will use this name. */
-        function () { return this._name; },
+        /** Name of the radio button group. All radio buttons inside this group will use this name. */
+        get: function () { return this._name; },
         set: function (value) {
             this._name = value;
             this.updateRadioButtonNames();
@@ -123,8 +121,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioGroup.prototype, "labelPosition", {
-        get: /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
-        function () {
+        /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
+        get: function () {
             return this._labelPosition;
         },
         set: function (v) {
@@ -135,8 +133,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioGroup.prototype, "value", {
-        get: /** Value of the radio button. */
-        function () { return this._value; },
+        /** Value of the radio button. */
+        get: function () { return this._value; },
         set: function (newValue) {
             if (this._value !== newValue) {
                 // Set this before proceeding to ensure no circular loop occurs with selection.
@@ -154,8 +152,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         }
     };
     Object.defineProperty(McRadioGroup.prototype, "selected", {
-        get: /** Whether the radio button is selected. */
-        function () { return this._selected; },
+        /** Whether the radio button is selected. */
+        get: function () { return this._selected; },
         set: function (selected) {
             this._selected = selected;
             this.value = selected ? selected.value : null;
@@ -165,8 +163,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioGroup.prototype, "disabled", {
-        get: /** Whether the radio group is disabled */
-        function () { return this._disabled; },
+        /** Whether the radio group is disabled */
+        get: function () { return this._disabled; },
         set: function (value) {
             this._disabled = core$1.toBoolean(value);
             this.markRadiosForCheck();
@@ -175,8 +173,8 @@ var McRadioGroup = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioGroup.prototype, "required", {
-        get: /** Whether the radio group is required */
-        function () { return this._required; },
+        /** Whether the radio group is required */
+        get: function () { return this._required; },
         set: function (value) {
             this._required = core$1.toBoolean(value);
             this.markRadiosForCheck();
@@ -188,15 +186,7 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Initialize properties once content children are available.
      * This allows us to propagate relevant attributes to associated buttons.
      */
-    /**
-         * Initialize properties once content children are available.
-         * This allows us to propagate relevant attributes to associated buttons.
-         */
-    McRadioGroup.prototype.ngAfterContentInit = /**
-         * Initialize properties once content children are available.
-         * This allows us to propagate relevant attributes to associated buttons.
-         */
-    function () {
+    McRadioGroup.prototype.ngAfterContentInit = function () {
         // Mark this component as initialized in AfterContentInit because the initial value can
         // possibly be set by NgModel on McRadioGroup, and it is possible that the OnInit of the
         // NgModel occurs *after* the OnInit of the McRadioGroup.
@@ -206,25 +196,15 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
      * radio buttons upon their blur.
      */
-    /**
-         * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
-         * radio buttons upon their blur.
-         */
-    McRadioGroup.prototype.touch = /**
-         * Mark this group as being "touched" (for ngModel). Meant to be called by the contained
-         * radio buttons upon their blur.
-         */
-    function () {
+    McRadioGroup.prototype.touch = function () {
         if (this.onTouched) {
             this.onTouched();
         }
     };
     /** Dispatch change event with current selection and group value. */
-    /** Dispatch change event with current selection and group value. */
-    McRadioGroup.prototype.emitChangeEvent = /** Dispatch change event with current selection and group value. */
-    function () {
+    McRadioGroup.prototype.emitChangeEvent = function () {
         if (this._isInitialized) {
-            this.change.emit(new McRadioChange((this._selected), this._value));
+            this.change.emit(new McRadioChange(this._selected, this._value));
         }
     };
     McRadioGroup.prototype.markRadiosForCheck = function () {
@@ -236,15 +216,7 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Sets the model value. Implemented as part of ControlValueAccessor.
      * @param value
      */
-    /**
-         * Sets the model value. Implemented as part of ControlValueAccessor.
-         * @param value
-         */
-    McRadioGroup.prototype.writeValue = /**
-         * Sets the model value. Implemented as part of ControlValueAccessor.
-         * @param value
-         */
-    function (value) {
+    McRadioGroup.prototype.writeValue = function (value) {
         this.value = value;
         this._changeDetector.markForCheck();
     };
@@ -253,17 +225,7 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Implemented as part of ControlValueAccessor.
      * @param fn Callback to be registered.
      */
-    /**
-         * Registers a callback to be triggered when the model value changes.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    McRadioGroup.prototype.registerOnChange = /**
-         * Registers a callback to be triggered when the model value changes.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    function (fn) {
+    McRadioGroup.prototype.registerOnChange = function (fn) {
         this.controlValueAccessorChangeFn = fn;
     };
     /**
@@ -271,32 +233,14 @@ var McRadioGroup = /** @class */ (function (_super) {
      * Implemented as part of ControlValueAccessor.
      * @param fn Callback to be registered.
      */
-    /**
-         * Registers a callback to be triggered when the control is touched.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    McRadioGroup.prototype.registerOnTouched = /**
-         * Registers a callback to be triggered when the control is touched.
-         * Implemented as part of ControlValueAccessor.
-         * @param fn Callback to be registered.
-         */
-    function (fn) {
+    McRadioGroup.prototype.registerOnTouched = function (fn) {
         this.onTouched = fn;
     };
     /**
      * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
      * @param isDisabled Whether the control should be disabled.
      */
-    /**
-         * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
-         * @param isDisabled Whether the control should be disabled.
-         */
-    McRadioGroup.prototype.setDisabledState = /**
-         * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
-         * @param isDisabled Whether the control should be disabled.
-         */
-    function (isDisabled) {
+    McRadioGroup.prototype.setDisabledState = function (isDisabled) {
         this.disabled = isDisabled;
         this._changeDetector.markForCheck();
     };
@@ -309,9 +253,7 @@ var McRadioGroup = /** @class */ (function (_super) {
         }
     };
     /** Updates the `selected` radio button from the internal _value state. */
-    /** Updates the `selected` radio button from the internal _value state. */
-    McRadioGroup.prototype.updateSelectedRadioFromValue = /** Updates the `selected` radio button from the internal _value state. */
-    function () {
+    McRadioGroup.prototype.updateSelectedRadioFromValue = function () {
         var _this = this;
         // If the value already matches the selected radio, do nothing.
         var isAlreadySelected = this._selected != null && this._selected.value === this._value;
@@ -339,26 +281,23 @@ var McRadioGroup = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McRadioGroup.ctorParameters = function () { return [
-        { type: core.ChangeDetectorRef, },
+        { type: core.ChangeDetectorRef }
     ]; };
     McRadioGroup.propDecorators = {
-        "change": [{ type: core.Output },],
-        "_radios": [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] },],
-        "name": [{ type: core.Input },],
-        "labelPosition": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "selected": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
+        change: [{ type: core.Output }],
+        _radios: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] }],
+        name: [{ type: core.Input }],
+        labelPosition: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        selected: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        required: [{ type: core.Input }]
     };
     return McRadioGroup;
 }(_McRadioGroupMixinBase));
 // Boilerplate for applying mixins to McRadioButton.
 /** @docs-private */
-var   
-// Boilerplate for applying mixins to McRadioButton.
-/** @docs-private */
-McRadioButtonBase = /** @class */ (function () {
+var McRadioButtonBase = /** @class */ (function () {
     function McRadioButtonBase(_elementRef) {
         this._elementRef = _elementRef;
     }
@@ -376,10 +315,10 @@ var McRadioButton = /** @class */ (function (_super) {
         /** The unique ID for the radio button. */
         _this.id = _this._uniqueId;
         /**
-             * Event emitted when the checked state of this radio button changes.
-             * Change events are only emitted when the value changes due to user interaction with
-             * the radio button (the same behavior as `<input type-"radio">`).
-             */
+         * Event emitted when the checked state of this radio button changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * the radio button (the same behavior as `<input type-"radio">`).
+         */
         _this.change = new core.EventEmitter();
         _this.isFocused = false;
         /** Whether this radio is checked. */
@@ -398,8 +337,8 @@ var McRadioButton = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(McRadioButton.prototype, "checked", {
-        get: /** Whether this radio button is checked. */
-        function () { return this._checked; },
+        /** Whether this radio button is checked. */
+        get: function () { return this._checked; },
         set: function (value) {
             var newCheckedState = core$1.toBoolean(value);
             if (this._checked !== newCheckedState) {
@@ -423,8 +362,8 @@ var McRadioButton = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioButton.prototype, "value", {
-        get: /** The value of this radio button. */
-        function () { return this._value; },
+        /** The value of this radio button. */
+        get: function () { return this._value; },
         set: function (value) {
             if (this._value !== value) {
                 this._value = value;
@@ -443,8 +382,8 @@ var McRadioButton = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioButton.prototype, "disabled", {
-        get: /** Whether the radio button is disabled. */
-        function () {
+        /** Whether the radio button is disabled. */
+        get: function () {
             return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
         },
         set: function (value) {
@@ -458,8 +397,8 @@ var McRadioButton = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioButton.prototype, "required", {
-        get: /** Whether the radio button is required. */
-        function () {
+        /** Whether the radio button is required. */
+        get: function () {
             return this._required || (this.radioGroup && this.radioGroup.required);
         },
         set: function (value) {
@@ -469,8 +408,8 @@ var McRadioButton = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McRadioButton.prototype, "labelPosition", {
-        get: /** Whether the label should appear after or before the radio button. Defaults to 'after' */
-        function () {
+        /** Whether the label should appear after or before the radio button. Defaults to 'after' */
+        get: function () {
             return this._labelPosition || (this.radioGroup && this.radioGroup.labelPosition) || 'after';
         },
         set: function (value) {
@@ -481,8 +420,7 @@ var McRadioButton = /** @class */ (function (_super) {
     });
     Object.defineProperty(McRadioButton.prototype, "inputId", {
         /** ID of the native input element inside `<mc-radio-button>` */
-        get: /** ID of the native input element inside `<mc-radio-button>` */
-        function () { return (this.id || this._uniqueId) + "-input"; },
+        get: function () { return (this.id || this._uniqueId) + "-input"; },
         enumerable: true,
         configurable: true
     });
@@ -499,25 +437,13 @@ var McRadioButton = /** @class */ (function (_super) {
         this.removeUniqueSelectionListener();
     };
     /** Focuses the radio button. */
-    /** Focuses the radio button. */
-    McRadioButton.prototype.focus = /** Focuses the radio button. */
-    function () { };
+    McRadioButton.prototype.focus = function () { };
     /**
      * Marks the radio button as needing checking for change detection.
      * This method is exposed because the parent radio group will directly
      * update bound properties of the radio button.
      */
-    /**
-         * Marks the radio button as needing checking for change detection.
-         * This method is exposed because the parent radio group will directly
-         * update bound properties of the radio button.
-         */
-    McRadioButton.prototype.markForCheck = /**
-         * Marks the radio button as needing checking for change detection.
-         * This method is exposed because the parent radio group will directly
-         * update bound properties of the radio button.
-         */
-    function () {
+    McRadioButton.prototype.markForCheck = function () {
         // When group value changes, the button will not be notified. Use `markForCheck` to explicit
         // update radio button's status
         this._changeDetector.markForCheck();
@@ -549,9 +475,7 @@ var McRadioButton = /** @class */ (function (_super) {
         }
     };
     /** Dispatch change event with current value. */
-    /** Dispatch change event with current value. */
-    McRadioButton.prototype.emitChangeEvent = /** Dispatch change event with current value. */
-    function () {
+    McRadioButton.prototype.emitChangeEvent = function () {
         this.change.emit(new McRadioChange(this, this._value));
     };
     McRadioButton.decorators = [
@@ -574,25 +498,25 @@ var McRadioButton = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McRadioButton.ctorParameters = function () { return [
-        { type: McRadioGroup, decorators: [{ type: core.Optional },] },
-        { type: core.ElementRef, },
-        { type: core.ChangeDetectorRef, },
-        { type: collections.UniqueSelectionDispatcher, },
+        { type: McRadioGroup, decorators: [{ type: core.Optional }] },
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef },
+        { type: collections.UniqueSelectionDispatcher }
     ]; };
     McRadioButton.propDecorators = {
-        "id": [{ type: core.Input },],
-        "name": [{ type: core.Input },],
-        "ariaLabel": [{ type: core.Input, args: ['aria-label',] },],
-        "ariaLabelledby": [{ type: core.Input, args: ['aria-labelledby',] },],
-        "ariaDescribedby": [{ type: core.Input, args: ['aria-describedby',] },],
-        "checked": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "disabled": [{ type: core.Input },],
-        "required": [{ type: core.Input },],
-        "labelPosition": [{ type: core.Input },],
-        "_inputElement": [{ type: core.ViewChild, args: ['input',] },],
-        "change": [{ type: core.Output },],
-        "isFocused": [{ type: core.Input },],
+        id: [{ type: core.Input }],
+        name: [{ type: core.Input }],
+        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
+        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
+        ariaDescribedby: [{ type: core.Input, args: ['aria-describedby',] }],
+        checked: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        required: [{ type: core.Input }],
+        labelPosition: [{ type: core.Input }],
+        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
+        change: [{ type: core.Output }],
+        isFocused: [{ type: core.Input }]
     };
     return McRadioButton;
 }(_McRadioButtonMixinBase));

@@ -13,7 +13,7 @@ import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconCSSStyler = /** @class */ (function () {
     function McIconCSSStyler() {
@@ -32,7 +32,8 @@ var McIconBase = /** @class */ (function () {
     }
     return McIconBase;
 }());
-var /** @type {?} */ _McIconMixinBase = mixinColor(McIconBase);
+/** @type {?} */
+var _McIconMixinBase = mixinColor(McIconBase);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {
@@ -60,15 +61,15 @@ var McIcon = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McIcon.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: undefined, decorators: [{ type: Attribute, args: ['mc-icon',] },] },
+        { type: ElementRef },
+        { type: String, decorators: [{ type: Attribute, args: ['mc-icon',] }] }
     ]; };
     return McIcon;
 }(_McIconMixinBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconModule = /** @class */ (function () {
     function McIconModule() {
@@ -95,12 +96,12 @@ var McIconModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { McIconModule, McIconCSSStyler, McIconBase, _McIconMixinBase, McIcon };

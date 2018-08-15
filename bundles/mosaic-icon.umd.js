@@ -41,7 +41,7 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconCSSStyler = /** @class */ (function () {
     function McIconCSSStyler() {
@@ -60,7 +60,8 @@ var McIconBase = /** @class */ (function () {
     }
     return McIconBase;
 }());
-var /** @type {?} */ _McIconMixinBase = core$1.mixinColor(McIconBase);
+/** @type {?} */
+var _McIconMixinBase = core$1.mixinColor(McIconBase);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {
@@ -88,15 +89,15 @@ var McIcon = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McIcon.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['mc-icon',] },] },
+        { type: core.ElementRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
     ]; };
     return McIcon;
 }(_McIconMixinBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconModule = /** @class */ (function () {
     function McIconModule() {

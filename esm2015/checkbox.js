@@ -31,15 +31,7 @@ const MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
  * Represents the different states that require custom transitions between them.
  * @docs-private
  */
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
 var TransitionCheckState;
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
 (function (TransitionCheckState) {
     /** The initial state of the component before any user interaction. */
     TransitionCheckState[TransitionCheckState["Init"] = 0] = "Init";
@@ -75,13 +67,13 @@ class McCheckbox extends _McCheckboxMixinBase {
         this._focusMonitor = _focusMonitor;
         this._clickAction = _clickAction;
         /**
-             * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will
-             * take precedence so this may be omitted.
-             */
+         * Attached to the aria-label attribute of the host element. In most cases, arial-labelledby will
+         * take precedence so this may be omitted.
+         */
         this.ariaLabel = '';
         /**
-             * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
-             */
+         * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
+         */
         this.ariaLabelledby = null;
         this._uniqueId = `mc-checkbox-${++nextUniqueId}`;
         /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
@@ -95,9 +87,9 @@ class McCheckbox extends _McCheckboxMixinBase {
         /** Event emitted when the checkbox's `indeterminate` value changes. */
         this.indeterminateChange = new EventEmitter();
         /**
-             * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-             * @docs-private
-             */
+         * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+         * @docs-private
+         */
         this._onTouched = () => {
         };
         this._currentAnimationClass = '';
@@ -129,8 +121,8 @@ class McCheckbox extends _McCheckboxMixinBase {
         this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
     }
     /**
-         * Whether the checkbox is checked.
-         */
+     * Whether the checkbox is checked.
+     */
     get checked() {
         return this._checked;
     }
@@ -141,9 +133,9 @@ class McCheckbox extends _McCheckboxMixinBase {
         }
     }
     /**
-         * Whether the checkbox is disabled. This fully overrides the implementation provided by
-         * mixinDisabled, but the mixin is still required because mixinTabIndex requires it.
-         */
+     * Whether the checkbox is disabled. This fully overrides the implementation provided by
+     * mixinDisabled, but the mixin is still required because mixinTabIndex requires it.
+     */
     get disabled() {
         return this._disabled;
     }
@@ -154,11 +146,11 @@ class McCheckbox extends _McCheckboxMixinBase {
         }
     }
     /**
-         * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
-         * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
-         * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
-         * set to false.
-         */
+     * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
+     * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
+     * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
+     * set to false.
+     */
     get indeterminate() {
         return this._indeterminate;
     }
@@ -233,12 +225,12 @@ class McCheckbox extends _McCheckboxMixinBase {
         this.checked = !this.checked;
     }
     /**
-         * Event handler for checkbox input element.
-         * Toggles checked state if element is not disabled.
-         * Do not toggle on (change) event since IE doesn't fire change event when
-         *   indeterminate checkbox is clicked.
-         * @param event
-         */
+     * Event handler for checkbox input element.
+     * Toggles checked state if element is not disabled.
+     * Do not toggle on (change) event since IE doesn't fire change event when
+     *   indeterminate checkbox is clicked.
+     * @param event
+     */
     _onInputClick(event) {
         // We have to stop propagation for click events on the visual hidden input element.
         // By default, when a user clicks on a label element, a generated click event will be
@@ -305,26 +297,26 @@ McCheckbox.decorators = [
 ];
 /** @nocollapse */
 McCheckbox.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: ChangeDetectorRef, },
-    { type: FocusMonitor, },
-    { type: undefined, decorators: [{ type: Attribute, args: ['tabindex',] },] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_CHECKBOX_CLICK_ACTION,] },] },
+    { type: ElementRef },
+    { type: ChangeDetectorRef },
+    { type: FocusMonitor },
+    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_CHECKBOX_CLICK_ACTION,] }] }
 ];
 McCheckbox.propDecorators = {
-    "ariaLabel": [{ type: Input, args: ['aria-label',] },],
-    "ariaLabelledby": [{ type: Input, args: ['aria-labelledby',] },],
-    "id": [{ type: Input },],
-    "required": [{ type: Input },],
-    "labelPosition": [{ type: Input },],
-    "name": [{ type: Input },],
-    "change": [{ type: Output },],
-    "indeterminateChange": [{ type: Output },],
-    "value": [{ type: Input },],
-    "_inputElement": [{ type: ViewChild, args: ['input',] },],
-    "checked": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "indeterminate": [{ type: Input },],
+    ariaLabel: [{ type: Input, args: ['aria-label',] }],
+    ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
+    id: [{ type: Input }],
+    required: [{ type: Input }],
+    labelPosition: [{ type: Input }],
+    name: [{ type: Input }],
+    change: [{ type: Output }],
+    indeterminateChange: [{ type: Output }],
+    value: [{ type: Input }],
+    _inputElement: [{ type: ViewChild, args: ['input',] }],
+    checked: [{ type: Input }],
+    disabled: [{ type: Input }],
+    indeterminate: [{ type: Input }]
 };
 
 const MC_CHECKBOX_REQUIRED_VALIDATOR = {

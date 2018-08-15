@@ -89,13 +89,13 @@ var McProgressSpinner = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McProgressSpinner.ctorParameters = function () { return [
-        { type: core.ElementRef, },
+        { type: core.ElementRef }
     ]; };
     McProgressSpinner.propDecorators = {
-        "id": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "mode": [{ type: core.Input },],
-        "color": [{ type: core.Input },],
+        id: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        mode: [{ type: core.Input }],
+        color: [{ type: core.Input }]
     };
     return McProgressSpinner;
 }(_McProgressPinnerMixinBase));

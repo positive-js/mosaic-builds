@@ -12,7 +12,7 @@
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McDivider = /** @class */ (function () {
     function McDivider() {
@@ -20,6 +20,7 @@ var McDivider = /** @class */ (function () {
         this._inset = false;
     }
     Object.defineProperty(McDivider.prototype, "vertical", {
+        // Whether the divider is vertically aligned.
         get: /**
          * @return {?}
          */
@@ -37,6 +38,7 @@ var McDivider = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(McDivider.prototype, "inset", {
+        // Whether the divider is an inset divider.
         get: /**
          * @return {?}
          */
@@ -70,17 +72,16 @@ var McDivider = /** @class */ (function () {
                     preserveWhitespaces: false
                 },] },
     ];
-    /** @nocollapse */
     McDivider.propDecorators = {
-        "vertical": [{ type: core.Input },],
-        "inset": [{ type: core.Input },],
+        vertical: [{ type: core.Input }],
+        inset: [{ type: core.Input }]
     };
     return McDivider;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McDividerModule = /** @class */ (function () {
     function McDividerModule() {

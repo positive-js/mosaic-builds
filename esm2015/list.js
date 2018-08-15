@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 /**
  * Component for list-options of selection-list. Each list-option can automatically
@@ -49,7 +49,8 @@ class McListOption {
      * @return {?}
      */
     set disabled(value) {
-        const /** @type {?} */ newValue = toBoolean(value);
+        /** @type {?} */
+        const newValue = toBoolean(value);
         if (newValue !== this._disabled) {
             this._disabled = newValue;
             this._changeDetector.markForCheck();
@@ -66,7 +67,8 @@ class McListOption {
      * @return {?}
      */
     set selected(value) {
-        const /** @type {?} */ isSelected = toBoolean(value);
+        /** @type {?} */
+        const isSelected = toBoolean(value);
         if (isSelected !== this._selected) {
             this.setSelected(isSelected);
             this.listSelection._reportValueChange();
@@ -77,12 +79,8 @@ class McListOption {
      */
     ngOnInit() {
         if (this._selected) {
-            // List options that are selected at initialization can't be reported properly to the form
-            // control. This is because it takes some time until the selection-list knows about all
-            // available options. Also it can happen that the ControlValueAccessor has an initial value
-            // that should be used instead. Deferring the value change report to the next tick ensures
-            // that the form control value is not being overwritten.
-            const /** @type {?} */ wasSelected = this._selected;
+            /** @type {?} */
+            const wasSelected = this._selected;
             Promise.resolve().then(() => {
                 if (this._selected || wasSelected) {
                     this.selected = true;
@@ -203,19 +201,20 @@ McListOption.decorators = [
 ];
 /** @nocollapse */
 McListOption.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: ChangeDetectorRef, },
-    { type: McListSelection, decorators: [{ type: Inject, args: [forwardRef(() => McListSelection),] },] },
+    { type: ElementRef },
+    { type: ChangeDetectorRef },
+    { type: McListSelection, decorators: [{ type: Inject, args: [forwardRef(() => McListSelection),] }] }
 ];
 McListOption.propDecorators = {
-    "_lines": [{ type: ContentChildren, args: [McLine,] },],
-    "_text": [{ type: ViewChild, args: ['text',] },],
-    "checkboxPosition": [{ type: Input },],
-    "value": [{ type: Input },],
-    "disabled": [{ type: Input },],
-    "selected": [{ type: Input },],
+    _lines: [{ type: ContentChildren, args: [McLine,] }],
+    _text: [{ type: ViewChild, args: ['text',] }],
+    checkboxPosition: [{ type: Input }],
+    value: [{ type: Input }],
+    disabled: [{ type: Input }],
+    selected: [{ type: Input }]
 };
-const /** @type {?} */ MC_SELECTION_LIST_VALUE_ACCESSOR = {
+/** @type {?} */
+const MC_SELECTION_LIST_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => McListSelection),
     multi: true
@@ -232,7 +231,8 @@ class McListSelectionChange {
 }
 class McListSelectionBase {
 }
-const /** @type {?} */ _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
+/** @type {?} */
+const _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
 class McListSelection extends _McListSelectionMixinBase {
     /**
      * @param {?} _element
@@ -272,10 +272,10 @@ class McListSelection extends _McListSelectionMixinBase {
         }
         // Sync external changes to the model back to the options.
         this._modelChanges = /** @type {?} */ ((this.selectedOptions.onChange)).subscribe((event) => {
-            for (const /** @type {?} */ item of event.added) {
+            for (const item of event.added) {
                 item.selected = true;
             }
-            for (const /** @type {?} */ item of event.removed) {
+            for (const item of event.removed) {
                 item.selected = false;
             }
         });
@@ -323,8 +323,10 @@ class McListSelection extends _McListSelectionMixinBase {
     setFocusedOption(option) {
         this._keyManager.updateActiveItem(option);
         if (this.withShift && this.multiple) {
-            const /** @type {?} */ previousIndex = this._keyManager.previousActiveItemIndex;
-            const /** @type {?} */ activeIndex = this._keyManager.activeItemIndex;
+            /** @type {?} */
+            const previousIndex = this._keyManager.previousActiveItemIndex;
+            /** @type {?} */
+            const activeIndex = this._keyManager.activeItemIndex;
             if (previousIndex < activeIndex) {
                 this.options.forEach((item, index) => {
                     if (index >= previousIndex && index <= activeIndex) {
@@ -402,9 +404,11 @@ class McListSelection extends _McListSelectionMixinBase {
      * @return {?}
      */
     toggleFocusedOption() {
-        const /** @type {?} */ focusedIndex = this._keyManager.activeItemIndex;
+        /** @type {?} */
+        const focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
-            const /** @type {?} */ focusedOption = this.options.toArray()[focusedIndex];
+            /** @type {?} */
+            const focusedOption = this.options.toArray()[focusedIndex];
             if (focusedOption && this._canUnselectLast(focusedOption)) {
                 focusedOption.toggle();
                 // Emit a change event because the focused option changed its state through user interaction.
@@ -431,7 +435,8 @@ class McListSelection extends _McListSelectionMixinBase {
      */
     _removeOptionFromList(option) {
         if (option._hasFocus) {
-            const /** @type {?} */ optionIndex = this._getOptionIndex(option);
+            /** @type {?} */
+            const optionIndex = this._getOptionIndex(option);
             // Check whether the option is the last item
             if (optionIndex > 0) {
                 this._keyManager.setPreviousItemActive();
@@ -446,7 +451,8 @@ class McListSelection extends _McListSelectionMixinBase {
      * @return {?}
      */
     _onKeyDown(event) {
-        const /** @type {?} */ keyCode = event.keyCode;
+        /** @type {?} */
+        const keyCode = event.keyCode;
         this.withShift = event.shiftKey;
         this.withCtrl = event.ctrlKey;
         switch (keyCode) {
@@ -551,21 +557,21 @@ McListSelection.decorators = [
 ];
 /** @nocollapse */
 McListSelection.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Attribute, args: ['tabindex',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['auto-select',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['no-unselect',] },] },
-    { type: undefined, decorators: [{ type: Attribute, args: ['multiple',] },] },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
+    { type: String, decorators: [{ type: Attribute, args: ['auto-select',] }] },
+    { type: String, decorators: [{ type: Attribute, args: ['no-unselect',] }] },
+    { type: String, decorators: [{ type: Attribute, args: ['multiple',] }] }
 ];
 McListSelection.propDecorators = {
-    "options": [{ type: ContentChildren, args: [McListOption,] },],
-    "horizontal": [{ type: Input },],
-    "selectionChange": [{ type: Output },],
+    options: [{ type: ContentChildren, args: [McListOption,] }],
+    horizontal: [{ type: Input }],
+    selectionChange: [{ type: Output }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McListBase {
 }
@@ -644,15 +650,15 @@ McListItem.decorators = [
 ];
 /** @nocollapse */
 McListItem.ctorParameters = () => [
-    { type: ElementRef, },
+    { type: ElementRef }
 ];
 McListItem.propDecorators = {
-    "_lines": [{ type: ContentChildren, args: [McLine,] },],
+    _lines: [{ type: ContentChildren, args: [McLine,] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McListModule {
 }
@@ -682,12 +688,12 @@ McListModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, _McListSelectionMixinBase, McListSelection };

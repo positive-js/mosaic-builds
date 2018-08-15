@@ -12,7 +12,7 @@ import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McIconCSSStyler {
 }
@@ -30,7 +30,8 @@ class McIconBase {
         this._elementRef = _elementRef;
     }
 }
-const /** @type {?} */ _McIconMixinBase = mixinColor(McIconBase);
+/** @type {?} */
+const _McIconMixinBase = mixinColor(McIconBase);
 class McIcon extends _McIconMixinBase {
     /**
      * @param {?} elementRef
@@ -58,13 +59,13 @@ McIcon.decorators = [
 ];
 /** @nocollapse */
 McIcon.ctorParameters = () => [
-    { type: ElementRef, },
-    { type: undefined, decorators: [{ type: Attribute, args: ['mc-icon',] },] },
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Attribute, args: ['mc-icon',] }] }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 class McIconModule {
 }
@@ -88,12 +89,12 @@ McIconModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
 export { McIconModule, McIconCSSStyler, McIconBase, _McIconMixinBase, McIcon };

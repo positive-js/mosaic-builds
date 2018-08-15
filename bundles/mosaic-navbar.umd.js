@@ -41,7 +41,7 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconCSSStyler = /** @class */ (function () {
     function McIconCSSStyler() {
@@ -60,7 +60,8 @@ var McIconBase = /** @class */ (function () {
     }
     return McIconBase;
 }());
-var /** @type {?} */ _McIconMixinBase = core$1.mixinColor(McIconBase);
+/** @type {?} */
+var _McIconMixinBase = core$1.mixinColor(McIconBase);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {
@@ -88,15 +89,15 @@ var McIcon = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McIcon.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: undefined, decorators: [{ type: core.Attribute, args: ['mc-icon',] },] },
+        { type: core.ElementRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
     ]; };
     return McIcon;
 }(_McIconMixinBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McIconModule = /** @class */ (function () {
     function McIconModule() {
@@ -123,16 +124,24 @@ var McIconModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-var /** @type {?} */ COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
-var /** @type {?} */ MC_ICON = 'mc-icon';
-var /** @type {?} */ MC_NAVBAR = 'mc-navbar';
-var /** @type {?} */ MC_NAVBAR_CONTAINER = 'mc-navbar-container';
-var /** @type {?} */ MC_NAVBAR_ITEM = 'mc-navbar-item';
-var /** @type {?} */ MC_NAVBAR_BRAND = 'mc-navbar-brand';
-var /** @type {?} */ MC_NAVBAR_TITLE = 'mc-navbar-title';
-var /** @type {?} */ MC_NAVBAR_LOGO = 'mc-navbar-logo';
+/** @type {?} */
+var COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
+/** @type {?} */
+var MC_ICON = 'mc-icon';
+/** @type {?} */
+var MC_NAVBAR = 'mc-navbar';
+/** @type {?} */
+var MC_NAVBAR_CONTAINER = 'mc-navbar-container';
+/** @type {?} */
+var MC_NAVBAR_ITEM = 'mc-navbar-item';
+/** @type {?} */
+var MC_NAVBAR_BRAND = 'mc-navbar-brand';
+/** @type {?} */
+var MC_NAVBAR_TITLE = 'mc-navbar-title';
+/** @type {?} */
+var MC_NAVBAR_LOGO = 'mc-navbar-logo';
 var McNavbarLogo = /** @class */ (function () {
     function McNavbarLogo() {
     }
@@ -178,7 +187,8 @@ var McNavbarItemBase = /** @class */ (function () {
     }
     return McNavbarItemBase;
 }());
-var /** @type {?} */ _McNavbarMixinBase = core$1.mixinDisabled(McNavbarItemBase);
+/** @type {?} */
+var _McNavbarMixinBase = core$1.mixinDisabled(McNavbarItemBase);
 var McNavbarItem = /** @class */ (function (_super) {
     __extends(McNavbarItem, _super);
     function McNavbarItem(elementRef, _focusMonitor, _platform, _cdRef) {
@@ -292,7 +302,8 @@ var McNavbarItem = /** @class */ (function (_super) {
      * @return {?}
      */
     function ($event) {
-        var /** @type {?} */ isNavbarItem = (/** @type {?} */ ($event.target)).classList.contains(MC_NAVBAR_ITEM);
+        /** @type {?} */
+        var isNavbarItem = (/** @type {?} */ ($event.target)).classList.contains(MC_NAVBAR_ITEM);
         if (this.hasDropdownContent && $event.keyCode === keycodes.SPACE && isNavbarItem) {
             this.toggleDropdown();
         }
@@ -371,7 +382,8 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        var /** @type {?} */ events = this.elementRef.nativeElement.eventListeners('click');
+        /** @type {?} */
+        var events = this.elementRef.nativeElement.eventListeners('click');
         events.forEach(function (event) { return _this.elementRef.nativeElement.removeEventListener('click', event); });
         this.elementRef.nativeElement.addEventListener('click', function (event) {
             if (_this.elementRef.nativeElement.hasAttribute('disabled')) {
@@ -395,17 +407,17 @@ var McNavbarItem = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McNavbarItem.ctorParameters = function () { return [
-        { type: core.ElementRef, },
-        { type: a11y.FocusMonitor, },
-        { type: platform.Platform, },
-        { type: core.ChangeDetectorRef, },
+        { type: core.ElementRef },
+        { type: a11y.FocusMonitor },
+        { type: platform.Platform },
+        { type: core.ChangeDetectorRef }
     ]; };
     McNavbarItem.propDecorators = {
-        "tabIndex": [{ type: core.Input },],
-        "dropdownItems": [{ type: core.Input },],
-        "collapsedTitle": [{ type: core.Input },],
-        "dropdownItemTmpl": [{ type: core.ContentChild, args: ['dropdownItemTmpl', { read: core.TemplateRef },] },],
-        "dropdownContent": [{ type: core.ViewChild, args: ['dropdownContent', { read: core.ElementRef },] },],
+        tabIndex: [{ type: core.Input }],
+        dropdownItems: [{ type: core.Input }],
+        collapsedTitle: [{ type: core.Input }],
+        dropdownItemTmpl: [{ type: core.ContentChild, args: ['dropdownItemTmpl', { read: core.TemplateRef },] }],
+        dropdownContent: [{ type: core.ViewChild, args: ['dropdownContent', { read: core.ElementRef },] }]
     };
     return McNavbarItem;
 }(_McNavbarMixinBase));
@@ -428,10 +440,9 @@ var McNavbarContainer = /** @class */ (function () {
                     selector: MC_NAVBAR_CONTAINER
                 },] },
     ];
-    /** @nocollapse */
     McNavbarContainer.propDecorators = {
-        "position": [{ type: core.Input },],
-        "cssClasses": [{ type: core.HostBinding, args: ['class',] },],
+        position: [{ type: core.Input }],
+        cssClasses: [{ type: core.HostBinding, args: ['class',] }]
     };
     return McNavbarContainer;
 }());
@@ -531,7 +542,8 @@ var CachedItemWidth = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ computedTitle = this.element.getAttribute('computedTitle');
+        /** @type {?} */
+        var computedTitle = this.element.getAttribute('computedTitle');
         return computedTitle
             ? decodeURI(computedTitle)
             : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
@@ -565,7 +577,8 @@ var McNavbar = /** @class */ (function () {
             MC_NAVBAR_BRAND,
             MC_NAVBAR_TITLE
         ];
-        var /** @type {?} */ resizeObserver = rxjs.fromEvent(window, 'resize')
+        /** @type {?} */
+        var resizeObserver = rxjs.fromEvent(window, 'resize')
             .pipe(operators.debounceTime(this.resizeDebounceInterval));
         this._resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
     }
@@ -614,9 +627,11 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
-        for (var /** @type {?} */ i = this.itemsWidths.length - 1; i >= 0; i--) {
-            var /** @type {?} */ item = this.itemsWidths[i];
+        /** @type {?} */
+        var collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
+        for (var i = this.itemsWidths.length - 1; i >= 0; i--) {
+            /** @type {?} */
+            var item = this.itemsWidths[i];
             if (!item.canCollapse) {
                 continue;
             }
@@ -664,9 +679,12 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function (element) {
-        var /** @type {?} */ baseWidth = element.getBoundingClientRect().width;
-        var /** @type {?} */ marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
-        var /** @type {?} */ marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
+        /** @type {?} */
+        var baseWidth = element.getBoundingClientRect().width;
+        /** @type {?} */
+        var marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
+        /** @type {?} */
+        var marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
         return baseWidth + marginRight + marginLeft;
     };
     /**
@@ -677,9 +695,11 @@ var McNavbar = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        var /** @type {?} */ allItemsSelector = this.secondLevelElements
+        /** @type {?} */
+        var allItemsSelector = this.secondLevelElements
             .map(function (e) { return _this.firstLevelElement + ">" + e; });
-        var /** @type {?} */ allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
+        /** @type {?} */
+        var allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
         this._itemsWidths = allItems
             .map(function (el) { return new CachedItemWidth(el, _this.getOuterElementWidth(el), _this.getItemsForCollapse(el)); });
     };
@@ -692,7 +712,8 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function (element) {
-        var /** @type {?} */ icon = element.querySelector("[" + MC_ICON + "]," + MC_NAVBAR_LOGO + ",[" + MC_NAVBAR_LOGO + "]");
+        /** @type {?} */
+        var icon = element.querySelector("[" + MC_ICON + "]," + MC_NAVBAR_LOGO + ",[" + MC_NAVBAR_LOGO + "]");
         if (!icon) {
             return [];
         }
@@ -710,14 +731,14 @@ var McNavbar = /** @class */ (function () {
     ];
     /** @nocollapse */
     McNavbar.ctorParameters = function () { return [
-        { type: core.ElementRef, },
+        { type: core.ElementRef }
     ]; };
     return McNavbar;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 var McNavbarModule = /** @class */ (function () {
     function McNavbarModule() {

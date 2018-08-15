@@ -51,19 +51,19 @@ var McInput = /** @class */ (function (_super) {
         _this._platform = _platform;
         _this.ngControl = ngControl;
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
         _this.focused = false;
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
         _this.stateChanges = new Subject();
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
         _this.controlType = 'mc-input';
         _this._uid = "mc-input-" + nextUniqueId++;
         _this._disabled = false;
@@ -79,21 +79,18 @@ var McInput = /** @class */ (function (_super) {
         ].filter(function (t) { return getSupportedInputTypes().has(t); });
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
-        // If no input value accessor was explicitly specified, use the element as the input value
-        // accessor.
         _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
         _this._previousNativeValue = _this.value;
-        // Force setter to be called in case id was not specified.
         // Force setter to be called in case id was not specified.
         _this.id = _this.id;
         return _this;
     }
     Object.defineProperty(McInput.prototype, "disabled", {
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: function () {
             if (this.ngControl && this.ngControl.disabled !== null) {
                 return this.ngControl.disabled;
             }
@@ -112,11 +109,11 @@ var McInput = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McInput.prototype, "id", {
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: function () {
             return this._id;
         },
         set: function (value) {
@@ -126,11 +123,11 @@ var McInput = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McInput.prototype, "required", {
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: function () {
             return this._required;
         },
         set: function (value) {
@@ -140,10 +137,9 @@ var McInput = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McInput.prototype, "type", {
-        get: 
         // tslint:disable no-reserved-keywords
         /** Input type of the element. */
-        function () {
+        get: function () {
             return this._type;
         },
         set: function (value) {
@@ -160,13 +156,12 @@ var McInput = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McInput.prototype, "value", {
-        get: 
         // tslint:enable no-reserved-keywords
         /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        get: function () {
             return this._inputValueAccessor.value;
         },
         set: function (value) {
@@ -197,15 +192,11 @@ var McInput = /** @class */ (function (_super) {
         this._dirtyCheckNativeValue();
     };
     /** Focuses the input. */
-    /** Focuses the input. */
-    McInput.prototype.focus = /** Focuses the input. */
-    function () {
+    McInput.prototype.focus = function () {
         this._elementRef.nativeElement.focus();
     };
     /** Callback for the cases where the focused state of the input changes. */
-    /** Callback for the cases where the focused state of the input changes. */
-    McInput.prototype._focusChanged = /** Callback for the cases where the focused state of the input changes. */
-    function (isFocused) {
+    McInput.prototype._focusChanged = function (isFocused) {
         if (isFocused !== this.focused) {
             this.focused = isFocused;
             this.stateChanges.next();
@@ -225,11 +216,7 @@ var McInput = /** @class */ (function (_super) {
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        get: /**
-             * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-        function () {
+        get: function () {
             return !this._isNeverEmpty() && !this._elementRef.nativeElement.value && !this._isBadInput();
         },
         enumerable: true,
@@ -239,21 +226,11 @@ var McInput = /** @class */ (function (_super) {
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
-    McInput.prototype.onContainerClick = /**
-         * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
-    function () {
+    McInput.prototype.onContainerClick = function () {
         this.focus();
     };
     /** Does some manual dirty checking on the native input `value` property. */
-    /** Does some manual dirty checking on the native input `value` property. */
-    McInput.prototype._dirtyCheckNativeValue = /** Does some manual dirty checking on the native input `value` property. */
-    function () {
+    McInput.prototype._dirtyCheckNativeValue = function () {
         var newValue = this.value;
         if (this._previousNativeValue !== newValue) {
             this._previousNativeValue = newValue;
@@ -261,23 +238,17 @@ var McInput = /** @class */ (function (_super) {
         }
     };
     /** Make sure the input is a supported type. */
-    /** Make sure the input is a supported type. */
-    McInput.prototype._validateType = /** Make sure the input is a supported type. */
-    function () {
+    McInput.prototype._validateType = function () {
         if (MC_INPUT_INVALID_TYPES.indexOf(this._type) > -1) {
             throw getMcInputUnsupportedTypeError(this._type);
         }
     };
     /** Checks whether the input type is one of the types that are never empty. */
-    /** Checks whether the input type is one of the types that are never empty. */
-    McInput.prototype._isNeverEmpty = /** Checks whether the input type is one of the types that are never empty. */
-    function () {
+    McInput.prototype._isNeverEmpty = function () {
         return this._neverEmptyInputTypes.indexOf(this._type) > -1;
     };
     /** Checks whether the input is invalid based on the native validation. */
-    /** Checks whether the input is invalid based on the native validation. */
-    McInput.prototype._isBadInput = /** Checks whether the input is invalid based on the native validation. */
-    function () {
+    McInput.prototype._isBadInput = function () {
         // The `validity` property won't be present on platform-server.
         var validity = this._elementRef.nativeElement.validity;
         return validity && validity.badInput;
@@ -303,22 +274,22 @@ var McInput = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McInput.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: Platform, },
-        { type: NgControl, decorators: [{ type: Optional }, { type: Self },] },
-        { type: NgForm, decorators: [{ type: Optional },] },
-        { type: FormGroupDirective, decorators: [{ type: Optional },] },
-        { type: ErrorStateMatcher, },
-        { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [MC_INPUT_VALUE_ACCESSOR,] },] },
+        { type: ElementRef },
+        { type: Platform },
+        { type: NgControl, decorators: [{ type: Optional }, { type: Self }] },
+        { type: NgForm, decorators: [{ type: Optional }] },
+        { type: FormGroupDirective, decorators: [{ type: Optional }] },
+        { type: ErrorStateMatcher },
+        { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [MC_INPUT_VALUE_ACCESSOR,] }] }
     ]; };
     McInput.propDecorators = {
-        "errorStateMatcher": [{ type: Input },],
-        "disabled": [{ type: Input },],
-        "id": [{ type: Input },],
-        "placeholder": [{ type: Input },],
-        "required": [{ type: Input },],
-        "type": [{ type: Input },],
-        "value": [{ type: Input },],
+        errorStateMatcher: [{ type: Input }],
+        disabled: [{ type: Input }],
+        id: [{ type: Input }],
+        placeholder: [{ type: Input }],
+        required: [{ type: Input }],
+        type: [{ type: Input }],
+        value: [{ type: Input }]
     };
     return McInput;
 }(_McInputMixinBase));

@@ -81,13 +81,13 @@ var McProgressBar = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McProgressBar.ctorParameters = function () { return [
-        { type: core.ElementRef, },
+        { type: core.ElementRef }
     ]; };
     McProgressBar.propDecorators = {
-        "id": [{ type: core.Input },],
-        "value": [{ type: core.Input },],
-        "mode": [{ type: core.Input },],
-        "color": [{ type: core.Input },],
+        id: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        mode: [{ type: core.Input }],
+        color: [{ type: core.Input }]
     };
     return McProgressBar;
 }(_McProgressBarMixinBase));
