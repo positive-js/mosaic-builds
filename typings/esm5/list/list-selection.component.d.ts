@@ -75,7 +75,7 @@ export declare class McListSelection extends _McListSelectionMixinBase implement
     setDisabledState(isDisabled: boolean): void;
     getSelectedOptionValues(): string[];
     toggleFocusedOption(): void;
-    _canUnselectLast(listOption: McListOption): boolean;
+    _canDeselectLast(listOption: McListOption): boolean;
     _getHeight(): number;
     _onTouched: () => void;
     _removeOptionFromList(option: McListOption): void;

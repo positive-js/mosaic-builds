@@ -345,7 +345,7 @@ class McListSelection extends _McListSelectionMixinBase {
         }
         else if (this.withCtrl) {
             this.withCtrl = false;
-            if (!this._canUnselectLast(option)) {
+            if (!this._canDeselectLast(option)) {
                 return;
             }
             option.toggle();
@@ -409,7 +409,7 @@ class McListSelection extends _McListSelectionMixinBase {
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             /** @type {?} */
             const focusedOption = this.options.toArray()[focusedIndex];
-            if (focusedOption && this._canUnselectLast(focusedOption)) {
+            if (focusedOption && this._canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
                 // Emit a change event because the focused option changed its state through user interaction.
                 this._emitChangeEvent(focusedOption);
@@ -420,7 +420,7 @@ class McListSelection extends _McListSelectionMixinBase {
      * @param {?} listOption
      * @return {?}
      */
-    _canUnselectLast(listOption) {
+    _canDeselectLast(listOption) {
         return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
     }
     /**

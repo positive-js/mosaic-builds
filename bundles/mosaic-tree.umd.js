@@ -234,6 +234,15 @@ var McTreeNodeOption = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
+    McTreeNodeOption.prototype._getHeight = /**
+     * @return {?}
+     */
+    function () {
+        return this._elementRef.nativeElement.getClientRects()[0].height;
+    };
+    /**
+     * @return {?}
+     */
     McTreeNodeOption.prototype._handleFocus = /**
      * @return {?}
      */
@@ -317,14 +326,16 @@ var McTreeSelectionChange = /** @class */ (function () {
  */
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
-    function McTreeSelection(_differs, _changeDetectorRef, tabIndex, multiple, autoSelect) {
+    function McTreeSelection(_elementRef, _differs, _changeDetectorRef, tabIndex, multiple, autoSelect, noUnselect) {
         var _this = _super.call(this, _differs, _changeDetectorRef) || this;
+        _this._elementRef = _elementRef;
         _this._disabled = false;
         _this.navigationChange = new core.EventEmitter();
         _this.selectionChange = new core.EventEmitter();
         _this.tabIndex = parseInt(tabIndex) || 0;
         _this.multiple = multiple === null ? true : core$1.toBoolean(multiple);
         _this.autoSelect = autoSelect === null ? true : core$1.toBoolean(autoSelect);
+        _this.noUnselect = noUnselect === null ? true : core$1.toBoolean(noUnselect);
         _this.selectedOptions = new collections.SelectionModel(_this.multiple);
         return _this;
     }
@@ -366,6 +377,8 @@ var McTreeSelection = /** @class */ (function (_super) {
     function (event) {
         /** @type {?} */
         var keyCode = event.keyCode;
+        this.withShift = event.shiftKey;
+        this.withCtrl = event.ctrlKey;
         switch (keyCode) {
             case keycodes.LEFT_ARROW:
                 if (this._keyManager.activeItem) {
@@ -385,19 +398,19 @@ var McTreeSelection = /** @class */ (function (_super) {
                 event.preventDefault();
                 break;
             case keycodes.HOME:
-                console.log('need set focus on first node');
+                this._keyManager.setFirstItemActive();
                 event.preventDefault();
                 break;
             case keycodes.END:
-                console.log('need set focus on last node');
+                this._keyManager.setLastItemActive();
                 event.preventDefault();
                 break;
             case keycodes.PAGE_UP:
-                console.log('need do scroll page and set focus on first in viewport');
+                this._keyManager.setPreviousPageItemActive();
                 event.preventDefault();
                 break;
             case keycodes.PAGE_DOWN:
-                console.log('need do scroll page and set focus on last in viewport');
+                this._keyManager.setNextPageItemActive();
                 event.preventDefault();
                 break;
             default:
@@ -417,6 +430,18 @@ var McTreeSelection = /** @class */ (function (_super) {
             .withHorizontalOrientation(null);
     };
     /**
+     * @return {?}
+     */
+    McTreeSelection.prototype.updateScrollSize = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.options.first) {
+            return;
+        }
+        this._keyManager.withScrollSize(Math.floor(this._getHeight() / this.options.first._getHeight()));
+    };
+    /**
      * @param {?} option
      * @return {?}
      */
@@ -426,9 +451,39 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function (option) {
         this._keyManager.updateActiveItem(option);
-        if (this.autoSelect) {
-            this.options.forEach(function (item) { return item.setSelected(false); });
-            option.setSelected(true);
+        if (this.withShift && this.multiple) {
+            /** @type {?} */
+            var previousIndex_1 = this._keyManager.previousActiveItemIndex;
+            /** @type {?} */
+            var activeIndex_1 = this._keyManager.activeItemIndex;
+            if (previousIndex_1 < activeIndex_1) {
+                this.options.forEach(function (item, index) {
+                    if (index >= previousIndex_1 && index <= activeIndex_1) {
+                        item.setSelected(true);
+                    }
+                });
+            }
+            else {
+                this.options.forEach(function (item, index) {
+                    if (index >= activeIndex_1 && index <= previousIndex_1) {
+                        item.setSelected(true);
+                    }
+                });
+            }
+            this.withShift = false;
+        }
+        else if (this.withCtrl) {
+            this.withCtrl = false;
+            if (!this._canDeselectLast(option)) {
+                return;
+            }
+            option.toggle();
+        }
+        else {
+            if (this.autoSelect) {
+                this.options.forEach(function (item) { return item.setSelected(false); });
+                option.setSelected(true);
+            }
         }
         this._emitNavigationEvent(option);
     };
@@ -445,7 +500,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             /** @type {?} */
             var focusedOption = this.options.toArray()[focusedIndex];
-            if (focusedOption && this._canUnselectLast(focusedOption)) {
+            if (focusedOption && this._canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
                 // Emit a change event because the focused option changed its state through user interaction.
                 this._emitChangeEvent(focusedOption);
@@ -487,6 +542,16 @@ var McTreeSelection = /** @class */ (function (_super) {
             this.options.reset(arrayOfInstances);
             this.options.notifyOnChanges();
         }
+        this.updateScrollSize();
+    };
+    /**
+     * @return {?}
+     */
+    McTreeSelection.prototype._getHeight = /**
+     * @return {?}
+     */
+    function () {
+        return this._elementRef.nativeElement.getClientRects()[0].height;
     };
     /**
      * @param {?} option
@@ -524,16 +589,15 @@ var McTreeSelection = /** @class */ (function (_super) {
         return index >= 0 && index < this.options.length;
     };
     /**
-     * @param {?} _option
+     * @param {?} option
      * @return {?}
      */
-    McTreeSelection.prototype._canUnselectLast = /**
-     * @param {?} _option
+    McTreeSelection.prototype._canDeselectLast = /**
+     * @param {?} option
      * @return {?}
      */
-    function (_option) {
-        return true;
-        // return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
+    function (option) {
+        return !(this.noUnselect && this.selectedOptions.selected.length === 1 && option.selected);
     };
     McTreeSelection.decorators = [
         { type: core.Component, args: [{
@@ -542,11 +606,12 @@ var McTreeSelection = /** @class */ (function (_super) {
                     template: "<ng-container cdkTreeNodeOutlet></ng-container>",
                     host: {
                         '[tabIndex]': 'tabIndex',
-                        class: 'mc-tree',
+                        class: 'mc-tree-selection',
                         role: 'tree-selection',
-                        '(keydown)': '_onKeyDown($event)'
+                        '(keydown)': '_onKeyDown($event)',
+                        '(window:resize)': 'updateScrollSize()'
                     },
-                    styles: [".mc-tree{display:block;border:1px solid red}.mc-tree-node{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-node>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-node:focus{outline:0}.mc-tree-node:not([disabled]){cursor:pointer}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
+                    styles: [".mc-tree-selection{display:block;border:1px solid red}.mc-tree-node{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-node>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-node:focus{outline:0}.mc-tree-node:not([disabled]){cursor:pointer}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     providers: [{ provide: tree.CdkTree, useExisting: McTreeSelection }]
@@ -554,11 +619,13 @@ var McTreeSelection = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McTreeSelection.ctorParameters = function () { return [
+        { type: core.ElementRef },
         { type: core.IterableDiffers },
         { type: core.ChangeDetectorRef },
         { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
         { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] }
+        { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
+        { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] }
     ]; };
     McTreeSelection.propDecorators = {
         _nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet,] }],

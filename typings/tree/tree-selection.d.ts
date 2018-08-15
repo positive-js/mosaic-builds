@@ -19,6 +19,7 @@ export declare class McTreeNodeOption<T> extends CdkTreeNode<T> implements CanDi
     focus(): void;
     toggle(): void;
     setSelected(selected: boolean): void;
+    _getHeight(): number;
     _handleFocus(): void;
     _handleBlur(): void;
     _handleClick(): void;
@@ -35,6 +36,7 @@ export declare class McTreeSelectionChange {
     constructor(source: McTreeSelection<any>, option: McTreeNodeOption<any>);
 }
 export declare class McTreeSelection<T> extends _McTreeSelectionBase<T> implements AfterContentInit, CanDisable, HasTabIndex {
+    private _elementRef;
     _nodeOutlet: CdkTreeNodeOutlet;
     options: QueryList<McTreeNodeOption<T>>;
     _keyManager: FocusKeyManager<McTreeNodeOption<T>>;
@@ -43,15 +45,20 @@ export declare class McTreeSelection<T> extends _McTreeSelectionBase<T> implemen
     tabIndex: number;
     multiple: boolean;
     autoSelect: boolean;
+    noUnselect: boolean;
+    withShift: boolean;
+    withCtrl: boolean;
     disabled: boolean;
     readonly navigationChange: EventEmitter<McTreeNavigationChange>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange>;
-    constructor(_differs: IterableDiffers, _changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string, autoSelect: string);
+    constructor(_elementRef: ElementRef, _differs: IterableDiffers, _changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string, autoSelect: string, noUnselect: string);
     _onKeyDown(event: KeyboardEvent): void;
     ngAfterContentInit(): void;
+    updateScrollSize(): void;
     setFocusedOption(option: McTreeNodeOption<T>): void;
     toggleFocusedOption(): void;
     renderNodeChanges(data: T[], dataDiffer?: IterableDiffer<T>, viewContainer?: any, parentData?: T): void;
+    _getHeight(): number;
     _emitNavigationEvent(option: McTreeNodeOption<T>): void;
     _emitChangeEvent(option: McTreeNodeOption<T>): void;
     /**
@@ -60,5 +67,5 @@ export declare class McTreeSelection<T> extends _McTreeSelectionBase<T> implemen
      * @returns True if the index is valid for our list of options.
      */
     private _isValidIndex(index);
-    private _canUnselectLast(_option);
+    private _canDeselectLast(option);
 }

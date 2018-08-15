@@ -434,7 +434,7 @@ var McListSelection = /** @class */ (function (_super) {
         }
         else if (this.withCtrl) {
             this.withCtrl = false;
-            if (!this._canUnselectLast(option)) {
+            if (!this._canDeselectLast(option)) {
                 return;
             }
             option.toggle();
@@ -525,7 +525,7 @@ var McListSelection = /** @class */ (function (_super) {
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
             /** @type {?} */
             var focusedOption = this.options.toArray()[focusedIndex];
-            if (focusedOption && this._canUnselectLast(focusedOption)) {
+            if (focusedOption && this._canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
                 // Emit a change event because the focused option changed its state through user interaction.
                 this._emitChangeEvent(focusedOption);
@@ -536,7 +536,7 @@ var McListSelection = /** @class */ (function (_super) {
      * @param {?} listOption
      * @return {?}
      */
-    McListSelection.prototype._canUnselectLast = /**
+    McListSelection.prototype._canDeselectLast = /**
      * @param {?} listOption
      * @return {?}
      */

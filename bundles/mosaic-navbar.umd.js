@@ -781,11 +781,11 @@ exports._McNavbarMixinBase = _McNavbarMixinBase;
 exports.McNavbarItem = McNavbarItem;
 exports.McNavbarContainer = McNavbarContainer;
 exports.McNavbar = McNavbar;
-exports.ɵe8 = McIcon;
-exports.ɵc8 = McIconBase;
-exports.ɵb8 = McIconCSSStyler;
-exports.ɵd8 = _McIconMixinBase;
-exports.ɵa8 = McIconModule;
+exports.ɵe9 = McIcon;
+exports.ɵc9 = McIconBase;
+exports.ɵb9 = McIconCSSStyler;
+exports.ɵd9 = _McIconMixinBase;
+exports.ɵa9 = McIconModule;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
