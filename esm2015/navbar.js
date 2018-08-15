@@ -659,5 +659,5 @@ McNavbarModule.decorators = [
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
-export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar, McIcon as ɵe9, McIconBase as ɵc9, McIconCSSStyler as ɵb9, _McIconMixinBase as ɵd9, McIconModule as ɵa9 };
+export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar, McIcon as ɵe8, McIconBase as ɵc8, McIconCSSStyler as ɵb8, _McIconMixinBase as ɵd8, McIconModule as ɵa8 };
 //# sourceMappingURL=navbar.js.map
