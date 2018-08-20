@@ -1,4 +1,40 @@
 // Import all the theming
+@keyframes mc-progress {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 29px 0;
+    }
+}
+
+.mc-progress {
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        $lighter: transparent;
+        $darker: rgba(0, 0, 0, .05);
+        background: linear-gradient(
+                135deg,
+                $darker 10px, $lighter 10px,
+                $lighter 20px, $darker 20px,
+                $darker 30px, $lighter 30px
+        ) repeat;
+        background-size: 29px 29px;
+        animation: mc-progress 1s linear infinite;
+    }
+}
+
+
 @mixin cdk-a11y {
 
     .cdk-visually-hidden {
@@ -544,7 +580,7 @@ $mc-dark-theme-background: (
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-ef0921cpx mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-b1db7f5px mc-color($second, 300);
         }
 
         &__light {
@@ -566,44 +602,6 @@ $mc-dark-theme-background: (
 }
 
 
-
-
-@keyframes mc-progress {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: 29px 0;
-    }
-}
-
-.mc-progress {
-    position: relative;
-
-    &:after {
-        content: '';
-        position: absolute;
-
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-
-        $lighter: transparent;
-        $darker: rgba(0, 0, 0, .05);
-        background: linear-gradient(
-                135deg,
-                $darker 10px, $lighter 10px,
-                $lighter 20px, $darker 20px,
-                $darker 30px, $lighter 30px
-        ) repeat;
-        background-size: 29px 29px;
-        animation: mc-progress 1s linear infinite;
-    }
-}
-
-
-// TODO: Its only for testing colors
 
 
 
@@ -747,7 +745,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-ef0921cpx mc-color($primary, 500);
+            box-shadow: 0 0.0.1-b1db7f5px mc-color($primary, 500);
         }
     }
 }
@@ -784,7 +782,6 @@ $mc-dark-theme-background: (
 
 
 // TODO: Its only for testing colors
-
 
 
 // This mixin will ensure that lines that overflow the container will hide the overflow and
@@ -921,6 +918,50 @@ $mc-dark-theme-background: (
 
 
 
+
+@mixin mc-tree-theme($theme) {
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    .mc-tree-node {
+        color: mc-color($foreground, text);
+
+        &.mc-focused {
+            border-color: mc-color($primary, 500);
+        }
+
+        &:hover,
+        &.mc-hovered {
+            background-color: mc-color($background, 'hover');
+        }
+
+        &.mc-selected {
+            background-color: mc-color($primary, 100);
+        }
+
+        &[disabled] {
+            background-color: transparent;
+
+            color: mc-color($foreground, disabled-text);
+        }
+    }
+}
+
+@mixin mc-tree-typography($config) {
+    .mc-tree-selection {
+        font-family: mc-font-family($config);
+    }
+
+    .mc-tree-node {
+        font-weight: mc-font-weight($config, body);
+        font-size: mc-font-size($config, body);
+    }
+}
+
+
+
+
+
 @mixin _mc-radio-color($palette) {
 
     .mc-radio-outer-circle {
@@ -1025,7 +1066,7 @@ $mc-dark-theme-background: (
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-ef0921cpx map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-b1db7f5px map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1139,8 +1180,6 @@ $mc-dark-theme-background: (
 
 
 
-
-
 @mixin _mc-navbar-theme-color($theme) {
     $palette: map-get($theme, primary);
 
@@ -1177,7 +1216,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-ef0921cpx mc-color($palette, 500);
+            box-shadow: 0 0.0.1-b1db7f5px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1327,7 +1366,7 @@ $mc-dark-theme-background: (
                 border: {
                     color: mc-color($primary, 500);
                 }
-                box-shadow: 0 0.0.1-ef0921cpx mc-color($primary, 500);
+                box-shadow: 0 0.0.1-b1db7f5px mc-color($primary, 500);
             }
 
             &.ng-invalid {
@@ -1350,7 +1389,7 @@ $mc-dark-theme-background: (
                 border: {
                     color: mc-color($mc-red, 400);
                 }
-                box-shadow: 0 0.0.1-ef0921cpx mc-color($mc-red, 400);
+                box-shadow: 0 0.0.1-b1db7f5px mc-color($mc-red, 400);
             }
         }
 
@@ -1471,49 +1510,6 @@ $mc-dark-theme-background: (
 
 
 
-
-
-
-
-
-@mixin mc-tree-theme($theme) {
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
-
-    .mc-tree-node {
-        color: mc-color($foreground, text);
-
-        &.mc-focused {
-            border-color: mc-color($primary, 500);
-        }
-
-        &:hover,
-        &.mc-hovered {
-            background-color: mc-color($background, 'hover');
-        }
-
-        &.mc-selected {
-            background-color: mc-color($primary, 100);
-        }
-
-        &[disabled] {
-            background-color: transparent;
-
-            color: mc-color($foreground, disabled-text);
-        }
-    }
-}
-
-@mixin mc-tree-typography($config) {
-    .mc-tree-selection {
-        font-family: mc-font-family($config);
-    }
-
-    .mc-tree-node {
-        font-weight: mc-font-weight($config, body);
-        font-size: mc-font-size($config, body);
-    }
-}
 
 
 
