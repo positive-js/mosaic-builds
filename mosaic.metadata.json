@@ -28,10 +28,10 @@
       "from": "./list"
     },
     {
-      "from": "./navbar"
+      "from": "./progress-bar"
     },
     {
-      "from": "./progress-bar"
+      "from": "./navbar"
     },
     {
       "from": "./form-field"

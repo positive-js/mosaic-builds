@@ -2857,89 +2857,6 @@ var McListModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
-var McIconCSSStyler$1 = /** @class */ (function () {
-    function McIconCSSStyler() {
-    }
-    McIconCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mc-icon]',
-                    host: { class: 'mc mc-icon' }
-                },] },
-    ];
-    return McIconCSSStyler;
-}());
-var McIconBase$1 = /** @class */ (function () {
-    function McIconBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McIconBase;
-}());
-/** @type {?} */
-var _McIconMixinBase$1 = mixinColor(McIconBase$1);
-var McIcon$1 = /** @class */ (function (_super) {
-    __extends(McIcon, _super);
-    function McIcon(elementRef, iconName) {
-        var _this = _super.call(this, elementRef) || this;
-        elementRef.nativeElement.classList.add(iconName);
-        return _this;
-    }
-    /**
-     * @return {?}
-     */
-    McIcon.prototype._getHostElement = /**
-     * @return {?}
-     */
-    function () {
-        return this._elementRef.nativeElement;
-    };
-    McIcon.decorators = [
-        { type: core.Component, args: [{
-                    selector: "[mc-icon]",
-                    template: '<ng-content></ng-content>',
-                    styles: [""],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None
-                },] },
-    ];
-    /** @nocollapse */
-    McIcon.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
-    ]; };
-    return McIcon;
-}(_McIconMixinBase$1));
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-var McIconModule$1 = /** @class */ (function () {
-    function McIconModule() {
-    }
-    McIconModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McIcon$1,
-                        McIconCSSStyler$1
-                    ],
-                    declarations: [
-                        McIcon$1,
-                        McIconCSSStyler$1
-                    ]
-                },] },
-    ];
-    return McIconModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 /** @type {?} */
 var COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
 /** @type {?} */
@@ -3563,7 +3480,7 @@ var McNavbarModule = /** @class */ (function () {
                         common.CommonModule,
                         a11y.A11yModule,
                         platform.PlatformModule,
-                        McIconModule$1
+                        McIconModule
                     ],
                     exports: [
                         McNavbar,
@@ -5268,11 +5185,6 @@ exports.McListSelectionChange = McListSelectionChange;
 exports.McListSelectionBase = McListSelectionBase;
 exports._McListSelectionMixinBase = _McListSelectionMixinBase;
 exports.McListSelection = McListSelection;
-exports.ɵe8 = McIcon$1;
-exports.ɵc8 = McIconBase$1;
-exports.ɵb8 = McIconCSSStyler$1;
-exports.ɵd8 = _McIconMixinBase$1;
-exports.ɵa8 = McIconModule$1;
 exports.McNavbarModule = McNavbarModule;
 exports.McNavbarLogo = McNavbarLogo;
 exports.McNavbarBrand = McNavbarBrand;

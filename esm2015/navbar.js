@@ -4,91 +4,15 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Attribute, ChangeDetectionStrategy, Component, Directive, ElementRef, ViewEncapsulation, NgModule, HostBinding, Input, ContentChild, TemplateRef, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { mixinColor, mixinDisabled } from '@ptsecurity/mosaic/core';
-import { CommonModule } from '@angular/common';
-import { A11yModule, FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { PlatformModule, Platform } from '@ptsecurity/cdk/platform';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Component, Directive, ElementRef, HostBinding, Input, ViewEncapsulation, ContentChild, TemplateRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, NgModule } from '@angular/core';
+import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-class McIconCSSStyler {
-}
-McIconCSSStyler.decorators = [
-    { type: Directive, args: [{
-                selector: '[mc-icon]',
-                host: { class: 'mc mc-icon' }
-            },] },
-];
-class McIconBase {
-    /**
-     * @param {?} _elementRef
-     */
-    constructor(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-}
-/** @type {?} */
-const _McIconMixinBase = mixinColor(McIconBase);
-class McIcon extends _McIconMixinBase {
-    /**
-     * @param {?} elementRef
-     * @param {?} iconName
-     */
-    constructor(elementRef, iconName) {
-        super(elementRef);
-        elementRef.nativeElement.classList.add(iconName);
-    }
-    /**
-     * @return {?}
-     */
-    _getHostElement() {
-        return this._elementRef.nativeElement;
-    }
-}
-McIcon.decorators = [
-    { type: Component, args: [{
-                selector: `[mc-icon]`,
-                template: '<ng-content></ng-content>',
-                styles: [""],
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None
-            },] },
-];
-/** @nocollapse */
-McIcon.ctorParameters = () => [
-    { type: ElementRef },
-    { type: String, decorators: [{ type: Attribute, args: ['mc-icon',] }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-class McIconModule {
-}
-McIconModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    A11yModule,
-                    PlatformModule
-                ],
-                exports: [
-                    McIcon,
-                    McIconCSSStyler
-                ],
-                declarations: [
-                    McIcon,
-                    McIconCSSStyler
-                ]
-            },] },
-];
+import { Platform, PlatformModule } from '@ptsecurity/cdk/platform';
+import { mixinDisabled } from '@ptsecurity/mosaic/core';
+import { CommonModule } from '@angular/common';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
@@ -659,5 +583,5 @@ McNavbarModule.decorators = [
  * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 
-export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar, McIcon as ɵe8, McIconBase as ɵc8, McIconCSSStyler as ɵb8, _McIconMixinBase as ɵd8, McIconModule as ɵa8 };
+export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar };
 //# sourceMappingURL=navbar.js.map

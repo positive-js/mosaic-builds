@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('rxjs'), require('rxjs/operators'), require('@ptsecurity/cdk/keycodes')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/navbar', ['exports', '@angular/core', '@ptsecurity/mosaic/core', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', 'rxjs', 'rxjs/operators', '@ptsecurity/cdk/keycodes'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.navbar = {}),global.ng.core,global.ng.mosaic.core,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform,global.rxjs,global.rxjs.operators,global.ng.cdk.keycodes));
-}(this, (function (exports,core,core$1,common,a11y,platform,rxjs,operators,keycodes) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs'), require('rxjs/operators'), require('@angular/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/cdk/platform'), require('@ptsecurity/mosaic/core'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/navbar', ['exports', 'rxjs', 'rxjs/operators', '@angular/core', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', '@ptsecurity/cdk/platform', '@ptsecurity/mosaic/core', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.navbar = {}),global.rxjs,global.rxjs.operators,global.ng.core,global.ng.cdk.a11y,global.ng.cdk.keycodes,global.ng.cdk.platform,global.ng.mosaic.core,global.ng.common,global.ng.mosaic.icon));
+}(this, (function (exports,rxjs,operators,core,a11y,keycodes,platform,core$1,common,icon) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -38,89 +38,6 @@ function __extends(d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-var McIconCSSStyler = /** @class */ (function () {
-    function McIconCSSStyler() {
-    }
-    McIconCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mc-icon]',
-                    host: { class: 'mc mc-icon' }
-                },] },
-    ];
-    return McIconCSSStyler;
-}());
-var McIconBase = /** @class */ (function () {
-    function McIconBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McIconBase;
-}());
-/** @type {?} */
-var _McIconMixinBase = core$1.mixinColor(McIconBase);
-var McIcon = /** @class */ (function (_super) {
-    __extends(McIcon, _super);
-    function McIcon(elementRef, iconName) {
-        var _this = _super.call(this, elementRef) || this;
-        elementRef.nativeElement.classList.add(iconName);
-        return _this;
-    }
-    /**
-     * @return {?}
-     */
-    McIcon.prototype._getHostElement = /**
-     * @return {?}
-     */
-    function () {
-        return this._elementRef.nativeElement;
-    };
-    McIcon.decorators = [
-        { type: core.Component, args: [{
-                    selector: "[mc-icon]",
-                    template: '<ng-content></ng-content>',
-                    styles: [""],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None
-                },] },
-    ];
-    /** @nocollapse */
-    McIcon.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
-    ]; };
-    return McIcon;
-}(_McIconMixinBase));
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-var McIconModule = /** @class */ (function () {
-    function McIconModule() {
-    }
-    McIconModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McIcon,
-                        McIconCSSStyler
-                    ],
-                    declarations: [
-                        McIcon,
-                        McIconCSSStyler
-                    ]
-                },] },
-    ];
-    return McIconModule;
-}());
 
 /**
  * @fileoverview added by tsickle
@@ -713,8 +630,8 @@ var McNavbar = /** @class */ (function () {
      */
     function (element) {
         /** @type {?} */
-        var icon = element.querySelector("[" + MC_ICON + "]," + MC_NAVBAR_LOGO + ",[" + MC_NAVBAR_LOGO + "]");
-        if (!icon) {
+        var icon$$1 = element.querySelector("[" + MC_ICON + "]," + MC_NAVBAR_LOGO + ",[" + MC_NAVBAR_LOGO + "]");
+        if (!icon$$1) {
             return [];
         }
         return Array.from(element.querySelectorAll(MC_NAVBAR_TITLE))
@@ -749,7 +666,7 @@ var McNavbarModule = /** @class */ (function () {
                         common.CommonModule,
                         a11y.A11yModule,
                         platform.PlatformModule,
-                        McIconModule
+                        icon.McIconModule
                     ],
                     exports: [
                         McNavbar,
@@ -781,11 +698,6 @@ exports._McNavbarMixinBase = _McNavbarMixinBase;
 exports.McNavbarItem = McNavbarItem;
 exports.McNavbarContainer = McNavbarContainer;
 exports.McNavbar = McNavbar;
-exports.ɵe8 = McIcon;
-exports.ɵc8 = McIconBase;
-exports.ɵb8 = McIconCSSStyler;
-exports.ɵd8 = _McIconMixinBase;
-exports.ɵa8 = McIconModule;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
