@@ -102,11 +102,13 @@ var McRadioGroup = /** @class */ (function (_super) {
         /** Whether the radio group is required. */
         _this._required = false;
         /** The method to be called in order to update ngModel */
+        // tslint:disable-next-line
         _this.controlValueAccessorChangeFn = function () { };
         /**
          * onTouch function registered via registerOnTouch (ControlValueAccessor).
          * @docs-private
          */
+        // tslint:disable-next-line
         _this.onTouched = function () { };
         return _this;
     }
@@ -146,11 +148,6 @@ var McRadioGroup = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    McRadioGroup.prototype.checkSelectedRadioButton = function () {
-        if (this._selected && !this._selected.checked) {
-            this._selected.checked = true;
-        }
-    };
     Object.defineProperty(McRadioGroup.prototype, "selected", {
         /** Whether the radio button is selected. */
         get: function () { return this._selected; },
@@ -182,6 +179,11 @@ var McRadioGroup = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    McRadioGroup.prototype.checkSelectedRadioButton = function () {
+        if (this._selected && !this._selected.checked) {
+            this._selected.checked = true;
+        }
+    };
     /**
      * Initialize properties once content children are available.
      * This allows us to propagate relevant attributes to associated buttons.
@@ -256,7 +258,7 @@ var McRadioGroup = /** @class */ (function (_super) {
     McRadioGroup.prototype.updateSelectedRadioFromValue = function () {
         var _this = this;
         // If the value already matches the selected radio, do nothing.
-        var isAlreadySelected = this._selected != null && this._selected.value === this._value;
+        var isAlreadySelected = this._selected !== null && this._selected.value === this._value;
         if (this._radios != null && !isAlreadySelected) {
             this._selected = null;
             this._radios.forEach(function (radio) {
@@ -273,8 +275,8 @@ var McRadioGroup = /** @class */ (function (_super) {
                     exportAs: 'mcRadioGroup',
                     providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR],
                     host: {
-                        'role': 'radiogroup',
-                        'class': 'mc-radio-group'
+                        role: 'radiogroup',
+                        class: 'mc-radio-group'
                     },
                     inputs: ['disabled']
                 },] },
@@ -284,14 +286,14 @@ var McRadioGroup = /** @class */ (function (_super) {
         { type: core.ChangeDetectorRef }
     ]; };
     McRadioGroup.propDecorators = {
-        change: [{ type: core.Output }],
-        _radios: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] }],
         name: [{ type: core.Input }],
         labelPosition: [{ type: core.Input }],
         value: [{ type: core.Input }],
         selected: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
-        required: [{ type: core.Input }]
+        required: [{ type: core.Input }],
+        change: [{ type: core.Output }],
+        _radios: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] }]
     };
     return McRadioGroup;
 }(_McRadioGroupMixinBase));
@@ -326,6 +328,7 @@ var McRadioButton = /** @class */ (function (_super) {
         /** Value assigned to this radio. */
         _this._value = null;
         /** Unregister function for _radioDispatcher */
+        // tslint:disable-next-line
         _this.removeUniqueSelectionListener = function () { };
         _this.radioGroup = radioGroup;
         _this.removeUniqueSelectionListener =
@@ -432,11 +435,11 @@ var McRadioButton = /** @class */ (function (_super) {
             this.name = this.radioGroup.name;
         }
     };
-    McRadioButton.prototype.ngAfterViewInit = function () { };
     McRadioButton.prototype.ngOnDestroy = function () {
         this.removeUniqueSelectionListener();
     };
     /** Focuses the radio button. */
+    // tslint:disable-next-line
     McRadioButton.prototype.focus = function () { };
     /**
      * Marks the radio button as needing checking for change detection.

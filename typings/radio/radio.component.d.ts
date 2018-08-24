@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
 import { CanColor, CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
@@ -25,7 +25,19 @@ export declare const _McRadioGroupMixinBase: (new (...args: any[]) => CanDisable
  */
 export declare const MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any;
 export declare class McRadioGroup extends _McRadioGroupMixinBase implements AfterContentInit, ControlValueAccessor, CanDisable {
-    private _changeDetector;
+    private readonly _changeDetector;
+    /** Name of the radio button group. All radio buttons inside this group will use this name. */
+    name: string;
+    /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
+    labelPosition: 'before' | 'after';
+    /** Value of the radio button. */
+    value: any;
+    /** Whether the radio button is selected. */
+    selected: McRadioButton | null;
+    /** Whether the radio group is disabled */
+    disabled: boolean;
+    /** Whether the radio group is required */
+    required: boolean;
     /**
      * Event emitted when the group value changes.
      * Change events are only emitted when the value changes due to user interaction with
@@ -53,6 +65,7 @@ export declare class McRadioGroup extends _McRadioGroupMixinBase implements Afte
     private _disabled;
     /** Whether the radio group is required. */
     private _required;
+    constructor(_changeDetector: ChangeDetectorRef);
     /** The method to be called in order to update ngModel */
     controlValueAccessorChangeFn: (value: any) => void;
     /**
@@ -60,20 +73,7 @@ export declare class McRadioGroup extends _McRadioGroupMixinBase implements Afte
      * @docs-private
      */
     onTouched: () => any;
-    /** Name of the radio button group. All radio buttons inside this group will use this name. */
-    name: string;
-    /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
-    labelPosition: 'before' | 'after';
-    /** Value of the radio button. */
-    value: any;
     checkSelectedRadioButton(): void;
-    /** Whether the radio button is selected. */
-    selected: McRadioButton | null;
-    /** Whether the radio group is disabled */
-    disabled: boolean;
-    /** Whether the radio group is required */
-    required: boolean;
-    constructor(_changeDetector: ChangeDetectorRef);
     /**
      * Initialize properties once content children are available.
      * This allows us to propagate relevant attributes to associated buttons.
@@ -120,10 +120,10 @@ export declare class McRadioButtonBase {
     constructor(_elementRef: ElementRef);
 }
 export declare const _McRadioButtonMixinBase: (new (...args: any[]) => CanColor) & (new (...args: any[]) => HasTabIndex) & typeof McRadioButtonBase;
-export declare class McRadioButton extends _McRadioButtonMixinBase implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
-    private _changeDetector;
-    private _radioDispatcher;
-    private _uniqueId;
+export declare class McRadioButton extends _McRadioButtonMixinBase implements OnInit, OnDestroy, CanColor, HasTabIndex {
+    private readonly _changeDetector;
+    private readonly _radioDispatcher;
+    private readonly _uniqueId;
     /** The unique ID for the radio button. */
     id: string;
     /** Analog to HTML 'name' attribute used to group radios for unique selection. */
@@ -167,10 +167,9 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     /** Value assigned to this radio. */
     private _value;
     /** Unregister function for _radioDispatcher */
-    private removeUniqueSelectionListener;
+    private readonly removeUniqueSelectionListener;
     constructor(radioGroup: McRadioGroup, elementRef: ElementRef, _changeDetector: ChangeDetectorRef, _radioDispatcher: UniqueSelectionDispatcher);
     ngOnInit(): void;
-    ngAfterViewInit(): void;
     ngOnDestroy(): void;
     /** Focuses the radio button. */
     focus(): void;

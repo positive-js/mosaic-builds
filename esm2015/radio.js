@@ -69,11 +69,13 @@ class McRadioGroup extends _McRadioGroupMixinBase {
         /** Whether the radio group is required. */
         this._required = false;
         /** The method to be called in order to update ngModel */
+        // tslint:disable-next-line
         this.controlValueAccessorChangeFn = () => { };
         /**
          * onTouch function registered via registerOnTouch (ControlValueAccessor).
          * @docs-private
          */
+        // tslint:disable-next-line
         this.onTouched = () => { };
     }
     /** Name of the radio button group. All radio buttons inside this group will use this name. */
@@ -100,11 +102,6 @@ class McRadioGroup extends _McRadioGroupMixinBase {
             this.checkSelectedRadioButton();
         }
     }
-    checkSelectedRadioButton() {
-        if (this._selected && !this._selected.checked) {
-            this._selected.checked = true;
-        }
-    }
     /** Whether the radio button is selected. */
     get selected() { return this._selected; }
     set selected(selected) {
@@ -123,6 +120,11 @@ class McRadioGroup extends _McRadioGroupMixinBase {
     set required(value) {
         this._required = toBoolean(value);
         this.markRadiosForCheck();
+    }
+    checkSelectedRadioButton() {
+        if (this._selected && !this._selected.checked) {
+            this._selected.checked = true;
+        }
     }
     /**
      * Initialize properties once content children are available.
@@ -196,7 +198,7 @@ class McRadioGroup extends _McRadioGroupMixinBase {
     /** Updates the `selected` radio button from the internal _value state. */
     updateSelectedRadioFromValue() {
         // If the value already matches the selected radio, do nothing.
-        const isAlreadySelected = this._selected != null && this._selected.value === this._value;
+        const isAlreadySelected = this._selected !== null && this._selected.value === this._value;
         if (this._radios != null && !isAlreadySelected) {
             this._selected = null;
             this._radios.forEach((radio) => {
@@ -214,8 +216,8 @@ McRadioGroup.decorators = [
                 exportAs: 'mcRadioGroup',
                 providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR],
                 host: {
-                    'role': 'radiogroup',
-                    'class': 'mc-radio-group'
+                    role: 'radiogroup',
+                    class: 'mc-radio-group'
                 },
                 inputs: ['disabled']
             },] },
@@ -225,14 +227,14 @@ McRadioGroup.ctorParameters = () => [
     { type: ChangeDetectorRef }
 ];
 McRadioGroup.propDecorators = {
-    change: [{ type: Output }],
-    _radios: [{ type: ContentChildren, args: [forwardRef(() => McRadioButton), { descendants: true },] }],
     name: [{ type: Input }],
     labelPosition: [{ type: Input }],
     value: [{ type: Input }],
     selected: [{ type: Input }],
     disabled: [{ type: Input }],
-    required: [{ type: Input }]
+    required: [{ type: Input }],
+    change: [{ type: Output }],
+    _radios: [{ type: ContentChildren, args: [forwardRef(() => McRadioButton), { descendants: true },] }]
 };
 // Boilerplate for applying mixins to McRadioButton.
 /** @docs-private */
@@ -263,6 +265,7 @@ class McRadioButton extends _McRadioButtonMixinBase {
         /** Value assigned to this radio. */
         this._value = null;
         /** Unregister function for _radioDispatcher */
+        // tslint:disable-next-line
         this.removeUniqueSelectionListener = () => { };
         this.radioGroup = radioGroup;
         this.removeUniqueSelectionListener =
@@ -344,11 +347,11 @@ class McRadioButton extends _McRadioButtonMixinBase {
             this.name = this.radioGroup.name;
         }
     }
-    ngAfterViewInit() { }
     ngOnDestroy() {
         this.removeUniqueSelectionListener();
     }
     /** Focuses the radio button. */
+    // tslint:disable-next-line
     focus() { }
     /**
      * Marks the radio button as needing checking for change detection.
