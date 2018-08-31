@@ -989,6 +989,57 @@ var McButtonModule = /** @class */ (function () {
     return McButtonModule;
 }());
 
+var McLink = /** @class */ (function () {
+    function McLink(elementRef, _focusMonitor) {
+        this.elementRef = elementRef;
+        this._focusMonitor = _focusMonitor;
+        this._focusMonitor.monitor(elementRef.nativeElement, true);
+    }
+    McLink.prototype.ngOnDestroy = function () {
+        this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    };
+    McLink.prototype.focus = function () {
+        this._getHostElement().focus();
+    };
+    McLink.prototype._getHostElement = function () {
+        return this.elementRef.nativeElement;
+    };
+    McLink.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'a.mc-link',
+                    template: "<ng-content></ng-content>",
+                    encapsulation: core.ViewEncapsulation.None,
+                    styles: [".mc-link{display:inline-flex;align-items:center;padding:2px 4px;text-decoration:none!important;cursor:pointer;outline:0}.mc-link{transition-property:color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link:focus{transition:none}.mc-link:hover{transition:none}.mc-link.mc-focused,.mc-link:focus{border-radius:3px}.mc-link.mc-disabled,.mc-link[disabled]{pointer-events:none;cursor:default}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link .mc-link_dashed,.mc-link.mc-link_underlined{transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link .mc-link_dashed:focus,.mc-link.mc-link_underlined:focus{transition:none}.mc-link .mc-link_dashed:hover,.mc-link.mc-link_underlined:hover{transition:none}"]
+                },] },
+    ];
+    /** @nocollapse */
+    McLink.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: a11y.FocusMonitor }
+    ]; };
+    return McLink;
+}());
+
+var McLinkModule = /** @class */ (function () {
+    function McLinkModule() {
+    }
+    McLinkModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        a11y.A11yModule
+                    ],
+                    declarations: [
+                        McLink
+                    ],
+                    exports: [
+                        McLink
+                    ]
+                },] },
+    ];
+    return McLinkModule;
+}());
+
 /**
  * Injection token that can be used to specify the checkbox click behavior.
  */
@@ -5127,6 +5178,8 @@ exports._McButtonMixinBase = _McButtonMixinBase;
 exports.McButton = McButton;
 exports.McAnchor = McAnchor;
 exports.McIconButton = McIconButton;
+exports.McLinkModule = McLinkModule;
+exports.McLink = McLink;
 exports.MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = MC_CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.McCheckboxChange = McCheckboxChange;
 exports.McCheckboxBase = McCheckboxBase;
@@ -5136,7 +5189,7 @@ exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
 exports.McCheckboxModule = McCheckboxModule;
 exports.MC_CHECKBOX_REQUIRED_VALIDATOR = MC_CHECKBOX_REQUIRED_VALIDATOR;
 exports.McCheckboxRequiredValidator = McCheckboxRequiredValidator;
-exports.ɵa0 = MC_SANITY_CHECKS_FACTORY;
+exports.ɵa1 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
@@ -5170,7 +5223,7 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵa12 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵa13 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
 exports.McInputBase = McInputBase;
 exports._McInputMixinBase = _McInputMixinBase;
