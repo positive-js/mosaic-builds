@@ -9,15 +9,15 @@ export declare class McRadioChange {
     /** The value of the McRadioButton. */
     value: any;
     constructor(
-        /** The McRadioButton that emits the change event. */
-        source: McRadioButton, 
-        /** The value of the McRadioButton. */
-        value: any);
+    /** The McRadioButton that emits the change event. */
+    source: McRadioButton, 
+    /** The value of the McRadioButton. */
+    value: any);
 }
 /** @docs-private */
 export declare class McRadioGroupBase {
 }
-export declare const _McRadioGroupMixinBase: (new (...args: any[]) => CanDisable) & typeof McRadioGroupBase;
+export declare const _McRadioGroupMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McRadioGroupBase;
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
  * allows it to support [(ngModel)] and ngControl.
@@ -109,9 +109,9 @@ export declare class McRadioGroup extends _McRadioGroupMixinBase implements Afte
      * @param isDisabled Whether the control should be disabled.
      */
     setDisabledState(isDisabled: boolean): void;
-    private updateRadioButtonNames();
+    private updateRadioButtonNames;
     /** Updates the `selected` radio button from the internal _value state. */
-    private updateSelectedRadioFromValue();
+    private updateSelectedRadioFromValue;
 }
 /** @docs-private */
 export declare class McRadioButtonBase {
@@ -119,7 +119,7 @@ export declare class McRadioButtonBase {
     disabled: boolean;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McRadioButtonMixinBase: (new (...args: any[]) => CanColor) & (new (...args: any[]) => HasTabIndex) & typeof McRadioButtonBase;
+export declare const _McRadioButtonMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanColor> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<HasTabIndex> & typeof McRadioButtonBase;
 export declare class McRadioButton extends _McRadioButtonMixinBase implements OnInit, OnDestroy, CanColor, HasTabIndex {
     private readonly _changeDetector;
     private readonly _radioDispatcher;
@@ -182,5 +182,5 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     onInputClick(event: Event): void;
     onInputChange(event: Event): void;
     /** Dispatch change event with current value. */
-    private emitChangeEvent();
+    private emitChangeEvent;
 }

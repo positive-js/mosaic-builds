@@ -39,15 +39,26 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
 var McCleaner = /** @class */ (function () {
     function McCleaner() {
     }
-    McCleaner.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-cleaner',
-                    template: '<i mc-icon="mc-close-M_16" class="mc-cleaner__icon"></i>'
-                },] },
-    ];
+    McCleaner = __decorate([
+        core.Component({
+            selector: 'mc-cleaner',
+            template: '<i mc-icon="mc-close-M_16" class="mc-cleaner__icon"></i>'
+        })
+    ], McCleaner);
     return McCleaner;
 }());
 
@@ -67,40 +78,41 @@ var McHint = /** @class */ (function () {
     function McHint() {
         this.id = "mc-hint-" + nextUniqueId++;
     }
-    McHint.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-hint',
-                    host: {
-                        class: 'mc-hint',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    McHint.propDecorators = {
-        id: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McHint.prototype, "id", void 0);
+    McHint = __decorate([
+        core.Directive({
+            selector: 'mc-hint',
+            host: {
+                class: 'mc-hint',
+                '[attr.id]': 'id'
+            }
+        })
+    ], McHint);
     return McHint;
 }());
 
 var McPrefix = /** @class */ (function () {
     function McPrefix() {
     }
-    McPrefix.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcPrefix]'
-                },] },
-    ];
+    McPrefix = __decorate([
+        core.Directive({
+            selector: '[mcPrefix]'
+        })
+    ], McPrefix);
     return McPrefix;
 }());
 
 var McSuffix = /** @class */ (function () {
     function McSuffix() {
     }
-    McSuffix.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcSuffix]'
-                },] },
-    ];
+    McSuffix = __decorate([
+        core.Directive({
+            selector: '[mcSuffix]'
+        })
+    ], McSuffix);
     return McSuffix;
 }());
 
@@ -209,87 +221,97 @@ var McFormField = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    McFormField.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-form-field',
-                    exportAs: 'mcFormField',
-                    template: "<div class=\"mc-form-field__wrapper\"><div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div></div>",
-                    // McInput is a directive and can't have styles, so we need to include its styles here.
-                    // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
-                    // aren't using McInput.
-                    styles: [".mc-form-field{display:inline-block;position:relative}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;top:0;bottom:0;right:0;width:32px;cursor:pointer;display:flex;flex-direction:row;justify-content:center;align-items:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
-                    host: {
-                        class: 'mc-form-field',
-                        '[class.mc-form-field_invalid]': '_control.errorState',
-                        '[class.mc-form-field_disabled]': '_control.disabled',
-                        '[class.mc-form-field_has-prefix]': 'hasPrefix',
-                        '[class.mc-form-field_has-suffix]': 'hasSuffix',
-                        '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
-                        '[class.mc-focused]': '_control.focused',
-                        '[class.ng-untouched]': '_shouldForward("untouched")',
-                        '[class.ng-touched]': '_shouldForward("touched")',
-                        '[class.ng-pristine]': '_shouldForward("pristine")',
-                        '[class.ng-dirty]': '_shouldForward("dirty")',
-                        '[class.ng-valid]': '_shouldForward("valid")',
-                        '[class.ng-invalid]': '_shouldForward("invalid")',
-                        '[class.ng-pending]': '_shouldForward("pending")',
-                        '(keydown)': 'onKeyDown($event)'
-                    },
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McFormField.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef }
-    ]; };
-    McFormField.propDecorators = {
-        _control: [{ type: core.ContentChild, args: [McFormFieldControl,] }],
-        _hint: [{ type: core.ContentChildren, args: [McHint,] }],
-        _suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
-        _prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
-        _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }]
-    };
+    __decorate([
+        core.ContentChild(McFormFieldControl),
+        __metadata("design:type", McFormFieldControl)
+    ], McFormField.prototype, "_control", void 0);
+    __decorate([
+        core.ContentChildren(McHint),
+        __metadata("design:type", core.QueryList)
+    ], McFormField.prototype, "_hint", void 0);
+    __decorate([
+        core.ContentChildren(McSuffix),
+        __metadata("design:type", core.QueryList)
+    ], McFormField.prototype, "_suffix", void 0);
+    __decorate([
+        core.ContentChildren(McPrefix),
+        __metadata("design:type", core.QueryList)
+    ], McFormField.prototype, "_prefix", void 0);
+    __decorate([
+        core.ContentChildren(McCleaner),
+        __metadata("design:type", core.QueryList)
+    ], McFormField.prototype, "_cleaner", void 0);
+    McFormField = __decorate([
+        core.Component({
+            selector: 'mc-form-field',
+            exportAs: 'mcFormField',
+            template: "<div class=\"mc-form-field__wrapper\"><div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div></div>",
+            // McInput is a directive and can't have styles, so we need to include its styles here.
+            // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
+            // aren't using McInput.
+            styles: [".mc-form-field{display:inline-block;position:relative}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;top:0;bottom:0;right:0;width:32px;cursor:pointer;display:flex;flex-direction:row;justify-content:center;align-items:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
+            host: {
+                class: 'mc-form-field',
+                '[class.mc-form-field_invalid]': '_control.errorState',
+                '[class.mc-form-field_disabled]': '_control.disabled',
+                '[class.mc-form-field_has-prefix]': 'hasPrefix',
+                '[class.mc-form-field_has-suffix]': 'hasSuffix',
+                '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
+                '[class.mc-focused]': '_control.focused',
+                '[class.ng-untouched]': '_shouldForward("untouched")',
+                '[class.ng-touched]': '_shouldForward("touched")',
+                '[class.ng-pristine]': '_shouldForward("pristine")',
+                '[class.ng-dirty]': '_shouldForward("dirty")',
+                '[class.ng-valid]': '_shouldForward("valid")',
+                '[class.ng-invalid]': '_shouldForward("invalid")',
+                '[class.ng-pending]': '_shouldForward("pending")',
+                '(keydown)': 'onKeyDown($event)'
+            },
+            encapsulation: core.ViewEncapsulation.None,
+            changeDetection: core.ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [core.ElementRef,
+            core.ChangeDetectorRef])
+    ], McFormField);
     return McFormField;
 }(McFormFieldBase));
 var McFormFieldWithoutBorders = /** @class */ (function () {
     function McFormFieldWithoutBorders() {
     }
-    McFormFieldWithoutBorders.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-form-field[mcFormFieldWithoutBorders]',
-                    exportAs: 'mcFormFieldWithoutBorders',
-                    host: { class: 'mc-form-field_without-borders' }
-                },] },
-    ];
+    McFormFieldWithoutBorders = __decorate([
+        core.Directive({
+            selector: 'mc-form-field[mcFormFieldWithoutBorders]',
+            exportAs: 'mcFormFieldWithoutBorders',
+            host: { class: 'mc-form-field_without-borders' }
+        })
+    ], McFormFieldWithoutBorders);
     return McFormFieldWithoutBorders;
 }());
 
 var McFormFieldModule = /** @class */ (function () {
     function McFormFieldModule() {
     }
-    McFormFieldModule.decorators = [
-        { type: core.NgModule, args: [{
-                    declarations: [
-                        McFormField,
-                        McFormFieldWithoutBorders,
-                        McHint,
-                        McPrefix,
-                        McSuffix,
-                        McCleaner
-                    ],
-                    imports: [common.CommonModule, icon.McIconModule],
-                    exports: [
-                        McFormField,
-                        McFormFieldWithoutBorders,
-                        McHint,
-                        McPrefix,
-                        McSuffix,
-                        McCleaner
-                    ]
-                },] },
-    ];
+    McFormFieldModule = __decorate([
+        core.NgModule({
+            declarations: [
+                McFormField,
+                McFormFieldWithoutBorders,
+                McHint,
+                McPrefix,
+                McSuffix,
+                McCleaner
+            ],
+            imports: [common.CommonModule, icon.McIconModule],
+            exports: [
+                McFormField,
+                McFormFieldWithoutBorders,
+                McHint,
+                McPrefix,
+                McSuffix,
+                McCleaner
+            ]
+        })
+    ], McFormFieldModule);
     return McFormFieldModule;
 }());
 

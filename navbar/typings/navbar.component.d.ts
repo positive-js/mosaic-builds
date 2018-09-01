@@ -17,7 +17,7 @@ export declare class McNavbarItemBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McNavbarMixinBase: (new (...args: any[]) => CanDisable) & typeof McNavbarItemBase;
+export declare const _McNavbarMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McNavbarItemBase;
 export declare class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterViewInit, OnDestroy, CanDisable {
     elementRef: ElementRef;
     private _focusMonitor;
@@ -42,12 +42,12 @@ export declare class McNavbarItem extends _McNavbarMixinBase implements OnInit, 
     handleClickByItem(): void;
     handleKeydown($event: KeyboardEvent): void;
     handleClickByDropdownItem(): void;
-    private listenClickOutside();
-    private toggleDropdown();
-    private forceCloseDropdown();
-    private startListenFocusDropdownItems();
-    private stopListenFocusDropdownItems();
-    private denyClickIfDisabled();
+    private listenClickOutside;
+    private toggleDropdown;
+    private forceCloseDropdown;
+    private startListenFocusDropdownItems;
+    private stopListenFocusDropdownItems;
+    private denyClickIfDisabled;
 }
 export declare class McNavbarContainer {
     position: McNavbarContainerPositionType;
@@ -69,8 +69,8 @@ export declare class McNavbar implements AfterViewInit, OnDestroy {
     updateCollapsed(): void;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
-    private calculateAndCacheTotalItemsWidth();
-    private getOuterElementWidth(element);
-    private calculateAndCacheItemsWidth();
-    private getItemsForCollapse(element);
+    private calculateAndCacheTotalItemsWidth;
+    private getOuterElementWidth;
+    private calculateAndCacheItemsWidth;
+    private getItemsForCollapse;
 }

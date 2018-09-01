@@ -24,7 +24,7 @@ export declare class McButtonBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McButtonMixinBase: (new (...args: any[]) => CanColor) & (new (...args: any[]) => CanDisable) & typeof McButtonBase;
+export declare const _McButtonMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanColor> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McButtonBase;
 export declare class McButton extends _McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
     private _platform;
     private _focusMonitor;

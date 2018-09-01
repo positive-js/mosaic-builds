@@ -39,6 +39,17 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
 var idIterator = 0;
 var MIN_PERCENT = 0;
 var MAX_PERCENT = 100;
@@ -66,49 +77,56 @@ var McProgressBar = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    McProgressBar.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-progress-bar',
-                    template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
-                    styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    host: {
-                        class: 'mc-progress-bar',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McProgressBar.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
-    McProgressBar.propDecorators = {
-        id: [{ type: core.Input }],
-        value: [{ type: core.Input }],
-        mode: [{ type: core.Input }],
-        color: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McProgressBar.prototype, "id", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Number)
+    ], McProgressBar.prototype, "value", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McProgressBar.prototype, "mode", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McProgressBar.prototype, "color", void 0);
+    McProgressBar = __decorate([
+        core.Component({
+            selector: 'mc-progress-bar',
+            template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
+            styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None,
+            host: {
+                class: 'mc-progress-bar',
+                '[attr.id]': 'id'
+            }
+        }),
+        __metadata("design:paramtypes", [core.ElementRef])
+    ], McProgressBar);
     return McProgressBar;
 }(_McProgressBarMixinBase));
 
 var McProgressBarModule = /** @class */ (function () {
     function McProgressBarModule() {
     }
-    McProgressBarModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McProgressBar
-                    ],
-                    declarations: [
-                        McProgressBar
-                    ]
-                },] },
-    ];
+    McProgressBarModule = __decorate([
+        core.NgModule({
+            imports: [
+                common.CommonModule,
+                platform.PlatformModule
+            ],
+            exports: [
+                McProgressBar
+            ],
+            declarations: [
+                McProgressBar
+            ]
+        })
+    ], McProgressBarModule);
     return McProgressBarModule;
 }());
 

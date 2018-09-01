@@ -39,45 +39,31 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @param {?} val
- * @return {?}
- */
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
 function isBoolean(val) { return typeof val === 'boolean'; }
-/**
- * @param {?} value
- * @return {?}
- */
 function toBoolean(value) {
     return value != null && "" + value !== 'false';
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/** @type {?} */
+// Injection token that configures whether the Mosaic sanity checks are enabled.
 var MC_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
     factory: MC_SANITY_CHECKS_FACTORY
 });
-/**
- * @return {?}
- */
 function MC_SANITY_CHECKS_FACTORY() {
     return true;
 }
@@ -90,8 +76,11 @@ function MC_SANITY_CHECKS_FACTORY() {
 var McCommonModule = /** @class */ (function () {
     function McCommonModule(_sanityChecksEnabled) {
         this._sanityChecksEnabled = _sanityChecksEnabled;
+        // Whether we've done the global sanity checks (e.g. a theme is loaded, there is a doctype).
         this._hasDoneGlobalChecks = false;
+        // Reference to the global `document` object.
         this._document = typeof document === 'object' && document ? document : null;
+        // Reference to the global 'window' object.
         this._window = typeof window === 'object' && window ? window : null;
         if (this._areChecksEnabled() && !this._hasDoneGlobalChecks) {
             this._checkDoctypeIsDefined();
@@ -99,49 +88,25 @@ var McCommonModule = /** @class */ (function () {
             this._hasDoneGlobalChecks = true;
         }
     }
-    /**
-     * @return {?}
-     */
-    McCommonModule.prototype._areChecksEnabled = /**
-     * @return {?}
-     */
-    function () {
+    // Whether any sanity checks are enabled
+    McCommonModule.prototype._areChecksEnabled = function () {
         return this._sanityChecksEnabled && core.isDevMode() && !this._isTestEnv();
     };
-    /**
-     * @return {?}
-     */
-    McCommonModule.prototype._isTestEnv = /**
-     * @return {?}
-     */
-    function () {
+    // Whether the code is running in tests.
+    McCommonModule.prototype._isTestEnv = function () {
         return this._window && (this._window['__karma__'] || this._window['jasmine']);
     };
-    /**
-     * @return {?}
-     */
-    McCommonModule.prototype._checkDoctypeIsDefined = /**
-     * @return {?}
-     */
-    function () {
+    McCommonModule.prototype._checkDoctypeIsDefined = function () {
         if (this._document && !this._document.doctype) {
             console.warn('Current document does not have a doctype. This may cause ' +
                 'some Mosaic components not to behave as expected.');
         }
     };
-    /**
-     * @return {?}
-     */
-    McCommonModule.prototype._checkThemeIsPresent = /**
-     * @return {?}
-     */
-    function () {
+    McCommonModule.prototype._checkThemeIsPresent = function () {
         if (this._document && typeof getComputedStyle === 'function') {
-            /** @type {?} */
             var testElement = this._document.createElement('div');
             testElement.classList.add('mc-theme-loaded-marker');
             this._document.body.appendChild(testElement);
-            /** @type {?} */
             var computedStyle = getComputedStyle(testElement);
             // In some situations, the computed style of the test element can be null. For example in
             // Firefox, the computed style is null if an application is running inside of a hidden iframe.
@@ -154,28 +119,18 @@ var McCommonModule = /** @class */ (function () {
             this._document.body.removeChild(testElement);
         }
     };
-    McCommonModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [bidi.BidiModule],
-                    exports: [bidi.BidiModule]
-                },] },
-    ];
-    /** @nocollapse */
-    McCommonModule.ctorParameters = function () { return [
-        { type: Boolean, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_SANITY_CHECKS,] }] }
-    ]; };
+    McCommonModule = __decorate([
+        core.NgModule({
+            imports: [bidi.BidiModule],
+            exports: [bidi.BidiModule]
+        }),
+        __param(0, core.Optional()), __param(0, core.Inject(MC_SANITY_CHECKS)),
+        __metadata("design:paramtypes", [Boolean])
+    ], McCommonModule);
     return McCommonModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @template T
- * @param {?} base
- * @return {?}
- */
+// Mixin to augment a directive with a `disabled` property.
 function mixinDisabled(base) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
@@ -189,17 +144,10 @@ function mixinDisabled(base) {
             return _this;
         }
         Object.defineProperty(class_1.prototype, "disabled", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._disabled;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._disabled = toBoolean(value);
             },
             enumerable: true,
@@ -209,26 +157,16 @@ function mixinDisabled(base) {
     }(base));
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/** @enum {string} */
-var ThemePalette = {
-    Primary: 'primary',
-    Second: 'second',
-    Warn: 'warn',
-    Default: 'second',
-};
-/**
- * Mixin to augment a directive with a `color` property.
- * @template T
- * @param {?} base
- * @param {?=} defaultColor
- * @return {?}
- */
+
+(function (ThemePalette) {
+    ThemePalette["Primary"] = "primary";
+    ThemePalette["Second"] = "second";
+    ThemePalette["Warn"] = "warn";
+    ThemePalette["Default"] = "second";
+})(exports.ThemePalette || (exports.ThemePalette = {}));
+/** Mixin to augment a directive with a `color` property. */
 function mixinColor(base, defaultColor) {
-    if (defaultColor === void 0) { defaultColor = ThemePalette.Default; }
+    if (defaultColor === void 0) { defaultColor = exports.ThemePalette.Default; }
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
         function class_1() {
@@ -238,23 +176,14 @@ function mixinColor(base, defaultColor) {
             }
             var _this = _super.apply(this, args) || this;
             // Set the default color that can be specified from the mixin.
-            // Set the default color that can be specified from the mixin.
             _this.color = defaultColor;
             return _this;
         }
         Object.defineProperty(class_1.prototype, "color", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._color;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
-                /** @type {?} */
+            set: function (value) {
                 var colorPalette = value || defaultColor;
                 if (colorPalette !== this._color) {
                     if (this._color) {
@@ -273,16 +202,7 @@ function mixinColor(base, defaultColor) {
     }(base));
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @template T
- * @param {?} base
- * @param {?=} defaultTabIndex
- * @return {?}
- */
+// Mixin to augment a directive with a `tabIndex` property.
 function mixinTabIndex(base, defaultTabIndex) {
     if (defaultTabIndex === void 0) { defaultTabIndex = 0; }
     return /** @class */ (function (_super) {
@@ -297,17 +217,10 @@ function mixinTabIndex(base, defaultTabIndex) {
             return _this;
         }
         Object.defineProperty(class_1.prototype, "tabIndex", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this.disabled ? -1 : this._tabIndex;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._tabIndex = value != null ? value : defaultTabIndex;
             },
             enumerable: true,
@@ -318,15 +231,8 @@ function mixinTabIndex(base, defaultTabIndex) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
  * Mixin to augment a directive with updateErrorState method.
  * For component with `errorState` and need to update `errorState`.
- * @template T
- * @param {?} base
- * @return {?}
  */
 function mixinErrorState(base) {
     return /** @class */ (function (_super) {
@@ -337,9 +243,7 @@ function mixinErrorState(base) {
                 args[_i] = arguments[_i];
             }
             var _this = _super.apply(this, args) || this;
-            /**
-             * Whether the component is in an error state.
-             */
+            /** Whether the component is in an error state. */
             _this.errorState = false;
             /**
              * Stream that emits whenever the state of the input changes such that the wrapping
@@ -348,22 +252,11 @@ function mixinErrorState(base) {
             _this.stateChanges = new rxjs.Subject();
             return _this;
         }
-        /**
-         * @return {?}
-         */
-        class_1.prototype.updateErrorState = /**
-         * @return {?}
-         */
-        function () {
-            /** @type {?} */
+        class_1.prototype.updateErrorState = function () {
             var oldState = this.errorState;
-            /** @type {?} */
             var parent = this._parentFormGroup || this._parentForm;
-            /** @type {?} */
             var matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
-            /** @type {?} */
-            var control = this.ngControl ? /** @type {?} */ (this.ngControl.control) : null;
-            /** @type {?} */
+            var control = this.ngControl ? this.ngControl.control : null;
             var newState = matcher.isErrorState(control, parent);
             if (newState !== oldState) {
                 this.errorState = newState;
@@ -375,39 +268,26 @@ function mixinErrorState(base) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
  * Shared directive to count lines inside a text area, such as a list item.
- * Line elements can be extracted with a \@ContentChildren(McLine) query, then
+ * Line elements can be extracted with a @ContentChildren(McLine) query, then
  * counted by checking the query list's length.
  */
 var McLine = /** @class */ (function () {
     function McLine() {
     }
-    McLine.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mc-line], [mcLine]',
-                    host: { class: 'mc-line' }
-                },] },
-    ];
+    McLine = __decorate([
+        core.Directive({
+            selector: '[mc-line], [mcLine]',
+            host: { class: 'mc-line' }
+        })
+    ], McLine);
     return McLine;
 }());
 /**
  * Helper that takes a query list of lines and sets the correct class on the host.
- * \@docs-private
+ * @docs-private
  */
-var   /**
- * Helper that takes a query list of lines and sets the correct class on the host.
- * \@docs-private
- */
-McLineSetter = /** @class */ (function () {
+var McLineSetter = /** @class */ (function () {
     function McLineSetter(_lines, _element) {
         var _this = this;
         this._lines = _lines;
@@ -417,15 +297,7 @@ McLineSetter = /** @class */ (function () {
             _this._setLineClass(_this._lines.length);
         });
     }
-    /**
-     * @param {?} count
-     * @return {?}
-     */
-    McLineSetter.prototype._setLineClass = /**
-     * @param {?} count
-     * @return {?}
-     */
-    function (count) {
+    McLineSetter.prototype._setLineClass = function (count) {
         this._resetClasses();
         if (count === 2 || count === 3) {
             this._setClass("mc-" + count + "-line", true);
@@ -434,28 +306,12 @@ McLineSetter = /** @class */ (function () {
             this._setClass("mc-multi-line", true);
         }
     };
-    /**
-     * @return {?}
-     */
-    McLineSetter.prototype._resetClasses = /**
-     * @return {?}
-     */
-    function () {
+    McLineSetter.prototype._resetClasses = function () {
         this._setClass('mc-2-line', false);
         this._setClass('mc-3-line', false);
         this._setClass('mc-multi-line', false);
     };
-    /**
-     * @param {?} className
-     * @param {?} isAdd
-     * @return {?}
-     */
-    McLineSetter.prototype._setClass = /**
-     * @param {?} className
-     * @param {?} isAdd
-     * @return {?}
-     */
-    function (className, isAdd) {
+    McLineSetter.prototype._setClass = function (className, isAdd) {
         if (isAdd) {
             this._element.nativeElement.classList.add(className);
         }
@@ -468,74 +324,42 @@ McLineSetter = /** @class */ (function () {
 var McLineModule = /** @class */ (function () {
     function McLineModule() {
     }
-    McLineModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [],
-                    exports: [McLine],
-                    declarations: [McLine]
-                },] },
-    ];
+    McLineModule = __decorate([
+        core.NgModule({
+            imports: [],
+            exports: [McLine],
+            declarations: [McLine]
+        })
+    ], McLineModule);
     return McLineModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * Error state matcher that matches when a control is invalid and dirty.
- */
+/** Error state matcher that matches when a control is invalid and dirty. */
 var ShowOnDirtyErrorStateMatcher = /** @class */ (function () {
     function ShowOnDirtyErrorStateMatcher() {
     }
-    /**
-     * @param {?} control
-     * @param {?} form
-     * @return {?}
-     */
-    ShowOnDirtyErrorStateMatcher.prototype.isErrorState = /**
-     * @param {?} control
-     * @param {?} form
-     * @return {?}
-     */
-    function (control, form) {
+    ShowOnDirtyErrorStateMatcher.prototype.isErrorState = function (control, form) {
         return !!(control && control.invalid && (control.dirty || (form && form.submitted)));
     };
-    ShowOnDirtyErrorStateMatcher.decorators = [
-        { type: core.Injectable },
-    ];
+    ShowOnDirtyErrorStateMatcher = __decorate([
+        core.Injectable()
+    ], ShowOnDirtyErrorStateMatcher);
     return ShowOnDirtyErrorStateMatcher;
 }());
-/**
- * Provider that defines how form controls behave with regards to displaying error messages.
- */
+/** Provider that defines how form controls behave with regards to displaying error messages. */
 var ErrorStateMatcher = /** @class */ (function () {
     function ErrorStateMatcher() {
     }
-    /**
-     * @param {?} control
-     * @param {?} form
-     * @return {?}
-     */
-    ErrorStateMatcher.prototype.isErrorState = /**
-     * @param {?} control
-     * @param {?} form
-     * @return {?}
-     */
-    function (control, form) {
+    ErrorStateMatcher.prototype.isErrorState = function (control, form) {
         return !!(control && control.invalid && (control.touched || (form && form.submitted)));
     };
-    ErrorStateMatcher.decorators = [
-        { type: core.Injectable, args: [{ providedIn: 'root' },] },
-    ];
-    /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core.defineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+    ErrorStateMatcher.ngInjectableDef = core.defineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+    ErrorStateMatcher = __decorate([
+        core.Injectable({ providedIn: 'root' })
+    ], ErrorStateMatcher);
     return ErrorStateMatcher;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 /**
  * Component that shows a simplified checkbox without including any kind of "real" checkbox.
  * Meant to be used when the checkbox is purely decorative and a large number of them will be
@@ -547,7 +371,7 @@ var ErrorStateMatcher = /** @class */ (function () {
  * interchangeable with `<mc-checkbox>` and should *not* be used if the user would directly
  * interact with the checkbox. The pseudo-checkbox should only be used as an implementation detail
  * of more complex components that appropriately handle selected / checked state.
- * \@docs-private
+ * @docs-private
  */
 var McPseudoCheckbox = /** @class */ (function () {
     function McPseudoCheckbox() {
@@ -556,52 +380,52 @@ var McPseudoCheckbox = /** @class */ (function () {
         // Whether the checkbox is disabled.
         this.disabled = false;
     }
-    McPseudoCheckbox.decorators = [
-        { type: core.Component, args: [{
-                    encapsulation: core.ViewEncapsulation.None,
-                    preserveWhitespaces: false,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    selector: 'mc-pseudo-checkbox',
-                    styles: [""],
-                    template: '',
-                    host: {
-                        class: 'mc-pseudo-checkbox',
-                        '[class.mc-pseudo-checkbox-indeterminate]': 'state === "indeterminate"',
-                        '[class.mc-pseudo-checkbox-checked]': 'state === "checked"',
-                        '[class.mc-pseudo-checkbox-disabled]': 'disabled'
-                    }
-                },] },
-    ];
-    McPseudoCheckbox.propDecorators = {
-        state: [{ type: core.Input }],
-        disabled: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McPseudoCheckbox.prototype, "state", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean)
+    ], McPseudoCheckbox.prototype, "disabled", void 0);
+    McPseudoCheckbox = __decorate([
+        core.Component({
+            encapsulation: core.ViewEncapsulation.None,
+            preserveWhitespaces: false,
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            selector: 'mc-pseudo-checkbox',
+            styles: [""],
+            template: '',
+            host: {
+                class: 'mc-pseudo-checkbox',
+                '[class.mc-pseudo-checkbox-indeterminate]': 'state === "indeterminate"',
+                '[class.mc-pseudo-checkbox-checked]': 'state === "checked"',
+                '[class.mc-pseudo-checkbox-disabled]': 'disabled'
+            }
+        })
+    ], McPseudoCheckbox);
     return McPseudoCheckbox;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McPseudoCheckboxModule = /** @class */ (function () {
     function McPseudoCheckboxModule() {
     }
-    McPseudoCheckboxModule.decorators = [
-        { type: core.NgModule, args: [{
-                    exports: [McPseudoCheckbox],
-                    declarations: [McPseudoCheckbox]
-                },] },
-    ];
+    McPseudoCheckboxModule = __decorate([
+        core.NgModule({
+            exports: [McPseudoCheckbox],
+            declarations: [McPseudoCheckbox]
+        })
+    ], McPseudoCheckboxModule);
     return McPseudoCheckboxModule;
 }());
 
+exports.ɵa1 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
 exports.MC_SANITY_CHECKS = MC_SANITY_CHECKS;
 exports.mixinDisabled = mixinDisabled;
 exports.mixinColor = mixinColor;
-exports.ThemePalette = ThemePalette;
 exports.mixinTabIndex = mixinTabIndex;
 exports.mixinErrorState = mixinErrorState;
 exports.McLine = McLine;
@@ -611,7 +435,6 @@ exports.ShowOnDirtyErrorStateMatcher = ShowOnDirtyErrorStateMatcher;
 exports.ErrorStateMatcher = ErrorStateMatcher;
 exports.McPseudoCheckboxModule = McPseudoCheckboxModule;
 exports.McPseudoCheckbox = McPseudoCheckbox;
-exports.ɵa1 = MC_SANITY_CHECKS_FACTORY;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

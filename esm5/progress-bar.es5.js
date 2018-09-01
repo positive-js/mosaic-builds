@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __extends } from 'tslib';
+import { __decorate, __extends, __metadata } from 'tslib';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, ElementRef, Input, NgModule } from '@angular/core';
 import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
@@ -37,49 +37,56 @@ var McProgressBar = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    McProgressBar.decorators = [
-        { type: Component, args: [{
-                    selector: 'mc-progress-bar',
-                    template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
-                    styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None,
-                    host: {
-                        class: 'mc-progress-bar',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McProgressBar.ctorParameters = function () { return [
-        { type: ElementRef }
-    ]; };
-    McProgressBar.propDecorators = {
-        id: [{ type: Input }],
-        value: [{ type: Input }],
-        mode: [{ type: Input }],
-        color: [{ type: Input }]
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], McProgressBar.prototype, "id", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Number)
+    ], McProgressBar.prototype, "value", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], McProgressBar.prototype, "mode", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], McProgressBar.prototype, "color", void 0);
+    McProgressBar = __decorate([
+        Component({
+            selector: 'mc-progress-bar',
+            template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
+            styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
+            changeDetection: ChangeDetectionStrategy.OnPush,
+            encapsulation: ViewEncapsulation.None,
+            host: {
+                class: 'mc-progress-bar',
+                '[attr.id]': 'id'
+            }
+        }),
+        __metadata("design:paramtypes", [ElementRef])
+    ], McProgressBar);
     return McProgressBar;
 }(_McProgressBarMixinBase));
 
 var McProgressBarModule = /** @class */ (function () {
     function McProgressBarModule() {
     }
-    McProgressBarModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [
-                        CommonModule,
-                        PlatformModule
-                    ],
-                    exports: [
-                        McProgressBar
-                    ],
-                    declarations: [
-                        McProgressBar
-                    ]
-                },] },
-    ];
+    McProgressBarModule = __decorate([
+        NgModule({
+            imports: [
+                CommonModule,
+                PlatformModule
+            ],
+            exports: [
+                McProgressBar
+            ],
+            declarations: [
+                McProgressBar
+            ]
+        })
+    ], McProgressBarModule);
     return McProgressBarModule;
 }());
 

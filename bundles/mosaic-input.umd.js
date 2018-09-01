@@ -39,6 +39,21 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
 function getMcInputUnsupportedTypeError(inputType) {
     return Error("Input type \"" + inputType + "\" isn't supported by mcInput.");
 }
@@ -109,6 +124,7 @@ var McInput = /** @class */ (function (_super) {
         _this.id = _this.id;
         return _this;
     }
+    McInput_1 = McInput;
     Object.defineProperty(McInput.prototype, "disabled", {
         /**
          * Implemented as part of McFormFieldControl.
@@ -277,69 +293,94 @@ var McInput = /** @class */ (function (_super) {
         var validity = this._elementRef.nativeElement.validity;
         return validity && validity.badInput;
     };
-    McInput.decorators = [
-        { type: core.Directive, args: [{
-                    selector: "input[mcInput]",
-                    exportAs: 'mcInput',
-                    host: {
-                        'class': 'mc-input',
-                        // Native input properties that are overwritten by Angular inputs need to be synced with
-                        // the native input element. Otherwise property bindings for those don't work.
-                        '[attr.id]': 'id',
-                        '[attr.placeholder]': 'placeholder',
-                        '[disabled]': 'disabled',
-                        '[required]': 'required',
-                        '(blur)': '_focusChanged(false)',
-                        '(focus)': '_focusChanged(true)',
-                        '(input)': '_onInput()'
-                    },
-                    providers: [{ provide: formField.McFormFieldControl, useExisting: McInput }]
-                },] },
-    ];
-    /** @nocollapse */
-    McInput.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: platform.Platform },
-        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.NgForm, decorators: [{ type: core.Optional }] },
-        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
-        { type: core$1.ErrorStateMatcher },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_INPUT_VALUE_ACCESSOR,] }] }
-    ]; };
-    McInput.propDecorators = {
-        errorStateMatcher: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        id: [{ type: core.Input }],
-        placeholder: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        type: [{ type: core.Input }],
-        value: [{ type: core.Input }]
-    };
+    var McInput_1;
+    __decorate([
+        core.Input(),
+        __metadata("design:type", core$1.ErrorStateMatcher)
+    ], McInput.prototype, "errorStateMatcher", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McInput.prototype, "disabled", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], McInput.prototype, "id", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McInput.prototype, "placeholder", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McInput.prototype, "required", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], McInput.prototype, "type", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], McInput.prototype, "value", null);
+    McInput = McInput_1 = __decorate([
+        core.Directive({
+            selector: "input[mcInput]",
+            exportAs: 'mcInput',
+            host: {
+                'class': 'mc-input',
+                // Native input properties that are overwritten by Angular inputs need to be synced with
+                // the native input element. Otherwise property bindings for those don't work.
+                '[attr.id]': 'id',
+                '[attr.placeholder]': 'placeholder',
+                '[disabled]': 'disabled',
+                '[required]': 'required',
+                '(blur)': '_focusChanged(false)',
+                '(focus)': '_focusChanged(true)',
+                '(input)': '_onInput()'
+            },
+            providers: [{ provide: formField.McFormFieldControl, useExisting: McInput_1 }]
+        }),
+        __param(2, core.Optional()), __param(2, core.Self()),
+        __param(3, core.Optional()),
+        __param(4, core.Optional()),
+        __param(6, core.Optional()), __param(6, core.Self()), __param(6, core.Inject(MC_INPUT_VALUE_ACCESSOR)),
+        __metadata("design:paramtypes", [core.ElementRef,
+            platform.Platform,
+            forms.NgControl,
+            forms.NgForm,
+            forms.FormGroupDirective,
+            core$1.ErrorStateMatcher, Object])
+    ], McInput);
     return McInput;
 }(_McInputMixinBase));
 var McInputMono = /** @class */ (function () {
     function McInputMono() {
     }
-    McInputMono.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'input[mcInputMonospace]',
-                    exportAs: 'McInputMonospace',
-                    host: { class: 'mc-input_monospace' }
-                },] },
-    ];
+    McInputMono = __decorate([
+        core.Directive({
+            selector: 'input[mcInputMonospace]',
+            exportAs: 'McInputMonospace',
+            host: { class: 'mc-input_monospace' }
+        })
+    ], McInputMono);
     return McInputMono;
 }());
 
 var McInputModule = /** @class */ (function () {
     function McInputModule() {
     }
-    McInputModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, a11y.A11yModule, core$1.McCommonModule, forms.FormsModule],
-                    exports: [McInput, McInputMono],
-                    declarations: [McInput, McInputMono]
-                },] },
-    ];
+    McInputModule = __decorate([
+        core.NgModule({
+            imports: [common.CommonModule, a11y.A11yModule, core$1.McCommonModule, forms.FormsModule],
+            exports: [McInput, McInputMono],
+            declarations: [McInput, McInputMono]
+        })
+    ], McInputModule);
     return McInputModule;
 }());
 

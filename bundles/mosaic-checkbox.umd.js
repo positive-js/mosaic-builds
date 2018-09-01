@@ -39,6 +39,21 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
 /**
  * Injection token that can be used to specify the checkbox click behavior.
  */
@@ -330,50 +345,88 @@ var McCheckbox = /** @class */ (function (_super) {
         // emit its event object to the `change` output.
         event.stopPropagation();
     };
-    McCheckbox.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-checkbox',
-                    template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input class=\"mc-checkbox-input cdk-visually-hidden\" type=\"checkbox\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"></div><div class=\"mc-checkbox-background\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></span></label>",
-                    styles: [".mc-checkbox-checkmark,.mc-checkbox-mixedmark{width:calc(100% - 2px)}.mc-checkbox-background,.mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-background{align-items:center;display:inline-flex;justify-content:center}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{top:0;left:0;right:0;bottom:0;position:absolute;width:100%;opacity:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}.mc-checkbox-checked .mc-checkbox-checkmark{opacity:1}.mc-checkbox-checked .mc-checkbox-mixedmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-checkmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-mixedmark{opacity:1}.mc-checkbox-unchecked .mc-checkbox-background{background-color:transparent}.mc-checkbox-disabled{cursor:default}.mc-checkbox-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-input{bottom:0;left:50%}.mc-checkbox-input:focus+.mc-checkbox-frame{top:-1px;left:-1px;border-width:2px;width:18px;height:18px}"],
-                    exportAs: 'mcCheckbox',
-                    host: {
-                        class: 'mc-checkbox',
-                        '[id]': 'id',
-                        '[attr.id]': 'id',
-                        '[class.mc-checkbox-indeterminate]': 'indeterminate',
-                        '[class.mc-checkbox-checked]': 'checked',
-                        '[class.mc-checkbox-disabled]': 'disabled',
-                        '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
-                    },
-                    providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],
-                    inputs: ['color', 'tabIndex'],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McCheckbox.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef },
-        { type: a11y.FocusMonitor },
-        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_CHECKBOX_CLICK_ACTION,] }] }
-    ]; };
-    McCheckbox.propDecorators = {
-        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
-        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
-        id: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        labelPosition: [{ type: core.Input }],
-        name: [{ type: core.Input }],
-        change: [{ type: core.Output }],
-        indeterminateChange: [{ type: core.Output }],
-        value: [{ type: core.Input }],
-        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
-        checked: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        indeterminate: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input('aria-label'),
+        __metadata("design:type", String)
+    ], McCheckbox.prototype, "ariaLabel", void 0);
+    __decorate([
+        core.Input('aria-labelledby'),
+        __metadata("design:type", Object)
+    ], McCheckbox.prototype, "ariaLabelledby", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McCheckbox.prototype, "id", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McCheckbox.prototype, "required", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McCheckbox.prototype, "labelPosition", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object)
+    ], McCheckbox.prototype, "name", void 0);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", core.EventEmitter)
+    ], McCheckbox.prototype, "change", void 0);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", core.EventEmitter)
+    ], McCheckbox.prototype, "indeterminateChange", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McCheckbox.prototype, "value", void 0);
+    __decorate([
+        core.ViewChild('input'),
+        __metadata("design:type", core.ElementRef)
+    ], McCheckbox.prototype, "_inputElement", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McCheckbox.prototype, "checked", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], McCheckbox.prototype, "disabled", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McCheckbox.prototype, "indeterminate", null);
+    McCheckbox = __decorate([
+        core.Component({
+            selector: 'mc-checkbox',
+            template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input class=\"mc-checkbox-input cdk-visually-hidden\" type=\"checkbox\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"></div><div class=\"mc-checkbox-background\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></span></label>",
+            styles: [".mc-checkbox-checkmark,.mc-checkbox-mixedmark{width:calc(100% - 2px)}.mc-checkbox-background,.mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-background{align-items:center;display:inline-flex;justify-content:center}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{top:0;left:0;right:0;bottom:0;position:absolute;width:100%;opacity:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}.mc-checkbox-checked .mc-checkbox-checkmark{opacity:1}.mc-checkbox-checked .mc-checkbox-mixedmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-checkmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-mixedmark{opacity:1}.mc-checkbox-unchecked .mc-checkbox-background{background-color:transparent}.mc-checkbox-disabled{cursor:default}.mc-checkbox-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-input{bottom:0;left:50%}.mc-checkbox-input:focus+.mc-checkbox-frame{top:-1px;left:-1px;border-width:2px;width:18px;height:18px}"],
+            exportAs: 'mcCheckbox',
+            host: {
+                class: 'mc-checkbox',
+                '[id]': 'id',
+                '[attr.id]': 'id',
+                '[class.mc-checkbox-indeterminate]': 'indeterminate',
+                '[class.mc-checkbox-checked]': 'checked',
+                '[class.mc-checkbox-disabled]': 'disabled',
+                '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
+            },
+            providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],
+            inputs: ['color', 'tabIndex'],
+            encapsulation: core.ViewEncapsulation.None,
+            changeDetection: core.ChangeDetectionStrategy.OnPush
+        }),
+        __param(3, core.Attribute('tabindex')),
+        __param(4, core.Optional()), __param(4, core.Inject(MC_CHECKBOX_CLICK_ACTION)),
+        __metadata("design:paramtypes", [core.ElementRef,
+            core.ChangeDetectorRef,
+            a11y.FocusMonitor, String, Object])
+    ], McCheckbox);
     return McCheckbox;
 }(_McCheckboxMixinBase));
 
@@ -392,26 +445,26 @@ var McCheckboxRequiredValidator = /** @class */ (function (_super) {
     function McCheckboxRequiredValidator() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    McCheckboxRequiredValidator.decorators = [
-        { type: core.Directive, args: [{
-                    selector: "mc-checkbox[required][formControlName],\n             mc-checkbox[required][formControl], mc-checkbox[required][ngModel]",
-                    providers: [MC_CHECKBOX_REQUIRED_VALIDATOR],
-                    host: { '[attr.required]': 'required ? "" : null' }
-                },] },
-    ];
+    McCheckboxRequiredValidator = __decorate([
+        core.Directive({
+            selector: "mc-checkbox[required][formControlName],\n             mc-checkbox[required][formControl], mc-checkbox[required][ngModel]",
+            providers: [MC_CHECKBOX_REQUIRED_VALIDATOR],
+            host: { '[attr.required]': 'required ? "" : null' }
+        })
+    ], McCheckboxRequiredValidator);
     return McCheckboxRequiredValidator;
 }(forms.CheckboxRequiredValidator));
 
 var McCheckboxModule = /** @class */ (function () {
     function McCheckboxModule() {
     }
-    McCheckboxModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, core$1.McCommonModule],
-                    exports: [McCheckbox, McCheckboxRequiredValidator, core$1.McCommonModule],
-                    declarations: [McCheckbox, McCheckboxRequiredValidator]
-                },] },
-    ];
+    McCheckboxModule = __decorate([
+        core.NgModule({
+            imports: [common.CommonModule, core$1.McCommonModule],
+            exports: [McCheckbox, McCheckboxRequiredValidator, core$1.McCommonModule],
+            declarations: [McCheckbox, McCheckboxRequiredValidator]
+        })
+    ], McCheckboxModule);
     return McCheckboxModule;
 }());
 

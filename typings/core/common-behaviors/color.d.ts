@@ -10,7 +10,7 @@ export declare enum ThemePalette {
     Primary = "primary",
     Second = "second",
     Warn = "warn",
-    Default = "second",
+    Default = "second"
 }
 /** Mixin to augment a directive with a `color` property. */
 export declare function mixinColor<T extends Constructor<HasElementRef>>(base: T, defaultColor?: ThemePalette): Constructor<CanColor> & T;

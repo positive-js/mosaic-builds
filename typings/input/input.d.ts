@@ -11,7 +11,7 @@ export declare class McInputBase {
     ngControl: NgControl;
     constructor(_defaultErrorStateMatcher: ErrorStateMatcher, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
-export declare const _McInputMixinBase: (new (...args: any[]) => CanUpdateErrorState) & typeof McInputBase;
+export declare const _McInputMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanUpdateErrorState> & typeof McInputBase;
 export declare class McInput extends _McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState {
     protected _elementRef: ElementRef;
     protected _platform: Platform;

@@ -579,7 +579,7 @@ $mc-dark-theme-background: (
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-6e1fff3px mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-1a343b0px mc-color($second, 300);
         }
 
         &__light {
@@ -742,7 +742,7 @@ $mc-dark-theme-background: (
     &.mc-warn {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-6e1fff3px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-1a343b0px mc-color($primary, 500);
         }
     }
 }
@@ -805,107 +805,107 @@ $mc-dark-theme-background: (
 
     .mc-link {
         color: mc-color($link, 500);
-    }
-
-    &.mc-visited,
-    &:visited {
-        color: mc-color($link, 500);
-    }
-
-    &.mc-active,
-    &.mc-hovered,
-    &:active,
-    &:hover {
-        color: mc-color($link, 700);
-    }
-
-    &:hover.cdk-keyboard-focused,
-    &.mc-hovered.cdk-keyboard-focused,
-    &:hover.mc-focused {
-        outline: none;
-        box-shadow: 0 0 0 2px mc-color($link, 500);
-        color: mc-color($link, 700);
-    }
-
-    &.mc-focused,
-    &.cdk-keyboard-focused {
-        color: mc-color($link, 500);
-        border-color: mc-color($link, 500);
-        box-shadow: 0 0 0 2px mc-color($link, 500);
-    }
-
-    &.mc-disabled,
-    &[disabled] {
-        color: $link-disabled !important;
-        box-shadow: none;
-
-        &.mc-focused,
-        &:focus {
-            border-color: $link-disabled;
-            box-shadow: none;
-        }
-    }
-
-    &.mc-link_underlined {
-
-        & > .mc-link__text {
-            @include _mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
-        }
 
         &.mc-visited,
         &:visited {
+            color: mc-color($link, 500);
+        }
+
+        &.mc-active,
+        &.mc-hovered,
+        &:active,
+        &:hover {
+            color: mc-color($link, 700);
+        }
+
+        &:hover.cdk-keyboard-focused,
+        &.mc-hovered.cdk-keyboard-focused,
+        &:hover.mc-focused {
+            outline: none;
+            box-shadow: 0 0 0 2px mc-color($link, 500);
+            color: mc-color($link, 700);
+        }
+
+        &.mc-focused,
+        &.cdk-keyboard-focused {
+            color: mc-color($link, 500);
+            border-color: mc-color($link, 500);
+            box-shadow: 0 0 0 2px mc-color($link, 500);
+        }
+
+        &.mc-disabled,
+        &[disabled] {
+            color: $link-disabled !important;
+            box-shadow: none;
+
+            &.mc-focused,
+            &:focus {
+                border-color: $link-disabled;
+                box-shadow: none;
+            }
+        }
+
+        &.mc-link_underlined {
+
             & > .mc-link__text {
                 @include _mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
             }
-        }
 
-        &.mc-active,
-        &.mc-hovered,
-        &.mc-focused,
-        &:active,
-        &:hover,
-        &:focus {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin(mc-color($link, 700), 100%, 0.32);
+            &.mc-visited,
+            &:visited {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin(mc-color($link, 500), 100%, 0.32);
+                }
+            }
+
+            &.mc-active,
+            &.mc-hovered,
+            &.mc-focused,
+            &:active,
+            &:hover,
+            &:focus {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin(mc-color($link, 700), 100%, 0.32);
+                }
+            }
+
+            &.mc-disabled,
+            &[disabled] {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin($link-disabled, 100%, 0.32*0.3);
+                }
             }
         }
 
-        &.mc-disabled,
-        &[disabled] {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin($link-disabled, 100%, 0.32*0.3);
-            }
-        }
-    }
+        &.mc-link_dashed {
 
-    &.mc-link_dashed {
-
-        & > .mc-link__text {
-            @include _mc-link-dashes_mixin(mc-color($link, 500));
-        }
-
-        &.mc-visited,
-        &:visited {
             & > .mc-link__text {
                 @include _mc-link-dashes_mixin(mc-color($link, 500));
             }
-        }
 
-        &.mc-active,
-        &.mc-hovered,
-        &.mc-focused,
-        &:active,
-        &:hover,
-        &:focus {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin(mc-color($link, 700));
+            &.mc-visited,
+            &:visited {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin(mc-color($link, 500));
+                }
             }
-        }
 
-        &.mc-disabled,
-        &[disabled] {
-            & > .mc-link__text {
-                @include _mc-link-dashes_mixin($link-disabled, 66%, 0.32*0.3);
+            &.mc-active,
+            &.mc-hovered,
+            &.mc-focused,
+            &:active,
+            &:hover,
+            &:focus {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin(mc-color($link, 700));
+                }
+            }
+
+            &.mc-disabled,
+            &[disabled] {
+                & > .mc-link__text {
+                    @include _mc-link-dashes_mixin($link-disabled, 66%, 0.32*0.3);
+                }
             }
         }
     }
@@ -1201,7 +1201,7 @@ $mc-dark-theme-background: (
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-6e1fff3px map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-1a343b0px map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1351,7 +1351,7 @@ $mc-dark-theme-background: (
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-6e1fff3px mc-color($palette, 500);
+            box-shadow: 0 0.0.1-1a343b0px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1501,7 +1501,7 @@ $mc-dark-theme-background: (
                 border: {
                     color: mc-color($primary, 500);
                 }
-                box-shadow: 0 0.0.1-6e1fff3px mc-color($primary, 500);
+                box-shadow: 0 0.0.1-1a343b0px mc-color($primary, 500);
             }
 
             &.ng-invalid {
@@ -1524,7 +1524,7 @@ $mc-dark-theme-background: (
                 border: {
                     color: mc-color($mc-red, 400);
                 }
-                box-shadow: 0 0.0.1-6e1fff3px mc-color($mc-red, 400);
+                box-shadow: 0 0.0.1-1a343b0px mc-color($mc-red, 400);
             }
         }
 

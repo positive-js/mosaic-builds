@@ -24,7 +24,7 @@ export declare class McTreeNodeOption<T> extends CdkTreeNode<T> implements CanDi
     _handleBlur(): void;
     _handleClick(): void;
 }
-export declare const _McTreeSelectionBase: (new (...args: any[]) => HasTabIndex) & (new (...args: any[]) => CanDisable) & typeof CdkTree;
+export declare const _McTreeSelectionBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<HasTabIndex> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof CdkTree;
 export declare class McTreeNavigationChange {
     source: McTreeSelection<any>;
     option: McTreeNodeOption<any>;
@@ -66,6 +66,6 @@ export declare class McTreeSelection<T> extends _McTreeSelectionBase<T> implemen
      * @param index The index to be checked.
      * @returns True if the index is valid for our list of options.
      */
-    private _isValidIndex(index);
-    private _canDeselectLast(option);
+    private _isValidIndex;
+    private _canDeselectLast;
 }

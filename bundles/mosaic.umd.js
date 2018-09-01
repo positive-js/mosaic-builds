@@ -39,45 +39,31 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @param {?} val
- * @return {?}
- */
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
 function isBoolean(val) { return typeof val === 'boolean'; }
-/**
- * @param {?} value
- * @return {?}
- */
 function toBoolean(value) {
     return value != null && "" + value !== 'false';
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/** @type {?} */
+// Injection token that configures whether the Mosaic sanity checks are enabled.
 var MC_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
     factory: MC_SANITY_CHECKS_FACTORY
 });
-/**
- * @return {?}
- */
 function MC_SANITY_CHECKS_FACTORY() {
     return true;
 }
@@ -90,8 +76,11 @@ function MC_SANITY_CHECKS_FACTORY() {
 var McCommonModule = /** @class */ (function () {
     function McCommonModule(_sanityChecksEnabled) {
         this._sanityChecksEnabled = _sanityChecksEnabled;
+        // Whether we've done the global sanity checks (e.g. a theme is loaded, there is a doctype).
         this._hasDoneGlobalChecks = false;
+        // Reference to the global `document` object.
         this._document = typeof document === 'object' && document ? document : null;
+        // Reference to the global 'window' object.
         this._window = typeof window === 'object' && window ? window : null;
         if (this._areChecksEnabled() && !this._hasDoneGlobalChecks) {
             this._checkDoctypeIsDefined();
@@ -99,49 +88,25 @@ var McCommonModule = /** @class */ (function () {
             this._hasDoneGlobalChecks = true;
         }
     }
-    /**
-     * @return {?}
-     */
-    McCommonModule.prototype._areChecksEnabled = /**
-     * @return {?}
-     */
-    function () {
+    // Whether any sanity checks are enabled
+    McCommonModule.prototype._areChecksEnabled = function () {
         return this._sanityChecksEnabled && core.isDevMode() && !this._isTestEnv();
     };
-    /**
-     * @return {?}
-     */
-    McCommonModule.prototype._isTestEnv = /**
-     * @return {?}
-     */
-    function () {
+    // Whether the code is running in tests.
+    McCommonModule.prototype._isTestEnv = function () {
         return this._window && (this._window['__karma__'] || this._window['jasmine']);
     };
-    /**
-     * @return {?}
-     */
-    McCommonModule.prototype._checkDoctypeIsDefined = /**
-     * @return {?}
-     */
-    function () {
+    McCommonModule.prototype._checkDoctypeIsDefined = function () {
         if (this._document && !this._document.doctype) {
             console.warn('Current document does not have a doctype. This may cause ' +
                 'some Mosaic components not to behave as expected.');
         }
     };
-    /**
-     * @return {?}
-     */
-    McCommonModule.prototype._checkThemeIsPresent = /**
-     * @return {?}
-     */
-    function () {
+    McCommonModule.prototype._checkThemeIsPresent = function () {
         if (this._document && typeof getComputedStyle === 'function') {
-            /** @type {?} */
             var testElement = this._document.createElement('div');
             testElement.classList.add('mc-theme-loaded-marker');
             this._document.body.appendChild(testElement);
-            /** @type {?} */
             var computedStyle = getComputedStyle(testElement);
             // In some situations, the computed style of the test element can be null. For example in
             // Firefox, the computed style is null if an application is running inside of a hidden iframe.
@@ -154,28 +119,18 @@ var McCommonModule = /** @class */ (function () {
             this._document.body.removeChild(testElement);
         }
     };
-    McCommonModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [bidi.BidiModule],
-                    exports: [bidi.BidiModule]
-                },] },
-    ];
-    /** @nocollapse */
-    McCommonModule.ctorParameters = function () { return [
-        { type: Boolean, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_SANITY_CHECKS,] }] }
-    ]; };
+    McCommonModule = __decorate([
+        core.NgModule({
+            imports: [bidi.BidiModule],
+            exports: [bidi.BidiModule]
+        }),
+        __param(0, core.Optional()), __param(0, core.Inject(MC_SANITY_CHECKS)),
+        __metadata("design:paramtypes", [Boolean])
+    ], McCommonModule);
     return McCommonModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @template T
- * @param {?} base
- * @return {?}
- */
+// Mixin to augment a directive with a `disabled` property.
 function mixinDisabled(base) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
@@ -189,17 +144,10 @@ function mixinDisabled(base) {
             return _this;
         }
         Object.defineProperty(class_1.prototype, "disabled", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._disabled;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._disabled = toBoolean(value);
             },
             enumerable: true,
@@ -209,26 +157,16 @@ function mixinDisabled(base) {
     }(base));
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/** @enum {string} */
-var ThemePalette = {
-    Primary: 'primary',
-    Second: 'second',
-    Warn: 'warn',
-    Default: 'second',
-};
-/**
- * Mixin to augment a directive with a `color` property.
- * @template T
- * @param {?} base
- * @param {?=} defaultColor
- * @return {?}
- */
+
+(function (ThemePalette) {
+    ThemePalette["Primary"] = "primary";
+    ThemePalette["Second"] = "second";
+    ThemePalette["Warn"] = "warn";
+    ThemePalette["Default"] = "second";
+})(exports.ThemePalette || (exports.ThemePalette = {}));
+/** Mixin to augment a directive with a `color` property. */
 function mixinColor(base, defaultColor) {
-    if (defaultColor === void 0) { defaultColor = ThemePalette.Default; }
+    if (defaultColor === void 0) { defaultColor = exports.ThemePalette.Default; }
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
         function class_1() {
@@ -238,23 +176,14 @@ function mixinColor(base, defaultColor) {
             }
             var _this = _super.apply(this, args) || this;
             // Set the default color that can be specified from the mixin.
-            // Set the default color that can be specified from the mixin.
             _this.color = defaultColor;
             return _this;
         }
         Object.defineProperty(class_1.prototype, "color", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._color;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
-                /** @type {?} */
+            set: function (value) {
                 var colorPalette = value || defaultColor;
                 if (colorPalette !== this._color) {
                     if (this._color) {
@@ -273,16 +202,7 @@ function mixinColor(base, defaultColor) {
     }(base));
 }
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @template T
- * @param {?} base
- * @param {?=} defaultTabIndex
- * @return {?}
- */
+// Mixin to augment a directive with a `tabIndex` property.
 function mixinTabIndex(base, defaultTabIndex) {
     if (defaultTabIndex === void 0) { defaultTabIndex = 0; }
     return /** @class */ (function (_super) {
@@ -297,17 +217,10 @@ function mixinTabIndex(base, defaultTabIndex) {
             return _this;
         }
         Object.defineProperty(class_1.prototype, "tabIndex", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this.disabled ? -1 : this._tabIndex;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._tabIndex = value != null ? value : defaultTabIndex;
             },
             enumerable: true,
@@ -318,15 +231,8 @@ function mixinTabIndex(base, defaultTabIndex) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
  * Mixin to augment a directive with updateErrorState method.
  * For component with `errorState` and need to update `errorState`.
- * @template T
- * @param {?} base
- * @return {?}
  */
 function mixinErrorState(base) {
     return /** @class */ (function (_super) {
@@ -337,9 +243,7 @@ function mixinErrorState(base) {
                 args[_i] = arguments[_i];
             }
             var _this = _super.apply(this, args) || this;
-            /**
-             * Whether the component is in an error state.
-             */
+            /** Whether the component is in an error state. */
             _this.errorState = false;
             /**
              * Stream that emits whenever the state of the input changes such that the wrapping
@@ -348,22 +252,11 @@ function mixinErrorState(base) {
             _this.stateChanges = new rxjs.Subject();
             return _this;
         }
-        /**
-         * @return {?}
-         */
-        class_1.prototype.updateErrorState = /**
-         * @return {?}
-         */
-        function () {
-            /** @type {?} */
+        class_1.prototype.updateErrorState = function () {
             var oldState = this.errorState;
-            /** @type {?} */
             var parent = this._parentFormGroup || this._parentForm;
-            /** @type {?} */
             var matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
-            /** @type {?} */
-            var control = this.ngControl ? /** @type {?} */ (this.ngControl.control) : null;
-            /** @type {?} */
+            var control = this.ngControl ? this.ngControl.control : null;
             var newState = matcher.isErrorState(control, parent);
             if (newState !== oldState) {
                 this.errorState = newState;
@@ -375,39 +268,26 @@ function mixinErrorState(base) {
 }
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
  * Shared directive to count lines inside a text area, such as a list item.
- * Line elements can be extracted with a \@ContentChildren(McLine) query, then
+ * Line elements can be extracted with a @ContentChildren(McLine) query, then
  * counted by checking the query list's length.
  */
 var McLine = /** @class */ (function () {
     function McLine() {
     }
-    McLine.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mc-line], [mcLine]',
-                    host: { class: 'mc-line' }
-                },] },
-    ];
+    McLine = __decorate([
+        core.Directive({
+            selector: '[mc-line], [mcLine]',
+            host: { class: 'mc-line' }
+        })
+    ], McLine);
     return McLine;
 }());
 /**
  * Helper that takes a query list of lines and sets the correct class on the host.
- * \@docs-private
+ * @docs-private
  */
-var   /**
- * Helper that takes a query list of lines and sets the correct class on the host.
- * \@docs-private
- */
-McLineSetter = /** @class */ (function () {
+var McLineSetter = /** @class */ (function () {
     function McLineSetter(_lines, _element) {
         var _this = this;
         this._lines = _lines;
@@ -417,15 +297,7 @@ McLineSetter = /** @class */ (function () {
             _this._setLineClass(_this._lines.length);
         });
     }
-    /**
-     * @param {?} count
-     * @return {?}
-     */
-    McLineSetter.prototype._setLineClass = /**
-     * @param {?} count
-     * @return {?}
-     */
-    function (count) {
+    McLineSetter.prototype._setLineClass = function (count) {
         this._resetClasses();
         if (count === 2 || count === 3) {
             this._setClass("mc-" + count + "-line", true);
@@ -434,28 +306,12 @@ McLineSetter = /** @class */ (function () {
             this._setClass("mc-multi-line", true);
         }
     };
-    /**
-     * @return {?}
-     */
-    McLineSetter.prototype._resetClasses = /**
-     * @return {?}
-     */
-    function () {
+    McLineSetter.prototype._resetClasses = function () {
         this._setClass('mc-2-line', false);
         this._setClass('mc-3-line', false);
         this._setClass('mc-multi-line', false);
     };
-    /**
-     * @param {?} className
-     * @param {?} isAdd
-     * @return {?}
-     */
-    McLineSetter.prototype._setClass = /**
-     * @param {?} className
-     * @param {?} isAdd
-     * @return {?}
-     */
-    function (className, isAdd) {
+    McLineSetter.prototype._setClass = function (className, isAdd) {
         if (isAdd) {
             this._element.nativeElement.classList.add(className);
         }
@@ -468,74 +324,42 @@ McLineSetter = /** @class */ (function () {
 var McLineModule = /** @class */ (function () {
     function McLineModule() {
     }
-    McLineModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [],
-                    exports: [McLine],
-                    declarations: [McLine]
-                },] },
-    ];
+    McLineModule = __decorate([
+        core.NgModule({
+            imports: [],
+            exports: [McLine],
+            declarations: [McLine]
+        })
+    ], McLineModule);
     return McLineModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * Error state matcher that matches when a control is invalid and dirty.
- */
+/** Error state matcher that matches when a control is invalid and dirty. */
 var ShowOnDirtyErrorStateMatcher = /** @class */ (function () {
     function ShowOnDirtyErrorStateMatcher() {
     }
-    /**
-     * @param {?} control
-     * @param {?} form
-     * @return {?}
-     */
-    ShowOnDirtyErrorStateMatcher.prototype.isErrorState = /**
-     * @param {?} control
-     * @param {?} form
-     * @return {?}
-     */
-    function (control, form) {
+    ShowOnDirtyErrorStateMatcher.prototype.isErrorState = function (control, form) {
         return !!(control && control.invalid && (control.dirty || (form && form.submitted)));
     };
-    ShowOnDirtyErrorStateMatcher.decorators = [
-        { type: core.Injectable },
-    ];
+    ShowOnDirtyErrorStateMatcher = __decorate([
+        core.Injectable()
+    ], ShowOnDirtyErrorStateMatcher);
     return ShowOnDirtyErrorStateMatcher;
 }());
-/**
- * Provider that defines how form controls behave with regards to displaying error messages.
- */
+/** Provider that defines how form controls behave with regards to displaying error messages. */
 var ErrorStateMatcher = /** @class */ (function () {
     function ErrorStateMatcher() {
     }
-    /**
-     * @param {?} control
-     * @param {?} form
-     * @return {?}
-     */
-    ErrorStateMatcher.prototype.isErrorState = /**
-     * @param {?} control
-     * @param {?} form
-     * @return {?}
-     */
-    function (control, form) {
+    ErrorStateMatcher.prototype.isErrorState = function (control, form) {
         return !!(control && control.invalid && (control.touched || (form && form.submitted)));
     };
-    ErrorStateMatcher.decorators = [
-        { type: core.Injectable, args: [{ providedIn: 'root' },] },
-    ];
-    /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core.defineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+    ErrorStateMatcher.ngInjectableDef = core.defineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+    ErrorStateMatcher = __decorate([
+        core.Injectable({ providedIn: 'root' })
+    ], ErrorStateMatcher);
     return ErrorStateMatcher;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 /**
  * Component that shows a simplified checkbox without including any kind of "real" checkbox.
  * Meant to be used when the checkbox is purely decorative and a large number of them will be
@@ -547,7 +371,7 @@ var ErrorStateMatcher = /** @class */ (function () {
  * interchangeable with `<mc-checkbox>` and should *not* be used if the user would directly
  * interact with the checkbox. The pseudo-checkbox should only be used as an implementation detail
  * of more complex components that appropriately handle selected / checked state.
- * \@docs-private
+ * @docs-private
  */
 var McPseudoCheckbox = /** @class */ (function () {
     function McPseudoCheckbox() {
@@ -556,58 +380,54 @@ var McPseudoCheckbox = /** @class */ (function () {
         // Whether the checkbox is disabled.
         this.disabled = false;
     }
-    McPseudoCheckbox.decorators = [
-        { type: core.Component, args: [{
-                    encapsulation: core.ViewEncapsulation.None,
-                    preserveWhitespaces: false,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    selector: 'mc-pseudo-checkbox',
-                    styles: [""],
-                    template: '',
-                    host: {
-                        class: 'mc-pseudo-checkbox',
-                        '[class.mc-pseudo-checkbox-indeterminate]': 'state === "indeterminate"',
-                        '[class.mc-pseudo-checkbox-checked]': 'state === "checked"',
-                        '[class.mc-pseudo-checkbox-disabled]': 'disabled'
-                    }
-                },] },
-    ];
-    McPseudoCheckbox.propDecorators = {
-        state: [{ type: core.Input }],
-        disabled: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McPseudoCheckbox.prototype, "state", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean)
+    ], McPseudoCheckbox.prototype, "disabled", void 0);
+    McPseudoCheckbox = __decorate([
+        core.Component({
+            encapsulation: core.ViewEncapsulation.None,
+            preserveWhitespaces: false,
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            selector: 'mc-pseudo-checkbox',
+            styles: [""],
+            template: '',
+            host: {
+                class: 'mc-pseudo-checkbox',
+                '[class.mc-pseudo-checkbox-indeterminate]': 'state === "indeterminate"',
+                '[class.mc-pseudo-checkbox-checked]': 'state === "checked"',
+                '[class.mc-pseudo-checkbox-disabled]': 'disabled'
+            }
+        })
+    ], McPseudoCheckbox);
     return McPseudoCheckbox;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McPseudoCheckboxModule = /** @class */ (function () {
     function McPseudoCheckboxModule() {
     }
-    McPseudoCheckboxModule.decorators = [
-        { type: core.NgModule, args: [{
-                    exports: [McPseudoCheckbox],
-                    declarations: [McPseudoCheckbox]
-                },] },
-    ];
+    McPseudoCheckboxModule = __decorate([
+        core.NgModule({
+            exports: [McPseudoCheckbox],
+            declarations: [McPseudoCheckbox]
+        })
+    ], McPseudoCheckboxModule);
     return McPseudoCheckboxModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McIconCSSStyler = /** @class */ (function () {
     function McIconCSSStyler() {
     }
-    McIconCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mc-icon]',
-                    host: { class: 'mc mc-icon' }
-                },] },
-    ];
+    McIconCSSStyler = __decorate([
+        core.Directive({
+            selector: '[mc-icon]',
+            host: { class: 'mc mc-icon' }
+        })
+    ], McIconCSSStyler);
     return McIconCSSStyler;
 }());
 var McIconBase = /** @class */ (function () {
@@ -616,7 +436,6 @@ var McIconBase = /** @class */ (function () {
     }
     return McIconBase;
 }());
-/** @type {?} */
 var _McIconMixinBase = mixinColor(McIconBase);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
@@ -625,144 +444,112 @@ var McIcon = /** @class */ (function (_super) {
         elementRef.nativeElement.classList.add(iconName);
         return _this;
     }
-    /**
-     * @return {?}
-     */
-    McIcon.prototype._getHostElement = /**
-     * @return {?}
-     */
-    function () {
+    McIcon.prototype._getHostElement = function () {
         return this._elementRef.nativeElement;
     };
-    McIcon.decorators = [
-        { type: core.Component, args: [{
-                    selector: "[mc-icon]",
-                    template: '<ng-content></ng-content>',
-                    styles: [""],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None
-                },] },
-    ];
-    /** @nocollapse */
-    McIcon.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
-    ]; };
+    McIcon = __decorate([
+        core.Component({
+            selector: "[mc-icon]",
+            template: '<ng-content></ng-content>',
+            styles: [""],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None
+        }),
+        __param(1, core.Attribute('mc-icon')),
+        __metadata("design:paramtypes", [core.ElementRef, String])
+    ], McIcon);
     return McIcon;
 }(_McIconMixinBase));
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McIconModule = /** @class */ (function () {
     function McIconModule() {
     }
-    McIconModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McIcon,
-                        McIconCSSStyler
-                    ],
-                    declarations: [
-                        McIcon,
-                        McIconCSSStyler
-                    ]
-                },] },
-    ];
+    McIconModule = __decorate([
+        core.NgModule({
+            imports: [
+                common.CommonModule,
+                a11y.A11yModule,
+                platform.PlatformModule
+            ],
+            exports: [
+                McIcon,
+                McIconCSSStyler
+            ],
+            declarations: [
+                McIcon,
+                McIconCSSStyler
+            ]
+        })
+    ], McIconModule);
     return McIconModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McButtonCSSStyler = /** @class */ (function () {
     function McButtonCSSStyler() {
     }
-    McButtonCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'button[mc-button], a[mc-button]',
-                    host: { class: 'mc-button' }
-                },] },
-    ];
+    McButtonCSSStyler = __decorate([
+        core.Directive({
+            selector: 'button[mc-button], a[mc-button]',
+            host: { class: 'mc-button' }
+        })
+    ], McButtonCSSStyler);
     return McButtonCSSStyler;
 }());
 var McXSButtonCSSStyler = /** @class */ (function () {
     function McXSButtonCSSStyler() {
     }
-    McXSButtonCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'button[mc-xs-button], a[mc-xs-button]',
-                    host: { class: 'mc-button mc-button_xs' }
-                },] },
-    ];
+    McXSButtonCSSStyler = __decorate([
+        core.Directive({
+            selector: 'button[mc-xs-button], a[mc-xs-button]',
+            host: { class: 'mc-button mc-button_xs' }
+        })
+    ], McXSButtonCSSStyler);
     return McXSButtonCSSStyler;
 }());
 var McSMButtonCSSStyler = /** @class */ (function () {
     function McSMButtonCSSStyler() {
     }
-    McSMButtonCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'button[mc-sm-button], a[mc-sm-button]',
-                    host: { class: 'mc-button mc-button_sm' }
-                },] },
-    ];
+    McSMButtonCSSStyler = __decorate([
+        core.Directive({
+            selector: 'button[mc-sm-button], a[mc-sm-button]',
+            host: { class: 'mc-button mc-button_sm' }
+        })
+    ], McSMButtonCSSStyler);
     return McSMButtonCSSStyler;
 }());
 var McLGButtonCSSStyler = /** @class */ (function () {
     function McLGButtonCSSStyler() {
     }
-    McLGButtonCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'button[mc-lg-button], a[mc-lg-button]',
-                    host: { class: 'mc-button mc-button_lg' }
-                },] },
-    ];
+    McLGButtonCSSStyler = __decorate([
+        core.Directive({
+            selector: 'button[mc-lg-button], a[mc-lg-button]',
+            host: { class: 'mc-button mc-button_lg' }
+        })
+    ], McLGButtonCSSStyler);
     return McLGButtonCSSStyler;
 }());
 var McXLButtonCSSStyler = /** @class */ (function () {
     function McXLButtonCSSStyler() {
     }
-    McXLButtonCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'button[mc-xl-button], a[mc-xl-button]',
-                    host: { class: 'mc-button mc-button_xl' }
-                },] },
-    ];
+    McXLButtonCSSStyler = __decorate([
+        core.Directive({
+            selector: 'button[mc-xl-button], a[mc-xl-button]',
+            host: { class: 'mc-button mc-button_xl' }
+        })
+    ], McXLButtonCSSStyler);
     return McXLButtonCSSStyler;
 }());
 var McIconButtonCSSStyler = /** @class */ (function () {
     function McIconButtonCSSStyler(elementRef) {
         this.nativeElement = elementRef.nativeElement;
     }
-    /**
-     * @return {?}
-     */
-    McIconButtonCSSStyler.prototype.ngAfterContentInit = /**
-     * @return {?}
-     */
-    function () {
+    McIconButtonCSSStyler.prototype.ngAfterContentInit = function () {
         this._addClassModificatorForIcons();
     };
-    /**
-     * @return {?}
-     */
-    McIconButtonCSSStyler.prototype._addClassModificatorForIcons = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
+    McIconButtonCSSStyler.prototype._addClassModificatorForIcons = function () {
         var twoIcons = 2;
-        /** @type {?} */
         var icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
         if (icons.length === 1) {
-            /** @type {?} */
             var iconElement = icons[0];
             if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
                 if (iconElement.nextSibling) {
@@ -776,27 +563,22 @@ var McIconButtonCSSStyler = /** @class */ (function () {
             }
         }
         else if (icons.length === twoIcons) {
-            /** @type {?} */
             var firstIconElement = icons[0];
-            /** @type {?} */
             var secondIconElement = icons[1];
             firstIconElement.classList.add('mc-icon_left');
             secondIconElement.classList.add('mc-icon_right');
         }
     };
-    McIconButtonCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'button[mc-icon-button], a[mc-icon-button]',
-                    queries: {
-                        contentChildren: new core.ContentChildren(McIcon)
-                    },
-                    host: { class: 'mc-icon-button' }
-                },] },
-    ];
-    /** @nocollapse */
-    McIconButtonCSSStyler.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
+    McIconButtonCSSStyler = __decorate([
+        core.Directive({
+            selector: 'button[mc-icon-button], a[mc-icon-button]',
+            queries: {
+                contentChildren: new core.ContentChildren(McIcon)
+            },
+            host: { class: 'mc-icon-button' }
+        }),
+        __metadata("design:paramtypes", [core.ElementRef])
+    ], McIconButtonCSSStyler);
     return McIconButtonCSSStyler;
 }());
 var McButtonBase = /** @class */ (function () {
@@ -805,7 +587,6 @@ var McButtonBase = /** @class */ (function () {
     }
     return McButtonBase;
 }());
-/** @type {?} */
 var _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
 var McButton = /** @class */ (function (_super) {
     __extends(McButton, _super);
@@ -816,52 +597,29 @@ var McButton = /** @class */ (function (_super) {
         _this._focusMonitor.monitor(_this._elementRef.nativeElement, true);
         return _this;
     }
-    /**
-     * @return {?}
-     */
-    McButton.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
+    McButton.prototype.ngOnDestroy = function () {
         this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     };
-    /**
-     * @return {?}
-     */
-    McButton.prototype.focus = /**
-     * @return {?}
-     */
-    function () {
+    McButton.prototype.focus = function () {
         this._getHostElement().focus();
     };
-    /**
-     * @return {?}
-     */
-    McButton.prototype._getHostElement = /**
-     * @return {?}
-     */
-    function () {
+    McButton.prototype._getHostElement = function () {
         return this._elementRef.nativeElement;
     };
-    McButton.decorators = [
-        { type: core.Component, args: [{
-                    selector: "\n        button[mc-button],\n        button[mc-xs-button],\n        button[mc-sm-button],\n        button[mc-lg-button],\n        button[mc-xl-button]\n    ",
-                    template: "<div class=\"mc-button-wrapper\"><ng-content></ng-content></div><div class=\"mc-button-focus-overlay\"></div>",
-                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;margin:0;border:1px solid transparent;border-radius:3px}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:0}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:5px 15px;line-height:20px;font-size:15px}.mc-button_xs{padding:3px 7px;line-height:16px;font-size:12px}.mc-button_sm{padding:3px 15px;line-height:16px;font-size:12px}.mc-button_lg{padding:9px 15px;line-height:20px;font-size:15px}.mc-button_xl{padding:9px 59px;line-height:28px;font-size:18px}.mc-icon-button{padding:5px 7px;line-height:20px;font-size:16px}.mc-icon-button.mc-icon-button_left{padding-right:15px}.mc-icon-button.mc-icon-button_right{padding-left:15px}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:7px}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:7px}.mc-button-group{display:flex;flex-direction:row}.mc-button-group>.mc-button:first-of-type:not(:last-of-type),.mc-button-group>.mc-icon-button:first-of-type:not(:last-of-type){border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-group>.mc-button:last-of-type:not(:first-of-type),.mc-button-group>.mc-icon-button:last-of-type:not(:first-of-type){border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-group>.mc-button:not(:first-of-type):not(:last-of-type),.mc-button-group>.mc-icon-button:not(:first-of-type):not(:last-of-type){border-radius:0}.mc-button-group .mc-button+.mc-button,.mc-button-group .mc-button+.mc-icon-button,.mc-button-group .mc-icon-button+.mc-button,.mc-button-group .mc-icon-button+.mc-icon-button{margin-left:-1px}.mc-button-group_justified>.mc-button,.mc-button-group_justified>.mc-icon-button{width:100%}.mc-button-group-vertical{display:flex;flex-direction:column}.mc-button-group-vertical>.mc-button:first-child:not(:last-child),.mc-button-group-vertical>.mc-icon-button:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-group-vertical>.mc-button:last-child:not(:first-child),.mc-button-group-vertical>.mc-icon-button:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-group-vertical>.mc-button:not(:first-child):not(:last-child),.mc-button-group-vertical>.mc-icon-button:not(:first-child):not(:last-child){border-radius:0}.mc-button-group-vertical .mc-button+.mc-button,.mc-button-group-vertical .mc-button+.mc-icon-button,.mc-button-group-vertical .mc-icon-button+.mc-button,.mc-button-group-vertical .mc-icon-button+.mc-icon-button{margin-top:-1px}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    inputs: ['disabled', 'color'],
-                    host: {
-                        '[disabled]': 'disabled || null'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McButton.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: platform.Platform },
-        { type: a11y.FocusMonitor }
-    ]; };
+    McButton = __decorate([
+        core.Component({
+            selector: "\n        button[mc-button],\n        button[mc-xs-button],\n        button[mc-sm-button],\n        button[mc-lg-button],\n        button[mc-xl-button]\n    ",
+            template: "<div class=\"mc-button-wrapper\"><ng-content></ng-content></div><div class=\"mc-button-focus-overlay\"></div>",
+            styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;margin:0;border:1px solid transparent;border-radius:3px}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:0}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:5px 15px;line-height:20px;font-size:15px}.mc-button_xs{padding:3px 7px;line-height:16px;font-size:12px}.mc-button_sm{padding:3px 15px;line-height:16px;font-size:12px}.mc-button_lg{padding:9px 15px;line-height:20px;font-size:15px}.mc-button_xl{padding:9px 59px;line-height:28px;font-size:18px}.mc-icon-button{padding:5px 7px;line-height:20px;font-size:16px}.mc-icon-button.mc-icon-button_left{padding-right:15px}.mc-icon-button.mc-icon-button_right{padding-left:15px}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:7px}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:7px}.mc-button-group{display:flex;flex-direction:row}.mc-button-group>.mc-button:first-of-type:not(:last-of-type),.mc-button-group>.mc-icon-button:first-of-type:not(:last-of-type){border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-group>.mc-button:last-of-type:not(:first-of-type),.mc-button-group>.mc-icon-button:last-of-type:not(:first-of-type){border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-group>.mc-button:not(:first-of-type):not(:last-of-type),.mc-button-group>.mc-icon-button:not(:first-of-type):not(:last-of-type){border-radius:0}.mc-button-group .mc-button+.mc-button,.mc-button-group .mc-button+.mc-icon-button,.mc-button-group .mc-icon-button+.mc-button,.mc-button-group .mc-icon-button+.mc-icon-button{margin-left:-1px}.mc-button-group_justified>.mc-button,.mc-button-group_justified>.mc-icon-button{width:100%}.mc-button-group-vertical{display:flex;flex-direction:column}.mc-button-group-vertical>.mc-button:first-child:not(:last-child),.mc-button-group-vertical>.mc-icon-button:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-group-vertical>.mc-button:last-child:not(:first-child),.mc-button-group-vertical>.mc-icon-button:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-group-vertical>.mc-button:not(:first-child):not(:last-child),.mc-button-group-vertical>.mc-icon-button:not(:first-child):not(:last-child){border-radius:0}.mc-button-group-vertical .mc-button+.mc-button,.mc-button-group-vertical .mc-button+.mc-icon-button,.mc-button-group-vertical .mc-icon-button+.mc-button,.mc-button-group-vertical .mc-icon-button+.mc-icon-button{margin-top:-1px}"],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None,
+            inputs: ['disabled', 'color'],
+            host: {
+                '[disabled]': 'disabled || null'
+            }
+        }),
+        __metadata("design:paramtypes", [core.ElementRef, platform.Platform, a11y.FocusMonitor])
+    ], McButton);
     return McButton;
 }(_McButtonMixinBase));
 var McAnchor = /** @class */ (function (_super) {
@@ -869,41 +627,28 @@ var McAnchor = /** @class */ (function (_super) {
     function McAnchor(platform$$1, focusMonitor, elementRef) {
         return _super.call(this, elementRef, platform$$1, focusMonitor) || this;
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    McAnchor.prototype._haltDisabledEvents = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
+    McAnchor.prototype._haltDisabledEvents = function (event) {
         if (this.disabled) {
             event.preventDefault();
             event.stopImmediatePropagation();
         }
     };
-    McAnchor.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'a[mc-button], a[mc-xs-button], a[mc-sm-button], a[mc-lg-button], a[mc-xl-button]',
-                    template: "<div class=\"mc-button-wrapper\"><ng-content></ng-content></div><div class=\"mc-button-focus-overlay\"></div>",
-                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;margin:0;border:1px solid transparent;border-radius:3px}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:0}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:5px 15px;line-height:20px;font-size:15px}.mc-button_xs{padding:3px 7px;line-height:16px;font-size:12px}.mc-button_sm{padding:3px 15px;line-height:16px;font-size:12px}.mc-button_lg{padding:9px 15px;line-height:20px;font-size:15px}.mc-button_xl{padding:9px 59px;line-height:28px;font-size:18px}.mc-icon-button{padding:5px 7px;line-height:20px;font-size:16px}.mc-icon-button.mc-icon-button_left{padding-right:15px}.mc-icon-button.mc-icon-button_right{padding-left:15px}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:7px}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:7px}.mc-button-group{display:flex;flex-direction:row}.mc-button-group>.mc-button:first-of-type:not(:last-of-type),.mc-button-group>.mc-icon-button:first-of-type:not(:last-of-type){border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-group>.mc-button:last-of-type:not(:first-of-type),.mc-button-group>.mc-icon-button:last-of-type:not(:first-of-type){border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-group>.mc-button:not(:first-of-type):not(:last-of-type),.mc-button-group>.mc-icon-button:not(:first-of-type):not(:last-of-type){border-radius:0}.mc-button-group .mc-button+.mc-button,.mc-button-group .mc-button+.mc-icon-button,.mc-button-group .mc-icon-button+.mc-button,.mc-button-group .mc-icon-button+.mc-icon-button{margin-left:-1px}.mc-button-group_justified>.mc-button,.mc-button-group_justified>.mc-icon-button{width:100%}.mc-button-group-vertical{display:flex;flex-direction:column}.mc-button-group-vertical>.mc-button:first-child:not(:last-child),.mc-button-group-vertical>.mc-icon-button:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-group-vertical>.mc-button:last-child:not(:first-child),.mc-button-group-vertical>.mc-icon-button:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-group-vertical>.mc-button:not(:first-child):not(:last-child),.mc-button-group-vertical>.mc-icon-button:not(:first-child):not(:last-child){border-radius:0}.mc-button-group-vertical .mc-button+.mc-button,.mc-button-group-vertical .mc-button+.mc-icon-button,.mc-button-group-vertical .mc-icon-button+.mc-button,.mc-button-group-vertical .mc-icon-button+.mc-icon-button{margin-top:-1px}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    inputs: ['disabled', 'color'],
-                    host: {
-                        '[attr.tabindex]': 'disabled ? -1 : 0',
-                        '[attr.disabled]': 'disabled || null',
-                        '(click)': '_haltDisabledEvents($event)'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McAnchor.ctorParameters = function () { return [
-        { type: platform.Platform },
-        { type: a11y.FocusMonitor },
-        { type: core.ElementRef }
-    ]; };
+    McAnchor = __decorate([
+        core.Component({
+            selector: 'a[mc-button], a[mc-xs-button], a[mc-sm-button], a[mc-lg-button], a[mc-xl-button]',
+            template: "<div class=\"mc-button-wrapper\"><ng-content></ng-content></div><div class=\"mc-button-focus-overlay\"></div>",
+            styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;margin:0;border:1px solid transparent;border-radius:3px}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:0}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:5px 15px;line-height:20px;font-size:15px}.mc-button_xs{padding:3px 7px;line-height:16px;font-size:12px}.mc-button_sm{padding:3px 15px;line-height:16px;font-size:12px}.mc-button_lg{padding:9px 15px;line-height:20px;font-size:15px}.mc-button_xl{padding:9px 59px;line-height:28px;font-size:18px}.mc-icon-button{padding:5px 7px;line-height:20px;font-size:16px}.mc-icon-button.mc-icon-button_left{padding-right:15px}.mc-icon-button.mc-icon-button_right{padding-left:15px}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:7px}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:7px}.mc-button-group{display:flex;flex-direction:row}.mc-button-group>.mc-button:first-of-type:not(:last-of-type),.mc-button-group>.mc-icon-button:first-of-type:not(:last-of-type){border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-group>.mc-button:last-of-type:not(:first-of-type),.mc-button-group>.mc-icon-button:last-of-type:not(:first-of-type){border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-group>.mc-button:not(:first-of-type):not(:last-of-type),.mc-button-group>.mc-icon-button:not(:first-of-type):not(:last-of-type){border-radius:0}.mc-button-group .mc-button+.mc-button,.mc-button-group .mc-button+.mc-icon-button,.mc-button-group .mc-icon-button+.mc-button,.mc-button-group .mc-icon-button+.mc-icon-button{margin-left:-1px}.mc-button-group_justified>.mc-button,.mc-button-group_justified>.mc-icon-button{width:100%}.mc-button-group-vertical{display:flex;flex-direction:column}.mc-button-group-vertical>.mc-button:first-child:not(:last-child),.mc-button-group-vertical>.mc-icon-button:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-group-vertical>.mc-button:last-child:not(:first-child),.mc-button-group-vertical>.mc-icon-button:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-group-vertical>.mc-button:not(:first-child):not(:last-child),.mc-button-group-vertical>.mc-icon-button:not(:first-child):not(:last-child){border-radius:0}.mc-button-group-vertical .mc-button+.mc-button,.mc-button-group-vertical .mc-button+.mc-icon-button,.mc-button-group-vertical .mc-icon-button+.mc-button,.mc-button-group-vertical .mc-icon-button+.mc-icon-button{margin-top:-1px}"],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None,
+            inputs: ['disabled', 'color'],
+            host: {
+                '[attr.tabindex]': 'disabled ? -1 : 0',
+                '[attr.disabled]': 'disabled || null',
+                '(click)': '_haltDisabledEvents($event)'
+            }
+        }),
+        __metadata("design:paramtypes", [platform.Platform, a11y.FocusMonitor, core.ElementRef])
+    ], McAnchor);
     return McAnchor;
 }(McButton));
 var McIconButton = /** @class */ (function (_super) {
@@ -911,133 +656,65 @@ var McIconButton = /** @class */ (function (_super) {
     function McIconButton(platform$$1, focusMonitor, elementRef) {
         return _super.call(this, elementRef, platform$$1, focusMonitor) || this;
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    McIconButton.prototype._haltDisabledEvents = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
+    McIconButton.prototype._haltDisabledEvents = function (event) {
         if (this.disabled) {
             event.preventDefault();
             event.stopImmediatePropagation();
         }
     };
-    McIconButton.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'button[mc-icon-button]',
-                    template: "<div class=\"mc-button-wrapper\"><ng-content></ng-content></div><div class=\"mc-button-focus-overlay\"></div>",
-                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;margin:0;border:1px solid transparent;border-radius:3px}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:0}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:5px 15px;line-height:20px;font-size:15px}.mc-button_xs{padding:3px 7px;line-height:16px;font-size:12px}.mc-button_sm{padding:3px 15px;line-height:16px;font-size:12px}.mc-button_lg{padding:9px 15px;line-height:20px;font-size:15px}.mc-button_xl{padding:9px 59px;line-height:28px;font-size:18px}.mc-icon-button{padding:5px 7px;line-height:20px;font-size:16px}.mc-icon-button.mc-icon-button_left{padding-right:15px}.mc-icon-button.mc-icon-button_right{padding-left:15px}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:7px}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:7px}.mc-button-group{display:flex;flex-direction:row}.mc-button-group>.mc-button:first-of-type:not(:last-of-type),.mc-button-group>.mc-icon-button:first-of-type:not(:last-of-type){border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-group>.mc-button:last-of-type:not(:first-of-type),.mc-button-group>.mc-icon-button:last-of-type:not(:first-of-type){border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-group>.mc-button:not(:first-of-type):not(:last-of-type),.mc-button-group>.mc-icon-button:not(:first-of-type):not(:last-of-type){border-radius:0}.mc-button-group .mc-button+.mc-button,.mc-button-group .mc-button+.mc-icon-button,.mc-button-group .mc-icon-button+.mc-button,.mc-button-group .mc-icon-button+.mc-icon-button{margin-left:-1px}.mc-button-group_justified>.mc-button,.mc-button-group_justified>.mc-icon-button{width:100%}.mc-button-group-vertical{display:flex;flex-direction:column}.mc-button-group-vertical>.mc-button:first-child:not(:last-child),.mc-button-group-vertical>.mc-icon-button:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-group-vertical>.mc-button:last-child:not(:first-child),.mc-button-group-vertical>.mc-icon-button:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-group-vertical>.mc-button:not(:first-child):not(:last-child),.mc-button-group-vertical>.mc-icon-button:not(:first-child):not(:last-child){border-radius:0}.mc-button-group-vertical .mc-button+.mc-button,.mc-button-group-vertical .mc-button+.mc-icon-button,.mc-button-group-vertical .mc-icon-button+.mc-button,.mc-button-group-vertical .mc-icon-button+.mc-icon-button{margin-top:-1px}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    inputs: ['disabled', 'color'],
-                    host: {
-                        '[attr.tabindex]': 'disabled ? -1 : 0',
-                        '[attr.disabled]': 'disabled || null'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McIconButton.ctorParameters = function () { return [
-        { type: platform.Platform },
-        { type: a11y.FocusMonitor },
-        { type: core.ElementRef }
-    ]; };
+    McIconButton = __decorate([
+        core.Component({
+            selector: 'button[mc-icon-button]',
+            template: "<div class=\"mc-button-wrapper\"><ng-content></ng-content></div><div class=\"mc-button-focus-overlay\"></div>",
+            styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;margin:0;border:1px solid transparent;border-radius:3px}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:0}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:5px 15px;line-height:20px;font-size:15px}.mc-button_xs{padding:3px 7px;line-height:16px;font-size:12px}.mc-button_sm{padding:3px 15px;line-height:16px;font-size:12px}.mc-button_lg{padding:9px 15px;line-height:20px;font-size:15px}.mc-button_xl{padding:9px 59px;line-height:28px;font-size:18px}.mc-icon-button{padding:5px 7px;line-height:20px;font-size:16px}.mc-icon-button.mc-icon-button_left{padding-right:15px}.mc-icon-button.mc-icon-button_right{padding-left:15px}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:7px}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:7px}.mc-button-group{display:flex;flex-direction:row}.mc-button-group>.mc-button:first-of-type:not(:last-of-type),.mc-button-group>.mc-icon-button:first-of-type:not(:last-of-type){border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-group>.mc-button:last-of-type:not(:first-of-type),.mc-button-group>.mc-icon-button:last-of-type:not(:first-of-type){border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-group>.mc-button:not(:first-of-type):not(:last-of-type),.mc-button-group>.mc-icon-button:not(:first-of-type):not(:last-of-type){border-radius:0}.mc-button-group .mc-button+.mc-button,.mc-button-group .mc-button+.mc-icon-button,.mc-button-group .mc-icon-button+.mc-button,.mc-button-group .mc-icon-button+.mc-icon-button{margin-left:-1px}.mc-button-group_justified>.mc-button,.mc-button-group_justified>.mc-icon-button{width:100%}.mc-button-group-vertical{display:flex;flex-direction:column}.mc-button-group-vertical>.mc-button:first-child:not(:last-child),.mc-button-group-vertical>.mc-icon-button:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-group-vertical>.mc-button:last-child:not(:first-child),.mc-button-group-vertical>.mc-icon-button:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-group-vertical>.mc-button:not(:first-child):not(:last-child),.mc-button-group-vertical>.mc-icon-button:not(:first-child):not(:last-child){border-radius:0}.mc-button-group-vertical .mc-button+.mc-button,.mc-button-group-vertical .mc-button+.mc-icon-button,.mc-button-group-vertical .mc-icon-button+.mc-button,.mc-button-group-vertical .mc-icon-button+.mc-icon-button{margin-top:-1px}"],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None,
+            inputs: ['disabled', 'color'],
+            host: {
+                '[attr.tabindex]': 'disabled ? -1 : 0',
+                '[attr.disabled]': 'disabled || null'
+            }
+        }),
+        __metadata("design:paramtypes", [platform.Platform, a11y.FocusMonitor, core.ElementRef])
+    ], McIconButton);
     return McIconButton;
 }(McButton));
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McButtonModule = /** @class */ (function () {
     function McButtonModule() {
     }
-    McButtonModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McButton,
-                        McAnchor,
-                        McIconButton,
-                        McButtonCSSStyler,
-                        McXSButtonCSSStyler,
-                        McSMButtonCSSStyler,
-                        McLGButtonCSSStyler,
-                        McXLButtonCSSStyler,
-                        McIconButtonCSSStyler
-                    ],
-                    declarations: [
-                        McButton,
-                        McAnchor,
-                        McIconButton,
-                        McButtonCSSStyler,
-                        McXSButtonCSSStyler,
-                        McSMButtonCSSStyler,
-                        McLGButtonCSSStyler,
-                        McXLButtonCSSStyler,
-                        McIconButtonCSSStyler
-                    ]
-                },] },
-    ];
+    McButtonModule = __decorate([
+        core.NgModule({
+            imports: [
+                common.CommonModule,
+                a11y.A11yModule,
+                platform.PlatformModule
+            ],
+            exports: [
+                McButton,
+                McAnchor,
+                McIconButton,
+                McButtonCSSStyler,
+                McXSButtonCSSStyler,
+                McSMButtonCSSStyler,
+                McLGButtonCSSStyler,
+                McXLButtonCSSStyler,
+                McIconButtonCSSStyler
+            ],
+            declarations: [
+                McButton,
+                McAnchor,
+                McIconButton,
+                McButtonCSSStyler,
+                McXSButtonCSSStyler,
+                McSMButtonCSSStyler,
+                McLGButtonCSSStyler,
+                McXLButtonCSSStyler,
+                McIconButtonCSSStyler
+            ]
+        })
+    ], McButtonModule);
     return McButtonModule;
-}());
-
-var McLink = /** @class */ (function () {
-    function McLink(elementRef, _focusMonitor) {
-        this.elementRef = elementRef;
-        this._focusMonitor = _focusMonitor;
-        this._focusMonitor.monitor(elementRef.nativeElement, true);
-    }
-    McLink.prototype.ngOnDestroy = function () {
-        this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-    };
-    McLink.prototype.focus = function () {
-        this._getHostElement().focus();
-    };
-    McLink.prototype._getHostElement = function () {
-        return this.elementRef.nativeElement;
-    };
-    McLink.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'a.mc-link',
-                    template: "<ng-content></ng-content>",
-                    encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-link{display:inline-flex;align-items:center;padding:2px 4px;text-decoration:none!important;cursor:pointer;outline:0}.mc-link{transition-property:color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link:focus{transition:none}.mc-link:hover{transition:none}.mc-link.mc-focused,.mc-link:focus{border-radius:3px}.mc-link.mc-disabled,.mc-link[disabled]{pointer-events:none;cursor:default}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link .mc-link_dashed,.mc-link.mc-link_underlined{transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link .mc-link_dashed:focus,.mc-link.mc-link_underlined:focus{transition:none}.mc-link .mc-link_dashed:hover,.mc-link.mc-link_underlined:hover{transition:none}"]
-                },] },
-    ];
-    /** @nocollapse */
-    McLink.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: a11y.FocusMonitor }
-    ]; };
-    return McLink;
-}());
-
-var McLinkModule = /** @class */ (function () {
-    function McLinkModule() {
-    }
-    McLinkModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule
-                    ],
-                    declarations: [
-                        McLink
-                    ],
-                    exports: [
-                        McLink
-                    ]
-                },] },
-    ];
-    return McLinkModule;
 }());
 
 /**
@@ -1331,50 +1008,88 @@ var McCheckbox = /** @class */ (function (_super) {
         // emit its event object to the `change` output.
         event.stopPropagation();
     };
-    McCheckbox.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-checkbox',
-                    template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input class=\"mc-checkbox-input cdk-visually-hidden\" type=\"checkbox\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"></div><div class=\"mc-checkbox-background\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></span></label>",
-                    styles: [".mc-checkbox-checkmark,.mc-checkbox-mixedmark{width:calc(100% - 2px)}.mc-checkbox-background,.mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-background{align-items:center;display:inline-flex;justify-content:center}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{top:0;left:0;right:0;bottom:0;position:absolute;width:100%;opacity:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}.mc-checkbox-checked .mc-checkbox-checkmark{opacity:1}.mc-checkbox-checked .mc-checkbox-mixedmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-checkmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-mixedmark{opacity:1}.mc-checkbox-unchecked .mc-checkbox-background{background-color:transparent}.mc-checkbox-disabled{cursor:default}.mc-checkbox-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-input{bottom:0;left:50%}.mc-checkbox-input:focus+.mc-checkbox-frame{top:-1px;left:-1px;border-width:2px;width:18px;height:18px}"],
-                    exportAs: 'mcCheckbox',
-                    host: {
-                        class: 'mc-checkbox',
-                        '[id]': 'id',
-                        '[attr.id]': 'id',
-                        '[class.mc-checkbox-indeterminate]': 'indeterminate',
-                        '[class.mc-checkbox-checked]': 'checked',
-                        '[class.mc-checkbox-disabled]': 'disabled',
-                        '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
-                    },
-                    providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],
-                    inputs: ['color', 'tabIndex'],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McCheckbox.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef },
-        { type: a11y.FocusMonitor },
-        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_CHECKBOX_CLICK_ACTION,] }] }
-    ]; };
-    McCheckbox.propDecorators = {
-        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
-        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
-        id: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        labelPosition: [{ type: core.Input }],
-        name: [{ type: core.Input }],
-        change: [{ type: core.Output }],
-        indeterminateChange: [{ type: core.Output }],
-        value: [{ type: core.Input }],
-        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
-        checked: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        indeterminate: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input('aria-label'),
+        __metadata("design:type", String)
+    ], McCheckbox.prototype, "ariaLabel", void 0);
+    __decorate([
+        core.Input('aria-labelledby'),
+        __metadata("design:type", Object)
+    ], McCheckbox.prototype, "ariaLabelledby", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McCheckbox.prototype, "id", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McCheckbox.prototype, "required", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McCheckbox.prototype, "labelPosition", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object)
+    ], McCheckbox.prototype, "name", void 0);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", core.EventEmitter)
+    ], McCheckbox.prototype, "change", void 0);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", core.EventEmitter)
+    ], McCheckbox.prototype, "indeterminateChange", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McCheckbox.prototype, "value", void 0);
+    __decorate([
+        core.ViewChild('input'),
+        __metadata("design:type", core.ElementRef)
+    ], McCheckbox.prototype, "_inputElement", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McCheckbox.prototype, "checked", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], McCheckbox.prototype, "disabled", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McCheckbox.prototype, "indeterminate", null);
+    McCheckbox = __decorate([
+        core.Component({
+            selector: 'mc-checkbox',
+            template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input class=\"mc-checkbox-input cdk-visually-hidden\" type=\"checkbox\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"></div><div class=\"mc-checkbox-background\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></span></label>",
+            styles: [".mc-checkbox-checkmark,.mc-checkbox-mixedmark{width:calc(100% - 2px)}.mc-checkbox-background,.mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-background{align-items:center;display:inline-flex;justify-content:center}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{top:0;left:0;right:0;bottom:0;position:absolute;width:100%;opacity:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}.mc-checkbox-checked .mc-checkbox-checkmark{opacity:1}.mc-checkbox-checked .mc-checkbox-mixedmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-checkmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-mixedmark{opacity:1}.mc-checkbox-unchecked .mc-checkbox-background{background-color:transparent}.mc-checkbox-disabled{cursor:default}.mc-checkbox-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-input{bottom:0;left:50%}.mc-checkbox-input:focus+.mc-checkbox-frame{top:-1px;left:-1px;border-width:2px;width:18px;height:18px}"],
+            exportAs: 'mcCheckbox',
+            host: {
+                class: 'mc-checkbox',
+                '[id]': 'id',
+                '[attr.id]': 'id',
+                '[class.mc-checkbox-indeterminate]': 'indeterminate',
+                '[class.mc-checkbox-checked]': 'checked',
+                '[class.mc-checkbox-disabled]': 'disabled',
+                '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
+            },
+            providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],
+            inputs: ['color', 'tabIndex'],
+            encapsulation: core.ViewEncapsulation.None,
+            changeDetection: core.ChangeDetectionStrategy.OnPush
+        }),
+        __param(3, core.Attribute('tabindex')),
+        __param(4, core.Optional()), __param(4, core.Inject(MC_CHECKBOX_CLICK_ACTION)),
+        __metadata("design:paramtypes", [core.ElementRef,
+            core.ChangeDetectorRef,
+            a11y.FocusMonitor, String, Object])
+    ], McCheckbox);
     return McCheckbox;
 }(_McCheckboxMixinBase));
 
@@ -1393,33 +1108,29 @@ var McCheckboxRequiredValidator = /** @class */ (function (_super) {
     function McCheckboxRequiredValidator() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    McCheckboxRequiredValidator.decorators = [
-        { type: core.Directive, args: [{
-                    selector: "mc-checkbox[required][formControlName],\n             mc-checkbox[required][formControl], mc-checkbox[required][ngModel]",
-                    providers: [MC_CHECKBOX_REQUIRED_VALIDATOR],
-                    host: { '[attr.required]': 'required ? "" : null' }
-                },] },
-    ];
+    McCheckboxRequiredValidator = __decorate([
+        core.Directive({
+            selector: "mc-checkbox[required][formControlName],\n             mc-checkbox[required][formControl], mc-checkbox[required][ngModel]",
+            providers: [MC_CHECKBOX_REQUIRED_VALIDATOR],
+            host: { '[attr.required]': 'required ? "" : null' }
+        })
+    ], McCheckboxRequiredValidator);
     return McCheckboxRequiredValidator;
 }(forms.CheckboxRequiredValidator));
 
 var McCheckboxModule = /** @class */ (function () {
     function McCheckboxModule() {
     }
-    McCheckboxModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, McCommonModule],
-                    exports: [McCheckbox, McCheckboxRequiredValidator, McCommonModule],
-                    declarations: [McCheckbox, McCheckboxRequiredValidator]
-                },] },
-    ];
+    McCheckboxModule = __decorate([
+        core.NgModule({
+            imports: [common.CommonModule, McCommonModule],
+            exports: [McCheckbox, McCheckboxRequiredValidator, McCommonModule],
+            declarations: [McCheckbox, McCheckboxRequiredValidator]
+        })
+    ], McCheckboxModule);
     return McCheckboxModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McDivider = /** @class */ (function () {
     function McDivider() {
         this._vertical = false;
@@ -1427,17 +1138,10 @@ var McDivider = /** @class */ (function () {
     }
     Object.defineProperty(McDivider.prototype, "vertical", {
         // Whether the divider is vertically aligned.
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._vertical;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._vertical = toBoolean(value);
         },
         enumerable: true,
@@ -1445,80 +1149,75 @@ var McDivider = /** @class */ (function () {
     });
     Object.defineProperty(McDivider.prototype, "inset", {
         // Whether the divider is an inset divider.
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._inset;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._inset = toBoolean(value);
         },
         enumerable: true,
         configurable: true
     });
-    McDivider.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-divider',
-                    host: {
-                        class: 'mc-divider',
-                        role: 'separator',
-                        '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
-                        '[class.mc-divider-vertical]': 'vertical',
-                        '[class.mc-divider-inset]': 'inset'
-                    },
-                    template: '',
-                    styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}"],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    preserveWhitespaces: false
-                },] },
-    ];
-    McDivider.propDecorators = {
-        vertical: [{ type: core.Input }],
-        inset: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McDivider.prototype, "vertical", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McDivider.prototype, "inset", null);
+    McDivider = __decorate([
+        core.Component({
+            selector: 'mc-divider',
+            host: {
+                class: 'mc-divider',
+                role: 'separator',
+                '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
+                '[class.mc-divider-vertical]': 'vertical',
+                '[class.mc-divider-inset]': 'inset'
+            },
+            template: '',
+            styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}"],
+            encapsulation: core.ViewEncapsulation.None,
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            preserveWhitespaces: false
+        })
+    ], McDivider);
     return McDivider;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McDividerModule = /** @class */ (function () {
     function McDividerModule() {
     }
-    McDividerModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        McCommonModule,
-                        common.CommonModule
-                    ],
-                    exports: [
-                        McDivider,
-                        McCommonModule
-                    ],
-                    declarations: [
-                        McDivider
-                    ]
-                },] },
-    ];
+    McDividerModule = __decorate([
+        core.NgModule({
+            imports: [
+                McCommonModule,
+                common.CommonModule
+            ],
+            exports: [
+                McDivider,
+                McCommonModule
+            ],
+            declarations: [
+                McDivider
+            ]
+        })
+    ], McDividerModule);
     return McDividerModule;
 }());
 
 var McCleaner = /** @class */ (function () {
     function McCleaner() {
     }
-    McCleaner.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-cleaner',
-                    template: '<i mc-icon="mc-close-M_16" class="mc-cleaner__icon"></i>'
-                },] },
-    ];
+    McCleaner = __decorate([
+        core.Component({
+            selector: 'mc-cleaner',
+            template: '<i mc-icon="mc-close-M_16" class="mc-cleaner__icon"></i>'
+        })
+    ], McCleaner);
     return McCleaner;
 }());
 
@@ -1538,40 +1237,41 @@ var McHint = /** @class */ (function () {
     function McHint() {
         this.id = "mc-hint-" + nextUniqueId$1++;
     }
-    McHint.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-hint',
-                    host: {
-                        class: 'mc-hint',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    McHint.propDecorators = {
-        id: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McHint.prototype, "id", void 0);
+    McHint = __decorate([
+        core.Directive({
+            selector: 'mc-hint',
+            host: {
+                class: 'mc-hint',
+                '[attr.id]': 'id'
+            }
+        })
+    ], McHint);
     return McHint;
 }());
 
 var McPrefix = /** @class */ (function () {
     function McPrefix() {
     }
-    McPrefix.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcPrefix]'
-                },] },
-    ];
+    McPrefix = __decorate([
+        core.Directive({
+            selector: '[mcPrefix]'
+        })
+    ], McPrefix);
     return McPrefix;
 }());
 
 var McSuffix = /** @class */ (function () {
     function McSuffix() {
     }
-    McSuffix.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcSuffix]'
-                },] },
-    ];
+    McSuffix = __decorate([
+        core.Directive({
+            selector: '[mcSuffix]'
+        })
+    ], McSuffix);
     return McSuffix;
 }());
 
@@ -1680,87 +1380,97 @@ var McFormField = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    McFormField.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-form-field',
-                    exportAs: 'mcFormField',
-                    template: "<div class=\"mc-form-field__wrapper\"><div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div></div>",
-                    // McInput is a directive and can't have styles, so we need to include its styles here.
-                    // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
-                    // aren't using McInput.
-                    styles: [".mc-form-field{display:inline-block;position:relative}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;top:0;bottom:0;right:0;width:32px;cursor:pointer;display:flex;flex-direction:row;justify-content:center;align-items:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
-                    host: {
-                        class: 'mc-form-field',
-                        '[class.mc-form-field_invalid]': '_control.errorState',
-                        '[class.mc-form-field_disabled]': '_control.disabled',
-                        '[class.mc-form-field_has-prefix]': 'hasPrefix',
-                        '[class.mc-form-field_has-suffix]': 'hasSuffix',
-                        '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
-                        '[class.mc-focused]': '_control.focused',
-                        '[class.ng-untouched]': '_shouldForward("untouched")',
-                        '[class.ng-touched]': '_shouldForward("touched")',
-                        '[class.ng-pristine]': '_shouldForward("pristine")',
-                        '[class.ng-dirty]': '_shouldForward("dirty")',
-                        '[class.ng-valid]': '_shouldForward("valid")',
-                        '[class.ng-invalid]': '_shouldForward("invalid")',
-                        '[class.ng-pending]': '_shouldForward("pending")',
-                        '(keydown)': 'onKeyDown($event)'
-                    },
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McFormField.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef }
-    ]; };
-    McFormField.propDecorators = {
-        _control: [{ type: core.ContentChild, args: [McFormFieldControl,] }],
-        _hint: [{ type: core.ContentChildren, args: [McHint,] }],
-        _suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
-        _prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
-        _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }]
-    };
+    __decorate([
+        core.ContentChild(McFormFieldControl),
+        __metadata("design:type", McFormFieldControl)
+    ], McFormField.prototype, "_control", void 0);
+    __decorate([
+        core.ContentChildren(McHint),
+        __metadata("design:type", core.QueryList)
+    ], McFormField.prototype, "_hint", void 0);
+    __decorate([
+        core.ContentChildren(McSuffix),
+        __metadata("design:type", core.QueryList)
+    ], McFormField.prototype, "_suffix", void 0);
+    __decorate([
+        core.ContentChildren(McPrefix),
+        __metadata("design:type", core.QueryList)
+    ], McFormField.prototype, "_prefix", void 0);
+    __decorate([
+        core.ContentChildren(McCleaner),
+        __metadata("design:type", core.QueryList)
+    ], McFormField.prototype, "_cleaner", void 0);
+    McFormField = __decorate([
+        core.Component({
+            selector: 'mc-form-field',
+            exportAs: 'mcFormField',
+            template: "<div class=\"mc-form-field__wrapper\"><div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div></div>",
+            // McInput is a directive and can't have styles, so we need to include its styles here.
+            // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
+            // aren't using McInput.
+            styles: [".mc-form-field{display:inline-block;position:relative}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;top:0;bottom:0;right:0;width:32px;cursor:pointer;display:flex;flex-direction:row;justify-content:center;align-items:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
+            host: {
+                class: 'mc-form-field',
+                '[class.mc-form-field_invalid]': '_control.errorState',
+                '[class.mc-form-field_disabled]': '_control.disabled',
+                '[class.mc-form-field_has-prefix]': 'hasPrefix',
+                '[class.mc-form-field_has-suffix]': 'hasSuffix',
+                '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
+                '[class.mc-focused]': '_control.focused',
+                '[class.ng-untouched]': '_shouldForward("untouched")',
+                '[class.ng-touched]': '_shouldForward("touched")',
+                '[class.ng-pristine]': '_shouldForward("pristine")',
+                '[class.ng-dirty]': '_shouldForward("dirty")',
+                '[class.ng-valid]': '_shouldForward("valid")',
+                '[class.ng-invalid]': '_shouldForward("invalid")',
+                '[class.ng-pending]': '_shouldForward("pending")',
+                '(keydown)': 'onKeyDown($event)'
+            },
+            encapsulation: core.ViewEncapsulation.None,
+            changeDetection: core.ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [core.ElementRef,
+            core.ChangeDetectorRef])
+    ], McFormField);
     return McFormField;
 }(McFormFieldBase));
 var McFormFieldWithoutBorders = /** @class */ (function () {
     function McFormFieldWithoutBorders() {
     }
-    McFormFieldWithoutBorders.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-form-field[mcFormFieldWithoutBorders]',
-                    exportAs: 'mcFormFieldWithoutBorders',
-                    host: { class: 'mc-form-field_without-borders' }
-                },] },
-    ];
+    McFormFieldWithoutBorders = __decorate([
+        core.Directive({
+            selector: 'mc-form-field[mcFormFieldWithoutBorders]',
+            exportAs: 'mcFormFieldWithoutBorders',
+            host: { class: 'mc-form-field_without-borders' }
+        })
+    ], McFormFieldWithoutBorders);
     return McFormFieldWithoutBorders;
 }());
 
 var McFormFieldModule = /** @class */ (function () {
     function McFormFieldModule() {
     }
-    McFormFieldModule.decorators = [
-        { type: core.NgModule, args: [{
-                    declarations: [
-                        McFormField,
-                        McFormFieldWithoutBorders,
-                        McHint,
-                        McPrefix,
-                        McSuffix,
-                        McCleaner
-                    ],
-                    imports: [common.CommonModule, McIconModule],
-                    exports: [
-                        McFormField,
-                        McFormFieldWithoutBorders,
-                        McHint,
-                        McPrefix,
-                        McSuffix,
-                        McCleaner
-                    ]
-                },] },
-    ];
+    McFormFieldModule = __decorate([
+        core.NgModule({
+            declarations: [
+                McFormField,
+                McFormFieldWithoutBorders,
+                McHint,
+                McPrefix,
+                McSuffix,
+                McCleaner
+            ],
+            imports: [common.CommonModule, McIconModule],
+            exports: [
+                McFormField,
+                McFormFieldWithoutBorders,
+                McHint,
+                McPrefix,
+                McSuffix,
+                McCleaner
+            ]
+        })
+    ], McFormFieldModule);
     return McFormFieldModule;
 }());
 
@@ -1834,6 +1544,7 @@ var McInput = /** @class */ (function (_super) {
         _this.id = _this.id;
         return _this;
     }
+    McInput_1 = McInput;
     Object.defineProperty(McInput.prototype, "disabled", {
         /**
          * Implemented as part of McFormFieldControl.
@@ -2002,76 +1713,97 @@ var McInput = /** @class */ (function (_super) {
         var validity = this._elementRef.nativeElement.validity;
         return validity && validity.badInput;
     };
-    McInput.decorators = [
-        { type: core.Directive, args: [{
-                    selector: "input[mcInput]",
-                    exportAs: 'mcInput',
-                    host: {
-                        'class': 'mc-input',
-                        // Native input properties that are overwritten by Angular inputs need to be synced with
-                        // the native input element. Otherwise property bindings for those don't work.
-                        '[attr.id]': 'id',
-                        '[attr.placeholder]': 'placeholder',
-                        '[disabled]': 'disabled',
-                        '[required]': 'required',
-                        '(blur)': '_focusChanged(false)',
-                        '(focus)': '_focusChanged(true)',
-                        '(input)': '_onInput()'
-                    },
-                    providers: [{ provide: McFormFieldControl, useExisting: McInput }]
-                },] },
-    ];
-    /** @nocollapse */
-    McInput.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: platform.Platform },
-        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.NgForm, decorators: [{ type: core.Optional }] },
-        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
-        { type: ErrorStateMatcher },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_INPUT_VALUE_ACCESSOR,] }] }
-    ]; };
-    McInput.propDecorators = {
-        errorStateMatcher: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        id: [{ type: core.Input }],
-        placeholder: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        type: [{ type: core.Input }],
-        value: [{ type: core.Input }]
-    };
+    var McInput_1;
+    __decorate([
+        core.Input(),
+        __metadata("design:type", ErrorStateMatcher)
+    ], McInput.prototype, "errorStateMatcher", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McInput.prototype, "disabled", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], McInput.prototype, "id", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McInput.prototype, "placeholder", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McInput.prototype, "required", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], McInput.prototype, "type", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], McInput.prototype, "value", null);
+    McInput = McInput_1 = __decorate([
+        core.Directive({
+            selector: "input[mcInput]",
+            exportAs: 'mcInput',
+            host: {
+                'class': 'mc-input',
+                // Native input properties that are overwritten by Angular inputs need to be synced with
+                // the native input element. Otherwise property bindings for those don't work.
+                '[attr.id]': 'id',
+                '[attr.placeholder]': 'placeholder',
+                '[disabled]': 'disabled',
+                '[required]': 'required',
+                '(blur)': '_focusChanged(false)',
+                '(focus)': '_focusChanged(true)',
+                '(input)': '_onInput()'
+            },
+            providers: [{ provide: McFormFieldControl, useExisting: McInput_1 }]
+        }),
+        __param(2, core.Optional()), __param(2, core.Self()),
+        __param(3, core.Optional()),
+        __param(4, core.Optional()),
+        __param(6, core.Optional()), __param(6, core.Self()), __param(6, core.Inject(MC_INPUT_VALUE_ACCESSOR)),
+        __metadata("design:paramtypes", [core.ElementRef,
+            platform.Platform,
+            forms.NgControl,
+            forms.NgForm,
+            forms.FormGroupDirective,
+            ErrorStateMatcher, Object])
+    ], McInput);
     return McInput;
 }(_McInputMixinBase));
 var McInputMono = /** @class */ (function () {
     function McInputMono() {
     }
-    McInputMono.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'input[mcInputMonospace]',
-                    exportAs: 'McInputMonospace',
-                    host: { class: 'mc-input_monospace' }
-                },] },
-    ];
+    McInputMono = __decorate([
+        core.Directive({
+            selector: 'input[mcInputMonospace]',
+            exportAs: 'McInputMonospace',
+            host: { class: 'mc-input_monospace' }
+        })
+    ], McInputMono);
     return McInputMono;
 }());
 
 var McInputModule = /** @class */ (function () {
     function McInputModule() {
     }
-    McInputModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, a11y.A11yModule, McCommonModule, forms.FormsModule],
-                    exports: [McInput, McInputMono],
-                    declarations: [McInput, McInputMono]
-                },] },
-    ];
+    McInputModule = __decorate([
+        core.NgModule({
+            imports: [common.CommonModule, a11y.A11yModule, McCommonModule, forms.FormsModule],
+            exports: [McInput, McInputMono],
+            declarations: [McInput, McInputMono]
+        })
+    ], McInputModule);
     return McInputModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 /**
  * Component for list-options of selection-list. Each list-option can automatically
  * generate a checkbox and can put current item into the selectionModel of selection-list
@@ -2089,18 +1821,10 @@ var McListOption = /** @class */ (function () {
         this._disabled = false;
     }
     Object.defineProperty(McListOption.prototype, "disabled", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._disabled || (this.listSelection && this.listSelection.disabled);
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            /** @type {?} */
+        set: function (value) {
             var newValue = toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
@@ -2111,18 +1835,10 @@ var McListOption = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(McListOption.prototype, "selected", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this.listSelection.selectedOptions && this.listSelection.selectedOptions.isSelected(this) || false;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            /** @type {?} */
+        set: function (value) {
             var isSelected = toBoolean(value);
             if (isSelected !== this._selected) {
                 this.setSelected(isSelected);
@@ -2132,16 +1848,14 @@ var McListOption = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @return {?}
-     */
-    McListOption.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype.ngOnInit = function () {
         var _this = this;
         if (this._selected) {
-            /** @type {?} */
+            // List options that are selected at initialization can't be reported properly to the form
+            // control. This is because it takes some time until the selection-list knows about all
+            // available options. Also it can happen that the ControlValueAccessor has an initial value
+            // that should be used instead. Deferring the value change report to the next tick ensures
+            // that the form control value is not being overwritten.
             var wasSelected_1 = this._selected;
             Promise.resolve().then(function () {
                 if (_this._selected || wasSelected_1) {
@@ -2151,22 +1865,10 @@ var McListOption = /** @class */ (function () {
             });
         }
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype.ngAfterContentInit = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype.ngAfterContentInit = function () {
         this._lineSetter = new McLineSetter(this._lines, this._element);
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype.ngOnDestroy = function () {
         var _this = this;
         if (this.selected) {
             // We have to delay this until the next tick in order
@@ -2175,43 +1877,17 @@ var McListOption = /** @class */ (function () {
         }
         this.listSelection._removeOptionFromList(this);
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype.toggle = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype.toggle = function () {
         this.selected = !this.selected;
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype.focus = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype.focus = function () {
         this._element.nativeElement.focus();
         this.listSelection.setFocusedOption(this);
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype.getLabel = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype.getLabel = function () {
         return this._text ? this._text.nativeElement.textContent : '';
     };
-    /**
-     * @param {?} selected
-     * @return {?}
-     */
-    McListOption.prototype.setSelected = /**
-     * @param {?} selected
-     * @return {?}
-     */
-    function (selected) {
+    McListOption.prototype.setSelected = function (selected) {
         if (this._selected === selected || !this.listSelection.selectedOptions) {
             return;
         }
@@ -2224,101 +1900,91 @@ var McListOption = /** @class */ (function () {
         }
         this._changeDetector.markForCheck();
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype._getHeight = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype._getHeight = function () {
         return this._element.nativeElement.getClientRects()[0].height;
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype._handleClick = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype._handleClick = function () {
         if (this.disabled) {
             return;
         }
         this.listSelection.setFocusedOption(this);
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype._handleFocus = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype._handleFocus = function () {
         if (this.disabled || this._hasFocus) {
             return;
         }
         this._hasFocus = true;
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype._handleBlur = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype._handleBlur = function () {
         this._hasFocus = false;
         this.listSelection._onTouched();
     };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype._getHostElement = /**
-     * @return {?}
-     */
-    function () {
+    McListOption.prototype._getHostElement = function () {
         return this._element.nativeElement;
     };
-    McListOption.decorators = [
-        { type: core.Component, args: [{
-                    exportAs: 'mcListOption',
-                    selector: 'mc-list-option',
-                    host: {
-                        tabindex: '-1',
-                        class: 'mc-list-option',
-                        '[class.mc-selected]': 'selected',
-                        '[class.mc-focused]': '_hasFocus',
-                        '(focus)': '_handleFocus()',
-                        '(blur)': '_handleBlur()',
-                        '(click)': '_handleClick()'
-                    },
-                    template: "<div class=\"mc-list-item-content\"><div class=\"mc-list-text\" #text><ng-content></ng-content></div></div>",
-                    encapsulation: core.ViewEncapsulation.None,
-                    preserveWhitespaces: false,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McListOption.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef },
-        { type: McListSelection, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McListSelection; }),] }] }
-    ]; };
-    McListOption.propDecorators = {
-        _lines: [{ type: core.ContentChildren, args: [McLine,] }],
-        _text: [{ type: core.ViewChild, args: ['text',] }],
-        checkboxPosition: [{ type: core.Input }],
-        value: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        selected: [{ type: core.Input }]
-    };
+    __decorate([
+        core.ContentChildren(McLine),
+        __metadata("design:type", core.QueryList)
+    ], McListOption.prototype, "_lines", void 0);
+    __decorate([
+        core.ViewChild('text'),
+        __metadata("design:type", core.ElementRef)
+    ], McListOption.prototype, "_text", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McListOption.prototype, "checkboxPosition", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object)
+    ], McListOption.prototype, "value", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], McListOption.prototype, "disabled", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McListOption.prototype, "selected", null);
+    McListOption = __decorate([
+        core.Component({
+            exportAs: 'mcListOption',
+            selector: 'mc-list-option',
+            host: {
+                tabindex: '-1',
+                class: 'mc-list-option',
+                '[class.mc-selected]': 'selected',
+                '[class.mc-focused]': '_hasFocus',
+                '(focus)': '_handleFocus()',
+                '(blur)': '_handleBlur()',
+                '(click)': '_handleClick()'
+            },
+            template: "<div class=\"mc-list-item-content\"><div class=\"mc-list-text\" #text><ng-content></ng-content></div></div>",
+            encapsulation: core.ViewEncapsulation.None,
+            preserveWhitespaces: false,
+            changeDetection: core.ChangeDetectionStrategy.OnPush
+        }),
+        __param(2, core.Inject(core.forwardRef(function () { return McListSelection; }))),
+        __metadata("design:paramtypes", [core.ElementRef,
+            core.ChangeDetectorRef,
+            McListSelection])
+    ], McListOption);
     return McListOption;
 }());
-/** @type {?} */
 var MC_SELECTION_LIST_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
     useExisting: core.forwardRef(function () { return McListSelection; }),
     multi: true
 };
+// Change event that is being fired whenever the selected state of an option changes. */
 var McListSelectionChange = /** @class */ (function () {
-    function McListSelectionChange(source, option) {
+    function McListSelectionChange(
+    // Reference to the selection list that emitted the event.
+    source, 
+    // Reference to the option that has been changed.
+    option) {
         this.source = source;
         this.option = option;
     }
@@ -2329,7 +1995,6 @@ var McListSelectionBase = /** @class */ (function () {
     }
     return McListSelectionBase;
 }());
-/** @type {?} */
 var _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
 var McListSelection = /** @class */ (function (_super) {
     __extends(McListSelection, _super);
@@ -2342,6 +2007,7 @@ var McListSelection = /** @class */ (function (_super) {
         _this._modelChanges = rxjs.Subscription.EMPTY;
         // View to model callback that should be called if the list or its options lost focus.
         _this._onTouched = function () { };
+        // View to model callback that should be called whenever the selected options change.
         _this._onChange = function (_) { };
         _this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
         _this.multiple = multiple === null ? true : toBoolean(multiple);
@@ -2350,13 +2016,7 @@ var McListSelection = /** @class */ (function (_super) {
         _this.selectedOptions = new collections.SelectionModel(_this.multiple);
         return _this;
     }
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype.ngAfterContentInit = /**
-     * @return {?}
-     */
-    function () {
+    McListSelection.prototype.ngAfterContentInit = function () {
         this.horizontal = toBoolean(this.horizontal);
         this._keyManager = new a11y.FocusKeyManager(this.options)
             .withTypeAhead()
@@ -2367,7 +2027,7 @@ var McListSelection = /** @class */ (function (_super) {
             this._tempValues = null;
         }
         // Sync external changes to the model back to the options.
-        this._modelChanges = /** @type {?} */ ((this.selectedOptions.onChange)).subscribe(function (event) {
+        this._modelChanges = this.selectedOptions.onChange.subscribe(function (event) {
             for (var _i = 0, _a = event.added; _i < _a.length; _i++) {
                 var item = _a[_i];
                 item.selected = true;
@@ -2379,71 +2039,31 @@ var McListSelection = /** @class */ (function (_super) {
         });
         this.updateScrollSize();
     };
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
+    McListSelection.prototype.ngOnDestroy = function () {
         this._modelChanges.unsubscribe();
     };
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype.focus = /**
-     * @return {?}
-     */
-    function () {
+    McListSelection.prototype.focus = function () {
         this._element.nativeElement.focus();
     };
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype.selectAll = /**
-     * @return {?}
-     */
-    function () {
+    McListSelection.prototype.selectAll = function () {
         this.options.forEach(function (option) { return option.setSelected(true); });
         this._reportValueChange();
     };
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype.deselectAll = /**
-     * @return {?}
-     */
-    function () {
+    McListSelection.prototype.deselectAll = function () {
         this.options.forEach(function (option) { return option.setSelected(false); });
         this._reportValueChange();
     };
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype.updateScrollSize = /**
-     * @return {?}
-     */
-    function () {
+    McListSelection.prototype.updateScrollSize = function () {
         if (this.horizontal || !this.options.first) {
             return;
         }
         this._keyManager.withScrollSize(Math.floor(this._getHeight() / this.options.first._getHeight()));
     };
     // Sets the focused option of the selection-list.
-    /**
-     * @param {?} option
-     * @return {?}
-     */
-    McListSelection.prototype.setFocusedOption = /**
-     * @param {?} option
-     * @return {?}
-     */
-    function (option) {
+    McListSelection.prototype.setFocusedOption = function (option) {
         this._keyManager.updateActiveItem(option);
         if (this.withShift && this.multiple) {
-            /** @type {?} */
             var previousIndex_1 = this._keyManager.previousActiveItemIndex;
-            /** @type {?} */
             var activeIndex_1 = this._keyManager.activeItemIndex;
             if (previousIndex_1 < activeIndex_1) {
                 this.options.forEach(function (item, index) {
@@ -2478,15 +2098,7 @@ var McListSelection = /** @class */ (function (_super) {
         this._reportValueChange();
     };
     // Implemented as part of ControlValueAccessor.
-    /**
-     * @param {?} values
-     * @return {?}
-     */
-    McListSelection.prototype.writeValue = /**
-     * @param {?} values
-     * @return {?}
-     */
-    function (values) {
+    McListSelection.prototype.writeValue = function (values) {
         if (this.options) {
             this._setOptionsFromValues(values || []);
         }
@@ -2495,64 +2107,26 @@ var McListSelection = /** @class */ (function (_super) {
         }
     };
     // Implemented as part of ControlValueAccessor.
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    McListSelection.prototype.registerOnChange = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
+    McListSelection.prototype.registerOnChange = function (fn) {
         this._onChange = fn;
     };
     // Implemented as part of ControlValueAccessor.
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    McListSelection.prototype.registerOnTouched = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
+    McListSelection.prototype.registerOnTouched = function (fn) {
         this._onTouched = fn;
     };
     // Implemented as a part of ControlValueAccessor.
-    /**
-     * @param {?} isDisabled
-     * @return {?}
-     */
-    McListSelection.prototype.setDisabledState = /**
-     * @param {?} isDisabled
-     * @return {?}
-     */
-    function (isDisabled) {
+    McListSelection.prototype.setDisabledState = function (isDisabled) {
         if (this.options) {
             this.options.forEach(function (option) { return option.disabled = isDisabled; });
         }
     };
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype.getSelectedOptionValues = /**
-     * @return {?}
-     */
-    function () {
+    McListSelection.prototype.getSelectedOptionValues = function () {
         return this.options.filter(function (option) { return option.selected; }).map(function (option) { return option.value; });
     };
     // Toggles the selected state of the currently focused option.
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype.toggleFocusedOption = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
+    McListSelection.prototype.toggleFocusedOption = function () {
         var focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
-            /** @type {?} */
             var focusedOption = this.options.toArray()[focusedIndex];
             if (focusedOption && this._canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
@@ -2561,38 +2135,15 @@ var McListSelection = /** @class */ (function (_super) {
             }
         }
     };
-    /**
-     * @param {?} listOption
-     * @return {?}
-     */
-    McListSelection.prototype._canDeselectLast = /**
-     * @param {?} listOption
-     * @return {?}
-     */
-    function (listOption) {
+    McListSelection.prototype._canDeselectLast = function (listOption) {
         return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
     };
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype._getHeight = /**
-     * @return {?}
-     */
-    function () {
+    McListSelection.prototype._getHeight = function () {
         return this._element.nativeElement.getClientRects()[0].height;
     };
     // Removes an option from the selection list and updates the active item.
-    /**
-     * @param {?} option
-     * @return {?}
-     */
-    McListSelection.prototype._removeOptionFromList = /**
-     * @param {?} option
-     * @return {?}
-     */
-    function (option) {
+    McListSelection.prototype._removeOptionFromList = function (option) {
         if (option._hasFocus) {
-            /** @type {?} */
             var optionIndex = this._getOptionIndex(option);
             // Check whether the option is the last item
             if (optionIndex > 0) {
@@ -2603,16 +2154,7 @@ var McListSelection = /** @class */ (function (_super) {
             }
         }
     };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    McListSelection.prototype._onKeyDown = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        /** @type {?} */
+    McListSelection.prototype._onKeyDown = function (event) {
         var keyCode = event.keyCode;
         this.withShift = event.shiftKey;
         this.withCtrl = event.ctrlKey;
@@ -2647,121 +2189,81 @@ var McListSelection = /** @class */ (function (_super) {
         }
     };
     // Reports a value change to the ControlValueAccessor
-    /**
-     * @return {?}
-     */
-    McListSelection.prototype._reportValueChange = /**
-     * @return {?}
-     */
-    function () {
+    McListSelection.prototype._reportValueChange = function () {
         if (this.options) {
             this._onChange(this.getSelectedOptionValues());
         }
     };
     // Emits a change event if the selected state of an option changed.
-    /**
-     * @param {?} option
-     * @return {?}
-     */
-    McListSelection.prototype._emitChangeEvent = /**
-     * @param {?} option
-     * @return {?}
-     */
-    function (option) {
+    McListSelection.prototype._emitChangeEvent = function (option) {
         this.selectionChange.emit(new McListSelectionChange(this, option));
     };
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    McListSelection.prototype._getOptionByValue = /**
-     * @param {?} value
-     * @return {?}
-     */
-    function (value) {
+    // Returns the option with the specified value.
+    McListSelection.prototype._getOptionByValue = function (value) {
         return this.options.find(function (option) { return option.value === value; });
     };
-    /**
-     * @param {?} values
-     * @return {?}
-     */
-    McListSelection.prototype._setOptionsFromValues = /**
-     * @param {?} values
-     * @return {?}
-     */
-    function (values) {
+    // Sets the selected options based on the specified values.
+    McListSelection.prototype._setOptionsFromValues = function (values) {
         var _this = this;
         this.options.forEach(function (option) { return option.setSelected(false); });
         values
             .map(function (value) { return _this._getOptionByValue(value); })
             .filter(Boolean)
-            .forEach(function (option) { return ((option)).setSelected(true); });
+            .forEach(function (option) { return option.setSelected(true); });
     };
     /**
      * Utility to ensure all indexes are valid.
-     * @param {?} index The index to be checked.
-     * @return {?} True if the index is valid for our list of options.
+     * @param index The index to be checked.
+     * @returns True if the index is valid for our list of options.
      */
-    McListSelection.prototype._isValidIndex = /**
-     * Utility to ensure all indexes are valid.
-     * @param {?} index The index to be checked.
-     * @return {?} True if the index is valid for our list of options.
-     */
-    function (index) {
+    McListSelection.prototype._isValidIndex = function (index) {
         return index >= 0 && index < this.options.length;
     };
-    /**
-     * @param {?} option
-     * @return {?}
-     */
-    McListSelection.prototype._getOptionIndex = /**
-     * @param {?} option
-     * @return {?}
-     */
-    function (option) {
+    // Returns the index of the specified list option.
+    McListSelection.prototype._getOptionIndex = function (option) {
         return this.options.toArray().indexOf(option);
     };
-    McListSelection.decorators = [
-        { type: core.Component, args: [{
-                    exportAs: 'mcListSelection',
-                    selector: 'mc-list-selection',
-                    template: '<ng-content></ng-content>',
-                    styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-subheader{display:flex;box-sizing:border-box;padding:15px;align-items:center}.mc-list .mc-subheader,.mc-list-selection .mc-subheader{margin:0}.mc-list,.mc-list-selection{display:block}.mc-list .mc-subheader,.mc-list-selection .mc-subheader{height:32px;line-height:2px}.mc-list .mc-subheader:first-child,.mc-list-selection .mc-subheader:first-child{margin-top:0}.mc-list .mc-list-item,.mc-list .mc-list-option,.mc-list-selection .mc-list-item,.mc-list-selection .mc-list-option{display:block;height:32px}.mc-list .mc-list-item .mc-list-item-content,.mc-list .mc-list-option .mc-list-item-content,.mc-list-selection .mc-list-item .mc-list-item-content,.mc-list-selection .mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 15px}.mc-list .mc-list-item.mc-2-line,.mc-list .mc-list-option.mc-2-line,.mc-list-selection .mc-list-item.mc-2-line,.mc-list-selection .mc-list-option.mc-2-line{height:72px}.mc-list .mc-list-item.mc-3-line,.mc-list .mc-list-option.mc-3-line,.mc-list-selection .mc-list-item.mc-3-line,.mc-list-selection .mc-list-option.mc-3-line{height:88px}.mc-list .mc-list-item.mc-multi-line,.mc-list .mc-list-option.mc-multi-line,.mc-list-selection .mc-list-item.mc-multi-line,.mc-list-selection .mc-list-option.mc-multi-line{height:auto}.mc-list .mc-list-item.mc-multi-line .mc-list-item-content,.mc-list .mc-list-option.mc-multi-line .mc-list-item-content,.mc-list-selection .mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-selection .mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-bottom:16px}.mc-list .mc-list-item .mc-list-text,.mc-list .mc-list-option .mc-list-text,.mc-list-selection .mc-list-item .mc-list-text,.mc-list-selection .mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list .mc-list-item .mc-list-text>*,.mc-list .mc-list-option .mc-list-text>*,.mc-list-selection .mc-list-item .mc-list-text>*,.mc-list-selection .mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list .mc-list-item .mc-list-text:empty,.mc-list .mc-list-option .mc-list-text:empty,.mc-list-selection .mc-list-item .mc-list-text:empty,.mc-list-selection .mc-list-option .mc-list-text:empty{display:none}.mc-list .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-selection .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-selection .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-selection .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-selection .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list .mc-list-item .mc-list-icon,.mc-list .mc-list-option .mc-list-icon,.mc-list-selection .mc-list-item .mc-list-icon,.mc-list-selection .mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;height:24px;border-radius:50%;padding:4px;font-size:24px}.mc-list .mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list .mc-list-option .mc-list-icon~.mc-divider-inset,.mc-list-selection .mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list-selection .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:62px;width:calc(100% - 62px)}[dir=rtl] .mc-list .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list .mc-list-option .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-selection .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-selection .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:auto;margin-right:62px}.mc-list .mc-list-item .mc-divider,.mc-list .mc-list-option .mc-divider,.mc-list-selection .mc-list-item .mc-divider,.mc-list-selection .mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list .mc-list-item .mc-divider,[dir=rtl] .mc-list .mc-list-option .mc-divider,[dir=rtl] .mc-list-selection .mc-list-item .mc-divider,[dir=rtl] .mc-list-selection .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list .mc-list-item .mc-divider.mc-divider-inset,.mc-list .mc-list-option .mc-divider.mc-divider-inset,.mc-list-selection .mc-list-item .mc-divider.mc-divider-inset,.mc-list-selection .mc-list-option .mc-divider.mc-divider-inset{position:absolute}.mc-list-option:not([disabled]){cursor:pointer}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    inputs: ['disabled', 'tabIndex'],
-                    host: {
-                        class: 'mc-list-selection',
-                        '[tabIndex]': 'tabIndex',
-                        '(focus)': 'focus()',
-                        '(blur)': '_onTouched()',
-                        '(keydown)': '_onKeyDown($event)',
-                        '(window:resize)': 'updateScrollSize()'
-                    },
-                    providers: [MC_SELECTION_LIST_VALUE_ACCESSOR],
-                    preserveWhitespaces: false
-                },] },
-    ];
-    /** @nocollapse */
-    McListSelection.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] }
-    ]; };
-    McListSelection.propDecorators = {
-        options: [{ type: core.ContentChildren, args: [McListOption,] }],
-        horizontal: [{ type: core.Input }],
-        selectionChange: [{ type: core.Output }]
-    };
+    __decorate([
+        core.ContentChildren(McListOption),
+        __metadata("design:type", core.QueryList)
+    ], McListSelection.prototype, "options", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean)
+    ], McListSelection.prototype, "horizontal", void 0);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", core.EventEmitter)
+    ], McListSelection.prototype, "selectionChange", void 0);
+    McListSelection = __decorate([
+        core.Component({
+            exportAs: 'mcListSelection',
+            selector: 'mc-list-selection',
+            template: '<ng-content></ng-content>',
+            styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-subheader{display:flex;box-sizing:border-box;padding:15px;align-items:center}.mc-list .mc-subheader,.mc-list-selection .mc-subheader{margin:0}.mc-list,.mc-list-selection{display:block}.mc-list .mc-subheader,.mc-list-selection .mc-subheader{height:32px;line-height:2px}.mc-list .mc-subheader:first-child,.mc-list-selection .mc-subheader:first-child{margin-top:0}.mc-list .mc-list-item,.mc-list .mc-list-option,.mc-list-selection .mc-list-item,.mc-list-selection .mc-list-option{display:block;height:32px}.mc-list .mc-list-item .mc-list-item-content,.mc-list .mc-list-option .mc-list-item-content,.mc-list-selection .mc-list-item .mc-list-item-content,.mc-list-selection .mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 15px}.mc-list .mc-list-item.mc-2-line,.mc-list .mc-list-option.mc-2-line,.mc-list-selection .mc-list-item.mc-2-line,.mc-list-selection .mc-list-option.mc-2-line{height:72px}.mc-list .mc-list-item.mc-3-line,.mc-list .mc-list-option.mc-3-line,.mc-list-selection .mc-list-item.mc-3-line,.mc-list-selection .mc-list-option.mc-3-line{height:88px}.mc-list .mc-list-item.mc-multi-line,.mc-list .mc-list-option.mc-multi-line,.mc-list-selection .mc-list-item.mc-multi-line,.mc-list-selection .mc-list-option.mc-multi-line{height:auto}.mc-list .mc-list-item.mc-multi-line .mc-list-item-content,.mc-list .mc-list-option.mc-multi-line .mc-list-item-content,.mc-list-selection .mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-selection .mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-bottom:16px}.mc-list .mc-list-item .mc-list-text,.mc-list .mc-list-option .mc-list-text,.mc-list-selection .mc-list-item .mc-list-text,.mc-list-selection .mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list .mc-list-item .mc-list-text>*,.mc-list .mc-list-option .mc-list-text>*,.mc-list-selection .mc-list-item .mc-list-text>*,.mc-list-selection .mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list .mc-list-item .mc-list-text:empty,.mc-list .mc-list-option .mc-list-text:empty,.mc-list-selection .mc-list-item .mc-list-text:empty,.mc-list-selection .mc-list-option .mc-list-text:empty{display:none}.mc-list .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-selection .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-selection .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-selection .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-selection .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list .mc-list-item .mc-list-icon,.mc-list .mc-list-option .mc-list-icon,.mc-list-selection .mc-list-item .mc-list-icon,.mc-list-selection .mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;height:24px;border-radius:50%;padding:4px;font-size:24px}.mc-list .mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list .mc-list-option .mc-list-icon~.mc-divider-inset,.mc-list-selection .mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list-selection .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:62px;width:calc(100% - 62px)}[dir=rtl] .mc-list .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list .mc-list-option .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-selection .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-selection .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:auto;margin-right:62px}.mc-list .mc-list-item .mc-divider,.mc-list .mc-list-option .mc-divider,.mc-list-selection .mc-list-item .mc-divider,.mc-list-selection .mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list .mc-list-item .mc-divider,[dir=rtl] .mc-list .mc-list-option .mc-divider,[dir=rtl] .mc-list-selection .mc-list-item .mc-divider,[dir=rtl] .mc-list-selection .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list .mc-list-item .mc-divider.mc-divider-inset,.mc-list .mc-list-option .mc-divider.mc-divider-inset,.mc-list-selection .mc-list-item .mc-divider.mc-divider-inset,.mc-list-selection .mc-list-option .mc-divider.mc-divider-inset{position:absolute}.mc-list-option:not([disabled]){cursor:pointer}"],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None,
+            inputs: ['disabled', 'tabIndex'],
+            host: {
+                class: 'mc-list-selection',
+                '[tabIndex]': 'tabIndex',
+                '(focus)': 'focus()',
+                '(blur)': '_onTouched()',
+                '(keydown)': '_onKeyDown($event)',
+                '(window:resize)': 'updateScrollSize()'
+            },
+            providers: [MC_SELECTION_LIST_VALUE_ACCESSOR],
+            preserveWhitespaces: false
+        }),
+        __param(1, core.Attribute('tabindex')),
+        __param(2, core.Attribute('auto-select')),
+        __param(3, core.Attribute('no-unselect')),
+        __param(4, core.Attribute('multiple')),
+        __metadata("design:paramtypes", [core.ElementRef, String, String, String, String])
+    ], McListSelection);
     return McListSelection;
 }(_McListSelectionMixinBase));
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McListBase = /** @class */ (function () {
     function McListBase() {
     }
@@ -2772,33 +2274,34 @@ var McList = /** @class */ (function (_super) {
     function McList() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    McList.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-list',
-                    host: { class: 'mc-list' },
-                    template: '<ng-content></ng-content>',
-                    styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-subheader{display:flex;box-sizing:border-box;padding:15px;align-items:center}.mc-list .mc-subheader,.mc-list-selection .mc-subheader{margin:0}.mc-list,.mc-list-selection{display:block}.mc-list .mc-subheader,.mc-list-selection .mc-subheader{height:32px;line-height:2px}.mc-list .mc-subheader:first-child,.mc-list-selection .mc-subheader:first-child{margin-top:0}.mc-list .mc-list-item,.mc-list .mc-list-option,.mc-list-selection .mc-list-item,.mc-list-selection .mc-list-option{display:block;height:32px}.mc-list .mc-list-item .mc-list-item-content,.mc-list .mc-list-option .mc-list-item-content,.mc-list-selection .mc-list-item .mc-list-item-content,.mc-list-selection .mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 15px}.mc-list .mc-list-item.mc-2-line,.mc-list .mc-list-option.mc-2-line,.mc-list-selection .mc-list-item.mc-2-line,.mc-list-selection .mc-list-option.mc-2-line{height:72px}.mc-list .mc-list-item.mc-3-line,.mc-list .mc-list-option.mc-3-line,.mc-list-selection .mc-list-item.mc-3-line,.mc-list-selection .mc-list-option.mc-3-line{height:88px}.mc-list .mc-list-item.mc-multi-line,.mc-list .mc-list-option.mc-multi-line,.mc-list-selection .mc-list-item.mc-multi-line,.mc-list-selection .mc-list-option.mc-multi-line{height:auto}.mc-list .mc-list-item.mc-multi-line .mc-list-item-content,.mc-list .mc-list-option.mc-multi-line .mc-list-item-content,.mc-list-selection .mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-selection .mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-bottom:16px}.mc-list .mc-list-item .mc-list-text,.mc-list .mc-list-option .mc-list-text,.mc-list-selection .mc-list-item .mc-list-text,.mc-list-selection .mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list .mc-list-item .mc-list-text>*,.mc-list .mc-list-option .mc-list-text>*,.mc-list-selection .mc-list-item .mc-list-text>*,.mc-list-selection .mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list .mc-list-item .mc-list-text:empty,.mc-list .mc-list-option .mc-list-text:empty,.mc-list-selection .mc-list-item .mc-list-text:empty,.mc-list-selection .mc-list-option .mc-list-text:empty{display:none}.mc-list .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-selection .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-selection .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-selection .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-selection .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list .mc-list-item .mc-list-icon,.mc-list .mc-list-option .mc-list-icon,.mc-list-selection .mc-list-item .mc-list-icon,.mc-list-selection .mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;height:24px;border-radius:50%;padding:4px;font-size:24px}.mc-list .mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list .mc-list-option .mc-list-icon~.mc-divider-inset,.mc-list-selection .mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list-selection .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:62px;width:calc(100% - 62px)}[dir=rtl] .mc-list .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list .mc-list-option .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-selection .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-selection .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:auto;margin-right:62px}.mc-list .mc-list-item .mc-divider,.mc-list .mc-list-option .mc-divider,.mc-list-selection .mc-list-item .mc-divider,.mc-list-selection .mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list .mc-list-item .mc-divider,[dir=rtl] .mc-list .mc-list-option .mc-divider,[dir=rtl] .mc-list-selection .mc-list-item .mc-divider,[dir=rtl] .mc-list-selection .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list .mc-list-item .mc-divider.mc-divider-inset,.mc-list .mc-list-option .mc-divider.mc-divider-inset,.mc-list-selection .mc-list-item .mc-divider.mc-divider-inset,.mc-list-selection .mc-list-option .mc-divider.mc-divider-inset{position:absolute}.mc-list-option:not([disabled]){cursor:pointer}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None
-                },] },
-    ];
+    McList = __decorate([
+        core.Component({
+            selector: 'mc-list',
+            host: { class: 'mc-list' },
+            template: '<ng-content></ng-content>',
+            styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-subheader{display:flex;box-sizing:border-box;padding:15px;align-items:center}.mc-list .mc-subheader,.mc-list-selection .mc-subheader{margin:0}.mc-list,.mc-list-selection{display:block}.mc-list .mc-subheader,.mc-list-selection .mc-subheader{height:32px;line-height:2px}.mc-list .mc-subheader:first-child,.mc-list-selection .mc-subheader:first-child{margin-top:0}.mc-list .mc-list-item,.mc-list .mc-list-option,.mc-list-selection .mc-list-item,.mc-list-selection .mc-list-option{display:block;height:32px}.mc-list .mc-list-item .mc-list-item-content,.mc-list .mc-list-option .mc-list-item-content,.mc-list-selection .mc-list-item .mc-list-item-content,.mc-list-selection .mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 15px}.mc-list .mc-list-item.mc-2-line,.mc-list .mc-list-option.mc-2-line,.mc-list-selection .mc-list-item.mc-2-line,.mc-list-selection .mc-list-option.mc-2-line{height:72px}.mc-list .mc-list-item.mc-3-line,.mc-list .mc-list-option.mc-3-line,.mc-list-selection .mc-list-item.mc-3-line,.mc-list-selection .mc-list-option.mc-3-line{height:88px}.mc-list .mc-list-item.mc-multi-line,.mc-list .mc-list-option.mc-multi-line,.mc-list-selection .mc-list-item.mc-multi-line,.mc-list-selection .mc-list-option.mc-multi-line{height:auto}.mc-list .mc-list-item.mc-multi-line .mc-list-item-content,.mc-list .mc-list-option.mc-multi-line .mc-list-item-content,.mc-list-selection .mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-selection .mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-bottom:16px}.mc-list .mc-list-item .mc-list-text,.mc-list .mc-list-option .mc-list-text,.mc-list-selection .mc-list-item .mc-list-text,.mc-list-selection .mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list .mc-list-item .mc-list-text>*,.mc-list .mc-list-option .mc-list-text>*,.mc-list-selection .mc-list-item .mc-list-text>*,.mc-list-selection .mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list .mc-list-item .mc-list-text:empty,.mc-list .mc-list-option .mc-list-text:empty,.mc-list-selection .mc-list-item .mc-list-text:empty,.mc-list-selection .mc-list-option .mc-list-text:empty{display:none}.mc-list .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-selection .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-selection .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-selection .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-selection .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list .mc-list-item .mc-list-icon,.mc-list .mc-list-option .mc-list-icon,.mc-list-selection .mc-list-item .mc-list-icon,.mc-list-selection .mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;height:24px;border-radius:50%;padding:4px;font-size:24px}.mc-list .mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list .mc-list-option .mc-list-icon~.mc-divider-inset,.mc-list-selection .mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list-selection .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:62px;width:calc(100% - 62px)}[dir=rtl] .mc-list .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list .mc-list-option .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-selection .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-selection .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:auto;margin-right:62px}.mc-list .mc-list-item .mc-divider,.mc-list .mc-list-option .mc-divider,.mc-list-selection .mc-list-item .mc-divider,.mc-list-selection .mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list .mc-list-item .mc-divider,[dir=rtl] .mc-list .mc-list-option .mc-divider,[dir=rtl] .mc-list-selection .mc-list-item .mc-divider,[dir=rtl] .mc-list-selection .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list .mc-list-item .mc-divider.mc-divider-inset,.mc-list .mc-list-option .mc-divider.mc-divider-inset,.mc-list-selection .mc-list-item .mc-divider.mc-divider-inset,.mc-list-selection .mc-list-option .mc-divider.mc-divider-inset{position:absolute}.mc-list-option:not([disabled]){cursor:pointer}"],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None
+        })
+    ], McList);
     return McList;
 }(McListBase));
 /**
  * Directive whose purpose is to add the mc- CSS styling to this selector.
- * \@docs-private
+ * @docs-private
  */
 var McListSubheaderCssStyler = /** @class */ (function () {
     function McListSubheaderCssStyler() {
     }
-    McListSubheaderCssStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mc-subheader], [mcSubheader]',
-                    host: { class: 'mc-subheader' }
-                },] },
-    ];
+    McListSubheaderCssStyler = __decorate([
+        core.Directive({
+            selector: '[mc-subheader], [mcSubheader]',
+            host: { class: 'mc-subheader' }
+        })
+    ], McListSubheaderCssStyler);
     return McListSubheaderCssStyler;
 }());
+// Boilerplate for applying mixins to McListItem.
 var McListItemBase = /** @class */ (function () {
     function McListItemBase() {
     }
@@ -2811,156 +2314,161 @@ var McListItem = /** @class */ (function (_super) {
         _this._element = _element;
         return _this;
     }
-    /**
-     * @return {?}
-     */
-    McListItem.prototype.ngAfterContentInit = /**
-     * @return {?}
-     */
-    function () {
+    McListItem.prototype.ngAfterContentInit = function () {
         this._lineSetter = new McLineSetter(this._lines, this._element);
     };
-    /**
-     * @return {?}
-     */
-    McListItem.prototype._handleFocus = /**
-     * @return {?}
-     */
-    function () {
+    McListItem.prototype._handleFocus = function () {
         this._element.nativeElement.classList.add('mc-focused');
     };
-    /**
-     * @return {?}
-     */
-    McListItem.prototype._handleBlur = /**
-     * @return {?}
-     */
-    function () {
+    McListItem.prototype._handleBlur = function () {
         this._element.nativeElement.classList.remove('mc-focused');
     };
-    /**
-     * @return {?}
-     */
-    McListItem.prototype._getHostElement = /**
-     * @return {?}
-     */
-    function () {
+    McListItem.prototype._getHostElement = function () {
         return this._element.nativeElement;
     };
-    McListItem.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-list-item, a[mc-list-item]',
-                    host: {
-                        class: 'mc-list-item',
-                        '(focus)': '_handleFocus()',
-                        '(blur)': '_handleBlur()'
-                    },
-                    template: "<div class=\"mc-list-item-content\"><ng-content select=\"[mc-list-icon], [mcListIcon]\"></ng-content><div class=\"mc-list-text\"><ng-content select=\"[mc-line], [mcLine]\"></ng-content></div><ng-content></ng-content></div>",
-                    encapsulation: core.ViewEncapsulation.None,
-                    preserveWhitespaces: false,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McListItem.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
-    McListItem.propDecorators = {
-        _lines: [{ type: core.ContentChildren, args: [McLine,] }]
-    };
+    __decorate([
+        core.ContentChildren(McLine),
+        __metadata("design:type", core.QueryList)
+    ], McListItem.prototype, "_lines", void 0);
+    McListItem = __decorate([
+        core.Component({
+            selector: 'mc-list-item, a[mc-list-item]',
+            host: {
+                class: 'mc-list-item',
+                '(focus)': '_handleFocus()',
+                '(blur)': '_handleBlur()'
+            },
+            template: "<div class=\"mc-list-item-content\"><ng-content select=\"[mc-list-icon], [mcListIcon]\"></ng-content><div class=\"mc-list-text\"><ng-content select=\"[mc-line], [mcLine]\"></ng-content></div><ng-content></ng-content></div>",
+            encapsulation: core.ViewEncapsulation.None,
+            preserveWhitespaces: false,
+            changeDetection: core.ChangeDetectionStrategy.OnPush
+        }),
+        __metadata("design:paramtypes", [core.ElementRef])
+    ], McListItem);
     return McListItem;
 }(McListItemBase));
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McListModule = /** @class */ (function () {
     function McListModule() {
     }
-    McListModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        McLineModule
-                    ],
-                    exports: [
-                        McList,
-                        McListSelection,
-                        McListItem,
-                        McListOption,
-                        McListSubheaderCssStyler
-                    ],
-                    declarations: [
-                        McList,
-                        McListSelection,
-                        McListItem,
-                        McListOption,
-                        McListSubheaderCssStyler
-                    ]
-                },] },
-    ];
+    McListModule = __decorate([
+        core.NgModule({
+            imports: [
+                common.CommonModule,
+                a11y.A11yModule,
+                McLineModule
+            ],
+            exports: [
+                McList,
+                McListSelection,
+                McListItem,
+                McListOption,
+                McListSubheaderCssStyler
+            ],
+            declarations: [
+                McList,
+                McListSelection,
+                McListItem,
+                McListOption,
+                McListSubheaderCssStyler
+            ]
+        })
+    ], McListModule);
     return McListModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/** @type {?} */
+var McLink = /** @class */ (function () {
+    function McLink(elementRef, _focusMonitor) {
+        this.elementRef = elementRef;
+        this._focusMonitor = _focusMonitor;
+        this._focusMonitor.monitor(elementRef.nativeElement, true);
+    }
+    McLink.prototype.ngOnDestroy = function () {
+        this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    };
+    McLink.prototype.focus = function () {
+        this._getHostElement().focus();
+    };
+    McLink.prototype._getHostElement = function () {
+        return this.elementRef.nativeElement;
+    };
+    McLink = __decorate([
+        core.Component({
+            selector: 'a.mc-link',
+            template: "<ng-content></ng-content>",
+            encapsulation: core.ViewEncapsulation.None,
+            styles: [".mc-link{display:inline-flex;align-items:center;padding:2px 4px;text-decoration:none!important;cursor:pointer;outline:0}.mc-link{transition-property:color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link:focus{transition:none}.mc-link:hover{transition:none}.mc-link.mc-focused,.mc-link:focus{border-radius:3px}.mc-link.mc-disabled,.mc-link[disabled]{pointer-events:none;cursor:default}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link .mc-link_dashed,.mc-link.mc-link_underlined{transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link .mc-link_dashed:focus,.mc-link.mc-link_underlined:focus{transition:none}.mc-link .mc-link_dashed:hover,.mc-link.mc-link_underlined:hover{transition:none}"]
+        }),
+        __metadata("design:paramtypes", [core.ElementRef, a11y.FocusMonitor])
+    ], McLink);
+    return McLink;
+}());
+
+var McLinkModule = /** @class */ (function () {
+    function McLinkModule() {
+    }
+    McLinkModule = __decorate([
+        core.NgModule({
+            imports: [
+                common.CommonModule,
+                a11y.A11yModule
+            ],
+            declarations: [
+                McLink
+            ],
+            exports: [
+                McLink
+            ]
+        })
+    ], McLinkModule);
+    return McLinkModule;
+}());
+
 var COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
-/** @type {?} */
 var MC_ICON = 'mc-icon';
-/** @type {?} */
 var MC_NAVBAR = 'mc-navbar';
-/** @type {?} */
 var MC_NAVBAR_CONTAINER = 'mc-navbar-container';
-/** @type {?} */
 var MC_NAVBAR_ITEM = 'mc-navbar-item';
-/** @type {?} */
 var MC_NAVBAR_BRAND = 'mc-navbar-brand';
-/** @type {?} */
 var MC_NAVBAR_TITLE = 'mc-navbar-title';
-/** @type {?} */
 var MC_NAVBAR_LOGO = 'mc-navbar-logo';
 var McNavbarLogo = /** @class */ (function () {
     function McNavbarLogo() {
     }
-    McNavbarLogo.decorators = [
-        { type: core.Directive, args: [{
-                    selector: MC_NAVBAR_LOGO,
-                    host: {
-                        class: MC_NAVBAR_LOGO
-                    }
-                },] },
-    ];
+    McNavbarLogo = __decorate([
+        core.Directive({
+            selector: MC_NAVBAR_LOGO,
+            host: {
+                class: MC_NAVBAR_LOGO
+            }
+        })
+    ], McNavbarLogo);
     return McNavbarLogo;
 }());
 var McNavbarBrand = /** @class */ (function () {
     function McNavbarBrand() {
     }
-    McNavbarBrand.decorators = [
-        { type: core.Directive, args: [{
-                    selector: MC_NAVBAR_BRAND,
-                    host: {
-                        class: MC_NAVBAR_BRAND
-                    }
-                },] },
-    ];
+    McNavbarBrand = __decorate([
+        core.Directive({
+            selector: MC_NAVBAR_BRAND,
+            host: {
+                class: MC_NAVBAR_BRAND
+            }
+        })
+    ], McNavbarBrand);
     return McNavbarBrand;
 }());
 var McNavbarTitle = /** @class */ (function () {
     function McNavbarTitle() {
     }
-    McNavbarTitle.decorators = [
-        { type: core.Directive, args: [{
-                    selector: MC_NAVBAR_TITLE,
-                    host: {
-                        class: MC_NAVBAR_TITLE
-                    }
-                },] },
-    ];
+    McNavbarTitle = __decorate([
+        core.Directive({
+            selector: MC_NAVBAR_TITLE,
+            host: {
+                class: MC_NAVBAR_TITLE
+            }
+        })
+    ], McNavbarTitle);
     return McNavbarTitle;
 }());
 var McNavbarItemBase = /** @class */ (function () {
@@ -2969,7 +2477,6 @@ var McNavbarItemBase = /** @class */ (function () {
     }
     return McNavbarItemBase;
 }());
-/** @type {?} */
 var _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
 var McNavbarItem = /** @class */ (function (_super) {
     __extends(McNavbarItem, _super);
@@ -2986,126 +2493,63 @@ var McNavbarItem = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(McNavbarItem.prototype, "collapsedTitle", {
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McNavbarItem.prototype, "hasDropdownContent", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this.dropdownItems.length > 0;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McNavbarItem.prototype, "_dropdownElements", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this.dropdownContent ? this.dropdownContent.nativeElement.querySelectorAll('li > *') : [];
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.ngOnInit = function () {
         this.denyClickIfDisabled();
         this._focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
         if (this.hasDropdownContent) {
             this.listenClickOutside();
         }
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.ngAfterViewInit = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.ngAfterViewInit = function () {
         if (!this.hasDropdownContent) {
             return;
         }
         this.startListenFocusDropdownItems();
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.ngOnDestroy = function () {
         this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         this.stopListenFocusDropdownItems();
     };
-    /**
-     * @param {?} link
-     * @return {?}
-     */
-    McNavbarItem.prototype.isActiveDropdownLink = /**
-     * @param {?} link
-     * @return {?}
-     */
-    function (link) {
+    McNavbarItem.prototype.isActiveDropdownLink = function (link) {
         if (!this._platform.isBrowser) {
             return false;
         }
         return window.location.href.indexOf(link) >= 0;
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.handleClickByItem = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.handleClickByItem = function () {
         this.toggleDropdown();
     };
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
-    McNavbarItem.prototype.handleKeydown = /**
-     * @param {?} $event
-     * @return {?}
-     */
-    function ($event) {
-        /** @type {?} */
-        var isNavbarItem = (/** @type {?} */ ($event.target)).classList.contains(MC_NAVBAR_ITEM);
+    McNavbarItem.prototype.handleKeydown = function ($event) {
+        var isNavbarItem = $event.target.classList.contains(MC_NAVBAR_ITEM);
         if (this.hasDropdownContent && $event.keyCode === keycodes.SPACE && isNavbarItem) {
             this.toggleDropdown();
         }
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.handleClickByDropdownItem = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.handleClickByDropdownItem = function () {
         this.forceCloseDropdown();
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.listenClickOutside = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.listenClickOutside = function () {
         var _this = this;
         this._subscription.add(this._focusMonitor$.subscribe(function (origin) {
             if (origin === null) {
@@ -3113,58 +2557,28 @@ var McNavbarItem = /** @class */ (function (_super) {
             }
         }));
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.toggleDropdown = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.toggleDropdown = function () {
         this.isCollapsed = !this.isCollapsed;
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.forceCloseDropdown = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.forceCloseDropdown = function () {
         this.isCollapsed = true;
         this._cdRef.detectChanges();
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.startListenFocusDropdownItems = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.startListenFocusDropdownItems = function () {
         var _this = this;
         this._dropdownElements.forEach(function (el) {
             _this._focusMonitor.monitor(el, true);
         });
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.stopListenFocusDropdownItems = /**
-     * @return {?}
-     */
-    function () {
+    McNavbarItem.prototype.stopListenFocusDropdownItems = function () {
         var _this = this;
         this._dropdownElements.forEach(function (el) {
             _this._focusMonitor.stopMonitoring(el);
         });
     };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.denyClickIfDisabled = /**
-     * @return {?}
-     */
-    function () {
+    // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
+    McNavbarItem.prototype.denyClickIfDisabled = function () {
         var _this = this;
-        /** @type {?} */
         var events = this.elementRef.nativeElement.eventListeners('click');
         events.forEach(function (event) { return _this.elementRef.nativeElement.removeEventListener('click', event); });
         this.elementRef.nativeElement.addEventListener('click', function (event) {
@@ -3174,33 +2588,44 @@ var McNavbarItem = /** @class */ (function (_super) {
         }, true);
         events.forEach(function (event) { return _this.elementRef.nativeElement.addEventListener('click', event); });
     };
-    McNavbarItem.decorators = [
-        { type: core.Component, args: [{
-                    selector: MC_NAVBAR_ITEM,
-                    template: "\n        <a\n            [attr.tabindex]=\"disabled ? -1 : tabIndex\"\n            (click)=\"handleClickByItem()\"\n            (keydown)=\"handleKeydown($event)\"\n            class=\"mc-navbar-item\"\n        >\n            <ng-content></ng-content>\n            <i *ngIf=\"hasDropdownContent\" mc-icon=\"mc-angle-M_16\"></i>\n        </a>\n        <ul\n            #dropdownContent\n            *ngIf=\"hasDropdownContent\"\n            [ngClass]=\"{ 'is-collapsed': isCollapsed }\"\n            class=\"mc-navbar-dropdown\"\n        >\n            <li\n                *ngFor=\"let item of dropdownItems\"\n                (click)=\"handleClickByDropdownItem()\"\n                class=\"mc-navbar-dropdown-item\"\n            >\n                <ng-container *ngIf=\"dropdownItemTmpl\">\n                    <ng-container *ngTemplateOutlet=\"dropdownItemTmpl; context: { $implicit: item }\"></ng-container>\n                </ng-container>\n                <a\n                    *ngIf=\"!dropdownItemTmpl\"\n                    [attr.href]=\"item.link\"\n                    [ngClass]=\"{ 'is-active': isActiveDropdownLink(item.link) }\"\n                    class=\"mc-navbar-dropdown-link\"\n                >{{ item.text }}</a>\n            </li>\n        </ul>\n    ",
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    inputs: ['disabled'],
-                    host: {
-                        '[attr.disabled]': 'disabled || null',
-                        '[attr.tabindex]': '-1'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McNavbarItem.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: a11y.FocusMonitor },
-        { type: platform.Platform },
-        { type: core.ChangeDetectorRef }
-    ]; };
-    McNavbarItem.propDecorators = {
-        tabIndex: [{ type: core.Input }],
-        dropdownItems: [{ type: core.Input }],
-        collapsedTitle: [{ type: core.Input }],
-        dropdownItemTmpl: [{ type: core.ContentChild, args: ['dropdownItemTmpl', { read: core.TemplateRef },] }],
-        dropdownContent: [{ type: core.ViewChild, args: ['dropdownContent', { read: core.ElementRef },] }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Number)
+    ], McNavbarItem.prototype, "tabIndex", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Array)
+    ], McNavbarItem.prototype, "dropdownItems", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], McNavbarItem.prototype, "collapsedTitle", null);
+    __decorate([
+        core.ContentChild('dropdownItemTmpl', { read: core.TemplateRef }),
+        __metadata("design:type", core.TemplateRef)
+    ], McNavbarItem.prototype, "dropdownItemTmpl", void 0);
+    __decorate([
+        core.ViewChild('dropdownContent', { read: core.ElementRef }),
+        __metadata("design:type", core.ElementRef)
+    ], McNavbarItem.prototype, "dropdownContent", void 0);
+    McNavbarItem = __decorate([
+        core.Component({
+            selector: MC_NAVBAR_ITEM,
+            template: "\n        <a\n            [attr.tabindex]=\"disabled ? -1 : tabIndex\"\n            (click)=\"handleClickByItem()\"\n            (keydown)=\"handleKeydown($event)\"\n            class=\"mc-navbar-item\"\n        >\n            <ng-content></ng-content>\n            <i *ngIf=\"hasDropdownContent\" mc-icon=\"mc-angle-M_16\"></i>\n        </a>\n        <ul\n            #dropdownContent\n            *ngIf=\"hasDropdownContent\"\n            [ngClass]=\"{ 'is-collapsed': isCollapsed }\"\n            class=\"mc-navbar-dropdown\"\n        >\n            <li\n                *ngFor=\"let item of dropdownItems\"\n                (click)=\"handleClickByDropdownItem()\"\n                class=\"mc-navbar-dropdown-item\"\n            >\n                <ng-container *ngIf=\"dropdownItemTmpl\">\n                    <ng-container *ngTemplateOutlet=\"dropdownItemTmpl; context: { $implicit: item }\"></ng-container>\n                </ng-container>\n                <a\n                    *ngIf=\"!dropdownItemTmpl\"\n                    [attr.href]=\"item.link\"\n                    [ngClass]=\"{ 'is-active': isActiveDropdownLink(item.link) }\"\n                    class=\"mc-navbar-dropdown-link\"\n                >{{ item.text }}</a>\n            </li>\n        </ul>\n    ",
+            encapsulation: core.ViewEncapsulation.None,
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            inputs: ['disabled'],
+            host: {
+                '[attr.disabled]': 'disabled || null',
+                '[attr.tabindex]': '-1'
+            }
+        }),
+        __metadata("design:paramtypes", [core.ElementRef,
+            a11y.FocusMonitor,
+            platform.Platform,
+            core.ChangeDetectorRef])
+    ], McNavbarItem);
     return McNavbarItem;
 }(_McNavbarMixinBase));
 var McNavbarContainer = /** @class */ (function () {
@@ -3208,24 +2633,26 @@ var McNavbarContainer = /** @class */ (function () {
         this.position = 'left';
     }
     Object.defineProperty(McNavbarContainer.prototype, "cssClasses", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this.position === 'left' ? 'mc-navbar-left' : 'mc-navbar-right';
         },
         enumerable: true,
         configurable: true
     });
-    McNavbarContainer.decorators = [
-        { type: core.Directive, args: [{
-                    selector: MC_NAVBAR_CONTAINER
-                },] },
-    ];
-    McNavbarContainer.propDecorators = {
-        position: [{ type: core.Input }],
-        cssClasses: [{ type: core.HostBinding, args: ['class',] }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McNavbarContainer.prototype, "position", void 0);
+    __decorate([
+        core.HostBinding('class'),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [])
+    ], McNavbarContainer.prototype, "cssClasses", null);
+    McNavbarContainer = __decorate([
+        core.Directive({
+            selector: MC_NAVBAR_CONTAINER
+        })
+    ], McNavbarContainer);
     return McNavbarContainer;
 }());
 var CollapsibleItem = /** @class */ (function () {
@@ -3234,25 +2661,11 @@ var CollapsibleItem = /** @class */ (function () {
         this.width = width;
         this._collapsed = false;
     }
-    /**
-     * @param {?} collapsed
-     * @return {?}
-     */
-    CollapsibleItem.prototype.processCollapsed = /**
-     * @param {?} collapsed
-     * @return {?}
-     */
-    function (collapsed) {
+    CollapsibleItem.prototype.processCollapsed = function (collapsed) {
         this._collapsed = collapsed;
         this.updateCollapsedClass();
     };
-    /**
-     * @return {?}
-     */
-    CollapsibleItem.prototype.updateCollapsedClass = /**
-     * @return {?}
-     */
-    function () {
+    CollapsibleItem.prototype.updateCollapsedClass = function () {
         if (this._collapsed) {
             this.element.classList.add(COLLAPSED_CLASS);
         }
@@ -3270,20 +2683,14 @@ var CachedItemWidth = /** @class */ (function () {
         this.itemsForCollapse = itemsForCollapse;
     }
     Object.defineProperty(CachedItemWidth.prototype, "canCollapse", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this.itemsForCollapse.length > 0;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(CachedItemWidth.prototype, "collapsedItemsWidth", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             if (this._collapsedItemsWidth !== undefined) {
                 return this._collapsedItemsWidth;
             }
@@ -3293,52 +2700,23 @@ var CachedItemWidth = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @param {?} collapsed
-     * @return {?}
-     */
-    CachedItemWidth.prototype.processCollapsed = /**
-     * @param {?} collapsed
-     * @return {?}
-     */
-    function (collapsed) {
+    CachedItemWidth.prototype.processCollapsed = function (collapsed) {
         if (this.itemsForCollapse.length > 0) {
             this.updateTitle(collapsed);
         }
         this.itemsForCollapse.forEach(function (item) { return item.processCollapsed(collapsed); });
     };
-    /**
-     * @return {?}
-     */
-    CachedItemWidth.prototype.calculateAndCacheCollapsedItemsWidth = /**
-     * @return {?}
-     */
-    function () {
+    CachedItemWidth.prototype.calculateAndCacheCollapsedItemsWidth = function () {
         this._collapsedItemsWidth = this.itemsForCollapse
             .reduce(function (acc, item) { return acc + item.width; }, 0);
     };
-    /**
-     * @return {?}
-     */
-    CachedItemWidth.prototype.getTitle = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
+    CachedItemWidth.prototype.getTitle = function () {
         var computedTitle = this.element.getAttribute('computedTitle');
         return computedTitle
             ? decodeURI(computedTitle)
             : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
     };
-    /**
-     * @param {?} collapsed
-     * @return {?}
-     */
-    CachedItemWidth.prototype.updateTitle = /**
-     * @param {?} collapsed
-     * @return {?}
-     */
-    function (collapsed) {
+    CachedItemWidth.prototype.updateTitle = function (collapsed) {
         if (collapsed) {
             this.element.setAttribute('title', this.getTitle());
         }
@@ -3359,26 +2737,19 @@ var McNavbar = /** @class */ (function () {
             MC_NAVBAR_BRAND,
             MC_NAVBAR_TITLE
         ];
-        /** @type {?} */
         var resizeObserver = rxjs.fromEvent(window, 'resize')
             .pipe(operators.debounceTime(this.resizeDebounceInterval));
         this._resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
     }
     Object.defineProperty(McNavbar.prototype, "maxAllowedWidth", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McNavbar.prototype, "itemsWidths", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             if (this._itemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
                 return this._itemsWidths;
             }
@@ -3389,10 +2760,7 @@ var McNavbar = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(McNavbar.prototype, "totalItemsWidth", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             if (this._totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
                 return this._totalItemsWidths;
             }
@@ -3402,17 +2770,9 @@ var McNavbar = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @return {?}
-     */
-    McNavbar.prototype.updateCollapsed = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
+    McNavbar.prototype.updateCollapsed = function () {
         var collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
         for (var i = this.itemsWidths.length - 1; i >= 0; i--) {
-            /** @type {?} */
             var item = this.itemsWidths[i];
             if (!item.canCollapse) {
                 continue;
@@ -3421,136 +2781,83 @@ var McNavbar = /** @class */ (function () {
             collapseDelta -= item.collapsedItemsWidth;
         }
     };
-    /**
-     * @return {?}
-     */
-    McNavbar.prototype.ngAfterViewInit = /**
-     * @return {?}
-     */
-    function () {
+    McNavbar.prototype.ngAfterViewInit = function () {
         var _this = this;
         // Note: this wait is required for loading and rendering fonts for icons;
         // unfortunately we cannot control font rendering
         setTimeout(function () { return _this.updateCollapsed(); }, 0);
     };
-    /**
-     * @return {?}
-     */
-    McNavbar.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
+    McNavbar.prototype.ngOnDestroy = function () {
         this._resizeSubscription.unsubscribe();
     };
-    /**
-     * @return {?}
-     */
-    McNavbar.prototype.calculateAndCacheTotalItemsWidth = /**
-     * @return {?}
-     */
-    function () {
+    McNavbar.prototype.calculateAndCacheTotalItemsWidth = function () {
         this._totalItemsWidths = this.itemsWidths
             .reduce(function (acc, item) { return acc + item.width; }, 0);
     };
-    /**
-     * @param {?} element
-     * @return {?}
-     */
-    McNavbar.prototype.getOuterElementWidth = /**
-     * @param {?} element
-     * @return {?}
-     */
-    function (element) {
-        /** @type {?} */
+    McNavbar.prototype.getOuterElementWidth = function (element) {
         var baseWidth = element.getBoundingClientRect().width;
-        /** @type {?} */
         var marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
-        /** @type {?} */
         var marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
         return baseWidth + marginRight + marginLeft;
     };
-    /**
-     * @return {?}
-     */
-    McNavbar.prototype.calculateAndCacheItemsWidth = /**
-     * @return {?}
-     */
-    function () {
+    McNavbar.prototype.calculateAndCacheItemsWidth = function () {
         var _this = this;
-        /** @type {?} */
         var allItemsSelector = this.secondLevelElements
             .map(function (e) { return _this.firstLevelElement + ">" + e; });
-        /** @type {?} */
         var allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
         this._itemsWidths = allItems
             .map(function (el) { return new CachedItemWidth(el, _this.getOuterElementWidth(el), _this.getItemsForCollapse(el)); });
     };
-    /**
-     * @param {?} element
-     * @return {?}
-     */
-    McNavbar.prototype.getItemsForCollapse = /**
-     * @param {?} element
-     * @return {?}
-     */
-    function (element) {
-        /** @type {?} */
+    McNavbar.prototype.getItemsForCollapse = function (element) {
         var icon = element.querySelector("[" + MC_ICON + "]," + MC_NAVBAR_LOGO + ",[" + MC_NAVBAR_LOGO + "]");
         if (!icon) {
             return [];
         }
         return Array.from(element.querySelectorAll(MC_NAVBAR_TITLE))
-            .map(function (el) { return new CollapsibleItem(/** @type {?} */ (el), el.getBoundingClientRect().width); });
+            .map(function (el) { return new CollapsibleItem(el, el.getBoundingClientRect().width); });
     };
-    McNavbar.decorators = [
-        { type: core.Component, args: [{
-                    selector: MC_NAVBAR,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    template: "\n        <nav class=\"mc-navbar\">\n            <ng-content select=\"[" + MC_NAVBAR_CONTAINER + "]," + MC_NAVBAR_CONTAINER + "\"></ng-content>\n        </nav>\n    ",
-                    styles: [".mc-navbar-left,.mc-navbar-right,mc-navbar-container{height:100%;display:flex;flex-shrink:0;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar{position:relative;height:48px;padding:0 0;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar [mc-icon]+mc-navbar-title{margin-left:8px}.mc-navbar mc-navbar-title:not(.mc-navbar-collapsed-title)+[mc-icon]{margin-left:8px}.mc-navbar-brand,.mc-navbar-item,.mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{height:100%;position:relative;display:flex;align-items:center;padding-left:16px;padding-right:16px;background-color:transparent;border:none}.mc-navbar-brand,mc-navbar-brand{padding-left:0;padding-right:12px;margin-right:24px}.mc-navbar-brand .mc-navbar-title,mc-navbar-brand .mc-navbar-title{padding-left:12px;padding-right:0}.mc-navbar-title{white-space:nowrap}.mc-navbar-item:not([disabled]){cursor:pointer}.mc-navbar-item .mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{padding:0}mc-navbar-item.mc-progress:not([disabled]){cursor:pointer}.mc-navbar-item[disabled],mc-navbar-item[disabled] .mc-navbar-item{cursor:default}mc-navbar-title.mc-navbar-collapsed-title{display:none}.mc-navbar-dropdown{position:absolute;top:100%;left:0;box-sizing:border-box;min-width:100%;height:auto;margin:0;list-style:none;padding-top:4px;padding-right:0;padding-bottom:4px;padding-left:0;border:1px solid;border-top:none;z-index:1}.mc-navbar-right .mc-navbar-dropdown{left:auto;right:0}.mc-navbar-dropdown-link{position:relative;display:block;box-sizing:border-box;padding-top:6px;padding-right:16px;padding-bottom:6px;padding-left:16px;border:2px solid transparent;text-decoration:none;white-space:nowrap}.mc-navbar-dropdown-link.is-active:hover::before{position:absolute;top:-2px;right:-2px;bottom:-2px;left:-2px;content:\"\"}.mc-navbar-dropdown.is-collapsed{display:none}"],
-                    encapsulation: core.ViewEncapsulation.None
-                },] },
-    ];
-    /** @nocollapse */
-    McNavbar.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
+    McNavbar = __decorate([
+        core.Component({
+            selector: MC_NAVBAR,
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            template: "\n        <nav class=\"mc-navbar\">\n            <ng-content select=\"[" + MC_NAVBAR_CONTAINER + "]," + MC_NAVBAR_CONTAINER + "\"></ng-content>\n        </nav>\n    ",
+            styles: [".mc-navbar-left,.mc-navbar-right,mc-navbar-container{height:100%;display:flex;flex-shrink:0;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar{position:relative;height:48px;padding:0 0;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar [mc-icon]+mc-navbar-title{margin-left:8px}.mc-navbar mc-navbar-title:not(.mc-navbar-collapsed-title)+[mc-icon]{margin-left:8px}.mc-navbar-brand,.mc-navbar-item,.mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{height:100%;position:relative;display:flex;align-items:center;padding-left:16px;padding-right:16px;background-color:transparent;border:none}.mc-navbar-brand,mc-navbar-brand{padding-left:0;padding-right:12px;margin-right:24px}.mc-navbar-brand .mc-navbar-title,mc-navbar-brand .mc-navbar-title{padding-left:12px;padding-right:0}.mc-navbar-title{white-space:nowrap}.mc-navbar-item:not([disabled]){cursor:pointer}.mc-navbar-item .mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{padding:0}mc-navbar-item.mc-progress:not([disabled]){cursor:pointer}.mc-navbar-item[disabled],mc-navbar-item[disabled] .mc-navbar-item{cursor:default}mc-navbar-title.mc-navbar-collapsed-title{display:none}.mc-navbar-dropdown{position:absolute;top:100%;left:0;box-sizing:border-box;min-width:100%;height:auto;margin:0;list-style:none;padding-top:4px;padding-right:0;padding-bottom:4px;padding-left:0;border:1px solid;border-top:none;z-index:1}.mc-navbar-right .mc-navbar-dropdown{left:auto;right:0}.mc-navbar-dropdown-link{position:relative;display:block;box-sizing:border-box;padding-top:6px;padding-right:16px;padding-bottom:6px;padding-left:16px;border:2px solid transparent;text-decoration:none;white-space:nowrap}.mc-navbar-dropdown-link.is-active:hover::before{position:absolute;top:-2px;right:-2px;bottom:-2px;left:-2px;content:\"\"}.mc-navbar-dropdown.is-collapsed{display:none}"],
+            encapsulation: core.ViewEncapsulation.None
+        }),
+        __metadata("design:paramtypes", [core.ElementRef])
+    ], McNavbar);
     return McNavbar;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
 var McNavbarModule = /** @class */ (function () {
     function McNavbarModule() {
     }
-    McNavbarModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        platform.PlatformModule,
-                        McIconModule
-                    ],
-                    exports: [
-                        McNavbar,
-                        McNavbarContainer,
-                        McNavbarTitle,
-                        McNavbarItem,
-                        McNavbarBrand,
-                        McNavbarLogo
-                    ],
-                    declarations: [
-                        McNavbar,
-                        McNavbarContainer,
-                        McNavbarTitle,
-                        McNavbarItem,
-                        McNavbarBrand,
-                        McNavbarLogo
-                    ]
-                },] },
-    ];
+    McNavbarModule = __decorate([
+        core.NgModule({
+            imports: [
+                common.CommonModule,
+                a11y.A11yModule,
+                platform.PlatformModule,
+                McIconModule
+            ],
+            exports: [
+                McNavbar,
+                McNavbarContainer,
+                McNavbarTitle,
+                McNavbarItem,
+                McNavbarBrand,
+                McNavbarLogo
+            ],
+            declarations: [
+                McNavbar,
+                McNavbarContainer,
+                McNavbarTitle,
+                McNavbarItem,
+                McNavbarBrand,
+                McNavbarLogo
+            ]
+        })
+    ], McNavbarModule);
     return McNavbarModule;
 }());
 
@@ -3571,7 +2878,7 @@ var McProgressBar = /** @class */ (function (_super) {
         _this.id = "mc-progress-bar-" + idIterator++;
         _this.value = 0;
         _this.mode = 'determinate';
-        _this.color = ThemePalette.Primary;
+        _this.color = exports.ThemePalette.Primary;
         return _this;
     }
     Object.defineProperty(McProgressBar.prototype, "percentage", {
@@ -3581,49 +2888,56 @@ var McProgressBar = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    McProgressBar.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-progress-bar',
-                    template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
-                    styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    host: {
-                        class: 'mc-progress-bar',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McProgressBar.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
-    McProgressBar.propDecorators = {
-        id: [{ type: core.Input }],
-        value: [{ type: core.Input }],
-        mode: [{ type: core.Input }],
-        color: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McProgressBar.prototype, "id", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Number)
+    ], McProgressBar.prototype, "value", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McProgressBar.prototype, "mode", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McProgressBar.prototype, "color", void 0);
+    McProgressBar = __decorate([
+        core.Component({
+            selector: 'mc-progress-bar',
+            template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
+            styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None,
+            host: {
+                class: 'mc-progress-bar',
+                '[attr.id]': 'id'
+            }
+        }),
+        __metadata("design:paramtypes", [core.ElementRef])
+    ], McProgressBar);
     return McProgressBar;
 }(_McProgressBarMixinBase));
 
 var McProgressBarModule = /** @class */ (function () {
     function McProgressBarModule() {
     }
-    McProgressBarModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McProgressBar
-                    ],
-                    declarations: [
-                        McProgressBar
-                    ]
-                },] },
-    ];
+    McProgressBarModule = __decorate([
+        core.NgModule({
+            imports: [
+                common.CommonModule,
+                platform.PlatformModule
+            ],
+            exports: [
+                McProgressBar
+            ],
+            declarations: [
+                McProgressBar
+            ]
+        })
+    ], McProgressBarModule);
     return McProgressBarModule;
 }());
 
@@ -3645,7 +2959,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
         _this.id = "mc-progress-spinner-" + idIterator$1++;
         _this.value = 0;
         _this.mode = 'determinate';
-        _this.color = ThemePalette.Primary;
+        _this.color = exports.ThemePalette.Primary;
         return _this;
     }
     Object.defineProperty(McProgressSpinner.prototype, "percentage", {
@@ -3662,49 +2976,56 @@ var McProgressSpinner = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    McProgressSpinner.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-progress-spinner',
-                    template: "<div class=\"mc-progress-spinner__inner\" [ngClass]=\"{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}\"><svg focusable=\"false\" preserveAspectRatio=\"xMidYMid meet\" viewBox=\"0 0 100 100\" class=\"mc-progress-spinner__svg\"><circle cx=\"50%\" cy=\"50%\" r=\"42.5%\" class=\"mc-progress-spinner__circle\" [ngStyle]=\"{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}\"></circle></svg></div>",
-                    styles: ["@keyframes mc-progress-spinner-indeterminate{100%{transform:rotateZ(270deg)}}.mc-progress-spinner{display:inline-block;width:16px;height:16px;overflow:hidden}.mc-progress-spinner__inner{width:100%;height:100%;transform:rotateZ(-90deg)}.mc-progress-spinner__inner--indeterminate{animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite}.mc-progress-spinner__inner--indeterminate .mc-progress-spinner__circle{stroke-dashoffset:80%}.mc-progress-spinner__svg{width:100%;height:100%}.mc-progress-spinner__circle{fill:none;stroke:#000;stroke-dasharray:273%;stroke-width:13%;transition:stroke-dashoffset .3s;transform-origin:center center}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    host: {
-                        class: 'mc-progress-spinner',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McProgressSpinner.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
-    McProgressSpinner.propDecorators = {
-        id: [{ type: core.Input }],
-        value: [{ type: core.Input }],
-        mode: [{ type: core.Input }],
-        color: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McProgressSpinner.prototype, "id", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Number)
+    ], McProgressSpinner.prototype, "value", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McProgressSpinner.prototype, "mode", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McProgressSpinner.prototype, "color", void 0);
+    McProgressSpinner = __decorate([
+        core.Component({
+            selector: 'mc-progress-spinner',
+            template: "<div class=\"mc-progress-spinner__inner\" [ngClass]=\"{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}\"><svg focusable=\"false\" preserveAspectRatio=\"xMidYMid meet\" viewBox=\"0 0 100 100\" class=\"mc-progress-spinner__svg\"><circle cx=\"50%\" cy=\"50%\" r=\"42.5%\" class=\"mc-progress-spinner__circle\" [ngStyle]=\"{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}\"></circle></svg></div>",
+            styles: ["@keyframes mc-progress-spinner-indeterminate{100%{transform:rotateZ(270deg)}}.mc-progress-spinner{display:inline-block;width:16px;height:16px;overflow:hidden}.mc-progress-spinner__inner{width:100%;height:100%;transform:rotateZ(-90deg)}.mc-progress-spinner__inner--indeterminate{animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite}.mc-progress-spinner__inner--indeterminate .mc-progress-spinner__circle{stroke-dashoffset:80%}.mc-progress-spinner__svg{width:100%;height:100%}.mc-progress-spinner__circle{fill:none;stroke:#000;stroke-dasharray:273%;stroke-width:13%;transition:stroke-dashoffset .3s;transform-origin:center center}"],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None,
+            host: {
+                class: 'mc-progress-spinner',
+                '[attr.id]': 'id'
+            }
+        }),
+        __metadata("design:paramtypes", [core.ElementRef])
+    ], McProgressSpinner);
     return McProgressSpinner;
 }(_McProgressPinnerMixinBase));
 
 var McProgressSpinnerModule = /** @class */ (function () {
     function McProgressSpinnerModule() {
     }
-    McProgressSpinnerModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McProgressSpinner
-                    ],
-                    declarations: [
-                        McProgressSpinner
-                    ]
-                },] },
-    ];
+    McProgressSpinnerModule = __decorate([
+        core.NgModule({
+            imports: [
+                common.CommonModule,
+                platform.PlatformModule
+            ],
+            exports: [
+                McProgressSpinner
+            ],
+            declarations: [
+                McProgressSpinner
+            ]
+        })
+    ], McProgressSpinnerModule);
     return McProgressSpinnerModule;
 }());
 
@@ -3938,32 +3259,57 @@ var McRadioGroup = /** @class */ (function (_super) {
             });
         }
     };
-    McRadioGroup.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-radio-group',
-                    exportAs: 'mcRadioGroup',
-                    providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR],
-                    host: {
-                        role: 'radiogroup',
-                        class: 'mc-radio-group'
-                    },
-                    inputs: ['disabled']
-                },] },
-    ];
-    /** @nocollapse */
-    McRadioGroup.ctorParameters = function () { return [
-        { type: core.ChangeDetectorRef }
-    ]; };
-    McRadioGroup.propDecorators = {
-        name: [{ type: core.Input }],
-        labelPosition: [{ type: core.Input }],
-        value: [{ type: core.Input }],
-        selected: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        change: [{ type: core.Output }],
-        _radios: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], McRadioGroup.prototype, "name", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [Object])
+    ], McRadioGroup.prototype, "labelPosition", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], McRadioGroup.prototype, "value", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], McRadioGroup.prototype, "selected", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Object])
+    ], McRadioGroup.prototype, "disabled", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McRadioGroup.prototype, "required", null);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", core.EventEmitter)
+    ], McRadioGroup.prototype, "change", void 0);
+    __decorate([
+        core.ContentChildren(core.forwardRef(function () { return McRadioButton; }), { descendants: true }),
+        __metadata("design:type", core.QueryList)
+    ], McRadioGroup.prototype, "_radios", void 0);
+    McRadioGroup = __decorate([
+        core.Directive({
+            selector: 'mc-radio-group',
+            exportAs: 'mcRadioGroup',
+            providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR],
+            host: {
+                role: 'radiogroup',
+                class: 'mc-radio-group'
+            },
+            inputs: ['disabled']
+        }),
+        __metadata("design:paramtypes", [core.ChangeDetectorRef])
+    ], McRadioGroup);
     return McRadioGroup;
 }(_McRadioGroupMixinBase));
 // Boilerplate for applying mixins to McRadioButton.
@@ -4150,94 +3496,123 @@ var McRadioButton = /** @class */ (function (_super) {
     McRadioButton.prototype.emitChangeEvent = function () {
         this.change.emit(new McRadioChange(this, this._value));
     };
-    McRadioButton.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-radio-button',
-                    template: "<label [attr.for]=\"inputId\" class=\"mc-radio-label\" #label><input #input class=\"mc-radio-input cdk-visually-hidden\" type=\"radio\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [attr.name]=\"name\" [required]=\"required\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-describedby]=\"ariaDescribedby\" (change)=\"onInputChange($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></div></label>",
-                    styles: [".mc-radio-button{display:inline-block}.mc-radio-label{cursor:pointer;display:inline-flex;align-items:center;white-space:nowrap;vertical-align:middle}.mc-radio-label-content{display:inline-block;order:0;line-height:inherit;padding-right:0}[dir=rtl] .mc-radio-label-content{padding-right:26px;padding-left:0}.mc-radio-input{position:absolute;outline:0;opacity:0}.mc-radio-input+.mc-radio-label-content{position:relative;cursor:pointer;padding-left:26px}.mc-radio-input+.mc-radio-label-content:before{position:absolute;left:0;top:-1px;content:'';background:#fff;width:14px;height:14px;display:block;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2);border-width:1px;border-style:solid;border-radius:50%}.mc-radio-input+.mc-radio-label-content:after{content:'';top:4px;left:5px;width:6px;height:6px;border-radius:50%;position:absolute;opacity:0}.mc-radio-input:checked+.mc-radio-label-content:before{box-shadow:unset}.mc-radio-input:checked:hover+.mc-radio-label-content:after{opacity:1}.mc-radio-input:focus+.mc-radio-label-content:before{top:-2px;left:-1px;box-shadow:inset 0 0 0 1px #fff;border-width:2px}.mc-radio-input[disabled]{cursor:default}.mc-radio-input[disabled]+.mc-radio-label-content{cursor:default}"],
-                    inputs: ['color', 'tabIndex'],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    exportAs: 'mcRadioButton',
-                    host: {
-                        class: 'mc-radio-button',
-                        '[attr.id]': 'id',
-                        '[class.mc-radio-checked]': 'checked',
-                        '[class.mc-radio-disabled]': 'disabled',
-                        '(focus)': '_inputElement.nativeElement.focus()'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McRadioButton.ctorParameters = function () { return [
-        { type: McRadioGroup, decorators: [{ type: core.Optional }] },
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef },
-        { type: collections.UniqueSelectionDispatcher }
-    ]; };
-    McRadioButton.propDecorators = {
-        id: [{ type: core.Input }],
-        name: [{ type: core.Input }],
-        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
-        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
-        ariaDescribedby: [{ type: core.Input, args: ['aria-describedby',] }],
-        checked: [{ type: core.Input }],
-        value: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        labelPosition: [{ type: core.Input }],
-        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
-        change: [{ type: core.Output }],
-        isFocused: [{ type: core.Input }]
-    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McRadioButton.prototype, "id", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McRadioButton.prototype, "name", void 0);
+    __decorate([
+        core.Input('aria-label'),
+        __metadata("design:type", String)
+    ], McRadioButton.prototype, "ariaLabel", void 0);
+    __decorate([
+        core.Input('aria-labelledby'),
+        __metadata("design:type", String)
+    ], McRadioButton.prototype, "ariaLabelledby", void 0);
+    __decorate([
+        core.Input('aria-describedby'),
+        __metadata("design:type", String)
+    ], McRadioButton.prototype, "ariaDescribedby", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McRadioButton.prototype, "checked", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], McRadioButton.prototype, "value", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McRadioButton.prototype, "disabled", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McRadioButton.prototype, "required", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [Object])
+    ], McRadioButton.prototype, "labelPosition", null);
+    __decorate([
+        core.ViewChild('input'),
+        __metadata("design:type", core.ElementRef)
+    ], McRadioButton.prototype, "_inputElement", void 0);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", core.EventEmitter)
+    ], McRadioButton.prototype, "change", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean)
+    ], McRadioButton.prototype, "isFocused", void 0);
+    McRadioButton = __decorate([
+        core.Component({
+            selector: 'mc-radio-button',
+            template: "<label [attr.for]=\"inputId\" class=\"mc-radio-label\" #label><input #input class=\"mc-radio-input cdk-visually-hidden\" type=\"radio\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [attr.name]=\"name\" [required]=\"required\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-describedby]=\"ariaDescribedby\" (change)=\"onInputChange($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></div></label>",
+            styles: [".mc-radio-button{display:inline-block}.mc-radio-label{cursor:pointer;display:inline-flex;align-items:center;white-space:nowrap;vertical-align:middle}.mc-radio-label-content{display:inline-block;order:0;line-height:inherit;padding-right:0}[dir=rtl] .mc-radio-label-content{padding-right:26px;padding-left:0}.mc-radio-input{position:absolute;outline:0;opacity:0}.mc-radio-input+.mc-radio-label-content{position:relative;cursor:pointer;padding-left:26px}.mc-radio-input+.mc-radio-label-content:before{position:absolute;left:0;top:-1px;content:'';background:#fff;width:14px;height:14px;display:block;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2);border-width:1px;border-style:solid;border-radius:50%}.mc-radio-input+.mc-radio-label-content:after{content:'';top:4px;left:5px;width:6px;height:6px;border-radius:50%;position:absolute;opacity:0}.mc-radio-input:checked+.mc-radio-label-content:before{box-shadow:unset}.mc-radio-input:checked:hover+.mc-radio-label-content:after{opacity:1}.mc-radio-input:focus+.mc-radio-label-content:before{top:-2px;left:-1px;box-shadow:inset 0 0 0 1px #fff;border-width:2px}.mc-radio-input[disabled]{cursor:default}.mc-radio-input[disabled]+.mc-radio-label-content{cursor:default}"],
+            inputs: ['color', 'tabIndex'],
+            encapsulation: core.ViewEncapsulation.None,
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            exportAs: 'mcRadioButton',
+            host: {
+                class: 'mc-radio-button',
+                '[attr.id]': 'id',
+                '[class.mc-radio-checked]': 'checked',
+                '[class.mc-radio-disabled]': 'disabled',
+                '(focus)': '_inputElement.nativeElement.focus()'
+            }
+        }),
+        __param(0, core.Optional()),
+        __metadata("design:paramtypes", [McRadioGroup,
+            core.ElementRef,
+            core.ChangeDetectorRef,
+            collections.UniqueSelectionDispatcher])
+    ], McRadioButton);
     return McRadioButton;
 }(_McRadioButtonMixinBase));
 
 var McRadioModule = /** @class */ (function () {
     function McRadioModule() {
     }
-    McRadioModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, a11y.A11yModule, McCommonModule],
-                    exports: [McRadioGroup, McRadioButton, McCommonModule],
-                    declarations: [McRadioGroup, McRadioButton]
-                },] },
-    ];
+    McRadioModule = __decorate([
+        core.NgModule({
+            imports: [common.CommonModule, a11y.A11yModule, McCommonModule],
+            exports: [McRadioGroup, McRadioButton, McCommonModule],
+            declarations: [McRadioGroup, McRadioButton]
+        })
+    ], McRadioModule);
     return McRadioModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @template T
- */
 var McTreeNodeDef = /** @class */ (function (_super) {
     __extends(McTreeNodeDef, _super);
     function McTreeNodeDef() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    McTreeNodeDef.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcTreeNodeDef]',
-                    inputs: ['when: mcTreeNodeDefWhen'],
-                    providers: [{ provide: tree.CdkTreeNodeDef, useExisting: McTreeNodeDef }]
-                },] },
-    ];
-    McTreeNodeDef.propDecorators = {
-        data: [{ type: core.Input, args: ['mcTreeNode',] }]
-    };
+    McTreeNodeDef_1 = McTreeNodeDef;
+    var McTreeNodeDef_1;
+    __decorate([
+        core.Input('mcTreeNode'),
+        __metadata("design:type", Object)
+    ], McTreeNodeDef.prototype, "data", void 0);
+    McTreeNodeDef = McTreeNodeDef_1 = __decorate([
+        core.Directive({
+            selector: '[mcTreeNodeDef]',
+            inputs: ['when: mcTreeNodeDefWhen'],
+            providers: [{ provide: tree.CdkTreeNodeDef, useExisting: McTreeNodeDef_1 }]
+        })
+    ], McTreeNodeDef);
     return McTreeNodeDef;
 }(tree.CdkTreeNodeDef));
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
- * @template T
- */
 var McTreeNodePadding = /** @class */ (function (_super) {
     __extends(McTreeNodePadding, _super);
     function McTreeNodePadding() {
@@ -4247,61 +3622,45 @@ var McTreeNodePadding = /** @class */ (function (_super) {
         _this._indent = 16;
         return _this;
     }
+    McTreeNodePadding_1 = McTreeNodePadding;
     Object.defineProperty(McTreeNodePadding.prototype, "leftPadding", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return (this._withIcon ? 0 : this._iconWidth) + this._baseLeftPadding;
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * @return {?}
-     */
-    McTreeNodePadding.prototype._paddingIndent = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
+    McTreeNodePadding.prototype._paddingIndent = function () {
         var nodeLevel = (this._treeNode.data && this._tree.treeControl.getLevel)
             ? this._tree.treeControl.getLevel(this._treeNode.data)
             : null;
-        /** @type {?} */
         var level = this._level || nodeLevel;
         return level ? (level * this._indent) + this.leftPadding + "px" : this._baseLeftPadding + "px";
     };
-    /**
-     * @return {?}
-     */
-    McTreeNodePadding.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
+    McTreeNodePadding.prototype.ngOnInit = function () {
         this._withIcon = this._tree.treeControl.isExpandable(this._treeNode.data);
         this._setPadding();
     };
-    McTreeNodePadding.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcTreeNodePadding]',
-                    providers: [{ provide: tree.CdkTreeNodePadding, useExisting: McTreeNodePadding }]
-                },] },
-    ];
-    McTreeNodePadding.propDecorators = {
-        level: [{ type: core.Input, args: ['mcTreeNodePadding',] }],
-        indent: [{ type: core.Input, args: ['mcTreeNodePaddingIndent',] }]
-    };
+    var McTreeNodePadding_1;
+    __decorate([
+        core.Input('mcTreeNodePadding'),
+        __metadata("design:type", Number)
+    ], McTreeNodePadding.prototype, "level", void 0);
+    __decorate([
+        core.Input('mcTreeNodePaddingIndent'),
+        __metadata("design:type", Number)
+    ], McTreeNodePadding.prototype, "indent", void 0);
+    McTreeNodePadding = McTreeNodePadding_1 = __decorate([
+        core.Directive({
+            selector: '[mcTreeNodePadding]',
+            providers: [{ provide: tree.CdkTreeNodePadding, useExisting: McTreeNodePadding_1 }]
+        })
+    ], McTreeNodePadding);
     return McTreeNodePadding;
 }(tree.CdkTreeNodePadding));
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
  * Wrapper for the CdkTree node with Material design styles.
- * @template T
  */
 var McTreeNodeOption = /** @class */ (function (_super) {
     __extends(McTreeNodeOption, _super);
@@ -4315,19 +3674,12 @@ var McTreeNodeOption = /** @class */ (function (_super) {
         _this._selected = false;
         return _this;
     }
+    McTreeNodeOption_1 = McTreeNodeOption;
     Object.defineProperty(McTreeNodeOption.prototype, "disabled", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._disabled;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            /** @type {?} */
+        set: function (value) {
             var newValue = toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
@@ -4337,18 +3689,10 @@ var McTreeNodeOption = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McTreeNodeOption.prototype, "selected", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this.treeSelection.selectedOptions && this.treeSelection.selectedOptions.isSelected(this) || false;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            /** @type {?} */
+        set: function (value) {
             var isSelected = toBoolean(value);
             if (isSelected !== this._selected) {
                 this.setSelected(isSelected);
@@ -4358,34 +3702,14 @@ var McTreeNodeOption = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @return {?}
-     */
-    McTreeNodeOption.prototype.focus = /**
-     * @return {?}
-     */
-    function () {
+    McTreeNodeOption.prototype.focus = function () {
         this._elementRef.nativeElement.focus();
         this.treeSelection.setFocusedOption(this);
     };
-    /**
-     * @return {?}
-     */
-    McTreeNodeOption.prototype.toggle = /**
-     * @return {?}
-     */
-    function () {
+    McTreeNodeOption.prototype.toggle = function () {
         this.selected = !this.selected;
     };
-    /**
-     * @param {?} selected
-     * @return {?}
-     */
-    McTreeNodeOption.prototype.setSelected = /**
-     * @param {?} selected
-     * @return {?}
-     */
-    function (selected) {
+    McTreeNodeOption.prototype.setSelected = function (selected) {
         if (this._selected === selected || !this.treeSelection.selectedOptions) {
             return;
         }
@@ -4398,81 +3722,64 @@ var McTreeNodeOption = /** @class */ (function (_super) {
         }
         // this._changeDetector.markForCheck();
     };
-    /**
-     * @return {?}
-     */
-    McTreeNodeOption.prototype._getHeight = /**
-     * @return {?}
-     */
-    function () {
+    McTreeNodeOption.prototype._getHeight = function () {
         return this._elementRef.nativeElement.getClientRects()[0].height;
     };
-    /**
-     * @return {?}
-     */
-    McTreeNodeOption.prototype._handleFocus = /**
-     * @return {?}
-     */
-    function () {
+    McTreeNodeOption.prototype._handleFocus = function () {
         if (this.disabled || this._hasFocus) {
             return;
         }
         this._hasFocus = true;
     };
-    /**
-     * @return {?}
-     */
-    McTreeNodeOption.prototype._handleBlur = /**
-     * @return {?}
-     */
-    function () {
+    McTreeNodeOption.prototype._handleBlur = function () {
         this._hasFocus = false;
     };
-    /**
-     * @return {?}
-     */
-    McTreeNodeOption.prototype._handleClick = /**
-     * @return {?}
-     */
-    function () {
+    McTreeNodeOption.prototype._handleClick = function () {
         if (this.disabled) {
             return;
         }
         this.treeSelection.setFocusedOption(this);
     };
-    McTreeNodeOption.decorators = [
-        { type: core.Directive, args: [{
-                    exportAs: 'mcTreeNodeOption',
-                    selector: 'mc-tree-node-option',
-                    host: {
-                        tabindex: '-1',
-                        '[class.mc-selected]': 'selected',
-                        '[class.mc-focused]': '_hasFocus',
-                        '[attr.aria-expanded]': 'isExpanded',
-                        '[attr.aria-level]': 'role === "treeitem" ? level : null',
-                        class: 'mc-tree-node',
-                        '(focus)': '_handleFocus()',
-                        '(blur)': '_handleBlur()',
-                        '(click)': '_handleClick()'
-                    },
-                    providers: [
-                        { provide: tree.CdkTreeNode, useExisting: McTreeNodeOption }
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    McTreeNodeOption.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: McTreeSelection, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McTreeSelection; }),] }] }
-    ]; };
-    McTreeNodeOption.propDecorators = {
-        role: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        selected: [{ type: core.Input }]
-    };
+    var McTreeNodeOption_1;
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McTreeNodeOption.prototype, "role", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], McTreeNodeOption.prototype, "disabled", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McTreeNodeOption.prototype, "selected", null);
+    McTreeNodeOption = McTreeNodeOption_1 = __decorate([
+        core.Directive({
+            exportAs: 'mcTreeNodeOption',
+            selector: 'mc-tree-node-option',
+            host: {
+                tabindex: '-1',
+                '[class.mc-selected]': 'selected',
+                '[class.mc-focused]': '_hasFocus',
+                '[attr.aria-expanded]': 'isExpanded',
+                '[attr.aria-level]': 'role === "treeitem" ? level : null',
+                class: 'mc-tree-node',
+                '(focus)': '_handleFocus()',
+                '(blur)': '_handleBlur()',
+                '(click)': '_handleClick()'
+            },
+            providers: [
+                { provide: tree.CdkTreeNode, useExisting: McTreeNodeOption_1 }
+            ]
+        }),
+        __param(1, core.Inject(core.forwardRef(function () { return McTreeSelection; }))),
+        __metadata("design:paramtypes", [core.ElementRef,
+            McTreeSelection])
+    ], McTreeNodeOption);
     return McTreeNodeOption;
 }(tree.CdkTreeNode));
-/** @type {?} */
 var _McTreeSelectionBase = mixinTabIndex(mixinDisabled(tree.CdkTree));
 var McTreeNavigationChange = /** @class */ (function () {
     function McTreeNavigationChange(source, option) {
@@ -4488,9 +3795,6 @@ var McTreeSelectionChange = /** @class */ (function () {
     }
     return McTreeSelectionChange;
 }());
-/**
- * @template T
- */
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
     function McTreeSelection(_elementRef, _differs, _changeDetectorRef, tabIndex, multiple, autoSelect, noUnselect) {
@@ -4506,19 +3810,12 @@ var McTreeSelection = /** @class */ (function (_super) {
         _this.selectedOptions = new collections.SelectionModel(_this.multiple);
         return _this;
     }
+    McTreeSelection_1 = McTreeSelection;
     Object.defineProperty(McTreeSelection.prototype, "disabled", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._disabled;
         },
-        set: /**
-         * @param {?} rawValue
-         * @return {?}
-         */
-        function (rawValue) {
-            /** @type {?} */
+        set: function (rawValue) {
             var value = toBoolean(rawValue);
             if (this._disabled !== value) {
                 this._disabled = value;
@@ -4533,16 +3830,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    McTreeSelection.prototype._onKeyDown = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        /** @type {?} */
+    McTreeSelection.prototype._onKeyDown = function (event) {
         var keyCode = event.keyCode;
         this.withShift = event.shiftKey;
         this.withCtrl = event.ctrlKey;
@@ -4584,44 +3872,22 @@ var McTreeSelection = /** @class */ (function (_super) {
                 this._keyManager.onKeydown(event);
         }
     };
-    /**
-     * @return {?}
-     */
-    McTreeSelection.prototype.ngAfterContentInit = /**
-     * @return {?}
-     */
-    function () {
+    McTreeSelection.prototype.ngAfterContentInit = function () {
         this._keyManager = new a11y.FocusKeyManager(this.options)
             .withTypeAhead()
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
     };
-    /**
-     * @return {?}
-     */
-    McTreeSelection.prototype.updateScrollSize = /**
-     * @return {?}
-     */
-    function () {
+    McTreeSelection.prototype.updateScrollSize = function () {
         if (!this.options.first) {
             return;
         }
         this._keyManager.withScrollSize(Math.floor(this._getHeight() / this.options.first._getHeight()));
     };
-    /**
-     * @param {?} option
-     * @return {?}
-     */
-    McTreeSelection.prototype.setFocusedOption = /**
-     * @param {?} option
-     * @return {?}
-     */
-    function (option) {
+    McTreeSelection.prototype.setFocusedOption = function (option) {
         this._keyManager.updateActiveItem(option);
         if (this.withShift && this.multiple) {
-            /** @type {?} */
             var previousIndex_1 = this._keyManager.previousActiveItemIndex;
-            /** @type {?} */
             var activeIndex_1 = this._keyManager.activeItemIndex;
             if (previousIndex_1 < activeIndex_1) {
                 this.options.forEach(function (item, index) {
@@ -4655,17 +3921,9 @@ var McTreeSelection = /** @class */ (function (_super) {
         this._emitNavigationEvent(option);
     };
     // Toggles the selected state of the currently focused option.
-    /**
-     * @return {?}
-     */
-    McTreeSelection.prototype.toggleFocusedOption = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
+    McTreeSelection.prototype.toggleFocusedOption = function () {
         var focusedIndex = this._keyManager.activeItemIndex;
         if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
-            /** @type {?} */
             var focusedOption = this.options.toArray()[focusedIndex];
             if (focusedOption && this._canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
@@ -4674,34 +3932,17 @@ var McTreeSelection = /** @class */ (function (_super) {
             }
         }
     };
-    /**
-     * @param {?} data
-     * @param {?=} dataDiffer
-     * @param {?=} viewContainer
-     * @param {?=} parentData
-     * @return {?}
-     */
-    McTreeSelection.prototype.renderNodeChanges = /**
-     * @param {?} data
-     * @param {?=} dataDiffer
-     * @param {?=} viewContainer
-     * @param {?=} parentData
-     * @return {?}
-     */
-    function (data, dataDiffer, viewContainer, parentData) {
+    McTreeSelection.prototype.renderNodeChanges = function (data, dataDiffer, viewContainer, parentData) {
         if (dataDiffer === void 0) { dataDiffer = this._dataDiffer; }
         if (viewContainer === void 0) { viewContainer = this._nodeOutlet.viewContainer; }
         _super.prototype.renderNodeChanges.call(this, data, dataDiffer, viewContainer, parentData);
-        /** @type {?} */
         var arrayOfInstances = [];
         viewContainer._embeddedViews.forEach(function (view) {
-            /** @type {?} */
             var viewDef = view.def;
             viewDef.nodes.forEach(function (node) {
                 if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
-                    /** @type {?} */
                     var nodeData = view.nodes[node.nodeIndex];
-                    arrayOfInstances.push(/** @type {?} */ (nodeData.instance));
+                    arrayOfInstances.push(nodeData.instance);
                 }
             });
         });
@@ -4711,104 +3952,76 @@ var McTreeSelection = /** @class */ (function (_super) {
         }
         this.updateScrollSize();
     };
-    /**
-     * @return {?}
-     */
-    McTreeSelection.prototype._getHeight = /**
-     * @return {?}
-     */
-    function () {
+    McTreeSelection.prototype._getHeight = function () {
         return this._elementRef.nativeElement.getClientRects()[0].height;
     };
-    /**
-     * @param {?} option
-     * @return {?}
-     */
-    McTreeSelection.prototype._emitNavigationEvent = /**
-     * @param {?} option
-     * @return {?}
-     */
-    function (option) {
+    McTreeSelection.prototype._emitNavigationEvent = function (option) {
         this.navigationChange.emit(new McTreeNavigationChange(this, option));
     };
-    /**
-     * @param {?} option
-     * @return {?}
-     */
-    McTreeSelection.prototype._emitChangeEvent = /**
-     * @param {?} option
-     * @return {?}
-     */
-    function (option) {
+    McTreeSelection.prototype._emitChangeEvent = function (option) {
         this.selectionChange.emit(new McTreeNavigationChange(this, option));
     };
     /**
      * Utility to ensure all indexes are valid.
-     * @param {?} index The index to be checked.
-     * @return {?} True if the index is valid for our list of options.
+     * @param index The index to be checked.
+     * @returns True if the index is valid for our list of options.
      */
-    McTreeSelection.prototype._isValidIndex = /**
-     * Utility to ensure all indexes are valid.
-     * @param {?} index The index to be checked.
-     * @return {?} True if the index is valid for our list of options.
-     */
-    function (index) {
+    McTreeSelection.prototype._isValidIndex = function (index) {
         return index >= 0 && index < this.options.length;
     };
-    /**
-     * @param {?} option
-     * @return {?}
-     */
-    McTreeSelection.prototype._canDeselectLast = /**
-     * @param {?} option
-     * @return {?}
-     */
-    function (option) {
+    McTreeSelection.prototype._canDeselectLast = function (option) {
         return !(this.noUnselect && this.selectedOptions.selected.length === 1 && option.selected);
     };
-    McTreeSelection.decorators = [
-        { type: core.Component, args: [{
-                    exportAs: 'mcTreeSelection',
-                    selector: 'mc-tree-selection',
-                    template: "<ng-container cdkTreeNodeOutlet></ng-container>",
-                    host: {
-                        '[tabIndex]': 'tabIndex',
-                        class: 'mc-tree-selection',
-                        role: 'tree-selection',
-                        '(keydown)': '_onKeyDown($event)',
-                        '(window:resize)': 'updateScrollSize()'
-                    },
-                    styles: [".mc-tree-selection{display:block;border:1px solid red}.mc-tree-node{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-node>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-node:focus{outline:0}.mc-tree-node:not([disabled]){cursor:pointer}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    providers: [{ provide: tree.CdkTree, useExisting: McTreeSelection }]
-                },] },
-    ];
-    /** @nocollapse */
-    McTreeSelection.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.IterableDiffers },
-        { type: core.ChangeDetectorRef },
-        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] }
-    ]; };
-    McTreeSelection.propDecorators = {
-        _nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet,] }],
-        options: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McTreeNodeOption; }),] }],
-        disabled: [{ type: core.Input }],
-        navigationChange: [{ type: core.Output }],
-        selectionChange: [{ type: core.Output }]
-    };
+    var McTreeSelection_1;
+    __decorate([
+        core.ViewChild(tree.CdkTreeNodeOutlet),
+        __metadata("design:type", tree.CdkTreeNodeOutlet)
+    ], McTreeSelection.prototype, "_nodeOutlet", void 0);
+    __decorate([
+        core.ContentChildren(core.forwardRef(function () { return McTreeNodeOption; })),
+        __metadata("design:type", core.QueryList)
+    ], McTreeSelection.prototype, "options", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McTreeSelection.prototype, "disabled", null);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", Object)
+    ], McTreeSelection.prototype, "navigationChange", void 0);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", Object)
+    ], McTreeSelection.prototype, "selectionChange", void 0);
+    McTreeSelection = McTreeSelection_1 = __decorate([
+        core.Component({
+            exportAs: 'mcTreeSelection',
+            selector: 'mc-tree-selection',
+            template: "<ng-container cdkTreeNodeOutlet></ng-container>",
+            host: {
+                '[tabIndex]': 'tabIndex',
+                class: 'mc-tree-selection',
+                role: 'tree-selection',
+                '(keydown)': '_onKeyDown($event)',
+                '(window:resize)': 'updateScrollSize()'
+            },
+            styles: [".mc-tree-selection{display:block;border:1px solid red}.mc-tree-node{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-node>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-node:focus{outline:0}.mc-tree-node:not([disabled]){cursor:pointer}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
+            encapsulation: core.ViewEncapsulation.None,
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            providers: [{ provide: tree.CdkTree, useExisting: McTreeSelection_1 }]
+        }),
+        __param(3, core.Attribute('tabindex')),
+        __param(4, core.Attribute('multiple')),
+        __param(5, core.Attribute('auto-select')),
+        __param(6, core.Attribute('no-unselect')),
+        __metadata("design:paramtypes", [core.ElementRef,
+            core.IterableDiffers,
+            core.ChangeDetectorRef, String, String, String, String])
+    ], McTreeSelection);
     return McTreeSelection;
 }(_McTreeSelectionBase));
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/** @type {?} */
 var MC_TREE_DIRECTIVES = [
     McTreeNodeDef,
     McTreeNodePadding,
@@ -4818,21 +4031,17 @@ var MC_TREE_DIRECTIVES = [
 var McTreeModule = /** @class */ (function () {
     function McTreeModule() {
     }
-    McTreeModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, tree.CdkTreeModule],
-                    exports: MC_TREE_DIRECTIVES,
-                    declarations: MC_TREE_DIRECTIVES
-                },] },
-    ];
+    McTreeModule = __decorate([
+        core.NgModule({
+            imports: [common.CommonModule, tree.CdkTreeModule],
+            exports: MC_TREE_DIRECTIVES,
+            declarations: MC_TREE_DIRECTIVES
+        })
+    ], McTreeModule);
     return McTreeModule;
 }());
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
  * Tree flattener to convert a normal type of node to node with children & level information.
  * Transform nested nodes of type `T` to flattened nodes of type `F`.
  *
@@ -4865,73 +4074,21 @@ var McTreeModule = /** @class */ (function () {
  *   level: 2
  * }
  * and the output flattened type is `F` with additional information.
- * @template T, F
  */
-var   /**
- * Tree flattener to convert a normal type of node to node with children & level information.
- * Transform nested nodes of type `T` to flattened nodes of type `F`.
- *
- * For example, the input data of type `T` is nested, and contains its children data:
- *   SomeNode: {
- *     key: 'Fruits',
- *     children: [
- *       NodeOne: {
- *         key: 'Apple',
- *       },
- *       NodeTwo: {
- *        key: 'Pear',
- *      }
- *    ]
- *  }
- *  After flattener flatten the tree, the structure will become
- *  SomeNode: {
- *    key: 'Fruits',
- *    expandable: true,
- *    level: 1
- *  },
- *  NodeOne: {
- *    key: 'Apple',
- *    expandable: false,
- *    level: 2
- *  },
- *  NodeTwo: {
- *   key: 'Pear',
- *   expandable: false,
- *   level: 2
- * }
- * and the output flattened type is `F` with additional information.
- * @template T, F
- */
-McTreeFlattener = /** @class */ (function () {
+var McTreeFlattener = /** @class */ (function () {
     function McTreeFlattener(transformFunction, getLevel, isExpandable, getChildren) {
         this.transformFunction = transformFunction;
         this.getLevel = getLevel;
         this.isExpandable = isExpandable;
         this.getChildren = getChildren;
     }
-    /**
-     * @param {?} node
-     * @param {?} level
-     * @param {?} resultNodes
-     * @param {?} parentMap
-     * @return {?}
-     */
-    McTreeFlattener.prototype._flattenNode = /**
-     * @param {?} node
-     * @param {?} level
-     * @param {?} resultNodes
-     * @param {?} parentMap
-     * @return {?}
-     */
-    function (node, level, resultNodes, parentMap) {
+    McTreeFlattener.prototype._flattenNode = function (node, level, resultNodes, parentMap) {
         var _this = this;
-        /** @type {?} */
         var flatNode = this.transformFunction(node, level);
         resultNodes.push(flatNode);
         if (this.isExpandable(flatNode)) {
             this.getChildren(node).pipe(operators.take(1)).subscribe(function (children) {
                 children.forEach(function (child, index) {
-                    /** @type {?} */
                     var childParentMap = parentMap.slice();
                     childParentMap.push(index !== children.length - 1);
                     _this._flattenNode(child, level + 1, resultNodes, childParentMap);
@@ -4945,23 +4102,8 @@ McTreeFlattener = /** @class */ (function () {
      * Please note that type T may be nested, and the length of `structuredData` may be different
      * from that of returned list `F[]`.
      */
-    /**
-     * Flatten a list of node type T to flattened version of node F.
-     * Please note that type T may be nested, and the length of `structuredData` may be different
-     * from that of returned list `F[]`.
-     * @param {?} structuredData
-     * @return {?}
-     */
-    McTreeFlattener.prototype.flattenNodes = /**
-     * Flatten a list of node type T to flattened version of node F.
-     * Please note that type T may be nested, and the length of `structuredData` may be different
-     * from that of returned list `F[]`.
-     * @param {?} structuredData
-     * @return {?}
-     */
-    function (structuredData) {
+    McTreeFlattener.prototype.flattenNodes = function (structuredData) {
         var _this = this;
-        /** @type {?} */
         var resultNodes = [];
         structuredData.forEach(function (node) { return _this._flattenNode(node, 0, resultNodes, []); });
         return resultNodes;
@@ -4970,29 +4112,12 @@ McTreeFlattener = /** @class */ (function () {
      * Expand flattened node with current expansion status.
      * The returned list may have different length.
      */
-    /**
-     * Expand flattened node with current expansion status.
-     * The returned list may have different length.
-     * @param {?} nodes
-     * @param {?} treeControl
-     * @return {?}
-     */
-    McTreeFlattener.prototype.expandFlattenedNodes = /**
-     * Expand flattened node with current expansion status.
-     * The returned list may have different length.
-     * @param {?} nodes
-     * @param {?} treeControl
-     * @return {?}
-     */
-    function (nodes, treeControl) {
+    McTreeFlattener.prototype.expandFlattenedNodes = function (nodes, treeControl) {
         var _this = this;
-        /** @type {?} */
         var results = [];
-        /** @type {?} */
         var currentExpand = [];
         currentExpand[0] = true;
         nodes.forEach(function (node) {
-            /** @type {?} */
             var expand = true;
             for (var i = 0; i <= _this.getLevel(node); i++) {
                 expand = expand && currentExpand[i];
@@ -5014,17 +4139,8 @@ McTreeFlattener = /** @class */ (function () {
  * to `McTree`.
  * The nested tree nodes of type `T` are flattened through `MсTreeFlattener`, and converted
  * to type `F` for `McTree` to consume.
- * @template T, F
  */
-var   /**
- * Data source for flat tree.
- * The data source need to handle expansion/collapsion of the tree node and change the data feed
- * to `McTree`.
- * The nested tree nodes of type `T` are flattened through `MсTreeFlattener`, and converted
- * to type `F` for `McTree` to consume.
- * @template T, F
- */
-McTreeFlatDataSource = /** @class */ (function (_super) {
+var McTreeFlatDataSource = /** @class */ (function (_super) {
     __extends(McTreeFlatDataSource, _super);
     function McTreeFlatDataSource(treeControl, treeFlattener, initialData) {
         if (initialData === void 0) { initialData = []; }
@@ -5037,17 +4153,10 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(McTreeFlatDataSource.prototype, "data", {
-        get: /**
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._data.value;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._data.next(value);
             this._flattenedData.next(this.treeFlattener.flattenNodes(this.data));
             this.treeControl.dataNodes = this._flattenedData.value;
@@ -5055,20 +4164,11 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @param {?} collectionViewer
-     * @return {?}
-     */
-    McTreeFlatDataSource.prototype.connect = /**
-     * @param {?} collectionViewer
-     * @return {?}
-     */
-    function (collectionViewer) {
+    McTreeFlatDataSource.prototype.connect = function (collectionViewer) {
         var _this = this;
-        /** @type {?} */
         var changes = [
             collectionViewer.viewChange,
-            /** @type {?} */ ((this.treeControl.expansionModel.onChange)),
+            this.treeControl.expansionModel.onChange,
             this._flattenedData
         ];
         return rxjs.merge.apply(void 0, changes).pipe(operators.map(function () {
@@ -5076,37 +4176,19 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
             return _this._expandedData.value;
         }));
     };
-    /**
-     * @return {?}
-     */
-    McTreeFlatDataSource.prototype.disconnect = /**
-     * @return {?}
-     */
-    function () {
+    McTreeFlatDataSource.prototype.disconnect = function () {
         // no op
     };
     return McTreeFlatDataSource;
 }(collections.DataSource));
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/**
  * Data source for nested tree.
  *
  * The data source for nested tree doesn't have to consider node flattener, or the way to expand
  * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
- * @template T
  */
-var   /**
- * Data source for nested tree.
- *
- * The data source for nested tree doesn't have to consider node flattener, or the way to expand
- * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
- * @template T
- */
-McTreeNestedDataSource = /** @class */ (function (_super) {
+var McTreeNestedDataSource = /** @class */ (function (_super) {
     __extends(McTreeNestedDataSource, _super);
     function McTreeNestedDataSource() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -5117,52 +4199,25 @@ McTreeNestedDataSource = /** @class */ (function (_super) {
         /**
          * Data for the nested tree
          */
-        get: /**
-         * Data for the nested tree
-         * @return {?}
-         */
-        function () {
+        get: function () {
             return this._data.value;
         },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        set: function (value) {
             this._data.next(value);
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * @param {?} collectionViewer
-     * @return {?}
-     */
-    McTreeNestedDataSource.prototype.connect = /**
-     * @param {?} collectionViewer
-     * @return {?}
-     */
-    function (collectionViewer) {
+    McTreeNestedDataSource.prototype.connect = function (collectionViewer) {
         var _this = this;
         return rxjs.merge.apply(void 0, [collectionViewer.viewChange, this._data]).pipe(operators.map(function () { return _this.data; }));
     };
-    /**
-     * @return {?}
-     */
-    McTreeNestedDataSource.prototype.disconnect = /**
-     * @return {?}
-     */
-    function () {
+    McTreeNestedDataSource.prototype.disconnect = function () {
         // no op
     };
     return McTreeNestedDataSource;
 }(collections.DataSource));
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
- */
-/** @type {?} */
 var VERSION = new core.Version('0.0.1');
 
 exports.VERSION = VERSION;
@@ -5178,8 +4233,6 @@ exports._McButtonMixinBase = _McButtonMixinBase;
 exports.McButton = McButton;
 exports.McAnchor = McAnchor;
 exports.McIconButton = McIconButton;
-exports.McLinkModule = McLinkModule;
-exports.McLink = McLink;
 exports.MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = MC_CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.McCheckboxChange = McCheckboxChange;
 exports.McCheckboxBase = McCheckboxBase;
@@ -5196,7 +4249,6 @@ exports.McCommonModule = McCommonModule;
 exports.MC_SANITY_CHECKS = MC_SANITY_CHECKS;
 exports.mixinDisabled = mixinDisabled;
 exports.mixinColor = mixinColor;
-exports.ThemePalette = ThemePalette;
 exports.mixinTabIndex = mixinTabIndex;
 exports.mixinErrorState = mixinErrorState;
 exports.McLine = McLine;
@@ -5241,6 +4293,8 @@ exports.McListSelectionChange = McListSelectionChange;
 exports.McListSelectionBase = McListSelectionBase;
 exports._McListSelectionMixinBase = _McListSelectionMixinBase;
 exports.McListSelection = McListSelection;
+exports.McLinkModule = McLinkModule;
+exports.McLink = McLink;
 exports.McNavbarModule = McNavbarModule;
 exports.McNavbarLogo = McNavbarLogo;
 exports.McNavbarBrand = McNavbarBrand;

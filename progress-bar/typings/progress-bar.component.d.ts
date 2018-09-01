@@ -5,7 +5,7 @@ export declare class McProgressBarBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McProgressBarMixinBase: (new (...args: any[]) => CanColor) & typeof McProgressBarBase;
+export declare const _McProgressBarMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanColor> & typeof McProgressBarBase;
 export declare class McProgressBar extends _McProgressBarMixinBase implements CanColor {
     id: string;
     value: number;

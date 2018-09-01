@@ -45,7 +45,7 @@ export declare class McListSelectionChange {
 }
 export declare class McListSelectionBase {
 }
-export declare const _McListSelectionMixinBase: (new (...args: any[]) => CanDisable) & typeof McListSelectionBase;
+export declare const _McListSelectionMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McListSelectionBase;
 export declare class McListSelection extends _McListSelectionMixinBase implements IFocusableOption, CanDisable, AfterContentInit, ControlValueAccessor {
     private _element;
     _keyManager: FocusKeyManager<McListOption>;
@@ -82,14 +82,14 @@ export declare class McListSelection extends _McListSelectionMixinBase implement
     _onKeyDown(event: KeyboardEvent): void;
     _reportValueChange(): void;
     _emitChangeEvent(option: McListOption): void;
-    private _getOptionByValue(value);
-    private _setOptionsFromValues(values);
+    private _getOptionByValue;
+    private _setOptionsFromValues;
     /**
      * Utility to ensure all indexes are valid.
      * @param index The index to be checked.
      * @returns True if the index is valid for our list of options.
      */
-    private _isValidIndex(index);
-    private _getOptionIndex(option);
+    private _isValidIndex;
+    private _getOptionIndex;
     private _onChange;
 }

@@ -21,7 +21,7 @@ export declare enum TransitionCheckState {
     /** The state representing the component when it's becoming unchecked. */
     Unchecked = 2,
     /** The state representing the component when it's becoming indeterminate. */
-    Indeterminate = 3,
+    Indeterminate = 3
 }
 /** Change event object emitted by McCheckbox. */
 export declare class McCheckboxChange {
@@ -35,7 +35,7 @@ export declare class McCheckboxBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McCheckboxMixinBase: (new (...args: any[]) => HasTabIndex) & (new (...args: any[]) => CanColor) & (new (...args: any[]) => CanDisable) & typeof McCheckboxBase;
+export declare const _McCheckboxMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<HasTabIndex> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanColor> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McCheckboxBase;
 /**
  * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
  * and exposes a similar API. A McCheckbox can be either checked, unchecked, indeterminate, or
@@ -113,10 +113,10 @@ export declare class McCheckbox extends _McCheckboxMixinBase implements ControlV
     registerOnTouched(fn: any): void;
     setDisabledState(isDisabled: boolean): void;
     _getAriaChecked(): 'true' | 'false' | 'mixed';
-    private _transitionCheckState(newState);
-    private _emitChangeEvent();
+    private _transitionCheckState;
+    private _emitChangeEvent;
     /** Function is called whenever the focus changes for the input element. */
-    private _onInputFocusChange(focusOrigin);
+    private _onInputFocusChange;
     /** Toggles the `checked` state of the checkbox. */
     toggle(): void;
     /**

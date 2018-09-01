@@ -13,8 +13,8 @@ export declare class McCommonModule {
     private _document;
     private _window;
     constructor(_sanityChecksEnabled: boolean);
-    private _areChecksEnabled();
-    private _isTestEnv();
-    private _checkDoctypeIsDefined();
-    private _checkThemeIsPresent();
+    private _areChecksEnabled;
+    private _isTestEnv;
+    private _checkDoctypeIsDefined;
+    private _checkThemeIsPresent;
 }

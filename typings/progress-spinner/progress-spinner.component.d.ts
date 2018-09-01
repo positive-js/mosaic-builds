@@ -5,7 +5,7 @@ export declare class McProgressSpinnerBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McProgressPinnerMixinBase: (new (...args: any[]) => CanColor) & typeof McProgressSpinnerBase;
+export declare const _McProgressPinnerMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanColor> & typeof McProgressSpinnerBase;
 export declare class McProgressSpinner extends _McProgressPinnerMixinBase implements CanColor {
     id: string;
     value: number;
