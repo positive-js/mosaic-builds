@@ -2542,6 +2542,7 @@ var McNavbarItem = /** @class */ (function (_super) {
     };
     McNavbarItem.prototype.handleKeydown = function ($event) {
         var isNavbarItem = $event.target.classList.contains(MC_NAVBAR_ITEM);
+        // tslint:disable-next-line
         if (this.hasDropdownContent && $event.keyCode === keycodes.SPACE && isNavbarItem) {
             this.toggleDropdown();
         }

@@ -109,6 +109,7 @@ let McNavbarItem = class McNavbarItem extends _McNavbarMixinBase {
     }
     handleKeydown($event) {
         const isNavbarItem = $event.target.classList.contains(MC_NAVBAR_ITEM);
+        // tslint:disable-next-line
         if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {
             this.toggleDropdown();
         }

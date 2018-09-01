@@ -32,7 +32,6 @@ export declare class McNavbarItem extends _McNavbarMixinBase implements OnInit, 
     isCollapsed: boolean;
     private _subscription;
     private _focusMonitor$;
-    private _lastFocusedElement;
     private readonly _dropdownElements;
     constructor(elementRef: ElementRef, _focusMonitor: FocusMonitor, _platform: Platform, _cdRef: ChangeDetectorRef);
     ngOnInit(): void;
