@@ -3,6 +3,8 @@ import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 export declare class McLink implements OnDestroy {
     private elementRef;
     private _focusMonitor;
+    disabled: boolean;
+    tabindex: number;
     constructor(elementRef: ElementRef, _focusMonitor: FocusMonitor);
     ngOnDestroy(): void;
     focus(): void;
