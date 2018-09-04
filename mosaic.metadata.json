@@ -43,6 +43,9 @@
       "from": "./button"
     },
     {
+      "from": "./modal"
+    },
+    {
       "from": "./input"
     },
     {

@@ -5,9 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __decorate, __param, __metadata } from 'tslib';
-import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, defineInjectable } from '@angular/core';
+import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, defineInjectable, inject } from '@angular/core';
 import { BidiModule } from '@ptsecurity/cdk/bidi';
 import { Subject } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 function isBoolean(val) { return typeof val === 'boolean'; }
 function toBoolean(value) {
@@ -326,9 +327,50 @@ McPseudoCheckboxModule = __decorate([
     })
 ], McPseudoCheckboxModule);
 
+let McMeasureScrollbarService = class McMeasureScrollbarService {
+    constructor(document) {
+        this.document = document;
+        this.scrollbarMeasure = {
+            position: 'absolute',
+            top: '-9999px',
+            width: '50px',
+            height: '50px',
+            overflow: 'scroll'
+        };
+        this.initScrollBarWidth();
+    }
+    get scrollBarWidth() {
+        if (this._scrollbarWidth) {
+            return this._scrollbarWidth;
+        }
+        this.initScrollBarWidth();
+        return this._scrollbarWidth;
+    }
+    initScrollBarWidth() {
+        const scrollDiv = this.document.createElement('div');
+        for (const scrollProp in this.scrollbarMeasure) {
+            if (this.scrollbarMeasure.hasOwnProperty(scrollProp)) {
+                scrollDiv.style[scrollProp] = this.scrollbarMeasure[scrollProp];
+            }
+        }
+        this.document.body.appendChild(scrollDiv);
+        const width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+        this.document.body.removeChild(scrollDiv);
+        this._scrollbarWidth = width;
+    }
+};
+McMeasureScrollbarService.ngInjectableDef = defineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(inject(DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
+McMeasureScrollbarService = __decorate([
+    Injectable({
+        providedIn: 'root'
+    }),
+    __param(0, Inject(DOCUMENT)),
+    __metadata("design:paramtypes", [Object])
+], McMeasureScrollbarService);
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { MC_SANITY_CHECKS_FACTORY as ɵa1, isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox };
+export { MC_SANITY_CHECKS_FACTORY as ɵa1, isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService };
 //# sourceMappingURL=core.js.map

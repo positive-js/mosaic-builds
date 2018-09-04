@@ -18,4 +18,5 @@ export * from './progress-bar';
 export * from './navbar';
 export * from './form-field';
 export * from './button';
+export * from './modal';
 export * from './input';

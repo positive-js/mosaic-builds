@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('rxjs')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', 'rxjs'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}),global.ng.core,global.ng.cdk.bidi,global.rxjs));
-}(this, (function (exports,core,bidi,rxjs) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('rxjs'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', 'rxjs', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}),global.ng.core,global.ng.cdk.bidi,global.rxjs,global.ng.common));
+}(this, (function (exports,core,bidi,rxjs,common) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -419,6 +419,52 @@ var McPseudoCheckboxModule = /** @class */ (function () {
     return McPseudoCheckboxModule;
 }());
 
+var McMeasureScrollbarService = /** @class */ (function () {
+    function McMeasureScrollbarService(document) {
+        this.document = document;
+        this.scrollbarMeasure = {
+            position: 'absolute',
+            top: '-9999px',
+            width: '50px',
+            height: '50px',
+            overflow: 'scroll'
+        };
+        this.initScrollBarWidth();
+    }
+    Object.defineProperty(McMeasureScrollbarService.prototype, "scrollBarWidth", {
+        get: function () {
+            if (this._scrollbarWidth) {
+                return this._scrollbarWidth;
+            }
+            this.initScrollBarWidth();
+            return this._scrollbarWidth;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McMeasureScrollbarService.prototype.initScrollBarWidth = function () {
+        var scrollDiv = this.document.createElement('div');
+        for (var scrollProp in this.scrollbarMeasure) {
+            if (this.scrollbarMeasure.hasOwnProperty(scrollProp)) {
+                scrollDiv.style[scrollProp] = this.scrollbarMeasure[scrollProp];
+            }
+        }
+        this.document.body.appendChild(scrollDiv);
+        var width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+        this.document.body.removeChild(scrollDiv);
+        this._scrollbarWidth = width;
+    };
+    McMeasureScrollbarService.ngInjectableDef = core.defineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core.inject(common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
+    McMeasureScrollbarService = __decorate([
+        core.Injectable({
+            providedIn: 'root'
+        }),
+        __param(0, core.Inject(common.DOCUMENT)),
+        __metadata("design:paramtypes", [Object])
+    ], McMeasureScrollbarService);
+    return McMeasureScrollbarService;
+}());
+
 exports.ɵa1 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
@@ -435,6 +481,7 @@ exports.ShowOnDirtyErrorStateMatcher = ShowOnDirtyErrorStateMatcher;
 exports.ErrorStateMatcher = ErrorStateMatcher;
 exports.McPseudoCheckboxModule = McPseudoCheckboxModule;
 exports.McPseudoCheckbox = McPseudoCheckbox;
+exports.McMeasureScrollbarService = McMeasureScrollbarService;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
