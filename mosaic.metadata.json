@@ -4,34 +4,34 @@
   "metadata": {},
   "exports": [
     {
-      "from": "./link"
-    },
-    {
       "from": "./core"
-    },
-    {
-      "from": "./list"
     },
     {
       "from": "./tree"
     },
     {
-      "from": "./divider"
-    },
-    {
       "from": "./radio"
-    },
-    {
-      "from": "./progress-spinner"
-    },
-    {
-      "from": "./icon"
     },
     {
       "from": "./checkbox"
     },
     {
+      "from": "./divider"
+    },
+    {
+      "from": "./progress-spinner"
+    },
+    {
       "from": "./progress-bar"
+    },
+    {
+      "from": "./icon"
+    },
+    {
+      "from": "./list"
+    },
+    {
+      "from": "./link"
     },
     {
       "from": "./navbar"

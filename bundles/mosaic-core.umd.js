@@ -465,7 +465,7 @@ var McMeasureScrollbarService = /** @class */ (function () {
     return McMeasureScrollbarService;
 }());
 
-exports.ɵa1 = MC_SANITY_CHECKS_FACTORY;
+exports.ɵa0 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
