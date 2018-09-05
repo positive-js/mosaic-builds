@@ -7,6 +7,7 @@
 import { __decorate, __param, __metadata, __extends } from 'tslib';
 import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, defineInjectable, inject } from '@angular/core';
 import { BidiModule } from '@ptsecurity/cdk/bidi';
+import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { Subject } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 
@@ -104,7 +105,7 @@ function mixinDisabled(base) {
                 return this._disabled;
             },
             set: function (value) {
-                this._disabled = toBoolean(value);
+                this._disabled = coerceBooleanProperty(value);
             },
             enumerable: true,
             configurable: true

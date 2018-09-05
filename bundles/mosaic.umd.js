@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('@angular/forms'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/portal'), require('@ptsecurity/cdk/tree')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', 'rxjs', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', '@angular/forms', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/portal', '@ptsecurity/cdk/tree'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.rxjs,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform,global.ng.forms,global.ng.cdk.keycodes,global.rxjs.operators,global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.cdk.overlay,global.ng.cdk.portal,global.ng.cdk.tree));
-}(this, (function (exports,core,bidi,rxjs,common,a11y,platform,forms,keycodes,operators,coercion,collections,overlay,portal,tree) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('@angular/forms'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/portal'), require('@ptsecurity/cdk/tree')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', '@angular/forms', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/portal', '@ptsecurity/cdk/tree'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform,global.ng.forms,global.ng.cdk.keycodes,global.rxjs.operators,global.ng.cdk.collections,global.ng.cdk.overlay,global.ng.cdk.portal,global.ng.cdk.tree));
+}(this, (function (exports,core,bidi,coercion,rxjs,common,a11y,platform,forms,keycodes,operators,collections,overlay,portal,tree) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -159,7 +159,7 @@ function mixinDisabled(base) {
                 return this._disabled;
             },
             set: function (value) {
-                this._disabled = toBoolean(value);
+                this._disabled = coercion.coerceBooleanProperty(value);
             },
             enumerable: true,
             configurable: true

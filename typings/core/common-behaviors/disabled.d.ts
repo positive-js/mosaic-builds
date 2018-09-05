@@ -2,4 +2,6 @@ import { Constructor } from './constructor';
 export interface CanDisable {
     disabled: boolean;
 }
-export declare function mixinDisabled<T extends Constructor<{}>>(base: T): Constructor<CanDisable> & T;
+/** @docs-private */
+export declare type CanDisableCtor = Constructor<CanDisable>;
+export declare function mixinDisabled<T extends Constructor<{}>>(base: T): CanDisableCtor & T;
