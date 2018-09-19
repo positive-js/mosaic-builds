@@ -26,9 +26,9 @@ export declare abstract class McFormFieldControl<T> {
     /** Whether the control is in an error state. */
     readonly errorState: boolean;
     /**
-     * An optional name for the control type that can be used to distinguish `mat-form-field` elements
+     * An optional name for the control type that can be used to distinguish `mc-form-field` elements
      * based on their control type. The form field will add a class,
-     * `mat-form-field-type-{{controlType}}` to its root element.
+     * `mc-form-field-type-{{controlType}}` to its root element.
      */
     readonly controlType?: string;
     /** Handles a click on the control's container. */

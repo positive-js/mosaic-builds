@@ -17,7 +17,6 @@ export declare class McListOption implements AfterContentInit, OnDestroy, OnInit
     _text: ElementRef;
     checkboxPosition: 'before' | 'after';
     value: any;
-    private _focusHandlerInProgress;
     disabled: any;
     selected: boolean;
     private _lineSetter;

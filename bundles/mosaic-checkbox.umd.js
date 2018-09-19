@@ -460,8 +460,8 @@ var McCheckboxModule = /** @class */ (function () {
     }
     McCheckboxModule = __decorate([
         core.NgModule({
-            imports: [common.CommonModule, core$1.McCommonModule],
-            exports: [McCheckbox, McCheckboxRequiredValidator, core$1.McCommonModule],
+            imports: [common.CommonModule],
+            exports: [McCheckbox, McCheckboxRequiredValidator],
             declarations: [McCheckbox, McCheckboxRequiredValidator]
         })
     ], McCheckboxModule);

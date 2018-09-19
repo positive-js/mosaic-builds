@@ -7,7 +7,7 @@
       "from": "./core"
     },
     {
-      "from": "./tree"
+      "from": "./divider"
     },
     {
       "from": "./radio"
@@ -16,7 +16,7 @@
       "from": "./checkbox"
     },
     {
-      "from": "./divider"
+      "from": "./tree"
     },
     {
       "from": "./progress-spinner"
@@ -25,13 +25,13 @@
       "from": "./progress-bar"
     },
     {
+      "from": "./link"
+    },
+    {
       "from": "./icon"
     },
     {
       "from": "./list"
-    },
-    {
-      "from": "./link"
     },
     {
       "from": "./navbar"
@@ -43,10 +43,16 @@
       "from": "./button"
     },
     {
+      "from": "./tag"
+    },
+    {
       "from": "./modal"
     },
     {
       "from": "./input"
+    },
+    {
+      "from": "./select"
     },
     {
       "from": "./typings/index"

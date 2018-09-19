@@ -6,7 +6,7 @@
  */
 import { __decorate, __metadata } from 'tslib';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, NgModule } from '@angular/core';
-import { toBoolean, McCommonModule } from '@ptsecurity/mosaic/core';
+import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { CommonModule } from '@angular/common';
 
 let McDivider = class McDivider {
@@ -19,14 +19,14 @@ let McDivider = class McDivider {
         return this._vertical;
     }
     set vertical(value) {
-        this._vertical = toBoolean(value);
+        this._vertical = coerceBooleanProperty(value);
     }
     // Whether the divider is an inset divider.
     get inset() {
         return this._inset;
     }
     set inset(value) {
-        this._inset = toBoolean(value);
+        this._inset = coerceBooleanProperty(value);
     }
 };
 __decorate([
@@ -61,17 +61,9 @@ let McDividerModule = class McDividerModule {
 };
 McDividerModule = __decorate([
     NgModule({
-        imports: [
-            McCommonModule,
-            CommonModule
-        ],
-        exports: [
-            McDivider,
-            McCommonModule
-        ],
-        declarations: [
-            McDivider
-        ]
+        imports: [CommonModule],
+        exports: [McDivider],
+        declarations: [McDivider]
     })
 ], McDividerModule);
 

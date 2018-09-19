@@ -5,11 +5,12 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __decorate, __param, __metadata, __extends } from 'tslib';
-import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, defineInjectable, inject } from '@angular/core';
+import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, EventEmitter, Output, defineInjectable, inject } from '@angular/core';
 import { BidiModule } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { Subject } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, CommonModule } from '@angular/common';
+import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
 
 function isBoolean(val) { return typeof val === 'boolean'; }
 function toBoolean(value) {
@@ -132,7 +133,6 @@ function mixinColor(base, defaultColor) {
                 args[_i] = arguments[_i];
             }
             var _this = _super.apply(this, args) || this;
-            // Set the default color that can be specified from the mixin.
             _this.color = defaultColor;
             return _this;
         }
@@ -204,7 +204,7 @@ function mixinErrorState(base) {
             _this.errorState = false;
             /**
              * Stream that emits whenever the state of the input changes such that the wrapping
-             * `MсFormField` needs to run change detection.
+             * `MatFormField` needs to run change detection.
              */
             _this.stateChanges = new Subject();
             return _this;
@@ -332,9 +332,7 @@ var ErrorStateMatcher = /** @class */ (function () {
  */
 var McPseudoCheckbox = /** @class */ (function () {
     function McPseudoCheckbox() {
-        // Display state of the checkbox.
         this.state = 'unchecked';
-        // Whether the checkbox is disabled.
         this.disabled = false;
     }
     __decorate([
@@ -351,13 +349,13 @@ var McPseudoCheckbox = /** @class */ (function () {
             preserveWhitespaces: false,
             changeDetection: ChangeDetectionStrategy.OnPush,
             selector: 'mc-pseudo-checkbox',
-            styles: [""],
-            template: '',
+            styles: [".mc-pseudo-checkbox{position:relative;display:inline-block;box-sizing:border-box;width:16px;height:16px;border-radius:3px;border-width:1px;border-style:solid;cursor:pointer;vertical-align:middle;flex-shrink:0}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;left:-1px}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-pseudo-checkbox_checked .mc-checkbox-checkmark{display:inline-block}.mc-pseudo-checkbox.mc-pseudo-checkbox_indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}"],
+            template: "<i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>",
             host: {
                 class: 'mc-pseudo-checkbox',
-                '[class.mc-pseudo-checkbox-indeterminate]': 'state === "indeterminate"',
-                '[class.mc-pseudo-checkbox-checked]': 'state === "checked"',
-                '[class.mc-pseudo-checkbox-disabled]': 'disabled'
+                '[class.mc-pseudo-checkbox_indeterminate]': 'state === "indeterminate"',
+                '[class.mc-pseudo-checkbox_checked]': 'state === "checked"',
+                '[class.mc-disabled]': 'disabled'
             }
         })
     ], McPseudoCheckbox);
@@ -422,9 +420,359 @@ var McMeasureScrollbarService = /** @class */ (function () {
     return McMeasureScrollbarService;
 }());
 
+// Boilerplate for applying mixins to McOptgroup.
+/** @docs-private */
+var McOptgroupBase = /** @class */ (function () {
+    function McOptgroupBase() {
+    }
+    return McOptgroupBase;
+}());
+var _McOptgroupMixinBase = mixinDisabled(McOptgroupBase);
+// Counter for unique group ids.
+var _uniqueOptgroupIdCounter = 0;
+/**
+ * Component that is used to group instances of `mc-option`.
+ */
+var McOptgroup = /** @class */ (function (_super) {
+    __extends(McOptgroup, _super);
+    function McOptgroup() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        /** Unique id for the underlying label. */
+        _this._labelId = "mc-optgroup-label-" + _uniqueOptgroupIdCounter++;
+        return _this;
+    }
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], McOptgroup.prototype, "label", void 0);
+    McOptgroup = __decorate([
+        Component({
+            selector: 'mc-optgroup',
+            exportAs: 'mcOptgroup',
+            template: "<label class=\"mc-optgroup-label\" [id]=\"_labelId\">{{ label }}</label><ng-content select=\"mc-option, ng-container\"></ng-content>",
+            encapsulation: ViewEncapsulation.None,
+            changeDetection: ChangeDetectionStrategy.OnPush,
+            inputs: ['disabled'],
+            styles: [".mc-optgroup-label{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}"],
+            host: {
+                class: 'mc-optgroup',
+                role: 'group',
+                '[class.mc-optgroup-disabled]': 'disabled',
+                '[attr.aria-disabled]': 'disabled.toString()',
+                '[attr.aria-labelledby]': '_labelId'
+            }
+        })
+    ], McOptgroup);
+    return McOptgroup;
+}(_McOptgroupMixinBase));
+
+/**
+ * Option IDs need to be unique across components, so this counter exists outside of
+ * the component definition.
+ */
+var _uniqueIdCounter = 0;
+/** Event object emitted by McOption when selected or deselected. */
+var McOptionSelectionChange = /** @class */ (function () {
+    function McOptionSelectionChange(
+    /** Reference to the option that emitted the event. */
+    source, 
+    /** Whether the change in the option's value was a result of a user action. */
+    isUserInput) {
+        if (isUserInput === void 0) { isUserInput = false; }
+        this.source = source;
+        this.isUserInput = isUserInput;
+    }
+    return McOptionSelectionChange;
+}());
+/**
+ * Injection token used to provide the parent component to options.
+ */
+var MC_OPTION_PARENT_COMPONENT = new InjectionToken('MC_OPTION_PARENT_COMPONENT');
+/**
+ * Single option inside of a `<mat-select>` element.
+ */
+var McOption = /** @class */ (function () {
+    function McOption(_element, _changeDetectorRef, _parent, group) {
+        this._element = _element;
+        this._changeDetectorRef = _changeDetectorRef;
+        this._parent = _parent;
+        this.group = group;
+        /** Event emitted when the option is selected or deselected. */
+        // tslint:disable-next-line:no-output-on-prefix
+        this.onSelectionChange = new EventEmitter();
+        /** Emits when the state of the option changes and any parents have to be notified. */
+        this._stateChanges = new Subject();
+        this._selected = false;
+        this._active = false;
+        this._disabled = false;
+        this._id = "mc-option-" + _uniqueIdCounter++;
+        this._mostRecentViewValue = '';
+    }
+    Object.defineProperty(McOption.prototype, "multiple", {
+        /** Whether the wrapping component is in multiple selection mode. */
+        get: function () {
+            return this._parent && this._parent.multiple;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McOption.prototype, "id", {
+        /** The unique ID of the option. */
+        get: function () {
+            return this._id;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McOption.prototype, "selected", {
+        /** Whether or not the option is currently selected. */
+        get: function () {
+            return this._selected;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McOption.prototype, "disabled", {
+        /** Whether the option is disabled. */
+        get: function () {
+            return (this.group && this.group.disabled) || this._disabled;
+        },
+        set: function (value) {
+            this._disabled = coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McOption.prototype, "disableRipple", {
+        /** Whether ripples for the option are disabled. */
+        get: function () {
+            return this._parent && this._parent.disableRipple;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McOption.prototype, "active", {
+        /**
+         * Whether or not the option is currently active and ready to be selected.
+         * An active option displays styles as if it is focused, but the
+         * focus is actually retained somewhere else. This comes in handy
+         * for components like autocomplete where focus must remain on the input.
+         */
+        get: function () {
+            return this._active;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McOption.prototype, "viewValue", {
+        /**
+         * The displayed value of the option. It is necessary to show the selected option in the
+         * select's trigger.
+         */
+        get: function () {
+            // TODO(kara): Add input property alternative for node envs.
+            return (this._getHostElement().textContent || '').trim();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /** Selects the option. */
+    McOption.prototype.select = function () {
+        if (!this._selected) {
+            this._selected = true;
+            this._changeDetectorRef.markForCheck();
+            this._emitSelectionChangeEvent();
+        }
+    };
+    /** Deselects the option. */
+    McOption.prototype.deselect = function () {
+        if (this._selected) {
+            this._selected = false;
+            this._changeDetectorRef.markForCheck();
+            this._emitSelectionChangeEvent();
+        }
+    };
+    /** Sets focus onto this option. */
+    McOption.prototype.focus = function () {
+        var element = this._getHostElement();
+        if (typeof element.focus === 'function') {
+            element.focus();
+        }
+    };
+    /**
+     * This method sets display styles on the option to make it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     */
+    McOption.prototype.setActiveStyles = function () {
+        if (!this._active) {
+            this._active = true;
+            this._changeDetectorRef.markForCheck();
+        }
+    };
+    /**
+     * This method removes display styles on the option that made it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     */
+    McOption.prototype.setInactiveStyles = function () {
+        if (this._active) {
+            this._active = false;
+            this._changeDetectorRef.markForCheck();
+        }
+    };
+    /** Gets the label to be used when determining whether the option should be focused. */
+    McOption.prototype.getLabel = function () {
+        return this.viewValue;
+    };
+    /** Ensures the option is selected when activated from the keyboard. */
+    McOption.prototype._handleKeydown = function (event) {
+        if (event.keyCode === ENTER || event.keyCode === SPACE) {
+            this._selectViaInteraction();
+            // Prevent the page from scrolling down and form submits.
+            event.preventDefault();
+        }
+    };
+    /**
+     * `Selects the option while indicating the selection came from the user. Used to
+     * determine if the select's view -> model callback should be invoked.`
+     */
+    McOption.prototype._selectViaInteraction = function () {
+        if (!this.disabled) {
+            this._selected = this.multiple ? !this._selected : true;
+            this._changeDetectorRef.markForCheck();
+            this._emitSelectionChangeEvent(true);
+        }
+    };
+    /** Returns the correct tabindex for the option depending on disabled state. */
+    McOption.prototype._getTabIndex = function () {
+        return this.disabled ? '-1' : '0';
+    };
+    /** Gets the host DOM element. */
+    McOption.prototype._getHostElement = function () {
+        return this._element.nativeElement;
+    };
+    McOption.prototype.ngAfterViewChecked = function () {
+        // Since parent components could be using the option's label to display the selected values
+        // (e.g. `mat-select`) and they don't have a way of knowing if the option's label has changed
+        // we have to check for changes in the DOM ourselves and dispatch an event. These checks are
+        // relatively cheap, however we still limit them only to selected options in order to avoid
+        // hitting the DOM too often.
+        if (this._selected) {
+            var viewValue = this.viewValue;
+            if (viewValue !== this._mostRecentViewValue) {
+                this._mostRecentViewValue = viewValue;
+                this._stateChanges.next();
+            }
+        }
+    };
+    McOption.prototype.ngOnDestroy = function () {
+        this._stateChanges.complete();
+    };
+    /** Emits the selection change event. */
+    McOption.prototype._emitSelectionChangeEvent = function (isUserInput) {
+        if (isUserInput === void 0) { isUserInput = false; }
+        this.onSelectionChange.emit(new McOptionSelectionChange(this, isUserInput));
+    };
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], McOption.prototype, "value", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], McOption.prototype, "disabled", null);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], McOption.prototype, "onSelectionChange", void 0);
+    McOption = __decorate([
+        Component({
+            selector: 'mc-option',
+            exportAs: 'mcOption',
+            host: {
+                '[attr.tabindex]': '_getTabIndex()',
+                '[class.mc-selected]': 'selected',
+                '[class.mc-option-multiple]': 'multiple',
+                '[class.mc-active]': 'active',
+                '[id]': 'id',
+                '[class.mc-disabled]': 'disabled',
+                '(click)': '_selectViaInteraction()',
+                '(keydown)': '_handleKeydown($event)',
+                class: 'mc-option'
+            },
+            styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;border:2px solid transparent;cursor:pointer;outline:0;padding:0 16px;-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;text-overflow:ellipsis}"],
+            template: "<mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span>",
+            encapsulation: ViewEncapsulation.None,
+            changeDetection: ChangeDetectionStrategy.OnPush
+        }),
+        __param(2, Optional()), __param(2, Inject(MC_OPTION_PARENT_COMPONENT)),
+        __param(3, Optional()),
+        __metadata("design:paramtypes", [ElementRef,
+            ChangeDetectorRef, Object, McOptgroup])
+    ], McOption);
+    return McOption;
+}());
+/**
+ * Counts the amount of option group labels that precede the specified option.
+ * @param optionIndex Index of the option at which to start counting.
+ * @param options Flat list of all of the options.
+ * @param optionGroups Flat list of all of the option groups.
+ * @docs-private
+ */
+function _countGroupLabelsBeforeOption(optionIndex, options, optionGroups) {
+    if (optionGroups.length) {
+        var optionsArray = options.toArray();
+        var groups = optionGroups.toArray();
+        var groupCounter = 0;
+        for (var i = 0; i < optionIndex + 1; i++) {
+            if (optionsArray[i].group && optionsArray[i].group === groups[groupCounter]) {
+                groupCounter++;
+            }
+        }
+        return groupCounter;
+    }
+    return 0;
+}
+/**
+ * Determines the position to which to scroll a panel in order for an option to be into view.
+ * @param optionIndex Index of the option to be scrolled into the view.
+ * @param optionHeight Height of the options.
+ * @param currentScrollPosition Current scroll position of the panel.
+ * @param panelHeight Height of the panel.
+ * @docs-private
+ */
+function _getOptionScrollPosition(optionIndex, optionHeight, currentScrollPosition, panelHeight) {
+    var optionOffset = optionIndex * optionHeight;
+    if (optionOffset < currentScrollPosition) {
+        return optionOffset;
+    }
+    if (optionOffset + optionHeight > currentScrollPosition + panelHeight) {
+        return Math.max(0, optionOffset - panelHeight + optionHeight);
+    }
+    return currentScrollPosition;
+}
+
+var McOptionModule = /** @class */ (function () {
+    function McOptionModule() {
+    }
+    McOptionModule = __decorate([
+        NgModule({
+            imports: [CommonModule, McPseudoCheckboxModule],
+            exports: [McOption, McOptgroup],
+            declarations: [McOption, McOptgroup]
+        })
+    ], McOptionModule);
+    return McOptionModule;
+}());
+
+/** InjectionToken that can be used to specify the global label options. */
+var MC_LABEL_GLOBAL_OPTIONS = new InjectionToken('mc-label-global-options');
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { MC_SANITY_CHECKS_FACTORY as ɵa0, isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService };
+export { MC_SANITY_CHECKS_FACTORY as ɵa1, isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, _countGroupLabelsBeforeOption, _getOptionScrollPosition, McOptgroupBase, _McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS };
 //# sourceMappingURL=core.es5.js.map

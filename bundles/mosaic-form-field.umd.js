@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/formField', ['exports', '@angular/core', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.formField = {}),global.ng.core,global.ng.cdk.keycodes,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.mosaic.icon));
-}(this, (function (exports,core,keycodes,rxjs,operators,common,icon) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/formField', ['exports', '@angular/core', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core', 'rxjs', 'rxjs/operators', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.formField = {}),global.ng.core,global.ng.cdk.keycodes,global.ng.mosaic.core,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.mosaic.icon));
+}(this, (function (exports,core,keycodes,core$1,rxjs,operators,common,icon) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -116,18 +116,22 @@ var McSuffix = /** @class */ (function () {
     return McSuffix;
 }());
 
+var nextUniqueId$1 = 0;
 var McFormFieldBase = /** @class */ (function () {
     function McFormFieldBase(_elementRef) {
         this._elementRef = _elementRef;
     }
     return McFormFieldBase;
 }());
+var _McFormFieldMixinBase = core$1.mixinColor(McFormFieldBase, core$1.ThemePalette.Primary);
 var McFormField = /** @class */ (function (_super) {
     __extends(McFormField, _super);
     function McFormField(_elementRef, _changeDetectorRef) {
         var _this = _super.call(this, _elementRef) || this;
         _this._elementRef = _elementRef;
         _this._changeDetectorRef = _changeDetectorRef;
+        // Unique id for the internal form field label.
+        _this._labelId = "mc-form-field-label-" + nextUniqueId$1++;
         return _this;
     }
     McFormField.prototype.ngAfterContentInit = function () {
@@ -138,7 +142,8 @@ var McFormField = /** @class */ (function (_super) {
                 .add("mc-form-field-type-" + this._control.controlType);
         }
         // Subscribe to changes in the child control state in order to update the form field UI.
-        this._control.stateChanges.pipe(operators.startWith()).subscribe(function () {
+        this._control.stateChanges.pipe(operators.startWith())
+            .subscribe(function () {
             _this._changeDetectorRef.markForCheck();
         });
         // Run change detection if the value changes.
@@ -245,11 +250,11 @@ var McFormField = /** @class */ (function (_super) {
         core.Component({
             selector: 'mc-form-field',
             exportAs: 'mcFormField',
-            template: "<div class=\"mc-form-field__wrapper\"><div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div></div>",
+            template: "<div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div>",
             // McInput is a directive and can't have styles, so we need to include its styles here.
             // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
             // aren't using McInput.
-            styles: [".mc-form-field{display:inline-block;position:relative}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;top:0;bottom:0;right:0;width:32px;cursor:pointer;display:flex;flex-direction:row;justify-content:center;align-items:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
+            styles: [".mc-form-field{position:relative;display:inline-block}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;display:flex;flex-direction:row;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px;cursor:pointer} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
             host: {
                 class: 'mc-form-field',
                 '[class.mc-form-field_invalid]': '_control.errorState',
@@ -267,14 +272,14 @@ var McFormField = /** @class */ (function (_super) {
                 '[class.ng-pending]': '_shouldForward("pending")',
                 '(keydown)': 'onKeyDown($event)'
             },
+            inputs: ['color'],
             encapsulation: core.ViewEncapsulation.None,
             changeDetection: core.ChangeDetectionStrategy.OnPush
         }),
-        __metadata("design:paramtypes", [core.ElementRef,
-            core.ChangeDetectorRef])
+        __metadata("design:paramtypes", [core.ElementRef, core.ChangeDetectorRef])
     ], McFormField);
     return McFormField;
-}(McFormFieldBase));
+}(_McFormFieldMixinBase));
 var McFormFieldWithoutBorders = /** @class */ (function () {
     function McFormFieldWithoutBorders() {
     }
@@ -317,6 +322,7 @@ var McFormFieldModule = /** @class */ (function () {
 
 exports.McFormFieldModule = McFormFieldModule;
 exports.McFormFieldBase = McFormFieldBase;
+exports._McFormFieldMixinBase = _McFormFieldMixinBase;
 exports.McFormField = McFormField;
 exports.McFormFieldWithoutBorders = McFormFieldWithoutBorders;
 exports.McFormFieldControl = McFormFieldControl;

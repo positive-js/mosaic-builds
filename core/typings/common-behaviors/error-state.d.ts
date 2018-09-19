@@ -4,10 +4,10 @@ import { ErrorStateMatcher } from '../error/error-options';
 import { Constructor } from './constructor';
 /** @docs-private */
 export interface CanUpdateErrorState {
+    updateErrorState(): any;
     readonly stateChanges: Subject<void>;
     errorState: boolean;
     errorStateMatcher: ErrorStateMatcher;
-    updateErrorState(): any;
 }
 /** @docs-private */
 export interface HasErrorState {

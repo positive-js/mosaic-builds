@@ -610,7 +610,7 @@ var McRadioModule = /** @class */ (function () {
     McRadioModule = __decorate([
         core.NgModule({
             imports: [common.CommonModule, a11y.A11yModule, core$1.McCommonModule],
-            exports: [McRadioGroup, McRadioButton, core$1.McCommonModule],
+            exports: [McRadioGroup, McRadioButton],
             declarations: [McRadioGroup, McRadioButton]
         })
     ], McRadioModule);

@@ -132,12 +132,8 @@ var McLinkModule = /** @class */ (function () {
                 common.CommonModule,
                 a11y.A11yModule
             ],
-            declarations: [
-                McLink
-            ],
-            exports: [
-                McLink
-            ]
+            declarations: [McLink],
+            exports: [McLink]
         })
     ], McLinkModule);
     return McLinkModule;

@@ -8,7 +8,7 @@ import { InjectionToken, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, 
 import { __extends, __decorate, __metadata, __param } from 'tslib';
 import { NG_VALUE_ACCESSOR, CheckboxRequiredValidator, NG_VALIDATORS } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { mixinColor, mixinDisabled, mixinTabIndex, toBoolean, McCommonModule } from '@ptsecurity/mosaic/core';
+import { mixinColor, mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -417,8 +417,8 @@ var McCheckboxModule = /** @class */ (function () {
     }
     McCheckboxModule = __decorate([
         NgModule({
-            imports: [CommonModule, McCommonModule],
-            exports: [McCheckbox, McCheckboxRequiredValidator, McCommonModule],
+            imports: [CommonModule],
+            exports: [McCheckbox, McCheckboxRequiredValidator],
             declarations: [McCheckbox, McCheckboxRequiredValidator]
         })
     ], McCheckboxModule);

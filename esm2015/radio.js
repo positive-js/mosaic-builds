@@ -506,7 +506,7 @@ let McRadioModule = class McRadioModule {
 McRadioModule = __decorate([
     NgModule({
         imports: [CommonModule, A11yModule, McCommonModule],
-        exports: [McRadioGroup, McRadioButton, McCommonModule],
+        exports: [McRadioGroup, McRadioButton],
         declarations: [McRadioGroup, McRadioButton]
     })
 ], McRadioModule);

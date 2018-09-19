@@ -468,7 +468,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                 '(keydown)': '_onKeyDown($event)',
                 '(window:resize)': 'updateScrollSize()'
             },
-            styles: [".mc-tree-selection{display:block;border:1px solid red}.mc-tree-node{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-node>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-node:focus{outline:0}.mc-tree-node:not([disabled]){cursor:pointer}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
+            styles: [".mc-tree-selection{display:block}.mc-tree-node{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-node>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-node:focus{outline:0}.mc-tree-node:not([disabled]){cursor:pointer}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
             encapsulation: core.ViewEncapsulation.None,
             changeDetection: core.ChangeDetectionStrategy.OnPush,
             providers: [{ provide: tree.CdkTree, useExisting: McTreeSelection_1 }]
