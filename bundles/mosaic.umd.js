@@ -5548,13 +5548,6 @@ var McTagModule = /** @class */ (function () {
 }());
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Returns an exception to be thrown when attempting to change a select's `multiple` option
  * after initialization.
  * @docs-private
@@ -6260,6 +6253,7 @@ var McSelect = /** @class */ (function (_super) {
     };
     /** Handles keyboard events while the select is closed. */
     McSelect.prototype._handleClosedKeydown = function (event) {
+        /* tslint:disable-next-line */
         var keyCode = event.keyCode;
         var isArrowKey = keyCode === keycodes.DOWN_ARROW || keyCode === keycodes.UP_ARROW ||
             keyCode === keycodes.LEFT_ARROW || keyCode === keycodes.RIGHT_ARROW;
@@ -6275,6 +6269,7 @@ var McSelect = /** @class */ (function (_super) {
     };
     /** Handles keyboard events when the selected is open. */
     McSelect.prototype._handleOpenKeydown = function (event) {
+        /* tslint:disable-next-line */
         var keyCode = event.keyCode;
         var isArrowKey = keyCode === keycodes.DOWN_ARROW || keyCode === keycodes.UP_ARROW;
         var manager = this._keyManager;
@@ -6509,6 +6504,7 @@ var McSelect = /** @class */ (function (_super) {
     };
     /** Gets the index of the provided option in the option list. */
     McSelect.prototype._getOptionIndex = function (option) {
+        /* tslint:disable-next-line */
         return this.options.reduce(function (result, current, index) {
             /* tslint:disable-next-line:strict-type-predicates */
             return result === undefined ? (option === current ? index : undefined) : result;
@@ -6916,8 +6912,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb15 = CssUnitPipe;
-exports.ɵa15 = McModalControlService;
+exports.ɵb16 = CssUnitPipe;
+exports.ɵa16 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -6963,7 +6959,7 @@ exports.McTagBase = McTagBase;
 exports._McTagMixinBase = _McTagMixinBase;
 exports.McTag = McTag;
 exports.McTagModule = McTagModule;
-exports.ɵa16 = mcSelectAnimations;
+exports.ɵa15 = mcSelectAnimations;
 exports.McSelectModule = McSelectModule;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;

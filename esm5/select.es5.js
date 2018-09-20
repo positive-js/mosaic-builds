@@ -23,13 +23,6 @@ import { CommonModule } from '@angular/common';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Returns an exception to be thrown when attempting to change a select's `multiple` option
  * after initialization.
  * @docs-private
@@ -735,6 +728,7 @@ var McSelect = /** @class */ (function (_super) {
     };
     /** Handles keyboard events while the select is closed. */
     McSelect.prototype._handleClosedKeydown = function (event) {
+        /* tslint:disable-next-line */
         var keyCode = event.keyCode;
         var isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW ||
             keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
@@ -750,6 +744,7 @@ var McSelect = /** @class */ (function (_super) {
     };
     /** Handles keyboard events when the selected is open. */
     McSelect.prototype._handleOpenKeydown = function (event) {
+        /* tslint:disable-next-line */
         var keyCode = event.keyCode;
         var isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
         var manager = this._keyManager;
@@ -984,6 +979,7 @@ var McSelect = /** @class */ (function (_super) {
     };
     /** Gets the index of the provided option in the option list. */
     McSelect.prototype._getOptionIndex = function (option) {
+        /* tslint:disable-next-line */
         return this.options.reduce(function (result, current, index) {
             /* tslint:disable-next-line:strict-type-predicates */
             return result === undefined ? (option === current ? index : undefined) : result;
@@ -1304,5 +1300,5 @@ var McSelectModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { mcSelectAnimations as ɵa16, McSelectModule, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_ITEM_HEIGHT_EM, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McSelectChange, McSelectBase, _McSelectMixinBase, McSelectTrigger, McSelect };
+export { mcSelectAnimations as ɵa15, McSelectModule, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_ITEM_HEIGHT_EM, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McSelectChange, McSelectBase, _McSelectMixinBase, McSelectTrigger, McSelect };
 //# sourceMappingURL=select.es5.js.map
