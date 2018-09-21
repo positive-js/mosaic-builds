@@ -11,6 +11,7 @@ import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { Subject } from 'rxjs';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 function isBoolean(val) { return typeof val === 'boolean'; }
 function toBoolean(value) {
@@ -770,9 +771,134 @@ var McOptionModule = /** @class */ (function () {
 /** InjectionToken that can be used to specify the global label options. */
 var MC_LABEL_GLOBAL_OPTIONS = new InjectionToken('mc-label-global-options');
 
+var fadeAnimation = trigger('fadeAnimation', [
+    state('void', style({ opacity: 0 })),
+    state('true', style({ opacity: 1 })),
+    state('false', style({ opacity: 0 })),
+    transition('* => true', animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')),
+    transition('* => void', animate('150ms cubic-bezier(0.4, 0.0, 1, 1)')),
+]);
+
+var POSITION_MAP = {
+    top: {
+        originX: 'center',
+        originY: 'top',
+        overlayX: 'center',
+        overlayY: 'bottom'
+    },
+    topCenter: {
+        originX: 'center',
+        originY: 'top',
+        overlayX: 'center',
+        overlayY: 'bottom',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    topLeft: {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'bottom',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    topRight: {
+        originX: 'end',
+        originY: 'top',
+        overlayX: 'end',
+        overlayY: 'bottom',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    right: {
+        originX: 'end',
+        originY: 'center',
+        overlayX: 'start',
+        overlayY: 'center'
+    },
+    rightTop: {
+        originX: 'end',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'top',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    rightBottom: {
+        originX: 'end',
+        originY: 'bottom',
+        overlayX: 'start',
+        overlayY: 'bottom',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    bottom: {
+        originX: 'center',
+        originY: 'bottom',
+        overlayX: 'center',
+        overlayY: 'top'
+    },
+    bottomCenter: {
+        originX: 'center',
+        originY: 'bottom',
+        overlayX: 'center',
+        overlayY: 'top'
+    },
+    bottomLeft: {
+        originX: 'start',
+        originY: 'bottom',
+        overlayX: 'start',
+        overlayY: 'top'
+    },
+    bottomRight: {
+        originX: 'end',
+        originY: 'bottom',
+        overlayX: 'end',
+        overlayY: 'top'
+    },
+    left: {
+        originX: 'start',
+        originY: 'center',
+        overlayX: 'end',
+        overlayY: 'center'
+    },
+    leftTop: {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'end',
+        overlayY: 'top'
+    },
+    leftBottom: {
+        originX: 'start',
+        originY: 'bottom',
+        overlayX: 'end',
+        overlayY: 'bottom'
+    }
+};
+var DEFAULT_4_POSITIONS = _objectValues([
+    POSITION_MAP.top, POSITION_MAP.right, POSITION_MAP.bottom, POSITION_MAP.left
+]);
+function arrayMap(array, iteratee) {
+    var index = -1;
+    var length = array == null ? 0 : array.length;
+    var result = Array(length);
+    while (++index < length) {
+        result[index] = iteratee(array[index], index, array);
+    }
+    return result;
+}
+function baseValues(object, props) {
+    return arrayMap(props, function (key) {
+        return object[key];
+    });
+}
+function _objectValues(object) {
+    return object == null ? [] : baseValues(object, Object.keys(object));
+}
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { MC_SANITY_CHECKS_FACTORY as ɵa1, isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, _countGroupLabelsBeforeOption, _getOptionScrollPosition, McOptgroupBase, _McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS };
+export { MC_SANITY_CHECKS_FACTORY as ɵa1, isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, _countGroupLabelsBeforeOption, _getOptionScrollPosition, McOptgroupBase, _McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, POSITION_MAP, DEFAULT_4_POSITIONS };
 //# sourceMappingURL=core.es5.js.map

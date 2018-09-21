@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}),global.ng.core,global.ng.cdk.bidi,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes));
-}(this, (function (exports,core,bidi,coercion,rxjs,common,keycodes) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}),global.ng.core,global.ng.cdk.bidi,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations));
+}(this, (function (exports,core,bidi,coercion,rxjs,common,keycodes,animations) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -812,6 +812,131 @@ var McOptionModule = /** @class */ (function () {
 /** InjectionToken that can be used to specify the global label options. */
 var MC_LABEL_GLOBAL_OPTIONS = new core.InjectionToken('mc-label-global-options');
 
+var fadeAnimation = animations.trigger('fadeAnimation', [
+    animations.state('void', animations.style({ opacity: 0 })),
+    animations.state('true', animations.style({ opacity: 1 })),
+    animations.state('false', animations.style({ opacity: 0 })),
+    animations.transition('* => true', animations.animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')),
+    animations.transition('* => void', animations.animate('150ms cubic-bezier(0.4, 0.0, 1, 1)')),
+]);
+
+var POSITION_MAP = {
+    top: {
+        originX: 'center',
+        originY: 'top',
+        overlayX: 'center',
+        overlayY: 'bottom'
+    },
+    topCenter: {
+        originX: 'center',
+        originY: 'top',
+        overlayX: 'center',
+        overlayY: 'bottom',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    topLeft: {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'bottom',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    topRight: {
+        originX: 'end',
+        originY: 'top',
+        overlayX: 'end',
+        overlayY: 'bottom',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    right: {
+        originX: 'end',
+        originY: 'center',
+        overlayX: 'start',
+        overlayY: 'center'
+    },
+    rightTop: {
+        originX: 'end',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'top',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    rightBottom: {
+        originX: 'end',
+        originY: 'bottom',
+        overlayX: 'start',
+        overlayY: 'bottom',
+        offsetX: undefined,
+        offsetY: undefined
+    },
+    bottom: {
+        originX: 'center',
+        originY: 'bottom',
+        overlayX: 'center',
+        overlayY: 'top'
+    },
+    bottomCenter: {
+        originX: 'center',
+        originY: 'bottom',
+        overlayX: 'center',
+        overlayY: 'top'
+    },
+    bottomLeft: {
+        originX: 'start',
+        originY: 'bottom',
+        overlayX: 'start',
+        overlayY: 'top'
+    },
+    bottomRight: {
+        originX: 'end',
+        originY: 'bottom',
+        overlayX: 'end',
+        overlayY: 'top'
+    },
+    left: {
+        originX: 'start',
+        originY: 'center',
+        overlayX: 'end',
+        overlayY: 'center'
+    },
+    leftTop: {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'end',
+        overlayY: 'top'
+    },
+    leftBottom: {
+        originX: 'start',
+        originY: 'bottom',
+        overlayX: 'end',
+        overlayY: 'bottom'
+    }
+};
+var DEFAULT_4_POSITIONS = _objectValues([
+    POSITION_MAP.top, POSITION_MAP.right, POSITION_MAP.bottom, POSITION_MAP.left
+]);
+function arrayMap(array, iteratee) {
+    var index = -1;
+    var length = array == null ? 0 : array.length;
+    var result = Array(length);
+    while (++index < length) {
+        result[index] = iteratee(array[index], index, array);
+    }
+    return result;
+}
+function baseValues(object, props) {
+    return arrayMap(props, function (key) {
+        return object[key];
+    });
+}
+function _objectValues(object) {
+    return object == null ? [] : baseValues(object, Object.keys(object));
+}
+
 exports.ɵa1 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
@@ -839,6 +964,9 @@ exports.McOptgroupBase = McOptgroupBase;
 exports._McOptgroupMixinBase = _McOptgroupMixinBase;
 exports.McOptgroup = McOptgroup;
 exports.MC_LABEL_GLOBAL_OPTIONS = MC_LABEL_GLOBAL_OPTIONS;
+exports.fadeAnimation = fadeAnimation;
+exports.POSITION_MAP = POSITION_MAP;
+exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

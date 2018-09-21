@@ -1,0 +1,8 @@
+{
+  "name": "@ptsecurity/mosaic/tooltip",
+  "typings": "../tooltip.d.ts",
+  "main": "../bundles/mosaic-tooltip.umd.js",
+  "module": "../esm5/tooltip.es5.js",
+  "es2015": "../esm2015/tooltip.js",
+  "sideEffects": false
+}
