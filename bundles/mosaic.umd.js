@@ -4326,7 +4326,7 @@ var McProgressSpinnerBase = /** @class */ (function () {
     }
     return McProgressSpinnerBase;
 }());
-var _McProgressPinnerMixinBase = mixinColor(McProgressSpinnerBase);
+var _McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
 var MAX_DASH_ARRAY = 273;
 var McProgressSpinner = /** @class */ (function (_super) {
     __extends(McProgressSpinner, _super);
@@ -4383,7 +4383,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
         __metadata("design:paramtypes", [core.ElementRef])
     ], McProgressSpinner);
     return McProgressSpinner;
-}(_McProgressPinnerMixinBase));
+}(_McProgressSpinnerMixinBase));
 
 var McProgressSpinnerModule = /** @class */ (function () {
     function McProgressSpinnerModule() {
@@ -4582,7 +4582,6 @@ var McRadioGroup = /** @class */ (function (_super) {
     };
     /**
      * Sets the model value. Implemented as part of ControlValueAccessor.
-     * @param value
      */
     McRadioGroup.prototype.writeValue = function (value) {
         this.value = value;
@@ -7707,7 +7706,7 @@ exports._McProgressBarMixinBase = _McProgressBarMixinBase;
 exports.McProgressBar = McProgressBar;
 exports.McProgressSpinnerModule = McProgressSpinnerModule;
 exports.McProgressSpinnerBase = McProgressSpinnerBase;
-exports._McProgressPinnerMixinBase = _McProgressPinnerMixinBase;
+exports._McProgressSpinnerMixinBase = _McProgressSpinnerMixinBase;
 exports.McProgressSpinner = McProgressSpinner;
 exports.McRadioModule = McRadioModule;
 exports.McRadioChange = McRadioChange;

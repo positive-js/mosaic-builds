@@ -59,7 +59,7 @@ var McProgressSpinnerBase = /** @class */ (function () {
     }
     return McProgressSpinnerBase;
 }());
-var _McProgressPinnerMixinBase = core$1.mixinColor(McProgressSpinnerBase);
+var _McProgressSpinnerMixinBase = core$1.mixinColor(McProgressSpinnerBase);
 var MAX_DASH_ARRAY = 273;
 var McProgressSpinner = /** @class */ (function (_super) {
     __extends(McProgressSpinner, _super);
@@ -116,7 +116,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
         __metadata("design:paramtypes", [core.ElementRef])
     ], McProgressSpinner);
     return McProgressSpinner;
-}(_McProgressPinnerMixinBase));
+}(_McProgressSpinnerMixinBase));
 
 var McProgressSpinnerModule = /** @class */ (function () {
     function McProgressSpinnerModule() {
@@ -140,7 +140,7 @@ var McProgressSpinnerModule = /** @class */ (function () {
 
 exports.McProgressSpinnerModule = McProgressSpinnerModule;
 exports.McProgressSpinnerBase = McProgressSpinnerBase;
-exports._McProgressPinnerMixinBase = _McProgressPinnerMixinBase;
+exports._McProgressSpinnerMixinBase = _McProgressSpinnerMixinBase;
 exports.McProgressSpinner = McProgressSpinner;
 
 Object.defineProperty(exports, '__esModule', { value: true });

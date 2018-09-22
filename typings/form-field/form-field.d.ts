@@ -1,5 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, QueryList } from '@angular/core';
-import { CanColor } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor } from '@ptsecurity/mosaic/core';
 import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
 import { McHint } from './hint';
@@ -9,7 +9,7 @@ export declare class McFormFieldBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McFormFieldMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanColor> & typeof McFormFieldBase;
+export declare const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase;
 export declare class McFormField extends _McFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
     _elementRef: ElementRef;
     private _changeDetectorRef;

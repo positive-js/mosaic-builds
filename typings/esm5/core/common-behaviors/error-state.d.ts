@@ -10,6 +10,8 @@ export interface CanUpdateErrorState {
     errorStateMatcher: ErrorStateMatcher;
 }
 /** @docs-private */
+export declare type CanUpdateErrorStateCtor = Constructor<CanUpdateErrorState>;
+/** @docs-private */
 export interface HasErrorState {
     _parentFormGroup: FormGroupDirective;
     _parentForm: NgForm;
@@ -20,4 +22,4 @@ export interface HasErrorState {
  * Mixin to augment a directive with updateErrorState method.
  * For component with `errorState` and need to update `errorState`.
  */
-export declare function mixinErrorState<T extends Constructor<HasErrorState>>(base: T): Constructor<CanUpdateErrorState> & T;
+export declare function mixinErrorState<T extends Constructor<HasErrorState>>(base: T): CanUpdateErrorStateCtor & T;

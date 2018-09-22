@@ -1,7 +1,7 @@
 import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
-import { CanColor, CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, CanDisable, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 /** Change event object emitted by McRadio. */
 export declare class McRadioChange {
     /** The McRadioButton that emits the change event. */
@@ -89,7 +89,6 @@ export declare class McRadioGroup extends _McRadioGroupMixinBase implements Afte
     markRadiosForCheck(): void;
     /**
      * Sets the model value. Implemented as part of ControlValueAccessor.
-     * @param value
      */
     writeValue(value: any): void;
     /**
@@ -119,7 +118,7 @@ export declare class McRadioButtonBase {
     disabled: boolean;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McRadioButtonMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanColor> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<HasTabIndex> & typeof McRadioButtonBase;
+export declare const _McRadioButtonMixinBase: CanColorCtor & HasTabIndexCtor & typeof McRadioButtonBase;
 export declare class McRadioButton extends _McRadioButtonMixinBase implements OnInit, OnDestroy, CanColor, HasTabIndex {
     private readonly _changeDetector;
     private readonly _radioDispatcher;

@@ -18,9 +18,9 @@ class McProgressSpinnerBase {
         this._elementRef = _elementRef;
     }
 }
-const _McProgressPinnerMixinBase = mixinColor(McProgressSpinnerBase);
+const _McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
 const MAX_DASH_ARRAY = 273;
-let McProgressSpinner = class McProgressSpinner extends _McProgressPinnerMixinBase {
+let McProgressSpinner = class McProgressSpinner extends _McProgressSpinnerMixinBase {
     constructor(elementRef) {
         super(elementRef);
         this.id = `mc-progress-spinner-${idIterator++}`;
@@ -87,5 +87,5 @@ McProgressSpinnerModule = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { McProgressSpinnerModule, McProgressSpinnerBase, _McProgressPinnerMixinBase, McProgressSpinner };
+export { McProgressSpinnerModule, McProgressSpinnerBase, _McProgressSpinnerMixinBase, McProgressSpinner };
 //# sourceMappingURL=progress-spinner.js.map

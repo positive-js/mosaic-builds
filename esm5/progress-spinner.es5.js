@@ -19,7 +19,7 @@ var McProgressSpinnerBase = /** @class */ (function () {
     }
     return McProgressSpinnerBase;
 }());
-var _McProgressPinnerMixinBase = mixinColor(McProgressSpinnerBase);
+var _McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
 var MAX_DASH_ARRAY = 273;
 var McProgressSpinner = /** @class */ (function (_super) {
     __extends(McProgressSpinner, _super);
@@ -76,7 +76,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
         __metadata("design:paramtypes", [ElementRef])
     ], McProgressSpinner);
     return McProgressSpinner;
-}(_McProgressPinnerMixinBase));
+}(_McProgressSpinnerMixinBase));
 
 var McProgressSpinnerModule = /** @class */ (function () {
     function McProgressSpinnerModule() {
@@ -102,5 +102,5 @@ var McProgressSpinnerModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { McProgressSpinnerModule, McProgressSpinnerBase, _McProgressPinnerMixinBase, McProgressSpinner };
+export { McProgressSpinnerModule, McProgressSpinnerBase, _McProgressSpinnerMixinBase, McProgressSpinner };
 //# sourceMappingURL=progress-spinner.es5.js.map

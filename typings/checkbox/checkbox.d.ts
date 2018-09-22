@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { CanColor, CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { McCheckboxClickAction } from './checkbox-config';
 /**
  * Provider Expression that allows mc-checkbox to register as a ControlValueAccessor.
@@ -35,7 +35,7 @@ export declare class McCheckboxBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McCheckboxMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<HasTabIndex> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanColor> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McCheckboxBase;
+export declare const _McCheckboxMixinBase: HasTabIndexCtor & CanColorCtor & CanDisableCtor & typeof McCheckboxBase;
 /**
  * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
  * and exposes a similar API. A McCheckbox can be either checked, unchecked, indeterminate, or

@@ -159,7 +159,6 @@ let McRadioGroup = class McRadioGroup extends _McRadioGroupMixinBase {
     }
     /**
      * Sets the model value. Implemented as part of ControlValueAccessor.
-     * @param value
      */
     writeValue(value) {
         this.value = value;

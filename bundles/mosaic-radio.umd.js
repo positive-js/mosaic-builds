@@ -231,7 +231,6 @@ var McRadioGroup = /** @class */ (function (_super) {
     };
     /**
      * Sets the model value. Implemented as part of ControlValueAccessor.
-     * @param value
      */
     McRadioGroup.prototype.writeValue = function (value) {
         this.value = value;

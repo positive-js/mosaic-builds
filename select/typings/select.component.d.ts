@@ -4,7 +4,7 @@ import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkConnectedOverlay, Overlay, RepositionScrollStrategy, IScrollStrategy, ViewportRuler } from '@ptsecurity/cdk/overlay';
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, InjectionToken, NgZone, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { CanDisable, CanUpdateErrorState, ErrorStateMatcher, HasTabIndex, McOptgroup, McOption, McOptionSelectionChange } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, HasTabIndex, HasTabIndexCtor, McOptgroup, McOption, McOptionSelectionChange } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tag';
 import { Observable, Subject } from 'rxjs';
@@ -57,7 +57,7 @@ export declare class McSelectBase {
     ngControl: NgControl;
     constructor(_elementRef: ElementRef, _defaultErrorStateMatcher: ErrorStateMatcher, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
-export declare const _McSelectMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<HasTabIndex> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanUpdateErrorState> & typeof McSelectBase;
+export declare const _McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor & typeof McSelectBase;
 /**
  * Allows the user to customize the trigger that is displayed when the select has a value.
  */
