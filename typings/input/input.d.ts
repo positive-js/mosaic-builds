@@ -2,7 +2,7 @@ import { DoCheck, ElementRef, OnChanges, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { Platform } from '@ptsecurity/cdk/platform';
-import { CanUpdateErrorState, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
+import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 export declare class McInputBase {
     _defaultErrorStateMatcher: ErrorStateMatcher;
@@ -11,7 +11,7 @@ export declare class McInputBase {
     ngControl: NgControl;
     constructor(_defaultErrorStateMatcher: ErrorStateMatcher, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
-export declare const _McInputMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanUpdateErrorState> & typeof McInputBase;
+export declare const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase;
 export declare class McInput extends _McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState {
     protected _elementRef: ElementRef;
     protected _platform: Platform;
