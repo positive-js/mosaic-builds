@@ -2,7 +2,7 @@ import { AfterContentInit, ElementRef, EventEmitter, QueryList, ChangeDetectorRe
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { McLine, CanDisable } from '@ptsecurity/mosaic/core';
+import { McLine, CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 /**
  * Component for list-options of selection-list. Each list-option can automatically
  * generate a checkbox and can put current item into the selectionModel of selection-list
@@ -44,7 +44,7 @@ export declare class McListSelectionChange {
 }
 export declare class McListSelectionBase {
 }
-export declare const _McListSelectionMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McListSelectionBase;
+export declare const _McListSelectionMixinBase: CanDisableCtor & typeof McListSelectionBase;
 export declare class McListSelection extends _McListSelectionMixinBase implements IFocusableOption, CanDisable, AfterContentInit, ControlValueAccessor {
     private _element;
     _keyManager: FocusKeyManager<McListOption>;

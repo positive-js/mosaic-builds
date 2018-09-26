@@ -1,7 +1,7 @@
 import { AfterViewInit, ElementRef, OnDestroy, OnInit, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { Platform } from '@ptsecurity/cdk/platform';
-import { CanDisable } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 export declare type McNavbarContainerPositionType = 'left' | 'right';
 export interface IMcNavbarDropdownItem {
     link?: string;
@@ -17,7 +17,7 @@ export declare class McNavbarItemBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McNavbarMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McNavbarItemBase;
+export declare const _McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase;
 export declare class McNavbarItem extends _McNavbarMixinBase implements OnInit, AfterViewInit, OnDestroy, CanDisable {
     elementRef: ElementRef;
     private _focusMonitor;

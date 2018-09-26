@@ -1,7 +1,7 @@
 import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
-import { CanColor, CanColorCtor, CanDisable, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 /** Change event object emitted by McRadio. */
 export declare class McRadioChange {
     /** The McRadioButton that emits the change event. */
@@ -17,7 +17,7 @@ export declare class McRadioChange {
 /** @docs-private */
 export declare class McRadioGroupBase {
 }
-export declare const _McRadioGroupMixinBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McRadioGroupBase;
+export declare const _McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase;
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
  * allows it to support [(ngModel)] and ngControl.
