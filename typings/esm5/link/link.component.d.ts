@@ -1,11 +1,11 @@
 import { ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 export declare class McLinkBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McLinkBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<HasTabIndex> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof McLinkBase;
+export declare const _McLinkBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase;
 export declare class McLink extends _McLinkBase implements OnDestroy, HasTabIndex, CanDisable {
     elementRef: ElementRef;
     private _focusMonitor;

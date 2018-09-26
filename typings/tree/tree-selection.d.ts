@@ -1,7 +1,7 @@
 import { AfterContentInit, ChangeDetectorRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ElementRef } from '@angular/core';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTreeNode, CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
-import { CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 /**
  * Wrapper for the CdkTree node with Material design styles.
@@ -24,7 +24,7 @@ export declare class McTreeNodeOption<T> extends CdkTreeNode<T> implements CanDi
     _handleBlur(): void;
     _handleClick(): void;
 }
-export declare const _McTreeSelectionBase: import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<HasTabIndex> & import("@ptsecurity/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & typeof CdkTree;
+export declare const _McTreeSelectionBase: HasTabIndexCtor & CanDisableCtor & typeof CdkTree;
 export declare class McTreeNavigationChange {
     source: McTreeSelection<any>;
     option: McTreeNodeOption<any>;
