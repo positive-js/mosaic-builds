@@ -25,16 +25,19 @@
       "from": "./progress-spinner"
     },
     {
-      "from": "./link"
+      "from": "./layout"
     },
     {
-      "from": "./list"
+      "from": "./link"
     },
     {
       "from": "./icon"
     },
     {
       "from": "./progress-bar"
+    },
+    {
+      "from": "./list"
     },
     {
       "from": "./navbar"
@@ -49,13 +52,13 @@
       "from": "./button"
     },
     {
+      "from": "./modal"
+    },
+    {
       "from": "./input"
     },
     {
       "from": "./select"
-    },
-    {
-      "from": "./modal"
     },
     {
       "from": "./typings/index"

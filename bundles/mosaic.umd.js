@@ -2330,6 +2330,210 @@ var McInputModule = /** @class */ (function () {
     return McInputModule;
 }());
 
+var McContentComponent = /** @class */ (function () {
+    function McContentComponent() {
+    }
+    McContentComponent = __decorate([
+        core.Component({
+            selector: 'mc-content',
+            preserveWhitespaces: false,
+            template: "<ng-content></ng-content>",
+            styles: [
+                ":host {\n            display: block;\n        }"
+            ],
+            host: {
+                '[class.mc-layout-content]': 'true'
+            }
+        })
+    ], McContentComponent);
+    return McContentComponent;
+}());
+
+var McFooterComponent = /** @class */ (function () {
+    function McFooterComponent() {
+    }
+    McFooterComponent = __decorate([
+        core.Component({
+            selector: 'mc-footer',
+            preserveWhitespaces: false,
+            template: "<ng-content></ng-content>",
+            styles: [
+                ":host {\n            display: block;\n        }"
+            ],
+            host: {
+                '[class.mc-layout-footer]': 'true'
+            }
+        })
+    ], McFooterComponent);
+    return McFooterComponent;
+}());
+
+var McHeaderComponent = /** @class */ (function () {
+    function McHeaderComponent() {
+    }
+    McHeaderComponent = __decorate([
+        core.Component({
+            selector: 'mc-header',
+            preserveWhitespaces: false,
+            template: "<ng-content></ng-content>",
+            styles: [
+                ":host {\n            display: block;\n        }"
+            ],
+            host: {
+                '[class.mc-layout-header]': 'true'
+            }
+        })
+    ], McHeaderComponent);
+    return McHeaderComponent;
+}());
+
+var McLayoutComponent = /** @class */ (function () {
+    function McLayoutComponent() {
+        this.hasSidebar = false;
+    }
+    McLayoutComponent = __decorate([
+        core.Component({
+            selector: 'mc-layout',
+            preserveWhitespaces: false,
+            styles: [".mc-layout{display:flex;flex-direction:column;flex:auto}.mc-layout,.mc-layout *{box-sizing:border-box}.mc-layout-content{flex:auto}.mc-layout-has-sidebar{flex-direction:row}.mc-layout-has-sidebar>.mc-layout,.mc-layout-has-sidebar>.mc-layout-content{overflow-x:hidden}.mc-layout-footer,.mc-layout-header{flex:0 0 auto;padding:0 0}.mc-layout-sider{transition:all .2s;position:relative;min-width:0}.mc-layout-sider-children{height:100%;padding-top:.1px;margin-top:-.1px}.mc-layout-sider-right{order:1}"],
+            template: "<ng-content></ng-content>",
+            host: {
+                '[class.mc-layout]': 'true',
+                '[class.mc-layout-has-sidebar]': 'hasSidebar'
+            },
+            encapsulation: core.ViewEncapsulation.None,
+            changeDetection: core.ChangeDetectionStrategy.OnPush
+        })
+    ], McLayoutComponent);
+    return McLayoutComponent;
+}());
+
+var McSidebarComponent = /** @class */ (function () {
+    function McSidebarComponent(mcLayoutComponent) {
+        this.mcLayoutComponent = mcLayoutComponent;
+        this._mcWidth = 200;
+        this.mcCollapsedWidth = 80;
+        this.mcCollapsedChange = new core.EventEmitter();
+        this.collapsed = false;
+        this.collapsible = false;
+    }
+    Object.defineProperty(McSidebarComponent.prototype, "mcCollapsible", {
+        get: function () {
+            return this.collapsible;
+        },
+        set: function (value) {
+            this.collapsible = toBoolean(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McSidebarComponent.prototype, "mcCollapsed", {
+        get: function () {
+            return this.collapsed;
+        },
+        set: function (value) {
+            this.collapsed = toBoolean(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McSidebarComponent.prototype, "mcFlex", {
+        get: function () {
+            if (this.mcCollapsed) {
+                return "0 0 " + this.mcCollapsedWidth + "px";
+            }
+            else {
+                return "0 0 " + this.mcWidth + "px";
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McSidebarComponent.prototype, "mcWidth", {
+        get: function () {
+            if (this.mcCollapsed) {
+                return this.mcCollapsedWidth;
+            }
+            else {
+                return this._mcWidth;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McSidebarComponent.prototype.ngOnInit = function () {
+        if (this.mcLayoutComponent) {
+            this.mcLayoutComponent.hasSidebar = true;
+        }
+    };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object)
+    ], McSidebarComponent.prototype, "_mcWidth", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object)
+    ], McSidebarComponent.prototype, "mcCollapsedWidth", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McSidebarComponent.prototype, "mcCollapsible", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], McSidebarComponent.prototype, "mcCollapsed", null);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", Object)
+    ], McSidebarComponent.prototype, "mcCollapsedChange", void 0);
+    McSidebarComponent = __decorate([
+        core.Component({
+            selector: 'mc-sidebar',
+            preserveWhitespaces: false,
+            template: "<div class=\"mc-layout-sidebar-children\"><ng-content></ng-content></div>",
+            host: {
+                '[class.mc-layout-sidebar]': 'true',
+                '[class.mc-layout-sidebar-collapsed]': 'mcCollapsed',
+                '[style.flex]': 'mcFlex',
+                '[style.max-width.px]': 'mcWidth',
+                '[style.min-width.px]': 'mcWidth',
+                '[style.width.px]': 'mcWidth'
+            },
+            changeDetection: core.ChangeDetectionStrategy.OnPush
+        }),
+        __param(0, core.Optional()), __param(0, core.Host()),
+        __metadata("design:paramtypes", [McLayoutComponent])
+    ], McSidebarComponent);
+    return McSidebarComponent;
+}());
+
+var McLayoutModule = /** @class */ (function () {
+    function McLayoutModule() {
+    }
+    McLayoutModule = __decorate([
+        core.NgModule({
+            imports: [common.CommonModule],
+            exports: [
+                McLayoutComponent,
+                McContentComponent,
+                McFooterComponent,
+                McHeaderComponent,
+                McSidebarComponent
+            ],
+            declarations: [
+                McLayoutComponent,
+                McContentComponent,
+                McFooterComponent,
+                McHeaderComponent,
+                McSidebarComponent
+            ]
+        })
+    ], McLayoutModule);
+    return McLayoutModule;
+}());
+
 /**
  * Component for list-options of selection-list. Each list-option can automatically
  * generate a checkbox and can put current item into the selectionModel of selection-list
@@ -7663,12 +7867,18 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵa15 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵa16 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
 exports.McInputBase = McInputBase;
 exports._McInputMixinBase = _McInputMixinBase;
 exports.McInput = McInput;
 exports.McInputMono = McInputMono;
+exports.McContentComponent = McContentComponent;
+exports.McFooterComponent = McFooterComponent;
+exports.McHeaderComponent = McHeaderComponent;
+exports.McLayoutComponent = McLayoutComponent;
+exports.McSidebarComponent = McSidebarComponent;
+exports.McLayoutModule = McLayoutModule;
 exports.McListModule = McListModule;
 exports.McListBase = McListBase;
 exports.McList = McList;
@@ -7685,8 +7895,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb16 = CssUnitPipe;
-exports.ɵa16 = McModalControlService;
+exports.ɵb17 = CssUnitPipe;
+exports.ɵa17 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -7732,7 +7942,7 @@ exports.McTagBase = McTagBase;
 exports._McTagMixinBase = _McTagMixinBase;
 exports.McTag = McTag;
 exports.McTagModule = McTagModule;
-exports.ɵa17 = mcSelectAnimations;
+exports.ɵa18 = mcSelectAnimations;
 exports.McSelectModule = McSelectModule;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;
