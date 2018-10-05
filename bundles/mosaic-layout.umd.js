@@ -123,6 +123,7 @@ var McSidebarComponent = /** @class */ (function () {
         this.mcLayoutComponent = mcLayoutComponent;
         this._mcWidth = 200;
         this.mcCollapsedWidth = 80;
+        // tslint:disable-next-line
         this.mcCollapsedChange = new core.EventEmitter();
         this.collapsed = false;
         this.collapsible = false;

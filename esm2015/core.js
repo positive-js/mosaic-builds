@@ -53,6 +53,7 @@ let McCommonModule = class McCommonModule {
     }
     // Whether the code is running in tests.
     _isTestEnv() {
+        // tslint:disable-next-line
         return this._window && (this._window['__karma__'] || this._window['jasmine']);
     }
     _checkDoctypeIsDefined() {
@@ -92,6 +93,7 @@ McCommonModule = __decorate([
 function mixinDisabled(base) {
     return class extends base {
         constructor(...args) {
+            // tslint:disable-next-line
             super(...args);
             this._disabled = false;
         }
@@ -348,6 +350,7 @@ let McMeasureScrollbarService = class McMeasureScrollbarService {
     }
     initScrollBarWidth() {
         const scrollDiv = this.document.createElement('div');
+        // tslint:disable-next-line
         for (const scrollProp in this.scrollbarMeasure) {
             if (this.scrollbarMeasure.hasOwnProperty(scrollProp)) {
                 scrollDiv.style[scrollProp] = this.scrollbarMeasure[scrollProp];
@@ -542,6 +545,7 @@ let McOption = class McOption {
     }
     /** Ensures the option is selected when activated from the keyboard. */
     _handleKeydown(event) {
+        // tslint:disable-next-line
         if (event.keyCode === ENTER || event.keyCode === SPACE) {
             this._selectViaInteraction();
             // Prevent the page from scrolling down and form submits.

@@ -53,6 +53,7 @@ var McCommonModule = /** @class */ (function () {
     };
     // Whether the code is running in tests.
     McCommonModule.prototype._isTestEnv = function () {
+        // tslint:disable-next-line
         return this._window && (this._window['__karma__'] || this._window['jasmine']);
     };
     McCommonModule.prototype._checkDoctypeIsDefined = function () {
@@ -400,6 +401,7 @@ var McMeasureScrollbarService = /** @class */ (function () {
     });
     McMeasureScrollbarService.prototype.initScrollBarWidth = function () {
         var scrollDiv = this.document.createElement('div');
+        // tslint:disable-next-line
         for (var scrollProp in this.scrollbarMeasure) {
             if (this.scrollbarMeasure.hasOwnProperty(scrollProp)) {
                 scrollDiv.style[scrollProp] = this.scrollbarMeasure[scrollProp];
@@ -628,6 +630,7 @@ var McOption = /** @class */ (function () {
     };
     /** Ensures the option is selected when activated from the keyboard. */
     McOption.prototype._handleKeydown = function (event) {
+        // tslint:disable-next-line
         if (event.keyCode === ENTER || event.keyCode === SPACE) {
             this._selectViaInteraction();
             // Prevent the page from scrolling down and form submits.

@@ -88,6 +88,7 @@ let McSidebarComponent = class McSidebarComponent {
         this.mcLayoutComponent = mcLayoutComponent;
         this._mcWidth = 200;
         this.mcCollapsedWidth = 80;
+        // tslint:disable-next-line
         this.mcCollapsedChange = new EventEmitter();
         this.collapsed = false;
         this.collapsible = false;
