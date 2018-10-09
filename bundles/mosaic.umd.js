@@ -983,7 +983,7 @@ var McIcon = /** @class */ (function (_super) {
         core.Component({
             selector: "[mc-icon]",
             template: '<ng-content></ng-content>',
-            styles: [""],
+            styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
             changeDetection: core.ChangeDetectionStrategy.OnPush,
             encapsulation: core.ViewEncapsulation.None
         }),
@@ -1756,6 +1756,13 @@ function getMcFormFieldMissingControlError() {
     return Error('mc-form-field must contain a McFormFieldControl.');
 }
 
+/** An interface which allows a control to work inside of a `MсFormField`. */
+var McFormFieldNumberControl = /** @class */ (function () {
+    function McFormFieldNumberControl() {
+    }
+    return McFormFieldNumberControl;
+}());
+
 var nextUniqueId$1 = 0;
 var McHint = /** @class */ (function () {
     function McHint() {
@@ -1788,6 +1795,36 @@ var McPrefix = /** @class */ (function () {
     return McPrefix;
 }());
 
+var McStepper = /** @class */ (function () {
+    function McStepper() {
+        this.stepUp = new core.EventEmitter();
+        this.stepDown = new core.EventEmitter();
+    }
+    McStepper.prototype.onStepUp = function ($event) {
+        this.stepUp.emit();
+        $event.preventDefault();
+    };
+    McStepper.prototype.onStepDown = function ($event) {
+        this.stepDown.emit();
+        $event.preventDefault();
+    };
+    __decorate([
+        core.Output(),
+        __metadata("design:type", core.EventEmitter)
+    ], McStepper.prototype, "stepUp", void 0);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", core.EventEmitter)
+    ], McStepper.prototype, "stepDown", void 0);
+    McStepper = __decorate([
+        core.Component({
+            selector: 'mc-stepper',
+            template: "\n        <i class=\"mc mc-stepper-step-up mc-icon mc-angle-L_16 mc-icon-flip-h\" (mousedown)=\"onStepUp($event)\"></i>\n        <i class=\"mc mc-stepper-step-down mc-icon mc-angle-L_16\" (mousedown)=\"onStepDown($event)\"></i>\n    "
+        })
+    ], McStepper);
+    return McStepper;
+}());
+
 var McSuffix = /** @class */ (function () {
     function McSuffix() {
     }
@@ -1815,6 +1852,7 @@ var McFormField = /** @class */ (function (_super) {
         _this._changeDetectorRef = _changeDetectorRef;
         // Unique id for the internal form field label.
         _this._labelId = "mc-form-field-label-" + nextUniqueId$1$1++;
+        _this.hovered = false;
         return _this;
     }
     McFormField.prototype.ngAfterContentInit = function () {
@@ -1823,12 +1861,22 @@ var McFormField = /** @class */ (function (_super) {
         if (this._control.controlType) {
             this._elementRef.nativeElement.classList
                 .add("mc-form-field-type-" + this._control.controlType);
+            if (this._numberControl && this.hasStepper) {
+                this._stepper.stepUp.subscribe(this.onStepUp.bind(this));
+                this._stepper.stepDown.subscribe(this.onStepDown.bind(this));
+            }
         }
         // Subscribe to changes in the child control state in order to update the form field UI.
         this._control.stateChanges.pipe(operators.startWith())
             .subscribe(function () {
             _this._changeDetectorRef.markForCheck();
         });
+        if (this._numberControl) {
+            this._numberControl.stateChanges.pipe(operators.startWith())
+                .subscribe(function () {
+                _this._changeDetectorRef.markForCheck();
+            });
+        }
         // Run change detection if the value changes.
         var valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || rxjs.EMPTY;
         rxjs.merge(valueChanges)
@@ -1848,9 +1896,12 @@ var McFormField = /** @class */ (function (_super) {
         }
     };
     McFormField.prototype.onContainerClick = function ($event) {
-        return this._control.onContainerClick && this._control.onContainerClick($event);
+        if (this._control.onContainerClick) {
+            this._control.onContainerClick($event);
+        }
     };
     McFormField.prototype.onKeyDown = function (e) {
+        // tslint:disable-next-line:deprecation
         if (e.keyCode === keycodes.ESCAPE &&
             this._control.focused &&
             this.hasCleaner) {
@@ -1858,6 +1909,22 @@ var McFormField = /** @class */ (function (_super) {
                 this._control.ngControl.reset();
             }
             e.preventDefault();
+        }
+    };
+    McFormField.prototype.onHoverChanged = function (isHovered) {
+        if (isHovered !== this.hovered) {
+            this.hovered = isHovered;
+            this._changeDetectorRef.markForCheck();
+        }
+    };
+    McFormField.prototype.onStepUp = function () {
+        if (this._numberControl) {
+            this._numberControl.stepUp(this._numberControl.step);
+        }
+    };
+    McFormField.prototype.onStepDown = function () {
+        if (this._numberControl) {
+            this._numberControl.stepDown(this._numberControl.step);
         }
     };
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
@@ -1899,12 +1966,37 @@ var McFormField = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McFormField.prototype, "hasStepper", {
+        get: function () {
+            return !!this._stepper;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McFormField.prototype, "canShowCleaner", {
         get: function () {
             return this.hasCleaner &&
-                this._control && this._control.ngControl
+                this._control &&
+                this._control.ngControl
                 ? this._control.ngControl.value && !this._control.disabled
                 : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "disabled", {
+        get: function () {
+            return this._control && this._control.disabled;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "canShowStepper", {
+        get: function () {
+            return this._numberControl &&
+                !this.disabled &&
+                (this._numberControl.focused ||
+                    this.hovered);
         },
         enumerable: true,
         configurable: true
@@ -1913,6 +2005,10 @@ var McFormField = /** @class */ (function (_super) {
         core.ContentChild(McFormFieldControl),
         __metadata("design:type", McFormFieldControl)
     ], McFormField.prototype, "_control", void 0);
+    __decorate([
+        core.ContentChild(McFormFieldNumberControl),
+        __metadata("design:type", McFormFieldNumberControl)
+    ], McFormField.prototype, "_numberControl", void 0);
     __decorate([
         core.ContentChildren(McHint),
         __metadata("design:type", core.QueryList)
@@ -1929,22 +2025,27 @@ var McFormField = /** @class */ (function (_super) {
         core.ContentChildren(McCleaner),
         __metadata("design:type", core.QueryList)
     ], McFormField.prototype, "_cleaner", void 0);
+    __decorate([
+        core.ContentChild(McStepper),
+        __metadata("design:type", McStepper)
+    ], McFormField.prototype, "_stepper", void 0);
     McFormField = __decorate([
         core.Component({
             selector: 'mc-form-field',
             exportAs: 'mcFormField',
-            template: "<div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div>",
+            template: "<div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div><ng-content *ngIf=\"canShowStepper\" select=\"mc-stepper\"></ng-content></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div>",
             // McInput is a directive and can't have styles, so we need to include its styles here.
             // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
             // aren't using McInput.
-            styles: [".mc-form-field{position:relative;display:inline-block;width:100%}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;display:flex;flex-direction:row;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px;cursor:pointer} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}"],
+            styles: [".mc-form-field{position:relative;display:inline-block;width:100%}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;display:flex;flex-direction:row;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px;cursor:pointer}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px}mc-stepper .mc-stepper-step-down,mc-stepper .mc-stepper-step-up{cursor:pointer;width:32px;text-align:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset}"],
             host: {
                 class: 'mc-form-field',
                 '[class.mc-form-field_invalid]': '_control.errorState',
                 '[class.mc-form-field_disabled]': '_control.disabled',
                 '[class.mc-form-field_has-prefix]': 'hasPrefix',
                 '[class.mc-form-field_has-suffix]': 'hasSuffix',
-                '[class.mc-form-field_has-cleaner]': 'hasCleaner',
+                '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
+                '[class.mc-form-field_has-stepper]': 'canShowStepper',
                 '[class.mc-focused]': '_control.focused',
                 '[class.ng-untouched]': '_shouldForward("untouched")',
                 '[class.ng-touched]': '_shouldForward("touched")',
@@ -1953,7 +2054,9 @@ var McFormField = /** @class */ (function (_super) {
                 '[class.ng-valid]': '_shouldForward("valid")',
                 '[class.ng-invalid]': '_shouldForward("invalid")',
                 '[class.ng-pending]': '_shouldForward("pending")',
-                '(keydown)': 'onKeyDown($event)'
+                '(keydown)': 'onKeyDown($event)',
+                '(mouseenter)': 'onHoverChanged(true)',
+                '(mouseleave)': 'onHoverChanged(false)'
             },
             inputs: ['color'],
             encapsulation: core.ViewEncapsulation.None,
@@ -1987,7 +2090,8 @@ var McFormFieldModule = /** @class */ (function () {
                 McHint,
                 McPrefix,
                 McSuffix,
-                McCleaner
+                McCleaner,
+                McStepper
             ],
             imports: [common.CommonModule, McIconModule],
             exports: [
@@ -1996,7 +2100,8 @@ var McFormFieldModule = /** @class */ (function () {
                 McHint,
                 McPrefix,
                 McSuffix,
-                McCleaner
+                McCleaner,
+                McStepper
             ]
         })
     ], McFormFieldModule);
@@ -2009,6 +2114,42 @@ function getMcInputUnsupportedTypeError(inputType) {
 
 var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
 
+function sanitizeNumber(value) {
+    return !isFinite(value) || isNaN(value)
+        ? null
+        : value;
+}
+function getPrecision(value) {
+    var arr = value.toString().split('.');
+    return arr.length === 1
+        ? 1
+        // tslint:disable-next-line:no-magic-numbers
+        : Math.pow(10, arr[1].length);
+}
+function add(value1, value2) {
+    var precision = Math.max(getPrecision(value1), getPrecision(value2));
+    var res = (value1 * precision + value2 * precision) / precision;
+    return sanitizeNumber(res);
+}
+var stepUp = function (value, max, min, step) {
+    var res;
+    if (value === null) {
+        res = add(min, step);
+        return res === null ? null : Math.min(res, max);
+    }
+    res = add(value, step);
+    return res === null ? null : Math.max(Math.min(res, max), min);
+};
+var stepDown = function (value, max, min, step) {
+    var res;
+    if (value === null) {
+        res = add(max, -step);
+        return res === null ? null : Math.max(res, min);
+    }
+    res = add(value, -step);
+    return res === null ? null : Math.min(Math.max(res, min), max);
+};
+
 var MC_INPUT_INVALID_TYPES = [
     'button',
     'checkbox',
@@ -2020,6 +2161,8 @@ var MC_INPUT_INVALID_TYPES = [
     'reset',
     'submit'
 ];
+var BIG_STEP = 10;
+var SMALL_STEP = 1;
 var nextUniqueId$2 = 0;
 var McInputBase = /** @class */ (function () {
     function McInputBase(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) {
@@ -2031,12 +2174,161 @@ var McInputBase = /** @class */ (function () {
     return McInputBase;
 }());
 var _McInputMixinBase = mixinErrorState(McInputBase);
+var McNumberInput = /** @class */ (function () {
+    function McNumberInput(_platform, _elementRef, _model, step, bigStep, min, max) {
+        this._platform = _platform;
+        this._elementRef = _elementRef;
+        this._model = _model;
+        /**
+         * Implemented as part of McFormFieldNumberControl.
+         * @docs-private
+         */
+        this.focused = false;
+        /**
+         * Implemented as part of McFormFieldNumberControl.
+         * @docs-private
+         */
+        this.stateChanges = new rxjs.Subject();
+        this._step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
+        this._bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
+        this._min = this.isDigit(min) ? parseFloat(min) : -Infinity;
+        this._max = this.isDigit(max) ? parseFloat(max) : Infinity;
+        this._host = this._elementRef.nativeElement;
+        var self = this;
+        if ('valueAsNumber' in this._host) {
+            Object.defineProperty(Object.getPrototypeOf(this._host), 'valueAsNumber', {
+                // tslint:disable-next-line:no-reserved-keywords
+                get: function () {
+                    var res = parseFloat(self.normalizeSplitter(this.value));
+                    return isNaN(res) ? null : res;
+                }
+            });
+        }
+    }
+    McNumberInput_1 = McNumberInput;
+    Object.defineProperty(McNumberInput.prototype, "step", {
+        get: function () {
+            return this._step;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McNumberInput.prototype, "bigStep", {
+        get: function () {
+            return this._bigStep;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McNumberInput.prototype._focusChanged = function (isFocused) {
+        if (isFocused !== this.focused) {
+            this.focused = isFocused;
+            this.stateChanges.next();
+        }
+    };
+    McNumberInput.prototype.onKeyDown = function (event) {
+        var _this = this;
+        // tslint:disable-next-line:deprecation
+        var keyCode = event.keyCode;
+        var isCtrlA = function (e) { return e.keyCode === keycodes.A && (e.ctrlKey || e.metaKey); };
+        var isCtrlC = function (e) { return e.keyCode === keycodes.C && (e.ctrlKey || e.metaKey); };
+        var isCtrlV = function (e) { return e.keyCode === keycodes.V && (e.ctrlKey || e.metaKey); };
+        var isCtrlX = function (e) { return e.keyCode === keycodes.X && (e.ctrlKey || e.metaKey); };
+        var isFKey = function (e) { return e.keyCode >= keycodes.F1 && e.keyCode <= keycodes.F12; };
+        var isNumber = function (e) { return (e.keyCode >= keycodes.ZERO && e.keyCode <= keycodes.NINE) ||
+            (e.keyCode >= keycodes.NUMPAD_ZERO && e.keyCode <= keycodes.NUMPAD_NINE); };
+        var minuses = [keycodes.NUMPAD_MINUS, keycodes.DASH, keycodes.FF_MINUS];
+        var serviceKeys = [keycodes.DELETE, keycodes.BACKSPACE, keycodes.TAB, keycodes.ESCAPE, keycodes.ENTER];
+        var arrows = [keycodes.LEFT_ARROW, keycodes.RIGHT_ARROW];
+        var allowedKeys = [keycodes.HOME, keycodes.END].concat(arrows).concat(serviceKeys).concat(minuses);
+        var isIEPeriod = function (e) { return e.key === '.' || e.key === 'Decimal'; };
+        var isNotIEPeriod = function (e) { return e.key === '.' || e.key === ','; };
+        // Decimal is for IE
+        var isPeriod = function (e) { return _this._platform.EDGE || _this._platform.TRIDENT
+            ? isIEPeriod(e)
+            : isNotIEPeriod(e); };
+        if (allowedKeys.indexOf(keyCode) !== -1 ||
+            isCtrlA(event) ||
+            isCtrlC(event) ||
+            isCtrlV(event) ||
+            isCtrlX(event) ||
+            isFKey(event) ||
+            isPeriod(event)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is not a number and stop the keypress
+        if (event.shiftKey || !isNumber(event)) {
+            event.preventDefault();
+            // process steps
+            var step = event.shiftKey ? this._bigStep : this._step;
+            if (keyCode === keycodes.UP_ARROW) {
+                this.stepUp(step);
+            }
+            if (keyCode === keycodes.DOWN_ARROW) {
+                this.stepDown(step);
+            }
+        }
+    };
+    McNumberInput.prototype.onPaste = function (event) {
+        var value = event.clipboardData.getData('text');
+        value = this.normalizeSplitter(value);
+        if (!this.isDigit(value)) {
+            event.preventDefault();
+        }
+    };
+    McNumberInput.prototype.stepUp = function (step) {
+        this._elementRef.nativeElement.focus();
+        var res = stepUp(this._host.valueAsNumber, this._max, this._min, step);
+        this._host.value = res === null ? '' : res.toString();
+        this._model.update.emit(this._host.valueAsNumber);
+    };
+    McNumberInput.prototype.stepDown = function (step) {
+        this._elementRef.nativeElement.focus();
+        var res = stepDown(this._host.valueAsNumber, this._max, this._min, step);
+        this._host.value = res === null ? '' : res.toString();
+        this._model.update.emit(this._host.valueAsNumber);
+    };
+    McNumberInput.prototype.normalizeSplitter = function (value) {
+        return value ? value.replace(/,/g, '.') : value;
+    };
+    McNumberInput.prototype.isDigit = function (value) {
+        return this.isFloat(value) || this.isInt(value);
+    };
+    McNumberInput.prototype.isFloat = function (value) {
+        return /^-?\d+\.\d+$/.test(value);
+    };
+    McNumberInput.prototype.isInt = function (value) {
+        return /^-?\d+$/.test(value);
+    };
+    var McNumberInput_1;
+    McNumberInput = McNumberInput_1 = __decorate([
+        core.Directive({
+            selector: "input[mcInput][type=\"number\"]",
+            exportAs: 'mcNumericalInput',
+            providers: [forms.NgModel, { provide: McFormFieldNumberControl, useExisting: McNumberInput_1 }],
+            host: {
+                '(blur)': '_focusChanged(false)',
+                '(focus)': '_focusChanged(true)',
+                '(paste)': 'onPaste($event)',
+                '(keydown)': 'onKeyDown($event)'
+            }
+        }),
+        __param(3, core.Attribute('step')),
+        __param(4, core.Attribute('big-step')),
+        __param(5, core.Attribute('min')),
+        __param(6, core.Attribute('max')),
+        __metadata("design:paramtypes", [platform.Platform,
+            core.ElementRef,
+            forms.NgModel, String, String, String, String])
+    ], McNumberInput);
+    return McNumberInput;
+}());
 var McInput = /** @class */ (function (_super) {
     __extends(McInput, _super);
-    function McInput(_elementRef, _platform, ngControl, _parentForm, _parentFormGroup, _defaultErrorStateMatcher, inputValueAccessor) {
+    function McInput(_elementRef, ngControl, _parentForm, _parentFormGroup, _defaultErrorStateMatcher, inputValueAccessor) {
         var _this = _super.call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) || this;
         _this._elementRef = _elementRef;
-        _this._platform = _platform;
         _this.ngControl = ngControl;
         /**
          * Implemented as part of McFormFieldControl.
@@ -2281,7 +2573,7 @@ var McInput = /** @class */ (function (_super) {
             selector: "input[mcInput]",
             exportAs: 'mcInput',
             host: {
-                'class': 'mc-input',
+                class: 'mc-input',
                 // Native input properties that are overwritten by Angular inputs need to be synced with
                 // the native input element. Otherwise property bindings for those don't work.
                 '[attr.id]': 'id',
@@ -2294,12 +2586,11 @@ var McInput = /** @class */ (function (_super) {
             },
             providers: [{ provide: McFormFieldControl, useExisting: McInput_1 }]
         }),
-        __param(2, core.Optional()), __param(2, core.Self()),
+        __param(1, core.Optional()), __param(1, core.Self()),
+        __param(2, core.Optional()),
         __param(3, core.Optional()),
-        __param(4, core.Optional()),
-        __param(6, core.Optional()), __param(6, core.Self()), __param(6, core.Inject(MC_INPUT_VALUE_ACCESSOR)),
+        __param(5, core.Optional()), __param(5, core.Self()), __param(5, core.Inject(MC_INPUT_VALUE_ACCESSOR)),
         __metadata("design:paramtypes", [core.ElementRef,
-            platform.Platform,
             forms.NgControl,
             forms.NgForm,
             forms.FormGroupDirective,
@@ -2320,14 +2611,91 @@ var McInputMono = /** @class */ (function () {
     return McInputMono;
 }());
 
+var MIN_VALIDATOR = {
+    provide: forms.NG_VALIDATORS,
+    useExisting: core.forwardRef(function () { return MinValidator; }),
+    multi: true
+};
+/**
+ * A directive which installs the {@link MinValidator} for any `formControlName`,
+ * `formControl`, or control with `ngModel` that also has a `min` attribute.
+ *
+ * @experimental
+ */
+var MinValidator = /** @class */ (function () {
+    function MinValidator() {
+    }
+    MinValidator.prototype.ngOnChanges = function (changes) {
+        if ('min' in changes) {
+            this._createValidator();
+            if (this._onChange) {
+                this._onChange();
+            }
+        }
+    };
+    MinValidator.prototype.validate = function (c) { return this._validator(c); };
+    MinValidator.prototype.registerOnValidatorChange = function (fn) { this._onChange = fn; };
+    MinValidator.prototype._createValidator = function () { this._validator = forms.Validators.min(parseInt(this.min, 10)); };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], MinValidator.prototype, "min", void 0);
+    MinValidator = __decorate([
+        core.Directive({
+            selector: '[min][formControlName],[min][formControl],[min][ngModel]',
+            providers: [MIN_VALIDATOR],
+            host: { '[attr.min]': 'min ? min : null' }
+        })
+    ], MinValidator);
+    return MinValidator;
+}());
+var MAX_VALIDATOR = {
+    provide: forms.NG_VALIDATORS,
+    useExisting: core.forwardRef(function () { return MaxValidator; }),
+    multi: true
+};
+/**
+ * A directive which installs the {@link MaxValidator} for any `formControlName`,
+ * `formControl`, or control with `ngModel` that also has a `min` attribute.
+ *
+ * @experimental
+ */
+var MaxValidator = /** @class */ (function () {
+    function MaxValidator() {
+    }
+    MaxValidator.prototype.ngOnChanges = function (changes) {
+        if ('max' in changes) {
+            this._createValidator();
+            if (this._onChange) {
+                this._onChange();
+            }
+        }
+    };
+    MaxValidator.prototype.validate = function (c) { return this._validator(c); };
+    MaxValidator.prototype.registerOnValidatorChange = function (fn) { this._onChange = fn; };
+    MaxValidator.prototype._createValidator = function () { this._validator = forms.Validators.max(parseInt(this.max, 10)); };
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], MaxValidator.prototype, "max", void 0);
+    MaxValidator = __decorate([
+        core.Directive({
+            selector: '[max][formControlName],[max][formControl],[max][ngModel]',
+            providers: [MAX_VALIDATOR],
+            host: { '[attr.max]': 'max ? max : null' }
+        })
+    ], MaxValidator);
+    return MaxValidator;
+}());
+
 var McInputModule = /** @class */ (function () {
     function McInputModule() {
     }
     McInputModule = __decorate([
         core.NgModule({
             imports: [common.CommonModule, a11y.A11yModule, McCommonModule, forms.FormsModule],
-            exports: [McInput, McInputMono],
-            declarations: [McInput, McInputMono]
+            exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator],
+            declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator]
         })
     ], McInputModule);
     return McInputModule;
@@ -7861,22 +8229,33 @@ exports._McFormFieldMixinBase = _McFormFieldMixinBase;
 exports.McFormField = McFormField;
 exports.McFormFieldWithoutBorders = McFormFieldWithoutBorders;
 exports.McFormFieldControl = McFormFieldControl;
+exports.McFormFieldNumberControl = McFormFieldNumberControl;
 exports.getMcFormFieldMissingControlError = getMcFormFieldMissingControlError;
 exports.McHint = McHint;
 exports.McSuffix = McSuffix;
 exports.McPrefix = McPrefix;
 exports.McCleaner = McCleaner;
+exports.McStepper = McStepper;
 exports.McIconModule = McIconModule;
 exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
+exports.ɵd16 = MAX_VALIDATOR;
+exports.ɵb16 = MIN_VALIDATOR;
+exports.ɵe16 = MaxValidator;
+exports.ɵc16 = MinValidator;
 exports.ɵa16 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
+exports.BIG_STEP = BIG_STEP;
+exports.SMALL_STEP = SMALL_STEP;
 exports.McInputBase = McInputBase;
 exports._McInputMixinBase = _McInputMixinBase;
+exports.McNumberInput = McNumberInput;
 exports.McInput = McInput;
 exports.McInputMono = McInputMono;
+exports.stepUp = stepUp;
+exports.stepDown = stepDown;
 exports.McContentComponent = McContentComponent;
 exports.McFooterComponent = McFooterComponent;
 exports.McHeaderComponent = McHeaderComponent;
@@ -7899,8 +8278,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb17 = CssUnitPipe;
-exports.ɵa17 = McModalControlService;
+exports.ɵb18 = CssUnitPipe;
+exports.ɵa18 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -7946,7 +8325,7 @@ exports.McTagBase = McTagBase;
 exports._McTagMixinBase = _McTagMixinBase;
 exports.McTag = McTag;
 exports.McTagModule = McTagModule;
-exports.ɵa18 = mcSelectAnimations;
+exports.ɵa17 = mcSelectAnimations;
 exports.McSelectModule = McSelectModule;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;

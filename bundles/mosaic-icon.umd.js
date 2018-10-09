@@ -86,7 +86,7 @@ var McIcon = /** @class */ (function (_super) {
         core.Component({
             selector: "[mc-icon]",
             template: '<ng-content></ng-content>',
-            styles: [""],
+            styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
             changeDetection: core.ChangeDetectionStrategy.OnPush,
             encapsulation: core.ViewEncapsulation.None
         }),

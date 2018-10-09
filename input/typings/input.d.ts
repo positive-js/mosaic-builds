@@ -1,9 +1,11 @@
 import { DoCheck, ElementRef, OnChanges, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { FormGroupDirective, NgControl, NgForm, NgModel } from '@angular/forms';
 import { Platform } from '@ptsecurity/cdk/platform';
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
+import { Subject } from 'rxjs';
+export declare const BIG_STEP = 10;
+export declare const SMALL_STEP = 1;
 export declare class McInputBase {
     _defaultErrorStateMatcher: ErrorStateMatcher;
     _parentForm: NgForm;
@@ -12,9 +14,53 @@ export declare class McInputBase {
     constructor(_defaultErrorStateMatcher: ErrorStateMatcher, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
 export declare const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase;
+export declare class McNumberInput implements McFormFieldNumberControl<any> {
+    private _platform;
+    private _elementRef;
+    private _model;
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    value: any;
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    focused: boolean;
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    readonly stateChanges: Subject<void>;
+    private readonly _host;
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    private readonly _step;
+    readonly step: number;
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    private readonly _bigStep;
+    readonly bigStep: number;
+    private readonly _min;
+    private readonly _max;
+    constructor(_platform: Platform, _elementRef: ElementRef, _model: NgModel, step: string, bigStep: string, min: string, max: string);
+    _focusChanged(isFocused: boolean): void;
+    onKeyDown(event: KeyboardEvent): void;
+    onPaste(event: any): void;
+    stepUp(step: number): void;
+    stepDown(step: number): void;
+    private normalizeSplitter;
+    private isDigit;
+    private isFloat;
+    private isInt;
+}
 export declare class McInput extends _McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState {
     protected _elementRef: ElementRef;
-    protected _platform: Platform;
     ngControl: NgControl;
     /** An object used to control when error messages are shown. */
     errorStateMatcher: ErrorStateMatcher;
@@ -68,7 +114,7 @@ export declare class McInput extends _McInputMixinBase implements McFormFieldCon
     protected _type: string;
     protected _neverEmptyInputTypes: string[];
     private _inputValueAccessor;
-    constructor(_elementRef: ElementRef, _platform: Platform, ngControl: NgControl, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, _defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any);
+    constructor(_elementRef: ElementRef, ngControl: NgControl, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, _defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any);
     ngOnChanges(): void;
     ngOnDestroy(): void;
     ngDoCheck(): void;
