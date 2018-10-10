@@ -45,7 +45,8 @@ var McIcon = /** @class */ (function (_super) {
             template: '<ng-content></ng-content>',
             styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
             changeDetection: ChangeDetectionStrategy.OnPush,
-            encapsulation: ViewEncapsulation.None
+            encapsulation: ViewEncapsulation.None,
+            inputs: ['color']
         }),
         __param(1, Attribute('mc-icon')),
         __metadata("design:paramtypes", [ElementRef, String])

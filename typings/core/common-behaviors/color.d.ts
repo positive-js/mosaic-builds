@@ -11,7 +11,7 @@ export interface HasElementRef {
 export declare enum ThemePalette {
     Primary = "primary",
     Second = "second",
-    Warn = "warn",
+    Error = "error",
     Default = "second"
 }
 /** Mixin to augment a directive with a `color` property. */

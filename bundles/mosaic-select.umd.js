@@ -1328,7 +1328,7 @@ var McSelectModule = /** @class */ (function () {
     return McSelectModule;
 }());
 
-exports.ɵa17 = mcSelectAnimations;
+exports.ɵa18 = mcSelectAnimations;
 exports.McSelectModule = McSelectModule;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;

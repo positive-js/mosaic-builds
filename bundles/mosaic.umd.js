@@ -173,7 +173,7 @@ function mixinDisabled(base) {
 (function (ThemePalette) {
     ThemePalette["Primary"] = "primary";
     ThemePalette["Second"] = "second";
-    ThemePalette["Warn"] = "warn";
+    ThemePalette["Error"] = "error";
     ThemePalette["Default"] = "second";
 })(exports.ThemePalette || (exports.ThemePalette = {}));
 /** Mixin to augment a directive with a `color` property. */
@@ -985,7 +985,8 @@ var McIcon = /** @class */ (function (_super) {
             template: '<ng-content></ng-content>',
             styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
             changeDetection: core.ChangeDetectionStrategy.OnPush,
-            encapsulation: core.ViewEncapsulation.None
+            encapsulation: core.ViewEncapsulation.None,
+            inputs: ['color']
         }),
         __param(1, core.Attribute('mc-icon')),
         __metadata("design:paramtypes", [core.ElementRef, String])
@@ -8278,8 +8279,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb18 = CssUnitPipe;
-exports.ɵa18 = McModalControlService;
+exports.ɵb17 = CssUnitPipe;
+exports.ɵa17 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -8325,7 +8326,7 @@ exports.McTagBase = McTagBase;
 exports._McTagMixinBase = _McTagMixinBase;
 exports.McTag = McTag;
 exports.McTagModule = McTagModule;
-exports.ɵa17 = mcSelectAnimations;
+exports.ɵa18 = mcSelectAnimations;
 exports.McSelectModule = McSelectModule;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;
