@@ -375,10 +375,11 @@ $mc-light-theme-foreground: (
 
 // Background palette for light themes.
 $mc-light-theme-background: (
-    hover: rgba(black, 0.05),
-    background: white,
-    disabled-button: $black-12-opacity,
-    focused-button: $black-6-opacity,
+    background:           white,
+    hover:                rgba(black, 0.05),
+    disabled-button:      $black-12-opacity,
+    selected-button:      grey,
+    focused-button:       $black-6-opacity,
     disabled-list-option: #CCC
 );
 
@@ -389,18 +390,19 @@ $mc-dark-theme-foreground: (
     disabled-button:   rgba(white, 0.3),
     disabled-text:     rgba(white, 0.3),
     hint-text:         rgba(white, 0.3),
-    secondary-text:    rgba(white, 0.7),
     icon:              white,
-    icons:             white,
-    text:              white
+    text:              white,
+    secondary-text:    rgba(white, 0.7),
 );
 
 // Background palette for dark themes.
 $mc-dark-theme-background: (
-    background: #303030,
-    disabled-button: $white-12-opacity,
-    selected-button: grey,
-    selected-disabled-button: grey
+    background:           #333333,
+    hover:                rgba(black, 0.05),
+    disabled-button:      $white-12-opacity,
+    selected-button:      grey,
+    focused-button:       $black-6-opacity,
+    disabled-list-option: #CCC
 );
 
 
@@ -810,7 +812,7 @@ $base-font-size: 15px !default;
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-3903602px mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-2c7578bpx mc-color($second, 300);
         }
 
         &__light {
@@ -934,7 +936,7 @@ $base-font-size: 15px !default;
 
     .mc-alert_close:focus {
         border-color: mc-color($primary, 500);
-        box-shadow: 0 0.0.1-3903602px mc-color($primary, 500);
+        box-shadow: 0 0.0.1-2c7578bpx mc-color($primary, 500);
         z-index: 1;
     }
 
@@ -1124,7 +1126,7 @@ $base-font-size: 15px !default;
     &.mc-error {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-3903602px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-2c7578bpx mc-color($primary, 500);
         }
     }
 }
@@ -1592,7 +1594,7 @@ $zindex-tooltip         : 1060;
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-3903602px map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-2c7578bpx map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1742,7 +1744,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-3903602px mc-color($palette, 500);
+            box-shadow: 0 0.0.1-2c7578bpx mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1891,7 +1893,7 @@ $zindex-tooltip         : 1060;
                 border: {
                     color: mc-color($primary, 500);
                 }
-                box-shadow: 0 0.0.1-3903602px mc-color($primary, 500);
+                box-shadow: 0 0.0.1-2c7578bpx mc-color($primary, 500);
             }
 
             &.ng-invalid {
@@ -1914,7 +1916,7 @@ $zindex-tooltip         : 1060;
                 border: {
                     color: mc-color($mc-red, 400);
                 }
-                box-shadow: 0 0.0.1-3903602px mc-color($mc-red, 400);
+                box-shadow: 0 0.0.1-2c7578bpx mc-color($mc-red, 400);
             }
         }
 
@@ -1981,7 +1983,7 @@ $zindex-tooltip         : 1060;
 
         &-content {
             box-shadow:
-                0 0.0.1-3903602px mc-color($second, 300),
+                0 0.0.1-2c7578bpx mc-color($second, 300),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2052,7 +2054,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color, 500);
-        box-shadow: 0 0.0.1-3903602px mc-color($focus-color, 500);
+        box-shadow: 0 0.0.1-2c7578bpx mc-color($focus-color, 500);
         background-color: mc-color($main-color, 100);
     }
 
@@ -2240,6 +2242,15 @@ $box-shadow-base: 0 2px 4px 0 $shadow-color;
 // Mixin that renders all of the core styles that depend on the theme.
 @mixin mc-core-theme($theme) {
     @include mc-pseudo-checkbox-theme($theme);
+
+
+    .mc-app-background {
+        $background: map-get($theme, background);
+        $foreground: map-get($theme, foreground);
+
+        background-color: mc-color($background, background);
+        color: mc-color($foreground, text);
+    }
 }
 
 
