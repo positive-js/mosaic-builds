@@ -812,7 +812,7 @@ $base-font-size: 15px !default;
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-10dcac7px mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-f5e1f55px mc-color($second, 300);
         }
 
         &__light {
@@ -936,7 +936,7 @@ $base-font-size: 15px !default;
 
     .mc-alert_close:focus {
         border-color: mc-color($primary, 500);
-        box-shadow: 0 0.0.1-10dcac7px mc-color($primary, 500);
+        box-shadow: 0 0.0.1-f5e1f55px mc-color($primary, 500);
         z-index: 1;
     }
 
@@ -1126,7 +1126,7 @@ $base-font-size: 15px !default;
     &.mc-error {
         &.cdk-focused {
             border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-10dcac7px mc-color($primary, 500);
+            box-shadow: 0 0.0.1-f5e1f55px mc-color($primary, 500);
         }
     }
 }
@@ -1594,7 +1594,7 @@ $zindex-tooltip         : 1060;
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-10dcac7px map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-f5e1f55px map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1744,7 +1744,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-10dcac7px mc-color($palette, 500);
+            box-shadow: 0 0.0.1-f5e1f55px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1863,6 +1863,9 @@ $zindex-tooltip         : 1060;
 @mixin mc-form-field-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
+
+    $foreground: map-get($theme, foreground);
+
     $hover-darken: 5%;
 
     .mc-form-field {
@@ -1887,13 +1890,17 @@ $zindex-tooltip         : 1060;
                 background: {
                     color: mc-color($second, 40);
                 }
+
+                .mc-icon, .mc-input {
+                    color: mc-color($foreground, disabled-text);
+                }
             }
 
             &.mc-focused .mc-form-field__container {
                 border: {
                     color: mc-color($primary, 500);
                 }
-                box-shadow: 0 0.0.1-10dcac7px mc-color($primary, 500);
+                box-shadow: 0 0.0.1-f5e1f55px mc-color($primary, 500);
             }
 
             &.ng-invalid {
@@ -1916,7 +1923,7 @@ $zindex-tooltip         : 1060;
                 border: {
                     color: mc-color($mc-red, 400);
                 }
-                box-shadow: 0 0.0.1-10dcac7px mc-color($mc-red, 400);
+                box-shadow: 0 0.0.1-f5e1f55px mc-color($mc-red, 400);
             }
         }
 
@@ -1983,7 +1990,7 @@ $zindex-tooltip         : 1060;
 
         &-content {
             box-shadow:
-                0 0.0.1-10dcac7px mc-color($second, 300),
+                0 0.0.1-f5e1f55px mc-color($second, 300),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2054,7 +2061,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color, 500);
-        box-shadow: 0 0.0.1-10dcac7px mc-color($focus-color, 500);
+        box-shadow: 0 0.0.1-f5e1f55px mc-color($focus-color, 500);
         background-color: mc-color($main-color, 100);
     }
 
