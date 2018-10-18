@@ -31,13 +31,13 @@
       "from": "./link"
     },
     {
+      "from": "./list"
+    },
+    {
       "from": "./icon"
     },
     {
       "from": "./progress-bar"
-    },
-    {
-      "from": "./list"
     },
     {
       "from": "./navbar"
@@ -49,16 +49,19 @@
       "from": "./tag"
     },
     {
-      "from": "./button"
+      "from": "./splitter"
     },
     {
-      "from": "./modal"
+      "from": "./button"
     },
     {
       "from": "./input"
     },
     {
       "from": "./select"
+    },
+    {
+      "from": "./modal"
     },
     {
       "from": "./typings/index"

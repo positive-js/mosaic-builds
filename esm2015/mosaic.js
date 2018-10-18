@@ -23,6 +23,7 @@ export * from '@ptsecurity/mosaic/radio';
 export * from '@ptsecurity/mosaic/tree';
 export * from '@ptsecurity/mosaic/tag';
 export * from '@ptsecurity/mosaic/select';
+export * from '@ptsecurity/mosaic/splitter';
 export * from '@ptsecurity/mosaic/tooltip';
 
 const VERSION = new Version('0.0.1');
