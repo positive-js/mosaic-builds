@@ -275,6 +275,8 @@ var McGutterDirective = /** @class */ (function () {
         if (this.disabled) {
             this.setAttr("disabled" /* Disabled */, 'true');
         }
+        // fix IE issue with gutter icon. flex-direction is requied for flex alignment options
+        this.setStyle("flex-direction" /* FlexDirection */, this.isVertical() ? 'row' : 'column');
     };
     McGutterDirective.prototype.isVertical = function () {
         return this.direction === "vertical" /* Vertical */;
