@@ -19,10 +19,10 @@
       "from": "./tree"
     },
     {
-      "from": "./radio"
+      "from": "./toggle"
     },
     {
-      "from": "./progress-spinner"
+      "from": "./radio"
     },
     {
       "from": "./layout"
@@ -37,19 +37,22 @@
       "from": "./icon"
     },
     {
+      "from": "./progress-spinner"
+    },
+    {
       "from": "./progress-bar"
     },
     {
       "from": "./navbar"
     },
     {
-      "from": "./form-field"
-    },
-    {
       "from": "./tag"
     },
     {
       "from": "./splitter"
+    },
+    {
+      "from": "./form-field"
     },
     {
       "from": "./button"
