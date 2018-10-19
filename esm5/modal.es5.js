@@ -831,5 +831,5 @@ var McModalModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { CssUnitPipe as ɵb19, McModalControlService as ɵa19, McModalComponent, McModalRef, McModalModule, McModalService };
+export { CssUnitPipe as ɵb20, McModalControlService as ɵa20, McModalComponent, McModalRef, McModalModule, McModalService };
 //# sourceMappingURL=modal.es5.js.map

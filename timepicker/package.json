@@ -1,0 +1,8 @@
+{
+  "name": "@ptsecurity/mosaic/timepicker",
+  "typings": "../timepicker.d.ts",
+  "main": "../bundles/mosaic-timepicker.umd.js",
+  "module": "../esm5/timepicker.es5.js",
+  "es2015": "../esm2015/timepicker.js",
+  "sideEffects": false
+}

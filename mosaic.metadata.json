@@ -34,16 +34,13 @@
       "from": "./list"
     },
     {
-      "from": "./icon"
-    },
-    {
       "from": "./progress-spinner"
     },
     {
-      "from": "./progress-bar"
+      "from": "./icon"
     },
     {
-      "from": "./navbar"
+      "from": "./progress-bar"
     },
     {
       "from": "./tag"
@@ -58,13 +55,19 @@
       "from": "./button"
     },
     {
+      "from": "./navbar"
+    },
+    {
+      "from": "./modal"
+    },
+    {
       "from": "./input"
     },
     {
       "from": "./select"
     },
     {
-      "from": "./modal"
+      "from": "./timepicker"
     },
     {
       "from": "./typings/index"
