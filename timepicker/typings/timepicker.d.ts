@@ -1,7 +1,7 @@
 import { DoCheck, ElementRef, InjectionToken, OnChanges, OnDestroy, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { CanUpdateErrorState, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
+import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { TimeFormats } from './timepicker.constants';
 export declare const MC_INPUT_VALUE_ACCESSOR: InjectionToken<{
@@ -14,7 +14,7 @@ export declare class McTimepickerBase {
     ngControl: NgControl;
     constructor(_defaultErrorStateMatcher: ErrorStateMatcher, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
-export declare const McTimepickerMixinBase: import("../core/common-behaviors/constructor").Constructor<CanUpdateErrorState> & typeof McTimepickerBase;
+export declare const McTimepickerMixinBase: CanUpdateErrorStateCtor & typeof McTimepickerBase;
 export declare class McTimepicker extends McTimepickerMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState, ControlValueAccessor {
     private readonly _elementRef;
     ngControl: NgControl;
