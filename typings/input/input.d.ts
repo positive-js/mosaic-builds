@@ -22,6 +22,18 @@ export declare class McNumberInput implements McFormFieldNumberControl<any> {
      * Implemented as part of McFormFieldNumberControl.
      * @docs-private
      */
+    bigStep: number;
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
+    step: number;
+    min: number;
+    max: number;
+    /**
+     * Implemented as part of McFormFieldNumberControl.
+     * @docs-private
+     */
     value: any;
     /**
      * Implemented as part of McFormFieldNumberControl.
@@ -34,20 +46,6 @@ export declare class McNumberInput implements McFormFieldNumberControl<any> {
      */
     readonly stateChanges: Subject<void>;
     private readonly _host;
-    /**
-     * Implemented as part of McFormFieldNumberControl.
-     * @docs-private
-     */
-    private readonly _step;
-    readonly step: number;
-    /**
-     * Implemented as part of McFormFieldNumberControl.
-     * @docs-private
-     */
-    private readonly _bigStep;
-    readonly bigStep: number;
-    private readonly _min;
-    private readonly _max;
     constructor(_platform: Platform, _elementRef: ElementRef, _model: NgModel, step: string, bigStep: string, min: string, max: string);
     _focusChanged(isFocused: boolean): void;
     onKeyDown(event: KeyboardEvent): void;

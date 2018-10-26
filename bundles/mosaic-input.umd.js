@@ -135,10 +135,10 @@ var McNumberInput = /** @class */ (function () {
          * @docs-private
          */
         this.stateChanges = new rxjs.Subject();
-        this._step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
-        this._bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
-        this._min = this.isDigit(min) ? parseFloat(min) : -Infinity;
-        this._max = this.isDigit(max) ? parseFloat(max) : Infinity;
+        this.step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
+        this.bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
+        this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
+        this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
         this._host = this._elementRef.nativeElement;
         var self = this;
         if ('valueAsNumber' in this._host) {
@@ -152,20 +152,6 @@ var McNumberInput = /** @class */ (function () {
         }
     }
     McNumberInput_1 = McNumberInput;
-    Object.defineProperty(McNumberInput.prototype, "step", {
-        get: function () {
-            return this._step;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McNumberInput.prototype, "bigStep", {
-        get: function () {
-            return this._bigStep;
-        },
-        enumerable: true,
-        configurable: true
-    });
     McNumberInput.prototype._focusChanged = function (isFocused) {
         if (isFocused !== this.focused) {
             this.focused = isFocused;
@@ -207,7 +193,7 @@ var McNumberInput = /** @class */ (function () {
         if (event.shiftKey || !isNumber(event)) {
             event.preventDefault();
             // process steps
-            var step = event.shiftKey ? this._bigStep : this._step;
+            var step = event.shiftKey ? this.bigStep : this.step;
             if (keyCode === keycodes.UP_ARROW) {
                 this.stepUp(step);
             }
@@ -225,13 +211,13 @@ var McNumberInput = /** @class */ (function () {
     };
     McNumberInput.prototype.stepUp = function (step) {
         this._elementRef.nativeElement.focus();
-        var res = stepUp(this._host.valueAsNumber, this._max, this._min, step);
+        var res = stepUp(this._host.valueAsNumber, this.max, this.min, step);
         this._host.value = res === null ? '' : res.toString();
         this._model.update.emit(this._host.valueAsNumber);
     };
     McNumberInput.prototype.stepDown = function (step) {
         this._elementRef.nativeElement.focus();
-        var res = stepDown(this._host.valueAsNumber, this._max, this._min, step);
+        var res = stepDown(this._host.valueAsNumber, this.max, this.min, step);
         this._host.value = res === null ? '' : res.toString();
         this._model.update.emit(this._host.valueAsNumber);
     };
@@ -248,6 +234,22 @@ var McNumberInput = /** @class */ (function () {
         return /^-?\d+$/.test(value);
     };
     var McNumberInput_1;
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Number)
+    ], McNumberInput.prototype, "bigStep", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Number)
+    ], McNumberInput.prototype, "step", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Number)
+    ], McNumberInput.prototype, "min", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Number)
+    ], McNumberInput.prototype, "max", void 0);
     McNumberInput = McNumberInput_1 = __decorate([
         core.Directive({
             selector: "input[mcInput][type=\"number\"]",

@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { InjectionToken, Attribute, Directive, ElementRef, Inject, Input, Optional, Self, forwardRef, NgModule } from '@angular/core';
-import { __decorate, __param, __metadata } from 'tslib';
+import { __decorate, __metadata, __param } from 'tslib';
 import { FormGroupDirective, NgControl, NgForm, NgModel, NG_VALIDATORS, Validators, FormsModule } from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { END, C, V, X, A, DELETE, BACKSPACE, TAB, ENTER, ESCAPE, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH, FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12 } from '@ptsecurity/cdk/keycodes';
@@ -97,10 +97,10 @@ let McNumberInput = McNumberInput_1 = class McNumberInput {
          * @docs-private
          */
         this.stateChanges = new Subject();
-        this._step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
-        this._bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
-        this._min = this.isDigit(min) ? parseFloat(min) : -Infinity;
-        this._max = this.isDigit(max) ? parseFloat(max) : Infinity;
+        this.step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
+        this.bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
+        this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
+        this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
         this._host = this._elementRef.nativeElement;
         const self = this;
         if ('valueAsNumber' in this._host) {
@@ -112,12 +112,6 @@ let McNumberInput = McNumberInput_1 = class McNumberInput {
                 }
             });
         }
-    }
-    get step() {
-        return this._step;
-    }
-    get bigStep() {
-        return this._bigStep;
     }
     _focusChanged(isFocused) {
         if (isFocused !== this.focused) {
@@ -159,7 +153,7 @@ let McNumberInput = McNumberInput_1 = class McNumberInput {
         if (event.shiftKey || !isNumber(event)) {
             event.preventDefault();
             // process steps
-            const step = event.shiftKey ? this._bigStep : this._step;
+            const step = event.shiftKey ? this.bigStep : this.step;
             if (keyCode === UP_ARROW) {
                 this.stepUp(step);
             }
@@ -177,13 +171,13 @@ let McNumberInput = McNumberInput_1 = class McNumberInput {
     }
     stepUp(step) {
         this._elementRef.nativeElement.focus();
-        const res = stepUp(this._host.valueAsNumber, this._max, this._min, step);
+        const res = stepUp(this._host.valueAsNumber, this.max, this.min, step);
         this._host.value = res === null ? '' : res.toString();
         this._model.update.emit(this._host.valueAsNumber);
     }
     stepDown(step) {
         this._elementRef.nativeElement.focus();
-        const res = stepDown(this._host.valueAsNumber, this._max, this._min, step);
+        const res = stepDown(this._host.valueAsNumber, this.max, this.min, step);
         this._host.value = res === null ? '' : res.toString();
         this._model.update.emit(this._host.valueAsNumber);
     }
@@ -200,6 +194,22 @@ let McNumberInput = McNumberInput_1 = class McNumberInput {
         return /^-?\d+$/.test(value);
     }
 };
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], McNumberInput.prototype, "bigStep", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], McNumberInput.prototype, "step", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], McNumberInput.prototype, "min", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], McNumberInput.prototype, "max", void 0);
 McNumberInput = McNumberInput_1 = __decorate([
     Directive({
         selector: `input[mcInput][type="number"]`,
