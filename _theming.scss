@@ -203,20 +203,22 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
 }
 
 
-$black-87-opacity: rgba(black, 0.87);
-$black-50-opacity: rgba(black, 0.5);
-$black-30-opacity: rgba(black, 0.3);
-$black-20-opacity: rgba(black, 0.2);
 $black-12-opacity: rgba(black, 0.12);
 $black-6-opacity:  rgba(black, 0.06);
-$black-4-opacity:  rgba(black, 0.04);
-$black-1-opacity:  rgba(black, 0.01);
 
-$white-87-opacity: rgba(white, 0.87);
 $white-12-opacity: rgba(white, 0.12);
-$white-6-opacity:  rgba(white, 0.06);
 
-$dark-disabled-text: rgba(black, 0.5);
+$dark-text-default:     #4d4d4d;
+$dark-text-secondary:   #999999;
+$dark-text-disabled:    #b3b3b3;
+
+$dark-icon-secondary:   #cccccc;
+
+$light-text-default:    #f0f0f0;
+$light-text-secondary:  #999999;
+$light-text-disabled:   #999999;
+
+$light-icon-secondary:  #999999;
 
 $mc-blue: (
     40: #f5fafd,
@@ -233,19 +235,19 @@ $mc-blue: (
     A100: rgba(0, 153, 255, 0.15),
     A200: rgba(0, 153, 255, 0.3),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
         500: white,
         560: white,
         600: white,
         700: white,
-        800: $white-87-opacity,
-        A100: $black-87-opacity,
-        A200: white
+        800: white,
+        A100: $dark-text-default,
+        A200: white,
     )
 );
 
@@ -263,18 +265,18 @@ $mc-green: (
     800: #163f07,
     A100: rgba(68, 255, 0, 0.15),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
-        500: $black-87-opacity,
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
+        500: white,
         560: white,
         600: white,
         700: white,
-        800: $white-87-opacity,
-        A100: $black-87-opacity
+        800: white,
+        A100: $dark-text-default,
     )
 );
 
@@ -292,17 +294,18 @@ $mc-red: (
     800: #541208,
     A100: rgba(224, 79, 56, 0.15),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
         500: white,
+        560: white,
         600: white,
         700: white,
-        800: $white-87-opacity,
-        A100: $black-87-opacity
+        800: white,
+        A100: $dark-text-default,
     )
 );
 
@@ -318,17 +321,24 @@ $mc-grey: (
     600: #666666,
     700: #4d4d4d,
     800: #333333,
+    A40: rgba(0, 0, 0, 0.04),
+    A60: rgba(0, 0, 0, 0.06),
+    A100: rgba(0, 0, 0, 0.1),
+    A200: rgba(0, 0, 0, 0.2),
+    A300: rgba(0, 0, 0, 0.3),
+    A500: rgba(0, 0, 0, 0.5),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
-        500: $black-87-opacity,
-        600: $white-87-opacity,
-        700: $white-87-opacity,
-        800: $white-87-opacity
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
+        500: white,
+        560: white,
+        600: white,
+        700: white,
+        800: white,
     )
 );
 
@@ -346,41 +356,38 @@ $mc-yellow: (
     800: #503602,
     A100: rgba(255, 170, 0, 0.15),
     contrast: (
-        40: $black-87-opacity,
-        60: $black-87-opacity,
-        100: $black-87-opacity,
-        200: $black-87-opacity,
-        300: $black-87-opacity,
-        400: $black-87-opacity,
-        500: $black-87-opacity,
-        560: $black-87-opacity,
-        600: $black-87-opacity,
-        700: $black-87-opacity,
-        800: $black-87-opacity,
-        A100: $black-87-opacity
+        40: $dark-text-default,
+        60: $dark-text-default,
+        100: $dark-text-default,
+        200: $dark-text-default,
+        300: $dark-text-default,
+        400: white,
+        500: white,
+        560: white,
+        600: white,
+        700: white,
+        800: white,
+        A100: $dark-text-default,
     )
 );
 
+
 // Foreground palette for light themes.
 $mc-light-theme-foreground: (
-    base:              black,
-    disabled:          $dark-disabled-text,
+    base:              black, //скорей всего это fg-default-text
+    disabled:          $dark-text-disabled,
     disabled-button:   rgba(black, 0.26),
-    disabled-text:     rgba(black, 0.3),
     hint-text:         rgba(black, 0.38),
     icon:              rgba(black, 0.54),
-    text:              rgba(black, 0.87),
-    secondary-text:    rgba(black, 0.54),
-);
+    secondary-text:    rgba(black, 0.54), //скорей всего это fg-less-contrast-text
 
-// Background palette for light themes.
-$mc-light-theme-background: (
-    background:           white,
-    hover:                rgba(black, 0.05),
-    disabled-button:      $black-12-opacity,
-    selected-button:      grey,
-    focused-button:       $black-6-opacity,
-    disabled-list-option: #CCC
+    // ↓ новое
+    text:                   $dark-text-default,
+    fg-less-contrast-text:  $dark-text-secondary,
+    disabled-text:          $dark-text-disabled,
+
+    default-icon:        $dark-text-secondary,
+    less-contrast-icon:  $dark-icon-secondary,
 );
 
 // Foreground palette for dark themes.
@@ -388,21 +395,61 @@ $mc-dark-theme-foreground: (
     base:              white,
     disabled:          rgba(white, 0.3),
     disabled-button:   rgba(white, 0.3),
-    disabled-text:     rgba(white, 0.3),
     hint-text:         rgba(white, 0.3),
     icon:              white,
-    text:              white,
     secondary-text:    rgba(white, 0.7),
+
+    // ↓ новое
+    text:                   $light-text-default,
+    fg-less-contrast-text:  $light-text-secondary,
+    disabled-text:          $light-text-disabled,
+
+    default-icon:        $light-text-secondary,
+    less-contrast-icon:  $light-icon-secondary,
+);
+
+// Background palette for light themes.
+$mc-light-theme-background: (
+    disabled-button:      $black-12-opacity,
+    selected-button:      grey,
+    focused-button:       $black-6-opacity,
+    disabled-list-option: #CCC,
+
+    // ↓ новое
+    background:           white,
+    bg-content:           map-get($mc-grey, 60), //secondary-60
+    bg-dropdowns:         white,
+
+    button-bg:            map-get($mc-grey, 60),
+    button-border:        map-get($mc-grey, 200),
+    button-disabled-overlay:      rgba(white, 0.3),
+
+    hover:                rgba(black, 0.05),
+
+    in-shadow:            inset 0 1px 2px 0 rgba(black, 0.2),
 );
 
 // Background palette for dark themes.
 $mc-dark-theme-background: (
-    background:           #333333,
-    hover:                rgba(black, 0.05),
     disabled-button:      $white-12-opacity,
     selected-button:      grey,
     focused-button:       $black-6-opacity,
-    disabled-list-option: #CCC
+    disabled-list-option: #CCC,
+
+    // ↓ новое
+    // каким образом три следующих параметра предлагается связать с бэкграундом праймари и секонд кнопок ?
+    background:           map-get($mc-grey, 800),
+    bg-content:           map-get($mc-grey,  60), //secondary-60
+    bg-dropdowns:         #ffffff,
+
+    // цвет бордера зависит от палитры
+    button-bg:            map-get($mc-grey, 600),
+    button-border:        map-get($mc-grey, 500),
+    button-disabled-overlay:      rgba(black, 0.2),
+
+    hover:                rgba(white, 0.05),
+
+    in-shadow:            inset 1px 2px 2px 0 rgba(black, 0.2),
 );
 
 
@@ -812,7 +859,7 @@ $base-font-size: 15px !default;
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-11e4d54px mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-fb5853apx mc-color($second, 300);
         }
 
         &__light {
@@ -940,7 +987,7 @@ $base-font-size: 15px !default;
 
     .mc-alert_close:focus {
         border: 1px solid mc-color($primary, 500);
-        box-shadow: 0 0.0.1-11e4d54px mc-color($primary, 500);
+        box-shadow: 0 0.0.1-fb5853apx mc-color($primary, 500);
         z-index: 1;
     }
 
@@ -996,160 +1043,113 @@ $base-font-size: 15px !default;
     }
 }
 
-@mixin _mc-button-primary-color($palette) {
-    $hover-lighten: 5%;
-
+@mixin _mc-button-primary-color($palette, $foreground, $background) {
+    border-color: map-get($palette, 560);
+    background: mc-color($palette, 500);
     color: mc-contrast($palette, 500);
 
-    border-color: mc-color($palette, 600);
-    background:
-        mc-color($palette, 500)
-        linear-gradient(to bottom, mc-color($palette, 500), mc-color($palette, 560));
+    .mc-button-overlay {
+        background: transparent;
+    }
 
     &:hover,
     &.mc-hover {
-        background-image: linear-gradient(
-            to bottom,
-            lighten(mc-color($palette, 500), $hover-lighten),
-            lighten(mc-color($palette, 560), $hover-lighten)
-        );
+        & .mc-button-overlay {
+            background: map-get($background, hover);
+        }
     }
 
     &:active,
     &.mc-active {
-        background-image: linear-gradient(to bottom, mc-color($palette, 600), mc-color($palette, 560));
-
-        &:hover,
-        &.mc-hover {
-            background-image: linear-gradient(
-                to bottom,
-                lighten(mc-color($palette, 600), $hover-lighten),
-                lighten(mc-color($palette, 560), $hover-lighten)
-            );
-        }
+        border-color: darken(mc-color($palette, 560), 5);
+        background: darken(mc-color($palette, 500), 5);
+        box-shadow: map-get($background, in-shadow);
     }
 
-    &.disabled,
+    &.mc-disabled,
     &[disabled] {
-        color: mc-color($palette, 200);
+        border-color: map-get($palette, 500);
+        color: transparentize(mc-contrast($palette, 500), 0.5);
 
-        border-color: mc-color($palette, 400);
-        background-image: linear-gradient(to bottom, mc-color($palette, 300), mc-color($palette, 400));
+        & .mc-button-overlay {
+            background: mc-color($background, button-disabled-overlay);
+        }
     }
 }
 
-@mixin _mc-button-second-color($palette) {
-    $hover-darken: 5%;
-
-    color: mc-contrast($palette, 500);
-
-    border-color: mc-color($palette, 300);
-    background-image: linear-gradient(to bottom, mc-color($palette, 40, 1), mc-color($palette, 100));
+@mixin _mc-button-second-color($palette, $foreground, $background) {
+    border-color: mc-color($background, button-border);
+    background: map-get($background, button-bg);
+    color: map-get($foreground, text);
 
     &:hover,
     &.mc-hover {
-        background-image: linear-gradient(
-            to bottom, darken(mc-color($palette, 40), $hover-darken), darken(mc-color($palette, 100), $hover-darken)
-        );
+        & .mc-button-overlay {
+            background: map-get($background, hover);
+        }
     }
 
     &:active,
     &.mc-active {
-        background-image: linear-gradient(to bottom, mc-color($palette, 200), mc-color($palette, 100));
-
-        &:hover,
-        &.mc-hover {
-            background-image: linear-gradient(
-                to bottom,
-                darken(mc-color($palette, 200), $hover-darken),
-                darken(mc-color($palette, 100), $hover-darken)
-            );
-        }
+        border-color: darken(mc-color($background, button-border), 5);
+        background: darken(map-get($background, button-bg), 5);
+        box-shadow: map-get($background, in-shadow);
     }
 
+    &.mc-disabled,
     &[disabled] {
-        color: mc-color($palette, 200);
+        border-color: mc-color($background, button-bg);
+        color: map-get($foreground, disabled-text);
 
-        border-color: mc-color($palette, 200);
-        background-image: linear-gradient(to bottom, mc-color($palette, 40, 1), mc-color($palette, 60));
+        & .mc-button-overlay {
+            background: mc-color($background, button-disabled-overlay);
+        }
     }
 }
 
-@mixin _mc-button-error-color($secondPalette, $errorPalette) {
-    $hover-darken: 5%;
+@mixin _mc-button-error-color($secondPalette, $errorPalette, $foreground, $background) {
+    @include _mc-button-second-color($secondPalette, $foreground, $background);
 
-    color: mc-color($errorPalette, 500);
-
-    border-color: mc-color($secondPalette, 300);
-    background-image: linear-gradient(to bottom, mc-color($secondPalette, 40, 1), mc-color($secondPalette, 100));
-
-    &:hover,
-    &.mc-hover {
-        background-image: linear-gradient(
-            to bottom,
-            darken(mc-color($secondPalette, 40), $hover-darken),
-            darken(mc-color($secondPalette, 100), $hover-darken)
-        );
-    }
-
-    &:active,
-    &.mc-active {
-        background-image: linear-gradient(to bottom, mc-color($secondPalette, 200), mc-color($secondPalette, 100));
-
-        &:hover,
-        &.mc-hover {
-            background-image: linear-gradient(
-                to bottom,
-                darken(mc-color($secondPalette, 200), $hover-darken),
-                darken(mc-color($secondPalette, 100), $hover-darken)
-            );
-        }
-    }
-
-    &[disabled] {
-        color: mc-color($secondPalette, 200);
-
-        border-color: mc-color($secondPalette, 200);
-        background-image: linear-gradient(to bottom, mc-color($secondPalette, 40, 1), mc-color($secondPalette, 60));
-    }
+    color: mc-color($errorPalette);
 }
 
 @mixin _mc-button-theme-color($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
+    $is-dark: map-get($theme, is-dark);
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
     &.mc-primary {
-        @include _mc-button-primary-color($primary);
+        @include _mc-button-primary-color($primary, $foreground, $background);
     }
 
     &.mc-second {
-        @include _mc-button-second-color($second);
+        @include _mc-button-second-color($second, $foreground, $background);
     }
 
     &.mc-error {
-        @include _mc-button-error-color($second, $error);
+        @include _mc-button-error-color($second, $error, $foreground, $background);
     }
 
     &.mc-primary,
     &.mc-second,
     &.mc-error {
-        &.cdk-focused {
-            border-color: mc-color($primary, 500);
-            box-shadow: 0 0.0.1-11e4d54px mc-color($primary, 500);
+        -webkit-font-smoothing: antialiased;
+
+        &.cdk-keyboard-focused {
+            $focus-color: map-get($primary, lighter);
+
+            border-color: $focus-color;
+            box-shadow: 0 0.0.1-fb5853apx $focus-color;
         }
     }
 }
 
 @mixin mc-button-theme($theme) {
     .mc-button,
-    .mc-xs-button,
-    .mc-sm-button,
-    .mc-lg-button,
-    .mc-xl-button,
     .mc-icon-button {
         @include _mc-button-theme-color($theme);
     }
@@ -1157,10 +1157,6 @@ $base-font-size: 15px !default;
 
 @mixin mc-button-typography($config) {
     .mc-button,
-    .mc-xs-button,
-    .mc-sm-button,
-    .mc-lg-button,
-    .mc-xl-button,
     .mc-icon-button {
         @include mc-typography-level-to-styles($config, body);
 
@@ -1607,7 +1603,7 @@ $zindex-tooltip         : 1060;
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-11e4d54px map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-fb5853apx map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1757,7 +1753,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-11e4d54px mc-color($palette, 500);
+            box-shadow: 0 0.0.1-fb5853apx mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1913,7 +1909,7 @@ $zindex-tooltip         : 1060;
                 border: {
                     color: mc-color($primary, 500);
                 }
-                box-shadow: 0 0.0.1-11e4d54px mc-color($primary, 500);
+                box-shadow: 0 0.0.1-fb5853apx mc-color($primary, 500);
             }
 
             &.ng-invalid {
@@ -1936,7 +1932,7 @@ $zindex-tooltip         : 1060;
                 border: {
                     color: mc-color($mc-red, 400);
                 }
-                box-shadow: 0 0.0.1-11e4d54px mc-color($mc-red, 400);
+                box-shadow: 0 0.0.1-fb5853apx mc-color($mc-red, 400);
             }
         }
 
@@ -2003,7 +1999,7 @@ $zindex-tooltip         : 1060;
 
         &-content {
             box-shadow:
-                0 0.0.1-11e4d54px mc-color($second, 300),
+                0 0.0.1-fb5853apx mc-color($second, 300),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2074,7 +2070,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color, 500);
-        box-shadow: 0 0.0.1-11e4d54px mc-color($focus-color, 500);
+        box-shadow: 0 0.0.1-fb5853apx mc-color($focus-color, 500);
         background-color: mc-color($main-color, 100);
     }
 
@@ -2311,7 +2307,7 @@ $hover-darken: 5%;
             .mc-toggle-input {
                 + .mc-toggle-bar-container .mc-toggle__focus-frame {
                     border: 2px solid map-get($primary, 500);
-                    box-shadow: inset 0 0.0.1-11e4d54px map-get($background, background);
+                    box-shadow: inset 0 0.0.1-fb5853apx map-get($background, background);
                 }
             }
         }
