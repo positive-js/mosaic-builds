@@ -361,7 +361,11 @@ var McTimepicker = /** @class */ (function (_super) {
             this._getDateFromTimeString(this._elementRef.nativeElement.value);
         this._currentDTimeInput = timeToApply;
         if (doTimestringReformat && timeToApply !== undefined) {
+            var selectionStart = this._elementRef.nativeElement.selectionStart;
+            var selectionEnd = this._elementRef.nativeElement.selectionEnd;
             this._renderer.setProperty(this._elementRef.nativeElement, 'value', this._getTimeStringFromDate(timeToApply, this.timeFormat));
+            this._elementRef.nativeElement.selectionStart = selectionStart;
+            this._elementRef.nativeElement.selectionEnd = selectionEnd;
         }
         this.ngControl.control.updateValueAndValidity();
         var result = this.ngControl.errors === null && timeToApply !== undefined ? timeToApply : null;

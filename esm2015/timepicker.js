@@ -287,7 +287,11 @@ let McTimepicker = McTimepicker_1 = class McTimepicker extends McTimepickerMixin
             this._getDateFromTimeString(this._elementRef.nativeElement.value);
         this._currentDTimeInput = timeToApply;
         if (doTimestringReformat && timeToApply !== undefined) {
+            const selectionStart = this._elementRef.nativeElement.selectionStart;
+            const selectionEnd = this._elementRef.nativeElement.selectionEnd;
             this._renderer.setProperty(this._elementRef.nativeElement, 'value', this._getTimeStringFromDate(timeToApply, this.timeFormat));
+            this._elementRef.nativeElement.selectionStart = selectionStart;
+            this._elementRef.nativeElement.selectionEnd = selectionEnd;
         }
         this.ngControl.control.updateValueAndValidity();
         const result = this.ngControl.errors === null && timeToApply !== undefined ? timeToApply : null;

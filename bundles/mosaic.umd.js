@@ -6556,7 +6556,11 @@ var McTimepicker = /** @class */ (function (_super) {
             this._getDateFromTimeString(this._elementRef.nativeElement.value);
         this._currentDTimeInput = timeToApply;
         if (doTimestringReformat && timeToApply !== undefined) {
+            var selectionStart = this._elementRef.nativeElement.selectionStart;
+            var selectionEnd = this._elementRef.nativeElement.selectionEnd;
             this._renderer.setProperty(this._elementRef.nativeElement, 'value', this._getTimeStringFromDate(timeToApply, this.timeFormat));
+            this._elementRef.nativeElement.selectionStart = selectionStart;
+            this._elementRef.nativeElement.selectionEnd = selectionEnd;
         }
         this.ngControl.control.updateValueAndValidity();
         var result = this.ngControl.errors === null && timeToApply !== undefined ? timeToApply : null;
@@ -9344,8 +9348,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb20 = CssUnitPipe;
-exports.ɵa20 = McModalControlService;
+exports.ɵb21 = CssUnitPipe;
+exports.ɵa21 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -9410,7 +9414,7 @@ exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
 exports.ɵ0 = ɵ0;
 exports.ɵ1 = ɵ1;
-exports.ɵa21 = mcSelectAnimations;
+exports.ɵa20 = mcSelectAnimations;
 exports.McSelectModule = McSelectModule;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;
