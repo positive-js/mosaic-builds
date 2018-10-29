@@ -6455,6 +6455,15 @@ var McTimepicker = /** @class */ (function (_super) {
         this._applyInputChanges();
         this.focusChanged(false);
     };
+    McTimepicker.prototype.onPaste = function ($event) {
+        $event.preventDefault();
+        var clipboardUserInput = $event.clipboardData.getData('text');
+        if (this._getDateFromTimeString(clipboardUserInput) === undefined) {
+            return;
+        }
+        this._elementRef.nativeElement.value = clipboardUserInput;
+        this.onInput();
+    };
     McTimepicker.prototype.onInput = function () {
         var initialCursorStart = this._elementRef.nativeElement.selectionStart;
         var initialCursorEnd = this._elementRef.nativeElement.selectionEnd;
@@ -6857,6 +6866,7 @@ var McTimepicker = /** @class */ (function (_super) {
                 '(blur)': 'onBlur()',
                 '(focus)': 'focusChanged(true)',
                 '(input)': 'onInput()',
+                '(paste)': 'onPaste($event)',
                 '(keydown)': 'onKeyDown($event)'
             },
             providers: [
@@ -9297,11 +9307,11 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵd19 = MAX_VALIDATOR;
-exports.ɵb19 = MIN_VALIDATOR;
-exports.ɵe19 = MaxValidator;
-exports.ɵc19 = MinValidator;
-exports.ɵa19 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵd18 = MAX_VALIDATOR;
+exports.ɵb18 = MIN_VALIDATOR;
+exports.ɵe18 = MaxValidator;
+exports.ɵc18 = MinValidator;
+exports.ɵa18 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;

@@ -191,6 +191,15 @@ let McTimepicker = McTimepicker_1 = class McTimepicker extends McTimepickerMixin
         this._applyInputChanges();
         this.focusChanged(false);
     }
+    onPaste($event) {
+        $event.preventDefault();
+        const clipboardUserInput = $event.clipboardData.getData('text');
+        if (this._getDateFromTimeString(clipboardUserInput) === undefined) {
+            return;
+        }
+        this._elementRef.nativeElement.value = clipboardUserInput;
+        this.onInput();
+    }
     onInput() {
         const initialCursorStart = this._elementRef.nativeElement.selectionStart;
         const initialCursorEnd = this._elementRef.nativeElement.selectionEnd;
@@ -584,6 +593,7 @@ McTimepicker = McTimepicker_1 = __decorate([
             '(blur)': 'onBlur()',
             '(focus)': 'focusChanged(true)',
             '(input)': 'onInput()',
+            '(paste)': 'onPaste($event)',
             '(keydown)': 'onKeyDown($event)'
         },
         providers: [

@@ -77,6 +77,7 @@ export declare class McTimepicker extends McTimepickerMixinBase implements McFor
     focus(): void;
     focusChanged(isFocused: boolean): void;
     onBlur(): void;
+    onPaste($event: any): void;
     onInput(): void;
     /**
      * Implemented as part of McFormFieldControl.

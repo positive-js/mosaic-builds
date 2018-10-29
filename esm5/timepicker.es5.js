@@ -222,6 +222,15 @@ var McTimepicker = /** @class */ (function (_super) {
         this._applyInputChanges();
         this.focusChanged(false);
     };
+    McTimepicker.prototype.onPaste = function ($event) {
+        $event.preventDefault();
+        var clipboardUserInput = $event.clipboardData.getData('text');
+        if (this._getDateFromTimeString(clipboardUserInput) === undefined) {
+            return;
+        }
+        this._elementRef.nativeElement.value = clipboardUserInput;
+        this.onInput();
+    };
     McTimepicker.prototype.onInput = function () {
         var initialCursorStart = this._elementRef.nativeElement.selectionStart;
         var initialCursorEnd = this._elementRef.nativeElement.selectionEnd;
@@ -624,6 +633,7 @@ var McTimepicker = /** @class */ (function (_super) {
                 '(blur)': 'onBlur()',
                 '(focus)': 'focusChanged(true)',
                 '(input)': 'onInput()',
+                '(paste)': 'onPaste($event)',
                 '(keydown)': 'onKeyDown($event)'
             },
             providers: [
