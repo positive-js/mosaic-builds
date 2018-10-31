@@ -25,6 +25,7 @@ export * from '@ptsecurity/mosaic/tag';
 export * from '@ptsecurity/mosaic/timepicker';
 export * from '@ptsecurity/mosaic/select';
 export * from '@ptsecurity/mosaic/splitter';
+export * from '@ptsecurity/mosaic/toggle';
 export * from '@ptsecurity/mosaic/tooltip';
 
 const VERSION = new Version('0.0.1');
