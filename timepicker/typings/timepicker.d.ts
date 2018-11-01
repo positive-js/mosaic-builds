@@ -16,9 +16,9 @@ export declare class McTimepickerBase {
 }
 export declare const McTimepickerMixinBase: CanUpdateErrorStateCtor & typeof McTimepickerBase;
 export declare class McTimepicker extends McTimepickerMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState, ControlValueAccessor {
-    private readonly _elementRef;
+    private readonly elementRef;
     ngControl: NgControl;
-    private readonly _renderer;
+    private readonly renderer;
     /** An object used to control when error messages are shown. */
     errorStateMatcher: ErrorStateMatcher;
     /**
@@ -57,20 +57,20 @@ export declare class McTimepicker extends McTimepickerMixinBase implements McFor
     minTime: string | null;
     maxTime: string | null;
     private _id;
-    private readonly _uid;
+    private readonly uid;
     private _disabled;
     private _required;
-    private _previousNativeValue;
-    private readonly _inputValueAccessor;
-    private _onChange;
-    private _onTouched;
+    private previousNativeValue;
+    private readonly inputValueAccessor;
+    private onChange;
+    private onTouched;
     private _timeFormat;
     private _minTime;
-    private _minDTime;
+    private minDateTime;
     private _maxTime;
-    private _maxDTime;
-    private _currentDTimeInput;
-    constructor(_elementRef: ElementRef, ngControl: NgControl, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, _defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, _renderer: Renderer2);
+    private maxDateTime;
+    private currentDateTimeInput;
+    constructor(elementRef: ElementRef, ngControl: NgControl, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, _defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, renderer: Renderer2);
     ngOnChanges(): void;
     ngOnDestroy(): void;
     ngDoCheck(): void;
@@ -94,44 +94,44 @@ export declare class McTimepicker extends McTimepickerMixinBase implements McFor
     registerOnChange(fn: (value: Date) => void): void;
     registerOnTouched(fn: () => void): void;
     /** Does some manual dirty checking on the native input `value` property. */
-    private _dirtyCheckNativeValue;
+    private dirtyCheckNativeValue;
     /** Checks whether the input is invalid based on the native validation. */
-    private _isBadInput;
-    private _applyInputChanges;
-    private _upDownTimeByArrowKeys;
-    private _switchSelectionBetweenTimeparts;
+    private isBadInput;
+    private applyInputChanges;
+    private upDownTimeByArrowKeys;
+    private switchSelectionBetweenTimeparts;
     /**
      * @description Microsoft EDGE doesn't support KeyboaedEvent.code thus we need this helper
      */
-    private _getKeyCode;
-    private _createSelectionOfTimeComponentInInput;
-    private _incrementTime;
+    private getKeyCode;
+    private createSelectionOfTimeComponentInInput;
+    private incrementTime;
     /**
      * @description Decrement part of time
      */
-    private _decrementTime;
-    private _getCursorPositionOfPrevTimePartStart;
-    private _getCursorPositionOfNextTimePartStart;
+    private decrementTime;
+    private getCursorPositionOfPrevTimePartStart;
+    private getCursorPositionOfNextTimePartStart;
     /**
      * @description Get params for arrow-keys (up/down) time valie edit.
      * @param cursorPosition Current cursor position in timeString
      */
-    private _getTimeEditMetrics;
+    private getTimeEditMetrics;
     /**
      * @description Create time string for displaying inside input element of UI
      */
-    private _getTimeStringFromDate;
-    private _getParsedTimeParts;
+    private getTimeStringFromDate;
+    private getParsedTimeParts;
     /**
      * @description Create Date object from separate parts of time
      */
-    private _getDateFromTimeDigits;
-    private _getDateFromTimeString;
-    private _getNumberWithLeadingZero;
-    private _getTimeDigitsFromDate;
-    private _parseValidator;
-    private _minTimeValidator;
-    private _maxTimeValidator;
-    private _isTimeLowerThenMin;
-    private _isTimeGreaterThenMax;
+    private getDateFromTimeDigits;
+    private getDateFromTimeString;
+    private getNumberWithLeadingZero;
+    private getTimeDigitsFromDate;
+    private parseValidator;
+    private minTimeValidator;
+    private maxTimeValidator;
+    private isTimeLowerThenMin;
+    private isTimeGreaterThenMax;
 }
