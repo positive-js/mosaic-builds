@@ -859,7 +859,7 @@ $base-font-size: 15px !default;
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-29d35depx mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-dffeeecpx mc-color($second, 300);
         }
 
         &__light {
@@ -987,7 +987,7 @@ $base-font-size: 15px !default;
 
     .mc-alert_close:focus {
         border: 1px solid mc-color($primary, 500);
-        box-shadow: 0 0.0.1-29d35depx mc-color($primary, 500);
+        box-shadow: 0 0.0.1-dffeeecpx mc-color($primary, 500);
         z-index: 1;
     }
 
@@ -1143,7 +1143,7 @@ $base-font-size: 15px !default;
             $focus-color: map-get($primary, lighter);
 
             border-color: $focus-color;
-            box-shadow: 0 0.0.1-29d35depx $focus-color;
+            box-shadow: 0 0.0.1-dffeeecpx $focus-color;
         }
     }
 }
@@ -1603,7 +1603,7 @@ $zindex-tooltip         : 1060;
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-29d35depx map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-dffeeecpx map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1753,7 +1753,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-29d35depx mc-color($palette, 500);
+            box-shadow: 0 0.0.1-dffeeecpx mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1909,7 +1909,7 @@ $zindex-tooltip         : 1060;
                 border: {
                     color: mc-color($primary, 500);
                 }
-                box-shadow: 0 0.0.1-29d35depx mc-color($primary, 500);
+                box-shadow: 0 0.0.1-dffeeecpx mc-color($primary, 500);
             }
 
             &.ng-invalid {
@@ -1932,7 +1932,7 @@ $zindex-tooltip         : 1060;
                 border: {
                     color: mc-color($mc-red, 400);
                 }
-                box-shadow: 0 0.0.1-29d35depx mc-color($mc-red, 400);
+                box-shadow: 0 0.0.1-dffeeecpx mc-color($mc-red, 400);
             }
         }
 
@@ -1999,7 +1999,7 @@ $zindex-tooltip         : 1060;
 
         &-content {
             box-shadow:
-                0 0.0.1-29d35depx mc-color($second, 300),
+                0 0.0.1-dffeeecpx mc-color($second, 300),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2070,7 +2070,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color, 500);
-        box-shadow: 0 0.0.1-29d35depx mc-color($focus-color, 500);
+        box-shadow: 0 0.0.1-dffeeecpx mc-color($focus-color, 500);
         background-color: mc-color($main-color, 100);
     }
 
@@ -2307,7 +2307,7 @@ $hover-darken: 5%;
             .mc-toggle-input {
                 + .mc-toggle-bar-container .mc-toggle__focus-frame {
                     border: 2px solid map-get($primary, 500);
-                    box-shadow: inset 0 0.0.1-29d35depx map-get($background, background);
+                    box-shadow: inset 0 0.0.1-dffeeecpx map-get($background, background);
                 }
             }
         }
@@ -2405,6 +2405,113 @@ $hover-darken: 5%;
 }
 
 
+
+
+
+
+@mixin left-marker($color) {
+    $gray100: mc-color($mc-grey, 100);
+    box-shadow: inset 4px 0 0 0 mc-color($color, 400), inset -1px 0 0 0 $gray100, inset 0 1px 0 0 $gray100, inset 0 -1px 0 0 $gray100;
+}
+
+@mixin left-marker-dark($color) {
+    $gray600: mc-color($mc-grey, 600);
+    box-shadow: inset 4px 0 0 0 mc-color($color, 600), inset -1px 0 0 0 $gray600, inset 0 1px 0 0 $gray600, inset 0 -1px 0 0 $gray600;
+}
+
+@mixin set-state($background, $marker, $border-color) {
+    background-color: $background;
+    box-shadow: inset 4px 0 0 0 $marker, inset -1px 0 0 0 $border-color, inset 0 1px 0 0 $border-color, inset 0 -1px 0 0 $border-color;
+}
+
+@mixin normal-state($color, $border-color, $isDark) {
+    @if $isDark == true {
+        @include set-state(mc-color($color, 700), mc-color($color, 600), mc-color($border-color, 600));
+    } @else {
+        @include set-state(mc-color($color, 60), mc-color($color, 400), mc-color($border-color, 100));
+    }
+}
+
+@mixin selected-state($border-color, $back-color, $isDark) {
+    @if $isDark == true {
+        background-color: mc-color($back-color, 700);
+        box-shadow: inset 4px 0 0 0 mc-color($border-color, 600);
+    } @else {
+        background-color: mc-color($back-color, 100);
+        box-shadow: inset 4px 0 0 0 mc-color($border-color, 400);
+    }
+}
+
+@mixin mc-card-theme($theme) {
+    $isDark: map-get($theme, is-dark);
+    $default: map-get($theme, default);
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $info: map-get($theme, info);
+    $error: map-get($theme, error);
+    $warning: map-get($theme, warning);
+    $success: map-get($theme, success);
+    $theme-background: map-get($theme, background);
+    $theme-foreground: map-get($theme, foreground);
+    $white-background-color: if($isDark, mc-color($second, 700), map-get($theme-background, background));
+    $foreground-color: map-get($theme-foreground, base);
+    
+    $hover-color: map-get($theme-background, hover);
+    $focus-color: mc-color($primary, lighter);
+    
+    .mc-card {
+        background-color: mc-color($default, 60);
+        color: $foreground-color;
+        
+        &_info {
+            @include normal-state($info, $second, $isDark);
+            
+            &.mc-card_selected {
+                @include selected-state($info, $primary, $isDark);
+            }
+        }
+        
+        &_warning {
+            @include normal-state($warning, $second, $isDark);
+            
+            &.mc-card_selected {
+                @include selected-state($warning, $primary, $isDark);
+            }
+        }
+        
+        &_success {
+            @include normal-state($success, $second, $isDark);
+            
+            &.mc-card_selected {
+                @include selected-state($success, $primary, $isDark);
+            }
+        }
+        
+        &_error {
+            @include normal-state($error, $second, $isDark);
+            
+            &.mc-card_selected {
+                @include selected-state($error, $primary, $isDark);
+            }
+        }
+        
+        &_white {
+            background-color: $white-background-color;
+        }
+        
+        .mc-card__hover-overlay {
+            background: $hover-color;
+        }
+        
+        &:focus,
+        &.cdk-focused {
+            .mc-card__focus-overlay {
+                border: solid 1px $focus-color;
+                box-shadow: 0 0.0.1-dffeeecpx $focus-color;
+            }
+        }
+    }
+}
 
 
 
@@ -2578,6 +2685,7 @@ $hover-darken: 5%;
     @include mc-alert-theme($theme);
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
+    @include mc-card-theme($theme);
     @include mc-icon-theme($theme);
     @include mc-list-theme($theme);
     @include mc-panel-theme($theme);

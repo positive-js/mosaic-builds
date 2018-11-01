@@ -1249,6 +1249,157 @@ var McButtonModule = /** @class */ (function () {
     return McButtonModule;
 }());
 
+(function (Status) {
+    Status[Status["Info"] = 0] = "Info";
+    Status[Status["Success"] = 1] = "Success";
+    Status[Status["Warning"] = 2] = "Warning";
+    Status[Status["Error"] = 3] = "Error";
+})(exports.Status || (exports.Status = {}));
+var name = 'mc-card';
+var McCard = /** @class */ (function () {
+    function McCard(_elementRef, _focusMonitor) {
+        this._elementRef = _elementRef;
+        this._focusMonitor = _focusMonitor;
+        this.readonly = false;
+        this.selected = false;
+        this.selectedChange = new core.EventEmitter();
+        this.mode = 'color';
+        this.status = exports.Status.Info;
+        this._tabIndex = 0;
+        this._focusMonitor.monitor(this._elementRef.nativeElement, false);
+    }
+    Object.defineProperty(McCard.prototype, "tabIndex", {
+        get: function () {
+            return this.readonly ? null : this._tabIndex;
+        },
+        set: function (value) {
+            this._tabIndex = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McCard.prototype, "statusClass", {
+        get: function () {
+            switch (this.status) {
+                case exports.Status.Error:
+                    return name + "_error";
+                case exports.Status.Info:
+                    return name + "_info";
+                case exports.Status.Success:
+                    return name + "_success";
+                case exports.Status.Warning:
+                    return name + "_warning";
+                default:
+                    return '';
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McCard.prototype, "isWhiteMode", {
+        get: function () {
+            return this.mode === 'white';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McCard.prototype.ngOnDestroy = function () {
+        this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
+    };
+    McCard.prototype.focus = function () {
+        this.hostElement.focus();
+    };
+    McCard.prototype.clicked = function ($event) {
+        if (!this.readonly) {
+            $event.stopPropagation();
+            this.selectedChange.emit(!this.selected);
+        }
+    };
+    Object.defineProperty(McCard.prototype, "hostElement", {
+        get: function () {
+            return this._elementRef.nativeElement;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McCard.prototype.onKeyDown = function ($event) {
+        var keyCode = $event.keyCode;
+        switch (keyCode) {
+            case keycodes.SPACE:
+                if (!this.readonly) {
+                    $event.preventDefault();
+                    this.selectedChange.emit(!this.selected);
+                }
+                break;
+            default:
+        }
+    };
+    __decorate([
+        core.HostBinding('attr.tabIndex'),
+        core.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], McCard.prototype, "tabIndex", null);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object)
+    ], McCard.prototype, "readonly", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Object)
+    ], McCard.prototype, "selected", void 0);
+    __decorate([
+        core.Output(),
+        __metadata("design:type", Object)
+    ], McCard.prototype, "selectedChange", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", String)
+    ], McCard.prototype, "mode", void 0);
+    __decorate([
+        core.Input(),
+        __metadata("design:type", Number)
+    ], McCard.prototype, "status", void 0);
+    McCard = __decorate([
+        core.Component({
+            selector: name,
+            template: "<div class=\"mc-card__wrapper\" [ngClass]=\"statusClass\" [class.mc-card_white]=\"isWhiteMode\" [class.mc-card_selected]=\"selected\" (click)=\"clicked($event)\"><ng-content></ng-content></div><div class=\"mc-card__hover-overlay\"></div><div class=\"mc-card__focus-overlay\"></div>",
+            styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer}.mc-card__wrapper{flex:auto;display:block;padding-left:4px}.mc-card:focus{outline:0}.mc-card.cdk-focused{z-index:1}.mc-card__focus-overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none}.mc-card__hover-overlay{top:0;left:0;right:0;bottom:0;position:absolute;display:none!important;pointer-events:none}.mc-card:not(.mc-card_readonly):hover .mc-card__hover-overlay{display:block!important}.mc-card.mc-card_readonly{cursor:auto}"],
+            changeDetection: core.ChangeDetectionStrategy.OnPush,
+            encapsulation: core.ViewEncapsulation.None,
+            inputs: ['color'],
+            host: {
+                class: name,
+                '[class.mc-card_readonly]': 'readonly',
+                '(keydown)': 'onKeyDown($event)'
+            }
+        }),
+        __metadata("design:paramtypes", [core.ElementRef, a11y.FocusMonitor])
+    ], McCard);
+    return McCard;
+}());
+
+var McCardModule = /** @class */ (function () {
+    function McCardModule() {
+    }
+    McCardModule = __decorate([
+        core.NgModule({
+            imports: [
+                common.CommonModule,
+                a11y.A11yModule,
+                platform.PlatformModule
+            ],
+            exports: [
+                McCard
+            ],
+            declarations: [
+                McCard
+            ]
+        })
+    ], McCardModule);
+    return McCardModule;
+}());
+
 /**
  * Injection token that can be used to specify the checkbox click behavior.
  */
@@ -9445,7 +9596,7 @@ var McToolTipModule = /** @class */ (function () {
 var VERSION = new core.Version('0.0.1');
 
 exports.VERSION = VERSION;
-exports.ɵa1 = MC_SANITY_CHECKS_FACTORY;
+exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
@@ -9487,6 +9638,8 @@ exports._McButtonMixinBase = _McButtonMixinBase;
 exports.McButton = McButton;
 exports.McAnchor = McAnchor;
 exports.McIconButton = McIconButton;
+exports.McCardModule = McCardModule;
+exports.McCard = McCard;
 exports.MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = MC_CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.McCheckboxChange = McCheckboxChange;
 exports.McCheckboxBase = McCheckboxBase;
@@ -9516,11 +9669,11 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵd18 = MAX_VALIDATOR;
-exports.ɵb18 = MIN_VALIDATOR;
-exports.ɵe18 = MaxValidator;
-exports.ɵc18 = MinValidator;
-exports.ɵa18 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵd20 = MAX_VALIDATOR;
+exports.ɵb20 = MIN_VALIDATOR;
+exports.ɵe20 = MaxValidator;
+exports.ɵc20 = MinValidator;
+exports.ɵa20 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -9553,8 +9706,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb20 = CssUnitPipe;
-exports.ɵa20 = McModalControlService;
+exports.ɵb21 = CssUnitPipe;
+exports.ɵa21 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -9619,7 +9772,7 @@ exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
 exports.ɵ0 = ɵ0;
 exports.ɵ1 = ɵ1;
-exports.ɵa21 = mcSelectAnimations;
+exports.ɵa22 = mcSelectAnimations;
 exports.McSelectModule = McSelectModule;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;
