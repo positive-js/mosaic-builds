@@ -17,11 +17,11 @@ export declare class McFormField extends _McFormFieldMixinBase implements AfterC
     private _changeDetectorRef;
     _control: McFormFieldControl<any>;
     _numberControl: McFormFieldNumberControl<any>;
+    _stepper: McStepper;
     _hint: QueryList<McHint>;
     _suffix: QueryList<McSuffix>;
     _prefix: QueryList<McPrefix>;
     _cleaner: QueryList<McCleaner>;
-    _stepper: McStepper;
     _labelId: string;
     hovered: boolean;
     constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef);

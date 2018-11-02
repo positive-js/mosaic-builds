@@ -630,7 +630,9 @@ var MaxValidator = /** @class */ (function () {
         core.Directive({
             selector: '[max][formControlName],[max][formControl],[max][ngModel]',
             providers: [MAX_VALIDATOR],
-            host: { '[attr.max]': 'max ? max : null' }
+            host: {
+                '[attr.max]': 'max ? max : null'
+            }
         })
     ], MaxValidator);
     return MaxValidator;

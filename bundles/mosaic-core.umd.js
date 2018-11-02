@@ -164,6 +164,7 @@ function mixinDisabled(base) {
     ThemePalette["Second"] = "second";
     ThemePalette["Error"] = "error";
     ThemePalette["Default"] = "second";
+    ThemePalette["Empty"] = "";
 })(exports.ThemePalette || (exports.ThemePalette = {}));
 /** Mixin to augment a directive with a `color` property. */
 function mixinColor(base, defaultColor) {

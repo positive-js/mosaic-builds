@@ -6,7 +6,7 @@
  */
 import { __decorate, __extends, __param, __metadata } from 'tslib';
 import { Attribute, ChangeDetectionStrategy, Component, Directive, ElementRef, ViewEncapsulation, NgModule } from '@angular/core';
-import { mixinColor } from '@ptsecurity/mosaic/core';
+import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
@@ -28,7 +28,7 @@ var McIconBase = /** @class */ (function () {
     }
     return McIconBase;
 }());
-var _McIconMixinBase = mixinColor(McIconBase);
+var _McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {

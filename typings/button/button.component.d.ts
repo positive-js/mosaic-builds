@@ -4,14 +4,6 @@ import { CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/
 import { McIcon } from '@ptsecurity/mosaic/icon';
 export declare class McButtonCSSStyler {
 }
-export declare class McXSButtonCSSStyler {
-}
-export declare class McSMButtonCSSStyler {
-}
-export declare class McLGButtonCSSStyler {
-}
-export declare class McXLButtonCSSStyler {
-}
 export declare class McIconButtonCSSStyler {
     nativeElement: Element;
     contentChildren: QueryList<McIcon>;

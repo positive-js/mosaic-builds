@@ -7,7 +7,7 @@
 import { __decorate, __extends, __metadata } from 'tslib';
 import { Component, Directive, Input, EventEmitter, Output, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, ContentChildren, ElementRef, QueryList, ViewEncapsulation, NgModule } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { mixinColor } from '@ptsecurity/mosaic/core';
 import { EMPTY, merge } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ var McCleaner = /** @class */ (function () {
     McCleaner = __decorate([
         Component({
             selector: 'mc-cleaner',
-            template: '<i mc-icon="mc-close-M_16" class="mc-cleaner__icon"></i>'
+            template: '<i mc-icon="mc-close-M_16"></i>'
         })
     ], McCleaner);
     return McCleaner;
@@ -123,7 +123,7 @@ var McFormFieldBase = /** @class */ (function () {
     }
     return McFormFieldBase;
 }());
-var _McFormFieldMixinBase = mixinColor(McFormFieldBase, ThemePalette.Primary);
+var _McFormFieldMixinBase = mixinColor(McFormFieldBase);
 var McFormField = /** @class */ (function (_super) {
     __extends(McFormField, _super);
     function McFormField(_elementRef, _changeDetectorRef) {
@@ -290,6 +290,10 @@ var McFormField = /** @class */ (function (_super) {
         __metadata("design:type", McFormFieldNumberControl)
     ], McFormField.prototype, "_numberControl", void 0);
     __decorate([
+        ContentChild(McStepper),
+        __metadata("design:type", McStepper)
+    ], McFormField.prototype, "_stepper", void 0);
+    __decorate([
         ContentChildren(McHint),
         __metadata("design:type", QueryList)
     ], McFormField.prototype, "_hint", void 0);
@@ -305,10 +309,6 @@ var McFormField = /** @class */ (function (_super) {
         ContentChildren(McCleaner),
         __metadata("design:type", QueryList)
     ], McFormField.prototype, "_cleaner", void 0);
-    __decorate([
-        ContentChild(McStepper),
-        __metadata("design:type", McStepper)
-    ], McFormField.prototype, "_stepper", void 0);
     McFormField = __decorate([
         Component({
             selector: 'mc-form-field',
@@ -321,7 +321,7 @@ var McFormField = /** @class */ (function (_super) {
             host: {
                 class: 'mc-form-field',
                 '[class.mc-form-field_invalid]': '_control.errorState',
-                '[class.mc-form-field_disabled]': '_control.disabled',
+                '[class.mc-disabled]': '_control.disabled',
                 '[class.mc-form-field_has-prefix]': 'hasPrefix',
                 '[class.mc-form-field_has-suffix]': 'hasSuffix',
                 '[class.mc-form-field_has-cleaner]': 'canShowCleaner',

@@ -123,6 +123,7 @@ var ThemePalette;
     ThemePalette["Second"] = "second";
     ThemePalette["Error"] = "error";
     ThemePalette["Default"] = "second";
+    ThemePalette["Empty"] = "";
 })(ThemePalette || (ThemePalette = {}));
 /** Mixin to augment a directive with a `color` property. */
 function mixinColor(base, defaultColor) {

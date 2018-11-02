@@ -56,7 +56,7 @@ var McCleaner = /** @class */ (function () {
     McCleaner = __decorate([
         core.Component({
             selector: 'mc-cleaner',
-            template: '<i mc-icon="mc-close-M_16" class="mc-cleaner__icon"></i>'
+            template: '<i mc-icon="mc-close-M_16"></i>'
         })
     ], McCleaner);
     return McCleaner;
@@ -160,7 +160,7 @@ var McFormFieldBase = /** @class */ (function () {
     }
     return McFormFieldBase;
 }());
-var _McFormFieldMixinBase = core$1.mixinColor(McFormFieldBase, core$1.ThemePalette.Primary);
+var _McFormFieldMixinBase = core$1.mixinColor(McFormFieldBase);
 var McFormField = /** @class */ (function (_super) {
     __extends(McFormField, _super);
     function McFormField(_elementRef, _changeDetectorRef) {
@@ -327,6 +327,10 @@ var McFormField = /** @class */ (function (_super) {
         __metadata("design:type", McFormFieldNumberControl)
     ], McFormField.prototype, "_numberControl", void 0);
     __decorate([
+        core.ContentChild(McStepper),
+        __metadata("design:type", McStepper)
+    ], McFormField.prototype, "_stepper", void 0);
+    __decorate([
         core.ContentChildren(McHint),
         __metadata("design:type", core.QueryList)
     ], McFormField.prototype, "_hint", void 0);
@@ -342,10 +346,6 @@ var McFormField = /** @class */ (function (_super) {
         core.ContentChildren(McCleaner),
         __metadata("design:type", core.QueryList)
     ], McFormField.prototype, "_cleaner", void 0);
-    __decorate([
-        core.ContentChild(McStepper),
-        __metadata("design:type", McStepper)
-    ], McFormField.prototype, "_stepper", void 0);
     McFormField = __decorate([
         core.Component({
             selector: 'mc-form-field',
@@ -358,7 +358,7 @@ var McFormField = /** @class */ (function (_super) {
             host: {
                 class: 'mc-form-field',
                 '[class.mc-form-field_invalid]': '_control.errorState',
-                '[class.mc-form-field_disabled]': '_control.disabled',
+                '[class.mc-disabled]': '_control.disabled',
                 '[class.mc-form-field_has-prefix]': 'hasPrefix',
                 '[class.mc-form-field_has-suffix]': 'hasSuffix',
                 '[class.mc-form-field_has-cleaner]': 'canShowCleaner',

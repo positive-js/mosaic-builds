@@ -71,7 +71,7 @@ var McIconBase = /** @class */ (function () {
     }
     return McIconBase;
 }());
-var _McIconMixinBase = core$1.mixinColor(McIconBase);
+var _McIconMixinBase = core$1.mixinColor(McIconBase, core$1.ThemePalette.Empty);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {
