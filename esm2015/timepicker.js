@@ -27,8 +27,8 @@ var TimeFormats;
     TimeFormats["HHmm"] = "HH:mm";
 })(TimeFormats || (TimeFormats = {}));
 const TIMEFORMAT_PLACEHOLDERS = {
-    'hh:mm:ss': '  :  :  ',
-    'hh:mm': '  :  '
+    [TimeFormats.HHmmss]: '  :  :  ',
+    [TimeFormats.HHmm]: '  :  '
 };
 const DEFAULT_TIME_FORMAT = TimeFormats.HHmm;
 const HOURS_MINUTES_SECONDS_REGEXP = new RegExp(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])?$/);
@@ -94,6 +94,7 @@ let McTimepicker = McTimepicker_1 = class McTimepicker extends McTimepickerMixin
         this.onChange = noop;
         // Force setter to be called in case id was not specified.
         this.id = this.id;
+        this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
         // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
@@ -146,7 +147,7 @@ let McTimepicker = McTimepicker_1 = class McTimepicker extends McTimepickerMixin
             .map((timeFormatKey) => TimeFormats[timeFormatKey])
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
         validatorOnChange();
-        this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat.toLowerCase()];
+        this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
     }
     get minTime() { return this._minTime; }
     set minTime(minValue) {

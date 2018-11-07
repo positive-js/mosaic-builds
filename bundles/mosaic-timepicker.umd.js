@@ -54,6 +54,8 @@ function __metadata(metadataKey, metadataValue) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
 }
 
+var _a;
+
 (function (TimeParts) {
     TimeParts[TimeParts["hours"] = 0] = "hours";
     TimeParts[TimeParts["minutes"] = 1] = "minutes";
@@ -64,10 +66,7 @@ function __metadata(metadataKey, metadataValue) {
     TimeFormats["HHmmss"] = "HH:mm:ss";
     TimeFormats["HHmm"] = "HH:mm";
 })(exports.TimeFormats || (exports.TimeFormats = {}));
-var TIMEFORMAT_PLACEHOLDERS = {
-    'hh:mm:ss': '  :  :  ',
-    'hh:mm': '  :  '
-};
+var TIMEFORMAT_PLACEHOLDERS = (_a = {}, _a[exports.TimeFormats.HHmmss] = '  :  :  ', _a[exports.TimeFormats.HHmm] = '  :  ', _a);
 var DEFAULT_TIME_FORMAT = exports.TimeFormats.HHmm;
 var HOURS_MINUTES_SECONDS_REGEXP = new RegExp(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])?$/);
 var HOURS_MINUTES_REGEXP = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]|[0-9])?$/;
@@ -133,6 +132,7 @@ var McTimepicker = /** @class */ (function (_super) {
         _this.onChange = rxjs.noop;
         // Force setter to be called in case id was not specified.
         _this.id = _this.id;
+        _this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
         // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
         if (_this.ngControl) {
             _this.ngControl.valueAccessor = _this;
@@ -204,7 +204,7 @@ var McTimepicker = /** @class */ (function (_super) {
                 .map(function (timeFormatKey) { return exports.TimeFormats[timeFormatKey]; })
                 .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
             validatorOnChange();
-            this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat.toLowerCase()];
+            this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
         },
         enumerable: true,
         configurable: true

@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
 
+var _a;
 var TimeParts;
 (function (TimeParts) {
     TimeParts[TimeParts["hours"] = 0] = "hours";
@@ -26,10 +27,7 @@ var TimeFormats;
     TimeFormats["HHmmss"] = "HH:mm:ss";
     TimeFormats["HHmm"] = "HH:mm";
 })(TimeFormats || (TimeFormats = {}));
-var TIMEFORMAT_PLACEHOLDERS = {
-    'hh:mm:ss': '  :  :  ',
-    'hh:mm': '  :  '
-};
+var TIMEFORMAT_PLACEHOLDERS = (_a = {}, _a[TimeFormats.HHmmss] = '  :  :  ', _a[TimeFormats.HHmm] = '  :  ', _a);
 var DEFAULT_TIME_FORMAT = TimeFormats.HHmm;
 var HOURS_MINUTES_SECONDS_REGEXP = new RegExp(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])?$/);
 var HOURS_MINUTES_REGEXP = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]|[0-9])?$/;
@@ -95,6 +93,7 @@ var McTimepicker = /** @class */ (function (_super) {
         _this.onChange = noop;
         // Force setter to be called in case id was not specified.
         _this.id = _this.id;
+        _this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
         // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
         if (_this.ngControl) {
             _this.ngControl.valueAccessor = _this;
@@ -166,7 +165,7 @@ var McTimepicker = /** @class */ (function (_super) {
                 .map(function (timeFormatKey) { return TimeFormats[timeFormatKey]; })
                 .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
             validatorOnChange();
-            this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat.toLowerCase()];
+            this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
         },
         enumerable: true,
         configurable: true
