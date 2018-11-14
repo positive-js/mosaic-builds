@@ -1198,13 +1198,6 @@ var McButtonModule = /** @class */ (function () {
     return McButtonModule;
 }());
 
-(function (Status) {
-    Status[Status["Info"] = 0] = "Info";
-    Status[Status["Success"] = 1] = "Success";
-    Status[Status["Warning"] = 2] = "Warning";
-    Status[Status["Error"] = 3] = "Error";
-})(exports.Status || (exports.Status = {}));
-var name = 'mc-card';
 var McCard = /** @class */ (function () {
     function McCard(_elementRef, _focusMonitor) {
         this._elementRef = _elementRef;
@@ -1212,8 +1205,6 @@ var McCard = /** @class */ (function () {
         this.readonly = false;
         this.selected = false;
         this.selectedChange = new core.EventEmitter();
-        this.mode = 'color';
-        this.status = exports.Status.Info;
         this._tabIndex = 0;
         this._focusMonitor.monitor(this._elementRef.nativeElement, false);
     }
@@ -1227,38 +1218,13 @@ var McCard = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(McCard.prototype, "statusClass", {
-        get: function () {
-            switch (this.status) {
-                case exports.Status.Error:
-                    return name + "_error";
-                case exports.Status.Info:
-                    return name + "_info";
-                case exports.Status.Success:
-                    return name + "_success";
-                case exports.Status.Warning:
-                    return name + "_warning";
-                default:
-                    return '';
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McCard.prototype, "isWhiteMode", {
-        get: function () {
-            return this.mode === 'white';
-        },
-        enumerable: true,
-        configurable: true
-    });
     McCard.prototype.ngOnDestroy = function () {
         this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     };
     McCard.prototype.focus = function () {
         this.hostElement.focus();
     };
-    McCard.prototype.clicked = function ($event) {
+    McCard.prototype.onClick = function ($event) {
         if (!this.readonly) {
             $event.stopPropagation();
             this.selectedChange.emit(!this.selected);
@@ -1272,8 +1238,7 @@ var McCard = /** @class */ (function () {
         configurable: true
     });
     McCard.prototype.onKeyDown = function ($event) {
-        var keyCode = $event.keyCode;
-        switch (keyCode) {
+        switch ($event.keyCode) {
             case keycodes.SPACE:
                 if (!this.readonly) {
                     $event.preventDefault();
@@ -1301,26 +1266,20 @@ var McCard = /** @class */ (function () {
         core.Output(),
         __metadata("design:type", Object)
     ], McCard.prototype, "selectedChange", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", String)
-    ], McCard.prototype, "mode", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Number)
-    ], McCard.prototype, "status", void 0);
     McCard = __decorate([
         core.Component({
-            selector: name,
-            template: "<div class=\"mc-card__wrapper\" [ngClass]=\"statusClass\" [class.mc-card_white]=\"isWhiteMode\" [class.mc-card_selected]=\"selected\" (click)=\"clicked($event)\"><ng-content></ng-content></div><div class=\"mc-card__hover-overlay\"></div><div class=\"mc-card__focus-overlay\"></div>",
-            styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer}.mc-card__wrapper{flex:auto;display:block;padding-left:4px}.mc-card:focus{outline:0}.mc-card.cdk-focused{z-index:1}.mc-card__focus-overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none}.mc-card__hover-overlay{top:0;left:0;right:0;bottom:0;position:absolute;display:none!important;pointer-events:none}.mc-card:not(.mc-card_readonly):hover .mc-card__hover-overlay{display:block!important}.mc-card.mc-card_readonly{cursor:auto}"],
+            selector: 'mc-card',
+            template: "<ng-content></ng-content><div class=\"mc-card__overlay\"></div>",
+            styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer;border-left-width:4px;border-left-style:solid;border-left-color:transparent}.mc-card:focus{outline:0}.mc-card .mc-card__overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;background:0 0}.mc-card.mc-card_readonly{cursor:auto}"],
             changeDetection: core.ChangeDetectionStrategy.OnPush,
             encapsulation: core.ViewEncapsulation.None,
             inputs: ['color'],
             host: {
-                class: name,
+                class: 'mc-card',
                 '[class.mc-card_readonly]': 'readonly',
-                '(keydown)': 'onKeyDown($event)'
+                '[class.mc-card_selected]': 'selected',
+                '(keydown)': 'onKeyDown($event)',
+                '(click)': 'onClick($event)'
             }
         }),
         __metadata("design:paramtypes", [core.ElementRef, a11y.FocusMonitor])
@@ -1338,12 +1297,8 @@ var McCardModule = /** @class */ (function () {
                 a11y.A11yModule,
                 platform.PlatformModule
             ],
-            exports: [
-                McCard
-            ],
-            declarations: [
-                McCard
-            ]
+            exports: [McCard],
+            declarations: [McCard]
         })
     ], McCardModule);
     return McCardModule;
@@ -1839,7 +1794,7 @@ var McCleaner = /** @class */ (function () {
     McCleaner = __decorate([
         core.Component({
             selector: 'mc-cleaner',
-            template: '<i mc-icon="mc-close-M_16"></i>'
+            template: '<i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>'
         })
     ], McCleaner);
     return McCleaner;
@@ -1919,7 +1874,7 @@ var McStepper = /** @class */ (function () {
     McStepper = __decorate([
         core.Component({
             selector: 'mc-stepper',
-            template: "\n        <i class=\"mc mc-stepper-step-up mc-icon mc-angle-L_16 mc-icon-flip-h\" (mousedown)=\"onStepUp($event)\"></i>\n        <i class=\"mc mc-stepper-step-down mc-icon mc-angle-L_16\" (mousedown)=\"onStepDown($event)\"></i>\n    "
+            template: "\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-up mc-angle-L_16\"\n           (mousedown)=\"onStepUp($event)\">\n        </i>\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-down mc-angle-L_16\"\n           (mousedown)=\"onStepDown($event)\">\n        </i>\n    "
         })
     ], McStepper);
     return McStepper;
@@ -2137,7 +2092,7 @@ var McFormField = /** @class */ (function (_super) {
             // McInput is a directive and can't have styles, so we need to include its styles here.
             // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
             // aren't using McInput.
-            styles: [".mc-form-field{position:relative;display:inline-block;width:100%}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;display:flex;flex-direction:row;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px;cursor:pointer}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px}mc-stepper .mc-stepper-step-down,mc-stepper .mc-stepper-step-up{cursor:pointer;width:32px;text-align:center} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset}"],
+            styles: [".mc-form-field{position:relative;display:inline-block;width:100%}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;display:flex;flex-direction:row;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px;cursor:pointer}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px}mc-stepper .mc-stepper-step-down,mc-stepper .mc-stepper-step-up{cursor:pointer;width:32px;text-align:center}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset}"],
             host: {
                 class: 'mc-form-field',
                 '[class.mc-form-field_invalid]': '_control.errorState',
@@ -9617,11 +9572,11 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵd19 = MAX_VALIDATOR;
-exports.ɵb19 = MIN_VALIDATOR;
-exports.ɵe19 = MaxValidator;
-exports.ɵc19 = MinValidator;
-exports.ɵa19 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵd20 = MAX_VALIDATOR;
+exports.ɵb20 = MIN_VALIDATOR;
+exports.ɵe20 = MaxValidator;
+exports.ɵc20 = MinValidator;
+exports.ɵa20 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;

@@ -385,7 +385,7 @@ $mc-light-theme-foreground: (
     less-contrast-text: $dark-text-secondary,
     disabled-text:      $dark-text-disabled,
 
-    default-icon:       rgba(transparent, 0.25),
+    default-icon:       rgba(transparent, 0.45),
 );
 
 $mc-dark-theme-foreground: (
@@ -491,48 +491,50 @@ $mc-dark-theme-background: (
 @function mc-light-theme(
     $primary,
     $second,
-    $error: mc-palette($mc-red),
-    $warning: mc-palette($mc-yellow),
-    $success: mc-palette($mc-green),
+    $error,
+
     $info: mc-palette($mc-blue),
-    $default: mc-palette($mc-grey)
+    $success: mc-palette($mc-green),
+    $warning: mc-palette($mc-yellow)
 ) {
     @return (
+        is-dark: false,
+
         primary: $primary,
         second: $second,
-        is-dark: false,
+        error: $error,
+
         foreground: $mc-light-theme-foreground,
         background: $mc-light-theme-background,
-        // additional palette
-        error: $error,
+
         warning: $warning,
         success: $success,
         info: $info,
-        default: $default,
     );
 }
 
 @function mc-dark-theme(
     $primary,
     $second,
-    $error: mc-palette($mc-red),
-    $warning: mc-palette($mc-yellow),
-    $success: mc-palette($mc-green),
+    $error,
+
     $info: mc-palette($mc-blue),
-    $default: mc-palette($mc-grey)
+    $success: mc-palette($mc-green),
+    $warning: mc-palette($mc-yellow)
 ) {
     @return (
+        is-dark: true,
+
         primary: $primary,
         second: $second,
-        is-dark: true,
+        error: $error,
+
         foreground: $mc-dark-theme-foreground,
         background: $mc-dark-theme-background,
-        // additional palette
-        error: $error,
+
         warning: $warning,
         success: $success,
         info: $info,
-        default: $default,
     );
 }
 
@@ -854,7 +856,7 @@ $base-font-size: 15px !default;
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-02803bapx mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-33e1fb0px mc-color($second, 300);
         }
 
         &__light {
@@ -883,131 +885,137 @@ $base-font-size: 15px !default;
 .mc-alert {
     display: flex;
     align-items: baseline;
-    min-width: 10px;
-    min-height: 1rem;
+
     vertical-align: top;
     text-align: left;
-    border-radius: 4px;
-    border: 1px solid transparent;
 
-    // Improve alignment and spacing of inner content
-    * {
-        margin: 0;
-        padding: 0;
-    }
+    border: 1px solid transparent;
+    border-radius: 4px;
 
     .mc-link {
         padding-left: 0;
+    }
+
+    .mc-alert__icon {
+        margin-right: 8px;
+    }
+
+    &.mc-alert_small {
+        // todo откуда такие паддинги ?
+        padding: 11px 15px;
+
+        &.mc-alert_dismissible {
+            padding-right: 32px;
+        }
+    }
+
+    &:not(.mc-alert_small) {
+        // todo откуда такие паддинги ?
+        padding: 13px 15px;
+
+        &.mc-alert_dismissible {
+            padding-right: 32px;
+        }
     }
 }
 
 .mc-alert_dismissible {
     position: relative;
 
-    .mc-alert_close {
-        cursor: pointer;
-        border: 1px solid transparent;
-        background: transparent;
+    .mc-alert__close {
         position: absolute;
+
         z-index: 10;
+        right: 15px;
+
+        border: 1px solid transparent;
         outline: 0;
-        padding: 0;
+
         margin: 0;
-        right: 16px;
 
+        background: transparent;
+
+        padding: 0;
+
+        cursor: pointer;
         text-align: center;
+    }
 
-        [mc-icon], .mc-icon {
-            padding: 0;
-            margin: 0;
-            outline: 0;
+    &.mc-alert_small {
+        .mc-alert__close {
+            top: 10px;
         }
+    }
 
-        $hover-darken: 5%;
-
-        &:hover {
-            [mc-icon], .mc-icon {
-                color: darken(mc-color($mc-grey, 400), $hover-darken);
-            }
+    &:not(.mc-alert_small) {
+        .mc-alert__close {
+            top: 14px;
         }
     }
 }
 
-.mc-alert_dismissible:not(.mc-alert_small) {
-    .mc-alert_close {
-        top: 14px;
-    }
-}
+@mixin alert-theme($color, $is-dark) {
+    background-color: mc-color($color, if($is-dark, darker, lighter));
+    border-color: mc-color($color, if($is-dark, darker, default));
 
-.mc-alert_dismissible.mc-alert_small {
-    .mc-alert_close {
-        top: 10px;
-    }
-}
-
-.mc-alert:not(.mc-alert_small) {
-    padding: 13px 15px;
-
-    &.mc-alert_dismissible {
-        padding-right: 32px;
-    }
-}
-
-.mc-alert.mc-alert_small {
-    padding: 11px 15px;
-
-    &.mc-alert_dismissible {
-        padding-right: 32px;
-    }
-}
-
-@mixin alert-base ($color) {
-    background-color: mc-color($color, 60);
-    border: 1px solid mc-color($color, 200);
-
-
-    [mc-icon], .mc-icon {
-        color: mc-color($color, 400);
-        margin-right: 8px;
+    .mc-alert__icon {
+        color: mc-color($color, if($is-dark, default, darker));
     }
 }
 
 @mixin mc-alert-theme($theme) {
     $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
     $error: map-get($theme, error);
+
     $warning: map-get($theme, warning);
     $success: map-get($theme, success);
     $info: map-get($theme, info);
-    $default: map-get($theme, default);
 
-    .mc-alert_close:focus {
-        border: 1px solid mc-color($primary, 500);
-        box-shadow: 0 0.0.1-02803bapx mc-color($primary, 500);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $is-dark: map-get($theme, is-dark);
+
+    .mc-alert__close:focus {
+        border: 1px solid mc-color($primary);
+        box-shadow: 0 0.0.1-33e1fb0px mc-color($primary);
         z-index: 1;
     }
 
     .mc-alert {
-        background-color: white;
+        color: mc-color($foreground, text);
     }
 
     .mc-alert_error {
-        @include alert-base($error);
+        background-color: mc-color($error, if($is-dark, darker, lighter));
+        // todo $error более темный в светлой теме
+        border-color: mc-color($error, if($is-dark, darker, 200));
+
+        .mc-alert__icon {
+            color: mc-color($error, if($is-dark, default, 400));
+        }
     }
 
     .mc-alert_warning {
-        @include alert-base($warning);
+        @include alert-theme($warning, $is-dark);
     }
 
     .mc-alert_success {
-        @include alert-base($success);
+        @include alert-theme($success, $is-dark);
     }
 
     .mc-alert_info {
-        @include alert-base($info);
+        @include alert-theme($info, $is-dark);
     }
 
-    .mc-alert_default {
-        @include alert-base($default);
+    .mc-alert:not(.mc-alert_error):not(.mc-alert_warning):not(.mc-alert_success):not(.mc-alert_info) {
+        background-color: mc-color($second, if($is-dark, darker, lighter));
+        border-color: mc-color($second, if($is-dark, darker, 200));
+
+        .mc-alert__icon {
+            color: mc-color($second, if($is-dark, default, 400));
+        }
     }
 }
 
@@ -1172,7 +1180,7 @@ $base-font-size: 15px !default;
             $focus-color: mc-color($primary);
 
             border-color: $focus-color;
-            box-shadow: 0 0.0.1-02803bapx $focus-color;
+            box-shadow: 0 0.0.1-33e1fb0px $focus-color;
         }
     }
 }
@@ -1632,7 +1640,7 @@ $zindex-tooltip         : 1060;
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-02803bapx map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-33e1fb0px map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1782,7 +1790,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-02803bapx mc-color($palette, 500);
+            box-shadow: 0 0.0.1-33e1fb0px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1932,12 +1940,12 @@ $zindex-tooltip         : 1060;
                     color: mc-color($primary);
                 }
 
-                box-shadow: 0 0.0.1-02803bapx mc-color($primary);
+                box-shadow: 0 0.0.1-33e1fb0px mc-color($primary);
             }
 
             &.ng-invalid .mc-form-field__container {
                 background: {
-                    color: if($is-dark-theme, transparent, mc-color($error, lighter, 0.2));
+                    color: if($is-dark-theme, transparent, mc-color($error, lighter));
                 }
 
                 border: {
@@ -1950,7 +1958,7 @@ $zindex-tooltip         : 1060;
             }
 
             &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0.0.1-02803bapx mc-color($error);
+                box-shadow: 0 0.0.1-33e1fb0px mc-color($error, darker);
             }
 
             &.mc-disabled .mc-form-field__container {
@@ -1965,21 +1973,6 @@ $zindex-tooltip         : 1060;
                 .mc-icon,
                 .mc-input {
                     color: mc-color($foreground, disabled-text);
-                }
-            }
-        }
-
-        mc-cleaner {
-            &:hover .mc-icon {
-                color: mc-color($second, darker);
-            }
-        }
-
-        mc-stepper {
-            .mc-stepper-step-up,
-            .mc-stepper-step-down {
-                &:hover {
-                    color: mc-color($second, darker);
                 }
             }
         }
@@ -2023,7 +2016,7 @@ $zindex-tooltip         : 1060;
 
         &-content {
             box-shadow:
-                0 0.0.1-02803bapx mc-color($second, 300),
+                0 0.0.1-33e1fb0px mc-color($second, 300),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2094,7 +2087,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color, 500);
-        box-shadow: 0 0.0.1-02803bapx mc-color($focus-color, 500);
+        box-shadow: 0 0.0.1-33e1fb0px mc-color($focus-color, 500);
         background-color: mc-color($main-color, 100);
     }
 
@@ -2331,7 +2324,7 @@ $hover-darken: 5%;
             .mc-toggle-input {
                 + .mc-toggle-bar-container .mc-toggle__focus-frame {
                     border: 2px solid map-get($primary, 500);
-                    box-shadow: inset 0 0.0.1-02803bapx map-get($background, background);
+                    box-shadow: inset 0 0.0.1-33e1fb0px map-get($background, background);
                 }
             }
         }
@@ -2433,106 +2426,81 @@ $hover-darken: 5%;
 
 
 
-@mixin left-marker($color) {
-    $gray100: mc-color($mc-grey, 100);
-    box-shadow: inset 4px 0 0 0 mc-color($color, 400), inset -1px 0 0 0 $gray100, inset 0 1px 0 0 $gray100, inset 0 -1px 0 0 $gray100;
-}
 
-@mixin left-marker-dark($color) {
-    $gray600: mc-color($mc-grey, 600);
-    box-shadow: inset 4px 0 0 0 mc-color($color, 600), inset -1px 0 0 0 $gray600, inset 0 1px 0 0 $gray600, inset 0 -1px 0 0 $gray600;
-}
+@mixin normal-state($color, $second, $isDark) {
+    box-shadow:
+        inset -1px 0 0 0 mc-color($second, if($isDark, darker, lighter)),
+        inset 0 1px 0 0 mc-color($second, if($isDark, darker, lighter)),
+        inset 0 -1px 0 0 mc-color($second, if($isDark, darker, lighter));
 
-@mixin set-state($background, $marker, $border-color) {
-    background-color: $background;
-    box-shadow: inset 4px 0 0 0 $marker, inset -1px 0 0 0 $border-color, inset 0 1px 0 0 $border-color, inset 0 -1px 0 0 $border-color;
-}
+    background-color: mc-color($color, if($isDark, darker, lighter));
 
-@mixin normal-state($color, $border-color, $isDark) {
-    @if $isDark == true {
-        @include set-state(mc-color($color, 700), mc-color($color, 600), mc-color($border-color, 600));
-    } @else {
-        @include set-state(mc-color($color, 60), mc-color($color, 400), mc-color($border-color, 100));
-    }
-}
-
-@mixin selected-state($border-color, $back-color, $isDark) {
-    @if $isDark == true {
-        background-color: mc-color($back-color, 700);
-        box-shadow: inset 4px 0 0 0 mc-color($border-color, 600);
-    } @else {
-        background-color: mc-color($back-color, 100);
-        box-shadow: inset 4px 0 0 0 mc-color($border-color, 400);
-    }
+    border-left-color: mc-color($color);
 }
 
 @mixin mc-card-theme($theme) {
-    $isDark: map-get($theme, is-dark);
-    $default: map-get($theme, default);
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $info: map-get($theme, info);
     $error: map-get($theme, error);
-    $warning: map-get($theme, warning);
+
+    $info: map-get($theme, info);
     $success: map-get($theme, success);
-    $theme-background: map-get($theme, background);
-    $theme-foreground: map-get($theme, foreground);
-    $white-background-color: if($isDark, mc-color($second, 700), map-get($theme-background, background));
-    $foreground-color: map-get($theme-foreground, base);
-    
-    $hover-color: map-get($theme-background, hover);
-    $focus-color: mc-color($primary, lighter);
-    
+    $warning: map-get($theme, warning);
+
+    $isDark: map-get($theme, is-dark);
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
     .mc-card {
-        background-color: mc-color($default, 60);
-        color: $foreground-color;
+        color: map-get($foreground, text);
         
-        &_info {
+        &.mc-card_info {
             @include normal-state($info, $second, $isDark);
-            
+
+            // todo для mc-card_selected в темной теме макеты не готовы
             &.mc-card_selected {
-                @include selected-state($info, $primary, $isDark);
+                background-color: mc-color($primary, 100);
             }
         }
         
-        &_warning {
+        &.mc-card_warning {
             @include normal-state($warning, $second, $isDark);
             
             &.mc-card_selected {
-                @include selected-state($warning, $primary, $isDark);
+                background-color: mc-color($primary, 100);
             }
         }
-        
-        &_success {
+
+        &.mc-card_success {
             @include normal-state($success, $second, $isDark);
             
             &.mc-card_selected {
-                @include selected-state($success, $primary, $isDark);
+                background-color: mc-color($primary, 100);
             }
         }
         
-        &_error {
+        &.mc-card_error {
             @include normal-state($error, $second, $isDark);
             
             &.mc-card_selected {
-                @include selected-state($error, $primary, $isDark);
+                background-color: mc-color($primary, 100);
             }
         }
         
-        &_white {
-            background-color: $white-background-color;
+        &.mc-card_white {
+            background-color: mix(map-get($background, background), white, 90%);
         }
-        
-        .mc-card__hover-overlay {
-            background: $hover-color;
-        }
-        
-        &:focus,
-        &.cdk-focused {
-            .mc-card__focus-overlay {
-                border: solid 1px $focus-color;
-                box-shadow: 0 0.0.1-02803bapx $focus-color;
+
+        // todo мне кажется тут можно сделать без overlay
+        &:not(.mc-card_readonly):hover {
+            .mc-card__overlay {
+                background: map-get($background, hover);
             }
+        }
+
+        &.cdk-keyboard-focused {
+            box-shadow: 0 0 0 2px mc-color($primary);
         }
     }
 }
@@ -2558,7 +2526,7 @@ $hover-darken: 5%;
     // Дефолтные серые иконки default-icon: лупа в поле, иконки дропдаунов v, все иконки вне полей.
     .mc-icon:not(.mc-icon_light) {
         &.mc-primary {
-            color: mix(map-get($foreground, default-icon), $primary-color);
+            color: mix(map-get($foreground, default-icon), $primary-color, 30%);
 
             &[disabled],
             &.mc-disabled {
@@ -2567,7 +2535,8 @@ $hover-darken: 5%;
         }
 
         &.mc-second {
-            color: mix(map-get($foreground, default-icon), $second-color, 70%);
+            // todo Миша, less-contrast-text - в темной теме не такой как на макетах.
+            color: map-get($foreground, less-contrast-text);
 
             &[disabled],
             &.mc-disabled {
@@ -2576,12 +2545,16 @@ $hover-darken: 5%;
         }
 
         &.mc-error {
-            color: mix(map-get($foreground, default-icon), $error-color);
+            color: mix(map-get($foreground, default-icon), $error-color, 30%);
 
             &[disabled],
             &.mc-disabled {
                 color: $error-color;
             }
+        }
+
+        .mc-icon:not(.mc-primary):not(.mc-second):not(.mc-error) {
+            color: map-get($foreground, text);
         }
     }
 

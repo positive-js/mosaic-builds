@@ -11,14 +11,6 @@ import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 import { PlatformModule } from '@ptsecurity/cdk/platform';
 
-var Status;
-(function (Status) {
-    Status[Status["Info"] = 0] = "Info";
-    Status[Status["Success"] = 1] = "Success";
-    Status[Status["Warning"] = 2] = "Warning";
-    Status[Status["Error"] = 3] = "Error";
-})(Status || (Status = {}));
-const name = 'mc-card';
 let McCard = class McCard {
     constructor(_elementRef, _focusMonitor) {
         this._elementRef = _elementRef;
@@ -26,8 +18,6 @@ let McCard = class McCard {
         this.readonly = false;
         this.selected = false;
         this.selectedChange = new EventEmitter();
-        this.mode = 'color';
-        this.status = Status.Info;
         this._tabIndex = 0;
         this._focusMonitor.monitor(this._elementRef.nativeElement, false);
     }
@@ -37,30 +27,13 @@ let McCard = class McCard {
     set tabIndex(value) {
         this._tabIndex = value;
     }
-    get statusClass() {
-        switch (this.status) {
-            case Status.Error:
-                return `${name}_error`;
-            case Status.Info:
-                return `${name}_info`;
-            case Status.Success:
-                return `${name}_success`;
-            case Status.Warning:
-                return `${name}_warning`;
-            default:
-                return '';
-        }
-    }
-    get isWhiteMode() {
-        return this.mode === 'white';
-    }
     ngOnDestroy() {
         this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
     focus() {
         this.hostElement.focus();
     }
-    clicked($event) {
+    onClick($event) {
         if (!this.readonly) {
             $event.stopPropagation();
             this.selectedChange.emit(!this.selected);
@@ -70,8 +43,7 @@ let McCard = class McCard {
         return this._elementRef.nativeElement;
     }
     onKeyDown($event) {
-        const keyCode = $event.keyCode;
-        switch (keyCode) {
+        switch ($event.keyCode) {
             case SPACE:
                 if (!this.readonly) {
                     $event.preventDefault();
@@ -100,26 +72,20 @@ __decorate([
     Output(),
     __metadata("design:type", Object)
 ], McCard.prototype, "selectedChange", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McCard.prototype, "mode", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Number)
-], McCard.prototype, "status", void 0);
 McCard = __decorate([
     Component({
-        selector: name,
-        template: "<div class=\"mc-card__wrapper\" [ngClass]=\"statusClass\" [class.mc-card_white]=\"isWhiteMode\" [class.mc-card_selected]=\"selected\" (click)=\"clicked($event)\"><ng-content></ng-content></div><div class=\"mc-card__hover-overlay\"></div><div class=\"mc-card__focus-overlay\"></div>",
-        styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer}.mc-card__wrapper{flex:auto;display:block;padding-left:4px}.mc-card:focus{outline:0}.mc-card.cdk-focused{z-index:1}.mc-card__focus-overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none}.mc-card__hover-overlay{top:0;left:0;right:0;bottom:0;position:absolute;display:none!important;pointer-events:none}.mc-card:not(.mc-card_readonly):hover .mc-card__hover-overlay{display:block!important}.mc-card.mc-card_readonly{cursor:auto}"],
+        selector: 'mc-card',
+        template: "<ng-content></ng-content><div class=\"mc-card__overlay\"></div>",
+        styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer;border-left-width:4px;border-left-style:solid;border-left-color:transparent}.mc-card:focus{outline:0}.mc-card .mc-card__overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;background:0 0}.mc-card.mc-card_readonly{cursor:auto}"],
         changeDetection: ChangeDetectionStrategy.OnPush,
         encapsulation: ViewEncapsulation.None,
         inputs: ['color'],
         host: {
-            class: name,
+            class: 'mc-card',
             '[class.mc-card_readonly]': 'readonly',
-            '(keydown)': 'onKeyDown($event)'
+            '[class.mc-card_selected]': 'selected',
+            '(keydown)': 'onKeyDown($event)',
+            '(click)': 'onClick($event)'
         }
     }),
     __metadata("design:paramtypes", [ElementRef, FocusMonitor])
@@ -134,12 +100,8 @@ McCardModule = __decorate([
             A11yModule,
             PlatformModule
         ],
-        exports: [
-            McCard
-        ],
-        declarations: [
-            McCard
-        ]
+        exports: [McCard],
+        declarations: [McCard]
     })
 ], McCardModule);
 
@@ -147,5 +109,5 @@ McCardModule = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { McCardModule, Status, McCard };
+export { McCardModule, McCard };
 //# sourceMappingURL=card.js.map
