@@ -22,6 +22,9 @@
       "from": "./tooltip"
     },
     {
+      "from": "./dropdown"
+    },
+    {
       "from": "./toggle"
     },
     {

@@ -11,6 +11,7 @@ export * from './divider';
 export * from './tree';
 export * from './checkbox';
 export * from './tooltip';
+export * from './dropdown';
 export * from './toggle';
 export * from './radio';
 export * from './layout';

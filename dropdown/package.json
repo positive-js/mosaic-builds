@@ -1,0 +1,8 @@
+{
+  "name": "@ptsecurity/mosaic/dropdown",
+  "typings": "../dropdown.d.ts",
+  "main": "../bundles/mosaic-dropdown.umd.js",
+  "module": "../esm5/dropdown.es5.js",
+  "es2015": "../esm2015/dropdown.js",
+  "sideEffects": false
+}
