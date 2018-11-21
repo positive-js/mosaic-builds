@@ -856,7 +856,7 @@ $base-font-size: 15px !default;
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-2a643cbpx mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-a639a2bpx mc-color($second, 300);
         }
 
         &__light {
@@ -979,7 +979,7 @@ $base-font-size: 15px !default;
 
     .mc-alert__close:focus {
         border: 1px solid mc-color($primary);
-        box-shadow: 0 0.0.1-2a643cbpx mc-color($primary);
+        box-shadow: 0 0.0.1-a639a2bpx mc-color($primary);
         z-index: 1;
     }
 
@@ -1180,7 +1180,7 @@ $base-font-size: 15px !default;
             $focus-color: mc-color($primary);
 
             border-color: $focus-color;
-            box-shadow: 0 0.0.1-2a643cbpx $focus-color;
+            box-shadow: 0 0.0.1-a639a2bpx $focus-color;
         }
     }
 }
@@ -1247,7 +1247,7 @@ $base-font-size: 15px !default;
         &.cdk-keyboard-focused {
             background-color: map-get($primary, 100);
             border: 1px solid $focus-color;
-            box-shadow: inset 0 0.0.1-2a643cbpx $focus-color;
+            box-shadow: inset 0 0.0.1-a639a2bpx $focus-color;
         }
 
         &[disabled] {
@@ -1707,7 +1707,7 @@ $zindex-tooltip         : 1060;
     $foreground: map-get($theme, foreground);
 
     // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-2a643cbpx map-get($background, background);
+    $focus-border-box-shadow: inset 0 0.0.1-a639a2bpx map-get($background, background);
 
     // background
     $toggle-background-unchecked: $background;
@@ -1857,7 +1857,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-2a643cbpx mc-color($palette, 500);
+            box-shadow: 0 0.0.1-a639a2bpx mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -2007,7 +2007,7 @@ $zindex-tooltip         : 1060;
                     color: mc-color($primary);
                 }
 
-                box-shadow: 0 0.0.1-2a643cbpx mc-color($primary);
+                box-shadow: 0 0.0.1-a639a2bpx mc-color($primary);
             }
 
             &.ng-invalid .mc-form-field__container {
@@ -2019,13 +2019,13 @@ $zindex-tooltip         : 1060;
                     color: mc-color($error);
                 }
 
-                .mc-input {
+                .mc-input, .mc-textarea {
                     color: mc-color($error);
                 }
             }
 
             &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0.0.1-2a643cbpx mc-color($error, darker);
+                box-shadow: 0 0.0.1-a639a2bpx mc-color($error, darker);
             }
 
             &.mc-disabled .mc-form-field__container {
@@ -2038,7 +2038,8 @@ $zindex-tooltip         : 1060;
                 }
 
                 .mc-icon,
-                .mc-input {
+                .mc-input,
+                .mc-textarea {
                     color: mc-color($foreground, disabled-text);
                 }
             }
@@ -2083,7 +2084,7 @@ $zindex-tooltip         : 1060;
 
         &-content {
             box-shadow:
-                0 0.0.1-2a643cbpx mc-color($second, 300),
+                0 0.0.1-a639a2bpx mc-color($second, 300),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2136,6 +2137,49 @@ $zindex-tooltip         : 1060;
 
 
 
+@mixin mc-option-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $primary: map-get($theme, primary);
+
+    .mc-option {
+        color: mc-color($foreground, text);
+
+        &:hover,
+        &.mc-hovered {
+            background: mc-color($background, 'hover');
+        }
+
+        &.mc-active {
+            border-color: mc-color($primary, 500);
+        }
+
+        &.mc-selected {
+            background-color: mc-color($primary, 100);
+        }
+
+        &.mc-disabled {
+            background-color: transparent;
+
+            color: mc-color($foreground, disabled-text);
+        }
+    }
+}
+
+@mixin mc-option-typography($config) {
+    .mc-option {
+        font: {
+            family: mc-font-family($config, body);
+            size: mc-font-size($config, body);
+        }
+    }
+}
+
+
+
+
+
 
 
 @mixin _mc-tag-color($main-color, $focus-color) {
@@ -2154,7 +2198,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color, 500);
-        box-shadow: 0 0.0.1-2a643cbpx mc-color($focus-color, 500);
+        box-shadow: 0 0.0.1-a639a2bpx mc-color($focus-color, 500);
         background-color: mc-color($main-color, 100);
     }
 
@@ -2220,43 +2264,33 @@ $zindex-tooltip         : 1060;
 
 
 
-
-@mixin mc-option-theme($theme) {
+@mixin mc-textarea-theme($theme) {
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
 
-    $primary: map-get($theme, primary);
+    .mc-input {
+        color: map-get($foreground, text);
 
-    .mc-option {
-        color: mc-color($foreground, text);
-
-        &:hover,
-        &.mc-hovered {
-            background: mc-color($background, 'hover');
+        &::placeholder {
+            color: map-get($foreground, disabled-text);
         }
 
-        &.mc-active {
-            border-color: mc-color($primary, 500);
+        &::-ms-input-placeholder {
+            color: map-get($foreground, disabled-text);
         }
 
-        &.mc-selected {
-            background-color: mc-color($primary, 100);
-        }
-
-        &.mc-disabled {
-            background-color: transparent;
-
-            color: mc-color($foreground, disabled-text);
+        &::-webkit-input-placeholder {
+            color: map-get($foreground, disabled-text);
         }
     }
 }
 
-@mixin mc-option-typography($config) {
-    .mc-option {
-        font: {
-            family: mc-font-family($config, body);
-            size: mc-font-size($config, body);
-        }
+@mixin mc-textarea-typography($config) {
+    textarea.mc-textarea {
+        @include mc-typography-level-to-styles($config, body);
+    }
+
+    .mc-textarea.mc-textarea_monospace {
+        @include mc-typography-level-to-styles($config, body-mono);
     }
 }
 
@@ -2391,7 +2425,7 @@ $hover-darken: 5%;
             .mc-toggle-input {
                 + .mc-toggle-bar-container .mc-toggle__focus-frame {
                     border: 2px solid map-get($primary, 500);
-                    box-shadow: inset 0 0.0.1-2a643cbpx map-get($background, background);
+                    box-shadow: inset 0 0.0.1-a639a2bpx map-get($background, background);
                 }
             }
         }
@@ -2448,6 +2482,7 @@ $hover-darken: 5%;
     @include mc-modal-typography($config);
     @include mc-option-typography($config);
     @include mc-tag-typography($config);
+    @include mc-textarea-typography($config);
     @include mc-toggle-typography($config);
 }
 
@@ -2768,6 +2803,7 @@ $hover-darken: 5%;
 
 
 
+
 @mixin mc-splitter-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
@@ -2816,6 +2852,6 @@ $hover-darken: 5%;
     @include mc-option-theme($theme);
     @include mc-tag-theme($theme);
     @include mc-tooltip-theme($theme);
-    @include mc-toggle-theme($theme);
+    @include mc-textarea-theme($theme);
     @include mc-splitter-theme($theme);
 }

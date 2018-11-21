@@ -1,6 +1,6 @@
 {
     "name": "@ptsecurity/mosaic",
-    "version": "0.0.1-2a643cb",
+    "version": "0.0.1-a639a2b",
     "description": "Mosaic",
     "main": "./bundles/mosaic.umd.js",
     "module": "./esm5/mosaic.es5.js",
@@ -24,7 +24,7 @@
         "@angular/animations": ">=7.0.0",
         "@angular/core": ">=7.0.0",
         "@angular/common": ">=7.0.0",
-        "@ptsecurity/cdk": "0.0.1-2a643cb"
+        "@ptsecurity/cdk": "0.0.1-a639a2b"
     },
     "dependencies": {
         "tslib": "^1.7.1"
