@@ -856,7 +856,7 @@ $base-font-size: 15px !default;
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-5d82306px mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-97e3a31px mc-color($second, 300);
         }
 
         &__light {
@@ -979,7 +979,7 @@ $base-font-size: 15px !default;
 
     .mc-alert__close:focus {
         border: 1px solid mc-color($primary);
-        box-shadow: 0 0.0.1-5d82306px mc-color($primary);
+        box-shadow: 0 0.0.1-97e3a31px mc-color($primary);
         z-index: 1;
     }
 
@@ -1180,7 +1180,7 @@ $base-font-size: 15px !default;
             $focus-color: mc-color($primary);
 
             border-color: $focus-color;
-            box-shadow: 0 0.0.1-5d82306px $focus-color;
+            box-shadow: 0 0.0.1-97e3a31px $focus-color;
         }
     }
 }
@@ -1247,7 +1247,7 @@ $base-font-size: 15px !default;
         &.cdk-keyboard-focused {
             background-color: map-get($primary, 100);
             border: 1px solid $focus-color;
-            box-shadow: inset 0 0.0.1-5d82306px $focus-color;
+            box-shadow: inset 0 0.0.1-97e3a31px $focus-color;
         }
 
         &[disabled] {
@@ -1642,7 +1642,7 @@ $base-font-size: 15px !default;
             }
 
             + .mc-radio-label-content .mc-radio-button__inner-circle {
-                box-shadow: 0 0.0.1-5d82306px white;
+                box-shadow: 0 0.0.1-97e3a31px white;
             }
         }
 
@@ -1735,7 +1735,7 @@ $zindex-tooltip         : 1060;
             + .mc-checkbox-frame {
                 border-color: $focus-color;
 
-                box-shadow: inset 0 0.0.1-5d82306px white, 0 0.0.1-5d82306px $focus-color;
+                box-shadow: inset 0 0.0.1-97e3a31px white, 0 0.0.1-97e3a31px $focus-color;
             }
         }
 
@@ -1801,7 +1801,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-5d82306px mc-color($palette, 500);
+            box-shadow: 0 0.0.1-97e3a31px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1951,7 +1951,7 @@ $zindex-tooltip         : 1060;
                     color: mc-color($primary);
                 }
 
-                box-shadow: 0 0.0.1-5d82306px mc-color($primary);
+                box-shadow: 0 0.0.1-97e3a31px mc-color($primary);
             }
 
             &.ng-invalid .mc-form-field__container {
@@ -1969,7 +1969,7 @@ $zindex-tooltip         : 1060;
             }
 
             &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0.0.1-5d82306px mc-color($error, darker);
+                box-shadow: 0 0.0.1-97e3a31px mc-color($error, darker);
             }
 
             &.mc-disabled .mc-form-field__container {
@@ -2028,7 +2028,7 @@ $zindex-tooltip         : 1060;
 
         &-content {
             box-shadow:
-                0 0.0.1-5d82306px mc-color($second, 300),
+                0 0.0.1-97e3a31px mc-color($second, 300),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2142,7 +2142,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color, 500);
-        box-shadow: 0 0.0.1-5d82306px mc-color($focus-color, 500);
+        box-shadow: 0 0.0.1-97e3a31px mc-color($focus-color, 500);
         background-color: mc-color($main-color, 100);
     }
 
@@ -2330,7 +2330,7 @@ $hover-darken: 5%;
 
         &.cdk-keyboard-focused {
             & .mc-toggle__focus-frame {
-                box-shadow: inset 0 0.0.1-5d82306px map-get($background, background), 0 0 0 2px mc-color($primary);
+                box-shadow: inset 0 0.0.1-97e3a31px map-get($background, background), 0 0 0 2px mc-color($primary);
             }
         }
 
