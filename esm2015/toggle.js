@@ -20,7 +20,7 @@ class McToggleBase {
         this._elementRef = _elementRef;
     }
 }
-const _McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase)));
+const _McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
 class McToggleChange {
 }
 let McToggleComponent = McToggleComponent_1 = class McToggleComponent extends _McToggleMixinBase {
@@ -29,7 +29,6 @@ let McToggleComponent = McToggleComponent_1 = class McToggleComponent extends _M
         this._elementRef = _elementRef;
         this._focusMonitor = _focusMonitor;
         this._changeDetectorRef = _changeDetectorRef;
-        this.color = ThemePalette.Primary;
         this.labelPosition = 'right';
         this.ariaLabel = '';
         this.ariaLabelledby = null;
@@ -40,7 +39,9 @@ let McToggleComponent = McToggleComponent_1 = class McToggleComponent extends _M
         this._disabled = false;
         this._checked = false;
         this.change = new EventEmitter();
+        // tslint:disable-next-line:no-empty
         this._onTouchedCallback = () => { };
+        // tslint:disable-next-line:no-empty
         this._onChangeCallback = (_) => { };
         this.tabIndex = parseInt(tabIndex) || 0;
         this._focusMonitor.monitor(this._elementRef.nativeElement, true);
@@ -158,7 +159,7 @@ McToggleComponent = McToggleComponent_1 = __decorate([
         selector: 'mc-toggle',
         exportAs: 'mcToggle',
         template: "<label [attr.for]=\"inputId\" class=\"mc-toggle-layout\" #label><div class=\"mc-toggle__container\" [class.left]=\"labelPosition === 'left'\"><input #input type=\"checkbox\" class=\"mc-toggle-input cdk-visually-hidden\" [id]=\"inputId\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (click)=\"_onInputClick($event)\" (change)=\"_onInteractionEvent($event)\"><div class=\"mc-toggle-bar-container\"><div class=\"mc-toggle__focus-frame\"></div><div class=\"mc-toggle-bar\"><div class=\"mc-toggle__circle\" [@switch]=\"checked\"></div></div></div><div class=\"mc-toggle__content\" [class.left]=\"labelPosition === 'left'\" [class.right]=\"labelPosition === 'right'\"><span class=\"mc-toggle-label\" (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></div></div></label>",
-        styles: ["mc-toggle{display:inline-block}mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}mc-toggle .mc-toggle__container{display:flex;align-items:center;position:relative}mc-toggle .mc-toggle__container.left{flex-direction:row-reverse}mc-toggle .mc-toggle__content.left{margin-right:8px}mc-toggle .mc-toggle__content.right{margin-left:8px}mc-toggle .mc-toggle-bar{position:relative}mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}mc-toggle .mc-toggle-bar-container{position:relative}mc-toggle .mc-toggle__focus-frame{position:absolute;z-index:1;top:-1px;left:-1px}mc-toggle .mc-toggle__circle{position:absolute;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:16px;width:28px;border-radius:9px}mc-toggle:not(.mc-toggle_small) .mc-toggle__focus-frame{border-radius:10px;height:18px;width:30px}mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:16px;width:16px}mc-toggle.mc-toggle_small .mc-toggle-bar{height:14px;width:24px;border-radius:8px}mc-toggle.mc-toggle_small .mc-toggle__focus-frame{border-radius:9px;height:16px;width:26px}mc-toggle.mc-toggle_small .mc-toggle__circle{height:14px;width:14px}mc-toggle:not(.mc-disabled){cursor:pointer}"],
+        styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-toggle .mc-toggle-bar{position:relative;border-width:1px;border-style:solid}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{display:flex;align-items:center;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:8px}.mc-toggle__content.right{margin-left:8px}.mc-toggle__circle{position:absolute;border-width:1px;border-style:solid;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}.mc-toggle__focus-frame{position:absolute;top:0;left:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:16px;width:28px;border-radius:9px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__focus-frame{border-radius:9px;height:16px;width:28px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:16px;width:16px}.mc-toggle.mc-toggle_small .mc-toggle-bar{height:14px;width:24px;border-radius:8px}.mc-toggle.mc-toggle_small .mc-toggle__focus-frame{border-radius:8px;height:14px;width:24px}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:14px;width:14px}.mc-toggle:not(.mc-disabled){cursor:pointer}"],
         providers: [
             { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => McToggleComponent_1), multi: true }
         ],
@@ -166,10 +167,11 @@ McToggleComponent = McToggleComponent_1 = __decorate([
         encapsulation: ViewEncapsulation.None,
         inputs: ['disabled', 'color', 'tabIndex'],
         host: {
+            class: 'mc-toggle',
             '[id]': 'id',
             '[attr.id]': 'id',
             '[class.mc-disabled]': 'disabled',
-            '[class.mc-toggle-off]': '!checked'
+            '[class.mc-toggle_off]': '!checked'
         },
         animations: [
             trigger('switch', [

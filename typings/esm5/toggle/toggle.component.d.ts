@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, ElementRef, EventEmitter } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { ThemePalette, CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 declare type ToggleLabelPositionType = 'left' | 'right';
 export declare class McToggleBase {
     _elementRef: ElementRef;
@@ -16,7 +16,6 @@ export declare class McToggleComponent extends _McToggleMixinBase implements Con
     _elementRef: ElementRef;
     private _focusMonitor;
     private _changeDetectorRef;
-    color: ThemePalette;
     _inputElement: ElementRef;
     labelPosition: ToggleLabelPositionType;
     ariaLabel: string;

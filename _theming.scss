@@ -856,7 +856,7 @@ $base-font-size: 15px !default;
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-a639a2bpx mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-5d82306px mc-color($second, 300);
         }
 
         &__light {
@@ -979,7 +979,7 @@ $base-font-size: 15px !default;
 
     .mc-alert__close:focus {
         border: 1px solid mc-color($primary);
-        box-shadow: 0 0.0.1-a639a2bpx mc-color($primary);
+        box-shadow: 0 0.0.1-5d82306px mc-color($primary);
         z-index: 1;
     }
 
@@ -1180,7 +1180,7 @@ $base-font-size: 15px !default;
             $focus-color: mc-color($primary);
 
             border-color: $focus-color;
-            box-shadow: 0 0.0.1-a639a2bpx $focus-color;
+            box-shadow: 0 0.0.1-5d82306px $focus-color;
         }
     }
 }
@@ -1247,7 +1247,7 @@ $base-font-size: 15px !default;
         &.cdk-keyboard-focused {
             background-color: map-get($primary, 100);
             border: 1px solid $focus-color;
-            box-shadow: inset 0 0.0.1-a639a2bpx $focus-color;
+            box-shadow: inset 0 0.0.1-5d82306px $focus-color;
         }
 
         &[disabled] {
@@ -1593,93 +1593,86 @@ $base-font-size: 15px !default;
 
 
 
-@mixin _mc-radio-color($palette) {
-
-    .mc-radio-outer-circle {
-        border-color: mc-color($palette, 300);
-    }
-}
-
 @mixin mc-radio-theme($theme) {
-
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $foreground: map-get($theme, foreground);
 
-    .mc-radio-input {
-        + .mc-radio-label-content {
-            &:before {
-                border-color: mc-color($second, 300);
-            }
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $is-dark: map-get($theme, is-dark);
+
+    $focus-color: mc-color($primary);
+
+    .mc-radio-group {
+        color: map-get($foreground, text);
+    }
+
+    .mc-radio-button {
+        & .mc-radio-button__outer-circle {
+            background: map-get($background, background);
+            border-color: mc-color($second);
         }
 
         &:hover {
-            + .mc-radio-label-content {
-
-                &:before {
-                    background-color: darken(white, 5%);
-                }
+            & .mc-radio-button__outer-circle {
+                background: mix(map-get($background, background), map-get($background, hover), 5);
             }
         }
 
-        &:checked {
-            + .mc-radio-label-content {
+        &.mc-checked {
+            & .mc-radio-button__outer-circle {
+                background: white;
 
-                &:after {
-                    opacity: 1;
-                    background: white;
-                }
+                border-color: mc-color($primary, if($is-dark, lighter, darker));
+            }
 
-                &:before {
-                    background: mc-color($primary, 500);
-                    border-color: mc-color($primary, 600);
-                }
+            & .mc-radio-button__inner-circle {
+                display: block;
+
+                border-color: if($is-dark, mc-color($primary, 600), mc-color($primary));
             }
         }
 
-        &:checked:hover {
-            + .mc-radio-label-content {
+        & .mc-radio-input:focus {
+            + .mc-radio-label-content .mc-radio-button__outer-circle {
+                border-color: $focus-color;
 
-                &:before {
-                    background: lighten(mc-color($primary, 500), 5%);
-                    border-color: lighten(mc-color($primary, 600), 5%);
-                }
+                box-shadow: 0 0 0 2px $focus-color;
+            }
+
+            + .mc-radio-label-content .mc-radio-button__inner-circle {
+                box-shadow: 0 0.0.1-5d82306px white;
             }
         }
 
-        &:focus {
-            + .mc-radio-label-content:before {
-                border-color: mc-color($primary, 500);
+        &.mc-disabled {
+            color: map-get($foreground, disabled-text);
+
+            & .mc-radio-label {
+                cursor: default;
             }
-        }
 
-        &[disabled] {
+            & .mc-radio-button__outer-circle {
+                border-color: map-get($background, button-border);
 
-            + .mc-radio-label-content {
+                background: map-get($background, button-bg);
+            }
 
-                opacity: 0.5;
-                color: mc-color($second, 700);
+            & .mc-radio-button__inner-circle {
+                border-color: map-get($background, button-bg);
 
-                &:before {
-                    background: mc-color($second, 40); // GRAY-40
-                    border: {
-                        color: mc-color($second, 100); //GRAY-100
-                    }
-                }
+                box-shadow: none;
 
-                &:after {
-                    background: mc-color($second, 200); // GRAY-200
-                }
+                background: mc-color($second, 200);
             }
         }
     }
 }
 
 @mixin mc-radio-typography($config) {
-
-    .mc-radio-button {
+    .mc-radio-group {
         @include mc-typography-level-to-styles($config, body);
-        line-height: 16px;
     }
 }
 
@@ -1700,120 +1693,71 @@ $zindex-tooltip         : 1060;
 
 @mixin mc-checkbox-theme($theme) {
     $hover-lighten: 5%;
-    // main
+
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
-    $background: map-get($theme, background);
+
     $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
 
-    // focus inset shadow color
-    $focus-border-box-shadow: inset 0 0.0.1-a639a2bpx map-get($background, background);
+    $is-dark: map-get($theme, is-dark);
 
-    // background
-    $toggle-background-unchecked: $background;
-    $toggle-background-checked: map-get($primary, 500);
-    $toggle-background-checked-hover: lighten($toggle-background-checked, $hover-lighten);
-    $toggle-background-disabled: map-get($second, 40);
-    $toggle-background-hover: map-get($background, hover);
-
-    // border
-    $toggle-border-color-checked: map-get($primary, 600);
-    $toggle-border-color-checked-hover: lighten($toggle-border-color-checked, $hover-lighten);
-    $toggle-border-color-unchecked: map-get($second, 300);
-    $toggle-border-color-focus: map-get($primary, 500);
-    $toggle-border-color-disabled: map-get($second, 100);
-
-    // icon
-    $icon-color-checked: map-get($background, background);
-    $icon-color-disabled: map-get($second, 200);
-
-    // label
-    $label-color-disabled: map-get($foreground, disabled-text);
-    $label-color: map-get($foreground, text);
-
-    .mc-checkbox-label {
-        color: $label-color;
-    }
+    $focus-color: mc-color($primary);
 
     .mc-checkbox-frame {
-        border-color: $toggle-border-color-unchecked;
-    }
+        border-color: mc-color($second);
 
-    .mc-checkbox-checkmark,
-    .mc-checkbox-mixedmark {
-        color: $icon-color-checked;
-    }
-
-    .mc-checkbox:not(.mc-checkbox-disabled) {
-        .mc-checkbox-input {
-            &:hover {
-                + .mc-checkbox-frame {
-                    background-color: $toggle-background-hover;
-                }
-            }
-
-            &:focus {
-                + .mc-checkbox-frame {
-                    border-color: $toggle-border-color-focus;
-                }
-            }
-        }
-
-        &.mc-checkbox-checked,
-        &.mc-checkbox-indeterminate {
-            .mc-checkbox-input {
-                &:focus {
-                    + .mc-checkbox-frame {
-                        border-color: $toggle-border-color-focus;
-                        box-shadow: $focus-border-box-shadow;
-                    }
-                }
-            }
+        & .mc-checkbox-checkmark,
+        & .mc-checkbox-mixedmark {
+            color: white;
         }
     }
 
-    .mc-checkbox-checked:not(.mc-checkbox-disabled),
-    .mc-checkbox-indeterminate:not(.mc-checkbox-disabled) {
-        .mc-checkbox-frame {
-            background: $toggle-background-checked;
-            border-color: $toggle-border-color-checked;
-        }
-        .mc-checkbox-input {
-            &:hover {
-                + .mc-checkbox-frame {
-                    background: $toggle-background-checked-hover;
-                    border-color: $toggle-border-color-checked-hover;
-                }
-            }
-            &:focus:hover {
-                + .mc-checkbox-frame {
-                    border-color: $toggle-border-color-focus;
-                    box-shadow: $focus-border-box-shadow;
-                }
+    .mc-checkbox {
+        color: map-get($foreground, text);
+
+        &:hover {
+            .mc-checkbox-frame {
+                background: mix(map-get($background, background), map-get($background, hover), 5);
             }
         }
-    }
 
-    .mc-checkbox-disabled {
-        .mc-checkbox-frame {
-            border-color: $toggle-border-color-disabled;
-            background-color: $toggle-background-disabled;
+        &.mc-checked,
+        &.mc-indeterminate {
+            .mc-checkbox-frame {
+                border-color: mc-color($primary, if($is-dark, lighter, darker));
+
+                background: if($is-dark, mc-color($primary, 600), mc-color($primary));
+            }
         }
 
-        .mc-checkbox-label {
-            color: $label-color-disabled;
+        & .mc-checkbox-input.cdk-focused {
+            + .mc-checkbox-frame {
+                border-color: $focus-color;
+
+                box-shadow: inset 0 0.0.1-5d82306px white, 0 0.0.1-5d82306px $focus-color;
+            }
         }
 
-        .mc-checkbox-checkmark,
-        .mc-checkbox-mixedmark {
-            color: $icon-color-disabled;
+        &.mc-disabled {
+            color: map-get($foreground, disabled-text);
+
+            .mc-checkbox-frame {
+                border-color: map-get($background, button-border);
+
+                background-color: map-get($background, button-bg);
+            }
+
+            .mc-checkbox-checkmark,
+            .mc-checkbox-mixedmark {
+                color: mc-color($second, 200);
+            }
         }
     }
 }
 
 @mixin mc-checkbox-typography($config) {
-    .mc-checkbox,
-    .mc-checkbox-layout .mc-checkbox-label {
+    .mc-checkbox {
         @include mc-typography-level-to-styles($config, body);
     }
 }
@@ -1857,7 +1801,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-a639a2bpx mc-color($palette, 500);
+            box-shadow: 0 0.0.1-5d82306px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -2007,7 +1951,7 @@ $zindex-tooltip         : 1060;
                     color: mc-color($primary);
                 }
 
-                box-shadow: 0 0.0.1-a639a2bpx mc-color($primary);
+                box-shadow: 0 0.0.1-5d82306px mc-color($primary);
             }
 
             &.ng-invalid .mc-form-field__container {
@@ -2025,7 +1969,7 @@ $zindex-tooltip         : 1060;
             }
 
             &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0.0.1-a639a2bpx mc-color($error, darker);
+                box-shadow: 0 0.0.1-5d82306px mc-color($error, darker);
             }
 
             &.mc-disabled .mc-form-field__container {
@@ -2084,7 +2028,7 @@ $zindex-tooltip         : 1060;
 
         &-content {
             box-shadow:
-                0 0.0.1-a639a2bpx mc-color($second, 300),
+                0 0.0.1-5d82306px mc-color($second, 300),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2198,7 +2142,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color, 500);
-        box-shadow: 0 0.0.1-a639a2bpx mc-color($focus-color, 500);
+        box-shadow: 0 0.0.1-5d82306px mc-color($focus-color, 500);
         background-color: mc-color($main-color, 100);
     }
 
@@ -2338,121 +2282,97 @@ $box-shadow-base: 0 2px 4px 0 $shadow-color;
     }
 }
 
+
+
+
+
 $hover-darken: 5%;
-
-@mixin _mc-toggle-color($palette) {
-    $color: mc-color($palette, 500);
-
-    .mc-toggle-bar {
-        background: $color;
-    }
-}
-
-@mixin _mc-toggle-border-color($palette) {
-    $color: mc-color($palette, 500);
-
-    .mc-toggle-bar {
-        border: 1px solid $color;
-    }
-}
-
-@mixin _mc-toggle-circle-color($darken) {
-    $toggle-circle-color-1: darken(white, $darken);
-    $toggle-circle-color-2: darken(mc-color($mc-grey, 100), $darken);
-
-    border: 1px solid mc-color($mc-grey, 300);
-    background:
-        $toggle-circle-color-1
-        linear-gradient(to bottom, $toggle-circle-color-1, $toggle-circle-color-2);
-}
-
-@mixin _mc-toggle-off-color($darken) {
-    $toggle-off-color-1: darken(mc-color($second, 100), $darken);
-    $toggle-off-color-2: darken(mc-color($second, 60), $darken);
-
-    background: $toggle-off-color-1 linear-gradient(to bottom, $toggle-off-color-1, $toggle-off-color-2);
-}
 
 @mixin mc-toggle-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
+
     $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
 
-    $toggle-off-color-1: mc-color($second, 100);
-    $toggle-off-color-2: mc-color($second, 60);
+    $is-dark: map-get($theme, is-dark);
 
-    mc-toggle {
-        .mc-toggle__circle {
-            @include _mc-toggle-circle-color(0);
-        }
+    .mc-toggle {
+        color: map-get($foreground, text);
 
         .mc-toggle-bar {
-            border: 1px solid mc-color($mc-grey, 300);
+            background: map-get($background, button-bg);
+            border-color: mc-color($background, button-border);
         }
 
-        &.mc-toggle-off {
-            .mc-toggle-input {
-                ~ .mc-toggle-bar-container .mc-toggle-bar {
-                    @include _mc-toggle-off-color(0)
+        .mc-toggle__circle {
+            border-color: mc-color($background, button-border);
+
+            background: linear-gradient(to bottom, white, if($is-dark, white, mc-color($second, lighter)));
+        }
+
+        &.mc-toggle_off {
+            .mc-toggle-bar {
+                background: linear-gradient(to bottom, mc-color($second, lighter), mc-color($background, button-bg));
+
+                @if $is-dark {
+                    background: map-get($background, background);
                 }
             }
         }
 
-        &.mc-primary:not(.mc-toggle-off) {
-            @include _mc-toggle-color($primary);
-            @include _mc-toggle-border-color($primary);
-        }
-
-        &.mc-error:not(.mc-toggle-off) {
-            @include _mc-toggle-color($error);
-            @include _mc-toggle-border-color($error);
-        }
-    }
-
-    mc-toggle:not(.mc-disabled) {
-        .mc-toggle-input {
-            &:hover {
-                ~ .mc-toggle-bar-container .mc-toggle-bar {
-                    .mc-toggle__circle {
-                        @include _mc-toggle-circle-color($hover-darken);
-                    }
-                }
+        &:hover {
+            & .mc-toggle__focus-frame {
+                background: map-get($background, hover);
             }
         }
 
         &.cdk-keyboard-focused {
-            .mc-toggle-input {
-                + .mc-toggle-bar-container .mc-toggle__focus-frame {
-                    border: 2px solid map-get($primary, 500);
-                    box-shadow: inset 0 0.0.1-a639a2bpx map-get($background, background);
-                }
+            & .mc-toggle__focus-frame {
+                box-shadow: inset 0 0.0.1-5d82306px map-get($background, background), 0 0 0 2px mc-color($primary);
             }
         }
 
-        &.mc-toggle-off {
-            .mc-toggle-input {
-                &:hover {
-                    ~ .mc-toggle-bar-container .mc-toggle-bar {
-                        @include _mc-toggle-off-color($hover-darken)
+        &.mc-primary:not(.mc-toggle_off) {
+            .mc-toggle-bar {
+                border-color: mc-color($primary);
+                background: mc-color($primary);
+            }
+        }
+
+        &.mc-error:not(.mc-toggle_off) {
+            .mc-toggle-bar {
+                border-color: mc-color($error);
+                background: mc-color($error);
+            }
+        }
+
+        &.mc-disabled {
+            color: map-get($foreground, disabled-text);
+
+            &.mc-toggle_off {
+                .mc-toggle-bar {
+                    @if $is-dark {
+                        background: map-get($mc-grey, 700);
                     }
                 }
             }
-        }
-    }
 
-    mc-toggle.mc-disabled {
-        opacity: 0.5;
+            & .mc-toggle__focus-frame {
+                background: map-get($background, disabled-overlay);
+            }
+        }
     }
 }
 
 
 @mixin mc-toggle-typography($config) {
-    mc-toggle:not(.mc-toggle_small) {
+    .mc-toggle:not(.mc-toggle_small) {
         @include mc-typography-level-to-styles($config, body);
     }
 
-    mc-toggle.mc-toggle_small {
+    .mc-toggle.mc-toggle_small {
         @include mc-typography-level-to-styles($config, caption);
     }
 }

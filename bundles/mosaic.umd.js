@@ -1654,16 +1654,16 @@ var McCheckbox = /** @class */ (function (_super) {
     McCheckbox = __decorate([
         core.Component({
             selector: 'mc-checkbox',
-            template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input class=\"mc-checkbox-input cdk-visually-hidden\" type=\"checkbox\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"></div><div class=\"mc-checkbox-background\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></span></label>",
-            styles: [".mc-checkbox-checkmark,.mc-checkbox-mixedmark{width:calc(100% - 2px)}.mc-checkbox-background,.mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-background{align-items:center;display:inline-flex;justify-content:center}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{top:0;left:0;right:0;bottom:0;position:absolute;width:100%;opacity:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}.mc-checkbox-checked .mc-checkbox-checkmark{opacity:1}.mc-checkbox-checked .mc-checkbox-mixedmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-checkmark{opacity:0}.mc-checkbox-indeterminate .mc-checkbox-mixedmark{opacity:1}.mc-checkbox-unchecked .mc-checkbox-background{background-color:transparent}.mc-checkbox-disabled{cursor:default}.mc-checkbox-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-input{bottom:0;left:50%}.mc-checkbox-input:focus+.mc-checkbox-frame{top:-1px;left:-1px;border-width:2px;width:18px;height:18px}"],
+            template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input type=\"checkbox\" class=\"mc-checkbox-input cdk-visually-hidden\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></label>",
+            styles: [".mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;left:-1px;right:0;bottom:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}.mc-checked .mc-checkbox-checkmark{display:block}.mc-checked .mc-checkbox-mixedmark{display:none}.mc-indeterminate .mc-checkbox-checkmark{display:none}.mc-indeterminate .mc-checkbox-mixedmark{display:block}.mc-disabled{cursor:default}.mc-disabled .mc-checkbox-frame{box-shadow:none}"],
             exportAs: 'mcCheckbox',
             host: {
                 class: 'mc-checkbox',
                 '[id]': 'id',
                 '[attr.id]': 'id',
-                '[class.mc-checkbox-indeterminate]': 'indeterminate',
-                '[class.mc-checkbox-checked]': 'checked',
-                '[class.mc-checkbox-disabled]': 'disabled',
+                '[class.mc-indeterminate]': 'indeterminate',
+                '[class.mc-checked]': 'checked',
+                '[class.mc-disabled]': 'disabled',
                 '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
             },
             providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],
@@ -6431,8 +6431,8 @@ var McRadioButton = /** @class */ (function (_super) {
     McRadioButton = __decorate([
         core.Component({
             selector: 'mc-radio-button',
-            template: "<label [attr.for]=\"inputId\" class=\"mc-radio-label\" #label><input #input class=\"mc-radio-input cdk-visually-hidden\" type=\"radio\" [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [attr.name]=\"name\" [required]=\"required\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-describedby]=\"ariaDescribedby\" (change)=\"onInputChange($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\"><span style=\"display:none\">&nbsp;</span><ng-content></ng-content></div></label>",
-            styles: [".mc-radio-button{display:inline-block}.mc-radio-label{cursor:pointer;display:inline-flex;align-items:center;white-space:nowrap;vertical-align:middle}.mc-radio-label-content{display:inline-block;order:0;line-height:inherit;padding-right:0}[dir=rtl] .mc-radio-label-content{padding-right:26px;padding-left:0}.mc-radio-input{position:absolute;outline:0;opacity:0}.mc-radio-input+.mc-radio-label-content{position:relative;cursor:pointer;padding-left:26px}.mc-radio-input+.mc-radio-label-content:before{position:absolute;left:0;top:-1px;content:'';background:#fff;width:14px;height:14px;display:block;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2);border-width:1px;border-style:solid;border-radius:50%}.mc-radio-input+.mc-radio-label-content:after{content:'';top:4px;left:5px;width:6px;height:6px;border-radius:50%;position:absolute;opacity:0}.mc-radio-input:checked+.mc-radio-label-content:before{box-shadow:unset}.mc-radio-input:checked:hover+.mc-radio-label-content:after{opacity:1}.mc-radio-input:focus+.mc-radio-label-content:before{top:-2px;left:-1px;box-shadow:inset 0 0 0 1px #fff;border-width:2px}.mc-radio-input[disabled]{cursor:default}.mc-radio-input[disabled]+.mc-radio-label-content{cursor:default}"],
+            template: "<label class=\"mc-radio-label\" [attr.for]=\"inputId\" #label><input type=\"radio\" class=\"mc-radio-input cdk-visually-hidden\" #input [id]=\"inputId\" [checked]=\"checked\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [attr.name]=\"name\" [required]=\"required\" [attr.aria-label]=\"ariaLabel\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-describedby]=\"ariaDescribedby\" (change)=\"onInputChange($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\"><div class=\"mc-radio-button__outer-circle\"></div><div class=\"mc-radio-button__inner-circle\"></div><ng-content></ng-content></div></label>",
+            styles: [".mc-radio-button{display:inline-block}.mc-radio-label{display:inline-flex;align-items:center;vertical-align:middle;cursor:pointer;white-space:nowrap}.mc-radio-label-content{display:inline-block;position:relative;order:0;line-height:inherit;padding-left:26px;padding-right:0}.mc-radio-label-content .mc-radio-button__inner-circle,.mc-radio-label-content .mc-radio-button__outer-circle{position:absolute;content:'';border-style:solid;border-radius:50%}.mc-radio-label-content .mc-radio-button__outer-circle{left:0;top:calc(50% - 8px);width:14px;height:14px;border-width:1px}.mc-radio-label-content .mc-radio-button__inner-circle{display:none;left:1px;top:calc(50% - 7px);width:6px;height:6px;border-width:4px;border-color:transparent}[dir=rtl] .mc-radio-label-content{padding-right:26px;padding-left:0}.mc-radio-input{position:absolute;outline:0;opacity:0}"],
             inputs: ['color', 'tabIndex'],
             encapsulation: core.ViewEncapsulation.None,
             changeDetection: core.ChangeDetectionStrategy.OnPush,
@@ -6440,8 +6440,8 @@ var McRadioButton = /** @class */ (function (_super) {
             host: {
                 class: 'mc-radio-button',
                 '[attr.id]': 'id',
-                '[class.mc-radio-checked]': 'checked',
-                '[class.mc-radio-disabled]': 'disabled',
+                '[class.mc-checked]': 'checked',
+                '[class.mc-disabled]': 'disabled',
                 '(focus)': '_inputElement.nativeElement.focus()'
             }
         }),
@@ -9521,7 +9521,7 @@ var McToggleBase = /** @class */ (function () {
     }
     return McToggleBase;
 }());
-var _McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase)));
+var _McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), exports.ThemePalette.Primary));
 var McToggleChange = /** @class */ (function () {
     function McToggleChange() {
     }
@@ -9534,7 +9534,6 @@ var McToggleComponent = /** @class */ (function (_super) {
         _this._elementRef = _elementRef;
         _this._focusMonitor = _focusMonitor;
         _this._changeDetectorRef = _changeDetectorRef;
-        _this.color = exports.ThemePalette.Primary;
         _this.labelPosition = 'right';
         _this.ariaLabel = '';
         _this.ariaLabelledby = null;
@@ -9545,7 +9544,9 @@ var McToggleComponent = /** @class */ (function (_super) {
         _this._disabled = false;
         _this._checked = false;
         _this.change = new core.EventEmitter();
+        // tslint:disable-next-line:no-empty
         _this._onTouchedCallback = function () { };
+        // tslint:disable-next-line:no-empty
         _this._onChangeCallback = function (_) { };
         _this.tabIndex = parseInt(tabIndex) || 0;
         _this._focusMonitor.monitor(_this._elementRef.nativeElement, true);
@@ -9677,7 +9678,7 @@ var McToggleComponent = /** @class */ (function (_super) {
             selector: 'mc-toggle',
             exportAs: 'mcToggle',
             template: "<label [attr.for]=\"inputId\" class=\"mc-toggle-layout\" #label><div class=\"mc-toggle__container\" [class.left]=\"labelPosition === 'left'\"><input #input type=\"checkbox\" class=\"mc-toggle-input cdk-visually-hidden\" [id]=\"inputId\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (click)=\"_onInputClick($event)\" (change)=\"_onInteractionEvent($event)\"><div class=\"mc-toggle-bar-container\"><div class=\"mc-toggle__focus-frame\"></div><div class=\"mc-toggle-bar\"><div class=\"mc-toggle__circle\" [@switch]=\"checked\"></div></div></div><div class=\"mc-toggle__content\" [class.left]=\"labelPosition === 'left'\" [class.right]=\"labelPosition === 'right'\"><span class=\"mc-toggle-label\" (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></div></div></label>",
-            styles: ["mc-toggle{display:inline-block}mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}mc-toggle .mc-toggle__container{display:flex;align-items:center;position:relative}mc-toggle .mc-toggle__container.left{flex-direction:row-reverse}mc-toggle .mc-toggle__content.left{margin-right:8px}mc-toggle .mc-toggle__content.right{margin-left:8px}mc-toggle .mc-toggle-bar{position:relative}mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}mc-toggle .mc-toggle-bar-container{position:relative}mc-toggle .mc-toggle__focus-frame{position:absolute;z-index:1;top:-1px;left:-1px}mc-toggle .mc-toggle__circle{position:absolute;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:16px;width:28px;border-radius:9px}mc-toggle:not(.mc-toggle_small) .mc-toggle__focus-frame{border-radius:10px;height:18px;width:30px}mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:16px;width:16px}mc-toggle.mc-toggle_small .mc-toggle-bar{height:14px;width:24px;border-radius:8px}mc-toggle.mc-toggle_small .mc-toggle__focus-frame{border-radius:9px;height:16px;width:26px}mc-toggle.mc-toggle_small .mc-toggle__circle{height:14px;width:14px}mc-toggle:not(.mc-disabled){cursor:pointer}"],
+            styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-toggle .mc-toggle-bar{position:relative;border-width:1px;border-style:solid}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{display:flex;align-items:center;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:8px}.mc-toggle__content.right{margin-left:8px}.mc-toggle__circle{position:absolute;border-width:1px;border-style:solid;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}.mc-toggle__focus-frame{position:absolute;top:0;left:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:16px;width:28px;border-radius:9px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__focus-frame{border-radius:9px;height:16px;width:28px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:16px;width:16px}.mc-toggle.mc-toggle_small .mc-toggle-bar{height:14px;width:24px;border-radius:8px}.mc-toggle.mc-toggle_small .mc-toggle__focus-frame{border-radius:8px;height:14px;width:24px}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:14px;width:14px}.mc-toggle:not(.mc-disabled){cursor:pointer}"],
             providers: [
                 { provide: forms.NG_VALUE_ACCESSOR, useExisting: core.forwardRef(function () { return McToggleComponent_1; }), multi: true }
             ],
@@ -9685,10 +9686,11 @@ var McToggleComponent = /** @class */ (function (_super) {
             encapsulation: core.ViewEncapsulation.None,
             inputs: ['disabled', 'color', 'tabIndex'],
             host: {
+                class: 'mc-toggle',
                 '[id]': 'id',
                 '[attr.id]': 'id',
                 '[class.mc-disabled]': 'disabled',
-                '[class.mc-toggle-off]': '!checked'
+                '[class.mc-toggle_off]': '!checked'
             },
             animations: [
                 animations.trigger('switch', [
@@ -10456,11 +10458,11 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵd20 = MAX_VALIDATOR;
-exports.ɵb20 = MIN_VALIDATOR;
-exports.ɵe20 = MaxValidator;
-exports.ɵc20 = MinValidator;
-exports.ɵa20 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵd21 = MAX_VALIDATOR;
+exports.ɵb21 = MIN_VALIDATOR;
+exports.ɵe21 = MaxValidator;
+exports.ɵc21 = MinValidator;
+exports.ɵa21 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
