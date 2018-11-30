@@ -374,8 +374,7 @@ var McDropdown = /** @class */ (function () {
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     McDropdown.prototype._handleKeydown = function (event) {
         // tslint:disable-next-line:deprecation
-        var keyCode = event.keyCode;
-        switch (keyCode) {
+        switch (event.keyCode) {
             case ESCAPE:
                 this.closed.emit('keydown');
                 break;
@@ -385,6 +384,7 @@ var McDropdown = /** @class */ (function () {
                 this._keyManager.onKeydown(event);
                 break;
             default:
+                // todo зачем обрабатывать лишние события ?
                 this._keyManager.onKeydown(event);
         }
     };
@@ -525,8 +525,8 @@ var McDropdown = /** @class */ (function () {
     McDropdown = McDropdown_1 = __decorate([
         Component({
             selector: 'mc-dropdown',
-            template: "<ng-template><div class=\"mc-dropdown__panel\" [ngClass]=\"_classList\" (keydown)=\"_handleKeydown($event)\" (click)=\"closed.emit('click')\" [@transformDropdown]=\"_panelAnimationState\" (@transformDropdown.start)=\"_isAnimating = true\" (@transformDropdown.done)=\"_onAnimationDone($event)\" tabindex=\"-1\" role=\"dropdown\"><div class=\"mc-dropdown__content\"><ng-content></ng-content></div></div></ng-template>",
-            styles: [".mc-dropdown__item{display:block;width:100%;padding:5px 15px;text-align:left;box-sizing:border-box}.mc-dropdown__item:not([disabled]){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content{height:100%}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
+            template: "<ng-template><div class=\"mc-dropdown__panel\" [ngClass]=\"_classList\" (keydown)=\"_handleKeydown($event)\" (click)=\"closed.emit('click')\" [@transformDropdown]=\"_panelAnimationState\" (@transformDropdown.start)=\"_isAnimating = true\" (@transformDropdown.done)=\"_onAnimationDone($event)\" tabindex=\"-1\"><div class=\"mc-dropdown__content\"><ng-content></ng-content></div></div></ng-template>",
+            styles: [".mc-dropdown__item{display:block;box-sizing:border-box;width:100%;border:1px solid transparent;outline:0;padding:5px 15px;text-align:left}.mc-dropdown__item:not([disabled]){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content{height:100%}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
             changeDetection: ChangeDetectionStrategy.OnPush,
             encapsulation: ViewEncapsulation.None,
             exportAs: 'mcDropdown',

@@ -166,15 +166,13 @@ let McFormField = class McFormField extends _McFormFieldMixinBase {
             this._control.onContainerClick($event);
         }
     }
-    onKeyDown(e) {
+    onKeyDown(event) {
         // tslint:disable-next-line:deprecation
-        if (e.keyCode === ESCAPE &&
-            this._control.focused &&
-            this.hasCleaner) {
+        if (event.keyCode === ESCAPE && this._control.focused && this.hasCleaner) {
             if (this._control && this._control.ngControl) {
                 this._control.ngControl.reset();
             }
-            e.preventDefault();
+            event.preventDefault();
         }
     }
     onHoverChanged(isHovered) {

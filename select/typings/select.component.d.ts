@@ -170,6 +170,7 @@ export declare class McSelect extends _McSelectMixinBase implements AfterContent
      */
     readonly valueChange: EventEmitter<any>;
     hiddenItems: number;
+    oneMoreText: string;
     /** Whether or not the overlay panel is open. */
     private _panelOpen;
     /** Whether filling out the select is required in the form. */

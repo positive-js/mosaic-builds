@@ -1,4 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, QueryList } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { CanColor, CanColorCtor } from '@ptsecurity/mosaic/core';
 import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
@@ -30,12 +31,12 @@ export declare class McFormField extends _McFormFieldMixinBase implements AfterC
     ngAfterViewInit(): void;
     clearValue($event: any): void;
     onContainerClick($event: any): void;
-    onKeyDown(e: KeyboardEvent): void;
+    onKeyDown(event: KeyboardEvent): void;
     onHoverChanged(isHovered: boolean): void;
     onStepUp(): void;
     onStepDown(): void;
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    _shouldForward(prop: string): boolean;
+    _shouldForward(prop: keyof NgControl): boolean;
     /** Throws an error if the form field's control is missing. */
     protected _validateControlChild(): void;
     readonly hasHint: boolean;
