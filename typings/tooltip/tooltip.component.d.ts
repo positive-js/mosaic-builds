@@ -3,7 +3,7 @@ import { Directionality } from '@ptsecurity/cdk/bidi';
 import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, IScrollStrategy, IOverlayConnectionPosition, IOriginConnectionPosition } from '@ptsecurity/cdk/overlay';
 import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import { BehaviorSubject, Observable } from 'rxjs';
-export declare class McToolTipComponent {
+export declare class McTooltipComponent {
     cdr: ChangeDetectorRef;
     _prefix: string;
     _positions: ConnectionPositionPair[];
@@ -48,7 +48,7 @@ export declare const MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER: {
 };
 /** Creates an error to be thrown if the user supplied an invalid tooltip position. */
 export declare function getMcTooltipInvalidPositionError(position: string): Error;
-export declare class McTooltipDirective implements OnInit, OnDestroy {
+export declare class McTooltip implements OnInit, OnDestroy {
     private _overlay;
     private elementRef;
     private _ngZone;
@@ -67,9 +67,12 @@ export declare class McTooltipDirective implements OnInit, OnDestroy {
     _trigger: string;
     _placement: string;
     _overlayRef: OverlayRef | null;
-    _portal: ComponentPortal<McToolTipComponent>;
+    _portal: ComponentPortal<McTooltipComponent>;
     availablePositions: any;
-    tooltip: McToolTipComponent | null;
+    tooltip: McTooltipComponent | null;
+    tooltipClass: string | string[] | Set<string> | {
+        [key: string]: any;
+    };
     mcVisibleChange: EventEmitter<boolean>;
     private $unsubscribe;
     mcTitle: string;
@@ -80,6 +83,9 @@ export declare class McTooltipDirective implements OnInit, OnDestroy {
     mcVisible: boolean;
     mcTrigger: string;
     mcPlacement: string;
+    mcTooltipClass: string | string[] | Set<string> | {
+        [key: string]: any;
+    };
     readonly isOpen: boolean;
     readonly isParentDisabled: boolean;
     private manualListeners;
@@ -95,6 +101,9 @@ export declare class McTooltipDirective implements OnInit, OnDestroy {
     ngOnDestroy(): void;
     handleKeydown(e: KeyboardEvent): void;
     handleTouchend(): void;
+    initElementRefListeners(): void;
+    show(): void;
+    hide(): void;
     /** Updates the position of the current tooltip. */
     _updatePosition(): void;
     /**
@@ -112,6 +121,4 @@ export declare class McTooltipDirective implements OnInit, OnDestroy {
     };
     /** Inverts an overlay position. */
     private _invertPosition;
-    private show;
-    private hide;
 }
