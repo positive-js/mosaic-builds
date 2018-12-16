@@ -848,7 +848,7 @@ $base-font-size: 15px !default;
         &__transparent {
             color: mc-color($second, 800);
             background-color: transparent;
-            box-shadow: inset 0 0.0.1-627740epx mc-color($second, 300);
+            box-shadow: inset 0 0.0.1-2747f75px mc-color($second, 300);
         }
 
         &__light {
@@ -971,7 +971,7 @@ $base-font-size: 15px !default;
 
     .mc-alert__close:focus {
         border: 1px solid mc-color($primary);
-        box-shadow: 0 0.0.1-627740epx mc-color($primary);
+        box-shadow: 0 0.0.1-2747f75px mc-color($primary);
         z-index: 1;
     }
 
@@ -1172,7 +1172,7 @@ $base-font-size: 15px !default;
             $focus-color: mc-color($primary);
 
             border-color: $focus-color;
-            box-shadow: 0 0.0.1-627740epx $focus-color;
+            box-shadow: 0 0.0.1-2747f75px $focus-color;
         }
     }
 }
@@ -1236,7 +1236,7 @@ $base-font-size: 15px !default;
 
         &.cdk-keyboard-focused {
             border-color: mc-color($primary);
-            box-shadow: inset 0 0.0.1-627740epx mc-color($primary);
+            box-shadow: inset 0 0.0.1-2747f75px mc-color($primary);
         }
 
         &[disabled] {
@@ -1614,7 +1614,7 @@ $base-font-size: 15px !default;
             }
 
             + .mc-radio-label-content .mc-radio-button__inner-circle {
-                box-shadow: 0 0.0.1-627740epx white;
+                box-shadow: 0 0.0.1-2747f75px white;
             }
         }
 
@@ -1707,7 +1707,7 @@ $zindex-tooltip         : 1060;
             + .mc-checkbox-frame {
                 border-color: $focus-color;
 
-                box-shadow: inset 0 0.0.1-627740epx white, 0 0.0.1-627740epx $focus-color;
+                box-shadow: inset 0 0.0.1-2747f75px white, 0 0.0.1-2747f75px $focus-color;
             }
         }
 
@@ -1773,7 +1773,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-627740epx mc-color($palette, 500);
+            box-shadow: 0 0.0.1-2747f75px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1923,7 +1923,7 @@ $zindex-tooltip         : 1060;
                     color: mc-color($primary);
                 }
 
-                box-shadow: 0 0.0.1-627740epx mc-color($primary);
+                box-shadow: 0 0.0.1-2747f75px mc-color($primary);
             }
 
             &.ng-invalid .mc-form-field__container {
@@ -1942,7 +1942,7 @@ $zindex-tooltip         : 1060;
             }
 
             &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0.0.1-627740epx mc-color($error);
+                box-shadow: 0 0.0.1-2747f75px mc-color($error);
             }
 
             &.mc-disabled .mc-form-field__container {
@@ -2001,7 +2001,7 @@ $zindex-tooltip         : 1060;
 
         &-content {
             box-shadow:
-                0 0.0.1-627740epx mc-color($second, 300),
+                0 0.0.1-2747f75px mc-color($second, 300),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2111,7 +2111,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color);
-        box-shadow: 0 0.0.1-627740epx mc-color($focus-color);
+        box-shadow: 0 0.0.1-2747f75px mc-color($focus-color);
     }
 
     &.mc-disabled {
@@ -2303,7 +2303,7 @@ $hover-darken: 5%;
 
         &.cdk-keyboard-focused {
             & .mc-toggle__focus-frame {
-                box-shadow: inset 0 0.0.1-627740epx map-get($background, background), 0 0 0 2px mc-color($primary);
+                box-shadow: inset 0 0.0.1-2747f75px map-get($background, background), 0 0 0 2px mc-color($primary);
             }
         }
 
