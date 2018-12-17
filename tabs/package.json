@@ -1,0 +1,8 @@
+{
+  "name": "@ptsecurity/mosaic/tabs",
+  "typings": "../tabs.d.ts",
+  "main": "../bundles/mosaic-tabs.umd.js",
+  "module": "../esm5/tabs.es5.js",
+  "es2015": "../esm2015/tabs.js",
+  "sideEffects": false
+}

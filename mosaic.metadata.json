@@ -28,7 +28,7 @@
       "from": "./toggle"
     },
     {
-      "from": "./radio"
+      "from": "./tabs"
     },
     {
       "from": "./layout"
@@ -40,16 +40,16 @@
       "from": "./list"
     },
     {
-      "from": "./icon"
+      "from": "./radio"
     },
     {
-      "from": "./progress-spinner"
+      "from": "./icon"
     },
     {
       "from": "./progress-bar"
     },
     {
-      "from": "./navbar"
+      "from": "./progress-spinner"
     },
     {
       "from": "./tag"
@@ -64,19 +64,22 @@
       "from": "./button"
     },
     {
-      "from": "./input"
+      "from": "./navbar"
+    },
+    {
+      "from": "./modal"
     },
     {
       "from": "./select"
+    },
+    {
+      "from": "./input"
     },
     {
       "from": "./textarea"
     },
     {
       "from": "./timepicker"
-    },
-    {
-      "from": "./modal"
     },
     {
       "from": "./typings/index"
