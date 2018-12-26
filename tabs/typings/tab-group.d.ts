@@ -38,6 +38,7 @@ export declare const mcTabGroupMixinBase: CanColorCtor & typeof McTabGroupBase;
  */
 export declare class McTabGroup extends mcTabGroupMixinBase implements AfterContentInit, AfterContentChecked, OnDestroy, CanColor {
     private changeDetectorRef;
+    lightTab: boolean;
     /** Whether the tab group should grow to the size of the active tab. */
     dynamicHeight: boolean;
     /** The index of the active tab. */
@@ -68,7 +69,7 @@ export declare class McTabGroup extends mcTabGroupMixinBase implements AfterCont
     private _dynamicHeight;
     private _selectedIndex;
     private groupId;
-    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, defaultConfig?: IMcTabsConfig);
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, lightTabs: string, defaultConfig?: IMcTabsConfig);
     /**
      * After the content is checked, this component knows what tabs have been defined
      * and what the selected index should be. This is where we can know exactly what position
