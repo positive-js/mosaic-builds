@@ -991,7 +991,7 @@ $base-font-size: 15px !default;
 
     .mc-alert__close:focus {
         border: 1px solid mc-color($primary);
-        box-shadow: 0 0.0.1-8c8116cpx mc-color($primary);
+        box-shadow: 0 0.0.1-0c0b066px mc-color($primary);
         z-index: 1;
     }
 
@@ -1192,7 +1192,7 @@ $base-font-size: 15px !default;
             $focus-color: mc-color($primary);
 
             border-color: $focus-color;
-            box-shadow: 0 0.0.1-8c8116cpx $focus-color;
+            box-shadow: 0 0.0.1-0c0b066px $focus-color;
         }
     }
 }
@@ -1256,7 +1256,7 @@ $base-font-size: 15px !default;
 
         &.cdk-keyboard-focused {
             border-color: mc-color($primary);
-            box-shadow: inset 0 0.0.1-8c8116cpx mc-color($primary);
+            box-shadow: inset 0 0.0.1-0c0b066px mc-color($primary);
         }
 
         &[disabled] {
@@ -1690,7 +1690,7 @@ $base-font-size: 15px !default;
             }
 
             + .mc-radio-label-content .mc-radio-button__inner-circle {
-                box-shadow: 0 0.0.1-8c8116cpx white;
+                box-shadow: 0 0.0.1-0c0b066px white;
             }
         }
 
@@ -1781,7 +1781,7 @@ $zindex-tooltip         : 1060;
             + .mc-checkbox-frame {
                 border-color: $focus-color;
 
-                box-shadow: inset 0 0.0.1-8c8116cpx white, 0 0.0.1-8c8116cpx $focus-color;
+                box-shadow: inset 0 0.0.1-0c0b066px white, 0 0.0.1-0c0b066px $focus-color;
             }
         }
 
@@ -1847,7 +1847,7 @@ $zindex-tooltip         : 1060;
 
         &.cdk-focused {
             border-color: mc-color($palette, 500);
-            box-shadow: 0 0.0.1-8c8116cpx mc-color($palette, 500);
+            box-shadow: 0 0.0.1-0c0b066px mc-color($palette, 500);
             z-index: 1;
 
             > .mc-navbar-item {
@@ -1997,7 +1997,7 @@ $zindex-tooltip         : 1060;
                     color: mc-color($primary);
                 }
 
-                box-shadow: 0 0.0.1-8c8116cpx mc-color($primary);
+                box-shadow: 0 0.0.1-0c0b066px mc-color($primary);
             }
 
             &.ng-invalid .mc-form-field__container {
@@ -2016,7 +2016,7 @@ $zindex-tooltip         : 1060;
             }
 
             &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0.0.1-8c8116cpx mc-color($error);
+                box-shadow: 0 0.0.1-0c0b066px mc-color($error);
             }
 
             &.mc-disabled .mc-form-field__container {
@@ -2074,7 +2074,7 @@ $zindex-tooltip         : 1060;
             background-color: map-get($background, background);
 
             box-shadow:
-                0 0.0.1-8c8116cpx mc-color($second, if($is-dark, 800, 300)),
+                0 0.0.1-0c0b066px mc-color($second, if($is-dark, 800, 300)),
                 0 6px 12px 0 rgba(0, 0, 0, 0.5);
         }
 
@@ -2178,7 +2178,7 @@ $zindex-tooltip         : 1060;
     &.mc-active,
     &.mc-focused {
         border-color: mc-color($focus-color);
-        box-shadow: 0 0.0.1-8c8116cpx mc-color($focus-color);
+        box-shadow: 0 0.0.1-0c0b066px mc-color($focus-color);
     }
 
     &.mc-disabled {
@@ -2372,7 +2372,7 @@ $hover-darken: 5%;
 
         &.cdk-keyboard-focused {
             & .mc-toggle__focus-frame {
-                box-shadow: inset 0 0.0.1-8c8116cpx map-get($background, background), 0 0 0 2px mc-color($primary);
+                box-shadow: inset 0 0.0.1-0c0b066px map-get($background, background), 0 0 0 2px mc-color($primary);
             }
         }
 
