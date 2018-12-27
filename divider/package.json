@@ -1,8 +1,8 @@
 {
-  "name": "@ptsecurity/mosaic/divider",
-  "typings": "../divider.d.ts",
-  "main": "../bundles/mosaic-divider.umd.js",
-  "module": "../esm5/divider.es5.js",
-  "es2015": "../esm2015/divider.js",
-  "sideEffects": false
+    "name": "@ptsecurity/mosaic/divider",
+    "typings": "../divider.d.ts",
+    "main": "../bundles/mosaic-divider.umd.js",
+    "module": "../esm5/divider.es5.js",
+    "es2015": "../esm2015/divider.js",
+    "sideEffects": false
 }

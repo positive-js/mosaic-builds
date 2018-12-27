@@ -1,8 +1,8 @@
 {
-  "name": "@ptsecurity/mosaic/link",
-  "typings": "../link.d.ts",
-  "main": "../bundles/mosaic-link.umd.js",
-  "module": "../esm5/link.es5.js",
-  "es2015": "../esm2015/link.js",
-  "sideEffects": false
+    "name": "@ptsecurity/mosaic/link",
+    "typings": "../link.d.ts",
+    "main": "../bundles/mosaic-link.umd.js",
+    "module": "../esm5/link.es5.js",
+    "es2015": "../esm2015/link.js",
+    "sideEffects": false
 }

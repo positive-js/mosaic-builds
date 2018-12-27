@@ -1,8 +1,8 @@
 {
-  "name": "@ptsecurity/mosaic/tree",
-  "typings": "../tree.d.ts",
-  "main": "../bundles/mosaic-tree.umd.js",
-  "module": "../esm5/tree.es5.js",
-  "es2015": "../esm2015/tree.js",
-  "sideEffects": false
+    "name": "@ptsecurity/mosaic/tree",
+    "typings": "../tree.d.ts",
+    "main": "../bundles/mosaic-tree.umd.js",
+    "module": "../esm5/tree.es5.js",
+    "es2015": "../esm2015/tree.js",
+    "sideEffects": false
 }

@@ -1,8 +1,8 @@
 {
-  "name": "@ptsecurity/mosaic/toggle",
-  "typings": "../toggle.d.ts",
-  "main": "../bundles/mosaic-toggle.umd.js",
-  "module": "../esm5/toggle.es5.js",
-  "es2015": "../esm2015/toggle.js",
-  "sideEffects": false
+    "name": "@ptsecurity/mosaic/toggle",
+    "typings": "../toggle.d.ts",
+    "main": "../bundles/mosaic-toggle.umd.js",
+    "module": "../esm5/toggle.es5.js",
+    "es2015": "../esm2015/toggle.js",
+    "sideEffects": false
 }

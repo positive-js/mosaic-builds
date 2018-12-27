@@ -1,8 +1,8 @@
 {
-  "name": "@ptsecurity/mosaic/textarea",
-  "typings": "../textarea.d.ts",
-  "main": "../bundles/mosaic-textarea.umd.js",
-  "module": "../esm5/textarea.es5.js",
-  "es2015": "../esm2015/textarea.js",
-  "sideEffects": false
+    "name": "@ptsecurity/mosaic/textarea",
+    "typings": "../textarea.d.ts",
+    "main": "../bundles/mosaic-textarea.umd.js",
+    "module": "../esm5/textarea.es5.js",
+    "es2015": "../esm2015/textarea.js",
+    "sideEffects": false
 }

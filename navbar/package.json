@@ -1,8 +1,8 @@
 {
-  "name": "@ptsecurity/mosaic/navbar",
-  "typings": "../navbar.d.ts",
-  "main": "../bundles/mosaic-navbar.umd.js",
-  "module": "../esm5/navbar.es5.js",
-  "es2015": "../esm2015/navbar.js",
-  "sideEffects": false
+    "name": "@ptsecurity/mosaic/navbar",
+    "typings": "../navbar.d.ts",
+    "main": "../bundles/mosaic-navbar.umd.js",
+    "module": "../esm5/navbar.es5.js",
+    "es2015": "../esm2015/navbar.js",
+    "sideEffects": false
 }

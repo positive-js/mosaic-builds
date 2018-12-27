@@ -1,8 +1,8 @@
 {
-  "name": "@ptsecurity/mosaic/modal",
-  "typings": "../modal.d.ts",
-  "main": "../bundles/mosaic-modal.umd.js",
-  "module": "../esm5/modal.es5.js",
-  "es2015": "../esm2015/modal.js",
-  "sideEffects": false
+    "name": "@ptsecurity/mosaic/modal",
+    "typings": "../modal.d.ts",
+    "main": "../bundles/mosaic-modal.umd.js",
+    "module": "../esm5/modal.es5.js",
+    "es2015": "../esm2015/modal.js",
+    "sideEffects": false
 }
