@@ -11954,7 +11954,7 @@ var McToolTipModule = /** @class */ (function () {
     return McToolTipModule;
 }());
 
-var VERSION = new core.Version('0.0.1');
+var VERSION = new core.Version('1.0.0-beta.0');
 
 exports.VERSION = VERSION;
 exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
@@ -12045,11 +12045,11 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵd22 = MAX_VALIDATOR;
-exports.ɵb22 = MIN_VALIDATOR;
-exports.ɵe22 = MaxValidator;
-exports.ɵc22 = MinValidator;
-exports.ɵa22 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵd21 = MAX_VALIDATOR;
+exports.ɵb21 = MIN_VALIDATOR;
+exports.ɵe21 = MaxValidator;
+exports.ɵc21 = MinValidator;
+exports.ɵa21 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
