@@ -41,9 +41,9 @@ export declare class McTabHeader extends McTabHeaderBase implements AfterContent
     /** Whether the tab list can be scrolled more towards the beginning of the tab label list. */
     disableScrollBefore: boolean;
     /** Event emitted when the option is selected. */
-    readonly selectFocusedIndex: EventEmitter<{}>;
+    readonly selectFocusedIndex: EventEmitter<number>;
     /** Event emitted when a label is focused. */
-    readonly indexFocused: EventEmitter<{}>;
+    readonly indexFocused: EventEmitter<number>;
     /** The distance in pixels that the tab labels should be translated to the left. */
     private _scrollDistance;
     /** Whether the header should scroll to the selected index after the view has been checked. */
@@ -59,6 +59,8 @@ export declare class McTabHeader extends McTabHeaderBase implements AfterContent
     private scrollDistanceChanged;
     /** Used to manage focus between the tabs. */
     private keyManager;
+    /** Cached text content of the header. */
+    private currentTextContent;
     private _selectedIndex;
     constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, viewportRuler: ViewportRuler, dir: Directionality, ngZone: NgZone);
     ngAfterContentChecked(): void;
@@ -71,6 +73,10 @@ export declare class McTabHeader extends McTabHeaderBase implements AfterContent
     onContentChanges(): void;
     /**
      * Updating the view whether pagination should be enabled or not
+     *
+     * WARNING: Calling this method can be very costly in terms of performance.  It should be called
+     * as infrequently as possible from outside of the Tabs component as it causes a reflow of the
+     * page.
      */
     updatePagination(): void;
     /**

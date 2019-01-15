@@ -7666,16 +7666,28 @@ var McTabHeader = /** @class */ (function (_super) {
      */
     McTabHeader.prototype.onContentChanges = function () {
         var _this = this;
-        var zoneCallback = function () {
-            _this.updatePagination();
-            _this.changeDetectorRef.markForCheck();
-        };
-        // The content observer runs outside the `NgZone` by default, which
-        // means that we need to bring the callback back in ourselves.
-        this.ngZone.run(zoneCallback);
+        var textContent = this.elementRef.nativeElement.textContent;
+        // We need to diff the text content of the header, because the MutationObserver callback
+        // will fire even if the text content didn't change which is inefficient and is prone
+        // to infinite loops if a poorly constructed expression is passed in.
+        if (textContent !== this.currentTextContent) {
+            this.currentTextContent = textContent;
+            var zoneCallback = function () {
+                _this.updatePagination();
+                _this.changeDetectorRef.markForCheck();
+            };
+            // The content observer runs outside the `NgZone` by default, which
+            // means that we need to bring the callback back in ourselves.
+            // TODO: Remove null check for `_ngZone` once it's a required parameter.
+            this.ngZone ? this.ngZone.run(zoneCallback) : zoneCallback();
+        }
     };
     /**
      * Updating the view whether pagination should be enabled or not
+     *
+     * WARNING: Calling this method can be very costly in terms of performance.  It should be called
+     * as infrequently as possible from outside of the Tabs component as it causes a reflow of the
+     * page.
      */
     McTabHeader.prototype.updatePagination = function () {
         this.checkPaginationEnabled();
@@ -7732,7 +7744,13 @@ var McTabHeader = /** @class */ (function (_super) {
         // Don't use `translate3d` here because we don't want to create a new layer. A new layer
         // seems to cause flickering and overflow in Internet Explorer.
         // See: https://github.com/angular/material2/issues/10276
-        this.tabList.nativeElement.style.transform = "translateX(" + translateX + "px)";
+        // We round the `transform` here, because transforms with sub-pixel precision cause some
+        // browsers to blur the content of the element.
+        this.tabList.nativeElement.style.transform = "translateX(" + Math.round(translateX) + "px)";
+        // Setting the `transform` on IE will change the scroll offset of the parent, causing the
+        // position to be thrown off in some cases. We have to reset it ourselves to ensure that
+        // it doesn't get thrown off.
+        this.tabList.nativeElement.scrollLeft = 0;
     };
     /**
      * Moves the tab list in the 'before' or 'after' direction (towards the beginning of the list or
@@ -7854,11 +7872,11 @@ var McTabHeader = /** @class */ (function (_super) {
     ], McTabHeader.prototype, "tabList", void 0);
     __decorate([
         core.Output(),
-        __metadata("design:type", Object)
+        __metadata("design:type", core.EventEmitter)
     ], McTabHeader.prototype, "selectFocusedIndex", void 0);
     __decorate([
         core.Output(),
-        __metadata("design:type", Object)
+        __metadata("design:type", core.EventEmitter)
     ], McTabHeader.prototype, "indexFocused", void 0);
     McTabHeader = __decorate([
         core.Component({
@@ -12045,11 +12063,11 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵd23 = MAX_VALIDATOR;
-exports.ɵb23 = MIN_VALIDATOR;
-exports.ɵe23 = MaxValidator;
-exports.ɵc23 = MinValidator;
-exports.ɵa23 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵd21 = MAX_VALIDATOR;
+exports.ɵb21 = MIN_VALIDATOR;
+exports.ɵe21 = MaxValidator;
+exports.ɵc21 = MinValidator;
+exports.ɵa21 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
