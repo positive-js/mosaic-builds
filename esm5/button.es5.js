@@ -35,12 +35,13 @@ var McIconButtonCSSStyler = /** @class */ (function () {
         var icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
         if (icons.length === 1) {
             var iconElement = icons[0];
+            var COMMENT_NODE = 8;
             if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
-                if (iconElement.nextSibling) {
+                if (iconElement.nextSibling && iconElement.nextSibling.nodeType !== COMMENT_NODE) {
                     iconElement.classList.add('mc-icon_left');
                     this.nativeElement.classList.add('mc-icon-button_left');
                 }
-                if (iconElement.previousSibling) {
+                if (iconElement.previousSibling && iconElement.previousSibling.nodeType !== COMMENT_NODE) {
                     iconElement.classList.add('mc-icon_right');
                     this.nativeElement.classList.add('mc-icon-button_right');
                 }
