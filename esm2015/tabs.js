@@ -17,7 +17,6 @@ import { coerceNumberProperty, coerceBooleanProperty } from '@ptsecurity/cdk/coe
 import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
 import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /** Decorates the `ng-template` tags and reads out the template from it. */
 let McTabContent = class McTabContent {
@@ -148,49 +147,6 @@ const mcTabsAnimations = {
     ])
 };
 
-/**
- * The portal host directive for the contents of the tab.
- * @docs-private
- */
-let McTabBodyPortal = class McTabBodyPortal extends CdkPortalOutlet {
-    constructor(componentFactoryResolver, viewContainerRef, host) {
-        super(componentFactoryResolver, viewContainerRef);
-        this.host = host;
-        /** Subscription to events for when the tab body begins centering. */
-        this.centeringSub = Subscription.EMPTY;
-        /** Subscription to events for when the tab body finishes leaving from center position. */
-        this.leavingSub = Subscription.EMPTY;
-    }
-    /** Set initial visibility or set up subscription for changing visibility. */
-    ngOnInit() {
-        super.ngOnInit();
-        this.centeringSub = this.host.beforeCentering
-            .pipe(startWith(this.host.isCenterPosition(this.host.bodyPosition)))
-            .subscribe((isCentering) => {
-            if (isCentering && !this.hasAttached()) {
-                this.attach(this.host.content);
-            }
-        });
-        this.leavingSub = this.host.afterLeavingCenter.subscribe(() => {
-            this.detach();
-        });
-    }
-    /** Clean up centering subscription. */
-    ngOnDestroy() {
-        super.ngOnDestroy();
-        this.centeringSub.unsubscribe();
-        this.leavingSub.unsubscribe();
-    }
-};
-McTabBodyPortal = __decorate([
-    Directive({
-        selector: '[mcTabBodyHost]'
-    }),
-    __param(2, Inject(forwardRef(() => McTabBody))),
-    __metadata("design:paramtypes", [ComponentFactoryResolver,
-        ViewContainerRef,
-        McTabBody])
-], McTabBodyPortal);
 /**
  * Wrapper for the contents of a tab.
  * @docs-private
@@ -341,6 +297,49 @@ McTabBody = __decorate([
         Directionality,
         ChangeDetectorRef])
 ], McTabBody);
+/**
+ * The portal host directive for the contents of the tab.
+ * @docs-private
+ */
+let McTabBodyPortal = class McTabBodyPortal extends CdkPortalOutlet {
+    constructor(componentFactoryResolver, viewContainerRef, host) {
+        super(componentFactoryResolver, viewContainerRef);
+        this.host = host;
+        /** Subscription to events for when the tab body begins centering. */
+        this.centeringSub = Subscription.EMPTY;
+        /** Subscription to events for when the tab body finishes leaving from center position. */
+        this.leavingSub = Subscription.EMPTY;
+    }
+    /** Set initial visibility or set up subscription for changing visibility. */
+    ngOnInit() {
+        super.ngOnInit();
+        this.centeringSub = this.host.beforeCentering
+            .pipe(startWith(this.host.isCenterPosition(this.host.bodyPosition)))
+            .subscribe((isCentering) => {
+            if (isCentering && !this.hasAttached()) {
+                this.attach(this.host.content);
+            }
+        });
+        this.leavingSub = this.host.afterLeavingCenter.subscribe(() => {
+            this.detach();
+        });
+    }
+    /** Clean up centering subscription. */
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.centeringSub.unsubscribe();
+        this.leavingSub.unsubscribe();
+    }
+};
+McTabBodyPortal = __decorate([
+    Directive({
+        selector: '[mcTabBodyHost]'
+    }),
+    __param(2, Inject(forwardRef(() => McTabBody))),
+    __metadata("design:paramtypes", [ComponentFactoryResolver,
+        ViewContainerRef,
+        McTabBody])
+], McTabBodyPortal);
 
 // Boilerplate for applying mixins to McTabLabelWrapper.
 /** @docs-private */
@@ -1166,8 +1165,7 @@ McTabsModule = __decorate([
             CommonModule,
             McCommonModule,
             PortalModule,
-            A11yModule,
-            BrowserAnimationsModule
+            A11yModule
         ],
         // Don't export all components because some are only to be used internally.
         exports: [

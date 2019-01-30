@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('@angular/forms'), require('@ptsecurity/cdk/portal'), require('rxjs/operators'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/cdk/scrolling'), require('@angular/platform-browser/animations')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', '@angular/forms', '@ptsecurity/cdk/portal', 'rxjs/operators', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/tree', '@ptsecurity/cdk/scrolling', '@angular/platform-browser/animations'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.a11y,global.ng.cdk.platform,global.ng.forms,global.ng.cdk.portal,global.rxjs.operators,global.ng.cdk.overlay,global.ng.cdk.collections,global.ng.cdk.tree,global.ng.cdk.scrolling,global.ng.platformBrowser.animations));
-}(this, (function (exports,core,bidi,coercion,rxjs,common,keycodes,animations,a11y,platform,forms,portal,operators,overlay,collections,tree,scrolling,animations$1) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('@angular/forms'), require('@ptsecurity/cdk/portal'), require('rxjs/operators'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/cdk/scrolling')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', '@angular/forms', '@ptsecurity/cdk/portal', 'rxjs/operators', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/tree', '@ptsecurity/cdk/scrolling'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.a11y,global.ng.cdk.platform,global.ng.forms,global.ng.cdk.portal,global.rxjs.operators,global.ng.cdk.overlay,global.ng.cdk.collections,global.ng.cdk.tree,global.ng.cdk.scrolling));
+}(this, (function (exports,core,bidi,coercion,rxjs,common,keycodes,animations,a11y,platform,forms,portal,operators,overlay,collections,tree,scrolling) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7238,53 +7238,6 @@ var mcTabsAnimations = {
 };
 
 /**
- * The portal host directive for the contents of the tab.
- * @docs-private
- */
-var McTabBodyPortal = /** @class */ (function (_super) {
-    __extends(McTabBodyPortal, _super);
-    function McTabBodyPortal(componentFactoryResolver, viewContainerRef, host) {
-        var _this = _super.call(this, componentFactoryResolver, viewContainerRef) || this;
-        _this.host = host;
-        /** Subscription to events for when the tab body begins centering. */
-        _this.centeringSub = rxjs.Subscription.EMPTY;
-        /** Subscription to events for when the tab body finishes leaving from center position. */
-        _this.leavingSub = rxjs.Subscription.EMPTY;
-        return _this;
-    }
-    /** Set initial visibility or set up subscription for changing visibility. */
-    McTabBodyPortal.prototype.ngOnInit = function () {
-        var _this = this;
-        _super.prototype.ngOnInit.call(this);
-        this.centeringSub = this.host.beforeCentering
-            .pipe(operators.startWith(this.host.isCenterPosition(this.host.bodyPosition)))
-            .subscribe(function (isCentering) {
-            if (isCentering && !_this.hasAttached()) {
-                _this.attach(_this.host.content);
-            }
-        });
-        this.leavingSub = this.host.afterLeavingCenter.subscribe(function () {
-            _this.detach();
-        });
-    };
-    /** Clean up centering subscription. */
-    McTabBodyPortal.prototype.ngOnDestroy = function () {
-        _super.prototype.ngOnDestroy.call(this);
-        this.centeringSub.unsubscribe();
-        this.leavingSub.unsubscribe();
-    };
-    McTabBodyPortal = __decorate([
-        core.Directive({
-            selector: '[mcTabBodyHost]'
-        }),
-        __param(2, core.Inject(core.forwardRef(function () { return McTabBody; }))),
-        __metadata("design:paramtypes", [core.ComponentFactoryResolver,
-            core.ViewContainerRef,
-            McTabBody])
-    ], McTabBodyPortal);
-    return McTabBodyPortal;
-}(portal.CdkPortalOutlet));
-/**
  * Wrapper for the contents of a tab.
  * @docs-private
  */
@@ -7441,6 +7394,53 @@ var McTabBody = /** @class */ (function () {
     ], McTabBody);
     return McTabBody;
 }());
+/**
+ * The portal host directive for the contents of the tab.
+ * @docs-private
+ */
+var McTabBodyPortal = /** @class */ (function (_super) {
+    __extends(McTabBodyPortal, _super);
+    function McTabBodyPortal(componentFactoryResolver, viewContainerRef, host) {
+        var _this = _super.call(this, componentFactoryResolver, viewContainerRef) || this;
+        _this.host = host;
+        /** Subscription to events for when the tab body begins centering. */
+        _this.centeringSub = rxjs.Subscription.EMPTY;
+        /** Subscription to events for when the tab body finishes leaving from center position. */
+        _this.leavingSub = rxjs.Subscription.EMPTY;
+        return _this;
+    }
+    /** Set initial visibility or set up subscription for changing visibility. */
+    McTabBodyPortal.prototype.ngOnInit = function () {
+        var _this = this;
+        _super.prototype.ngOnInit.call(this);
+        this.centeringSub = this.host.beforeCentering
+            .pipe(operators.startWith(this.host.isCenterPosition(this.host.bodyPosition)))
+            .subscribe(function (isCentering) {
+            if (isCentering && !_this.hasAttached()) {
+                _this.attach(_this.host.content);
+            }
+        });
+        this.leavingSub = this.host.afterLeavingCenter.subscribe(function () {
+            _this.detach();
+        });
+    };
+    /** Clean up centering subscription. */
+    McTabBodyPortal.prototype.ngOnDestroy = function () {
+        _super.prototype.ngOnDestroy.call(this);
+        this.centeringSub.unsubscribe();
+        this.leavingSub.unsubscribe();
+    };
+    McTabBodyPortal = __decorate([
+        core.Directive({
+            selector: '[mcTabBodyHost]'
+        }),
+        __param(2, core.Inject(core.forwardRef(function () { return McTabBody; }))),
+        __metadata("design:paramtypes", [core.ComponentFactoryResolver,
+            core.ViewContainerRef,
+            McTabBody])
+    ], McTabBodyPortal);
+    return McTabBodyPortal;
+}(portal.CdkPortalOutlet));
 
 // Boilerplate for applying mixins to McTabLabelWrapper.
 /** @docs-private */
@@ -8335,8 +8335,7 @@ var McTabsModule = /** @class */ (function () {
                 common.CommonModule,
                 McCommonModule,
                 portal.PortalModule,
-                a11y.A11yModule,
-                animations$1.BrowserAnimationsModule
+                a11y.A11yModule
             ],
             // Don't export all components because some are only to be used internally.
             exports: [
@@ -11297,7 +11296,7 @@ var McToggleModule = /** @class */ (function () {
     }
     McToggleModule = __decorate([
         core.NgModule({
-            imports: [common.CommonModule, animations$1.BrowserAnimationsModule, a11y.A11yModule, McCommonModule],
+            imports: [common.CommonModule, a11y.A11yModule, McCommonModule],
             exports: [McToggleComponent],
             declarations: [McToggleComponent]
         })
@@ -12087,11 +12086,11 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵd22 = MAX_VALIDATOR;
-exports.ɵb22 = MIN_VALIDATOR;
-exports.ɵe22 = MaxValidator;
-exports.ɵc22 = MinValidator;
-exports.ɵa22 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵd21 = MAX_VALIDATOR;
+exports.ɵb21 = MIN_VALIDATOR;
+exports.ɵe21 = MaxValidator;
+exports.ɵc21 = MinValidator;
+exports.ɵa21 = MC_INPUT_VALUE_ACCESSOR;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;

@@ -11,7 +11,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { ThemePalette, mixinColor, mixinDisabled, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 var McToggleComponent_1;
 let nextUniqueId = 0;
@@ -191,7 +190,7 @@ let McToggleModule = class McToggleModule {
 };
 McToggleModule = __decorate([
     NgModule({
-        imports: [CommonModule, BrowserAnimationsModule, A11yModule, McCommonModule],
+        imports: [CommonModule, A11yModule, McCommonModule],
         exports: [McToggleComponent],
         declarations: [McToggleComponent]
     })

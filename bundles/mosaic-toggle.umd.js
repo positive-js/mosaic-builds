@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/animations'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/common'), require('@angular/platform-browser/animations')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/toggle', ['exports', '@angular/animations', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/common', '@angular/platform-browser/animations'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.toggle = {}),global.ng.animations,global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.mosaic.core,global.ng.common,global.ng.platformBrowser.animations));
-}(this, (function (exports,animations,core,forms,a11y,core$1,common,animations$1) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/animations'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/toggle', ['exports', '@angular/animations', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.toggle = {}),global.ng.animations,global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.mosaic.core,global.ng.common));
+}(this, (function (exports,animations,core,forms,a11y,core$1,common) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -253,7 +253,7 @@ var McToggleModule = /** @class */ (function () {
     }
     McToggleModule = __decorate([
         core.NgModule({
-            imports: [common.CommonModule, animations$1.BrowserAnimationsModule, a11y.A11yModule, core$1.McCommonModule],
+            imports: [common.CommonModule, a11y.A11yModule, core$1.McCommonModule],
             exports: [McToggleComponent],
             declarations: [McToggleComponent]
         })

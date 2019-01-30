@@ -21,22 +21,6 @@ export declare type McTabBodyPositionState = 'left' | 'center' | 'right' | 'left
  */
 export declare type McTabBodyOriginState = 'left' | 'right';
 /**
- * The portal host directive for the contents of the tab.
- * @docs-private
- */
-export declare class McTabBodyPortal extends CdkPortalOutlet implements OnInit, OnDestroy {
-    private host;
-    /** Subscription to events for when the tab body begins centering. */
-    private centeringSub;
-    /** Subscription to events for when the tab body finishes leaving from center position. */
-    private leavingSub;
-    constructor(componentFactoryResolver: ComponentFactoryResolver, viewContainerRef: ViewContainerRef, host: McTabBody);
-    /** Set initial visibility or set up subscription for changing visibility. */
-    ngOnInit(): void;
-    /** Clean up centering subscription. */
-    ngOnDestroy(): void;
-}
-/**
  * Wrapper for the contents of a tab.
  * @docs-private
  */
@@ -87,4 +71,20 @@ export declare class McTabBody implements OnInit, OnDestroy {
      * tab is becoming visible immediately after creation.
      */
     private computePositionFromOrigin;
+}
+/**
+ * The portal host directive for the contents of the tab.
+ * @docs-private
+ */
+export declare class McTabBodyPortal extends CdkPortalOutlet implements OnInit, OnDestroy {
+    private host;
+    /** Subscription to events for when the tab body begins centering. */
+    private centeringSub;
+    /** Subscription to events for when the tab body finishes leaving from center position. */
+    private leavingSub;
+    constructor(componentFactoryResolver: ComponentFactoryResolver, viewContainerRef: ViewContainerRef, host: McTabBody);
+    /** Set initial visibility or set up subscription for changing visibility. */
+    ngOnInit(): void;
+    /** Clean up centering subscription. */
+    ngOnDestroy(): void;
 }

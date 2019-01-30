@@ -17,7 +17,6 @@ import { coerceNumberProperty, coerceBooleanProperty } from '@ptsecurity/cdk/coe
 import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
 import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /** Decorates the `ng-template` tags and reads out the template from it. */
 var McTabContent = /** @class */ (function () {
@@ -164,53 +163,6 @@ var mcTabsAnimations = {
     ])
 };
 
-/**
- * The portal host directive for the contents of the tab.
- * @docs-private
- */
-var McTabBodyPortal = /** @class */ (function (_super) {
-    __extends(McTabBodyPortal, _super);
-    function McTabBodyPortal(componentFactoryResolver, viewContainerRef, host) {
-        var _this = _super.call(this, componentFactoryResolver, viewContainerRef) || this;
-        _this.host = host;
-        /** Subscription to events for when the tab body begins centering. */
-        _this.centeringSub = Subscription.EMPTY;
-        /** Subscription to events for when the tab body finishes leaving from center position. */
-        _this.leavingSub = Subscription.EMPTY;
-        return _this;
-    }
-    /** Set initial visibility or set up subscription for changing visibility. */
-    McTabBodyPortal.prototype.ngOnInit = function () {
-        var _this = this;
-        _super.prototype.ngOnInit.call(this);
-        this.centeringSub = this.host.beforeCentering
-            .pipe(startWith(this.host.isCenterPosition(this.host.bodyPosition)))
-            .subscribe(function (isCentering) {
-            if (isCentering && !_this.hasAttached()) {
-                _this.attach(_this.host.content);
-            }
-        });
-        this.leavingSub = this.host.afterLeavingCenter.subscribe(function () {
-            _this.detach();
-        });
-    };
-    /** Clean up centering subscription. */
-    McTabBodyPortal.prototype.ngOnDestroy = function () {
-        _super.prototype.ngOnDestroy.call(this);
-        this.centeringSub.unsubscribe();
-        this.leavingSub.unsubscribe();
-    };
-    McTabBodyPortal = __decorate([
-        Directive({
-            selector: '[mcTabBodyHost]'
-        }),
-        __param(2, Inject(forwardRef(function () { return McTabBody; }))),
-        __metadata("design:paramtypes", [ComponentFactoryResolver,
-            ViewContainerRef,
-            McTabBody])
-    ], McTabBodyPortal);
-    return McTabBodyPortal;
-}(CdkPortalOutlet));
 /**
  * Wrapper for the contents of a tab.
  * @docs-private
@@ -368,6 +320,53 @@ var McTabBody = /** @class */ (function () {
     ], McTabBody);
     return McTabBody;
 }());
+/**
+ * The portal host directive for the contents of the tab.
+ * @docs-private
+ */
+var McTabBodyPortal = /** @class */ (function (_super) {
+    __extends(McTabBodyPortal, _super);
+    function McTabBodyPortal(componentFactoryResolver, viewContainerRef, host) {
+        var _this = _super.call(this, componentFactoryResolver, viewContainerRef) || this;
+        _this.host = host;
+        /** Subscription to events for when the tab body begins centering. */
+        _this.centeringSub = Subscription.EMPTY;
+        /** Subscription to events for when the tab body finishes leaving from center position. */
+        _this.leavingSub = Subscription.EMPTY;
+        return _this;
+    }
+    /** Set initial visibility or set up subscription for changing visibility. */
+    McTabBodyPortal.prototype.ngOnInit = function () {
+        var _this = this;
+        _super.prototype.ngOnInit.call(this);
+        this.centeringSub = this.host.beforeCentering
+            .pipe(startWith(this.host.isCenterPosition(this.host.bodyPosition)))
+            .subscribe(function (isCentering) {
+            if (isCentering && !_this.hasAttached()) {
+                _this.attach(_this.host.content);
+            }
+        });
+        this.leavingSub = this.host.afterLeavingCenter.subscribe(function () {
+            _this.detach();
+        });
+    };
+    /** Clean up centering subscription. */
+    McTabBodyPortal.prototype.ngOnDestroy = function () {
+        _super.prototype.ngOnDestroy.call(this);
+        this.centeringSub.unsubscribe();
+        this.leavingSub.unsubscribe();
+    };
+    McTabBodyPortal = __decorate([
+        Directive({
+            selector: '[mcTabBodyHost]'
+        }),
+        __param(2, Inject(forwardRef(function () { return McTabBody; }))),
+        __metadata("design:paramtypes", [ComponentFactoryResolver,
+            ViewContainerRef,
+            McTabBody])
+    ], McTabBodyPortal);
+    return McTabBodyPortal;
+}(CdkPortalOutlet));
 
 // Boilerplate for applying mixins to McTabLabelWrapper.
 /** @docs-private */
@@ -1262,8 +1261,7 @@ var McTabsModule = /** @class */ (function () {
                 CommonModule,
                 McCommonModule,
                 PortalModule,
-                A11yModule,
-                BrowserAnimationsModule
+                A11yModule
             ],
             // Don't export all components because some are only to be used internally.
             exports: [
