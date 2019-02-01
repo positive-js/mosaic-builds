@@ -651,10 +651,10 @@ var McInputModule = /** @class */ (function () {
     return McInputModule;
 }());
 
-exports.ɵc22 = MAX_VALIDATOR;
-exports.ɵa22 = MIN_VALIDATOR;
-exports.ɵd22 = MaxValidator;
-exports.ɵb22 = MinValidator;
+exports.ɵc24 = MAX_VALIDATOR;
+exports.ɵa24 = MIN_VALIDATOR;
+exports.ɵd24 = MaxValidator;
+exports.ɵb24 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
