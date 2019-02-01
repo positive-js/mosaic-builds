@@ -19,16 +19,19 @@
       "from": "./checkbox"
     },
     {
-      "from": "./tooltip"
-    },
-    {
-      "from": "./dropdown"
-    },
-    {
       "from": "./toggle"
     },
     {
       "from": "./tabs"
+    },
+    {
+      "from": "./radio"
+    },
+    {
+      "from": "./tooltip"
+    },
+    {
+      "from": "./dropdown"
     },
     {
       "from": "./layout"
@@ -40,16 +43,16 @@
       "from": "./list"
     },
     {
-      "from": "./radio"
+      "from": "./icon"
     },
     {
-      "from": "./icon"
+      "from": "./progress-spinner"
     },
     {
       "from": "./progress-bar"
     },
     {
-      "from": "./progress-spinner"
+      "from": "./navbar"
     },
     {
       "from": "./tag"
@@ -58,28 +61,28 @@
       "from": "./splitter"
     },
     {
-      "from": "./form-field"
-    },
-    {
       "from": "./button"
     },
     {
-      "from": "./navbar"
-    },
-    {
-      "from": "./modal"
+      "from": "./form-field"
     },
     {
       "from": "./select"
     },
     {
-      "from": "./input"
-    },
-    {
       "from": "./textarea"
     },
     {
+      "from": "./modal"
+    },
+    {
+      "from": "./input"
+    },
+    {
       "from": "./timepicker"
+    },
+    {
+      "from": "./datepicker"
     },
     {
       "from": "./typings/index"

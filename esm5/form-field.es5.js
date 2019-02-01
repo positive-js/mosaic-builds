@@ -99,7 +99,7 @@ var McStepper = /** @class */ (function () {
     McStepper = __decorate([
         Component({
             selector: 'mc-stepper',
-            template: "\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-up mc-angle-L_16\"\n           (mousedown)=\"onStepUp($event)\">\n        </i>\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-down mc-angle-L_16\"\n           (mousedown)=\"onStepDown($event)\">\n        </i>\n    "
+            template: "\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-up mc-angle-down-L_16\"\n           (mousedown)=\"onStepUp($event)\">\n        </i>\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-down mc-angle-down-L_16\"\n           (mousedown)=\"onStepDown($event)\">\n        </i>\n    "
         })
     ], McStepper);
     return McStepper;

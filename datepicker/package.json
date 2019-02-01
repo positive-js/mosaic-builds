@@ -1,0 +1,8 @@
+{
+    "name": "@ptsecurity/mosaic/datepicker",
+    "typings": "../datepicker.d.ts",
+    "main": "../bundles/mosaic-datepicker.umd.js",
+    "module": "../esm5/datepicker.es5.js",
+    "es2015": "../esm2015/datepicker.js",
+    "sideEffects": false
+}

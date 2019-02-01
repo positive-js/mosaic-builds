@@ -651,11 +651,10 @@ var McInputModule = /** @class */ (function () {
     return McInputModule;
 }());
 
-exports.ɵd21 = MAX_VALIDATOR;
-exports.ɵb21 = MIN_VALIDATOR;
-exports.ɵe21 = MaxValidator;
-exports.ɵc21 = MinValidator;
-exports.ɵa21 = MC_INPUT_VALUE_ACCESSOR;
+exports.ɵc22 = MAX_VALIDATOR;
+exports.ɵa22 = MIN_VALIDATOR;
+exports.ɵd22 = MaxValidator;
+exports.ɵb22 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -666,6 +665,7 @@ exports.McInput = McInput;
 exports.McInputMono = McInputMono;
 exports.stepUp = stepUp;
 exports.stepDown = stepDown;
+exports.MC_INPUT_VALUE_ACCESSOR = MC_INPUT_VALUE_ACCESSOR;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('rxjs'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/timepicker', ['exports', '@angular/core', '@angular/forms', 'rxjs', '@ptsecurity/cdk/coercion', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.timepicker = {}),global.ng.core,global.ng.forms,global.rxjs,global.ng.cdk.coercion,global.ng.mosaic.core,global.ng.mosaic.formField,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform));
-}(this, (function (exports,core,forms,rxjs,coercion,core$1,formField,common,a11y,platform) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/input'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/timepicker', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/coercion', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/input', 'rxjs', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.timepicker = {}),global.ng.core,global.ng.forms,global.ng.cdk.coercion,global.ng.mosaic.core,global.ng.mosaic.formField,global.ng.mosaic.input,global.rxjs,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform));
+}(this, (function (exports,core,forms,coercion,core$1,formField,input,rxjs,common,a11y,platform) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -84,7 +84,6 @@ var uniqueComponentIdSuffix = 0;
 var validatorOnChange = rxjs.noop;
 var validator = function () { return null; };
 var ɵ0 = validator;
-var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
 var McTimepickerBase = /** @class */ (function () {
     function McTimepickerBase(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) {
         this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
@@ -694,7 +693,7 @@ var McTimepicker = /** @class */ (function (_super) {
         __param(1, core.Optional()), __param(1, core.Self()),
         __param(2, core.Optional()),
         __param(3, core.Optional()),
-        __param(5, core.Optional()), __param(5, core.Self()), __param(5, core.Inject(MC_INPUT_VALUE_ACCESSOR)),
+        __param(5, core.Optional()), __param(5, core.Self()), __param(5, core.Inject(input.MC_INPUT_VALUE_ACCESSOR)),
         __metadata("design:paramtypes", [core.ElementRef,
             forms.NgControl,
             forms.NgForm,
@@ -739,7 +738,6 @@ exports.ARROW_UP_KEYCODE = ARROW_UP_KEYCODE;
 exports.ARROW_DOWN_KEYCODE = ARROW_DOWN_KEYCODE;
 exports.ARROW_LEFT_KEYCODE = ARROW_LEFT_KEYCODE;
 exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
-exports.MC_INPUT_VALUE_ACCESSOR = MC_INPUT_VALUE_ACCESSOR;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
