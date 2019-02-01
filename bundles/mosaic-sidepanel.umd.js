@@ -587,13 +587,13 @@ var McSidepanelModule = /** @class */ (function () {
     return McSidepanelModule;
 }());
 
-exports.ɵb22 = mcSidepanelAnimations;
-exports.ɵa22 = mcSidepanelTransformAnimation;
-exports.ɵg22 = McSidepanelActions;
-exports.ɵe22 = McSidepanelBody;
-exports.ɵc22 = McSidepanelClose;
-exports.ɵf22 = McSidepanelFooter;
-exports.ɵd22 = McSidepanelHeader;
+exports.ɵb20 = mcSidepanelAnimations;
+exports.ɵa20 = mcSidepanelTransformAnimation;
+exports.ɵg20 = McSidepanelActions;
+exports.ɵe20 = McSidepanelBody;
+exports.ɵc20 = McSidepanelClose;
+exports.ɵf20 = McSidepanelFooter;
+exports.ɵd20 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
