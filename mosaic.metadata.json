@@ -43,10 +43,10 @@
       "from": "./list"
     },
     {
-      "from": "./icon"
+      "from": "./progress-spinner"
     },
     {
-      "from": "./progress-spinner"
+      "from": "./icon"
     },
     {
       "from": "./progress-bar"
@@ -58,6 +58,9 @@
       "from": "./tag"
     },
     {
+      "from": "./sidepanel"
+    },
+    {
       "from": "./splitter"
     },
     {
@@ -67,13 +70,13 @@
       "from": "./form-field"
     },
     {
-      "from": "./select"
+      "from": "./modal"
     },
     {
       "from": "./textarea"
     },
     {
-      "from": "./modal"
+      "from": "./select"
     },
     {
       "from": "./input"

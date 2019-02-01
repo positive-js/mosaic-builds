@@ -740,5 +740,5 @@ McModalModule = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { CssUnitPipe as ɵb23, McModalControlService as ɵa23, McModalComponent, McModalRef, McModalModule, McModalService };
+export { CssUnitPipe as ɵb25, McModalControlService as ɵa25, McModalComponent, McModalRef, McModalModule, McModalService };
 //# sourceMappingURL=modal.js.map

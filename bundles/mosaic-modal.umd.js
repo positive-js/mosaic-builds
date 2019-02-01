@@ -876,8 +876,8 @@ var McModalModule = /** @class */ (function () {
     return McModalModule;
 }());
 
-exports.ɵb23 = CssUnitPipe;
-exports.ɵa23 = McModalControlService;
+exports.ɵb25 = CssUnitPipe;
+exports.ɵa25 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;

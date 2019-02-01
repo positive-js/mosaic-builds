@@ -821,8 +821,16 @@ var fadeAnimation = animations.trigger('fadeAnimation', [
     animations.state('true', animations.style({ opacity: 1 })),
     animations.state('false', animations.style({ opacity: 0 })),
     animations.transition('* => true', animations.animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')),
-    animations.transition('* => void', animations.animate('150ms cubic-bezier(0.4, 0.0, 1, 1)')),
+    animations.transition('* => void', animations.animate('150ms cubic-bezier(0.4, 0.0, 1, 1)'))
 ]);
+
+
+(function (AnimationCurves) {
+    AnimationCurves["StandardCurve"] = "cubic-bezier(0.4,0.0,0.2,1)";
+    AnimationCurves["DecelerationCurve"] = "cubic-bezier(0.0,0.0,0.2,1)";
+    AnimationCurves["AccelerationCurve"] = "cubic-bezier(0.4,0.0,1,1)";
+    AnimationCurves["SharpCurve"] = "cubic-bezier(0.4,0.0,0.6,1)";
+})(exports.AnimationCurves || (exports.AnimationCurves = {}));
 
 var POSITION_MAP = {
     top: {

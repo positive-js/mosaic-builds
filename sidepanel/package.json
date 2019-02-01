@@ -1,0 +1,8 @@
+{
+    "name": "@ptsecurity/mosaic/sidepanel",
+    "typings": "../sidepanel.d.ts",
+    "main": "../bundles/mosaic-sidepanel.umd.js",
+    "module": "../esm5/sidepanel.es5.js",
+    "es2015": "../esm2015/sidepanel.js",
+    "sideEffects": false
+}

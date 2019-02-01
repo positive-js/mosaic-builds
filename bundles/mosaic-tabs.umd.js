@@ -1334,15 +1334,15 @@ var McTabsModule = /** @class */ (function () {
     return McTabsModule;
 }());
 
-exports.ɵd13 = McTabBase;
-exports.ɵe13 = mcTabMixinBase;
-exports.ɵa13 = McTabHeaderBase;
-exports.ɵb13 = McTabLabelWrapperBase;
-exports.ɵc13 = mcTabLabelWrapperMixinBase;
-exports.ɵh13 = McTabLinkBase;
-exports.ɵf13 = McTabNavBase;
-exports.ɵi13 = mcTabLinkMixinBase;
-exports.ɵg13 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;

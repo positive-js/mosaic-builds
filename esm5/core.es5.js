@@ -780,8 +780,16 @@ var fadeAnimation = trigger('fadeAnimation', [
     state('true', style({ opacity: 1 })),
     state('false', style({ opacity: 0 })),
     transition('* => true', animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')),
-    transition('* => void', animate('150ms cubic-bezier(0.4, 0.0, 1, 1)')),
+    transition('* => void', animate('150ms cubic-bezier(0.4, 0.0, 1, 1)'))
 ]);
+
+var AnimationCurves;
+(function (AnimationCurves) {
+    AnimationCurves["StandardCurve"] = "cubic-bezier(0.4,0.0,0.2,1)";
+    AnimationCurves["DecelerationCurve"] = "cubic-bezier(0.0,0.0,0.2,1)";
+    AnimationCurves["AccelerationCurve"] = "cubic-bezier(0.4,0.0,1,1)";
+    AnimationCurves["SharpCurve"] = "cubic-bezier(0.4,0.0,0.6,1)";
+})(AnimationCurves || (AnimationCurves = {}));
 
 var POSITION_MAP = {
     top: {
@@ -904,5 +912,5 @@ function _objectValues(object) {
  * Generated bundle index. Do not edit.
  */
 
-export { MC_SANITY_CHECKS_FACTORY as ɵa3, isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, _countGroupLabelsBeforeOption, _getOptionScrollPosition, McOptgroupBase, _McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, POSITION_MAP, DEFAULT_4_POSITIONS };
+export { MC_SANITY_CHECKS_FACTORY as ɵa3, isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, _countGroupLabelsBeforeOption, _getOptionScrollPosition, McOptgroupBase, _McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, AnimationCurves, POSITION_MAP, DEFAULT_4_POSITIONS };
 //# sourceMappingURL=core.es5.js.map

@@ -832,8 +832,16 @@ var fadeAnimation = animations.trigger('fadeAnimation', [
     animations.state('true', animations.style({ opacity: 1 })),
     animations.state('false', animations.style({ opacity: 0 })),
     animations.transition('* => true', animations.animate('150ms cubic-bezier(0.0, 0.0, 0.2, 1)')),
-    animations.transition('* => void', animations.animate('150ms cubic-bezier(0.4, 0.0, 1, 1)')),
+    animations.transition('* => void', animations.animate('150ms cubic-bezier(0.4, 0.0, 1, 1)'))
 ]);
+
+
+(function (AnimationCurves) {
+    AnimationCurves["StandardCurve"] = "cubic-bezier(0.4,0.0,0.2,1)";
+    AnimationCurves["DecelerationCurve"] = "cubic-bezier(0.0,0.0,0.2,1)";
+    AnimationCurves["AccelerationCurve"] = "cubic-bezier(0.4,0.0,1,1)";
+    AnimationCurves["SharpCurve"] = "cubic-bezier(0.4,0.0,0.6,1)";
+})(exports.AnimationCurves || (exports.AnimationCurves = {}));
 
 var POSITION_MAP = {
     top: {
@@ -14418,7 +14426,7 @@ exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
 exports.McCheckboxModule = McCheckboxModule;
 exports.MC_CHECKBOX_REQUIRED_VALIDATOR = MC_CHECKBOX_REQUIRED_VALIDATOR;
 exports.McCheckboxRequiredValidator = McCheckboxRequiredValidator;
-exports.ɵa27 = McMultiYearView;
+exports.ɵa28 = McMultiYearView;
 exports.McDatepickerModule = McDatepickerModule;
 exports.McCalendarHeader = McCalendarHeader;
 exports.McCalendar = McCalendar;
@@ -14480,10 +14488,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc24 = MAX_VALIDATOR;
-exports.ɵa24 = MIN_VALIDATOR;
-exports.ɵd24 = MaxValidator;
-exports.ɵb24 = MinValidator;
+exports.ɵc23 = MAX_VALIDATOR;
+exports.ɵa23 = MIN_VALIDATOR;
+exports.ɵd23 = MaxValidator;
+exports.ɵb23 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -14517,8 +14525,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb23 = CssUnitPipe;
-exports.ɵa23 = McModalControlService;
+exports.ɵb25 = CssUnitPipe;
+exports.ɵa25 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -14560,15 +14568,15 @@ exports.McTreeSelection = McTreeSelection;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd13 = McTabBase;
-exports.ɵe13 = mcTabMixinBase;
-exports.ɵa13 = McTabHeaderBase;
-exports.ɵb13 = McTabLabelWrapperBase;
-exports.ɵc13 = mcTabLabelWrapperMixinBase;
-exports.ɵh13 = McTabLinkBase;
-exports.ɵf13 = McTabNavBase;
-exports.ɵi13 = mcTabLinkMixinBase;
-exports.ɵg13 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -14616,7 +14624,7 @@ exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
 exports.ɵ0 = ɵ0;
 exports.ɵ1 = ɵ1;
-exports.ɵa25 = mcSelectAnimations;
+exports.ɵa26 = mcSelectAnimations;
 exports.McSelectModule = McSelectModule;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;
