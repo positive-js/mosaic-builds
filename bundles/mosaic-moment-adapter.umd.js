@@ -613,7 +613,7 @@ var MosaicDateModule = /** @class */ (function () {
 }());
 
 /** Current version of the Component Development Kit. */
-var VERSION = new core.Version('1.0.0-beta.1');
+var VERSION = new core.Version('1.0.0-beta.0');
 
 exports.VERSION = VERSION;
 exports.MosaicDateAdapter = MosaicDateAdapter;
