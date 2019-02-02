@@ -1501,7 +1501,7 @@ var McDatepickerContent = /** @class */ (function (_super) {
     ], McDatepickerContent);
     return McDatepickerContent;
 }(McDatepickerContentMixinBase));
-// TODO(mmalerba): We use a component instead of a directive here so the user can use implicit
+// TODO: We use a component instead of a directive here so the user can use implicit
 // template reference variables (e.g. #d vs #d="mcDatepicker"). We can change this to a directive
 // if angular adds support for `exportAs: '$implicit'` on directives.
 /** Component responsible for managing the datepicker popup/dialog. */
@@ -2400,5 +2400,5 @@ var McDatepickerModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { McMultiYearView as ɵa28, McDatepickerModule, McCalendarHeader, McCalendar, McCalendarCell, McCalendarBody, MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, McDatepickerContentBase, McDatepickerContentMixinBase, McDatepickerContent, McDatepicker, mcDatepickerAnimations, MC_DATEPICKER_VALUE_ACCESSOR, MC_DATEPICKER_VALIDATORS, McDatepickerInputEvent, McDatepickerInput, McDatepickerIntl, McDatepickerToggleIcon, McDatepickerToggle, McMonthView, McYearView };
+export { McMultiYearView as ɵa27, McDatepickerModule, McCalendarHeader, McCalendar, McCalendarCell, McCalendarBody, MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, McDatepickerContentBase, McDatepickerContentMixinBase, McDatepickerContent, McDatepicker, mcDatepickerAnimations, MC_DATEPICKER_VALUE_ACCESSOR, MC_DATEPICKER_VALIDATORS, McDatepickerInputEvent, McDatepickerInput, McDatepickerIntl, McDatepickerToggleIcon, McDatepickerToggle, McMonthView, McYearView };
 //# sourceMappingURL=datepicker.es5.js.map

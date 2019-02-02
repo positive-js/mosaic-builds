@@ -4174,7 +4174,7 @@ var McDatepickerContent = /** @class */ (function (_super) {
     ], McDatepickerContent);
     return McDatepickerContent;
 }(McDatepickerContentMixinBase));
-// TODO(mmalerba): We use a component instead of a directive here so the user can use implicit
+// TODO: We use a component instead of a directive here so the user can use implicit
 // template reference variables (e.g. #d vs #d="mcDatepicker"). We can change this to a directive
 // if angular adds support for `exportAs: '$implicit'` on directives.
 /** Component responsible for managing the datepicker popup/dialog. */
@@ -14377,7 +14377,7 @@ var McToolTipModule = /** @class */ (function () {
 var VERSION = new core.Version('1.0.0-beta.0');
 
 exports.VERSION = VERSION;
-exports.ɵa3 = MC_SANITY_CHECKS_FACTORY;
+exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
@@ -14426,7 +14426,7 @@ exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
 exports.McCheckboxModule = McCheckboxModule;
 exports.MC_CHECKBOX_REQUIRED_VALIDATOR = MC_CHECKBOX_REQUIRED_VALIDATOR;
 exports.McCheckboxRequiredValidator = McCheckboxRequiredValidator;
-exports.ɵa28 = McMultiYearView;
+exports.ɵa27 = McMultiYearView;
 exports.McDatepickerModule = McDatepickerModule;
 exports.McCalendarHeader = McCalendarHeader;
 exports.McCalendar = McCalendar;
@@ -14488,10 +14488,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc23 = MAX_VALIDATOR;
-exports.ɵa23 = MIN_VALIDATOR;
-exports.ɵd23 = MaxValidator;
-exports.ɵb23 = MinValidator;
+exports.ɵc22 = MAX_VALIDATOR;
+exports.ɵa22 = MIN_VALIDATOR;
+exports.ɵd22 = MaxValidator;
+exports.ɵb22 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -14525,8 +14525,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb25 = CssUnitPipe;
-exports.ɵa25 = McModalControlService;
+exports.ɵb24 = CssUnitPipe;
+exports.ɵa24 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -14568,15 +14568,15 @@ exports.McTreeSelection = McTreeSelection;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd16 = McTabBase;
-exports.ɵe16 = mcTabMixinBase;
-exports.ɵa16 = McTabHeaderBase;
-exports.ɵb16 = McTabLabelWrapperBase;
-exports.ɵc16 = mcTabLabelWrapperMixinBase;
-exports.ɵh16 = McTabLinkBase;
-exports.ɵf16 = McTabNavBase;
-exports.ɵi16 = mcTabLinkMixinBase;
-exports.ɵg16 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -14624,7 +14624,7 @@ exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
 exports.ɵ0 = ɵ0;
 exports.ɵ1 = ɵ1;
-exports.ɵa26 = mcSelectAnimations;
+exports.ɵa25 = mcSelectAnimations;
 exports.McSelectModule = McSelectModule;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;

@@ -949,7 +949,7 @@ function _objectValues(object) {
     return object == null ? [] : baseValues(object, Object.keys(object));
 }
 
-exports.ɵa3 = MC_SANITY_CHECKS_FACTORY;
+exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;

@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('messageformat'), require('moment'), require('@angular/core'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/cdk/platform')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic-moment-adapter', ['exports', 'messageformat', 'moment', '@angular/core', '@ptsecurity/cdk/datetime', '@ptsecurity/cdk/platform'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng['mosaic-moment-adapter'] = {}),global.messageformat,global.moment.moment,global.ng.core,global.ng.cdk.datetime,global.ng.cdk.platform));
-}(this, (function (exports,MessageFormat,_rollupMoment__default,core,datetime,platform) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/datetime'), require('moment')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic-moment-adapter', ['exports', '@angular/core', '@ptsecurity/cdk/datetime', 'moment'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng['mosaic-moment-adapter'] = {}),global.ng.core,global.ng.cdk.datetime,global.moment.moment));
+}(this, (function (exports,core,datetime,_rollupMoment__default) { 'use strict';
 
 var _rollupMoment__default__default = _rollupMoment__default['default'];
 
@@ -41,17 +41,6 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
 function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -66,171 +55,6 @@ function __param(paramIndex, decorator) {
 function __metadata(metadataKey, metadataValue) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
 }
-
-/** @docs-private */
-function createMissingDateForamtterError(provider) {
-    return Error("McDateAdapter: No provider found for " + provider + ". You must import one of the existing " +
-        "modules at your application root or provide a custom implementation or use exists ones.");
-}
-
-var moment = _rollupMoment__default__default || _rollupMoment__default;
-var McDateFormatter = /** @class */ (function () {
-    function McDateFormatter(config, locale) {
-        this.config = config;
-        this.locale = locale;
-        this.errorText = 'Invalid date';
-        this.configure();
-    }
-    Object.defineProperty(McDateFormatter.prototype, "moment", {
-        get: function () {
-            return this._moment;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    McDateFormatter.prototype.compileVariables = function (date, variables) {
-        var compiledVariables = {};
-        // tslint:disable-next-line:no-for-in
-        for (var key in variables) {
-            if (!variables.hasOwnProperty(key)) {
-                continue;
-            }
-            var value = variables[key];
-            compiledVariables[key] = date.format(value);
-        }
-        compiledVariables.CURRENT_YEAR = this.isCurrentYear(date);
-        return compiledVariables;
-    };
-    McDateFormatter.prototype.relativeDate = function (value, template) {
-        if (!this._moment.isMoment(value)) {
-            throw new Error(this.errorText);
-        }
-        var now = this.momentWithLocale();
-        var totalSeconds = now.diff(value, 'seconds');
-        var totalMinutes = now.diff(value, 'minutes');
-        var isToday = now.isSame(value, 'day');
-        var isYesterday = now.add(-1, 'days').isSame(value, 'day');
-        var templateVariables = __assign({}, this.config.variables, template.variables);
-        var variables = this.compileVariables(value, templateVariables);
-        var newTemplate;
-        if (totalSeconds <= 59) { // seconds ago
-            variables.SECONDS_PASSED = totalSeconds;
-            newTemplate = template.SECONDS_AGO;
-        }
-        else if (totalMinutes <= 59) { // minutes ago
-            variables.MINUTES_PASSED = totalMinutes;
-            newTemplate = template.MINUTES_AGO;
-        }
-        else if (isToday) { // today
-            newTemplate = template.TODAY;
-        }
-        else if (isYesterday) { // yesterday
-            newTemplate = template.YESTERDAY;
-        }
-        else { // before yesterday
-            newTemplate = template.BEFORE_YESTERDAY;
-        }
-        return this.messageformat.compile(newTemplate)(variables);
-    };
-    McDateFormatter.prototype.relativeShortDate = function (date) {
-        return this.relativeDate(date, this.config.relativeTemplates.short);
-    };
-    McDateFormatter.prototype.relativeLongDate = function (date) {
-        return this.relativeDate(date, this.config.relativeTemplates.long);
-    };
-    McDateFormatter.prototype.absoluteDate = function (date, params, datetime$$1) {
-        if (datetime$$1 === void 0) { datetime$$1 = false; }
-        if (!this._moment.isMoment(date)) {
-            throw new Error(this.errorText);
-        }
-        var variables = __assign({}, this.config.variables, params.variables);
-        var template = datetime$$1 ? params.DATETIME : params.DATE;
-        return this.messageformat.compile(template)(this.compileVariables(date, variables));
-    };
-    McDateFormatter.prototype.absoluteShortDate = function (date) {
-        return this.absoluteDate(date, this.config.absoluteTemplates.short);
-    };
-    McDateFormatter.prototype.absoluteShortDateTime = function (date) {
-        return this.absoluteDate(date, this.config.absoluteTemplates.short, true);
-    };
-    McDateFormatter.prototype.absoluteLongDate = function (date) {
-        return this.absoluteDate(date, this.config.absoluteTemplates.long);
-    };
-    McDateFormatter.prototype.absoluteLongDateTime = function (date) {
-        return this.absoluteDate(date, this.config.absoluteTemplates.long, true);
-    };
-    McDateFormatter.prototype.rangeDate = function (startDate, endDate, template) {
-        if (!this._moment.isMoment(startDate) || !this._moment.isMoment(endDate)) {
-            throw new Error(this.errorText);
-        }
-        var variables = __assign({}, this.config.variables, template.variables);
-        var sameMonth = this.isSame('month', startDate, endDate);
-        var startDateVariables = this.compileVariables(startDate, variables);
-        startDateVariables.SAME_MONTH = sameMonth;
-        var endDateVariables = this.compileVariables(endDate, variables);
-        endDateVariables.SAME_MONTH = sameMonth;
-        var params = __assign({}, variables, { START_DATE: this.messageformat.compile(template.START_DATE)(startDateVariables), END_DATE: this.messageformat.compile(template.END_DATE)(endDateVariables), SAME_MONTH: sameMonth });
-        return this.messageformat.compile(template.DATE)(params);
-    };
-    McDateFormatter.prototype.rangeDateTime = function (startDate, endDate, template) {
-        if (!this._moment.isMoment(startDate) || !this._moment.isMoment(endDate)) {
-            throw new Error(this.errorText);
-        }
-        var variables = __assign({}, this.config.variables, template.variables);
-        var sameMonth = this.isSame('month', startDate, endDate);
-        var sameDay = this.isSame('day', startDate, endDate);
-        var startDateVariables = this.compileVariables(startDate, variables);
-        startDateVariables.SAME_MONTH = sameMonth;
-        startDateVariables.SAME_DAY = sameDay;
-        var endDateVariables = this.compileVariables(endDate, variables);
-        endDateVariables.SAME_MONTH = sameMonth;
-        endDateVariables.SAME_DAY = sameDay;
-        var params = __assign({}, variables, { START_DATETIME: this.messageformat.compile(template.START_DATETIME)(startDateVariables), END_DATETIME: this.messageformat.compile(template.END_DATETIME)(endDateVariables), SAME_MONTH: sameMonth, SAME_DAY: sameDay });
-        return this.messageformat.compile(template.DATETIME)(params);
-    };
-    McDateFormatter.prototype.rangeShortDate = function (startDate, endDate) {
-        return this.rangeDate(startDate, endDate, this.config.rangeTemplates.short);
-    };
-    McDateFormatter.prototype.rangeShortDateTime = function (startDate, endDate) {
-        return this.rangeDateTime(startDate, endDate, this.config.rangeTemplates.short);
-    };
-    McDateFormatter.prototype.rangeLongDate = function (startDate, endDate) {
-        return this.rangeDate(startDate, endDate, this.config.rangeTemplates.long);
-    };
-    McDateFormatter.prototype.rangeLongDateTime = function (startDate, endDate) {
-        return this.rangeDateTime(startDate, endDate, this.config.rangeTemplates.long);
-    };
-    McDateFormatter.prototype.rangeMiddleDateTime = function (startDate, endDate) {
-        return this.rangeDateTime(startDate, endDate, this.config.rangeTemplates.middle);
-    };
-    McDateFormatter.prototype.isCurrentYear = function (value) {
-        return this.momentWithLocale().isSame(value, 'year') ? 'yes' : 'no';
-    };
-    McDateFormatter.prototype.isSame = function (unit, startDate, endDate) {
-        return startDate.isSame(endDate, unit) ? 'yes' : 'no';
-    };
-    McDateFormatter.prototype.momentWithLocale = function () {
-        return this.moment().locale(this.locale);
-    };
-    McDateFormatter.prototype.configure = function () {
-        this.configureMoment(this.locale);
-        this.configureTranslator(this.locale);
-    };
-    McDateFormatter.prototype.configureTranslator = function (locale) {
-        this.messageformat = new MessageFormat(locale);
-    };
-    McDateFormatter.prototype.configureMoment = function (locale) {
-        this._moment = moment;
-        var momentLocale = locale.substr(0, 2);
-        this._moment.updateLocale(momentLocale, {
-            monthsShort: {
-                format: this.config.monthNames.short,
-                standalone: this.config.monthNames.short
-            }
-        });
-    };
-    return McDateFormatter;
-}());
 
 var enUS = {
     variables: {
@@ -395,26 +219,19 @@ var ruRU = {
     }
 };
 
-var MC_DATE_FORMATTER_CONFIGS_SET = new core.InjectionToken('mc-date-formatter-configs-set');
-var McDateFormatterConfigSet = /** @class */ (function () {
-    function McDateFormatterConfigSet() {
-    }
-    return McDateFormatterConfigSet;
-}());
-var DEFAULT_MC_DATE_FORMATTER_CONFIGS_SET = {
-    get 'en-US'() {
-        return enUS;
-    },
-    get 'ru-RU'() {
-        return ruRU;
-    }
-};
-
-/** https://tools.ietf.org/html/rfc3339 */
-var ISO_8601_REGEX = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|(?:(?:\+|-)\d{2}:\d{2}))?)?$/;
-var ɵ0 = function (i) { return String(i + 1); };
-/** The default date names to use if Intl API is not available. */
-var DEFAULT_DATE_NAMES = range(31, ɵ0);
+var moment = _rollupMoment__default__default || _rollupMoment__default;
+/** InjectionToken for moment date adapter to configure options. */
+var MC_MOMENT_DATE_ADAPTER_OPTIONS = new core.InjectionToken('MC_MOMENT_DATE_ADAPTER_OPTIONS', {
+    providedIn: 'root',
+    factory: MC_MOMENT_DATE_ADAPTER_OPTIONS_FACTORY
+});
+/** @docs-private */
+// tslint:disable:naming-convention
+function MC_MOMENT_DATE_ADAPTER_OPTIONS_FACTORY() {
+    return {
+        useUtc: false
+    };
+}
 /** Creates an array and fills it with values. */
 function range(length, valueFunction) {
     var valuesArray = Array(length);
@@ -423,167 +240,175 @@ function range(length, valueFunction) {
     }
     return valuesArray;
 }
-var MosaicDateAdapter = /** @class */ (function (_super) {
-    __extends(MosaicDateAdapter, _super);
-    function MosaicDateAdapter(mcDateLocale, formatterConfigsSet) {
+var MomentDateAdapter = /** @class */ (function (_super) {
+    __extends(MomentDateAdapter, _super);
+    function MomentDateAdapter(dateLocale, options) {
         var _this = _super.call(this) || this;
-        _this.formatterConfigsSet = formatterConfigsSet;
-        _super.prototype.setLocale.call(_this, mcDateLocale);
-        if (!_this.formatterConfigsSet) {
-            throw createMissingDateForamtterError('MC_DATE_FORMATTER_CONFIGS_SET');
-        }
-        var formatter = new McDateFormatter(_this.formatterConfig, _this.locale);
-        _this.moment = formatter.moment;
+        _this.options = options;
+        _this.setLocale(dateLocale || moment.locale());
         return _this;
     }
-    Object.defineProperty(MosaicDateAdapter.prototype, "formatterConfig", {
-        get: function () {
-            var config = this.formatterConfigsSet[this.locale];
-            if (!config) {
-                throw Error("There is no formatter config for locale: " + this.locale);
-            }
-            return config;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    MosaicDateAdapter.prototype.getYear = function (date) {
-        return date.getFullYear();
-    };
-    MosaicDateAdapter.prototype.getMonth = function (date) {
-        return date.getMonth();
-    };
-    MosaicDateAdapter.prototype.getDate = function (date) {
-        return date.getDate();
-    };
-    MosaicDateAdapter.prototype.getDayOfWeek = function (date) {
-        return date.getDay();
-    };
-    MosaicDateAdapter.prototype.getMonthNames = function (style) {
-        return this.formatterConfig.monthNames[style];
-    };
-    MosaicDateAdapter.prototype.getDateNames = function () {
-        return DEFAULT_DATE_NAMES;
-    };
-    MosaicDateAdapter.prototype.getDayOfWeekNames = function (style) {
-        return this.formatterConfig.dayOfWeekNames[style];
-    };
-    MosaicDateAdapter.prototype.getYearName = function (date) {
-        return String(this.getYear(date));
-    };
-    MosaicDateAdapter.prototype.getFirstDayOfWeek = function () {
-        switch (this.locale) {
-            case 'ru-RU':
-                return 1;
-            case 'en-US':
-                return 0;
-            default:
-                return 1;
+    MomentDateAdapter.prototype.setLocale = function (locale) {
+        var _this = this;
+        _super.prototype.setLocale.call(this, locale);
+        var momentLocaleData = moment.localeData(locale);
+        // This is our customs translations
+        var i18nLocals = ['en', 'ru'];
+        if (i18nLocals.indexOf(locale) !== -1) {
+            var formatterConfig = locale === 'en' ? enUS : ruRU;
+            momentLocaleData = moment.updateLocale(locale, {
+                monthsShort: {
+                    format: formatterConfig.monthNames.short,
+                    standalone: formatterConfig.monthNames.short
+                },
+                weekdaysShort: formatterConfig.dayOfWeekNames.short,
+                weekdays: formatterConfig.dayOfWeekNames.long
+            });
         }
+        this.localeData = {
+            firstDayOfWeek: momentLocaleData.firstDayOfWeek(),
+            longMonths: momentLocaleData.months(),
+            shortMonths: momentLocaleData.monthsShort(),
+            dates: range(31, function (i) { return _this.createDate(2017, 0, i + 1).format('D'); }),
+            longDaysOfWeek: momentLocaleData.weekdays(),
+            shortDaysOfWeek: momentLocaleData.weekdaysShort(),
+            narrowDaysOfWeek: momentLocaleData.weekdaysMin()
+        };
     };
-    MosaicDateAdapter.prototype.getNumDaysInMonth = function (date) {
-        return this.getDate(this.createDateWithOverflow(this.getYear(date), this.getMonth(date) + 1, 0));
+    MomentDateAdapter.prototype.getYear = function (date) {
+        return this.clone(date).year();
     };
-    MosaicDateAdapter.prototype.clone = function (date) {
-        return new Date(date.getTime());
+    MomentDateAdapter.prototype.getMonth = function (date) {
+        return this.clone(date).month();
     };
-    MosaicDateAdapter.prototype.createDate = function (year, month, date) {
+    MomentDateAdapter.prototype.getDate = function (date) {
+        return this.clone(date).date();
+    };
+    MomentDateAdapter.prototype.getDayOfWeek = function (date) {
+        return this.clone(date).day();
+    };
+    MomentDateAdapter.prototype.getMonthNames = function (style) {
+        // Moment.js doesn't support narrow month names
+        return style === 'long' ? this.localeData.longMonths : this.localeData.shortMonths;
+    };
+    MomentDateAdapter.prototype.getDateNames = function () {
+        return this.localeData.dates;
+    };
+    MomentDateAdapter.prototype.getDayOfWeekNames = function (style) {
+        if (style === 'long') {
+            return this.localeData.longDaysOfWeek;
+        }
+        if (style === 'short') {
+            return this.localeData.shortDaysOfWeek;
+        }
+        return this.localeData.narrowDaysOfWeek;
+    };
+    MomentDateAdapter.prototype.getYearName = function (date) {
+        return this.clone(date).format('YYYY');
+    };
+    MomentDateAdapter.prototype.getFirstDayOfWeek = function () {
+        return this.localeData.firstDayOfWeek;
+    };
+    MomentDateAdapter.prototype.getNumDaysInMonth = function (date) {
+        return this.clone(date).daysInMonth();
+    };
+    MomentDateAdapter.prototype.clone = function (date) {
+        return date.clone().locale(this.locale);
+    };
+    MomentDateAdapter.prototype.createDate = function (year, month, date) {
+        // Moment.js will create an invalid date if any of the components are out of bounds, but we
+        // explicitly check each case so we can throw more descriptive errors.
         if (month < 0 || month > 11) {
             throw Error("Invalid month index \"" + month + "\". Month index has to be between 0 and 11.");
         }
         if (date < 1) {
             throw Error("Invalid date \"" + date + "\". Date has to be greater than 0.");
         }
-        var result = this.createDateWithOverflow(year, month, date);
-        if (result.getMonth() !== month) {
+        var result = this.createMoment({ year: year, month: month, date: date }).locale(this.locale);
+        // If the result isn't valid, the date must have been out of bounds for this month.
+        if (!result.isValid()) {
             throw Error("Invalid date \"" + date + "\" for month with index \"" + month + "\".");
         }
         return result;
     };
-    MosaicDateAdapter.prototype.today = function () {
-        return new Date();
+    MomentDateAdapter.prototype.today = function () {
+        return this.createMoment().locale(this.locale);
     };
-    MosaicDateAdapter.prototype.parse = function (value, parseFormat) {
-        if (value && typeof value === 'string') {
-            return this.moment(value, parseFormat).toDate();
+    MomentDateAdapter.prototype.parse = function (value, parseFormat) {
+        // tslint:disable:triple-equals
+        if (value && typeof value == 'string') {
+            return this.createMoment(value, parseFormat, this.locale);
         }
-        return value ? this.moment(value).toDate() : null;
+        return value ? this.createMoment(value).locale(this.locale) : null;
     };
-    MosaicDateAdapter.prototype.format = function (date, displayFormat) {
+    MomentDateAdapter.prototype.format = function (date, displayFormat) {
+        // tslint:disable:no-parameter-reassignment
+        date = this.clone(date);
         if (!this.isValid(date)) {
-            throw Error('MosaicDateAdapter: Cannot format invalid date.');
+            throw Error('MomentDateAdapter: Cannot format invalid date.');
         }
-        return this.moment(date).format(displayFormat);
+        return date.format(displayFormat);
     };
-    MosaicDateAdapter.prototype.addCalendarYears = function (date, years) {
-        return this.addCalendarMonths(date, years * 12);
+    MomentDateAdapter.prototype.addCalendarYears = function (date, years) {
+        return this.clone(date).add({ years: years });
     };
-    MosaicDateAdapter.prototype.addCalendarMonths = function (date, months) {
-        var newDate = this.createDateWithOverflow(this.getYear(date), this.getMonth(date) + months, this.getDate(date));
-        if (this.getMonth(newDate) !== ((this.getMonth(date) + months) % 12 + 12) % 12) {
-            newDate = this.createDateWithOverflow(this.getYear(newDate), this.getMonth(newDate), 0);
-        }
-        return newDate;
+    MomentDateAdapter.prototype.addCalendarMonths = function (date, months) {
+        return this.clone(date).add({ months: months });
     };
-    MosaicDateAdapter.prototype.addCalendarDays = function (date, days) {
-        return this.createDateWithOverflow(this.getYear(date), this.getMonth(date), this.getDate(date) + days);
+    MomentDateAdapter.prototype.addCalendarDays = function (date, days) {
+        return this.clone(date).add({ days: days });
     };
-    MosaicDateAdapter.prototype.toIso8601 = function (date) {
-        return [
-            date.getUTCFullYear(),
-            this.toDigit(date.getUTCMonth() + 1),
-            this.toDigit(date.getUTCDate())
-        ].join('-');
+    MomentDateAdapter.prototype.toIso8601 = function (date) {
+        return this.clone(date).format();
     };
     /** https://www.ietf.org/rfc/rfc3339.txt */
-    MosaicDateAdapter.prototype.deserialize = function (value) {
+    MomentDateAdapter.prototype.deserialize = function (value) {
+        var date;
+        if (value instanceof Date) {
+            date = this.createMoment(value).locale(this.locale);
+        }
+        else if (this.isDateInstance(value)) {
+            // Note: assumes that cloning also sets the correct locale.
+            return this.clone(value);
+        }
         if (typeof value === 'string') {
             if (!value) {
                 return null;
             }
-            // The `Date` constructor accepts formats other than ISO 8601, so we need to make sure the
-            // string is the right format first.
-            if (ISO_8601_REGEX.test(value)) {
-                var date = new Date(value);
-                if (this.isValid(date)) {
-                    return date;
-                }
-            }
+            date = this.createMoment(value, moment.ISO_8601).locale(this.locale);
+        }
+        if (date && this.isValid(date)) {
+            return this.createMoment(date).locale(this.locale);
         }
         return _super.prototype.deserialize.call(this, value);
     };
-    MosaicDateAdapter.prototype.isDateInstance = function (obj) {
-        return obj instanceof Date;
+    MomentDateAdapter.prototype.isDateInstance = function (obj) {
+        return moment.isMoment(obj);
     };
-    MosaicDateAdapter.prototype.isValid = function (date) {
-        return !isNaN(date.getTime());
+    MomentDateAdapter.prototype.isValid = function (date) {
+        return this.clone(date).isValid();
     };
-    MosaicDateAdapter.prototype.invalid = function () {
-        return new Date(NaN);
+    MomentDateAdapter.prototype.invalid = function () {
+        return moment.invalid();
     };
-    /** Creates a date but allows the month and date to overflow. */
-    MosaicDateAdapter.prototype.createDateWithOverflow = function (year, month, date) {
-        var result = new Date(year, month, date);
-        // We need to correct for the fact that JS native Date treats years in range [0, 99] as
-        // abbreviations for 19xx.
-        if (year >= 0 && year < 100) {
-            result.setFullYear(this.getYear(result) - 1900);
+    /** Creates a Moment instance while respecting the current UTC settings. */
+    MomentDateAdapter.prototype.createMoment = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
         }
-        return result;
+        return (this.options && this.options.useUtc) ? moment.utc.apply(moment, args) : moment.apply(void 0, args);
     };
-    MosaicDateAdapter.prototype.toDigit = function (n) {
-        return ("00" + n).slice(-2);
-    };
-    MosaicDateAdapter = __decorate([
+    MomentDateAdapter = __decorate([
         core.Injectable(),
         __param(0, core.Optional()), __param(0, core.Inject(datetime.MC_DATE_LOCALE)),
-        __param(1, core.Optional()), __param(1, core.Inject(MC_DATE_FORMATTER_CONFIGS_SET)),
-        __metadata("design:paramtypes", [String, McDateFormatterConfigSet])
-    ], MosaicDateAdapter);
-    return MosaicDateAdapter;
+        __param(1, core.Optional()), __param(1, core.Inject(MC_MOMENT_DATE_ADAPTER_OPTIONS)),
+        __metadata("design:paramtypes", [String, Object])
+    ], MomentDateAdapter);
+    return MomentDateAdapter;
 }(datetime.DateAdapter));
 
-var MC_MOSAIC_DATE_FORMATS = {
+var MC_MOMENT_DATE_FORMATS = {
     parse: {
         dateInput: 'L'
     },
@@ -595,36 +420,44 @@ var MC_MOSAIC_DATE_FORMATS = {
     }
 };
 
-var ɵ0$1 = DEFAULT_MC_DATE_FORMATTER_CONFIGS_SET, ɵ1 = MC_MOSAIC_DATE_FORMATS;
-var MosaicDateModule = /** @class */ (function () {
-    function MosaicDateModule() {
+var MomentDateModule = /** @class */ (function () {
+    function MomentDateModule() {
     }
-    MosaicDateModule = __decorate([
+    MomentDateModule = __decorate([
         core.NgModule({
-            imports: [platform.PlatformModule],
             providers: [
-                { provide: datetime.DateAdapter, useClass: MosaicDateAdapter },
-                { provide: MC_DATE_FORMATTER_CONFIGS_SET, useValue: ɵ0$1 },
-                { provide: datetime.MC_DATE_FORMATS, useValue: ɵ1 }
+                {
+                    provide: datetime.DateAdapter,
+                    useClass: MomentDateAdapter,
+                    deps: [datetime.MC_DATE_LOCALE, MC_MOMENT_DATE_ADAPTER_OPTIONS]
+                }
             ]
         })
-    ], MosaicDateModule);
-    return MosaicDateModule;
+    ], MomentDateModule);
+    return MomentDateModule;
+}());
+var ɵ0 = MC_MOMENT_DATE_FORMATS;
+var McMomentDateModule = /** @class */ (function () {
+    function McMomentDateModule() {
+    }
+    McMomentDateModule = __decorate([
+        core.NgModule({
+            imports: [MomentDateModule],
+            providers: [{
+                    provide: datetime.MC_DATE_FORMATS, useValue: ɵ0
+                }]
+        })
+    ], McMomentDateModule);
+    return McMomentDateModule;
 }());
 
-/** Current version of the Component Development Kit. */
-var VERSION = new core.Version('1.0.0-beta.0');
-
-exports.VERSION = VERSION;
-exports.MosaicDateAdapter = MosaicDateAdapter;
+exports.MomentDateModule = MomentDateModule;
+exports.McMomentDateModule = McMomentDateModule;
 exports.ɵ0 = ɵ0;
-exports.MosaicDateModule = MosaicDateModule;
-exports.ɵ1 = ɵ1;
-exports.MC_MOSAIC_DATE_FORMATS = MC_MOSAIC_DATE_FORMATS;
-exports.McDateFormatter = McDateFormatter;
-exports.MC_DATE_FORMATTER_CONFIGS_SET = MC_DATE_FORMATTER_CONFIGS_SET;
-exports.McDateFormatterConfigSet = McDateFormatterConfigSet;
-exports.DEFAULT_MC_DATE_FORMATTER_CONFIGS_SET = DEFAULT_MC_DATE_FORMATTER_CONFIGS_SET;
+exports.MC_MOMENT_DATE_ADAPTER_OPTIONS = MC_MOMENT_DATE_ADAPTER_OPTIONS;
+exports.MC_MOMENT_DATE_ADAPTER_OPTIONS_FACTORY = MC_MOMENT_DATE_ADAPTER_OPTIONS_FACTORY;
+exports.MomentDateAdapter = MomentDateAdapter;
+exports.MC_MOMENT_DATE_FORMATS = MC_MOMENT_DATE_FORMATS;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
