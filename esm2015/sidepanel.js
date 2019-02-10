@@ -524,5 +524,5 @@ McSidepanelModule = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { mcSidepanelAnimations as ɵb21, mcSidepanelTransformAnimation as ɵa21, McSidepanelActions as ɵg21, McSidepanelBody as ɵe21, McSidepanelClose as ɵc21, McSidepanelFooter as ɵf21, McSidepanelHeader as ɵd21, McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef };
+export { mcSidepanelAnimations as ɵb20, mcSidepanelTransformAnimation as ɵa20, McSidepanelActions as ɵg20, McSidepanelBody as ɵe20, McSidepanelClose as ɵc20, McSidepanelFooter as ɵf20, McSidepanelHeader as ɵd20, McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef };
 //# sourceMappingURL=sidepanel.js.map
