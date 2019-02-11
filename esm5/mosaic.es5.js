@@ -34,7 +34,7 @@ export * from '@ptsecurity/mosaic/splitter';
 export * from '@ptsecurity/mosaic/toggle';
 export * from '@ptsecurity/mosaic/tooltip';
 
-var VERSION = new Version('1.0.0-beta.0');
+var VERSION = new Version('1.0.0-beta.1');
 
 /**
  * Generated bundle index. Do not edit.
