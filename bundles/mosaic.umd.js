@@ -11160,11 +11160,23 @@ var ARROW_LEFT_KEYCODE = 'ArrowLeft';
 var ARROW_RIGHT_KEYCODE = 'ArrowRight';
 
 var uniqueComponentIdSuffix = 0;
-var validatorOnChange = rxjs.noop;
-var validator = function () { return null; };
-var ɵ0 = validator;
+var formValidators = new WeakMap();
+var formValidatorOnChangeRegistrators = new WeakMap();
+var validatorOnChange = function (c) {
+    var validatorOnChangeHandler = formValidatorOnChangeRegistrators.get(c);
+    if (validatorOnChangeHandler !== undefined) {
+        validatorOnChangeHandler();
+    }
+};
+var ɵ0 = validatorOnChange;
 var McTimepickerBase = /** @class */ (function () {
-    function McTimepickerBase(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) {
+    function McTimepickerBase(
+    // tslint:disable-next-line naming-convention
+    _defaultErrorStateMatcher, 
+    // tslint:disable-next-line naming-convention
+    _parentForm, 
+    // tslint:disable-next-line naming-convention
+    _parentFormGroup, ngControl) {
         this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
         this._parentForm = _parentForm;
         this._parentFormGroup = _parentFormGroup;
@@ -11175,12 +11187,29 @@ var McTimepickerBase = /** @class */ (function () {
 // tslint:disable-next-line naming-convention
 var McTimepickerMixinBase = mixinErrorState(McTimepickerBase);
 var ɵ1 = {
-    validate: function (c) { return validator ? validator(c) : null; },
-    registerOnValidatorChange: function (fn) { validatorOnChange = fn; }
+    validate: function (c) {
+        // TODO This is `workaround` to bind singleton-like Validator implementation to
+        // context of each validated component. This MUST be realized in proper way!
+        if (this.__validatorOnChangeHandler !== undefined) {
+            formValidatorOnChangeRegistrators.set(c, this.__validatorOnChangeHandler);
+            this.__validatorOnChangeHandler = undefined;
+        }
+        var validator = formValidators.get(c);
+        return validator ? validator(c) : null;
+    },
+    registerOnValidatorChange: function (fn) {
+        this.__validatorOnChangeHandler = fn;
+    }
 };
 var McTimepicker = /** @class */ (function (_super) {
     __extends(McTimepicker, _super);
-    function McTimepicker(elementRef, ngControl, _parentForm, _parentFormGroup, _defaultErrorStateMatcher, inputValueAccessor, renderer) {
+    function McTimepicker(elementRef, ngControl, 
+    // tslint:disable-next-line naming-convention
+    _parentForm, 
+    // tslint:disable-next-line naming-convention
+    _parentFormGroup, 
+    // tslint:disable-next-line naming-convention
+    _defaultErrorStateMatcher, inputValueAccessor, renderer) {
         var _this = _super.call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) || this;
         _this.elementRef = elementRef;
         _this.ngControl = ngControl;
@@ -11216,11 +11245,11 @@ var McTimepicker = /** @class */ (function (_super) {
             _this.ngControl.valueAccessor = _this;
         }
         // Substitute initial empty validator with validator linked to directive object instance (workaround)
-        validator = forms.Validators.compose([
+        formValidators.set(_this.ngControl.control, forms.Validators.compose([
             function () { return _this.parseValidator(); },
             function () { return _this.minTimeValidator(); },
             function () { return _this.maxTimeValidator(); }
-        ]);
+        ]));
         return _this;
     }
     McTimepicker_1 = McTimepicker;
@@ -11281,7 +11310,7 @@ var McTimepicker = /** @class */ (function (_super) {
                 .keys(exports.TimeFormats)
                 .map(function (timeFormatKey) { return exports.TimeFormats[timeFormatKey]; })
                 .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
-            validatorOnChange();
+            validatorOnChange(this.ngControl.control);
             this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
         },
         enumerable: true,
@@ -11292,7 +11321,7 @@ var McTimepicker = /** @class */ (function (_super) {
         set: function (minValue) {
             this._minTime = minValue;
             this.minDateTime = minValue !== null ? this.getDateFromTimeString(minValue) : undefined;
-            validatorOnChange();
+            validatorOnChange(this.ngControl.control);
         },
         enumerable: true,
         configurable: true
@@ -11302,7 +11331,7 @@ var McTimepicker = /** @class */ (function (_super) {
         set: function (maxValue) {
             this._maxTime = maxValue;
             this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
-            validatorOnChange();
+            validatorOnChange(this.ngControl.control);
         },
         enumerable: true,
         configurable: true
@@ -15010,10 +15039,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc23 = MAX_VALIDATOR;
-exports.ɵa23 = MIN_VALIDATOR;
-exports.ɵd23 = MaxValidator;
-exports.ɵb23 = MinValidator;
+exports.ɵc22 = MAX_VALIDATOR;
+exports.ɵa22 = MIN_VALIDATOR;
+exports.ɵd22 = MaxValidator;
+exports.ɵb22 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;

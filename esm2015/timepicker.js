@@ -46,11 +46,23 @@ const ARROW_RIGHT_KEYCODE = 'ArrowRight';
 
 var McTimepicker_1;
 let uniqueComponentIdSuffix = 0;
-let validatorOnChange = noop;
-let validator = () => null;
-const ɵ0 = validator;
+const formValidators = new WeakMap();
+const formValidatorOnChangeRegistrators = new WeakMap();
+const validatorOnChange = (c) => {
+    const validatorOnChangeHandler = formValidatorOnChangeRegistrators.get(c);
+    if (validatorOnChangeHandler !== undefined) {
+        validatorOnChangeHandler();
+    }
+};
+const ɵ0 = validatorOnChange;
 class McTimepickerBase {
-    constructor(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) {
+    constructor(
+    // tslint:disable-next-line naming-convention
+    _defaultErrorStateMatcher, 
+    // tslint:disable-next-line naming-convention
+    _parentForm, 
+    // tslint:disable-next-line naming-convention
+    _parentFormGroup, ngControl) {
         this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
         this._parentForm = _parentForm;
         this._parentFormGroup = _parentFormGroup;
@@ -60,11 +72,28 @@ class McTimepickerBase {
 // tslint:disable-next-line naming-convention
 const McTimepickerMixinBase = mixinErrorState(McTimepickerBase);
 const ɵ1 = {
-    validate(c) { return validator ? validator(c) : null; },
-    registerOnValidatorChange(fn) { validatorOnChange = fn; }
+    validate(c) {
+        // TODO This is `workaround` to bind singleton-like Validator implementation to
+        // context of each validated component. This MUST be realized in proper way!
+        if (this.__validatorOnChangeHandler !== undefined) {
+            formValidatorOnChangeRegistrators.set(c, this.__validatorOnChangeHandler);
+            this.__validatorOnChangeHandler = undefined;
+        }
+        const validator = formValidators.get(c);
+        return validator ? validator(c) : null;
+    },
+    registerOnValidatorChange(fn) {
+        this.__validatorOnChangeHandler = fn;
+    }
 };
 let McTimepicker = McTimepicker_1 = class McTimepicker extends McTimepickerMixinBase {
-    constructor(elementRef, ngControl, _parentForm, _parentFormGroup, _defaultErrorStateMatcher, inputValueAccessor, renderer) {
+    constructor(elementRef, ngControl, 
+    // tslint:disable-next-line naming-convention
+    _parentForm, 
+    // tslint:disable-next-line naming-convention
+    _parentFormGroup, 
+    // tslint:disable-next-line naming-convention
+    _defaultErrorStateMatcher, inputValueAccessor, renderer) {
         super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
         this.elementRef = elementRef;
         this.ngControl = ngControl;
@@ -100,11 +129,11 @@ let McTimepicker = McTimepicker_1 = class McTimepicker extends McTimepickerMixin
             this.ngControl.valueAccessor = this;
         }
         // Substitute initial empty validator with validator linked to directive object instance (workaround)
-        validator = Validators.compose([
+        formValidators.set(this.ngControl.control, Validators.compose([
             () => this.parseValidator(),
             () => this.minTimeValidator(),
             () => this.maxTimeValidator()
-        ]);
+        ]));
     }
     get disabled() {
         if (this.ngControl && this.ngControl.disabled !== null) {
@@ -146,20 +175,20 @@ let McTimepicker = McTimepicker_1 = class McTimepicker extends McTimepickerMixin
             .keys(TimeFormats)
             .map((timeFormatKey) => TimeFormats[timeFormatKey])
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
-        validatorOnChange();
+        validatorOnChange(this.ngControl.control);
         this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
     }
     get minTime() { return this._minTime; }
     set minTime(minValue) {
         this._minTime = minValue;
         this.minDateTime = minValue !== null ? this.getDateFromTimeString(minValue) : undefined;
-        validatorOnChange();
+        validatorOnChange(this.ngControl.control);
     }
     get maxTime() { return this._maxTime; }
     set maxTime(maxValue) {
         this._maxTime = maxValue;
         this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
-        validatorOnChange();
+        validatorOnChange(this.ngControl.control);
     }
     ngOnChanges() {
         this.stateChanges.next();
