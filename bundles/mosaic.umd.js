@@ -14925,7 +14925,7 @@ var McToolTipModule = /** @class */ (function () {
     return McToolTipModule;
 }());
 
-var VERSION = new core.Version('1.0.0-beta.1');
+var VERSION = new core.Version('1.0.0-beta.2');
 
 exports.VERSION = VERSION;
 exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
