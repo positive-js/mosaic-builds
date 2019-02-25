@@ -617,5 +617,5 @@ var McInputModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { MAX_VALIDATOR as ɵc23, MIN_VALIDATOR as ɵa23, MaxValidator as ɵd23, MinValidator as ɵb23, McInputModule, BIG_STEP, SMALL_STEP, McInputBase, _McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR };
+export { MAX_VALIDATOR as ɵc22, MIN_VALIDATOR as ɵa22, MaxValidator as ɵd22, MinValidator as ɵb22, McInputModule, BIG_STEP, SMALL_STEP, McInputBase, _McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR };
 //# sourceMappingURL=input.es5.js.map
