@@ -625,6 +625,7 @@ McTimepicker = McTimepicker_1 = __decorate([
             '[attr.min-time]': 'minTime',
             '[attr.max-time]': 'maxTime',
             '[attr.value]': 'value',
+            '[attr.aria-invalid]': 'errorState',
             '(blur)': 'onBlur()',
             '(focus)': 'focusChanged(true)',
             '(input)': 'onInput()',

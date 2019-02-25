@@ -268,6 +268,7 @@ var McTextarea = /** @class */ (function (_super) {
                 '[class.mc-textarea-resizable]': '!canGrow',
                 '[attr.id]': 'id',
                 '[attr.placeholder]': 'placeholder',
+                '[attr.aria-invalid]': 'errorState',
                 '[disabled]': 'disabled',
                 '[required]': 'required',
                 '(blur)': 'focusChanged(false)',

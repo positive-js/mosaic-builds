@@ -11100,6 +11100,7 @@ var McTextarea = /** @class */ (function (_super) {
                 '[class.mc-textarea-resizable]': '!canGrow',
                 '[attr.id]': 'id',
                 '[attr.placeholder]': 'placeholder',
+                '[attr.aria-invalid]': 'errorState',
                 '[disabled]': 'disabled',
                 '[required]': 'required',
                 '(blur)': 'focusChanged(false)',
@@ -11780,6 +11781,7 @@ var McTimepicker = /** @class */ (function (_super) {
                 '[attr.min-time]': 'minTime',
                 '[attr.max-time]': 'maxTime',
                 '[attr.value]': 'value',
+                '[attr.aria-invalid]': 'errorState',
                 '(blur)': 'onBlur()',
                 '(focus)': 'focusChanged(true)',
                 '(input)': 'onInput()',
@@ -15039,10 +15041,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc22 = MAX_VALIDATOR;
-exports.ɵa22 = MIN_VALIDATOR;
-exports.ɵd22 = MaxValidator;
-exports.ɵb22 = MinValidator;
+exports.ɵc23 = MAX_VALIDATOR;
+exports.ɵa23 = MIN_VALIDATOR;
+exports.ɵd23 = MaxValidator;
+exports.ɵb23 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -15119,15 +15121,15 @@ exports.McTreeSelection = McTreeSelection;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd14 = McTabBase;
-exports.ɵe14 = mcTabMixinBase;
-exports.ɵa14 = McTabHeaderBase;
-exports.ɵb14 = McTabLabelWrapperBase;
-exports.ɵc14 = mcTabLabelWrapperMixinBase;
-exports.ɵh14 = McTabLinkBase;
-exports.ɵf14 = McTabNavBase;
-exports.ɵi14 = mcTabLinkMixinBase;
-exports.ɵg14 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
