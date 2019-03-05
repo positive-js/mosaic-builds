@@ -56,16 +56,10 @@ const validatorOnChange = (c) => {
 };
 const ɵ0 = validatorOnChange;
 class McTimepickerBase {
-    constructor(
-    // tslint:disable-next-line naming-convention
-    _defaultErrorStateMatcher, 
-    // tslint:disable-next-line naming-convention
-    _parentForm, 
-    // tslint:disable-next-line naming-convention
-    _parentFormGroup, ngControl) {
-        this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
-        this._parentForm = _parentForm;
-        this._parentFormGroup = _parentFormGroup;
+    constructor(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
+        this.defaultErrorStateMatcher = defaultErrorStateMatcher;
+        this.parentForm = parentForm;
+        this.parentFormGroup = parentFormGroup;
         this.ngControl = ngControl;
     }
 }
@@ -87,14 +81,8 @@ const ɵ1 = {
     }
 };
 let McTimepicker = McTimepicker_1 = class McTimepicker extends McTimepickerMixinBase {
-    constructor(elementRef, ngControl, 
-    // tslint:disable-next-line naming-convention
-    _parentForm, 
-    // tslint:disable-next-line naming-convention
-    _parentFormGroup, 
-    // tslint:disable-next-line naming-convention
-    _defaultErrorStateMatcher, inputValueAccessor, renderer) {
-        super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
+    constructor(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer) {
+        super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         this.elementRef = elementRef;
         this.ngControl = ngControl;
         this.renderer = renderer;

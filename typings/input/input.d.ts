@@ -7,11 +7,11 @@ import { Subject } from 'rxjs';
 export declare const BIG_STEP = 10;
 export declare const SMALL_STEP = 1;
 export declare class McInputBase {
-    _defaultErrorStateMatcher: ErrorStateMatcher;
-    _parentForm: NgForm;
-    _parentFormGroup: FormGroupDirective;
+    defaultErrorStateMatcher: ErrorStateMatcher;
+    parentForm: NgForm;
+    parentFormGroup: FormGroupDirective;
     ngControl: NgControl;
-    constructor(_defaultErrorStateMatcher: ErrorStateMatcher, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, ngControl: NgControl);
+    constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
 export declare const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase;
 export declare class McNumberInput implements McFormFieldNumberControl<any> {
@@ -112,7 +112,7 @@ export declare class McInput extends _McInputMixinBase implements McFormFieldCon
     protected _type: string;
     protected _neverEmptyInputTypes: string[];
     private _inputValueAccessor;
-    constructor(_elementRef: ElementRef, ngControl: NgControl, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, _defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any);
+    constructor(_elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any);
     ngOnChanges(): void;
     ngOnDestroy(): void;
     ngDoCheck(): void;

@@ -74,10 +74,10 @@ const BIG_STEP = 10;
 const SMALL_STEP = 1;
 let nextUniqueId = 0;
 class McInputBase {
-    constructor(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) {
-        this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
-        this._parentForm = _parentForm;
-        this._parentFormGroup = _parentFormGroup;
+    constructor(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
+        this.defaultErrorStateMatcher = defaultErrorStateMatcher;
+        this.parentForm = parentForm;
+        this.parentFormGroup = parentFormGroup;
         this.ngControl = ngControl;
     }
 }
@@ -231,8 +231,8 @@ McNumberInput = McNumberInput_1 = __decorate([
         NgModel, String, String, String, String])
 ], McNumberInput);
 let McInput = McInput_1 = class McInput extends _McInputMixinBase {
-    constructor(_elementRef, ngControl, _parentForm, _parentFormGroup, _defaultErrorStateMatcher, inputValueAccessor) {
-        super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
+    constructor(_elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         this._elementRef = _elementRef;
         this.ngControl = ngControl;
         /**

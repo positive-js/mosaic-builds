@@ -111,10 +111,10 @@ var BIG_STEP = 10;
 var SMALL_STEP = 1;
 var nextUniqueId = 0;
 var McInputBase = /** @class */ (function () {
-    function McInputBase(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) {
-        this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
-        this._parentForm = _parentForm;
-        this._parentFormGroup = _parentFormGroup;
+    function McInputBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
+        this.defaultErrorStateMatcher = defaultErrorStateMatcher;
+        this.parentForm = parentForm;
+        this.parentFormGroup = parentFormGroup;
         this.ngControl = ngControl;
     }
     return McInputBase;
@@ -274,8 +274,8 @@ var McNumberInput = /** @class */ (function () {
 }());
 var McInput = /** @class */ (function (_super) {
     __extends(McInput, _super);
-    function McInput(_elementRef, ngControl, _parentForm, _parentFormGroup, _defaultErrorStateMatcher, inputValueAccessor) {
-        var _this = _super.call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) || this;
+    function McInput(_elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this._elementRef = _elementRef;
         _this.ngControl = ngControl;
         /**

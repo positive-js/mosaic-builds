@@ -91,16 +91,10 @@ var validatorOnChange = function (c) {
 };
 var ɵ0 = validatorOnChange;
 var McTimepickerBase = /** @class */ (function () {
-    function McTimepickerBase(
-    // tslint:disable-next-line naming-convention
-    _defaultErrorStateMatcher, 
-    // tslint:disable-next-line naming-convention
-    _parentForm, 
-    // tslint:disable-next-line naming-convention
-    _parentFormGroup, ngControl) {
-        this._defaultErrorStateMatcher = _defaultErrorStateMatcher;
-        this._parentForm = _parentForm;
-        this._parentFormGroup = _parentFormGroup;
+    function McTimepickerBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
+        this.defaultErrorStateMatcher = defaultErrorStateMatcher;
+        this.parentForm = parentForm;
+        this.parentFormGroup = parentFormGroup;
         this.ngControl = ngControl;
     }
     return McTimepickerBase;
@@ -124,14 +118,8 @@ var ɵ1 = {
 };
 var McTimepicker = /** @class */ (function (_super) {
     __extends(McTimepicker, _super);
-    function McTimepicker(elementRef, ngControl, 
-    // tslint:disable-next-line naming-convention
-    _parentForm, 
-    // tslint:disable-next-line naming-convention
-    _parentFormGroup, 
-    // tslint:disable-next-line naming-convention
-    _defaultErrorStateMatcher, inputValueAccessor, renderer) {
-        var _this = _super.call(this, _defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl) || this;
+    function McTimepicker(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer) {
+        var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this.elementRef = elementRef;
         _this.ngControl = ngControl;
         _this.renderer = renderer;

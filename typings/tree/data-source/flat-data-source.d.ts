@@ -41,7 +41,7 @@ export declare class McTreeFlattener<T, F> {
     isExpandable: (node: F) => boolean;
     getChildren: (node: T) => Observable<T[]>;
     constructor(transformFunction: (node: T, level: number) => F, getLevel: (node: F) => number, isExpandable: (node: F) => boolean, getChildren: (node: T) => Observable<T[]>);
-    _flattenNode(node: T, level: number, resultNodes: F[], parentMap: boolean[]): F[];
+    flattenNode(node: T, level: number, resultNodes: F[], parentMap: boolean[]): F[];
     /**
      * Flatten a list of node type T to flattened version of node F.
      * Please note that type T may be nested, and the length of `structuredData` may be different
@@ -64,10 +64,10 @@ export declare class McTreeFlattener<T, F> {
 export declare class McTreeFlatDataSource<T, F> extends DataSource<F> {
     private treeControl;
     private treeFlattener;
-    _flattenedData: BehaviorSubject<F[]>;
-    _expandedData: BehaviorSubject<F[]>;
-    _data: BehaviorSubject<T[]>;
+    flattenedData: BehaviorSubject<F[]>;
+    expandedData: BehaviorSubject<F[]>;
     data: T[];
+    private _data;
     constructor(treeControl: FlatTreeControl<F>, treeFlattener: McTreeFlattener<T, F>, initialData?: T[]);
     connect(collectionViewer: ICollectionViewer): Observable<F[]>;
     disconnect(): void;

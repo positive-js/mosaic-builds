@@ -1,0 +1,8 @@
+{
+    "name": "@ptsecurity/mosaic/tree-select",
+    "typings": "../tree-select.d.ts",
+    "main": "../bundles/mosaic-tree-select.umd.js",
+    "module": "../esm5/tree-select.es5.js",
+    "es2015": "../esm2015/tree-select.js",
+    "sideEffects": false
+}

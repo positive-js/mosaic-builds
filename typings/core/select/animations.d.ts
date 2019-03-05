@@ -1,9 +1,9 @@
 import { AnimationTriggerMetadata } from '@angular/animations';
 /**
- * The following are all the animations for the mat-select component, with each
+ * The following are all the animations for the mc-select component, with each
  * const containing the metadata for one animation.
  *
- * The values below match the implementation of the AngularJS Material mat-select animation.
+ * The values below match the implementation of the AngularJS Material mc-select animation.
  */
 export declare const mcSelectAnimations: {
     readonly transformPanel: AnimationTriggerMetadata;

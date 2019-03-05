@@ -7,11 +7,11 @@ export declare const MC_TEXTAREA_VALUE_ACCESSOR: InjectionToken<{
     value: any;
 }>;
 export declare class McTextareaBase {
-    _defaultErrorStateMatcher: ErrorStateMatcher;
-    _parentForm: NgForm;
-    _parentFormGroup: FormGroupDirective;
+    defaultErrorStateMatcher: ErrorStateMatcher;
+    parentForm: NgForm;
+    parentFormGroup: FormGroupDirective;
     ngControl: NgControl;
-    constructor(_defaultErrorStateMatcher: ErrorStateMatcher, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, ngControl: NgControl);
+    constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
 export declare const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBase;
 export declare class McTextarea extends McTextareaMixinBase implements McFormFieldControl<any>, OnInit, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState {
@@ -71,7 +71,7 @@ export declare class McTextarea extends McTextareaMixinBase implements McFormFie
     private lineHeight;
     private freeRowsHeight;
     private minHeight;
-    constructor(elementRef: ElementRef, ngControl: NgControl, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, _defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, ngZone: NgZone);
+    constructor(elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, ngZone: NgZone);
     ngOnInit(): void;
     ngOnChanges(): void;
     ngOnDestroy(): void;

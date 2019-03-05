@@ -1,5 +1,5 @@
 import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 /**
  * Data source for nested tree.
  *
@@ -7,11 +7,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
  * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
  */
 export declare class McTreeNestedDataSource<T> extends DataSource<T> {
-    _data: BehaviorSubject<T[]>;
-    /**
-     * Data for the nested tree
-     */
     data: T[];
+    private _data;
     connect(collectionViewer: ICollectionViewer): Observable<T[]>;
     disconnect(): void;
 }

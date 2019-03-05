@@ -5,11 +5,11 @@ import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 import { TimeFormats } from './timepicker.constants';
 export declare class McTimepickerBase {
-    _defaultErrorStateMatcher: ErrorStateMatcher;
-    _parentForm: NgForm;
-    _parentFormGroup: FormGroupDirective;
+    defaultErrorStateMatcher: ErrorStateMatcher;
+    parentForm: NgForm;
+    parentFormGroup: FormGroupDirective;
     ngControl: NgControl;
-    constructor(_defaultErrorStateMatcher: ErrorStateMatcher, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, ngControl: NgControl);
+    constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
 export declare const McTimepickerMixinBase: CanUpdateErrorStateCtor & typeof McTimepickerBase;
 export declare class McTimepicker extends McTimepickerMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState, ControlValueAccessor {
@@ -67,7 +67,7 @@ export declare class McTimepicker extends McTimepickerMixinBase implements McFor
     private _maxTime;
     private maxDateTime;
     private currentDateTimeInput;
-    constructor(elementRef: ElementRef, ngControl: NgControl, _parentForm: NgForm, _parentFormGroup: FormGroupDirective, _defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, renderer: Renderer2);
+    constructor(elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, renderer: Renderer2);
     ngOnChanges(): void;
     ngOnDestroy(): void;
     ngDoCheck(): void;

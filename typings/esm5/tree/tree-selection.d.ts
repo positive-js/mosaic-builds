@@ -1,71 +1,52 @@
 import { AfterContentInit, ChangeDetectorRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ElementRef } from '@angular/core';
+import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { CdkTreeNode, CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
+import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import { CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
-import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-/**
- * Wrapper for the CdkTree node with Material design styles.
- */
-export declare class McTreeNodeOption<T> extends CdkTreeNode<T> implements CanDisable {
-    protected _elementRef: ElementRef;
-    protected treeSelection: McTreeSelection<T>;
-    role: 'treeitem' | 'group';
-    disabled: any;
-    selected: boolean;
-    private _hasFocus;
-    private _disabled;
-    private _selected;
-    constructor(_elementRef: ElementRef, treeSelection: McTreeSelection<T>);
-    focus(): void;
-    toggle(): void;
-    setSelected(selected: boolean): void;
-    _getHeight(): number;
-    _handleFocus(): void;
-    _handleBlur(): void;
-    _handleClick(): void;
-}
-export declare const _McTreeSelectionBase: HasTabIndexCtor & CanDisableCtor & typeof CdkTree;
+import { McTreeOption } from './tree-option';
 export declare class McTreeNavigationChange {
-    source: McTreeSelection<any>;
-    option: McTreeNodeOption<any>;
-    constructor(source: McTreeSelection<any>, option: McTreeNodeOption<any>);
+    source: McTreeSelection;
+    option: McTreeOption;
+    constructor(source: McTreeSelection, option: McTreeOption);
 }
 export declare class McTreeSelectionChange {
-    source: McTreeSelection<any>;
-    option: McTreeNodeOption<any>;
-    constructor(source: McTreeSelection<any>, option: McTreeNodeOption<any>);
+    source: McTreeSelection;
+    option: McTreeOption;
+    constructor(source: McTreeSelection, option: McTreeOption);
 }
-export declare class McTreeSelection<T> extends _McTreeSelectionBase<T> implements AfterContentInit, CanDisable, HasTabIndex {
-    private _elementRef;
-    _nodeOutlet: CdkTreeNodeOutlet;
-    options: QueryList<McTreeNodeOption<T>>;
-    _keyManager: FocusKeyManager<McTreeNodeOption<T>>;
-    selectedOptions: SelectionModel<McTreeNodeOption<T>>;
-    _disabled: boolean;
+declare class McTreeSelectionBase<T> extends CdkTree<T> {
+    constructor(differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef);
+}
+declare const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor & typeof McTreeSelectionBase;
+export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption> implements AfterContentInit, CanDisable, HasTabIndex {
+    private elementRef;
+    nodeOutlet: CdkTreeNodeOutlet;
+    options: QueryList<McTreeOption>;
+    keyManager: ActiveDescendantKeyManager<McTreeOption>;
+    selectionModel: SelectionModel<McTreeOption>;
     tabIndex: number;
     multiple: boolean;
     autoSelect: boolean;
     noUnselect: boolean;
     withShift: boolean;
     withCtrl: boolean;
-    disabled: boolean;
     readonly navigationChange: EventEmitter<McTreeNavigationChange>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange>;
-    constructor(_elementRef: ElementRef, _differs: IterableDiffers, _changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string, autoSelect: string, noUnselect: string);
-    _onKeyDown(event: KeyboardEvent): void;
+    disabled: boolean;
+    private _disabled;
+    private readonly destroy;
+    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string, autoSelect: string, noUnselect: string);
     ngAfterContentInit(): void;
+    ngOnDestroy(): void;
+    onKeyDown(event: KeyboardEvent): void;
     updateScrollSize(): void;
-    setFocusedOption(option: McTreeNodeOption<T>): void;
+    setFocusedOption(option: McTreeOption): void;
     toggleFocusedOption(): void;
-    renderNodeChanges(data: T[], dataDiffer?: IterableDiffer<T>, viewContainer?: any, parentData?: T): void;
-    _getHeight(): number;
-    _emitNavigationEvent(option: McTreeNodeOption<T>): void;
-    _emitChangeEvent(option: McTreeNodeOption<T>): void;
-    /**
-     * Utility to ensure all indexes are valid.
-     * @param index The index to be checked.
-     * @returns True if the index is valid for our list of options.
-     */
-    private _isValidIndex;
-    private _canDeselectLast;
+    renderNodeChanges(data: McTreeOption[], dataDiffer?: IterableDiffer<McTreeOption>, viewContainer?: any, parentData?: McTreeOption): void;
+    getHeight(): number;
+    emitNavigationEvent(option: McTreeOption): void;
+    emitChangeEvent(option: McTreeOption): void;
+    private isValidIndex;
+    private canDeselectLast;
 }
+export {};

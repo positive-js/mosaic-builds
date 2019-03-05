@@ -3,15 +3,9 @@ import { Subject } from 'rxjs';
 import { McOptgroup } from './optgroup';
 /** Event object emitted by McOption when selected or deselected. */
 export declare class McOptionSelectionChange {
-    /** Reference to the option that emitted the event. */
     source: McOption;
-    /** Whether the change in the option's value was a result of a user action. */
     isUserInput: boolean;
-    constructor(
-    /** Reference to the option that emitted the event. */
-    source: McOption, 
-    /** Whether the change in the option's value was a result of a user action. */
-    isUserInput?: boolean);
+    constructor(source: McOption, isUserInput?: boolean);
 }
 /**
  * Describes a parent component that manages a list of options.
@@ -19,7 +13,6 @@ export declare class McOptionSelectionChange {
  * @docs-private
  */
 export interface IMcOptionParentComponent {
-    disableRipple?: boolean;
     multiple?: boolean;
 }
 /**
@@ -27,35 +20,32 @@ export interface IMcOptionParentComponent {
  */
 export declare const MC_OPTION_PARENT_COMPONENT: InjectionToken<IMcOptionParentComponent>;
 /**
- * Single option inside of a `<mat-select>` element.
+ * Single option inside of a `<mc-select>` element.
  */
 export declare class McOption implements AfterViewChecked, OnDestroy {
-    private readonly _element;
-    private readonly _changeDetectorRef;
-    private readonly _parent;
+    private readonly element;
+    private readonly changeDetectorRef;
+    private readonly parent;
     readonly group: McOptgroup;
-    /** Whether the wrapping component is in multiple selection mode. */
-    readonly multiple: boolean | undefined;
-    /** The unique ID of the option. */
-    readonly id: string;
-    /** Whether or not the option is currently selected. */
-    readonly selected: boolean;
     /** The form value of the option. */
     value: any;
-    /** Whether the option is disabled. */
-    disabled: any;
-    /** Whether ripples for the option are disabled. */
-    readonly disableRipple: boolean | undefined;
     /** Event emitted when the option is selected or deselected. */
     readonly onSelectionChange: EventEmitter<McOptionSelectionChange>;
     /** Emits when the state of the option changes and any parents have to be notified. */
-    readonly _stateChanges: Subject<void>;
+    readonly stateChanges: Subject<void>;
+    /**
+     * The displayed value of the option. It is necessary to show the selected option in the
+     * select's trigger.
+     */
+    readonly viewValue: string;
+    /** Whether the wrapping component is in multiple selection mode. */
+    readonly multiple: boolean | undefined;
+    readonly id: string;
+    private _id;
+    readonly selected: boolean;
     private _selected;
-    private _active;
+    disabled: any;
     private _disabled;
-    private readonly _id;
-    private _mostRecentViewValue;
-    constructor(_element: ElementRef, _changeDetectorRef: ChangeDetectorRef, _parent: IMcOptionParentComponent, group: McOptgroup);
     /**
      * Whether or not the option is currently active and ready to be selected.
      * An active option displays styles as if it is focused, but the
@@ -63,16 +53,13 @@ export declare class McOption implements AfterViewChecked, OnDestroy {
      * for components like autocomplete where focus must remain on the input.
      */
     readonly active: boolean;
-    /**
-     * The displayed value of the option. It is necessary to show the selected option in the
-     * select's trigger.
-     */
-    readonly viewValue: string;
-    /** Selects the option. */
+    private _active;
+    private mostRecentViewValue;
+    constructor(element: ElementRef, changeDetectorRef: ChangeDetectorRef, parent: IMcOptionParentComponent, group: McOptgroup);
+    ngAfterViewChecked(): void;
+    ngOnDestroy(): void;
     select(): void;
-    /** Deselects the option. */
     deselect(): void;
-    /** Sets focus onto this option. */
     focus(): void;
     /**
      * This method sets display styles on the option to make it appear
@@ -89,20 +76,16 @@ export declare class McOption implements AfterViewChecked, OnDestroy {
     /** Gets the label to be used when determining whether the option should be focused. */
     getLabel(): string;
     /** Ensures the option is selected when activated from the keyboard. */
-    _handleKeydown(event: KeyboardEvent): void;
+    handleKeydown(event: KeyboardEvent): void;
     /**
      * `Selects the option while indicating the selection came from the user. Used to
      * determine if the select's view -> model callback should be invoked.`
      */
-    _selectViaInteraction(): void;
-    /** Returns the correct tabindex for the option depending on disabled state. */
-    _getTabIndex(): string;
-    /** Gets the host DOM element. */
-    _getHostElement(): HTMLElement;
-    ngAfterViewChecked(): void;
-    ngOnDestroy(): void;
+    selectViaInteraction(): void;
+    getTabIndex(): string;
+    getHostElement(): HTMLElement;
     /** Emits the selection change event. */
-    private _emitSelectionChangeEvent;
+    private emitSelectionChangeEvent;
 }
 /**
  * Counts the amount of option group labels that precede the specified option.
@@ -111,7 +94,7 @@ export declare class McOption implements AfterViewChecked, OnDestroy {
  * @param optionGroups Flat list of all of the option groups.
  * @docs-private
  */
-export declare function _countGroupLabelsBeforeOption(optionIndex: number, options: QueryList<McOption>, optionGroups: QueryList<McOptgroup>): number;
+export declare function countGroupLabelsBeforeOption(optionIndex: number, options: QueryList<McOption>, optionGroups: QueryList<McOptgroup>): number;
 /**
  * Determines the position to which to scroll a panel in order for an option to be into view.
  * @param optionIndex Index of the option to be scrolled into the view.
@@ -120,4 +103,4 @@ export declare function _countGroupLabelsBeforeOption(optionIndex: number, optio
  * @param panelHeight Height of the panel.
  * @docs-private
  */
-export declare function _getOptionScrollPosition(optionIndex: number, optionHeight: number, currentScrollPosition: number, panelHeight: number): number;
+export declare function getOptionScrollPosition(optionIndex: number, optionHeight: number, currentScrollPosition: number, panelHeight: number): number;
