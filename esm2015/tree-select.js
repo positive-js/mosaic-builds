@@ -580,7 +580,7 @@ let McTreeSelect = McTreeSelect_1 = class McTreeSelect extends McTreeSelectMixin
             event.preventDefault();
             this.open();
         }
-        else if (!this.multiple) {
+        else if (!this.multiple && this.tree.keyManager && this.tree.keyManager.onKeydown) {
             this.tree.keyManager.onKeydown(event);
         }
     }

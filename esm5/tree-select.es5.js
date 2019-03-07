@@ -645,7 +645,7 @@ var McTreeSelect = /** @class */ (function (_super) {
             event.preventDefault();
             this.open();
         }
-        else if (!this.multiple) {
+        else if (!this.multiple && this.tree.keyManager && this.tree.keyManager.onKeydown) {
             this.tree.keyManager.onKeydown(event);
         }
     };
