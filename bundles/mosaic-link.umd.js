@@ -39,27 +39,17 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __param(paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McLinkBase = /** @class */ (function () {
     function McLinkBase(_elementRef) {
         this._elementRef = _elementRef;
     }
     return McLinkBase;
 }());
+/** @type {?} */
 var _McLinkBase = core$1.mixinTabIndex(core$1.mixinDisabled(McLinkBase));
 var McLink = /** @class */ (function (_super) {
     __extends(McLink, _super);
@@ -74,10 +64,18 @@ var McLink = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(McLink.prototype, "disabled", {
-        get: function () {
+        get: /**
+         * @return {?}
+         */
+        function () {
             return this._disabled;
         },
-        set: function (value) {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            /** @type {?} */
             var newValue = core$1.toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
@@ -87,55 +85,78 @@ var McLink = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    McLink.prototype.ngOnDestroy = function () {
+    /**
+     * @return {?}
+     */
+    McLink.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     };
-    McLink.prototype.focus = function () {
+    /**
+     * @return {?}
+     */
+    McLink.prototype.focus = /**
+     * @return {?}
+     */
+    function () {
         this._getHostElement().focus();
     };
-    McLink.prototype._getHostElement = function () {
+    /**
+     * @return {?}
+     */
+    McLink.prototype._getHostElement = /**
+     * @return {?}
+     */
+    function () {
         return this.elementRef.nativeElement;
     };
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], McLink.prototype, "disabled", null);
-    McLink = __decorate([
-        core.Component({
-            selector: 'a.mc-link',
-            template: "<ng-content></ng-content>",
-            changeDetection: core.ChangeDetectionStrategy.OnPush,
-            encapsulation: core.ViewEncapsulation.None,
-            exportAs: 'mcLink',
-            styles: [".mc-link{display:inline-flex;align-items:center;padding:2px 0;text-decoration:none!important;cursor:pointer;outline:0;transition-property:color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link:focus{transition:none}.mc-link:hover{transition:none}.mc-link.mc-focused,.mc-link:focus{border-radius:3px}.mc-link[disabled]{pointer-events:none;cursor:default}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link.mc-link_dashed,.mc-link.mc-link_underlined{transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link.mc-link_dashed:focus,.mc-link.mc-link_underlined:focus{transition:none}.mc-link.mc-link_dashed:hover,.mc-link.mc-link_underlined:hover{transition:none}"],
-            inputs: ['disabled'],
-            host: {
-                '[attr.disabled]': 'disabled || null',
-                '[attr.tabindex]': 'tabIndex'
-            }
-        }),
-        __param(0, core.Attribute('tabindex')),
-        __metadata("design:paramtypes", [String, core.ElementRef,
-            a11y.FocusMonitor,
-            core.ChangeDetectorRef])
-    ], McLink);
+    McLink.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'a.mc-link',
+                    template: "<ng-content></ng-content>",
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core.ViewEncapsulation.None,
+                    exportAs: 'mcLink',
+                    styles: [".mc-link{display:inline-flex;align-items:center;padding:2px 0;text-decoration:none!important;cursor:pointer;outline:0;transition-property:color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link:focus{transition:none}.mc-link:hover{transition:none}.mc-link.mc-focused,.mc-link:focus{border-radius:3px}.mc-link[disabled]{pointer-events:none;cursor:default}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link.mc-link_dashed,.mc-link.mc-link_underlined{transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link.mc-link_dashed:focus,.mc-link.mc-link_underlined:focus{transition:none}.mc-link.mc-link_dashed:hover,.mc-link.mc-link_underlined:hover{transition:none}"],
+                    inputs: ['disabled'],
+                    host: {
+                        '[attr.disabled]': 'disabled || null',
+                        '[attr.tabindex]': 'tabIndex'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McLink.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
+        { type: core.ElementRef },
+        { type: a11y.FocusMonitor },
+        { type: core.ChangeDetectorRef }
+    ]; };
+    McLink.propDecorators = {
+        disabled: [{ type: core.Input }]
+    };
     return McLink;
 }(_McLinkBase));
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McLinkModule = /** @class */ (function () {
     function McLinkModule() {
     }
-    McLinkModule = __decorate([
-        core.NgModule({
-            imports: [
-                common.CommonModule,
-                a11y.A11yModule
-            ],
-            declarations: [McLink],
-            exports: [McLink]
-        })
-    ], McLinkModule);
+    McLinkModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        a11y.A11yModule
+                    ],
+                    declarations: [McLink],
+                    exports: [McLink]
+                },] },
+    ];
     return McLinkModule;
 }());
 

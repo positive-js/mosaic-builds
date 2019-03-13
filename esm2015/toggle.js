@@ -4,7 +4,6 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __decorate, __metadata, __param } from 'tslib';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -12,17 +11,31 @@ import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { ThemePalette, mixinColor, mixinDisabled, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 
-var McToggleComponent_1;
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 let nextUniqueId = 0;
 class McToggleBase {
+    /**
+     * @param {?} _elementRef
+     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
+/** @type {?} */
 const _McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
 class McToggleChange {
 }
-let McToggleComponent = McToggleComponent_1 = class McToggleComponent extends _McToggleMixinBase {
+class McToggleComponent extends _McToggleMixinBase {
+    /**
+     * @param {?} _elementRef
+     * @param {?} _focusMonitor
+     * @param {?} _changeDetectorRef
+     * @param {?} tabIndex
+     */
     constructor(_elementRef, _focusMonitor, _changeDetectorRef, tabIndex) {
         super(_elementRef);
         this._elementRef = _elementRef;
@@ -45,159 +58,204 @@ let McToggleComponent = McToggleComponent_1 = class McToggleComponent extends _M
         this.tabIndex = parseInt(tabIndex) || 0;
         this._focusMonitor.monitor(this._elementRef.nativeElement, true);
     }
+    /**
+     * @return {?}
+     */
     get inputId() {
         return `${this.id || this._uniqueId}-input`;
     }
+    /**
+     * @return {?}
+     */
     get disabled() {
         return this._disabled;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set disabled(value) {
         if (value !== this._disabled) {
             this._disabled = value;
             this._changeDetectorRef.markForCheck();
         }
     }
+    /**
+     * @return {?}
+     */
     get checked() {
         return this._checked;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set checked(value) {
         if (value !== this._checked) {
             this._checked = value;
             this._changeDetectorRef.markForCheck();
         }
     }
+    /**
+     * @return {?}
+     */
     ngOnDestroy() {
         this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
+    /**
+     * @return {?}
+     */
     focus() {
         this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
     }
+    /**
+     * @return {?}
+     */
     _getAriaChecked() {
         return this.checked;
     }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
     _onInteractionEvent(event) {
         event.stopPropagation();
     }
+    /**
+     * @return {?}
+     */
     _onLabelTextChange() {
         this._changeDetectorRef.markForCheck();
     }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
     _onInputClick(event) {
         event.stopPropagation();
         this._updateModelValue();
         this._emitChangeEvent();
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     writeValue(value) {
         this.checked = !!value;
     }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     registerOnChange(fn) {
         this._onChangeCallback = fn;
     }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     registerOnTouched(fn) {
         this._onTouchedCallback = fn;
     }
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
     }
+    /**
+     * @private
+     * @return {?}
+     */
     _updateModelValue() {
         this._checked = !this.checked;
         this._onChangeCallback(this.checked);
         this._onTouchedCallback();
     }
+    /**
+     * @private
+     * @return {?}
+     */
     _emitChangeEvent() {
+        /** @type {?} */
         const event = new McToggleChange();
         event.source = this;
         event.checked = this.checked;
         this._onChangeCallback(this.checked);
         this.change.emit(event);
     }
+}
+McToggleComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-toggle',
+                exportAs: 'mcToggle',
+                template: "<label [attr.for]=\"inputId\" class=\"mc-toggle-layout\" #label><div class=\"mc-toggle__container\" [class.left]=\"labelPosition === 'left'\"><input #input type=\"checkbox\" class=\"mc-toggle-input cdk-visually-hidden\" [id]=\"inputId\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (click)=\"_onInputClick($event)\" (change)=\"_onInteractionEvent($event)\"><div class=\"mc-toggle-bar-container\"><div class=\"mc-toggle__focus-frame\"></div><div class=\"mc-toggle-bar\"><div class=\"mc-toggle__circle\" [@switch]=\"checked\"></div></div></div><div class=\"mc-toggle__content\" [class.left]=\"labelPosition === 'left'\" [class.right]=\"labelPosition === 'right'\"><span class=\"mc-toggle-label\" (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></div></div></label>",
+                styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-toggle .mc-toggle-bar{position:relative;border-width:1px;border-style:solid}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{display:flex;align-items:center;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:8px}.mc-toggle__content.right{margin-left:8px}.mc-toggle__circle{position:absolute;border-width:1px;border-style:solid;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}.mc-toggle__focus-frame{position:absolute;top:0;left:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:16px;width:28px;border-radius:9px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__focus-frame{border-radius:9px;height:16px;width:28px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:16px;width:16px}.mc-toggle.mc-toggle_small .mc-toggle-bar{height:14px;width:24px;border-radius:8px}.mc-toggle.mc-toggle_small .mc-toggle__focus-frame{border-radius:8px;height:14px;width:24px}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:14px;width:14px}.mc-toggle:not(.mc-disabled){cursor:pointer}"],
+                providers: [
+                    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => McToggleComponent), multi: true }
+                ],
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                encapsulation: ViewEncapsulation.None,
+                inputs: ['disabled', 'color', 'tabIndex'],
+                host: {
+                    class: 'mc-toggle',
+                    '[id]': 'id',
+                    '[attr.id]': 'id',
+                    '[class.mc-disabled]': 'disabled',
+                    '[class.mc-toggle_off]': '!checked'
+                },
+                animations: [
+                    trigger('switch', [
+                        state('true', style({ left: '50%' })),
+                        state('false', style({ left: '1px' })),
+                        transition('true <=> false', animate('150ms'))
+                    ])
+                ]
+            },] },
+];
+/** @nocollapse */
+McToggleComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: FocusMonitor },
+    { type: ChangeDetectorRef },
+    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] }
+];
+McToggleComponent.propDecorators = {
+    _inputElement: [{ type: ViewChild, args: ['input',] }],
+    labelPosition: [{ type: Input }],
+    ariaLabel: [{ type: Input, args: ['aria-label',] }],
+    ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
+    id: [{ type: Input }],
+    name: [{ type: Input }],
+    value: [{ type: Input }],
+    disabled: [{ type: Input }],
+    checked: [{ type: Input }],
+    change: [{ type: Output }]
 };
-__decorate([
-    ViewChild('input'),
-    __metadata("design:type", ElementRef)
-], McToggleComponent.prototype, "_inputElement", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McToggleComponent.prototype, "labelPosition", void 0);
-__decorate([
-    Input('aria-label'),
-    __metadata("design:type", String)
-], McToggleComponent.prototype, "ariaLabel", void 0);
-__decorate([
-    Input('aria-labelledby'),
-    __metadata("design:type", Object)
-], McToggleComponent.prototype, "ariaLabelledby", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McToggleComponent.prototype, "id", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], McToggleComponent.prototype, "name", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McToggleComponent.prototype, "value", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], McToggleComponent.prototype, "disabled", null);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McToggleComponent.prototype, "checked", null);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McToggleComponent.prototype, "change", void 0);
-McToggleComponent = McToggleComponent_1 = __decorate([
-    Component({
-        selector: 'mc-toggle',
-        exportAs: 'mcToggle',
-        template: "<label [attr.for]=\"inputId\" class=\"mc-toggle-layout\" #label><div class=\"mc-toggle__container\" [class.left]=\"labelPosition === 'left'\"><input #input type=\"checkbox\" class=\"mc-toggle-input cdk-visually-hidden\" [id]=\"inputId\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (click)=\"_onInputClick($event)\" (change)=\"_onInteractionEvent($event)\"><div class=\"mc-toggle-bar-container\"><div class=\"mc-toggle__focus-frame\"></div><div class=\"mc-toggle-bar\"><div class=\"mc-toggle__circle\" [@switch]=\"checked\"></div></div></div><div class=\"mc-toggle__content\" [class.left]=\"labelPosition === 'left'\" [class.right]=\"labelPosition === 'right'\"><span class=\"mc-toggle-label\" (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></div></div></label>",
-        styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-toggle .mc-toggle-bar{position:relative;border-width:1px;border-style:solid}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{display:flex;align-items:center;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:8px}.mc-toggle__content.right{margin-left:8px}.mc-toggle__circle{position:absolute;border-width:1px;border-style:solid;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}.mc-toggle__focus-frame{position:absolute;top:0;left:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:16px;width:28px;border-radius:9px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__focus-frame{border-radius:9px;height:16px;width:28px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:16px;width:16px}.mc-toggle.mc-toggle_small .mc-toggle-bar{height:14px;width:24px;border-radius:8px}.mc-toggle.mc-toggle_small .mc-toggle__focus-frame{border-radius:8px;height:14px;width:24px}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:14px;width:14px}.mc-toggle:not(.mc-disabled){cursor:pointer}"],
-        providers: [
-            { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => McToggleComponent_1), multi: true }
-        ],
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        encapsulation: ViewEncapsulation.None,
-        inputs: ['disabled', 'color', 'tabIndex'],
-        host: {
-            class: 'mc-toggle',
-            '[id]': 'id',
-            '[attr.id]': 'id',
-            '[class.mc-disabled]': 'disabled',
-            '[class.mc-toggle_off]': '!checked'
-        },
-        animations: [
-            trigger('switch', [
-                state('true', style({ left: '50%' })),
-                state('false', style({ left: '1px' })),
-                transition('true <=> false', animate('150ms'))
-            ])
-        ]
-    }),
-    __param(3, Attribute('tabindex')),
-    __metadata("design:paramtypes", [ElementRef,
-        FocusMonitor,
-        ChangeDetectorRef, String])
-], McToggleComponent);
-
-let McToggleModule = class McToggleModule {
-};
-McToggleModule = __decorate([
-    NgModule({
-        imports: [CommonModule, A11yModule, McCommonModule],
-        exports: [McToggleComponent],
-        declarations: [McToggleComponent]
-    })
-], McToggleModule);
 
 /**
- * Generated bundle index. Do not edit.
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McToggleModule {
+}
+McToggleModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, A11yModule, McCommonModule],
+                exports: [McToggleComponent],
+                declarations: [McToggleComponent]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McToggleModule, McToggleBase, _McToggleMixinBase, McToggleChange, McToggleComponent };

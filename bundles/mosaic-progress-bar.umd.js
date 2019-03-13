@@ -6,7 +6,7 @@
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@angular/common'), require('@ptsecurity/cdk/platform')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/progressBar', ['exports', '@angular/core', '@ptsecurity/mosaic/core', '@angular/common', '@ptsecurity/cdk/platform'], factory) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/progress-bar', ['exports', '@angular/core', '@ptsecurity/mosaic/core', '@angular/common', '@ptsecurity/cdk/platform'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.progressBar = {}),global.ng.core,global.ng.mosaic.core,global.ng.common,global.ng.cdk.platform));
 }(this, (function (exports,core,core$1,common,platform) { 'use strict';
 
@@ -39,19 +39,15 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 var idIterator = 0;
+/** @type {?} */
 var MIN_PERCENT = 0;
+/** @type {?} */
 var MAX_PERCENT = 100;
 var McProgressBarBase = /** @class */ (function () {
     function McProgressBarBase(_elementRef) {
@@ -59,6 +55,7 @@ var McProgressBarBase = /** @class */ (function () {
     }
     return McProgressBarBase;
 }());
+/** @type {?} */
 var _McProgressBarMixinBase = core$1.mixinColor(McProgressBarBase);
 var McProgressBar = /** @class */ (function (_super) {
     __extends(McProgressBar, _super);
@@ -71,62 +68,62 @@ var McProgressBar = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(McProgressBar.prototype, "percentage", {
-        get: function () {
+        get: /**
+         * @return {?}
+         */
+        function () {
             return Math.max(MIN_PERCENT, Math.min(MAX_PERCENT, this.value)) / MAX_PERCENT;
         },
         enumerable: true,
         configurable: true
     });
-    __decorate([
-        core.Input(),
-        __metadata("design:type", String)
-    ], McProgressBar.prototype, "id", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Number)
-    ], McProgressBar.prototype, "value", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", String)
-    ], McProgressBar.prototype, "mode", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", String)
-    ], McProgressBar.prototype, "color", void 0);
-    McProgressBar = __decorate([
-        core.Component({
-            selector: 'mc-progress-bar',
-            template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
-            styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
-            changeDetection: core.ChangeDetectionStrategy.OnPush,
-            encapsulation: core.ViewEncapsulation.None,
-            host: {
-                class: 'mc-progress-bar',
-                '[attr.id]': 'id'
-            }
-        }),
-        __metadata("design:paramtypes", [core.ElementRef])
-    ], McProgressBar);
+    McProgressBar.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-progress-bar',
+                    template: "<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\"><div *ngSwitchCase=\"'indeterminate'\" class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\"></div><div *ngSwitchDefault class=\"mc-progress-bar__line mc-progress-bar__line--determinate\" [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\"></div></div>",
+                    styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}100%{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:4px;overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core.ViewEncapsulation.None,
+                    host: {
+                        class: 'mc-progress-bar',
+                        '[attr.id]': 'id'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McProgressBar.ctorParameters = function () { return [
+        { type: core.ElementRef }
+    ]; };
+    McProgressBar.propDecorators = {
+        id: [{ type: core.Input }],
+        value: [{ type: core.Input }],
+        mode: [{ type: core.Input }],
+        color: [{ type: core.Input }]
+    };
     return McProgressBar;
 }(_McProgressBarMixinBase));
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McProgressBarModule = /** @class */ (function () {
     function McProgressBarModule() {
     }
-    McProgressBarModule = __decorate([
-        core.NgModule({
-            imports: [
-                common.CommonModule,
-                platform.PlatformModule
-            ],
-            exports: [
-                McProgressBar
-            ],
-            declarations: [
-                McProgressBar
-            ]
-        })
-    ], McProgressBarModule);
+    McProgressBarModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        platform.PlatformModule
+                    ],
+                    exports: [
+                        McProgressBar
+                    ],
+                    declarations: [
+                        McProgressBar
+                    ]
+                },] },
+    ];
     return McProgressBarModule;
 }());
 

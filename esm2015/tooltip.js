@@ -4,7 +4,6 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __decorate, __metadata, __param } from 'tslib';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, EventEmitter, HostBinding, Inject, InjectionToken, Input, NgZone, Optional, Output, TemplateRef, ViewContainerRef, ViewEncapsulation, NgModule } from '@angular/core';
 import { Directionality } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
@@ -16,7 +15,14 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
-let McTooltipComponent = class McTooltipComponent {
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McTooltipComponent {
+    /**
+     * @param {?} cdr
+     */
     constructor(cdr) {
         this.cdr = cdr;
         this.prefix = 'mc-tooltip_placement';
@@ -28,30 +34,53 @@ let McTooltipComponent = class McTooltipComponent {
         this._mcTrigger = 'hover';
         this._mcPlacement = 'top';
         this._mcVisible = new BehaviorSubject(false);
-        /** Subject for notifying that the tooltip has been hidden from the view */
+        /**
+         * Subject for notifying that the tooltip has been hidden from the view
+         */
         this.onHideSubject = new Subject();
         this.closeOnInteraction = false;
         this.availablePositions = POSITION_MAP;
         this.$visible = this._mcVisible.asObservable();
     }
+    /**
+     * @return {?}
+     */
     get mcTitle() {
         return this._mcTitle;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcTitle(value) {
         this.isTitleString = !(value instanceof TemplateRef);
         if (this.isTitleString) {
             this._mcTitle = value;
         }
     }
+    /**
+     * @return {?}
+     */
     get mcTrigger() {
         return this._mcTrigger;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcTrigger(value) {
         this._mcTrigger = value;
     }
+    /**
+     * @return {?}
+     */
     get mcPlacement() {
         return this._mcPlacement;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcPlacement(value) {
         if (value !== this._mcPlacement) {
             this._mcPlacement = value;
@@ -61,16 +90,27 @@ let McTooltipComponent = class McTooltipComponent {
             this._mcPlacement = 'top';
         }
     }
+    /**
+     * @return {?}
+     */
     get mcVisible() {
         return this._mcVisible.value;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcVisible(value) {
+        /** @type {?} */
         const visible = coerceBooleanProperty(value);
         if (this._mcVisible.value !== visible) {
             this._mcVisible.next(visible);
             this.mcVisibleChange.emit(visible);
         }
     }
+    /**
+     * @return {?}
+     */
     show() {
         if (this.hideTid) {
             clearTimeout(this.hideTid);
@@ -88,6 +128,9 @@ let McTooltipComponent = class McTooltipComponent {
             }, this.mcMouseEnterDelay);
         }
     }
+    /**
+     * @return {?}
+     */
     hide() {
         if (this.showTid) {
             clearTimeout(this.showTid);
@@ -101,98 +144,115 @@ let McTooltipComponent = class McTooltipComponent {
             this.markForCheck();
         }, this.mcMouseLeaveDelay);
     }
+    /**
+     * @return {?}
+     */
     setClassMap() {
         this.classMap = `${this.prefix}-${this.mcPlacement}`;
     }
+    /**
+     * @return {?}
+     */
     isContentEmpty() {
         return this.isTitleString ? (this.mcTitle === '' || !this.mcTitle) : false;
     }
-    /** Returns an observable that notifies when the tooltip has been hidden from view. */
+    /**
+     * Returns an observable that notifies when the tooltip has been hidden from view.
+     * @return {?}
+     */
     afterHidden() {
         return this.onHideSubject.asObservable();
     }
+    /**
+     * @return {?}
+     */
     markForCheck() {
         this.cdr.markForCheck();
     }
+    /**
+     * @return {?}
+     */
     handleBodyInteraction() {
         if (this.closeOnInteraction) {
             this.hide();
         }
     }
+}
+McTooltipComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-tooltip-component',
+                inputs: [
+                    'mcMouseEnterDelay',
+                    'mcMouseLeaveDelay',
+                    'mcTitle',
+                    'mcVisible',
+                    'mcTrigger',
+                    'mcPlacement'
+                ],
+                outputs: ['mcVisibleChange'],
+                animations: [fadeAnimation],
+                template: "<div class=\"mc-tooltip\" [ngClass]=\"classMap\" [@fadeAnimation]=\"''+($visible | async)\"><div class=\"mc-tooltip-content\"><div class=\"mc-tooltip-arrow\"></div><div class=\"mc-tooltip-inner\"><ng-container>{{ mcTitle }}</ng-container></div></div></div>",
+                preserveWhitespaces: false,
+                styles: ["@keyframes mc-progress{from{background-position:0 0}to{background-position:29px 0}}.mc-progress{position:relative}.mc-progress:after{content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(135deg,rgba(0,0,0,.05) 10px,transparent 10px,transparent 20px,rgba(0,0,0,.05) 20px,rgba(0,0,0,.05) 30px,transparent 30px) repeat;background-size:29px 29px;animation:mc-progress 1s linear infinite}.cdk-overlay-container{pointer-events:none;top:0;left:0;height:100%;width:100%;position:fixed;z-index:1000;box-sizing:border-box;margin:0;padding:0}.cdk-overlay-backdrop{top:0;bottom:0;left:0;right:0;-webkit-tap-highlight-color:transparent;transition:opacity .4s cubic-bezier(.25,.8,.25,1);opacity:0;position:absolute;pointer-events:auto;z-index:1000;box-sizing:border-box;margin:0;padding:0}.cdk-overlay-pane{box-sizing:border-box;position:absolute;pointer-events:auto;margin:0;padding:0;z-index:1000;max-width:100%;max-height:100%}.cdk-overlay-connected-position-bounding-box{box-sizing:border-box;position:absolute;z-index:1000;display:flex;flex-direction:column;margin:0;padding:0;min-width:1px;min-height:1px}.mc-tooltip{display:block;box-sizing:border-box;visibility:visible;position:relative;margin:0;padding:0;z-index:1060;max-width:240px;list-style:none;white-space:pre-line}.mc-tooltip_placement-top{padding-bottom:11px}.mc-tooltip_placement-right{padding-left:11px}.mc-tooltip_placement-bottom{padding-top:11px}.mc-tooltip_placement-left{padding-right:11px}.mc-tooltip-inner{padding:8px 16px;text-align:left;text-decoration:none;border-radius:3px;min-height:16px;height:fit-content;vertical-align:center}.mc-tooltip-arrow{position:absolute;width:0;height:0;border-color:transparent;border-style:solid}.mc-tooltip_placement-top .mc-tooltip-arrow{bottom:3px;border-width:8px 8px 0;left:50%;margin-left:-8px}.mc-tooltip_placement-right .mc-tooltip-arrow{left:3px;border-width:8px 8px 8px 0;top:16px;margin-top:-8px}.mc-tooltip_placement-left .mc-tooltip-arrow{right:3px;border-width:8px 0 8px 8px;top:16px;margin-top:-8px}.mc-tooltip_placement-bottom .mc-tooltip-arrow{top:3px;border-width:0 8px 8px;left:50%;margin-left:-8px}"],
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                host: {
+                    '(body:click)': 'this.handleBodyInteraction()'
+                }
+            },] },
+];
+/** @nocollapse */
+McTooltipComponent.ctorParameters = () => [
+    { type: ChangeDetectorRef }
+];
+McTooltipComponent.propDecorators = {
+    mcVisibleChange: [{ type: Output }],
+    mcMouseEnterDelay: [{ type: Input }],
+    mcMouseLeaveDelay: [{ type: Input }],
+    mcTitle: [{ type: Input }],
+    mcTrigger: [{ type: Input }],
+    mcPlacement: [{ type: Input }],
+    mcVisible: [{ type: Input }]
 };
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTooltipComponent.prototype, "mcVisibleChange", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], McTooltipComponent.prototype, "mcMouseEnterDelay", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], McTooltipComponent.prototype, "mcMouseLeaveDelay", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], McTooltipComponent.prototype, "mcTitle", null);
-__decorate([
-    Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], McTooltipComponent.prototype, "mcTrigger", null);
-__decorate([
-    Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], McTooltipComponent.prototype, "mcPlacement", null);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McTooltipComponent.prototype, "mcVisible", null);
-McTooltipComponent = __decorate([
-    Component({
-        selector: 'mc-tooltip-component',
-        inputs: [
-            'mcMouseEnterDelay',
-            'mcMouseLeaveDelay',
-            'mcTitle',
-            'mcVisible',
-            'mcTrigger',
-            'mcPlacement'
-        ],
-        outputs: ['mcVisibleChange'],
-        animations: [fadeAnimation],
-        template: "<div class=\"mc-tooltip\" [ngClass]=\"classMap\" [@fadeAnimation]=\"''+($visible | async)\"><div class=\"mc-tooltip-content\"><div class=\"mc-tooltip-arrow\"></div><div class=\"mc-tooltip-inner\"><ng-container>{{ mcTitle }}</ng-container></div></div></div>",
-        preserveWhitespaces: false,
-        styles: ["@keyframes mc-progress{from{background-position:0 0}to{background-position:29px 0}}.mc-progress{position:relative}.mc-progress:after{content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(135deg,rgba(0,0,0,.05) 10px,transparent 10px,transparent 20px,rgba(0,0,0,.05) 20px,rgba(0,0,0,.05) 30px,transparent 30px) repeat;background-size:29px 29px;animation:mc-progress 1s linear infinite}.cdk-overlay-container{pointer-events:none;top:0;left:0;height:100%;width:100%;position:fixed;z-index:1000;box-sizing:border-box;margin:0;padding:0}.cdk-overlay-backdrop{top:0;bottom:0;left:0;right:0;-webkit-tap-highlight-color:transparent;transition:opacity .4s cubic-bezier(.25,.8,.25,1);opacity:0;position:absolute;pointer-events:auto;z-index:1000;box-sizing:border-box;margin:0;padding:0}.cdk-overlay-pane{box-sizing:border-box;position:absolute;pointer-events:auto;margin:0;padding:0;z-index:1000;max-width:100%;max-height:100%}.cdk-overlay-connected-position-bounding-box{box-sizing:border-box;position:absolute;z-index:1000;display:flex;flex-direction:column;margin:0;padding:0;min-width:1px;min-height:1px}.mc-tooltip{display:block;box-sizing:border-box;visibility:visible;position:relative;margin:0;padding:0;z-index:1060;max-width:240px;list-style:none;white-space:pre-line}.mc-tooltip_placement-top{padding-bottom:11px}.mc-tooltip_placement-right{padding-left:11px}.mc-tooltip_placement-bottom{padding-top:11px}.mc-tooltip_placement-left{padding-right:11px}.mc-tooltip-inner{padding:8px 16px;text-align:left;text-decoration:none;border-radius:3px;min-height:16px;height:fit-content;vertical-align:center}.mc-tooltip-arrow{position:absolute;width:0;height:0;border-color:transparent;border-style:solid}.mc-tooltip_placement-top .mc-tooltip-arrow{bottom:3px;border-width:8px 8px 0;left:50%;margin-left:-8px}.mc-tooltip_placement-right .mc-tooltip-arrow{left:3px;border-width:8px 8px 8px 0;top:16px;margin-top:-8px}.mc-tooltip_placement-left .mc-tooltip-arrow{right:3px;border-width:8px 0 8px 8px;top:16px;margin-top:-8px}.mc-tooltip_placement-bottom .mc-tooltip-arrow{top:3px;border-width:0 8px 8px;left:50%;margin-left:-8px}"],
-        encapsulation: ViewEncapsulation.None,
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        host: {
-            '(body:click)': 'this.handleBodyInteraction()'
-        }
-    }),
-    __metadata("design:paramtypes", [ChangeDetectorRef])
-], McTooltipComponent);
+/** @type {?} */
 const MC_TOOLTIP_SCROLL_STRATEGY = new InjectionToken('mc-tooltip-scroll-strategy');
-/** @docs-private */
+/**
+ * \@docs-private
+ * @param {?} overlay
+ * @return {?}
+ */
 function mcTooltipScrollStrategyFactory(overlay) {
     return () => overlay.scrollStrategies.reposition({ scrollThrottle: 20 });
 }
-/** @docs-private */
+/**
+ * \@docs-private
+ * @type {?}
+ */
 const MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     provide: MC_TOOLTIP_SCROLL_STRATEGY,
     deps: [Overlay],
     useFactory: mcTooltipScrollStrategyFactory
 };
-/** Creates an error to be thrown if the user supplied an invalid tooltip position. */
+/**
+ * Creates an error to be thrown if the user supplied an invalid tooltip position.
+ * @param {?} position
+ * @return {?}
+ */
 function getMcTooltipInvalidPositionError(position) {
     return Error(`McTooltip position "${position}" is invalid.`);
 }
+/** @type {?} */
 const VIEWPORT_MARGIN = 8;
-let McTooltip = class McTooltip {
+class McTooltip {
+    /**
+     * @param {?} overlay
+     * @param {?} elementRef
+     * @param {?} ngZone
+     * @param {?} scrollDispatcher
+     * @param {?} hostView
+     * @param {?} scrollStrategy
+     * @param {?} direction
+     */
     constructor(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
         this.overlay = overlay;
         this.elementRef = elementRef;
@@ -213,37 +273,76 @@ let McTooltip = class McTooltip {
         this.destroyed = new Subject();
         this.availablePositions = POSITION_MAP;
     }
+    /**
+     * @return {?}
+     */
     get mcTitle() {
         return this._mcTitle;
     }
+    /**
+     * @param {?} title
+     * @return {?}
+     */
     set mcTitle(title) {
         this._mcTitle = title;
         this.updateCompValue('mcTitle', title);
     }
+    /**
+     * @param {?} title
+     * @return {?}
+     */
     set setTitle(title) {
         this.mcTitle = title;
     }
+    /**
+     * @return {?}
+     */
     get disabled() { return this._disabled; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set disabled(value) {
         this._disabled = coerceBooleanProperty(value);
     }
+    /**
+     * @return {?}
+     */
     get mcMouseEnterDelay() {
         return this._mcMouseEnterDelay;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcMouseEnterDelay(value) {
         this._mcMouseEnterDelay = value;
         this.updateCompValue('mcMouseEnterDelay', value);
     }
+    /**
+     * @return {?}
+     */
     get mcMouseLeaveDelay() {
         return this._mcMouseLeaveDelay;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcMouseLeaveDelay(value) {
         this._mcMouseLeaveDelay = value;
         this.updateCompValue('mcMouseLeaveDelay', value);
     }
+    /**
+     * @return {?}
+     */
     get mcTrigger() {
         return this._mcTrigger;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcTrigger(value) {
         if (value) {
             this._mcTrigger = value;
@@ -253,9 +352,16 @@ let McTooltip = class McTooltip {
             this._mcTrigger = 'hover';
         }
     }
+    /**
+     * @return {?}
+     */
     get mcPlacement() {
         return this._mcPlacement;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcPlacement(value) {
         if (value) {
             this._mcPlacement = value;
@@ -265,17 +371,32 @@ let McTooltip = class McTooltip {
             this._mcPlacement = 'top';
         }
     }
+    /**
+     * @return {?}
+     */
     get mcTooltipClass() { return this._mcTooltipClass; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mсTooltipClass(value) {
         this._mcTooltipClass = value;
         if (this.tooltip) {
             this.tooltip.setClassMap();
         }
     }
+    /**
+     * @return {?}
+     */
     get mcVisible() {
         return this._mcVisible;
     }
+    /**
+     * @param {?} externalValue
+     * @return {?}
+     */
     set mcVisible(externalValue) {
+        /** @type {?} */
         const value = coerceBooleanProperty(externalValue);
         this._mcVisible = value;
         this.updateCompValue('mcVisible', value);
@@ -283,24 +404,35 @@ let McTooltip = class McTooltip {
             this.show();
         }
     }
+    /**
+     * @return {?}
+     */
     get isOpen() {
         return this.isTooltipOpen;
     }
+    /**
+     * @return {?}
+     */
     get isParentDisabled() {
         return this.parentDisabled;
     }
-    /** Create the overlay config and position strategy */
+    /**
+     * Create the overlay config and position strategy
+     * @return {?}
+     */
     createOverlay() {
         if (this.overlayRef) {
             return this.overlayRef;
         }
         // Create connected position strategy that listens for scroll events to reposition.
+        /** @type {?} */
         const strategy = this.overlay.position()
             .flexibleConnectedTo(this.elementRef)
             .withTransformOriginOn('.mc-tooltip')
             .withFlexibleDimensions(false)
             .withViewportMargin(VIEWPORT_MARGIN)
             .withPositions([...DEFAULT_4_POSITIONS]);
+        /** @type {?} */
         const scrollableAncestors = this.scrollDispatcher
             .getAncestorScrollContainers(this.elementRef);
         strategy.withScrollableContainers(scrollableAncestors);
@@ -326,13 +458,21 @@ let McTooltip = class McTooltip {
             .subscribe(() => this.detach());
         return this.overlayRef;
     }
+    /**
+     * @return {?}
+     */
     detach() {
         if (this.overlayRef && this.overlayRef.hasAttached()) {
             this.overlayRef.detach();
         }
         this.tooltip = null;
     }
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
     onPositionChange($event) {
+        /** @type {?} */
         let updatedPlacement = this.mcPlacement;
         Object.keys(this.availablePositions).some((key) => {
             if ($event.connectionPair.originX === this.availablePositions[key].originX &&
@@ -351,13 +491,19 @@ let McTooltip = class McTooltip {
         }
         this.handlePositioningUpdate();
     }
+    /**
+     * @return {?}
+     */
     handlePositioningUpdate() {
         if (!this.overlayRef) {
             this.overlayRef = this.createOverlay();
         }
         if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
+            /** @type {?} */
             const pos = (this.overlayRef.overlayElement.clientHeight -
-                this.hostView.element.nativeElement.clientHeight) / 2; // tslint:disable-line
+                this.hostView.element.nativeElement.clientHeight) / 2;
+            // tslint:disable-line
+            /** @type {?} */
             const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
             this.overlayRef.overlayElement.style.top =
                 `${parseInt(currentContainer.split('px')[0], 10) + pos - 1}px`;
@@ -365,6 +511,11 @@ let McTooltip = class McTooltip {
         }
     }
     // tslint:disable-next-line:no-any
+    /**
+     * @param {?} key
+     * @param {?} value
+     * @return {?}
+     */
     updateCompValue(key, value) {
         if (this.isDynamicTooltip && value) {
             if (this.tooltip) {
@@ -372,9 +523,15 @@ let McTooltip = class McTooltip {
             }
         }
     }
+    /**
+     * @return {?}
+     */
     ngOnInit() {
         this.initElementRefListeners();
     }
+    /**
+     * @return {?}
+     */
     ngOnDestroy() {
         if (this.overlayRef) {
             this.overlayRef.dispose();
@@ -384,14 +541,24 @@ let McTooltip = class McTooltip {
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
     }
+    /**
+     * @param {?} e
+     * @return {?}
+     */
     handleKeydown(e) {
         if (this.isTooltipOpen && e.keyCode === ESCAPE) { // tslint:disable-line
             this.hide();
         }
     }
+    /**
+     * @return {?}
+     */
     handleTouchend() {
         this.hide();
     }
+    /**
+     * @return {?}
+     */
     initElementRefListeners() {
         if (this.mcTrigger === 'hover') {
             this.manualListeners
@@ -406,9 +573,13 @@ let McTooltip = class McTooltip {
                 .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
         }
     }
+    /**
+     * @return {?}
+     */
     show() {
         if (!this.disabled) {
             if (!this.tooltip) {
+                /** @type {?} */
                 const overlayRef = this.createOverlay();
                 this.detach();
                 this.portal = this.portal || new ComponentPortal(McTooltipComponent, this.hostView);
@@ -417,6 +588,7 @@ let McTooltip = class McTooltip {
                     .pipe(takeUntil(this.destroyed))
                     .subscribe(() => this.detach());
                 this.isDynamicTooltip = true;
+                /** @type {?} */
                 const properties = [
                     'mcTitle',
                     'mcPlacement',
@@ -439,18 +611,27 @@ let McTooltip = class McTooltip {
             this.tooltip.show();
         }
     }
+    /**
+     * @return {?}
+     */
     hide() {
         if (this.tooltip) {
             this.tooltip.hide();
         }
     }
-    /** Updates the position of the current tooltip. */
+    /**
+     * Updates the position of the current tooltip.
+     * @return {?}
+     */
     updatePosition() {
         if (!this.overlayRef) {
             this.overlayRef = this.createOverlay();
         }
-        const position = this.overlayRef.getConfig().positionStrategy;
+        /** @type {?} */
+        const position = (/** @type {?} */ (this.overlayRef.getConfig().positionStrategy));
+        /** @type {?} */
         const origin = this.getOrigin();
+        /** @type {?} */
         const overlay = this.getOverlayPosition();
         position.withPositions([
             Object.assign({}, origin.main, overlay.main),
@@ -460,10 +641,14 @@ let McTooltip = class McTooltip {
     /**
      * Returns the origin position and a fallback position based on the user's position preference.
      * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
+     * @return {?}
      */
     getOrigin() {
+        /** @type {?} */
         const position = this.mcPlacement;
+        /** @type {?} */
         const isLtr = !this.direction || this.direction.value === 'ltr';
+        /** @type {?} */
         let originPosition;
         if (position === 'top' || position === 'bottom') {
             originPosition = { originX: 'center', originY: position === 'top' ? 'top' : 'bottom' };
@@ -487,10 +672,16 @@ let McTooltip = class McTooltip {
             fallback: { originX: x, originY: y }
         };
     }
-    /** Returns the overlay position and a fallback position based on the user's preference */
+    /**
+     * Returns the overlay position and a fallback position based on the user's preference
+     * @return {?}
+     */
     getOverlayPosition() {
+        /** @type {?} */
         const position = this.mcPlacement;
+        /** @type {?} */
         const isLtr = !this.direction || this.direction.value === 'ltr';
+        /** @type {?} */
         let overlayPosition;
         if (position === 'top') {
             overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
@@ -517,9 +708,17 @@ let McTooltip = class McTooltip {
             fallback: { overlayX: x, overlayY: y }
         };
     }
-    /** Inverts an overlay position. */
+    /**
+     * Inverts an overlay position.
+     * @private
+     * @param {?} x
+     * @param {?} y
+     * @return {?}
+     */
     invertPosition(x, y) {
+        /** @type {?} */
         let newX = x;
+        /** @type {?} */
         let newY = y;
         if (this.mcPlacement === 'top' || this.mcPlacement === 'bottom') {
             if (y === 'top') {
@@ -539,99 +738,67 @@ let McTooltip = class McTooltip {
         }
         return { x: newX, y: newY };
     }
+}
+McTooltip.decorators = [
+    { type: Directive, args: [{
+                selector: '[mcTooltip], [attribute^="mcTooltip"]',
+                exportAs: 'mcTooltip',
+                host: {
+                    '(keydown)': 'handleKeydown($event)',
+                    '(touchend)': 'handleTouchend()'
+                }
+            },] },
+];
+/** @nocollapse */
+McTooltip.ctorParameters = () => [
+    { type: Overlay },
+    { type: ElementRef },
+    { type: NgZone },
+    { type: ScrollDispatcher },
+    { type: ViewContainerRef },
+    { type: undefined, decorators: [{ type: Inject, args: [MC_TOOLTIP_SCROLL_STRATEGY,] }] },
+    { type: Directionality, decorators: [{ type: Optional }] }
+];
+McTooltip.propDecorators = {
+    mcVisibleChange: [{ type: Output }],
+    mcTitle: [{ type: Input, args: ['mcTooltip',] }],
+    setTitle: [{ type: Input, args: ['mcTitle',] }],
+    disabled: [{ type: Input, args: ['mcTooltipDisabled',] }],
+    mcMouseEnterDelay: [{ type: Input, args: ['mcMouseEnterDelay',] }],
+    mcMouseLeaveDelay: [{ type: Input, args: ['mcMouseLeaveDelay',] }],
+    mcTrigger: [{ type: Input, args: ['mcTrigger',] }],
+    mcPlacement: [{ type: Input, args: ['mcPlacement',] }],
+    mcTooltipClass: [{ type: Input, args: ['mcTooltipClass',] }],
+    mcVisible: [{ type: Input, args: ['mcVisible',] }],
+    isOpen: [{ type: HostBinding, args: ['class.mc-tooltip-open',] }],
+    isParentDisabled: [{ type: HostBinding, args: ['class.disabled',] }]
 };
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], McTooltip.prototype, "mcVisibleChange", void 0);
-__decorate([
-    Input('mcTooltip'),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], McTooltip.prototype, "mcTitle", null);
-__decorate([
-    Input('mcTitle'),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], McTooltip.prototype, "setTitle", null);
-__decorate([
-    Input('mcTooltipDisabled'),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Object])
-], McTooltip.prototype, "disabled", null);
-__decorate([
-    Input('mcMouseEnterDelay'),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], McTooltip.prototype, "mcMouseEnterDelay", null);
-__decorate([
-    Input('mcMouseLeaveDelay'),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], McTooltip.prototype, "mcMouseLeaveDelay", null);
-__decorate([
-    Input('mcTrigger'),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], McTooltip.prototype, "mcTrigger", null);
-__decorate([
-    Input('mcPlacement'),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], McTooltip.prototype, "mcPlacement", null);
-__decorate([
-    Input('mcTooltipClass'),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [])
-], McTooltip.prototype, "mcTooltipClass", null);
-__decorate([
-    Input('mcVisible'),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McTooltip.prototype, "mcVisible", null);
-__decorate([
-    HostBinding('class.mc-tooltip-open'),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [])
-], McTooltip.prototype, "isOpen", null);
-__decorate([
-    HostBinding('class.disabled'),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [])
-], McTooltip.prototype, "isParentDisabled", null);
-McTooltip = __decorate([
-    Directive({
-        selector: '[mcTooltip], [attribute^="mcTooltip"]',
-        exportAs: 'mcTooltip',
-        host: {
-            '(keydown)': 'handleKeydown($event)',
-            '(touchend)': 'handleTouchend()'
-        }
-    }),
-    __param(5, Inject(MC_TOOLTIP_SCROLL_STRATEGY)),
-    __param(6, Optional()),
-    __metadata("design:paramtypes", [Overlay,
-        ElementRef,
-        NgZone,
-        ScrollDispatcher,
-        ViewContainerRef, Object, Directionality])
-], McTooltip);
-
-let McToolTipModule = class McToolTipModule {
-};
-McToolTipModule = __decorate([
-    NgModule({
-        declarations: [McTooltipComponent, McTooltip],
-        exports: [McTooltipComponent, McTooltip],
-        imports: [CommonModule, OverlayModule],
-        providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
-        entryComponents: [McTooltipComponent]
-    })
-], McToolTipModule);
 
 /**
- * Generated bundle index. Do not edit.
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McToolTipModule {
+}
+McToolTipModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [McTooltipComponent, McTooltip],
+                exports: [McTooltipComponent, McTooltip],
+                imports: [CommonModule, OverlayModule],
+                providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
+                entryComponents: [McTooltipComponent]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McToolTipModule, McTooltipComponent, MC_TOOLTIP_SCROLL_STRATEGY, mcTooltipScrollStrategyFactory, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, getMcTooltipInvalidPositionError, McTooltip };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+export { McToolTipModule, mcTooltipScrollStrategyFactory, getMcTooltipInvalidPositionError, McTooltipComponent, MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McTooltip };
 //# sourceMappingURL=tooltip.js.map

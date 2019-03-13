@@ -4,86 +4,108 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __decorate, __metadata, __param } from 'tslib';
 import { Component, ChangeDetectionStrategy, ViewEncapsulation, EventEmitter, Host, Input, Optional, Output, NgModule } from '@angular/core';
 import { toBoolean } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 
-let McContentComponent = class McContentComponent {
-};
-McContentComponent = __decorate([
-    Component({
-        selector: 'mc-content',
-        preserveWhitespaces: false,
-        template: "<ng-content></ng-content>",
-        styles: [
-            `:host {
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McContentComponent {
+}
+McContentComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-content',
+                preserveWhitespaces: false,
+                template: "<ng-content></ng-content>",
+                styles: [
+                    `:host {
             display: block;
         }`
-        ],
-        host: {
-            '[class.mc-layout-content]': 'true'
-        }
-    })
-], McContentComponent);
+                ],
+                host: {
+                    '[class.mc-layout-content]': 'true'
+                }
+            },] },
+];
 
-let McFooterComponent = class McFooterComponent {
-};
-McFooterComponent = __decorate([
-    Component({
-        selector: 'mc-footer',
-        preserveWhitespaces: false,
-        template: "<ng-content></ng-content>",
-        styles: [
-            `:host {
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McFooterComponent {
+}
+McFooterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-footer',
+                preserveWhitespaces: false,
+                template: "<ng-content></ng-content>",
+                styles: [
+                    `:host {
             display: block;
         }`
-        ],
-        host: {
-            '[class.mc-layout-footer]': 'true'
-        }
-    })
-], McFooterComponent);
+                ],
+                host: {
+                    '[class.mc-layout-footer]': 'true'
+                }
+            },] },
+];
 
-let McHeaderComponent = class McHeaderComponent {
-};
-McHeaderComponent = __decorate([
-    Component({
-        selector: 'mc-header',
-        preserveWhitespaces: false,
-        template: "<ng-content></ng-content>",
-        styles: [
-            `:host {
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McHeaderComponent {
+}
+McHeaderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-header',
+                preserveWhitespaces: false,
+                template: "<ng-content></ng-content>",
+                styles: [
+                    `:host {
             display: block;
         }`
-        ],
-        host: {
-            '[class.mc-layout-header]': 'true'
-        }
-    })
-], McHeaderComponent);
+                ],
+                host: {
+                    '[class.mc-layout-header]': 'true'
+                }
+            },] },
+];
 
-let McLayoutComponent = class McLayoutComponent {
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McLayoutComponent {
     constructor() {
         this.hasSidebar = false;
     }
-};
-McLayoutComponent = __decorate([
-    Component({
-        selector: 'mc-layout',
-        preserveWhitespaces: false,
-        styles: [".mc-layout{display:flex;flex-direction:column;flex:auto}.mc-layout,.mc-layout *{box-sizing:border-box}.mc-layout-content{flex:auto}.mc-layout-has-sidebar{flex-direction:row}.mc-layout-has-sidebar>.mc-layout,.mc-layout-has-sidebar>.mc-layout-content{overflow-x:hidden}.mc-layout-footer,.mc-layout-header{flex:0 0 auto;padding:0 0}.mc-layout-sider{transition:all .2s;position:relative;min-width:0}.mc-layout-sider-children{height:100%;padding-top:.1px;margin-top:-.1px}.mc-layout-sider-right{order:1}"],
-        template: "<ng-content></ng-content>",
-        host: {
-            '[class.mc-layout]': 'true',
-            '[class.mc-layout-has-sidebar]': 'hasSidebar'
-        },
-        encapsulation: ViewEncapsulation.None,
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], McLayoutComponent);
+}
+McLayoutComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-layout',
+                preserveWhitespaces: false,
+                styles: [".mc-layout{display:flex;flex-direction:column;flex:auto}.mc-layout,.mc-layout *{box-sizing:border-box}.mc-layout-content{flex:auto}.mc-layout-has-sidebar{flex-direction:row}.mc-layout-has-sidebar>.mc-layout,.mc-layout-has-sidebar>.mc-layout-content{overflow-x:hidden}.mc-layout-footer,.mc-layout-header{flex:0 0 auto;padding:0 0}.mc-layout-sider{transition:all .2s;position:relative;min-width:0}.mc-layout-sider-children{height:100%;padding-top:.1px;margin-top:-.1px}.mc-layout-sider-right{order:1}"],
+                template: "<ng-content></ng-content>",
+                host: {
+                    '[class.mc-layout]': 'true',
+                    '[class.mc-layout-has-sidebar]': 'hasSidebar'
+                },
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
 
-let McSidebarComponent = class McSidebarComponent {
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McSidebarComponent {
+    /**
+     * @param {?} mcLayoutComponent
+     */
     constructor(mcLayoutComponent) {
         this.mcLayoutComponent = mcLayoutComponent;
         this._mcWidth = 200;
@@ -93,18 +115,35 @@ let McSidebarComponent = class McSidebarComponent {
         this.collapsed = false;
         this.collapsible = false;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcCollapsible(value) {
         this.collapsible = toBoolean(value);
     }
+    /**
+     * @return {?}
+     */
     get mcCollapsible() {
         return this.collapsible;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set mcCollapsed(value) {
         this.collapsed = toBoolean(value);
     }
+    /**
+     * @return {?}
+     */
     get mcCollapsed() {
         return this.collapsed;
     }
+    /**
+     * @return {?}
+     */
     get mcFlex() {
         if (this.mcCollapsed) {
             return `0 0 ${this.mcCollapsedWidth}px`;
@@ -113,6 +152,9 @@ let McSidebarComponent = class McSidebarComponent {
             return `0 0 ${this.mcWidth}px`;
         }
     }
+    /**
+     * @return {?}
+     */
     get mcWidth() {
         if (this.mcCollapsed) {
             return this.mcCollapsedWidth;
@@ -121,77 +163,77 @@ let McSidebarComponent = class McSidebarComponent {
             return this._mcWidth;
         }
     }
+    /**
+     * @return {?}
+     */
     ngOnInit() {
         if (this.mcLayoutComponent) {
             this.mcLayoutComponent.hasSidebar = true;
         }
     }
+}
+McSidebarComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-sidebar',
+                preserveWhitespaces: false,
+                template: "<div class=\"mc-layout-sidebar-children\"><ng-content></ng-content></div>",
+                host: {
+                    '[class.mc-layout-sidebar]': 'true',
+                    '[class.mc-layout-sidebar-collapsed]': 'mcCollapsed',
+                    '[style.flex]': 'mcFlex',
+                    '[style.max-width.px]': 'mcWidth',
+                    '[style.min-width.px]': 'mcWidth',
+                    '[style.width.px]': 'mcWidth'
+                },
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+McSidebarComponent.ctorParameters = () => [
+    { type: McLayoutComponent, decorators: [{ type: Optional }, { type: Host }] }
+];
+McSidebarComponent.propDecorators = {
+    _mcWidth: [{ type: Input }],
+    mcCollapsedWidth: [{ type: Input }],
+    mcCollapsible: [{ type: Input }],
+    mcCollapsed: [{ type: Input }],
+    mcCollapsedChange: [{ type: Output }]
 };
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], McSidebarComponent.prototype, "_mcWidth", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], McSidebarComponent.prototype, "mcCollapsedWidth", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McSidebarComponent.prototype, "mcCollapsible", null);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McSidebarComponent.prototype, "mcCollapsed", null);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], McSidebarComponent.prototype, "mcCollapsedChange", void 0);
-McSidebarComponent = __decorate([
-    Component({
-        selector: 'mc-sidebar',
-        preserveWhitespaces: false,
-        template: "<div class=\"mc-layout-sidebar-children\"><ng-content></ng-content></div>",
-        host: {
-            '[class.mc-layout-sidebar]': 'true',
-            '[class.mc-layout-sidebar-collapsed]': 'mcCollapsed',
-            '[style.flex]': 'mcFlex',
-            '[style.max-width.px]': 'mcWidth',
-            '[style.min-width.px]': 'mcWidth',
-            '[style.width.px]': 'mcWidth'
-        },
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __param(0, Optional()), __param(0, Host()),
-    __metadata("design:paramtypes", [McLayoutComponent])
-], McSidebarComponent);
-
-let McLayoutModule = class McLayoutModule {
-};
-McLayoutModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        exports: [
-            McLayoutComponent,
-            McContentComponent,
-            McFooterComponent,
-            McHeaderComponent,
-            McSidebarComponent
-        ],
-        declarations: [
-            McLayoutComponent,
-            McContentComponent,
-            McFooterComponent,
-            McHeaderComponent,
-            McSidebarComponent
-        ]
-    })
-], McLayoutModule);
 
 /**
- * Generated bundle index. Do not edit.
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McLayoutModule {
+}
+McLayoutModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                exports: [
+                    McLayoutComponent,
+                    McContentComponent,
+                    McFooterComponent,
+                    McHeaderComponent,
+                    McSidebarComponent
+                ],
+                declarations: [
+                    McLayoutComponent,
+                    McContentComponent,
+                    McFooterComponent,
+                    McHeaderComponent,
+                    McSidebarComponent
+                ]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McContentComponent, McFooterComponent, McHeaderComponent, McLayoutComponent, McSidebarComponent, McLayoutModule };

@@ -51,7 +51,7 @@ export declare class McDatepickerInput<D> implements ControlValueAccessor, OnDes
     /** Emits when an `input` event is fired on this `<input>`. */
     readonly dateInput: EventEmitter<McDatepickerInputEvent<D>>;
     /** Emits when the value changes (either due to user input or programmatic change). */
-    valueChange: EventEmitter<D | null>;
+    valueChange: EventEmitter<D>;
     /** Emits when the disabled state has changed */
     disabledChange: EventEmitter<boolean>;
     private _value;

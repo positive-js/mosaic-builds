@@ -5,54 +5,72 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { InjectionToken, Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, Output, ViewChild, ViewEncapsulation, Directive, NgModule } from '@angular/core';
-import { __decorate, __metadata, __param } from 'tslib';
 import { NG_VALUE_ACCESSOR, CheckboxRequiredValidator, NG_VALIDATORS } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { mixinColor, mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
  * Injection token that can be used to specify the checkbox click behavior.
+ * @type {?}
  */
 const MC_CHECKBOX_CLICK_ACTION = new InjectionToken('mc-checkbox-click-action');
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // Increasing integer for generating unique ids for checkbox components.
+/** @type {?} */
 let nextUniqueId = 0;
 /**
  * Provider Expression that allows mc-checkbox to register as a ControlValueAccessor.
  * This allows it to support [(ngModel)].
- * @docs-private
+ * \@docs-private
+ * @type {?}
  */
 const MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => McCheckbox),
     multi: true
 };
-/**
- * Represents the different states that require custom transitions between them.
- * @docs-private
- */
-var TransitionCheckState;
-(function (TransitionCheckState) {
+/** @enum {number} */
+const TransitionCheckState = {
     /** The initial state of the component before any user interaction. */
-    TransitionCheckState[TransitionCheckState["Init"] = 0] = "Init";
+    Init: 0,
     /** The state representing the component when it's becoming checked. */
-    TransitionCheckState[TransitionCheckState["Checked"] = 1] = "Checked";
+    Checked: 1,
     /** The state representing the component when it's becoming unchecked. */
-    TransitionCheckState[TransitionCheckState["Unchecked"] = 2] = "Unchecked";
+    Unchecked: 2,
     /** The state representing the component when it's becoming indeterminate. */
-    TransitionCheckState[TransitionCheckState["Indeterminate"] = 3] = "Indeterminate";
-})(TransitionCheckState || (TransitionCheckState = {}));
-/** Change event object emitted by McCheckbox. */
+    Indeterminate: 3,
+};
+TransitionCheckState[TransitionCheckState.Init] = 'Init';
+TransitionCheckState[TransitionCheckState.Checked] = 'Checked';
+TransitionCheckState[TransitionCheckState.Unchecked] = 'Unchecked';
+TransitionCheckState[TransitionCheckState.Indeterminate] = 'Indeterminate';
+/**
+ * Change event object emitted by McCheckbox.
+ */
 class McCheckboxChange {
 }
 // Boilerplate for applying mixins to McCheckbox.
-/** @docs-private */
+/**
+ * \@docs-private
+ */
 class McCheckboxBase {
+    /**
+     * @param {?} _elementRef
+     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
+/** @type {?} */
 const _McCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
 /**
  * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
@@ -61,7 +79,14 @@ const _McCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBa
  * so there is no need to provide them yourself. However, if you want to omit a label and still
  * have the checkbox be accessible, you may supply an [aria-label] input.
  */
-let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
+class McCheckbox extends _McCheckboxMixinBase {
+    /**
+     * @param {?} elementRef
+     * @param {?} _changeDetectorRef
+     * @param {?} _focusMonitor
+     * @param {?} tabIndex
+     * @param {?} _clickAction
+     */
     constructor(elementRef, _changeDetectorRef, _focusMonitor, tabIndex, _clickAction) {
         super(elementRef);
         this._changeDetectorRef = _changeDetectorRef;
@@ -77,19 +102,29 @@ let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
          */
         this.ariaLabelledby = null;
         this._uniqueId = `mc-checkbox-${++nextUniqueId}`;
-        /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
+        /**
+         * A unique id for the checkbox input. If none is supplied, it will be auto-generated.
+         */
         this.id = this._uniqueId;
-        /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
+        /**
+         * Whether the label should appear after or before the checkbox. Defaults to 'after'
+         */
         this.labelPosition = 'after';
-        /** Name value will be applied to the input element if present */
+        /**
+         * Name value will be applied to the input element if present
+         */
         this.name = null;
-        /** Event emitted when the checkbox's `checked` value changes. */
+        /**
+         * Event emitted when the checkbox's `checked` value changes.
+         */
         this.change = new EventEmitter();
-        /** Event emitted when the checkbox's `indeterminate` value changes. */
+        /**
+         * Event emitted when the checkbox's `indeterminate` value changes.
+         */
         this.indeterminateChange = new EventEmitter();
         /**
          * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-         * @docs-private
+         * \@docs-private
          */
         this._onTouched = () => {
         };
@@ -102,31 +137,52 @@ let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
         this._indeterminate = false;
         this.tabIndex = parseInt(tabIndex) || 0;
     }
-    /** Returns the unique id for the visual hidden input. */
+    /**
+     * Returns the unique id for the visual hidden input.
+     * @return {?}
+     */
     get inputId() {
         return `${this.id || this._uniqueId}-input`;
     }
-    /** Whether the checkbox is required. */
+    /**
+     * Whether the checkbox is required.
+     * @return {?}
+     */
     get required() {
         return this._required;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set required(value) {
         this._required = toBoolean(value);
     }
+    /**
+     * @return {?}
+     */
     ngAfterViewInit() {
         this._focusMonitor
             .monitor(this._inputElement.nativeElement)
             .subscribe((focusOrigin) => this._onInputFocusChange(focusOrigin));
     }
+    /**
+     * @return {?}
+     */
     ngOnDestroy() {
         this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
     }
     /**
      * Whether the checkbox is checked.
+     * @return {?}
      */
     get checked() {
         return this._checked;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set checked(value) {
         if (value != this.checked) {
             this._checked = value;
@@ -136,10 +192,15 @@ let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
     /**
      * Whether the checkbox is disabled. This fully overrides the implementation provided by
      * mixinDisabled, but the mixin is still required because mixinTabIndex requires it.
+     * @return {?}
      */
     get disabled() {
         return this._disabled;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set disabled(value) {
         if (value != this.disabled) {
             this._disabled = value;
@@ -151,11 +212,17 @@ let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
      * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
      * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
      * set to false.
+     * @return {?}
      */
     get indeterminate() {
         return this._indeterminate;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set indeterminate(value) {
+        /** @type {?} */
         const changed = value != this._indeterminate;
         this._indeterminate = value;
         if (changed) {
@@ -168,7 +235,10 @@ let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
             this.indeterminateChange.emit(this._indeterminate);
         }
     }
-    /** Method being called whenever the label text changes. */
+    /**
+     * Method being called whenever the label text changes.
+     * @return {?}
+     */
     _onLabelTextChange() {
         // This method is getting called whenever the label of the checkbox changes.
         // Since the checkbox uses the OnPush strategy we need to notify it about the change
@@ -176,26 +246,52 @@ let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
         this._changeDetectorRef.markForCheck();
     }
     // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     writeValue(value) {
         this.checked = !!value;
     }
     // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     registerOnChange(fn) {
         this._controlValueAccessorChangeFn = fn;
     }
     // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     registerOnTouched(fn) {
         this._onTouched = fn;
     }
     // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
     }
+    /**
+     * @return {?}
+     */
     _getAriaChecked() {
         return this.checked ? 'true' : (this.indeterminate ? 'mixed' : 'false');
     }
+    /**
+     * @private
+     * @param {?} newState
+     * @return {?}
+     */
     _transitionCheckState(newState) {
+        /** @type {?} */
         const oldState = this._currentCheckState;
+        /** @type {?} */
         const element = this._elementRef.nativeElement;
         if (oldState === newState) {
             return;
@@ -208,20 +304,33 @@ let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
             element.classList.add(this._currentAnimationClass);
         }
     }
+    /**
+     * @private
+     * @return {?}
+     */
     _emitChangeEvent() {
+        /** @type {?} */
         const event = new McCheckboxChange();
         event.source = this;
         event.checked = this.checked;
         this._controlValueAccessorChangeFn(this.checked);
         this.change.emit(event);
     }
-    /** Function is called whenever the focus changes for the input element. */
+    /**
+     * Function is called whenever the focus changes for the input element.
+     * @private
+     * @param {?} focusOrigin
+     * @return {?}
+     */
     _onInputFocusChange(focusOrigin) {
         if (focusOrigin) {
             this._onTouched();
         }
     }
-    /** Toggles the `checked` state of the checkbox. */
+    /**
+     * Toggles the `checked` state of the checkbox.
+     * @return {?}
+     */
     toggle() {
         this.checked = !this.checked;
     }
@@ -230,7 +339,8 @@ let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
      * Toggles checked state if element is not disabled.
      * Do not toggle on (change) event since IE doesn't fire change event when
      *   indeterminate checkbox is clicked.
-     * @param event
+     * @param {?} event
+     * @return {?}
      */
     _onInputClick(event) {
         // We have to stop propagation for click events on the visual hidden input element.
@@ -264,100 +374,74 @@ let McCheckbox = class McCheckbox extends _McCheckboxMixinBase {
             this._inputElement.nativeElement.indeterminate = this.indeterminate;
         }
     }
-    /** Focuses the checkbox. */
+    /**
+     * Focuses the checkbox.
+     * @return {?}
+     */
     focus() {
         this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
     }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
     _onInteractionEvent(event) {
         // We always have to stop propagation on the change event.
         // Otherwise the change event, from the input element, will bubble up and
         // emit its event object to the `change` output.
         event.stopPropagation();
     }
+}
+McCheckbox.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-checkbox',
+                template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input type=\"checkbox\" class=\"mc-checkbox-input cdk-visually-hidden\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></label>",
+                styles: [".mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox.mc-checked .mc-checkbox-checkmark{display:block}.mc-checkbox.mc-checked .mc-checkbox-mixedmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-checkmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:block}.mc-checkbox.mc-disabled{cursor:default}.mc-checkbox.mc-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;left:-1px;right:0;bottom:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}"],
+                exportAs: 'mcCheckbox',
+                host: {
+                    class: 'mc-checkbox',
+                    '[id]': 'id',
+                    '[attr.id]': 'id',
+                    '[class.mc-indeterminate]': 'indeterminate',
+                    '[class.mc-checked]': 'checked',
+                    '[class.mc-disabled]': 'disabled',
+                    '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
+                },
+                providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],
+                inputs: ['color', 'tabIndex'],
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+McCheckbox.ctorParameters = () => [
+    { type: ElementRef },
+    { type: ChangeDetectorRef },
+    { type: FocusMonitor },
+    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_CHECKBOX_CLICK_ACTION,] }] }
+];
+McCheckbox.propDecorators = {
+    ariaLabel: [{ type: Input, args: ['aria-label',] }],
+    ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
+    id: [{ type: Input }],
+    required: [{ type: Input }],
+    labelPosition: [{ type: Input }],
+    name: [{ type: Input }],
+    change: [{ type: Output }],
+    indeterminateChange: [{ type: Output }],
+    value: [{ type: Input }],
+    _inputElement: [{ type: ViewChild, args: ['input',] }],
+    checked: [{ type: Input }],
+    disabled: [{ type: Input }],
+    indeterminate: [{ type: Input }]
 };
-__decorate([
-    Input('aria-label'),
-    __metadata("design:type", String)
-], McCheckbox.prototype, "ariaLabel", void 0);
-__decorate([
-    Input('aria-labelledby'),
-    __metadata("design:type", Object)
-], McCheckbox.prototype, "ariaLabelledby", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McCheckbox.prototype, "id", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McCheckbox.prototype, "required", null);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McCheckbox.prototype, "labelPosition", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], McCheckbox.prototype, "name", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McCheckbox.prototype, "change", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McCheckbox.prototype, "indeterminateChange", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McCheckbox.prototype, "value", void 0);
-__decorate([
-    ViewChild('input'),
-    __metadata("design:type", ElementRef)
-], McCheckbox.prototype, "_inputElement", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McCheckbox.prototype, "checked", null);
-__decorate([
-    Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], McCheckbox.prototype, "disabled", null);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McCheckbox.prototype, "indeterminate", null);
-McCheckbox = __decorate([
-    Component({
-        selector: 'mc-checkbox',
-        template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input type=\"checkbox\" class=\"mc-checkbox-input cdk-visually-hidden\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></label>",
-        styles: [".mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox.mc-checked .mc-checkbox-checkmark{display:block}.mc-checkbox.mc-checked .mc-checkbox-mixedmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-checkmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:block}.mc-checkbox.mc-disabled{cursor:default}.mc-checkbox.mc-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;left:-1px;right:0;bottom:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}"],
-        exportAs: 'mcCheckbox',
-        host: {
-            class: 'mc-checkbox',
-            '[id]': 'id',
-            '[attr.id]': 'id',
-            '[class.mc-indeterminate]': 'indeterminate',
-            '[class.mc-checked]': 'checked',
-            '[class.mc-disabled]': 'disabled',
-            '[class.mc-checkbox-label-before]': 'labelPosition == "before"'
-        },
-        providers: [MC_CHECKBOX_CONTROL_VALUE_ACCESSOR],
-        inputs: ['color', 'tabIndex'],
-        encapsulation: ViewEncapsulation.None,
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __param(3, Attribute('tabindex')),
-    __param(4, Optional()), __param(4, Inject(MC_CHECKBOX_CLICK_ACTION)),
-    __metadata("design:paramtypes", [ElementRef,
-        ChangeDetectorRef,
-        FocusMonitor, String, Object])
-], McCheckbox);
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 const MC_CHECKBOX_REQUIRED_VALIDATOR = {
     provide: NG_VALIDATORS,
     useExisting: forwardRef(() => McCheckboxRequiredValidator),
@@ -368,29 +452,39 @@ const MC_CHECKBOX_REQUIRED_VALIDATOR = {
  * Current CheckboxRequiredValidator only work with `input type=checkbox` and does not
  * work with `mc-checkbox`.
  */
-let McCheckboxRequiredValidator = class McCheckboxRequiredValidator extends CheckboxRequiredValidator {
-};
-McCheckboxRequiredValidator = __decorate([
-    Directive({
-        selector: `mc-checkbox[required][formControlName],
+class McCheckboxRequiredValidator extends CheckboxRequiredValidator {
+}
+McCheckboxRequiredValidator.decorators = [
+    { type: Directive, args: [{
+                selector: `mc-checkbox[required][formControlName],
              mc-checkbox[required][formControl], mc-checkbox[required][ngModel]`,
-        providers: [MC_CHECKBOX_REQUIRED_VALIDATOR],
-        host: { '[attr.required]': 'required ? "" : null' }
-    })
-], McCheckboxRequiredValidator);
-
-let McCheckboxModule = class McCheckboxModule {
-};
-McCheckboxModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        exports: [McCheckbox, McCheckboxRequiredValidator],
-        declarations: [McCheckbox, McCheckboxRequiredValidator]
-    })
-], McCheckboxModule);
+                providers: [MC_CHECKBOX_REQUIRED_VALIDATOR],
+                host: { '[attr.required]': 'required ? "" : null' }
+            },] },
+];
 
 /**
- * Generated bundle index. Do not edit.
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McCheckboxModule {
+}
+McCheckboxModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                exports: [McCheckbox, McCheckboxRequiredValidator],
+                declarations: [McCheckbox, McCheckboxRequiredValidator]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { MC_CHECKBOX_CONTROL_VALUE_ACCESSOR, TransitionCheckState, McCheckboxChange, McCheckboxBase, _McCheckboxMixinBase, McCheckbox, MC_CHECKBOX_CLICK_ACTION, McCheckboxModule, MC_CHECKBOX_REQUIRED_VALIDATOR, McCheckboxRequiredValidator };

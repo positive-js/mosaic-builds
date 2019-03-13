@@ -14,12 +14,8 @@ export declare class McCalendarCell {
     displayValue: string;
     ariaLabel: string;
     enabled: boolean;
-    cssClasses?: string | Set<string> | {
-        [key: string]: any;
-    } | string[] | undefined;
-    constructor(value: number, displayValue: string, ariaLabel: string, enabled: boolean, cssClasses?: string | Set<string> | {
-        [key: string]: any;
-    } | string[] | undefined);
+    cssClasses?: McCalendarCellCssClasses;
+    constructor(value: number, displayValue: string, ariaLabel: string, enabled: boolean, cssClasses?: McCalendarCellCssClasses);
 }
 /**
  * An internal component used to display calendar data in a table.

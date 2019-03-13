@@ -39,31 +39,46 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __param(paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @param {?} val
+ * @return {?}
+ */
 function isBoolean(val) { return typeof val === 'boolean'; }
+/**
+ * @param {?} value
+ * @return {?}
+ */
 function toBoolean(value) {
     return value != null && "" + value !== 'false';
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // Injection token that configures whether the Mosaic sanity checks are enabled.
+/** @type {?} */
 var MC_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
     factory: MC_SANITY_CHECKS_FACTORY
 });
+/**
+ * @return {?}
+ */
 function MC_SANITY_CHECKS_FACTORY() {
     return true;
 }
@@ -89,25 +104,65 @@ var McCommonModule = /** @class */ (function () {
         }
     }
     // Whether any sanity checks are enabled
-    McCommonModule.prototype._areChecksEnabled = function () {
+    // Whether any sanity checks are enabled
+    /**
+     * @private
+     * @return {?}
+     */
+    McCommonModule.prototype._areChecksEnabled = 
+    // Whether any sanity checks are enabled
+    /**
+     * @private
+     * @return {?}
+     */
+    function () {
         return this._sanityChecksEnabled && core.isDevMode() && !this._isTestEnv();
     };
     // Whether the code is running in tests.
-    McCommonModule.prototype._isTestEnv = function () {
+    // Whether the code is running in tests.
+    /**
+     * @private
+     * @return {?}
+     */
+    McCommonModule.prototype._isTestEnv = 
+    // Whether the code is running in tests.
+    /**
+     * @private
+     * @return {?}
+     */
+    function () {
         // tslint:disable-next-line
         return this._window && (this._window['__karma__'] || this._window['jasmine']);
     };
-    McCommonModule.prototype._checkDoctypeIsDefined = function () {
+    /**
+     * @private
+     * @return {?}
+     */
+    McCommonModule.prototype._checkDoctypeIsDefined = /**
+     * @private
+     * @return {?}
+     */
+    function () {
         if (this._document && !this._document.doctype) {
             console.warn('Current document does not have a doctype. This may cause ' +
                 'some Mosaic components not to behave as expected.');
         }
     };
-    McCommonModule.prototype._checkThemeIsPresent = function () {
+    /**
+     * @private
+     * @return {?}
+     */
+    McCommonModule.prototype._checkThemeIsPresent = /**
+     * @private
+     * @return {?}
+     */
+    function () {
         if (this._document && typeof getComputedStyle === 'function') {
+            /** @type {?} */
             var testElement = this._document.createElement('div');
             testElement.classList.add('mc-theme-loaded-marker');
             this._document.body.appendChild(testElement);
+            /** @type {?} */
             var computedStyle = getComputedStyle(testElement);
             // In some situations, the computed style of the test element can be null. For example in
             // Firefox, the computed style is null if an application is running inside of a hidden iframe.
@@ -120,17 +175,28 @@ var McCommonModule = /** @class */ (function () {
             this._document.body.removeChild(testElement);
         }
     };
-    McCommonModule = __decorate([
-        core.NgModule({
-            imports: [bidi.BidiModule],
-            exports: [bidi.BidiModule]
-        }),
-        __param(0, core.Optional()), __param(0, core.Inject(MC_SANITY_CHECKS)),
-        __metadata("design:paramtypes", [Boolean])
-    ], McCommonModule);
+    McCommonModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [bidi.BidiModule],
+                    exports: [bidi.BidiModule]
+                },] },
+    ];
+    /** @nocollapse */
+    McCommonModule.ctorParameters = function () { return [
+        { type: Boolean, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_SANITY_CHECKS,] }] }
+    ]; };
     return McCommonModule;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @template T
+ * @param {?} base
+ * @return {?}
+ */
 function mixinDisabled(base) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
@@ -144,10 +210,17 @@ function mixinDisabled(base) {
             return _this;
         }
         Object.defineProperty(class_1.prototype, "disabled", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return this._disabled;
             },
-            set: function (value) {
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
                 this._disabled = coercion.coerceBooleanProperty(value);
             },
             enumerable: true,
@@ -157,17 +230,27 @@ function mixinDisabled(base) {
     }(base));
 }
 
-
-(function (ThemePalette) {
-    ThemePalette["Primary"] = "primary";
-    ThemePalette["Second"] = "second";
-    ThemePalette["Error"] = "error";
-    ThemePalette["Default"] = "second";
-    ThemePalette["Empty"] = "";
-})(exports.ThemePalette || (exports.ThemePalette = {}));
-/** Mixin to augment a directive with a `color` property. */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var ThemePalette = {
+    Primary: 'primary',
+    Second: 'second',
+    Error: 'error',
+    Default: 'second',
+    Empty: '',
+};
+/**
+ * Mixin to augment a directive with a `color` property.
+ * @template T
+ * @param {?} base
+ * @param {?=} defaultColor
+ * @return {?}
+ */
 function mixinColor(base, defaultColor) {
-    if (defaultColor === void 0) { defaultColor = exports.ThemePalette.Default; }
+    if (defaultColor === void 0) { defaultColor = ThemePalette.Default; }
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
         function class_1() {
@@ -180,10 +263,18 @@ function mixinColor(base, defaultColor) {
             return _this;
         }
         Object.defineProperty(class_1.prototype, "color", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return this._color;
             },
-            set: function (value) {
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                /** @type {?} */
                 var colorPalette = value || defaultColor;
                 if (colorPalette !== this._color) {
                     if (this._color) {
@@ -202,7 +293,17 @@ function mixinColor(base, defaultColor) {
     }(base));
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // Mixin to augment a directive with a `tabIndex` property.
+/**
+ * @template T
+ * @param {?} base
+ * @param {?=} defaultTabIndex
+ * @return {?}
+ */
 function mixinTabIndex(base, defaultTabIndex) {
     if (defaultTabIndex === void 0) { defaultTabIndex = 0; }
     return /** @class */ (function (_super) {
@@ -217,10 +318,17 @@ function mixinTabIndex(base, defaultTabIndex) {
             return _this;
         }
         Object.defineProperty(class_1.prototype, "tabIndex", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return this.disabled ? -1 : this._tabIndex;
             },
-            set: function (value) {
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
                 this._tabIndex = value != null ? value : defaultTabIndex;
             },
             enumerable: true,
@@ -231,8 +339,15 @@ function mixinTabIndex(base, defaultTabIndex) {
 }
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
  * Mixin to augment a directive with updateErrorState method.
  * For component with `errorState` and need to update `errorState`.
+ * @template T
+ * @param {?} base
+ * @return {?}
  */
 function mixinErrorState(base) {
     return /** @class */ (function (_super) {
@@ -243,7 +358,9 @@ function mixinErrorState(base) {
                 args[_i] = arguments[_i];
             }
             var _this = _super.apply(this, args) || this;
-            /** Whether the component is in an error state. */
+            /**
+             * Whether the component is in an error state.
+             */
             _this.errorState = false;
             /**
              * Stream that emits whenever the state of the input changes such that the wrapping
@@ -252,11 +369,22 @@ function mixinErrorState(base) {
             _this.stateChanges = new rxjs.Subject();
             return _this;
         }
-        class_1.prototype.updateErrorState = function () {
+        /**
+         * @return {?}
+         */
+        class_1.prototype.updateErrorState = /**
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
             var oldState = this.errorState;
+            /** @type {?} */
             var parent = this.parentFormGroup || this.parentForm;
+            /** @type {?} */
             var matcher = this.errorStateMatcher || this.defaultErrorStateMatcher;
-            var control = this.ngControl ? this.ngControl.control : null;
+            /** @type {?} */
+            var control = this.ngControl ? (/** @type {?} */ (this.ngControl.control)) : null;
+            /** @type {?} */
             var newState = matcher.isErrorState(control, parent);
             if (newState !== oldState) {
                 this.errorState = newState;
@@ -268,26 +396,39 @@ function mixinErrorState(base) {
 }
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
  * Shared directive to count lines inside a text area, such as a list item.
- * Line elements can be extracted with a @ContentChildren(McLine) query, then
+ * Line elements can be extracted with a \@ContentChildren(McLine) query, then
  * counted by checking the query list's length.
  */
 var McLine = /** @class */ (function () {
     function McLine() {
     }
-    McLine = __decorate([
-        core.Directive({
-            selector: '[mc-line], [mcLine]',
-            host: { class: 'mc-line' }
-        })
-    ], McLine);
+    McLine.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mc-line], [mcLine]',
+                    host: { class: 'mc-line' }
+                },] },
+    ];
     return McLine;
 }());
 /**
  * Helper that takes a query list of lines and sets the correct class on the host.
- * @docs-private
+ * \@docs-private
  */
-var McLineSetter = /** @class */ (function () {
+var   /**
+ * Helper that takes a query list of lines and sets the correct class on the host.
+ * \@docs-private
+ */
+McLineSetter = /** @class */ (function () {
     function McLineSetter(_lines, _element) {
         var _this = this;
         this._lines = _lines;
@@ -297,7 +438,17 @@ var McLineSetter = /** @class */ (function () {
             _this._setLineClass(_this._lines.length);
         });
     }
-    McLineSetter.prototype._setLineClass = function (count) {
+    /**
+     * @private
+     * @param {?} count
+     * @return {?}
+     */
+    McLineSetter.prototype._setLineClass = /**
+     * @private
+     * @param {?} count
+     * @return {?}
+     */
+    function (count) {
         this._resetClasses();
         if (count === 2 || count === 3) {
             this._setClass("mc-" + count + "-line", true);
@@ -306,12 +457,32 @@ var McLineSetter = /** @class */ (function () {
             this._setClass("mc-multi-line", true);
         }
     };
-    McLineSetter.prototype._resetClasses = function () {
+    /**
+     * @private
+     * @return {?}
+     */
+    McLineSetter.prototype._resetClasses = /**
+     * @private
+     * @return {?}
+     */
+    function () {
         this._setClass('mc-2-line', false);
         this._setClass('mc-3-line', false);
         this._setClass('mc-multi-line', false);
     };
-    McLineSetter.prototype._setClass = function (className, isAdd) {
+    /**
+     * @private
+     * @param {?} className
+     * @param {?} isAdd
+     * @return {?}
+     */
+    McLineSetter.prototype._setClass = /**
+     * @private
+     * @param {?} className
+     * @param {?} isAdd
+     * @return {?}
+     */
+    function (className, isAdd) {
         if (isAdd) {
             this._element.nativeElement.classList.add(className);
         }
@@ -324,42 +495,74 @@ var McLineSetter = /** @class */ (function () {
 var McLineModule = /** @class */ (function () {
     function McLineModule() {
     }
-    McLineModule = __decorate([
-        core.NgModule({
-            imports: [],
-            exports: [McLine],
-            declarations: [McLine]
-        })
-    ], McLineModule);
+    McLineModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [],
+                    exports: [McLine],
+                    declarations: [McLine]
+                },] },
+    ];
     return McLineModule;
 }());
 
-/** Error state matcher that matches when a control is invalid and dirty. */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Error state matcher that matches when a control is invalid and dirty.
+ */
 var ShowOnDirtyErrorStateMatcher = /** @class */ (function () {
     function ShowOnDirtyErrorStateMatcher() {
     }
-    ShowOnDirtyErrorStateMatcher.prototype.isErrorState = function (control, form) {
+    /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    ShowOnDirtyErrorStateMatcher.prototype.isErrorState = /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    function (control, form) {
         return !!(control && control.invalid && (control.dirty || (form && form.submitted)));
     };
-    ShowOnDirtyErrorStateMatcher = __decorate([
-        core.Injectable()
-    ], ShowOnDirtyErrorStateMatcher);
+    ShowOnDirtyErrorStateMatcher.decorators = [
+        { type: core.Injectable },
+    ];
     return ShowOnDirtyErrorStateMatcher;
 }());
-/** Provider that defines how form controls behave with regards to displaying error messages. */
+/**
+ * Provider that defines how form controls behave with regards to displaying error messages.
+ */
 var ErrorStateMatcher = /** @class */ (function () {
     function ErrorStateMatcher() {
     }
-    ErrorStateMatcher.prototype.isErrorState = function (control, form) {
+    /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    ErrorStateMatcher.prototype.isErrorState = /**
+     * @param {?} control
+     * @param {?} form
+     * @return {?}
+     */
+    function (control, form) {
         return !!(control && control.invalid && (control.touched || (form && form.submitted)));
     };
-    ErrorStateMatcher.ngInjectableDef = core.defineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
-    ErrorStateMatcher = __decorate([
-        core.Injectable({ providedIn: 'root' })
-    ], ErrorStateMatcher);
+    ErrorStateMatcher.decorators = [
+        { type: core.Injectable, args: [{ providedIn: 'root' },] },
+    ];
+    /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core.defineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
     return ErrorStateMatcher;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /**
  * Component that shows a simplified checkbox without including any kind of "real" checkbox.
  * Meant to be used when the checkbox is purely decorative and a large number of them will be
@@ -371,52 +574,56 @@ var ErrorStateMatcher = /** @class */ (function () {
  * interchangeable with `<mc-checkbox>` and should *not* be used if the user would directly
  * interact with the checkbox. The pseudo-checkbox should only be used as an implementation detail
  * of more complex components that appropriately handle selected / checked state.
- * @docs-private
+ * \@docs-private
  */
 var McPseudoCheckbox = /** @class */ (function () {
     function McPseudoCheckbox() {
         this.state = 'unchecked';
         this.disabled = false;
     }
-    __decorate([
-        core.Input(),
-        __metadata("design:type", String)
-    ], McPseudoCheckbox.prototype, "state", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Boolean)
-    ], McPseudoCheckbox.prototype, "disabled", void 0);
-    McPseudoCheckbox = __decorate([
-        core.Component({
-            encapsulation: core.ViewEncapsulation.None,
-            preserveWhitespaces: false,
-            changeDetection: core.ChangeDetectionStrategy.OnPush,
-            selector: 'mc-pseudo-checkbox',
-            styles: [".mc-pseudo-checkbox{position:relative;display:inline-block;box-sizing:border-box;width:16px;height:16px;border-radius:3px;border-width:1px;border-style:solid;cursor:pointer;vertical-align:middle;flex-shrink:0}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;left:-1px}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark{display:inline-block}.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}"],
-            template: "<i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>",
-            host: {
-                class: 'mc-pseudo-checkbox',
-                '[class.mc-indeterminate]': 'state === "indeterminate"',
-                '[class.mc-checked]': 'state === "checked"',
-                '[class.mc-disabled]': 'disabled'
-            }
-        })
-    ], McPseudoCheckbox);
+    McPseudoCheckbox.decorators = [
+        { type: core.Component, args: [{
+                    encapsulation: core.ViewEncapsulation.None,
+                    preserveWhitespaces: false,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    selector: 'mc-pseudo-checkbox',
+                    styles: [".mc-pseudo-checkbox{position:relative;display:inline-block;box-sizing:border-box;width:16px;height:16px;border-radius:3px;border-width:1px;border-style:solid;cursor:pointer;vertical-align:middle;flex-shrink:0}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;left:-1px}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark{display:inline-block}.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}"],
+                    template: "<i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>",
+                    host: {
+                        class: 'mc-pseudo-checkbox',
+                        '[class.mc-indeterminate]': 'state === "indeterminate"',
+                        '[class.mc-checked]': 'state === "checked"',
+                        '[class.mc-disabled]': 'disabled'
+                    }
+                },] },
+    ];
+    McPseudoCheckbox.propDecorators = {
+        state: [{ type: core.Input }],
+        disabled: [{ type: core.Input }]
+    };
     return McPseudoCheckbox;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McPseudoCheckboxModule = /** @class */ (function () {
     function McPseudoCheckboxModule() {
     }
-    McPseudoCheckboxModule = __decorate([
-        core.NgModule({
-            exports: [McPseudoCheckbox],
-            declarations: [McPseudoCheckbox]
-        })
-    ], McPseudoCheckboxModule);
+    McPseudoCheckboxModule.decorators = [
+        { type: core.NgModule, args: [{
+                    exports: [McPseudoCheckbox],
+                    declarations: [McPseudoCheckbox]
+                },] },
+    ];
     return McPseudoCheckboxModule;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McMeasureScrollbarService = /** @class */ (function () {
     function McMeasureScrollbarService(document) {
         this.document = document;
@@ -430,7 +637,10 @@ var McMeasureScrollbarService = /** @class */ (function () {
         this.initScrollBarWidth();
     }
     Object.defineProperty(McMeasureScrollbarService.prototype, "scrollBarWidth", {
-        get: function () {
+        get: /**
+         * @return {?}
+         */
+        function () {
             if (this._scrollbarWidth) {
                 return this._scrollbarWidth;
             }
@@ -440,7 +650,14 @@ var McMeasureScrollbarService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    McMeasureScrollbarService.prototype.initScrollBarWidth = function () {
+    /**
+     * @return {?}
+     */
+    McMeasureScrollbarService.prototype.initScrollBarWidth = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
         var scrollDiv = this.document.createElement('div');
         // tslint:disable-next-line
         for (var scrollProp in this.scrollbarMeasure) {
@@ -449,30 +666,46 @@ var McMeasureScrollbarService = /** @class */ (function () {
             }
         }
         this.document.body.appendChild(scrollDiv);
+        /** @type {?} */
         var width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
         this.document.body.removeChild(scrollDiv);
         this._scrollbarWidth = width;
     };
-    McMeasureScrollbarService.ngInjectableDef = core.defineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core.inject(common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
-    McMeasureScrollbarService = __decorate([
-        core.Injectable({
-            providedIn: 'root'
-        }),
-        __param(0, core.Inject(common.DOCUMENT)),
-        __metadata("design:paramtypes", [Object])
-    ], McMeasureScrollbarService);
+    McMeasureScrollbarService.decorators = [
+        { type: core.Injectable, args: [{
+                    providedIn: 'root'
+                },] },
+    ];
+    /** @nocollapse */
+    McMeasureScrollbarService.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
+    ]; };
+    /** @nocollapse */ McMeasureScrollbarService.ngInjectableDef = core.defineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core.inject(common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
     return McMeasureScrollbarService;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // Boilerplate for applying mixins to McOptgroup.
-/** @docs-private */
-var McOptgroupBase = /** @class */ (function () {
+/**
+ * \@docs-private
+ */
+var   
+// Boilerplate for applying mixins to McOptgroup.
+/**
+ * \@docs-private
+ */
+McOptgroupBase = /** @class */ (function () {
     function McOptgroupBase() {
     }
     return McOptgroupBase;
 }());
+/** @type {?} */
 var McOptgroupMixinBase = mixinDisabled(McOptgroupBase);
 // Counter for unique group ids.
+/** @type {?} */
 var uniqueOptgroupIdCounter = 0;
 /**
  * Component that is used to group instances of `mc-option`.
@@ -481,42 +714,53 @@ var McOptgroup = /** @class */ (function (_super) {
     __extends(McOptgroup, _super);
     function McOptgroup() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        /** Unique id for the underlying label. */
+        /**
+         * Unique id for the underlying label.
+         */
         _this.labelId = "mc-optgroup-label-" + uniqueOptgroupIdCounter++;
         return _this;
     }
-    __decorate([
-        core.Input(),
-        __metadata("design:type", String)
-    ], McOptgroup.prototype, "label", void 0);
-    McOptgroup = __decorate([
-        core.Component({
-            selector: 'mc-optgroup',
-            exportAs: 'mcOptgroup',
-            template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label><ng-content select=\"mc-option, ng-container\"></ng-content>",
-            encapsulation: core.ViewEncapsulation.None,
-            changeDetection: core.ChangeDetectionStrategy.OnPush,
-            inputs: ['disabled'],
-            styles: [".mc-optgroup-label{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}"],
-            host: {
-                class: 'mc-optgroup',
-                role: 'group',
-                '[class.mc-optgroup-disabled]': 'disabled',
-                '[attr.aria-disabled]': 'disabled.toString()',
-                '[attr.aria-labelledby]': 'labelId'
-            }
-        })
-    ], McOptgroup);
+    McOptgroup.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-optgroup',
+                    exportAs: 'mcOptgroup',
+                    template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label><ng-content select=\"mc-option, ng-container\"></ng-content>",
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    inputs: ['disabled'],
+                    styles: [".mc-optgroup-label{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}"],
+                    host: {
+                        class: 'mc-optgroup',
+                        role: 'group',
+                        '[class.mc-optgroup-disabled]': 'disabled',
+                        '[attr.aria-disabled]': 'disabled.toString()',
+                        '[attr.aria-labelledby]': 'labelId'
+                    }
+                },] },
+    ];
+    McOptgroup.propDecorators = {
+        label: [{ type: core.Input }]
+    };
     return McOptgroup;
 }(McOptgroupMixinBase));
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
  * Option IDs need to be unique across components, so this counter exists outside of
  * the component definition.
+ * @type {?}
  */
 var uniqueIdCounter = 0;
-/** Event object emitted by McOption when selected or deselected. */
-var McOptionSelectionChange = /** @class */ (function () {
+/**
+ * Event object emitted by McOption when selected or deselected.
+ */
+var   /**
+ * Event object emitted by McOption when selected or deselected.
+ */
+McOptionSelectionChange = /** @class */ (function () {
     function McOptionSelectionChange(source, isUserInput) {
         if (isUserInput === void 0) { isUserInput = false; }
         this.source = source;
@@ -526,6 +770,7 @@ var McOptionSelectionChange = /** @class */ (function () {
 }());
 /**
  * Injection token used to provide the parent component to options.
+ * @type {?}
  */
 var MC_OPTION_PARENT_COMPONENT = new core.InjectionToken('MC_OPTION_PARENT_COMPONENT');
 /**
@@ -537,10 +782,14 @@ var McOption = /** @class */ (function () {
         this.changeDetectorRef = changeDetectorRef;
         this.parent = parent;
         this.group = group$$1;
-        /** Event emitted when the option is selected or deselected. */
+        /**
+         * Event emitted when the option is selected or deselected.
+         */
         // tslint:disable-next-line:no-output-on-prefix
         this.onSelectionChange = new core.EventEmitter();
-        /** Emits when the state of the option changes and any parents have to be notified. */
+        /**
+         * Emits when the state of the option changes and any parents have to be notified.
+         */
         this.stateChanges = new rxjs.Subject();
         this._id = "mc-option-" + uniqueIdCounter++;
         this._selected = false;
@@ -553,7 +802,12 @@ var McOption = /** @class */ (function () {
          * The displayed value of the option. It is necessary to show the selected option in the
          * select's trigger.
          */
-        get: function () {
+        get: /**
+         * The displayed value of the option. It is necessary to show the selected option in the
+         * select's trigger.
+         * @return {?}
+         */
+        function () {
             // TODO(kara): Add input property alternative for node envs.
             return (this.getHostElement().textContent || '').trim();
         },
@@ -562,31 +816,48 @@ var McOption = /** @class */ (function () {
     });
     Object.defineProperty(McOption.prototype, "multiple", {
         /** Whether the wrapping component is in multiple selection mode. */
-        get: function () {
+        get: /**
+         * Whether the wrapping component is in multiple selection mode.
+         * @return {?}
+         */
+        function () {
             return this.parent && this.parent.multiple;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McOption.prototype, "id", {
-        get: function () {
+        get: /**
+         * @return {?}
+         */
+        function () {
             return this._id;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McOption.prototype, "selected", {
-        get: function () {
+        get: /**
+         * @return {?}
+         */
+        function () {
             return this._selected;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McOption.prototype, "disabled", {
-        get: function () {
+        get: /**
+         * @return {?}
+         */
+        function () {
             return (this.group && this.group.disabled) || this._disabled;
         },
-        set: function (value) {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
             this._disabled = coercion.coerceBooleanProperty(value);
         },
         enumerable: true,
@@ -599,19 +870,33 @@ var McOption = /** @class */ (function () {
          * focus is actually retained somewhere else. This comes in handy
          * for components like autocomplete where focus must remain on the input.
          */
-        get: function () {
+        get: /**
+         * Whether or not the option is currently active and ready to be selected.
+         * An active option displays styles as if it is focused, but the
+         * focus is actually retained somewhere else. This comes in handy
+         * for components like autocomplete where focus must remain on the input.
+         * @return {?}
+         */
+        function () {
             return this._active;
         },
         enumerable: true,
         configurable: true
     });
-    McOption.prototype.ngAfterViewChecked = function () {
+    /**
+     * @return {?}
+     */
+    McOption.prototype.ngAfterViewChecked = /**
+     * @return {?}
+     */
+    function () {
         // Since parent components could be using the option's label to display the selected values
         // (e.g. `mc-select`) and they don't have a way of knowing if the option's label has changed
         // we have to check for changes in the DOM ourselves and dispatch an event. These checks are
         // relatively cheap, however we still limit them only to selected options in order to avoid
         // hitting the DOM too often.
         if (this._selected) {
+            /** @type {?} */
             var viewValue = this.viewValue;
             if (viewValue !== this.mostRecentViewValue) {
                 this.mostRecentViewValue = viewValue;
@@ -619,24 +904,49 @@ var McOption = /** @class */ (function () {
             }
         }
     };
-    McOption.prototype.ngOnDestroy = function () {
+    /**
+     * @return {?}
+     */
+    McOption.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
         this.stateChanges.complete();
     };
-    McOption.prototype.select = function () {
+    /**
+     * @return {?}
+     */
+    McOption.prototype.select = /**
+     * @return {?}
+     */
+    function () {
         if (!this._selected) {
             this._selected = true;
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent();
         }
     };
-    McOption.prototype.deselect = function () {
+    /**
+     * @return {?}
+     */
+    McOption.prototype.deselect = /**
+     * @return {?}
+     */
+    function () {
         if (this._selected) {
             this._selected = false;
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent();
         }
     };
-    McOption.prototype.focus = function () {
+    /**
+     * @return {?}
+     */
+    McOption.prototype.focus = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
         var element = this.getHostElement();
         if (typeof element.focus === 'function') {
             element.focus();
@@ -647,7 +957,19 @@ var McOption = /** @class */ (function () {
      * active. This is used by the ActiveDescendantKeyManager so key
      * events will display the proper options as active on arrow key events.
      */
-    McOption.prototype.setActiveStyles = function () {
+    /**
+     * This method sets display styles on the option to make it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     * @return {?}
+     */
+    McOption.prototype.setActiveStyles = /**
+     * This method sets display styles on the option to make it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     * @return {?}
+     */
+    function () {
         if (!this._active) {
             this._active = true;
             this.changeDetectorRef.markForCheck();
@@ -658,18 +980,48 @@ var McOption = /** @class */ (function () {
      * active. This is used by the ActiveDescendantKeyManager so key
      * events will display the proper options as active on arrow key events.
      */
-    McOption.prototype.setInactiveStyles = function () {
+    /**
+     * This method removes display styles on the option that made it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     * @return {?}
+     */
+    McOption.prototype.setInactiveStyles = /**
+     * This method removes display styles on the option that made it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     * @return {?}
+     */
+    function () {
         if (this._active) {
             this._active = false;
             this.changeDetectorRef.markForCheck();
         }
     };
     /** Gets the label to be used when determining whether the option should be focused. */
-    McOption.prototype.getLabel = function () {
+    /**
+     * Gets the label to be used when determining whether the option should be focused.
+     * @return {?}
+     */
+    McOption.prototype.getLabel = /**
+     * Gets the label to be used when determining whether the option should be focused.
+     * @return {?}
+     */
+    function () {
         return this.viewValue;
     };
     /** Ensures the option is selected when activated from the keyboard. */
-    McOption.prototype.handleKeydown = function (event) {
+    /**
+     * Ensures the option is selected when activated from the keyboard.
+     * @param {?} event
+     * @return {?}
+     */
+    McOption.prototype.handleKeydown = /**
+     * Ensures the option is selected when activated from the keyboard.
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
         // tslint:disable-next-line
         if (event.keyCode === keycodes.ENTER || event.keyCode === keycodes.SPACE) {
             this.selectViaInteraction();
@@ -681,75 +1033,108 @@ var McOption = /** @class */ (function () {
      * `Selects the option while indicating the selection came from the user. Used to
      * determine if the select's view -> model callback should be invoked.`
      */
-    McOption.prototype.selectViaInteraction = function () {
+    /**
+     * `Selects the option while indicating the selection came from the user. Used to
+     * determine if the select's view -> model callback should be invoked.`
+     * @return {?}
+     */
+    McOption.prototype.selectViaInteraction = /**
+     * `Selects the option while indicating the selection came from the user. Used to
+     * determine if the select's view -> model callback should be invoked.`
+     * @return {?}
+     */
+    function () {
         if (!this.disabled) {
             this._selected = this.multiple ? !this._selected : true;
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
         }
     };
-    McOption.prototype.getTabIndex = function () {
+    /**
+     * @return {?}
+     */
+    McOption.prototype.getTabIndex = /**
+     * @return {?}
+     */
+    function () {
         return this.disabled ? '-1' : '0';
     };
-    McOption.prototype.getHostElement = function () {
+    /**
+     * @return {?}
+     */
+    McOption.prototype.getHostElement = /**
+     * @return {?}
+     */
+    function () {
         return this.element.nativeElement;
     };
     /** Emits the selection change event. */
-    McOption.prototype.emitSelectionChangeEvent = function (isUserInput) {
+    /**
+     * Emits the selection change event.
+     * @private
+     * @param {?=} isUserInput
+     * @return {?}
+     */
+    McOption.prototype.emitSelectionChangeEvent = /**
+     * Emits the selection change event.
+     * @private
+     * @param {?=} isUserInput
+     * @return {?}
+     */
+    function (isUserInput) {
         if (isUserInput === void 0) { isUserInput = false; }
         this.onSelectionChange.emit(new McOptionSelectionChange(this, isUserInput));
     };
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Object)
-    ], McOption.prototype, "value", void 0);
-    __decorate([
-        core.Output(),
-        __metadata("design:type", Object)
-    ], McOption.prototype, "onSelectionChange", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], McOption.prototype, "disabled", null);
-    McOption = __decorate([
-        core.Component({
-            selector: 'mc-option',
-            exportAs: 'mcOption',
-            host: {
-                '[attr.tabindex]': 'getTabIndex()',
-                class: 'mc-option',
-                '[class.mc-selected]': 'selected',
-                '[class.mc-option-multiple]': 'multiple',
-                '[class.mc-active]': 'active',
-                '[class.mc-disabled]': 'disabled',
-                '[id]': 'id',
-                '(click)': 'selectViaInteraction()',
-                '(keydown)': 'handleKeydown($event)'
-            },
-            styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;border:2px solid transparent;cursor:pointer;outline:0;padding:0 16px;-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}"],
-            template: "<mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
-            encapsulation: core.ViewEncapsulation.None,
-            changeDetection: core.ChangeDetectionStrategy.OnPush
-        }),
-        __param(2, core.Optional()), __param(2, core.Inject(MC_OPTION_PARENT_COMPONENT)),
-        __param(3, core.Optional()),
-        __metadata("design:paramtypes", [core.ElementRef,
-            core.ChangeDetectorRef, Object, McOptgroup])
-    ], McOption);
+    McOption.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-option',
+                    exportAs: 'mcOption',
+                    host: {
+                        '[attr.tabindex]': 'getTabIndex()',
+                        class: 'mc-option',
+                        '[class.mc-selected]': 'selected',
+                        '[class.mc-option-multiple]': 'multiple',
+                        '[class.mc-active]': 'active',
+                        '[class.mc-disabled]': 'disabled',
+                        '[id]': 'id',
+                        '(click)': 'selectViaInteraction()',
+                        '(keydown)': 'handleKeydown($event)'
+                    },
+                    styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;border:2px solid transparent;cursor:pointer;outline:0;padding:0 16px;-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}"],
+                    template: "<mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    McOption.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_OPTION_PARENT_COMPONENT,] }] },
+        { type: McOptgroup, decorators: [{ type: core.Optional }] }
+    ]; };
+    McOption.propDecorators = {
+        value: [{ type: core.Input }],
+        onSelectionChange: [{ type: core.Output }],
+        disabled: [{ type: core.Input }]
+    };
     return McOption;
 }());
 /**
  * Counts the amount of option group labels that precede the specified option.
- * @param optionIndex Index of the option at which to start counting.
- * @param options Flat list of all of the options.
- * @param optionGroups Flat list of all of the option groups.
- * @docs-private
+ * \@docs-private
+ * @param {?} optionIndex Index of the option at which to start counting.
+ * @param {?} options Flat list of all of the options.
+ * @param {?} optionGroups Flat list of all of the option groups.
+ * @return {?}
  */
 function countGroupLabelsBeforeOption(optionIndex, options, optionGroups) {
     if (optionGroups.length) {
+        /** @type {?} */
         var optionsArray = options.toArray();
+        /** @type {?} */
         var groups = optionGroups.toArray();
+        /** @type {?} */
         var groupCounter = 0;
         for (var i = 0; i < optionIndex + 1; i++) {
             if (optionsArray[i].group && optionsArray[i].group === groups[groupCounter]) {
@@ -762,13 +1147,15 @@ function countGroupLabelsBeforeOption(optionIndex, options, optionGroups) {
 }
 /**
  * Determines the position to which to scroll a panel in order for an option to be into view.
- * @param optionIndex Index of the option to be scrolled into the view.
- * @param optionHeight Height of the options.
- * @param currentScrollPosition Current scroll position of the panel.
- * @param panelHeight Height of the panel.
- * @docs-private
+ * \@docs-private
+ * @param {?} optionIndex Index of the option to be scrolled into the view.
+ * @param {?} optionHeight Height of the options.
+ * @param {?} currentScrollPosition Current scroll position of the panel.
+ * @param {?} panelHeight Height of the panel.
+ * @return {?}
  */
 function getOptionScrollPosition(optionIndex, optionHeight, currentScrollPosition, panelHeight) {
+    /** @type {?} */
     var optionOffset = optionIndex * optionHeight;
     if (optionOffset < currentScrollPosition) {
         return optionOffset;
@@ -779,22 +1166,38 @@ function getOptionScrollPosition(optionIndex, optionHeight, currentScrollPositio
     return currentScrollPosition;
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McOptionModule = /** @class */ (function () {
     function McOptionModule() {
     }
-    McOptionModule = __decorate([
-        core.NgModule({
-            imports: [common.CommonModule, McPseudoCheckboxModule],
-            exports: [McOption, McOptgroup],
-            declarations: [McOption, McOptgroup]
-        })
-    ], McOptionModule);
+    McOptionModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule, McPseudoCheckboxModule],
+                    exports: [McOption, McOptgroup],
+                    declarations: [McOption, McOptgroup]
+                },] },
+    ];
     return McOptionModule;
 }());
 
-/** InjectionToken that can be used to specify the global label options. */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * InjectionToken that can be used to specify the global label options.
+ * @type {?}
+ */
 var MC_LABEL_GLOBAL_OPTIONS = new core.InjectionToken('mc-label-global-options');
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 var fadeAnimation = animations.trigger('fadeAnimation', [
     animations.state('void', animations.style({ opacity: 0 })),
     animations.state('true', animations.style({ opacity: 1 })),
@@ -803,14 +1206,28 @@ var fadeAnimation = animations.trigger('fadeAnimation', [
     animations.transition('* => void', animations.animate('150ms cubic-bezier(0.4, 0.0, 1, 1)'))
 ]);
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var AnimationCurves = {
+    StandardCurve: 'cubic-bezier(0.4,0.0,0.2,1)',
+    DecelerationCurve: 'cubic-bezier(0.0,0.0,0.2,1)',
+    AccelerationCurve: 'cubic-bezier(0.4,0.0,1,1)',
+    SharpCurve: 'cubic-bezier(0.4,0.0,0.6,1)',
+};
 
-(function (AnimationCurves) {
-    AnimationCurves["StandardCurve"] = "cubic-bezier(0.4,0.0,0.2,1)";
-    AnimationCurves["DecelerationCurve"] = "cubic-bezier(0.0,0.0,0.2,1)";
-    AnimationCurves["AccelerationCurve"] = "cubic-bezier(0.4,0.0,1,1)";
-    AnimationCurves["SharpCurve"] = "cubic-bezier(0.4,0.0,0.6,1)";
-})(exports.AnimationCurves || (exports.AnimationCurves = {}));
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 var POSITION_MAP = {
     top: {
         originX: 'center',
@@ -907,33 +1324,64 @@ var POSITION_MAP = {
         overlayY: 'bottom'
     }
 };
+/** @type {?} */
 var DEFAULT_4_POSITIONS = _objectValues([
     POSITION_MAP.top, POSITION_MAP.right, POSITION_MAP.bottom, POSITION_MAP.left
 ]);
+/**
+ * @template T, S
+ * @param {?} array
+ * @param {?} iteratee
+ * @return {?}
+ */
 function arrayMap(array, iteratee) {
+    /** @type {?} */
     var index = -1;
+    /** @type {?} */
     var length = array == null ? 0 : array.length;
+    /** @type {?} */
     var result = Array(length);
     while (++index < length) {
         result[index] = iteratee(array[index], index, array);
     }
     return result;
 }
+/**
+ * @template T
+ * @param {?} object
+ * @param {?} props
+ * @return {?}
+ */
 function baseValues(object, props) {
     return arrayMap(props, function (key) {
         return object[key];
     });
 }
+/**
+ * @template T
+ * @param {?} object
+ * @return {?}
+ */
 function _objectValues(object) {
     return object == null ? [] : baseValues(object, Object.keys(object));
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 var selectEvents = 'selectEvents';
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
  * Returns an exception to be thrown when attempting to change a select's `multiple` option
  * after initialization.
- * @docs-private
+ * \@docs-private
+ * @return {?}
  */
 function getMcSelectDynamicMultipleError() {
     return Error('Cannot change `multiple` mode of select after initialization.');
@@ -942,7 +1390,8 @@ function getMcSelectDynamicMultipleError() {
  * Returns an exception to be thrown when attempting to assign a non-array value to a select
  * in `multiple` mode. Note that `undefined` and `null` are still valid values to allow for
  * resetting the value.
- * @docs-private
+ * \@docs-private
+ * @return {?}
  */
 function getMcSelectNonArrayValueError() {
     return Error('Value must be an array in multiple-selection mode.');
@@ -951,30 +1400,55 @@ function getMcSelectNonArrayValueError() {
  * Returns an exception to be thrown when assigning a non-function value to the comparator
  * used to determine if a value corresponds to an option. Note that whether the function
  * actually takes two values and returns a boolean is not checked.
+ * @return {?}
  */
 function getMcSelectNonFunctionValueError() {
     return Error('`compareWith` must be a function.');
 }
 
-/** The max height of the select's overlay panel */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * The max height of the select's overlay panel
+ * @type {?}
+ */
 var SELECT_PANEL_MAX_HEIGHT = 224;
-/** The panel's padding on the x-axis */
+/**
+ * The panel's padding on the x-axis
+ * @type {?}
+ */
 var SELECT_PANEL_PADDING_X = 1;
-/** The panel's x axis padding if it is indented (e.g. there is an option group). */
 /* tslint:disable-next-line:no-magic-numbers */
+/**
+ * The panel's x axis padding if it is indented (e.g. there is an option group).
+ * @type {?}
+ */
 var SELECT_PANEL_INDENT_PADDING_X = SELECT_PANEL_PADDING_X * 2;
 /**
  * The select panel will only "fit" inside the viewport if it is positioned at
  * this value or more away from the viewport boundary.
+ * @type {?}
  */
 var SELECT_PANEL_VIEWPORT_PADDING = 8;
-/** Injection token that determines the scroll handling while a select is open. */
+/**
+ * Injection token that determines the scroll handling while a select is open.
+ * @type {?}
+ */
 var MC_SELECT_SCROLL_STRATEGY = new core.InjectionToken('mc-select-scroll-strategy');
-/** @docs-private */
+/**
+ * \@docs-private
+ * @param {?} overlay
+ * @return {?}
+ */
 function mcSelectScrollStrategyProviderFactory(overlay$$1) {
     return function () { return overlay$$1.scrollStrategies.reposition(); };
 }
-/** @docs-private */
+/**
+ * \@docs-private
+ * @type {?}
+ */
 var MC_SELECT_SCROLL_STRATEGY_PROVIDER = {
     provide: MC_SELECT_SCROLL_STRATEGY,
     deps: [overlay.Overlay],
@@ -982,10 +1456,15 @@ var MC_SELECT_SCROLL_STRATEGY_PROVIDER = {
 };
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
  * The following are all the animations for the mc-select component, with each
  * const containing the metadata for one animation.
  *
  * The values below match the implementation of the AngularJS Material mc-select animation.
+ * @type {?}
  */
 var mcSelectAnimations = {
     /**
@@ -1025,13 +1504,13 @@ var mcSelectAnimations = {
     ])
 };
 
-exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
 exports.MC_SANITY_CHECKS = MC_SANITY_CHECKS;
 exports.mixinDisabled = mixinDisabled;
 exports.mixinColor = mixinColor;
+exports.ThemePalette = ThemePalette;
 exports.mixinTabIndex = mixinTabIndex;
 exports.mixinErrorState = mixinErrorState;
 exports.McLine = McLine;
@@ -1043,16 +1522,17 @@ exports.McPseudoCheckboxModule = McPseudoCheckboxModule;
 exports.McPseudoCheckbox = McPseudoCheckbox;
 exports.McMeasureScrollbarService = McMeasureScrollbarService;
 exports.McOptionModule = McOptionModule;
+exports.countGroupLabelsBeforeOption = countGroupLabelsBeforeOption;
+exports.getOptionScrollPosition = getOptionScrollPosition;
 exports.McOptionSelectionChange = McOptionSelectionChange;
 exports.MC_OPTION_PARENT_COMPONENT = MC_OPTION_PARENT_COMPONENT;
 exports.McOption = McOption;
-exports.countGroupLabelsBeforeOption = countGroupLabelsBeforeOption;
-exports.getOptionScrollPosition = getOptionScrollPosition;
 exports.McOptgroupBase = McOptgroupBase;
 exports.McOptgroupMixinBase = McOptgroupMixinBase;
 exports.McOptgroup = McOptgroup;
 exports.MC_LABEL_GLOBAL_OPTIONS = MC_LABEL_GLOBAL_OPTIONS;
 exports.fadeAnimation = fadeAnimation;
+exports.AnimationCurves = AnimationCurves;
 exports.POSITION_MAP = POSITION_MAP;
 exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
 exports.mcSelectAnimations = mcSelectAnimations;
@@ -1060,13 +1540,14 @@ exports.selectEvents = selectEvents;
 exports.getMcSelectDynamicMultipleError = getMcSelectDynamicMultipleError;
 exports.getMcSelectNonArrayValueError = getMcSelectNonArrayValueError;
 exports.getMcSelectNonFunctionValueError = getMcSelectNonFunctionValueError;
+exports.mcSelectScrollStrategyProviderFactory = mcSelectScrollStrategyProviderFactory;
 exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
 exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;
 exports.SELECT_PANEL_INDENT_PADDING_X = SELECT_PANEL_INDENT_PADDING_X;
 exports.SELECT_PANEL_VIEWPORT_PADDING = SELECT_PANEL_VIEWPORT_PADDING;
 exports.MC_SELECT_SCROLL_STRATEGY = MC_SELECT_SCROLL_STRATEGY;
-exports.mcSelectScrollStrategyProviderFactory = mcSelectScrollStrategyProviderFactory;
 exports.MC_SELECT_SCROLL_STRATEGY_PROVIDER = MC_SELECT_SCROLL_STRATEGY_PROVIDER;
+exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

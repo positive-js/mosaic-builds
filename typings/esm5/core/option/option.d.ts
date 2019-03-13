@@ -39,7 +39,7 @@ export declare class McOption implements AfterViewChecked, OnDestroy {
      */
     readonly viewValue: string;
     /** Whether the wrapping component is in multiple selection mode. */
-    readonly multiple: boolean | undefined;
+    readonly multiple: boolean;
     readonly id: string;
     private _id;
     readonly selected: boolean;

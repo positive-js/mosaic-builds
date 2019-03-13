@@ -39,30 +39,19 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __param(paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McIconCSSStyler = /** @class */ (function () {
     function McIconCSSStyler() {
     }
-    McIconCSSStyler = __decorate([
-        core.Directive({
-            selector: '[mc-icon]',
-            host: { class: 'mc mc-icon' }
-        })
-    ], McIconCSSStyler);
+    McIconCSSStyler.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mc-icon]',
+                    host: { class: 'mc mc-icon' }
+                },] },
+    ];
     return McIconCSSStyler;
 }());
 var McIconBase = /** @class */ (function () {
@@ -71,6 +60,7 @@ var McIconBase = /** @class */ (function () {
     }
     return McIconBase;
 }());
+/** @type {?} */
 var _McIconMixinBase = core$1.mixinColor(McIconBase, core$1.ThemePalette.Empty);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
@@ -79,44 +69,57 @@ var McIcon = /** @class */ (function (_super) {
         elementRef.nativeElement.classList.add(iconName);
         return _this;
     }
-    McIcon.prototype._getHostElement = function () {
+    /**
+     * @return {?}
+     */
+    McIcon.prototype._getHostElement = /**
+     * @return {?}
+     */
+    function () {
         return this._elementRef.nativeElement;
     };
-    McIcon = __decorate([
-        core.Component({
-            selector: "[mc-icon]",
-            template: '<ng-content></ng-content>',
-            styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
-            changeDetection: core.ChangeDetectionStrategy.OnPush,
-            encapsulation: core.ViewEncapsulation.None,
-            inputs: ['color']
-        }),
-        __param(1, core.Attribute('mc-icon')),
-        __metadata("design:paramtypes", [core.ElementRef, String])
-    ], McIcon);
+    McIcon.decorators = [
+        { type: core.Component, args: [{
+                    selector: "[mc-icon]",
+                    template: '<ng-content></ng-content>',
+                    styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core.ViewEncapsulation.None,
+                    inputs: ['color']
+                },] },
+    ];
+    /** @nocollapse */
+    McIcon.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
+    ]; };
     return McIcon;
 }(_McIconMixinBase));
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McIconModule = /** @class */ (function () {
     function McIconModule() {
     }
-    McIconModule = __decorate([
-        core.NgModule({
-            imports: [
-                common.CommonModule,
-                a11y.A11yModule,
-                platform.PlatformModule
-            ],
-            exports: [
-                McIcon,
-                McIconCSSStyler
-            ],
-            declarations: [
-                McIcon,
-                McIconCSSStyler
-            ]
-        })
-    ], McIconModule);
+    McIconModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        a11y.A11yModule,
+                        platform.PlatformModule
+                    ],
+                    exports: [
+                        McIcon,
+                        McIconCSSStyler
+                    ],
+                    declarations: [
+                        McIcon,
+                        McIconCSSStyler
+                    ]
+                },] },
+    ];
     return McIconModule;
 }());
 

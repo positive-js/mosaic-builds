@@ -40,7 +40,7 @@ export declare class McMultiYearView<D> implements AfterContentInit {
     private _selected;
     private _minDate;
     private _maxDate;
-    constructor(changeDetectorRef: ChangeDetectorRef, dateAdapter: DateAdapter<D>, dir?: Directionality | undefined);
+    constructor(changeDetectorRef: ChangeDetectorRef, dateAdapter: DateAdapter<D>, dir?: Directionality);
     ngAfterContentInit(): void;
     /** Initializes this multi-year view. */
     init(): void;

@@ -50,71 +50,91 @@ var __assign = function() {
     return __assign.apply(this, arguments);
 };
 
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __param(paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
-/** Injection token that can be used to access the data that was passed in to a sidepanel. */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Injection token that can be used to access the data that was passed in to a sidepanel.
+ * @type {?}
+ */
 var MC_SIDEPANEL_DATA = new core.InjectionToken('McSidepanelData');
-
-(function (McSidepanelPosition) {
-    McSidepanelPosition["Right"] = "right";
-    McSidepanelPosition["Left"] = "left";
-    McSidepanelPosition["Top"] = "top";
-    McSidepanelPosition["Bottom"] = "bottom";
-})(exports.McSidepanelPosition || (exports.McSidepanelPosition = {}));
-var McSidepanelConfig = /** @class */ (function () {
+/** @enum {string} */
+var McSidepanelPosition = {
+    Right: 'right',
+    Left: 'left',
+    Top: 'top',
+    Bottom: 'bottom',
+};
+/**
+ * @template D
+ */
+var   /**
+ * @template D
+ */
+McSidepanelConfig = /** @class */ (function () {
     function McSidepanelConfig() {
-        /** Data being injected into the child component. */
+        /**
+         * Data being injected into the child component.
+         */
         this.data = null;
-        this.position = exports.McSidepanelPosition.Right;
-        /** Whether the sidepanel has a backdrop. */
+        this.position = McSidepanelPosition.Right;
+        /**
+         * Whether the sidepanel has a backdrop.
+         */
         this.hasBackdrop = true;
-        /** When we open multiple sidepanels, backdrop appears only once, except cases then this flag is true. */
+        /**
+         * When we open multiple sidepanels, backdrop appears only once, except cases then this flag is true.
+         */
         this.requiredBackdrop = false;
-        /** Whether the user can use escape or clicking outside to close the sidepanel. */
+        /**
+         * Whether the user can use escape or clicking outside to close the sidepanel.
+         */
         this.disableClose = false;
-        /** Custom class for the overlay pane. */
+        /**
+         * Custom class for the overlay pane.
+         */
         this.overlayPanelClass = '';
     }
     return McSidepanelConfig;
 }());
 
-var McSidepanelAnimationState;
-(function (McSidepanelAnimationState) {
-    McSidepanelAnimationState["Void"] = "void";
-    McSidepanelAnimationState["Visible"] = "visible";
-    McSidepanelAnimationState["Hidden"] = "hidden";
-})(McSidepanelAnimationState || (McSidepanelAnimationState = {}));
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var McSidepanelAnimationState = {
+    Void: 'void',
+    Visible: 'visible',
+    Hidden: 'hidden',
+};
 // TODO Find a way to use dynamic keys and avoid error "Expression form not supported."
 // tslint:disable-next-line
+/** @type {?} */
 var mcSidepanelTransformAnimation = {
     right: { in: 'translateX(100%)', out: 'translateX(0%)' },
     left: { in: 'translateX(-100%)', out: 'translateX(0%)' },
     top: { in: 'translateY(-100%)', out: 'translateY(0%)' },
     bottom: { in: 'translateY(100%)', out: 'translateY(0%)' }
 };
+/** @type {?} */
 var mcSidepanelAnimations = {
     sidepanelState: animations.trigger('state', [
-        animations.state('hidden', animations.style({ transform: '{{transformIn}}' }), { params: { transformIn: mcSidepanelTransformAnimation[exports.McSidepanelPosition.Right].in } }),
-        animations.state('visible', animations.style({ transform: '{{transformOut}}' }), { params: { transformOut: mcSidepanelTransformAnimation[exports.McSidepanelPosition.Right].out } }),
+        animations.state('hidden', animations.style({ transform: '{{transformIn}}' }), { params: { transformIn: mcSidepanelTransformAnimation[McSidepanelPosition.Right].in } }),
+        animations.state('visible', animations.style({ transform: '{{transformOut}}' }), { params: { transformOut: mcSidepanelTransformAnimation[McSidepanelPosition.Right].out } }),
         animations.transition('visible => void, visible => hidden', animations.animate("200ms " + core$1.AnimationCurves.AccelerationCurve)),
         animations.transition('void => visible', animations.animate("200ms " + core$1.AnimationCurves.DecelerationCurve))
     ])
 };
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 var MC_SIDEPANEL_WITH_INDENT = new core.InjectionToken('mc-sidepanel-with-indent');
+/** @type {?} */
 var MC_SIDEPANEL_WITH_SHADOW = new core.InjectionToken('mc-sidepanel-with-shadow');
 var McSidepanelContainerComponent = /** @class */ (function (_super) {
     __extends(McSidepanelContainerComponent, _super);
@@ -125,109 +145,211 @@ var McSidepanelContainerComponent = /** @class */ (function (_super) {
         _this.sidepanelConfig = sidepanelConfig;
         _this.withIndent = withIndent;
         _this.withShadow = withShadow;
-        /** The state of the sidepanel animations. */
+        /**
+         * The state of the sidepanel animations.
+         */
         _this.animationState = McSidepanelAnimationState.Void;
-        /** Emits whenever the state of the animation changes. */
+        /**
+         * Emits whenever the state of the animation changes.
+         */
         _this.animationStateChanged = new core.EventEmitter();
         return _this;
     }
-    McSidepanelContainerComponent.prototype.ngOnDestroy = function () {
+    /**
+     * @return {?}
+     */
+    McSidepanelContainerComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
         this.destroyed = true;
     };
     /** Attach a component portal as content to this sidepanel container. */
-    McSidepanelContainerComponent.prototype.attachComponentPortal = function (portal$$1) {
+    /**
+     * Attach a component portal as content to this sidepanel container.
+     * @template T
+     * @param {?} portal
+     * @return {?}
+     */
+    McSidepanelContainerComponent.prototype.attachComponentPortal = /**
+     * Attach a component portal as content to this sidepanel container.
+     * @template T
+     * @param {?} portal
+     * @return {?}
+     */
+    function (portal$$1) {
         this.validatePortalAttached();
         this.setAnimation();
         this.setPanelClass();
         return this.portalOutlet.attachComponentPortal(portal$$1);
     };
     /** Attach a template portal as content to this sidepanel container. */
-    McSidepanelContainerComponent.prototype.attachTemplatePortal = function (portal$$1) {
+    /**
+     * Attach a template portal as content to this sidepanel container.
+     * @template C
+     * @param {?} portal
+     * @return {?}
+     */
+    McSidepanelContainerComponent.prototype.attachTemplatePortal = /**
+     * Attach a template portal as content to this sidepanel container.
+     * @template C
+     * @param {?} portal
+     * @return {?}
+     */
+    function (portal$$1) {
         this.validatePortalAttached();
         this.setAnimation();
         this.setPanelClass();
         return this.portalOutlet.attachTemplatePortal(portal$$1);
     };
     /** Begin animation of the sidepanel entrance into view. */
-    McSidepanelContainerComponent.prototype.enter = function () {
+    /**
+     * Begin animation of the sidepanel entrance into view.
+     * @return {?}
+     */
+    McSidepanelContainerComponent.prototype.enter = /**
+     * Begin animation of the sidepanel entrance into view.
+     * @return {?}
+     */
+    function () {
         if (!this.destroyed) {
             this.animationState = McSidepanelAnimationState.Visible;
             this.changeDetectorRef.detectChanges();
         }
     };
     /** Begin animation of the sidepanel exiting from view. */
-    McSidepanelContainerComponent.prototype.exit = function () {
+    /**
+     * Begin animation of the sidepanel exiting from view.
+     * @return {?}
+     */
+    McSidepanelContainerComponent.prototype.exit = /**
+     * Begin animation of the sidepanel exiting from view.
+     * @return {?}
+     */
+    function () {
         if (!this.destroyed) {
             this.animationState = McSidepanelAnimationState.Hidden;
             this.changeDetectorRef.markForCheck();
         }
     };
-    McSidepanelContainerComponent.prototype.onAnimation = function (event) {
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McSidepanelContainerComponent.prototype.onAnimation = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
         this.animationStateChanged.emit(event);
     };
-    McSidepanelContainerComponent.prototype.setAnimation = function () {
-        var position = this.sidepanelConfig.position;
+    /**
+     * @private
+     * @return {?}
+     */
+    McSidepanelContainerComponent.prototype.setAnimation = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var position = (/** @type {?} */ (this.sidepanelConfig.position));
         this.animationTransform = {
             transformIn: mcSidepanelTransformAnimation[position].in,
             transformOut: mcSidepanelTransformAnimation[position].out
         };
     };
-    McSidepanelContainerComponent.prototype.setPanelClass = function () {
+    /**
+     * @private
+     * @return {?}
+     */
+    McSidepanelContainerComponent.prototype.setPanelClass = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
         var element = this.elementRef.nativeElement;
-        var position = this.sidepanelConfig.position;
+        /** @type {?} */
+        var position = (/** @type {?} */ (this.sidepanelConfig.position));
         element.classList.add("mc-sidepanel-container_" + position);
         if (this.withShadow) {
             element.classList.add('mc-sidepanel-container_shadowed');
         }
     };
-    McSidepanelContainerComponent.prototype.validatePortalAttached = function () {
+    /**
+     * @private
+     * @return {?}
+     */
+    McSidepanelContainerComponent.prototype.validatePortalAttached = /**
+     * @private
+     * @return {?}
+     */
+    function () {
         if (this.portalOutlet.hasAttached()) {
             throw Error('Attempting to attach sidepanel content after content is already attached');
         }
     };
-    __decorate([
-        core.ViewChild(portal.CdkPortalOutlet),
-        __metadata("design:type", portal.CdkPortalOutlet)
-    ], McSidepanelContainerComponent.prototype, "portalOutlet", void 0);
-    McSidepanelContainerComponent = __decorate([
-        core.Component({
-            selector: 'mc-sidepanel-container',
-            template: "<div class=\"mc-sidepanel-wrapper\"><div class=\"mc-sidepanel-indent\" *ngIf=\"withIndent\"><button mcSidepanelClose></button></div><div class=\"mc-sidepanel-content\"><ng-template cdkPortalOutlet></ng-template></div></div>",
-            styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-sidepanel-container{outline:0;display:flex;flex:1;position:fixed;min-height:0}.mc-sidepanel-container .flex{min-height:0}.mc-sidepanel-container_left,.mc-sidepanel-container_right{width:33%;min-width:400px;height:100%;top:0}.mc-sidepanel-container_left .mc-sidepanel-indent,.mc-sidepanel-container_right .mc-sidepanel-indent{width:16px;height:100%}.mc-sidepanel-container_right{right:0;transform:translateX(100%)}.mc-sidepanel-container_right .mc-sidepanel-wrapper{flex-direction:row}.mc-sidepanel-container_left{left:0;transform:translateX(-100%)}.mc-sidepanel-container_left .mc-sidepanel-wrapper{flex-direction:row-reverse}.mc-sidepanel-container_bottom,.mc-sidepanel-container_top{flex-direction:column;height:33%;min-height:400px;width:100%;left:0}.mc-sidepanel-container_bottom .mc-sidepanel-indent,.mc-sidepanel-container_top .mc-sidepanel-indent{height:16px;width:100%}.mc-sidepanel-container_top{top:0;transform:translateY(-100%)}.mc-sidepanel-container_top .mc-sidepanel-wrapper{flex-direction:column-reverse}.mc-sidepanel-container_bottom{bottom:0;transform:translateY(100%)}.mc-sidepanel-container_bottom .mc-sidepanel-wrapper{flex-direction:column}.mc-sidepanel-wrapper{display:flex;flex:1;min-height:0;width:100%}.mc-sidepanel-indent{display:flex;flex:0 0 auto}.mc-sidepanel-indent .mc-sidepanel-close{width:100%;height:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;background:0 0;padding:0}.mc-sidepanel-content{display:flex;flex-direction:column;flex:1;min-height:0;width:100%}.mc-sidepanel-header{padding:14px 16px;display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-header .mc-sidepanel-close{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;background:0 0;padding:0 0 0 8px}.mc-sidepanel-title{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mc-sidepanel-body{overflow-y:auto;display:flex;flex:1;flex-direction:column;min-height:0}.mc-sidepanel-footer{padding:16px;display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-footer .mc-sidepanel-actions{display:flex;align-items:center;flex-direction:row;flex:1}.mc-sidepanel-footer .mc-sidepanel-actions[align=left]{justify-content:start}.mc-sidepanel-footer .mc-sidepanel-actions[align=right]{justify-content:flex-end}.mc-sidepanel-footer button+button{margin-left:16px}"],
-            changeDetection: core.ChangeDetectionStrategy.OnPush,
-            encapsulation: core.ViewEncapsulation.None,
-            animations: [mcSidepanelAnimations.sidepanelState],
-            host: {
-                class: 'mc-sidepanel-container',
-                tabindex: '-1',
-                role: 'dialog',
-                'aria-modal': 'true',
-                '[attr.id]': 'id',
-                '[@state]': "{\n            value: animationState,\n            params: animationTransform\n        }",
-                '(@state.start)': 'onAnimation($event)',
-                '(@state.done)': 'onAnimation($event)'
-            }
-        }),
-        __param(3, core.Inject(MC_SIDEPANEL_WITH_INDENT)),
-        __param(4, core.Inject(MC_SIDEPANEL_WITH_SHADOW)),
-        __metadata("design:paramtypes", [core.ElementRef,
-            core.ChangeDetectorRef,
-            McSidepanelConfig, Boolean, Boolean])
-    ], McSidepanelContainerComponent);
+    McSidepanelContainerComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-sidepanel-container',
+                    template: "<div class=\"mc-sidepanel-wrapper\"><div class=\"mc-sidepanel-indent\" *ngIf=\"withIndent\"><button mcSidepanelClose></button></div><div class=\"mc-sidepanel-content\"><ng-template cdkPortalOutlet></ng-template></div></div>",
+                    styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-sidepanel-container{outline:0;display:flex;flex:1;position:fixed;min-height:0}.mc-sidepanel-container .flex{min-height:0}.mc-sidepanel-container_left,.mc-sidepanel-container_right{width:33%;min-width:400px;height:100%;top:0}.mc-sidepanel-container_left .mc-sidepanel-indent,.mc-sidepanel-container_right .mc-sidepanel-indent{width:16px;height:100%}.mc-sidepanel-container_right{right:0;transform:translateX(100%)}.mc-sidepanel-container_right .mc-sidepanel-wrapper{flex-direction:row}.mc-sidepanel-container_left{left:0;transform:translateX(-100%)}.mc-sidepanel-container_left .mc-sidepanel-wrapper{flex-direction:row-reverse}.mc-sidepanel-container_bottom,.mc-sidepanel-container_top{flex-direction:column;height:33%;min-height:400px;width:100%;left:0}.mc-sidepanel-container_bottom .mc-sidepanel-indent,.mc-sidepanel-container_top .mc-sidepanel-indent{height:16px;width:100%}.mc-sidepanel-container_top{top:0;transform:translateY(-100%)}.mc-sidepanel-container_top .mc-sidepanel-wrapper{flex-direction:column-reverse}.mc-sidepanel-container_bottom{bottom:0;transform:translateY(100%)}.mc-sidepanel-container_bottom .mc-sidepanel-wrapper{flex-direction:column}.mc-sidepanel-wrapper{display:flex;flex:1;min-height:0;width:100%}.mc-sidepanel-indent{display:flex;flex:0 0 auto}.mc-sidepanel-indent .mc-sidepanel-close{width:100%;height:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;background:0 0;padding:0}.mc-sidepanel-content{display:flex;flex-direction:column;flex:1;min-height:0;width:100%}.mc-sidepanel-header{padding:14px 16px;display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-header .mc-sidepanel-close{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;background:0 0;padding:0 0 0 8px}.mc-sidepanel-title{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mc-sidepanel-body{overflow-y:auto;display:flex;flex:1;flex-direction:column;min-height:0}.mc-sidepanel-footer{padding:16px;display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-footer .mc-sidepanel-actions{display:flex;align-items:center;flex-direction:row;flex:1}.mc-sidepanel-footer .mc-sidepanel-actions[align=left]{justify-content:start}.mc-sidepanel-footer .mc-sidepanel-actions[align=right]{justify-content:flex-end}.mc-sidepanel-footer button+button{margin-left:16px}"],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core.ViewEncapsulation.None,
+                    animations: [mcSidepanelAnimations.sidepanelState],
+                    host: {
+                        class: 'mc-sidepanel-container',
+                        tabindex: '-1',
+                        role: 'dialog',
+                        'aria-modal': 'true',
+                        '[attr.id]': 'id',
+                        '[@state]': "{\n            value: animationState,\n            params: animationTransform\n        }",
+                        '(@state.start)': 'onAnimation($event)',
+                        '(@state.done)': 'onAnimation($event)'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McSidepanelContainerComponent.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef },
+        { type: McSidepanelConfig },
+        { type: Boolean, decorators: [{ type: core.Inject, args: [MC_SIDEPANEL_WITH_INDENT,] }] },
+        { type: Boolean, decorators: [{ type: core.Inject, args: [MC_SIDEPANEL_WITH_SHADOW,] }] }
+    ]; };
+    McSidepanelContainerComponent.propDecorators = {
+        portalOutlet: [{ type: core.ViewChild, args: [portal.CdkPortalOutlet,] }]
+    };
     return McSidepanelContainerComponent;
 }(portal.BasePortalOutlet));
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // Counter for unique sidepanel ids.
+/** @type {?} */
 var uniqueId = 0;
-var McSidepanelRef = /** @class */ (function () {
+/**
+ * @template T, R
+ */
+var   /**
+ * @template T, R
+ */
+McSidepanelRef = /** @class */ (function () {
     function McSidepanelRef(containerInstance, overlayRef, config) {
         var _this = this;
         this.containerInstance = containerInstance;
         this.overlayRef = overlayRef;
         this.config = config;
-        /** Subject for notifying the user that the sidepanel has been closed and dismissed. */
+        /**
+         * Subject for notifying the user that the sidepanel has been closed and dismissed.
+         */
         this.afterClosed$ = new rxjs.Subject();
-        /** Subject for notifying the user that the sidepanel has opened and appeared. */
+        /**
+         * Subject for notifying the user that the sidepanel has opened and appeared.
+         */
         this.afterOpened$ = new rxjs.Subject();
         this.id = this.config.id || "mc-sidepanel-" + uniqueId++;
         this.containerInstance.id = this.id;
@@ -249,7 +371,15 @@ var McSidepanelRef = /** @class */ (function () {
             operators.filter(function (event) { return event.keyCode === keycodes.ESCAPE; }))).subscribe(function () { return _this.close(); });
         }
     }
-    McSidepanelRef.prototype.close = function (result) {
+    /**
+     * @param {?=} result
+     * @return {?}
+     */
+    McSidepanelRef.prototype.close = /**
+     * @param {?=} result
+     * @return {?}
+     */
+    function (result) {
         var _this = this;
         if (!this.afterClosed$.closed) {
             // Transition the backdrop in parallel to the sidepanel.
@@ -259,17 +389,40 @@ var McSidepanelRef = /** @class */ (function () {
         }
     };
     /** Gets an observable that is notified when the sidepanel is finished closing. */
-    McSidepanelRef.prototype.afterClosed = function () {
+    /**
+     * Gets an observable that is notified when the sidepanel is finished closing.
+     * @return {?}
+     */
+    McSidepanelRef.prototype.afterClosed = /**
+     * Gets an observable that is notified when the sidepanel is finished closing.
+     * @return {?}
+     */
+    function () {
         return this.afterClosed$.asObservable();
     };
     /** Gets an observable that is notified when the sidepanel has opened and appeared. */
-    McSidepanelRef.prototype.afterOpened = function () {
+    /**
+     * Gets an observable that is notified when the sidepanel has opened and appeared.
+     * @return {?}
+     */
+    McSidepanelRef.prototype.afterOpened = /**
+     * Gets an observable that is notified when the sidepanel has opened and appeared.
+     * @return {?}
+     */
+    function () {
         return this.afterOpened$.asObservable();
     };
     return McSidepanelRef;
 }());
 
-/** Injection token that can be used to specify default sidepanel options. */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Injection token that can be used to specify default sidepanel options.
+ * @type {?}
+ */
 var MC_SIDEPANEL_DEFAULT_OPTIONS = new core.InjectionToken('mc-sidepanel-default-options');
 var McSidepanelService = /** @class */ (function () {
     function McSidepanelService(overlay$$1, injector, defaultOptions, parentSidepanelService) {
@@ -281,36 +434,65 @@ var McSidepanelService = /** @class */ (function () {
     }
     Object.defineProperty(McSidepanelService.prototype, "openedSidepanels", {
         /** Keeps track of the currently-open sidepanels. */
-        get: function () {
+        get: /**
+         * Keeps track of the currently-open sidepanels.
+         * @return {?}
+         */
+        function () {
             return this.parentSidepanelService ? this.parentSidepanelService.openedSidepanels :
                 this.openedSidepanelsAtThisLevel;
         },
         enumerable: true,
         configurable: true
     });
-    McSidepanelService.prototype.ngOnDestroy = function () {
+    /**
+     * @return {?}
+     */
+    McSidepanelService.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
         // Only close the sidepanels at this level on destroy
         // since the parent service may still be active.
         this.closeSidepanels(this.openedSidepanelsAtThisLevel);
     };
-    McSidepanelService.prototype.open = function (componentOrTemplateRef, config) {
+    /**
+     * @template T, D
+     * @param {?} componentOrTemplateRef
+     * @param {?=} config
+     * @return {?}
+     */
+    McSidepanelService.prototype.open = /**
+     * @template T, D
+     * @param {?} componentOrTemplateRef
+     * @param {?=} config
+     * @return {?}
+     */
+    function (componentOrTemplateRef, config) {
         var _this = this;
+        /** @type {?} */
         var fullConfig = __assign({}, (this.defaultOptions || new McSidepanelConfig()), config);
         if (fullConfig.id && this.getSidepanelById(fullConfig.id)) {
             throw Error("Sidepanel with id \"" + fullConfig.id + "\" exists already. The sidepanel id must be unique.");
         }
+        /** @type {?} */
         var overlayRef = this.createOverlay(fullConfig);
+        /** @type {?} */
         var container = this.attachContainer(overlayRef, fullConfig);
+        /** @type {?} */
         var ref = new McSidepanelRef(container, overlayRef, fullConfig);
         if (componentOrTemplateRef instanceof core.TemplateRef) {
-            container.attachTemplatePortal(new portal.TemplatePortal(componentOrTemplateRef, null, {
+            container.attachTemplatePortal(new portal.TemplatePortal(componentOrTemplateRef, (/** @type {?} */ (null)), (/** @type {?} */ ({
                 $implicit: fullConfig.data,
                 sidepanelRef: ref
-            }));
+            }))));
         }
         else {
+            /** @type {?} */
             var injector = this.createInjector(fullConfig, ref, container);
+            /** @type {?} */
             var portal$$1 = new portal.ComponentPortal(componentOrTemplateRef, undefined, injector);
+            /** @type {?} */
             var contentRef = container.attachComponentPortal(portal$$1);
             ref.instance = contentRef.instance;
         }
@@ -322,27 +504,63 @@ var McSidepanelService = /** @class */ (function () {
     /**
      * Closes all of the currently-open sidepanels.
      */
-    McSidepanelService.prototype.closeAll = function () {
+    /**
+     * Closes all of the currently-open sidepanels.
+     * @return {?}
+     */
+    McSidepanelService.prototype.closeAll = /**
+     * Closes all of the currently-open sidepanels.
+     * @return {?}
+     */
+    function () {
         this.closeSidepanels(this.openedSidepanels);
     };
     /**
      * Finds an open sidepanel by its id.
      * @param id ID to use when looking up the sidepanel.
      */
-    McSidepanelService.prototype.getSidepanelById = function (id) {
+    /**
+     * Finds an open sidepanel by its id.
+     * @param {?} id ID to use when looking up the sidepanel.
+     * @return {?}
+     */
+    McSidepanelService.prototype.getSidepanelById = /**
+     * Finds an open sidepanel by its id.
+     * @param {?} id ID to use when looking up the sidepanel.
+     * @return {?}
+     */
+    function (id) {
         return this.openedSidepanels.find(function (sidepanel) { return sidepanel.id === id; });
     };
     /**
      * Attaches the sidepanel container component to the overlay.
      */
-    McSidepanelService.prototype.attachContainer = function (overlayRef, config) {
+    /**
+     * Attaches the sidepanel container component to the overlay.
+     * @private
+     * @param {?} overlayRef
+     * @param {?} config
+     * @return {?}
+     */
+    McSidepanelService.prototype.attachContainer = /**
+     * Attaches the sidepanel container component to the overlay.
+     * @private
+     * @param {?} overlayRef
+     * @param {?} config
+     * @return {?}
+     */
+    function (overlayRef, config) {
+        /** @type {?} */
         var openedSidepanelsWithSamePosition = this.getOpenedSidepanelsWithSamePosition(config);
+        /** @type {?} */
         var injector = new portal.PortalInjector(this.injector, new WeakMap([
             [McSidepanelConfig, config],
             [MC_SIDEPANEL_WITH_INDENT, openedSidepanelsWithSamePosition.length >= 1],
             [MC_SIDEPANEL_WITH_SHADOW, openedSidepanelsWithSamePosition.length < 2] // tslint:disable-line
         ]));
+        /** @type {?} */
         var containerPortal = new portal.ComponentPortal(McSidepanelContainerComponent, undefined, injector);
+        /** @type {?} */
         var containerRef = overlayRef.attach(containerPortal);
         return containerRef.instance;
     };
@@ -354,11 +572,32 @@ var McSidepanelService = /** @class */ (function () {
      * @param sidepanelContainer Sidepanel container element that wraps all of the contents.
      * @returns The custom injector that can be used inside the sidepanel.
      */
-    McSidepanelService.prototype.createInjector = function (config, sidepanelRef, sidepanelContainer) {
+    /**
+     * Creates a custom injector to be used inside the sidepanel. This allows a component loaded inside
+     * of a sidepanel to close itself and, optionally, to return a value.
+     * @private
+     * @template T
+     * @param {?} config Config object that is used to construct the sidepanel.
+     * @param {?} sidepanelRef Reference to the sidepanel.
+     * @param {?} sidepanelContainer Sidepanel container element that wraps all of the contents.
+     * @return {?} The custom injector that can be used inside the sidepanel.
+     */
+    McSidepanelService.prototype.createInjector = /**
+     * Creates a custom injector to be used inside the sidepanel. This allows a component loaded inside
+     * of a sidepanel to close itself and, optionally, to return a value.
+     * @private
+     * @template T
+     * @param {?} config Config object that is used to construct the sidepanel.
+     * @param {?} sidepanelRef Reference to the sidepanel.
+     * @param {?} sidepanelContainer Sidepanel container element that wraps all of the contents.
+     * @return {?} The custom injector that can be used inside the sidepanel.
+     */
+    function (config, sidepanelRef, sidepanelContainer) {
         // The McSidepanelContainerComponent is injected in the portal as the McSidepanelContainerComponent and
         // the sidepanel's content are created out of the same ViewContainerRef and as such, are siblings for injector
         // purposes. To allow the hierarchy that is expected, the McSidepanelContainerComponent is explicitly
         // added to the injection tokens.
+        /** @type {?} */
         var injectionTokens = new WeakMap([
             [McSidepanelContainerComponent, sidepanelContainer],
             [MC_SIDEPANEL_DATA, config.data],
@@ -370,7 +609,20 @@ var McSidepanelService = /** @class */ (function () {
      * Creates a new overlay and places it in the correct location.
      * @param config The user-specified sidepanel config.
      */
-    McSidepanelService.prototype.createOverlay = function (config) {
+    /**
+     * Creates a new overlay and places it in the correct location.
+     * @private
+     * @param {?} config The user-specified sidepanel config.
+     * @return {?}
+     */
+    McSidepanelService.prototype.createOverlay = /**
+     * Creates a new overlay and places it in the correct location.
+     * @private
+     * @param {?} config The user-specified sidepanel config.
+     * @return {?}
+     */
+    function (config) {
+        /** @type {?} */
         var overlayConfig = new overlay.OverlayConfig({
             hasBackdrop: config.hasBackdrop,
             backdropClass: this.getBackdropClass(config),
@@ -381,42 +633,92 @@ var McSidepanelService = /** @class */ (function () {
         });
         return this.overlay.create(overlayConfig);
     };
-    McSidepanelService.prototype.closeSidepanels = function (sidepanels) {
+    /**
+     * @private
+     * @param {?} sidepanels
+     * @return {?}
+     */
+    McSidepanelService.prototype.closeSidepanels = /**
+     * @private
+     * @param {?} sidepanels
+     * @return {?}
+     */
+    function (sidepanels) {
+        /** @type {?} */
         var reversedOpenedSidepanels = sidepanels.reverse().slice();
         reversedOpenedSidepanels.forEach(function (sidepanelRef) {
             sidepanelRef.close();
         });
     };
-    McSidepanelService.prototype.getBackdropClass = function (config) {
-        var hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some(function (sidepanelRef) { return sidepanelRef.config.hasBackdrop; });
+    /**
+     * @private
+     * @param {?} config
+     * @return {?}
+     */
+    McSidepanelService.prototype.getBackdropClass = /**
+     * @private
+     * @param {?} config
+     * @return {?}
+     */
+    function (config) {
+        /** @type {?} */
+        var hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some(function (sidepanelRef) { return (/** @type {?} */ (sidepanelRef.config.hasBackdrop)); });
         return config.requiredBackdrop || !hasOpenedSidepanelWithBackdrop ? 'cdk-overlay-dark-backdrop' :
             'cdk-overlay-transparent-backdrop';
     };
-    McSidepanelService.prototype.getOpenedSidepanelsWithSamePosition = function (config) {
+    /**
+     * @private
+     * @param {?} config
+     * @return {?}
+     */
+    McSidepanelService.prototype.getOpenedSidepanelsWithSamePosition = /**
+     * @private
+     * @param {?} config
+     * @return {?}
+     */
+    function (config) {
         return this.openedSidepanels.filter(function (sidepanelRef) { return sidepanelRef.config.position === config.position; });
     };
     /**
      * Removes a sidepanel from the array of open sidepanels.
      * @param sidepanelRef Sidepanel to be removed.
      */
-    McSidepanelService.prototype.removeOpenSidepanel = function (sidepanelRef) {
+    /**
+     * Removes a sidepanel from the array of open sidepanels.
+     * @private
+     * @param {?} sidepanelRef Sidepanel to be removed.
+     * @return {?}
+     */
+    McSidepanelService.prototype.removeOpenSidepanel = /**
+     * Removes a sidepanel from the array of open sidepanels.
+     * @private
+     * @param {?} sidepanelRef Sidepanel to be removed.
+     * @return {?}
+     */
+    function (sidepanelRef) {
+        /** @type {?} */
         var index = this.openedSidepanels.indexOf(sidepanelRef);
         if (index > -1) {
             this.openedSidepanels.splice(index, 1);
         }
     };
-    McSidepanelService = __decorate([
-        core.Injectable(),
-        __param(2, core.Optional()), __param(2, core.Inject(MC_SIDEPANEL_DEFAULT_OPTIONS)),
-        __param(3, core.Optional()), __param(3, core.SkipSelf()),
-        __metadata("design:paramtypes", [overlay.Overlay,
-            core.Injector,
-            McSidepanelConfig,
-            McSidepanelService])
-    ], McSidepanelService);
+    McSidepanelService.decorators = [
+        { type: core.Injectable },
+    ];
+    /** @nocollapse */
+    McSidepanelService.ctorParameters = function () { return [
+        { type: overlay.Overlay },
+        { type: core.Injector },
+        { type: McSidepanelConfig, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_SIDEPANEL_DEFAULT_OPTIONS,] }] },
+        { type: McSidepanelService, decorators: [{ type: core.Optional }, { type: core.SkipSelf }] }
+    ]; };
     return McSidepanelService;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /**
  * Button that will close the current sidepanel.
  */
@@ -426,7 +728,13 @@ var McSidepanelClose = /** @class */ (function () {
         this.elementRef = elementRef;
         this.sidepanelService = sidepanelService;
     }
-    McSidepanelClose.prototype.ngOnInit = function () {
+    /**
+     * @return {?}
+     */
+    McSidepanelClose.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
         var _this = this;
         if (!this.sidepanelRef) {
             // When this directive is included in a sidepanel via TemplateRef (rather than being
@@ -436,38 +744,45 @@ var McSidepanelClose = /** @class */ (function () {
             // This must occur in `onInit`, as the ID binding for the sidepanel container won't
             // be resolved at constructor time. We use setTimeout by same reason.
             setTimeout(function () {
-                _this.sidepanelRef = getClosestSidepanel(_this.elementRef, _this.sidepanelService.openedSidepanels);
+                _this.sidepanelRef = (/** @type {?} */ (getClosestSidepanel(_this.elementRef, _this.sidepanelService.openedSidepanels)));
             });
         }
     };
-    McSidepanelClose.prototype.ngOnChanges = function (changes) {
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    McSidepanelClose.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
+        /** @type {?} */
         var proxiedChange = changes.mcSidepanelClose || changes.sidepanelResult;
         if (proxiedChange) {
             this.sidepanelResult = proxiedChange.currentValue;
         }
     };
-    __decorate([
-        core.Input('mc-sidepanel-close'),
-        __metadata("design:type", Object)
-    ], McSidepanelClose.prototype, "sidepanelResult", void 0);
-    __decorate([
-        core.Input('mcSidepanelClose'),
-        __metadata("design:type", Object)
-    ], McSidepanelClose.prototype, "mcSidepanelClose", void 0);
-    McSidepanelClose = __decorate([
-        core.Directive({
-            selector: 'button[mc-sidepanel-close], button[mcSidepanelClose]',
-            host: {
-                '(click)': 'sidepanelRef.close(sidepanelResult)',
-                class: 'mc-sidepanel-close',
-                type: 'button'
-            }
-        }),
-        __param(0, core.Optional()),
-        __metadata("design:paramtypes", [McSidepanelRef,
-            core.ElementRef,
-            McSidepanelService])
-    ], McSidepanelClose);
+    McSidepanelClose.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'button[mc-sidepanel-close], button[mcSidepanelClose]',
+                    host: {
+                        '(click)': 'sidepanelRef.close(sidepanelResult)',
+                        class: 'mc-sidepanel-close',
+                        type: 'button'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McSidepanelClose.ctorParameters = function () { return [
+        { type: McSidepanelRef, decorators: [{ type: core.Optional }] },
+        { type: core.ElementRef },
+        { type: McSidepanelService }
+    ]; };
+    McSidepanelClose.propDecorators = {
+        sidepanelResult: [{ type: core.Input, args: ['mc-sidepanel-close',] }],
+        mcSidepanelClose: [{ type: core.Input, args: ['mcSidepanelClose',] }]
+    };
     return McSidepanelClose;
 }());
 /**
@@ -476,19 +791,18 @@ var McSidepanelClose = /** @class */ (function () {
 var McSidepanelHeader = /** @class */ (function () {
     function McSidepanelHeader() {
     }
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Boolean)
-    ], McSidepanelHeader.prototype, "closeable", void 0);
-    McSidepanelHeader = __decorate([
-        core.Component({
-            selector: 'mc-sidepanel-header',
-            template: "\n        <div class=\"mc-sidepanel-title\">\n            <ng-content></ng-content>\n        </div>\n        <button *ngIf=\"closeable\" mc-sidepanel-close>\n            <span class=\"mc-sidepanel-close-x\">\n                <i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" color=\"second\"></i>\n            </span>\n        </button>\n    ",
-            host: {
-                class: 'mc-sidepanel-header'
-            }
-        })
-    ], McSidepanelHeader);
+    McSidepanelHeader.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-sidepanel-header',
+                    template: "\n        <div class=\"mc-sidepanel-title\">\n            <ng-content></ng-content>\n        </div>\n        <button *ngIf=\"closeable\" mc-sidepanel-close>\n            <span class=\"mc-sidepanel-close-x\">\n                <i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" color=\"second\"></i>\n            </span>\n        </button>\n    ",
+                    host: {
+                        class: 'mc-sidepanel-header'
+                    }
+                },] },
+    ];
+    McSidepanelHeader.propDecorators = {
+        closeable: [{ type: core.Input }]
+    };
     return McSidepanelHeader;
 }());
 /**
@@ -497,14 +811,14 @@ var McSidepanelHeader = /** @class */ (function () {
 var McSidepanelBody = /** @class */ (function () {
     function McSidepanelBody() {
     }
-    McSidepanelBody = __decorate([
-        core.Directive({
-            selector: 'mc-sidepanel-body, [mc-sidepanel-body], mcSidepanelBody',
-            host: {
-                class: 'mc-sidepanel-body'
-            }
-        })
-    ], McSidepanelBody);
+    McSidepanelBody.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-sidepanel-body, [mc-sidepanel-body], mcSidepanelBody',
+                    host: {
+                        class: 'mc-sidepanel-body'
+                    }
+                },] },
+    ];
     return McSidepanelBody;
 }());
 /**
@@ -513,14 +827,14 @@ var McSidepanelBody = /** @class */ (function () {
 var McSidepanelFooter = /** @class */ (function () {
     function McSidepanelFooter() {
     }
-    McSidepanelFooter = __decorate([
-        core.Directive({
-            selector: 'mc-sidepanel-footer, [mc-sidepanel-footer], mcSidepanelFooter',
-            host: {
-                class: 'mc-sidepanel-footer'
-            }
-        })
-    ], McSidepanelFooter);
+    McSidepanelFooter.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-sidepanel-footer, [mc-sidepanel-footer], mcSidepanelFooter',
+                    host: {
+                        class: 'mc-sidepanel-footer'
+                    }
+                },] },
+    ];
     return McSidepanelFooter;
 }());
 /**
@@ -529,64 +843,80 @@ var McSidepanelFooter = /** @class */ (function () {
 var McSidepanelActions = /** @class */ (function () {
     function McSidepanelActions() {
     }
-    McSidepanelActions = __decorate([
-        core.Directive({
-            selector: 'mc-sidepanel-actions, [mc-sidepanel-actions], mcSidepanelActions',
-            host: {
-                class: 'mc-sidepanel-actions'
-            }
-        })
-    ], McSidepanelActions);
+    McSidepanelActions.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-sidepanel-actions, [mc-sidepanel-actions], mcSidepanelActions',
+                    host: {
+                        class: 'mc-sidepanel-actions'
+                    }
+                },] },
+    ];
     return McSidepanelActions;
 }());
 /**
  * Finds the closest McSidepanelRef to an element by looking at the DOM.
- * @param element Element relative to which to look for a sidepanel.
- * @param openSidepanels References to the currently-open sidepanels.
+ * @param {?} element Element relative to which to look for a sidepanel.
+ * @param {?} openSidepanels References to the currently-open sidepanels.
+ * @return {?}
  */
 function getClosestSidepanel(element, openSidepanels) {
+    /** @type {?} */
     var parent = element.nativeElement.parentElement;
     while (parent && !parent.classList.contains('mc-sidepanel-container')) {
         parent = parent.parentElement;
     }
-    return parent ? openSidepanels.find(function (sidepanel) { return sidepanel.id === parent.id; }) : null;
+    return parent ? openSidepanels.find(function (sidepanel) { return sidepanel.id === (/** @type {?} */ (parent)).id; }) : null;
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McSidepanelModule = /** @class */ (function () {
     function McSidepanelModule() {
     }
-    McSidepanelModule = __decorate([
-        core.NgModule({
-            imports: [
-                common.CommonModule,
-                overlay.OverlayModule,
-                portal.PortalModule,
-                core$1.McCommonModule,
-                icon.McIconModule
-            ],
-            providers: [McSidepanelService],
-            declarations: [
-                McSidepanelContainerComponent,
-                McSidepanelClose,
-                McSidepanelHeader,
-                McSidepanelBody,
-                McSidepanelFooter,
-                McSidepanelActions
-            ],
-            entryComponents: [McSidepanelContainerComponent],
-            exports: [
-                McSidepanelContainerComponent,
-                McSidepanelClose,
-                McSidepanelHeader,
-                McSidepanelBody,
-                McSidepanelFooter,
-                McSidepanelActions
-            ]
-        })
-    ], McSidepanelModule);
+    McSidepanelModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        overlay.OverlayModule,
+                        portal.PortalModule,
+                        core$1.McCommonModule,
+                        icon.McIconModule
+                    ],
+                    providers: [McSidepanelService],
+                    declarations: [
+                        McSidepanelContainerComponent,
+                        McSidepanelClose,
+                        McSidepanelHeader,
+                        McSidepanelBody,
+                        McSidepanelFooter,
+                        McSidepanelActions
+                    ],
+                    entryComponents: [McSidepanelContainerComponent],
+                    exports: [
+                        McSidepanelContainerComponent,
+                        McSidepanelClose,
+                        McSidepanelHeader,
+                        McSidepanelBody,
+                        McSidepanelFooter,
+                        McSidepanelActions
+                    ]
+                },] },
+    ];
     return McSidepanelModule;
 }());
 
+exports.McSidepanelModule = McSidepanelModule;
+exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
+exports.McSidepanelService = McSidepanelService;
+exports.MC_SIDEPANEL_DATA = MC_SIDEPANEL_DATA;
+exports.McSidepanelPosition = McSidepanelPosition;
+exports.McSidepanelConfig = McSidepanelConfig;
+exports.MC_SIDEPANEL_WITH_INDENT = MC_SIDEPANEL_WITH_INDENT;
+exports.MC_SIDEPANEL_WITH_SHADOW = MC_SIDEPANEL_WITH_SHADOW;
+exports.McSidepanelContainerComponent = McSidepanelContainerComponent;
+exports.McSidepanelRef = McSidepanelRef;
 exports.ɵb21 = mcSidepanelAnimations;
 exports.ɵa21 = mcSidepanelTransformAnimation;
 exports.ɵg21 = McSidepanelActions;
@@ -594,15 +924,6 @@ exports.ɵe21 = McSidepanelBody;
 exports.ɵc21 = McSidepanelClose;
 exports.ɵf21 = McSidepanelFooter;
 exports.ɵd21 = McSidepanelHeader;
-exports.McSidepanelModule = McSidepanelModule;
-exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
-exports.McSidepanelService = McSidepanelService;
-exports.MC_SIDEPANEL_DATA = MC_SIDEPANEL_DATA;
-exports.McSidepanelConfig = McSidepanelConfig;
-exports.MC_SIDEPANEL_WITH_INDENT = MC_SIDEPANEL_WITH_INDENT;
-exports.MC_SIDEPANEL_WITH_SHADOW = MC_SIDEPANEL_WITH_SHADOW;
-exports.McSidepanelContainerComponent = McSidepanelContainerComponent;
-exports.McSidepanelRef = McSidepanelRef;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

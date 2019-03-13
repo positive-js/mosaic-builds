@@ -4,8 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __decorate, __metadata, __param } from 'tslib';
-import { Directive, TemplateRef, ChangeDetectionStrategy, Component, ContentChild, Input, ViewChild, ViewContainerRef, ViewEncapsulation, ChangeDetectorRef, Inject, Output, EventEmitter, ElementRef, Optional, ComponentFactoryResolver, forwardRef, ContentChildren, NgZone, QueryList, InjectionToken, Attribute, NgModule } from '@angular/core';
+import { Directive, TemplateRef, ChangeDetectionStrategy, Component, ContentChild, Input, ViewChild, ViewContainerRef, ViewEncapsulation, ChangeDetectorRef, Inject, Output, EventEmitter, ElementRef, Optional, ComponentFactoryResolver, forwardRef, ContentChildren, NgZone, InjectionToken, Attribute, NgModule } from '@angular/core';
 import { CdkPortal, TemplatePortal, CdkPortalOutlet, PortalHostDirective, PortalModule } from '@ptsecurity/cdk/portal';
 import { mixinDisabled, mixinColor, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
 import { Subject, Subscription, merge, of } from 'rxjs';
@@ -18,38 +17,68 @@ import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
 import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 
-/** Decorates the `ng-template` tags and reads out the template from it. */
-let McTabContent = class McTabContent {
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Decorates the `ng-template` tags and reads out the template from it.
+ */
+class McTabContent {
+    /**
+     * @param {?} template
+     */
     constructor(template) {
         this.template = template;
     }
-};
-McTabContent = __decorate([
-    Directive({ selector: '[mcTabContent]' }),
-    __metadata("design:paramtypes", [TemplateRef])
-], McTabContent);
+}
+McTabContent.decorators = [
+    { type: Directive, args: [{ selector: '[mcTabContent]' },] },
+];
+/** @nocollapse */
+McTabContent.ctorParameters = () => [
+    { type: TemplateRef }
+];
 
-/** Used to flag tab labels for use with the portal directive */
-let McTabLabel = class McTabLabel extends CdkPortal {
-};
-McTabLabel = __decorate([
-    Directive({
-        selector: '[mc-tab-label], [mcTabLabel]'
-    })
-], McTabLabel);
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Used to flag tab labels for use with the portal directive
+ */
+class McTabLabel extends CdkPortal {
+}
+McTabLabel.decorators = [
+    { type: Directive, args: [{
+                selector: '[mc-tab-label], [mcTabLabel]'
+            },] },
+];
 // TODO: workaround for https://github.com/angular/material2/issues/12760
-McTabLabel.ctorParameters = () => CdkPortal.ctorParameters;
+((/** @type {?} */ (McTabLabel))).ctorParameters = () => ((/** @type {?} */ (CdkPortal))).ctorParameters;
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class McTabBase {
 }
+/** @type {?} */
 const mcTabMixinBase = mixinDisabled(McTabBase);
-let McTab = class McTab extends mcTabMixinBase {
+class McTab extends mcTabMixinBase {
+    /**
+     * @param {?} viewContainerRef
+     */
     constructor(viewContainerRef) {
         super();
         this.viewContainerRef = viewContainerRef;
-        /** Plain text label for the tab, used when there is no template label. */
+        /**
+         * Plain text label for the tab, used when there is no template label.
+         */
         this.textLabel = '';
-        /** Emits whenever the internal state of the tab changes. */
+        /**
+         * Emits whenever the internal state of the tab changes.
+         */
         this.stateChanges = new Subject();
         /**
          * The relatively indexed position where 0 represents the center, negative is left, and positive
@@ -65,67 +94,76 @@ let McTab = class McTab extends mcTabMixinBase {
          * Whether the tab is currently active.
          */
         this.isActive = false;
-        /** Portal that will be the hosted content of the tab */
+        /**
+         * Portal that will be the hosted content of the tab
+         */
         this.contentPortal = null;
     }
-    /** @docs-private */
+    /**
+     * \@docs-private
+     * @return {?}
+     */
     get content() {
         return this.contentPortal;
     }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     ngOnChanges(changes) {
         if (changes.hasOwnProperty('textLabel') ||
             changes.hasOwnProperty('disabled')) {
             this.stateChanges.next();
         }
     }
+    /**
+     * @return {?}
+     */
     ngOnDestroy() {
         this.stateChanges.complete();
     }
+    /**
+     * @return {?}
+     */
     ngOnInit() {
         this.contentPortal = new TemplatePortal(this.explicitContent || this.implicitContent, this.viewContainerRef);
     }
+}
+McTab.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-tab',
+                // Create a template for the content of the <mc-tab> so that we can grab a reference to this
+                // TemplateRef and use it in a Portal to render the tab content in the appropriate place in the
+                // tab-group.
+                template: '<ng-template><ng-content></ng-content></ng-template>',
+                inputs: ['disabled'],
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                encapsulation: ViewEncapsulation.None,
+                exportAs: 'mcTab'
+            },] },
+];
+/** @nocollapse */
+McTab.ctorParameters = () => [
+    { type: ViewContainerRef }
+];
+McTab.propDecorators = {
+    templateLabel: [{ type: ContentChild, args: [McTabLabel,] }],
+    explicitContent: [{ type: ContentChild, args: [McTabContent, { read: TemplateRef },] }],
+    implicitContent: [{ type: ViewChild, args: [TemplateRef,] }],
+    textLabel: [{ type: Input, args: ['label',] }],
+    ariaLabel: [{ type: Input, args: ['aria-label',] }],
+    ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }]
 };
-__decorate([
-    ContentChild(McTabLabel),
-    __metadata("design:type", McTabLabel)
-], McTab.prototype, "templateLabel", void 0);
-__decorate([
-    ContentChild(McTabContent, { read: TemplateRef }),
-    __metadata("design:type", TemplateRef)
-], McTab.prototype, "explicitContent", void 0);
-__decorate([
-    ViewChild(TemplateRef),
-    __metadata("design:type", TemplateRef)
-], McTab.prototype, "implicitContent", void 0);
-__decorate([
-    Input('label'),
-    __metadata("design:type", String)
-], McTab.prototype, "textLabel", void 0);
-__decorate([
-    Input('aria-label'),
-    __metadata("design:type", String)
-], McTab.prototype, "ariaLabel", void 0);
-__decorate([
-    Input('aria-labelledby'),
-    __metadata("design:type", String)
-], McTab.prototype, "ariaLabelledby", void 0);
-McTab = __decorate([
-    Component({
-        selector: 'mc-tab',
-        // Create a template for the content of the <mc-tab> so that we can grab a reference to this
-        // TemplateRef and use it in a Portal to render the tab content in the appropriate place in the
-        // tab-group.
-        template: '<ng-template><ng-content></ng-content></ng-template>',
-        inputs: ['disabled'],
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        encapsulation: ViewEncapsulation.None,
-        exportAs: 'mcTab'
-    }),
-    __metadata("design:paramtypes", [ViewContainerRef])
-], McTab);
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 const mcTabsAnimations = {
-    /** Animation translates a tab along the X axis. */
+    /**
+     * Animation translates a tab along the X axis.
+     */
     translateTab: trigger('translateTab', [
         // Note: transitions to `none` instead of 0, because some browsers might blur the content.
         state('center, void, left-origin-center, right-origin-center', style({ transform: 'none' })),
@@ -148,26 +186,47 @@ const mcTabsAnimations = {
 };
 
 /**
- * Wrapper for the contents of a tab.
- * @docs-private
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-let McTabBody = class McTabBody {
+/**
+ * Wrapper for the contents of a tab.
+ * \@docs-private
+ */
+class McTabBody {
+    /**
+     * @param {?} elementRef
+     * @param {?} dir
+     * @param {?} changeDetectorRef
+     */
     constructor(elementRef, dir, changeDetectorRef) {
         this.elementRef = elementRef;
         this.dir = dir;
-        /** Event emitted when the tab begins to animate towards the center as the active tab. */
+        /**
+         * Event emitted when the tab begins to animate towards the center as the active tab.
+         */
         this.onCentering = new EventEmitter();
-        /** Event emitted before the centering of the tab begins. */
+        /**
+         * Event emitted before the centering of the tab begins.
+         */
         this.beforeCentering = new EventEmitter();
-        /** Event emitted before the centering of the tab begins. */
+        /**
+         * Event emitted before the centering of the tab begins.
+         */
         this.afterLeavingCenter = new EventEmitter();
-        /** Event emitted when the tab completes its animation towards the center. */
+        /**
+         * Event emitted when the tab completes its animation towards the center.
+         */
         this.onCentered = new EventEmitter(true);
         // Note that the default value will always be overwritten by `McTabBody`, but we need one
         // anyway to prevent the animations module from throwing an error if the body is used on its own.
-        /** Duration for the tab's animation. */
+        /**
+         * Duration for the tab's animation.
+         */
         this.animationDuration = '0ms';
-        /** Subscription to the directionality change observable. */
+        /**
+         * Subscription to the directionality change observable.
+         */
         this.dirChangeSubscription = Subscription.EMPTY;
         if (this.dir && changeDetectorRef) {
             this.dirChangeSubscription = this.dir.change.subscribe((direction) => {
@@ -176,7 +235,11 @@ let McTabBody = class McTabBody {
             });
         }
     }
-    /** The shifted index position of the tab body, where zero represents the active center tab. */
+    /**
+     * The shifted index position of the tab body, where zero represents the active center tab.
+     * @param {?} position
+     * @return {?}
+     */
     set position(position) {
         this.positionIndex = position;
         this.computePositionAnimationState();
@@ -184,22 +247,35 @@ let McTabBody = class McTabBody {
     /**
      * After initialized, check if the content is centered and has an origin. If so, set the
      * special position states that transition the tab from the left or right before centering.
+     * @return {?}
      */
     ngOnInit() {
         if (this.bodyPosition === 'center' && this.origin != null) {
             this.bodyPosition = this.computePositionFromOrigin();
         }
     }
+    /**
+     * @return {?}
+     */
     ngOnDestroy() {
         this.dirChangeSubscription.unsubscribe();
     }
+    /**
+     * @param {?} e
+     * @return {?}
+     */
     onTranslateTabStarted(e) {
+        /** @type {?} */
         const isCentering = this.isCenterPosition(e.toState);
         this.beforeCentering.emit(isCentering);
         if (isCentering) {
             this.onCentering.emit(this.elementRef.nativeElement.clientHeight);
         }
     }
+    /**
+     * @param {?} e
+     * @return {?}
+     */
     onTranslateTabComplete(e) {
         // If the transition to the center is complete, emit an event.
         if (this.isCenterPosition(e.toState) && this.isCenterPosition(this.bodyPosition)) {
@@ -209,17 +285,29 @@ let McTabBody = class McTabBody {
             this.afterLeavingCenter.emit();
         }
     }
-    /** The text direction of the containing app. */
+    /**
+     * The text direction of the containing app.
+     * @return {?}
+     */
     getLayoutDirection() {
         return this.dir && this.dir.value === 'rtl' ? 'rtl' : 'ltr';
     }
-    /** Whether the provided position state is considered center, regardless of origin. */
+    /**
+     * Whether the provided position state is considered center, regardless of origin.
+     * @param {?} position
+     * @return {?}
+     */
     isCenterPosition(position) {
         return position === 'center' ||
             position === 'left-origin-center' ||
             position === 'right-origin-center';
     }
-    /** Computes the position state that will be used for the tab-body animation trigger. */
+    /**
+     * Computes the position state that will be used for the tab-body animation trigger.
+     * @private
+     * @param {?=} dir
+     * @return {?}
+     */
     computePositionAnimationState(dir = this.getLayoutDirection()) {
         if (this.positionIndex < 0) {
             this.bodyPosition = dir === 'ltr' ? 'left' : 'right';
@@ -234,83 +322,74 @@ let McTabBody = class McTabBody {
     /**
      * Computes the position state based on the specified origin position. This is used if the
      * tab is becoming visible immediately after creation.
+     * @private
+     * @return {?}
      */
     computePositionFromOrigin() {
+        /** @type {?} */
         const dir = this.getLayoutDirection();
         if ((dir === 'ltr' && this.origin <= 0) || (dir === 'rtl' && this.origin > 0)) {
             return 'left-origin-center';
         }
         return 'right-origin-center';
     }
+}
+McTabBody.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-tab-body',
+                template: "<div class=\"mc-tab-body__content\" #content [@translateTab]=\"{ value: bodyPosition, params: {animationDuration: animationDuration} }\" (@translateTab.start)=\"onTranslateTabStarted($event)\" (@translateTab.done)=\"onTranslateTabComplete($event)\"><ng-template mcTabBodyHost></ng-template></div>",
+                styles: [".mc-tab-body__content{height:100%;overflow:auto}.mc-tab-body__content .mc-tab-group_dynamic-height{overflow:hidden}"],
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                animations: [mcTabsAnimations.translateTab],
+                host: {
+                    class: 'mc-tab-body'
+                }
+            },] },
+];
+/** @nocollapse */
+McTabBody.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Directionality, decorators: [{ type: Optional }] },
+    { type: ChangeDetectorRef }
+];
+McTabBody.propDecorators = {
+    position: [{ type: Input }],
+    onCentering: [{ type: Output }],
+    beforeCentering: [{ type: Output }],
+    afterLeavingCenter: [{ type: Output }],
+    onCentered: [{ type: Output }],
+    portalHost: [{ type: ViewChild, args: [PortalHostDirective,] }],
+    content: [{ type: Input, args: ['content',] }],
+    origin: [{ type: Input }],
+    animationDuration: [{ type: Input }]
 };
-__decorate([
-    Input(),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], McTabBody.prototype, "position", null);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabBody.prototype, "onCentering", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabBody.prototype, "beforeCentering", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabBody.prototype, "afterLeavingCenter", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabBody.prototype, "onCentered", void 0);
-__decorate([
-    ViewChild(PortalHostDirective),
-    __metadata("design:type", PortalHostDirective)
-], McTabBody.prototype, "portalHost", void 0);
-__decorate([
-    Input('content'),
-    __metadata("design:type", TemplatePortal)
-], McTabBody.prototype, "content", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Number)
-], McTabBody.prototype, "origin", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McTabBody.prototype, "animationDuration", void 0);
-McTabBody = __decorate([
-    Component({
-        selector: 'mc-tab-body',
-        template: "<div class=\"mc-tab-body__content\" #content [@translateTab]=\"{ value: bodyPosition, params: {animationDuration: animationDuration} }\" (@translateTab.start)=\"onTranslateTabStarted($event)\" (@translateTab.done)=\"onTranslateTabComplete($event)\"><ng-template mcTabBodyHost></ng-template></div>",
-        styles: [".mc-tab-body__content{height:100%;overflow:auto}.mc-tab-body__content .mc-tab-group_dynamic-height{overflow:hidden}"],
-        encapsulation: ViewEncapsulation.None,
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        animations: [mcTabsAnimations.translateTab],
-        host: {
-            class: 'mc-tab-body'
-        }
-    }),
-    __param(1, Optional()),
-    __metadata("design:paramtypes", [ElementRef,
-        Directionality,
-        ChangeDetectorRef])
-], McTabBody);
 /**
  * The portal host directive for the contents of the tab.
- * @docs-private
+ * \@docs-private
  */
-let McTabBodyPortal = class McTabBodyPortal extends CdkPortalOutlet {
+class McTabBodyPortal extends CdkPortalOutlet {
+    /**
+     * @param {?} componentFactoryResolver
+     * @param {?} viewContainerRef
+     * @param {?} host
+     */
     constructor(componentFactoryResolver, viewContainerRef, host) {
         super(componentFactoryResolver, viewContainerRef);
         this.host = host;
-        /** Subscription to events for when the tab body begins centering. */
+        /**
+         * Subscription to events for when the tab body begins centering.
+         */
         this.centeringSub = Subscription.EMPTY;
-        /** Subscription to events for when the tab body finishes leaving from center position. */
+        /**
+         * Subscription to events for when the tab body finishes leaving from center position.
+         */
         this.leavingSub = Subscription.EMPTY;
     }
-    /** Set initial visibility or set up subscription for changing visibility. */
+    /**
+     * Set initial visibility or set up subscription for changing visibility.
+     * @return {?}
+     */
     ngOnInit() {
         super.ngOnInit();
         this.centeringSub = this.host.beforeCentering
@@ -324,69 +403,105 @@ let McTabBodyPortal = class McTabBodyPortal extends CdkPortalOutlet {
             this.detach();
         });
     }
-    /** Clean up centering subscription. */
+    /**
+     * Clean up centering subscription.
+     * @return {?}
+     */
     ngOnDestroy() {
         super.ngOnDestroy();
         this.centeringSub.unsubscribe();
         this.leavingSub.unsubscribe();
     }
-};
-McTabBodyPortal = __decorate([
-    Directive({
-        selector: '[mcTabBodyHost]'
-    }),
-    __param(2, Inject(forwardRef(() => McTabBody))),
-    __metadata("design:paramtypes", [ComponentFactoryResolver,
-        ViewContainerRef,
-        McTabBody])
-], McTabBodyPortal);
+}
+McTabBodyPortal.decorators = [
+    { type: Directive, args: [{
+                selector: '[mcTabBodyHost]'
+            },] },
+];
+/** @nocollapse */
+McTabBodyPortal.ctorParameters = () => [
+    { type: ComponentFactoryResolver },
+    { type: ViewContainerRef },
+    { type: McTabBody, decorators: [{ type: Inject, args: [forwardRef(() => McTabBody),] }] }
+];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // Boilerplate for applying mixins to McTabLabelWrapper.
-/** @docs-private */
+/**
+ * \@docs-private
+ */
 class McTabLabelWrapperBase {
 }
+/** @type {?} */
 const mcTabLabelWrapperMixinBase = mixinDisabled(McTabLabelWrapperBase);
 /**
  * Used in the `mc-tab-group` view to display tab labels.
- * @docs-private
+ * \@docs-private
  */
-let McTabLabelWrapper = class McTabLabelWrapper extends mcTabLabelWrapperMixinBase {
+class McTabLabelWrapper extends mcTabLabelWrapperMixinBase {
+    /**
+     * @param {?} elementRef
+     */
     constructor(elementRef) {
         super();
         this.elementRef = elementRef;
     }
-    /** Sets focus on the wrapper element */
+    /**
+     * Sets focus on the wrapper element
+     * @return {?}
+     */
     focus() {
         this.elementRef.nativeElement.focus();
     }
+    /**
+     * @return {?}
+     */
     getOffsetLeft() {
         return this.elementRef.nativeElement.offsetLeft;
     }
+    /**
+     * @return {?}
+     */
     getOffsetWidth() {
         return this.elementRef.nativeElement.offsetWidth;
     }
-};
-McTabLabelWrapper = __decorate([
-    Directive({
-        selector: '[mcTabLabelWrapper]',
-        inputs: ['disabled'],
-        host: {
-            '[class.mc-disabled]': 'disabled',
-            '[attr.aria-disabled]': '!!disabled'
-        }
-    }),
-    __metadata("design:paramtypes", [ElementRef])
-], McTabLabelWrapper);
+}
+McTabLabelWrapper.decorators = [
+    { type: Directive, args: [{
+                selector: '[mcTabLabelWrapper]',
+                inputs: ['disabled'],
+                host: {
+                    '[class.mc-disabled]': 'disabled',
+                    '[attr.aria-disabled]': '!!disabled'
+                }
+            },] },
+];
+/** @nocollapse */
+McTabLabelWrapper.ctorParameters = () => [
+    { type: ElementRef }
+];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 const VIEWPORT_THROTTLE_TIME = 150;
+/** @type {?} */
 const SCROLL_DISTANCE_DELIMITER = 3;
 /**
  * The distance in pixels that will be overshot when scrolling a tab label into view. This helps
  * provide a small affordance to the label next to it.
+ * @type {?}
  */
 const EXAGGERATED_OVERSCROLL = 60;
 // Boilerplate for applying mixins to McTabHeader.
-/** @docs-private */
+/**
+ * \@docs-private
+ */
 class McTabHeaderBase {
 }
 /**
@@ -394,9 +509,16 @@ class McTabHeaderBase {
  * When the tabs list's width exceeds the width of the header container,
  * then arrows will be displayed to allow the user to scroll
  * left and right across the header.
- * @docs-private
+ * \@docs-private
  */
-let McTabHeader = class McTabHeader extends McTabHeaderBase {
+class McTabHeader extends McTabHeaderBase {
+    /**
+     * @param {?} elementRef
+     * @param {?} changeDetectorRef
+     * @param {?} viewportRuler
+     * @param {?} dir
+     * @param {?} ngZone
+     */
     constructor(elementRef, changeDetectorRef, viewportRuler, dir, ngZone) {
         super();
         this.elementRef = elementRef;
@@ -404,29 +526,53 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
         this.viewportRuler = viewportRuler;
         this.dir = dir;
         this.ngZone = ngZone;
-        /** Whether the controls for pagination should be displayed */
+        /**
+         * Whether the controls for pagination should be displayed
+         */
         this.showPaginationControls = false;
-        /** Whether the tab list can be scrolled more towards the end of the tab label list. */
+        /**
+         * Whether the tab list can be scrolled more towards the end of the tab label list.
+         */
         this.disableScrollAfter = true;
-        /** Whether the tab list can be scrolled more towards the beginning of the tab label list. */
+        /**
+         * Whether the tab list can be scrolled more towards the beginning of the tab label list.
+         */
         this.disableScrollBefore = true;
-        /** Event emitted when the option is selected. */
+        /**
+         * Event emitted when the option is selected.
+         */
         this.selectFocusedIndex = new EventEmitter();
-        /** Event emitted when a label is focused. */
+        /**
+         * Event emitted when a label is focused.
+         */
         this.indexFocused = new EventEmitter();
-        /** The distance in pixels that the tab labels should be translated to the left. */
+        /**
+         * The distance in pixels that the tab labels should be translated to the left.
+         */
         this._scrollDistance = 0;
-        /** Whether the header should scroll to the selected index after the view has been checked. */
+        /**
+         * Whether the header should scroll to the selected index after the view has been checked.
+         */
         this.selectedIndexChanged = false;
-        /** Emits when the component is destroyed. */
+        /**
+         * Emits when the component is destroyed.
+         */
         this.destroyed = new Subject();
         this._selectedIndex = 0;
     }
-    /** The index of the active tab. */
+    /**
+     * The index of the active tab.
+     * @return {?}
+     */
     get selectedIndex() {
         return this._selectedIndex;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set selectedIndex(value) {
+        /** @type {?} */
         const coercedValue = coerceNumberProperty(value);
         this.selectedIndexChanged = this._selectedIndex !== coercedValue;
         this._selectedIndex = coercedValue;
@@ -434,11 +580,18 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
             this.keyManager.updateActiveItem(coercedValue);
         }
     }
-    /** Tracks which element has focus; used for keyboard navigation */
+    /**
+     * Tracks which element has focus; used for keyboard navigation
+     * @return {?}
+     */
     get focusIndex() {
-        return this.keyManager ? this.keyManager.activeItemIndex : 0;
+        return this.keyManager ? (/** @type {?} */ (this.keyManager.activeItemIndex)) : 0;
     }
-    /** When the focus index is set, we must manually send focus to the correct label */
+    /**
+     * When the focus index is set, we must manually send focus to the correct label
+     * @param {?} value
+     * @return {?}
+     */
     set focusIndex(value) {
         if (!this.isValidIndex(value) ||
             this.focusIndex === value ||
@@ -447,10 +600,17 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
         }
         this.keyManager.setActiveItem(value);
     }
-    /** Sets the distance in pixels that the tab header should be transformed in the X-axis. */
+    /**
+     * Sets the distance in pixels that the tab header should be transformed in the X-axis.
+     * @return {?}
+     */
     get scrollDistance() {
         return this._scrollDistance;
     }
+    /**
+     * @param {?} v
+     * @return {?}
+     */
     set scrollDistance(v) {
         this._scrollDistance = Math.max(0, Math.min(this.getMaxScrollDistance(), v));
         // Mark that the scroll distance has changed so that after the view is checked, the CSS
@@ -458,6 +618,9 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
         this.scrollDistanceChanged = true;
         this.checkScrollingControls();
     }
+    /**
+     * @return {?}
+     */
     ngAfterContentChecked() {
         // If the number of tab labels have changed, check if scrolling should be enabled
         if (this.tabLabelCount !== this.labelWrappers.length) {
@@ -481,6 +644,10 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
             this.changeDetectorRef.markForCheck();
         }
     }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
     handleKeydown(event) {
         switch (event.keyCode) {
             case HOME:
@@ -500,9 +667,15 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
                 this.keyManager.onKeydown(event);
         }
     }
+    /**
+     * @return {?}
+     */
     ngAfterContentInit() {
+        /** @type {?} */
         const dirChange = this.dir ? this.dir.change : of(null);
+        /** @type {?} */
         const resize = this.viewportRuler.change(VIEWPORT_THROTTLE_TIME);
+        /** @type {?} */
         const realign = () => {
             this.updatePagination();
         };
@@ -533,20 +706,26 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
             this.setTabFocus(newFocusIndex);
         });
     }
+    /**
+     * @return {?}
+     */
     ngOnDestroy() {
         this.destroyed.next();
         this.destroyed.complete();
     }
     /**
      * Callback for when the MutationObserver detects that the content has changed.
+     * @return {?}
      */
     onContentChanges() {
+        /** @type {?} */
         const textContent = this.elementRef.nativeElement.textContent;
         // We need to diff the text content of the header, because the MutationObserver callback
         // will fire even if the text content didn't change which is inefficient and is prone
         // to infinite loops if a poorly constructed expression is passed in.
         if (textContent !== this.currentTextContent) {
             this.currentTextContent = textContent;
+            /** @type {?} */
             const zoneCallback = () => {
                 this.updatePagination();
                 this.changeDetectorRef.markForCheck();
@@ -563,6 +742,7 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
      * WARNING: Calling this method can be very costly in terms of performance.  It should be called
      * as infrequently as possible from outside of the Tabs component as it causes a reflow of the
      * page.
+     * @return {?}
      */
     updatePagination() {
         this.checkPaginationEnabled();
@@ -572,11 +752,14 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
     /**
      * Determines if an index is valid.  If the tabs are not ready yet, we assume that the user is
      * providing a valid index and return true.
+     * @param {?} index
+     * @return {?}
      */
     isValidIndex(index) {
         if (!this.labelWrappers) {
             return true;
         }
+        /** @type {?} */
         const tab = this.labelWrappers
             ? this.labelWrappers.toArray()[index]
             : null;
@@ -585,6 +768,8 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
     /**
      * Sets focus on the HTML element for the label wrapper and scrolls it into the view if
      * scrolling is enabled.
+     * @param {?} tabIndex
+     * @return {?}
      */
     setTabFocus(tabIndex) {
         if (this.showPaginationControls) {
@@ -595,7 +780,9 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
             // Do not let the browser manage scrolling to focus the element, this will be handled
             // by using translation. In LTR, the scroll left should be 0. In RTL, the scroll width
             // should be the full width minus the offset width.
+            /** @type {?} */
             const containerEl = this.tabListContainer.nativeElement;
+            /** @type {?} */
             const dir = this.getLayoutDirection();
             if (dir === 'ltr') {
                 containerEl.scrollLeft = 0;
@@ -606,13 +793,21 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
             }
         }
     }
-    /** The layout direction of the containing app. */
+    /**
+     * The layout direction of the containing app.
+     * @return {?}
+     */
     getLayoutDirection() {
         return this.dir && this.dir.value === 'rtl' ? 'rtl' : 'ltr';
     }
-    /** Performs the CSS transformation on the tab list that will cause the list to scroll. */
+    /**
+     * Performs the CSS transformation on the tab list that will cause the list to scroll.
+     * @return {?}
+     */
     updateTabScrollPosition() {
+        /** @type {?} */
         const scrollDistance = this.scrollDistance;
+        /** @type {?} */
         const translateX = this.getLayoutDirection() === 'ltr'
             ? -scrollDistance
             : scrollDistance;
@@ -634,8 +829,11 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
      *
      * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
      * should be called sparingly.
+     * @param {?} scrollDir
+     * @return {?}
      */
     scrollHeader(scrollDir) {
+        /** @type {?} */
         const viewLength = this.tabListContainer.nativeElement.offsetWidth;
         // Move the scroll distance one-third the length of the tab list's viewport.
         this.scrollDistance +=
@@ -646,8 +844,11 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
      *
      * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
      * should be called sparingly.
+     * @param {?} labelIndex
+     * @return {?}
      */
     scrollToLabel(labelIndex) {
+        /** @type {?} */
         const selectedLabel = this.labelWrappers
             ? this.labelWrappers.toArray()[labelIndex]
             : null;
@@ -655,8 +856,11 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
             return;
         }
         // The view length is the visible width of the tab labels.
+        /** @type {?} */
         const viewLength = this.tabListContainer.nativeElement.offsetWidth;
+        /** @type {?} */
         let labelBeforePos;
+        /** @type {?} */
         let labelAfterPos;
         if (this.getLayoutDirection() === 'ltr') {
             labelBeforePos = selectedLabel.getOffsetLeft();
@@ -668,7 +872,9 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
                     selectedLabel.getOffsetLeft();
             labelBeforePos = labelAfterPos - selectedLabel.getOffsetWidth();
         }
+        /** @type {?} */
         const beforeVisiblePos = this.scrollDistance;
+        /** @type {?} */
         const afterVisiblePos = this.scrollDistance + viewLength;
         if (labelBeforePos < beforeVisiblePos) {
             // Scroll header to move label to the before direction
@@ -688,8 +894,10 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
      *
      * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
      * should be called sparingly.
+     * @return {?}
      */
     checkPaginationEnabled() {
+        /** @type {?} */
         const isEnabled = this.tabList.nativeElement.scrollWidth >
             this.elementRef.nativeElement.offsetWidth;
         if (!isEnabled) {
@@ -708,6 +916,7 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
      *
      * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
      * should be called sparingly.
+     * @return {?}
      */
     checkScrollingControls() {
         // Check if the pagination arrows should be activated.
@@ -722,132 +931,162 @@ let McTabHeader = class McTabHeader extends McTabHeaderBase {
      *
      * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
      * should be called sparingly.
+     * @return {?}
      */
     getMaxScrollDistance() {
+        /** @type {?} */
         const lengthOfTabList = this.tabList.nativeElement.scrollWidth;
+        /** @type {?} */
         const viewLength = this.tabListContainer.nativeElement.offsetWidth;
         return lengthOfTabList - viewLength || 0;
     }
+}
+McTabHeader.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-tab-header',
+                template: "<div class=\"mc-tab-header__pagination mc-tab-header__pagination_before mc-elevation-z4\" aria-hidden=\"true\" [class.mc-tab-header_disabled]=\"disableScrollBefore\" (click)=\"scrollHeader('before')\"><div class=\"mc-tab-header__pagination-chevron\"></div></div><div class=\"mc-tab-header__content\" #tabListContainer (keydown)=\"handleKeydown($event)\"><div class=\"mc-tab-list\" #tabList role=\"tablist\" (cdkObserveContent)=\"onContentChanges()\"><div class=\"mc-tab-list__content\"><ng-content></ng-content></div></div></div><div class=\"mc-tab-header__pagination mc-tab-header__pagination_after mc-elevation-z4\" aria-hidden=\"true\" [class.mc-tab-header_disabled]=\"disableScrollAfter\" (click)=\"scrollHeader('after')\"><div class=\"mc-tab-header__pagination-chevron\"></div></div>",
+                styles: [".mc-tab-header{display:flex}.mc-tab-header__pagination{position:relative;display:none;justify-content:center;align-items:center;min-width:32px;cursor:pointer;z-index:2}.mc-tab-header__pagination .mc-tab-header__pagination-controls_enabled{display:flex}.mc-tab-header__pagination-chevron{border-style:solid;border-width:2px 2px 0 0;content:\"\";height:8px;width:8px}.mc-tab-header__pagination_after,.mc-tab-header_rtl .mc-tab-header__pagination_before{padding-right:4px}.mc-tab-header__pagination_after .mc-tab-header__pagination-chevron,.mc-tab-header_rtl .mc-tab-header__pagination_before .mc-tab-header__pagination-chevron{transform:rotate(45deg)}.mc-tab-header__pagination_before,.mc-tab-header_rtl .mc-tab-header__pagination_after{padding-left:4px}.mc-tab-header__pagination_before .mc-tab-header__pagination-chevron,.mc-tab-header_rtl .mc-tab-header__pagination_after .mc-tab-header__pagination-chevron{transform:rotate(-135deg)}.mc-tab-header_disabled{box-shadow:none;cursor:default}.mc-tab-header__content{display:flex;flex-grow:1;overflow:hidden;z-index:1}.mc-tab-list{flex-grow:1;position:relative;transition:transform .5s cubic-bezier(.35,0,.25,1)}.mc-tab-list__content{display:flex}.mc-tab-group_align-labels-center .mc-tab-list__content{justify-content:center}.mc-tab-group_align-labels-end .mc-tab-list__content{justify-content:flex-end}.mc-tab-group_stretch-labels .mc-tab-label{flex-basis:0;flex-grow:1}"],
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                host: {
+                    class: 'mc-tab-header',
+                    '[class.mc-tab-header__pagination-controls_enabled]': 'showPaginationControls',
+                    '[class.mc-tab-header_rtl]': 'getLayoutDirection() == \'rtl\''
+                }
+            },] },
+];
+/** @nocollapse */
+McTabHeader.ctorParameters = () => [
+    { type: ElementRef },
+    { type: ChangeDetectorRef },
+    { type: ViewportRuler },
+    { type: Directionality, decorators: [{ type: Optional }] },
+    { type: NgZone }
+];
+McTabHeader.propDecorators = {
+    selectedIndex: [{ type: Input }],
+    labelWrappers: [{ type: ContentChildren, args: [McTabLabelWrapper,] }],
+    tabListContainer: [{ type: ViewChild, args: ['tabListContainer',] }],
+    tabList: [{ type: ViewChild, args: ['tabList',] }],
+    selectFocusedIndex: [{ type: Output }],
+    indexFocused: [{ type: Output }]
 };
-__decorate([
-    Input(),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], McTabHeader.prototype, "selectedIndex", null);
-__decorate([
-    ContentChildren(McTabLabelWrapper),
-    __metadata("design:type", QueryList)
-], McTabHeader.prototype, "labelWrappers", void 0);
-__decorate([
-    ViewChild('tabListContainer'),
-    __metadata("design:type", ElementRef)
-], McTabHeader.prototype, "tabListContainer", void 0);
-__decorate([
-    ViewChild('tabList'),
-    __metadata("design:type", ElementRef)
-], McTabHeader.prototype, "tabList", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabHeader.prototype, "selectFocusedIndex", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabHeader.prototype, "indexFocused", void 0);
-McTabHeader = __decorate([
-    Component({
-        selector: 'mc-tab-header',
-        template: "<div class=\"mc-tab-header__pagination mc-tab-header__pagination_before mc-elevation-z4\" aria-hidden=\"true\" [class.mc-tab-header_disabled]=\"disableScrollBefore\" (click)=\"scrollHeader('before')\"><div class=\"mc-tab-header__pagination-chevron\"></div></div><div class=\"mc-tab-header__content\" #tabListContainer (keydown)=\"handleKeydown($event)\"><div class=\"mc-tab-list\" #tabList role=\"tablist\" (cdkObserveContent)=\"onContentChanges()\"><div class=\"mc-tab-list__content\"><ng-content></ng-content></div></div></div><div class=\"mc-tab-header__pagination mc-tab-header__pagination_after mc-elevation-z4\" aria-hidden=\"true\" [class.mc-tab-header_disabled]=\"disableScrollAfter\" (click)=\"scrollHeader('after')\"><div class=\"mc-tab-header__pagination-chevron\"></div></div>",
-        styles: [".mc-tab-header{display:flex}.mc-tab-header__pagination{position:relative;display:none;justify-content:center;align-items:center;min-width:32px;cursor:pointer;z-index:2}.mc-tab-header__pagination .mc-tab-header__pagination-controls_enabled{display:flex}.mc-tab-header__pagination-chevron{border-style:solid;border-width:2px 2px 0 0;content:\"\";height:8px;width:8px}.mc-tab-header__pagination_after,.mc-tab-header_rtl .mc-tab-header__pagination_before{padding-right:4px}.mc-tab-header__pagination_after .mc-tab-header__pagination-chevron,.mc-tab-header_rtl .mc-tab-header__pagination_before .mc-tab-header__pagination-chevron{transform:rotate(45deg)}.mc-tab-header__pagination_before,.mc-tab-header_rtl .mc-tab-header__pagination_after{padding-left:4px}.mc-tab-header__pagination_before .mc-tab-header__pagination-chevron,.mc-tab-header_rtl .mc-tab-header__pagination_after .mc-tab-header__pagination-chevron{transform:rotate(-135deg)}.mc-tab-header_disabled{box-shadow:none;cursor:default}.mc-tab-header__content{display:flex;flex-grow:1;overflow:hidden;z-index:1}.mc-tab-list{flex-grow:1;position:relative;transition:transform .5s cubic-bezier(.35,0,.25,1)}.mc-tab-list__content{display:flex}.mc-tab-group_align-labels-center .mc-tab-list__content{justify-content:center}.mc-tab-group_align-labels-end .mc-tab-list__content{justify-content:flex-end}.mc-tab-group_stretch-labels .mc-tab-label{flex-basis:0;flex-grow:1}"],
-        encapsulation: ViewEncapsulation.None,
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        host: {
-            class: 'mc-tab-header',
-            '[class.mc-tab-header__pagination-controls_enabled]': 'showPaginationControls',
-            '[class.mc-tab-header_rtl]': 'getLayoutDirection() == \'rtl\''
-        }
-    }),
-    __param(3, Optional()),
-    __metadata("design:paramtypes", [ElementRef,
-        ChangeDetectorRef,
-        ViewportRuler,
-        Directionality,
-        NgZone])
-], McTabHeader);
 
-let McLightTabsCssStyler = class McLightTabsCssStyler {
-};
-McLightTabsCssStyler = __decorate([
-    Directive({
-        selector: 'mc-tab-group[mc-light-tabs], [mc-tab-nav-bar][mc-light-tabs]',
-        host: { class: 'mc-tab-group_light' }
-    })
-], McLightTabsCssStyler);
-let McAlignTabsCenterCssStyler = class McAlignTabsCenterCssStyler {
-};
-McAlignTabsCenterCssStyler = __decorate([
-    Directive({
-        selector: 'mc-tab-group[mc-align-tabs-center], [mc-tab-nav-bar][mc-align-tabs-center]',
-        host: { class: 'mc-tab-group_align-labels-center' }
-    })
-], McAlignTabsCenterCssStyler);
-let McAlignTabsEndCssStyler = class McAlignTabsEndCssStyler {
-};
-McAlignTabsEndCssStyler = __decorate([
-    Directive({
-        selector: 'mc-tab-group[mc-align-tabs-end], [mc-tab-nav-bar][mc-align-tabs-end]',
-        host: { class: 'mc-tab-group_align-labels-end' }
-    })
-], McAlignTabsEndCssStyler);
-let McStretchTabsCssStyler = class McStretchTabsCssStyler {
-};
-McStretchTabsCssStyler = __decorate([
-    Directive({
-        selector: 'mc-tab-group[mc-stretch-tabs], [mc-tab-nav-bar][mc-stretch-tabs]',
-        host: { class: 'mc-tab-group_stretch-labels' }
-    })
-], McStretchTabsCssStyler);
-/** Used to generate unique ID's for each tab component */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McLightTabsCssStyler {
+}
+McLightTabsCssStyler.decorators = [
+    { type: Directive, args: [{
+                selector: 'mc-tab-group[mc-light-tabs], [mc-tab-nav-bar][mc-light-tabs]',
+                host: { class: 'mc-tab-group_light' }
+            },] },
+];
+class McAlignTabsCenterCssStyler {
+}
+McAlignTabsCenterCssStyler.decorators = [
+    { type: Directive, args: [{
+                selector: 'mc-tab-group[mc-align-tabs-center], [mc-tab-nav-bar][mc-align-tabs-center]',
+                host: { class: 'mc-tab-group_align-labels-center' }
+            },] },
+];
+class McAlignTabsEndCssStyler {
+}
+McAlignTabsEndCssStyler.decorators = [
+    { type: Directive, args: [{
+                selector: 'mc-tab-group[mc-align-tabs-end], [mc-tab-nav-bar][mc-align-tabs-end]',
+                host: { class: 'mc-tab-group_align-labels-end' }
+            },] },
+];
+class McStretchTabsCssStyler {
+}
+McStretchTabsCssStyler.decorators = [
+    { type: Directive, args: [{
+                selector: 'mc-tab-group[mc-stretch-tabs], [mc-tab-nav-bar][mc-stretch-tabs]',
+                host: { class: 'mc-tab-group_stretch-labels' }
+            },] },
+];
+/**
+ * Used to generate unique ID's for each tab component
+ * @type {?}
+ */
 let nextId = 0;
-/** A simple change event emitted on focus or selection changes. */
+/**
+ * A simple change event emitted on focus or selection changes.
+ */
 class McTabChangeEvent {
 }
-/** Injection token that can be used to provide the default options the tabs module. */
+/**
+ * Injection token that can be used to provide the default options the tabs module.
+ * @type {?}
+ */
 const MC_TABS_CONFIG = new InjectionToken('MC_TABS_CONFIG');
 // Boilerplate for applying mixins to McTabGroup.
-/** @docs-private */
+/**
+ * \@docs-private
+ */
 class McTabGroupBase {
     // tslint:disable-next-line:naming-convention
+    /**
+     * @param {?} _elementRef
+     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
+/** @type {?} */
 const mcTabGroupMixinBase = mixinColor(mixinDisabled(McTabGroupBase));
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
  * keyboard navigation.
  */
-let McTabGroup = class McTabGroup extends mcTabGroupMixinBase {
+class McTabGroup extends mcTabGroupMixinBase {
+    /**
+     * @param {?} elementRef
+     * @param {?} changeDetectorRef
+     * @param {?} lightTabs
+     * @param {?=} defaultConfig
+     */
     constructor(elementRef, changeDetectorRef, lightTabs, defaultConfig) {
         super(elementRef);
         this.changeDetectorRef = changeDetectorRef;
-        /** Position of the tab header. */
+        /**
+         * Position of the tab header.
+         */
         this.headerPosition = 'above';
-        /** Output to enable support for two-way binding on `[(selectedIndex)]` */
+        /**
+         * Output to enable support for two-way binding on `[(selectedIndex)]`
+         */
         this.selectedIndexChange = new EventEmitter();
-        /** Event emitted when focus has changed within a tab group. */
+        /**
+         * Event emitted when focus has changed within a tab group.
+         */
         this.focusChange = new EventEmitter();
-        /** Event emitted when the body animation has completed */
+        /**
+         * Event emitted when the body animation has completed
+         */
         this.animationDone = new EventEmitter();
-        /** Event emitted when the tab selection has changed. */
+        /**
+         * Event emitted when the tab selection has changed.
+         */
         this.selectedTabChange = new EventEmitter(true);
-        /** The tab index that should be selected after the content has been checked. */
+        /**
+         * The tab index that should be selected after the content has been checked.
+         */
         this.indexToSelect = 0;
-        /** Snapshot of the height of the tab body wrapper before another tab is activated. */
+        /**
+         * Snapshot of the height of the tab body wrapper before another tab is activated.
+         */
         this.tabBodyWrapperHeight = 0;
-        /** Subscription to tabs being added/removed. */
+        /**
+         * Subscription to tabs being added/removed.
+         */
         this.tabsSubscription = Subscription.EMPTY;
-        /** Subscription to changes in the tab labels. */
+        /**
+         * Subscription to changes in the tab labels.
+         */
         this.tabLabelSubscription = Subscription.EMPTY;
         this._dynamicHeight = false;
         this._selectedIndex = null;
@@ -856,11 +1095,25 @@ let McTabGroup = class McTabGroup extends mcTabGroupMixinBase {
         this.animationDuration = defaultConfig && defaultConfig.animationDuration ?
             defaultConfig.animationDuration : '0ms';
     }
-    /** Whether the tab group should grow to the size of the active tab. */
+    /**
+     * Whether the tab group should grow to the size of the active tab.
+     * @return {?}
+     */
     get dynamicHeight() { return this._dynamicHeight; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set dynamicHeight(value) { this._dynamicHeight = coerceBooleanProperty(value); }
-    /** The index of the active tab. */
+    /**
+     * The index of the active tab.
+     * @return {?}
+     */
     get selectedIndex() { return this._selectedIndex; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set selectedIndex(value) {
         this.indexToSelect = coerceNumberProperty(value, null);
     }
@@ -869,14 +1122,17 @@ let McTabGroup = class McTabGroup extends mcTabGroupMixinBase {
      * and what the selected index should be. This is where we can know exactly what position
      * each tab should be in according to the new selected index, and additionally we know how
      * a new selected tab should transition in (from the left or right).
+     * @return {?}
      */
     ngAfterContentChecked() {
         // Don't clamp the `indexToSelect` immediately in the setter because it can happen that
         // the amount of tabs changes before the actual change detection runs.
+        /** @type {?} */
         const indexToSelect = this.indexToSelect = this.clampTabIndex(this.indexToSelect);
         // If there is a change in selected index, emit a change event. Should not trigger if
         // the selected index has not yet been initialized.
         if (this._selectedIndex !== indexToSelect) {
+            /** @type {?} */
             const isFirstRun = this._selectedIndex == null;
             if (!isFirstRun) {
                 this.selectedTabChange.emit(this.createChangeEvent(indexToSelect));
@@ -904,15 +1160,20 @@ let McTabGroup = class McTabGroup extends mcTabGroupMixinBase {
             this.changeDetectorRef.markForCheck();
         }
     }
+    /**
+     * @return {?}
+     */
     ngAfterContentInit() {
         this.subscribeToTabLabels();
         // Subscribe to changes in the amount of tabs, in order to be
         // able to re-render the content as new tabs are added or removed.
         this.tabsSubscription = this.tabs.changes.subscribe(() => {
+            /** @type {?} */
             const indexToSelect = this.clampTabIndex(this.indexToSelect);
             // Maintain the previously-selected tab if a new tab is added or removed and there is no
             // explicit change that selects a different tab.
             if (indexToSelect === this._selectedIndex) {
+                /** @type {?} */
                 const tabs = this.tabs.toArray();
                 for (let i = 0; i < tabs.length; i++) {
                     if (tabs[i].isActive) {
@@ -928,29 +1189,47 @@ let McTabGroup = class McTabGroup extends mcTabGroupMixinBase {
             this.changeDetectorRef.markForCheck();
         });
     }
+    /**
+     * @return {?}
+     */
     ngOnDestroy() {
         this.tabsSubscription.unsubscribe();
         this.tabLabelSubscription.unsubscribe();
     }
+    /**
+     * @param {?} index
+     * @return {?}
+     */
     focusChanged(index) {
         this.focusChange.emit(this.createChangeEvent(index));
     }
-    /** Returns a unique id for each tab label element */
+    /**
+     * Returns a unique id for each tab label element
+     * @param {?} i
+     * @return {?}
+     */
     getTabLabelId(i) {
         return `mc-tab-label-${this.groupId}-${i}`;
     }
-    /** Returns a unique id for each tab content element */
+    /**
+     * Returns a unique id for each tab content element
+     * @param {?} i
+     * @return {?}
+     */
     getTabContentId(i) {
         return `mc-tab-content-${this.groupId}-${i}`;
     }
     /**
      * Sets the height of the body wrapper to the height of the activating tab if dynamic
      * height property is true.
+     * @param {?} tabHeight
+     * @return {?}
      */
     setTabBodyWrapperHeight(tabHeight) {
         if (!this._dynamicHeight || !this.tabBodyWrapperHeight) {
             return;
         }
+        /** @type {?} */
         const wrapper = this.tabBodyWrapper.nativeElement;
         wrapper.style.height = `${this.tabBodyWrapperHeight}px`;
         // This conditional forces the browser to paint the height so that
@@ -959,26 +1238,46 @@ let McTabGroup = class McTabGroup extends mcTabGroupMixinBase {
             wrapper.style.height = `${tabHeight}px`;
         }
     }
-    /** Removes the height of the tab body wrapper. */
+    /**
+     * Removes the height of the tab body wrapper.
+     * @return {?}
+     */
     removeTabBodyWrapperHeight() {
         this.tabBodyWrapperHeight = this.tabBodyWrapper.nativeElement.clientHeight;
         this.tabBodyWrapper.nativeElement.style.height = '';
         this.animationDone.emit();
     }
-    /** Handle click events, setting new selected index if appropriate. */
+    /**
+     * Handle click events, setting new selected index if appropriate.
+     * @param {?} tab
+     * @param {?} tabHeader
+     * @param {?} index
+     * @return {?}
+     */
     handleClick(tab, tabHeader, index) {
         if (!tab.disabled) {
             this.selectedIndex = tabHeader.focusIndex = index;
         }
     }
-    /** Retrieves the tabindex for the tab. */
+    /**
+     * Retrieves the tabindex for the tab.
+     * @param {?} tab
+     * @param {?} index
+     * @return {?}
+     */
     getTabIndex(tab, index) {
         if (tab.disabled) {
             return null;
         }
         return this.selectedIndex === index ? 0 : -1;
     }
+    /**
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
     createChangeEvent(index) {
+        /** @type {?} */
         const event = new McTabChangeEvent();
         event.index = index;
         if (this.tabs && this.tabs.length) {
@@ -987,10 +1286,12 @@ let McTabGroup = class McTabGroup extends mcTabGroupMixinBase {
         return event;
     }
     /**
-     * Subscribes to changes in the tab labels. This is needed, because the @Input for the label is
+     * Subscribes to changes in the tab labels. This is needed, because the \@Input for the label is
      * on the McTab component, whereas the data binding is inside the McTabGroup. In order for the
      * binding to be updated, we need to subscribe to changes in it and trigger change detection
      * manually.
+     * @private
+     * @return {?}
      */
     subscribeToTabLabels() {
         if (this.tabLabelSubscription) {
@@ -999,210 +1300,236 @@ let McTabGroup = class McTabGroup extends mcTabGroupMixinBase {
         this.tabLabelSubscription = merge(...this.tabs.map((tab) => tab.stateChanges))
             .subscribe(() => this.changeDetectorRef.markForCheck());
     }
-    /** Clamps the given index to the bounds of 0 and the tabs length. */
+    /**
+     * Clamps the given index to the bounds of 0 and the tabs length.
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
     clampTabIndex(index) {
         // Note the `|| 0`, which ensures that values like NaN can't get through
         // and which would otherwise throw the component into an infinite loop
         // (since Mch.max(NaN, 0) === NaN).
         return Math.min(this.tabs.length - 1, Math.max(index || 0, 0));
     }
+}
+McTabGroup.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-tab-group',
+                exportAs: 'mcTabGroup',
+                template: "<mc-tab-header #tabHeader [selectedIndex]=\"selectedIndex\" (indexFocused)=\"focusChanged($event)\" (selectFocusedIndex)=\"selectedIndex = $event\"><div role=\"tab\" mcTabLabelWrapper cdkMonitorElementFocus [class.mc-tab-label]=\"!lightTab\" [class.mc-tab-light-label]=\"lightTab\" *ngFor=\"let tab of tabs; let i = index\" [id]=\"getTabLabelId(i)\" [attr.tabIndex]=\"getTabIndex(tab, i)\" [attr.aria-posinset]=\"i + 1\" [attr.aria-setsize]=\"tabs.length\" [attr.aria-controls]=\"getTabContentId(i)\" [attr.aria-selected]=\"selectedIndex == i\" [attr.aria-label]=\"tab.ariaLabel || null\" [attr.aria-labelledby]=\"(!tab.ariaLabel && tab.ariaLabelledby) ? tab.ariaLabelledby : null\" [class.mc-active]=\"selectedIndex == i\" [disabled]=\"tab.disabled\" (click)=\"handleClick(tab, tabHeader, i)\"><div class=\"mc-tab-label__content\"><ng-template [ngIf]=\"tab.templateLabel\"><ng-template [cdkPortalOutlet]=\"tab.templateLabel\"></ng-template></ng-template><ng-template [ngIf]=\"!tab.templateLabel\">{{tab.textLabel}}</ng-template></div><div class=\"mc-tab-overlay\"></div></div></mc-tab-header><div class=\"mc-tab-body__wrapper\" #tabBodyWrapper><mc-tab-body role=\"tabpanel\" *ngFor=\"let tab of tabs; let i = index\" [id]=\"getTabContentId(i)\" [attr.aria-labelledby]=\"getTabLabelId(i)\" [class.mc-tab-body__active]=\"selectedIndex == i\" [content]=\"tab.content\" [position]=\"tab.position\" [origin]=\"tab.origin\" [animationDuration]=\"animationDuration\" (onCentered)=\"removeTabBodyWrapperHeight()\" (onCentering)=\"setTabBodyWrapperHeight($event)\"></mc-tab-body></div>",
+                styles: [".mc-tab-label.cdk-keyboard-focused:after,.mc-tab-light-label.cdk-keyboard-focused:after,.mc-tab-light-label.mc-active:before,.mc-tab-light-label:hover:before{display:block;position:absolute;content:\"\"}.mc-tab-light-label.mc-active:before,.mc-tab-light-label:hover:before{bottom:-1px;left:0;height:4px;right:0}.mc-tab-group{display:flex;flex-direction:column;box-sizing:border-box;text-align:center;white-space:nowrap}.mc-tab-group.mc-tab-group_inverted-header{flex-direction:column-reverse}.mc-tab-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-left:16px;outline:0;border-bottom-width:1px;border-bottom-style:solid;border-top-width:1px;border-top-style:solid;border-top-left-radius:3px;border-top-right-radius:3px}.mc-tab-label.cdk-keyboard-focused{z-index:1}.mc-tab-label.cdk-keyboard-focused:after{top:-2px;right:-1px;bottom:-1px;left:-1px;border-width:2px;border-style:solid;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom:none}.mc-tab-label.mc-disabled{pointer-events:none}.mc-tab-label .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-label.mc-active{padding-right:15px;padding-left:15px;border-width:1px;border-style:solid}.mc-tab-label.mc-active.cdk-keyboard-focused:after{z-index:1;right:-2px;left:-2px}.mc-tab-label .mc-tab-overlay{border-top-width:1px;border-top-style:solid;border-top-color:transparent;border-top-left-radius:3px;border-top-right-radius:3px}.mc-tab-light-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-left:16px;outline:0;border-bottom-width:1px;border-bottom-style:solid}.mc-tab-light-label.cdk-keyboard-focused{z-index:1}.mc-tab-light-label.cdk-keyboard-focused:after{top:-2px;right:-1px;bottom:-1px;left:-1px;border-width:2px;border-style:solid;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom:none}.mc-tab-light-label.mc-disabled{pointer-events:none}.mc-tab-light-label .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-light-label.cdk-keyboard-focused+:hover:before{left:1px}.mc-tab-light-label.cdk-keyboard-focused:after{top:-1px}.mc-tab-light-label .mc-tab-overlay{position:absolute;top:0}.mc-tab-header__content{padding:1px 1px 0 1px}.mc-tab-body__wrapper{display:flex;overflow:hidden;position:relative}.mc-tab-body{top:0;left:0;right:0;bottom:0;position:absolute;display:block;overflow:hidden;flex-basis:100%}.mc-tab-body.mc-tab-body__active{overflow-x:hidden;overflow-y:auto;position:relative;z-index:1;flex-grow:1}.mc-tab-group.mc-tab-group_dynamic-height .mc-tab-body.mc-tab-body__active{overflow-y:hidden}"],
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                inputs: ['color'],
+                host: {
+                    class: 'mc-tab-group',
+                    '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',
+                    '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
+                }
+            },] },
+];
+/** @nocollapse */
+McTabGroup.ctorParameters = () => [
+    { type: ElementRef },
+    { type: ChangeDetectorRef },
+    { type: String, decorators: [{ type: Attribute, args: ['mc-light-tabs',] }] },
+    { type: undefined, decorators: [{ type: Inject, args: [MC_TABS_CONFIG,] }, { type: Optional }] }
+];
+McTabGroup.propDecorators = {
+    dynamicHeight: [{ type: Input }],
+    selectedIndex: [{ type: Input }],
+    tabs: [{ type: ContentChildren, args: [McTab,] }],
+    tabBodyWrapper: [{ type: ViewChild, args: ['tabBodyWrapper',] }],
+    tabHeader: [{ type: ViewChild, args: ['tabHeader',] }],
+    headerPosition: [{ type: Input }],
+    animationDuration: [{ type: Input }],
+    selectedIndexChange: [{ type: Output }],
+    focusChange: [{ type: Output }],
+    animationDone: [{ type: Output }],
+    selectedTabChange: [{ type: Output }]
 };
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McTabGroup.prototype, "dynamicHeight", null);
-__decorate([
-    Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], McTabGroup.prototype, "selectedIndex", null);
-__decorate([
-    ContentChildren(McTab),
-    __metadata("design:type", QueryList)
-], McTabGroup.prototype, "tabs", void 0);
-__decorate([
-    ViewChild('tabBodyWrapper'),
-    __metadata("design:type", ElementRef)
-], McTabGroup.prototype, "tabBodyWrapper", void 0);
-__decorate([
-    ViewChild('tabHeader'),
-    __metadata("design:type", McTabHeader)
-], McTabGroup.prototype, "tabHeader", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McTabGroup.prototype, "headerPosition", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], McTabGroup.prototype, "animationDuration", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabGroup.prototype, "selectedIndexChange", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabGroup.prototype, "focusChange", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabGroup.prototype, "animationDone", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], McTabGroup.prototype, "selectedTabChange", void 0);
-McTabGroup = __decorate([
-    Component({
-        selector: 'mc-tab-group',
-        exportAs: 'mcTabGroup',
-        template: "<mc-tab-header #tabHeader [selectedIndex]=\"selectedIndex\" (indexFocused)=\"focusChanged($event)\" (selectFocusedIndex)=\"selectedIndex = $event\"><div role=\"tab\" mcTabLabelWrapper cdkMonitorElementFocus [class.mc-tab-label]=\"!lightTab\" [class.mc-tab-light-label]=\"lightTab\" *ngFor=\"let tab of tabs; let i = index\" [id]=\"getTabLabelId(i)\" [attr.tabIndex]=\"getTabIndex(tab, i)\" [attr.aria-posinset]=\"i + 1\" [attr.aria-setsize]=\"tabs.length\" [attr.aria-controls]=\"getTabContentId(i)\" [attr.aria-selected]=\"selectedIndex == i\" [attr.aria-label]=\"tab.ariaLabel || null\" [attr.aria-labelledby]=\"(!tab.ariaLabel && tab.ariaLabelledby) ? tab.ariaLabelledby : null\" [class.mc-active]=\"selectedIndex == i\" [disabled]=\"tab.disabled\" (click)=\"handleClick(tab, tabHeader, i)\"><div class=\"mc-tab-label__content\"><ng-template [ngIf]=\"tab.templateLabel\"><ng-template [cdkPortalOutlet]=\"tab.templateLabel\"></ng-template></ng-template><ng-template [ngIf]=\"!tab.templateLabel\">{{tab.textLabel}}</ng-template></div><div class=\"mc-tab-overlay\"></div></div></mc-tab-header><div class=\"mc-tab-body__wrapper\" #tabBodyWrapper><mc-tab-body role=\"tabpanel\" *ngFor=\"let tab of tabs; let i = index\" [id]=\"getTabContentId(i)\" [attr.aria-labelledby]=\"getTabLabelId(i)\" [class.mc-tab-body__active]=\"selectedIndex == i\" [content]=\"tab.content\" [position]=\"tab.position\" [origin]=\"tab.origin\" [animationDuration]=\"animationDuration\" (onCentered)=\"removeTabBodyWrapperHeight()\" (onCentering)=\"setTabBodyWrapperHeight($event)\"></mc-tab-body></div>",
-        styles: [".mc-tab-label.cdk-keyboard-focused:after,.mc-tab-light-label.cdk-keyboard-focused:after,.mc-tab-light-label.mc-active:before,.mc-tab-light-label:hover:before{display:block;position:absolute;content:\"\"}.mc-tab-light-label.mc-active:before,.mc-tab-light-label:hover:before{bottom:-1px;left:0;height:4px;right:0}.mc-tab-group{display:flex;flex-direction:column;box-sizing:border-box;text-align:center;white-space:nowrap}.mc-tab-group.mc-tab-group_inverted-header{flex-direction:column-reverse}.mc-tab-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-left:16px;outline:0;border-bottom-width:1px;border-bottom-style:solid;border-top-width:1px;border-top-style:solid;border-top-left-radius:3px;border-top-right-radius:3px}.mc-tab-label.cdk-keyboard-focused{z-index:1}.mc-tab-label.cdk-keyboard-focused:after{top:-2px;right:-1px;bottom:-1px;left:-1px;border-width:2px;border-style:solid;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom:none}.mc-tab-label.mc-disabled{pointer-events:none}.mc-tab-label .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-label.mc-active{padding-right:15px;padding-left:15px;border-width:1px;border-style:solid}.mc-tab-label.mc-active.cdk-keyboard-focused:after{z-index:1;right:-2px;left:-2px}.mc-tab-label .mc-tab-overlay{border-top-width:1px;border-top-style:solid;border-top-color:transparent;border-top-left-radius:3px;border-top-right-radius:3px}.mc-tab-light-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-left:16px;outline:0;border-bottom-width:1px;border-bottom-style:solid}.mc-tab-light-label.cdk-keyboard-focused{z-index:1}.mc-tab-light-label.cdk-keyboard-focused:after{top:-2px;right:-1px;bottom:-1px;left:-1px;border-width:2px;border-style:solid;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom:none}.mc-tab-light-label.mc-disabled{pointer-events:none}.mc-tab-light-label .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-light-label.cdk-keyboard-focused+:hover:before{left:1px}.mc-tab-light-label.cdk-keyboard-focused:after{top:-1px}.mc-tab-light-label .mc-tab-overlay{position:absolute;top:0}.mc-tab-header__content{padding:1px 1px 0 1px}.mc-tab-body__wrapper{display:flex;overflow:hidden;position:relative}.mc-tab-body{top:0;left:0;right:0;bottom:0;position:absolute;display:block;overflow:hidden;flex-basis:100%}.mc-tab-body.mc-tab-body__active{overflow-x:hidden;overflow-y:auto;position:relative;z-index:1;flex-grow:1}.mc-tab-group.mc-tab-group_dynamic-height .mc-tab-body.mc-tab-body__active{overflow-y:hidden}"],
-        encapsulation: ViewEncapsulation.None,
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        inputs: ['color'],
-        host: {
-            class: 'mc-tab-group',
-            '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',
-            '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
-        }
-    }),
-    __param(2, Attribute('mc-light-tabs')),
-    __param(3, Inject(MC_TABS_CONFIG)), __param(3, Optional()),
-    __metadata("design:paramtypes", [ElementRef,
-        ChangeDetectorRef, String, Object])
-], McTabGroup);
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // Boilerplate for applying mixins to McTabNav.
-/** @docs-private */
+/**
+ * \@docs-private
+ */
 class McTabNavBase {
     // tslint:disable-next-line:naming-convention
+    /**
+     * @param {?} _elementRef
+     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
+/** @type {?} */
 const mcTabNavMixinBase = mixinColor(McTabNavBase);
 /**
  * Navigation component matching the styles of the tab group header.
  */
-let McTabNav = class McTabNav extends mcTabNavMixinBase {
+class McTabNav extends mcTabNavMixinBase {
+    /**
+     * @param {?} elementRef
+     */
     constructor(elementRef) {
         super(elementRef);
     }
-};
-McTabNav = __decorate([
-    Component({
-        selector: '[mc-tab-nav-bar]',
-        exportAs: 'mcTabNavBar, mcTabNav',
-        inputs: ['color'],
-        template: "<div class=\"mc-tab-links\"><ng-content></ng-content></div>",
-        styles: [".mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-active:before,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link:hover:before,.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused:after{display:block;position:absolute;content:\"\"}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-active:before,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link:hover:before{bottom:-1px;left:0;height:4px;right:0}.mc-tab-link{vertical-align:top;text-decoration:none;-webkit-tap-highlight-color:transparent}.mc-tab-group_stretch-labels .mc-tab-link{flex-basis:0;flex-grow:1}.mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar{display:flex}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-left:16px;outline:0;border-bottom-width:1px;border-bottom-style:solid;border-top-width:1px;border-top-style:solid;border-top-left-radius:3px;border-top-right-radius:3px}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused:after{top:-2px;right:-1px;bottom:-1px;left:-1px;border-width:2px;border-style:solid;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-active{padding-right:15px;padding-left:15px;border-width:1px;border-style:solid}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-active.cdk-keyboard-focused:after{z-index:1;right:-2px;left:-2px}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link .mc-tab-overlay{border-top-width:1px;border-top-style:solid;border-top-color:transparent;border-top-left-radius:3px;border-top-right-radius:3px}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-left:16px;outline:0;border-bottom-width:1px;border-bottom-style:solid}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after{top:-2px;right:-1px;bottom:-1px;left:-1px;border-width:2px;border-style:solid;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused+:hover:before{left:1px}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after{top:-1px}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link .mc-tab-overlay{position:absolute;top:0}.mc-tab-links{display:flex;position:relative;padding:1px 1px 0 1px;flex-grow:1}.mc-tab-links .mc-tab-group_align-labels-center{justify-content:center}.mc-tab-links .mc-tab-group_align-labels-end{justify-content:flex-end}"],
-        host: { class: 'mc-tab-nav-bar' },
-        encapsulation: ViewEncapsulation.None,
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [ElementRef])
-], McTabNav);
+}
+McTabNav.decorators = [
+    { type: Component, args: [{
+                selector: '[mc-tab-nav-bar]',
+                exportAs: 'mcTabNavBar, mcTabNav',
+                inputs: ['color'],
+                template: "<div class=\"mc-tab-links\"><ng-content></ng-content></div>",
+                styles: [".mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-active:before,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link:hover:before,.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused:after{display:block;position:absolute;content:\"\"}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-active:before,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link:hover:before{bottom:-1px;left:0;height:4px;right:0}.mc-tab-link{vertical-align:top;text-decoration:none;-webkit-tap-highlight-color:transparent}.mc-tab-group_stretch-labels .mc-tab-link{flex-basis:0;flex-grow:1}.mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar{display:flex}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-left:16px;outline:0;border-bottom-width:1px;border-bottom-style:solid;border-top-width:1px;border-top-style:solid;border-top-left-radius:3px;border-top-right-radius:3px}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused:after{top:-2px;right:-1px;bottom:-1px;left:-1px;border-width:2px;border-style:solid;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-active{padding-right:15px;padding-left:15px;border-width:1px;border-style:solid}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-active.cdk-keyboard-focused:after{z-index:1;right:-2px;left:-2px}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link .mc-tab-overlay{border-top-width:1px;border-top-style:solid;border-top-color:transparent;border-top-left-radius:3px;border-top-right-radius:3px}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-left:16px;outline:0;border-bottom-width:1px;border-bottom-style:solid}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after{top:-2px;right:-1px;bottom:-1px;left:-1px;border-width:2px;border-style:solid;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused+:hover:before{left:1px}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after{top:-1px}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link .mc-tab-overlay{position:absolute;top:0}.mc-tab-links{display:flex;position:relative;padding:1px 1px 0 1px;flex-grow:1}.mc-tab-links .mc-tab-group_align-labels-center{justify-content:center}.mc-tab-links .mc-tab-group_align-labels-end{justify-content:flex-end}"],
+                host: { class: 'mc-tab-nav-bar' },
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+McTabNav.ctorParameters = () => [
+    { type: ElementRef }
+];
 // Boilerplate for applying mixins to McTabLink.
 class McTabLinkBase {
 }
+/** @type {?} */
 const mcTabLinkMixinBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
 /**
  * Link inside of a `mc-tab-nav-bar`.
  */
-let McTabLink = class McTabLink extends mcTabLinkMixinBase {
+class McTabLink extends mcTabLinkMixinBase {
+    /**
+     * @param {?} elementRef
+     * @param {?} tabIndex
+     * @param {?} focusMonitor
+     */
     constructor(elementRef, tabIndex, focusMonitor) {
         super();
         this.elementRef = elementRef;
         this.focusMonitor = focusMonitor;
-        /** Whether the tab link is active or not. */
+        /**
+         * Whether the tab link is active or not.
+         */
         this.isActive = false;
         this.tabIndex = parseInt(tabIndex) || 0;
         this.focusMonitor.monitor(this.elementRef.nativeElement);
     }
-    /** Whether the link is active. */
+    /**
+     * Whether the link is active.
+     * @return {?}
+     */
     get active() {
         return this.isActive;
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     set active(value) {
         if (value !== this.isActive) {
             this.isActive = value;
         }
     }
+    /**
+     * @return {?}
+     */
     ngOnDestroy() {
         this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     }
+}
+McTabLink.decorators = [
+    { type: Directive, args: [{
+                selector: '[mc-tab-link], [mcTabLink]',
+                exportAs: 'mcTabLink',
+                inputs: ['disabled', 'tabIndex'],
+                host: {
+                    class: 'mc-tab-link',
+                    '[attr.aria-current]': 'active',
+                    '[attr.aria-disabled]': 'disabled.toString()',
+                    '[attr.tabIndex]': 'tabIndex',
+                    '[class.mc-disabled]': 'disabled',
+                    '[class.mc-active]': 'active'
+                }
+            },] },
+];
+/** @nocollapse */
+McTabLink.ctorParameters = () => [
+    { type: ElementRef },
+    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
+    { type: FocusMonitor }
+];
+McTabLink.propDecorators = {
+    active: [{ type: Input }]
 };
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], McTabLink.prototype, "active", null);
-McTabLink = __decorate([
-    Directive({
-        selector: '[mc-tab-link], [mcTabLink]',
-        exportAs: 'mcTabLink',
-        inputs: ['disabled', 'tabIndex'],
-        host: {
-            class: 'mc-tab-link',
-            '[attr.aria-current]': 'active',
-            '[attr.aria-disabled]': 'disabled.toString()',
-            '[attr.tabIndex]': 'tabIndex',
-            '[class.mc-disabled]': 'disabled',
-            '[class.mc-active]': 'active'
-        }
-    }),
-    __param(1, Attribute('tabindex')),
-    __metadata("design:paramtypes", [ElementRef, String, FocusMonitor])
-], McTabLink);
-
-let McTabsModule = class McTabsModule {
-};
-McTabsModule = __decorate([
-    NgModule({
-        imports: [
-            CommonModule,
-            McCommonModule,
-            PortalModule,
-            A11yModule
-        ],
-        // Don't export all components because some are only to be used internally.
-        exports: [
-            McCommonModule,
-            McTabGroup,
-            McTabLabel,
-            McTab,
-            McTabNav,
-            McTabLink,
-            McTabContent,
-            McLightTabsCssStyler,
-            McAlignTabsCenterCssStyler,
-            McAlignTabsEndCssStyler,
-            McStretchTabsCssStyler
-        ],
-        declarations: [
-            McTabGroup,
-            McTabLabel,
-            McTab,
-            McTabLabelWrapper,
-            McTabNav,
-            McTabLink,
-            McTabBody,
-            McTabBodyPortal,
-            McTabHeader,
-            McTabContent,
-            McLightTabsCssStyler,
-            McAlignTabsCenterCssStyler,
-            McAlignTabsEndCssStyler,
-            McStretchTabsCssStyler
-        ]
-    })
-], McTabsModule);
 
 /**
- * Generated bundle index. Do not edit.
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McTabsModule {
+}
+McTabsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    McCommonModule,
+                    PortalModule,
+                    A11yModule
+                ],
+                // Don't export all components because some are only to be used internally.
+                exports: [
+                    McCommonModule,
+                    McTabGroup,
+                    McTabLabel,
+                    McTab,
+                    McTabNav,
+                    McTabLink,
+                    McTabContent,
+                    McLightTabsCssStyler,
+                    McAlignTabsCenterCssStyler,
+                    McAlignTabsEndCssStyler,
+                    McStretchTabsCssStyler
+                ],
+                declarations: [
+                    McTabGroup,
+                    McTabLabel,
+                    McTab,
+                    McTabLabelWrapper,
+                    McTabNav,
+                    McTabLink,
+                    McTabBody,
+                    McTabBodyPortal,
+                    McTabHeader,
+                    McTabContent,
+                    McLightTabsCssStyler,
+                    McAlignTabsCenterCssStyler,
+                    McAlignTabsEndCssStyler,
+                    McStretchTabsCssStyler
+                ]
+            },] },
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTabBase as ɵd15, mcTabMixinBase as ɵe15, McTabHeaderBase as ɵa15, McTabLabelWrapperBase as ɵb15, mcTabLabelWrapperMixinBase as ɵc15, McTabLinkBase as ɵh15, McTabNavBase as ɵf15, mcTabLinkMixinBase as ɵi15, mcTabNavMixinBase as ɵg15, McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, mcTabGroupMixinBase, McTabGroup, mcTabsAnimations };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, mcTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd15, mcTabMixinBase as ɵe15, McTabHeaderBase as ɵa15, McTabLabelWrapperBase as ɵb15, mcTabLabelWrapperMixinBase as ɵc15, McTabLinkBase as ɵh15, McTabNavBase as ɵf15, mcTabLinkMixinBase as ɵi15, mcTabNavMixinBase as ɵg15 };
 //# sourceMappingURL=tabs.js.map

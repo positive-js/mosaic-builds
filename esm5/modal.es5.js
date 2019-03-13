@@ -4,9 +4,9 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __extends, __assign, __decorate, __metadata, __param } from 'tslib';
 import { Injectable, Optional, SkipSelf, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, ElementRef, EventEmitter, Inject, Injector, Input, Output, Renderer2, TemplateRef, Type, ViewChild, ViewContainerRef, ViewEncapsulation, Pipe, NgModule } from '@angular/core';
 import { Subject } from 'rxjs';
+import { __extends, __assign } from 'tslib';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { Overlay, OverlayRef, OverlayModule } from '@ptsecurity/cdk/overlay';
@@ -16,6 +16,10 @@ import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McModalControlService = /** @class */ (function () {
     function McModalControlService(parentService) {
         this.parentService = parentService;
@@ -28,7 +32,12 @@ var McModalControlService = /** @class */ (function () {
     }
     Object.defineProperty(McModalControlService.prototype, "afterAllClose", {
         // Track singleton afterAllClose through over the injection tree
-        get: function () {
+        get: 
+        // Track singleton afterAllClose through over the injection tree
+        /**
+         * @return {?}
+         */
+        function () {
             return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose;
         },
         enumerable: true,
@@ -36,7 +45,12 @@ var McModalControlService = /** @class */ (function () {
     });
     Object.defineProperty(McModalControlService.prototype, "openModals", {
         // Track singleton openModals array through over the injection tree
-        get: function () {
+        get: 
+        // Track singleton openModals array through over the injection tree
+        /**
+         * @return {?}
+         */
+        function () {
             return this.parentService ? this.parentService.openModals : this.rootOpenModals;
         },
         enumerable: true,
@@ -44,32 +58,80 @@ var McModalControlService = /** @class */ (function () {
     });
     Object.defineProperty(McModalControlService.prototype, "registeredMetaMap", {
         // Registered modal for later usage
-        get: function () {
+        get: 
+        // Registered modal for later usage
+        /**
+         * @private
+         * @return {?}
+         */
+        function () {
             return this.parentService ? this.parentService.registeredMetaMap : this.rootRegisteredMetaMap;
         },
         enumerable: true,
         configurable: true
     });
     // Register a modal to listen its open/close
-    McModalControlService.prototype.registerModal = function (modalRef) {
+    // Register a modal to listen its open/close
+    /**
+     * @param {?} modalRef
+     * @return {?}
+     */
+    McModalControlService.prototype.registerModal = 
+    // Register a modal to listen its open/close
+    /**
+     * @param {?} modalRef
+     * @return {?}
+     */
+    function (modalRef) {
         var _this = this;
         if (!this.hasRegistered(modalRef)) {
+            /** @type {?} */
             var afterOpenSubscription = modalRef.afterOpen.subscribe(function () { return _this.openModals.push(modalRef); });
+            /** @type {?} */
             var afterCloseSubscription = modalRef.afterClose.subscribe(function () { return _this.removeOpenModal(modalRef); });
             this.registeredMetaMap.set(modalRef, { modalRef: modalRef, afterOpenSubscription: afterOpenSubscription, afterCloseSubscription: afterCloseSubscription });
         }
     };
-    McModalControlService.prototype.hasRegistered = function (modalRef) {
+    /**
+     * @param {?} modalRef
+     * @return {?}
+     */
+    McModalControlService.prototype.hasRegistered = /**
+     * @param {?} modalRef
+     * @return {?}
+     */
+    function (modalRef) {
         return this.registeredMetaMap.has(modalRef);
     };
     // Close all registered opened modals
-    McModalControlService.prototype.closeAll = function () {
+    // Close all registered opened modals
+    /**
+     * @return {?}
+     */
+    McModalControlService.prototype.closeAll = 
+    // Close all registered opened modals
+    /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
         var i = this.openModals.length;
         while (i--) {
             this.openModals[i].close();
         }
     };
-    McModalControlService.prototype.removeOpenModal = function (modalRef) {
+    /**
+     * @private
+     * @param {?} modalRef
+     * @return {?}
+     */
+    McModalControlService.prototype.removeOpenModal = /**
+     * @private
+     * @param {?} modalRef
+     * @return {?}
+     */
+    function (modalRef) {
+        /** @type {?} */
         var index = this.openModals.indexOf(modalRef);
         if (index > -1) {
             this.openModals.splice(index, 1);
@@ -78,34 +140,64 @@ var McModalControlService = /** @class */ (function () {
             }
         }
     };
-    McModalControlService = __decorate([
-        Injectable(),
-        __param(0, Optional()), __param(0, SkipSelf()),
-        __metadata("design:paramtypes", [McModalControlService])
-    ], McModalControlService);
+    McModalControlService.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    McModalControlService.ctorParameters = function () { return [
+        { type: McModalControlService, decorators: [{ type: Optional }, { type: SkipSelf }] }
+    ]; };
     return McModalControlService;
 }());
 
 /**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
  * API class that public to users to handle the modal instance.
  * McModalRef is aim to avoid accessing to the modal instance directly by users.
+ * @abstract
+ * @template T, R
  */
-var McModalRef = /** @class */ (function () {
+var  /**
+ * API class that public to users to handle the modal instance.
+ * McModalRef is aim to avoid accessing to the modal instance directly by users.
+ * @abstract
+ * @template T, R
+ */
+McModalRef = /** @class */ (function () {
     function McModalRef() {
     }
     return McModalRef;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ModalUtil = /** @class */ (function () {
     function ModalUtil(document) {
         this.document = document;
         this.lastPosition = { x: -1, y: -1 };
         this.listenDocumentClick();
     }
-    ModalUtil.prototype.getLastClickPosition = function () {
+    /**
+     * @return {?}
+     */
+    ModalUtil.prototype.getLastClickPosition = /**
+     * @return {?}
+     */
+    function () {
         return this.lastPosition;
     };
-    ModalUtil.prototype.listenDocumentClick = function () {
+    /**
+     * @return {?}
+     */
+    ModalUtil.prototype.listenDocumentClick = /**
+     * @return {?}
+     */
+    function () {
         var _this = this;
         this.document.addEventListener('click', function (event) {
             _this.lastPosition = { x: event.clientX, y: event.clientY };
@@ -115,8 +207,16 @@ var ModalUtil = /** @class */ (function () {
 }());
 var ModalUtil$1 = new ModalUtil(document);
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // Duration when perform animations (ms)
+/** @type {?} */
 var MODAL_ANIMATE_DURATION = 200;
+/**
+ * @template T, R
+ */
 var McModalComponent = /** @class */ (function (_super) {
     __extends(McModalComponent, _super);
     function McModalComponent(overlay, renderer, cfr, elementRef, viewContainer, mcMeasureScrollbarService, modalControl, changeDetector, document) {
@@ -155,44 +255,91 @@ var McModalComponent = /** @class */ (function (_super) {
         return _this;
     }
     Object.defineProperty(McModalComponent.prototype, "mcVisible", {
-        get: function () { return this._mcVisible; },
-        set: function (value) { this._mcVisible = value; },
+        get: /**
+         * @return {?}
+         */
+        function () { return this._mcVisible; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { this._mcVisible = value; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McModalComponent.prototype, "mcClosable", {
-        get: function () { return this._mcClosable; },
-        set: function (value) { this._mcClosable = value; },
+        get: /**
+         * @return {?}
+         */
+        function () { return this._mcClosable; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { this._mcClosable = value; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McModalComponent.prototype, "mcMask", {
-        get: function () { return this._mcMask; },
-        set: function (value) { this._mcMask = value; },
+        get: /**
+         * @return {?}
+         */
+        function () { return this._mcMask; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { this._mcMask = value; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McModalComponent.prototype, "mcMaskClosable", {
-        get: function () { return this._mcMaskClosable; },
-        set: function (value) { this._mcMaskClosable = value; },
+        get: /**
+         * @return {?}
+         */
+        function () { return this._mcMaskClosable; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { this._mcMaskClosable = value; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McModalComponent.prototype, "mcOkLoading", {
-        get: function () { return this._mcOkLoading; },
-        set: function (value) { this._mcOkLoading = value; },
+        get: /**
+         * @return {?}
+         */
+        function () { return this._mcOkLoading; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { this._mcOkLoading = value; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McModalComponent.prototype, "mcCancelLoading", {
-        get: function () { return this._mcCancelLoading; },
-        set: function (value) { this._mcCancelLoading = value; },
+        get: /**
+         * @return {?}
+         */
+        function () { return this._mcCancelLoading; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { this._mcCancelLoading = value; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McModalComponent.prototype, "afterOpen", {
         // Observable alias for mcAfterOpen
-        get: function () {
+        get: 
+        // Observable alias for mcAfterOpen
+        /**
+         * @return {?}
+         */
+        function () {
             return this.mcAfterOpen.asObservable();
         },
         enumerable: true,
@@ -200,21 +347,32 @@ var McModalComponent = /** @class */ (function (_super) {
     });
     Object.defineProperty(McModalComponent.prototype, "afterClose", {
         // Observable alias for mcAfterClose
-        get: function () {
+        get: 
+        // Observable alias for mcAfterClose
+        /**
+         * @return {?}
+         */
+        function () {
             return this.mcAfterClose.asObservable();
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McModalComponent.prototype, "okText", {
-        get: function () {
+        get: /**
+         * @return {?}
+         */
+        function () {
             return this.mcOkText;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McModalComponent.prototype, "cancelText", {
-        get: function () {
+        get: /**
+         * @return {?}
+         */
+        function () {
             return this.mcCancelText;
         },
         enumerable: true,
@@ -222,20 +380,31 @@ var McModalComponent = /** @class */ (function (_super) {
     });
     Object.defineProperty(McModalComponent.prototype, "hidden", {
         // Indicate whether this dialog should hidden
-        get: function () {
+        get: 
+        // Indicate whether this dialog should hidden
+        /**
+         * @return {?}
+         */
+        function () {
             return !this.mcVisible && !this.animationState;
         },
         enumerable: true,
         configurable: true
     });
-    McModalComponent.prototype.ngOnInit = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
         // Create component along without View
         if (this.isComponent(this.mcContent)) {
-            this.createDynamicComponent(this.mcContent);
+            this.createDynamicComponent((/** @type {?} */ (this.mcContent)));
         }
         // Setup default button options
         if (this.isModalButtons(this.mcFooter)) {
-            this.mcFooter = this.formatModalButtons(this.mcFooter);
+            this.mcFooter = this.formatModalButtons((/** @type {?} */ (this.mcFooter)));
         }
         // Place the modal dom to elsewhere
         this.container = typeof this.mcGetContainer === 'function' ? this.mcGetContainer() : this.mcGetContainer;
@@ -254,98 +423,244 @@ var McModalComponent = /** @class */ (function (_super) {
     // here we can't support "mcContent"(Component) etc. as inputs that initialized dynamically.
     // BUT: User also can change "mcContent" dynamically to trigger UI changes
     // (provided you don't use Component that needs initializations)
-    McModalComponent.prototype.ngOnChanges = function (changes) {
+    // [NOTE] NOT available when using by service!
+    // Because ngOnChanges never be called when using by service,
+    // here we can't support "mcContent"(Component) etc. as inputs that initialized dynamically.
+    // BUT: User also can change "mcContent" dynamically to trigger UI changes
+    // (provided you don't use Component that needs initializations)
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    McModalComponent.prototype.ngOnChanges = 
+    // [NOTE] NOT available when using by service!
+    // Because ngOnChanges never be called when using by service,
+    // here we can't support "mcContent"(Component) etc. as inputs that initialized dynamically.
+    // BUT: User also can change "mcContent" dynamically to trigger UI changes
+    // (provided you don't use Component that needs initializations)
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
         if (changes.mcVisible) {
             // Do not trigger animation while initializing
             this.handleVisibleStateChange(this.mcVisible, !changes.mcVisible.firstChange);
         }
     };
-    McModalComponent.prototype.ngAfterViewInit = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
         // If using Component, it is the time to attach View while bodyContainer is ready
         if (this.contentComponentRef) {
             this.bodyContainer.insert(this.contentComponentRef.hostView);
         }
         if (this.autoFocusButtonOk) {
-            this.autoFocusButtonOk.nativeElement.focus();
+            ((/** @type {?} */ (this.autoFocusButtonOk.nativeElement))).focus();
         }
     };
-    McModalComponent.prototype.ngOnDestroy = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
         if (this.container instanceof OverlayRef) {
             this.container.dispose();
         }
     };
-    McModalComponent.prototype.open = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.open = /**
+     * @return {?}
+     */
+    function () {
         this.changeVisibleFromInside(true);
     };
-    McModalComponent.prototype.close = function (result) {
+    /**
+     * @param {?=} result
+     * @return {?}
+     */
+    McModalComponent.prototype.close = /**
+     * @param {?=} result
+     * @return {?}
+     */
+    function (result) {
         this.changeVisibleFromInside(false, result);
     };
     // Destroy equals Close
-    McModalComponent.prototype.destroy = function (result) {
+    // Destroy equals Close
+    /**
+     * @param {?=} result
+     * @return {?}
+     */
+    McModalComponent.prototype.destroy = 
+    // Destroy equals Close
+    /**
+     * @param {?=} result
+     * @return {?}
+     */
+    function (result) {
         this.close(result);
     };
-    McModalComponent.prototype.triggerOk = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.triggerOk = /**
+     * @return {?}
+     */
+    function () {
         this.onClickOkCancel('ok');
     };
-    McModalComponent.prototype.triggerCancel = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.triggerCancel = /**
+     * @return {?}
+     */
+    function () {
         this.onClickOkCancel('cancel');
     };
-    McModalComponent.prototype.getInstance = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.getInstance = /**
+     * @return {?}
+     */
+    function () {
         return this;
     };
-    McModalComponent.prototype.getContentComponentRef = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.getContentComponentRef = /**
+     * @return {?}
+     */
+    function () {
         return this.contentComponentRef;
     };
-    McModalComponent.prototype.getContentComponent = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.getContentComponent = /**
+     * @return {?}
+     */
+    function () {
         return this.contentComponentRef && this.contentComponentRef.instance;
     };
-    McModalComponent.prototype.getElement = function () {
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.getElement = /**
+     * @return {?}
+     */
+    function () {
         return this.elementRef && this.elementRef.nativeElement;
     };
-    McModalComponent.prototype.onClickMask = function ($event) {
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
+    McModalComponent.prototype.onClickMask = /**
+     * @param {?} $event
+     * @return {?}
+     */
+    function ($event) {
         if (this.mcMask &&
             this.mcMaskClosable &&
-            $event.target.classList.contains('mc-modal-wrap') &&
+            ((/** @type {?} */ ($event.target))).classList.contains('mc-modal-wrap') &&
             this.mcVisible) {
             this.onClickOkCancel('cancel');
         }
     };
     // tslint:disable-next-line
-    McModalComponent.prototype.isModalType = function (type) {
+    // tslint:disable-next-line
+    /**
+     * @param {?} type
+     * @return {?}
+     */
+    McModalComponent.prototype.isModalType = 
+    // tslint:disable-next-line
+    /**
+     * @param {?} type
+     * @return {?}
+     */
+    function (type) {
         return this.mcModalType === type;
     };
-    McModalComponent.prototype.onKeyDown = function (event) {
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McModalComponent.prototype.onKeyDown = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
         if (event.keyCode === ESCAPE && this.container && (this.container instanceof OverlayRef)) {
             this.close();
             event.preventDefault();
         }
     };
     // AoT
-    McModalComponent.prototype.onClickCloseBtn = function () {
+    // AoT
+    /**
+     * @return {?}
+     */
+    McModalComponent.prototype.onClickCloseBtn = 
+    // AoT
+    /**
+     * @return {?}
+     */
+    function () {
         if (this.mcVisible) {
             this.onClickOkCancel('cancel');
         }
     };
     // AoT
     // tslint:disable-next-line
-    McModalComponent.prototype.onClickOkCancel = function (type) {
+    // AoT
+    // tslint:disable-next-line
+    /**
+     * @param {?} type
+     * @return {?}
+     */
+    McModalComponent.prototype.onClickOkCancel = 
+    // AoT
+    // tslint:disable-next-line
+    /**
+     * @param {?} type
+     * @return {?}
+     */
+    function (type) {
         var _this = this;
+        /** @type {?} */
         var trigger = { ok: this.mcOnOk, cancel: this.mcOnCancel }[type];
+        /** @type {?} */
         var loadingKey = { ok: 'mcOkLoading', cancel: 'mcCancelLoading' }[type];
         if (trigger instanceof EventEmitter) {
             trigger.emit(this.getContentComponent());
         }
         else if (typeof trigger === 'function') {
+            /** @type {?} */
             var result = trigger(this.getContentComponent());
             // Users can return "false" to prevent closing by default
-            var caseClose_1 = function (doClose) { return (doClose !== false) && _this.close(doClose); };
+            /** @type {?} */
+            var caseClose_1 = function (doClose) { return (doClose !== false) && _this.close((/** @type {?} */ (doClose))); };
             if (isPromise(result)) {
                 this[loadingKey] = true;
+                /** @type {?} */
                 var handleThen = function (doClose) {
                     _this[loadingKey] = false;
                     caseClose_1(doClose);
                 };
-                result.then(handleThen).catch(handleThen);
+                ((/** @type {?} */ (result))).then(handleThen).catch(handleThen);
             }
             else {
                 caseClose_1(result);
@@ -353,23 +668,84 @@ var McModalComponent = /** @class */ (function (_super) {
         }
     };
     // AoT
-    McModalComponent.prototype.isNonEmptyString = function (value) {
+    // AoT
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    McModalComponent.prototype.isNonEmptyString = 
+    // AoT
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
         return typeof value === 'string' && value !== '';
     };
     // AoT
-    McModalComponent.prototype.isTemplateRef = function (value) {
+    // AoT
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    McModalComponent.prototype.isTemplateRef = 
+    // AoT
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
         return value instanceof TemplateRef;
     };
     // AoT
-    McModalComponent.prototype.isComponent = function (value) {
+    // AoT
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    McModalComponent.prototype.isComponent = 
+    // AoT
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
         return value instanceof Type;
     };
     // AoT
-    McModalComponent.prototype.isModalButtons = function (value) {
+    // AoT
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    McModalComponent.prototype.isModalButtons = 
+    // AoT
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
         return Array.isArray(value) && value.length > 0;
     };
     // Do rest things when visible state changed
-    McModalComponent.prototype.handleVisibleStateChange = function (visible, animation, closeResult) {
+    // Do rest things when visible state changed
+    /**
+     * @private
+     * @param {?} visible
+     * @param {?=} animation
+     * @param {?=} closeResult
+     * @return {?}
+     */
+    McModalComponent.prototype.handleVisibleStateChange = 
+    // Do rest things when visible state changed
+    /**
+     * @private
+     * @param {?} visible
+     * @param {?=} animation
+     * @param {?=} closeResult
+     * @return {?}
+     */
+    function (visible, animation, closeResult) {
         var _this = this;
         if (animation === void 0) { animation = true; }
         // Hide scrollbar at the first time when shown up
@@ -393,8 +769,27 @@ var McModalComponent = /** @class */ (function (_super) {
     // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
     // AoT
     // tslint:disable-next-line
-    McModalComponent.prototype.getButtonCallableProp = function (options, prop) {
+    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
+    // AoT
+    // tslint:disable-next-line
+    /**
+     * @param {?} options
+     * @param {?} prop
+     * @return {?}
+     */
+    McModalComponent.prototype.getButtonCallableProp = 
+    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
+    // AoT
+    // tslint:disable-next-line
+    /**
+     * @param {?} options
+     * @param {?} prop
+     * @return {?}
+     */
+    function (options, prop) {
+        /** @type {?} */
         var value = options[prop];
+        /** @type {?} */
         var args = [];
         if (this.contentComponentRef) {
             args.push(this.contentComponentRef.instance);
@@ -404,16 +799,47 @@ var McModalComponent = /** @class */ (function (_super) {
     // On mcFooter's modal button click
     // AoT
     // tslint:disable-next-line
-    McModalComponent.prototype.onButtonClick = function (button) {
+    // On mcFooter's modal button click
+    // AoT
+    // tslint:disable-next-line
+    /**
+     * @param {?} button
+     * @return {?}
+     */
+    McModalComponent.prototype.onButtonClick = 
+    // On mcFooter's modal button click
+    // AoT
+    // tslint:disable-next-line
+    /**
+     * @param {?} button
+     * @return {?}
+     */
+    function (button) {
         // Call onClick directly
+        /** @type {?} */
         var result = this.getButtonCallableProp(button, 'onClick');
         if (isPromise(result)) {
             button.loading = true;
-            result.then(function () { return button.loading = false; }).catch(function () { return button.loading = false; });
+            ((/** @type {?} */ (result))).then(function () { return button.loading = false; }).catch(function () { return button.loading = false; });
         }
     };
     // Change mcVisible from inside
-    McModalComponent.prototype.changeVisibleFromInside = function (visible, closeResult) {
+    // Change mcVisible from inside
+    /**
+     * @private
+     * @param {?} visible
+     * @param {?=} closeResult
+     * @return {?}
+     */
+    McModalComponent.prototype.changeVisibleFromInside = 
+    // Change mcVisible from inside
+    /**
+     * @private
+     * @param {?} visible
+     * @param {?=} closeResult
+     * @return {?}
+     */
+    function (visible, closeResult) {
         if (this.mcVisible !== visible) {
             // Change mcVisible value immediately
             this.mcVisible = visible;
@@ -422,7 +848,17 @@ var McModalComponent = /** @class */ (function (_super) {
         }
         return Promise.resolve();
     };
-    McModalComponent.prototype.changeAnimationState = function (state) {
+    /**
+     * @private
+     * @param {?} state
+     * @return {?}
+     */
+    McModalComponent.prototype.changeAnimationState = /**
+     * @private
+     * @param {?} state
+     * @return {?}
+     */
+    function (state) {
         var _a, _b;
         this.animationState = state;
         if (state) {
@@ -440,7 +876,17 @@ var McModalComponent = /** @class */ (function (_super) {
             this.changeDetector.markForCheck();
         }
     };
-    McModalComponent.prototype.animateTo = function (isVisible) {
+    /**
+     * @private
+     * @param {?} isVisible
+     * @return {?}
+     */
+    McModalComponent.prototype.animateTo = /**
+     * @private
+     * @param {?} isVisible
+     * @return {?}
+     */
+    function (isVisible) {
         var _this = this;
         // Figure out the lastest click position when shows up
         if (isVisible) {
@@ -455,7 +901,17 @@ var McModalComponent = /** @class */ (function (_super) {
             resolve();
         }, MODAL_ANIMATE_DURATION); });
     };
-    McModalComponent.prototype.formatModalButtons = function (buttons) {
+    /**
+     * @private
+     * @param {?} buttons
+     * @return {?}
+     */
+    McModalComponent.prototype.formatModalButtons = /**
+     * @private
+     * @param {?} buttons
+     * @return {?}
+     */
+    function (buttons) {
         return buttons.map(function (button) {
             return __assign({
                 type: 'default',
@@ -472,8 +928,24 @@ var McModalComponent = /** @class */ (function (_super) {
      * (this action will be executed when bodyContainer is ready)
      * @param component Component class
      */
-    McModalComponent.prototype.createDynamicComponent = function (component) {
+    /**
+     * Create a component dynamically but not attach to any View
+     * (this action will be executed when bodyContainer is ready)
+     * @private
+     * @param {?} component Component class
+     * @return {?}
+     */
+    McModalComponent.prototype.createDynamicComponent = /**
+     * Create a component dynamically but not attach to any View
+     * (this action will be executed when bodyContainer is ready)
+     * @private
+     * @param {?} component Component class
+     * @return {?}
+     */
+    function (component) {
+        /** @type {?} */
         var factory = this.cfr.resolveComponentFactory(component);
+        /** @type {?} */
         var childInjector = Injector.create({
             providers: [{ provide: McModalRef, useValue: this }],
             parent: this.viewContainer.parentInjector
@@ -487,8 +959,21 @@ var McModalComponent = /** @class */ (function (_super) {
         this.contentComponentRef.changeDetectorRef.detectChanges();
     };
     // Update transform-origin to the last click position on document
-    McModalComponent.prototype.updateTransformOrigin = function () {
-        var modalElement = this.modalContainer.nativeElement;
+    // Update transform-origin to the last click position on document
+    /**
+     * @private
+     * @return {?}
+     */
+    McModalComponent.prototype.updateTransformOrigin = 
+    // Update transform-origin to the last click position on document
+    /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var modalElement = (/** @type {?} */ (this.modalContainer.nativeElement));
+        /** @type {?} */
         var lastPosition = ModalUtil$1.getLastClickPosition();
         if (lastPosition) {
             // tslint:disable-next-line
@@ -499,8 +984,21 @@ var McModalComponent = /** @class */ (function (_super) {
      * Take care of the body's overflow to decide the existense of scrollbar
      * @param plusNum The number that the openModals.length will increase soon
      */
-    McModalComponent.prototype.changeBodyOverflow = function (plusNum) {
+    /**
+     * Take care of the body's overflow to decide the existense of scrollbar
+     * @private
+     * @param {?=} plusNum The number that the openModals.length will increase soon
+     * @return {?}
+     */
+    McModalComponent.prototype.changeBodyOverflow = /**
+     * Take care of the body's overflow to decide the existense of scrollbar
+     * @private
+     * @param {?=} plusNum The number that the openModals.length will increase soon
+     * @return {?}
+     */
+    function (plusNum) {
         if (plusNum === void 0) { plusNum = 0; }
+        /** @type {?} */
         var openModals = this.modalControl.openModals;
         if (openModals.length + plusNum > 0) {
             // tslint:disable-next-line
@@ -512,183 +1010,114 @@ var McModalComponent = /** @class */ (function (_super) {
             this.renderer.removeStyle(this.document.body, 'overflow');
         }
     };
-    __decorate([
-        Input(),
-        __metadata("design:type", String)
-    ], McModalComponent.prototype, "mcModalType", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcContent", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcComponentParams", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcFooter", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], McModalComponent.prototype, "mcVisible", null);
-    __decorate([
-        Output(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcVisibleChange", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Number)
-    ], McModalComponent.prototype, "mcZIndex", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcWidth", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", String)
-    ], McModalComponent.prototype, "mcWrapClassName", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", String)
-    ], McModalComponent.prototype, "mcClassName", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcStyle", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcTitle", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Boolean)
-    ], McModalComponent.prototype, "mcCloseByESC", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], McModalComponent.prototype, "mcClosable", null);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], McModalComponent.prototype, "mcMask", null);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], McModalComponent.prototype, "mcMaskClosable", null);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcMaskStyle", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcBodyStyle", void 0);
-    __decorate([
-        Output(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcAfterOpen", void 0);
-    __decorate([
-        Output(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcAfterClose", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", String)
-    ], McModalComponent.prototype, "mcOkText", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcOkType", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], McModalComponent.prototype, "mcOkLoading", null);
-    __decorate([
-        Input(), Output(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcOnOk", void 0);
-    __decorate([
-        ViewChild('autoFocusButtonOk', { read: ElementRef }),
-        __metadata("design:type", ElementRef)
-    ], McModalComponent.prototype, "autoFocusButtonOk", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", String)
-    ], McModalComponent.prototype, "mcCancelText", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], McModalComponent.prototype, "mcCancelLoading", null);
-    __decorate([
-        Input(), Output(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcOnCancel", void 0);
-    __decorate([
-        ViewChild('modalContainer'),
-        __metadata("design:type", ElementRef)
-    ], McModalComponent.prototype, "modalContainer", void 0);
-    __decorate([
-        ViewChild('bodyContainer', { read: ViewContainerRef }),
-        __metadata("design:type", ViewContainerRef)
-    ], McModalComponent.prototype, "bodyContainer", void 0);
-    __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], McModalComponent.prototype, "mcGetContainer", void 0);
-    McModalComponent = __decorate([
-        Component({
-            selector: 'mc-modal',
-            template: "<ng-template #tplOriginContent><ng-content></ng-content></ng-template><div><div *ngIf=\"mcMask\" class=\"mc-modal-mask\" [ngClass]=\"maskAnimationClassMap\" [class.mc-modal-mask-hidden]=\"hidden\" [ngStyle]=\"mcMaskStyle\" [style.zIndex]=\"mcZIndex\"></div><div (click)=\"onClickMask($event)\" class=\"mc-modal-wrap {{ mcWrapClassName }}\" [style.zIndex]=\"mcZIndex\" [style.display]=\"hidden ? 'none' : ''\" tabindex=\"-1\" role=\"dialog\"><div #modalContainer class=\"mc-modal {{ mcClassName }}\" [ngClass]=\"modalAnimationClassMap\" [ngStyle]=\"mcStyle\" [style.width]=\"mcWidth | toCssUnit\" [style.transform-origin]=\"transformOrigin\" role=\"document\"><div class=\"mc-modal-content\"><button *ngIf=\"mcClosable\" (click)=\"onClickCloseBtn()\" class=\"mc-modal-close\" aria-label=\"Close\"><span class=\"mc-modal-close-x\"><i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" color=\"second\"></i></span></button><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isModalType('default')\" [ngTemplateOutlet]=\"tplContentDefault\"></ng-container><ng-container *ngSwitchCase=\"isModalType('confirm')\" [ngTemplateOutlet]=\"tplContentConfirm\"></ng-container></ng-container></div></div></div></div><ng-template #tplContentDefault><div *ngIf=\"mcTitle\" class=\"mc-modal-header\"><div class=\"mc-modal-title\"><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcTitle)\" [ngTemplateOutlet]=\"mcTitle\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcTitle)\"><div [innerHTML]=\"mcTitle\"></div></ng-container></ng-container></div></div><div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\"><ng-container #bodyContainer><ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\"><div [innerHTML]=\"mcContent\"></div></ng-container><ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container></ng-container></ng-container></div><div *ngIf=\"mcFooter !== null\" class=\"mc-modal-footer\"><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcFooter)\" [ngTemplateOutlet]=\"mcFooter\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcFooter)\"><div [innerHTML]=\"mcFooter\"></div></ng-container><ng-container *ngSwitchCase=\"isModalButtons(mcFooter)\"><button *ngFor=\"let button of mcFooter\" mc-button [hidden]=\"!getButtonCallableProp(button, 'show')\" [disabled]=\"getButtonCallableProp(button, 'disabled')\" [color]=\"button.type\">{{ button.label }}</button></ng-container><ng-container *ngSwitchDefault><button *ngIf=\"mcOkText!==null\" mc-button color=\"primary\" (click)=\"onClickOkCancel('ok')\">{{ okText }}</button> <button *ngIf=\"mcCancelText!==null\" mc-button (click)=\"onClickOkCancel('cancel')\">{{ cancelText }}</button></ng-container></ng-container></div></ng-template><ng-template #tplContentConfirm><div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\"><div class=\"mc-confirm-body-wrapper\"><div class=\"mc-confirm-body\"><div class=\"mc-confirm-content\"><ng-container #bodyContainer><ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\"><div [innerHTML]=\"mcContent\"></div></ng-container><ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container></ng-container></ng-container></div></div></div></div><div class=\"mc-confirm-btns\"><button mc-button [color]=\"mcOkType\" #autoFocusButtonOk *ngIf=\"mcOkText !== ''\" (click)=\"onClickOkCancel('ok')\">{{ okText }}</button> <button mc-button color=\"second\" *ngIf=\"mcCancelText!==''\" (click)=\"onClickOkCancel('cancel')\">{{ cancelText }}</button></div></ng-template>",
-            styles: ["@keyframes mcFadeIn{0%{opacity:0}100%{opacity:1}}@keyframes mcFadeOut{0%{opacity:1}100%{opacity:0}}@keyframes mcZoomIn{0%{opacity:0;transform:translate(0,-25%)}100%{opacity:1;transform:scale(1)}}@keyframes mcZoomOut{0%{transform:scale(1)}100%{opacity:0;transform:translate(0,-30%)}}.fade-appear,.fade-enter{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.fade-leave{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.fade-appear.fade-appear-active,.fade-enter.fade-enter-active{animation-name:mcFadeIn;animation-play-state:running}.fade-leave.fade-leave-active{animation-name:mcFadeOut;animation-play-state:running;pointer-events:none}.className-appear,.className-enter{opacity:0;animation-timing-function:ease-out}.className-leave{animation-timing-function:ease-out}.zoom-appear,.zoom-enter{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.zoom-leave{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.zoom-appear.zoom-appear-active,.zoom-enter.zoom-enter-active{animation-name:mcZoomIn;animation-play-state:running}.zoom-leave.zoom-leave-active{animation-name:mcZoomOut;animation-play-state:running;pointer-events:none}.className-appear,.className-enter{transform:translate(0,-25%);animation-timing-function:cubic-bezier(.075,.82,.165,1)}.className-leave{transform:translate(0,0);animation-timing-function:cubic-bezier(.785,.135,.15,.86)}.mc-confirm .mc-modal-header{display:none}.mc-confirm .mc-modal-close{display:none}.mc-confirm .mc-modal-body{padding:24px}.mc-confirm-body-wrapper{zoom:1}.mc-confirm-body-wrapper:after,.mc-confirm-body-wrapper:before{content:\"\";display:table}.mc-confirm-body-wrapper:after{clear:both}.mc-confirm-body .mc-confirm-title{display:block;overflow:auto}.mc-confirm .mc-confirm-btns{border-radius:0 0 4px 4px;text-align:right}.mc-confirm .mc-confirm-btns button+button{margin:16px 16px 16px}.mc-modal{box-sizing:border-box;position:relative;top:48px;width:auto;margin:0 auto;padding:0 0 24px 0;list-style:none}.mc-modal.zoom-appear,.mc-modal.zoom-enter{animation-duration:.3s;transform:none;opacity:0}.mc-modal-wrap{position:fixed;z-index:1000;top:0;right:0;bottom:0;left:0;overflow:auto;-webkit-overflow-scrolling:touch;outline:0}.mc-modal-title{margin:0}.mc-modal-content{position:relative;border-radius:4px;background-clip:padding-box;background-color:#fff}.mc-modal-close{position:absolute;z-index:10;top:0;right:0;padding:0;border:0;outline:0;cursor:pointer;background:0 0}.mc-modal-close .mc-modal-close-x{display:block;vertical-align:baseline;text-align:center;width:56px;height:56px;line-height:56px}.mc-modal-header{padding:14px 16px;border-radius:4px 4px 0 0}.mc-modal-body{padding:16px 24px 24px 24px;max-height:calc(100vh - 260px);word-wrap:break-word;overflow-y:auto}.mc-modal-footer{padding:16px 16px;border-radius:0 0 4px 4px;text-align:right}.mc-modal-footer button+button{margin-left:16px;margin-bottom:0}.mc-modal-mask{position:fixed;z-index:1000;top:0;right:0;left:0;bottom:0;height:100%;background-color:rgba(0,0,0,.5)}.mc-modal-mask.mc-modal-mask-hidden{display:none}.mc-modal-open{overflow:hidden}"],
-            changeDetection: ChangeDetectionStrategy.OnPush,
-            encapsulation: ViewEncapsulation.None,
-            host: {
-                '(keydown)': 'onKeyDown($event)'
-            }
-        }),
-        __param(8, Inject(DOCUMENT)),
-        __metadata("design:paramtypes", [Overlay,
-            Renderer2,
-            ComponentFactoryResolver,
-            ElementRef,
-            ViewContainerRef,
-            McMeasureScrollbarService,
-            McModalControlService,
-            ChangeDetectorRef, Object])
-    ], McModalComponent);
+    McModalComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'mc-modal',
+                    template: "<ng-template #tplOriginContent><ng-content></ng-content></ng-template><div><div *ngIf=\"mcMask\" class=\"mc-modal-mask\" [ngClass]=\"maskAnimationClassMap\" [class.mc-modal-mask-hidden]=\"hidden\" [ngStyle]=\"mcMaskStyle\" [style.zIndex]=\"mcZIndex\"></div><div (click)=\"onClickMask($event)\" class=\"mc-modal-wrap {{ mcWrapClassName }}\" [style.zIndex]=\"mcZIndex\" [style.display]=\"hidden ? 'none' : ''\" tabindex=\"-1\" role=\"dialog\"><div #modalContainer class=\"mc-modal {{ mcClassName }}\" [ngClass]=\"modalAnimationClassMap\" [ngStyle]=\"mcStyle\" [style.width]=\"mcWidth | toCssUnit\" [style.transform-origin]=\"transformOrigin\" role=\"document\"><div class=\"mc-modal-content\"><button *ngIf=\"mcClosable\" (click)=\"onClickCloseBtn()\" class=\"mc-modal-close\" aria-label=\"Close\"><span class=\"mc-modal-close-x\"><i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" color=\"second\"></i></span></button><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isModalType('default')\" [ngTemplateOutlet]=\"tplContentDefault\"></ng-container><ng-container *ngSwitchCase=\"isModalType('confirm')\" [ngTemplateOutlet]=\"tplContentConfirm\"></ng-container></ng-container></div></div></div></div><ng-template #tplContentDefault><div *ngIf=\"mcTitle\" class=\"mc-modal-header\"><div class=\"mc-modal-title\"><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcTitle)\" [ngTemplateOutlet]=\"mcTitle\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcTitle)\"><div [innerHTML]=\"mcTitle\"></div></ng-container></ng-container></div></div><div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\"><ng-container #bodyContainer><ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\"><div [innerHTML]=\"mcContent\"></div></ng-container><ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container></ng-container></ng-container></div><div *ngIf=\"mcFooter !== null\" class=\"mc-modal-footer\"><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcFooter)\" [ngTemplateOutlet]=\"mcFooter\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcFooter)\"><div [innerHTML]=\"mcFooter\"></div></ng-container><ng-container *ngSwitchCase=\"isModalButtons(mcFooter)\"><button *ngFor=\"let button of mcFooter\" mc-button [hidden]=\"!getButtonCallableProp(button, 'show')\" [disabled]=\"getButtonCallableProp(button, 'disabled')\" [color]=\"button.type\">{{ button.label }}</button></ng-container><ng-container *ngSwitchDefault><button *ngIf=\"mcOkText!==null\" mc-button color=\"primary\" (click)=\"onClickOkCancel('ok')\">{{ okText }}</button> <button *ngIf=\"mcCancelText!==null\" mc-button (click)=\"onClickOkCancel('cancel')\">{{ cancelText }}</button></ng-container></ng-container></div></ng-template><ng-template #tplContentConfirm><div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\"><div class=\"mc-confirm-body-wrapper\"><div class=\"mc-confirm-body\"><div class=\"mc-confirm-content\"><ng-container #bodyContainer><ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\"><div [innerHTML]=\"mcContent\"></div></ng-container><ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container></ng-container></ng-container></div></div></div></div><div class=\"mc-confirm-btns\"><button mc-button [color]=\"mcOkType\" #autoFocusButtonOk *ngIf=\"mcOkText !== ''\" (click)=\"onClickOkCancel('ok')\">{{ okText }}</button> <button mc-button color=\"second\" *ngIf=\"mcCancelText!==''\" (click)=\"onClickOkCancel('cancel')\">{{ cancelText }}</button></div></ng-template>",
+                    styles: ["@keyframes mcFadeIn{0%{opacity:0}100%{opacity:1}}@keyframes mcFadeOut{0%{opacity:1}100%{opacity:0}}@keyframes mcZoomIn{0%{opacity:0;transform:translate(0,-25%)}100%{opacity:1;transform:scale(1)}}@keyframes mcZoomOut{0%{transform:scale(1)}100%{opacity:0;transform:translate(0,-30%)}}.fade-appear,.fade-enter{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.fade-leave{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.fade-appear.fade-appear-active,.fade-enter.fade-enter-active{animation-name:mcFadeIn;animation-play-state:running}.fade-leave.fade-leave-active{animation-name:mcFadeOut;animation-play-state:running;pointer-events:none}.className-appear,.className-enter{opacity:0;animation-timing-function:ease-out}.className-leave{animation-timing-function:ease-out}.zoom-appear,.zoom-enter{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.zoom-leave{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.zoom-appear.zoom-appear-active,.zoom-enter.zoom-enter-active{animation-name:mcZoomIn;animation-play-state:running}.zoom-leave.zoom-leave-active{animation-name:mcZoomOut;animation-play-state:running;pointer-events:none}.className-appear,.className-enter{transform:translate(0,-25%);animation-timing-function:cubic-bezier(.075,.82,.165,1)}.className-leave{transform:translate(0,0);animation-timing-function:cubic-bezier(.785,.135,.15,.86)}.mc-confirm .mc-modal-header{display:none}.mc-confirm .mc-modal-close{display:none}.mc-confirm .mc-modal-body{padding:24px}.mc-confirm-body-wrapper{zoom:1}.mc-confirm-body-wrapper:after,.mc-confirm-body-wrapper:before{content:\"\";display:table}.mc-confirm-body-wrapper:after{clear:both}.mc-confirm-body .mc-confirm-title{display:block;overflow:auto}.mc-confirm .mc-confirm-btns{border-radius:0 0 4px 4px;text-align:right}.mc-confirm .mc-confirm-btns button+button{margin:16px 16px 16px}.mc-modal{box-sizing:border-box;position:relative;top:48px;width:auto;margin:0 auto;padding:0 0 24px 0;list-style:none}.mc-modal.zoom-appear,.mc-modal.zoom-enter{animation-duration:.3s;transform:none;opacity:0}.mc-modal-wrap{position:fixed;z-index:1000;top:0;right:0;bottom:0;left:0;overflow:auto;-webkit-overflow-scrolling:touch;outline:0}.mc-modal-title{margin:0}.mc-modal-content{position:relative;border-radius:4px;background-clip:padding-box;background-color:#fff}.mc-modal-close{position:absolute;z-index:10;top:0;right:0;padding:0;border:0;outline:0;cursor:pointer;background:0 0}.mc-modal-close .mc-modal-close-x{display:block;vertical-align:baseline;text-align:center;width:56px;height:56px;line-height:56px}.mc-modal-header{padding:14px 16px;border-radius:4px 4px 0 0}.mc-modal-body{padding:16px 24px 24px 24px;max-height:calc(100vh - 260px);word-wrap:break-word;overflow-y:auto}.mc-modal-footer{padding:16px 16px;border-radius:0 0 4px 4px;text-align:right}.mc-modal-footer button+button{margin-left:16px;margin-bottom:0}.mc-modal-mask{position:fixed;z-index:1000;top:0;right:0;left:0;bottom:0;height:100%;background-color:rgba(0,0,0,.5)}.mc-modal-mask.mc-modal-mask-hidden{display:none}.mc-modal-open{overflow:hidden}"],
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    host: {
+                        '(keydown)': 'onKeyDown($event)'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    McModalComponent.ctorParameters = function () { return [
+        { type: Overlay },
+        { type: Renderer2 },
+        { type: ComponentFactoryResolver },
+        { type: ElementRef },
+        { type: ViewContainerRef },
+        { type: McMeasureScrollbarService },
+        { type: McModalControlService },
+        { type: ChangeDetectorRef },
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
+    ]; };
+    McModalComponent.propDecorators = {
+        mcModalType: [{ type: Input }],
+        mcContent: [{ type: Input }],
+        mcComponentParams: [{ type: Input }],
+        mcFooter: [{ type: Input }],
+        mcVisible: [{ type: Input }],
+        mcVisibleChange: [{ type: Output }],
+        mcZIndex: [{ type: Input }],
+        mcWidth: [{ type: Input }],
+        mcWrapClassName: [{ type: Input }],
+        mcClassName: [{ type: Input }],
+        mcStyle: [{ type: Input }],
+        mcTitle: [{ type: Input }],
+        mcCloseByESC: [{ type: Input }],
+        mcClosable: [{ type: Input }],
+        mcMask: [{ type: Input }],
+        mcMaskClosable: [{ type: Input }],
+        mcMaskStyle: [{ type: Input }],
+        mcBodyStyle: [{ type: Input }],
+        mcAfterOpen: [{ type: Output }],
+        mcAfterClose: [{ type: Output }],
+        mcOkText: [{ type: Input }],
+        mcOkType: [{ type: Input }],
+        mcOkLoading: [{ type: Input }],
+        mcOnOk: [{ type: Input }, { type: Output }],
+        autoFocusButtonOk: [{ type: ViewChild, args: ['autoFocusButtonOk', { read: ElementRef },] }],
+        mcCancelText: [{ type: Input }],
+        mcCancelLoading: [{ type: Input }],
+        mcOnCancel: [{ type: Input }, { type: Output }],
+        modalContainer: [{ type: ViewChild, args: ['modalContainer',] }],
+        bodyContainer: [{ type: ViewChild, args: ['bodyContainer', { read: ViewContainerRef },] }],
+        mcGetContainer: [{ type: Input }]
+    };
     return McModalComponent;
 }(McModalRef));
 ////////////
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function isPromise(obj) {
     // tslint:disable-next-line
-    return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function' && typeof obj.catch === 'function';
+    return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof ((/** @type {?} */ (obj))).then === 'function' && typeof ((/** @type {?} */ (obj))).catch === 'function';
 }
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var CssUnitPipe = /** @class */ (function () {
     function CssUnitPipe() {
     }
-    CssUnitPipe.prototype.transform = function (value, defaultUnit) {
+    /**
+     * @param {?} value
+     * @param {?=} defaultUnit
+     * @return {?}
+     */
+    CssUnitPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} defaultUnit
+     * @return {?}
+     */
+    function (value, defaultUnit) {
         if (defaultUnit === void 0) { defaultUnit = 'px'; }
+        /** @type {?} */
         var formatted = +value;
         return isNaN(formatted) ? "" + value : "" + formatted + defaultUnit;
     };
-    CssUnitPipe = __decorate([
-        Pipe({
-            name: 'toCssUnit'
-        })
-    ], CssUnitPipe);
+    CssUnitPipe.decorators = [
+        { type: Pipe, args: [{
+                    name: 'toCssUnit'
+                },] },
+    ];
     return CssUnitPipe;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // A builder used for managing service creating modals
-var ModalBuilderForService = /** @class */ (function () {
+var 
+// A builder used for managing service creating modals
+ModalBuilderForService = /** @class */ (function () {
     function ModalBuilderForService(overlay, options) {
         if (options === void 0) { options = {}; }
         var _this = this;
@@ -707,24 +1136,57 @@ var ModalBuilderForService = /** @class */ (function () {
         }))
             .subscribe(function () { return _this.modalRef.instance.close(); });
     }
-    ModalBuilderForService.prototype.getInstance = function () {
+    /**
+     * @return {?}
+     */
+    ModalBuilderForService.prototype.getInstance = /**
+     * @return {?}
+     */
+    function () {
         return this.modalRef && this.modalRef.instance;
     };
-    ModalBuilderForService.prototype.destroyModal = function () {
+    /**
+     * @return {?}
+     */
+    ModalBuilderForService.prototype.destroyModal = /**
+     * @return {?}
+     */
+    function () {
         if (this.modalRef) {
             this.overlayRef.dispose();
             // @ts-ignore
             this.modalRef = null;
         }
     };
-    ModalBuilderForService.prototype.changeProps = function (options) {
+    /**
+     * @private
+     * @param {?} options
+     * @return {?}
+     */
+    ModalBuilderForService.prototype.changeProps = /**
+     * @private
+     * @param {?} options
+     * @return {?}
+     */
+    function (options) {
         if (this.modalRef) {
             // here not limit user's inputs at runtime
             Object.assign(this.modalRef.instance, options);
         }
     };
     // Create component to ApplicationRef
-    ModalBuilderForService.prototype.createModal = function () {
+    // Create component to ApplicationRef
+    /**
+     * @private
+     * @return {?}
+     */
+    ModalBuilderForService.prototype.createModal = 
+    // Create component to ApplicationRef
+    /**
+     * @private
+     * @return {?}
+     */
+    function () {
         this.overlayRef = this.overlay.create();
         this.modalRef = this.overlayRef.attach(new ComponentPortal(McModalComponent));
     };
@@ -737,24 +1199,51 @@ var McModalService = /** @class */ (function () {
     }
     Object.defineProperty(McModalService.prototype, "openModals", {
         // Track of the current close modals (we assume invisible is close this time)
-        get: function () {
+        get: 
+        // Track of the current close modals (we assume invisible is close this time)
+        /**
+         * @return {?}
+         */
+        function () {
             return this.modalControl.openModals;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(McModalService.prototype, "afterAllClose", {
-        get: function () {
+        get: /**
+         * @return {?}
+         */
+        function () {
             return this.modalControl.afterAllClose.asObservable();
         },
         enumerable: true,
         configurable: true
     });
     // Closes all of the currently-open dialogs
-    McModalService.prototype.closeAll = function () {
+    // Closes all of the currently-open dialogs
+    /**
+     * @return {?}
+     */
+    McModalService.prototype.closeAll = 
+    // Closes all of the currently-open dialogs
+    /**
+     * @return {?}
+     */
+    function () {
         this.modalControl.closeAll();
     };
-    McModalService.prototype.create = function (options) {
+    /**
+     * @template T
+     * @param {?=} options
+     * @return {?}
+     */
+    McModalService.prototype.create = /**
+     * @template T
+     * @param {?=} options
+     * @return {?}
+     */
+    function (options) {
         if (options === void 0) { options = {}; }
         if (typeof options.mcOnCancel !== 'function') {
             // Leave a empty function to close this modal by default
@@ -770,7 +1259,19 @@ var McModalService = /** @class */ (function () {
         }
         return new ModalBuilderForService(this.overlay, options).getInstance();
     };
-    McModalService.prototype.confirm = function (options, confirmType) {
+    /**
+     * @template T
+     * @param {?=} options
+     * @param {?=} confirmType
+     * @return {?}
+     */
+    McModalService.prototype.confirm = /**
+     * @template T
+     * @param {?=} options
+     * @param {?=} confirmType
+     * @return {?}
+     */
+    function (options, confirmType) {
         if (options === void 0) { options = {}; }
         if (confirmType === void 0) { confirmType = 'confirm'; }
         if ('mcFooter' in options) {
@@ -787,15 +1288,49 @@ var McModalService = /** @class */ (function () {
         options.mcMaskClosable = false;
         return this.create(options);
     };
-    McModalService.prototype.success = function (options) {
+    /**
+     * @template T
+     * @param {?=} options
+     * @return {?}
+     */
+    McModalService.prototype.success = /**
+     * @template T
+     * @param {?=} options
+     * @return {?}
+     */
+    function (options) {
         if (options === void 0) { options = {}; }
         return this.simpleConfirm(options, 'success');
     };
-    McModalService.prototype.delete = function (options) {
+    /**
+     * @template T
+     * @param {?=} options
+     * @return {?}
+     */
+    McModalService.prototype.delete = /**
+     * @template T
+     * @param {?=} options
+     * @return {?}
+     */
+    function (options) {
         if (options === void 0) { options = {}; }
         return this.simpleConfirm(options, 'warn');
     };
-    McModalService.prototype.simpleConfirm = function (options, confirmType) {
+    /**
+     * @private
+     * @template T
+     * @param {?=} options
+     * @param {?=} confirmType
+     * @return {?}
+     */
+    McModalService.prototype.simpleConfirm = /**
+     * @private
+     * @template T
+     * @param {?=} options
+     * @param {?=} confirmType
+     * @return {?}
+     */
+    function (options, confirmType) {
         if (options === void 0) { options = {}; }
         // Remove the Cancel button if the user not specify a Cancel button
         if (!('mcCancelText' in options)) {
@@ -804,32 +1339,50 @@ var McModalService = /** @class */ (function () {
         }
         return this.confirm(options, confirmType);
     };
-    McModalService = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [Overlay,
-            McModalControlService])
-    ], McModalService);
+    McModalService.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    McModalService.ctorParameters = function () { return [
+        { type: Overlay },
+        { type: McModalControlService }
+    ]; };
     return McModalService;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McModalModule = /** @class */ (function () {
     function McModalModule() {
     }
-    McModalModule = __decorate([
-        NgModule({
-            imports: [CommonModule, OverlayModule, McButtonModule, McIconModule],
-            exports: [McModalComponent],
-            declarations: [McModalComponent, CssUnitPipe],
-            entryComponents: [McModalComponent],
-            providers: [McModalControlService, McModalService]
-        })
-    ], McModalModule);
+    McModalModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule, OverlayModule, McButtonModule, McIconModule],
+                    exports: [McModalComponent],
+                    declarations: [McModalComponent, CssUnitPipe],
+                    entryComponents: [McModalComponent],
+                    providers: [McModalControlService, McModalService]
+                },] },
+    ];
     return McModalModule;
 }());
 
 /**
- * Generated bundle index. Do not edit.
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { CssUnitPipe as ɵb24, McModalControlService as ɵa24, McModalComponent, McModalRef, McModalModule, McModalService };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵb24, McModalControlService as ɵa24 };
 //# sourceMappingURL=modal.es5.js.map

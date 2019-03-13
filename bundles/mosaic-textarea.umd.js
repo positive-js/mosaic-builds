@@ -39,22 +39,13 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __param(paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
 var MC_TEXTAREA_VALUE_ACCESSOR = new core.InjectionToken('MC_TEXTAREA_VALUE_ACCESSOR');
+/** @type {?} */
 var nextUniqueId = 0;
 var McTextareaBase = /** @class */ (function () {
     function McTextareaBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
@@ -66,6 +57,7 @@ var McTextareaBase = /** @class */ (function () {
     return McTextareaBase;
 }());
 // tslint:disable-next-line:naming-convention
+/** @type {?} */
 var McTextareaMixinBase = core$1.mixinErrorState(McTextareaBase);
 var McTextarea = /** @class */ (function (_super) {
     __extends(McTextarea, _super);
@@ -77,17 +69,17 @@ var McTextarea = /** @class */ (function (_super) {
         _this.canGrow = true;
         /**
          * Implemented as part of McFormFieldControl.
-         * @docs-private
+         * \@docs-private
          */
         _this.focused = false;
         /**
          * Implemented as part of McFormFieldControl.
-         * @docs-private
+         * \@docs-private
          */
         _this.stateChanges = new rxjs.Subject();
         /**
          * Implemented as part of McFormFieldControl.
-         * @docs-private
+         * \@docs-private
          */
         _this.controlType = 'mc-textarea';
         _this.uid = "mc-textsrea-" + nextUniqueId++;
@@ -102,23 +94,37 @@ var McTextarea = /** @class */ (function (_super) {
         _this.previousNativeValue = _this.value;
         // Force setter to be called in case id was not specified.
         _this.id = _this.id;
-        var growObserver = rxjs.fromEvent(elementRef.nativeElement, 'input');
+        /** @type {?} */
+        var growObserver = rxjs.fromEvent(elementRef.nativeElement, 'input')
+        /*.pipe(
+            map((event: any) => this.getGrowHeight()),
+            // map((event: any) => event.target.scrollHeight),
+            distinctUntilChanged()
+        )*/ ;
         _this.growSubscription = growObserver.subscribe(_this.grow.bind(_this));
         return _this;
     }
-    McTextarea_1 = McTextarea;
     Object.defineProperty(McTextarea.prototype, "disabled", {
         /**
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        get: function () {
+        get: /**
+         * Implemented as part of McFormFieldControl.
+         * \@docs-private
+         * @return {?}
+         */
+        function () {
             if (this.ngControl && this.ngControl.disabled !== null) {
                 return this.ngControl.disabled;
             }
             return this._disabled;
         },
-        set: function (value) {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
             this._disabled = coercion.coerceBooleanProperty(value);
             if (this.focused) {
                 this.focused = false;
@@ -133,10 +139,19 @@ var McTextarea = /** @class */ (function (_super) {
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        get: function () {
+        get: /**
+         * Implemented as part of McFormFieldControl.
+         * \@docs-private
+         * @return {?}
+         */
+        function () {
             return this._id;
         },
-        set: function (value) {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
             this._id = value || this.uid;
         },
         enumerable: true,
@@ -147,10 +162,19 @@ var McTextarea = /** @class */ (function (_super) {
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        get: function () {
+        get: /**
+         * Implemented as part of McFormFieldControl.
+         * \@docs-private
+         * @return {?}
+         */
+        function () {
             return this._required;
         },
-        set: function (value) {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
             this._required = coercion.coerceBooleanProperty(value);
         },
         enumerable: true,
@@ -161,10 +185,19 @@ var McTextarea = /** @class */ (function (_super) {
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        get: function () {
+        get: /**
+         * Implemented as part of McFormFieldControl.
+         * \@docs-private
+         * @return {?}
+         */
+        function () {
             return this.valueAccessor.value;
         },
-        set: function (value) {
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
             if (value !== this.value) {
                 this.valueAccessor.value = value;
                 this.stateChanges.next();
@@ -173,24 +206,50 @@ var McTextarea = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    McTextarea.prototype.ngOnInit = function () {
+    /**
+     * @return {?}
+     */
+    McTextarea.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
         var _this = this;
         setTimeout(function () { return _this.grow(); }, 0);
-        this.lineHeight = parseInt(getComputedStyle(this.elementRef.nativeElement).lineHeight, 10);
-        var paddingTop = parseInt(getComputedStyle(this.elementRef.nativeElement).paddingTop, 10);
-        var paddingBottom = parseInt(getComputedStyle(this.elementRef.nativeElement).paddingBottom, 10);
+        this.lineHeight = parseInt((/** @type {?} */ (getComputedStyle(this.elementRef.nativeElement).lineHeight)), 10);
+        /** @type {?} */
+        var paddingTop = parseInt((/** @type {?} */ (getComputedStyle(this.elementRef.nativeElement).paddingTop)), 10);
+        /** @type {?} */
+        var paddingBottom = parseInt((/** @type {?} */ (getComputedStyle(this.elementRef.nativeElement).paddingBottom)), 10);
         // tslint:disable-next-line:no-magic-numbers
         this.minHeight = this.lineHeight * 2 + paddingTop + paddingBottom;
         this.freeRowsHeight = this.lineHeight;
     };
-    McTextarea.prototype.ngOnChanges = function () {
+    /**
+     * @return {?}
+     */
+    McTextarea.prototype.ngOnChanges = /**
+     * @return {?}
+     */
+    function () {
         this.stateChanges.next();
     };
-    McTextarea.prototype.ngOnDestroy = function () {
+    /**
+     * @return {?}
+     */
+    McTextarea.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
         this.stateChanges.complete();
         this.growSubscription.unsubscribe();
     };
-    McTextarea.prototype.ngDoCheck = function () {
+    /**
+     * @return {?}
+     */
+    McTextarea.prototype.ngDoCheck = /**
+     * @return {?}
+     */
+    function () {
         if (this.ngControl) {
             // We need to re-evaluate this on every change detection cycle, because there are some
             // error triggers that we can't subscribe to (e.g. parent form submissions). This means
@@ -203,26 +262,57 @@ var McTextarea = /** @class */ (function (_super) {
         this.dirtyCheckNativeValue();
     };
     /** Grow textarea height to avoid vertical scroll  */
-    McTextarea.prototype.grow = function () {
+    /**
+     * Grow textarea height to avoid vertical scroll
+     * @return {?}
+     */
+    McTextarea.prototype.grow = /**
+     * Grow textarea height to avoid vertical scroll
+     * @return {?}
+     */
+    function () {
         var _this = this;
         if (!this.canGrow) {
             return;
         }
         this.ngZone.runOutsideAngular(function () {
+            /** @type {?} */
             var textarea = _this.elementRef.nativeElement;
-            var outerHeight = parseInt(window.getComputedStyle(textarea).height, 10);
+            /** @type {?} */
+            var outerHeight = parseInt((/** @type {?} */ (window.getComputedStyle(textarea).height)), 10);
+            /** @type {?} */
             var diff = outerHeight - textarea.clientHeight;
             textarea.style.height = 0; // this line is important to height recalculation
+            // this line is important to height recalculation
+            /** @type {?} */
             var height = Math.max(_this.minHeight, textarea.scrollHeight + diff + _this.freeRowsHeight);
             textarea.style.height = height + "px";
         });
     };
     /** Focuses the textarea. */
-    McTextarea.prototype.focus = function () {
+    /**
+     * Focuses the textarea.
+     * @return {?}
+     */
+    McTextarea.prototype.focus = /**
+     * Focuses the textarea.
+     * @return {?}
+     */
+    function () {
         this.elementRef.nativeElement.focus();
     };
     /** Callback for the cases where the focused state of the textarea changes. */
-    McTextarea.prototype.focusChanged = function (isFocused) {
+    /**
+     * Callback for the cases where the focused state of the textarea changes.
+     * @param {?} isFocused
+     * @return {?}
+     */
+    McTextarea.prototype.focusChanged = /**
+     * Callback for the cases where the focused state of the textarea changes.
+     * @param {?} isFocused
+     * @return {?}
+     */
+    function (isFocused) {
         if (isFocused !== this.focused) {
             this.focused = isFocused;
             this.stateChanges.next();
@@ -233,7 +323,12 @@ var McTextarea = /** @class */ (function (_super) {
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        get: function () {
+        get: /**
+         * Implemented as part of McFormFieldControl.
+         * \@docs-private
+         * @return {?}
+         */
+        function () {
             return !this.elementRef.nativeElement.value && !this.isBadInput();
         },
         enumerable: true,
@@ -243,11 +338,32 @@ var McTextarea = /** @class */ (function (_super) {
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    McTextarea.prototype.onContainerClick = function () {
+    /**
+     * Implemented as part of McFormFieldControl.
+     * \@docs-private
+     * @return {?}
+     */
+    McTextarea.prototype.onContainerClick = /**
+     * Implemented as part of McFormFieldControl.
+     * \@docs-private
+     * @return {?}
+     */
+    function () {
         this.focus();
     };
     /** Does some manual dirty checking on the native textarea `value` property. */
-    McTextarea.prototype.dirtyCheckNativeValue = function () {
+    /**
+     * Does some manual dirty checking on the native textarea `value` property.
+     * @protected
+     * @return {?}
+     */
+    McTextarea.prototype.dirtyCheckNativeValue = /**
+     * Does some manual dirty checking on the native textarea `value` property.
+     * @protected
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
         var newValue = this.value;
         if (this.previousNativeValue !== newValue) {
             this.previousNativeValue = newValue;
@@ -255,90 +371,93 @@ var McTextarea = /** @class */ (function (_super) {
         }
     };
     /** Checks whether the textarea is invalid based on the native validation. */
-    McTextarea.prototype.isBadInput = function () {
+    /**
+     * Checks whether the textarea is invalid based on the native validation.
+     * @protected
+     * @return {?}
+     */
+    McTextarea.prototype.isBadInput = /**
+     * Checks whether the textarea is invalid based on the native validation.
+     * @protected
+     * @return {?}
+     */
+    function () {
         // The `validity` property won't be present on platform-server.
-        var validity = this.elementRef.nativeElement.validity;
+        /** @type {?} */
+        var validity = ((/** @type {?} */ (this.elementRef.nativeElement))).validity;
         return validity && validity.badInput;
     };
-    McTextarea.prototype.getGrowHeight = function () {
+    /**
+     * @private
+     * @return {?}
+     */
+    McTextarea.prototype.getGrowHeight = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
         var textarea = this.elementRef.nativeElement;
-        var outerHeight = parseInt(window.getComputedStyle(textarea).height.toString(), 10);
+        /** @type {?} */
+        var outerHeight = parseInt((/** @type {?} */ (window.getComputedStyle(textarea).height)).toString(), 10);
+        /** @type {?} */
         var diff = outerHeight - textarea.clientHeight;
         return Math.max(this.minHeight, textarea.scrollHeight + diff);
     };
-    var McTextarea_1;
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Boolean)
-    ], McTextarea.prototype, "canGrow", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", core$1.ErrorStateMatcher)
-    ], McTextarea.prototype, "errorStateMatcher", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Boolean),
-        __metadata("design:paramtypes", [Boolean])
-    ], McTextarea.prototype, "disabled", null);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", String),
-        __metadata("design:paramtypes", [String])
-    ], McTextarea.prototype, "id", null);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", String)
-    ], McTextarea.prototype, "placeholder", void 0);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", Boolean),
-        __metadata("design:paramtypes", [Boolean])
-    ], McTextarea.prototype, "required", null);
-    __decorate([
-        core.Input(),
-        __metadata("design:type", String),
-        __metadata("design:paramtypes", [String])
-    ], McTextarea.prototype, "value", null);
-    McTextarea = McTextarea_1 = __decorate([
-        core.Directive({
-            selector: 'textarea[mcTextarea]',
-            exportAs: 'mcTextarea',
-            host: {
-                class: 'mc-textarea',
-                '[class.mc-textarea-resizable]': '!canGrow',
-                '[attr.id]': 'id',
-                '[attr.placeholder]': 'placeholder',
-                '[attr.aria-invalid]': 'errorState',
-                '[disabled]': 'disabled',
-                '[required]': 'required',
-                '(blur)': 'focusChanged(false)',
-                '(focus)': 'focusChanged(true)'
-            },
-            providers: [{ provide: formField.McFormFieldControl, useExisting: McTextarea_1 }]
-        }),
-        __param(1, core.Optional()), __param(1, core.Self()),
-        __param(2, core.Optional()),
-        __param(3, core.Optional()),
-        __param(5, core.Optional()), __param(5, core.Self()), __param(5, core.Inject(MC_TEXTAREA_VALUE_ACCESSOR)),
-        __metadata("design:paramtypes", [core.ElementRef,
-            forms.NgControl,
-            forms.NgForm,
-            forms.FormGroupDirective,
-            core$1.ErrorStateMatcher, Object, core.NgZone])
-    ], McTextarea);
+    McTextarea.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'textarea[mcTextarea]',
+                    exportAs: 'mcTextarea',
+                    host: {
+                        class: 'mc-textarea',
+                        '[class.mc-textarea-resizable]': '!canGrow',
+                        '[attr.id]': 'id',
+                        '[attr.placeholder]': 'placeholder',
+                        '[attr.aria-invalid]': 'errorState',
+                        '[disabled]': 'disabled',
+                        '[required]': 'required',
+                        '(blur)': 'focusChanged(false)',
+                        '(focus)': 'focusChanged(true)'
+                    },
+                    providers: [{ provide: formField.McFormFieldControl, useExisting: McTextarea }]
+                },] },
+    ];
+    /** @nocollapse */
+    McTextarea.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
+        { type: forms.NgForm, decorators: [{ type: core.Optional }] },
+        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
+        { type: core$1.ErrorStateMatcher },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_TEXTAREA_VALUE_ACCESSOR,] }] },
+        { type: core.NgZone }
+    ]; };
+    McTextarea.propDecorators = {
+        canGrow: [{ type: core.Input }],
+        errorStateMatcher: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        id: [{ type: core.Input }],
+        placeholder: [{ type: core.Input }],
+        required: [{ type: core.Input }],
+        value: [{ type: core.Input }]
+    };
     return McTextarea;
 }(McTextareaMixinBase));
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McTextareaModule = /** @class */ (function () {
     function McTextareaModule() {
     }
-    McTextareaModule = __decorate([
-        core.NgModule({
-            imports: [common.CommonModule, a11y.A11yModule, core$1.McCommonModule, forms.FormsModule],
-            exports: [McTextarea],
-            declarations: [McTextarea]
-        })
-    ], McTextareaModule);
+    McTextareaModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule, a11y.A11yModule, core$1.McCommonModule, forms.FormsModule],
+                    exports: [McTextarea],
+                    declarations: [McTextarea]
+                },] },
+    ];
     return McTextareaModule;
 }());
 

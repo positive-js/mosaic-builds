@@ -55,7 +55,7 @@ export declare class McMonthView<D> implements AfterContentInit {
     private _selected;
     private _minDate;
     private _maxDate;
-    constructor(changeDetectorRef: ChangeDetectorRef, dateFormats: McDateFormats, dateAdapter: DateAdapter<D>, dir?: Directionality | undefined);
+    constructor(changeDetectorRef: ChangeDetectorRef, dateFormats: McDateFormats, dateAdapter: DateAdapter<D>, dir?: Directionality);
     ngAfterContentInit(): void;
     /** Handles when a new date is selected. */
     dateSelected(date: number): void;

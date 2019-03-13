@@ -42,7 +42,7 @@ export declare class McDropdownTrigger implements OnInit, AfterContentInit, OnDe
     private _opened;
     private _closeSubscription;
     private _hoverSubscription;
-    constructor(_overlay: Overlay, _element: ElementRef<HTMLElement>, _viewContainerRef: ViewContainerRef, _scrollStrategy: any, _dir: Directionality, _focusMonitor?: FocusMonitor | undefined);
+    constructor(_overlay: Overlay, _element: ElementRef<HTMLElement>, _viewContainerRef: ViewContainerRef, _scrollStrategy: any, _dir: Directionality, _focusMonitor?: FocusMonitor);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;

@@ -15,7 +15,7 @@ export declare class McDropdownItem extends _McDropdownItemMixinBase implements 
     private _focusMonitor;
     private _parentDropdownPanel?;
     private _document;
-    constructor(_elementRef: ElementRef<HTMLElement>, document: any, _focusMonitor: FocusMonitor, _parentDropdownPanel?: McDropdownPanel<McDropdownItem> | undefined);
+    constructor(_elementRef: ElementRef<HTMLElement>, document: any, _focusMonitor: FocusMonitor, _parentDropdownPanel?: McDropdownPanel<McDropdownItem>);
     /** Focuses the dropdown item. */
     focus(origin?: FocusOrigin): void;
     ngOnDestroy(): void;
