@@ -24509,7 +24509,7 @@ var McToolTipModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var VERSION = new core.Version('1.0.0-beta.3');
+var VERSION = new core.Version('1.0.0-beta.4');
 
 exports.VERSION = VERSION;
 exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;

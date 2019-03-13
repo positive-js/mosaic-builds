@@ -40,7 +40,7 @@ export { McToolTipModule, mcTooltipScrollStrategyFactory, getMcTooltipInvalidPos
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('1.0.0-beta.3');
+const VERSION = new Version('1.0.0-beta.4');
 
 /**
  * @fileoverview added by tsickle
