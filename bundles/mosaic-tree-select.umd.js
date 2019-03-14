@@ -175,14 +175,14 @@ var McTreeSelect = /** @class */ (function (_super) {
         /**
          * Combined stream of all of the child options' change events.
          */
-        _this.optionSelectionChanges = rxjs.defer(function () {
+        _this.optionSelectionChanges = (/** @type {?} */ (rxjs.defer(function () {
             if (_this.options) {
                 return rxjs.merge.apply(void 0, _this.options.map(function (option) { return option.onSelectionChange; }));
             }
             return _this.ngZone.onStable
                 .asObservable()
                 .pipe(operators.take(1), operators.switchMap(function () { return _this.optionSelectionChanges; }));
-        });
+        })));
         _this._required = false;
         _this._multiple = false;
         _this._autoSelect = true;

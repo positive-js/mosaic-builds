@@ -174,14 +174,14 @@ class McTreeSelect extends McTreeSelectMixinBase {
         /**
          * Combined stream of all of the child options' change events.
          */
-        this.optionSelectionChanges = defer(() => {
+        this.optionSelectionChanges = (/** @type {?} */ (defer(() => {
             if (this.options) {
                 return merge(...this.options.map((option) => option.onSelectionChange));
             }
             return this.ngZone.onStable
                 .asObservable()
                 .pipe(take(1), switchMap(() => this.optionSelectionChanges));
-        });
+        })));
         this._required = false;
         this._multiple = false;
         this._autoSelect = true;

@@ -16677,14 +16677,14 @@ var McSelect = /** @class */ (function (_super) {
         /**
          * Combined stream of all of the child options' change events.
          */
-        _this.optionSelectionChanges = rxjs.defer(function () {
+        _this.optionSelectionChanges = (/** @type {?} */ (rxjs.defer(function () {
             if (_this.options) {
                 return rxjs.merge.apply(void 0, _this.options.map(function (option) { return option.onSelectionChange; }));
             }
             return _this._ngZone.onStable
                 .asObservable()
                 .pipe(operators.take(1), operators.switchMap(function () { return _this.optionSelectionChanges; }));
-        });
+        })));
         /**
          * Event emitted when the select panel has been toggled.
          */
@@ -18485,14 +18485,14 @@ var McTreeSelect = /** @class */ (function (_super) {
         /**
          * Combined stream of all of the child options' change events.
          */
-        _this.optionSelectionChanges = rxjs.defer(function () {
+        _this.optionSelectionChanges = (/** @type {?} */ (rxjs.defer(function () {
             if (_this.options) {
                 return rxjs.merge.apply(void 0, _this.options.map(function (option) { return option.onSelectionChange; }));
             }
             return _this.ngZone.onStable
                 .asObservable()
                 .pipe(operators.take(1), operators.switchMap(function () { return _this.optionSelectionChanges; }));
-        });
+        })));
         _this._required = false;
         _this._multiple = false;
         _this._autoSelect = true;
@@ -24638,10 +24638,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc22 = MAX_VALIDATOR;
-exports.ɵa22 = MIN_VALIDATOR;
-exports.ɵd22 = MaxValidator;
-exports.ɵb22 = MinValidator;
+exports.ɵc23 = MAX_VALIDATOR;
+exports.ɵa23 = MIN_VALIDATOR;
+exports.ɵd23 = MaxValidator;
+exports.ɵb23 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -24720,15 +24720,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd14 = McTabBase;
+exports.ɵe14 = mcTabMixinBase;
+exports.ɵa14 = McTabHeaderBase;
+exports.ɵb14 = McTabLabelWrapperBase;
+exports.ɵc14 = mcTabLabelWrapperMixinBase;
+exports.ɵh14 = McTabLinkBase;
+exports.ɵf14 = McTabNavBase;
+exports.ɵi14 = mcTabLinkMixinBase;
+exports.ɵg14 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -24786,13 +24786,13 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵb21 = mcSidepanelAnimations;
-exports.ɵa21 = mcSidepanelTransformAnimation;
-exports.ɵg21 = McSidepanelActions;
-exports.ɵe21 = McSidepanelBody;
-exports.ɵc21 = McSidepanelClose;
-exports.ɵf21 = McSidepanelFooter;
-exports.ɵd21 = McSidepanelHeader;
+exports.ɵb20 = mcSidepanelAnimations;
+exports.ɵa20 = mcSidepanelTransformAnimation;
+exports.ɵg20 = McSidepanelActions;
+exports.ɵe20 = McSidepanelBody;
+exports.ɵc20 = McSidepanelClose;
+exports.ɵf20 = McSidepanelFooter;
+exports.ɵd20 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
