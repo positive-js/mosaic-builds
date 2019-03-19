@@ -982,10 +982,10 @@ exports.McInputMono = McInputMono;
 exports.stepUp = stepUp;
 exports.stepDown = stepDown;
 exports.MC_INPUT_VALUE_ACCESSOR = MC_INPUT_VALUE_ACCESSOR;
-exports.ɵc23 = MAX_VALIDATOR;
-exports.ɵa23 = MIN_VALIDATOR;
-exports.ɵd23 = MaxValidator;
-exports.ɵb23 = MinValidator;
+exports.ɵc22 = MAX_VALIDATOR;
+exports.ɵa22 = MIN_VALIDATOR;
+exports.ɵd22 = MaxValidator;
+exports.ɵb22 = MinValidator;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
