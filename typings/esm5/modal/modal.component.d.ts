@@ -18,7 +18,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     private document;
     mcModalType: ModalType;
     mcContent: string | TemplateRef<{}> | Type<T>;
-    mcComponentParams: object;
+    mcComponentParams: T;
     mcFooter: string | TemplateRef<{}> | IModalButtonOptions<T>[];
     mcVisible: boolean;
     _mcVisible: boolean;
@@ -45,13 +45,13 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     mcOkLoading: boolean;
     _mcOkLoading: boolean;
     mcOnOk: EventEmitter<T> | OnClickCallback<T>;
-    autoFocusButtonOk: ElementRef;
     mcCancelText: string;
     mcCancelLoading: boolean;
     _mcCancelLoading: boolean;
     mcOnCancel: EventEmitter<T> | OnClickCallback<T>;
     modalContainer: ElementRef;
     bodyContainer: ViewContainerRef;
+    autoFocusButtonOk: ElementRef;
     maskAnimationClassMap: object;
     modalAnimationClassMap: object;
     transformOrigin: string;

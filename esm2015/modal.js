@@ -37,14 +37,14 @@ class McModalControlService {
      * @return {?}
      */
     get afterAllClose() {
-        return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose;
+        return this.parentService ? this.parentService.afterAllClose : (/** @type {?} */ (this.rootAfterAllClose));
     }
     // Track singleton openModals array through over the injection tree
     /**
      * @return {?}
      */
     get openModals() {
-        return this.parentService ? this.parentService.openModals : this.rootOpenModals;
+        return this.parentService ? this.parentService.openModals : (/** @type {?} */ (this.rootOpenModals));
     }
     // Registered modal for later usage
     /**
@@ -765,12 +765,12 @@ McModalComponent.propDecorators = {
     mcOkType: [{ type: Input }],
     mcOkLoading: [{ type: Input }],
     mcOnOk: [{ type: Input }, { type: Output }],
-    autoFocusButtonOk: [{ type: ViewChild, args: ['autoFocusButtonOk', { read: ElementRef },] }],
     mcCancelText: [{ type: Input }],
     mcCancelLoading: [{ type: Input }],
     mcOnCancel: [{ type: Input }, { type: Output }],
     modalContainer: [{ type: ViewChild, args: ['modalContainer',] }],
     bodyContainer: [{ type: ViewChild, args: ['bodyContainer', { read: ViewContainerRef },] }],
+    autoFocusButtonOk: [{ type: ViewChild, args: ['autoFocusButtonOk', { read: ElementRef },] }],
     mcGetContainer: [{ type: Input }]
 };
 ////////////
@@ -819,17 +819,17 @@ class ModalBuilderForService {
         this.overlay = overlay;
         this.createModal();
         if (!('mcGetContainer' in options)) {
-            options.mcGetContainer = null;
+            options.mcGetContainer = undefined;
         }
         this.changeProps(options);
-        this.modalRef.instance.open();
-        this.modalRef.instance.mcAfterClose.subscribe(() => this.destroyModal());
+        (/** @type {?} */ (this.modalRef)).instance.open();
+        (/** @type {?} */ (this.modalRef)).instance.mcAfterClose.subscribe(() => this.destroyModal());
         this.overlayRef.keydownEvents()
             // @ts-ignore
             .pipe(filter((event) => {
             return event.keyCode === ESCAPE && options.mcCloseByESC;
         }))
-            .subscribe(() => this.modalRef.instance.close());
+            .subscribe(() => (/** @type {?} */ (this.modalRef)).instance.close());
     }
     /**
      * @return {?}
@@ -843,7 +843,6 @@ class ModalBuilderForService {
     destroyModal() {
         if (this.modalRef) {
             this.overlayRef.dispose();
-            // @ts-ignore
             this.modalRef = null;
         }
     }
@@ -915,7 +914,7 @@ class McModalService {
             // tslint:disable-next-line
             options.mcWidth = 480;
         }
-        return new ModalBuilderForService(this.overlay, options).getInstance();
+        return (/** @type {?} */ (new ModalBuilderForService(this.overlay, options).getInstance()));
     }
     /**
      * @template T

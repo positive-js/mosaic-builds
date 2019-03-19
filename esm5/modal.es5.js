@@ -38,7 +38,7 @@ var McModalControlService = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose;
+            return this.parentService ? this.parentService.afterAllClose : (/** @type {?} */ (this.rootAfterAllClose));
         },
         enumerable: true,
         configurable: true
@@ -51,7 +51,7 @@ var McModalControlService = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.parentService ? this.parentService.openModals : this.rootOpenModals;
+            return this.parentService ? this.parentService.openModals : (/** @type {?} */ (this.rootOpenModals));
         },
         enumerable: true,
         configurable: true
@@ -1059,12 +1059,12 @@ var McModalComponent = /** @class */ (function (_super) {
         mcOkType: [{ type: Input }],
         mcOkLoading: [{ type: Input }],
         mcOnOk: [{ type: Input }, { type: Output }],
-        autoFocusButtonOk: [{ type: ViewChild, args: ['autoFocusButtonOk', { read: ElementRef },] }],
         mcCancelText: [{ type: Input }],
         mcCancelLoading: [{ type: Input }],
         mcOnCancel: [{ type: Input }, { type: Output }],
         modalContainer: [{ type: ViewChild, args: ['modalContainer',] }],
         bodyContainer: [{ type: ViewChild, args: ['bodyContainer', { read: ViewContainerRef },] }],
+        autoFocusButtonOk: [{ type: ViewChild, args: ['autoFocusButtonOk', { read: ElementRef },] }],
         mcGetContainer: [{ type: Input }]
     };
     return McModalComponent;
@@ -1124,17 +1124,17 @@ ModalBuilderForService = /** @class */ (function () {
         this.overlay = overlay;
         this.createModal();
         if (!('mcGetContainer' in options)) {
-            options.mcGetContainer = null;
+            options.mcGetContainer = undefined;
         }
         this.changeProps(options);
-        this.modalRef.instance.open();
-        this.modalRef.instance.mcAfterClose.subscribe(function () { return _this.destroyModal(); });
+        (/** @type {?} */ (this.modalRef)).instance.open();
+        (/** @type {?} */ (this.modalRef)).instance.mcAfterClose.subscribe(function () { return _this.destroyModal(); });
         this.overlayRef.keydownEvents()
             // @ts-ignore
             .pipe(filter(function (event) {
             return event.keyCode === ESCAPE && options.mcCloseByESC;
         }))
-            .subscribe(function () { return _this.modalRef.instance.close(); });
+            .subscribe(function () { return (/** @type {?} */ (_this.modalRef)).instance.close(); });
     }
     /**
      * @return {?}
@@ -1154,7 +1154,6 @@ ModalBuilderForService = /** @class */ (function () {
     function () {
         if (this.modalRef) {
             this.overlayRef.dispose();
-            // @ts-ignore
             this.modalRef = null;
         }
     };
@@ -1257,7 +1256,7 @@ var McModalService = /** @class */ (function () {
             // tslint:disable-next-line
             options.mcWidth = 480;
         }
-        return new ModalBuilderForService(this.overlay, options).getInstance();
+        return (/** @type {?} */ (new ModalBuilderForService(this.overlay, options).getInstance()));
     };
     /**
      * @template T

@@ -9,7 +9,7 @@ export declare class ModalBuilderForService {
     private modalRef;
     private overlayRef;
     constructor(overlay: Overlay, options?: IModalOptionsForService);
-    getInstance(): McModalComponent;
+    getInstance(): McModalComponent | null;
     destroyModal(): void;
     private changeProps;
     private createModal;

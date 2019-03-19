@@ -72,7 +72,7 @@ var McModalControlService = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose;
+            return this.parentService ? this.parentService.afterAllClose : (/** @type {?} */ (this.rootAfterAllClose));
         },
         enumerable: true,
         configurable: true
@@ -85,7 +85,7 @@ var McModalControlService = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.parentService ? this.parentService.openModals : this.rootOpenModals;
+            return this.parentService ? this.parentService.openModals : (/** @type {?} */ (this.rootOpenModals));
         },
         enumerable: true,
         configurable: true
@@ -1093,12 +1093,12 @@ var McModalComponent = /** @class */ (function (_super) {
         mcOkType: [{ type: core.Input }],
         mcOkLoading: [{ type: core.Input }],
         mcOnOk: [{ type: core.Input }, { type: core.Output }],
-        autoFocusButtonOk: [{ type: core.ViewChild, args: ['autoFocusButtonOk', { read: core.ElementRef },] }],
         mcCancelText: [{ type: core.Input }],
         mcCancelLoading: [{ type: core.Input }],
         mcOnCancel: [{ type: core.Input }, { type: core.Output }],
         modalContainer: [{ type: core.ViewChild, args: ['modalContainer',] }],
         bodyContainer: [{ type: core.ViewChild, args: ['bodyContainer', { read: core.ViewContainerRef },] }],
+        autoFocusButtonOk: [{ type: core.ViewChild, args: ['autoFocusButtonOk', { read: core.ElementRef },] }],
         mcGetContainer: [{ type: core.Input }]
     };
     return McModalComponent;
@@ -1158,17 +1158,17 @@ ModalBuilderForService = /** @class */ (function () {
         this.overlay = overlay$$1;
         this.createModal();
         if (!('mcGetContainer' in options)) {
-            options.mcGetContainer = null;
+            options.mcGetContainer = undefined;
         }
         this.changeProps(options);
-        this.modalRef.instance.open();
-        this.modalRef.instance.mcAfterClose.subscribe(function () { return _this.destroyModal(); });
+        (/** @type {?} */ (this.modalRef)).instance.open();
+        (/** @type {?} */ (this.modalRef)).instance.mcAfterClose.subscribe(function () { return _this.destroyModal(); });
         this.overlayRef.keydownEvents()
             // @ts-ignore
             .pipe(operators.filter(function (event) {
             return event.keyCode === keycodes.ESCAPE && options.mcCloseByESC;
         }))
-            .subscribe(function () { return _this.modalRef.instance.close(); });
+            .subscribe(function () { return (/** @type {?} */ (_this.modalRef)).instance.close(); });
     }
     /**
      * @return {?}
@@ -1188,7 +1188,6 @@ ModalBuilderForService = /** @class */ (function () {
     function () {
         if (this.modalRef) {
             this.overlayRef.dispose();
-            // @ts-ignore
             this.modalRef = null;
         }
     };
@@ -1291,7 +1290,7 @@ var McModalService = /** @class */ (function () {
             // tslint:disable-next-line
             options.mcWidth = 480;
         }
-        return new ModalBuilderForService(this.overlay, options).getInstance();
+        return (/** @type {?} */ (new ModalBuilderForService(this.overlay, options).getInstance()));
     };
     /**
      * @template T
