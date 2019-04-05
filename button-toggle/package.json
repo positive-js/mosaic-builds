@@ -1,0 +1,8 @@
+{
+    "name": "@ptsecurity/mosaic/button-toggle",
+    "typings": "../button-toggle.d.ts",
+    "main": "../bundles/mosaic-button-toggle.umd.js",
+    "module": "../esm5/button-toggle.es5.js",
+    "es2015": "../esm2015/button-toggle.js",
+    "sideEffects": false
+}

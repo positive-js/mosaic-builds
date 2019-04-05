@@ -7,34 +7,37 @@
       "from": "./core"
     },
     {
-      "from": "./divider"
-    },
-    {
       "from": "./card"
     },
     {
-      "from": "./tree"
-    },
-    {
-      "from": "./tooltip"
-    },
-    {
-      "from": "./tabs"
-    },
-    {
-      "from": "./dropdown"
-    },
-    {
-      "from": "./layout"
+      "from": "./divider"
     },
     {
       "from": "./checkbox"
     },
     {
-      "from": "./list"
+      "from": "./tooltip"
     },
     {
       "from": "./toggle"
+    },
+    {
+      "from": "./radio"
+    },
+    {
+      "from": "./dropdown"
+    },
+    {
+      "from": "./tree"
+    },
+    {
+      "from": "./link"
+    },
+    {
+      "from": "./list"
+    },
+    {
+      "from": "./tabs"
     },
     {
       "from": "./icon"
@@ -46,13 +49,13 @@
       "from": "./progress-spinner"
     },
     {
-      "from": "./radio"
-    },
-    {
-      "from": "./link"
+      "from": "./layout"
     },
     {
       "from": "./button"
+    },
+    {
+      "from": "./navbar"
     },
     {
       "from": "./form-field"
@@ -61,25 +64,25 @@
       "from": "./tag"
     },
     {
-      "from": "./navbar"
+      "from": "./splitter"
     },
     {
       "from": "./sidepanel"
     },
     {
-      "from": "./splitter"
-    },
-    {
       "from": "./select"
-    },
-    {
-      "from": "./textarea"
     },
     {
       "from": "./modal"
     },
     {
+      "from": "./textarea"
+    },
+    {
       "from": "./input"
+    },
+    {
+      "from": "./button-toggle"
     },
     {
       "from": "./tree-select"

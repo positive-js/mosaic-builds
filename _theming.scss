@@ -1225,6 +1225,55 @@ $base-font-size: 15px !default;
 
 
 
+
+
+
+@mixin mc-button-toggle-theme($theme) {
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+    $divider-color: mc-color($foreground, divider);
+
+    .mc-button-toggle-standalone {
+        box-shadow: none;
+    }
+
+    .mc-button-toggle-vertical {
+        .mc-button-toggle + .mc-button-toggle {
+            border-left: none;
+            border-right: none;
+        }
+    }
+
+    .mc-button-toggle[disabled] {
+        outline: 0;
+    }
+
+    .mc-button-toggle-checked:not([disabled]) {
+        .mc-button,
+        .mc-icon-button {
+            background: darken(map-get($background, button-bg), 5);
+        }
+
+        &:not(.cdk-keyboard-focused) {
+            .mc-button,
+            .mc-icon-button {
+                border-color: darken(mc-color($background, button-border), 5);
+                box-shadow: map-get($background, in-shadow);
+            }
+        }
+    }
+}
+
+@mixin mc-button-toggle-typography($config) {
+    .mc-button-toggle {
+        font-family: mc-font-family($config);
+    }
+}
+
+
+
 // Width and height of input toggles
 $mc-toggle-size: 16px !default;
 
@@ -2741,6 +2790,7 @@ $hover-darken: 5%;
     @include mc-alert-typography($config);
     @include mc-badge-typography($config);
     @include mc-button-typography($config);
+    @include mc-button-toggle-typography($config);
     @include mc-checkbox-typography($config);
     @include mc-datepicker-typography($config);
     @include mc-dropdown-typography($config);
@@ -2784,6 +2834,7 @@ $hover-darken: 5%;
         color: mc-color($foreground, text);
     }
 }
+
 
 
 
@@ -3111,6 +3162,7 @@ $hover-darken: 5%;
     @include mc-alert-theme($theme);
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
+    @include mc-button-toggle-theme($theme);
     @include mc-card-theme($theme);
     @include mc-datepicker-theme($theme);
     @include mc-dropdown-theme($theme);
