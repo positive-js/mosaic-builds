@@ -1,33 +1,27 @@
-import { ElementRef, OnDestroy, QueryList } from '@angular/core';
+import { ElementRef, OnDestroy } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
-import { McIcon } from '@ptsecurity/mosaic/icon';
-export declare class McButtonCSSStyler {
-}
-export declare class McIconButtonCSSStyler {
+export declare class McButtonCssStyler {
     nativeElement: Element;
-    contentChildren: QueryList<McIcon>;
+    readonly isIconButton: boolean;
+    private icons;
     constructor(elementRef: ElementRef);
     ngAfterContentInit(): void;
-    _addClassModificatorForIcons(): void;
+    private addClassModificatorForIcons;
 }
 export declare class McButtonBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McButtonMixinBase: CanDisableCtor & CanColorCtor & typeof McButtonBase;
-export declare class McButton extends _McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
+export declare const McButtonMixinBase: CanDisableCtor & CanColorCtor & typeof McButtonBase;
+export declare class McButton extends McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
     private _focusMonitor;
     constructor(elementRef: ElementRef, _focusMonitor: FocusMonitor);
     ngOnDestroy(): void;
     focus(): void;
-    _getHostElement(): any;
+    getHostElement(): any;
 }
 export declare class McAnchor extends McButton {
     constructor(focusMonitor: FocusMonitor, elementRef: ElementRef);
-    _haltDisabledEvents(event: Event): void;
-}
-export declare class McIconButton extends McButton {
-    constructor(focusMonitor: FocusMonitor, elementRef: ElementRef);
-    _haltDisabledEvents(event: Event): void;
+    haltDisabledEvents(event: Event): void;
 }

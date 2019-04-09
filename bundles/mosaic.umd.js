@@ -1519,128 +1519,51 @@ var mcSelectAnimations = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var McIconCSSStyler = /** @class */ (function () {
-    function McIconCSSStyler() {
-    }
-    McIconCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mc-icon]',
-                    host: { class: 'mc mc-icon' }
-                },] },
-    ];
-    return McIconCSSStyler;
-}());
-var McIconBase = /** @class */ (function () {
-    function McIconBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McIconBase;
-}());
-/** @type {?} */
-var _McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
-var McIcon = /** @class */ (function (_super) {
-    __extends(McIcon, _super);
-    function McIcon(elementRef, iconName) {
-        var _this = _super.call(this, elementRef) || this;
-        elementRef.nativeElement.classList.add(iconName);
-        return _this;
-    }
-    /**
-     * @return {?}
-     */
-    McIcon.prototype._getHostElement = /**
-     * @return {?}
-     */
-    function () {
-        return this._elementRef.nativeElement;
-    };
-    McIcon.decorators = [
-        { type: core.Component, args: [{
-                    selector: "[mc-icon]",
-                    template: '<ng-content></ng-content>',
-                    styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    inputs: ['color']
-                },] },
-    ];
-    /** @nocollapse */
-    McIcon.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
-    ]; };
-    return McIcon;
-}(_McIconMixinBase));
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McIconModule = /** @class */ (function () {
-    function McIconModule() {
-    }
-    McIconModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McIcon,
-                        McIconCSSStyler
-                    ],
-                    declarations: [
-                        McIcon,
-                        McIconCSSStyler
-                    ]
-                },] },
-    ];
-    return McIconModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McButtonCSSStyler = /** @class */ (function () {
-    function McButtonCSSStyler() {
-    }
-    McButtonCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'button[mc-button], a[mc-button]',
-                    host: { class: 'mc-button' }
-                },] },
-    ];
-    return McButtonCSSStyler;
-}());
-var McIconButtonCSSStyler = /** @class */ (function () {
-    function McIconButtonCSSStyler(elementRef) {
+var McButtonCssStyler = /** @class */ (function () {
+    function McButtonCssStyler(elementRef) {
+        this.icons = [];
         this.nativeElement = elementRef.nativeElement;
     }
+    Object.defineProperty(McButtonCssStyler.prototype, "isIconButton", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.icons.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
-    McIconButtonCSSStyler.prototype.ngAfterContentInit = /**
+    McButtonCssStyler.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
-        this._addClassModificatorForIcons();
+        /**
+         * Here we had to use native selectors due to number of angular issues about ContentChildren limitations
+         * https://github.com/angular/angular/issues/16299
+         * https://github.com/angular/angular/issues/8563
+         * https://github.com/angular/angular/issues/14769
+         */
+        this.icons = Array.from(this.nativeElement.querySelectorAll('.mc-icon'));
+        this.addClassModificatorForIcons();
     };
     /**
+     * @private
      * @return {?}
      */
-    McIconButtonCSSStyler.prototype._addClassModificatorForIcons = /**
+    McButtonCssStyler.prototype.addClassModificatorForIcons = /**
+     * @private
      * @return {?}
      */
     function () {
         /** @type {?} */
         var twoIcons = 2;
-        /** @type {?} */
-        var icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
-        if (icons.length === 1) {
+        if (this.icons.length === 1) {
             /** @type {?} */
-            var iconElement = icons[0];
+            var iconElement = this.icons[0];
             /** @type {?} */
             var COMMENT_NODE = 8;
             if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
@@ -1654,38 +1577,40 @@ var McIconButtonCSSStyler = /** @class */ (function () {
                 }
             }
         }
-        else if (icons.length === twoIcons) {
+        else if (this.icons.length === twoIcons) {
             /** @type {?} */
-            var firstIconElement = icons[0];
+            var firstIconElement = this.icons[0];
             /** @type {?} */
-            var secondIconElement = icons[1];
+            var secondIconElement = this.icons[1];
             firstIconElement.classList.add('mc-icon_left');
             secondIconElement.classList.add('mc-icon_right');
         }
     };
-    McIconButtonCSSStyler.decorators = [
+    McButtonCssStyler.decorators = [
         { type: core.Directive, args: [{
-                    selector: 'button[mc-icon-button], a[mc-icon-button]',
-                    queries: {
-                        contentChildren: new core.ContentChildren(McIcon)
-                    },
-                    host: { class: 'mc-icon-button' }
+                    selector: 'button[mc-button], a[mc-button]',
+                    host: {
+                        '[class.mc-button]': '!isIconButton',
+                        '[class.mc-icon-button]': 'isIconButton'
+                    }
                 },] },
     ];
     /** @nocollapse */
-    McIconButtonCSSStyler.ctorParameters = function () { return [
+    McButtonCssStyler.ctorParameters = function () { return [
         { type: core.ElementRef }
     ]; };
-    return McIconButtonCSSStyler;
+    return McButtonCssStyler;
 }());
 var McButtonBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McButtonBase(_elementRef) {
         this._elementRef = _elementRef;
     }
     return McButtonBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
+var McButtonMixinBase = mixinColor(mixinDisabled(McButtonBase));
 var McButton = /** @class */ (function (_super) {
     __extends(McButton, _super);
     function McButton(elementRef, _focusMonitor) {
@@ -1710,12 +1635,12 @@ var McButton = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this._getHostElement().focus();
+        this.getHostElement().focus();
     };
     /**
      * @return {?}
      */
-    McButton.prototype._getHostElement = /**
+    McButton.prototype.getHostElement = /**
      * @return {?}
      */
     function () {
@@ -1723,7 +1648,7 @@ var McButton = /** @class */ (function (_super) {
     };
     McButton.decorators = [
         { type: core.Component, args: [{
-                    selector: "\n        button[mc-button],\n        button[mc-xs-button],\n        button[mc-sm-button],\n        button[mc-lg-button],\n        button[mc-xl-button]\n    ",
+                    selector: 'button[mc-button]',
                     template: "<div class=\"mc-button-wrapper\"><ng-content></ng-content></div><div class=\"mc-button-overlay\"></div>",
                     styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;margin:0;border:1px solid transparent;border-radius:3px}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:0}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{pointer-events:none;cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:5px 15px;line-height:20px;font-size:15px}.mc-icon-button{padding:5px 7px;line-height:20px;font-size:15px}.mc-icon-button.mc-icon-button_left{padding-right:15px}.mc-icon-button.mc-icon-button_right{padding-left:15px}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:7px}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:7px}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}.mc-button-group{display:flex;flex-direction:row}.mc-button-group>.mc-button:first-of-type:not(:last-of-type),.mc-button-group>.mc-icon-button:first-of-type:not(:last-of-type){border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-group>.mc-button:last-of-type:not(:first-of-type),.mc-button-group>.mc-icon-button:last-of-type:not(:first-of-type){border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-group>.mc-button:not(:first-of-type):not(:last-of-type),.mc-button-group>.mc-icon-button:not(:first-of-type):not(:last-of-type){border-radius:0}.mc-button-group .mc-button+.mc-button,.mc-button-group .mc-button+.mc-icon-button,.mc-button-group .mc-icon-button+.mc-button,.mc-button-group .mc-icon-button+.mc-icon-button{margin-left:-1px}.mc-button-group_justified>.mc-button,.mc-button-group_justified>.mc-icon-button{width:100%}.mc-button-group_vertical{display:flex;flex-direction:column}.mc-button-group_vertical>.mc-button:first-child:not(:last-child),.mc-button-group_vertical>.mc-icon-button:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-group_vertical>.mc-button:last-child:not(:first-child),.mc-button-group_vertical>.mc-icon-button:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-group_vertical>.mc-button:not(:first-child):not(:last-child),.mc-button-group_vertical>.mc-icon-button:not(:first-child):not(:last-child){border-radius:0}.mc-button-group_vertical .mc-button+.mc-button,.mc-button-group_vertical .mc-button+.mc-icon-button,.mc-button-group_vertical .mc-icon-button+.mc-button,.mc-button-group_vertical .mc-icon-button+.mc-icon-button{margin-top:-1px}"],
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
@@ -1740,7 +1665,7 @@ var McButton = /** @class */ (function (_super) {
         { type: a11y.FocusMonitor }
     ]; };
     return McButton;
-}(_McButtonMixinBase));
+}(McButtonMixinBase));
 var McAnchor = /** @class */ (function (_super) {
     __extends(McAnchor, _super);
     function McAnchor(focusMonitor, elementRef) {
@@ -1750,7 +1675,7 @@ var McAnchor = /** @class */ (function (_super) {
      * @param {?} event
      * @return {?}
      */
-    McAnchor.prototype._haltDisabledEvents = /**
+    McAnchor.prototype.haltDisabledEvents = /**
      * @param {?} event
      * @return {?}
      */
@@ -1762,7 +1687,7 @@ var McAnchor = /** @class */ (function (_super) {
     };
     McAnchor.decorators = [
         { type: core.Component, args: [{
-                    selector: 'a[mc-button], a[mc-xs-button], a[mc-sm-button], a[mc-lg-button], a[mc-xl-button]',
+                    selector: 'a[mc-button]',
                     template: "<div class=\"mc-button-wrapper\"><ng-content></ng-content></div><div class=\"mc-button-overlay\"></div>",
                     styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;margin:0;border:1px solid transparent;border-radius:3px}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:0}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{pointer-events:none;cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:5px 15px;line-height:20px;font-size:15px}.mc-icon-button{padding:5px 7px;line-height:20px;font-size:15px}.mc-icon-button.mc-icon-button_left{padding-right:15px}.mc-icon-button.mc-icon-button_right{padding-left:15px}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:7px}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:7px}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}.mc-button-group{display:flex;flex-direction:row}.mc-button-group>.mc-button:first-of-type:not(:last-of-type),.mc-button-group>.mc-icon-button:first-of-type:not(:last-of-type){border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-group>.mc-button:last-of-type:not(:first-of-type),.mc-button-group>.mc-icon-button:last-of-type:not(:first-of-type){border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-group>.mc-button:not(:first-of-type):not(:last-of-type),.mc-button-group>.mc-icon-button:not(:first-of-type):not(:last-of-type){border-radius:0}.mc-button-group .mc-button+.mc-button,.mc-button-group .mc-button+.mc-icon-button,.mc-button-group .mc-icon-button+.mc-button,.mc-button-group .mc-icon-button+.mc-icon-button{margin-left:-1px}.mc-button-group_justified>.mc-button,.mc-button-group_justified>.mc-icon-button{width:100%}.mc-button-group_vertical{display:flex;flex-direction:column}.mc-button-group_vertical>.mc-button:first-child:not(:last-child),.mc-button-group_vertical>.mc-icon-button:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-group_vertical>.mc-button:last-child:not(:first-child),.mc-button-group_vertical>.mc-icon-button:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-group_vertical>.mc-button:not(:first-child):not(:last-child),.mc-button-group_vertical>.mc-icon-button:not(:first-child):not(:last-child){border-radius:0}.mc-button-group_vertical .mc-button+.mc-button,.mc-button-group_vertical .mc-button+.mc-icon-button,.mc-button-group_vertical .mc-icon-button+.mc-button,.mc-button-group_vertical .mc-icon-button+.mc-icon-button{margin-top:-1px}"],
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
@@ -1771,7 +1696,7 @@ var McAnchor = /** @class */ (function (_super) {
                     host: {
                         '[attr.tabindex]': 'disabled ? -1 : 0',
                         '[attr.disabled]': 'disabled || null',
-                        '(click)': '_haltDisabledEvents($event)'
+                        '(click)': 'haltDisabledEvents($event)'
                     }
                 },] },
     ];
@@ -1781,46 +1706,6 @@ var McAnchor = /** @class */ (function (_super) {
         { type: core.ElementRef }
     ]; };
     return McAnchor;
-}(McButton));
-var McIconButton = /** @class */ (function (_super) {
-    __extends(McIconButton, _super);
-    function McIconButton(focusMonitor, elementRef) {
-        return _super.call(this, elementRef, focusMonitor) || this;
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    McIconButton.prototype._haltDisabledEvents = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        if (this.disabled) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
-    };
-    McIconButton.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'button[mc-icon-button]',
-                    template: "<div class=\"mc-button-wrapper\"><ng-content></ng-content></div><div class=\"mc-button-overlay\"></div>",
-                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;margin:0;border:1px solid transparent;border-radius:3px}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:0}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{pointer-events:none;cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:5px 15px;line-height:20px;font-size:15px}.mc-icon-button{padding:5px 7px;line-height:20px;font-size:15px}.mc-icon-button.mc-icon-button_left{padding-right:15px}.mc-icon-button.mc-icon-button_right{padding-left:15px}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:7px}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:7px}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}.mc-button-group{display:flex;flex-direction:row}.mc-button-group>.mc-button:first-of-type:not(:last-of-type),.mc-button-group>.mc-icon-button:first-of-type:not(:last-of-type){border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-group>.mc-button:last-of-type:not(:first-of-type),.mc-button-group>.mc-icon-button:last-of-type:not(:first-of-type){border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-group>.mc-button:not(:first-of-type):not(:last-of-type),.mc-button-group>.mc-icon-button:not(:first-of-type):not(:last-of-type){border-radius:0}.mc-button-group .mc-button+.mc-button,.mc-button-group .mc-button+.mc-icon-button,.mc-button-group .mc-icon-button+.mc-button,.mc-button-group .mc-icon-button+.mc-icon-button{margin-left:-1px}.mc-button-group_justified>.mc-button,.mc-button-group_justified>.mc-icon-button{width:100%}.mc-button-group_vertical{display:flex;flex-direction:column}.mc-button-group_vertical>.mc-button:first-child:not(:last-child),.mc-button-group_vertical>.mc-icon-button:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-group_vertical>.mc-button:last-child:not(:first-child),.mc-button-group_vertical>.mc-icon-button:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-group_vertical>.mc-button:not(:first-child):not(:last-child),.mc-button-group_vertical>.mc-icon-button:not(:first-child):not(:last-child){border-radius:0}.mc-button-group_vertical .mc-button+.mc-button,.mc-button-group_vertical .mc-button+.mc-icon-button,.mc-button-group_vertical .mc-icon-button+.mc-button,.mc-button-group_vertical .mc-icon-button+.mc-icon-button{margin-top:-1px}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    inputs: ['disabled', 'color'],
-                    host: {
-                        '[attr.tabindex]': 'disabled ? -1 : 0',
-                        '[attr.disabled]': 'disabled || null'
-                    }
-                },] },
-    ];
-    /** @nocollapse */
-    McIconButton.ctorParameters = function () { return [
-        { type: a11y.FocusMonitor },
-        { type: core.ElementRef }
-    ]; };
-    return McIconButton;
 }(McButton));
 
 /**
@@ -1840,16 +1725,12 @@ var McButtonModule = /** @class */ (function () {
                     exports: [
                         McButton,
                         McAnchor,
-                        McIconButton,
-                        McButtonCSSStyler,
-                        McIconButtonCSSStyler
+                        McButtonCssStyler
                     ],
                     declarations: [
                         McButton,
                         McAnchor,
-                        McIconButton,
-                        McButtonCSSStyler,
-                        McIconButtonCSSStyler
+                        McButtonCssStyler
                     ]
                 },] },
     ];
@@ -2441,7 +2322,7 @@ var McButtonToggle = /** @class */ (function () {
         { type: core.Component, args: [{
                     selector: 'mc-button-toggle',
                     template: "\n        <button\n            mc-button\n            [disabled]=\"disabled\"\n            [attr.tabindex]=\"disabled ? -1 : tabIndex\"\n            (click)=\"onToggleClick()\">\n            <ng-content></ng-content>\n        </button>\n    ",
-                    styles: [".mc-button-toggle-group{display:flex;flex-direction:row}.mc-button-toggle-group:not(.mc-button-toggle-vertical) .mc-button-toggle:not([disabled])+.mc-button-toggle:not([disabled]){margin-left:-1px}.mc-button-toggle-group .mc-button-toggle>.mc-button{padding:5px 7px}.mc-button-toggle-group .mc-button-toggle:first-of-type:not(:last-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:first-of-type:not(:last-of-type)>.mc-icon-button{border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-toggle-group .mc-button-toggle:last-of-type:not(:first-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:last-of-type:not(:first-of-type)>.mc-icon-button{border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-toggle-group .mc-button-toggle:not(:first-of-type):not(:last-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:not(:first-of-type):not(:last-of-type)>.mc-icon-button{border-radius:0}.mc-button-toggle-vertical{flex-direction:column}.mc-button-toggle-vertical .mc-button-toggle:not([disabled])+.mc-button-toggle:not([disabled]){margin-top:-1px}.mc-button-toggle-vertical .mc-button-toggle .mc-button,.mc-button-toggle-vertical .mc-button-toggle .mc-icon-button{width:100%}.mc-button-toggle-vertical .mc-button-toggle:first-child:not(:last-child)>.mc-button,.mc-button-toggle-vertical .mc-button-toggle:first-child:not(:last-child)>.mc-icon-button{border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-toggle-vertical .mc-button-toggle:last-child:not(:first-child)>.mc-button,.mc-button-toggle-vertical .mc-button-toggle:last-child:not(:first-child)>.mc-icon-button{border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-toggle-vertical .mc-button-toggle:not(:first-child):not(:last-child)>.mc-button,.mc-button-toggle-vertical .mc-button-toggle:not(:first-child):not(:last-child)>.mc-icon-button{border-radius:0}"],
+                    styles: [".mc-button-toggle-group{display:flex;flex-direction:row}.mc-button-toggle-group:not(.mc-button-toggle-vertical) .mc-button-toggle:not([disabled])+.mc-button-toggle:not([disabled]){margin-left:-1px}.mc-button-toggle-group .mc-button-toggle:first-of-type:not(:last-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:first-of-type:not(:last-of-type)>.mc-icon-button{border-bottom-right-radius:0;border-top-right-radius:0}.mc-button-toggle-group .mc-button-toggle:last-of-type:not(:first-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:last-of-type:not(:first-of-type)>.mc-icon-button{border-bottom-left-radius:0;border-top-left-radius:0}.mc-button-toggle-group .mc-button-toggle:not(:first-of-type):not(:last-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:not(:first-of-type):not(:last-of-type)>.mc-icon-button{border-radius:0}.mc-button-toggle-vertical{flex-direction:column}.mc-button-toggle-vertical .mc-button-toggle:not([disabled])+.mc-button-toggle:not([disabled]){margin-top:-1px}.mc-button-toggle-vertical .mc-button-toggle .mc-button,.mc-button-toggle-vertical .mc-button-toggle .mc-icon-button{width:100%}.mc-button-toggle-vertical .mc-button-toggle:first-child:not(:last-child)>.mc-button,.mc-button-toggle-vertical .mc-button-toggle:first-child:not(:last-child)>.mc-icon-button{border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px}.mc-button-toggle-vertical .mc-button-toggle:last-child:not(:first-child)>.mc-button,.mc-button-toggle-vertical .mc-button-toggle:last-child:not(:first-child)>.mc-icon-button{border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px}.mc-button-toggle-vertical .mc-button-toggle:not(:first-child):not(:last-child)>.mc-button,.mc-button-toggle-vertical .mc-button-toggle:not(:first-child):not(:last-child)>.mc-icon-button{border-radius:0}"],
                     encapsulation: core.ViewEncapsulation.None,
                     exportAs: 'mcButtonToggle',
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
@@ -3238,6 +3119,90 @@ var McCheckboxModule = /** @class */ (function () {
                 },] },
     ];
     return McCheckboxModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McIconCSSStyler = /** @class */ (function () {
+    function McIconCSSStyler() {
+    }
+    McIconCSSStyler.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mc-icon]',
+                    host: { class: 'mc mc-icon' }
+                },] },
+    ];
+    return McIconCSSStyler;
+}());
+var McIconBase = /** @class */ (function () {
+    function McIconBase(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+    return McIconBase;
+}());
+/** @type {?} */
+var _McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
+var McIcon = /** @class */ (function (_super) {
+    __extends(McIcon, _super);
+    function McIcon(elementRef, iconName) {
+        var _this = _super.call(this, elementRef) || this;
+        elementRef.nativeElement.classList.add(iconName);
+        return _this;
+    }
+    /**
+     * @return {?}
+     */
+    McIcon.prototype._getHostElement = /**
+     * @return {?}
+     */
+    function () {
+        return this._elementRef.nativeElement;
+    };
+    McIcon.decorators = [
+        { type: core.Component, args: [{
+                    selector: "[mc-icon]",
+                    template: '<ng-content></ng-content>',
+                    styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core.ViewEncapsulation.None,
+                    inputs: ['color']
+                },] },
+    ];
+    /** @nocollapse */
+    McIcon.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
+    ]; };
+    return McIcon;
+}(_McIconMixinBase));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McIconModule = /** @class */ (function () {
+    function McIconModule() {
+    }
+    McIconModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        a11y.A11yModule,
+                        platform.PlatformModule
+                    ],
+                    exports: [
+                        McIcon,
+                        McIconCSSStyler
+                    ],
+                    declarations: [
+                        McIcon,
+                        McIconCSSStyler
+                    ]
+                },] },
+    ];
+    return McIconModule;
 }());
 
 /**
@@ -6389,7 +6354,7 @@ var McCalendarHeader = /** @class */ (function () {
     McCalendarHeader.decorators = [
         { type: core.Component, args: [{
                     selector: 'mc-calendar-header',
-                    template: "<div class=\"mc-calendar__header\"><div class=\"mc-calendar__controls\"><button mc-button type=\"button\" class=\"mc-calendar__period-button\" (click)=\"currentPeriodClicked()\" [attr.aria-label]=\"periodButtonLabel\">{{periodButtonText}} <i class=\"mc mc-icon\" [class.mc-angle-up-M_16]=\"calendar.currentView !== 'month'\" [class.mc-angle-down-M_16]=\"calendar.currentView === 'month'\"></i></button><div class=\"mc-calendar-spacer\"></div><ng-content></ng-content><button mc-icon-button type=\"button\" class=\"mc-calendar__previous-button\" [disabled]=\"!previousEnabled()\" (click)=\"previousClicked()\" [attr.aria-label]=\"prevButtonLabel\"><i mc-icon=\"mc-angle-left-L_16\"></i></button> <button mc-icon-button type=\"button\" class=\"mc-calendar__next-button\" [disabled]=\"!nextEnabled()\" (click)=\"nextClicked()\" [attr.aria-label]=\"nextButtonLabel\"><i mc-icon=\"mc-angle-right-L_16\"></i></button></div></div>",
+                    template: "<div class=\"mc-calendar__header\"><div class=\"mc-calendar__controls\"><button mc-button type=\"button\" class=\"mc-calendar__period-button\" (click)=\"currentPeriodClicked()\" [attr.aria-label]=\"periodButtonLabel\">{{periodButtonText}} <i class=\"mc mc-icon\" [class.mc-angle-up-M_16]=\"calendar.currentView !== 'month'\" [class.mc-angle-down-M_16]=\"calendar.currentView === 'month'\"></i></button><div class=\"mc-calendar-spacer\"></div><ng-content></ng-content><button mc-button type=\"button\" class=\"mc-calendar__previous-button\" [disabled]=\"!previousEnabled()\" (click)=\"previousClicked()\" [attr.aria-label]=\"prevButtonLabel\"><i mc-icon=\"mc-angle-left-L_16\"></i></button> <button mc-button type=\"button\" class=\"mc-calendar__next-button\" [disabled]=\"!nextEnabled()\" (click)=\"nextClicked()\" [attr.aria-label]=\"nextButtonLabel\"><i mc-icon=\"mc-angle-right-L_16\"></i></button></div></div>",
                     exportAs: 'mcCalendarHeader',
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush
@@ -8138,7 +8103,7 @@ var McDatepickerToggle = /** @class */ (function () {
     McDatepickerToggle.decorators = [
         { type: core.Component, args: [{
                     selector: 'mc-datepicker-toggle',
-                    template: "<button #button mc-icon-button type=\"button\" class=\"mc-datepicker-toggle__button\" aria-haspopup=\"true\" [attr.aria-label]=\"intl.openCalendarLabel\" [attr.tabindex]=\"disabled ? -1 : tabIndex\" [disabled]=\"disabled\" (click)=\"open($event)\"><i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i><ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content></button>",
+                    template: "<button #button mc-button type=\"button\" class=\"mc-datepicker-toggle__button\" aria-haspopup=\"true\" [attr.aria-label]=\"intl.openCalendarLabel\" [attr.tabindex]=\"disabled ? -1 : tabIndex\" [disabled]=\"disabled\" (click)=\"open($event)\"><i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i><ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content></button>",
                     styles: [".mc-datepicker-toggle:focus{outline:0}.mc-datepicker-toggle__button.mc-icon-button{width:30px;height:30px;margin-left:2px}.mc-form-field-appearance-legacy .mc-form-field-prefix .mc-datepicker-toggle__default-icon,.mc-form-field-appearance-legacy .mc-form-field-suffix .mc-datepicker-toggle__default-icon{width:1em}.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-prefix .mc-datepicker-toggle__default-icon,.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-suffix .mc-datepicker-toggle__default-icon{display:block;width:1.5em;height:1.5em}.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-prefix .mc-icon-button .mc-datepicker-toggle__default-icon,.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-suffix .mc-icon-button .mc-datepicker-toggle__default-icon{margin:auto}"],
                     host: {
                         class: 'mc-datepicker-toggle',
@@ -25192,13 +25157,11 @@ exports.SELECT_PANEL_VIEWPORT_PADDING = SELECT_PANEL_VIEWPORT_PADDING;
 exports.MC_SELECT_SCROLL_STRATEGY = MC_SELECT_SCROLL_STRATEGY;
 exports.MC_SELECT_SCROLL_STRATEGY_PROVIDER = MC_SELECT_SCROLL_STRATEGY_PROVIDER;
 exports.McButtonModule = McButtonModule;
-exports.McButtonCSSStyler = McButtonCSSStyler;
-exports.McIconButtonCSSStyler = McIconButtonCSSStyler;
+exports.McButtonCssStyler = McButtonCssStyler;
 exports.McButtonBase = McButtonBase;
-exports._McButtonMixinBase = _McButtonMixinBase;
+exports.McButtonMixinBase = McButtonMixinBase;
 exports.McButton = McButton;
 exports.McAnchor = McAnchor;
-exports.McIconButton = McIconButton;
 exports.McButtonToggleModule = McButtonToggleModule;
 exports.MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR = MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR;
 exports.McButtonToggleChange = McButtonToggleChange;
