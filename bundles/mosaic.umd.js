@@ -25109,7 +25109,7 @@ var McToolTipModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var VERSION = new core.Version('1.0.0-beta.4');
+var VERSION = new core.Version('1.0.0-beta.5');
 
 exports.VERSION = VERSION;
 exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
@@ -25241,10 +25241,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc24 = MAX_VALIDATOR;
-exports.ɵa24 = MIN_VALIDATOR;
-exports.ɵd24 = MaxValidator;
-exports.ɵb24 = MinValidator;
+exports.ɵc23 = MAX_VALIDATOR;
+exports.ɵa23 = MIN_VALIDATOR;
+exports.ɵd23 = MaxValidator;
+exports.ɵb23 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -25389,13 +25389,13 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵb20 = mcSidepanelAnimations;
-exports.ɵa20 = mcSidepanelTransformAnimation;
-exports.ɵg20 = McSidepanelActions;
-exports.ɵe20 = McSidepanelBody;
-exports.ɵc20 = McSidepanelClose;
-exports.ɵf20 = McSidepanelFooter;
-exports.ɵd20 = McSidepanelHeader;
+exports.ɵb21 = mcSidepanelAnimations;
+exports.ɵa21 = mcSidepanelTransformAnimation;
+exports.ɵg21 = McSidepanelActions;
+exports.ɵe21 = McSidepanelBody;
+exports.ɵc21 = McSidepanelClose;
+exports.ɵf21 = McSidepanelFooter;
+exports.ɵd21 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;

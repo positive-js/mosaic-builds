@@ -15,7 +15,7 @@ export { McDivider, McDividerModule } from '@ptsecurity/mosaic/divider';
 export { McDropdownModule, MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY, MC_DROPDOWN_DEFAULT_OPTIONS, McDropdown, McDropdownItemBase, _McDropdownItemMixinBase, McDropdownItem, MC_DROPDOWN_PANEL, throwMcDropdownMissingError, throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY, mcDropdownAnimations, fadeInItems, transformDropdown, McDropdownContent, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY, MC_DROPDOWN_SCROLL_STRATEGY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER, McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 export { McFormFieldModule, McFormFieldBase, _McFormFieldMixinBase, McFormField, McFormFieldWithoutBorders, McFormFieldControl, McFormFieldNumberControl, getMcFormFieldMissingControlError, McHint, McSuffix, McPrefix, McCleaner, McStepper } from '@ptsecurity/mosaic/form-field';
 export { McIconModule, McIconCSSStyler, McIconBase, _McIconMixinBase, McIcon } from '@ptsecurity/mosaic/icon';
-export { ɵc24, ɵa24, ɵd24, ɵb24, McInputModule, BIG_STEP, SMALL_STEP, McInputBase, _McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
+export { ɵc23, ɵa23, ɵd23, ɵb23, McInputModule, BIG_STEP, SMALL_STEP, McInputBase, _McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
 export { McContentComponent, McFooterComponent, McHeaderComponent, McLayoutComponent, McSidebarComponent, McLayoutModule } from '@ptsecurity/mosaic/layout';
 export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, _McListSelectionMixinBase, McListSelection } from '@ptsecurity/mosaic/list';
 export { McLinkModule, McLinkBase, _McLinkBase, McLink } from '@ptsecurity/mosaic/link';
@@ -31,7 +31,7 @@ export { McTreeSelectModule, McTreeSelectChange, McTreeSelectTrigger, McTreeSele
 export { McTagBase, _McTagMixinBase, McTag, McTagModule } from '@ptsecurity/mosaic/tag';
 export { MC_TEXTAREA_VALUE_ACCESSOR, McTextareaBase, McTextareaMixinBase, McTextarea, McTextareaModule } from '@ptsecurity/mosaic/textarea';
 export { McTimepickerModule, TimeParts, TimeFormats, TIMEFORMAT_PLACEHOLDERS, DEFAULT_TIME_FORMAT, HOURS_MINUTES_SECONDS_REGEXP, HOURS_MINUTES_REGEXP, HOURS_ONLY_REGEXP, SECONDS_PER_MINUTE, MINUTES_PER_HOUR, HOURS_PER_DAY, ARROW_UP_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_LEFT_KEYCODE, ARROW_RIGHT_KEYCODE, McTimepickerBase, McTimepickerMixinBase, McTimepicker } from '@ptsecurity/mosaic/timepicker';
-export { ɵb20, ɵa20, ɵg20, ɵe20, ɵc20, ɵf20, ɵd20, McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef } from '@ptsecurity/mosaic/sidepanel';
+export { ɵb21, ɵa21, ɵg21, ɵe21, ɵc21, ɵf21, ɵd21, McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef } from '@ptsecurity/mosaic/sidepanel';
 export { McSplitterModule, McSplitterComponent, McGutterDirective, McSplitterAreaDirective } from '@ptsecurity/mosaic/splitter';
 export { McToggleModule, McToggleBase, _McToggleMixinBase, McToggleChange, McToggleComponent } from '@ptsecurity/mosaic/toggle';
 export { McToolTipModule, mcTooltipScrollStrategyFactory, getMcTooltipInvalidPositionError, McTooltipComponent, MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McTooltip } from '@ptsecurity/mosaic/tooltip';
@@ -41,7 +41,7 @@ export { McToolTipModule, mcTooltipScrollStrategyFactory, getMcTooltipInvalidPos
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('1.0.0-beta.4');
+const VERSION = new Version('1.0.0-beta.5');
 
 /**
  * @fileoverview added by tsickle
