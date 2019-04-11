@@ -1406,8 +1406,8 @@ exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
 exports.McModalService = McModalService;
-exports.ɵb26 = CssUnitPipe;
-exports.ɵa26 = McModalControlService;
+exports.ɵb27 = CssUnitPipe;
+exports.ɵa27 = McModalControlService;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
