@@ -728,5 +728,5 @@ McSidepanelModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef, mcSidepanelAnimations as ɵb21, mcSidepanelTransformAnimation as ɵa21, McSidepanelActions as ɵg21, McSidepanelBody as ɵe21, McSidepanelClose as ɵc21, McSidepanelFooter as ɵf21, McSidepanelHeader as ɵd21 };
+export { McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef, mcSidepanelAnimations as ɵb19, mcSidepanelTransformAnimation as ɵa19, McSidepanelActions as ɵg19, McSidepanelBody as ɵe19, McSidepanelClose as ɵc19, McSidepanelFooter as ɵf19, McSidepanelHeader as ɵd19 };
 //# sourceMappingURL=sidepanel.js.map
