@@ -12,13 +12,13 @@ export declare class McOptionSelectionChange {
  * Contains properties that the options can inherit.
  * @docs-private
  */
-export interface IMcOptionParentComponent {
+export interface McOptionParentComponent {
     multiple?: boolean;
 }
 /**
  * Injection token used to provide the parent component to options.
  */
-export declare const MC_OPTION_PARENT_COMPONENT: InjectionToken<IMcOptionParentComponent>;
+export declare const MC_OPTION_PARENT_COMPONENT: InjectionToken<McOptionParentComponent>;
 /**
  * Single option inside of a `<mc-select>` element.
  */
@@ -55,7 +55,7 @@ export declare class McOption implements AfterViewChecked, OnDestroy {
     readonly active: boolean;
     private _active;
     private mostRecentViewValue;
-    constructor(element: ElementRef, changeDetectorRef: ChangeDetectorRef, parent: IMcOptionParentComponent, group: McOptgroup);
+    constructor(element: ElementRef, changeDetectorRef: ChangeDetectorRef, parent: McOptionParentComponent, group: McOptgroup);
     ngAfterViewChecked(): void;
     ngOnDestroy(): void;
     select(): void;

@@ -23,6 +23,7 @@ export declare class McFormField extends _McFormFieldMixinBase implements AfterC
     _suffix: QueryList<McSuffix>;
     _prefix: QueryList<McPrefix>;
     _cleaner: QueryList<McCleaner>;
+    connectionContainerRef: ElementRef;
     _labelId: string;
     hovered: boolean;
     constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef);
@@ -35,6 +36,11 @@ export declare class McFormField extends _McFormFieldMixinBase implements AfterC
     onHoverChanged(isHovered: boolean): void;
     onStepUp(): void;
     onStepDown(): void;
+    /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     */
+    getConnectedOverlayOrigin(): ElementRef;
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     _shouldForward(prop: keyof NgControl): boolean;
     /** Throws an error if the form field's control is missing. */

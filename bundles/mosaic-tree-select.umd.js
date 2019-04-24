@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/tag'), require('@ptsecurity/mosaic/tree'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree-select', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/tag', '@ptsecurity/mosaic/tree', 'rxjs', 'rxjs/operators', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.treeSelect = {}),global.ng.core,global.ng.forms,global.ng.cdk.bidi,global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.cdk.keycodes,global.ng.cdk.overlay,global.ng.cdk.tree,global.ng.mosaic.core,global.ng.mosaic.formField,global.ng.mosaic.tag,global.ng.mosaic.tree,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.mosaic.icon));
-}(this, (function (exports,core,forms,bidi,coercion,collections,keycodes,overlay,tree,core$1,formField,tag,tree$1,rxjs,operators,common,icon) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/tags'), require('@ptsecurity/mosaic/tree'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree-select', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/tags', '@ptsecurity/mosaic/tree', 'rxjs', 'rxjs/operators', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.treeSelect = {}),global.ng.core,global.ng.forms,global.ng.cdk.bidi,global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.cdk.keycodes,global.ng.cdk.overlay,global.ng.cdk.tree,global.ng.mosaic.core,global.ng.mosaic.formField,global.ng.mosaic.tags,global.ng.mosaic.tree,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.mosaic.icon));
+}(this, (function (exports,core,forms,bidi,coercion,collections,keycodes,overlay,tree,core$1,formField,tags,tree$1,rxjs,operators,common,icon) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -959,9 +959,9 @@ var McTreeSelect = /** @class */ (function (_super) {
         var totalVisibleItemsWidth = 0;
         /** @type {?} */
         var itemMargin = 4;
-        this.tags.forEach(function (tag$$1) {
-            if (tag$$1.nativeElement.offsetTop < tag$$1.nativeElement.offsetHeight) {
-                totalVisibleItemsWidth += tag$$1.nativeElement.getBoundingClientRect().width + itemMargin;
+        this.tags.forEach(function (tag) {
+            if (tag.nativeElement.offsetTop < tag.nativeElement.offsetHeight) {
+                totalVisibleItemsWidth += tag.nativeElement.getBoundingClientRect().width + itemMargin;
                 visibleItems++;
             }
         });
@@ -1807,7 +1807,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         trigger: [{ type: core.ViewChild, args: ['trigger',] }],
         panel: [{ type: core.ViewChild, args: ['panel',] }],
         overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay,] }],
-        tags: [{ type: core.ViewChildren, args: [tag.McTag,] }],
+        tags: [{ type: core.ViewChildren, args: [tags.McTag,] }],
         customTrigger: [{ type: core.ContentChild, args: [McTreeSelectTrigger,] }],
         tree: [{ type: core.ContentChild, args: [tree$1.McTreeSelection,] }],
         openedChange: [{ type: core.Output }],
@@ -1844,7 +1844,7 @@ var McTreeSelectModule = /** @class */ (function () {
                         tree.CdkTreeModule,
                         tree$1.McTreeModule,
                         icon.McIconModule,
-                        tag.McTagModule,
+                        tags.McTagsModule,
                         core$1.McPseudoCheckboxModule
                     ],
                     exports: [McTreeSelect, McTreeSelectTrigger, common.CommonModule],

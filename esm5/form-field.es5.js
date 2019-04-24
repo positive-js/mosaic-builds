@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Component, Directive, Input, EventEmitter, Output, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, ContentChildren, ElementRef, ViewEncapsulation, NgModule } from '@angular/core';
+import { Component, Directive, Input, EventEmitter, Output, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, ContentChildren, ElementRef, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
 import { __extends } from 'tslib';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { mixinColor } from '@ptsecurity/mosaic/core';
@@ -339,6 +339,23 @@ var McFormField = /** @class */ (function (_super) {
             this._numberControl.stepDown(this._numberControl.step);
         }
     };
+    /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     */
+    /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     * @return {?}
+     */
+    McFormField.prototype.getConnectedOverlayOrigin = /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     * @return {?}
+     */
+    function () {
+        return this.connectionContainerRef || this._elementRef;
+    };
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     /**
      * Determines whether a class from the NgControl should be forwarded to the host element.
@@ -504,7 +521,8 @@ var McFormField = /** @class */ (function (_super) {
         _hint: [{ type: ContentChildren, args: [McHint,] }],
         _suffix: [{ type: ContentChildren, args: [McSuffix,] }],
         _prefix: [{ type: ContentChildren, args: [McPrefix,] }],
-        _cleaner: [{ type: ContentChildren, args: [McCleaner,] }]
+        _cleaner: [{ type: ContentChildren, args: [McCleaner,] }],
+        connectionContainerRef: [{ type: ViewChild, args: ['connectionContainer',] }]
     };
     return McFormField;
 }(_McFormFieldMixinBase));

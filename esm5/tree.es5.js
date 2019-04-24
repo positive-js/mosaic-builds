@@ -577,7 +577,6 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function () {
         this.keyManager = new ActiveDescendantKeyManager(this.options)
-            // .withTypeAhead()
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
     };
@@ -600,6 +599,7 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (event) {
+        // tslint:disable-next-line: deprecation
         /** @type {?} */
         var keyCode = event.keyCode;
         this.withShift = event.shiftKey;

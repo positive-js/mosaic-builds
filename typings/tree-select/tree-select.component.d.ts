@@ -5,7 +5,7 @@ import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkConnectedOverlay, ViewportRuler } from '@ptsecurity/cdk/overlay';
 import { CanDisable, CanUpdateErrorState, ErrorStateMatcher, HasTabIndex, CanDisableCtor, HasTabIndexCtor, CanUpdateErrorStateCtor } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { McTag } from '@ptsecurity/mosaic/tag';
+import { McTag } from '@ptsecurity/mosaic/tags';
 import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { Observable, Subject } from 'rxjs';
 /** Change event object that is emitted when the select value has changed. */

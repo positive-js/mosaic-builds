@@ -1,0 +1,8 @@
+{
+    "name": "@ptsecurity/mosaic/tags",
+    "typings": "../tags.d.ts",
+    "main": "../bundles/mosaic-tags.umd.js",
+    "module": "../esm5/tags.es5.js",
+    "es2015": "../esm2015/tags.js",
+    "sideEffects": false
+}

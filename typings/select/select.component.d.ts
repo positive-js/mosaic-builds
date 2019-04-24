@@ -6,7 +6,7 @@ import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkConnectedOverlay, ViewportRuler } from '@ptsecurity/cdk/overlay';
 import { CanDisable, CanDisableCtor, CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, HasTabIndex, HasTabIndexCtor, McOptgroup, McOption, McOptionSelectionChange } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { McTag } from '@ptsecurity/mosaic/tag';
+import { McTag } from '@ptsecurity/mosaic/tags';
 import { Observable, Subject } from 'rxjs';
 /** The height of the select items in `em` units. */
 export declare const SELECT_ITEM_HEIGHT_EM = 2;

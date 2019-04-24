@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/tag'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/select', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', '@ptsecurity/cdk/overlay', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/tag', 'rxjs', 'rxjs/operators', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.select = {}),global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.bidi,global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.cdk.keycodes,global.ng.cdk.overlay,global.ng.mosaic.core,global.ng.mosaic.formField,global.ng.mosaic.tag,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.mosaic.icon));
-}(this, (function (exports,core,forms,a11y,bidi,coercion,collections,keycodes,overlay,core$1,formField,tag,rxjs,operators,common,icon) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/tags'), require('rxjs'), require('rxjs/operators'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/select', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', '@ptsecurity/cdk/overlay', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/tags', 'rxjs', 'rxjs/operators', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.select = {}),global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.bidi,global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.cdk.keycodes,global.ng.cdk.overlay,global.ng.mosaic.core,global.ng.mosaic.formField,global.ng.mosaic.tags,global.rxjs,global.rxjs.operators,global.ng.common,global.ng.mosaic.icon));
+}(this, (function (exports,core,forms,a11y,bidi,coercion,collections,keycodes,overlay,core$1,formField,tags,rxjs,operators,common,icon) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -938,9 +938,9 @@ var McSelect = /** @class */ (function (_super) {
         var totalVisibleItemsWidth = 0;
         /** @type {?} */
         var itemMargin = 4;
-        this.tags.forEach(function (tag$$1) {
-            if (tag$$1.nativeElement.offsetTop < tag$$1.nativeElement.offsetHeight) {
-                totalVisibleItemsWidth += tag$$1.nativeElement.getBoundingClientRect().width + itemMargin;
+        this.tags.forEach(function (tag) {
+            if (tag.nativeElement.offsetTop < tag.nativeElement.offsetHeight) {
+                totalVisibleItemsWidth += tag.nativeElement.getBoundingClientRect().width + itemMargin;
                 visibleItems++;
             }
         });
@@ -1780,7 +1780,7 @@ var McSelect = /** @class */ (function (_super) {
         trigger: [{ type: core.ViewChild, args: ['trigger',] }],
         panel: [{ type: core.ViewChild, args: ['panel',] }],
         overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay,] }],
-        tags: [{ type: core.ViewChildren, args: [tag.McTag,] }],
+        tags: [{ type: core.ViewChildren, args: [tags.McTag,] }],
         customTrigger: [{ type: core.ContentChild, args: [McSelectTrigger,] }],
         options: [{ type: core.ContentChildren, args: [core$1.McOption, { descendants: true },] }],
         optionGroups: [{ type: core.ContentChildren, args: [core$1.McOptgroup,] }],
@@ -1816,7 +1816,7 @@ var McSelectModule = /** @class */ (function () {
                         overlay.OverlayModule,
                         core$1.McOptionModule,
                         icon.McIconModule,
-                        tag.McTagModule
+                        tags.McTagsModule
                     ],
                     exports: [formField.McFormFieldModule, McSelect, McSelectTrigger, core$1.McOptionModule, common.CommonModule],
                     declarations: [McSelect, McSelectTrigger],

@@ -61,16 +61,13 @@
       "from": "./form-field"
     },
     {
-      "from": "./tag"
-    },
-    {
       "from": "./splitter"
     },
     {
       "from": "./sidepanel"
     },
     {
-      "from": "./select"
+      "from": "./tags"
     },
     {
       "from": "./modal"
@@ -85,13 +82,16 @@
       "from": "./button-toggle"
     },
     {
-      "from": "./tree-select"
+      "from": "./select"
     },
     {
       "from": "./timepicker"
     },
     {
       "from": "./datepicker"
+    },
+    {
+      "from": "./tree-select"
     },
     {
       "from": "./typings/index"

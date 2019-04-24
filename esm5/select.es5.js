@@ -15,7 +15,7 @@ import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW,
 import { CdkConnectedOverlay, ViewportRuler, OverlayModule } from '@ptsecurity/cdk/overlay';
 import { countGroupLabelsBeforeOption, getOptionScrollPosition, ErrorStateMatcher, MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption, mixinDisabled, mixinErrorState, mixinTabIndex, mcSelectAnimations, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McOptionModule } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
-import { McTag, McTagModule } from '@ptsecurity/mosaic/tag';
+import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
 import { defer, merge, Subject } from 'rxjs';
 import { filter, map, startWith, switchMap, take, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
@@ -1798,7 +1798,7 @@ var McSelectModule = /** @class */ (function () {
                         OverlayModule,
                         McOptionModule,
                         McIconModule,
-                        McTagModule
+                        McTagsModule
                     ],
                     exports: [McFormFieldModule, McSelect, McSelectTrigger, McOptionModule, CommonModule],
                     declarations: [McSelect, McSelectTrigger],

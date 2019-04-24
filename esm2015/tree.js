@@ -460,7 +460,6 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
      */
     ngAfterContentInit() {
         this.keyManager = new ActiveDescendantKeyManager(this.options)
-            // .withTypeAhead()
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
     }
@@ -476,6 +475,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
      * @return {?}
      */
     onKeyDown(event) {
+        // tslint:disable-next-line: deprecation
         /** @type {?} */
         const keyCode = event.keyCode;
         this.withShift = event.shiftKey;

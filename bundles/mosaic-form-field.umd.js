@@ -365,6 +365,23 @@ var McFormField = /** @class */ (function (_super) {
             this._numberControl.stepDown(this._numberControl.step);
         }
     };
+    /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     */
+    /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     * @return {?}
+     */
+    McFormField.prototype.getConnectedOverlayOrigin = /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     * @return {?}
+     */
+    function () {
+        return this.connectionContainerRef || this._elementRef;
+    };
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     /**
      * Determines whether a class from the NgControl should be forwarded to the host element.
@@ -530,7 +547,8 @@ var McFormField = /** @class */ (function (_super) {
         _hint: [{ type: core.ContentChildren, args: [McHint,] }],
         _suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
         _prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
-        _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }]
+        _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }],
+        connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer',] }]
     };
     return McFormField;
 }(_McFormFieldMixinBase));
