@@ -457,6 +457,7 @@ McButtonToggle.decorators = [
                 template: `
         <button
             mc-button
+            type="button"
             [disabled]="disabled"
             [attr.tabindex]="disabled ? -1 : tabIndex"
             (click)="onToggleClick()">
