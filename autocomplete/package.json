@@ -1,0 +1,8 @@
+{
+    "name": "@ptsecurity/mosaic/autocomplete",
+    "typings": "../autocomplete.d.ts",
+    "main": "../bundles/mosaic-autocomplete.umd.js",
+    "module": "../esm5/autocomplete.es5.js",
+    "es2015": "../esm2015/autocomplete.js",
+    "sideEffects": false
+}

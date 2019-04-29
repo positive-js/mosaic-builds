@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('@angular/forms'), require('@ptsecurity/cdk/collections'), require('rxjs/operators'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/cdk/portal'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/cdk/scrolling')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', '@angular/forms', '@ptsecurity/cdk/collections', 'rxjs/operators', '@ptsecurity/cdk/datetime', '@ptsecurity/cdk/portal', '@ptsecurity/cdk/tree', '@ptsecurity/cdk/scrolling'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.overlay,global.ng.cdk.a11y,global.ng.cdk.platform,global.ng.forms,global.ng.cdk.collections,global.rxjs.operators,global.ng.cdk.datetime,global.ng.cdk.portal,global.ng.cdk.tree,global.ng.cdk.scrolling));
-}(this, (function (exports,core,bidi,coercion,rxjs,common,keycodes,animations,overlay,a11y,platform,forms,collections,operators,datetime,portal,tree,scrolling) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('rxjs/operators'), require('@angular/forms'), require('@ptsecurity/cdk/portal'), require('@ptsecurity/cdk/scrolling'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/cdk/tree')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', 'rxjs/operators', '@angular/forms', '@ptsecurity/cdk/portal', '@ptsecurity/cdk/scrolling', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/datetime', '@ptsecurity/cdk/tree'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.overlay,global.ng.cdk.a11y,global.ng.cdk.platform,global.rxjs.operators,global.ng.forms,global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.collections,global.ng.cdk.datetime,global.ng.cdk.tree));
+}(this, (function (exports,core,bidi,coercion,rxjs,common,keycodes,animations,overlay,a11y,platform,operators,forms,portal,scrolling,collections,datetime,tree) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1519,6 +1519,1792 @@ var mcSelectAnimations = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var McIconCSSStyler = /** @class */ (function () {
+    function McIconCSSStyler() {
+    }
+    McIconCSSStyler.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mc-icon]',
+                    host: { class: 'mc mc-icon' }
+                },] },
+    ];
+    return McIconCSSStyler;
+}());
+var McIconBase = /** @class */ (function () {
+    function McIconBase(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+    return McIconBase;
+}());
+/** @type {?} */
+var _McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
+var McIcon = /** @class */ (function (_super) {
+    __extends(McIcon, _super);
+    function McIcon(elementRef, iconName) {
+        var _this = _super.call(this, elementRef) || this;
+        elementRef.nativeElement.classList.add(iconName);
+        return _this;
+    }
+    /**
+     * @return {?}
+     */
+    McIcon.prototype._getHostElement = /**
+     * @return {?}
+     */
+    function () {
+        return this._elementRef.nativeElement;
+    };
+    McIcon.decorators = [
+        { type: core.Component, args: [{
+                    selector: "[mc-icon]",
+                    template: '<ng-content></ng-content>',
+                    styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    encapsulation: core.ViewEncapsulation.None,
+                    inputs: ['color']
+                },] },
+    ];
+    /** @nocollapse */
+    McIcon.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
+    ]; };
+    return McIcon;
+}(_McIconMixinBase));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McIconModule = /** @class */ (function () {
+    function McIconModule() {
+    }
+    McIconModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        a11y.A11yModule,
+                        platform.PlatformModule
+                    ],
+                    exports: [
+                        McIcon,
+                        McIconCSSStyler
+                    ],
+                    declarations: [
+                        McIcon,
+                        McIconCSSStyler
+                    ]
+                },] },
+    ];
+    return McIconModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McCleaner = /** @class */ (function () {
+    function McCleaner() {
+    }
+    McCleaner.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-cleaner',
+                    template: '<i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>'
+                },] },
+    ];
+    return McCleaner;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * An interface which allows a control to work inside of a `MсFormField`.
+ * @abstract
+ * @template T
+ */
+var   /**
+ * An interface which allows a control to work inside of a `MсFormField`.
+ * @abstract
+ * @template T
+ */
+McFormFieldControl = /** @class */ (function () {
+    function McFormFieldControl() {
+    }
+    return McFormFieldControl;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @return {?}
+ */
+function getMcFormFieldMissingControlError() {
+    return Error('mc-form-field must contain a McFormFieldControl.');
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * An interface which allows a control to work inside of a `MсFormField`.
+ * @abstract
+ * @template T
+ */
+var   /**
+ * An interface which allows a control to work inside of a `MсFormField`.
+ * @abstract
+ * @template T
+ */
+McFormFieldNumberControl = /** @class */ (function () {
+    function McFormFieldNumberControl() {
+    }
+    return McFormFieldNumberControl;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var nextUniqueId = 0;
+var McHint = /** @class */ (function () {
+    function McHint() {
+        this.id = "mc-hint-" + nextUniqueId++;
+    }
+    McHint.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-hint',
+                    host: {
+                        class: 'mc-hint',
+                        '[attr.id]': 'id'
+                    }
+                },] },
+    ];
+    McHint.propDecorators = {
+        id: [{ type: core.Input }]
+    };
+    return McHint;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McPrefix = /** @class */ (function () {
+    function McPrefix() {
+    }
+    McPrefix.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mcPrefix]'
+                },] },
+    ];
+    return McPrefix;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McStepper = /** @class */ (function () {
+    function McStepper() {
+        this.stepUp = new core.EventEmitter();
+        this.stepDown = new core.EventEmitter();
+    }
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
+    McStepper.prototype.onStepUp = /**
+     * @param {?} $event
+     * @return {?}
+     */
+    function ($event) {
+        this.stepUp.emit();
+        $event.preventDefault();
+    };
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
+    McStepper.prototype.onStepDown = /**
+     * @param {?} $event
+     * @return {?}
+     */
+    function ($event) {
+        this.stepDown.emit();
+        $event.preventDefault();
+    };
+    McStepper.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-stepper',
+                    template: "\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-up mc-angle-down-L_16\"\n           (mousedown)=\"onStepUp($event)\">\n        </i>\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-down mc-angle-down-L_16\"\n           (mousedown)=\"onStepDown($event)\">\n        </i>\n    "
+                },] },
+    ];
+    McStepper.propDecorators = {
+        stepUp: [{ type: core.Output }],
+        stepDown: [{ type: core.Output }]
+    };
+    return McStepper;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McSuffix = /** @class */ (function () {
+    function McSuffix() {
+    }
+    McSuffix.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mcSuffix]'
+                },] },
+    ];
+    return McSuffix;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+var nextUniqueId$1 = 0;
+var McFormFieldBase = /** @class */ (function () {
+    function McFormFieldBase(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+    return McFormFieldBase;
+}());
+/** @type {?} */
+var _McFormFieldMixinBase = mixinColor(McFormFieldBase);
+var McFormField = /** @class */ (function (_super) {
+    __extends(McFormField, _super);
+    function McFormField(_elementRef, _changeDetectorRef) {
+        var _this = _super.call(this, _elementRef) || this;
+        _this._elementRef = _elementRef;
+        _this._changeDetectorRef = _changeDetectorRef;
+        // Unique id for the internal form field label.
+        _this._labelId = "mc-form-field-label-" + nextUniqueId$1++;
+        _this.hovered = false;
+        return _this;
+    }
+    /**
+     * @return {?}
+     */
+    McFormField.prototype.ngAfterContentInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this._validateControlChild();
+        if (this._control.controlType) {
+            this._elementRef.nativeElement.classList
+                .add("mc-form-field-type-" + this._control.controlType);
+            if (this._numberControl && this.hasStepper) {
+                this._stepper.stepUp.subscribe(this.onStepUp.bind(this));
+                this._stepper.stepDown.subscribe(this.onStepDown.bind(this));
+            }
+        }
+        // Subscribe to changes in the child control state in order to update the form field UI.
+        this._control.stateChanges.pipe(operators.startWith())
+            .subscribe(function () {
+            _this._changeDetectorRef.markForCheck();
+        });
+        if (this._numberControl) {
+            this._numberControl.stateChanges.pipe(operators.startWith())
+                .subscribe(function () {
+                _this._changeDetectorRef.markForCheck();
+            });
+        }
+        // Run change detection if the value changes.
+        /** @type {?} */
+        var valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || rxjs.EMPTY;
+        rxjs.merge(valueChanges)
+            .subscribe(function () { return _this._changeDetectorRef.markForCheck(); });
+    };
+    /**
+     * @return {?}
+     */
+    McFormField.prototype.ngAfterContentChecked = /**
+     * @return {?}
+     */
+    function () {
+        this._validateControlChild();
+    };
+    /**
+     * @return {?}
+     */
+    McFormField.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
+        // Avoid animations on load.
+        this._changeDetectorRef.detectChanges();
+    };
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
+    McFormField.prototype.clearValue = /**
+     * @param {?} $event
+     * @return {?}
+     */
+    function ($event) {
+        $event.stopPropagation();
+        if (this._control && this._control.ngControl) {
+            this._control.ngControl.reset();
+        }
+    };
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
+    McFormField.prototype.onContainerClick = /**
+     * @param {?} $event
+     * @return {?}
+     */
+    function ($event) {
+        if (this._control.onContainerClick) {
+            this._control.onContainerClick($event);
+        }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McFormField.prototype.onKeyDown = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        // tslint:disable-next-line:deprecation
+        if (event.keyCode === keycodes.ESCAPE && this._control.focused && this.hasCleaner) {
+            if (this._control && this._control.ngControl) {
+                this._control.ngControl.reset();
+            }
+            event.preventDefault();
+        }
+    };
+    /**
+     * @param {?} isHovered
+     * @return {?}
+     */
+    McFormField.prototype.onHoverChanged = /**
+     * @param {?} isHovered
+     * @return {?}
+     */
+    function (isHovered) {
+        if (isHovered !== this.hovered) {
+            this.hovered = isHovered;
+            this._changeDetectorRef.markForCheck();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    McFormField.prototype.onStepUp = /**
+     * @return {?}
+     */
+    function () {
+        if (this._numberControl) {
+            this._numberControl.stepUp(this._numberControl.step);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    McFormField.prototype.onStepDown = /**
+     * @return {?}
+     */
+    function () {
+        if (this._numberControl) {
+            this._numberControl.stepDown(this._numberControl.step);
+        }
+    };
+    /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     */
+    /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     * @return {?}
+     */
+    McFormField.prototype.getConnectedOverlayOrigin = /**
+     * Gets an ElementRef for the element that a overlay attached to the form-field should be
+     * positioned relative to.
+     * @return {?}
+     */
+    function () {
+        return this.connectionContainerRef || this._elementRef;
+    };
+    /** Determines whether a class from the NgControl should be forwarded to the host element. */
+    /**
+     * Determines whether a class from the NgControl should be forwarded to the host element.
+     * @param {?} prop
+     * @return {?}
+     */
+    McFormField.prototype._shouldForward = /**
+     * Determines whether a class from the NgControl should be forwarded to the host element.
+     * @param {?} prop
+     * @return {?}
+     */
+    function (prop) {
+        /** @type {?} */
+        var ngControl = this._control ? this._control.ngControl : null;
+        return ngControl && ngControl[prop];
+    };
+    /** Throws an error if the form field's control is missing. */
+    /**
+     * Throws an error if the form field's control is missing.
+     * @protected
+     * @return {?}
+     */
+    McFormField.prototype._validateControlChild = /**
+     * Throws an error if the form field's control is missing.
+     * @protected
+     * @return {?}
+     */
+    function () {
+        if (!this._control) {
+            throw getMcFormFieldMissingControlError();
+        }
+    };
+    Object.defineProperty(McFormField.prototype, "hasHint", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._hint && this._hint.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "hasSuffix", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._suffix && this._suffix.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "hasPrefix", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._prefix && this._prefix.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "hasCleaner", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._cleaner && this._cleaner.length > 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "hasStepper", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return !!this._stepper;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "canShowCleaner", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.hasCleaner &&
+                this._control &&
+                this._control.ngControl
+                ? this._control.ngControl.value && !this._control.disabled
+                : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "disabled", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._control && this._control.disabled;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McFormField.prototype, "canShowStepper", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._numberControl &&
+                !this.disabled &&
+                (this._numberControl.focused ||
+                    this.hovered);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McFormField.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-form-field',
+                    exportAs: 'mcFormField',
+                    template: "<div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div><ng-content *ngIf=\"canShowStepper\" select=\"mc-stepper\"></ng-content></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div>",
+                    // McInput is a directive and can't have styles, so we need to include its styles here.
+                    // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
+                    // aren't using McInput.
+                    styles: [".mc-form-field{position:relative;display:inline-block;width:100%}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;display:flex;flex-direction:row;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px;cursor:pointer}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px}mc-stepper .mc-stepper-step-down,mc-stepper .mc-stepper-step-up{cursor:pointer;width:32px;text-align:center}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%;min-height:30px}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset} .mc-textarea{background:0 0;margin:0;border:none;outline:0;resize:none;overflow:auto;width:100%;box-sizing:border-box;padding:5px 16px}.mc-textarea{display:inline-block;-webkit-appearance:none;vertical-align:bottom}.mc-textarea:not(.mc-textarea-resizable){box-sizing:border-box;overflow-y:hidden}.mc-textarea.mc-textarea-resizable{resize:vertical;min-height:50px}.mc-textarea:invalid{box-shadow:unset}"],
+                    host: {
+                        class: 'mc-form-field',
+                        '[class.mc-form-field_invalid]': '_control.errorState',
+                        '[class.mc-disabled]': '_control.disabled',
+                        '[class.mc-form-field_has-prefix]': 'hasPrefix',
+                        '[class.mc-form-field_has-suffix]': 'hasSuffix',
+                        '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
+                        '[class.mc-form-field_has-stepper]': 'canShowStepper',
+                        '[class.mc-focused]': '_control.focused',
+                        '[class.ng-untouched]': '_shouldForward("untouched")',
+                        '[class.ng-touched]': '_shouldForward("touched")',
+                        '[class.ng-pristine]': '_shouldForward("pristine")',
+                        '[class.ng-dirty]': '_shouldForward("dirty")',
+                        '[class.ng-valid]': '_shouldForward("valid")',
+                        '[class.ng-invalid]': '_shouldForward("invalid")',
+                        '[class.ng-pending]': '_shouldForward("pending")',
+                        '(keydown)': 'onKeyDown($event)',
+                        '(mouseenter)': 'onHoverChanged(true)',
+                        '(mouseleave)': 'onHoverChanged(false)'
+                    },
+                    inputs: ['color'],
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    McFormField.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef }
+    ]; };
+    McFormField.propDecorators = {
+        _control: [{ type: core.ContentChild, args: [McFormFieldControl,] }],
+        _numberControl: [{ type: core.ContentChild, args: [McFormFieldNumberControl,] }],
+        _stepper: [{ type: core.ContentChild, args: [McStepper,] }],
+        _hint: [{ type: core.ContentChildren, args: [McHint,] }],
+        _suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
+        _prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
+        _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }],
+        connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer',] }]
+    };
+    return McFormField;
+}(_McFormFieldMixinBase));
+var McFormFieldWithoutBorders = /** @class */ (function () {
+    function McFormFieldWithoutBorders() {
+    }
+    McFormFieldWithoutBorders.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-form-field[mcFormFieldWithoutBorders]',
+                    exportAs: 'mcFormFieldWithoutBorders',
+                    host: { class: 'mc-form-field_without-borders' }
+                },] },
+    ];
+    return McFormFieldWithoutBorders;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McFormFieldModule = /** @class */ (function () {
+    function McFormFieldModule() {
+    }
+    McFormFieldModule.decorators = [
+        { type: core.NgModule, args: [{
+                    declarations: [
+                        McFormField,
+                        McFormFieldWithoutBorders,
+                        McHint,
+                        McPrefix,
+                        McSuffix,
+                        McCleaner,
+                        McStepper
+                    ],
+                    imports: [common.CommonModule, McIconModule],
+                    exports: [
+                        McFormField,
+                        McFormFieldWithoutBorders,
+                        McHint,
+                        McPrefix,
+                        McSuffix,
+                        McCleaner,
+                        McStepper
+                    ]
+                },] },
+    ];
+    return McFormFieldModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Autocomplete IDs need to be unique across components, so this counter exists outside of
+ * the component definition.
+ * @type {?}
+ */
+var uniqueAutocompleteIdCounter = 0;
+var McAutocompleteSelectedEvent = /** @class */ (function () {
+    function McAutocompleteSelectedEvent(source, option) {
+        this.source = source;
+        this.option = option;
+    }
+    return McAutocompleteSelectedEvent;
+}());
+/**
+ * Injection token to be used to override the default options for `mc-autocomplete`.
+ * @type {?}
+ */
+var MC_AUTOCOMPLETE_DEFAULT_OPTIONS = new core.InjectionToken('mc-autocomplete-default-options', {
+    providedIn: 'root',
+    factory: MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY
+});
+// tslint:disable-next-line naming-convention
+/**
+ * @return {?}
+ */
+function MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY() {
+    return { autoActiveFirstOption: true };
+}
+var McAutocomplete = /** @class */ (function () {
+    function McAutocomplete(changeDetectorRef, elementRef, defaults) {
+        this.changeDetectorRef = changeDetectorRef;
+        this.elementRef = elementRef;
+        /**
+         * Unique ID to be used by autocomplete trigger's "aria-owns" property.
+         */
+        this.id = "mc-autocomplete-" + uniqueAutocompleteIdCounter++;
+        /**
+         * Whether the autocomplete panel should be visible, depending on option length.
+         */
+        this.showPanel = false;
+        /**
+         * Function that maps an option's control value to its display value in the trigger.
+         */
+        this.displayWith = null;
+        /**
+         * Event that is emitted whenever an option from the list is selected.
+         */
+        this.optionSelected = new core.EventEmitter();
+        /**
+         * Event that is emitted when the autocomplete panel is opened.
+         */
+        this.opened = new core.EventEmitter();
+        /**
+         * Event that is emitted when the autocomplete panel is closed.
+         */
+        this.closed = new core.EventEmitter();
+        this._classList = {};
+        this._isOpen = false;
+        this._autoActiveFirstOption = !!defaults.autoActiveFirstOption;
+    }
+    Object.defineProperty(McAutocomplete.prototype, "classList", {
+        /**
+         * Takes classes set on the host mc-autocomplete element and applies them to the panel
+         * inside the overlay container to allow for easy styling.
+         */
+        get: /**
+         * Takes classes set on the host mc-autocomplete element and applies them to the panel
+         * inside the overlay container to allow for easy styling.
+         * @return {?}
+         */
+        function () {
+            return this._classList;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            var _this = this;
+            if (value && value.length) {
+                value.split(' ')
+                    .forEach(function (className) { return _this._classList[className.trim()] = true; });
+                this.elementRef.nativeElement.className = '';
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McAutocomplete.prototype, "autoActiveFirstOption", {
+        /**
+         * Whether the first option should be highlighted when the autocomplete panel is opened.
+         * Can be configured globally through the `MC_AUTOCOMPLETE_DEFAULT_OPTIONS` token.
+         */
+        get: /**
+         * Whether the first option should be highlighted when the autocomplete panel is opened.
+         * Can be configured globally through the `MC_AUTOCOMPLETE_DEFAULT_OPTIONS` token.
+         * @return {?}
+         */
+        function () {
+            return this._autoActiveFirstOption;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._autoActiveFirstOption = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McAutocomplete.prototype, "isOpen", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._isOpen && this.showPanel;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._isOpen = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    McAutocomplete.prototype.ngAfterContentInit = /**
+     * @return {?}
+     */
+    function () {
+        this.keyManager = new a11y.ActiveDescendantKeyManager(this.options);
+        this.setVisibility();
+    };
+    /**
+     * @param {?} scrollTop
+     * @return {?}
+     */
+    McAutocomplete.prototype.setScrollTop = /**
+     * @param {?} scrollTop
+     * @return {?}
+     */
+    function (scrollTop) {
+        if (this.panel) {
+            this.panel.nativeElement.scrollTop = scrollTop;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    McAutocomplete.prototype.getScrollTop = /**
+     * @return {?}
+     */
+    function () {
+        return this.panel ? this.panel.nativeElement.scrollTop : 0;
+    };
+    /**
+     * @return {?}
+     */
+    McAutocomplete.prototype.setVisibility = /**
+     * @return {?}
+     */
+    function () {
+        this.showPanel = !!this.options.length;
+        this._classList['mc-autocomplete_visible'] = this.showPanel;
+        this._classList['mc-autocomplete_hidden'] = !this.showPanel;
+        this.changeDetectorRef.markForCheck();
+    };
+    /**
+     * @param {?} option
+     * @return {?}
+     */
+    McAutocomplete.prototype.emitSelectEvent = /**
+     * @param {?} option
+     * @return {?}
+     */
+    function (option) {
+        /** @type {?} */
+        var event = new McAutocompleteSelectedEvent(this, option);
+        this.optionSelected.emit(event);
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McAutocomplete.prototype.onKeydown = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        this.keyManager.onKeydown(event);
+    };
+    McAutocomplete.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-autocomplete',
+                    exportAs: 'mcAutocomplete',
+                    template: "<ng-template><div class=\"mc-autocomplete-panel\" role=\"listbox\" [id]=\"id\" [ngClass]=\"classList\" #panel><ng-content></ng-content></div></ng-template>",
+                    styles: [".mc-autocomplete-trigger{text-overflow:ellipsis}.mc-autocomplete-panel{visibility:hidden;position:relative;overflow:auto;-webkit-overflow-scrolling:touch;margin-top:-1px;min-width:100%;width:100%;max-width:none;max-height:256px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-autocomplete-panel.mc-autocomplete_visible{visibility:visible}.mc-autocomplete-panel.mc-autocomplete_hidden{visibility:hidden}.mc-autocomplete-panel-above .mc-autocomplete-panel{border-radius:0;border-top-left-radius:3px;border-top-right-radius:3px}.mc-autocomplete-panel .mc-divider-horizontal{margin-top:-1px}@media screen and (-ms-high-contrast:active){.mc-autocomplete-panel{outline:solid 1px}}"],
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    host: { class: 'mc-autocomplete' },
+                    providers: [
+                        { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McAutocomplete }
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    McAutocomplete.ctorParameters = function () { return [
+        { type: core.ChangeDetectorRef },
+        { type: core.ElementRef },
+        { type: undefined, decorators: [{ type: core.Inject, args: [MC_AUTOCOMPLETE_DEFAULT_OPTIONS,] }] }
+    ]; };
+    McAutocomplete.propDecorators = {
+        template: [{ type: core.ViewChild, args: [core.TemplateRef,] }],
+        panel: [{ type: core.ViewChild, args: ['panel',] }],
+        options: [{ type: core.ContentChildren, args: [McOption, { descendants: true },] }],
+        optionGroups: [{ type: core.ContentChildren, args: [McOptgroup,] }],
+        displayWith: [{ type: core.Input }],
+        panelWidth: [{ type: core.Input }],
+        optionSelected: [{ type: core.Output }],
+        opened: [{ type: core.Output }],
+        closed: [{ type: core.Output }],
+        classList: [{ type: core.Input, args: ['class',] }],
+        autoActiveFirstOption: [{ type: core.Input }]
+    };
+    return McAutocomplete;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Directive applied to an element to make it usable
+ * as a connection point for an autocomplete panel.
+ */
+var McAutocompleteOrigin = /** @class */ (function () {
+    function McAutocompleteOrigin(elementRef) {
+        this.elementRef = elementRef;
+    }
+    McAutocompleteOrigin.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mcAutocompleteOrigin]',
+                    exportAs: 'mcAutocompleteOrigin'
+                },] },
+    ];
+    /** @nocollapse */
+    McAutocompleteOrigin.ctorParameters = function () { return [
+        { type: core.ElementRef }
+    ]; };
+    return McAutocompleteOrigin;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * The height of each autocomplete option.
+ * @type {?}
+ */
+var AUTOCOMPLETE_OPTION_HEIGHT = 32;
+/**
+ * The total height of the autocomplete panel.
+ * @type {?}
+ */
+var AUTOCOMPLETE_PANEL_HEIGHT = 256;
+/** @type {?} */
+var AUTOCOMPLETE_BORDER_WIDTH = 2;
+/**
+ * Injection token that determines the scroll handling while the autocomplete panel is open.
+ * @type {?}
+ */
+var MC_AUTOCOMPLETE_SCROLL_STRATEGY = new core.InjectionToken('mc-autocomplete-scroll-strategy');
+// tslint:disable-next-line naming-convention
+/**
+ * @param {?} overlay
+ * @return {?}
+ */
+function MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(overlay$$1) {
+    return function () { return overlay$$1.scrollStrategies.reposition(); };
+}
+/** @type {?} */
+var MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
+    provide: MC_AUTOCOMPLETE_SCROLL_STRATEGY,
+    deps: [overlay.Overlay],
+    useFactory: MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY
+};
+/**
+ * Provider that allows the autocomplete to register as a ControlValueAccessor.
+ * \@docs-private
+ * @type {?}
+ */
+var MAT_AUTOCOMPLETE_VALUE_ACCESSOR = {
+    provide: forms.NG_VALUE_ACCESSOR,
+    useExisting: core.forwardRef(function () { return McAutocompleteTrigger; }),
+    multi: true
+};
+/**
+ * Creates an error to be thrown when attempting to use an autocomplete trigger without a panel.
+ * \@docs-private
+ * @return {?}
+ */
+function getMcAutocompleteMissingPanelError() {
+    return Error('Attempting to open an undefined instance of `mc-autocomplete`. ' +
+        'Make sure that the id passed to the `mcAutocomplete` is correct and that ' +
+        'you\'re attempting to open it after the ngAfterContentInit hook.');
+}
+var McAutocompleteTrigger = /** @class */ (function () {
+    function McAutocompleteTrigger(elementRef, viewContainerRef, changeDetectorRef, overlay$$1, zone, scrollStrategy, dir, formField, document, viewportRuler) {
+        var _this = this;
+        this.elementRef = elementRef;
+        this.viewContainerRef = viewContainerRef;
+        this.changeDetectorRef = changeDetectorRef;
+        this.overlay = overlay$$1;
+        this.zone = zone;
+        this.dir = dir;
+        this.formField = formField;
+        this.document = document;
+        this.viewportRuler = viewportRuler;
+        // @ts-ignore
+        this.optionSelections = rxjs.defer(function () {
+            if (_this.autocomplete && _this.autocomplete.options) {
+                return rxjs.merge.apply(void 0, _this.autocomplete.options.map(function (option) { return option.onSelectionChange; }));
+            }
+            // If there are any subscribers before `ngAfterViewInit`, the `autocomplete` will be undefined.
+            // Return a stream that we'll replace with the real one once everything is in place.
+            return _this.zone.onStable
+                .asObservable()
+                .pipe(operators.take(1), operators.switchMap(function () { return _this.optionSelections; }));
+        });
+        /**
+         * `autocomplete` attribute to be set on the input element.
+         * \@docs-private
+         */
+        this.autocompleteAttribute = 'off';
+        this._autocompleteDisabled = false;
+        this.overlayAttached = false;
+        this.componentDestroyed = false;
+        /**
+         * Subscription to viewport size changes.
+         */
+        this.viewportSubscription = rxjs.Subscription.EMPTY;
+        /**
+         * Whether the autocomplete can open the next time it is focused. Used to prevent a focused,
+         * closed autocomplete from being reopened if the user switches to another browser tab and then
+         * comes back.
+         */
+        this.canOpenOnNextFocus = true;
+        /**
+         * Stream of keyboard events that can close the panel.
+         */
+        this.closeKeyEventStream = new rxjs.Subject();
+        /**
+         * `View -> model callback called when value changes`
+         */
+        // tslint:disable-next-line no-empty
+        this.onChange = function () { };
+        /**
+         * `View -> model callback called when autocomplete has been touched`
+         */
+        // tslint:disable-next-line no-empty
+        this.onTouched = function () { };
+        /**
+         * Event handler for when the window is blurred. Needs to be an
+         * arrow function in order to preserve the context.
+         */
+        this.windowBlurHandler = function () {
+            // If the user blurred the window while the autocomplete is focused, it means that it'll be
+            // refocused when they come back. In this case we want to skip the first focus event, if the
+            // pane was closed, in order to avoid reopening it unintentionally.
+            _this.canOpenOnNextFocus = _this.document.activeElement !== _this.elementRef.nativeElement || _this.panelOpen;
+        };
+        // tslint:disable-next-line no-typeof-undefined
+        if (typeof window !== 'undefined') {
+            zone.runOutsideAngular(function () {
+                window.addEventListener('blur', _this.windowBlurHandler);
+            });
+        }
+        this.scrollStrategy = scrollStrategy;
+    }
+    Object.defineProperty(McAutocompleteTrigger.prototype, "activeOption", {
+        /** The currently active option, coerced to MatOption type. */
+        get: /**
+         * The currently active option, coerced to MatOption type.
+         * @return {?}
+         */
+        function () {
+            if (this.autocomplete && this.autocomplete.keyManager) {
+                return this.autocomplete.keyManager.activeItem;
+            }
+            return null;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McAutocompleteTrigger.prototype, "panelOpen", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.overlayAttached && this.autocomplete.showPanel;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McAutocompleteTrigger.prototype, "autocompleteDisabled", {
+        /**
+         * Whether the autocomplete is disabled. When disabled, the element will
+         * act as a regular input and the user won't be able to open the panel.
+         */
+        get: /**
+         * Whether the autocomplete is disabled. When disabled, the element will
+         * act as a regular input and the user won't be able to open the panel.
+         * @return {?}
+         */
+        function () {
+            return this._autocompleteDisabled;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._autocompleteDisabled = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        // tslint:disable-next-line no-typeof-undefined
+        if (typeof window !== 'undefined') {
+            window.removeEventListener('blur', this.windowBlurHandler);
+        }
+        this.viewportSubscription.unsubscribe();
+        this.componentDestroyed = true;
+        this.destroyPanel();
+        this.closeKeyEventStream.complete();
+    };
+    /** Opens the autocomplete suggestion panel. */
+    /**
+     * Opens the autocomplete suggestion panel.
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.openPanel = /**
+     * Opens the autocomplete suggestion panel.
+     * @return {?}
+     */
+    function () {
+        this.attachOverlay();
+    };
+    /**
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.closePanel = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.overlayAttached) {
+            return;
+        }
+        if (this.panelOpen) {
+            this.autocomplete.closed.emit();
+        }
+        this.autocomplete.isOpen = this.overlayAttached = false;
+        if (this.overlayRef && this.overlayRef.hasAttached()) {
+            this.overlayRef.detach();
+            this.closingActionsSubscription.unsubscribe();
+        }
+        // Note that in some cases this can end up being called after the component is destroyed.
+        // Add a check to ensure that we don't try to run change detection on a destroyed view.
+        if (!this.componentDestroyed) {
+            // We need to trigger change detection manually, because
+            // `fromEvent` doesn't seem to do it at the proper time.
+            // This ensures that the label is reset when the
+            // user clicks outside.
+            this.changeDetectorRef.detectChanges();
+        }
+    };
+    /**
+     * Updates the position of the autocomplete suggestion panel to ensure that it fits all options
+     * within the viewport.
+     */
+    /**
+     * Updates the position of the autocomplete suggestion panel to ensure that it fits all options
+     * within the viewport.
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.updatePosition = /**
+     * Updates the position of the autocomplete suggestion panel to ensure that it fits all options
+     * within the viewport.
+     * @return {?}
+     */
+    function () {
+        if (this.overlayAttached) {
+            (/** @type {?} */ (this.overlayRef)).updatePosition();
+        }
+    };
+    Object.defineProperty(McAutocompleteTrigger.prototype, "panelClosingActions", {
+        /**
+         * A stream of actions that should close the autocomplete panel, including
+         * when an option is selected, on blur, and when TAB is pressed.
+         */
+        get: /**
+         * A stream of actions that should close the autocomplete panel, including
+         * when an option is selected, on blur, and when TAB is pressed.
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            return rxjs.merge(this.optionSelections, this.autocomplete.keyManager.tabOut.pipe(operators.filter(function () { return _this.overlayAttached; })), this.closeKeyEventStream, this.getOutsideClickStream(), this.overlayRef ?
+                this.overlayRef.detachments().pipe(operators.filter(function () { return _this.overlayAttached; })) :
+                rxjs.of()).pipe(
+            // Normalize the output so we return a consistent type.
+            operators.map(function (event) { return event instanceof McOptionSelectionChange ? event : null; }));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // Implemented as part of ControlValueAccessor.
+    // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.writeValue = 
+    // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        var _this = this;
+        Promise.resolve(null).then(function () { return _this.setTriggerValue(value); });
+    };
+    // Implemented as part of ControlValueAccessor.
+    // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.registerOnChange = 
+    // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
+        this.onChange = fn;
+    };
+    // Implemented as part of ControlValueAccessor.
+    // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.registerOnTouched = 
+    // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
+        this.onTouched = fn;
+    };
+    // Implemented as part of ControlValueAccessor.
+    // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.setDisabledState = 
+    // Implemented as part of ControlValueAccessor.
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    function (isDisabled) {
+        this.elementRef.nativeElement.disabled = isDisabled;
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.handleKeydown = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        // tslint:disable-next-line deprecation
+        /** @type {?} */
+        var keyCode = event.keyCode;
+        // Prevent the default action on all escape key presses. This is here primarily to bring IE
+        // in line with other browsers. By default, pressing escape on IE will cause it to revert
+        // the input value to the one that it had on focus, however it won't dispatch any events
+        // which means that the model value will be out of sync with the view.
+        if (keyCode === keycodes.ESCAPE) {
+            event.preventDefault();
+        }
+        if (this.activeOption && keyCode === keycodes.ENTER && this.panelOpen) {
+            this.activeOption.selectViaInteraction();
+            this.resetActiveItem();
+            event.preventDefault();
+        }
+        else if (this.autocomplete) {
+            /** @type {?} */
+            var prevActiveItem = this.autocomplete.keyManager.activeItem;
+            if (this.panelOpen || keyCode === keycodes.TAB) {
+                this.autocomplete.onKeydown(event);
+            }
+            else if (keyCode === keycodes.DOWN_ARROW && this.canOpen()) {
+                this.openPanel();
+            }
+            /** @type {?} */
+            var isArrowKey = keyCode === keycodes.UP_ARROW || keyCode === keycodes.DOWN_ARROW;
+            if (isArrowKey || this.autocomplete.keyManager.activeItem !== prevActiveItem) {
+                this.scrollToOption();
+            }
+        }
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.handleInput = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        /** @type {?} */
+        var target = (/** @type {?} */ (event.target));
+        /** @type {?} */
+        var value = target.value;
+        // Based on `NumberValueAccessor` from forms.
+        if (target.type === 'number') {
+            value = value === '' ? null : parseFloat(value);
+        }
+        // If the input has a placeholder, IE will fire the `input` event on page load,
+        // focus and blur, in addition to when the user actually changed the value. To
+        // filter out all of the extra events, we save the value on focus and between
+        // `input` events, and we check whether it changed.
+        // See: https://connect.microsoft.com/IE/feedback/details/885747/
+        if (this.previousValue !== value) {
+            this.previousValue = value;
+            this.onChange(value);
+            if (this.canOpen() && this.document.activeElement === event.target) {
+                this.openPanel();
+            }
+        }
+    };
+    /**
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.handleFocus = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.canOpenOnNextFocus) {
+            this.canOpenOnNextFocus = true;
+        }
+        else if (this.canOpen()) {
+            this.previousValue = this.elementRef.nativeElement.value;
+            this.attachOverlay();
+        }
+    };
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.handleClick = /**
+     * @param {?} $event
+     * @return {?}
+     */
+    function ($event) {
+        if (this.canOpen() && this.document.activeElement === $event.target) {
+            this.openPanel();
+        }
+    };
+    /** Stream of clicks outside of the autocomplete panel. */
+    /**
+     * Stream of clicks outside of the autocomplete panel.
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.getOutsideClickStream = /**
+     * Stream of clicks outside of the autocomplete panel.
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (!this.document) {
+            return rxjs.of(null);
+        }
+        return rxjs.fromEvent(this.document, 'click')
+            .pipe(operators.filter(function (event) {
+            /** @type {?} */
+            var clickTarget = (/** @type {?} */ (event.target));
+            /** @type {?} */
+            var formField = _this.formField ?
+                _this.formField._elementRef.nativeElement : null;
+            return _this.overlayAttached &&
+                clickTarget !== _this.elementRef.nativeElement &&
+                (!formField || !formField.contains(clickTarget)) &&
+                (!!_this.overlayRef && !_this.overlayRef.overlayElement.contains(clickTarget));
+        }));
+    };
+    /**
+     * Given that we are not actually focusing active options, we must manually adjust scroll
+     * to reveal options below the fold. First, we find the offset of the option from the top
+     * of the panel. If that offset is below the fold, the new scrollTop will be the offset -
+     * the panel height + the option height, so the active option will be just visible at the
+     * bottom of the panel. If that offset is above the top of the visible panel, the new scrollTop
+     * will become the offset. If that offset is visible within the panel already, the scrollTop is
+     * not adjusted.
+     */
+    /**
+     * Given that we are not actually focusing active options, we must manually adjust scroll
+     * to reveal options below the fold. First, we find the offset of the option from the top
+     * of the panel. If that offset is below the fold, the new scrollTop will be the offset -
+     * the panel height + the option height, so the active option will be just visible at the
+     * bottom of the panel. If that offset is above the top of the visible panel, the new scrollTop
+     * will become the offset. If that offset is visible within the panel already, the scrollTop is
+     * not adjusted.
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.scrollToOption = /**
+     * Given that we are not actually focusing active options, we must manually adjust scroll
+     * to reveal options below the fold. First, we find the offset of the option from the top
+     * of the panel. If that offset is below the fold, the new scrollTop will be the offset -
+     * the panel height + the option height, so the active option will be just visible at the
+     * bottom of the panel. If that offset is above the top of the visible panel, the new scrollTop
+     * will become the offset. If that offset is visible within the panel already, the scrollTop is
+     * not adjusted.
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var index = this.autocomplete.keyManager.activeItemIndex || 0;
+        /** @type {?} */
+        var labelCount = countGroupLabelsBeforeOption(index, this.autocomplete.options, this.autocomplete.optionGroups);
+        /** @type {?} */
+        var newScrollPosition = getOptionScrollPosition(index + labelCount, AUTOCOMPLETE_OPTION_HEIGHT, this.autocomplete.getScrollTop(), AUTOCOMPLETE_PANEL_HEIGHT);
+        this.autocomplete.setScrollTop(newScrollPosition);
+    };
+    /**
+     * This method listens to a stream of panel closing actions and resets the
+     * stream every time the option list changes.
+     */
+    /**
+     * This method listens to a stream of panel closing actions and resets the
+     * stream every time the option list changes.
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.subscribeToClosingActions = /**
+     * This method listens to a stream of panel closing actions and resets the
+     * stream every time the option list changes.
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        /** @type {?} */
+        var firstStable = this.zone.onStable.asObservable()
+            .pipe(operators.take(1));
+        /** @type {?} */
+        var optionChanges = this.autocomplete.options.changes
+            .pipe(operators.tap(function () { return _this.positionStrategy.reapplyLastPosition(); }), 
+        // Defer emitting to the stream until the next tick, because changing
+        // bindings in here will cause "changed after checked" errors.
+        operators.delay(0));
+        // When the zone is stable initially, and when the option list changes...
+        return rxjs.merge(firstStable, optionChanges)
+            .pipe(
+        // create a new stream of panelClosingActions, replacing any previous streams
+        // that were created, and flatten it so our stream only emits closing events...
+        operators.switchMap(function () {
+            _this.resetActiveItem();
+            _this.autocomplete.setVisibility();
+            if (_this.panelOpen) {
+                (/** @type {?} */ (_this.overlayRef)).updatePosition();
+            }
+            return _this.panelClosingActions;
+        }), 
+        // when the first closing event occurs...
+        operators.take(1))
+            // set the value, close the panel, and complete.
+            .subscribe(function (event) { return _this.setValueAndClose(event); });
+    };
+    /** Destroys the autocomplete suggestion panel. */
+    /**
+     * Destroys the autocomplete suggestion panel.
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.destroyPanel = /**
+     * Destroys the autocomplete suggestion panel.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this.overlayRef) {
+            this.closePanel();
+            this.overlayRef.dispose();
+            this.overlayRef = null;
+        }
+    };
+    /**
+     * @private
+     * @param {?} value
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.setTriggerValue = /**
+     * @private
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        /** @type {?} */
+        var toDisplay = this.autocomplete && this.autocomplete.displayWith ?
+            this.autocomplete.displayWith(value) :
+            value;
+        // Simply falling back to an empty string if the display value is falsy does not work properly.
+        // The display value can also be the number zero and shouldn't fall back to an empty string.
+        /** @type {?} */
+        var inputValue = toDisplay != null ? toDisplay : '';
+        // If it's used within a `MatFormField`, we should set it through the property so it can go
+        // through change detection.
+        if (this.formField) {
+            this.formField._control.value = inputValue;
+        }
+        else {
+            this.elementRef.nativeElement.value = inputValue;
+        }
+        this.previousValue = inputValue;
+    };
+    /** This method closes the panel, and if a value is specified, also sets the associated
+     * control to that value. It will also mark the control as dirty if this interaction
+     * stemmed from the user.
+     */
+    /**
+     * This method closes the panel, and if a value is specified, also sets the associated
+     * control to that value. It will also mark the control as dirty if this interaction
+     * stemmed from the user.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.setValueAndClose = /**
+     * This method closes the panel, and if a value is specified, also sets the associated
+     * control to that value. It will also mark the control as dirty if this interaction
+     * stemmed from the user.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (event && event.source) {
+            this.clearPreviousSelectedOption(event.source);
+            this.setTriggerValue(event.source.value);
+            this.onChange(event.source.value);
+            this.elementRef.nativeElement.focus();
+            this.autocomplete.emitSelectEvent(event.source);
+        }
+        this.closePanel();
+    };
+    /** Clear any previous selected option and emit a selection change event for this option */
+    /**
+     * Clear any previous selected option and emit a selection change event for this option
+     * @private
+     * @param {?} skip
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.clearPreviousSelectedOption = /**
+     * Clear any previous selected option and emit a selection change event for this option
+     * @private
+     * @param {?} skip
+     * @return {?}
+     */
+    function (skip) {
+        this.autocomplete.options.forEach(function (option) {
+            if (option !== skip && option.selected) {
+                option.deselect();
+            }
+        });
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.attachOverlay = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (!this.autocomplete) {
+            throw getMcAutocompleteMissingPanelError();
+        }
+        /** @type {?} */
+        var overlayRef = this.overlayRef;
+        if (!overlayRef) {
+            this.portal = new portal.TemplatePortal(this.autocomplete.template, this.viewContainerRef);
+            overlayRef = this.overlay.create(this.getOverlayConfig());
+            this.overlayRef = overlayRef;
+            // Use the `keydownEvents` in order to take advantage of
+            // the overlay event targeting provided by the CDK overlay.
+            overlayRef.keydownEvents().subscribe(function (event) {
+                // Close when pressing ESCAPE or ALT + UP_ARROW, based on the a11y guidelines.
+                // See: https://www.w3.org/TR/wai-aria-practices-1.1/#textbox-keyboard-interaction
+                // tslint:disable-next-line deprecation
+                if (event.keyCode === keycodes.ESCAPE || (event.keyCode === keycodes.UP_ARROW && event.altKey)) {
+                    _this.resetActiveItem();
+                    _this.closeKeyEventStream.next();
+                }
+            });
+            if (this.viewportRuler) {
+                this.viewportSubscription = this.viewportRuler.change().subscribe(function () {
+                    if (_this.panelOpen && overlayRef) {
+                        overlayRef.updateSize({ width: _this.getPanelWidth() });
+                    }
+                });
+            }
+        }
+        else {
+            /** @type {?} */
+            var position = (/** @type {?} */ (overlayRef.getConfig().positionStrategy));
+            // Update the trigger, panel width and direction, in case anything has changed.
+            position.setOrigin(this.getConnectedElement());
+            overlayRef.updateSize({ width: this.getPanelWidth() });
+        }
+        if (overlayRef && !overlayRef.hasAttached()) {
+            overlayRef.attach(this.portal);
+            this.closingActionsSubscription = this.subscribeToClosingActions();
+        }
+        /** @type {?} */
+        var wasOpen = this.panelOpen;
+        this.autocomplete.setVisibility();
+        this.autocomplete.isOpen = this.overlayAttached = true;
+        // We need to do an extra `panelOpen` check in here, because the
+        // autocomplete won't be shown if there are no options.
+        if (this.panelOpen && wasOpen !== this.panelOpen) {
+            this.autocomplete.opened.emit();
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.getOverlayConfig = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return new overlay.OverlayConfig({
+            positionStrategy: this.getOverlayPosition(),
+            scrollStrategy: this.scrollStrategy(),
+            width: this.getPanelWidth(),
+            direction: this.dir
+        });
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.getOverlayPosition = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.positionStrategy = this.overlay.position()
+            .flexibleConnectedTo(this.getConnectedElement())
+            .withFlexibleDimensions(false)
+            .withPush(false)
+            .withPositions((/** @type {?} */ ([
+            {
+                originX: 'start',
+                originY: 'bottom',
+                overlayX: 'start',
+                overlayY: 'top'
+            },
+            {
+                originX: 'start',
+                originY: 'top',
+                overlayX: 'start',
+                overlayY: 'bottom',
+                // The overlay edge connected to the trigger should have squared corners, while
+                // the opposite end has rounded corners. We apply a CSS class to swap the
+                // border-radius based on the overlay position.
+                panelClass: 'mc-autocomplete-panel-above'
+            }
+        ])));
+        return this.positionStrategy;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.getConnectedElement = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this.connectedTo) {
+            return this.connectedTo.elementRef;
+        }
+        return this.formField ? this.formField.getConnectedOverlayOrigin() : this.elementRef;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.getPanelWidth = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return this.autocomplete.panelWidth || this.getHostWidth() - AUTOCOMPLETE_BORDER_WIDTH;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.getHostWidth = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return this.getConnectedElement().nativeElement.getBoundingClientRect().width;
+    };
+    /**
+     * Resets the active item to -1 so arrow events will activate the
+     * correct options, or to 0 if the consumer opted into it.
+     */
+    /**
+     * Resets the active item to -1 so arrow events will activate the
+     * correct options, or to 0 if the consumer opted into it.
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.resetActiveItem = /**
+     * Resets the active item to -1 so arrow events will activate the
+     * correct options, or to 0 if the consumer opted into it.
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.autocomplete.keyManager.setActiveItem(this.autocomplete.autoActiveFirstOption ? 0 : -1);
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McAutocompleteTrigger.prototype.canOpen = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var element = this.elementRef.nativeElement;
+        return !element.readOnly && !element.disabled && !this._autocompleteDisabled;
+    };
+    McAutocompleteTrigger.decorators = [
+        { type: core.Directive, args: [{
+                    selector: "input[mcAutocomplete], textarea[mcAutocomplete]",
+                    host: {
+                        class: 'mc-autocomplete-trigger',
+                        '[attr.autocomplete]': 'autocompleteAttribute',
+                        // Note: we use `focusin`, as opposed to `focus`, in order to open the panel
+                        // a little earlier. This avoids issues where IE delays the focusing of the input.
+                        '(focusin)': 'handleFocus()',
+                        '(blur)': 'onTouched()',
+                        '(input)': 'handleInput($event)',
+                        '(keydown)': 'handleKeydown($event)',
+                        '(click)': 'handleClick($event)'
+                    },
+                    exportAs: 'mcAutocompleteTrigger',
+                    providers: [MAT_AUTOCOMPLETE_VALUE_ACCESSOR]
+                },] },
+    ];
+    /** @nocollapse */
+    McAutocompleteTrigger.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: core.ViewContainerRef },
+        { type: core.ChangeDetectorRef },
+        { type: overlay.Overlay },
+        { type: core.NgZone },
+        { type: undefined, decorators: [{ type: core.Inject, args: [MC_AUTOCOMPLETE_SCROLL_STRATEGY,] }] },
+        { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
+        { type: McFormField, decorators: [{ type: core.Optional }, { type: core.Host }] },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [common.DOCUMENT,] }] },
+        { type: scrolling.ViewportRuler }
+    ]; };
+    McAutocompleteTrigger.propDecorators = {
+        autocomplete: [{ type: core.Input, args: ['mcAutocomplete',] }],
+        connectedTo: [{ type: core.Input, args: ['mcAutocompleteConnectedTo',] }],
+        autocompleteAttribute: [{ type: core.Input, args: ['autocomplete',] }],
+        autocompleteDisabled: [{ type: core.Input, args: ['mcAutocompleteDisabled',] }]
+    };
+    return McAutocompleteTrigger;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McAutocompleteModule = /** @class */ (function () {
+    function McAutocompleteModule() {
+    }
+    McAutocompleteModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [McOptionModule, overlay.OverlayModule, McCommonModule, common.CommonModule],
+                    exports: [
+                        McAutocomplete,
+                        McOptionModule,
+                        McAutocompleteTrigger,
+                        McAutocompleteOrigin,
+                        McCommonModule
+                    ],
+                    declarations: [McAutocomplete, McAutocompleteTrigger, McAutocompleteOrigin],
+                    providers: [MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER]
+                },] },
+    ];
+    return McAutocompleteModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McButtonCssStyler = /** @class */ (function () {
     function McButtonCssStyler(elementRef) {
         this.icons = [];
@@ -2534,7 +4320,7 @@ var MC_CHECKBOX_CLICK_ACTION = new core.InjectionToken('mc-checkbox-click-action
  */
 // Increasing integer for generating unique ids for checkbox components.
 /** @type {?} */
-var nextUniqueId = 0;
+var nextUniqueId$2 = 0;
 /**
  * Provider Expression that allows mc-checkbox to register as a ControlValueAccessor.
  * This allows it to support [(ngModel)].
@@ -2612,7 +4398,7 @@ var McCheckbox = /** @class */ (function (_super) {
          * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
          */
         _this.ariaLabelledby = null;
-        _this._uniqueId = "mc-checkbox-" + ++nextUniqueId;
+        _this._uniqueId = "mc-checkbox-" + ++nextUniqueId$2;
         /**
          * A unique id for the checkbox input. If none is supplied, it will be auto-generated.
          */
@@ -3125,649 +4911,6 @@ var McCheckboxModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var McIconCSSStyler = /** @class */ (function () {
-    function McIconCSSStyler() {
-    }
-    McIconCSSStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mc-icon]',
-                    host: { class: 'mc mc-icon' }
-                },] },
-    ];
-    return McIconCSSStyler;
-}());
-var McIconBase = /** @class */ (function () {
-    function McIconBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McIconBase;
-}());
-/** @type {?} */
-var _McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
-var McIcon = /** @class */ (function (_super) {
-    __extends(McIcon, _super);
-    function McIcon(elementRef, iconName) {
-        var _this = _super.call(this, elementRef) || this;
-        elementRef.nativeElement.classList.add(iconName);
-        return _this;
-    }
-    /**
-     * @return {?}
-     */
-    McIcon.prototype._getHostElement = /**
-     * @return {?}
-     */
-    function () {
-        return this._elementRef.nativeElement;
-    };
-    McIcon.decorators = [
-        { type: core.Component, args: [{
-                    selector: "[mc-icon]",
-                    template: '<ng-content></ng-content>',
-                    styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    inputs: ['color']
-                },] },
-    ];
-    /** @nocollapse */
-    McIcon.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
-    ]; };
-    return McIcon;
-}(_McIconMixinBase));
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McIconModule = /** @class */ (function () {
-    function McIconModule() {
-    }
-    McIconModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McIcon,
-                        McIconCSSStyler
-                    ],
-                    declarations: [
-                        McIcon,
-                        McIconCSSStyler
-                    ]
-                },] },
-    ];
-    return McIconModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McCleaner = /** @class */ (function () {
-    function McCleaner() {
-    }
-    McCleaner.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-cleaner',
-                    template: '<i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>'
-                },] },
-    ];
-    return McCleaner;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * An interface which allows a control to work inside of a `MсFormField`.
- * @abstract
- * @template T
- */
-var   /**
- * An interface which allows a control to work inside of a `MсFormField`.
- * @abstract
- * @template T
- */
-McFormFieldControl = /** @class */ (function () {
-    function McFormFieldControl() {
-    }
-    return McFormFieldControl;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @return {?}
- */
-function getMcFormFieldMissingControlError() {
-    return Error('mc-form-field must contain a McFormFieldControl.');
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * An interface which allows a control to work inside of a `MсFormField`.
- * @abstract
- * @template T
- */
-var   /**
- * An interface which allows a control to work inside of a `MсFormField`.
- * @abstract
- * @template T
- */
-McFormFieldNumberControl = /** @class */ (function () {
-    function McFormFieldNumberControl() {
-    }
-    return McFormFieldNumberControl;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var nextUniqueId$1 = 0;
-var McHint = /** @class */ (function () {
-    function McHint() {
-        this.id = "mc-hint-" + nextUniqueId$1++;
-    }
-    McHint.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-hint',
-                    host: {
-                        class: 'mc-hint',
-                        '[attr.id]': 'id'
-                    }
-                },] },
-    ];
-    McHint.propDecorators = {
-        id: [{ type: core.Input }]
-    };
-    return McHint;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McPrefix = /** @class */ (function () {
-    function McPrefix() {
-    }
-    McPrefix.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcPrefix]'
-                },] },
-    ];
-    return McPrefix;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McStepper = /** @class */ (function () {
-    function McStepper() {
-        this.stepUp = new core.EventEmitter();
-        this.stepDown = new core.EventEmitter();
-    }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
-    McStepper.prototype.onStepUp = /**
-     * @param {?} $event
-     * @return {?}
-     */
-    function ($event) {
-        this.stepUp.emit();
-        $event.preventDefault();
-    };
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
-    McStepper.prototype.onStepDown = /**
-     * @param {?} $event
-     * @return {?}
-     */
-    function ($event) {
-        this.stepDown.emit();
-        $event.preventDefault();
-    };
-    McStepper.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-stepper',
-                    template: "\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-up mc-angle-down-L_16\"\n           (mousedown)=\"onStepUp($event)\">\n        </i>\n        <i class=\"mc mc-icon mc-icon_light mc-second mc-stepper-step-down mc-angle-down-L_16\"\n           (mousedown)=\"onStepDown($event)\">\n        </i>\n    "
-                },] },
-    ];
-    McStepper.propDecorators = {
-        stepUp: [{ type: core.Output }],
-        stepDown: [{ type: core.Output }]
-    };
-    return McStepper;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McSuffix = /** @class */ (function () {
-    function McSuffix() {
-    }
-    McSuffix.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcSuffix]'
-                },] },
-    ];
-    return McSuffix;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-var nextUniqueId$1$1 = 0;
-var McFormFieldBase = /** @class */ (function () {
-    function McFormFieldBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McFormFieldBase;
-}());
-/** @type {?} */
-var _McFormFieldMixinBase = mixinColor(McFormFieldBase);
-var McFormField = /** @class */ (function (_super) {
-    __extends(McFormField, _super);
-    function McFormField(_elementRef, _changeDetectorRef) {
-        var _this = _super.call(this, _elementRef) || this;
-        _this._elementRef = _elementRef;
-        _this._changeDetectorRef = _changeDetectorRef;
-        // Unique id for the internal form field label.
-        _this._labelId = "mc-form-field-label-" + nextUniqueId$1$1++;
-        _this.hovered = false;
-        return _this;
-    }
-    /**
-     * @return {?}
-     */
-    McFormField.prototype.ngAfterContentInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this._validateControlChild();
-        if (this._control.controlType) {
-            this._elementRef.nativeElement.classList
-                .add("mc-form-field-type-" + this._control.controlType);
-            if (this._numberControl && this.hasStepper) {
-                this._stepper.stepUp.subscribe(this.onStepUp.bind(this));
-                this._stepper.stepDown.subscribe(this.onStepDown.bind(this));
-            }
-        }
-        // Subscribe to changes in the child control state in order to update the form field UI.
-        this._control.stateChanges.pipe(operators.startWith())
-            .subscribe(function () {
-            _this._changeDetectorRef.markForCheck();
-        });
-        if (this._numberControl) {
-            this._numberControl.stateChanges.pipe(operators.startWith())
-                .subscribe(function () {
-                _this._changeDetectorRef.markForCheck();
-            });
-        }
-        // Run change detection if the value changes.
-        /** @type {?} */
-        var valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || rxjs.EMPTY;
-        rxjs.merge(valueChanges)
-            .subscribe(function () { return _this._changeDetectorRef.markForCheck(); });
-    };
-    /**
-     * @return {?}
-     */
-    McFormField.prototype.ngAfterContentChecked = /**
-     * @return {?}
-     */
-    function () {
-        this._validateControlChild();
-    };
-    /**
-     * @return {?}
-     */
-    McFormField.prototype.ngAfterViewInit = /**
-     * @return {?}
-     */
-    function () {
-        // Avoid animations on load.
-        this._changeDetectorRef.detectChanges();
-    };
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
-    McFormField.prototype.clearValue = /**
-     * @param {?} $event
-     * @return {?}
-     */
-    function ($event) {
-        $event.stopPropagation();
-        if (this._control && this._control.ngControl) {
-            this._control.ngControl.reset();
-        }
-    };
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
-    McFormField.prototype.onContainerClick = /**
-     * @param {?} $event
-     * @return {?}
-     */
-    function ($event) {
-        if (this._control.onContainerClick) {
-            this._control.onContainerClick($event);
-        }
-    };
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    McFormField.prototype.onKeyDown = /**
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        // tslint:disable-next-line:deprecation
-        if (event.keyCode === keycodes.ESCAPE && this._control.focused && this.hasCleaner) {
-            if (this._control && this._control.ngControl) {
-                this._control.ngControl.reset();
-            }
-            event.preventDefault();
-        }
-    };
-    /**
-     * @param {?} isHovered
-     * @return {?}
-     */
-    McFormField.prototype.onHoverChanged = /**
-     * @param {?} isHovered
-     * @return {?}
-     */
-    function (isHovered) {
-        if (isHovered !== this.hovered) {
-            this.hovered = isHovered;
-            this._changeDetectorRef.markForCheck();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    McFormField.prototype.onStepUp = /**
-     * @return {?}
-     */
-    function () {
-        if (this._numberControl) {
-            this._numberControl.stepUp(this._numberControl.step);
-        }
-    };
-    /**
-     * @return {?}
-     */
-    McFormField.prototype.onStepDown = /**
-     * @return {?}
-     */
-    function () {
-        if (this._numberControl) {
-            this._numberControl.stepDown(this._numberControl.step);
-        }
-    };
-    /**
-     * Gets an ElementRef for the element that a overlay attached to the form-field should be
-     * positioned relative to.
-     */
-    /**
-     * Gets an ElementRef for the element that a overlay attached to the form-field should be
-     * positioned relative to.
-     * @return {?}
-     */
-    McFormField.prototype.getConnectedOverlayOrigin = /**
-     * Gets an ElementRef for the element that a overlay attached to the form-field should be
-     * positioned relative to.
-     * @return {?}
-     */
-    function () {
-        return this.connectionContainerRef || this._elementRef;
-    };
-    /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    /**
-     * Determines whether a class from the NgControl should be forwarded to the host element.
-     * @param {?} prop
-     * @return {?}
-     */
-    McFormField.prototype._shouldForward = /**
-     * Determines whether a class from the NgControl should be forwarded to the host element.
-     * @param {?} prop
-     * @return {?}
-     */
-    function (prop) {
-        /** @type {?} */
-        var ngControl = this._control ? this._control.ngControl : null;
-        return ngControl && ngControl[prop];
-    };
-    /** Throws an error if the form field's control is missing. */
-    /**
-     * Throws an error if the form field's control is missing.
-     * @protected
-     * @return {?}
-     */
-    McFormField.prototype._validateControlChild = /**
-     * Throws an error if the form field's control is missing.
-     * @protected
-     * @return {?}
-     */
-    function () {
-        if (!this._control) {
-            throw getMcFormFieldMissingControlError();
-        }
-    };
-    Object.defineProperty(McFormField.prototype, "hasHint", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._hint && this._hint.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "hasSuffix", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._suffix && this._suffix.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "hasPrefix", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._prefix && this._prefix.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "hasCleaner", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._cleaner && this._cleaner.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "hasStepper", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return !!this._stepper;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "canShowCleaner", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.hasCleaner &&
-                this._control &&
-                this._control.ngControl
-                ? this._control.ngControl.value && !this._control.disabled
-                : false;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "disabled", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._control && this._control.disabled;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McFormField.prototype, "canShowStepper", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._numberControl &&
-                !this.disabled &&
-                (this._numberControl.focused ||
-                    this.hovered);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    McFormField.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-form-field',
-                    exportAs: 'mcFormField',
-                    template: "<div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\"><div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\"><ng-content select=\"[mcPrefix]\"></ng-content></div><div class=\"mc-form-field__infix\"><ng-content></ng-content></div><div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\"><ng-content select=\"[mcSuffix]\"></ng-content></div><div class=\"mc-form-field__cleaner\" *ngIf=\"canShowCleaner && !hasSuffix\" (click)=\"clearValue($event)\"><ng-content select=\"mc-cleaner\"></ng-content></div><ng-content *ngIf=\"canShowStepper\" select=\"mc-stepper\"></ng-content></div><div class=\"mc-form-field__hint\" *ngIf=\"hasHint\"><ng-content select=\"mc-hint\"></ng-content></div>",
-                    // McInput is a directive and can't have styles, so we need to include its styles here.
-                    // The McInput styles are fairly minimal so it shouldn't be a big deal for people who
-                    // aren't using McInput.
-                    styles: [".mc-form-field{position:relative;display:inline-block;width:100%}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;display:flex;flex-direction:row;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px;cursor:pointer}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px}mc-stepper .mc-stepper-step-down,mc-stepper .mc-stepper-step-up{cursor:pointer;width:32px;text-align:center}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%;min-height:30px}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset} .mc-textarea{background:0 0;margin:0;border:none;outline:0;resize:none;overflow:auto;width:100%;box-sizing:border-box;padding:5px 16px}.mc-textarea{display:inline-block;-webkit-appearance:none;vertical-align:bottom}.mc-textarea:not(.mc-textarea-resizable){box-sizing:border-box;overflow-y:hidden}.mc-textarea.mc-textarea-resizable{resize:vertical;min-height:50px}.mc-textarea:invalid{box-shadow:unset}"],
-                    host: {
-                        class: 'mc-form-field',
-                        '[class.mc-form-field_invalid]': '_control.errorState',
-                        '[class.mc-disabled]': '_control.disabled',
-                        '[class.mc-form-field_has-prefix]': 'hasPrefix',
-                        '[class.mc-form-field_has-suffix]': 'hasSuffix',
-                        '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
-                        '[class.mc-form-field_has-stepper]': 'canShowStepper',
-                        '[class.mc-focused]': '_control.focused',
-                        '[class.ng-untouched]': '_shouldForward("untouched")',
-                        '[class.ng-touched]': '_shouldForward("touched")',
-                        '[class.ng-pristine]': '_shouldForward("pristine")',
-                        '[class.ng-dirty]': '_shouldForward("dirty")',
-                        '[class.ng-valid]': '_shouldForward("valid")',
-                        '[class.ng-invalid]': '_shouldForward("invalid")',
-                        '[class.ng-pending]': '_shouldForward("pending")',
-                        '(keydown)': 'onKeyDown($event)',
-                        '(mouseenter)': 'onHoverChanged(true)',
-                        '(mouseleave)': 'onHoverChanged(false)'
-                    },
-                    inputs: ['color'],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McFormField.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef }
-    ]; };
-    McFormField.propDecorators = {
-        _control: [{ type: core.ContentChild, args: [McFormFieldControl,] }],
-        _numberControl: [{ type: core.ContentChild, args: [McFormFieldNumberControl,] }],
-        _stepper: [{ type: core.ContentChild, args: [McStepper,] }],
-        _hint: [{ type: core.ContentChildren, args: [McHint,] }],
-        _suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
-        _prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
-        _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }],
-        connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer',] }]
-    };
-    return McFormField;
-}(_McFormFieldMixinBase));
-var McFormFieldWithoutBorders = /** @class */ (function () {
-    function McFormFieldWithoutBorders() {
-    }
-    McFormFieldWithoutBorders.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-form-field[mcFormFieldWithoutBorders]',
-                    exportAs: 'mcFormFieldWithoutBorders',
-                    host: { class: 'mc-form-field_without-borders' }
-                },] },
-    ];
-    return McFormFieldWithoutBorders;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McFormFieldModule = /** @class */ (function () {
-    function McFormFieldModule() {
-    }
-    McFormFieldModule.decorators = [
-        { type: core.NgModule, args: [{
-                    declarations: [
-                        McFormField,
-                        McFormFieldWithoutBorders,
-                        McHint,
-                        McPrefix,
-                        McSuffix,
-                        McCleaner,
-                        McStepper
-                    ],
-                    imports: [common.CommonModule, McIconModule],
-                    exports: [
-                        McFormField,
-                        McFormFieldWithoutBorders,
-                        McHint,
-                        McPrefix,
-                        McSuffix,
-                        McCleaner,
-                        McStepper
-                    ]
-                },] },
-    ];
-    return McFormFieldModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /**
  * @param {?} inputType
  * @return {?}
@@ -3864,7 +5007,7 @@ var BIG_STEP = 10;
 /** @type {?} */
 var SMALL_STEP = 1;
 /** @type {?} */
-var nextUniqueId$2 = 0;
+var nextUniqueId$3 = 0;
 var McInputBase = /** @class */ (function () {
     function McInputBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
         this.defaultErrorStateMatcher = defaultErrorStateMatcher;
@@ -4145,7 +5288,7 @@ var McInput = /** @class */ (function (_super) {
          * \@docs-private
          */
         _this.controlType = 'mc-input';
-        _this._uid = "mc-input-" + nextUniqueId$2++;
+        _this._uid = "mc-input-" + nextUniqueId$3++;
         _this._disabled = false;
         _this._required = false;
         _this._type = 'text';
@@ -13151,7 +14294,7 @@ var McProgressSpinnerModule = /** @class */ (function () {
  */
 // Increasing integer for generating unique ids for radio components.
 /** @type {?} */
-var nextUniqueId$3 = 0;
+var nextUniqueId$4 = 0;
 /**
  * Change event object emitted by McRadio.
  */
@@ -13213,7 +14356,7 @@ var McRadioGroup = /** @class */ (function (_super) {
         /**
          * The HTML name attribute applied to radio buttons in this group.
          */
-        _this._name = "mc-radio-group-" + nextUniqueId$3++;
+        _this._name = "mc-radio-group-" + nextUniqueId$4++;
         /**
          * The currently selected radio button. Should match value.
          */
@@ -13605,7 +14748,7 @@ var McRadioButton = /** @class */ (function (_super) {
         var _this = _super.call(this, elementRef) || this;
         _this._changeDetector = _changeDetector;
         _this._radioDispatcher = _radioDispatcher;
-        _this._uniqueId = "mc-radio-" + ++nextUniqueId$3;
+        _this._uniqueId = "mc-radio-" + ++nextUniqueId$4;
         /* tslint:disable:member-ordering */
         /**
          * The unique ID for the radio button.
@@ -17642,7 +18785,7 @@ var McTagListBase = /** @class */ (function () {
 var _McTagListMixinBase = mixinErrorState(McTagListBase);
 // Increasing integer for generating unique ids for tag-list components.
 /** @type {?} */
-var nextUniqueId$4 = 0;
+var nextUniqueId$5 = 0;
 /**
  * Change event object that is emitted when the tag list value has changed.
  */
@@ -17671,7 +18814,7 @@ var McTagList = /** @class */ (function (_super) {
          * \@docs-private
          */
         _this.valueChange = new core.EventEmitter();
-        _this.uid = "mc-tag-list-" + nextUniqueId$4++;
+        _this.uid = "mc-tag-list-" + nextUniqueId$5++;
         /**
          * User defined tab index.
          * When it is not null, use user defined tab index. Otherwise use tabIndex
@@ -18813,7 +19956,7 @@ var McTagList = /** @class */ (function (_super) {
  */
 // Increasing integer for generating unique ids.
 /** @type {?} */
-var nextUniqueId$1$2 = 0;
+var nextUniqueId$1$1 = 0;
 /**
  * Directive that adds tag-specific behaviors to an input element inside `<mc-form-field>`.
  * May be placed inside or outside of an `<mc-tag-list>`.
@@ -18843,7 +19986,7 @@ var McTagInput = /** @class */ (function () {
         /**
          * Unique id for the input.
          */
-        this.id = "mc-tag-list-input-" + nextUniqueId$1$2++;
+        this.id = "mc-tag-list-input-" + nextUniqueId$1$1++;
         this._addOnBlur = false;
         this._disabled = false;
         // tslint:disable-next-line: no-unnecessary-type-assertion
@@ -19114,7 +20257,7 @@ var McTagsModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var nextUniqueId$5 = 0;
+var nextUniqueId$6 = 0;
 /**
  * The height of the select items in `em` units.
  * @type {?}
@@ -19265,7 +20408,7 @@ var McSelect = /** @class */ (function (_super) {
         /**
          * Unique id for this input.
          */
-        _this.uid = "mc-select-" + nextUniqueId$5++;
+        _this.uid = "mc-select-" + nextUniqueId$6++;
         /**
          * Emits whenever the component is destroyed.
          */
@@ -20901,7 +22044,7 @@ var McSelectModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var nextUniqueId$6 = 0;
+var nextUniqueId$7 = 0;
 /**
  * Change event object that is emitted when the select value has changed.
  */
@@ -21052,7 +22195,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         /**
          * Unique id for this input.
          */
-        _this.uid = "mc-select-" + nextUniqueId$6++;
+        _this.uid = "mc-select-" + nextUniqueId$7++;
         /**
          * Emits whenever the component is destroyed.
          */
@@ -22719,7 +23862,7 @@ var McTreeSelectModule = /** @class */ (function () {
 /** @type {?} */
 var MC_TEXTAREA_VALUE_ACCESSOR = new core.InjectionToken('MC_TEXTAREA_VALUE_ACCESSOR');
 /** @type {?} */
-var nextUniqueId$7 = 0;
+var nextUniqueId$8 = 0;
 var McTextareaBase = /** @class */ (function () {
     function McTextareaBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
         this.defaultErrorStateMatcher = defaultErrorStateMatcher;
@@ -22755,7 +23898,7 @@ var McTextarea = /** @class */ (function (_super) {
          * \@docs-private
          */
         _this.controlType = 'mc-textarea';
-        _this.uid = "mc-textsrea-" + nextUniqueId$7++;
+        _this.uid = "mc-textsrea-" + nextUniqueId$8++;
         _this._disabled = false;
         _this._required = false;
         _this.lineHeight = 0;
@@ -25826,7 +26969,7 @@ var McSplitterModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var nextUniqueId$8 = 0;
+var nextUniqueId$9 = 0;
 var McToggleBase = /** @class */ (function () {
     function McToggleBase(_elementRef) {
         this._elementRef = _elementRef;
@@ -25850,7 +26993,7 @@ var McToggleComponent = /** @class */ (function (_super) {
         _this.labelPosition = 'right';
         _this.ariaLabel = '';
         _this.ariaLabelledby = null;
-        _this._uniqueId = "mc-toggle-" + ++nextUniqueId$8;
+        _this._uniqueId = "mc-toggle-" + ++nextUniqueId$9;
         // tslint:disable:member-ordering
         _this.id = _this._uniqueId;
         _this.name = null;
@@ -27103,6 +28246,21 @@ exports.SELECT_PANEL_INDENT_PADDING_X = SELECT_PANEL_INDENT_PADDING_X;
 exports.SELECT_PANEL_VIEWPORT_PADDING = SELECT_PANEL_VIEWPORT_PADDING;
 exports.MC_SELECT_SCROLL_STRATEGY = MC_SELECT_SCROLL_STRATEGY;
 exports.MC_SELECT_SCROLL_STRATEGY_PROVIDER = MC_SELECT_SCROLL_STRATEGY_PROVIDER;
+exports.MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY = MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY;
+exports.McAutocompleteSelectedEvent = McAutocompleteSelectedEvent;
+exports.MC_AUTOCOMPLETE_DEFAULT_OPTIONS = MC_AUTOCOMPLETE_DEFAULT_OPTIONS;
+exports.McAutocomplete = McAutocomplete;
+exports.McAutocompleteModule = McAutocompleteModule;
+exports.MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY = MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY;
+exports.getMcAutocompleteMissingPanelError = getMcAutocompleteMissingPanelError;
+exports.AUTOCOMPLETE_OPTION_HEIGHT = AUTOCOMPLETE_OPTION_HEIGHT;
+exports.AUTOCOMPLETE_PANEL_HEIGHT = AUTOCOMPLETE_PANEL_HEIGHT;
+exports.AUTOCOMPLETE_BORDER_WIDTH = AUTOCOMPLETE_BORDER_WIDTH;
+exports.MC_AUTOCOMPLETE_SCROLL_STRATEGY = MC_AUTOCOMPLETE_SCROLL_STRATEGY;
+exports.MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER;
+exports.MAT_AUTOCOMPLETE_VALUE_ACCESSOR = MAT_AUTOCOMPLETE_VALUE_ACCESSOR;
+exports.McAutocompleteTrigger = McAutocompleteTrigger;
+exports.McAutocompleteOrigin = McAutocompleteOrigin;
 exports.McButtonModule = McButtonModule;
 exports.McButtonCssStyler = McButtonCssStyler;
 exports.McButtonBase = McButtonBase;
@@ -27126,7 +28284,7 @@ exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
 exports.McCheckboxModule = McCheckboxModule;
 exports.MC_CHECKBOX_REQUIRED_VALIDATOR = MC_CHECKBOX_REQUIRED_VALIDATOR;
 exports.McCheckboxRequiredValidator = McCheckboxRequiredValidator;
-exports.ɵa29 = McMultiYearView;
+exports.ɵa30 = McMultiYearView;
 exports.McDatepickerModule = McDatepickerModule;
 exports.McCalendarHeader = McCalendarHeader;
 exports.McCalendar = McCalendar;
@@ -27270,15 +28428,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd14 = McTabBase;
+exports.ɵe14 = mcTabMixinBase;
+exports.ɵa14 = McTabHeaderBase;
+exports.ɵb14 = McTabLabelWrapperBase;
+exports.ɵc14 = mcTabLabelWrapperMixinBase;
+exports.ɵh14 = McTabLinkBase;
+exports.ɵf14 = McTabNavBase;
+exports.ɵi14 = mcTabLinkMixinBase;
+exports.ɵg14 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
