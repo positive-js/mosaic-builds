@@ -3496,7 +3496,6 @@ var McDatepickerModule = /** @class */ (function () {
                         OverlayModule,
                         A11yModule,
                         PortalModule,
-                        McButtonModule,
                         McIconModule
                     ],
                     exports: [
@@ -3510,7 +3509,8 @@ var McDatepickerModule = /** @class */ (function () {
                         McMonthView,
                         McYearView,
                         McMultiYearView,
-                        McCalendarHeader
+                        McCalendarHeader,
+                        McButtonModule
                     ],
                     declarations: [
                         McCalendar,

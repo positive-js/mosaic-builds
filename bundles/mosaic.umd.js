@@ -9311,7 +9311,6 @@ var McDatepickerModule = /** @class */ (function () {
                         overlay.OverlayModule,
                         a11y.A11yModule,
                         portal.PortalModule,
-                        McButtonModule,
                         McIconModule
                     ],
                     exports: [
@@ -9325,7 +9324,8 @@ var McDatepickerModule = /** @class */ (function () {
                         McMonthView,
                         McYearView,
                         McMultiYearView,
-                        McCalendarHeader
+                        McCalendarHeader,
+                        McButtonModule
                     ],
                     declarations: [
                         McCalendar,
@@ -28346,10 +28346,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc23 = MAX_VALIDATOR;
-exports.ɵa23 = MIN_VALIDATOR;
-exports.ɵd23 = MaxValidator;
-exports.ɵb23 = MinValidator;
+exports.ɵc22 = MAX_VALIDATOR;
+exports.ɵa22 = MIN_VALIDATOR;
+exports.ɵd22 = MaxValidator;
+exports.ɵb22 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -28383,8 +28383,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb25 = CssUnitPipe;
-exports.ɵa25 = McModalControlService;
+exports.ɵb26 = CssUnitPipe;
+exports.ɵa26 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -28428,15 +28428,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd14 = McTabBase;
-exports.ɵe14 = mcTabMixinBase;
-exports.ɵa14 = McTabHeaderBase;
-exports.ɵb14 = McTabLabelWrapperBase;
-exports.ɵc14 = mcTabLabelWrapperMixinBase;
-exports.ɵh14 = McTabLinkBase;
-exports.ɵf14 = McTabNavBase;
-exports.ɵi14 = mcTabLinkMixinBase;
-exports.ɵg14 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;

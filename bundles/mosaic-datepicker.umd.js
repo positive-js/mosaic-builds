@@ -3511,7 +3511,6 @@ var McDatepickerModule = /** @class */ (function () {
                         overlay.OverlayModule,
                         a11y.A11yModule,
                         portal.PortalModule,
-                        button.McButtonModule,
                         icon.McIconModule
                     ],
                     exports: [
@@ -3525,7 +3524,8 @@ var McDatepickerModule = /** @class */ (function () {
                         McMonthView,
                         McYearView,
                         McMultiYearView,
-                        McCalendarHeader
+                        McCalendarHeader,
+                        button.McButtonModule
                     ],
                     declarations: [
                         McCalendar,

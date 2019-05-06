@@ -2821,7 +2821,6 @@ McDatepickerModule.decorators = [
                     OverlayModule,
                     A11yModule,
                     PortalModule,
-                    McButtonModule,
                     McIconModule
                 ],
                 exports: [
@@ -2835,7 +2834,8 @@ McDatepickerModule.decorators = [
                     McMonthView,
                     McYearView,
                     McMultiYearView,
-                    McCalendarHeader
+                    McCalendarHeader,
+                    McButtonModule
                 ],
                 declarations: [
                     McCalendar,
