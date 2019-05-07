@@ -28727,7 +28727,7 @@ var McVerticalNavbarModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var VERSION = new core.Version('1.0.0-beta.5');
+var VERSION = new core.Version('1.0.0-beta.6');
 
 exports.VERSION = VERSION;
 exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
@@ -29033,13 +29033,13 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵb19 = mcSidepanelAnimations;
-exports.ɵa19 = mcSidepanelTransformAnimation;
-exports.ɵg19 = McSidepanelActions;
-exports.ɵe19 = McSidepanelBody;
-exports.ɵc19 = McSidepanelClose;
-exports.ɵf19 = McSidepanelFooter;
-exports.ɵd19 = McSidepanelHeader;
+exports.ɵb17 = mcSidepanelAnimations;
+exports.ɵa17 = mcSidepanelTransformAnimation;
+exports.ɵg17 = McSidepanelActions;
+exports.ɵe17 = McSidepanelBody;
+exports.ɵc17 = McSidepanelClose;
+exports.ɵf17 = McSidepanelFooter;
+exports.ɵd17 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
@@ -29066,7 +29066,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa21 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

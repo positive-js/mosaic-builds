@@ -32,18 +32,18 @@ export { McTreeSelectModule, McTreeSelectChange, McTreeSelectTrigger, McTreeSele
 export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, _McTagMixinBase, McTag, McTagRemove, McTagListBase, _McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS } from '@ptsecurity/mosaic/tags';
 export { MC_TEXTAREA_VALUE_ACCESSOR, McTextareaBase, McTextareaMixinBase, McTextarea, McTextareaModule } from '@ptsecurity/mosaic/textarea';
 export { McTimepickerModule, TimeParts, TimeFormats, TIMEFORMAT_PLACEHOLDERS, DEFAULT_TIME_FORMAT, HOURS_MINUTES_SECONDS_REGEXP, HOURS_MINUTES_REGEXP, HOURS_ONLY_REGEXP, SECONDS_PER_MINUTE, MINUTES_PER_HOUR, HOURS_PER_DAY, ARROW_UP_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_LEFT_KEYCODE, ARROW_RIGHT_KEYCODE, McTimepickerBase, McTimepickerMixinBase, McTimepicker } from '@ptsecurity/mosaic/timepicker';
-export { ɵb19, ɵa19, ɵg19, ɵe19, ɵc19, ɵf19, ɵd19, McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef } from '@ptsecurity/mosaic/sidepanel';
+export { ɵb17, ɵa17, ɵg17, ɵe17, ɵc17, ɵf17, ɵd17, McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef } from '@ptsecurity/mosaic/sidepanel';
 export { McSplitterModule, McSplitterComponent, McGutterDirective, McSplitterAreaDirective } from '@ptsecurity/mosaic/splitter';
 export { McToggleModule, McToggleBase, _McToggleMixinBase, McToggleChange, McToggleComponent } from '@ptsecurity/mosaic/toggle';
 export { McToolTipModule, mcTooltipScrollStrategyFactory, getMcTooltipInvalidPositionError, McTooltipComponent, MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McTooltip } from '@ptsecurity/mosaic/tooltip';
-export { ɵa22, McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, _McVerticalNavbarMixinBase, McVerticalNavbarItem } from '@ptsecurity/mosaic/vertical-navbar';
+export { ɵa21, McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, _McVerticalNavbarMixinBase, McVerticalNavbarItem } from '@ptsecurity/mosaic/vertical-navbar';
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var VERSION = new Version('1.0.0-beta.5');
+var VERSION = new Version('1.0.0-beta.6');
 
 /**
  * @fileoverview added by tsickle
