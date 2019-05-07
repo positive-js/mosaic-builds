@@ -5,18 +5,20 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { DOCUMENT, CommonModule } from '@angular/common';
-import { Directive, TemplateRef, ComponentFactoryResolver, ApplicationRef, Injector, ViewContainerRef, Inject, InjectionToken, ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, Optional, ContentChild, ContentChildren, EventEmitter, Input, NgZone, Output, ViewChild, NgModule } from '@angular/core';
+import { Directive, TemplateRef, ComponentFactoryResolver, ApplicationRef, Injector, ViewContainerRef, Inject, InjectionToken, ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, Optional, Input, ViewChild, ContentChild, ContentChildren, EventEmitter, NgZone, Output, Self, NgModule } from '@angular/core';
 import { TemplatePortal, DomPortalOutlet } from '@ptsecurity/cdk/portal';
-import { Subject, Subscription, merge } from 'rxjs';
+import { Subject, merge, Subscription, asapScheduler, of } from 'rxjs';
 import { __extends } from 'tslib';
 import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled } from '@ptsecurity/mosaic/core';
 import { trigger, state, style, animate, transition, query, group } from '@angular/animations';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { ESCAPE, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import { take, filter, takeUntil } from 'rxjs/operators';
+import { ESCAPE, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
+import { startWith, switchMap, take, delay, filter, takeUntil } from 'rxjs/operators';
 import { Directionality } from '@ptsecurity/cdk/bidi';
 import { Overlay, OverlayConfig, OverlayModule } from '@ptsecurity/cdk/overlay';
+import { normalizePassiveListenerOptions } from '@ptsecurity/cdk/platform';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
@@ -161,6 +163,22 @@ var McDropdownItem = /** @class */ (function (_super) {
         _this._elementRef = _elementRef;
         _this._focusMonitor = _focusMonitor;
         _this._parentDropdownPanel = _parentDropdownPanel;
+        /**
+         * ARIA role for the dropdown item.
+         */
+        _this.role = 'menuitem';
+        /**
+         * Stream that emits when the dropdown item is hovered.
+         */
+        _this._hovered = new Subject();
+        /**
+         * Whether the dropdown item is highlighted.
+         */
+        _this._highlighted = false;
+        /**
+         * Whether the dropdown item acts as a trigger for a nested dropdown.
+         */
+        _this._triggersNestedDropdown = false;
         if (_focusMonitor) {
             // Start monitoring the element so it gets the appropriate focused classes. We want
             // to show the focus style for dropdown items only when the focus was not caused by a
@@ -206,6 +224,7 @@ var McDropdownItem = /** @class */ (function (_super) {
         if (this._parentDropdownPanel && this._parentDropdownPanel.removeItem) {
             this._parentDropdownPanel.removeItem(this);
         }
+        this._hovered.complete();
     };
     /** Used to set the `tabindex`. */
     /**
@@ -248,6 +267,18 @@ var McDropdownItem = /** @class */ (function (_super) {
             event.stopPropagation();
         }
     };
+    /** Emits to the hover stream. */
+    /**
+     * Emits to the hover stream.
+     * @return {?}
+     */
+    McDropdownItem.prototype._handleMouseEnter = /**
+     * Emits to the hover stream.
+     * @return {?}
+     */
+    function () {
+        this._hovered.next(this);
+    };
     /** Gets the label to be used when determining whether the option should be focused. */
     /**
      * Gets the label to be used when determining whether the option should be focused.
@@ -259,7 +290,7 @@ var McDropdownItem = /** @class */ (function (_super) {
      */
     function () {
         /** @type {?} */
-        var element = this._elementRef.nativeElement;
+        var element = this.content.nativeElement;
         // tslint:disable-next-line:no-magic-numbers
         /** @type {?} */
         var textNodeType = this._document ? this._document.TEXT_NODE : 3;
@@ -285,15 +316,18 @@ var McDropdownItem = /** @class */ (function (_super) {
                     exportAs: 'mcDropdownItem',
                     inputs: ['disabled'],
                     host: {
-                        role: 'dropdown-item',
+                        '[attr.role]': 'role',
                         class: 'mc-dropdown__item',
+                        '[class.mc-dropdown__item_highlighted]': '_highlighted',
                         '[attr.tabindex]': '_getTabIndex()',
+                        '[attr.aria-disabled]': 'disabled.toString()',
                         '[attr.disabled]': 'disabled || null',
-                        '(click)': '_checkDisabled($event)'
+                        '(click)': '_checkDisabled($event)',
+                        '(mouseenter)': '_handleMouseEnter()'
                     },
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
-                    template: "<ng-content></ng-content>"
+                    template: "\n        <div #content>\n            <ng-content></ng-content>\n        </div>\n        <i *ngIf=\"_triggersNestedDropdown\" mc-icon=\"mc-angle-right-M_16\" class=\"mc-dropdown__trigger\"></i>\n    "
                 },] },
     ];
     /** @nocollapse */
@@ -303,6 +337,10 @@ var McDropdownItem = /** @class */ (function (_super) {
         { type: FocusMonitor },
         { type: undefined, decorators: [{ type: Inject, args: [MC_DROPDOWN_PANEL,] }, { type: Optional }] }
     ]; };
+    McDropdownItem.propDecorators = {
+        role: [{ type: Input }],
+        content: [{ type: ViewChild, args: ['content',] }]
+    };
     return McDropdownItem;
 }(_McDropdownItemMixinBase));
 
@@ -311,6 +349,8 @@ var McDropdownItem = /** @class */ (function (_super) {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
+ * Throws an exception for the case when dropdown trigger doesn't have a valid mc-dropdown instance
+ * \@docs-private
  * @return {?}
  */
 function throwMcDropdownMissingError() {
@@ -341,8 +381,6 @@ function throwMcDropdownInvalidPositionY() {
  */
 /**
  * Animations used by the mc-dropdown component.
- * Animation duration and timing values are based on:
- * https://material.io/guidelines/components/menus.html#menus-usage
  * \@docs-private
  * @type {?}
  */
@@ -402,7 +440,8 @@ var MC_DROPDOWN_DEFAULT_OPTIONS = new InjectionToken('mc-dropdown-default-option
  */
 function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY() {
     return {
-        overlapTrigger: false,
+        overlapTriggerX: true,
+        overlapTriggerY: false,
         xPosition: 'after',
         yPosition: 'below',
         backdropClass: 'cdk-overlay-transparent-backdrop'
@@ -447,7 +486,8 @@ var McDropdown = /** @class */ (function () {
          * Subscription to tab events on the dropdown panel
          */
         this._tabSubscription = Subscription.EMPTY;
-        this._overlapTrigger = this._defaultOptions.overlapTrigger;
+        this._overlapTriggerX = this._defaultOptions.overlapTriggerX;
+        this._overlapTriggerY = this._defaultOptions.overlapTriggerY;
         this._hasBackdrop = this._defaultOptions.hasBackdrop;
     }
     Object.defineProperty(McDropdown.prototype, "xPosition", {
@@ -456,7 +496,9 @@ var McDropdown = /** @class */ (function () {
          * Position of the dropdown in the X axis.
          * @return {?}
          */
-        function () { return this._xPosition; },
+        function () {
+            return this._xPosition;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -477,7 +519,9 @@ var McDropdown = /** @class */ (function () {
          * Position of the dropdown in the Y axis.
          * @return {?}
          */
-        function () { return this._yPosition; },
+        function () {
+            return this._yPosition;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -492,19 +536,40 @@ var McDropdown = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(McDropdown.prototype, "overlapTrigger", {
-        /** Whether the dropdown should overlap its trigger. */
+    Object.defineProperty(McDropdown.prototype, "overlapTriggerY", {
+        /** Whether the dropdown should overlap its trigger vertically. */
         get: /**
-         * Whether the dropdown should overlap its trigger.
+         * Whether the dropdown should overlap its trigger vertically.
          * @return {?}
          */
-        function () { return this._overlapTrigger; },
+        function () {
+            return this._overlapTriggerY;
+        },
         set: /**
          * @param {?} value
          * @return {?}
          */
         function (value) {
-            this._overlapTrigger = coerceBooleanProperty(value);
+            this._overlapTriggerY = coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McDropdown.prototype, "overlapTriggerX", {
+        /** Whether the dropdown should overlap its trigger horizontally. */
+        get: /**
+         * Whether the dropdown should overlap its trigger horizontally.
+         * @return {?}
+         */
+        function () {
+            return this._overlapTriggerX;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._overlapTriggerX = coerceBooleanProperty(value);
         },
         enumerable: true,
         configurable: true
@@ -515,7 +580,9 @@ var McDropdown = /** @class */ (function () {
          * Whether the dropdown has a backdrop.
          * @return {?}
          */
-        function () { return this._hasBackdrop; },
+        function () {
+            return this._hasBackdrop;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -541,11 +608,19 @@ var McDropdown = /** @class */ (function () {
          * @return {?}
          */
         function (classes) {
+            var _this = this;
+            /** @type {?} */
+            var previousPanelClass = this._previousPanelClass;
+            if (previousPanelClass && previousPanelClass.length) {
+                previousPanelClass.split(' ').forEach(function (className) {
+                    _this._classList[className] = false;
+                });
+            }
+            this._previousPanelClass = classes;
             if (classes && classes.length) {
-                this._classList = classes.split(' ').reduce(function (obj, className) {
-                    obj[className] = true;
-                    return obj;
-                }, {});
+                classes.split(' ').forEach(function (className) {
+                    _this._classList[className] = true;
+                });
                 this._elementRef.nativeElement.className = '';
             }
         },
@@ -582,6 +657,18 @@ var McDropdown = /** @class */ (function () {
         this._tabSubscription.unsubscribe();
         this.closed.complete();
     };
+    /** Stream that emits whenever the hovered dropdown item changes. */
+    /**
+     * Stream that emits whenever the hovered dropdown item changes.
+     * @return {?}
+     */
+    McDropdown.prototype._hovered = /**
+     * Stream that emits whenever the hovered dropdown item changes.
+     * @return {?}
+     */
+    function () {
+        return this._itemChanges.pipe(startWith(this._items), switchMap(function (items) { return merge.apply(void 0, items.map(function (item) { return item._hovered; })); }));
+    };
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     /**
      * Handle a keyboard event from the dropdown, delegating to the appropriate action.
@@ -594,18 +681,26 @@ var McDropdown = /** @class */ (function () {
      * @return {?}
      */
     function (event) {
-        // tslint:disable-next-line:deprecation
-        switch (event.keyCode) {
+        /** @type {?} */
+        var keyCode = event.keyCode;
+        switch (keyCode) {
             case ESCAPE:
                 this.closed.emit('keydown');
                 break;
-            case UP_ARROW:
-            case DOWN_ARROW:
-                this._keyManager.setFocusOrigin('keyboard');
-                this._keyManager.onKeydown(event);
+            case LEFT_ARROW:
+                if (this.parent && this.direction === 'ltr') {
+                    this.closed.emit('keydown');
+                }
+                break;
+            case RIGHT_ARROW:
+                if (this.parent && this.direction === 'rtl') {
+                    this.closed.emit('keydown');
+                }
                 break;
             default:
-                // todo зачем обрабатывать лишние события ?
+                if (keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
+                    this._keyManager.setFocusOrigin('keyboard');
+                }
                 this._keyManager.onKeydown(event);
         }
     };
@@ -775,12 +870,23 @@ var McDropdown = /** @class */ (function () {
     function (event) {
         this._animationDone.next(event);
         this._isAnimating = false;
-        // Scroll the content element to the top once the animation is done. This is necessary, because
-        // we move focus to the first item while it's still being animated, which can throw the browser
-        // off when it determines the scroll position. Alternatively we can move focus when the
-        // animation is done, however moving focus asynchronously will interrupt screen readers
-        // which are in the process of reading out the dropdown already. We take the `element` from
-        // the `event` since we can't use a `ViewChild` to access the pane.
+    };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdown.prototype._onAnimationStart = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        this._isAnimating = true;
+        // Scroll the content element to the top as soon as the animation starts. This is necessary,
+        // because we move focus to the first item while it's still being animated, which can throw
+        // the browser off when it determines the scroll position. Alternatively we can move focus
+        // when the animation is done, however moving focus asynchronously will interrupt screen
+        // readers which are in the process of reading out the dropdown already. We take the `element`
+        // from the `event` since we can't use a `ViewChild` to access the pane.
         if (event.toState === 'enter' && this._keyManager.activeItemIndex === 0) {
             event.element.scrollTop = 0;
         }
@@ -788,8 +894,8 @@ var McDropdown = /** @class */ (function () {
     McDropdown.decorators = [
         { type: Component, args: [{
                     selector: 'mc-dropdown',
-                    template: "<ng-template><div class=\"mc-dropdown__panel\" [ngClass]=\"_classList\" (keydown)=\"_handleKeydown($event)\" (click)=\"closed.emit('click')\" [@transformDropdown]=\"_panelAnimationState\" (@transformDropdown.start)=\"_isAnimating = true\" (@transformDropdown.done)=\"_onAnimationDone($event)\" tabindex=\"-1\"><div class=\"mc-dropdown__content\"><ng-content></ng-content></div></div></ng-template>",
-                    styles: [".mc-dropdown__item{display:block;box-sizing:border-box;width:100%;border:1px solid transparent;outline:0;padding:5px 15px;text-align:left}.mc-dropdown__item:not([disabled]){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content{height:100%}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
+                    template: "<ng-template><div class=\"mc-dropdown__panel\" [ngClass]=\"_classList\" (keydown)=\"_handleKeydown($event)\" (click)=\"closed.emit('click')\" [@transformDropdown]=\"_panelAnimationState\" (@transformDropdown.start)=\"_onAnimationStart($event)\" (@transformDropdown.done)=\"_onAnimationDone($event)\" tabindex=\"-1\" role=\"dropdown\"><div class=\"mc-dropdown__content\"><ng-content></ng-content></div></div></ng-template>",
+                    styles: [".mc-dropdown__item{display:flex;align-items:center;position:relative;box-sizing:border-box;width:100%;border:1px solid transparent;outline:0;padding:5px 15px;text-align:left}.mc-dropdown__item:not([disabled]){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__trigger{margin-left:auto;padding-left:16px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content{height:100%}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
                     exportAs: 'mcDropdown',
@@ -811,7 +917,8 @@ var McDropdown = /** @class */ (function () {
     McDropdown.propDecorators = {
         xPosition: [{ type: Input }],
         yPosition: [{ type: Input }],
-        overlapTrigger: [{ type: Input }],
+        overlapTriggerY: [{ type: Input }],
+        overlapTriggerX: [{ type: Input }],
         hasBackdrop: [{ type: Input }],
         panelClass: [{ type: Input, args: ['class',] }],
         backdropClass: [{ type: Input }],
@@ -850,17 +957,35 @@ var MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     useFactory: MC_DROPDOWN_SCROLL_STRATEGY_FACTORY
 };
 /**
+ * Default top padding of the nested dropdown panel.
+ * @type {?}
+ */
+var NESTED_PANEL_TOP_PADDING = 2;
+/**
+ * Options for binding a passive event listener.
+ * @type {?}
+ */
+var passiveEventListenerOptions = normalizePassiveListenerOptions({ passive: true });
+/**
  * This directive is intended to be used in conjunction with an mc-dropdown tag.  It is
  * responsible for toggling the display of the provided dropdown instance.
  */
 var McDropdownTrigger = /** @class */ (function () {
-    function McDropdownTrigger(_overlay, _element, _viewContainerRef, _scrollStrategy, _dir, _focusMonitor) {
+    function McDropdownTrigger(_overlay, _element, _viewContainerRef, _scrollStrategy, _parent, _dropdownItemInstance, _dir, _focusMonitor) {
+        var _this = this;
         this._overlay = _overlay;
         this._element = _element;
         this._viewContainerRef = _viewContainerRef;
         this._scrollStrategy = _scrollStrategy;
+        this._parent = _parent;
+        this._dropdownItemInstance = _dropdownItemInstance;
         this._dir = _dir;
         this._focusMonitor = _focusMonitor;
+        /**
+         * Handles touch start events on the trigger.
+         * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
+         */
+        this._handleTouchStart = function () { return _this._openedBy = 'touch'; };
         // Tracking input type is necessary so it's possible to only auto-focus
         // the first item of the list when the dropdown is opened via the keyboard
         this._openedBy = null;
@@ -876,19 +1001,11 @@ var McDropdownTrigger = /** @class */ (function () {
         this._opened = false;
         this._closeSubscription = Subscription.EMPTY;
         this._hoverSubscription = Subscription.EMPTY;
+        _element.nativeElement.addEventListener('touchstart', this._handleTouchStart, passiveEventListenerOptions);
+        if (_dropdownItemInstance) {
+            _dropdownItemInstance._triggersNestedDropdown = this.triggersNestedDropdown();
+        }
     }
-    Object.defineProperty(McDropdownTrigger.prototype, "opened", {
-        /** Whether the dropdown is open. */
-        get: /**
-         * Whether the dropdown is open.
-         * @return {?}
-         */
-        function () {
-            return this._opened;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(McDropdownTrigger.prototype, "dir", {
         /** The text direction of the containing app. */
         get: /**
@@ -901,15 +1018,39 @@ var McDropdownTrigger = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @return {?}
-     */
-    McDropdownTrigger.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.dropdown.closed = this.dropdown.closed || new EventEmitter();
-    };
+    Object.defineProperty(McDropdownTrigger.prototype, "dropdown", {
+        /** References the dropdown instance that the trigger is associated with. */
+        get: /**
+         * References the dropdown instance that the trigger is associated with.
+         * @return {?}
+         */
+        function () {
+            return this._dropdown;
+        },
+        set: /**
+         * @param {?} dropdown
+         * @return {?}
+         */
+        function (dropdown) {
+            var _this = this;
+            if (dropdown === this._dropdown) {
+                return;
+            }
+            this._dropdown = dropdown;
+            this._closeSubscription.unsubscribe();
+            if (dropdown) {
+                this._closeSubscription = dropdown.closed.asObservable().subscribe(function (reason) {
+                    _this._destroy();
+                    // If a click closed the dropdown, we should close the entire chain of nested dropdowns.
+                    if ((reason === 'click' || reason === 'tab') && _this._parent) {
+                        _this._parent.closed.emit(reason);
+                    }
+                });
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -917,11 +1058,8 @@ var McDropdownTrigger = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var _this = this;
         this._check();
-        this.dropdown.closed.asObservable().subscribe(function () {
-            _this._destroy();
-        });
+        this._handleHover();
     };
     /**
      * @return {?}
@@ -934,7 +1072,33 @@ var McDropdownTrigger = /** @class */ (function () {
             this._overlayRef.dispose();
             this._overlayRef = null;
         }
+        this._element.nativeElement.removeEventListener('touchstart', this._handleTouchStart, passiveEventListenerOptions);
         this._cleanUpSubscriptions();
+        this._closeSubscription.unsubscribe();
+    };
+    Object.defineProperty(McDropdownTrigger.prototype, "opened", {
+        /** Whether the dropdown is open. */
+        get: /**
+         * Whether the dropdown is open.
+         * @return {?}
+         */
+        function () {
+            return this._opened;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /** Whether the dropdown triggers a nested dropdown or a top-level one. */
+    /**
+     * Whether the dropdown triggers a nested dropdown or a top-level one.
+     * @return {?}
+     */
+    McDropdownTrigger.prototype.triggersNestedDropdown = /**
+     * Whether the dropdown triggers a nested dropdown or a top-level one.
+     * @return {?}
+     */
+    function () {
+        return !!(this._dropdownItemInstance && this._parent);
     };
     /** Toggles the dropdown between the open and closed states. */
     /**
@@ -966,8 +1130,12 @@ var McDropdownTrigger = /** @class */ (function () {
         this._check();
         /** @type {?} */
         var overlayRef = this._createOverlay();
-        this._setPosition((/** @type {?} */ (overlayRef.getConfig().positionStrategy)));
-        overlayRef.attach(this._portal);
+        /** @type {?} */
+        var overlayConfig = overlayRef.getConfig();
+        this._setPosition((/** @type {?} */ (overlayConfig.positionStrategy)));
+        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersNestedDropdown() :
+            this.dropdown.hasBackdrop;
+        overlayRef.attach(this._getPortal());
         if (this.dropdown.lazyContent) {
             this.dropdown.lazyContent.attach(this.data);
         }
@@ -1040,7 +1208,7 @@ var McDropdownTrigger = /** @class */ (function () {
                     .pipe(filter(function (event) { return event.toState === 'void'; }), take(1), 
                 // Interrupt if the content got re-attached.
                 takeUntil(dropdown.lazyContent._attached))
-                    .subscribe(function () { return dropdown.lazyContent.detach(); }, undefined, function () {
+                    .subscribe(function () { return (/** @type {?} */ (dropdown.lazyContent)).detach(); }, undefined, function () {
                     // No matter whether the content got re-attached, reset the dropdown.
                     _this._reset();
                 });
@@ -1073,6 +1241,7 @@ var McDropdownTrigger = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        this.dropdown.parent = this.triggersNestedDropdown() ? this._parent : undefined;
         this.dropdown.direction = this.dir;
         this._setIsOpened(true);
         this.dropdown.focusFirstItem(this._openedBy || 'program');
@@ -1103,7 +1272,7 @@ var McDropdownTrigger = /** @class */ (function () {
             // `keyboard` so we don't have to specify which one it is.
             this.focus();
         }
-        else {
+        else if (!this.triggersNestedDropdown()) {
             this.focus(this._openedBy);
         }
         this._openedBy = null;
@@ -1126,19 +1295,22 @@ var McDropdownTrigger = /** @class */ (function () {
         this._opened = isOpen;
         // tslint:disable-next-line:no-void-expression
         this._opened ? this.dropdownOpened.emit() : this.dropdownClosed.emit();
+        if (this.triggersNestedDropdown()) {
+            this._dropdownItemInstance._highlighted = isOpen;
+        }
     };
     /**
-     * This method checks that a valid instance of Dropdown has been passed into
+     * This method checks that a valid instance of McDropdown has been passed into
      * mcDropdownTriggerFor. If not, an exception is thrown.
      */
     /**
-     * This method checks that a valid instance of Dropdown has been passed into
+     * This method checks that a valid instance of McDropdown has been passed into
      * mcDropdownTriggerFor. If not, an exception is thrown.
      * @private
      * @return {?}
      */
     McDropdownTrigger.prototype._check = /**
-     * This method checks that a valid instance of Dropdown has been passed into
+     * This method checks that a valid instance of McDropdown has been passed into
      * mcDropdownTriggerFor. If not, an exception is thrown.
      * @private
      * @return {?}
@@ -1166,7 +1338,6 @@ var McDropdownTrigger = /** @class */ (function () {
      */
     function () {
         if (!this._overlayRef) {
-            this._portal = new TemplatePortal(this.dropdown.templateRef, this._viewContainerRef);
             /** @type {?} */
             var config = this._getOverlayConfig();
             this._subscribeToPositions((/** @type {?} */ (config.positionStrategy)));
@@ -1198,9 +1369,6 @@ var McDropdownTrigger = /** @class */ (function () {
                 .flexibleConnectedTo(this._element)
                 .withLockedPosition()
                 .withTransformOriginOn('.mc-dropdown__panel'),
-            hasBackdrop: this.dropdown.hasBackdrop === null || this.dropdown.hasBackdrop === undefined
-                ? true
-                : this.dropdown.hasBackdrop,
             backdropClass: this.dropdown.backdropClass || 'cdk-overlay-transparent-backdrop',
             scrollStrategy: this._scrollStrategy(),
             direction: this._dir
@@ -1230,15 +1398,12 @@ var McDropdownTrigger = /** @class */ (function () {
     function (position) {
         var _this = this;
         if (this.dropdown.setPositionClasses) {
-            // todo possibly we should not recompute positions there
-            /*position.positionChanges.subscribe((change) => {
-                const posX: DropdownPositionX = change.connectionPair.overlayX === 'start' ? 'after' : 'before';
-                const posY: DropdownPositionY = change.connectionPair.overlayY === 'top' ? 'below' : 'above';
-
-                this.dropdown.setPositionClasses!(posX, posY);
-            });*/
-            position.positionChanges.subscribe(function () {
-                (/** @type {?} */ (_this.dropdown.setPositionClasses))(_this.dropdown.xPosition, _this.dropdown.yPosition);
+            position.positionChanges.subscribe(function (change) {
+                /** @type {?} */
+                var posX = change.connectionPair.overlayX === 'start' ? 'after' : 'before';
+                /** @type {?} */
+                var posY = change.connectionPair.overlayY === 'top' ? 'below' : 'above';
+                (/** @type {?} */ (_this.dropdown.setPositionClasses))(posX, posY);
             });
         }
     };
@@ -1262,15 +1427,30 @@ var McDropdownTrigger = /** @class */ (function () {
      * @return {?}
      */
     function (positionStrategy) {
-        var _a = this.dropdown.xPosition === 'before' ? ['end', 'start'] : ['start', 'end'], originX = _a[0], originFallbackX = _a[1];
-        var _b = this.dropdown.yPosition === 'above' ? ['bottom', 'top'] : ['top', 'bottom'], overlayY = _b[0], overlayFallbackY = _b[1];
-        var _c = [overlayY, overlayFallbackY], originY = _c[0], originFallbackY = _c[1];
-        var _d = [originX, originFallbackX], overlayX = _d[0], overlayFallbackX = _d[1];
+        var _a = this.dropdown.xPosition === 'before' ?
+            ['end', 'start', 'end', 'start'] :
+            ['start', 'end', 'start', 'end'], originX = _a[0], originFallbackX = _a[1], overlayX = _a[2], overlayFallbackX = _a[3];
+        var _b = this.dropdown.yPosition === 'above' ?
+            ['bottom', 'top', 'bottom', 'top'] :
+            ['top', 'bottom', 'top', 'bottom'], overlayY = _b[0], overlayFallbackY = _b[1], originY = _b[2], originFallbackY = _b[3];
         /** @type {?} */
         var offsetY = 0;
-        if (!this.dropdown.overlapTrigger) {
-            originY = overlayY === 'top' ? 'bottom' : 'top';
-            originFallbackY = overlayFallbackY === 'top' ? 'bottom' : 'top';
+        if (this.triggersNestedDropdown()) {
+            // When the dropdown is nested, it should always align itself
+            // to the edges of the trigger, instead of overlapping it.
+            overlayFallbackX = originX = this.dropdown.xPosition === 'before' ? 'start' : 'end';
+            originFallbackX = overlayX = originX === 'end' ? 'start' : 'end';
+            offsetY = overlayY === 'bottom' ? NESTED_PANEL_TOP_PADDING : -NESTED_PANEL_TOP_PADDING;
+        }
+        else {
+            if (!this.dropdown.overlapTriggerY) {
+                originY = overlayY === 'top' ? 'bottom' : 'top';
+                originFallbackY = overlayFallbackY === 'top' ? 'bottom' : 'top';
+            }
+            if (!this.dropdown.overlapTriggerX) {
+                overlayFallbackX = originX = this.dropdown.xPosition === 'before' ? 'start' : 'end';
+                originFallbackX = overlayX = originX === 'end' ? 'start' : 'end';
+            }
         }
         positionStrategy.withPositions([
             { originX: originX, originY: originY, overlayX: overlayX, overlayY: overlayY, offsetY: offsetY },
@@ -1318,18 +1498,156 @@ var McDropdownTrigger = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        var _this = this;
         /** @type {?} */
         var backdrop = (/** @type {?} */ (this._overlayRef)).backdropClick();
         /** @type {?} */
         var detachments = (/** @type {?} */ (this._overlayRef)).detachments();
-        return merge(backdrop, detachments);
+        /** @type {?} */
+        var parentClose = this._parent ? this._parent.closed : of();
+        /** @type {?} */
+        var hover = this._parent ? this._parent._hovered().pipe(filter(function (active) { return active !== _this._dropdownItemInstance; }), filter(function () { return _this._opened; })) : of();
+        return merge(backdrop, parentClose, hover, detachments);
+    };
+    /** Handles mouse presses on the trigger. */
+    /**
+     * Handles mouse presses on the trigger.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdownTrigger.prototype._handleMousedown = /**
+     * Handles mouse presses on the trigger.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        // Since right or middle button clicks won't trigger the `click` event,
+        // we shouldn't consider the dropdown as opened by mouse in those cases.
+        this._openedBy = event.button === 0 ? 'mouse' : null;
+        // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
+        // we should prevent focus from moving onto it via click to avoid the
+        // highlight from lingering on the dropdown item.
+        if (this.triggersNestedDropdown()) {
+            event.preventDefault();
+        }
+    };
+    /** Handles key presses on the trigger. */
+    /**
+     * Handles key presses on the trigger.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdownTrigger.prototype._handleKeydown = /**
+     * Handles key presses on the trigger.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        /** @type {?} */
+        var keyCode = event.keyCode;
+        if (keyCode === SPACE || keyCode === ENTER) {
+            this.open();
+        }
+        if (this.triggersNestedDropdown() && ((keyCode === RIGHT_ARROW && this.dir === 'ltr') ||
+            (keyCode === LEFT_ARROW && this.dir === 'rtl'))) {
+            this.open();
+        }
+    };
+    /** Handles click events on the trigger. */
+    /**
+     * Handles click events on the trigger.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdownTrigger.prototype._handleClick = /**
+     * Handles click events on the trigger.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (this.triggersNestedDropdown()) {
+            // Stop event propagation to avoid closing the parent dropdown.
+            event.stopPropagation();
+            this.open();
+        }
+        else {
+            this.toggle();
+        }
+    };
+    /** Handles the cases where the user hovers over the trigger. */
+    /**
+     * Handles the cases where the user hovers over the trigger.
+     * @private
+     * @return {?}
+     */
+    McDropdownTrigger.prototype._handleHover = /**
+     * Handles the cases where the user hovers over the trigger.
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        // Subscribe to changes in the hovered item in order to toggle the panel.
+        if (!this.triggersNestedDropdown()) {
+            return;
+        }
+        this._hoverSubscription = this._parent._hovered()
+            // Since we might have multiple competing triggers for the same dropdown (e.g. a nested dropdown
+            // with different data and triggers), we have to delay it by a tick to ensure that
+            // it won't be closed immediately after it is opened.
+            .pipe(filter(function (active) { return active === _this._dropdownItemInstance && !active.disabled; }), delay(0, asapScheduler))
+            .subscribe(function () {
+            _this._openedBy = 'mouse';
+            // If the same dropdown is used between multiple triggers, it might still be animating
+            // while the new trigger tries to re-open it. Wait for the animation to finish
+            // before doing so. Also interrupt if the user moves to another item.
+            if (_this.dropdown instanceof McDropdown && _this.dropdown._isAnimating) {
+                // We need the `delay(0)` here in order to avoid
+                // 'changed after checked' errors in some cases. See #12194.
+                _this.dropdown._animationDone
+                    .pipe(take(1), delay(0, asapScheduler), takeUntil(_this._parent._hovered()))
+                    .subscribe(function () { return _this.open(); });
+            }
+            else {
+                _this.open();
+            }
+        });
+    };
+    /** Gets the portal that should be attached to the overlay. */
+    /**
+     * Gets the portal that should be attached to the overlay.
+     * @private
+     * @return {?}
+     */
+    McDropdownTrigger.prototype._getPortal = /**
+     * Gets the portal that should be attached to the overlay.
+     * @private
+     * @return {?}
+     */
+    function () {
+        // Note that we can avoid this check by keeping the portal on the dropdown panel.
+        // While it would be cleaner, we'd have to introduce another required method on
+        // `McDropdownPanel`, making it harder to consume.
+        if (!this._portal || this._portal.templateRef !== this.dropdown.templateRef) {
+            this._portal = new TemplatePortal(this.dropdown.templateRef, this._viewContainerRef);
+        }
+        return this._portal;
     };
     McDropdownTrigger.decorators = [
         { type: Directive, args: [{
                     selector: "[mcDropdownTriggerFor]",
                     host: {
-                        '(touchstart)': '_openedBy = "touch"',
-                        '(click)': 'toggle()'
+                        'aria-haspopup': 'true',
+                        '[attr.aria-expanded]': 'opened || null',
+                        '(mousedown)': '_handleMousedown($event)',
+                        '(keydown)': '_handleKeydown($event)',
+                        '(click)': '_handleClick($event)'
                     },
                     exportAs: 'mcDropdownTrigger'
                 },] },
@@ -1340,6 +1658,8 @@ var McDropdownTrigger = /** @class */ (function () {
         { type: ElementRef },
         { type: ViewContainerRef },
         { type: undefined, decorators: [{ type: Inject, args: [MC_DROPDOWN_SCROLL_STRATEGY,] }] },
+        { type: McDropdown, decorators: [{ type: Optional }] },
+        { type: McDropdownItem, decorators: [{ type: Optional }, { type: Self }] },
         { type: Directionality, decorators: [{ type: Optional }] },
         { type: FocusMonitor }
     ]; };
@@ -1363,7 +1683,8 @@ var McDropdownModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     imports: [
                         CommonModule,
-                        OverlayModule
+                        OverlayModule,
+                        McIconModule
                     ],
                     exports: [McDropdown, McDropdownItem, McDropdownTrigger, McDropdownContent],
                     declarations: [McDropdown, McDropdownItem, McDropdownTrigger, McDropdownContent],
@@ -1388,5 +1709,5 @@ var McDropdownModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McDropdownModule, MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY, MC_DROPDOWN_DEFAULT_OPTIONS, McDropdown, McDropdownItemBase, _McDropdownItemMixinBase, McDropdownItem, MC_DROPDOWN_PANEL, throwMcDropdownMissingError, throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY, mcDropdownAnimations, fadeInItems, transformDropdown, McDropdownContent, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY, MC_DROPDOWN_SCROLL_STRATEGY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER, McDropdownTrigger };
+export { McDropdownModule, MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY, MC_DROPDOWN_DEFAULT_OPTIONS, McDropdown, McDropdownItemBase, _McDropdownItemMixinBase, McDropdownItem, MC_DROPDOWN_PANEL, throwMcDropdownMissingError, throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY, mcDropdownAnimations, fadeInItems, transformDropdown, McDropdownContent, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY, MC_DROPDOWN_SCROLL_STRATEGY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER, NESTED_PANEL_TOP_PADDING, McDropdownTrigger };
 //# sourceMappingURL=dropdown.es5.js.map

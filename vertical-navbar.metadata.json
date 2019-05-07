@@ -1,0 +1,12 @@
+{
+  "__symbolic": "module",
+  "version": 3,
+  "metadata": {},
+  "exports": [
+    {
+      "from": "./vertical-navbar/index"
+    }
+  ],
+  "flatModuleIndexRedirect": true,
+  "importAs": "@ptsecurity/mosaic/vertical-navbar"
+}

@@ -1,8 +1,10 @@
-import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, OnDestroy, ViewContainerRef } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
 import { Overlay, IScrollStrategy } from '@ptsecurity/cdk/overlay';
+import { McDropdownItem } from './dropdown-item';
 import { McDropdownPanel } from './dropdown-panel';
+import { McDropdown } from './dropdown.component';
 /** Injection token that determines the scroll handling while the dropdown is open. */
 export declare const MC_DROPDOWN_SCROLL_STRATEGY: InjectionToken<() => IScrollStrategy>;
 /** @docs-private */
@@ -13,24 +15,32 @@ export declare const MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER: {
     deps: (typeof Overlay)[];
     useFactory: typeof MC_DROPDOWN_SCROLL_STRATEGY_FACTORY;
 };
+/** Default top padding of the nested dropdown panel. */
+export declare const NESTED_PANEL_TOP_PADDING = 2;
 /**
  * This directive is intended to be used in conjunction with an mc-dropdown tag.  It is
  * responsible for toggling the display of the provided dropdown instance.
  */
-export declare class McDropdownTrigger implements OnInit, AfterContentInit, OnDestroy {
+export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private _overlay;
     private _element;
     private _viewContainerRef;
     private _scrollStrategy;
+    private _parent;
+    private _dropdownItemInstance;
     private _dir;
     private _focusMonitor?;
-    /** Whether the dropdown is open. */
-    readonly opened: boolean;
+    /**
+     * Handles touch start events on the trigger.
+     * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
+     */
+    private _handleTouchStart;
     /** The text direction of the containing app. */
     readonly dir: Direction;
     _openedBy: 'mouse' | 'touch' | null;
     /** References the dropdown instance that the trigger is associated with. */
     dropdown: McDropdownPanel;
+    private _dropdown;
     /** Data to be passed along to any lazily-rendered content. */
     data: any;
     /** Event emitted when the associated dropdown is opened. */
@@ -42,10 +52,13 @@ export declare class McDropdownTrigger implements OnInit, AfterContentInit, OnDe
     private _opened;
     private _closeSubscription;
     private _hoverSubscription;
-    constructor(_overlay: Overlay, _element: ElementRef<HTMLElement>, _viewContainerRef: ViewContainerRef, _scrollStrategy: any, _dir: Directionality, _focusMonitor?: FocusMonitor);
-    ngOnInit(): void;
+    constructor(_overlay: Overlay, _element: ElementRef<HTMLElement>, _viewContainerRef: ViewContainerRef, _scrollStrategy: any, _parent: McDropdown, _dropdownItemInstance: McDropdownItem, _dir: Directionality, _focusMonitor?: FocusMonitor);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
+    /** Whether the dropdown is open. */
+    readonly opened: boolean;
+    /** Whether the dropdown triggers a nested dropdown or a top-level one. */
+    triggersNestedDropdown(): boolean;
     /** Toggles the dropdown between the open and closed states. */
     toggle(): void;
     /** Opens the dropdown. */
@@ -71,7 +84,7 @@ export declare class McDropdownTrigger implements OnInit, AfterContentInit, OnDe
     private _reset;
     private _setIsOpened;
     /**
-     * This method checks that a valid instance of Dropdown has been passed into
+     * This method checks that a valid instance of McDropdown has been passed into
      * mcDropdownTriggerFor. If not, an exception is thrown.
      */
     private _check;
@@ -101,4 +114,14 @@ export declare class McDropdownTrigger implements OnInit, AfterContentInit, OnDe
     private _cleanUpSubscriptions;
     /** Returns a stream that emits whenever an action that should close the dropdown occurs. */
     private _closingActions;
+    /** Handles mouse presses on the trigger. */
+    private _handleMousedown;
+    /** Handles key presses on the trigger. */
+    private _handleKeydown;
+    /** Handles click events on the trigger. */
+    private _handleClick;
+    /** Handles the cases where the user hovers over the trigger. */
+    private _handleHover;
+    /** Gets the portal that should be attached to the overlay. */
+    private _getPortal;
 }

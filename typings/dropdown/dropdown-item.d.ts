@@ -1,6 +1,7 @@
 import { ElementRef, OnDestroy } from '@angular/core';
 import { IFocusableOption, FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
+import { Subject } from 'rxjs';
 import { McDropdownPanel } from './dropdown-panel';
 /** @docs-private */
 export declare class McDropdownItemBase {
@@ -14,7 +15,16 @@ export declare class McDropdownItem extends _McDropdownItemMixinBase implements 
     private _elementRef;
     private _focusMonitor;
     private _parentDropdownPanel?;
+    /** ARIA role for the dropdown item. */
+    role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox';
+    content: any;
     private _document;
+    /** Stream that emits when the dropdown item is hovered. */
+    readonly _hovered: Subject<McDropdownItem>;
+    /** Whether the dropdown item is highlighted. */
+    _highlighted: boolean;
+    /** Whether the dropdown item acts as a trigger for a nested dropdown. */
+    _triggersNestedDropdown: boolean;
     constructor(_elementRef: ElementRef<HTMLElement>, document: any, _focusMonitor: FocusMonitor, _parentDropdownPanel?: McDropdownPanel<McDropdownItem>);
     /** Focuses the dropdown item. */
     focus(origin?: FocusOrigin): void;
@@ -25,6 +35,8 @@ export declare class McDropdownItem extends _McDropdownItemMixinBase implements 
     _getHostElement(): HTMLElement;
     /** Prevents the default element actions if it is disabled. */
     _checkDisabled(event: Event): void;
+    /** Emits to the hover stream. */
+    _handleMouseEnter(): void;
     /** Gets the label to be used when determining whether the option should be focused. */
     getLabel(): string;
 }

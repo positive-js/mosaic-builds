@@ -1,3 +1,7 @@
+/**
+ * Throws an exception for the case when dropdown trigger doesn't have a valid mc-dropdown instance
+ * @docs-private
+ */
 export declare function throwMcDropdownMissingError(): void;
 /**
  * Throws an exception for the case when dropdown's x-position value isn't valid.

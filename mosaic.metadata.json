@@ -4,31 +4,13 @@
   "metadata": {},
   "exports": [
     {
+      "from": "./divider"
+    },
+    {
       "from": "./core"
     },
     {
       "from": "./card"
-    },
-    {
-      "from": "./divider"
-    },
-    {
-      "from": "./toggle"
-    },
-    {
-      "from": "./checkbox"
-    },
-    {
-      "from": "./tree"
-    },
-    {
-      "from": "./tabs"
-    },
-    {
-      "from": "./dropdown"
-    },
-    {
-      "from": "./layout"
     },
     {
       "from": "./link"
@@ -37,10 +19,25 @@
       "from": "./tooltip"
     },
     {
-      "from": "./icon"
+      "from": "./toggle"
     },
     {
-      "from": "./radio"
+      "from": "./tabs"
+    },
+    {
+      "from": "./tree"
+    },
+    {
+      "from": "./layout"
+    },
+    {
+      "from": "./checkbox"
+    },
+    {
+      "from": "./list"
+    },
+    {
+      "from": "./icon"
     },
     {
       "from": "./progress-bar"
@@ -49,31 +46,28 @@
       "from": "./progress-spinner"
     },
     {
-      "from": "./list"
-    },
-    {
-      "from": "./navbar"
-    },
-    {
-      "from": "./form-field"
-    },
-    {
-      "from": "./sidepanel"
+      "from": "./radio"
     },
     {
       "from": "./splitter"
     },
     {
+      "from": "./dropdown"
+    },
+    {
+      "from": "./form-field"
+    },
+    {
+      "from": "./navbar"
+    },
+    {
       "from": "./button"
     },
     {
-      "from": "./input"
+      "from": "./sidepanel"
     },
     {
-      "from": "./button-toggle"
-    },
-    {
-      "from": "./autocomplete"
+      "from": "./vertical-navbar"
     },
     {
       "from": "./modal"
@@ -85,16 +79,25 @@
       "from": "./tags"
     },
     {
-      "from": "./timepicker"
+      "from": "./input"
     },
     {
-      "from": "./select"
+      "from": "./button-toggle"
+    },
+    {
+      "from": "./autocomplete"
     },
     {
       "from": "./datepicker"
     },
     {
+      "from": "./select"
+    },
+    {
       "from": "./tree-select"
+    },
+    {
+      "from": "./timepicker"
     },
     {
       "from": "./typings/index"

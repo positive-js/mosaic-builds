@@ -2,7 +2,7 @@ import { AnimationEvent } from '@angular/animations';
 import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, TemplateRef, QueryList, OnInit } from '@angular/core';
 import { FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { Direction } from '@ptsecurity/cdk/bidi';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { McDropdownContent } from './dropdown-content';
 import { McDropdownItem } from './dropdown-item';
 import { McDropdownPanel } from './dropdown-panel';
@@ -13,8 +13,10 @@ export interface McDropdownDefaultOptions {
     xPosition: DropdownPositionX;
     /** The y-axis position of the dropdown. */
     yPosition: DropdownPositionY;
-    /** Whether the dropdown should overlap the dropdown trigger. */
-    overlapTrigger: boolean;
+    /** Whether the dropdown should overlap the dropdown trigger horizontally. */
+    overlapTriggerX: boolean;
+    /** Whether the dropdown should overlap the dropdown trigger vertically. */
+    overlapTriggerY: boolean;
     /** Class to be applied to the dropdown's backdrop. */
     backdropClass: string;
     /** Whether the dropdown has a backdrop. */
@@ -32,8 +34,10 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     xPosition: DropdownPositionX;
     /** Position of the dropdown in the Y axis. */
     yPosition: DropdownPositionY;
-    /** Whether the dropdown should overlap its trigger. */
-    overlapTrigger: boolean;
+    /** Whether the dropdown should overlap its trigger vertically. */
+    overlapTriggerY: boolean;
+    /** Whether the dropdown should overlap its trigger horizontally. */
+    overlapTriggerX: boolean;
     /** Whether the dropdown has a backdrop. */
     hasBackdrop: boolean | undefined;
     /**
@@ -53,6 +57,8 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     _animationDone: Subject<AnimationEvent>;
     /** Whether the dropdown is animating. */
     _isAnimating: boolean;
+    /** Parent dropdown of the current dropdown panel. */
+    parent: McDropdownPanel | undefined;
     /** Layout direction of the dropdown. */
     direction: Direction;
     /** Class to be added to the backdrop element. */
@@ -68,6 +74,7 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
      * @docs-private
      */
     lazyContent: McDropdownContent;
+    private _previousPanelClass;
     /** Event emitted when the dropdown is closed. */
     readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
     private _keyManager;
@@ -79,12 +86,15 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     private _itemChanges;
     /** Subscription to tab events on the dropdown panel */
     private _tabSubscription;
-    private _overlapTrigger;
+    private _overlapTriggerX;
+    private _overlapTriggerY;
     private _hasBackdrop;
     constructor(_elementRef: ElementRef<HTMLElement>, _ngZone: NgZone, _defaultOptions: McDropdownDefaultOptions);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
+    /** Stream that emits whenever the hovered dropdown item changes. */
+    _hovered(): Observable<McDropdownItem>;
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     _handleKeydown(event: KeyboardEvent): void;
     /**
@@ -121,4 +131,5 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     _resetAnimation(): void;
     /** Callback that is invoked when the panel animation completes. */
     _onAnimationDone(event: AnimationEvent): void;
+    _onAnimationStart(event: AnimationEvent): void;
 }

@@ -1,0 +1,8 @@
+{
+    "name": "@ptsecurity/mosaic/vertical-navbar",
+    "typings": "../vertical-navbar.d.ts",
+    "main": "../bundles/mosaic-vertical-navbar.umd.js",
+    "module": "../esm5/vertical-navbar.es5.js",
+    "es2015": "../esm2015/vertical-navbar.js",
+    "sideEffects": false
+}
