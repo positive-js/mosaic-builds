@@ -344,6 +344,7 @@ var McTooltip = /** @class */ (function () {
          */
         function (value) {
             this._disabled = coerceBooleanProperty(value);
+            this.updateCompValue('mcTooltipDisabled', value);
         },
         enumerable: true,
         configurable: true
@@ -470,6 +471,9 @@ var McTooltip = /** @class */ (function () {
             this.updateCompValue('mcVisible', value);
             if (value) {
                 this.show();
+            }
+            else {
+                this.hide();
             }
         },
         enumerable: true,

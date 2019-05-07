@@ -304,6 +304,7 @@ class McTooltip {
      */
     set disabled(value) {
         this._disabled = coerceBooleanProperty(value);
+        this.updateCompValue('mcTooltipDisabled', value);
     }
     /**
      * @return {?}
@@ -402,6 +403,9 @@ class McTooltip {
         this.updateCompValue('mcVisible', value);
         if (value) {
             this.show();
+        }
+        else {
+            this.hide();
         }
     }
     /**

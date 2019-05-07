@@ -27902,6 +27902,7 @@ var McTooltip = /** @class */ (function () {
          */
         function (value) {
             this._disabled = coercion.coerceBooleanProperty(value);
+            this.updateCompValue('mcTooltipDisabled', value);
         },
         enumerable: true,
         configurable: true
@@ -28028,6 +28029,9 @@ var McTooltip = /** @class */ (function () {
             this.updateCompValue('mcVisible', value);
             if (value) {
                 this.show();
+            }
+            else {
+                this.hide();
             }
         },
         enumerable: true,
@@ -28875,10 +28879,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc24 = MAX_VALIDATOR;
-exports.ɵa24 = MIN_VALIDATOR;
-exports.ɵd24 = MaxValidator;
-exports.ɵb24 = MinValidator;
+exports.ɵc23 = MAX_VALIDATOR;
+exports.ɵa23 = MIN_VALIDATOR;
+exports.ɵd23 = MaxValidator;
+exports.ɵb23 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -28912,8 +28916,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
+exports.ɵb25 = CssUnitPipe;
+exports.ɵa25 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -29033,13 +29037,13 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵb17 = mcSidepanelAnimations;
-exports.ɵa17 = mcSidepanelTransformAnimation;
-exports.ɵg17 = McSidepanelActions;
-exports.ɵe17 = McSidepanelBody;
-exports.ɵc17 = McSidepanelClose;
-exports.ɵf17 = McSidepanelFooter;
-exports.ɵd17 = McSidepanelHeader;
+exports.ɵb19 = mcSidepanelAnimations;
+exports.ɵa19 = mcSidepanelTransformAnimation;
+exports.ɵg19 = McSidepanelActions;
+exports.ɵe19 = McSidepanelBody;
+exports.ɵc19 = McSidepanelClose;
+exports.ɵf19 = McSidepanelFooter;
+exports.ɵd19 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
