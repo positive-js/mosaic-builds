@@ -1474,7 +1474,6 @@ var MC_SELECT_SCROLL_STRATEGY_PROVIDER = {
  * The following are all the animations for the mc-select component, with each
  * const containing the metadata for one animation.
  *
- * The values below match the implementation of the AngularJS Material mc-select animation.
  * @type {?}
  */
 var mcSelectAnimations = {
@@ -19032,8 +19031,6 @@ var McTag = /** @class */ (function (_super) {
     return McTag;
 }(_McTagMixinBase));
 /**
- * Applies proper (click) support and adds styling for use with the Material Design "cancel" icon
- * available at https://material.io/icons/#ic_cancel.
  *
  * Example:
  *
@@ -28915,8 +28912,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb26 = CssUnitPipe;
-exports.ɵa26 = McModalControlService;
+exports.ɵb27 = CssUnitPipe;
+exports.ɵa27 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;

@@ -20,7 +20,7 @@ export { ɵc24, ɵa24, ɵd24, ɵb24, McInputModule, BIG_STEP, SMALL_STEP, McInpu
 export { McContentComponent, McFooterComponent, McHeaderComponent, McLayoutComponent, McSidebarComponent, McLayoutModule } from '@ptsecurity/mosaic/layout';
 export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, _McListSelectionMixinBase, McListSelection } from '@ptsecurity/mosaic/list';
 export { McLinkModule, McLinkBase, _McLinkBase, McLink } from '@ptsecurity/mosaic/link';
-export { ɵb26, ɵa26, McModalComponent, McModalRef, McModalModule, McModalService } from '@ptsecurity/mosaic/modal';
+export { ɵb27, ɵa27, McModalComponent, McModalRef, McModalModule, McModalService } from '@ptsecurity/mosaic/modal';
 export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar } from '@ptsecurity/mosaic/navbar';
 export { McProgressBarModule, McProgressBarBase, _McProgressBarMixinBase, McProgressBar } from '@ptsecurity/mosaic/progress-bar';
 export { McProgressSpinnerModule, McProgressSpinnerBase, _McProgressSpinnerMixinBase, McProgressSpinner } from '@ptsecurity/mosaic/progress-spinner';
