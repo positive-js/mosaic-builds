@@ -7,6 +7,7 @@
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, Renderer2, Self, NgModule } from '@angular/core';
 import { FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, Validators, FormsModule } from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
@@ -130,12 +131,14 @@ class McTimepicker extends McTimepickerMixinBase {
      * @param {?} defaultErrorStateMatcher
      * @param {?} inputValueAccessor
      * @param {?} renderer
+     * @param {?} dateAdapter
      */
-    constructor(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer) {
+    constructor(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer, dateAdapter) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         this.elementRef = elementRef;
         this.ngControl = ngControl;
         this.renderer = renderer;
+        this.dateAdapter = dateAdapter;
         /**
          * Implemented as part of McFormFieldControl.
          * \@docs-private
@@ -154,6 +157,10 @@ class McTimepicker extends McTimepickerMixinBase {
         this.uid = `mc-timepicker-${uniqueComponentIdSuffix++}`;
         this._minTime = null;
         this._maxTime = null;
+        if (!this.dateAdapter) {
+            throw Error(`McTimepicker: No provider found for DateAdapter. You must import one of the existing ` +
+                `modules at your application root or provide a custom implementation or use exists ones.`);
+        }
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
         this.inputValueAccessor = inputValueAccessor || this.elementRef.nativeElement;
@@ -705,11 +712,22 @@ class McTimepicker extends McTimepickerMixinBase {
      */
     getParsedTimeParts(timeString) {
         /** @type {?} */
-        const hoursAndMinutesAndSeconds = timeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        const momentWrappedTime = this.dateAdapter.parse(timeString, [
+            'h:m a',
+            'h:m:s a',
+            'H:m',
+            'H:m:s'
+        ]);
         /** @type {?} */
-        const hoursAndMinutes = timeString.match(HOURS_MINUTES_REGEXP);
+        const convertedTimeString = momentWrappedTime !== null
+            ? momentWrappedTime.format('HH:mm:ss')
+            : '';
         /** @type {?} */
-        const hoursOnly = timeString.match(HOURS_ONLY_REGEXP);
+        const hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        /** @type {?} */
+        const hoursAndMinutes = convertedTimeString.match(HOURS_MINUTES_REGEXP);
+        /** @type {?} */
+        const hoursOnly = convertedTimeString.match(HOURS_ONLY_REGEXP);
         return {
             hoursOnly,
             hoursAndMinutes,
@@ -883,7 +901,8 @@ McTimepicker.ctorParameters = () => [
     { type: FormGroupDirective, decorators: [{ type: Optional }] },
     { type: ErrorStateMatcher },
     { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [MC_INPUT_VALUE_ACCESSOR,] }] },
-    { type: Renderer2 }
+    { type: Renderer2 },
+    { type: DateAdapter, decorators: [{ type: Optional }] }
 ];
 McTimepicker.propDecorators = {
     errorStateMatcher: [{ type: Input }],

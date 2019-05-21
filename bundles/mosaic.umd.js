@@ -24694,11 +24694,12 @@ var ɵ1 = {
 };
 var McTimepicker = /** @class */ (function (_super) {
     __extends(McTimepicker, _super);
-    function McTimepicker(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer) {
+    function McTimepicker(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer, dateAdapter) {
         var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this.elementRef = elementRef;
         _this.ngControl = ngControl;
         _this.renderer = renderer;
+        _this.dateAdapter = dateAdapter;
         /**
          * Implemented as part of McFormFieldControl.
          * \@docs-private
@@ -24717,6 +24718,10 @@ var McTimepicker = /** @class */ (function (_super) {
         _this.uid = "mc-timepicker-" + uniqueComponentIdSuffix++;
         _this._minTime = null;
         _this._maxTime = null;
+        if (!_this.dateAdapter) {
+            throw Error("McTimepicker: No provider found for DateAdapter. You must import one of the existing " +
+                "modules at your application root or provide a custom implementation or use exists ones.");
+        }
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
         _this.inputValueAccessor = inputValueAccessor || _this.elementRef.nativeElement;
@@ -25463,11 +25468,22 @@ var McTimepicker = /** @class */ (function (_super) {
      */
     function (timeString) {
         /** @type {?} */
-        var hoursAndMinutesAndSeconds = timeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        var momentWrappedTime = this.dateAdapter.parse(timeString, [
+            'h:m a',
+            'h:m:s a',
+            'H:m',
+            'H:m:s'
+        ]);
         /** @type {?} */
-        var hoursAndMinutes = timeString.match(HOURS_MINUTES_REGEXP);
+        var convertedTimeString = momentWrappedTime !== null
+            ? momentWrappedTime.format('HH:mm:ss')
+            : '';
         /** @type {?} */
-        var hoursOnly = timeString.match(HOURS_ONLY_REGEXP);
+        var hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        /** @type {?} */
+        var hoursAndMinutes = convertedTimeString.match(HOURS_MINUTES_REGEXP);
+        /** @type {?} */
+        var hoursOnly = convertedTimeString.match(HOURS_ONLY_REGEXP);
         return {
             hoursOnly: hoursOnly,
             hoursAndMinutes: hoursAndMinutes,
@@ -25689,7 +25705,8 @@ var McTimepicker = /** @class */ (function (_super) {
         { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
         { type: ErrorStateMatcher },
         { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_INPUT_VALUE_ACCESSOR,] }] },
-        { type: core.Renderer2 }
+        { type: core.Renderer2 },
+        { type: datetime.DateAdapter, decorators: [{ type: core.Optional }] }
     ]; };
     McTimepicker.propDecorators = {
         errorStateMatcher: [{ type: core.Input }],
@@ -28916,8 +28933,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
+exports.ɵb25 = CssUnitPipe;
+exports.ɵa25 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -29037,13 +29054,13 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵb18 = mcSidepanelAnimations;
-exports.ɵa18 = mcSidepanelTransformAnimation;
-exports.ɵg18 = McSidepanelActions;
-exports.ɵe18 = McSidepanelBody;
-exports.ɵc18 = McSidepanelClose;
-exports.ɵf18 = McSidepanelFooter;
-exports.ɵd18 = McSidepanelHeader;
+exports.ɵb19 = mcSidepanelAnimations;
+exports.ɵa19 = mcSidepanelTransformAnimation;
+exports.ɵg19 = McSidepanelActions;
+exports.ɵe19 = McSidepanelBody;
+exports.ɵc19 = McSidepanelClose;
+exports.ɵf19 = McSidepanelFooter;
+exports.ɵd19 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
@@ -29070,7 +29087,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa21 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

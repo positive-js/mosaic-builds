@@ -1,5 +1,6 @@
 import { DoCheck, ElementRef, OnChanges, OnDestroy, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
@@ -16,6 +17,7 @@ export declare class McTimepicker extends McTimepickerMixinBase implements McFor
     private readonly elementRef;
     ngControl: NgControl;
     private readonly renderer;
+    private dateAdapter;
     /** An object used to control when error messages are shown. */
     errorStateMatcher: ErrorStateMatcher;
     /**
@@ -67,7 +69,7 @@ export declare class McTimepicker extends McTimepickerMixinBase implements McFor
     private _maxTime;
     private maxDateTime;
     private currentDateTimeInput;
-    constructor(elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, renderer: Renderer2);
+    constructor(elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, renderer: Renderer2, dateAdapter: DateAdapter<any>);
     ngOnChanges(): void;
     ngOnDestroy(): void;
     ngDoCheck(): void;

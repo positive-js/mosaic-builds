@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/input'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/timepicker', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/coercion', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/input', 'rxjs', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.timepicker = {}),global.ng.core,global.ng.forms,global.ng.cdk.coercion,global.ng.mosaic.core,global.ng.mosaic.formField,global.ng.mosaic.input,global.rxjs,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform));
-}(this, (function (exports,core,forms,coercion,core$1,formField,input,rxjs,common,a11y,platform) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/input'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/timepicker', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/datetime', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/input', 'rxjs', '@angular/common', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.timepicker = {}),global.ng.core,global.ng.forms,global.ng.cdk.coercion,global.ng.cdk.datetime,global.ng.mosaic.core,global.ng.mosaic.formField,global.ng.mosaic.input,global.rxjs,global.ng.common,global.ng.cdk.a11y,global.ng.cdk.platform));
+}(this, (function (exports,core,forms,coercion,datetime,core$1,formField,input,rxjs,common,a11y,platform) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -140,11 +140,12 @@ var ɵ1 = {
 };
 var McTimepicker = /** @class */ (function (_super) {
     __extends(McTimepicker, _super);
-    function McTimepicker(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer) {
+    function McTimepicker(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer, dateAdapter) {
         var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this.elementRef = elementRef;
         _this.ngControl = ngControl;
         _this.renderer = renderer;
+        _this.dateAdapter = dateAdapter;
         /**
          * Implemented as part of McFormFieldControl.
          * \@docs-private
@@ -163,6 +164,10 @@ var McTimepicker = /** @class */ (function (_super) {
         _this.uid = "mc-timepicker-" + uniqueComponentIdSuffix++;
         _this._minTime = null;
         _this._maxTime = null;
+        if (!_this.dateAdapter) {
+            throw Error("McTimepicker: No provider found for DateAdapter. You must import one of the existing " +
+                "modules at your application root or provide a custom implementation or use exists ones.");
+        }
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
         _this.inputValueAccessor = inputValueAccessor || _this.elementRef.nativeElement;
@@ -909,11 +914,22 @@ var McTimepicker = /** @class */ (function (_super) {
      */
     function (timeString) {
         /** @type {?} */
-        var hoursAndMinutesAndSeconds = timeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        var momentWrappedTime = this.dateAdapter.parse(timeString, [
+            'h:m a',
+            'h:m:s a',
+            'H:m',
+            'H:m:s'
+        ]);
         /** @type {?} */
-        var hoursAndMinutes = timeString.match(HOURS_MINUTES_REGEXP);
+        var convertedTimeString = momentWrappedTime !== null
+            ? momentWrappedTime.format('HH:mm:ss')
+            : '';
         /** @type {?} */
-        var hoursOnly = timeString.match(HOURS_ONLY_REGEXP);
+        var hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        /** @type {?} */
+        var hoursAndMinutes = convertedTimeString.match(HOURS_MINUTES_REGEXP);
+        /** @type {?} */
+        var hoursOnly = convertedTimeString.match(HOURS_ONLY_REGEXP);
         return {
             hoursOnly: hoursOnly,
             hoursAndMinutes: hoursAndMinutes,
@@ -1135,7 +1151,8 @@ var McTimepicker = /** @class */ (function (_super) {
         { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
         { type: core$1.ErrorStateMatcher },
         { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [input.MC_INPUT_VALUE_ACCESSOR,] }] },
-        { type: core.Renderer2 }
+        { type: core.Renderer2 },
+        { type: datetime.DateAdapter, decorators: [{ type: core.Optional }] }
     ]; };
     McTimepicker.propDecorators = {
         errorStateMatcher: [{ type: core.Input }],
