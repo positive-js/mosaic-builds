@@ -1239,25 +1239,19 @@ var POSITION_MAP = {
         originX: 'center',
         originY: 'top',
         overlayX: 'center',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     topLeft: {
         originX: 'start',
         originY: 'top',
         overlayX: 'start',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     topRight: {
         originX: 'end',
         originY: 'top',
         overlayX: 'end',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     right: {
         originX: 'end',
@@ -1269,17 +1263,13 @@ var POSITION_MAP = {
         originX: 'end',
         originY: 'top',
         overlayX: 'start',
-        overlayY: 'top',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'top'
     },
     rightBottom: {
         originX: 'end',
         originY: 'bottom',
         overlayX: 'start',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     bottom: {
         originX: 'center',
@@ -1325,9 +1315,30 @@ var POSITION_MAP = {
     }
 };
 /** @type {?} */
-var DEFAULT_4_POSITIONS = _objectValues([
+var DEFAULT_4_POSITIONS = objectValues([
     POSITION_MAP.top, POSITION_MAP.right, POSITION_MAP.bottom, POSITION_MAP.left
 ]);
+/** @type {?} */
+var EXTENDED_OVERLAY_POSITIONS = objectValues([
+    POSITION_MAP.top, POSITION_MAP.topLeft, POSITION_MAP.topRight, POSITION_MAP.right, POSITION_MAP.rightTop,
+    POSITION_MAP.rightBottom, POSITION_MAP.bottom, POSITION_MAP.bottomLeft, POSITION_MAP.bottomRight,
+    POSITION_MAP.left, POSITION_MAP.leftTop, POSITION_MAP.leftBottom
+]);
+/** @type {?} */
+var POSITION_TO_CSS_MAP = {
+    top: 'top',
+    topLeft: 'top-left',
+    topRight: 'top-right',
+    right: 'right',
+    rightTop: 'right-top',
+    rightBottom: 'right-bottom',
+    left: 'left',
+    leftTop: 'left-top',
+    leftBottom: 'left-bottom',
+    bottom: 'bottom',
+    bottomLeft: 'bottom-left',
+    bottomRight: 'bottom-right'
+};
 /**
  * @template T, S
  * @param {?} array
@@ -1362,7 +1373,7 @@ function baseValues(object, props) {
  * @param {?} object
  * @return {?}
  */
-function _objectValues(object) {
+function objectValues(object) {
     return object == null ? [] : baseValues(object, Object.keys(object));
 }
 
@@ -1534,6 +1545,8 @@ exports.fadeAnimation = fadeAnimation;
 exports.AnimationCurves = AnimationCurves;
 exports.POSITION_MAP = POSITION_MAP;
 exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
+exports.EXTENDED_OVERLAY_POSITIONS = EXTENDED_OVERLAY_POSITIONS;
+exports.POSITION_TO_CSS_MAP = POSITION_TO_CSS_MAP;
 exports.mcSelectAnimations = mcSelectAnimations;
 exports.selectEvents = selectEvents;
 exports.getMcSelectDynamicMultipleError = getMcSelectDynamicMultipleError;

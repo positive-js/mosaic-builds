@@ -1,0 +1,8 @@
+{
+    "name": "@ptsecurity/mosaic/popover",
+    "typings": "../popover.d.ts",
+    "main": "../bundles/mosaic-popover.umd.js",
+    "module": "../esm5/popover.es5.js",
+    "es2015": "../esm2015/popover.js",
+    "sideEffects": false
+}

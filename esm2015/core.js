@@ -997,25 +997,19 @@ const POSITION_MAP = {
         originX: 'center',
         originY: 'top',
         overlayX: 'center',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     topLeft: {
         originX: 'start',
         originY: 'top',
         overlayX: 'start',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     topRight: {
         originX: 'end',
         originY: 'top',
         overlayX: 'end',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     right: {
         originX: 'end',
@@ -1027,17 +1021,13 @@ const POSITION_MAP = {
         originX: 'end',
         originY: 'top',
         overlayX: 'start',
-        overlayY: 'top',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'top'
     },
     rightBottom: {
         originX: 'end',
         originY: 'bottom',
         overlayX: 'start',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     bottom: {
         originX: 'center',
@@ -1083,9 +1073,30 @@ const POSITION_MAP = {
     }
 };
 /** @type {?} */
-const DEFAULT_4_POSITIONS = _objectValues([
+const DEFAULT_4_POSITIONS = objectValues([
     POSITION_MAP.top, POSITION_MAP.right, POSITION_MAP.bottom, POSITION_MAP.left
 ]);
+/** @type {?} */
+const EXTENDED_OVERLAY_POSITIONS = objectValues([
+    POSITION_MAP.top, POSITION_MAP.topLeft, POSITION_MAP.topRight, POSITION_MAP.right, POSITION_MAP.rightTop,
+    POSITION_MAP.rightBottom, POSITION_MAP.bottom, POSITION_MAP.bottomLeft, POSITION_MAP.bottomRight,
+    POSITION_MAP.left, POSITION_MAP.leftTop, POSITION_MAP.leftBottom
+]);
+/** @type {?} */
+const POSITION_TO_CSS_MAP = {
+    top: 'top',
+    topLeft: 'top-left',
+    topRight: 'top-right',
+    right: 'right',
+    rightTop: 'right-top',
+    rightBottom: 'right-bottom',
+    left: 'left',
+    leftTop: 'left-top',
+    leftBottom: 'left-bottom',
+    bottom: 'bottom',
+    bottomLeft: 'bottom-left',
+    bottomRight: 'bottom-right'
+};
 /**
  * @template T, S
  * @param {?} array
@@ -1120,7 +1131,7 @@ function baseValues(object, props) {
  * @param {?} object
  * @return {?}
  */
-function _objectValues(object) {
+function objectValues(object) {
     return object == null ? [] : baseValues(object, Object.keys(object));
 }
 
@@ -1276,5 +1287,5 @@ const mcSelectAnimations = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, McOptgroupBase, McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, AnimationCurves, POSITION_MAP, DEFAULT_4_POSITIONS, mcSelectAnimations, selectEvents, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, mcSelectScrollStrategyProviderFactory, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_SANITY_CHECKS_FACTORY as ɵa2 };
+export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, McOptgroupBase, McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, AnimationCurves, POSITION_MAP, DEFAULT_4_POSITIONS, EXTENDED_OVERLAY_POSITIONS, POSITION_TO_CSS_MAP, mcSelectAnimations, selectEvents, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, mcSelectScrollStrategyProviderFactory, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_SANITY_CHECKS_FACTORY as ɵa2 };
 //# sourceMappingURL=core.js.map

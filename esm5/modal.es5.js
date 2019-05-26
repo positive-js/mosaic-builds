@@ -1383,5 +1383,5 @@ var McModalModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵb25, McModalControlService as ɵa25 };
+export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵb28, McModalControlService as ɵa28 };
 //# sourceMappingURL=modal.es5.js.map

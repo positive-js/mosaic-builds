@@ -4,19 +4,19 @@
   "metadata": {},
   "exports": [
     {
-      "from": "./divider"
-    },
-    {
       "from": "./core"
     },
     {
       "from": "./card"
     },
     {
-      "from": "./link"
+      "from": "./divider"
     },
     {
-      "from": "./tooltip"
+      "from": "./radio"
+    },
+    {
+      "from": "./checkbox"
     },
     {
       "from": "./toggle"
@@ -25,13 +25,13 @@
       "from": "./tabs"
     },
     {
+      "from": "./tooltip"
+    },
+    {
       "from": "./tree"
     },
     {
-      "from": "./layout"
-    },
-    {
-      "from": "./checkbox"
+      "from": "./link"
     },
     {
       "from": "./list"
@@ -40,16 +40,16 @@
       "from": "./icon"
     },
     {
+      "from": "./popover"
+    },
+    {
       "from": "./progress-bar"
     },
     {
       "from": "./progress-spinner"
     },
     {
-      "from": "./radio"
-    },
-    {
-      "from": "./splitter"
+      "from": "./layout"
     },
     {
       "from": "./dropdown"
@@ -62,6 +62,9 @@
     },
     {
       "from": "./button"
+    },
+    {
+      "from": "./splitter"
     },
     {
       "from": "./sidepanel"

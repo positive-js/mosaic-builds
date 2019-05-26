@@ -1250,25 +1250,19 @@ var POSITION_MAP = {
         originX: 'center',
         originY: 'top',
         overlayX: 'center',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     topLeft: {
         originX: 'start',
         originY: 'top',
         overlayX: 'start',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     topRight: {
         originX: 'end',
         originY: 'top',
         overlayX: 'end',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     right: {
         originX: 'end',
@@ -1280,17 +1274,13 @@ var POSITION_MAP = {
         originX: 'end',
         originY: 'top',
         overlayX: 'start',
-        overlayY: 'top',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'top'
     },
     rightBottom: {
         originX: 'end',
         originY: 'bottom',
         overlayX: 'start',
-        overlayY: 'bottom',
-        offsetX: undefined,
-        offsetY: undefined
+        overlayY: 'bottom'
     },
     bottom: {
         originX: 'center',
@@ -1336,9 +1326,30 @@ var POSITION_MAP = {
     }
 };
 /** @type {?} */
-var DEFAULT_4_POSITIONS = _objectValues([
+var DEFAULT_4_POSITIONS = objectValues([
     POSITION_MAP.top, POSITION_MAP.right, POSITION_MAP.bottom, POSITION_MAP.left
 ]);
+/** @type {?} */
+var EXTENDED_OVERLAY_POSITIONS = objectValues([
+    POSITION_MAP.top, POSITION_MAP.topLeft, POSITION_MAP.topRight, POSITION_MAP.right, POSITION_MAP.rightTop,
+    POSITION_MAP.rightBottom, POSITION_MAP.bottom, POSITION_MAP.bottomLeft, POSITION_MAP.bottomRight,
+    POSITION_MAP.left, POSITION_MAP.leftTop, POSITION_MAP.leftBottom
+]);
+/** @type {?} */
+var POSITION_TO_CSS_MAP = {
+    top: 'top',
+    topLeft: 'top-left',
+    topRight: 'top-right',
+    right: 'right',
+    rightTop: 'right-top',
+    rightBottom: 'right-bottom',
+    left: 'left',
+    leftTop: 'left-top',
+    leftBottom: 'left-bottom',
+    bottom: 'bottom',
+    bottomLeft: 'bottom-left',
+    bottomRight: 'bottom-right'
+};
 /**
  * @template T, S
  * @param {?} array
@@ -1373,7 +1384,7 @@ function baseValues(object, props) {
  * @param {?} object
  * @return {?}
  */
-function _objectValues(object) {
+function objectValues(object) {
     return object == null ? [] : baseValues(object, Object.keys(object));
 }
 
@@ -28783,6 +28794,8 @@ exports.fadeAnimation = fadeAnimation;
 exports.AnimationCurves = AnimationCurves;
 exports.POSITION_MAP = POSITION_MAP;
 exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
+exports.EXTENDED_OVERLAY_POSITIONS = EXTENDED_OVERLAY_POSITIONS;
+exports.POSITION_TO_CSS_MAP = POSITION_TO_CSS_MAP;
 exports.mcSelectAnimations = mcSelectAnimations;
 exports.selectEvents = selectEvents;
 exports.getMcSelectDynamicMultipleError = getMcSelectDynamicMultipleError;
@@ -28833,7 +28846,7 @@ exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
 exports.McCheckboxModule = McCheckboxModule;
 exports.MC_CHECKBOX_REQUIRED_VALIDATOR = MC_CHECKBOX_REQUIRED_VALIDATOR;
 exports.McCheckboxRequiredValidator = McCheckboxRequiredValidator;
-exports.ɵa31 = McMultiYearView;
+exports.ɵa32 = McMultiYearView;
 exports.McDatepickerModule = McDatepickerModule;
 exports.McCalendarHeader = McCalendarHeader;
 exports.McCalendar = McCalendar;
@@ -28896,10 +28909,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc23 = MAX_VALIDATOR;
-exports.ɵa23 = MIN_VALIDATOR;
-exports.ɵd23 = MaxValidator;
-exports.ɵb23 = MinValidator;
+exports.ɵc24 = MAX_VALIDATOR;
+exports.ɵa24 = MIN_VALIDATOR;
+exports.ɵd24 = MaxValidator;
+exports.ɵb24 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -28933,8 +28946,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb25 = CssUnitPipe;
-exports.ɵa25 = McModalControlService;
+exports.ɵb28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -28978,15 +28991,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd14 = McTabBase;
-exports.ɵe14 = mcTabMixinBase;
-exports.ɵa14 = McTabHeaderBase;
-exports.ɵb14 = McTabLabelWrapperBase;
-exports.ɵc14 = mcTabLabelWrapperMixinBase;
-exports.ɵh14 = McTabLinkBase;
-exports.ɵf14 = McTabNavBase;
-exports.ɵi14 = mcTabLinkMixinBase;
-exports.ɵg14 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -29054,13 +29067,13 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵb19 = mcSidepanelAnimations;
-exports.ɵa19 = mcSidepanelTransformAnimation;
-exports.ɵg19 = McSidepanelActions;
-exports.ɵe19 = McSidepanelBody;
-exports.ɵc19 = McSidepanelClose;
-exports.ɵf19 = McSidepanelFooter;
-exports.ɵd19 = McSidepanelHeader;
+exports.ɵb20 = mcSidepanelAnimations;
+exports.ɵa20 = mcSidepanelTransformAnimation;
+exports.ɵg20 = McSidepanelActions;
+exports.ɵe20 = McSidepanelBody;
+exports.ɵc20 = McSidepanelClose;
+exports.ɵf20 = McSidepanelFooter;
+exports.ɵd20 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
@@ -29087,7 +29100,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa21 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
