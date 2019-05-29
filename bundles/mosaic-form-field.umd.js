@@ -297,6 +297,7 @@ var McFormField = /** @class */ (function (_super) {
         $event.stopPropagation();
         if (this._control && this._control.ngControl) {
             this._control.ngControl.reset();
+            this._control.focus();
         }
     };
     /**

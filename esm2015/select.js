@@ -14,8 +14,9 @@ import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW,
 import { CdkConnectedOverlay, ViewportRuler, OverlayModule } from '@ptsecurity/cdk/overlay';
 import { countGroupLabelsBeforeOption, getOptionScrollPosition, ErrorStateMatcher, MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption, mixinDisabled, mixinErrorState, mixinTabIndex, mcSelectAnimations, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McOptionModule } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McInput } from '@ptsecurity/mosaic/input';
 import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
-import { defer, merge, Subject } from 'rxjs';
+import { defer, merge, Subject, Subscription } from 'rxjs';
 import { filter, map, startWith, switchMap, take, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -62,6 +63,53 @@ class McSelectBase {
 }
 /** @type {?} */
 const McSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
+class McSelectSearch {
+    constructor() {
+        this.searchChangesSubscription = new Subscription();
+        this.isSearchChanged = false;
+    }
+    /**
+     * @return {?}
+     */
+    focus() {
+        this.input.focus();
+    }
+    /**
+     * @return {?}
+     */
+    reset() {
+        this.input.ngControl.reset();
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterContentInit() {
+        if (!this.input) {
+            throw Error('McSelectSearch does not work without input');
+        }
+        if (!this.input.ngControl) {
+            throw Error('McSelectSearch does not work without ngControl');
+        }
+        this.searchChangesSubscription = (/** @type {?} */ (this.input.ngControl.valueChanges)).subscribe(() => {
+            this.isSearchChanged = true;
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.searchChangesSubscription.unsubscribe();
+    }
+}
+McSelectSearch.decorators = [
+    { type: Directive, args: [{
+                selector: '[mcSelectSearch]',
+                exportAs: 'mcSelectSearch'
+            },] },
+];
+McSelectSearch.propDecorators = {
+    input: [{ type: ContentChild, args: [McInput,] }]
+};
 class McSelectTrigger {
 }
 McSelectTrigger.decorators = [
@@ -103,6 +151,7 @@ class McSelect extends McSelectMixinBase {
          * The cached font-size of the trigger element.
          */
         this.triggerFontSize = 0;
+        this.previousSelectionModelSelected = [];
         /**
          * The IDs of child options to be passed to the aria-owns attribute.
          */
@@ -154,7 +203,7 @@ class McSelect extends McSelectMixinBase {
          */
         this.optionSelectionChanges = (/** @type {?} */ (defer(() => {
             if (this.options) {
-                return merge(...this.options.map((option) => option.onSelectionChange));
+                return merge(...this.options.map((option) => option.onSelectionChange), ...this.selectionModel.selected.map((option) => option.onSelectionChange));
             }
             return this._ngZone.onStable
                 .asObservable()
@@ -201,11 +250,11 @@ class McSelect extends McSelectMixinBase {
         /**
          * `View -> model callback called when value changes`
          */
-        this._onChange = () => { };
+        this.onChange = () => { };
         /**
          * `View -> model callback called when select has been touched`
          */
-        this._onTouched = () => { };
+        this.onTouched = () => { };
         /**
          * Comparison function to specify which option is displayed. Defaults to object equality.
          */
@@ -419,6 +468,14 @@ class McSelect extends McSelectMixinBase {
         this.stateChanges.complete();
     }
     /**
+     * @return {?}
+     */
+    resetSearch() {
+        if (this.search) {
+            this.search.reset();
+        }
+    }
+    /**
      * Toggles the overlay panel open or closed.
      * @return {?}
      */
@@ -455,6 +512,7 @@ class McSelect extends McSelectMixinBase {
                 this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
             }
         });
+        this.resetSearch();
     }
     /**
      * Closes the overlay panel and focuses the host element.
@@ -465,7 +523,7 @@ class McSelect extends McSelectMixinBase {
             this._panelOpen = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();
-            this._onTouched();
+            this.onTouched();
         }
     }
     /**
@@ -489,7 +547,7 @@ class McSelect extends McSelectMixinBase {
      * @return {?}
      */
     registerOnChange(fn) {
-        this._onChange = fn;
+        this.onChange = fn;
     }
     /**
      * Saves a callback function to be invoked when the select is blurred
@@ -500,7 +558,7 @@ class McSelect extends McSelectMixinBase {
      * @return {?}
      */
     registerOnTouched(fn) {
-        this._onTouched = fn;
+        this.onTouched = fn;
     }
     /**
      * Disables the select. Part of the ControlValueAccessor interface required
@@ -588,6 +646,9 @@ class McSelect extends McSelectMixinBase {
     onFadeInDone() {
         this.panelDoneAnimating = this.panelOpen;
         this._changeDetectorRef.markForCheck();
+        if (this.search && this._panelOpen) {
+            this.search.focus();
+        }
     }
     /**
      * @return {?}
@@ -606,7 +667,7 @@ class McSelect extends McSelectMixinBase {
     onBlur() {
         this._focused = false;
         if (!this.disabled && !this.panelOpen) {
-            this._onTouched();
+            this.onTouched();
             this._changeDetectorRef.markForCheck();
             this.stateChanges.next();
         }
@@ -621,7 +682,7 @@ class McSelect extends McSelectMixinBase {
             .subscribe(() => {
             this._changeDetectorRef.detectChanges();
             this.calculateOverlayOffsetX();
-            this.panel.nativeElement.scrollTop = this.scrollTop;
+            this.optionsContainer.nativeElement.scrollTop = this.scrollTop;
         });
     }
     /**
@@ -855,6 +916,7 @@ class McSelect extends McSelectMixinBase {
      * @return {?}
      */
     setSelectionByValue(value) {
+        this.previousSelectionModelSelected = this.selectionModel.selected;
         if (this.multiple && value) {
             if (!Array.isArray(value)) {
                 throw getMcSelectNonArrayValueError();
@@ -876,14 +938,15 @@ class McSelect extends McSelectMixinBase {
         this._changeDetectorRef.markForCheck();
     }
     /**
-     * Finds and selects and option based on its value.
      * @private
      * @param {?} value
-     * @return {?} Option that has the corresponding value.
+     * @return {?}
      */
-    selectValue(value) {
-        /** @type {?} */
-        const correspondingOption = this.options.find((option) => {
+    getCorrespondOption(value) {
+        return [
+            ...this.options.toArray(),
+            ...this.previousSelectionModelSelected
+        ].find((option) => {
             try {
                 // Treat null as a special reset value.
                 return option.value != null && this._compareWith(option.value, value);
@@ -896,6 +959,16 @@ class McSelect extends McSelectMixinBase {
                 return false;
             }
         });
+    }
+    /**
+     * Finds and selects and option based on its value.
+     * @private
+     * @param {?} value
+     * @return {?} Option that has the corresponding value.
+     */
+    selectValue(value) {
+        /** @type {?} */
+        const correspondingOption = this.getCorrespondOption(value);
         if (correspondingOption) {
             this.selectionModel.select(correspondingOption);
         }
@@ -907,8 +980,10 @@ class McSelect extends McSelectMixinBase {
      * @return {?}
      */
     initKeyManager() {
+        /** @type {?} */
+        const typeAheadDebounce = 200;
         this.keyManager = new ActiveDescendantKeyManager(this.options)
-            .withTypeAhead()
+            .withTypeAhead(typeAheadDebounce, this.search ? -1 : 0)
             .withVerticalOrientation()
             .withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
         this.keyManager.tabOut
@@ -942,6 +1017,10 @@ class McSelect extends McSelectMixinBase {
             .pipe(takeUntil(changedOrDestroyed))
             .subscribe((event) => {
             this.onSelect(event.source, event.isUserInput);
+            if (this.search && this.search.isSearchChanged) {
+                Promise.resolve().then(() => this.keyManager.setFirstItemActive());
+                this.search.isSearchChanged = false;
+            }
             if (event.isUserInput && !this.multiple && this._panelOpen) {
                 this.close();
                 this.focus();
@@ -989,7 +1068,13 @@ class McSelect extends McSelectMixinBase {
                     // want to restore focus back to the trigger, in order to
                     // prevent the select keyboard controls from clashing with
                     // the ones from `mc-option`.
-                    this.focus();
+                    // If search is avaliable then we focus search again.
+                    if (this.search) {
+                        this.search.focus();
+                    }
+                    else {
+                        this.focus();
+                    }
                 }
             }
         }
@@ -1031,7 +1116,7 @@ class McSelect extends McSelectMixinBase {
         }
         this._value = valueToEmit;
         this.valueChange.emit(valueToEmit);
-        this._onChange(valueToEmit);
+        this.onChange(valueToEmit);
         this.selectionChange.emit(new McSelectChange(this, valueToEmit));
         this._changeDetectorRef.markForCheck();
     }
@@ -1069,7 +1154,7 @@ class McSelect extends McSelectMixinBase {
         const activeOptionIndex = this.keyManager.activeItemIndex || 0;
         /** @type {?} */
         const labelCount = countGroupLabelsBeforeOption(activeOptionIndex, this.options, this.optionGroups);
-        this.panel.nativeElement.scrollTop = getOptionScrollPosition(activeOptionIndex + labelCount, this.getItemHeight(), this.panel.nativeElement.scrollTop, SELECT_PANEL_MAX_HEIGHT);
+        this.optionsContainer.nativeElement.scrollTop = getOptionScrollPosition(activeOptionIndex + labelCount, this.getItemHeight(), this.optionsContainer.nativeElement.scrollTop, SELECT_PANEL_MAX_HEIGHT);
     }
     /**
      * Gets the index of the provided option in the option list.
@@ -1301,8 +1386,8 @@ McSelect.decorators = [
     { type: Component, args: [{
                 selector: 'mc-select',
                 exportAs: 'mcSelect',
-                template: "<div cdk-overlay-origin class=\"mc-select__trigger\" (click)=\"toggle()\" [class.mc-select__trigger_multiple]=\"multiple\" #origin=\"cdkOverlayOrigin\" #trigger><div class=\"mc-select__matcher\" [ngSwitch]=\"empty\"><span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\u00A0' }}</span> <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\"><div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\"><span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span><div *ngSwitchCase=\"true\" class=\"mc-select__match-list\"><mc-tag *ngFor=\"let option of triggerValues\" [disabled]=\"disabled\" [class.mc-error]=\"errorState\">{{ option.viewValue || option.value }} <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveMatcherItem(option, $event)\"></i></mc-tag></div><div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">{{ oneMoreText }} {{ hiddenItems }}</div></div><ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content></span></div><div class=\"mc-select__arrow-wrapper\"><i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\" color=\"second\"></i></div></div><ng-template cdk-connected-overlay cdkConnectedOverlayLockPosition cdkConnectedOverlayHasBackdrop cdkConnectedOverlayBackdropClass=\"cdk-overlay-transparent-backdrop\" [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\" [cdkConnectedOverlayOrigin]=\"origin\" [cdkConnectedOverlayOpen]=\"panelOpen\" [cdkConnectedOverlayPositions]=\"positions\" [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\" [cdkConnectedOverlayOffsetY]=\"offsetY\" (backdropClick)=\"close()\" (attach)=\"onAttached()\" (detach)=\"close()\"><div #panel class=\"mc-select__panel {{ getPanelTheme() }}\" [ngClass]=\"panelClass\" (@transformPanel.done)=\"panelDoneAnimatingStream.next($event.toState)\" [style.transformOrigin]=\"transformOrigin\" [class.mc-select-panel-done-animcing]=\"panelDoneAnimating\" [style.font-size.px]=\"triggerFontSize\" (keydown)=\"handleKeydown($event)\"><div class=\"mc-select__content\" [@fadeInContent]=\"'showing'\" (@fadeInContent.done)=\"onFadeInDone()\"><ng-content></ng-content></div></div></ng-template>",
-                styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-select{box-sizing:border-box;display:inline-block;width:100%;outline:0}.mc-select.mc-disabled .mc-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;cursor:pointer;padding:3px 7px 3px 15px}.mc-select__trigger.mc-select__trigger_multiple{padding-left:7px}.mc-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-select__matcher>span{width:100%}.mc-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:24px;margin:0;padding-left:0}.mc-select__match-list .mc-tag{margin-right:4px}.mc-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-select__match-container .mc-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-select__arrow-wrapper{display:table-cell;vertical-align:middle}.mc-form-field-appearance-fill .mc-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-select__arrow-wrapper{transform:translateY(-25%)}.mc-select__panel{max-height:224px;min-width:100%;overflow:auto;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-select__content{height:100%}.mc-select__panel .mc-optgroup-label,.mc-select__panel .mc-option{font-size:inherit;line-height:32px;height:32px}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-form-field-type-mc-select .mc-form-field-label{width:calc(100% - 18px)}"],
+                template: "<div cdk-overlay-origin class=\"mc-select__trigger\" (click)=\"toggle()\" [class.mc-select__trigger_multiple]=\"multiple\" #origin=\"cdkOverlayOrigin\" #trigger><div class=\"mc-select__matcher\" [ngSwitch]=\"empty\"><span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\u00A0' }}</span> <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\"><div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\"><span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span><div *ngSwitchCase=\"true\" class=\"mc-select__match-list\"><mc-tag *ngFor=\"let option of triggerValues\" [disabled]=\"disabled\" [class.mc-error]=\"errorState\">{{ option.viewValue || option.value }} <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveMatcherItem(option, $event)\"></i></mc-tag></div><div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">{{ oneMoreText }} {{ hiddenItems }}</div></div><ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content></span></div><div class=\"mc-select__arrow-wrapper\"><i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\" color=\"second\"></i></div></div><ng-template cdk-connected-overlay cdkConnectedOverlayLockPosition cdkConnectedOverlayHasBackdrop cdkConnectedOverlayBackdropClass=\"cdk-overlay-transparent-backdrop\" [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\" [cdkConnectedOverlayOrigin]=\"origin\" [cdkConnectedOverlayOpen]=\"panelOpen\" [cdkConnectedOverlayPositions]=\"positions\" [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\" [cdkConnectedOverlayOffsetY]=\"offsetY\" (backdropClick)=\"close()\" (attach)=\"onAttached()\" (detach)=\"close()\"><div #panel class=\"mc-select__panel {{ getPanelTheme() }}\" [ngClass]=\"panelClass\" (@transformPanel.done)=\"panelDoneAnimatingStream.next($event.toState)\" [style.transformOrigin]=\"transformOrigin\" [class.mc-select-panel-done-animcing]=\"panelDoneAnimating\" [style.font-size.px]=\"triggerFontSize\" (keydown)=\"handleKeydown($event)\"><div *ngIf=\"search\" class=\"mc-select__search-container\"><ng-content select=\"[mcSelectSearch]\"></ng-content></div><div #optionsContainer class=\"mc-select__content\" [@fadeInContent]=\"'showing'\" (@fadeInContent.done)=\"onFadeInDone()\"><ng-content select=\"mc-option,mc-optgroup\"></ng-content></div></div></ng-template>",
+                styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-select{box-sizing:border-box;display:inline-block;width:100%;outline:0}.mc-select.mc-disabled .mc-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;cursor:pointer;padding:3px 7px 3px 15px}.mc-select__trigger.mc-select__trigger_multiple{padding-left:7px}.mc-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-select__matcher>span{width:100%}.mc-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:24px;margin:0;padding-left:0}.mc-select__match-list .mc-tag{margin-right:4px}.mc-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-select__match-container .mc-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-select__arrow-wrapper{display:table-cell;vertical-align:middle}.mc-form-field-appearance-fill .mc-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-select__arrow-wrapper{transform:translateY(-25%)}.mc-select__panel{min-width:100%;overflow:hidden;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-select__content{max-height:224px;overflow:auto}.mc-select__panel .mc-optgroup-label,.mc-select__panel .mc-option{font-size:inherit;line-height:32px;height:32px}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-form-field-type-mc-select .mc-form-field-label{width:calc(100% - 18px)}"],
                 inputs: ['disabled', 'tabIndex'],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
@@ -1347,11 +1432,13 @@ McSelect.ctorParameters = () => [
 McSelect.propDecorators = {
     trigger: [{ type: ViewChild, args: ['trigger',] }],
     panel: [{ type: ViewChild, args: ['panel',] }],
+    optionsContainer: [{ type: ViewChild, args: ['optionsContainer',] }],
     overlayDir: [{ type: ViewChild, args: [CdkConnectedOverlay,] }],
     tags: [{ type: ViewChildren, args: [McTag,] }],
     customTrigger: [{ type: ContentChild, args: [McSelectTrigger,] }],
     options: [{ type: ContentChildren, args: [McOption, { descendants: true },] }],
     optionGroups: [{ type: ContentChildren, args: [McOptgroup,] }],
+    search: [{ type: ContentChild, args: [McSelectSearch,] }],
     panelClass: [{ type: Input }],
     errorStateMatcher: [{ type: Input }],
     sortComparator: [{ type: Input }],
@@ -1383,8 +1470,19 @@ McSelectModule.decorators = [
                     McIconModule,
                     McTagsModule
                 ],
-                exports: [McFormFieldModule, McSelect, McSelectTrigger, McOptionModule, CommonModule],
-                declarations: [McSelect, McSelectTrigger],
+                exports: [
+                    McFormFieldModule,
+                    McSelect,
+                    McSelectSearch,
+                    McSelectTrigger,
+                    McOptionModule,
+                    CommonModule
+                ],
+                declarations: [
+                    McSelect,
+                    McSelectSearch,
+                    McSelectTrigger
+                ],
                 providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER]
             },] },
 ];
@@ -1399,5 +1497,5 @@ McSelectModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McSelectModule, SELECT_ITEM_HEIGHT_EM, McSelectChange, McSelectBase, McSelectTrigger, McSelect };
+export { McSelectModule, SELECT_ITEM_HEIGHT_EM, McSelectChange, McSelectBase, McSelectSearch, McSelectTrigger, McSelect };
 //# sourceMappingURL=select.js.map

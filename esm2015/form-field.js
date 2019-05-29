@@ -232,6 +232,7 @@ class McFormField extends _McFormFieldMixinBase {
         $event.stopPropagation();
         if (this._control && this._control.ngControl) {
             this._control.ngControl.reset();
+            this._control.focus();
         }
     }
     /**

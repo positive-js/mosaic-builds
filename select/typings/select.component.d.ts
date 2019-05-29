@@ -6,8 +6,9 @@ import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkConnectedOverlay, ViewportRuler } from '@ptsecurity/cdk/overlay';
 import { CanDisable, CanDisableCtor, CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, HasTabIndex, HasTabIndexCtor, McOptgroup, McOption, McOptionSelectionChange } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McInput } from '@ptsecurity/mosaic/input';
 import { McTag } from '@ptsecurity/mosaic/tags';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 /** The height of the select items in `em` units. */
 export declare const SELECT_ITEM_HEIGHT_EM = 2;
 /** Change event object that is emitted when the select value has changed. */
@@ -25,6 +26,15 @@ export declare class McSelectBase {
     constructor(elementRef: ElementRef, defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
 declare const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor & typeof McSelectBase;
+export declare class McSelectSearch implements AfterContentInit, OnDestroy {
+    input: McInput;
+    searchChangesSubscription: Subscription;
+    isSearchChanged: boolean;
+    focus(): void;
+    reset(): void;
+    ngAfterContentInit(): void;
+    ngOnDestroy(): void;
+}
 export declare class McSelectTrigger {
 }
 export declare class McSelect extends McSelectMixinBase implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable, HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
@@ -46,6 +56,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     triggerFontSize: number;
     /** Deals with the selection logic. */
     selectionModel: SelectionModel<McOption>;
+    previousSelectionModelSelected: McOption[];
     /** Manages keyboard events for options in the panel. */
     keyManager: ActiveDescendantKeyManager<McOption>;
     /** The IDs of child options to be passed to the aria-owns attribute. */
@@ -78,6 +89,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     }[];
     trigger: ElementRef;
     panel: ElementRef;
+    optionsContainer: ElementRef;
     overlayDir: CdkConnectedOverlay;
     tags: QueryList<McTag>;
     /** User-supplied override of the trigger element. */
@@ -86,6 +98,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     options: QueryList<McOption>;
     /** All of the defined groups of options. */
     optionGroups: QueryList<McOptgroup>;
+    search: McSelectSearch;
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     panelClass: string | string[] | Set<string> | {
         [key: string]: any;
@@ -153,9 +166,10 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     /** `View -> model callback called when value changes` */
-    _onChange: (value: any) => void;
+    onChange: (value: any) => void;
     /** `View -> model callback called when select has been touched` */
-    _onTouched: () => void;
+    onTouched: () => void;
+    resetSearch(): void;
     /** Toggles the overlay panel open or closed. */
     toggle(): void;
     /** Opens the overlay panel. */
@@ -244,6 +258,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
      * found with the designated value, the select trigger is cleared.
      */
     private setSelectionByValue;
+    private getCorrespondOption;
     /**
      * Finds and selects and option based on its value.
      * @returns Option that has the corresponding value.
