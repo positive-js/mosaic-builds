@@ -25805,18 +25805,6 @@ var ARROW_RIGHT_KEYCODE = 'ArrowRight';
  */
 /** @type {?} */
 var uniqueComponentIdSuffix = 0;
-/** @type {?} */
-var formValidators = new WeakMap();
-/** @type {?} */
-var formValidatorOnChangeRegistrators = new WeakMap();
-/** @type {?} */
-var validatorOnChange = function (c) {
-    /** @type {?} */
-    var validatorOnChangeHandler = formValidatorOnChangeRegistrators.get(c);
-    if (validatorOnChangeHandler !== undefined) {
-        validatorOnChangeHandler();
-    }
-};
 var McTimepickerBase = /** @class */ (function () {
     function McTimepickerBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
         this.defaultErrorStateMatcher = defaultErrorStateMatcher;
@@ -25829,30 +25817,6 @@ var McTimepickerBase = /** @class */ (function () {
 // tslint:disable-next-line naming-convention
 /** @type {?} */
 var McTimepickerMixinBase = mixinErrorState(McTimepickerBase);
-var ɵ1 = {
-    validate: /**
-     * @param {?} c
-     * @return {?}
-     */
-    function (c) {
-        // TODO This is `workaround` to bind singleton-like Validator implementation to
-        // context of each validated component. This MUST be realized in proper way!
-        if (this.__validatorOnChangeHandler !== undefined) {
-            formValidatorOnChangeRegistrators.set(c, this.__validatorOnChangeHandler);
-            this.__validatorOnChangeHandler = undefined;
-        }
-        /** @type {?} */
-        var validator = formValidators.get(c);
-        return validator ? validator(c) : null;
-    },
-    registerOnValidatorChange: /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
-        this.__validatorOnChangeHandler = fn;
-    }
-};
 var McTimepicker = /** @class */ (function (_super) {
     __extends(McTimepicker, _super);
     function McTimepicker(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer, dateAdapter) {
@@ -25891,16 +25855,24 @@ var McTimepicker = /** @class */ (function (_super) {
         // Force setter to be called in case id was not specified.
         _this.id = _this.id;
         _this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
-        // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
         if (_this.ngControl) {
+            // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
             _this.ngControl.valueAccessor = _this;
+            // To avoid cyclic dependency https://stackoverflow.com/a/49578414
+            /** @type {?} */
+            var control = (/** @type {?} */ (_this.ngControl.control));
+            /** @type {?} */
+            var myValidators = [
+                function () { return _this.parseValidator(); },
+                function () { return _this.minTimeValidator(); },
+                function () { return _this.maxTimeValidator(); }
+            ];
+            /** @type {?} */
+            var validators = control.validator
+                ? [control.validator].concat(myValidators) : myValidators;
+            control.setValidators(validators);
+            control.updateValueAndValidity();
         }
-        // Substitute initial empty validator with validator linked to directive object instance (workaround)
-        formValidators.set((/** @type {?} */ (_this.ngControl.control)), forms.Validators.compose([
-            function () { return _this.parseValidator(); },
-            function () { return _this.minTimeValidator(); },
-            function () { return _this.maxTimeValidator(); }
-        ]));
         return _this;
     }
     Object.defineProperty(McTimepicker.prototype, "disabled", {
@@ -25999,7 +25971,7 @@ var McTimepicker = /** @class */ (function (_super) {
                 .keys(TimeFormats)
                 .map(function (timeFormatKey) { return TimeFormats[timeFormatKey]; })
                 .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
-            validatorOnChange((/** @type {?} */ (this.ngControl.control)));
+            ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
             this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
         },
         enumerable: true,
@@ -26017,7 +25989,7 @@ var McTimepicker = /** @class */ (function (_super) {
         function (minValue) {
             this._minTime = minValue;
             this.minDateTime = minValue !== null ? this.getDateFromTimeString(minValue) : undefined;
-            validatorOnChange((/** @type {?} */ (this.ngControl.control)));
+            ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
         },
         enumerable: true,
         configurable: true
@@ -26034,7 +26006,7 @@ var McTimepicker = /** @class */ (function (_super) {
         function (maxValue) {
             this._maxTime = maxValue;
             this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
-            validatorOnChange((/** @type {?} */ (this.ngControl.control)));
+            ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
         },
         enumerable: true,
         configurable: true
@@ -26846,11 +26818,6 @@ var McTimepicker = /** @class */ (function (_super) {
                         '(keydown)': 'onKeyDown($event)'
                     },
                     providers: [
-                        {
-                            provide: forms.NG_VALIDATORS,
-                            useValue: ɵ1,
-                            multi: true
-                        },
                         {
                             provide: McFormFieldControl,
                             useExisting: core.forwardRef(function () { return McTimepicker; })
@@ -30149,15 +30116,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd14 = McTabBase;
+exports.ɵe14 = mcTabMixinBase;
+exports.ɵa14 = McTabHeaderBase;
+exports.ɵb14 = McTabLabelWrapperBase;
+exports.ɵc14 = mcTabLabelWrapperMixinBase;
+exports.ɵh14 = McTabLinkBase;
+exports.ɵf14 = McTabNavBase;
+exports.ɵi14 = mcTabLinkMixinBase;
+exports.ɵg14 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -30225,13 +30192,13 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵb20 = mcSidepanelAnimations;
-exports.ɵa20 = mcSidepanelTransformAnimation;
-exports.ɵg20 = McSidepanelActions;
-exports.ɵe20 = McSidepanelBody;
-exports.ɵc20 = McSidepanelClose;
-exports.ɵf20 = McSidepanelFooter;
-exports.ɵd20 = McSidepanelHeader;
+exports.ɵb19 = mcSidepanelAnimations;
+exports.ɵa19 = mcSidepanelTransformAnimation;
+exports.ɵg19 = McSidepanelActions;
+exports.ɵe19 = McSidepanelBody;
+exports.ɵc19 = McSidepanelClose;
+exports.ɵf19 = McSidepanelFooter;
+exports.ɵd19 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
@@ -30258,7 +30225,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

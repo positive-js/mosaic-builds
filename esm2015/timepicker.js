@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, Renderer2, Self, NgModule } from '@angular/core';
-import { FormGroupDirective, NG_VALIDATORS, NgControl, NgForm, Validators, FormsModule } from '@angular/forms';
+import { FormGroupDirective, NgControl, NgForm, FormsModule } from '@angular/forms';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
@@ -69,18 +69,6 @@ const ARROW_RIGHT_KEYCODE = 'ArrowRight';
  */
 /** @type {?} */
 let uniqueComponentIdSuffix = 0;
-/** @type {?} */
-const formValidators = new WeakMap();
-/** @type {?} */
-const formValidatorOnChangeRegistrators = new WeakMap();
-/** @type {?} */
-const validatorOnChange = (c) => {
-    /** @type {?} */
-    const validatorOnChangeHandler = formValidatorOnChangeRegistrators.get(c);
-    if (validatorOnChangeHandler !== undefined) {
-        validatorOnChangeHandler();
-    }
-};
 class McTimepickerBase {
     /**
      * @param {?} defaultErrorStateMatcher
@@ -98,30 +86,6 @@ class McTimepickerBase {
 // tslint:disable-next-line naming-convention
 /** @type {?} */
 const McTimepickerMixinBase = mixinErrorState(McTimepickerBase);
-const ɵ1 = {
-    /**
-     * @param {?} c
-     * @return {?}
-     */
-    validate(c) {
-        // TODO This is `workaround` to bind singleton-like Validator implementation to
-        // context of each validated component. This MUST be realized in proper way!
-        if (this.__validatorOnChangeHandler !== undefined) {
-            formValidatorOnChangeRegistrators.set(c, this.__validatorOnChangeHandler);
-            this.__validatorOnChangeHandler = undefined;
-        }
-        /** @type {?} */
-        const validator = formValidators.get(c);
-        return validator ? validator(c) : null;
-    },
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    registerOnValidatorChange(fn) {
-        this.__validatorOnChangeHandler = fn;
-    }
-};
 class McTimepicker extends McTimepickerMixinBase {
     /**
      * @param {?} elementRef
@@ -169,16 +133,25 @@ class McTimepicker extends McTimepickerMixinBase {
         // Force setter to be called in case id was not specified.
         this.id = this.id;
         this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
-        // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
         if (this.ngControl) {
+            // Instead of NG_VALUE_ACCESSOR (https://github.com/angular/material2/issues/8158#issuecomment-344618103)
             this.ngControl.valueAccessor = this;
+            // To avoid cyclic dependency https://stackoverflow.com/a/49578414
+            /** @type {?} */
+            const control = (/** @type {?} */ (this.ngControl.control));
+            /** @type {?} */
+            const myValidators = [
+                () => this.parseValidator(),
+                () => this.minTimeValidator(),
+                () => this.maxTimeValidator()
+            ];
+            /** @type {?} */
+            const validators = control.validator
+                ? [control.validator, ...myValidators]
+                : myValidators;
+            control.setValidators(validators);
+            control.updateValueAndValidity();
         }
-        // Substitute initial empty validator with validator linked to directive object instance (workaround)
-        formValidators.set((/** @type {?} */ (this.ngControl.control)), Validators.compose([
-            () => this.parseValidator(),
-            () => this.minTimeValidator(),
-            () => this.maxTimeValidator()
-        ]));
     }
     /**
      * @return {?}
@@ -251,7 +224,7 @@ class McTimepicker extends McTimepickerMixinBase {
             .keys(TimeFormats)
             .map((timeFormatKey) => TimeFormats[timeFormatKey])
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
-        validatorOnChange((/** @type {?} */ (this.ngControl.control)));
+        ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
         this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
     }
     /**
@@ -265,7 +238,7 @@ class McTimepicker extends McTimepickerMixinBase {
     set minTime(minValue) {
         this._minTime = minValue;
         this.minDateTime = minValue !== null ? this.getDateFromTimeString(minValue) : undefined;
-        validatorOnChange((/** @type {?} */ (this.ngControl.control)));
+        ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
     }
     /**
      * @return {?}
@@ -278,7 +251,7 @@ class McTimepicker extends McTimepickerMixinBase {
     set maxTime(maxValue) {
         this._maxTime = maxValue;
         this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
-        validatorOnChange((/** @type {?} */ (this.ngControl.control)));
+        ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
     }
     /**
      * @return {?}
@@ -881,11 +854,6 @@ McTimepicker.decorators = [
                     '(keydown)': 'onKeyDown($event)'
                 },
                 providers: [
-                    {
-                        provide: NG_VALIDATORS,
-                        useValue: ɵ1,
-                        multi: true
-                    },
                     {
                         provide: McFormFieldControl,
                         useExisting: forwardRef(() => McTimepicker)
