@@ -2608,7 +2608,6 @@ var McDatepicker = /** @class */ (function () {
                 _this._opened = false;
                 _this.closedStream.emit();
                 _this.focusedElementBeforeOpen = null;
-                _this.datepickerInput.elementRef.nativeElement.focus();
             }
         };
         if (this.focusedElementBeforeOpen &&

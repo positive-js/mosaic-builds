@@ -2103,7 +2103,6 @@ class McDatepicker {
                 this._opened = false;
                 this.closedStream.emit();
                 this.focusedElementBeforeOpen = null;
-                this.datepickerInput.elementRef.nativeElement.focus();
             }
         };
         if (this.focusedElementBeforeOpen &&

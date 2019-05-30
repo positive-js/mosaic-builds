@@ -236,5 +236,5 @@ var McVerticalNavbarModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, _McVerticalNavbarMixinBase, McVerticalNavbarItem, toggleVerticalNavbarAnimation as ɵa22 };
+export { McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, _McVerticalNavbarMixinBase, McVerticalNavbarItem, toggleVerticalNavbarAnimation as ɵa23 };
 //# sourceMappingURL=vertical-navbar.es5.js.map
