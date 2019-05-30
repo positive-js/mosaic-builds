@@ -8434,6 +8434,7 @@ var McDatepicker = /** @class */ (function () {
                 _this._opened = false;
                 _this.closedStream.emit();
                 _this.focusedElementBeforeOpen = null;
+                _this.datepickerInput.elementRef.nativeElement.focus();
             }
         };
         if (this.focusedElementBeforeOpen &&
@@ -30343,7 +30344,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
