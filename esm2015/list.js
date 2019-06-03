@@ -6,11 +6,11 @@
  */
 import { Attribute, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, Input, Output, ViewEncapsulation, ChangeDetectorRef, Inject, ViewChild, Directive, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { FocusKeyManager, A11yModule } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { END, ENTER, HOME, PAGE_DOWN, PAGE_UP, SPACE } from '@ptsecurity/cdk/keycodes';
-import { McLine, McLineSetter, mixinDisabled, toBoolean, McLineModule } from '@ptsecurity/mosaic/core';
+import { DOWN_ARROW, END, ENTER, hasModifierKey, HOME, PAGE_DOWN, PAGE_UP, SPACE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { McLine, mixinDisabled, toBoolean, McLineSetter, McLineModule } from '@ptsecurity/mosaic/core';
+import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -32,11 +32,11 @@ class McListOption {
         this._element = _element;
         this._changeDetector = _changeDetector;
         this.listSelection = listSelection;
-        this._hasFocus = false;
+        this.hasFocus = false;
         // Whether the label should appear before or after the checkbox. Defaults to 'after'
         this.checkboxPosition = 'after';
-        this._selected = false;
         this._disabled = false;
+        this._selected = false;
     }
     /**
      * @return {?}
@@ -71,7 +71,7 @@ class McListOption {
         const isSelected = toBoolean(value);
         if (isSelected !== this._selected) {
             this.setSelected(isSelected);
-            this.listSelection._reportValueChange();
+            this.listSelection.reportValueChange();
         }
     }
     /**
@@ -97,19 +97,13 @@ class McListOption {
     /**
      * @return {?}
      */
-    ngAfterContentInit() {
-        this._lineSetter = new McLineSetter(this._lines, this._element);
-    }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         if (this.selected) {
             // We have to delay this until the next tick in order
             // to avoid changed after checked errors.
             Promise.resolve().then(() => this.selected = false);
         }
-        this.listSelection._removeOptionFromList(this);
+        this.listSelection.removeOptionFromList(this);
     }
     /**
      * @return {?}
@@ -122,13 +116,12 @@ class McListOption {
      */
     focus() {
         this._element.nativeElement.focus();
-        this.listSelection.setFocusedOption(this);
     }
     /**
      * @return {?}
      */
     getLabel() {
-        return this._text ? this._text.nativeElement.textContent : '';
+        return this.text ? this.text.nativeElement.textContent : '';
     }
     /**
      * @param {?} selected
@@ -150,38 +143,39 @@ class McListOption {
     /**
      * @return {?}
      */
-    _getHeight() {
+    getHeight() {
         return this._element.nativeElement.getClientRects()[0].height;
     }
     /**
+     * @param {?} $event
      * @return {?}
      */
-    _handleClick() {
+    handleClick($event) {
         if (this.disabled) {
             return;
         }
-        this.listSelection.setFocusedOption(this);
+        this.listSelection.setFocusedOption(this, $event);
     }
     /**
      * @return {?}
      */
-    _handleFocus() {
-        if (this.disabled || this._hasFocus) {
+    handleFocus() {
+        if (this.disabled || this.hasFocus) {
             return;
         }
-        this._hasFocus = true;
+        this.hasFocus = true;
     }
     /**
      * @return {?}
      */
-    _handleBlur() {
-        this._hasFocus = false;
-        this.listSelection._onTouched();
+    handleBlur() {
+        this.hasFocus = false;
+        this.listSelection.onTouched();
     }
     /**
      * @return {?}
      */
-    _getHostElement() {
+    getHostElement() {
         return this._element.nativeElement;
     }
 }
@@ -193,10 +187,10 @@ McListOption.decorators = [
                     tabindex: '-1',
                     class: 'mc-list-option',
                     '[class.mc-selected]': 'selected',
-                    '[class.mc-focused]': '_hasFocus',
-                    '(focus)': '_handleFocus()',
-                    '(blur)': '_handleBlur()',
-                    '(click)': '_handleClick()'
+                    '[class.mc-focused]': 'hasFocus',
+                    '(focus)': 'handleFocus()',
+                    '(blur)': 'handleBlur()',
+                    '(click)': 'handleClick($event)'
                 },
                 template: "<div class=\"mc-list-item-content\"><div class=\"mc-list-text\" #text><ng-content></ng-content></div></div>",
                 encapsulation: ViewEncapsulation.None,
@@ -211,8 +205,8 @@ McListOption.ctorParameters = () => [
     { type: McListSelection, decorators: [{ type: Inject, args: [forwardRef(() => McListSelection),] }] }
 ];
 McListOption.propDecorators = {
-    _lines: [{ type: ContentChildren, args: [McLine,] }],
-    _text: [{ type: ViewChild, args: ['text',] }],
+    lines: [{ type: ContentChildren, args: [McLine,] }],
+    text: [{ type: ViewChild, args: ['text',] }],
     checkboxPosition: [{ type: Input }],
     value: [{ type: Input }],
     disabled: [{ type: Input }],
@@ -224,7 +218,6 @@ const MC_SELECTION_LIST_VALUE_ACCESSOR = {
     useExisting: forwardRef(() => McListSelection),
     multi: true
 };
-// Change event that is being fired whenever the selected state of an option changes. */
 class McListSelectionChange {
     /**
      * @param {?} source
@@ -237,27 +230,29 @@ class McListSelectionChange {
 }
 class McListSelectionBase {
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
 const _McListSelectionMixinBase = mixinDisabled(McListSelectionBase);
 class McListSelection extends _McListSelectionMixinBase {
     /**
-     * @param {?} _element
+     * @param {?} element
      * @param {?} tabIndex
      * @param {?} autoSelect
      * @param {?} noUnselect
      * @param {?} multiple
      */
-    constructor(_element, tabIndex, autoSelect, noUnselect, multiple) {
+    constructor(element, tabIndex, autoSelect, noUnselect, multiple) {
         super();
-        this._element = _element;
+        this.element = element;
         this.horizontal = false;
         // Emits a change event whenever the selected state of an option changes.
         this.selectionChange = new EventEmitter();
-        this._modelChanges = Subscription.EMPTY;
+        this.modelChanges = Subscription.EMPTY;
         // View to model callback that should be called if the list or its options lost focus.
-        this._onTouched = () => { };
+        // tslint:disable-next-line:no-empty
+        this.onTouched = () => { };
         // View to model callback that should be called whenever the selected options change.
-        this._onChange = (_) => { };
+        this.onChange = (_) => { };
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
         this.multiple = multiple === null ? true : toBoolean(multiple);
         this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
@@ -269,16 +264,16 @@ class McListSelection extends _McListSelectionMixinBase {
      */
     ngAfterContentInit() {
         this.horizontal = toBoolean(this.horizontal);
-        this._keyManager = new FocusKeyManager(this.options)
+        this.keyManager = new FocusKeyManager(this.options)
             .withTypeAhead()
             .withVerticalOrientation(!this.horizontal)
             .withHorizontalOrientation(this.horizontal ? 'ltr' : null);
-        if (this._tempValues) {
-            this._setOptionsFromValues(this._tempValues);
-            this._tempValues = null;
+        if (this.tempValues) {
+            this.setOptionsFromValues(this.tempValues);
+            this.tempValues = null;
         }
         // Sync external changes to the model back to the options.
-        this._modelChanges = (/** @type {?} */ (this.selectedOptions.onChange)).subscribe((event) => {
+        this.modelChanges = (/** @type {?} */ (this.selectedOptions.onChange)).subscribe((event) => {
             for (const item of event.added) {
                 item.selected = true;
             }
@@ -292,27 +287,27 @@ class McListSelection extends _McListSelectionMixinBase {
      * @return {?}
      */
     ngOnDestroy() {
-        this._modelChanges.unsubscribe();
+        this.modelChanges.unsubscribe();
     }
     /**
      * @return {?}
      */
     focus() {
-        this._element.nativeElement.focus();
+        this.element.nativeElement.focus();
     }
     /**
      * @return {?}
      */
     selectAll() {
         this.options.forEach((option) => option.setSelected(true));
-        this._reportValueChange();
+        this.reportValueChange();
     }
     /**
      * @return {?}
      */
     deselectAll() {
         this.options.forEach((option) => option.setSelected(false));
-        this._reportValueChange();
+        this.reportValueChange();
     }
     /**
      * @return {?}
@@ -321,20 +316,25 @@ class McListSelection extends _McListSelectionMixinBase {
         if (this.horizontal || !this.options.first) {
             return;
         }
-        this._keyManager.withScrollSize(Math.floor(this._getHeight() / this.options.first._getHeight()));
+        this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.options.first.getHeight()));
     }
     // Sets the focused option of the selection-list.
     /**
      * @param {?} option
+     * @param {?=} $event
      * @return {?}
      */
-    setFocusedOption(option) {
-        this._keyManager.updateActiveItem(option);
-        if (this.withShift && this.multiple) {
+    setFocusedOption(option, $event) {
+        this.keyManager.updateActiveItem(option);
+        /** @type {?} */
+        const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
+        /** @type {?} */
+        const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
+        if (withShift && this.multiple) {
             /** @type {?} */
-            const previousIndex = this._keyManager.previousActiveItemIndex;
+            const previousIndex = this.keyManager.previousActiveItemIndex;
             /** @type {?} */
-            const activeIndex = this._keyManager.activeItemIndex;
+            const activeIndex = this.keyManager.activeItemIndex;
             if (previousIndex < activeIndex) {
                 this.options.forEach((item, index) => {
                     if (index >= previousIndex && index <= activeIndex) {
@@ -349,11 +349,9 @@ class McListSelection extends _McListSelectionMixinBase {
                     }
                 });
             }
-            this.withShift = false;
         }
-        else if (this.withCtrl) {
-            this.withCtrl = false;
-            if (!this._canDeselectLast(option)) {
+        else if (withCtrl) {
+            if (!this.canDeselectLast(option)) {
                 return;
             }
             option.toggle();
@@ -364,8 +362,8 @@ class McListSelection extends _McListSelectionMixinBase {
                 option.setSelected(true);
             }
         }
-        this._emitChangeEvent(option);
-        this._reportValueChange();
+        this.emitChangeEvent(option);
+        this.reportValueChange();
     }
     // Implemented as part of ControlValueAccessor.
     /**
@@ -374,10 +372,10 @@ class McListSelection extends _McListSelectionMixinBase {
      */
     writeValue(values) {
         if (this.options) {
-            this._setOptionsFromValues(values || []);
+            this.setOptionsFromValues(values || []);
         }
         else {
-            this._tempValues = values;
+            this.tempValues = values;
         }
     }
     // Implemented as part of ControlValueAccessor.
@@ -386,7 +384,7 @@ class McListSelection extends _McListSelectionMixinBase {
      * @return {?}
      */
     registerOnChange(fn) {
-        this._onChange = fn;
+        this.onChange = fn;
     }
     // Implemented as part of ControlValueAccessor.
     /**
@@ -394,7 +392,7 @@ class McListSelection extends _McListSelectionMixinBase {
      * @return {?}
      */
     registerOnTouched(fn) {
-        this._onTouched = fn;
+        this.onTouched = fn;
     }
     // Implemented as a part of ControlValueAccessor.
     /**
@@ -418,14 +416,14 @@ class McListSelection extends _McListSelectionMixinBase {
      */
     toggleFocusedOption() {
         /** @type {?} */
-        const focusedIndex = this._keyManager.activeItemIndex;
-        if (focusedIndex != null && this._isValidIndex(focusedIndex)) {
+        const focusedIndex = this.keyManager.activeItemIndex;
+        if (focusedIndex != null && this.isValidIndex(focusedIndex)) {
             /** @type {?} */
             const focusedOption = this.options.toArray()[focusedIndex];
-            if (focusedOption && this._canDeselectLast(focusedOption)) {
+            if (focusedOption && this.canDeselectLast(focusedOption)) {
                 focusedOption.toggle();
                 // Emit a change event because the focused option changed its state through user interaction.
-                this._emitChangeEvent(focusedOption);
+                this.emitChangeEvent(focusedOption);
             }
         }
     }
@@ -433,30 +431,30 @@ class McListSelection extends _McListSelectionMixinBase {
      * @param {?} listOption
      * @return {?}
      */
-    _canDeselectLast(listOption) {
+    canDeselectLast(listOption) {
         return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
     }
     /**
      * @return {?}
      */
-    _getHeight() {
-        return this._element.nativeElement.getClientRects()[0].height;
+    getHeight() {
+        return this.element.nativeElement.getClientRects()[0].height;
     }
     // Removes an option from the selection list and updates the active item.
     /**
      * @param {?} option
      * @return {?}
      */
-    _removeOptionFromList(option) {
-        if (option._hasFocus) {
+    removeOptionFromList(option) {
+        if (option.hasFocus) {
             /** @type {?} */
-            const optionIndex = this._getOptionIndex(option);
+            const optionIndex = this.getOptionIndex(option);
             // Check whether the option is the last item
             if (optionIndex > 0) {
-                this._keyManager.setPreviousItemActive();
+                this.keyManager.setPreviousItemActive();
             }
             else if (optionIndex === 0 && this.options.length > 1) {
-                this._keyManager.setNextItemActive();
+                this.keyManager.setNextItemActive();
             }
         }
     }
@@ -464,48 +462,48 @@ class McListSelection extends _McListSelectionMixinBase {
      * @param {?} event
      * @return {?}
      */
-    _onKeyDown(event) {
+    onKeyDown(event) {
         /** @type {?} */
         const keyCode = event.keyCode;
-        this.withShift = event.shiftKey;
-        this.withCtrl = event.ctrlKey;
         switch (keyCode) {
             case SPACE:
             case ENTER:
                 this.toggleFocusedOption();
-                event.preventDefault();
+                break;
+            case TAB:
+                this.keyManager.tabOut.next();
+                return;
+            case DOWN_ARROW:
+                this.keyManager.setNextItemActive();
+                break;
+            case UP_ARROW:
+                this.keyManager.setPreviousItemActive();
                 break;
             case HOME:
-                this._keyManager.setFirstItemActive();
-                event.preventDefault();
+                this.keyManager.setFirstItemActive();
                 break;
             case END:
-                this._keyManager.setLastItemActive();
-                event.preventDefault();
+                this.keyManager.setLastItemActive();
                 break;
             case PAGE_UP:
-                if (!this.horizontal) {
-                    this._keyManager.setPreviousPageItemActive();
-                }
-                event.preventDefault();
+                this.keyManager.setPreviousPageItemActive();
                 break;
             case PAGE_DOWN:
-                if (!this.horizontal) {
-                    this._keyManager.setNextPageItemActive();
-                }
-                event.preventDefault();
+                this.keyManager.setNextPageItemActive();
                 break;
             default:
-                this._keyManager.onKeydown(event);
+                return;
         }
+        event.preventDefault();
+        this.setFocusedOption((/** @type {?} */ (this.keyManager.activeItem)), event);
     }
     // Reports a value change to the ControlValueAccessor
     /**
      * @return {?}
      */
-    _reportValueChange() {
+    reportValueChange() {
         if (this.options) {
-            this._onChange(this.getSelectedOptionValues());
+            this.onChange(this.getSelectedOptionValues());
         }
     }
     // Emits a change event if the selected state of an option changed.
@@ -513,7 +511,7 @@ class McListSelection extends _McListSelectionMixinBase {
      * @param {?} option
      * @return {?}
      */
-    _emitChangeEvent(option) {
+    emitChangeEvent(option) {
         this.selectionChange.emit(new McListSelectionChange(this, option));
     }
     // Returns the option with the specified value.
@@ -522,7 +520,7 @@ class McListSelection extends _McListSelectionMixinBase {
      * @param {?} value
      * @return {?}
      */
-    _getOptionByValue(value) {
+    getOptionByValue(value) {
         return this.options.find((option) => option.value === value);
     }
     // Sets the selected options based on the specified values.
@@ -531,10 +529,10 @@ class McListSelection extends _McListSelectionMixinBase {
      * @param {?} values
      * @return {?}
      */
-    _setOptionsFromValues(values) {
+    setOptionsFromValues(values) {
         this.options.forEach((option) => option.setSelected(false));
         values
-            .map((value) => this._getOptionByValue(value))
+            .map((value) => this.getOptionByValue(value))
             .filter(Boolean)
             .forEach((option) => (/** @type {?} */ (option)).setSelected(true));
     }
@@ -544,7 +542,7 @@ class McListSelection extends _McListSelectionMixinBase {
      * @param {?} index The index to be checked.
      * @return {?} True if the index is valid for our list of options.
      */
-    _isValidIndex(index) {
+    isValidIndex(index) {
         return index >= 0 && index < this.options.length;
     }
     // Returns the index of the specified list option.
@@ -553,7 +551,7 @@ class McListSelection extends _McListSelectionMixinBase {
      * @param {?} option
      * @return {?}
      */
-    _getOptionIndex(option) {
+    getOptionIndex(option) {
         return this.options.toArray().indexOf(option);
     }
 }
@@ -570,8 +568,8 @@ McListSelection.decorators = [
                     class: 'mc-list-selection',
                     '[tabIndex]': 'tabIndex',
                     '(focus)': 'focus()',
-                    '(blur)': '_onTouched()',
-                    '(keydown)': '_onKeyDown($event)',
+                    '(blur)': 'onTouched()',
+                    '(keydown)': 'onKeyDown($event)',
                     '(window:resize)': 'updateScrollSize()'
                 },
                 providers: [MC_SELECTION_LIST_VALUE_ACCESSOR],
@@ -637,24 +635,24 @@ class McListItem extends McListItemBase {
      * @return {?}
      */
     ngAfterContentInit() {
-        this._lineSetter = new McLineSetter(this._lines, this._element);
+        this.lineSetter = new McLineSetter(this.lines, this._element);
     }
     /**
      * @return {?}
      */
-    _handleFocus() {
+    handleFocus() {
         this._element.nativeElement.classList.add('mc-focused');
     }
     /**
      * @return {?}
      */
-    _handleBlur() {
+    handleBlur() {
         this._element.nativeElement.classList.remove('mc-focused');
     }
     /**
      * @return {?}
      */
-    _getHostElement() {
+    getHostElement() {
         return this._element.nativeElement;
     }
 }
@@ -663,8 +661,8 @@ McListItem.decorators = [
                 selector: 'mc-list-item, a[mc-list-item]',
                 host: {
                     class: 'mc-list-item',
-                    '(focus)': '_handleFocus()',
-                    '(blur)': '_handleBlur()'
+                    '(focus)': 'handleFocus()',
+                    '(blur)': 'handleBlur()'
                 },
                 template: "<div class=\"mc-list-item-content\"><ng-content select=\"[mc-list-icon], [mcListIcon]\"></ng-content><div class=\"mc-list-text\"><ng-content select=\"[mc-line], [mcLine]\"></ng-content></div><ng-content></ng-content></div>",
                 encapsulation: ViewEncapsulation.None,
@@ -677,7 +675,7 @@ McListItem.ctorParameters = () => [
     { type: ElementRef }
 ];
 McListItem.propDecorators = {
-    _lines: [{ type: ContentChildren, args: [McLine,] }]
+    lines: [{ type: ContentChildren, args: [McLine,] }]
 };
 
 /**

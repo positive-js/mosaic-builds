@@ -14,11 +14,11 @@ export declare class McListItemBase {
 }
 export declare class McListItem extends McListItemBase implements AfterContentInit {
     private _element;
-    _lines: QueryList<McLine>;
-    private _lineSetter;
+    lines: QueryList<McLine>;
+    private lineSetter;
     constructor(_element: ElementRef);
     ngAfterContentInit(): void;
-    _handleFocus(): void;
-    _handleBlur(): void;
-    _getHostElement(): HTMLElement;
+    handleFocus(): void;
+    handleBlur(): void;
+    getHostElement(): HTMLElement;
 }
