@@ -1009,5 +1009,5 @@ McModalModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵb28, McModalControlService as ɵa28 };
+export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵb26, McModalControlService as ɵa26 };
 //# sourceMappingURL=modal.js.map
