@@ -1653,13 +1653,12 @@ $mc-calendar-weekday-table-font-size: 11px !default;
             color: map-get($background, background);
         }
 
-        .mc-form-field__container {
-            border: {
-                color: mc-color($second);
-            }
-        }
-
         &:not(.mc-form-field_without-borders) {
+            .mc-form-field__container {
+                border: {
+                    color: mc-color($second);
+                }
+            }
 
             &:hover .mc-form-field__container {
                 border: {
