@@ -12355,7 +12355,7 @@ var McLink = /** @class */ (function (_super) {
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
                     exportAs: 'mcLink',
-                    styles: [".mc-link{display:inline-flex;align-items:center;padding:2px 0;text-decoration:none!important;cursor:pointer;outline:0;transition-property:color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link:focus{transition:none}.mc-link:hover{transition:none}.mc-link.mc-focused,.mc-link:focus{border-radius:3px}.mc-link[disabled]{pointer-events:none;cursor:default}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link.mc-link_dashed,.mc-link.mc-link_underlined{transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out;transition-property:background,color;transition-duration:.33s;transition-timing-function:ease-out}.mc-link.mc-link_dashed:focus,.mc-link.mc-link_underlined:focus{transition:none}.mc-link.mc-link_dashed:hover,.mc-link.mc-link_underlined:hover{transition:none}"],
+                    styles: [".mc-link{display:inline-block;outline:0;padding:4px 8px;text-decoration:none;cursor:pointer}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link.cdk-keyboard-focused{border-radius:3px}.mc-link[disabled]{pointer-events:none;cursor:default}"],
                     inputs: ['disabled'],
                     host: {
                         '[attr.disabled]': 'disabled || null',
@@ -30225,8 +30225,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
+exports.ɵb28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -30355,13 +30355,13 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵb20 = mcSidepanelAnimations;
-exports.ɵa20 = mcSidepanelTransformAnimation;
-exports.ɵg20 = McSidepanelActions;
-exports.ɵe20 = McSidepanelBody;
-exports.ɵc20 = McSidepanelClose;
-exports.ɵf20 = McSidepanelFooter;
-exports.ɵd20 = McSidepanelHeader;
+exports.ɵb21 = mcSidepanelAnimations;
+exports.ɵa21 = mcSidepanelTransformAnimation;
+exports.ɵg21 = McSidepanelActions;
+exports.ɵe21 = McSidepanelBody;
+exports.ɵc21 = McSidepanelClose;
+exports.ɵf21 = McSidepanelFooter;
+exports.ɵd21 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
