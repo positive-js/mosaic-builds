@@ -11,7 +11,7 @@ import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { Directionality } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, A } from '@ptsecurity/cdk/keycodes';
+import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, A, PAGE_UP, PAGE_DOWN } from '@ptsecurity/cdk/keycodes';
 import { CdkConnectedOverlay, ViewportRuler, OverlayModule } from '@ptsecurity/cdk/overlay';
 import { countGroupLabelsBeforeOption, getOptionScrollPosition, ErrorStateMatcher, MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption, mixinDisabled, mixinErrorState, mixinTabIndex, mcSelectAnimations, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McOptionModule } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -874,6 +874,7 @@ var McSelect = /** @class */ (function (_super) {
             _this._changeDetectorRef.detectChanges();
             _this.calculateOverlayOffsetX();
             _this.optionsContainer.nativeElement.scrollTop = _this.scrollTop;
+            _this.updateScrollSize();
         });
     };
     /** Returns the theme to be used on the panel. */
@@ -1037,6 +1038,31 @@ var McSelect = /** @class */ (function (_super) {
      * @private
      * @return {?}
      */
+    McSelect.prototype.getHeightOfOptionsContainer = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return this.optionsContainer.nativeElement.getClientRects()[0].height;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McSelect.prototype.updateScrollSize = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (!this.options.first) {
+            return;
+        }
+        this.keyManager.withScrollSize(Math.floor(this.getHeightOfOptionsContainer() / this.options.first.getHeight()));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
     McSelect.prototype.getTotalItemsWidthInMatcher = /**
      * @private
      * @return {?}
@@ -1112,19 +1138,26 @@ var McSelect = /** @class */ (function (_super) {
         var isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
         /** @type {?} */
         var manager = this.keyManager;
-        if (keyCode === HOME || keyCode === END) {
-            event.preventDefault();
-            if (keyCode === HOME) {
-                manager.setFirstItemActive();
-            }
-            else {
-                manager.setLastItemActive();
-            }
-        }
-        else if (isArrowKey && event.altKey) {
+        if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
             this.close();
+        }
+        else if (keyCode === HOME) {
+            event.preventDefault();
+            manager.setFirstItemActive();
+        }
+        else if (keyCode === END) {
+            event.preventDefault();
+            manager.setLastItemActive();
+        }
+        else if (keyCode === PAGE_UP) {
+            event.preventDefault();
+            manager.setPreviousPageItemActive();
+        }
+        else if (keyCode === PAGE_DOWN) {
+            event.preventDefault();
+            manager.setNextPageItemActive();
         }
         else if ((keyCode === ENTER || keyCode === SPACE) && manager.activeItem) {
             event.preventDefault();

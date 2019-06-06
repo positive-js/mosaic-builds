@@ -891,6 +891,7 @@ var McSelect = /** @class */ (function (_super) {
             _this._changeDetectorRef.detectChanges();
             _this.calculateOverlayOffsetX();
             _this.optionsContainer.nativeElement.scrollTop = _this.scrollTop;
+            _this.updateScrollSize();
         });
     };
     /** Returns the theme to be used on the panel. */
@@ -1054,6 +1055,31 @@ var McSelect = /** @class */ (function (_super) {
      * @private
      * @return {?}
      */
+    McSelect.prototype.getHeightOfOptionsContainer = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return this.optionsContainer.nativeElement.getClientRects()[0].height;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McSelect.prototype.updateScrollSize = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (!this.options.first) {
+            return;
+        }
+        this.keyManager.withScrollSize(Math.floor(this.getHeightOfOptionsContainer() / this.options.first.getHeight()));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
     McSelect.prototype.getTotalItemsWidthInMatcher = /**
      * @private
      * @return {?}
@@ -1129,19 +1155,26 @@ var McSelect = /** @class */ (function (_super) {
         var isArrowKey = keyCode === keycodes.DOWN_ARROW || keyCode === keycodes.UP_ARROW;
         /** @type {?} */
         var manager = this.keyManager;
-        if (keyCode === keycodes.HOME || keyCode === keycodes.END) {
-            event.preventDefault();
-            if (keyCode === keycodes.HOME) {
-                manager.setFirstItemActive();
-            }
-            else {
-                manager.setLastItemActive();
-            }
-        }
-        else if (isArrowKey && event.altKey) {
+        if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
             this.close();
+        }
+        else if (keyCode === keycodes.HOME) {
+            event.preventDefault();
+            manager.setFirstItemActive();
+        }
+        else if (keyCode === keycodes.END) {
+            event.preventDefault();
+            manager.setLastItemActive();
+        }
+        else if (keyCode === keycodes.PAGE_UP) {
+            event.preventDefault();
+            manager.setPreviousPageItemActive();
+        }
+        else if (keyCode === keycodes.PAGE_DOWN) {
+            event.preventDefault();
+            manager.setNextPageItemActive();
         }
         else if ((keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) && manager.activeItem) {
             event.preventDefault();

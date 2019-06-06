@@ -247,6 +247,8 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     /** Invoked when an option is clicked. */
     onRemoveMatcherItem(option: McOption, $event: any): void;
     calculateHiddenItems(): void;
+    private getHeightOfOptionsContainer;
+    private updateScrollSize;
     private getTotalItemsWidthInMatcher;
     /** Handles keyboard events while the select is closed. */
     private handleClosedKeydown;

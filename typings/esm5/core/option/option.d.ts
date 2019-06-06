@@ -58,6 +58,7 @@ export declare class McOption implements AfterViewChecked, OnDestroy {
     constructor(element: ElementRef, changeDetectorRef: ChangeDetectorRef, parent: McOptionParentComponent, group: McOptgroup);
     ngAfterViewChecked(): void;
     ngOnDestroy(): void;
+    getHeight(): number;
     select(): void;
     deselect(): void;
     focus(): void;

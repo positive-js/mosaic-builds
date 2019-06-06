@@ -916,6 +916,15 @@ var McOption = /** @class */ (function () {
     /**
      * @return {?}
      */
+    McOption.prototype.getHeight = /**
+     * @return {?}
+     */
+    function () {
+        return this.element.nativeElement.getClientRects()[0].height;
+    };
+    /**
+     * @return {?}
+     */
     McOption.prototype.select = /**
      * @return {?}
      */

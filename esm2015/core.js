@@ -743,6 +743,12 @@ class McOption {
     /**
      * @return {?}
      */
+    getHeight() {
+        return this.element.nativeElement.getClientRects()[0].height;
+    }
+    /**
+     * @return {?}
+     */
     select() {
         if (!this._selected) {
             this._selected = true;
