@@ -1,6 +1,6 @@
 {
     "name": "@ptsecurity/mosaic",
-    "version": "1.0.0-beta.7-880ddc3",
+    "version": "8.0.0-beta.0-1b1c17b",
     "description": "Mosaic",
     "main": "./bundles/mosaic.umd.js",
     "module": "./esm5/mosaic.es5.js",
@@ -21,12 +21,12 @@
     },
     "homepage": "https://github.com/positive-js/mosaic#readme",
     "peerDependencies": {
-        "@angular/animations": ">=7.0.0",
-        "@angular/core": ">=7.0.0",
-        "@angular/common": ">=7.0.0",
-        "@angular/forms": ">=7.0.0",
-        "@ptsecurity/cdk": "1.0.0-beta.7-880ddc3",
-        "@ptsecurity/mosaic-moment-adapter": "1.0.0-beta.7-880ddc3"
+        "@angular/animations": ">=8.0.0",
+        "@angular/core": ">=8.0.0",
+        "@angular/common": ">=8.0.0",
+        "@angular/forms": ">=8.0.0",
+        "@ptsecurity/cdk": "8.0.0-beta.0-1b1c17b",
+        "@ptsecurity/mosaic-moment-adapter": "8.0.0-beta.0-1b1c17b"
     },
     "dependencies": {
         "tslib": "^1.7.1"

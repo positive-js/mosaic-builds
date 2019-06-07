@@ -21,7 +21,7 @@ import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token to be used to override the default options for the chips module.
@@ -31,7 +31,7 @@ const MC_TAGS_DEFAULT_OPTIONS = new InjectionToken('mc-tags-default-options');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Event object emitted by McTag when selected or deselected.
@@ -222,7 +222,11 @@ class McTag extends _McTagMixinBase {
      */
     addClassModificatorForIcons() {
         /** @type {?} */
-        const icons = this.contentChildren.map((item) => item._elementRef.nativeElement);
+        const icons = this.contentChildren.map((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => item._elementRef.nativeElement));
         if (icons.length === 1) {
             /** @type {?} */
             const iconElement = icons[0];
@@ -376,12 +380,18 @@ class McTag extends _McTagMixinBase {
         this._ngZone.onStable
             .asObservable()
             .pipe(take(1))
-            .subscribe(() => {
-            this._ngZone.run(() => {
+            .subscribe((/**
+         * @return {?}
+         */
+        () => {
+            this._ngZone.run((/**
+             * @return {?}
+             */
+            () => {
                 this.hasFocus = false;
                 this.onBlur.next({ tag: this });
-            });
-        });
+            }));
+        }));
     }
     /**
      * @private
@@ -428,9 +438,12 @@ McTag.ctorParameters = () => [
 ];
 McTag.propDecorators = {
     contentChildren: [{ type: ContentChildren, args: [McIcon,] }],
-    avatar: [{ type: ContentChild, args: [McTagAvatar,] }],
-    trailingIcon: [{ type: ContentChild, args: [McTagTrailingIcon,] }],
-    removeIcon: [{ type: ContentChild, args: [forwardRef(() => McTagRemove),] }],
+    avatar: [{ type: ContentChild, args: [McTagAvatar, { static: false },] }],
+    trailingIcon: [{ type: ContentChild, args: [McTagTrailingIcon, { static: false },] }],
+    removeIcon: [{ type: ContentChild, args: [forwardRef((/**
+                 * @return {?}
+                 */
+                () => McTagRemove)), { static: false },] }],
     selectionChange: [{ type: Output }],
     destroyed: [{ type: Output }],
     removed: [{ type: Output }],
@@ -490,7 +503,7 @@ McTagRemove.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McTagListBase {
     /**
@@ -579,10 +592,21 @@ class McTagList extends _McTagListMixinBase {
          */
         this.destroyed = new Subject();
         // tslint:disable-next-line:no-empty
-        this.onTouched = () => { };
+        this.onTouched = (/**
+         * @return {?}
+         */
+        () => { });
         // tslint:disable-next-line:no-empty
-        this.onChange = () => { };
-        this._compareWith = (o1, o2) => o1 === o2;
+        this.onChange = (/**
+         * @return {?}
+         */
+        () => { });
+        this._compareWith = (/**
+         * @param {?} o1
+         * @param {?} o2
+         * @return {?}
+         */
+        (o1, o2) => o1 === o2);
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
         }
@@ -592,28 +616,44 @@ class McTagList extends _McTagListMixinBase {
      * @return {?}
      */
     get tagSelectionChanges() {
-        return merge(...this.tags.map((tag) => tag.selectionChange));
+        return merge(...this.tags.map((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        (tag) => tag.selectionChange)));
     }
     /**
      * Combined stream of all of the child tags' focus change events.
      * @return {?}
      */
     get tagFocusChanges() {
-        return merge(...this.tags.map((tag) => tag.onFocus));
+        return merge(...this.tags.map((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        (tag) => tag.onFocus)));
     }
     /**
      * Combined stream of all of the child tags' blur change events.
      * @return {?}
      */
     get tagBlurChanges() {
-        return merge(...this.tags.map((tag) => tag.onBlur));
+        return merge(...this.tags.map((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        (tag) => tag.onBlur)));
     }
     /**
      * Combined stream of all of the child tags' remove change events.
      * @return {?}
      */
     get tagRemoveChanges() {
-        return merge(...this.tags.map((tag) => tag.destroyed));
+        return merge(...this.tags.map((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        (tag) => tag.destroyed)));
     }
     /**
      * The array of selected tags inside tag list.
@@ -766,7 +806,11 @@ class McTagList extends _McTagListMixinBase {
     set selectable(value) {
         this._selectable = coerceBooleanProperty(value);
         if (this.tags) {
-            this.tags.forEach((tag) => tag.tagListSelectable = this._selectable);
+            this.tags.forEach((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            (tag) => tag.tagListSelectable = this._selectable));
         }
     }
     /**
@@ -787,27 +831,43 @@ class McTagList extends _McTagListMixinBase {
         if (this.dir) {
             this.dir.change
                 .pipe(takeUntil(this.destroyed))
-                .subscribe((dir) => this.keyManager.withHorizontalOrientation(dir));
+                .subscribe((/**
+             * @param {?} dir
+             * @return {?}
+             */
+            (dir) => this.keyManager.withHorizontalOrientation(dir)));
         }
         // Prevents the tag list from capturing focus and redirecting
         // it back to the first tag when the user tabs out.
         this.keyManager.tabOut
             .pipe(takeUntil(this.destroyed))
-            .subscribe(() => {
+            .subscribe((/**
+         * @return {?}
+         */
+        () => {
             this._tabIndex = -1;
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this._tabIndex = this.userTabIndex || 0;
                 this.changeDetectorRef.markForCheck();
-            });
-        });
+            }));
+        }));
         // When the list changes, re-subscribe
         this.tags.changes
             .pipe(startWith(null), takeUntil(this.destroyed))
-            .subscribe(() => {
+            .subscribe((/**
+         * @return {?}
+         */
+        () => {
             if (this.disabled) {
                 // Since this happens after the content has been
                 // checked, we need to defer it to the next tick.
-                Promise.resolve().then(() => { this.syncTagsDisabledState(); });
+                Promise.resolve().then((/**
+                 * @return {?}
+                 */
+                () => { this.syncTagsDisabledState(); }));
             }
             this.resetTags();
             // Reset tags selected/deselected status
@@ -818,9 +878,12 @@ class McTagList extends _McTagListMixinBase {
             this.updateFocusForDestroyedTags();
             // Defer setting the value in order to avoid the "Expression
             // has changed after it was checked" errors from Angular.
-            Promise.resolve().then(() => { this.tagChanges.emit(this.tags.toArray()); });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            () => { this.tagChanges.emit(this.tags.toArray()); }));
             this.stateChanges.next();
-        });
+        }));
     }
     /**
      * @return {?}
@@ -973,9 +1036,17 @@ class McTagList extends _McTagListMixinBase {
      */
     setSelectionByValue(value, isUserInput = true) {
         this.clearSelection();
-        this.tags.forEach((tag) => tag.deselect());
+        this.tags.forEach((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        (tag) => tag.deselect()));
         if (Array.isArray(value)) {
-            value.forEach((currentValue) => this.selectValue(currentValue, isUserInput));
+            value.forEach((/**
+             * @param {?} currentValue
+             * @return {?}
+             */
+            (currentValue) => this.selectValue(currentValue, isUserInput)));
             this.sortValues();
         }
         else {
@@ -1002,11 +1073,14 @@ class McTagList extends _McTagListMixinBase {
                 // If the focus is not moved to tag input, mark the field as touched. If the focus moved
                 // to tag input, do nothing.
                 // Timeout is needed to wait for the focus() event trigger on tag input.
-                setTimeout(() => {
+                setTimeout((/**
+                 * @return {?}
+                 */
+                () => {
                     if (!this.focused) {
                         this.markAsTouched();
                     }
-                });
+                }));
             }
             else {
                 // If there's no tag input, then mark the field as touched.
@@ -1081,9 +1155,13 @@ class McTagList extends _McTagListMixinBase {
      */
     selectValue(value, isUserInput = true) {
         /** @type {?} */
-        const correspondingTag = this.tags.find((tag) => {
+        const correspondingTag = this.tags.find((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        (tag) => {
             return tag.value != null && this._compareWith(tag.value, value);
-        });
+        }));
         if (correspondingTag) {
             if (isUserInput) {
                 correspondingTag.selectViaInteraction();
@@ -1102,12 +1180,15 @@ class McTagList extends _McTagListMixinBase {
     initializeSelection() {
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
-        Promise.resolve().then(() => {
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        () => {
             if (this.ngControl || this._value) {
                 this.setSelectionByValue(this.ngControl ? this.ngControl.value : this._value, false);
                 this.stateChanges.next();
             }
-        });
+        }));
     }
     /**
      * Deselects every tag in the list.
@@ -1117,11 +1198,15 @@ class McTagList extends _McTagListMixinBase {
      */
     clearSelection(skip) {
         this.selectionModel.clear();
-        this.tags.forEach((tag) => {
+        this.tags.forEach((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        (tag) => {
             if (tag !== skip) {
                 tag.deselect();
             }
-        });
+        }));
         this.stateChanges.next();
     }
     /**
@@ -1133,11 +1218,15 @@ class McTagList extends _McTagListMixinBase {
     sortValues() {
         if (this._multiple) {
             this.selectionModel.clear();
-            this.tags.forEach((tag) => {
+            this.tags.forEach((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            (tag) => {
                 if (tag.selected) {
                     this.selectionModel.select(tag);
                 }
-            });
+            }));
             this.stateChanges.next();
         }
     }
@@ -1151,7 +1240,11 @@ class McTagList extends _McTagListMixinBase {
         /** @type {?} */
         let valueToEmit = null;
         if (Array.isArray(this.selected)) {
-            valueToEmit = this.selected.map((tag) => tag.value);
+            valueToEmit = this.selected.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            (tag) => tag.value));
         }
         else {
             valueToEmit = this.selected ? this.selected.value : fallbackValue;
@@ -1200,7 +1293,11 @@ class McTagList extends _McTagListMixinBase {
      * @return {?}
      */
     listenToTagsSelection() {
-        this.tagSelectionSubscription = this.tagSelectionChanges.subscribe((event) => {
+        this.tagSelectionSubscription = this.tagSelectionChanges.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             if (event.source.selected) {
                 this.selectionModel.select(event.source);
             }
@@ -1209,16 +1306,20 @@ class McTagList extends _McTagListMixinBase {
             }
             // For single selection tag list, make sure the deselected value is unselected.
             if (!this.multiple) {
-                this.tags.forEach((tag) => {
+                this.tags.forEach((/**
+                 * @param {?} tag
+                 * @return {?}
+                 */
+                (tag) => {
                     if (!this.selectionModel.isSelected(tag) && tag.selected) {
                         tag.deselect();
                     }
-                });
+                }));
             }
             if (event.isUserInput) {
                 this.propagateChanges();
             }
-        });
+        }));
     }
     /**
      * Listens to user-generated selection events on each tag.
@@ -1226,25 +1327,36 @@ class McTagList extends _McTagListMixinBase {
      * @return {?}
      */
     listenToTagsFocus() {
-        this.tagFocusSubscription = this.tagFocusChanges.subscribe((event) => {
+        this.tagFocusSubscription = this.tagFocusChanges.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             /** @type {?} */
             const tagIndex = this.tags.toArray().indexOf(event.tag);
             if (this.isValidIndex(tagIndex)) {
                 this.keyManager.updateActiveItem(tagIndex);
             }
             this.stateChanges.next();
-        });
-        this.tagBlurSubscription = this.tagBlurChanges.subscribe(() => {
+        }));
+        this.tagBlurSubscription = this.tagBlurChanges.subscribe((/**
+         * @return {?}
+         */
+        () => {
             this.blur();
             this.stateChanges.next();
-        });
+        }));
     }
     /**
      * @private
      * @return {?}
      */
     listenToTagsRemoved() {
-        this.tagRemoveSubscription = this.tagRemoveChanges.subscribe((event) => {
+        this.tagRemoveSubscription = this.tagRemoveChanges.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             /** @type {?} */
             const tag = event.tag;
             /** @type {?} */
@@ -1255,7 +1367,7 @@ class McTagList extends _McTagListMixinBase {
             if (this.isValidIndex(tagIndex) && tag.hasFocus) {
                 this.lastDestroyedTagIndex = tagIndex;
             }
-        });
+        }));
     }
     /**
      * Checks whether an event comes from inside a tag element.
@@ -1280,7 +1392,11 @@ class McTagList extends _McTagListMixinBase {
      * @return {?}
      */
     hasFocusedTag() {
-        return this.tags.some((tag) => tag.hasFocus);
+        return this.tags.some((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        (tag) => tag.hasFocus));
     }
     /**
      * Syncs the list's disabled state with the individual tags.
@@ -1289,9 +1405,13 @@ class McTagList extends _McTagListMixinBase {
      */
     syncTagsDisabledState() {
         if (this.tags) {
-            this.tags.forEach((tag) => {
+            this.tags.forEach((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            (tag) => {
                 tag.disabled = this._disabled;
-            });
+            }));
         }
     }
 }
@@ -1345,7 +1465,7 @@ McTagList.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Increasing integer for generating unique ids.
 /** @type {?} */
@@ -1553,7 +1673,7 @@ McTagInput.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 const ɵ0 = ({ separatorKeyCodes: [ENTER] });
 class McTagsModule {
@@ -1587,12 +1707,12 @@ McTagsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, _McTagMixinBase, McTag, McTagRemove, McTagListBase, _McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS };

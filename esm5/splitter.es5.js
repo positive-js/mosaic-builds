@@ -11,7 +11,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSplitterComponent = /** @class */ (function () {
     function McSplitterComponent(elementRef, ngZone, renderer) {
@@ -141,18 +141,35 @@ var McSplitterComponent = /** @class */ (function () {
         };
         leftArea.initialSize = leftArea.area.getSize();
         rightArea.initialSize = rightArea.area.getSize();
-        this.areas.forEach(function (item) {
+        this.areas.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
             /** @type {?} */
             var size = item.area.getSize();
             item.area.disableFlex();
             item.area.setSize(size);
-        });
-        this.ngZone.runOutsideAngular(function () {
-            _this.listeners.push(_this.renderer.listen('document', 'mouseup', function () { return _this.onMouseUp(); }));
-        });
-        this.ngZone.runOutsideAngular(function () {
-            _this.listeners.push(_this.renderer.listen('document', 'mousemove', function (e) { return _this.onMouseMove(e, startPoint, leftArea, rightArea); }));
-        });
+        }));
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        function () {
+            _this.listeners.push(_this.renderer.listen('document', 'mouseup', (/**
+             * @return {?}
+             */
+            function () { return _this.onMouseUp(); })));
+        }));
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        function () {
+            _this.listeners.push(_this.renderer.listen('document', 'mousemove', (/**
+             * @param {?} e
+             * @return {?}
+             */
+            function (e) { return _this.onMouseMove(e, startPoint, leftArea, rightArea); })));
+        }));
         this.isDragging = true;
     };
     /**
@@ -166,13 +183,18 @@ var McSplitterComponent = /** @class */ (function () {
     function (area) {
         /** @type {?} */
         var indexToRemove = -1;
-        this.areas.some(function (item, index) {
+        this.areas.some((/**
+         * @param {?} item
+         * @param {?} index
+         * @return {?}
+         */
+        function (item, index) {
             if (item.area === area) {
                 indexToRemove = index;
                 return true;
             }
             return false;
-        });
+        }));
         if (indexToRemove === -1) {
             return;
         }
@@ -675,7 +697,7 @@ var McSplitterAreaDirective = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSplitterModule = /** @class */ (function () {
     function McSplitterModule() {
@@ -703,12 +725,12 @@ var McSplitterModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McSplitterModule, McSplitterComponent, McGutterDirective, McSplitterAreaDirective };

@@ -17,7 +17,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
@@ -222,11 +222,15 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this._subscription.add(this._focusMonitor$.subscribe(function (origin) {
+        this._subscription.add(this._focusMonitor$.subscribe((/**
+         * @param {?} origin
+         * @return {?}
+         */
+        function (origin) {
             if (origin === null) {
                 _this.forceCloseDropdown();
             }
-        }));
+        })));
     };
     /**
      * @private
@@ -261,9 +265,13 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this._dropdownElements.forEach(function (el) {
+        this._dropdownElements.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        function (el) {
             _this._focusMonitor.monitor(el, true);
-        });
+        }));
     };
     /**
      * @private
@@ -275,9 +283,13 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this._dropdownElements.forEach(function (el) {
+        this._dropdownElements.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        function (el) {
             _this._focusMonitor.stopMonitoring(el);
-        });
+        }));
     };
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
@@ -295,13 +307,25 @@ var McNavbarItem = /** @class */ (function (_super) {
         var _this = this;
         /** @type {?} */
         var events = this.elementRef.nativeElement.eventListeners('click');
-        events.forEach(function (event) { return _this.elementRef.nativeElement.removeEventListener('click', event); });
-        this.elementRef.nativeElement.addEventListener('click', function (event) {
+        events.forEach((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) { return _this.elementRef.nativeElement.removeEventListener('click', event); }));
+        this.elementRef.nativeElement.addEventListener('click', (/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             if (_this.elementRef.nativeElement.hasAttribute('disabled')) {
                 event.stopImmediatePropagation();
             }
-        }, true);
-        events.forEach(function (event) { return _this.elementRef.nativeElement.addEventListener('click', event); });
+        }), true);
+        events.forEach((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) { return _this.elementRef.nativeElement.addEventListener('click', event); }));
     };
     McNavbarItem.decorators = [
         { type: Component, args: [{
@@ -327,8 +351,8 @@ var McNavbarItem = /** @class */ (function (_super) {
         tabIndex: [{ type: Input }],
         dropdownItems: [{ type: Input }],
         collapsedTitle: [{ type: Input }],
-        dropdownItemTmpl: [{ type: ContentChild, args: ['dropdownItemTmpl', { read: TemplateRef },] }],
-        dropdownContent: [{ type: ViewChild, args: ['dropdownContent', { read: ElementRef },] }]
+        dropdownItemTmpl: [{ type: ContentChild, args: ['dropdownItemTmpl', { read: TemplateRef, static: false },] }],
+        dropdownContent: [{ type: ViewChild, args: ['dropdownContent', { read: ElementRef, static: false },] }]
     };
     return McNavbarItem;
 }(_McNavbarMixinBase));
@@ -436,7 +460,11 @@ var CachedItemWidth = /** @class */ (function () {
         if (this.itemsForCollapse.length > 0) {
             this.updateTitle(collapsed);
         }
-        this.itemsForCollapse.forEach(function (item) { return item.processCollapsed(collapsed); });
+        this.itemsForCollapse.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return item.processCollapsed(collapsed); }));
     };
     /**
      * @private
@@ -448,7 +476,12 @@ var CachedItemWidth = /** @class */ (function () {
      */
     function () {
         this._collapsedItemsWidth = this.itemsForCollapse
-            .reduce(function (acc, item) { return acc + item.width; }, 0);
+            .reduce((/**
+         * @param {?} acc
+         * @param {?} item
+         * @return {?}
+         */
+        function (acc, item) { return acc + item.width; }), 0);
     };
     /**
      * @private
@@ -571,7 +604,10 @@ var McNavbar = /** @class */ (function () {
         var _this = this;
         // Note: this wait is required for loading and rendering fonts for icons;
         // unfortunately we cannot control font rendering
-        setTimeout(function () { return _this.updateCollapsed(); }, 0);
+        setTimeout((/**
+         * @return {?}
+         */
+        function () { return _this.updateCollapsed(); }), 0);
     };
     /**
      * @return {?}
@@ -592,7 +628,12 @@ var McNavbar = /** @class */ (function () {
      */
     function () {
         this._totalItemsWidths = this.itemsWidths
-            .reduce(function (acc, item) { return acc + item.width; }, 0);
+            .reduce((/**
+         * @param {?} acc
+         * @param {?} item
+         * @return {?}
+         */
+        function (acc, item) { return acc + item.width; }), 0);
     };
     /**
      * @private
@@ -625,11 +666,19 @@ var McNavbar = /** @class */ (function () {
         var _this = this;
         /** @type {?} */
         var allItemsSelector = this.secondLevelElements
-            .map(function (e) { return _this.firstLevelElement + ">" + e; });
+            .map((/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return _this.firstLevelElement + ">" + e; }));
         /** @type {?} */
         var allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
         this._itemsWidths = allItems
-            .map(function (el) { return new CachedItemWidth(el, _this.getOuterElementWidth(el), _this.getItemsForCollapse(el)); });
+            .map((/**
+         * @param {?} el
+         * @return {?}
+         */
+        function (el) { return new CachedItemWidth(el, _this.getOuterElementWidth(el), _this.getItemsForCollapse(el)); }));
     };
     /**
      * @private
@@ -648,7 +697,11 @@ var McNavbar = /** @class */ (function () {
             return [];
         }
         return Array.from(element.querySelectorAll(MC_NAVBAR_TITLE))
-            .map(function (el) { return new CollapsibleItem((/** @type {?} */ (el)), el.getBoundingClientRect().width); });
+            .map((/**
+         * @param {?} el
+         * @return {?}
+         */
+        function (el) { return new CollapsibleItem((/** @type {?} */ (el)), el.getBoundingClientRect().width); }));
     };
     McNavbar.decorators = [
         { type: Component, args: [{
@@ -668,7 +721,7 @@ var McNavbar = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McNavbarModule = /** @class */ (function () {
     function McNavbarModule() {
@@ -704,12 +757,12 @@ var McNavbarModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar };

@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to specify the checkbox click behavior.
@@ -23,7 +23,7 @@ var MC_CHECKBOX_CLICK_ACTION = new InjectionToken('mc-checkbox-click-action');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Increasing integer for generating unique ids for checkbox components.
 /** @type {?} */
@@ -36,7 +36,10 @@ var nextUniqueId = 0;
  */
 var MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(function () { return McCheckbox; }),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    function () { return McCheckbox; })),
     multi: true
 };
 /** @enum {number} */
@@ -130,12 +133,18 @@ var McCheckbox = /** @class */ (function (_super) {
          * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
          * \@docs-private
          */
-        _this._onTouched = function () {
-        };
+        _this._onTouched = (/**
+         * @return {?}
+         */
+        function () {
+        });
         _this._currentAnimationClass = '';
         _this._currentCheckState = TransitionCheckState.Init;
-        _this._controlValueAccessorChangeFn = function () {
-        };
+        _this._controlValueAccessorChangeFn = (/**
+         * @return {?}
+         */
+        function () {
+        });
         _this._checked = false;
         _this._disabled = false;
         _this._indeterminate = false;
@@ -183,7 +192,11 @@ var McCheckbox = /** @class */ (function (_super) {
         var _this = this;
         this._focusMonitor
             .monitor(this._inputElement.nativeElement)
-            .subscribe(function (focusOrigin) { return _this._onInputFocusChange(focusOrigin); });
+            .subscribe((/**
+         * @param {?} focusOrigin
+         * @return {?}
+         */
+        function (focusOrigin) { return _this._onInputFocusChange(focusOrigin); }));
     };
     /**
      * @return {?}
@@ -475,10 +488,13 @@ var McCheckbox = /** @class */ (function (_super) {
         if (!this.disabled && this._clickAction !== 'noop') {
             // When user manually click on the checkbox, `indeterminate` is set to false.
             if (this.indeterminate && this._clickAction !== 'check') {
-                Promise.resolve().then(function () {
+                Promise.resolve().then((/**
+                 * @return {?}
+                 */
+                function () {
                     _this._indeterminate = false;
                     _this.indeterminateChange.emit(_this._indeterminate);
-                });
+                }));
             }
             this.toggle();
             this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
@@ -559,7 +575,7 @@ var McCheckbox = /** @class */ (function (_super) {
         change: [{ type: Output }],
         indeterminateChange: [{ type: Output }],
         value: [{ type: Input }],
-        _inputElement: [{ type: ViewChild, args: ['input',] }],
+        _inputElement: [{ type: ViewChild, args: ['input', { static: false },] }],
         checked: [{ type: Input }],
         disabled: [{ type: Input }],
         indeterminate: [{ type: Input }]
@@ -569,12 +585,15 @@ var McCheckbox = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_CHECKBOX_REQUIRED_VALIDATOR = {
     provide: NG_VALIDATORS,
-    useExisting: forwardRef(function () { return McCheckboxRequiredValidator; }),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    function () { return McCheckboxRequiredValidator; })),
     multi: true
 };
 /**
@@ -599,7 +618,7 @@ var McCheckboxRequiredValidator = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McCheckboxModule = /** @class */ (function () {
     function McCheckboxModule() {
@@ -616,12 +635,12 @@ var McCheckboxModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { MC_CHECKBOX_CONTROL_VALUE_ACCESSOR, TransitionCheckState, McCheckboxChange, McCheckboxBase, _McCheckboxMixinBase, McCheckbox, MC_CHECKBOX_CLICK_ACTION, McCheckboxModule, MC_CHECKBOX_REQUIRED_VALIDATOR, McCheckboxRequiredValidator };

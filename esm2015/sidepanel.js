@@ -17,7 +17,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to access the data that was passed in to a sidepanel.
@@ -62,7 +62,7 @@ class McSidepanelConfig {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const McSidepanelAnimationState = {
@@ -91,7 +91,7 @@ const mcSidepanelAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MC_SIDEPANEL_WITH_INDENT = new InjectionToken('mc-sidepanel-with-indent');
@@ -246,12 +246,12 @@ McSidepanelContainerComponent.ctorParameters = () => [
     { type: Boolean, decorators: [{ type: Inject, args: [MC_SIDEPANEL_WITH_SHADOW,] }] }
 ];
 McSidepanelContainerComponent.propDecorators = {
-    portalOutlet: [{ type: ViewChild, args: [CdkPortalOutlet,] }]
+    portalOutlet: [{ type: ViewChild, args: [CdkPortalOutlet, { static: true },] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Counter for unique sidepanel ids.
 /** @type {?} */
@@ -280,21 +280,42 @@ class McSidepanelRef {
         this.id = this.config.id || `mc-sidepanel-${uniqueId++}`;
         this.containerInstance.id = this.id;
         // Emit when opening animation completes
-        containerInstance.animationStateChanged.pipe(filter((event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible), take(1)).subscribe(() => {
+        containerInstance.animationStateChanged.pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible)), take(1)).subscribe((/**
+         * @return {?}
+         */
+        () => {
             this.afterOpened$.next();
             this.afterOpened$.complete();
-        });
+        }));
         // Dispose overlay when closing animation is complete
-        containerInstance.animationStateChanged.pipe(filter((event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden), take(1)).subscribe(() => {
+        containerInstance.animationStateChanged.pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden)), take(1)).subscribe((/**
+         * @return {?}
+         */
+        () => {
             overlayRef.dispose();
             this.afterClosed$.next(this.result);
             this.afterClosed$.complete();
-        });
+        }));
         if (!containerInstance.sidepanelConfig.disableClose) {
             merge(overlayRef.backdropClick(), overlayRef.keydownEvents().pipe(
             // tslint:disable:deprecation
             // keyCode is deprecated, but IE11 and Edge don't support code property, which we need use instead
-            filter((event) => event.keyCode === ESCAPE))).subscribe(() => this.close());
+            filter((/**
+             * @param {?} event
+             * @return {?}
+             */
+            (event) => event.keyCode === ESCAPE)))).subscribe((/**
+             * @return {?}
+             */
+            () => this.close()));
         }
     }
     /**
@@ -304,7 +325,14 @@ class McSidepanelRef {
     close(result) {
         if (!this.afterClosed$.closed) {
             // Transition the backdrop in parallel to the sidepanel.
-            this.containerInstance.animationStateChanged.pipe(filter((event) => event.phaseName === 'done'), take(1)).subscribe(() => this.overlayRef.detachBackdrop());
+            this.containerInstance.animationStateChanged.pipe(filter((/**
+             * @param {?} event
+             * @return {?}
+             */
+            (event) => event.phaseName === 'done')), take(1)).subscribe((/**
+             * @return {?}
+             */
+            () => this.overlayRef.detachBackdrop()));
             this.result = result;
             this.containerInstance.exit();
         }
@@ -327,7 +355,7 @@ class McSidepanelRef {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to specify default sidepanel options.
@@ -398,7 +426,10 @@ class McSidepanelService {
             ref.instance = contentRef.instance;
         }
         this.openedSidepanels.push(ref);
-        ref.afterClosed().subscribe(() => this.removeOpenSidepanel(ref));
+        ref.afterClosed().subscribe((/**
+         * @return {?}
+         */
+        () => this.removeOpenSidepanel(ref)));
         container.enter();
         return ref;
     }
@@ -415,7 +446,11 @@ class McSidepanelService {
      * @return {?}
      */
     getSidepanelById(id) {
-        return this.openedSidepanels.find((sidepanel) => sidepanel.id === id);
+        return this.openedSidepanels.find((/**
+         * @param {?} sidepanel
+         * @return {?}
+         */
+        (sidepanel) => sidepanel.id === id));
     }
     /**
      * Attaches the sidepanel container component to the overlay.
@@ -488,9 +523,13 @@ class McSidepanelService {
     closeSidepanels(sidepanels) {
         /** @type {?} */
         const reversedOpenedSidepanels = [...sidepanels.reverse()];
-        reversedOpenedSidepanels.forEach((sidepanelRef) => {
+        reversedOpenedSidepanels.forEach((/**
+         * @param {?} sidepanelRef
+         * @return {?}
+         */
+        (sidepanelRef) => {
             sidepanelRef.close();
-        });
+        }));
     }
     /**
      * @private
@@ -499,7 +538,11 @@ class McSidepanelService {
      */
     getBackdropClass(config) {
         /** @type {?} */
-        const hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some((sidepanelRef) => (/** @type {?} */ (sidepanelRef.config.hasBackdrop)));
+        const hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some((/**
+         * @param {?} sidepanelRef
+         * @return {?}
+         */
+        (sidepanelRef) => (/** @type {?} */ (sidepanelRef.config.hasBackdrop))));
         return config.requiredBackdrop || !hasOpenedSidepanelWithBackdrop ? 'cdk-overlay-dark-backdrop' :
             'cdk-overlay-transparent-backdrop';
     }
@@ -509,7 +552,11 @@ class McSidepanelService {
      * @return {?}
      */
     getOpenedSidepanelsWithSamePosition(config) {
-        return this.openedSidepanels.filter((sidepanelRef) => sidepanelRef.config.position === config.position);
+        return this.openedSidepanels.filter((/**
+         * @param {?} sidepanelRef
+         * @return {?}
+         */
+        (sidepanelRef) => sidepanelRef.config.position === config.position));
     }
     /**
      * Removes a sidepanel from the array of open sidepanels.
@@ -538,7 +585,7 @@ McSidepanelService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Button that will close the current sidepanel.
@@ -565,9 +612,12 @@ class McSidepanelClose {
             // ID.
             // This must occur in `onInit`, as the ID binding for the sidepanel container won't
             // be resolved at constructor time. We use setTimeout by same reason.
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.sidepanelRef = (/** @type {?} */ (getClosestSidepanel(this.elementRef, this.sidepanelService.openedSidepanels)));
-            });
+            }));
         }
     }
     /**
@@ -679,12 +729,16 @@ function getClosestSidepanel(element, openSidepanels) {
     while (parent && !parent.classList.contains('mc-sidepanel-container')) {
         parent = parent.parentElement;
     }
-    return parent ? openSidepanels.find((sidepanel) => sidepanel.id === (/** @type {?} */ (parent)).id) : null;
+    return parent ? openSidepanels.find((/**
+     * @param {?} sidepanel
+     * @return {?}
+     */
+    (sidepanel) => sidepanel.id === (/** @type {?} */ (parent)).id)) : null;
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McSidepanelModule {
 }
@@ -720,12 +774,12 @@ McSidepanelModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef, mcSidepanelAnimations as ɵb20, mcSidepanelTransformAnimation as ɵa20, McSidepanelActions as ɵg20, McSidepanelBody as ɵe20, McSidepanelClose as ɵc20, McSidepanelFooter as ɵf20, McSidepanelHeader as ɵd20 };

@@ -11,7 +11,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McSplitterComponent {
     /**
@@ -120,18 +120,35 @@ class McSplitterComponent {
         };
         leftArea.initialSize = leftArea.area.getSize();
         rightArea.initialSize = rightArea.area.getSize();
-        this.areas.forEach((item) => {
+        this.areas.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => {
             /** @type {?} */
             const size = item.area.getSize();
             item.area.disableFlex();
             item.area.setSize(size);
-        });
-        this.ngZone.runOutsideAngular(() => {
-            this.listeners.push(this.renderer.listen('document', 'mouseup', () => this.onMouseUp()));
-        });
-        this.ngZone.runOutsideAngular(() => {
-            this.listeners.push(this.renderer.listen('document', 'mousemove', (e) => this.onMouseMove(e, startPoint, leftArea, rightArea)));
-        });
+        }));
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        () => {
+            this.listeners.push(this.renderer.listen('document', 'mouseup', (/**
+             * @return {?}
+             */
+            () => this.onMouseUp())));
+        }));
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        () => {
+            this.listeners.push(this.renderer.listen('document', 'mousemove', (/**
+             * @param {?} e
+             * @return {?}
+             */
+            (e) => this.onMouseMove(e, startPoint, leftArea, rightArea))));
+        }));
         this.isDragging = true;
     }
     /**
@@ -141,13 +158,18 @@ class McSplitterComponent {
     removeArea(area) {
         /** @type {?} */
         let indexToRemove = -1;
-        this.areas.some((item, index) => {
+        this.areas.some((/**
+         * @param {?} item
+         * @param {?} index
+         * @return {?}
+         */
+        (item, index) => {
             if (item.area === area) {
                 indexToRemove = index;
                 return true;
             }
             return false;
-        });
+        }));
         if (indexToRemove === -1) {
             return;
         }
@@ -540,7 +562,7 @@ McSplitterAreaDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McSplitterModule {
 }
@@ -565,12 +587,12 @@ McSplitterModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McSplitterModule, McSplitterComponent, McGutterDirective, McSplitterAreaDirective };

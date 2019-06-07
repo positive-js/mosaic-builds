@@ -17,7 +17,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McModalControlService {
     /**
@@ -62,9 +62,15 @@ class McModalControlService {
     registerModal(modalRef) {
         if (!this.hasRegistered(modalRef)) {
             /** @type {?} */
-            const afterOpenSubscription = modalRef.afterOpen.subscribe(() => this.openModals.push(modalRef));
+            const afterOpenSubscription = modalRef.afterOpen.subscribe((/**
+             * @return {?}
+             */
+            () => this.openModals.push(modalRef)));
             /** @type {?} */
-            const afterCloseSubscription = modalRef.afterClose.subscribe(() => this.removeOpenModal(modalRef));
+            const afterCloseSubscription = modalRef.afterClose.subscribe((/**
+             * @return {?}
+             */
+            () => this.removeOpenModal(modalRef)));
             this.registeredMetaMap.set(modalRef, { modalRef, afterOpenSubscription, afterCloseSubscription });
         }
     }
@@ -112,7 +118,7 @@ McModalControlService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * API class that public to users to handle the modal instance.
@@ -125,7 +131,7 @@ class McModalRef {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ModalUtil {
     /**
@@ -146,16 +152,20 @@ class ModalUtil {
      * @return {?}
      */
     listenDocumentClick() {
-        this.document.addEventListener('click', (event) => {
+        this.document.addEventListener('click', (/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             this.lastPosition = { x: event.clientX, y: event.clientY };
-        });
+        }));
     }
 }
 var ModalUtil$1 = new ModalUtil(document);
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Duration when perform animations (ms)
 /** @type {?} */
@@ -207,7 +217,10 @@ class McModalComponent extends McModalRef {
         this.mcOnCancel = new EventEmitter();
         // The origin point that animation based on
         this.transformOrigin = '0px 0px 0px';
-        this.mcGetContainer = () => this.overlay.create();
+        this.mcGetContainer = (/**
+         * @return {?}
+         */
+        () => this.overlay.create());
     }
     /**
      * @return {?}
@@ -470,14 +483,22 @@ class McModalComponent extends McModalRef {
             const result = trigger(this.getContentComponent());
             // Users can return "false" to prevent closing by default
             /** @type {?} */
-            const caseClose = (doClose) => (doClose !== false) && this.close((/** @type {?} */ (doClose)));
+            const caseClose = (/**
+             * @param {?} doClose
+             * @return {?}
+             */
+            (doClose) => (doClose !== false) && this.close((/** @type {?} */ (doClose))));
             if (isPromise(result)) {
                 this[loadingKey] = true;
                 /** @type {?} */
-                const handleThen = (doClose) => {
+                const handleThen = (/**
+                 * @param {?} doClose
+                 * @return {?}
+                 */
+                (doClose) => {
                     this[loadingKey] = false;
                     caseClose(doClose);
-                };
+                });
                 ((/** @type {?} */ (result))).then(handleThen).catch(handleThen);
             }
             else {
@@ -533,7 +554,10 @@ class McModalComponent extends McModalRef {
         return Promise
             .resolve(animation && this.animateTo(visible))
             // Emit open/close event after animations over
-            .then(() => {
+            .then((/**
+         * @return {?}
+         */
+        () => {
             if (visible) {
                 this.mcAfterOpen.emit();
             }
@@ -542,7 +566,7 @@ class McModalComponent extends McModalRef {
                 // Show/hide scrollbar when animation is over
                 this.changeBodyOverflow();
             }
-        });
+        }));
     }
     // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
     // AoT
@@ -575,7 +599,13 @@ class McModalComponent extends McModalRef {
         const result = this.getButtonCallableProp(button, 'onClick');
         if (isPromise(result)) {
             button.loading = true;
-            ((/** @type {?} */ (result))).then(() => button.loading = false).catch(() => button.loading = false);
+            ((/** @type {?} */ (result))).then((/**
+             * @return {?}
+             */
+            () => button.loading = false)).catch((/**
+             * @return {?}
+             */
+            () => button.loading = false));
         }
     }
     // Change mcVisible from inside
@@ -632,14 +662,24 @@ class McModalComponent extends McModalRef {
         if (isVisible) {
             // [NOTE] Using timeout due to the document.click event is fired later than visible change,
             // so if not postponed to next event-loop, we can't get the lastest click position
-            window.setTimeout(() => this.updateTransformOrigin());
+            window.setTimeout((/**
+             * @return {?}
+             */
+            () => this.updateTransformOrigin()));
         }
         this.changeAnimationState(isVisible ? 'enter' : 'leave');
         // Return when animation is over
-        return new Promise((resolve) => window.setTimeout(() => {
+        return new Promise((/**
+         * @param {?} resolve
+         * @return {?}
+         */
+        (resolve) => window.setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.changeAnimationState(null);
             resolve();
-        }, MODAL_ANIMATE_DURATION));
+        }), MODAL_ANIMATE_DURATION)));
     }
     /**
      * @private
@@ -647,7 +687,11 @@ class McModalComponent extends McModalRef {
      * @return {?}
      */
     formatModalButtons(buttons) {
-        return buttons.map((button) => {
+        return buttons.map((/**
+         * @param {?} button
+         * @return {?}
+         */
+        (button) => {
             return Object.assign({
                 type: 'default',
                 size: 'default',
@@ -656,7 +700,7 @@ class McModalComponent extends McModalRef {
                 loading: false,
                 disabled: false
             }, button);
-        });
+        }));
     }
     /**
      * Create a component dynamically but not attach to any View
@@ -768,9 +812,9 @@ McModalComponent.propDecorators = {
     mcCancelText: [{ type: Input }],
     mcCancelLoading: [{ type: Input }],
     mcOnCancel: [{ type: Input }, { type: Output }],
-    modalContainer: [{ type: ViewChild, args: ['modalContainer',] }],
-    bodyContainer: [{ type: ViewChild, args: ['bodyContainer', { read: ViewContainerRef },] }],
-    autoFocusButtonOk: [{ type: ViewChild, args: ['autoFocusButtonOk', { read: ElementRef },] }],
+    modalContainer: [{ type: ViewChild, args: ['modalContainer', { static: false },] }],
+    bodyContainer: [{ type: ViewChild, args: ['bodyContainer', { read: ViewContainerRef, static: false },] }],
+    autoFocusButtonOk: [{ type: ViewChild, args: ['autoFocusButtonOk', { read: ElementRef, static: false },] }],
     mcGetContainer: [{ type: Input }]
 };
 ////////////
@@ -785,7 +829,7 @@ function isPromise(obj) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CssUnitPipe {
     /**
@@ -807,7 +851,7 @@ CssUnitPipe.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // A builder used for managing service creating modals
 class ModalBuilderForService {
@@ -823,13 +867,23 @@ class ModalBuilderForService {
         }
         this.changeProps(options);
         (/** @type {?} */ (this.modalRef)).instance.open();
-        (/** @type {?} */ (this.modalRef)).instance.mcAfterClose.subscribe(() => this.destroyModal());
+        (/** @type {?} */ (this.modalRef)).instance.mcAfterClose.subscribe((/**
+         * @return {?}
+         */
+        () => this.destroyModal()));
         this.overlayRef.keydownEvents()
             // @ts-ignore
-            .pipe(filter((event) => {
+            .pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             return event.keyCode === ESCAPE && options.mcCloseByESC;
-        }))
-            .subscribe(() => (/** @type {?} */ (this.modalRef)).instance.close());
+        })))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => (/** @type {?} */ (this.modalRef)).instance.close()));
     }
     /**
      * @return {?}
@@ -905,7 +959,10 @@ class McModalService {
         if (typeof options.mcOnCancel !== 'function') {
             // Leave a empty function to close this modal by default
             // tslint:disable-next-line
-            options.mcOnCancel = () => { };
+            options.mcOnCancel = (/**
+             * @return {?}
+             */
+            () => { });
         }
         if (!('mcCloseByESC' in options)) {
             options.mcCloseByESC = true;
@@ -930,7 +987,10 @@ class McModalService {
         if (typeof options.mcOnOk !== 'function') {
             // Leave a empty function to close this modal by default
             // tslint:disable-next-line
-            options.mcOnOk = () => { };
+            options.mcOnOk = (/**
+             * @return {?}
+             */
+            () => { });
         }
         options.mcModalType = 'confirm';
         options.mcClassName = `mc-confirm mc-confirm-${confirmType} ${options.mcClassName || ''}`;
@@ -980,7 +1040,7 @@ McModalService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McModalModule {
 }
@@ -996,18 +1056,18 @@ McModalModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵb28, McModalControlService as ɵa28 };
+export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵb27, McModalControlService as ɵa27 };
 //# sourceMappingURL=modal.js.map

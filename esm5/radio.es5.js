@@ -14,7 +14,7 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Increasing integer for generating unique ids for radio components.
 /** @type {?} */
@@ -56,7 +56,10 @@ var _McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
  */
 var MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(function () { return McRadioGroup; }),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    function () { return McRadioGroup; })),
     multi: true
 };
 var McRadioGroup = /** @class */ (function (_super) {
@@ -105,13 +108,19 @@ var McRadioGroup = /** @class */ (function (_super) {
          * The method to be called in order to update ngModel
          */
         // tslint:disable-next-line
-        _this.controlValueAccessorChangeFn = function () { };
+        _this.controlValueAccessorChangeFn = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * onTouch function registered via registerOnTouch (ControlValueAccessor).
          * \@docs-private
          */
         // tslint:disable-next-line
-        _this.onTouched = function () { };
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         return _this;
     }
     Object.defineProperty(McRadioGroup.prototype, "name", {
@@ -301,7 +310,11 @@ var McRadioGroup = /** @class */ (function (_super) {
      */
     function () {
         if (this._radios) {
-            this._radios.forEach(function (radio) { return radio.markForCheck(); });
+            this._radios.forEach((/**
+             * @param {?} radio
+             * @return {?}
+             */
+            function (radio) { return radio.markForCheck(); }));
         }
     };
     /**
@@ -390,9 +403,13 @@ var McRadioGroup = /** @class */ (function (_super) {
     function () {
         var _this = this;
         if (this._radios) {
-            this._radios.forEach(function (radio) {
+            this._radios.forEach((/**
+             * @param {?} radio
+             * @return {?}
+             */
+            function (radio) {
                 radio.name = _this.name;
-            });
+            }));
         }
     };
     /** Updates the `selected` radio button from the internal _value state. */
@@ -413,12 +430,16 @@ var McRadioGroup = /** @class */ (function (_super) {
         var isAlreadySelected = this._selected !== null && this._selected.value === this._value;
         if (this._radios != null && !isAlreadySelected) {
             this._selected = null;
-            this._radios.forEach(function (radio) {
+            this._radios.forEach((/**
+             * @param {?} radio
+             * @return {?}
+             */
+            function (radio) {
                 radio.checked = _this.value === radio.value;
                 if (radio.checked) {
                     _this._selected = radio;
                 }
-            });
+            }));
         }
     };
     McRadioGroup.decorators = [
@@ -445,7 +466,10 @@ var McRadioGroup = /** @class */ (function (_super) {
         disabled: [{ type: Input }],
         required: [{ type: Input }],
         change: [{ type: Output }],
-        _radios: [{ type: ContentChildren, args: [forwardRef(function () { return McRadioButton; }), { descendants: true },] }]
+        _radios: [{ type: ContentChildren, args: [forwardRef((/**
+                     * @return {?}
+                     */
+                    function () { return McRadioButton; })), { descendants: true },] }]
     };
     return McRadioGroup;
 }(_McRadioGroupMixinBase));
@@ -497,14 +521,22 @@ var McRadioButton = /** @class */ (function (_super) {
          * Unregister function for _radioDispatcher
          */
         // tslint:disable-next-line
-        _this.removeUniqueSelectionListener = function () { };
+        _this.removeUniqueSelectionListener = (/**
+         * @return {?}
+         */
+        function () { });
         _this.radioGroup = radioGroup;
         _this.removeUniqueSelectionListener =
-            _radioDispatcher.listen(function (id, name) {
+            _radioDispatcher.listen((/**
+             * @param {?} id
+             * @param {?} name
+             * @return {?}
+             */
+            function (id, name) {
                 if (id !== _this.id && name === _this.name) {
                     _this.checked = false;
                 }
-            });
+            }));
         return _this;
     }
     Object.defineProperty(McRadioButton.prototype, "checked", {
@@ -792,7 +824,7 @@ var McRadioButton = /** @class */ (function (_super) {
         disabled: [{ type: Input }],
         required: [{ type: Input }],
         labelPosition: [{ type: Input }],
-        _inputElement: [{ type: ViewChild, args: ['input',] }],
+        _inputElement: [{ type: ViewChild, args: ['input', { static: false },] }],
         change: [{ type: Output }],
         isFocused: [{ type: Input }]
     };
@@ -801,7 +833,7 @@ var McRadioButton = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McRadioModule = /** @class */ (function () {
     function McRadioModule() {
@@ -818,12 +850,12 @@ var McRadioModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McRadioModule, McRadioChange, McRadioGroupBase, _McRadioGroupMixinBase, MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioGroup, McRadioButtonBase, _McRadioButtonMixinBase, McRadioButton };

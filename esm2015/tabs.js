@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Decorates the `ng-template` tags and reads out the template from it.
@@ -42,7 +42,7 @@ McTabContent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Used to flag tab labels for use with the portal directive
@@ -55,11 +55,14 @@ McTabLabel.decorators = [
             },] },
 ];
 // TODO: workaround for https://github.com/angular/material2/issues/12760
-((/** @type {?} */ (McTabLabel))).ctorParameters = () => ((/** @type {?} */ (CdkPortal))).ctorParameters;
+((/** @type {?} */ (McTabLabel))).ctorParameters = (/**
+ * @return {?}
+ */
+() => ((/** @type {?} */ (CdkPortal))).ctorParameters);
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McTabBase {
 }
@@ -147,9 +150,9 @@ McTab.ctorParameters = () => [
     { type: ViewContainerRef }
 ];
 McTab.propDecorators = {
-    templateLabel: [{ type: ContentChild, args: [McTabLabel,] }],
-    explicitContent: [{ type: ContentChild, args: [McTabContent, { read: TemplateRef },] }],
-    implicitContent: [{ type: ViewChild, args: [TemplateRef,] }],
+    templateLabel: [{ type: ContentChild, args: [McTabLabel, { static: false },] }],
+    explicitContent: [{ type: ContentChild, args: [McTabContent, { read: TemplateRef, static: true },] }],
+    implicitContent: [{ type: ViewChild, args: [TemplateRef, { static: true },] }],
     textLabel: [{ type: Input, args: ['label',] }],
     ariaLabel: [{ type: Input, args: ['aria-label',] }],
     ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }]
@@ -157,7 +160,7 @@ McTab.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const mcTabsAnimations = {
@@ -187,7 +190,7 @@ const mcTabsAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Wrapper for the contents of a tab.
@@ -229,10 +232,14 @@ class McTabBody {
          */
         this.dirChangeSubscription = Subscription.EMPTY;
         if (this.dir && changeDetectorRef) {
-            this.dirChangeSubscription = this.dir.change.subscribe((direction) => {
+            this.dirChangeSubscription = this.dir.change.subscribe((/**
+             * @param {?} direction
+             * @return {?}
+             */
+            (direction) => {
                 this.computePositionAnimationState(direction);
                 changeDetectorRef.markForCheck();
-            });
+            }));
         }
     }
     /**
@@ -359,7 +366,7 @@ McTabBody.propDecorators = {
     beforeCentering: [{ type: Output }],
     afterLeavingCenter: [{ type: Output }],
     onCentered: [{ type: Output }],
-    portalHost: [{ type: ViewChild, args: [PortalHostDirective,] }],
+    portalHost: [{ type: ViewChild, args: [PortalHostDirective, { static: false },] }],
     content: [{ type: Input, args: ['content',] }],
     origin: [{ type: Input }],
     animationDuration: [{ type: Input }]
@@ -394,14 +401,21 @@ class McTabBodyPortal extends CdkPortalOutlet {
         super.ngOnInit();
         this.centeringSub = this.host.beforeCentering
             .pipe(startWith(this.host.isCenterPosition(this.host.bodyPosition)))
-            .subscribe((isCentering) => {
+            .subscribe((/**
+         * @param {?} isCentering
+         * @return {?}
+         */
+        (isCentering) => {
             if (isCentering && !this.hasAttached()) {
                 this.attach(this.host.content);
             }
-        });
-        this.leavingSub = this.host.afterLeavingCenter.subscribe(() => {
+        }));
+        this.leavingSub = this.host.afterLeavingCenter.subscribe((/**
+         * @return {?}
+         */
+        () => {
             this.detach();
-        });
+        }));
     }
     /**
      * Clean up centering subscription.
@@ -422,12 +436,15 @@ McTabBodyPortal.decorators = [
 McTabBodyPortal.ctorParameters = () => [
     { type: ComponentFactoryResolver },
     { type: ViewContainerRef },
-    { type: McTabBody, decorators: [{ type: Inject, args: [forwardRef(() => McTabBody),] }] }
+    { type: McTabBody, decorators: [{ type: Inject, args: [forwardRef((/**
+                     * @return {?}
+                     */
+                    () => McTabBody)),] }] }
 ];
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to McTabLabelWrapper.
 /**
@@ -486,7 +503,7 @@ McTabLabelWrapper.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const VIEWPORT_THROTTLE_TIME = 150;
@@ -676,9 +693,12 @@ class McTabHeader extends McTabHeaderBase {
         /** @type {?} */
         const resize = this.viewportRuler.change(VIEWPORT_THROTTLE_TIME);
         /** @type {?} */
-        const realign = () => {
+        const realign = (/**
+         * @return {?}
+         */
+        () => {
             this.updatePagination();
-        };
+        });
         this.keyManager = new FocusKeyManager(this.labelWrappers)
             .withHorizontalOrientation(this.getLayoutDirection())
             .withWrap();
@@ -692,19 +712,26 @@ class McTabHeader extends McTabHeaderBase {
         // the key manager if the direction has changed.
         merge(dirChange, resize)
             .pipe(takeUntil(this.destroyed))
-            .subscribe(() => {
+            .subscribe((/**
+         * @return {?}
+         */
+        () => {
             realign();
             this.keyManager.withHorizontalOrientation(this.getLayoutDirection());
-        });
+        }));
         // If there is a change in the focus key manager we need to emit the `indexFocused`
         // event in order to provide a public event that notifies about focus changes. Also we realign
         // the tabs container by scrolling the new focused tab into the visible section.
         this.keyManager.change
             .pipe(takeUntil(this.destroyed))
-            .subscribe((newFocusIndex) => {
+            .subscribe((/**
+         * @param {?} newFocusIndex
+         * @return {?}
+         */
+        (newFocusIndex) => {
             this.indexFocused.emit(newFocusIndex);
             this.setTabFocus(newFocusIndex);
-        });
+        }));
     }
     /**
      * @return {?}
@@ -726,10 +753,13 @@ class McTabHeader extends McTabHeaderBase {
         if (textContent !== this.currentTextContent) {
             this.currentTextContent = textContent;
             /** @type {?} */
-            const zoneCallback = () => {
+            const zoneCallback = (/**
+             * @return {?}
+             */
+            () => {
                 this.updatePagination();
                 this.changeDetectorRef.markForCheck();
-            };
+            });
             // The content observer runs outside the `NgZone` by default, which
             // means that we need to bring the callback back in ourselves.
             // TODO: Remove null check for `_ngZone` once it's a required parameter.
@@ -966,15 +996,15 @@ McTabHeader.ctorParameters = () => [
 McTabHeader.propDecorators = {
     selectedIndex: [{ type: Input }],
     labelWrappers: [{ type: ContentChildren, args: [McTabLabelWrapper,] }],
-    tabListContainer: [{ type: ViewChild, args: ['tabListContainer',] }],
-    tabList: [{ type: ViewChild, args: ['tabList',] }],
+    tabListContainer: [{ type: ViewChild, args: ['tabListContainer', { static: true },] }],
+    tabList: [{ type: ViewChild, args: ['tabList', { static: true },] }],
     selectFocusedIndex: [{ type: Output }],
     indexFocused: [{ type: Output }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McLightTabsCssStyler {
 }
@@ -1139,22 +1169,35 @@ class McTabGroup extends mcTabGroupMixinBase {
             }
             // Changing these values after change detection has run
             // since the checked content may contain references to them.
-            Promise.resolve().then(() => {
-                this.tabs.forEach((tab, index) => tab.isActive = index === indexToSelect);
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            () => {
+                this.tabs.forEach((/**
+                 * @param {?} tab
+                 * @param {?} index
+                 * @return {?}
+                 */
+                (tab, index) => tab.isActive = index === indexToSelect));
                 if (!isFirstRun) {
                     this.selectedIndexChange.emit(indexToSelect);
                 }
-            });
+            }));
         }
         // Setup the position for each tab and optionally setup an origin on the next selected tab.
-        this.tabs.forEach((tab, index) => {
+        this.tabs.forEach((/**
+         * @param {?} tab
+         * @param {?} index
+         * @return {?}
+         */
+        (tab, index) => {
             tab.position = index - indexToSelect;
             // If there is already a selected tab, then set up an origin for the next selected tab
             // if it doesn't have one already.
             if (this._selectedIndex != null && tab.position === 0 && !tab.origin) {
                 tab.origin = indexToSelect - this._selectedIndex;
             }
-        });
+        }));
         if (this._selectedIndex !== indexToSelect) {
             this._selectedIndex = indexToSelect;
             this.changeDetectorRef.markForCheck();
@@ -1167,7 +1210,10 @@ class McTabGroup extends mcTabGroupMixinBase {
         this.subscribeToTabLabels();
         // Subscribe to changes in the amount of tabs, in order to be
         // able to re-render the content as new tabs are added or removed.
-        this.tabsSubscription = this.tabs.changes.subscribe(() => {
+        this.tabsSubscription = this.tabs.changes.subscribe((/**
+         * @return {?}
+         */
+        () => {
             /** @type {?} */
             const indexToSelect = this.clampTabIndex(this.indexToSelect);
             // Maintain the previously-selected tab if a new tab is added or removed and there is no
@@ -1187,7 +1233,7 @@ class McTabGroup extends mcTabGroupMixinBase {
             }
             this.subscribeToTabLabels();
             this.changeDetectorRef.markForCheck();
-        });
+        }));
     }
     /**
      * @return {?}
@@ -1297,8 +1343,15 @@ class McTabGroup extends mcTabGroupMixinBase {
         if (this.tabLabelSubscription) {
             this.tabLabelSubscription.unsubscribe();
         }
-        this.tabLabelSubscription = merge(...this.tabs.map((tab) => tab.stateChanges))
-            .subscribe(() => this.changeDetectorRef.markForCheck());
+        this.tabLabelSubscription = merge(...this.tabs.map((/**
+         * @param {?} tab
+         * @return {?}
+         */
+        (tab) => tab.stateChanges)))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.changeDetectorRef.markForCheck()));
     }
     /**
      * Clamps the given index to the bounds of 0 and the tabs length.
@@ -1340,8 +1393,8 @@ McTabGroup.propDecorators = {
     dynamicHeight: [{ type: Input }],
     selectedIndex: [{ type: Input }],
     tabs: [{ type: ContentChildren, args: [McTab,] }],
-    tabBodyWrapper: [{ type: ViewChild, args: ['tabBodyWrapper',] }],
-    tabHeader: [{ type: ViewChild, args: ['tabHeader',] }],
+    tabBodyWrapper: [{ type: ViewChild, args: ['tabBodyWrapper', { static: false },] }],
+    tabHeader: [{ type: ViewChild, args: ['tabHeader', { static: false },] }],
     headerPosition: [{ type: Input }],
     animationDuration: [{ type: Input }],
     selectedIndexChange: [{ type: Output }],
@@ -1352,7 +1405,7 @@ McTabGroup.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to McTabNav.
 /**
@@ -1471,7 +1524,7 @@ McTabLink.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McTabsModule {
 }
@@ -1518,18 +1571,18 @@ McTabsModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, mcTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd14, mcTabMixinBase as ɵe14, McTabHeaderBase as ɵa14, McTabLabelWrapperBase as ɵb14, mcTabLabelWrapperMixinBase as ɵc14, McTabLinkBase as ɵh14, McTabNavBase as ɵf14, mcTabLinkMixinBase as ɵi14, mcTabNavMixinBase as ɵg14 };
+export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, mcTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd15, mcTabMixinBase as ɵe15, McTabHeaderBase as ɵa15, McTabLabelWrapperBase as ɵb15, mcTabLabelWrapperMixinBase as ɵc15, McTabLinkBase as ɵh15, McTabNavBase as ɵf15, mcTabLinkMixinBase as ɵi15, mcTabNavMixinBase as ɵg15 };
 //# sourceMappingURL=tabs.js.map

@@ -41,7 +41,7 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var nextUniqueId = 0;
@@ -76,9 +76,16 @@ var McToggleComponent = /** @class */ (function (_super) {
         _this._checked = false;
         _this.change = new core.EventEmitter();
         // tslint:disable-next-line:no-empty
-        _this._onTouchedCallback = function () { };
+        _this._onTouchedCallback = (/**
+         * @return {?}
+         */
+        function () { });
         // tslint:disable-next-line:no-empty
-        _this._onChangeCallback = function (_) { };
+        _this._onChangeCallback = (/**
+         * @param {?} _
+         * @return {?}
+         */
+        function (_) { });
         _this.tabIndex = parseInt(tabIndex) || 0;
         _this._focusMonitor.monitor(_this._elementRef.nativeElement, true);
         return _this;
@@ -273,7 +280,10 @@ var McToggleComponent = /** @class */ (function (_super) {
                     template: "<label [attr.for]=\"inputId\" class=\"mc-toggle-layout\" #label><div class=\"mc-toggle__container\" [class.left]=\"labelPosition === 'left'\"><input #input type=\"checkbox\" class=\"mc-toggle-input cdk-visually-hidden\" [id]=\"inputId\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (click)=\"_onInputClick($event)\" (change)=\"_onInteractionEvent($event)\"><div class=\"mc-toggle-bar-container\"><div class=\"mc-toggle__focus-frame\"></div><div class=\"mc-toggle-bar\"><div class=\"mc-toggle__circle\" [@switch]=\"checked\"></div></div></div><div class=\"mc-toggle__content\" [class.left]=\"labelPosition === 'left'\" [class.right]=\"labelPosition === 'right'\"><span class=\"mc-toggle-label\" (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></div></div></label>",
                     styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-toggle .mc-toggle-bar{position:relative;border-width:1px;border-style:solid}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{display:flex;align-items:center;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:8px}.mc-toggle__content.right{margin-left:8px}.mc-toggle__circle{position:absolute;border-width:1px;border-style:solid;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}.mc-toggle__focus-frame{position:absolute;top:0;left:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:16px;width:28px;border-radius:9px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__focus-frame{border-radius:9px;height:16px;width:28px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:16px;width:16px}.mc-toggle.mc-toggle_small .mc-toggle-bar{height:14px;width:24px;border-radius:8px}.mc-toggle.mc-toggle_small .mc-toggle__focus-frame{border-radius:8px;height:14px;width:24px}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:14px;width:14px}.mc-toggle:not(.mc-disabled){cursor:pointer}"],
                     providers: [
-                        { provide: forms.NG_VALUE_ACCESSOR, useExisting: core.forwardRef(function () { return McToggleComponent; }), multi: true }
+                        { provide: forms.NG_VALUE_ACCESSOR, useExisting: core.forwardRef((/**
+                             * @return {?}
+                             */
+                            function () { return McToggleComponent; })), multi: true }
                     ],
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
@@ -302,7 +312,7 @@ var McToggleComponent = /** @class */ (function (_super) {
         { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] }
     ]; };
     McToggleComponent.propDecorators = {
-        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
+        _inputElement: [{ type: core.ViewChild, args: ['input', { static: false },] }],
         labelPosition: [{ type: core.Input }],
         ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
         ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
@@ -318,7 +328,7 @@ var McToggleComponent = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McToggleModule = /** @class */ (function () {
     function McToggleModule() {

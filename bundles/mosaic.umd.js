@@ -52,7 +52,7 @@ var __assign = function() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} val
@@ -69,17 +69,17 @@ function toBoolean(value) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Injection token that configures whether the Mosaic sanity checks are enabled.
 /** @type {?} */
@@ -201,7 +201,7 @@ var McCommonModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -243,7 +243,7 @@ function mixinDisabled(base) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 var ThemePalette = {
@@ -306,7 +306,7 @@ function mixinColor(base, defaultColor) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Mixin to augment a directive with a `tabIndex` property.
 /**
@@ -351,7 +351,7 @@ function mixinTabIndex(base, defaultTabIndex) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Mixin to augment a directive with updateErrorState method.
@@ -408,12 +408,12 @@ function mixinErrorState(base) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Shared directive to count lines inside a text area, such as a list item.
@@ -445,9 +445,12 @@ McLineSetter = /** @class */ (function () {
         this._lines = _lines;
         this._element = _element;
         this._setLineClass(this._lines.length);
-        this._lines.changes.subscribe(function () {
+        this._lines.changes.subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._setLineClass(_this._lines.length);
-        });
+        }));
     }
     /**
      * @private
@@ -518,7 +521,7 @@ var McLineModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Error state matcher that matches when a control is invalid and dirty.
@@ -566,13 +569,13 @@ var ErrorStateMatcher = /** @class */ (function () {
     ErrorStateMatcher.decorators = [
         { type: core.Injectable, args: [{ providedIn: 'root' },] },
     ];
-    /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core.defineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+    /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
     return ErrorStateMatcher;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Component that shows a simplified checkbox without including any kind of "real" checkbox.
@@ -617,7 +620,7 @@ var McPseudoCheckbox = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McPseudoCheckboxModule = /** @class */ (function () {
     function McPseudoCheckboxModule() {
@@ -633,7 +636,7 @@ var McPseudoCheckboxModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McMeasureScrollbarService = /** @class */ (function () {
     function McMeasureScrollbarService(document) {
@@ -691,13 +694,13 @@ var McMeasureScrollbarService = /** @class */ (function () {
     McMeasureScrollbarService.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
     ]; };
-    /** @nocollapse */ McMeasureScrollbarService.ngInjectableDef = core.defineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core.inject(common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
+    /** @nocollapse */ McMeasureScrollbarService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core.ɵɵinject(common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
     return McMeasureScrollbarService;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to McOptgroup.
 /**
@@ -757,7 +760,7 @@ var McOptgroup = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Option IDs need to be unique across components, so this counter exists outside of
@@ -819,7 +822,7 @@ var McOption = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            // TODO(kara): Add input property alternative for node envs.
+            // TODO: Add input property alternative for node envs.
             return (this.getHostElement().textContent || '').trim();
         },
         enumerable: true,
@@ -1188,7 +1191,7 @@ function getOptionScrollPosition(optionIndex, optionHeight, currentScrollPositio
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McOptionModule = /** @class */ (function () {
     function McOptionModule() {
@@ -1205,7 +1208,7 @@ var McOptionModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * InjectionToken that can be used to specify the global label options.
@@ -1215,7 +1218,7 @@ var MC_LABEL_GLOBAL_OPTIONS = new core.InjectionToken('mc-label-global-options')
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var fadeAnimation = animations.trigger('fadeAnimation', [
@@ -1228,7 +1231,7 @@ var fadeAnimation = animations.trigger('fadeAnimation', [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 var AnimationCurves = {
@@ -1240,12 +1243,12 @@ var AnimationCurves = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var POSITION_MAP = {
@@ -1384,9 +1387,13 @@ function arrayMap(array, iteratee) {
  * @return {?}
  */
 function baseValues(object, props) {
-    return arrayMap(props, function (key) {
+    return arrayMap(props, (/**
+     * @param {?} key
+     * @return {?}
+     */
+    function (key) {
         return object[key];
-    });
+    }));
 }
 /**
  * @template T
@@ -1399,14 +1406,14 @@ function objectValues(object) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var selectEvents = 'selectEvents';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Returns an exception to be thrown when attempting to change a select's `multiple` option
@@ -1439,7 +1446,7 @@ function getMcSelectNonFunctionValueError() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * The max height of the select's overlay panel
@@ -1474,7 +1481,10 @@ var MC_SELECT_SCROLL_STRATEGY = new core.InjectionToken('mc-select-scroll-strate
  * @return {?}
  */
 function mcSelectScrollStrategyProviderFactory(overlay$$1) {
-    return function () { return overlay$$1.scrollStrategies.reposition(); };
+    return (/**
+     * @return {?}
+     */
+    function () { return overlay$$1.scrollStrategies.reposition(); });
 }
 /**
  * \@docs-private
@@ -1488,7 +1498,7 @@ var MC_SELECT_SCROLL_STRATEGY_PROVIDER = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * The following are all the animations for the mc-select component, with each
@@ -1536,7 +1546,7 @@ var mcSelectAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McIconCSSStyler = /** @class */ (function () {
     function McIconCSSStyler() {
@@ -1593,7 +1603,7 @@ var McIcon = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McIconModule = /** @class */ (function () {
     function McIconModule() {
@@ -1620,7 +1630,7 @@ var McIconModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McCleaner = /** @class */ (function () {
     function McCleaner() {
@@ -1636,7 +1646,7 @@ var McCleaner = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An interface which allows a control to work inside of a `MсFormField`.
@@ -1656,7 +1666,7 @@ McFormFieldControl = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -1667,7 +1677,7 @@ function getMcFormFieldMissingControlError() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An interface which allows a control to work inside of a `MсFormField`.
@@ -1687,7 +1697,7 @@ McFormFieldNumberControl = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var nextUniqueId = 0;
@@ -1712,7 +1722,7 @@ var McHint = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McPrefix = /** @class */ (function () {
     function McPrefix() {
@@ -1727,7 +1737,7 @@ var McPrefix = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McStepper = /** @class */ (function () {
     function McStepper() {
@@ -1773,7 +1783,7 @@ var McStepper = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSuffix = /** @class */ (function () {
     function McSuffix() {
@@ -1788,7 +1798,7 @@ var McSuffix = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var nextUniqueId$1 = 0;
@@ -1830,20 +1840,29 @@ var McFormField = /** @class */ (function (_super) {
         }
         // Subscribe to changes in the child control state in order to update the form field UI.
         this._control.stateChanges.pipe(operators.startWith())
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._changeDetectorRef.markForCheck();
-        });
+        }));
         if (this._numberControl) {
             this._numberControl.stateChanges.pipe(operators.startWith())
-                .subscribe(function () {
+                .subscribe((/**
+             * @return {?}
+             */
+            function () {
                 _this._changeDetectorRef.markForCheck();
-            });
+            }));
         }
         // Run change detection if the value changes.
         /** @type {?} */
         var valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || rxjs.EMPTY;
         rxjs.merge(valueChanges)
-            .subscribe(function () { return _this._changeDetectorRef.markForCheck(); });
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this._changeDetectorRef.markForCheck(); }));
     };
     /**
      * @return {?}
@@ -2121,14 +2140,14 @@ var McFormField = /** @class */ (function (_super) {
         { type: core.ChangeDetectorRef }
     ]; };
     McFormField.propDecorators = {
-        _control: [{ type: core.ContentChild, args: [McFormFieldControl,] }],
-        _numberControl: [{ type: core.ContentChild, args: [McFormFieldNumberControl,] }],
-        _stepper: [{ type: core.ContentChild, args: [McStepper,] }],
+        _control: [{ type: core.ContentChild, args: [McFormFieldControl, { static: false },] }],
+        _numberControl: [{ type: core.ContentChild, args: [McFormFieldNumberControl, { static: false },] }],
+        _stepper: [{ type: core.ContentChild, args: [McStepper, { static: false },] }],
         _hint: [{ type: core.ContentChildren, args: [McHint,] }],
         _suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
         _prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
         _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }],
-        connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer',] }]
+        connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer', { static: true },] }]
     };
     return McFormField;
 }(_McFormFieldMixinBase));
@@ -2147,7 +2166,7 @@ var McFormFieldWithoutBorders = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McFormFieldModule = /** @class */ (function () {
     function McFormFieldModule() {
@@ -2180,7 +2199,7 @@ var McFormFieldModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Autocomplete IDs need to be unique across components, so this counter exists outside of
@@ -2263,7 +2282,11 @@ var McAutocomplete = /** @class */ (function () {
             var _this = this;
             if (value && value.length) {
                 value.split(' ')
-                    .forEach(function (className) { return _this._classList[className.trim()] = true; });
+                    .forEach((/**
+                 * @param {?} className
+                 * @return {?}
+                 */
+                function (className) { return _this._classList[className.trim()] = true; }));
                 this.elementRef.nativeElement.className = '';
             }
         },
@@ -2399,8 +2422,8 @@ var McAutocomplete = /** @class */ (function () {
         { type: undefined, decorators: [{ type: core.Inject, args: [MC_AUTOCOMPLETE_DEFAULT_OPTIONS,] }] }
     ]; };
     McAutocomplete.propDecorators = {
-        template: [{ type: core.ViewChild, args: [core.TemplateRef,] }],
-        panel: [{ type: core.ViewChild, args: ['panel',] }],
+        template: [{ type: core.ViewChild, args: [core.TemplateRef, { static: true },] }],
+        panel: [{ type: core.ViewChild, args: ['panel', { static: false },] }],
         options: [{ type: core.ContentChildren, args: [McOption, { descendants: true },] }],
         optionGroups: [{ type: core.ContentChildren, args: [McOptgroup,] }],
         displayWith: [{ type: core.Input }],
@@ -2416,7 +2439,7 @@ var McAutocomplete = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Directive applied to an element to make it usable
@@ -2441,7 +2464,7 @@ var McAutocompleteOrigin = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * The height of each autocomplete option.
@@ -2466,7 +2489,10 @@ var MC_AUTOCOMPLETE_SCROLL_STRATEGY = new core.InjectionToken('mc-autocomplete-s
  * @return {?}
  */
 function MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(overlay$$1) {
-    return function () { return overlay$$1.scrollStrategies.reposition(); };
+    return (/**
+     * @return {?}
+     */
+    function () { return overlay$$1.scrollStrategies.reposition(); });
 }
 /** @type {?} */
 var MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
@@ -2481,7 +2507,10 @@ var MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
  */
 var MAT_AUTOCOMPLETE_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McAutocompleteTrigger; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McAutocompleteTrigger; })),
     multi: true
 };
 /**
@@ -2507,16 +2536,26 @@ var McAutocompleteTrigger = /** @class */ (function () {
         this.document = document;
         this.viewportRuler = viewportRuler;
         // @ts-ignore
-        this.optionSelections = rxjs.defer(function () {
+        this.optionSelections = rxjs.defer((/**
+         * @return {?}
+         */
+        function () {
             if (_this.autocomplete && _this.autocomplete.options) {
-                return rxjs.merge.apply(void 0, _this.autocomplete.options.map(function (option) { return option.onSelectionChange; }));
+                return rxjs.merge.apply(void 0, _this.autocomplete.options.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.onSelectionChange; })));
             }
             // If there are any subscribers before `ngAfterViewInit`, the `autocomplete` will be undefined.
             // Return a stream that we'll replace with the real one once everything is in place.
             return _this.zone.onStable
                 .asObservable()
-                .pipe(operators.take(1), operators.switchMap(function () { return _this.optionSelections; }));
-        });
+                .pipe(operators.take(1), operators.switchMap((/**
+             * @return {?}
+             */
+            function () { return _this.optionSelections; })));
+        }));
         /**
          * `autocomplete` attribute to be set on the input element.
          * \@docs-private
@@ -2543,27 +2582,39 @@ var McAutocompleteTrigger = /** @class */ (function () {
          * `View -> model callback called when value changes`
          */
         // tslint:disable-next-line no-empty
-        this.onChange = function () { };
+        this.onChange = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * `View -> model callback called when autocomplete has been touched`
          */
         // tslint:disable-next-line no-empty
-        this.onTouched = function () { };
+        this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * Event handler for when the window is blurred. Needs to be an
          * arrow function in order to preserve the context.
          */
-        this.windowBlurHandler = function () {
+        this.windowBlurHandler = (/**
+         * @return {?}
+         */
+        function () {
             // If the user blurred the window while the autocomplete is focused, it means that it'll be
             // refocused when they come back. In this case we want to skip the first focus event, if the
             // pane was closed, in order to avoid reopening it unintentionally.
             _this.canOpenOnNextFocus = _this.document.activeElement !== _this.elementRef.nativeElement || _this.panelOpen;
-        };
+        });
         // tslint:disable-next-line no-typeof-undefined
         if (typeof window !== 'undefined') {
-            zone.runOutsideAngular(function () {
+            zone.runOutsideAngular((/**
+             * @return {?}
+             */
+            function () {
                 window.addEventListener('blur', _this.windowBlurHandler);
-            });
+            }));
         }
         this.scrollStrategy = scrollStrategy;
     }
@@ -2702,11 +2753,21 @@ var McAutocompleteTrigger = /** @class */ (function () {
          */
         function () {
             var _this = this;
-            return rxjs.merge(this.optionSelections, this.autocomplete.keyManager.tabOut.pipe(operators.filter(function () { return _this.overlayAttached; })), this.closeKeyEventStream, this.getOutsideClickStream(), this.overlayRef ?
-                this.overlayRef.detachments().pipe(operators.filter(function () { return _this.overlayAttached; })) :
+            return rxjs.merge(this.optionSelections, this.autocomplete.keyManager.tabOut.pipe(operators.filter((/**
+             * @return {?}
+             */
+            function () { return _this.overlayAttached; }))), this.closeKeyEventStream, this.getOutsideClickStream(), this.overlayRef ?
+                this.overlayRef.detachments().pipe(operators.filter((/**
+                 * @return {?}
+                 */
+                function () { return _this.overlayAttached; }))) :
                 rxjs.of()).pipe(
             // Normalize the output so we return a consistent type.
-            operators.map(function (event) { return event instanceof McOptionSelectionChange ? event : null; }));
+            operators.map((/**
+             * @param {?} event
+             * @return {?}
+             */
+            function (event) { return event instanceof McOptionSelectionChange ? event : null; })));
         },
         enumerable: true,
         configurable: true
@@ -2725,7 +2786,10 @@ var McAutocompleteTrigger = /** @class */ (function () {
      */
     function (value) {
         var _this = this;
-        Promise.resolve(null).then(function () { return _this.setTriggerValue(value); });
+        Promise.resolve(null).then((/**
+         * @return {?}
+         */
+        function () { return _this.setTriggerValue(value); }));
     };
     // Implemented as part of ControlValueAccessor.
     // Implemented as part of ControlValueAccessor.
@@ -2887,7 +2951,11 @@ var McAutocompleteTrigger = /** @class */ (function () {
             return rxjs.of(null);
         }
         return rxjs.fromEvent(this.document, 'click')
-            .pipe(operators.filter(function (event) {
+            .pipe(operators.filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             /** @type {?} */
             var clickTarget = (/** @type {?} */ (event.target));
             /** @type {?} */
@@ -2897,7 +2965,7 @@ var McAutocompleteTrigger = /** @class */ (function () {
                 clickTarget !== _this.elementRef.nativeElement &&
                 (!formField || !formField.contains(clickTarget)) &&
                 (!!_this.overlayRef && !_this.overlayRef.overlayElement.contains(clickTarget));
-        }));
+        })));
     };
     /**
      * Given that we are not actually focusing active options, we must manually adjust scroll
@@ -2962,7 +3030,10 @@ var McAutocompleteTrigger = /** @class */ (function () {
             .pipe(operators.take(1));
         /** @type {?} */
         var optionChanges = this.autocomplete.options.changes
-            .pipe(operators.tap(function () { return _this.positionStrategy.reapplyLastPosition(); }), 
+            .pipe(operators.tap((/**
+         * @return {?}
+         */
+        function () { return _this.positionStrategy.reapplyLastPosition(); })), 
         // Defer emitting to the stream until the next tick, because changing
         // bindings in here will cause "changed after checked" errors.
         operators.delay(0));
@@ -2971,18 +3042,25 @@ var McAutocompleteTrigger = /** @class */ (function () {
             .pipe(
         // create a new stream of panelClosingActions, replacing any previous streams
         // that were created, and flatten it so our stream only emits closing events...
-        operators.switchMap(function () {
+        operators.switchMap((/**
+         * @return {?}
+         */
+        function () {
             _this.resetActiveItem();
             _this.autocomplete.setVisibility();
             if (_this.panelOpen) {
                 (/** @type {?} */ (_this.overlayRef)).updatePosition();
             }
             return _this.panelClosingActions;
-        }), 
+        })), 
         // when the first closing event occurs...
         operators.take(1))
             // set the value, close the panel, and complete.
-            .subscribe(function (event) { return _this.setValueAndClose(event); });
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) { return _this.setValueAndClose(event); }));
     };
     /** Destroys the autocomplete suggestion panel. */
     /**
@@ -3075,11 +3153,15 @@ var McAutocompleteTrigger = /** @class */ (function () {
      * @return {?}
      */
     function (skip) {
-        this.autocomplete.options.forEach(function (option) {
+        this.autocomplete.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) {
             if (option !== skip && option.selected) {
                 option.deselect();
             }
-        });
+        }));
     };
     /**
      * @private
@@ -3102,7 +3184,11 @@ var McAutocompleteTrigger = /** @class */ (function () {
             this.overlayRef = overlayRef;
             // Use the `keydownEvents` in order to take advantage of
             // the overlay event targeting provided by the CDK overlay.
-            overlayRef.keydownEvents().subscribe(function (event) {
+            overlayRef.keydownEvents().subscribe((/**
+             * @param {?} event
+             * @return {?}
+             */
+            function (event) {
                 // Close when pressing ESCAPE or ALT + UP_ARROW, based on the a11y guidelines.
                 // See: https://www.w3.org/TR/wai-aria-practices-1.1/#textbox-keyboard-interaction
                 // tslint:disable-next-line deprecation
@@ -3110,13 +3196,16 @@ var McAutocompleteTrigger = /** @class */ (function () {
                     _this.resetActiveItem();
                     _this.closeKeyEventStream.next();
                 }
-            });
+            }));
             if (this.viewportRuler) {
-                this.viewportSubscription = this.viewportRuler.change().subscribe(function () {
+                this.viewportSubscription = this.viewportRuler.change().subscribe((/**
+                 * @return {?}
+                 */
+                function () {
                     if (_this.panelOpen && overlayRef) {
                         overlayRef.updateSize({ width: _this.getPanelWidth() });
                     }
-                });
+                }));
             }
         }
         else {
@@ -3299,7 +3388,7 @@ var McAutocompleteTrigger = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McAutocompleteModule = /** @class */ (function () {
     function McAutocompleteModule() {
@@ -3323,7 +3412,7 @@ var McAutocompleteModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McButtonCssStyler = /** @class */ (function () {
     function McButtonCssStyler(elementRef) {
@@ -3516,7 +3605,7 @@ var McAnchor = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McButtonModule = /** @class */ (function () {
     function McButtonModule() {
@@ -3545,7 +3634,7 @@ var McButtonModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Provider Expression that allows mc-button-toggle-group to register as a ControlValueAccessor.
@@ -3555,7 +3644,10 @@ var McButtonModule = /** @class */ (function () {
  */
 var MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McButtonToggleGroup; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McButtonToggleGroup; })),
     multi: true
 };
 /**
@@ -3595,12 +3687,18 @@ var McButtonToggleGroup = /** @class */ (function () {
          * Now `ngModel` binding is not supported in multiple selection mode.
          */
         // tslint:disable-next-line:no-empty
-        this.controlValueAccessorChangeFn = function () { };
+        this.controlValueAccessorChangeFn = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * onTouch function registered via registerOnTouch (ControlValueAccessor).
          */
         // tslint:disable-next-line:no-empty
-        this.onTouched = function () { };
+        this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
     }
     Object.defineProperty(McButtonToggleGroup.prototype, "vertical", {
         /** Whether the toggle group is vertical. */
@@ -3631,7 +3729,11 @@ var McButtonToggleGroup = /** @class */ (function () {
             /** @type {?} */
             var selected = this.selectionModel ? this.selectionModel.selected : [];
             if (this.multiple) {
-                return selected.map(function (toggle) { return toggle.value; });
+                return selected.map((/**
+                 * @param {?} toggle
+                 * @return {?}
+                 */
+                function (toggle) { return toggle.value; }));
             }
             return selected[0] ? selected[0].value : undefined;
         },
@@ -3697,7 +3799,11 @@ var McButtonToggleGroup = /** @class */ (function () {
             if (!this.buttonToggles) {
                 return;
             }
-            this.buttonToggles.forEach(function (toggle) { return toggle.markForCheck(); });
+            this.buttonToggles.forEach((/**
+             * @param {?} toggle
+             * @return {?}
+             */
+            function (toggle) { return toggle.markForCheck(); }));
         },
         enumerable: true,
         configurable: true
@@ -3719,7 +3825,11 @@ var McButtonToggleGroup = /** @class */ (function () {
      */
     function () {
         var _a;
-        (_a = this.selectionModel).select.apply(_a, this.buttonToggles.filter(function (toggle) { return toggle.checked; }));
+        (_a = this.selectionModel).select.apply(_a, this.buttonToggles.filter((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        function (toggle) { return toggle.checked; })));
         this.disabled = this._disabled;
     };
     /**
@@ -3875,7 +3985,11 @@ var McButtonToggleGroup = /** @class */ (function () {
             return false;
         }
         if (this.multiple && Array.isArray(this.rawValue)) {
-            return this.rawValue.some(function (value) { return toggle.value != null && value === toggle.value; });
+            return this.rawValue.some((/**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) { return toggle.value != null && value === toggle.value; }));
         }
         return toggle.value === this.rawValue;
     };
@@ -3903,7 +4017,11 @@ var McButtonToggleGroup = /** @class */ (function () {
                 throw Error('Value must be an array in multiple-selection mode.');
             }
             this.clearSelection();
-            value.forEach(function (currentValue) { return _this.selectValue(currentValue); });
+            value.forEach((/**
+             * @param {?} currentValue
+             * @return {?}
+             */
+            function (currentValue) { return _this.selectValue(currentValue); }));
         }
         else {
             this.clearSelection();
@@ -3923,7 +4041,11 @@ var McButtonToggleGroup = /** @class */ (function () {
      */
     function () {
         this.selectionModel.clear();
-        this.buttonToggles.forEach(function (toggle) { return toggle.checked = false; });
+        this.buttonToggles.forEach((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        function (toggle) { return toggle.checked = false; }));
     };
     /** Selects a value if there's a toggle that corresponds to it. */
     /**
@@ -3940,9 +4062,13 @@ var McButtonToggleGroup = /** @class */ (function () {
      */
     function (value) {
         /** @type {?} */
-        var correspondingOption = this.buttonToggles.find(function (toggle) {
+        var correspondingOption = this.buttonToggles.find((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        function (toggle) {
             return toggle.value != null && toggle.value === value;
-        });
+        }));
         if (correspondingOption) {
             correspondingOption.checked = true;
             this.selectionModel.select(correspondingOption);
@@ -3968,7 +4094,10 @@ var McButtonToggleGroup = /** @class */ (function () {
         vertical: [{ type: core.Input }],
         value: [{ type: core.Input }],
         multiple: [{ type: core.Input }],
-        buttonToggles: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McButtonToggle; }),] }],
+        buttonToggles: [{ type: core.ContentChildren, args: [core.forwardRef((/**
+                     * @return {?}
+                     */
+                    function () { return McButtonToggle; })),] }],
         disabled: [{ type: core.Input }],
         valueChange: [{ type: core.Output }],
         change: [{ type: core.Output }]
@@ -4062,7 +4191,10 @@ var McButtonToggle = /** @class */ (function () {
         // Remove the toggle from the selection once it's destroyed. Needs to happen
         // on the next tick in order to avoid "changed after checked" errors.
         if (group && group.isSelected(this)) {
-            Promise.resolve().then(function () { return group.syncButtonToggle(_this, false); });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () { return group.syncButtonToggle(_this, false); }));
         }
     };
     /** Focuses the button. */
@@ -4153,7 +4285,7 @@ var McButtonToggle = /** @class */ (function () {
     ]; };
     McButtonToggle.propDecorators = {
         checked: [{ type: core.Input }],
-        mcButton: [{ type: core.ViewChild, args: [McButton,] }],
+        mcButton: [{ type: core.ViewChild, args: [McButton, { static: false },] }],
         value: [{ type: core.Input }],
         tabIndex: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
@@ -4164,7 +4296,7 @@ var McButtonToggle = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McButtonToggleModule = /** @class */ (function () {
     function McButtonToggleModule() {
@@ -4181,7 +4313,7 @@ var McButtonToggleModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McCard = /** @class */ (function () {
     function McCard(_elementRef, _focusMonitor) {
@@ -4305,7 +4437,7 @@ var McCard = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McCardModule = /** @class */ (function () {
     function McCardModule() {
@@ -4326,7 +4458,7 @@ var McCardModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to specify the checkbox click behavior.
@@ -4336,7 +4468,7 @@ var MC_CHECKBOX_CLICK_ACTION = new core.InjectionToken('mc-checkbox-click-action
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Increasing integer for generating unique ids for checkbox components.
 /** @type {?} */
@@ -4349,7 +4481,10 @@ var nextUniqueId$2 = 0;
  */
 var MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McCheckbox; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McCheckbox; })),
     multi: true
 };
 /** @enum {number} */
@@ -4443,12 +4578,18 @@ var McCheckbox = /** @class */ (function (_super) {
          * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
          * \@docs-private
          */
-        _this._onTouched = function () {
-        };
+        _this._onTouched = (/**
+         * @return {?}
+         */
+        function () {
+        });
         _this._currentAnimationClass = '';
         _this._currentCheckState = TransitionCheckState.Init;
-        _this._controlValueAccessorChangeFn = function () {
-        };
+        _this._controlValueAccessorChangeFn = (/**
+         * @return {?}
+         */
+        function () {
+        });
         _this._checked = false;
         _this._disabled = false;
         _this._indeterminate = false;
@@ -4496,7 +4637,11 @@ var McCheckbox = /** @class */ (function (_super) {
         var _this = this;
         this._focusMonitor
             .monitor(this._inputElement.nativeElement)
-            .subscribe(function (focusOrigin) { return _this._onInputFocusChange(focusOrigin); });
+            .subscribe((/**
+         * @param {?} focusOrigin
+         * @return {?}
+         */
+        function (focusOrigin) { return _this._onInputFocusChange(focusOrigin); }));
     };
     /**
      * @return {?}
@@ -4788,10 +4933,13 @@ var McCheckbox = /** @class */ (function (_super) {
         if (!this.disabled && this._clickAction !== 'noop') {
             // When user manually click on the checkbox, `indeterminate` is set to false.
             if (this.indeterminate && this._clickAction !== 'check') {
-                Promise.resolve().then(function () {
+                Promise.resolve().then((/**
+                 * @return {?}
+                 */
+                function () {
                     _this._indeterminate = false;
                     _this.indeterminateChange.emit(_this._indeterminate);
-                });
+                }));
             }
             this.toggle();
             this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
@@ -4872,7 +5020,7 @@ var McCheckbox = /** @class */ (function (_super) {
         change: [{ type: core.Output }],
         indeterminateChange: [{ type: core.Output }],
         value: [{ type: core.Input }],
-        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
+        _inputElement: [{ type: core.ViewChild, args: ['input', { static: false },] }],
         checked: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
         indeterminate: [{ type: core.Input }]
@@ -4882,12 +5030,15 @@ var McCheckbox = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_CHECKBOX_REQUIRED_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
-    useExisting: core.forwardRef(function () { return McCheckboxRequiredValidator; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McCheckboxRequiredValidator; })),
     multi: true
 };
 /**
@@ -4912,7 +5063,7 @@ var McCheckboxRequiredValidator = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McCheckboxModule = /** @class */ (function () {
     function McCheckboxModule() {
@@ -4929,7 +5080,7 @@ var McCheckboxModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} inputType
@@ -4941,14 +5092,14 @@ function getMcInputUnsupportedTypeError(inputType) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} value
@@ -4984,7 +5135,14 @@ function add(value1, value2) {
     return sanitizeNumber(res);
 }
 /** @type {?} */
-var stepUp = function (value, max, min, step) {
+var stepUp = (/**
+ * @param {?} value
+ * @param {?} max
+ * @param {?} min
+ * @param {?} step
+ * @return {?}
+ */
+function (value, max, min, step) {
     /** @type {?} */
     var res;
     if (value === null) {
@@ -4993,9 +5151,16 @@ var stepUp = function (value, max, min, step) {
     }
     res = add(value, step);
     return res === null ? null : Math.max(Math.min(res, max), min);
-};
+});
 /** @type {?} */
-var stepDown = function (value, max, min, step) {
+var stepDown = (/**
+ * @param {?} value
+ * @param {?} max
+ * @param {?} min
+ * @param {?} step
+ * @return {?}
+ */
+function (value, max, min, step) {
     /** @type {?} */
     var res;
     if (value === null) {
@@ -5004,11 +5169,11 @@ var stepDown = function (value, max, min, step) {
     }
     res = add(value, -step);
     return res === null ? null : Math.min(Math.max(res, min), max);
-};
+});
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_INPUT_INVALID_TYPES = [
@@ -5105,18 +5270,42 @@ var McNumberInput = /** @class */ (function () {
         /** @type {?} */
         var keyCode = event.keyCode;
         /** @type {?} */
-        var isCtrlA = function (e) { return e.keyCode === keycodes.A && (e.ctrlKey || e.metaKey); };
+        var isCtrlA = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.A && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
-        var isCtrlC = function (e) { return e.keyCode === keycodes.C && (e.ctrlKey || e.metaKey); };
+        var isCtrlC = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.C && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
-        var isCtrlV = function (e) { return e.keyCode === keycodes.V && (e.ctrlKey || e.metaKey); };
+        var isCtrlV = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.V && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
-        var isCtrlX = function (e) { return e.keyCode === keycodes.X && (e.ctrlKey || e.metaKey); };
+        var isCtrlX = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.X && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
-        var isFKey = function (e) { return e.keyCode >= keycodes.F1 && e.keyCode <= keycodes.F12; };
+        var isFKey = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode >= keycodes.F1 && e.keyCode <= keycodes.F12; });
         /** @type {?} */
-        var isNumber = function (e) { return (e.keyCode >= keycodes.ZERO && e.keyCode <= keycodes.NINE) ||
-            (e.keyCode >= keycodes.NUMPAD_ZERO && e.keyCode <= keycodes.NUMPAD_NINE); };
+        var isNumber = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return (e.keyCode >= keycodes.ZERO && e.keyCode <= keycodes.NINE) ||
+            (e.keyCode >= keycodes.NUMPAD_ZERO && e.keyCode <= keycodes.NUMPAD_NINE); });
         /** @type {?} */
         var minuses = [keycodes.NUMPAD_MINUS, keycodes.DASH, keycodes.FF_MINUS];
         /** @type {?} */
@@ -5126,14 +5315,26 @@ var McNumberInput = /** @class */ (function () {
         /** @type {?} */
         var allowedKeys = [keycodes.HOME, keycodes.END].concat(arrows).concat(serviceKeys).concat(minuses);
         /** @type {?} */
-        var isIEPeriod = function (e) { return e.key === '.' || e.key === 'Decimal'; };
+        var isIEPeriod = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.key === '.' || e.key === 'Decimal'; });
         /** @type {?} */
-        var isNotIEPeriod = function (e) { return e.key === '.' || e.key === ','; };
+        var isNotIEPeriod = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.key === '.' || e.key === ','; });
         // Decimal is for IE
         /** @type {?} */
-        var isPeriod = function (e) { return _this._platform.EDGE || _this._platform.TRIDENT
+        var isPeriod = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return _this._platform.EDGE || _this._platform.TRIDENT
             ? isIEPeriod(e)
-            : isNotIEPeriod(e); };
+            : isNotIEPeriod(e); });
         if (allowedKeys.indexOf(keyCode) !== -1 ||
             isCtrlA(event) ||
             isCtrlC(event) ||
@@ -5319,7 +5520,11 @@ var McInput = /** @class */ (function (_super) {
             'month',
             'time',
             'week'
-        ].filter(function (t) { return platform.getSupportedInputTypes().has(t); });
+        ].filter((/**
+         * @param {?} t
+         * @return {?}
+         */
+        function (t) { return platform.getSupportedInputTypes().has(t); }));
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
         _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
@@ -5697,12 +5902,15 @@ var McInputMono = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MIN_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
-    useExisting: core.forwardRef(function () { return MinValidator; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return MinValidator; })),
     multi: true
 };
 /**
@@ -5772,7 +5980,10 @@ var MinValidator = /** @class */ (function () {
 /** @type {?} */
 var MAX_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
-    useExisting: core.forwardRef(function () { return MaxValidator; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return MaxValidator; })),
     multi: true
 };
 /**
@@ -5844,7 +6055,7 @@ var MaxValidator = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McInputModule = /** @class */ (function () {
     function McInputModule() {
@@ -5861,7 +6072,7 @@ var McInputModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@docs-private
@@ -5875,7 +6086,7 @@ function createMissingDateImplError(provider) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Datepicker data that requires internationalization.
@@ -5931,13 +6142,13 @@ var McDatepickerIntl = /** @class */ (function () {
     McDatepickerIntl.decorators = [
         { type: core.Injectable, args: [{ providedIn: 'root' },] },
     ];
-    /** @nocollapse */ McDatepickerIntl.ngInjectableDef = core.defineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
+    /** @nocollapse */ McDatepickerIntl.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
     return McDatepickerIntl;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An internal class that represents the data corresponding to a single calendar cell.
@@ -6049,15 +6260,21 @@ var McCalendarBody = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.ngZone.runOutsideAngular(function () {
-            _this.ngZone.onStable.asObservable().pipe(operators.take(1)).subscribe(function () {
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        function () {
+            _this.ngZone.onStable.asObservable().pipe(operators.take(1)).subscribe((/**
+             * @return {?}
+             */
+            function () {
                 /** @type {?} */
                 var activeCell = _this.elementRef.nativeElement.querySelector('.mc-calendar__body_active');
                 if (activeCell) {
                     activeCell.focus();
                 }
-            });
-        });
+            }));
+        }));
     };
     McCalendarBody.decorators = [
         { type: core.Component, args: [{
@@ -6095,7 +6312,7 @@ var McCalendarBody = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var DAYS_PER_WEEK = 7;
@@ -6136,9 +6353,14 @@ var McMonthView = /** @class */ (function () {
         var longWeekdays = this.dateAdapter.getDayOfWeekNames('long');
         // Rotate the labels for days of the week based on the configured first day of the week.
         /** @type {?} */
-        var weekdays = longWeekdays.map(function (long, i) {
+        var weekdays = longWeekdays.map((/**
+         * @param {?} long
+         * @param {?} i
+         * @return {?}
+         */
+        function (long, i) {
             return { long: long, narrow: narrowWeekdays[i] };
-        });
+        }));
         this.weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
         this._activeDate = this.dateAdapter.today();
     }
@@ -6519,14 +6741,14 @@ var McMonthView = /** @class */ (function () {
         selectedChange: [{ type: core.Output }],
         userSelection: [{ type: core.Output }],
         activeDateChange: [{ type: core.Output }],
-        mcCalendarBody: [{ type: core.ViewChild, args: [McCalendarBody,] }]
+        mcCalendarBody: [{ type: core.ViewChild, args: [McCalendarBody, { static: false },] }]
     };
     return McMonthView;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var yearsPerPage = 24;
@@ -6673,7 +6895,11 @@ var McMultiYearView = /** @class */ (function () {
         for (var i = 0, row = []; i < yearsPerPage; i++) {
             row.push(activeYear - activeOffset + i);
             if (row.length === yearsPerRow) {
-                this.years.push(row.map(function (year) { return _this.createCellForYear(year); }));
+                this.years.push(row.map((/**
+                 * @param {?} year
+                 * @return {?}
+                 */
+                function (year) { return _this.createCellForYear(year); })));
                 row = [];
             }
         }
@@ -6891,14 +7117,14 @@ var McMultiYearView = /** @class */ (function () {
         selectedChange: [{ type: core.Output }],
         yearSelected: [{ type: core.Output }],
         activeDateChange: [{ type: core.Output }],
-        mcCalendarBody: [{ type: core.ViewChild, args: [McCalendarBody,] }]
+        mcCalendarBody: [{ type: core.ViewChild, args: [McCalendarBody, { static: false },] }]
     };
     return McMultiYearView;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An internal component used to display a single year in the datepicker.
@@ -7132,7 +7358,15 @@ var McYearView = /** @class */ (function () {
         var monthNames = this.dateAdapter.getMonthNames('short');
         // First row of months only contains 5 elements so we can fit the year label on the same row.
         // tslint:disable-next-line:no-magic-numbers
-        this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]].map(function (row) { return row.map(function (month) { return _this.createCellForMonth(month, monthNames[month]); }); });
+        this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]].map((/**
+         * @param {?} row
+         * @return {?}
+         */
+        function (row) { return row.map((/**
+         * @param {?} month
+         * @return {?}
+         */
+        function (month) { return _this.createCellForMonth(month, monthNames[month]); })); }));
         this.changeDetectorRef.markForCheck();
     };
     /** Focuses the active cell after the microtask queue is empty. */
@@ -7341,14 +7575,14 @@ var McYearView = /** @class */ (function () {
         selectedChange: [{ type: core.Output }],
         monthSelected: [{ type: core.Output }],
         activeDateChange: [{ type: core.Output }],
-        mcCalendarBody: [{ type: core.ViewChild, args: [McCalendarBody,] }]
+        mcCalendarBody: [{ type: core.ViewChild, args: [McCalendarBody, { static: false },] }]
     };
     return McYearView;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Default header for McCalendar
@@ -7360,7 +7594,10 @@ var McCalendarHeader = /** @class */ (function () {
         this.calendar = calendar;
         this.dateAdapter = dateAdapter;
         this.dateFormats = dateFormats;
-        this.calendar.stateChanges.subscribe(function () { return changeDetectorRef.markForCheck(); });
+        this.calendar.stateChanges.subscribe((/**
+         * @return {?}
+         */
+        function () { return changeDetectorRef.markForCheck(); }));
     }
     Object.defineProperty(McCalendarHeader.prototype, "periodButtonText", {
         /** The label for the current calendar view. */
@@ -7544,7 +7781,10 @@ var McCalendarHeader = /** @class */ (function () {
     /** @nocollapse */
     McCalendarHeader.ctorParameters = function () { return [
         { type: McDatepickerIntl },
-        { type: McCalendar, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McCalendar; }),] }] },
+        { type: McCalendar, decorators: [{ type: core.Inject, args: [core.forwardRef((/**
+                         * @return {?}
+                         */
+                        function () { return McCalendar; })),] }] },
         { type: datetime.DateAdapter, decorators: [{ type: core.Optional }] },
         { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [datetime.MC_DATE_FORMATS,] }] },
         { type: core.ChangeDetectorRef }
@@ -7600,10 +7840,13 @@ var McCalendar = /** @class */ (function () {
         if (!this.dateFormats) {
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
-        this.intlChanges = intl.changes.subscribe(function () {
+        this.intlChanges = intl.changes.subscribe((/**
+         * @return {?}
+         */
+        function () {
             changeDetectorRef.markForCheck();
             _this.stateChanges.next();
-        });
+        }));
     }
     Object.defineProperty(McCalendar.prototype, "startAt", {
         /** A date representing the period (month or year) to start the calendar in. */
@@ -7940,16 +8183,16 @@ var McCalendar = /** @class */ (function () {
         yearSelected: [{ type: core.Output }],
         monthSelected: [{ type: core.Output }],
         userSelection: [{ type: core.Output }],
-        monthView: [{ type: core.ViewChild, args: [McMonthView,] }],
-        yearView: [{ type: core.ViewChild, args: [McYearView,] }],
-        multiYearView: [{ type: core.ViewChild, args: [McMultiYearView,] }]
+        monthView: [{ type: core.ViewChild, args: [McMonthView, { static: false },] }],
+        yearView: [{ type: core.ViewChild, args: [McYearView, { static: false },] }],
+        multiYearView: [{ type: core.ViewChild, args: [McMultiYearView, { static: false },] }]
     };
     return McCalendar;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Animations used by the mosaic datepicker.
@@ -7989,7 +8232,7 @@ if (!Element.prototype.matches) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Used to generate a unique ID for each datepicker instance.
@@ -8008,7 +8251,10 @@ var MC_DATEPICKER_SCROLL_STRATEGY = new core.InjectionToken('mc-datepicker-scrol
  */
 // tslint:disable-next-line:naming-convention
 function MC_DATEPICKER_SCROLL_STRATEGY_FACTORY(overlay$$1) {
-    return function () { return overlay$$1.scrollStrategies.reposition(); };
+    return (/**
+     * @return {?}
+     */
+    function () { return overlay$$1.scrollStrategies.reposition(); });
 }
 /**
  * \@docs-private
@@ -8084,7 +8330,7 @@ var McDatepickerContent = /** @class */ (function (_super) {
         { type: core.ElementRef }
     ]; };
     McDatepickerContent.propDecorators = {
-        calendar: [{ type: core.ViewChild, args: [McCalendar,] }]
+        calendar: [{ type: core.ViewChild, args: [McCalendar, { static: false },] }]
     };
     return McDatepickerContent;
 }(McDatepickerContentMixinBase));
@@ -8390,7 +8636,11 @@ var McDatepicker = /** @class */ (function () {
         }
         this.datepickerInput = input;
         this.inputSubscription =
-            this.datepickerInput.valueChange.subscribe(function (value) { return _this.selected = value; });
+            this.datepickerInput.valueChange.subscribe((/**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) { return _this.selected = value; }));
     };
     /** Open the calendar. */
     /**
@@ -8436,7 +8686,10 @@ var McDatepicker = /** @class */ (function () {
             this.calendarPortal.detach();
         }
         /** @type {?} */
-        var completeClose = function () {
+        var completeClose = (/**
+         * @return {?}
+         */
+        function () {
             // The `_opened` could've been reset already if
             // we got two events in quick succession.
             if (_this._opened) {
@@ -8445,7 +8698,7 @@ var McDatepicker = /** @class */ (function () {
                 _this.focusedElementBeforeOpen = null;
                 _this.datepickerInput.elementRef.nativeElement.focus();
             }
-        };
+        });
         if (this.focusedElementBeforeOpen &&
             typeof this.focusedElementBeforeOpen.focus === 'function') {
             // Because IE moves focus asynchronously, we can't count on it being restored before we've
@@ -8484,9 +8737,12 @@ var McDatepicker = /** @class */ (function () {
             this.popupComponentRef.instance.datepicker = this;
             this.setColor();
             // Update the position once the calendar has rendered.
-            this.ngZone.onStable.asObservable().pipe(operators.take(1)).subscribe(function () {
+            this.ngZone.onStable.asObservable().pipe(operators.take(1)).subscribe((/**
+             * @return {?}
+             */
+            function () {
                 _this.popupRef.updatePosition();
-            });
+            }));
         }
     };
     /** Create the popup. */
@@ -8513,11 +8769,18 @@ var McDatepicker = /** @class */ (function () {
         });
         this.popupRef = this.overlay.create(overlayConfig);
         this.popupRef.overlayElement.setAttribute('role', 'dialog');
-        rxjs.merge(this.popupRef.backdropClick(), this.popupRef.detachments(), this.popupRef.keydownEvents().pipe(operators.filter(function (event) {
+        rxjs.merge(this.popupRef.backdropClick(), this.popupRef.detachments(), this.popupRef.keydownEvents().pipe(operators.filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             // Closing on alt + up is only valid when there's an input associated with the datepicker.
             // tslint:disable-next-line:deprecation
             return event.keyCode === keycodes.ESCAPE || (_this.datepickerInput && event.altKey && event.keyCode === keycodes.UP_ARROW);
-        }))).subscribe(function () { return _this.close(); });
+        })))).subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.close(); }));
     };
     /** Create the popup PositionStrategy. */
     /**
@@ -8638,7 +8901,7 @@ var McDatepicker = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@docs-private
@@ -8646,7 +8909,10 @@ var McDatepicker = /** @class */ (function () {
  */
 var MC_DATEPICKER_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McDatepickerInput; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McDatepickerInput; })),
     multi: true
 };
 /**
@@ -8655,7 +8921,10 @@ var MC_DATEPICKER_VALUE_ACCESSOR = {
  */
 var MC_DATEPICKER_VALIDATORS = {
     provide: forms.NG_VALIDATORS,
-    useExisting: core.forwardRef(function () { return McDatepickerInput; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McDatepickerInput; })),
     multi: true
 };
 /**
@@ -8711,48 +8980,72 @@ var McDatepickerInput = /** @class */ (function () {
          * Whether the last value set on the input was valid.
          */
         this.lastValueValid = false;
-        this.onTouched = function () {
-        };
-        this.cvaOnChange = function () {
-        };
-        this.validatorOnChange = function () {
-        };
+        this.onTouched = (/**
+         * @return {?}
+         */
+        function () {
+        });
+        this.cvaOnChange = (/**
+         * @return {?}
+         */
+        function () {
+        });
+        this.validatorOnChange = (/**
+         * @return {?}
+         */
+        function () {
+        });
         /**
          * The form control validator for whether the input parses.
          */
-        this.parseValidator = function () {
+        this.parseValidator = (/**
+         * @return {?}
+         */
+        function () {
             return _this.lastValueValid ?
                 null : { mcDatepickerParse: { text: _this.elementRef.nativeElement.value } };
-        };
+        });
         /**
          * The form control validator for the min date.
          */
-        this.minValidator = function (control) {
+        this.minValidator = (/**
+         * @param {?} control
+         * @return {?}
+         */
+        function (control) {
             /** @type {?} */
             var controlValue = _this.getValidDateOrNull(_this.dateAdapter.deserialize(control.value));
             return (!_this.min || !controlValue ||
                 _this.dateAdapter.compareDate(_this.min, controlValue) <= 0) ?
                 null : { mcDatepickerMin: { min: _this.min, actual: controlValue } };
-        };
+        });
         /**
          * The form control validator for the max date.
          */
-        this.maxValidator = function (control) {
+        this.maxValidator = (/**
+         * @param {?} control
+         * @return {?}
+         */
+        function (control) {
             /** @type {?} */
             var controlValue = _this.getValidDateOrNull(_this.dateAdapter.deserialize(control.value));
             return (!_this.max || !controlValue ||
                 _this.dateAdapter.compareDate(_this.max, controlValue) >= 0) ?
                 null : { mcDatepickerMax: { max: _this.max, actual: controlValue } };
-        };
+        });
         /**
          * The form control validator for the date filter.
          */
-        this.filterValidator = function (control) {
+        this.filterValidator = (/**
+         * @param {?} control
+         * @return {?}
+         */
+        function (control) {
             /** @type {?} */
             var controlValue = _this.getValidDateOrNull(_this.dateAdapter.deserialize(control.value));
             return !_this.dateFilter || !controlValue || _this.dateFilter(controlValue) ?
                 null : { mcDatepickerFilter: true };
-        };
+        });
         /**
          * The combined form control validator for this input.
          */
@@ -8770,9 +9063,12 @@ var McDatepickerInput = /** @class */ (function () {
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
         // Update the displayed date when the locale changes.
-        this.localeSubscription = dateAdapter.localeChanges.subscribe(function () {
+        this.localeSubscription = dateAdapter.localeChanges.subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.value = _this.value;
-        });
+        }));
     }
     Object.defineProperty(McDatepickerInput.prototype, "mcDatepicker", {
         /** The datepicker that this input is associated with. */
@@ -8789,13 +9085,17 @@ var McDatepickerInput = /** @class */ (function () {
             this.datepicker = value;
             this.datepicker.registerInput(this);
             this.datepickerSubscription.unsubscribe();
-            this.datepickerSubscription = this.datepicker.selectedChanged.subscribe(function (selected) {
+            this.datepickerSubscription = this.datepicker.selectedChanged.subscribe((/**
+             * @param {?} selected
+             * @return {?}
+             */
+            function (selected) {
                 _this.value = selected;
                 _this.cvaOnChange(selected);
                 _this.onTouched();
                 _this.dateInput.emit(new McDatepickerInputEvent(_this, _this.elementRef.nativeElement));
                 _this.dateChange.emit(new McDatepickerInputEvent(_this, _this.elementRef.nativeElement));
-            });
+            }));
         },
         enumerable: true,
         configurable: true
@@ -9169,7 +9469,7 @@ var McDatepickerInput = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Can be used to override the icon of a `mcDatepickerToggle`.
@@ -9280,7 +9580,10 @@ var McDatepickerToggle = /** @class */ (function () {
             rxjs.merge(this.datepicker.openedStream, this.datepicker.closedStream) :
             rxjs.of();
         this.stateChanges.unsubscribe();
-        this.stateChanges = rxjs.merge(this.intl.changes, datepickerDisabled, inputDisabled, datepickerToggled).subscribe(function () { return _this.changeDetectorRef.markForCheck(); });
+        this.stateChanges = rxjs.merge(this.intl.changes, datepickerDisabled, inputDisabled, datepickerToggled).subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.changeDetectorRef.markForCheck(); }));
     };
     McDatepickerToggle.decorators = [
         { type: core.Component, args: [{
@@ -9311,15 +9614,15 @@ var McDatepickerToggle = /** @class */ (function () {
         disabled: [{ type: core.Input }],
         datepicker: [{ type: core.Input, args: ['for',] }],
         tabIndex: [{ type: core.Input }],
-        customIcon: [{ type: core.ContentChild, args: [McDatepickerToggleIcon,] }],
-        button: [{ type: core.ViewChild, args: ['button',] }]
+        customIcon: [{ type: core.ContentChild, args: [McDatepickerToggleIcon, { static: false },] }],
+        button: [{ type: core.ViewChild, args: ['button', { static: false },] }]
     };
     return McDatepickerToggle;
 }());
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McDatepickerModule = /** @class */ (function () {
     function McDatepickerModule() {
@@ -9376,7 +9679,7 @@ var McDatepickerModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McDivider = /** @class */ (function () {
     function McDivider() {
@@ -9449,7 +9752,7 @@ var McDivider = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McDividerModule = /** @class */ (function () {
     function McDividerModule() {
@@ -9466,7 +9769,7 @@ var McDividerModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Dropdown content that will be rendered lazily once the dropdown is opened.
@@ -9567,7 +9870,7 @@ var McDropdownContent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token used to provide the parent dropdown to dropdown-specific components.
@@ -9578,7 +9881,7 @@ var MC_DROPDOWN_PANEL = new core.InjectionToken('MC_DROPDOWN_PANEL');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to McDropdownItem.
 /**
@@ -9783,14 +10086,14 @@ var McDropdownItem = /** @class */ (function (_super) {
     ]; };
     McDropdownItem.propDecorators = {
         role: [{ type: core.Input }],
-        content: [{ type: core.ViewChild, args: ['content',] }]
+        content: [{ type: core.ViewChild, args: ['content', { static: false },] }]
     };
     return McDropdownItem;
 }(_McDropdownItemMixinBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Throws an exception for the case when dropdown trigger doesn't have a valid mc-dropdown instance
@@ -9821,7 +10124,7 @@ function throwMcDropdownInvalidPositionY() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Animations used by the mc-dropdown component.
@@ -9868,7 +10171,7 @@ var transformDropdown = mcDropdownAnimations.transformDropdown;
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token to be used to override the default options for `mc-dropdown`.
@@ -10056,15 +10359,23 @@ var McDropdown = /** @class */ (function () {
             /** @type {?} */
             var previousPanelClass = this._previousPanelClass;
             if (previousPanelClass && previousPanelClass.length) {
-                previousPanelClass.split(' ').forEach(function (className) {
+                previousPanelClass.split(' ').forEach((/**
+                 * @param {?} className
+                 * @return {?}
+                 */
+                function (className) {
                     _this._classList[className] = false;
-                });
+                }));
             }
             this._previousPanelClass = classes;
             if (classes && classes.length) {
-                classes.split(' ').forEach(function (className) {
+                classes.split(' ').forEach((/**
+                 * @param {?} className
+                 * @return {?}
+                 */
+                function (className) {
                     _this._classList[className] = true;
-                });
+                }));
                 this._elementRef.nativeElement.className = '';
             }
         },
@@ -10089,7 +10400,10 @@ var McDropdown = /** @class */ (function () {
     function () {
         var _this = this;
         this._keyManager = new a11y.FocusKeyManager(this.items).withWrap().withTypeAhead();
-        this._tabSubscription = this._keyManager.tabOut.subscribe(function () { return _this.closed.emit('tab'); });
+        this._tabSubscription = this._keyManager.tabOut.subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.closed.emit('tab'); }));
     };
     /**
      * @return {?}
@@ -10111,7 +10425,15 @@ var McDropdown = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this._itemChanges.pipe(operators.startWith(this._items), operators.switchMap(function (items) { return rxjs.merge.apply(void 0, items.map(function (item) { return item._hovered; })); }));
+        return this._itemChanges.pipe(operators.startWith(this._items), operators.switchMap((/**
+         * @param {?} items
+         * @return {?}
+         */
+        function (items) { return rxjs.merge.apply(void 0, items.map((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return item._hovered; }))); })));
     };
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     /**
@@ -10169,7 +10491,10 @@ var McDropdown = /** @class */ (function () {
         if (this.lazyContent) {
             this._ngZone.onStable.asObservable()
                 .pipe(operators.take(1))
-                .subscribe(function () { return _this._keyManager.setFocusOrigin(origin).setFirstItemActive(); });
+                .subscribe((/**
+             * @return {?}
+             */
+            function () { return _this._keyManager.setFocusOrigin(origin).setFirstItemActive(); }));
         }
         else {
             this._keyManager.setFocusOrigin(origin).setFirstItemActive();
@@ -10366,9 +10691,9 @@ var McDropdown = /** @class */ (function () {
         hasBackdrop: [{ type: core.Input }],
         panelClass: [{ type: core.Input, args: ['class',] }],
         backdropClass: [{ type: core.Input }],
-        templateRef: [{ type: core.ViewChild, args: [core.TemplateRef,] }],
+        templateRef: [{ type: core.ViewChild, args: [core.TemplateRef, { static: false },] }],
         items: [{ type: core.ContentChildren, args: [McDropdownItem,] }],
-        lazyContent: [{ type: core.ContentChild, args: [McDropdownContent,] }],
+        lazyContent: [{ type: core.ContentChild, args: [McDropdownContent, { static: false },] }],
         closed: [{ type: core.Output }]
     };
     return McDropdown;
@@ -10376,7 +10701,7 @@ var McDropdown = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that determines the scroll handling while the dropdown is open.
@@ -10389,7 +10714,10 @@ var MC_DROPDOWN_SCROLL_STRATEGY = new core.InjectionToken('mc-dropdown-scroll-st
  * @return {?}
  */
 function MC_DROPDOWN_SCROLL_STRATEGY_FACTORY(overlay$$1) {
-    return function () { return overlay$$1.scrollStrategies.reposition(); };
+    return (/**
+     * @return {?}
+     */
+    function () { return overlay$$1.scrollStrategies.reposition(); });
 }
 /**
  * \@docs-private
@@ -10429,7 +10757,10 @@ var McDropdownTrigger = /** @class */ (function () {
          * Handles touch start events on the trigger.
          * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
          */
-        this._handleTouchStart = function () { return _this._openedBy = 'touch'; };
+        this._handleTouchStart = (/**
+         * @return {?}
+         */
+        function () { return _this._openedBy = 'touch'; });
         // Tracking input type is necessary so it's possible to only auto-focus
         // the first item of the list when the dropdown is opened via the keyboard
         this._openedBy = null;
@@ -10483,13 +10814,17 @@ var McDropdownTrigger = /** @class */ (function () {
             this._dropdown = dropdown;
             this._closeSubscription.unsubscribe();
             if (dropdown) {
-                this._closeSubscription = dropdown.closed.asObservable().subscribe(function (reason) {
+                this._closeSubscription = dropdown.closed.asObservable().subscribe((/**
+                 * @param {?} reason
+                 * @return {?}
+                 */
+                function (reason) {
                     _this._destroy();
                     // If a click closed the dropdown, we should close the entire chain of nested dropdowns.
                     if ((reason === 'click' || reason === 'tab') && _this._parent) {
                         _this._parent.closed.emit(reason);
                     }
-                });
+                }));
             }
         },
         enumerable: true,
@@ -10583,7 +10918,10 @@ var McDropdownTrigger = /** @class */ (function () {
         if (this.dropdown.lazyContent) {
             this.dropdown.lazyContent.attach(this.data);
         }
-        this._closeSubscription = this._closingActions().subscribe(function () { return _this.close(); });
+        this._closeSubscription = this._closingActions().subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.close(); }));
         this._init();
         if (this.dropdown instanceof McDropdown) {
             this.dropdown._startAnimation();
@@ -10649,13 +10987,23 @@ var McDropdownTrigger = /** @class */ (function () {
             if (dropdown.lazyContent) {
                 // Wait for the exit animation to finish before detaching the content.
                 dropdown._animationDone
-                    .pipe(operators.filter(function (event) { return event.toState === 'void'; }), operators.take(1), 
+                    .pipe(operators.filter((/**
+                 * @param {?} event
+                 * @return {?}
+                 */
+                function (event) { return event.toState === 'void'; })), operators.take(1), 
                 // Interrupt if the content got re-attached.
                 operators.takeUntil(dropdown.lazyContent._attached))
-                    .subscribe(function () { return (/** @type {?} */ (dropdown.lazyContent)).detach(); }, undefined, function () {
+                    .subscribe((/**
+                 * @return {?}
+                 */
+                function () { return (/** @type {?} */ (dropdown.lazyContent)).detach(); }), undefined, (/**
+                 * @return {?}
+                 */
+                function () {
                     // No matter whether the content got re-attached, reset the dropdown.
                     _this._reset();
-                });
+                }));
             }
             else {
                 this._reset();
@@ -10842,13 +11190,17 @@ var McDropdownTrigger = /** @class */ (function () {
     function (position) {
         var _this = this;
         if (this.dropdown.setPositionClasses) {
-            position.positionChanges.subscribe(function (change) {
+            position.positionChanges.subscribe((/**
+             * @param {?} change
+             * @return {?}
+             */
+            function (change) {
                 /** @type {?} */
                 var posX = change.connectionPair.overlayX === 'start' ? 'after' : 'before';
                 /** @type {?} */
                 var posY = change.connectionPair.overlayY === 'top' ? 'below' : 'above';
                 (/** @type {?} */ (_this.dropdown.setPositionClasses))(posX, posY);
-            });
+            }));
         }
     };
     /**
@@ -10950,7 +11302,14 @@ var McDropdownTrigger = /** @class */ (function () {
         /** @type {?} */
         var parentClose = this._parent ? this._parent.closed : rxjs.of();
         /** @type {?} */
-        var hover = this._parent ? this._parent._hovered().pipe(operators.filter(function (active) { return active !== _this._dropdownItemInstance; }), operators.filter(function () { return _this._opened; })) : rxjs.of();
+        var hover = this._parent ? this._parent._hovered().pipe(operators.filter((/**
+         * @param {?} active
+         * @return {?}
+         */
+        function (active) { return active !== _this._dropdownItemInstance; })), operators.filter((/**
+         * @return {?}
+         */
+        function () { return _this._opened; }))) : rxjs.of();
         return rxjs.merge(backdrop, parentClose, hover, detachments);
     };
     /** Handles mouse presses on the trigger. */
@@ -11045,8 +11404,15 @@ var McDropdownTrigger = /** @class */ (function () {
             // Since we might have multiple competing triggers for the same dropdown (e.g. a nested dropdown
             // with different data and triggers), we have to delay it by a tick to ensure that
             // it won't be closed immediately after it is opened.
-            .pipe(operators.filter(function (active) { return active === _this._dropdownItemInstance && !active.disabled; }), operators.delay(0, rxjs.asapScheduler))
-            .subscribe(function () {
+            .pipe(operators.filter((/**
+         * @param {?} active
+         * @return {?}
+         */
+        function (active) { return active === _this._dropdownItemInstance && !active.disabled; })), operators.delay(0, rxjs.asapScheduler))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._openedBy = 'mouse';
             // If the same dropdown is used between multiple triggers, it might still be animating
             // while the new trigger tries to re-open it. Wait for the animation to finish
@@ -11056,12 +11422,15 @@ var McDropdownTrigger = /** @class */ (function () {
                 // 'changed after checked' errors in some cases. See #12194.
                 _this.dropdown._animationDone
                     .pipe(operators.take(1), operators.delay(0, rxjs.asapScheduler), operators.takeUntil(_this._parent._hovered()))
-                    .subscribe(function () { return _this.open(); });
+                    .subscribe((/**
+                 * @return {?}
+                 */
+                function () { return _this.open(); }));
             }
             else {
                 _this.open();
             }
-        });
+        }));
     };
     /** Gets the portal that should be attached to the overlay. */
     /**
@@ -11118,7 +11487,7 @@ var McDropdownTrigger = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McDropdownModule = /** @class */ (function () {
     function McDropdownModule() {
@@ -11140,7 +11509,7 @@ var McDropdownModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McContentComponent = /** @class */ (function () {
     function McContentComponent() {
@@ -11163,7 +11532,7 @@ var McContentComponent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McFooterComponent = /** @class */ (function () {
     function McFooterComponent() {
@@ -11186,7 +11555,7 @@ var McFooterComponent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McHeaderComponent = /** @class */ (function () {
     function McHeaderComponent() {
@@ -11209,7 +11578,7 @@ var McHeaderComponent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McLayoutComponent = /** @class */ (function () {
     function McLayoutComponent() {
@@ -11234,7 +11603,7 @@ var McLayoutComponent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSidebarComponent = /** @class */ (function () {
     function McSidebarComponent(mcLayoutComponent) {
@@ -11353,7 +11722,7 @@ var McSidebarComponent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McLayoutModule = /** @class */ (function () {
     function McLayoutModule() {
@@ -11382,7 +11751,7 @@ var McLayoutModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Component for list-options of selection-list. Each list-option can automatically
@@ -11460,12 +11829,15 @@ var McListOption = /** @class */ (function () {
             // that the form control value is not being overwritten.
             /** @type {?} */
             var wasSelected_1 = this._selected;
-            Promise.resolve().then(function () {
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () {
                 if (_this._selected || wasSelected_1) {
                     _this.selected = true;
                     _this._changeDetector.markForCheck();
                 }
-            });
+            }));
         }
     };
     /**
@@ -11479,7 +11851,10 @@ var McListOption = /** @class */ (function () {
         if (this.selected) {
             // We have to delay this until the next tick in order
             // to avoid changed after checked errors.
-            Promise.resolve().then(function () { return _this.selected = false; });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () { return _this.selected = false; }));
         }
         this.listSelection.removeOptionFromList(this);
     };
@@ -11608,11 +11983,14 @@ var McListOption = /** @class */ (function () {
     McListOption.ctorParameters = function () { return [
         { type: core.ElementRef },
         { type: core.ChangeDetectorRef },
-        { type: McListSelection, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McListSelection; }),] }] }
+        { type: McListSelection, decorators: [{ type: core.Inject, args: [core.forwardRef((/**
+                         * @return {?}
+                         */
+                        function () { return McListSelection; })),] }] }
     ]; };
     McListOption.propDecorators = {
         lines: [{ type: core.ContentChildren, args: [McLine,] }],
-        text: [{ type: core.ViewChild, args: ['text',] }],
+        text: [{ type: core.ViewChild, args: ['text', { static: false },] }],
         checkboxPosition: [{ type: core.Input }],
         value: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
@@ -11623,7 +12001,10 @@ var McListOption = /** @class */ (function () {
 /** @type {?} */
 var MC_SELECTION_LIST_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McListSelection; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McListSelection; })),
     multi: true
 };
 var McListSelectionChange = /** @class */ (function () {
@@ -11652,9 +12033,16 @@ var McListSelection = /** @class */ (function (_super) {
         _this.modelChanges = rxjs.Subscription.EMPTY;
         // View to model callback that should be called if the list or its options lost focus.
         // tslint:disable-next-line:no-empty
-        _this.onTouched = function () { };
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         // View to model callback that should be called whenever the selected options change.
-        _this.onChange = function (_) { };
+        _this.onChange = (/**
+         * @param {?} _
+         * @return {?}
+         */
+        function (_) { });
         _this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
         _this.multiple = multiple === null ? true : toBoolean(multiple);
         _this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
@@ -11679,7 +12067,11 @@ var McListSelection = /** @class */ (function (_super) {
             this.tempValues = null;
         }
         // Sync external changes to the model back to the options.
-        this.modelChanges = (/** @type {?} */ (this.selectedOptions.onChange)).subscribe(function (event) {
+        this.modelChanges = (/** @type {?} */ (this.selectedOptions.onChange)).subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             for (var _i = 0, _a = event.added; _i < _a.length; _i++) {
                 var item = _a[_i];
                 item.selected = true;
@@ -11688,7 +12080,7 @@ var McListSelection = /** @class */ (function (_super) {
                 var item = _c[_b];
                 item.selected = false;
             }
-        });
+        }));
         this.updateScrollSize();
     };
     /**
@@ -11716,7 +12108,11 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.options.forEach(function (option) { return option.setSelected(true); });
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.setSelected(true); }));
         this.reportValueChange();
     };
     /**
@@ -11726,7 +12122,11 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.options.forEach(function (option) { return option.setSelected(false); });
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.setSelected(false); }));
         this.reportValueChange();
     };
     /**
@@ -11767,18 +12167,28 @@ var McListSelection = /** @class */ (function (_super) {
             /** @type {?} */
             var activeIndex_1 = this.keyManager.activeItemIndex;
             if (previousIndex_1 < activeIndex_1) {
-                this.options.forEach(function (item, index) {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (item, index) {
                     if (index >= previousIndex_1 && index <= activeIndex_1) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
             else {
-                this.options.forEach(function (item, index) {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (item, index) {
                     if (index >= activeIndex_1 && index <= previousIndex_1) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
         }
         else if (withCtrl) {
@@ -11789,7 +12199,11 @@ var McListSelection = /** @class */ (function (_super) {
         }
         else {
             if (this.autoSelect) {
-                this.options.forEach(function (item) { return item.setSelected(false); });
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @return {?}
+                 */
+                function (item) { return item.setSelected(false); }));
                 option.setSelected(true);
             }
         }
@@ -11860,7 +12274,11 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function (isDisabled) {
         if (this.options) {
-            this.options.forEach(function (option) { return option.disabled = isDisabled; });
+            this.options.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.disabled = isDisabled; }));
         }
     };
     /**
@@ -11870,7 +12288,15 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        return this.options.filter(function (option) { return option.selected; }).map(function (option) { return option.value; });
+        return this.options.filter((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.selected; })).map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.value; }));
     };
     // Toggles the selected state of the currently focused option.
     // Toggles the selected state of the currently focused option.
@@ -12028,7 +12454,11 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (value) {
-        return this.options.find(function (option) { return option.value === value; });
+        return this.options.find((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.value === value; }));
     };
     // Sets the selected options based on the specified values.
     // Sets the selected options based on the specified values.
@@ -12046,11 +12476,23 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function (values) {
         var _this = this;
-        this.options.forEach(function (option) { return option.setSelected(false); });
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.setSelected(false); }));
         values
-            .map(function (value) { return _this.getOptionByValue(value); })
+            .map((/**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { return _this.getOptionByValue(value); }))
             .filter(Boolean)
-            .forEach(function (option) { return (/** @type {?} */ (option)).setSelected(true); });
+            .forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return (/** @type {?} */ (option)).setSelected(true); }));
     };
     /**
      * Utility to ensure all indexes are valid.
@@ -12128,7 +12570,7 @@ var McListSelection = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McListBase = /** @class */ (function () {
     function McListBase() {
@@ -12244,7 +12686,7 @@ var McListItem = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McListModule = /** @class */ (function () {
     function McListModule() {
@@ -12277,7 +12719,7 @@ var McListModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McLinkBase = /** @class */ (function () {
     function McLinkBase(_elementRef) {
@@ -12378,7 +12820,7 @@ var McLink = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McLinkModule = /** @class */ (function () {
     function McLinkModule() {
@@ -12398,7 +12840,7 @@ var McLinkModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McModalControlService = /** @class */ (function () {
     function McModalControlService(parentService) {
@@ -12466,9 +12908,15 @@ var McModalControlService = /** @class */ (function () {
         var _this = this;
         if (!this.hasRegistered(modalRef)) {
             /** @type {?} */
-            var afterOpenSubscription = modalRef.afterOpen.subscribe(function () { return _this.openModals.push(modalRef); });
+            var afterOpenSubscription = modalRef.afterOpen.subscribe((/**
+             * @return {?}
+             */
+            function () { return _this.openModals.push(modalRef); }));
             /** @type {?} */
-            var afterCloseSubscription = modalRef.afterClose.subscribe(function () { return _this.removeOpenModal(modalRef); });
+            var afterCloseSubscription = modalRef.afterClose.subscribe((/**
+             * @return {?}
+             */
+            function () { return _this.removeOpenModal(modalRef); }));
             this.registeredMetaMap.set(modalRef, { modalRef: modalRef, afterOpenSubscription: afterOpenSubscription, afterCloseSubscription: afterCloseSubscription });
         }
     };
@@ -12532,7 +12980,7 @@ var McModalControlService = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * API class that public to users to handle the modal instance.
@@ -12554,7 +13002,7 @@ McModalRef = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ModalUtil = /** @class */ (function () {
     function ModalUtil(document) {
@@ -12579,9 +13027,13 @@ var ModalUtil = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.document.addEventListener('click', function (event) {
+        this.document.addEventListener('click', (/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             _this.lastPosition = { x: event.clientX, y: event.clientY };
-        });
+        }));
     };
     return ModalUtil;
 }());
@@ -12589,7 +13041,7 @@ var ModalUtil$1 = new ModalUtil(document);
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Duration when perform animations (ms)
 /** @type {?} */
@@ -12631,7 +13083,10 @@ var McModalComponent = /** @class */ (function (_super) {
         _this.mcOnCancel = new core.EventEmitter();
         // The origin point that animation based on
         _this.transformOrigin = '0px 0px 0px';
-        _this.mcGetContainer = function () { return _this.overlay.create(); };
+        _this.mcGetContainer = (/**
+         * @return {?}
+         */
+        function () { return _this.overlay.create(); });
         return _this;
     }
     Object.defineProperty(McModalComponent.prototype, "mcVisible", {
@@ -13032,14 +13487,22 @@ var McModalComponent = /** @class */ (function (_super) {
             var result = trigger(this.getContentComponent());
             // Users can return "false" to prevent closing by default
             /** @type {?} */
-            var caseClose_1 = function (doClose) { return (doClose !== false) && _this.close((/** @type {?} */ (doClose))); };
+            var caseClose_1 = (/**
+             * @param {?} doClose
+             * @return {?}
+             */
+            function (doClose) { return (doClose !== false) && _this.close((/** @type {?} */ (doClose))); });
             if (isPromise(result)) {
                 this[loadingKey] = true;
                 /** @type {?} */
-                var handleThen = function (doClose) {
+                var handleThen = (/**
+                 * @param {?} doClose
+                 * @return {?}
+                 */
+                function (doClose) {
                     _this[loadingKey] = false;
                     caseClose_1(doClose);
-                };
+                });
                 ((/** @type {?} */ (result))).then(handleThen).catch(handleThen);
             }
             else {
@@ -13135,7 +13598,10 @@ var McModalComponent = /** @class */ (function (_super) {
         return Promise
             .resolve(animation && this.animateTo(visible))
             // Emit open/close event after animations over
-            .then(function () {
+            .then((/**
+         * @return {?}
+         */
+        function () {
             if (visible) {
                 _this.mcAfterOpen.emit();
             }
@@ -13144,7 +13610,7 @@ var McModalComponent = /** @class */ (function (_super) {
                 // Show/hide scrollbar when animation is over
                 _this.changeBodyOverflow();
             }
-        });
+        }));
     };
     // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
     // AoT
@@ -13200,7 +13666,13 @@ var McModalComponent = /** @class */ (function (_super) {
         var result = this.getButtonCallableProp(button, 'onClick');
         if (isPromise(result)) {
             button.loading = true;
-            ((/** @type {?} */ (result))).then(function () { return button.loading = false; }).catch(function () { return button.loading = false; });
+            ((/** @type {?} */ (result))).then((/**
+             * @return {?}
+             */
+            function () { return button.loading = false; })).catch((/**
+             * @return {?}
+             */
+            function () { return button.loading = false; }));
         }
     };
     // Change mcVisible from inside
@@ -13272,14 +13744,24 @@ var McModalComponent = /** @class */ (function (_super) {
         if (isVisible) {
             // [NOTE] Using timeout due to the document.click event is fired later than visible change,
             // so if not postponed to next event-loop, we can't get the lastest click position
-            window.setTimeout(function () { return _this.updateTransformOrigin(); });
+            window.setTimeout((/**
+             * @return {?}
+             */
+            function () { return _this.updateTransformOrigin(); }));
         }
         this.changeAnimationState(isVisible ? 'enter' : 'leave');
         // Return when animation is over
-        return new Promise(function (resolve) { return window.setTimeout(function () {
+        return new Promise((/**
+         * @param {?} resolve
+         * @return {?}
+         */
+        function (resolve) { return window.setTimeout((/**
+         * @return {?}
+         */
+        function () {
             _this.changeAnimationState(null);
             resolve();
-        }, MODAL_ANIMATE_DURATION); });
+        }), MODAL_ANIMATE_DURATION); }));
     };
     /**
      * @private
@@ -13292,7 +13774,11 @@ var McModalComponent = /** @class */ (function (_super) {
      * @return {?}
      */
     function (buttons) {
-        return buttons.map(function (button) {
+        return buttons.map((/**
+         * @param {?} button
+         * @return {?}
+         */
+        function (button) {
             return __assign({
                 type: 'default',
                 size: 'default',
@@ -13301,7 +13787,7 @@ var McModalComponent = /** @class */ (function (_super) {
                 loading: false,
                 disabled: false
             }, button);
-        });
+        }));
     };
     /**
      * Create a component dynamically but not attach to any View
@@ -13442,9 +13928,9 @@ var McModalComponent = /** @class */ (function (_super) {
         mcCancelText: [{ type: core.Input }],
         mcCancelLoading: [{ type: core.Input }],
         mcOnCancel: [{ type: core.Input }, { type: core.Output }],
-        modalContainer: [{ type: core.ViewChild, args: ['modalContainer',] }],
-        bodyContainer: [{ type: core.ViewChild, args: ['bodyContainer', { read: core.ViewContainerRef },] }],
-        autoFocusButtonOk: [{ type: core.ViewChild, args: ['autoFocusButtonOk', { read: core.ElementRef },] }],
+        modalContainer: [{ type: core.ViewChild, args: ['modalContainer', { static: false },] }],
+        bodyContainer: [{ type: core.ViewChild, args: ['bodyContainer', { read: core.ViewContainerRef, static: false },] }],
+        autoFocusButtonOk: [{ type: core.ViewChild, args: ['autoFocusButtonOk', { read: core.ElementRef, static: false },] }],
         mcGetContainer: [{ type: core.Input }]
     };
     return McModalComponent;
@@ -13461,7 +13947,7 @@ function isPromise(obj) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var CssUnitPipe = /** @class */ (function () {
     function CssUnitPipe() {
@@ -13492,15 +13978,15 @@ var CssUnitPipe = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // A builder used for managing service creating modals
 var 
 // A builder used for managing service creating modals
 ModalBuilderForService = /** @class */ (function () {
     function ModalBuilderForService(overlay$$1, options) {
-        if (options === void 0) { options = {}; }
         var _this = this;
+        if (options === void 0) { options = {}; }
         this.overlay = overlay$$1;
         this.createModal();
         if (!('mcGetContainer' in options)) {
@@ -13508,13 +13994,23 @@ ModalBuilderForService = /** @class */ (function () {
         }
         this.changeProps(options);
         (/** @type {?} */ (this.modalRef)).instance.open();
-        (/** @type {?} */ (this.modalRef)).instance.mcAfterClose.subscribe(function () { return _this.destroyModal(); });
+        (/** @type {?} */ (this.modalRef)).instance.mcAfterClose.subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.destroyModal(); }));
         this.overlayRef.keydownEvents()
             // @ts-ignore
-            .pipe(operators.filter(function (event) {
+            .pipe(operators.filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             return event.keyCode === keycodes.ESCAPE && options.mcCloseByESC;
-        }))
-            .subscribe(function () { return (/** @type {?} */ (_this.modalRef)).instance.close(); });
+        })))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return (/** @type {?} */ (_this.modalRef)).instance.close(); }));
     }
     /**
      * @return {?}
@@ -13627,7 +14123,10 @@ var McModalService = /** @class */ (function () {
         if (typeof options.mcOnCancel !== 'function') {
             // Leave a empty function to close this modal by default
             // tslint:disable-next-line
-            options.mcOnCancel = function () { };
+            options.mcOnCancel = (/**
+             * @return {?}
+             */
+            function () { });
         }
         if (!('mcCloseByESC' in options)) {
             options.mcCloseByESC = true;
@@ -13660,7 +14159,10 @@ var McModalService = /** @class */ (function () {
         if (typeof options.mcOnOk !== 'function') {
             // Leave a empty function to close this modal by default
             // tslint:disable-next-line
-            options.mcOnOk = function () { };
+            options.mcOnOk = (/**
+             * @return {?}
+             */
+            function () { });
         }
         options.mcModalType = 'confirm';
         options.mcClassName = "mc-confirm mc-confirm-" + confirmType + " " + (options.mcClassName || '');
@@ -13731,7 +14233,7 @@ var McModalService = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McModalModule = /** @class */ (function () {
     function McModalModule() {
@@ -13750,7 +14252,7 @@ var McModalModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
@@ -13955,11 +14457,15 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this._subscription.add(this._focusMonitor$.subscribe(function (origin) {
+        this._subscription.add(this._focusMonitor$.subscribe((/**
+         * @param {?} origin
+         * @return {?}
+         */
+        function (origin) {
             if (origin === null) {
                 _this.forceCloseDropdown();
             }
-        }));
+        })));
     };
     /**
      * @private
@@ -13994,9 +14500,13 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this._dropdownElements.forEach(function (el) {
+        this._dropdownElements.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        function (el) {
             _this._focusMonitor.monitor(el, true);
-        });
+        }));
     };
     /**
      * @private
@@ -14008,9 +14518,13 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this._dropdownElements.forEach(function (el) {
+        this._dropdownElements.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        function (el) {
             _this._focusMonitor.stopMonitoring(el);
-        });
+        }));
     };
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
@@ -14028,13 +14542,25 @@ var McNavbarItem = /** @class */ (function (_super) {
         var _this = this;
         /** @type {?} */
         var events = this.elementRef.nativeElement.eventListeners('click');
-        events.forEach(function (event) { return _this.elementRef.nativeElement.removeEventListener('click', event); });
-        this.elementRef.nativeElement.addEventListener('click', function (event) {
+        events.forEach((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) { return _this.elementRef.nativeElement.removeEventListener('click', event); }));
+        this.elementRef.nativeElement.addEventListener('click', (/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             if (_this.elementRef.nativeElement.hasAttribute('disabled')) {
                 event.stopImmediatePropagation();
             }
-        }, true);
-        events.forEach(function (event) { return _this.elementRef.nativeElement.addEventListener('click', event); });
+        }), true);
+        events.forEach((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) { return _this.elementRef.nativeElement.addEventListener('click', event); }));
     };
     McNavbarItem.decorators = [
         { type: core.Component, args: [{
@@ -14060,8 +14586,8 @@ var McNavbarItem = /** @class */ (function (_super) {
         tabIndex: [{ type: core.Input }],
         dropdownItems: [{ type: core.Input }],
         collapsedTitle: [{ type: core.Input }],
-        dropdownItemTmpl: [{ type: core.ContentChild, args: ['dropdownItemTmpl', { read: core.TemplateRef },] }],
-        dropdownContent: [{ type: core.ViewChild, args: ['dropdownContent', { read: core.ElementRef },] }]
+        dropdownItemTmpl: [{ type: core.ContentChild, args: ['dropdownItemTmpl', { read: core.TemplateRef, static: false },] }],
+        dropdownContent: [{ type: core.ViewChild, args: ['dropdownContent', { read: core.ElementRef, static: false },] }]
     };
     return McNavbarItem;
 }(_McNavbarMixinBase));
@@ -14169,7 +14695,11 @@ var CachedItemWidth = /** @class */ (function () {
         if (this.itemsForCollapse.length > 0) {
             this.updateTitle(collapsed);
         }
-        this.itemsForCollapse.forEach(function (item) { return item.processCollapsed(collapsed); });
+        this.itemsForCollapse.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return item.processCollapsed(collapsed); }));
     };
     /**
      * @private
@@ -14181,7 +14711,12 @@ var CachedItemWidth = /** @class */ (function () {
      */
     function () {
         this._collapsedItemsWidth = this.itemsForCollapse
-            .reduce(function (acc, item) { return acc + item.width; }, 0);
+            .reduce((/**
+         * @param {?} acc
+         * @param {?} item
+         * @return {?}
+         */
+        function (acc, item) { return acc + item.width; }), 0);
     };
     /**
      * @private
@@ -14304,7 +14839,10 @@ var McNavbar = /** @class */ (function () {
         var _this = this;
         // Note: this wait is required for loading and rendering fonts for icons;
         // unfortunately we cannot control font rendering
-        setTimeout(function () { return _this.updateCollapsed(); }, 0);
+        setTimeout((/**
+         * @return {?}
+         */
+        function () { return _this.updateCollapsed(); }), 0);
     };
     /**
      * @return {?}
@@ -14325,7 +14863,12 @@ var McNavbar = /** @class */ (function () {
      */
     function () {
         this._totalItemsWidths = this.itemsWidths
-            .reduce(function (acc, item) { return acc + item.width; }, 0);
+            .reduce((/**
+         * @param {?} acc
+         * @param {?} item
+         * @return {?}
+         */
+        function (acc, item) { return acc + item.width; }), 0);
     };
     /**
      * @private
@@ -14358,11 +14901,19 @@ var McNavbar = /** @class */ (function () {
         var _this = this;
         /** @type {?} */
         var allItemsSelector = this.secondLevelElements
-            .map(function (e) { return _this.firstLevelElement + ">" + e; });
+            .map((/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return _this.firstLevelElement + ">" + e; }));
         /** @type {?} */
         var allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
         this._itemsWidths = allItems
-            .map(function (el) { return new CachedItemWidth(el, _this.getOuterElementWidth(el), _this.getItemsForCollapse(el)); });
+            .map((/**
+         * @param {?} el
+         * @return {?}
+         */
+        function (el) { return new CachedItemWidth(el, _this.getOuterElementWidth(el), _this.getItemsForCollapse(el)); }));
     };
     /**
      * @private
@@ -14381,7 +14932,11 @@ var McNavbar = /** @class */ (function () {
             return [];
         }
         return Array.from(element.querySelectorAll(MC_NAVBAR_TITLE))
-            .map(function (el) { return new CollapsibleItem((/** @type {?} */ (el)), el.getBoundingClientRect().width); });
+            .map((/**
+         * @param {?} el
+         * @return {?}
+         */
+        function (el) { return new CollapsibleItem((/** @type {?} */ (el)), el.getBoundingClientRect().width); }));
     };
     McNavbar.decorators = [
         { type: core.Component, args: [{
@@ -14401,7 +14956,7 @@ var McNavbar = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McNavbarModule = /** @class */ (function () {
     function McNavbarModule() {
@@ -14437,7 +14992,7 @@ var McNavbarModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var mcPopoverAnimations = {
@@ -14459,7 +15014,7 @@ var mcPopoverAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McPopoverComponent = /** @class */ (function () {
     function McPopoverComponent(changeDetectorRef, componentElementRef) {
@@ -14779,7 +15334,10 @@ var MC_POPOVER_SCROLL_STRATEGY = new core.InjectionToken('mc-popover-scroll-stra
  * @return {?}
  */
 function mcPopoverScrollStrategyFactory(overlay$$1) {
-    return function () { return overlay$$1.scrollStrategies.reposition({ scrollThrottle: 20 }); };
+    return (/**
+     * @return {?}
+     */
+    function () { return overlay$$1.scrollStrategies.reposition({ scrollThrottle: 20 }); });
 }
 /**
  * \@docs-private
@@ -15093,16 +15651,23 @@ var McPopover = /** @class */ (function () {
         var scrollableAncestors = this.scrollDispatcher
             .getAncestorScrollContainers(this.elementRef);
         strategy.withScrollableContainers(scrollableAncestors);
-        strategy.positionChanges.pipe(operators.takeUntil(this.destroyed)).subscribe(function (change) {
+        strategy.positionChanges.pipe(operators.takeUntil(this.destroyed)).subscribe((/**
+         * @param {?} change
+         * @return {?}
+         */
+        function (change) {
             if (_this.popover) {
                 _this.onPositionChange(change);
                 if (change.scrollableViewProperties.isOverlayClipped && _this.popover.mcVisible) {
                     // After position changes occur and the overlay is clipped by
                     // a parent scrollable then close the popover.
-                    _this.ngZone.run(function () { return _this.hide(); });
+                    _this.ngZone.run((/**
+                     * @return {?}
+                     */
+                    function () { return _this.hide(); }));
                 }
             }
-        });
+        }));
         this.overlayRef = this.overlay.create({
             direction: this.direction,
             positionStrategy: strategy,
@@ -15112,7 +15677,10 @@ var McPopover = /** @class */ (function () {
         this.updatePosition();
         this.overlayRef.detachments()
             .pipe(operators.takeUntil(this.destroyed))
-            .subscribe(function () { return _this.detach(); });
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.detach(); }));
         return this.overlayRef;
     };
     /**
@@ -15139,7 +15707,11 @@ var McPopover = /** @class */ (function () {
         var _this = this;
         /** @type {?} */
         var updatedPlacement = this.mcPlacement;
-        Object.keys(this.availablePositions).some(function (key) {
+        Object.keys(this.availablePositions).some((/**
+         * @param {?} key
+         * @return {?}
+         */
+        function (key) {
             if ($event.connectionPair.originX === _this.availablePositions[key].originX &&
                 $event.connectionPair.originY === _this.availablePositions[key].originY &&
                 $event.connectionPair.overlayX === _this.availablePositions[key].overlayX &&
@@ -15148,7 +15720,7 @@ var McPopover = /** @class */ (function () {
                 return true;
             }
             return false;
-        });
+        }));
         this.updateCompValue('mcPlacement', updatedPlacement);
         if (this.popover) {
             this.updateCompValue('classList', this.classList);
@@ -15239,9 +15811,14 @@ var McPopover = /** @class */ (function () {
         if (this.overlayRef) {
             this.overlayRef.dispose();
         }
-        this.manualListeners.forEach(function (listener, event) {
+        this.manualListeners.forEach((/**
+         * @param {?} listener
+         * @param {?} event
+         * @return {?}
+         */
+        function (listener, event) {
             return _this.elementRef.nativeElement.removeEventListener(event, listener);
-        });
+        }));
         this.manualListeners.clear();
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
@@ -15278,15 +15855,37 @@ var McPopover = /** @class */ (function () {
         var _this = this;
         if (this.mcTrigger === 'hover') {
             this.manualListeners
-                .set('mouseenter', function () { return _this.show(); })
-                .set('mouseleave', function () { return _this.hide(); })
-                .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
+                .set('mouseenter', (/**
+             * @return {?}
+             */
+            function () { return _this.show(); }))
+                .set('mouseleave', (/**
+             * @return {?}
+             */
+            function () { return _this.hide(); }))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
         }
         if (this.mcTrigger === 'focus') {
             this.manualListeners
-                .set('focus', function () { return _this.show(); })
-                .set('blur', function () { return _this.hide(); })
-                .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
+                .set('focus', (/**
+             * @return {?}
+             */
+            function () { return _this.show(); }))
+                .set('blur', (/**
+             * @return {?}
+             */
+            function () { return _this.hide(); }))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
         }
     };
     /**
@@ -15318,16 +15917,27 @@ var McPopover = /** @class */ (function () {
                     'mcContent',
                     'mcFooter'
                 ];
-                properties.forEach(function (property) { return _this.updateCompValue(property, _this[property]); });
+                properties.forEach((/**
+                 * @param {?} property
+                 * @return {?}
+                 */
+                function (property) { return _this.updateCompValue(property, _this[property]); }));
                 this.popover.mcVisibleChange.pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
-                    .subscribe(function (data) {
+                    .subscribe((/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                function (data) {
                     _this.mcVisible = data;
                     _this.mcVisibleChange.emit(data);
                     _this.isPopoverOpen = data;
-                });
+                }));
                 this.popover.afterHidden()
                     .pipe(operators.takeUntil(this.destroyed))
-                    .subscribe(function () { return _this.detach(); });
+                    .subscribe((/**
+                 * @return {?}
+                 */
+                function () { return _this.detach(); }));
             }
             this.updatePosition();
             this.popover.show();
@@ -15374,9 +15984,12 @@ var McPopover = /** @class */ (function () {
         // FIXME: Необходимо в некоторых моментах форсировать позиционировать только после рендеринга всего контента
         //
         if (reapplyPosition) {
-            setTimeout(function () {
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
                 position.reapplyLastPosition();
-            });
+            }));
         }
     };
     /**
@@ -15568,7 +16181,7 @@ var McPopover = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McPopoverModule = /** @class */ (function () {
     function McPopoverModule() {
@@ -15587,7 +16200,7 @@ var McPopoverModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var idIterator = 0;
@@ -15651,7 +16264,7 @@ var McProgressBar = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McProgressBarModule = /** @class */ (function () {
     function McProgressBarModule() {
@@ -15675,7 +16288,7 @@ var McProgressBarModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var idIterator$1 = 0;
@@ -15751,7 +16364,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McProgressSpinnerModule = /** @class */ (function () {
     function McProgressSpinnerModule() {
@@ -15775,7 +16388,7 @@ var McProgressSpinnerModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Increasing integer for generating unique ids for radio components.
 /** @type {?} */
@@ -15817,7 +16430,10 @@ var _McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
  */
 var MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McRadioGroup; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McRadioGroup; })),
     multi: true
 };
 var McRadioGroup = /** @class */ (function (_super) {
@@ -15866,13 +16482,19 @@ var McRadioGroup = /** @class */ (function (_super) {
          * The method to be called in order to update ngModel
          */
         // tslint:disable-next-line
-        _this.controlValueAccessorChangeFn = function () { };
+        _this.controlValueAccessorChangeFn = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * onTouch function registered via registerOnTouch (ControlValueAccessor).
          * \@docs-private
          */
         // tslint:disable-next-line
-        _this.onTouched = function () { };
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         return _this;
     }
     Object.defineProperty(McRadioGroup.prototype, "name", {
@@ -16062,7 +16684,11 @@ var McRadioGroup = /** @class */ (function (_super) {
      */
     function () {
         if (this._radios) {
-            this._radios.forEach(function (radio) { return radio.markForCheck(); });
+            this._radios.forEach((/**
+             * @param {?} radio
+             * @return {?}
+             */
+            function (radio) { return radio.markForCheck(); }));
         }
     };
     /**
@@ -16151,9 +16777,13 @@ var McRadioGroup = /** @class */ (function (_super) {
     function () {
         var _this = this;
         if (this._radios) {
-            this._radios.forEach(function (radio) {
+            this._radios.forEach((/**
+             * @param {?} radio
+             * @return {?}
+             */
+            function (radio) {
                 radio.name = _this.name;
-            });
+            }));
         }
     };
     /** Updates the `selected` radio button from the internal _value state. */
@@ -16174,12 +16804,16 @@ var McRadioGroup = /** @class */ (function (_super) {
         var isAlreadySelected = this._selected !== null && this._selected.value === this._value;
         if (this._radios != null && !isAlreadySelected) {
             this._selected = null;
-            this._radios.forEach(function (radio) {
+            this._radios.forEach((/**
+             * @param {?} radio
+             * @return {?}
+             */
+            function (radio) {
                 radio.checked = _this.value === radio.value;
                 if (radio.checked) {
                     _this._selected = radio;
                 }
-            });
+            }));
         }
     };
     McRadioGroup.decorators = [
@@ -16206,7 +16840,10 @@ var McRadioGroup = /** @class */ (function (_super) {
         disabled: [{ type: core.Input }],
         required: [{ type: core.Input }],
         change: [{ type: core.Output }],
-        _radios: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McRadioButton; }), { descendants: true },] }]
+        _radios: [{ type: core.ContentChildren, args: [core.forwardRef((/**
+                     * @return {?}
+                     */
+                    function () { return McRadioButton; })), { descendants: true },] }]
     };
     return McRadioGroup;
 }(_McRadioGroupMixinBase));
@@ -16258,14 +16895,22 @@ var McRadioButton = /** @class */ (function (_super) {
          * Unregister function for _radioDispatcher
          */
         // tslint:disable-next-line
-        _this.removeUniqueSelectionListener = function () { };
+        _this.removeUniqueSelectionListener = (/**
+         * @return {?}
+         */
+        function () { });
         _this.radioGroup = radioGroup;
         _this.removeUniqueSelectionListener =
-            _radioDispatcher.listen(function (id, name) {
+            _radioDispatcher.listen((/**
+             * @param {?} id
+             * @param {?} name
+             * @return {?}
+             */
+            function (id, name) {
                 if (id !== _this.id && name === _this.name) {
                     _this.checked = false;
                 }
-            });
+            }));
         return _this;
     }
     Object.defineProperty(McRadioButton.prototype, "checked", {
@@ -16553,7 +17198,7 @@ var McRadioButton = /** @class */ (function (_super) {
         disabled: [{ type: core.Input }],
         required: [{ type: core.Input }],
         labelPosition: [{ type: core.Input }],
-        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
+        _inputElement: [{ type: core.ViewChild, args: ['input', { static: false },] }],
         change: [{ type: core.Output }],
         isFocused: [{ type: core.Input }]
     };
@@ -16562,7 +17207,7 @@ var McRadioButton = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McRadioModule = /** @class */ (function () {
     function McRadioModule() {
@@ -16579,7 +17224,7 @@ var McRadioModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -16604,7 +17249,7 @@ var McTreeNodeDef = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -16669,7 +17314,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -16693,7 +17338,7 @@ var McTreeNodeToggle = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token used to provide the parent component to options.
@@ -16945,7 +17590,7 @@ var McTreeOption = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            // TODO(kara): Add input property alternative for node envs.
+            // TODO: Add input property alternative for node envs.
             return (this.getHostElement().textContent || '').trim();
         },
         enumerable: true,
@@ -16983,7 +17628,7 @@ var McTreeOption = /** @class */ (function (_super) {
      */
     function () {
         if (!this.disabled) {
-            this._selected = this.multiple ? !this._selected : true;
+            this._selected = !this._selected;
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
             if (this.parent.setFocusedOption) {
@@ -17054,7 +17699,7 @@ var McTreeOption = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTreeNavigationChange = /** @class */ (function () {
     function McTreeNavigationChange(source, option) {
@@ -17232,18 +17877,28 @@ var McTreeSelection = /** @class */ (function (_super) {
             /** @type {?} */
             var activeIndex_1 = this.keyManager.activeItemIndex;
             if (previousIndex_1 < activeIndex_1) {
-                this.options.forEach(function (item, index) {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (item, index) {
                     if (index >= previousIndex_1 && index <= activeIndex_1) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
             else {
-                this.options.forEach(function (item, index) {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (item, index) {
                     if (index >= activeIndex_1 && index <= previousIndex_1) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
             this.withShift = false;
         }
@@ -17256,7 +17911,11 @@ var McTreeSelection = /** @class */ (function (_super) {
         }
         else {
             if (this.autoSelect) {
-                this.options.forEach(function (item) { return item.setSelected(false); });
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @return {?}
+                 */
+                function (item) { return item.setSelected(false); }));
                 option.setSelected(true);
             }
         }
@@ -17301,17 +17960,25 @@ var McTreeSelection = /** @class */ (function (_super) {
         _super.prototype.renderNodeChanges.call(this, data, dataDiffer, viewContainer, parentData);
         /** @type {?} */
         var arrayOfInstances = [];
-        viewContainer._embeddedViews.forEach(function (view) {
+        viewContainer._embeddedViews.forEach((/**
+         * @param {?} view
+         * @return {?}
+         */
+        function (view) {
             /** @type {?} */
             var viewDef = view.def;
-            viewDef.nodes.forEach(function (node) {
+            viewDef.nodes.forEach((/**
+             * @param {?} node
+             * @return {?}
+             */
+            function (node) {
                 if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
                     /** @type {?} */
                     var nodeData = view.nodes[node.nodeIndex];
                     arrayOfInstances.push((/** @type {?} */ (nodeData.instance)));
                 }
-            });
-        });
+            }));
+        }));
         if (this.options) {
             this.options.reset(arrayOfInstances);
             this.options.notifyOnChanges();
@@ -17411,7 +18078,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] }
     ]; };
     McTreeSelection.propDecorators = {
-        nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet,] }],
+        nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet, { static: true },] }],
         options: [{ type: core.ContentChildren, args: [McTreeOption,] }],
         navigationChange: [{ type: core.Output }],
         selectionChange: [{ type: core.Output }],
@@ -17422,7 +18089,7 @@ var McTreeSelection = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_TREE_DIRECTIVES = [
@@ -17447,7 +18114,7 @@ var McTreeModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Tree flattener to convert a normal type of node to node with children & level information.
@@ -17548,14 +18215,23 @@ McTreeFlattener = /** @class */ (function () {
         if (this.isExpandable(flatNode)) {
             this.getChildren(node)
                 .pipe(operators.take(1))
-                .subscribe(function (children) {
-                children.forEach(function (child, index) {
+                .subscribe((/**
+             * @param {?} children
+             * @return {?}
+             */
+            function (children) {
+                children.forEach((/**
+                 * @param {?} child
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (child, index) {
                     /** @type {?} */
                     var childParentMap = parentMap.slice();
                     childParentMap.push(index !== children.length - 1);
                     _this.flattenNode(child, level + 1, resultNodes, childParentMap);
-                });
-            });
+                }));
+            }));
         }
         return resultNodes;
     };
@@ -17582,7 +18258,11 @@ McTreeFlattener = /** @class */ (function () {
         var _this = this;
         /** @type {?} */
         var resultNodes = [];
-        structuredData.forEach(function (node) { return _this.flattenNode(node, 0, resultNodes, []); });
+        structuredData.forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        function (node) { return _this.flattenNode(node, 0, resultNodes, []); }));
         return resultNodes;
     };
     /**
@@ -17610,7 +18290,11 @@ McTreeFlattener = /** @class */ (function () {
         /** @type {?} */
         var currentExpand = [];
         currentExpand[0] = true;
-        nodes.forEach(function (node) {
+        nodes.forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        function (node) {
             /** @type {?} */
             var expand = true;
             for (var i = 0; i <= _this.getLevel(node); i++) {
@@ -17622,7 +18306,7 @@ McTreeFlattener = /** @class */ (function () {
             if (_this.isExpandable(node)) {
                 currentExpand[_this.getLevel(node) + 1] = treeControl.isExpanded(node);
             }
-        });
+        }));
         return results;
     };
     return McTreeFlattener;
@@ -17690,10 +18374,13 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
             this.treeControl.expansionModel.changed,
             this.flattenedData
         ];
-        return rxjs.merge.apply(void 0, changes).pipe(operators.map(function () {
+        return rxjs.merge.apply(void 0, changes).pipe(operators.map((/**
+         * @return {?}
+         */
+        function () {
             _this.expandedData.next(_this.treeFlattener.expandFlattenedNodes(_this.flattenedData.value, _this.treeControl));
             return _this.expandedData.value;
-        }));
+        })));
     };
     /**
      * @return {?}
@@ -17709,7 +18396,7 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Data source for nested tree.
@@ -17760,7 +18447,10 @@ McTreeNestedDataSource = /** @class */ (function (_super) {
      */
     function (collectionViewer) {
         var _this = this;
-        return rxjs.merge.apply(void 0, [collectionViewer.viewChange, this._data]).pipe(operators.map(function () { return _this.data; }));
+        return rxjs.merge.apply(void 0, [collectionViewer.viewChange, this._data]).pipe(operators.map((/**
+         * @return {?}
+         */
+        function () { return _this.data; })));
     };
     /**
      * @return {?}
@@ -17776,7 +18466,7 @@ McTreeNestedDataSource = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Decorates the `ng-template` tags and reads out the template from it.
@@ -17797,7 +18487,7 @@ var McTabContent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Used to flag tab labels for use with the portal directive
@@ -17815,11 +18505,14 @@ var McTabLabel = /** @class */ (function (_super) {
     return McTabLabel;
 }(portal.CdkPortal));
 // TODO: workaround for https://github.com/angular/material2/issues/12760
-((/** @type {?} */ (McTabLabel))).ctorParameters = function () { return ((/** @type {?} */ (portal.CdkPortal))).ctorParameters; };
+((/** @type {?} */ (McTabLabel))).ctorParameters = (/**
+ * @return {?}
+ */
+function () { return ((/** @type {?} */ (portal.CdkPortal))).ctorParameters; });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTabBase = /** @class */ (function () {
     function McTabBase() {
@@ -17923,9 +18616,9 @@ var McTab = /** @class */ (function (_super) {
         { type: core.ViewContainerRef }
     ]; };
     McTab.propDecorators = {
-        templateLabel: [{ type: core.ContentChild, args: [McTabLabel,] }],
-        explicitContent: [{ type: core.ContentChild, args: [McTabContent, { read: core.TemplateRef },] }],
-        implicitContent: [{ type: core.ViewChild, args: [core.TemplateRef,] }],
+        templateLabel: [{ type: core.ContentChild, args: [McTabLabel, { static: false },] }],
+        explicitContent: [{ type: core.ContentChild, args: [McTabContent, { read: core.TemplateRef, static: true },] }],
+        implicitContent: [{ type: core.ViewChild, args: [core.TemplateRef, { static: true },] }],
         textLabel: [{ type: core.Input, args: ['label',] }],
         ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
         ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }]
@@ -17935,7 +18628,7 @@ var McTab = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var mcTabsAnimations = {
@@ -17965,7 +18658,7 @@ var mcTabsAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Wrapper for the contents of a tab.
@@ -18003,10 +18696,14 @@ var McTabBody = /** @class */ (function () {
          */
         this.dirChangeSubscription = rxjs.Subscription.EMPTY;
         if (this.dir && changeDetectorRef) {
-            this.dirChangeSubscription = this.dir.change.subscribe(function (direction) {
+            this.dirChangeSubscription = this.dir.change.subscribe((/**
+             * @param {?} direction
+             * @return {?}
+             */
+            function (direction) {
                 _this.computePositionAnimationState(direction);
                 changeDetectorRef.markForCheck();
-            });
+            }));
         }
     }
     Object.defineProperty(McTabBody.prototype, "position", {
@@ -18186,7 +18883,7 @@ var McTabBody = /** @class */ (function () {
         beforeCentering: [{ type: core.Output }],
         afterLeavingCenter: [{ type: core.Output }],
         onCentered: [{ type: core.Output }],
-        portalHost: [{ type: core.ViewChild, args: [portal.PortalHostDirective,] }],
+        portalHost: [{ type: core.ViewChild, args: [portal.PortalHostDirective, { static: false },] }],
         content: [{ type: core.Input, args: ['content',] }],
         origin: [{ type: core.Input }],
         animationDuration: [{ type: core.Input }]
@@ -18226,14 +18923,21 @@ var McTabBodyPortal = /** @class */ (function (_super) {
         _super.prototype.ngOnInit.call(this);
         this.centeringSub = this.host.beforeCentering
             .pipe(operators.startWith(this.host.isCenterPosition(this.host.bodyPosition)))
-            .subscribe(function (isCentering) {
+            .subscribe((/**
+         * @param {?} isCentering
+         * @return {?}
+         */
+        function (isCentering) {
             if (isCentering && !_this.hasAttached()) {
                 _this.attach(_this.host.content);
             }
-        });
-        this.leavingSub = this.host.afterLeavingCenter.subscribe(function () {
+        }));
+        this.leavingSub = this.host.afterLeavingCenter.subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.detach();
-        });
+        }));
     };
     /** Clean up centering subscription. */
     /**
@@ -18258,14 +18962,17 @@ var McTabBodyPortal = /** @class */ (function (_super) {
     McTabBodyPortal.ctorParameters = function () { return [
         { type: core.ComponentFactoryResolver },
         { type: core.ViewContainerRef },
-        { type: McTabBody, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McTabBody; }),] }] }
+        { type: McTabBody, decorators: [{ type: core.Inject, args: [core.forwardRef((/**
+                         * @return {?}
+                         */
+                        function () { return McTabBody; })),] }] }
     ]; };
     return McTabBodyPortal;
 }(portal.CdkPortalOutlet));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to McTabLabelWrapper.
 /**
@@ -18343,7 +19050,7 @@ var McTabLabelWrapper = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var VIEWPORT_THROTTLE_TIME = 150;
@@ -18563,9 +19270,12 @@ var McTabHeader = /** @class */ (function (_super) {
         /** @type {?} */
         var resize = this.viewportRuler.change(VIEWPORT_THROTTLE_TIME);
         /** @type {?} */
-        var realign = function () {
+        var realign = (/**
+         * @return {?}
+         */
+        function () {
             _this.updatePagination();
-        };
+        });
         this.keyManager = new a11y.FocusKeyManager(this.labelWrappers)
             .withHorizontalOrientation(this.getLayoutDirection())
             .withWrap();
@@ -18579,19 +19289,26 @@ var McTabHeader = /** @class */ (function (_super) {
         // the key manager if the direction has changed.
         rxjs.merge(dirChange, resize)
             .pipe(operators.takeUntil(this.destroyed))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             realign();
             _this.keyManager.withHorizontalOrientation(_this.getLayoutDirection());
-        });
+        }));
         // If there is a change in the focus key manager we need to emit the `indexFocused`
         // event in order to provide a public event that notifies about focus changes. Also we realign
         // the tabs container by scrolling the new focused tab into the visible section.
         this.keyManager.change
             .pipe(operators.takeUntil(this.destroyed))
-            .subscribe(function (newFocusIndex) {
+            .subscribe((/**
+         * @param {?} newFocusIndex
+         * @return {?}
+         */
+        function (newFocusIndex) {
             _this.indexFocused.emit(newFocusIndex);
             _this.setTabFocus(newFocusIndex);
-        });
+        }));
     };
     /**
      * @return {?}
@@ -18624,10 +19341,13 @@ var McTabHeader = /** @class */ (function (_super) {
         if (textContent !== this.currentTextContent) {
             this.currentTextContent = textContent;
             /** @type {?} */
-            var zoneCallback = function () {
+            var zoneCallback = (/**
+             * @return {?}
+             */
+            function () {
                 _this.updatePagination();
                 _this.changeDetectorRef.markForCheck();
-            };
+            });
             // The content observer runs outside the `NgZone` by default, which
             // means that we need to bring the callback back in ourselves.
             // TODO: Remove null check for `_ngZone` once it's a required parameter.
@@ -18991,8 +19711,8 @@ var McTabHeader = /** @class */ (function (_super) {
     McTabHeader.propDecorators = {
         selectedIndex: [{ type: core.Input }],
         labelWrappers: [{ type: core.ContentChildren, args: [McTabLabelWrapper,] }],
-        tabListContainer: [{ type: core.ViewChild, args: ['tabListContainer',] }],
-        tabList: [{ type: core.ViewChild, args: ['tabList',] }],
+        tabListContainer: [{ type: core.ViewChild, args: ['tabListContainer', { static: true },] }],
+        tabList: [{ type: core.ViewChild, args: ['tabList', { static: true },] }],
         selectFocusedIndex: [{ type: core.Output }],
         indexFocused: [{ type: core.Output }]
     };
@@ -19001,7 +19721,7 @@ var McTabHeader = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McLightTabsCssStyler = /** @class */ (function () {
     function McLightTabsCssStyler() {
@@ -19207,22 +19927,35 @@ var McTabGroup = /** @class */ (function (_super) {
             }
             // Changing these values after change detection has run
             // since the checked content may contain references to them.
-            Promise.resolve().then(function () {
-                _this.tabs.forEach(function (tab, index) { return tab.isActive = index === indexToSelect; });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () {
+                _this.tabs.forEach((/**
+                 * @param {?} tab
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (tab, index) { return tab.isActive = index === indexToSelect; }));
                 if (!isFirstRun_1) {
                     _this.selectedIndexChange.emit(indexToSelect);
                 }
-            });
+            }));
         }
         // Setup the position for each tab and optionally setup an origin on the next selected tab.
-        this.tabs.forEach(function (tab, index) {
+        this.tabs.forEach((/**
+         * @param {?} tab
+         * @param {?} index
+         * @return {?}
+         */
+        function (tab, index) {
             tab.position = index - indexToSelect;
             // If there is already a selected tab, then set up an origin for the next selected tab
             // if it doesn't have one already.
             if (_this._selectedIndex != null && tab.position === 0 && !tab.origin) {
                 tab.origin = indexToSelect - _this._selectedIndex;
             }
-        });
+        }));
         if (this._selectedIndex !== indexToSelect) {
             this._selectedIndex = indexToSelect;
             this.changeDetectorRef.markForCheck();
@@ -19239,7 +19972,10 @@ var McTabGroup = /** @class */ (function (_super) {
         this.subscribeToTabLabels();
         // Subscribe to changes in the amount of tabs, in order to be
         // able to re-render the content as new tabs are added or removed.
-        this.tabsSubscription = this.tabs.changes.subscribe(function () {
+        this.tabsSubscription = this.tabs.changes.subscribe((/**
+         * @return {?}
+         */
+        function () {
             /** @type {?} */
             var indexToSelect = _this.clampTabIndex(_this.indexToSelect);
             // Maintain the previously-selected tab if a new tab is added or removed and there is no
@@ -19259,7 +19995,7 @@ var McTabGroup = /** @class */ (function (_super) {
             }
             _this.subscribeToTabLabels();
             _this.changeDetectorRef.markForCheck();
-        });
+        }));
     };
     /**
      * @return {?}
@@ -19438,7 +20174,14 @@ var McTabGroup = /** @class */ (function (_super) {
         if (this.tabLabelSubscription) {
             this.tabLabelSubscription.unsubscribe();
         }
-        this.tabLabelSubscription = rxjs.merge.apply(void 0, this.tabs.map(function (tab) { return tab.stateChanges; })).subscribe(function () { return _this.changeDetectorRef.markForCheck(); });
+        this.tabLabelSubscription = rxjs.merge.apply(void 0, this.tabs.map((/**
+         * @param {?} tab
+         * @return {?}
+         */
+        function (tab) { return tab.stateChanges; }))).subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.changeDetectorRef.markForCheck(); }));
     };
     /** Clamps the given index to the bounds of 0 and the tabs length. */
     /**
@@ -19486,8 +20229,8 @@ var McTabGroup = /** @class */ (function (_super) {
         dynamicHeight: [{ type: core.Input }],
         selectedIndex: [{ type: core.Input }],
         tabs: [{ type: core.ContentChildren, args: [McTab,] }],
-        tabBodyWrapper: [{ type: core.ViewChild, args: ['tabBodyWrapper',] }],
-        tabHeader: [{ type: core.ViewChild, args: ['tabHeader',] }],
+        tabBodyWrapper: [{ type: core.ViewChild, args: ['tabBodyWrapper', { static: false },] }],
+        tabHeader: [{ type: core.ViewChild, args: ['tabHeader', { static: false },] }],
         headerPosition: [{ type: core.Input }],
         animationDuration: [{ type: core.Input }],
         selectedIndexChange: [{ type: core.Output }],
@@ -19500,7 +20243,7 @@ var McTabGroup = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to McTabNav.
 /**
@@ -19632,7 +20375,7 @@ var McTabLink = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTabsModule = /** @class */ (function () {
     function McTabsModule() {
@@ -19682,7 +20425,7 @@ var McTabsModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token to be used to override the default options for the chips module.
@@ -19692,7 +20435,7 @@ var MC_TAGS_DEFAULT_OPTIONS = new core.InjectionToken('mc-tags-default-options')
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Event object emitted by McTag when selected or deselected.
@@ -19922,7 +20665,11 @@ var McTag = /** @class */ (function (_super) {
      */
     function () {
         /** @type {?} */
-        var icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
+        var icons = this.contentChildren.map((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return item._elementRef.nativeElement; }));
         if (icons.length === 1) {
             /** @type {?} */
             var iconElement = icons[0];
@@ -20127,12 +20874,18 @@ var McTag = /** @class */ (function (_super) {
         this._ngZone.onStable
             .asObservable()
             .pipe(operators.take(1))
-            .subscribe(function () {
-            _this._ngZone.run(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            _this._ngZone.run((/**
+             * @return {?}
+             */
+            function () {
                 _this.hasFocus = false;
                 _this.onBlur.next({ tag: _this });
-            });
-        });
+            }));
+        }));
     };
     /**
      * @private
@@ -20184,9 +20937,12 @@ var McTag = /** @class */ (function (_super) {
     ]; };
     McTag.propDecorators = {
         contentChildren: [{ type: core.ContentChildren, args: [McIcon,] }],
-        avatar: [{ type: core.ContentChild, args: [McTagAvatar,] }],
-        trailingIcon: [{ type: core.ContentChild, args: [McTagTrailingIcon,] }],
-        removeIcon: [{ type: core.ContentChild, args: [core.forwardRef(function () { return McTagRemove; }),] }],
+        avatar: [{ type: core.ContentChild, args: [McTagAvatar, { static: false },] }],
+        trailingIcon: [{ type: core.ContentChild, args: [McTagTrailingIcon, { static: false },] }],
+        removeIcon: [{ type: core.ContentChild, args: [core.forwardRef((/**
+                     * @return {?}
+                     */
+                    function () { return McTagRemove; })), { static: false },] }],
         selectionChange: [{ type: core.Output }],
         destroyed: [{ type: core.Output }],
         removed: [{ type: core.Output }],
@@ -20252,7 +21008,7 @@ var McTagRemove = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTagListBase = /** @class */ (function () {
     function McTagListBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
@@ -20328,10 +21084,21 @@ var McTagList = /** @class */ (function (_super) {
          */
         _this.destroyed = new rxjs.Subject();
         // tslint:disable-next-line:no-empty
-        _this.onTouched = function () { };
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         // tslint:disable-next-line:no-empty
-        _this.onChange = function () { };
-        _this._compareWith = function (o1, o2) { return o1 === o2; };
+        _this.onChange = (/**
+         * @return {?}
+         */
+        function () { });
+        _this._compareWith = (/**
+         * @param {?} o1
+         * @param {?} o2
+         * @return {?}
+         */
+        function (o1, o2) { return o1 === o2; });
         if (_this.ngControl) {
             _this.ngControl.valueAccessor = _this;
         }
@@ -20344,7 +21111,11 @@ var McTagList = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return rxjs.merge.apply(void 0, this.tags.map(function (tag) { return tag.selectionChange; }));
+            return rxjs.merge.apply(void 0, this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.selectionChange; })));
         },
         enumerable: true,
         configurable: true
@@ -20356,7 +21127,11 @@ var McTagList = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return rxjs.merge.apply(void 0, this.tags.map(function (tag) { return tag.onFocus; }));
+            return rxjs.merge.apply(void 0, this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.onFocus; })));
         },
         enumerable: true,
         configurable: true
@@ -20368,7 +21143,11 @@ var McTagList = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return rxjs.merge.apply(void 0, this.tags.map(function (tag) { return tag.onBlur; }));
+            return rxjs.merge.apply(void 0, this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.onBlur; })));
         },
         enumerable: true,
         configurable: true
@@ -20380,7 +21159,11 @@ var McTagList = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return rxjs.merge.apply(void 0, this.tags.map(function (tag) { return tag.destroyed; }));
+            return rxjs.merge.apply(void 0, this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.destroyed; })));
         },
         enumerable: true,
         configurable: true
@@ -20622,7 +21405,11 @@ var McTagList = /** @class */ (function (_super) {
             var _this = this;
             this._selectable = coercion.coerceBooleanProperty(value);
             if (this.tags) {
-                this.tags.forEach(function (tag) { return tag.tagListSelectable = _this._selectable; });
+                this.tags.forEach((/**
+                 * @param {?} tag
+                 * @return {?}
+                 */
+                function (tag) { return tag.tagListSelectable = _this._selectable; }));
             }
         },
         enumerable: true,
@@ -20654,27 +21441,43 @@ var McTagList = /** @class */ (function (_super) {
         if (this.dir) {
             this.dir.change
                 .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(function (dir) { return _this.keyManager.withHorizontalOrientation(dir); });
+                .subscribe((/**
+             * @param {?} dir
+             * @return {?}
+             */
+            function (dir) { return _this.keyManager.withHorizontalOrientation(dir); }));
         }
         // Prevents the tag list from capturing focus and redirecting
         // it back to the first tag when the user tabs out.
         this.keyManager.tabOut
             .pipe(operators.takeUntil(this.destroyed))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._tabIndex = -1;
-            setTimeout(function () {
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
                 _this._tabIndex = _this.userTabIndex || 0;
                 _this.changeDetectorRef.markForCheck();
-            });
-        });
+            }));
+        }));
         // When the list changes, re-subscribe
         this.tags.changes
             .pipe(operators.startWith(null), operators.takeUntil(this.destroyed))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this.disabled) {
                 // Since this happens after the content has been
                 // checked, we need to defer it to the next tick.
-                Promise.resolve().then(function () { _this.syncTagsDisabledState(); });
+                Promise.resolve().then((/**
+                 * @return {?}
+                 */
+                function () { _this.syncTagsDisabledState(); }));
             }
             _this.resetTags();
             // Reset tags selected/deselected status
@@ -20685,9 +21488,12 @@ var McTagList = /** @class */ (function (_super) {
             _this.updateFocusForDestroyedTags();
             // Defer setting the value in order to avoid the "Expression
             // has changed after it was checked" errors from Angular.
-            Promise.resolve().then(function () { _this.tagChanges.emit(_this.tags.toArray()); });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () { _this.tagChanges.emit(_this.tags.toArray()); }));
             _this.stateChanges.next();
-        });
+        }));
     };
     /**
      * @return {?}
@@ -20922,9 +21728,17 @@ var McTagList = /** @class */ (function (_super) {
         var _this = this;
         if (isUserInput === void 0) { isUserInput = true; }
         this.clearSelection();
-        this.tags.forEach(function (tag) { return tag.deselect(); });
+        this.tags.forEach((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) { return tag.deselect(); }));
         if (Array.isArray(value)) {
-            value.forEach(function (currentValue) { return _this.selectValue(currentValue, isUserInput); });
+            value.forEach((/**
+             * @param {?} currentValue
+             * @return {?}
+             */
+            function (currentValue) { return _this.selectValue(currentValue, isUserInput); }));
             this.sortValues();
         }
         else {
@@ -20957,11 +21771,14 @@ var McTagList = /** @class */ (function (_super) {
                 // If the focus is not moved to tag input, mark the field as touched. If the focus moved
                 // to tag input, do nothing.
                 // Timeout is needed to wait for the focus() event trigger on tag input.
-                setTimeout(function () {
+                setTimeout((/**
+                 * @return {?}
+                 */
+                function () {
                     if (!_this.focused) {
                         _this.markAsTouched();
                     }
-                });
+                }));
             }
             else {
                 // If there's no tag input, then mark the field as touched.
@@ -21090,9 +21907,13 @@ var McTagList = /** @class */ (function (_super) {
         var _this = this;
         if (isUserInput === void 0) { isUserInput = true; }
         /** @type {?} */
-        var correspondingTag = this.tags.find(function (tag) {
+        var correspondingTag = this.tags.find((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) {
             return tag.value != null && _this._compareWith(tag.value, value);
-        });
+        }));
         if (correspondingTag) {
             if (isUserInput) {
                 correspondingTag.selectViaInteraction();
@@ -21116,12 +21937,15 @@ var McTagList = /** @class */ (function (_super) {
         var _this = this;
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
-        Promise.resolve().then(function () {
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        function () {
             if (_this.ngControl || _this._value) {
                 _this.setSelectionByValue(_this.ngControl ? _this.ngControl.value : _this._value, false);
                 _this.stateChanges.next();
             }
-        });
+        }));
     };
     /**
      * Deselects every tag in the list.
@@ -21141,11 +21965,15 @@ var McTagList = /** @class */ (function (_super) {
      */
     function (skip) {
         this.selectionModel.clear();
-        this.tags.forEach(function (tag) {
+        this.tags.forEach((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) {
             if (tag !== skip) {
                 tag.deselect();
             }
-        });
+        }));
         this.stateChanges.next();
     };
     /**
@@ -21168,11 +21996,15 @@ var McTagList = /** @class */ (function (_super) {
         var _this = this;
         if (this._multiple) {
             this.selectionModel.clear();
-            this.tags.forEach(function (tag) {
+            this.tags.forEach((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) {
                 if (tag.selected) {
                     _this.selectionModel.select(tag);
                 }
-            });
+            }));
             this.stateChanges.next();
         }
     };
@@ -21193,7 +22025,11 @@ var McTagList = /** @class */ (function (_super) {
         /** @type {?} */
         var valueToEmit = null;
         if (Array.isArray(this.selected)) {
-            valueToEmit = this.selected.map(function (tag) { return tag.value; });
+            valueToEmit = this.selected.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.value; }));
         }
         else {
             valueToEmit = this.selected ? this.selected.value : fallbackValue;
@@ -21257,7 +22093,11 @@ var McTagList = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this.tagSelectionSubscription = this.tagSelectionChanges.subscribe(function (event) {
+        this.tagSelectionSubscription = this.tagSelectionChanges.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             if (event.source.selected) {
                 _this.selectionModel.select(event.source);
             }
@@ -21266,16 +22106,20 @@ var McTagList = /** @class */ (function (_super) {
             }
             // For single selection tag list, make sure the deselected value is unselected.
             if (!_this.multiple) {
-                _this.tags.forEach(function (tag) {
+                _this.tags.forEach((/**
+                 * @param {?} tag
+                 * @return {?}
+                 */
+                function (tag) {
                     if (!_this.selectionModel.isSelected(tag) && tag.selected) {
                         tag.deselect();
                     }
-                });
+                }));
             }
             if (event.isUserInput) {
                 _this.propagateChanges();
             }
-        });
+        }));
     };
     /** Listens to user-generated selection events on each tag. */
     /**
@@ -21290,18 +22134,25 @@ var McTagList = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this.tagFocusSubscription = this.tagFocusChanges.subscribe(function (event) {
+        this.tagFocusSubscription = this.tagFocusChanges.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             /** @type {?} */
             var tagIndex = _this.tags.toArray().indexOf(event.tag);
             if (_this.isValidIndex(tagIndex)) {
                 _this.keyManager.updateActiveItem(tagIndex);
             }
             _this.stateChanges.next();
-        });
-        this.tagBlurSubscription = this.tagBlurChanges.subscribe(function () {
+        }));
+        this.tagBlurSubscription = this.tagBlurChanges.subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.blur();
             _this.stateChanges.next();
-        });
+        }));
     };
     /**
      * @private
@@ -21313,7 +22164,11 @@ var McTagList = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this.tagRemoveSubscription = this.tagRemoveChanges.subscribe(function (event) {
+        this.tagRemoveSubscription = this.tagRemoveChanges.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             /** @type {?} */
             var tag = event.tag;
             /** @type {?} */
@@ -21324,7 +22179,7 @@ var McTagList = /** @class */ (function (_super) {
             if (_this.isValidIndex(tagIndex) && tag.hasFocus) {
                 _this.lastDestroyedTagIndex = tagIndex;
             }
-        });
+        }));
     };
     /** Checks whether an event comes from inside a tag element. */
     /**
@@ -21362,7 +22217,11 @@ var McTagList = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        return this.tags.some(function (tag) { return tag.hasFocus; });
+        return this.tags.some((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) { return tag.hasFocus; }));
     };
     /** Syncs the list's disabled state with the individual tags. */
     /**
@@ -21378,9 +22237,13 @@ var McTagList = /** @class */ (function (_super) {
     function () {
         var _this = this;
         if (this.tags) {
-            this.tags.forEach(function (tag) {
+            this.tags.forEach((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) {
                 tag.disabled = _this._disabled;
-            });
+            }));
         }
     };
     McTagList.decorators = [
@@ -21435,7 +22298,7 @@ var McTagList = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Increasing integer for generating unique ids.
 /** @type {?} */
@@ -21700,7 +22563,7 @@ var McTagInput = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ɵ0 = ({ separatorKeyCodes: [keycodes.ENTER] });
 var McTagsModule = /** @class */ (function () {
@@ -21737,7 +22600,7 @@ var McTagsModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var nextUniqueId$6 = 0;
@@ -21808,9 +22671,12 @@ var McSelectSearch = /** @class */ (function () {
         if (!this.input.ngControl) {
             throw Error('McSelectSearch does not work without ngControl');
         }
-        this.searchChangesSubscription = (/** @type {?} */ (this.input.ngControl.valueChanges)).subscribe(function () {
+        this.searchChangesSubscription = (/** @type {?} */ (this.input.ngControl.valueChanges)).subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.isSearchChanged = true;
-        });
+        }));
     };
     /**
      * @return {?}
@@ -21828,7 +22694,7 @@ var McSelectSearch = /** @class */ (function () {
                 },] },
     ];
     McSelectSearch.propDecorators = {
-        input: [{ type: core.ContentChild, args: [McInput,] }]
+        input: [{ type: core.ContentChild, args: [McInput, { static: false },] }]
     };
     return McSelectSearch;
 }());
@@ -21912,14 +22778,28 @@ var McSelect = /** @class */ (function (_super) {
         /**
          * Combined stream of all of the child options' change events.
          */
-        _this.optionSelectionChanges = (/** @type {?} */ (rxjs.defer(function () {
+        _this.optionSelectionChanges = (/** @type {?} */ (rxjs.defer((/**
+         * @return {?}
+         */
+        function () {
             if (_this.options) {
-                return rxjs.merge.apply(void 0, _this.options.map(function (option) { return option.onSelectionChange; }).concat(_this.selectionModel.selected.map(function (option) { return option.onSelectionChange; })));
+                return rxjs.merge.apply(void 0, _this.options.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.onSelectionChange; })).concat(_this.selectionModel.selected.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.onSelectionChange; }))));
             }
             return _this._ngZone.onStable
                 .asObservable()
-                .pipe(operators.take(1), operators.switchMap(function () { return _this.optionSelectionChanges; }));
-        })));
+                .pipe(operators.take(1), operators.switchMap((/**
+             * @return {?}
+             */
+            function () { return _this.optionSelectionChanges; })));
+        }))));
         /**
          * Event emitted when the select panel has been toggled.
          */
@@ -21927,11 +22807,25 @@ var McSelect = /** @class */ (function (_super) {
         /**
          * Event emitted when the select has been opened.
          */
-        _this.openedStream = _this.openedChange.pipe(operators.filter(function (o) { return o; }), operators.map(function () { }));
+        _this.openedStream = _this.openedChange.pipe(operators.filter((/**
+         * @param {?} o
+         * @return {?}
+         */
+        function (o) { return o; })), operators.map((/**
+         * @return {?}
+         */
+        function () { })));
         /**
          * Event emitted when the select has been closed.
          */
-        _this.closedStream = _this.openedChange.pipe(operators.filter(function (o) { return !o; }), operators.map(function () { }));
+        _this.closedStream = _this.openedChange.pipe(operators.filter((/**
+         * @param {?} o
+         * @return {?}
+         */
+        function (o) { return !o; })), operators.map((/**
+         * @return {?}
+         */
+        function () { })));
         /**
          * Event emitted when the selected value has been changed by the user.
          */
@@ -21961,15 +22855,26 @@ var McSelect = /** @class */ (function (_super) {
         /**
          * `View -> model callback called when value changes`
          */
-        _this.onChange = function () { };
+        _this.onChange = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * `View -> model callback called when select has been touched`
          */
-        _this.onTouched = function () { };
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * Comparison function to specify which option is displayed. Defaults to object equality.
          */
-        _this._compareWith = function (o1, o2) { return o1 === o2; };
+        _this._compareWith = (/**
+         * @param {?} o1
+         * @param {?} o2
+         * @return {?}
+         */
+        function (o1, o2) { return o1 === o2; });
         if (_this.ngControl) {
             // Note: we provide the value accessor through here, instead of
             // the `providers` to avoid running into a circular import.
@@ -22159,7 +23064,10 @@ var McSelect = /** @class */ (function (_super) {
         // https://github.com/angular/angular/issues/24084
         this.panelDoneAnimatingStream
             .pipe(operators.distinctUntilChanged(), operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this.panelOpen) {
                 _this.scrollTop = 0;
                 _this.openedChange.emit(true);
@@ -22170,7 +23078,7 @@ var McSelect = /** @class */ (function (_super) {
                 _this.overlayDir.offsetX = 0;
                 _this._changeDetectorRef.markForCheck();
             }
-        });
+        }));
     };
     /**
      * @return {?}
@@ -22183,16 +23091,31 @@ var McSelect = /** @class */ (function (_super) {
         this.initKeyManager();
         this.selectionModel.changed
             .pipe(operators.takeUntil(this.destroy))
-            .subscribe(function (event) {
-            event.added.forEach(function (option) { return option.select(); });
-            event.removed.forEach(function (option) { return option.deselect(); });
-        });
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            event.added.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.select(); }));
+            event.removed.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.deselect(); }));
+        }));
         this.options.changes
             .pipe(operators.startWith(null), operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.resetOptions();
             _this.initializeSelection();
-        });
+        }));
     };
     /**
      * @return {?}
@@ -22203,9 +23126,15 @@ var McSelect = /** @class */ (function (_super) {
     function () {
         var _this = this;
         this.tags.changes
-            .subscribe(function () {
-            setTimeout(function () { return _this.calculateHiddenItems(); }, 0);
-        });
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            setTimeout((/**
+             * @return {?}
+             */
+            function () { return _this.calculateHiddenItems(); }), 0);
+        }));
     };
     /**
      * @return {?}
@@ -22298,11 +23227,14 @@ var McSelect = /** @class */ (function (_super) {
         // Set the font size on the panel element once it exists.
         this._ngZone.onStable.asObservable()
             .pipe(operators.take(1))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this.triggerFontSize && _this.overlayDir.overlayRef && _this.overlayDir.overlayRef.overlayElement) {
                 _this.overlayDir.overlayRef.overlayElement.style.fontSize = _this.triggerFontSize + "px";
             }
-        });
+        }));
         this.resetSearch();
     };
     /** Closes the overlay panel and focuses the host element. */
@@ -22444,7 +23376,11 @@ var McSelect = /** @class */ (function (_super) {
             }
             if (this._multiple) {
                 /** @type {?} */
-                var selectedOptions = this.selectionModel.selected.map(function (option) { return option.viewValue; });
+                var selectedOptions = this.selectionModel.selected.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.viewValue; }));
                 if (this.isRtl()) {
                     selectedOptions.reverse();
                 }
@@ -22583,12 +23519,15 @@ var McSelect = /** @class */ (function (_super) {
         var _this = this;
         this.overlayDir.positionChange
             .pipe(operators.take(1))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._changeDetectorRef.detectChanges();
             _this.calculateOverlayOffsetX();
             _this.optionsContainer.nativeElement.scrollTop = _this.scrollTop;
             _this.updateScrollSize();
-        });
+        }));
     };
     /** Returns the theme to be used on the panel. */
     /**
@@ -22712,12 +23651,16 @@ var McSelect = /** @class */ (function (_super) {
         var totalVisibleItemsWidth = 0;
         /** @type {?} */
         var itemMargin = 4;
-        this.tags.forEach(function (tag) {
+        this.tags.forEach((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) {
             if (tag.nativeElement.offsetTop < tag.nativeElement.offsetHeight) {
                 totalVisibleItemsWidth += tag.nativeElement.getBoundingClientRect().width + itemMargin;
                 visibleItems++;
             }
-        });
+        }));
         this.hiddenItems = ((/** @type {?} */ (this.selected))).length - visibleItems;
         if (this.hiddenItems) {
             /** @type {?} */
@@ -22793,9 +23736,13 @@ var McSelect = /** @class */ (function (_super) {
         var totalItemsWidth = 0;
         /** @type {?} */
         var itemMargin = 4;
-        triggerClone.querySelectorAll('mc-tag').forEach(function (item) {
+        triggerClone.querySelectorAll('mc-tag').forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
             totalItemsWidth += (/** @type {?} */ (item.getBoundingClientRect().width)) + itemMargin;
-        });
+        }));
         triggerClone.remove();
         return totalItemsWidth;
     };
@@ -22879,15 +23826,23 @@ var McSelect = /** @class */ (function (_super) {
         else if (this._multiple && keyCode === keycodes.A && event.ctrlKey) {
             event.preventDefault();
             /** @type {?} */
-            var hasDeselectedOptions_1 = this.options.some(function (option) { return !option.selected; });
-            this.options.forEach(function (option) {
+            var hasDeselectedOptions_1 = this.options.some((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return !option.selected; }));
+            this.options.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) {
                 if (hasDeselectedOptions_1 && !option.disabled) {
                     option.select();
                 }
                 else {
                     option.deselect();
                 }
-            });
+            }));
         }
         else {
             /** @type {?} */
@@ -22911,9 +23866,12 @@ var McSelect = /** @class */ (function (_super) {
         var _this = this;
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
-        Promise.resolve().then(function () {
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        function () {
             _this.setSelectionByValue(_this.ngControl ? _this.ngControl.value : _this._value);
-        });
+        }));
     };
     /**
      * Sets the selected option based on a value. If no option can be
@@ -22941,7 +23899,11 @@ var McSelect = /** @class */ (function (_super) {
                 throw getMcSelectNonArrayValueError();
             }
             this.selectionModel.clear();
-            value.forEach(function (currentValue) { return _this.selectValue(currentValue); });
+            value.forEach((/**
+             * @param {?} currentValue
+             * @return {?}
+             */
+            function (currentValue) { return _this.selectValue(currentValue); }));
             this.sortValues();
         }
         else {
@@ -22968,7 +23930,11 @@ var McSelect = /** @class */ (function (_super) {
      */
     function (value) {
         var _this = this;
-        return this.options.toArray().concat(this.previousSelectionModelSelected).find(function (option) {
+        return this.options.toArray().concat(this.previousSelectionModelSelected).find((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) {
             try {
                 // Treat null as a special reset value.
                 return option.value != null && _this._compareWith(option.value, value);
@@ -22980,7 +23946,7 @@ var McSelect = /** @class */ (function (_super) {
                 }
                 return false;
             }
-        });
+        }));
     };
     /**
      * Finds and selects and option based on its value.
@@ -23027,22 +23993,28 @@ var McSelect = /** @class */ (function (_super) {
             .withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
         this.keyManager.tabOut
             .pipe(operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             // Restore focus to the trigger before closing. Ensures that the focus
             // position won't be lost if the user got focus into the overlay.
             _this.focus();
             _this.close();
-        });
+        }));
         this.keyManager.change
             .pipe(operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this._panelOpen && _this.panel) {
                 _this.scrollActiveOptionIntoView();
             }
             else if (!_this._panelOpen && !_this.multiple && _this.keyManager.activeItem) {
                 _this.keyManager.activeItem.selectViaInteraction();
             }
-        });
+        }));
     };
     /** Drops current option subscriptions and IDs and resets from scratch. */
     /**
@@ -23061,24 +24033,38 @@ var McSelect = /** @class */ (function (_super) {
         var changedOrDestroyed = rxjs.merge(this.options.changes, this.destroy);
         this.optionSelectionChanges
             .pipe(operators.takeUntil(changedOrDestroyed))
-            .subscribe(function (event) {
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             _this.onSelect(event.source, event.isUserInput);
             if (_this.search && _this.search.isSearchChanged) {
-                Promise.resolve().then(function () { return _this.keyManager.setFirstItemActive(); });
+                Promise.resolve().then((/**
+                 * @return {?}
+                 */
+                function () { return _this.keyManager.setFirstItemActive(); }));
                 _this.search.isSearchChanged = false;
             }
             if (event.isUserInput && !_this.multiple && _this._panelOpen) {
                 _this.close();
                 _this.focus();
             }
-        });
+        }));
         // Listen to changes in the internal state of the options and react accordingly.
         // Handles cases like the labels of the selected options changing.
-        rxjs.merge.apply(void 0, this.options.map(function (option) { return option.stateChanges; })).pipe(operators.takeUntil(changedOrDestroyed))
-            .subscribe(function () {
+        rxjs.merge.apply(void 0, this.options.map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.stateChanges; }))).pipe(operators.takeUntil(changedOrDestroyed))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._changeDetectorRef.markForCheck();
             _this.stateChanges.next();
-        });
+        }));
         this.setOptionIds();
     };
     /** Invoked when an option is clicked. */
@@ -23152,10 +24138,15 @@ var McSelect = /** @class */ (function (_super) {
         if (this.multiple) {
             /** @type {?} */
             var options_1 = this.options.toArray();
-            this.selectionModel.sort(function (a, b) {
+            this.selectionModel.sort((/**
+             * @param {?} a
+             * @param {?} b
+             * @return {?}
+             */
+            function (a, b) {
                 return _this.sortComparator ? _this.sortComparator(a, b, options_1) :
                     options_1.indexOf(a) - options_1.indexOf(b);
-            });
+            }));
             this.stateChanges.next();
         }
     };
@@ -23176,7 +24167,11 @@ var McSelect = /** @class */ (function (_super) {
         /** @type {?} */
         var valueToEmit = null;
         if (this.multiple) {
-            valueToEmit = ((/** @type {?} */ (this.selected))).map(function (option) { return option.value; });
+            valueToEmit = ((/** @type {?} */ (this.selected))).map((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.value; }));
         }
         else {
             valueToEmit = this.selected ? ((/** @type {?} */ (this.selected))).value : fallbackValue;
@@ -23199,7 +24194,11 @@ var McSelect = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.optionIds = this.options.map(function (option) { return option.id; }).join(' ');
+        this.optionIds = this.options.map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.id; })).join(' ');
     };
     /**
      * Highlights the selected item. If no option is selected, it will highlight
@@ -23260,10 +24259,16 @@ var McSelect = /** @class */ (function (_super) {
      */
     function (option) {
         /* tslint:disable-next-line */
-        return this.options.reduce(function (result, current, index) {
+        return this.options.reduce((/**
+         * @param {?} result
+         * @param {?} current
+         * @param {?} index
+         * @return {?}
+         */
+        function (result, current, index) {
             /* tslint:disable-next-line:strict-type-predicates */
             return result === undefined ? (option === current ? index : undefined) : result;
-        }, undefined);
+        }), undefined);
     };
     /** Calculates the scroll position and x- and y-offsets of the overlay panel. */
     /**
@@ -23609,15 +24614,15 @@ var McSelect = /** @class */ (function (_super) {
         { type: undefined, decorators: [{ type: core.Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] }
     ]; };
     McSelect.propDecorators = {
-        trigger: [{ type: core.ViewChild, args: ['trigger',] }],
-        panel: [{ type: core.ViewChild, args: ['panel',] }],
-        optionsContainer: [{ type: core.ViewChild, args: ['optionsContainer',] }],
-        overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay,] }],
+        trigger: [{ type: core.ViewChild, args: ['trigger', { static: false },] }],
+        panel: [{ type: core.ViewChild, args: ['panel', { static: false },] }],
+        optionsContainer: [{ type: core.ViewChild, args: ['optionsContainer', { static: false },] }],
+        overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay, { static: false },] }],
         tags: [{ type: core.ViewChildren, args: [McTag,] }],
-        customTrigger: [{ type: core.ContentChild, args: [McSelectTrigger,] }],
+        customTrigger: [{ type: core.ContentChild, args: [McSelectTrigger, { static: false },] }],
         options: [{ type: core.ContentChildren, args: [McOption, { descendants: true },] }],
         optionGroups: [{ type: core.ContentChildren, args: [McOptgroup,] }],
-        search: [{ type: core.ContentChild, args: [McSelectSearch,] }],
+        search: [{ type: core.ContentChild, args: [McSelectSearch, { static: false },] }],
         panelClass: [{ type: core.Input }],
         errorStateMatcher: [{ type: core.Input }],
         sortComparator: [{ type: core.Input }],
@@ -23638,7 +24643,7 @@ var McSelect = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSelectModule = /** @class */ (function () {
     function McSelectModule() {
@@ -23673,7 +24678,7 @@ var McSelectModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var nextUniqueId$7 = 0;
@@ -23789,11 +24794,25 @@ var McTreeSelect = /** @class */ (function (_super) {
         /**
          * Event emitted when the select has been opened.
          */
-        _this.openedStream = _this.openedChange.pipe(operators.filter(function (o) { return o; }), operators.map(function () { }));
+        _this.openedStream = _this.openedChange.pipe(operators.filter((/**
+         * @param {?} o
+         * @return {?}
+         */
+        function (o) { return o; })), operators.map((/**
+         * @return {?}
+         */
+        function () { })));
         /**
          * Event emitted when the select has been closed.
          */
-        _this.closedStream = _this.openedChange.pipe(operators.filter(function (o) { return !o; }), operators.map(function () { }));
+        _this.closedStream = _this.openedChange.pipe(operators.filter((/**
+         * @param {?} o
+         * @return {?}
+         */
+        function (o) { return !o; })), operators.map((/**
+         * @return {?}
+         */
+        function () { })));
         /**
          * Event emitted when the selected value has been changed by the user.
          */
@@ -23807,14 +24826,24 @@ var McTreeSelect = /** @class */ (function (_super) {
         /**
          * Combined stream of all of the child options' change events.
          */
-        _this.optionSelectionChanges = (/** @type {?} */ (rxjs.defer(function () {
+        _this.optionSelectionChanges = (/** @type {?} */ (rxjs.defer((/**
+         * @return {?}
+         */
+        function () {
             if (_this.options) {
-                return rxjs.merge.apply(void 0, _this.options.map(function (option) { return option.onSelectionChange; }));
+                return rxjs.merge.apply(void 0, _this.options.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.onSelectionChange; })));
             }
             return _this.ngZone.onStable
                 .asObservable()
-                .pipe(operators.take(1), operators.switchMap(function () { return _this.optionSelectionChanges; }));
-        })));
+                .pipe(operators.take(1), operators.switchMap((/**
+             * @return {?}
+             */
+            function () { return _this.optionSelectionChanges; })));
+        }))));
         _this._required = false;
         _this._multiple = false;
         _this._autoSelect = true;
@@ -23835,15 +24864,26 @@ var McTreeSelect = /** @class */ (function (_super) {
         /**
          * `View -> model callback called when value changes`
          */
-        _this.onChange = function () { };
+        _this.onChange = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * `View -> model callback called when select has been touched`
          */
-        _this.onTouched = function () { };
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * Comparison function to specify which option is displayed. Defaults to object equality.
          */
-        _this._compareWith = function (o1, o2) { return o1 === o2; };
+        _this._compareWith = (/**
+         * @param {?} o1
+         * @param {?} o2
+         * @return {?}
+         */
+        function (o1, o2) { return o1 === o2; });
         if (_this.ngControl) {
             // Note: we provide the value accessor through here, instead of
             // the `providers` to avoid running into a circular import.
@@ -24055,7 +25095,10 @@ var McTreeSelect = /** @class */ (function (_super) {
         // https://github.com/angular/angular/issues/24084
         this.panelDoneAnimatingStream
             .pipe(operators.distinctUntilChanged(), operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this.panelOpen) {
                 _this.scrollTop = 0;
                 _this.openedChange.emit(true);
@@ -24066,7 +25109,7 @@ var McTreeSelect = /** @class */ (function (_super) {
                 _this.overlayDir.offsetX = 0;
                 _this.changeDetectorRef.markForCheck();
             }
-        });
+        }));
     };
     /**
      * @return {?}
@@ -24084,10 +25127,22 @@ var McTreeSelect = /** @class */ (function (_super) {
         this.tree.autoSelect = this.autoSelect;
         this.selectionModel.changed
             .pipe(operators.takeUntil(this.destroy))
-            .subscribe(function (event) {
-            event.added.forEach(function (option) { return option.select(); });
-            event.removed.forEach(function (option) { return option.deselect(); });
-        });
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            event.added.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.select(); }));
+            event.removed.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.deselect(); }));
+        }));
     };
     /**
      * @return {?}
@@ -24101,15 +25156,24 @@ var McTreeSelect = /** @class */ (function (_super) {
             return;
         }
         this.tags.changes
-            .subscribe(function () {
-            setTimeout(function () { return _this.calculateHiddenItems(); }, 0);
-        });
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            setTimeout((/**
+             * @return {?}
+             */
+            function () { return _this.calculateHiddenItems(); }), 0);
+        }));
         this.options.changes
             .pipe(operators.startWith(null), operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.updateSelectedOptions();
             _this.resetOptions();
-        });
+        }));
     };
     /**
      * @return {?}
@@ -24185,11 +25249,14 @@ var McTreeSelect = /** @class */ (function (_super) {
         // Set the font size on the panel element once it exists.
         this.ngZone.onStable.asObservable()
             .pipe(operators.take(1))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this.triggerFontSize && _this.overlayDir.overlayRef && _this.overlayDir.overlayRef.overlayElement) {
                 _this.overlayDir.overlayRef.overlayElement.style.fontSize = _this.triggerFontSize + "px";
             }
-        });
+        }));
     };
     /** Closes the overlay panel and focuses the host element. */
     /**
@@ -24457,12 +25524,15 @@ var McTreeSelect = /** @class */ (function (_super) {
         var _this = this;
         this.overlayDir.positionChange
             .pipe(operators.take(1))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.changeDetectorRef.detectChanges();
             _this.calculateOverlayOffsetX();
             _this.panel.nativeElement.scrollTop = _this.scrollTop;
             _this.tree.updateScrollSize();
-        });
+        }));
     };
     /** Returns the theme to be used on the panel. */
     /**
@@ -24566,11 +25636,15 @@ var McTreeSelect = /** @class */ (function (_super) {
      */
     function (selectedOption, $event) {
         $event.stopPropagation();
-        this.options.forEach(function (option) {
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) {
             if (option.data === selectedOption.data) {
                 option.deselect();
             }
-        });
+        }));
         this.selectionModel.deselect(selectedOption);
     };
     /**
@@ -24591,12 +25665,16 @@ var McTreeSelect = /** @class */ (function (_super) {
         var totalVisibleItemsWidth = 0;
         /** @type {?} */
         var itemMargin = 4;
-        this.tags.forEach(function (tag) {
+        this.tags.forEach((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) {
             if (tag.nativeElement.offsetTop < tag.nativeElement.offsetHeight) {
                 totalVisibleItemsWidth += tag.nativeElement.getBoundingClientRect().width + itemMargin;
                 visibleItems++;
             }
-        });
+        }));
         this.hiddenItems = this.selectionModel.selected.length - visibleItems;
         if (this.hiddenItems) {
             /** @type {?} */
@@ -24636,15 +25714,23 @@ var McTreeSelect = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this.selectionModel.selected.forEach(function (selectedOption) {
-            _this.options.forEach(function (option) {
+        this.selectionModel.selected.forEach((/**
+         * @param {?} selectedOption
+         * @return {?}
+         */
+        function (selectedOption) {
+            _this.options.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) {
                 if (option.data === selectedOption.data) {
                     _this.selectionModel.deselect(selectedOption);
                     _this.selectionModel.select(option);
                     option.select();
                 }
-            });
-        });
+            }));
+        }));
     };
     /**
      * @private
@@ -24667,9 +25753,13 @@ var McTreeSelect = /** @class */ (function (_super) {
         var totalItemsWidth = 0;
         /** @type {?} */
         var itemMargin = 4;
-        triggerClone.querySelectorAll('mc-tag').forEach(function (item) {
+        triggerClone.querySelectorAll('mc-tag').forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
             totalItemsWidth += (/** @type {?} */ (item.getBoundingClientRect().width)) + itemMargin;
-        });
+        }));
         triggerClone.remove();
         return totalItemsWidth;
     };
@@ -24749,15 +25839,23 @@ var McTreeSelect = /** @class */ (function (_super) {
         else if (this.multiple && keyCode === keycodes.A && event.ctrlKey) {
             event.preventDefault();
             /** @type {?} */
-            var hasDeselectedOptions_1 = this.options.some(function (option) { return !option.selected; });
-            this.options.forEach(function (option) {
+            var hasDeselectedOptions_1 = this.options.some((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return !option.selected; }));
+            this.options.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) {
                 if (hasDeselectedOptions_1 && !option.disabled) {
                     option.select();
                 }
                 else {
                     option.deselect();
                 }
-            });
+            }));
         }
         else {
             /** @type {?} */
@@ -24781,9 +25879,12 @@ var McTreeSelect = /** @class */ (function (_super) {
         var _this = this;
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
-        Promise.resolve().then(function () {
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        function () {
             _this.setSelectionByValue(_this.ngControl ? _this.ngControl.value : _this._value);
-        });
+        }));
     };
     /**
      * Sets the selected option based on a value. If no option can be
@@ -24810,7 +25911,11 @@ var McTreeSelect = /** @class */ (function (_super) {
                 throw getMcSelectNonArrayValueError();
             }
             this.selectionModel.clear();
-            value.forEach(function (currentValue) { return _this.selectValue(currentValue); });
+            value.forEach((/**
+             * @param {?} currentValue
+             * @return {?}
+             */
+            function (currentValue) { return _this.selectValue(currentValue); }));
             this.sortValues();
         }
         else {
@@ -24844,7 +25949,11 @@ var McTreeSelect = /** @class */ (function (_super) {
     function (value) {
         var _this = this;
         /** @type {?} */
-        var correspondingOption = this.options.find(function (option) {
+        var correspondingOption = this.options.find((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) {
             try {
                 // Treat null as a special reset value.
                 return option.value != null && _this._compareWith(option.value, value);
@@ -24856,7 +25965,7 @@ var McTreeSelect = /** @class */ (function (_super) {
                 }
                 return false;
             }
-        });
+        }));
         if (correspondingOption) {
             this.selectionModel.select(correspondingOption);
         }
@@ -24873,25 +25982,34 @@ var McTreeSelect = /** @class */ (function (_super) {
     function () {
         var _this = this;
         this.originalOnKeyDown = this.tree.onKeyDown;
-        this.tree.onKeyDown = function () { };
+        this.tree.onKeyDown = (/**
+         * @return {?}
+         */
+        function () { });
         this.tree.keyManager.tabOut
             .pipe(operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             // Restore focus to the trigger before closing. Ensures that the focus
             // position won't be lost if the user got focus into the overlay.
             _this.focus();
             _this.close();
-        });
+        }));
         this.tree.keyManager.change
             .pipe(operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this._panelOpen && _this.panel) {
                 _this.scrollActiveOptionIntoView();
             }
             else if (!_this._panelOpen && !_this.multiple && _this.tree.keyManager.activeItem) {
                 _this.tree.keyManager.activeItem.selectViaInteraction();
             }
-        });
+        }));
     };
     /** Drops current option subscriptions and IDs and resets from scratch. */
     /**
@@ -24910,13 +26028,17 @@ var McTreeSelect = /** @class */ (function (_super) {
         var changedOrDestroyed = rxjs.merge(this.options.changes, this.destroy);
         this.optionSelectionChanges
             .pipe(operators.takeUntil(changedOrDestroyed))
-            .subscribe(function (event) {
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             _this.onSelect(event.source, event.isUserInput);
             if (event.isUserInput && !_this.multiple && _this._panelOpen) {
                 _this.close();
                 _this.focus();
             }
-        });
+        }));
         // Listen to changes in the internal state of the options and react accordingly.
         // Handles cases like the labels of the selected options changing.
         // merge(...this.options.map((option) => option.stateChanges))
@@ -24992,10 +26114,15 @@ var McTreeSelect = /** @class */ (function (_super) {
         if (this.multiple) {
             /** @type {?} */
             var options_1 = this.options.toArray();
-            this.selectionModel.sort(function (a, b) {
+            this.selectionModel.sort((/**
+             * @param {?} a
+             * @param {?} b
+             * @return {?}
+             */
+            function (a, b) {
                 return _this.sortComparator ? _this.sortComparator(a, b, options_1) :
                     options_1.indexOf(a) - options_1.indexOf(b);
-            });
+            }));
             this.stateChanges.next();
         }
     };
@@ -25016,7 +26143,11 @@ var McTreeSelect = /** @class */ (function (_super) {
         /** @type {?} */
         var valueToEmit = null;
         if (this.multiple) {
-            valueToEmit = ((/** @type {?} */ (this.selected))).map(function (option) { return option.value; });
+            valueToEmit = ((/** @type {?} */ (this.selected))).map((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.value; }));
         }
         else {
             valueToEmit = this.selected ? ((/** @type {?} */ (this.selected))).value : fallbackValue;
@@ -25039,7 +26170,11 @@ var McTreeSelect = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.optionIds = this.options.map(function (option) { return option.id; }).join(' ');
+        this.optionIds = this.options.map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.id; })).join(' ');
     };
     /**
      * Highlights the selected item. If no option is selected, it will highlight
@@ -25098,10 +26233,16 @@ var McTreeSelect = /** @class */ (function (_super) {
      */
     function (option) {
         // todo разобраться с этим срачем!
-        return this.options.reduce(function (result, current, index) {
+        return this.options.reduce((/**
+         * @param {?} result
+         * @param {?} current
+         * @param {?} index
+         * @return {?}
+         */
+        function (result, current, index) {
             /* tslint:disable-next-line:strict-type-predicates */
             return result === undefined ? (option === current ? index : undefined) : result;
-        }, undefined);
+        }), undefined);
     };
     /** Calculates the scroll position and x- and y-offsets of the overlay panel. */
     /**
@@ -25443,12 +26584,12 @@ var McTreeSelect = /** @class */ (function (_super) {
         { type: undefined, decorators: [{ type: core.Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] }
     ]; };
     McTreeSelect.propDecorators = {
-        trigger: [{ type: core.ViewChild, args: ['trigger',] }],
-        panel: [{ type: core.ViewChild, args: ['panel',] }],
-        overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay,] }],
+        trigger: [{ type: core.ViewChild, args: ['trigger', { static: false },] }],
+        panel: [{ type: core.ViewChild, args: ['panel', { static: false },] }],
+        overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay, { static: false },] }],
         tags: [{ type: core.ViewChildren, args: [McTag,] }],
-        customTrigger: [{ type: core.ContentChild, args: [McTreeSelectTrigger,] }],
-        tree: [{ type: core.ContentChild, args: [McTreeSelection,] }],
+        customTrigger: [{ type: core.ContentChild, args: [McTreeSelectTrigger, { static: false },] }],
+        tree: [{ type: core.ContentChild, args: [McTreeSelection, { static: false },] }],
         openedChange: [{ type: core.Output }],
         openedStream: [{ type: core.Output, args: ['opened',] }],
         closedStream: [{ type: core.Output, args: ['closed',] }],
@@ -25470,7 +26611,7 @@ var McTreeSelect = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTreeSelectModule = /** @class */ (function () {
     function McTreeSelectModule() {
@@ -25496,7 +26637,7 @@ var McTreeSelectModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_TEXTAREA_VALUE_ACCESSOR = new core.InjectionToken('MC_TEXTAREA_VALUE_ACCESSOR');
@@ -25669,7 +26810,10 @@ var McTextarea = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        setTimeout(function () { return _this.grow(); }, 0);
+        setTimeout((/**
+         * @return {?}
+         */
+        function () { return _this.grow(); }), 0);
         this.lineHeight = parseInt((/** @type {?} */ (getComputedStyle(this.elementRef.nativeElement).lineHeight)), 10);
         /** @type {?} */
         var paddingTop = parseInt((/** @type {?} */ (getComputedStyle(this.elementRef.nativeElement).paddingTop)), 10);
@@ -25730,7 +26874,10 @@ var McTextarea = /** @class */ (function (_super) {
         if (!this.canGrow) {
             return;
         }
-        this.ngZone.runOutsideAngular(function () {
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        function () {
             /** @type {?} */
             var textarea = _this.elementRef.nativeElement;
             /** @type {?} */
@@ -25742,7 +26889,7 @@ var McTextarea = /** @class */ (function (_super) {
             /** @type {?} */
             var height = Math.max(_this.minHeight, textarea.scrollHeight + diff + _this.freeRowsHeight);
             textarea.style.height = height + "px";
-        });
+        }));
     };
     /** Focuses the textarea. */
     /**
@@ -25901,7 +27048,7 @@ var McTextarea = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTextareaModule = /** @class */ (function () {
     function McTextareaModule() {
@@ -25919,7 +27066,7 @@ var McTextareaModule = /** @class */ (function () {
 var _a;
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 var TimeParts = {
@@ -25963,7 +27110,7 @@ var ARROW_RIGHT_KEYCODE = 'ArrowRight';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var uniqueComponentIdSuffix = 0;
@@ -26025,9 +27172,18 @@ var McTimepicker = /** @class */ (function (_super) {
             var control = (/** @type {?} */ (_this.ngControl.control));
             /** @type {?} */
             var myValidators = [
-                function () { return _this.parseValidator(); },
-                function () { return _this.minTimeValidator(); },
-                function () { return _this.maxTimeValidator(); }
+                (/**
+                 * @return {?}
+                 */
+                function () { return _this.parseValidator(); }),
+                (/**
+                 * @return {?}
+                 */
+                function () { return _this.minTimeValidator(); }),
+                (/**
+                 * @return {?}
+                 */
+                function () { return _this.maxTimeValidator(); })
             ];
             /** @type {?} */
             var validators = control.validator
@@ -26131,7 +27287,11 @@ var McTimepicker = /** @class */ (function (_super) {
         function (formatValue) {
             this._timeFormat = Object
                 .keys(TimeFormats)
-                .map(function (timeFormatKey) { return TimeFormats[timeFormatKey]; })
+                .map((/**
+             * @param {?} timeFormatKey
+             * @return {?}
+             */
+            function (timeFormatKey) { return TimeFormats[timeFormatKey]; }))
                 .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
             ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
             this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
@@ -26546,12 +27706,15 @@ var McTimepicker = /** @class */ (function (_super) {
      */
     function (cursorPos) {
         var _this = this;
-        setTimeout(function () {
+        setTimeout((/**
+         * @return {?}
+         */
+        function () {
             /** @type {?} */
             var newEditParams = _this.getTimeEditMetrics(cursorPos);
             _this.elementRef.nativeElement.selectionStart = newEditParams.cursorStartPosition;
             _this.elementRef.nativeElement.selectionEnd = newEditParams.cursorEndPosition;
-        });
+        }));
     };
     /**
      * @private
@@ -26739,8 +27902,8 @@ var McTimepicker = /** @class */ (function (_super) {
      * @return {?}
      */
     function (tempVal, timeFormat) {
-        if (timeFormat === void 0) { timeFormat = DEFAULT_TIME_FORMAT; }
         var _a;
+        if (timeFormat === void 0) { timeFormat = DEFAULT_TIME_FORMAT; }
         /** @type {?} */
         var hours = this.getNumberWithLeadingZero(tempVal.getHours());
         /** @type {?} */
@@ -26748,7 +27911,13 @@ var McTimepicker = /** @class */ (function (_super) {
         /** @type {?} */
         var seconds = this.getNumberWithLeadingZero(tempVal.getSeconds());
         /** @type {?} */
-        var formattedTimeGenerators = (_a = {}, _a[TimeFormats.HHmm] = function () { return hours + ":" + minutes; }, _a[TimeFormats.HHmmss] = function () { return hours + ":" + minutes + ":" + seconds; }, _a);
+        var formattedTimeGenerators = (_a = {}, _a[TimeFormats.HHmm] = (/**
+             * @return {?}
+             */
+            function () { return hours + ":" + minutes; }), _a[TimeFormats.HHmmss] = (/**
+             * @return {?}
+             */
+            function () { return hours + ":" + minutes + ":" + seconds; }), _a);
         return formattedTimeGenerators[timeFormat]();
     };
     /**
@@ -26982,7 +28151,10 @@ var McTimepicker = /** @class */ (function (_super) {
                     providers: [
                         {
                             provide: McFormFieldControl,
-                            useExisting: core.forwardRef(function () { return McTimepicker; })
+                            useExisting: core.forwardRef((/**
+                             * @return {?}
+                             */
+                            function () { return McTimepicker; }))
                         }
                     ]
                 },] },
@@ -27014,7 +28186,7 @@ var McTimepicker = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTimepickerModule = /** @class */ (function () {
     function McTimepickerModule() {
@@ -27040,7 +28212,7 @@ var McTimepickerModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to access the data that was passed in to a sidepanel.
@@ -27089,7 +28261,7 @@ McSidepanelConfig = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 var McSidepanelAnimationState = {
@@ -27118,7 +28290,7 @@ var mcSidepanelAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_SIDEPANEL_WITH_INDENT = new core.InjectionToken('mc-sidepanel-with-indent');
@@ -27307,14 +28479,14 @@ var McSidepanelContainerComponent = /** @class */ (function (_super) {
         { type: Boolean, decorators: [{ type: core.Inject, args: [MC_SIDEPANEL_WITH_SHADOW,] }] }
     ]; };
     McSidepanelContainerComponent.propDecorators = {
-        portalOutlet: [{ type: core.ViewChild, args: [portal.CdkPortalOutlet,] }]
+        portalOutlet: [{ type: core.ViewChild, args: [portal.CdkPortalOutlet, { static: true },] }]
     };
     return McSidepanelContainerComponent;
 }(portal.BasePortalOutlet));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Counter for unique sidepanel ids.
 /** @type {?} */
@@ -27342,21 +28514,42 @@ McSidepanelRef = /** @class */ (function () {
         this.id = this.config.id || "mc-sidepanel-" + uniqueId++;
         this.containerInstance.id = this.id;
         // Emit when opening animation completes
-        containerInstance.animationStateChanged.pipe(operators.filter(function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible; }), operators.take(1)).subscribe(function () {
+        containerInstance.animationStateChanged.pipe(operators.filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible; })), operators.take(1)).subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.afterOpened$.next();
             _this.afterOpened$.complete();
-        });
+        }));
         // Dispose overlay when closing animation is complete
-        containerInstance.animationStateChanged.pipe(operators.filter(function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden; }), operators.take(1)).subscribe(function () {
+        containerInstance.animationStateChanged.pipe(operators.filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden; })), operators.take(1)).subscribe((/**
+         * @return {?}
+         */
+        function () {
             overlayRef.dispose();
             _this.afterClosed$.next(_this.result);
             _this.afterClosed$.complete();
-        });
+        }));
         if (!containerInstance.sidepanelConfig.disableClose) {
             rxjs.merge(overlayRef.backdropClick(), overlayRef.keydownEvents().pipe(
             // tslint:disable:deprecation
             // keyCode is deprecated, but IE11 and Edge don't support code property, which we need use instead
-            operators.filter(function (event) { return event.keyCode === keycodes.ESCAPE; }))).subscribe(function () { return _this.close(); });
+            operators.filter((/**
+             * @param {?} event
+             * @return {?}
+             */
+            function (event) { return event.keyCode === keycodes.ESCAPE; })))).subscribe((/**
+             * @return {?}
+             */
+            function () { return _this.close(); }));
         }
     }
     /**
@@ -27371,7 +28564,14 @@ McSidepanelRef = /** @class */ (function () {
         var _this = this;
         if (!this.afterClosed$.closed) {
             // Transition the backdrop in parallel to the sidepanel.
-            this.containerInstance.animationStateChanged.pipe(operators.filter(function (event) { return event.phaseName === 'done'; }), operators.take(1)).subscribe(function () { return _this.overlayRef.detachBackdrop(); });
+            this.containerInstance.animationStateChanged.pipe(operators.filter((/**
+             * @param {?} event
+             * @return {?}
+             */
+            function (event) { return event.phaseName === 'done'; })), operators.take(1)).subscribe((/**
+             * @return {?}
+             */
+            function () { return _this.overlayRef.detachBackdrop(); }));
             this.result = result;
             this.containerInstance.exit();
         }
@@ -27405,7 +28605,7 @@ McSidepanelRef = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to specify default sidepanel options.
@@ -27485,7 +28685,10 @@ var McSidepanelService = /** @class */ (function () {
             ref.instance = contentRef.instance;
         }
         this.openedSidepanels.push(ref);
-        ref.afterClosed().subscribe(function () { return _this.removeOpenSidepanel(ref); });
+        ref.afterClosed().subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.removeOpenSidepanel(ref); }));
         container.enter();
         return ref;
     };
@@ -27518,7 +28721,11 @@ var McSidepanelService = /** @class */ (function () {
      * @return {?}
      */
     function (id) {
-        return this.openedSidepanels.find(function (sidepanel) { return sidepanel.id === id; });
+        return this.openedSidepanels.find((/**
+         * @param {?} sidepanel
+         * @return {?}
+         */
+        function (sidepanel) { return sidepanel.id === id; }));
     };
     /**
      * Attaches the sidepanel container component to the overlay.
@@ -27634,9 +28841,13 @@ var McSidepanelService = /** @class */ (function () {
     function (sidepanels) {
         /** @type {?} */
         var reversedOpenedSidepanels = sidepanels.reverse().slice();
-        reversedOpenedSidepanels.forEach(function (sidepanelRef) {
+        reversedOpenedSidepanels.forEach((/**
+         * @param {?} sidepanelRef
+         * @return {?}
+         */
+        function (sidepanelRef) {
             sidepanelRef.close();
-        });
+        }));
     };
     /**
      * @private
@@ -27650,7 +28861,11 @@ var McSidepanelService = /** @class */ (function () {
      */
     function (config) {
         /** @type {?} */
-        var hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some(function (sidepanelRef) { return (/** @type {?} */ (sidepanelRef.config.hasBackdrop)); });
+        var hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some((/**
+         * @param {?} sidepanelRef
+         * @return {?}
+         */
+        function (sidepanelRef) { return (/** @type {?} */ (sidepanelRef.config.hasBackdrop)); }));
         return config.requiredBackdrop || !hasOpenedSidepanelWithBackdrop ? 'cdk-overlay-dark-backdrop' :
             'cdk-overlay-transparent-backdrop';
     };
@@ -27665,7 +28880,11 @@ var McSidepanelService = /** @class */ (function () {
      * @return {?}
      */
     function (config) {
-        return this.openedSidepanels.filter(function (sidepanelRef) { return sidepanelRef.config.position === config.position; });
+        return this.openedSidepanels.filter((/**
+         * @param {?} sidepanelRef
+         * @return {?}
+         */
+        function (sidepanelRef) { return sidepanelRef.config.position === config.position; }));
     };
     /**
      * Removes a sidepanel from the array of open sidepanels.
@@ -27705,7 +28924,7 @@ var McSidepanelService = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Button that will close the current sidepanel.
@@ -27731,9 +28950,12 @@ var McSidepanelClose = /** @class */ (function () {
             // ID.
             // This must occur in `onInit`, as the ID binding for the sidepanel container won't
             // be resolved at constructor time. We use setTimeout by same reason.
-            setTimeout(function () {
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
                 _this.sidepanelRef = (/** @type {?} */ (getClosestSidepanel(_this.elementRef, _this.sidepanelService.openedSidepanels)));
-            });
+            }));
         }
     };
     /**
@@ -27853,12 +29075,16 @@ function getClosestSidepanel(element, openSidepanels) {
     while (parent && !parent.classList.contains('mc-sidepanel-container')) {
         parent = parent.parentElement;
     }
-    return parent ? openSidepanels.find(function (sidepanel) { return sidepanel.id === (/** @type {?} */ (parent)).id; }) : null;
+    return parent ? openSidepanels.find((/**
+     * @param {?} sidepanel
+     * @return {?}
+     */
+    function (sidepanel) { return sidepanel.id === (/** @type {?} */ (parent)).id; })) : null;
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSidepanelModule = /** @class */ (function () {
     function McSidepanelModule() {
@@ -27897,7 +29123,7 @@ var McSidepanelModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSplitterComponent = /** @class */ (function () {
     function McSplitterComponent(elementRef, ngZone, renderer) {
@@ -28027,18 +29253,35 @@ var McSplitterComponent = /** @class */ (function () {
         };
         leftArea.initialSize = leftArea.area.getSize();
         rightArea.initialSize = rightArea.area.getSize();
-        this.areas.forEach(function (item) {
+        this.areas.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
             /** @type {?} */
             var size = item.area.getSize();
             item.area.disableFlex();
             item.area.setSize(size);
-        });
-        this.ngZone.runOutsideAngular(function () {
-            _this.listeners.push(_this.renderer.listen('document', 'mouseup', function () { return _this.onMouseUp(); }));
-        });
-        this.ngZone.runOutsideAngular(function () {
-            _this.listeners.push(_this.renderer.listen('document', 'mousemove', function (e) { return _this.onMouseMove(e, startPoint, leftArea, rightArea); }));
-        });
+        }));
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        function () {
+            _this.listeners.push(_this.renderer.listen('document', 'mouseup', (/**
+             * @return {?}
+             */
+            function () { return _this.onMouseUp(); })));
+        }));
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        function () {
+            _this.listeners.push(_this.renderer.listen('document', 'mousemove', (/**
+             * @param {?} e
+             * @return {?}
+             */
+            function (e) { return _this.onMouseMove(e, startPoint, leftArea, rightArea); })));
+        }));
         this.isDragging = true;
     };
     /**
@@ -28052,13 +29295,18 @@ var McSplitterComponent = /** @class */ (function () {
     function (area) {
         /** @type {?} */
         var indexToRemove = -1;
-        this.areas.some(function (item, index) {
+        this.areas.some((/**
+         * @param {?} item
+         * @param {?} index
+         * @return {?}
+         */
+        function (item, index) {
             if (item.area === area) {
                 indexToRemove = index;
                 return true;
             }
             return false;
-        });
+        }));
         if (indexToRemove === -1) {
             return;
         }
@@ -28561,7 +29809,7 @@ var McSplitterAreaDirective = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSplitterModule = /** @class */ (function () {
     function McSplitterModule() {
@@ -28589,7 +29837,7 @@ var McSplitterModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var nextUniqueId$9 = 0;
@@ -28624,9 +29872,16 @@ var McToggleComponent = /** @class */ (function (_super) {
         _this._checked = false;
         _this.change = new core.EventEmitter();
         // tslint:disable-next-line:no-empty
-        _this._onTouchedCallback = function () { };
+        _this._onTouchedCallback = (/**
+         * @return {?}
+         */
+        function () { });
         // tslint:disable-next-line:no-empty
-        _this._onChangeCallback = function (_) { };
+        _this._onChangeCallback = (/**
+         * @param {?} _
+         * @return {?}
+         */
+        function (_) { });
         _this.tabIndex = parseInt(tabIndex) || 0;
         _this._focusMonitor.monitor(_this._elementRef.nativeElement, true);
         return _this;
@@ -28821,7 +30076,10 @@ var McToggleComponent = /** @class */ (function (_super) {
                     template: "<label [attr.for]=\"inputId\" class=\"mc-toggle-layout\" #label><div class=\"mc-toggle__container\" [class.left]=\"labelPosition === 'left'\"><input #input type=\"checkbox\" class=\"mc-toggle-input cdk-visually-hidden\" [id]=\"inputId\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (click)=\"_onInputClick($event)\" (change)=\"_onInteractionEvent($event)\"><div class=\"mc-toggle-bar-container\"><div class=\"mc-toggle__focus-frame\"></div><div class=\"mc-toggle-bar\"><div class=\"mc-toggle__circle\" [@switch]=\"checked\"></div></div></div><div class=\"mc-toggle__content\" [class.left]=\"labelPosition === 'left'\" [class.right]=\"labelPosition === 'right'\"><span class=\"mc-toggle-label\" (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></div></div></label>",
                     styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-toggle .mc-toggle-bar{position:relative;border-width:1px;border-style:solid}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{display:flex;align-items:center;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:8px}.mc-toggle__content.right{margin-left:8px}.mc-toggle__circle{position:absolute;border-width:1px;border-style:solid;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}.mc-toggle__focus-frame{position:absolute;top:0;left:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:16px;width:28px;border-radius:9px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__focus-frame{border-radius:9px;height:16px;width:28px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:16px;width:16px}.mc-toggle.mc-toggle_small .mc-toggle-bar{height:14px;width:24px;border-radius:8px}.mc-toggle.mc-toggle_small .mc-toggle__focus-frame{border-radius:8px;height:14px;width:24px}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:14px;width:14px}.mc-toggle:not(.mc-disabled){cursor:pointer}"],
                     providers: [
-                        { provide: forms.NG_VALUE_ACCESSOR, useExisting: core.forwardRef(function () { return McToggleComponent; }), multi: true }
+                        { provide: forms.NG_VALUE_ACCESSOR, useExisting: core.forwardRef((/**
+                             * @return {?}
+                             */
+                            function () { return McToggleComponent; })), multi: true }
                     ],
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
@@ -28850,7 +30108,7 @@ var McToggleComponent = /** @class */ (function (_super) {
         { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] }
     ]; };
     McToggleComponent.propDecorators = {
-        _inputElement: [{ type: core.ViewChild, args: ['input',] }],
+        _inputElement: [{ type: core.ViewChild, args: ['input', { static: false },] }],
         labelPosition: [{ type: core.Input }],
         ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
         ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
@@ -28866,7 +30124,7 @@ var McToggleComponent = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McToggleModule = /** @class */ (function () {
     function McToggleModule() {
@@ -28883,7 +30141,7 @@ var McToggleModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTooltipComponent = /** @class */ (function () {
     function McTooltipComponent(cdr) {
@@ -29002,13 +30260,16 @@ var McTooltipComponent = /** @class */ (function () {
             if (this.mcTrigger !== 'manual') {
                 this.closeOnInteraction = true;
             }
-            this.showTid = setTimeout(function () {
+            this.showTid = setTimeout((/**
+             * @return {?}
+             */
+            function () {
                 _this.mcVisible = true;
                 _this.mcVisibleChange.emit(true);
                 // Mark for check so if any parent component has set the
                 // ChangeDetectionStrategy to OnPush it will be checked anyways
                 _this.markForCheck();
-            }, this.mcMouseEnterDelay);
+            }), this.mcMouseEnterDelay);
         }
     };
     /**
@@ -29022,14 +30283,17 @@ var McTooltipComponent = /** @class */ (function () {
         if (this.showTid) {
             clearTimeout(this.showTid);
         }
-        this.hideTid = setTimeout(function () {
+        this.hideTid = setTimeout((/**
+         * @return {?}
+         */
+        function () {
             _this.mcVisible = false;
             _this.mcVisibleChange.emit(false);
             _this.onHideSubject.next();
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
             _this.markForCheck();
-        }, this.mcMouseLeaveDelay);
+        }), this.mcMouseLeaveDelay);
     };
     /**
      * @return {?}
@@ -29127,7 +30391,10 @@ var MC_TOOLTIP_SCROLL_STRATEGY = new core.InjectionToken('mc-tooltip-scroll-stra
  * @return {?}
  */
 function mcTooltipScrollStrategyFactory(overlay$$1) {
-    return function () { return overlay$$1.scrollStrategies.reposition({ scrollThrottle: 20 }); };
+    return (/**
+     * @return {?}
+     */
+    function () { return overlay$$1.scrollStrategies.reposition({ scrollThrottle: 20 }); });
 }
 /**
  * \@docs-private
@@ -29390,16 +30657,23 @@ var McTooltip = /** @class */ (function () {
         var scrollableAncestors = this.scrollDispatcher
             .getAncestorScrollContainers(this.elementRef);
         strategy.withScrollableContainers(scrollableAncestors);
-        strategy.positionChanges.pipe(operators.takeUntil(this.destroyed)).subscribe(function (change) {
+        strategy.positionChanges.pipe(operators.takeUntil(this.destroyed)).subscribe((/**
+         * @param {?} change
+         * @return {?}
+         */
+        function (change) {
             if (_this.tooltip) {
                 _this.onPositionChange(change);
                 if (change.scrollableViewProperties.isOverlayClipped && _this.tooltip.mcVisible) {
                     // After position changes occur and the overlay is clipped by
                     // a parent scrollable then close the tooltip.
-                    _this.ngZone.run(function () { return _this.hide(); });
+                    _this.ngZone.run((/**
+                     * @return {?}
+                     */
+                    function () { return _this.hide(); }));
                 }
             }
-        });
+        }));
         this.overlayRef = this.overlay.create({
             direction: this.direction,
             positionStrategy: strategy,
@@ -29409,7 +30683,10 @@ var McTooltip = /** @class */ (function () {
         this.updatePosition();
         this.overlayRef.detachments()
             .pipe(operators.takeUntil(this.destroyed))
-            .subscribe(function () { return _this.detach(); });
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.detach(); }));
         return this.overlayRef;
     };
     /**
@@ -29436,7 +30713,11 @@ var McTooltip = /** @class */ (function () {
         var _this = this;
         /** @type {?} */
         var updatedPlacement = this.mcPlacement;
-        Object.keys(this.availablePositions).some(function (key) {
+        Object.keys(this.availablePositions).some((/**
+         * @param {?} key
+         * @return {?}
+         */
+        function (key) {
             if ($event.connectionPair.originX === _this.availablePositions[key].originX &&
                 $event.connectionPair.originY === _this.availablePositions[key].originY &&
                 $event.connectionPair.overlayX === _this.availablePositions[key].overlayX &&
@@ -29445,7 +30726,7 @@ var McTooltip = /** @class */ (function () {
                 return true;
             }
             return false;
-        });
+        }));
         this.updateCompValue('mcPlacement', updatedPlacement);
         if (this.tooltip) {
             this.tooltip.setClassMap();
@@ -29516,9 +30797,14 @@ var McTooltip = /** @class */ (function () {
         if (this.overlayRef) {
             this.overlayRef.dispose();
         }
-        this.manualListeners.forEach(function (listener, event) {
+        this.manualListeners.forEach((/**
+         * @param {?} listener
+         * @param {?} event
+         * @return {?}
+         */
+        function (listener, event) {
             return _this.elementRef.nativeElement.removeEventListener(event, listener);
-        });
+        }));
         this.manualListeners.clear();
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
@@ -29555,15 +30841,37 @@ var McTooltip = /** @class */ (function () {
         var _this = this;
         if (this.mcTrigger === 'hover') {
             this.manualListeners
-                .set('mouseenter', function () { return _this.show(); })
-                .set('mouseleave', function () { return _this.hide(); })
-                .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
+                .set('mouseenter', (/**
+             * @return {?}
+             */
+            function () { return _this.show(); }))
+                .set('mouseleave', (/**
+             * @return {?}
+             */
+            function () { return _this.hide(); }))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
         }
         if (this.mcTrigger === 'focus') {
             this.manualListeners
-                .set('focus', function () { return _this.show(); })
-                .set('blur', function () { return _this.hide(); })
-                .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
+                .set('focus', (/**
+             * @return {?}
+             */
+            function () { return _this.show(); }))
+                .set('blur', (/**
+             * @return {?}
+             */
+            function () { return _this.hide(); }))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
         }
     };
     /**
@@ -29583,7 +30891,10 @@ var McTooltip = /** @class */ (function () {
                 this.tooltip = overlayRef.attach(this.portal).instance;
                 this.tooltip.afterHidden()
                     .pipe(operators.takeUntil(this.destroyed))
-                    .subscribe(function () { return _this.detach(); });
+                    .subscribe((/**
+                 * @return {?}
+                 */
+                function () { return _this.detach(); }));
                 this.isDynamicTooltip = true;
                 /** @type {?} */
                 var properties = [
@@ -29596,13 +30907,21 @@ var McTooltip = /** @class */ (function () {
                     'mсTooltipClass',
                     'mcVisible'
                 ];
-                properties.forEach(function (property) { return _this.updateCompValue(property, _this[property]); });
+                properties.forEach((/**
+                 * @param {?} property
+                 * @return {?}
+                 */
+                function (property) { return _this.updateCompValue(property, _this[property]); }));
                 this.tooltip.mcVisibleChange.pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
-                    .subscribe(function (data) {
+                    .subscribe((/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                function (data) {
                     _this.mcVisible = data;
                     _this.mcVisibleChange.emit(data);
                     _this.isTooltipOpen = data;
-                });
+                }));
             }
             this.updatePosition();
             this.tooltip.show();
@@ -29804,7 +31123,7 @@ var McTooltip = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McToolTipModule = /** @class */ (function () {
     function McToolTipModule() {
@@ -29823,7 +31142,7 @@ var McToolTipModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McVerticalNavbarItemIcon = /** @class */ (function () {
     function McVerticalNavbarItemIcon() {
@@ -29918,7 +31237,7 @@ var McVerticalNavbarItem = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -29937,7 +31256,7 @@ function toggleVerticalNavbarAnimation() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McVerticalNavbarHeader = /** @class */ (function () {
     function McVerticalNavbarHeader() {
@@ -30004,7 +31323,7 @@ var McVerticalNavbar = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var COMPONENTS = [
@@ -30035,10 +31354,10 @@ var McVerticalNavbarModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var VERSION = new core.Version('1.0.0-beta.7');
+var VERSION = new core.Version('8.0.0-beta.0');
 
 exports.VERSION = VERSION;
 exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
@@ -30225,8 +31544,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb28 = CssUnitPipe;
-exports.ɵa28 = McModalControlService;
+exports.ɵb27 = CssUnitPipe;
+exports.ɵa27 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -30278,15 +31597,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd14 = McTabBase;
-exports.ɵe14 = mcTabMixinBase;
-exports.ɵa14 = McTabHeaderBase;
-exports.ɵb14 = McTabLabelWrapperBase;
-exports.ɵc14 = mcTabLabelWrapperMixinBase;
-exports.ɵh14 = McTabLinkBase;
-exports.ɵf14 = McTabNavBase;
-exports.ɵi14 = mcTabLinkMixinBase;
-exports.ɵg14 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;

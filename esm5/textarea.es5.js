@@ -16,7 +16,7 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_TEXTAREA_VALUE_ACCESSOR = new InjectionToken('MC_TEXTAREA_VALUE_ACCESSOR');
@@ -189,7 +189,10 @@ var McTextarea = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        setTimeout(function () { return _this.grow(); }, 0);
+        setTimeout((/**
+         * @return {?}
+         */
+        function () { return _this.grow(); }), 0);
         this.lineHeight = parseInt((/** @type {?} */ (getComputedStyle(this.elementRef.nativeElement).lineHeight)), 10);
         /** @type {?} */
         var paddingTop = parseInt((/** @type {?} */ (getComputedStyle(this.elementRef.nativeElement).paddingTop)), 10);
@@ -250,7 +253,10 @@ var McTextarea = /** @class */ (function (_super) {
         if (!this.canGrow) {
             return;
         }
-        this.ngZone.runOutsideAngular(function () {
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        function () {
             /** @type {?} */
             var textarea = _this.elementRef.nativeElement;
             /** @type {?} */
@@ -262,7 +268,7 @@ var McTextarea = /** @class */ (function (_super) {
             /** @type {?} */
             var height = Math.max(_this.minHeight, textarea.scrollHeight + diff + _this.freeRowsHeight);
             textarea.style.height = height + "px";
-        });
+        }));
     };
     /** Focuses the textarea. */
     /**
@@ -421,7 +427,7 @@ var McTextarea = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTextareaModule = /** @class */ (function () {
     function McTextareaModule() {
@@ -438,12 +444,12 @@ var McTextareaModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { MC_TEXTAREA_VALUE_ACCESSOR, McTextareaBase, McTextareaMixinBase, McTextarea, McTextareaModule };

@@ -41,7 +41,7 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var nextUniqueId = 0;
@@ -112,9 +112,12 @@ var McSelectSearch = /** @class */ (function () {
         if (!this.input.ngControl) {
             throw Error('McSelectSearch does not work without ngControl');
         }
-        this.searchChangesSubscription = (/** @type {?} */ (this.input.ngControl.valueChanges)).subscribe(function () {
+        this.searchChangesSubscription = (/** @type {?} */ (this.input.ngControl.valueChanges)).subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.isSearchChanged = true;
-        });
+        }));
     };
     /**
      * @return {?}
@@ -132,7 +135,7 @@ var McSelectSearch = /** @class */ (function () {
                 },] },
     ];
     McSelectSearch.propDecorators = {
-        input: [{ type: core.ContentChild, args: [input.McInput,] }]
+        input: [{ type: core.ContentChild, args: [input.McInput, { static: false },] }]
     };
     return McSelectSearch;
 }());
@@ -216,14 +219,28 @@ var McSelect = /** @class */ (function (_super) {
         /**
          * Combined stream of all of the child options' change events.
          */
-        _this.optionSelectionChanges = (/** @type {?} */ (rxjs.defer(function () {
+        _this.optionSelectionChanges = (/** @type {?} */ (rxjs.defer((/**
+         * @return {?}
+         */
+        function () {
             if (_this.options) {
-                return rxjs.merge.apply(void 0, _this.options.map(function (option) { return option.onSelectionChange; }).concat(_this.selectionModel.selected.map(function (option) { return option.onSelectionChange; })));
+                return rxjs.merge.apply(void 0, _this.options.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.onSelectionChange; })).concat(_this.selectionModel.selected.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.onSelectionChange; }))));
             }
             return _this._ngZone.onStable
                 .asObservable()
-                .pipe(operators.take(1), operators.switchMap(function () { return _this.optionSelectionChanges; }));
-        })));
+                .pipe(operators.take(1), operators.switchMap((/**
+             * @return {?}
+             */
+            function () { return _this.optionSelectionChanges; })));
+        }))));
         /**
          * Event emitted when the select panel has been toggled.
          */
@@ -231,11 +248,25 @@ var McSelect = /** @class */ (function (_super) {
         /**
          * Event emitted when the select has been opened.
          */
-        _this.openedStream = _this.openedChange.pipe(operators.filter(function (o) { return o; }), operators.map(function () { }));
+        _this.openedStream = _this.openedChange.pipe(operators.filter((/**
+         * @param {?} o
+         * @return {?}
+         */
+        function (o) { return o; })), operators.map((/**
+         * @return {?}
+         */
+        function () { })));
         /**
          * Event emitted when the select has been closed.
          */
-        _this.closedStream = _this.openedChange.pipe(operators.filter(function (o) { return !o; }), operators.map(function () { }));
+        _this.closedStream = _this.openedChange.pipe(operators.filter((/**
+         * @param {?} o
+         * @return {?}
+         */
+        function (o) { return !o; })), operators.map((/**
+         * @return {?}
+         */
+        function () { })));
         /**
          * Event emitted when the selected value has been changed by the user.
          */
@@ -265,15 +296,26 @@ var McSelect = /** @class */ (function (_super) {
         /**
          * `View -> model callback called when value changes`
          */
-        _this.onChange = function () { };
+        _this.onChange = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * `View -> model callback called when select has been touched`
          */
-        _this.onTouched = function () { };
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * Comparison function to specify which option is displayed. Defaults to object equality.
          */
-        _this._compareWith = function (o1, o2) { return o1 === o2; };
+        _this._compareWith = (/**
+         * @param {?} o1
+         * @param {?} o2
+         * @return {?}
+         */
+        function (o1, o2) { return o1 === o2; });
         if (_this.ngControl) {
             // Note: we provide the value accessor through here, instead of
             // the `providers` to avoid running into a circular import.
@@ -463,7 +505,10 @@ var McSelect = /** @class */ (function (_super) {
         // https://github.com/angular/angular/issues/24084
         this.panelDoneAnimatingStream
             .pipe(operators.distinctUntilChanged(), operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this.panelOpen) {
                 _this.scrollTop = 0;
                 _this.openedChange.emit(true);
@@ -474,7 +519,7 @@ var McSelect = /** @class */ (function (_super) {
                 _this.overlayDir.offsetX = 0;
                 _this._changeDetectorRef.markForCheck();
             }
-        });
+        }));
     };
     /**
      * @return {?}
@@ -487,16 +532,31 @@ var McSelect = /** @class */ (function (_super) {
         this.initKeyManager();
         this.selectionModel.changed
             .pipe(operators.takeUntil(this.destroy))
-            .subscribe(function (event) {
-            event.added.forEach(function (option) { return option.select(); });
-            event.removed.forEach(function (option) { return option.deselect(); });
-        });
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            event.added.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.select(); }));
+            event.removed.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.deselect(); }));
+        }));
         this.options.changes
             .pipe(operators.startWith(null), operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.resetOptions();
             _this.initializeSelection();
-        });
+        }));
     };
     /**
      * @return {?}
@@ -507,9 +567,15 @@ var McSelect = /** @class */ (function (_super) {
     function () {
         var _this = this;
         this.tags.changes
-            .subscribe(function () {
-            setTimeout(function () { return _this.calculateHiddenItems(); }, 0);
-        });
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            setTimeout((/**
+             * @return {?}
+             */
+            function () { return _this.calculateHiddenItems(); }), 0);
+        }));
     };
     /**
      * @return {?}
@@ -602,11 +668,14 @@ var McSelect = /** @class */ (function (_super) {
         // Set the font size on the panel element once it exists.
         this._ngZone.onStable.asObservable()
             .pipe(operators.take(1))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this.triggerFontSize && _this.overlayDir.overlayRef && _this.overlayDir.overlayRef.overlayElement) {
                 _this.overlayDir.overlayRef.overlayElement.style.fontSize = _this.triggerFontSize + "px";
             }
-        });
+        }));
         this.resetSearch();
     };
     /** Closes the overlay panel and focuses the host element. */
@@ -748,7 +817,11 @@ var McSelect = /** @class */ (function (_super) {
             }
             if (this._multiple) {
                 /** @type {?} */
-                var selectedOptions = this.selectionModel.selected.map(function (option) { return option.viewValue; });
+                var selectedOptions = this.selectionModel.selected.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.viewValue; }));
                 if (this.isRtl()) {
                     selectedOptions.reverse();
                 }
@@ -887,12 +960,15 @@ var McSelect = /** @class */ (function (_super) {
         var _this = this;
         this.overlayDir.positionChange
             .pipe(operators.take(1))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._changeDetectorRef.detectChanges();
             _this.calculateOverlayOffsetX();
             _this.optionsContainer.nativeElement.scrollTop = _this.scrollTop;
             _this.updateScrollSize();
-        });
+        }));
     };
     /** Returns the theme to be used on the panel. */
     /**
@@ -1016,12 +1092,16 @@ var McSelect = /** @class */ (function (_super) {
         var totalVisibleItemsWidth = 0;
         /** @type {?} */
         var itemMargin = 4;
-        this.tags.forEach(function (tag) {
+        this.tags.forEach((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) {
             if (tag.nativeElement.offsetTop < tag.nativeElement.offsetHeight) {
                 totalVisibleItemsWidth += tag.nativeElement.getBoundingClientRect().width + itemMargin;
                 visibleItems++;
             }
-        });
+        }));
         this.hiddenItems = ((/** @type {?} */ (this.selected))).length - visibleItems;
         if (this.hiddenItems) {
             /** @type {?} */
@@ -1097,9 +1177,13 @@ var McSelect = /** @class */ (function (_super) {
         var totalItemsWidth = 0;
         /** @type {?} */
         var itemMargin = 4;
-        triggerClone.querySelectorAll('mc-tag').forEach(function (item) {
+        triggerClone.querySelectorAll('mc-tag').forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) {
             totalItemsWidth += (/** @type {?} */ (item.getBoundingClientRect().width)) + itemMargin;
-        });
+        }));
         triggerClone.remove();
         return totalItemsWidth;
     };
@@ -1183,15 +1267,23 @@ var McSelect = /** @class */ (function (_super) {
         else if (this._multiple && keyCode === keycodes.A && event.ctrlKey) {
             event.preventDefault();
             /** @type {?} */
-            var hasDeselectedOptions_1 = this.options.some(function (option) { return !option.selected; });
-            this.options.forEach(function (option) {
+            var hasDeselectedOptions_1 = this.options.some((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return !option.selected; }));
+            this.options.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) {
                 if (hasDeselectedOptions_1 && !option.disabled) {
                     option.select();
                 }
                 else {
                     option.deselect();
                 }
-            });
+            }));
         }
         else {
             /** @type {?} */
@@ -1215,9 +1307,12 @@ var McSelect = /** @class */ (function (_super) {
         var _this = this;
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
-        Promise.resolve().then(function () {
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        function () {
             _this.setSelectionByValue(_this.ngControl ? _this.ngControl.value : _this._value);
-        });
+        }));
     };
     /**
      * Sets the selected option based on a value. If no option can be
@@ -1245,7 +1340,11 @@ var McSelect = /** @class */ (function (_super) {
                 throw core$1.getMcSelectNonArrayValueError();
             }
             this.selectionModel.clear();
-            value.forEach(function (currentValue) { return _this.selectValue(currentValue); });
+            value.forEach((/**
+             * @param {?} currentValue
+             * @return {?}
+             */
+            function (currentValue) { return _this.selectValue(currentValue); }));
             this.sortValues();
         }
         else {
@@ -1272,7 +1371,11 @@ var McSelect = /** @class */ (function (_super) {
      */
     function (value) {
         var _this = this;
-        return this.options.toArray().concat(this.previousSelectionModelSelected).find(function (option) {
+        return this.options.toArray().concat(this.previousSelectionModelSelected).find((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) {
             try {
                 // Treat null as a special reset value.
                 return option.value != null && _this._compareWith(option.value, value);
@@ -1284,7 +1387,7 @@ var McSelect = /** @class */ (function (_super) {
                 }
                 return false;
             }
-        });
+        }));
     };
     /**
      * Finds and selects and option based on its value.
@@ -1331,22 +1434,28 @@ var McSelect = /** @class */ (function (_super) {
             .withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
         this.keyManager.tabOut
             .pipe(operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             // Restore focus to the trigger before closing. Ensures that the focus
             // position won't be lost if the user got focus into the overlay.
             _this.focus();
             _this.close();
-        });
+        }));
         this.keyManager.change
             .pipe(operators.takeUntil(this.destroy))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this._panelOpen && _this.panel) {
                 _this.scrollActiveOptionIntoView();
             }
             else if (!_this._panelOpen && !_this.multiple && _this.keyManager.activeItem) {
                 _this.keyManager.activeItem.selectViaInteraction();
             }
-        });
+        }));
     };
     /** Drops current option subscriptions and IDs and resets from scratch. */
     /**
@@ -1365,24 +1474,38 @@ var McSelect = /** @class */ (function (_super) {
         var changedOrDestroyed = rxjs.merge(this.options.changes, this.destroy);
         this.optionSelectionChanges
             .pipe(operators.takeUntil(changedOrDestroyed))
-            .subscribe(function (event) {
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             _this.onSelect(event.source, event.isUserInput);
             if (_this.search && _this.search.isSearchChanged) {
-                Promise.resolve().then(function () { return _this.keyManager.setFirstItemActive(); });
+                Promise.resolve().then((/**
+                 * @return {?}
+                 */
+                function () { return _this.keyManager.setFirstItemActive(); }));
                 _this.search.isSearchChanged = false;
             }
             if (event.isUserInput && !_this.multiple && _this._panelOpen) {
                 _this.close();
                 _this.focus();
             }
-        });
+        }));
         // Listen to changes in the internal state of the options and react accordingly.
         // Handles cases like the labels of the selected options changing.
-        rxjs.merge.apply(void 0, this.options.map(function (option) { return option.stateChanges; })).pipe(operators.takeUntil(changedOrDestroyed))
-            .subscribe(function () {
+        rxjs.merge.apply(void 0, this.options.map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.stateChanges; }))).pipe(operators.takeUntil(changedOrDestroyed))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._changeDetectorRef.markForCheck();
             _this.stateChanges.next();
-        });
+        }));
         this.setOptionIds();
     };
     /** Invoked when an option is clicked. */
@@ -1456,10 +1579,15 @@ var McSelect = /** @class */ (function (_super) {
         if (this.multiple) {
             /** @type {?} */
             var options_1 = this.options.toArray();
-            this.selectionModel.sort(function (a, b) {
+            this.selectionModel.sort((/**
+             * @param {?} a
+             * @param {?} b
+             * @return {?}
+             */
+            function (a, b) {
                 return _this.sortComparator ? _this.sortComparator(a, b, options_1) :
                     options_1.indexOf(a) - options_1.indexOf(b);
-            });
+            }));
             this.stateChanges.next();
         }
     };
@@ -1480,7 +1608,11 @@ var McSelect = /** @class */ (function (_super) {
         /** @type {?} */
         var valueToEmit = null;
         if (this.multiple) {
-            valueToEmit = ((/** @type {?} */ (this.selected))).map(function (option) { return option.value; });
+            valueToEmit = ((/** @type {?} */ (this.selected))).map((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.value; }));
         }
         else {
             valueToEmit = this.selected ? ((/** @type {?} */ (this.selected))).value : fallbackValue;
@@ -1503,7 +1635,11 @@ var McSelect = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.optionIds = this.options.map(function (option) { return option.id; }).join(' ');
+        this.optionIds = this.options.map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.id; })).join(' ');
     };
     /**
      * Highlights the selected item. If no option is selected, it will highlight
@@ -1564,10 +1700,16 @@ var McSelect = /** @class */ (function (_super) {
      */
     function (option) {
         /* tslint:disable-next-line */
-        return this.options.reduce(function (result, current, index) {
+        return this.options.reduce((/**
+         * @param {?} result
+         * @param {?} current
+         * @param {?} index
+         * @return {?}
+         */
+        function (result, current, index) {
             /* tslint:disable-next-line:strict-type-predicates */
             return result === undefined ? (option === current ? index : undefined) : result;
-        }, undefined);
+        }), undefined);
     };
     /** Calculates the scroll position and x- and y-offsets of the overlay panel. */
     /**
@@ -1913,15 +2055,15 @@ var McSelect = /** @class */ (function (_super) {
         { type: undefined, decorators: [{ type: core.Inject, args: [core$1.MC_SELECT_SCROLL_STRATEGY,] }] }
     ]; };
     McSelect.propDecorators = {
-        trigger: [{ type: core.ViewChild, args: ['trigger',] }],
-        panel: [{ type: core.ViewChild, args: ['panel',] }],
-        optionsContainer: [{ type: core.ViewChild, args: ['optionsContainer',] }],
-        overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay,] }],
+        trigger: [{ type: core.ViewChild, args: ['trigger', { static: false },] }],
+        panel: [{ type: core.ViewChild, args: ['panel', { static: false },] }],
+        optionsContainer: [{ type: core.ViewChild, args: ['optionsContainer', { static: false },] }],
+        overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay, { static: false },] }],
         tags: [{ type: core.ViewChildren, args: [tags.McTag,] }],
-        customTrigger: [{ type: core.ContentChild, args: [McSelectTrigger,] }],
+        customTrigger: [{ type: core.ContentChild, args: [McSelectTrigger, { static: false },] }],
         options: [{ type: core.ContentChildren, args: [core$1.McOption, { descendants: true },] }],
         optionGroups: [{ type: core.ContentChildren, args: [core$1.McOptgroup,] }],
-        search: [{ type: core.ContentChild, args: [McSelectSearch,] }],
+        search: [{ type: core.ContentChild, args: [McSelectSearch, { static: false },] }],
         panelClass: [{ type: core.Input }],
         errorStateMatcher: [{ type: core.Input }],
         sortComparator: [{ type: core.Input }],
@@ -1942,7 +2084,7 @@ var McSelect = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSelectModule = /** @class */ (function () {
     function McSelectModule() {

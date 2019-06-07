@@ -22,7 +22,7 @@ import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token to be used to override the default options for the chips module.
@@ -32,7 +32,7 @@ var MC_TAGS_DEFAULT_OPTIONS = new InjectionToken('mc-tags-default-options');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Event object emitted by McTag when selected or deselected.
@@ -262,7 +262,11 @@ var McTag = /** @class */ (function (_super) {
      */
     function () {
         /** @type {?} */
-        var icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
+        var icons = this.contentChildren.map((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return item._elementRef.nativeElement; }));
         if (icons.length === 1) {
             /** @type {?} */
             var iconElement = icons[0];
@@ -467,12 +471,18 @@ var McTag = /** @class */ (function (_super) {
         this._ngZone.onStable
             .asObservable()
             .pipe(take(1))
-            .subscribe(function () {
-            _this._ngZone.run(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            _this._ngZone.run((/**
+             * @return {?}
+             */
+            function () {
                 _this.hasFocus = false;
                 _this.onBlur.next({ tag: _this });
-            });
-        });
+            }));
+        }));
     };
     /**
      * @private
@@ -524,9 +534,12 @@ var McTag = /** @class */ (function (_super) {
     ]; };
     McTag.propDecorators = {
         contentChildren: [{ type: ContentChildren, args: [McIcon,] }],
-        avatar: [{ type: ContentChild, args: [McTagAvatar,] }],
-        trailingIcon: [{ type: ContentChild, args: [McTagTrailingIcon,] }],
-        removeIcon: [{ type: ContentChild, args: [forwardRef(function () { return McTagRemove; }),] }],
+        avatar: [{ type: ContentChild, args: [McTagAvatar, { static: false },] }],
+        trailingIcon: [{ type: ContentChild, args: [McTagTrailingIcon, { static: false },] }],
+        removeIcon: [{ type: ContentChild, args: [forwardRef((/**
+                     * @return {?}
+                     */
+                    function () { return McTagRemove; })), { static: false },] }],
         selectionChange: [{ type: Output }],
         destroyed: [{ type: Output }],
         removed: [{ type: Output }],
@@ -592,7 +605,7 @@ var McTagRemove = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTagListBase = /** @class */ (function () {
     function McTagListBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
@@ -668,10 +681,21 @@ var McTagList = /** @class */ (function (_super) {
          */
         _this.destroyed = new Subject();
         // tslint:disable-next-line:no-empty
-        _this.onTouched = function () { };
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         // tslint:disable-next-line:no-empty
-        _this.onChange = function () { };
-        _this._compareWith = function (o1, o2) { return o1 === o2; };
+        _this.onChange = (/**
+         * @return {?}
+         */
+        function () { });
+        _this._compareWith = (/**
+         * @param {?} o1
+         * @param {?} o2
+         * @return {?}
+         */
+        function (o1, o2) { return o1 === o2; });
         if (_this.ngControl) {
             _this.ngControl.valueAccessor = _this;
         }
@@ -684,7 +708,11 @@ var McTagList = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return merge.apply(void 0, this.tags.map(function (tag) { return tag.selectionChange; }));
+            return merge.apply(void 0, this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.selectionChange; })));
         },
         enumerable: true,
         configurable: true
@@ -696,7 +724,11 @@ var McTagList = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return merge.apply(void 0, this.tags.map(function (tag) { return tag.onFocus; }));
+            return merge.apply(void 0, this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.onFocus; })));
         },
         enumerable: true,
         configurable: true
@@ -708,7 +740,11 @@ var McTagList = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return merge.apply(void 0, this.tags.map(function (tag) { return tag.onBlur; }));
+            return merge.apply(void 0, this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.onBlur; })));
         },
         enumerable: true,
         configurable: true
@@ -720,7 +756,11 @@ var McTagList = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return merge.apply(void 0, this.tags.map(function (tag) { return tag.destroyed; }));
+            return merge.apply(void 0, this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.destroyed; })));
         },
         enumerable: true,
         configurable: true
@@ -962,7 +1002,11 @@ var McTagList = /** @class */ (function (_super) {
             var _this = this;
             this._selectable = coerceBooleanProperty(value);
             if (this.tags) {
-                this.tags.forEach(function (tag) { return tag.tagListSelectable = _this._selectable; });
+                this.tags.forEach((/**
+                 * @param {?} tag
+                 * @return {?}
+                 */
+                function (tag) { return tag.tagListSelectable = _this._selectable; }));
             }
         },
         enumerable: true,
@@ -994,27 +1038,43 @@ var McTagList = /** @class */ (function (_super) {
         if (this.dir) {
             this.dir.change
                 .pipe(takeUntil(this.destroyed))
-                .subscribe(function (dir) { return _this.keyManager.withHorizontalOrientation(dir); });
+                .subscribe((/**
+             * @param {?} dir
+             * @return {?}
+             */
+            function (dir) { return _this.keyManager.withHorizontalOrientation(dir); }));
         }
         // Prevents the tag list from capturing focus and redirecting
         // it back to the first tag when the user tabs out.
         this.keyManager.tabOut
             .pipe(takeUntil(this.destroyed))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._tabIndex = -1;
-            setTimeout(function () {
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
                 _this._tabIndex = _this.userTabIndex || 0;
                 _this.changeDetectorRef.markForCheck();
-            });
-        });
+            }));
+        }));
         // When the list changes, re-subscribe
         this.tags.changes
             .pipe(startWith(null), takeUntil(this.destroyed))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             if (_this.disabled) {
                 // Since this happens after the content has been
                 // checked, we need to defer it to the next tick.
-                Promise.resolve().then(function () { _this.syncTagsDisabledState(); });
+                Promise.resolve().then((/**
+                 * @return {?}
+                 */
+                function () { _this.syncTagsDisabledState(); }));
             }
             _this.resetTags();
             // Reset tags selected/deselected status
@@ -1025,9 +1085,12 @@ var McTagList = /** @class */ (function (_super) {
             _this.updateFocusForDestroyedTags();
             // Defer setting the value in order to avoid the "Expression
             // has changed after it was checked" errors from Angular.
-            Promise.resolve().then(function () { _this.tagChanges.emit(_this.tags.toArray()); });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () { _this.tagChanges.emit(_this.tags.toArray()); }));
             _this.stateChanges.next();
-        });
+        }));
     };
     /**
      * @return {?}
@@ -1262,9 +1325,17 @@ var McTagList = /** @class */ (function (_super) {
         var _this = this;
         if (isUserInput === void 0) { isUserInput = true; }
         this.clearSelection();
-        this.tags.forEach(function (tag) { return tag.deselect(); });
+        this.tags.forEach((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) { return tag.deselect(); }));
         if (Array.isArray(value)) {
-            value.forEach(function (currentValue) { return _this.selectValue(currentValue, isUserInput); });
+            value.forEach((/**
+             * @param {?} currentValue
+             * @return {?}
+             */
+            function (currentValue) { return _this.selectValue(currentValue, isUserInput); }));
             this.sortValues();
         }
         else {
@@ -1297,11 +1368,14 @@ var McTagList = /** @class */ (function (_super) {
                 // If the focus is not moved to tag input, mark the field as touched. If the focus moved
                 // to tag input, do nothing.
                 // Timeout is needed to wait for the focus() event trigger on tag input.
-                setTimeout(function () {
+                setTimeout((/**
+                 * @return {?}
+                 */
+                function () {
                     if (!_this.focused) {
                         _this.markAsTouched();
                     }
-                });
+                }));
             }
             else {
                 // If there's no tag input, then mark the field as touched.
@@ -1430,9 +1504,13 @@ var McTagList = /** @class */ (function (_super) {
         var _this = this;
         if (isUserInput === void 0) { isUserInput = true; }
         /** @type {?} */
-        var correspondingTag = this.tags.find(function (tag) {
+        var correspondingTag = this.tags.find((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) {
             return tag.value != null && _this._compareWith(tag.value, value);
-        });
+        }));
         if (correspondingTag) {
             if (isUserInput) {
                 correspondingTag.selectViaInteraction();
@@ -1456,12 +1534,15 @@ var McTagList = /** @class */ (function (_super) {
         var _this = this;
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
-        Promise.resolve().then(function () {
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        function () {
             if (_this.ngControl || _this._value) {
                 _this.setSelectionByValue(_this.ngControl ? _this.ngControl.value : _this._value, false);
                 _this.stateChanges.next();
             }
-        });
+        }));
     };
     /**
      * Deselects every tag in the list.
@@ -1481,11 +1562,15 @@ var McTagList = /** @class */ (function (_super) {
      */
     function (skip) {
         this.selectionModel.clear();
-        this.tags.forEach(function (tag) {
+        this.tags.forEach((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) {
             if (tag !== skip) {
                 tag.deselect();
             }
-        });
+        }));
         this.stateChanges.next();
     };
     /**
@@ -1508,11 +1593,15 @@ var McTagList = /** @class */ (function (_super) {
         var _this = this;
         if (this._multiple) {
             this.selectionModel.clear();
-            this.tags.forEach(function (tag) {
+            this.tags.forEach((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) {
                 if (tag.selected) {
                     _this.selectionModel.select(tag);
                 }
-            });
+            }));
             this.stateChanges.next();
         }
     };
@@ -1533,7 +1622,11 @@ var McTagList = /** @class */ (function (_super) {
         /** @type {?} */
         var valueToEmit = null;
         if (Array.isArray(this.selected)) {
-            valueToEmit = this.selected.map(function (tag) { return tag.value; });
+            valueToEmit = this.selected.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.value; }));
         }
         else {
             valueToEmit = this.selected ? this.selected.value : fallbackValue;
@@ -1597,7 +1690,11 @@ var McTagList = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this.tagSelectionSubscription = this.tagSelectionChanges.subscribe(function (event) {
+        this.tagSelectionSubscription = this.tagSelectionChanges.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             if (event.source.selected) {
                 _this.selectionModel.select(event.source);
             }
@@ -1606,16 +1703,20 @@ var McTagList = /** @class */ (function (_super) {
             }
             // For single selection tag list, make sure the deselected value is unselected.
             if (!_this.multiple) {
-                _this.tags.forEach(function (tag) {
+                _this.tags.forEach((/**
+                 * @param {?} tag
+                 * @return {?}
+                 */
+                function (tag) {
                     if (!_this.selectionModel.isSelected(tag) && tag.selected) {
                         tag.deselect();
                     }
-                });
+                }));
             }
             if (event.isUserInput) {
                 _this.propagateChanges();
             }
-        });
+        }));
     };
     /** Listens to user-generated selection events on each tag. */
     /**
@@ -1630,18 +1731,25 @@ var McTagList = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this.tagFocusSubscription = this.tagFocusChanges.subscribe(function (event) {
+        this.tagFocusSubscription = this.tagFocusChanges.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             /** @type {?} */
             var tagIndex = _this.tags.toArray().indexOf(event.tag);
             if (_this.isValidIndex(tagIndex)) {
                 _this.keyManager.updateActiveItem(tagIndex);
             }
             _this.stateChanges.next();
-        });
-        this.tagBlurSubscription = this.tagBlurChanges.subscribe(function () {
+        }));
+        this.tagBlurSubscription = this.tagBlurChanges.subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.blur();
             _this.stateChanges.next();
-        });
+        }));
     };
     /**
      * @private
@@ -1653,7 +1761,11 @@ var McTagList = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this.tagRemoveSubscription = this.tagRemoveChanges.subscribe(function (event) {
+        this.tagRemoveSubscription = this.tagRemoveChanges.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             /** @type {?} */
             var tag = event.tag;
             /** @type {?} */
@@ -1664,7 +1776,7 @@ var McTagList = /** @class */ (function (_super) {
             if (_this.isValidIndex(tagIndex) && tag.hasFocus) {
                 _this.lastDestroyedTagIndex = tagIndex;
             }
-        });
+        }));
     };
     /** Checks whether an event comes from inside a tag element. */
     /**
@@ -1702,7 +1814,11 @@ var McTagList = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        return this.tags.some(function (tag) { return tag.hasFocus; });
+        return this.tags.some((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        function (tag) { return tag.hasFocus; }));
     };
     /** Syncs the list's disabled state with the individual tags. */
     /**
@@ -1718,9 +1834,13 @@ var McTagList = /** @class */ (function (_super) {
     function () {
         var _this = this;
         if (this.tags) {
-            this.tags.forEach(function (tag) {
+            this.tags.forEach((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) {
                 tag.disabled = _this._disabled;
-            });
+            }));
         }
     };
     McTagList.decorators = [
@@ -1775,7 +1895,7 @@ var McTagList = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Increasing integer for generating unique ids.
 /** @type {?} */
@@ -2040,7 +2160,7 @@ var McTagInput = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ɵ0 = ({ separatorKeyCodes: [ENTER] });
 var McTagsModule = /** @class */ (function () {
@@ -2077,12 +2197,12 @@ var McTagsModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, _McTagMixinBase, McTag, McTagRemove, McTagListBase, _McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS };

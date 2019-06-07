@@ -12,7 +12,7 @@
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Provider Expression that allows mc-button-toggle-group to register as a ControlValueAccessor.
@@ -22,7 +22,10 @@
  */
 var MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McButtonToggleGroup; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McButtonToggleGroup; })),
     multi: true
 };
 /**
@@ -62,12 +65,18 @@ var McButtonToggleGroup = /** @class */ (function () {
          * Now `ngModel` binding is not supported in multiple selection mode.
          */
         // tslint:disable-next-line:no-empty
-        this.controlValueAccessorChangeFn = function () { };
+        this.controlValueAccessorChangeFn = (/**
+         * @return {?}
+         */
+        function () { });
         /**
          * onTouch function registered via registerOnTouch (ControlValueAccessor).
          */
         // tslint:disable-next-line:no-empty
-        this.onTouched = function () { };
+        this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
     }
     Object.defineProperty(McButtonToggleGroup.prototype, "vertical", {
         /** Whether the toggle group is vertical. */
@@ -98,7 +107,11 @@ var McButtonToggleGroup = /** @class */ (function () {
             /** @type {?} */
             var selected = this.selectionModel ? this.selectionModel.selected : [];
             if (this.multiple) {
-                return selected.map(function (toggle) { return toggle.value; });
+                return selected.map((/**
+                 * @param {?} toggle
+                 * @return {?}
+                 */
+                function (toggle) { return toggle.value; }));
             }
             return selected[0] ? selected[0].value : undefined;
         },
@@ -164,7 +177,11 @@ var McButtonToggleGroup = /** @class */ (function () {
             if (!this.buttonToggles) {
                 return;
             }
-            this.buttonToggles.forEach(function (toggle) { return toggle.markForCheck(); });
+            this.buttonToggles.forEach((/**
+             * @param {?} toggle
+             * @return {?}
+             */
+            function (toggle) { return toggle.markForCheck(); }));
         },
         enumerable: true,
         configurable: true
@@ -186,7 +203,11 @@ var McButtonToggleGroup = /** @class */ (function () {
      */
     function () {
         var _a;
-        (_a = this.selectionModel).select.apply(_a, this.buttonToggles.filter(function (toggle) { return toggle.checked; }));
+        (_a = this.selectionModel).select.apply(_a, this.buttonToggles.filter((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        function (toggle) { return toggle.checked; })));
         this.disabled = this._disabled;
     };
     /**
@@ -342,7 +363,11 @@ var McButtonToggleGroup = /** @class */ (function () {
             return false;
         }
         if (this.multiple && Array.isArray(this.rawValue)) {
-            return this.rawValue.some(function (value) { return toggle.value != null && value === toggle.value; });
+            return this.rawValue.some((/**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) { return toggle.value != null && value === toggle.value; }));
         }
         return toggle.value === this.rawValue;
     };
@@ -370,7 +395,11 @@ var McButtonToggleGroup = /** @class */ (function () {
                 throw Error('Value must be an array in multiple-selection mode.');
             }
             this.clearSelection();
-            value.forEach(function (currentValue) { return _this.selectValue(currentValue); });
+            value.forEach((/**
+             * @param {?} currentValue
+             * @return {?}
+             */
+            function (currentValue) { return _this.selectValue(currentValue); }));
         }
         else {
             this.clearSelection();
@@ -390,7 +419,11 @@ var McButtonToggleGroup = /** @class */ (function () {
      */
     function () {
         this.selectionModel.clear();
-        this.buttonToggles.forEach(function (toggle) { return toggle.checked = false; });
+        this.buttonToggles.forEach((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        function (toggle) { return toggle.checked = false; }));
     };
     /** Selects a value if there's a toggle that corresponds to it. */
     /**
@@ -407,9 +440,13 @@ var McButtonToggleGroup = /** @class */ (function () {
      */
     function (value) {
         /** @type {?} */
-        var correspondingOption = this.buttonToggles.find(function (toggle) {
+        var correspondingOption = this.buttonToggles.find((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        function (toggle) {
             return toggle.value != null && toggle.value === value;
-        });
+        }));
         if (correspondingOption) {
             correspondingOption.checked = true;
             this.selectionModel.select(correspondingOption);
@@ -435,7 +472,10 @@ var McButtonToggleGroup = /** @class */ (function () {
         vertical: [{ type: core.Input }],
         value: [{ type: core.Input }],
         multiple: [{ type: core.Input }],
-        buttonToggles: [{ type: core.ContentChildren, args: [core.forwardRef(function () { return McButtonToggle; }),] }],
+        buttonToggles: [{ type: core.ContentChildren, args: [core.forwardRef((/**
+                     * @return {?}
+                     */
+                    function () { return McButtonToggle; })),] }],
         disabled: [{ type: core.Input }],
         valueChange: [{ type: core.Output }],
         change: [{ type: core.Output }]
@@ -529,7 +569,10 @@ var McButtonToggle = /** @class */ (function () {
         // Remove the toggle from the selection once it's destroyed. Needs to happen
         // on the next tick in order to avoid "changed after checked" errors.
         if (group && group.isSelected(this)) {
-            Promise.resolve().then(function () { return group.syncButtonToggle(_this, false); });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () { return group.syncButtonToggle(_this, false); }));
         }
     };
     /** Focuses the button. */
@@ -620,7 +663,7 @@ var McButtonToggle = /** @class */ (function () {
     ]; };
     McButtonToggle.propDecorators = {
         checked: [{ type: core.Input }],
-        mcButton: [{ type: core.ViewChild, args: [button.McButton,] }],
+        mcButton: [{ type: core.ViewChild, args: [button.McButton, { static: false },] }],
         value: [{ type: core.Input }],
         tabIndex: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
@@ -631,7 +674,7 @@ var McButtonToggle = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McButtonToggleModule = /** @class */ (function () {
     function McButtonToggleModule() {

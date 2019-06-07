@@ -38,7 +38,7 @@ var __assign = function() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var mcPopoverAnimations = {
@@ -60,7 +60,7 @@ var mcPopoverAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McPopoverComponent = /** @class */ (function () {
     function McPopoverComponent(changeDetectorRef, componentElementRef) {
@@ -380,7 +380,10 @@ var MC_POPOVER_SCROLL_STRATEGY = new core.InjectionToken('mc-popover-scroll-stra
  * @return {?}
  */
 function mcPopoverScrollStrategyFactory(overlay$$1) {
-    return function () { return overlay$$1.scrollStrategies.reposition({ scrollThrottle: 20 }); };
+    return (/**
+     * @return {?}
+     */
+    function () { return overlay$$1.scrollStrategies.reposition({ scrollThrottle: 20 }); });
 }
 /**
  * \@docs-private
@@ -694,16 +697,23 @@ var McPopover = /** @class */ (function () {
         var scrollableAncestors = this.scrollDispatcher
             .getAncestorScrollContainers(this.elementRef);
         strategy.withScrollableContainers(scrollableAncestors);
-        strategy.positionChanges.pipe(operators.takeUntil(this.destroyed)).subscribe(function (change) {
+        strategy.positionChanges.pipe(operators.takeUntil(this.destroyed)).subscribe((/**
+         * @param {?} change
+         * @return {?}
+         */
+        function (change) {
             if (_this.popover) {
                 _this.onPositionChange(change);
                 if (change.scrollableViewProperties.isOverlayClipped && _this.popover.mcVisible) {
                     // After position changes occur and the overlay is clipped by
                     // a parent scrollable then close the popover.
-                    _this.ngZone.run(function () { return _this.hide(); });
+                    _this.ngZone.run((/**
+                     * @return {?}
+                     */
+                    function () { return _this.hide(); }));
                 }
             }
-        });
+        }));
         this.overlayRef = this.overlay.create({
             direction: this.direction,
             positionStrategy: strategy,
@@ -713,7 +723,10 @@ var McPopover = /** @class */ (function () {
         this.updatePosition();
         this.overlayRef.detachments()
             .pipe(operators.takeUntil(this.destroyed))
-            .subscribe(function () { return _this.detach(); });
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.detach(); }));
         return this.overlayRef;
     };
     /**
@@ -740,7 +753,11 @@ var McPopover = /** @class */ (function () {
         var _this = this;
         /** @type {?} */
         var updatedPlacement = this.mcPlacement;
-        Object.keys(this.availablePositions).some(function (key) {
+        Object.keys(this.availablePositions).some((/**
+         * @param {?} key
+         * @return {?}
+         */
+        function (key) {
             if ($event.connectionPair.originX === _this.availablePositions[key].originX &&
                 $event.connectionPair.originY === _this.availablePositions[key].originY &&
                 $event.connectionPair.overlayX === _this.availablePositions[key].overlayX &&
@@ -749,7 +766,7 @@ var McPopover = /** @class */ (function () {
                 return true;
             }
             return false;
-        });
+        }));
         this.updateCompValue('mcPlacement', updatedPlacement);
         if (this.popover) {
             this.updateCompValue('classList', this.classList);
@@ -840,9 +857,14 @@ var McPopover = /** @class */ (function () {
         if (this.overlayRef) {
             this.overlayRef.dispose();
         }
-        this.manualListeners.forEach(function (listener, event) {
+        this.manualListeners.forEach((/**
+         * @param {?} listener
+         * @param {?} event
+         * @return {?}
+         */
+        function (listener, event) {
             return _this.elementRef.nativeElement.removeEventListener(event, listener);
-        });
+        }));
         this.manualListeners.clear();
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
@@ -879,15 +901,37 @@ var McPopover = /** @class */ (function () {
         var _this = this;
         if (this.mcTrigger === 'hover') {
             this.manualListeners
-                .set('mouseenter', function () { return _this.show(); })
-                .set('mouseleave', function () { return _this.hide(); })
-                .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
+                .set('mouseenter', (/**
+             * @return {?}
+             */
+            function () { return _this.show(); }))
+                .set('mouseleave', (/**
+             * @return {?}
+             */
+            function () { return _this.hide(); }))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
         }
         if (this.mcTrigger === 'focus') {
             this.manualListeners
-                .set('focus', function () { return _this.show(); })
-                .set('blur', function () { return _this.hide(); })
-                .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
+                .set('focus', (/**
+             * @return {?}
+             */
+            function () { return _this.show(); }))
+                .set('blur', (/**
+             * @return {?}
+             */
+            function () { return _this.hide(); }))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
         }
     };
     /**
@@ -919,16 +963,27 @@ var McPopover = /** @class */ (function () {
                     'mcContent',
                     'mcFooter'
                 ];
-                properties.forEach(function (property) { return _this.updateCompValue(property, _this[property]); });
+                properties.forEach((/**
+                 * @param {?} property
+                 * @return {?}
+                 */
+                function (property) { return _this.updateCompValue(property, _this[property]); }));
                 this.popover.mcVisibleChange.pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
-                    .subscribe(function (data) {
+                    .subscribe((/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                function (data) {
                     _this.mcVisible = data;
                     _this.mcVisibleChange.emit(data);
                     _this.isPopoverOpen = data;
-                });
+                }));
                 this.popover.afterHidden()
                     .pipe(operators.takeUntil(this.destroyed))
-                    .subscribe(function () { return _this.detach(); });
+                    .subscribe((/**
+                 * @return {?}
+                 */
+                function () { return _this.detach(); }));
             }
             this.updatePosition();
             this.popover.show();
@@ -975,9 +1030,12 @@ var McPopover = /** @class */ (function () {
         // FIXME: Необходимо в некоторых моментах форсировать позиционировать только после рендеринга всего контента
         //
         if (reapplyPosition) {
-            setTimeout(function () {
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
                 position.reapplyLastPosition();
-            });
+            }));
         }
     };
     /**
@@ -1169,7 +1227,7 @@ var McPopover = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McPopoverModule = /** @class */ (function () {
     function McPopoverModule() {

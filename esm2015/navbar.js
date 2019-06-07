@@ -16,7 +16,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
@@ -178,11 +178,15 @@ class McNavbarItem extends _McNavbarMixinBase {
      * @return {?}
      */
     listenClickOutside() {
-        this._subscription.add(this._focusMonitor$.subscribe((origin) => {
+        this._subscription.add(this._focusMonitor$.subscribe((/**
+         * @param {?} origin
+         * @return {?}
+         */
+        (origin) => {
             if (origin === null) {
                 this.forceCloseDropdown();
             }
-        }));
+        })));
     }
     /**
      * @private
@@ -204,18 +208,26 @@ class McNavbarItem extends _McNavbarMixinBase {
      * @return {?}
      */
     startListenFocusDropdownItems() {
-        this._dropdownElements.forEach((el) => {
+        this._dropdownElements.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => {
             this._focusMonitor.monitor(el, true);
-        });
+        }));
     }
     /**
      * @private
      * @return {?}
      */
     stopListenFocusDropdownItems() {
-        this._dropdownElements.forEach((el) => {
+        this._dropdownElements.forEach((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => {
             this._focusMonitor.stopMonitoring(el);
-        });
+        }));
     }
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
     /**
@@ -225,13 +237,25 @@ class McNavbarItem extends _McNavbarMixinBase {
     denyClickIfDisabled() {
         /** @type {?} */
         const events = this.elementRef.nativeElement.eventListeners('click');
-        events.forEach((event) => this.elementRef.nativeElement.removeEventListener('click', event));
-        this.elementRef.nativeElement.addEventListener('click', (event) => {
+        events.forEach((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => this.elementRef.nativeElement.removeEventListener('click', event)));
+        this.elementRef.nativeElement.addEventListener('click', (/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             if (this.elementRef.nativeElement.hasAttribute('disabled')) {
                 event.stopImmediatePropagation();
             }
-        }, true);
-        events.forEach((event) => this.elementRef.nativeElement.addEventListener('click', event));
+        }), true);
+        events.forEach((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => this.elementRef.nativeElement.addEventListener('click', event)));
     }
 }
 McNavbarItem.decorators = [
@@ -290,8 +314,8 @@ McNavbarItem.propDecorators = {
     tabIndex: [{ type: Input }],
     dropdownItems: [{ type: Input }],
     collapsedTitle: [{ type: Input }],
-    dropdownItemTmpl: [{ type: ContentChild, args: ['dropdownItemTmpl', { read: TemplateRef },] }],
-    dropdownContent: [{ type: ViewChild, args: ['dropdownContent', { read: ElementRef },] }]
+    dropdownItemTmpl: [{ type: ContentChild, args: ['dropdownItemTmpl', { read: TemplateRef, static: false },] }],
+    dropdownContent: [{ type: ViewChild, args: ['dropdownContent', { read: ElementRef, static: false },] }]
 };
 class McNavbarContainer {
     constructor() {
@@ -379,7 +403,11 @@ class CachedItemWidth {
         if (this.itemsForCollapse.length > 0) {
             this.updateTitle(collapsed);
         }
-        this.itemsForCollapse.forEach((item) => item.processCollapsed(collapsed));
+        this.itemsForCollapse.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => item.processCollapsed(collapsed)));
     }
     /**
      * @private
@@ -387,7 +415,12 @@ class CachedItemWidth {
      */
     calculateAndCacheCollapsedItemsWidth() {
         this._collapsedItemsWidth = this.itemsForCollapse
-            .reduce((acc, item) => acc + item.width, 0);
+            .reduce((/**
+         * @param {?} acc
+         * @param {?} item
+         * @return {?}
+         */
+        (acc, item) => acc + item.width), 0);
     }
     /**
      * @private
@@ -484,7 +517,10 @@ class McNavbar {
     ngAfterViewInit() {
         // Note: this wait is required for loading and rendering fonts for icons;
         // unfortunately we cannot control font rendering
-        setTimeout(() => this.updateCollapsed(), 0);
+        setTimeout((/**
+         * @return {?}
+         */
+        () => this.updateCollapsed()), 0);
     }
     /**
      * @return {?}
@@ -498,7 +534,12 @@ class McNavbar {
      */
     calculateAndCacheTotalItemsWidth() {
         this._totalItemsWidths = this.itemsWidths
-            .reduce((acc, item) => acc + item.width, 0);
+            .reduce((/**
+         * @param {?} acc
+         * @param {?} item
+         * @return {?}
+         */
+        (acc, item) => acc + item.width), 0);
     }
     /**
      * @private
@@ -521,11 +562,19 @@ class McNavbar {
     calculateAndCacheItemsWidth() {
         /** @type {?} */
         const allItemsSelector = this.secondLevelElements
-            .map((e) => `${this.firstLevelElement}>${e}`);
+            .map((/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => `${this.firstLevelElement}>${e}`));
         /** @type {?} */
         const allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
         this._itemsWidths = allItems
-            .map((el) => new CachedItemWidth(el, this.getOuterElementWidth(el), this.getItemsForCollapse(el)));
+            .map((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => new CachedItemWidth(el, this.getOuterElementWidth(el), this.getItemsForCollapse(el))));
     }
     /**
      * @private
@@ -539,7 +588,11 @@ class McNavbar {
             return [];
         }
         return Array.from(element.querySelectorAll(MC_NAVBAR_TITLE))
-            .map((el) => new CollapsibleItem((/** @type {?} */ (el)), el.getBoundingClientRect().width));
+            .map((/**
+         * @param {?} el
+         * @return {?}
+         */
+        (el) => new CollapsibleItem((/** @type {?} */ (el)), el.getBoundingClientRect().width)));
     }
 }
 McNavbar.decorators = [
@@ -562,7 +615,7 @@ McNavbar.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McNavbarModule {
 }
@@ -595,12 +648,12 @@ McNavbarModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar };

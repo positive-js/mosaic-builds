@@ -41,7 +41,7 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} inputType
@@ -53,14 +53,14 @@ function getMcInputUnsupportedTypeError(inputType) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} value
@@ -96,7 +96,14 @@ function add(value1, value2) {
     return sanitizeNumber(res);
 }
 /** @type {?} */
-var stepUp = function (value, max, min, step) {
+var stepUp = (/**
+ * @param {?} value
+ * @param {?} max
+ * @param {?} min
+ * @param {?} step
+ * @return {?}
+ */
+function (value, max, min, step) {
     /** @type {?} */
     var res;
     if (value === null) {
@@ -105,9 +112,16 @@ var stepUp = function (value, max, min, step) {
     }
     res = add(value, step);
     return res === null ? null : Math.max(Math.min(res, max), min);
-};
+});
 /** @type {?} */
-var stepDown = function (value, max, min, step) {
+var stepDown = (/**
+ * @param {?} value
+ * @param {?} max
+ * @param {?} min
+ * @param {?} step
+ * @return {?}
+ */
+function (value, max, min, step) {
     /** @type {?} */
     var res;
     if (value === null) {
@@ -116,11 +130,11 @@ var stepDown = function (value, max, min, step) {
     }
     res = add(value, -step);
     return res === null ? null : Math.min(Math.max(res, min), max);
-};
+});
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_INPUT_INVALID_TYPES = [
@@ -217,18 +231,42 @@ var McNumberInput = /** @class */ (function () {
         /** @type {?} */
         var keyCode = event.keyCode;
         /** @type {?} */
-        var isCtrlA = function (e) { return e.keyCode === keycodes.A && (e.ctrlKey || e.metaKey); };
+        var isCtrlA = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.A && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
-        var isCtrlC = function (e) { return e.keyCode === keycodes.C && (e.ctrlKey || e.metaKey); };
+        var isCtrlC = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.C && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
-        var isCtrlV = function (e) { return e.keyCode === keycodes.V && (e.ctrlKey || e.metaKey); };
+        var isCtrlV = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.V && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
-        var isCtrlX = function (e) { return e.keyCode === keycodes.X && (e.ctrlKey || e.metaKey); };
+        var isCtrlX = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.X && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
-        var isFKey = function (e) { return e.keyCode >= keycodes.F1 && e.keyCode <= keycodes.F12; };
+        var isFKey = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode >= keycodes.F1 && e.keyCode <= keycodes.F12; });
         /** @type {?} */
-        var isNumber = function (e) { return (e.keyCode >= keycodes.ZERO && e.keyCode <= keycodes.NINE) ||
-            (e.keyCode >= keycodes.NUMPAD_ZERO && e.keyCode <= keycodes.NUMPAD_NINE); };
+        var isNumber = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return (e.keyCode >= keycodes.ZERO && e.keyCode <= keycodes.NINE) ||
+            (e.keyCode >= keycodes.NUMPAD_ZERO && e.keyCode <= keycodes.NUMPAD_NINE); });
         /** @type {?} */
         var minuses = [keycodes.NUMPAD_MINUS, keycodes.DASH, keycodes.FF_MINUS];
         /** @type {?} */
@@ -238,14 +276,26 @@ var McNumberInput = /** @class */ (function () {
         /** @type {?} */
         var allowedKeys = [keycodes.HOME, keycodes.END].concat(arrows).concat(serviceKeys).concat(minuses);
         /** @type {?} */
-        var isIEPeriod = function (e) { return e.key === '.' || e.key === 'Decimal'; };
+        var isIEPeriod = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.key === '.' || e.key === 'Decimal'; });
         /** @type {?} */
-        var isNotIEPeriod = function (e) { return e.key === '.' || e.key === ','; };
+        var isNotIEPeriod = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.key === '.' || e.key === ','; });
         // Decimal is for IE
         /** @type {?} */
-        var isPeriod = function (e) { return _this._platform.EDGE || _this._platform.TRIDENT
+        var isPeriod = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return _this._platform.EDGE || _this._platform.TRIDENT
             ? isIEPeriod(e)
-            : isNotIEPeriod(e); };
+            : isNotIEPeriod(e); });
         if (allowedKeys.indexOf(keyCode) !== -1 ||
             isCtrlA(event) ||
             isCtrlC(event) ||
@@ -431,7 +481,11 @@ var McInput = /** @class */ (function (_super) {
             'month',
             'time',
             'week'
-        ].filter(function (t) { return platform.getSupportedInputTypes().has(t); });
+        ].filter((/**
+         * @param {?} t
+         * @return {?}
+         */
+        function (t) { return platform.getSupportedInputTypes().has(t); }));
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
         _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
@@ -809,12 +863,15 @@ var McInputMono = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MIN_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
-    useExisting: core.forwardRef(function () { return MinValidator; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return MinValidator; })),
     multi: true
 };
 /**
@@ -884,7 +941,10 @@ var MinValidator = /** @class */ (function () {
 /** @type {?} */
 var MAX_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
-    useExisting: core.forwardRef(function () { return MaxValidator; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return MaxValidator; })),
     multi: true
 };
 /**
@@ -956,7 +1016,7 @@ var MaxValidator = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McInputModule = /** @class */ (function () {
     function McInputModule() {

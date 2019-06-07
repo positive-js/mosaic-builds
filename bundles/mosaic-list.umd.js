@@ -41,7 +41,7 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Component for list-options of selection-list. Each list-option can automatically
@@ -119,12 +119,15 @@ var McListOption = /** @class */ (function () {
             // that the form control value is not being overwritten.
             /** @type {?} */
             var wasSelected_1 = this._selected;
-            Promise.resolve().then(function () {
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () {
                 if (_this._selected || wasSelected_1) {
                     _this.selected = true;
                     _this._changeDetector.markForCheck();
                 }
-            });
+            }));
         }
     };
     /**
@@ -138,7 +141,10 @@ var McListOption = /** @class */ (function () {
         if (this.selected) {
             // We have to delay this until the next tick in order
             // to avoid changed after checked errors.
-            Promise.resolve().then(function () { return _this.selected = false; });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () { return _this.selected = false; }));
         }
         this.listSelection.removeOptionFromList(this);
     };
@@ -267,11 +273,14 @@ var McListOption = /** @class */ (function () {
     McListOption.ctorParameters = function () { return [
         { type: core.ElementRef },
         { type: core.ChangeDetectorRef },
-        { type: McListSelection, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McListSelection; }),] }] }
+        { type: McListSelection, decorators: [{ type: core.Inject, args: [core.forwardRef((/**
+                         * @return {?}
+                         */
+                        function () { return McListSelection; })),] }] }
     ]; };
     McListOption.propDecorators = {
         lines: [{ type: core.ContentChildren, args: [core$1.McLine,] }],
-        text: [{ type: core.ViewChild, args: ['text',] }],
+        text: [{ type: core.ViewChild, args: ['text', { static: false },] }],
         checkboxPosition: [{ type: core.Input }],
         value: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
@@ -282,7 +291,10 @@ var McListOption = /** @class */ (function () {
 /** @type {?} */
 var MC_SELECTION_LIST_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
-    useExisting: core.forwardRef(function () { return McListSelection; }),
+    useExisting: core.forwardRef((/**
+     * @return {?}
+     */
+    function () { return McListSelection; })),
     multi: true
 };
 var McListSelectionChange = /** @class */ (function () {
@@ -311,9 +323,16 @@ var McListSelection = /** @class */ (function (_super) {
         _this.modelChanges = rxjs.Subscription.EMPTY;
         // View to model callback that should be called if the list or its options lost focus.
         // tslint:disable-next-line:no-empty
-        _this.onTouched = function () { };
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
         // View to model callback that should be called whenever the selected options change.
-        _this.onChange = function (_) { };
+        _this.onChange = (/**
+         * @param {?} _
+         * @return {?}
+         */
+        function (_) { });
         _this.autoSelect = autoSelect === null ? true : core$1.toBoolean(autoSelect);
         _this.multiple = multiple === null ? true : core$1.toBoolean(multiple);
         _this.noUnselect = noUnselect === null ? true : core$1.toBoolean(noUnselect);
@@ -338,7 +357,11 @@ var McListSelection = /** @class */ (function (_super) {
             this.tempValues = null;
         }
         // Sync external changes to the model back to the options.
-        this.modelChanges = (/** @type {?} */ (this.selectedOptions.onChange)).subscribe(function (event) {
+        this.modelChanges = (/** @type {?} */ (this.selectedOptions.onChange)).subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
             for (var _i = 0, _a = event.added; _i < _a.length; _i++) {
                 var item = _a[_i];
                 item.selected = true;
@@ -347,7 +370,7 @@ var McListSelection = /** @class */ (function (_super) {
                 var item = _c[_b];
                 item.selected = false;
             }
-        });
+        }));
         this.updateScrollSize();
     };
     /**
@@ -375,7 +398,11 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.options.forEach(function (option) { return option.setSelected(true); });
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.setSelected(true); }));
         this.reportValueChange();
     };
     /**
@@ -385,7 +412,11 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.options.forEach(function (option) { return option.setSelected(false); });
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.setSelected(false); }));
         this.reportValueChange();
     };
     /**
@@ -426,18 +457,28 @@ var McListSelection = /** @class */ (function (_super) {
             /** @type {?} */
             var activeIndex_1 = this.keyManager.activeItemIndex;
             if (previousIndex_1 < activeIndex_1) {
-                this.options.forEach(function (item, index) {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (item, index) {
                     if (index >= previousIndex_1 && index <= activeIndex_1) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
             else {
-                this.options.forEach(function (item, index) {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (item, index) {
                     if (index >= activeIndex_1 && index <= previousIndex_1) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
         }
         else if (withCtrl) {
@@ -448,7 +489,11 @@ var McListSelection = /** @class */ (function (_super) {
         }
         else {
             if (this.autoSelect) {
-                this.options.forEach(function (item) { return item.setSelected(false); });
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @return {?}
+                 */
+                function (item) { return item.setSelected(false); }));
                 option.setSelected(true);
             }
         }
@@ -519,7 +564,11 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function (isDisabled) {
         if (this.options) {
-            this.options.forEach(function (option) { return option.disabled = isDisabled; });
+            this.options.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.disabled = isDisabled; }));
         }
     };
     /**
@@ -529,7 +578,15 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        return this.options.filter(function (option) { return option.selected; }).map(function (option) { return option.value; });
+        return this.options.filter((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.selected; })).map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.value; }));
     };
     // Toggles the selected state of the currently focused option.
     // Toggles the selected state of the currently focused option.
@@ -687,7 +744,11 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (value) {
-        return this.options.find(function (option) { return option.value === value; });
+        return this.options.find((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.value === value; }));
     };
     // Sets the selected options based on the specified values.
     // Sets the selected options based on the specified values.
@@ -705,11 +766,23 @@ var McListSelection = /** @class */ (function (_super) {
      */
     function (values) {
         var _this = this;
-        this.options.forEach(function (option) { return option.setSelected(false); });
+        this.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.setSelected(false); }));
         values
-            .map(function (value) { return _this.getOptionByValue(value); })
+            .map((/**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { return _this.getOptionByValue(value); }))
             .filter(Boolean)
-            .forEach(function (option) { return (/** @type {?} */ (option)).setSelected(true); });
+            .forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return (/** @type {?} */ (option)).setSelected(true); }));
     };
     /**
      * Utility to ensure all indexes are valid.
@@ -787,7 +860,7 @@ var McListSelection = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McListBase = /** @class */ (function () {
     function McListBase() {
@@ -903,7 +976,7 @@ var McListItem = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McListModule = /** @class */ (function () {
     function McListModule() {

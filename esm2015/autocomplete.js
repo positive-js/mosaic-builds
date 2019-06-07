@@ -21,7 +21,7 @@ import { filter, take, switchMap, delay, tap, map } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Autocomplete IDs need to be unique across components, so this counter exists outside of
@@ -106,7 +106,11 @@ class McAutocomplete {
     set classList(value) {
         if (value && value.length) {
             value.split(' ')
-                .forEach((className) => this._classList[className.trim()] = true);
+                .forEach((/**
+             * @param {?} className
+             * @return {?}
+             */
+            (className) => this._classList[className.trim()] = true));
             this.elementRef.nativeElement.className = '';
         }
     }
@@ -207,8 +211,8 @@ McAutocomplete.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MC_AUTOCOMPLETE_DEFAULT_OPTIONS,] }] }
 ];
 McAutocomplete.propDecorators = {
-    template: [{ type: ViewChild, args: [TemplateRef,] }],
-    panel: [{ type: ViewChild, args: ['panel',] }],
+    template: [{ type: ViewChild, args: [TemplateRef, { static: true },] }],
+    panel: [{ type: ViewChild, args: ['panel', { static: false },] }],
     options: [{ type: ContentChildren, args: [McOption, { descendants: true },] }],
     optionGroups: [{ type: ContentChildren, args: [McOptgroup,] }],
     displayWith: [{ type: Input }],
@@ -222,7 +226,7 @@ McAutocomplete.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Directive applied to an element to make it usable
@@ -249,7 +253,7 @@ McAutocompleteOrigin.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * The height of each autocomplete option.
@@ -274,7 +278,10 @@ const MC_AUTOCOMPLETE_SCROLL_STRATEGY = new InjectionToken('mc-autocomplete-scro
  * @return {?}
  */
 function MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(overlay) {
-    return () => overlay.scrollStrategies.reposition();
+    return (/**
+     * @return {?}
+     */
+    () => overlay.scrollStrategies.reposition());
 }
 /** @type {?} */
 const MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
@@ -289,7 +296,10 @@ const MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
  */
 const MAT_AUTOCOMPLETE_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => McAutocompleteTrigger),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => McAutocompleteTrigger)),
     multi: true
 };
 /**
@@ -326,16 +336,26 @@ class McAutocompleteTrigger {
         this.document = document;
         this.viewportRuler = viewportRuler;
         // @ts-ignore
-        this.optionSelections = defer(() => {
+        this.optionSelections = defer((/**
+         * @return {?}
+         */
+        () => {
             if (this.autocomplete && this.autocomplete.options) {
-                return merge(...this.autocomplete.options.map((option) => option.onSelectionChange));
+                return merge(...this.autocomplete.options.map((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                (option) => option.onSelectionChange)));
             }
             // If there are any subscribers before `ngAfterViewInit`, the `autocomplete` will be undefined.
             // Return a stream that we'll replace with the real one once everything is in place.
             return this.zone.onStable
                 .asObservable()
-                .pipe(take(1), switchMap(() => this.optionSelections));
-        });
+                .pipe(take(1), switchMap((/**
+             * @return {?}
+             */
+            () => this.optionSelections)));
+        }));
         /**
          * `autocomplete` attribute to be set on the input element.
          * \@docs-private
@@ -362,27 +382,39 @@ class McAutocompleteTrigger {
          * `View -> model callback called when value changes`
          */
         // tslint:disable-next-line no-empty
-        this.onChange = () => { };
+        this.onChange = (/**
+         * @return {?}
+         */
+        () => { });
         /**
          * `View -> model callback called when autocomplete has been touched`
          */
         // tslint:disable-next-line no-empty
-        this.onTouched = () => { };
+        this.onTouched = (/**
+         * @return {?}
+         */
+        () => { });
         /**
          * Event handler for when the window is blurred. Needs to be an
          * arrow function in order to preserve the context.
          */
-        this.windowBlurHandler = () => {
+        this.windowBlurHandler = (/**
+         * @return {?}
+         */
+        () => {
             // If the user blurred the window while the autocomplete is focused, it means that it'll be
             // refocused when they come back. In this case we want to skip the first focus event, if the
             // pane was closed, in order to avoid reopening it unintentionally.
             this.canOpenOnNextFocus = this.document.activeElement !== this.elementRef.nativeElement || this.panelOpen;
-        };
+        });
         // tslint:disable-next-line no-typeof-undefined
         if (typeof window !== 'undefined') {
-            zone.runOutsideAngular(() => {
+            zone.runOutsideAngular((/**
+             * @return {?}
+             */
+            () => {
                 window.addEventListener('blur', this.windowBlurHandler);
-            });
+            }));
         }
         this.scrollStrategy = scrollStrategy;
     }
@@ -478,11 +510,21 @@ class McAutocompleteTrigger {
      * @return {?}
      */
     get panelClosingActions() {
-        return merge(this.optionSelections, this.autocomplete.keyManager.tabOut.pipe(filter(() => this.overlayAttached)), this.closeKeyEventStream, this.getOutsideClickStream(), this.overlayRef ?
-            this.overlayRef.detachments().pipe(filter(() => this.overlayAttached)) :
+        return merge(this.optionSelections, this.autocomplete.keyManager.tabOut.pipe(filter((/**
+         * @return {?}
+         */
+        () => this.overlayAttached))), this.closeKeyEventStream, this.getOutsideClickStream(), this.overlayRef ?
+            this.overlayRef.detachments().pipe(filter((/**
+             * @return {?}
+             */
+            () => this.overlayAttached))) :
             of()).pipe(
         // Normalize the output so we return a consistent type.
-        map((event) => event instanceof McOptionSelectionChange ? event : null));
+        map((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => event instanceof McOptionSelectionChange ? event : null)));
     }
     // Implemented as part of ControlValueAccessor.
     /**
@@ -490,7 +532,10 @@ class McAutocompleteTrigger {
      * @return {?}
      */
     writeValue(value) {
-        Promise.resolve(null).then(() => this.setTriggerValue(value));
+        Promise.resolve(null).then((/**
+         * @return {?}
+         */
+        () => this.setTriggerValue(value)));
     }
     // Implemented as part of ControlValueAccessor.
     /**
@@ -609,7 +654,11 @@ class McAutocompleteTrigger {
             return of(null);
         }
         return fromEvent(this.document, 'click')
-            .pipe(filter((event) => {
+            .pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             /** @type {?} */
             const clickTarget = (/** @type {?} */ (event.target));
             /** @type {?} */
@@ -619,7 +668,7 @@ class McAutocompleteTrigger {
                 clickTarget !== this.elementRef.nativeElement &&
                 (!formField || !formField.contains(clickTarget)) &&
                 (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget));
-        }));
+        })));
     }
     /**
      * Given that we are not actually focusing active options, we must manually adjust scroll
@@ -653,7 +702,10 @@ class McAutocompleteTrigger {
             .pipe(take(1));
         /** @type {?} */
         const optionChanges = this.autocomplete.options.changes
-            .pipe(tap(() => this.positionStrategy.reapplyLastPosition()), 
+            .pipe(tap((/**
+         * @return {?}
+         */
+        () => this.positionStrategy.reapplyLastPosition())), 
         // Defer emitting to the stream until the next tick, because changing
         // bindings in here will cause "changed after checked" errors.
         delay(0));
@@ -662,18 +714,25 @@ class McAutocompleteTrigger {
             .pipe(
         // create a new stream of panelClosingActions, replacing any previous streams
         // that were created, and flatten it so our stream only emits closing events...
-        switchMap(() => {
+        switchMap((/**
+         * @return {?}
+         */
+        () => {
             this.resetActiveItem();
             this.autocomplete.setVisibility();
             if (this.panelOpen) {
                 (/** @type {?} */ (this.overlayRef)).updatePosition();
             }
             return this.panelClosingActions;
-        }), 
+        })), 
         // when the first closing event occurs...
         take(1))
             // set the value, close the panel, and complete.
-            .subscribe((event) => this.setValueAndClose(event));
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => this.setValueAndClose(event)));
     }
     /**
      * Destroys the autocomplete suggestion panel.
@@ -736,11 +795,15 @@ class McAutocompleteTrigger {
      * @return {?}
      */
     clearPreviousSelectedOption(skip) {
-        this.autocomplete.options.forEach((option) => {
+        this.autocomplete.options.forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => {
             if (option !== skip && option.selected) {
                 option.deselect();
             }
-        });
+        }));
     }
     /**
      * @private
@@ -758,7 +821,11 @@ class McAutocompleteTrigger {
             this.overlayRef = overlayRef;
             // Use the `keydownEvents` in order to take advantage of
             // the overlay event targeting provided by the CDK overlay.
-            overlayRef.keydownEvents().subscribe((event) => {
+            overlayRef.keydownEvents().subscribe((/**
+             * @param {?} event
+             * @return {?}
+             */
+            (event) => {
                 // Close when pressing ESCAPE or ALT + UP_ARROW, based on the a11y guidelines.
                 // See: https://www.w3.org/TR/wai-aria-practices-1.1/#textbox-keyboard-interaction
                 // tslint:disable-next-line deprecation
@@ -766,13 +833,16 @@ class McAutocompleteTrigger {
                     this.resetActiveItem();
                     this.closeKeyEventStream.next();
                 }
-            });
+            }));
             if (this.viewportRuler) {
-                this.viewportSubscription = this.viewportRuler.change().subscribe(() => {
+                this.viewportSubscription = this.viewportRuler.change().subscribe((/**
+                 * @return {?}
+                 */
+                () => {
                     if (this.panelOpen && overlayRef) {
                         overlayRef.updateSize({ width: this.getPanelWidth() });
                     }
-                });
+                }));
             }
         }
         else {
@@ -920,7 +990,7 @@ McAutocompleteTrigger.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McAutocompleteModule {
 }
@@ -941,12 +1011,12 @@ McAutocompleteModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY, McAutocompleteSelectedEvent, MC_AUTOCOMPLETE_DEFAULT_OPTIONS, McAutocomplete, McAutocompleteModule, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY, getMcAutocompleteMissingPanelError, AUTOCOMPLETE_OPTION_HEIGHT, AUTOCOMPLETE_PANEL_HEIGHT, AUTOCOMPLETE_BORDER_WIDTH, MC_AUTOCOMPLETE_SCROLL_STRATEGY, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER, MAT_AUTOCOMPLETE_VALUE_ACCESSOR, McAutocompleteTrigger, McAutocompleteOrigin };

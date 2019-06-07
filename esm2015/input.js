@@ -17,7 +17,7 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} inputType
@@ -29,14 +29,14 @@ function getMcInputUnsupportedTypeError(inputType) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MC_INPUT_VALUE_ACCESSOR = new InjectionToken('MC_INPUT_VALUE_ACCESSOR');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @param {?} value
@@ -72,7 +72,14 @@ function add(value1, value2) {
     return sanitizeNumber(res);
 }
 /** @type {?} */
-const stepUp = (value, max, min, step) => {
+const stepUp = (/**
+ * @param {?} value
+ * @param {?} max
+ * @param {?} min
+ * @param {?} step
+ * @return {?}
+ */
+(value, max, min, step) => {
     /** @type {?} */
     let res;
     if (value === null) {
@@ -81,9 +88,16 @@ const stepUp = (value, max, min, step) => {
     }
     res = add(value, step);
     return res === null ? null : Math.max(Math.min(res, max), min);
-};
+});
 /** @type {?} */
-const stepDown = (value, max, min, step) => {
+const stepDown = (/**
+ * @param {?} value
+ * @param {?} max
+ * @param {?} min
+ * @param {?} step
+ * @return {?}
+ */
+(value, max, min, step) => {
     /** @type {?} */
     let res;
     if (value === null) {
@@ -92,11 +106,11 @@ const stepDown = (value, max, min, step) => {
     }
     res = add(value, -step);
     return res === null ? null : Math.min(Math.max(res, min), max);
-};
+});
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MC_INPUT_INVALID_TYPES = [
@@ -196,18 +210,42 @@ class McNumberInput {
         /** @type {?} */
         const keyCode = event.keyCode;
         /** @type {?} */
-        const isCtrlA = (e) => e.keyCode === A && (e.ctrlKey || e.metaKey);
+        const isCtrlA = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => e.keyCode === A && (e.ctrlKey || e.metaKey));
         /** @type {?} */
-        const isCtrlC = (e) => e.keyCode === C && (e.ctrlKey || e.metaKey);
+        const isCtrlC = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => e.keyCode === C && (e.ctrlKey || e.metaKey));
         /** @type {?} */
-        const isCtrlV = (e) => e.keyCode === V && (e.ctrlKey || e.metaKey);
+        const isCtrlV = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => e.keyCode === V && (e.ctrlKey || e.metaKey));
         /** @type {?} */
-        const isCtrlX = (e) => e.keyCode === X && (e.ctrlKey || e.metaKey);
+        const isCtrlX = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => e.keyCode === X && (e.ctrlKey || e.metaKey));
         /** @type {?} */
-        const isFKey = (e) => e.keyCode >= F1 && e.keyCode <= F12;
+        const isFKey = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => e.keyCode >= F1 && e.keyCode <= F12);
         /** @type {?} */
-        const isNumber = (e) => (e.keyCode >= ZERO && e.keyCode <= NINE) ||
-            (e.keyCode >= NUMPAD_ZERO && e.keyCode <= NUMPAD_NINE);
+        const isNumber = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => (e.keyCode >= ZERO && e.keyCode <= NINE) ||
+            (e.keyCode >= NUMPAD_ZERO && e.keyCode <= NUMPAD_NINE));
         /** @type {?} */
         const minuses = [NUMPAD_MINUS, DASH, FF_MINUS];
         /** @type {?} */
@@ -217,14 +255,26 @@ class McNumberInput {
         /** @type {?} */
         const allowedKeys = [HOME, END].concat(arrows).concat(serviceKeys).concat(minuses);
         /** @type {?} */
-        const isIEPeriod = (e) => e.key === '.' || e.key === 'Decimal';
+        const isIEPeriod = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => e.key === '.' || e.key === 'Decimal');
         /** @type {?} */
-        const isNotIEPeriod = (e) => e.key === '.' || e.key === ',';
+        const isNotIEPeriod = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => e.key === '.' || e.key === ',');
         // Decimal is for IE
         /** @type {?} */
-        const isPeriod = (e) => this._platform.EDGE || this._platform.TRIDENT
+        const isPeriod = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => this._platform.EDGE || this._platform.TRIDENT
             ? isIEPeriod(e)
-            : isNotIEPeriod(e);
+            : isNotIEPeriod(e));
         if (allowedKeys.indexOf(keyCode) !== -1 ||
             isCtrlA(event) ||
             isCtrlC(event) ||
@@ -384,7 +434,11 @@ class McInput extends _McInputMixinBase {
             'month',
             'time',
             'week'
-        ].filter((t) => getSupportedInputTypes().has(t));
+        ].filter((/**
+         * @param {?} t
+         * @return {?}
+         */
+        (t) => getSupportedInputTypes().has(t)));
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
         this._inputValueAccessor = inputValueAccessor || this._elementRef.nativeElement;
@@ -652,12 +706,15 @@ McInputMono.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MIN_VALIDATOR = {
     provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => MinValidator),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => MinValidator)),
     multi: true
 };
 /**
@@ -708,7 +765,10 @@ MinValidator.propDecorators = {
 /** @type {?} */
 const MAX_VALIDATOR = {
     provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => MaxValidator),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => MaxValidator)),
     multi: true
 };
 /**
@@ -761,7 +821,7 @@ MaxValidator.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McInputModule {
 }
@@ -775,12 +835,12 @@ McInputModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McInputModule, BIG_STEP, SMALL_STEP, McInputBase, _McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR, MAX_VALIDATOR as ɵc24, MIN_VALIDATOR as ɵa24, MaxValidator as ɵd24, MinValidator as ɵb24 };

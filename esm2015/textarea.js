@@ -15,7 +15,7 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MC_TEXTAREA_VALUE_ACCESSOR = new InjectionToken('MC_TEXTAREA_VALUE_ACCESSOR');
@@ -164,7 +164,10 @@ class McTextarea extends McTextareaMixinBase {
      * @return {?}
      */
     ngOnInit() {
-        setTimeout(() => this.grow(), 0);
+        setTimeout((/**
+         * @return {?}
+         */
+        () => this.grow()), 0);
         this.lineHeight = parseInt((/** @type {?} */ (getComputedStyle(this.elementRef.nativeElement).lineHeight)), 10);
         /** @type {?} */
         const paddingTop = parseInt((/** @type {?} */ (getComputedStyle(this.elementRef.nativeElement).paddingTop)), 10);
@@ -210,7 +213,10 @@ class McTextarea extends McTextareaMixinBase {
         if (!this.canGrow) {
             return;
         }
-        this.ngZone.runOutsideAngular(() => {
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        () => {
             /** @type {?} */
             const textarea = this.elementRef.nativeElement;
             /** @type {?} */
@@ -222,7 +228,7 @@ class McTextarea extends McTextareaMixinBase {
             /** @type {?} */
             const height = Math.max(this.minHeight, textarea.scrollHeight + diff + this.freeRowsHeight);
             textarea.style.height = `${height}px`;
-        });
+        }));
     }
     /**
      * Focuses the textarea.
@@ -336,7 +342,7 @@ McTextarea.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McTextareaModule {
 }
@@ -350,12 +356,12 @@ McTextareaModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { MC_TEXTAREA_VALUE_ACCESSOR, McTextareaBase, McTextareaMixinBase, McTextarea, McTextareaModule };

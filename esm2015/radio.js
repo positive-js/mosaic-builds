@@ -13,7 +13,7 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Increasing integer for generating unique ids for radio components.
 /** @type {?} */
@@ -47,7 +47,10 @@ const _McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
  */
 const MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => McRadioGroup),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => McRadioGroup)),
     multi: true
 };
 class McRadioGroup extends _McRadioGroupMixinBase {
@@ -98,13 +101,19 @@ class McRadioGroup extends _McRadioGroupMixinBase {
          * The method to be called in order to update ngModel
          */
         // tslint:disable-next-line
-        this.controlValueAccessorChangeFn = () => { };
+        this.controlValueAccessorChangeFn = (/**
+         * @return {?}
+         */
+        () => { });
         /**
          * onTouch function registered via registerOnTouch (ControlValueAccessor).
          * \@docs-private
          */
         // tslint:disable-next-line
-        this.onTouched = () => { };
+        this.onTouched = (/**
+         * @return {?}
+         */
+        () => { });
     }
     /**
      * Name of the radio button group. All radio buttons inside this group will use this name.
@@ -234,7 +243,11 @@ class McRadioGroup extends _McRadioGroupMixinBase {
      */
     markRadiosForCheck() {
         if (this._radios) {
-            this._radios.forEach((radio) => radio.markForCheck());
+            this._radios.forEach((/**
+             * @param {?} radio
+             * @return {?}
+             */
+            (radio) => radio.markForCheck()));
         }
     }
     /**
@@ -279,9 +292,13 @@ class McRadioGroup extends _McRadioGroupMixinBase {
      */
     updateRadioButtonNames() {
         if (this._radios) {
-            this._radios.forEach((radio) => {
+            this._radios.forEach((/**
+             * @param {?} radio
+             * @return {?}
+             */
+            (radio) => {
                 radio.name = this.name;
-            });
+            }));
         }
     }
     /**
@@ -295,12 +312,16 @@ class McRadioGroup extends _McRadioGroupMixinBase {
         const isAlreadySelected = this._selected !== null && this._selected.value === this._value;
         if (this._radios != null && !isAlreadySelected) {
             this._selected = null;
-            this._radios.forEach((radio) => {
+            this._radios.forEach((/**
+             * @param {?} radio
+             * @return {?}
+             */
+            (radio) => {
                 radio.checked = this.value === radio.value;
                 if (radio.checked) {
                     this._selected = radio;
                 }
-            });
+            }));
         }
     }
 }
@@ -328,7 +349,10 @@ McRadioGroup.propDecorators = {
     disabled: [{ type: Input }],
     required: [{ type: Input }],
     change: [{ type: Output }],
-    _radios: [{ type: ContentChildren, args: [forwardRef(() => McRadioButton), { descendants: true },] }]
+    _radios: [{ type: ContentChildren, args: [forwardRef((/**
+                 * @return {?}
+                 */
+                () => McRadioButton)), { descendants: true },] }]
 };
 // Boilerplate for applying mixins to McRadioButton.
 /**
@@ -380,14 +404,22 @@ class McRadioButton extends _McRadioButtonMixinBase {
          * Unregister function for _radioDispatcher
          */
         // tslint:disable-next-line
-        this.removeUniqueSelectionListener = () => { };
+        this.removeUniqueSelectionListener = (/**
+         * @return {?}
+         */
+        () => { });
         this.radioGroup = radioGroup;
         this.removeUniqueSelectionListener =
-            _radioDispatcher.listen((id, name) => {
+            _radioDispatcher.listen((/**
+             * @param {?} id
+             * @param {?} name
+             * @return {?}
+             */
+            (id, name) => {
                 if (id !== this.id && name === this.name) {
                     this.checked = false;
                 }
-            });
+            }));
     }
     /**
      * Whether this radio button is checked.
@@ -607,14 +639,14 @@ McRadioButton.propDecorators = {
     disabled: [{ type: Input }],
     required: [{ type: Input }],
     labelPosition: [{ type: Input }],
-    _inputElement: [{ type: ViewChild, args: ['input',] }],
+    _inputElement: [{ type: ViewChild, args: ['input', { static: false },] }],
     change: [{ type: Output }],
     isFocused: [{ type: Input }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McRadioModule {
 }
@@ -628,12 +660,12 @@ McRadioModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McRadioModule, McRadioChange, McRadioGroupBase, _McRadioGroupMixinBase, MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioGroup, McRadioButtonBase, _McRadioButtonMixinBase, McRadioButton };

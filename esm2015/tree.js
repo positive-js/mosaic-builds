@@ -16,7 +16,7 @@ import { map, take } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -36,7 +36,7 @@ McTreeNodeDef.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -88,7 +88,7 @@ McTreeNodePadding.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -107,7 +107,7 @@ McTreeNodeToggle.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token used to provide the parent component to options.
@@ -285,7 +285,7 @@ class McTreeOption extends CdkTreeNode {
      * @return {?}
      */
     get viewValue() {
-        // TODO(kara): Add input property alternative for node envs.
+        // TODO: Add input property alternative for node envs.
         return (this.getHostElement().textContent || '').trim();
     }
     /**
@@ -311,7 +311,7 @@ class McTreeOption extends CdkTreeNode {
      */
     selectViaInteraction() {
         if (!this.disabled) {
-            this._selected = this.multiple ? !this._selected : true;
+            this._selected = !this._selected;
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
             if (this.parent.setFocusedOption) {
@@ -370,7 +370,7 @@ McTreeOption.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McTreeNavigationChange {
     /**
@@ -539,18 +539,28 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
             /** @type {?} */
             const activeIndex = this.keyManager.activeItemIndex;
             if (previousIndex < activeIndex) {
-                this.options.forEach((item, index) => {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                (item, index) => {
                     if (index >= previousIndex && index <= activeIndex) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
             else {
-                this.options.forEach((item, index) => {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                (item, index) => {
                     if (index >= activeIndex && index <= previousIndex) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
             this.withShift = false;
         }
@@ -563,7 +573,11 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
         }
         else {
             if (this.autoSelect) {
-                this.options.forEach((item) => item.setSelected(false));
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @return {?}
+                 */
+                (item) => item.setSelected(false)));
                 option.setSelected(true);
             }
         }
@@ -596,17 +610,25 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
         /** @type {?} */
         const arrayOfInstances = [];
-        viewContainer._embeddedViews.forEach((view) => {
+        viewContainer._embeddedViews.forEach((/**
+         * @param {?} view
+         * @return {?}
+         */
+        (view) => {
             /** @type {?} */
             const viewDef = view.def;
-            viewDef.nodes.forEach((node) => {
+            viewDef.nodes.forEach((/**
+             * @param {?} node
+             * @return {?}
+             */
+            (node) => {
                 if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
                     /** @type {?} */
                     const nodeData = view.nodes[node.nodeIndex];
                     arrayOfInstances.push((/** @type {?} */ (nodeData.instance)));
                 }
-            });
-        });
+            }));
+        }));
         if (this.options) {
             this.options.reset(arrayOfInstances);
             this.options.notifyOnChanges();
@@ -686,7 +708,7 @@ McTreeSelection.ctorParameters = () => [
     { type: String, decorators: [{ type: Attribute, args: ['no-unselect',] }] }
 ];
 McTreeSelection.propDecorators = {
-    nodeOutlet: [{ type: ViewChild, args: [CdkTreeNodeOutlet,] }],
+    nodeOutlet: [{ type: ViewChild, args: [CdkTreeNodeOutlet, { static: true },] }],
     options: [{ type: ContentChildren, args: [McTreeOption,] }],
     navigationChange: [{ type: Output }],
     selectionChange: [{ type: Output }],
@@ -695,7 +717,7 @@ McTreeSelection.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MC_TREE_DIRECTIVES = [
@@ -717,7 +739,7 @@ McTreeModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Tree flattener to convert a normal type of node to node with children & level information.
@@ -781,14 +803,23 @@ class McTreeFlattener {
         if (this.isExpandable(flatNode)) {
             this.getChildren(node)
                 .pipe(take(1))
-                .subscribe((children) => {
-                children.forEach((child, index) => {
+                .subscribe((/**
+             * @param {?} children
+             * @return {?}
+             */
+            (children) => {
+                children.forEach((/**
+                 * @param {?} child
+                 * @param {?} index
+                 * @return {?}
+                 */
+                (child, index) => {
                     /** @type {?} */
                     const childParentMap = parentMap.slice();
                     childParentMap.push(index !== children.length - 1);
                     this.flattenNode(child, level + 1, resultNodes, childParentMap);
-                });
-            });
+                }));
+            }));
         }
         return resultNodes;
     }
@@ -802,7 +833,11 @@ class McTreeFlattener {
     flattenNodes(structuredData) {
         /** @type {?} */
         const resultNodes = [];
-        structuredData.forEach((node) => this.flattenNode(node, 0, resultNodes, []));
+        structuredData.forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        (node) => this.flattenNode(node, 0, resultNodes, [])));
         return resultNodes;
     }
     /**
@@ -818,7 +853,11 @@ class McTreeFlattener {
         /** @type {?} */
         const currentExpand = [];
         currentExpand[0] = true;
-        nodes.forEach((node) => {
+        nodes.forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        (node) => {
             /** @type {?} */
             let expand = true;
             for (let i = 0; i <= this.getLevel(node); i++) {
@@ -830,7 +869,7 @@ class McTreeFlattener {
             if (this.isExpandable(node)) {
                 currentExpand[this.getLevel(node) + 1] = treeControl.isExpanded(node);
             }
-        });
+        }));
         return results;
     }
 }
@@ -883,10 +922,13 @@ class McTreeFlatDataSource extends DataSource {
             this.flattenedData
         ];
         return merge(...changes)
-            .pipe(map(() => {
+            .pipe(map((/**
+         * @return {?}
+         */
+        () => {
             this.expandedData.next(this.treeFlattener.expandFlattenedNodes(this.flattenedData.value, this.treeControl));
             return this.expandedData.value;
-        }));
+        })));
     }
     /**
      * @return {?}
@@ -898,7 +940,7 @@ class McTreeFlatDataSource extends DataSource {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Data source for nested tree.
@@ -932,7 +974,10 @@ class McTreeNestedDataSource extends DataSource {
      */
     connect(collectionViewer) {
         return merge(...[collectionViewer.viewChange, this._data])
-            .pipe(map(() => this.data));
+            .pipe(map((/**
+         * @return {?}
+         */
+        () => this.data)));
     }
     /**
      * @return {?}
@@ -944,12 +989,12 @@ class McTreeNestedDataSource extends DataSource {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggle, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };

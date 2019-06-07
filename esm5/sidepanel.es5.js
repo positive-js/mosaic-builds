@@ -18,7 +18,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to access the data that was passed in to a sidepanel.
@@ -67,7 +67,7 @@ McSidepanelConfig = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 var McSidepanelAnimationState = {
@@ -96,7 +96,7 @@ var mcSidepanelAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_SIDEPANEL_WITH_INDENT = new InjectionToken('mc-sidepanel-with-indent');
@@ -285,14 +285,14 @@ var McSidepanelContainerComponent = /** @class */ (function (_super) {
         { type: Boolean, decorators: [{ type: Inject, args: [MC_SIDEPANEL_WITH_SHADOW,] }] }
     ]; };
     McSidepanelContainerComponent.propDecorators = {
-        portalOutlet: [{ type: ViewChild, args: [CdkPortalOutlet,] }]
+        portalOutlet: [{ type: ViewChild, args: [CdkPortalOutlet, { static: true },] }]
     };
     return McSidepanelContainerComponent;
 }(BasePortalOutlet));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Counter for unique sidepanel ids.
 /** @type {?} */
@@ -320,21 +320,42 @@ McSidepanelRef = /** @class */ (function () {
         this.id = this.config.id || "mc-sidepanel-" + uniqueId++;
         this.containerInstance.id = this.id;
         // Emit when opening animation completes
-        containerInstance.animationStateChanged.pipe(filter(function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible; }), take(1)).subscribe(function () {
+        containerInstance.animationStateChanged.pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible; })), take(1)).subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.afterOpened$.next();
             _this.afterOpened$.complete();
-        });
+        }));
         // Dispose overlay when closing animation is complete
-        containerInstance.animationStateChanged.pipe(filter(function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden; }), take(1)).subscribe(function () {
+        containerInstance.animationStateChanged.pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden; })), take(1)).subscribe((/**
+         * @return {?}
+         */
+        function () {
             overlayRef.dispose();
             _this.afterClosed$.next(_this.result);
             _this.afterClosed$.complete();
-        });
+        }));
         if (!containerInstance.sidepanelConfig.disableClose) {
             merge(overlayRef.backdropClick(), overlayRef.keydownEvents().pipe(
             // tslint:disable:deprecation
             // keyCode is deprecated, but IE11 and Edge don't support code property, which we need use instead
-            filter(function (event) { return event.keyCode === ESCAPE; }))).subscribe(function () { return _this.close(); });
+            filter((/**
+             * @param {?} event
+             * @return {?}
+             */
+            function (event) { return event.keyCode === ESCAPE; })))).subscribe((/**
+             * @return {?}
+             */
+            function () { return _this.close(); }));
         }
     }
     /**
@@ -349,7 +370,14 @@ McSidepanelRef = /** @class */ (function () {
         var _this = this;
         if (!this.afterClosed$.closed) {
             // Transition the backdrop in parallel to the sidepanel.
-            this.containerInstance.animationStateChanged.pipe(filter(function (event) { return event.phaseName === 'done'; }), take(1)).subscribe(function () { return _this.overlayRef.detachBackdrop(); });
+            this.containerInstance.animationStateChanged.pipe(filter((/**
+             * @param {?} event
+             * @return {?}
+             */
+            function (event) { return event.phaseName === 'done'; })), take(1)).subscribe((/**
+             * @return {?}
+             */
+            function () { return _this.overlayRef.detachBackdrop(); }));
             this.result = result;
             this.containerInstance.exit();
         }
@@ -383,7 +411,7 @@ McSidepanelRef = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to specify default sidepanel options.
@@ -463,7 +491,10 @@ var McSidepanelService = /** @class */ (function () {
             ref.instance = contentRef.instance;
         }
         this.openedSidepanels.push(ref);
-        ref.afterClosed().subscribe(function () { return _this.removeOpenSidepanel(ref); });
+        ref.afterClosed().subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.removeOpenSidepanel(ref); }));
         container.enter();
         return ref;
     };
@@ -496,7 +527,11 @@ var McSidepanelService = /** @class */ (function () {
      * @return {?}
      */
     function (id) {
-        return this.openedSidepanels.find(function (sidepanel) { return sidepanel.id === id; });
+        return this.openedSidepanels.find((/**
+         * @param {?} sidepanel
+         * @return {?}
+         */
+        function (sidepanel) { return sidepanel.id === id; }));
     };
     /**
      * Attaches the sidepanel container component to the overlay.
@@ -612,9 +647,13 @@ var McSidepanelService = /** @class */ (function () {
     function (sidepanels) {
         /** @type {?} */
         var reversedOpenedSidepanels = sidepanels.reverse().slice();
-        reversedOpenedSidepanels.forEach(function (sidepanelRef) {
+        reversedOpenedSidepanels.forEach((/**
+         * @param {?} sidepanelRef
+         * @return {?}
+         */
+        function (sidepanelRef) {
             sidepanelRef.close();
-        });
+        }));
     };
     /**
      * @private
@@ -628,7 +667,11 @@ var McSidepanelService = /** @class */ (function () {
      */
     function (config) {
         /** @type {?} */
-        var hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some(function (sidepanelRef) { return (/** @type {?} */ (sidepanelRef.config.hasBackdrop)); });
+        var hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some((/**
+         * @param {?} sidepanelRef
+         * @return {?}
+         */
+        function (sidepanelRef) { return (/** @type {?} */ (sidepanelRef.config.hasBackdrop)); }));
         return config.requiredBackdrop || !hasOpenedSidepanelWithBackdrop ? 'cdk-overlay-dark-backdrop' :
             'cdk-overlay-transparent-backdrop';
     };
@@ -643,7 +686,11 @@ var McSidepanelService = /** @class */ (function () {
      * @return {?}
      */
     function (config) {
-        return this.openedSidepanels.filter(function (sidepanelRef) { return sidepanelRef.config.position === config.position; });
+        return this.openedSidepanels.filter((/**
+         * @param {?} sidepanelRef
+         * @return {?}
+         */
+        function (sidepanelRef) { return sidepanelRef.config.position === config.position; }));
     };
     /**
      * Removes a sidepanel from the array of open sidepanels.
@@ -683,7 +730,7 @@ var McSidepanelService = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Button that will close the current sidepanel.
@@ -709,9 +756,12 @@ var McSidepanelClose = /** @class */ (function () {
             // ID.
             // This must occur in `onInit`, as the ID binding for the sidepanel container won't
             // be resolved at constructor time. We use setTimeout by same reason.
-            setTimeout(function () {
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
                 _this.sidepanelRef = (/** @type {?} */ (getClosestSidepanel(_this.elementRef, _this.sidepanelService.openedSidepanels)));
-            });
+            }));
         }
     };
     /**
@@ -831,12 +881,16 @@ function getClosestSidepanel(element, openSidepanels) {
     while (parent && !parent.classList.contains('mc-sidepanel-container')) {
         parent = parent.parentElement;
     }
-    return parent ? openSidepanels.find(function (sidepanel) { return sidepanel.id === (/** @type {?} */ (parent)).id; }) : null;
+    return parent ? openSidepanels.find((/**
+     * @param {?} sidepanel
+     * @return {?}
+     */
+    function (sidepanel) { return sidepanel.id === (/** @type {?} */ (parent)).id; })) : null;
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSidepanelModule = /** @class */ (function () {
     function McSidepanelModule() {
@@ -875,12 +929,12 @@ var McSidepanelModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef, mcSidepanelAnimations as ɵb20, mcSidepanelTransformAnimation as ɵa20, McSidepanelActions as ɵg20, McSidepanelBody as ɵe20, McSidepanelClose as ɵc20, McSidepanelFooter as ɵf20, McSidepanelHeader as ɵd20 };

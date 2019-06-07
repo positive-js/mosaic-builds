@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const mcPopoverAnimations = {
@@ -40,7 +40,7 @@ const mcPopoverAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McPopoverComponent {
     /**
@@ -293,7 +293,10 @@ const MC_POPOVER_SCROLL_STRATEGY = new InjectionToken('mc-popover-scroll-strateg
  * @return {?}
  */
 function mcPopoverScrollStrategyFactory(overlay) {
-    return () => overlay.scrollStrategies.reposition({ scrollThrottle: 20 });
+    return (/**
+     * @return {?}
+     */
+    () => overlay.scrollStrategies.reposition({ scrollThrottle: 20 }));
 }
 /**
  * \@docs-private
@@ -562,16 +565,23 @@ class McPopover {
         const scrollableAncestors = this.scrollDispatcher
             .getAncestorScrollContainers(this.elementRef);
         strategy.withScrollableContainers(scrollableAncestors);
-        strategy.positionChanges.pipe(takeUntil(this.destroyed)).subscribe((change) => {
+        strategy.positionChanges.pipe(takeUntil(this.destroyed)).subscribe((/**
+         * @param {?} change
+         * @return {?}
+         */
+        (change) => {
             if (this.popover) {
                 this.onPositionChange(change);
                 if (change.scrollableViewProperties.isOverlayClipped && this.popover.mcVisible) {
                     // After position changes occur and the overlay is clipped by
                     // a parent scrollable then close the popover.
-                    this.ngZone.run(() => this.hide());
+                    this.ngZone.run((/**
+                     * @return {?}
+                     */
+                    () => this.hide()));
                 }
             }
-        });
+        }));
         this.overlayRef = this.overlay.create({
             direction: this.direction,
             positionStrategy: strategy,
@@ -581,7 +591,10 @@ class McPopover {
         this.updatePosition();
         this.overlayRef.detachments()
             .pipe(takeUntil(this.destroyed))
-            .subscribe(() => this.detach());
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.detach()));
         return this.overlayRef;
     }
     /**
@@ -600,7 +613,11 @@ class McPopover {
     onPositionChange($event) {
         /** @type {?} */
         let updatedPlacement = this.mcPlacement;
-        Object.keys(this.availablePositions).some((key) => {
+        Object.keys(this.availablePositions).some((/**
+         * @param {?} key
+         * @return {?}
+         */
+        (key) => {
             if ($event.connectionPair.originX === this.availablePositions[key].originX &&
                 $event.connectionPair.originY === this.availablePositions[key].originY &&
                 $event.connectionPair.overlayX === this.availablePositions[key].overlayX &&
@@ -609,7 +626,7 @@ class McPopover {
                 return true;
             }
             return false;
-        });
+        }));
         this.updateCompValue('mcPlacement', updatedPlacement);
         if (this.popover) {
             this.updateCompValue('classList', this.classList);
@@ -682,7 +699,12 @@ class McPopover {
         if (this.overlayRef) {
             this.overlayRef.dispose();
         }
-        this.manualListeners.forEach((listener, event) => this.elementRef.nativeElement.removeEventListener(event, listener));
+        this.manualListeners.forEach((/**
+         * @param {?} listener
+         * @param {?} event
+         * @return {?}
+         */
+        (listener, event) => this.elementRef.nativeElement.removeEventListener(event, listener)));
         this.manualListeners.clear();
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
@@ -708,15 +730,37 @@ class McPopover {
     initElementRefListeners() {
         if (this.mcTrigger === 'hover') {
             this.manualListeners
-                .set('mouseenter', () => this.show())
-                .set('mouseleave', () => this.hide())
-                .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
+                .set('mouseenter', (/**
+             * @return {?}
+             */
+            () => this.show()))
+                .set('mouseleave', (/**
+             * @return {?}
+             */
+            () => this.hide()))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            (listener, event) => this.elementRef.nativeElement.addEventListener(event, listener)));
         }
         if (this.mcTrigger === 'focus') {
             this.manualListeners
-                .set('focus', () => this.show())
-                .set('blur', () => this.hide())
-                .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
+                .set('focus', (/**
+             * @return {?}
+             */
+            () => this.show()))
+                .set('blur', (/**
+             * @return {?}
+             */
+            () => this.hide()))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            (listener, event) => this.elementRef.nativeElement.addEventListener(event, listener)));
         }
     }
     /**
@@ -744,16 +788,27 @@ class McPopover {
                     'mcContent',
                     'mcFooter'
                 ];
-                properties.forEach((property) => this.updateCompValue(property, this[property]));
+                properties.forEach((/**
+                 * @param {?} property
+                 * @return {?}
+                 */
+                (property) => this.updateCompValue(property, this[property])));
                 this.popover.mcVisibleChange.pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
-                    .subscribe((data) => {
+                    .subscribe((/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                (data) => {
                     this.mcVisible = data;
                     this.mcVisibleChange.emit(data);
                     this.isPopoverOpen = data;
-                });
+                }));
                 this.popover.afterHidden()
                     .pipe(takeUntil(this.destroyed))
-                    .subscribe(() => this.detach());
+                    .subscribe((/**
+                 * @return {?}
+                 */
+                () => this.detach()));
             }
             this.updatePosition();
             this.popover.show();
@@ -790,9 +845,12 @@ class McPopover {
         // FIXME: Необходимо в некоторых моментах форсировать позиционировать только после рендеринга всего контента
         //
         if (reapplyPosition) {
-            setTimeout(() => {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 position.reapplyLastPosition();
-            });
+            }));
         }
     }
     /**
@@ -955,7 +1013,7 @@ McPopover.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McPopoverModule {
 }
@@ -971,12 +1029,12 @@ McPopoverModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McPopoverModule, mcPopoverScrollStrategyFactory, getMcPopoverInvalidPositionError, McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover, mcPopoverAnimations };

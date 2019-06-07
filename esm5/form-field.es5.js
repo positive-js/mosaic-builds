@@ -15,7 +15,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McCleaner = /** @class */ (function () {
     function McCleaner() {
@@ -31,7 +31,7 @@ var McCleaner = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An interface which allows a control to work inside of a `MсFormField`.
@@ -51,7 +51,7 @@ McFormFieldControl = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @return {?}
@@ -62,7 +62,7 @@ function getMcFormFieldMissingControlError() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An interface which allows a control to work inside of a `MсFormField`.
@@ -82,7 +82,7 @@ McFormFieldNumberControl = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var nextUniqueId = 0;
@@ -107,7 +107,7 @@ var McHint = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McPrefix = /** @class */ (function () {
     function McPrefix() {
@@ -122,7 +122,7 @@ var McPrefix = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McStepper = /** @class */ (function () {
     function McStepper() {
@@ -168,7 +168,7 @@ var McStepper = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSuffix = /** @class */ (function () {
     function McSuffix() {
@@ -183,7 +183,7 @@ var McSuffix = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var nextUniqueId$1 = 0;
@@ -225,20 +225,29 @@ var McFormField = /** @class */ (function (_super) {
         }
         // Subscribe to changes in the child control state in order to update the form field UI.
         this._control.stateChanges.pipe(startWith())
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._changeDetectorRef.markForCheck();
-        });
+        }));
         if (this._numberControl) {
             this._numberControl.stateChanges.pipe(startWith())
-                .subscribe(function () {
+                .subscribe((/**
+             * @return {?}
+             */
+            function () {
                 _this._changeDetectorRef.markForCheck();
-            });
+            }));
         }
         // Run change detection if the value changes.
         /** @type {?} */
         var valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || EMPTY;
         merge(valueChanges)
-            .subscribe(function () { return _this._changeDetectorRef.markForCheck(); });
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this._changeDetectorRef.markForCheck(); }));
     };
     /**
      * @return {?}
@@ -516,14 +525,14 @@ var McFormField = /** @class */ (function (_super) {
         { type: ChangeDetectorRef }
     ]; };
     McFormField.propDecorators = {
-        _control: [{ type: ContentChild, args: [McFormFieldControl,] }],
-        _numberControl: [{ type: ContentChild, args: [McFormFieldNumberControl,] }],
-        _stepper: [{ type: ContentChild, args: [McStepper,] }],
+        _control: [{ type: ContentChild, args: [McFormFieldControl, { static: false },] }],
+        _numberControl: [{ type: ContentChild, args: [McFormFieldNumberControl, { static: false },] }],
+        _stepper: [{ type: ContentChild, args: [McStepper, { static: false },] }],
         _hint: [{ type: ContentChildren, args: [McHint,] }],
         _suffix: [{ type: ContentChildren, args: [McSuffix,] }],
         _prefix: [{ type: ContentChildren, args: [McPrefix,] }],
         _cleaner: [{ type: ContentChildren, args: [McCleaner,] }],
-        connectionContainerRef: [{ type: ViewChild, args: ['connectionContainer',] }]
+        connectionContainerRef: [{ type: ViewChild, args: ['connectionContainer', { static: true },] }]
     };
     return McFormField;
 }(_McFormFieldMixinBase));
@@ -542,7 +551,7 @@ var McFormFieldWithoutBorders = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McFormFieldModule = /** @class */ (function () {
     function McFormFieldModule() {
@@ -575,12 +584,12 @@ var McFormFieldModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McFormFieldModule, McFormFieldBase, _McFormFieldMixinBase, McFormField, McFormFieldWithoutBorders, McFormFieldControl, McFormFieldNumberControl, getMcFormFieldMissingControlError, McHint, McSuffix, McPrefix, McCleaner, McStepper };

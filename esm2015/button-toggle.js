@@ -14,7 +14,7 @@ import { McCommonModule } from '@ptsecurity/mosaic/core';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Provider Expression that allows mc-button-toggle-group to register as a ControlValueAccessor.
@@ -24,7 +24,10 @@ import { McCommonModule } from '@ptsecurity/mosaic/core';
  */
 const MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => McButtonToggleGroup),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => McButtonToggleGroup)),
     multi: true
 };
 /**
@@ -67,12 +70,18 @@ class McButtonToggleGroup {
          * Now `ngModel` binding is not supported in multiple selection mode.
          */
         // tslint:disable-next-line:no-empty
-        this.controlValueAccessorChangeFn = () => { };
+        this.controlValueAccessorChangeFn = (/**
+         * @return {?}
+         */
+        () => { });
         /**
          * onTouch function registered via registerOnTouch (ControlValueAccessor).
          */
         // tslint:disable-next-line:no-empty
-        this.onTouched = () => { };
+        this.onTouched = (/**
+         * @return {?}
+         */
+        () => { });
     }
     /**
      * Whether the toggle group is vertical.
@@ -96,7 +105,11 @@ class McButtonToggleGroup {
         /** @type {?} */
         const selected = this.selectionModel ? this.selectionModel.selected : [];
         if (this.multiple) {
-            return selected.map((toggle) => toggle.value);
+            return selected.map((/**
+             * @param {?} toggle
+             * @return {?}
+             */
+            (toggle) => toggle.value));
         }
         return selected[0] ? selected[0].value : undefined;
     }
@@ -147,7 +160,11 @@ class McButtonToggleGroup {
         if (!this.buttonToggles) {
             return;
         }
-        this.buttonToggles.forEach((toggle) => toggle.markForCheck());
+        this.buttonToggles.forEach((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        (toggle) => toggle.markForCheck()));
     }
     /**
      * @return {?}
@@ -159,7 +176,11 @@ class McButtonToggleGroup {
      * @return {?}
      */
     ngAfterContentInit() {
-        this.selectionModel.select(...this.buttonToggles.filter((toggle) => toggle.checked));
+        this.selectionModel.select(...this.buttonToggles.filter((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        (toggle) => toggle.checked)));
         this.disabled = this._disabled;
     }
     /**
@@ -254,7 +275,11 @@ class McButtonToggleGroup {
             return false;
         }
         if (this.multiple && Array.isArray(this.rawValue)) {
-            return this.rawValue.some((value) => toggle.value != null && value === toggle.value);
+            return this.rawValue.some((/**
+             * @param {?} value
+             * @return {?}
+             */
+            (value) => toggle.value != null && value === toggle.value));
         }
         return toggle.value === this.rawValue;
     }
@@ -274,7 +299,11 @@ class McButtonToggleGroup {
                 throw Error('Value must be an array in multiple-selection mode.');
             }
             this.clearSelection();
-            value.forEach((currentValue) => this.selectValue(currentValue));
+            value.forEach((/**
+             * @param {?} currentValue
+             * @return {?}
+             */
+            (currentValue) => this.selectValue(currentValue)));
         }
         else {
             this.clearSelection();
@@ -288,7 +317,11 @@ class McButtonToggleGroup {
      */
     clearSelection() {
         this.selectionModel.clear();
-        this.buttonToggles.forEach((toggle) => toggle.checked = false);
+        this.buttonToggles.forEach((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        (toggle) => toggle.checked = false));
     }
     /**
      * Selects a value if there's a toggle that corresponds to it.
@@ -298,9 +331,13 @@ class McButtonToggleGroup {
      */
     selectValue(value) {
         /** @type {?} */
-        const correspondingOption = this.buttonToggles.find((toggle) => {
+        const correspondingOption = this.buttonToggles.find((/**
+         * @param {?} toggle
+         * @return {?}
+         */
+        (toggle) => {
             return toggle.value != null && toggle.value === value;
-        });
+        }));
         if (correspondingOption) {
             correspondingOption.checked = true;
             this.selectionModel.select(correspondingOption);
@@ -327,7 +364,10 @@ McButtonToggleGroup.propDecorators = {
     vertical: [{ type: Input }],
     value: [{ type: Input }],
     multiple: [{ type: Input }],
-    buttonToggles: [{ type: ContentChildren, args: [forwardRef(() => McButtonToggle),] }],
+    buttonToggles: [{ type: ContentChildren, args: [forwardRef((/**
+                 * @return {?}
+                 */
+                () => McButtonToggle)),] }],
     disabled: [{ type: Input }],
     valueChange: [{ type: Output }],
     change: [{ type: Output }]
@@ -409,7 +449,10 @@ class McButtonToggle {
         // Remove the toggle from the selection once it's destroyed. Needs to happen
         // on the next tick in order to avoid "changed after checked" errors.
         if (group && group.isSelected(this)) {
-            Promise.resolve().then(() => group.syncButtonToggle(this, false));
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            () => group.syncButtonToggle(this, false)));
         }
     }
     /**
@@ -489,7 +532,7 @@ McButtonToggle.ctorParameters = () => [
 ];
 McButtonToggle.propDecorators = {
     checked: [{ type: Input }],
-    mcButton: [{ type: ViewChild, args: [McButton,] }],
+    mcButton: [{ type: ViewChild, args: [McButton, { static: false },] }],
     value: [{ type: Input }],
     tabIndex: [{ type: Input }],
     disabled: [{ type: Input }],
@@ -498,7 +541,7 @@ McButtonToggle.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McButtonToggleModule {
 }
@@ -512,12 +555,12 @@ McButtonToggleModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McButtonToggleModule, MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR, McButtonToggleChange, McButtonToggleGroup, McButtonToggle };

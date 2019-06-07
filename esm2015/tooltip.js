@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McTooltipComponent {
     /**
@@ -119,13 +119,16 @@ class McTooltipComponent {
             if (this.mcTrigger !== 'manual') {
                 this.closeOnInteraction = true;
             }
-            this.showTid = setTimeout(() => {
+            this.showTid = setTimeout((/**
+             * @return {?}
+             */
+            () => {
                 this.mcVisible = true;
                 this.mcVisibleChange.emit(true);
                 // Mark for check so if any parent component has set the
                 // ChangeDetectionStrategy to OnPush it will be checked anyways
                 this.markForCheck();
-            }, this.mcMouseEnterDelay);
+            }), this.mcMouseEnterDelay);
         }
     }
     /**
@@ -135,14 +138,17 @@ class McTooltipComponent {
         if (this.showTid) {
             clearTimeout(this.showTid);
         }
-        this.hideTid = setTimeout(() => {
+        this.hideTid = setTimeout((/**
+         * @return {?}
+         */
+        () => {
             this.mcVisible = false;
             this.mcVisibleChange.emit(false);
             this.onHideSubject.next();
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
             this.markForCheck();
-        }, this.mcMouseLeaveDelay);
+        }), this.mcMouseLeaveDelay);
     }
     /**
      * @return {?}
@@ -222,7 +228,10 @@ const MC_TOOLTIP_SCROLL_STRATEGY = new InjectionToken('mc-tooltip-scroll-strateg
  * @return {?}
  */
 function mcTooltipScrollStrategyFactory(overlay) {
-    return () => overlay.scrollStrategies.reposition({ scrollThrottle: 20 });
+    return (/**
+     * @return {?}
+     */
+    () => overlay.scrollStrategies.reposition({ scrollThrottle: 20 }));
 }
 /**
  * \@docs-private
@@ -440,16 +449,23 @@ class McTooltip {
         const scrollableAncestors = this.scrollDispatcher
             .getAncestorScrollContainers(this.elementRef);
         strategy.withScrollableContainers(scrollableAncestors);
-        strategy.positionChanges.pipe(takeUntil(this.destroyed)).subscribe((change) => {
+        strategy.positionChanges.pipe(takeUntil(this.destroyed)).subscribe((/**
+         * @param {?} change
+         * @return {?}
+         */
+        (change) => {
             if (this.tooltip) {
                 this.onPositionChange(change);
                 if (change.scrollableViewProperties.isOverlayClipped && this.tooltip.mcVisible) {
                     // After position changes occur and the overlay is clipped by
                     // a parent scrollable then close the tooltip.
-                    this.ngZone.run(() => this.hide());
+                    this.ngZone.run((/**
+                     * @return {?}
+                     */
+                    () => this.hide()));
                 }
             }
-        });
+        }));
         this.overlayRef = this.overlay.create({
             direction: this.direction,
             positionStrategy: strategy,
@@ -459,7 +475,10 @@ class McTooltip {
         this.updatePosition();
         this.overlayRef.detachments()
             .pipe(takeUntil(this.destroyed))
-            .subscribe(() => this.detach());
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.detach()));
         return this.overlayRef;
     }
     /**
@@ -478,7 +497,11 @@ class McTooltip {
     onPositionChange($event) {
         /** @type {?} */
         let updatedPlacement = this.mcPlacement;
-        Object.keys(this.availablePositions).some((key) => {
+        Object.keys(this.availablePositions).some((/**
+         * @param {?} key
+         * @return {?}
+         */
+        (key) => {
             if ($event.connectionPair.originX === this.availablePositions[key].originX &&
                 $event.connectionPair.originY === this.availablePositions[key].originY &&
                 $event.connectionPair.overlayX === this.availablePositions[key].overlayX &&
@@ -487,7 +510,7 @@ class McTooltip {
                 return true;
             }
             return false;
-        });
+        }));
         this.updateCompValue('mcPlacement', updatedPlacement);
         if (this.tooltip) {
             this.tooltip.setClassMap();
@@ -540,7 +563,12 @@ class McTooltip {
         if (this.overlayRef) {
             this.overlayRef.dispose();
         }
-        this.manualListeners.forEach((listener, event) => this.elementRef.nativeElement.removeEventListener(event, listener));
+        this.manualListeners.forEach((/**
+         * @param {?} listener
+         * @param {?} event
+         * @return {?}
+         */
+        (listener, event) => this.elementRef.nativeElement.removeEventListener(event, listener)));
         this.manualListeners.clear();
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
@@ -566,15 +594,37 @@ class McTooltip {
     initElementRefListeners() {
         if (this.mcTrigger === 'hover') {
             this.manualListeners
-                .set('mouseenter', () => this.show())
-                .set('mouseleave', () => this.hide())
-                .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
+                .set('mouseenter', (/**
+             * @return {?}
+             */
+            () => this.show()))
+                .set('mouseleave', (/**
+             * @return {?}
+             */
+            () => this.hide()))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            (listener, event) => this.elementRef.nativeElement.addEventListener(event, listener)));
         }
         if (this.mcTrigger === 'focus') {
             this.manualListeners
-                .set('focus', () => this.show())
-                .set('blur', () => this.hide())
-                .forEach((listener, event) => this.elementRef.nativeElement.addEventListener(event, listener));
+                .set('focus', (/**
+             * @return {?}
+             */
+            () => this.show()))
+                .set('blur', (/**
+             * @return {?}
+             */
+            () => this.hide()))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            (listener, event) => this.elementRef.nativeElement.addEventListener(event, listener)));
         }
     }
     /**
@@ -590,7 +640,10 @@ class McTooltip {
                 this.tooltip = overlayRef.attach(this.portal).instance;
                 this.tooltip.afterHidden()
                     .pipe(takeUntil(this.destroyed))
-                    .subscribe(() => this.detach());
+                    .subscribe((/**
+                 * @return {?}
+                 */
+                () => this.detach()));
                 this.isDynamicTooltip = true;
                 /** @type {?} */
                 const properties = [
@@ -603,13 +656,21 @@ class McTooltip {
                     'mсTooltipClass',
                     'mcVisible'
                 ];
-                properties.forEach((property) => this.updateCompValue(property, this[property]));
+                properties.forEach((/**
+                 * @param {?} property
+                 * @return {?}
+                 */
+                (property) => this.updateCompValue(property, this[property])));
                 this.tooltip.mcVisibleChange.pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
-                    .subscribe((data) => {
+                    .subscribe((/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                (data) => {
                     this.mcVisible = data;
                     this.mcVisibleChange.emit(data);
                     this.isTooltipOpen = data;
-                });
+                }));
             }
             this.updatePosition();
             this.tooltip.show();
@@ -780,7 +841,7 @@ McTooltip.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McToolTipModule {
 }
@@ -796,12 +857,12 @@ McToolTipModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McToolTipModule, mcTooltipScrollStrategyFactory, getMcTooltipInvalidPositionError, McTooltipComponent, MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McTooltip };

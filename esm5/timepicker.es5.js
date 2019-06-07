@@ -20,7 +20,7 @@ import { PlatformModule } from '@ptsecurity/cdk/platform';
 var _a;
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 var TimeParts = {
@@ -64,7 +64,7 @@ var ARROW_RIGHT_KEYCODE = 'ArrowRight';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var uniqueComponentIdSuffix = 0;
@@ -126,9 +126,18 @@ var McTimepicker = /** @class */ (function (_super) {
             var control = (/** @type {?} */ (_this.ngControl.control));
             /** @type {?} */
             var myValidators = [
-                function () { return _this.parseValidator(); },
-                function () { return _this.minTimeValidator(); },
-                function () { return _this.maxTimeValidator(); }
+                (/**
+                 * @return {?}
+                 */
+                function () { return _this.parseValidator(); }),
+                (/**
+                 * @return {?}
+                 */
+                function () { return _this.minTimeValidator(); }),
+                (/**
+                 * @return {?}
+                 */
+                function () { return _this.maxTimeValidator(); })
             ];
             /** @type {?} */
             var validators = control.validator
@@ -232,7 +241,11 @@ var McTimepicker = /** @class */ (function (_super) {
         function (formatValue) {
             this._timeFormat = Object
                 .keys(TimeFormats)
-                .map(function (timeFormatKey) { return TimeFormats[timeFormatKey]; })
+                .map((/**
+             * @param {?} timeFormatKey
+             * @return {?}
+             */
+            function (timeFormatKey) { return TimeFormats[timeFormatKey]; }))
                 .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
             ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
             this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
@@ -647,12 +660,15 @@ var McTimepicker = /** @class */ (function (_super) {
      */
     function (cursorPos) {
         var _this = this;
-        setTimeout(function () {
+        setTimeout((/**
+         * @return {?}
+         */
+        function () {
             /** @type {?} */
             var newEditParams = _this.getTimeEditMetrics(cursorPos);
             _this.elementRef.nativeElement.selectionStart = newEditParams.cursorStartPosition;
             _this.elementRef.nativeElement.selectionEnd = newEditParams.cursorEndPosition;
-        });
+        }));
     };
     /**
      * @private
@@ -840,8 +856,8 @@ var McTimepicker = /** @class */ (function (_super) {
      * @return {?}
      */
     function (tempVal, timeFormat) {
-        if (timeFormat === void 0) { timeFormat = DEFAULT_TIME_FORMAT; }
         var _a;
+        if (timeFormat === void 0) { timeFormat = DEFAULT_TIME_FORMAT; }
         /** @type {?} */
         var hours = this.getNumberWithLeadingZero(tempVal.getHours());
         /** @type {?} */
@@ -849,7 +865,13 @@ var McTimepicker = /** @class */ (function (_super) {
         /** @type {?} */
         var seconds = this.getNumberWithLeadingZero(tempVal.getSeconds());
         /** @type {?} */
-        var formattedTimeGenerators = (_a = {}, _a[TimeFormats.HHmm] = function () { return hours + ":" + minutes; }, _a[TimeFormats.HHmmss] = function () { return hours + ":" + minutes + ":" + seconds; }, _a);
+        var formattedTimeGenerators = (_a = {}, _a[TimeFormats.HHmm] = (/**
+             * @return {?}
+             */
+            function () { return hours + ":" + minutes; }), _a[TimeFormats.HHmmss] = (/**
+             * @return {?}
+             */
+            function () { return hours + ":" + minutes + ":" + seconds; }), _a);
         return formattedTimeGenerators[timeFormat]();
     };
     /**
@@ -1083,7 +1105,10 @@ var McTimepicker = /** @class */ (function (_super) {
                     providers: [
                         {
                             provide: McFormFieldControl,
-                            useExisting: forwardRef(function () { return McTimepicker; })
+                            useExisting: forwardRef((/**
+                             * @return {?}
+                             */
+                            function () { return McTimepicker; }))
                         }
                     ]
                 },] },
@@ -1115,7 +1140,7 @@ var McTimepicker = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTimepickerModule = /** @class */ (function () {
     function McTimepickerModule() {
@@ -1141,12 +1166,12 @@ var McTimepickerModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McTimepickerModule, TimeParts, TimeFormats, TIMEFORMAT_PLACEHOLDERS, DEFAULT_TIME_FORMAT, HOURS_MINUTES_SECONDS_REGEXP, HOURS_MINUTES_REGEXP, HOURS_ONLY_REGEXP, SECONDS_PER_MINUTE, MINUTES_PER_HOUR, HOURS_PER_DAY, ARROW_UP_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_LEFT_KEYCODE, ARROW_RIGHT_KEYCODE, McTimepickerBase, McTimepickerMixinBase, McTimepicker };

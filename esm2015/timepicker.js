@@ -18,7 +18,7 @@ import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {number} */
 const TimeParts = {
@@ -65,7 +65,7 @@ const ARROW_RIGHT_KEYCODE = 'ArrowRight';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 let uniqueComponentIdSuffix = 0;
@@ -141,9 +141,18 @@ class McTimepicker extends McTimepickerMixinBase {
             const control = (/** @type {?} */ (this.ngControl.control));
             /** @type {?} */
             const myValidators = [
-                () => this.parseValidator(),
-                () => this.minTimeValidator(),
-                () => this.maxTimeValidator()
+                (/**
+                 * @return {?}
+                 */
+                () => this.parseValidator()),
+                (/**
+                 * @return {?}
+                 */
+                () => this.minTimeValidator()),
+                (/**
+                 * @return {?}
+                 */
+                () => this.maxTimeValidator())
             ];
             /** @type {?} */
             const validators = control.validator
@@ -222,7 +231,11 @@ class McTimepicker extends McTimepickerMixinBase {
     set timeFormat(formatValue) {
         this._timeFormat = Object
             .keys(TimeFormats)
-            .map((timeFormatKey) => TimeFormats[timeFormatKey])
+            .map((/**
+         * @param {?} timeFormatKey
+         * @return {?}
+         */
+        (timeFormatKey) => TimeFormats[timeFormatKey]))
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
         ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
         this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
@@ -524,12 +537,15 @@ class McTimepicker extends McTimepickerMixinBase {
      * @return {?}
      */
     createSelectionOfTimeComponentInInput(cursorPos) {
-        setTimeout(() => {
+        setTimeout((/**
+         * @return {?}
+         */
+        () => {
             /** @type {?} */
             const newEditParams = this.getTimeEditMetrics(cursorPos);
             this.elementRef.nativeElement.selectionStart = newEditParams.cursorStartPosition;
             this.elementRef.nativeElement.selectionEnd = newEditParams.cursorEndPosition;
-        });
+        }));
     }
     /**
      * @private
@@ -673,8 +689,14 @@ class McTimepicker extends McTimepickerMixinBase {
         const seconds = this.getNumberWithLeadingZero(tempVal.getSeconds());
         /** @type {?} */
         const formattedTimeGenerators = {
-            [TimeFormats.HHmm]: () => `${hours}:${minutes}`,
-            [TimeFormats.HHmmss]: () => `${hours}:${minutes}:${seconds}`
+            [TimeFormats.HHmm]: (/**
+             * @return {?}
+             */
+            () => `${hours}:${minutes}`),
+            [TimeFormats.HHmmss]: (/**
+             * @return {?}
+             */
+            () => `${hours}:${minutes}:${seconds}`)
         };
         return formattedTimeGenerators[timeFormat]();
     }
@@ -856,7 +878,10 @@ McTimepicker.decorators = [
                 providers: [
                     {
                         provide: McFormFieldControl,
-                        useExisting: forwardRef(() => McTimepicker)
+                        useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => McTimepicker))
                     }
                 ]
             },] },
@@ -886,7 +911,7 @@ McTimepicker.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McTimepickerModule {
 }
@@ -909,12 +934,12 @@ McTimepickerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McTimepickerModule, TimeParts, TimeFormats, TIMEFORMAT_PLACEHOLDERS, DEFAULT_TIME_FORMAT, HOURS_MINUTES_SECONDS_REGEXP, HOURS_MINUTES_REGEXP, HOURS_ONLY_REGEXP, SECONDS_PER_MINUTE, MINUTES_PER_HOUR, HOURS_PER_DAY, ARROW_UP_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_LEFT_KEYCODE, ARROW_RIGHT_KEYCODE, McTimepickerBase, McTimepickerMixinBase, McTimepicker };

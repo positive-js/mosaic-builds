@@ -41,7 +41,7 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Decorates the `ng-template` tags and reads out the template from it.
@@ -62,7 +62,7 @@ var McTabContent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Used to flag tab labels for use with the portal directive
@@ -80,11 +80,14 @@ var McTabLabel = /** @class */ (function (_super) {
     return McTabLabel;
 }(portal.CdkPortal));
 // TODO: workaround for https://github.com/angular/material2/issues/12760
-((/** @type {?} */ (McTabLabel))).ctorParameters = function () { return ((/** @type {?} */ (portal.CdkPortal))).ctorParameters; };
+((/** @type {?} */ (McTabLabel))).ctorParameters = (/**
+ * @return {?}
+ */
+function () { return ((/** @type {?} */ (portal.CdkPortal))).ctorParameters; });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTabBase = /** @class */ (function () {
     function McTabBase() {
@@ -188,9 +191,9 @@ var McTab = /** @class */ (function (_super) {
         { type: core.ViewContainerRef }
     ]; };
     McTab.propDecorators = {
-        templateLabel: [{ type: core.ContentChild, args: [McTabLabel,] }],
-        explicitContent: [{ type: core.ContentChild, args: [McTabContent, { read: core.TemplateRef },] }],
-        implicitContent: [{ type: core.ViewChild, args: [core.TemplateRef,] }],
+        templateLabel: [{ type: core.ContentChild, args: [McTabLabel, { static: false },] }],
+        explicitContent: [{ type: core.ContentChild, args: [McTabContent, { read: core.TemplateRef, static: true },] }],
+        implicitContent: [{ type: core.ViewChild, args: [core.TemplateRef, { static: true },] }],
         textLabel: [{ type: core.Input, args: ['label',] }],
         ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
         ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }]
@@ -200,7 +203,7 @@ var McTab = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var mcTabsAnimations = {
@@ -230,7 +233,7 @@ var mcTabsAnimations = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Wrapper for the contents of a tab.
@@ -268,10 +271,14 @@ var McTabBody = /** @class */ (function () {
          */
         this.dirChangeSubscription = rxjs.Subscription.EMPTY;
         if (this.dir && changeDetectorRef) {
-            this.dirChangeSubscription = this.dir.change.subscribe(function (direction) {
+            this.dirChangeSubscription = this.dir.change.subscribe((/**
+             * @param {?} direction
+             * @return {?}
+             */
+            function (direction) {
                 _this.computePositionAnimationState(direction);
                 changeDetectorRef.markForCheck();
-            });
+            }));
         }
     }
     Object.defineProperty(McTabBody.prototype, "position", {
@@ -451,7 +458,7 @@ var McTabBody = /** @class */ (function () {
         beforeCentering: [{ type: core.Output }],
         afterLeavingCenter: [{ type: core.Output }],
         onCentered: [{ type: core.Output }],
-        portalHost: [{ type: core.ViewChild, args: [portal.PortalHostDirective,] }],
+        portalHost: [{ type: core.ViewChild, args: [portal.PortalHostDirective, { static: false },] }],
         content: [{ type: core.Input, args: ['content',] }],
         origin: [{ type: core.Input }],
         animationDuration: [{ type: core.Input }]
@@ -491,14 +498,21 @@ var McTabBodyPortal = /** @class */ (function (_super) {
         _super.prototype.ngOnInit.call(this);
         this.centeringSub = this.host.beforeCentering
             .pipe(operators.startWith(this.host.isCenterPosition(this.host.bodyPosition)))
-            .subscribe(function (isCentering) {
+            .subscribe((/**
+         * @param {?} isCentering
+         * @return {?}
+         */
+        function (isCentering) {
             if (isCentering && !_this.hasAttached()) {
                 _this.attach(_this.host.content);
             }
-        });
-        this.leavingSub = this.host.afterLeavingCenter.subscribe(function () {
+        }));
+        this.leavingSub = this.host.afterLeavingCenter.subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this.detach();
-        });
+        }));
     };
     /** Clean up centering subscription. */
     /**
@@ -523,14 +537,17 @@ var McTabBodyPortal = /** @class */ (function (_super) {
     McTabBodyPortal.ctorParameters = function () { return [
         { type: core.ComponentFactoryResolver },
         { type: core.ViewContainerRef },
-        { type: McTabBody, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McTabBody; }),] }] }
+        { type: McTabBody, decorators: [{ type: core.Inject, args: [core.forwardRef((/**
+                         * @return {?}
+                         */
+                        function () { return McTabBody; })),] }] }
     ]; };
     return McTabBodyPortal;
 }(portal.CdkPortalOutlet));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to McTabLabelWrapper.
 /**
@@ -608,7 +625,7 @@ var McTabLabelWrapper = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var VIEWPORT_THROTTLE_TIME = 150;
@@ -828,9 +845,12 @@ var McTabHeader = /** @class */ (function (_super) {
         /** @type {?} */
         var resize = this.viewportRuler.change(VIEWPORT_THROTTLE_TIME);
         /** @type {?} */
-        var realign = function () {
+        var realign = (/**
+         * @return {?}
+         */
+        function () {
             _this.updatePagination();
-        };
+        });
         this.keyManager = new a11y.FocusKeyManager(this.labelWrappers)
             .withHorizontalOrientation(this.getLayoutDirection())
             .withWrap();
@@ -844,19 +864,26 @@ var McTabHeader = /** @class */ (function (_super) {
         // the key manager if the direction has changed.
         rxjs.merge(dirChange, resize)
             .pipe(operators.takeUntil(this.destroyed))
-            .subscribe(function () {
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             realign();
             _this.keyManager.withHorizontalOrientation(_this.getLayoutDirection());
-        });
+        }));
         // If there is a change in the focus key manager we need to emit the `indexFocused`
         // event in order to provide a public event that notifies about focus changes. Also we realign
         // the tabs container by scrolling the new focused tab into the visible section.
         this.keyManager.change
             .pipe(operators.takeUntil(this.destroyed))
-            .subscribe(function (newFocusIndex) {
+            .subscribe((/**
+         * @param {?} newFocusIndex
+         * @return {?}
+         */
+        function (newFocusIndex) {
             _this.indexFocused.emit(newFocusIndex);
             _this.setTabFocus(newFocusIndex);
-        });
+        }));
     };
     /**
      * @return {?}
@@ -889,10 +916,13 @@ var McTabHeader = /** @class */ (function (_super) {
         if (textContent !== this.currentTextContent) {
             this.currentTextContent = textContent;
             /** @type {?} */
-            var zoneCallback = function () {
+            var zoneCallback = (/**
+             * @return {?}
+             */
+            function () {
                 _this.updatePagination();
                 _this.changeDetectorRef.markForCheck();
-            };
+            });
             // The content observer runs outside the `NgZone` by default, which
             // means that we need to bring the callback back in ourselves.
             // TODO: Remove null check for `_ngZone` once it's a required parameter.
@@ -1256,8 +1286,8 @@ var McTabHeader = /** @class */ (function (_super) {
     McTabHeader.propDecorators = {
         selectedIndex: [{ type: core.Input }],
         labelWrappers: [{ type: core.ContentChildren, args: [McTabLabelWrapper,] }],
-        tabListContainer: [{ type: core.ViewChild, args: ['tabListContainer',] }],
-        tabList: [{ type: core.ViewChild, args: ['tabList',] }],
+        tabListContainer: [{ type: core.ViewChild, args: ['tabListContainer', { static: true },] }],
+        tabList: [{ type: core.ViewChild, args: ['tabList', { static: true },] }],
         selectFocusedIndex: [{ type: core.Output }],
         indexFocused: [{ type: core.Output }]
     };
@@ -1266,7 +1296,7 @@ var McTabHeader = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McLightTabsCssStyler = /** @class */ (function () {
     function McLightTabsCssStyler() {
@@ -1472,22 +1502,35 @@ var McTabGroup = /** @class */ (function (_super) {
             }
             // Changing these values after change detection has run
             // since the checked content may contain references to them.
-            Promise.resolve().then(function () {
-                _this.tabs.forEach(function (tab, index) { return tab.isActive = index === indexToSelect; });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () {
+                _this.tabs.forEach((/**
+                 * @param {?} tab
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (tab, index) { return tab.isActive = index === indexToSelect; }));
                 if (!isFirstRun_1) {
                     _this.selectedIndexChange.emit(indexToSelect);
                 }
-            });
+            }));
         }
         // Setup the position for each tab and optionally setup an origin on the next selected tab.
-        this.tabs.forEach(function (tab, index) {
+        this.tabs.forEach((/**
+         * @param {?} tab
+         * @param {?} index
+         * @return {?}
+         */
+        function (tab, index) {
             tab.position = index - indexToSelect;
             // If there is already a selected tab, then set up an origin for the next selected tab
             // if it doesn't have one already.
             if (_this._selectedIndex != null && tab.position === 0 && !tab.origin) {
                 tab.origin = indexToSelect - _this._selectedIndex;
             }
-        });
+        }));
         if (this._selectedIndex !== indexToSelect) {
             this._selectedIndex = indexToSelect;
             this.changeDetectorRef.markForCheck();
@@ -1504,7 +1547,10 @@ var McTabGroup = /** @class */ (function (_super) {
         this.subscribeToTabLabels();
         // Subscribe to changes in the amount of tabs, in order to be
         // able to re-render the content as new tabs are added or removed.
-        this.tabsSubscription = this.tabs.changes.subscribe(function () {
+        this.tabsSubscription = this.tabs.changes.subscribe((/**
+         * @return {?}
+         */
+        function () {
             /** @type {?} */
             var indexToSelect = _this.clampTabIndex(_this.indexToSelect);
             // Maintain the previously-selected tab if a new tab is added or removed and there is no
@@ -1524,7 +1570,7 @@ var McTabGroup = /** @class */ (function (_super) {
             }
             _this.subscribeToTabLabels();
             _this.changeDetectorRef.markForCheck();
-        });
+        }));
     };
     /**
      * @return {?}
@@ -1703,7 +1749,14 @@ var McTabGroup = /** @class */ (function (_super) {
         if (this.tabLabelSubscription) {
             this.tabLabelSubscription.unsubscribe();
         }
-        this.tabLabelSubscription = rxjs.merge.apply(void 0, this.tabs.map(function (tab) { return tab.stateChanges; })).subscribe(function () { return _this.changeDetectorRef.markForCheck(); });
+        this.tabLabelSubscription = rxjs.merge.apply(void 0, this.tabs.map((/**
+         * @param {?} tab
+         * @return {?}
+         */
+        function (tab) { return tab.stateChanges; }))).subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.changeDetectorRef.markForCheck(); }));
     };
     /** Clamps the given index to the bounds of 0 and the tabs length. */
     /**
@@ -1751,8 +1804,8 @@ var McTabGroup = /** @class */ (function (_super) {
         dynamicHeight: [{ type: core.Input }],
         selectedIndex: [{ type: core.Input }],
         tabs: [{ type: core.ContentChildren, args: [McTab,] }],
-        tabBodyWrapper: [{ type: core.ViewChild, args: ['tabBodyWrapper',] }],
-        tabHeader: [{ type: core.ViewChild, args: ['tabHeader',] }],
+        tabBodyWrapper: [{ type: core.ViewChild, args: ['tabBodyWrapper', { static: false },] }],
+        tabHeader: [{ type: core.ViewChild, args: ['tabHeader', { static: false },] }],
         headerPosition: [{ type: core.Input }],
         animationDuration: [{ type: core.Input }],
         selectedIndexChange: [{ type: core.Output }],
@@ -1765,7 +1818,7 @@ var McTabGroup = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to McTabNav.
 /**
@@ -1897,7 +1950,7 @@ var McTabLink = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTabsModule = /** @class */ (function () {
     function McTabsModule() {
@@ -1965,15 +2018,15 @@ exports.McTabGroupBase = McTabGroupBase;
 exports.mcTabGroupMixinBase = mcTabGroupMixinBase;
 exports.McTabGroup = McTabGroup;
 exports.mcTabsAnimations = mcTabsAnimations;
-exports.ɵd14 = McTabBase;
-exports.ɵe14 = mcTabMixinBase;
-exports.ɵa14 = McTabHeaderBase;
-exports.ɵb14 = McTabLabelWrapperBase;
-exports.ɵc14 = mcTabLabelWrapperMixinBase;
-exports.ɵh14 = McTabLinkBase;
-exports.ɵf14 = McTabNavBase;
-exports.ɵi14 = mcTabLinkMixinBase;
-exports.ɵg14 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

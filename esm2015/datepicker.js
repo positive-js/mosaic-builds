@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Injectable, NgModule, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, Inject, Input, Optional, Output, ViewChild, ViewEncapsulation, ElementRef, NgZone, InjectionToken, ViewContainerRef, Directive, Attribute, ContentChild, defineInjectable } from '@angular/core';
+import { Injectable, NgModule, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, Inject, Input, Optional, Output, ViewChild, ViewEncapsulation, ElementRef, NgZone, InjectionToken, ViewContainerRef, Directive, Attribute, ContentChild, ɵɵdefineInjectable } from '@angular/core';
 import { Subject, merge, Subscription, of } from 'rxjs';
 import { take, filter } from 'rxjs/operators';
 import { Directionality } from '@ptsecurity/cdk/bidi';
@@ -25,7 +25,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@docs-private
@@ -39,7 +39,7 @@ function createMissingDateImplError(provider) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Datepicker data that requires internationalization.
@@ -96,11 +96,11 @@ class McDatepickerIntl {
 McDatepickerIntl.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] },
 ];
-/** @nocollapse */ McDatepickerIntl.ngInjectableDef = defineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
+/** @nocollapse */ McDatepickerIntl.ngInjectableDef = ɵɵdefineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An internal class that represents the data corresponding to a single calendar cell.
@@ -199,15 +199,21 @@ class McCalendarBody {
      * @return {?}
      */
     focusActiveCell() {
-        this.ngZone.runOutsideAngular(() => {
-            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        () => {
+            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe((/**
+             * @return {?}
+             */
+            () => {
                 /** @type {?} */
                 const activeCell = this.elementRef.nativeElement.querySelector('.mc-calendar__body_active');
                 if (activeCell) {
                     activeCell.focus();
                 }
-            });
-        });
+            }));
+        }));
     }
 }
 McCalendarBody.decorators = [
@@ -244,7 +250,7 @@ McCalendarBody.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const DAYS_PER_WEEK = 7;
@@ -291,9 +297,14 @@ class McMonthView {
         const longWeekdays = this.dateAdapter.getDayOfWeekNames('long');
         // Rotate the labels for days of the week based on the configured first day of the week.
         /** @type {?} */
-        const weekdays = longWeekdays.map((long, i) => {
+        const weekdays = longWeekdays.map((/**
+         * @param {?} long
+         * @param {?} i
+         * @return {?}
+         */
+        (long, i) => {
             return { long, narrow: narrowWeekdays[i] };
-        });
+        }));
         this.weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
         this._activeDate = this.dateAdapter.today();
     }
@@ -581,12 +592,12 @@ McMonthView.propDecorators = {
     selectedChange: [{ type: Output }],
     userSelection: [{ type: Output }],
     activeDateChange: [{ type: Output }],
-    mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody,] }]
+    mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody, { static: false },] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const yearsPerPage = 24;
@@ -709,7 +720,11 @@ class McMultiYearView {
         for (let i = 0, row = []; i < yearsPerPage; i++) {
             row.push(activeYear - activeOffset + i);
             if (row.length === yearsPerRow) {
-                this.years.push(row.map((year) => this.createCellForYear(year)));
+                this.years.push(row.map((/**
+                 * @param {?} year
+                 * @return {?}
+                 */
+                (year) => this.createCellForYear(year))));
                 row = [];
             }
         }
@@ -879,12 +894,12 @@ McMultiYearView.propDecorators = {
     selectedChange: [{ type: Output }],
     yearSelected: [{ type: Output }],
     activeDateChange: [{ type: Output }],
-    mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody,] }]
+    mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody, { static: false },] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * An internal component used to display a single year in the datepicker.
@@ -1083,7 +1098,15 @@ class McYearView {
         const monthNames = this.dateAdapter.getMonthNames('short');
         // First row of months only contains 5 elements so we can fit the year label on the same row.
         // tslint:disable-next-line:no-magic-numbers
-        this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]].map((row) => row.map((month) => this.createCellForMonth(month, monthNames[month])));
+        this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]].map((/**
+         * @param {?} row
+         * @return {?}
+         */
+        (row) => row.map((/**
+         * @param {?} month
+         * @return {?}
+         */
+        (month) => this.createCellForMonth(month, monthNames[month])))));
         this.changeDetectorRef.markForCheck();
     }
     /**
@@ -1223,12 +1246,12 @@ McYearView.propDecorators = {
     selectedChange: [{ type: Output }],
     monthSelected: [{ type: Output }],
     activeDateChange: [{ type: Output }],
-    mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody,] }]
+    mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody, { static: false },] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Default header for McCalendar
@@ -1247,7 +1270,10 @@ class McCalendarHeader {
         this.calendar = calendar;
         this.dateAdapter = dateAdapter;
         this.dateFormats = dateFormats;
-        this.calendar.stateChanges.subscribe(() => changeDetectorRef.markForCheck());
+        this.calendar.stateChanges.subscribe((/**
+         * @return {?}
+         */
+        () => changeDetectorRef.markForCheck()));
     }
     /**
      * The label for the current calendar view.
@@ -1380,7 +1406,10 @@ McCalendarHeader.decorators = [
 /** @nocollapse */
 McCalendarHeader.ctorParameters = () => [
     { type: McDatepickerIntl },
-    { type: McCalendar, decorators: [{ type: Inject, args: [forwardRef(() => McCalendar),] }] },
+    { type: McCalendar, decorators: [{ type: Inject, args: [forwardRef((/**
+                     * @return {?}
+                     */
+                    () => McCalendar)),] }] },
     { type: DateAdapter, decorators: [{ type: Optional }] },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DATE_FORMATS,] }] },
     { type: ChangeDetectorRef }
@@ -1439,10 +1468,13 @@ class McCalendar {
         if (!this.dateFormats) {
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
-        this.intlChanges = intl.changes.subscribe(() => {
+        this.intlChanges = intl.changes.subscribe((/**
+         * @return {?}
+         */
+        () => {
             changeDetectorRef.markForCheck();
             this.stateChanges.next();
-        });
+        }));
     }
     /**
      * A date representing the period (month or year) to start the calendar in.
@@ -1683,14 +1715,14 @@ McCalendar.propDecorators = {
     yearSelected: [{ type: Output }],
     monthSelected: [{ type: Output }],
     userSelection: [{ type: Output }],
-    monthView: [{ type: ViewChild, args: [McMonthView,] }],
-    yearView: [{ type: ViewChild, args: [McYearView,] }],
-    multiYearView: [{ type: ViewChild, args: [McMultiYearView,] }]
+    monthView: [{ type: ViewChild, args: [McMonthView, { static: false },] }],
+    yearView: [{ type: ViewChild, args: [McYearView, { static: false },] }],
+    multiYearView: [{ type: ViewChild, args: [McMultiYearView, { static: false },] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Animations used by the mosaic datepicker.
@@ -1730,7 +1762,7 @@ if (!Element.prototype.matches) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Used to generate a unique ID for each datepicker instance.
@@ -1749,7 +1781,10 @@ const MC_DATEPICKER_SCROLL_STRATEGY = new InjectionToken('mc-datepicker-scroll-s
  */
 // tslint:disable-next-line:naming-convention
 function MC_DATEPICKER_SCROLL_STRATEGY_FACTORY(overlay) {
-    return () => overlay.scrollStrategies.reposition();
+    return (/**
+     * @return {?}
+     */
+    () => overlay.scrollStrategies.reposition());
 }
 /**
  * \@docs-private
@@ -1822,7 +1857,7 @@ McDatepickerContent.ctorParameters = () => [
     { type: ElementRef }
 ];
 McDatepickerContent.propDecorators = {
-    calendar: [{ type: ViewChild, args: [McCalendar,] }]
+    calendar: [{ type: ViewChild, args: [McCalendar, { static: false },] }]
 };
 // TODO: We use a component instead of a directive here so the user can use implicit
 // template reference variables (e.g. #d vs #d="mcDatepicker"). We can change this to a directive
@@ -2061,7 +2096,11 @@ class McDatepicker {
         }
         this.datepickerInput = input;
         this.inputSubscription =
-            this.datepickerInput.valueChange.subscribe((value) => this.selected = value);
+            this.datepickerInput.valueChange.subscribe((/**
+             * @param {?} value
+             * @return {?}
+             */
+            (value) => this.selected = value));
     }
     /**
      * Open the calendar.
@@ -2096,7 +2135,10 @@ class McDatepicker {
             this.calendarPortal.detach();
         }
         /** @type {?} */
-        const completeClose = () => {
+        const completeClose = (/**
+         * @return {?}
+         */
+        () => {
             // The `_opened` could've been reset already if
             // we got two events in quick succession.
             if (this._opened) {
@@ -2105,7 +2147,7 @@ class McDatepicker {
                 this.focusedElementBeforeOpen = null;
                 this.datepickerInput.elementRef.nativeElement.focus();
             }
-        };
+        });
         if (this.focusedElementBeforeOpen &&
             typeof this.focusedElementBeforeOpen.focus === 'function') {
             // Because IE moves focus asynchronously, we can't count on it being restored before we've
@@ -2137,9 +2179,12 @@ class McDatepicker {
             this.popupComponentRef.instance.datepicker = this;
             this.setColor();
             // Update the position once the calendar has rendered.
-            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
+            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe((/**
+             * @return {?}
+             */
+            () => {
                 this.popupRef.updatePosition();
-            });
+            }));
         }
     }
     /**
@@ -2159,11 +2204,18 @@ class McDatepicker {
         });
         this.popupRef = this.overlay.create(overlayConfig);
         this.popupRef.overlayElement.setAttribute('role', 'dialog');
-        merge(this.popupRef.backdropClick(), this.popupRef.detachments(), this.popupRef.keydownEvents().pipe(filter((event) => {
+        merge(this.popupRef.backdropClick(), this.popupRef.detachments(), this.popupRef.keydownEvents().pipe(filter((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
             // Closing on alt + up is only valid when there's an input associated with the datepicker.
             // tslint:disable-next-line:deprecation
             return event.keyCode === ESCAPE || (this.datepickerInput && event.altKey && event.keyCode === UP_ARROW);
-        }))).subscribe(() => this.close());
+        })))).subscribe((/**
+         * @return {?}
+         */
+        () => this.close()));
     }
     /**
      * Create the popup PositionStrategy.
@@ -2262,7 +2314,7 @@ McDatepicker.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * \@docs-private
@@ -2270,7 +2322,10 @@ McDatepicker.propDecorators = {
  */
 const MC_DATEPICKER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => McDatepickerInput),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => McDatepickerInput)),
     multi: true
 };
 /**
@@ -2279,7 +2334,10 @@ const MC_DATEPICKER_VALUE_ACCESSOR = {
  */
 const MC_DATEPICKER_VALIDATORS = {
     provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => McDatepickerInput),
+    useExisting: forwardRef((/**
+     * @return {?}
+     */
+    () => McDatepickerInput)),
     multi: true
 };
 /**
@@ -2337,48 +2395,72 @@ class McDatepickerInput {
          * Whether the last value set on the input was valid.
          */
         this.lastValueValid = false;
-        this.onTouched = () => {
-        };
-        this.cvaOnChange = () => {
-        };
-        this.validatorOnChange = () => {
-        };
+        this.onTouched = (/**
+         * @return {?}
+         */
+        () => {
+        });
+        this.cvaOnChange = (/**
+         * @return {?}
+         */
+        () => {
+        });
+        this.validatorOnChange = (/**
+         * @return {?}
+         */
+        () => {
+        });
         /**
          * The form control validator for whether the input parses.
          */
-        this.parseValidator = () => {
+        this.parseValidator = (/**
+         * @return {?}
+         */
+        () => {
             return this.lastValueValid ?
                 null : { mcDatepickerParse: { text: this.elementRef.nativeElement.value } };
-        };
+        });
         /**
          * The form control validator for the min date.
          */
-        this.minValidator = (control) => {
+        this.minValidator = (/**
+         * @param {?} control
+         * @return {?}
+         */
+        (control) => {
             /** @type {?} */
             const controlValue = this.getValidDateOrNull(this.dateAdapter.deserialize(control.value));
             return (!this.min || !controlValue ||
                 this.dateAdapter.compareDate(this.min, controlValue) <= 0) ?
                 null : { mcDatepickerMin: { min: this.min, actual: controlValue } };
-        };
+        });
         /**
          * The form control validator for the max date.
          */
-        this.maxValidator = (control) => {
+        this.maxValidator = (/**
+         * @param {?} control
+         * @return {?}
+         */
+        (control) => {
             /** @type {?} */
             const controlValue = this.getValidDateOrNull(this.dateAdapter.deserialize(control.value));
             return (!this.max || !controlValue ||
                 this.dateAdapter.compareDate(this.max, controlValue) >= 0) ?
                 null : { mcDatepickerMax: { max: this.max, actual: controlValue } };
-        };
+        });
         /**
          * The form control validator for the date filter.
          */
-        this.filterValidator = (control) => {
+        this.filterValidator = (/**
+         * @param {?} control
+         * @return {?}
+         */
+        (control) => {
             /** @type {?} */
             const controlValue = this.getValidDateOrNull(this.dateAdapter.deserialize(control.value));
             return !this.dateFilter || !controlValue || this.dateFilter(controlValue) ?
                 null : { mcDatepickerFilter: true };
-        };
+        });
         /**
          * The combined form control validator for this input.
          */
@@ -2396,9 +2478,12 @@ class McDatepickerInput {
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
         // Update the displayed date when the locale changes.
-        this.localeSubscription = dateAdapter.localeChanges.subscribe(() => {
+        this.localeSubscription = dateAdapter.localeChanges.subscribe((/**
+         * @return {?}
+         */
+        () => {
             this.value = this.value;
-        });
+        }));
     }
     /**
      * The datepicker that this input is associated with.
@@ -2412,13 +2497,17 @@ class McDatepickerInput {
         this.datepicker = value;
         this.datepicker.registerInput(this);
         this.datepickerSubscription.unsubscribe();
-        this.datepickerSubscription = this.datepicker.selectedChanged.subscribe((selected) => {
+        this.datepickerSubscription = this.datepicker.selectedChanged.subscribe((/**
+         * @param {?} selected
+         * @return {?}
+         */
+        (selected) => {
             this.value = selected;
             this.cvaOnChange(selected);
             this.onTouched();
             this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
             this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
-        });
+        }));
     }
     /**
      * Function that can be used to filter out dates within the datepicker.
@@ -2683,7 +2772,7 @@ McDatepickerInput.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Can be used to override the icon of a `mcDatepickerToggle`.
@@ -2772,7 +2861,10 @@ class McDatepickerToggle {
             merge(this.datepicker.openedStream, this.datepicker.closedStream) :
             of();
         this.stateChanges.unsubscribe();
-        this.stateChanges = merge(this.intl.changes, datepickerDisabled, inputDisabled, datepickerToggled).subscribe(() => this.changeDetectorRef.markForCheck());
+        this.stateChanges = merge(this.intl.changes, datepickerDisabled, inputDisabled, datepickerToggled).subscribe((/**
+         * @return {?}
+         */
+        () => this.changeDetectorRef.markForCheck()));
     }
 }
 McDatepickerToggle.decorators = [
@@ -2804,13 +2896,13 @@ McDatepickerToggle.propDecorators = {
     disabled: [{ type: Input }],
     datepicker: [{ type: Input, args: ['for',] }],
     tabIndex: [{ type: Input }],
-    customIcon: [{ type: ContentChild, args: [McDatepickerToggleIcon,] }],
-    button: [{ type: ViewChild, args: ['button',] }]
+    customIcon: [{ type: ContentChild, args: [McDatepickerToggleIcon, { static: false },] }],
+    button: [{ type: ViewChild, args: ['button', { static: false },] }]
 };
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McDatepickerModule {
 }
@@ -2864,12 +2956,12 @@ McDatepickerModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McDatepickerModule, McCalendarHeader, McCalendar, McCalendarCell, McCalendarBody, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, McDatepickerContentBase, McDatepickerContentMixinBase, McDatepickerContent, McDatepicker, mcDatepickerAnimations, MC_DATEPICKER_VALUE_ACCESSOR, MC_DATEPICKER_VALIDATORS, McDatepickerInputEvent, McDatepickerInput, McDatepickerIntl, McDatepickerToggleIcon, McDatepickerToggle, McMonthView, McYearView, McMultiYearView as ɵa32 };

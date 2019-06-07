@@ -41,7 +41,7 @@ function __extends(d, b) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -66,7 +66,7 @@ var McTreeNodeDef = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -131,7 +131,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @template T
@@ -155,7 +155,7 @@ var McTreeNodeToggle = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token used to provide the parent component to options.
@@ -407,7 +407,7 @@ var McTreeOption = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            // TODO(kara): Add input property alternative for node envs.
+            // TODO: Add input property alternative for node envs.
             return (this.getHostElement().textContent || '').trim();
         },
         enumerable: true,
@@ -445,7 +445,7 @@ var McTreeOption = /** @class */ (function (_super) {
      */
     function () {
         if (!this.disabled) {
-            this._selected = this.multiple ? !this._selected : true;
+            this._selected = !this._selected;
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
             if (this.parent.setFocusedOption) {
@@ -516,7 +516,7 @@ var McTreeOption = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McTreeNavigationChange = /** @class */ (function () {
     function McTreeNavigationChange(source, option) {
@@ -694,18 +694,28 @@ var McTreeSelection = /** @class */ (function (_super) {
             /** @type {?} */
             var activeIndex_1 = this.keyManager.activeItemIndex;
             if (previousIndex_1 < activeIndex_1) {
-                this.options.forEach(function (item, index) {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (item, index) {
                     if (index >= previousIndex_1 && index <= activeIndex_1) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
             else {
-                this.options.forEach(function (item, index) {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (item, index) {
                     if (index >= activeIndex_1 && index <= previousIndex_1) {
                         item.setSelected(true);
                     }
-                });
+                }));
             }
             this.withShift = false;
         }
@@ -718,7 +728,11 @@ var McTreeSelection = /** @class */ (function (_super) {
         }
         else {
             if (this.autoSelect) {
-                this.options.forEach(function (item) { return item.setSelected(false); });
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @return {?}
+                 */
+                function (item) { return item.setSelected(false); }));
                 option.setSelected(true);
             }
         }
@@ -763,17 +777,25 @@ var McTreeSelection = /** @class */ (function (_super) {
         _super.prototype.renderNodeChanges.call(this, data, dataDiffer, viewContainer, parentData);
         /** @type {?} */
         var arrayOfInstances = [];
-        viewContainer._embeddedViews.forEach(function (view) {
+        viewContainer._embeddedViews.forEach((/**
+         * @param {?} view
+         * @return {?}
+         */
+        function (view) {
             /** @type {?} */
             var viewDef = view.def;
-            viewDef.nodes.forEach(function (node) {
+            viewDef.nodes.forEach((/**
+             * @param {?} node
+             * @return {?}
+             */
+            function (node) {
                 if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
                     /** @type {?} */
                     var nodeData = view.nodes[node.nodeIndex];
                     arrayOfInstances.push((/** @type {?} */ (nodeData.instance)));
                 }
-            });
-        });
+            }));
+        }));
         if (this.options) {
             this.options.reset(arrayOfInstances);
             this.options.notifyOnChanges();
@@ -873,7 +895,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] }
     ]; };
     McTreeSelection.propDecorators = {
-        nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet,] }],
+        nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet, { static: true },] }],
         options: [{ type: core.ContentChildren, args: [McTreeOption,] }],
         navigationChange: [{ type: core.Output }],
         selectionChange: [{ type: core.Output }],
@@ -884,7 +906,7 @@ var McTreeSelection = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 var MC_TREE_DIRECTIVES = [
@@ -909,7 +931,7 @@ var McTreeModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Tree flattener to convert a normal type of node to node with children & level information.
@@ -1010,14 +1032,23 @@ McTreeFlattener = /** @class */ (function () {
         if (this.isExpandable(flatNode)) {
             this.getChildren(node)
                 .pipe(operators.take(1))
-                .subscribe(function (children) {
-                children.forEach(function (child, index) {
+                .subscribe((/**
+             * @param {?} children
+             * @return {?}
+             */
+            function (children) {
+                children.forEach((/**
+                 * @param {?} child
+                 * @param {?} index
+                 * @return {?}
+                 */
+                function (child, index) {
                     /** @type {?} */
                     var childParentMap = parentMap.slice();
                     childParentMap.push(index !== children.length - 1);
                     _this.flattenNode(child, level + 1, resultNodes, childParentMap);
-                });
-            });
+                }));
+            }));
         }
         return resultNodes;
     };
@@ -1044,7 +1075,11 @@ McTreeFlattener = /** @class */ (function () {
         var _this = this;
         /** @type {?} */
         var resultNodes = [];
-        structuredData.forEach(function (node) { return _this.flattenNode(node, 0, resultNodes, []); });
+        structuredData.forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        function (node) { return _this.flattenNode(node, 0, resultNodes, []); }));
         return resultNodes;
     };
     /**
@@ -1072,7 +1107,11 @@ McTreeFlattener = /** @class */ (function () {
         /** @type {?} */
         var currentExpand = [];
         currentExpand[0] = true;
-        nodes.forEach(function (node) {
+        nodes.forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        function (node) {
             /** @type {?} */
             var expand = true;
             for (var i = 0; i <= _this.getLevel(node); i++) {
@@ -1084,7 +1123,7 @@ McTreeFlattener = /** @class */ (function () {
             if (_this.isExpandable(node)) {
                 currentExpand[_this.getLevel(node) + 1] = treeControl.isExpanded(node);
             }
-        });
+        }));
         return results;
     };
     return McTreeFlattener;
@@ -1152,10 +1191,13 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
             this.treeControl.expansionModel.changed,
             this.flattenedData
         ];
-        return rxjs.merge.apply(void 0, changes).pipe(operators.map(function () {
+        return rxjs.merge.apply(void 0, changes).pipe(operators.map((/**
+         * @return {?}
+         */
+        function () {
             _this.expandedData.next(_this.treeFlattener.expandFlattenedNodes(_this.flattenedData.value, _this.treeControl));
             return _this.expandedData.value;
-        }));
+        })));
     };
     /**
      * @return {?}
@@ -1171,7 +1213,7 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Data source for nested tree.
@@ -1222,7 +1264,10 @@ McTreeNestedDataSource = /** @class */ (function (_super) {
      */
     function (collectionViewer) {
         var _this = this;
-        return rxjs.merge.apply(void 0, [collectionViewer.viewChange, this._data]).pipe(operators.map(function () { return _this.data; }));
+        return rxjs.merge.apply(void 0, [collectionViewer.viewChange, this._data]).pipe(operators.map((/**
+         * @return {?}
+         */
+        function () { return _this.data; })));
     };
     /**
      * @return {?}

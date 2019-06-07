@@ -20,14 +20,14 @@ export { ɵc24, ɵa24, ɵd24, ɵb24, McInputModule, BIG_STEP, SMALL_STEP, McInpu
 export { McContentComponent, McFooterComponent, McHeaderComponent, McLayoutComponent, McSidebarComponent, McLayoutModule } from '@ptsecurity/mosaic/layout';
 export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, _McListSelectionMixinBase, McListSelection } from '@ptsecurity/mosaic/list';
 export { McLinkModule, McLinkBase, _McLinkBase, McLink } from '@ptsecurity/mosaic/link';
-export { ɵb28, ɵa28, McModalComponent, McModalRef, McModalModule, McModalService } from '@ptsecurity/mosaic/modal';
+export { ɵb27, ɵa27, McModalComponent, McModalRef, McModalModule, McModalService } from '@ptsecurity/mosaic/modal';
 export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar } from '@ptsecurity/mosaic/navbar';
 export { McPopoverModule, mcPopoverScrollStrategyFactory, getMcPopoverInvalidPositionError, McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover, mcPopoverAnimations } from '@ptsecurity/mosaic/popover';
 export { McProgressBarModule, McProgressBarBase, _McProgressBarMixinBase, McProgressBar } from '@ptsecurity/mosaic/progress-bar';
 export { McProgressSpinnerModule, McProgressSpinnerBase, _McProgressSpinnerMixinBase, McProgressSpinner } from '@ptsecurity/mosaic/progress-spinner';
 export { McRadioModule, McRadioChange, McRadioGroupBase, _McRadioGroupMixinBase, MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioGroup, McRadioButtonBase, _McRadioButtonMixinBase, McRadioButton } from '@ptsecurity/mosaic/radio';
 export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggle, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource } from '@ptsecurity/mosaic/tree';
-export { ɵd14, ɵe14, ɵa14, ɵb14, ɵc14, ɵh14, ɵf14, ɵi14, ɵg14, McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, mcTabGroupMixinBase, McTabGroup, mcTabsAnimations } from '@ptsecurity/mosaic/tabs';
+export { ɵd15, ɵe15, ɵa15, ɵb15, ɵc15, ɵh15, ɵf15, ɵi15, ɵg15, McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, mcTabGroupMixinBase, McTabGroup, mcTabsAnimations } from '@ptsecurity/mosaic/tabs';
 export { McSelectModule, SELECT_ITEM_HEIGHT_EM, McSelectChange, McSelectBase, McSelectSearch, McSelectTrigger, McSelect } from '@ptsecurity/mosaic/select';
 export { McTreeSelectModule, McTreeSelectChange, McTreeSelectTrigger, McTreeSelect } from '@ptsecurity/mosaic/tree-select';
 export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, _McTagMixinBase, McTag, McTagRemove, McTagListBase, _McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS } from '@ptsecurity/mosaic/tags';
@@ -41,19 +41,19 @@ export { ɵa23, McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbar
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('1.0.0-beta.7');
+const VERSION = new Version('8.0.0-beta.0');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { VERSION };

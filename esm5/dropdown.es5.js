@@ -22,7 +22,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Dropdown content that will be rendered lazily once the dropdown is opened.
@@ -123,7 +123,7 @@ var McDropdownContent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token used to provide the parent dropdown to dropdown-specific components.
@@ -134,7 +134,7 @@ var MC_DROPDOWN_PANEL = new InjectionToken('MC_DROPDOWN_PANEL');
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Boilerplate for applying mixins to McDropdownItem.
 /**
@@ -339,14 +339,14 @@ var McDropdownItem = /** @class */ (function (_super) {
     ]; };
     McDropdownItem.propDecorators = {
         role: [{ type: Input }],
-        content: [{ type: ViewChild, args: ['content',] }]
+        content: [{ type: ViewChild, args: ['content', { static: false },] }]
     };
     return McDropdownItem;
 }(_McDropdownItemMixinBase));
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Throws an exception for the case when dropdown trigger doesn't have a valid mc-dropdown instance
@@ -377,7 +377,7 @@ function throwMcDropdownInvalidPositionY() {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Animations used by the mc-dropdown component.
@@ -424,7 +424,7 @@ var transformDropdown = mcDropdownAnimations.transformDropdown;
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token to be used to override the default options for `mc-dropdown`.
@@ -612,15 +612,23 @@ var McDropdown = /** @class */ (function () {
             /** @type {?} */
             var previousPanelClass = this._previousPanelClass;
             if (previousPanelClass && previousPanelClass.length) {
-                previousPanelClass.split(' ').forEach(function (className) {
+                previousPanelClass.split(' ').forEach((/**
+                 * @param {?} className
+                 * @return {?}
+                 */
+                function (className) {
                     _this._classList[className] = false;
-                });
+                }));
             }
             this._previousPanelClass = classes;
             if (classes && classes.length) {
-                classes.split(' ').forEach(function (className) {
+                classes.split(' ').forEach((/**
+                 * @param {?} className
+                 * @return {?}
+                 */
+                function (className) {
                     _this._classList[className] = true;
-                });
+                }));
                 this._elementRef.nativeElement.className = '';
             }
         },
@@ -645,7 +653,10 @@ var McDropdown = /** @class */ (function () {
     function () {
         var _this = this;
         this._keyManager = new FocusKeyManager(this.items).withWrap().withTypeAhead();
-        this._tabSubscription = this._keyManager.tabOut.subscribe(function () { return _this.closed.emit('tab'); });
+        this._tabSubscription = this._keyManager.tabOut.subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.closed.emit('tab'); }));
     };
     /**
      * @return {?}
@@ -667,7 +678,15 @@ var McDropdown = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this._itemChanges.pipe(startWith(this._items), switchMap(function (items) { return merge.apply(void 0, items.map(function (item) { return item._hovered; })); }));
+        return this._itemChanges.pipe(startWith(this._items), switchMap((/**
+         * @param {?} items
+         * @return {?}
+         */
+        function (items) { return merge.apply(void 0, items.map((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return item._hovered; }))); })));
     };
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     /**
@@ -725,7 +744,10 @@ var McDropdown = /** @class */ (function () {
         if (this.lazyContent) {
             this._ngZone.onStable.asObservable()
                 .pipe(take(1))
-                .subscribe(function () { return _this._keyManager.setFocusOrigin(origin).setFirstItemActive(); });
+                .subscribe((/**
+             * @return {?}
+             */
+            function () { return _this._keyManager.setFocusOrigin(origin).setFirstItemActive(); }));
         }
         else {
             this._keyManager.setFocusOrigin(origin).setFirstItemActive();
@@ -922,9 +944,9 @@ var McDropdown = /** @class */ (function () {
         hasBackdrop: [{ type: Input }],
         panelClass: [{ type: Input, args: ['class',] }],
         backdropClass: [{ type: Input }],
-        templateRef: [{ type: ViewChild, args: [TemplateRef,] }],
+        templateRef: [{ type: ViewChild, args: [TemplateRef, { static: false },] }],
         items: [{ type: ContentChildren, args: [McDropdownItem,] }],
-        lazyContent: [{ type: ContentChild, args: [McDropdownContent,] }],
+        lazyContent: [{ type: ContentChild, args: [McDropdownContent, { static: false },] }],
         closed: [{ type: Output }]
     };
     return McDropdown;
@@ -932,7 +954,7 @@ var McDropdown = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that determines the scroll handling while the dropdown is open.
@@ -945,7 +967,10 @@ var MC_DROPDOWN_SCROLL_STRATEGY = new InjectionToken('mc-dropdown-scroll-strateg
  * @return {?}
  */
 function MC_DROPDOWN_SCROLL_STRATEGY_FACTORY(overlay) {
-    return function () { return overlay.scrollStrategies.reposition(); };
+    return (/**
+     * @return {?}
+     */
+    function () { return overlay.scrollStrategies.reposition(); });
 }
 /**
  * \@docs-private
@@ -985,7 +1010,10 @@ var McDropdownTrigger = /** @class */ (function () {
          * Handles touch start events on the trigger.
          * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
          */
-        this._handleTouchStart = function () { return _this._openedBy = 'touch'; };
+        this._handleTouchStart = (/**
+         * @return {?}
+         */
+        function () { return _this._openedBy = 'touch'; });
         // Tracking input type is necessary so it's possible to only auto-focus
         // the first item of the list when the dropdown is opened via the keyboard
         this._openedBy = null;
@@ -1039,13 +1067,17 @@ var McDropdownTrigger = /** @class */ (function () {
             this._dropdown = dropdown;
             this._closeSubscription.unsubscribe();
             if (dropdown) {
-                this._closeSubscription = dropdown.closed.asObservable().subscribe(function (reason) {
+                this._closeSubscription = dropdown.closed.asObservable().subscribe((/**
+                 * @param {?} reason
+                 * @return {?}
+                 */
+                function (reason) {
                     _this._destroy();
                     // If a click closed the dropdown, we should close the entire chain of nested dropdowns.
                     if ((reason === 'click' || reason === 'tab') && _this._parent) {
                         _this._parent.closed.emit(reason);
                     }
-                });
+                }));
             }
         },
         enumerable: true,
@@ -1139,7 +1171,10 @@ var McDropdownTrigger = /** @class */ (function () {
         if (this.dropdown.lazyContent) {
             this.dropdown.lazyContent.attach(this.data);
         }
-        this._closeSubscription = this._closingActions().subscribe(function () { return _this.close(); });
+        this._closeSubscription = this._closingActions().subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.close(); }));
         this._init();
         if (this.dropdown instanceof McDropdown) {
             this.dropdown._startAnimation();
@@ -1205,13 +1240,23 @@ var McDropdownTrigger = /** @class */ (function () {
             if (dropdown.lazyContent) {
                 // Wait for the exit animation to finish before detaching the content.
                 dropdown._animationDone
-                    .pipe(filter(function (event) { return event.toState === 'void'; }), take(1), 
+                    .pipe(filter((/**
+                 * @param {?} event
+                 * @return {?}
+                 */
+                function (event) { return event.toState === 'void'; })), take(1), 
                 // Interrupt if the content got re-attached.
                 takeUntil(dropdown.lazyContent._attached))
-                    .subscribe(function () { return (/** @type {?} */ (dropdown.lazyContent)).detach(); }, undefined, function () {
+                    .subscribe((/**
+                 * @return {?}
+                 */
+                function () { return (/** @type {?} */ (dropdown.lazyContent)).detach(); }), undefined, (/**
+                 * @return {?}
+                 */
+                function () {
                     // No matter whether the content got re-attached, reset the dropdown.
                     _this._reset();
-                });
+                }));
             }
             else {
                 this._reset();
@@ -1398,13 +1443,17 @@ var McDropdownTrigger = /** @class */ (function () {
     function (position) {
         var _this = this;
         if (this.dropdown.setPositionClasses) {
-            position.positionChanges.subscribe(function (change) {
+            position.positionChanges.subscribe((/**
+             * @param {?} change
+             * @return {?}
+             */
+            function (change) {
                 /** @type {?} */
                 var posX = change.connectionPair.overlayX === 'start' ? 'after' : 'before';
                 /** @type {?} */
                 var posY = change.connectionPair.overlayY === 'top' ? 'below' : 'above';
                 (/** @type {?} */ (_this.dropdown.setPositionClasses))(posX, posY);
-            });
+            }));
         }
     };
     /**
@@ -1506,7 +1555,14 @@ var McDropdownTrigger = /** @class */ (function () {
         /** @type {?} */
         var parentClose = this._parent ? this._parent.closed : of();
         /** @type {?} */
-        var hover = this._parent ? this._parent._hovered().pipe(filter(function (active) { return active !== _this._dropdownItemInstance; }), filter(function () { return _this._opened; })) : of();
+        var hover = this._parent ? this._parent._hovered().pipe(filter((/**
+         * @param {?} active
+         * @return {?}
+         */
+        function (active) { return active !== _this._dropdownItemInstance; })), filter((/**
+         * @return {?}
+         */
+        function () { return _this._opened; }))) : of();
         return merge(backdrop, parentClose, hover, detachments);
     };
     /** Handles mouse presses on the trigger. */
@@ -1601,8 +1657,15 @@ var McDropdownTrigger = /** @class */ (function () {
             // Since we might have multiple competing triggers for the same dropdown (e.g. a nested dropdown
             // with different data and triggers), we have to delay it by a tick to ensure that
             // it won't be closed immediately after it is opened.
-            .pipe(filter(function (active) { return active === _this._dropdownItemInstance && !active.disabled; }), delay(0, asapScheduler))
-            .subscribe(function () {
+            .pipe(filter((/**
+         * @param {?} active
+         * @return {?}
+         */
+        function (active) { return active === _this._dropdownItemInstance && !active.disabled; })), delay(0, asapScheduler))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
             _this._openedBy = 'mouse';
             // If the same dropdown is used between multiple triggers, it might still be animating
             // while the new trigger tries to re-open it. Wait for the animation to finish
@@ -1612,12 +1675,15 @@ var McDropdownTrigger = /** @class */ (function () {
                 // 'changed after checked' errors in some cases. See #12194.
                 _this.dropdown._animationDone
                     .pipe(take(1), delay(0, asapScheduler), takeUntil(_this._parent._hovered()))
-                    .subscribe(function () { return _this.open(); });
+                    .subscribe((/**
+                 * @return {?}
+                 */
+                function () { return _this.open(); }));
             }
             else {
                 _this.open();
             }
-        });
+        }));
     };
     /** Gets the portal that should be attached to the overlay. */
     /**
@@ -1674,7 +1740,7 @@ var McDropdownTrigger = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McDropdownModule = /** @class */ (function () {
     function McDropdownModule() {
@@ -1696,17 +1762,17 @@ var McDropdownModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McDropdownModule, MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY, MC_DROPDOWN_DEFAULT_OPTIONS, McDropdown, McDropdownItemBase, _McDropdownItemMixinBase, McDropdownItem, MC_DROPDOWN_PANEL, throwMcDropdownMissingError, throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY, mcDropdownAnimations, fadeInItems, transformDropdown, McDropdownContent, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY, MC_DROPDOWN_SCROLL_STRATEGY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER, NESTED_PANEL_TOP_PADDING, McDropdownTrigger };
