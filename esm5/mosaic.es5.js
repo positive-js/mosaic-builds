@@ -20,7 +20,7 @@ export { ɵc24, ɵa24, ɵd24, ɵb24, McInputModule, BIG_STEP, SMALL_STEP, McInpu
 export { McContentComponent, McFooterComponent, McHeaderComponent, McLayoutComponent, McSidebarComponent, McLayoutModule } from '@ptsecurity/mosaic/layout';
 export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, _McListSelectionMixinBase, McListSelection } from '@ptsecurity/mosaic/list';
 export { McLinkModule, McLinkBase, _McLinkBase, McLink } from '@ptsecurity/mosaic/link';
-export { ɵb26, ɵa26, McModalComponent, McModalRef, McModalModule, McModalService } from '@ptsecurity/mosaic/modal';
+export { ɵb28, ɵa28, McModalComponent, McModalRef, McModalModule, McModalService } from '@ptsecurity/mosaic/modal';
 export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar } from '@ptsecurity/mosaic/navbar';
 export { McPopoverModule, mcPopoverScrollStrategyFactory, getMcPopoverInvalidPositionError, McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover, mcPopoverAnimations } from '@ptsecurity/mosaic/popover';
 export { McProgressBarModule, McProgressBarBase, _McProgressBarMixinBase, McProgressBar } from '@ptsecurity/mosaic/progress-bar';
@@ -33,7 +33,7 @@ export { McTreeSelectModule, McTreeSelectChange, McTreeSelectTrigger, McTreeSele
 export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, _McTagMixinBase, McTag, McTagRemove, McTagListBase, _McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS } from '@ptsecurity/mosaic/tags';
 export { MC_TEXTAREA_VALUE_ACCESSOR, McTextareaBase, McTextareaMixinBase, McTextarea, McTextareaModule } from '@ptsecurity/mosaic/textarea';
 export { McTimepickerModule, TimeParts, TimeFormats, TIMEFORMAT_PLACEHOLDERS, DEFAULT_TIME_FORMAT, HOURS_MINUTES_SECONDS_REGEXP, HOURS_MINUTES_REGEXP, HOURS_ONLY_REGEXP, SECONDS_PER_MINUTE, MINUTES_PER_HOUR, HOURS_PER_DAY, ARROW_UP_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_LEFT_KEYCODE, ARROW_RIGHT_KEYCODE, McTimepickerBase, McTimepickerMixinBase, McTimepicker } from '@ptsecurity/mosaic/timepicker';
-export { ɵb20, ɵa20, ɵg20, ɵe20, ɵc20, ɵf20, ɵd20, McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef } from '@ptsecurity/mosaic/sidepanel';
+export { ɵb21, ɵa21, ɵg21, ɵe21, ɵc21, ɵf21, ɵd21, McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef } from '@ptsecurity/mosaic/sidepanel';
 export { McSplitterModule, McSplitterComponent, McGutterDirective, McSplitterAreaDirective } from '@ptsecurity/mosaic/splitter';
 export { McToggleModule, McToggleBase, _McToggleMixinBase, McToggleChange, McToggleComponent } from '@ptsecurity/mosaic/toggle';
 export { McToolTipModule, mcTooltipScrollStrategyFactory, getMcTooltipInvalidPositionError, McTooltipComponent, MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McTooltip } from '@ptsecurity/mosaic/tooltip';
