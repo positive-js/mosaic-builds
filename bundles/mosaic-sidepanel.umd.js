@@ -917,13 +917,13 @@ exports.MC_SIDEPANEL_WITH_INDENT = MC_SIDEPANEL_WITH_INDENT;
 exports.MC_SIDEPANEL_WITH_SHADOW = MC_SIDEPANEL_WITH_SHADOW;
 exports.McSidepanelContainerComponent = McSidepanelContainerComponent;
 exports.McSidepanelRef = McSidepanelRef;
-exports.ɵb21 = mcSidepanelAnimations;
-exports.ɵa21 = mcSidepanelTransformAnimation;
-exports.ɵg21 = McSidepanelActions;
-exports.ɵe21 = McSidepanelBody;
-exports.ɵc21 = McSidepanelClose;
-exports.ɵf21 = McSidepanelFooter;
-exports.ɵd21 = McSidepanelHeader;
+exports.ɵb18 = mcSidepanelAnimations;
+exports.ɵa18 = mcSidepanelTransformAnimation;
+exports.ɵg18 = McSidepanelActions;
+exports.ɵe18 = McSidepanelBody;
+exports.ɵc18 = McSidepanelClose;
+exports.ɵf18 = McSidepanelFooter;
+exports.ɵd18 = McSidepanelHeader;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

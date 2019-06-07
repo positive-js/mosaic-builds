@@ -797,6 +797,11 @@ var MomentDateAdapter = /** @class */ (function (_super) {
         var endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
         /** @type {?} */
+        var bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' &&
+            endDateVariables.CURRENT_YEAR === 'yes';
+        startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+        endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+        /** @type {?} */
         var params = __assign({}, variables, { START_DATE: this.messageformat.compile(template.START_DATE)(startDateVariables), END_DATE: this.messageformat.compile(template.END_DATE)(endDateVariables), SAME_MONTH: sameMonth });
         return this.messageformat.compile(template.DATE)(params);
     };
@@ -830,6 +835,11 @@ var MomentDateAdapter = /** @class */ (function (_super) {
         var endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
         endDateVariables.SAME_DAY = sameDay;
+        /** @type {?} */
+        var bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' &&
+            endDateVariables.CURRENT_YEAR === 'yes';
+        startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+        endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
         /** @type {?} */
         var params = __assign({}, variables, { START_DATETIME: this.messageformat.compile(template.START_DATETIME)(startDateVariables), END_DATETIME: this.messageformat.compile(template.END_DATETIME)(endDateVariables), SAME_MONTH: sameMonth, SAME_DAY: sameDay });
         return this.messageformat.compile(template.DATETIME)(params);
