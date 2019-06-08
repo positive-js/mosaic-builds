@@ -3668,7 +3668,9 @@ exports.McDatepickerToggleIcon = McDatepickerToggleIcon;
 exports.McDatepickerToggle = McDatepickerToggle;
 exports.McMonthView = McMonthView;
 exports.McYearView = McYearView;
-exports.ɵa32 = McMultiYearView;
+exports.yearsPerPage = yearsPerPage;
+exports.yearsPerRow = yearsPerRow;
+exports.McMultiYearView = McMultiYearView;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
