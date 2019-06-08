@@ -650,10 +650,11 @@ class McAutocompleteTrigger {
      * @return {?}
      */
     getOutsideClickStream() {
-        if (!this.document) {
-            return of(null);
-        }
-        return fromEvent(this.document, 'click')
+        return merge((/** @type {?} */ (
+        // tslint:disable-next-line: no-unnecessary-type-assertion
+        fromEvent(this.document, 'click'))), (/** @type {?} */ (
+        // tslint:disable-next-line: no-unnecessary-type-assertion
+        fromEvent(this.document, 'touchend'))))
             .pipe(filter((/**
          * @param {?} event
          * @return {?}

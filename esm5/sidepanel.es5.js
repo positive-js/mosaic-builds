@@ -937,5 +937,5 @@ var McSidepanelModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef, mcSidepanelAnimations as ɵb19, mcSidepanelTransformAnimation as ɵa19, McSidepanelActions as ɵg19, McSidepanelBody as ɵe19, McSidepanelClose as ɵc19, McSidepanelFooter as ɵf19, McSidepanelHeader as ɵd19 };
+export { McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef, mcSidepanelAnimations as ɵb20, mcSidepanelTransformAnimation as ɵa20, McSidepanelActions as ɵg20, McSidepanelBody as ɵe20, McSidepanelClose as ɵc20, McSidepanelFooter as ɵf20, McSidepanelHeader as ɵd20 };
 //# sourceMappingURL=sidepanel.es5.js.map

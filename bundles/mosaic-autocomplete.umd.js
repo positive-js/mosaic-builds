@@ -760,10 +760,11 @@ var McAutocompleteTrigger = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        if (!this.document) {
-            return rxjs.of(null);
-        }
-        return rxjs.fromEvent(this.document, 'click')
+        return rxjs.merge((/** @type {?} */ (
+        // tslint:disable-next-line: no-unnecessary-type-assertion
+        rxjs.fromEvent(this.document, 'click'))), (/** @type {?} */ (
+        // tslint:disable-next-line: no-unnecessary-type-assertion
+        rxjs.fromEvent(this.document, 'touchend'))))
             .pipe(operators.filter((/**
          * @param {?} event
          * @return {?}
