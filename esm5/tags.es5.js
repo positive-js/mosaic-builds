@@ -1888,7 +1888,11 @@ var McTagList = /** @class */ (function (_super) {
         errorStateMatcher: [{ type: Input }],
         orientation: [{ type: Input, args: ['orientation',] }],
         change: [{ type: Output }],
-        tags: [{ type: ContentChildren, args: [McTag,] }]
+        tags: [{ type: ContentChildren, args: [McTag, {
+                        // Need to use `descendants: true`,
+                        // Ivy will no longer match indirect descendants if it's left as false.
+                        descendants: true
+                    },] }]
     };
     return McTagList;
 }(_McTagListMixinBase));

@@ -1907,7 +1907,11 @@ var McTagList = /** @class */ (function (_super) {
         errorStateMatcher: [{ type: core.Input }],
         orientation: [{ type: core.Input, args: ['orientation',] }],
         change: [{ type: core.Output }],
-        tags: [{ type: core.ContentChildren, args: [McTag,] }]
+        tags: [{ type: core.ContentChildren, args: [McTag, {
+                        // Need to use `descendants: true`,
+                        // Ivy will no longer match indirect descendants if it's left as false.
+                        descendants: true
+                    },] }]
     };
     return McTagList;
 }(_McTagListMixinBase));
