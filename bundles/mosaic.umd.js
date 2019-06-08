@@ -3046,10 +3046,19 @@ var McAutocompleteTrigger = /** @class */ (function () {
          * @return {?}
          */
         function () {
+            /** @type {?} */
+            var wasOpen = _this.panelOpen;
             _this.resetActiveItem();
             _this.autocomplete.setVisibility();
             if (_this.panelOpen) {
                 (/** @type {?} */ (_this.overlayRef)).updatePosition();
+                // If the `panelOpen` state changed, we need to make sure to emit the `opened`
+                // event, because we may not have emitted it when the panel was attached. This
+                // can happen if the users opens the panel and there are no options, but the
+                // options come in slightly later or as a result of the value changing.
+                if (wasOpen !== _this.panelOpen) {
+                    _this.autocomplete.opened.emit();
+                }
             }
             return _this.panelClosingActions;
         })), 
@@ -31603,15 +31612,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd12 = McTabBase;
+exports.ɵe12 = mcTabMixinBase;
+exports.ɵa12 = McTabHeaderBase;
+exports.ɵb12 = McTabLabelWrapperBase;
+exports.ɵc12 = mcTabLabelWrapperMixinBase;
+exports.ɵh12 = McTabLinkBase;
+exports.ɵf12 = McTabNavBase;
+exports.ɵi12 = mcTabLinkMixinBase;
+exports.ɵg12 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;

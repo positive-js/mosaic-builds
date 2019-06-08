@@ -868,10 +868,19 @@ var McAutocompleteTrigger = /** @class */ (function () {
          * @return {?}
          */
         function () {
+            /** @type {?} */
+            var wasOpen = _this.panelOpen;
             _this.resetActiveItem();
             _this.autocomplete.setVisibility();
             if (_this.panelOpen) {
                 (/** @type {?} */ (_this.overlayRef)).updatePosition();
+                // If the `panelOpen` state changed, we need to make sure to emit the `opened`
+                // event, because we may not have emitted it when the panel was attached. This
+                // can happen if the users opens the panel and there are no options, but the
+                // options come in slightly later or as a result of the value changing.
+                if (wasOpen !== _this.panelOpen) {
+                    _this.autocomplete.opened.emit();
+                }
             }
             return _this.panelClosingActions;
         })), 
