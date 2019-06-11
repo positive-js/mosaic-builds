@@ -180,6 +180,7 @@ class McFormField extends _McFormFieldMixinBase {
         // Unique id for the internal form field label.
         this._labelId = `mc-form-field-label-${nextUniqueId$1++}`;
         this.hovered = false;
+        this.canCleanerClearByEsc = true;
     }
     /**
      * @return {?}
@@ -259,7 +260,7 @@ class McFormField extends _McFormFieldMixinBase {
      */
     onKeyDown(event) {
         // tslint:disable-next-line:deprecation
-        if (event.keyCode === ESCAPE && this._control.focused && this.hasCleaner) {
+        if (this.canCleanerClearByEsc && event.keyCode === ESCAPE && this._control.focused && this.hasCleaner) {
             if (this._control && this._control.ngControl) {
                 this._control.ngControl.reset();
             }

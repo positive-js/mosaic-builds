@@ -30,10 +30,12 @@ export declare class McSelectSearch implements AfterContentInit, OnDestroy {
     input: McInput;
     searchChangesSubscription: Subscription;
     isSearchChanged: boolean;
+    constructor(formField: McFormField);
     focus(): void;
     reset(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
+    handleKeydown(event: KeyboardEvent): void;
 }
 export declare class McSelectTrigger {
 }
@@ -50,6 +52,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     controlType: string;
     hiddenItems: number;
     oneMoreText: string;
+    noOptionsText: string;
     /** The last measured value for the trigger's client bounding rect. */
     triggerRect: ClientRect;
     /** The cached font-size of the trigger element. */
@@ -151,6 +154,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     focused: boolean;
     private _focused;
     readonly panelOpen: boolean;
+    readonly isEmptySearchResult: boolean;
     private _panelOpen;
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop;

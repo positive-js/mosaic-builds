@@ -26,6 +26,7 @@ export declare class McFormField extends _McFormFieldMixinBase implements AfterC
     connectionContainerRef: ElementRef;
     _labelId: string;
     hovered: boolean;
+    canCleanerClearByEsc: boolean;
     constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef);
     ngAfterContentInit(): void;
     ngAfterContentChecked(): void;

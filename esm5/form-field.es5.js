@@ -204,6 +204,7 @@ var McFormField = /** @class */ (function (_super) {
         // Unique id for the internal form field label.
         _this._labelId = "mc-form-field-label-" + nextUniqueId$1++;
         _this.hovered = false;
+        _this.canCleanerClearByEsc = true;
         return _this;
     }
     /**
@@ -306,7 +307,7 @@ var McFormField = /** @class */ (function (_super) {
      */
     function (event) {
         // tslint:disable-next-line:deprecation
-        if (event.keyCode === ESCAPE && this._control.focused && this.hasCleaner) {
+        if (this.canCleanerClearByEsc && event.keyCode === ESCAPE && this._control.focused && this.hasCleaner) {
             if (this._control && this._control.ngControl) {
                 this._control.ngControl.reset();
             }

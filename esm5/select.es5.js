@@ -11,7 +11,7 @@ import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { Directionality } from '@ptsecurity/cdk/bidi';
 import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
-import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, A, PAGE_UP, PAGE_DOWN } from '@ptsecurity/cdk/keycodes';
+import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, A, ESCAPE, PAGE_UP, PAGE_DOWN } from '@ptsecurity/cdk/keycodes';
 import { CdkConnectedOverlay, ViewportRuler, OverlayModule } from '@ptsecurity/cdk/overlay';
 import { countGroupLabelsBeforeOption, getOptionScrollPosition, ErrorStateMatcher, MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption, mixinDisabled, mixinErrorState, mixinTabIndex, mcSelectAnimations, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McOptionModule } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
@@ -59,9 +59,10 @@ var McSelectBase = /** @class */ (function () {
 /** @type {?} */
 var McSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
 var McSelectSearch = /** @class */ (function () {
-    function McSelectSearch() {
+    function McSelectSearch(formField) {
         this.searchChangesSubscription = new Subscription();
         this.isSearchChanged = false;
+        formField.canCleanerClearByEsc = false;
     }
     /**
      * @return {?}
@@ -90,7 +91,7 @@ var McSelectSearch = /** @class */ (function () {
     function () {
         var _this = this;
         if (!this.input) {
-            throw Error('McSelectSearch does not work without input');
+            throw Error('McSelectSearch does not work without mcInput');
         }
         if (!this.input.ngControl) {
             throw Error('McSelectSearch does not work without ngControl');
@@ -111,12 +112,36 @@ var McSelectSearch = /** @class */ (function () {
     function () {
         this.searchChangesSubscription.unsubscribe();
     };
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McSelectSearch.prototype.handleKeydown = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        // tslint:disable-next-line:deprecation
+        if (event.keyCode === ESCAPE) {
+            if (this.input.value) {
+                this.reset();
+                event.stopPropagation();
+            }
+        }
+    };
     McSelectSearch.decorators = [
         { type: Directive, args: [{
                     selector: '[mcSelectSearch]',
-                    exportAs: 'mcSelectSearch'
+                    exportAs: 'mcSelectSearch',
+                    host: {
+                        '(keydown)': 'handleKeydown($event)'
+                    }
                 },] },
     ];
+    /** @nocollapse */
+    McSelectSearch.ctorParameters = function () { return [
+        { type: McFormField }
+    ]; };
     McSelectSearch.propDecorators = {
         input: [{ type: ContentChild, args: [McInput, { static: false },] }]
     };
@@ -147,7 +172,9 @@ var McSelect = /** @class */ (function (_super) {
          */
         _this.controlType = 'mc-select';
         _this.hiddenItems = 0;
+        // todo localization
         _this.oneMoreText = '...ещё';
+        _this.noOptionsText = 'Ничего не найдено';
         /**
          * The cached font-size of the trigger element.
          */
@@ -473,6 +500,18 @@ var McSelect = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McSelect.prototype, "isEmptySearchResult", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.search &&
+                this.options.length === 0 &&
+                !!this.search.input.value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -606,6 +645,12 @@ var McSelect = /** @class */ (function (_super) {
     function () {
         if (this.search) {
             this.search.reset();
+            /*
+            todo the incorrect behaviour of keyManager is possible here
+            to avoid first item selection (to provide correct options flipping on closed select)
+            we should process options update like it is the first options appearance
+             */
+            this.search.isSearchChanged = false;
         }
     };
     /** Toggles the overlay panel open or closed. */
@@ -659,7 +704,6 @@ var McSelect = /** @class */ (function (_super) {
                 _this.overlayDir.overlayRef.overlayElement.style.fontSize = _this.triggerFontSize + "px";
             }
         }));
-        this.resetSearch();
     };
     /** Closes the overlay panel and focuses the host element. */
     /**
@@ -672,6 +716,8 @@ var McSelect = /** @class */ (function (_super) {
      */
     function () {
         if (this._panelOpen) {
+            // the order of calls is important
+            this.resetSearch();
             this._panelOpen = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();
@@ -1994,8 +2040,8 @@ var McSelect = /** @class */ (function (_super) {
         { type: Component, args: [{
                     selector: 'mc-select',
                     exportAs: 'mcSelect',
-                    template: "<div cdk-overlay-origin class=\"mc-select__trigger\" (click)=\"toggle()\" [class.mc-select__trigger_multiple]=\"multiple\" #origin=\"cdkOverlayOrigin\" #trigger><div class=\"mc-select__matcher\" [ngSwitch]=\"empty\"><span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\u00A0' }}</span> <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\"><div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\"><span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span><div *ngSwitchCase=\"true\" class=\"mc-select__match-list\"><mc-tag *ngFor=\"let option of triggerValues\" [disabled]=\"disabled\" [class.mc-error]=\"errorState\">{{ option.viewValue || option.value }} <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveMatcherItem(option, $event)\"></i></mc-tag></div><div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">{{ oneMoreText }} {{ hiddenItems }}</div></div><ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content></span></div><div class=\"mc-select__arrow-wrapper\"><i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\" color=\"second\"></i></div></div><ng-template cdk-connected-overlay cdkConnectedOverlayLockPosition cdkConnectedOverlayHasBackdrop cdkConnectedOverlayBackdropClass=\"cdk-overlay-transparent-backdrop\" [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\" [cdkConnectedOverlayOrigin]=\"origin\" [cdkConnectedOverlayOpen]=\"panelOpen\" [cdkConnectedOverlayPositions]=\"positions\" [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\" [cdkConnectedOverlayOffsetY]=\"offsetY\" (backdropClick)=\"close()\" (attach)=\"onAttached()\" (detach)=\"close()\"><div #panel class=\"mc-select__panel {{ getPanelTheme() }}\" [ngClass]=\"panelClass\" (@transformPanel.done)=\"panelDoneAnimatingStream.next($event.toState)\" [style.transformOrigin]=\"transformOrigin\" [class.mc-select-panel-done-animcing]=\"panelDoneAnimating\" [style.font-size.px]=\"triggerFontSize\" (keydown)=\"handleKeydown($event)\"><div *ngIf=\"search\" class=\"mc-select__search-container\"><ng-content select=\"[mcSelectSearch]\"></ng-content></div><div #optionsContainer class=\"mc-select__content\" [@fadeInContent]=\"'showing'\" (@fadeInContent.done)=\"onFadeInDone()\"><ng-content select=\"mc-option,mc-optgroup\"></ng-content></div></div></ng-template>",
-                    styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-select{box-sizing:border-box;display:inline-block;width:100%;outline:0}.mc-select.mc-disabled .mc-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;cursor:pointer;padding:3px 7px 3px 15px}.mc-select__trigger.mc-select__trigger_multiple{padding-left:7px}.mc-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-select__matcher>span{width:100%}.mc-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:24px;margin:0;padding-left:0}.mc-select__match-list .mc-tag{margin-right:4px}.mc-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-select__match-container .mc-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-select__arrow-wrapper{display:table-cell;vertical-align:middle}.mc-form-field-appearance-fill .mc-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-select__arrow-wrapper{transform:translateY(-25%)}.mc-select__panel{min-width:100%;overflow:hidden;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-select__content{max-height:224px;overflow:auto}.mc-select__panel .mc-optgroup-label,.mc-select__panel .mc-option{font-size:inherit;line-height:32px;height:32px}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-form-field-type-mc-select .mc-form-field-label{width:calc(100% - 18px)}"],
+                    template: "<div cdk-overlay-origin class=\"mc-select__trigger\" (click)=\"toggle()\" [class.mc-select__trigger_multiple]=\"multiple\" #origin=\"cdkOverlayOrigin\" #trigger><div class=\"mc-select__matcher\" [ngSwitch]=\"empty\"><span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\u00A0' }}</span> <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\"><div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\"><span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span><div *ngSwitchCase=\"true\" class=\"mc-select__match-list\"><mc-tag *ngFor=\"let option of triggerValues\" [disabled]=\"disabled\" [class.mc-error]=\"errorState\">{{ option.viewValue || option.value }} <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveMatcherItem(option, $event)\"></i></mc-tag></div><div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">{{ oneMoreText }} {{ hiddenItems }}</div></div><ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content></span></div><div class=\"mc-select__arrow-wrapper\"><i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\" color=\"second\"></i></div></div><ng-template cdk-connected-overlay cdkConnectedOverlayLockPosition cdkConnectedOverlayHasBackdrop cdkConnectedOverlayBackdropClass=\"cdk-overlay-transparent-backdrop\" [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\" [cdkConnectedOverlayOrigin]=\"origin\" [cdkConnectedOverlayOpen]=\"panelOpen\" [cdkConnectedOverlayPositions]=\"positions\" [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\" [cdkConnectedOverlayOffsetY]=\"offsetY\" (backdropClick)=\"close()\" (attach)=\"onAttached()\" (detach)=\"close()\"><div #panel class=\"mc-select__panel {{ getPanelTheme() }}\" [ngClass]=\"panelClass\" (@transformPanel.done)=\"panelDoneAnimatingStream.next($event.toState)\" [style.transformOrigin]=\"transformOrigin\" [class.mc-select-panel-done-animcing]=\"panelDoneAnimating\" [style.font-size.px]=\"triggerFontSize\" (keydown)=\"handleKeydown($event)\"><div *ngIf=\"search\" class=\"mc-select__search-container\"><ng-content select=\"[mcSelectSearch]\"></ng-content></div><div #optionsContainer class=\"mc-select__content\" [@fadeInContent]=\"'showing'\" (@fadeInContent.done)=\"onFadeInDone()\"><div *ngIf=\"isEmptySearchResult\" class=\"mc-select__no-options-message\">{{noOptionsText}}</div><ng-content select=\"mc-option,mc-optgroup\"></ng-content></div></div></ng-template>",
+                    styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-select{box-sizing:border-box;display:inline-block;width:100%;outline:0}.mc-select.mc-disabled .mc-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-select__no-options-message{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;cursor:default;outline:0;padding:0 16px}.mc-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;cursor:pointer;padding:3px 7px 3px 15px}.mc-select__trigger.mc-select__trigger_multiple{padding-left:7px}.mc-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;margin-top:-2px;white-space:nowrap}.mc-select__matcher>span{width:100%}.mc-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:26px;margin:0;padding-left:0}.mc-select__match-list .mc-tag{margin-right:4px}.mc-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-select__match-container .mc-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-select__arrow-wrapper{display:table-cell;vertical-align:middle}.mc-form-field-appearance-fill .mc-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-select__arrow-wrapper{transform:translateY(-25%)}.mc-select__panel{min-width:100%;overflow:hidden;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-select__content{max-height:224px;overflow:auto}.mc-select__panel .mc-optgroup-label,.mc-select__panel .mc-option{font-size:inherit;line-height:32px;height:32px}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-form-field-type-mc-select .mc-form-field-label{width:calc(100% - 18px)}"],
                     inputs: ['disabled', 'tabIndex'],
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
