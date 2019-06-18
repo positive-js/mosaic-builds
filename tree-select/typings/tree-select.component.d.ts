@@ -39,7 +39,6 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     /** A name for this control that can be used by `mc-form-field`. */
     controlType: string;
     hiddenItems: number;
-    oneMoreText: string;
     /** The last measured value for the trigger's client bounding rect. */
     triggerRect: ClientRect;
     /** The cached font-size of the trigger element. */
@@ -81,6 +80,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     /** User-supplied override of the trigger element. */
     customTrigger: McTreeSelectTrigger;
     tree: McTreeSelection;
+    hiddenItemsText: string;
     /** Event emitted when the select panel has been toggled. */
     readonly openedChange: EventEmitter<boolean>;
     /** Event emitted when the select has been opened. */

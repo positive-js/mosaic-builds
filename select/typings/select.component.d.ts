@@ -37,6 +37,8 @@ export declare class McSelectSearch implements AfterContentInit, OnDestroy {
     ngOnDestroy(): void;
     handleKeydown(event: KeyboardEvent): void;
 }
+export declare class McSelectSearchEmptyResult {
+}
 export declare class McSelectTrigger {
 }
 export declare class McSelect extends McSelectMixinBase implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable, HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
@@ -51,8 +53,6 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     /** A name for this control that can be used by `mc-form-field`. */
     controlType: string;
     hiddenItems: number;
-    oneMoreText: string;
-    noOptionsText: string;
     /** The last measured value for the trigger's client bounding rect. */
     triggerRect: ClientRect;
     /** The cached font-size of the trigger element. */
@@ -102,6 +102,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     /** All of the defined groups of options. */
     optionGroups: QueryList<McOptgroup>;
     search: McSelectSearch;
+    hiddenItemsText: string;
     /** Classes to be passed to the select panel. Supports the same syntax as `ngClass`. */
     panelClass: string | string[] | Set<string> | {
         [key: string]: any;
@@ -154,8 +155,8 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     focused: boolean;
     private _focused;
     readonly panelOpen: boolean;
-    readonly isEmptySearchResult: boolean;
     private _panelOpen;
+    readonly isEmptySearchResult: boolean;
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop;
     /** Unique id for this input. */
