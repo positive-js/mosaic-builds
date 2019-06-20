@@ -10764,14 +10764,7 @@ var McDropdownTrigger = /** @class */ (function () {
         this._dropdownItemInstance = _dropdownItemInstance;
         this._dir = _dir;
         this._focusMonitor = _focusMonitor;
-        /**
-         * Handles touch start events on the trigger.
-         * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
-         */
-        this._handleTouchStart = (/**
-         * @return {?}
-         */
-        function () { return _this._openedBy = 'touch'; });
+        this._opened = false;
         // Tracking input type is necessary so it's possible to only auto-focus
         // the first item of the list when the dropdown is opened via the keyboard
         this._openedBy = null;
@@ -10784,9 +10777,16 @@ var McDropdownTrigger = /** @class */ (function () {
          */
         this.dropdownClosed = new core.EventEmitter();
         this._overlayRef = null;
-        this._opened = false;
         this._closeSubscription = rxjs.Subscription.EMPTY;
         this._hoverSubscription = rxjs.Subscription.EMPTY;
+        /**
+         * Handles touch start events on the trigger.
+         * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
+         */
+        this._handleTouchStart = (/**
+         * @return {?}
+         */
+        function () { return _this._openedBy = 'touch'; });
         _element.nativeElement.addEventListener('touchstart', this._handleTouchStart, passiveEventListenerOptions);
         if (_dropdownItemInstance) {
             _dropdownItemInstance._triggersNestedDropdown = this.triggersNestedDropdown();
@@ -10841,6 +10841,18 @@ var McDropdownTrigger = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McDropdownTrigger.prototype, "opened", {
+        /** Whether the dropdown is open. */
+        get: /**
+         * Whether the dropdown is open.
+         * @return {?}
+         */
+        function () {
+            return this._opened;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -10866,18 +10878,6 @@ var McDropdownTrigger = /** @class */ (function () {
         this._cleanUpSubscriptions();
         this._closeSubscription.unsubscribe();
     };
-    Object.defineProperty(McDropdownTrigger.prototype, "opened", {
-        /** Whether the dropdown is open. */
-        get: /**
-         * Whether the dropdown is open.
-         * @return {?}
-         */
-        function () {
-            return this._opened;
-        },
-        enumerable: true,
-        configurable: true
-    });
     /** Whether the dropdown triggers a nested dropdown or a top-level one. */
     /**
      * Whether the dropdown triggers a nested dropdown or a top-level one.
@@ -10971,6 +10971,71 @@ var McDropdownTrigger = /** @class */ (function () {
         }
         else {
             this._element.nativeElement.focus();
+        }
+    };
+    /** Handles mouse presses on the trigger. */
+    /**
+     * Handles mouse presses on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdownTrigger.prototype.handleMousedown = /**
+     * Handles mouse presses on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        // Since right or middle button clicks won't trigger the `click` event,
+        // we shouldn't consider the dropdown as opened by mouse in those cases.
+        this._openedBy = event.button === 0 ? 'mouse' : null;
+        // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
+        // we should prevent focus from moving onto it via click to avoid the
+        // highlight from lingering on the dropdown item.
+        if (this.triggersNestedDropdown()) {
+            event.preventDefault();
+        }
+    };
+    /** Handles key presses on the trigger. */
+    /**
+     * Handles key presses on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdownTrigger.prototype.handleKeydown = /**
+     * Handles key presses on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        /** @type {?} */
+        var keyCode = event.keyCode;
+        if (keyCode === keycodes.SPACE || keyCode === keycodes.ENTER) {
+            this.open();
+        }
+        if (this.triggersNestedDropdown() && ((keyCode === keycodes.RIGHT_ARROW && this.dir === 'ltr') ||
+            (keyCode === keycodes.LEFT_ARROW && this.dir === 'rtl'))) {
+            this.open();
+        }
+    };
+    /** Handles click events on the trigger. */
+    /**
+     * Handles click events on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdownTrigger.prototype.handleClick = /**
+     * Handles click events on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (this.triggersNestedDropdown()) {
+            // Stop event propagation to avoid closing the parent dropdown.
+            event.stopPropagation();
+            this.open();
+        }
+        else {
+            this.toggle();
         }
     };
     /** Closes the dropdown and does the necessary cleanup. */
@@ -11323,77 +11388,6 @@ var McDropdownTrigger = /** @class */ (function () {
         function () { return _this._opened; }))) : rxjs.of();
         return rxjs.merge(backdrop, parentClose, hover, detachments);
     };
-    /** Handles mouse presses on the trigger. */
-    /**
-     * Handles mouse presses on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    McDropdownTrigger.prototype._handleMousedown = /**
-     * Handles mouse presses on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        // Since right or middle button clicks won't trigger the `click` event,
-        // we shouldn't consider the dropdown as opened by mouse in those cases.
-        this._openedBy = event.button === 0 ? 'mouse' : null;
-        // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
-        // we should prevent focus from moving onto it via click to avoid the
-        // highlight from lingering on the dropdown item.
-        if (this.triggersNestedDropdown()) {
-            event.preventDefault();
-        }
-    };
-    /** Handles key presses on the trigger. */
-    /**
-     * Handles key presses on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    McDropdownTrigger.prototype._handleKeydown = /**
-     * Handles key presses on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        /** @type {?} */
-        var keyCode = event.keyCode;
-        if (keyCode === keycodes.SPACE || keyCode === keycodes.ENTER) {
-            this.open();
-        }
-        if (this.triggersNestedDropdown() && ((keyCode === keycodes.RIGHT_ARROW && this.dir === 'ltr') ||
-            (keyCode === keycodes.LEFT_ARROW && this.dir === 'rtl'))) {
-            this.open();
-        }
-    };
-    /** Handles click events on the trigger. */
-    /**
-     * Handles click events on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    McDropdownTrigger.prototype._handleClick = /**
-     * Handles click events on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        if (this.triggersNestedDropdown()) {
-            // Stop event propagation to avoid closing the parent dropdown.
-            event.stopPropagation();
-            this.open();
-        }
-        else {
-            this.toggle();
-        }
-    };
     /** Handles the cases where the user hovers over the trigger. */
     /**
      * Handles the cases where the user hovers over the trigger.
@@ -11469,9 +11463,9 @@ var McDropdownTrigger = /** @class */ (function () {
                     host: {
                         'aria-haspopup': 'true',
                         '[attr.aria-expanded]': 'opened || null',
-                        '(mousedown)': '_handleMousedown($event)',
-                        '(keydown)': '_handleKeydown($event)',
-                        '(click)': '_handleClick($event)'
+                        '(mousedown)': 'handleMousedown($event)',
+                        '(keydown)': 'handleKeydown($event)',
+                        '(click)': 'handleClick($event)'
                     },
                     exportAs: 'mcDropdownTrigger'
                 },] },
@@ -14321,25 +14315,21 @@ var McNavbarTitle = /** @class */ (function () {
     return McNavbarTitle;
 }());
 var McNavbarItemBase = /** @class */ (function () {
-    function McNavbarItemBase(_elementRef) {
-        this._elementRef = _elementRef;
+    function McNavbarItemBase(elementRef) {
+        this.elementRef = elementRef;
     }
     return McNavbarItemBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
+var McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
 var McNavbarItem = /** @class */ (function (_super) {
     __extends(McNavbarItem, _super);
-    function McNavbarItem(elementRef, _focusMonitor, _platform, _cdRef) {
+    function McNavbarItem(elementRef, _focusMonitor) {
         var _this = _super.call(this, elementRef) || this;
         _this.elementRef = elementRef;
         _this._focusMonitor = _focusMonitor;
-        _this._platform = _platform;
-        _this._cdRef = _cdRef;
         _this.tabIndex = 0;
-        _this.dropdownItems = [];
-        _this.isCollapsed = true;
-        _this._subscription = new rxjs.Subscription();
         return _this;
     }
     Object.defineProperty(McNavbarItem.prototype, "collapsedTitle", {
@@ -14353,27 +14343,6 @@ var McNavbarItem = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(McNavbarItem.prototype, "hasDropdownContent", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.dropdownItems.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McNavbarItem.prototype, "_dropdownElements", {
-        get: /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            return this.dropdownContent ? this.dropdownContent.nativeElement.querySelectorAll('li > *') : [];
-        },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * @return {?}
      */
@@ -14382,22 +14351,7 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         this.denyClickIfDisabled();
-        this._focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
-        if (this.hasDropdownContent) {
-            this.listenClickOutside();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.ngAfterViewInit = /**
-     * @return {?}
-     */
-    function () {
-        if (!this.hasDropdownContent) {
-            return;
-        }
-        this.startListenFocusDropdownItems();
+        this._focusMonitor.monitor(this.elementRef.nativeElement, true);
     };
     /**
      * @return {?}
@@ -14406,136 +14360,7 @@ var McNavbarItem = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-        this.stopListenFocusDropdownItems();
-    };
-    /**
-     * @param {?} link
-     * @return {?}
-     */
-    McNavbarItem.prototype.isActiveDropdownLink = /**
-     * @param {?} link
-     * @return {?}
-     */
-    function (link) {
-        if (!this._platform.isBrowser) {
-            return false;
-        }
-        return window.location.href.indexOf(link) >= 0;
-    };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.handleClickByItem = /**
-     * @return {?}
-     */
-    function () {
-        this.toggleDropdown();
-    };
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
-    McNavbarItem.prototype.handleKeydown = /**
-     * @param {?} $event
-     * @return {?}
-     */
-    function ($event) {
-        /** @type {?} */
-        var isNavbarItem = ((/** @type {?} */ ($event.target))).classList.contains(MC_NAVBAR_ITEM);
-        // tslint:disable-next-line
-        if (this.hasDropdownContent && $event.keyCode === keycodes.SPACE && isNavbarItem) {
-            this.toggleDropdown();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.handleClickByDropdownItem = /**
-     * @return {?}
-     */
-    function () {
-        this.forceCloseDropdown();
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.listenClickOutside = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this._subscription.add(this._focusMonitor$.subscribe((/**
-         * @param {?} origin
-         * @return {?}
-         */
-        function (origin) {
-            if (origin === null) {
-                _this.forceCloseDropdown();
-            }
-        })));
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.toggleDropdown = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.isCollapsed = !this.isCollapsed;
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.forceCloseDropdown = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.isCollapsed = true;
-        this._cdRef.detectChanges();
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.startListenFocusDropdownItems = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this._dropdownElements.forEach((/**
-         * @param {?} el
-         * @return {?}
-         */
-        function (el) {
-            _this._focusMonitor.monitor(el, true);
-        }));
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.stopListenFocusDropdownItems = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this._dropdownElements.forEach((/**
-         * @param {?} el
-         * @return {?}
-         */
-        function (el) {
-            _this._focusMonitor.stopMonitoring(el);
-        }));
     };
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
@@ -14576,32 +14401,27 @@ var McNavbarItem = /** @class */ (function (_super) {
     McNavbarItem.decorators = [
         { type: core.Component, args: [{
                     selector: MC_NAVBAR_ITEM,
-                    template: "\n        <a\n            [attr.tabindex]=\"disabled ? -1 : tabIndex\"\n            (click)=\"handleClickByItem()\"\n            (keydown)=\"handleKeydown($event)\"\n            class=\"mc-navbar-item\"\n        >\n            <ng-content></ng-content>\n            <i *ngIf=\"hasDropdownContent\" mc-icon=\"mc-angle-down-M_16\"></i>\n        </a>\n        <ul\n            #dropdownContent\n            *ngIf=\"hasDropdownContent\"\n            [ngClass]=\"{ 'is-collapsed': isCollapsed }\"\n            class=\"mc-navbar-dropdown\"\n        >\n            <li\n                *ngFor=\"let item of dropdownItems\"\n                (click)=\"handleClickByDropdownItem()\"\n                class=\"mc-navbar-dropdown-item\"\n            >\n                <ng-container *ngIf=\"dropdownItemTmpl\">\n                    <ng-container *ngTemplateOutlet=\"dropdownItemTmpl; context: { $implicit: item }\"></ng-container>\n                </ng-container>\n                <a\n                    *ngIf=\"!dropdownItemTmpl\"\n                    [attr.href]=\"item.link\"\n                    [ngClass]=\"{ 'is-active': isActiveDropdownLink(item.link) }\"\n                    class=\"mc-navbar-dropdown-link\"\n                >{{ item.text }}</a>\n            </li>\n        </ul>\n    ",
+                    template: "<ng-content></ng-content>",
                     encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
                     inputs: ['disabled'],
                     host: {
+                        '[attr.tabIndex]': 'disabled ? -1 : tabIndex',
                         '[attr.disabled]': 'disabled || null',
-                        '[attr.tabindex]': '-1'
+                        class: 'mc-navbar-item'
                     }
                 },] },
     ];
     /** @nocollapse */
     McNavbarItem.ctorParameters = function () { return [
         { type: core.ElementRef },
-        { type: a11y.FocusMonitor },
-        { type: platform.Platform },
-        { type: core.ChangeDetectorRef }
+        { type: a11y.FocusMonitor }
     ]; };
     McNavbarItem.propDecorators = {
         tabIndex: [{ type: core.Input }],
-        dropdownItems: [{ type: core.Input }],
-        collapsedTitle: [{ type: core.Input }],
-        dropdownItemTmpl: [{ type: core.ContentChild, args: ['dropdownItemTmpl', { read: core.TemplateRef, static: false },] }],
-        dropdownContent: [{ type: core.ViewChild, args: ['dropdownContent', { read: core.ElementRef, static: false },] }]
+        collapsedTitle: [{ type: core.Input }]
     };
     return McNavbarItem;
-}(_McNavbarMixinBase));
+}(McNavbarMixinBase));
 var McNavbarContainer = /** @class */ (function () {
     function McNavbarContainer() {
         this.position = 'left';
@@ -14631,7 +14451,7 @@ var CollapsibleItem = /** @class */ (function () {
     function CollapsibleItem(element, width) {
         this.element = element;
         this.width = width;
-        this._collapsed = false;
+        this.collapsed = false;
     }
     /**
      * @param {?} collapsed
@@ -14642,7 +14462,7 @@ var CollapsibleItem = /** @class */ (function () {
      * @return {?}
      */
     function (collapsed) {
-        this._collapsed = collapsed;
+        this.collapsed = collapsed;
         this.updateCollapsedClass();
     };
     /**
@@ -14654,7 +14474,7 @@ var CollapsibleItem = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this._collapsed) {
+        if (this.collapsed) {
             this.element.classList.add(COLLAPSED_CLASS);
         }
         else {
@@ -14778,7 +14598,7 @@ var McNavbar = /** @class */ (function () {
         /** @type {?} */
         var resizeObserver = rxjs.fromEvent(window, 'resize')
             .pipe(operators.debounceTime(this.resizeDebounceInterval));
-        this._resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
+        this.resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
     }
     Object.defineProperty(McNavbar.prototype, "maxAllowedWidth", {
         get: /**
@@ -14812,11 +14632,11 @@ var McNavbar = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            if (this._totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
-                return this._totalItemsWidths;
+            if (this.totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
+                return this.totalItemsWidths;
             }
             this.calculateAndCacheTotalItemsWidth();
-            return this._totalItemsWidths;
+            return this.totalItemsWidths;
         },
         enumerable: true,
         configurable: true
@@ -14862,7 +14682,7 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this._resizeSubscription.unsubscribe();
+        this.resizeSubscription.unsubscribe();
     };
     /**
      * @private
@@ -14873,7 +14693,7 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this._totalItemsWidths = this.itemsWidths
+        this.totalItemsWidths = this.itemsWidths
             .reduce((/**
          * @param {?} acc
          * @param {?} item
@@ -14952,9 +14772,8 @@ var McNavbar = /** @class */ (function () {
     McNavbar.decorators = [
         { type: core.Component, args: [{
                     selector: MC_NAVBAR,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
                     template: "\n        <nav class=\"mc-navbar\">\n            <ng-content select=\"[" + MC_NAVBAR_CONTAINER + "]," + MC_NAVBAR_CONTAINER + "\"></ng-content>\n        </nav>\n    ",
-                    styles: [".mc-navbar-left,.mc-navbar-right,mc-navbar-container{height:100%;display:flex;flex-shrink:0;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar{position:relative;height:48px;padding:0 0;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar [mc-icon]+mc-navbar-title{margin-left:8px}.mc-navbar mc-navbar-title:not(.mc-navbar-collapsed-title)+[mc-icon]{margin-left:8px}.mc-navbar-brand,.mc-navbar-item,.mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{height:100%;position:relative;display:flex;align-items:center;padding-left:16px;padding-right:16px;background-color:transparent;border:none}.mc-navbar-brand,mc-navbar-brand{padding-left:0;padding-right:12px;margin-right:24px}.mc-navbar-brand .mc-navbar-title,mc-navbar-brand .mc-navbar-title{padding-left:12px;padding-right:0}.mc-navbar-title{white-space:nowrap}.mc-navbar-item:not([disabled]){cursor:pointer}.mc-navbar-item .mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{padding:0}mc-navbar-item.mc-progress:not([disabled]){cursor:pointer}.mc-navbar-item[disabled],mc-navbar-item[disabled] .mc-navbar-item{cursor:default}mc-navbar-title.mc-navbar-collapsed-title{display:none}.mc-navbar-dropdown{position:absolute;top:100%;left:0;box-sizing:border-box;min-width:100%;height:auto;margin:0;list-style:none;padding-top:4px;padding-right:0;padding-bottom:4px;padding-left:0;border:1px solid;border-top:none;z-index:1}.mc-navbar-right .mc-navbar-dropdown{left:auto;right:0}.mc-navbar-dropdown-link{position:relative;display:block;box-sizing:border-box;padding-top:6px;padding-right:16px;padding-bottom:6px;padding-left:16px;border:2px solid transparent;text-decoration:none;white-space:nowrap}.mc-navbar-dropdown-link.is-active:hover::before{position:absolute;top:-2px;right:-2px;bottom:-2px;left:-2px;content:\"\"}.mc-navbar-dropdown.is-collapsed{display:none}"],
+                    styles: [".mc-navbar-left,.mc-navbar-right,mc-navbar-container{height:100%;display:flex;flex-shrink:0;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar{position:relative;height:48px;padding:0 0;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar [mc-icon]+mc-navbar-title{margin-left:8px}.mc-navbar [mc-icon]{min-width:16px;min-height:16px}.mc-navbar mc-navbar-title:not(.mc-navbar-collapsed-title)+[mc-icon]{margin-left:8px}.mc-navbar-brand,.mc-navbar-item,.mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{height:100%;position:relative;display:flex;align-items:center;padding-left:16px;padding-right:16px}.mc-navbar-brand,mc-navbar-brand{padding-left:0;padding-right:12px;margin-right:24px}.mc-navbar-brand .mc-navbar-title,mc-navbar-brand .mc-navbar-title{padding-left:12px;padding-right:0}.mc-navbar-title{white-space:nowrap}.mc-navbar-item:not([disabled]){cursor:pointer}.mc-navbar-item .mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{padding:0}mc-navbar-item.mc-progress:not([disabled]){cursor:pointer}.mc-navbar-item[disabled],mc-navbar-item[disabled] .mc-navbar-item{cursor:default}mc-navbar-title.mc-navbar-collapsed-title{display:none}"],
                     encapsulation: core.ViewEncapsulation.None
                 },] },
     ];
@@ -14977,8 +14796,7 @@ var McNavbarModule = /** @class */ (function () {
                     imports: [
                         common.CommonModule,
                         a11y.A11yModule,
-                        platform.PlatformModule,
-                        McIconModule
+                        platform.PlatformModule
                     ],
                     exports: [
                         McNavbar,
@@ -31629,7 +31447,7 @@ exports.McNavbarLogo = McNavbarLogo;
 exports.McNavbarBrand = McNavbarBrand;
 exports.McNavbarTitle = McNavbarTitle;
 exports.McNavbarItemBase = McNavbarItemBase;
-exports._McNavbarMixinBase = _McNavbarMixinBase;
+exports.McNavbarMixinBase = McNavbarMixinBase;
 exports.McNavbarItem = McNavbarItem;
 exports.McNavbarContainer = McNavbarContainer;
 exports.McNavbar = McNavbar;
@@ -31671,15 +31489,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;

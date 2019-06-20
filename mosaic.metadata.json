@@ -13,10 +13,7 @@
       "from": "./divider"
     },
     {
-      "from": "./radio"
-    },
-    {
-      "from": "./checkbox"
+      "from": "./tooltip"
     },
     {
       "from": "./toggle"
@@ -25,10 +22,25 @@
       "from": "./tabs"
     },
     {
-      "from": "./tooltip"
+      "from": "./navbar"
+    },
+    {
+      "from": "./checkbox"
+    },
+    {
+      "from": "./radio"
+    },
+    {
+      "from": "./progress-spinner"
     },
     {
       "from": "./tree"
+    },
+    {
+      "from": "./progress-bar"
+    },
+    {
+      "from": "./layout"
     },
     {
       "from": "./link"
@@ -37,70 +49,58 @@
       "from": "./list"
     },
     {
-      "from": "./icon"
-    },
-    {
       "from": "./popover"
     },
     {
-      "from": "./progress-bar"
-    },
-    {
-      "from": "./progress-spinner"
-    },
-    {
-      "from": "./layout"
-    },
-    {
-      "from": "./dropdown"
+      "from": "./icon"
     },
     {
       "from": "./form-field"
     },
     {
-      "from": "./navbar"
-    },
-    {
-      "from": "./button"
+      "from": "./sidepanel"
     },
     {
       "from": "./splitter"
     },
     {
-      "from": "./sidepanel"
+      "from": "./dropdown"
     },
     {
-      "from": "./vertical-navbar"
-    },
-    {
-      "from": "./modal"
-    },
-    {
-      "from": "./textarea"
-    },
-    {
-      "from": "./tags"
-    },
-    {
-      "from": "./input"
+      "from": "./button"
     },
     {
       "from": "./button-toggle"
     },
     {
+      "from": "./modal"
+    },
+    {
+      "from": "./input"
+    },
+    {
+      "from": "./tags"
+    },
+    {
+      "from": "./textarea"
+    },
+    {
       "from": "./autocomplete"
     },
     {
-      "from": "./datepicker"
+      "from": "./vertical-navbar"
+    },
+    {
+      "from": "./timepicker"
     },
     {
       "from": "./select"
     },
     {
-      "from": "./tree-select"
+      "from": "./datepicker"
     },
     {
-      "from": "./timepicker"
+      "from": "./tree-select"
     },
     {
       "from": "./typings/index"

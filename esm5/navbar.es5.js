@@ -5,15 +5,13 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { Component, Directive, ElementRef, HostBinding, Input, ViewEncapsulation, ContentChild, TemplateRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, NgModule } from '@angular/core';
+import { Component, Directive, ElementRef, HostBinding, Input, ViewEncapsulation, NgModule } from '@angular/core';
 import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { SPACE } from '@ptsecurity/cdk/keycodes';
-import { Platform, PlatformModule } from '@ptsecurity/cdk/platform';
 import { mixinDisabled } from '@ptsecurity/mosaic/core';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle
@@ -75,25 +73,21 @@ var McNavbarTitle = /** @class */ (function () {
     return McNavbarTitle;
 }());
 var McNavbarItemBase = /** @class */ (function () {
-    function McNavbarItemBase(_elementRef) {
-        this._elementRef = _elementRef;
+    function McNavbarItemBase(elementRef) {
+        this.elementRef = elementRef;
     }
     return McNavbarItemBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
+var McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
 var McNavbarItem = /** @class */ (function (_super) {
     __extends(McNavbarItem, _super);
-    function McNavbarItem(elementRef, _focusMonitor, _platform, _cdRef) {
+    function McNavbarItem(elementRef, _focusMonitor) {
         var _this = _super.call(this, elementRef) || this;
         _this.elementRef = elementRef;
         _this._focusMonitor = _focusMonitor;
-        _this._platform = _platform;
-        _this._cdRef = _cdRef;
         _this.tabIndex = 0;
-        _this.dropdownItems = [];
-        _this.isCollapsed = true;
-        _this._subscription = new Subscription();
         return _this;
     }
     Object.defineProperty(McNavbarItem.prototype, "collapsedTitle", {
@@ -107,27 +101,6 @@ var McNavbarItem = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(McNavbarItem.prototype, "hasDropdownContent", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.dropdownItems.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McNavbarItem.prototype, "_dropdownElements", {
-        get: /**
-         * @private
-         * @return {?}
-         */
-        function () {
-            return this.dropdownContent ? this.dropdownContent.nativeElement.querySelectorAll('li > *') : [];
-        },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * @return {?}
      */
@@ -136,22 +109,7 @@ var McNavbarItem = /** @class */ (function (_super) {
      */
     function () {
         this.denyClickIfDisabled();
-        this._focusMonitor$ = this._focusMonitor.monitor(this.elementRef.nativeElement, true);
-        if (this.hasDropdownContent) {
-            this.listenClickOutside();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.ngAfterViewInit = /**
-     * @return {?}
-     */
-    function () {
-        if (!this.hasDropdownContent) {
-            return;
-        }
-        this.startListenFocusDropdownItems();
+        this._focusMonitor.monitor(this.elementRef.nativeElement, true);
     };
     /**
      * @return {?}
@@ -160,136 +118,7 @@ var McNavbarItem = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this._subscription.unsubscribe();
         this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-        this.stopListenFocusDropdownItems();
-    };
-    /**
-     * @param {?} link
-     * @return {?}
-     */
-    McNavbarItem.prototype.isActiveDropdownLink = /**
-     * @param {?} link
-     * @return {?}
-     */
-    function (link) {
-        if (!this._platform.isBrowser) {
-            return false;
-        }
-        return window.location.href.indexOf(link) >= 0;
-    };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.handleClickByItem = /**
-     * @return {?}
-     */
-    function () {
-        this.toggleDropdown();
-    };
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
-    McNavbarItem.prototype.handleKeydown = /**
-     * @param {?} $event
-     * @return {?}
-     */
-    function ($event) {
-        /** @type {?} */
-        var isNavbarItem = ((/** @type {?} */ ($event.target))).classList.contains(MC_NAVBAR_ITEM);
-        // tslint:disable-next-line
-        if (this.hasDropdownContent && $event.keyCode === SPACE && isNavbarItem) {
-            this.toggleDropdown();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    McNavbarItem.prototype.handleClickByDropdownItem = /**
-     * @return {?}
-     */
-    function () {
-        this.forceCloseDropdown();
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.listenClickOutside = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this._subscription.add(this._focusMonitor$.subscribe((/**
-         * @param {?} origin
-         * @return {?}
-         */
-        function (origin) {
-            if (origin === null) {
-                _this.forceCloseDropdown();
-            }
-        })));
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.toggleDropdown = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.isCollapsed = !this.isCollapsed;
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.forceCloseDropdown = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.isCollapsed = true;
-        this._cdRef.detectChanges();
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.startListenFocusDropdownItems = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this._dropdownElements.forEach((/**
-         * @param {?} el
-         * @return {?}
-         */
-        function (el) {
-            _this._focusMonitor.monitor(el, true);
-        }));
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McNavbarItem.prototype.stopListenFocusDropdownItems = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        this._dropdownElements.forEach((/**
-         * @param {?} el
-         * @return {?}
-         */
-        function (el) {
-            _this._focusMonitor.stopMonitoring(el);
-        }));
     };
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
     // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
@@ -330,32 +159,27 @@ var McNavbarItem = /** @class */ (function (_super) {
     McNavbarItem.decorators = [
         { type: Component, args: [{
                     selector: MC_NAVBAR_ITEM,
-                    template: "\n        <a\n            [attr.tabindex]=\"disabled ? -1 : tabIndex\"\n            (click)=\"handleClickByItem()\"\n            (keydown)=\"handleKeydown($event)\"\n            class=\"mc-navbar-item\"\n        >\n            <ng-content></ng-content>\n            <i *ngIf=\"hasDropdownContent\" mc-icon=\"mc-angle-down-M_16\"></i>\n        </a>\n        <ul\n            #dropdownContent\n            *ngIf=\"hasDropdownContent\"\n            [ngClass]=\"{ 'is-collapsed': isCollapsed }\"\n            class=\"mc-navbar-dropdown\"\n        >\n            <li\n                *ngFor=\"let item of dropdownItems\"\n                (click)=\"handleClickByDropdownItem()\"\n                class=\"mc-navbar-dropdown-item\"\n            >\n                <ng-container *ngIf=\"dropdownItemTmpl\">\n                    <ng-container *ngTemplateOutlet=\"dropdownItemTmpl; context: { $implicit: item }\"></ng-container>\n                </ng-container>\n                <a\n                    *ngIf=\"!dropdownItemTmpl\"\n                    [attr.href]=\"item.link\"\n                    [ngClass]=\"{ 'is-active': isActiveDropdownLink(item.link) }\"\n                    class=\"mc-navbar-dropdown-link\"\n                >{{ item.text }}</a>\n            </li>\n        </ul>\n    ",
+                    template: "<ng-content></ng-content>",
                     encapsulation: ViewEncapsulation.None,
-                    changeDetection: ChangeDetectionStrategy.OnPush,
                     inputs: ['disabled'],
                     host: {
+                        '[attr.tabIndex]': 'disabled ? -1 : tabIndex',
                         '[attr.disabled]': 'disabled || null',
-                        '[attr.tabindex]': '-1'
+                        class: 'mc-navbar-item'
                     }
                 },] },
     ];
     /** @nocollapse */
     McNavbarItem.ctorParameters = function () { return [
         { type: ElementRef },
-        { type: FocusMonitor },
-        { type: Platform },
-        { type: ChangeDetectorRef }
+        { type: FocusMonitor }
     ]; };
     McNavbarItem.propDecorators = {
         tabIndex: [{ type: Input }],
-        dropdownItems: [{ type: Input }],
-        collapsedTitle: [{ type: Input }],
-        dropdownItemTmpl: [{ type: ContentChild, args: ['dropdownItemTmpl', { read: TemplateRef, static: false },] }],
-        dropdownContent: [{ type: ViewChild, args: ['dropdownContent', { read: ElementRef, static: false },] }]
+        collapsedTitle: [{ type: Input }]
     };
     return McNavbarItem;
-}(_McNavbarMixinBase));
+}(McNavbarMixinBase));
 var McNavbarContainer = /** @class */ (function () {
     function McNavbarContainer() {
         this.position = 'left';
@@ -385,7 +209,7 @@ var CollapsibleItem = /** @class */ (function () {
     function CollapsibleItem(element, width) {
         this.element = element;
         this.width = width;
-        this._collapsed = false;
+        this.collapsed = false;
     }
     /**
      * @param {?} collapsed
@@ -396,7 +220,7 @@ var CollapsibleItem = /** @class */ (function () {
      * @return {?}
      */
     function (collapsed) {
-        this._collapsed = collapsed;
+        this.collapsed = collapsed;
         this.updateCollapsedClass();
     };
     /**
@@ -408,7 +232,7 @@ var CollapsibleItem = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this._collapsed) {
+        if (this.collapsed) {
             this.element.classList.add(COLLAPSED_CLASS);
         }
         else {
@@ -532,7 +356,7 @@ var McNavbar = /** @class */ (function () {
         /** @type {?} */
         var resizeObserver = fromEvent(window, 'resize')
             .pipe(debounceTime(this.resizeDebounceInterval));
-        this._resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
+        this.resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
     }
     Object.defineProperty(McNavbar.prototype, "maxAllowedWidth", {
         get: /**
@@ -566,11 +390,11 @@ var McNavbar = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            if (this._totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
-                return this._totalItemsWidths;
+            if (this.totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
+                return this.totalItemsWidths;
             }
             this.calculateAndCacheTotalItemsWidth();
-            return this._totalItemsWidths;
+            return this.totalItemsWidths;
         },
         enumerable: true,
         configurable: true
@@ -616,7 +440,7 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this._resizeSubscription.unsubscribe();
+        this.resizeSubscription.unsubscribe();
     };
     /**
      * @private
@@ -627,7 +451,7 @@ var McNavbar = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this._totalItemsWidths = this.itemsWidths
+        this.totalItemsWidths = this.itemsWidths
             .reduce((/**
          * @param {?} acc
          * @param {?} item
@@ -706,9 +530,8 @@ var McNavbar = /** @class */ (function () {
     McNavbar.decorators = [
         { type: Component, args: [{
                     selector: MC_NAVBAR,
-                    changeDetection: ChangeDetectionStrategy.OnPush,
                     template: "\n        <nav class=\"mc-navbar\">\n            <ng-content select=\"[" + MC_NAVBAR_CONTAINER + "]," + MC_NAVBAR_CONTAINER + "\"></ng-content>\n        </nav>\n    ",
-                    styles: [".mc-navbar-left,.mc-navbar-right,mc-navbar-container{height:100%;display:flex;flex-shrink:0;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar{position:relative;height:48px;padding:0 0;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar [mc-icon]+mc-navbar-title{margin-left:8px}.mc-navbar mc-navbar-title:not(.mc-navbar-collapsed-title)+[mc-icon]{margin-left:8px}.mc-navbar-brand,.mc-navbar-item,.mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{height:100%;position:relative;display:flex;align-items:center;padding-left:16px;padding-right:16px;background-color:transparent;border:none}.mc-navbar-brand,mc-navbar-brand{padding-left:0;padding-right:12px;margin-right:24px}.mc-navbar-brand .mc-navbar-title,mc-navbar-brand .mc-navbar-title{padding-left:12px;padding-right:0}.mc-navbar-title{white-space:nowrap}.mc-navbar-item:not([disabled]){cursor:pointer}.mc-navbar-item .mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{padding:0}mc-navbar-item.mc-progress:not([disabled]){cursor:pointer}.mc-navbar-item[disabled],mc-navbar-item[disabled] .mc-navbar-item{cursor:default}mc-navbar-title.mc-navbar-collapsed-title{display:none}.mc-navbar-dropdown{position:absolute;top:100%;left:0;box-sizing:border-box;min-width:100%;height:auto;margin:0;list-style:none;padding-top:4px;padding-right:0;padding-bottom:4px;padding-left:0;border:1px solid;border-top:none;z-index:1}.mc-navbar-right .mc-navbar-dropdown{left:auto;right:0}.mc-navbar-dropdown-link{position:relative;display:block;box-sizing:border-box;padding-top:6px;padding-right:16px;padding-bottom:6px;padding-left:16px;border:2px solid transparent;text-decoration:none;white-space:nowrap}.mc-navbar-dropdown-link.is-active:hover::before{position:absolute;top:-2px;right:-2px;bottom:-2px;left:-2px;content:\"\"}.mc-navbar-dropdown.is-collapsed{display:none}"],
+                    styles: [".mc-navbar-left,.mc-navbar-right,mc-navbar-container{height:100%;display:flex;flex-shrink:0;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar{position:relative;height:48px;padding:0 0;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar [mc-icon]+mc-navbar-title{margin-left:8px}.mc-navbar [mc-icon]{min-width:16px;min-height:16px}.mc-navbar mc-navbar-title:not(.mc-navbar-collapsed-title)+[mc-icon]{margin-left:8px}.mc-navbar-brand,.mc-navbar-item,.mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{height:100%;position:relative;display:flex;align-items:center;padding-left:16px;padding-right:16px}.mc-navbar-brand,mc-navbar-brand{padding-left:0;padding-right:12px;margin-right:24px}.mc-navbar-brand .mc-navbar-title,mc-navbar-brand .mc-navbar-title{padding-left:12px;padding-right:0}.mc-navbar-title{white-space:nowrap}.mc-navbar-item:not([disabled]){cursor:pointer}.mc-navbar-item .mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{padding:0}mc-navbar-item.mc-progress:not([disabled]){cursor:pointer}.mc-navbar-item[disabled],mc-navbar-item[disabled] .mc-navbar-item{cursor:default}mc-navbar-title.mc-navbar-collapsed-title{display:none}"],
                     encapsulation: ViewEncapsulation.None
                 },] },
     ];
@@ -731,8 +554,7 @@ var McNavbarModule = /** @class */ (function () {
                     imports: [
                         CommonModule,
                         A11yModule,
-                        PlatformModule,
-                        McIconModule
+                        PlatformModule
                     ],
                     exports: [
                         McNavbar,
@@ -765,5 +587,5 @@ var McNavbarModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, _McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar };
+export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar };
 //# sourceMappingURL=navbar.es5.js.map

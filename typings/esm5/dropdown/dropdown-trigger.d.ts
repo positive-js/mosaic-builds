@@ -30,17 +30,15 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private _dropdownItemInstance;
     private _dir;
     private _focusMonitor?;
-    /**
-     * Handles touch start events on the trigger.
-     * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
-     */
-    private _handleTouchStart;
     /** The text direction of the containing app. */
     readonly dir: Direction;
-    _openedBy: 'mouse' | 'touch' | null;
     /** References the dropdown instance that the trigger is associated with. */
     dropdown: McDropdownPanel;
     private _dropdown;
+    private _opened;
+    /** Whether the dropdown is open. */
+    readonly opened: boolean;
+    _openedBy: 'mouse' | 'touch' | null;
     /** Data to be passed along to any lazily-rendered content. */
     data: any;
     /** Event emitted when the associated dropdown is opened. */
@@ -49,14 +47,11 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     readonly dropdownClosed: EventEmitter<void>;
     private _portal;
     private _overlayRef;
-    private _opened;
     private _closeSubscription;
     private _hoverSubscription;
     constructor(_overlay: Overlay, _element: ElementRef<HTMLElement>, _viewContainerRef: ViewContainerRef, _scrollStrategy: any, _parent: McDropdown, _dropdownItemInstance: McDropdownItem, _dir: Directionality, _focusMonitor?: FocusMonitor);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
-    /** Whether the dropdown is open. */
-    readonly opened: boolean;
     /** Whether the dropdown triggers a nested dropdown or a top-level one. */
     triggersNestedDropdown(): boolean;
     /** Toggles the dropdown between the open and closed states. */
@@ -70,6 +65,17 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
      * @param origin Source of the dropdown trigger's focus.
      */
     focus(origin?: FocusOrigin): void;
+    /** Handles mouse presses on the trigger. */
+    handleMousedown(event: MouseEvent): void;
+    /** Handles key presses on the trigger. */
+    handleKeydown(event: KeyboardEvent): void;
+    /** Handles click events on the trigger. */
+    handleClick(event: MouseEvent): void;
+    /**
+     * Handles touch start events on the trigger.
+     * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
+     */
+    private _handleTouchStart;
     /** Closes the dropdown and does the necessary cleanup. */
     private _destroy;
     /**
@@ -114,12 +120,6 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private _cleanUpSubscriptions;
     /** Returns a stream that emits whenever an action that should close the dropdown occurs. */
     private _closingActions;
-    /** Handles mouse presses on the trigger. */
-    private _handleMousedown;
-    /** Handles key presses on the trigger. */
-    private _handleKeydown;
-    /** Handles click events on the trigger. */
-    private _handleClick;
     /** Handles the cases where the user hovers over the trigger. */
     private _handleHover;
     /** Gets the portal that should be attached to the overlay. */

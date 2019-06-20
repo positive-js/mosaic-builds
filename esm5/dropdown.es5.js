@@ -1006,14 +1006,7 @@ var McDropdownTrigger = /** @class */ (function () {
         this._dropdownItemInstance = _dropdownItemInstance;
         this._dir = _dir;
         this._focusMonitor = _focusMonitor;
-        /**
-         * Handles touch start events on the trigger.
-         * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
-         */
-        this._handleTouchStart = (/**
-         * @return {?}
-         */
-        function () { return _this._openedBy = 'touch'; });
+        this._opened = false;
         // Tracking input type is necessary so it's possible to only auto-focus
         // the first item of the list when the dropdown is opened via the keyboard
         this._openedBy = null;
@@ -1026,9 +1019,16 @@ var McDropdownTrigger = /** @class */ (function () {
          */
         this.dropdownClosed = new EventEmitter();
         this._overlayRef = null;
-        this._opened = false;
         this._closeSubscription = Subscription.EMPTY;
         this._hoverSubscription = Subscription.EMPTY;
+        /**
+         * Handles touch start events on the trigger.
+         * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
+         */
+        this._handleTouchStart = (/**
+         * @return {?}
+         */
+        function () { return _this._openedBy = 'touch'; });
         _element.nativeElement.addEventListener('touchstart', this._handleTouchStart, passiveEventListenerOptions);
         if (_dropdownItemInstance) {
             _dropdownItemInstance._triggersNestedDropdown = this.triggersNestedDropdown();
@@ -1083,6 +1083,18 @@ var McDropdownTrigger = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McDropdownTrigger.prototype, "opened", {
+        /** Whether the dropdown is open. */
+        get: /**
+         * Whether the dropdown is open.
+         * @return {?}
+         */
+        function () {
+            return this._opened;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -1108,18 +1120,6 @@ var McDropdownTrigger = /** @class */ (function () {
         this._cleanUpSubscriptions();
         this._closeSubscription.unsubscribe();
     };
-    Object.defineProperty(McDropdownTrigger.prototype, "opened", {
-        /** Whether the dropdown is open. */
-        get: /**
-         * Whether the dropdown is open.
-         * @return {?}
-         */
-        function () {
-            return this._opened;
-        },
-        enumerable: true,
-        configurable: true
-    });
     /** Whether the dropdown triggers a nested dropdown or a top-level one. */
     /**
      * Whether the dropdown triggers a nested dropdown or a top-level one.
@@ -1213,6 +1213,71 @@ var McDropdownTrigger = /** @class */ (function () {
         }
         else {
             this._element.nativeElement.focus();
+        }
+    };
+    /** Handles mouse presses on the trigger. */
+    /**
+     * Handles mouse presses on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdownTrigger.prototype.handleMousedown = /**
+     * Handles mouse presses on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        // Since right or middle button clicks won't trigger the `click` event,
+        // we shouldn't consider the dropdown as opened by mouse in those cases.
+        this._openedBy = event.button === 0 ? 'mouse' : null;
+        // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
+        // we should prevent focus from moving onto it via click to avoid the
+        // highlight from lingering on the dropdown item.
+        if (this.triggersNestedDropdown()) {
+            event.preventDefault();
+        }
+    };
+    /** Handles key presses on the trigger. */
+    /**
+     * Handles key presses on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdownTrigger.prototype.handleKeydown = /**
+     * Handles key presses on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        /** @type {?} */
+        var keyCode = event.keyCode;
+        if (keyCode === SPACE || keyCode === ENTER) {
+            this.open();
+        }
+        if (this.triggersNestedDropdown() && ((keyCode === RIGHT_ARROW && this.dir === 'ltr') ||
+            (keyCode === LEFT_ARROW && this.dir === 'rtl'))) {
+            this.open();
+        }
+    };
+    /** Handles click events on the trigger. */
+    /**
+     * Handles click events on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    McDropdownTrigger.prototype.handleClick = /**
+     * Handles click events on the trigger.
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        if (this.triggersNestedDropdown()) {
+            // Stop event propagation to avoid closing the parent dropdown.
+            event.stopPropagation();
+            this.open();
+        }
+        else {
+            this.toggle();
         }
     };
     /** Closes the dropdown and does the necessary cleanup. */
@@ -1565,77 +1630,6 @@ var McDropdownTrigger = /** @class */ (function () {
         function () { return _this._opened; }))) : of();
         return merge(backdrop, parentClose, hover, detachments);
     };
-    /** Handles mouse presses on the trigger. */
-    /**
-     * Handles mouse presses on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    McDropdownTrigger.prototype._handleMousedown = /**
-     * Handles mouse presses on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        // Since right or middle button clicks won't trigger the `click` event,
-        // we shouldn't consider the dropdown as opened by mouse in those cases.
-        this._openedBy = event.button === 0 ? 'mouse' : null;
-        // Since clicking on the trigger won't close the dropdown if it opens a nested dropdown,
-        // we should prevent focus from moving onto it via click to avoid the
-        // highlight from lingering on the dropdown item.
-        if (this.triggersNestedDropdown()) {
-            event.preventDefault();
-        }
-    };
-    /** Handles key presses on the trigger. */
-    /**
-     * Handles key presses on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    McDropdownTrigger.prototype._handleKeydown = /**
-     * Handles key presses on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        /** @type {?} */
-        var keyCode = event.keyCode;
-        if (keyCode === SPACE || keyCode === ENTER) {
-            this.open();
-        }
-        if (this.triggersNestedDropdown() && ((keyCode === RIGHT_ARROW && this.dir === 'ltr') ||
-            (keyCode === LEFT_ARROW && this.dir === 'rtl'))) {
-            this.open();
-        }
-    };
-    /** Handles click events on the trigger. */
-    /**
-     * Handles click events on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    McDropdownTrigger.prototype._handleClick = /**
-     * Handles click events on the trigger.
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
-    function (event) {
-        if (this.triggersNestedDropdown()) {
-            // Stop event propagation to avoid closing the parent dropdown.
-            event.stopPropagation();
-            this.open();
-        }
-        else {
-            this.toggle();
-        }
-    };
     /** Handles the cases where the user hovers over the trigger. */
     /**
      * Handles the cases where the user hovers over the trigger.
@@ -1711,9 +1705,9 @@ var McDropdownTrigger = /** @class */ (function () {
                     host: {
                         'aria-haspopup': 'true',
                         '[attr.aria-expanded]': 'opened || null',
-                        '(mousedown)': '_handleMousedown($event)',
-                        '(keydown)': '_handleKeydown($event)',
-                        '(click)': '_handleClick($event)'
+                        '(mousedown)': 'handleMousedown($event)',
+                        '(keydown)': 'handleKeydown($event)',
+                        '(click)': 'handleClick($event)'
                     },
                     exportAs: 'mcDropdownTrigger'
                 },] },
