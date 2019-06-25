@@ -109,6 +109,7 @@ class McSplitterComponent {
         if (this.disabled) {
             return;
         }
+        event.preventDefault();
         /** @type {?} */
         const leftArea = this.areas[leftAreaIndex];
         /** @type {?} */

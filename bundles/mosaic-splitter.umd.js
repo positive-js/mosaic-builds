@@ -131,6 +131,7 @@ var McSplitterComponent = /** @class */ (function () {
         if (this.disabled) {
             return;
         }
+        event.preventDefault();
         /** @type {?} */
         var leftArea = this.areas[leftAreaIndex];
         /** @type {?} */
