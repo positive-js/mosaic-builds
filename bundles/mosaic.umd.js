@@ -11516,248 +11516,6 @@ var McDropdownModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var McContentComponent = /** @class */ (function () {
-    function McContentComponent() {
-    }
-    McContentComponent.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-content',
-                    preserveWhitespaces: false,
-                    template: "<ng-content></ng-content>",
-                    styles: [
-                        ":host {\n            display: block;\n        }"
-                    ],
-                    host: {
-                        '[class.mc-layout-content]': 'true'
-                    }
-                },] },
-    ];
-    return McContentComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McFooterComponent = /** @class */ (function () {
-    function McFooterComponent() {
-    }
-    McFooterComponent.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-footer',
-                    preserveWhitespaces: false,
-                    template: "<ng-content></ng-content>",
-                    styles: [
-                        ":host {\n            display: block;\n        }"
-                    ],
-                    host: {
-                        '[class.mc-layout-footer]': 'true'
-                    }
-                },] },
-    ];
-    return McFooterComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McHeaderComponent = /** @class */ (function () {
-    function McHeaderComponent() {
-    }
-    McHeaderComponent.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-header',
-                    preserveWhitespaces: false,
-                    template: "<ng-content></ng-content>",
-                    styles: [
-                        ":host {\n            display: block;\n        }"
-                    ],
-                    host: {
-                        '[class.mc-layout-header]': 'true'
-                    }
-                },] },
-    ];
-    return McHeaderComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McLayoutComponent = /** @class */ (function () {
-    function McLayoutComponent() {
-        this.hasSidebar = false;
-    }
-    McLayoutComponent.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-layout',
-                    preserveWhitespaces: false,
-                    styles: [".mc-layout{display:flex;flex-direction:column;flex:auto}.mc-layout,.mc-layout *{box-sizing:border-box}.mc-layout-content{flex:auto}.mc-layout-has-sidebar{flex-direction:row}.mc-layout-has-sidebar>.mc-layout,.mc-layout-has-sidebar>.mc-layout-content{overflow-x:hidden}.mc-layout-footer,.mc-layout-header{flex:0 0 auto;padding:0 0}.mc-layout-sider{transition:all .2s;position:relative;min-width:0}.mc-layout-sider-children{height:100%;padding-top:.1px;margin-top:-.1px}.mc-layout-sider-right{order:1}"],
-                    template: "<ng-content></ng-content>",
-                    host: {
-                        '[class.mc-layout]': 'true',
-                        '[class.mc-layout-has-sidebar]': 'hasSidebar'
-                    },
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    return McLayoutComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McSidebarComponent = /** @class */ (function () {
-    function McSidebarComponent(mcLayoutComponent) {
-        this.mcLayoutComponent = mcLayoutComponent;
-        this._mcWidth = 200;
-        this.mcCollapsedWidth = 80;
-        // tslint:disable-next-line
-        this.mcCollapsedChange = new core.EventEmitter();
-        this.collapsed = false;
-        this.collapsible = false;
-    }
-    Object.defineProperty(McSidebarComponent.prototype, "mcCollapsible", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.collapsible;
-        },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this.collapsible = toBoolean(value);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McSidebarComponent.prototype, "mcCollapsed", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.collapsed;
-        },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this.collapsed = toBoolean(value);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McSidebarComponent.prototype, "mcFlex", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            if (this.mcCollapsed) {
-                return "0 0 " + this.mcCollapsedWidth + "px";
-            }
-            else {
-                return "0 0 " + this.mcWidth + "px";
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McSidebarComponent.prototype, "mcWidth", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            if (this.mcCollapsed) {
-                return this.mcCollapsedWidth;
-            }
-            else {
-                return this._mcWidth;
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @return {?}
-     */
-    McSidebarComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        if (this.mcLayoutComponent) {
-            this.mcLayoutComponent.hasSidebar = true;
-        }
-    };
-    McSidebarComponent.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-sidebar',
-                    preserveWhitespaces: false,
-                    template: "<div class=\"mc-layout-sidebar-children\"><ng-content></ng-content></div>",
-                    host: {
-                        '[class.mc-layout-sidebar]': 'true',
-                        '[class.mc-layout-sidebar-collapsed]': 'mcCollapsed',
-                        '[style.flex]': 'mcFlex',
-                        '[style.max-width.px]': 'mcWidth',
-                        '[style.min-width.px]': 'mcWidth',
-                        '[style.width.px]': 'mcWidth'
-                    },
-                    changeDetection: core.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    McSidebarComponent.ctorParameters = function () { return [
-        { type: McLayoutComponent, decorators: [{ type: core.Optional }, { type: core.Host }] }
-    ]; };
-    McSidebarComponent.propDecorators = {
-        _mcWidth: [{ type: core.Input }],
-        mcCollapsedWidth: [{ type: core.Input }],
-        mcCollapsible: [{ type: core.Input }],
-        mcCollapsed: [{ type: core.Input }],
-        mcCollapsedChange: [{ type: core.Output }]
-    };
-    return McSidebarComponent;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var McLayoutModule = /** @class */ (function () {
-    function McLayoutModule() {
-    }
-    McLayoutModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule],
-                    exports: [
-                        McLayoutComponent,
-                        McContentComponent,
-                        McFooterComponent,
-                        McHeaderComponent,
-                        McSidebarComponent
-                    ],
-                    declarations: [
-                        McLayoutComponent,
-                        McContentComponent,
-                        McFooterComponent,
-                        McHeaderComponent,
-                        McSidebarComponent
-                    ]
-                },] },
-    ];
-    return McLayoutModule;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /**
  * Component for list-options of selection-list. Each list-option can automatically
  * generate a checkbox and can put current item into the selectionModel of selection-list
@@ -28104,6 +27862,294 @@ var McTimepickerModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+var McSidebarAnimationState = {
+    Opened: 'opened',
+    Closed: 'closed',
+};
+/** @type {?} */
+var mcSidebarAnimations = {
+    sidebarState: animations.trigger('state', [
+        animations.state('opened', animations.style({
+            minWidth: '{{ openedStateMinWidth }}',
+            width: '{{ openedStateWidth }}',
+            maxWidth: '{{ openedStateMaxWidth }}'
+        }), { params: { openedStateMinWidth: '', openedStateWidth: '', openedStateMaxWidth: '' } }),
+        animations.state('closed', animations.style({
+            minWidth: '{{ closedStateWidth }}',
+            width: '{{ closedStateWidth }}',
+            maxWidth: '{{ closedStateWidth }}'
+        }), { params: { closedStateWidth: '' } }),
+        animations.transition('opened => closed', [animations.animate('0.1s')]),
+        animations.transition('closed => opened', [animations.animate('0.2s')])
+    ])
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @enum {string} */
+var SidebarPositions = {
+    Left: 'left',
+    Right: 'right',
+};
+var McSidebarOpened = /** @class */ (function () {
+    function McSidebarOpened() {
+    }
+    McSidebarOpened.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mc-sidebar-opened]',
+                    exportAs: 'mcSidebarOpened'
+                },] },
+    ];
+    McSidebarOpened.propDecorators = {
+        minWidth: [{ type: core.Input }],
+        width: [{ type: core.Input }],
+        maxWidth: [{ type: core.Input }]
+    };
+    return McSidebarOpened;
+}());
+var McSidebarClosed = /** @class */ (function () {
+    function McSidebarClosed() {
+    }
+    McSidebarClosed.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mc-sidebar-closed]',
+                    exportAs: 'mcSidebarClosed'
+                },] },
+    ];
+    McSidebarClosed.propDecorators = {
+        width: [{ type: core.Input }]
+    };
+    return McSidebarClosed;
+}());
+var McSidebar = /** @class */ (function () {
+    function McSidebar(ngZone, elementRef) {
+        this.ngZone = ngZone;
+        this.elementRef = elementRef;
+        this._opened = true;
+        this.stateChanged = new core.EventEmitter();
+        this.internalState = true;
+        this.needSaveAndRestoreWidth = false;
+    }
+    Object.defineProperty(McSidebar.prototype, "opened", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._opened;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            if (this.needSaveAndRestoreWidth && this._opened) {
+                this.saveWidth();
+            }
+            this._opened = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McSidebar.prototype, "animationState", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._opened ? McSidebarAnimationState.Opened : McSidebarAnimationState.Closed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    McSidebar.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        if (this.position === SidebarPositions.Left || this.position === SidebarPositions.Right) {
+            this.registerKeydownListener();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    McSidebar.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        if (this.position === SidebarPositions.Left || this.position === SidebarPositions.Right) {
+            this.unRegisterKeydownListener();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    McSidebar.prototype.toggle = /**
+     * @return {?}
+     */
+    function () {
+        this.opened = !this.opened;
+    };
+    /**
+     * @return {?}
+     */
+    McSidebar.prototype.onAnimationStart = /**
+     * @return {?}
+     */
+    function () {
+        if (this._opened) {
+            this.internalState = this._opened;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    McSidebar.prototype.onAnimationDone = /**
+     * @return {?}
+     */
+    function () {
+        this.internalState = this._opened;
+        this.stateChanged.emit(this._opened);
+    };
+    /**
+     * @return {?}
+     */
+    McSidebar.prototype.ngAfterContentInit = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.openedContent.width) {
+            this.needSaveAndRestoreWidth = true;
+        }
+        this.params = {
+            openedStateWidth: this.openedContent.width || 'inherit',
+            openedStateMinWidth: this.openedContent.minWidth || 'inherit',
+            openedStateMaxWidth: this.openedContent.maxWidth || 'inherit',
+            closedStateWidth: this.closedContent.width || '32px'
+        };
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McSidebar.prototype.registerKeydownListener = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.documentKeydownListener = (/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            if (keycodes.isControl(event) || keycodes.isInput(event)) {
+                return;
+            }
+            if ((_this.position === SidebarPositions.Left && keycodes.isLeftBracket(event)) ||
+                (_this.position === SidebarPositions.Right && keycodes.isRightBracket(event))) {
+                _this.ngZone.run((/**
+                 * @return {?}
+                 */
+                function () { return _this._opened = !_this._opened; }));
+            }
+        });
+        this.ngZone.runOutsideAngular((/**
+         * @return {?}
+         */
+        function () {
+            // tslint:disable-next-line: no-unbound-method
+            document.addEventListener('keypress', _this.documentKeydownListener, true);
+        }));
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McSidebar.prototype.unRegisterKeydownListener = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        // tslint:disable-next-line: no-unbound-method
+        document.removeEventListener('keypress', this.documentKeydownListener, true);
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McSidebar.prototype.saveWidth = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.params.openedStateWidth = this.elementRef.nativeElement.offsetWidth + "px";
+    };
+    McSidebar.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-sidebar',
+                    exportAs: 'mcSidebar',
+                    template: "<ng-container [ngSwitch]=\"internalState\"><ng-container *ngSwitchCase=\"true\"><ng-content select=\"[mc-sidebar-opened]\"></ng-content></ng-container><ng-container *ngSwitchCase=\"false\"><ng-content select=\"[mc-sidebar-closed]\"></ng-content></ng-container></ng-container>",
+                    styles: [".mc-sidebar{display:inline-block;height:100%;overflow:hidden}.mc-sidebar-closed,.mc-sidebar-opened{height:100%}"],
+                    host: {
+                        class: 'mc-sidebar',
+                        '[@state]': "{\n            value: animationState,\n            params: params\n        }",
+                        '(@state.start)': 'onAnimationStart()',
+                        '(@state.done)': 'onAnimationDone()'
+                    },
+                    animations: [mcSidebarAnimations.sidebarState],
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    McSidebar.ctorParameters = function () { return [
+        { type: core.NgZone },
+        { type: core.ElementRef }
+    ]; };
+    McSidebar.propDecorators = {
+        opened: [{ type: core.Input }],
+        position: [{ type: core.Input }],
+        stateChanged: [{ type: core.Output }],
+        openedContent: [{ type: core.ContentChild, args: [McSidebarOpened, { static: false },] }],
+        closedContent: [{ type: core.ContentChild, args: [McSidebarClosed, { static: false },] }]
+    };
+    return McSidebar;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McSidebarModule = /** @class */ (function () {
+    function McSidebarModule() {
+    }
+    McSidebarModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule],
+                    declarations: [
+                        McSidebarClosed,
+                        McSidebarOpened,
+                        McSidebar
+                    ],
+                    exports: [
+                        McSidebarClosed,
+                        McSidebarOpened,
+                        McSidebar
+                    ]
+                },] },
+    ];
+    return McSidebarModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /**
  * Injection token that can be used to access the data that was passed in to a sidepanel.
  * @type {?}
@@ -29016,8 +29062,9 @@ var McSidepanelModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSplitterComponent = /** @class */ (function () {
-    function McSplitterComponent(elementRef, ngZone, renderer) {
+    function McSplitterComponent(elementRef, changeDetectorRef, ngZone, renderer) {
         this.elementRef = elementRef;
+        this.changeDetectorRef = changeDetectorRef;
         this.ngZone = ngZone;
         this.renderer = renderer;
         this.areas = [];
@@ -29306,6 +29353,7 @@ var McSplitterComponent = /** @class */ (function () {
     McSplitterComponent.decorators = [
         { type: core.Component, args: [{
                     selector: 'mc-splitter',
+                    exportAs: 'mcSplitter',
                     preserveWhitespaces: false,
                     styles: ["mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}mc-splitter-area{overflow:hidden}mc-gutter{display:flex;flex-grow:0;flex-shrink:0;overflow:hidden;justify-content:center;align-items:center}.icon-vertical{transform:rotate(90deg)}"],
                     template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [direction]=\"direction\" [disabled]=\"disabled\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"><i mc-icon=\"mc-ellipsis_16\" color=\"second\" [class.icon-vertical]=\"direction === 'vertical'\" *ngIf=\"!disabled\"></i></mc-gutter></ng-template>",
@@ -29316,6 +29364,7 @@ var McSplitterComponent = /** @class */ (function () {
     /** @nocollapse */
     McSplitterComponent.ctorParameters = function () { return [
         { type: core.ElementRef },
+        { type: core.ChangeDetectorRef },
         { type: core.NgZone },
         { type: core.Renderer2 }
     ]; };
@@ -29543,7 +29592,8 @@ var McSplitterAreaDirective = /** @class */ (function () {
     function () {
         this.splitter.addArea(this);
         this.removeStyle("max-width" /* MaxWidth */);
-        this.setStyle("flex" /* Flex */, '1');
+        // todo нахера это сделано ?
+        // this.setStyle(StyleProperty.Flex, '1');
         if (this.splitter.direction === "vertical" /* Vertical */) {
             this.setStyle("width" /* Width */, '100%');
             this.removeStyle("height" /* Height */);
@@ -29686,7 +29736,7 @@ var McSplitterAreaDirective = /** @class */ (function () {
     };
     McSplitterAreaDirective.decorators = [
         { type: core.Directive, args: [{
-                    selector: 'mc-splitter-area'
+                    selector: '[mc-splitter-area]'
                 },] },
     ];
     /** @nocollapse */
@@ -31251,7 +31301,7 @@ var McVerticalNavbarModule = /** @class */ (function () {
 var VERSION = new core.Version('8.0.0-beta.2');
 
 exports.VERSION = VERSION;
-exports.ɵa2 = MC_SANITY_CHECKS_FACTORY;
+exports.ɵa3 = MC_SANITY_CHECKS_FACTORY;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
@@ -31400,10 +31450,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc24 = MAX_VALIDATOR;
-exports.ɵa24 = MIN_VALIDATOR;
-exports.ɵd24 = MaxValidator;
-exports.ɵb24 = MinValidator;
+exports.ɵc25 = MAX_VALIDATOR;
+exports.ɵa25 = MIN_VALIDATOR;
+exports.ɵd25 = MaxValidator;
+exports.ɵb25 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -31415,12 +31465,6 @@ exports.McInputMono = McInputMono;
 exports.stepUp = stepUp;
 exports.stepDown = stepDown;
 exports.MC_INPUT_VALUE_ACCESSOR = MC_INPUT_VALUE_ACCESSOR;
-exports.McContentComponent = McContentComponent;
-exports.McFooterComponent = McFooterComponent;
-exports.McHeaderComponent = McHeaderComponent;
-exports.McLayoutComponent = McLayoutComponent;
-exports.McSidebarComponent = McSidebarComponent;
-exports.McLayoutModule = McLayoutModule;
 exports.McListModule = McListModule;
 exports.McListBase = McListBase;
 exports.McList = McList;
@@ -31437,8 +31481,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb28 = CssUnitPipe;
-exports.ɵa28 = McModalControlService;
+exports.ɵb27 = CssUnitPipe;
+exports.ɵa27 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -31568,6 +31612,12 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
+exports.ɵa2 = mcSidebarAnimations;
+exports.McSidebarModule = McSidebarModule;
+exports.SidebarPositions = SidebarPositions;
+exports.McSidebarOpened = McSidebarOpened;
+exports.McSidebarClosed = McSidebarClosed;
+exports.McSidebar = McSidebar;
 exports.ɵb20 = mcSidepanelAnimations;
 exports.ɵa20 = mcSidepanelTransformAnimation;
 exports.ɵg20 = McSidepanelActions;
@@ -31601,7 +31651,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

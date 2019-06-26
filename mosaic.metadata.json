@@ -10,10 +10,10 @@
       "from": "./card"
     },
     {
-      "from": "./divider"
+      "from": "./sidebar"
     },
     {
-      "from": "./tooltip"
+      "from": "./divider"
     },
     {
       "from": "./toggle"
@@ -22,25 +22,22 @@
       "from": "./tabs"
     },
     {
-      "from": "./navbar"
+      "from": "./popover"
     },
     {
       "from": "./checkbox"
     },
     {
-      "from": "./radio"
-    },
-    {
-      "from": "./progress-spinner"
-    },
-    {
       "from": "./tree"
     },
     {
-      "from": "./progress-bar"
+      "from": "./radio"
     },
     {
-      "from": "./layout"
+      "from": "./tooltip"
+    },
+    {
+      "from": "./progress-spinner"
     },
     {
       "from": "./link"
@@ -49,7 +46,10 @@
       "from": "./list"
     },
     {
-      "from": "./popover"
+      "from": "./progress-bar"
+    },
+    {
+      "from": "./navbar"
     },
     {
       "from": "./icon"
@@ -76,16 +76,16 @@
       "from": "./modal"
     },
     {
-      "from": "./input"
+      "from": "./tags"
     },
     {
-      "from": "./tags"
+      "from": "./autocomplete"
     },
     {
       "from": "./textarea"
     },
     {
-      "from": "./autocomplete"
+      "from": "./input"
     },
     {
       "from": "./vertical-navbar"

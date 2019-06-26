@@ -1,4 +1,4 @@
-import { ElementRef, NgZone, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, NgZone, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 interface IArea {
     area: McSplitterAreaDirective;
     index: number;
@@ -10,7 +10,8 @@ export declare const enum Direction {
     Vertical = "vertical"
 }
 export declare class McSplitterComponent implements OnInit {
-    private elementRef;
+    elementRef: ElementRef;
+    changeDetectorRef: ChangeDetectorRef;
     private ngZone;
     private renderer;
     readonly areas: IArea[];
@@ -23,7 +24,7 @@ export declare class McSplitterComponent implements OnInit {
     direction: Direction;
     disabled: boolean;
     gutterSize: number;
-    constructor(elementRef: ElementRef, ngZone: NgZone, renderer: Renderer2);
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, ngZone: NgZone, renderer: Renderer2);
     addArea(area: McSplitterAreaDirective): void;
     ngOnInit(): void;
     onMouseDown(event: MouseEvent, leftAreaIndex: number, rightAreaIndex: number): void;

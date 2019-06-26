@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { ChangeDetectionStrategy, Component, Directive, ElementRef, Input, NgZone, Renderer2, ViewEncapsulation, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, Input, NgZone, Renderer2, ViewEncapsulation, NgModule } from '@angular/core';
 import { coerceBooleanProperty, coerceCssPixelValue, coerceNumberProperty } from '@ptsecurity/cdk/coercion';
 import { CommonModule } from '@angular/common';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
@@ -14,8 +14,9 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McSplitterComponent = /** @class */ (function () {
-    function McSplitterComponent(elementRef, ngZone, renderer) {
+    function McSplitterComponent(elementRef, changeDetectorRef, ngZone, renderer) {
         this.elementRef = elementRef;
+        this.changeDetectorRef = changeDetectorRef;
         this.ngZone = ngZone;
         this.renderer = renderer;
         this.areas = [];
@@ -304,6 +305,7 @@ var McSplitterComponent = /** @class */ (function () {
     McSplitterComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mc-splitter',
+                    exportAs: 'mcSplitter',
                     preserveWhitespaces: false,
                     styles: ["mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}mc-splitter-area{overflow:hidden}mc-gutter{display:flex;flex-grow:0;flex-shrink:0;overflow:hidden;justify-content:center;align-items:center}.icon-vertical{transform:rotate(90deg)}"],
                     template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [direction]=\"direction\" [disabled]=\"disabled\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"><i mc-icon=\"mc-ellipsis_16\" color=\"second\" [class.icon-vertical]=\"direction === 'vertical'\" *ngIf=\"!disabled\"></i></mc-gutter></ng-template>",
@@ -314,6 +316,7 @@ var McSplitterComponent = /** @class */ (function () {
     /** @nocollapse */
     McSplitterComponent.ctorParameters = function () { return [
         { type: ElementRef },
+        { type: ChangeDetectorRef },
         { type: NgZone },
         { type: Renderer2 }
     ]; };
@@ -541,7 +544,8 @@ var McSplitterAreaDirective = /** @class */ (function () {
     function () {
         this.splitter.addArea(this);
         this.removeStyle("max-width" /* MaxWidth */);
-        this.setStyle("flex" /* Flex */, '1');
+        // todo нахера это сделано ?
+        // this.setStyle(StyleProperty.Flex, '1');
         if (this.splitter.direction === "vertical" /* Vertical */) {
             this.setStyle("width" /* Width */, '100%');
             this.removeStyle("height" /* Height */);
@@ -684,7 +688,7 @@ var McSplitterAreaDirective = /** @class */ (function () {
     };
     McSplitterAreaDirective.decorators = [
         { type: Directive, args: [{
-                    selector: 'mc-splitter-area'
+                    selector: '[mc-splitter-area]'
                 },] },
     ];
     /** @nocollapse */

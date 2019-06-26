@@ -1,0 +1,8 @@
+{
+    "name": "@ptsecurity/mosaic/sidebar",
+    "typings": "../sidebar.d.ts",
+    "main": "../bundles/mosaic-sidebar.umd.js",
+    "module": "../esm5/sidebar.es5.js",
+    "es2015": "../esm2015/sidebar.js",
+    "sideEffects": false
+}
