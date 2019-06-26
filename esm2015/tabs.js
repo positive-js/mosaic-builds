@@ -154,6 +154,7 @@ McTab.propDecorators = {
     explicitContent: [{ type: ContentChild, args: [McTabContent, { read: TemplateRef, static: true },] }],
     implicitContent: [{ type: ViewChild, args: [TemplateRef, { static: true },] }],
     textLabel: [{ type: Input, args: ['label',] }],
+    tabId: [{ type: Input, args: ['tabId',] }],
     ariaLabel: [{ type: Input, args: ['aria-label',] }],
     ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }]
 };

@@ -20,6 +20,7 @@ export declare class McTab extends mcTabMixinBase implements OnInit, CanDisable,
     implicitContent: TemplateRef<any>;
     /** Plain text label for the tab, used when there is no template label. */
     textLabel: string;
+    tabId: string;
     /** Aria label for the tab. */
     ariaLabel: string;
     /**

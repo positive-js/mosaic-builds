@@ -195,6 +195,7 @@ var McTab = /** @class */ (function (_super) {
         explicitContent: [{ type: core.ContentChild, args: [McTabContent, { read: core.TemplateRef, static: true },] }],
         implicitContent: [{ type: core.ViewChild, args: [core.TemplateRef, { static: true },] }],
         textLabel: [{ type: core.Input, args: ['label',] }],
+        tabId: [{ type: core.Input, args: ['tabId',] }],
         ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
         ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }]
     };
