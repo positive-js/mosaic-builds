@@ -446,7 +446,7 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (option, $event) {
-        this.keyManager.updateActiveItem(option);
+        this.keyManager.setActiveItem(option);
         /** @type {?} */
         var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
         /** @type {?} */

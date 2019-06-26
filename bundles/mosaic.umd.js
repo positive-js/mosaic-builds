@@ -11919,7 +11919,7 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (option, $event) {
-        this.keyManager.updateActiveItem(option);
+        this.keyManager.setActiveItem(option);
         /** @type {?} */
         var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
         /** @type {?} */
@@ -31481,8 +31481,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
+exports.ɵb28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;

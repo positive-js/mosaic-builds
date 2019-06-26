@@ -356,7 +356,7 @@ class McListSelection extends _McListSelectionMixinBase {
      * @return {?}
      */
     setFocusedOption(option, $event) {
-        this.keyManager.updateActiveItem(option);
+        this.keyManager.setActiveItem(option);
         /** @type {?} */
         const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
         /** @type {?} */
