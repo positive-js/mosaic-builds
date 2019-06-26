@@ -4,7 +4,7 @@ import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 export interface McTreeOptionParentComponent {
     multiple: boolean;
-    selectionModel: SelectionModel<McTreeOption>;
+    selectionModel: SelectionModel<any>;
     setFocusedOption: any;
 }
 /**
@@ -20,10 +20,11 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     protected elementRef: ElementRef;
     protected changeDetectorRef: ChangeDetectorRef;
     private readonly parent;
-    readonly onSelectionChange: EventEmitter<McTreeOptionChange>;
     value: any;
+    private _value;
     disabled: any;
     private _disabled;
+    readonly onSelectionChange: EventEmitter<McTreeOptionChange>;
     selected: boolean;
     private _selected;
     /**
@@ -54,10 +55,6 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     setInactiveStyles(): void;
     getHeight(): number;
     focus(): void;
-    /**
-     * The displayed value of the option. It is necessary to show the selected option in the
-     * select's trigger.
-     */
     readonly viewValue: string;
     select(): void;
     deselect(): void;

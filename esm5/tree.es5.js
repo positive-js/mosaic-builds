@@ -5,15 +5,16 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
-import { Directive, Input, ChangeDetectorRef, Component, EventEmitter, Output, ElementRef, Inject, Optional, InjectionToken, Attribute, ChangeDetectionStrategy, ContentChildren, IterableDiffers, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
+import { Directive, Input, ChangeDetectorRef, Component, EventEmitter, Output, ElementRef, Inject, Optional, InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, Attribute, ContentChildren, IterableDiffers, ViewChild, Self, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNodeToggle, CdkTreeNode, CdkTree, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { toBoolean, mixinDisabled, mixinTabIndex, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
+import { NgControl } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { SelectionModel, DataSource } from '@ptsecurity/cdk/collections';
 import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { Subject, BehaviorSubject, merge } from 'rxjs';
+import { takeUntil, map, take } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { map, take } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -157,13 +158,30 @@ var McTreeOption = /** @class */ (function (_super) {
         _this.elementRef = elementRef;
         _this.changeDetectorRef = changeDetectorRef;
         _this.parent = parent;
-        _this.onSelectionChange = new EventEmitter();
         _this._disabled = false;
+        _this.onSelectionChange = new EventEmitter();
         _this._selected = false;
         _this._active = false;
         _this._id = "mc-tree-option-" + uniqueIdCounter++;
         return _this;
     }
+    Object.defineProperty(McTreeOption.prototype, "value", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._value;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._value = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McTreeOption.prototype, "disabled", {
         get: /**
          * @return {?}
@@ -279,12 +297,12 @@ var McTreeOption = /** @class */ (function (_super) {
         }
         this._selected = selected;
         if (selected) {
-            this.parent.selectionModel.select(this);
+            this.parent.selectionModel.select(this.value);
         }
         else {
-            this.parent.selectionModel.deselect(this);
+            this.parent.selectionModel.deselect(this.value);
         }
-        // this._changeDetector.markForCheck();
+        this.changeDetectorRef.markForCheck();
     };
     /**
      * This method sets display styles on the option to make it appear
@@ -366,10 +384,6 @@ var McTreeOption = /** @class */ (function (_super) {
         //
         //     this.treeSelection.setFocusedOption(this);
         // }
-        /**
-         * The displayed value of the option. It is necessary to show the selected option in the
-         * select's trigger.
-         */
         get: 
         // todo старая реализация, нужно восстановить tree-selection
         // handleClick(): void {
@@ -378,8 +392,6 @@ var McTreeOption = /** @class */ (function (_super) {
         //     this.treeSelection.setFocusedOption(this);
         // }
         /**
-         * The displayed value of the option. It is necessary to show the selected option in the
-         * select's trigger.
          * @return {?}
          */
         function () {
@@ -421,7 +433,6 @@ var McTreeOption = /** @class */ (function (_super) {
      */
     function () {
         if (!this.disabled) {
-            this._selected = !this._selected;
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
             if (this.parent.setFocusedOption) {
@@ -463,6 +474,7 @@ var McTreeOption = /** @class */ (function (_super) {
         { type: Component, args: [{
                     selector: 'mc-tree-option',
                     exportAs: 'mcTreeOption',
+                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                     host: {
                         '[attr.id]': 'id',
                         '[attr.tabindex]': 'getTabIndex()',
@@ -472,7 +484,8 @@ var McTreeOption = /** @class */ (function (_super) {
                         '[class.mc-active]': 'active',
                         '(click)': 'selectViaInteraction()'
                     },
-                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
                     providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
                 },] },
     ];
@@ -483,9 +496,9 @@ var McTreeOption = /** @class */ (function (_super) {
         { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_TREE_OPTION_PARENT_COMPONENT,] }] }
     ]; };
     McTreeOption.propDecorators = {
-        onSelectionChange: [{ type: Output }],
         value: [{ type: Input }],
-        disabled: [{ type: Input }]
+        disabled: [{ type: Input }],
+        onSelectionChange: [{ type: Output }]
     };
     return McTreeOption;
 }(CdkTreeNode));
@@ -526,13 +539,33 @@ McTreeSelectionBase = /** @class */ (function (_super) {
 var McTreeSelectionBaseMixin = mixinTabIndex(mixinDisabled(McTreeSelectionBase));
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
-    function McTreeSelection(elementRef, differs, changeDetectorRef, tabIndex, multiple, autoSelect, noUnselect) {
+    function McTreeSelection(elementRef, differs, changeDetectorRef, ngControl, tabIndex, multiple, autoSelect, noUnselect) {
         var _this = _super.call(this, differs, changeDetectorRef) || this;
         _this.elementRef = elementRef;
+        _this.ngControl = ngControl;
         _this.navigationChange = new EventEmitter();
         _this.selectionChange = new EventEmitter();
         _this._disabled = false;
         _this.destroy = new Subject();
+        /**
+         * `View -> model callback called when value changes`
+         */
+        _this.onChange = (/**
+         * @return {?}
+         */
+        function () { });
+        /**
+         * `View -> model callback called when select has been touched`
+         */
+        _this.onTouched = (/**
+         * @return {?}
+         */
+        function () { });
+        if (_this.ngControl) {
+            // Note: we provide the value accessor through here, instead of
+            // the `providers` to avoid running into a circular import.
+            _this.ngControl.valueAccessor = _this;
+        }
         _this.tabIndex = parseInt(tabIndex) || 0;
         _this.multiple = multiple === null ? false : toBoolean(multiple);
         _this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
@@ -576,9 +609,44 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
+        var _this = this;
         this.keyManager = new ActiveDescendantKeyManager(this.options)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
+        this.selectionModel.changed
+            .pipe(takeUntil(this.destroy))
+            .subscribe((/**
+         * @param {?} changeEvent
+         * @return {?}
+         */
+        function (changeEvent) {
+            _this.onChange(changeEvent.source.selected);
+            // event.added.forEach((option) => option.select());
+            // event.removed.forEach((option) => option.deselect());
+        }));
+        this.options.changes
+            .pipe(takeUntil(this.destroy))
+            .subscribe((/**
+         * @param {?} options
+         * @return {?}
+         */
+        function (options) {
+            options.forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) {
+                _this.selectionModel.selected.forEach((/**
+                 * @param {?} selectedOption
+                 * @return {?}
+                 */
+                function (selectedOption) {
+                    if (option.value === selectedOption) {
+                        option._selected = true;
+                    }
+                }));
+            }));
+        }));
     };
     /**
      * @return {?}
@@ -664,7 +732,13 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function (option) {
         this.keyManager.setActiveItem(option);
-        if (this.withShift && this.multiple) {
+        if (this.multiple) {
+            if (!this.canDeselectLast(option)) {
+                return;
+            }
+            option.toggle();
+        }
+        else if (this.withShift) {
             /** @type {?} */
             var previousIndex_1 = this.keyManager.previousActiveItemIndex;
             /** @type {?} */
@@ -722,15 +796,11 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function () {
         /** @type {?} */
-        var focusedIndex = this.keyManager.activeItemIndex;
-        if (focusedIndex != null && this.isValidIndex(focusedIndex)) {
-            /** @type {?} */
-            var focusedOption = this.options.toArray()[focusedIndex];
-            if (focusedOption && this.canDeselectLast(focusedOption)) {
-                focusedOption.toggle();
-                // Emit a change event because the focused option changed its state through user interaction.
-                this.emitChangeEvent(focusedOption);
-            }
+        var focusedOption = this.keyManager.activeItem;
+        if (focusedOption) {
+            this.setFocusedOption(focusedOption);
+            // Emit a change event because the focused option changed its state through user interaction.
+            this.emitChangeEvent(focusedOption);
         }
     };
     /**
@@ -767,8 +837,12 @@ var McTreeSelection = /** @class */ (function (_super) {
             function (node) {
                 if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
                     /** @type {?} */
-                    var nodeData = view.nodes[node.nodeIndex];
-                    arrayOfInstances.push((/** @type {?} */ (nodeData.instance)));
+                    var nodeData_1 = view.nodes[node.nodeIndex];
+                    arrayOfInstances.push((/** @type {?} */ (nodeData_1.instance)));
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    function () { return nodeData_1.instance.changeDetectorRef.detectChanges(); }));
                 }
             }));
         }));
@@ -777,6 +851,7 @@ var McTreeSelection = /** @class */ (function (_super) {
             this.options.notifyOnChanges();
         }
         this.updateScrollSize();
+        this.nodeOutlet.changeDetectorRef.detectChanges();
     };
     /**
      * @return {?}
@@ -815,17 +890,103 @@ var McTreeSelection = /** @class */ (function (_super) {
         this.selectionChange.emit(new McTreeNavigationChange(this, option));
     };
     /**
-     * @private
-     * @param {?} index
+     * @param {?} value
      * @return {?}
      */
-    McTreeSelection.prototype.isValidIndex = /**
-     * @private
-     * @param {?} index
+    McTreeSelection.prototype.writeValue = /**
+     * @param {?} value
      * @return {?}
      */
-    function (index) {
-        return index >= 0 && index < this.options.length;
+    function (value) {
+        if (this.options) {
+            this.setOptionsFromValues(this.multiple ? value : [value]);
+        }
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    McTreeSelection.prototype.registerOnChange = /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
+        this.onChange = fn;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    McTreeSelection.prototype.registerOnTouched = /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
+        this.onTouched = fn;
+    };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    McTreeSelection.prototype.setDisabledState = /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    function (isDisabled) {
+        this._disabled = isDisabled;
+        this.changeDetectorRef.markForCheck();
+        // this.stateChanges.next();
+    };
+    /**
+     * @private
+     * @param {?} value
+     * @return {?}
+     */
+    McTreeSelection.prototype.getCorrespondOption = /**
+     * @private
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        return this.options.find((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) {
+            try {
+                // Treat null as a special reset value.
+                return option.value != null && option.value === value;
+            }
+            catch (error) {
+                console.warn(error);
+                return false;
+            }
+        }));
+    };
+    /**
+     * @private
+     * @param {?} values
+     * @return {?}
+     */
+    McTreeSelection.prototype.setOptionsFromValues = /**
+     * @private
+     * @param {?} values
+     * @return {?}
+     */
+    function (values) {
+        var _this = this;
+        values.forEach((/**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            /** @type {?} */
+            var correspondingOption = _this.getCorrespondOption(value);
+            _this.selectionModel.select(value);
+            if (correspondingOption) {
+                correspondingOption.selected = true;
+            }
+        }));
     };
     /**
      * @private
@@ -865,6 +1026,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         { type: ElementRef },
         { type: IterableDiffers },
         { type: ChangeDetectorRef },
+        { type: NgControl, decorators: [{ type: Self }, { type: Optional }] },
         { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
         { type: String, decorators: [{ type: Attribute, args: ['multiple',] }] },
         { type: String, decorators: [{ type: Attribute, args: ['auto-select',] }] },

@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/list', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core', 'rxjs', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.list = {}),global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.collections,global.ng.cdk.keycodes,global.ng.mosaic.core,global.rxjs,global.ng.common));
-}(this, (function (exports,core,forms,a11y,collections,keycodes,core$1,rxjs,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/list', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.list = {}),global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.collections,global.ng.cdk.keycodes,global.ng.mosaic.core,global.rxjs,global.rxjs.operators,global.ng.common));
+}(this, (function (exports,core,forms,a11y,collections,keycodes,core$1,rxjs,operators,common) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -86,7 +86,7 @@ var McListOption = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.listSelection.selectedOptions && this.listSelection.selectedOptions.isSelected(this) || false;
+            return this.listSelection.selectionModel && this.listSelection.selectionModel.isSelected(this) || false;
         },
         set: /**
          * @param {?} value
@@ -184,15 +184,15 @@ var McListOption = /** @class */ (function () {
      * @return {?}
      */
     function (selected) {
-        if (this._selected === selected || !this.listSelection.selectedOptions) {
+        if (this._selected === selected || !this.listSelection.selectionModel) {
             return;
         }
         this._selected = selected;
         if (selected) {
-            this.listSelection.selectedOptions.select(this);
+            this.listSelection.selectionModel.select(this);
         }
         else {
-            this.listSelection.selectedOptions.deselect(this);
+            this.listSelection.selectionModel.deselect(this);
         }
         this._changeDetector.markForCheck();
     };
@@ -320,7 +320,10 @@ var McListSelection = /** @class */ (function (_super) {
         _this.horizontal = false;
         // Emits a change event whenever the selected state of an option changes.
         _this.selectionChange = new core.EventEmitter();
-        _this.modelChanges = rxjs.Subscription.EMPTY;
+        /**
+         * Emits whenever the component is destroyed.
+         */
+        _this.destroy = new rxjs.Subject();
         // View to model callback that should be called if the list or its options lost focus.
         // tslint:disable-next-line:no-empty
         _this.onTouched = (/**
@@ -337,7 +340,7 @@ var McListSelection = /** @class */ (function (_super) {
         _this.multiple = multiple === null ? true : core$1.toBoolean(multiple);
         _this.noUnselect = noUnselect === null ? true : core$1.toBoolean(noUnselect);
         _this.tabIndex = parseInt(tabIndex) || 0;
-        _this.selectedOptions = new collections.SelectionModel(_this.multiple);
+        _this.selectionModel = new collections.SelectionModel(_this.multiple);
         return _this;
     }
     /**
@@ -356,8 +359,9 @@ var McListSelection = /** @class */ (function (_super) {
             this.setOptionsFromValues(this.tempValues);
             this.tempValues = null;
         }
-        // Sync external changes to the model back to the options.
-        this.modelChanges = (/** @type {?} */ (this.selectedOptions.onChange)).subscribe((/**
+        this.selectionModel.changed
+            .pipe(operators.takeUntil(this.destroy))
+            .subscribe((/**
          * @param {?} event
          * @return {?}
          */
@@ -380,7 +384,8 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.modelChanges.unsubscribe();
+        this.destroy.next();
+        this.destroy.complete();
     };
     /**
      * @return {?}
@@ -620,7 +625,7 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (listOption) {
-        return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
+        return !(this.noUnselect && this.selectionModel.selected.length === 1 && listOption.selected);
     };
     /**
      * @return {?}

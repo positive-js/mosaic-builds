@@ -53,9 +53,10 @@ export declare class McListSelection extends _McListSelectionMixinBase implement
     multiple: boolean;
     horizontal: boolean;
     readonly selectionChange: EventEmitter<McListSelectionChange>;
-    selectedOptions: SelectionModel<McListOption>;
+    selectionModel: SelectionModel<McListOption>;
     private tempValues;
-    private modelChanges;
+    /** Emits whenever the component is destroyed. */
+    private readonly destroy;
     constructor(element: ElementRef, tabIndex: string, autoSelect: string, noUnselect: string, multiple: string);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;

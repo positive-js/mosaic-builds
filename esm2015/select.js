@@ -1122,7 +1122,7 @@ class McSelect extends McSelectMixinBase {
         (option) => {
             try {
                 // Treat null as a special reset value.
-                return option.value != null && this._compareWith(option.value, value);
+                return option.value != null && this.compareWith(option.value, value);
             }
             catch (error) {
                 if (isDevMode()) {

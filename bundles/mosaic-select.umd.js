@@ -1431,7 +1431,7 @@ var McSelect = /** @class */ (function (_super) {
         function (option) {
             try {
                 // Treat null as a special reset value.
-                return option.value != null && _this._compareWith(option.value, value);
+                return option.value != null && _this.compareWith(option.value, value);
             }
             catch (error) {
                 if (core.isDevMode()) {

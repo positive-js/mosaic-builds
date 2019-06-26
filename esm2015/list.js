@@ -10,7 +10,8 @@ import { FocusKeyManager, A11yModule } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { DOWN_ARROW, END, ENTER, hasModifierKey, HOME, PAGE_DOWN, PAGE_UP, SPACE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McLine, mixinDisabled, toBoolean, McLineSetter, McLineModule } from '@ptsecurity/mosaic/core';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -60,7 +61,7 @@ class McListOption {
      * @return {?}
      */
     get selected() {
-        return this.listSelection.selectedOptions && this.listSelection.selectedOptions.isSelected(this) || false;
+        return this.listSelection.selectionModel && this.listSelection.selectionModel.isSelected(this) || false;
     }
     /**
      * @param {?} value
@@ -134,15 +135,15 @@ class McListOption {
      * @return {?}
      */
     setSelected(selected) {
-        if (this._selected === selected || !this.listSelection.selectedOptions) {
+        if (this._selected === selected || !this.listSelection.selectionModel) {
             return;
         }
         this._selected = selected;
         if (selected) {
-            this.listSelection.selectedOptions.select(this);
+            this.listSelection.selectionModel.select(this);
         }
         else {
-            this.listSelection.selectedOptions.deselect(this);
+            this.listSelection.selectionModel.deselect(this);
         }
         this._changeDetector.markForCheck();
     }
@@ -259,7 +260,10 @@ class McListSelection extends _McListSelectionMixinBase {
         this.horizontal = false;
         // Emits a change event whenever the selected state of an option changes.
         this.selectionChange = new EventEmitter();
-        this.modelChanges = Subscription.EMPTY;
+        /**
+         * Emits whenever the component is destroyed.
+         */
+        this.destroy = new Subject();
         // View to model callback that should be called if the list or its options lost focus.
         // tslint:disable-next-line:no-empty
         this.onTouched = (/**
@@ -276,7 +280,7 @@ class McListSelection extends _McListSelectionMixinBase {
         this.multiple = multiple === null ? true : toBoolean(multiple);
         this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
         this.tabIndex = parseInt(tabIndex) || 0;
-        this.selectedOptions = new SelectionModel(this.multiple);
+        this.selectionModel = new SelectionModel(this.multiple);
     }
     /**
      * @return {?}
@@ -291,8 +295,9 @@ class McListSelection extends _McListSelectionMixinBase {
             this.setOptionsFromValues(this.tempValues);
             this.tempValues = null;
         }
-        // Sync external changes to the model back to the options.
-        this.modelChanges = (/** @type {?} */ (this.selectedOptions.onChange)).subscribe((/**
+        this.selectionModel.changed
+            .pipe(takeUntil(this.destroy))
+            .subscribe((/**
          * @param {?} event
          * @return {?}
          */
@@ -310,7 +315,8 @@ class McListSelection extends _McListSelectionMixinBase {
      * @return {?}
      */
     ngOnDestroy() {
-        this.modelChanges.unsubscribe();
+        this.destroy.next();
+        this.destroy.complete();
     }
     /**
      * @return {?}
@@ -489,7 +495,7 @@ class McListSelection extends _McListSelectionMixinBase {
      * @return {?}
      */
     canDeselectLast(listOption) {
-        return !(this.noUnselect && this.selectedOptions.selected.length === 1 && listOption.selected);
+        return !(this.noUnselect && this.selectionModel.selected.length === 1 && listOption.selected);
     }
     /**
      * @return {?}

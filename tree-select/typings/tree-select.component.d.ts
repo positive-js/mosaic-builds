@@ -44,7 +44,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     /** The cached font-size of the trigger element. */
     triggerFontSize: number;
     /** Deals with the selection logic. */
-    selectionModel: SelectionModel<McTreeOption>;
+    selectionModel: SelectionModel<any>;
     /** The IDs of child options to be passed to the aria-owns attribute. */
     optionIds: string;
     /** The value of the select panel's transform-origin property. */
@@ -110,6 +110,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     readonly optionSelectionChanges: Observable<McTreeSelectChange>;
     options: QueryList<McTreeOption>;
     private originalOnKeyDown;
+    private fireValueChangedEvent;
     placeholder: string;
     private _placeholder;
     required: boolean;
@@ -144,6 +145,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     private readonly uid;
     /** Emits whenever the component is destroyed. */
     private readonly destroy;
+    private tempValues;
     constructor(viewportRuler: ViewportRuler, changeDetectorRef: ChangeDetectorRef, ngZone: NgZone, renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, elementRef: ElementRef, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, parentFormField: McFormField, ngControl: NgControl, tabIndex: string, scrollStrategyFactory: any);
     ngOnInit(): void;
     ngAfterContentInit(): void;
@@ -189,7 +191,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
      * @param isDisabled Sets whether the component is disabled.
      */
     setDisabledState(isDisabled: boolean): void;
-    readonly selected: McTreeOption | McTreeOption[];
+    readonly selected: any;
     readonly triggerValue: string;
     readonly triggerValues: McTreeOption[];
     readonly empty: boolean;

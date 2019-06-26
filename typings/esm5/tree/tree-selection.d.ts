@@ -1,4 +1,5 @@
 import { AfterContentInit, ChangeDetectorRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ElementRef } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
@@ -18,12 +19,13 @@ declare class McTreeSelectionBase<T> extends CdkTree<T> {
     constructor(differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef);
 }
 declare const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor & typeof McTreeSelectionBase;
-export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption> implements AfterContentInit, CanDisable, HasTabIndex {
+export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
     private elementRef;
+    ngControl: NgControl;
     nodeOutlet: CdkTreeNodeOutlet;
     options: QueryList<McTreeOption>;
     keyManager: ActiveDescendantKeyManager<McTreeOption>;
-    selectionModel: SelectionModel<McTreeOption>;
+    selectionModel: SelectionModel<any>;
     tabIndex: number;
     multiple: boolean;
     autoSelect: boolean;
@@ -35,7 +37,7 @@ export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOpti
     disabled: boolean;
     private _disabled;
     private readonly destroy;
-    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string, autoSelect: string, noUnselect: string);
+    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, ngControl: NgControl, tabIndex: string, multiple: string, autoSelect: string, noUnselect: string);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     onKeyDown(event: KeyboardEvent): void;
@@ -46,7 +48,16 @@ export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOpti
     getHeight(): number;
     emitNavigationEvent(option: McTreeOption): void;
     emitChangeEvent(option: McTreeOption): void;
-    private isValidIndex;
+    writeValue(value: any): void;
+    /** `View -> model callback called when value changes` */
+    onChange: (value: any) => void;
+    registerOnChange(fn: (value: any) => void): void;
+    /** `View -> model callback called when select has been touched` */
+    onTouched: () => void;
+    registerOnTouched(fn: () => {}): void;
+    setDisabledState(isDisabled: boolean): void;
+    private getCorrespondOption;
+    private setOptionsFromValues;
     private canDeselectLast;
 }
 export {};
