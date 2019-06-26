@@ -31298,7 +31298,7 @@ var McVerticalNavbarModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var VERSION = new core.Version('8.0.0-beta.2');
+var VERSION = new core.Version('8.0.0-beta.3');
 
 exports.VERSION = VERSION;
 exports.ɵa3 = MC_SANITY_CHECKS_FACTORY;
