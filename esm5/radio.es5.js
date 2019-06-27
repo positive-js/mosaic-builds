@@ -5,9 +5,9 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
+import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, Optional, Output, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
 import { mixinColor, mixinDisabled, mixinTabIndex, toBoolean, McCommonModule } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
@@ -496,19 +496,12 @@ var McRadioButton = /** @class */ (function (_super) {
         var _this = _super.call(this, elementRef) || this;
         _this._changeDetector = _changeDetector;
         _this._radioDispatcher = _radioDispatcher;
-        _this._uniqueId = "mc-radio-" + ++nextUniqueId;
         /* tslint:disable:member-ordering */
+        _this._uniqueId = "mc-radio-" + ++nextUniqueId;
         /**
          * The unique ID for the radio button.
          */
         _this.id = _this._uniqueId;
-        /**
-         * Event emitted when the checked state of this radio button changes.
-         * Change events are only emitted when the value changes due to user interaction with
-         * the radio button (the same behavior as `<input type-"radio">`).
-         */
-        _this.change = new EventEmitter();
-        _this.isFocused = false;
         /**
          * Whether this radio is checked.
          */
@@ -517,6 +510,13 @@ var McRadioButton = /** @class */ (function (_super) {
          * Value assigned to this radio.
          */
         _this._value = null;
+        /**
+         * Event emitted when the checked state of this radio button changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * the radio button (the same behavior as `<input type-"radio">`).
+         */
+        _this.change = new EventEmitter();
+        _this.isFocused = false;
         /**
          * Unregister function for _radioDispatcher
          */
@@ -814,16 +814,16 @@ var McRadioButton = /** @class */ (function (_super) {
         { type: UniqueSelectionDispatcher }
     ]; };
     McRadioButton.propDecorators = {
-        id: [{ type: Input }],
-        name: [{ type: Input }],
-        ariaLabel: [{ type: Input, args: ['aria-label',] }],
-        ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
-        ariaDescribedby: [{ type: Input, args: ['aria-describedby',] }],
         checked: [{ type: Input }],
         value: [{ type: Input }],
         disabled: [{ type: Input }],
         required: [{ type: Input }],
         labelPosition: [{ type: Input }],
+        id: [{ type: Input }],
+        name: [{ type: Input }],
+        ariaLabel: [{ type: Input, args: ['aria-label',] }],
+        ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
+        ariaDescribedby: [{ type: Input, args: ['aria-describedby',] }],
         _inputElement: [{ type: ViewChild, args: ['input', { static: false },] }],
         change: [{ type: Output }],
         isFocused: [{ type: Input }]

@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/mosaic/core'), require('@angular/common'), require('@ptsecurity/cdk/a11y')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/radio', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/collections', '@ptsecurity/mosaic/core', '@angular/common', '@ptsecurity/cdk/a11y'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.radio = {}),global.ng.core,global.ng.forms,global.ng.cdk.collections,global.ng.mosaic.core,global.ng.common,global.ng.cdk.a11y));
-}(this, (function (exports,core,forms,collections,core$1,common,a11y) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/collections'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/mosaic/core'), require('@angular/common'), require('@ptsecurity/cdk/a11y')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/radio', ['exports', '@angular/cdk/collections', '@angular/core', '@angular/forms', '@ptsecurity/mosaic/core', '@angular/common', '@ptsecurity/cdk/a11y'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.radio = {}),global.ng.cdk.collections,global.ng.core,global.ng.forms,global.ng.mosaic.core,global.ng.common,global.ng.cdk.a11y));
+}(this, (function (exports,collections,core,forms,core$1,common,a11y) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -523,19 +523,12 @@ var McRadioButton = /** @class */ (function (_super) {
         var _this = _super.call(this, elementRef) || this;
         _this._changeDetector = _changeDetector;
         _this._radioDispatcher = _radioDispatcher;
-        _this._uniqueId = "mc-radio-" + ++nextUniqueId;
         /* tslint:disable:member-ordering */
+        _this._uniqueId = "mc-radio-" + ++nextUniqueId;
         /**
          * The unique ID for the radio button.
          */
         _this.id = _this._uniqueId;
-        /**
-         * Event emitted when the checked state of this radio button changes.
-         * Change events are only emitted when the value changes due to user interaction with
-         * the radio button (the same behavior as `<input type-"radio">`).
-         */
-        _this.change = new core.EventEmitter();
-        _this.isFocused = false;
         /**
          * Whether this radio is checked.
          */
@@ -544,6 +537,13 @@ var McRadioButton = /** @class */ (function (_super) {
          * Value assigned to this radio.
          */
         _this._value = null;
+        /**
+         * Event emitted when the checked state of this radio button changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * the radio button (the same behavior as `<input type-"radio">`).
+         */
+        _this.change = new core.EventEmitter();
+        _this.isFocused = false;
         /**
          * Unregister function for _radioDispatcher
          */
@@ -841,16 +841,16 @@ var McRadioButton = /** @class */ (function (_super) {
         { type: collections.UniqueSelectionDispatcher }
     ]; };
     McRadioButton.propDecorators = {
-        id: [{ type: core.Input }],
-        name: [{ type: core.Input }],
-        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
-        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
-        ariaDescribedby: [{ type: core.Input, args: ['aria-describedby',] }],
         checked: [{ type: core.Input }],
         value: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
         required: [{ type: core.Input }],
         labelPosition: [{ type: core.Input }],
+        id: [{ type: core.Input }],
+        name: [{ type: core.Input }],
+        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
+        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
+        ariaDescribedby: [{ type: core.Input, args: ['aria-describedby',] }],
         _inputElement: [{ type: core.ViewChild, args: ['input', { static: false },] }],
         change: [{ type: core.Output }],
         isFocused: [{ type: core.Input }]

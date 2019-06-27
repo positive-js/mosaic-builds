@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { SelectionModel } from '@angular/cdk/collections';
 import { Attribute, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, Input, Output, ViewEncapsulation, ChangeDetectorRef, Inject, ViewChild, Directive, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager, A11yModule } from '@ptsecurity/cdk/a11y';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { DOWN_ARROW, END, ENTER, hasModifierKey, HOME, PAGE_DOWN, PAGE_UP, SPACE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McLine, mixinDisabled, toBoolean, McLineSetter, McLineModule } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';

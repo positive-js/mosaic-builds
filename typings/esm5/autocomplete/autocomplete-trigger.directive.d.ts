@@ -1,8 +1,8 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { ChangeDetectorRef, ElementRef, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { Overlay, IScrollStrategy } from '@ptsecurity/cdk/overlay';
-import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
+import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { McOption, McOptionSelectionChange } from '@ptsecurity/mosaic/core';
 import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { Observable } from 'rxjs';
@@ -19,10 +19,10 @@ export declare const AUTOCOMPLETE_OPTION_HEIGHT = 32;
 export declare const AUTOCOMPLETE_PANEL_HEIGHT = 256;
 export declare const AUTOCOMPLETE_BORDER_WIDTH: number;
 /** Injection token that determines the scroll handling while the autocomplete panel is open. */
-export declare const MC_AUTOCOMPLETE_SCROLL_STRATEGY: InjectionToken<() => IScrollStrategy>;
-export declare function MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => IScrollStrategy;
+export declare const MC_AUTOCOMPLETE_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
+export declare function MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy;
 export declare const MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER: {
-    provide: InjectionToken<() => IScrollStrategy>;
+    provide: InjectionToken<() => ScrollStrategy>;
     deps: (typeof Overlay)[];
     useFactory: typeof MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY;
 };

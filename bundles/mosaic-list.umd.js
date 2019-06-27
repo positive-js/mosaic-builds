@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/list', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.list = {}),global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.collections,global.ng.cdk.keycodes,global.ng.mosaic.core,global.rxjs,global.rxjs.operators,global.ng.common));
-}(this, (function (exports,core,forms,a11y,collections,keycodes,core$1,rxjs,operators,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/collections'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/list', ['exports', '@angular/cdk/collections', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.list = {}),global.ng.cdk.collections,global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.keycodes,global.ng.mosaic.core,global.rxjs,global.rxjs.operators,global.ng.common));
+}(this, (function (exports,collections,core,forms,a11y,keycodes,core$1,rxjs,operators,common) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.

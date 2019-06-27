@@ -5,17 +5,17 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, forwardRef, Inject, Input, Optional, Renderer2, Self, NgModule } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm, FormsModule } from '@angular/forms';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
 import { noop, Subject } from 'rxjs';
+import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 var _a;
 /**

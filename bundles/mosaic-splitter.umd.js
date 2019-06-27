@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/coercion'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/splitter', ['exports', '@angular/core', '@ptsecurity/cdk/coercion', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.splitter = {}),global.ng.core,global.ng.cdk.coercion,global.ng.common,global.ng.mosaic.icon));
-}(this, (function (exports,core,coercion,common,icon) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/coercion'), require('@angular/core'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/splitter', ['exports', '@angular/cdk/coercion', '@angular/core', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.splitter = {}),global.ng.cdk.coercion,global.ng.core,global.ng.common,global.ng.mosaic.icon));
+}(this, (function (exports,coercion,core,common,icon) { 'use strict';
 
 /**
  * @fileoverview added by tsickle

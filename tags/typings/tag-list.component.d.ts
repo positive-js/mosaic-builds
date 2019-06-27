@@ -1,8 +1,8 @@
+import { Directionality } from '@angular/cdk/bidi';
+import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Observable } from 'rxjs';

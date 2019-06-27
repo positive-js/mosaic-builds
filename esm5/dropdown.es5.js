@@ -4,20 +4,20 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { TemplatePortal, DomPortalOutlet } from '@angular/cdk/portal';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { Directive, TemplateRef, ComponentFactoryResolver, ApplicationRef, Injector, ViewContainerRef, Inject, InjectionToken, ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, Optional, Input, ViewChild, ContentChild, ContentChildren, EventEmitter, NgZone, Output, Self, NgModule } from '@angular/core';
-import { TemplatePortal, DomPortalOutlet } from '@ptsecurity/cdk/portal';
 import { Subject, merge, Subscription, asapScheduler, of } from 'rxjs';
 import { __extends } from 'tslib';
 import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled } from '@ptsecurity/mosaic/core';
 import { trigger, state, style, animate, transition, query, group } from '@angular/animations';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ESCAPE, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
 import { startWith, switchMap, take, delay, filter, takeUntil } from 'rxjs/operators';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { Overlay, OverlayConfig, OverlayModule } from '@ptsecurity/cdk/overlay';
-import { normalizePassiveListenerOptions } from '@ptsecurity/cdk/platform';
+import { Directionality } from '@angular/cdk/bidi';
+import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
+import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
@@ -452,6 +452,11 @@ var McDropdown = /** @class */ (function () {
         this._elementRef = _elementRef;
         this._ngZone = _ngZone;
         this._defaultOptions = _defaultOptions;
+        this._xPosition = this._defaultOptions.xPosition;
+        this._yPosition = this._defaultOptions.yPosition;
+        this._overlapTriggerX = this._defaultOptions.overlapTriggerX;
+        this._overlapTriggerY = this._defaultOptions.overlapTriggerY;
+        this._hasBackdrop = this._defaultOptions.hasBackdrop;
         /**
          * Config object to be passed into the dropdown's ngClass
          */
@@ -472,8 +477,6 @@ var McDropdown = /** @class */ (function () {
          * Event emitted when the dropdown is closed.
          */
         this.closed = new EventEmitter();
-        this._xPosition = this._defaultOptions.xPosition;
-        this._yPosition = this._defaultOptions.yPosition;
         /**
          * Dropdown items inside the current dropdown.
          */
@@ -486,9 +489,6 @@ var McDropdown = /** @class */ (function () {
          * Subscription to tab events on the dropdown panel
          */
         this._tabSubscription = Subscription.EMPTY;
-        this._overlapTriggerX = this._defaultOptions.overlapTriggerX;
-        this._overlapTriggerY = this._defaultOptions.overlapTriggerY;
-        this._hasBackdrop = this._defaultOptions.hasBackdrop;
     }
     Object.defineProperty(McDropdown.prototype, "xPosition", {
         /** Position of the dropdown in the X axis. */

@@ -1,5 +1,5 @@
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectorRef, ComponentFactoryResolver, ComponentRef, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, TemplateRef, Type, ViewContainerRef } from '@angular/core';
-import { Overlay, OverlayRef } from '@ptsecurity/cdk/overlay';
 import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 import { McModalControlService } from './modal-control.service';

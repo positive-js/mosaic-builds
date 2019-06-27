@@ -1,6 +1,6 @@
+import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 /** Change event object emitted by McRadio. */
 export declare class McRadioChange {
@@ -122,17 +122,6 @@ export declare const _McRadioButtonMixinBase: CanColorCtor & HasTabIndexCtor & t
 export declare class McRadioButton extends _McRadioButtonMixinBase implements OnInit, OnDestroy, CanColor, HasTabIndex {
     private readonly _changeDetector;
     private readonly _radioDispatcher;
-    private readonly _uniqueId;
-    /** The unique ID for the radio button. */
-    id: string;
-    /** Analog to HTML 'name' attribute used to group radios for unique selection. */
-    name: string;
-    /** Used to set the 'aria-label' attribute on the underlying input element. */
-    ariaLabel: string;
-    /** The 'aria-labelledby' attribute takes precedence as the element's text alternative. */
-    ariaLabelledby: string;
-    /** The 'aria-describedby' attribute is read after the element's label and field type. */
-    ariaDescribedby: string;
     /** Whether this radio button is checked. */
     checked: boolean;
     /** The value of this radio button. */
@@ -144,6 +133,27 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     /** Whether the label should appear after or before the radio button. Defaults to 'after' */
     labelPosition: 'before' | 'after';
     private _labelPosition;
+    private readonly _uniqueId;
+    /** The unique ID for the radio button. */
+    id: string;
+    /** ID of the native input element inside `<mc-radio-button>` */
+    readonly inputId: string;
+    /** Whether this radio is checked. */
+    private _checked;
+    /** Whether this radio is disabled. */
+    private _disabled;
+    /** Whether this radio is required. */
+    private _required;
+    /** Value assigned to this radio. */
+    private _value;
+    /** Analog to HTML 'name' attribute used to group radios for unique selection. */
+    name: string;
+    /** Used to set the 'aria-label' attribute on the underlying input element. */
+    ariaLabel: string;
+    /** The 'aria-labelledby' attribute takes precedence as the element's text alternative. */
+    ariaLabelledby: string;
+    /** The 'aria-describedby' attribute is read after the element's label and field type. */
+    ariaDescribedby: string;
     /** The native `<input type=radio>` element */
     _inputElement: ElementRef;
     /**
@@ -155,18 +165,6 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     /** The parent radio group. May or may not be present. */
     radioGroup: McRadioGroup;
     isFocused: boolean;
-    /** ID of the native input element inside `<mc-radio-button>` */
-    readonly inputId: string;
-    /** Whether this radio is checked. */
-    private _checked;
-    /** Whether this radio is disabled. */
-    private _disabled;
-    /** Whether this radio is required. */
-    private _required;
-    /** Value assigned to this radio. */
-    private _value;
-    /** Unregister function for _radioDispatcher */
-    private readonly removeUniqueSelectionListener;
     constructor(radioGroup: McRadioGroup, elementRef: ElementRef, _changeDetector: ChangeDetectorRef, _radioDispatcher: UniqueSelectionDispatcher);
     ngOnInit(): void;
     ngOnDestroy(): void;
@@ -180,6 +178,8 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     markForCheck(): void;
     onInputClick(event: Event): void;
     onInputChange(event: Event): void;
+    /** Unregister function for _radioDispatcher */
+    private readonly removeUniqueSelectionListener;
     /** Dispatch change event with current value. */
     private emitChangeEvent;
 }

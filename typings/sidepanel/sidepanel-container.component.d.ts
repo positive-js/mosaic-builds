@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
+import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ComponentRef, ElementRef, EmbeddedViewRef, EventEmitter, InjectionToken, OnDestroy } from '@angular/core';
-import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, TemplatePortal } from '@ptsecurity/cdk/portal';
 import { McSidepanelAnimationState } from './sidepanel-animations';
 import { McSidepanelConfig } from './sidepanel-config';
 export declare const MC_SIDEPANEL_WITH_INDENT: InjectionToken<boolean>;

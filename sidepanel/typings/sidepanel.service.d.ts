@@ -1,6 +1,6 @@
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentType } from '@angular/cdk/portal';
 import { InjectionToken, Injector, OnDestroy, TemplateRef } from '@angular/core';
-import { Overlay } from '@ptsecurity/cdk/overlay';
-import { IComponentType } from '@ptsecurity/cdk/portal';
 import { McSidepanelConfig } from './sidepanel-config';
 import { McSidepanelRef } from './sidepanel-ref';
 /** Injection token that can be used to specify default sidepanel options. */
@@ -15,7 +15,7 @@ export declare class McSidepanelService implements OnDestroy {
     readonly openedSidepanels: McSidepanelRef[];
     constructor(overlay: Overlay, injector: Injector, defaultOptions: McSidepanelConfig, parentSidepanelService: McSidepanelService);
     ngOnDestroy(): void;
-    open<T, D = any>(componentOrTemplateRef: IComponentType<T> | TemplateRef<T>, config?: McSidepanelConfig<D>): McSidepanelRef<T>;
+    open<T, D = any>(componentOrTemplateRef: ComponentType<T> | TemplateRef<T>, config?: McSidepanelConfig<D>): McSidepanelRef<T>;
     /**
      * Closes all of the currently-open sidepanels.
      */

@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@ptsecurity/cdk/overlay')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@ptsecurity/cdk/overlay'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}),global.ng.core,global.ng.cdk.bidi,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.overlay));
-}(this, (function (exports,core,bidi,coercion,rxjs,common,keycodes,animations,overlay) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}),global.ng.cdk.bidi,global.ng.core,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.overlay));
+}(this, (function (exports,bidi,core,coercion,rxjs,common,keycodes,animations,overlay) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.

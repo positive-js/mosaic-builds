@@ -4,8 +4,8 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { coerceBooleanProperty, coerceCssPixelValue, coerceNumberProperty } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, Input, NgZone, Renderer2, ViewEncapsulation, NgModule } from '@angular/core';
-import { coerceBooleanProperty, coerceCssPixelValue, coerceNumberProperty } from '@ptsecurity/cdk/coercion';
 import { CommonModule } from '@angular/common';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 

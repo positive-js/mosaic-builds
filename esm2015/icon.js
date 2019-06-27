@@ -6,9 +6,9 @@
  */
 import { Attribute, ChangeDetectionStrategy, Component, Directive, ElementRef, ViewEncapsulation, NgModule } from '@angular/core';
 import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle

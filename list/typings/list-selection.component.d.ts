@@ -1,7 +1,7 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ElementRef, EventEmitter, QueryList, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { McLine, CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 /**
  * Component for list-options of selection-list. Each list-option can automatically

@@ -1,5 +1,5 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { AfterContentInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { McCalendarBody, McCalendarCell } from './calendar-body';
 export declare const yearsPerPage = 24;

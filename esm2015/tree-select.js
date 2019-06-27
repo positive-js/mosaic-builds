@@ -4,13 +4,13 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { Directionality } from '@angular/cdk/bidi';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectionModel } from '@angular/cdk/collections';
+import { CdkConnectedOverlay, ViewportRuler, OverlayModule } from '@angular/cdk/overlay';
 import { Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, Directive, ElementRef, EventEmitter, Inject, Input, isDevMode, NgZone, Optional, Output, Renderer2, Self, ViewChild, ViewChildren, ViewEncapsulation, NgModule } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, A, PAGE_UP, PAGE_DOWN } from '@ptsecurity/cdk/keycodes';
-import { CdkConnectedOverlay, ViewportRuler, OverlayModule } from '@ptsecurity/cdk/overlay';
 import { CdkTree, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { getOptionScrollPosition, ErrorStateMatcher, mixinTabIndex, mixinDisabled, mixinErrorState, mcSelectAnimations, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';

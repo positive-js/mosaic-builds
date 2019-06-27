@@ -1,5 +1,5 @@
+import { OverlayRef } from '@angular/cdk/overlay';
 import { EventEmitter, TemplateRef, Type } from '@angular/core';
-import { OverlayRef } from '@ptsecurity/cdk/overlay';
 export declare type OnClickCallback<T> = ((instance: T) => (false | void | {}) | Promise<false | void | {}>);
 export declare type ModalType = 'default' | 'confirm';
 export declare type ConfirmType = 'confirm' | 'success' | 'warn';

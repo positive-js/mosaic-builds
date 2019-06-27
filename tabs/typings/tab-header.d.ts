@@ -1,6 +1,6 @@
+import { Direction, Directionality } from '@angular/cdk/bidi';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { AfterContentChecked, AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, NgZone, OnDestroy, QueryList } from '@angular/core';
-import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
-import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
 import { McTabLabelWrapper } from './tab-label-wrapper';
 /**
  * The directions that scrolling can go in when the header's tabs exceed the header width. 'After'

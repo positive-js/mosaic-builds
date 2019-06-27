@@ -1,4 +1,4 @@
-import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 /**
  * Data source for nested tree.
@@ -9,6 +9,6 @@ import { Observable } from 'rxjs';
 export declare class McTreeNestedDataSource<T> extends DataSource<T> {
     data: T[];
     private _data;
-    connect(collectionViewer: ICollectionViewer): Observable<T[]>;
+    connect(collectionViewer: CollectionViewer): Observable<T[]>;
     disconnect(): void;
 }

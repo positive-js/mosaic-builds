@@ -1,8 +1,8 @@
 import { AnimationEvent } from '@angular/animations';
+import { Directionality } from '@angular/cdk/bidi';
+import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, ScrollStrategy, OverlayConnectionPosition, OriginConnectionPosition, HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, IScrollStrategy, IOverlayConnectionPosition, IOriginConnectionPosition, HorizontalConnectionPos, VerticalConnectionPos } from '@ptsecurity/cdk/overlay';
-import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import { Observable } from 'rxjs';
 export declare type PopoverVisibility = 'initial' | 'visible' | 'hidden';
 export declare class McPopoverComponent {
@@ -45,12 +45,12 @@ export declare class McPopoverComponent {
     animationDone(event: AnimationEvent): void;
     ngOnDestroy(): void;
 }
-export declare const MC_POPOVER_SCROLL_STRATEGY: InjectionToken<() => IScrollStrategy>;
+export declare const MC_POPOVER_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
-export declare function mcPopoverScrollStrategyFactory(overlay: Overlay): () => IScrollStrategy;
+export declare function mcPopoverScrollStrategyFactory(overlay: Overlay): () => ScrollStrategy;
 /** @docs-private */
 export declare const MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER: {
-    provide: InjectionToken<() => IScrollStrategy>;
+    provide: InjectionToken<() => ScrollStrategy>;
     deps: (typeof Overlay)[];
     useFactory: typeof mcPopoverScrollStrategyFactory;
 };
@@ -118,15 +118,15 @@ export declare class McPopover implements OnInit, OnDestroy {
      * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
      */
     getOrigin(): {
-        main: IOriginConnectionPosition;
-        fallback: IOriginConnectionPosition;
+        main: OriginConnectionPosition;
+        fallback: OriginConnectionPosition;
     };
     getOriginXaxis(): HorizontalConnectionPos;
     getOriginYaxis(): VerticalConnectionPos;
     /** Returns the overlay position and a fallback position based on the user's preference */
     getOverlayPosition(): {
-        main: IOverlayConnectionPosition;
-        fallback: IOverlayConnectionPosition;
+        main: OverlayConnectionPosition;
+        fallback: OverlayConnectionPosition;
     };
     /** Inverts an overlay position. */
     private invertPosition;

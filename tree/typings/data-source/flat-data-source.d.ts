@@ -1,4 +1,4 @@
-import { ICollectionViewer, DataSource } from '@ptsecurity/cdk/collections';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { FlatTreeControl, ITreeControl } from '@ptsecurity/cdk/tree';
 import { BehaviorSubject, Observable } from 'rxjs';
 /**
@@ -69,6 +69,6 @@ export declare class McTreeFlatDataSource<T, F> extends DataSource<F> {
     data: T[];
     private _data;
     constructor(treeControl: FlatTreeControl<F>, treeFlattener: McTreeFlattener<T, F>, initialData?: T[]);
-    connect(collectionViewer: ICollectionViewer): Observable<F[]>;
+    connect(collectionViewer: CollectionViewer): Observable<F[]>;
     disconnect(): void;
 }

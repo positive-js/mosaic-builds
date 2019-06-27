@@ -6,16 +6,16 @@
  */
 import { Directive, TemplateRef, ChangeDetectionStrategy, Component, ContentChild, Input, ViewChild, ViewContainerRef, ViewEncapsulation, ChangeDetectorRef, Inject, Output, EventEmitter, ElementRef, Optional, ComponentFactoryResolver, forwardRef, ContentChildren, NgZone, InjectionToken, Attribute, NgModule } from '@angular/core';
 import { __extends } from 'tslib';
-import { CdkPortal, TemplatePortal, CdkPortalOutlet, PortalHostDirective, PortalModule } from '@ptsecurity/cdk/portal';
+import { CdkPortal, TemplatePortal, CdkPortalOutlet, PortalHostDirective, PortalModule } from '@angular/cdk/portal';
 import { mixinDisabled, mixinColor, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
 import { Subject, Subscription, merge, of } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Directionality } from '@ptsecurity/cdk/bidi';
+import { Directionality } from '@angular/cdk/bidi';
 import { startWith, takeUntil } from 'rxjs/operators';
+import { coerceNumberProperty, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { FocusKeyManager, FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { coerceNumberProperty, coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
-import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 
 /**

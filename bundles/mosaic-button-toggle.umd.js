@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/core')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/button-toggle', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/collections', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/core'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.buttonToggle = {}),global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.mosaic.button,global.ng.mosaic.core));
-}(this, (function (exports,core,forms,a11y,coercion,collections,button,core$1) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/core')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/button-toggle', ['exports', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/core'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.buttonToggle = {}),global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.core,global.ng.forms,global.ng.cdk.a11y,global.ng.mosaic.button,global.ng.mosaic.core));
+}(this, (function (exports,coercion,collections,core,forms,a11y,button,core$1) { 'use strict';
 
 /**
  * @fileoverview added by tsickle

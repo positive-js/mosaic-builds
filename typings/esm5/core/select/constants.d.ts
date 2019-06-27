@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { IScrollStrategy, Overlay, RepositionScrollStrategy } from '@ptsecurity/cdk/overlay';
+import { ScrollStrategy, Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 /** The max height of the select's overlay panel */
 export declare const SELECT_PANEL_MAX_HEIGHT = 224;
 /** The panel's padding on the x-axis */
@@ -12,12 +12,12 @@ export declare const SELECT_PANEL_INDENT_PADDING_X: number;
  */
 export declare const SELECT_PANEL_VIEWPORT_PADDING = 8;
 /** Injection token that determines the scroll handling while a select is open. */
-export declare const MC_SELECT_SCROLL_STRATEGY: InjectionToken<() => IScrollStrategy>;
+export declare const MC_SELECT_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
 export declare function mcSelectScrollStrategyProviderFactory(overlay: Overlay): () => RepositionScrollStrategy;
 /** @docs-private */
 export declare const MC_SELECT_SCROLL_STRATEGY_PROVIDER: {
-    provide: InjectionToken<() => IScrollStrategy>;
+    provide: InjectionToken<() => ScrollStrategy>;
     deps: (typeof Overlay)[];
     useFactory: typeof mcSelectScrollStrategyProviderFactory;
 };

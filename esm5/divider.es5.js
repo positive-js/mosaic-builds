@@ -4,8 +4,8 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, NgModule } from '@angular/core';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { CommonModule } from '@angular/common';
 
 /**

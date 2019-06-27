@@ -5,8 +5,8 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/animations'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/cdk/portal'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@ptsecurity/cdk/overlay'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/sidepanel', ['exports', '@angular/core', '@angular/animations', '@ptsecurity/mosaic/core', '@ptsecurity/cdk/portal', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@ptsecurity/cdk/overlay', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/animations'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/portal'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/cdk/overlay'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/sidepanel', ['exports', '@angular/core', '@angular/animations', '@ptsecurity/mosaic/core', '@angular/cdk/portal', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/cdk/overlay', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
 	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.sidepanel = {}),global.ng.core,global.ng.animations,global.ng.mosaic.core,global.ng.cdk.portal,global.ng.cdk.keycodes,global.rxjs,global.rxjs.operators,global.ng.cdk.overlay,global.ng.common,global.ng.mosaic.icon));
 }(this, (function (exports,core,animations,core$1,portal,keycodes,rxjs,operators,overlay,common,icon) { 'use strict';
 

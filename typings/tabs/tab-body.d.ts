@@ -1,7 +1,7 @@
 import { AnimationEvent } from '@angular/animations';
+import { Directionality, Direction } from '@angular/cdk/bidi';
+import { TemplatePortal, CdkPortalOutlet, PortalHostDirective } from '@angular/cdk/portal';
 import { ChangeDetectorRef, EventEmitter, OnDestroy, OnInit, ElementRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
-import { Directionality, Direction } from '@ptsecurity/cdk/bidi';
-import { TemplatePortal, CdkPortalOutlet, PortalHostDirective } from '@ptsecurity/cdk/portal';
 /**
  * These position states are used internally as animation states for the tab body. Setting the
  * position state to left, right, or center will transition the tab body from its current

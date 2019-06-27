@@ -1,5 +1,5 @@
+import { TemplatePortal } from '@angular/cdk/portal';
 import { OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
-import { TemplatePortal } from '@ptsecurity/cdk/portal';
 import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { McTabLabel } from './tab-label';

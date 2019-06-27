@@ -8,11 +8,11 @@ import { InjectionToken, ChangeDetectionStrategy, ChangeDetectorRef, Component, 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AnimationCurves, McCommonModule } from '@ptsecurity/mosaic/core';
 import { __extends, __assign } from 'tslib';
-import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, PortalInjector, TemplatePortal, PortalModule } from '@ptsecurity/cdk/portal';
+import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, PortalInjector, TemplatePortal, PortalModule } from '@angular/cdk/portal';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { merge, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
-import { Overlay, OverlayConfig, OverlayModule } from '@ptsecurity/cdk/overlay';
+import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 

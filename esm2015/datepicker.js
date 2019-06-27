@@ -7,14 +7,14 @@
 import { Injectable, NgModule, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, Inject, Input, Optional, Output, ViewChild, ViewEncapsulation, ElementRef, NgZone, InjectionToken, ViewContainerRef, Directive, Attribute, ContentChild, ɵɵdefineInjectable } from '@angular/core';
 import { Subject, merge, Subscription, of } from 'rxjs';
 import { take, filter } from 'rxjs/operators';
-import { Directionality } from '@ptsecurity/cdk/bidi';
+import { Directionality } from '@angular/cdk/bidi';
 import { DateAdapter, MC_DATE_FORMATS } from '@ptsecurity/cdk/datetime';
 import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, UP_ARROW, SPACE, ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { ComponentPortal, PortalModule } from '@ptsecurity/cdk/portal';
+import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import { DOCUMENT, CommonModule } from '@angular/common';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { Overlay, OverlayConfig, OverlayModule } from '@ptsecurity/cdk/overlay';
 import { mixinColor } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl, McFormField } from '@ptsecurity/mosaic/form-field';
 import { NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';

@@ -4,11 +4,11 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectionModel } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, Optional, Output, ViewEncapsulation, ViewChild, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { McButton, McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
 

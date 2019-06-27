@@ -7,8 +7,8 @@
 import { Output, ChangeDetectionStrategy, Component, ElementRef, Input, EventEmitter, ViewEncapsulation, HostBinding, NgModule } from '@angular/core';
 import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { SPACE } from '@ptsecurity/cdk/keycodes';
+import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle

@@ -1,17 +1,17 @@
+import { Direction, Directionality } from '@angular/cdk/bidi';
+import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, OnDestroy, ViewContainerRef } from '@angular/core';
 import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
-import { Direction, Directionality } from '@ptsecurity/cdk/bidi';
-import { Overlay, IScrollStrategy } from '@ptsecurity/cdk/overlay';
 import { McDropdownItem } from './dropdown-item';
 import { McDropdownPanel } from './dropdown-panel';
 import { McDropdown } from './dropdown.component';
 /** Injection token that determines the scroll handling while the dropdown is open. */
-export declare const MC_DROPDOWN_SCROLL_STRATEGY: InjectionToken<() => IScrollStrategy>;
+export declare const MC_DROPDOWN_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
-export declare function MC_DROPDOWN_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => IScrollStrategy;
+export declare function MC_DROPDOWN_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy;
 /** @docs-private */
 export declare const MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER: {
-    provide: InjectionToken<() => IScrollStrategy>;
+    provide: InjectionToken<() => ScrollStrategy>;
     deps: (typeof Overlay)[];
     useFactory: typeof MC_DROPDOWN_SCROLL_STRATEGY_FACTORY;
 };

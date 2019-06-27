@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.ng.mosaic.core,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.collections,global.ng.cdk.keycodes,global.rxjs,global.rxjs.operators,global.ng.common));
-}(this, (function (exports,core,tree,core$1,forms,a11y,collections,keycodes,rxjs,operators,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/core', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.ng.mosaic.core,global.ng.cdk.collections,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.keycodes,global.rxjs,global.rxjs.operators,global.ng.common));
+}(this, (function (exports,core,tree,core$1,collections,forms,a11y,keycodes,rxjs,operators,common) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.

@@ -9,8 +9,8 @@ import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 import { animate, style, transition, trigger, state } from '@angular/animations';
+import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**

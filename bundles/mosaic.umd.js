@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/platform'), require('rxjs/operators'), require('@angular/forms'), require('@ptsecurity/cdk/portal'), require('@ptsecurity/cdk/scrolling'), require('@ptsecurity/cdk/collections'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/cdk/tree')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/platform', 'rxjs/operators', '@angular/forms', '@ptsecurity/cdk/portal', '@ptsecurity/cdk/scrolling', '@ptsecurity/cdk/collections', '@ptsecurity/cdk/datetime', '@ptsecurity/cdk/tree'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.core,global.ng.cdk.bidi,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.overlay,global.ng.cdk.a11y,global.ng.cdk.platform,global.rxjs.operators,global.ng.forms,global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.collections,global.ng.cdk.datetime,global.ng.cdk.tree));
-}(this, (function (exports,core,bidi,coercion,rxjs,common,keycodes,animations,overlay,a11y,platform,operators,forms,portal,scrolling,collections,datetime,tree) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay'), require('@angular/cdk/platform'), require('@ptsecurity/cdk/a11y'), require('rxjs/operators'), require('@angular/forms'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/datetime'), require('@angular/cdk/a11y'), require('@ptsecurity/cdk/tree')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay', '@angular/cdk/platform', '@ptsecurity/cdk/a11y', 'rxjs/operators', '@angular/forms', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/collections', '@ptsecurity/cdk/datetime', '@angular/cdk/a11y', '@ptsecurity/cdk/tree'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.cdk.bidi,global.ng.core,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.overlay,global.ng.cdk.platform,global.ng.cdk.a11y,global.rxjs.operators,global.ng.forms,global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.collections,global.ng.cdk.datetime,global.ng.cdk.a11y,global.ng.cdk.tree));
+}(this, (function (exports,bidi,core,coercion,rxjs,common,keycodes,animations,overlay,platform,a11y,operators,forms,portal,scrolling,collections,datetime,a11y$1,tree) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -10210,6 +10210,11 @@ var McDropdown = /** @class */ (function () {
         this._elementRef = _elementRef;
         this._ngZone = _ngZone;
         this._defaultOptions = _defaultOptions;
+        this._xPosition = this._defaultOptions.xPosition;
+        this._yPosition = this._defaultOptions.yPosition;
+        this._overlapTriggerX = this._defaultOptions.overlapTriggerX;
+        this._overlapTriggerY = this._defaultOptions.overlapTriggerY;
+        this._hasBackdrop = this._defaultOptions.hasBackdrop;
         /**
          * Config object to be passed into the dropdown's ngClass
          */
@@ -10230,8 +10235,6 @@ var McDropdown = /** @class */ (function () {
          * Event emitted when the dropdown is closed.
          */
         this.closed = new core.EventEmitter();
-        this._xPosition = this._defaultOptions.xPosition;
-        this._yPosition = this._defaultOptions.yPosition;
         /**
          * Dropdown items inside the current dropdown.
          */
@@ -10244,9 +10247,6 @@ var McDropdown = /** @class */ (function () {
          * Subscription to tab events on the dropdown panel
          */
         this._tabSubscription = rxjs.Subscription.EMPTY;
-        this._overlapTriggerX = this._defaultOptions.overlapTriggerX;
-        this._overlapTriggerY = this._defaultOptions.overlapTriggerY;
-        this._hasBackdrop = this._defaultOptions.hasBackdrop;
     }
     Object.defineProperty(McDropdown.prototype, "xPosition", {
         /** Position of the dropdown in the X axis. */
@@ -13647,7 +13647,7 @@ var McModalComponent = /** @class */ (function (_super) {
     McModalComponent.decorators = [
         { type: core.Component, args: [{
                     selector: 'mc-modal',
-                    template: "<ng-template #tplOriginContent><ng-content></ng-content></ng-template><div><div *ngIf=\"mcMask\" class=\"mc-modal-mask\" [ngClass]=\"maskAnimationClassMap\" [class.mc-modal-mask-hidden]=\"hidden\" [ngStyle]=\"mcMaskStyle\" [style.zIndex]=\"mcZIndex\"></div><div (click)=\"onClickMask($event)\" class=\"mc-modal-wrap {{ mcWrapClassName }}\" [style.zIndex]=\"mcZIndex\" [style.display]=\"hidden ? 'none' : ''\" tabindex=\"-1\" role=\"dialog\"><div #modalContainer class=\"mc-modal {{ mcClassName }}\" [ngClass]=\"modalAnimationClassMap\" [ngStyle]=\"mcStyle\" [style.width]=\"mcWidth | toCssUnit\" [style.transform-origin]=\"transformOrigin\" role=\"document\"><div class=\"mc-modal-content\"><button *ngIf=\"mcClosable\" (click)=\"onClickCloseBtn()\" class=\"mc-modal-close\" aria-label=\"Close\"><span class=\"mc-modal-close-x\"><i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" color=\"second\"></i></span></button><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isModalType('default')\" [ngTemplateOutlet]=\"tplContentDefault\"></ng-container><ng-container *ngSwitchCase=\"isModalType('confirm')\" [ngTemplateOutlet]=\"tplContentConfirm\"></ng-container></ng-container></div></div></div></div><ng-template #tplContentDefault><div *ngIf=\"mcTitle\" class=\"mc-modal-header\"><div class=\"mc-modal-title\"><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcTitle)\" [ngTemplateOutlet]=\"mcTitle\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcTitle)\"><div [innerHTML]=\"mcTitle\"></div></ng-container></ng-container></div></div><div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\"><ng-container #bodyContainer><ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\"><div [innerHTML]=\"mcContent\"></div></ng-container><ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container></ng-container></ng-container></div><div *ngIf=\"mcFooter !== null\" class=\"mc-modal-footer\"><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcFooter)\" [ngTemplateOutlet]=\"mcFooter\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcFooter)\"><div [innerHTML]=\"mcFooter\"></div></ng-container><ng-container *ngSwitchCase=\"isModalButtons(mcFooter)\"><button *ngFor=\"let button of mcFooter\" mc-button [hidden]=\"!getButtonCallableProp(button, 'show')\" [disabled]=\"getButtonCallableProp(button, 'disabled')\" [color]=\"button.type\">{{ button.label }}</button></ng-container><ng-container *ngSwitchDefault><button *ngIf=\"mcOkText!==null\" mc-button color=\"primary\" (click)=\"onClickOkCancel('ok')\">{{ okText }}</button> <button *ngIf=\"mcCancelText!==null\" mc-button (click)=\"onClickOkCancel('cancel')\">{{ cancelText }}</button></ng-container></ng-container></div></ng-template><ng-template #tplContentConfirm><div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\"><div class=\"mc-confirm-body-wrapper\"><div class=\"mc-confirm-body\"><div class=\"mc-confirm-content\"><ng-container #bodyContainer><ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\"><div [innerHTML]=\"mcContent\"></div></ng-container><ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container></ng-container></ng-container></div></div></div></div><div class=\"mc-confirm-btns\"><button mc-button [color]=\"mcOkType\" #autoFocusButtonOk *ngIf=\"mcOkText !== ''\" (click)=\"onClickOkCancel('ok')\">{{ okText }}</button> <button mc-button color=\"second\" *ngIf=\"mcCancelText!==''\" (click)=\"onClickOkCancel('cancel')\">{{ cancelText }}</button></div></ng-template>",
+                    template: "<ng-template #tplOriginContent><ng-content></ng-content></ng-template><div><div *ngIf=\"mcMask\" class=\"mc-modal-mask\" [ngClass]=\"maskAnimationClassMap\" [class.mc-modal-mask-hidden]=\"hidden\" [ngStyle]=\"mcMaskStyle\" [style.zIndex]=\"mcZIndex\"></div><div (click)=\"onClickMask($event)\" class=\"mc-modal-wrap {{ mcWrapClassName }}\" [style.zIndex]=\"mcZIndex\" [style.display]=\"hidden ? 'none' : ''\" tabindex=\"-1\" role=\"dialog\"><div #modalContainer class=\"mc-modal {{ mcClassName }}\" [ngClass]=\"modalAnimationClassMap\" [ngStyle]=\"mcStyle\" [style.width]=\"mcWidth | toCssUnit\" [style.transform-origin]=\"transformOrigin\" role=\"document\"><div class=\"mc-modal-content\" cdkTrapFocus><button *ngIf=\"mcClosable\" (click)=\"onClickCloseBtn()\" class=\"mc-modal-close\" aria-label=\"Close\"><span class=\"mc-modal-close-x\"><i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" color=\"second\"></i></span></button><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isModalType('default')\" [ngTemplateOutlet]=\"tplContentDefault\"></ng-container><ng-container *ngSwitchCase=\"isModalType('confirm')\" [ngTemplateOutlet]=\"tplContentConfirm\"></ng-container></ng-container></div></div></div></div><ng-template #tplContentDefault><div *ngIf=\"mcTitle\" class=\"mc-modal-header\"><div class=\"mc-modal-title\"><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcTitle)\" [ngTemplateOutlet]=\"mcTitle\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcTitle)\"><div [innerHTML]=\"mcTitle\"></div></ng-container></ng-container></div></div><div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\"><ng-container #bodyContainer><ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\"><div [innerHTML]=\"mcContent\"></div></ng-container><ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container></ng-container></ng-container></div><div *ngIf=\"mcFooter !== null\" class=\"mc-modal-footer\"><ng-container [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcFooter)\" [ngTemplateOutlet]=\"mcFooter\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcFooter)\"><div [innerHTML]=\"mcFooter\"></div></ng-container><ng-container *ngSwitchCase=\"isModalButtons(mcFooter)\"><button *ngFor=\"let button of mcFooter\" mc-button [hidden]=\"!getButtonCallableProp(button, 'show')\" [disabled]=\"getButtonCallableProp(button, 'disabled')\" [color]=\"button.type\">{{ button.label }}</button></ng-container><ng-container *ngSwitchDefault><button *ngIf=\"mcOkText!==null\" mc-button color=\"primary\" (click)=\"onClickOkCancel('ok')\">{{ okText }}</button> <button *ngIf=\"mcCancelText!==null\" mc-button (click)=\"onClickOkCancel('cancel')\" autofocus>{{ cancelText }}</button></ng-container></ng-container></div></ng-template><ng-template #tplContentConfirm><div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\"><div class=\"mc-confirm-body-wrapper\"><div class=\"mc-confirm-body\"><div class=\"mc-confirm-content\"><ng-container #bodyContainer><ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\"><ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container><ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\"><div [innerHTML]=\"mcContent\"></div></ng-container><ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container></ng-container></ng-container></div></div></div></div><div class=\"mc-confirm-btns\"><button mc-button [color]=\"mcOkType\" #autoFocusButtonOk *ngIf=\"mcOkText !== ''\" (click)=\"onClickOkCancel('ok')\">{{ okText }}</button> <button mc-button color=\"second\" *ngIf=\"mcCancelText!==''\" (click)=\"onClickOkCancel('cancel')\" autofocus>{{ cancelText }}</button></div></ng-template>",
                     styles: ["@keyframes mcFadeIn{0%{opacity:0}100%{opacity:1}}@keyframes mcFadeOut{0%{opacity:1}100%{opacity:0}}@keyframes mcZoomIn{0%{opacity:0;transform:translate(0,-25%)}100%{opacity:1;transform:scale(1)}}@keyframes mcZoomOut{0%{transform:scale(1)}100%{opacity:0;transform:translate(0,-30%)}}.fade-appear,.fade-enter{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.fade-leave{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.fade-appear.fade-appear-active,.fade-enter.fade-enter-active{animation-name:mcFadeIn;animation-play-state:running}.fade-leave.fade-leave-active{animation-name:mcFadeOut;animation-play-state:running;pointer-events:none}.className-appear,.className-enter{opacity:0;animation-timing-function:ease-out}.className-leave{animation-timing-function:ease-out}.zoom-appear,.zoom-enter{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.zoom-leave{animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.zoom-appear.zoom-appear-active,.zoom-enter.zoom-enter-active{animation-name:mcZoomIn;animation-play-state:running}.zoom-leave.zoom-leave-active{animation-name:mcZoomOut;animation-play-state:running;pointer-events:none}.className-appear,.className-enter{transform:translate(0,-25%);animation-timing-function:cubic-bezier(.075,.82,.165,1)}.className-leave{transform:translate(0,0);animation-timing-function:cubic-bezier(.785,.135,.15,.86)}.mc-confirm .mc-modal-header{display:none}.mc-confirm .mc-modal-close{display:none}.mc-confirm .mc-modal-body{padding:24px}.mc-confirm-body-wrapper{zoom:1}.mc-confirm-body-wrapper:after,.mc-confirm-body-wrapper:before{content:\"\";display:table}.mc-confirm-body-wrapper:after{clear:both}.mc-confirm-body .mc-confirm-title{display:block;overflow:auto}.mc-confirm .mc-confirm-btns{border-radius:0 0 4px 4px;text-align:right}.mc-confirm .mc-confirm-btns button+button{margin:16px 16px 16px}.mc-modal{box-sizing:border-box;position:relative;top:48px;width:auto;margin:0 auto;padding:0 0 24px 0;list-style:none}.mc-modal.zoom-appear,.mc-modal.zoom-enter{animation-duration:.3s;transform:none;opacity:0}.mc-modal-wrap{position:fixed;z-index:1000;top:0;right:0;bottom:0;left:0;overflow:auto;-webkit-overflow-scrolling:touch;outline:0}.mc-modal-title{margin:0}.mc-modal-content{position:relative;border-radius:4px;background-clip:padding-box;background-color:#fff}.mc-modal-close{position:absolute;z-index:10;top:0;right:0;padding:0;border:0;outline:0;cursor:pointer;background:0 0}.mc-modal-close .mc-modal-close-x{display:block;vertical-align:baseline;text-align:center;width:56px;height:56px;line-height:56px}.mc-modal-header{padding:14px 16px;border-radius:4px 4px 0 0}.mc-modal-body{padding:16px 24px 24px 24px;max-height:calc(100vh - 260px);word-wrap:break-word;overflow-y:auto}.mc-modal-footer{padding:16px 16px;border-radius:0 0 4px 4px;text-align:right}.mc-modal-footer button+button{margin-left:16px;margin-bottom:0}.mc-modal-mask{position:fixed;z-index:1000;top:0;right:0;left:0;bottom:0;height:100%;background-color:rgba(0,0,0,.5)}.mc-modal-mask.mc-modal-mask-hidden{display:none}.mc-modal-open{overflow:hidden}"],
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
@@ -14008,7 +14008,7 @@ var McModalModule = /** @class */ (function () {
     }
     McModalModule.decorators = [
         { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, overlay.OverlayModule, McButtonModule, McIconModule],
+                    imports: [common.CommonModule, overlay.OverlayModule, a11y$1.A11yModule, McButtonModule, McIconModule],
                     exports: [McModalComponent],
                     declarations: [McModalComponent, CssUnitPipe],
                     entryComponents: [McModalComponent],
@@ -16462,19 +16462,12 @@ var McRadioButton = /** @class */ (function (_super) {
         var _this = _super.call(this, elementRef) || this;
         _this._changeDetector = _changeDetector;
         _this._radioDispatcher = _radioDispatcher;
-        _this._uniqueId = "mc-radio-" + ++nextUniqueId$4;
         /* tslint:disable:member-ordering */
+        _this._uniqueId = "mc-radio-" + ++nextUniqueId$4;
         /**
          * The unique ID for the radio button.
          */
         _this.id = _this._uniqueId;
-        /**
-         * Event emitted when the checked state of this radio button changes.
-         * Change events are only emitted when the value changes due to user interaction with
-         * the radio button (the same behavior as `<input type-"radio">`).
-         */
-        _this.change = new core.EventEmitter();
-        _this.isFocused = false;
         /**
          * Whether this radio is checked.
          */
@@ -16483,6 +16476,13 @@ var McRadioButton = /** @class */ (function (_super) {
          * Value assigned to this radio.
          */
         _this._value = null;
+        /**
+         * Event emitted when the checked state of this radio button changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * the radio button (the same behavior as `<input type-"radio">`).
+         */
+        _this.change = new core.EventEmitter();
+        _this.isFocused = false;
         /**
          * Unregister function for _radioDispatcher
          */
@@ -16780,16 +16780,16 @@ var McRadioButton = /** @class */ (function (_super) {
         { type: collections.UniqueSelectionDispatcher }
     ]; };
     McRadioButton.propDecorators = {
-        id: [{ type: core.Input }],
-        name: [{ type: core.Input }],
-        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
-        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
-        ariaDescribedby: [{ type: core.Input, args: ['aria-describedby',] }],
         checked: [{ type: core.Input }],
         value: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
         required: [{ type: core.Input }],
         labelPosition: [{ type: core.Input }],
+        id: [{ type: core.Input }],
+        name: [{ type: core.Input }],
+        ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
+        ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }],
+        ariaDescribedby: [{ type: core.Input, args: ['aria-describedby',] }],
         _inputElement: [{ type: core.ViewChild, args: ['input', { static: false },] }],
         change: [{ type: core.Output }],
         isFocused: [{ type: core.Input }]
@@ -31687,8 +31687,8 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵb26 = CssUnitPipe;
-exports.ɵa26 = McModalControlService;
+exports.ɵb28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;

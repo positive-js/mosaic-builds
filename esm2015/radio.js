@@ -4,9 +4,9 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, Optional, Output, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { UniqueSelectionDispatcher } from '@ptsecurity/cdk/collections';
 import { mixinColor, mixinDisabled, mixinTabIndex, toBoolean, McCommonModule } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
@@ -379,19 +379,12 @@ class McRadioButton extends _McRadioButtonMixinBase {
         super(elementRef);
         this._changeDetector = _changeDetector;
         this._radioDispatcher = _radioDispatcher;
-        this._uniqueId = `mc-radio-${++nextUniqueId}`;
         /* tslint:disable:member-ordering */
+        this._uniqueId = `mc-radio-${++nextUniqueId}`;
         /**
          * The unique ID for the radio button.
          */
         this.id = this._uniqueId;
-        /**
-         * Event emitted when the checked state of this radio button changes.
-         * Change events are only emitted when the value changes due to user interaction with
-         * the radio button (the same behavior as `<input type-"radio">`).
-         */
-        this.change = new EventEmitter();
-        this.isFocused = false;
         /**
          * Whether this radio is checked.
          */
@@ -400,6 +393,13 @@ class McRadioButton extends _McRadioButtonMixinBase {
          * Value assigned to this radio.
          */
         this._value = null;
+        /**
+         * Event emitted when the checked state of this radio button changes.
+         * Change events are only emitted when the value changes due to user interaction with
+         * the radio button (the same behavior as `<input type-"radio">`).
+         */
+        this.change = new EventEmitter();
+        this.isFocused = false;
         /**
          * Unregister function for _radioDispatcher
          */
@@ -629,16 +629,16 @@ McRadioButton.ctorParameters = () => [
     { type: UniqueSelectionDispatcher }
 ];
 McRadioButton.propDecorators = {
-    id: [{ type: Input }],
-    name: [{ type: Input }],
-    ariaLabel: [{ type: Input, args: ['aria-label',] }],
-    ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
-    ariaDescribedby: [{ type: Input, args: ['aria-describedby',] }],
     checked: [{ type: Input }],
     value: [{ type: Input }],
     disabled: [{ type: Input }],
     required: [{ type: Input }],
     labelPosition: [{ type: Input }],
+    id: [{ type: Input }],
+    name: [{ type: Input }],
+    ariaLabel: [{ type: Input, args: ['aria-label',] }],
+    ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
+    ariaDescribedby: [{ type: Input, args: ['aria-describedby',] }],
     _inputElement: [{ type: ViewChild, args: ['input', { static: false },] }],
     change: [{ type: Output }],
     isFocused: [{ type: Input }]

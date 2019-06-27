@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/dropdown'), require('@angular/animations'), require('@angular/common'), require('@ptsecurity/cdk/platform'), require('@ptsecurity/mosaic/icon')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/vertical-navbar', ['exports', '@angular/core', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/dropdown', '@angular/animations', '@angular/common', '@ptsecurity/cdk/platform', '@ptsecurity/mosaic/icon'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.verticalNavbar = {}),global.ng.core,global.ng.cdk.a11y,global.ng.mosaic.core,global.ng.mosaic.dropdown,global.ng.animations,global.ng.common,global.ng.cdk.platform,global.ng.mosaic.icon));
-}(this, (function (exports,core,a11y,core$1,dropdown,animations,common,platform,icon) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/dropdown'), require('@angular/animations'), require('@angular/cdk/platform'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/vertical-navbar', ['exports', '@angular/core', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/dropdown', '@angular/animations', '@angular/cdk/platform', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.verticalNavbar = {}),global.ng.core,global.ng.cdk.a11y,global.ng.mosaic.core,global.ng.mosaic.dropdown,global.ng.animations,global.ng.cdk.platform,global.ng.common,global.ng.mosaic.icon));
+}(this, (function (exports,core,a11y,core$1,dropdown,animations,platform,common,icon) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.

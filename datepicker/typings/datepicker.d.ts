@@ -1,20 +1,20 @@
+import { Directionality } from '@angular/cdk/bidi';
+import { Overlay, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
+import { ComponentType } from '@angular/cdk/portal';
 import { AfterViewInit, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { Overlay, OverlayRef, IScrollStrategy } from '@ptsecurity/cdk/overlay';
-import { IComponentType } from '@ptsecurity/cdk/portal';
 import { CanColor, CanColorCtor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { Observable, Subject } from 'rxjs';
 import { McCalendar } from './calendar';
 import { McCalendarCellCssClasses } from './calendar-body';
 import { McDatepickerInput } from './datepicker-input';
 /** Injection token that determines the scroll handling while the calendar is open. */
-export declare const MC_DATEPICKER_SCROLL_STRATEGY: InjectionToken<() => IScrollStrategy>;
+export declare const MC_DATEPICKER_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
-export declare function MC_DATEPICKER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => IScrollStrategy;
+export declare function MC_DATEPICKER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy;
 /** @docs-private */
 export declare const MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER: {
-    provide: InjectionToken<() => IScrollStrategy>;
+    provide: InjectionToken<() => ScrollStrategy>;
     deps: (typeof Overlay)[];
     useFactory: typeof MC_DATEPICKER_SCROLL_STRATEGY_FACTORY;
 };
@@ -66,7 +66,7 @@ export declare class McDatepicker<D> implements OnDestroy, CanColor {
     readonly dateFilter: (date: D | null) => boolean;
     readonly value: D | null;
     /** An input indicating the type of the custom header component for the calendar, if set. */
-    calendarHeaderComponent: IComponentType<any>;
+    calendarHeaderComponent: ComponentType<any>;
     /** The view that the calendar should start in. */
     startView: 'month' | 'year' | 'multi-year';
     /**

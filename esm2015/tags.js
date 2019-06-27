@@ -5,19 +5,19 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { InjectionToken, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewEncapsulation, ChangeDetectorRef, Optional, Self, Inject, NgModule } from '@angular/core';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BACKSPACE, DELETE, SPACE, END, HOME, hasModifierKey, ENTER } from '@ptsecurity/cdk/keycodes';
 import { mixinColor, mixinDisabled, ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { Subject, merge } from 'rxjs';
 import { take, startWith, takeUntil } from 'rxjs/operators';
+import { Directionality } from '@angular/cdk/bidi';
+import { SelectionModel } from '@angular/cdk/collections';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle

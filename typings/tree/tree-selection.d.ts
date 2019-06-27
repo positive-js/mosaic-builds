@@ -1,7 +1,7 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ChangeDetectorRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import { CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { McTreeOption } from './tree-option';

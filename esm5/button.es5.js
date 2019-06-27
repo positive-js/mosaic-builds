@@ -8,8 +8,8 @@ import { __extends } from 'tslib';
 import { ChangeDetectionStrategy, Component, Directive, ElementRef, ViewEncapsulation, NgModule } from '@angular/core';
 import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinColor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle

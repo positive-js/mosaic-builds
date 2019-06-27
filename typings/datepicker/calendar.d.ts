@@ -1,6 +1,6 @@
+import { ComponentType, Portal } from '@angular/cdk/portal';
 import { AfterContentInit, AfterViewChecked, ChangeDetectorRef, EventEmitter, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { DateAdapter, McDateFormats } from '@ptsecurity/cdk/datetime';
-import { IComponentType, Portal } from '@ptsecurity/cdk/portal';
 import { Subject } from 'rxjs';
 import { McCalendarCellCssClasses } from './calendar-body';
 import { McDatepickerIntl } from './datepicker-intl';
@@ -63,7 +63,7 @@ export declare class McCalendar<D> implements AfterContentInit, AfterViewChecked
     /** Whether the calendar is in month view. */
     currentView: McCalendarView;
     /** An input indicating the type of the header component, if set. */
-    headerComponent: IComponentType<any>;
+    headerComponent: ComponentType<any>;
     /** A portal containing the header component type for this calendar. */
     calendarHeaderPortal: Portal<any>;
     /** Whether the calendar should be started in month or year view. */

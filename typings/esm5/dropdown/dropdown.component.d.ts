@@ -1,7 +1,7 @@
 import { AnimationEvent } from '@angular/animations';
+import { Direction } from '@angular/cdk/bidi';
 import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, TemplateRef, QueryList, OnInit } from '@angular/core';
 import { FocusOrigin } from '@ptsecurity/cdk/a11y';
-import { Direction } from '@ptsecurity/cdk/bidi';
 import { Observable, Subject } from 'rxjs';
 import { McDropdownContent } from './dropdown-content';
 import { McDropdownItem } from './dropdown-item';
@@ -47,6 +47,11 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
      * @param classes list of class names
      */
     panelClass: string;
+    private _xPosition;
+    private _yPosition;
+    private _overlapTriggerX;
+    private _overlapTriggerY;
+    private _hasBackdrop;
     /** Config object to be passed into the dropdown's ngClass */
     _classList: {
         [key: string]: boolean;
@@ -74,21 +79,16 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
      * @docs-private
      */
     lazyContent: McDropdownContent;
-    private _previousPanelClass;
     /** Event emitted when the dropdown is closed. */
     readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
+    private _previousPanelClass;
     private _keyManager;
-    private _xPosition;
-    private _yPosition;
     /** Dropdown items inside the current dropdown. */
     private _items;
     /** Emits whenever the amount of dropdown items changes. */
     private _itemChanges;
     /** Subscription to tab events on the dropdown panel */
     private _tabSubscription;
-    private _overlapTriggerX;
-    private _overlapTriggerY;
-    private _hasBackdrop;
     constructor(_elementRef: ElementRef<HTMLElement>, _ngZone: NgZone, _defaultOptions: McDropdownDefaultOptions);
     ngOnInit(): void;
     ngAfterContentInit(): void;

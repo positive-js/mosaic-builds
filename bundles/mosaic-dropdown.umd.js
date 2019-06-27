@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/portal'), require('rxjs'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/animations'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@ptsecurity/cdk/bidi'), require('@ptsecurity/cdk/overlay'), require('@ptsecurity/cdk/platform'), require('@ptsecurity/mosaic/icon')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/dropdown', ['exports', '@angular/common', '@angular/core', '@ptsecurity/cdk/portal', 'rxjs', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/animations', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@ptsecurity/cdk/bidi', '@ptsecurity/cdk/overlay', '@ptsecurity/cdk/platform', '@ptsecurity/mosaic/icon'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.dropdown = {}),global.ng.common,global.ng.core,global.ng.cdk.portal,global.rxjs,global.ng.cdk.a11y,global.ng.mosaic.core,global.ng.animations,global.ng.cdk.coercion,global.ng.cdk.keycodes,global.rxjs.operators,global.ng.cdk.bidi,global.ng.cdk.overlay,global.ng.cdk.platform,global.ng.mosaic.icon));
-}(this, (function (exports,common,core,portal,rxjs,a11y,core$1,animations,coercion,keycodes,operators,bidi,overlay,platform,icon) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/portal'), require('@angular/common'), require('@angular/core'), require('rxjs'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/animations'), require('@angular/cdk/coercion'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/bidi'), require('@angular/cdk/overlay'), require('@angular/cdk/platform'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/dropdown', ['exports', '@angular/cdk/portal', '@angular/common', '@angular/core', 'rxjs', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/animations', '@angular/cdk/coercion', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/bidi', '@angular/cdk/overlay', '@angular/cdk/platform', '@ptsecurity/mosaic/icon'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.dropdown = {}),global.ng.cdk.portal,global.ng.common,global.ng.core,global.rxjs,global.ng.cdk.a11y,global.ng.mosaic.core,global.ng.animations,global.ng.cdk.coercion,global.ng.cdk.keycodes,global.rxjs.operators,global.ng.cdk.bidi,global.ng.cdk.overlay,global.ng.cdk.platform,global.ng.mosaic.icon));
+}(this, (function (exports,portal,common,core,rxjs,a11y,core$1,animations,coercion,keycodes,operators,bidi,overlay,platform,icon) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -471,6 +471,11 @@ var McDropdown = /** @class */ (function () {
         this._elementRef = _elementRef;
         this._ngZone = _ngZone;
         this._defaultOptions = _defaultOptions;
+        this._xPosition = this._defaultOptions.xPosition;
+        this._yPosition = this._defaultOptions.yPosition;
+        this._overlapTriggerX = this._defaultOptions.overlapTriggerX;
+        this._overlapTriggerY = this._defaultOptions.overlapTriggerY;
+        this._hasBackdrop = this._defaultOptions.hasBackdrop;
         /**
          * Config object to be passed into the dropdown's ngClass
          */
@@ -491,8 +496,6 @@ var McDropdown = /** @class */ (function () {
          * Event emitted when the dropdown is closed.
          */
         this.closed = new core.EventEmitter();
-        this._xPosition = this._defaultOptions.xPosition;
-        this._yPosition = this._defaultOptions.yPosition;
         /**
          * Dropdown items inside the current dropdown.
          */
@@ -505,9 +508,6 @@ var McDropdown = /** @class */ (function () {
          * Subscription to tab events on the dropdown panel
          */
         this._tabSubscription = rxjs.Subscription.EMPTY;
-        this._overlapTriggerX = this._defaultOptions.overlapTriggerX;
-        this._overlapTriggerY = this._defaultOptions.overlapTriggerY;
-        this._hasBackdrop = this._defaultOptions.hasBackdrop;
     }
     Object.defineProperty(McDropdown.prototype, "xPosition", {
         /** Position of the dropdown in the X axis. */

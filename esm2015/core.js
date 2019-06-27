@@ -4,14 +4,14 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { BidiModule } from '@angular/cdk/bidi';
 import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, EventEmitter, Output, ɵɵdefineInjectable, ɵɵinject } from '@angular/core';
-import { BidiModule } from '@ptsecurity/cdk/bidi';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
 import { animate, state, style, transition, trigger, query, animateChild, group } from '@angular/animations';
-import { Overlay } from '@ptsecurity/cdk/overlay';
+import { Overlay } from '@angular/cdk/overlay';
 
 /**
  * @fileoverview added by tsickle

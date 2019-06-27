@@ -10,8 +10,8 @@ import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled } from '@ptsecurity/mosaic/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { PlatformModule } from '@ptsecurity/cdk/platform';
 
 /**
  * @fileoverview added by tsickle

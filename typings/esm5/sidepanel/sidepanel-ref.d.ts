@@ -1,4 +1,4 @@
-import { OverlayRef } from '@ptsecurity/cdk/overlay';
+import { OverlayRef } from '@angular/cdk/overlay';
 import { Observable } from 'rxjs';
 import { McSidepanelConfig } from './sidepanel-config';
 import { McSidepanelContainerComponent } from './sidepanel-container.component';

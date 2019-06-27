@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/portal'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('@angular/animations'), require('@ptsecurity/cdk/bidi'), require('rxjs/operators'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/coercion'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/cdk/scrolling'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tabs', ['exports', '@angular/core', '@ptsecurity/cdk/portal', '@ptsecurity/mosaic/core', 'rxjs', '@angular/animations', '@ptsecurity/cdk/bidi', 'rxjs/operators', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/coercion', '@ptsecurity/cdk/keycodes', '@ptsecurity/cdk/scrolling', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tabs = {}),global.ng.core,global.ng.cdk.portal,global.ng.mosaic.core,global.rxjs,global.ng.animations,global.ng.cdk.bidi,global.rxjs.operators,global.ng.cdk.a11y,global.ng.cdk.coercion,global.ng.cdk.keycodes,global.ng.cdk.scrolling,global.ng.common));
-}(this, (function (exports,core,portal,core$1,rxjs,animations,bidi,operators,a11y,coercion,keycodes,scrolling,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/cdk/portal'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('@angular/animations'), require('@angular/cdk/bidi'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('@angular/cdk/scrolling'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tabs', ['exports', '@angular/core', '@angular/cdk/portal', '@ptsecurity/mosaic/core', 'rxjs', '@angular/animations', '@angular/cdk/bidi', 'rxjs/operators', '@angular/cdk/coercion', '@angular/cdk/scrolling', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tabs = {}),global.ng.core,global.ng.cdk.portal,global.ng.mosaic.core,global.rxjs,global.ng.animations,global.ng.cdk.bidi,global.rxjs.operators,global.ng.cdk.coercion,global.ng.cdk.scrolling,global.ng.cdk.a11y,global.ng.cdk.keycodes,global.ng.common));
+}(this, (function (exports,core,portal,core$1,rxjs,animations,bidi,operators,coercion,scrolling,a11y,keycodes,common) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.

@@ -1,7 +1,7 @@
+import { Directionality } from '@angular/cdk/bidi';
+import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, ScrollStrategy, OverlayConnectionPosition, OriginConnectionPosition } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Directionality } from '@ptsecurity/cdk/bidi';
-import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, IScrollStrategy, IOverlayConnectionPosition, IOriginConnectionPosition } from '@ptsecurity/cdk/overlay';
-import { ComponentPortal } from '@ptsecurity/cdk/portal';
 import { Observable } from 'rxjs';
 export declare class McTooltipComponent {
     cdr: ChangeDetectorRef;
@@ -37,12 +37,12 @@ export declare class McTooltipComponent {
     markForCheck(): void;
     handleBodyInteraction(): void;
 }
-export declare const MC_TOOLTIP_SCROLL_STRATEGY: InjectionToken<() => IScrollStrategy>;
+export declare const MC_TOOLTIP_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
-export declare function mcTooltipScrollStrategyFactory(overlay: Overlay): () => IScrollStrategy;
+export declare function mcTooltipScrollStrategyFactory(overlay: Overlay): () => ScrollStrategy;
 /** @docs-private */
 export declare const MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER: {
-    provide: InjectionToken<() => IScrollStrategy>;
+    provide: InjectionToken<() => ScrollStrategy>;
     deps: (typeof Overlay)[];
     useFactory: typeof mcTooltipScrollStrategyFactory;
 };
@@ -112,13 +112,13 @@ export declare class McTooltip implements OnInit, OnDestroy {
      * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
      */
     getOrigin(): {
-        main: IOriginConnectionPosition;
-        fallback: IOriginConnectionPosition;
+        main: OriginConnectionPosition;
+        fallback: OriginConnectionPosition;
     };
     /** Returns the overlay position and a fallback position based on the user's preference */
     getOverlayPosition(): {
-        main: IOverlayConnectionPosition;
-        fallback: IOverlayConnectionPosition;
+        main: OverlayConnectionPosition;
+        fallback: OverlayConnectionPosition;
     };
     /** Inverts an overlay position. */
     private invertPosition;

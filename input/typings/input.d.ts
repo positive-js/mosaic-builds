@@ -1,6 +1,6 @@
+import { Platform } from '@angular/cdk/platform';
 import { DoCheck, ElementRef, OnChanges, OnDestroy } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm, NgModel } from '@angular/forms';
-import { Platform } from '@ptsecurity/cdk/platform';
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';

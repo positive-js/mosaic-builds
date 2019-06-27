@@ -1,5 +1,5 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { Observable } from 'rxjs';
-import { Overlay } from '@ptsecurity/cdk/overlay';
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { McModalComponent } from './modal.component';

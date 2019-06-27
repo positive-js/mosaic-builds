@@ -7,9 +7,9 @@
 import { Directive, Input, ChangeDetectorRef, Component, EventEmitter, Output, ElementRef, Inject, Optional, InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, Attribute, ContentChildren, IterableDiffers, ViewChild, Self, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNodeToggle, CdkTreeNode, CdkTree, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { toBoolean, mixinDisabled, mixinTabIndex, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
+import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NgControl } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { SelectionModel, DataSource } from '@ptsecurity/cdk/collections';
 import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { Subject, BehaviorSubject, merge } from 'rxjs';
 import { takeUntil, map, take } from 'rxjs/operators';

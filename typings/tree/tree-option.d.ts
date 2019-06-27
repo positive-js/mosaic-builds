@@ -1,5 +1,5 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { ChangeDetectorRef, EventEmitter, ElementRef, InjectionToken } from '@angular/core';
-import { SelectionModel } from '@ptsecurity/cdk/collections';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 export interface McTreeOptionParentComponent {

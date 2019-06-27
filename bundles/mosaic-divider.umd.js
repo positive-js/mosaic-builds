@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/coercion'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/divider', ['exports', '@angular/core', '@ptsecurity/cdk/coercion', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.divider = {}),global.ng.core,global.ng.cdk.coercion,global.ng.common));
-}(this, (function (exports,core,coercion,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/coercion'), require('@angular/core'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/divider', ['exports', '@angular/cdk/coercion', '@angular/core', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.divider = {}),global.ng.cdk.coercion,global.ng.core,global.ng.common));
+}(this, (function (exports,coercion,core,common) { 'use strict';
 
 /**
  * @fileoverview added by tsickle

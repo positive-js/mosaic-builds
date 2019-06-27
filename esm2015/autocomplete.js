@@ -4,17 +4,17 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, Inject, InjectionToken, Input, Output, TemplateRef, ViewChild, ViewEncapsulation, Directive, forwardRef, Host, NgZone, Optional, ViewContainerRef, NgModule } from '@angular/core';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { coerceBooleanProperty } from '@ptsecurity/cdk/coercion';
 import { MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, McOptionModule, McCommonModule } from '@ptsecurity/mosaic/core';
+import { Directionality } from '@angular/cdk/bidi';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Directionality } from '@ptsecurity/cdk/bidi';
 import { DOWN_ARROW, ENTER, ESCAPE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import { Overlay, OverlayConfig, OverlayModule } from '@ptsecurity/cdk/overlay';
-import { TemplatePortal } from '@ptsecurity/cdk/portal';
-import { ViewportRuler } from '@ptsecurity/cdk/scrolling';
+import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { Subscription, defer, fromEvent, merge, of, Subject } from 'rxjs';
 import { filter, take, switchMap, delay, tap, map } from 'rxjs/operators';
