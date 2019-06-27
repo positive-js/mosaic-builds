@@ -481,7 +481,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         this.tree.autoSelect = this.autoSelect;
         this.tree.multiple = this.multiple;
         if (this.multiple) {
-            this.tree.noUnselect = false;
+            this.tree.noUnselectLastSelected = false;
         }
         if (this.tempValues) {
             this.setSelectionByValue(this.tempValues);

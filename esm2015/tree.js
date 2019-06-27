@@ -462,7 +462,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
         this.tabIndex = parseInt(tabIndex) || 0;
         this.multiple = multiple === null ? false : toBoolean(multiple);
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
-        this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
+        this.noUnselectLastSelected = noUnselect === null ? true : toBoolean(noUnselect);
         this.selectionModel = new SelectionModel(this.multiple);
     }
     /**
@@ -497,6 +497,16 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
         this.keyManager = new ActiveDescendantKeyManager(this.options)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
+        this.keyManager.change
+            .pipe(takeUntil(this.destroy))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => {
+            if (this.keyManager.activeItem) {
+                this.emitNavigationEvent(this.keyManager.activeItem);
+            }
+        }));
         this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
             .subscribe((/**
@@ -505,8 +515,6 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
          */
         (changeEvent) => {
             this.onChange(changeEvent.source.selected);
-            // event.added.forEach((option) => option.select());
-            // event.removed.forEach((option) => option.deselect());
         }));
         this.options.changes
             .pipe(takeUntil(this.destroy))
@@ -610,6 +618,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
                 return;
             }
             option.toggle();
+            this.emitChangeEvent(option);
         }
         else if (withShift) {
             /** @type {?} */
@@ -640,12 +649,14 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
                     }
                 }));
             }
+            this.emitChangeEvent(option);
         }
         else if (withCtrl) {
             if (!this.canDeselectLast(option)) {
                 return;
             }
             option.toggle();
+            this.emitChangeEvent(option);
         }
         else {
             if (this.autoSelect) {
@@ -655,9 +666,9 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
                  */
                 (item) => item.setSelected(false)));
                 option.setSelected(true);
+                this.emitChangeEvent(option);
             }
         }
-        this.emitNavigationEvent(option);
     }
     /**
      * @return {?}
@@ -667,8 +678,6 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
         const focusedOption = this.keyManager.activeItem;
         if (focusedOption) {
             this.setFocusedOption(focusedOption);
-            // Emit a change event because the focused option changed its state through user interaction.
-            this.emitChangeEvent(focusedOption);
         }
     }
     /**
@@ -815,7 +824,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
      * @return {?}
      */
     canDeselectLast(option) {
-        return !(this.noUnselect && this.selectionModel.selected.length === 1 && option.selected);
+        return !(this.noUnselectLastSelected && this.selectionModel.selected.length === 1 && option.selected);
     }
 }
 McTreeSelection.decorators = [

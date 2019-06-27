@@ -594,7 +594,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         _this.tabIndex = parseInt(tabIndex) || 0;
         _this.multiple = multiple === null ? false : core$1.toBoolean(multiple);
         _this.autoSelect = autoSelect === null ? true : core$1.toBoolean(autoSelect);
-        _this.noUnselect = noUnselect === null ? true : core$1.toBoolean(noUnselect);
+        _this.noUnselectLastSelected = noUnselect === null ? true : core$1.toBoolean(noUnselect);
         _this.selectionModel = new collections.SelectionModel(_this.multiple);
         return _this;
     }
@@ -638,6 +638,16 @@ var McTreeSelection = /** @class */ (function (_super) {
         this.keyManager = new a11y.ActiveDescendantKeyManager(this.options)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
+        this.keyManager.change
+            .pipe(operators.takeUntil(this.destroy))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            if (_this.keyManager.activeItem) {
+                _this.emitNavigationEvent(_this.keyManager.activeItem);
+            }
+        }));
         this.selectionModel.changed
             .pipe(operators.takeUntil(this.destroy))
             .subscribe((/**
@@ -646,8 +656,6 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (changeEvent) {
             _this.onChange(changeEvent.source.selected);
-            // event.added.forEach((option) => option.select());
-            // event.removed.forEach((option) => option.deselect());
         }));
         this.options.changes
             .pipe(operators.takeUntil(this.destroy))
@@ -766,6 +774,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                 return;
             }
             option.toggle();
+            this.emitChangeEvent(option);
         }
         else if (withShift) {
             /** @type {?} */
@@ -796,12 +805,14 @@ var McTreeSelection = /** @class */ (function (_super) {
                     }
                 }));
             }
+            this.emitChangeEvent(option);
         }
         else if (withCtrl) {
             if (!this.canDeselectLast(option)) {
                 return;
             }
             option.toggle();
+            this.emitChangeEvent(option);
         }
         else {
             if (this.autoSelect) {
@@ -811,9 +822,9 @@ var McTreeSelection = /** @class */ (function (_super) {
                  */
                 function (item) { return item.setSelected(false); }));
                 option.setSelected(true);
+                this.emitChangeEvent(option);
             }
         }
-        this.emitNavigationEvent(option);
     };
     /**
      * @return {?}
@@ -826,8 +837,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         var focusedOption = this.keyManager.activeItem;
         if (focusedOption) {
             this.setFocusedOption(focusedOption);
-            // Emit a change event because the focused option changed its state through user interaction.
-            this.emitChangeEvent(focusedOption);
         }
     };
     /**
@@ -1026,7 +1035,7 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (option) {
-        return !(this.noUnselect && this.selectionModel.selected.length === 1 && option.selected);
+        return !(this.noUnselectLastSelected && this.selectionModel.selected.length === 1 && option.selected);
     };
     McTreeSelection.decorators = [
         { type: core.Component, args: [{

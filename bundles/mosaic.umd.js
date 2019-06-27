@@ -17369,7 +17369,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         _this.tabIndex = parseInt(tabIndex) || 0;
         _this.multiple = multiple === null ? false : toBoolean(multiple);
         _this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
-        _this.noUnselect = noUnselect === null ? true : toBoolean(noUnselect);
+        _this.noUnselectLastSelected = noUnselect === null ? true : toBoolean(noUnselect);
         _this.selectionModel = new collections.SelectionModel(_this.multiple);
         return _this;
     }
@@ -17413,6 +17413,16 @@ var McTreeSelection = /** @class */ (function (_super) {
         this.keyManager = new a11y.ActiveDescendantKeyManager(this.options)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
+        this.keyManager.change
+            .pipe(operators.takeUntil(this.destroy))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            if (_this.keyManager.activeItem) {
+                _this.emitNavigationEvent(_this.keyManager.activeItem);
+            }
+        }));
         this.selectionModel.changed
             .pipe(operators.takeUntil(this.destroy))
             .subscribe((/**
@@ -17421,8 +17431,6 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (changeEvent) {
             _this.onChange(changeEvent.source.selected);
-            // event.added.forEach((option) => option.select());
-            // event.removed.forEach((option) => option.deselect());
         }));
         this.options.changes
             .pipe(operators.takeUntil(this.destroy))
@@ -17541,6 +17549,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                 return;
             }
             option.toggle();
+            this.emitChangeEvent(option);
         }
         else if (withShift) {
             /** @type {?} */
@@ -17571,12 +17580,14 @@ var McTreeSelection = /** @class */ (function (_super) {
                     }
                 }));
             }
+            this.emitChangeEvent(option);
         }
         else if (withCtrl) {
             if (!this.canDeselectLast(option)) {
                 return;
             }
             option.toggle();
+            this.emitChangeEvent(option);
         }
         else {
             if (this.autoSelect) {
@@ -17586,9 +17597,9 @@ var McTreeSelection = /** @class */ (function (_super) {
                  */
                 function (item) { return item.setSelected(false); }));
                 option.setSelected(true);
+                this.emitChangeEvent(option);
             }
         }
-        this.emitNavigationEvent(option);
     };
     /**
      * @return {?}
@@ -17601,8 +17612,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         var focusedOption = this.keyManager.activeItem;
         if (focusedOption) {
             this.setFocusedOption(focusedOption);
-            // Emit a change event because the focused option changed its state through user interaction.
-            this.emitChangeEvent(focusedOption);
         }
     };
     /**
@@ -17801,7 +17810,7 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (option) {
-        return !(this.noUnselect && this.selectionModel.selected.length === 1 && option.selected);
+        return !(this.noUnselectLastSelected && this.selectionModel.selected.length === 1 && option.selected);
     };
     McTreeSelection.decorators = [
         { type: core.Component, args: [{
@@ -24953,7 +24962,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         this.tree.autoSelect = this.autoSelect;
         this.tree.multiple = this.multiple;
         if (this.multiple) {
-            this.tree.noUnselect = false;
+            this.tree.noUnselectLastSelected = false;
         }
         if (this.tempValues) {
             this.setSelectionByValue(this.tempValues);
@@ -31744,15 +31753,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31861,7 +31870,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

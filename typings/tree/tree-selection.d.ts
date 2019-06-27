@@ -29,7 +29,7 @@ export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOpti
     tabIndex: number;
     multiple: boolean;
     autoSelect: boolean;
-    noUnselect: boolean;
+    noUnselectLastSelected: boolean;
     readonly navigationChange: EventEmitter<McTreeNavigationChange>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange>;
     disabled: boolean;
