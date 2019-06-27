@@ -1213,7 +1213,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         }
         else if ((keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
-            this.tree.keyManager.activeItem.selectViaInteraction();
+            this.tree.keyManager.activeItem.selectViaInteraction(event);
         }
         else if (this.multiple && keyCode === keycodes.A && event.ctrlKey) {
             event.preventDefault();
@@ -1242,7 +1242,7 @@ var McTreeSelect = /** @class */ (function (_super) {
             this.tree.keyManager.onKeydown(event);
             if (this.multiple && isArrowKey && event.shiftKey && this.tree.keyManager.activeItem &&
                 this.tree.keyManager.activeItemIndex !== previouslyFocusedIndex) {
-                this.tree.keyManager.activeItem.selectViaInteraction();
+                this.tree.keyManager.activeItem.selectViaInteraction(event);
             }
         }
     };

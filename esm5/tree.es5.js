@@ -11,7 +11,7 @@ import { toBoolean, mixinDisabled, mixinTabIndex, McPseudoCheckboxModule } from 
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NgControl } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
+import { END, ENTER, hasModifierKey, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { Subject, BehaviorSubject, merge } from 'rxjs';
 import { takeUntil, map, take } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
@@ -426,17 +426,19 @@ var McTreeOption = /** @class */ (function (_super) {
         }
     };
     /**
+     * @param {?=} $event
      * @return {?}
      */
     McTreeOption.prototype.selectViaInteraction = /**
+     * @param {?=} $event
      * @return {?}
      */
-    function () {
+    function ($event) {
         if (!this.disabled) {
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
             if (this.parent.setFocusedOption) {
-                this.parent.setFocusedOption(this);
+                this.parent.setFocusedOption(this, $event);
             }
         }
     };
@@ -482,7 +484,7 @@ var McTreeOption = /** @class */ (function (_super) {
                         class: 'mc-tree-option',
                         '[class.mc-selected]': 'selected',
                         '[class.mc-active]': 'active',
-                        '(click)': 'selectViaInteraction()'
+                        '(click)': 'selectViaInteraction($event)'
                     },
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
@@ -670,8 +672,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         // tslint:disable-next-line: deprecation
         /** @type {?} */
         var keyCode = event.keyCode;
-        this.withShift = event.shiftKey;
-        this.withCtrl = event.ctrlKey;
         switch (keyCode) {
             case LEFT_ARROW:
                 if (this.keyManager.activeItem) {
@@ -724,21 +724,27 @@ var McTreeSelection = /** @class */ (function (_super) {
     };
     /**
      * @param {?} option
+     * @param {?=} $event
      * @return {?}
      */
     McTreeSelection.prototype.setFocusedOption = /**
      * @param {?} option
+     * @param {?=} $event
      * @return {?}
      */
-    function (option) {
+    function (option, $event) {
         this.keyManager.setActiveItem(option);
+        /** @type {?} */
+        var withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
+        /** @type {?} */
+        var withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
         if (this.multiple) {
             if (!this.canDeselectLast(option)) {
                 return;
             }
             option.toggle();
         }
-        else if (this.withShift) {
+        else if (withShift) {
             /** @type {?} */
             var previousIndex_1 = this.keyManager.previousActiveItemIndex;
             /** @type {?} */
@@ -767,10 +773,8 @@ var McTreeSelection = /** @class */ (function (_super) {
                     }
                 }));
             }
-            this.withShift = false;
         }
-        else if (this.withCtrl) {
-            this.withCtrl = false;
+        else if (withCtrl) {
             if (!this.canDeselectLast(option)) {
                 return;
             }

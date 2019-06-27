@@ -58,7 +58,7 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     readonly viewValue: string;
     select(): void;
     deselect(): void;
-    selectViaInteraction(): void;
+    selectViaInteraction($event?: KeyboardEvent): void;
     emitSelectionChangeEvent(isUserInput?: boolean): void;
     getHostElement(): HTMLElement;
     getTabIndex(): string;

@@ -30,8 +30,6 @@ export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOpti
     multiple: boolean;
     autoSelect: boolean;
     noUnselect: boolean;
-    withShift: boolean;
-    withCtrl: boolean;
     readonly navigationChange: EventEmitter<McTreeNavigationChange>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange>;
     disabled: boolean;
@@ -42,7 +40,7 @@ export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOpti
     ngOnDestroy(): void;
     onKeyDown(event: KeyboardEvent): void;
     updateScrollSize(): void;
-    setFocusedOption(option: McTreeOption): void;
+    setFocusedOption(option: McTreeOption, $event?: KeyboardEvent): void;
     toggleFocusedOption(): void;
     renderNodeChanges(data: McTreeOption[], dataDiffer?: IterableDiffer<McTreeOption>, viewContainer?: any, parentData?: McTreeOption): void;
     getHeight(): number;

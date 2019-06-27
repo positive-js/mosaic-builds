@@ -449,17 +449,19 @@ var McTreeOption = /** @class */ (function (_super) {
         }
     };
     /**
+     * @param {?=} $event
      * @return {?}
      */
     McTreeOption.prototype.selectViaInteraction = /**
+     * @param {?=} $event
      * @return {?}
      */
-    function () {
+    function ($event) {
         if (!this.disabled) {
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
             if (this.parent.setFocusedOption) {
-                this.parent.setFocusedOption(this);
+                this.parent.setFocusedOption(this, $event);
             }
         }
     };
@@ -505,7 +507,7 @@ var McTreeOption = /** @class */ (function (_super) {
                         class: 'mc-tree-option',
                         '[class.mc-selected]': 'selected',
                         '[class.mc-active]': 'active',
-                        '(click)': 'selectViaInteraction()'
+                        '(click)': 'selectViaInteraction($event)'
                     },
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
@@ -693,8 +695,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         // tslint:disable-next-line: deprecation
         /** @type {?} */
         var keyCode = event.keyCode;
-        this.withShift = event.shiftKey;
-        this.withCtrl = event.ctrlKey;
         switch (keyCode) {
             case keycodes.LEFT_ARROW:
                 if (this.keyManager.activeItem) {
@@ -747,21 +747,27 @@ var McTreeSelection = /** @class */ (function (_super) {
     };
     /**
      * @param {?} option
+     * @param {?=} $event
      * @return {?}
      */
     McTreeSelection.prototype.setFocusedOption = /**
      * @param {?} option
+     * @param {?=} $event
      * @return {?}
      */
-    function (option) {
+    function (option, $event) {
         this.keyManager.setActiveItem(option);
+        /** @type {?} */
+        var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
+        /** @type {?} */
+        var withCtrl = $event ? keycodes.hasModifierKey($event, 'ctrlKey') : false;
         if (this.multiple) {
             if (!this.canDeselectLast(option)) {
                 return;
             }
             option.toggle();
         }
-        else if (this.withShift) {
+        else if (withShift) {
             /** @type {?} */
             var previousIndex_1 = this.keyManager.previousActiveItemIndex;
             /** @type {?} */
@@ -790,10 +796,8 @@ var McTreeSelection = /** @class */ (function (_super) {
                     }
                 }));
             }
-            this.withShift = false;
         }
-        else if (this.withCtrl) {
-            this.withCtrl = false;
+        else if (withCtrl) {
             if (!this.canDeselectLast(option)) {
                 return;
             }

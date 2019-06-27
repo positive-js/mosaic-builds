@@ -17224,17 +17224,19 @@ var McTreeOption = /** @class */ (function (_super) {
         }
     };
     /**
+     * @param {?=} $event
      * @return {?}
      */
     McTreeOption.prototype.selectViaInteraction = /**
+     * @param {?=} $event
      * @return {?}
      */
-    function () {
+    function ($event) {
         if (!this.disabled) {
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
             if (this.parent.setFocusedOption) {
-                this.parent.setFocusedOption(this);
+                this.parent.setFocusedOption(this, $event);
             }
         }
     };
@@ -17280,7 +17282,7 @@ var McTreeOption = /** @class */ (function (_super) {
                         class: 'mc-tree-option',
                         '[class.mc-selected]': 'selected',
                         '[class.mc-active]': 'active',
-                        '(click)': 'selectViaInteraction()'
+                        '(click)': 'selectViaInteraction($event)'
                     },
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
@@ -17468,8 +17470,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         // tslint:disable-next-line: deprecation
         /** @type {?} */
         var keyCode = event.keyCode;
-        this.withShift = event.shiftKey;
-        this.withCtrl = event.ctrlKey;
         switch (keyCode) {
             case keycodes.LEFT_ARROW:
                 if (this.keyManager.activeItem) {
@@ -17522,21 +17522,27 @@ var McTreeSelection = /** @class */ (function (_super) {
     };
     /**
      * @param {?} option
+     * @param {?=} $event
      * @return {?}
      */
     McTreeSelection.prototype.setFocusedOption = /**
      * @param {?} option
+     * @param {?=} $event
      * @return {?}
      */
-    function (option) {
+    function (option, $event) {
         this.keyManager.setActiveItem(option);
+        /** @type {?} */
+        var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
+        /** @type {?} */
+        var withCtrl = $event ? keycodes.hasModifierKey($event, 'ctrlKey') : false;
         if (this.multiple) {
             if (!this.canDeselectLast(option)) {
                 return;
             }
             option.toggle();
         }
-        else if (this.withShift) {
+        else if (withShift) {
             /** @type {?} */
             var previousIndex_1 = this.keyManager.previousActiveItemIndex;
             /** @type {?} */
@@ -17565,10 +17571,8 @@ var McTreeSelection = /** @class */ (function (_super) {
                     }
                 }));
             }
-            this.withShift = false;
         }
-        else if (this.withCtrl) {
-            this.withCtrl = false;
+        else if (withCtrl) {
             if (!this.canDeselectLast(option)) {
                 return;
             }
@@ -25664,7 +25668,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         }
         else if ((keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
-            this.tree.keyManager.activeItem.selectViaInteraction();
+            this.tree.keyManager.activeItem.selectViaInteraction(event);
         }
         else if (this.multiple && keyCode === keycodes.A && event.ctrlKey) {
             event.preventDefault();
@@ -25693,7 +25697,7 @@ var McTreeSelect = /** @class */ (function (_super) {
             this.tree.keyManager.onKeydown(event);
             if (this.multiple && isArrowKey && event.shiftKey && this.tree.keyManager.activeItem &&
                 this.tree.keyManager.activeItemIndex !== previouslyFocusedIndex) {
-                this.tree.keyManager.activeItem.selectViaInteraction();
+                this.tree.keyManager.activeItem.selectViaInteraction(event);
             }
         }
     };
@@ -31740,15 +31744,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd16 = McTabBase;
-exports.ɵe16 = mcTabMixinBase;
-exports.ɵa16 = McTabHeaderBase;
-exports.ɵb16 = McTabLabelWrapperBase;
-exports.ɵc16 = mcTabLabelWrapperMixinBase;
-exports.ɵh16 = McTabLinkBase;
-exports.ɵf16 = McTabNavBase;
-exports.ɵi16 = mcTabLinkMixinBase;
-exports.ɵg16 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31818,7 +31822,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa1 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -31857,7 +31861,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
