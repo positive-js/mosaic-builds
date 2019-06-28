@@ -15,21 +15,21 @@ export declare class McSplitterComponent implements OnInit {
     private ngZone;
     private renderer;
     readonly areas: IArea[];
-    private _direction;
-    private _disabled;
-    private _gutterSize;
     private isDragging;
     private readonly areaPositionDivider;
     private readonly listeners;
     direction: Direction;
+    private _direction;
     disabled: boolean;
+    private _disabled;
     gutterSize: number;
+    private _gutterSize;
     constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, ngZone: NgZone, renderer: Renderer2);
     addArea(area: McSplitterAreaDirective): void;
     ngOnInit(): void;
     onMouseDown(event: MouseEvent, leftAreaIndex: number, rightAreaIndex: number): void;
     removeArea(area: McSplitterAreaDirective): void;
-    private isVertical;
+    isVertical(): boolean;
     private onMouseMove;
     private onMouseUp;
     private setStyle;
@@ -37,21 +37,16 @@ export declare class McSplitterComponent implements OnInit {
 export declare class McGutterDirective implements OnInit {
     private renderer;
     private elementRef;
-    private _direction;
-    private _disabled;
-    private _order;
-    private _size;
     direction: Direction;
-    disabled: boolean;
+    private _direction;
     order: number;
+    private _order;
     size: number;
+    private _size;
     constructor(renderer: Renderer2, elementRef: ElementRef);
     ngOnInit(): void;
     private isVertical;
-    private getCursor;
-    private getState;
     private setStyle;
-    private setAttr;
 }
 export declare class McSplitterAreaDirective implements OnInit, OnDestroy {
     private elementRef;

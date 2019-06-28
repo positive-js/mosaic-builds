@@ -21,11 +21,11 @@ var McSplitterComponent = /** @class */ (function () {
         this.ngZone = ngZone;
         this.renderer = renderer;
         this.areas = [];
-        this._disabled = false;
-        this._gutterSize = 6;
         this.isDragging = false;
         this.areaPositionDivider = 2;
         this.listeners = [];
+        this._disabled = false;
+        this._gutterSize = 6;
     }
     Object.defineProperty(McSplitterComponent.prototype, "direction", {
         get: /**
@@ -204,11 +204,9 @@ var McSplitterComponent = /** @class */ (function () {
         this.areas.splice(indexToRemove, 1);
     };
     /**
-     * @private
      * @return {?}
      */
     McSplitterComponent.prototype.isVertical = /**
-     * @private
      * @return {?}
      */
     function () {
@@ -307,9 +305,12 @@ var McSplitterComponent = /** @class */ (function () {
         { type: core.Component, args: [{
                     selector: 'mc-splitter',
                     exportAs: 'mcSplitter',
+                    host: {
+                        class: 'mc-splitter'
+                    },
                     preserveWhitespaces: false,
-                    styles: ["mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}mc-splitter-area{overflow:hidden}mc-gutter{display:flex;flex-grow:0;flex-shrink:0;overflow:hidden;justify-content:center;align-items:center}.icon-vertical{transform:rotate(90deg)}"],
-                    template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [direction]=\"direction\" [disabled]=\"disabled\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"><i mc-icon=\"mc-ellipsis_16\" color=\"second\" [class.icon-vertical]=\"direction === 'vertical'\" *ngIf=\"!disabled\"></i></mc-gutter></ng-template>",
+                    styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;overflow:hidden}.mc-gutter.mc-gutter_horizontal>.mc-icon{transform:rotate(90deg)}"],
+                    template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [class.mc-gutter_horizontal]=\"!isVertical\" [direction]=\"direction\" [attr.disabled]=\"disabled || null\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"><i mc-icon=\"mc-ellipsis_16\" color=\"second\" *ngIf=\"!disabled\"></i></mc-gutter></ng-template>",
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush
                 },] },
@@ -333,7 +334,6 @@ var McGutterDirective = /** @class */ (function () {
         this.renderer = renderer;
         this.elementRef = elementRef;
         this._direction = "vertical" /* Vertical */;
-        this._disabled = false;
         this._order = 0;
         this._size = 6;
     }
@@ -350,23 +350,6 @@ var McGutterDirective = /** @class */ (function () {
          */
         function (direction) {
             this._direction = direction;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McGutterDirective.prototype, "disabled", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._disabled;
-        },
-        set: /**
-         * @param {?} disabled
-         * @return {?}
-         */
-        function (disabled) {
-            this._disabled = coercion.coerceBooleanProperty(disabled);
         },
         enumerable: true,
         configurable: true
@@ -412,15 +395,11 @@ var McGutterDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.setStyle("cursor" /* Cursor */, this.getCursor(this.getState()));
         this.setStyle("flex-basis" /* FlexBasis */, coercion.coerceCssPixelValue(this.size));
         this.setStyle(this.isVertical() ? "height" /* Height */ : "width" /* Width */, coercion.coerceCssPixelValue(this.size));
         this.setStyle("order" /* Order */, this.order);
         if (!this.isVertical()) {
             this.setStyle("height" /* Height */, '100%');
-        }
-        if (this.disabled) {
-            this.setAttr("disabled" /* Disabled */, 'true');
         }
         // fix IE issue with gutter icon. flex-direction is requied for flex alignment options
         this.setStyle("flex-direction" /* FlexDirection */, this.isVertical() ? 'row' : 'column');
@@ -438,43 +417,6 @@ var McGutterDirective = /** @class */ (function () {
     };
     /**
      * @private
-     * @param {?} state
-     * @return {?}
-     */
-    McGutterDirective.prototype.getCursor = /**
-     * @private
-     * @param {?} state
-     * @return {?}
-     */
-    function (state) {
-        switch (state) {
-            case "disabled" /* Disabled */:
-                return "default" /* Default */;
-            case "vertical" /* Vertical */:
-                return "row-resize" /* ResizeRow */;
-            case "horizontal" /* Horizontal */:
-                return "col-resize" /* ResizeColumn */;
-            default:
-                throw Error("Unknown gutter state for cursor: " + state);
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    McGutterDirective.prototype.getState = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        return this.disabled
-            ? "disabled" /* Disabled */
-            : this.direction === "vertical" /* Vertical */
-                ? "vertical" /* Vertical */
-                : "horizontal" /* Horizontal */;
-    };
-    /**
-     * @private
      * @param {?} property
      * @param {?} value
      * @return {?}
@@ -488,24 +430,12 @@ var McGutterDirective = /** @class */ (function () {
     function (property, value) {
         this.renderer.setStyle(this.elementRef.nativeElement, property, value);
     };
-    /**
-     * @private
-     * @param {?} attribute
-     * @param {?} value
-     * @return {?}
-     */
-    McGutterDirective.prototype.setAttr = /**
-     * @private
-     * @param {?} attribute
-     * @param {?} value
-     * @return {?}
-     */
-    function (attribute, value) {
-        this.renderer.setAttribute(this.elementRef.nativeElement, attribute, value);
-    };
     McGutterDirective.decorators = [
         { type: core.Directive, args: [{
-                    selector: 'mc-gutter'
+                    selector: 'mc-gutter',
+                    host: {
+                        class: 'mc-gutter'
+                    }
                 },] },
     ];
     /** @nocollapse */
@@ -515,7 +445,6 @@ var McGutterDirective = /** @class */ (function () {
     ]; };
     McGutterDirective.propDecorators = {
         direction: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
         order: [{ type: core.Input }],
         size: [{ type: core.Input }]
     };
@@ -545,8 +474,6 @@ var McSplitterAreaDirective = /** @class */ (function () {
     function () {
         this.splitter.addArea(this);
         this.removeStyle("max-width" /* MaxWidth */);
-        // todo нахера это сделано ?
-        // this.setStyle(StyleProperty.Flex, '1');
         if (this.splitter.direction === "vertical" /* Vertical */) {
             this.setStyle("width" /* Width */, '100%');
             this.removeStyle("height" /* Height */);
@@ -689,7 +616,10 @@ var McSplitterAreaDirective = /** @class */ (function () {
     };
     McSplitterAreaDirective.decorators = [
         { type: core.Directive, args: [{
-                    selector: '[mc-splitter-area]'
+                    selector: '[mc-splitter-area]',
+                    host: {
+                        class: 'mc-splitter-area'
+                    }
                 },] },
     ];
     /** @nocollapse */
