@@ -44,7 +44,7 @@ export { ɵa22, McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbar
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const VERSION = new Version('8.0.0-beta.3');
+const VERSION = new Version('8.0.0-beta.4');
 
 /**
  * @fileoverview added by tsickle
