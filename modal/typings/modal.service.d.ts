@@ -23,6 +23,7 @@ export declare class McModalService {
     closeAll(): void;
     create<T>(options?: IModalOptionsForService<T>): McModalRef<T>;
     confirm<T>(options?: IModalOptionsForService<T>, confirmType?: ConfirmType): McModalRef<T>;
+    open<T>(options?: IModalOptionsForService<T>): McModalRef<T>;
     success<T>(options?: IModalOptionsForService<T>): McModalRef<T>;
     delete<T>(options?: IModalOptionsForService<T>): McModalRef<T>;
     private simpleConfirm;

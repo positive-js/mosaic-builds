@@ -17,6 +17,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     private changeDetector;
     private document;
     mcModalType: ModalType;
+    mcComponent: Type<T>;
     mcContent: string | TemplateRef<{}> | Type<T>;
     mcComponentParams: T;
     mcFooter: string | TemplateRef<{}> | IModalButtonOptions<T>[];
