@@ -27067,6 +27067,9 @@ var McTimepickerBase = /** @class */ (function () {
 // tslint:disable-next-line naming-convention
 /** @type {?} */
 var McTimepickerMixinBase = mixinErrorState(McTimepickerBase);
+/**
+ * @template D
+ */
 var McTimepicker = /** @class */ (function (_super) {
     __extends(McTimepicker, _super);
     function McTimepicker(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, renderer, dateAdapter) {
@@ -27831,35 +27834,23 @@ var McTimepicker = /** @class */ (function (_super) {
     /**
      * \@description Create time string for displaying inside input element of UI
      * @private
-     * @param {?} tempVal
+     * @param {?} value
      * @param {?=} timeFormat
      * @return {?}
      */
     McTimepicker.prototype.getTimeStringFromDate = /**
      * \@description Create time string for displaying inside input element of UI
      * @private
-     * @param {?} tempVal
+     * @param {?} value
      * @param {?=} timeFormat
      * @return {?}
      */
-    function (tempVal, timeFormat) {
-        var _a;
+    function (value, timeFormat) {
         if (timeFormat === void 0) { timeFormat = DEFAULT_TIME_FORMAT; }
-        /** @type {?} */
-        var hours = this.getNumberWithLeadingZero(tempVal.getHours());
-        /** @type {?} */
-        var minutes = this.getNumberWithLeadingZero(tempVal.getMinutes());
-        /** @type {?} */
-        var seconds = this.getNumberWithLeadingZero(tempVal.getSeconds());
-        /** @type {?} */
-        var formattedTimeGenerators = (_a = {}, _a[TimeFormats.HHmm] = (/**
-             * @return {?}
-             */
-            function () { return hours + ":" + minutes; }), _a[TimeFormats.HHmmss] = (/**
-             * @return {?}
-             */
-            function () { return hours + ":" + minutes + ":" + seconds; }), _a);
-        return formattedTimeGenerators[timeFormat]();
+        if (value === undefined || value === null) {
+            return '';
+        }
+        return this.dateAdapter.format(value, timeFormat);
     };
     /**
      * @private
@@ -27929,7 +27920,6 @@ var McTimepicker = /** @class */ (function (_super) {
      * @return {?}
      */
     function (timeString) {
-        // TODO Use moment-js
         if (timeString === undefined) {
             return;
         }
@@ -27957,26 +27947,10 @@ var McTimepicker = /** @class */ (function (_super) {
             minutes = Number(hoursAndMinutesAndSeconds[2]);
             seconds = Number(hoursAndMinutesAndSeconds[3]);
         }
-        // const timestamp: number = Date.parse(fullDateString);
         /** @type {?} */
-        var resultDate = new Date(1970, 0, 1, hours, minutes, seconds);
+        var resultDate = this.dateAdapter.createDateTime(1970, 0, 1, hours, minutes, seconds, 0);
         // tslint:enable no-magic-numbers
-        return isNaN(resultDate.getTime()) ? undefined : resultDate;
-    };
-    /**
-     * @private
-     * @param {?} digit
-     * @return {?}
-     */
-    McTimepicker.prototype.getNumberWithLeadingZero = /**
-     * @private
-     * @param {?} digit
-     * @return {?}
-     */
-    function (digit) {
-        /** @type {?} */
-        var MAX_DIGIT_WITH_LEADING_ZERO = 9;
-        return digit > MAX_DIGIT_WITH_LEADING_ZERO ? "" + digit : "0" + digit;
+        return this.dateAdapter.isValid(resultDate) ? resultDate : undefined;
     };
     /**
      * @private
@@ -27990,9 +27964,9 @@ var McTimepicker = /** @class */ (function (_super) {
      */
     function (dateVal) {
         return {
-            hours: dateVal.getHours(),
-            minutes: dateVal.getMinutes(),
-            seconds: dateVal.getSeconds()
+            hours: this.dateAdapter.getHours(dateVal),
+            minutes: this.dateAdapter.getMinutes(dateVal),
+            seconds: this.dateAdapter.getSeconds(dateVal)
         };
     };
     /**
@@ -28019,6 +27993,7 @@ var McTimepicker = /** @class */ (function (_super) {
     function () {
         if (this.currentDateTimeInput !== undefined &&
             this.minDateTime !== undefined &&
+            this.minDateTime !== null &&
             this.isTimeLowerThenMin(this.currentDateTimeInput)) {
             return { mcTimepickerLowerThenMintime: { text: this.elementRef.nativeElement.value } };
         }
@@ -28035,6 +28010,7 @@ var McTimepicker = /** @class */ (function (_super) {
     function () {
         if (this.currentDateTimeInput !== undefined &&
             this.maxDateTime !== undefined &&
+            this.maxDateTime !== null &&
             this.isTimeGreaterThenMax(this.currentDateTimeInput)) {
             return { mcTimepickerHigherThenMaxtime: { text: this.elementRef.nativeElement.value } };
         }
@@ -28051,7 +28027,10 @@ var McTimepicker = /** @class */ (function (_super) {
      * @return {?}
      */
     function (timeToCompare) {
-        return timeToCompare.getTime() - ((/** @type {?} */ (this.minDateTime))).getTime() < 0;
+        if (timeToCompare === undefined || timeToCompare === null) {
+            return false;
+        }
+        return this.dateAdapter.compareDateTime(timeToCompare, this.minDateTime) < 0;
     };
     /**
      * @private
@@ -28064,7 +28043,10 @@ var McTimepicker = /** @class */ (function (_super) {
      * @return {?}
      */
     function (timeToCompare) {
-        return timeToCompare.getTime() - ((/** @type {?} */ (this.maxDateTime))).getTime() >= 0;
+        if (timeToCompare === undefined || timeToCompare === null) {
+            return false;
+        }
+        return this.dateAdapter.compareDateTime(timeToCompare, this.maxDateTime) >= 0;
     };
     McTimepicker.decorators = [
         { type: core.Directive, args: [{
@@ -31760,15 +31742,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31877,7 +31859,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa24 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

@@ -13,7 +13,7 @@ export declare class McTimepickerBase {
     constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
 export declare const McTimepickerMixinBase: CanUpdateErrorStateCtor & typeof McTimepickerBase;
-export declare class McTimepicker extends McTimepickerMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState, ControlValueAccessor {
+export declare class McTimepicker<D> extends McTimepickerMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState, ControlValueAccessor {
     private readonly elementRef;
     ngControl: NgControl;
     private readonly renderer;
@@ -88,9 +88,9 @@ export declare class McTimepicker extends McTimepickerMixinBase implements McFor
      * @docs-private
      */
     onContainerClick(): void;
-    writeValue(value: Date | null): void;
+    writeValue(value: D | null): void;
     onKeyDown(event: KeyboardEvent): void;
-    registerOnChange(fn: (value: Date) => void): void;
+    registerOnChange(fn: (value: D) => void): void;
     registerOnTouched(fn: () => void): void;
     /** Does some manual dirty checking on the native input `value` property. */
     private dirtyCheckNativeValue;
@@ -126,7 +126,6 @@ export declare class McTimepicker extends McTimepickerMixinBase implements McFor
      */
     private getDateFromTimeDigits;
     private getDateFromTimeString;
-    private getNumberWithLeadingZero;
     private getTimeDigitsFromDate;
     private parseValidator;
     private minTimeValidator;

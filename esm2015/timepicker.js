@@ -86,6 +86,9 @@ class McTimepickerBase {
 // tslint:disable-next-line naming-convention
 /** @type {?} */
 const McTimepickerMixinBase = mixinErrorState(McTimepickerBase);
+/**
+ * @template D
+ */
 class McTimepicker extends McTimepickerMixinBase {
     /**
      * @param {?} elementRef
@@ -676,29 +679,15 @@ class McTimepicker extends McTimepickerMixinBase {
     /**
      * \@description Create time string for displaying inside input element of UI
      * @private
-     * @param {?} tempVal
+     * @param {?} value
      * @param {?=} timeFormat
      * @return {?}
      */
-    getTimeStringFromDate(tempVal, timeFormat = DEFAULT_TIME_FORMAT) {
-        /** @type {?} */
-        const hours = this.getNumberWithLeadingZero(tempVal.getHours());
-        /** @type {?} */
-        const minutes = this.getNumberWithLeadingZero(tempVal.getMinutes());
-        /** @type {?} */
-        const seconds = this.getNumberWithLeadingZero(tempVal.getSeconds());
-        /** @type {?} */
-        const formattedTimeGenerators = {
-            [TimeFormats.HHmm]: (/**
-             * @return {?}
-             */
-            () => `${hours}:${minutes}`),
-            [TimeFormats.HHmmss]: (/**
-             * @return {?}
-             */
-            () => `${hours}:${minutes}:${seconds}`)
-        };
-        return formattedTimeGenerators[timeFormat]();
+    getTimeStringFromDate(value, timeFormat = DEFAULT_TIME_FORMAT) {
+        if (value === undefined || value === null) {
+            return '';
+        }
+        return this.dateAdapter.format(value, timeFormat);
     }
     /**
      * @private
@@ -746,7 +735,6 @@ class McTimepicker extends McTimepickerMixinBase {
      * @return {?}
      */
     getDateFromTimeString(timeString) {
-        // TODO Use moment-js
         if (timeString === undefined) {
             return;
         }
@@ -774,21 +762,10 @@ class McTimepicker extends McTimepickerMixinBase {
             minutes = Number(hoursAndMinutesAndSeconds[2]);
             seconds = Number(hoursAndMinutesAndSeconds[3]);
         }
-        // const timestamp: number = Date.parse(fullDateString);
         /** @type {?} */
-        const resultDate = new Date(1970, 0, 1, hours, minutes, seconds);
+        const resultDate = this.dateAdapter.createDateTime(1970, 0, 1, hours, minutes, seconds, 0);
         // tslint:enable no-magic-numbers
-        return isNaN(resultDate.getTime()) ? undefined : resultDate;
-    }
-    /**
-     * @private
-     * @param {?} digit
-     * @return {?}
-     */
-    getNumberWithLeadingZero(digit) {
-        /** @type {?} */
-        const MAX_DIGIT_WITH_LEADING_ZERO = 9;
-        return digit > MAX_DIGIT_WITH_LEADING_ZERO ? `${digit}` : `0${digit}`;
+        return this.dateAdapter.isValid(resultDate) ? resultDate : undefined;
     }
     /**
      * @private
@@ -797,9 +774,9 @@ class McTimepicker extends McTimepickerMixinBase {
      */
     getTimeDigitsFromDate(dateVal) {
         return {
-            hours: dateVal.getHours(),
-            minutes: dateVal.getMinutes(),
-            seconds: dateVal.getSeconds()
+            hours: this.dateAdapter.getHours(dateVal),
+            minutes: this.dateAdapter.getMinutes(dateVal),
+            seconds: this.dateAdapter.getSeconds(dateVal)
         };
     }
     /**
@@ -818,6 +795,7 @@ class McTimepicker extends McTimepickerMixinBase {
     minTimeValidator() {
         if (this.currentDateTimeInput !== undefined &&
             this.minDateTime !== undefined &&
+            this.minDateTime !== null &&
             this.isTimeLowerThenMin(this.currentDateTimeInput)) {
             return { mcTimepickerLowerThenMintime: { text: this.elementRef.nativeElement.value } };
         }
@@ -830,6 +808,7 @@ class McTimepicker extends McTimepickerMixinBase {
     maxTimeValidator() {
         if (this.currentDateTimeInput !== undefined &&
             this.maxDateTime !== undefined &&
+            this.maxDateTime !== null &&
             this.isTimeGreaterThenMax(this.currentDateTimeInput)) {
             return { mcTimepickerHigherThenMaxtime: { text: this.elementRef.nativeElement.value } };
         }
@@ -841,7 +820,10 @@ class McTimepicker extends McTimepickerMixinBase {
      * @return {?}
      */
     isTimeLowerThenMin(timeToCompare) {
-        return timeToCompare.getTime() - ((/** @type {?} */ (this.minDateTime))).getTime() < 0;
+        if (timeToCompare === undefined || timeToCompare === null) {
+            return false;
+        }
+        return this.dateAdapter.compareDateTime(timeToCompare, this.minDateTime) < 0;
     }
     /**
      * @private
@@ -849,7 +831,10 @@ class McTimepicker extends McTimepickerMixinBase {
      * @return {?}
      */
     isTimeGreaterThenMax(timeToCompare) {
-        return timeToCompare.getTime() - ((/** @type {?} */ (this.maxDateTime))).getTime() >= 0;
+        if (timeToCompare === undefined || timeToCompare === null) {
+            return false;
+        }
+        return this.dateAdapter.compareDateTime(timeToCompare, this.maxDateTime) >= 0;
     }
 }
 McTimepicker.decorators = [

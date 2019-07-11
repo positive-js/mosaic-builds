@@ -370,6 +370,61 @@ var MomentDateAdapter = /** @class */ (function (_super) {
      * @param {?} date
      * @return {?}
      */
+    MomentDateAdapter.prototype.getHours = /**
+     * @param {?} date
+     * @return {?}
+     */
+    function (date) {
+        return this.clone(date).hours();
+    };
+    /**
+     * @param {?} date
+     * @return {?}
+     */
+    MomentDateAdapter.prototype.getMinutes = /**
+     * @param {?} date
+     * @return {?}
+     */
+    function (date) {
+        return this.clone(date).minutes();
+    };
+    /**
+     * @param {?} date
+     * @return {?}
+     */
+    MomentDateAdapter.prototype.getSeconds = /**
+     * @param {?} date
+     * @return {?}
+     */
+    function (date) {
+        return this.clone(date).seconds();
+    };
+    /**
+     * @param {?} date
+     * @return {?}
+     */
+    MomentDateAdapter.prototype.getMilliseconds = /**
+     * @param {?} date
+     * @return {?}
+     */
+    function (date) {
+        return this.clone(date).milliseconds();
+    };
+    /**
+     * @param {?} date
+     * @return {?}
+     */
+    MomentDateAdapter.prototype.getTime = /**
+     * @param {?} date
+     * @return {?}
+     */
+    function (date) {
+        return date.valueOf();
+    };
+    /**
+     * @param {?} date
+     * @return {?}
+     */
     MomentDateAdapter.prototype.getDayOfWeek = /**
      * @param {?} date
      * @return {?}
@@ -485,6 +540,35 @@ var MomentDateAdapter = /** @class */ (function (_super) {
             throw Error("Invalid date \"" + date + "\" for month with index \"" + month + "\".");
         }
         return result;
+    };
+    /**
+     * @param {?} year
+     * @param {?} month
+     * @param {?} date
+     * @param {?} hours
+     * @param {?} minutes
+     * @param {?} seconds
+     * @param {?} milliseconds
+     * @return {?}
+     */
+    MomentDateAdapter.prototype.createDateTime = /**
+     * @param {?} year
+     * @param {?} month
+     * @param {?} date
+     * @param {?} hours
+     * @param {?} minutes
+     * @param {?} seconds
+     * @param {?} milliseconds
+     * @return {?}
+     */
+    function (year, month, date, hours, minutes, seconds, milliseconds) {
+        /** @type {?} */
+        var newDate = this.createDate(year, month, date);
+        newDate.hours(hours);
+        newDate.minutes(minutes);
+        newDate.seconds(seconds);
+        newDate.milliseconds(milliseconds);
+        return newDate;
     };
     /**
      * @return {?}
