@@ -31503,7 +31503,7 @@ var McVerticalNavbarModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-var VERSION = new core.Version('8.0.0-beta.4');
+var VERSION = new core.Version('8.0.0-beta.5');
 
 exports.VERSION = VERSION;
 exports.ɵa3 = MC_SANITY_CHECKS_FACTORY;
@@ -31686,11 +31686,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵe28 = CssUnitPipe;
-exports.ɵa28 = McModalControlService;
-exports.ɵc28 = McModalBody;
-exports.ɵd28 = McModalFooter;
-exports.ɵb28 = McModalTitle;
+exports.ɵe27 = CssUnitPipe;
+exports.ɵa27 = McModalControlService;
+exports.ɵc27 = McModalBody;
+exports.ɵd27 = McModalFooter;
+exports.ɵb27 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
