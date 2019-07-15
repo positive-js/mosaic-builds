@@ -3352,7 +3352,7 @@ $hover-darken: 5%;
             background-color: mix(map-get($background, button-bg), map-get($background, hover));
         }
 
-        &.mc-gutter_horizontal {
+        &.mc-gutter_vertical {
             cursor: row-resize;
         }
 

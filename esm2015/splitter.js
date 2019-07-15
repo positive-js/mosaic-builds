@@ -264,8 +264,8 @@ McSplitterComponent.decorators = [
                     class: 'mc-splitter'
                 },
                 preserveWhitespaces: false,
-                styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;overflow:hidden}.mc-gutter.mc-gutter_horizontal>.mc-icon{transform:rotate(90deg)}"],
-                template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [class.mc-gutter_horizontal]=\"!isVertical\" [direction]=\"direction\" [attr.disabled]=\"disabled || null\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"><i mc-icon=\"mc-ellipsis_16\" color=\"second\" *ngIf=\"!disabled\"></i></mc-gutter></ng-template>",
+                styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;overflow:hidden}.mc-gutter.mc-gutter_vertical>.mc-icon{transform:rotate(90deg)}"],
+                template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [class.mc-gutter_vertical]=\"isVertical()\" [direction]=\"direction\" [attr.disabled]=\"disabled || null\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"><i mc-icon=\"mc-ellipsis_16\" color=\"second\" *ngIf=\"!disabled\"></i></mc-gutter></ng-template>",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] },
@@ -431,9 +431,11 @@ class McSplitterAreaDirective {
      * @return {?}
      */
     setSize(size) {
-        /** @type {?} */
-        const sz = coerceNumberProperty(size);
-        this.setStyle(this.getSizeProperty(), coerceCssPixelValue(sz));
+        if (size) {
+            /** @type {?} */
+            const sz = coerceNumberProperty(size);
+            this.setStyle(this.getSizeProperty(), coerceCssPixelValue(sz));
+        }
     }
     /**
      * @return {?}

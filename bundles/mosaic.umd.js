@@ -29631,8 +29631,8 @@ var McSplitterComponent = /** @class */ (function () {
                         class: 'mc-splitter'
                     },
                     preserveWhitespaces: false,
-                    styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;overflow:hidden}.mc-gutter.mc-gutter_horizontal>.mc-icon{transform:rotate(90deg)}"],
-                    template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [class.mc-gutter_horizontal]=\"!isVertical\" [direction]=\"direction\" [attr.disabled]=\"disabled || null\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"><i mc-icon=\"mc-ellipsis_16\" color=\"second\" *ngIf=\"!disabled\"></i></mc-gutter></ng-template>",
+                    styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;overflow:hidden}.mc-gutter.mc-gutter_vertical>.mc-icon{transform:rotate(90deg)}"],
+                    template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [class.mc-gutter_vertical]=\"isVertical()\" [direction]=\"direction\" [attr.disabled]=\"disabled || null\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"><i mc-icon=\"mc-ellipsis_16\" color=\"second\" *ngIf=\"!disabled\"></i></mc-gutter></ng-template>",
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush
                 },] },
@@ -29834,9 +29834,11 @@ var McSplitterAreaDirective = /** @class */ (function () {
      * @return {?}
      */
     function (size) {
-        /** @type {?} */
-        var sz = coercion.coerceNumberProperty(size);
-        this.setStyle(this.getSizeProperty(), coercion.coerceCssPixelValue(sz));
+        if (size) {
+            /** @type {?} */
+            var sz = coercion.coerceNumberProperty(size);
+            this.setStyle(this.getSizeProperty(), coercion.coerceCssPixelValue(sz));
+        }
     };
     /**
      * @return {?}
@@ -31859,7 +31861,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
