@@ -12565,7 +12565,7 @@ var McLink = /** @class */ (function (_super) {
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
                     exportAs: 'mcLink',
-                    styles: [".mc-link{text-decoration:none;cursor:pointer}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link.cdk-keyboard-focused{outline-width:2px;outline-style:solid;outline-offset:2px}.mc-link[disabled]{pointer-events:none;cursor:default}"],
+                    styles: [".mc-link{text-decoration:none;cursor:pointer}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link[disabled]{pointer-events:none;cursor:default}"],
                     inputs: ['disabled'],
                     host: {
                         '[attr.disabled]': 'disabled || null',
@@ -31744,15 +31744,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd16 = McTabBase;
-exports.ɵe16 = mcTabMixinBase;
-exports.ɵa16 = McTabHeaderBase;
-exports.ɵb16 = McTabLabelWrapperBase;
-exports.ɵc16 = mcTabLabelWrapperMixinBase;
-exports.ɵh16 = McTabLinkBase;
-exports.ɵf16 = McTabNavBase;
-exports.ɵi16 = mcTabLinkMixinBase;
-exports.ɵg16 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;

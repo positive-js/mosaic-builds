@@ -90,7 +90,7 @@ var McLink = /** @class */ (function (_super) {
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
                     exportAs: 'mcLink',
-                    styles: [".mc-link{text-decoration:none;cursor:pointer}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link.cdk-keyboard-focused{outline-width:2px;outline-style:solid;outline-offset:2px}.mc-link[disabled]{pointer-events:none;cursor:default}"],
+                    styles: [".mc-link{text-decoration:none;cursor:pointer}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link[disabled]{pointer-events:none;cursor:default}"],
                     inputs: ['disabled'],
                     host: {
                         '[attr.disabled]': 'disabled || null',
