@@ -184,8 +184,8 @@ var McTreeOption = /** @class */ (function (_super) {
         _this._disabled = false;
         _this.onSelectionChange = new core.EventEmitter();
         _this._selected = false;
-        _this._active = false;
         _this._id = "mc-tree-option-" + uniqueIdCounter++;
+        _this.hasFocus = false;
         return _this;
     }
     Object.defineProperty(McTreeOption.prototype, "value", {
@@ -257,26 +257,6 @@ var McTreeOption = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(McTreeOption.prototype, "active", {
-        /**
-         * Whether or not the option is currently active and ready to be selected.
-         * An active option displays styles as if it is focused, but the
-         * focus is actually retained somewhere else. This comes in handy
-         * for components like autocomplete where focus must remain on the input.
-         */
-        get: /**
-         * Whether or not the option is currently active and ready to be selected.
-         * An active option displays styles as if it is focused, but the
-         * focus is actually retained somewhere else. This comes in handy
-         * for components like autocomplete where focus must remain on the input.
-         * @return {?}
-         */
-        function () {
-            return this._active;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(McTreeOption.prototype, "id", {
         get: /**
          * @return {?}
@@ -328,49 +308,40 @@ var McTreeOption = /** @class */ (function (_super) {
         this.changeDetectorRef.markForCheck();
     };
     /**
-     * This method sets display styles on the option to make it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
-     */
-    /**
-     * This method sets display styles on the option to make it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
      * @return {?}
      */
-    McTreeOption.prototype.setActiveStyles = /**
-     * This method sets display styles on the option to make it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
+    McTreeOption.prototype.handleFocus = /**
      * @return {?}
      */
     function () {
-        if (!this._active) {
-            this._active = true;
-            this.changeDetectorRef.markForCheck();
+        if (this.disabled || this.hasFocus) {
+            return;
+        }
+        this.hasFocus = true;
+        if (this.parent.setFocusedOption) {
+            this.parent.setFocusedOption(this);
         }
     };
     /**
-     * This method removes display styles on the option that made it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
-     */
-    /**
-     * This method removes display styles on the option that made it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
      * @return {?}
      */
-    McTreeOption.prototype.setInactiveStyles = /**
-     * This method removes display styles on the option that made it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
+    McTreeOption.prototype.handleBlur = /**
      * @return {?}
      */
     function () {
-        if (this._active) {
-            this._active = false;
-            this.changeDetectorRef.markForCheck();
+        this.hasFocus = false;
+    };
+    /**
+     * @return {?}
+     */
+    McTreeOption.prototype.focus = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var element = this.getHostElement();
+        if (typeof element.focus === 'function') {
+            element.focus();
         }
     };
     /**
@@ -387,34 +358,8 @@ var McTreeOption = /** @class */ (function (_super) {
         }
         return 0;
     };
-    /**
-     * @return {?}
-     */
-    McTreeOption.prototype.focus = /**
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var element = this.getHostElement();
-        if (typeof element.focus === 'function') {
-            element.focus();
-        }
-    };
     Object.defineProperty(McTreeOption.prototype, "viewValue", {
-        // todo старая реализация, нужно восстановить tree-selection
-        // handleClick(): void {
-        //     if (this.disabled) { return; }
-        //
-        //     this.treeSelection.setFocusedOption(this);
-        // }
-        get: 
-        // todo старая реализация, нужно восстановить tree-selection
-        // handleClick(): void {
-        //     if (this.disabled) { return; }
-        //
-        //     this.treeSelection.setFocusedOption(this);
-        // }
-        /**
+        get: /**
          * @return {?}
          */
         function () {
@@ -460,8 +405,8 @@ var McTreeOption = /** @class */ (function (_super) {
         if (!this.disabled) {
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
-            if (this.parent.setFocusedOption) {
-                this.parent.setFocusedOption(this, $event);
+            if (this.parent.setSelectedOption) {
+                this.parent.setSelectedOption(this, $event);
             }
         }
     };
@@ -506,7 +451,9 @@ var McTreeOption = /** @class */ (function (_super) {
                         '[attr.disabled]': 'disabled || null',
                         class: 'mc-tree-option',
                         '[class.mc-selected]': 'selected',
-                        '[class.mc-active]': 'active',
+                        '[class.mc-focused]': 'hasFocus',
+                        '(focus)': 'handleFocus()',
+                        '(blur)': 'handleBlur()',
                         '(click)': 'selectViaInteraction($event)'
                     },
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
@@ -635,7 +582,7 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this.keyManager = new a11y.ActiveDescendantKeyManager(this.options)
+        this.keyManager = new a11y.FocusKeyManager(this.options)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
         this.keyManager.change
@@ -758,13 +705,12 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @param {?=} $event
      * @return {?}
      */
-    McTreeSelection.prototype.setFocusedOption = /**
+    McTreeSelection.prototype.setSelectedOption = /**
      * @param {?} option
      * @param {?=} $event
      * @return {?}
      */
     function (option, $event) {
-        this.keyManager.setActiveItem(option);
         /** @type {?} */
         var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
         /** @type {?} */
@@ -827,6 +773,17 @@ var McTreeSelection = /** @class */ (function (_super) {
         }
     };
     /**
+     * @param {?} option
+     * @return {?}
+     */
+    McTreeSelection.prototype.setFocusedOption = /**
+     * @param {?} option
+     * @return {?}
+     */
+    function (option) {
+        this.keyManager.setActiveItem(option);
+    };
+    /**
      * @return {?}
      */
     McTreeSelection.prototype.toggleFocusedOption = /**
@@ -836,7 +793,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         /** @type {?} */
         var focusedOption = this.keyManager.activeItem;
         if (focusedOption) {
-            this.setFocusedOption(focusedOption);
+            this.setSelectedOption(focusedOption);
         }
     };
     /**

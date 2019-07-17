@@ -5,6 +5,7 @@ import { CanDisable } from '@ptsecurity/mosaic/core';
 export interface McTreeOptionParentComponent {
     multiple: boolean;
     selectionModel: SelectionModel<any>;
+    setSelectedOption: any;
     setFocusedOption: any;
 }
 /**
@@ -27,34 +28,17 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     readonly onSelectionChange: EventEmitter<McTreeOptionChange>;
     selected: boolean;
     private _selected;
-    /**
-     * Whether or not the option is currently active and ready to be selected.
-     * An active option displays styles as if it is focused, but the
-     * focus is actually retained somewhere else. This comes in handy
-     * for components like autocomplete where focus must remain on the input.
-     */
-    readonly active: boolean;
-    private _active;
     readonly id: string;
     private _id;
     readonly multiple: boolean;
+    hasFocus: boolean;
     constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, parent: McTreeOptionParentComponent);
     toggle(): void;
     setSelected(selected: boolean): void;
-    /**
-     * This method sets display styles on the option to make it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
-     */
-    setActiveStyles(): void;
-    /**
-     * This method removes display styles on the option that made it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
-     */
-    setInactiveStyles(): void;
-    getHeight(): number;
+    handleFocus(): void;
+    handleBlur(): void;
     focus(): void;
+    getHeight(): number;
     readonly viewValue: string;
     select(): void;
     deselect(): void;

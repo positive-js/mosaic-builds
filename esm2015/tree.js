@@ -9,7 +9,7 @@ import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNodeToggle, CdkTreeNode, Cdk
 import { toBoolean, mixinDisabled, mixinTabIndex, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NgControl } from '@angular/forms';
-import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { END, ENTER, hasModifierKey, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { Subject, BehaviorSubject, merge } from 'rxjs';
 import { takeUntil, map, take } from 'rxjs/operators';
@@ -142,8 +142,8 @@ class McTreeOption extends CdkTreeNode {
         this._disabled = false;
         this.onSelectionChange = new EventEmitter();
         this._selected = false;
-        this._active = false;
         this._id = `mc-tree-option-${uniqueIdCounter++}`;
+        this.hasFocus = false;
     }
     /**
      * @return {?}
@@ -198,16 +198,6 @@ class McTreeOption extends CdkTreeNode {
         }
     }
     /**
-     * Whether or not the option is currently active and ready to be selected.
-     * An active option displays styles as if it is focused, but the
-     * focus is actually retained somewhere else. This comes in handy
-     * for components like autocomplete where focus must remain on the input.
-     * @return {?}
-     */
-    get active() {
-        return this._active;
-    }
-    /**
      * @return {?}
      */
     get id() {
@@ -243,27 +233,31 @@ class McTreeOption extends CdkTreeNode {
         this.changeDetectorRef.markForCheck();
     }
     /**
-     * This method sets display styles on the option to make it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
      * @return {?}
      */
-    setActiveStyles() {
-        if (!this._active) {
-            this._active = true;
-            this.changeDetectorRef.markForCheck();
+    handleFocus() {
+        if (this.disabled || this.hasFocus) {
+            return;
+        }
+        this.hasFocus = true;
+        if (this.parent.setFocusedOption) {
+            this.parent.setFocusedOption(this);
         }
     }
     /**
-     * This method removes display styles on the option that made it appear
-     * active. This is used by the ActiveDescendantKeyManager so key
-     * events will display the proper options as active on arrow key events.
      * @return {?}
      */
-    setInactiveStyles() {
-        if (this._active) {
-            this._active = false;
-            this.changeDetectorRef.markForCheck();
+    handleBlur() {
+        this.hasFocus = false;
+    }
+    /**
+     * @return {?}
+     */
+    focus() {
+        /** @type {?} */
+        const element = this.getHostElement();
+        if (typeof element.focus === 'function') {
+            element.focus();
         }
     }
     /**
@@ -277,22 +271,6 @@ class McTreeOption extends CdkTreeNode {
         }
         return 0;
     }
-    /**
-     * @return {?}
-     */
-    focus() {
-        /** @type {?} */
-        const element = this.getHostElement();
-        if (typeof element.focus === 'function') {
-            element.focus();
-        }
-    }
-    // todo старая реализация, нужно восстановить tree-selection
-    // handleClick(): void {
-    //     if (this.disabled) { return; }
-    //
-    //     this.treeSelection.setFocusedOption(this);
-    // }
     /**
      * @return {?}
      */
@@ -326,8 +304,8 @@ class McTreeOption extends CdkTreeNode {
         if (!this.disabled) {
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
-            if (this.parent.setFocusedOption) {
-                this.parent.setFocusedOption(this, $event);
+            if (this.parent.setSelectedOption) {
+                this.parent.setSelectedOption(this, $event);
             }
         }
     }
@@ -362,7 +340,9 @@ McTreeOption.decorators = [
                     '[attr.disabled]': 'disabled || null',
                     class: 'mc-tree-option',
                     '[class.mc-selected]': 'selected',
-                    '[class.mc-active]': 'active',
+                    '[class.mc-focused]': 'hasFocus',
+                    '(focus)': 'handleFocus()',
+                    '(blur)': 'handleBlur()',
                     '(click)': 'selectViaInteraction($event)'
                 },
                 changeDetection: ChangeDetectionStrategy.OnPush,
@@ -494,7 +474,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
      * @return {?}
      */
     ngAfterContentInit() {
-        this.keyManager = new ActiveDescendantKeyManager(this.options)
+        this.keyManager = new FocusKeyManager(this.options)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
         this.keyManager.change
@@ -607,8 +587,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
      * @param {?=} $event
      * @return {?}
      */
-    setFocusedOption(option, $event) {
-        this.keyManager.setActiveItem(option);
+    setSelectedOption(option, $event) {
         /** @type {?} */
         const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
         /** @type {?} */
@@ -671,13 +650,20 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
         }
     }
     /**
+     * @param {?} option
+     * @return {?}
+     */
+    setFocusedOption(option) {
+        this.keyManager.setActiveItem(option);
+    }
+    /**
      * @return {?}
      */
     toggleFocusedOption() {
         /** @type {?} */
         const focusedOption = this.keyManager.activeItem;
         if (focusedOption) {
-            this.setFocusedOption(focusedOption);
+            this.setSelectedOption(focusedOption);
         }
     }
     /**

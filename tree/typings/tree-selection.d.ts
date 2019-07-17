@@ -1,7 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ChangeDetectorRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import { CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { McTreeOption } from './tree-option';
@@ -24,7 +24,7 @@ export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOpti
     ngControl: NgControl;
     nodeOutlet: CdkTreeNodeOutlet;
     options: QueryList<McTreeOption>;
-    keyManager: ActiveDescendantKeyManager<McTreeOption>;
+    keyManager: FocusKeyManager<McTreeOption>;
     selectionModel: SelectionModel<any>;
     tabIndex: number;
     multiple: boolean;
@@ -40,7 +40,8 @@ export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOpti
     ngOnDestroy(): void;
     onKeyDown(event: KeyboardEvent): void;
     updateScrollSize(): void;
-    setFocusedOption(option: McTreeOption, $event?: KeyboardEvent): void;
+    setSelectedOption(option: McTreeOption, $event?: KeyboardEvent): void;
+    setFocusedOption(option: McTreeOption): void;
     toggleFocusedOption(): void;
     renderNodeChanges(data: McTreeOption[], dataDiffer?: IterableDiffer<McTreeOption>, viewContainer?: any, parentData?: McTreeOption): void;
     getHeight(): number;
