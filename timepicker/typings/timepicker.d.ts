@@ -1,4 +1,4 @@
-import { DoCheck, ElementRef, OnChanges, OnDestroy, Renderer2 } from '@angular/core';
+import { DoCheck, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
@@ -13,18 +13,11 @@ export declare class McTimepickerBase {
     constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
 export declare const McTimepickerMixinBase: CanUpdateErrorStateCtor & typeof McTimepickerBase;
-export declare class McTimepicker<D> extends McTimepickerMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState, ControlValueAccessor {
+export declare class McTimepicker<D> extends McTimepickerMixinBase implements McFormFieldControl<any>, OnDestroy, DoCheck, CanUpdateErrorState, ControlValueAccessor {
     private readonly elementRef;
     ngControl: NgControl;
     private readonly renderer;
     private dateAdapter;
-    /** An object used to control when error messages are shown. */
-    errorStateMatcher: ErrorStateMatcher;
-    /**
-     * Implemented as part of McFormFieldControl.
-     * @docs-private
-     */
-    focused: boolean;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -34,43 +27,48 @@ export declare class McTimepicker<D> extends McTimepickerMixinBase implements Mc
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
+    focused: boolean;
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
     controlType: string;
-    disabled: boolean;
-    id: string;
+    /** An object used to control when error messages are shown. */
+    errorStateMatcher: ErrorStateMatcher;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     placeholder: string;
+    disabled: boolean;
+    private _disabled;
+    id: string;
+    private _id;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     required: boolean;
+    private _required;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     value: string;
     timeFormat: TimeFormats;
+    private _timeFormat;
     minTime: string | null;
+    private _minTime;
     maxTime: string | null;
-    private _id;
+    private _maxTime;
     private readonly uid;
-    private _disabled;
-    private _required;
-    private previousNativeValue;
     private readonly inputValueAccessor;
+    private originalValue;
+    private previousNativeValue;
+    private currentDateTimeInput;
     private onChange;
     private onTouched;
-    private _timeFormat;
-    private _minTime;
-    private minDateTime;
-    private _maxTime;
-    private maxDateTime;
-    private currentDateTimeInput;
     constructor(elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, renderer: Renderer2, dateAdapter: DateAdapter<any>);
-    ngOnChanges(): void;
     ngOnDestroy(): void;
     ngDoCheck(): void;
     focus(): void;
@@ -92,6 +90,7 @@ export declare class McTimepicker<D> extends McTimepickerMixinBase implements Mc
     onKeyDown(event: KeyboardEvent): void;
     registerOnChange(fn: (value: D) => void): void;
     registerOnTouched(fn: () => void): void;
+    saveOriginalValue(value: D): void;
     /** Does some manual dirty checking on the native input `value` property. */
     private dirtyCheckNativeValue;
     /** Checks whether the input is invalid based on the native validation. */

@@ -27039,20 +27039,20 @@ var McTimepicker = /** @class */ (function (_super) {
          * Implemented as part of McFormFieldControl.
          * \@docs-private
          */
-        _this.focused = false;
-        /**
-         * Implemented as part of McFormFieldControl.
-         * \@docs-private
-         */
         _this.stateChanges = new rxjs.Subject();
         /**
          * Implemented as part of McFormFieldControl.
          * \@docs-private
          */
+        _this.focused = false;
+        /**
+         * Implemented as part of McFormFieldControl.
+         * \@docs-private
+         */
         _this.controlType = 'mc-timepicker';
-        _this.uid = "mc-timepicker-" + uniqueComponentIdSuffix++;
         _this._minTime = null;
         _this._maxTime = null;
+        _this.uid = "mc-timepicker-" + uniqueComponentIdSuffix++;
         if (!_this.dateAdapter) {
             throw Error("McTimepicker: No provider found for DateAdapter. You must import one of the existing " +
                 "modules at your application root or provide a custom implementation or use exists ones.");
@@ -27124,12 +27124,16 @@ var McTimepicker = /** @class */ (function (_super) {
         get: /**
          * @return {?}
          */
-        function () { return this._id; },
+        function () {
+            return this._id;
+        },
         set: /**
          * @param {?} value
          * @return {?}
          */
-        function (value) { this._id = value || this.uid; },
+        function (value) {
+            this._id = value || this.uid;
+        },
         enumerable: true,
         configurable: true
     });
@@ -27143,12 +27147,16 @@ var McTimepicker = /** @class */ (function (_super) {
          * \@docs-private
          * @return {?}
          */
-        function () { return this._required; },
+        function () {
+            return this._required;
+        },
         set: /**
          * @param {?} value
          * @return {?}
          */
-        function (value) { this._required = coercion.coerceBooleanProperty(value); },
+        function (value) {
+            this._required = coercion.coerceBooleanProperty(value);
+        },
         enumerable: true,
         configurable: true
     });
@@ -27162,7 +27170,9 @@ var McTimepicker = /** @class */ (function (_super) {
          * \@docs-private
          * @return {?}
          */
-        function () { return this.inputValueAccessor.value; },
+        function () {
+            return this.inputValueAccessor.value;
+        },
         set: /**
          * @param {?} value
          * @return {?}
@@ -27180,7 +27190,9 @@ var McTimepicker = /** @class */ (function (_super) {
         get: /**
          * @return {?}
          */
-        function () { return this._timeFormat; },
+        function () {
+            return this._timeFormat;
+        },
         set: /**
          * @param {?} formatValue
          * @return {?}
@@ -27204,14 +27216,15 @@ var McTimepicker = /** @class */ (function (_super) {
         get: /**
          * @return {?}
          */
-        function () { return this._minTime; },
+        function () {
+            return this._minTime;
+        },
         set: /**
-         * @param {?} minValue
+         * @param {?} value
          * @return {?}
          */
-        function (minValue) {
-            this._minTime = minValue;
-            this.minDateTime = minValue !== null ? this.getDateFromTimeString(minValue) : undefined;
+        function (value) {
+            this._minTime = value;
             ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
         },
         enumerable: true,
@@ -27221,28 +27234,20 @@ var McTimepicker = /** @class */ (function (_super) {
         get: /**
          * @return {?}
          */
-        function () { return this._maxTime; },
+        function () {
+            return this._maxTime;
+        },
         set: /**
          * @param {?} maxValue
          * @return {?}
          */
         function (maxValue) {
             this._maxTime = maxValue;
-            this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
             ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
         },
         enumerable: true,
         configurable: true
     });
-    /**
-     * @return {?}
-     */
-    McTimepicker.prototype.ngOnChanges = /**
-     * @return {?}
-     */
-    function () {
-        this.stateChanges.next();
-    };
     /**
      * @return {?}
      */
@@ -27406,10 +27411,10 @@ var McTimepicker = /** @class */ (function (_super) {
      */
     function (value) {
         if (value !== null) {
+            this.saveOriginalValue(value);
             this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.getTimeStringFromDate(value, this.timeFormat));
+            this.applyInputChanges();
         }
-        this.onChange(value || null);
-        this.applyInputChanges();
     };
     /**
      * @param {?} event
@@ -27450,6 +27455,19 @@ var McTimepicker = /** @class */ (function (_super) {
      */
     function (fn) {
         this.onTouched = fn;
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    McTimepicker.prototype.saveOriginalValue = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        if (this.dateAdapter.isValid(value)) {
+            this.originalValue = value;
+        }
     };
     /** Does some manual dirty checking on the native input `value` property. */
     /**
@@ -27905,8 +27923,7 @@ var McTimepicker = /** @class */ (function (_super) {
             seconds = Number(hoursAndMinutesAndSeconds[3]);
         }
         /** @type {?} */
-        var resultDate = this.dateAdapter.createDateTime(1970, 0, 1, hours, minutes, seconds, 0);
-        // tslint:enable no-magic-numbers
+        var resultDate = this.dateAdapter.createDateTime(this.dateAdapter.getYear(this.originalValue), this.dateAdapter.getMonth(this.originalValue), this.dateAdapter.getDate(this.originalValue), hours, minutes, seconds, 0);
         return this.dateAdapter.isValid(resultDate) ? resultDate : undefined;
     };
     /**
@@ -27948,9 +27965,8 @@ var McTimepicker = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        if (this.currentDateTimeInput !== undefined &&
-            this.minDateTime !== undefined &&
-            this.minDateTime !== null &&
+        if (this.minTime &&
+            this.currentDateTimeInput !== undefined &&
             this.isTimeLowerThenMin(this.currentDateTimeInput)) {
             return { mcTimepickerLowerThenMintime: { text: this.elementRef.nativeElement.value } };
         }
@@ -27965,9 +27981,8 @@ var McTimepicker = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        if (this.currentDateTimeInput !== undefined &&
-            this.maxDateTime !== undefined &&
-            this.maxDateTime !== null &&
+        if (this.maxTime &&
+            this.currentDateTimeInput !== undefined &&
             this.isTimeGreaterThenMax(this.currentDateTimeInput)) {
             return { mcTimepickerHigherThenMaxtime: { text: this.elementRef.nativeElement.value } };
         }
@@ -27984,10 +27999,10 @@ var McTimepicker = /** @class */ (function (_super) {
      * @return {?}
      */
     function (timeToCompare) {
-        if (timeToCompare === undefined || timeToCompare === null) {
+        if (timeToCompare === undefined || timeToCompare === null || this.minTime === null) {
             return false;
         }
-        return this.dateAdapter.compareDateTime(timeToCompare, this.minDateTime) < 0;
+        return this.dateAdapter.compareDateTime(timeToCompare, this.getDateFromTimeString(this.minTime)) < 0;
     };
     /**
      * @private
@@ -28000,10 +28015,10 @@ var McTimepicker = /** @class */ (function (_super) {
      * @return {?}
      */
     function (timeToCompare) {
-        if (timeToCompare === undefined || timeToCompare === null) {
+        if (timeToCompare === undefined || timeToCompare === null || this.maxTime === null) {
             return false;
         }
-        return this.dateAdapter.compareDateTime(timeToCompare, this.maxDateTime) >= 0;
+        return this.dateAdapter.compareDateTime(timeToCompare, this.getDateFromTimeString(this.maxTime)) >= 0;
     };
     McTimepicker.decorators = [
         { type: core.Directive, args: [{
@@ -28052,9 +28067,9 @@ var McTimepicker = /** @class */ (function (_super) {
     ]; };
     McTimepicker.propDecorators = {
         errorStateMatcher: [{ type: core.Input }],
+        placeholder: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
         id: [{ type: core.Input }],
-        placeholder: [{ type: core.Input }],
         required: [{ type: core.Input }],
         value: [{ type: core.Input }],
         timeFormat: [{ type: core.Input, args: ['time-format',] }],
@@ -31779,7 +31794,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa1 = mcSidebarAnimations;
+exports.ɵa2 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -31818,7 +31833,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

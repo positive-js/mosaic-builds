@@ -110,20 +110,20 @@ class McTimepicker extends McTimepickerMixinBase {
          * Implemented as part of McFormFieldControl.
          * \@docs-private
          */
-        this.focused = false;
-        /**
-         * Implemented as part of McFormFieldControl.
-         * \@docs-private
-         */
         this.stateChanges = new Subject();
         /**
          * Implemented as part of McFormFieldControl.
          * \@docs-private
          */
+        this.focused = false;
+        /**
+         * Implemented as part of McFormFieldControl.
+         * \@docs-private
+         */
         this.controlType = 'mc-timepicker';
-        this.uid = `mc-timepicker-${uniqueComponentIdSuffix++}`;
         this._minTime = null;
         this._maxTime = null;
+        this.uid = `mc-timepicker-${uniqueComponentIdSuffix++}`;
         if (!this.dateAdapter) {
             throw Error(`McTimepicker: No provider found for DateAdapter. You must import one of the existing ` +
                 `modules at your application root or provide a custom implementation or use exists ones.`);
@@ -190,29 +190,39 @@ class McTimepicker extends McTimepickerMixinBase {
     /**
      * @return {?}
      */
-    get id() { return this._id; }
+    get id() {
+        return this._id;
+    }
     /**
      * @param {?} value
      * @return {?}
      */
-    set id(value) { this._id = value || this.uid; }
+    set id(value) {
+        this._id = value || this.uid;
+    }
     /**
      * Implemented as part of McFormFieldControl.
      * \@docs-private
      * @return {?}
      */
-    get required() { return this._required; }
+    get required() {
+        return this._required;
+    }
     /**
      * @param {?} value
      * @return {?}
      */
-    set required(value) { this._required = coerceBooleanProperty(value); }
+    set required(value) {
+        this._required = coerceBooleanProperty(value);
+    }
     /**
      * Implemented as part of McFormFieldControl.
      * \@docs-private
      * @return {?}
      */
-    get value() { return this.inputValueAccessor.value; }
+    get value() {
+        return this.inputValueAccessor.value;
+    }
     /**
      * @param {?} value
      * @return {?}
@@ -226,7 +236,9 @@ class McTimepicker extends McTimepickerMixinBase {
     /**
      * @return {?}
      */
-    get timeFormat() { return this._timeFormat; }
+    get timeFormat() {
+        return this._timeFormat;
+    }
     /**
      * @param {?} formatValue
      * @return {?}
@@ -246,34 +258,30 @@ class McTimepicker extends McTimepickerMixinBase {
     /**
      * @return {?}
      */
-    get minTime() { return this._minTime; }
+    get minTime() {
+        return this._minTime;
+    }
     /**
-     * @param {?} minValue
+     * @param {?} value
      * @return {?}
      */
-    set minTime(minValue) {
-        this._minTime = minValue;
-        this.minDateTime = minValue !== null ? this.getDateFromTimeString(minValue) : undefined;
+    set minTime(value) {
+        this._minTime = value;
         ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
     }
     /**
      * @return {?}
      */
-    get maxTime() { return this._maxTime; }
+    get maxTime() {
+        return this._maxTime;
+    }
     /**
      * @param {?} maxValue
      * @return {?}
      */
     set maxTime(maxValue) {
         this._maxTime = maxValue;
-        this.maxDateTime = maxValue !== null ? this.getDateFromTimeString(maxValue) : undefined;
         ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
-    }
-    /**
-     * @return {?}
-     */
-    ngOnChanges() {
-        this.stateChanges.next();
     }
     /**
      * @return {?}
@@ -394,10 +402,10 @@ class McTimepicker extends McTimepickerMixinBase {
      */
     writeValue(value) {
         if (value !== null) {
+            this.saveOriginalValue(value);
             this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.getTimeStringFromDate(value, this.timeFormat));
+            this.applyInputChanges();
         }
-        this.onChange(value || null);
-        this.applyInputChanges();
     }
     /**
      * @param {?} event
@@ -426,6 +434,15 @@ class McTimepicker extends McTimepickerMixinBase {
      */
     registerOnTouched(fn) {
         this.onTouched = fn;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    saveOriginalValue(value) {
+        if (this.dateAdapter.isValid(value)) {
+            this.originalValue = value;
+        }
     }
     /**
      * Does some manual dirty checking on the native input `value` property.
@@ -763,8 +780,7 @@ class McTimepicker extends McTimepickerMixinBase {
             seconds = Number(hoursAndMinutesAndSeconds[3]);
         }
         /** @type {?} */
-        const resultDate = this.dateAdapter.createDateTime(1970, 0, 1, hours, minutes, seconds, 0);
-        // tslint:enable no-magic-numbers
+        const resultDate = this.dateAdapter.createDateTime(this.dateAdapter.getYear(this.originalValue), this.dateAdapter.getMonth(this.originalValue), this.dateAdapter.getDate(this.originalValue), hours, minutes, seconds, 0);
         return this.dateAdapter.isValid(resultDate) ? resultDate : undefined;
     }
     /**
@@ -793,9 +809,8 @@ class McTimepicker extends McTimepickerMixinBase {
      * @return {?}
      */
     minTimeValidator() {
-        if (this.currentDateTimeInput !== undefined &&
-            this.minDateTime !== undefined &&
-            this.minDateTime !== null &&
+        if (this.minTime &&
+            this.currentDateTimeInput !== undefined &&
             this.isTimeLowerThenMin(this.currentDateTimeInput)) {
             return { mcTimepickerLowerThenMintime: { text: this.elementRef.nativeElement.value } };
         }
@@ -806,9 +821,8 @@ class McTimepicker extends McTimepickerMixinBase {
      * @return {?}
      */
     maxTimeValidator() {
-        if (this.currentDateTimeInput !== undefined &&
-            this.maxDateTime !== undefined &&
-            this.maxDateTime !== null &&
+        if (this.maxTime &&
+            this.currentDateTimeInput !== undefined &&
             this.isTimeGreaterThenMax(this.currentDateTimeInput)) {
             return { mcTimepickerHigherThenMaxtime: { text: this.elementRef.nativeElement.value } };
         }
@@ -820,10 +834,10 @@ class McTimepicker extends McTimepickerMixinBase {
      * @return {?}
      */
     isTimeLowerThenMin(timeToCompare) {
-        if (timeToCompare === undefined || timeToCompare === null) {
+        if (timeToCompare === undefined || timeToCompare === null || this.minTime === null) {
             return false;
         }
-        return this.dateAdapter.compareDateTime(timeToCompare, this.minDateTime) < 0;
+        return this.dateAdapter.compareDateTime(timeToCompare, this.getDateFromTimeString(this.minTime)) < 0;
     }
     /**
      * @private
@@ -831,10 +845,10 @@ class McTimepicker extends McTimepickerMixinBase {
      * @return {?}
      */
     isTimeGreaterThenMax(timeToCompare) {
-        if (timeToCompare === undefined || timeToCompare === null) {
+        if (timeToCompare === undefined || timeToCompare === null || this.maxTime === null) {
             return false;
         }
-        return this.dateAdapter.compareDateTime(timeToCompare, this.maxDateTime) >= 0;
+        return this.dateAdapter.compareDateTime(timeToCompare, this.getDateFromTimeString(this.maxTime)) >= 0;
     }
 }
 McTimepicker.decorators = [
@@ -884,9 +898,9 @@ McTimepicker.ctorParameters = () => [
 ];
 McTimepicker.propDecorators = {
     errorStateMatcher: [{ type: Input }],
+    placeholder: [{ type: Input }],
     disabled: [{ type: Input }],
     id: [{ type: Input }],
-    placeholder: [{ type: Input }],
     required: [{ type: Input }],
     value: [{ type: Input }],
     timeFormat: [{ type: Input, args: ['time-format',] }],
