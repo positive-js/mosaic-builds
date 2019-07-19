@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, Optional, Output, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -492,9 +493,10 @@ McRadioButtonBase = /** @class */ (function () {
 var _McRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
 var McRadioButton = /** @class */ (function (_super) {
     __extends(McRadioButton, _super);
-    function McRadioButton(radioGroup, elementRef, _changeDetector, _radioDispatcher) {
+    function McRadioButton(radioGroup, elementRef, _changeDetector, focusMonitor, _radioDispatcher) {
         var _this = _super.call(this, elementRef) || this;
         _this._changeDetector = _changeDetector;
+        _this.focusMonitor = focusMonitor;
         _this._radioDispatcher = _radioDispatcher;
         /* tslint:disable:member-ordering */
         _this._uniqueId = "mc-radio-" + ++nextUniqueId;
@@ -690,25 +692,45 @@ var McRadioButton = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
+    McRadioButton.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.focusMonitor
+            .monitor(this._elementRef, true)
+            .subscribe((/**
+         * @param {?} focusOrigin
+         * @return {?}
+         */
+        function (focusOrigin) {
+            if (!focusOrigin && _this.radioGroup) {
+                _this.radioGroup.touch();
+            }
+        }));
+    };
+    /**
+     * @return {?}
+     */
     McRadioButton.prototype.ngOnDestroy = /**
      * @return {?}
      */
     function () {
+        this.focusMonitor.stopMonitoring(this._elementRef);
         this.removeUniqueSelectionListener();
     };
     /** Focuses the radio button. */
-    // tslint:disable-next-line
     /**
      * Focuses the radio button.
      * @return {?}
      */
-    // tslint:disable-next-line
     McRadioButton.prototype.focus = /**
      * Focuses the radio button.
      * @return {?}
      */
-    // tslint:disable-next-line
-    function () { };
+    function () {
+        this._inputElement.nativeElement.focus();
+    };
     /**
      * Marks the radio button as needing checking for change detection.
      * This method is exposed because the parent radio group will directly
@@ -801,8 +823,7 @@ var McRadioButton = /** @class */ (function (_super) {
                         class: 'mc-radio-button',
                         '[attr.id]': 'id',
                         '[class.mc-checked]': 'checked',
-                        '[class.mc-disabled]': 'disabled',
-                        '(focus)': '_inputElement.nativeElement.focus()'
+                        '[class.mc-disabled]': 'disabled'
                     }
                 },] },
     ];
@@ -811,6 +832,7 @@ var McRadioButton = /** @class */ (function (_super) {
         { type: McRadioGroup, decorators: [{ type: Optional }] },
         { type: ElementRef },
         { type: ChangeDetectorRef },
+        { type: FocusMonitor },
         { type: UniqueSelectionDispatcher }
     ]; };
     McRadioButton.propDecorators = {

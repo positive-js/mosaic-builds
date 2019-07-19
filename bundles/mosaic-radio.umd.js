@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/collections'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/mosaic/core'), require('@angular/common'), require('@ptsecurity/cdk/a11y')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/radio', ['exports', '@angular/cdk/collections', '@angular/core', '@angular/forms', '@ptsecurity/mosaic/core', '@angular/common', '@ptsecurity/cdk/a11y'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.radio = {}),global.ng.cdk.collections,global.ng.core,global.ng.forms,global.ng.mosaic.core,global.ng.common,global.ng.cdk.a11y));
-}(this, (function (exports,collections,core,forms,core$1,common,a11y) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/collections'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/mosaic/core'), require('@angular/common'), require('@ptsecurity/cdk/a11y')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/radio', ['exports', '@angular/cdk/a11y', '@angular/cdk/collections', '@angular/core', '@angular/forms', '@ptsecurity/mosaic/core', '@angular/common', '@ptsecurity/cdk/a11y'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.radio = {}),global.ng.cdk.a11y,global.ng.cdk.collections,global.ng.core,global.ng.forms,global.ng.mosaic.core,global.ng.common,global.ng.cdk.a11y));
+}(this, (function (exports,a11y,collections,core,forms,core$1,common,a11y$1) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -519,9 +519,10 @@ McRadioButtonBase = /** @class */ (function () {
 var _McRadioButtonMixinBase = core$1.mixinColor(core$1.mixinTabIndex(McRadioButtonBase));
 var McRadioButton = /** @class */ (function (_super) {
     __extends(McRadioButton, _super);
-    function McRadioButton(radioGroup, elementRef, _changeDetector, _radioDispatcher) {
+    function McRadioButton(radioGroup, elementRef, _changeDetector, focusMonitor, _radioDispatcher) {
         var _this = _super.call(this, elementRef) || this;
         _this._changeDetector = _changeDetector;
+        _this.focusMonitor = focusMonitor;
         _this._radioDispatcher = _radioDispatcher;
         /* tslint:disable:member-ordering */
         _this._uniqueId = "mc-radio-" + ++nextUniqueId;
@@ -717,25 +718,45 @@ var McRadioButton = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
+    McRadioButton.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.focusMonitor
+            .monitor(this._elementRef, true)
+            .subscribe((/**
+         * @param {?} focusOrigin
+         * @return {?}
+         */
+        function (focusOrigin) {
+            if (!focusOrigin && _this.radioGroup) {
+                _this.radioGroup.touch();
+            }
+        }));
+    };
+    /**
+     * @return {?}
+     */
     McRadioButton.prototype.ngOnDestroy = /**
      * @return {?}
      */
     function () {
+        this.focusMonitor.stopMonitoring(this._elementRef);
         this.removeUniqueSelectionListener();
     };
     /** Focuses the radio button. */
-    // tslint:disable-next-line
     /**
      * Focuses the radio button.
      * @return {?}
      */
-    // tslint:disable-next-line
     McRadioButton.prototype.focus = /**
      * Focuses the radio button.
      * @return {?}
      */
-    // tslint:disable-next-line
-    function () { };
+    function () {
+        this._inputElement.nativeElement.focus();
+    };
     /**
      * Marks the radio button as needing checking for change detection.
      * This method is exposed because the parent radio group will directly
@@ -828,8 +849,7 @@ var McRadioButton = /** @class */ (function (_super) {
                         class: 'mc-radio-button',
                         '[attr.id]': 'id',
                         '[class.mc-checked]': 'checked',
-                        '[class.mc-disabled]': 'disabled',
-                        '(focus)': '_inputElement.nativeElement.focus()'
+                        '[class.mc-disabled]': 'disabled'
                     }
                 },] },
     ];
@@ -838,6 +858,7 @@ var McRadioButton = /** @class */ (function (_super) {
         { type: McRadioGroup, decorators: [{ type: core.Optional }] },
         { type: core.ElementRef },
         { type: core.ChangeDetectorRef },
+        { type: a11y.FocusMonitor },
         { type: collections.UniqueSelectionDispatcher }
     ]; };
     McRadioButton.propDecorators = {
@@ -867,7 +888,7 @@ var McRadioModule = /** @class */ (function () {
     }
     McRadioModule.decorators = [
         { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, a11y.A11yModule, core$1.McCommonModule],
+                    imports: [common.CommonModule, a11y$1.A11yModule, core$1.McCommonModule],
                     exports: [McRadioGroup, McRadioButton],
                     declarations: [McRadioGroup, McRadioButton]
                 },] },

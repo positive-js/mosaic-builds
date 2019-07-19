@@ -1,5 +1,6 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
-import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 /** Change event object emitted by McRadio. */
@@ -119,8 +120,9 @@ export declare class McRadioButtonBase {
     constructor(_elementRef: ElementRef);
 }
 export declare const _McRadioButtonMixinBase: CanColorCtor & HasTabIndexCtor & typeof McRadioButtonBase;
-export declare class McRadioButton extends _McRadioButtonMixinBase implements OnInit, OnDestroy, CanColor, HasTabIndex {
+export declare class McRadioButton extends _McRadioButtonMixinBase implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
     private readonly _changeDetector;
+    private focusMonitor;
     private readonly _radioDispatcher;
     /** Whether this radio button is checked. */
     checked: boolean;
@@ -165,8 +167,9 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     /** The parent radio group. May or may not be present. */
     radioGroup: McRadioGroup;
     isFocused: boolean;
-    constructor(radioGroup: McRadioGroup, elementRef: ElementRef, _changeDetector: ChangeDetectorRef, _radioDispatcher: UniqueSelectionDispatcher);
+    constructor(radioGroup: McRadioGroup, elementRef: ElementRef, _changeDetector: ChangeDetectorRef, focusMonitor: FocusMonitor, _radioDispatcher: UniqueSelectionDispatcher);
     ngOnInit(): void;
+    ngAfterViewInit(): void;
     ngOnDestroy(): void;
     /** Focuses the radio button. */
     focus(): void;

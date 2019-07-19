@@ -898,11 +898,7 @@ $base-font-size: 15px !default;
 
     $is-dark: map-get($theme, is-dark);
 
-    .mc-alert__close:focus {
-        border: 1px solid mc-color($primary);
-        box-shadow: 0 0 0 1px mc-color($primary);
-        z-index: 1;
-    }
+    
 
     .mc-alert {
         color: mc-color($foreground, text);
@@ -2286,7 +2282,7 @@ $mc-calendar-weekday-table-font-size: 11px !default;
             }
         }
 
-        & .mc-radio-input:focus {
+        &.cdk-keyboard-focused .mc-radio-input {
             + .mc-radio-label-content .mc-radio-button__outer-circle {
                 border-color: $focus-color;
 

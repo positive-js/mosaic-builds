@@ -4,6 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, Optional, Output, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -373,11 +374,13 @@ class McRadioButton extends _McRadioButtonMixinBase {
      * @param {?} radioGroup
      * @param {?} elementRef
      * @param {?} _changeDetector
+     * @param {?} focusMonitor
      * @param {?} _radioDispatcher
      */
-    constructor(radioGroup, elementRef, _changeDetector, _radioDispatcher) {
+    constructor(radioGroup, elementRef, _changeDetector, focusMonitor, _radioDispatcher) {
         super(elementRef);
         this._changeDetector = _changeDetector;
+        this.focusMonitor = focusMonitor;
         this._radioDispatcher = _radioDispatcher;
         /* tslint:disable:member-ordering */
         this._uniqueId = `mc-radio-${++nextUniqueId}`;
@@ -539,15 +542,33 @@ class McRadioButton extends _McRadioButtonMixinBase {
     /**
      * @return {?}
      */
+    ngAfterViewInit() {
+        this.focusMonitor
+            .monitor(this._elementRef, true)
+            .subscribe((/**
+         * @param {?} focusOrigin
+         * @return {?}
+         */
+        (focusOrigin) => {
+            if (!focusOrigin && this.radioGroup) {
+                this.radioGroup.touch();
+            }
+        }));
+    }
+    /**
+     * @return {?}
+     */
     ngOnDestroy() {
+        this.focusMonitor.stopMonitoring(this._elementRef);
         this.removeUniqueSelectionListener();
     }
     /**
      * Focuses the radio button.
      * @return {?}
      */
-    // tslint:disable-next-line
-    focus() { }
+    focus() {
+        this._inputElement.nativeElement.focus();
+    }
     /**
      * Marks the radio button as needing checking for change detection.
      * This method is exposed because the parent radio group will directly
@@ -616,8 +637,7 @@ McRadioButton.decorators = [
                     class: 'mc-radio-button',
                     '[attr.id]': 'id',
                     '[class.mc-checked]': 'checked',
-                    '[class.mc-disabled]': 'disabled',
-                    '(focus)': '_inputElement.nativeElement.focus()'
+                    '[class.mc-disabled]': 'disabled'
                 }
             },] },
 ];
@@ -626,6 +646,7 @@ McRadioButton.ctorParameters = () => [
     { type: McRadioGroup, decorators: [{ type: Optional }] },
     { type: ElementRef },
     { type: ChangeDetectorRef },
+    { type: FocusMonitor },
     { type: UniqueSelectionDispatcher }
 ];
 McRadioButton.propDecorators = {

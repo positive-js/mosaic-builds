@@ -16532,9 +16532,10 @@ McRadioButtonBase = /** @class */ (function () {
 var _McRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
 var McRadioButton = /** @class */ (function (_super) {
     __extends(McRadioButton, _super);
-    function McRadioButton(radioGroup, elementRef, _changeDetector, _radioDispatcher) {
+    function McRadioButton(radioGroup, elementRef, _changeDetector, focusMonitor, _radioDispatcher) {
         var _this = _super.call(this, elementRef) || this;
         _this._changeDetector = _changeDetector;
+        _this.focusMonitor = focusMonitor;
         _this._radioDispatcher = _radioDispatcher;
         /* tslint:disable:member-ordering */
         _this._uniqueId = "mc-radio-" + ++nextUniqueId$4;
@@ -16730,25 +16731,45 @@ var McRadioButton = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
+    McRadioButton.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.focusMonitor
+            .monitor(this._elementRef, true)
+            .subscribe((/**
+         * @param {?} focusOrigin
+         * @return {?}
+         */
+        function (focusOrigin) {
+            if (!focusOrigin && _this.radioGroup) {
+                _this.radioGroup.touch();
+            }
+        }));
+    };
+    /**
+     * @return {?}
+     */
     McRadioButton.prototype.ngOnDestroy = /**
      * @return {?}
      */
     function () {
+        this.focusMonitor.stopMonitoring(this._elementRef);
         this.removeUniqueSelectionListener();
     };
     /** Focuses the radio button. */
-    // tslint:disable-next-line
     /**
      * Focuses the radio button.
      * @return {?}
      */
-    // tslint:disable-next-line
     McRadioButton.prototype.focus = /**
      * Focuses the radio button.
      * @return {?}
      */
-    // tslint:disable-next-line
-    function () { };
+    function () {
+        this._inputElement.nativeElement.focus();
+    };
     /**
      * Marks the radio button as needing checking for change detection.
      * This method is exposed because the parent radio group will directly
@@ -16841,8 +16862,7 @@ var McRadioButton = /** @class */ (function (_super) {
                         class: 'mc-radio-button',
                         '[attr.id]': 'id',
                         '[class.mc-checked]': 'checked',
-                        '[class.mc-disabled]': 'disabled',
-                        '(focus)': '_inputElement.nativeElement.focus()'
+                        '[class.mc-disabled]': 'disabled'
                     }
                 },] },
     ];
@@ -16851,6 +16871,7 @@ var McRadioButton = /** @class */ (function (_super) {
         { type: McRadioGroup, decorators: [{ type: core.Optional }] },
         { type: core.ElementRef },
         { type: core.ChangeDetectorRef },
+        { type: a11y$1.FocusMonitor },
         { type: collections.UniqueSelectionDispatcher }
     ]; };
     McRadioButton.propDecorators = {
@@ -31660,11 +31681,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵe27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
-exports.ɵc27 = McModalBody;
-exports.ɵd27 = McModalFooter;
-exports.ɵb27 = McModalTitle;
+exports.ɵe28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
+exports.ɵc28 = McModalBody;
+exports.ɵd28 = McModalFooter;
+exports.ɵb28 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -31716,15 +31737,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd16 = McTabBase;
-exports.ɵe16 = mcTabMixinBase;
-exports.ɵa16 = McTabHeaderBase;
-exports.ɵb16 = McTabLabelWrapperBase;
-exports.ɵc16 = mcTabLabelWrapperMixinBase;
-exports.ɵh16 = McTabLinkBase;
-exports.ɵf16 = McTabNavBase;
-exports.ɵi16 = mcTabLinkMixinBase;
-exports.ɵg16 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31794,7 +31815,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa1 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -31833,7 +31854,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
