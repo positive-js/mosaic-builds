@@ -14919,19 +14919,6 @@ var McPopoverComponent = /** @class */ (function () {
         return typeof value === 'string' && value !== '';
     };
     /**
-     * @param {?} e
-     * @return {?}
-     */
-    McPopoverComponent.prototype.handleBodyInteraction = /**
-     * @param {?} e
-     * @return {?}
-     */
-    function (e) {
-        if (this.closeOnInteraction && !this.componentElementRef.nativeElement.contains(e.target)) {
-            this.hide();
-        }
-    };
-    /**
      * @return {?}
      */
     McPopoverComponent.prototype.animationStart = /**
@@ -14977,8 +14964,7 @@ var McPopoverComponent = /** @class */ (function () {
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     animations: [mcPopoverAnimations.popoverState],
                     host: {
-                        '[class]': 'getCssClassesList',
-                        '(body:click)': 'handleBodyInteraction($event)'
+                        '[class]': 'getCssClassesList'
                     }
                 },] },
     ];
@@ -15338,8 +15324,21 @@ var McPopover = /** @class */ (function () {
             direction: this.direction,
             positionStrategy: strategy,
             panelClass: 'mc-popover__panel',
-            scrollStrategy: this.scrollStrategy()
+            scrollStrategy: this.scrollStrategy(),
+            hasBackdrop: this.mcTrigger === 'manual',
+            backdropClass: 'no-class'
         });
+        if (this.mcTrigger === 'manual') {
+            this.overlayRef.backdropClick().subscribe((/**
+             * @return {?}
+             */
+            function () {
+                if (!_this.popover) {
+                    return;
+                }
+                _this.popover.hide();
+            }));
+        }
         this.updatePosition();
         this.overlayRef.detachments()
             .pipe(operators.takeUntil(this.destroyed))
@@ -31737,15 +31736,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31815,7 +31814,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa1 = mcSidebarAnimations;
+exports.ɵa0 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -31854,7 +31853,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

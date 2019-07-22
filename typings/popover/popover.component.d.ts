@@ -40,7 +40,6 @@ export declare class McPopoverComponent {
     markForCheck(): void;
     isTemplateRef(value: any): boolean;
     isNonEmptyString(value: any): boolean;
-    handleBodyInteraction(e: any): void;
     animationStart(): void;
     animationDone(event: AnimationEvent): void;
     ngOnDestroy(): void;

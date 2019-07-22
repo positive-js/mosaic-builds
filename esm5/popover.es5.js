@@ -280,19 +280,6 @@ var McPopoverComponent = /** @class */ (function () {
         return typeof value === 'string' && value !== '';
     };
     /**
-     * @param {?} e
-     * @return {?}
-     */
-    McPopoverComponent.prototype.handleBodyInteraction = /**
-     * @param {?} e
-     * @return {?}
-     */
-    function (e) {
-        if (this.closeOnInteraction && !this.componentElementRef.nativeElement.contains(e.target)) {
-            this.hide();
-        }
-    };
-    /**
      * @return {?}
      */
     McPopoverComponent.prototype.animationStart = /**
@@ -338,8 +325,7 @@ var McPopoverComponent = /** @class */ (function () {
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     animations: [mcPopoverAnimations.popoverState],
                     host: {
-                        '[class]': 'getCssClassesList',
-                        '(body:click)': 'handleBodyInteraction($event)'
+                        '[class]': 'getCssClassesList'
                     }
                 },] },
     ];
@@ -699,8 +685,21 @@ var McPopover = /** @class */ (function () {
             direction: this.direction,
             positionStrategy: strategy,
             panelClass: 'mc-popover__panel',
-            scrollStrategy: this.scrollStrategy()
+            scrollStrategy: this.scrollStrategy(),
+            hasBackdrop: this.mcTrigger === 'manual',
+            backdropClass: 'no-class'
         });
+        if (this.mcTrigger === 'manual') {
+            this.overlayRef.backdropClick().subscribe((/**
+             * @return {?}
+             */
+            function () {
+                if (!_this.popover) {
+                    return;
+                }
+                _this.popover.hide();
+            }));
+        }
         this.updatePosition();
         this.overlayRef.detachments()
             .pipe(takeUntil(this.destroyed))

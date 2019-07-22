@@ -227,15 +227,6 @@ class McPopoverComponent {
         return typeof value === 'string' && value !== '';
     }
     /**
-     * @param {?} e
-     * @return {?}
-     */
-    handleBodyInteraction(e) {
-        if (this.closeOnInteraction && !this.componentElementRef.nativeElement.contains(e.target)) {
-            this.hide();
-        }
-    }
-    /**
      * @return {?}
      */
     animationStart() {
@@ -272,8 +263,7 @@ McPopoverComponent.decorators = [
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 animations: [mcPopoverAnimations.popoverState],
                 host: {
-                    '[class]': 'getCssClassesList',
-                    '(body:click)': 'handleBodyInteraction($event)'
+                    '[class]': 'getCssClassesList'
                 }
             },] },
 ];
@@ -586,8 +576,21 @@ class McPopover {
             direction: this.direction,
             positionStrategy: strategy,
             panelClass: 'mc-popover__panel',
-            scrollStrategy: this.scrollStrategy()
+            scrollStrategy: this.scrollStrategy(),
+            hasBackdrop: this.mcTrigger === 'manual',
+            backdropClass: 'no-class'
         });
+        if (this.mcTrigger === 'manual') {
+            this.overlayRef.backdropClick().subscribe((/**
+             * @return {?}
+             */
+            () => {
+                if (!this.popover) {
+                    return;
+                }
+                this.popover.hide();
+            }));
+        }
         this.updatePosition();
         this.overlayRef.detachments()
             .pipe(takeUntil(this.destroyed))
