@@ -598,9 +598,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                  * @return {?}
                  */
                 function (selectedOption) {
-                    if (option.value === selectedOption) {
-                        option._selected = true;
-                    }
+                    option._selected = option.value === selectedOption;
                 }));
             }));
         }));
@@ -945,6 +943,7 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function (values) {
         var _this = this;
+        this.selectionModel.clear();
         values.forEach((/**
          * @param {?} value
          * @return {?}
@@ -957,6 +956,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                 correspondingOption.selected = true;
             }
         }));
+        this.options.notifyOnChanges();
     };
     /**
      * @private

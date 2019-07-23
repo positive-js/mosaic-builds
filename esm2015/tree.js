@@ -513,9 +513,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
                  * @return {?}
                  */
                 (selectedOption) => {
-                    if (option.value === selectedOption) {
-                        option._selected = true;
-                    }
+                    option._selected = option.value === selectedOption;
                 }));
             }));
         }));
@@ -791,6 +789,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
      * @return {?}
      */
     setOptionsFromValues(values) {
+        this.selectionModel.clear();
         values.forEach((/**
          * @param {?} value
          * @return {?}
@@ -803,6 +802,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
                 correspondingOption.selected = true;
             }
         }));
+        this.options.notifyOnChanges();
     }
     /**
      * @private
