@@ -49,8 +49,9 @@ function __extends(d, b) {
  * if the current item is selected.
  */
 var McListOption = /** @class */ (function () {
-    function McListOption(_element, _changeDetector, listSelection) {
-        this._element = _element;
+    function McListOption(elementRef, focusMonitor, _changeDetector, listSelection) {
+        this.elementRef = elementRef;
+        this.focusMonitor = focusMonitor;
         this._changeDetector = _changeDetector;
         this.listSelection = listSelection;
         this.hasFocus = false;
@@ -111,6 +112,7 @@ var McListOption = /** @class */ (function () {
      */
     function () {
         var _this = this;
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
         if (this._selected) {
             // List options that are selected at initialization can't be reported properly to the form
             // control. This is because it takes some time until the selection-list knows about all
@@ -146,6 +148,7 @@ var McListOption = /** @class */ (function () {
              */
             function () { return _this.selected = false; }));
         }
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         this.listSelection.removeOptionFromList(this);
     };
     /**
@@ -164,7 +167,7 @@ var McListOption = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this._element.nativeElement.focus();
+        this.elementRef.nativeElement.focus();
     };
     /**
      * @return {?}
@@ -203,7 +206,7 @@ var McListOption = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this._element.nativeElement.getClientRects()[0].height;
+        return this.elementRef.nativeElement.getClientRects()[0].height;
     };
     /**
      * @param {?} $event
@@ -248,7 +251,7 @@ var McListOption = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this._element.nativeElement;
+        return this.elementRef.nativeElement;
     };
     McListOption.decorators = [
         { type: core.Component, args: [{
@@ -272,6 +275,7 @@ var McListOption = /** @class */ (function () {
     /** @nocollapse */
     McListOption.ctorParameters = function () { return [
         { type: core.ElementRef },
+        { type: a11y.FocusMonitor },
         { type: core.ChangeDetectorRef },
         { type: McListSelection, decorators: [{ type: core.Inject, args: [core.forwardRef((/**
                          * @return {?}

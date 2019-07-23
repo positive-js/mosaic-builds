@@ -898,7 +898,9 @@ $base-font-size: 15px !default;
 
     $is-dark: map-get($theme, is-dark);
 
-    
+    .mc-alert__close:focus {
+        outline: none;
+    }
 
     .mc-alert {
         color: mc-color($foreground, text);
@@ -1374,10 +1376,9 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
             }
         }
 
-        & .mc-checkbox-input.cdk-focused {
+        & .mc-checkbox-input.cdk-keyboard-focused {
             + .mc-checkbox-frame {
                 border-color: $focus-color;
-
                 box-shadow: inset 0 0 0 1px white, 0 0 0 1px $focus-color;
             }
         }
@@ -1948,7 +1949,7 @@ $mc-calendar-weekday-table-font-size: 11px !default;
             background: mc-color($background, hover);
         }
 
-        &.mc-focused {
+        &.cdk-keyboard-focused {
             border-color: mc-color($primary);
         }
 
@@ -2082,10 +2083,9 @@ $mc-calendar-weekday-table-font-size: 11px !default;
 
         &.cdk-keyboard-focused, &.cdk-program-focused  {
             $focus-color: mc-color($primary);
-
-            border-color: $focus-color;
-            box-shadow: 0 0 0 1px $focus-color;
+            outline: $focus-color solid 2px;
         }
+
     }
 
     mc-navbar-item:hover:not([disabled]):not(.mc-progress) {

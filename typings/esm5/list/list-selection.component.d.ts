@@ -1,7 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ElementRef, EventEmitter, QueryList, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager, FocusMonitor, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { McLine, CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 /**
  * Component for list-options of selection-list. Each list-option can automatically
@@ -9,7 +9,8 @@ import { McLine, CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
  * if the current item is selected.
  */
 export declare class McListOption implements OnDestroy, OnInit, IFocusableOption {
-    private _element;
+    private elementRef;
+    private focusMonitor;
     private _changeDetector;
     listSelection: McListSelection;
     hasFocus: boolean;
@@ -21,7 +22,7 @@ export declare class McListOption implements OnDestroy, OnInit, IFocusableOption
     private _disabled;
     selected: boolean;
     private _selected;
-    constructor(_element: ElementRef, _changeDetector: ChangeDetectorRef, listSelection: McListSelection);
+    constructor(elementRef: ElementRef<HTMLElement>, focusMonitor: FocusMonitor, _changeDetector: ChangeDetectorRef, listSelection: McListSelection);
     ngOnInit(): void;
     ngOnDestroy(): void;
     toggle(): void;

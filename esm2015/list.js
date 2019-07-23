@@ -7,7 +7,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Attribute, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, Input, Output, ViewEncapsulation, ChangeDetectorRef, Inject, ViewChild, Directive, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusKeyManager, A11yModule } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager, FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { DOWN_ARROW, END, ENTER, hasModifierKey, HOME, PAGE_DOWN, PAGE_UP, SPACE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McLine, mixinDisabled, toBoolean, McLineSetter, McLineModule } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
@@ -25,12 +25,14 @@ import { CommonModule } from '@angular/common';
  */
 class McListOption {
     /**
-     * @param {?} _element
+     * @param {?} elementRef
+     * @param {?} focusMonitor
      * @param {?} _changeDetector
      * @param {?} listSelection
      */
-    constructor(_element, _changeDetector, listSelection) {
-        this._element = _element;
+    constructor(elementRef, focusMonitor, _changeDetector, listSelection) {
+        this.elementRef = elementRef;
+        this.focusMonitor = focusMonitor;
         this._changeDetector = _changeDetector;
         this.listSelection = listSelection;
         this.hasFocus = false;
@@ -79,6 +81,7 @@ class McListOption {
      * @return {?}
      */
     ngOnInit() {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
         if (this._selected) {
             // List options that are selected at initialization can't be reported properly to the form
             // control. This is because it takes some time until the selection-list knows about all
@@ -110,6 +113,7 @@ class McListOption {
              */
             () => this.selected = false));
         }
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         this.listSelection.removeOptionFromList(this);
     }
     /**
@@ -122,7 +126,7 @@ class McListOption {
      * @return {?}
      */
     focus() {
-        this._element.nativeElement.focus();
+        this.elementRef.nativeElement.focus();
     }
     /**
      * @return {?}
@@ -151,7 +155,7 @@ class McListOption {
      * @return {?}
      */
     getHeight() {
-        return this._element.nativeElement.getClientRects()[0].height;
+        return this.elementRef.nativeElement.getClientRects()[0].height;
     }
     /**
      * @param {?} $event
@@ -183,7 +187,7 @@ class McListOption {
      * @return {?}
      */
     getHostElement() {
-        return this._element.nativeElement;
+        return this.elementRef.nativeElement;
     }
 }
 McListOption.decorators = [
@@ -208,6 +212,7 @@ McListOption.decorators = [
 /** @nocollapse */
 McListOption.ctorParameters = () => [
     { type: ElementRef },
+    { type: FocusMonitor },
     { type: ChangeDetectorRef },
     { type: McListSelection, decorators: [{ type: Inject, args: [forwardRef((/**
                      * @return {?}
