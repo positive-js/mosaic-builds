@@ -505,6 +505,12 @@ var McTreeSelect = /** @class */ (function (_super) {
             this.tempValues = null;
             this.fireValueChangedEvent = true;
         }
+        this.tree.selectionChange
+            .pipe(operators.takeUntil(this.destroy))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.propagateChanges(); }));
         this.selectionModel.changed
             .pipe(operators.takeUntil(this.destroy))
             .subscribe((/**
@@ -513,7 +519,6 @@ var McTreeSelect = /** @class */ (function (_super) {
          */
         function (event) {
             _this.changeDetectorRef.detectChanges();
-            _this.propagateChanges();
             if (!_this.multiple && _this.panelOpen) {
                 _this.close();
             }
@@ -998,7 +1003,6 @@ var McTreeSelect = /** @class */ (function (_super) {
      */
     function () {
         this.focus();
-        this.open();
     };
     /** Invoked when an option is clicked. */
     /**
@@ -1290,8 +1294,8 @@ var McTreeSelect = /** @class */ (function (_super) {
          * @return {?}
          */
         function (option) { option.deselect(); }));
+        this.selectionModel.clear();
         if (value === null) {
-            this.selectionModel.clear();
             return;
         }
         if (this.multiple && value) {

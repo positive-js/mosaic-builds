@@ -495,6 +495,7 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
          */
         (changeEvent) => {
             this.onChange(changeEvent.source.selected);
+            this.options.notifyOnChanges();
         }));
         this.options.changes
             .pipe(takeUntil(this.destroy))
@@ -508,12 +509,15 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
              * @return {?}
              */
             (option) => {
+                option.deselect();
                 this.selectionModel.selected.forEach((/**
                  * @param {?} selectedOption
                  * @return {?}
                  */
                 (selectedOption) => {
-                    option._selected = option.value === selectedOption;
+                    if (option.value === selectedOption) {
+                        option.select();
+                    }
                 }));
             }));
         }));

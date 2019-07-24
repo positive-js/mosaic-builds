@@ -603,6 +603,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (changeEvent) {
             _this.onChange(changeEvent.source.selected);
+            _this.options.notifyOnChanges();
         }));
         this.options.changes
             .pipe(operators.takeUntil(this.destroy))
@@ -616,12 +617,15 @@ var McTreeSelection = /** @class */ (function (_super) {
              * @return {?}
              */
             function (option) {
+                option.deselect();
                 _this.selectionModel.selected.forEach((/**
                  * @param {?} selectedOption
                  * @return {?}
                  */
                 function (selectedOption) {
-                    option._selected = option.value === selectedOption;
+                    if (option.value === selectedOption) {
+                        option.select();
+                    }
                 }));
             }));
         }));

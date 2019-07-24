@@ -17476,6 +17476,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (changeEvent) {
             _this.onChange(changeEvent.source.selected);
+            _this.options.notifyOnChanges();
         }));
         this.options.changes
             .pipe(operators.takeUntil(this.destroy))
@@ -17489,12 +17490,15 @@ var McTreeSelection = /** @class */ (function (_super) {
              * @return {?}
              */
             function (option) {
+                option.deselect();
                 _this.selectionModel.selected.forEach((/**
                  * @param {?} selectedOption
                  * @return {?}
                  */
                 function (selectedOption) {
-                    option._selected = option.value === selectedOption;
+                    if (option.value === selectedOption) {
+                        option.select();
+                    }
                 }));
             }));
         }));
@@ -25024,6 +25028,12 @@ var McTreeSelect = /** @class */ (function (_super) {
             this.tempValues = null;
             this.fireValueChangedEvent = true;
         }
+        this.tree.selectionChange
+            .pipe(operators.takeUntil(this.destroy))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.propagateChanges(); }));
         this.selectionModel.changed
             .pipe(operators.takeUntil(this.destroy))
             .subscribe((/**
@@ -25032,7 +25042,6 @@ var McTreeSelect = /** @class */ (function (_super) {
          */
         function (event) {
             _this.changeDetectorRef.detectChanges();
-            _this.propagateChanges();
             if (!_this.multiple && _this.panelOpen) {
                 _this.close();
             }
@@ -25517,7 +25526,6 @@ var McTreeSelect = /** @class */ (function (_super) {
      */
     function () {
         this.focus();
-        this.open();
     };
     /** Invoked when an option is clicked. */
     /**
@@ -25809,8 +25817,8 @@ var McTreeSelect = /** @class */ (function (_super) {
          * @return {?}
          */
         function (option) { option.deselect(); }));
+        this.selectionModel.clear();
         if (value === null) {
-            this.selectionModel.clear();
             return;
         }
         if (this.multiple && value) {
@@ -31818,7 +31826,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa1 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -31857,7 +31865,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
