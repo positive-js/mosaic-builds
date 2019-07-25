@@ -10675,7 +10675,7 @@ var McDropdown = /** @class */ (function () {
         { type: core.Component, args: [{
                     selector: 'mc-dropdown',
                     template: "<ng-template><div class=\"mc-dropdown__panel\" [ngClass]=\"_classList\" (keydown)=\"_handleKeydown($event)\" (click)=\"closed.emit('click')\" [@transformDropdown]=\"_panelAnimationState\" (@transformDropdown.start)=\"_onAnimationStart($event)\" (@transformDropdown.done)=\"_onAnimationDone($event)\" tabindex=\"-1\" role=\"dropdown\"><div class=\"mc-dropdown__content\"><ng-content></ng-content></div></div></ng-template>",
-                    styles: [".mc-dropdown__item{display:flex;align-items:center;position:relative;box-sizing:border-box;width:100%;border:1px solid transparent;outline:0;padding:5px 15px;text-align:left}.mc-dropdown__item:not([disabled]){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__trigger{margin-left:auto;padding-left:16px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content{height:100%}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
+                    styles: [".mc-dropdown__item{display:flex;align-items:center;position:relative;box-sizing:border-box;width:100%;border:1px solid transparent;outline:0;padding:5px 15px;text-align:left;white-space:nowrap}.mc-dropdown__item:not([disabled]){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__trigger{margin-left:auto;padding-left:16px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content{height:100%}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
                     exportAs: 'mcDropdown',
@@ -31826,19 +31826,19 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa1 = mcSidebarAnimations;
+exports.ɵa2 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
 exports.McSidebarClosed = McSidebarClosed;
 exports.McSidebar = McSidebar;
-exports.ɵb20 = mcSidepanelAnimations;
-exports.ɵa20 = mcSidepanelTransformAnimation;
-exports.ɵg20 = McSidepanelActions;
-exports.ɵe20 = McSidepanelBody;
-exports.ɵc20 = McSidepanelClose;
-exports.ɵf20 = McSidepanelFooter;
-exports.ɵd20 = McSidepanelHeader;
+exports.ɵb19 = mcSidepanelAnimations;
+exports.ɵa19 = mcSidepanelTransformAnimation;
+exports.ɵg19 = McSidepanelActions;
+exports.ɵe19 = McSidepanelBody;
+exports.ɵc19 = McSidepanelClose;
+exports.ɵf19 = McSidepanelFooter;
+exports.ɵd19 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
@@ -31865,7 +31865,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
