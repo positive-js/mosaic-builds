@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { coerceBooleanProperty, coerceCssPixelValue, coerceNumberProperty } from '@angular/cdk/coercion';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, Input, NgZone, Renderer2, ViewEncapsulation, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, Input, NgZone, Renderer2, ViewChildren, ViewEncapsulation, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 
@@ -13,6 +13,108 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class McGutterDirective {
+    /**
+     * @param {?} elementRef
+     * @param {?} renderer
+     */
+    constructor(elementRef, renderer) {
+        this.elementRef = elementRef;
+        this.renderer = renderer;
+        this._direction = "vertical" /* Vertical */;
+        this._order = 0;
+        this._size = 6;
+        this.dragged = false;
+    }
+    /**
+     * @return {?}
+     */
+    get direction() {
+        return this._direction;
+    }
+    /**
+     * @param {?} direction
+     * @return {?}
+     */
+    set direction(direction) {
+        this._direction = direction;
+    }
+    /**
+     * @return {?}
+     */
+    get order() {
+        return this._order;
+    }
+    /**
+     * @param {?} order
+     * @return {?}
+     */
+    set order(order) {
+        this._order = coerceNumberProperty(order);
+    }
+    /**
+     * @return {?}
+     */
+    get size() {
+        return this._size;
+    }
+    /**
+     * @param {?} size
+     * @return {?}
+     */
+    set size(size) {
+        this._size = coerceNumberProperty(size);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.setStyle("flex-basis" /* FlexBasis */, coerceCssPixelValue(this.size));
+        this.setStyle(this.isVertical() ? "height" /* Height */ : "width" /* Width */, coerceCssPixelValue(this.size));
+        this.setStyle("order" /* Order */, this.order);
+        if (!this.isVertical()) {
+            this.setStyle("height" /* Height */, '100%');
+        }
+        // fix IE issue with gutter icon. flex-direction is requied for flex alignment options
+        this.setStyle("flex-direction" /* FlexDirection */, this.isVertical() ? 'row' : 'column');
+    }
+    /**
+     * @return {?}
+     */
+    isVertical() {
+        return this.direction === "vertical" /* Vertical */;
+    }
+    /**
+     * @private
+     * @param {?} property
+     * @param {?} value
+     * @return {?}
+     */
+    setStyle(property, value) {
+        this.renderer.setStyle(this.elementRef.nativeElement, property, value);
+    }
+}
+McGutterDirective.decorators = [
+    { type: Directive, args: [{
+                selector: 'mc-gutter',
+                host: {
+                    class: 'mc-gutter',
+                    '[class.mc-gutter_vertical]': 'isVertical()',
+                    '[class.mc-gutter_dragged]': 'dragged',
+                    '(mousedown)': 'dragged = true'
+                }
+            },] },
+];
+/** @nocollapse */
+McGutterDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+McGutterDirective.propDecorators = {
+    direction: [{ type: Input }],
+    order: [{ type: Input }],
+    size: [{ type: Input }]
+};
 class McSplitterComponent {
     /**
      * @param {?} elementRef
@@ -186,6 +288,22 @@ class McSplitterComponent {
     }
     /**
      * @private
+     * @return {?}
+     */
+    updateGutter() {
+        this.gutters.forEach((/**
+         * @param {?} gutter
+         * @return {?}
+         */
+        (gutter) => {
+            if (gutter.dragged) {
+                gutter.dragged = false;
+                this.changeDetectorRef.detectChanges();
+            }
+        }));
+    }
+    /**
+     * @private
      * @param {?} event
      * @param {?} startPoint
      * @param {?} leftArea
@@ -245,6 +363,7 @@ class McSplitterComponent {
             }
         }
         this.isDragging = false;
+        this.updateGutter();
     }
     /**
      * @private
@@ -265,7 +384,7 @@ McSplitterComponent.decorators = [
                 },
                 preserveWhitespaces: false,
                 styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;overflow:hidden}.mc-gutter.mc-gutter_vertical>.mc-icon{transform:rotate(90deg)}"],
-                template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [class.mc-gutter_vertical]=\"isVertical()\" [direction]=\"direction\" [attr.disabled]=\"disabled || null\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"><i mc-icon=\"mc-ellipsis_16\" color=\"second\" *ngIf=\"!disabled\"></i></mc-gutter></ng-template>",
+                template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [direction]=\"direction\" [attr.disabled]=\"disabled || null\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"></mc-gutter></ng-template>",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] },
@@ -278,108 +397,10 @@ McSplitterComponent.ctorParameters = () => [
     { type: Renderer2 }
 ];
 McSplitterComponent.propDecorators = {
+    gutters: [{ type: ViewChildren, args: [McGutterDirective,] }],
     direction: [{ type: Input }],
     disabled: [{ type: Input }],
     gutterSize: [{ type: Input }]
-};
-class McGutterDirective {
-    /**
-     * @param {?} renderer
-     * @param {?} elementRef
-     */
-    constructor(renderer, elementRef) {
-        this.renderer = renderer;
-        this.elementRef = elementRef;
-        this._direction = "vertical" /* Vertical */;
-        this._order = 0;
-        this._size = 6;
-    }
-    /**
-     * @return {?}
-     */
-    get direction() {
-        return this._direction;
-    }
-    /**
-     * @param {?} direction
-     * @return {?}
-     */
-    set direction(direction) {
-        this._direction = direction;
-    }
-    /**
-     * @return {?}
-     */
-    get order() {
-        return this._order;
-    }
-    /**
-     * @param {?} order
-     * @return {?}
-     */
-    set order(order) {
-        this._order = coerceNumberProperty(order);
-    }
-    /**
-     * @return {?}
-     */
-    get size() {
-        return this._size;
-    }
-    /**
-     * @param {?} size
-     * @return {?}
-     */
-    set size(size) {
-        this._size = coerceNumberProperty(size);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.setStyle("flex-basis" /* FlexBasis */, coerceCssPixelValue(this.size));
-        this.setStyle(this.isVertical() ? "height" /* Height */ : "width" /* Width */, coerceCssPixelValue(this.size));
-        this.setStyle("order" /* Order */, this.order);
-        if (!this.isVertical()) {
-            this.setStyle("height" /* Height */, '100%');
-        }
-        // fix IE issue with gutter icon. flex-direction is requied for flex alignment options
-        this.setStyle("flex-direction" /* FlexDirection */, this.isVertical() ? 'row' : 'column');
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    isVertical() {
-        return this.direction === "vertical" /* Vertical */;
-    }
-    /**
-     * @private
-     * @param {?} property
-     * @param {?} value
-     * @return {?}
-     */
-    setStyle(property, value) {
-        this.renderer.setStyle(this.elementRef.nativeElement, property, value);
-    }
-}
-McGutterDirective.decorators = [
-    { type: Directive, args: [{
-                selector: 'mc-gutter',
-                host: {
-                    class: 'mc-gutter'
-                }
-            },] },
-];
-/** @nocollapse */
-McGutterDirective.ctorParameters = () => [
-    { type: Renderer2 },
-    { type: ElementRef }
-];
-McGutterDirective.propDecorators = {
-    direction: [{ type: Input }],
-    order: [{ type: Input }],
-    size: [{ type: Input }]
 };
 class McSplitterAreaDirective {
     /**
@@ -553,5 +574,5 @@ McSplitterModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McSplitterModule, McSplitterComponent, McGutterDirective, McSplitterAreaDirective };
+export { McSplitterModule, McGutterDirective, McSplitterComponent, McSplitterAreaDirective };
 //# sourceMappingURL=splitter.js.map

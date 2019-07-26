@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ElementRef, NgZone, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, NgZone, OnDestroy, OnInit, QueryList, Renderer2 } from '@angular/core';
 interface IArea {
     area: McSplitterAreaDirective;
     index: number;
@@ -9,12 +9,28 @@ export declare const enum Direction {
     Horizontal = "horizontal",
     Vertical = "vertical"
 }
+export declare class McGutterDirective implements OnInit {
+    private elementRef;
+    private renderer;
+    direction: Direction;
+    private _direction;
+    order: number;
+    private _order;
+    size: number;
+    private _size;
+    dragged: boolean;
+    constructor(elementRef: ElementRef, renderer: Renderer2);
+    ngOnInit(): void;
+    isVertical(): boolean;
+    private setStyle;
+}
 export declare class McSplitterComponent implements OnInit {
     elementRef: ElementRef;
     changeDetectorRef: ChangeDetectorRef;
     private ngZone;
     private renderer;
     readonly areas: IArea[];
+    gutters: QueryList<McGutterDirective>;
     private isDragging;
     private readonly areaPositionDivider;
     private readonly listeners;
@@ -30,22 +46,9 @@ export declare class McSplitterComponent implements OnInit {
     onMouseDown(event: MouseEvent, leftAreaIndex: number, rightAreaIndex: number): void;
     removeArea(area: McSplitterAreaDirective): void;
     isVertical(): boolean;
+    private updateGutter;
     private onMouseMove;
     private onMouseUp;
-    private setStyle;
-}
-export declare class McGutterDirective implements OnInit {
-    private renderer;
-    private elementRef;
-    direction: Direction;
-    private _direction;
-    order: number;
-    private _order;
-    size: number;
-    private _size;
-    constructor(renderer: Renderer2, elementRef: ElementRef);
-    ngOnInit(): void;
-    private isVertical;
     private setStyle;
 }
 export declare class McSplitterAreaDirective implements OnInit, OnDestroy {
