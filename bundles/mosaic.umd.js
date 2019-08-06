@@ -12823,14 +12823,13 @@ var MODAL_ANIMATE_DURATION = 200;
  */
 var McModalComponent = /** @class */ (function (_super) {
     __extends(McModalComponent, _super);
-    function McModalComponent(overlay$$1, renderer, cfr, elementRef, viewContainer, mcMeasureScrollbarService, modalControl, changeDetector, document) {
+    function McModalComponent(overlay$$1, renderer, cfr, elementRef, viewContainer, modalControl, changeDetector, document) {
         var _this = _super.call(this) || this;
         _this.overlay = overlay$$1;
         _this.renderer = renderer;
         _this.cfr = cfr;
         _this.elementRef = elementRef;
         _this.viewContainer = viewContainer;
-        _this.mcMeasureScrollbarService = mcMeasureScrollbarService;
         _this.modalControl = modalControl;
         _this.changeDetector = changeDetector;
         _this.document = document;
@@ -13643,11 +13642,9 @@ var McModalComponent = /** @class */ (function (_super) {
         var openModals = this.modalControl.openModals;
         if (openModals.length + plusNum > 0) {
             // tslint:disable-next-line
-            this.renderer.setStyle(this.document.body, 'padding-right', this.mcMeasureScrollbarService.scrollBarWidth + "px");
             this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
         }
         else {
-            this.renderer.removeStyle(this.document.body, 'padding-right');
             this.renderer.removeStyle(this.document.body, 'overflow');
         }
     };
@@ -13670,7 +13667,6 @@ var McModalComponent = /** @class */ (function (_super) {
         { type: core.ComponentFactoryResolver },
         { type: core.ElementRef },
         { type: core.ViewContainerRef },
-        { type: McMeasureScrollbarService },
         { type: McModalControlService },
         { type: core.ChangeDetectorRef },
         { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
@@ -31773,15 +31769,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31851,7 +31847,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa1 = mcSidebarAnimations;
+exports.ɵa2 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -31890,7 +31886,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

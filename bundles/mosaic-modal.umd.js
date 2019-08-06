@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('@angular/cdk/overlay'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/portal'), require('rxjs/operators'), require('@angular/cdk/a11y'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/icon')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/modal', ['exports', '@angular/core', 'rxjs', '@angular/cdk/overlay', '@angular/common', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core', '@angular/cdk/portal', 'rxjs/operators', '@angular/cdk/a11y', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/icon'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.modal = {}),global.ng.core,global.rxjs,global.ng.cdk.overlay,global.ng.common,global.ng.cdk.keycodes,global.ng.mosaic.core,global.ng.cdk.portal,global.rxjs.operators,global.ng.cdk.a11y,global.ng.mosaic.button,global.ng.mosaic.icon));
-}(this, (function (exports,core,rxjs,overlay,common,keycodes,core$1,portal,operators,a11y,button,icon) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('@angular/cdk/overlay'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/cdk/portal'), require('rxjs/operators'), require('@angular/cdk/a11y'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/icon')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/modal', ['exports', '@angular/core', 'rxjs', '@angular/cdk/overlay', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/cdk/portal', 'rxjs/operators', '@angular/cdk/a11y', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/icon'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.modal = {}),global.ng.core,global.rxjs,global.ng.cdk.overlay,global.ng.common,global.ng.cdk.keycodes,global.ng.cdk.portal,global.rxjs.operators,global.ng.cdk.a11y,global.ng.mosaic.button,global.ng.mosaic.icon));
+}(this, (function (exports,core,rxjs,overlay,common,keycodes,portal,operators,a11y,button,icon) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -263,14 +263,13 @@ var MODAL_ANIMATE_DURATION = 200;
  */
 var McModalComponent = /** @class */ (function (_super) {
     __extends(McModalComponent, _super);
-    function McModalComponent(overlay$$1, renderer, cfr, elementRef, viewContainer, mcMeasureScrollbarService, modalControl, changeDetector, document) {
+    function McModalComponent(overlay$$1, renderer, cfr, elementRef, viewContainer, modalControl, changeDetector, document) {
         var _this = _super.call(this) || this;
         _this.overlay = overlay$$1;
         _this.renderer = renderer;
         _this.cfr = cfr;
         _this.elementRef = elementRef;
         _this.viewContainer = viewContainer;
-        _this.mcMeasureScrollbarService = mcMeasureScrollbarService;
         _this.modalControl = modalControl;
         _this.changeDetector = changeDetector;
         _this.document = document;
@@ -1083,11 +1082,9 @@ var McModalComponent = /** @class */ (function (_super) {
         var openModals = this.modalControl.openModals;
         if (openModals.length + plusNum > 0) {
             // tslint:disable-next-line
-            this.renderer.setStyle(this.document.body, 'padding-right', this.mcMeasureScrollbarService.scrollBarWidth + "px");
             this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
         }
         else {
-            this.renderer.removeStyle(this.document.body, 'padding-right');
             this.renderer.removeStyle(this.document.body, 'overflow');
         }
     };
@@ -1110,7 +1107,6 @@ var McModalComponent = /** @class */ (function (_super) {
         { type: core.ComponentFactoryResolver },
         { type: core.ElementRef },
         { type: core.ViewContainerRef },
-        { type: core$1.McMeasureScrollbarService },
         { type: McModalControlService },
         { type: core.ChangeDetectorRef },
         { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }

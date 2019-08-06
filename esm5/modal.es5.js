@@ -10,7 +10,6 @@ import { __extends, __assign } from 'tslib';
 import { Overlay, OverlayRef, OverlayModule } from '@angular/cdk/overlay';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { filter } from 'rxjs/operators';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -230,14 +229,13 @@ var MODAL_ANIMATE_DURATION = 200;
  */
 var McModalComponent = /** @class */ (function (_super) {
     __extends(McModalComponent, _super);
-    function McModalComponent(overlay, renderer, cfr, elementRef, viewContainer, mcMeasureScrollbarService, modalControl, changeDetector, document) {
+    function McModalComponent(overlay, renderer, cfr, elementRef, viewContainer, modalControl, changeDetector, document) {
         var _this = _super.call(this) || this;
         _this.overlay = overlay;
         _this.renderer = renderer;
         _this.cfr = cfr;
         _this.elementRef = elementRef;
         _this.viewContainer = viewContainer;
-        _this.mcMeasureScrollbarService = mcMeasureScrollbarService;
         _this.modalControl = modalControl;
         _this.changeDetector = changeDetector;
         _this.document = document;
@@ -1050,11 +1048,9 @@ var McModalComponent = /** @class */ (function (_super) {
         var openModals = this.modalControl.openModals;
         if (openModals.length + plusNum > 0) {
             // tslint:disable-next-line
-            this.renderer.setStyle(this.document.body, 'padding-right', this.mcMeasureScrollbarService.scrollBarWidth + "px");
             this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
         }
         else {
-            this.renderer.removeStyle(this.document.body, 'padding-right');
             this.renderer.removeStyle(this.document.body, 'overflow');
         }
     };
@@ -1077,7 +1073,6 @@ var McModalComponent = /** @class */ (function (_super) {
         { type: ComponentFactoryResolver },
         { type: ElementRef },
         { type: ViewContainerRef },
-        { type: McMeasureScrollbarService },
         { type: McModalControlService },
         { type: ChangeDetectorRef },
         { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }

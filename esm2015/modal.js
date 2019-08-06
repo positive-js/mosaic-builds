@@ -9,7 +9,6 @@ import { Subject } from 'rxjs';
 import { Overlay, OverlayRef, OverlayModule } from '@angular/cdk/overlay';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { filter } from 'rxjs/operators';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -181,19 +180,17 @@ class McModalComponent extends McModalRef {
      * @param {?} cfr
      * @param {?} elementRef
      * @param {?} viewContainer
-     * @param {?} mcMeasureScrollbarService
      * @param {?} modalControl
      * @param {?} changeDetector
      * @param {?} document
      */
-    constructor(overlay, renderer, cfr, elementRef, viewContainer, mcMeasureScrollbarService, modalControl, changeDetector, document) {
+    constructor(overlay, renderer, cfr, elementRef, viewContainer, modalControl, changeDetector, document) {
         super();
         this.overlay = overlay;
         this.renderer = renderer;
         this.cfr = cfr;
         this.elementRef = elementRef;
         this.viewContainer = viewContainer;
-        this.mcMeasureScrollbarService = mcMeasureScrollbarService;
         this.modalControl = modalControl;
         this.changeDetector = changeDetector;
         this.document = document;
@@ -755,11 +752,9 @@ class McModalComponent extends McModalRef {
         const openModals = this.modalControl.openModals;
         if (openModals.length + plusNum > 0) {
             // tslint:disable-next-line
-            this.renderer.setStyle(this.document.body, 'padding-right', `${this.mcMeasureScrollbarService.scrollBarWidth}px`);
             this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
         }
         else {
-            this.renderer.removeStyle(this.document.body, 'padding-right');
             this.renderer.removeStyle(this.document.body, 'overflow');
         }
     }
@@ -783,7 +778,6 @@ McModalComponent.ctorParameters = () => [
     { type: ComponentFactoryResolver },
     { type: ElementRef },
     { type: ViewContainerRef },
-    { type: McMeasureScrollbarService },
     { type: McModalControlService },
     { type: ChangeDetectorRef },
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }

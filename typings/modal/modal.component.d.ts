@@ -1,6 +1,5 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectorRef, ComponentFactoryResolver, ComponentRef, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, TemplateRef, Type, ViewContainerRef } from '@angular/core';
-import { McMeasureScrollbarService } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
@@ -12,7 +11,6 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     private cfr;
     private elementRef;
     private viewContainer;
-    private mcMeasureScrollbarService;
     private modalControl;
     private changeDetector;
     private document;
@@ -64,7 +62,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     private contentComponentRef;
     private animationState;
     private container;
-    constructor(overlay: Overlay, renderer: Renderer2, cfr: ComponentFactoryResolver, elementRef: ElementRef, viewContainer: ViewContainerRef, mcMeasureScrollbarService: McMeasureScrollbarService, modalControl: McModalControlService, changeDetector: ChangeDetectorRef, document: any);
+    constructor(overlay: Overlay, renderer: Renderer2, cfr: ComponentFactoryResolver, elementRef: ElementRef, viewContainer: ViewContainerRef, modalControl: McModalControlService, changeDetector: ChangeDetectorRef, document: any);
     mcGetContainer: HTMLElement | OverlayRef | (() => HTMLElement | OverlayRef);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
