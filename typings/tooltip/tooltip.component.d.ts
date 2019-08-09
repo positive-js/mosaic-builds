@@ -9,8 +9,8 @@ export declare class McTooltipComponent {
     positions: ConnectionPositionPair[];
     classMap: {};
     isTitleString: boolean;
-    showTid: number;
-    hideTid: number;
+    showTid: any;
+    hideTid: any;
     availablePositions: any;
     $visible: Observable<boolean>;
     mcVisibleChange: EventEmitter<boolean>;
