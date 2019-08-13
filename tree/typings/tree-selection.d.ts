@@ -3,7 +3,7 @@ import { AfterContentInit, ChangeDetectorRef, EventEmitter, IterableDiffer, Iter
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
-import { CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
+import { CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
 import { McTreeOption } from './tree-option';
 export declare class McTreeNavigationChange {
     source: McTreeSelection;
@@ -15,18 +15,13 @@ export declare class McTreeSelectionChange {
     option: McTreeOption;
     constructor(source: McTreeSelection, option: McTreeOption);
 }
-declare class McTreeSelectionBase<T> extends CdkTree<T> {
-    constructor(differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef);
-}
-declare const McTreeSelectionBaseMixin: HasTabIndexCtor & CanDisableCtor & typeof McTreeSelectionBase;
-export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOption> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
+export declare class McTreeSelection extends CdkTree<any> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
     private elementRef;
     ngControl: NgControl;
     nodeOutlet: CdkTreeNodeOutlet;
     options: QueryList<McTreeOption>;
     keyManager: FocusKeyManager<McTreeOption>;
     selectionModel: SelectionModel<any>;
-    tabIndex: number;
     multiple: boolean;
     autoSelect: boolean;
     noUnselectLastSelected: boolean;
@@ -34,8 +29,10 @@ export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOpti
     readonly selectionChange: EventEmitter<McTreeSelectionChange>;
     disabled: boolean;
     private _disabled;
+    tabIndex: number;
+    private _tabIndex;
     private readonly destroy;
-    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, ngControl: NgControl, tabIndex: string, multiple: string, autoSelect: string, noUnselect: string);
+    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, ngControl: NgControl, multiple: string, autoSelect: string, noUnselect: string);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     onKeyDown(event: KeyboardEvent): void;
@@ -59,4 +56,3 @@ export declare class McTreeSelection extends McTreeSelectionBaseMixin<McTreeOpti
     private setOptionsFromValues;
     private canDeselectLast;
 }
-export {};

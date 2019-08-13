@@ -6,7 +6,7 @@
  */
 import { Directive, Input, ChangeDetectorRef, Component, EventEmitter, Output, ElementRef, Inject, Optional, InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, Attribute, ContentChildren, IterableDiffers, ViewChild, Self, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNodeToggle, CdkTreeNode, CdkTree, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { toBoolean, mixinDisabled, mixinTabIndex, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
+import { toBoolean, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NgControl } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
@@ -386,33 +386,17 @@ class McTreeSelectionChange {
         this.option = option;
     }
 }
-/**
- * @template T
- */
-class McTreeSelectionBase extends CdkTree {
-    /**
-     * @param {?} differs
-     * @param {?} changeDetectorRef
-     */
-    constructor(differs, changeDetectorRef) {
-        super(differs, changeDetectorRef);
-    }
-}
-/* tslint:disable-next-line:naming-convention */
-/** @type {?} */
-const McTreeSelectionBaseMixin = mixinTabIndex(mixinDisabled(McTreeSelectionBase));
-class McTreeSelection extends McTreeSelectionBaseMixin {
+class McTreeSelection extends CdkTree {
     /**
      * @param {?} elementRef
      * @param {?} differs
      * @param {?} changeDetectorRef
      * @param {?} ngControl
-     * @param {?} tabIndex
      * @param {?} multiple
      * @param {?} autoSelect
      * @param {?} noUnselect
      */
-    constructor(elementRef, differs, changeDetectorRef, ngControl, tabIndex, multiple, autoSelect, noUnselect) {
+    constructor(elementRef, differs, changeDetectorRef, ngControl, multiple, autoSelect, noUnselect) {
         super(differs, changeDetectorRef);
         this.elementRef = elementRef;
         this.ngControl = ngControl;
@@ -439,7 +423,6 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
             // the `providers` to avoid running into a circular import.
             this.ngControl.valueAccessor = this;
         }
-        this.tabIndex = parseInt(tabIndex) || 0;
         this.multiple = multiple === null ? false : toBoolean(multiple);
         this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
         this.noUnselectLastSelected = noUnselect === null ? true : toBoolean(noUnselect);
@@ -469,6 +452,19 @@ class McTreeSelection extends McTreeSelectionBaseMixin {
                 console.log('need enable all options');
             }
         }
+    }
+    /**
+     * @return {?}
+     */
+    get tabIndex() {
+        return this.disabled ? -1 : this._tabIndex;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set tabIndex(value) {
+        this._tabIndex = value != null ? value : 0;
     }
     /**
      * @return {?}
@@ -843,7 +839,6 @@ McTreeSelection.ctorParameters = () => [
     { type: IterableDiffers },
     { type: ChangeDetectorRef },
     { type: NgControl, decorators: [{ type: Self }, { type: Optional }] },
-    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
     { type: String, decorators: [{ type: Attribute, args: ['multiple',] }] },
     { type: String, decorators: [{ type: Attribute, args: ['auto-select',] }] },
     { type: String, decorators: [{ type: Attribute, args: ['no-unselect',] }] }
@@ -853,7 +848,8 @@ McTreeSelection.propDecorators = {
     options: [{ type: ContentChildren, args: [McTreeOption,] }],
     navigationChange: [{ type: Output }],
     selectionChange: [{ type: Output }],
-    disabled: [{ type: Input }]
+    disabled: [{ type: Input }],
+    tabIndex: [{ type: Input }]
 };
 
 /**

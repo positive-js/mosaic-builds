@@ -493,25 +493,9 @@ var McTreeSelectionChange = /** @class */ (function () {
     }
     return McTreeSelectionChange;
 }());
-/**
- * @template T
- */
-var /**
- * @template T
- */
-McTreeSelectionBase = /** @class */ (function (_super) {
-    __extends(McTreeSelectionBase, _super);
-    function McTreeSelectionBase(differs, changeDetectorRef) {
-        return _super.call(this, differs, changeDetectorRef) || this;
-    }
-    return McTreeSelectionBase;
-}(tree.CdkTree));
-/* tslint:disable-next-line:naming-convention */
-/** @type {?} */
-var McTreeSelectionBaseMixin = core$1.mixinTabIndex(core$1.mixinDisabled(McTreeSelectionBase));
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
-    function McTreeSelection(elementRef, differs, changeDetectorRef, ngControl, tabIndex, multiple, autoSelect, noUnselect) {
+    function McTreeSelection(elementRef, differs, changeDetectorRef, ngControl, multiple, autoSelect, noUnselect) {
         var _this = _super.call(this, differs, changeDetectorRef) || this;
         _this.elementRef = elementRef;
         _this.ngControl = ngControl;
@@ -538,7 +522,6 @@ var McTreeSelection = /** @class */ (function (_super) {
             // the `providers` to avoid running into a circular import.
             _this.ngControl.valueAccessor = _this;
         }
-        _this.tabIndex = parseInt(tabIndex) || 0;
         _this.multiple = multiple === null ? false : core$1.toBoolean(multiple);
         _this.autoSelect = autoSelect === null ? true : core$1.toBoolean(autoSelect);
         _this.noUnselectLastSelected = noUnselect === null ? true : core$1.toBoolean(noUnselect);
@@ -570,6 +553,23 @@ var McTreeSelection = /** @class */ (function (_super) {
                     console.log('need enable all options');
                 }
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "tabIndex", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.disabled ? -1 : this._tabIndex;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._tabIndex = value != null ? value : 0;
         },
         enumerable: true,
         configurable: true
@@ -1024,7 +1024,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         { type: core.IterableDiffers },
         { type: core.ChangeDetectorRef },
         { type: forms.NgControl, decorators: [{ type: core.Self }, { type: core.Optional }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
         { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] },
         { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
         { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] }
@@ -1034,10 +1033,11 @@ var McTreeSelection = /** @class */ (function (_super) {
         options: [{ type: core.ContentChildren, args: [McTreeOption,] }],
         navigationChange: [{ type: core.Output }],
         selectionChange: [{ type: core.Output }],
-        disabled: [{ type: core.Input }]
+        disabled: [{ type: core.Input }],
+        tabIndex: [{ type: core.Input }]
     };
     return McTreeSelection;
-}(McTreeSelectionBaseMixin));
+}(tree.CdkTree));
 
 /**
  * @fileoverview added by tsickle

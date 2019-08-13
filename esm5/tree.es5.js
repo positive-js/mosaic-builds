@@ -7,7 +7,7 @@
 import { __extends } from 'tslib';
 import { Directive, Input, ChangeDetectorRef, Component, EventEmitter, Output, ElementRef, Inject, Optional, InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, Attribute, ContentChildren, IterableDiffers, ViewChild, Self, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNodeToggle, CdkTreeNode, CdkTree, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { toBoolean, mixinDisabled, mixinTabIndex, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
+import { toBoolean, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NgControl } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
@@ -470,25 +470,9 @@ var McTreeSelectionChange = /** @class */ (function () {
     }
     return McTreeSelectionChange;
 }());
-/**
- * @template T
- */
-var /**
- * @template T
- */
-McTreeSelectionBase = /** @class */ (function (_super) {
-    __extends(McTreeSelectionBase, _super);
-    function McTreeSelectionBase(differs, changeDetectorRef) {
-        return _super.call(this, differs, changeDetectorRef) || this;
-    }
-    return McTreeSelectionBase;
-}(CdkTree));
-/* tslint:disable-next-line:naming-convention */
-/** @type {?} */
-var McTreeSelectionBaseMixin = mixinTabIndex(mixinDisabled(McTreeSelectionBase));
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
-    function McTreeSelection(elementRef, differs, changeDetectorRef, ngControl, tabIndex, multiple, autoSelect, noUnselect) {
+    function McTreeSelection(elementRef, differs, changeDetectorRef, ngControl, multiple, autoSelect, noUnselect) {
         var _this = _super.call(this, differs, changeDetectorRef) || this;
         _this.elementRef = elementRef;
         _this.ngControl = ngControl;
@@ -515,7 +499,6 @@ var McTreeSelection = /** @class */ (function (_super) {
             // the `providers` to avoid running into a circular import.
             _this.ngControl.valueAccessor = _this;
         }
-        _this.tabIndex = parseInt(tabIndex) || 0;
         _this.multiple = multiple === null ? false : toBoolean(multiple);
         _this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
         _this.noUnselectLastSelected = noUnselect === null ? true : toBoolean(noUnselect);
@@ -547,6 +530,23 @@ var McTreeSelection = /** @class */ (function (_super) {
                     console.log('need enable all options');
                 }
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "tabIndex", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.disabled ? -1 : this._tabIndex;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._tabIndex = value != null ? value : 0;
         },
         enumerable: true,
         configurable: true
@@ -1001,7 +1001,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         { type: IterableDiffers },
         { type: ChangeDetectorRef },
         { type: NgControl, decorators: [{ type: Self }, { type: Optional }] },
-        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
         { type: String, decorators: [{ type: Attribute, args: ['multiple',] }] },
         { type: String, decorators: [{ type: Attribute, args: ['auto-select',] }] },
         { type: String, decorators: [{ type: Attribute, args: ['no-unselect',] }] }
@@ -1011,10 +1010,11 @@ var McTreeSelection = /** @class */ (function (_super) {
         options: [{ type: ContentChildren, args: [McTreeOption,] }],
         navigationChange: [{ type: Output }],
         selectionChange: [{ type: Output }],
-        disabled: [{ type: Input }]
+        disabled: [{ type: Input }],
+        tabIndex: [{ type: Input }]
     };
     return McTreeSelection;
-}(McTreeSelectionBaseMixin));
+}(CdkTree));
 
 /**
  * @fileoverview added by tsickle

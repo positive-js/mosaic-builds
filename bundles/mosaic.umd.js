@@ -17362,25 +17362,9 @@ var McTreeSelectionChange = /** @class */ (function () {
     }
     return McTreeSelectionChange;
 }());
-/**
- * @template T
- */
-var /**
- * @template T
- */
-McTreeSelectionBase = /** @class */ (function (_super) {
-    __extends(McTreeSelectionBase, _super);
-    function McTreeSelectionBase(differs, changeDetectorRef) {
-        return _super.call(this, differs, changeDetectorRef) || this;
-    }
-    return McTreeSelectionBase;
-}(tree.CdkTree));
-/* tslint:disable-next-line:naming-convention */
-/** @type {?} */
-var McTreeSelectionBaseMixin = mixinTabIndex(mixinDisabled(McTreeSelectionBase));
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
-    function McTreeSelection(elementRef, differs, changeDetectorRef, ngControl, tabIndex, multiple, autoSelect, noUnselect) {
+    function McTreeSelection(elementRef, differs, changeDetectorRef, ngControl, multiple, autoSelect, noUnselect) {
         var _this = _super.call(this, differs, changeDetectorRef) || this;
         _this.elementRef = elementRef;
         _this.ngControl = ngControl;
@@ -17407,7 +17391,6 @@ var McTreeSelection = /** @class */ (function (_super) {
             // the `providers` to avoid running into a circular import.
             _this.ngControl.valueAccessor = _this;
         }
-        _this.tabIndex = parseInt(tabIndex) || 0;
         _this.multiple = multiple === null ? false : toBoolean(multiple);
         _this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
         _this.noUnselectLastSelected = noUnselect === null ? true : toBoolean(noUnselect);
@@ -17439,6 +17422,23 @@ var McTreeSelection = /** @class */ (function (_super) {
                     console.log('need enable all options');
                 }
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "tabIndex", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.disabled ? -1 : this._tabIndex;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._tabIndex = value != null ? value : 0;
         },
         enumerable: true,
         configurable: true
@@ -17893,7 +17893,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         { type: core.IterableDiffers },
         { type: core.ChangeDetectorRef },
         { type: forms.NgControl, decorators: [{ type: core.Self }, { type: core.Optional }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
         { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] },
         { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
         { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] }
@@ -17903,10 +17902,11 @@ var McTreeSelection = /** @class */ (function (_super) {
         options: [{ type: core.ContentChildren, args: [McTreeOption,] }],
         navigationChange: [{ type: core.Output }],
         selectionChange: [{ type: core.Output }],
-        disabled: [{ type: core.Input }]
+        disabled: [{ type: core.Input }],
+        tabIndex: [{ type: core.Input }]
     };
     return McTreeSelection;
-}(McTreeSelectionBaseMixin));
+}(tree.CdkTree));
 
 /**
  * @fileoverview added by tsickle
@@ -31769,15 +31769,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd16 = McTabBase;
-exports.ɵe16 = mcTabMixinBase;
-exports.ɵa16 = McTabHeaderBase;
-exports.ɵb16 = McTabLabelWrapperBase;
-exports.ɵc16 = mcTabLabelWrapperMixinBase;
-exports.ɵh16 = McTabLinkBase;
-exports.ɵf16 = McTabNavBase;
-exports.ɵi16 = mcTabLinkMixinBase;
-exports.ɵg16 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
