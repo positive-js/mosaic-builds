@@ -1123,5 +1123,5 @@ McModalModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵe28, McModalControlService as ɵa28, McModalBody as ɵc28, McModalFooter as ɵd28, McModalTitle as ɵb28 };
+export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵe27, McModalControlService as ɵa27, McModalBody as ɵc27, McModalFooter as ɵd27, McModalTitle as ɵb27 };
 //# sourceMappingURL=modal.js.map

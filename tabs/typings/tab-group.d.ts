@@ -25,7 +25,7 @@ export interface IMcTabsConfig {
     animationDuration?: string;
 }
 /** Injection token that can be used to provide the default options the tabs module. */
-export declare const MC_TABS_CONFIG: InjectionToken<unknown>;
+export declare const MC_TABS_CONFIG: InjectionToken<{}>;
 /** @docs-private */
 export declare class McTabGroupBase {
     _elementRef: ElementRef;
