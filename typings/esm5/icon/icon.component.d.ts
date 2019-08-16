@@ -9,5 +9,5 @@ export declare class McIconBase {
 export declare const _McIconMixinBase: CanColorCtor & typeof McIconBase;
 export declare class McIcon extends _McIconMixinBase implements CanColor {
     constructor(elementRef: ElementRef, iconName: string);
-    _getHostElement(): any;
+    getHostElement(): any;
 }

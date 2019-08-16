@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { BidiModule } from '@angular/cdk/bidi';
-import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, EventEmitter, Output, ɵɵdefineInjectable, ɵɵinject } from '@angular/core';
+import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, EventEmitter, Output, Pipe, ɵɵdefineInjectable, ɵɵinject } from '@angular/core';
 import { __extends } from 'tslib';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
@@ -1517,11 +1517,57 @@ var mcSelectAnimations = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var McHighlightPipe = /** @class */ (function () {
+    function McHighlightPipe() {
+    }
+    /**
+     * @param {?} value
+     * @param {?} args
+     * @return {?}
+     */
+    McHighlightPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?} args
+     * @return {?}
+     */
+    function (value, args) {
+        if (!args) {
+            return value;
+        }
+        return value.replace(new RegExp("(" + args + ")", 'gi'), '<mark class="mc-highlight">$1</mark>');
+    };
+    McHighlightPipe.decorators = [
+        { type: Pipe, args: [{ name: 'mcHighlight' },] },
+    ];
+    return McHighlightPipe;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McHighlightModule = /** @class */ (function () {
+    function McHighlightModule() {
+    }
+    McHighlightModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [CommonModule],
+                    exports: [McHighlightPipe],
+                    declarations: [McHighlightPipe]
+                },] },
+    ];
+    return McHighlightModule;
+}());
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, McOptgroupBase, McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, AnimationCurves, POSITION_MAP, DEFAULT_4_POSITIONS, EXTENDED_OVERLAY_POSITIONS, POSITION_TO_CSS_MAP, mcSelectAnimations, selectEvents, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, mcSelectScrollStrategyProviderFactory, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_SANITY_CHECKS_FACTORY as ɵa3 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, McOptgroupBase, McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, AnimationCurves, POSITION_MAP, DEFAULT_4_POSITIONS, EXTENDED_OVERLAY_POSITIONS, POSITION_TO_CSS_MAP, mcSelectAnimations, selectEvents, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, mcSelectScrollStrategyProviderFactory, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McHighlightModule, McHighlightPipe, MC_SANITY_CHECKS_FACTORY as ɵa3 };
 //# sourceMappingURL=core.es5.js.map

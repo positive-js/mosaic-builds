@@ -3238,8 +3238,13 @@ $hover-darken: 5%;
             }
         }
 
-        .mc-icon:not(.mc-primary):not(.mc-second):not(.mc-error) {
-            color: map-get($foreground, text);
+        &:not(.mc-primary):not(.mc-second):not(.mc-error) {
+            &[disabled],
+            &.mc-disabled {
+                color: mc-color($second);
+
+                cursor: default;
+            }
         }
     }
 
@@ -3386,6 +3391,17 @@ $hover-darken: 5%;
 
 
 
+@mixin mc-highlight-theme($theme) {
+    .mc-highlight {
+        color: inherit;
+
+        font-weight: bold;
+        background-color: transparent;
+    }
+}
+
+
+
 
 @mixin mc-panel-theme($theme) {
     $background: map-get($theme, background);
@@ -3438,4 +3454,5 @@ $hover-darken: 5%;
     @include mc-tree-select-theme($theme);
     @include mc-tree-theme($theme);
     @include mc-vertical-navbar-theme($theme);
+    @include mc-highlight-theme($theme);
 }

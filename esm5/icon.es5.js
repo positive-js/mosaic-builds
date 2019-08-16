@@ -44,7 +44,7 @@ var McIcon = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
-    McIcon.prototype._getHostElement = /**
+    McIcon.prototype.getHostElement = /**
      * @return {?}
      */
     function () {

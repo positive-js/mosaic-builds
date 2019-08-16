@@ -4,7 +4,7 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
 import { CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
-import { McTreeOption } from './tree-option';
+import { McTreeOption } from './tree-option.component';
 export declare class McTreeNavigationChange {
     source: McTreeSelection;
     option: McTreeOption;

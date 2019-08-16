@@ -1548,6 +1548,57 @@ var mcSelectAnimations = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McHighlightPipe = /** @class */ (function () {
+    function McHighlightPipe() {
+    }
+    /**
+     * @param {?} value
+     * @param {?} args
+     * @return {?}
+     */
+    McHighlightPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?} args
+     * @return {?}
+     */
+    function (value, args) {
+        if (!args) {
+            return value;
+        }
+        return value.replace(new RegExp("(" + args + ")", 'gi'), '<mark class="mc-highlight">$1</mark>');
+    };
+    McHighlightPipe.decorators = [
+        { type: core.Pipe, args: [{ name: 'mcHighlight' },] },
+    ];
+    return McHighlightPipe;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McHighlightModule = /** @class */ (function () {
+    function McHighlightModule() {
+    }
+    McHighlightModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule],
+                    exports: [McHighlightPipe],
+                    declarations: [McHighlightPipe]
+                },] },
+    ];
+    return McHighlightModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var McIconCSSStyler = /** @class */ (function () {
     function McIconCSSStyler() {
     }
@@ -1577,7 +1628,7 @@ var McIcon = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
-    McIcon.prototype._getHostElement = /**
+    McIcon.prototype.getHostElement = /**
      * @return {?}
      */
     function () {
@@ -17005,21 +17056,91 @@ var McTreeNodePadding = /** @class */ (function (_super) {
 /**
  * @template T
  */
-var McTreeNodeToggle = /** @class */ (function (_super) {
-    __extends(McTreeNodeToggle, _super);
-    function McTreeNodeToggle() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var McTreeNodeToggleComponent = /** @class */ (function (_super) {
+    __extends(McTreeNodeToggleComponent, _super);
+    function McTreeNodeToggleComponent(tree$$1, treeNode) {
+        var _this = _super.call(this, tree$$1, treeNode) || this;
+        _this.tree = tree$$1;
+        _this.treeNode = treeNode;
+        _this.disabled = false;
+        // todo может пересмотреть, как то не очень
+        ((/** @type {?} */ (_this.tree.treeControl))).filterValue
+            .subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { _this.disabled = value.length > 0; }));
+        return _this;
     }
-    McTreeNodeToggle.decorators = [
+    Object.defineProperty(McTreeNodeToggleComponent.prototype, "iconState", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.disabled || this.tree.treeControl.isExpanded(this.node);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McTreeNodeToggleComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-tree-node-toggle',
+                    template: "\n        <i class=\"mc mc-icon mc-angle-down-S_16\"></i>\n    ",
+                    host: {
+                        class: 'mc-tree-node-toggle',
+                        '(click)': 'toggle($event)',
+                        '[class.mc-disabled]': 'disabled',
+                        '[class.mc-opened]': 'iconState'
+                    },
+                    encapsulation: core.ViewEncapsulation.None,
+                    providers: [{ provide: tree.CdkTreeNodeToggle, useExisting: McTreeNodeToggleComponent }]
+                },] },
+    ];
+    /** @nocollapse */
+    McTreeNodeToggleComponent.ctorParameters = function () { return [
+        { type: tree.CdkTree },
+        { type: tree.CdkTreeNode }
+    ]; };
+    McTreeNodeToggleComponent.propDecorators = {
+        node: [{ type: core.Input }]
+    };
+    return McTreeNodeToggleComponent;
+}(tree.CdkTreeNodeToggle));
+/**
+ * @template T
+ */
+var McTreeNodeToggleDirective = /** @class */ (function (_super) {
+    __extends(McTreeNodeToggleDirective, _super);
+    function McTreeNodeToggleDirective(tree$$1, treeNode) {
+        var _this = _super.call(this, tree$$1, treeNode) || this;
+        _this.tree = tree$$1;
+        _this.treeNode = treeNode;
+        _this.disabled = false;
+        // todo может пересмотреть, как то не очень
+        ((/** @type {?} */ (_this.tree.treeControl))).filterValue
+            .subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { _this.disabled = value.length > 0; }));
+        return _this;
+    }
+    McTreeNodeToggleDirective.decorators = [
         { type: core.Directive, args: [{
                     selector: '[mcTreeNodeToggle]',
                     host: {
-                        '(click)': 'toggle($event)'
+                        '(click)': 'toggle($event)',
+                        '[class.mc-disabled]': 'disabled'
                     },
-                    providers: [{ provide: tree.CdkTreeNodeToggle, useExisting: McTreeNodeToggle }]
+                    providers: [{ provide: tree.CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]
                 },] },
     ];
-    return McTreeNodeToggle;
+    /** @nocollapse */
+    McTreeNodeToggleDirective.ctorParameters = function () { return [
+        { type: tree.CdkTree },
+        { type: tree.CdkTreeNode }
+    ]; };
+    return McTreeNodeToggleDirective;
 }(tree.CdkTreeNodeToggle));
 
 /**
@@ -17706,7 +17827,11 @@ var McTreeSelection = /** @class */ (function (_super) {
                     setTimeout((/**
                      * @return {?}
                      */
-                    function () { return nodeData_1.instance.changeDetectorRef.detectChanges(); }));
+                    function () {
+                        if (!nodeData_1.instance.changeDetectorRef.destroyed) {
+                            nodeData_1.instance.changeDetectorRef.detectChanges();
+                        }
+                    }));
                 }
             }));
         }));
@@ -17878,7 +18003,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                         '(keydown)': 'onKeyDown($event)',
                         '(window:resize)': 'updateScrollSize()'
                     },
-                    styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
+                    styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle.mc-disabled{cursor:default}"],
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     providers: [
@@ -17918,7 +18043,8 @@ var MC_TREE_DIRECTIVES = [
     McTreeOption,
     McTreeNodeDef,
     McTreeNodePadding,
-    McTreeNodeToggle
+    McTreeNodeToggleComponent,
+    McTreeNodeToggleDirective
 ];
 var McTreeModule = /** @class */ (function () {
     function McTreeModule() {
@@ -18018,43 +18144,66 @@ McTreeFlattener = /** @class */ (function () {
      * @param {?} node
      * @param {?} level
      * @param {?} resultNodes
-     * @param {?} parentMap
+     * @param {?} parent
      * @return {?}
      */
     McTreeFlattener.prototype.flattenNode = /**
      * @param {?} node
      * @param {?} level
      * @param {?} resultNodes
-     * @param {?} parentMap
+     * @param {?} parent
      * @return {?}
      */
-    function (node, level, resultNodes, parentMap) {
+    function (node, level, resultNodes, parent) {
         var _this = this;
         /** @type {?} */
-        var flatNode = this.transformFunction(node, level);
+        var flatNode = this.transformFunction(node, level, parent);
         resultNodes.push(flatNode);
         if (this.isExpandable(flatNode)) {
-            this.getChildren(node)
-                .pipe(operators.take(1))
-                .subscribe((/**
-             * @param {?} children
-             * @return {?}
-             */
-            function (children) {
-                children.forEach((/**
-                 * @param {?} child
-                 * @param {?} index
-                 * @return {?}
-                 */
-                function (child, index) {
-                    /** @type {?} */
-                    var childParentMap = parentMap.slice();
-                    childParentMap.push(index !== children.length - 1);
-                    _this.flattenNode(child, level + 1, resultNodes, childParentMap);
-                }));
-            }));
+            /** @type {?} */
+            var childrenNodes = this.getChildren(node);
+            if (childrenNodes) {
+                if (Array.isArray(childrenNodes)) {
+                    this.flattenChildren(childrenNodes, level, resultNodes, flatNode);
+                }
+                else {
+                    childrenNodes
+                        .pipe(operators.take(1))
+                        .subscribe((/**
+                     * @param {?} children
+                     * @return {?}
+                     */
+                    function (children) {
+                        _this.flattenChildren(children, level, resultNodes, flatNode);
+                    }));
+                }
+            }
         }
         return resultNodes;
+    };
+    /**
+     * @param {?} children
+     * @param {?} level
+     * @param {?} resultNodes
+     * @param {?} parent
+     * @return {?}
+     */
+    McTreeFlattener.prototype.flattenChildren = /**
+     * @param {?} children
+     * @param {?} level
+     * @param {?} resultNodes
+     * @param {?} parent
+     * @return {?}
+     */
+    function (children, level, resultNodes, parent) {
+        var _this = this;
+        children.forEach((/**
+         * @param {?} child
+         * @return {?}
+         */
+        function (child) {
+            _this.flattenNode(child, level + 1, resultNodes, parent);
+        }));
     };
     /**
      * Flatten a list of node type T to flattened version of node F.
@@ -18083,7 +18232,7 @@ McTreeFlattener = /** @class */ (function () {
          * @param {?} node
          * @return {?}
          */
-        function (node) { return _this.flattenNode(node, 0, resultNodes, []); }));
+        function (node) { return _this.flattenNode(node, 0, resultNodes, null); }));
         return resultNodes;
     };
     /**
@@ -18132,6 +18281,11 @@ McTreeFlattener = /** @class */ (function () {
     };
     return McTreeFlattener;
 }());
+/** @enum {string} */
+var McTreeDataSourceChangeTypes = {
+    Expansion: 'expansion',
+    Filter: 'filter',
+};
 /**
  * Data source for flat tree.
  * The data source need to handle expansion/collapsion of the tree node and change the data feed
@@ -18157,6 +18311,7 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
         _this.treeFlattener = treeFlattener;
         _this.flattenedData = new rxjs.BehaviorSubject([]);
         _this.expandedData = new rxjs.BehaviorSubject([]);
+        _this.filteredData = new rxjs.BehaviorSubject([]);
         _this._data = new rxjs.BehaviorSubject(initialData);
         return _this;
     }
@@ -18189,19 +18344,54 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
      */
     function (collectionViewer) {
         var _this = this;
-        /** @type {?} */
-        var changes = [
-            collectionViewer.viewChange,
-            this.treeControl.expansionModel.changed,
-            this.flattenedData
-        ];
-        return rxjs.merge.apply(void 0, changes).pipe(operators.map((/**
+        return rxjs.merge(collectionViewer.viewChange, this.treeControl.expansionModel.changed
+            .pipe(operators.map((/**
+         * @param {?} value
          * @return {?}
          */
-        function () {
-            _this.expandedData.next(_this.treeFlattener.expandFlattenedNodes(_this.flattenedData.value, _this.treeControl));
-            return _this.expandedData.value;
+        function (value) { return ({ type: McTreeDataSourceChangeTypes.Expansion, value: value }); }))), this.treeControl.filterValue
+            .pipe(operators.map((/**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { return ({ type: McTreeDataSourceChangeTypes.Filter, value: value }); }))), this.flattenedData)
+            .pipe(operators.map((/**
+         * @param {?} changeObj
+         * @return {?}
+         */
+        function (changeObj) {
+            if (changeObj.type === McTreeDataSourceChangeTypes.Filter) {
+                if (changeObj.value && changeObj.value.length > 0) {
+                    return _this.filterHandler();
+                }
+                else {
+                    return _this.expansionHandler();
+                }
+            }
+            return _this.expansionHandler();
         })));
+    };
+    /**
+     * @return {?}
+     */
+    McTreeFlatDataSource.prototype.filterHandler = /**
+     * @return {?}
+     */
+    function () {
+        this.filteredData.next(this.treeControl.filterModel.selected);
+        return this.filteredData.value;
+    };
+    /**
+     * @return {?}
+     */
+    McTreeFlatDataSource.prototype.expansionHandler = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var expandedNodes = this.treeFlattener.expandFlattenedNodes(this.flattenedData.value, this.treeControl);
+        this.expandedData.next(expandedNodes);
+        return this.expandedData.value;
     };
     /**
      * @return {?}
@@ -18223,14 +18413,14 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
  * Data source for nested tree.
  *
  * The data source for nested tree doesn't have to consider node flattener, or the way to expand
- * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
+ * or collapse. The expansion/collapsion will be handled by TreeControl and each non-leaf node.
  * @template T
  */
 var   /**
  * Data source for nested tree.
  *
  * The data source for nested tree doesn't have to consider node flattener, or the way to expand
- * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
+ * or collapse. The expansion/collapsion will be handled by TreeControl and each non-leaf node.
  * @template T
  */
 McTreeNestedDataSource = /** @class */ (function (_super) {
@@ -26466,7 +26656,7 @@ var McTreeSelect = /** @class */ (function (_super) {
                     selector: 'mc-tree-select',
                     exportAs: 'mcTreeSelect',
                     template: "<div cdk-overlay-origin class=\"mc-tree-select__trigger\" (click)=\"toggle()\" [class.mc-tree-select__trigger_multiple]=\"multiple\" #origin=\"cdkOverlayOrigin\" #trigger><div class=\"mc-tree-select__matcher\" [ngSwitch]=\"empty\"><span class=\"mc-tree-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\u00A0' }}</span> <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\"><div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-tree-select__match-container\"><span *ngSwitchCase=\"false\" class=\"mc-tree-select__matcher-text\">{{ triggerValue }}</span><div *ngSwitchCase=\"true\" class=\"mc-tree-select__match-list\"><mc-tag *ngFor=\"let option of selected\" [disabled]=\"disabled\" [class.mc-error]=\"errorState\">{{ option }} <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveSelectedOption(option, $event)\"></i></mc-tag></div><div class=\"mc-tree-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">{{ hiddenItemsText }} {{ hiddenItems }}</div></div><ng-content select=\"mc-tree-select-trigger\" *ngSwitchCase=\"true\"></ng-content></span></div><div class=\"mc-tree-select__arrow-wrapper\"><i class=\"mc-tree-select__arrow\" mc-icon=\"mc-angle-down-L_16\" color=\"second\"></i></div></div><ng-template cdk-connected-overlay cdkConnectedOverlayLockPosition cdkConnectedOverlayHasBackdrop cdkConnectedOverlayBackdropClass=\"cdk-overlay-transparent-backdrop\" [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\" [cdkConnectedOverlayOrigin]=\"origin\" [cdkConnectedOverlayOpen]=\"panelOpen\" [cdkConnectedOverlayPositions]=\"positions\" [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\" [cdkConnectedOverlayOffsetY]=\"offsetY\" (backdropClick)=\"close()\" (attach)=\"onAttached()\" (detach)=\"close()\"><div #panel class=\"mc-tree-select__panel {{ getPanelTheme() }}\" [ngClass]=\"panelClass\" (@transformPanel.done)=\"panelDoneAnimatingStream.next($event.toState)\" [style.transformOrigin]=\"transformOrigin\" [class.mc-select-panel-done-animcing]=\"panelDoneAnimating\" [style.font-size.px]=\"triggerFontSize\" (keydown)=\"handleKeydown($event)\"><div #optionsContainer class=\"mc-tree-select__content\" [@fadeInContent]=\"'showing'\" (@fadeInContent.done)=\"onFadeInDone()\"><ng-content select=\"mc-tree-selection\"></ng-content></div></div></ng-template>",
-                    styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-tree-select{box-sizing:border-box;display:inline-block;width:100%;outline:0}.mc-tree-select.mc-disabled .mc-tree-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-tree-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;cursor:pointer;padding-right:7px;padding-left:15px}.mc-tree-select__trigger.mc-tree-select__trigger_multiple{padding-left:7px}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tree-select__placeholder{margin-left:8px}.mc-tree-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tree-select__matcher>span{width:100%}.mc-tree-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:28px;margin:0;padding-left:0}.mc-tree-select__match-list .mc-tag{margin-right:4px}.mc-tree-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-tree-select__match-container .mc-tree-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-tree-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-tree-select__arrow-wrapper{align-self:center}.mc-form-field-appearance-fill .mc-tree-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-tree-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-tree-select__arrow-wrapper{transform:translateY(-25%)}.mc-tree-select__panel{max-height:224px;min-width:100%;overflow:auto;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-tree-select__content{height:100%}.mc-tree-select__content .mc-tree-selection{height:100%}.mc-tree-select__panel .mc-optgroup-label,.mc-tree-select__panel .mc-tree-select-option{font-size:inherit;line-height:32px;height:32px}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-form-field-type-mc-select .mc-form-field-label{width:calc(100% - 18px)}"],
+                    styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle.mc-disabled{cursor:default}.mc-tree-select{box-sizing:border-box;display:inline-block;width:100%;outline:0}.mc-tree-select.mc-disabled .mc-tree-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-tree-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;cursor:pointer;padding-right:7px;padding-left:15px}.mc-tree-select__trigger.mc-tree-select__trigger_multiple{padding-left:7px}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tree-select__placeholder{margin-left:8px}.mc-tree-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tree-select__matcher>span{width:100%}.mc-tree-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:28px;margin:0;padding-left:0}.mc-tree-select__match-list .mc-tag{margin-right:4px}.mc-tree-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-tree-select__match-container .mc-tree-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-tree-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-tree-select__arrow-wrapper{align-self:center}.mc-form-field-appearance-fill .mc-tree-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-tree-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-tree-select__arrow-wrapper{transform:translateY(-25%)}.mc-tree-select__panel{max-height:224px;min-width:100%;overflow:auto;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-tree-select__content{height:100%}.mc-tree-select__content .mc-tree-selection{height:100%}.mc-tree-select__panel .mc-optgroup-label,.mc-tree-select__panel .mc-tree-select-option{font-size:inherit;line-height:32px;height:32px}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-form-field-type-mc-select .mc-form-field-label{width:calc(100% - 18px)}"],
                     inputs: ['disabled', 'tabIndex'],
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
@@ -31579,6 +31769,8 @@ exports.SELECT_PANEL_INDENT_PADDING_X = SELECT_PANEL_INDENT_PADDING_X;
 exports.SELECT_PANEL_VIEWPORT_PADDING = SELECT_PANEL_VIEWPORT_PADDING;
 exports.MC_SELECT_SCROLL_STRATEGY = MC_SELECT_SCROLL_STRATEGY;
 exports.MC_SELECT_SCROLL_STRATEGY_PROVIDER = MC_SELECT_SCROLL_STRATEGY_PROVIDER;
+exports.McHighlightModule = McHighlightModule;
+exports.McHighlightPipe = McHighlightPipe;
 exports.MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY = MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY;
 exports.McAutocompleteSelectedEvent = McAutocompleteSelectedEvent;
 exports.MC_AUTOCOMPLETE_DEFAULT_OPTIONS = MC_AUTOCOMPLETE_DEFAULT_OPTIONS;
@@ -31682,10 +31874,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc23 = MAX_VALIDATOR;
-exports.ɵa23 = MIN_VALIDATOR;
-exports.ɵd23 = MaxValidator;
-exports.ɵb23 = MinValidator;
+exports.ɵc25 = MAX_VALIDATOR;
+exports.ɵa25 = MIN_VALIDATOR;
+exports.ɵd25 = MaxValidator;
+exports.ɵb25 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -31759,7 +31951,8 @@ exports.McRadioButton = McRadioButton;
 exports.McTreeModule = McTreeModule;
 exports.McTreeNodeDef = McTreeNodeDef;
 exports.McTreeNodePadding = McTreeNodePadding;
-exports.McTreeNodeToggle = McTreeNodeToggle;
+exports.McTreeNodeToggleComponent = McTreeNodeToggleComponent;
+exports.McTreeNodeToggleDirective = McTreeNodeToggleDirective;
 exports.McTreeNavigationChange = McTreeNavigationChange;
 exports.McTreeSelectionChange = McTreeSelectionChange;
 exports.McTreeSelection = McTreeSelection;
@@ -31769,15 +31962,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd11 = McTabBase;
-exports.ɵe11 = mcTabMixinBase;
-exports.ɵa11 = McTabHeaderBase;
-exports.ɵb11 = McTabLabelWrapperBase;
-exports.ɵc11 = mcTabLabelWrapperMixinBase;
-exports.ɵh11 = McTabLinkBase;
-exports.ɵf11 = McTabNavBase;
-exports.ɵi11 = mcTabLinkMixinBase;
-exports.ɵg11 = mcTabNavMixinBase;
+exports.ɵd14 = McTabBase;
+exports.ɵe14 = mcTabMixinBase;
+exports.ɵa14 = McTabHeaderBase;
+exports.ɵb14 = McTabLabelWrapperBase;
+exports.ɵc14 = mcTabLabelWrapperMixinBase;
+exports.ɵh14 = McTabLinkBase;
+exports.ɵf14 = McTabNavBase;
+exports.ɵi14 = mcTabLinkMixinBase;
+exports.ɵg14 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31847,7 +32040,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa1 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -31886,7 +32079,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa24 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

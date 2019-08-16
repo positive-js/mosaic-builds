@@ -44,7 +44,7 @@ class McIcon extends _McIconMixinBase {
     /**
      * @return {?}
      */
-    _getHostElement() {
+    getHostElement() {
         return this._elementRef.nativeElement;
     }
 }

@@ -1,5 +1,5 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { FlatTreeControl, ITreeControl } from '@ptsecurity/cdk/tree';
+import { FlatTreeControl, TreeControl } from '@ptsecurity/cdk/tree';
 import { BehaviorSubject, Observable } from 'rxjs';
 /**
  * Tree flattener to convert a normal type of node to node with children & level information.
@@ -36,12 +36,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
  * and the output flattened type is `F` with additional information.
  */
 export declare class McTreeFlattener<T, F> {
-    transformFunction: (node: T, level: number) => F;
+    transformFunction: (node: T, level: number, parent: F | null) => F;
     getLevel: (node: F) => number;
     isExpandable: (node: F) => boolean;
-    getChildren: (node: T) => Observable<T[]>;
-    constructor(transformFunction: (node: T, level: number) => F, getLevel: (node: F) => number, isExpandable: (node: F) => boolean, getChildren: (node: T) => Observable<T[]>);
-    flattenNode(node: T, level: number, resultNodes: F[], parentMap: boolean[]): F[];
+    getChildren: (node: T) => Observable<T[]> | T[] | undefined | null;
+    constructor(transformFunction: (node: T, level: number, parent: F | null) => F, getLevel: (node: F) => number, isExpandable: (node: F) => boolean, getChildren: (node: T) => Observable<T[]> | T[] | undefined | null);
+    flattenNode(node: T, level: number, resultNodes: F[], parent: F | null): F[];
+    flattenChildren(children: T[], level: number, resultNodes: F[], parent: F | null): void;
     /**
      * Flatten a list of node type T to flattened version of node F.
      * Please note that type T may be nested, and the length of `structuredData` may be different
@@ -52,7 +53,7 @@ export declare class McTreeFlattener<T, F> {
      * Expand flattened node with current expansion status.
      * The returned list may have different length.
      */
-    expandFlattenedNodes(nodes: F[], treeControl: ITreeControl<F>): F[];
+    expandFlattenedNodes(nodes: F[], treeControl: TreeControl<F>): F[];
 }
 /**
  * Data source for flat tree.
@@ -66,9 +67,12 @@ export declare class McTreeFlatDataSource<T, F> extends DataSource<F> {
     private treeFlattener;
     flattenedData: BehaviorSubject<F[]>;
     expandedData: BehaviorSubject<F[]>;
+    filteredData: BehaviorSubject<F[]>;
     data: T[];
     private _data;
     constructor(treeControl: FlatTreeControl<F>, treeFlattener: McTreeFlattener<T, F>, initialData?: T[]);
     connect(collectionViewer: CollectionViewer): Observable<F[]>;
+    filterHandler(): F[];
+    expansionHandler(): F[];
     disconnect(): void;
 }

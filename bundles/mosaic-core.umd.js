@@ -1533,6 +1533,57 @@ var mcSelectAnimations = {
     ])
 };
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McHighlightPipe = /** @class */ (function () {
+    function McHighlightPipe() {
+    }
+    /**
+     * @param {?} value
+     * @param {?} args
+     * @return {?}
+     */
+    McHighlightPipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?} args
+     * @return {?}
+     */
+    function (value, args) {
+        if (!args) {
+            return value;
+        }
+        return value.replace(new RegExp("(" + args + ")", 'gi'), '<mark class="mc-highlight">$1</mark>');
+    };
+    McHighlightPipe.decorators = [
+        { type: core.Pipe, args: [{ name: 'mcHighlight' },] },
+    ];
+    return McHighlightPipe;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McHighlightModule = /** @class */ (function () {
+    function McHighlightModule() {
+    }
+    McHighlightModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule],
+                    exports: [McHighlightPipe],
+                    declarations: [McHighlightPipe]
+                },] },
+    ];
+    return McHighlightModule;
+}());
+
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
@@ -1578,6 +1629,8 @@ exports.SELECT_PANEL_INDENT_PADDING_X = SELECT_PANEL_INDENT_PADDING_X;
 exports.SELECT_PANEL_VIEWPORT_PADDING = SELECT_PANEL_VIEWPORT_PADDING;
 exports.MC_SELECT_SCROLL_STRATEGY = MC_SELECT_SCROLL_STRATEGY;
 exports.MC_SELECT_SCROLL_STRATEGY_PROVIDER = MC_SELECT_SCROLL_STRATEGY_PROVIDER;
+exports.McHighlightModule = McHighlightModule;
+exports.McHighlightPipe = McHighlightPipe;
 exports.ɵa3 = MC_SANITY_CHECKS_FACTORY;
 
 Object.defineProperty(exports, '__esModule', { value: true });

@@ -5,8 +5,8 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
-import { Directive, Input, ChangeDetectorRef, Component, EventEmitter, Output, ElementRef, Inject, Optional, InjectionToken, ChangeDetectionStrategy, ViewEncapsulation, Attribute, ContentChildren, IterableDiffers, ViewChild, Self, NgModule } from '@angular/core';
-import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNodeToggle, CdkTreeNode, CdkTree, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
+import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, Optional, InjectionToken, ChangeDetectionStrategy, Attribute, ContentChildren, IterableDiffers, ViewChild, Self, NgModule } from '@angular/core';
+import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeToggle, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { toBoolean, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NgControl } from '@angular/forms';
@@ -113,21 +113,91 @@ var McTreeNodePadding = /** @class */ (function (_super) {
 /**
  * @template T
  */
-var McTreeNodeToggle = /** @class */ (function (_super) {
-    __extends(McTreeNodeToggle, _super);
-    function McTreeNodeToggle() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var McTreeNodeToggleComponent = /** @class */ (function (_super) {
+    __extends(McTreeNodeToggleComponent, _super);
+    function McTreeNodeToggleComponent(tree, treeNode) {
+        var _this = _super.call(this, tree, treeNode) || this;
+        _this.tree = tree;
+        _this.treeNode = treeNode;
+        _this.disabled = false;
+        // todo может пересмотреть, как то не очень
+        ((/** @type {?} */ (_this.tree.treeControl))).filterValue
+            .subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { _this.disabled = value.length > 0; }));
+        return _this;
     }
-    McTreeNodeToggle.decorators = [
+    Object.defineProperty(McTreeNodeToggleComponent.prototype, "iconState", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.disabled || this.tree.treeControl.isExpanded(this.node);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    McTreeNodeToggleComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'mc-tree-node-toggle',
+                    template: "\n        <i class=\"mc mc-icon mc-angle-down-S_16\"></i>\n    ",
+                    host: {
+                        class: 'mc-tree-node-toggle',
+                        '(click)': 'toggle($event)',
+                        '[class.mc-disabled]': 'disabled',
+                        '[class.mc-opened]': 'iconState'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleComponent }]
+                },] },
+    ];
+    /** @nocollapse */
+    McTreeNodeToggleComponent.ctorParameters = function () { return [
+        { type: CdkTree },
+        { type: CdkTreeNode }
+    ]; };
+    McTreeNodeToggleComponent.propDecorators = {
+        node: [{ type: Input }]
+    };
+    return McTreeNodeToggleComponent;
+}(CdkTreeNodeToggle));
+/**
+ * @template T
+ */
+var McTreeNodeToggleDirective = /** @class */ (function (_super) {
+    __extends(McTreeNodeToggleDirective, _super);
+    function McTreeNodeToggleDirective(tree, treeNode) {
+        var _this = _super.call(this, tree, treeNode) || this;
+        _this.tree = tree;
+        _this.treeNode = treeNode;
+        _this.disabled = false;
+        // todo может пересмотреть, как то не очень
+        ((/** @type {?} */ (_this.tree.treeControl))).filterValue
+            .subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { _this.disabled = value.length > 0; }));
+        return _this;
+    }
+    McTreeNodeToggleDirective.decorators = [
         { type: Directive, args: [{
                     selector: '[mcTreeNodeToggle]',
                     host: {
-                        '(click)': 'toggle($event)'
+                        '(click)': 'toggle($event)',
+                        '[class.mc-disabled]': 'disabled'
                     },
-                    providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggle }]
+                    providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]
                 },] },
     ];
-    return McTreeNodeToggle;
+    /** @nocollapse */
+    McTreeNodeToggleDirective.ctorParameters = function () { return [
+        { type: CdkTree },
+        { type: CdkTreeNode }
+    ]; };
+    return McTreeNodeToggleDirective;
 }(CdkTreeNodeToggle));
 
 /**
@@ -814,7 +884,11 @@ var McTreeSelection = /** @class */ (function (_super) {
                     setTimeout((/**
                      * @return {?}
                      */
-                    function () { return nodeData_1.instance.changeDetectorRef.detectChanges(); }));
+                    function () {
+                        if (!nodeData_1.instance.changeDetectorRef.destroyed) {
+                            nodeData_1.instance.changeDetectorRef.detectChanges();
+                        }
+                    }));
                 }
             }));
         }));
@@ -986,7 +1060,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                         '(keydown)': 'onKeyDown($event)',
                         '(window:resize)': 'updateScrollSize()'
                     },
-                    styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}"],
+                    styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle.mc-disabled{cursor:default}"],
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     providers: [
@@ -1026,7 +1100,8 @@ var MC_TREE_DIRECTIVES = [
     McTreeOption,
     McTreeNodeDef,
     McTreeNodePadding,
-    McTreeNodeToggle
+    McTreeNodeToggleComponent,
+    McTreeNodeToggleDirective
 ];
 var McTreeModule = /** @class */ (function () {
     function McTreeModule() {
@@ -1126,43 +1201,66 @@ McTreeFlattener = /** @class */ (function () {
      * @param {?} node
      * @param {?} level
      * @param {?} resultNodes
-     * @param {?} parentMap
+     * @param {?} parent
      * @return {?}
      */
     McTreeFlattener.prototype.flattenNode = /**
      * @param {?} node
      * @param {?} level
      * @param {?} resultNodes
-     * @param {?} parentMap
+     * @param {?} parent
      * @return {?}
      */
-    function (node, level, resultNodes, parentMap) {
+    function (node, level, resultNodes, parent) {
         var _this = this;
         /** @type {?} */
-        var flatNode = this.transformFunction(node, level);
+        var flatNode = this.transformFunction(node, level, parent);
         resultNodes.push(flatNode);
         if (this.isExpandable(flatNode)) {
-            this.getChildren(node)
-                .pipe(take(1))
-                .subscribe((/**
-             * @param {?} children
-             * @return {?}
-             */
-            function (children) {
-                children.forEach((/**
-                 * @param {?} child
-                 * @param {?} index
-                 * @return {?}
-                 */
-                function (child, index) {
-                    /** @type {?} */
-                    var childParentMap = parentMap.slice();
-                    childParentMap.push(index !== children.length - 1);
-                    _this.flattenNode(child, level + 1, resultNodes, childParentMap);
-                }));
-            }));
+            /** @type {?} */
+            var childrenNodes = this.getChildren(node);
+            if (childrenNodes) {
+                if (Array.isArray(childrenNodes)) {
+                    this.flattenChildren(childrenNodes, level, resultNodes, flatNode);
+                }
+                else {
+                    childrenNodes
+                        .pipe(take(1))
+                        .subscribe((/**
+                     * @param {?} children
+                     * @return {?}
+                     */
+                    function (children) {
+                        _this.flattenChildren(children, level, resultNodes, flatNode);
+                    }));
+                }
+            }
         }
         return resultNodes;
+    };
+    /**
+     * @param {?} children
+     * @param {?} level
+     * @param {?} resultNodes
+     * @param {?} parent
+     * @return {?}
+     */
+    McTreeFlattener.prototype.flattenChildren = /**
+     * @param {?} children
+     * @param {?} level
+     * @param {?} resultNodes
+     * @param {?} parent
+     * @return {?}
+     */
+    function (children, level, resultNodes, parent) {
+        var _this = this;
+        children.forEach((/**
+         * @param {?} child
+         * @return {?}
+         */
+        function (child) {
+            _this.flattenNode(child, level + 1, resultNodes, parent);
+        }));
     };
     /**
      * Flatten a list of node type T to flattened version of node F.
@@ -1191,7 +1289,7 @@ McTreeFlattener = /** @class */ (function () {
          * @param {?} node
          * @return {?}
          */
-        function (node) { return _this.flattenNode(node, 0, resultNodes, []); }));
+        function (node) { return _this.flattenNode(node, 0, resultNodes, null); }));
         return resultNodes;
     };
     /**
@@ -1240,6 +1338,11 @@ McTreeFlattener = /** @class */ (function () {
     };
     return McTreeFlattener;
 }());
+/** @enum {string} */
+var McTreeDataSourceChangeTypes = {
+    Expansion: 'expansion',
+    Filter: 'filter',
+};
 /**
  * Data source for flat tree.
  * The data source need to handle expansion/collapsion of the tree node and change the data feed
@@ -1265,6 +1368,7 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
         _this.treeFlattener = treeFlattener;
         _this.flattenedData = new BehaviorSubject([]);
         _this.expandedData = new BehaviorSubject([]);
+        _this.filteredData = new BehaviorSubject([]);
         _this._data = new BehaviorSubject(initialData);
         return _this;
     }
@@ -1297,19 +1401,54 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
      */
     function (collectionViewer) {
         var _this = this;
-        /** @type {?} */
-        var changes = [
-            collectionViewer.viewChange,
-            this.treeControl.expansionModel.changed,
-            this.flattenedData
-        ];
-        return merge.apply(void 0, changes).pipe(map((/**
+        return merge(collectionViewer.viewChange, this.treeControl.expansionModel.changed
+            .pipe(map((/**
+         * @param {?} value
          * @return {?}
          */
-        function () {
-            _this.expandedData.next(_this.treeFlattener.expandFlattenedNodes(_this.flattenedData.value, _this.treeControl));
-            return _this.expandedData.value;
+        function (value) { return ({ type: McTreeDataSourceChangeTypes.Expansion, value: value }); }))), this.treeControl.filterValue
+            .pipe(map((/**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { return ({ type: McTreeDataSourceChangeTypes.Filter, value: value }); }))), this.flattenedData)
+            .pipe(map((/**
+         * @param {?} changeObj
+         * @return {?}
+         */
+        function (changeObj) {
+            if (changeObj.type === McTreeDataSourceChangeTypes.Filter) {
+                if (changeObj.value && changeObj.value.length > 0) {
+                    return _this.filterHandler();
+                }
+                else {
+                    return _this.expansionHandler();
+                }
+            }
+            return _this.expansionHandler();
         })));
+    };
+    /**
+     * @return {?}
+     */
+    McTreeFlatDataSource.prototype.filterHandler = /**
+     * @return {?}
+     */
+    function () {
+        this.filteredData.next(this.treeControl.filterModel.selected);
+        return this.filteredData.value;
+    };
+    /**
+     * @return {?}
+     */
+    McTreeFlatDataSource.prototype.expansionHandler = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var expandedNodes = this.treeFlattener.expandFlattenedNodes(this.flattenedData.value, this.treeControl);
+        this.expandedData.next(expandedNodes);
+        return this.expandedData.value;
     };
     /**
      * @return {?}
@@ -1331,14 +1470,14 @@ McTreeFlatDataSource = /** @class */ (function (_super) {
  * Data source for nested tree.
  *
  * The data source for nested tree doesn't have to consider node flattener, or the way to expand
- * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
+ * or collapse. The expansion/collapsion will be handled by TreeControl and each non-leaf node.
  * @template T
  */
 var  /**
  * Data source for nested tree.
  *
  * The data source for nested tree doesn't have to consider node flattener, or the way to expand
- * or collapse. The expansion/collapsion will be handled by ITreeControl and each non-leaf node.
+ * or collapse. The expansion/collapsion will be handled by TreeControl and each non-leaf node.
  * @template T
  */
 McTreeNestedDataSource = /** @class */ (function (_super) {
@@ -1403,5 +1542,5 @@ McTreeNestedDataSource = /** @class */ (function (_super) {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggle, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };
+export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggleComponent, McTreeNodeToggleDirective, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };
 //# sourceMappingURL=tree.es5.js.map
