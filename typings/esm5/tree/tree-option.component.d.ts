@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { ChangeDetectorRef, EventEmitter, ElementRef, InjectionToken } from '@angular/core';
+import { ChangeDetectorRef, EventEmitter, ElementRef, InjectionToken, OnInit, OnDestroy } from '@angular/core';
+import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 export interface McTreeOptionParentComponent {
@@ -17,9 +18,10 @@ export declare class McTreeOptionChange {
     isUserInput: boolean;
     constructor(source: McTreeOption, isUserInput?: boolean);
 }
-export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable {
+export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements OnInit, OnDestroy, CanDisable {
     protected elementRef: ElementRef;
     protected changeDetectorRef: ChangeDetectorRef;
+    private focusMonitor;
     private readonly parent;
     value: any;
     private _value;
@@ -32,7 +34,9 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     private _id;
     readonly multiple: boolean;
     hasFocus: boolean;
-    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, parent: McTreeOptionParentComponent);
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, focusMonitor: FocusMonitor, parent: McTreeOptionParentComponent);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
     toggle(): void;
     setSelected(selected: boolean): void;
     handleFocus(): void;

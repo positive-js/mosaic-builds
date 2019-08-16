@@ -17164,12 +17164,13 @@ var McTreeOptionChange = /** @class */ (function () {
 var uniqueIdCounter$1 = 0;
 var McTreeOption = /** @class */ (function (_super) {
     __extends(McTreeOption, _super);
-    function McTreeOption(elementRef, changeDetectorRef, parent) {
+    function McTreeOption(elementRef, changeDetectorRef, focusMonitor, parent) {
         var _this = 
         // todo any
         _super.call(this, elementRef, (/** @type {?} */ (parent))) || this;
         _this.elementRef = elementRef;
         _this.changeDetectorRef = changeDetectorRef;
+        _this.focusMonitor = focusMonitor;
         _this.parent = parent;
         _this._disabled = false;
         _this.onSelectionChange = new core.EventEmitter();
@@ -17217,16 +17218,7 @@ var McTreeOption = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McTreeOption.prototype, "selected", {
-        // @Input()
-        // get selected(): boolean {
-        //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
-        // }
-        get: 
-        // @Input()
-        // get selected(): boolean {
-        //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
-        // }
-        /**
+        get: /**
          * @return {?}
          */
         function () {
@@ -17267,6 +17259,24 @@ var McTreeOption = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /**
+     * @return {?}
+     */
+    McTreeOption.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
+    };
+    /**
+     * @return {?}
+     */
+    McTreeOption.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    };
     /**
      * @return {?}
      */
@@ -17455,6 +17465,7 @@ var McTreeOption = /** @class */ (function (_super) {
     McTreeOption.ctorParameters = function () { return [
         { type: core.ElementRef },
         { type: core.ChangeDetectorRef },
+        { type: a11y.FocusMonitor },
         { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_TREE_OPTION_PARENT_COMPONENT,] }] }
     ]; };
     McTreeOption.propDecorators = {
@@ -31962,15 +31973,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd16 = McTabBase;
-exports.ɵe16 = mcTabMixinBase;
-exports.ɵa16 = McTabHeaderBase;
-exports.ɵb16 = McTabLabelWrapperBase;
-exports.ɵc16 = mcTabLabelWrapperMixinBase;
-exports.ɵh16 = McTabLinkBase;
-exports.ɵf16 = McTabNavBase;
-exports.ɵi16 = mcTabLinkMixinBase;
-exports.ɵg16 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;

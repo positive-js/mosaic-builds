@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/core', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.ng.mosaic.core,global.ng.cdk.collections,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.keycodes,global.rxjs,global.rxjs.operators,global.ng.common));
-}(this, (function (exports,core,tree,core$1,collections,forms,a11y,keycodes,rxjs,operators,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.ng.cdk.a11y,global.ng.mosaic.core,global.ng.cdk.collections,global.ng.forms,global.ng.cdk.keycodes,global.rxjs,global.rxjs.operators,global.ng.common));
+}(this, (function (exports,core,tree,a11y,core$1,collections,forms,keycodes,rxjs,operators,common) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -244,12 +244,13 @@ var McTreeOptionChange = /** @class */ (function () {
 var uniqueIdCounter = 0;
 var McTreeOption = /** @class */ (function (_super) {
     __extends(McTreeOption, _super);
-    function McTreeOption(elementRef, changeDetectorRef, parent) {
+    function McTreeOption(elementRef, changeDetectorRef, focusMonitor, parent) {
         var _this = 
         // todo any
         _super.call(this, elementRef, (/** @type {?} */ (parent))) || this;
         _this.elementRef = elementRef;
         _this.changeDetectorRef = changeDetectorRef;
+        _this.focusMonitor = focusMonitor;
         _this.parent = parent;
         _this._disabled = false;
         _this.onSelectionChange = new core.EventEmitter();
@@ -297,16 +298,7 @@ var McTreeOption = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McTreeOption.prototype, "selected", {
-        // @Input()
-        // get selected(): boolean {
-        //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
-        // }
-        get: 
-        // @Input()
-        // get selected(): boolean {
-        //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
-        // }
-        /**
+        get: /**
          * @return {?}
          */
         function () {
@@ -347,6 +339,24 @@ var McTreeOption = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /**
+     * @return {?}
+     */
+    McTreeOption.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
+    };
+    /**
+     * @return {?}
+     */
+    McTreeOption.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    };
     /**
      * @return {?}
      */
@@ -535,6 +545,7 @@ var McTreeOption = /** @class */ (function (_super) {
     McTreeOption.ctorParameters = function () { return [
         { type: core.ElementRef },
         { type: core.ChangeDetectorRef },
+        { type: a11y.FocusMonitor },
         { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_TREE_OPTION_PARENT_COMPONENT,] }] }
     ]; };
     McTreeOption.propDecorators = {

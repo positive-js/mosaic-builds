@@ -6,10 +6,10 @@
  */
 import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, Optional, InjectionToken, ChangeDetectionStrategy, Attribute, ContentChildren, IterableDiffers, ViewChild, Self, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeToggle, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
+import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { toBoolean, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NgControl } from '@angular/forms';
-import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { END, ENTER, hasModifierKey, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { Subject, BehaviorSubject, merge } from 'rxjs';
 import { takeUntil, map, take } from 'rxjs/operators';
@@ -206,13 +206,15 @@ class McTreeOption extends CdkTreeNode {
     /**
      * @param {?} elementRef
      * @param {?} changeDetectorRef
+     * @param {?} focusMonitor
      * @param {?} parent
      */
-    constructor(elementRef, changeDetectorRef, parent) {
+    constructor(elementRef, changeDetectorRef, focusMonitor, parent) {
         // todo any
         super(elementRef, (/** @type {?} */ (parent)));
         this.elementRef = elementRef;
         this.changeDetectorRef = changeDetectorRef;
+        this.focusMonitor = focusMonitor;
         this.parent = parent;
         this._disabled = false;
         this.onSelectionChange = new EventEmitter();
@@ -250,10 +252,6 @@ class McTreeOption extends CdkTreeNode {
             this._disabled = newValue;
         }
     }
-    // @Input()
-    // get selected(): boolean {
-    //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
-    // }
     /**
      * @return {?}
      */
@@ -283,6 +281,18 @@ class McTreeOption extends CdkTreeNode {
      */
     get multiple() {
         return this.parent.multiple;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     }
     /**
      * @return {?}
@@ -429,6 +439,7 @@ McTreeOption.decorators = [
 McTreeOption.ctorParameters = () => [
     { type: ElementRef },
     { type: ChangeDetectorRef },
+    { type: FocusMonitor },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_TREE_OPTION_PARENT_COMPONENT,] }] }
 ];
 McTreeOption.propDecorators = {

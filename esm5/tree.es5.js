@@ -7,10 +7,10 @@
 import { __extends } from 'tslib';
 import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, Optional, InjectionToken, ChangeDetectionStrategy, Attribute, ContentChildren, IterableDiffers, ViewChild, Self, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeToggle, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
+import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { toBoolean, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NgControl } from '@angular/forms';
-import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { END, ENTER, hasModifierKey, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { Subject, BehaviorSubject, merge } from 'rxjs';
 import { takeUntil, map, take } from 'rxjs/operators';
@@ -221,12 +221,13 @@ var McTreeOptionChange = /** @class */ (function () {
 var uniqueIdCounter = 0;
 var McTreeOption = /** @class */ (function (_super) {
     __extends(McTreeOption, _super);
-    function McTreeOption(elementRef, changeDetectorRef, parent) {
+    function McTreeOption(elementRef, changeDetectorRef, focusMonitor, parent) {
         var _this = 
         // todo any
         _super.call(this, elementRef, (/** @type {?} */ (parent))) || this;
         _this.elementRef = elementRef;
         _this.changeDetectorRef = changeDetectorRef;
+        _this.focusMonitor = focusMonitor;
         _this.parent = parent;
         _this._disabled = false;
         _this.onSelectionChange = new EventEmitter();
@@ -274,16 +275,7 @@ var McTreeOption = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McTreeOption.prototype, "selected", {
-        // @Input()
-        // get selected(): boolean {
-        //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
-        // }
-        get: 
-        // @Input()
-        // get selected(): boolean {
-        //     return this.treeSelection.selectionModel && this.treeSelection.selectionModel.isSelected(this) || false;
-        // }
-        /**
+        get: /**
          * @return {?}
          */
         function () {
@@ -324,6 +316,24 @@ var McTreeOption = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /**
+     * @return {?}
+     */
+    McTreeOption.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
+    };
+    /**
+     * @return {?}
+     */
+    McTreeOption.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    };
     /**
      * @return {?}
      */
@@ -512,6 +522,7 @@ var McTreeOption = /** @class */ (function (_super) {
     McTreeOption.ctorParameters = function () { return [
         { type: ElementRef },
         { type: ChangeDetectorRef },
+        { type: FocusMonitor },
         { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_TREE_OPTION_PARENT_COMPONENT,] }] }
     ]; };
     McTreeOption.propDecorators = {
