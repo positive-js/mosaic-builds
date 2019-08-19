@@ -6,7 +6,7 @@
  */
 import { BidiModule } from '@angular/cdk/bidi';
 import { NgModule, InjectionToken, Optional, Inject, isDevMode, Directive, Injectable, Component, ViewEncapsulation, Input, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, EventEmitter, Output, Pipe, ɵɵdefineInjectable, ɵɵinject } from '@angular/core';
-import { __extends } from 'tslib';
+import { __extends, __assign } from 'tslib';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { DOCUMENT, CommonModule } from '@angular/common';
@@ -1563,11 +1563,186 @@ var McHighlightModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @type {?} */
+var MC_LOCALE_ID = new InjectionToken('McLocaleId');
+/** @type {?} */
+var DEFAULT_MC_LOCALE_ID = 'ru';
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isEmpty(value) {
+    return value == null || value === '' || value !== value;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function strToNumber(value) {
+    if (typeof value === 'string' && !isNaN(Number(value) - parseFloat(value))) {
+        return Number(value);
+    }
+    if (typeof value !== 'number') {
+        throw new Error(value + " is not a number");
+    }
+    return value;
+}
+/** @type {?} */
+var NUMBER_FORMAT_REGEXP = /^(\d+)?\.((\d+)(-(\d+))?)?$/;
+/** @type {?} */
+var minIntGroupPosition = 1;
+/** @type {?} */
+var minFractionGroupPosition = 3;
+/** @type {?} */
+var maxFractionGroupPosition = 5;
+var ParsedDigitsInfo = /** @class */ (function () {
+    function ParsedDigitsInfo() {
+    }
+    return ParsedDigitsInfo;
+}());
+/**
+ * @param {?} digitsInfo
+ * @return {?}
+ */
+function parseDigitsInfo(digitsInfo) {
+    /** @type {?} */
+    var parts = digitsInfo.match(NUMBER_FORMAT_REGEXP);
+    if (parts === null) {
+        throw new Error(digitsInfo + " is not a valid digit info");
+    }
+    /** @type {?} */
+    var minIntPart = parts[minIntGroupPosition];
+    /** @type {?} */
+    var minFractionPart = parts[minFractionGroupPosition];
+    /** @type {?} */
+    var maxFractionPart = parts[maxFractionGroupPosition];
+    /** @type {?} */
+    var result = new ParsedDigitsInfo();
+    if (minIntPart != null) {
+        result.minimumIntegerDigits = parseInt(minIntPart);
+    }
+    if (minFractionPart != null) {
+        result.minimumFractionDigits = parseInt(minFractionPart);
+    }
+    if (maxFractionPart != null) {
+        result.maximumFractionDigits = parseInt(maxFractionPart);
+    }
+    else if (minFractionPart != null && result.minimumFractionDigits > result.maximumFractionDigits) {
+        result.maximumFractionDigits = result.minimumFractionDigits;
+    }
+    return result;
+}
+var McDecimalPipe = /** @class */ (function () {
+    function McDecimalPipe(_locale) {
+        this._locale = _locale;
+    }
+    /**
+     * @param value The number to be formatted.
+     * @param digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `MC_LOCALE_ID`, which is `ru` by default.
+     */
+    /**
+     * @param {?} value The number to be formatted.
+     * @param {?=} digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `MC_LOCALE_ID`, which is `ru` by default.
+     * @return {?}
+     */
+    McDecimalPipe.prototype.transform = /**
+     * @param {?} value The number to be formatted.
+     * @param {?=} digitsInfo Decimal representation options, specified by a string
+     * in the following format:<br>
+     * <code>{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}</code>.
+     *   - `minIntegerDigits`: The minimum number of integer digits before the decimal point.
+     * Default is `1`.
+     *   - `minFractionDigits`: The minimum number of digits after the decimal point.
+     * Default is `0`.
+     *   - `maxFractionDigits`: The maximum number of digits after the decimal point.
+     * Default is `3`.
+     * @param {?=} locale A locale code for the locale format rules to use.
+     * When not supplied, uses the value of `MC_LOCALE_ID`, which is `ru` by default.
+     * @return {?}
+     */
+    function (value, digitsInfo, locale) {
+        if (isEmpty(value)) {
+            return null;
+        }
+        /** @type {?} */
+        var currentLocale = locale || this._locale || DEFAULT_MC_LOCALE_ID;
+        /** @type {?} */
+        var parsedDigitsInfo;
+        if (digitsInfo) {
+            parsedDigitsInfo = parseDigitsInfo(digitsInfo);
+        }
+        /** @type {?} */
+        var options = __assign({ useGrouping: true, minimumIntegerDigits: 1, minimumFractionDigits: 0, maximumFractionDigits: 3 }, parsedDigitsInfo);
+        try {
+            /** @type {?} */
+            var num = strToNumber(value);
+            return Intl.NumberFormat.call(this, currentLocale, options).format(num);
+        }
+        catch (error) {
+            throw Error("InvalidPipeArgument: McDecimalPipe for pipe '" + JSON.stringify(error.message) + "'");
+        }
+    };
+    McDecimalPipe.decorators = [
+        { type: Injectable, args: [{ providedIn: 'root' },] },
+        { type: Pipe, args: [{ name: 'mcNumber' },] },
+    ];
+    /** @nocollapse */
+    McDecimalPipe.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: Optional }, { type: Inject, args: [MC_LOCALE_ID,] }] }
+    ]; };
+    /** @nocollapse */ McDecimalPipe.ngInjectableDef = ɵɵdefineInjectable({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(ɵɵinject(MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
+    return McDecimalPipe;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var McFormattersModule = /** @class */ (function () {
+    function McFormattersModule() {
+    }
+    McFormattersModule.decorators = [
+        { type: NgModule, args: [{
+                    exports: [
+                        McDecimalPipe
+                    ],
+                    declarations: [
+                        McDecimalPipe
+                    ]
+                },] },
+    ];
+    return McFormattersModule;
+}());
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, McOptgroupBase, McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, AnimationCurves, POSITION_MAP, DEFAULT_4_POSITIONS, EXTENDED_OVERLAY_POSITIONS, POSITION_TO_CSS_MAP, mcSelectAnimations, selectEvents, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, mcSelectScrollStrategyProviderFactory, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McHighlightModule, McHighlightPipe, MC_SANITY_CHECKS_FACTORY as ɵa3 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, McOptgroupBase, McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, AnimationCurves, POSITION_MAP, DEFAULT_4_POSITIONS, EXTENDED_OVERLAY_POSITIONS, POSITION_TO_CSS_MAP, mcSelectAnimations, selectEvents, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, mcSelectScrollStrategyProviderFactory, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McHighlightModule, McHighlightPipe, McFormattersModule, MC_LOCALE_ID, DEFAULT_MC_LOCALE_ID, NUMBER_FORMAT_REGEXP, McDecimalPipe, MC_SANITY_CHECKS_FACTORY as ɵa3 };
 //# sourceMappingURL=core.es5.js.map
