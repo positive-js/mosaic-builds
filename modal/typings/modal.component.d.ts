@@ -1,5 +1,5 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectorRef, ComponentFactoryResolver, ComponentRef, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, ComponentFactoryResolver, ComponentRef, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges, TemplateRef, Type, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
@@ -50,7 +50,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     mcOnCancel: EventEmitter<T> | OnClickCallback<T>;
     modalContainer: ElementRef;
     bodyContainer: ViewContainerRef;
-    autoFocusButtonOk: ElementRef;
+    autoFocusedButtons: QueryList<ElementRef>;
     maskAnimationClassMap: object;
     modalAnimationClassMap: object;
     transformOrigin: string;

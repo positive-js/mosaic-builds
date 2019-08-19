@@ -47,5 +47,6 @@ export interface IModalButtonOptions<T = any> {
     show?: boolean | ((this: IModalButtonOptions<T>, contentComponentInstance?: T) => boolean);
     loading?: boolean | ((this: IModalButtonOptions<T>, contentComponentInstance?: T) => boolean);
     disabled?: boolean | ((this: IModalButtonOptions<T>, contentComponentInstance?: T) => boolean);
+    autoFocus?: boolean;
     onClick?(this: IModalButtonOptions<T>, contentComponentInstance?: T): (void | {}) | Promise<(void | {})>;
 }
