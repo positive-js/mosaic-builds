@@ -34,6 +34,8 @@ export declare class McSplitterComponent implements OnInit {
     private isDragging;
     private readonly areaPositionDivider;
     private readonly listeners;
+    hideGutters: boolean;
+    private _hideGutters;
     direction: Direction;
     private _direction;
     disabled: boolean;

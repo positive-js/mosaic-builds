@@ -131,8 +131,22 @@ class McSplitterComponent {
         this.isDragging = false;
         this.areaPositionDivider = 2;
         this.listeners = [];
+        this._hideGutters = false;
         this._disabled = false;
         this._gutterSize = 6;
+    }
+    /**
+     * @return {?}
+     */
+    get hideGutters() {
+        return this._hideGutters;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set hideGutters(value) {
+        this._hideGutters = coerceBooleanProperty(value);
     }
     /**
      * @return {?}
@@ -384,7 +398,7 @@ McSplitterComponent.decorators = [
                 },
                 preserveWhitespaces: false,
                 styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;overflow:hidden}.mc-gutter.mc-gutter_vertical>.mc-icon{transform:rotate(90deg)}"],
-                template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [direction]=\"direction\" [attr.disabled]=\"disabled || null\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"></mc-gutter></ng-template>",
+                template: "<ng-content></ng-content><ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\"><mc-gutter *ngIf=\"last === false\" [direction]=\"direction\" [attr.disabled]=\"disabled || null\" [style.display]=\"hideGutters ? 'none' : 'flex'\" [size]=\"gutterSize\" [order]=\"index * 2 + 1\" (mousedown)=\"onMouseDown($event, index, index + 1)\"></mc-gutter></ng-template>",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] },
@@ -398,6 +412,7 @@ McSplitterComponent.ctorParameters = () => [
 ];
 McSplitterComponent.propDecorators = {
     gutters: [{ type: ViewChildren, args: [McGutterDirective,] }],
+    hideGutters: [{ type: Input }],
     direction: [{ type: Input }],
     disabled: [{ type: Input }],
     gutterSize: [{ type: Input }]
