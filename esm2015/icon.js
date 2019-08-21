@@ -39,7 +39,9 @@ class McIcon extends _McIconMixinBase {
      */
     constructor(elementRef, iconName) {
         super(elementRef);
-        elementRef.nativeElement.classList.add(iconName);
+        if (iconName) {
+            elementRef.nativeElement.classList.add(iconName);
+        }
     }
     /**
      * @return {?}

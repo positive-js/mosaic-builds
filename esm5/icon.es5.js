@@ -38,7 +38,9 @@ var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {
         var _this = _super.call(this, elementRef) || this;
-        elementRef.nativeElement.classList.add(iconName);
+        if (iconName) {
+            elementRef.nativeElement.classList.add(iconName);
+        }
         return _this;
     }
     /**
