@@ -30,7 +30,6 @@ export declare class McSidebar implements OnDestroy, OnInit, AfterContentInit {
     closedContent: McSidebarClosed;
     readonly animationState: McSidebarAnimationState;
     internalState: boolean;
-    private needSaveAndRestoreWidth;
     private documentKeydownListener;
     constructor(ngZone: NgZone, elementRef: ElementRef);
     ngOnInit(): void;

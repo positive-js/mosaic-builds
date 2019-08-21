@@ -78,9 +78,14 @@ class McSidebar {
         this.ngZone = ngZone;
         this.elementRef = elementRef;
         this._opened = true;
+        this.params = {
+            openedStateWidth: 'inherit',
+            openedStateMinWidth: 'inherit',
+            openedStateMaxWidth: 'inherit',
+            closedStateWidth: '32px'
+        };
         this.stateChanged = new EventEmitter();
         this.internalState = true;
-        this.needSaveAndRestoreWidth = false;
     }
     /**
      * @return {?}
@@ -93,7 +98,7 @@ class McSidebar {
      * @return {?}
      */
     set opened(value) {
-        if (this.needSaveAndRestoreWidth && this._opened) {
+        if (this._opened) {
             this.saveWidth();
         }
         this._opened = value;
@@ -145,9 +150,6 @@ class McSidebar {
      * @return {?}
      */
     ngAfterContentInit() {
-        if (!this.openedContent.width) {
-            this.needSaveAndRestoreWidth = true;
-        }
         this.params = {
             openedStateWidth: this.openedContent.width || 'inherit',
             openedStateMinWidth: this.openedContent.minWidth || 'inherit',
@@ -265,5 +267,5 @@ McSidebarModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McSidebarModule, SidebarPositions, McSidebarOpened, McSidebarClosed, McSidebar, mcSidebarAnimations as ɵa2 };
+export { McSidebarModule, SidebarPositions, McSidebarOpened, McSidebarClosed, McSidebar, mcSidebarAnimations as ɵa0 };
 //# sourceMappingURL=sidebar.js.map

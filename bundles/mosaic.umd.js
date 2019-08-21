@@ -28586,9 +28586,14 @@ var McSidebar = /** @class */ (function () {
         this.ngZone = ngZone;
         this.elementRef = elementRef;
         this._opened = true;
+        this.params = {
+            openedStateWidth: 'inherit',
+            openedStateMinWidth: 'inherit',
+            openedStateMaxWidth: 'inherit',
+            closedStateWidth: '32px'
+        };
         this.stateChanged = new core.EventEmitter();
         this.internalState = true;
-        this.needSaveAndRestoreWidth = false;
     }
     Object.defineProperty(McSidebar.prototype, "opened", {
         get: /**
@@ -28602,7 +28607,7 @@ var McSidebar = /** @class */ (function () {
          * @return {?}
          */
         function (value) {
-            if (this.needSaveAndRestoreWidth && this._opened) {
+            if (this._opened) {
                 this.saveWidth();
             }
             this._opened = value;
@@ -28679,9 +28684,6 @@ var McSidebar = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (!this.openedContent.width) {
-            this.needSaveAndRestoreWidth = true;
-        }
         this.params = {
             openedStateWidth: this.openedContent.width || 'inherit',
             openedStateMinWidth: this.openedContent.minWidth || 'inherit',
@@ -32178,15 +32180,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd14 = McTabBase;
-exports.ɵe14 = mcTabMixinBase;
-exports.ɵa14 = McTabHeaderBase;
-exports.ɵb14 = McTabLabelWrapperBase;
-exports.ɵc14 = mcTabLabelWrapperMixinBase;
-exports.ɵh14 = McTabLinkBase;
-exports.ɵf14 = McTabNavBase;
-exports.ɵi14 = mcTabLinkMixinBase;
-exports.ɵg14 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -32256,19 +32258,19 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa0 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
 exports.McSidebarClosed = McSidebarClosed;
 exports.McSidebar = McSidebar;
-exports.ɵb20 = mcSidepanelAnimations;
-exports.ɵa20 = mcSidepanelTransformAnimation;
-exports.ɵg20 = McSidepanelActions;
-exports.ɵe20 = McSidepanelBody;
-exports.ɵc20 = McSidepanelClose;
-exports.ɵf20 = McSidepanelFooter;
-exports.ɵd20 = McSidepanelHeader;
+exports.ɵb19 = mcSidepanelAnimations;
+exports.ɵa19 = mcSidepanelTransformAnimation;
+exports.ɵg19 = McSidepanelActions;
+exports.ɵe19 = McSidepanelBody;
+exports.ɵc19 = McSidepanelClose;
+exports.ɵf19 = McSidepanelFooter;
+exports.ɵd19 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
@@ -32295,7 +32297,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa24 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

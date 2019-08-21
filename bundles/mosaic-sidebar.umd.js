@@ -81,9 +81,14 @@ var McSidebar = /** @class */ (function () {
         this.ngZone = ngZone;
         this.elementRef = elementRef;
         this._opened = true;
+        this.params = {
+            openedStateWidth: 'inherit',
+            openedStateMinWidth: 'inherit',
+            openedStateMaxWidth: 'inherit',
+            closedStateWidth: '32px'
+        };
         this.stateChanged = new core.EventEmitter();
         this.internalState = true;
-        this.needSaveAndRestoreWidth = false;
     }
     Object.defineProperty(McSidebar.prototype, "opened", {
         get: /**
@@ -97,7 +102,7 @@ var McSidebar = /** @class */ (function () {
          * @return {?}
          */
         function (value) {
-            if (this.needSaveAndRestoreWidth && this._opened) {
+            if (this._opened) {
                 this.saveWidth();
             }
             this._opened = value;
@@ -174,9 +179,6 @@ var McSidebar = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (!this.openedContent.width) {
-            this.needSaveAndRestoreWidth = true;
-        }
         this.params = {
             openedStateWidth: this.openedContent.width || 'inherit',
             openedStateMinWidth: this.openedContent.minWidth || 'inherit',
@@ -303,7 +305,7 @@ exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
 exports.McSidebarClosed = McSidebarClosed;
 exports.McSidebar = McSidebar;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa0 = mcSidebarAnimations;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
