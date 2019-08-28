@@ -30118,10 +30118,7 @@ var McSplitterComponent = /** @class */ (function () {
         /** @type {?} */
         var minRightAreaSize = rightArea.area.getMinSize();
         if (newLeftAreaSize <= minLeftAreaSize || newRightAreaSize <= minRightAreaSize) {
-            /** @type {?} */
-            var rightAreaOffset = leftArea.initialSize - minLeftAreaSize;
-            leftArea.area.setSize(minLeftAreaSize);
-            rightArea.area.setSize(rightArea.initialSize + rightAreaOffset);
+            return;
         }
         else if (newLeftAreaSize <= 0) {
             leftArea.area.setSize(0);
@@ -32092,10 +32089,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc24 = MAX_VALIDATOR;
-exports.ɵa24 = MIN_VALIDATOR;
-exports.ɵd24 = MaxValidator;
-exports.ɵb24 = MinValidator;
+exports.ɵc25 = MAX_VALIDATOR;
+exports.ɵa25 = MIN_VALIDATOR;
+exports.ɵd25 = MaxValidator;
+exports.ɵb25 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -32180,15 +32177,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -32297,7 +32294,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa25 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

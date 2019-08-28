@@ -346,10 +346,7 @@ class McSplitterComponent {
         /** @type {?} */
         const minRightAreaSize = rightArea.area.getMinSize();
         if (newLeftAreaSize <= minLeftAreaSize || newRightAreaSize <= minRightAreaSize) {
-            /** @type {?} */
-            const rightAreaOffset = leftArea.initialSize - minLeftAreaSize;
-            leftArea.area.setSize(minLeftAreaSize);
-            rightArea.area.setSize(rightArea.initialSize + rightAreaOffset);
+            return;
         }
         else if (newLeftAreaSize <= 0) {
             leftArea.area.setSize(0);

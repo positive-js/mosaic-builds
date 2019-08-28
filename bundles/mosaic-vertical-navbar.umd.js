@@ -259,7 +259,7 @@ exports.McVerticalNavbarItemIcon = McVerticalNavbarItemIcon;
 exports.McVerticalNavbarItemBadge = McVerticalNavbarItemBadge;
 exports._McVerticalNavbarMixinBase = _McVerticalNavbarMixinBase;
 exports.McVerticalNavbarItem = McVerticalNavbarItem;
-exports.ɵa25 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
