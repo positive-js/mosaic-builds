@@ -1775,6 +1775,8 @@ $mc-calendar-weekday-table-font-size: 11px !default;
 
         &[disabled] {
             color: mc-color($foreground, disabled-text);
+
+            background: transparent;
         }
 
         .mc-dropdown__item-caption {
@@ -1943,6 +1945,10 @@ $mc-calendar-weekday-table-font-size: 11px !default;
     .mc-link {
         color: $color;
 
+        text-decoration: none;
+
+        cursor: pointer;
+
         &:focus {
             outline: none;
         }
@@ -1960,8 +1966,20 @@ $mc-calendar-weekday-table-font-size: 11px !default;
             outline-offset: 2px;
         }
 
+        & > .mc-link__icon {
+            color: inherit;
+        }
+
+        & .mc-link__text:not(:first-child) {
+            margin-left: 4px;
+        }
+
+        & .mc-link__text:not(:last-child) {
+            margin-right: 4px;
+        }
+
         &.mc-link_underlined .mc-link__text {
-            border-bottom-style: solid;            
+            border-bottom-style: solid;
             border-bottom-color: rgba($color, .32);
         }
 
@@ -1997,6 +2015,9 @@ $mc-calendar-weekday-table-font-size: 11px !default;
 
         &[disabled] {
             color: $color_disabled;
+
+            cursor: default;
+            pointer-events: none;
 
             &.mc-link_underlined .mc-link__text {
                 border-bottom-color: rgba($color_disabled, .64);

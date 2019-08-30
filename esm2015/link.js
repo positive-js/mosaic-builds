@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Input, Attribute, Component, ElementRef, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, NgModule } from '@angular/core';
+import { Input, ElementRef, ChangeDetectorRef, Directive, Attribute, NgModule } from '@angular/core';
 import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
@@ -15,29 +15,28 @@ import { CommonModule } from '@angular/common';
  */
 class McLinkBase {
     /**
-     * @param {?} _elementRef
+     * @param {?} elementRef
      */
-    constructor(_elementRef) {
-        this._elementRef = _elementRef;
+    constructor(elementRef) {
+        this.elementRef = elementRef;
     }
 }
 /** @type {?} */
 const _McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
 class McLink extends _McLinkBase {
     /**
-     * @param {?} tabIndex
      * @param {?} elementRef
-     * @param {?} _focusMonitor
-     * @param {?} _changeDetector
+     * @param {?} focusMonitor
+     * @param {?} changeDetector
+     * @param {?} tabIndex
      */
-    constructor(tabIndex, elementRef, _focusMonitor, _changeDetector) {
+    constructor(elementRef, focusMonitor, changeDetector, tabIndex) {
         super(elementRef);
-        this.elementRef = elementRef;
-        this._focusMonitor = _focusMonitor;
-        this._changeDetector = _changeDetector;
+        this.focusMonitor = focusMonitor;
+        this.changeDetector = changeDetector;
         this._disabled = false;
-        this._focusMonitor.monitor(elementRef.nativeElement, true);
         this.tabIndex = parseInt(tabIndex) || 0;
+        this.focusMonitor.monitor(elementRef.nativeElement, true);
     }
     /**
      * @return {?}
@@ -54,36 +53,32 @@ class McLink extends _McLinkBase {
         const newValue = toBoolean(value);
         if (newValue !== this._disabled) {
             this._disabled = newValue;
-            this._changeDetector.markForCheck();
+            this.changeDetector.markForCheck();
         }
     }
     /**
      * @return {?}
      */
     ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     }
     /**
      * @return {?}
      */
     focus() {
-        this._getHostElement().focus();
+        this.getHostElement().focus();
     }
     /**
      * @return {?}
      */
-    _getHostElement() {
+    getHostElement() {
         return this.elementRef.nativeElement;
     }
 }
 McLink.decorators = [
-    { type: Component, args: [{
+    { type: Directive, args: [{
                 selector: 'a.mc-link',
-                template: `<ng-content></ng-content>`,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
                 exportAs: 'mcLink',
-                styles: [".mc-link{text-decoration:none;cursor:pointer}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link[disabled]{pointer-events:none;cursor:default}"],
                 inputs: ['disabled'],
                 host: {
                     '[attr.disabled]': 'disabled || null',
@@ -93,10 +88,10 @@ McLink.decorators = [
 ];
 /** @nocollapse */
 McLink.ctorParameters = () => [
-    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
     { type: ElementRef },
     { type: FocusMonitor },
-    { type: ChangeDetectorRef }
+    { type: ChangeDetectorRef },
+    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] }
 ];
 McLink.propDecorators = {
     disabled: [{ type: Input }]

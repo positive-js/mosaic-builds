@@ -12722,8 +12722,8 @@ var McListModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McLinkBase = /** @class */ (function () {
-    function McLinkBase(_elementRef) {
-        this._elementRef = _elementRef;
+    function McLinkBase(elementRef) {
+        this.elementRef = elementRef;
     }
     return McLinkBase;
 }());
@@ -12731,14 +12731,13 @@ var McLinkBase = /** @class */ (function () {
 var _McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
 var McLink = /** @class */ (function (_super) {
     __extends(McLink, _super);
-    function McLink(tabIndex, elementRef, _focusMonitor, _changeDetector) {
+    function McLink(elementRef, focusMonitor, changeDetector, tabIndex) {
         var _this = _super.call(this, elementRef) || this;
-        _this.elementRef = elementRef;
-        _this._focusMonitor = _focusMonitor;
-        _this._changeDetector = _changeDetector;
+        _this.focusMonitor = focusMonitor;
+        _this.changeDetector = changeDetector;
         _this._disabled = false;
-        _this._focusMonitor.monitor(elementRef.nativeElement, true);
         _this.tabIndex = parseInt(tabIndex) || 0;
+        _this.focusMonitor.monitor(elementRef.nativeElement, true);
         return _this;
     }
     Object.defineProperty(McLink.prototype, "disabled", {
@@ -12757,7 +12756,7 @@ var McLink = /** @class */ (function (_super) {
             var newValue = toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
-                this._changeDetector.markForCheck();
+                this.changeDetector.markForCheck();
             }
         },
         enumerable: true,
@@ -12770,7 +12769,7 @@ var McLink = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     };
     /**
      * @return {?}
@@ -12779,25 +12778,21 @@ var McLink = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this._getHostElement().focus();
+        this.getHostElement().focus();
     };
     /**
      * @return {?}
      */
-    McLink.prototype._getHostElement = /**
+    McLink.prototype.getHostElement = /**
      * @return {?}
      */
     function () {
         return this.elementRef.nativeElement;
     };
     McLink.decorators = [
-        { type: core.Component, args: [{
+        { type: core.Directive, args: [{
                     selector: 'a.mc-link',
-                    template: "<ng-content></ng-content>",
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
                     exportAs: 'mcLink',
-                    styles: [".mc-link{text-decoration:none;cursor:pointer}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link[disabled]{pointer-events:none;cursor:default}"],
                     inputs: ['disabled'],
                     host: {
                         '[attr.disabled]': 'disabled || null',
@@ -12807,10 +12802,10 @@ var McLink = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McLink.ctorParameters = function () { return [
-        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
         { type: core.ElementRef },
         { type: a11y.FocusMonitor },
-        { type: core.ChangeDetectorRef }
+        { type: core.ChangeDetectorRef },
+        { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] }
     ]; };
     McLink.propDecorators = {
         disabled: [{ type: core.Input }]
@@ -32089,10 +32084,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc25 = MAX_VALIDATOR;
-exports.ɵa25 = MIN_VALIDATOR;
-exports.ɵd25 = MaxValidator;
-exports.ɵb25 = MinValidator;
+exports.ɵc24 = MAX_VALIDATOR;
+exports.ɵa24 = MIN_VALIDATOR;
+exports.ɵd24 = MaxValidator;
+exports.ɵb24 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -32255,7 +32250,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa1 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;

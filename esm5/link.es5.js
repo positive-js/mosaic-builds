@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
-import { Input, Attribute, Component, ElementRef, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, NgModule } from '@angular/core';
+import { Input, ElementRef, ChangeDetectorRef, Directive, Attribute, NgModule } from '@angular/core';
 import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
@@ -15,8 +15,8 @@ import { CommonModule } from '@angular/common';
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McLinkBase = /** @class */ (function () {
-    function McLinkBase(_elementRef) {
-        this._elementRef = _elementRef;
+    function McLinkBase(elementRef) {
+        this.elementRef = elementRef;
     }
     return McLinkBase;
 }());
@@ -24,14 +24,13 @@ var McLinkBase = /** @class */ (function () {
 var _McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
 var McLink = /** @class */ (function (_super) {
     __extends(McLink, _super);
-    function McLink(tabIndex, elementRef, _focusMonitor, _changeDetector) {
+    function McLink(elementRef, focusMonitor, changeDetector, tabIndex) {
         var _this = _super.call(this, elementRef) || this;
-        _this.elementRef = elementRef;
-        _this._focusMonitor = _focusMonitor;
-        _this._changeDetector = _changeDetector;
+        _this.focusMonitor = focusMonitor;
+        _this.changeDetector = changeDetector;
         _this._disabled = false;
-        _this._focusMonitor.monitor(elementRef.nativeElement, true);
         _this.tabIndex = parseInt(tabIndex) || 0;
+        _this.focusMonitor.monitor(elementRef.nativeElement, true);
         return _this;
     }
     Object.defineProperty(McLink.prototype, "disabled", {
@@ -50,7 +49,7 @@ var McLink = /** @class */ (function (_super) {
             var newValue = toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
-                this._changeDetector.markForCheck();
+                this.changeDetector.markForCheck();
             }
         },
         enumerable: true,
@@ -63,7 +62,7 @@ var McLink = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     };
     /**
      * @return {?}
@@ -72,25 +71,21 @@ var McLink = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this._getHostElement().focus();
+        this.getHostElement().focus();
     };
     /**
      * @return {?}
      */
-    McLink.prototype._getHostElement = /**
+    McLink.prototype.getHostElement = /**
      * @return {?}
      */
     function () {
         return this.elementRef.nativeElement;
     };
     McLink.decorators = [
-        { type: Component, args: [{
+        { type: Directive, args: [{
                     selector: 'a.mc-link',
-                    template: "<ng-content></ng-content>",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None,
                     exportAs: 'mcLink',
-                    styles: [".mc-link{text-decoration:none;cursor:pointer}.mc-link>.mc-link__icon{color:inherit}.mc-link>.mc-link__text:not(:first-child){margin-left:4px}.mc-link>.mc-link__text:not(:last-child){margin-right:4px}.mc-link[disabled]{pointer-events:none;cursor:default}"],
                     inputs: ['disabled'],
                     host: {
                         '[attr.disabled]': 'disabled || null',
@@ -100,10 +95,10 @@ var McLink = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     McLink.ctorParameters = function () { return [
-        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
         { type: ElementRef },
         { type: FocusMonitor },
-        { type: ChangeDetectorRef }
+        { type: ChangeDetectorRef },
+        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] }
     ]; };
     McLink.propDecorators = {
         disabled: [{ type: Input }]
