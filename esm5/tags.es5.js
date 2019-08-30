@@ -1431,13 +1431,15 @@ var McTagList = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        if (this.lastDestroyedTagIndex != null && this.tags.length) {
-            /** @type {?} */
-            var newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
-            this.keyManager.setActiveItem(newTagIndex);
-        }
-        else if (this.tags.length === 0) {
-            this.focusInput();
+        if (this.lastDestroyedTagIndex != null) {
+            if (this.tags.length) {
+                /** @type {?} */
+                var newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
+                this.keyManager.setActiveItem(newTagIndex);
+            }
+            else {
+                this.focusInput();
+            }
         }
         this.lastDestroyedTagIndex = null;
     };

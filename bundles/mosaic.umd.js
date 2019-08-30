@@ -22033,13 +22033,15 @@ var McTagList = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        if (this.lastDestroyedTagIndex != null && this.tags.length) {
-            /** @type {?} */
-            var newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
-            this.keyManager.setActiveItem(newTagIndex);
-        }
-        else if (this.tags.length === 0) {
-            this.focusInput();
+        if (this.lastDestroyedTagIndex != null) {
+            if (this.tags.length) {
+                /** @type {?} */
+                var newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
+                this.keyManager.setActiveItem(newTagIndex);
+            }
+            else {
+                this.focusInput();
+            }
         }
         this.lastDestroyedTagIndex = null;
     };
@@ -32084,10 +32086,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc24 = MAX_VALIDATOR;
-exports.ɵa24 = MIN_VALIDATOR;
-exports.ɵd24 = MaxValidator;
-exports.ɵb24 = MinValidator;
+exports.ɵc25 = MAX_VALIDATOR;
+exports.ɵa25 = MIN_VALIDATOR;
+exports.ɵd25 = MaxValidator;
+exports.ɵb25 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -32172,15 +32174,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -32250,7 +32252,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa1 = mcSidebarAnimations;
+exports.ɵa2 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -32289,7 +32291,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

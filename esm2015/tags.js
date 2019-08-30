@@ -1113,13 +1113,15 @@ class McTagList extends _McTagListMixinBase {
      * @return {?}
      */
     updateFocusForDestroyedTags() {
-        if (this.lastDestroyedTagIndex != null && this.tags.length) {
-            /** @type {?} */
-            const newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
-            this.keyManager.setActiveItem(newTagIndex);
-        }
-        else if (this.tags.length === 0) {
-            this.focusInput();
+        if (this.lastDestroyedTagIndex != null) {
+            if (this.tags.length) {
+                /** @type {?} */
+                const newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
+                this.keyManager.setActiveItem(newTagIndex);
+            }
+            else {
+                this.focusInput();
+            }
         }
         this.lastDestroyedTagIndex = null;
     }
