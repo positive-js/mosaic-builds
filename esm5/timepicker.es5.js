@@ -903,7 +903,7 @@ var McTimepicker = /** @class */ (function (_super) {
         ]);
         /** @type {?} */
         var convertedTimeString = momentWrappedTime !== null
-            ? momentWrappedTime.format('HH:mm:ss')
+            ? momentWrappedTime.format('H:m:s')
             : '';
         /** @type {?} */
         var hoursAndMinutesAndSeconds = convertedTimeString.match(HOURS_MINUTES_SECONDS_REGEXP);
