@@ -899,6 +899,8 @@ var McTreeSelection = /** @class */ (function (_super) {
         _super.prototype.renderNodeChanges.call(this, data, dataDiffer, viewContainer, parentData);
         /** @type {?} */
         var arrayOfInstances = [];
+        /** @type {?} */
+        var changeDetectorRefs = [];
         viewContainer._embeddedViews.forEach((/**
          * @param {?} view
          * @return {?}
@@ -913,16 +915,23 @@ var McTreeSelection = /** @class */ (function (_super) {
             function (node) {
                 if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
                     /** @type {?} */
-                    var nodeData_1 = view.nodes[node.nodeIndex];
-                    arrayOfInstances.push((/** @type {?} */ (nodeData_1.instance)));
-                    setTimeout((/**
-                     * @return {?}
-                     */
-                    function () {
-                        if (!nodeData_1.instance.changeDetectorRef.destroyed) {
-                            nodeData_1.instance.changeDetectorRef.detectChanges();
-                        }
-                    }));
+                    var nodeData = view.nodes[node.nodeIndex];
+                    arrayOfInstances.push((/** @type {?} */ (nodeData.instance)));
+                    changeDetectorRefs.push(nodeData.instance.changeDetectorRef);
+                }
+            }));
+        }));
+        setTimeout((/**
+         * @return {?}
+         */
+        function () {
+            changeDetectorRefs.forEach((/**
+             * @param {?} changeDetectorRef
+             * @return {?}
+             */
+            function (changeDetectorRef) {
+                if (!changeDetectorRef.destroyed) {
+                    changeDetectorRef.detectChanges();
                 }
             }));
         }));
