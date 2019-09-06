@@ -15,6 +15,7 @@
     &:after {
         content: '';
         position: absolute;
+        border-radius: inherit;
 
         top: 0;
         right: 0;
