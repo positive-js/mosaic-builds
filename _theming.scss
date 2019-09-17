@@ -2755,8 +2755,7 @@ $mc-calendar-weekday-table-font-size: 11px !default;
     border-color: mc-color($main-color, if($is-dark-theme, 700, 100));
 
     &.mc-active,
-    &.mc-focused,
-    &:focus {
+    &.mc-focused {
         border-color: mc-color($focus-color);
         box-shadow: 0 0 0 1px mc-color($focus-color);
     }

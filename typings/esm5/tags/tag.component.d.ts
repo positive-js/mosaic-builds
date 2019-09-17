@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, NgZone, OnDestroy, QueryList } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, NgZone, OnDestroy, QueryList } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
@@ -32,6 +32,7 @@ export declare class McTagBase {
 export declare const _McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase;
 export declare class McTag extends _McTagMixinBase implements IFocusableOption, OnDestroy, CanColor, CanDisable {
     elementRef: ElementRef;
+    changeDetectorRef: ChangeDetectorRef;
     private _ngZone;
     /** Emits when the tag is focused. */
     readonly onFocus: Subject<McTagEvent>;
@@ -74,9 +75,10 @@ export declare class McTag extends _McTagMixinBase implements IFocusableOption, 
      */
     removable: boolean;
     private _removable;
+    readonly tabindex: any;
     disabled: any;
     private _disabled;
-    constructor(elementRef: ElementRef, _ngZone: NgZone);
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, _ngZone: NgZone);
     ngAfterContentInit(): void;
     addClassModificatorForIcons(): void;
     addHostClassName(): void;

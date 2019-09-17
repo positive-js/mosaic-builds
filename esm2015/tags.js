@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { InjectionToken, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewEncapsulation, ChangeDetectorRef, Optional, Self, Inject, NgModule } from '@angular/core';
+import { InjectionToken, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewEncapsulation, Optional, Self, Inject, NgModule } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BACKSPACE, DELETE, SPACE, END, HOME, hasModifierKey, ENTER } from '@ptsecurity/cdk/keycodes';
 import { mixinColor, mixinDisabled, ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
@@ -89,11 +89,13 @@ const _McTagMixinBase = mixinColor(mixinDisabled(McTagBase));
 class McTag extends _McTagMixinBase {
     /**
      * @param {?} elementRef
+     * @param {?} changeDetectorRef
      * @param {?} _ngZone
      */
-    constructor(elementRef, _ngZone) {
+    constructor(elementRef, changeDetectorRef, _ngZone) {
         super(elementRef);
         this.elementRef = elementRef;
+        this.changeDetectorRef = changeDetectorRef;
         this._ngZone = _ngZone;
         /**
          * Emits when the tag is focused.
@@ -195,6 +197,15 @@ class McTag extends _McTagMixinBase {
      */
     set removable(value) {
         this._removable = coerceBooleanProperty(value);
+    }
+    /**
+     * @return {?}
+     */
+    get tabindex() {
+        if (!this.selectable) {
+            return null;
+        }
+        return this.disabled ? null : -1;
     }
     /**
      * @return {?}
@@ -311,11 +322,20 @@ class McTag extends _McTagMixinBase {
      * @return {?}
      */
     focus() {
+        if (!this.selectable) {
+            return;
+        }
         if (!this.hasFocus) {
             this.elementRef.nativeElement.focus();
             this.onFocus.next({ tag: this });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            () => {
+                this.hasFocus = true;
+                this.changeDetectorRef.markForCheck();
+            }));
         }
-        this.hasFocus = true;
     }
     /**
      * Allows for programmatic removal of the tag. Called by the McTagList when the DELETE or
@@ -415,13 +435,14 @@ McTag.decorators = [
                 inputs: ['color', 'disabled'],
                 host: {
                     class: 'mc-tag',
-                    '[attr.tabindex]': 'disabled ? null : -1',
-                    '[class.mc-tag-selected]': 'selected',
+                    '[attr.tabindex]': 'tabindex',
+                    '[attr.disabled]': 'disabled || null',
+                    '[class.mc-selected]': 'selected',
+                    '[class.mc-focused]': 'hasFocus',
                     '[class.mc-tag-with-avatar]': 'avatar',
                     '[class.mc-tag-with-trailing-icon]': 'trailingIcon || removeIcon',
                     '[class.mc-tag-disabled]': 'disabled',
                     '[class.mc-disabled]': 'disabled',
-                    '[attr.disabled]': 'disabled || null',
                     '(click)': 'handleClick($event)',
                     '(keydown)': 'handleKeydown($event)',
                     '(focus)': 'focus()',
@@ -434,6 +455,7 @@ McTag.decorators = [
 /** @nocollapse */
 McTag.ctorParameters = () => [
     { type: ElementRef },
+    { type: ChangeDetectorRef },
     { type: NgZone }
 ];
 McTag.propDecorators = {
