@@ -309,5 +309,5 @@ var McSidebarModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McSidebarModule, SidebarPositions, McSidebarOpened, McSidebarClosed, McSidebar, mcSidebarAnimations as ɵa2 };
+export { McSidebarModule, SidebarPositions, McSidebarOpened, McSidebarClosed, McSidebar, mcSidebarAnimations as ɵa1 };
 //# sourceMappingURL=sidebar.es5.js.map
