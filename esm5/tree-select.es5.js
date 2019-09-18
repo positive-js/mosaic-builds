@@ -460,7 +460,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         this.tree.autoSelect = this.autoSelect;
         this.tree.multiple = this.multiple;
         if (this.multiple) {
-            this.tree.noUnselectLastSelected = false;
+            this.tree.noUnselectLast = false;
         }
         if (this.tempValues) {
             this.setSelectionByValue(this.tempValues);
@@ -489,9 +489,6 @@ var McTreeSelect = /** @class */ (function (_super) {
                  * @return {?}
                  */
                 function (option) { return option.data === event.added[0]; })))));
-            }
-            else {
-                _this.tree.keyManager.updateActiveItem(-1);
             }
             if (!_this.multiple && _this.panelOpen) {
                 _this.close();
@@ -1110,7 +1107,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         }
         else if ((keyCode === ENTER || keyCode === SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
-            this.tree.keyManager.activeItem.selectViaInteraction(event);
+            this.selectionModel.toggle(this.tree.keyManager.activeItem.data);
         }
         else if (this.multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();

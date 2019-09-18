@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('rxjs/operators'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', 'rxjs/operators', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/keycodes', 'rxjs', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.rxjs.operators,global.ng.cdk.a11y,global.ng.mosaic.core,global.ng.cdk.collections,global.ng.forms,global.ng.cdk.keycodes,global.rxjs,global.ng.common));
-}(this, (function (exports,core,tree,operators,a11y,core$1,collections,forms,keycodes,rxjs,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('rxjs/operators'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', 'rxjs/operators', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/keycodes', 'rxjs', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.rxjs.operators,global.ng.cdk.a11y,global.ng.mosaic.core,global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.forms,global.ng.cdk.keycodes,global.rxjs,global.ng.common));
+}(this, (function (exports,core,tree,operators,a11y,core$1,coercion,collections,forms,keycodes,rxjs,common) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -603,11 +603,14 @@ var McTreeSelectionChange = /** @class */ (function () {
 }());
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
-    function McTreeSelection(elementRef, differs, changeDetectorRef, tabIndex, multiple, autoSelect, noUnselect) {
+    function McTreeSelection(elementRef, differs, changeDetectorRef, tabIndex, multiple) {
         var _this = _super.call(this, differs, changeDetectorRef) || this;
         _this.elementRef = elementRef;
         _this.navigationChange = new core.EventEmitter();
         _this.selectionChange = new core.EventEmitter();
+        _this._multiple = false;
+        _this._autoSelect = true;
+        _this._noUnselectLast = true;
         _this._disabled = false;
         _this.destroy = new rxjs.Subject();
         /**
@@ -625,12 +628,65 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function () { });
         _this.tabIndex = parseInt(tabIndex) || 0;
-        _this.multiple = multiple === null ? false : core$1.toBoolean(multiple);
-        _this.autoSelect = autoSelect === null ? true : core$1.toBoolean(autoSelect);
-        _this.noUnselectLastSelected = noUnselect === null ? true : core$1.toBoolean(noUnselect);
+        _this.multiple = multiple === null ? false : coercion.coerceBooleanProperty(multiple);
+        if (_this.multiple) {
+            _this.autoSelect = false;
+            _this.noUnselectLast = false;
+        }
         _this.selectionModel = new collections.SelectionModel(_this.multiple);
         return _this;
     }
+    Object.defineProperty(McTreeSelection.prototype, "multiple", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._multiple;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._multiple = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "autoSelect", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._autoSelect;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._autoSelect = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "noUnselectLast", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._noUnselectLast;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._noUnselectLast = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McTreeSelection.prototype, "disabled", {
         get: /**
          * @return {?}
@@ -644,7 +700,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (rawValue) {
             /** @type {?} */
-            var value = core$1.toBoolean(rawValue);
+            var value = coercion.coerceBooleanProperty(rawValue);
             if (this._disabled !== value) {
                 this._disabled = value;
                 this.markOptionsForCheck();
@@ -754,13 +810,13 @@ var McTreeSelection = /** @class */ (function (_super) {
                     this.treeControl.collapse(this.keyManager.activeItem.data);
                 }
                 event.preventDefault();
-                break;
+                return;
             case keycodes.RIGHT_ARROW:
                 if (this.keyManager.activeItem) {
                     this.treeControl.expand(this.keyManager.activeItem.data);
                 }
                 event.preventDefault();
-                break;
+                return;
             case keycodes.SPACE:
             case keycodes.ENTER:
                 this.toggleFocusedOption();
@@ -784,6 +840,9 @@ var McTreeSelection = /** @class */ (function (_super) {
                 break;
             default:
                 this.keyManager.onKeydown(event);
+        }
+        if (this.autoSelect && this.keyManager.activeItem) {
+            this.setSelectedOption(this.keyManager.activeItem);
         }
     };
     /**
@@ -809,65 +868,61 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (option, $event) {
+        var _a;
         /** @type {?} */
         var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
         /** @type {?} */
         var withCtrl = $event ? keycodes.hasModifierKey($event, 'ctrlKey') : false;
         if (this.multiple) {
-            if (!this.canDeselectLast(option)) {
-                return;
+            if (withShift) {
+                /** @type {?} */
+                var previousIndex_1 = this.keyManager.previousActiveItemIndex;
+                /** @type {?} */
+                var activeIndex_1 = this.keyManager.activeItemIndex;
+                if (previousIndex_1 < activeIndex_1) {
+                    this.renderedOptions.forEach((/**
+                     * @param {?} item
+                     * @param {?} index
+                     * @return {?}
+                     */
+                    function (item, index) {
+                        if (index >= previousIndex_1 && index <= activeIndex_1) {
+                            item.setSelected(true);
+                        }
+                    }));
+                }
+                else {
+                    this.renderedOptions.forEach((/**
+                     * @param {?} item
+                     * @param {?} index
+                     * @return {?}
+                     */
+                    function (item, index) {
+                        if (index >= activeIndex_1 && index <= previousIndex_1) {
+                            item.setSelected(true);
+                        }
+                    }));
+                }
+                this.emitChangeEvent(option);
             }
-            this.selectionModel.toggle(option.data);
-            this.emitChangeEvent(option);
-        }
-        else if (withShift) {
-            /** @type {?} */
-            var previousIndex_1 = this.keyManager.previousActiveItemIndex;
-            /** @type {?} */
-            var activeIndex_1 = this.keyManager.activeItemIndex;
-            if (previousIndex_1 < activeIndex_1) {
-                this.renderedOptions.forEach((/**
-                 * @param {?} item
-                 * @param {?} index
-                 * @return {?}
-                 */
-                function (item, index) {
-                    if (index >= previousIndex_1 && index <= activeIndex_1) {
-                        item.setSelected(true);
-                    }
-                }));
+            else if (withCtrl) {
+                if (!this.canDeselectLast(option)) {
+                    return;
+                }
+                this.selectionModel.toggle(option.data);
+                this.emitChangeEvent(option);
             }
             else {
-                this.renderedOptions.forEach((/**
-                 * @param {?} item
-                 * @param {?} index
-                 * @return {?}
-                 */
-                function (item, index) {
-                    if (index >= activeIndex_1 && index <= previousIndex_1) {
-                        item.setSelected(true);
-                    }
-                }));
+                this.selectionModel.toggle(option.data);
+                this.emitChangeEvent(option);
             }
-            this.emitChangeEvent(option);
-        }
-        else if (withCtrl) {
-            if (!this.canDeselectLast(option)) {
-                return;
-            }
-            this.selectionModel.toggle(option.data);
-            this.emitChangeEvent(option);
         }
         else {
             if (!this.canDeselectLast(option)) {
                 return;
             }
             if (this.autoSelect) {
-                this.renderedOptions.forEach((/**
-                 * @param {?} item
-                 * @return {?}
-                 */
-                function (item) { return item.setSelected(false); }));
+                (_a = this.selectionModel).deselect.apply(_a, this.selectionModel.selected);
                 this.selectionModel.select(option.data);
                 // todo не факт что это нужно
                 this.emitChangeEvent(option);
@@ -1015,6 +1070,9 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (value) {
+        if (this.multiple && value && !Array.isArray(value)) {
+            throw core$1.getMcSelectNonArrayValueError();
+        }
         if (this.renderedOptions) {
             this.setOptionsFromValues(this.multiple ? value : [value]);
         }
@@ -1123,7 +1181,7 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (option) {
-        return !(this.noUnselectLastSelected && this.selectionModel.selected.length === 1 && option.selected);
+        return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && option.selected);
     };
     McTreeSelection.decorators = [
         { type: core.Component, args: [{
@@ -1152,9 +1210,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         { type: core.IterableDiffers },
         { type: core.ChangeDetectorRef },
         { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] }
+        { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] }
     ]; };
     McTreeSelection.propDecorators = {
         nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet, { static: true },] }],
@@ -1162,6 +1218,9 @@ var McTreeSelection = /** @class */ (function (_super) {
         treeControl: [{ type: core.Input }],
         navigationChange: [{ type: core.Output }],
         selectionChange: [{ type: core.Output }],
+        multiple: [{ type: core.Input }],
+        autoSelect: [{ type: core.Input }],
+        noUnselectLast: [{ type: core.Input }],
         disabled: [{ type: core.Input }]
     };
     return McTreeSelection;

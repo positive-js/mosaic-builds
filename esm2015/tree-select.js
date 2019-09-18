@@ -421,7 +421,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this.tree.autoSelect = this.autoSelect;
         this.tree.multiple = this.multiple;
         if (this.multiple) {
-            this.tree.noUnselectLastSelected = false;
+            this.tree.noUnselectLast = false;
         }
         if (this.tempValues) {
             this.setSelectionByValue(this.tempValues);
@@ -450,9 +450,6 @@ class McTreeSelect extends McTreeSelectMixinBase {
                  * @return {?}
                  */
                 (option) => option.data === event.added[0])))));
-            }
-            else {
-                this.tree.keyManager.updateActiveItem(-1);
             }
             if (!this.multiple && this.panelOpen) {
                 this.close();
@@ -893,7 +890,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
         }
         else if ((keyCode === ENTER || keyCode === SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
-            this.tree.keyManager.activeItem.selectViaInteraction(event);
+            this.selectionModel.toggle(this.tree.keyManager.activeItem.data);
         }
         else if (this.multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();

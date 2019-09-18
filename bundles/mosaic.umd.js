@@ -17703,11 +17703,14 @@ var McTreeSelectionChange = /** @class */ (function () {
 }());
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
-    function McTreeSelection(elementRef, differs, changeDetectorRef, tabIndex, multiple, autoSelect, noUnselect) {
+    function McTreeSelection(elementRef, differs, changeDetectorRef, tabIndex, multiple) {
         var _this = _super.call(this, differs, changeDetectorRef) || this;
         _this.elementRef = elementRef;
         _this.navigationChange = new core.EventEmitter();
         _this.selectionChange = new core.EventEmitter();
+        _this._multiple = false;
+        _this._autoSelect = true;
+        _this._noUnselectLast = true;
         _this._disabled = false;
         _this.destroy = new rxjs.Subject();
         /**
@@ -17725,12 +17728,65 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function () { });
         _this.tabIndex = parseInt(tabIndex) || 0;
-        _this.multiple = multiple === null ? false : toBoolean(multiple);
-        _this.autoSelect = autoSelect === null ? true : toBoolean(autoSelect);
-        _this.noUnselectLastSelected = noUnselect === null ? true : toBoolean(noUnselect);
+        _this.multiple = multiple === null ? false : coercion.coerceBooleanProperty(multiple);
+        if (_this.multiple) {
+            _this.autoSelect = false;
+            _this.noUnselectLast = false;
+        }
         _this.selectionModel = new collections.SelectionModel(_this.multiple);
         return _this;
     }
+    Object.defineProperty(McTreeSelection.prototype, "multiple", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._multiple;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._multiple = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "autoSelect", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._autoSelect;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._autoSelect = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "noUnselectLast", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._noUnselectLast;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._noUnselectLast = coercion.coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McTreeSelection.prototype, "disabled", {
         get: /**
          * @return {?}
@@ -17744,7 +17800,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (rawValue) {
             /** @type {?} */
-            var value = toBoolean(rawValue);
+            var value = coercion.coerceBooleanProperty(rawValue);
             if (this._disabled !== value) {
                 this._disabled = value;
                 this.markOptionsForCheck();
@@ -17854,13 +17910,13 @@ var McTreeSelection = /** @class */ (function (_super) {
                     this.treeControl.collapse(this.keyManager.activeItem.data);
                 }
                 event.preventDefault();
-                break;
+                return;
             case keycodes.RIGHT_ARROW:
                 if (this.keyManager.activeItem) {
                     this.treeControl.expand(this.keyManager.activeItem.data);
                 }
                 event.preventDefault();
-                break;
+                return;
             case keycodes.SPACE:
             case keycodes.ENTER:
                 this.toggleFocusedOption();
@@ -17884,6 +17940,9 @@ var McTreeSelection = /** @class */ (function (_super) {
                 break;
             default:
                 this.keyManager.onKeydown(event);
+        }
+        if (this.autoSelect && this.keyManager.activeItem) {
+            this.setSelectedOption(this.keyManager.activeItem);
         }
     };
     /**
@@ -17909,65 +17968,61 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (option, $event) {
+        var _a;
         /** @type {?} */
         var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
         /** @type {?} */
         var withCtrl = $event ? keycodes.hasModifierKey($event, 'ctrlKey') : false;
         if (this.multiple) {
-            if (!this.canDeselectLast(option)) {
-                return;
+            if (withShift) {
+                /** @type {?} */
+                var previousIndex_1 = this.keyManager.previousActiveItemIndex;
+                /** @type {?} */
+                var activeIndex_1 = this.keyManager.activeItemIndex;
+                if (previousIndex_1 < activeIndex_1) {
+                    this.renderedOptions.forEach((/**
+                     * @param {?} item
+                     * @param {?} index
+                     * @return {?}
+                     */
+                    function (item, index) {
+                        if (index >= previousIndex_1 && index <= activeIndex_1) {
+                            item.setSelected(true);
+                        }
+                    }));
+                }
+                else {
+                    this.renderedOptions.forEach((/**
+                     * @param {?} item
+                     * @param {?} index
+                     * @return {?}
+                     */
+                    function (item, index) {
+                        if (index >= activeIndex_1 && index <= previousIndex_1) {
+                            item.setSelected(true);
+                        }
+                    }));
+                }
+                this.emitChangeEvent(option);
             }
-            this.selectionModel.toggle(option.data);
-            this.emitChangeEvent(option);
-        }
-        else if (withShift) {
-            /** @type {?} */
-            var previousIndex_1 = this.keyManager.previousActiveItemIndex;
-            /** @type {?} */
-            var activeIndex_1 = this.keyManager.activeItemIndex;
-            if (previousIndex_1 < activeIndex_1) {
-                this.renderedOptions.forEach((/**
-                 * @param {?} item
-                 * @param {?} index
-                 * @return {?}
-                 */
-                function (item, index) {
-                    if (index >= previousIndex_1 && index <= activeIndex_1) {
-                        item.setSelected(true);
-                    }
-                }));
+            else if (withCtrl) {
+                if (!this.canDeselectLast(option)) {
+                    return;
+                }
+                this.selectionModel.toggle(option.data);
+                this.emitChangeEvent(option);
             }
             else {
-                this.renderedOptions.forEach((/**
-                 * @param {?} item
-                 * @param {?} index
-                 * @return {?}
-                 */
-                function (item, index) {
-                    if (index >= activeIndex_1 && index <= previousIndex_1) {
-                        item.setSelected(true);
-                    }
-                }));
+                this.selectionModel.toggle(option.data);
+                this.emitChangeEvent(option);
             }
-            this.emitChangeEvent(option);
-        }
-        else if (withCtrl) {
-            if (!this.canDeselectLast(option)) {
-                return;
-            }
-            this.selectionModel.toggle(option.data);
-            this.emitChangeEvent(option);
         }
         else {
             if (!this.canDeselectLast(option)) {
                 return;
             }
             if (this.autoSelect) {
-                this.renderedOptions.forEach((/**
-                 * @param {?} item
-                 * @return {?}
-                 */
-                function (item) { return item.setSelected(false); }));
+                (_a = this.selectionModel).deselect.apply(_a, this.selectionModel.selected);
                 this.selectionModel.select(option.data);
                 // todo не факт что это нужно
                 this.emitChangeEvent(option);
@@ -18115,6 +18170,9 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (value) {
+        if (this.multiple && value && !Array.isArray(value)) {
+            throw getMcSelectNonArrayValueError();
+        }
         if (this.renderedOptions) {
             this.setOptionsFromValues(this.multiple ? value : [value]);
         }
@@ -18223,7 +18281,7 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (option) {
-        return !(this.noUnselectLastSelected && this.selectionModel.selected.length === 1 && option.selected);
+        return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && option.selected);
     };
     McTreeSelection.decorators = [
         { type: core.Component, args: [{
@@ -18252,9 +18310,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         { type: core.IterableDiffers },
         { type: core.ChangeDetectorRef },
         { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] }
+        { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] }
     ]; };
     McTreeSelection.propDecorators = {
         nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet, { static: true },] }],
@@ -18262,6 +18318,9 @@ var McTreeSelection = /** @class */ (function (_super) {
         treeControl: [{ type: core.Input }],
         navigationChange: [{ type: core.Output }],
         selectionChange: [{ type: core.Output }],
+        multiple: [{ type: core.Input }],
+        autoSelect: [{ type: core.Input }],
+        noUnselectLast: [{ type: core.Input }],
         disabled: [{ type: core.Input }]
     };
     return McTreeSelection;
@@ -25110,7 +25169,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         this.tree.autoSelect = this.autoSelect;
         this.tree.multiple = this.multiple;
         if (this.multiple) {
-            this.tree.noUnselectLastSelected = false;
+            this.tree.noUnselectLast = false;
         }
         if (this.tempValues) {
             this.setSelectionByValue(this.tempValues);
@@ -25139,9 +25198,6 @@ var McTreeSelect = /** @class */ (function (_super) {
                  * @return {?}
                  */
                 function (option) { return option.data === event.added[0]; })))));
-            }
-            else {
-                _this.tree.keyManager.updateActiveItem(-1);
             }
             if (!_this.multiple && _this.panelOpen) {
                 _this.close();
@@ -25760,7 +25816,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         }
         else if ((keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) && this.tree.keyManager.activeItem) {
             event.preventDefault();
-            this.tree.keyManager.activeItem.selectViaInteraction(event);
+            this.selectionModel.toggle(this.tree.keyManager.activeItem.data);
         }
         else if (this.multiple && keyCode === keycodes.A && event.ctrlKey) {
             event.preventDefault();
@@ -31269,10 +31325,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc25 = MAX_VALIDATOR;
-exports.ɵa25 = MIN_VALIDATOR;
-exports.ɵd25 = MaxValidator;
-exports.ɵb25 = MinValidator;
+exports.ɵc24 = MAX_VALIDATOR;
+exports.ɵa24 = MIN_VALIDATOR;
+exports.ɵd24 = MaxValidator;
+exports.ɵb24 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -31300,11 +31356,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵe28 = CssUnitPipe;
-exports.ɵa28 = McModalControlService;
-exports.ɵc28 = McModalBody;
-exports.ɵd28 = McModalFooter;
-exports.ɵb28 = McModalTitle;
+exports.ɵe27 = CssUnitPipe;
+exports.ɵa27 = McModalControlService;
+exports.ɵc27 = McModalBody;
+exports.ɵd27 = McModalFooter;
+exports.ɵb27 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -31435,7 +31491,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa1 = mcSidebarAnimations;
+exports.ɵa2 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
