@@ -9,8 +9,6 @@ import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McInput } from '@ptsecurity/mosaic/input';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { Observable, Subject, Subscription } from 'rxjs';
-/** The height of the select items in `em` units. */
-export declare const SELECT_ITEM_HEIGHT_EM = 2;
 /** Change event object that is emitted when the select value has changed. */
 export declare class McSelectChange {
     source: McSelect;
@@ -62,8 +60,6 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     previousSelectionModelSelected: McOption[];
     /** Manages keyboard events for options in the panel. */
     keyManager: ActiveDescendantKeyManager<McOption>;
-    /** The IDs of child options to be passed to the aria-owns attribute. */
-    optionIds: string;
     /** The value of the select panel's transform-origin property. */
     transformOrigin: string;
     /** Whether the panel's animation is done. */
@@ -237,14 +233,6 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     /** Focuses the select element. */
     focus(): void;
     /**
-     * Calculates the scroll position of the select's overlay panel.
-     *
-     * Attempts to center the selected option in the panel. If the option is
-     * too high or too low in the panel to be scrolled to the center, it clamps the
-     * scroll position to the min or max scroll positions respectively.
-     */
-    calculateOverlayScroll(selectedIndex: number, scrollBuffer: number, maxScroll: number): number;
-    /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
@@ -252,6 +240,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     /** Invoked when an option is clicked. */
     onRemoveMatcherItem(option: McOption, $event: any): void;
     calculateHiddenItems(): void;
+    getItemHeight(): number;
     private getHeightOfOptionsContainer;
     private updateScrollSize;
     private getTotalItemsWidthInMatcher;
@@ -281,8 +270,6 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private sortValues;
     /** Emits change event to set the model value. */
     private propagateChanges;
-    /** Records option IDs to pass to the aria-owns property. */
-    private setOptionIds;
     /**
      * Highlights the selected item. If no option is selected, it will highlight
      * the first item instead.
@@ -290,10 +277,6 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private highlightCorrectOption;
     /** Scrolls the active option into view. */
     private scrollActiveOptionIntoView;
-    /** Gets the index of the provided option in the option list. */
-    private getOptionIndex;
-    /** Calculates the scroll position and x- and y-offsets of the overlay panel. */
-    private calculateOverlayPosition;
     /**
      * Sets the x-offset of the overlay panel in relation to the trigger's top start corner.
      * This must be adjusted to align the selected option text over the trigger text when
@@ -302,29 +285,6 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
      * content width in order to constrain the panel within the viewport.
      */
     private calculateOverlayOffsetX;
-    /**
-     * Calculates the y-offset of the select's overlay panel in relation to the
-     * top start corner of the trigger. It has to be adjusted in order for the
-     * selected option to be aligned over the trigger when the panel opens.
-     */
-    private calculateOverlayOffsetY;
-    /**
-     * Checks that the attempted overlay position will fit within the viewport.
-     * If it will not fit, tries to adjust the scroll position and the associated
-     * y-offset so the panel can open fully on-screen. If it still won't fit,
-     * sets the offset back to 0 to allow the fallback position to take over.
-     */
-    private checkOverlayWithinViewport;
-    /** Adjusts the overlay panel up to fit in the viewport. */
-    private adjustPanelUp;
-    /** Adjusts the overlay panel down to fit in the viewport. */
-    private adjustPanelDown;
-    /** Sets the transform origin point based on the selected option. */
-    private getOriginBasedOnOption;
-    /** Calculates the amount of items in the select. This includes options and group labels. */
-    private getItemCount;
-    /** Calculates the height of the select's options. */
-    private getItemHeight;
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
     private _compareWith;
 }

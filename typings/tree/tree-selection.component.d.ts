@@ -1,10 +1,11 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ChangeDetectorRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ElementRef } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { CdkTree, CdkTreeNodeOutlet } from '@ptsecurity/cdk/tree';
+import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
 import { McTreeOption } from './tree-option.component';
+export declare const MC_SELECTION_TREE_VALUE_ACCESSOR: any;
 export declare class McTreeNavigationChange {
     source: McTreeSelection;
     option: McTreeOption;
@@ -15,16 +16,20 @@ export declare class McTreeSelectionChange {
     option: McTreeOption;
     constructor(source: McTreeSelection, option: McTreeOption);
 }
-export declare class McTreeSelection extends CdkTree<any> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
+interface SelectionModelOption {
+    id: number | string;
+    value: string;
+}
+export declare class McTreeSelection extends CdkTree<McTreeOption> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
     private elementRef;
-    ngControl: NgControl;
     nodeOutlet: CdkTreeNodeOutlet;
-    options: QueryList<McTreeOption>;
+    renderedOptions: QueryList<McTreeOption>;
     keyManager: FocusKeyManager<McTreeOption>;
-    selectionModel: SelectionModel<any>;
+    selectionModel: SelectionModel<SelectionModelOption>;
     multiple: boolean;
     autoSelect: boolean;
     noUnselectLastSelected: boolean;
+    treeControl: FlatTreeControl<McTreeOption>;
     readonly navigationChange: EventEmitter<McTreeNavigationChange>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange>;
     disabled: boolean;
@@ -32,7 +37,7 @@ export declare class McTreeSelection extends CdkTree<any> implements ControlValu
     tabIndex: number;
     private _tabIndex;
     private readonly destroy;
-    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, ngControl: NgControl, multiple: string, autoSelect: string, noUnselect: string);
+    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string, autoSelect: string, noUnselect: string);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     onKeyDown(event: KeyboardEvent): void;
@@ -42,6 +47,7 @@ export declare class McTreeSelection extends CdkTree<any> implements ControlValu
     toggleFocusedOption(): void;
     renderNodeChanges(data: McTreeOption[], dataDiffer?: IterableDiffer<McTreeOption>, viewContainer?: any, parentData?: McTreeOption): void;
     getHeight(): number;
+    getItemHeight(): number;
     emitNavigationEvent(option: McTreeOption): void;
     emitChangeEvent(option: McTreeOption): void;
     writeValue(value: any): void;
@@ -51,8 +57,13 @@ export declare class McTreeSelection extends CdkTree<any> implements ControlValu
     /** `View -> model callback called when select has been touched` */
     onTouched: () => void;
     registerOnTouched(fn: () => {}): void;
+    /**
+     * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
+     */
     setDisabledState(isDisabled: boolean): void;
-    private getCorrespondOption;
-    private setOptionsFromValues;
+    setOptionsFromValues(values: any[]): void;
+    getSelectedValues(): any[];
+    private markOptionsForCheck;
     private canDeselectLast;
 }
+export {};

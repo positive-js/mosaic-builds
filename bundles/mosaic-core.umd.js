@@ -934,7 +934,10 @@ var McOption = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this.element.nativeElement.getClientRects()[0].height;
+        // tslint:disable-next-line:naming-convention
+        /** @type {?} */
+        var DOMRect = this.element.nativeElement.getClientRects()[0];
+        return DOMRect ? DOMRect.height : 0;
     };
     /**
      * @return {?}

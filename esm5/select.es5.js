@@ -29,11 +29,6 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 /** @type {?} */
 var nextUniqueId = 0;
 /**
- * The height of the select items in `em` units.
- * @type {?}
- */
-var SELECT_ITEM_HEIGHT_EM = 2;
-/**
  * Change event object that is emitted when the select value has changed.
  */
 var  /**
@@ -56,6 +51,7 @@ var McSelectBase = /** @class */ (function () {
     }
     return McSelectBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
 var McSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
 var McSelectSearch = /** @class */ (function () {
@@ -188,10 +184,6 @@ var McSelect = /** @class */ (function (_super) {
          */
         _this.triggerFontSize = 0;
         _this.previousSelectionModelSelected = [];
-        /**
-         * The IDs of child options to be passed to the aria-owns attribute.
-         */
-        _this.optionIds = '';
         /**
          * The value of the select panel's transform-origin property.
          */
@@ -697,7 +689,6 @@ var McSelect = /** @class */ (function (_super) {
         this.triggerFontSize = parseInt(getComputedStyle(this.trigger.nativeElement)['font-size']);
         this._panelOpen = true;
         this.keyManager.withHorizontalOrientation(null);
-        this.calculateOverlayPosition();
         this.highlightCorrectOption();
         this._changeDetectorRef.markForCheck();
         // Set the font size on the panel element once it exists.
@@ -851,18 +842,6 @@ var McSelect = /** @class */ (function (_super) {
             if (this.empty) {
                 return '';
             }
-            if (this._multiple) {
-                /** @type {?} */
-                var selectedOptions = this.selectionModel.selected.map((/**
-                 * @param {?} option
-                 * @return {?}
-                 */
-                function (option) { return option.viewValue; }));
-                if (this.isRtl()) {
-                    selectedOptions.reverse();
-                }
-                return selectedOptions.join(', ');
-            }
             return this.selectionModel.selected[0].viewValue;
         },
         enumerable: true,
@@ -876,15 +855,12 @@ var McSelect = /** @class */ (function (_super) {
             if (this.empty) {
                 return [];
             }
-            if (this._multiple) {
-                /** @type {?} */
-                var selectedOptions = this.selectionModel.selected;
-                if (this.isRtl()) {
-                    selectedOptions.reverse();
-                }
-                return selectedOptions;
+            /** @type {?} */
+            var selectedOptions = this.selectionModel.selected;
+            if (this.isRtl()) {
+                selectedOptions.reverse();
             }
-            return [this.selectionModel.selected[0]];
+            return selectedOptions;
         },
         enumerable: true,
         configurable: true
@@ -1031,51 +1007,6 @@ var McSelect = /** @class */ (function (_super) {
         this.elementRef.nativeElement.focus();
     };
     /**
-     * Calculates the scroll position of the select's overlay panel.
-     *
-     * Attempts to center the selected option in the panel. If the option is
-     * too high or too low in the panel to be scrolled to the center, it clamps the
-     * scroll position to the min or max scroll positions respectively.
-     */
-    /**
-     * Calculates the scroll position of the select's overlay panel.
-     *
-     * Attempts to center the selected option in the panel. If the option is
-     * too high or too low in the panel to be scrolled to the center, it clamps the
-     * scroll position to the min or max scroll positions respectively.
-     * @param {?} selectedIndex
-     * @param {?} scrollBuffer
-     * @param {?} maxScroll
-     * @return {?}
-     */
-    McSelect.prototype.calculateOverlayScroll = /**
-     * Calculates the scroll position of the select's overlay panel.
-     *
-     * Attempts to center the selected option in the panel. If the option is
-     * too high or too low in the panel to be scrolled to the center, it clamps the
-     * scroll position to the min or max scroll positions respectively.
-     * @param {?} selectedIndex
-     * @param {?} scrollBuffer
-     * @param {?} maxScroll
-     * @return {?}
-     */
-    function (selectedIndex, scrollBuffer, maxScroll) {
-        /** @type {?} */
-        var itemHeight = this.getItemHeight();
-        /** @type {?} */
-        var optionOffsetFromScrollTop = itemHeight * selectedIndex;
-        /* tslint:disable-next-line:no-magic-numbers */
-        /** @type {?} */
-        var halfOptionHeight = itemHeight / 2;
-        // Starts at the optionOffsetFromScrollTop, which scrolls the option to the top of the
-        // scroll container, then subtracts the scroll buffer to scroll the option down to
-        // the center of the overlay panel. Half the option height must be re-added to the
-        // scrollTop so the option is centered based on its middle, not its top edge.
-        /** @type {?} */
-        var optimalScrollPosition = optionOffsetFromScrollTop - scrollBuffer + halfOptionHeight;
-        return Math.min(Math.max(0, optimalScrollPosition), maxScroll);
-    };
-    /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
@@ -1166,6 +1097,15 @@ var McSelect = /** @class */ (function (_super) {
             }
         }
         this._changeDetectorRef.markForCheck();
+    };
+    /**
+     * @return {?}
+     */
+    McSelect.prototype.getItemHeight = /**
+     * @return {?}
+     */
+    function () {
+        return this.options.first ? this.options.first.getHeight() : 0;
     };
     /**
      * @private
@@ -1542,7 +1482,6 @@ var McSelect = /** @class */ (function (_super) {
             _this._changeDetectorRef.markForCheck();
             _this.stateChanges.next();
         }));
-        this.setOptionIds();
     };
     /** Invoked when an option is clicked. */
     /**
@@ -1659,24 +1598,6 @@ var McSelect = /** @class */ (function (_super) {
         this.selectionChange.emit(new McSelectChange(this, valueToEmit));
         this._changeDetectorRef.markForCheck();
     };
-    /** Records option IDs to pass to the aria-owns property. */
-    /**
-     * Records option IDs to pass to the aria-owns property.
-     * @private
-     * @return {?}
-     */
-    McSelect.prototype.setOptionIds = /**
-     * Records option IDs to pass to the aria-owns property.
-     * @private
-     * @return {?}
-     */
-    function () {
-        this.optionIds = this.options.map((/**
-         * @param {?} option
-         * @return {?}
-         */
-        function (option) { return option.id; })).join(' ');
-    };
     /**
      * Highlights the selected item. If no option is selected, it will highlight
      * the first item instead.
@@ -1720,68 +1641,6 @@ var McSelect = /** @class */ (function (_super) {
         /** @type {?} */
         var labelCount = countGroupLabelsBeforeOption(activeOptionIndex, this.options, this.optionGroups);
         this.optionsContainer.nativeElement.scrollTop = getOptionScrollPosition(activeOptionIndex + labelCount, this.getItemHeight(), this.optionsContainer.nativeElement.scrollTop, SELECT_PANEL_MAX_HEIGHT);
-    };
-    /** Gets the index of the provided option in the option list. */
-    /**
-     * Gets the index of the provided option in the option list.
-     * @private
-     * @param {?} option
-     * @return {?}
-     */
-    McSelect.prototype.getOptionIndex = /**
-     * Gets the index of the provided option in the option list.
-     * @private
-     * @param {?} option
-     * @return {?}
-     */
-    function (option) {
-        /* tslint:disable-next-line */
-        return this.options.reduce((/**
-         * @param {?} result
-         * @param {?} current
-         * @param {?} index
-         * @return {?}
-         */
-        function (result, current, index) {
-            /* tslint:disable-next-line:strict-type-predicates */
-            return result === undefined ? (option === current ? index : undefined) : result;
-        }), undefined);
-    };
-    /** Calculates the scroll position and x- and y-offsets of the overlay panel. */
-    /**
-     * Calculates the scroll position and x- and y-offsets of the overlay panel.
-     * @private
-     * @return {?}
-     */
-    McSelect.prototype.calculateOverlayPosition = /**
-     * Calculates the scroll position and x- and y-offsets of the overlay panel.
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var itemHeight = this.getItemHeight();
-        /** @type {?} */
-        var items = this.getItemCount();
-        /** @type {?} */
-        var panelHeight = Math.min(items * itemHeight, SELECT_PANEL_MAX_HEIGHT);
-        /** @type {?} */
-        var scrollContainerHeight = items * itemHeight;
-        // The farthest the panel can be scrolled before it hits the bottom
-        /** @type {?} */
-        var maxScroll = scrollContainerHeight - panelHeight;
-        // If no value is selected we open the popup to the first item.
-        /** @type {?} */
-        var selectedOptionOffset = this.empty ? 0 : (/** @type {?} */ (this.getOptionIndex(this.selectionModel.selected[0])));
-        selectedOptionOffset += countGroupLabelsBeforeOption(selectedOptionOffset, this.options, this.optionGroups);
-        // We must maintain a scroll buffer so the selected option will be scrolled to the
-        // center of the overlay panel rather than the top.
-        /* tslint:disable-next-line:no-magic-numbers */
-        /** @type {?} */
-        var scrollBuffer = panelHeight / 2;
-        this.scrollTop = this.calculateOverlayScroll(selectedOptionOffset, scrollBuffer, maxScroll);
-        this.offsetY = this.calculateOverlayOffsetY();
-        this.checkOverlayWithinViewport(maxScroll);
     };
     /**
      * Sets the x-offset of the overlay panel in relation to the trigger's top start corner.
@@ -1846,215 +1705,18 @@ var McSelect = /** @class */ (function (_super) {
         this.overlayDir.offsetX = Math.round(offsetX);
         this.overlayDir.overlayRef.updatePosition();
     };
-    /**
-     * Calculates the y-offset of the select's overlay panel in relation to the
-     * top start corner of the trigger. It has to be adjusted in order for the
-     * selected option to be aligned over the trigger when the panel opens.
-     */
-    /**
-     * Calculates the y-offset of the select's overlay panel in relation to the
-     * top start corner of the trigger. It has to be adjusted in order for the
-     * selected option to be aligned over the trigger when the panel opens.
-     * @private
-     * @return {?}
-     */
-    McSelect.prototype.calculateOverlayOffsetY = /**
-     * Calculates the y-offset of the select's overlay panel in relation to the
-     * top start corner of the trigger. It has to be adjusted in order for the
-     * selected option to be aligned over the trigger when the panel opens.
-     * @private
-     * @return {?}
-     */
-    function () {
-        // const itemHeight = this.getItemHeight();
-        // const optionHeightAdjustment = (itemHeight - this.triggerRect.height) / 2;
-        // todo I'm not sure that we will use it
-        return 0;
-        // return Math.round(-optionHeightAdjustment);
-    };
-    /**
-     * Checks that the attempted overlay position will fit within the viewport.
-     * If it will not fit, tries to adjust the scroll position and the associated
-     * y-offset so the panel can open fully on-screen. If it still won't fit,
-     * sets the offset back to 0 to allow the fallback position to take over.
-     */
-    /**
-     * Checks that the attempted overlay position will fit within the viewport.
-     * If it will not fit, tries to adjust the scroll position and the associated
-     * y-offset so the panel can open fully on-screen. If it still won't fit,
-     * sets the offset back to 0 to allow the fallback position to take over.
-     * @private
-     * @param {?} maxScroll
-     * @return {?}
-     */
-    McSelect.prototype.checkOverlayWithinViewport = /**
-     * Checks that the attempted overlay position will fit within the viewport.
-     * If it will not fit, tries to adjust the scroll position and the associated
-     * y-offset so the panel can open fully on-screen. If it still won't fit,
-     * sets the offset back to 0 to allow the fallback position to take over.
-     * @private
-     * @param {?} maxScroll
-     * @return {?}
-     */
-    function (maxScroll) {
-        /** @type {?} */
-        var itemHeight = this.getItemHeight();
-        /** @type {?} */
-        var viewportSize = this._viewportRuler.getViewportSize();
-        /** @type {?} */
-        var topSpaceAvailable = this.triggerRect.top - SELECT_PANEL_VIEWPORT_PADDING;
-        /** @type {?} */
-        var bottomSpaceAvailable = viewportSize.height - this.triggerRect.bottom - SELECT_PANEL_VIEWPORT_PADDING;
-        /** @type {?} */
-        var panelHeightTop = Math.abs(this.offsetY);
-        /** @type {?} */
-        var totalPanelHeight = Math.min(this.getItemCount() * itemHeight, SELECT_PANEL_MAX_HEIGHT);
-        /** @type {?} */
-        var panelHeightBottom = totalPanelHeight - panelHeightTop - this.triggerRect.height;
-        if (panelHeightBottom > bottomSpaceAvailable) {
-            this.adjustPanelUp(panelHeightBottom, bottomSpaceAvailable);
-        }
-        else if (panelHeightTop > topSpaceAvailable) {
-            this.adjustPanelDown(panelHeightTop, topSpaceAvailable, maxScroll);
-        }
-        else {
-            this.transformOrigin = this.getOriginBasedOnOption();
-        }
-    };
-    /** Adjusts the overlay panel up to fit in the viewport. */
-    /**
-     * Adjusts the overlay panel up to fit in the viewport.
-     * @private
-     * @param {?} panelHeightBottom
-     * @param {?} bottomSpaceAvailable
-     * @return {?}
-     */
-    McSelect.prototype.adjustPanelUp = /**
-     * Adjusts the overlay panel up to fit in the viewport.
-     * @private
-     * @param {?} panelHeightBottom
-     * @param {?} bottomSpaceAvailable
-     * @return {?}
-     */
-    function (panelHeightBottom, bottomSpaceAvailable) {
-        // Browsers ignore fractional scroll offsets, so we need to round.
-        /** @type {?} */
-        var distanceBelowViewport = Math.round(panelHeightBottom - bottomSpaceAvailable);
-        // Scrolls the panel up by the distance it was extending past the boundary, then
-        // adjusts the offset by that amount to move the panel up into the viewport.
-        this.scrollTop -= distanceBelowViewport;
-        this.offsetY -= distanceBelowViewport;
-        this.transformOrigin = this.getOriginBasedOnOption();
-        // If the panel is scrolled to the very top, it won't be able to fit the panel
-        // by scrolling, so set the offset to 0 to allow the fallback position to take
-        // effect.
-        if (this.scrollTop <= 0) {
-            this.scrollTop = 0;
-            this.offsetY = 0;
-            this.transformOrigin = "50% bottom 0px";
-        }
-    };
-    /** Adjusts the overlay panel down to fit in the viewport. */
-    /**
-     * Adjusts the overlay panel down to fit in the viewport.
-     * @private
-     * @param {?} panelHeightTop
-     * @param {?} topSpaceAvailable
-     * @param {?} maxScroll
-     * @return {?}
-     */
-    McSelect.prototype.adjustPanelDown = /**
-     * Adjusts the overlay panel down to fit in the viewport.
-     * @private
-     * @param {?} panelHeightTop
-     * @param {?} topSpaceAvailable
-     * @param {?} maxScroll
-     * @return {?}
-     */
-    function (panelHeightTop, topSpaceAvailable, maxScroll) {
-        // Browsers ignore fractional scroll offsets, so we need to round.
-        /** @type {?} */
-        var distanceAboveViewport = Math.round(panelHeightTop - topSpaceAvailable);
-        // Scrolls the panel down by the distance it was extending past the boundary, then
-        // adjusts the offset by that amount to move the panel down into the viewport.
-        this.scrollTop += distanceAboveViewport;
-        this.offsetY += distanceAboveViewport;
-        this.transformOrigin = this.getOriginBasedOnOption();
-        // If the panel is scrolled to the very bottom, it won't be able to fit the
-        // panel by scrolling, so set the offset to 0 to allow the fallback position
-        // to take effect.
-        if (this.scrollTop >= maxScroll) {
-            this.scrollTop = maxScroll;
-            this.offsetY = 0;
-            this.transformOrigin = "50% top 0px";
-            return;
-        }
-    };
-    /** Sets the transform origin point based on the selected option. */
-    /**
-     * Sets the transform origin point based on the selected option.
-     * @private
-     * @return {?}
-     */
-    McSelect.prototype.getOriginBasedOnOption = /**
-     * Sets the transform origin point based on the selected option.
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var itemHeight = this.getItemHeight();
-        /* tslint:disable-next-line:no-magic-numbers */
-        /** @type {?} */
-        var optionHeightAdjustment = (itemHeight - this.triggerRect.height) / 2;
-        /* tslint:disable-next-line:no-magic-numbers */
-        /** @type {?} */
-        var originY = Math.abs(this.offsetY) - optionHeightAdjustment + itemHeight / 2;
-        return "50% " + originY + "px 0px";
-    };
-    /** Calculates the amount of items in the select. This includes options and group labels. */
-    /**
-     * Calculates the amount of items in the select. This includes options and group labels.
-     * @private
-     * @return {?}
-     */
-    McSelect.prototype.getItemCount = /**
-     * Calculates the amount of items in the select. This includes options and group labels.
-     * @private
-     * @return {?}
-     */
-    function () {
-        return this.options.length + this.optionGroups.length;
-    };
-    /** Calculates the height of the select's options. */
-    /**
-     * Calculates the height of the select's options.
-     * @private
-     * @return {?}
-     */
-    McSelect.prototype.getItemHeight = /**
-     * Calculates the height of the select's options.
-     * @private
-     * @return {?}
-     */
-    function () {
-        // todo доделать
-        /* tslint:disable-next-line:no-magic-numbers */
-        return 32;
-        // return this.triggerFontSize * SELECT_ITEM_HEIGHT_EM;
-    };
     McSelect.decorators = [
         { type: Component, args: [{
                     selector: 'mc-select',
                     exportAs: 'mcSelect',
-                    template: "<div cdk-overlay-origin class=\"mc-select__trigger\" (click)=\"toggle()\" [class.mc-select__trigger_multiple]=\"multiple\" #origin=\"cdkOverlayOrigin\" #trigger><div class=\"mc-select__matcher\" [ngSwitch]=\"empty\"><span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\u00A0' }}</span> <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\"><div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\"><span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span><div *ngSwitchCase=\"true\" class=\"mc-select__match-list\"><mc-tag *ngFor=\"let option of triggerValues\" [disabled]=\"disabled\" [selectable]=\"false\" [class.mc-error]=\"errorState\">{{ option.viewValue || option.value }} <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveMatcherItem(option, $event)\"></i></mc-tag></div><div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">{{ hiddenItemsText }} {{ hiddenItems }}</div></div><ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content></span></div><div class=\"mc-select__arrow-wrapper\"><i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\" color=\"second\"></i></div></div><ng-template cdk-connected-overlay cdkConnectedOverlayLockPosition cdkConnectedOverlayHasBackdrop cdkConnectedOverlayBackdropClass=\"cdk-overlay-transparent-backdrop\" [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\" [cdkConnectedOverlayOrigin]=\"origin\" [cdkConnectedOverlayOpen]=\"panelOpen\" [cdkConnectedOverlayPositions]=\"positions\" [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\" [cdkConnectedOverlayOffsetY]=\"offsetY\" (backdropClick)=\"close()\" (attach)=\"onAttached()\" (detach)=\"close()\"><div #panel class=\"mc-select__panel {{ getPanelTheme() }}\" [ngClass]=\"panelClass\" (@transformPanel.done)=\"panelDoneAnimatingStream.next($event.toState)\" [style.transformOrigin]=\"transformOrigin\" [class.mc-select-panel-done-animcing]=\"panelDoneAnimating\" [style.font-size.px]=\"triggerFontSize\" (keydown)=\"handleKeydown($event)\"><div *ngIf=\"search\" class=\"mc-select__search-container\"><ng-content select=\"[mcSelectSearch]\"></ng-content></div><div #optionsContainer class=\"mc-select__content\" [@fadeInContent]=\"'showing'\" (@fadeInContent.done)=\"onFadeInDone()\"><div *ngIf=\"isEmptySearchResult\" class=\"mc-select__no-options-message\"><ng-content select=\"[mc-select-search-empty-result]\"></ng-content></div><ng-content select=\"mc-option,mc-optgroup\"></ng-content></div></div></ng-template>",
+                    template: "<div cdk-overlay-origin class=\"mc-select__trigger\" (click)=\"toggle()\" [class.mc-select__trigger_multiple]=\"multiple\" #origin=\"cdkOverlayOrigin\" #trigger><div class=\"mc-select__matcher\" [ngSwitch]=\"empty\"><span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\u00A0' }}</span> <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\"><div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\"><span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span><div *ngSwitchCase=\"true\" class=\"mc-select__match-list\"><mc-tag *ngFor=\"let option of triggerValues\" [disabled]=\"disabled\" [selectable]=\"false\" [class.mc-error]=\"errorState\">{{ option.viewValue }} <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveMatcherItem(option, $event)\"></i></mc-tag></div><div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">{{ hiddenItemsText }} {{ hiddenItems }}</div></div><ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content></span></div><div class=\"mc-select__arrow-wrapper\"><i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\" color=\"second\"></i></div></div><ng-template cdk-connected-overlay cdkConnectedOverlayLockPosition cdkConnectedOverlayHasBackdrop cdkConnectedOverlayBackdropClass=\"cdk-overlay-transparent-backdrop\" [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\" [cdkConnectedOverlayOrigin]=\"origin\" [cdkConnectedOverlayOpen]=\"panelOpen\" [cdkConnectedOverlayPositions]=\"positions\" [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\" [cdkConnectedOverlayOffsetY]=\"offsetY\" (backdropClick)=\"close()\" (attach)=\"onAttached()\" (detach)=\"close()\"><div #panel class=\"mc-select__panel {{ getPanelTheme() }}\" [ngClass]=\"panelClass\" (@transformPanel.done)=\"panelDoneAnimatingStream.next($event.toState)\" [style.transformOrigin]=\"transformOrigin\" [class.mc-select-panel-done-animcing]=\"panelDoneAnimating\" [style.font-size.px]=\"triggerFontSize\" (keydown)=\"handleKeydown($event)\"><div *ngIf=\"search\" class=\"mc-select__search-container\"><ng-content select=\"[mcSelectSearch]\"></ng-content></div><div #optionsContainer class=\"mc-select__content\" [@fadeInContent]=\"'showing'\" (@fadeInContent.done)=\"onFadeInDone()\"><div *ngIf=\"isEmptySearchResult\" class=\"mc-select__no-options-message\"><ng-content select=\"[mc-select-search-empty-result]\"></ng-content></div><ng-content select=\"mc-option,mc-optgroup\"></ng-content></div></div></ng-template>",
                     styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-select{box-sizing:border-box;display:inline-block;vertical-align:top;width:100%;outline:0}.mc-select.mc-disabled .mc-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-select__no-options-message{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;cursor:default;outline:0;padding:0 16px}.mc-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;cursor:pointer;padding-right:7px;padding-left:15px}.mc-select__trigger.mc-select__trigger_multiple{padding-left:7px}.mc-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-select__matcher>span{width:100%}.mc-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:28px;margin:0;padding-left:0}.mc-select__match-list .mc-tag{margin-right:4px}.mc-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-select__match-container .mc-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-select__arrow-wrapper{align-self:center}.mc-form-field-appearance-fill .mc-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-select__arrow-wrapper{transform:translateY(-25%)}.mc-select__panel{min-width:100%;overflow:hidden;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-select__content{max-height:224px;overflow:auto}.mc-select__panel .mc-optgroup-label,.mc-select__panel .mc-option{font-size:inherit;line-height:32px;height:32px}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-form-field-type-mc-select .mc-form-field-label{width:calc(100% - 18px)}"],
-                    inputs: ['disabled', 'tabIndex'],
+                    inputs: ['disabled'],
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     host: {
                         '[attr.id]': 'id',
-                        '[attr.tabindex]': 'tabIndex',
+                        '[tabindex]': 'tabIndex',
                         class: 'mc-select',
                         '[class.mc-disabled]': 'disabled',
                         '[class.mc-select-invalid]': 'errorState',
@@ -2166,5 +1828,5 @@ var McSelectModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McSelectModule, SELECT_ITEM_HEIGHT_EM, McSelectChange, McSelectBase, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger, McSelect };
+export { McSelectModule, McSelectChange, McSelectBase, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger, McSelect };
 //# sourceMappingURL=select.es5.js.map

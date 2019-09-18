@@ -3080,6 +3080,12 @@ $hover-darken: 5%;
 
     $is-dark-theme: map-get($theme, is-dark);
 
+    .mc-tree-selection {
+        &:focus {
+            outline: none;
+        }
+    }
+
     .mc-tree-option {
         color: mc-color($foreground, text);
 

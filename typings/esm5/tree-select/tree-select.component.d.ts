@@ -10,10 +10,10 @@ import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { Observable, Subject } from 'rxjs';
 /** Change event object that is emitted when the select value has changed. */
 export declare class McTreeSelectChange {
-    source: McTreeOption;
+    source: McTreeSelect;
     value: any;
     isUserInput: boolean;
-    constructor(source: McTreeOption, value: any, isUserInput?: boolean);
+    constructor(source: McTreeSelect, value: any, isUserInput?: boolean);
 }
 export declare class McTreeSelectTrigger {
 }
@@ -26,16 +26,16 @@ declare class McTreeSelectBase {
     constructor(elementRef: ElementRef, defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
 declare const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor & typeof McTreeSelectBase;
-export declare class McTreeSelect extends McTreeSelectMixinBase implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable, HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
-    private readonly viewportRuler;
+export declare class McTreeSelect extends McTreeSelectMixinBase implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable, HasTabIndex, McFormFieldControl<McTreeOption>, CanUpdateErrorState {
+    elementRef: ElementRef;
     readonly changeDetectorRef: ChangeDetectorRef;
+    private readonly viewportRuler;
     private readonly ngZone;
     private readonly renderer;
-    elementRef: ElementRef;
+    private readonly scrollStrategyFactory;
     private readonly dir;
     private readonly parentFormField;
     ngControl: NgControl;
-    private readonly scrollStrategyFactory;
     /** A name for this control that can be used by `mc-form-field`. */
     controlType: string;
     hiddenItems: number;
@@ -45,8 +45,6 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     triggerFontSize: number;
     /** Deals with the selection logic. */
     selectionModel: SelectionModel<any>;
-    /** The IDs of child options to be passed to the aria-owns attribute. */
-    optionIds: string;
     /** The value of the select panel's transform-origin property. */
     transformOrigin: string;
     /** Whether the panel's animation is done. */
@@ -73,9 +71,11 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
         overlayX: string;
         overlayY: string;
     }[];
+    options: QueryList<McTreeOption>;
     trigger: ElementRef;
     panel: ElementRef;
     overlayDir: CdkConnectedOverlay;
+    hiddenItemsCounter: ElementRef;
     tags: QueryList<McTag>;
     /** User-supplied override of the trigger element. */
     customTrigger: McTreeSelectTrigger;
@@ -108,9 +108,6 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     sortComparator: (a: McTreeOption, b: McTreeOption, options: McTreeOption[]) => number;
     /** Combined stream of all of the child options' change events. */
     readonly optionSelectionChanges: Observable<McTreeSelectChange>;
-    options: QueryList<McTreeOption>;
-    private originalOnKeyDown;
-    private fireValueChangedEvent;
     placeholder: string;
     private _placeholder;
     required: boolean;
@@ -125,8 +122,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
      * should be returned.
      */
     compareWith: (o1: any, o2: any) => boolean;
-    /** Value of the select control. */
-    value: any;
+    readonly value: any;
     private _value;
     id: string;
     private _id;
@@ -139,6 +135,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     private _focused;
     readonly panelOpen: boolean;
     private _panelOpen;
+    private originalOnKeyDown;
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop;
     /** Unique id for this input. */
@@ -146,7 +143,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     /** Emits whenever the component is destroyed. */
     private readonly destroy;
     private tempValues;
-    constructor(viewportRuler: ViewportRuler, changeDetectorRef: ChangeDetectorRef, ngZone: NgZone, renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, elementRef: ElementRef, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, parentFormField: McFormField, ngControl: NgControl, tabIndex: string, scrollStrategyFactory: any);
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, viewportRuler: ViewportRuler, ngZone: NgZone, renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, tabIndex: string, scrollStrategyFactory: any, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, parentFormField: McFormField, ngControl: NgControl);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngAfterViewInit(): void;
@@ -192,8 +189,9 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
      */
     setDisabledState(isDisabled: boolean): void;
     readonly selected: any;
+    readonly selectedValues: any;
     readonly triggerValue: string;
-    readonly triggerValues: McTreeOption[];
+    readonly triggerValues: string[];
     readonly empty: boolean;
     isRtl(): boolean;
     handleKeydown(event: KeyboardEvent): void;
@@ -212,25 +210,15 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     onAttached(): void;
     /** Returns the theme to be used on the panel. */
     getPanelTheme(): string;
-    /** Focuses the select element. */
     focus(): void;
-    /**
-     * Calculates the scroll position of the select's overlay panel.
-     *
-     * Attempts to center the selected option in the panel. If the option is
-     * too high or too low in the panel to be scrolled to the center, it clamps the
-     * scroll position to the min or max scroll positions respectively.
-     */
-    calculateOverlayScroll(selectedIndex: number, scrollBuffer: number, maxScroll: number): number;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     onContainerClick(): void;
     /** Invoked when an option is clicked. */
-    onRemoveSelectedOption(selectedOption: McTreeOption, $event: any): void;
+    onRemoveSelectedOption(selectedOption: any, $event: any): void;
     calculateHiddenItems(): void;
-    private updateSelectedOptions;
     private getTotalItemsWidthInMatcher;
     private handleClosedKeydown;
     private handleOpenKeydown;
@@ -240,22 +228,9 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
      * found with the designated value, the select trigger is cleared.
      */
     private setSelectionByValue;
-    /**
-     * Finds and selects and option based on its value.
-     * @returns Option that has the corresponding value.
-     */
-    private selectValue;
     private initKeyManager;
-    /** Drops current option subscriptions and IDs and resets from scratch. */
-    private resetOptions;
-    /** Invoked when an option is clicked. */
-    private onSelect;
     /** Sorts the selected values in the selected based on their order in the panel. */
     private sortValues;
-    /** Emits change event to set the model value. */
-    private propagateChanges;
-    /** Records option IDs to pass to the aria-owns property. */
-    private setOptionIds;
     /**
      * Highlights the selected item. If no option is selected, it will highlight
      * the first item instead.
@@ -263,10 +238,6 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     private highlightCorrectOption;
     /** Scrolls the active option into view. */
     private scrollActiveOptionIntoView;
-    /** Gets the index of the provided option in the option list. */
-    private getOptionIndex;
-    /** Calculates the scroll position and x- and y-offsets of the overlay panel. */
-    private calculateOverlayPosition;
     /**
      * Sets the x-offset of the overlay panel in relation to the trigger's top start corner.
      * This must be adjusted to align the selected option text over the trigger text when
@@ -275,29 +246,6 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
      * content width in order to constrain the panel within the viewport.
      */
     private calculateOverlayOffsetX;
-    /**
-     * Calculates the y-offset of the select's overlay panel in relation to the
-     * top start corner of the trigger. It has to be adjusted in order for the
-     * selected option to be aligned over the trigger when the panel opens.
-     */
-    private calculateOverlayOffsetY;
-    /**
-     * Checks that the attempted overlay position will fit within the viewport.
-     * If it will not fit, tries to adjust the scroll position and the associated
-     * y-offset so the panel can open fully on-screen. If it still won't fit,
-     * sets the offset back to 0 to allow the fallback position to take over.
-     */
-    private checkOverlayWithinViewport;
-    /** Adjusts the overlay panel up to fit in the viewport. */
-    private adjustPanelUp;
-    /** Adjusts the overlay panel down to fit in the viewport. */
-    private adjustPanelDown;
-    /** Sets the transform origin point based on the selected option. */
-    private getOriginBasedOnOption;
-    /** Calculates the amount of items in the select. This includes options and group labels. */
-    private getItemCount;
-    /** Calculates the height of the select's options. */
-    private getItemHeight;
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
     private _compareWith;
 }
