@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { InjectionToken, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewEncapsulation, Optional, Self, Inject, NgModule } from '@angular/core';
+import { InjectionToken, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewEncapsulation, Optional, Self, Inject, Renderer2, NgModule } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { BACKSPACE, DELETE, SPACE, END, HOME, hasModifierKey, ENTER } from '@ptsecurity/cdk/keycodes';
 import { mixinColor, mixinDisabled, ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
@@ -1456,7 +1456,7 @@ McTagList.decorators = [
                     '[id]': 'uid'
                 },
                 providers: [{ provide: McFormFieldControl, useExisting: McTagList }],
-                styles: [".mc-tag-list{display:flex;flex-wrap:wrap;min-height:28px;padding:2px 6px}.mc-tag-list .mc-tag-input{flex:1 1 auto;height:22px;margin:2px 4px}.mc-tag-input{border:none;outline:0;background:0 0}"],
+                styles: [".mc-tag-list{display:flex;flex-wrap:wrap;min-height:28px;padding:2px 6px}.mc-tag-list .mc-tag-input{max-width:100%;flex:1 1 auto;height:22px;margin:2px 4px}.mc-tag-input{border:none;outline:0;background:0 0}"],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] },
@@ -1505,10 +1505,12 @@ let nextUniqueId$1 = 0;
 class McTagInput {
     /**
      * @param {?} elementRef
+     * @param {?} renderer
      * @param {?} defaultOptions
      */
-    constructor(elementRef, defaultOptions) {
+    constructor(elementRef, renderer, defaultOptions) {
         this.elementRef = elementRef;
+        this.renderer = renderer;
         this.defaultOptions = defaultOptions;
         /**
          * Whether the control is focused.
@@ -1534,8 +1536,10 @@ class McTagInput {
         this.id = `mc-tag-list-input-${nextUniqueId$1++}`;
         this._addOnBlur = false;
         this._disabled = false;
+        this.countOfSymbolsForUpdateWidth = 3;
         // tslint:disable-next-line: no-unnecessary-type-assertion
         this.inputElement = (/** @type {?} */ (this.elementRef.nativeElement));
+        this.setDefaultInputWidth();
     }
     /**
      * Register input for tag list
@@ -1623,6 +1627,7 @@ class McTagInput {
         }
         if (!event || this.isSeparatorKey(event)) {
             this.tagEnd.emit({ input: this.inputElement, value: this.inputElement.value });
+            this.updateInputWidth();
             if (event) {
                 event.preventDefault();
             }
@@ -1632,8 +1637,25 @@ class McTagInput {
      * @return {?}
      */
     onInput() {
+        this.updateInputWidth();
         // Let tag list know whenever the value changes.
         this._tagList.stateChanges.next();
+    }
+    /**
+     * @return {?}
+     */
+    updateInputWidth() {
+        /** @type {?} */
+        const length = this.inputElement.value.length;
+        this.renderer.setStyle(this.inputElement, 'max-width', 0);
+        this.oneSymbolWidth = this.inputElement.scrollWidth / length;
+        this.renderer.setStyle(this.inputElement, 'max-width', '');
+        if (length > this.countOfSymbolsForUpdateWidth) {
+            this.renderer.setStyle(this.inputElement, 'width', `${length * this.oneSymbolWidth}px`);
+        }
+        else {
+            this.setDefaultInputWidth();
+        }
     }
     /**
      * @return {?}
@@ -1648,6 +1670,13 @@ class McTagInput {
      */
     focus() {
         this.inputElement.focus();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    setDefaultInputWidth() {
+        this.renderer.setStyle(this.inputElement, 'width', '30px');
     }
     /**
      * Checks whether a keycode is one of the configured separators.
@@ -1687,6 +1716,7 @@ McTagInput.decorators = [
 /** @nocollapse */
 McTagInput.ctorParameters = () => [
     { type: ElementRef },
+    { type: Renderer2 },
     { type: undefined, decorators: [{ type: Inject, args: [MC_TAGS_DEFAULT_OPTIONS,] }] }
 ];
 McTagInput.propDecorators = {

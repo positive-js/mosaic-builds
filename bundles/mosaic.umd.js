@@ -22596,7 +22596,7 @@ var McTagList = /** @class */ (function (_super) {
                         '[id]': 'uid'
                     },
                     providers: [{ provide: McFormFieldControl, useExisting: McTagList }],
-                    styles: [".mc-tag-list{display:flex;flex-wrap:wrap;min-height:28px;padding:2px 6px}.mc-tag-list .mc-tag-input{flex:1 1 auto;height:22px;margin:2px 4px}.mc-tag-input{border:none;outline:0;background:0 0}"],
+                    styles: [".mc-tag-list{display:flex;flex-wrap:wrap;min-height:28px;padding:2px 6px}.mc-tag-list .mc-tag-input{max-width:100%;flex:1 1 auto;height:22px;margin:2px 4px}.mc-tag-input{border:none;outline:0;background:0 0}"],
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush
                 },] },
@@ -22645,8 +22645,9 @@ var nextUniqueId$1$1 = 0;
  * May be placed inside or outside of an `<mc-tag-list>`.
  */
 var McTagInput = /** @class */ (function () {
-    function McTagInput(elementRef, defaultOptions) {
+    function McTagInput(elementRef, renderer, defaultOptions) {
         this.elementRef = elementRef;
+        this.renderer = renderer;
         this.defaultOptions = defaultOptions;
         /**
          * Whether the control is focused.
@@ -22672,8 +22673,10 @@ var McTagInput = /** @class */ (function () {
         this.id = "mc-tag-list-input-" + nextUniqueId$1$1++;
         this._addOnBlur = false;
         this._disabled = false;
+        this.countOfSymbolsForUpdateWidth = 3;
         // tslint:disable-next-line: no-unnecessary-type-assertion
         this.inputElement = (/** @type {?} */ (this.elementRef.nativeElement));
+        this.setDefaultInputWidth();
     }
     Object.defineProperty(McTagInput.prototype, "tagList", {
         /** Register input for tag list */
@@ -22803,6 +22806,7 @@ var McTagInput = /** @class */ (function () {
         }
         if (!event || this.isSeparatorKey(event)) {
             this.tagEnd.emit({ input: this.inputElement, value: this.inputElement.value });
+            this.updateInputWidth();
             if (event) {
                 event.preventDefault();
             }
@@ -22815,8 +22819,28 @@ var McTagInput = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        this.updateInputWidth();
         // Let tag list know whenever the value changes.
         this._tagList.stateChanges.next();
+    };
+    /**
+     * @return {?}
+     */
+    McTagInput.prototype.updateInputWidth = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var length = this.inputElement.value.length;
+        this.renderer.setStyle(this.inputElement, 'max-width', 0);
+        this.oneSymbolWidth = this.inputElement.scrollWidth / length;
+        this.renderer.setStyle(this.inputElement, 'max-width', '');
+        if (length > this.countOfSymbolsForUpdateWidth) {
+            this.renderer.setStyle(this.inputElement, 'width', length * this.oneSymbolWidth + "px");
+        }
+        else {
+            this.setDefaultInputWidth();
+        }
     };
     /**
      * @return {?}
@@ -22839,6 +22863,17 @@ var McTagInput = /** @class */ (function () {
      */
     function () {
         this.inputElement.focus();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McTagInput.prototype.setDefaultInputWidth = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.renderer.setStyle(this.inputElement, 'width', '30px');
     };
     /** Checks whether a keycode is one of the configured separators. */
     /**
@@ -22884,6 +22919,7 @@ var McTagInput = /** @class */ (function () {
     /** @nocollapse */
     McTagInput.ctorParameters = function () { return [
         { type: core.ElementRef },
+        { type: core.Renderer2 },
         { type: undefined, decorators: [{ type: core.Inject, args: [MC_TAGS_DEFAULT_OPTIONS,] }] }
     ]; };
     McTagInput.propDecorators = {
@@ -31325,10 +31361,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc24 = MAX_VALIDATOR;
-exports.ɵa24 = MIN_VALIDATOR;
-exports.ɵd24 = MaxValidator;
-exports.ɵb24 = MinValidator;
+exports.ɵc25 = MAX_VALIDATOR;
+exports.ɵa25 = MIN_VALIDATOR;
+exports.ɵd25 = MaxValidator;
+exports.ɵb25 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -31356,11 +31392,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵe27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
-exports.ɵc27 = McModalBody;
-exports.ɵd27 = McModalFooter;
-exports.ɵb27 = McModalTitle;
+exports.ɵe28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
+exports.ɵc28 = McModalBody;
+exports.ɵd28 = McModalFooter;
+exports.ɵb28 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;

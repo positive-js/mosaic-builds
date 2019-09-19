@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, OnChanges } from '@angular/core';
+import { ElementRef, EventEmitter, OnChanges, Renderer2 } from '@angular/core';
 import { McTagsDefaultOptions } from './tag-default-options';
 import { McTagList } from './tag-list.component';
 import { McTagTextControl } from './tag-text-control';
@@ -15,6 +15,7 @@ export interface McTagInputEvent {
  */
 export declare class McTagInput implements McTagTextControl, OnChanges {
     private elementRef;
+    private renderer;
     private defaultOptions;
     /** Whether the control is focused. */
     focused: boolean;
@@ -32,7 +33,7 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     id: string;
     /** Register input for tag list */
     tagList: McTagList;
-    _tagList: McTagList;
+    private _tagList;
     /**
      * Whether or not the tagEnd event will be emitted when the input is blurred.
      */
@@ -43,9 +44,11 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     private _disabled;
     /** Whether the input is empty. */
     readonly empty: boolean;
+    countOfSymbolsForUpdateWidth: number;
+    private oneSymbolWidth;
     /** The native input element to which this directive is attached. */
     private inputElement;
-    constructor(elementRef: ElementRef<HTMLInputElement>, defaultOptions: McTagsDefaultOptions);
+    constructor(elementRef: ElementRef<HTMLInputElement>, renderer: Renderer2, defaultOptions: McTagsDefaultOptions);
     ngOnChanges(): void;
     /** Utility method to make host definition/tests more clear. */
     keydown(event?: KeyboardEvent): void;
@@ -54,9 +57,11 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     /** Checks to see if the (tagEnd) event needs to be emitted. */
     emittagEnd(event?: KeyboardEvent): void;
     onInput(): void;
+    updateInputWidth(): void;
     onFocus(): void;
     /** Focuses the input. */
     focus(): void;
+    private setDefaultInputWidth;
     /** Checks whether a keycode is one of the configured separators. */
     private isSeparatorKey;
 }
