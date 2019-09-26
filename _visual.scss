@@ -19,8 +19,6 @@ $fonts: (
     )
 );
 
-$base-font-size: 15px !default;
-
 @mixin size($width, $height) {
     width: $width;
     height: $height;
