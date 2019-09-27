@@ -2019,15 +2019,15 @@ exports.McTabGroupBase = McTabGroupBase;
 exports.mcTabGroupMixinBase = mcTabGroupMixinBase;
 exports.McTabGroup = McTabGroup;
 exports.mcTabsAnimations = mcTabsAnimations;
-exports.ɵd14 = McTabBase;
-exports.ɵe14 = mcTabMixinBase;
-exports.ɵa14 = McTabHeaderBase;
-exports.ɵb14 = McTabLabelWrapperBase;
-exports.ɵc14 = mcTabLabelWrapperMixinBase;
-exports.ɵh14 = McTabLinkBase;
-exports.ɵf14 = McTabNavBase;
-exports.ɵi14 = mcTabLinkMixinBase;
-exports.ɵg14 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
