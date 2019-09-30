@@ -146,7 +146,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     /** Whether the select is focused. */
     /**
     * @deprecated Setter to be removed as this property is intended to be readonly.
-    * @breaking-change 8.0.0-184c45e
+    * @breaking-change 8.0.0-904a1fc
     */
     focused: boolean;
     private _focused;
