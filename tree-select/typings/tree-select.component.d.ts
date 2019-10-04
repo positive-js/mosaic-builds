@@ -129,7 +129,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     /** Whether the select is focused. */
     /**
     * @deprecated Setter to be removed as this property is intended to be readonly.
-    * @breaking-change 8.0.0-0fa9c7e
+    * @breaking-change 8.0.0-1a4b5f3
     */
     focused: boolean;
     private _focused;
