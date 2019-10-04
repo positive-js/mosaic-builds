@@ -35,7 +35,7 @@ export declare class McCheckboxBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McCheckboxMixinBase: HasTabIndexCtor & CanColorCtor & CanDisableCtor & typeof McCheckboxBase;
+export declare const mcCheckboxMixinBase: HasTabIndexCtor & CanColorCtor & CanDisableCtor & typeof McCheckboxBase;
 /**
  * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
  * and exposes a similar API. A McCheckbox can be either checked, unchecked, indeterminate, or
@@ -43,7 +43,7 @@ export declare const _McCheckboxMixinBase: HasTabIndexCtor & CanColorCtor & CanD
  * so there is no need to provide them yourself. However, if you want to omit a label and still
  * have the checkbox be accessible, you may supply an [aria-label] input.
  */
-export declare class McCheckbox extends _McCheckboxMixinBase implements ControlValueAccessor, AfterViewInit, OnDestroy, CanColor, CanDisable, HasTabIndex {
+export declare class McCheckbox extends mcCheckboxMixinBase implements ControlValueAccessor, AfterViewInit, OnDestroy, CanColor, CanDisable, HasTabIndex {
     private _changeDetectorRef;
     private _focusMonitor;
     private _clickAction;
@@ -56,14 +56,8 @@ export declare class McCheckbox extends _McCheckboxMixinBase implements ControlV
      * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
      */
     ariaLabelledby: string | null;
-    private _uniqueId;
     /** A unique id for the checkbox input. If none is supplied, it will be auto-generated. */
     id: string;
-    /** Returns the unique id for the visual hidden input. */
-    readonly inputId: string;
-    /** Whether the checkbox is required. */
-    required: boolean;
-    private _required;
     /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
     labelPosition: 'before' | 'after';
     /** Name value will be applied to the input element if present */
@@ -75,16 +69,21 @@ export declare class McCheckbox extends _McCheckboxMixinBase implements ControlV
     /** The value attribute of the native input element */
     value: string;
     /** The native `<input type="checkbox">` element */
-    _inputElement: ElementRef;
+    inputElement: ElementRef;
+    private uniqueId;
+    private currentAnimationClass;
+    private currentCheckState;
+    /** Returns the unique id for the visual hidden input. */
+    readonly inputId: string;
+    /** Whether the checkbox is required. */
+    required: boolean;
+    private _required;
+    constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, _focusMonitor: FocusMonitor, tabIndex: string, _clickAction: McCheckboxClickAction);
     /**
      * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
      * @docs-private
      */
-    _onTouched: () => any;
-    private _currentAnimationClass;
-    private _currentCheckState;
-    private _controlValueAccessorChangeFn;
-    constructor(elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, _focusMonitor: FocusMonitor, tabIndex: string, _clickAction: McCheckboxClickAction);
+    onTouched: () => any;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     /**
@@ -107,16 +106,12 @@ export declare class McCheckbox extends _McCheckboxMixinBase implements ControlV
     indeterminate: boolean;
     private _indeterminate;
     /** Method being called whenever the label text changes. */
-    _onLabelTextChange(): void;
+    onLabelTextChange(): void;
     writeValue(value: any): void;
     registerOnChange(fn: (value: any) => void): void;
     registerOnTouched(fn: any): void;
     setDisabledState(isDisabled: boolean): void;
-    _getAriaChecked(): 'true' | 'false' | 'mixed';
-    private _transitionCheckState;
-    private _emitChangeEvent;
-    /** Function is called whenever the focus changes for the input element. */
-    private _onInputFocusChange;
+    getAriaChecked(): 'true' | 'false' | 'mixed';
     /** Toggles the `checked` state of the checkbox. */
     toggle(): void;
     /**
@@ -124,10 +119,15 @@ export declare class McCheckbox extends _McCheckboxMixinBase implements ControlV
      * Toggles checked state if element is not disabled.
      * Do not toggle on (change) event since IE doesn't fire change event when
      *   indeterminate checkbox is clicked.
-     * @param event
+     * @param event Input click event
      */
-    _onInputClick(event: Event): void;
+    onInputClick(event: Event): void;
     /** Focuses the checkbox. */
     focus(): void;
-    _onInteractionEvent(event: Event): void;
+    onInteractionEvent(event: Event): void;
+    private controlValueAccessorChangeFn;
+    private transitionCheckState;
+    private emitChangeEvent;
+    /** Function is called whenever the focus changes for the input element. */
+    private onInputFocusChange;
 }

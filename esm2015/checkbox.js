@@ -66,6 +66,7 @@ class McCheckboxChange {
  * \@docs-private
  */
 class McCheckboxBase {
+    // tslint:disable-next-line:naming-convention
     /**
      * @param {?} _elementRef
      */
@@ -74,7 +75,7 @@ class McCheckboxBase {
     }
 }
 /** @type {?} */
-const _McCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
+const mcCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
 /**
  * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
  * and exposes a similar API. A McCheckbox can be either checked, unchecked, indeterminate, or
@@ -82,16 +83,17 @@ const _McCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBa
  * so there is no need to provide them yourself. However, if you want to omit a label and still
  * have the checkbox be accessible, you may supply an [aria-label] input.
  */
-class McCheckbox extends _McCheckboxMixinBase {
+class McCheckbox extends mcCheckboxMixinBase {
+    // tslint:disable-next-line:naming-convention
     /**
-     * @param {?} elementRef
+     * @param {?} _elementRef
      * @param {?} _changeDetectorRef
      * @param {?} _focusMonitor
      * @param {?} tabIndex
      * @param {?} _clickAction
      */
-    constructor(elementRef, _changeDetectorRef, _focusMonitor, tabIndex, _clickAction) {
-        super(elementRef);
+    constructor(_elementRef, _changeDetectorRef, _focusMonitor, tabIndex, _clickAction) {
+        super(_elementRef);
         this._changeDetectorRef = _changeDetectorRef;
         this._focusMonitor = _focusMonitor;
         this._clickAction = _clickAction;
@@ -104,11 +106,6 @@ class McCheckbox extends _McCheckboxMixinBase {
          * Users can specify the `aria-labelledby` attribute which will be forwarded to the input element
          */
         this.ariaLabelledby = null;
-        this._uniqueId = `mc-checkbox-${++nextUniqueId}`;
-        /**
-         * A unique id for the checkbox input. If none is supplied, it will be auto-generated.
-         */
-        this.id = this._uniqueId;
         /**
          * Whether the label should appear after or before the checkbox. Defaults to 'after'
          */
@@ -125,33 +122,35 @@ class McCheckbox extends _McCheckboxMixinBase {
          * Event emitted when the checkbox's `indeterminate` value changes.
          */
         this.indeterminateChange = new EventEmitter();
+        this.uniqueId = `mc-checkbox-${++nextUniqueId}`;
+        this.currentAnimationClass = '';
+        this.currentCheckState = TransitionCheckState.Init;
         /**
          * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
          * \@docs-private
          */
-        this._onTouched = (/**
+        // tslint:disable-next-line:no-empty
+        this.onTouched = (/**
          * @return {?}
          */
-        () => {
-        });
-        this._currentAnimationClass = '';
-        this._currentCheckState = TransitionCheckState.Init;
-        this._controlValueAccessorChangeFn = (/**
-         * @return {?}
-         */
-        () => {
-        });
+        () => { });
         this._checked = false;
         this._disabled = false;
         this._indeterminate = false;
+        // tslint:disable-next-line:no-empty
+        this.controlValueAccessorChangeFn = (/**
+         * @return {?}
+         */
+        () => { });
         this.tabIndex = parseInt(tabIndex) || 0;
+        this.id = this.uniqueId;
     }
     /**
      * Returns the unique id for the visual hidden input.
      * @return {?}
      */
     get inputId() {
-        return `${this.id || this._uniqueId}-input`;
+        return `${this.id || this.uniqueId}-input`;
     }
     /**
      * Whether the checkbox is required.
@@ -172,18 +171,18 @@ class McCheckbox extends _McCheckboxMixinBase {
      */
     ngAfterViewInit() {
         this._focusMonitor
-            .monitor(this._inputElement.nativeElement)
+            .monitor(this.inputElement.nativeElement)
             .subscribe((/**
          * @param {?} focusOrigin
          * @return {?}
          */
-        (focusOrigin) => this._onInputFocusChange(focusOrigin)));
+        (focusOrigin) => this.onInputFocusChange(focusOrigin)));
     }
     /**
      * @return {?}
      */
     ngOnDestroy() {
-        this._focusMonitor.stopMonitoring(this._inputElement.nativeElement);
+        this._focusMonitor.stopMonitoring(this.inputElement.nativeElement);
     }
     /**
      * Whether the checkbox is checked.
@@ -197,7 +196,7 @@ class McCheckbox extends _McCheckboxMixinBase {
      * @return {?}
      */
     set checked(value) {
-        if (value != this.checked) {
+        if (value !== this.checked) {
             this._checked = value;
             this._changeDetectorRef.markForCheck();
         }
@@ -215,7 +214,7 @@ class McCheckbox extends _McCheckboxMixinBase {
      * @return {?}
      */
     set disabled(value) {
-        if (value != this.disabled) {
+        if (value !== this.disabled) {
             this._disabled = value;
             this._changeDetectorRef.markForCheck();
         }
@@ -236,14 +235,14 @@ class McCheckbox extends _McCheckboxMixinBase {
      */
     set indeterminate(value) {
         /** @type {?} */
-        const changed = value != this._indeterminate;
+        const changed = value !== this._indeterminate;
         this._indeterminate = value;
         if (changed) {
             if (this._indeterminate) {
-                this._transitionCheckState(TransitionCheckState.Indeterminate);
+                this.transitionCheckState(TransitionCheckState.Indeterminate);
             }
             else {
-                this._transitionCheckState(this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+                this.transitionCheckState(this.checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
             }
             this.indeterminateChange.emit(this._indeterminate);
         }
@@ -252,7 +251,7 @@ class McCheckbox extends _McCheckboxMixinBase {
      * Method being called whenever the label text changes.
      * @return {?}
      */
-    _onLabelTextChange() {
+    onLabelTextChange() {
         // This method is getting called whenever the label of the checkbox changes.
         // Since the checkbox uses the OnPush strategy we need to notify it about the change
         // that has been recognized by the cdkObserveContent directive.
@@ -272,7 +271,7 @@ class McCheckbox extends _McCheckboxMixinBase {
      * @return {?}
      */
     registerOnChange(fn) {
-        this._controlValueAccessorChangeFn = fn;
+        this.controlValueAccessorChangeFn = fn;
     }
     // Implemented as part of ControlValueAccessor.
     /**
@@ -280,7 +279,7 @@ class McCheckbox extends _McCheckboxMixinBase {
      * @return {?}
      */
     registerOnTouched(fn) {
-        this._onTouched = fn;
+        this.onTouched = fn;
     }
     // Implemented as part of ControlValueAccessor.
     /**
@@ -293,52 +292,8 @@ class McCheckbox extends _McCheckboxMixinBase {
     /**
      * @return {?}
      */
-    _getAriaChecked() {
+    getAriaChecked() {
         return this.checked ? 'true' : (this.indeterminate ? 'mixed' : 'false');
-    }
-    /**
-     * @private
-     * @param {?} newState
-     * @return {?}
-     */
-    _transitionCheckState(newState) {
-        /** @type {?} */
-        const oldState = this._currentCheckState;
-        /** @type {?} */
-        const element = this._elementRef.nativeElement;
-        if (oldState === newState) {
-            return;
-        }
-        if (this._currentAnimationClass.length > 0) {
-            element.classList.remove(this._currentAnimationClass);
-        }
-        this._currentCheckState = newState;
-        if (this._currentAnimationClass.length > 0) {
-            element.classList.add(this._currentAnimationClass);
-        }
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    _emitChangeEvent() {
-        /** @type {?} */
-        const event = new McCheckboxChange();
-        event.source = this;
-        event.checked = this.checked;
-        this._controlValueAccessorChangeFn(this.checked);
-        this.change.emit(event);
-    }
-    /**
-     * Function is called whenever the focus changes for the input element.
-     * @private
-     * @param {?} focusOrigin
-     * @return {?}
-     */
-    _onInputFocusChange(focusOrigin) {
-        if (focusOrigin) {
-            this._onTouched();
-        }
     }
     /**
      * Toggles the `checked` state of the checkbox.
@@ -352,10 +307,10 @@ class McCheckbox extends _McCheckboxMixinBase {
      * Toggles checked state if element is not disabled.
      * Do not toggle on (change) event since IE doesn't fire change event when
      *   indeterminate checkbox is clicked.
-     * @param {?} event
+     * @param {?} event Input click event
      * @return {?}
      */
-    _onInputClick(event) {
+    onInputClick(event) {
         // We have to stop propagation for click events on the visual hidden input element.
         // By default, when a user clicks on a label element, a generated click event will be
         // dispatched on the associated input element. Since we are using a label element as our
@@ -377,17 +332,17 @@ class McCheckbox extends _McCheckboxMixinBase {
                 }));
             }
             this.toggle();
-            this._transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
+            this.transitionCheckState(this._checked ? TransitionCheckState.Checked : TransitionCheckState.Unchecked);
             // Emit our custom change event if the native input emitted one.
             // It is important to only emit it, if the native input triggered one, because
             // we don't want to trigger a change event, when the `checked` variable changes for example.
-            this._emitChangeEvent();
+            this.emitChangeEvent();
         }
         else if (!this.disabled && this._clickAction === 'noop') {
             // Reset native input when clicked with noop. The native checkbox becomes checked after
             // click, reset it to be align with `checked` value of `mc-checkbox`.
-            this._inputElement.nativeElement.checked = this.checked;
-            this._inputElement.nativeElement.indeterminate = this.indeterminate;
+            this.inputElement.nativeElement.checked = this.checked;
+            this.inputElement.nativeElement.indeterminate = this.indeterminate;
         }
     }
     /**
@@ -395,23 +350,67 @@ class McCheckbox extends _McCheckboxMixinBase {
      * @return {?}
      */
     focus() {
-        this._focusMonitor.focusVia(this._inputElement.nativeElement, 'keyboard');
+        this._focusMonitor.focusVia(this.inputElement.nativeElement, 'keyboard');
     }
     /**
      * @param {?} event
      * @return {?}
      */
-    _onInteractionEvent(event) {
+    onInteractionEvent(event) {
         // We always have to stop propagation on the change event.
         // Otherwise the change event, from the input element, will bubble up and
         // emit its event object to the `change` output.
         event.stopPropagation();
     }
+    /**
+     * @private
+     * @param {?} newState
+     * @return {?}
+     */
+    transitionCheckState(newState) {
+        /** @type {?} */
+        const oldState = this.currentCheckState;
+        /** @type {?} */
+        const element = this._elementRef.nativeElement;
+        if (oldState === newState) {
+            return;
+        }
+        if (this.currentAnimationClass.length > 0) {
+            element.classList.remove(this.currentAnimationClass);
+        }
+        this.currentCheckState = newState;
+        if (this.currentAnimationClass.length > 0) {
+            element.classList.add(this.currentAnimationClass);
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    emitChangeEvent() {
+        /** @type {?} */
+        const event = new McCheckboxChange();
+        event.source = this;
+        event.checked = this.checked;
+        this.controlValueAccessorChangeFn(this.checked);
+        this.change.emit(event);
+    }
+    /**
+     * Function is called whenever the focus changes for the input element.
+     * @private
+     * @param {?} focusOrigin
+     * @return {?}
+     */
+    onInputFocusChange(focusOrigin) {
+        if (focusOrigin) {
+            this.onTouched();
+        }
+    }
 }
 McCheckbox.decorators = [
     { type: Component, args: [{
                 selector: 'mc-checkbox',
-                template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input type=\"checkbox\" class=\"mc-checkbox-input cdk-visually-hidden\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"_getAriaChecked()\" (change)=\"_onInteractionEvent($event)\" (click)=\"_onInputClick($event)\"><div class=\"mc-checkbox-frame\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"_onLabelTextChange()\"><ng-content></ng-content></span></label>",
+                template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input type=\"checkbox\" class=\"mc-checkbox-input cdk-visually-hidden\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"getAriaChecked()\" (change)=\"onInteractionEvent($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-checkbox-frame\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"onLabelTextChange()\"><ng-content></ng-content></span></label>",
                 styles: [".mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox.mc-checked .mc-checkbox-checkmark{display:block}.mc-checkbox.mc-checked .mc-checkbox-mixedmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-checkmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:block}.mc-checkbox.mc-disabled{cursor:default}.mc-checkbox.mc-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;left:-1px;right:0;bottom:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}"],
                 exportAs: 'mcCheckbox',
                 host: {
@@ -441,13 +440,13 @@ McCheckbox.propDecorators = {
     ariaLabel: [{ type: Input, args: ['aria-label',] }],
     ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
     id: [{ type: Input }],
-    required: [{ type: Input }],
     labelPosition: [{ type: Input }],
     name: [{ type: Input }],
     change: [{ type: Output }],
     indeterminateChange: [{ type: Output }],
     value: [{ type: Input }],
-    _inputElement: [{ type: ViewChild, args: ['input', { static: false },] }],
+    inputElement: [{ type: ViewChild, args: ['input', { static: false },] }],
+    required: [{ type: Input }],
     checked: [{ type: Input }],
     disabled: [{ type: Input }],
     indeterminate: [{ type: Input }]
@@ -506,5 +505,5 @@ McCheckboxModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { MC_CHECKBOX_CONTROL_VALUE_ACCESSOR, TransitionCheckState, McCheckboxChange, McCheckboxBase, _McCheckboxMixinBase, McCheckbox, MC_CHECKBOX_CLICK_ACTION, McCheckboxModule, MC_CHECKBOX_REQUIRED_VALIDATOR, McCheckboxRequiredValidator };
+export { MC_CHECKBOX_CONTROL_VALUE_ACCESSOR, TransitionCheckState, McCheckboxChange, McCheckboxBase, mcCheckboxMixinBase, McCheckbox, MC_CHECKBOX_CLICK_ACTION, McCheckboxModule, MC_CHECKBOX_REQUIRED_VALIDATOR, McCheckboxRequiredValidator };
 //# sourceMappingURL=checkbox.js.map
