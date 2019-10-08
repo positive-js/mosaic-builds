@@ -4,5 +4,5 @@ export declare const mosaicVersion: string | null;
  * Range of Angular versions that can be used together with the Mosaic version
  * that provides these schematics.
  */
-export declare const requiredAngularVersionRange = ">=8.0.0-4d5b9a8";
-export declare const angularCDKVersion = "^8.0.0-4d5b9a8";
+export declare const requiredAngularVersionRange = ">=8.0.0-33e2d24";
+export declare const angularCDKVersion = "^8.0.0-33e2d24";
