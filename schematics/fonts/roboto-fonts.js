@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const schematics_1 = require("@angular/cdk/schematics");
 const config_1 = require("@schematics/angular/utility/config");
-//TODO: add Roboto Fonts
+// TODO: add Roboto Fonts
 function addRobotoFonts(options) {
     return (host) => {
         const workspace = config_1.getWorkspace(host);
