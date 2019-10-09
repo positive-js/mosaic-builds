@@ -53,15 +53,15 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     private _overlapTriggerY;
     private _hasBackdrop;
     /** Config object to be passed into the dropdown's ngClass */
-    _classList: {
+    classList: {
         [key: string]: boolean;
     };
     /** Current state of the panel animation. */
-    _panelAnimationState: 'void' | 'enter';
+    panelAnimationState: 'void' | 'enter';
     /** Emits whenever an animation on the dropdown completes. */
-    _animationDone: Subject<AnimationEvent>;
+    animationDone: Subject<AnimationEvent>;
     /** Whether the dropdown is animating. */
-    _isAnimating: boolean;
+    isAnimating: boolean;
     /** Parent dropdown of the current dropdown panel. */
     parent: McDropdownPanel | undefined;
     /** Layout direction of the dropdown. */
@@ -81,22 +81,22 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     lazyContent: McDropdownContent;
     /** Event emitted when the dropdown is closed. */
     readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
-    private _previousPanelClass;
-    private _keyManager;
+    private previousPanelClass;
+    private keyManager;
     /** Dropdown items inside the current dropdown. */
-    private _items;
+    private itemsArray;
     /** Emits whenever the amount of dropdown items changes. */
-    private _itemChanges;
+    private itemChanges;
     /** Subscription to tab events on the dropdown panel */
-    private _tabSubscription;
+    private tabSubscription;
     constructor(_elementRef: ElementRef<HTMLElement>, _ngZone: NgZone, _defaultOptions: McDropdownDefaultOptions);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     /** Stream that emits whenever the hovered dropdown item changes. */
-    _hovered(): Observable<McDropdownItem>;
+    hovered(): Observable<McDropdownItem>;
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
-    _handleKeydown(event: KeyboardEvent): void;
+    handleKeydown(event: KeyboardEvent): void;
     /**
      * Focus the first item in the dropdown.
      * @param origin Action from which the focus originated. Used to set the correct styling.
@@ -126,10 +126,10 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
      */
     setPositionClasses(posX?: DropdownPositionX, posY?: DropdownPositionY): void;
     /** Starts the enter animation. */
-    _startAnimation(): void;
+    startAnimation(): void;
     /** Resets the panel animation to its initial state. */
-    _resetAnimation(): void;
+    resetAnimation(): void;
     /** Callback that is invoked when the panel animation completes. */
-    _onAnimationDone(event: AnimationEvent): void;
-    _onAnimationStart(event: AnimationEvent): void;
+    onAnimationDone(event: AnimationEvent): void;
+    onAnimationStart(event: AnimationEvent): void;
 }

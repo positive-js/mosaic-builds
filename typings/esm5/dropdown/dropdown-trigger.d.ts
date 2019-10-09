@@ -34,21 +34,21 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     readonly dir: Direction;
     /** References the dropdown instance that the trigger is associated with. */
     dropdown: McDropdownPanel;
-    private _dropdown;
-    private _opened;
-    /** Whether the dropdown is open. */
-    readonly opened: boolean;
-    _openedBy: 'mouse' | 'touch' | null;
+    openedBy: 'mouse' | 'touch' | null;
     /** Data to be passed along to any lazily-rendered content. */
     data: any;
     /** Event emitted when the associated dropdown is opened. */
     readonly dropdownOpened: EventEmitter<void>;
     /** Event emitted when the associated dropdown is closed. */
     readonly dropdownClosed: EventEmitter<void>;
-    private _portal;
-    private _overlayRef;
-    private _closeSubscription;
-    private _hoverSubscription;
+    private _dropdown;
+    /** Whether the dropdown is open. */
+    readonly opened: boolean;
+    private _opened;
+    private portal;
+    private overlayRef;
+    private closeSubscription;
+    private hoverSubscription;
     constructor(_overlay: Overlay, _element: ElementRef<HTMLElement>, _viewContainerRef: ViewContainerRef, _scrollStrategy: any, _parent: McDropdown, _dropdownItemInstance: McDropdownItem, _dir: Directionality, _focusMonitor?: FocusMonitor);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
@@ -75,53 +75,53 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
      * Handles touch start events on the trigger.
      * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
      */
-    private _handleTouchStart;
+    private handleTouchStart;
     /** Closes the dropdown and does the necessary cleanup. */
-    private _destroy;
+    private destroy;
     /**
      * This method sets the dropdown state to open and focuses the first item if
      * the dropdown was opened via the keyboard.
      */
-    private _init;
+    private init;
     /**
      * This method resets the dropdown when it's closed, most importantly restoring
      * focus to the dropdown trigger if the dropdown was opened via the keyboard.
      */
-    private _reset;
-    private _setIsOpened;
+    private reset;
+    private setIsOpened;
     /**
      * This method checks that a valid instance of McDropdown has been passed into
      * mcDropdownTriggerFor. If not, an exception is thrown.
      */
-    private _check;
+    private check;
     /**
      * This method creates the overlay from the provided dropdown's template and saves its
      * OverlayRef so that it can be attached to the DOM when open is called.
      */
-    private _createOverlay;
+    private createOverlay;
     /**
      * This method builds the configuration object needed to create the overlay, the OverlayState.
      * @returns OverlayConfig
      */
-    private _getOverlayConfig;
+    private getOverlayConfig;
     /**
      * Listens to changes in the position of the overlay and sets the correct classes
      * on the dropdown based on the new position. This ensures the animation origin is always
      * correct, even if a fallback position is used for the overlay.
      */
-    private _subscribeToPositions;
+    private subscribeToPositions;
     /**
      * Sets the appropriate positions on a position strategy
      * so the overlay connects with the trigger correctly.
      * @param positionStrategy Strategy whose position to update.
      */
-    private _setPosition;
+    private setPosition;
     /** Cleans up the active subscriptions. */
-    private _cleanUpSubscriptions;
+    private cleanUpSubscriptions;
     /** Returns a stream that emits whenever an action that should close the dropdown occurs. */
-    private _closingActions;
+    private closingActions;
     /** Handles the cases where the user hovers over the trigger. */
-    private _handleHover;
+    private handleHover;
     /** Gets the portal that should be attached to the overlay. */
-    private _getPortal;
+    private getPortal;
 }

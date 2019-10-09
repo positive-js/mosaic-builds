@@ -11,9 +11,9 @@ export declare class McDropdownContent implements OnDestroy {
     private _viewContainerRef;
     private _document;
     /** Emits when the dropdown content has been attached. */
-    _attached: Subject<void>;
-    private _portal;
-    private _outlet;
+    attached: Subject<void>;
+    private portal;
+    private outlet;
     constructor(_template: TemplateRef<any>, _componentFactoryResolver: ComponentFactoryResolver, _appRef: ApplicationRef, _injector: Injector, _viewContainerRef: ViewContainerRef, _document: any);
     /**
      * Attaches the content with a particular context.
