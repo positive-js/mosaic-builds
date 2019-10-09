@@ -9,12 +9,12 @@ export declare const MIN_VALIDATOR: Provider;
  */
 export declare class MinValidator implements Validator, OnChanges {
     min: string;
-    private _validator;
-    private _onChange;
+    private validator;
+    private onChange;
     ngOnChanges(changes: SimpleChanges): void;
     validate(c: AbstractControl): ValidationErrors | null;
     registerOnValidatorChange(fn: () => void): void;
-    private _createValidator;
+    private createValidator;
 }
 export declare const MAX_VALIDATOR: Provider;
 /**
@@ -25,10 +25,10 @@ export declare const MAX_VALIDATOR: Provider;
  */
 export declare class MaxValidator implements Validator, OnChanges {
     max: string;
-    private _validator;
-    private _onChange;
+    private validator;
+    private onChange;
     ngOnChanges(changes: SimpleChanges): void;
     validate(c: AbstractControl): ValidationErrors | null;
     registerOnValidatorChange(fn: () => void): void;
-    private _createValidator;
+    private createValidator;
 }

@@ -5450,7 +5450,7 @@ var McInputBase = /** @class */ (function () {
     return McInputBase;
 }());
 /** @type {?} */
-var _McInputMixinBase = mixinErrorState(McInputBase);
+var mcInputMixinBase = mixinErrorState(McInputBase);
 var McNumberInput = /** @class */ (function () {
     function McNumberInput(_platform, _elementRef, _model, step, bigStep, min, max) {
         this._platform = _platform;
@@ -5470,11 +5470,11 @@ var McNumberInput = /** @class */ (function () {
         this.bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
         this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
         this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
-        this._host = this._elementRef.nativeElement;
+        this.host = this._elementRef.nativeElement;
         /** @type {?} */
         var self = this;
-        if ('valueAsNumber' in this._host) {
-            Object.defineProperty(Object.getPrototypeOf(this._host), 'valueAsNumber', {
+        if ('valueAsNumber' in this.host) {
+            Object.defineProperty(Object.getPrototypeOf(this.host), 'valueAsNumber', {
                 // tslint:disable-next-line:no-reserved-keywords
                 get: 
                 // tslint:disable-next-line:no-reserved-keywords
@@ -5493,7 +5493,7 @@ var McNumberInput = /** @class */ (function () {
      * @param {?} isFocused
      * @return {?}
      */
-    McNumberInput.prototype._focusChanged = /**
+    McNumberInput.prototype.focusChanged = /**
      * @param {?} isFocused
      * @return {?}
      */
@@ -5633,9 +5633,9 @@ var McNumberInput = /** @class */ (function () {
     function (step) {
         this._elementRef.nativeElement.focus();
         /** @type {?} */
-        var res = stepUp(this._host.valueAsNumber, this.max, this.min, step);
-        this._host.value = res === null ? '' : res.toString();
-        this._model.update.emit(this._host.valueAsNumber);
+        var res = stepUp(this.host.valueAsNumber, this.max, this.min, step);
+        this.host.value = res === null ? '' : res.toString();
+        this._model.update.emit(this.host.valueAsNumber);
     };
     /**
      * @param {?} step
@@ -5648,9 +5648,9 @@ var McNumberInput = /** @class */ (function () {
     function (step) {
         this._elementRef.nativeElement.focus();
         /** @type {?} */
-        var res = stepDown(this._host.valueAsNumber, this.max, this.min, step);
-        this._host.value = res === null ? '' : res.toString();
-        this._model.update.emit(this._host.valueAsNumber);
+        var res = stepDown(this.host.valueAsNumber, this.max, this.min, step);
+        this.host.value = res === null ? '' : res.toString();
+        this._model.update.emit(this.host.valueAsNumber);
     };
     /**
      * @private
@@ -5710,8 +5710,8 @@ var McNumberInput = /** @class */ (function () {
                     exportAs: 'mcNumericalInput',
                     providers: [forms.NgModel, { provide: McFormFieldNumberControl, useExisting: McNumberInput }],
                     host: {
-                        '(blur)': '_focusChanged(false)',
-                        '(focus)': '_focusChanged(true)',
+                        '(blur)': 'focusChanged(false)',
+                        '(focus)': 'focusChanged(true)',
                         '(paste)': 'onPaste($event)',
                         '(keydown)': 'onKeyDown($event)'
                     }
@@ -5737,6 +5737,7 @@ var McNumberInput = /** @class */ (function () {
 }());
 var McInput = /** @class */ (function (_super) {
     __extends(McInput, _super);
+    // tslint:disable-next-line: naming-convention
     function McInput(_elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
         var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this._elementRef = _elementRef;
@@ -5756,11 +5757,8 @@ var McInput = /** @class */ (function (_super) {
          * \@docs-private
          */
         _this.controlType = 'mc-input';
-        _this._uid = "mc-input-" + nextUniqueId$3++;
-        _this._disabled = false;
-        _this._required = false;
-        _this._type = 'text';
-        _this._neverEmptyInputTypes = [
+        _this.uid = "mc-input-" + nextUniqueId$3++;
+        _this.neverEmptyInputTypes = [
             'date',
             'datetime',
             'datetime-local',
@@ -5772,10 +5770,17 @@ var McInput = /** @class */ (function (_super) {
          * @return {?}
          */
         function (t) { return platform.getSupportedInputTypes().has(t); }));
+        // tslint:disable-next-line: naming-convention
+        _this._disabled = false;
+        // tslint:disable-next-line: naming-convention
+        _this._required = false;
+        // tslint:enable no-reserved-keywords
+        // tslint:disable-next-line: naming-convention
+        _this._type = 'text';
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
         _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
-        _this._previousNativeValue = _this.value;
+        _this.previousNativeValue = _this.value;
         // Force setter to be called in case id was not specified.
         _this.id = _this.id;
         return _this;
@@ -5830,7 +5835,7 @@ var McInput = /** @class */ (function (_super) {
          * @return {?}
          */
         function (value) {
-            this._id = value || this._uid;
+            this._id = value || this.uid;
         },
         enumerable: true,
         configurable: true
@@ -5876,7 +5881,7 @@ var McInput = /** @class */ (function (_super) {
          */
         function (value) {
             this._type = value || 'text';
-            this._validateType();
+            this.validateType();
             // When using Angular inputs, developers are no longer able to set the properties on the native
             // input element. To ensure that bindings for `type` work, we need to sync the setter
             // with the native property. Textarea elements don't support the type property or attribute.
@@ -5888,14 +5893,11 @@ var McInput = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(McInput.prototype, "value", {
-        // tslint:enable no-reserved-keywords
         /**
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        get: 
-        // tslint:enable no-reserved-keywords
-        /**
+        get: /**
          * Implemented as part of McFormFieldControl.
          * \@docs-private
          * @return {?}
@@ -5950,7 +5952,7 @@ var McInput = /** @class */ (function (_super) {
         // We need to dirty-check the native element's value, because there are some cases where
         // we won't be notified when it changes (e.g. the consumer isn't using forms or they're
         // updating the value using `emitEvent: false`).
-        this._dirtyCheckNativeValue();
+        this.dirtyCheckNativeValue();
     };
     /** Focuses the input. */
     /**
@@ -5970,7 +5972,7 @@ var McInput = /** @class */ (function (_super) {
      * @param {?} isFocused
      * @return {?}
      */
-    McInput.prototype._focusChanged = /**
+    McInput.prototype.focusChanged = /**
      * Callback for the cases where the focused state of the input changes.
      * @param {?} isFocused
      * @return {?}
@@ -5984,7 +5986,7 @@ var McInput = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
-    McInput.prototype._onInput = /**
+    McInput.prototype.onInput = /**
      * @return {?}
      */
     function () {
@@ -6007,7 +6009,7 @@ var McInput = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return !this._isNeverEmpty() && !this._elementRef.nativeElement.value && !this._isBadInput();
+            return !this.isNeverEmpty() && !this._elementRef.nativeElement.value && !this.isBadInput();
         },
         enumerable: true,
         configurable: true
@@ -6035,7 +6037,7 @@ var McInput = /** @class */ (function (_super) {
      * @protected
      * @return {?}
      */
-    McInput.prototype._dirtyCheckNativeValue = /**
+    McInput.prototype.dirtyCheckNativeValue = /**
      * Does some manual dirty checking on the native input `value` property.
      * @protected
      * @return {?}
@@ -6043,8 +6045,8 @@ var McInput = /** @class */ (function (_super) {
     function () {
         /** @type {?} */
         var newValue = this.value;
-        if (this._previousNativeValue !== newValue) {
-            this._previousNativeValue = newValue;
+        if (this.previousNativeValue !== newValue) {
+            this.previousNativeValue = newValue;
             this.stateChanges.next();
         }
     };
@@ -6054,7 +6056,7 @@ var McInput = /** @class */ (function (_super) {
      * @protected
      * @return {?}
      */
-    McInput.prototype._validateType = /**
+    McInput.prototype.validateType = /**
      * Make sure the input is a supported type.
      * @protected
      * @return {?}
@@ -6070,13 +6072,13 @@ var McInput = /** @class */ (function (_super) {
      * @protected
      * @return {?}
      */
-    McInput.prototype._isNeverEmpty = /**
+    McInput.prototype.isNeverEmpty = /**
      * Checks whether the input type is one of the types that are never empty.
      * @protected
      * @return {?}
      */
     function () {
-        return this._neverEmptyInputTypes.indexOf(this._type) > -1;
+        return this.neverEmptyInputTypes.indexOf(this._type) > -1;
     };
     /** Checks whether the input is invalid based on the native validation. */
     /**
@@ -6084,7 +6086,7 @@ var McInput = /** @class */ (function (_super) {
      * @protected
      * @return {?}
      */
-    McInput.prototype._isBadInput = /**
+    McInput.prototype.isBadInput = /**
      * Checks whether the input is invalid based on the native validation.
      * @protected
      * @return {?}
@@ -6107,9 +6109,9 @@ var McInput = /** @class */ (function (_super) {
                         '[attr.placeholder]': 'placeholder',
                         '[disabled]': 'disabled',
                         '[required]': 'required',
-                        '(blur)': '_focusChanged(false)',
-                        '(focus)': '_focusChanged(true)',
-                        '(input)': '_onInput()'
+                        '(blur)': 'focusChanged(false)',
+                        '(focus)': 'focusChanged(true)',
+                        '(input)': 'onInput()'
                     },
                     providers: [{ provide: McFormFieldControl, useExisting: McInput }]
                 },] },
@@ -6125,15 +6127,15 @@ var McInput = /** @class */ (function (_super) {
     ]; };
     McInput.propDecorators = {
         errorStateMatcher: [{ type: core.Input }],
+        placeholder: [{ type: core.Input }],
         disabled: [{ type: core.Input }],
         id: [{ type: core.Input }],
-        placeholder: [{ type: core.Input }],
         required: [{ type: core.Input }],
         type: [{ type: core.Input }],
         value: [{ type: core.Input }]
     };
     return McInput;
-}(_McInputMixinBase));
+}(mcInputMixinBase));
 var McInputMono = /** @class */ (function () {
     function McInputMono() {
     }
@@ -6179,9 +6181,9 @@ var MinValidator = /** @class */ (function () {
      */
     function (changes) {
         if ('min' in changes) {
-            this._createValidator();
-            if (this._onChange) {
-                this._onChange();
+            this.createValidator();
+            if (this.onChange) {
+                this.onChange();
             }
         }
     };
@@ -6193,7 +6195,7 @@ var MinValidator = /** @class */ (function () {
      * @param {?} c
      * @return {?}
      */
-    function (c) { return this._validator(c); };
+    function (c) { return this.validator(c); };
     /**
      * @param {?} fn
      * @return {?}
@@ -6202,16 +6204,16 @@ var MinValidator = /** @class */ (function () {
      * @param {?} fn
      * @return {?}
      */
-    function (fn) { this._onChange = fn; };
+    function (fn) { this.onChange = fn; };
     /**
      * @private
      * @return {?}
      */
-    MinValidator.prototype._createValidator = /**
+    MinValidator.prototype.createValidator = /**
      * @private
      * @return {?}
      */
-    function () { this._validator = forms.Validators.min(parseInt(this.min, 10)); };
+    function () { this.validator = forms.Validators.min(parseInt(this.min, 10)); };
     MinValidator.decorators = [
         { type: core.Directive, args: [{
                     selector: '[min][formControlName],[min][formControl],[min][ngModel]',
@@ -6252,9 +6254,9 @@ var MaxValidator = /** @class */ (function () {
      */
     function (changes) {
         if ('max' in changes) {
-            this._createValidator();
-            if (this._onChange) {
-                this._onChange();
+            this.createValidator();
+            if (this.onChange) {
+                this.onChange();
             }
         }
     };
@@ -6266,7 +6268,7 @@ var MaxValidator = /** @class */ (function () {
      * @param {?} c
      * @return {?}
      */
-    function (c) { return this._validator(c); };
+    function (c) { return this.validator(c); };
     /**
      * @param {?} fn
      * @return {?}
@@ -6275,16 +6277,16 @@ var MaxValidator = /** @class */ (function () {
      * @param {?} fn
      * @return {?}
      */
-    function (fn) { this._onChange = fn; };
+    function (fn) { this.onChange = fn; };
     /**
      * @private
      * @return {?}
      */
-    MaxValidator.prototype._createValidator = /**
+    MaxValidator.prototype.createValidator = /**
      * @private
      * @return {?}
      */
-    function () { this._validator = forms.Validators.max(parseInt(this.max, 10)); };
+    function () { this.validator = forms.Validators.max(parseInt(this.max, 10)); };
     MaxValidator.decorators = [
         { type: core.Directive, args: [{
                     selector: '[max][formControlName],[max][formControl],[max][ngModel]',
@@ -31379,7 +31381,7 @@ exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
 exports.McInputBase = McInputBase;
-exports._McInputMixinBase = _McInputMixinBase;
+exports.mcInputMixinBase = mcInputMixinBase;
 exports.McNumberInput = McNumberInput;
 exports.McInput = McInput;
 exports.McInputMono = McInputMono;
@@ -31402,11 +31404,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵe26 = CssUnitPipe;
-exports.ɵa26 = McModalControlService;
-exports.ɵc26 = McModalBody;
-exports.ɵd26 = McModalFooter;
-exports.ɵb26 = McModalTitle;
+exports.ɵe28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
+exports.ɵc28 = McModalBody;
+exports.ɵd28 = McModalFooter;
+exports.ɵb28 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;

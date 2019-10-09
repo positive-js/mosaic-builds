@@ -13,7 +13,7 @@ export declare class McInputBase {
     ngControl: NgControl;
     constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
-export declare const _McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase;
+export declare const mcInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase;
 export declare class McNumberInput implements McFormFieldNumberControl<any> {
     private _platform;
     private _elementRef;
@@ -45,9 +45,9 @@ export declare class McNumberInput implements McFormFieldNumberControl<any> {
      * @docs-private
      */
     readonly stateChanges: Subject<void>;
-    private readonly _host;
+    private readonly host;
     constructor(_platform: Platform, _elementRef: ElementRef, _model: NgModel, step: string, bigStep: string, min: string, max: string);
-    _focusChanged(isFocused: boolean): void;
+    focusChanged(isFocused: boolean): void;
     onKeyDown(event: KeyboardEvent): void;
     onPaste(event: any): void;
     stepUp(step: number): void;
@@ -57,7 +57,7 @@ export declare class McNumberInput implements McFormFieldNumberControl<any> {
     private isFloat;
     private isInt;
 }
-export declare class McInput extends _McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState {
+export declare class McInput extends mcInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState {
     protected _elementRef: ElementRef;
     ngControl: NgControl;
     /** An object used to control when error messages are shown. */
@@ -81,36 +81,36 @@ export declare class McInput extends _McInputMixinBase implements McFormFieldCon
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
+    placeholder: string;
+    protected uid: string;
+    protected previousNativeValue: any;
+    protected neverEmptyInputTypes: string[];
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
     disabled: boolean;
+    protected _disabled: boolean;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     id: string;
-    /**
-     * Implemented as part of McFormFieldControl.
-     * @docs-private
-     */
-    placeholder: string;
+    protected _id: string;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     required: boolean;
+    protected _required: boolean;
     /** Input type of the element. */
     type: string;
+    protected _type: string;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     value: string;
-    protected _uid: string;
-    protected _previousNativeValue: any;
-    protected _disabled: boolean;
-    protected _id: string;
-    protected _required: boolean;
-    protected _type: string;
-    protected _neverEmptyInputTypes: string[];
     private _inputValueAccessor;
     constructor(_elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any);
     ngOnChanges(): void;
@@ -119,8 +119,8 @@ export declare class McInput extends _McInputMixinBase implements McFormFieldCon
     /** Focuses the input. */
     focus(): void;
     /** Callback for the cases where the focused state of the input changes. */
-    _focusChanged(isFocused: boolean): void;
-    _onInput(): void;
+    focusChanged(isFocused: boolean): void;
+    onInput(): void;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -132,13 +132,13 @@ export declare class McInput extends _McInputMixinBase implements McFormFieldCon
      */
     onContainerClick(): void;
     /** Does some manual dirty checking on the native input `value` property. */
-    protected _dirtyCheckNativeValue(): void;
+    protected dirtyCheckNativeValue(): void;
     /** Make sure the input is a supported type. */
-    protected _validateType(): void;
+    protected validateType(): void;
     /** Checks whether the input type is one of the types that are never empty. */
-    protected _isNeverEmpty(): boolean;
+    protected isNeverEmpty(): boolean;
     /** Checks whether the input is invalid based on the native validation. */
-    protected _isBadInput(): boolean;
+    protected isBadInput(): boolean;
 }
 export declare class McInputMono {
 }
