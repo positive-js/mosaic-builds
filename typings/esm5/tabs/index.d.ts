@@ -2,7 +2,7 @@
  * Generated bundle index. Do not edit.
  */
 export * from './public-api';
-export { McTabBase as ɵd16, mcTabMixinBase as ɵe16 } from './tab';
-export { McTabHeaderBase as ɵa16 } from './tab-header';
-export { McTabLabelWrapperBase as ɵb16, mcTabLabelWrapperMixinBase as ɵc16 } from './tab-label-wrapper';
-export { McTabLinkBase as ɵh16, McTabNavBase as ɵf16, mcTabLinkMixinBase as ɵi16, mcTabNavMixinBase as ɵg16 } from './tab-nav-bar/tab-nav-bar';
+export { McTabBase as ɵd15, mcTabMixinBase as ɵe15 } from './tab';
+export { McTabHeaderBase as ɵa15 } from './tab-header';
+export { McTabLabelWrapperBase as ɵb15, mcTabLabelWrapperMixinBase as ɵc15 } from './tab-label-wrapper';
+export { McTabLinkBase as ɵh15, McTabNavBase as ɵf15, mcTabLinkMixinBase as ɵi15, mcTabNavMixinBase as ɵg15 } from './tab-nav-bar/tab-nav-bar';
