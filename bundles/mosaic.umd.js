@@ -1884,11 +1884,13 @@ var McCleaner = /** @class */ (function () {
  * @abstract
  * @template T
  */
+// tslint:disable-next-line:naming-convention
 var   /**
  * An interface which allows a control to work inside of a `MсFormField`.
  * @abstract
  * @template T
  */
+// tslint:disable-next-line:naming-convention
 McFormFieldControl = /** @class */ (function () {
     function McFormFieldControl() {
     }
@@ -1915,11 +1917,13 @@ function getMcFormFieldMissingControlError() {
  * @abstract
  * @template T
  */
+// tslint:disable-next-line:naming-convention
 var   /**
  * An interface which allows a control to work inside of a `MсFormField`.
  * @abstract
  * @template T
  */
+// tslint:disable-next-line:naming-convention
 McFormFieldNumberControl = /** @class */ (function () {
     function McFormFieldNumberControl() {
     }
@@ -2034,21 +2038,23 @@ var McSuffix = /** @class */ (function () {
 /** @type {?} */
 var nextUniqueId$1 = 0;
 var McFormFieldBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McFormFieldBase(_elementRef) {
         this._elementRef = _elementRef;
     }
     return McFormFieldBase;
 }());
 /** @type {?} */
-var _McFormFieldMixinBase = mixinColor(McFormFieldBase);
+var mcFormFieldMixinBase = mixinColor(McFormFieldBase);
 var McFormField = /** @class */ (function (_super) {
     __extends(McFormField, _super);
+    // tslint:disable-next-line:naming-convention
     function McFormField(_elementRef, _changeDetectorRef) {
         var _this = _super.call(this, _elementRef) || this;
         _this._elementRef = _elementRef;
         _this._changeDetectorRef = _changeDetectorRef;
         // Unique id for the internal form field label.
-        _this._labelId = "mc-form-field-label-" + nextUniqueId$1++;
+        _this.labelId = "mc-form-field-label-" + nextUniqueId$1++;
         _this.hovered = false;
         _this.canCleanerClearByEsc = true;
         return _this;
@@ -2061,25 +2067,25 @@ var McFormField = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        this._validateControlChild();
-        if (this._control.controlType) {
+        this.validateControlChild();
+        if (this.control.controlType) {
             this._elementRef.nativeElement.classList
-                .add("mc-form-field-type-" + this._control.controlType);
-            if (this._numberControl && this.hasStepper) {
-                this._stepper.stepUp.subscribe(this.onStepUp.bind(this));
-                this._stepper.stepDown.subscribe(this.onStepDown.bind(this));
+                .add("mc-form-field-type-" + this.control.controlType);
+            if (this.numberControl && this.hasStepper) {
+                this.stepper.stepUp.subscribe(this.onStepUp.bind(this));
+                this.stepper.stepDown.subscribe(this.onStepDown.bind(this));
             }
         }
         // Subscribe to changes in the child control state in order to update the form field UI.
-        this._control.stateChanges.pipe(operators.startWith())
+        this.control.stateChanges.pipe(operators.startWith())
             .subscribe((/**
          * @return {?}
          */
         function () {
             _this._changeDetectorRef.markForCheck();
         }));
-        if (this._numberControl) {
-            this._numberControl.stateChanges.pipe(operators.startWith())
+        if (this.numberControl) {
+            this.numberControl.stateChanges.pipe(operators.startWith())
                 .subscribe((/**
              * @return {?}
              */
@@ -2089,7 +2095,7 @@ var McFormField = /** @class */ (function (_super) {
         }
         // Run change detection if the value changes.
         /** @type {?} */
-        var valueChanges = this._control.ngControl && this._control.ngControl.valueChanges || rxjs.EMPTY;
+        var valueChanges = this.control.ngControl && this.control.ngControl.valueChanges || rxjs.EMPTY;
         rxjs.merge(valueChanges)
             .subscribe((/**
          * @return {?}
@@ -2103,7 +2109,7 @@ var McFormField = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this._validateControlChild();
+        this.validateControlChild();
     };
     /**
      * @return {?}
@@ -2125,9 +2131,9 @@ var McFormField = /** @class */ (function (_super) {
      */
     function ($event) {
         $event.stopPropagation();
-        if (this._control && this._control.ngControl) {
-            this._control.ngControl.reset();
-            this._control.focus();
+        if (this.control && this.control.ngControl) {
+            this.control.ngControl.reset();
+            this.control.focus();
         }
     };
     /**
@@ -2139,8 +2145,8 @@ var McFormField = /** @class */ (function (_super) {
      * @return {?}
      */
     function ($event) {
-        if (this._control.onContainerClick) {
-            this._control.onContainerClick($event);
+        if (this.control.onContainerClick) {
+            this.control.onContainerClick($event);
         }
     };
     /**
@@ -2153,9 +2159,9 @@ var McFormField = /** @class */ (function (_super) {
      */
     function (event) {
         // tslint:disable-next-line:deprecation
-        if (this.canCleanerClearByEsc && event.keyCode === keycodes.ESCAPE && this._control.focused && this.hasCleaner) {
-            if (this._control && this._control.ngControl) {
-                this._control.ngControl.reset();
+        if (this.canCleanerClearByEsc && event.keyCode === keycodes.ESCAPE && this.control.focused && this.hasCleaner) {
+            if (this.control && this.control.ngControl) {
+                this.control.ngControl.reset();
             }
             event.preventDefault();
         }
@@ -2181,8 +2187,8 @@ var McFormField = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        if (this._numberControl) {
-            this._numberControl.stepUp(this._numberControl.step);
+        if (this.numberControl) {
+            this.numberControl.stepUp(this.numberControl.step);
         }
     };
     /**
@@ -2192,8 +2198,8 @@ var McFormField = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        if (this._numberControl) {
-            this._numberControl.stepDown(this._numberControl.step);
+        if (this.numberControl) {
+            this.numberControl.stepDown(this.numberControl.step);
         }
     };
     /**
@@ -2219,14 +2225,14 @@ var McFormField = /** @class */ (function (_super) {
      * @param {?} prop
      * @return {?}
      */
-    McFormField.prototype._shouldForward = /**
+    McFormField.prototype.shouldForward = /**
      * Determines whether a class from the NgControl should be forwarded to the host element.
      * @param {?} prop
      * @return {?}
      */
     function (prop) {
         /** @type {?} */
-        var ngControl = this._control ? this._control.ngControl : null;
+        var ngControl = this.control ? this.control.ngControl : null;
         return ngControl && ngControl[prop];
     };
     /** Throws an error if the form field's control is missing. */
@@ -2235,13 +2241,13 @@ var McFormField = /** @class */ (function (_super) {
      * @protected
      * @return {?}
      */
-    McFormField.prototype._validateControlChild = /**
+    McFormField.prototype.validateControlChild = /**
      * Throws an error if the form field's control is missing.
      * @protected
      * @return {?}
      */
     function () {
-        if (!this._control) {
+        if (!this.control) {
             throw getMcFormFieldMissingControlError();
         }
     };
@@ -2250,7 +2256,7 @@ var McFormField = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this._hint && this._hint.length > 0;
+            return this.hint && this.hint.length > 0;
         },
         enumerable: true,
         configurable: true
@@ -2260,7 +2266,7 @@ var McFormField = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this._suffix && this._suffix.length > 0;
+            return this.suffix && this.suffix.length > 0;
         },
         enumerable: true,
         configurable: true
@@ -2270,7 +2276,7 @@ var McFormField = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this._prefix && this._prefix.length > 0;
+            return this.prefix && this.prefix.length > 0;
         },
         enumerable: true,
         configurable: true
@@ -2280,7 +2286,7 @@ var McFormField = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this._cleaner && this._cleaner.length > 0;
+            return this.cleaner && this.cleaner.length > 0;
         },
         enumerable: true,
         configurable: true
@@ -2290,7 +2296,7 @@ var McFormField = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return !!this._stepper;
+            return !!this.stepper;
         },
         enumerable: true,
         configurable: true
@@ -2301,9 +2307,9 @@ var McFormField = /** @class */ (function (_super) {
          */
         function () {
             return this.hasCleaner &&
-                this._control &&
-                this._control.ngControl
-                ? this._control.ngControl.value && !this._control.disabled
+                this.control &&
+                this.control.ngControl
+                ? this.control.ngControl.value && !this.control.disabled
                 : false;
         },
         enumerable: true,
@@ -2314,7 +2320,7 @@ var McFormField = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this._control && this._control.disabled;
+            return this.control && this.control.disabled;
         },
         enumerable: true,
         configurable: true
@@ -2324,9 +2330,9 @@ var McFormField = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this._numberControl &&
+            return this.numberControl &&
                 !this.disabled &&
-                (this._numberControl.focused ||
+                (this.numberControl.focused ||
                     this.hovered);
         },
         enumerable: true,
@@ -2343,20 +2349,20 @@ var McFormField = /** @class */ (function (_super) {
                     styles: [".mc-form-field{position:relative;display:inline-block;width:100%;border-radius:3px}.mc-form-field:hover{z-index:1}.mc-form-field.mc-focused{z-index:2}.mc-form-field__hint{margin-top:4px}.mc-form-field__container{position:relative;border-width:1px;border-style:solid;border-color:initial;border-radius:3px}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:32px}.mc-form-field_has-prefix .mc-input{padding-left:32px}mc-cleaner{position:absolute;display:flex;flex-direction:row;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px;cursor:pointer}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:32px}mc-stepper .mc-stepper-step-down,mc-stepper .mc-stepper-step-up{cursor:pointer;width:32px;text-align:center}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)} .mc-input{background:0 0;padding:0;margin:0;border:none;outline:0;box-sizing:border-box;padding:5px 16px;width:100%;min-height:30px}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset} .mc-textarea{background:0 0;margin:0;border:none;outline:0;resize:none;overflow:auto;width:100%;box-sizing:border-box;padding:5px 16px}.mc-textarea{display:inline-block;-webkit-appearance:none;vertical-align:bottom}.mc-textarea:not(.mc-textarea-resizable){box-sizing:border-box;overflow-y:hidden}.mc-textarea.mc-textarea-resizable{resize:vertical;min-height:50px}.mc-textarea:invalid{box-shadow:unset}"],
                     host: {
                         class: 'mc-form-field',
-                        '[class.mc-form-field_invalid]': '_control.errorState',
-                        '[class.mc-disabled]': '_control.disabled',
+                        '[class.mc-form-field_invalid]': 'control.errorState',
+                        '[class.mc-disabled]': 'control.disabled',
                         '[class.mc-form-field_has-prefix]': 'hasPrefix',
                         '[class.mc-form-field_has-suffix]': 'hasSuffix',
                         '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
                         '[class.mc-form-field_has-stepper]': 'canShowStepper',
-                        '[class.mc-focused]': '_control.focused',
-                        '[class.ng-untouched]': '_shouldForward("untouched")',
-                        '[class.ng-touched]': '_shouldForward("touched")',
-                        '[class.ng-pristine]': '_shouldForward("pristine")',
-                        '[class.ng-dirty]': '_shouldForward("dirty")',
-                        '[class.ng-valid]': '_shouldForward("valid")',
-                        '[class.ng-invalid]': '_shouldForward("invalid")',
-                        '[class.ng-pending]': '_shouldForward("pending")',
+                        '[class.mc-focused]': 'control.focused',
+                        '[class.ng-untouched]': 'shouldForward("untouched")',
+                        '[class.ng-touched]': 'shouldForward("touched")',
+                        '[class.ng-pristine]': 'shouldForward("pristine")',
+                        '[class.ng-dirty]': 'shouldForward("dirty")',
+                        '[class.ng-valid]': 'shouldForward("valid")',
+                        '[class.ng-invalid]': 'shouldForward("invalid")',
+                        '[class.ng-pending]': 'shouldForward("pending")',
                         '(keydown)': 'onKeyDown($event)',
                         '(mouseenter)': 'onHoverChanged(true)',
                         '(mouseleave)': 'onHoverChanged(false)'
@@ -2372,17 +2378,17 @@ var McFormField = /** @class */ (function (_super) {
         { type: core.ChangeDetectorRef }
     ]; };
     McFormField.propDecorators = {
-        _control: [{ type: core.ContentChild, args: [McFormFieldControl, { static: false },] }],
-        _numberControl: [{ type: core.ContentChild, args: [McFormFieldNumberControl, { static: false },] }],
-        _stepper: [{ type: core.ContentChild, args: [McStepper, { static: false },] }],
-        _hint: [{ type: core.ContentChildren, args: [McHint,] }],
-        _suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
-        _prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
-        _cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }],
+        control: [{ type: core.ContentChild, args: [McFormFieldControl, { static: false },] }],
+        numberControl: [{ type: core.ContentChild, args: [McFormFieldNumberControl, { static: false },] }],
+        stepper: [{ type: core.ContentChild, args: [McStepper, { static: false },] }],
+        hint: [{ type: core.ContentChildren, args: [McHint,] }],
+        suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
+        prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
+        cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }],
         connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer', { static: true },] }]
     };
     return McFormField;
-}(_McFormFieldMixinBase));
+}(mcFormFieldMixinBase));
 var McFormFieldWithoutBorders = /** @class */ (function () {
     function McFormFieldWithoutBorders() {
     }
@@ -3344,7 +3350,7 @@ var McAutocompleteTrigger = /** @class */ (function () {
         // If it's used within a `MatFormField`, we should set it through the property so it can go
         // through change detection.
         if (this.formField) {
-            this.formField._control.value = inputValue;
+            this.formField.control.value = inputValue;
         }
         else {
             this.elementRef.nativeElement.value = inputValue;
@@ -31349,7 +31355,7 @@ exports.NESTED_PANEL_TOP_PADDING = NESTED_PANEL_TOP_PADDING;
 exports.McDropdownTrigger = McDropdownTrigger;
 exports.McFormFieldModule = McFormFieldModule;
 exports.McFormFieldBase = McFormFieldBase;
-exports._McFormFieldMixinBase = _McFormFieldMixinBase;
+exports.mcFormFieldMixinBase = mcFormFieldMixinBase;
 exports.McFormField = McFormField;
 exports.McFormFieldWithoutBorders = McFormFieldWithoutBorders;
 exports.McFormFieldControl = McFormFieldControl;
@@ -31396,11 +31402,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵe28 = CssUnitPipe;
-exports.ɵa28 = McModalControlService;
-exports.ɵc28 = McModalBody;
-exports.ɵd28 = McModalFooter;
-exports.ɵb28 = McModalTitle;
+exports.ɵe27 = CssUnitPipe;
+exports.ɵa27 = McModalControlService;
+exports.ɵc27 = McModalBody;
+exports.ɵd27 = McModalFooter;
+exports.ɵb27 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -31454,15 +31460,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31537,13 +31543,13 @@ exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
 exports.McSidebarClosed = McSidebarClosed;
 exports.McSidebar = McSidebar;
-exports.ɵb20 = mcSidepanelAnimations;
-exports.ɵa20 = mcSidepanelTransformAnimation;
-exports.ɵg20 = McSidepanelActions;
-exports.ɵe20 = McSidepanelBody;
-exports.ɵc20 = McSidepanelClose;
-exports.ɵf20 = McSidepanelFooter;
-exports.ɵd20 = McSidepanelHeader;
+exports.ɵb21 = mcSidepanelAnimations;
+exports.ɵa21 = mcSidepanelTransformAnimation;
+exports.ɵg21 = McSidepanelActions;
+exports.ɵe21 = McSidepanelBody;
+exports.ɵc21 = McSidepanelClose;
+exports.ɵf21 = McSidepanelFooter;
+exports.ɵd21 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;

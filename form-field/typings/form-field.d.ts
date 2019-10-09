@@ -12,19 +12,19 @@ export declare class McFormFieldBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase;
-export declare class McFormField extends _McFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
+export declare const mcFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase;
+export declare class McFormField extends mcFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
     _elementRef: ElementRef;
     private _changeDetectorRef;
-    _control: McFormFieldControl<any>;
-    _numberControl: McFormFieldNumberControl<any>;
-    _stepper: McStepper;
-    _hint: QueryList<McHint>;
-    _suffix: QueryList<McSuffix>;
-    _prefix: QueryList<McPrefix>;
-    _cleaner: QueryList<McCleaner>;
+    control: McFormFieldControl<any>;
+    numberControl: McFormFieldNumberControl<any>;
+    stepper: McStepper;
+    hint: QueryList<McHint>;
+    suffix: QueryList<McSuffix>;
+    prefix: QueryList<McPrefix>;
+    cleaner: QueryList<McCleaner>;
     connectionContainerRef: ElementRef;
-    _labelId: string;
+    labelId: string;
     hovered: boolean;
     canCleanerClearByEsc: boolean;
     constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef);
@@ -43,9 +43,9 @@ export declare class McFormField extends _McFormFieldMixinBase implements AfterC
      */
     getConnectedOverlayOrigin(): ElementRef;
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
-    _shouldForward(prop: keyof NgControl): boolean;
+    shouldForward(prop: keyof NgControl): boolean;
     /** Throws an error if the form field's control is missing. */
-    protected _validateControlChild(): void;
+    protected validateControlChild(): void;
     readonly hasHint: boolean;
     readonly hasSuffix: boolean;
     readonly hasPrefix: boolean;
