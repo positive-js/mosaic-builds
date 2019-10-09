@@ -22675,7 +22675,7 @@ var McTagInput = /** @class */ (function () {
          * Unique id for the input.
          */
         this.id = "mc-tag-list-input-" + nextUniqueId$1$1++;
-        this._addOnBlur = false;
+        this._addOnBlur = true;
         this._disabled = false;
         this.countOfSymbolsForUpdateWidth = 3;
         // tslint:disable-next-line: no-unnecessary-type-assertion
@@ -31365,10 +31365,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports._McIconMixinBase = _McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc25 = MAX_VALIDATOR;
-exports.ɵa25 = MIN_VALIDATOR;
-exports.ɵd25 = MaxValidator;
-exports.ɵb25 = MinValidator;
+exports.ɵc23 = MAX_VALIDATOR;
+exports.ɵa23 = MIN_VALIDATOR;
+exports.ɵd23 = MaxValidator;
+exports.ɵb23 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -31570,7 +31570,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

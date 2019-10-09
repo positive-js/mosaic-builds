@@ -1534,7 +1534,7 @@ class McTagInput {
          * Unique id for the input.
          */
         this.id = `mc-tag-list-input-${nextUniqueId$1++}`;
-        this._addOnBlur = false;
+        this._addOnBlur = true;
         this._disabled = false;
         this.countOfSymbolsForUpdateWidth = 3;
         // tslint:disable-next-line: no-unnecessary-type-assertion
