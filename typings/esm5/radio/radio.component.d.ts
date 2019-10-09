@@ -18,14 +18,14 @@ export declare class McRadioChange {
 /** @docs-private */
 export declare class McRadioGroupBase {
 }
-export declare const _McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase;
+export declare const mcRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase;
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
  * allows it to support [(ngModel)] and ngControl.
  * @docs-private
  */
 export declare const MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any;
-export declare class McRadioGroup extends _McRadioGroupMixinBase implements AfterContentInit, ControlValueAccessor, CanDisable {
+export declare class McRadioGroup extends mcRadioGroupMixinBase implements AfterContentInit, ControlValueAccessor, CanDisable {
     private readonly _changeDetector;
     /** Name of the radio button group. All radio buttons inside this group will use this name. */
     name: string;
@@ -46,7 +46,7 @@ export declare class McRadioGroup extends _McRadioGroupMixinBase implements Afte
      */
     readonly change: EventEmitter<McRadioChange>;
     /** Child radio buttons. */
-    _radios: QueryList<McRadioButton>;
+    radios: QueryList<McRadioButton>;
     /**
      * Selected value for group. Should equal the value of the selected radio button if there *is*
      * a corresponding radio button with a matching value. If there is *not* such a corresponding
@@ -59,7 +59,7 @@ export declare class McRadioGroup extends _McRadioGroupMixinBase implements Afte
     /** The currently selected radio button. Should match value. */
     private _selected;
     /** Whether the `value` has been set to its initial value. */
-    private _isInitialized;
+    private isInitialized;
     /** Whether the labels should appear after or before the radio-buttons. Defaults to 'after' */
     private _labelPosition;
     /** Whether the radio group is disabled. */
@@ -119,8 +119,8 @@ export declare class McRadioButtonBase {
     disabled: boolean;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McRadioButtonMixinBase: CanColorCtor & HasTabIndexCtor & typeof McRadioButtonBase;
-export declare class McRadioButton extends _McRadioButtonMixinBase implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
+export declare const mcRadioButtonMixinBase: CanColorCtor & HasTabIndexCtor & typeof McRadioButtonBase;
+export declare class McRadioButton extends mcRadioButtonMixinBase implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
     private readonly _changeDetector;
     private focusMonitor;
     private readonly _radioDispatcher;
@@ -134,20 +134,6 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     required: boolean;
     /** Whether the label should appear after or before the radio button. Defaults to 'after' */
     labelPosition: 'before' | 'after';
-    private _labelPosition;
-    private readonly _uniqueId;
-    /** The unique ID for the radio button. */
-    id: string;
-    /** ID of the native input element inside `<mc-radio-button>` */
-    readonly inputId: string;
-    /** Whether this radio is checked. */
-    private _checked;
-    /** Whether this radio is disabled. */
-    private _disabled;
-    /** Whether this radio is required. */
-    private _required;
-    /** Value assigned to this radio. */
-    private _value;
     /** Analog to HTML 'name' attribute used to group radios for unique selection. */
     name: string;
     /** Used to set the 'aria-label' attribute on the underlying input element. */
@@ -157,7 +143,7 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     /** The 'aria-describedby' attribute is read after the element's label and field type. */
     ariaDescribedby: string;
     /** The native `<input type=radio>` element */
-    _inputElement: ElementRef;
+    inputElement: ElementRef;
     /**
      * Event emitted when the checked state of this radio button changes.
      * Change events are only emitted when the value changes due to user interaction with
@@ -167,6 +153,20 @@ export declare class McRadioButton extends _McRadioButtonMixinBase implements On
     /** The parent radio group. May or may not be present. */
     radioGroup: McRadioGroup;
     isFocused: boolean;
+    /** The unique ID for the radio button. */
+    id: string;
+    /** ID of the native input element inside `<mc-radio-button>` */
+    readonly inputId: string;
+    private _labelPosition;
+    private readonly uniqueId;
+    /** Whether this radio is checked. */
+    private _checked;
+    /** Whether this radio is disabled. */
+    private _disabled;
+    /** Whether this radio is required. */
+    private _required;
+    /** Value assigned to this radio. */
+    private _value;
     constructor(radioGroup: McRadioGroup, elementRef: ElementRef, _changeDetector: ChangeDetectorRef, focusMonitor: FocusMonitor, _radioDispatcher: UniqueSelectionDispatcher);
     ngOnInit(): void;
     ngAfterViewInit(): void;
