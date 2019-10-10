@@ -35,9 +35,9 @@ export { McTimepickerModule, TimeParts, TimeFormats, TIMEFORMAT_PLACEHOLDERS, DE
 export { ɵa2, McSidebarModule, SidebarPositions, McSidebarOpened, McSidebarClosed, McSidebar } from '@ptsecurity/mosaic/sidebar';
 export { ɵb20, ɵa20, ɵg20, ɵe20, ɵc20, ɵf20, ɵd20, McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef } from '@ptsecurity/mosaic/sidepanel';
 export { McSplitterModule, McGutterDirective, McSplitterComponent, McSplitterAreaDirective } from '@ptsecurity/mosaic/splitter';
-export { McToggleModule, McToggleBase, _McToggleMixinBase, McToggleChange, McToggleComponent } from '@ptsecurity/mosaic/toggle';
+export { McToggleModule, McToggleBase, mcToggleMixinBase, McToggleChange, McToggleComponent } from '@ptsecurity/mosaic/toggle';
 export { McToolTipModule, mcTooltipScrollStrategyFactory, getMcTooltipInvalidPositionError, McTooltipComponent, MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McTooltip } from '@ptsecurity/mosaic/tooltip';
-export { ɵa23, McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, _McVerticalNavbarMixinBase, McVerticalNavbarItem } from '@ptsecurity/mosaic/vertical-navbar';
+export { ɵa22, McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, _McVerticalNavbarMixinBase, McVerticalNavbarItem } from '@ptsecurity/mosaic/vertical-navbar';
 
 /**
  * @fileoverview added by tsickle
