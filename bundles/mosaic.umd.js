@@ -12871,7 +12871,7 @@ var McModalControlService = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.parentService ? this.parentService.afterAllClose : (/** @type {?} */ (this.rootAfterAllClose));
+            return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose;
         },
         enumerable: true,
         configurable: true
@@ -12884,7 +12884,7 @@ var McModalControlService = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.parentService ? this.parentService.openModals : (/** @type {?} */ (this.rootOpenModals));
+            return this.parentService ? this.parentService.openModals : this.rootOpenModals;
         },
         enumerable: true,
         configurable: true
@@ -12999,12 +12999,14 @@ var McModalControlService = /** @class */ (function () {
  * @abstract
  * @template T, R
  */
+// tslint:disable-next-line:naming-convention
 var   /**
  * API class that public to users to handle the modal instance.
  * McModalRef is aim to avoid accessing to the modal instance directly by users.
  * @abstract
  * @template T, R
  */
+// tslint:disable-next-line:naming-convention
 McModalRef = /** @class */ (function () {
     function McModalRef() {
     }
@@ -13048,7 +13050,8 @@ var ModalUtil = /** @class */ (function () {
     };
     return ModalUtil;
 }());
-var ModalUtil$1 = new ModalUtil(document);
+/** @type {?} */
+var modalUtilObject = new ModalUtil(document);
 
 /**
  * @fileoverview added by tsickle
@@ -13072,23 +13075,28 @@ var McModalComponent = /** @class */ (function (_super) {
         _this.modalControl = modalControl;
         _this.changeDetector = changeDetector;
         _this.document = document;
-        // tslint:disable-next-line:no-any
         _this.mcModalType = 'default';
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcVisible = false;
         _this.mcVisibleChange = new core.EventEmitter();
         _this.mcZIndex = 1000;
         _this.mcWidth = 480;
         _this.mcCloseByESC = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcClosable = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcMask = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcMaskClosable = true;
         // Trigger when modal open(visible) after animations
         _this.mcAfterOpen = new core.EventEmitter();
         // Trigger when modal leave-animation over
         _this.mcAfterClose = new core.EventEmitter();
         _this.mcOkType = 'primary';
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcOkLoading = false;
         _this.mcOnOk = new core.EventEmitter();
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcCancelLoading = false;
         _this.mcOnCancel = new core.EventEmitter();
         // The origin point that animation based on
@@ -13252,7 +13260,7 @@ var McModalComponent = /** @class */ (function (_super) {
             this.mcFooter = this.formatModalButtons((/** @type {?} */ (this.mcFooter)));
         }
         if (this.isComponent(this.mcComponent)) {
-            this.createDynamicComponent((/** @type {?} */ (this.mcComponent)));
+            this.createDynamicComponent(this.mcComponent);
         }
         // Place the modal dom to elsewhere
         this.container = typeof this.mcGetContainer === 'function' ? this.mcGetContainer() : this.mcGetContainer;
@@ -13431,14 +13439,14 @@ var McModalComponent = /** @class */ (function (_super) {
             this.onClickOkCancel('cancel');
         }
     };
-    // tslint:disable-next-line
-    // tslint:disable-next-line
+    // tslint:disable-next-line: no-reserved-keywords
+    // tslint:disable-next-line: no-reserved-keywords
     /**
      * @param {?} type
      * @return {?}
      */
     McModalComponent.prototype.isModalType = 
-    // tslint:disable-next-line
+    // tslint:disable-next-line: no-reserved-keywords
     /**
      * @param {?} type
      * @return {?}
@@ -13455,6 +13463,7 @@ var McModalComponent = /** @class */ (function (_super) {
      * @return {?}
      */
     function (event) {
+        // tslint:disable-next-line:deprecation .key isn't supported in Edge
         if (event.keyCode === keycodes.ESCAPE && this.container && (this.container instanceof overlay.OverlayRef)) {
             this.close();
             event.preventDefault();
@@ -13476,16 +13485,16 @@ var McModalComponent = /** @class */ (function (_super) {
         }
     };
     // AoT
-    // tslint:disable-next-line
+    // tslint:disable-next-line: no-reserved-keywords
     // AoT
-    // tslint:disable-next-line
+    // tslint:disable-next-line: no-reserved-keywords
     /**
      * @param {?} type
      * @return {?}
      */
     McModalComponent.prototype.onClickOkCancel = 
     // AoT
-    // tslint:disable-next-line
+    // tslint:disable-next-line: no-reserved-keywords
     /**
      * @param {?} type
      * @return {?}
@@ -13587,6 +13596,64 @@ var McModalComponent = /** @class */ (function (_super) {
     function (value) {
         return Array.isArray(value) && value.length > 0;
     };
+    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
+    // AoT
+    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
+    // AoT
+    /**
+     * @param {?} options
+     * @param {?} prop
+     * @return {?}
+     */
+    McModalComponent.prototype.getButtonCallableProp = 
+    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
+    // AoT
+    /**
+     * @param {?} options
+     * @param {?} prop
+     * @return {?}
+     */
+    function (options, prop) {
+        /** @type {?} */
+        var value = options[prop];
+        /** @type {?} */
+        var args = [];
+        if (this.contentComponentRef) {
+            args.push(this.contentComponentRef.instance);
+        }
+        return typeof value === 'function' ? value.apply(options, args) : value;
+    };
+    // On mcFooter's modal button click
+    // AoT
+    // On mcFooter's modal button click
+    // AoT
+    /**
+     * @param {?} button
+     * @return {?}
+     */
+    McModalComponent.prototype.onButtonClick = 
+    // On mcFooter's modal button click
+    // AoT
+    /**
+     * @param {?} button
+     * @return {?}
+     */
+    function (button) {
+        // Call onClick directly
+        // tslint:disable-next-line:no-inferred-empty-object-type  rule seems to be broken
+        /** @type {?} */
+        var result = this.getButtonCallableProp(button, 'onClick');
+        if (isPromise(result)) {
+            button.loading = true;
+            ((/** @type {?} */ (result))).then((/**
+             * @return {?}
+             */
+            function () { return button.loading = false; })).catch((/**
+             * @return {?}
+             */
+            function () { return button.loading = false; }));
+        }
+    };
     // Do rest things when visible state changed
     // Do rest things when visible state changed
     /**
@@ -13628,69 +13695,6 @@ var McModalComponent = /** @class */ (function (_super) {
                 _this.changeBodyOverflow();
             }
         }));
-    };
-    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
-    // AoT
-    // tslint:disable-next-line
-    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
-    // AoT
-    // tslint:disable-next-line
-    /**
-     * @param {?} options
-     * @param {?} prop
-     * @return {?}
-     */
-    McModalComponent.prototype.getButtonCallableProp = 
-    // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
-    // AoT
-    // tslint:disable-next-line
-    /**
-     * @param {?} options
-     * @param {?} prop
-     * @return {?}
-     */
-    function (options, prop) {
-        /** @type {?} */
-        var value = options[prop];
-        /** @type {?} */
-        var args = [];
-        if (this.contentComponentRef) {
-            args.push(this.contentComponentRef.instance);
-        }
-        return typeof value === 'function' ? value.apply(options, args) : value;
-    };
-    // On mcFooter's modal button click
-    // AoT
-    // tslint:disable-next-line
-    // On mcFooter's modal button click
-    // AoT
-    // tslint:disable-next-line
-    /**
-     * @param {?} button
-     * @return {?}
-     */
-    McModalComponent.prototype.onButtonClick = 
-    // On mcFooter's modal button click
-    // AoT
-    // tslint:disable-next-line
-    /**
-     * @param {?} button
-     * @return {?}
-     */
-    function (button) {
-        // Call onClick directly
-        /** @type {?} */
-        var result = this.getButtonCallableProp(button, 'onClick');
-        if (isPromise(result)) {
-            button.loading = true;
-            ((/** @type {?} */ (result))).then((/**
-             * @return {?}
-             */
-            function () { return button.loading = false; })).catch((/**
-             * @return {?}
-             */
-            function () { return button.loading = false; }));
-        }
     };
     // Change mcVisible from inside
     // Change mcVisible from inside
@@ -13831,7 +13835,7 @@ var McModalComponent = /** @class */ (function (_super) {
         /** @type {?} */
         var childInjector = core.Injector.create({
             providers: [{ provide: McModalRef, useValue: this }],
-            parent: this.viewContainer.parentInjector
+            parent: this.viewContainer.injector
         });
         this.contentComponentRef = factory.create(childInjector);
         if (this.mcComponentParams) {
@@ -13857,9 +13861,8 @@ var McModalComponent = /** @class */ (function (_super) {
         /** @type {?} */
         var modalElement = (/** @type {?} */ (this.modalContainer.nativeElement));
         /** @type {?} */
-        var lastPosition = ModalUtil$1.getLastClickPosition();
+        var lastPosition = modalUtilObject.getLastClickPosition();
         if (lastPosition) {
-            // tslint:disable-next-line
             this.transformOrigin = lastPosition.x - modalElement.offsetLeft + "px " + (lastPosition.y - modalElement.offsetTop) + "px 0px";
         }
     };
@@ -13884,7 +13887,6 @@ var McModalComponent = /** @class */ (function (_super) {
         /** @type {?} */
         var openModals = this.modalControl.openModals;
         if (openModals.length + plusNum > 0) {
-            // tslint:disable-next-line
             this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
         }
         else {
@@ -13956,7 +13958,7 @@ var McModalComponent = /** @class */ (function (_super) {
  * @return {?}
  */
 function isPromise(obj) {
-    // tslint:disable-next-line
+    // tslint:disable-next-line: no-unbound-method
     return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof ((/** @type {?} */ (obj))).then === 'function' && typeof ((/** @type {?} */ (obj))).catch === 'function';
 }
 
@@ -14064,6 +14066,7 @@ ModalBuilderForService = /** @class */ (function () {
          * @return {?}
          */
         function (event) {
+            // tslint:disable-next-line:deprecation replacement .key isn't supported in Edge
             return event.keyCode === keycodes.ESCAPE && options.mcCloseByESC;
         })))
             .subscribe((/**
@@ -14257,12 +14260,16 @@ var McModalService = /** @class */ (function () {
         if (options === void 0) { options = {}; }
         return this.simpleConfirm(options, 'success');
     };
+    // tslint:disable-next-line: no-reserved-keywords
+    // tslint:disable-next-line: no-reserved-keywords
     /**
      * @template T
      * @param {?=} options
      * @return {?}
      */
-    McModalService.prototype.delete = /**
+    McModalService.prototype.delete = 
+    // tslint:disable-next-line: no-reserved-keywords
+    /**
      * @template T
      * @param {?=} options
      * @return {?}
@@ -31402,11 +31409,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵe27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
-exports.ɵc27 = McModalBody;
-exports.ɵd27 = McModalFooter;
-exports.ɵb27 = McModalTitle;
+exports.ɵe28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
+exports.ɵc28 = McModalBody;
+exports.ɵd28 = McModalFooter;
+exports.ɵb28 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -31460,15 +31467,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd16 = McTabBase;
-exports.ɵe16 = mcTabMixinBase;
-exports.ɵa16 = McTabHeaderBase;
-exports.ɵb16 = McTabLabelWrapperBase;
-exports.ɵc16 = mcTabLabelWrapperMixinBase;
-exports.ɵh16 = McTabLinkBase;
-exports.ɵf16 = McTabNavBase;
-exports.ɵi16 = mcTabLinkMixinBase;
-exports.ɵg16 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31576,7 +31583,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa24 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

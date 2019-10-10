@@ -86,9 +86,9 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     isTemplateRef(value: {}): boolean;
     isComponent(value: {}): boolean;
     isModalButtons(value: {}): boolean;
-    private handleVisibleStateChange;
     getButtonCallableProp(options: IModalButtonOptions<T>, prop: string): {};
     onButtonClick(button: IModalButtonOptions<T>): void;
+    private handleVisibleStateChange;
     private changeVisibleFromInside;
     private changeAnimationState;
     private animateTo;

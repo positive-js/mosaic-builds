@@ -9,5 +9,4 @@ export declare class ModalUtil {
     getLastClickPosition(): IClickPosition;
     listenDocumentClick(): void;
 }
-declare const _default: ModalUtil;
-export default _default;
+export declare const modalUtilObject: ModalUtil;
