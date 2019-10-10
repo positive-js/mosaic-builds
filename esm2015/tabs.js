@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { Directive, TemplateRef, ChangeDetectionStrategy, Component, ContentChild, Input, ViewChild, ViewContainerRef, ViewEncapsulation, ChangeDetectorRef, Inject, Output, EventEmitter, ElementRef, Optional, ComponentFactoryResolver, forwardRef, ContentChildren, NgZone, InjectionToken, Attribute, NgModule } from '@angular/core';
-import { CdkPortal, TemplatePortal, CdkPortalOutlet, PortalHostDirective, PortalModule } from '@angular/cdk/portal';
+import { CdkPortal, TemplatePortal, CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
 import { mixinDisabled, mixinColor, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
 import { Subject, Subscription, merge, of } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -367,7 +367,7 @@ McTabBody.propDecorators = {
     beforeCentering: [{ type: Output }],
     afterLeavingCenter: [{ type: Output }],
     onCentered: [{ type: Output }],
-    portalHost: [{ type: ViewChild, args: [PortalHostDirective, { static: false },] }],
+    portalHost: [{ type: ViewChild, args: [CdkPortalOutlet, { static: false },] }],
     content: [{ type: Input, args: ['content',] }],
     origin: [{ type: Input }],
     animationDuration: [{ type: Input }]
@@ -603,7 +603,7 @@ class McTabHeader extends McTabHeaderBase {
      * @return {?}
      */
     get focusIndex() {
-        return this.keyManager ? (/** @type {?} */ (this.keyManager.activeItemIndex)) : 0;
+        return this.keyManager ? this.keyManager.activeItemIndex : 0;
     }
     /**
      * When the focus index is set, we must manually send focus to the correct label
@@ -667,6 +667,7 @@ class McTabHeader extends McTabHeaderBase {
      * @return {?}
      */
     handleKeydown(event) {
+        // tslint:disable-next-line: deprecation
         switch (event.keyCode) {
             case HOME:
                 this.keyManager.setFirstItemActive();

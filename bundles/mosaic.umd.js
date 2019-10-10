@@ -19205,7 +19205,7 @@ var McTabBody = /** @class */ (function () {
         beforeCentering: [{ type: core.Output }],
         afterLeavingCenter: [{ type: core.Output }],
         onCentered: [{ type: core.Output }],
-        portalHost: [{ type: core.ViewChild, args: [portal.PortalHostDirective, { static: false },] }],
+        portalHost: [{ type: core.ViewChild, args: [portal.CdkPortalOutlet, { static: false },] }],
         content: [{ type: core.Input, args: ['content',] }],
         origin: [{ type: core.Input }],
         animationDuration: [{ type: core.Input }]
@@ -19481,7 +19481,7 @@ var McTabHeader = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this.keyManager ? (/** @type {?} */ (this.keyManager.activeItemIndex)) : 0;
+            return this.keyManager ? this.keyManager.activeItemIndex : 0;
         },
         /** When the focus index is set, we must manually send focus to the correct label */
         set: /**
@@ -19561,6 +19561,7 @@ var McTabHeader = /** @class */ (function (_super) {
      * @return {?}
      */
     function (event) {
+        // tslint:disable-next-line: deprecation
         switch (event.keyCode) {
             case keycodes.HOME:
                 this.keyManager.setFirstItemActive();
@@ -31584,7 +31585,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

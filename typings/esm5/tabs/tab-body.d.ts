@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { Directionality, Direction } from '@angular/cdk/bidi';
-import { TemplatePortal, CdkPortalOutlet, PortalHostDirective } from '@angular/cdk/portal';
+import { TemplatePortal, CdkPortalOutlet } from '@angular/cdk/portal';
 import { ChangeDetectorRef, EventEmitter, OnDestroy, OnInit, ElementRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 /**
  * These position states are used internally as animation states for the tab body. Setting the
@@ -40,7 +40,7 @@ export declare class McTabBody implements OnInit, OnDestroy {
     /** Event emitted when the tab completes its animation towards the center. */
     readonly onCentered: EventEmitter<void>;
     /** The portal host inside of this container into which the tab body content will be loaded. */
-    portalHost: PortalHostDirective;
+    portalHost: CdkPortalOutlet;
     /** The tab body content to display. */
     content: TemplatePortal;
     /** Position that will be used when the tab is immediately becoming visible after creation. */
