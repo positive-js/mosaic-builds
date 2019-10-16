@@ -354,12 +354,7 @@ class McTreeOption extends CdkTreeNode {
      * @return {?}
      */
     focus() {
-        /** @type {?} */
-        const element = this.getHostElement();
-        // tslint:disable-next-line: no-unbound-method
-        if (typeof element.focus === 'function') {
-            element.focus();
-        }
+        this.focusMonitor.focusVia(this.getHostElement(), 'keyboard');
     }
     /**
      * @return {?}
@@ -379,6 +374,7 @@ class McTreeOption extends CdkTreeNode {
         if (!this._selected) {
             this._selected = true;
             this.changeDetectorRef.markForCheck();
+            this.emitSelectionChangeEvent();
         }
     }
     /**
@@ -762,18 +758,15 @@ class McTreeSelection extends CdkTree {
                         }
                     }));
                 }
-                this.emitChangeEvent(option);
             }
             else if (withCtrl) {
                 if (!this.canDeselectLast(option)) {
                     return;
                 }
                 this.selectionModel.toggle(option.data);
-                this.emitChangeEvent(option);
             }
             else {
                 this.selectionModel.toggle(option.data);
-                this.emitChangeEvent(option);
             }
         }
         else {
@@ -783,10 +776,9 @@ class McTreeSelection extends CdkTree {
             if (this.autoSelect) {
                 this.selectionModel.deselect(...this.selectionModel.selected);
                 this.selectionModel.select(option.data);
-                // todo не факт что это нужно
-                this.emitChangeEvent(option);
             }
         }
+        this.emitChangeEvent(option);
     }
     /**
      * @param {?} option

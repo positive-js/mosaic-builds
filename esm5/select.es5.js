@@ -713,14 +713,15 @@ var McSelect = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        if (this._panelOpen) {
-            // the order of calls is important
-            this.resetSearch();
-            this._panelOpen = false;
-            this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
-            this._changeDetectorRef.markForCheck();
-            this.onTouched();
+        if (!this._panelOpen) {
+            return;
         }
+        // the order of calls is important
+        this.resetSearch();
+        this._panelOpen = false;
+        this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
+        this._changeDetectorRef.markForCheck();
+        this.onTouched();
     };
     /**
      * Sets the select's value. Part of the ControlValueAccessor interface

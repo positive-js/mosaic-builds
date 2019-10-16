@@ -416,12 +416,7 @@ var McTreeOption = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        /** @type {?} */
-        var element = this.getHostElement();
-        // tslint:disable-next-line: no-unbound-method
-        if (typeof element.focus === 'function') {
-            element.focus();
-        }
+        this.focusMonitor.focusVia(this.getHostElement(), 'keyboard');
     };
     /**
      * @return {?}
@@ -447,6 +442,7 @@ var McTreeOption = /** @class */ (function (_super) {
         if (!this._selected) {
             this._selected = true;
             this.changeDetectorRef.markForCheck();
+            this.emitSelectionChangeEvent();
         }
     };
     /**
@@ -881,18 +877,15 @@ var McTreeSelection = /** @class */ (function (_super) {
                         }
                     }));
                 }
-                this.emitChangeEvent(option);
             }
             else if (withCtrl) {
                 if (!this.canDeselectLast(option)) {
                     return;
                 }
                 this.selectionModel.toggle(option.data);
-                this.emitChangeEvent(option);
             }
             else {
                 this.selectionModel.toggle(option.data);
-                this.emitChangeEvent(option);
             }
         }
         else {
@@ -902,10 +895,9 @@ var McTreeSelection = /** @class */ (function (_super) {
             if (this.autoSelect) {
                 (_a = this.selectionModel).deselect.apply(_a, this.selectionModel.selected);
                 this.selectionModel.select(option.data);
-                // todo не факт что это нужно
-                this.emitChangeEvent(option);
             }
         }
+        this.emitChangeEvent(option);
     };
     /**
      * @param {?} option
