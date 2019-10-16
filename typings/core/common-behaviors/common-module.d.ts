@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 export declare const MC_SANITY_CHECKS: InjectionToken<boolean>;
-export declare function MC_SANITY_CHECKS_FACTORY(): boolean;
+export declare function mcSanityChecksFactory(): boolean;
 /**
  * Module that captures anything that should be loaded and/or run for *all* Mosaic
  * components. This includes Bidi, etc.
@@ -9,12 +9,12 @@ export declare function MC_SANITY_CHECKS_FACTORY(): boolean;
  */
 export declare class McCommonModule {
     private _sanityChecksEnabled;
-    private _hasDoneGlobalChecks;
+    private hasDoneGlobalChecks;
     private _document;
     private _window;
     constructor(_sanityChecksEnabled: boolean);
-    private _areChecksEnabled;
-    private _isTestEnv;
-    private _checkDoctypeIsDefined;
-    private _checkThemeIsPresent;
+    private areChecksEnabled;
+    private isTestEnv;
+    private checkDoctypeIsDefined;
+    private checkThemeIsPresent;
 }

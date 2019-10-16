@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay'), require('@angular/cdk/platform'), require('@ptsecurity/cdk/a11y'), require('rxjs/operators'), require('@angular/forms'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/datetime'), require('@angular/cdk/a11y'), require('@ptsecurity/cdk/tree')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay', '@angular/cdk/platform', '@ptsecurity/cdk/a11y', 'rxjs/operators', '@angular/forms', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/collections', '@ptsecurity/cdk/datetime', '@angular/cdk/a11y', '@ptsecurity/cdk/tree'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.cdk.bidi,global.ng.core,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.overlay,global.ng.cdk.platform,global.ng.cdk.a11y,global.rxjs.operators,global.ng.forms,global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.collections,global.ng.cdk.datetime,global.ng.cdk.a11y,global.ng.cdk.tree));
-}(this, (function (exports,bidi,core,coercion,rxjs,common,keycodes,animations,overlay,platform,a11y,operators,forms,portal,scrolling,collections,datetime,a11y$1,tree) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay'), require('@angular/cdk/platform'), require('@ptsecurity/cdk/a11y'), require('rxjs/operators'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/forms'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/datetime'), require('@angular/cdk/a11y'), require('@ptsecurity/cdk/tree')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay', '@angular/cdk/platform', '@ptsecurity/cdk/a11y', 'rxjs/operators', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/forms', '@angular/cdk/collections', '@ptsecurity/cdk/datetime', '@angular/cdk/a11y', '@ptsecurity/cdk/tree'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = {}),global.ng.cdk.bidi,global.ng.core,global.ng.cdk.coercion,global.rxjs,global.ng.common,global.ng.cdk.keycodes,global.ng.animations,global.ng.cdk.overlay,global.ng.cdk.platform,global.ng.cdk.a11y,global.rxjs.operators,global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.forms,global.ng.cdk.collections,global.ng.cdk.datetime,global.ng.cdk.a11y,global.ng.cdk.tree));
+}(this, (function (exports,bidi,core,coercion,rxjs,common,keycodes,animations,overlay,platform,a11y,operators,portal,scrolling,forms,collections,datetime,a11y$1,tree) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -85,12 +85,12 @@ function toBoolean(value) {
 /** @type {?} */
 var MC_SANITY_CHECKS = new core.InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
-    factory: MC_SANITY_CHECKS_FACTORY
+    factory: mcSanityChecksFactory
 });
 /**
  * @return {?}
  */
-function MC_SANITY_CHECKS_FACTORY() {
+function mcSanityChecksFactory() {
     return true;
 }
 /**
@@ -103,15 +103,17 @@ var McCommonModule = /** @class */ (function () {
     function McCommonModule(_sanityChecksEnabled) {
         this._sanityChecksEnabled = _sanityChecksEnabled;
         // Whether we've done the global sanity checks (e.g. a theme is loaded, there is a doctype).
-        this._hasDoneGlobalChecks = false;
+        this.hasDoneGlobalChecks = false;
         // Reference to the global `document` object.
+        // tslint:disable-next-line: orthodox-getter-and-setter
         this._document = typeof document === 'object' && document ? document : null;
         // Reference to the global 'window' object.
+        // tslint:disable-next-line: orthodox-getter-and-setter
         this._window = typeof window === 'object' && window ? window : null;
-        if (this._areChecksEnabled() && !this._hasDoneGlobalChecks) {
-            this._checkDoctypeIsDefined();
-            this._checkThemeIsPresent();
-            this._hasDoneGlobalChecks = true;
+        if (this.areChecksEnabled() && !this.hasDoneGlobalChecks) {
+            this.checkDoctypeIsDefined();
+            this.checkThemeIsPresent();
+            this.hasDoneGlobalChecks = true;
         }
     }
     // Whether any sanity checks are enabled
@@ -120,14 +122,14 @@ var McCommonModule = /** @class */ (function () {
      * @private
      * @return {?}
      */
-    McCommonModule.prototype._areChecksEnabled = 
+    McCommonModule.prototype.areChecksEnabled = 
     // Whether any sanity checks are enabled
     /**
      * @private
      * @return {?}
      */
     function () {
-        return this._sanityChecksEnabled && core.isDevMode() && !this._isTestEnv();
+        return this._sanityChecksEnabled && core.isDevMode() && !this.isTestEnv();
     };
     // Whether the code is running in tests.
     // Whether the code is running in tests.
@@ -135,7 +137,7 @@ var McCommonModule = /** @class */ (function () {
      * @private
      * @return {?}
      */
-    McCommonModule.prototype._isTestEnv = 
+    McCommonModule.prototype.isTestEnv = 
     // Whether the code is running in tests.
     /**
      * @private
@@ -149,7 +151,7 @@ var McCommonModule = /** @class */ (function () {
      * @private
      * @return {?}
      */
-    McCommonModule.prototype._checkDoctypeIsDefined = /**
+    McCommonModule.prototype.checkDoctypeIsDefined = /**
      * @private
      * @return {?}
      */
@@ -163,7 +165,7 @@ var McCommonModule = /** @class */ (function () {
      * @private
      * @return {?}
      */
-    McCommonModule.prototype._checkThemeIsPresent = /**
+    McCommonModule.prototype.checkThemeIsPresent = /**
      * @private
      * @return {?}
      */
@@ -444,12 +446,12 @@ McLineSetter = /** @class */ (function () {
         var _this = this;
         this._lines = _lines;
         this._element = _element;
-        this._setLineClass(this._lines.length);
+        this.setLineClass(this._lines.length);
         this._lines.changes.subscribe((/**
          * @return {?}
          */
         function () {
-            _this._setLineClass(_this._lines.length);
+            _this.setLineClass(_this._lines.length);
         }));
     }
     /**
@@ -457,32 +459,32 @@ McLineSetter = /** @class */ (function () {
      * @param {?} count
      * @return {?}
      */
-    McLineSetter.prototype._setLineClass = /**
+    McLineSetter.prototype.setLineClass = /**
      * @private
      * @param {?} count
      * @return {?}
      */
     function (count) {
-        this._resetClasses();
+        this.resetClasses();
         if (count === 2 || count === 3) {
-            this._setClass("mc-" + count + "-line", true);
+            this.setClass("mc-" + count + "-line", true);
         }
         else if (count > 3) {
-            this._setClass("mc-multi-line", true);
+            this.setClass("mc-multi-line", true);
         }
     };
     /**
      * @private
      * @return {?}
      */
-    McLineSetter.prototype._resetClasses = /**
+    McLineSetter.prototype.resetClasses = /**
      * @private
      * @return {?}
      */
     function () {
-        this._setClass('mc-2-line', false);
-        this._setClass('mc-3-line', false);
-        this._setClass('mc-multi-line', false);
+        this.setClass('mc-2-line', false);
+        this.setClass('mc-3-line', false);
+        this.setClass('mc-multi-line', false);
     };
     /**
      * @private
@@ -490,7 +492,7 @@ McLineSetter = /** @class */ (function () {
      * @param {?} isAdd
      * @return {?}
      */
-    McLineSetter.prototype._setClass = /**
+    McLineSetter.prototype.setClass = /**
      * @private
      * @param {?} className
      * @param {?} isAdd
@@ -4642,6 +4644,7 @@ var McCard = /** @class */ (function () {
      * @return {?}
      */
     function ($event) {
+        // tslint:disable-next-line:deprecation
         switch ($event.keyCode) {
             case keycodes.SPACE:
                 if (!this.readonly) {
@@ -31224,7 +31227,7 @@ var McVerticalNavbarModule = /** @class */ (function () {
 var VERSION = new core.Version('8.0.2');
 
 exports.VERSION = VERSION;
-exports.ɵa3 = MC_SANITY_CHECKS_FACTORY;
+exports.ɵa3 = mcSanityChecksFactory;
 exports.isBoolean = isBoolean;
 exports.toBoolean = toBoolean;
 exports.McCommonModule = McCommonModule;
@@ -31469,15 +31472,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;

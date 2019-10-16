@@ -9,12 +9,12 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren,
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, McOptionModule, McCommonModule } from '@ptsecurity/mosaic/core';
 import { Directionality } from '@angular/cdk/bidi';
-import { DOCUMENT, CommonModule } from '@angular/common';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, ENTER, ESCAPE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { ViewportRuler } from '@angular/cdk/scrolling';
+import { DOCUMENT, CommonModule } from '@angular/common';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DOWN_ARROW, ENTER, ESCAPE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { Subscription, defer, fromEvent, merge, of, Subject } from 'rxjs';
 import { filter, take, switchMap, delay, tap, map } from 'rxjs/operators';

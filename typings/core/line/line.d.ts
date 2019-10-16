@@ -14,9 +14,9 @@ export declare class McLineSetter {
     private _lines;
     private _element;
     constructor(_lines: QueryList<McLine>, _element: ElementRef);
-    private _setLineClass;
-    private _resetClasses;
-    private _setClass;
+    private setLineClass;
+    private resetClasses;
+    private setClass;
 }
 export declare class McLineModule {
 }

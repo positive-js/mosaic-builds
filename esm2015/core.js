@@ -48,12 +48,12 @@ function toBoolean(value) {
 /** @type {?} */
 const MC_SANITY_CHECKS = new InjectionToken('mc-sanity-checks', {
     providedIn: 'root',
-    factory: MC_SANITY_CHECKS_FACTORY
+    factory: mcSanityChecksFactory
 });
 /**
  * @return {?}
  */
-function MC_SANITY_CHECKS_FACTORY() {
+function mcSanityChecksFactory() {
     return true;
 }
 /**
@@ -69,15 +69,17 @@ class McCommonModule {
     constructor(_sanityChecksEnabled) {
         this._sanityChecksEnabled = _sanityChecksEnabled;
         // Whether we've done the global sanity checks (e.g. a theme is loaded, there is a doctype).
-        this._hasDoneGlobalChecks = false;
+        this.hasDoneGlobalChecks = false;
         // Reference to the global `document` object.
+        // tslint:disable-next-line: orthodox-getter-and-setter
         this._document = typeof document === 'object' && document ? document : null;
         // Reference to the global 'window' object.
+        // tslint:disable-next-line: orthodox-getter-and-setter
         this._window = typeof window === 'object' && window ? window : null;
-        if (this._areChecksEnabled() && !this._hasDoneGlobalChecks) {
-            this._checkDoctypeIsDefined();
-            this._checkThemeIsPresent();
-            this._hasDoneGlobalChecks = true;
+        if (this.areChecksEnabled() && !this.hasDoneGlobalChecks) {
+            this.checkDoctypeIsDefined();
+            this.checkThemeIsPresent();
+            this.hasDoneGlobalChecks = true;
         }
     }
     // Whether any sanity checks are enabled
@@ -85,15 +87,15 @@ class McCommonModule {
      * @private
      * @return {?}
      */
-    _areChecksEnabled() {
-        return this._sanityChecksEnabled && isDevMode() && !this._isTestEnv();
+    areChecksEnabled() {
+        return this._sanityChecksEnabled && isDevMode() && !this.isTestEnv();
     }
     // Whether the code is running in tests.
     /**
      * @private
      * @return {?}
      */
-    _isTestEnv() {
+    isTestEnv() {
         // tslint:disable-next-line
         return this._window && (this._window['__karma__'] || this._window['jasmine']);
     }
@@ -101,7 +103,7 @@ class McCommonModule {
      * @private
      * @return {?}
      */
-    _checkDoctypeIsDefined() {
+    checkDoctypeIsDefined() {
         if (this._document && !this._document.doctype) {
             console.warn('Current document does not have a doctype. This may cause ' +
                 'some Mosaic components not to behave as expected.');
@@ -111,7 +113,7 @@ class McCommonModule {
      * @private
      * @return {?}
      */
-    _checkThemeIsPresent() {
+    checkThemeIsPresent() {
         if (this._document && typeof getComputedStyle === 'function') {
             /** @type {?} */
             const testElement = this._document.createElement('div');
@@ -351,12 +353,12 @@ class McLineSetter {
     constructor(_lines, _element) {
         this._lines = _lines;
         this._element = _element;
-        this._setLineClass(this._lines.length);
+        this.setLineClass(this._lines.length);
         this._lines.changes.subscribe((/**
          * @return {?}
          */
         () => {
-            this._setLineClass(this._lines.length);
+            this.setLineClass(this._lines.length);
         }));
     }
     /**
@@ -364,23 +366,23 @@ class McLineSetter {
      * @param {?} count
      * @return {?}
      */
-    _setLineClass(count) {
-        this._resetClasses();
+    setLineClass(count) {
+        this.resetClasses();
         if (count === 2 || count === 3) {
-            this._setClass(`mc-${count}-line`, true);
+            this.setClass(`mc-${count}-line`, true);
         }
         else if (count > 3) {
-            this._setClass(`mc-multi-line`, true);
+            this.setClass(`mc-multi-line`, true);
         }
     }
     /**
      * @private
      * @return {?}
      */
-    _resetClasses() {
-        this._setClass('mc-2-line', false);
-        this._setClass('mc-3-line', false);
-        this._setClass('mc-multi-line', false);
+    resetClasses() {
+        this.setClass('mc-2-line', false);
+        this.setClass('mc-3-line', false);
+        this.setClass('mc-multi-line', false);
     }
     /**
      * @private
@@ -388,7 +390,7 @@ class McLineSetter {
      * @param {?} isAdd
      * @return {?}
      */
-    _setClass(className, isAdd) {
+    setClass(className, isAdd) {
         if (isAdd) {
             this._element.nativeElement.classList.add(className);
         }
@@ -1483,5 +1485,5 @@ McFormattersModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, McOptgroupBase, McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, AnimationCurves, POSITION_MAP, DEFAULT_4_POSITIONS, EXTENDED_OVERLAY_POSITIONS, POSITION_TO_CSS_MAP, mcSelectAnimations, selectEvents, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, mcSelectScrollStrategyProviderFactory, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McHighlightModule, McHighlightPipe, McFormattersModule, MC_LOCALE_ID, DEFAULT_MC_LOCALE_ID, NUMBER_FORMAT_REGEXP, McDecimalPipe, MC_SANITY_CHECKS_FACTORY as ɵa3 };
+export { isBoolean, toBoolean, McCommonModule, MC_SANITY_CHECKS, mixinDisabled, mixinColor, ThemePalette, mixinTabIndex, mixinErrorState, McLine, McLineSetter, McLineModule, ShowOnDirtyErrorStateMatcher, ErrorStateMatcher, McPseudoCheckboxModule, McPseudoCheckbox, McMeasureScrollbarService, McOptionModule, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, MC_OPTION_PARENT_COMPONENT, McOption, McOptgroupBase, McOptgroupMixinBase, McOptgroup, MC_LABEL_GLOBAL_OPTIONS, fadeAnimation, AnimationCurves, POSITION_MAP, DEFAULT_4_POSITIONS, EXTENDED_OVERLAY_POSITIONS, POSITION_TO_CSS_MAP, mcSelectAnimations, selectEvents, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, mcSelectScrollStrategyProviderFactory, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McHighlightModule, McHighlightPipe, McFormattersModule, MC_LOCALE_ID, DEFAULT_MC_LOCALE_ID, NUMBER_FORMAT_REGEXP, McDecimalPipe, mcSanityChecksFactory as ɵa3 };
 //# sourceMappingURL=core.js.map

@@ -1,8 +1,8 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { ChangeDetectorRef, ElementRef, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { ViewportRuler } from '@angular/cdk/scrolling';
+import { ChangeDetectorRef, ElementRef, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 import { McOption, McOptionSelectionChange } from '@ptsecurity/mosaic/core';
 import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { Observable } from 'rxjs';

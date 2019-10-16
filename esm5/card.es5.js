@@ -93,6 +93,7 @@ var McCard = /** @class */ (function () {
      * @return {?}
      */
     function ($event) {
+        // tslint:disable-next-line:deprecation
         switch ($event.keyCode) {
             case SPACE:
                 if (!this.readonly) {

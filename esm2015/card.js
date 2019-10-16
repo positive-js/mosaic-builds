@@ -75,6 +75,7 @@ class McCard {
      * @return {?}
      */
     onKeyDown($event) {
+        // tslint:disable-next-line:deprecation
         switch ($event.keyCode) {
             case SPACE:
                 if (!this.readonly) {
