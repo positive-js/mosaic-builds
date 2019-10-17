@@ -76,7 +76,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     function McTreeNodePadding() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.baseLeftPadding = 12;
-        /* tslint:disable-next-line:naming-convention */
+        /* tslint:disable-next-line:naming-convention orthodox-getter-and-setter*/
         _this._indent = 20;
         _this.iconWidth = 20;
         return _this;

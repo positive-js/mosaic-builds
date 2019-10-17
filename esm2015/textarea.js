@@ -70,6 +70,7 @@ class McTextarea extends McTextareaMixinBase {
          */
         this.controlType = 'mc-textarea';
         this.uid = `mc-textsrea-${nextUniqueId++}`;
+        // tslint:disable:naming-convention
         this._disabled = false;
         this._required = false;
         this.lineHeight = 0;
@@ -226,7 +227,7 @@ class McTextarea extends McTextareaMixinBase {
             textarea.style.height = 0; // this line is important to height recalculation
             // this line is important to height recalculation
             /** @type {?} */
-            const height = Math.max(this.minHeight, textarea.scrollHeight + diff + this.freeRowsHeight);
+            const height = Math.max(this.minHeight, +textarea.scrollHeight + diff + this.freeRowsHeight);
             textarea.style.height = `${height}px`;
         }));
     }
@@ -299,7 +300,7 @@ class McTextarea extends McTextareaMixinBase {
         const outerHeight = parseInt((/** @type {?} */ (window.getComputedStyle(textarea).height)).toString(), 10);
         /** @type {?} */
         const diff = outerHeight - textarea.clientHeight;
-        return Math.max(this.minHeight, textarea.scrollHeight + diff);
+        return Math.max(this.minHeight, +textarea.scrollHeight + diff);
     }
 }
 McTextarea.decorators = [

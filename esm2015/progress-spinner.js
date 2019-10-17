@@ -20,6 +20,7 @@ const MIN_PERCENT = 0;
 /** @type {?} */
 const MAX_PERCENT = 100;
 class McProgressSpinnerBase {
+    // tslint:disable-next-line:naming-convention
     /**
      * @param {?} _elementRef
      */

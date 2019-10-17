@@ -83,6 +83,7 @@ var McTextarea = /** @class */ (function (_super) {
          */
         _this.controlType = 'mc-textarea';
         _this.uid = "mc-textsrea-" + nextUniqueId++;
+        // tslint:disable:naming-convention
         _this._disabled = false;
         _this._required = false;
         _this.lineHeight = 0;
@@ -291,7 +292,7 @@ var McTextarea = /** @class */ (function (_super) {
             textarea.style.height = 0; // this line is important to height recalculation
             // this line is important to height recalculation
             /** @type {?} */
-            var height = Math.max(_this.minHeight, textarea.scrollHeight + diff + _this.freeRowsHeight);
+            var height = Math.max(_this.minHeight, +textarea.scrollHeight + diff + _this.freeRowsHeight);
             textarea.style.height = height + "px";
         }));
     };
@@ -408,7 +409,7 @@ var McTextarea = /** @class */ (function (_super) {
         var outerHeight = parseInt((/** @type {?} */ (window.getComputedStyle(textarea).height)).toString(), 10);
         /** @type {?} */
         var diff = outerHeight - textarea.clientHeight;
-        return Math.max(this.minHeight, textarea.scrollHeight + diff);
+        return Math.max(this.minHeight, +textarea.scrollHeight + diff);
     };
     McTextarea.decorators = [
         { type: core.Directive, args: [{

@@ -46,6 +46,7 @@ var McVerticalNavbarItemBadge = /** @class */ (function () {
     return McVerticalNavbarItemBadge;
 }());
 var McVerticalNavbarItemBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McVerticalNavbarItemBase(_elementRef) {
         this._elementRef = _elementRef;
     }

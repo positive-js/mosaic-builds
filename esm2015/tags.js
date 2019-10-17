@@ -598,6 +598,8 @@ class McTagList extends _McTagListMixinBase {
          * Event emitted when the selected tag list value has been changed by the user.
          */
         this.change = new EventEmitter();
+        // public property with setter - should be private?
+        // tslint:disable-next-line: naming-convention orthodox-getter-and-setter
         this._tabIndex = 0;
         this._required = false;
         this._disabled = false;

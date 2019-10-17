@@ -43,6 +43,7 @@ McVerticalNavbarItemBadge.decorators = [
             },] },
 ];
 class McVerticalNavbarItemBase {
+    // tslint:disable-next-line:naming-convention
     /**
      * @param {?} _elementRef
      */

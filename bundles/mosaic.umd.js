@@ -16127,6 +16127,7 @@ var MIN_PERCENT = 0;
 /** @type {?} */
 var MAX_PERCENT = 100;
 var McProgressBarBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McProgressBarBase(_elementRef) {
         this._elementRef = _elementRef;
     }
@@ -16215,6 +16216,7 @@ var MIN_PERCENT$1 = 0;
 /** @type {?} */
 var MAX_PERCENT$1 = 100;
 var McProgressSpinnerBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McProgressSpinnerBase(_elementRef) {
         this._elementRef = _elementRef;
     }
@@ -17196,7 +17198,7 @@ var McTreeNodePadding = /** @class */ (function (_super) {
     function McTreeNodePadding() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.baseLeftPadding = 12;
-        /* tslint:disable-next-line:naming-convention */
+        /* tslint:disable-next-line:naming-convention orthodox-getter-and-setter*/
         _this._indent = 20;
         _this.iconWidth = 20;
         return _this;
@@ -21412,6 +21414,8 @@ var McTagList = /** @class */ (function (_super) {
          * Event emitted when the selected tag list value has been changed by the user.
          */
         _this.change = new core.EventEmitter();
+        // public property with setter - should be private?
+        // tslint:disable-next-line: naming-convention orthodox-getter-and-setter
         _this._tabIndex = 0;
         _this._required = false;
         _this._disabled = false;
@@ -26299,6 +26303,7 @@ var McTextarea = /** @class */ (function (_super) {
          */
         _this.controlType = 'mc-textarea';
         _this.uid = "mc-textsrea-" + nextUniqueId$8++;
+        // tslint:disable:naming-convention
         _this._disabled = false;
         _this._required = false;
         _this.lineHeight = 0;
@@ -26507,7 +26512,7 @@ var McTextarea = /** @class */ (function (_super) {
             textarea.style.height = 0; // this line is important to height recalculation
             // this line is important to height recalculation
             /** @type {?} */
-            var height = Math.max(_this.minHeight, textarea.scrollHeight + diff + _this.freeRowsHeight);
+            var height = Math.max(_this.minHeight, +textarea.scrollHeight + diff + _this.freeRowsHeight);
             textarea.style.height = height + "px";
         }));
     };
@@ -26624,7 +26629,7 @@ var McTextarea = /** @class */ (function (_super) {
         var outerHeight = parseInt((/** @type {?} */ (window.getComputedStyle(textarea).height)).toString(), 10);
         /** @type {?} */
         var diff = outerHeight - textarea.clientHeight;
-        return Math.max(this.minHeight, textarea.scrollHeight + diff);
+        return Math.max(this.minHeight, +textarea.scrollHeight + diff);
     };
     McTextarea.decorators = [
         { type: core.Directive, args: [{
@@ -31058,6 +31063,7 @@ var McVerticalNavbarItemBadge = /** @class */ (function () {
     return McVerticalNavbarItemBadge;
 }());
 var McVerticalNavbarItemBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McVerticalNavbarItemBase(_elementRef) {
         this._elementRef = _elementRef;
     }
@@ -31433,11 +31439,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports._McLinkBase = _McLinkBase;
 exports.McLink = McLink;
-exports.ɵe27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
-exports.ɵc27 = McModalBody;
-exports.ɵd27 = McModalFooter;
-exports.ɵb27 = McModalTitle;
+exports.ɵe28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
+exports.ɵc28 = McModalBody;
+exports.ɵd28 = McModalFooter;
+exports.ɵb28 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -31491,15 +31497,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd16 = McTabBase;
-exports.ɵe16 = mcTabMixinBase;
-exports.ɵa16 = McTabHeaderBase;
-exports.ɵb16 = McTabLabelWrapperBase;
-exports.ɵc16 = mcTabLabelWrapperMixinBase;
-exports.ɵh16 = McTabLinkBase;
-exports.ɵf16 = McTabNavBase;
-exports.ɵi16 = mcTabLinkMixinBase;
-exports.ɵg16 = mcTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = mcTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵi15 = mcTabLinkMixinBase;
+exports.ɵg15 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31568,7 +31574,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa1 = mcSidebarAnimations;
+exports.ɵa0 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;

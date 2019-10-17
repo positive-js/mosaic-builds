@@ -21,6 +21,7 @@ var MIN_PERCENT = 0;
 /** @type {?} */
 var MAX_PERCENT = 100;
 var McProgressBarBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McProgressBarBase(_elementRef) {
         this._elementRef = _elementRef;
     }

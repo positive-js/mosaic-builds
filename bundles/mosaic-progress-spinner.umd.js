@@ -50,6 +50,7 @@ var MIN_PERCENT = 0;
 /** @type {?} */
 var MAX_PERCENT = 100;
 var McProgressSpinnerBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McProgressSpinnerBase(_elementRef) {
         this._elementRef = _elementRef;
     }

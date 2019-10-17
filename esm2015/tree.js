@@ -47,7 +47,7 @@ class McTreeNodePadding extends CdkTreeNodePadding {
     constructor() {
         super(...arguments);
         this.baseLeftPadding = 12;
-        /* tslint:disable-next-line:naming-convention */
+        /* tslint:disable-next-line:naming-convention orthodox-getter-and-setter*/
         this._indent = 20;
         this.iconWidth = 20;
     }
