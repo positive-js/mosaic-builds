@@ -1,5 +1,5 @@
-import { InjectionToken } from '@angular/core';
 import { ScrollStrategy, Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { InjectionToken } from '@angular/core';
 /** The max height of the select's overlay panel */
 export declare const SELECT_PANEL_MAX_HEIGHT = 224;
 /** The panel's padding on the x-axis */

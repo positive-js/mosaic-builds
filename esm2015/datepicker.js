@@ -2461,10 +2461,6 @@ class McDatepickerInput {
             return !this.dateFilter || !controlValue || this.dateFilter(controlValue) ?
                 null : { mcDatepickerFilter: true };
         });
-        /**
-         * The combined form control validator for this input.
-         */
-        // tslint:disable:member-ordering
         this.validator = Validators.compose([
             this.parseValidator,
             this.minValidator,

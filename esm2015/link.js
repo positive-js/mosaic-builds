@@ -21,9 +21,10 @@ class McLinkBase {
         this.elementRef = elementRef;
     }
 }
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-const _McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
-class McLink extends _McLinkBase {
+const McLinkMixinBase = mixinTabIndex(mixinDisabled(McLinkBase));
+class McLink extends McLinkMixinBase {
     /**
      * @param {?} elementRef
      * @param {?} focusMonitor
@@ -124,5 +125,5 @@ McLinkModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McLinkModule, McLinkBase, _McLinkBase, McLink };
+export { McLinkModule, McLinkBase, McLinkMixinBase, McLink };
 //# sourceMappingURL=link.js.map

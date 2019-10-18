@@ -14,6 +14,7 @@ import { A11yModule } from '@ptsecurity/cdk/a11y';
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+// tslint:disable-next-line:naming-convention
 class McIconCSSStyler {
 }
 McIconCSSStyler.decorators = [
@@ -23,6 +24,7 @@ McIconCSSStyler.decorators = [
             },] },
 ];
 class McIconBase {
+    // tslint:disable-next-line:naming-convention
     /**
      * @param {?} _elementRef
      */
@@ -30,9 +32,10 @@ class McIconBase {
         this._elementRef = _elementRef;
     }
 }
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-const _McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
-class McIcon extends _McIconMixinBase {
+const McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
+class McIcon extends McIconMixinBase {
     /**
      * @param {?} elementRef
      * @param {?} iconName
@@ -100,5 +103,5 @@ McIconModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McIconModule, McIconCSSStyler, McIconBase, _McIconMixinBase, McIcon };
+export { McIconModule, McIconCSSStyler, McIconBase, McIconMixinBase, McIcon };
 //# sourceMappingURL=icon.js.map

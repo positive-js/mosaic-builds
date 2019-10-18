@@ -62,6 +62,8 @@ export declare class McDatepickerInput<D> implements ControlValueAccessor, OnDes
     private localeSubscription;
     /** Whether the last value set on the input was valid. */
     private lastValueValid;
+    /** The combined form control validator for this input. */
+    private validator;
     constructor(elementRef: ElementRef<HTMLInputElement>, dateAdapter: DateAdapter<D>, dateFormats: McDateFormats, formField: McFormField);
     onTouched: () => void;
     ngOnDestroy(): void;
@@ -92,8 +94,6 @@ export declare class McDatepickerInput<D> implements ControlValueAccessor, OnDes
     private filterValidator;
     /** Formats a value and sets it on the input element. */
     private formatValue;
-    /** The combined form control validator for this input. */
-    private validator;
     /**
      * @param obj The object to check.
      * @returns The given object if it is both a date instance and valid, otherwise null.

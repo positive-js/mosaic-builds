@@ -621,11 +621,11 @@ var McMeasureScrollbarService = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            if (this._scrollbarWidth) {
-                return this._scrollbarWidth;
+            if (this._scrollBarWidth) {
+                return this._scrollBarWidth;
             }
             this.initScrollBarWidth();
-            return this._scrollbarWidth;
+            return this._scrollBarWidth;
         },
         enumerable: true,
         configurable: true
@@ -649,7 +649,7 @@ var McMeasureScrollbarService = /** @class */ (function () {
         /** @type {?} */
         var width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
         this.document.body.removeChild(scrollDiv);
-        this._scrollbarWidth = width;
+        this._scrollBarWidth = width;
     };
     McMeasureScrollbarService.decorators = [
         { type: Injectable, args: [{
@@ -682,6 +682,7 @@ McOptgroupBase = /** @class */ (function () {
     }
     return McOptgroupBase;
 }());
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
 var McOptgroupMixinBase = mixinDisabled(McOptgroupBase);
 // Counter for unique group ids.

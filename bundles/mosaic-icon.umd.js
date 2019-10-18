@@ -55,13 +55,15 @@ var McIconCSSStyler = /** @class */ (function () {
     return McIconCSSStyler;
 }());
 var McIconBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McIconBase(_elementRef) {
         this._elementRef = _elementRef;
     }
     return McIconBase;
 }());
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-var _McIconMixinBase = core$1.mixinColor(McIconBase, core$1.ThemePalette.Empty);
+var McIconMixinBase = core$1.mixinColor(McIconBase, core$1.ThemePalette.Empty);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {
@@ -96,7 +98,7 @@ var McIcon = /** @class */ (function (_super) {
         { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
     ]; };
     return McIcon;
-}(_McIconMixinBase));
+}(McIconMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -128,7 +130,7 @@ var McIconModule = /** @class */ (function () {
 exports.McIconModule = McIconModule;
 exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
-exports._McIconMixinBase = _McIconMixinBase;
+exports.McIconMixinBase = McIconMixinBase;
 exports.McIcon = McIcon;
 
 Object.defineProperty(exports, '__esModule', { value: true });

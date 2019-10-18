@@ -657,11 +657,11 @@ var McMeasureScrollbarService = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            if (this._scrollbarWidth) {
-                return this._scrollbarWidth;
+            if (this._scrollBarWidth) {
+                return this._scrollBarWidth;
             }
             this.initScrollBarWidth();
-            return this._scrollbarWidth;
+            return this._scrollBarWidth;
         },
         enumerable: true,
         configurable: true
@@ -685,7 +685,7 @@ var McMeasureScrollbarService = /** @class */ (function () {
         /** @type {?} */
         var width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
         this.document.body.removeChild(scrollDiv);
-        this._scrollbarWidth = width;
+        this._scrollBarWidth = width;
     };
     McMeasureScrollbarService.decorators = [
         { type: core.Injectable, args: [{
@@ -718,6 +718,7 @@ McOptgroupBase = /** @class */ (function () {
     }
     return McOptgroupBase;
 }());
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
 var McOptgroupMixinBase = mixinDisabled(McOptgroupBase);
 // Counter for unique group ids.
@@ -1791,13 +1792,15 @@ var McIconCSSStyler = /** @class */ (function () {
     return McIconCSSStyler;
 }());
 var McIconBase = /** @class */ (function () {
+    // tslint:disable-next-line:naming-convention
     function McIconBase(_elementRef) {
         this._elementRef = _elementRef;
     }
     return McIconBase;
 }());
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-var _McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
+var McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
 var McIcon = /** @class */ (function (_super) {
     __extends(McIcon, _super);
     function McIcon(elementRef, iconName) {
@@ -1832,7 +1835,7 @@ var McIcon = /** @class */ (function (_super) {
         { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
     ]; };
     return McIcon;
-}(_McIconMixinBase));
+}(McIconMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -9298,10 +9301,6 @@ var McDatepickerInput = /** @class */ (function () {
             return !_this.dateFilter || !controlValue || _this.dateFilter(controlValue) ?
                 null : { mcDatepickerFilter: true };
         });
-        /**
-         * The combined form control validator for this input.
-         */
-        // tslint:disable:member-ordering
         this.validator = forms.Validators.compose([
             this.parseValidator,
             this.minValidator,
@@ -12746,8 +12745,9 @@ var McLinkBase = /** @class */ (function () {
     }
     return McLinkBase;
 }());
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-var _McLinkBase = mixinTabIndex(mixinDisabled(McLinkBase));
+var McLinkMixinBase = mixinTabIndex(mixinDisabled(McLinkBase));
 var McLink = /** @class */ (function (_super) {
     __extends(McLink, _super);
     function McLink(elementRef, focusMonitor, changeDetector, tabIndex) {
@@ -12830,7 +12830,7 @@ var McLink = /** @class */ (function (_super) {
         disabled: [{ type: core.Input }]
     };
     return McLink;
-}(_McLinkBase));
+}(McLinkMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -31406,7 +31406,7 @@ exports.McStepper = McStepper;
 exports.McIconModule = McIconModule;
 exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
-exports._McIconMixinBase = _McIconMixinBase;
+exports.McIconMixinBase = McIconMixinBase;
 exports.McIcon = McIcon;
 exports.ɵc25 = MAX_VALIDATOR;
 exports.ɵa25 = MIN_VALIDATOR;
@@ -31437,13 +31437,13 @@ exports._McListSelectionMixinBase = _McListSelectionMixinBase;
 exports.McListSelection = McListSelection;
 exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
-exports._McLinkBase = _McLinkBase;
+exports.McLinkMixinBase = McLinkMixinBase;
 exports.McLink = McLink;
-exports.ɵe27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
-exports.ɵc27 = McModalBody;
-exports.ɵd27 = McModalFooter;
-exports.ɵb27 = McModalTitle;
+exports.ɵe28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
+exports.ɵc28 = McModalBody;
+exports.ɵd28 = McModalFooter;
+exports.ɵb28 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -31497,15 +31497,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵd16 = McTabBase;
+exports.ɵe16 = mcTabMixinBase;
+exports.ɵa16 = McTabHeaderBase;
+exports.ɵb16 = McTabLabelWrapperBase;
+exports.ɵc16 = mcTabLabelWrapperMixinBase;
+exports.ɵh16 = McTabLinkBase;
+exports.ɵf16 = McTabNavBase;
+exports.ɵi16 = mcTabLinkMixinBase;
+exports.ɵg16 = mcTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;

@@ -3000,10 +3000,6 @@ var McDatepickerInput = /** @class */ (function () {
             return !_this.dateFilter || !controlValue || _this.dateFilter(controlValue) ?
                 null : { mcDatepickerFilter: true };
         });
-        /**
-         * The combined form control validator for this input.
-         */
-        // tslint:disable:member-ordering
         this.validator = Validators.compose([
             this.parseValidator,
             this.minValidator,

@@ -5,8 +5,8 @@ export declare class McLinkBase {
     elementRef: ElementRef;
     constructor(elementRef: ElementRef);
 }
-export declare const _McLinkBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase;
-export declare class McLink extends _McLinkBase implements OnDestroy, HasTabIndex, CanDisable {
+export declare const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase;
+export declare class McLink extends McLinkMixinBase implements OnDestroy, HasTabIndex, CanDisable {
     private focusMonitor;
     private changeDetector;
     disabled: any;

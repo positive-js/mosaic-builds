@@ -49,8 +49,9 @@ var McLinkBase = /** @class */ (function () {
     }
     return McLinkBase;
 }());
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-var _McLinkBase = core$1.mixinTabIndex(core$1.mixinDisabled(McLinkBase));
+var McLinkMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McLinkBase));
 var McLink = /** @class */ (function (_super) {
     __extends(McLink, _super);
     function McLink(elementRef, focusMonitor, changeDetector, tabIndex) {
@@ -133,7 +134,7 @@ var McLink = /** @class */ (function (_super) {
         disabled: [{ type: core.Input }]
     };
     return McLink;
-}(_McLinkBase));
+}(McLinkMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -157,7 +158,7 @@ var McLinkModule = /** @class */ (function () {
 
 exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
-exports._McLinkBase = _McLinkBase;
+exports.McLinkMixinBase = McLinkMixinBase;
 exports.McLink = McLink;
 
 Object.defineProperty(exports, '__esModule', { value: true });

@@ -527,11 +527,11 @@ class McMeasureScrollbarService {
      * @return {?}
      */
     get scrollBarWidth() {
-        if (this._scrollbarWidth) {
-            return this._scrollbarWidth;
+        if (this._scrollBarWidth) {
+            return this._scrollBarWidth;
         }
         this.initScrollBarWidth();
-        return this._scrollbarWidth;
+        return this._scrollBarWidth;
     }
     /**
      * @return {?}
@@ -549,7 +549,7 @@ class McMeasureScrollbarService {
         /** @type {?} */
         const width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
         this.document.body.removeChild(scrollDiv);
-        this._scrollbarWidth = width;
+        this._scrollBarWidth = width;
     }
 }
 McMeasureScrollbarService.decorators = [
@@ -573,6 +573,7 @@ McMeasureScrollbarService.ctorParameters = () => [
  */
 class McOptgroupBase {
 }
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
 const McOptgroupMixinBase = mixinDisabled(McOptgroupBase);
 // Counter for unique group ids.
