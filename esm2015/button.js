@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { ChangeDetectionStrategy, Component, Directive, ElementRef, ViewEncapsulation, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, ElementRef, ViewEncapsulation, Renderer2, NgModule } from '@angular/core';
 import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinColor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { PlatformModule } from '@angular/cdk/platform';
@@ -17,8 +17,10 @@ import { CommonModule } from '@angular/common';
 class McButtonCssStyler {
     /**
      * @param {?} elementRef
+     * @param {?} renderer
      */
-    constructor(elementRef) {
+    constructor(elementRef, renderer) {
+        this.renderer = renderer;
         this.icons = [];
         this.nativeElement = elementRef.nativeElement;
     }
@@ -48,29 +50,22 @@ class McButtonCssStyler {
     addClassModificatorForIcons() {
         /** @type {?} */
         const twoIcons = 2;
+        const [firstIconElement, secondIconElement] = this.icons;
         if (this.icons.length === 1) {
             /** @type {?} */
-            const iconElement = this.icons[0];
-            /** @type {?} */
             const COMMENT_NODE = 8;
-            if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
-                if (iconElement.nextSibling && iconElement.nextSibling.nodeType !== COMMENT_NODE) {
-                    iconElement.classList.add('mc-icon_left');
-                    this.nativeElement.classList.add('mc-icon-button_left');
-                }
-                if (iconElement.previousSibling && iconElement.previousSibling.nodeType !== COMMENT_NODE) {
-                    iconElement.classList.add('mc-icon_right');
-                    this.nativeElement.classList.add('mc-icon-button_right');
-                }
+            if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_left');
+                this.renderer.addClass(this.nativeElement, 'mc-icon-button_left');
+            }
+            if (firstIconElement.previousSibling && firstIconElement.previousSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_right');
+                this.renderer.addClass(this.nativeElement, 'mc-icon-button_right');
             }
         }
         else if (this.icons.length === twoIcons) {
-            /** @type {?} */
-            const firstIconElement = this.icons[0];
-            /** @type {?} */
-            const secondIconElement = this.icons[1];
-            firstIconElement.classList.add('mc-icon_left');
-            secondIconElement.classList.add('mc-icon_right');
+            this.renderer.addClass(firstIconElement, 'mc-icon_left');
+            this.renderer.addClass(secondIconElement, 'mc-icon_right');
         }
     }
 }
@@ -85,7 +80,8 @@ McButtonCssStyler.decorators = [
 ];
 /** @nocollapse */
 McButtonCssStyler.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: Renderer2 }
 ];
 class McButtonBase {
     // tslint:disable-next-line:naming-convention

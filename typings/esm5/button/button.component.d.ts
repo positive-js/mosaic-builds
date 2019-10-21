@@ -1,11 +1,12 @@
-import { ElementRef, OnDestroy } from '@angular/core';
+import { ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
 export declare class McButtonCssStyler {
+    private renderer;
     nativeElement: Element;
     readonly isIconButton: boolean;
     private icons;
-    constructor(elementRef: ElementRef);
+    constructor(elementRef: ElementRef, renderer: Renderer2);
     ngAfterContentInit(): void;
     private addClassModificatorForIcons;
 }

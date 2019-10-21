@@ -3668,7 +3668,8 @@ var McAutocompleteModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var McButtonCssStyler = /** @class */ (function () {
-    function McButtonCssStyler(elementRef) {
+    function McButtonCssStyler(elementRef, renderer) {
+        this.renderer = renderer;
         this.icons = [];
         this.nativeElement = elementRef.nativeElement;
     }
@@ -3709,29 +3710,22 @@ var McButtonCssStyler = /** @class */ (function () {
     function () {
         /** @type {?} */
         var twoIcons = 2;
+        var _a = this.icons, firstIconElement = _a[0], secondIconElement = _a[1];
         if (this.icons.length === 1) {
             /** @type {?} */
-            var iconElement = this.icons[0];
-            /** @type {?} */
             var COMMENT_NODE = 8;
-            if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
-                if (iconElement.nextSibling && iconElement.nextSibling.nodeType !== COMMENT_NODE) {
-                    iconElement.classList.add('mc-icon_left');
-                    this.nativeElement.classList.add('mc-icon-button_left');
-                }
-                if (iconElement.previousSibling && iconElement.previousSibling.nodeType !== COMMENT_NODE) {
-                    iconElement.classList.add('mc-icon_right');
-                    this.nativeElement.classList.add('mc-icon-button_right');
-                }
+            if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_left');
+                this.renderer.addClass(this.nativeElement, 'mc-icon-button_left');
+            }
+            if (firstIconElement.previousSibling && firstIconElement.previousSibling.nodeType !== COMMENT_NODE) {
+                this.renderer.addClass(firstIconElement, 'mc-icon_right');
+                this.renderer.addClass(this.nativeElement, 'mc-icon-button_right');
             }
         }
         else if (this.icons.length === twoIcons) {
-            /** @type {?} */
-            var firstIconElement = this.icons[0];
-            /** @type {?} */
-            var secondIconElement = this.icons[1];
-            firstIconElement.classList.add('mc-icon_left');
-            secondIconElement.classList.add('mc-icon_right');
+            this.renderer.addClass(firstIconElement, 'mc-icon_left');
+            this.renderer.addClass(secondIconElement, 'mc-icon_right');
         }
     };
     McButtonCssStyler.decorators = [
@@ -3745,7 +3739,8 @@ var McButtonCssStyler = /** @class */ (function () {
     ];
     /** @nocollapse */
     McButtonCssStyler.ctorParameters = function () { return [
-        { type: core.ElementRef }
+        { type: core.ElementRef },
+        { type: core.Renderer2 }
     ]; };
     return McButtonCssStyler;
 }());
@@ -31574,7 +31569,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa1 = mcSidebarAnimations;
+exports.ɵa2 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
