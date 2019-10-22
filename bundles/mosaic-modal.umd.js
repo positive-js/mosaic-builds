@@ -288,7 +288,7 @@ var McModalComponent = /** @class */ (function (_super) {
         // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcMask = true;
         // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
-        _this._mcMaskClosable = true;
+        _this._mcMaskClosable = false;
         // Trigger when modal open(visible) after animations
         _this.mcAfterOpen = new core.EventEmitter();
         // Trigger when modal leave-animation over
@@ -1429,7 +1429,6 @@ var McModalService = /** @class */ (function () {
         }
         options.mcModalType = 'confirm';
         options.mcClassName = "mc-confirm mc-confirm-" + confirmType + " " + (options.mcClassName || '');
-        options.mcMaskClosable = false;
         return this.create(options);
     };
     /**

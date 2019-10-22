@@ -208,7 +208,7 @@ class McModalComponent extends McModalRef {
         // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         this._mcMask = true;
         // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
-        this._mcMaskClosable = true;
+        this._mcMaskClosable = false;
         // Trigger when modal open(visible) after animations
         this.mcAfterOpen = new EventEmitter();
         // Trigger when modal leave-animation over
@@ -1037,7 +1037,6 @@ class McModalService {
         }
         options.mcModalType = 'confirm';
         options.mcClassName = `mc-confirm mc-confirm-${confirmType} ${options.mcClassName || ''}`;
-        options.mcMaskClosable = false;
         return this.create(options);
     }
     /**
