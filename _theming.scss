@@ -1924,15 +1924,15 @@ $mc-calendar-weekday-table-font-size: 11px !default;
         color: map-get($foreground, text);;
 
         &::placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, disabled-text);
         }
 
         &::-ms-input-placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, disabled-text);
         }
 
         &::-webkit-input-placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, disabled-text);
         }
     }
 }
@@ -2552,6 +2552,10 @@ $mc-calendar-weekday-table-font-size: 11px !default;
         &.mc-disabled {
             color: mc-color($foreground, disabled-text);
         }
+    }
+
+    .mc-select__placeholder {
+        color: map-get($foreground, disabled-text);
     }
 
     .mc-select__panel {
