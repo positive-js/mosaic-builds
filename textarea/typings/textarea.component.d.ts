@@ -63,9 +63,9 @@ export declare class McTextarea extends McTextareaMixinBase implements McFormFie
     value: string;
     protected uid: string;
     protected previousNativeValue: any;
-    protected _disabled: boolean;
-    protected _id: string;
-    protected _required: boolean;
+    private _disabled;
+    private _id;
+    private _required;
     private valueAccessor;
     private growSubscription;
     private lineHeight;

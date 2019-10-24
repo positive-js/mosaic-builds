@@ -70,7 +70,6 @@ class McTextarea extends McTextareaMixinBase {
          */
         this.controlType = 'mc-textarea';
         this.uid = `mc-textsrea-${nextUniqueId++}`;
-        // tslint:disable:naming-convention
         this._disabled = false;
         this._required = false;
         this.lineHeight = 0;

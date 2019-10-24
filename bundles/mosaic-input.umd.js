@@ -485,12 +485,9 @@ var McInput = /** @class */ (function (_super) {
          * @return {?}
          */
         function (t) { return platform.getSupportedInputTypes().has(t); }));
-        // tslint:disable-next-line: naming-convention
         _this._disabled = false;
-        // tslint:disable-next-line: naming-convention
         _this._required = false;
         // tslint:enable no-reserved-keywords
-        // tslint:disable-next-line: naming-convention
         _this._type = 'text';
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
@@ -1045,10 +1042,10 @@ exports.McInputMono = McInputMono;
 exports.stepUp = stepUp;
 exports.stepDown = stepDown;
 exports.MC_INPUT_VALUE_ACCESSOR = MC_INPUT_VALUE_ACCESSOR;
-exports.ɵc26 = MAX_VALIDATOR;
-exports.ɵa26 = MIN_VALIDATOR;
-exports.ɵd26 = MaxValidator;
-exports.ɵb26 = MinValidator;
+exports.ɵc25 = MAX_VALIDATOR;
+exports.ɵa25 = MIN_VALIDATOR;
+exports.ɵd25 = MaxValidator;
+exports.ɵb25 = MinValidator;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -243,27 +243,21 @@ var McModalComponent = /** @class */ (function (_super) {
         _this.changeDetector = changeDetector;
         _this.document = document;
         _this.mcModalType = 'default';
-        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcVisible = false;
         _this.mcVisibleChange = new EventEmitter();
         _this.mcZIndex = 1000;
         _this.mcWidth = 480;
         _this.mcCloseByESC = true;
-        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcClosable = true;
-        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcMask = true;
-        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcMaskClosable = false;
         // Trigger when modal open(visible) after animations
         _this.mcAfterOpen = new EventEmitter();
         // Trigger when modal leave-animation over
         _this.mcAfterClose = new EventEmitter();
         _this.mcOkType = 'primary';
-        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcOkLoading = false;
         _this.mcOnOk = new EventEmitter();
-        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcCancelLoading = false;
         _this.mcOnCancel = new EventEmitter();
         // The origin point that animation based on
@@ -1523,5 +1517,5 @@ var McModalModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵe25, McModalControlService as ɵa25, McModalBody as ɵc25, McModalFooter as ɵd25, McModalTitle as ɵb25 };
+export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵe28, McModalControlService as ɵa28, McModalBody as ɵc28, McModalFooter as ɵd28, McModalTitle as ɵb28 };
 //# sourceMappingURL=modal.es5.js.map

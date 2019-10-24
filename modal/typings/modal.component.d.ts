@@ -20,7 +20,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     mcComponentParams: T;
     mcFooter: string | TemplateRef<{}> | IModalButtonOptions<T>[];
     mcVisible: boolean;
-    _mcVisible: boolean;
+    private _mcVisible;
     mcVisibleChange: EventEmitter<boolean>;
     mcZIndex: number;
     mcWidth: number | string;
@@ -30,11 +30,11 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     mcTitle: string | TemplateRef<{}>;
     mcCloseByESC: boolean;
     mcClosable: boolean;
-    _mcClosable: boolean;
+    private _mcClosable;
     mcMask: boolean;
-    _mcMask: boolean;
+    private _mcMask;
     mcMaskClosable: boolean;
-    _mcMaskClosable: boolean;
+    private _mcMaskClosable;
     mcMaskStyle: object;
     mcBodyStyle: object;
     mcAfterOpen: EventEmitter<void>;
@@ -42,11 +42,11 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     mcOkText: string;
     mcOkType: string;
     mcOkLoading: boolean;
-    _mcOkLoading: boolean;
+    private _mcOkLoading;
     mcOnOk: EventEmitter<T> | OnClickCallback<T>;
     mcCancelText: string;
     mcCancelLoading: boolean;
-    _mcCancelLoading: boolean;
+    private _mcCancelLoading;
     mcOnCancel: EventEmitter<T> | OnClickCallback<T>;
     modalContainer: ElementRef;
     bodyContainer: ViewContainerRef;

@@ -462,12 +462,9 @@ var McInput = /** @class */ (function (_super) {
          * @return {?}
          */
         function (t) { return getSupportedInputTypes().has(t); }));
-        // tslint:disable-next-line: naming-convention
         _this._disabled = false;
-        // tslint:disable-next-line: naming-convention
         _this._required = false;
         // tslint:enable no-reserved-keywords
-        // tslint:disable-next-line: naming-convention
         _this._type = 'text';
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
@@ -1021,5 +1018,5 @@ var McInputModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McInputModule, BIG_STEP, SMALL_STEP, McInputBase, McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR, MAX_VALIDATOR as ɵc26, MIN_VALIDATOR as ɵa26, MaxValidator as ɵd26, MinValidator as ɵb26 };
+export { McInputModule, BIG_STEP, SMALL_STEP, McInputBase, McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR, MAX_VALIDATOR as ɵc25, MIN_VALIDATOR as ɵa25, MaxValidator as ɵd25, MinValidator as ɵb25 };
 //# sourceMappingURL=input.es5.js.map
