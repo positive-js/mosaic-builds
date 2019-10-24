@@ -10,8 +10,8 @@ declare class McVerticalNavbarItemBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbarItemBase;
-export declare class McVerticalNavbarItem extends _McVerticalNavbarMixinBase implements CanDisable, OnDestroy {
+export declare const McVerticalNavbarMixinBase: CanDisableCtor & typeof McVerticalNavbarItemBase;
+export declare class McVerticalNavbarItem extends McVerticalNavbarMixinBase implements CanDisable, OnDestroy {
     private element;
     private focusMonitor;
     private trigger;

@@ -66,9 +66,10 @@ McTabLabel.decorators = [
  */
 class McTabBase {
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const mcTabMixinBase = mixinDisabled(McTabBase);
-class McTab extends mcTabMixinBase {
+const McTabMixinBase = mixinDisabled(McTabBase);
+class McTab extends McTabMixinBase {
     /**
      * @param {?} viewContainerRef
      */
@@ -453,13 +454,14 @@ McTabBodyPortal.ctorParameters = () => [
  */
 class McTabLabelWrapperBase {
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const mcTabLabelWrapperMixinBase = mixinDisabled(McTabLabelWrapperBase);
+const McTabLabelWrapperMixinBase = mixinDisabled(McTabLabelWrapperBase);
 /**
  * Used in the `mc-tab-group` view to display tab labels.
  * \@docs-private
  */
-class McTabLabelWrapper extends mcTabLabelWrapperMixinBase {
+class McTabLabelWrapper extends McTabLabelWrapperMixinBase {
     /**
      * @param {?} elementRef
      */
@@ -1068,13 +1070,14 @@ class McTabGroupBase {
         this._elementRef = _elementRef;
     }
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const mcTabGroupMixinBase = mixinColor(mixinDisabled(McTabGroupBase));
+const McTabGroupMixinBase = mixinColor(mixinDisabled(McTabGroupBase));
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
  * keyboard navigation.
  */
-class McTabGroup extends mcTabGroupMixinBase {
+class McTabGroup extends McTabGroupMixinBase {
     /**
      * @param {?} elementRef
      * @param {?} changeDetectorRef
@@ -1422,12 +1425,13 @@ class McTabNavBase {
         this._elementRef = _elementRef;
     }
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const mcTabNavMixinBase = mixinColor(McTabNavBase);
+const McTabNavMixinBase = mixinColor(McTabNavBase);
 /**
  * Navigation component matching the styles of the tab group header.
  */
-class McTabNav extends mcTabNavMixinBase {
+class McTabNav extends McTabNavMixinBase {
     /**
      * @param {?} elementRef
      */
@@ -1454,12 +1458,13 @@ McTabNav.ctorParameters = () => [
 // Boilerplate for applying mixins to McTabLink.
 class McTabLinkBase {
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const mcTabLinkMixinBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
+const McTabLinkMixinBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
 /**
  * Link inside of a `mc-tab-nav-bar`.
  */
-class McTabLink extends mcTabLinkMixinBase {
+class McTabLink extends McTabLinkMixinBase {
     /**
      * @param {?} elementRef
      * @param {?} tabIndex
@@ -1586,5 +1591,5 @@ McTabsModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, mcTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd15, mcTabMixinBase as ɵe15, McTabHeaderBase as ɵa15, McTabLabelWrapperBase as ɵb15, mcTabLabelWrapperMixinBase as ɵc15, McTabLinkBase as ɵh15, McTabNavBase as ɵf15, mcTabLinkMixinBase as ɵi15, mcTabNavMixinBase as ɵg15 };
+export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, McTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd15, McTabMixinBase as ɵe15, McTabHeaderBase as ɵa15, McTabLabelWrapperBase as ɵb15, McTabLabelWrapperMixinBase as ɵc15, McTabLinkBase as ɵh15, McTabLinkMixinBase as ɵi15, McTabNavBase as ɵf15, McTabNavMixinBase as ɵg15 };
 //# sourceMappingURL=tabs.js.map

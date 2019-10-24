@@ -250,8 +250,8 @@ class McListSelectionBase {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-const _McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelectionBase));
-class McListSelection extends _McListSelectionMixinBase {
+const McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelectionBase));
+class McListSelection extends McListSelectionMixinBase {
     /**
      * @param {?} element
      * @param {?} tabIndex
@@ -803,5 +803,5 @@ McListModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, _McListSelectionMixinBase, McListSelection };
+export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, McListSelectionMixinBase, McListSelection };
 //# sourceMappingURL=list.js.map

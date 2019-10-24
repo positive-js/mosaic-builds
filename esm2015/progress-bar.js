@@ -28,9 +28,10 @@ class McProgressBarBase {
         this._elementRef = _elementRef;
     }
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const _McProgressBarMixinBase = mixinColor(McProgressBarBase);
-class McProgressBar extends _McProgressBarMixinBase {
+const McProgressBarMixinBase = mixinColor(McProgressBarBase);
+class McProgressBar extends McProgressBarMixinBase {
     /**
      * @param {?} elementRef
      */
@@ -103,5 +104,5 @@ McProgressBarModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McProgressBarModule, McProgressBarBase, _McProgressBarMixinBase, McProgressBar };
+export { McProgressBarModule, McProgressBarBase, McProgressBarMixinBase, McProgressBar };
 //# sourceMappingURL=progress-bar.js.map

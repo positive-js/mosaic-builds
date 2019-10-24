@@ -6,20 +6,20 @@ export declare class McTabNavBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const mcTabNavMixinBase: CanColorCtor & typeof McTabNavBase;
+export declare const McTabNavMixinBase: CanColorCtor & typeof McTabNavBase;
 /**
  * Navigation component matching the styles of the tab group header.
  */
-export declare class McTabNav extends mcTabNavMixinBase implements CanColor {
+export declare class McTabNav extends McTabNavMixinBase implements CanColor {
     constructor(elementRef: ElementRef);
 }
 export declare class McTabLinkBase {
 }
-export declare const mcTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McTabLinkBase;
+export declare const McTabLinkMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McTabLinkBase;
 /**
  * Link inside of a `mc-tab-nav-bar`.
  */
-export declare class McTabLink extends mcTabLinkMixinBase implements OnDestroy, CanDisable, HasTabIndex {
+export declare class McTabLink extends McTabLinkMixinBase implements OnDestroy, CanDisable, HasTabIndex {
     elementRef: ElementRef;
     private focusMonitor;
     /** Whether the link is active. */

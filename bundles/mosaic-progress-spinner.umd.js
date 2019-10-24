@@ -56,8 +56,9 @@ var McProgressSpinnerBase = /** @class */ (function () {
     }
     return McProgressSpinnerBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McProgressSpinnerMixinBase = core$1.mixinColor(McProgressSpinnerBase);
+var McProgressSpinnerMixinBase = core$1.mixinColor(McProgressSpinnerBase);
 /** @type {?} */
 var MAX_DASH_ARRAY = 273;
 var McProgressSpinner = /** @class */ (function (_super) {
@@ -114,7 +115,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
         color: [{ type: core.Input }]
     };
     return McProgressSpinner;
-}(_McProgressSpinnerMixinBase));
+}(McProgressSpinnerMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -142,7 +143,7 @@ var McProgressSpinnerModule = /** @class */ (function () {
 
 exports.McProgressSpinnerModule = McProgressSpinnerModule;
 exports.McProgressSpinnerBase = McProgressSpinnerBase;
-exports._McProgressSpinnerMixinBase = _McProgressSpinnerMixinBase;
+exports.McProgressSpinnerMixinBase = McProgressSpinnerMixinBase;
 exports.McProgressSpinner = McProgressSpinner;
 
 Object.defineProperty(exports, '__esModule', { value: true });

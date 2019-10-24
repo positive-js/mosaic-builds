@@ -163,8 +163,9 @@ var McInputBase = /** @class */ (function () {
     }
     return McInputBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcInputMixinBase = core$1.mixinErrorState(McInputBase);
+var McInputMixinBase = core$1.mixinErrorState(McInputBase);
 var McNumberInput = /** @class */ (function () {
     function McNumberInput(_platform, _elementRef, _model, step, bigStep, min, max) {
         this._platform = _platform;
@@ -849,7 +850,7 @@ var McInput = /** @class */ (function (_super) {
         value: [{ type: core.Input }]
     };
     return McInput;
-}(mcInputMixinBase));
+}(McInputMixinBase));
 var McInputMono = /** @class */ (function () {
     function McInputMono() {
     }
@@ -1037,7 +1038,7 @@ exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
 exports.McInputBase = McInputBase;
-exports.mcInputMixinBase = mcInputMixinBase;
+exports.McInputMixinBase = McInputMixinBase;
 exports.McNumberInput = McNumberInput;
 exports.McInput = McInput;
 exports.McInputMono = McInputMono;

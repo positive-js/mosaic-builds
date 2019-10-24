@@ -169,9 +169,10 @@ class McFormFieldBase {
         this._elementRef = _elementRef;
     }
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const mcFormFieldMixinBase = mixinColor(McFormFieldBase);
-class McFormField extends mcFormFieldMixinBase {
+const McFormFieldMixinBase = mixinColor(McFormFieldBase);
+class McFormField extends McFormFieldMixinBase {
     // tslint:disable-next-line:naming-convention
     /**
      * @param {?} _elementRef
@@ -480,5 +481,5 @@ McFormFieldModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McFormFieldModule, McFormFieldBase, mcFormFieldMixinBase, McFormField, McFormFieldWithoutBorders, McFormFieldControl, McFormFieldNumberControl, getMcFormFieldMissingControlError, McHint, McSuffix, McPrefix, McCleaner, McStepper };
+export { McFormFieldModule, McFormFieldBase, McFormFieldMixinBase, McFormField, McFormFieldWithoutBorders, McFormFieldControl, McFormFieldNumberControl, getMcFormFieldMissingControlError, McHint, McSuffix, McPrefix, McCleaner, McStepper };
 //# sourceMappingURL=form-field.js.map

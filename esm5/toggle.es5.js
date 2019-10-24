@@ -25,8 +25,9 @@ var McToggleBase = /** @class */ (function () {
     }
     return McToggleBase;
 }());
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-var mcToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
+var McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
 var McToggleChange = /** @class */ (function () {
     function McToggleChange() {
     }
@@ -298,7 +299,7 @@ var McToggleComponent = /** @class */ (function (_super) {
         change: [{ type: Output }]
     };
     return McToggleComponent;
-}(mcToggleMixinBase));
+}(McToggleMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -327,5 +328,5 @@ var McToggleModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McToggleModule, McToggleBase, mcToggleMixinBase, McToggleChange, McToggleComponent };
+export { McToggleModule, McToggleBase, McToggleMixinBase, McToggleChange, McToggleComponent };
 //# sourceMappingURL=toggle.es5.js.map

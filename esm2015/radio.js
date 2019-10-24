@@ -38,8 +38,9 @@ class McRadioChange {
  */
 class McRadioGroupBase {
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const mcRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
+const McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
  * allows it to support [(ngModel)] and ngControl.
@@ -54,7 +55,7 @@ const MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = {
     () => McRadioGroup)),
     multi: true
 };
-class McRadioGroup extends mcRadioGroupMixinBase {
+class McRadioGroup extends McRadioGroupMixinBase {
     /**
      * @param {?} _changeDetector
      */
@@ -368,9 +369,10 @@ class McRadioButtonBase {
         this._elementRef = _elementRef;
     }
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const mcRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
-class McRadioButton extends mcRadioButtonMixinBase {
+const McRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
+class McRadioButton extends McRadioButtonMixinBase {
     /**
      * @param {?} radioGroup
      * @param {?} elementRef
@@ -687,5 +689,5 @@ McRadioModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McRadioModule, McRadioChange, McRadioGroupBase, mcRadioGroupMixinBase, MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioGroup, McRadioButtonBase, mcRadioButtonMixinBase, McRadioButton };
+export { McRadioModule, McRadioChange, McRadioGroupBase, McRadioGroupMixinBase, MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioGroup, McRadioButtonBase, McRadioButtonMixinBase, McRadioButton };
 //# sourceMappingURL=radio.js.map

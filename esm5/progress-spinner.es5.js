@@ -27,8 +27,9 @@ var McProgressSpinnerBase = /** @class */ (function () {
     }
     return McProgressSpinnerBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
+var McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
 /** @type {?} */
 var MAX_DASH_ARRAY = 273;
 var McProgressSpinner = /** @class */ (function (_super) {
@@ -85,7 +86,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
         color: [{ type: Input }]
     };
     return McProgressSpinner;
-}(_McProgressSpinnerMixinBase));
+}(McProgressSpinnerMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -121,5 +122,5 @@ var McProgressSpinnerModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McProgressSpinnerModule, McProgressSpinnerBase, _McProgressSpinnerMixinBase, McProgressSpinner };
+export { McProgressSpinnerModule, McProgressSpinnerBase, McProgressSpinnerMixinBase, McProgressSpinner };
 //# sourceMappingURL=progress-spinner.es5.js.map

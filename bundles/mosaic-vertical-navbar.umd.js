@@ -77,8 +77,9 @@ var McVerticalNavbarItemBase = /** @class */ (function () {
     }
     return McVerticalNavbarItemBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McVerticalNavbarMixinBase = core$1.mixinDisabled(McVerticalNavbarItemBase);
+var McVerticalNavbarMixinBase = core$1.mixinDisabled(McVerticalNavbarItemBase);
 var McVerticalNavbarItem = /** @class */ (function (_super) {
     __extends(McVerticalNavbarItem, _super);
     function McVerticalNavbarItem(element, focusMonitor, trigger$$1) {
@@ -133,7 +134,7 @@ var McVerticalNavbarItem = /** @class */ (function (_super) {
         tabIndex: [{ type: core.Input }]
     };
     return McVerticalNavbarItem;
-}(_McVerticalNavbarMixinBase));
+}(McVerticalNavbarMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -258,9 +259,9 @@ exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
 exports.McVerticalNavbar = McVerticalNavbar;
 exports.McVerticalNavbarItemIcon = McVerticalNavbarItemIcon;
 exports.McVerticalNavbarItemBadge = McVerticalNavbarItemBadge;
-exports._McVerticalNavbarMixinBase = _McVerticalNavbarMixinBase;
+exports.McVerticalNavbarMixinBase = McVerticalNavbarMixinBase;
 exports.McVerticalNavbarItem = McVerticalNavbarItem;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

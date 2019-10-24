@@ -7,12 +7,12 @@ export declare class McToggleBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const mcToggleMixinBase: HasTabIndexCtor & CanDisableCtor & CanColorCtor & typeof McToggleBase;
+export declare const McToggleMixinBase: HasTabIndexCtor & CanDisableCtor & CanColorCtor & typeof McToggleBase;
 export declare class McToggleChange {
     source: McToggleComponent;
     checked: boolean;
 }
-export declare class McToggleComponent extends mcToggleMixinBase implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
+export declare class McToggleComponent extends McToggleMixinBase implements ControlValueAccessor, CanColor, CanDisable, HasTabIndex {
     _elementRef: ElementRef;
     private _focusMonitor;
     private _changeDetectorRef;

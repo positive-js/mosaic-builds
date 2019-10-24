@@ -224,8 +224,9 @@ var McFormFieldBase = /** @class */ (function () {
     }
     return McFormFieldBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcFormFieldMixinBase = core$1.mixinColor(McFormFieldBase);
+var McFormFieldMixinBase = core$1.mixinColor(McFormFieldBase);
 var McFormField = /** @class */ (function (_super) {
     __extends(McFormField, _super);
     // tslint:disable-next-line:naming-convention
@@ -568,7 +569,7 @@ var McFormField = /** @class */ (function (_super) {
         connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer', { static: true },] }]
     };
     return McFormField;
-}(mcFormFieldMixinBase));
+}(McFormFieldMixinBase));
 var McFormFieldWithoutBorders = /** @class */ (function () {
     function McFormFieldWithoutBorders() {
     }
@@ -617,7 +618,7 @@ var McFormFieldModule = /** @class */ (function () {
 
 exports.McFormFieldModule = McFormFieldModule;
 exports.McFormFieldBase = McFormFieldBase;
-exports.mcFormFieldMixinBase = mcFormFieldMixinBase;
+exports.McFormFieldMixinBase = McFormFieldMixinBase;
 exports.McFormField = McFormField;
 exports.McFormFieldWithoutBorders = McFormFieldWithoutBorders;
 exports.McFormFieldControl = McFormFieldControl;

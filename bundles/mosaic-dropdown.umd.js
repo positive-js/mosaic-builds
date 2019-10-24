@@ -169,8 +169,9 @@ McDropdownItemBase = /** @class */ (function () {
     }
     return McDropdownItemBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcDropdownItemMixinBase = core$1.mixinDisabled(McDropdownItemBase);
+var McDropdownItemMixinBase = core$1.mixinDisabled(McDropdownItemBase);
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
  * It exists mostly to set the role attribute.
@@ -361,7 +362,7 @@ var McDropdownItem = /** @class */ (function (_super) {
         content: [{ type: core.ViewChild, args: ['content', { static: false },] }]
     };
     return McDropdownItem;
-}(mcDropdownItemMixinBase));
+}(McDropdownItemMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -1783,7 +1784,7 @@ exports.MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY = MC_DROPDOWN_DEFAULT_OPTIONS_FACTOR
 exports.MC_DROPDOWN_DEFAULT_OPTIONS = MC_DROPDOWN_DEFAULT_OPTIONS;
 exports.McDropdown = McDropdown;
 exports.McDropdownItemBase = McDropdownItemBase;
-exports.mcDropdownItemMixinBase = mcDropdownItemMixinBase;
+exports.McDropdownItemMixinBase = McDropdownItemMixinBase;
 exports.McDropdownItem = McDropdownItem;
 exports.MC_DROPDOWN_PANEL = MC_DROPDOWN_PANEL;
 exports.throwMcDropdownMissingError = throwMcDropdownMissingError;

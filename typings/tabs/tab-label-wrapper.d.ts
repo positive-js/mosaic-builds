@@ -3,12 +3,12 @@ import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 /** @docs-private */
 export declare class McTabLabelWrapperBase {
 }
-export declare const mcTabLabelWrapperMixinBase: CanDisableCtor & typeof McTabLabelWrapperBase;
+export declare const McTabLabelWrapperMixinBase: CanDisableCtor & typeof McTabLabelWrapperBase;
 /**
  * Used in the `mc-tab-group` view to display tab labels.
  * @docs-private
  */
-export declare class McTabLabelWrapper extends mcTabLabelWrapperMixinBase implements CanDisable {
+export declare class McTabLabelWrapper extends McTabLabelWrapperMixinBase implements CanDisable {
     elementRef: ElementRef;
     constructor(elementRef: ElementRef);
     /** Sets focus on the wrapper element */

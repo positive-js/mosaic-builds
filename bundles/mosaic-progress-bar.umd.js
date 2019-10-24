@@ -56,8 +56,9 @@ var McProgressBarBase = /** @class */ (function () {
     }
     return McProgressBarBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McProgressBarMixinBase = core$1.mixinColor(McProgressBarBase);
+var McProgressBarMixinBase = core$1.mixinColor(McProgressBarBase);
 var McProgressBar = /** @class */ (function (_super) {
     __extends(McProgressBar, _super);
     function McProgressBar(elementRef) {
@@ -102,7 +103,7 @@ var McProgressBar = /** @class */ (function (_super) {
         color: [{ type: core.Input }]
     };
     return McProgressBar;
-}(_McProgressBarMixinBase));
+}(McProgressBarMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -130,7 +131,7 @@ var McProgressBarModule = /** @class */ (function () {
 
 exports.McProgressBarModule = McProgressBarModule;
 exports.McProgressBarBase = McProgressBarBase;
-exports._McProgressBarMixinBase = _McProgressBarMixinBase;
+exports.McProgressBarMixinBase = McProgressBarMixinBase;
 exports.McProgressBar = McProgressBar;
 
 Object.defineProperty(exports, '__esModule', { value: true });

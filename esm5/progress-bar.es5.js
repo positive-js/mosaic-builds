@@ -27,8 +27,9 @@ var McProgressBarBase = /** @class */ (function () {
     }
     return McProgressBarBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McProgressBarMixinBase = mixinColor(McProgressBarBase);
+var McProgressBarMixinBase = mixinColor(McProgressBarBase);
 var McProgressBar = /** @class */ (function (_super) {
     __extends(McProgressBar, _super);
     function McProgressBar(elementRef) {
@@ -73,7 +74,7 @@ var McProgressBar = /** @class */ (function (_super) {
         color: [{ type: Input }]
     };
     return McProgressBar;
-}(_McProgressBarMixinBase));
+}(McProgressBarMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -109,5 +110,5 @@ var McProgressBarModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McProgressBarModule, McProgressBarBase, _McProgressBarMixinBase, McProgressBar };
+export { McProgressBarModule, McProgressBarBase, McProgressBarMixinBase, McProgressBar };
 //# sourceMappingURL=progress-bar.es5.js.map

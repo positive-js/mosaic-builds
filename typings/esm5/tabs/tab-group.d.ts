@@ -31,12 +31,12 @@ export declare class McTabGroupBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const mcTabGroupMixinBase: CanColorCtor & typeof McTabGroupBase;
+export declare const McTabGroupMixinBase: CanColorCtor & typeof McTabGroupBase;
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
  * keyboard navigation.
  */
-export declare class McTabGroup extends mcTabGroupMixinBase implements AfterContentInit, AfterContentChecked, OnDestroy, CanColor {
+export declare class McTabGroup extends McTabGroupMixinBase implements AfterContentInit, AfterContentChecked, OnDestroy, CanColor {
     private changeDetectorRef;
     lightTab: boolean;
     /** Whether the tab group should grow to the size of the active tab. */

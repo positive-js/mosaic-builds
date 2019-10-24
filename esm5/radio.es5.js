@@ -47,8 +47,9 @@ McRadioGroupBase = /** @class */ (function () {
     }
     return McRadioGroupBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
+var McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
  * allows it to support [(ngModel)] and ngControl.
@@ -473,7 +474,7 @@ var McRadioGroup = /** @class */ (function (_super) {
                     function () { return McRadioButton; })), { descendants: true },] }]
     };
     return McRadioGroup;
-}(mcRadioGroupMixinBase));
+}(McRadioGroupMixinBase));
 // Boilerplate for applying mixins to McRadioButton.
 /**
  * \@docs-private
@@ -490,8 +491,9 @@ McRadioButtonBase = /** @class */ (function () {
     }
     return McRadioButtonBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
+var McRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
 var McRadioButton = /** @class */ (function (_super) {
     __extends(McRadioButton, _super);
     function McRadioButton(radioGroup, elementRef, _changeDetector, focusMonitor, _radioDispatcher) {
@@ -849,7 +851,7 @@ var McRadioButton = /** @class */ (function (_super) {
         id: [{ type: Input }]
     };
     return McRadioButton;
-}(mcRadioButtonMixinBase));
+}(McRadioButtonMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -878,5 +880,5 @@ var McRadioModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McRadioModule, McRadioChange, McRadioGroupBase, mcRadioGroupMixinBase, MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioGroup, McRadioButtonBase, mcRadioButtonMixinBase, McRadioButton };
+export { McRadioModule, McRadioChange, McRadioGroupBase, McRadioGroupMixinBase, MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioGroup, McRadioButtonBase, McRadioButtonMixinBase, McRadioButton };
 //# sourceMappingURL=radio.es5.js.map

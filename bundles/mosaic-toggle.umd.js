@@ -52,8 +52,9 @@ var McToggleBase = /** @class */ (function () {
     }
     return McToggleBase;
 }());
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-var mcToggleMixinBase = core$1.mixinTabIndex(core$1.mixinColor(core$1.mixinDisabled(McToggleBase), core$1.ThemePalette.Primary));
+var McToggleMixinBase = core$1.mixinTabIndex(core$1.mixinColor(core$1.mixinDisabled(McToggleBase), core$1.ThemePalette.Primary));
 var McToggleChange = /** @class */ (function () {
     function McToggleChange() {
     }
@@ -325,7 +326,7 @@ var McToggleComponent = /** @class */ (function (_super) {
         change: [{ type: core.Output }]
     };
     return McToggleComponent;
-}(mcToggleMixinBase));
+}(McToggleMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -346,7 +347,7 @@ var McToggleModule = /** @class */ (function () {
 
 exports.McToggleModule = McToggleModule;
 exports.McToggleBase = McToggleBase;
-exports.mcToggleMixinBase = mcToggleMixinBase;
+exports.McToggleMixinBase = McToggleMixinBase;
 exports.McToggleChange = McToggleChange;
 exports.McToggleComponent = McToggleComponent;
 

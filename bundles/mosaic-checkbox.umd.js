@@ -112,8 +112,9 @@ McCheckboxBase = /** @class */ (function () {
     }
     return McCheckboxBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcCheckboxMixinBase = core$1.mixinTabIndex(core$1.mixinColor(core$1.mixinDisabled(McCheckboxBase)));
+var McCheckboxMixinBase = core$1.mixinTabIndex(core$1.mixinColor(core$1.mixinDisabled(McCheckboxBase)));
 /**
  * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
  * and exposes a similar API. A McCheckbox can be either checked, unchecked, indeterminate, or
@@ -608,7 +609,7 @@ var McCheckbox = /** @class */ (function (_super) {
         indeterminate: [{ type: core.Input }]
     };
     return McCheckbox;
-}(mcCheckboxMixinBase));
+}(McCheckboxMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -664,7 +665,7 @@ exports.MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = MC_CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.TransitionCheckState = TransitionCheckState;
 exports.McCheckboxChange = McCheckboxChange;
 exports.McCheckboxBase = McCheckboxBase;
-exports.mcCheckboxMixinBase = mcCheckboxMixinBase;
+exports.McCheckboxMixinBase = McCheckboxMixinBase;
 exports.McCheckbox = McCheckbox;
 exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
 exports.McCheckboxModule = McCheckboxModule;

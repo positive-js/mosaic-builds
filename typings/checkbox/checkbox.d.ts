@@ -35,7 +35,7 @@ export declare class McCheckboxBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const mcCheckboxMixinBase: HasTabIndexCtor & CanColorCtor & CanDisableCtor & typeof McCheckboxBase;
+export declare const McCheckboxMixinBase: HasTabIndexCtor & CanColorCtor & CanDisableCtor & typeof McCheckboxBase;
 /**
  * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
  * and exposes a similar API. A McCheckbox can be either checked, unchecked, indeterminate, or
@@ -43,7 +43,7 @@ export declare const mcCheckboxMixinBase: HasTabIndexCtor & CanColorCtor & CanDi
  * so there is no need to provide them yourself. However, if you want to omit a label and still
  * have the checkbox be accessible, you may supply an [aria-label] input.
  */
-export declare class McCheckbox extends mcCheckboxMixinBase implements ControlValueAccessor, AfterViewInit, OnDestroy, CanColor, CanDisable, HasTabIndex {
+export declare class McCheckbox extends McCheckboxMixinBase implements ControlValueAccessor, AfterViewInit, OnDestroy, CanColor, CanDisable, HasTabIndex {
     private _changeDetectorRef;
     private _focusMonitor;
     private _clickAction;

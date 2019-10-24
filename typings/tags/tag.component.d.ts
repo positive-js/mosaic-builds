@@ -29,8 +29,8 @@ export declare class McTagBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase;
-export declare class McTag extends _McTagMixinBase implements IFocusableOption, OnDestroy, CanColor, CanDisable {
+export declare const McTagMixinBase: CanColorCtor & CanDisableCtor & typeof McTagBase;
+export declare class McTag extends McTagMixinBase implements IFocusableOption, OnDestroy, CanColor, CanDisable {
     elementRef: ElementRef;
     changeDetectorRef: ChangeDetectorRef;
     private _ngZone;

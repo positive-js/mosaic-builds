@@ -15,14 +15,14 @@ export declare class McTagListBase {
     ngControl: NgControl;
     constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
-export declare const _McTagListMixinBase: CanUpdateErrorStateCtor & typeof McTagListBase;
+export declare const McTagListMixinBase: CanUpdateErrorStateCtor & typeof McTagListBase;
 /** Change event object that is emitted when the tag list value has changed. */
 export declare class McTagListChange {
     source: McTagList;
     value: any;
     constructor(source: McTagList, value: any);
 }
-export declare class McTagList extends _McTagListMixinBase implements McFormFieldControl<any>, ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
+export declare class McTagList extends McTagListMixinBase implements McFormFieldControl<any>, ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
     protected elementRef: ElementRef<HTMLElement>;
     private changeDetectorRef;
     private dir;

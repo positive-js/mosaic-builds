@@ -5,8 +5,8 @@ export declare class McProgressSpinnerBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McProgressSpinnerMixinBase: CanColorCtor & typeof McProgressSpinnerBase;
-export declare class McProgressSpinner extends _McProgressSpinnerMixinBase implements CanColor {
+export declare const McProgressSpinnerMixinBase: CanColorCtor & typeof McProgressSpinnerBase;
+export declare class McProgressSpinner extends McProgressSpinnerMixinBase implements CanColor {
     id: string;
     value: number;
     mode: ProgressSpinnerMode;

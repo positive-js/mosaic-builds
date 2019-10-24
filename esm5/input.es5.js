@@ -140,8 +140,9 @@ var McInputBase = /** @class */ (function () {
     }
     return McInputBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcInputMixinBase = mixinErrorState(McInputBase);
+var McInputMixinBase = mixinErrorState(McInputBase);
 var McNumberInput = /** @class */ (function () {
     function McNumberInput(_platform, _elementRef, _model, step, bigStep, min, max) {
         this._platform = _platform;
@@ -826,7 +827,7 @@ var McInput = /** @class */ (function (_super) {
         value: [{ type: Input }]
     };
     return McInput;
-}(mcInputMixinBase));
+}(McInputMixinBase));
 var McInputMono = /** @class */ (function () {
     function McInputMono() {
     }
@@ -1020,5 +1021,5 @@ var McInputModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McInputModule, BIG_STEP, SMALL_STEP, McInputBase, mcInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR, MAX_VALIDATOR as ɵc25, MIN_VALIDATOR as ɵa25, MaxValidator as ɵd25, MinValidator as ɵb25 };
+export { McInputModule, BIG_STEP, SMALL_STEP, McInputBase, McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR, MAX_VALIDATOR as ɵc25, MIN_VALIDATOR as ɵa25, MaxValidator as ɵd25, MinValidator as ɵb25 };
 //# sourceMappingURL=input.es5.js.map

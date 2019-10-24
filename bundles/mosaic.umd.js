@@ -2049,8 +2049,9 @@ var McFormFieldBase = /** @class */ (function () {
     }
     return McFormFieldBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcFormFieldMixinBase = mixinColor(McFormFieldBase);
+var McFormFieldMixinBase = mixinColor(McFormFieldBase);
 var McFormField = /** @class */ (function (_super) {
     __extends(McFormField, _super);
     // tslint:disable-next-line:naming-convention
@@ -2393,7 +2394,7 @@ var McFormField = /** @class */ (function (_super) {
         connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer', { static: true },] }]
     };
     return McFormField;
-}(mcFormFieldMixinBase));
+}(McFormFieldMixinBase));
 var McFormFieldWithoutBorders = /** @class */ (function () {
     function McFormFieldWithoutBorders() {
     }
@@ -4778,8 +4779,9 @@ McCheckboxBase = /** @class */ (function () {
     }
     return McCheckboxBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
+var McCheckboxMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McCheckboxBase)));
 /**
  * A mosaic checkbox component. Supports all of the functionality of an HTML5 checkbox,
  * and exposes a similar API. A McCheckbox can be either checked, unchecked, indeterminate, or
@@ -5274,7 +5276,7 @@ var McCheckbox = /** @class */ (function (_super) {
         indeterminate: [{ type: core.Input }]
     };
     return McCheckbox;
-}(mcCheckboxMixinBase));
+}(McCheckboxMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -5450,8 +5452,9 @@ var McInputBase = /** @class */ (function () {
     }
     return McInputBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcInputMixinBase = mixinErrorState(McInputBase);
+var McInputMixinBase = mixinErrorState(McInputBase);
 var McNumberInput = /** @class */ (function () {
     function McNumberInput(_platform, _elementRef, _model, step, bigStep, min, max) {
         this._platform = _platform;
@@ -6136,7 +6139,7 @@ var McInput = /** @class */ (function (_super) {
         value: [{ type: core.Input }]
     };
     return McInput;
-}(mcInputMixinBase));
+}(McInputMixinBase));
 var McInputMono = /** @class */ (function () {
     function McInputMono() {
     }
@@ -10143,8 +10146,9 @@ McDropdownItemBase = /** @class */ (function () {
     }
     return McDropdownItemBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcDropdownItemMixinBase = mixinDisabled(McDropdownItemBase);
+var McDropdownItemMixinBase = mixinDisabled(McDropdownItemBase);
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
  * It exists mostly to set the role attribute.
@@ -10335,7 +10339,7 @@ var McDropdownItem = /** @class */ (function (_super) {
         content: [{ type: core.ViewChild, args: ['content', { static: false },] }]
     };
     return McDropdownItem;
-}(mcDropdownItemMixinBase));
+}(McDropdownItemMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -12028,7 +12032,7 @@ var McListSelectionBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelectionBase));
+var McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelectionBase));
 var McListSelection = /** @class */ (function (_super) {
     __extends(McListSelection, _super);
     function McListSelection(element, tabIndex, autoSelect, noUnselect, multiple) {
@@ -12579,7 +12583,7 @@ var McListSelection = /** @class */ (function (_super) {
         selectionChange: [{ type: core.Output }]
     };
     return McListSelection;
-}(_McListSelectionMixinBase));
+}(McListSelectionMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -16127,8 +16131,9 @@ var McProgressBarBase = /** @class */ (function () {
     }
     return McProgressBarBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McProgressBarMixinBase = mixinColor(McProgressBarBase);
+var McProgressBarMixinBase = mixinColor(McProgressBarBase);
 var McProgressBar = /** @class */ (function (_super) {
     __extends(McProgressBar, _super);
     function McProgressBar(elementRef) {
@@ -16173,7 +16178,7 @@ var McProgressBar = /** @class */ (function (_super) {
         color: [{ type: core.Input }]
     };
     return McProgressBar;
-}(_McProgressBarMixinBase));
+}(McProgressBarMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -16216,8 +16221,9 @@ var McProgressSpinnerBase = /** @class */ (function () {
     }
     return McProgressSpinnerBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
+var McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
 /** @type {?} */
 var MAX_DASH_ARRAY = 273;
 var McProgressSpinner = /** @class */ (function (_super) {
@@ -16274,7 +16280,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
         color: [{ type: core.Input }]
     };
     return McProgressSpinner;
-}(_McProgressSpinnerMixinBase));
+}(McProgressSpinnerMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -16334,8 +16340,9 @@ McRadioGroupBase = /** @class */ (function () {
     }
     return McRadioGroupBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
+var McRadioGroupMixinBase = mixinDisabled(McRadioGroupBase);
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
  * allows it to support [(ngModel)] and ngControl.
@@ -16760,7 +16767,7 @@ var McRadioGroup = /** @class */ (function (_super) {
                     function () { return McRadioButton; })), { descendants: true },] }]
     };
     return McRadioGroup;
-}(mcRadioGroupMixinBase));
+}(McRadioGroupMixinBase));
 // Boilerplate for applying mixins to McRadioButton.
 /**
  * \@docs-private
@@ -16777,8 +16784,9 @@ McRadioButtonBase = /** @class */ (function () {
     }
     return McRadioButtonBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
+var McRadioButtonMixinBase = mixinColor(mixinTabIndex(McRadioButtonBase));
 var McRadioButton = /** @class */ (function (_super) {
     __extends(McRadioButton, _super);
     function McRadioButton(radioGroup, elementRef, _changeDetector, focusMonitor, _radioDispatcher) {
@@ -17136,7 +17144,7 @@ var McRadioButton = /** @class */ (function (_super) {
         id: [{ type: core.Input }]
     };
     return McRadioButton;
-}(mcRadioButtonMixinBase));
+}(McRadioButtonMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -18831,8 +18839,9 @@ var McTabBase = /** @class */ (function () {
     }
     return McTabBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabMixinBase = mixinDisabled(McTabBase);
+var McTabMixinBase = mixinDisabled(McTabBase);
 var McTab = /** @class */ (function (_super) {
     __extends(McTab, _super);
     function McTab(viewContainerRef) {
@@ -18937,7 +18946,7 @@ var McTab = /** @class */ (function (_super) {
         ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }]
     };
     return McTab;
-}(mcTabMixinBase));
+}(McTabMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -19301,8 +19310,9 @@ McTabLabelWrapperBase = /** @class */ (function () {
     }
     return McTabLabelWrapperBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabLabelWrapperMixinBase = mixinDisabled(McTabLabelWrapperBase);
+var McTabLabelWrapperMixinBase = mixinDisabled(McTabLabelWrapperBase);
 /**
  * Used in the `mc-tab-group` view to display tab labels.
  * \@docs-private
@@ -19359,7 +19369,7 @@ var McTabLabelWrapper = /** @class */ (function (_super) {
         { type: core.ElementRef }
     ]; };
     return McTabLabelWrapper;
-}(mcTabLabelWrapperMixinBase));
+}(McTabLabelWrapperMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -20118,8 +20128,9 @@ McTabGroupBase = /** @class */ (function () {
     }
     return McTabGroupBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabGroupMixinBase = mixinColor(mixinDisabled(McTabGroupBase));
+var McTabGroupMixinBase = mixinColor(mixinDisabled(McTabGroupBase));
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
  * keyboard navigation.
@@ -20553,7 +20564,7 @@ var McTabGroup = /** @class */ (function (_super) {
         selectedTabChange: [{ type: core.Output }]
     };
     return McTabGroup;
-}(mcTabGroupMixinBase));
+}(McTabGroupMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -20575,8 +20586,9 @@ McTabNavBase = /** @class */ (function () {
     }
     return McTabNavBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabNavMixinBase = mixinColor(McTabNavBase);
+var McTabNavMixinBase = mixinColor(McTabNavBase);
 /**
  * Navigation component matching the styles of the tab group header.
  */
@@ -20602,7 +20614,7 @@ var McTabNav = /** @class */ (function (_super) {
         { type: core.ElementRef }
     ]; };
     return McTabNav;
-}(mcTabNavMixinBase));
+}(McTabNavMixinBase));
 // Boilerplate for applying mixins to McTabLink.
 var   
 // Boilerplate for applying mixins to McTabLink.
@@ -20611,8 +20623,9 @@ McTabLinkBase = /** @class */ (function () {
     }
     return McTabLinkBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabLinkMixinBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
+var McTabLinkMixinBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
 /**
  * Link inside of a `mc-tab-nav-bar`.
  */
@@ -20685,7 +20698,7 @@ var McTabLink = /** @class */ (function (_super) {
         active: [{ type: core.Input }]
     };
     return McTabLink;
-}(mcTabLinkMixinBase));
+}(McTabLinkMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -20807,7 +20820,7 @@ var McTagBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McTagMixinBase = mixinColor(mixinDisabled(McTagBase));
+var McTagMixinBase = mixinColor(mixinDisabled(McTagBase));
 var McTag = /** @class */ (function (_super) {
     __extends(McTag, _super);
     function McTag(elementRef, changeDetectorRef, _ngZone) {
@@ -21292,7 +21305,7 @@ var McTag = /** @class */ (function (_super) {
         removable: [{ type: core.Input }]
     };
     return McTag;
-}(_McTagMixinBase));
+}(McTagMixinBase));
 /**
  *
  * Example:
@@ -21361,7 +21374,7 @@ var McTagListBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McTagListMixinBase = mixinErrorState(McTagListBase);
+var McTagListMixinBase = mixinErrorState(McTagListBase);
 // Increasing integer for generating unique ids for tag-list components.
 /** @type {?} */
 var nextUniqueId$5 = 0;
@@ -22642,7 +22655,7 @@ var McTagList = /** @class */ (function (_super) {
                     },] }]
     };
     return McTagList;
-}(_McTagListMixinBase));
+}(McTagListMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -29732,8 +29745,9 @@ var McToggleBase = /** @class */ (function () {
     }
     return McToggleBase;
 }());
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-var mcToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
+var McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
 var McToggleChange = /** @class */ (function () {
     function McToggleChange() {
     }
@@ -30005,7 +30019,7 @@ var McToggleComponent = /** @class */ (function (_super) {
         change: [{ type: core.Output }]
     };
     return McToggleComponent;
-}(mcToggleMixinBase));
+}(McToggleMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -31063,8 +31077,9 @@ var McVerticalNavbarItemBase = /** @class */ (function () {
     }
     return McVerticalNavbarItemBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McVerticalNavbarMixinBase = mixinDisabled(McVerticalNavbarItemBase);
+var McVerticalNavbarMixinBase = mixinDisabled(McVerticalNavbarItemBase);
 var McVerticalNavbarItem = /** @class */ (function (_super) {
     __extends(McVerticalNavbarItem, _super);
     function McVerticalNavbarItem(element, focusMonitor, trigger$$1) {
@@ -31119,7 +31134,7 @@ var McVerticalNavbarItem = /** @class */ (function (_super) {
         tabIndex: [{ type: core.Input }]
     };
     return McVerticalNavbarItem;
-}(_McVerticalNavbarMixinBase));
+}(McVerticalNavbarMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -31331,7 +31346,7 @@ exports.MC_CHECKBOX_CONTROL_VALUE_ACCESSOR = MC_CHECKBOX_CONTROL_VALUE_ACCESSOR;
 exports.TransitionCheckState = TransitionCheckState;
 exports.McCheckboxChange = McCheckboxChange;
 exports.McCheckboxBase = McCheckboxBase;
-exports.mcCheckboxMixinBase = mcCheckboxMixinBase;
+exports.McCheckboxMixinBase = McCheckboxMixinBase;
 exports.McCheckbox = McCheckbox;
 exports.MC_CHECKBOX_CLICK_ACTION = MC_CHECKBOX_CLICK_ACTION;
 exports.McCheckboxModule = McCheckboxModule;
@@ -31369,7 +31384,7 @@ exports.MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY = MC_DROPDOWN_DEFAULT_OPTIONS_FACTOR
 exports.MC_DROPDOWN_DEFAULT_OPTIONS = MC_DROPDOWN_DEFAULT_OPTIONS;
 exports.McDropdown = McDropdown;
 exports.McDropdownItemBase = McDropdownItemBase;
-exports.mcDropdownItemMixinBase = mcDropdownItemMixinBase;
+exports.McDropdownItemMixinBase = McDropdownItemMixinBase;
 exports.McDropdownItem = McDropdownItem;
 exports.MC_DROPDOWN_PANEL = MC_DROPDOWN_PANEL;
 exports.throwMcDropdownMissingError = throwMcDropdownMissingError;
@@ -31386,7 +31401,7 @@ exports.NESTED_PANEL_TOP_PADDING = NESTED_PANEL_TOP_PADDING;
 exports.McDropdownTrigger = McDropdownTrigger;
 exports.McFormFieldModule = McFormFieldModule;
 exports.McFormFieldBase = McFormFieldBase;
-exports.mcFormFieldMixinBase = mcFormFieldMixinBase;
+exports.McFormFieldMixinBase = McFormFieldMixinBase;
 exports.McFormField = McFormField;
 exports.McFormFieldWithoutBorders = McFormFieldWithoutBorders;
 exports.McFormFieldControl = McFormFieldControl;
@@ -31410,7 +31425,7 @@ exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
 exports.McInputBase = McInputBase;
-exports.mcInputMixinBase = mcInputMixinBase;
+exports.McInputMixinBase = McInputMixinBase;
 exports.McNumberInput = McNumberInput;
 exports.McInput = McInput;
 exports.McInputMono = McInputMono;
@@ -31427,7 +31442,7 @@ exports.McListOption = McListOption;
 exports.MC_SELECTION_LIST_VALUE_ACCESSOR = MC_SELECTION_LIST_VALUE_ACCESSOR;
 exports.McListSelectionChange = McListSelectionChange;
 exports.McListSelectionBase = McListSelectionBase;
-exports._McListSelectionMixinBase = _McListSelectionMixinBase;
+exports.McListSelectionMixinBase = McListSelectionMixinBase;
 exports.McListSelection = McListSelection;
 exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
@@ -31461,20 +31476,20 @@ exports.McPopover = McPopover;
 exports.mcPopoverAnimations = mcPopoverAnimations;
 exports.McProgressBarModule = McProgressBarModule;
 exports.McProgressBarBase = McProgressBarBase;
-exports._McProgressBarMixinBase = _McProgressBarMixinBase;
+exports.McProgressBarMixinBase = McProgressBarMixinBase;
 exports.McProgressBar = McProgressBar;
 exports.McProgressSpinnerModule = McProgressSpinnerModule;
 exports.McProgressSpinnerBase = McProgressSpinnerBase;
-exports._McProgressSpinnerMixinBase = _McProgressSpinnerMixinBase;
+exports.McProgressSpinnerMixinBase = McProgressSpinnerMixinBase;
 exports.McProgressSpinner = McProgressSpinner;
 exports.McRadioModule = McRadioModule;
 exports.McRadioChange = McRadioChange;
 exports.McRadioGroupBase = McRadioGroupBase;
-exports.mcRadioGroupMixinBase = mcRadioGroupMixinBase;
+exports.McRadioGroupMixinBase = McRadioGroupMixinBase;
 exports.MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR;
 exports.McRadioGroup = McRadioGroup;
 exports.McRadioButtonBase = McRadioButtonBase;
-exports.mcRadioButtonMixinBase = mcRadioButtonMixinBase;
+exports.McRadioButtonMixinBase = McRadioButtonMixinBase;
 exports.McRadioButton = McRadioButton;
 exports.McTreeModule = McTreeModule;
 exports.McTreeNodeDef = McTreeNodeDef;
@@ -31492,14 +31507,14 @@ exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
 exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
+exports.ɵe15 = McTabMixinBase;
 exports.ɵa15 = McTabHeaderBase;
 exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵc15 = McTabLabelWrapperMixinBase;
 exports.ɵh15 = McTabLinkBase;
+exports.ɵi15 = McTabLinkMixinBase;
 exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵg15 = McTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -31517,7 +31532,7 @@ exports.McStretchTabsCssStyler = McStretchTabsCssStyler;
 exports.McTabChangeEvent = McTabChangeEvent;
 exports.MC_TABS_CONFIG = MC_TABS_CONFIG;
 exports.McTabGroupBase = McTabGroupBase;
-exports.mcTabGroupMixinBase = mcTabGroupMixinBase;
+exports.McTabGroupMixinBase = McTabGroupMixinBase;
 exports.McTabGroup = McTabGroup;
 exports.mcTabsAnimations = mcTabsAnimations;
 exports.McSelectModule = McSelectModule;
@@ -31536,11 +31551,11 @@ exports.McTagSelectionChange = McTagSelectionChange;
 exports.McTagAvatar = McTagAvatar;
 exports.McTagTrailingIcon = McTagTrailingIcon;
 exports.McTagBase = McTagBase;
-exports._McTagMixinBase = _McTagMixinBase;
+exports.McTagMixinBase = McTagMixinBase;
 exports.McTag = McTag;
 exports.McTagRemove = McTagRemove;
 exports.McTagListBase = McTagListBase;
-exports._McTagListMixinBase = _McTagListMixinBase;
+exports.McTagListMixinBase = McTagListMixinBase;
 exports.McTagListChange = McTagListChange;
 exports.McTagList = McTagList;
 exports.McTagInput = McTagInput;
@@ -31568,7 +31583,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa0 = mcSidebarAnimations;
+exports.ɵa2 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -31597,7 +31612,7 @@ exports.McSplitterComponent = McSplitterComponent;
 exports.McSplitterAreaDirective = McSplitterAreaDirective;
 exports.McToggleModule = McToggleModule;
 exports.McToggleBase = McToggleBase;
-exports.mcToggleMixinBase = mcToggleMixinBase;
+exports.McToggleMixinBase = McToggleMixinBase;
 exports.McToggleChange = McToggleChange;
 exports.McToggleComponent = McToggleComponent;
 exports.McToolTipModule = McToolTipModule;
@@ -31607,14 +31622,14 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
 exports.McVerticalNavbar = McVerticalNavbar;
 exports.McVerticalNavbarItemIcon = McVerticalNavbarItemIcon;
 exports.McVerticalNavbarItemBadge = McVerticalNavbarItemBadge;
-exports._McVerticalNavbarMixinBase = _McVerticalNavbarMixinBase;
+exports.McVerticalNavbarMixinBase = McVerticalNavbarMixinBase;
 exports.McVerticalNavbarItem = McVerticalNavbarItem;
 
 Object.defineProperty(exports, '__esModule', { value: true });

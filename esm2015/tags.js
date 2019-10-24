@@ -85,8 +85,8 @@ class McTagBase {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-const _McTagMixinBase = mixinColor(mixinDisabled(McTagBase));
-class McTag extends _McTagMixinBase {
+const McTagMixinBase = mixinColor(mixinDisabled(McTagBase));
+class McTag extends McTagMixinBase {
     /**
      * @param {?} elementRef
      * @param {?} changeDetectorRef
@@ -543,7 +543,7 @@ class McTagListBase {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-const _McTagListMixinBase = mixinErrorState(McTagListBase);
+const McTagListMixinBase = mixinErrorState(McTagListBase);
 // Increasing integer for generating unique ids for tag-list components.
 /** @type {?} */
 let nextUniqueId = 0;
@@ -560,7 +560,7 @@ class McTagListChange {
         this.value = value;
     }
 }
-class McTagList extends _McTagListMixinBase {
+class McTagList extends McTagListMixinBase {
     /**
      * @param {?} elementRef
      * @param {?} changeDetectorRef
@@ -1775,5 +1775,5 @@ McTagsModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, _McTagMixinBase, McTag, McTagRemove, McTagListBase, _McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS };
+export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, McTagMixinBase, McTag, McTagRemove, McTagListBase, McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS };
 //# sourceMappingURL=tags.js.map

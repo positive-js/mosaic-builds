@@ -26,11 +26,12 @@ class McToggleBase {
         this._elementRef = _elementRef;
     }
 }
+// tslint:disable-next-line: naming-convention
 /** @type {?} */
-const mcToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
+const McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
 class McToggleChange {
 }
-class McToggleComponent extends mcToggleMixinBase {
+class McToggleComponent extends McToggleMixinBase {
     // tslint:disable-next-line:naming-convention
     /**
      * @param {?} _elementRef
@@ -269,5 +270,5 @@ McToggleModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McToggleModule, McToggleBase, mcToggleMixinBase, McToggleChange, McToggleComponent };
+export { McToggleModule, McToggleBase, McToggleMixinBase, McToggleChange, McToggleComponent };
 //# sourceMappingURL=toggle.js.map

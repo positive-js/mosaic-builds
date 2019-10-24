@@ -28,11 +28,12 @@ class McProgressSpinnerBase {
         this._elementRef = _elementRef;
     }
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const _McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
+const McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
 /** @type {?} */
 const MAX_DASH_ARRAY = 273;
-class McProgressSpinner extends _McProgressSpinnerMixinBase {
+class McProgressSpinner extends McProgressSpinnerMixinBase {
     /**
      * @param {?} elementRef
      */
@@ -111,5 +112,5 @@ McProgressSpinnerModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McProgressSpinnerModule, McProgressSpinnerBase, _McProgressSpinnerMixinBase, McProgressSpinner };
+export { McProgressSpinnerModule, McProgressSpinnerBase, McProgressSpinnerMixinBase, McProgressSpinner };
 //# sourceMappingURL=progress-spinner.js.map

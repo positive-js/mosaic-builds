@@ -198,8 +198,9 @@ var McFormFieldBase = /** @class */ (function () {
     }
     return McFormFieldBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcFormFieldMixinBase = mixinColor(McFormFieldBase);
+var McFormFieldMixinBase = mixinColor(McFormFieldBase);
 var McFormField = /** @class */ (function (_super) {
     __extends(McFormField, _super);
     // tslint:disable-next-line:naming-convention
@@ -542,7 +543,7 @@ var McFormField = /** @class */ (function (_super) {
         connectionContainerRef: [{ type: ViewChild, args: ['connectionContainer', { static: true },] }]
     };
     return McFormField;
-}(mcFormFieldMixinBase));
+}(McFormFieldMixinBase));
 var McFormFieldWithoutBorders = /** @class */ (function () {
     function McFormFieldWithoutBorders() {
     }
@@ -599,5 +600,5 @@ var McFormFieldModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McFormFieldModule, McFormFieldBase, mcFormFieldMixinBase, McFormField, McFormFieldWithoutBorders, McFormFieldControl, McFormFieldNumberControl, getMcFormFieldMissingControlError, McHint, McSuffix, McPrefix, McCleaner, McStepper };
+export { McFormFieldModule, McFormFieldBase, McFormFieldMixinBase, McFormField, McFormFieldWithoutBorders, McFormFieldControl, McFormFieldNumberControl, getMcFormFieldMissingControlError, McHint, McSuffix, McPrefix, McCleaner, McStepper };
 //# sourceMappingURL=form-field.es5.js.map

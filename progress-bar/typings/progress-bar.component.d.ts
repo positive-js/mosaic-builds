@@ -5,8 +5,8 @@ export declare class McProgressBarBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const _McProgressBarMixinBase: CanColorCtor & typeof McProgressBarBase;
-export declare class McProgressBar extends _McProgressBarMixinBase implements CanColor {
+export declare const McProgressBarMixinBase: CanColorCtor & typeof McProgressBarBase;
+export declare class McProgressBar extends McProgressBarMixinBase implements CanColor {
     id: string;
     value: number;
     mode: ProgressBarMode;

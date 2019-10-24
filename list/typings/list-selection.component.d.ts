@@ -43,8 +43,8 @@ export declare class McListSelectionChange {
 }
 export declare class McListSelectionBase {
 }
-export declare const _McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase;
-export declare class McListSelection extends _McListSelectionMixinBase implements IFocusableOption, CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor, HasTabIndex {
+export declare const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase;
+export declare class McListSelection extends McListSelectionMixinBase implements IFocusableOption, CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor, HasTabIndex {
     private element;
     keyManager: FocusKeyManager<McListOption>;
     options: QueryList<McListOption>;

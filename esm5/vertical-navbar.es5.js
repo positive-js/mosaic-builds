@@ -52,8 +52,9 @@ var McVerticalNavbarItemBase = /** @class */ (function () {
     }
     return McVerticalNavbarItemBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McVerticalNavbarMixinBase = mixinDisabled(McVerticalNavbarItemBase);
+var McVerticalNavbarMixinBase = mixinDisabled(McVerticalNavbarItemBase);
 var McVerticalNavbarItem = /** @class */ (function (_super) {
     __extends(McVerticalNavbarItem, _super);
     function McVerticalNavbarItem(element, focusMonitor, trigger$$1) {
@@ -108,7 +109,7 @@ var McVerticalNavbarItem = /** @class */ (function (_super) {
         tabIndex: [{ type: Input }]
     };
     return McVerticalNavbarItem;
-}(_McVerticalNavbarMixinBase));
+}(McVerticalNavbarMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -237,5 +238,5 @@ var McVerticalNavbarModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, _McVerticalNavbarMixinBase, McVerticalNavbarItem, toggleVerticalNavbarAnimation as ɵa22 };
+export { McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, McVerticalNavbarMixinBase, McVerticalNavbarItem, toggleVerticalNavbarAnimation as ɵa23 };
 //# sourceMappingURL=vertical-navbar.es5.js.map

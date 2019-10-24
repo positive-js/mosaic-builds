@@ -73,8 +73,9 @@ var McTabBase = /** @class */ (function () {
     }
     return McTabBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabMixinBase = mixinDisabled(McTabBase);
+var McTabMixinBase = mixinDisabled(McTabBase);
 var McTab = /** @class */ (function (_super) {
     __extends(McTab, _super);
     function McTab(viewContainerRef) {
@@ -179,7 +180,7 @@ var McTab = /** @class */ (function (_super) {
         ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }]
     };
     return McTab;
-}(mcTabMixinBase));
+}(McTabMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -543,8 +544,9 @@ McTabLabelWrapperBase = /** @class */ (function () {
     }
     return McTabLabelWrapperBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabLabelWrapperMixinBase = mixinDisabled(McTabLabelWrapperBase);
+var McTabLabelWrapperMixinBase = mixinDisabled(McTabLabelWrapperBase);
 /**
  * Used in the `mc-tab-group` view to display tab labels.
  * \@docs-private
@@ -601,7 +603,7 @@ var McTabLabelWrapper = /** @class */ (function (_super) {
         { type: ElementRef }
     ]; };
     return McTabLabelWrapper;
-}(mcTabLabelWrapperMixinBase));
+}(McTabLabelWrapperMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -1360,8 +1362,9 @@ McTabGroupBase = /** @class */ (function () {
     }
     return McTabGroupBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabGroupMixinBase = mixinColor(mixinDisabled(McTabGroupBase));
+var McTabGroupMixinBase = mixinColor(mixinDisabled(McTabGroupBase));
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
  * keyboard navigation.
@@ -1795,7 +1798,7 @@ var McTabGroup = /** @class */ (function (_super) {
         selectedTabChange: [{ type: Output }]
     };
     return McTabGroup;
-}(mcTabGroupMixinBase));
+}(McTabGroupMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -1817,8 +1820,9 @@ McTabNavBase = /** @class */ (function () {
     }
     return McTabNavBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabNavMixinBase = mixinColor(McTabNavBase);
+var McTabNavMixinBase = mixinColor(McTabNavBase);
 /**
  * Navigation component matching the styles of the tab group header.
  */
@@ -1844,7 +1848,7 @@ var McTabNav = /** @class */ (function (_super) {
         { type: ElementRef }
     ]; };
     return McTabNav;
-}(mcTabNavMixinBase));
+}(McTabNavMixinBase));
 // Boilerplate for applying mixins to McTabLink.
 var  
 // Boilerplate for applying mixins to McTabLink.
@@ -1853,8 +1857,9 @@ McTabLinkBase = /** @class */ (function () {
     }
     return McTabLinkBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabLinkMixinBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
+var McTabLinkMixinBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
 /**
  * Link inside of a `mc-tab-nav-bar`.
  */
@@ -1927,7 +1932,7 @@ var McTabLink = /** @class */ (function (_super) {
         active: [{ type: Input }]
     };
     return McTabLink;
-}(mcTabLinkMixinBase));
+}(McTabLinkMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -1994,5 +1999,5 @@ var McTabsModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, mcTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd15, mcTabMixinBase as ɵe15, McTabHeaderBase as ɵa15, McTabLabelWrapperBase as ɵb15, mcTabLabelWrapperMixinBase as ɵc15, McTabLinkBase as ɵh15, McTabNavBase as ɵf15, mcTabLinkMixinBase as ɵi15, mcTabNavMixinBase as ɵg15 };
+export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, McTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd15, McTabMixinBase as ɵe15, McTabHeaderBase as ɵa15, McTabLabelWrapperBase as ɵb15, McTabLabelWrapperMixinBase as ɵc15, McTabLinkBase as ɵh15, McTabLinkMixinBase as ɵi15, McTabNavBase as ɵf15, McTabNavMixinBase as ɵg15 };
 //# sourceMappingURL=tabs.es5.js.map

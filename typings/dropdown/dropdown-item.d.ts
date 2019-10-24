@@ -6,12 +6,12 @@ import { McDropdownPanel } from './dropdown-panel';
 /** @docs-private */
 export declare class McDropdownItemBase {
 }
-export declare const mcDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase;
+export declare const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase;
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
  * It exists mostly to set the role attribute.
  */
-export declare class McDropdownItem extends mcDropdownItemMixinBase implements IFocusableOption, CanDisable, OnDestroy {
+export declare class McDropdownItem extends McDropdownItemMixinBase implements IFocusableOption, CanDisable, OnDestroy {
     private _elementRef;
     private _focusMonitor;
     private _parentDropdownPanel?;

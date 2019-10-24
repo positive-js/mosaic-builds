@@ -90,7 +90,7 @@ var McTagBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McTagMixinBase = mixinColor(mixinDisabled(McTagBase));
+var McTagMixinBase = mixinColor(mixinDisabled(McTagBase));
 var McTag = /** @class */ (function (_super) {
     __extends(McTag, _super);
     function McTag(elementRef, changeDetectorRef, _ngZone) {
@@ -575,7 +575,7 @@ var McTag = /** @class */ (function (_super) {
         removable: [{ type: Input }]
     };
     return McTag;
-}(_McTagMixinBase));
+}(McTagMixinBase));
 /**
  *
  * Example:
@@ -644,7 +644,7 @@ var McTagListBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McTagListMixinBase = mixinErrorState(McTagListBase);
+var McTagListMixinBase = mixinErrorState(McTagListBase);
 // Increasing integer for generating unique ids for tag-list components.
 /** @type {?} */
 var nextUniqueId = 0;
@@ -1925,7 +1925,7 @@ var McTagList = /** @class */ (function (_super) {
                     },] }]
     };
     return McTagList;
-}(_McTagListMixinBase));
+}(McTagListMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -2275,5 +2275,5 @@ var McTagsModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, _McTagMixinBase, McTag, McTagRemove, McTagListBase, _McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS };
+export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, McTagMixinBase, McTag, McTagRemove, McTagListBase, McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS };
 //# sourceMappingURL=tags.es5.js.map

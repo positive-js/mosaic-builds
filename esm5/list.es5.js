@@ -291,7 +291,7 @@ var McListSelectionBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelectionBase));
+var McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelectionBase));
 var McListSelection = /** @class */ (function (_super) {
     __extends(McListSelection, _super);
     function McListSelection(element, tabIndex, autoSelect, noUnselect, multiple) {
@@ -842,7 +842,7 @@ var McListSelection = /** @class */ (function (_super) {
         selectionChange: [{ type: Output }]
     };
     return McListSelection;
-}(_McListSelectionMixinBase));
+}(McListSelectionMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -1003,5 +1003,5 @@ var McListModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, _McListSelectionMixinBase, McListSelection };
+export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, McListSelectionMixinBase, McListSelection };
 //# sourceMappingURL=list.es5.js.map

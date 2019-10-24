@@ -315,7 +315,7 @@ var McListSelectionBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McListSelectionMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McListSelectionBase));
+var McListSelectionMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McListSelectionBase));
 var McListSelection = /** @class */ (function (_super) {
     __extends(McListSelection, _super);
     function McListSelection(element, tabIndex, autoSelect, noUnselect, multiple) {
@@ -866,7 +866,7 @@ var McListSelection = /** @class */ (function (_super) {
         selectionChange: [{ type: core.Output }]
     };
     return McListSelection;
-}(_McListSelectionMixinBase));
+}(McListSelectionMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -1027,7 +1027,7 @@ exports.McListOption = McListOption;
 exports.MC_SELECTION_LIST_VALUE_ACCESSOR = MC_SELECTION_LIST_VALUE_ACCESSOR;
 exports.McListSelectionChange = McListSelectionChange;
 exports.McListSelectionBase = McListSelectionBase;
-exports._McListSelectionMixinBase = _McListSelectionMixinBase;
+exports.McListSelectionMixinBase = McListSelectionMixinBase;
 exports.McListSelection = McListSelection;
 
 Object.defineProperty(exports, '__esModule', { value: true });

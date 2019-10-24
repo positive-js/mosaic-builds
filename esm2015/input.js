@@ -144,8 +144,9 @@ class McInputBase {
         this.ngControl = ngControl;
     }
 }
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-const mcInputMixinBase = mixinErrorState(McInputBase);
+const McInputMixinBase = mixinErrorState(McInputBase);
 class McNumberInput {
     /**
      * @param {?} _platform
@@ -395,7 +396,7 @@ McNumberInput.propDecorators = {
     min: [{ type: Input }],
     max: [{ type: Input }]
 };
-class McInput extends mcInputMixinBase {
+class McInput extends McInputMixinBase {
     // tslint:disable-next-line: naming-convention
     /**
      * @param {?} _elementRef
@@ -847,5 +848,5 @@ McInputModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McInputModule, BIG_STEP, SMALL_STEP, McInputBase, mcInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR, MAX_VALIDATOR as ɵc25, MIN_VALIDATOR as ɵa25, MaxValidator as ɵd25, MinValidator as ɵb25 };
+export { McInputModule, BIG_STEP, SMALL_STEP, McInputBase, McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR, MAX_VALIDATOR as ɵc25, MIN_VALIDATOR as ɵa25, MaxValidator as ɵd25, MinValidator as ɵb25 };
 //# sourceMappingURL=input.js.map

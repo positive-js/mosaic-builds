@@ -94,8 +94,9 @@ var McTabBase = /** @class */ (function () {
     }
     return McTabBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabMixinBase = core$1.mixinDisabled(McTabBase);
+var McTabMixinBase = core$1.mixinDisabled(McTabBase);
 var McTab = /** @class */ (function (_super) {
     __extends(McTab, _super);
     function McTab(viewContainerRef) {
@@ -200,7 +201,7 @@ var McTab = /** @class */ (function (_super) {
         ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }]
     };
     return McTab;
-}(mcTabMixinBase));
+}(McTabMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -564,8 +565,9 @@ McTabLabelWrapperBase = /** @class */ (function () {
     }
     return McTabLabelWrapperBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabLabelWrapperMixinBase = core$1.mixinDisabled(McTabLabelWrapperBase);
+var McTabLabelWrapperMixinBase = core$1.mixinDisabled(McTabLabelWrapperBase);
 /**
  * Used in the `mc-tab-group` view to display tab labels.
  * \@docs-private
@@ -622,7 +624,7 @@ var McTabLabelWrapper = /** @class */ (function (_super) {
         { type: core.ElementRef }
     ]; };
     return McTabLabelWrapper;
-}(mcTabLabelWrapperMixinBase));
+}(McTabLabelWrapperMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -1381,8 +1383,9 @@ McTabGroupBase = /** @class */ (function () {
     }
     return McTabGroupBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabGroupMixinBase = core$1.mixinColor(core$1.mixinDisabled(McTabGroupBase));
+var McTabGroupMixinBase = core$1.mixinColor(core$1.mixinDisabled(McTabGroupBase));
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
  * keyboard navigation.
@@ -1816,7 +1819,7 @@ var McTabGroup = /** @class */ (function (_super) {
         selectedTabChange: [{ type: core.Output }]
     };
     return McTabGroup;
-}(mcTabGroupMixinBase));
+}(McTabGroupMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -1838,8 +1841,9 @@ McTabNavBase = /** @class */ (function () {
     }
     return McTabNavBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabNavMixinBase = core$1.mixinColor(McTabNavBase);
+var McTabNavMixinBase = core$1.mixinColor(McTabNavBase);
 /**
  * Navigation component matching the styles of the tab group header.
  */
@@ -1865,7 +1869,7 @@ var McTabNav = /** @class */ (function (_super) {
         { type: core.ElementRef }
     ]; };
     return McTabNav;
-}(mcTabNavMixinBase));
+}(McTabNavMixinBase));
 // Boilerplate for applying mixins to McTabLink.
 var   
 // Boilerplate for applying mixins to McTabLink.
@@ -1874,8 +1878,9 @@ McTabLinkBase = /** @class */ (function () {
     }
     return McTabLinkBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcTabLinkMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McTabLinkBase));
+var McTabLinkMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McTabLinkBase));
 /**
  * Link inside of a `mc-tab-nav-bar`.
  */
@@ -1948,7 +1953,7 @@ var McTabLink = /** @class */ (function (_super) {
         active: [{ type: core.Input }]
     };
     return McTabLink;
-}(mcTabLinkMixinBase));
+}(McTabLinkMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -2017,18 +2022,18 @@ exports.McStretchTabsCssStyler = McStretchTabsCssStyler;
 exports.McTabChangeEvent = McTabChangeEvent;
 exports.MC_TABS_CONFIG = MC_TABS_CONFIG;
 exports.McTabGroupBase = McTabGroupBase;
-exports.mcTabGroupMixinBase = mcTabGroupMixinBase;
+exports.McTabGroupMixinBase = McTabGroupMixinBase;
 exports.McTabGroup = McTabGroup;
 exports.mcTabsAnimations = mcTabsAnimations;
 exports.ɵd15 = McTabBase;
-exports.ɵe15 = mcTabMixinBase;
+exports.ɵe15 = McTabMixinBase;
 exports.ɵa15 = McTabHeaderBase;
 exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = mcTabLabelWrapperMixinBase;
+exports.ɵc15 = McTabLabelWrapperMixinBase;
 exports.ɵh15 = McTabLinkBase;
+exports.ɵi15 = McTabLinkMixinBase;
 exports.ɵf15 = McTabNavBase;
-exports.ɵi15 = mcTabLinkMixinBase;
-exports.ɵg15 = mcTabNavMixinBase;
+exports.ɵg15 = McTabNavMixinBase;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

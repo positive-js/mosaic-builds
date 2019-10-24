@@ -18,14 +18,14 @@ export declare class McRadioChange {
 /** @docs-private */
 export declare class McRadioGroupBase {
 }
-export declare const mcRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase;
+export declare const McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase;
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
  * allows it to support [(ngModel)] and ngControl.
  * @docs-private
  */
 export declare const MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR: any;
-export declare class McRadioGroup extends mcRadioGroupMixinBase implements AfterContentInit, ControlValueAccessor, CanDisable {
+export declare class McRadioGroup extends McRadioGroupMixinBase implements AfterContentInit, ControlValueAccessor, CanDisable {
     private readonly _changeDetector;
     /** Name of the radio button group. All radio buttons inside this group will use this name. */
     name: string;
@@ -119,8 +119,8 @@ export declare class McRadioButtonBase {
     disabled: boolean;
     constructor(_elementRef: ElementRef);
 }
-export declare const mcRadioButtonMixinBase: CanColorCtor & HasTabIndexCtor & typeof McRadioButtonBase;
-export declare class McRadioButton extends mcRadioButtonMixinBase implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
+export declare const McRadioButtonMixinBase: CanColorCtor & HasTabIndexCtor & typeof McRadioButtonBase;
+export declare class McRadioButton extends McRadioButtonMixinBase implements OnInit, AfterViewInit, OnDestroy, CanColor, HasTabIndex {
     private readonly _changeDetector;
     private focusMonitor;
     private readonly _radioDispatcher;

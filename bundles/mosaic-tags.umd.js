@@ -109,7 +109,7 @@ var McTagBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McTagMixinBase = core$1.mixinColor(core$1.mixinDisabled(McTagBase));
+var McTagMixinBase = core$1.mixinColor(core$1.mixinDisabled(McTagBase));
 var McTag = /** @class */ (function (_super) {
     __extends(McTag, _super);
     function McTag(elementRef, changeDetectorRef, _ngZone) {
@@ -594,7 +594,7 @@ var McTag = /** @class */ (function (_super) {
         removable: [{ type: core.Input }]
     };
     return McTag;
-}(_McTagMixinBase));
+}(McTagMixinBase));
 /**
  *
  * Example:
@@ -663,7 +663,7 @@ var McTagListBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var _McTagListMixinBase = core$1.mixinErrorState(McTagListBase);
+var McTagListMixinBase = core$1.mixinErrorState(McTagListBase);
 // Increasing integer for generating unique ids for tag-list components.
 /** @type {?} */
 var nextUniqueId = 0;
@@ -1944,7 +1944,7 @@ var McTagList = /** @class */ (function (_super) {
                     },] }]
     };
     return McTagList;
-}(_McTagListMixinBase));
+}(McTagListMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -2289,11 +2289,11 @@ exports.McTagSelectionChange = McTagSelectionChange;
 exports.McTagAvatar = McTagAvatar;
 exports.McTagTrailingIcon = McTagTrailingIcon;
 exports.McTagBase = McTagBase;
-exports._McTagMixinBase = _McTagMixinBase;
+exports.McTagMixinBase = McTagMixinBase;
 exports.McTag = McTag;
 exports.McTagRemove = McTagRemove;
 exports.McTagListBase = McTagListBase;
-exports._McTagListMixinBase = _McTagListMixinBase;
+exports.McTagListMixinBase = McTagListMixinBase;
 exports.McTagListChange = McTagListChange;
 exports.McTagList = McTagList;
 exports.McTagInput = McTagInput;

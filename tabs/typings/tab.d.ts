@@ -5,8 +5,8 @@ import { Subject } from 'rxjs';
 import { McTabLabel } from './tab-label';
 export declare class McTabBase {
 }
-export declare const mcTabMixinBase: CanDisableCtor & typeof McTabBase;
-export declare class McTab extends mcTabMixinBase implements OnInit, CanDisable, OnChanges, OnDestroy {
+export declare const McTabMixinBase: CanDisableCtor & typeof McTabBase;
+export declare class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChanges, OnDestroy {
     private viewContainerRef;
     /** @docs-private */
     readonly content: TemplatePortal | null;

@@ -12,8 +12,8 @@ export declare class McFormFieldBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const mcFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase;
-export declare class McFormField extends mcFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
+export declare const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase;
+export declare class McFormField extends McFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
     _elementRef: ElementRef;
     private _changeDetectorRef;
     control: McFormFieldControl<any>;

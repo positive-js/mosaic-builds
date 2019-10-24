@@ -13,7 +13,7 @@ export declare class McInputBase {
     ngControl: NgControl;
     constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
-export declare const mcInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase;
+export declare const McInputMixinBase: CanUpdateErrorStateCtor & typeof McInputBase;
 export declare class McNumberInput implements McFormFieldNumberControl<any> {
     private _platform;
     private _elementRef;
@@ -57,7 +57,7 @@ export declare class McNumberInput implements McFormFieldNumberControl<any> {
     private isFloat;
     private isInt;
 }
-export declare class McInput extends mcInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState {
+export declare class McInput extends McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState {
     protected _elementRef: ElementRef;
     ngControl: NgControl;
     /** An object used to control when error messages are shown. */

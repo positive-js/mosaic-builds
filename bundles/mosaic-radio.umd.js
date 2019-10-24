@@ -73,8 +73,9 @@ McRadioGroupBase = /** @class */ (function () {
     }
     return McRadioGroupBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcRadioGroupMixinBase = core$1.mixinDisabled(McRadioGroupBase);
+var McRadioGroupMixinBase = core$1.mixinDisabled(McRadioGroupBase);
 /**
  * Provider Expression that allows mc-radio-group to register as a ControlValueAccessor. This
  * allows it to support [(ngModel)] and ngControl.
@@ -499,7 +500,7 @@ var McRadioGroup = /** @class */ (function (_super) {
                     function () { return McRadioButton; })), { descendants: true },] }]
     };
     return McRadioGroup;
-}(mcRadioGroupMixinBase));
+}(McRadioGroupMixinBase));
 // Boilerplate for applying mixins to McRadioButton.
 /**
  * \@docs-private
@@ -516,8 +517,9 @@ McRadioButtonBase = /** @class */ (function () {
     }
     return McRadioButtonBase;
 }());
+// tslint:disable-next-line:naming-convention
 /** @type {?} */
-var mcRadioButtonMixinBase = core$1.mixinColor(core$1.mixinTabIndex(McRadioButtonBase));
+var McRadioButtonMixinBase = core$1.mixinColor(core$1.mixinTabIndex(McRadioButtonBase));
 var McRadioButton = /** @class */ (function (_super) {
     __extends(McRadioButton, _super);
     function McRadioButton(radioGroup, elementRef, _changeDetector, focusMonitor, _radioDispatcher) {
@@ -875,7 +877,7 @@ var McRadioButton = /** @class */ (function (_super) {
         id: [{ type: core.Input }]
     };
     return McRadioButton;
-}(mcRadioButtonMixinBase));
+}(McRadioButtonMixinBase));
 
 /**
  * @fileoverview added by tsickle
@@ -897,11 +899,11 @@ var McRadioModule = /** @class */ (function () {
 exports.McRadioModule = McRadioModule;
 exports.McRadioChange = McRadioChange;
 exports.McRadioGroupBase = McRadioGroupBase;
-exports.mcRadioGroupMixinBase = mcRadioGroupMixinBase;
+exports.McRadioGroupMixinBase = McRadioGroupMixinBase;
 exports.MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR;
 exports.McRadioGroup = McRadioGroup;
 exports.McRadioButtonBase = McRadioButtonBase;
-exports.mcRadioButtonMixinBase = mcRadioButtonMixinBase;
+exports.McRadioButtonMixinBase = McRadioButtonMixinBase;
 exports.McRadioButton = McRadioButton;
 
 Object.defineProperty(exports, '__esModule', { value: true });
