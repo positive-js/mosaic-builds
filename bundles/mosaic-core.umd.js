@@ -465,11 +465,15 @@ McLineSetter = /** @class */ (function () {
      * @return {?}
      */
     function (count) {
+        /** @type {?} */
+        var minLineClassNumber = 2;
+        /** @type {?} */
+        var maxLineClassNumber = 3;
         this.resetClasses();
-        if (count === 2 || count === 3) {
+        if (count === minLineClassNumber || count === maxLineClassNumber) {
             this.setClass("mc-" + count + "-line", true);
         }
-        else if (count > 3) {
+        else if (count > maxLineClassNumber) {
             this.setClass("mc-multi-line", true);
         }
     };
