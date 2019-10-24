@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tasks_1 = require("@angular-devkit/schematics/tasks");
 const package_config_1 = require("./package-config");
 const version_names_1 = require("./version-names");
+// tslint:disable-next-line:no-default-export
 function default_1(options) {
     return (host, context) => {
         const ngCoreVersionTag = package_config_1.getPackageVersionFromPackageJson(host, '@angular/core');

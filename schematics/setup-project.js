@@ -35,9 +35,10 @@ function addAnimationsModule(options) {
         const appModulePath = ng_ast_utils_1.getAppModulePath(host, schematics_2.getProjectMainFile(project));
         if (options.animations) {
             if (schematics_2.hasNgModuleImport(host, appModulePath, noopAnimationsModuleName)) {
-                return console.warn(chalk_1.default.red(`Could not set up "${chalk_1.default.bold(browserAnimationsModuleName)}" ` +
+                console.warn(chalk_1.default.red(`Could not set up "${chalk_1.default.bold(browserAnimationsModuleName)}" ` +
                     `because "${chalk_1.default.bold(noopAnimationsModuleName)}" is already imported. Please manually ` +
                     `set up browser animations.`));
+                return;
             }
             schematics_2.addModuleImportToRootModule(host, browserAnimationsModuleName, '@angular/platform-browser/animations', project);
         }

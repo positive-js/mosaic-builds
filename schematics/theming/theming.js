@@ -4,10 +4,10 @@ const core_1 = require("@angular-devkit/core");
 const schematics_1 = require("@angular-devkit/schematics");
 const schematics_2 = require("@angular/cdk/schematics");
 const change_1 = require("@schematics/angular/utility/change");
+const config_1 = require("@schematics/angular/utility/config");
 const chalk_1 = require("chalk");
 const path_1 = require("path");
 const create_custom_theme_1 = require("./create-custom-theme");
-const config_1 = require("@schematics/angular/utility/config");
 /** Path segment that can be found in paths that refer to a prebuilt theme. */
 const prebuiltThemePathSegment = '@ptsecurity/mosaic/prebuilt-themes';
 /** Default file name of the custom theme that can be generated. */

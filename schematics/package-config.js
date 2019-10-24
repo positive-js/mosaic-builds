@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function sortObjectByKeys(obj) {
-    return Object.keys(obj).sort().reduce((result, key) => (result[key] = obj[key]) && result, {});
+    const initialValue = {};
+    return Object.keys(obj).sort().reduce((result, key) => (result[key] = obj[key]) && result, initialValue);
 }
 function getPackageVersionFromPackageJson(tree, name) {
     if (!tree.exists('package.json')) {
@@ -15,6 +16,7 @@ function getPackageVersionFromPackageJson(tree, name) {
 }
 exports.getPackageVersionFromPackageJson = getPackageVersionFromPackageJson;
 function addPackageToPackageJson(host, pkg, version) {
+    const space = 4;
     if (host.exists('package.json')) {
         const sourceText = host.read('package.json').toString('utf-8');
         const json = JSON.parse(sourceText);
@@ -25,7 +27,7 @@ function addPackageToPackageJson(host, pkg, version) {
             json.dependencies[pkg] = version;
             json.dependencies = sortObjectByKeys(json.dependencies);
         }
-        host.overwrite('package.json', JSON.stringify(json, null, 4));
+        host.overwrite('package.json', JSON.stringify(json, null, space));
     }
     return host;
 }
