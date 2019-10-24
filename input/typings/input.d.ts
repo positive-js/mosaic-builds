@@ -90,22 +90,22 @@ export declare class McInput extends McInputMixinBase implements McFormFieldCont
      * @docs-private
      */
     disabled: boolean;
-    private _disabled;
+    protected _disabled: boolean;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     id: string;
-    private _id;
+    protected _id: string;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     required: boolean;
-    private _required;
+    protected _required: boolean;
     /** Input type of the element. */
     type: string;
-    private _type;
+    protected _type: string;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private

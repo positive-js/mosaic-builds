@@ -197,21 +197,27 @@ class McModalComponent extends McModalRef {
         this.changeDetector = changeDetector;
         this.document = document;
         this.mcModalType = 'default';
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         this._mcVisible = false;
         this.mcVisibleChange = new EventEmitter();
         this.mcZIndex = 1000;
         this.mcWidth = 480;
         this.mcCloseByESC = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         this._mcClosable = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         this._mcMask = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         this._mcMaskClosable = false;
         // Trigger when modal open(visible) after animations
         this.mcAfterOpen = new EventEmitter();
         // Trigger when modal leave-animation over
         this.mcAfterClose = new EventEmitter();
         this.mcOkType = 'primary';
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         this._mcOkLoading = false;
         this.mcOnOk = new EventEmitter();
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         this._mcCancelLoading = false;
         this.mcOnCancel = new EventEmitter();
         // The origin point that animation based on

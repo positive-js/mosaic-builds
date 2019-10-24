@@ -485,9 +485,12 @@ var McInput = /** @class */ (function (_super) {
          * @return {?}
          */
         function (t) { return platform.getSupportedInputTypes().has(t); }));
+        // tslint:disable-next-line: naming-convention
         _this._disabled = false;
+        // tslint:disable-next-line: naming-convention
         _this._required = false;
         // tslint:enable no-reserved-keywords
+        // tslint:disable-next-line: naming-convention
         _this._type = 'text';
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.

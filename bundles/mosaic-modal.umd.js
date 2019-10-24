@@ -277,21 +277,27 @@ var McModalComponent = /** @class */ (function (_super) {
         _this.changeDetector = changeDetector;
         _this.document = document;
         _this.mcModalType = 'default';
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcVisible = false;
         _this.mcVisibleChange = new core.EventEmitter();
         _this.mcZIndex = 1000;
         _this.mcWidth = 480;
         _this.mcCloseByESC = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcClosable = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcMask = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcMaskClosable = false;
         // Trigger when modal open(visible) after animations
         _this.mcAfterOpen = new core.EventEmitter();
         // Trigger when modal leave-animation over
         _this.mcAfterClose = new core.EventEmitter();
         _this.mcOkType = 'primary';
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcOkLoading = false;
         _this.mcOnOk = new core.EventEmitter();
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcCancelLoading = false;
         _this.mcOnCancel = new core.EventEmitter();
         // The origin point that animation based on

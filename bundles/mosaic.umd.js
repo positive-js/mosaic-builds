@@ -5778,9 +5778,12 @@ var McInput = /** @class */ (function (_super) {
          * @return {?}
          */
         function (t) { return platform.getSupportedInputTypes().has(t); }));
+        // tslint:disable-next-line: naming-convention
         _this._disabled = false;
+        // tslint:disable-next-line: naming-convention
         _this._required = false;
         // tslint:enable no-reserved-keywords
+        // tslint:disable-next-line: naming-convention
         _this._type = 'text';
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.
@@ -13079,21 +13082,27 @@ var McModalComponent = /** @class */ (function (_super) {
         _this.changeDetector = changeDetector;
         _this.document = document;
         _this.mcModalType = 'default';
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcVisible = false;
         _this.mcVisibleChange = new core.EventEmitter();
         _this.mcZIndex = 1000;
         _this.mcWidth = 480;
         _this.mcCloseByESC = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcClosable = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcMask = true;
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcMaskClosable = false;
         // Trigger when modal open(visible) after animations
         _this.mcAfterOpen = new core.EventEmitter();
         // Trigger when modal leave-animation over
         _this.mcAfterClose = new core.EventEmitter();
         _this.mcOkType = 'primary';
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcOkLoading = false;
         _this.mcOnOk = new core.EventEmitter();
+        // tslint:disable-next-line:orthodox-getter-and-setter , naming-convention  could be private?
         _this._mcCancelLoading = false;
         _this.mcOnCancel = new core.EventEmitter();
         // The origin point that animation based on
@@ -21416,6 +21425,7 @@ var McTagList = /** @class */ (function (_super) {
          * Event emitted when the selected tag list value has been changed by the user.
          */
         _this.change = new core.EventEmitter();
+        // public property with setter - should be private?
         // tslint:disable-next-line: naming-convention orthodox-getter-and-setter
         _this._tabIndex = 0;
         _this._required = false;
@@ -26304,6 +26314,7 @@ var McTextarea = /** @class */ (function (_super) {
          */
         _this.controlType = 'mc-textarea';
         _this.uid = "mc-textsrea-" + nextUniqueId$8++;
+        // tslint:disable:naming-convention
         _this._disabled = false;
         _this._required = false;
         _this.lineHeight = 0;
@@ -31582,13 +31593,13 @@ exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
 exports.McSidebarClosed = McSidebarClosed;
 exports.McSidebar = McSidebar;
-exports.ɵb20 = mcSidepanelAnimations;
-exports.ɵa20 = mcSidepanelTransformAnimation;
-exports.ɵg20 = McSidepanelActions;
-exports.ɵe20 = McSidepanelBody;
-exports.ɵc20 = McSidepanelClose;
-exports.ɵf20 = McSidepanelFooter;
-exports.ɵd20 = McSidepanelHeader;
+exports.ɵb19 = mcSidepanelAnimations;
+exports.ɵa19 = mcSidepanelTransformAnimation;
+exports.ɵg19 = McSidepanelActions;
+exports.ɵe19 = McSidepanelBody;
+exports.ɵc19 = McSidepanelClose;
+exports.ɵf19 = McSidepanelFooter;
+exports.ɵd19 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
@@ -31615,7 +31626,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa24 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
