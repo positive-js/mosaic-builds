@@ -4,7 +4,7 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, InjectionToken, ChangeDetectionStrategy, Attribute, ContentChildren, IterableDiffers, ViewChild, forwardRef, NgModule } from '@angular/core';
+import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, InjectionToken, ChangeDetectionStrategy, Attribute, ContentChildren, forwardRef, IterableDiffers, ViewChild, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeToggle, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { map, takeUntil, take } from 'rxjs/operators';
 import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
@@ -258,6 +258,12 @@ class McTreeOption extends CdkTreeNode {
     /**
      * @return {?}
      */
+    get showCheckbox() {
+        return this.tree.showCheckbox;
+    }
+    /**
+     * @return {?}
+     */
     get selected() {
         return this._selected;
     }
@@ -325,10 +331,10 @@ class McTreeOption extends CdkTreeNode {
         }
         this._selected = selected;
         if (selected) {
-            this.tree.selectionModel.select(this.value);
+            this.tree.selectionModel.select(this.data);
         }
         else {
-            this.tree.selectionModel.deselect(this.value);
+            this.tree.selectionModel.deselect(this.data);
         }
         this.changeDetectorRef.markForCheck();
     }
@@ -429,7 +435,7 @@ McTreeOption.decorators = [
     { type: Component, args: [{
                 selector: 'mc-tree-option',
                 exportAs: 'mcTreeOption',
-                template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                 host: {
                     '[attr.id]': 'id',
                     '[attr.tabindex]': 'getTabIndex()',
@@ -462,6 +468,11 @@ McTreeOption.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+const MultipleMode = {
+    CHECKBOX: 'checkbox',
+    KEYBOARD: 'keyboard',
+};
 /** @type {?} */
 const MC_SELECTION_TREE_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -504,7 +515,6 @@ class McTreeSelection extends CdkTree {
         this.elementRef = elementRef;
         this.navigationChange = new EventEmitter();
         this.selectionChange = new EventEmitter();
-        this._multiple = false;
         this._autoSelect = true;
         this._noUnselectLast = true;
         this._disabled = false;
@@ -524,7 +534,12 @@ class McTreeSelection extends CdkTree {
          */
         () => { });
         this.tabIndex = parseInt(tabIndex) || 0;
-        this.multiple = multiple === null ? false : coerceBooleanProperty(multiple);
+        if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
+            this.multipleMode = multiple;
+        }
+        else if (multiple !== null) {
+            this.multipleMode = MultipleMode.CHECKBOX;
+        }
         if (this.multiple) {
             this.autoSelect = false;
             this.noUnselectLast = false;
@@ -535,14 +550,7 @@ class McTreeSelection extends CdkTree {
      * @return {?}
      */
     get multiple() {
-        return this._multiple;
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set multiple(value) {
-        this._multiple = coerceBooleanProperty(value);
+        return !!this.multipleMode;
     }
     /**
      * @return {?}
@@ -600,6 +608,12 @@ class McTreeSelection extends CdkTree {
      */
     set tabIndex(value) {
         this._tabIndex = value != null ? value : 0;
+    }
+    /**
+     * @return {?}
+     */
+    get showCheckbox() {
+        return this.multipleMode === MultipleMode.CHECKBOX;
     }
     /**
      * @return {?}
@@ -734,6 +748,10 @@ class McTreeSelection extends CdkTree {
                 const previousIndex = this.keyManager.previousActiveItemIndex;
                 /** @type {?} */
                 const activeIndex = this.keyManager.activeItemIndex;
+                /** @type {?} */
+                const activeOption = this.renderedOptions.toArray()[activeIndex];
+                /** @type {?} */
+                const targetSelected = !activeOption.selected;
                 if (previousIndex < activeIndex) {
                     this.renderedOptions.forEach((/**
                      * @param {?} item
@@ -742,7 +760,7 @@ class McTreeSelection extends CdkTree {
                      */
                     (item, index) => {
                         if (index >= previousIndex && index <= activeIndex) {
-                            item.setSelected(true);
+                            item.setSelected(targetSelected);
                         }
                     }));
                 }
@@ -754,7 +772,7 @@ class McTreeSelection extends CdkTree {
                      */
                     (item, index) => {
                         if (index >= activeIndex && index <= previousIndex) {
-                            item.setSelected(true);
+                            item.setSelected(targetSelected);
                         }
                     }));
                 }
@@ -766,6 +784,9 @@ class McTreeSelection extends CdkTree {
                 this.selectionModel.toggle(option.data);
             }
             else {
+                if (this.multipleMode === MultipleMode.KEYBOARD) {
+                    this.selectionModel.clear();
+                }
                 this.selectionModel.toggle(option.data);
             }
         }
@@ -1001,7 +1022,6 @@ McTreeSelection.propDecorators = {
     treeControl: [{ type: Input }],
     navigationChange: [{ type: Output }],
     selectionChange: [{ type: Output }],
-    multiple: [{ type: Input }],
     autoSelect: [{ type: Input }],
     noUnselectLast: [{ type: Input }],
     disabled: [{ type: Input }]
@@ -1339,5 +1359,5 @@ class McTreeNestedDataSource extends DataSource {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggleComponent, McTreeNodeToggleDirective, MC_SELECTION_TREE_VALUE_ACCESSOR, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };
+export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggleComponent, McTreeNodeToggleDirective, MultipleMode, MC_SELECTION_TREE_VALUE_ACCESSOR, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };
 //# sourceMappingURL=tree.js.map

@@ -17417,6 +17417,16 @@ var McTreeOption = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McTreeOption.prototype, "showCheckbox", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.tree.showCheckbox;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McTreeOption.prototype, "selected", {
         get: /**
          * @return {?}
@@ -17519,10 +17529,10 @@ var McTreeOption = /** @class */ (function (_super) {
         }
         this._selected = selected;
         if (selected) {
-            this.tree.selectionModel.select(this.value);
+            this.tree.selectionModel.select(this.data);
         }
         else {
-            this.tree.selectionModel.deselect(this.value);
+            this.tree.selectionModel.deselect(this.data);
         }
         this.changeDetectorRef.markForCheck();
     };
@@ -17658,7 +17668,7 @@ var McTreeOption = /** @class */ (function (_super) {
         { type: core.Component, args: [{
                     selector: 'mc-tree-option',
                     exportAs: 'mcTreeOption',
-                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                     host: {
                         '[attr.id]': 'id',
                         '[attr.tabindex]': 'getTabIndex()',
@@ -17693,6 +17703,11 @@ var McTreeOption = /** @class */ (function (_super) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+var MultipleMode = {
+    CHECKBOX: 'checkbox',
+    KEYBOARD: 'keyboard',
+};
 /** @type {?} */
 var MC_SELECTION_TREE_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
@@ -17723,7 +17738,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         _this.elementRef = elementRef;
         _this.navigationChange = new core.EventEmitter();
         _this.selectionChange = new core.EventEmitter();
-        _this._multiple = false;
         _this._autoSelect = true;
         _this._noUnselectLast = true;
         _this._disabled = false;
@@ -17743,7 +17757,12 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function () { });
         _this.tabIndex = parseInt(tabIndex) || 0;
-        _this.multiple = multiple === null ? false : coercion.coerceBooleanProperty(multiple);
+        if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
+            _this.multipleMode = multiple;
+        }
+        else if (multiple !== null) {
+            _this.multipleMode = MultipleMode.CHECKBOX;
+        }
         if (_this.multiple) {
             _this.autoSelect = false;
             _this.noUnselectLast = false;
@@ -17756,14 +17775,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this._multiple;
-        },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this._multiple = coercion.coerceBooleanProperty(value);
+            return !!this.multipleMode;
         },
         enumerable: true,
         configurable: true
@@ -17837,6 +17849,16 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (value) {
             this._tabIndex = value != null ? value : 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "showCheckbox", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.multipleMode === MultipleMode.CHECKBOX;
         },
         enumerable: true,
         configurable: true
@@ -17994,6 +18016,10 @@ var McTreeSelection = /** @class */ (function (_super) {
                 var previousIndex_1 = this.keyManager.previousActiveItemIndex;
                 /** @type {?} */
                 var activeIndex_1 = this.keyManager.activeItemIndex;
+                /** @type {?} */
+                var activeOption = this.renderedOptions.toArray()[activeIndex_1];
+                /** @type {?} */
+                var targetSelected_1 = !activeOption.selected;
                 if (previousIndex_1 < activeIndex_1) {
                     this.renderedOptions.forEach((/**
                      * @param {?} item
@@ -18002,7 +18028,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                      */
                     function (item, index) {
                         if (index >= previousIndex_1 && index <= activeIndex_1) {
-                            item.setSelected(true);
+                            item.setSelected(targetSelected_1);
                         }
                     }));
                 }
@@ -18014,7 +18040,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                      */
                     function (item, index) {
                         if (index >= activeIndex_1 && index <= previousIndex_1) {
-                            item.setSelected(true);
+                            item.setSelected(targetSelected_1);
                         }
                     }));
                 }
@@ -18026,6 +18052,9 @@ var McTreeSelection = /** @class */ (function (_super) {
                 this.selectionModel.toggle(option.data);
             }
             else {
+                if (this.multipleMode === MultipleMode.KEYBOARD) {
+                    this.selectionModel.clear();
+                }
                 this.selectionModel.toggle(option.data);
             }
         }
@@ -18329,7 +18358,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         treeControl: [{ type: core.Input }],
         navigationChange: [{ type: core.Output }],
         selectionChange: [{ type: core.Output }],
-        multiple: [{ type: core.Input }],
         autoSelect: [{ type: core.Input }],
         noUnselectLast: [{ type: core.Input }],
         disabled: [{ type: core.Input }]
@@ -25181,9 +25209,6 @@ var McTreeSelect = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        if (this.tree) {
-            this.tree.multiple = this.multiple;
-        }
         this.stateChanges.next();
         // We need `distinctUntilChanged` here, because some browsers will
         // fire the animation end event twice for the same animation. See:
@@ -25222,7 +25247,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         this.initKeyManager();
         this.options = this.tree.renderedOptions;
         this.tree.autoSelect = this.autoSelect;
-        this.tree.multiple = this.multiple;
+        this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
         if (this.multiple) {
             this.tree.noUnselectLast = false;
         }
@@ -31441,11 +31466,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports.McLinkMixinBase = McLinkMixinBase;
 exports.McLink = McLink;
-exports.ɵe27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
-exports.ɵc27 = McModalBody;
-exports.ɵd27 = McModalFooter;
-exports.ɵb27 = McModalTitle;
+exports.ɵe28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
+exports.ɵc28 = McModalBody;
+exports.ɵd28 = McModalFooter;
+exports.ɵb28 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -31489,6 +31514,7 @@ exports.McTreeNodeDef = McTreeNodeDef;
 exports.McTreeNodePadding = McTreeNodePadding;
 exports.McTreeNodeToggleComponent = McTreeNodeToggleComponent;
 exports.McTreeNodeToggleDirective = McTreeNodeToggleDirective;
+exports.MultipleMode = MultipleMode;
 exports.MC_SELECTION_TREE_VALUE_ACCESSOR = MC_SELECTION_TREE_VALUE_ACCESSOR;
 exports.McTreeNavigationChange = McTreeNavigationChange;
 exports.McTreeSelectionChange = McTreeSelectionChange;

@@ -1,10 +1,14 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterContentInit, ChangeDetectorRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ElementRef } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
 import { McTreeOption } from './tree-option.component';
+export declare enum MultipleMode {
+    CHECKBOX = "checkbox",
+    KEYBOARD = "keyboard"
+}
 export declare const MC_SELECTION_TREE_VALUE_ACCESSOR: any;
 export declare class McTreeNavigationChange {
     source: McTreeSelection;
@@ -29,8 +33,8 @@ export declare class McTreeSelection extends CdkTree<McTreeOption> implements Co
     treeControl: FlatTreeControl<McTreeOption>;
     readonly navigationChange: EventEmitter<McTreeNavigationChange>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange>;
-    multiple: boolean;
-    private _multiple;
+    multipleMode: MultipleMode | null;
+    readonly multiple: boolean;
     autoSelect: boolean;
     private _autoSelect;
     noUnselectLast: boolean;
@@ -39,6 +43,7 @@ export declare class McTreeSelection extends CdkTree<McTreeOption> implements Co
     private _disabled;
     tabIndex: number;
     private _tabIndex;
+    readonly showCheckbox: boolean;
     private readonly destroy;
     constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string);
     ngAfterContentInit(): void;

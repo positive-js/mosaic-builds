@@ -15,7 +15,7 @@ import { CdkTree, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { getOptionScrollPosition, ErrorStateMatcher, mixinTabIndex, mixinDisabled, mixinErrorState, mcSelectAnimations, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, McTreeModule } from '@ptsecurity/mosaic/tree';
+import { McTreeSelection, MultipleMode, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { defer, merge, Subject } from 'rxjs';
 import { filter, map, switchMap, take, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
@@ -382,9 +382,6 @@ class McTreeSelect extends McTreeSelectMixinBase {
      * @return {?}
      */
     ngOnInit() {
-        if (this.tree) {
-            this.tree.multiple = this.multiple;
-        }
         this.stateChanges.next();
         // We need `distinctUntilChanged` here, because some browsers will
         // fire the animation end event twice for the same animation. See:
@@ -419,7 +416,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this.initKeyManager();
         this.options = this.tree.renderedOptions;
         this.tree.autoSelect = this.autoSelect;
-        this.tree.multiple = this.multiple;
+        this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
         if (this.multiple) {
             this.tree.noUnselectLast = false;
         }

@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
-import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, InjectionToken, ChangeDetectionStrategy, Attribute, ContentChildren, IterableDiffers, ViewChild, forwardRef, NgModule } from '@angular/core';
+import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, InjectionToken, ChangeDetectionStrategy, Attribute, ContentChildren, forwardRef, IterableDiffers, ViewChild, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeToggle, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { map, takeUntil, take } from 'rxjs/operators';
 import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
@@ -276,6 +276,16 @@ var McTreeOption = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McTreeOption.prototype, "showCheckbox", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.tree.showCheckbox;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McTreeOption.prototype, "selected", {
         get: /**
          * @return {?}
@@ -378,10 +388,10 @@ var McTreeOption = /** @class */ (function (_super) {
         }
         this._selected = selected;
         if (selected) {
-            this.tree.selectionModel.select(this.value);
+            this.tree.selectionModel.select(this.data);
         }
         else {
-            this.tree.selectionModel.deselect(this.value);
+            this.tree.selectionModel.deselect(this.data);
         }
         this.changeDetectorRef.markForCheck();
     };
@@ -517,7 +527,7 @@ var McTreeOption = /** @class */ (function (_super) {
         { type: Component, args: [{
                     selector: 'mc-tree-option',
                     exportAs: 'mcTreeOption',
-                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                     host: {
                         '[attr.id]': 'id',
                         '[attr.tabindex]': 'getTabIndex()',
@@ -552,6 +562,11 @@ var McTreeOption = /** @class */ (function (_super) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+var MultipleMode = {
+    CHECKBOX: 'checkbox',
+    KEYBOARD: 'keyboard',
+};
 /** @type {?} */
 var MC_SELECTION_TREE_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -582,7 +597,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         _this.elementRef = elementRef;
         _this.navigationChange = new EventEmitter();
         _this.selectionChange = new EventEmitter();
-        _this._multiple = false;
         _this._autoSelect = true;
         _this._noUnselectLast = true;
         _this._disabled = false;
@@ -602,7 +616,12 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function () { });
         _this.tabIndex = parseInt(tabIndex) || 0;
-        _this.multiple = multiple === null ? false : coerceBooleanProperty(multiple);
+        if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
+            _this.multipleMode = multiple;
+        }
+        else if (multiple !== null) {
+            _this.multipleMode = MultipleMode.CHECKBOX;
+        }
         if (_this.multiple) {
             _this.autoSelect = false;
             _this.noUnselectLast = false;
@@ -615,14 +634,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this._multiple;
-        },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this._multiple = coerceBooleanProperty(value);
+            return !!this.multipleMode;
         },
         enumerable: true,
         configurable: true
@@ -696,6 +708,16 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (value) {
             this._tabIndex = value != null ? value : 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "showCheckbox", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.multipleMode === MultipleMode.CHECKBOX;
         },
         enumerable: true,
         configurable: true
@@ -853,6 +875,10 @@ var McTreeSelection = /** @class */ (function (_super) {
                 var previousIndex_1 = this.keyManager.previousActiveItemIndex;
                 /** @type {?} */
                 var activeIndex_1 = this.keyManager.activeItemIndex;
+                /** @type {?} */
+                var activeOption = this.renderedOptions.toArray()[activeIndex_1];
+                /** @type {?} */
+                var targetSelected_1 = !activeOption.selected;
                 if (previousIndex_1 < activeIndex_1) {
                     this.renderedOptions.forEach((/**
                      * @param {?} item
@@ -861,7 +887,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                      */
                     function (item, index) {
                         if (index >= previousIndex_1 && index <= activeIndex_1) {
-                            item.setSelected(true);
+                            item.setSelected(targetSelected_1);
                         }
                     }));
                 }
@@ -873,7 +899,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                      */
                     function (item, index) {
                         if (index >= activeIndex_1 && index <= previousIndex_1) {
-                            item.setSelected(true);
+                            item.setSelected(targetSelected_1);
                         }
                     }));
                 }
@@ -885,6 +911,9 @@ var McTreeSelection = /** @class */ (function (_super) {
                 this.selectionModel.toggle(option.data);
             }
             else {
+                if (this.multipleMode === MultipleMode.KEYBOARD) {
+                    this.selectionModel.clear();
+                }
                 this.selectionModel.toggle(option.data);
             }
         }
@@ -1188,7 +1217,6 @@ var McTreeSelection = /** @class */ (function (_super) {
         treeControl: [{ type: Input }],
         navigationChange: [{ type: Output }],
         selectionChange: [{ type: Output }],
-        multiple: [{ type: Input }],
         autoSelect: [{ type: Input }],
         noUnselectLast: [{ type: Input }],
         disabled: [{ type: Input }]
@@ -1648,5 +1676,5 @@ McTreeNestedDataSource = /** @class */ (function (_super) {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggleComponent, McTreeNodeToggleDirective, MC_SELECTION_TREE_VALUE_ACCESSOR, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };
+export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggleComponent, McTreeNodeToggleDirective, MultipleMode, MC_SELECTION_TREE_VALUE_ACCESSOR, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };
 //# sourceMappingURL=tree.es5.js.map

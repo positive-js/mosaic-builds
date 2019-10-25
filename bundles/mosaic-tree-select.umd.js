@@ -434,9 +434,6 @@ var McTreeSelect = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
-        if (this.tree) {
-            this.tree.multiple = this.multiple;
-        }
         this.stateChanges.next();
         // We need `distinctUntilChanged` here, because some browsers will
         // fire the animation end event twice for the same animation. See:
@@ -475,7 +472,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         this.initKeyManager();
         this.options = this.tree.renderedOptions;
         this.tree.autoSelect = this.autoSelect;
-        this.tree.multiple = this.multiple;
+        this.tree.multipleMode = this.multiple ? tree$1.MultipleMode.CHECKBOX : null;
         if (this.multiple) {
             this.tree.noUnselectLast = false;
         }
