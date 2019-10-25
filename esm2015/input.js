@@ -438,12 +438,9 @@ class McInput extends McInputMixinBase {
          * @return {?}
          */
         (t) => getSupportedInputTypes().has(t)));
-        // tslint:disable-next-line: naming-convention
         this._disabled = false;
-        // tslint:disable-next-line: naming-convention
         this._required = false;
         // tslint:enable no-reserved-keywords
-        // tslint:disable-next-line: naming-convention
         this._type = 'text';
         // If no input value accessor was explicitly specified, use the element as the input value
         // accessor.

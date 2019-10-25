@@ -58,7 +58,6 @@ var McTextarea = /** @class */ (function (_super) {
          */
         _this.controlType = 'mc-textarea';
         _this.uid = "mc-textsrea-" + nextUniqueId++;
-        // tslint:disable:naming-convention
         _this._disabled = false;
         _this._required = false;
         _this.lineHeight = 0;
