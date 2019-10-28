@@ -4,7 +4,8 @@ import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
-import { McTreeOption } from './tree-option.component';
+import { Observable } from 'rxjs';
+import { McTreeOption, McTreeOptionEvent } from './tree-option.component';
 export declare enum MultipleMode {
     CHECKBOX = "checkbox",
     KEYBOARD = "keyboard"
@@ -30,10 +31,13 @@ export declare class McTreeSelection extends CdkTree<McTreeOption> implements Co
     renderedOptions: QueryList<McTreeOption>;
     keyManager: FocusKeyManager<McTreeOption>;
     selectionModel: SelectionModel<SelectionModelOption>;
+    resetFocusedItemOnBlur: boolean;
     treeControl: FlatTreeControl<McTreeOption>;
     readonly navigationChange: EventEmitter<McTreeNavigationChange>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange>;
     multipleMode: MultipleMode | null;
+    readonly optionFocusChanges: Observable<McTreeOptionEvent>;
+    readonly optionBlurChanges: Observable<McTreeOptionEvent>;
     readonly multiple: boolean;
     autoSelect: boolean;
     private _autoSelect;
@@ -41,13 +45,17 @@ export declare class McTreeSelection extends CdkTree<McTreeOption> implements Co
     private _noUnselectLast;
     disabled: boolean;
     private _disabled;
-    tabIndex: number;
+    tabIndex: any;
     private _tabIndex;
     readonly showCheckbox: boolean;
     private readonly destroy;
+    private optionFocusSubscription;
+    private optionBlurSubscription;
     constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
+    focus(): void;
+    blur(): void;
     onKeyDown(event: KeyboardEvent): void;
     updateScrollSize(): void;
     setSelectedOption(option: McTreeOption, $event?: KeyboardEvent): void;
@@ -71,6 +79,18 @@ export declare class McTreeSelection extends CdkTree<McTreeOption> implements Co
     setDisabledState(isDisabled: boolean): void;
     setOptionsFromValues(values: any[]): void;
     getSelectedValues(): any[];
+    protected updateTabIndex(): void;
+    private resetOptions;
+    private dropSubscriptions;
+    private listenToOptionsFocus;
+    /**
+     * Utility to ensure all indexes are valid.
+     * @param index The index to be checked.
+     * @returns True if the index is valid for our list of options.
+     */
+    private isValidIndex;
+    /** Checks whether any of the options is focused. */
+    private hasFocusedOption;
     private markOptionsForCheck;
     private canDeselectLast;
 }

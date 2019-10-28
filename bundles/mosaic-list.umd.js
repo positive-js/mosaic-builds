@@ -49,12 +49,14 @@ function __extends(d, b) {
  * if the current item is selected.
  */
 var McListOption = /** @class */ (function () {
-    function McListOption(elementRef, focusMonitor, _changeDetector, listSelection) {
+    function McListOption(elementRef, changeDetector, ngZone, listSelection) {
         this.elementRef = elementRef;
-        this.focusMonitor = focusMonitor;
-        this._changeDetector = _changeDetector;
+        this.changeDetector = changeDetector;
+        this.ngZone = ngZone;
         this.listSelection = listSelection;
         this.hasFocus = false;
+        this.onFocus = new rxjs.Subject();
+        this.onBlur = new rxjs.Subject();
         // Whether the label should appear before or after the checkbox. Defaults to 'after'
         this.checkboxPosition = 'after';
         this._disabled = false;
@@ -76,7 +78,7 @@ var McListOption = /** @class */ (function () {
             var newValue = core$1.toBoolean(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
-                this._changeDetector.markForCheck();
+                this.changeDetector.markForCheck();
             }
         },
         enumerable: true,
@@ -104,6 +106,16 @@ var McListOption = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McListOption.prototype, "tabIndex", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.disabled ? null : -1;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -112,7 +124,6 @@ var McListOption = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
         if (this._selected) {
             // List options that are selected at initialization can't be reported properly to the form
             // control. This is because it takes some time until the selection-list knows about all
@@ -127,7 +138,7 @@ var McListOption = /** @class */ (function () {
             function () {
                 if (_this._selected || wasSelected_1) {
                     _this.selected = true;
-                    _this._changeDetector.markForCheck();
+                    _this.changeDetector.markForCheck();
                 }
             }));
         }
@@ -148,7 +159,6 @@ var McListOption = /** @class */ (function () {
              */
             function () { return _this.selected = false; }));
         }
-        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         this.listSelection.removeOptionFromList(this);
     };
     /**
@@ -159,15 +169,6 @@ var McListOption = /** @class */ (function () {
      */
     function () {
         this.selected = !this.selected;
-    };
-    /**
-     * @return {?}
-     */
-    McListOption.prototype.focus = /**
-     * @return {?}
-     */
-    function () {
-        this.elementRef.nativeElement.focus();
     };
     /**
      * @return {?}
@@ -197,7 +198,7 @@ var McListOption = /** @class */ (function () {
         else {
             this.listSelection.selectionModel.deselect(this);
         }
-        this._changeDetector.markForCheck();
+        this.changeDetector.markForCheck();
     };
     /**
      * @return {?}
@@ -225,24 +226,50 @@ var McListOption = /** @class */ (function () {
     /**
      * @return {?}
      */
-    McListOption.prototype.handleFocus = /**
+    McListOption.prototype.focus = /**
      * @return {?}
      */
     function () {
-        if (this.disabled || this.hasFocus) {
-            return;
+        var _this = this;
+        if (!this.hasFocus) {
+            this.elementRef.nativeElement.focus();
+            this.onFocus.next({ option: this });
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () {
+                _this.hasFocus = true;
+                _this.changeDetector.markForCheck();
+            }));
         }
-        this.hasFocus = true;
     };
     /**
      * @return {?}
      */
-    McListOption.prototype.handleBlur = /**
+    McListOption.prototype.blur = /**
      * @return {?}
      */
     function () {
-        this.hasFocus = false;
-        this.listSelection.onTouched();
+        var _this = this;
+        // When animations are enabled, Angular may end up removing the option from the DOM a little
+        // earlier than usual, causing it to be blurred and throwing off the logic in the list
+        // that moves focus not the next item. To work around the issue, we defer marking the option
+        // as not focused until the next time the zone stabilizes.
+        this.ngZone.onStable
+            .asObservable()
+            .pipe(operators.take(1))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            _this.ngZone.run((/**
+             * @return {?}
+             */
+            function () {
+                _this.hasFocus = false;
+                _this.onBlur.next({ option: _this });
+            }));
+        }));
     };
     /**
      * @return {?}
@@ -258,12 +285,12 @@ var McListOption = /** @class */ (function () {
                     exportAs: 'mcListOption',
                     selector: 'mc-list-option',
                     host: {
-                        tabindex: '-1',
+                        '[attr.tabindex]': 'tabIndex',
                         class: 'mc-list-option',
                         '[class.mc-selected]': 'selected',
                         '[class.mc-focused]': 'hasFocus',
-                        '(focus)': 'handleFocus()',
-                        '(blur)': 'handleBlur()',
+                        '(focus)': 'focus()',
+                        '(blur)': 'blur()',
                         '(click)': 'handleClick($event)'
                     },
                     template: "<div class=\"mc-list-item-content\"><div class=\"mc-list-text\" #text><ng-content></ng-content></div></div>",
@@ -275,8 +302,8 @@ var McListOption = /** @class */ (function () {
     /** @nocollapse */
     McListOption.ctorParameters = function () { return [
         { type: core.ElementRef },
-        { type: a11y.FocusMonitor },
         { type: core.ChangeDetectorRef },
+        { type: core.NgZone },
         { type: McListSelection, decorators: [{ type: core.Inject, args: [core.forwardRef((/**
                          * @return {?}
                          */
@@ -318,16 +345,18 @@ var McListSelectionBase = /** @class */ (function () {
 var McListSelectionMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McListSelectionBase));
 var McListSelection = /** @class */ (function (_super) {
     __extends(McListSelection, _super);
-    function McListSelection(element, tabIndex, autoSelect, noUnselect, multiple) {
+    function McListSelection(element, changeDetectorRef, tabIndex, autoSelect, noUnselect, multiple) {
         var _this = _super.call(this) || this;
         _this.element = element;
+        _this.changeDetectorRef = changeDetectorRef;
         _this.horizontal = false;
+        _this._tabIndex = 0;
         // Emits a change event whenever the selected state of an option changes.
         _this.selectionChange = new core.EventEmitter();
         /**
          * Emits whenever the component is destroyed.
          */
-        _this.destroy = new rxjs.Subject();
+        _this.destroyed = new rxjs.Subject();
         // View to model callback that should be called if the list or its options lost focus.
         // tslint:disable-next-line:no-empty
         _this.onTouched = (/**
@@ -343,10 +372,55 @@ var McListSelection = /** @class */ (function (_super) {
         _this.autoSelect = autoSelect === null ? true : core$1.toBoolean(autoSelect);
         _this.multiple = multiple === null ? true : core$1.toBoolean(multiple);
         _this.noUnselect = noUnselect === null ? true : core$1.toBoolean(noUnselect);
-        _this.tabIndex = parseInt(tabIndex) || 0;
+        _this._tabIndex = parseInt(tabIndex) || 0;
         _this.selectionModel = new collections.SelectionModel(_this.multiple);
         return _this;
     }
+    Object.defineProperty(McListSelection.prototype, "tabIndex", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._tabIndex;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._tabIndex = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McListSelection.prototype, "optionFocusChanges", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return rxjs.merge.apply(void 0, this.options.map((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.onFocus; })));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McListSelection.prototype, "optionBlurChanges", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return rxjs.merge.apply(void 0, this.options.map((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.onBlur; })));
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -354,17 +428,33 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
+        var _this = this;
         this.horizontal = core$1.toBoolean(this.horizontal);
         this.keyManager = new a11y.FocusKeyManager(this.options)
             .withTypeAhead()
             .withVerticalOrientation(!this.horizontal)
             .withHorizontalOrientation(this.horizontal ? 'ltr' : null);
+        this.keyManager.tabOut
+            .pipe(operators.takeUntil(this.destroyed))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            _this._tabIndex = -1;
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
+                _this._tabIndex = 0;
+                _this.changeDetectorRef.markForCheck();
+            }));
+        }));
         if (this.tempValues) {
             this.setOptionsFromValues(this.tempValues);
             this.tempValues = null;
         }
         this.selectionModel.changed
-            .pipe(operators.takeUntil(this.destroy))
+            .pipe(operators.takeUntil(this.destroyed))
             .subscribe((/**
          * @param {?} event
          * @return {?}
@@ -379,6 +469,16 @@ var McListSelection = /** @class */ (function (_super) {
                 item.selected = false;
             }
         }));
+        this.options.changes
+            .pipe(operators.startWith(null), operators.takeUntil(this.destroyed))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            _this.resetOptions();
+            // Check to see if we need to update our tab index
+            _this.updateTabIndex();
+        }));
         this.updateScrollSize();
     };
     /**
@@ -388,8 +488,8 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.destroy.next();
-        this.destroy.complete();
+        this.destroyed.next();
+        this.destroyed.complete();
     };
     /**
      * @return {?}
@@ -398,7 +498,23 @@ var McListSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        this.element.nativeElement.focus();
+        if (this.options.length === 0) {
+            return;
+        }
+        this.keyManager.setFirstItemActive();
+    };
+    /**
+     * @return {?}
+     */
+    McListSelection.prototype.blur = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.hasFocusedOption()) {
+            this.keyManager.setActiveItem(-1);
+        }
+        this.onTouched();
+        this.changeDetectorRef.markForCheck();
     };
     /**
      * @return {?}
@@ -739,6 +855,93 @@ var McListSelection = /** @class */ (function (_super) {
     function (option) {
         this.selectionChange.emit(new McListSelectionChange(this, option));
     };
+    /**
+     * @protected
+     * @return {?}
+     */
+    McListSelection.prototype.updateTabIndex = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        this._tabIndex = this.options.length === 0 ? -1 : 0;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McListSelection.prototype.resetOptions = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.dropSubscriptions();
+        this.listenToOptionsFocus();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McListSelection.prototype.dropSubscriptions = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this.optionFocusSubscription) {
+            this.optionFocusSubscription.unsubscribe();
+            this.optionFocusSubscription = null;
+        }
+        if (this.optionBlurSubscription) {
+            this.optionBlurSubscription.unsubscribe();
+            this.optionBlurSubscription = null;
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McListSelection.prototype.listenToOptionsFocus = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.optionFocusSubscription = this.optionFocusChanges
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            /** @type {?} */
+            var index = _this.options.toArray().indexOf(event.option);
+            if (_this.isValidIndex(index)) {
+                _this.keyManager.updateActiveItem(index);
+            }
+        }));
+        this.optionBlurSubscription = this.optionBlurChanges
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.blur(); }));
+    };
+    /** Checks whether any of the options is focused. */
+    /**
+     * Checks whether any of the options is focused.
+     * @private
+     * @return {?}
+     */
+    McListSelection.prototype.hasFocusedOption = /**
+     * Checks whether any of the options is focused.
+     * @private
+     * @return {?}
+     */
+    function () {
+        return this.options.some((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.hasFocus; }));
+    };
     // Returns the option with the specified value.
     // Returns the option with the specified value.
     /**
@@ -841,10 +1044,10 @@ var McListSelection = /** @class */ (function (_super) {
                     encapsulation: core.ViewEncapsulation.None,
                     inputs: ['disabled'],
                     host: {
+                        '[attr.tabindex]': 'tabIndex',
                         class: 'mc-list-selection',
-                        '[tabIndex]': 'tabIndex',
                         '(focus)': 'focus()',
-                        '(blur)': 'onTouched()',
+                        '(blur)': 'blur()',
                         '(keydown)': 'onKeyDown($event)',
                         '(window:resize)': 'updateScrollSize()'
                     },
@@ -855,6 +1058,7 @@ var McListSelection = /** @class */ (function (_super) {
     /** @nocollapse */
     McListSelection.ctorParameters = function () { return [
         { type: core.ElementRef },
+        { type: core.ChangeDetectorRef },
         { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
         { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
         { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] },
@@ -863,6 +1067,7 @@ var McListSelection = /** @class */ (function (_super) {
     McListSelection.propDecorators = {
         options: [{ type: core.ContentChildren, args: [McListOption,] }],
         horizontal: [{ type: core.Input }],
+        tabIndex: [{ type: core.Input }],
         selectionChange: [{ type: core.Output }]
     };
     return McListSelection;

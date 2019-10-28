@@ -411,6 +411,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
         if (!this.tree) {
             return;
         }
+        this.tree.resetFocusedItemOnBlur = false;
         this.selectionModel = this.tree.selectionModel = new SelectionModel(this.multiple);
         this.tree.ngAfterContentInit();
         this.initKeyManager();

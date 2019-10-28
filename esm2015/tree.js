@@ -4,16 +4,16 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, InjectionToken, ChangeDetectionStrategy, Attribute, ContentChildren, forwardRef, IterableDiffers, ViewChild, NgModule } from '@angular/core';
+import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, InjectionToken, ChangeDetectionStrategy, NgZone, Attribute, ContentChildren, forwardRef, IterableDiffers, ViewChild, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeToggle, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { map, takeUntil, take } from 'rxjs/operators';
-import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
+import { map, take, takeUntil } from 'rxjs/operators';
 import { toBoolean, getMcSelectNonArrayValueError, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
+import { Subject, merge, BehaviorSubject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { END, ENTER, hasModifierKey, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
-import { Subject, BehaviorSubject, merge } from 'rxjs';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
+import { hasModifierKey, END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -211,14 +211,16 @@ class McTreeOption extends CdkTreeNode {
     /**
      * @param {?} elementRef
      * @param {?} changeDetectorRef
-     * @param {?} focusMonitor
+     * @param {?} ngZone
      * @param {?} tree
      */
-    constructor(elementRef, changeDetectorRef, focusMonitor, tree) {
+    constructor(elementRef, changeDetectorRef, ngZone, tree) {
         super(elementRef, tree);
         this.changeDetectorRef = changeDetectorRef;
-        this.focusMonitor = focusMonitor;
+        this.ngZone = ngZone;
         this.tree = tree;
+        this.onFocus = new Subject();
+        this.onBlur = new Subject();
         this._disabled = false;
         this.onSelectionChange = new EventEmitter();
         this._selected = false;
@@ -300,20 +302,14 @@ class McTreeOption extends CdkTreeNode {
     /**
      * @return {?}
      */
-    ngOnInit() {
-        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
+    get tabIndex() {
+        return this.disabled ? null : -1;
     }
     /**
      * @return {?}
      */
     ngAfterContentInit() {
         this.value = this.tree.treeControl.getValue(this.data);
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
-        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     }
     /**
      * @return {?}
@@ -341,26 +337,43 @@ class McTreeOption extends CdkTreeNode {
     /**
      * @return {?}
      */
-    handleFocus() {
+    focus() {
         if (this.disabled || this.hasFocus) {
             return;
         }
-        this.hasFocus = true;
-        if (this.tree.setFocusedOption) {
-            this.tree.setFocusedOption(this);
-        }
+        this.elementRef.nativeElement.focus();
+        this.onFocus.next({ option: this });
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        () => {
+            this.hasFocus = true;
+            this.changeDetectorRef.markForCheck();
+        }));
     }
     /**
      * @return {?}
      */
-    handleBlur() {
-        this.hasFocus = false;
-    }
-    /**
-     * @return {?}
-     */
-    focus() {
-        this.focusMonitor.focusVia(this.getHostElement(), 'keyboard');
+    blur() {
+        // When animations are enabled, Angular may end up removing the option from the DOM a little
+        // earlier than usual, causing it to be blurred and throwing off the logic in the tree
+        // that moves focus not the next item. To work around the issue, we defer marking the option
+        // as not focused until the next time the zone stabilizes.
+        this.ngZone.onStable
+            .asObservable()
+            .pipe(take(1))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => {
+            this.ngZone.run((/**
+             * @return {?}
+             */
+            () => {
+                this.hasFocus = false;
+                this.onBlur.next({ option: this });
+            }));
+        }));
     }
     /**
      * @return {?}
@@ -421,12 +434,6 @@ class McTreeOption extends CdkTreeNode {
     /**
      * @return {?}
      */
-    getTabIndex() {
-        return this.disabled ? '-1' : '0';
-    }
-    /**
-     * @return {?}
-     */
     markForCheck() {
         this.changeDetectorRef.markForCheck();
     }
@@ -438,13 +445,13 @@ McTreeOption.decorators = [
                 template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                 host: {
                     '[attr.id]': 'id',
-                    '[attr.tabindex]': 'getTabIndex()',
+                    '[attr.tabindex]': 'tabIndex',
                     '[attr.disabled]': 'disabled || null',
                     class: 'mc-tree-option',
                     '[class.mc-selected]': 'selected',
                     '[class.mc-focused]': 'hasFocus',
-                    '(focus)': 'handleFocus()',
-                    '(blur)': 'handleBlur()',
+                    '(focus)': 'focus()',
+                    '(blur)': 'blur()',
                     '(click)': 'selectViaInteraction($event)'
                 },
                 changeDetection: ChangeDetectionStrategy.OnPush,
@@ -456,7 +463,7 @@ McTreeOption.decorators = [
 McTreeOption.ctorParameters = () => [
     { type: ElementRef },
     { type: ChangeDetectorRef },
-    { type: FocusMonitor },
+    { type: NgZone },
     { type: undefined, decorators: [{ type: Inject, args: [MC_TREE_OPTION_PARENT_COMPONENT,] }] }
 ];
 McTreeOption.propDecorators = {
@@ -513,11 +520,13 @@ class McTreeSelection extends CdkTree {
     constructor(elementRef, differs, changeDetectorRef, tabIndex, multiple) {
         super(differs, changeDetectorRef);
         this.elementRef = elementRef;
+        this.resetFocusedItemOnBlur = true;
         this.navigationChange = new EventEmitter();
         this.selectionChange = new EventEmitter();
         this._autoSelect = true;
         this._noUnselectLast = true;
         this._disabled = false;
+        this._tabIndex = 0;
         this.destroy = new Subject();
         /**
          * `View -> model callback called when value changes`
@@ -545,6 +554,26 @@ class McTreeSelection extends CdkTree {
             this.noUnselectLast = false;
         }
         this.selectionModel = new SelectionModel(this.multiple);
+    }
+    /**
+     * @return {?}
+     */
+    get optionFocusChanges() {
+        return merge(...this.renderedOptions.map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => option.onFocus)));
+    }
+    /**
+     * @return {?}
+     */
+    get optionBlurChanges() {
+        return merge(...this.renderedOptions.map((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => option.onBlur)));
     }
     /**
      * @return {?}
@@ -600,14 +629,14 @@ class McTreeSelection extends CdkTree {
      * @return {?}
      */
     get tabIndex() {
-        return this.disabled ? -1 : this._tabIndex;
+        return this._tabIndex;
     }
     /**
      * @param {?} value
      * @return {?}
      */
     set tabIndex(value) {
-        this._tabIndex = value != null ? value : 0;
+        this._tabIndex = value;
     }
     /**
      * @return {?}
@@ -648,6 +677,9 @@ class McTreeSelection extends CdkTree {
          * @return {?}
          */
         (options) => {
+            this.resetOptions();
+            // Check to see if we need to update our tab index
+            this.updateTabIndex();
             // todo need to do optimisation
             options.forEach((/**
              * @param {?} option
@@ -673,6 +705,25 @@ class McTreeSelection extends CdkTree {
     ngOnDestroy() {
         this.destroy.next();
         this.destroy.complete();
+    }
+    /**
+     * @return {?}
+     */
+    focus() {
+        if (this.renderedOptions.length === 0) {
+            return;
+        }
+        this.keyManager.setFirstItemActive();
+    }
+    /**
+     * @return {?}
+     */
+    blur() {
+        if (!this.hasFocusedOption() && this.resetFocusedItemOnBlur) {
+            this.keyManager.setActiveItem(-1);
+        }
+        this.onTouched();
+        this.changeDetectorRef.markForCheck();
     }
     /**
      * @param {?} event
@@ -716,6 +767,8 @@ class McTreeSelection extends CdkTree {
                 this.keyManager.setNextPageItemActive();
                 event.preventDefault();
                 break;
+            case TAB:
+                return;
             default:
                 this.keyManager.onKeydown(event);
         }
@@ -966,6 +1019,79 @@ class McTreeSelection extends CdkTree {
         (selected) => this.treeControl.getValue(selected)));
     }
     /**
+     * @protected
+     * @return {?}
+     */
+    updateTabIndex() {
+        this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    resetOptions() {
+        this.dropSubscriptions();
+        this.listenToOptionsFocus();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    dropSubscriptions() {
+        if (this.optionFocusSubscription) {
+            this.optionFocusSubscription.unsubscribe();
+            this.optionFocusSubscription = null;
+        }
+        if (this.optionBlurSubscription) {
+            this.optionBlurSubscription.unsubscribe();
+            this.optionBlurSubscription = null;
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    listenToOptionsFocus() {
+        this.optionFocusSubscription = this.optionFocusChanges
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        (event) => {
+            /** @type {?} */
+            const index = this.renderedOptions.toArray().indexOf(event.option);
+            if (this.isValidIndex(index)) {
+                this.keyManager.updateActiveItem(index);
+            }
+        }));
+        this.optionBlurSubscription = this.optionBlurChanges
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.blur()));
+    }
+    /**
+     * Utility to ensure all indexes are valid.
+     * @private
+     * @param {?} index The index to be checked.
+     * @return {?} True if the index is valid for our list of options.
+     */
+    isValidIndex(index) {
+        return index >= 0 && index < this.renderedOptions.length;
+    }
+    /**
+     * Checks whether any of the options is focused.
+     * @private
+     * @return {?}
+     */
+    hasFocusedOption() {
+        return this.renderedOptions.some((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => option.hasFocus));
+    }
+    /**
      * @private
      * @return {?}
      */
@@ -994,7 +1120,9 @@ McTreeSelection.decorators = [
                 template: '<ng-container cdkTreeNodeOutlet></ng-container>',
                 host: {
                     class: 'mc-tree-selection',
-                    '[tabindex]': 'tabIndex',
+                    '[attr.tabindex]': 'tabIndex',
+                    '(focus)': 'focus()',
+                    '(blur)': 'blur()',
                     '(keydown)': 'onKeyDown($event)',
                     '(window:resize)': 'updateScrollSize()'
                 },
@@ -1024,7 +1152,8 @@ McTreeSelection.propDecorators = {
     selectionChange: [{ type: Output }],
     autoSelect: [{ type: Input }],
     noUnselectLast: [{ type: Input }],
-    disabled: [{ type: Input }]
+    disabled: [{ type: Input }],
+    tabIndex: [{ type: Input }]
 };
 
 /**

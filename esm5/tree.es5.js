@@ -5,16 +5,16 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { __extends } from 'tslib';
-import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, InjectionToken, ChangeDetectionStrategy, Attribute, ContentChildren, forwardRef, IterableDiffers, ViewChild, NgModule } from '@angular/core';
+import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, InjectionToken, ChangeDetectionStrategy, NgZone, Attribute, ContentChildren, forwardRef, IterableDiffers, ViewChild, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeToggle, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { map, takeUntil, take } from 'rxjs/operators';
-import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
+import { map, take, takeUntil } from 'rxjs/operators';
 import { toBoolean, getMcSelectNonArrayValueError, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
+import { Subject, merge, BehaviorSubject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { END, ENTER, hasModifierKey, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
-import { Subject, BehaviorSubject, merge } from 'rxjs';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
+import { hasModifierKey, END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -226,11 +226,13 @@ var McTreeOptionChange = /** @class */ (function () {
 var uniqueIdCounter = 0;
 var McTreeOption = /** @class */ (function (_super) {
     __extends(McTreeOption, _super);
-    function McTreeOption(elementRef, changeDetectorRef, focusMonitor, tree) {
+    function McTreeOption(elementRef, changeDetectorRef, ngZone, tree) {
         var _this = _super.call(this, elementRef, tree) || this;
         _this.changeDetectorRef = changeDetectorRef;
-        _this.focusMonitor = focusMonitor;
+        _this.ngZone = ngZone;
         _this.tree = tree;
+        _this.onFocus = new Subject();
+        _this.onBlur = new Subject();
         _this._disabled = false;
         _this.onSelectionChange = new EventEmitter();
         _this._selected = false;
@@ -338,15 +340,16 @@ var McTreeOption = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    /**
-     * @return {?}
-     */
-    McTreeOption.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        this.focusMonitor.monitor(this.elementRef.nativeElement, false);
-    };
+    Object.defineProperty(McTreeOption.prototype, "tabIndex", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.disabled ? null : -1;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @return {?}
      */
@@ -355,15 +358,6 @@ var McTreeOption = /** @class */ (function (_super) {
      */
     function () {
         this.value = this.tree.treeControl.getValue(this.data);
-    };
-    /**
-     * @return {?}
-     */
-    McTreeOption.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     };
     /**
      * @return {?}
@@ -398,35 +392,51 @@ var McTreeOption = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
-    McTreeOption.prototype.handleFocus = /**
-     * @return {?}
-     */
-    function () {
-        if (this.disabled || this.hasFocus) {
-            return;
-        }
-        this.hasFocus = true;
-        if (this.tree.setFocusedOption) {
-            this.tree.setFocusedOption(this);
-        }
-    };
-    /**
-     * @return {?}
-     */
-    McTreeOption.prototype.handleBlur = /**
-     * @return {?}
-     */
-    function () {
-        this.hasFocus = false;
-    };
-    /**
-     * @return {?}
-     */
     McTreeOption.prototype.focus = /**
      * @return {?}
      */
     function () {
-        this.focusMonitor.focusVia(this.getHostElement(), 'keyboard');
+        var _this = this;
+        if (this.disabled || this.hasFocus) {
+            return;
+        }
+        this.elementRef.nativeElement.focus();
+        this.onFocus.next({ option: this });
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        function () {
+            _this.hasFocus = true;
+            _this.changeDetectorRef.markForCheck();
+        }));
+    };
+    /**
+     * @return {?}
+     */
+    McTreeOption.prototype.blur = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        // When animations are enabled, Angular may end up removing the option from the DOM a little
+        // earlier than usual, causing it to be blurred and throwing off the logic in the tree
+        // that moves focus not the next item. To work around the issue, we defer marking the option
+        // as not focused until the next time the zone stabilizes.
+        this.ngZone.onStable
+            .asObservable()
+            .pipe(take(1))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () {
+            _this.ngZone.run((/**
+             * @return {?}
+             */
+            function () {
+                _this.hasFocus = false;
+                _this.onBlur.next({ option: _this });
+            }));
+        }));
     };
     /**
      * @return {?}
@@ -508,15 +518,6 @@ var McTreeOption = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
-    McTreeOption.prototype.getTabIndex = /**
-     * @return {?}
-     */
-    function () {
-        return this.disabled ? '-1' : '0';
-    };
-    /**
-     * @return {?}
-     */
     McTreeOption.prototype.markForCheck = /**
      * @return {?}
      */
@@ -530,13 +531,13 @@ var McTreeOption = /** @class */ (function (_super) {
                     template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                     host: {
                         '[attr.id]': 'id',
-                        '[attr.tabindex]': 'getTabIndex()',
+                        '[attr.tabindex]': 'tabIndex',
                         '[attr.disabled]': 'disabled || null',
                         class: 'mc-tree-option',
                         '[class.mc-selected]': 'selected',
                         '[class.mc-focused]': 'hasFocus',
-                        '(focus)': 'handleFocus()',
-                        '(blur)': 'handleBlur()',
+                        '(focus)': 'focus()',
+                        '(blur)': 'blur()',
                         '(click)': 'selectViaInteraction($event)'
                     },
                     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -548,7 +549,7 @@ var McTreeOption = /** @class */ (function (_super) {
     McTreeOption.ctorParameters = function () { return [
         { type: ElementRef },
         { type: ChangeDetectorRef },
-        { type: FocusMonitor },
+        { type: NgZone },
         { type: undefined, decorators: [{ type: Inject, args: [MC_TREE_OPTION_PARENT_COMPONENT,] }] }
     ]; };
     McTreeOption.propDecorators = {
@@ -595,11 +596,13 @@ var McTreeSelection = /** @class */ (function (_super) {
     function McTreeSelection(elementRef, differs, changeDetectorRef, tabIndex, multiple) {
         var _this = _super.call(this, differs, changeDetectorRef) || this;
         _this.elementRef = elementRef;
+        _this.resetFocusedItemOnBlur = true;
         _this.navigationChange = new EventEmitter();
         _this.selectionChange = new EventEmitter();
         _this._autoSelect = true;
         _this._noUnselectLast = true;
         _this._disabled = false;
+        _this._tabIndex = 0;
         _this.destroy = new Subject();
         /**
          * `View -> model callback called when value changes`
@@ -629,6 +632,34 @@ var McTreeSelection = /** @class */ (function (_super) {
         _this.selectionModel = new SelectionModel(_this.multiple);
         return _this;
     }
+    Object.defineProperty(McTreeSelection.prototype, "optionFocusChanges", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return merge.apply(void 0, this.renderedOptions.map((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.onFocus; })));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(McTreeSelection.prototype, "optionBlurChanges", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return merge.apply(void 0, this.renderedOptions.map((/**
+             * @param {?} option
+             * @return {?}
+             */
+            function (option) { return option.onBlur; })));
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McTreeSelection.prototype, "multiple", {
         get: /**
          * @return {?}
@@ -700,14 +731,14 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this.disabled ? -1 : this._tabIndex;
+            return this._tabIndex;
         },
         set: /**
          * @param {?} value
          * @return {?}
          */
         function (value) {
-            this._tabIndex = value != null ? value : 0;
+            this._tabIndex = value;
         },
         enumerable: true,
         configurable: true
@@ -759,6 +790,9 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function (options) {
+            _this.resetOptions();
+            // Check to see if we need to update our tab index
+            _this.updateTabIndex();
             // todo need to do optimisation
             options.forEach((/**
              * @param {?} option
@@ -787,6 +821,31 @@ var McTreeSelection = /** @class */ (function (_super) {
     function () {
         this.destroy.next();
         this.destroy.complete();
+    };
+    /**
+     * @return {?}
+     */
+    McTreeSelection.prototype.focus = /**
+     * @return {?}
+     */
+    function () {
+        if (this.renderedOptions.length === 0) {
+            return;
+        }
+        this.keyManager.setFirstItemActive();
+    };
+    /**
+     * @return {?}
+     */
+    McTreeSelection.prototype.blur = /**
+     * @return {?}
+     */
+    function () {
+        if (!this.hasFocusedOption() && this.resetFocusedItemOnBlur) {
+            this.keyManager.setActiveItem(-1);
+        }
+        this.onTouched();
+        this.changeDetectorRef.markForCheck();
     };
     /**
      * @param {?} event
@@ -834,6 +893,8 @@ var McTreeSelection = /** @class */ (function (_super) {
                 this.keyManager.setNextPageItemActive();
                 event.preventDefault();
                 break;
+            case TAB:
+                return;
             default:
                 this.keyManager.onKeydown(event);
         }
@@ -1153,6 +1214,113 @@ var McTreeSelection = /** @class */ (function (_super) {
         function (selected) { return _this.treeControl.getValue(selected); }));
     };
     /**
+     * @protected
+     * @return {?}
+     */
+    McTreeSelection.prototype.updateTabIndex = /**
+     * @protected
+     * @return {?}
+     */
+    function () {
+        this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McTreeSelection.prototype.resetOptions = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.dropSubscriptions();
+        this.listenToOptionsFocus();
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McTreeSelection.prototype.dropSubscriptions = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this.optionFocusSubscription) {
+            this.optionFocusSubscription.unsubscribe();
+            this.optionFocusSubscription = null;
+        }
+        if (this.optionBlurSubscription) {
+            this.optionBlurSubscription.unsubscribe();
+            this.optionBlurSubscription = null;
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McTreeSelection.prototype.listenToOptionsFocus = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.optionFocusSubscription = this.optionFocusChanges
+            .subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            /** @type {?} */
+            var index = _this.renderedOptions.toArray().indexOf(event.option);
+            if (_this.isValidIndex(index)) {
+                _this.keyManager.updateActiveItem(index);
+            }
+        }));
+        this.optionBlurSubscription = this.optionBlurChanges
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.blur(); }));
+    };
+    /**
+     * Utility to ensure all indexes are valid.
+     * @param index The index to be checked.
+     * @returns True if the index is valid for our list of options.
+     */
+    /**
+     * Utility to ensure all indexes are valid.
+     * @private
+     * @param {?} index The index to be checked.
+     * @return {?} True if the index is valid for our list of options.
+     */
+    McTreeSelection.prototype.isValidIndex = /**
+     * Utility to ensure all indexes are valid.
+     * @private
+     * @param {?} index The index to be checked.
+     * @return {?} True if the index is valid for our list of options.
+     */
+    function (index) {
+        return index >= 0 && index < this.renderedOptions.length;
+    };
+    /** Checks whether any of the options is focused. */
+    /**
+     * Checks whether any of the options is focused.
+     * @private
+     * @return {?}
+     */
+    McTreeSelection.prototype.hasFocusedOption = /**
+     * Checks whether any of the options is focused.
+     * @private
+     * @return {?}
+     */
+    function () {
+        return this.renderedOptions.some((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.hasFocus; }));
+    };
+    /**
      * @private
      * @return {?}
      */
@@ -1189,7 +1357,9 @@ var McTreeSelection = /** @class */ (function (_super) {
                     template: '<ng-container cdkTreeNodeOutlet></ng-container>',
                     host: {
                         class: 'mc-tree-selection',
-                        '[tabindex]': 'tabIndex',
+                        '[attr.tabindex]': 'tabIndex',
+                        '(focus)': 'focus()',
+                        '(blur)': 'blur()',
                         '(keydown)': 'onKeyDown($event)',
                         '(window:resize)': 'updateScrollSize()'
                     },
@@ -1219,7 +1389,8 @@ var McTreeSelection = /** @class */ (function (_super) {
         selectionChange: [{ type: Output }],
         autoSelect: [{ type: Input }],
         noUnselectLast: [{ type: Input }],
-        disabled: [{ type: Input }]
+        disabled: [{ type: Input }],
+        tabIndex: [{ type: Input }]
     };
     return McTreeSelection;
 }(CdkTree));

@@ -2152,7 +2152,7 @@ $mc-calendar-weekday-table-font-size: 11px !default;
             background: mc-color($background, hover);
         }
 
-        &.cdk-keyboard-focused {
+        &.mc-focused {
             border-color: mc-color($primary);
         }
 
@@ -3122,7 +3122,7 @@ $hover-darken: 5%;
             background-color: mc-color($background, hover);
         }
 
-        &.cdk-keyboard-focused {
+        &.mc-focused {
             border-color: mc-color($primary);
         }
 

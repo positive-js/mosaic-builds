@@ -1,8 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterContentInit, ElementRef, EventEmitter, QueryList, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentInit, ElementRef, EventEmitter, QueryList, ChangeDetectorRef, OnDestroy, OnInit, NgZone } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { FocusKeyManager, FocusMonitor, IFocusableOption } from '@ptsecurity/cdk/a11y';
+import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { McLine, CanDisable, CanDisableCtor, HasTabIndexCtor, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { Observable, Subject } from 'rxjs';
+export interface McOptionEvent {
+    option: McListOption;
+}
 /**
  * Component for list-options of selection-list. Each list-option can automatically
  * generate a checkbox and can put current item into the selectionModel of selection-list
@@ -10,10 +14,12 @@ import { McLine, CanDisable, CanDisableCtor, HasTabIndexCtor, HasTabIndex } from
  */
 export declare class McListOption implements OnDestroy, OnInit, IFocusableOption {
     private elementRef;
-    private focusMonitor;
-    private _changeDetector;
+    private changeDetector;
+    private ngZone;
     listSelection: McListSelection;
     hasFocus: boolean;
+    readonly onFocus: Subject<McOptionEvent>;
+    readonly onBlur: Subject<McOptionEvent>;
     lines: QueryList<McLine>;
     text: ElementRef;
     checkboxPosition: 'before' | 'after';
@@ -22,17 +28,17 @@ export declare class McListOption implements OnDestroy, OnInit, IFocusableOption
     private _disabled;
     selected: boolean;
     private _selected;
-    constructor(elementRef: ElementRef<HTMLElement>, focusMonitor: FocusMonitor, _changeDetector: ChangeDetectorRef, listSelection: McListSelection);
+    readonly tabIndex: any;
+    constructor(elementRef: ElementRef<HTMLElement>, changeDetector: ChangeDetectorRef, ngZone: NgZone, listSelection: McListSelection);
     ngOnInit(): void;
     ngOnDestroy(): void;
     toggle(): void;
-    focus(): void;
     getLabel(): any;
     setSelected(selected: boolean): void;
     getHeight(): number;
     handleClick($event: any): void;
-    handleFocus(): void;
-    handleBlur(): void;
+    focus(): void;
+    blur(): void;
     getHostElement(): HTMLElement;
 }
 export declare const MC_SELECTION_LIST_VALUE_ACCESSOR: any;
@@ -44,23 +50,31 @@ export declare class McListSelectionChange {
 export declare class McListSelectionBase {
 }
 export declare const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase;
-export declare class McListSelection extends McListSelectionMixinBase implements IFocusableOption, CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor, HasTabIndex {
+export declare class McListSelection extends McListSelectionMixinBase implements CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor {
     private element;
+    private changeDetectorRef;
     keyManager: FocusKeyManager<McListOption>;
     options: QueryList<McListOption>;
     autoSelect: boolean;
     noUnselect: boolean;
     multiple: boolean;
     horizontal: boolean;
+    tabIndex: any;
+    private _tabIndex;
     readonly selectionChange: EventEmitter<McListSelectionChange>;
     selectionModel: SelectionModel<McListOption>;
+    readonly optionFocusChanges: Observable<McOptionEvent>;
+    readonly optionBlurChanges: Observable<McOptionEvent>;
     private tempValues;
     /** Emits whenever the component is destroyed. */
-    private readonly destroy;
-    constructor(element: ElementRef, tabIndex: string, autoSelect: string, noUnselect: string, multiple: string);
+    private readonly destroyed;
+    private optionFocusSubscription;
+    private optionBlurSubscription;
+    constructor(element: ElementRef, changeDetectorRef: ChangeDetectorRef, tabIndex: string, autoSelect: string, noUnselect: string, multiple: string);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     focus(): void;
+    blur(): void;
     selectAll(): void;
     deselectAll(): void;
     updateScrollSize(): void;
@@ -78,6 +92,12 @@ export declare class McListSelection extends McListSelectionMixinBase implements
     onKeyDown(event: KeyboardEvent): void;
     reportValueChange(): void;
     emitChangeEvent(option: McListOption): void;
+    protected updateTabIndex(): void;
+    private resetOptions;
+    private dropSubscriptions;
+    private listenToOptionsFocus;
+    /** Checks whether any of the options is focused. */
+    private hasFocusedOption;
     private getOptionByValue;
     private setOptionsFromValues;
     /**
