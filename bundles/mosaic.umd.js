@@ -17923,20 +17923,35 @@ var MC_SELECTION_TREE_VALUE_ACCESSOR = {
     function () { return McTreeSelection; })),
     multi: true
 };
-var McTreeNavigationChange = /** @class */ (function () {
+/**
+ * @template T
+ */
+var   /**
+ * @template T
+ */
+McTreeNavigationChange = /** @class */ (function () {
     function McTreeNavigationChange(source, option) {
         this.source = source;
         this.option = option;
     }
     return McTreeNavigationChange;
 }());
-var McTreeSelectionChange = /** @class */ (function () {
+/**
+ * @template T
+ */
+var   /**
+ * @template T
+ */
+McTreeSelectionChange = /** @class */ (function () {
     function McTreeSelectionChange(source, option) {
         this.source = source;
         this.option = option;
     }
     return McTreeSelectionChange;
 }());
+/**
+ * @template T
+ */
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
     function McTreeSelection(elementRef, differs, changeDetectorRef, tabIndex, multiple) {
@@ -18208,13 +18223,13 @@ var McTreeSelection = /** @class */ (function (_super) {
         switch (keyCode) {
             case keycodes.LEFT_ARROW:
                 if (this.keyManager.activeItem) {
-                    this.treeControl.collapse(this.keyManager.activeItem.data);
+                    this.treeControl.collapse((/** @type {?} */ (this.keyManager.activeItem.data)));
                 }
                 event.preventDefault();
                 return;
             case keycodes.RIGHT_ARROW:
                 if (this.keyManager.activeItem) {
-                    this.treeControl.expand(this.keyManager.activeItem.data);
+                    this.treeControl.expand((/** @type {?} */ (this.keyManager.activeItem.data)));
                 }
                 event.preventDefault();
                 return;
@@ -18617,7 +18632,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (event) {
             /** @type {?} */
-            var index = _this.renderedOptions.toArray().indexOf(event.option);
+            var index = _this.renderedOptions.toArray().indexOf((/** @type {?} */ (event.option)));
             if (_this.isValidIndex(index)) {
                 _this.keyManager.updateActiveItem(index);
             }
@@ -31902,15 +31917,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd15 = McTabBase;
-exports.ɵe15 = McTabMixinBase;
-exports.ɵa15 = McTabHeaderBase;
-exports.ɵb15 = McTabLabelWrapperBase;
-exports.ɵc15 = McTabLabelWrapperMixinBase;
-exports.ɵh15 = McTabLinkBase;
-exports.ɵi15 = McTabLinkMixinBase;
-exports.ɵf15 = McTabNavBase;
-exports.ɵg15 = McTabNavMixinBase;
+exports.ɵd14 = McTabBase;
+exports.ɵe14 = McTabMixinBase;
+exports.ɵa14 = McTabHeaderBase;
+exports.ɵb14 = McTabLabelWrapperBase;
+exports.ɵc14 = McTabLabelWrapperMixinBase;
+exports.ɵh14 = McTabLinkBase;
+exports.ɵi14 = McTabLinkMixinBase;
+exports.ɵf14 = McTabNavBase;
+exports.ɵg14 = McTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -32018,7 +32033,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa24 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

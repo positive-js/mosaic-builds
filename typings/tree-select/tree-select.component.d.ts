@@ -6,7 +6,7 @@ import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@an
 import { CanDisable, CanUpdateErrorState, ErrorStateMatcher, HasTabIndex, CanDisableCtor, HasTabIndexCtor, CanUpdateErrorStateCtor } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, McTreeOption } from "@ptsecurity/mosaic/tree";
+import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { Observable, Subject } from 'rxjs';
 /** Change event object that is emitted when the select value has changed. */
 export declare class McTreeSelectChange {
@@ -79,7 +79,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     tags: QueryList<McTag>;
     /** User-supplied override of the trigger element. */
     customTrigger: McTreeSelectTrigger;
-    tree: McTreeSelection;
+    tree: McTreeSelection<McTreeOption>;
     hiddenItemsText: string;
     /** Event emitted when the select panel has been toggled. */
     readonly openedChange: EventEmitter<boolean>;

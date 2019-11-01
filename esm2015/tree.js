@@ -489,6 +489,9 @@ const MC_SELECTION_TREE_VALUE_ACCESSOR = {
     () => McTreeSelection)),
     multi: true
 };
+/**
+ * @template T
+ */
 class McTreeNavigationChange {
     /**
      * @param {?} source
@@ -499,6 +502,9 @@ class McTreeNavigationChange {
         this.option = option;
     }
 }
+/**
+ * @template T
+ */
 class McTreeSelectionChange {
     /**
      * @param {?} source
@@ -509,6 +515,9 @@ class McTreeSelectionChange {
         this.option = option;
     }
 }
+/**
+ * @template T
+ */
 class McTreeSelection extends CdkTree {
     /**
      * @param {?} elementRef
@@ -736,13 +745,13 @@ class McTreeSelection extends CdkTree {
         switch (keyCode) {
             case LEFT_ARROW:
                 if (this.keyManager.activeItem) {
-                    this.treeControl.collapse(this.keyManager.activeItem.data);
+                    this.treeControl.collapse((/** @type {?} */ (this.keyManager.activeItem.data)));
                 }
                 event.preventDefault();
                 return;
             case RIGHT_ARROW:
                 if (this.keyManager.activeItem) {
-                    this.treeControl.expand(this.keyManager.activeItem.data);
+                    this.treeControl.expand((/** @type {?} */ (this.keyManager.activeItem.data)));
                 }
                 event.preventDefault();
                 return;
@@ -1059,7 +1068,7 @@ class McTreeSelection extends CdkTree {
          */
         (event) => {
             /** @type {?} */
-            const index = this.renderedOptions.toArray().indexOf(event.option);
+            const index = this.renderedOptions.toArray().indexOf((/** @type {?} */ (event.option)));
             if (this.isValidIndex(index)) {
                 this.keyManager.updateActiveItem(index);
             }

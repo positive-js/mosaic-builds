@@ -11,30 +11,30 @@ export declare enum MultipleMode {
     KEYBOARD = "keyboard"
 }
 export declare const MC_SELECTION_TREE_VALUE_ACCESSOR: any;
-export declare class McTreeNavigationChange {
-    source: McTreeSelection;
-    option: McTreeOption;
-    constructor(source: McTreeSelection, option: McTreeOption);
+export declare class McTreeNavigationChange<T> {
+    source: McTreeSelection<any>;
+    option: T;
+    constructor(source: McTreeSelection<any>, option: T);
 }
-export declare class McTreeSelectionChange {
-    source: McTreeSelection;
-    option: McTreeOption;
-    constructor(source: McTreeSelection, option: McTreeOption);
+export declare class McTreeSelectionChange<T> {
+    source: McTreeSelection<any>;
+    option: T;
+    constructor(source: McTreeSelection<any>, option: T);
 }
 interface SelectionModelOption {
     id: number | string;
     value: string;
 }
-export declare class McTreeSelection extends CdkTree<McTreeOption> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
+export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
     private elementRef;
     nodeOutlet: CdkTreeNodeOutlet;
-    renderedOptions: QueryList<McTreeOption>;
-    keyManager: FocusKeyManager<McTreeOption>;
+    renderedOptions: QueryList<T>;
+    keyManager: FocusKeyManager<T>;
     selectionModel: SelectionModel<SelectionModelOption>;
     resetFocusedItemOnBlur: boolean;
-    treeControl: FlatTreeControl<McTreeOption>;
-    readonly navigationChange: EventEmitter<McTreeNavigationChange>;
-    readonly selectionChange: EventEmitter<McTreeSelectionChange>;
+    treeControl: FlatTreeControl<T>;
+    readonly navigationChange: EventEmitter<McTreeNavigationChange<T>>;
+    readonly selectionChange: EventEmitter<McTreeSelectionChange<T>>;
     multipleMode: MultipleMode | null;
     readonly optionFocusChanges: Observable<McTreeOptionEvent>;
     readonly optionBlurChanges: Observable<McTreeOptionEvent>;
@@ -58,14 +58,14 @@ export declare class McTreeSelection extends CdkTree<McTreeOption> implements Co
     blur(): void;
     onKeyDown(event: KeyboardEvent): void;
     updateScrollSize(): void;
-    setSelectedOption(option: McTreeOption, $event?: KeyboardEvent): void;
-    setFocusedOption(option: McTreeOption): void;
+    setSelectedOption(option: T, $event?: KeyboardEvent): void;
+    setFocusedOption(option: T): void;
     toggleFocusedOption(): void;
-    renderNodeChanges(data: McTreeOption[], dataDiffer?: IterableDiffer<McTreeOption>, viewContainer?: any, parentData?: McTreeOption): void;
+    renderNodeChanges(data: T[], dataDiffer?: IterableDiffer<T>, viewContainer?: any, parentData?: T): void;
     getHeight(): number;
     getItemHeight(): number;
-    emitNavigationEvent(option: McTreeOption): void;
-    emitChangeEvent(option: McTreeOption): void;
+    emitNavigationEvent(option: T): void;
+    emitChangeEvent(option: T): void;
     writeValue(value: any): void;
     /** `View -> model callback called when value changes` */
     onChange: (value: any) => void;
