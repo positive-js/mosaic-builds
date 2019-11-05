@@ -686,6 +686,12 @@ class McTagList extends McTagListMixinBase {
         return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
     }
     /**
+     * @return {?}
+     */
+    get canShowCleaner() {
+        return this.cleaner && this.tags.length > 0;
+    }
+    /**
      * Whether the user should be allowed to select multiple tags.
      * @return {?}
      */
@@ -904,7 +910,10 @@ class McTagList extends McTagListMixinBase {
             Promise.resolve().then((/**
              * @return {?}
              */
-            () => { this.tagChanges.emit(this.tags.toArray()); }));
+            () => {
+                this.tagChanges.emit(this.tags.toArray());
+                this.changeDetectorRef.markForCheck();
+            }));
             this.stateChanges.next();
         }));
     }
@@ -1444,7 +1453,7 @@ McTagList.decorators = [
     { type: Component, args: [{
                 selector: 'mc-tag-list',
                 exportAs: 'mcTagList',
-                template: '<ng-content></ng-content>',
+                template: "<div class=\"mc-tags-list__list-container\"><ng-content></ng-content></div><div class=\"mc-tags-list__cleaner\" *ngIf=\"canShowCleaner\"><ng-content select=\"mc-cleaner\"></ng-content></div>",
                 host: {
                     class: 'mc-tag-list',
                     '[attr.tabindex]': 'disabled ? null : _tabIndex',
@@ -1457,7 +1466,7 @@ McTagList.decorators = [
                     '[id]': 'uid'
                 },
                 providers: [{ provide: McFormFieldControl, useExisting: McTagList }],
-                styles: [".mc-tag-list{display:flex;flex-wrap:wrap;min-height:28px;padding:2px 6px}.mc-tag-list .mc-tag-input{max-width:100%;flex:1 1 auto;height:22px;margin:2px 4px}.mc-tag-input{border:none;outline:0;background:0 0}"],
+                styles: [".mc-tag-list{display:flex;flex-direction:row}.mc-tags-list__list-container{display:flex;flex-wrap:wrap;flex:1 1 100%;min-width:0;min-height:28px;padding:2px 6px}.mc-tags-list__list-container .mc-tag-input{max-width:100%;flex:1 1 auto;height:22px;margin:2px 4px}.mc-tags-list__cleaner .mc-cleaner{height:32px}.mc-tag-input{border:none;outline:0;background:0 0}"],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] },
@@ -1485,6 +1494,7 @@ McTagList.propDecorators = {
     errorStateMatcher: [{ type: Input }],
     orientation: [{ type: Input, args: ['orientation',] }],
     change: [{ type: Output }],
+    cleaner: [{ type: ContentChild, args: ['mcTagListCleaner', { static: true },] }],
     tags: [{ type: ContentChildren, args: [McTag, {
                     // Need to use `descendants: true`,
                     // Ivy will no longer match indirect descendants if it's left as false.

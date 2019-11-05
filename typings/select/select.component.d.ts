@@ -5,7 +5,7 @@ import { AfterContentInit, AfterViewInit, ChangeDetectorRef, DoCheck, ElementRef
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor, CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, HasTabIndex, HasTabIndexCtor, McOptgroup, McOption, McOptionSelectionChange } from '@ptsecurity/mosaic/core';
-import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McInput } from '@ptsecurity/mosaic/input';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -93,6 +93,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     tags: QueryList<McTag>;
     /** User-supplied override of the trigger element. */
     customTrigger: McSelectTrigger;
+    cleaner: McCleaner;
     /** All of the defined select options. */
     options: QueryList<McOption>;
     /** All of the defined groups of options. */
@@ -153,6 +154,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     readonly panelOpen: boolean;
     private _panelOpen;
     readonly isEmptySearchResult: boolean;
+    readonly canShowCleaner: boolean;
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop;
     /** Unique id for this input. */
@@ -166,6 +168,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     ngDoCheck(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
+    clearValue($event: any): void;
     /** `View -> model callback called when value changes` */
     onChange: (value: any) => void;
     /** `View -> model callback called when select has been touched` */

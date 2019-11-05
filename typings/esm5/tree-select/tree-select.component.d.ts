@@ -4,7 +4,7 @@ import { CdkConnectedOverlay, ViewportRuler } from '@angular/cdk/overlay';
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, NgZone, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { CanDisable, CanUpdateErrorState, ErrorStateMatcher, HasTabIndex, CanDisableCtor, HasTabIndexCtor, CanUpdateErrorStateCtor } from '@ptsecurity/mosaic/core';
-import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { Observable, Subject } from 'rxjs';
@@ -77,6 +77,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     overlayDir: CdkConnectedOverlay;
     hiddenItemsCounter: ElementRef;
     tags: QueryList<McTag>;
+    cleaner: McCleaner;
     /** User-supplied override of the trigger element. */
     customTrigger: McTreeSelectTrigger;
     tree: McTreeSelection<McTreeOption>;
@@ -134,6 +135,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     focused: boolean;
     private _focused;
     readonly panelOpen: boolean;
+    readonly canShowCleaner: boolean;
     private _panelOpen;
     private originalOnKeyDown;
     /** The scroll position of the overlay panel, calculated to center the selected option. */
@@ -150,6 +152,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     ngDoCheck(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
+    clearValue($event: any): void;
     /** `View -> model callback called when value changes` */
     onChange: (value: any) => void;
     /** `View -> model callback called when select has been touched` */

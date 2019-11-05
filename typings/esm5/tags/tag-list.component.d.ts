@@ -4,7 +4,7 @@ import { AfterContentInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter,
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McCleaner, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Observable } from 'rxjs';
 import { McTagTextControl } from './tag-text-control';
 import { McTag, McTagEvent, McTagSelectionChange } from './tag.component';
@@ -38,6 +38,7 @@ export declare class McTagList extends McTagListMixinBase implements McFormField
     readonly tagRemoveChanges: Observable<McTagEvent>;
     /** The array of selected tags inside tag list. */
     readonly selected: McTag[] | McTag;
+    readonly canShowCleaner: boolean;
     /** Whether the user should be allowed to select multiple tags. */
     multiple: boolean;
     /**
@@ -110,6 +111,7 @@ export declare class McTagList extends McTagListMixinBase implements McFormField
     orientation: 'horizontal' | 'vertical';
     /** Event emitted when the selected tag list value has been changed by the user. */
     readonly change: EventEmitter<McTagListChange>;
+    cleaner: McCleaner;
     /** The tag components contained within this tag list. */
     tags: QueryList<McTag>;
     _tabIndex: number;
