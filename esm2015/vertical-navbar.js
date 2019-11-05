@@ -222,5 +222,5 @@ McVerticalNavbarModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, McVerticalNavbarMixinBase, McVerticalNavbarItem, toggleVerticalNavbarAnimation as ɵa23 };
+export { McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, McVerticalNavbarMixinBase, McVerticalNavbarItem, toggleVerticalNavbarAnimation as ɵa22 };
 //# sourceMappingURL=vertical-navbar.js.map
