@@ -288,11 +288,11 @@ var McTextarea = /** @class */ (function (_super) {
             var outerHeight = parseInt((/** @type {?} */ (window.getComputedStyle(textarea).height)), 10);
             /** @type {?} */
             var diff = outerHeight - textarea.clientHeight;
-            textarea.style.height = 0; // this line is important to height recalculation
+            textarea.style.minHeight = 0; // this line is important to height recalculation
             // this line is important to height recalculation
             /** @type {?} */
             var height = Math.max(_this.minHeight, +textarea.scrollHeight + diff + _this.freeRowsHeight);
-            textarea.style.height = height + "px";
+            textarea.style.minHeight = height + "px";
         }));
     };
     /** Focuses the textarea. */

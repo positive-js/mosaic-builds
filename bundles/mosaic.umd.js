@@ -26993,11 +26993,11 @@ var McTextarea = /** @class */ (function (_super) {
             var outerHeight = parseInt((/** @type {?} */ (window.getComputedStyle(textarea).height)), 10);
             /** @type {?} */
             var diff = outerHeight - textarea.clientHeight;
-            textarea.style.height = 0; // this line is important to height recalculation
+            textarea.style.minHeight = 0; // this line is important to height recalculation
             // this line is important to height recalculation
             /** @type {?} */
             var height = Math.max(_this.minHeight, +textarea.scrollHeight + diff + _this.freeRowsHeight);
-            textarea.style.height = height + "px";
+            textarea.style.minHeight = height + "px";
         }));
     };
     /** Focuses the textarea. */
@@ -31897,10 +31897,10 @@ exports.McIconCSSStyler = McIconCSSStyler;
 exports.McIconBase = McIconBase;
 exports.McIconMixinBase = McIconMixinBase;
 exports.McIcon = McIcon;
-exports.ɵc23 = MAX_VALIDATOR;
-exports.ɵa23 = MIN_VALIDATOR;
-exports.ɵd23 = MaxValidator;
-exports.ɵb23 = MinValidator;
+exports.ɵc25 = MAX_VALIDATOR;
+exports.ɵa25 = MIN_VALIDATOR;
+exports.ɵd25 = MaxValidator;
+exports.ɵb25 = MinValidator;
 exports.McInputModule = McInputModule;
 exports.BIG_STEP = BIG_STEP;
 exports.SMALL_STEP = SMALL_STEP;
@@ -32070,13 +32070,13 @@ exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
 exports.McSidebarClosed = McSidebarClosed;
 exports.McSidebar = McSidebar;
-exports.ɵb20 = mcSidepanelAnimations;
-exports.ɵa20 = mcSidepanelTransformAnimation;
-exports.ɵg20 = McSidepanelActions;
-exports.ɵe20 = McSidepanelBody;
-exports.ɵc20 = McSidepanelClose;
-exports.ɵf20 = McSidepanelFooter;
-exports.ɵd20 = McSidepanelHeader;
+exports.ɵb19 = mcSidepanelAnimations;
+exports.ɵa19 = mcSidepanelTransformAnimation;
+exports.ɵg19 = McSidepanelActions;
+exports.ɵe19 = McSidepanelBody;
+exports.ɵc19 = McSidepanelClose;
+exports.ɵf19 = McSidepanelFooter;
+exports.ɵd19 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
@@ -32103,7 +32103,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa24 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
