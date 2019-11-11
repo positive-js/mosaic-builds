@@ -31738,7 +31738,7 @@ var McVerticalNavbarModule = /** @class */ (function () {
  * Current version.
  * @type {?}
  */
-var VERSION = new core.Version('8.1.0');
+var VERSION = new core.Version('8.1.1');
 
 exports.VERSION = VERSION;
 exports.ɵa3 = mcSanityChecksFactory;
@@ -31928,11 +31928,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports.McLinkMixinBase = McLinkMixinBase;
 exports.McLink = McLink;
-exports.ɵe28 = CssUnitPipe;
-exports.ɵa28 = McModalControlService;
-exports.ɵc28 = McModalBody;
-exports.ɵd28 = McModalFooter;
-exports.ɵb28 = McModalTitle;
+exports.ɵe27 = CssUnitPipe;
+exports.ɵa27 = McModalControlService;
+exports.ɵc27 = McModalBody;
+exports.ɵd27 = McModalFooter;
+exports.ɵb27 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
