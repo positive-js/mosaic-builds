@@ -1,6 +1,6 @@
 {
     "name": "@ptsecurity/mosaic",
-    "version": "8.1.1-dd62fe3",
+    "version": "8.1.1-b99337b2",
     "description": "Mosaic",
     "main": "./bundles/mosaic.umd.js",
     "module": "./esm5/mosaic.es5.js",
@@ -26,8 +26,8 @@
         "@angular/core": ">=8.0.0",
         "@angular/common": ">=8.0.0",
         "@angular/forms": ">=8.0.0",
-        "@ptsecurity/cdk": "8.1.1-dd62fe3",
-        "@ptsecurity/mosaic-moment-adapter": "8.1.1-dd62fe3",
+        "@ptsecurity/cdk": "8.1.1-b99337b2",
+        "@ptsecurity/mosaic-moment-adapter": "8.1.1-b99337b2",
         "@ptsecurity/mosaic-icons": "^3.0.0"
     },
     "dependencies": {
