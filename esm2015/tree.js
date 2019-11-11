@@ -13,7 +13,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { hasModifierKey, END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
+import { hasModifierKey, END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -532,6 +532,7 @@ class McTreeSelection extends CdkTree {
         this.resetFocusedItemOnBlur = true;
         this.navigationChange = new EventEmitter();
         this.selectionChange = new EventEmitter();
+        this.userTabIndex = null;
         this._autoSelect = true;
         this._noUnselectLast = true;
         this._disabled = false;
@@ -646,6 +647,7 @@ class McTreeSelection extends CdkTree {
      */
     set tabIndex(value) {
         this._tabIndex = value;
+        this.userTabIndex = value;
     }
     /**
      * @return {?}
@@ -670,6 +672,12 @@ class McTreeSelection extends CdkTree {
                 this.emitNavigationEvent(this.keyManager.activeItem);
             }
         }));
+        this.keyManager.tabOut
+            .pipe(takeUntil(this.destroy))
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.allowFocusEscape()));
         this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
             .subscribe((/**
@@ -776,8 +784,6 @@ class McTreeSelection extends CdkTree {
                 this.keyManager.setNextPageItemActive();
                 event.preventDefault();
                 break;
-            case TAB:
-                return;
             default:
                 this.keyManager.onKeydown(event);
         }
@@ -1033,6 +1039,22 @@ class McTreeSelection extends CdkTree {
      */
     updateTabIndex() {
         this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    allowFocusEscape() {
+        if (this._tabIndex !== -1) {
+            this._tabIndex = -1;
+            setTimeout((/**
+             * @return {?}
+             */
+            () => {
+                this._tabIndex = this.userTabIndex || 0;
+                this.changeDetectorRef.markForCheck();
+            }));
+        }
     }
     /**
      * @private

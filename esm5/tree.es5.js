@@ -14,7 +14,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { hasModifierKey, END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE, TAB } from '@ptsecurity/cdk/keycodes';
+import { hasModifierKey, END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -614,6 +614,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         _this.resetFocusedItemOnBlur = true;
         _this.navigationChange = new EventEmitter();
         _this.selectionChange = new EventEmitter();
+        _this.userTabIndex = null;
         _this._autoSelect = true;
         _this._noUnselectLast = true;
         _this._disabled = false;
@@ -754,6 +755,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (value) {
             this._tabIndex = value;
+            this.userTabIndex = value;
         },
         enumerable: true,
         configurable: true
@@ -789,6 +791,12 @@ var McTreeSelection = /** @class */ (function (_super) {
                 _this.emitNavigationEvent(_this.keyManager.activeItem);
             }
         }));
+        this.keyManager.tabOut
+            .pipe(takeUntil(this.destroy))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.allowFocusEscape(); }));
         this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
             .subscribe((/**
@@ -908,8 +916,6 @@ var McTreeSelection = /** @class */ (function (_super) {
                 this.keyManager.setNextPageItemActive();
                 event.preventDefault();
                 break;
-            case TAB:
-                return;
             default:
                 this.keyManager.onKeydown(event);
         }
@@ -1238,6 +1244,27 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function () {
         this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McTreeSelection.prototype.allowFocusEscape = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (this._tabIndex !== -1) {
+            this._tabIndex = -1;
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
+                _this._tabIndex = _this.userTabIndex || 0;
+                _this.changeDetectorRef.markForCheck();
+            }));
+        }
     };
     /**
      * @private

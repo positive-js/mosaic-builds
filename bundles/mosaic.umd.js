@@ -17964,6 +17964,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         _this.resetFocusedItemOnBlur = true;
         _this.navigationChange = new core.EventEmitter();
         _this.selectionChange = new core.EventEmitter();
+        _this.userTabIndex = null;
         _this._autoSelect = true;
         _this._noUnselectLast = true;
         _this._disabled = false;
@@ -18104,6 +18105,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function (value) {
             this._tabIndex = value;
+            this.userTabIndex = value;
         },
         enumerable: true,
         configurable: true
@@ -18139,6 +18141,12 @@ var McTreeSelection = /** @class */ (function (_super) {
                 _this.emitNavigationEvent(_this.keyManager.activeItem);
             }
         }));
+        this.keyManager.tabOut
+            .pipe(operators.takeUntil(this.destroy))
+            .subscribe((/**
+         * @return {?}
+         */
+        function () { return _this.allowFocusEscape(); }));
         this.selectionModel.changed
             .pipe(operators.takeUntil(this.destroy))
             .subscribe((/**
@@ -18258,8 +18266,6 @@ var McTreeSelection = /** @class */ (function (_super) {
                 this.keyManager.setNextPageItemActive();
                 event.preventDefault();
                 break;
-            case keycodes.TAB:
-                return;
             default:
                 this.keyManager.onKeydown(event);
         }
@@ -18588,6 +18594,27 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function () {
         this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McTreeSelection.prototype.allowFocusEscape = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (this._tabIndex !== -1) {
+            this._tabIndex = -1;
+            setTimeout((/**
+             * @return {?}
+             */
+            function () {
+                _this._tabIndex = _this.userTabIndex || 0;
+                _this.changeDetectorRef.markForCheck();
+            }));
+        }
     };
     /**
      * @private
@@ -31928,11 +31955,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports.McLinkMixinBase = McLinkMixinBase;
 exports.McLink = McLink;
-exports.ɵe27 = CssUnitPipe;
-exports.ɵa27 = McModalControlService;
-exports.ɵc27 = McModalBody;
-exports.ɵd27 = McModalFooter;
-exports.ɵb27 = McModalTitle;
+exports.ɵe28 = CssUnitPipe;
+exports.ɵa28 = McModalControlService;
+exports.ɵc28 = McModalBody;
+exports.ɵd28 = McModalFooter;
+exports.ɵb28 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -32064,7 +32091,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa1 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -32103,7 +32130,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa24 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

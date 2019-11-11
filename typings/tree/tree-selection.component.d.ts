@@ -36,6 +36,7 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     readonly navigationChange: EventEmitter<McTreeNavigationChange<T>>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange<T>>;
     multipleMode: MultipleMode | null;
+    userTabIndex: number | null;
     readonly optionFocusChanges: Observable<McTreeOptionEvent>;
     readonly optionBlurChanges: Observable<McTreeOptionEvent>;
     readonly multiple: boolean;
@@ -80,6 +81,7 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     setOptionsFromValues(values: any[]): void;
     getSelectedValues(): any[];
     protected updateTabIndex(): void;
+    private allowFocusEscape;
     private resetOptions;
     private dropSubscriptions;
     private listenToOptionsFocus;
