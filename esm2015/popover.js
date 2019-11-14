@@ -42,6 +42,12 @@ const mcPopoverAnimations = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+const PopoverTriggers = {
+    Click: 'click',
+    Focus: 'focus',
+    Hover: 'hover',
+};
 class McPopoverComponent {
     /**
      * @param {?} changeDetectorRef
@@ -54,7 +60,7 @@ class McPopoverComponent {
         this.popoverVisibility = 'initial';
         this.closeOnInteraction = false;
         this.mcVisibleChange = new EventEmitter();
-        this._mcTrigger = 'hover';
+        this._mcTrigger = PopoverTriggers.Hover;
         this._mcPlacement = 'top';
         this._mcVisible = new BehaviorSubject(false);
         this._classList = [];
@@ -337,7 +343,7 @@ class McPopover {
         this.mcVisibleChange = new EventEmitter();
         this.$unsubscribe = new Subject();
         this._disabled = false;
-        this._mcTrigger = 'hover';
+        this._mcTrigger = PopoverTriggers.Click;
         this.popoverSize = 'normal';
         this._mcPlacement = 'top';
         this.manualListeners = new Map();
@@ -452,7 +458,7 @@ class McPopover {
             this.updateCompValue('mcTrigger', value);
         }
         else {
-            this._mcTrigger = 'hover';
+            this._mcTrigger = PopoverTriggers.Click;
         }
     }
     /**
@@ -577,11 +583,12 @@ class McPopover {
             positionStrategy: strategy,
             panelClass: 'mc-popover__panel',
             scrollStrategy: this.scrollStrategy(),
-            hasBackdrop: this.mcTrigger === 'manual',
+            hasBackdrop: this.mcTrigger === PopoverTriggers.Click,
             backdropClass: 'no-class'
         });
-        if (this.mcTrigger === 'manual') {
-            this.overlayRef.backdropClick().subscribe((/**
+        if (this.mcTrigger === PopoverTriggers.Click) {
+            this.overlayRef.backdropClick()
+                .subscribe((/**
              * @return {?}
              */
             () => {
@@ -707,7 +714,9 @@ class McPopover {
          * @param {?} event
          * @return {?}
          */
-        (listener, event) => this.elementRef.nativeElement.removeEventListener(event, listener)));
+        (listener, event) => {
+            this.elementRef.nativeElement.removeEventListener(event, listener);
+        }));
         this.manualListeners.clear();
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
@@ -717,7 +726,8 @@ class McPopover {
      * @return {?}
      */
     handleKeydown(e) {
-        if (this.isOpen && e.keyCode === ESCAPE) { // tslint:disable-line
+        // tslint:disable-next-line: deprecation
+        if (this.isOpen && e.keyCode === ESCAPE) {
             this.hide();
         }
     }
@@ -731,7 +741,22 @@ class McPopover {
      * @return {?}
      */
     initElementRefListeners() {
-        if (this.mcTrigger === 'hover') {
+        if (this.mcTrigger === PopoverTriggers.Click) {
+            this.manualListeners
+                .set('click', (/**
+             * @return {?}
+             */
+            () => this.show()))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            (listener, event) => {
+                this.elementRef.nativeElement.addEventListener(event, listener);
+            }));
+        }
+        else if (this.mcTrigger === PopoverTriggers.Hover) {
             this.manualListeners
                 .set('mouseenter', (/**
              * @return {?}
@@ -746,9 +771,11 @@ class McPopover {
              * @param {?} event
              * @return {?}
              */
-            (listener, event) => this.elementRef.nativeElement.addEventListener(event, listener)));
+            (listener, event) => {
+                this.elementRef.nativeElement.addEventListener(event, listener);
+            }));
         }
-        if (this.mcTrigger === 'focus') {
+        else if (this.mcTrigger === PopoverTriggers.Focus) {
             this.manualListeners
                 .set('focus', (/**
              * @return {?}
@@ -763,7 +790,9 @@ class McPopover {
              * @param {?} event
              * @return {?}
              */
-            (listener, event) => this.elementRef.nativeElement.addEventListener(event, listener)));
+            (listener, event) => {
+                this.elementRef.nativeElement.addEventListener(event, listener);
+            }));
         }
     }
     /**

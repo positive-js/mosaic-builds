@@ -43,6 +43,12 @@ var mcPopoverAnimations = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+var PopoverTriggers = {
+    Click: 'click',
+    Focus: 'focus',
+    Hover: 'hover',
+};
 var McPopoverComponent = /** @class */ (function () {
     function McPopoverComponent(changeDetectorRef, componentElementRef) {
         this.changeDetectorRef = changeDetectorRef;
@@ -51,7 +57,7 @@ var McPopoverComponent = /** @class */ (function () {
         this.popoverVisibility = 'initial';
         this.closeOnInteraction = false;
         this.mcVisibleChange = new EventEmitter();
-        this._mcTrigger = 'hover';
+        this._mcTrigger = PopoverTriggers.Hover;
         this._mcPlacement = 'top';
         this._mcVisible = new BehaviorSubject(false);
         this._classList = [];
@@ -392,7 +398,7 @@ var McPopover = /** @class */ (function () {
         this.mcVisibleChange = new EventEmitter();
         this.$unsubscribe = new Subject();
         this._disabled = false;
-        this._mcTrigger = 'hover';
+        this._mcTrigger = PopoverTriggers.Click;
         this.popoverSize = 'normal';
         this._mcPlacement = 'top';
         this.manualListeners = new Map();
@@ -532,7 +538,7 @@ var McPopover = /** @class */ (function () {
                 this.updateCompValue('mcTrigger', value);
             }
             else {
-                this._mcTrigger = 'hover';
+                this._mcTrigger = PopoverTriggers.Click;
             }
         },
         enumerable: true,
@@ -686,11 +692,12 @@ var McPopover = /** @class */ (function () {
             positionStrategy: strategy,
             panelClass: 'mc-popover__panel',
             scrollStrategy: this.scrollStrategy(),
-            hasBackdrop: this.mcTrigger === 'manual',
+            hasBackdrop: this.mcTrigger === PopoverTriggers.Click,
             backdropClass: 'no-class'
         });
-        if (this.mcTrigger === 'manual') {
-            this.overlayRef.backdropClick().subscribe((/**
+        if (this.mcTrigger === PopoverTriggers.Click) {
+            this.overlayRef.backdropClick()
+                .subscribe((/**
              * @return {?}
              */
             function () {
@@ -843,7 +850,7 @@ var McPopover = /** @class */ (function () {
          * @return {?}
          */
         function (listener, event) {
-            return _this.elementRef.nativeElement.removeEventListener(event, listener);
+            _this.elementRef.nativeElement.removeEventListener(event, listener);
         }));
         this.manualListeners.clear();
         this.$unsubscribe.next();
@@ -858,7 +865,8 @@ var McPopover = /** @class */ (function () {
      * @return {?}
      */
     function (e) {
-        if (this.isOpen && e.keyCode === ESCAPE) { // tslint:disable-line
+        // tslint:disable-next-line: deprecation
+        if (this.isOpen && e.keyCode === ESCAPE) {
             this.hide();
         }
     };
@@ -879,7 +887,22 @@ var McPopover = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        if (this.mcTrigger === 'hover') {
+        if (this.mcTrigger === PopoverTriggers.Click) {
+            this.manualListeners
+                .set('click', (/**
+             * @return {?}
+             */
+            function () { return _this.show(); }))
+                .forEach((/**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */
+            function (listener, event) {
+                _this.elementRef.nativeElement.addEventListener(event, listener);
+            }));
+        }
+        else if (this.mcTrigger === PopoverTriggers.Hover) {
             this.manualListeners
                 .set('mouseenter', (/**
              * @return {?}
@@ -894,9 +917,11 @@ var McPopover = /** @class */ (function () {
              * @param {?} event
              * @return {?}
              */
-            function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
+            function (listener, event) {
+                _this.elementRef.nativeElement.addEventListener(event, listener);
+            }));
         }
-        if (this.mcTrigger === 'focus') {
+        else if (this.mcTrigger === PopoverTriggers.Focus) {
             this.manualListeners
                 .set('focus', (/**
              * @return {?}
@@ -911,7 +936,9 @@ var McPopover = /** @class */ (function () {
              * @param {?} event
              * @return {?}
              */
-            function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
+            function (listener, event) {
+                _this.elementRef.nativeElement.addEventListener(event, listener);
+            }));
         }
     };
     /**
