@@ -559,7 +559,7 @@ class McTreeSelection extends CdkTree {
         else if (multiple !== null) {
             this.multipleMode = MultipleMode.CHECKBOX;
         }
-        if (this.multiple) {
+        if (this.multipleMode === MultipleMode.CHECKBOX) {
             this.autoSelect = false;
             this.noUnselectLast = false;
         }

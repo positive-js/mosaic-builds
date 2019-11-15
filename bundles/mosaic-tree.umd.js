@@ -663,7 +663,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         else if (multiple !== null) {
             _this.multipleMode = MultipleMode.CHECKBOX;
         }
-        if (_this.multiple) {
+        if (_this.multipleMode === MultipleMode.CHECKBOX) {
             _this.autoSelect = false;
             _this.noUnselectLast = false;
         }
