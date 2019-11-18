@@ -15,6 +15,7 @@ import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { EXTENDED_OVERLAY_POSITIONS, POSITION_MAP, POSITION_TO_CSS_MAP } from '@ptsecurity/mosaic/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -49,12 +50,18 @@ var PopoverTriggers = {
     Focus: 'focus',
     Hover: 'hover',
 };
+/** @enum {string} */
+var PopoverVisibility = {
+    Initial: 'initial',
+    Visible: 'visible',
+    Hidden: 'hidden',
+};
 var McPopoverComponent = /** @class */ (function () {
     function McPopoverComponent(changeDetectorRef, componentElementRef) {
         this.changeDetectorRef = changeDetectorRef;
         this.componentElementRef = componentElementRef;
         this.positions = EXTENDED_OVERLAY_POSITIONS.slice();
-        this.popoverVisibility = 'initial';
+        this.popoverVisibility = PopoverVisibility.Initial;
         this.closeOnInteraction = false;
         this.mcVisibleChange = new EventEmitter();
         this._mcTrigger = PopoverTriggers.Hover;
@@ -196,6 +203,30 @@ var McPopoverComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McPopoverComponent.prototype, "isOpen", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.popoverVisibility === PopoverVisibility.Visible;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} e
+     * @return {?}
+     */
+    McPopoverComponent.prototype.handleKeydown = /**
+     * @param {?} e
+     * @return {?}
+     */
+    function (e) {
+        // tslint:disable-next-line: deprecation
+        if (this.isOpen && e.keyCode === ESCAPE) {
+            this.hide();
+        }
+    };
     /**
      * @return {?}
      */
@@ -205,7 +236,7 @@ var McPopoverComponent = /** @class */ (function () {
     function () {
         if (this.isNonEmptyContent()) {
             this.closeOnInteraction = true;
-            this.popoverVisibility = 'visible';
+            this.popoverVisibility = PopoverVisibility.Visible;
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
             this.markForCheck();
@@ -218,7 +249,7 @@ var McPopoverComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.popoverVisibility = 'hidden';
+        this.popoverVisibility = PopoverVisibility.Hidden;
         this.mcVisibleChange.emit(false);
         // Mark for check so if any parent component has set the
         // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -252,7 +283,7 @@ var McPopoverComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this.popoverVisibility === 'visible';
+        return this.popoverVisibility === PopoverVisibility.Visible;
     };
     /**
      * @return {?}
@@ -305,10 +336,10 @@ var McPopoverComponent = /** @class */ (function () {
     function (event) {
         /** @type {?} */
         var toState = (/** @type {?} */ (event.toState));
-        if (toState === 'hidden' && !this.isVisible()) {
+        if (toState === PopoverVisibility.Hidden && !this.isVisible()) {
             this.onHideSubject.next();
         }
-        if (toState === 'visible' || toState === 'hidden') {
+        if (toState === PopoverVisibility.Visible || toState === PopoverVisibility.Hidden) {
             this.closeOnInteraction = true;
         }
     };
@@ -331,7 +362,8 @@ var McPopoverComponent = /** @class */ (function () {
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     animations: [mcPopoverAnimations.popoverState],
                     host: {
-                        '[class]': 'getCssClassesList'
+                        '[class]': 'getCssClassesList',
+                        '(keydown)': 'handleKeydown($event)'
                     }
                 },] },
     ];
@@ -975,7 +1007,8 @@ var McPopover = /** @class */ (function () {
                  * @return {?}
                  */
                 function (property) { return _this.updateCompValue(property, _this[property]); }));
-                this.popover.mcVisibleChange.pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
+                this.popover.mcVisibleChange
+                    .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
                     .subscribe((/**
                  * @param {?} data
                  * @return {?}
@@ -1242,7 +1275,7 @@ var McPopoverModule = /** @class */ (function () {
     McPopoverModule.decorators = [
         { type: NgModule, args: [{
                     declarations: [McPopoverComponent, McPopover],
-                    exports: [McPopoverComponent, McPopover],
+                    exports: [A11yModule, McPopoverComponent, McPopover],
                     imports: [CommonModule, OverlayModule],
                     providers: [MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER],
                     entryComponents: [McPopoverComponent]
@@ -1261,5 +1294,5 @@ var McPopoverModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McPopoverModule, mcPopoverScrollStrategyFactory, getMcPopoverInvalidPositionError, McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover, mcPopoverAnimations };
+export { McPopoverModule, mcPopoverScrollStrategyFactory, getMcPopoverInvalidPositionError, PopoverVisibility, McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover, mcPopoverAnimations };
 //# sourceMappingURL=popover.es5.js.map

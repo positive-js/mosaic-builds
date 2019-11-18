@@ -1,10 +1,14 @@
 import { AnimationEvent } from '@angular/animations';
 import { Directionality } from '@angular/cdk/bidi';
-import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, ScrollStrategy, OverlayConnectionPosition, OriginConnectionPosition, HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { ConnectedOverlayPositionChange, ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, ScrollDispatcher, ScrollStrategy, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
-export declare type PopoverVisibility = 'initial' | 'visible' | 'hidden';
+export declare enum PopoverVisibility {
+    Initial = "initial",
+    Visible = "visible",
+    Hidden = "hidden"
+}
 export declare class McPopoverComponent {
     changeDetectorRef: ChangeDetectorRef;
     componentElementRef: ElementRef;
@@ -28,9 +32,11 @@ export declare class McPopoverComponent {
     private _classList;
     readonly getCssClassesList: string;
     readonly getPlacementClass: string;
+    readonly isOpen: boolean;
     /** Subject for notifying that the popover has been hidden from the view */
     private readonly onHideSubject;
     constructor(changeDetectorRef: ChangeDetectorRef, componentElementRef: ElementRef);
+    handleKeydown(e: KeyboardEvent): void;
     show(): void;
     hide(): void;
     isNonEmptyContent(): boolean;

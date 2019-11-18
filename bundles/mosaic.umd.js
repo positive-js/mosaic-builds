@@ -15143,12 +15143,18 @@ var PopoverTriggers = {
     Focus: 'focus',
     Hover: 'hover',
 };
+/** @enum {string} */
+var PopoverVisibility = {
+    Initial: 'initial',
+    Visible: 'visible',
+    Hidden: 'hidden',
+};
 var McPopoverComponent = /** @class */ (function () {
     function McPopoverComponent(changeDetectorRef, componentElementRef) {
         this.changeDetectorRef = changeDetectorRef;
         this.componentElementRef = componentElementRef;
         this.positions = EXTENDED_OVERLAY_POSITIONS.slice();
-        this.popoverVisibility = 'initial';
+        this.popoverVisibility = PopoverVisibility.Initial;
         this.closeOnInteraction = false;
         this.mcVisibleChange = new core.EventEmitter();
         this._mcTrigger = PopoverTriggers.Hover;
@@ -15290,6 +15296,30 @@ var McPopoverComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McPopoverComponent.prototype, "isOpen", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this.popoverVisibility === PopoverVisibility.Visible;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} e
+     * @return {?}
+     */
+    McPopoverComponent.prototype.handleKeydown = /**
+     * @param {?} e
+     * @return {?}
+     */
+    function (e) {
+        // tslint:disable-next-line: deprecation
+        if (this.isOpen && e.keyCode === keycodes.ESCAPE) {
+            this.hide();
+        }
+    };
     /**
      * @return {?}
      */
@@ -15299,7 +15329,7 @@ var McPopoverComponent = /** @class */ (function () {
     function () {
         if (this.isNonEmptyContent()) {
             this.closeOnInteraction = true;
-            this.popoverVisibility = 'visible';
+            this.popoverVisibility = PopoverVisibility.Visible;
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
             this.markForCheck();
@@ -15312,7 +15342,7 @@ var McPopoverComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.popoverVisibility = 'hidden';
+        this.popoverVisibility = PopoverVisibility.Hidden;
         this.mcVisibleChange.emit(false);
         // Mark for check so if any parent component has set the
         // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -15346,7 +15376,7 @@ var McPopoverComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this.popoverVisibility === 'visible';
+        return this.popoverVisibility === PopoverVisibility.Visible;
     };
     /**
      * @return {?}
@@ -15399,10 +15429,10 @@ var McPopoverComponent = /** @class */ (function () {
     function (event) {
         /** @type {?} */
         var toState = (/** @type {?} */ (event.toState));
-        if (toState === 'hidden' && !this.isVisible()) {
+        if (toState === PopoverVisibility.Hidden && !this.isVisible()) {
             this.onHideSubject.next();
         }
-        if (toState === 'visible' || toState === 'hidden') {
+        if (toState === PopoverVisibility.Visible || toState === PopoverVisibility.Hidden) {
             this.closeOnInteraction = true;
         }
     };
@@ -15425,7 +15455,8 @@ var McPopoverComponent = /** @class */ (function () {
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     animations: [mcPopoverAnimations.popoverState],
                     host: {
-                        '[class]': 'getCssClassesList'
+                        '[class]': 'getCssClassesList',
+                        '(keydown)': 'handleKeydown($event)'
                     }
                 },] },
     ];
@@ -16069,7 +16100,8 @@ var McPopover = /** @class */ (function () {
                  * @return {?}
                  */
                 function (property) { return _this.updateCompValue(property, _this[property]); }));
-                this.popover.mcVisibleChange.pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
+                this.popover.mcVisibleChange
+                    .pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
                     .subscribe((/**
                  * @param {?} data
                  * @return {?}
@@ -16336,7 +16368,7 @@ var McPopoverModule = /** @class */ (function () {
     McPopoverModule.decorators = [
         { type: core.NgModule, args: [{
                     declarations: [McPopoverComponent, McPopover],
-                    exports: [McPopoverComponent, McPopover],
+                    exports: [a11y$1.A11yModule, McPopoverComponent, McPopover],
                     imports: [common.CommonModule, overlay.OverlayModule],
                     providers: [MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER],
                     entryComponents: [McPopoverComponent]
@@ -32003,6 +32035,7 @@ exports.McNavbar = McNavbar;
 exports.McPopoverModule = McPopoverModule;
 exports.mcPopoverScrollStrategyFactory = mcPopoverScrollStrategyFactory;
 exports.getMcPopoverInvalidPositionError = getMcPopoverInvalidPositionError;
+exports.PopoverVisibility = PopoverVisibility;
 exports.McPopoverComponent = McPopoverComponent;
 exports.MC_POPOVER_SCROLL_STRATEGY = MC_POPOVER_SCROLL_STRATEGY;
 exports.MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER;
@@ -32041,15 +32074,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd16 = McTabBase;
-exports.ɵe16 = McTabMixinBase;
-exports.ɵa16 = McTabHeaderBase;
-exports.ɵb16 = McTabLabelWrapperBase;
-exports.ɵc16 = McTabLabelWrapperMixinBase;
-exports.ɵh16 = McTabLinkBase;
-exports.ɵi16 = McTabLinkMixinBase;
-exports.ɵf16 = McTabNavBase;
-exports.ɵg16 = McTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = McTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = McTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵi15 = McTabLinkMixinBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵg15 = McTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -32118,7 +32151,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa1 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -32157,7 +32190,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa22 = toggleVerticalNavbarAnimation;
+exports.ɵa24 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;

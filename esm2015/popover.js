@@ -14,6 +14,7 @@ import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { EXTENDED_OVERLAY_POSITIONS, POSITION_MAP, POSITION_TO_CSS_MAP } from '@ptsecurity/mosaic/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -48,6 +49,12 @@ const PopoverTriggers = {
     Focus: 'focus',
     Hover: 'hover',
 };
+/** @enum {string} */
+const PopoverVisibility = {
+    Initial: 'initial',
+    Visible: 'visible',
+    Hidden: 'hidden',
+};
 class McPopoverComponent {
     /**
      * @param {?} changeDetectorRef
@@ -57,7 +64,7 @@ class McPopoverComponent {
         this.changeDetectorRef = changeDetectorRef;
         this.componentElementRef = componentElementRef;
         this.positions = [...EXTENDED_OVERLAY_POSITIONS];
-        this.popoverVisibility = 'initial';
+        this.popoverVisibility = PopoverVisibility.Initial;
         this.closeOnInteraction = false;
         this.mcVisibleChange = new EventEmitter();
         this._mcTrigger = PopoverTriggers.Hover;
@@ -174,10 +181,26 @@ class McPopoverComponent {
     /**
      * @return {?}
      */
+    get isOpen() {
+        return this.popoverVisibility === PopoverVisibility.Visible;
+    }
+    /**
+     * @param {?} e
+     * @return {?}
+     */
+    handleKeydown(e) {
+        // tslint:disable-next-line: deprecation
+        if (this.isOpen && e.keyCode === ESCAPE) {
+            this.hide();
+        }
+    }
+    /**
+     * @return {?}
+     */
     show() {
         if (this.isNonEmptyContent()) {
             this.closeOnInteraction = true;
-            this.popoverVisibility = 'visible';
+            this.popoverVisibility = PopoverVisibility.Visible;
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
             this.markForCheck();
@@ -187,7 +210,7 @@ class McPopoverComponent {
      * @return {?}
      */
     hide() {
-        this.popoverVisibility = 'hidden';
+        this.popoverVisibility = PopoverVisibility.Hidden;
         this.mcVisibleChange.emit(false);
         // Mark for check so if any parent component has set the
         // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -210,7 +233,7 @@ class McPopoverComponent {
      * @return {?}
      */
     isVisible() {
-        return this.popoverVisibility === 'visible';
+        return this.popoverVisibility === PopoverVisibility.Visible;
     }
     /**
      * @return {?}
@@ -245,10 +268,10 @@ class McPopoverComponent {
     animationDone(event) {
         /** @type {?} */
         const toState = (/** @type {?} */ (event.toState));
-        if (toState === 'hidden' && !this.isVisible()) {
+        if (toState === PopoverVisibility.Hidden && !this.isVisible()) {
             this.onHideSubject.next();
         }
-        if (toState === 'visible' || toState === 'hidden') {
+        if (toState === PopoverVisibility.Visible || toState === PopoverVisibility.Hidden) {
             this.closeOnInteraction = true;
         }
     }
@@ -269,7 +292,8 @@ McPopoverComponent.decorators = [
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 animations: [mcPopoverAnimations.popoverState],
                 host: {
-                    '[class]': 'getCssClassesList'
+                    '[class]': 'getCssClassesList',
+                    '(keydown)': 'handleKeydown($event)'
                 }
             },] },
 ];
@@ -825,7 +849,8 @@ class McPopover {
                  * @return {?}
                  */
                 (property) => this.updateCompValue(property, this[property])));
-                this.popover.mcVisibleChange.pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
+                this.popover.mcVisibleChange
+                    .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
                     .subscribe((/**
                  * @param {?} data
                  * @return {?}
@@ -1052,7 +1077,7 @@ class McPopoverModule {
 McPopoverModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [McPopoverComponent, McPopover],
-                exports: [McPopoverComponent, McPopover],
+                exports: [A11yModule, McPopoverComponent, McPopover],
                 imports: [CommonModule, OverlayModule],
                 providers: [MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER],
                 entryComponents: [McPopoverComponent]
@@ -1069,5 +1094,5 @@ McPopoverModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McPopoverModule, mcPopoverScrollStrategyFactory, getMcPopoverInvalidPositionError, McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover, mcPopoverAnimations };
+export { McPopoverModule, mcPopoverScrollStrategyFactory, getMcPopoverInvalidPositionError, PopoverVisibility, McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover, mcPopoverAnimations };
 //# sourceMappingURL=popover.js.map
