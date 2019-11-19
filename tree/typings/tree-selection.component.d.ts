@@ -3,13 +3,9 @@ import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, Iterable
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
-import { CanDisable, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { CanDisable, HasTabIndex, MultipleMode } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 import { McTreeOption, McTreeOptionEvent } from './tree-option.component';
-export declare enum MultipleMode {
-    CHECKBOX = "checkbox",
-    KEYBOARD = "keyboard"
-}
 export declare const MC_SELECTION_TREE_VALUE_ACCESSOR: any;
 export declare class McTreeNavigationChange<T> {
     source: McTreeSelection<any>;

@@ -24,7 +24,8 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     private _value;
     disabled: any;
     private _disabled;
-    readonly showCheckbox: boolean;
+    showCheckbox: any;
+    private _showCheckbox;
     readonly onSelectionChange: EventEmitter<McTreeOptionChange>;
     selected: boolean;
     private _selected;

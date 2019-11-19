@@ -13,10 +13,10 @@ import { Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, Conte
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, A, PAGE_UP, PAGE_DOWN } from '@ptsecurity/cdk/keycodes';
 import { CdkTree, CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { getOptionScrollPosition, ErrorStateMatcher, mixinTabIndex, mixinDisabled, mixinErrorState, mcSelectAnimations, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
+import { getOptionScrollPosition, ErrorStateMatcher, mixinTabIndex, mixinDisabled, mixinErrorState, mcSelectAnimations, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MultipleMode, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, MultipleMode, McTreeModule } from '@ptsecurity/mosaic/tree';
+import { McTreeSelection, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { defer, merge, Subject } from 'rxjs';
 import { filter, map, switchMap, take, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';

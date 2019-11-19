@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('rxjs/operators'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('@angular/common')) :
-	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', 'rxjs/operators', '@ptsecurity/mosaic/core', 'rxjs', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.rxjs.operators,global.ng.mosaic.core,global.rxjs,global.ng.cdk.coercion,global.ng.cdk.collections,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.keycodes,global.ng.common));
-}(this, (function (exports,core,tree,operators,core$1,rxjs,coercion,collections,forms,a11y,keycodes,common) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/tree'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/core', '@ptsecurity/cdk/tree', 'rxjs/operators', '@angular/cdk/coercion', 'rxjs', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core', '@angular/common'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}),global.ng.core,global.ng.cdk.tree,global.rxjs.operators,global.ng.cdk.coercion,global.rxjs,global.ng.cdk.collections,global.ng.forms,global.ng.cdk.a11y,global.ng.cdk.keycodes,global.ng.mosaic.core,global.ng.common));
+}(this, (function (exports,core,tree,operators,coercion,rxjs,collections,forms,a11y,keycodes,core$1,common) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -292,7 +292,7 @@ var McTreeOption = /** @class */ (function (_super) {
          */
         function (value) {
             /** @type {?} */
-            var newValue = core$1.toBoolean(value);
+            var newValue = coercion.coerceBooleanProperty(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
             }
@@ -305,7 +305,14 @@ var McTreeOption = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this.tree.showCheckbox;
+            return this._showCheckbox !== undefined ? this._showCheckbox : this.tree.showCheckbox;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._showCheckbox = coercion.coerceBooleanProperty(value);
         },
         enumerable: true,
         configurable: true
@@ -323,7 +330,7 @@ var McTreeOption = /** @class */ (function (_super) {
          */
         function (value) {
             /** @type {?} */
-            var isSelected = core$1.toBoolean(value);
+            var isSelected = coercion.coerceBooleanProperty(value);
             if (isSelected !== this._selected) {
                 this.setSelected(isSelected);
             }
@@ -550,7 +557,7 @@ var McTreeOption = /** @class */ (function (_super) {
         { type: core.Component, args: [{
                     selector: 'mc-tree-option',
                     exportAs: 'mcTreeOption',
-                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : 'unchecked'\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                     host: {
                         '[attr.id]': 'id',
                         '[attr.tabindex]': 'tabIndex',
@@ -576,6 +583,7 @@ var McTreeOption = /** @class */ (function (_super) {
     ]; };
     McTreeOption.propDecorators = {
         disabled: [{ type: core.Input }],
+        showCheckbox: [{ type: core.Input }],
         onSelectionChange: [{ type: core.Output }]
     };
     return McTreeOption;
@@ -585,11 +593,6 @@ var McTreeOption = /** @class */ (function (_super) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @enum {string} */
-var MultipleMode = {
-    CHECKBOX: 'checkbox',
-    KEYBOARD: 'keyboard',
-};
 /** @type {?} */
 var MC_SELECTION_TREE_VALUE_ACCESSOR = {
     provide: forms.NG_VALUE_ACCESSOR,
@@ -657,13 +660,13 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function () { });
         _this.tabIndex = parseInt(tabIndex) || 0;
-        if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
+        if (multiple === core$1.MultipleMode.CHECKBOX || multiple === core$1.MultipleMode.KEYBOARD) {
             _this.multipleMode = multiple;
         }
         else if (multiple !== null) {
-            _this.multipleMode = MultipleMode.CHECKBOX;
+            _this.multipleMode = core$1.MultipleMode.CHECKBOX;
         }
-        if (_this.multipleMode === MultipleMode.CHECKBOX) {
+        if (_this.multipleMode === core$1.MultipleMode.CHECKBOX) {
             _this.autoSelect = false;
             _this.noUnselectLast = false;
         }
@@ -787,7 +790,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this.multipleMode === MultipleMode.CHECKBOX;
+            return this.multipleMode === core$1.MultipleMode.CHECKBOX;
         },
         enumerable: true,
         configurable: true
@@ -1015,7 +1018,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                 this.selectionModel.toggle(option.data);
             }
             else {
-                if (this.multipleMode === MultipleMode.KEYBOARD) {
+                if (this.multipleMode === core$1.MultipleMode.KEYBOARD) {
                     this.selectionModel.clear();
                 }
                 this.selectionModel.toggle(option.data);
@@ -1906,7 +1909,6 @@ exports.McTreeNodeDef = McTreeNodeDef;
 exports.McTreeNodePadding = McTreeNodePadding;
 exports.McTreeNodeToggleComponent = McTreeNodeToggleComponent;
 exports.McTreeNodeToggleDirective = McTreeNodeToggleDirective;
-exports.MultipleMode = MultipleMode;
 exports.MC_SELECTION_TREE_VALUE_ACCESSOR = MC_SELECTION_TREE_VALUE_ACCESSOR;
 exports.McTreeNavigationChange = McTreeNavigationChange;
 exports.McTreeSelectionChange = McTreeSelectionChange;

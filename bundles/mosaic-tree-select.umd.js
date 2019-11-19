@@ -483,7 +483,7 @@ var McTreeSelect = /** @class */ (function (_super) {
         this.initKeyManager();
         this.options = this.tree.renderedOptions;
         this.tree.autoSelect = this.autoSelect;
-        this.tree.multipleMode = this.multiple ? tree$1.MultipleMode.CHECKBOX : null;
+        this.tree.multipleMode = this.multiple ? core$1.MultipleMode.CHECKBOX : null;
         if (this.multiple) {
             this.tree.noUnselectLast = false;
         }

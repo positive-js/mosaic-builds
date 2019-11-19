@@ -2,7 +2,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ElementRef, EventEmitter, QueryList, ChangeDetectorRef, OnDestroy, OnInit, NgZone } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { McLine, CanDisable, CanDisableCtor, HasTabIndexCtor, HasTabIndex } from '@ptsecurity/mosaic/core';
+import { McLine, CanDisable, CanDisableCtor, HasTabIndexCtor, HasTabIndex, MultipleMode } from '@ptsecurity/mosaic/core';
 import { Observable, Subject } from 'rxjs';
 export interface McOptionEvent {
     option: McListOption;
@@ -26,6 +26,8 @@ export declare class McListOption implements OnDestroy, OnInit, IFocusableOption
     value: any;
     disabled: any;
     private _disabled;
+    showCheckbox: any;
+    private _showCheckbox;
     selected: boolean;
     private _selected;
     readonly tabIndex: any;
@@ -57,10 +59,12 @@ export declare class McListSelection extends McListSelectionMixinBase implements
     options: QueryList<McListOption>;
     autoSelect: boolean;
     noUnselect: boolean;
-    multiple: boolean;
+    multipleMode: MultipleMode | null;
+    readonly multiple: boolean;
     horizontal: boolean;
     tabIndex: any;
     private _tabIndex;
+    readonly showCheckbox: boolean;
     readonly selectionChange: EventEmitter<McListSelectionChange>;
     selectionModel: SelectionModel<McListOption>;
     readonly optionFocusChanges: Observable<McOptionEvent>;

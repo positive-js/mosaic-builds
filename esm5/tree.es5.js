@@ -8,13 +8,13 @@ import { __extends } from 'tslib';
 import { Directive, Input, Component, ViewEncapsulation, ChangeDetectorRef, EventEmitter, Output, ElementRef, Inject, InjectionToken, ChangeDetectionStrategy, NgZone, Attribute, ContentChildren, forwardRef, IterableDiffers, ViewChild, NgModule } from '@angular/core';
 import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeToggle, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { map, take, takeUntil } from 'rxjs/operators';
-import { toBoolean, getMcSelectNonArrayValueError, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
-import { Subject, merge, BehaviorSubject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Subject, merge, BehaviorSubject } from 'rxjs';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { hasModifierKey, END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, SPACE } from '@ptsecurity/cdk/keycodes';
+import { getMcSelectNonArrayValueError, MultipleMode, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -270,7 +270,7 @@ var McTreeOption = /** @class */ (function (_super) {
          */
         function (value) {
             /** @type {?} */
-            var newValue = toBoolean(value);
+            var newValue = coerceBooleanProperty(value);
             if (newValue !== this._disabled) {
                 this._disabled = newValue;
             }
@@ -283,7 +283,14 @@ var McTreeOption = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this.tree.showCheckbox;
+            return this._showCheckbox !== undefined ? this._showCheckbox : this.tree.showCheckbox;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._showCheckbox = coerceBooleanProperty(value);
         },
         enumerable: true,
         configurable: true
@@ -301,7 +308,7 @@ var McTreeOption = /** @class */ (function (_super) {
          */
         function (value) {
             /** @type {?} */
-            var isSelected = toBoolean(value);
+            var isSelected = coerceBooleanProperty(value);
             if (isSelected !== this._selected) {
                 this.setSelected(isSelected);
             }
@@ -528,7 +535,7 @@ var McTreeOption = /** @class */ (function (_super) {
         { type: Component, args: [{
                     selector: 'mc-tree-option',
                     exportAs: 'mcTreeOption',
-                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                    template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : 'unchecked'\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                     host: {
                         '[attr.id]': 'id',
                         '[attr.tabindex]': 'tabIndex',
@@ -554,6 +561,7 @@ var McTreeOption = /** @class */ (function (_super) {
     ]; };
     McTreeOption.propDecorators = {
         disabled: [{ type: Input }],
+        showCheckbox: [{ type: Input }],
         onSelectionChange: [{ type: Output }]
     };
     return McTreeOption;
@@ -563,11 +571,6 @@ var McTreeOption = /** @class */ (function (_super) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @enum {string} */
-var MultipleMode = {
-    CHECKBOX: 'checkbox',
-    KEYBOARD: 'keyboard',
-};
 /** @type {?} */
 var MC_SELECTION_TREE_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -1889,5 +1892,5 @@ McTreeNestedDataSource = /** @class */ (function (_super) {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggleComponent, McTreeNodeToggleDirective, MultipleMode, MC_SELECTION_TREE_VALUE_ACCESSOR, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };
+export { McTreeModule, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggleComponent, McTreeNodeToggleDirective, MC_SELECTION_TREE_VALUE_ACCESSOR, McTreeNavigationChange, McTreeSelectionChange, McTreeSelection, MC_TREE_OPTION_PARENT_COMPONENT, McTreeOptionChange, McTreeOption, McTreeFlattener, McTreeFlatDataSource, McTreeNestedDataSource };
 //# sourceMappingURL=tree.es5.js.map
