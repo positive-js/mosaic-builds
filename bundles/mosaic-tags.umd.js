@@ -610,17 +610,6 @@ var McTagRemove = /** @class */ (function () {
     function McTagRemove(parentTag) {
         this.parentTag = parentTag;
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
-    McTagRemove.prototype.focus = /**
-     * @param {?} $event
-     * @return {?}
-     */
-    function ($event) {
-        $event.stopPropagation();
-    };
     /** Calls the parent tag's public `remove()` method if applicable. */
     /**
      * Calls the parent tag's public `remove()` method if applicable.
@@ -648,9 +637,7 @@ var McTagRemove = /** @class */ (function () {
                     selector: '[mcTagRemove]',
                     host: {
                         class: 'mc-tag-remove mc-tag-trailing-icon',
-                        '[attr.tabindex]': '-1',
-                        '(click)': 'handleClick($event)',
-                        '(focus)': 'focus($event)'
+                        '(click)': 'handleClick($event)'
                     }
                 },] },
     ];

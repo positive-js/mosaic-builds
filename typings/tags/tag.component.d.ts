@@ -115,7 +115,6 @@ export declare class McTag extends McTagMixinBase implements IFocusableOption, O
 export declare class McTagRemove {
     protected parentTag: McTag;
     constructor(parentTag: McTag);
-    focus($event: any): void;
     /** Calls the parent tag's public `remove()` method if applicable. */
     handleClick(event: Event): void;
 }

@@ -21891,17 +21891,6 @@ var McTagRemove = /** @class */ (function () {
     function McTagRemove(parentTag) {
         this.parentTag = parentTag;
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
-    McTagRemove.prototype.focus = /**
-     * @param {?} $event
-     * @return {?}
-     */
-    function ($event) {
-        $event.stopPropagation();
-    };
     /** Calls the parent tag's public `remove()` method if applicable. */
     /**
      * Calls the parent tag's public `remove()` method if applicable.
@@ -21929,9 +21918,7 @@ var McTagRemove = /** @class */ (function () {
                     selector: '[mcTagRemove]',
                     host: {
                         class: 'mc-tag-remove mc-tag-trailing-icon',
-                        '[attr.tabindex]': '-1',
-                        '(click)': 'handleClick($event)',
-                        '(focus)': 'focus($event)'
+                        '(click)': 'handleClick($event)'
                     }
                 },] },
     ];
@@ -32091,11 +32078,11 @@ exports.McLinkModule = McLinkModule;
 exports.McLinkBase = McLinkBase;
 exports.McLinkMixinBase = McLinkMixinBase;
 exports.McLink = McLink;
-exports.ɵe28 = CssUnitPipe;
-exports.ɵa28 = McModalControlService;
-exports.ɵc28 = McModalBody;
-exports.ɵd28 = McModalFooter;
-exports.ɵb28 = McModalTitle;
+exports.ɵe26 = CssUnitPipe;
+exports.ɵa26 = McModalControlService;
+exports.ɵc26 = McModalBody;
+exports.ɵd26 = McModalFooter;
+exports.ɵb26 = McModalTitle;
 exports.McModalComponent = McModalComponent;
 exports.McModalRef = McModalRef;
 exports.McModalModule = McModalModule;
@@ -32227,7 +32214,7 @@ exports.ARROW_RIGHT_KEYCODE = ARROW_RIGHT_KEYCODE;
 exports.McTimepickerBase = McTimepickerBase;
 exports.McTimepickerMixinBase = McTimepickerMixinBase;
 exports.McTimepicker = McTimepicker;
-exports.ɵa2 = mcSidebarAnimations;
+exports.ɵa1 = mcSidebarAnimations;
 exports.McSidebarModule = McSidebarModule;
 exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
@@ -32266,7 +32253,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa24 = toggleVerticalNavbarAnimation;
+exports.ɵa23 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
