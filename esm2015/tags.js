@@ -493,6 +493,13 @@ class McTagRemove {
         this.parentTag = parentTag;
     }
     /**
+     * @param {?} $event
+     * @return {?}
+     */
+    focus($event) {
+        $event.stopPropagation();
+    }
+    /**
      * Calls the parent tag's public `remove()` method if applicable.
      * @param {?} event
      * @return {?}
@@ -514,7 +521,9 @@ McTagRemove.decorators = [
                 selector: '[mcTagRemove]',
                 host: {
                     class: 'mc-tag-remove mc-tag-trailing-icon',
-                    '(click)': 'handleClick($event)'
+                    '[attr.tabindex]': '-1',
+                    '(click)': 'handleClick($event)',
+                    '(focus)': 'focus($event)'
                 }
             },] },
 ];
