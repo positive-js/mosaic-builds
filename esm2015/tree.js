@@ -309,12 +309,6 @@ class McTreeOption extends CdkTreeNode {
     /**
      * @return {?}
      */
-    get tabIndex() {
-        return this.disabled ? null : -1;
-    }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.value = this.tree.treeControl.getValue(this.data);
     }
@@ -452,7 +446,7 @@ McTreeOption.decorators = [
                 template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : 'unchecked'\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                 host: {
                     '[attr.id]': 'id',
-                    '[attr.tabindex]': 'tabIndex',
+                    '[attr.tabindex]': '-1',
                     '[attr.disabled]': 'disabled || null',
                     class: 'mc-tree-option',
                     '[class.mc-selected]': 'selected',
@@ -673,6 +667,10 @@ class McTreeSelection extends CdkTree {
         () => {
             if (this.keyManager.activeItem) {
                 this.emitNavigationEvent(this.keyManager.activeItem);
+                if (this.autoSelect && !this.keyManager.activeItem.disabled) {
+                    this.updateOptionsFocus();
+                    this.setSelectedOption(this.keyManager.activeItem);
+                }
             }
         }));
         this.keyManager.tabOut
@@ -790,9 +788,6 @@ class McTreeSelection extends CdkTree {
             default:
                 this.keyManager.onKeydown(event);
         }
-        if (this.autoSelect && this.keyManager.activeItem) {
-            this.setSelectedOption(this.keyManager.activeItem);
-        }
     }
     /**
      * @return {?}
@@ -866,8 +861,7 @@ class McTreeSelection extends CdkTree {
                 return;
             }
             if (this.autoSelect) {
-                this.selectionModel.deselect(...this.selectionModel.selected);
-                this.selectionModel.select(option.data);
+                this.selectionModel.toggle(option.data);
             }
         }
         this.emitChangeEvent(option);
@@ -885,8 +879,9 @@ class McTreeSelection extends CdkTree {
     toggleFocusedOption() {
         /** @type {?} */
         const focusedOption = this.keyManager.activeItem;
-        if (focusedOption) {
-            this.setSelectedOption(focusedOption);
+        if (focusedOption && (!focusedOption.selected || this.canDeselectLast(focusedOption))) {
+            focusedOption.toggle();
+            this.emitChangeEvent(focusedOption);
         }
     }
     /**
@@ -1137,6 +1132,23 @@ class McTreeSelection extends CdkTree {
              */
             (option) => option.markForCheck()));
         }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    updateOptionsFocus() {
+        this.renderedOptions
+            .filter((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => option.hasFocus))
+            .forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => option.hasFocus = false));
     }
     /**
      * @private

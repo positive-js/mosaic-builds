@@ -673,6 +673,7 @@ var McSelect = /** @class */ (function (_super) {
     function ($event) {
         $event.stopPropagation();
         this.selectionModel.clear();
+        this.keyManager.setActiveItem(-1);
         this.propagateChanges();
     };
     /**

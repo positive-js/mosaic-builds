@@ -524,6 +524,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
     clearValue($event) {
         $event.stopPropagation();
         this.selectionModel.clear();
+        this.tree.keyManager.setActiveItem(-1);
         this.setSelectionByValue([]);
         this.onChange(this.selectedValues);
     }
@@ -1057,24 +1058,19 @@ class McTreeSelect extends McTreeSelectMixinBase {
      * @return {?}
      */
     highlightCorrectOption() {
-        if (!this.tree.keyManager) {
+        if (this.empty || !this.tree.keyManager) {
             return;
         }
-        if (this.empty) {
-            this.tree.keyManager.setFirstItemActive();
-        }
-        else {
-            /** @type {?} */
-            const firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
-            /** @type {?} */
-            const selectedOption = this.options.find((/**
-             * @param {?} option
-             * @return {?}
-             */
-            (option) => option.value === firstSelectedValue));
-            if (selectedOption) {
-                this.tree.keyManager.setActiveItem(selectedOption);
-            }
+        /** @type {?} */
+        const firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
+        /** @type {?} */
+        const selectedOption = this.options.find((/**
+         * @param {?} option
+         * @return {?}
+         */
+        (option) => option.value === firstSelectedValue));
+        if (selectedOption) {
+            this.tree.keyManager.setActiveItem(selectedOption);
         }
     }
     /**

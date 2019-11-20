@@ -602,6 +602,7 @@ var McTreeSelect = /** @class */ (function (_super) {
     function ($event) {
         $event.stopPropagation();
         this.selectionModel.clear();
+        this.tree.keyManager.setActiveItem(-1);
         this.setSelectionByValue([]);
         this.onChange(this.selectedValues);
     };
@@ -1338,24 +1339,19 @@ var McTreeSelect = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        if (!this.tree.keyManager) {
+        if (this.empty || !this.tree.keyManager) {
             return;
         }
-        if (this.empty) {
-            this.tree.keyManager.setFirstItemActive();
-        }
-        else {
-            /** @type {?} */
-            var firstSelectedValue_1 = this.multiple ? this.selectedValues[0] : this.selectedValues;
-            /** @type {?} */
-            var selectedOption = this.options.find((/**
-             * @param {?} option
-             * @return {?}
-             */
-            function (option) { return option.value === firstSelectedValue_1; }));
-            if (selectedOption) {
-                this.tree.keyManager.setActiveItem(selectedOption);
-            }
+        /** @type {?} */
+        var firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
+        /** @type {?} */
+        var selectedOption = this.options.find((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.value === firstSelectedValue; }));
+        if (selectedOption) {
+            this.tree.keyManager.setActiveItem(selectedOption);
         }
     };
     /** Scrolls the active option into view. */

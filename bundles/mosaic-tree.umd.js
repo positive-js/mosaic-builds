@@ -369,16 +369,6 @@ var McTreeOption = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(McTreeOption.prototype, "tabIndex", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.disabled ? null : -1;
-        },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * @return {?}
      */
@@ -560,7 +550,7 @@ var McTreeOption = /** @class */ (function (_super) {
                     template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : 'unchecked'\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                     host: {
                         '[attr.id]': 'id',
-                        '[attr.tabindex]': 'tabIndex',
+                        '[attr.tabindex]': '-1',
                         '[attr.disabled]': 'disabled || null',
                         class: 'mc-tree-option',
                         '[class.mc-selected]': 'selected',
@@ -814,6 +804,10 @@ var McTreeSelection = /** @class */ (function (_super) {
         function () {
             if (_this.keyManager.activeItem) {
                 _this.emitNavigationEvent(_this.keyManager.activeItem);
+                if (_this.autoSelect && !_this.keyManager.activeItem.disabled) {
+                    _this.updateOptionsFocus();
+                    _this.setSelectedOption(_this.keyManager.activeItem);
+                }
             }
         }));
         this.keyManager.tabOut
@@ -944,9 +938,6 @@ var McTreeSelection = /** @class */ (function (_super) {
             default:
                 this.keyManager.onKeydown(event);
         }
-        if (this.autoSelect && this.keyManager.activeItem) {
-            this.setSelectedOption(this.keyManager.activeItem);
-        }
     };
     /**
      * @return {?}
@@ -971,7 +962,6 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function (option, $event) {
-        var _a;
         /** @type {?} */
         var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
         /** @type {?} */
@@ -1029,8 +1019,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                 return;
             }
             if (this.autoSelect) {
-                (_a = this.selectionModel).deselect.apply(_a, this.selectionModel.selected);
-                this.selectionModel.select(option.data);
+                this.selectionModel.toggle(option.data);
             }
         }
         this.emitChangeEvent(option);
@@ -1055,8 +1044,9 @@ var McTreeSelection = /** @class */ (function (_super) {
     function () {
         /** @type {?} */
         var focusedOption = this.keyManager.activeItem;
-        if (focusedOption) {
-            this.setSelectedOption(focusedOption);
+        if (focusedOption && (!focusedOption.selected || this.canDeselectLast(focusedOption))) {
+            focusedOption.toggle();
+            this.emitChangeEvent(focusedOption);
         }
     };
     /**
@@ -1403,6 +1393,27 @@ var McTreeSelection = /** @class */ (function (_super) {
              */
             function (option) { return option.markForCheck(); }));
         }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    McTreeSelection.prototype.updateOptionsFocus = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.renderedOptions
+            .filter((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.hasFocus; }))
+            .forEach((/**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) { return option.hasFocus = false; }));
     };
     /**
      * @private

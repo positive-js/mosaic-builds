@@ -33,7 +33,6 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     private _id;
     readonly multiple: boolean;
     readonly viewValue: string;
-    readonly tabIndex: any;
     hasFocus: boolean;
     constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, ngZone: NgZone, tree: any);
     ngAfterContentInit(): void;

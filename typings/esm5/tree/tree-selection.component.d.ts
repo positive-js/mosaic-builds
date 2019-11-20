@@ -90,6 +90,7 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     /** Checks whether any of the options is focused. */
     private hasFocusedOption;
     private markOptionsForCheck;
+    private updateOptionsFocus;
     private canDeselectLast;
 }
 export {};
