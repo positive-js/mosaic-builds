@@ -3337,6 +3337,10 @@ $hover-darken: 5%;
         background-color: mc-color($background, background);
         color: mc-color($foreground, text);
     }
+
+    .mc-theme-loaded-marker {
+        display: none;
+    }
 }
 
 
