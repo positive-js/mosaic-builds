@@ -1999,5 +1999,5 @@ var McTabsModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, McTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd14, McTabMixinBase as ɵe14, McTabHeaderBase as ɵa14, McTabLabelWrapperBase as ɵb14, McTabLabelWrapperMixinBase as ɵc14, McTabLinkBase as ɵh14, McTabLinkMixinBase as ɵi14, McTabNavBase as ɵf14, McTabNavMixinBase as ɵg14 };
+export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, McTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd15, McTabMixinBase as ɵe15, McTabHeaderBase as ɵa15, McTabLabelWrapperBase as ɵb15, McTabLabelWrapperMixinBase as ɵc15, McTabLinkBase as ɵh15, McTabLinkMixinBase as ɵi15, McTabNavBase as ɵf15, McTabNavMixinBase as ɵg15 };
 //# sourceMappingURL=tabs.es5.js.map

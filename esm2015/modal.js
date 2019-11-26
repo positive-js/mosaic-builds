@@ -397,6 +397,12 @@ class McModalComponent extends McModalRef {
     /**
      * @return {?}
      */
+    markForCheck() {
+        this.changeDetector.markForCheck();
+    }
+    /**
+     * @return {?}
+     */
     triggerOk() {
         this.onClickOkCancel('ok');
     }

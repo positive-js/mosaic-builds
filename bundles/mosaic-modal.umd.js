@@ -567,6 +567,15 @@ var McModalComponent = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
+    McModalComponent.prototype.markForCheck = /**
+     * @return {?}
+     */
+    function () {
+        this.changeDetector.markForCheck();
+    };
+    /**
+     * @return {?}
+     */
     McModalComponent.prototype.triggerOk = /**
      * @return {?}
      */

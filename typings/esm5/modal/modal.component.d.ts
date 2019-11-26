@@ -71,6 +71,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     open(): void;
     close(result?: R): void;
     destroy(result?: R): void;
+    markForCheck(): void;
     triggerOk(): void;
     triggerCancel(): void;
     getInstance(): McModalComponent;

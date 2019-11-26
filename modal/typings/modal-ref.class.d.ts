@@ -29,4 +29,8 @@ export declare abstract class McModalRef<T = any, R = any> {
      * Get the instance of the Modal itself
      */
     abstract getInstance(): McModalComponent;
+    /**
+     * Call markForCheck for change detector
+     */
+    abstract markForCheck(): any;
 }

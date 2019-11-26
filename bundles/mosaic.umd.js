@@ -13630,6 +13630,15 @@ var McModalComponent = /** @class */ (function (_super) {
     /**
      * @return {?}
      */
+    McModalComponent.prototype.markForCheck = /**
+     * @return {?}
+     */
+    function () {
+        this.changeDetector.markForCheck();
+    };
+    /**
+     * @return {?}
+     */
     McModalComponent.prototype.triggerOk = /**
      * @return {?}
      */
@@ -32150,15 +32159,15 @@ exports.McTreeOption = McTreeOption;
 exports.McTreeFlattener = McTreeFlattener;
 exports.McTreeFlatDataSource = McTreeFlatDataSource;
 exports.McTreeNestedDataSource = McTreeNestedDataSource;
-exports.ɵd14 = McTabBase;
-exports.ɵe14 = McTabMixinBase;
-exports.ɵa14 = McTabHeaderBase;
-exports.ɵb14 = McTabLabelWrapperBase;
-exports.ɵc14 = McTabLabelWrapperMixinBase;
-exports.ɵh14 = McTabLinkBase;
-exports.ɵi14 = McTabLinkMixinBase;
-exports.ɵf14 = McTabNavBase;
-exports.ɵg14 = McTabNavMixinBase;
+exports.ɵd15 = McTabBase;
+exports.ɵe15 = McTabMixinBase;
+exports.ɵa15 = McTabHeaderBase;
+exports.ɵb15 = McTabLabelWrapperBase;
+exports.ɵc15 = McTabLabelWrapperMixinBase;
+exports.ɵh15 = McTabLinkBase;
+exports.ɵi15 = McTabLinkMixinBase;
+exports.ɵf15 = McTabNavBase;
+exports.ɵg15 = McTabNavMixinBase;
 exports.McTabBody = McTabBody;
 exports.McTabBodyPortal = McTabBodyPortal;
 exports.McTabHeader = McTabHeader;
@@ -32266,7 +32275,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa22 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
