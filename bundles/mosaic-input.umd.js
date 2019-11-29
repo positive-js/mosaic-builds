@@ -256,6 +256,12 @@ var McNumberInput = /** @class */ (function () {
          */
         function (e) { return e.keyCode === keycodes.X && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
+        var isCtrlZ = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.Z && (e.ctrlKey || e.metaKey); });
+        /** @type {?} */
         var isFKey = (/**
          * @param {?} e
          * @return {?}
@@ -302,6 +308,7 @@ var McNumberInput = /** @class */ (function () {
             isCtrlC(event) ||
             isCtrlV(event) ||
             isCtrlX(event) ||
+            isCtrlZ(event) ||
             isFKey(event) ||
             isPeriod(event)) {
             // let it happen, don't do anything

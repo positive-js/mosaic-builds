@@ -8,7 +8,7 @@ import { InjectionToken, Attribute, Directive, ElementRef, Inject, Input, Option
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { getSupportedInputTypes, Platform } from '@angular/cdk/platform';
 import { FormGroupDirective, NgControl, NgForm, NgModel, NG_VALIDATORS, Validators, FormsModule } from '@angular/forms';
-import { END, C, V, X, A, DELETE, BACKSPACE, TAB, ENTER, ESCAPE, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH, FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12 } from '@ptsecurity/cdk/keycodes';
+import { END, C, V, X, A, Z, DELETE, BACKSPACE, TAB, ENTER, ESCAPE, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH, FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12 } from '@ptsecurity/cdk/keycodes';
 import { ErrorStateMatcher, mixinErrorState, McCommonModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
@@ -235,6 +235,12 @@ class McNumberInput {
          */
         (e) => e.keyCode === X && (e.ctrlKey || e.metaKey));
         /** @type {?} */
+        const isCtrlZ = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => e.keyCode === Z && (e.ctrlKey || e.metaKey));
+        /** @type {?} */
         const isFKey = (/**
          * @param {?} e
          * @return {?}
@@ -281,6 +287,7 @@ class McNumberInput {
             isCtrlC(event) ||
             isCtrlV(event) ||
             isCtrlX(event) ||
+            isCtrlZ(event) ||
             isFKey(event) ||
             isPeriod(event)) {
             // let it happen, don't do anything

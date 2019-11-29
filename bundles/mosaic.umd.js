@@ -5563,6 +5563,12 @@ var McNumberInput = /** @class */ (function () {
          */
         function (e) { return e.keyCode === keycodes.X && (e.ctrlKey || e.metaKey); });
         /** @type {?} */
+        var isCtrlZ = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        function (e) { return e.keyCode === keycodes.Z && (e.ctrlKey || e.metaKey); });
+        /** @type {?} */
         var isFKey = (/**
          * @param {?} e
          * @return {?}
@@ -5609,6 +5615,7 @@ var McNumberInput = /** @class */ (function () {
             isCtrlC(event) ||
             isCtrlV(event) ||
             isCtrlX(event) ||
+            isCtrlZ(event) ||
             isFKey(event) ||
             isPeriod(event)) {
             // let it happen, don't do anything
@@ -32242,13 +32249,13 @@ exports.SidebarPositions = SidebarPositions;
 exports.McSidebarOpened = McSidebarOpened;
 exports.McSidebarClosed = McSidebarClosed;
 exports.McSidebar = McSidebar;
-exports.ɵb20 = mcSidepanelAnimations;
-exports.ɵa20 = mcSidepanelTransformAnimation;
-exports.ɵg20 = McSidepanelActions;
-exports.ɵe20 = McSidepanelBody;
-exports.ɵc20 = McSidepanelClose;
-exports.ɵf20 = McSidepanelFooter;
-exports.ɵd20 = McSidepanelHeader;
+exports.ɵb21 = mcSidepanelAnimations;
+exports.ɵa21 = mcSidepanelTransformAnimation;
+exports.ɵg21 = McSidepanelActions;
+exports.ɵe21 = McSidepanelBody;
+exports.ɵc21 = McSidepanelClose;
+exports.ɵf21 = McSidepanelFooter;
+exports.ɵd21 = McSidepanelHeader;
 exports.McSidepanelModule = McSidepanelModule;
 exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
 exports.McSidepanelService = McSidepanelService;
@@ -32275,7 +32282,7 @@ exports.McTooltipComponent = McTooltipComponent;
 exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
 exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
 exports.McTooltip = McTooltip;
-exports.ɵa23 = toggleVerticalNavbarAnimation;
+exports.ɵa24 = toggleVerticalNavbarAnimation;
 exports.McVerticalNavbarModule = McVerticalNavbarModule;
 exports.McVerticalNavbarHeader = McVerticalNavbarHeader;
 exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
