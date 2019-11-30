@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, ContentChild, Directive, ElementRef, EventEmitter, Input, NgZone, Output, ViewEncapsulation, NgModule } from '@angular/core';
-import { isControl, isInput, isLeftBracket, isRightBracket } from '@ptsecurity/cdk/keycodes';
 import { CommonModule } from '@angular/common';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, NgZone, ElementRef, Input, Output, ContentChild, Directive, EventEmitter, NgModule } from '@angular/core';
+import { isControl, isInput, isLeftBracket, isRightBracket } from '@ptsecurity/cdk/keycodes';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 /**
  * @fileoverview added by tsickle
@@ -299,15 +299,5 @@ var McSidebarModule = /** @class */ (function () {
     return McSidebarModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McSidebarModule, SidebarPositions, McSidebarOpened, McSidebarClosed, McSidebar, mcSidebarAnimations as ɵa2 };
+export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions, mcSidebarAnimations as ɵa2 };
 //# sourceMappingURL=sidebar.es5.js.map

@@ -4,24 +4,24 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Injectable, NgModule, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, Inject, Input, Optional, Output, ViewChild, ViewEncapsulation, ElementRef, NgZone, InjectionToken, ViewContainerRef, Directive, Attribute, ContentChild, ɵɵdefineInjectable } from '@angular/core';
-import { Subject, merge, Subscription, of } from 'rxjs';
-import { take, filter } from 'rxjs/operators';
-import { Directionality } from '@angular/cdk/bidi';
-import { DateAdapter, MC_DATE_FORMATS } from '@ptsecurity/cdk/datetime';
-import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, UP_ARROW, SPACE, ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
+import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { DOCUMENT, CommonModule } from '@angular/common';
+import { Injectable, ɵɵdefineInjectable, EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, NgZone, Input, Output, ChangeDetectorRef, Optional, Inject, ViewChild, forwardRef, InjectionToken, ViewContainerRef, Directive, Attribute, ContentChild, NgModule } from '@angular/core';
+import { A11yModule } from '@ptsecurity/cdk/a11y';
+import { McButtonModule } from '@ptsecurity/mosaic/button';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { MC_DATE_FORMATS, DateAdapter } from '@ptsecurity/cdk/datetime';
+import { Subject, Subscription, merge, of } from 'rxjs';
+import { Directionality } from '@angular/cdk/bidi';
+import { SPACE, ENTER, PAGE_DOWN, PAGE_UP, END, HOME, DOWN_ARROW, UP_ARROW, RIGHT_ARROW, LEFT_ARROW, ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { take, filter } from 'rxjs/operators';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { mixinColor } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl, McFormField } from '@ptsecurity/mosaic/form-field';
-import { NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators } from '@angular/forms';
 import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
-import { McButtonModule } from '@ptsecurity/mosaic/button';
-import { A11yModule } from '@ptsecurity/cdk/a11y';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
@@ -2950,15 +2950,5 @@ McDatepickerModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McDatepickerModule, McCalendarHeader, McCalendar, McCalendarCell, McCalendarBody, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, McDatepickerContentBase, McDatepickerContentMixinBase, McDatepickerContent, McDatepicker, mcDatepickerAnimations, MC_DATEPICKER_VALUE_ACCESSOR, MC_DATEPICKER_VALIDATORS, McDatepickerInputEvent, McDatepickerInput, McDatepickerIntl, McDatepickerToggleIcon, McDatepickerToggle, McMonthView, McYearView, yearsPerPage, yearsPerRow, McMultiYearView };
+export { MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, MC_DATEPICKER_VALIDATORS, MC_DATEPICKER_VALUE_ACCESSOR, McCalendar, McCalendarBody, McCalendarCell, McCalendarHeader, McDatepicker, McDatepickerContent, McDatepickerContentBase, McDatepickerContentMixinBase, McDatepickerInput, McDatepickerInputEvent, McDatepickerIntl, McDatepickerModule, McDatepickerToggle, McDatepickerToggleIcon, McMonthView, McMultiYearView, McYearView, mcDatepickerAnimations, yearsPerPage, yearsPerRow };
 //# sourceMappingURL=datepicker.js.map

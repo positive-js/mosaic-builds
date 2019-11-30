@@ -4,14 +4,14 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __extends } from 'tslib';
-import { Component, Directive, ElementRef, HostBinding, Input, ViewEncapsulation, NgModule } from '@angular/core';
+import { PlatformModule } from '@angular/cdk/platform';
+import { CommonModule } from '@angular/common';
+import { Component, ViewEncapsulation, ElementRef, Input, Directive, HostBinding, NgModule } from '@angular/core';
 import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
+import { __extends } from 'tslib';
 import { mixinDisabled } from '@ptsecurity/mosaic/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { PlatformModule } from '@angular/cdk/platform';
-import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
@@ -577,15 +577,5 @@ var McNavbarModule = /** @class */ (function () {
     return McNavbarModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McNavbarModule, McNavbarLogo, McNavbarBrand, McNavbarTitle, McNavbarItemBase, McNavbarMixinBase, McNavbarItem, McNavbarContainer, McNavbar };
+export { McNavbar, McNavbarBrand, McNavbarContainer, McNavbarItem, McNavbarItemBase, McNavbarLogo, McNavbarMixinBase, McNavbarModule, McNavbarTitle };
 //# sourceMappingURL=navbar.es5.js.map

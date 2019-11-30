@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, NgModule } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -81,16 +81,6 @@ McDividerModule.decorators = [
                 declarations: [McDivider]
             },] },
 ];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 
 export { McDivider, McDividerModule };
 //# sourceMappingURL=divider.js.map

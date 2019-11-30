@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, ElementRef, Input, NgModule } from '@angular/core';
-import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Input, NgModule } from '@angular/core';
+import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 /**
  * @fileoverview added by tsickle
@@ -102,15 +102,5 @@ McProgressSpinnerModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McProgressSpinnerModule, McProgressSpinnerBase, McProgressSpinnerMixinBase, McProgressSpinner };
+export { McProgressSpinner, McProgressSpinnerBase, McProgressSpinnerMixinBase, McProgressSpinnerModule };
 //# sourceMappingURL=progress-spinner.js.map

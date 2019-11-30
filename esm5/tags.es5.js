@@ -4,21 +4,21 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { InjectionToken, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, NgZone, Output, ViewEncapsulation, Optional, Self, Inject, Renderer2, NgModule } from '@angular/core';
-import { __extends } from 'tslib';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { BACKSPACE, DELETE, SPACE, END, HOME, hasModifierKey, ENTER } from '@ptsecurity/cdk/keycodes';
-import { mixinColor, mixinDisabled, ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
-import { McIcon } from '@ptsecurity/mosaic/icon';
-import { Subject, merge } from 'rxjs';
-import { take, startWith, takeUntil } from 'rxjs/operators';
-import { Directionality } from '@angular/cdk/bidi';
-import { SelectionModel } from '@angular/cdk/collections';
-import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
+import { InjectionToken, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, NgZone, ContentChildren, ContentChild, forwardRef, Output, Input, Directive, Optional, Self, Renderer2, Inject, NgModule } from '@angular/core';
+import { SPACE, BACKSPACE, DELETE, HOME, END, hasModifierKey, ENTER } from '@ptsecurity/cdk/keycodes';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { __extends } from 'tslib';
+import { Directionality } from '@angular/cdk/bidi';
+import { SelectionModel } from '@angular/cdk/collections';
+import { NgForm, FormGroupDirective, NgControl } from '@angular/forms';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
+import { mixinColor, mixinDisabled, mixinErrorState, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
+import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { Subject, merge } from 'rxjs';
+import { take, takeUntil, startWith } from 'rxjs/operators';
+import { McIcon } from '@ptsecurity/mosaic/icon';
 
 /**
  * @fileoverview added by tsickle
@@ -477,7 +477,6 @@ var McTag = /** @class */ (function (_super) {
                 // Always prevent space from scrolling the page since the list has focus
                 event.preventDefault();
                 break;
-            default:
         }
     };
     /**
@@ -1299,9 +1298,7 @@ var McTagList = /** @class */ (function (_super) {
         }
         // TODO: ARIA says this should focus the first `selected` tag if any are selected.
         // Focus on first element if there's no tagInput inside tag-list
-        if (this.tagInput && this.tagInput.focused) {
-            // do nothing
-        }
+        if (this.tagInput && this.tagInput.focused) ;
         else if (this.tags.length > 0) {
             this.keyManager.setFirstItemActive();
             this.stateChanges.next();
@@ -2291,15 +2288,5 @@ var McTagsModule = /** @class */ (function () {
     return McTagsModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McTagsModule, McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, McTagMixinBase, McTag, McTagRemove, McTagListBase, McTagListMixinBase, McTagListChange, McTagList, McTagInput, MC_TAGS_DEFAULT_OPTIONS };
+export { MC_TAGS_DEFAULT_OPTIONS, McTag, McTagAvatar, McTagBase, McTagInput, McTagList, McTagListBase, McTagListChange, McTagListMixinBase, McTagMixinBase, McTagRemove, McTagSelectionChange, McTagTrailingIcon, McTagsModule };
 //# sourceMappingURL=tags.es5.js.map

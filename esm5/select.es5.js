@@ -4,23 +4,23 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { ViewportRuler, CdkConnectedOverlay, OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
+import { Directive, ContentChild, EventEmitter, isDevMode, Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, NgZone, Renderer2, ElementRef, Optional, Self, Attribute, Inject, ViewChild, ViewChildren, ContentChildren, Input, Output, NgModule } from '@angular/core';
+import { mixinTabIndex, mixinDisabled, mixinErrorState, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, countGroupLabelsBeforeOption, getOptionScrollPosition, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, mcSelectAnimations, MC_OPTION_PARENT_COMPONENT, ErrorStateMatcher, MC_SELECT_SCROLL_STRATEGY, McOption, McOptgroup, McOptionModule, MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/core';
+import { McFormField, McFormFieldControl, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
 import { __extends } from 'tslib';
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CdkConnectedOverlay, ViewportRuler, OverlayModule } from '@angular/cdk/overlay';
-import { Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, ElementRef, EventEmitter, Inject, Input, isDevMode, NgZone, Optional, Output, Renderer2, Self, ViewChild, ViewChildren, ViewEncapsulation, NgModule } from '@angular/core';
-import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { NgForm, FormGroupDirective, NgControl } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, A, ESCAPE, PAGE_UP, PAGE_DOWN } from '@ptsecurity/cdk/keycodes';
-import { countGroupLabelsBeforeOption, getOptionScrollPosition, ErrorStateMatcher, MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption, mixinDisabled, mixinErrorState, mixinTabIndex, mcSelectAnimations, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McOptionModule } from '@ptsecurity/mosaic/core';
-import { McFormField, McFormFieldControl, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
+import { ESCAPE, HOME, END, PAGE_UP, PAGE_DOWN, ENTER, SPACE, A, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McInput } from '@ptsecurity/mosaic/input';
-import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
-import { defer, merge, Subject, Subscription } from 'rxjs';
-import { filter, map, startWith, switchMap, take, takeUntil, distinctUntilChanged } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { Subject, defer, merge, Subscription } from 'rxjs';
+import { take, switchMap, filter, map, distinctUntilChanged, takeUntil, startWith } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -1844,15 +1844,5 @@ var McSelectModule = /** @class */ (function () {
     return McSelectModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McSelectModule, McSelectChange, McSelectBase, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger, McSelect };
+export { McSelect, McSelectBase, McSelectChange, McSelectModule, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger };
 //# sourceMappingURL=select.es5.js.map

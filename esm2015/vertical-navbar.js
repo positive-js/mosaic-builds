@@ -4,14 +4,14 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, Directive, ElementRef, Optional, Self, ChangeDetectorRef, NgModule } from '@angular/core';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { mixinDisabled } from '@ptsecurity/mosaic/core';
-import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
-import { animate, style, transition, trigger, state } from '@angular/animations';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
+import { Directive, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, Optional, Self, Input, ChangeDetectorRef, NgModule } from '@angular/core';
+import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { mixinDisabled } from '@ptsecurity/mosaic/core';
+import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 /**
  * @fileoverview added by tsickle
@@ -60,11 +60,11 @@ class McVerticalNavbarItem extends McVerticalNavbarMixinBase {
      * @param {?} focusMonitor
      * @param {?} trigger
      */
-    constructor(element, focusMonitor, trigger$$1) {
+    constructor(element, focusMonitor, trigger) {
         super(element);
         this.element = element;
         this.focusMonitor = focusMonitor;
-        this.trigger = trigger$$1;
+        this.trigger = trigger;
         this.tabIndex = 0;
         this.focusMonitor.monitor(this.element.nativeElement).subscribe();
     }
@@ -212,15 +212,5 @@ McVerticalNavbarModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, McVerticalNavbarMixinBase, McVerticalNavbarItem, toggleVerticalNavbarAnimation as ɵa23 };
+export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, toggleVerticalNavbarAnimation as ɵa23 };
 //# sourceMappingURL=vertical-navbar.js.map

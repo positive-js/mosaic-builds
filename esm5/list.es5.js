@@ -4,17 +4,17 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { CommonModule } from '@angular/common';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Inject, forwardRef, ContentChildren, ViewChild, Input, EventEmitter, Attribute, Output, Directive, NgModule } from '@angular/core';
+import { FocusKeyManager, A11yModule } from '@ptsecurity/cdk/a11y';
+import { toBoolean, McLine, mixinTabIndex, mixinDisabled, MultipleMode, McLineSetter, McPseudoCheckboxModule, McLineModule } from '@ptsecurity/mosaic/core';
 import { __extends } from 'tslib';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Attribute, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, EventEmitter, forwardRef, Input, Output, ViewEncapsulation, ChangeDetectorRef, Inject, ViewChild, NgZone, Directive, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusKeyManager, A11yModule } from '@ptsecurity/cdk/a11y';
-import { DOWN_ARROW, END, ENTER, hasModifierKey, HOME, PAGE_DOWN, PAGE_UP, SPACE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import { McLine, mixinDisabled, toBoolean, mixinTabIndex, MultipleMode, McLineSetter, McLineModule, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
-import { merge, Subject } from 'rxjs';
-import { startWith, take, takeUntil } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+import { hasModifierKey, PAGE_DOWN, PAGE_UP, END, HOME, UP_ARROW, DOWN_ARROW, TAB, ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
+import { Subject, merge } from 'rxjs';
+import { take, takeUntil, startWith } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -1241,15 +1241,5 @@ var McListModule = /** @class */ (function () {
     return McListModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McListModule, McListBase, McList, McListSubheaderCssStyler, McListItemBase, McListItem, McListOption, MC_SELECTION_LIST_VALUE_ACCESSOR, McListSelectionChange, McListSelectionBase, McListSelectionMixinBase, McListSelection };
+export { MC_SELECTION_LIST_VALUE_ACCESSOR, McList, McListBase, McListItem, McListItemBase, McListModule, McListOption, McListSelection, McListSelectionBase, McListSelectionChange, McListSelectionMixinBase, McListSubheaderCssStyler };
 //# sourceMappingURL=list.es5.js.map

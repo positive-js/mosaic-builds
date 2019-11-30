@@ -4,13 +4,13 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { SelectionModel } from '@angular/cdk/collections';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, ElementRef, EventEmitter, forwardRef, Input, Optional, Output, ViewEncapsulation, ViewChild, NgModule } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
+import { forwardRef, EventEmitter, Directive, ChangeDetectorRef, Input, ContentChildren, Output, Component, ViewEncapsulation, ChangeDetectionStrategy, Optional, ElementRef, ViewChild, NgModule } from '@angular/core';
 import { McButton, McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectionModel } from '@angular/cdk/collections';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
 /**
  * @fileoverview added by tsickle
@@ -553,15 +553,5 @@ McButtonToggleModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McButtonToggleModule, MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR, McButtonToggleChange, McButtonToggleGroup, McButtonToggle };
+export { MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR, McButtonToggle, McButtonToggleChange, McButtonToggleGroup, McButtonToggleModule };
 //# sourceMappingURL=button-toggle.js.map

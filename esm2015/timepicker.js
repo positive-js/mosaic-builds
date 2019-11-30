@@ -4,17 +4,17 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, forwardRef, Inject, Input, Optional, Renderer2, Self, NgModule } from '@angular/core';
-import { FormGroupDirective, NgControl, NgForm, FormsModule } from '@angular/forms';
-import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { ErrorStateMatcher, mixinErrorState } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
-import { noop, Subject } from 'rxjs';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
+import { Directive, forwardRef, ElementRef, Optional, Self, Inject, Renderer2, Input, NgModule } from '@angular/core';
+import { NgControl, NgForm, FormGroupDirective, FormsModule } from '@angular/forms';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { DateAdapter } from '@ptsecurity/cdk/datetime';
+import { mixinErrorState, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
+import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
+import { Subject, noop } from 'rxjs';
 
 /**
  * @fileoverview added by tsickle
@@ -585,7 +585,6 @@ class McTimepicker extends McTimepickerMixinBase {
             case TimeParts.seconds:
                 seconds++;
                 break;
-            default:
         }
         if (seconds > SECONDS_PER_MINUTE) {
             seconds = 0;
@@ -617,7 +616,6 @@ class McTimepicker extends McTimepickerMixinBase {
             case TimeParts.seconds:
                 seconds--;
                 break;
-            default:
         }
         if (seconds < 0) {
             seconds = SECONDS_PER_MINUTE;
@@ -931,15 +929,5 @@ McTimepickerModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McTimepickerModule, TimeParts, TimeFormats, TIMEFORMAT_PLACEHOLDERS, DEFAULT_TIME_FORMAT, HOURS_MINUTES_SECONDS_REGEXP, HOURS_MINUTES_REGEXP, HOURS_ONLY_REGEXP, SECONDS_PER_MINUTE, MINUTES_PER_HOUR, HOURS_PER_DAY, ARROW_UP_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_LEFT_KEYCODE, ARROW_RIGHT_KEYCODE, McTimepickerBase, McTimepickerMixinBase, McTimepicker };
+export { ARROW_DOWN_KEYCODE, ARROW_LEFT_KEYCODE, ARROW_RIGHT_KEYCODE, ARROW_UP_KEYCODE, DEFAULT_TIME_FORMAT, HOURS_MINUTES_REGEXP, HOURS_MINUTES_SECONDS_REGEXP, HOURS_ONLY_REGEXP, HOURS_PER_DAY, MINUTES_PER_HOUR, McTimepicker, McTimepickerBase, McTimepickerMixinBase, McTimepickerModule, SECONDS_PER_MINUTE, TIMEFORMAT_PLACEHOLDERS, TimeFormats, TimeParts };
 //# sourceMappingURL=timepicker.js.map

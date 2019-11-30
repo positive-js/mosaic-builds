@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { coerceBooleanProperty, coerceCssPixelValue, coerceNumberProperty } from '@angular/cdk/coercion';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, Input, NgZone, Renderer2, ViewChildren, ViewEncapsulation, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Directive, ElementRef, Renderer2, Input, Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, NgZone, ViewChildren, NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { coerceNumberProperty, coerceCssPixelValue, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 /**
  * @fileoverview added by tsickle
@@ -576,15 +576,5 @@ McSplitterModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McSplitterModule, McGutterDirective, McSplitterComponent, McSplitterAreaDirective };
+export { McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule };
 //# sourceMappingURL=splitter.js.map

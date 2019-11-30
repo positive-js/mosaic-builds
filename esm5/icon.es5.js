@@ -4,12 +4,12 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __extends } from 'tslib';
-import { Attribute, ChangeDetectionStrategy, Component, Directive, ElementRef, ViewEncapsulation, NgModule } from '@angular/core';
-import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Attribute, Directive, NgModule } from '@angular/core';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
+import { __extends } from 'tslib';
+import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 /**
  * @fileoverview added by tsickle
@@ -99,15 +99,5 @@ var McIconModule = /** @class */ (function () {
     return McIconModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McIconModule, McIconCSSStyler, McIconBase, McIconMixinBase, McIcon };
+export { McIcon, McIconBase, McIconCSSStyler, McIconMixinBase, McIconModule };
 //# sourceMappingURL=icon.es5.js.map

@@ -6,11 +6,11 @@
  */
 import { __extends } from 'tslib';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, Inject, Input, Optional, Self, InjectionToken, NgZone, NgModule } from '@angular/core';
-import { FormGroupDirective, NgControl, NgForm, FormsModule } from '@angular/forms';
-import { ErrorStateMatcher, mixinErrorState, McCommonModule } from '@ptsecurity/mosaic/core';
+import { InjectionToken, Directive, ElementRef, Optional, Self, Inject, NgZone, Input, NgModule } from '@angular/core';
+import { NgControl, NgForm, FormGroupDirective, FormsModule } from '@angular/forms';
+import { mixinErrorState, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { fromEvent, Subject } from 'rxjs';
+import { Subject, fromEvent } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 
@@ -442,15 +442,5 @@ var McTextareaModule = /** @class */ (function () {
     return McTextareaModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { MC_TEXTAREA_VALUE_ACCESSOR, McTextareaBase, McTextareaMixinBase, McTextarea, McTextareaModule };
+export { MC_TEXTAREA_VALUE_ACCESSOR, McTextarea, McTextareaBase, McTextareaMixinBase, McTextareaModule };
 //# sourceMappingURL=textarea.es5.js.map

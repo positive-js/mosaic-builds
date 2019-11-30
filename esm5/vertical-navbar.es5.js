@@ -4,15 +4,15 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __extends } from 'tslib';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, Directive, ElementRef, Optional, Self, ChangeDetectorRef, NgModule } from '@angular/core';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { mixinDisabled } from '@ptsecurity/mosaic/core';
-import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
-import { animate, style, transition, trigger, state } from '@angular/animations';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, Optional, Self, Input, Directive, ChangeDetectorRef, NgModule } from '@angular/core';
+import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { __extends } from 'tslib';
+import { mixinDisabled } from '@ptsecurity/mosaic/core';
+import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 /**
  * @fileoverview added by tsickle
@@ -57,11 +57,11 @@ var McVerticalNavbarItemBase = /** @class */ (function () {
 var McVerticalNavbarMixinBase = mixinDisabled(McVerticalNavbarItemBase);
 var McVerticalNavbarItem = /** @class */ (function (_super) {
     __extends(McVerticalNavbarItem, _super);
-    function McVerticalNavbarItem(element, focusMonitor, trigger$$1) {
+    function McVerticalNavbarItem(element, focusMonitor, trigger) {
         var _this = _super.call(this, element) || this;
         _this.element = element;
         _this.focusMonitor = focusMonitor;
-        _this.trigger = trigger$$1;
+        _this.trigger = trigger;
         _this.tabIndex = 0;
         _this.focusMonitor.monitor(_this.element.nativeElement).subscribe();
         return _this;
@@ -228,15 +228,5 @@ var McVerticalNavbarModule = /** @class */ (function () {
     return McVerticalNavbarModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McVerticalNavbarModule, McVerticalNavbarHeader, McVerticalNavbarTitle, McVerticalNavbar, McVerticalNavbarItemIcon, McVerticalNavbarItemBadge, McVerticalNavbarMixinBase, McVerticalNavbarItem, toggleVerticalNavbarAnimation as ɵa23 };
+export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, toggleVerticalNavbarAnimation as ɵa23 };
 //# sourceMappingURL=vertical-navbar.es5.js.map

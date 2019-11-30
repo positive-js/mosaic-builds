@@ -4,23 +4,23 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { ViewportRuler, CdkConnectedOverlay, OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
+import { EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Renderer2, Attribute, Inject, Optional, Self, ViewChild, ViewChildren, ContentChild, Input, Output, Directive, NgModule } from '@angular/core';
+import { CdkTree, CdkTreeModule } from '@ptsecurity/cdk/tree';
+import { mixinTabIndex, mixinDisabled, mixinErrorState, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, MultipleMode, getMcSelectNonArrayValueError, getOptionScrollPosition, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_VIEWPORT_PADDING, mcSelectAnimations, ErrorStateMatcher, MC_SELECT_SCROLL_STRATEGY, SELECT_PANEL_PADDING_X, McPseudoCheckboxModule, MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/core';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
+import { McTreeSelection, McTreeModule } from '@ptsecurity/mosaic/tree';
 import { __extends } from 'tslib';
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CdkConnectedOverlay, ViewportRuler, OverlayModule } from '@angular/cdk/overlay';
-import { Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, Directive, ElementRef, EventEmitter, Inject, Input, NgZone, Optional, Output, Renderer2, Self, ViewChild, ViewChildren, ViewEncapsulation, NgModule } from '@angular/core';
-import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { DOWN_ARROW, END, ENTER, HOME, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, A, PAGE_UP, PAGE_DOWN } from '@ptsecurity/cdk/keycodes';
-import { CdkTree, CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { getOptionScrollPosition, ErrorStateMatcher, mixinTabIndex, mixinDisabled, mixinErrorState, mcSelectAnimations, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, getMcSelectNonArrayValueError, MC_SELECT_SCROLL_STRATEGY, MultipleMode, MC_SELECT_SCROLL_STRATEGY_PROVIDER, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
-import { McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
-import { McTreeSelection, McTreeModule } from '@ptsecurity/mosaic/tree';
-import { defer, merge, Subject } from 'rxjs';
-import { filter, map, switchMap, take, takeUntil, distinctUntilChanged } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { NgForm, FormGroupDirective, NgControl } from '@angular/forms';
+import { LEFT_ARROW, RIGHT_ARROW, HOME, END, PAGE_UP, PAGE_DOWN, ENTER, SPACE, A, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { McFormFieldControl, McFormField } from '@ptsecurity/mosaic/form-field';
+import { Subject, defer, merge } from 'rxjs';
+import { filter, map, take, switchMap, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -1515,15 +1515,5 @@ var McTreeSelectModule = /** @class */ (function () {
     return McTreeSelectModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McTreeSelectModule, McTreeSelectChange, McTreeSelectTrigger, McTreeSelect };
+export { McTreeSelect, McTreeSelectChange, McTreeSelectModule, McTreeSelectTrigger };
 //# sourceMappingURL=tree-select.es5.js.map

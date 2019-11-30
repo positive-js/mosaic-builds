@@ -4,21 +4,21 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { TemplatePortal, DomPortalOutlet } from '@angular/cdk/portal';
+import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import { DOCUMENT, CommonModule } from '@angular/common';
-import { Directive, TemplateRef, ComponentFactoryResolver, ApplicationRef, Injector, ViewContainerRef, Inject, InjectionToken, ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, Optional, Input, ViewChild, ContentChild, ContentChildren, EventEmitter, NgZone, Output, Self, NgModule } from '@angular/core';
-import { Subject, merge, Subscription, asapScheduler, of } from 'rxjs';
+import { Directive, TemplateRef, ComponentFactoryResolver, ApplicationRef, Injector, ViewContainerRef, Inject, InjectionToken, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Optional, Input, ViewChild, NgZone, ContentChildren, ContentChild, Output, EventEmitter, Self, NgModule } from '@angular/core';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { TemplatePortal, DomPortalOutlet } from '@angular/cdk/portal';
+import { Subject, merge, Subscription, of, asapScheduler } from 'rxjs';
 import { __extends } from 'tslib';
 import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled } from '@ptsecurity/mosaic/core';
-import { trigger, state, style, animate, transition, query, group } from '@angular/animations';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ESCAPE, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
-import { startWith, switchMap, take, delay, filter, takeUntil } from 'rxjs/operators';
 import { Directionality } from '@angular/cdk/bidi';
-import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { UP_ARROW, DOWN_ARROW, RIGHT_ARROW, LEFT_ARROW, ESCAPE, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
+import { startWith, switchMap, take, filter, takeUntil, delay } from 'rxjs/operators';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { trigger, state, style, transition, group, query, animate } from '@angular/animations';
 
 /**
  * @fileoverview added by tsickle
@@ -1760,20 +1760,5 @@ var McDropdownModule = /** @class */ (function () {
     return McDropdownModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McDropdownModule, MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY, MC_DROPDOWN_DEFAULT_OPTIONS, McDropdown, McDropdownItemBase, McDropdownItemMixinBase, McDropdownItem, MC_DROPDOWN_PANEL, throwMcDropdownMissingError, throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY, mcDropdownAnimations, fadeInItems, transformDropdown, McDropdownContent, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY, MC_DROPDOWN_SCROLL_STRATEGY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER, NESTED_PANEL_TOP_PADDING, McDropdownTrigger };
+export { MC_DROPDOWN_DEFAULT_OPTIONS, MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY, MC_DROPDOWN_PANEL, MC_DROPDOWN_SCROLL_STRATEGY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER, McDropdown, McDropdownContent, McDropdownItem, McDropdownItemBase, McDropdownItemMixinBase, McDropdownModule, McDropdownTrigger, NESTED_PANEL_TOP_PADDING, fadeInItems, mcDropdownAnimations, throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY, throwMcDropdownMissingError, transformDropdown };
 //# sourceMappingURL=dropdown.es5.js.map

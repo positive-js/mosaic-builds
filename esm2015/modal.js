@@ -4,16 +4,16 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Injectable, Optional, SkipSelf, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, ElementRef, EventEmitter, Inject, Injector, Input, Output, Renderer2, TemplateRef, Type, ViewChild, ViewChildren, ViewContainerRef, ViewEncapsulation, Pipe, Directive, NgModule } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Overlay, OverlayRef, OverlayModule } from '@angular/cdk/overlay';
+import { OverlayRef, Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { DOCUMENT, CommonModule } from '@angular/common';
+import { Injectable, Optional, SkipSelf, EventEmitter, TemplateRef, Type, Injector, Component, ChangeDetectionStrategy, ViewEncapsulation, Renderer2, ComponentFactoryResolver, ElementRef, ViewContainerRef, ChangeDetectorRef, Inject, Input, Output, ViewChild, ViewChildren, Pipe, Directive, NgModule } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { filter } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { A11yModule } from '@angular/cdk/a11y';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { filter } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -1117,20 +1117,5 @@ McModalModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McModalComponent, McModalRef, McModalModule, McModalService, CssUnitPipe as ɵe28, McModalControlService as ɵa28, McModalBody as ɵc28, McModalFooter as ɵd28, McModalTitle as ɵb28 };
+export { McModalComponent, McModalModule, McModalRef, McModalService, McModalControlService as ɵa27, McModalTitle as ɵb27, McModalBody as ɵc27, McModalFooter as ɵd27, CssUnitPipe as ɵe27 };
 //# sourceMappingURL=modal.js.map

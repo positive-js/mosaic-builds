@@ -4,17 +4,17 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { InjectionToken, Attribute, Directive, ElementRef, Inject, Input, Optional, Self, forwardRef, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { InjectionToken, Directive, ElementRef, Attribute, Input, Optional, Self, Inject, forwardRef, NgModule } from '@angular/core';
+import { NgModel, NgControl, NgForm, FormGroupDirective, NG_VALIDATORS, Validators, FormsModule } from '@angular/forms';
+import { A11yModule } from '@ptsecurity/cdk/a11y';
+import { mixinErrorState, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
 import { __extends } from 'tslib';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { getSupportedInputTypes, Platform } from '@angular/cdk/platform';
-import { FormGroupDirective, NgControl, NgForm, NgModel, NG_VALIDATORS, Validators, FormsModule } from '@angular/forms';
-import { END, C, V, X, A, Z, DELETE, BACKSPACE, TAB, ENTER, ESCAPE, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH, FF_MINUS, LEFT_ARROW, RIGHT_ARROW, HOME, UP_ARROW, DOWN_ARROW, F1, F12 } from '@ptsecurity/cdk/keycodes';
-import { ErrorStateMatcher, mixinErrorState, McCommonModule } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
+import { Platform, getSupportedInputTypes } from '@angular/cdk/platform';
+import { A, C, V, X, Z, F1, F12, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, UP_ARROW, DOWN_ARROW, HOME, END, NUMPAD_MINUS, DASH, FF_MINUS, DELETE, BACKSPACE, TAB, ESCAPE, ENTER, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
+import { McFormFieldNumberControl, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { A11yModule } from '@ptsecurity/cdk/a11y';
 
 /**
  * @fileoverview added by tsickle
@@ -1015,15 +1015,5 @@ var McInputModule = /** @class */ (function () {
     return McInputModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McInputModule, BIG_STEP, SMALL_STEP, McInputBase, McInputMixinBase, McNumberInput, McInput, McInputMono, stepUp, stepDown, MC_INPUT_VALUE_ACCESSOR, MAX_VALIDATOR as ɵc24, MIN_VALIDATOR as ɵa24, MaxValidator as ɵd24, MinValidator as ɵb24 };
+export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, stepDown, stepUp, MIN_VALIDATOR as ɵa25, MinValidator as ɵb25, MAX_VALIDATOR as ɵc25, MaxValidator as ɵd25 };
 //# sourceMappingURL=input.es5.js.map

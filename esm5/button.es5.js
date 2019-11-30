@@ -4,12 +4,12 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __extends } from 'tslib';
-import { ChangeDetectionStrategy, Component, Directive, ElementRef, ViewEncapsulation, Renderer2, NgModule } from '@angular/core';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { mixinColor, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
+import { Directive, ElementRef, Renderer2, Component, ChangeDetectionStrategy, ViewEncapsulation, NgModule } from '@angular/core';
+import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
+import { __extends } from 'tslib';
+import { mixinColor, mixinDisabled } from '@ptsecurity/mosaic/core';
 
 /**
  * @fileoverview added by tsickle
@@ -228,15 +228,5 @@ var McButtonModule = /** @class */ (function () {
     return McButtonModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McButtonModule, McButtonCssStyler, McButtonBase, McButtonMixinBase, McButton, McAnchor };
+export { McAnchor, McButton, McButtonBase, McButtonCssStyler, McButtonMixinBase, McButtonModule };
 //# sourceMappingURL=button.es5.js.map

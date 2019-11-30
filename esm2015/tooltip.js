@@ -4,16 +4,16 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { Overlay, ScrollDispatcher, OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
+import { EventEmitter, TemplateRef, Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, Output, Input, InjectionToken, Directive, ElementRef, NgZone, ViewContainerRef, Inject, Optional, HostBinding, NgModule } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Overlay, ScrollDispatcher, OverlayModule } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, EventEmitter, HostBinding, Inject, InjectionToken, Input, NgZone, Optional, Output, TemplateRef, ViewContainerRef, ViewEncapsulation, NgModule } from '@angular/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { fadeAnimation, DEFAULT_4_POSITIONS, POSITION_MAP } from '@ptsecurity/mosaic/core';
+import { DEFAULT_4_POSITIONS, POSITION_MAP, fadeAnimation } from '@ptsecurity/mosaic/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -855,15 +855,5 @@ McToolTipModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McToolTipModule, mcTooltipScrollStrategyFactory, getMcTooltipInvalidPositionError, McTooltipComponent, MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McTooltip };
+export { MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McToolTipModule, McTooltip, McTooltipComponent, getMcTooltipInvalidPositionError, mcTooltipScrollStrategyFactory };
 //# sourceMappingURL=tooltip.js.map

@@ -4,11 +4,11 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Output, ChangeDetectionStrategy, Component, ElementRef, Input, EventEmitter, ViewEncapsulation, HostBinding, NgModule } from '@angular/core';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, HostBinding, Input, Output, EventEmitter, NgModule } from '@angular/core';
+import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
+import { SPACE } from '@ptsecurity/cdk/keycodes';
 
 /**
  * @fileoverview added by tsickle
@@ -101,7 +101,6 @@ var McCard = /** @class */ (function () {
                     this.selectedChange.emit(!this.selected);
                 }
                 break;
-            default:
         }
     };
     McCard.decorators = [
@@ -156,15 +155,5 @@ var McCardModule = /** @class */ (function () {
     return McCardModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McCardModule, McCard };
+export { McCard, McCardModule };
 //# sourceMappingURL=card.es5.js.map

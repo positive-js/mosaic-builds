@@ -5,19 +5,19 @@
  * Use of this source code is governed by an MIT-style license.
  */
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, Inject, InjectionToken, Input, Output, TemplateRef, ViewChild, ViewEncapsulation, Directive, forwardRef, Host, NgZone, Optional, ViewContainerRef, NgModule } from '@angular/core';
+import { InjectionToken, Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, Inject, ViewChild, TemplateRef, ContentChildren, Input, Output, EventEmitter, Directive, forwardRef, ViewContainerRef, NgZone, Optional, Host, NgModule } from '@angular/core';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { MC_OPTION_PARENT_COMPONENT, McOptgroup, McOption, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionSelectionChange, McOptionModule, McCommonModule } from '@ptsecurity/mosaic/core';
-import { Directionality } from '@angular/cdk/bidi';
+import { MC_OPTION_PARENT_COMPONENT, McOption, McOptgroup, McOptionSelectionChange, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionModule, McCommonModule } from '@ptsecurity/mosaic/core';
 import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
+import { DOCUMENT, CommonModule } from '@angular/common';
+import { Directionality } from '@angular/cdk/bidi';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { ViewportRuler } from '@angular/cdk/scrolling';
-import { DOCUMENT, CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, ENTER, ESCAPE, TAB, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { ESCAPE, ENTER, TAB, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McFormField } from '@ptsecurity/mosaic/form-field';
-import { Subscription, defer, fromEvent, merge, of, Subject } from 'rxjs';
-import { filter, take, switchMap, delay, tap, map } from 'rxjs/operators';
+import { merge, of, fromEvent, defer, Subscription, Subject } from 'rxjs';
+import { filter, map, take, tap, delay, switchMap } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -1242,15 +1242,5 @@ var McAutocompleteModule = /** @class */ (function () {
     return McAutocompleteModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY, McAutocompleteSelectedEvent, MC_AUTOCOMPLETE_DEFAULT_OPTIONS, McAutocomplete, McAutocompleteModule, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY, getMcAutocompleteMissingPanelError, AUTOCOMPLETE_OPTION_HEIGHT, AUTOCOMPLETE_PANEL_HEIGHT, AUTOCOMPLETE_BORDER_WIDTH, MC_AUTOCOMPLETE_SCROLL_STRATEGY, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER, MAT_AUTOCOMPLETE_VALUE_ACCESSOR, McAutocompleteTrigger, McAutocompleteOrigin };
+export { AUTOCOMPLETE_BORDER_WIDTH, AUTOCOMPLETE_OPTION_HEIGHT, AUTOCOMPLETE_PANEL_HEIGHT, MAT_AUTOCOMPLETE_VALUE_ACCESSOR, MC_AUTOCOMPLETE_DEFAULT_OPTIONS, MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY, MC_AUTOCOMPLETE_SCROLL_STRATEGY, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER, McAutocomplete, McAutocompleteModule, McAutocompleteOrigin, McAutocompleteSelectedEvent, McAutocompleteTrigger, getMcAutocompleteMissingPanelError };
 //# sourceMappingURL=autocomplete.es5.js.map

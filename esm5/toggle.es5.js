@@ -4,13 +4,13 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __extends } from 'tslib';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { ThemePalette, mixinColor, mixinDisabled, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
+import { EventEmitter, Component, forwardRef, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, Attribute, ViewChild, Input, Output, NgModule } from '@angular/core';
+import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
+import { mixinTabIndex, mixinColor, mixinDisabled, ThemePalette, McCommonModule } from '@ptsecurity/mosaic/core';
+import { __extends } from 'tslib';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * @fileoverview added by tsickle
@@ -318,15 +318,5 @@ var McToggleModule = /** @class */ (function () {
     return McToggleModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McToggleModule, McToggleBase, McToggleMixinBase, McToggleChange, McToggleComponent };
+export { McToggleBase, McToggleChange, McToggleComponent, McToggleMixinBase, McToggleModule };
 //# sourceMappingURL=toggle.es5.js.map

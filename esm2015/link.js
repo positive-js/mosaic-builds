@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Input, ElementRef, ChangeDetectorRef, Directive, Attribute, NgModule } from '@angular/core';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { mixinDisabled, mixinTabIndex, toBoolean } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
+import { Directive, ElementRef, ChangeDetectorRef, Attribute, Input, NgModule } from '@angular/core';
+import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
+import { mixinTabIndex, mixinDisabled, toBoolean } from '@ptsecurity/mosaic/core';
 
 /**
  * @fileoverview added by tsickle
@@ -115,15 +115,5 @@ McLinkModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McLinkModule, McLinkBase, McLinkMixinBase, McLink };
+export { McLink, McLinkBase, McLinkMixinBase, McLinkModule };
 //# sourceMappingURL=link.js.map

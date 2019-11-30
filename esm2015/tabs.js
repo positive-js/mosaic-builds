@@ -4,18 +4,18 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { Directive, TemplateRef, ChangeDetectionStrategy, Component, ContentChild, Input, ViewChild, ViewContainerRef, ViewEncapsulation, ChangeDetectorRef, Inject, Output, EventEmitter, ElementRef, Optional, ComponentFactoryResolver, forwardRef, ContentChildren, NgZone, InjectionToken, Attribute, NgModule } from '@angular/core';
 import { CdkPortal, TemplatePortal, CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
+import { CommonModule } from '@angular/common';
+import { Directive, TemplateRef, Component, ChangeDetectionStrategy, ViewEncapsulation, ViewContainerRef, ContentChild, ViewChild, Input, EventEmitter, ElementRef, Optional, ChangeDetectorRef, Output, ComponentFactoryResolver, Inject, forwardRef, NgZone, ContentChildren, InjectionToken, Attribute, NgModule } from '@angular/core';
+import { FocusKeyManager, FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled, mixinColor, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
-import { Subject, Subscription, merge, of } from 'rxjs';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Subject, Subscription, of, merge } from 'rxjs';
 import { Directionality } from '@angular/cdk/bidi';
 import { startWith, takeUntil } from 'rxjs/operators';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { coerceNumberProperty, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ViewportRuler } from '@angular/cdk/scrolling';
-import { FocusKeyManager, FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
-import { END, ENTER, HOME, SPACE } from '@ptsecurity/cdk/keycodes';
-import { CommonModule } from '@angular/common';
+import { SPACE, ENTER, END, HOME } from '@ptsecurity/cdk/keycodes';
 
 /**
  * @fileoverview added by tsickle
@@ -1576,20 +1576,5 @@ McTabsModule.decorators = [
             },] },
 ];
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McTabBody, McTabBodyPortal, McTabHeader, McTabLabelWrapper, McTab, McTabLabel, McTabNav, McTabLink, McTabContent, McTabsModule, McLightTabsCssStyler, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McStretchTabsCssStyler, McTabChangeEvent, MC_TABS_CONFIG, McTabGroupBase, McTabGroupMixinBase, McTabGroup, mcTabsAnimations, McTabBase as ɵd16, McTabMixinBase as ɵe16, McTabHeaderBase as ɵa16, McTabLabelWrapperBase as ɵb16, McTabLabelWrapperMixinBase as ɵc16, McTabLinkBase as ɵh16, McTabLinkMixinBase as ɵi16, McTabNavBase as ɵf16, McTabNavMixinBase as ɵg16 };
+export { MC_TABS_CONFIG, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McLightTabsCssStyler, McStretchTabsCssStyler, McTab, McTabBody, McTabBodyPortal, McTabChangeEvent, McTabContent, McTabGroup, McTabGroupBase, McTabGroupMixinBase, McTabHeader, McTabLabel, McTabLabelWrapper, McTabLink, McTabNav, McTabsModule, mcTabsAnimations, McTabHeaderBase as ɵa14, McTabLabelWrapperBase as ɵb14, McTabLabelWrapperMixinBase as ɵc14, McTabBase as ɵd14, McTabMixinBase as ɵe14, McTabNavBase as ɵf14, McTabNavMixinBase as ɵg14, McTabLinkBase as ɵh14, McTabLinkMixinBase as ɵi14 };
 //# sourceMappingURL=tabs.js.map

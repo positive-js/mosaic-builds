@@ -4,11 +4,11 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { __extends } from 'tslib';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, ElementRef, Input, NgModule } from '@angular/core';
-import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Input, NgModule } from '@angular/core';
+import { __extends } from 'tslib';
+import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 /**
  * @fileoverview added by tsickle
@@ -100,15 +100,5 @@ var McProgressBarModule = /** @class */ (function () {
     return McProgressBarModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McProgressBarModule, McProgressBarBase, McProgressBarMixinBase, McProgressBar };
+export { McProgressBar, McProgressBarBase, McProgressBarMixinBase, McProgressBarModule };
 //# sourceMappingURL=progress-bar.es5.js.map

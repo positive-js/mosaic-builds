@@ -4,17 +4,17 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
-import { InjectionToken, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, ViewChild, ViewEncapsulation, Injectable, Injector, Optional, SkipSelf, TemplateRef, Directive, Input, NgModule } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AnimationCurves, McCommonModule } from '@ptsecurity/mosaic/core';
-import { __extends, __assign } from 'tslib';
-import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, PortalInjector, TemplatePortal, PortalModule } from '@angular/cdk/portal';
-import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { merge, Subject } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
-import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
+import { OverlayConfig, Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { CdkPortalOutlet, BasePortalOutlet, TemplatePortal, ComponentPortal, PortalInjector, PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
+import { InjectionToken, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, Inject, ViewChild, TemplateRef, Injectable, Injector, Optional, SkipSelf, Directive, Input, NgModule } from '@angular/core';
+import { AnimationCurves, McCommonModule } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { __extends, __assign } from 'tslib';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { Subject, merge } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -927,15 +927,5 @@ var McSidepanelModule = /** @class */ (function () {
     return McSidepanelModule;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-export { McSidepanelModule, MC_SIDEPANEL_DEFAULT_OPTIONS, McSidepanelService, MC_SIDEPANEL_DATA, McSidepanelPosition, McSidepanelConfig, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelContainerComponent, McSidepanelRef, mcSidepanelAnimations as ɵb20, mcSidepanelTransformAnimation as ɵa20, McSidepanelActions as ɵg20, McSidepanelBody as ɵe20, McSidepanelClose as ɵc20, McSidepanelFooter as ɵf20, McSidepanelHeader as ɵd20 };
+export { MC_SIDEPANEL_DATA, MC_SIDEPANEL_DEFAULT_OPTIONS, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelConfig, McSidepanelContainerComponent, McSidepanelModule, McSidepanelPosition, McSidepanelRef, McSidepanelService, mcSidepanelTransformAnimation as ɵa20, mcSidepanelAnimations as ɵb20, McSidepanelClose as ɵc20, McSidepanelHeader as ɵd20, McSidepanelBody as ɵe20, McSidepanelFooter as ɵf20, McSidepanelActions as ɵg20 };
 //# sourceMappingURL=sidepanel.es5.js.map
