@@ -32244,7 +32244,7 @@
     exports.ɵa15 = McTabHeaderBase;
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa24 = toggleVerticalNavbarAnimation;
+    exports.ɵa22 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;

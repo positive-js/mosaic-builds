@@ -212,5 +212,5 @@ McVerticalNavbarModule.decorators = [
             },] },
 ];
 
-export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, toggleVerticalNavbarAnimation as ɵa24 };
+export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, toggleVerticalNavbarAnimation as ɵa22 };
 //# sourceMappingURL=vertical-navbar.js.map
