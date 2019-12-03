@@ -31894,7 +31894,7 @@
      * Current version.
      * @type {?}
      */
-    var VERSION = new core.Version('8.1.3');
+    var VERSION = new core.Version('8.2.0');
 
     exports.ARROW_DOWN_KEYCODE = ARROW_DOWN_KEYCODE;
     exports.ARROW_LEFT_KEYCODE = ARROW_LEFT_KEYCODE;

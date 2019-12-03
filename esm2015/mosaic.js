@@ -47,7 +47,7 @@ export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerti
  * Current version.
  * @type {?}
  */
-const VERSION = new Version('8.1.3');
+const VERSION = new Version('8.2.0');
 
 export { VERSION };
 //# sourceMappingURL=mosaic.js.map
