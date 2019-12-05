@@ -8,7 +8,7 @@ const chalk_1 = require("chalk");
 const roboto_fonts_1 = require("./fonts/roboto-fonts");
 const theming_1 = require("./theming/theming");
 /**
- * Scaffolds the basics of a Angular Material application, this includes:
+ * Scaffolds the basics application, this includes:
  *  - Add Packages to package.json
  *  - Adds pre-built themes to styles.ext
  *  - Adds Browser Animation to app.module

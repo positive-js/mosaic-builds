@@ -26,18 +26,18 @@ export { McProgressBar, McProgressBarBase, McProgressBarMixinBase, McProgressBar
 export { McProgressSpinner, McProgressSpinnerBase, McProgressSpinnerMixinBase, McProgressSpinnerModule } from '@ptsecurity/mosaic/progress-spinner';
 export { MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioButton, McRadioButtonBase, McRadioButtonMixinBase, McRadioChange, McRadioGroup, McRadioGroupBase, McRadioGroupMixinBase, McRadioModule } from '@ptsecurity/mosaic/radio';
 export { MC_SELECTION_TREE_VALUE_ACCESSOR, MC_TREE_OPTION_PARENT_COMPONENT, McTreeFlatDataSource, McTreeFlattener, McTreeModule, McTreeNavigationChange, McTreeNestedDataSource, McTreeNodeDef, McTreeNodePadding, McTreeNodeToggleComponent, McTreeNodeToggleDirective, McTreeOption, McTreeOptionChange, McTreeSelection, McTreeSelectionChange } from '@ptsecurity/mosaic/tree';
-export { MC_TABS_CONFIG, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McLightTabsCssStyler, McStretchTabsCssStyler, McTab, McTabBody, McTabBodyPortal, McTabChangeEvent, McTabContent, McTabGroup, McTabGroupBase, McTabGroupMixinBase, McTabHeader, McTabLabel, McTabLabelWrapper, McTabLink, McTabNav, McTabsModule, mcTabsAnimations, ɵa16, ɵb16, ɵc16, ɵd16, ɵe16, ɵf16, ɵg16, ɵh16, ɵi16 } from '@ptsecurity/mosaic/tabs';
+export { MC_TABS_CONFIG, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McLightTabsCssStyler, McStretchTabsCssStyler, McTab, McTabBody, McTabBodyPortal, McTabChangeEvent, McTabContent, McTabGroup, McTabGroupBase, McTabGroupMixinBase, McTabHeader, McTabLabel, McTabLabelWrapper, McTabLink, McTabNav, McTabsModule, mcTabsAnimations, ɵa13, ɵb13, ɵc13, ɵd13, ɵe13, ɵf13, ɵg13, ɵh13, ɵi13 } from '@ptsecurity/mosaic/tabs';
 export { McSelect, McSelectBase, McSelectChange, McSelectModule, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } from '@ptsecurity/mosaic/select';
 export { McTreeSelect, McTreeSelectChange, McTreeSelectModule, McTreeSelectTrigger } from '@ptsecurity/mosaic/tree-select';
 export { MC_TAGS_DEFAULT_OPTIONS, McTag, McTagAvatar, McTagBase, McTagInput, McTagList, McTagListBase, McTagListChange, McTagListMixinBase, McTagMixinBase, McTagRemove, McTagSelectionChange, McTagTrailingIcon, McTagsModule } from '@ptsecurity/mosaic/tags';
 export { MC_TEXTAREA_VALUE_ACCESSOR, McTextarea, McTextareaBase, McTextareaMixinBase, McTextareaModule } from '@ptsecurity/mosaic/textarea';
 export { ARROW_DOWN_KEYCODE, ARROW_LEFT_KEYCODE, ARROW_RIGHT_KEYCODE, ARROW_UP_KEYCODE, DEFAULT_TIME_FORMAT, HOURS_MINUTES_REGEXP, HOURS_MINUTES_SECONDS_REGEXP, HOURS_ONLY_REGEXP, HOURS_PER_DAY, MINUTES_PER_HOUR, McTimepicker, McTimepickerBase, McTimepickerMixinBase, McTimepickerModule, SECONDS_PER_MINUTE, TIMEFORMAT_PLACEHOLDERS, TimeFormats, TimeParts } from '@ptsecurity/mosaic/timepicker';
-export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions, ɵa2 } from '@ptsecurity/mosaic/sidebar';
+export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions, ɵa0 } from '@ptsecurity/mosaic/sidebar';
 export { MC_SIDEPANEL_DATA, MC_SIDEPANEL_DEFAULT_OPTIONS, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelConfig, McSidepanelContainerComponent, McSidepanelModule, McSidepanelPosition, McSidepanelRef, McSidepanelService, ɵa20, ɵb20, ɵc20, ɵd20, ɵe20, ɵf20, ɵg20 } from '@ptsecurity/mosaic/sidepanel';
 export { McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule } from '@ptsecurity/mosaic/splitter';
 export { McToggleBase, McToggleChange, McToggleComponent, McToggleMixinBase, McToggleModule } from '@ptsecurity/mosaic/toggle';
 export { MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McToolTipModule, McTooltip, McTooltipComponent, getMcTooltipInvalidPositionError, mcTooltipScrollStrategyFactory } from '@ptsecurity/mosaic/tooltip';
-export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, ɵa23 } from '@ptsecurity/mosaic/vertical-navbar';
+export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, ɵa22 } from '@ptsecurity/mosaic/vertical-navbar';
 
 /**
  * @fileoverview added by tsickle
