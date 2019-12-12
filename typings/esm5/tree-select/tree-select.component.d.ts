@@ -152,6 +152,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     ngDoCheck(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
+    hiddenItemsTextFormatter(hiddenItemsText: string, hiddenItems: number): string;
     clearValue($event: any): void;
     /** `View -> model callback called when value changes` */
     onChange: (value: any) => void;
