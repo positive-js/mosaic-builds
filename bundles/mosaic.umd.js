@@ -813,6 +813,23 @@
             this._active = false;
             this.mostRecentViewValue = '';
         }
+        Object.defineProperty(McOption.prototype, "showCheckbox", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._showCheckbox === undefined ? this.multiple : this._showCheckbox;
+            },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                this._showCheckbox = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(McOption.prototype, "viewValue", {
             /**
              * The displayed value of the option. It is necessary to show the selected option in the
@@ -1129,7 +1146,7 @@
                             '(keydown)': 'handleKeydown($event)'
                         },
                         styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;border:2px solid transparent;cursor:pointer;outline:0;padding:0 16px;-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}"],
-                        template: "<mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                        template: "<mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     },] },
@@ -1143,6 +1160,7 @@
         ]; };
         McOption.propDecorators = {
             value: [{ type: core.Input }],
+            showCheckbox: [{ type: core.Input }],
             onSelectionChange: [{ type: core.Output }],
             disabled: [{ type: core.Input }]
         };
@@ -32273,24 +32291,24 @@
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
     exports.ɵa23 = toggleVerticalNavbarAnimation;
-    exports.ɵa24 = MIN_VALIDATOR;
-    exports.ɵa27 = McModalControlService;
+    exports.ɵa25 = MIN_VALIDATOR;
+    exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
     exports.ɵb15 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
-    exports.ɵb24 = MinValidator;
-    exports.ɵb27 = McModalTitle;
+    exports.ɵb25 = MinValidator;
+    exports.ɵb28 = McModalTitle;
     exports.ɵc15 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
-    exports.ɵc24 = MAX_VALIDATOR;
-    exports.ɵc27 = McModalBody;
+    exports.ɵc25 = MAX_VALIDATOR;
+    exports.ɵc28 = McModalBody;
     exports.ɵd15 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
-    exports.ɵd24 = MaxValidator;
-    exports.ɵd27 = McModalFooter;
+    exports.ɵd25 = MaxValidator;
+    exports.ɵd28 = McModalFooter;
     exports.ɵe15 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
-    exports.ɵe27 = CssUnitPipe;
+    exports.ɵe28 = CssUnitPipe;
     exports.ɵf15 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
     exports.ɵg15 = McTabNavMixinBase;

@@ -29,6 +29,8 @@ export declare class McOption implements AfterViewChecked, OnDestroy {
     readonly group: McOptgroup;
     /** The form value of the option. */
     value: any;
+    showCheckbox: boolean;
+    private _showCheckbox;
     /** Event emitted when the option is selected or deselected. */
     readonly onSelectionChange: EventEmitter<McOptionSelectionChange>;
     /** Emits when the state of the option changes and any parents have to be notified. */

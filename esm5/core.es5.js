@@ -777,6 +777,23 @@ var McOption = /** @class */ (function () {
         this._active = false;
         this.mostRecentViewValue = '';
     }
+    Object.defineProperty(McOption.prototype, "showCheckbox", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._showCheckbox === undefined ? this.multiple : this._showCheckbox;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._showCheckbox = coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McOption.prototype, "viewValue", {
         /**
          * The displayed value of the option. It is necessary to show the selected option in the
@@ -1093,7 +1110,7 @@ var McOption = /** @class */ (function () {
                         '(keydown)': 'handleKeydown($event)'
                     },
                     styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;border:2px solid transparent;cursor:pointer;outline:0;padding:0 16px;-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}"],
-                    template: "<mc-pseudo-checkbox *ngIf=\"multiple\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                    template: "<mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : ''\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
@@ -1107,6 +1124,7 @@ var McOption = /** @class */ (function () {
     ]; };
     McOption.propDecorators = {
         value: [{ type: Input }],
+        showCheckbox: [{ type: Input }],
         onSelectionChange: [{ type: Output }],
         disabled: [{ type: Input }]
     };
