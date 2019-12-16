@@ -451,7 +451,7 @@ $mc-red: (
     500: #e04d36,
     560: #c43e29,
     600: #b23522,
-    700: #8.2.1-dc7f0092,
+    700: #8.2.1-38dc28f2,
     800: #541208,
     A100: rgba(224, 79, 56, 0.15),
     contrast: (
@@ -907,7 +907,7 @@ $fonts: (
 
     $headline:      mc-typography-level(24px, 32px),
     $title:         mc-typography-level(20px, 28px, 0.15px, 500),
-    $subheading:    mc-typography-level(15px, 20px, 0.15px, 500),
+    $subheading:    mc-typography-level(15px, 20px, 0.15px, 700),
 
     $body:          mc-typography-level(15px, 20px, 0.15px),
     $body-strong:   mc-typography-level(15px, 20px, 0.15px, 500),

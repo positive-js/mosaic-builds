@@ -2,5 +2,5 @@
  * Generated bundle index. Do not edit.
  */
 export * from './public-api';
-export { mcSidepanelAnimations as ɵb20, mcSidepanelTransformAnimation as ɵa20 } from './sidepanel-animations';
-export { McSidepanelActions as ɵg20, McSidepanelBody as ɵe20, McSidepanelClose as ɵc20, McSidepanelFooter as ɵf20, McSidepanelHeader as ɵd20 } from './sidepanel-directives';
+export { mcSidepanelAnimations as ɵb19, mcSidepanelTransformAnimation as ɵa19 } from './sidepanel-animations';
+export { McSidepanelActions as ɵg19, McSidepanelBody as ɵe19, McSidepanelClose as ɵc19, McSidepanelFooter as ɵf19, McSidepanelHeader as ɵd19 } from './sidepanel-directives';
