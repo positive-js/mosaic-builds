@@ -667,13 +667,10 @@ var McMeasureScrollbarService = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// Boilerplate for applying mixins to McOptgroup.
 /**
  * \@docs-private
  */
-var  
-// Boilerplate for applying mixins to McOptgroup.
-/**
+var  /**
  * \@docs-private
  */
 McOptgroupBase = /** @class */ (function () {
@@ -684,7 +681,6 @@ McOptgroupBase = /** @class */ (function () {
 // tslint:disable-next-line: naming-convention
 /** @type {?} */
 var McOptgroupMixinBase = mixinDisabled(McOptgroupBase);
-// Counter for unique group ids.
 /** @type {?} */
 var uniqueOptgroupIdCounter = 0;
 /**
@@ -704,17 +700,14 @@ var McOptgroup = /** @class */ (function (_super) {
         { type: Component, args: [{
                     selector: 'mc-optgroup',
                     exportAs: 'mcOptgroup',
-                    template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label><ng-content select=\"mc-option, ng-container\"></ng-content>",
+                    template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label><ng-content select=\"mc-option, mc-list-option, ng-container\"></ng-content>",
+                    styles: [".mc-optgroup-label{padding-left:17px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}"],
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     inputs: ['disabled'],
-                    styles: [".mc-optgroup-label{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}"],
                     host: {
                         class: 'mc-optgroup',
-                        role: 'group',
-                        '[class.mc-optgroup-disabled]': 'disabled',
-                        '[attr.aria-disabled]': 'disabled.toString()',
-                        '[attr.aria-labelledby]': 'labelId'
+                        '[class.mc-disabled]': 'disabled'
                     }
                 },] },
     ];
