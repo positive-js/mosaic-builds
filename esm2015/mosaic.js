@@ -19,7 +19,7 @@ export { McIcon, McIconBase, McIconCSSStyler, McIconMixinBase, McIconModule } fr
 export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, stepDown, stepUp, ɵa25, ɵb25, ɵc25, ɵd25 } from '@ptsecurity/mosaic/input';
 export { MC_SELECTION_LIST_VALUE_ACCESSOR, McList, McListBase, McListItem, McListItemBase, McListModule, McListOption, McListSelection, McListSelectionBase, McListSelectionChange, McListSelectionMixinBase, McListSubheaderCssStyler } from '@ptsecurity/mosaic/list';
 export { McLink, McLinkBase, McLinkMixinBase, McLinkModule } from '@ptsecurity/mosaic/link';
-export { McModalComponent, McModalModule, McModalRef, McModalService, ɵa26, ɵb26, ɵc26, ɵd26, ɵe26 } from '@ptsecurity/mosaic/modal';
+export { McModalComponent, McModalModule, McModalRef, McModalService, ɵa27, ɵb27, ɵc27, ɵd27, ɵe27 } from '@ptsecurity/mosaic/modal';
 export { McNavbar, McNavbarBrand, McNavbarContainer, McNavbarItem, McNavbarItemBase, McNavbarLogo, McNavbarMixinBase, McNavbarModule, McNavbarTitle } from '@ptsecurity/mosaic/navbar';
 export { MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover, McPopoverComponent, McPopoverModule, PopoverVisibility, getMcPopoverInvalidPositionError, mcPopoverAnimations, mcPopoverScrollStrategyFactory } from '@ptsecurity/mosaic/popover';
 export { McProgressBar, McProgressBarBase, McProgressBarMixinBase, McProgressBarModule } from '@ptsecurity/mosaic/progress-bar';
