@@ -261,7 +261,7 @@
     exports.McVerticalNavbarMixinBase = McVerticalNavbarMixinBase;
     exports.McVerticalNavbarModule = McVerticalNavbarModule;
     exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
-    exports.ɵa23 = toggleVerticalNavbarAnimation;
+    exports.ɵa22 = toggleVerticalNavbarAnimation;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
