@@ -1,9 +1,9 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm, Validator } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
+import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, McValidationOptions } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Observable } from 'rxjs';
 import { McTagTextControl } from './tag-text-control';
@@ -25,8 +25,9 @@ export declare class McTagListChange {
 export declare class McTagList extends McTagListMixinBase implements McFormFieldControl<any>, ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
     protected elementRef: ElementRef<HTMLElement>;
     private changeDetectorRef;
+    private rawValidators;
+    private mcValidation;
     private dir;
-    ngControl: NgControl;
     readonly controlType: string;
     /** Combined stream of all of the child tags' selection change events. */
     readonly tagSelectionChanges: Observable<McTagSelectionChange>;
@@ -139,7 +140,7 @@ export declare class McTagList extends McTagListMixinBase implements McFormField
     private tagSelectionSubscription;
     /** Subscription to remove changes in tags. */
     private tagRemoveSubscription;
-    constructor(elementRef: ElementRef<HTMLElement>, changeDetectorRef: ChangeDetectorRef, defaultErrorStateMatcher: ErrorStateMatcher, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
+    constructor(elementRef: ElementRef<HTMLElement>, changeDetectorRef: ChangeDetectorRef, defaultErrorStateMatcher: ErrorStateMatcher, rawValidators: Validator[], mcValidation: McValidationOptions, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
     ngAfterContentInit(): void;
     ngOnInit(): void;
     ngDoCheck(): void;
@@ -209,6 +210,7 @@ export declare class McTagList extends McTagListMixinBase implements McFormField
     private sortValues;
     /** Emits change event to set the model value. */
     private propagateChanges;
+    private propagateTagsChanges;
     private resetTags;
     private dropSubscriptions;
     /** Listens to user-generated selection events on each tag. */

@@ -262,7 +262,8 @@
                 }
             }
             // Subscribe to changes in the child control state in order to update the form field UI.
-            this.control.stateChanges.pipe(operators.startWith())
+            this.control.stateChanges
+                .pipe(operators.startWith())
                 .subscribe((/**
              * @return {?}
              */
@@ -270,7 +271,8 @@
                 _this._changeDetectorRef.markForCheck();
             }));
             if (this.numberControl) {
-                this.numberControl.stateChanges.pipe(operators.startWith())
+                this.numberControl.stateChanges
+                    .pipe(operators.startWith())
                     .subscribe((/**
                  * @return {?}
                  */

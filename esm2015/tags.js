@@ -6,14 +6,14 @@
  */
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { InjectionToken, Directive, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, NgZone, ContentChildren, ContentChild, forwardRef, Output, Input, Optional, Self, Renderer2, Inject, NgModule } from '@angular/core';
+import { InjectionToken, Directive, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, NgZone, ContentChildren, ContentChild, forwardRef, Output, Input, Optional, Inject, Self, Renderer2, NgModule } from '@angular/core';
 import { SPACE, BACKSPACE, DELETE, HOME, END, hasModifierKey, ENTER } from '@ptsecurity/cdk/keycodes';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
-import { NgForm, FormGroupDirective, NgControl } from '@angular/forms';
+import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { mixinColor, mixinDisabled, mixinErrorState, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
+import { mixinColor, mixinDisabled, mixinErrorState, setMosaicValidation, ErrorStateMatcher, MC_VALIDATION } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject, merge } from 'rxjs';
 import { take, takeUntil, startWith } from 'rxjs/operators';
@@ -573,17 +573,20 @@ class McTagList extends McTagListMixinBase {
      * @param {?} elementRef
      * @param {?} changeDetectorRef
      * @param {?} defaultErrorStateMatcher
+     * @param {?} rawValidators
+     * @param {?} mcValidation
      * @param {?} dir
      * @param {?} parentForm
      * @param {?} parentFormGroup
      * @param {?} ngControl
      */
-    constructor(elementRef, changeDetectorRef, defaultErrorStateMatcher, dir, parentForm, parentFormGroup, ngControl) {
+    constructor(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         this.elementRef = elementRef;
         this.changeDetectorRef = changeDetectorRef;
+        this.rawValidators = rawValidators;
+        this.mcValidation = mcValidation;
         this.dir = dir;
-        this.ngControl = ngControl;
         this.controlType = 'mc-tag-list';
         /**
          * Event that emits whenever the raw value of the tag-list changes. This is here primarily
@@ -862,6 +865,9 @@ class McTagList extends McTagListMixinBase {
      * @return {?}
      */
     ngAfterContentInit() {
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+        }
         this.keyManager = new FocusKeyManager(this.tags)
             .withVerticalOrientation()
             .withHorizontalOrientation(this.dir ? this.dir.value : 'ltr');
@@ -923,6 +929,7 @@ class McTagList extends McTagListMixinBase {
                 this.changeDetectorRef.markForCheck();
             }));
             this.stateChanges.next();
+            this.propagateTagsChanges();
         }));
     }
     /**
@@ -1276,6 +1283,7 @@ class McTagList extends McTagListMixinBase {
      * @param {?=} fallbackValue
      * @return {?}
      */
+    // todo need rethink this method and selection logic
     propagateChanges(fallbackValue) {
         /** @type {?} */
         let valueToEmit = null;
@@ -1289,6 +1297,23 @@ class McTagList extends McTagListMixinBase {
         else {
             valueToEmit = this.selected ? this.selected.value : fallbackValue;
         }
+        this._value = valueToEmit;
+        this.change.emit(new McTagListChange(this, valueToEmit));
+        this.valueChange.emit(valueToEmit);
+        this.onChange(valueToEmit);
+        this.changeDetectorRef.markForCheck();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    propagateTagsChanges() {
+        /** @type {?} */
+        const valueToEmit = this.tags.map((/**
+         * @param {?} tag
+         * @return {?}
+         */
+        (tag) => tag.value));
         this._value = valueToEmit;
         this.change.emit(new McTagListChange(this, valueToEmit));
         this.valueChange.emit(valueToEmit);
@@ -1482,6 +1507,8 @@ McTagList.ctorParameters = () => [
     { type: ElementRef },
     { type: ChangeDetectorRef },
     { type: ErrorStateMatcher },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [NG_VALIDATORS,] }] },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_VALIDATION,] }] },
     { type: Directionality, decorators: [{ type: Optional }] },
     { type: NgForm, decorators: [{ type: Optional }] },
     { type: FormGroupDirective, decorators: [{ type: Optional }] },

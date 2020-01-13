@@ -236,7 +236,8 @@ var McFormField = /** @class */ (function (_super) {
             }
         }
         // Subscribe to changes in the child control state in order to update the form field UI.
-        this.control.stateChanges.pipe(startWith())
+        this.control.stateChanges
+            .pipe(startWith())
             .subscribe((/**
          * @return {?}
          */
@@ -244,7 +245,8 @@ var McFormField = /** @class */ (function (_super) {
             _this._changeDetectorRef.markForCheck();
         }));
         if (this.numberControl) {
-            this.numberControl.stateChanges.pipe(startWith())
+            this.numberControl.stateChanges
+                .pipe(startWith())
                 .subscribe((/**
              * @return {?}
              */

@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.ng.common, global.ng.cdk.keycodes, global.ng.animations, global.ng.cdk.overlay));
-}(this, (function (exports, bidi, core, coercion, rxjs, common, keycodes, animations, overlay) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay'), require('@angular/forms')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay', '@angular/forms'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.ng.common, global.ng.cdk.keycodes, global.ng.animations, global.ng.cdk.overlay, global.ng.forms));
+}(this, (function (exports, bidi, core, coercion, rxjs, common, keycodes, animations, overlay, forms) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1776,7 +1776,137 @@
         return McFormattersModule;
     }());
 
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var MC_VALIDATION = new core.InjectionToken('McUseValidation', { factory: (/**
+         * @return {?}
+         */
+        function () { return ({ useValidation: true }); }) });
+    /** @enum {string} */
+    var ControlTypes = {
+        FormControl: 'FormControlDirective',
+        FormControlName: 'FormControlName',
+        ModelControl: 'NgModel',
+    };
+    /**
+     * @param {?} constructorName
+     * @return {?}
+     */
+    function getControlType(constructorName) {
+        if (constructorName === ControlTypes.FormControl || constructorName === ControlTypes.FormControlName) {
+            return ControlTypes.FormControl;
+        }
+        else if (constructorName === ControlTypes.ModelControl) {
+            return ControlTypes.ModelControl;
+        }
+        throw Error("Unknown constructor name: " + constructorName);
+    }
+    /**
+     * @param {?} control
+     * @param {?} validator
+     * @return {?}
+     */
+    function setValidState(control, validator) {
+        if (!control) {
+            return;
+        }
+        control.clearValidators();
+        control.updateValueAndValidity({ emitEvent: false });
+        control.setValidators(validator);
+    }
+    /**
+     * This function do next:
+     * - run validation on submitting parent form
+     * - prevent validation in required validator if form doesn't submitted
+     * - if control focused and untouched validation will be prevented
+     * @param {?} validators
+     * @param {?} parentForm
+     * @param {?} ngControl
+     * @return {?}
+     */
+    function setMosaicValidation(validators, parentForm, ngControl) {
+        var _this = this;
+        if (!ngControl) {
+            return;
+        }
+        if (parentForm) {
+            parentForm.ngSubmit.subscribe((/**
+             * @return {?}
+             */
+            function () {
+                // tslint:disable-next-line: no-unnecessary-type-assertion
+                (/** @type {?} */ (ngControl.control)).updateValueAndValidity();
+            }));
+        }
+        if (getControlType(ngControl.constructor.name) === ControlTypes.ModelControl) {
+            if (!validators) {
+                return;
+            }
+            validators.forEach((/**
+             * @param {?} validator
+             * @return {?}
+             */
+            function (validator) {
+                // tslint:disable-next-line: no-unbound-method
+                /** @type {?} */
+                var originalValidate = validator.validate;
+                if (validator instanceof forms.RequiredValidator) {
+                    // changed required validation logic
+                    validator.validate = (/**
+                     * @param {?} control
+                     * @return {?}
+                     */
+                    function (control) {
+                        if (parentForm && !parentForm.submitted) {
+                            return null;
+                        }
+                        return originalValidate.call(validator, control);
+                    });
+                }
+                else {
+                    // changed all other validation logic
+                    validator.validate = (/**
+                     * @param {?} control
+                     * @return {?}
+                     */
+                    function (control) {
+                        if (_this.focused) {
+                            return null;
+                        }
+                        return originalValidate.call(validator, control);
+                    });
+                }
+            }));
+        }
+        else if (getControlType(ngControl.constructor.name) === ControlTypes.FormControl) {
+            /** @type {?} */
+            var originalValidator_1 = (/** @type {?} */ (ngControl.control)).validator;
+            // changed required validation logic after initialization
+            if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
+                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
+            }
+            // check dynamic updates
+            (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**
+             * @return {?}
+             */
+            function () {
+                // changed required validation logic
+                if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
+                    setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
+                }
+                // changed all other validation logic
+                if (ngControl.invalid && _this.focused) {
+                    setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
+                }
+            }));
+        }
+    }
+
     exports.AnimationCurves = AnimationCurves;
+    exports.ControlTypes = ControlTypes;
     exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
     exports.DEFAULT_MC_LOCALE_ID = DEFAULT_MC_LOCALE_ID;
     exports.EXTENDED_OVERLAY_POSITIONS = EXTENDED_OVERLAY_POSITIONS;
@@ -1787,6 +1917,7 @@
     exports.MC_SANITY_CHECKS = MC_SANITY_CHECKS;
     exports.MC_SELECT_SCROLL_STRATEGY = MC_SELECT_SCROLL_STRATEGY;
     exports.MC_SELECT_SCROLL_STRATEGY_PROVIDER = MC_SELECT_SCROLL_STRATEGY_PROVIDER;
+    exports.MC_VALIDATION = MC_VALIDATION;
     exports.McCommonModule = McCommonModule;
     exports.McDecimalPipe = McDecimalPipe;
     exports.McFormattersModule = McFormattersModule;
@@ -1828,6 +1959,7 @@
     exports.mixinErrorState = mixinErrorState;
     exports.mixinTabIndex = mixinTabIndex;
     exports.selectEvents = selectEvents;
+    exports.setMosaicValidation = setMosaicValidation;
     exports.toBoolean = toBoolean;
     exports.ɵa3 = mcSanityChecksFactory;
 

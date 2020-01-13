@@ -694,12 +694,13 @@
     }());
     var McTagList = /** @class */ (function (_super) {
         __extends(McTagList, _super);
-        function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, dir, parentForm, parentFormGroup, ngControl) {
+        function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.changeDetectorRef = changeDetectorRef;
+            _this.rawValidators = rawValidators;
+            _this.mcValidation = mcValidation;
             _this.dir = dir;
-            _this.ngControl = ngControl;
             _this.controlType = 'mc-tag-list';
             /**
              * Event that emits whenever the raw value of the tag-list changes. This is here primarily
@@ -1100,6 +1101,9 @@
          */
         function () {
             var _this = this;
+            if (this.mcValidation.useValidation) {
+                core$1.setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            }
             this.keyManager = new a11y.FocusKeyManager(this.tags)
                 .withVerticalOrientation()
                 .withHorizontalOrientation(this.dir ? this.dir.value : 'ltr');
@@ -1161,6 +1165,7 @@
                     _this.changeDetectorRef.markForCheck();
                 }));
                 _this.stateChanges.next();
+                _this.propagateTagsChanges();
             }));
         };
         /**
@@ -1677,18 +1682,21 @@
             }
         };
         /** Emits change event to set the model value. */
+        // todo need rethink this method and selection logic
         /**
          * Emits change event to set the model value.
          * @private
          * @param {?=} fallbackValue
          * @return {?}
          */
+        // todo need rethink this method and selection logic
         McTagList.prototype.propagateChanges = /**
          * Emits change event to set the model value.
          * @private
          * @param {?=} fallbackValue
          * @return {?}
          */
+        // todo need rethink this method and selection logic
         function (fallbackValue) {
             /** @type {?} */
             var valueToEmit = null;
@@ -1702,6 +1710,27 @@
             else {
                 valueToEmit = this.selected ? this.selected.value : fallbackValue;
             }
+            this._value = valueToEmit;
+            this.change.emit(new McTagListChange(this, valueToEmit));
+            this.valueChange.emit(valueToEmit);
+            this.onChange(valueToEmit);
+            this.changeDetectorRef.markForCheck();
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        McTagList.prototype.propagateTagsChanges = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var valueToEmit = this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.value; }));
             this._value = valueToEmit;
             this.change.emit(new McTagListChange(this, valueToEmit));
             this.valueChange.emit(valueToEmit);
@@ -1941,6 +1970,8 @@
             { type: core.ElementRef },
             { type: core.ChangeDetectorRef },
             { type: core$1.ErrorStateMatcher },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
             { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },

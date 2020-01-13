@@ -167,10 +167,10 @@
     /** @type {?} */
     var McInputMixinBase = core$1.mixinErrorState(McInputBase);
     var McNumberInput = /** @class */ (function () {
-        function McNumberInput(_platform, _elementRef, _model, step, bigStep, min, max) {
-            this._platform = _platform;
-            this._elementRef = _elementRef;
-            this._model = _model;
+        function McNumberInput(platform, elementRef, model, step, bigStep, min, max) {
+            this.platform = platform;
+            this.elementRef = elementRef;
+            this.model = model;
             /**
              * Implemented as part of McFormFieldNumberControl.
              * \@docs-private
@@ -185,7 +185,7 @@
             this.bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
             this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
             this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
-            this.host = this._elementRef.nativeElement;
+            this.host = this.elementRef.nativeElement;
             /** @type {?} */
             var self = this;
             if ('valueAsNumber' in this.host) {
@@ -300,7 +300,7 @@
              * @param {?} e
              * @return {?}
              */
-            function (e) { return _this._platform.EDGE || _this._platform.TRIDENT
+            function (e) { return _this.platform.EDGE || _this.platform.TRIDENT
                 ? isIEPeriod(e)
                 : isNotIEPeriod(e); });
             if (allowedKeys.indexOf(keyCode) !== -1 ||
@@ -353,11 +353,11 @@
          * @return {?}
          */
         function (step) {
-            this._elementRef.nativeElement.focus();
+            this.elementRef.nativeElement.focus();
             /** @type {?} */
             var res = stepUp(this.host.valueAsNumber, this.max, this.min, step);
             this.host.value = res === null ? '' : res.toString();
-            this._model.update.emit(this.host.valueAsNumber);
+            this.model.update.emit(this.host.valueAsNumber);
         };
         /**
          * @param {?} step
@@ -368,11 +368,11 @@
          * @return {?}
          */
         function (step) {
-            this._elementRef.nativeElement.focus();
+            this.elementRef.nativeElement.focus();
             /** @type {?} */
             var res = stepDown(this.host.valueAsNumber, this.max, this.min, step);
             this.host.value = res === null ? '' : res.toString();
-            this._model.update.emit(this.host.valueAsNumber);
+            this.model.update.emit(this.host.valueAsNumber);
         };
         /**
          * @private
@@ -430,7 +430,10 @@
             { type: core.Directive, args: [{
                         selector: "input[mcInput][type=\"number\"]",
                         exportAs: 'mcNumericalInput',
-                        providers: [forms.NgModel, { provide: formField.McFormFieldNumberControl, useExisting: McNumberInput }],
+                        providers: [
+                            forms.NgModel,
+                            { provide: formField.McFormFieldNumberControl, useExisting: McNumberInput }
+                        ],
                         host: {
                             '(blur)': 'focusChanged(false)',
                             '(focus)': 'focusChanged(true)',
@@ -460,10 +463,11 @@
     var McInput = /** @class */ (function (_super) {
         __extends(McInput, _super);
         // tslint:disable-next-line: naming-convention
-        function McInput(_elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        function McInput(elementRef, rawValidators, mcValidation, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
-            _this._elementRef = _elementRef;
-            _this.ngControl = ngControl;
+            _this.elementRef = elementRef;
+            _this.rawValidators = rawValidators;
+            _this.mcValidation = mcValidation;
             /**
              * Implemented as part of McFormFieldControl.
              * \@docs-private
@@ -498,7 +502,7 @@
             _this._type = 'text';
             // If no input value accessor was explicitly specified, use the element as the input value
             // accessor.
-            _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
+            _this._inputValueAccessor = inputValueAccessor || _this.elementRef.nativeElement;
             _this.previousNativeValue = _this.value;
             // Force setter to be called in case id was not specified.
             _this.id = _this.id;
@@ -605,7 +609,7 @@
                 // input element. To ensure that bindings for `type` work, we need to sync the setter
                 // with the native property. Textarea elements don't support the type property or attribute.
                 if (platform.getSupportedInputTypes().has(this._type)) {
-                    this._elementRef.nativeElement.type = this._type;
+                    this.elementRef.nativeElement.type = this._type;
                 }
             },
             enumerable: true,
@@ -637,6 +641,20 @@
             enumerable: true,
             configurable: true
         });
+        /**
+         * @return {?}
+         */
+        McInput.prototype.ngAfterContentInit = /**
+         * @return {?}
+         */
+        function () {
+            if (!this.ngControl) {
+                return;
+            }
+            if (this.mcValidation.useValidation) {
+                core$1.setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            }
+        };
         /**
          * @return {?}
          */
@@ -683,7 +701,17 @@
          * @return {?}
          */
         function () {
-            this._elementRef.nativeElement.focus();
+            this.elementRef.nativeElement.focus();
+        };
+        /**
+         * @return {?}
+         */
+        McInput.prototype.onBlur = /**
+         * @return {?}
+         */
+        function () {
+            this.focusChanged(false);
+            (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity();
         };
         /** Callback for the cases where the focused state of the input changes. */
         /**
@@ -728,7 +756,7 @@
              * @return {?}
              */
             function () {
-                return !this.isNeverEmpty() && !this._elementRef.nativeElement.value && !this.isBadInput();
+                return !this.isNeverEmpty() && !this.elementRef.nativeElement.value && !this.isBadInput();
             },
             enumerable: true,
             configurable: true
@@ -813,7 +841,7 @@
         function () {
             // The `validity` property won't be present on platform-server.
             /** @type {?} */
-            var validity = ((/** @type {?} */ (this._elementRef.nativeElement))).validity;
+            var validity = ((/** @type {?} */ (this.elementRef.nativeElement))).validity;
             return validity && validity.badInput;
         };
         McInput.decorators = [
@@ -828,16 +856,20 @@
                             '[attr.placeholder]': 'placeholder',
                             '[disabled]': 'disabled',
                             '[required]': 'required',
-                            '(blur)': 'focusChanged(false)',
+                            '(blur)': 'onBlur()',
                             '(focus)': 'focusChanged(true)',
                             '(input)': 'onInput()'
                         },
-                        providers: [{ provide: formField.McFormFieldControl, useExisting: McInput }]
+                        providers: [
+                            { provide: formField.McFormFieldControl, useExisting: McInput }
+                        ]
                     },] },
         ];
         /** @nocollapse */
         McInput.ctorParameters = function () { return [
             { type: core.ElementRef },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
             { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },

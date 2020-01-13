@@ -2,9 +2,9 @@ import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CdkConnectedOverlay, ViewportRuler } from '@angular/cdk/overlay';
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, NgZone, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm, Validator } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { CanDisable, CanDisableCtor, CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, HasTabIndex, HasTabIndexCtor, McOptgroup, McOption, McOptionSelectionChange } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, HasTabIndex, HasTabIndexCtor, McOptgroup, McOption, McOptionSelectionChange, McValidationOptions } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McInput } from '@ptsecurity/mosaic/input';
 import { McTag } from '@ptsecurity/mosaic/tags';
@@ -44,10 +44,11 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private readonly _changeDetectorRef;
     private readonly _ngZone;
     private readonly _renderer;
+    private rawValidators;
     private readonly _dir;
     private readonly _parentFormField;
-    ngControl: NgControl;
     private readonly _scrollStrategyFactory;
+    private mcValidation;
     /** A name for this control that can be used by `mc-form-field`. */
     controlType: string;
     hiddenItems: number;
@@ -161,7 +162,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private readonly uid;
     /** Emits whenever the component is destroyed. */
     private readonly destroy;
-    constructor(_viewportRuler: ViewportRuler, _changeDetectorRef: ChangeDetectorRef, _ngZone: NgZone, _renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, elementRef: ElementRef, _dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, _parentFormField: McFormField, ngControl: NgControl, tabIndex: string, _scrollStrategyFactory: any);
+    constructor(_viewportRuler: ViewportRuler, _changeDetectorRef: ChangeDetectorRef, _ngZone: NgZone, _renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, elementRef: ElementRef, rawValidators: Validator[], _dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, _parentFormField: McFormField, ngControl: NgControl, tabIndex: string, _scrollStrategyFactory: any, mcValidation: McValidationOptions);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngAfterViewInit(): void;

@@ -6,9 +6,9 @@
  */
 import { ViewportRuler, CdkConnectedOverlay, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Renderer2, Attribute, Inject, Optional, Self, ViewChild, ViewChildren, ContentChild, Input, Output, Directive, NgModule } from '@angular/core';
+import { EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Renderer2, Attribute, Optional, Inject, Self, ViewChild, ViewChildren, ContentChild, Input, Output, Directive, NgModule } from '@angular/core';
 import { CdkTree, CdkTreeModule } from '@ptsecurity/cdk/tree';
-import { mixinTabIndex, mixinDisabled, mixinErrorState, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, MultipleMode, getMcSelectNonArrayValueError, getOptionScrollPosition, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_VIEWPORT_PADDING, mcSelectAnimations, ErrorStateMatcher, MC_SELECT_SCROLL_STRATEGY, SELECT_PANEL_PADDING_X, McPseudoCheckboxModule, MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/core';
+import { mixinTabIndex, mixinDisabled, mixinErrorState, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, setMosaicValidation, MultipleMode, getMcSelectNonArrayValueError, getOptionScrollPosition, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_VIEWPORT_PADDING, mcSelectAnimations, ErrorStateMatcher, MC_VALIDATION, MC_SELECT_SCROLL_STRATEGY, SELECT_PANEL_PADDING_X, McPseudoCheckboxModule, MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
 import { McTreeSelection, McTreeModule } from '@ptsecurity/mosaic/tree';
@@ -16,7 +16,7 @@ import { __extends } from 'tslib';
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import { NgForm, FormGroupDirective, NgControl } from '@angular/forms';
+import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW, HOME, END, PAGE_UP, PAGE_DOWN, ENTER, SPACE, A, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl, McFormField } from '@ptsecurity/mosaic/form-field';
 import { Subject, defer, merge } from 'rxjs';
@@ -66,17 +66,18 @@ var McTreeSelectBase = /** @class */ (function () {
 var McTreeSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McTreeSelectBase)));
 var McTreeSelect = /** @class */ (function (_super) {
     __extends(McTreeSelect, _super);
-    function McTreeSelect(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, tabIndex, scrollStrategyFactory, dir, parentForm, parentFormGroup, parentFormField, ngControl) {
+    function McTreeSelect(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, tabIndex, rawValidators, mcValidation, scrollStrategyFactory, dir, parentForm, parentFormGroup, parentFormField, ngControl) {
         var _this = _super.call(this, elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this.elementRef = elementRef;
         _this.changeDetectorRef = changeDetectorRef;
         _this.viewportRuler = viewportRuler;
         _this.ngZone = ngZone;
         _this.renderer = renderer;
+        _this.rawValidators = rawValidators;
+        _this.mcValidation = mcValidation;
         _this.scrollStrategyFactory = scrollStrategyFactory;
         _this.dir = dir;
         _this.parentFormField = parentFormField;
-        _this.ngControl = ngControl;
         /**
          * A name for this control that can be used by `mc-form-field`.
          */
@@ -459,6 +460,9 @@ var McTreeSelect = /** @class */ (function (_super) {
         var _this = this;
         if (!this.tree) {
             return;
+        }
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
         }
         this.tree.resetFocusedItemOnBlur = false;
         this.selectionModel = this.tree.selectionModel = new SelectionModel(this.multiple);
@@ -1441,7 +1445,6 @@ var McTreeSelect = /** @class */ (function (_super) {
                         class: 'mc-tree-select',
                         '[class.mc-disabled]': 'disabled',
                         '[class.mc-select-invalid]': 'errorState',
-                        '[class.mc-select-required]': 'required',
                         '(click)': 'toggle()',
                         '(keydown)': 'handleKeydown($event)',
                         '(focus)': 'onFocus()',
@@ -1467,12 +1470,14 @@ var McTreeSelect = /** @class */ (function (_super) {
         { type: Renderer2 },
         { type: ErrorStateMatcher },
         { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
+        { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [NG_VALIDATORS,] }] },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_VALIDATION,] }] },
         { type: undefined, decorators: [{ type: Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] },
         { type: Directionality, decorators: [{ type: Optional }] },
         { type: NgForm, decorators: [{ type: Optional }] },
         { type: FormGroupDirective, decorators: [{ type: Optional }] },
         { type: McFormField, decorators: [{ type: Optional }] },
-        { type: NgControl, decorators: [{ type: Self }, { type: Optional }] }
+        { type: NgControl, decorators: [{ type: Optional }, { type: Self }] }
     ]; };
     McTreeSelect.propDecorators = {
         trigger: [{ type: ViewChild, args: ['trigger', { static: false },] }],

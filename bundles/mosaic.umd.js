@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/cdk/bidi'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay'), require('@ptsecurity/cdk/a11y'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/forms'), require('@angular/cdk/platform'), require('rxjs/operators'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/datetime'), require('@angular/cdk/a11y'), require('@ptsecurity/cdk/tree')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@angular/cdk/bidi', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay', '@ptsecurity/cdk/a11y', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/forms', '@angular/cdk/platform', 'rxjs/operators', '@angular/cdk/collections', '@ptsecurity/cdk/datetime', '@angular/cdk/a11y', '@ptsecurity/cdk/tree'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = {}), global.ng.core, global.ng.cdk.bidi, global.ng.cdk.coercion, global.rxjs, global.ng.common, global.ng.cdk.keycodes, global.ng.animations, global.ng.cdk.overlay, global.ng.cdk.a11y, global.ng.cdk.portal, global.ng.cdk.scrolling, global.ng.forms, global.ng.cdk.platform, global.rxjs.operators, global.ng.cdk.collections, global.ng.cdk.datetime, global.ng.cdk.a11y, global.ng.cdk.tree));
-}(this, (function (exports, core, bidi, coercion, rxjs, common, keycodes, animations, overlay, a11y, portal, scrolling, forms, platform, operators, collections, datetime, a11y$1, tree) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/cdk/bidi'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/platform'), require('rxjs/operators'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/datetime'), require('@angular/cdk/a11y'), require('@ptsecurity/cdk/tree')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@angular/cdk/bidi', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay', '@angular/forms', '@ptsecurity/cdk/a11y', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/platform', 'rxjs/operators', '@angular/cdk/collections', '@ptsecurity/cdk/datetime', '@angular/cdk/a11y', '@ptsecurity/cdk/tree'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = {}), global.ng.core, global.ng.cdk.bidi, global.ng.cdk.coercion, global.rxjs, global.ng.common, global.ng.cdk.keycodes, global.ng.animations, global.ng.cdk.overlay, global.ng.forms, global.ng.cdk.a11y, global.ng.cdk.portal, global.ng.cdk.scrolling, global.ng.cdk.platform, global.rxjs.operators, global.ng.cdk.collections, global.ng.cdk.datetime, global.ng.cdk.a11y, global.ng.cdk.tree));
+}(this, (function (exports, core, bidi, coercion, rxjs, common, keycodes, animations, overlay, forms, a11y, portal, scrolling, platform, operators, collections, datetime, a11y$1, tree) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1780,6 +1780,135 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /** @type {?} */
+    var MC_VALIDATION = new core.InjectionToken('McUseValidation', { factory: (/**
+         * @return {?}
+         */
+        function () { return ({ useValidation: true }); }) });
+    /** @enum {string} */
+    var ControlTypes = {
+        FormControl: 'FormControlDirective',
+        FormControlName: 'FormControlName',
+        ModelControl: 'NgModel',
+    };
+    /**
+     * @param {?} constructorName
+     * @return {?}
+     */
+    function getControlType(constructorName) {
+        if (constructorName === ControlTypes.FormControl || constructorName === ControlTypes.FormControlName) {
+            return ControlTypes.FormControl;
+        }
+        else if (constructorName === ControlTypes.ModelControl) {
+            return ControlTypes.ModelControl;
+        }
+        throw Error("Unknown constructor name: " + constructorName);
+    }
+    /**
+     * @param {?} control
+     * @param {?} validator
+     * @return {?}
+     */
+    function setValidState(control, validator) {
+        if (!control) {
+            return;
+        }
+        control.clearValidators();
+        control.updateValueAndValidity({ emitEvent: false });
+        control.setValidators(validator);
+    }
+    /**
+     * This function do next:
+     * - run validation on submitting parent form
+     * - prevent validation in required validator if form doesn't submitted
+     * - if control focused and untouched validation will be prevented
+     * @param {?} validators
+     * @param {?} parentForm
+     * @param {?} ngControl
+     * @return {?}
+     */
+    function setMosaicValidation(validators, parentForm, ngControl) {
+        var _this = this;
+        if (!ngControl) {
+            return;
+        }
+        if (parentForm) {
+            parentForm.ngSubmit.subscribe((/**
+             * @return {?}
+             */
+            function () {
+                // tslint:disable-next-line: no-unnecessary-type-assertion
+                (/** @type {?} */ (ngControl.control)).updateValueAndValidity();
+            }));
+        }
+        if (getControlType(ngControl.constructor.name) === ControlTypes.ModelControl) {
+            if (!validators) {
+                return;
+            }
+            validators.forEach((/**
+             * @param {?} validator
+             * @return {?}
+             */
+            function (validator) {
+                // tslint:disable-next-line: no-unbound-method
+                /** @type {?} */
+                var originalValidate = validator.validate;
+                if (validator instanceof forms.RequiredValidator) {
+                    // changed required validation logic
+                    validator.validate = (/**
+                     * @param {?} control
+                     * @return {?}
+                     */
+                    function (control) {
+                        if (parentForm && !parentForm.submitted) {
+                            return null;
+                        }
+                        return originalValidate.call(validator, control);
+                    });
+                }
+                else {
+                    // changed all other validation logic
+                    validator.validate = (/**
+                     * @param {?} control
+                     * @return {?}
+                     */
+                    function (control) {
+                        if (_this.focused) {
+                            return null;
+                        }
+                        return originalValidate.call(validator, control);
+                    });
+                }
+            }));
+        }
+        else if (getControlType(ngControl.constructor.name) === ControlTypes.FormControl) {
+            /** @type {?} */
+            var originalValidator_1 = (/** @type {?} */ (ngControl.control)).validator;
+            // changed required validation logic after initialization
+            if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
+                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
+            }
+            // check dynamic updates
+            (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**
+             * @return {?}
+             */
+            function () {
+                // changed required validation logic
+                if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
+                    setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
+                }
+                // changed all other validation logic
+                if (ngControl.invalid && _this.focused) {
+                    setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
+                }
+            }));
+        }
+    }
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var McIconCSSStyler = /** @class */ (function () {
         function McIconCSSStyler() {
         }
@@ -2087,7 +2216,8 @@
                 }
             }
             // Subscribe to changes in the child control state in order to update the form field UI.
-            this.control.stateChanges.pipe(operators.startWith())
+            this.control.stateChanges
+                .pipe(operators.startWith())
                 .subscribe((/**
              * @return {?}
              */
@@ -2095,7 +2225,8 @@
                 _this._changeDetectorRef.markForCheck();
             }));
             if (this.numberControl) {
-                this.numberControl.stateChanges.pipe(operators.startWith())
+                this.numberControl.stateChanges
+                    .pipe(operators.startWith())
                     .subscribe((/**
                  * @return {?}
                  */
@@ -5459,10 +5590,10 @@
     /** @type {?} */
     var McInputMixinBase = mixinErrorState(McInputBase);
     var McNumberInput = /** @class */ (function () {
-        function McNumberInput(_platform, _elementRef, _model, step, bigStep, min, max) {
-            this._platform = _platform;
-            this._elementRef = _elementRef;
-            this._model = _model;
+        function McNumberInput(platform, elementRef, model, step, bigStep, min, max) {
+            this.platform = platform;
+            this.elementRef = elementRef;
+            this.model = model;
             /**
              * Implemented as part of McFormFieldNumberControl.
              * \@docs-private
@@ -5477,7 +5608,7 @@
             this.bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
             this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
             this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
-            this.host = this._elementRef.nativeElement;
+            this.host = this.elementRef.nativeElement;
             /** @type {?} */
             var self = this;
             if ('valueAsNumber' in this.host) {
@@ -5592,7 +5723,7 @@
              * @param {?} e
              * @return {?}
              */
-            function (e) { return _this._platform.EDGE || _this._platform.TRIDENT
+            function (e) { return _this.platform.EDGE || _this.platform.TRIDENT
                 ? isIEPeriod(e)
                 : isNotIEPeriod(e); });
             if (allowedKeys.indexOf(keyCode) !== -1 ||
@@ -5645,11 +5776,11 @@
          * @return {?}
          */
         function (step) {
-            this._elementRef.nativeElement.focus();
+            this.elementRef.nativeElement.focus();
             /** @type {?} */
             var res = stepUp(this.host.valueAsNumber, this.max, this.min, step);
             this.host.value = res === null ? '' : res.toString();
-            this._model.update.emit(this.host.valueAsNumber);
+            this.model.update.emit(this.host.valueAsNumber);
         };
         /**
          * @param {?} step
@@ -5660,11 +5791,11 @@
          * @return {?}
          */
         function (step) {
-            this._elementRef.nativeElement.focus();
+            this.elementRef.nativeElement.focus();
             /** @type {?} */
             var res = stepDown(this.host.valueAsNumber, this.max, this.min, step);
             this.host.value = res === null ? '' : res.toString();
-            this._model.update.emit(this.host.valueAsNumber);
+            this.model.update.emit(this.host.valueAsNumber);
         };
         /**
          * @private
@@ -5722,7 +5853,10 @@
             { type: core.Directive, args: [{
                         selector: "input[mcInput][type=\"number\"]",
                         exportAs: 'mcNumericalInput',
-                        providers: [forms.NgModel, { provide: McFormFieldNumberControl, useExisting: McNumberInput }],
+                        providers: [
+                            forms.NgModel,
+                            { provide: McFormFieldNumberControl, useExisting: McNumberInput }
+                        ],
                         host: {
                             '(blur)': 'focusChanged(false)',
                             '(focus)': 'focusChanged(true)',
@@ -5752,10 +5886,11 @@
     var McInput = /** @class */ (function (_super) {
         __extends(McInput, _super);
         // tslint:disable-next-line: naming-convention
-        function McInput(_elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        function McInput(elementRef, rawValidators, mcValidation, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
-            _this._elementRef = _elementRef;
-            _this.ngControl = ngControl;
+            _this.elementRef = elementRef;
+            _this.rawValidators = rawValidators;
+            _this.mcValidation = mcValidation;
             /**
              * Implemented as part of McFormFieldControl.
              * \@docs-private
@@ -5790,7 +5925,7 @@
             _this._type = 'text';
             // If no input value accessor was explicitly specified, use the element as the input value
             // accessor.
-            _this._inputValueAccessor = inputValueAccessor || _this._elementRef.nativeElement;
+            _this._inputValueAccessor = inputValueAccessor || _this.elementRef.nativeElement;
             _this.previousNativeValue = _this.value;
             // Force setter to be called in case id was not specified.
             _this.id = _this.id;
@@ -5897,7 +6032,7 @@
                 // input element. To ensure that bindings for `type` work, we need to sync the setter
                 // with the native property. Textarea elements don't support the type property or attribute.
                 if (platform.getSupportedInputTypes().has(this._type)) {
-                    this._elementRef.nativeElement.type = this._type;
+                    this.elementRef.nativeElement.type = this._type;
                 }
             },
             enumerable: true,
@@ -5929,6 +6064,20 @@
             enumerable: true,
             configurable: true
         });
+        /**
+         * @return {?}
+         */
+        McInput.prototype.ngAfterContentInit = /**
+         * @return {?}
+         */
+        function () {
+            if (!this.ngControl) {
+                return;
+            }
+            if (this.mcValidation.useValidation) {
+                setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            }
+        };
         /**
          * @return {?}
          */
@@ -5975,7 +6124,17 @@
          * @return {?}
          */
         function () {
-            this._elementRef.nativeElement.focus();
+            this.elementRef.nativeElement.focus();
+        };
+        /**
+         * @return {?}
+         */
+        McInput.prototype.onBlur = /**
+         * @return {?}
+         */
+        function () {
+            this.focusChanged(false);
+            (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity();
         };
         /** Callback for the cases where the focused state of the input changes. */
         /**
@@ -6020,7 +6179,7 @@
              * @return {?}
              */
             function () {
-                return !this.isNeverEmpty() && !this._elementRef.nativeElement.value && !this.isBadInput();
+                return !this.isNeverEmpty() && !this.elementRef.nativeElement.value && !this.isBadInput();
             },
             enumerable: true,
             configurable: true
@@ -6105,7 +6264,7 @@
         function () {
             // The `validity` property won't be present on platform-server.
             /** @type {?} */
-            var validity = ((/** @type {?} */ (this._elementRef.nativeElement))).validity;
+            var validity = ((/** @type {?} */ (this.elementRef.nativeElement))).validity;
             return validity && validity.badInput;
         };
         McInput.decorators = [
@@ -6120,16 +6279,20 @@
                             '[attr.placeholder]': 'placeholder',
                             '[disabled]': 'disabled',
                             '[required]': 'required',
-                            '(blur)': 'focusChanged(false)',
+                            '(blur)': 'onBlur()',
                             '(focus)': 'focusChanged(true)',
                             '(input)': 'onInput()'
                         },
-                        providers: [{ provide: McFormFieldControl, useExisting: McInput }]
+                        providers: [
+                            { provide: McFormFieldControl, useExisting: McInput }
+                        ]
                     },] },
         ];
         /** @nocollapse */
         McInput.ctorParameters = function () { return [
             { type: core.ElementRef },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_VALIDATION,] }] },
             { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
@@ -21988,12 +22151,13 @@
     }());
     var McTagList = /** @class */ (function (_super) {
         __extends(McTagList, _super);
-        function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, dir, parentForm, parentFormGroup, ngControl) {
+        function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.changeDetectorRef = changeDetectorRef;
+            _this.rawValidators = rawValidators;
+            _this.mcValidation = mcValidation;
             _this.dir = dir;
-            _this.ngControl = ngControl;
             _this.controlType = 'mc-tag-list';
             /**
              * Event that emits whenever the raw value of the tag-list changes. This is here primarily
@@ -22394,6 +22558,9 @@
          */
         function () {
             var _this = this;
+            if (this.mcValidation.useValidation) {
+                setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            }
             this.keyManager = new a11y.FocusKeyManager(this.tags)
                 .withVerticalOrientation()
                 .withHorizontalOrientation(this.dir ? this.dir.value : 'ltr');
@@ -22455,6 +22622,7 @@
                     _this.changeDetectorRef.markForCheck();
                 }));
                 _this.stateChanges.next();
+                _this.propagateTagsChanges();
             }));
         };
         /**
@@ -22971,18 +23139,21 @@
             }
         };
         /** Emits change event to set the model value. */
+        // todo need rethink this method and selection logic
         /**
          * Emits change event to set the model value.
          * @private
          * @param {?=} fallbackValue
          * @return {?}
          */
+        // todo need rethink this method and selection logic
         McTagList.prototype.propagateChanges = /**
          * Emits change event to set the model value.
          * @private
          * @param {?=} fallbackValue
          * @return {?}
          */
+        // todo need rethink this method and selection logic
         function (fallbackValue) {
             /** @type {?} */
             var valueToEmit = null;
@@ -22996,6 +23167,27 @@
             else {
                 valueToEmit = this.selected ? this.selected.value : fallbackValue;
             }
+            this._value = valueToEmit;
+            this.change.emit(new McTagListChange(this, valueToEmit));
+            this.valueChange.emit(valueToEmit);
+            this.onChange(valueToEmit);
+            this.changeDetectorRef.markForCheck();
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        McTagList.prototype.propagateTagsChanges = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var valueToEmit = this.tags.map((/**
+             * @param {?} tag
+             * @return {?}
+             */
+            function (tag) { return tag.value; }));
             this._value = valueToEmit;
             this.change.emit(new McTagListChange(this, valueToEmit));
             this.valueChange.emit(valueToEmit);
@@ -23235,6 +23427,8 @@
             { type: core.ElementRef },
             { type: core.ChangeDetectorRef },
             { type: ErrorStateMatcher },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_VALIDATION,] }] },
             { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
@@ -23743,16 +23937,17 @@
     }());
     var McSelect = /** @class */ (function (_super) {
         __extends(McSelect, _super);
-        function McSelect(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, tabIndex, _scrollStrategyFactory) {
+        function McSelect(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, tabIndex, _scrollStrategyFactory, mcValidation) {
             var _this = _super.call(this, elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this._viewportRuler = _viewportRuler;
             _this._changeDetectorRef = _changeDetectorRef;
             _this._ngZone = _ngZone;
             _this._renderer = _renderer;
+            _this.rawValidators = rawValidators;
             _this._dir = _dir;
             _this._parentFormField = _parentFormField;
-            _this.ngControl = ngControl;
             _this._scrollStrategyFactory = _scrollStrategyFactory;
+            _this.mcValidation = mcValidation;
             /**
              * A name for this control that can be used by `mc-form-field`.
              */
@@ -24139,6 +24334,9 @@
          */
         function () {
             var _this = this;
+            if (this.mcValidation.useValidation) {
+                setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            }
             this.initKeyManager();
             this.selectionModel.changed
                 .pipe(operators.takeUntil(this.destroy))
@@ -25337,7 +25535,6 @@
                             class: 'mc-select',
                             '[class.mc-disabled]': 'disabled',
                             '[class.mc-select-invalid]': 'errorState',
-                            '[class.mc-select-required]': 'required',
                             '(keydown)': 'handleKeydown($event)',
                             '(focus)': 'onFocus()',
                             '(blur)': 'onBlur()',
@@ -25361,13 +25558,15 @@
             { type: core.Renderer2 },
             { type: ErrorStateMatcher },
             { type: core.ElementRef },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
             { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
             { type: McFormField, decorators: [{ type: core.Optional }] },
             { type: forms.NgControl, decorators: [{ type: core.Self }, { type: core.Optional }] },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-            { type: undefined, decorators: [{ type: core.Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] }
+            { type: undefined, decorators: [{ type: core.Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] },
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_VALIDATION,] }] }
         ]; };
         McSelect.propDecorators = {
             trigger: [{ type: core.ViewChild, args: ['trigger', { static: false },] }],
@@ -25481,17 +25680,18 @@
     var McTreeSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McTreeSelectBase)));
     var McTreeSelect = /** @class */ (function (_super) {
         __extends(McTreeSelect, _super);
-        function McTreeSelect(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, tabIndex, scrollStrategyFactory, dir, parentForm, parentFormGroup, parentFormField, ngControl) {
+        function McTreeSelect(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, tabIndex, rawValidators, mcValidation, scrollStrategyFactory, dir, parentForm, parentFormGroup, parentFormField, ngControl) {
             var _this = _super.call(this, elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.changeDetectorRef = changeDetectorRef;
             _this.viewportRuler = viewportRuler;
             _this.ngZone = ngZone;
             _this.renderer = renderer;
+            _this.rawValidators = rawValidators;
+            _this.mcValidation = mcValidation;
             _this.scrollStrategyFactory = scrollStrategyFactory;
             _this.dir = dir;
             _this.parentFormField = parentFormField;
-            _this.ngControl = ngControl;
             /**
              * A name for this control that can be used by `mc-form-field`.
              */
@@ -25874,6 +26074,9 @@
             var _this = this;
             if (!this.tree) {
                 return;
+            }
+            if (this.mcValidation.useValidation) {
+                setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
             }
             this.tree.resetFocusedItemOnBlur = false;
             this.selectionModel = this.tree.selectionModel = new collections.SelectionModel(this.multiple);
@@ -26856,7 +27059,6 @@
                             class: 'mc-tree-select',
                             '[class.mc-disabled]': 'disabled',
                             '[class.mc-select-invalid]': 'errorState',
-                            '[class.mc-select-required]': 'required',
                             '(click)': 'toggle()',
                             '(keydown)': 'handleKeydown($event)',
                             '(focus)': 'onFocus()',
@@ -26882,12 +27084,14 @@
             { type: core.Renderer2 },
             { type: ErrorStateMatcher },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_VALIDATION,] }] },
             { type: undefined, decorators: [{ type: core.Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] },
             { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
             { type: McFormField, decorators: [{ type: core.Optional }] },
-            { type: forms.NgControl, decorators: [{ type: core.Self }, { type: core.Optional }] }
+            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] }
         ]; };
         McTreeSelect.propDecorators = {
             trigger: [{ type: core.ViewChild, args: ['trigger', { static: false },] }],
@@ -31950,6 +32154,7 @@
     exports.AUTOCOMPLETE_PANEL_HEIGHT = AUTOCOMPLETE_PANEL_HEIGHT;
     exports.AnimationCurves = AnimationCurves;
     exports.BIG_STEP = BIG_STEP;
+    exports.ControlTypes = ControlTypes;
     exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
     exports.DEFAULT_MC_LOCALE_ID = DEFAULT_MC_LOCALE_ID;
     exports.DEFAULT_TIME_FORMAT = DEFAULT_TIME_FORMAT;
@@ -32002,6 +32207,7 @@
     exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
     exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
     exports.MC_TREE_OPTION_PARENT_COMPONENT = MC_TREE_OPTION_PARENT_COMPONENT;
+    exports.MC_VALIDATION = MC_VALIDATION;
     exports.MINUTES_PER_HOUR = MINUTES_PER_HOUR;
     exports.McAlignTabsCenterCssStyler = McAlignTabsCenterCssStyler;
     exports.McAlignTabsEndCssStyler = McAlignTabsEndCssStyler;
@@ -32277,6 +32483,7 @@
     exports.mixinErrorState = mixinErrorState;
     exports.mixinTabIndex = mixinTabIndex;
     exports.selectEvents = selectEvents;
+    exports.setMosaicValidation = setMosaicValidation;
     exports.stepDown = stepDown;
     exports.stepUp = stepUp;
     exports.throwMcDropdownInvalidPositionX = throwMcDropdownInvalidPositionX;
@@ -32286,8 +32493,8 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
+    exports.ɵa0 = mcSidebarAnimations;
     exports.ɵa15 = McTabHeaderBase;
-    exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
     exports.ɵa22 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
