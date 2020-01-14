@@ -66,15 +66,6 @@
      * @param {?} value
      * @return {?}
      */
-    function sanitizeNumber(value) {
-        return !isFinite(value) || isNaN(value)
-            ? null
-            : value;
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     function getPrecision(value) {
         /** @type {?} */
         var arr = value.toString().split('.');
@@ -91,9 +82,7 @@
     function add(value1, value2) {
         /** @type {?} */
         var precision = Math.max(getPrecision(value1), getPrecision(value2));
-        /** @type {?} */
-        var res = (value1 * precision + value2 * precision) / precision;
-        return sanitizeNumber(res);
+        return (value1 * precision + value2 * precision) / precision;
     }
     /** @type {?} */
     var stepUp = (/**
@@ -104,14 +93,7 @@
      * @return {?}
      */
     function (value, max, min, step) {
-        /** @type {?} */
-        var res;
-        if (value === null) {
-            res = add(min, step);
-            return res === null ? null : Math.min(res, max);
-        }
-        res = add(value, step);
-        return res === null ? null : Math.max(Math.min(res, max), min);
+        return Math.max(Math.min(add(value, step), max), min);
     });
     /** @type {?} */
     var stepDown = (/**
@@ -122,14 +104,7 @@
      * @return {?}
      */
     function (value, max, min, step) {
-        /** @type {?} */
-        var res;
-        if (value === null) {
-            res = add(max, -step);
-            return res === null ? null : Math.max(res, min);
-        }
-        res = add(value, -step);
-        return res === null ? null : Math.min(Math.max(res, min), max);
+        return Math.min(Math.max(add(value, -step), min), max);
     });
 
     /**
@@ -355,8 +330,8 @@
         function (step) {
             this.elementRef.nativeElement.focus();
             /** @type {?} */
-            var res = stepUp(this.host.valueAsNumber, this.max, this.min, step);
-            this.host.value = res === null ? '' : res.toString();
+            var res = stepUp(this.host.valueAsNumber || 0, this.max, this.min, step);
+            this.host.value = res.toString();
             this.model.update.emit(this.host.valueAsNumber);
         };
         /**
@@ -370,8 +345,8 @@
         function (step) {
             this.elementRef.nativeElement.focus();
             /** @type {?} */
-            var res = stepDown(this.host.valueAsNumber, this.max, this.min, step);
-            this.host.value = res === null ? '' : res.toString();
+            var res = stepDown(this.host.valueAsNumber || 0, this.max, this.min, step);
+            this.host.value = res.toString();
             this.model.update.emit(this.host.valueAsNumber);
         };
         /**
@@ -431,7 +406,6 @@
                         selector: "input[mcInput][type=\"number\"]",
                         exportAs: 'mcNumericalInput',
                         providers: [
-                            forms.NgModel,
                             { provide: formField.McFormFieldNumberControl, useExisting: McNumberInput }
                         ],
                         host: {

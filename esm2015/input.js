@@ -42,15 +42,6 @@ const MC_INPUT_VALUE_ACCESSOR = new InjectionToken('MC_INPUT_VALUE_ACCESSOR');
  * @param {?} value
  * @return {?}
  */
-function sanitizeNumber(value) {
-    return !isFinite(value) || isNaN(value)
-        ? null
-        : value;
-}
-/**
- * @param {?} value
- * @return {?}
- */
 function getPrecision(value) {
     /** @type {?} */
     const arr = value.toString().split('.');
@@ -67,9 +58,7 @@ function getPrecision(value) {
 function add(value1, value2) {
     /** @type {?} */
     const precision = Math.max(getPrecision(value1), getPrecision(value2));
-    /** @type {?} */
-    const res = (value1 * precision + value2 * precision) / precision;
-    return sanitizeNumber(res);
+    return (value1 * precision + value2 * precision) / precision;
 }
 /** @type {?} */
 const stepUp = (/**
@@ -80,14 +69,7 @@ const stepUp = (/**
  * @return {?}
  */
 (value, max, min, step) => {
-    /** @type {?} */
-    let res;
-    if (value === null) {
-        res = add(min, step);
-        return res === null ? null : Math.min(res, max);
-    }
-    res = add(value, step);
-    return res === null ? null : Math.max(Math.min(res, max), min);
+    return Math.max(Math.min(add(value, step), max), min);
 });
 /** @type {?} */
 const stepDown = (/**
@@ -98,14 +80,7 @@ const stepDown = (/**
  * @return {?}
  */
 (value, max, min, step) => {
-    /** @type {?} */
-    let res;
-    if (value === null) {
-        res = add(max, -step);
-        return res === null ? null : Math.max(res, min);
-    }
-    res = add(value, -step);
-    return res === null ? null : Math.min(Math.max(res, min), max);
+    return Math.min(Math.max(add(value, -step), min), max);
 });
 
 /**
@@ -326,8 +301,8 @@ class McNumberInput {
     stepUp(step) {
         this.elementRef.nativeElement.focus();
         /** @type {?} */
-        const res = stepUp(this.host.valueAsNumber, this.max, this.min, step);
-        this.host.value = res === null ? '' : res.toString();
+        const res = stepUp(this.host.valueAsNumber || 0, this.max, this.min, step);
+        this.host.value = res.toString();
         this.model.update.emit(this.host.valueAsNumber);
     }
     /**
@@ -337,8 +312,8 @@ class McNumberInput {
     stepDown(step) {
         this.elementRef.nativeElement.focus();
         /** @type {?} */
-        const res = stepDown(this.host.valueAsNumber, this.max, this.min, step);
-        this.host.value = res === null ? '' : res.toString();
+        const res = stepDown(this.host.valueAsNumber || 0, this.max, this.min, step);
+        this.host.value = res.toString();
         this.model.update.emit(this.host.valueAsNumber);
     }
     /**
@@ -379,7 +354,6 @@ McNumberInput.decorators = [
                 selector: `input[mcInput][type="number"]`,
                 exportAs: 'mcNumericalInput',
                 providers: [
-                    NgModel,
                     { provide: McFormFieldNumberControl, useExisting: McNumberInput }
                 ],
                 host: {
