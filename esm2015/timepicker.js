@@ -252,8 +252,11 @@ class McTimepicker extends McTimepickerMixinBase {
          */
         (timeFormatKey) => TimeFormats[timeFormatKey]))
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
-        ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
         this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
+        setTimeout((/**
+         * @return {?}
+         */
+        () => this.applyInputChanges({ doTimestringReformat: true })));
     }
     /**
      * @return {?}

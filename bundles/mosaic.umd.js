@@ -27816,6 +27816,7 @@
              * @return {?}
              */
             function (formatValue) {
+                var _this = this;
                 this._timeFormat = Object
                     .keys(TimeFormats)
                     .map((/**
@@ -27824,8 +27825,11 @@
                  */
                 function (timeFormatKey) { return TimeFormats[timeFormatKey]; }))
                     .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
-                ((/** @type {?} */ (this.ngControl.control))).updateValueAndValidity();
                 this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._timeFormat];
+                setTimeout((/**
+                 * @return {?}
+                 */
+                function () { return _this.applyInputChanges({ doTimestringReformat: true }); }));
             },
             enumerable: true,
             configurable: true
@@ -32493,10 +32497,10 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa0 = mcSidebarAnimations;
+    exports.ɵa1 = mcSidebarAnimations;
     exports.ɵa15 = McTabHeaderBase;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa22 = toggleVerticalNavbarAnimation;
+    exports.ɵa23 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
