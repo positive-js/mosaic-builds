@@ -2045,6 +2045,12 @@
     function getMcFormFieldMissingControlError() {
         return Error('mc-form-field must contain a McFormFieldControl.');
     }
+    /**
+     * @return {?}
+     */
+    function getMcFormFieldYouCanNotUseCleanerInNumberInputError() {
+        return Error("You can't use mc-cleaner with input that have type=\"number\"");
+    }
 
     /**
      * @fileoverview added by tsickle
@@ -2206,6 +2212,10 @@
          */
         function () {
             var _this = this;
+            if (this.numberControl && this.hasCleaner) {
+                this.cleaner = null;
+                throw getMcFormFieldYouCanNotUseCleanerInNumberInputError();
+            }
             this.validateControlChild();
             if (this.control.controlType) {
                 this._elementRef.nativeElement.classList
@@ -2427,7 +2437,7 @@
              * @return {?}
              */
             function () {
-                return this.cleaner && this.cleaner.length > 0;
+                return !!this.cleaner;
             },
             enumerable: true,
             configurable: true
@@ -2522,10 +2532,10 @@
             control: [{ type: core.ContentChild, args: [McFormFieldControl, { static: false },] }],
             numberControl: [{ type: core.ContentChild, args: [McFormFieldNumberControl, { static: false },] }],
             stepper: [{ type: core.ContentChild, args: [McStepper, { static: false },] }],
+            cleaner: [{ type: core.ContentChild, args: [McCleaner, { static: false },] }],
             hint: [{ type: core.ContentChildren, args: [McHint,] }],
             suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
             prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
-            cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }],
             connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer', { static: true },] }]
         };
         return McFormField;
@@ -32441,6 +32451,7 @@
     exports.fadeInItems = fadeInItems;
     exports.getMcAutocompleteMissingPanelError = getMcAutocompleteMissingPanelError;
     exports.getMcFormFieldMissingControlError = getMcFormFieldMissingControlError;
+    exports.getMcFormFieldYouCanNotUseCleanerInNumberInputError = getMcFormFieldYouCanNotUseCleanerInNumberInputError;
     exports.getMcPopoverInvalidPositionError = getMcPopoverInvalidPositionError;
     exports.getMcSelectDynamicMultipleError = getMcSelectDynamicMultipleError;
     exports.getMcSelectNonArrayValueError = getMcSelectNonArrayValueError;
@@ -32471,34 +32482,34 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa15 = McTabHeaderBase;
+    exports.ɵa16 = McTabHeaderBase;
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
     exports.ɵa23 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
-    exports.ɵa27 = McModalControlService;
+    exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
-    exports.ɵb15 = McTabLabelWrapperBase;
+    exports.ɵb16 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
     exports.ɵb25 = MinValidator;
-    exports.ɵb27 = McModalTitle;
-    exports.ɵc15 = McTabLabelWrapperMixinBase;
+    exports.ɵb28 = McModalTitle;
+    exports.ɵc16 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
     exports.ɵc25 = MAX_VALIDATOR;
-    exports.ɵc27 = McModalBody;
-    exports.ɵd15 = McTabBase;
+    exports.ɵc28 = McModalBody;
+    exports.ɵd16 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
     exports.ɵd25 = MaxValidator;
-    exports.ɵd27 = McModalFooter;
-    exports.ɵe15 = McTabMixinBase;
+    exports.ɵd28 = McModalFooter;
+    exports.ɵe16 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
-    exports.ɵe27 = CssUnitPipe;
-    exports.ɵf15 = McTabNavBase;
+    exports.ɵe28 = CssUnitPipe;
+    exports.ɵf16 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
-    exports.ɵg15 = McTabNavMixinBase;
+    exports.ɵg16 = McTabNavMixinBase;
     exports.ɵg20 = McSidepanelActions;
-    exports.ɵh15 = McTabLinkBase;
-    exports.ɵi15 = McTabLinkMixinBase;
+    exports.ɵh16 = McTabLinkBase;
+    exports.ɵi16 = McTabLinkMixinBase;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

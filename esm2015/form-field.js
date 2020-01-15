@@ -52,6 +52,12 @@ class McFormFieldControl {
 function getMcFormFieldMissingControlError() {
     return Error('mc-form-field must contain a McFormFieldControl.');
 }
+/**
+ * @return {?}
+ */
+function getMcFormFieldYouCanNotUseCleanerInNumberInputError() {
+    return Error(`You can't use mc-cleaner with input that have type="number"`);
+}
 
 /**
  * @fileoverview added by tsickle
@@ -195,6 +201,10 @@ class McFormField extends McFormFieldMixinBase {
      * @return {?}
      */
     ngAfterContentInit() {
+        if (this.numberControl && this.hasCleaner) {
+            this.cleaner = null;
+            throw getMcFormFieldYouCanNotUseCleanerInNumberInputError();
+        }
         this.validateControlChild();
         if (this.control.controlType) {
             this._elementRef.nativeElement.classList
@@ -354,7 +364,7 @@ class McFormField extends McFormFieldMixinBase {
      * @return {?}
      */
     get hasCleaner() {
-        return this.cleaner && this.cleaner.length > 0;
+        return !!this.cleaner;
     }
     /**
      * @return {?}
@@ -431,10 +441,10 @@ McFormField.propDecorators = {
     control: [{ type: ContentChild, args: [McFormFieldControl, { static: false },] }],
     numberControl: [{ type: ContentChild, args: [McFormFieldNumberControl, { static: false },] }],
     stepper: [{ type: ContentChild, args: [McStepper, { static: false },] }],
+    cleaner: [{ type: ContentChild, args: [McCleaner, { static: false },] }],
     hint: [{ type: ContentChildren, args: [McHint,] }],
     suffix: [{ type: ContentChildren, args: [McSuffix,] }],
     prefix: [{ type: ContentChildren, args: [McPrefix,] }],
-    cleaner: [{ type: ContentChildren, args: [McCleaner,] }],
     connectionContainerRef: [{ type: ViewChild, args: ['connectionContainer', { static: true },] }]
 };
 class McFormFieldWithoutBorders {
@@ -477,5 +487,5 @@ McFormFieldModule.decorators = [
             },] },
 ];
 
-export { McCleaner, McFormField, McFormFieldBase, McFormFieldControl, McFormFieldMixinBase, McFormFieldModule, McFormFieldNumberControl, McFormFieldWithoutBorders, McHint, McPrefix, McStepper, McSuffix, getMcFormFieldMissingControlError };
+export { McCleaner, McFormField, McFormFieldBase, McFormFieldControl, McFormFieldMixinBase, McFormFieldModule, McFormFieldNumberControl, McFormFieldWithoutBorders, McHint, McPrefix, McStepper, McSuffix, getMcFormFieldMissingControlError, getMcFormFieldYouCanNotUseCleanerInNumberInputError };
 //# sourceMappingURL=form-field.js.map

@@ -19,10 +19,10 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     control: McFormFieldControl<any>;
     numberControl: McFormFieldNumberControl<any>;
     stepper: McStepper;
+    cleaner: McCleaner | null;
     hint: QueryList<McHint>;
     suffix: QueryList<McSuffix>;
     prefix: QueryList<McPrefix>;
-    cleaner: QueryList<McCleaner>;
     connectionContainerRef: ElementRef;
     labelId: string;
     hovered: boolean;

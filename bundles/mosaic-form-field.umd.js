@@ -91,6 +91,12 @@
     function getMcFormFieldMissingControlError() {
         return Error('mc-form-field must contain a McFormFieldControl.');
     }
+    /**
+     * @return {?}
+     */
+    function getMcFormFieldYouCanNotUseCleanerInNumberInputError() {
+        return Error("You can't use mc-cleaner with input that have type=\"number\"");
+    }
 
     /**
      * @fileoverview added by tsickle
@@ -252,6 +258,10 @@
          */
         function () {
             var _this = this;
+            if (this.numberControl && this.hasCleaner) {
+                this.cleaner = null;
+                throw getMcFormFieldYouCanNotUseCleanerInNumberInputError();
+            }
             this.validateControlChild();
             if (this.control.controlType) {
                 this._elementRef.nativeElement.classList
@@ -473,7 +483,7 @@
              * @return {?}
              */
             function () {
-                return this.cleaner && this.cleaner.length > 0;
+                return !!this.cleaner;
             },
             enumerable: true,
             configurable: true
@@ -568,10 +578,10 @@
             control: [{ type: core.ContentChild, args: [McFormFieldControl, { static: false },] }],
             numberControl: [{ type: core.ContentChild, args: [McFormFieldNumberControl, { static: false },] }],
             stepper: [{ type: core.ContentChild, args: [McStepper, { static: false },] }],
+            cleaner: [{ type: core.ContentChild, args: [McCleaner, { static: false },] }],
             hint: [{ type: core.ContentChildren, args: [McHint,] }],
             suffix: [{ type: core.ContentChildren, args: [McSuffix,] }],
             prefix: [{ type: core.ContentChildren, args: [McPrefix,] }],
-            cleaner: [{ type: core.ContentChildren, args: [McCleaner,] }],
             connectionContainerRef: [{ type: core.ViewChild, args: ['connectionContainer', { static: true },] }]
         };
         return McFormField;
@@ -635,6 +645,7 @@
     exports.McStepper = McStepper;
     exports.McSuffix = McSuffix;
     exports.getMcFormFieldMissingControlError = getMcFormFieldMissingControlError;
+    exports.getMcFormFieldYouCanNotUseCleanerInNumberInputError = getMcFormFieldYouCanNotUseCleanerInNumberInputError;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
