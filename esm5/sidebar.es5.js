@@ -299,5 +299,5 @@ var McSidebarModule = /** @class */ (function () {
     return McSidebarModule;
 }());
 
-export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions, mcSidebarAnimations as ɵa1 };
+export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions, mcSidebarAnimations as ɵa0 };
 //# sourceMappingURL=sidebar.es5.js.map

@@ -971,13 +971,13 @@
     exports.McSidepanelPosition = McSidepanelPosition;
     exports.McSidepanelRef = McSidepanelRef;
     exports.McSidepanelService = McSidepanelService;
-    exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵb20 = mcSidepanelAnimations;
-    exports.ɵc20 = McSidepanelClose;
-    exports.ɵd20 = McSidepanelHeader;
-    exports.ɵe20 = McSidepanelBody;
-    exports.ɵf20 = McSidepanelFooter;
-    exports.ɵg20 = McSidepanelActions;
+    exports.ɵa21 = mcSidepanelTransformAnimation;
+    exports.ɵb21 = mcSidepanelAnimations;
+    exports.ɵc21 = McSidepanelClose;
+    exports.ɵd21 = McSidepanelHeader;
+    exports.ɵe21 = McSidepanelBody;
+    exports.ɵf21 = McSidepanelFooter;
+    exports.ɵg21 = McSidepanelActions;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
