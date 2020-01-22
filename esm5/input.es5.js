@@ -6,7 +6,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { InjectionToken, Directive, ElementRef, Attribute, Input, Optional, Self, Inject, forwardRef, NgModule } from '@angular/core';
-import { NgModel, NG_VALIDATORS, NgControl, NgForm, FormGroupDirective, Validators, FormsModule } from '@angular/forms';
+import { NgModel, NG_VALIDATORS, NgControl, FormControlName, NgForm, FormGroupDirective, Validators, FormsModule } from '@angular/forms';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinErrorState, setMosaicValidation, MC_VALIDATION, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
 import { __extends } from 'tslib';
@@ -414,11 +414,13 @@ var McNumberInput = /** @class */ (function () {
 var McInput = /** @class */ (function (_super) {
     __extends(McInput, _super);
     // tslint:disable-next-line: naming-convention
-    function McInput(elementRef, rawValidators, mcValidation, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+    function McInput(elementRef, rawValidators, mcValidation, ngControl, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
         var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this.elementRef = elementRef;
         _this.rawValidators = rawValidators;
         _this.mcValidation = mcValidation;
+        _this.ngModel = ngModel;
+        _this.formControlName = formControlName;
         /**
          * Implemented as part of McFormFieldControl.
          * \@docs-private
@@ -603,7 +605,7 @@ var McInput = /** @class */ (function (_super) {
             return;
         }
         if (this.mcValidation.useValidation) {
-            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            setMosaicValidation(this);
         }
     };
     /**
@@ -822,6 +824,8 @@ var McInput = /** @class */ (function (_super) {
         { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] }] },
         { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_VALIDATION,] }] },
         { type: NgControl, decorators: [{ type: Optional }, { type: Self }] },
+        { type: NgModel, decorators: [{ type: Optional }, { type: Self }] },
+        { type: FormControlName, decorators: [{ type: Optional }, { type: Self }] },
         { type: NgForm, decorators: [{ type: Optional }] },
         { type: FormGroupDirective, decorators: [{ type: Optional }] },
         { type: ErrorStateMatcher },

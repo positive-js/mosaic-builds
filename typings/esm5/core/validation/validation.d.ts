@@ -4,14 +4,11 @@ export interface McValidationOptions {
     useValidation: boolean;
 }
 export declare const MC_VALIDATION: InjectionToken<McValidationOptions>;
-export declare enum ControlTypes {
-    FormControl = "FormControlDirective",
-    FormControlName = "FormControlName",
-    ModelControl = "NgModel"
-}
 /** This function do next:
  * - run validation on submitting parent form
  * - prevent validation in required validator if form doesn't submitted
- * - if control focused and untouched validation will be prevented
+ * - if control focused validation will be prevented
  */
-export declare function setMosaicValidation(validators: Validator[], parentForm: NgForm, ngControl: NgControl): void;
+export declare function setMosaicValidation(component: any): void;
+export declare function setMosaicValidationForModelControl(component: any, validators: Validator[], parentForm: NgForm): void;
+export declare function setMosaicValidationForFormControl(component: any, parentForm: NgForm, ngControl: NgControl): void;

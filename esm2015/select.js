@@ -14,7 +14,7 @@ import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl } from '@angular/forms';
+import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { ESCAPE, HOME, END, PAGE_UP, PAGE_DOWN, ENTER, SPACE, A, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McInput } from '@ptsecurity/mosaic/input';
@@ -160,11 +160,13 @@ class McSelect extends McSelectMixinBase {
      * @param {?} parentFormGroup
      * @param {?} _parentFormField
      * @param {?} ngControl
+     * @param {?} ngModel
+     * @param {?} formControlName
      * @param {?} tabIndex
      * @param {?} _scrollStrategyFactory
      * @param {?} mcValidation
      */
-    constructor(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, tabIndex, _scrollStrategyFactory, mcValidation) {
+    constructor(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, ngModel, formControlName, tabIndex, _scrollStrategyFactory, mcValidation) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         this._viewportRuler = _viewportRuler;
         this._changeDetectorRef = _changeDetectorRef;
@@ -173,6 +175,8 @@ class McSelect extends McSelectMixinBase {
         this.rawValidators = rawValidators;
         this._dir = _dir;
         this._parentFormField = _parentFormField;
+        this.ngModel = ngModel;
+        this.formControlName = formControlName;
         this._scrollStrategyFactory = _scrollStrategyFactory;
         this.mcValidation = mcValidation;
         /**
@@ -502,7 +506,7 @@ class McSelect extends McSelectMixinBase {
      */
     ngAfterContentInit() {
         if (this.mcValidation.useValidation) {
-            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            setMosaicValidation(this);
         }
         this.initKeyManager();
         this.selectionModel.changed
@@ -1427,6 +1431,8 @@ McSelect.ctorParameters = () => [
     { type: FormGroupDirective, decorators: [{ type: Optional }] },
     { type: McFormField, decorators: [{ type: Optional }] },
     { type: NgControl, decorators: [{ type: Self }, { type: Optional }] },
+    { type: NgModel, decorators: [{ type: Optional }, { type: Self }] },
+    { type: FormControlName, decorators: [{ type: Optional }, { type: Self }] },
     { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
     { type: undefined, decorators: [{ type: Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_VALIDATION,] }] }

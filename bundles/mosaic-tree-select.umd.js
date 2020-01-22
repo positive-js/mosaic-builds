@@ -83,18 +83,19 @@
     var McTreeSelectMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(core$1.mixinErrorState(McTreeSelectBase)));
     var McTreeSelect = /** @class */ (function (_super) {
         __extends(McTreeSelect, _super);
-        function McTreeSelect(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, tabIndex, rawValidators, mcValidation, scrollStrategyFactory, dir, parentForm, parentFormGroup, parentFormField, ngControl) {
+        function McTreeSelect(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, tabIndex, scrollStrategyFactory, rawValidators, mcValidation, dir, parentForm, parentFormGroup, parentFormField, ngControl, ngModel, formControlName) {
             var _this = _super.call(this, elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
-            _this.elementRef = elementRef;
             _this.changeDetectorRef = changeDetectorRef;
             _this.viewportRuler = viewportRuler;
             _this.ngZone = ngZone;
             _this.renderer = renderer;
+            _this.scrollStrategyFactory = scrollStrategyFactory;
             _this.rawValidators = rawValidators;
             _this.mcValidation = mcValidation;
-            _this.scrollStrategyFactory = scrollStrategyFactory;
             _this.dir = dir;
             _this.parentFormField = parentFormField;
+            _this.ngModel = ngModel;
+            _this.formControlName = formControlName;
             /**
              * A name for this control that can be used by `mc-form-field`.
              */
@@ -479,7 +480,7 @@
                 return;
             }
             if (this.mcValidation.useValidation) {
-                core$1.setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+                core$1.setMosaicValidation(this);
             }
             this.tree.resetFocusedItemOnBlur = false;
             this.selectionModel = this.tree.selectionModel = new collections.SelectionModel(this.multiple);
@@ -1487,14 +1488,16 @@
             { type: core.Renderer2 },
             { type: core$1.ErrorStateMatcher },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
+            { type: undefined, decorators: [{ type: core.Inject, args: [core$1.MC_SELECT_SCROLL_STRATEGY,] }] },
             { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
-            { type: undefined, decorators: [{ type: core.Inject, args: [core$1.MC_SELECT_SCROLL_STRATEGY,] }] },
             { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
             { type: formField.McFormField, decorators: [{ type: core.Optional }] },
-            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] }
+            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] }
         ]; };
         McTreeSelect.propDecorators = {
             trigger: [{ type: core.ViewChild, args: ['trigger', { static: false },] }],

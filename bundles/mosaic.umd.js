@@ -1785,25 +1785,6 @@
          * @return {?}
          */
         function () { return ({ useValidation: true }); }) });
-    /** @enum {string} */
-    var ControlTypes = {
-        FormControl: 'FormControlDirective',
-        FormControlName: 'FormControlName',
-        ModelControl: 'NgModel',
-    };
-    /**
-     * @param {?} constructorName
-     * @return {?}
-     */
-    function getControlType(constructorName) {
-        if (constructorName === ControlTypes.FormControl || constructorName === ControlTypes.FormControlName) {
-            return ControlTypes.FormControl;
-        }
-        else if (constructorName === ControlTypes.ModelControl) {
-            return ControlTypes.ModelControl;
-        }
-        throw Error("Unknown constructor name: " + constructorName);
-    }
     /**
      * @param {?} control
      * @param {?} validator
@@ -1821,17 +1802,18 @@
      * This function do next:
      * - run validation on submitting parent form
      * - prevent validation in required validator if form doesn't submitted
-     * - if control focused and untouched validation will be prevented
-     * @param {?} validators
-     * @param {?} parentForm
-     * @param {?} ngControl
+     * - if control focused validation will be prevented
+     * @param {?} component
      * @return {?}
      */
-    function setMosaicValidation(validators, parentForm, ngControl) {
-        var _this = this;
+    function setMosaicValidation(component) {
+        /** @type {?} */
+        var ngControl = component.ngControl;
         if (!ngControl) {
             return;
         }
+        /** @type {?} */
+        var parentForm = component.parentForm || component.parentFormGroup;
         if (parentForm) {
             parentForm.ngSubmit.subscribe((/**
              * @return {?}
@@ -1841,68 +1823,86 @@
                 (/** @type {?} */ (ngControl.control)).updateValueAndValidity();
             }));
         }
-        if (getControlType(ngControl.constructor.name) === ControlTypes.ModelControl) {
-            if (!validators) {
-                return;
-            }
-            validators.forEach((/**
-             * @param {?} validator
-             * @return {?}
-             */
-            function (validator) {
-                // tslint:disable-next-line: no-unbound-method
-                /** @type {?} */
-                var originalValidate = validator.validate;
-                if (validator instanceof forms.RequiredValidator) {
-                    // changed required validation logic
-                    validator.validate = (/**
-                     * @param {?} control
-                     * @return {?}
-                     */
-                    function (control) {
-                        if (parentForm && !parentForm.submitted) {
-                            return null;
-                        }
-                        return originalValidate.call(validator, control);
-                    });
-                }
-                else {
-                    // changed all other validation logic
-                    validator.validate = (/**
-                     * @param {?} control
-                     * @return {?}
-                     */
-                    function (control) {
-                        if (_this.focused) {
-                            return null;
-                        }
-                        return originalValidate.call(validator, control);
-                    });
-                }
-            }));
+        if (component.ngModel) {
+            setMosaicValidationForModelControl(component, component.rawValidators, parentForm);
         }
-        else if (getControlType(ngControl.constructor.name) === ControlTypes.FormControl) {
+        else if (component.formControlName) {
+            setMosaicValidationForFormControl(component, parentForm, ngControl);
+        }
+    }
+    /**
+     * @param {?} component
+     * @param {?} validators
+     * @param {?} parentForm
+     * @return {?}
+     */
+    function setMosaicValidationForModelControl(component, validators, parentForm) {
+        if (!validators) {
+            return;
+        }
+        validators.forEach((/**
+         * @param {?} validator
+         * @return {?}
+         */
+        function (validator) {
+            // tslint:disable-next-line: no-unbound-method
             /** @type {?} */
-            var originalValidator_1 = (/** @type {?} */ (ngControl.control)).validator;
-            // changed required validation logic after initialization
-            if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
-                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
-            }
-            // check dynamic updates
-            (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**
-             * @return {?}
-             */
-            function () {
+            var originalValidate = validator.validate;
+            if (validator instanceof forms.RequiredValidator) {
                 // changed required validation logic
-                if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
-                    setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
-                }
+                validator.validate = (/**
+                 * @param {?} control
+                 * @return {?}
+                 */
+                function (control) {
+                    if (parentForm && !parentForm.submitted) {
+                        return null;
+                    }
+                    return originalValidate.call(validator, control);
+                });
+            }
+            else {
                 // changed all other validation logic
-                if (ngControl.invalid && _this.focused) {
-                    setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
-                }
-            }));
+                validator.validate = (/**
+                 * @param {?} control
+                 * @return {?}
+                 */
+                function (control) {
+                    if (component.focused) {
+                        return null;
+                    }
+                    return originalValidate.call(validator, control);
+                });
+            }
+        }));
+    }
+    /**
+     * @param {?} component
+     * @param {?} parentForm
+     * @param {?} ngControl
+     * @return {?}
+     */
+    function setMosaicValidationForFormControl(component, parentForm, ngControl) {
+        /** @type {?} */
+        var originalValidator = (/** @type {?} */ (ngControl.control)).validator;
+        // changed required validation logic after initialization
+        if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
+            setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
         }
+        // check dynamic updates
+        (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**
+         * @return {?}
+         */
+        function () {
+            // changed required validation logic
+            if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
+                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
+            }
+            // changed all other validation logic
+            if (ngControl.invalid && component.focused) {
+                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
+            }
+        }));
     }
 
     /**
@@ -5870,11 +5870,13 @@
     var McInput = /** @class */ (function (_super) {
         __extends(McInput, _super);
         // tslint:disable-next-line: naming-convention
-        function McInput(elementRef, rawValidators, mcValidation, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        function McInput(elementRef, rawValidators, mcValidation, ngControl, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.rawValidators = rawValidators;
             _this.mcValidation = mcValidation;
+            _this.ngModel = ngModel;
+            _this.formControlName = formControlName;
             /**
              * Implemented as part of McFormFieldControl.
              * \@docs-private
@@ -6059,7 +6061,7 @@
                 return;
             }
             if (this.mcValidation.useValidation) {
-                setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+                setMosaicValidation(this);
             }
         };
         /**
@@ -6278,6 +6280,8 @@
             { type: Array, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_VALIDATION,] }] },
             { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
             { type: ErrorStateMatcher },
@@ -22135,13 +22139,15 @@
     }());
     var McTagList = /** @class */ (function (_super) {
         __extends(McTagList, _super);
-        function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl) {
+        function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl, ngModel, formControlName) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.changeDetectorRef = changeDetectorRef;
             _this.rawValidators = rawValidators;
             _this.mcValidation = mcValidation;
             _this.dir = dir;
+            _this.ngModel = ngModel;
+            _this.formControlName = formControlName;
             _this.controlType = 'mc-tag-list';
             /**
              * Event that emits whenever the raw value of the tag-list changes. This is here primarily
@@ -22543,7 +22549,7 @@
         function () {
             var _this = this;
             if (this.mcValidation.useValidation) {
-                setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+                setMosaicValidation(this);
             }
             this.keyManager = new a11y.FocusKeyManager(this.tags)
                 .withVerticalOrientation()
@@ -23416,7 +23422,9 @@
             { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
-            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] }
+            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] }
         ]; };
         McTagList.propDecorators = {
             multiple: [{ type: core.Input }],
@@ -23921,7 +23929,7 @@
     }());
     var McSelect = /** @class */ (function (_super) {
         __extends(McSelect, _super);
-        function McSelect(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, tabIndex, _scrollStrategyFactory, mcValidation) {
+        function McSelect(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, ngModel, formControlName, tabIndex, _scrollStrategyFactory, mcValidation) {
             var _this = _super.call(this, elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this._viewportRuler = _viewportRuler;
             _this._changeDetectorRef = _changeDetectorRef;
@@ -23930,6 +23938,8 @@
             _this.rawValidators = rawValidators;
             _this._dir = _dir;
             _this._parentFormField = _parentFormField;
+            _this.ngModel = ngModel;
+            _this.formControlName = formControlName;
             _this._scrollStrategyFactory = _scrollStrategyFactory;
             _this.mcValidation = mcValidation;
             /**
@@ -24319,7 +24329,7 @@
         function () {
             var _this = this;
             if (this.mcValidation.useValidation) {
-                setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+                setMosaicValidation(this);
             }
             this.initKeyManager();
             this.selectionModel.changed
@@ -25548,6 +25558,8 @@
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
             { type: McFormField, decorators: [{ type: core.Optional }] },
             { type: forms.NgControl, decorators: [{ type: core.Self }, { type: core.Optional }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
             { type: undefined, decorators: [{ type: core.Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_VALIDATION,] }] }
@@ -25664,18 +25676,19 @@
     var McTreeSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McTreeSelectBase)));
     var McTreeSelect = /** @class */ (function (_super) {
         __extends(McTreeSelect, _super);
-        function McTreeSelect(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, tabIndex, rawValidators, mcValidation, scrollStrategyFactory, dir, parentForm, parentFormGroup, parentFormField, ngControl) {
+        function McTreeSelect(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, tabIndex, scrollStrategyFactory, rawValidators, mcValidation, dir, parentForm, parentFormGroup, parentFormField, ngControl, ngModel, formControlName) {
             var _this = _super.call(this, elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
-            _this.elementRef = elementRef;
             _this.changeDetectorRef = changeDetectorRef;
             _this.viewportRuler = viewportRuler;
             _this.ngZone = ngZone;
             _this.renderer = renderer;
+            _this.scrollStrategyFactory = scrollStrategyFactory;
             _this.rawValidators = rawValidators;
             _this.mcValidation = mcValidation;
-            _this.scrollStrategyFactory = scrollStrategyFactory;
             _this.dir = dir;
             _this.parentFormField = parentFormField;
+            _this.ngModel = ngModel;
+            _this.formControlName = formControlName;
             /**
              * A name for this control that can be used by `mc-form-field`.
              */
@@ -26060,7 +26073,7 @@
                 return;
             }
             if (this.mcValidation.useValidation) {
-                setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+                setMosaicValidation(this);
             }
             this.tree.resetFocusedItemOnBlur = false;
             this.selectionModel = this.tree.selectionModel = new collections.SelectionModel(this.multiple);
@@ -27068,14 +27081,16 @@
             { type: core.Renderer2 },
             { type: ErrorStateMatcher },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
+            { type: undefined, decorators: [{ type: core.Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] },
             { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_VALIDATION,] }] },
-            { type: undefined, decorators: [{ type: core.Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] },
             { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
             { type: McFormField, decorators: [{ type: core.Optional }] },
-            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] }
+            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] }
         ]; };
         McTreeSelect.propDecorators = {
             trigger: [{ type: core.ViewChild, args: ['trigger', { static: false },] }],
@@ -32142,7 +32157,6 @@
     exports.AUTOCOMPLETE_PANEL_HEIGHT = AUTOCOMPLETE_PANEL_HEIGHT;
     exports.AnimationCurves = AnimationCurves;
     exports.BIG_STEP = BIG_STEP;
-    exports.ControlTypes = ControlTypes;
     exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
     exports.DEFAULT_MC_LOCALE_ID = DEFAULT_MC_LOCALE_ID;
     exports.DEFAULT_TIME_FORMAT = DEFAULT_TIME_FORMAT;
@@ -32473,6 +32487,8 @@
     exports.mixinTabIndex = mixinTabIndex;
     exports.selectEvents = selectEvents;
     exports.setMosaicValidation = setMosaicValidation;
+    exports.setMosaicValidationForFormControl = setMosaicValidationForFormControl;
+    exports.setMosaicValidationForModelControl = setMosaicValidationForModelControl;
     exports.stepDown = stepDown;
     exports.stepUp = stepUp;
     exports.throwMcDropdownInvalidPositionX = throwMcDropdownInvalidPositionX;
@@ -32483,31 +32499,31 @@
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
     exports.ɵa15 = McTabHeaderBase;
+    exports.ɵa19 = mcSidepanelTransformAnimation;
     exports.ɵa2 = mcSidebarAnimations;
-    exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa24 = toggleVerticalNavbarAnimation;
+    exports.ɵa22 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
-    exports.ɵa28 = McModalControlService;
+    exports.ɵa27 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
     exports.ɵb15 = McTabLabelWrapperBase;
-    exports.ɵb20 = mcSidepanelAnimations;
+    exports.ɵb19 = mcSidepanelAnimations;
     exports.ɵb25 = MinValidator;
-    exports.ɵb28 = McModalTitle;
+    exports.ɵb27 = McModalTitle;
     exports.ɵc15 = McTabLabelWrapperMixinBase;
-    exports.ɵc20 = McSidepanelClose;
+    exports.ɵc19 = McSidepanelClose;
     exports.ɵc25 = MAX_VALIDATOR;
-    exports.ɵc28 = McModalBody;
+    exports.ɵc27 = McModalBody;
     exports.ɵd15 = McTabBase;
-    exports.ɵd20 = McSidepanelHeader;
+    exports.ɵd19 = McSidepanelHeader;
     exports.ɵd25 = MaxValidator;
-    exports.ɵd28 = McModalFooter;
+    exports.ɵd27 = McModalFooter;
     exports.ɵe15 = McTabMixinBase;
-    exports.ɵe20 = McSidepanelBody;
-    exports.ɵe28 = CssUnitPipe;
+    exports.ɵe19 = McSidepanelBody;
+    exports.ɵe27 = CssUnitPipe;
     exports.ɵf15 = McTabNavBase;
-    exports.ɵf20 = McSidepanelFooter;
+    exports.ɵf19 = McSidepanelFooter;
     exports.ɵg15 = McTabNavMixinBase;
-    exports.ɵg20 = McSidepanelActions;
+    exports.ɵg19 = McSidepanelActions;
     exports.ɵh15 = McTabLinkBase;
     exports.ɵi15 = McTabLinkMixinBase;
 

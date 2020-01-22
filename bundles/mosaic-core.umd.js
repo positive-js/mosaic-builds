@@ -1785,25 +1785,6 @@
          * @return {?}
          */
         function () { return ({ useValidation: true }); }) });
-    /** @enum {string} */
-    var ControlTypes = {
-        FormControl: 'FormControlDirective',
-        FormControlName: 'FormControlName',
-        ModelControl: 'NgModel',
-    };
-    /**
-     * @param {?} constructorName
-     * @return {?}
-     */
-    function getControlType(constructorName) {
-        if (constructorName === ControlTypes.FormControl || constructorName === ControlTypes.FormControlName) {
-            return ControlTypes.FormControl;
-        }
-        else if (constructorName === ControlTypes.ModelControl) {
-            return ControlTypes.ModelControl;
-        }
-        throw Error("Unknown constructor name: " + constructorName);
-    }
     /**
      * @param {?} control
      * @param {?} validator
@@ -1821,17 +1802,18 @@
      * This function do next:
      * - run validation on submitting parent form
      * - prevent validation in required validator if form doesn't submitted
-     * - if control focused and untouched validation will be prevented
-     * @param {?} validators
-     * @param {?} parentForm
-     * @param {?} ngControl
+     * - if control focused validation will be prevented
+     * @param {?} component
      * @return {?}
      */
-    function setMosaicValidation(validators, parentForm, ngControl) {
-        var _this = this;
+    function setMosaicValidation(component) {
+        /** @type {?} */
+        var ngControl = component.ngControl;
         if (!ngControl) {
             return;
         }
+        /** @type {?} */
+        var parentForm = component.parentForm || component.parentFormGroup;
         if (parentForm) {
             parentForm.ngSubmit.subscribe((/**
              * @return {?}
@@ -1841,72 +1823,89 @@
                 (/** @type {?} */ (ngControl.control)).updateValueAndValidity();
             }));
         }
-        if (getControlType(ngControl.constructor.name) === ControlTypes.ModelControl) {
-            if (!validators) {
-                return;
-            }
-            validators.forEach((/**
-             * @param {?} validator
-             * @return {?}
-             */
-            function (validator) {
-                // tslint:disable-next-line: no-unbound-method
-                /** @type {?} */
-                var originalValidate = validator.validate;
-                if (validator instanceof forms.RequiredValidator) {
-                    // changed required validation logic
-                    validator.validate = (/**
-                     * @param {?} control
-                     * @return {?}
-                     */
-                    function (control) {
-                        if (parentForm && !parentForm.submitted) {
-                            return null;
-                        }
-                        return originalValidate.call(validator, control);
-                    });
-                }
-                else {
-                    // changed all other validation logic
-                    validator.validate = (/**
-                     * @param {?} control
-                     * @return {?}
-                     */
-                    function (control) {
-                        if (_this.focused) {
-                            return null;
-                        }
-                        return originalValidate.call(validator, control);
-                    });
-                }
-            }));
+        if (component.ngModel) {
+            setMosaicValidationForModelControl(component, component.rawValidators, parentForm);
         }
-        else if (getControlType(ngControl.constructor.name) === ControlTypes.FormControl) {
+        else if (component.formControlName) {
+            setMosaicValidationForFormControl(component, parentForm, ngControl);
+        }
+    }
+    /**
+     * @param {?} component
+     * @param {?} validators
+     * @param {?} parentForm
+     * @return {?}
+     */
+    function setMosaicValidationForModelControl(component, validators, parentForm) {
+        if (!validators) {
+            return;
+        }
+        validators.forEach((/**
+         * @param {?} validator
+         * @return {?}
+         */
+        function (validator) {
+            // tslint:disable-next-line: no-unbound-method
             /** @type {?} */
-            var originalValidator_1 = (/** @type {?} */ (ngControl.control)).validator;
-            // changed required validation logic after initialization
-            if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
-                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
-            }
-            // check dynamic updates
-            (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**
-             * @return {?}
-             */
-            function () {
+            var originalValidate = validator.validate;
+            if (validator instanceof forms.RequiredValidator) {
                 // changed required validation logic
-                if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
-                    setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
-                }
+                validator.validate = (/**
+                 * @param {?} control
+                 * @return {?}
+                 */
+                function (control) {
+                    if (parentForm && !parentForm.submitted) {
+                        return null;
+                    }
+                    return originalValidate.call(validator, control);
+                });
+            }
+            else {
                 // changed all other validation logic
-                if (ngControl.invalid && _this.focused) {
-                    setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator_1)));
-                }
-            }));
+                validator.validate = (/**
+                 * @param {?} control
+                 * @return {?}
+                 */
+                function (control) {
+                    if (component.focused) {
+                        return null;
+                    }
+                    return originalValidate.call(validator, control);
+                });
+            }
+        }));
+    }
+    /**
+     * @param {?} component
+     * @param {?} parentForm
+     * @param {?} ngControl
+     * @return {?}
+     */
+    function setMosaicValidationForFormControl(component, parentForm, ngControl) {
+        /** @type {?} */
+        var originalValidator = (/** @type {?} */ (ngControl.control)).validator;
+        // changed required validation logic after initialization
+        if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
+            setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
         }
+        // check dynamic updates
+        (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**
+         * @return {?}
+         */
+        function () {
+            // changed required validation logic
+            if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
+                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
+            }
+            // changed all other validation logic
+            if (ngControl.invalid && component.focused) {
+                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
+            }
+        }));
     }
 
     exports.AnimationCurves = AnimationCurves;
-    exports.ControlTypes = ControlTypes;
     exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
     exports.DEFAULT_MC_LOCALE_ID = DEFAULT_MC_LOCALE_ID;
     exports.EXTENDED_OVERLAY_POSITIONS = EXTENDED_OVERLAY_POSITIONS;
@@ -1960,6 +1959,8 @@
     exports.mixinTabIndex = mixinTabIndex;
     exports.selectEvents = selectEvents;
     exports.setMosaicValidation = setMosaicValidation;
+    exports.setMosaicValidationForFormControl = setMosaicValidationForFormControl;
+    exports.setMosaicValidationForModelControl = setMosaicValidationForModelControl;
     exports.toBoolean = toBoolean;
     exports.ɵa3 = mcSanityChecksFactory;
 

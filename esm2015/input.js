@@ -6,7 +6,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { InjectionToken, Directive, ElementRef, Attribute, Input, Optional, Self, Inject, forwardRef, NgModule } from '@angular/core';
-import { NgModel, NG_VALIDATORS, NgControl, NgForm, FormGroupDirective, Validators, FormsModule } from '@angular/forms';
+import { NgModel, NG_VALIDATORS, NgControl, FormControlName, NgForm, FormGroupDirective, Validators, FormsModule } from '@angular/forms';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinErrorState, setMosaicValidation, MC_VALIDATION, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -387,16 +387,20 @@ class McInput extends McInputMixinBase {
      * @param {?} rawValidators
      * @param {?} mcValidation
      * @param {?} ngControl
+     * @param {?} ngModel
+     * @param {?} formControlName
      * @param {?} parentForm
      * @param {?} parentFormGroup
      * @param {?} defaultErrorStateMatcher
      * @param {?} inputValueAccessor
      */
-    constructor(elementRef, rawValidators, mcValidation, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+    constructor(elementRef, rawValidators, mcValidation, ngControl, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         this.elementRef = elementRef;
         this.rawValidators = rawValidators;
         this.mcValidation = mcValidation;
+        this.ngModel = ngModel;
+        this.formControlName = formControlName;
         /**
          * Implemented as part of McFormFieldControl.
          * \@docs-private
@@ -538,7 +542,7 @@ class McInput extends McInputMixinBase {
             return;
         }
         if (this.mcValidation.useValidation) {
-            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            setMosaicValidation(this);
         }
     }
     /**
@@ -691,6 +695,8 @@ McInput.ctorParameters = () => [
     { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] }] },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_VALIDATION,] }] },
     { type: NgControl, decorators: [{ type: Optional }, { type: Self }] },
+    { type: NgModel, decorators: [{ type: Optional }, { type: Self }] },
+    { type: FormControlName, decorators: [{ type: Optional }, { type: Self }] },
     { type: NgForm, decorators: [{ type: Optional }] },
     { type: FormGroupDirective, decorators: [{ type: Optional }] },
     { type: ErrorStateMatcher },

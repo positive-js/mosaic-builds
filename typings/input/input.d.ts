@@ -1,6 +1,6 @@
 import { Platform } from '@angular/cdk/platform';
 import { AfterContentInit, DoCheck, ElementRef, OnChanges, OnDestroy } from '@angular/core';
-import { FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
+import { FormControlName, FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, McValidationOptions } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl, McFormFieldNumberControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
@@ -59,8 +59,10 @@ export declare class McNumberInput implements McFormFieldNumberControl<any> {
 }
 export declare class McInput extends McInputMixinBase implements McFormFieldControl<any>, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState, AfterContentInit, OnChanges {
     protected elementRef: ElementRef;
-    private rawValidators;
+    rawValidators: Validator[];
     private mcValidation;
+    ngModel: NgModel;
+    formControlName: FormControlName;
     /** An object used to control when error messages are shown. */
     errorStateMatcher: ErrorStateMatcher;
     /**
@@ -113,7 +115,7 @@ export declare class McInput extends McInputMixinBase implements McFormFieldCont
      */
     value: string;
     private _inputValueAccessor;
-    constructor(elementRef: ElementRef, rawValidators: Validator[], mcValidation: McValidationOptions, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any);
+    constructor(elementRef: ElementRef, rawValidators: Validator[], mcValidation: McValidationOptions, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any);
     ngAfterContentInit(): void;
     ngOnChanges(): void;
     ngOnDestroy(): void;

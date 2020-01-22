@@ -2,7 +2,7 @@ import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CdkConnectedOverlay, ViewportRuler } from '@angular/cdk/overlay';
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, NgZone, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm, Validator } from '@angular/forms';
+import { ControlValueAccessor, FormControlName, FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import { CanDisable, CanUpdateErrorState, ErrorStateMatcher, HasTabIndex, CanDisableCtor, HasTabIndexCtor, CanUpdateErrorStateCtor, McValidationOptions } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTag } from '@ptsecurity/mosaic/tags';
@@ -27,16 +27,17 @@ declare class McTreeSelectBase {
 }
 declare const McTreeSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor & typeof McTreeSelectBase;
 export declare class McTreeSelect extends McTreeSelectMixinBase implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable, HasTabIndex, McFormFieldControl<McTreeOption>, CanUpdateErrorState {
-    elementRef: ElementRef;
     readonly changeDetectorRef: ChangeDetectorRef;
     private readonly viewportRuler;
     private readonly ngZone;
     private readonly renderer;
-    private rawValidators;
-    private mcValidation;
     private readonly scrollStrategyFactory;
+    rawValidators: Validator[];
+    private mcValidation;
     private readonly dir;
     private readonly parentFormField;
+    ngModel: NgModel;
+    formControlName: FormControlName;
     /** A name for this control that can be used by `mc-form-field`. */
     controlType: string;
     hiddenItems: number;
@@ -146,7 +147,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     /** Emits whenever the component is destroyed. */
     private readonly destroy;
     private tempValues;
-    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, viewportRuler: ViewportRuler, ngZone: NgZone, renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, tabIndex: string, rawValidators: Validator[], mcValidation: McValidationOptions, scrollStrategyFactory: any, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, parentFormField: McFormField, ngControl: NgControl);
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, viewportRuler: ViewportRuler, ngZone: NgZone, renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, tabIndex: string, scrollStrategyFactory: any, rawValidators: Validator[], mcValidation: McValidationOptions, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, parentFormField: McFormField, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngAfterViewInit(): void;

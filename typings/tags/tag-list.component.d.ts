@@ -1,7 +1,7 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm, Validator } from '@angular/forms';
+import { ControlValueAccessor, FormControlName, FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, McValidationOptions } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -25,9 +25,11 @@ export declare class McTagListChange {
 export declare class McTagList extends McTagListMixinBase implements McFormFieldControl<any>, ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
     protected elementRef: ElementRef<HTMLElement>;
     private changeDetectorRef;
-    private rawValidators;
+    rawValidators: Validator[];
     private mcValidation;
     private dir;
+    ngModel: NgModel;
+    formControlName: FormControlName;
     readonly controlType: string;
     /** Combined stream of all of the child tags' selection change events. */
     readonly tagSelectionChanges: Observable<McTagSelectionChange>;
@@ -140,7 +142,7 @@ export declare class McTagList extends McTagListMixinBase implements McFormField
     private tagSelectionSubscription;
     /** Subscription to remove changes in tags. */
     private tagRemoveSubscription;
-    constructor(elementRef: ElementRef<HTMLElement>, changeDetectorRef: ChangeDetectorRef, defaultErrorStateMatcher: ErrorStateMatcher, rawValidators: Validator[], mcValidation: McValidationOptions, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
+    constructor(elementRef: ElementRef<HTMLElement>, changeDetectorRef: ChangeDetectorRef, defaultErrorStateMatcher: ErrorStateMatcher, rawValidators: Validator[], mcValidation: McValidationOptions, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName);
     ngAfterContentInit(): void;
     ngOnInit(): void;
     ngDoCheck(): void;

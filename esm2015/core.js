@@ -1484,25 +1484,6 @@ const MC_VALIDATION = new InjectionToken('McUseValidation', { factory: (/**
      * @return {?}
      */
     () => ({ useValidation: true })) });
-/** @enum {string} */
-const ControlTypes = {
-    FormControl: 'FormControlDirective',
-    FormControlName: 'FormControlName',
-    ModelControl: 'NgModel',
-};
-/**
- * @param {?} constructorName
- * @return {?}
- */
-function getControlType(constructorName) {
-    if (constructorName === ControlTypes.FormControl || constructorName === ControlTypes.FormControlName) {
-        return ControlTypes.FormControl;
-    }
-    else if (constructorName === ControlTypes.ModelControl) {
-        return ControlTypes.ModelControl;
-    }
-    throw Error(`Unknown constructor name: ${constructorName}`);
-}
 /**
  * @param {?} control
  * @param {?} validator
@@ -1520,16 +1501,18 @@ function setValidState(control, validator) {
  * This function do next:
  * - run validation on submitting parent form
  * - prevent validation in required validator if form doesn't submitted
- * - if control focused and untouched validation will be prevented
- * @param {?} validators
- * @param {?} parentForm
- * @param {?} ngControl
+ * - if control focused validation will be prevented
+ * @param {?} component
  * @return {?}
  */
-function setMosaicValidation(validators, parentForm, ngControl) {
+function setMosaicValidation(component) {
+    /** @type {?} */
+    const ngControl = component.ngControl;
     if (!ngControl) {
         return;
     }
+    /** @type {?} */
+    const parentForm = component.parentForm || component.parentFormGroup;
     if (parentForm) {
         parentForm.ngSubmit.subscribe((/**
          * @return {?}
@@ -1539,69 +1522,87 @@ function setMosaicValidation(validators, parentForm, ngControl) {
             (/** @type {?} */ (ngControl.control)).updateValueAndValidity();
         }));
     }
-    if (getControlType(ngControl.constructor.name) === ControlTypes.ModelControl) {
-        if (!validators) {
-            return;
-        }
-        validators.forEach((/**
-         * @param {?} validator
-         * @return {?}
-         */
-        (validator) => {
-            // tslint:disable-next-line: no-unbound-method
-            /** @type {?} */
-            const originalValidate = validator.validate;
-            if (validator instanceof RequiredValidator) {
-                // changed required validation logic
-                validator.validate = (/**
-                 * @param {?} control
-                 * @return {?}
-                 */
-                (control) => {
-                    if (parentForm && !parentForm.submitted) {
-                        return null;
-                    }
-                    return originalValidate.call(validator, control);
-                });
-            }
-            else {
-                // changed all other validation logic
-                validator.validate = (/**
-                 * @param {?} control
-                 * @return {?}
-                 */
-                (control) => {
-                    if (this.focused) {
-                        return null;
-                    }
-                    return originalValidate.call(validator, control);
-                });
-            }
-        }));
+    if (component.ngModel) {
+        setMosaicValidationForModelControl(component, component.rawValidators, parentForm);
     }
-    else if (getControlType(ngControl.constructor.name) === ControlTypes.FormControl) {
-        /** @type {?} */
-        const originalValidator = (/** @type {?} */ (ngControl.control)).validator;
-        // changed required validation logic after initialization
-        if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
-            setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
-        }
-        // check dynamic updates
-        (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**
-         * @return {?}
-         */
-        () => {
-            // changed required validation logic
-            if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
-                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
-            }
-            // changed all other validation logic
-            if (ngControl.invalid && this.focused) {
-                setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
-            }
-        }));
+    else if (component.formControlName) {
+        setMosaicValidationForFormControl(component, parentForm, ngControl);
     }
 }
+/**
+ * @param {?} component
+ * @param {?} validators
+ * @param {?} parentForm
+ * @return {?}
+ */
+function setMosaicValidationForModelControl(component, validators, parentForm) {
+    if (!validators) {
+        return;
+    }
+    validators.forEach((/**
+     * @param {?} validator
+     * @return {?}
+     */
+    (validator) => {
+        // tslint:disable-next-line: no-unbound-method
+        /** @type {?} */
+        const originalValidate = validator.validate;
+        if (validator instanceof RequiredValidator) {
+            // changed required validation logic
+            validator.validate = (/**
+             * @param {?} control
+             * @return {?}
+             */
+            (control) => {
+                if (parentForm && !parentForm.submitted) {
+                    return null;
+                }
+                return originalValidate.call(validator, control);
+            });
+        }
+        else {
+            // changed all other validation logic
+            validator.validate = (/**
+             * @param {?} control
+             * @return {?}
+             */
+            (control) => {
+                if (component.focused) {
+                    return null;
+                }
+                return originalValidate.call(validator, control);
+            });
+        }
+    }));
+}
+/**
+ * @param {?} component
+ * @param {?} parentForm
+ * @param {?} ngControl
+ * @return {?}
+ */
+function setMosaicValidationForFormControl(component, parentForm, ngControl) {
+    /** @type {?} */
+    const originalValidator = (/** @type {?} */ (ngControl.control)).validator;
+    // changed required validation logic after initialization
+    if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
+        setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
+    }
+    // check dynamic updates
+    (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**
+     * @return {?}
+     */
+    () => {
+        // changed required validation logic
+        if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
+            setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
+        }
+        // changed all other validation logic
+        if (ngControl.invalid && component.focused) {
+            setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
+        }
+    }));
+}
 
-export { AnimationCurves, ControlTypes, DEFAULT_4_POSITIONS, DEFAULT_MC_LOCALE_ID, EXTENDED_OVERLAY_POSITIONS, ErrorStateMatcher, MC_LABEL_GLOBAL_OPTIONS, MC_LOCALE_ID, MC_OPTION_PARENT_COMPONENT, MC_SANITY_CHECKS, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_VALIDATION, McCommonModule, McDecimalPipe, McFormattersModule, McHighlightModule, McHighlightPipe, McLine, McLineModule, McLineSetter, McMeasureScrollbarService, McOptgroup, McOptgroupBase, McOptgroupMixinBase, McOption, McOptionModule, McOptionSelectionChange, McPseudoCheckbox, McPseudoCheckboxModule, MultipleMode, NUMBER_FORMAT_REGEXP, POSITION_MAP, POSITION_TO_CSS_MAP, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, ShowOnDirtyErrorStateMatcher, ThemePalette, countGroupLabelsBeforeOption, fadeAnimation, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, getOptionScrollPosition, isBoolean, mcSelectAnimations, mcSelectScrollStrategyProviderFactory, mixinColor, mixinDisabled, mixinErrorState, mixinTabIndex, selectEvents, setMosaicValidation, toBoolean, mcSanityChecksFactory as ɵa3 };
+export { AnimationCurves, DEFAULT_4_POSITIONS, DEFAULT_MC_LOCALE_ID, EXTENDED_OVERLAY_POSITIONS, ErrorStateMatcher, MC_LABEL_GLOBAL_OPTIONS, MC_LOCALE_ID, MC_OPTION_PARENT_COMPONENT, MC_SANITY_CHECKS, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_VALIDATION, McCommonModule, McDecimalPipe, McFormattersModule, McHighlightModule, McHighlightPipe, McLine, McLineModule, McLineSetter, McMeasureScrollbarService, McOptgroup, McOptgroupBase, McOptgroupMixinBase, McOption, McOptionModule, McOptionSelectionChange, McPseudoCheckbox, McPseudoCheckboxModule, MultipleMode, NUMBER_FORMAT_REGEXP, POSITION_MAP, POSITION_TO_CSS_MAP, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, ShowOnDirtyErrorStateMatcher, ThemePalette, countGroupLabelsBeforeOption, fadeAnimation, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, getOptionScrollPosition, isBoolean, mcSelectAnimations, mcSelectScrollStrategyProviderFactory, mixinColor, mixinDisabled, mixinErrorState, mixinTabIndex, selectEvents, setMosaicValidation, setMosaicValidationForFormControl, setMosaicValidationForModelControl, toBoolean, mcSanityChecksFactory as ɵa3 };
 //# sourceMappingURL=core.js.map

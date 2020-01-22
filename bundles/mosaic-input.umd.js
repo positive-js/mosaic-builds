@@ -437,11 +437,13 @@
     var McInput = /** @class */ (function (_super) {
         __extends(McInput, _super);
         // tslint:disable-next-line: naming-convention
-        function McInput(elementRef, rawValidators, mcValidation, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        function McInput(elementRef, rawValidators, mcValidation, ngControl, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.rawValidators = rawValidators;
             _this.mcValidation = mcValidation;
+            _this.ngModel = ngModel;
+            _this.formControlName = formControlName;
             /**
              * Implemented as part of McFormFieldControl.
              * \@docs-private
@@ -626,7 +628,7 @@
                 return;
             }
             if (this.mcValidation.useValidation) {
-                core$1.setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+                core$1.setMosaicValidation(this);
             }
         };
         /**
@@ -845,6 +847,8 @@
             { type: Array, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
             { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
             { type: core$1.ErrorStateMatcher },

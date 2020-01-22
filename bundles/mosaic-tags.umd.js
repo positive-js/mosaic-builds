@@ -694,13 +694,15 @@
     }());
     var McTagList = /** @class */ (function (_super) {
         __extends(McTagList, _super);
-        function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl) {
+        function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl, ngModel, formControlName) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.changeDetectorRef = changeDetectorRef;
             _this.rawValidators = rawValidators;
             _this.mcValidation = mcValidation;
             _this.dir = dir;
+            _this.ngModel = ngModel;
+            _this.formControlName = formControlName;
             _this.controlType = 'mc-tag-list';
             /**
              * Event that emits whenever the raw value of the tag-list changes. This is here primarily
@@ -1102,7 +1104,7 @@
         function () {
             var _this = this;
             if (this.mcValidation.useValidation) {
-                core$1.setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+                core$1.setMosaicValidation(this);
             }
             this.keyManager = new a11y.FocusKeyManager(this.tags)
                 .withVerticalOrientation()
@@ -1975,7 +1977,9 @@
             { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
-            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] }
+            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] }
         ]; };
         McTagList.propDecorators = {
             multiple: [{ type: core.Input }],

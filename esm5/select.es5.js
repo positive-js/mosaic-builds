@@ -15,7 +15,7 @@ import { __extends } from 'tslib';
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl } from '@angular/forms';
+import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { ESCAPE, HOME, END, PAGE_UP, PAGE_DOWN, ENTER, SPACE, A, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McInput } from '@ptsecurity/mosaic/input';
@@ -164,7 +164,7 @@ var McSelectTrigger = /** @class */ (function () {
 }());
 var McSelect = /** @class */ (function (_super) {
     __extends(McSelect, _super);
-    function McSelect(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, tabIndex, _scrollStrategyFactory, mcValidation) {
+    function McSelect(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, ngModel, formControlName, tabIndex, _scrollStrategyFactory, mcValidation) {
         var _this = _super.call(this, elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this._viewportRuler = _viewportRuler;
         _this._changeDetectorRef = _changeDetectorRef;
@@ -173,6 +173,8 @@ var McSelect = /** @class */ (function (_super) {
         _this.rawValidators = rawValidators;
         _this._dir = _dir;
         _this._parentFormField = _parentFormField;
+        _this.ngModel = ngModel;
+        _this.formControlName = formControlName;
         _this._scrollStrategyFactory = _scrollStrategyFactory;
         _this.mcValidation = mcValidation;
         /**
@@ -562,7 +564,7 @@ var McSelect = /** @class */ (function (_super) {
     function () {
         var _this = this;
         if (this.mcValidation.useValidation) {
-            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            setMosaicValidation(this);
         }
         this.initKeyManager();
         this.selectionModel.changed
@@ -1791,6 +1793,8 @@ var McSelect = /** @class */ (function (_super) {
         { type: FormGroupDirective, decorators: [{ type: Optional }] },
         { type: McFormField, decorators: [{ type: Optional }] },
         { type: NgControl, decorators: [{ type: Self }, { type: Optional }] },
+        { type: NgModel, decorators: [{ type: Optional }, { type: Self }] },
+        { type: FormControlName, decorators: [{ type: Optional }, { type: Self }] },
         { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
         { type: undefined, decorators: [{ type: Inject, args: [MC_SELECT_SCROLL_STRATEGY,] }] },
         { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_VALIDATION,] }] }

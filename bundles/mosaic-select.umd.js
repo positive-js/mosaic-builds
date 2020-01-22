@@ -181,7 +181,7 @@
     }());
     var McSelect = /** @class */ (function (_super) {
         __extends(McSelect, _super);
-        function McSelect(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, tabIndex, _scrollStrategyFactory, mcValidation) {
+        function McSelect(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, ngModel, formControlName, tabIndex, _scrollStrategyFactory, mcValidation) {
             var _this = _super.call(this, elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this._viewportRuler = _viewportRuler;
             _this._changeDetectorRef = _changeDetectorRef;
@@ -190,6 +190,8 @@
             _this.rawValidators = rawValidators;
             _this._dir = _dir;
             _this._parentFormField = _parentFormField;
+            _this.ngModel = ngModel;
+            _this.formControlName = formControlName;
             _this._scrollStrategyFactory = _scrollStrategyFactory;
             _this.mcValidation = mcValidation;
             /**
@@ -579,7 +581,7 @@
         function () {
             var _this = this;
             if (this.mcValidation.useValidation) {
-                core$1.setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+                core$1.setMosaicValidation(this);
             }
             this.initKeyManager();
             this.selectionModel.changed
@@ -1808,6 +1810,8 @@
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
             { type: formField.McFormField, decorators: [{ type: core.Optional }] },
             { type: forms.NgControl, decorators: [{ type: core.Self }, { type: core.Optional }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
             { type: undefined, decorators: [{ type: core.Inject, args: [core$1.MC_SELECT_SCROLL_STRATEGY,] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] }

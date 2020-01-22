@@ -12,7 +12,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { __extends } from 'tslib';
 import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
-import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl } from '@angular/forms';
+import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { mixinColor, mixinDisabled, mixinErrorState, setMosaicValidation, ErrorStateMatcher, MC_VALIDATION } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -675,13 +675,15 @@ McTagListChange = /** @class */ (function () {
 }());
 var McTagList = /** @class */ (function (_super) {
     __extends(McTagList, _super);
-    function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl) {
+    function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl, ngModel, formControlName) {
         var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this.elementRef = elementRef;
         _this.changeDetectorRef = changeDetectorRef;
         _this.rawValidators = rawValidators;
         _this.mcValidation = mcValidation;
         _this.dir = dir;
+        _this.ngModel = ngModel;
+        _this.formControlName = formControlName;
         _this.controlType = 'mc-tag-list';
         /**
          * Event that emits whenever the raw value of the tag-list changes. This is here primarily
@@ -1083,7 +1085,7 @@ var McTagList = /** @class */ (function (_super) {
     function () {
         var _this = this;
         if (this.mcValidation.useValidation) {
-            setMosaicValidation.call(this, this.rawValidators, this.parentForm || this.parentFormGroup, this.ngControl);
+            setMosaicValidation(this);
         }
         this.keyManager = new FocusKeyManager(this.tags)
             .withVerticalOrientation()
@@ -1956,7 +1958,9 @@ var McTagList = /** @class */ (function (_super) {
         { type: Directionality, decorators: [{ type: Optional }] },
         { type: NgForm, decorators: [{ type: Optional }] },
         { type: FormGroupDirective, decorators: [{ type: Optional }] },
-        { type: NgControl, decorators: [{ type: Optional }, { type: Self }] }
+        { type: NgControl, decorators: [{ type: Optional }, { type: Self }] },
+        { type: NgModel, decorators: [{ type: Optional }, { type: Self }] },
+        { type: FormControlName, decorators: [{ type: Optional }, { type: Self }] }
     ]; };
     McTagList.propDecorators = {
         multiple: [{ type: Input }],
