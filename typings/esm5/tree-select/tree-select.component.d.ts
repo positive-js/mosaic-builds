@@ -226,6 +226,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     onRemoveSelectedOption(selectedOption: any, $event: any): void;
     calculateHiddenItems(): void;
     private getTotalItemsWidthInMatcher;
+    private getItemWidth;
     private handleClosedKeydown;
     private handleOpenKeydown;
     private initializeSelection;

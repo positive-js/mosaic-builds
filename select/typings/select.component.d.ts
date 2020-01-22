@@ -251,6 +251,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private getHeightOfOptionsContainer;
     private updateScrollSize;
     private getTotalItemsWidthInMatcher;
+    private getItemWidth;
     /** Handles keyboard events while the select is closed. */
     private handleClosedKeydown;
     /** Handles keyboard events when the selected is open. */

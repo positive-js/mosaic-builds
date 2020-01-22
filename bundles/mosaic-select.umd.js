@@ -1109,6 +1109,7 @@
          * @return {?}
          */
         function () {
+            var _this = this;
             if (this.empty || !this.multiple) {
                 return;
             }
@@ -1118,15 +1119,13 @@
             var totalItemsWidth = this.getTotalItemsWidthInMatcher();
             /** @type {?} */
             var totalVisibleItemsWidth = 0;
-            /** @type {?} */
-            var itemMargin = 4;
             this.tags.forEach((/**
              * @param {?} tag
              * @return {?}
              */
             function (tag) {
                 if (tag.nativeElement.offsetTop < tag.nativeElement.offsetHeight) {
-                    totalVisibleItemsWidth += tag.nativeElement.getBoundingClientRect().width + itemMargin;
+                    totalVisibleItemsWidth += _this.getItemWidth(tag.nativeElement);
                     visibleItems++;
                 }
             }));
@@ -1202,6 +1201,7 @@
          * @return {?}
          */
         function () {
+            var _this = this;
             /** @type {?} */
             var triggerClone = this.trigger.nativeElement.cloneNode(true);
             triggerClone.querySelector('.mc-select__match-hidden-text').remove();
@@ -1212,17 +1212,36 @@
             this._renderer.appendChild(this.trigger.nativeElement, triggerClone);
             /** @type {?} */
             var totalItemsWidth = 0;
-            /** @type {?} */
-            var itemMargin = 4;
             triggerClone.querySelectorAll('mc-tag').forEach((/**
              * @param {?} item
              * @return {?}
              */
             function (item) {
-                totalItemsWidth += (/** @type {?} */ (item.getBoundingClientRect().width)) + itemMargin;
+                totalItemsWidth += _this.getItemWidth(item);
             }));
             triggerClone.remove();
             return totalItemsWidth;
+        };
+        /**
+         * @private
+         * @param {?} element
+         * @return {?}
+         */
+        McSelect.prototype.getItemWidth = /**
+         * @private
+         * @param {?} element
+         * @return {?}
+         */
+        function (element) {
+            /** @type {?} */
+            var computedStyle = window.getComputedStyle(element);
+            /** @type {?} */
+            var width = parseInt((/** @type {?} */ (computedStyle.width)));
+            /** @type {?} */
+            var marginLeft = parseInt((/** @type {?} */ (computedStyle.marginLeft)));
+            /** @type {?} */
+            var marginRight = parseInt((/** @type {?} */ (computedStyle.marginRight)));
+            return width + marginLeft + marginRight;
         };
         /** Handles keyboard events while the select is closed. */
         /**

@@ -808,15 +808,13 @@ class McTreeSelect extends McTreeSelectMixinBase {
         const totalItemsWidth = this.getTotalItemsWidthInMatcher();
         /** @type {?} */
         let totalVisibleItemsWidth = 0;
-        /** @type {?} */
-        const itemMargin = 4;
         this.tags.forEach((/**
          * @param {?} tag
          * @return {?}
          */
         (tag) => {
             if (tag.nativeElement.offsetTop < tag.nativeElement.offsetHeight) {
-                totalVisibleItemsWidth += tag.nativeElement.getBoundingClientRect().width + itemMargin;
+                totalVisibleItemsWidth += this.getItemWidth(tag.nativeElement);
                 visibleItems++;
             }
         }));
@@ -864,17 +862,31 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this.renderer.appendChild(this.trigger.nativeElement, triggerClone);
         /** @type {?} */
         let totalItemsWidth = 0;
-        /** @type {?} */
-        const itemMargin = 4;
         triggerClone.querySelectorAll('mc-tag').forEach((/**
          * @param {?} item
          * @return {?}
          */
         (item) => {
-            totalItemsWidth += (/** @type {?} */ (item.getBoundingClientRect().width)) + itemMargin;
+            totalItemsWidth += this.getItemWidth(item);
         }));
         triggerClone.remove();
         return totalItemsWidth;
+    }
+    /**
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    getItemWidth(element) {
+        /** @type {?} */
+        const computedStyle = window.getComputedStyle(element);
+        /** @type {?} */
+        const width = parseInt((/** @type {?} */ (computedStyle.width)));
+        /** @type {?} */
+        const marginLeft = parseInt((/** @type {?} */ (computedStyle.marginLeft)));
+        /** @type {?} */
+        const marginRight = parseInt((/** @type {?} */ (computedStyle.marginRight)));
+        return width + marginLeft + marginRight;
     }
     /**
      * @private
