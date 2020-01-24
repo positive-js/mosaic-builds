@@ -560,7 +560,7 @@
         ErrorStateMatcher.decorators = [
             { type: core.Injectable, args: [{ providedIn: 'root' },] },
         ];
-        /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+        /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core["ɵɵdefineInjectable"]({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
         return ErrorStateMatcher;
     }());
 
@@ -695,7 +695,7 @@
         McMeasureScrollbarService.ctorParameters = function () { return [
             { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
         ]; };
-        /** @nocollapse */ McMeasureScrollbarService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core.ɵɵinject(common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
+        /** @nocollapse */ McMeasureScrollbarService.ngInjectableDef = core["ɵɵdefineInjectable"]({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core["ɵɵinject"](common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
         return McMeasureScrollbarService;
     }());
 
@@ -1752,7 +1752,7 @@
         McDecimalPipe.ctorParameters = function () { return [
             { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_LOCALE_ID,] }] }
         ]; };
-        /** @nocollapse */ McDecimalPipe.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(core.ɵɵinject(MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
+        /** @nocollapse */ McDecimalPipe.ngInjectableDef = core["ɵɵdefineInjectable"]({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(core["ɵɵinject"](MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
         return McDecimalPipe;
     }());
 

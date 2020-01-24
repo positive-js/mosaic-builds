@@ -560,7 +560,7 @@
         ErrorStateMatcher.decorators = [
             { type: core.Injectable, args: [{ providedIn: 'root' },] },
         ];
-        /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+        /** @nocollapse */ ErrorStateMatcher.ngInjectableDef = core["ɵɵdefineInjectable"]({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
         return ErrorStateMatcher;
     }());
 
@@ -695,7 +695,7 @@
         McMeasureScrollbarService.ctorParameters = function () { return [
             { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
         ]; };
-        /** @nocollapse */ McMeasureScrollbarService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core.ɵɵinject(common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
+        /** @nocollapse */ McMeasureScrollbarService.ngInjectableDef = core["ɵɵdefineInjectable"]({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core["ɵɵinject"](common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
         return McMeasureScrollbarService;
     }());
 
@@ -1752,7 +1752,7 @@
         McDecimalPipe.ctorParameters = function () { return [
             { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_LOCALE_ID,] }] }
         ]; };
-        /** @nocollapse */ McDecimalPipe.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(core.ɵɵinject(MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
+        /** @nocollapse */ McDecimalPipe.ngInjectableDef = core["ɵɵdefineInjectable"]({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(core["ɵɵinject"](MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
         return McDecimalPipe;
     }());
 
@@ -6553,7 +6553,7 @@
         McDatepickerIntl.decorators = [
             { type: core.Injectable, args: [{ providedIn: 'root' },] },
         ];
-        /** @nocollapse */ McDatepickerIntl.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
+        /** @nocollapse */ McDatepickerIntl.ngInjectableDef = core["ɵɵdefineInjectable"]({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
         return McDatepickerIntl;
     }());
 
@@ -32183,7 +32183,7 @@
      * Current version.
      * @type {?}
      */
-    var VERSION = new core.Version('8.3.0');
+    var VERSION = new core.Version('8.3.1');
 
     exports.ARROW_DOWN_KEYCODE = ARROW_DOWN_KEYCODE;
     exports.ARROW_LEFT_KEYCODE = ARROW_LEFT_KEYCODE;
@@ -32535,10 +32535,10 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa0 = mcSidebarAnimations;
     exports.ɵa15 = McTabHeaderBase;
+    exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa23 = toggleVerticalNavbarAnimation;
+    exports.ɵa24 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;

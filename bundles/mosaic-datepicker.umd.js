@@ -111,7 +111,7 @@
         McDatepickerIntl.decorators = [
             { type: core.Injectable, args: [{ providedIn: 'root' },] },
         ];
-        /** @nocollapse */ McDatepickerIntl.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
+        /** @nocollapse */ McDatepickerIntl.ngInjectableDef = core["ɵɵdefineInjectable"]({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
         return McDatepickerIntl;
     }());
 
