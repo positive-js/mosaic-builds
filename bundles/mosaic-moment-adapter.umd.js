@@ -114,29 +114,49 @@
             }
         },
         rangeTemplates: {
-            short: {
-                START_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE}, {YEAR}}}',
-                END_DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{DAY}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{SHORT_DATE}}\n                                        other{{SHORT_DATE}, {YEAR}}\n                                }}\n                        }",
-                DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{START_DATE}{DASH}{END_DATE}}\n                                other{{START_DATE}{LONG_DASH}{END_DATE}}\n                        }",
-                START_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{TIME}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{SHORT_DATE}, {TIME}}\n                                        other{{SHORT_DATE}, {YEAR}, {TIME}}\n                                }}\n                        }",
-                END_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{TIME}, {SHORT_DATE}}\n                                        other{{TIME}, {SHORT_DATE}, {YEAR}}\n                                }}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{SHORT_DATE}, {TIME}}\n                                        other{{SHORT_DATE}, {YEAR}, {TIME}}\n                                }}\n                        }",
-                DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                                other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                        }"
+            closedRange: {
+                short: {
+                    START_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE}, {YEAR}}}',
+                    END_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}}\n                                other{{SHORT_DATE}, {YEAR}}\n                        }}\n                }",
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}, {TIME}}\n                                other{{SHORT_DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{TIME}, {SHORT_DATE}}\n                                other{{TIME}, {SHORT_DATE}, {YEAR}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}, {TIME}}\n                                other{{SHORT_DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                        other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                }"
+                },
+                middle: {
+                    START_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}}\n                                other{{DATE}, {YEAR}}\n                        }}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{TIME}, {DATE}}\n                                other{{TIME}, {DATE}, {YEAR}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                        other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                }"
+                },
+                long: {
+                    START_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
+                    END_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}}\n                                other{{DATE}, {YEAR}}\n                        }}\n                }",
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, from{NBSP}{TIME}}\n                                other{{DATE}, {YEAR}, from{NBSP}{TIME}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{to{NBSP}{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME} {END_DATETIME}}\n                        other{From {START_DATETIME} to{NBSP}{END_DATETIME}}\n                }"
+                }
             },
-            middle: {
-                START_DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{DAY}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}}\n                                        other{{DATE}, {YEAR}}\n                                }}\n                        }",
-                END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
-                DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{START_DATE}{DASH}{END_DATE}}\n                                other{{START_DATE}{LONG_DASH}{END_DATE}}\n                        }",
-                START_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{TIME}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, {TIME}}\n                                        other{{DATE}, {YEAR}, {TIME}}\n                                }}\n                        }",
-                END_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{TIME}, {DATE}}\n                                        other{{TIME}, {DATE}, {YEAR}}\n                                }}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, {TIME}}\n                                        other{{DATE}, {YEAR}, {TIME}}\n                                }}\n                        }",
-                DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                                other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                        }"
-            },
-            long: {
-                START_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
-                END_DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{DAY}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}}\n                                        other{{DATE}, {YEAR}}\n                                }}\n                        }",
-                DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{START_DATE}{DASH}{END_DATE}}\n                                other{{START_DATE}{LONG_DASH}{END_DATE}}\n                        }",
-                START_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, from{NBSP}{TIME}}\n                                        other{{DATE}, {YEAR}, from{NBSP}{TIME}}\n                                }}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, {TIME}}\n                                        other{{DATE}, {YEAR}, {TIME}}\n                                }}\n                        }",
-                END_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{to{NBSP}{TIME}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, {TIME}}\n                                        other{{DATE}, {YEAR}, {TIME}}\n                                }}\n                        }",
-                DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{START_DATETIME} {END_DATETIME}}\n                                other{From {START_DATETIME} to{NBSP}{END_DATETIME}}\n                        }"
+            openedRange: {
+                short: {
+                    START_DATE: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}}\n                        other{{SHORT_DATE} {YEAR}}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
+                    DATE: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{From{NBSP}{START_DATE}}\n                        other{Until{NBSP}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}, {TIME}}\n                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                }",
+                    END_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}, {TIME}}\n                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                }",
+                    DATETIME: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{From{NBSP}{START_DATETIME}}\n                        other{Until{NBSP}{END_DATETIME}}\n                }"
+                },
+                long: {
+                    START_DATE: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}}\n                        other{{DATE} {YEAR}}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
+                    DATE: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{From{NBSP}{START_DATE}}\n                        other{Until{NBSP}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}, {TIME}}\n                        other{{DATE} {YEAR}, {TIME}}\n                }",
+                    END_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}, {TIME}}\n                        other{{DATE} {YEAR}, {TIME}}\n                }",
+                    DATETIME: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{From{NBSP}{START_DATETIME}}\n                        other{Until{NBSP}{END_DATETIME}}\n                }"
+                }
             }
         }
     };
@@ -203,29 +223,49 @@
             }
         },
         rangeTemplates: {
-            short: {
-                START_DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{DAY}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{SHORT_DATE}}\n                                        other{{SHORT_DATE} {YEAR}}\n                                }}\n                        }",
-                END_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
-                DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{START_DATE}{DASH}{END_DATE}}\n                                other{{START_DATE}{LONG_DASH}{END_DATE}}\n                        }",
-                START_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{TIME}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{SHORT_DATE}, {TIME}}\n                                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                                }}\n                        }",
-                END_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{TIME}, {SHORT_DATE}}\n                                        other{{TIME}, {SHORT_DATE} {YEAR}}\n                                }}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{SHORT_DATE}, {TIME}}\n                                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                                }}\n                        }",
-                DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                                other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                        }"
+            closedRange: {
+                short: {
+                    START_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}}\n                                other{{SHORT_DATE} {YEAR}}\n                        }}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}, {TIME}}\n                                other{{SHORT_DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{TIME}, {SHORT_DATE}}\n                                other{{TIME}, {SHORT_DATE} {YEAR}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}, {TIME}}\n                                other{{SHORT_DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                        other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                }"
+                },
+                middle: {
+                    START_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}}\n                                other{{DATE} {YEAR}}\n                        }}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{TIME}, {DATE}}\n                                other{{TIME}, {DATE} {YEAR}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                        other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                }"
+                },
+                long: {
+                    START_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}}\n                                other{{DATE} {YEAR}}\n                        }}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, \u0441{NBSP}{TIME}}\n                                other{{DATE} {YEAR}, \u0441{NBSP}{TIME}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{\u043F\u043E{NBSP}{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME} {END_DATETIME}}\n                        other{\u0421{NBSP}{START_DATETIME} \u043F\u043E{NBSP}{END_DATETIME}}\n                }"
+                }
             },
-            middle: {
-                START_DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{DAY}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}}\n                                        other{{DATE} {YEAR}}\n                                }}\n                        }",
-                END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
-                DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{START_DATE}{DASH}{END_DATE}}\n                                other{{START_DATE}{LONG_DASH}{END_DATE}}\n                        }",
-                START_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{TIME}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, {TIME}}\n                                        other{{DATE} {YEAR}, {TIME}}\n                                }}\n                        }",
-                END_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{TIME}, {DATE}}\n                                        other{{TIME}, {DATE} {YEAR}}\n                                }}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, {TIME}}\n                                        other{{DATE} {YEAR}, {TIME}}\n                                }}\n                        }",
-                DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                                other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                        }"
-            },
-            long: {
-                START_DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{DAY}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}}\n                                        other{{DATE} {YEAR}}\n                                }}\n                        }",
-                END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
-                DATE: "{\n                            SAME_MONTH,\n                            select,\n                                yes{{START_DATE}{DASH}{END_DATE}}\n                                other{{START_DATE}{LONG_DASH}{END_DATE}}\n                        }",
-                START_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, \u0441{NBSP}{TIME}}\n                                        other{{DATE} {YEAR}, \u0441{NBSP}{TIME}}\n                                }}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, {TIME}}\n                                        other{{DATE} {YEAR}, {TIME}}\n                                }}\n                        }",
-                END_DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{\u043F\u043E{NBSP}{TIME}}\n                                other{{\n                                    CURRENT_YEAR,\n                                    select,\n                                        yes{{DATE}, {TIME}}\n                                        other{{DATE} {YEAR}, {TIME}}\n                                }}\n                        }",
-                DATETIME: "{\n                            SAME_DAY,\n                            select,\n                                yes{{START_DATETIME} {END_DATETIME}}\n                                other{\u0421{NBSP}{START_DATETIME} \u043F\u043E{NBSP}{END_DATETIME}}\n                        }"
+            openedRange: {
+                short: {
+                    START_DATE: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}}\n                        other{{SHORT_DATE} {YEAR}}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
+                    DATE: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{\u0421{NBSP}{START_DATE}}\n                        other{\u041F\u043E{NBSP}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}, {TIME}}\n                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                }",
+                    END_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}, {TIME}}\n                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                }",
+                    DATETIME: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{\u0421{NBSP}{START_DATETIME}}\n                        other{\u041F\u043E{NBSP}{END_DATETIME}}\n                }"
+                },
+                long: {
+                    START_DATE: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}}\n                        other{{DATE} {YEAR}}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
+                    DATE: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{\u0421{NBSP}{START_DATE}}\n                        other{\u041F\u043E{NBSP}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}, {TIME}}\n                        other{{DATE} {YEAR}, {TIME}}\n                }",
+                    END_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}, {TIME}}\n                        other{{DATE} {YEAR}, {TIME}}\n                }",
+                    DATETIME: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{\u0421{NBSP}{START_DATETIME}}\n                        other{\u041F\u043E{NBSP}{END_DATETIME}}\n                }"
+                }
             }
         }
     };
@@ -877,6 +917,71 @@
          * @param {?} template
          * @return {?}
          */
+        MomentDateAdapter.prototype.openedRangeDate = /**
+         * @param {?} startDate
+         * @param {?} endDate
+         * @param {?} template
+         * @return {?}
+         */
+        function (startDate, endDate, template) {
+            if (!moment.isMoment(startDate) && !moment.isMoment(endDate)) {
+                throw new Error(this.invalidDateErrorText);
+            }
+            /** @type {?} */
+            var variables = __assign({}, this.formatterConfig.variables, template.variables);
+            /** @type {?} */
+            var params = {};
+            if (startDate) {
+                /** @type {?} */
+                var startDateVariables = this.compileVariables(startDate, variables);
+                params = __assign({}, variables, { START_DATE: this.messageformat.compile(template.START_DATE)(startDateVariables), RANGE_TYPE: 'onlyStart' });
+            }
+            else if (endDate) {
+                /** @type {?} */
+                var endDateVariables = this.compileVariables(endDate, variables);
+                params = __assign({}, variables, { END_DATE: this.messageformat.compile(template.END_DATE)(endDateVariables), RANGE_TYPE: 'onlyEnd' });
+            }
+            return this.messageformat.compile(template.DATE)(params);
+        };
+        /**
+         * @param {?} startDate
+         * @param {?} endDate
+         * @param {?} template
+         * @return {?}
+         */
+        MomentDateAdapter.prototype.openedRangeDateTime = /**
+         * @param {?} startDate
+         * @param {?} endDate
+         * @param {?} template
+         * @return {?}
+         */
+        function (startDate, endDate, template) {
+            console.log('openedRangeDateTime: '); // tslint:disable-line:no-console
+            if (!moment.isMoment(startDate) && !moment.isMoment(endDate)) {
+                throw new Error(this.invalidDateErrorText);
+            }
+            /** @type {?} */
+            var variables = __assign({}, this.formatterConfig.variables, template.variables);
+            /** @type {?} */
+            var params = {};
+            if (startDate) {
+                /** @type {?} */
+                var startDateVariables = this.compileVariables(startDate, variables);
+                params = __assign({}, variables, { START_DATETIME: this.messageformat.compile(template.START_DATETIME)(startDateVariables), RANGE_TYPE: 'onlyStart' });
+            }
+            else if (endDate) {
+                /** @type {?} */
+                var endDateVariables = this.compileVariables(endDate, variables);
+                params = __assign({}, variables, { END_DATETIME: this.messageformat.compile(template.END_DATETIME)(endDateVariables), RANGE_TYPE: 'onlyEnd' });
+            }
+            return this.messageformat.compile(template.DATETIME)(params);
+        };
+        /**
+         * @param {?} startDate
+         * @param {?} endDate
+         * @param {?} template
+         * @return {?}
+         */
         MomentDateAdapter.prototype.rangeDate = /**
          * @param {?} startDate
          * @param {?} endDate
@@ -947,55 +1052,75 @@
         };
         /**
          * @param {?} startDate
-         * @param {?} endDate
+         * @param {?=} endDate
          * @return {?}
          */
         MomentDateAdapter.prototype.rangeShortDate = /**
          * @param {?} startDate
-         * @param {?} endDate
+         * @param {?=} endDate
          * @return {?}
          */
         function (startDate, endDate) {
-            return this.rangeDate(startDate, endDate, this.formatterConfig.rangeTemplates.short);
+            /** @type {?} */
+            var rangeTemplates = this.formatterConfig.rangeTemplates;
+            if (startDate && endDate) {
+                return this.rangeDate(startDate, endDate, rangeTemplates.closedRange.short);
+            }
+            return this.openedRangeDate(startDate, endDate || null, rangeTemplates.openedRange.short);
         };
         /**
          * @param {?} startDate
-         * @param {?} endDate
+         * @param {?=} endDate
          * @return {?}
          */
         MomentDateAdapter.prototype.rangeShortDateTime = /**
          * @param {?} startDate
-         * @param {?} endDate
+         * @param {?=} endDate
          * @return {?}
          */
         function (startDate, endDate) {
-            return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.short);
+            /** @type {?} */
+            var rangeTemplates = this.formatterConfig.rangeTemplates;
+            if (startDate && endDate) {
+                return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.short);
+            }
+            return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.short);
         };
         /**
          * @param {?} startDate
-         * @param {?} endDate
+         * @param {?=} endDate
          * @return {?}
          */
         MomentDateAdapter.prototype.rangeLongDate = /**
          * @param {?} startDate
-         * @param {?} endDate
+         * @param {?=} endDate
          * @return {?}
          */
         function (startDate, endDate) {
-            return this.rangeDate(startDate, endDate, this.formatterConfig.rangeTemplates.long);
+            /** @type {?} */
+            var rangeTemplates = this.formatterConfig.rangeTemplates;
+            if (startDate && endDate) {
+                return this.rangeDate(startDate, endDate, rangeTemplates.closedRange.long);
+            }
+            return this.openedRangeDate(startDate, endDate || null, rangeTemplates.openedRange.long);
         };
         /**
          * @param {?} startDate
-         * @param {?} endDate
+         * @param {?=} endDate
          * @return {?}
          */
         MomentDateAdapter.prototype.rangeLongDateTime = /**
          * @param {?} startDate
-         * @param {?} endDate
+         * @param {?=} endDate
          * @return {?}
          */
         function (startDate, endDate) {
-            return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.long);
+            /** @type {?} */
+            var rangeTemplates = this.formatterConfig.rangeTemplates;
+            if (startDate && endDate) {
+                return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.long);
+            }
+            return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.long);
         };
         /**
          * @param {?} startDate
@@ -1008,7 +1133,7 @@
          * @return {?}
          */
         function (startDate, endDate) {
-            return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.middle);
+            return this.rangeDateTime(startDate, endDate, this.formatterConfig.rangeTemplates.closedRange.middle);
         };
         /** Creates a Moment instance while respecting the current UTC settings. */
         /**
