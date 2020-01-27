@@ -1025,5 +1025,5 @@ var McInputModule = /** @class */ (function () {
     return McInputModule;
 }());
 
-export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, stepDown, stepUp, MIN_VALIDATOR as ɵa25, MinValidator as ɵb25, MAX_VALIDATOR as ɵc25, MaxValidator as ɵd25 };
+export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, stepDown, stepUp, MIN_VALIDATOR as ɵa24, MinValidator as ɵb24, MAX_VALIDATOR as ɵc24, MaxValidator as ɵd24 };
 //# sourceMappingURL=input.es5.js.map
