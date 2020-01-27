@@ -159,10 +159,11 @@ var McDropdownItemMixinBase = mixinDisabled(McDropdownItemBase);
  */
 var McDropdownItem = /** @class */ (function (_super) {
     __extends(McDropdownItem, _super);
-    function McDropdownItem(_elementRef, document, _focusMonitor, _parentDropdownPanel) {
+    function McDropdownItem(_elementRef, _focusMonitor, document, _parentDropdownPanel) {
         var _this = _super.call(this) || this;
         _this._elementRef = _elementRef;
         _this._focusMonitor = _focusMonitor;
+        _this.document = document;
         _this._parentDropdownPanel = _parentDropdownPanel;
         /**
          * ARIA role for the dropdown item.
@@ -189,7 +190,6 @@ var McDropdownItem = /** @class */ (function (_super) {
         if (_parentDropdownPanel && _parentDropdownPanel.addItem) {
             _parentDropdownPanel.addItem(_this);
         }
-        _this.document = document;
         return _this;
     }
     /** Focuses the dropdown item. */
@@ -317,12 +317,11 @@ var McDropdownItem = /** @class */ (function (_super) {
                     exportAs: 'mcDropdownItem',
                     inputs: ['disabled'],
                     host: {
-                        '[attr.role]': 'role',
                         class: 'mc-dropdown__item',
                         '[class.mc-dropdown__item_highlighted]': 'highlighted',
+                        '[attr.role]': 'role',
                         '[attr.tabindex]': 'getTabIndex()',
-                        '[attr.aria-disabled]': 'disabled.toString()',
-                        '[attr.disabled]': 'disabled || null',
+                        '[class.mc-disabled]': 'disabled',
                         '(click)': 'checkDisabled($event)',
                         '(mouseenter)': 'handleMouseEnter()'
                     },
@@ -334,9 +333,9 @@ var McDropdownItem = /** @class */ (function (_super) {
     /** @nocollapse */
     McDropdownItem.ctorParameters = function () { return [
         { type: ElementRef },
-        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
         { type: FocusMonitor },
-        { type: undefined, decorators: [{ type: Inject, args: [MC_DROPDOWN_PANEL,] }, { type: Optional }] }
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DROPDOWN_PANEL,] }] }
     ]; };
     McDropdownItem.propDecorators = {
         role: [{ type: Input }],
@@ -704,7 +703,7 @@ var McDropdown = /** @class */ (function () {
     function (event) {
         // tslint:disable-next-line:deprecation
         /** @type {?} */
-        var keyCode = event.key || event.keyCode;
+        var keyCode = event.keyCode;
         switch (keyCode) {
             case ESCAPE:
                 this.closed.emit('keydown');
@@ -725,6 +724,15 @@ var McDropdown = /** @class */ (function () {
                 }
                 this.keyManager.onKeydown(event);
         }
+    };
+    /**
+     * @return {?}
+     */
+    McDropdown.prototype.handleClick = /**
+     * @return {?}
+     */
+    function () {
+        this.closed.emit('click');
     };
     /**
      * Focus the first item in the dropdown.
@@ -919,11 +927,11 @@ var McDropdown = /** @class */ (function () {
     McDropdown.decorators = [
         { type: Component, args: [{
                     selector: 'mc-dropdown',
-                    template: "<ng-template><div class=\"mc-dropdown__panel\" [ngClass]=\"classList\" (keydown)=\"handleKeydown($event)\" (click)=\"closed.emit('click')\" [@transformDropdown]=\"panelAnimationState\" (@transformDropdown.start)=\"onAnimationStart($event)\" (@transformDropdown.done)=\"onAnimationDone($event)\" tabindex=\"-1\" role=\"dropdown\"><div class=\"mc-dropdown__content\"><ng-content></ng-content></div></div></ng-template>",
-                    styles: [".mc-dropdown__item{display:flex;align-items:center;position:relative;box-sizing:border-box;width:100%;border:1px solid transparent;outline:0;padding:5px 15px;text-align:left;white-space:nowrap}.mc-dropdown__item:not([disabled]){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__trigger{margin-left:auto;padding-left:16px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
+                    exportAs: 'mcDropdown',
+                    template: "<ng-template><div class=\"mc-dropdown__panel\" [ngClass]=\"classList\" (keydown)=\"handleKeydown($event)\" (click)=\"handleClick()\" [@transformDropdown]=\"panelAnimationState\" (@transformDropdown.start)=\"onAnimationStart($event)\" (@transformDropdown.done)=\"onAnimationDone($event)\" role=\"dropdown\"><div class=\"mc-dropdown__content\"><ng-content></ng-content></div></div></ng-template>",
+                    styles: [".mc-dropdown__item{display:flex;align-items:center;position:relative;box-sizing:border-box;width:100%;border:1px solid transparent;outline:0;padding:5px 15px;text-align:left;white-space:nowrap}.mc-dropdown__item:not([disabled]):not(.mc-disabled){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__trigger{margin-left:auto;padding-left:16px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
-                    exportAs: 'mcDropdown',
                     animations: [
                         mcDropdownAnimations.transformDropdown,
                         mcDropdownAnimations.fadeInItems

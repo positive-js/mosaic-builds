@@ -10313,10 +10313,11 @@
      */
     var McDropdownItem = /** @class */ (function (_super) {
         __extends(McDropdownItem, _super);
-        function McDropdownItem(_elementRef, document, _focusMonitor, _parentDropdownPanel) {
+        function McDropdownItem(_elementRef, _focusMonitor, document, _parentDropdownPanel) {
             var _this = _super.call(this) || this;
             _this._elementRef = _elementRef;
             _this._focusMonitor = _focusMonitor;
+            _this.document = document;
             _this._parentDropdownPanel = _parentDropdownPanel;
             /**
              * ARIA role for the dropdown item.
@@ -10343,7 +10344,6 @@
             if (_parentDropdownPanel && _parentDropdownPanel.addItem) {
                 _parentDropdownPanel.addItem(_this);
             }
-            _this.document = document;
             return _this;
         }
         /** Focuses the dropdown item. */
@@ -10471,12 +10471,11 @@
                         exportAs: 'mcDropdownItem',
                         inputs: ['disabled'],
                         host: {
-                            '[attr.role]': 'role',
                             class: 'mc-dropdown__item',
                             '[class.mc-dropdown__item_highlighted]': 'highlighted',
+                            '[attr.role]': 'role',
                             '[attr.tabindex]': 'getTabIndex()',
-                            '[attr.aria-disabled]': 'disabled.toString()',
-                            '[attr.disabled]': 'disabled || null',
+                            '[class.mc-disabled]': 'disabled',
                             '(click)': 'checkDisabled($event)',
                             '(mouseenter)': 'handleMouseEnter()'
                         },
@@ -10488,9 +10487,9 @@
         /** @nocollapse */
         McDropdownItem.ctorParameters = function () { return [
             { type: core.ElementRef },
-            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
             { type: a11y.FocusMonitor },
-            { type: undefined, decorators: [{ type: core.Inject, args: [MC_DROPDOWN_PANEL,] }, { type: core.Optional }] }
+            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_DROPDOWN_PANEL,] }] }
         ]; };
         McDropdownItem.propDecorators = {
             role: [{ type: core.Input }],
@@ -10858,7 +10857,7 @@
         function (event) {
             // tslint:disable-next-line:deprecation
             /** @type {?} */
-            var keyCode = event.key || event.keyCode;
+            var keyCode = event.keyCode;
             switch (keyCode) {
                 case keycodes.ESCAPE:
                     this.closed.emit('keydown');
@@ -10879,6 +10878,15 @@
                     }
                     this.keyManager.onKeydown(event);
             }
+        };
+        /**
+         * @return {?}
+         */
+        McDropdown.prototype.handleClick = /**
+         * @return {?}
+         */
+        function () {
+            this.closed.emit('click');
         };
         /**
          * Focus the first item in the dropdown.
@@ -11073,11 +11081,11 @@
         McDropdown.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-dropdown',
-                        template: "<ng-template><div class=\"mc-dropdown__panel\" [ngClass]=\"classList\" (keydown)=\"handleKeydown($event)\" (click)=\"closed.emit('click')\" [@transformDropdown]=\"panelAnimationState\" (@transformDropdown.start)=\"onAnimationStart($event)\" (@transformDropdown.done)=\"onAnimationDone($event)\" tabindex=\"-1\" role=\"dropdown\"><div class=\"mc-dropdown__content\"><ng-content></ng-content></div></div></ng-template>",
-                        styles: [".mc-dropdown__item{display:flex;align-items:center;position:relative;box-sizing:border-box;width:100%;border:1px solid transparent;outline:0;padding:5px 15px;text-align:left;white-space:nowrap}.mc-dropdown__item:not([disabled]){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__trigger{margin-left:auto;padding-left:16px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
+                        exportAs: 'mcDropdown',
+                        template: "<ng-template><div class=\"mc-dropdown__panel\" [ngClass]=\"classList\" (keydown)=\"handleKeydown($event)\" (click)=\"handleClick()\" [@transformDropdown]=\"panelAnimationState\" (@transformDropdown.start)=\"onAnimationStart($event)\" (@transformDropdown.done)=\"onAnimationDone($event)\" role=\"dropdown\"><div class=\"mc-dropdown__content\"><ng-content></ng-content></div></div></ng-template>",
+                        styles: [".mc-dropdown__item{display:flex;align-items:center;position:relative;box-sizing:border-box;width:100%;border:1px solid transparent;outline:0;padding:5px 15px;text-align:left;white-space:nowrap}.mc-dropdown__item:not([disabled]):not(.mc-disabled){cursor:pointer}.mc-dropdown__item .mc-dropdown__item-caption{margin-top:4px}.mc-dropdown__trigger{margin-left:auto;padding-left:16px}.mc-dropdown__panel{min-width:100%;overflow:auto;margin-top:-1px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-dropdown__content h1,.mc-dropdown__content h2,.mc-dropdown__content h3,.mc-dropdown__content h4,.mc-dropdown__content h5{padding:8px 16px 4px 16px;margin:0}"],
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
                         encapsulation: core.ViewEncapsulation.None,
-                        exportAs: 'mcDropdown',
                         animations: [
                             mcDropdownAnimations.transformDropdown,
                             mcDropdownAnimations.fadeInItems
@@ -32535,34 +32543,34 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa16 = McTabHeaderBase;
-    exports.ɵa2 = mcSidebarAnimations;
+    exports.ɵa0 = mcSidebarAnimations;
+    exports.ɵa15 = McTabHeaderBase;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa24 = toggleVerticalNavbarAnimation;
+    exports.ɵa23 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
-    exports.ɵb16 = McTabLabelWrapperBase;
+    exports.ɵb15 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
     exports.ɵb25 = MinValidator;
     exports.ɵb28 = McModalTitle;
-    exports.ɵc16 = McTabLabelWrapperMixinBase;
+    exports.ɵc15 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
     exports.ɵc25 = MAX_VALIDATOR;
     exports.ɵc28 = McModalBody;
-    exports.ɵd16 = McTabBase;
+    exports.ɵd15 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
     exports.ɵd25 = MaxValidator;
     exports.ɵd28 = McModalFooter;
-    exports.ɵe16 = McTabMixinBase;
+    exports.ɵe15 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
     exports.ɵe28 = CssUnitPipe;
-    exports.ɵf16 = McTabNavBase;
+    exports.ɵf15 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
-    exports.ɵg16 = McTabNavMixinBase;
+    exports.ɵg15 = McTabNavMixinBase;
     exports.ɵg20 = McSidepanelActions;
-    exports.ɵh16 = McTabLinkBase;
-    exports.ɵi16 = McTabLinkMixinBase;
+    exports.ɵh15 = McTabLinkBase;
+    exports.ɵi15 = McTabLinkMixinBase;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

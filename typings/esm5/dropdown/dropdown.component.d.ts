@@ -97,6 +97,7 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     hovered(): Observable<McDropdownItem>;
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     handleKeydown(event: KeyboardEvent): void;
+    handleClick(): void;
     /**
      * Focus the first item in the dropdown.
      * @param origin Action from which the focus originated. Used to set the correct styling.

@@ -14,6 +14,7 @@ export declare const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdown
 export declare class McDropdownItem extends McDropdownItemMixinBase implements IFocusableOption, CanDisable, OnDestroy {
     private _elementRef;
     private _focusMonitor;
+    private document;
     private _parentDropdownPanel?;
     /** ARIA role for the dropdown item. */
     role: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox';
@@ -24,8 +25,7 @@ export declare class McDropdownItem extends McDropdownItemMixinBase implements I
     highlighted: boolean;
     /** Whether the dropdown item acts as a trigger for a nested dropdown. */
     triggersNestedDropdown: boolean;
-    private document;
-    constructor(_elementRef: ElementRef<HTMLElement>, document: any, _focusMonitor: FocusMonitor, _parentDropdownPanel?: McDropdownPanel<McDropdownItem>);
+    constructor(_elementRef: ElementRef<HTMLElement>, _focusMonitor: FocusMonitor, document: any, _parentDropdownPanel?: McDropdownPanel<McDropdownItem>);
     /** Focuses the dropdown item. */
     focus(origin?: FocusOrigin): void;
     ngOnDestroy(): void;
@@ -34,7 +34,7 @@ export declare class McDropdownItem extends McDropdownItemMixinBase implements I
     /** Returns the host DOM element. */
     getHostElement(): HTMLElement;
     /** Prevents the default element actions if it is disabled. */
-    checkDisabled(event: Event): void;
+    checkDisabled(event: MouseEvent): void;
     /** Emits to the hover stream. */
     handleMouseEnter(): void;
     /** Gets the label to be used when determining whether the option should be focused. */
