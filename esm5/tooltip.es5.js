@@ -114,9 +114,11 @@ var McTooltipComponent = /** @class */ (function () {
         function (value) {
             /** @type {?} */
             var visible = coerceBooleanProperty(value);
-            if (this._mcVisible.value !== visible) {
-                this._mcVisible.next(visible);
-                this.mcVisibleChange.emit(visible);
+            if (visible && this._mcVisible.value !== visible) {
+                this.show();
+            }
+            else {
+                this.hide();
             }
         },
         enumerable: true,
@@ -141,7 +143,7 @@ var McTooltipComponent = /** @class */ (function () {
              * @return {?}
              */
             function () {
-                _this.mcVisible = true;
+                _this._mcVisible.next(true);
                 _this.mcVisibleChange.emit(true);
                 // Mark for check so if any parent component has set the
                 // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -164,7 +166,7 @@ var McTooltipComponent = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            _this.mcVisible = false;
+            _this._mcVisible.next(false);
             _this.mcVisibleChange.emit(false);
             _this.onHideSubject.next();
             // Mark for check so if any parent component has set the
@@ -476,13 +478,15 @@ var McTooltip = /** @class */ (function () {
         function (externalValue) {
             /** @type {?} */
             var value = coerceBooleanProperty(externalValue);
-            this._mcVisible = value;
-            this.updateCompValue('mcVisible', value);
-            if (value) {
-                this.show();
-            }
-            else {
-                this.hide();
+            if (this._mcVisible !== value) {
+                this._mcVisible = value;
+                this.updateCompValue('mcVisible', value);
+                if (value) {
+                    this.show();
+                }
+                else {
+                    this.hide();
+                }
             }
         },
         enumerable: true,
@@ -781,8 +785,7 @@ var McTooltip = /** @class */ (function () {
                     'mcTooltipDisabled',
                     'mcMouseEnterDelay',
                     'mcMouseLeaveDelay',
-                    'mсTooltipClass',
-                    'mcVisible'
+                    'mсTooltipClass'
                 ];
                 properties.forEach((/**
                  * @param {?} property

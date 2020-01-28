@@ -103,9 +103,11 @@ class McTooltipComponent {
     set mcVisible(value) {
         /** @type {?} */
         const visible = coerceBooleanProperty(value);
-        if (this._mcVisible.value !== visible) {
-            this._mcVisible.next(visible);
-            this.mcVisibleChange.emit(visible);
+        if (visible && this._mcVisible.value !== visible) {
+            this.show();
+        }
+        else {
+            this.hide();
         }
     }
     /**
@@ -123,7 +125,7 @@ class McTooltipComponent {
              * @return {?}
              */
             () => {
-                this.mcVisible = true;
+                this._mcVisible.next(true);
                 this.mcVisibleChange.emit(true);
                 // Mark for check so if any parent component has set the
                 // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -142,7 +144,7 @@ class McTooltipComponent {
          * @return {?}
          */
         () => {
-            this.mcVisible = false;
+            this._mcVisible.next(false);
             this.mcVisibleChange.emit(false);
             this.onHideSubject.next();
             // Mark for check so if any parent component has set the
@@ -408,13 +410,15 @@ class McTooltip {
     set mcVisible(externalValue) {
         /** @type {?} */
         const value = coerceBooleanProperty(externalValue);
-        this._mcVisible = value;
-        this.updateCompValue('mcVisible', value);
-        if (value) {
-            this.show();
-        }
-        else {
-            this.hide();
+        if (this._mcVisible !== value) {
+            this._mcVisible = value;
+            this.updateCompValue('mcVisible', value);
+            if (value) {
+                this.show();
+            }
+            else {
+                this.hide();
+            }
         }
     }
     /**
@@ -653,8 +657,7 @@ class McTooltip {
                     'mcTooltipDisabled',
                     'mcMouseEnterDelay',
                     'mcMouseLeaveDelay',
-                    'mсTooltipClass',
-                    'mcVisible'
+                    'mсTooltipClass'
                 ];
                 properties.forEach((/**
                  * @param {?} property

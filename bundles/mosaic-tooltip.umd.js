@@ -134,9 +134,11 @@
             function (value) {
                 /** @type {?} */
                 var visible = coercion.coerceBooleanProperty(value);
-                if (this._mcVisible.value !== visible) {
-                    this._mcVisible.next(visible);
-                    this.mcVisibleChange.emit(visible);
+                if (visible && this._mcVisible.value !== visible) {
+                    this.show();
+                }
+                else {
+                    this.hide();
                 }
             },
             enumerable: true,
@@ -161,7 +163,7 @@
                  * @return {?}
                  */
                 function () {
-                    _this.mcVisible = true;
+                    _this._mcVisible.next(true);
                     _this.mcVisibleChange.emit(true);
                     // Mark for check so if any parent component has set the
                     // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -184,7 +186,7 @@
              * @return {?}
              */
             function () {
-                _this.mcVisible = false;
+                _this._mcVisible.next(false);
                 _this.mcVisibleChange.emit(false);
                 _this.onHideSubject.next();
                 // Mark for check so if any parent component has set the
@@ -496,13 +498,15 @@
             function (externalValue) {
                 /** @type {?} */
                 var value = coercion.coerceBooleanProperty(externalValue);
-                this._mcVisible = value;
-                this.updateCompValue('mcVisible', value);
-                if (value) {
-                    this.show();
-                }
-                else {
-                    this.hide();
+                if (this._mcVisible !== value) {
+                    this._mcVisible = value;
+                    this.updateCompValue('mcVisible', value);
+                    if (value) {
+                        this.show();
+                    }
+                    else {
+                        this.hide();
+                    }
                 }
             },
             enumerable: true,
@@ -801,8 +805,7 @@
                         'mcTooltipDisabled',
                         'mcMouseEnterDelay',
                         'mcMouseLeaveDelay',
-                        'mсTooltipClass',
-                        'mcVisible'
+                        'mсTooltipClass'
                     ];
                     properties.forEach((/**
                      * @param {?} property

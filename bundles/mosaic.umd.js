@@ -31066,9 +31066,11 @@
             function (value) {
                 /** @type {?} */
                 var visible = coercion.coerceBooleanProperty(value);
-                if (this._mcVisible.value !== visible) {
-                    this._mcVisible.next(visible);
-                    this.mcVisibleChange.emit(visible);
+                if (visible && this._mcVisible.value !== visible) {
+                    this.show();
+                }
+                else {
+                    this.hide();
                 }
             },
             enumerable: true,
@@ -31093,7 +31095,7 @@
                  * @return {?}
                  */
                 function () {
-                    _this.mcVisible = true;
+                    _this._mcVisible.next(true);
                     _this.mcVisibleChange.emit(true);
                     // Mark for check so if any parent component has set the
                     // ChangeDetectionStrategy to OnPush it will be checked anyways
@@ -31116,7 +31118,7 @@
              * @return {?}
              */
             function () {
-                _this.mcVisible = false;
+                _this._mcVisible.next(false);
                 _this.mcVisibleChange.emit(false);
                 _this.onHideSubject.next();
                 // Mark for check so if any parent component has set the
@@ -31428,13 +31430,15 @@
             function (externalValue) {
                 /** @type {?} */
                 var value = coercion.coerceBooleanProperty(externalValue);
-                this._mcVisible = value;
-                this.updateCompValue('mcVisible', value);
-                if (value) {
-                    this.show();
-                }
-                else {
-                    this.hide();
+                if (this._mcVisible !== value) {
+                    this._mcVisible = value;
+                    this.updateCompValue('mcVisible', value);
+                    if (value) {
+                        this.show();
+                    }
+                    else {
+                        this.hide();
+                    }
                 }
             },
             enumerable: true,
@@ -31733,8 +31737,7 @@
                         'mcTooltipDisabled',
                         'mcMouseEnterDelay',
                         'mcMouseLeaveDelay',
-                        'mсTooltipClass',
-                        'mcVisible'
+                        'mсTooltipClass'
                     ];
                     properties.forEach((/**
                      * @param {?} property
@@ -32543,34 +32546,34 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa15 = McTabHeaderBase;
+    exports.ɵa16 = McTabHeaderBase;
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa24 = MIN_VALIDATOR;
-    exports.ɵa25 = toggleVerticalNavbarAnimation;
+    exports.ɵa23 = toggleVerticalNavbarAnimation;
+    exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
-    exports.ɵb15 = McTabLabelWrapperBase;
+    exports.ɵb16 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
-    exports.ɵb24 = MinValidator;
+    exports.ɵb25 = MinValidator;
     exports.ɵb28 = McModalTitle;
-    exports.ɵc15 = McTabLabelWrapperMixinBase;
+    exports.ɵc16 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
-    exports.ɵc24 = MAX_VALIDATOR;
+    exports.ɵc25 = MAX_VALIDATOR;
     exports.ɵc28 = McModalBody;
-    exports.ɵd15 = McTabBase;
+    exports.ɵd16 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
-    exports.ɵd24 = MaxValidator;
+    exports.ɵd25 = MaxValidator;
     exports.ɵd28 = McModalFooter;
-    exports.ɵe15 = McTabMixinBase;
+    exports.ɵe16 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
     exports.ɵe28 = CssUnitPipe;
-    exports.ɵf15 = McTabNavBase;
+    exports.ɵf16 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
-    exports.ɵg15 = McTabNavMixinBase;
+    exports.ɵg16 = McTabNavMixinBase;
     exports.ɵg20 = McSidepanelActions;
-    exports.ɵh15 = McTabLinkBase;
-    exports.ɵi15 = McTabLinkMixinBase;
+    exports.ɵh16 = McTabLinkBase;
+    exports.ɵi16 = McTabLinkMixinBase;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
