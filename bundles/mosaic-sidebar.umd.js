@@ -305,7 +305,7 @@
     exports.McSidebarModule = McSidebarModule;
     exports.McSidebarOpened = McSidebarOpened;
     exports.SidebarPositions = SidebarPositions;
-    exports.ɵa2 = mcSidebarAnimations;
+    exports.ɵa1 = mcSidebarAnimations;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
