@@ -102,28 +102,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /**
-     * An interface which allows a control to work inside of a `MсFormField`.
-     * @abstract
-     * @template T
-     */
-    // tslint:disable-next-line:naming-convention
-    var   /**
-     * An interface which allows a control to work inside of a `MсFormField`.
-     * @abstract
-     * @template T
-     */
-    // tslint:disable-next-line:naming-convention
-    McFormFieldNumberControl = /** @class */ (function () {
-        function McFormFieldNumberControl() {
-        }
-        return McFormFieldNumberControl;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     /** @type {?} */
     var nextUniqueId = 0;
     var McHint = /** @class */ (function () {
@@ -169,6 +147,31 @@
             this.stepUp = new core.EventEmitter();
             this.stepDown = new core.EventEmitter();
         }
+        /**
+         * @param {?} numberInput
+         * @return {?}
+         */
+        McStepper.prototype.connectTo = /**
+         * @param {?} numberInput
+         * @return {?}
+         */
+        function (numberInput) {
+            if (!numberInput) {
+                return;
+            }
+            this.stepUp.subscribe((/**
+             * @return {?}
+             */
+            function () {
+                numberInput.stepUp(numberInput.step);
+            }));
+            this.stepDown.subscribe((/**
+             * @return {?}
+             */
+            function () {
+                numberInput.stepDown(numberInput.step);
+            }));
+        };
         /**
          * @param {?} $event
          * @return {?}
@@ -258,18 +261,13 @@
          */
         function () {
             var _this = this;
-            if (this.numberControl && this.hasCleaner) {
+            if (((/** @type {?} */ (this.control))).numberInput && this.hasCleaner) {
                 this.cleaner = null;
                 throw getMcFormFieldYouCanNotUseCleanerInNumberInputError();
             }
             this.validateControlChild();
             if (this.control.controlType) {
-                this._elementRef.nativeElement.classList
-                    .add("mc-form-field-type-" + this.control.controlType);
-                if (this.numberControl && this.hasStepper) {
-                    this.stepper.stepUp.subscribe(this.onStepUp.bind(this));
-                    this.stepper.stepDown.subscribe(this.onStepDown.bind(this));
-                }
+                this._elementRef.nativeElement.classList.add("mc-form-field-type-" + this.control.controlType);
             }
             // Subscribe to changes in the child control state in order to update the form field UI.
             this.control.stateChanges
@@ -280,15 +278,8 @@
             function () {
                 _this._changeDetectorRef.markForCheck();
             }));
-            if (this.numberControl) {
-                this.numberControl.stateChanges
-                    .pipe(operators.startWith())
-                    .subscribe((/**
-                 * @return {?}
-                 */
-                function () {
-                    _this._changeDetectorRef.markForCheck();
-                }));
+            if (this.hasStepper) {
+                this.stepper.connectTo(((/** @type {?} */ (this.control))).numberInput);
             }
             // Run change detection if the value changes.
             /** @type {?} */
@@ -375,28 +366,6 @@
             if (isHovered !== this.hovered) {
                 this.hovered = isHovered;
                 this._changeDetectorRef.markForCheck();
-            }
-        };
-        /**
-         * @return {?}
-         */
-        McFormField.prototype.onStepUp = /**
-         * @return {?}
-         */
-        function () {
-            if (this.numberControl) {
-                this.numberControl.stepUp(this.numberControl.step);
-            }
-        };
-        /**
-         * @return {?}
-         */
-        McFormField.prototype.onStepDown = /**
-         * @return {?}
-         */
-        function () {
-            if (this.numberControl) {
-                this.numberControl.stepDown(this.numberControl.step);
             }
         };
         /**
@@ -527,10 +496,7 @@
              * @return {?}
              */
             function () {
-                return this.numberControl &&
-                    !this.disabled &&
-                    (this.numberControl.focused ||
-                        this.hovered);
+                return this.control && !this.disabled && (this.control.focused || this.hovered);
             },
             enumerable: true,
             configurable: true
@@ -576,7 +542,6 @@
         ]; };
         McFormField.propDecorators = {
             control: [{ type: core.ContentChild, args: [McFormFieldControl, { static: false },] }],
-            numberControl: [{ type: core.ContentChild, args: [McFormFieldNumberControl, { static: false },] }],
             stepper: [{ type: core.ContentChild, args: [McStepper, { static: false },] }],
             cleaner: [{ type: core.ContentChild, args: [McCleaner, { static: false },] }],
             hint: [{ type: core.ContentChildren, args: [McHint,] }],
@@ -638,7 +603,6 @@
     exports.McFormFieldControl = McFormFieldControl;
     exports.McFormFieldMixinBase = McFormFieldMixinBase;
     exports.McFormFieldModule = McFormFieldModule;
-    exports.McFormFieldNumberControl = McFormFieldNumberControl;
     exports.McFormFieldWithoutBorders = McFormFieldWithoutBorders;
     exports.McHint = McHint;
     exports.McPrefix = McPrefix;

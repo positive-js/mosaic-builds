@@ -3,7 +3,6 @@ import { NgControl } from '@angular/forms';
 import { CanColor, CanColorCtor } from '@ptsecurity/mosaic/core';
 import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
-import { McFormFieldNumberControl } from './form-field-number-control';
 import { McHint } from './hint';
 import { McPrefix } from './prefix';
 import { McStepper } from './stepper';
@@ -17,7 +16,6 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     _elementRef: ElementRef;
     private _changeDetectorRef;
     control: McFormFieldControl<any>;
-    numberControl: McFormFieldNumberControl<any>;
     stepper: McStepper;
     cleaner: McCleaner | null;
     hint: QueryList<McHint>;
@@ -35,8 +33,6 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     onContainerClick($event: any): void;
     onKeyDown(event: KeyboardEvent): void;
     onHoverChanged(isHovered: boolean): void;
-    onStepUp(): void;
-    onStepDown(): void;
     /**
      * Gets an ElementRef for the element that a overlay attached to the form-field should be
      * positioned relative to.

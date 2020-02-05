@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/platform'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/form-field'), require('rxjs')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/input', ['exports', '@angular/common', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/platform', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/form-field', 'rxjs'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.input = {}), global.ng.common, global.ng.core, global.ng.forms, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.platform, global.ng.cdk.keycodes, global.ng.mosaic.formField, global.rxjs));
-}(this, (function (exports, common, core, forms, a11y, core$1, coercion, platform, keycodes, formField, rxjs) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/platform'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('@ptsecurity/cdk/keycodes')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/input', ['exports', '@angular/common', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/platform', '@ptsecurity/mosaic/form-field', 'rxjs', '@ptsecurity/cdk/keycodes'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.input = {}), global.ng.common, global.ng.core, global.ng.forms, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.platform, global.ng.mosaic.formField, global.rxjs, global.ng.cdk.keycodes));
+}(this, (function (exports, common, core, forms, a11y, core$1, coercion, platform, formField, rxjs, keycodes) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -56,12 +56,37 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
-    var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
-
+    var BIG_STEP = 10;
+    /** @type {?} */
+    var SMALL_STEP = 1;
     /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @param {?} value
+     * @return {?}
      */
+    function normalizeSplitter(value) {
+        return value ? value.replace(/,/g, '.') : value;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    function isFloat(value) {
+        return /^-?\d+\.\d+$/.test(value);
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    function isInt(value) {
+        return /^-?\d+$/.test(value);
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    function isDigit(value) {
+        return isFloat(value) || isInt(value);
+    }
     /**
      * @param {?} value
      * @return {?}
@@ -84,87 +109,19 @@
         var precision = Math.max(getPrecision(value1), getPrecision(value2));
         return (value1 * precision + value2 * precision) / precision;
     }
-    /** @type {?} */
-    var stepUp = (/**
-     * @param {?} value
-     * @param {?} max
-     * @param {?} min
-     * @param {?} step
-     * @return {?}
-     */
-    function (value, max, min, step) {
-        return Math.max(Math.min(add(value, step), max), min);
-    });
-    /** @type {?} */
-    var stepDown = (/**
-     * @param {?} value
-     * @param {?} max
-     * @param {?} min
-     * @param {?} step
-     * @return {?}
-     */
-    function (value, max, min, step) {
-        return Math.min(Math.max(add(value, -step), min), max);
-    });
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
-    var MC_INPUT_INVALID_TYPES = [
-        'button',
-        'checkbox',
-        'file',
-        'hidden',
-        'image',
-        'radio',
-        'range',
-        'reset',
-        'submit'
-    ];
-    /** @type {?} */
-    var BIG_STEP = 10;
-    /** @type {?} */
-    var SMALL_STEP = 1;
-    /** @type {?} */
-    var nextUniqueId = 0;
-    var McInputBase = /** @class */ (function () {
-        function McInputBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
-            this.defaultErrorStateMatcher = defaultErrorStateMatcher;
-            this.parentForm = parentForm;
-            this.parentFormGroup = parentFormGroup;
-            this.ngControl = ngControl;
-        }
-        return McInputBase;
-    }());
-    // tslint:disable-next-line:naming-convention
-    /** @type {?} */
-    var McInputMixinBase = core$1.mixinErrorState(McInputBase);
     var McNumberInput = /** @class */ (function () {
-        function McNumberInput(platform, elementRef, model, step, bigStep, min, max) {
+        function McNumberInput(platform, elementRef, ngControl, step, bigStep, min, max) {
             this.platform = platform;
             this.elementRef = elementRef;
-            this.model = model;
-            /**
-             * Implemented as part of McFormFieldNumberControl.
-             * \@docs-private
-             */
+            this.ngControl = ngControl;
             this.focused = false;
-            /**
-             * Implemented as part of McFormFieldNumberControl.
-             * \@docs-private
-             */
             this.stateChanges = new rxjs.Subject();
-            this.step = this.isDigit(step) ? parseFloat(step) : SMALL_STEP;
-            this.bigStep = this.isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
-            this.min = this.isDigit(min) ? parseFloat(min) : -Infinity;
-            this.max = this.isDigit(max) ? parseFloat(max) : Infinity;
-            this.host = this.elementRef.nativeElement;
-            /** @type {?} */
-            var self = this;
-            if ('valueAsNumber' in this.host) {
-                Object.defineProperty(Object.getPrototypeOf(this.host), 'valueAsNumber', {
+            this.step = isDigit(step) ? parseFloat(step) : SMALL_STEP;
+            this.bigStep = isDigit(bigStep) ? parseFloat(bigStep) : BIG_STEP;
+            this.min = isDigit(min) ? parseFloat(min) : -Infinity;
+            this.max = isDigit(max) ? parseFloat(max) : Infinity;
+            if ('valueAsNumber' in this.nativeElement) {
+                Object.defineProperty(Object.getPrototypeOf(this.nativeElement), 'valueAsNumber', {
                     // tslint:disable-next-line:no-reserved-keywords
                     get: 
                     // tslint:disable-next-line:no-reserved-keywords
@@ -173,12 +130,22 @@
                      */
                     function () {
                         /** @type {?} */
-                        var res = parseFloat(self.normalizeSplitter(this.value));
+                        var res = parseFloat(normalizeSplitter(this.value));
                         return isNaN(res) ? null : res;
                     }
                 });
             }
         }
+        Object.defineProperty(McNumberInput.prototype, "nativeElement", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.elementRef.nativeElement;
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * @param {?} isFocused
          * @return {?}
@@ -250,14 +217,6 @@
             function (e) { return (e.keyCode >= keycodes.ZERO && e.keyCode <= keycodes.NINE) ||
                 (e.keyCode >= keycodes.NUMPAD_ZERO && e.keyCode <= keycodes.NUMPAD_NINE); });
             /** @type {?} */
-            var minuses = [keycodes.NUMPAD_MINUS, keycodes.DASH, keycodes.FF_MINUS];
-            /** @type {?} */
-            var serviceKeys = [keycodes.DELETE, keycodes.BACKSPACE, keycodes.TAB, keycodes.ESCAPE, keycodes.ENTER];
-            /** @type {?} */
-            var arrows = [keycodes.LEFT_ARROW, keycodes.RIGHT_ARROW];
-            /** @type {?} */
-            var allowedKeys = [keycodes.HOME, keycodes.END].concat(arrows).concat(serviceKeys).concat(minuses);
-            /** @type {?} */
             var isIEPeriod = (/**
              * @param {?} e
              * @return {?}
@@ -269,6 +228,14 @@
              * @return {?}
              */
             function (e) { return e.key === '.' || e.key === ','; });
+            /** @type {?} */
+            var minuses = [keycodes.NUMPAD_MINUS, keycodes.DASH, keycodes.FF_MINUS];
+            /** @type {?} */
+            var serviceKeys = [keycodes.DELETE, keycodes.BACKSPACE, keycodes.TAB, keycodes.ESCAPE, keycodes.ENTER];
+            /** @type {?} */
+            var arrows = [keycodes.LEFT_ARROW, keycodes.RIGHT_ARROW];
+            /** @type {?} */
+            var allowedKeys = [keycodes.HOME, keycodes.END].concat(arrows).concat(serviceKeys).concat(minuses);
             // Decimal is for IE
             /** @type {?} */
             var isPeriod = (/**
@@ -312,10 +279,7 @@
          * @return {?}
          */
         function (event) {
-            /** @type {?} */
-            var value = event.clipboardData.getData('text');
-            value = this.normalizeSplitter(value);
-            if (!this.isDigit(value)) {
+            if (!isDigit(normalizeSplitter(event.clipboardData.getData('text')))) {
                 event.preventDefault();
             }
         };
@@ -330,9 +294,9 @@
         function (step) {
             this.elementRef.nativeElement.focus();
             /** @type {?} */
-            var res = stepUp(this.host.valueAsNumber || 0, this.max, this.min, step);
-            this.host.value = res.toString();
-            this.model.update.emit(this.host.valueAsNumber);
+            var res = Math.max(Math.min(add(this.nativeElement.valueAsNumber || 0, step), this.max), this.min);
+            this.nativeElement.value = res.toString();
+            this.viewToModelUpdate(this.nativeElement.valueAsNumber);
         };
         /**
          * @param {?} step
@@ -345,69 +309,29 @@
         function (step) {
             this.elementRef.nativeElement.focus();
             /** @type {?} */
-            var res = stepDown(this.host.valueAsNumber || 0, this.max, this.min, step);
-            this.host.value = res.toString();
-            this.model.update.emit(this.host.valueAsNumber);
+            var res = Math.min(Math.max(add(this.nativeElement.valueAsNumber || 0, -step), this.min), this.max);
+            this.nativeElement.value = res.toString();
+            this.viewToModelUpdate(this.nativeElement.valueAsNumber);
         };
         /**
          * @private
          * @param {?} value
          * @return {?}
          */
-        McNumberInput.prototype.normalizeSplitter = /**
+        McNumberInput.prototype.viewToModelUpdate = /**
          * @private
          * @param {?} value
          * @return {?}
          */
         function (value) {
-            return value ? value.replace(/,/g, '.') : value;
-        };
-        /**
-         * @private
-         * @param {?} value
-         * @return {?}
-         */
-        McNumberInput.prototype.isDigit = /**
-         * @private
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            return this.isFloat(value) || this.isInt(value);
-        };
-        /**
-         * @private
-         * @param {?} value
-         * @return {?}
-         */
-        McNumberInput.prototype.isFloat = /**
-         * @private
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            return /^-?\d+\.\d+$/.test(value);
-        };
-        /**
-         * @private
-         * @param {?} value
-         * @return {?}
-         */
-        McNumberInput.prototype.isInt = /**
-         * @private
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            return /^-?\d+$/.test(value);
+            if (this.ngControl) {
+                (/** @type {?} */ (this.ngControl.control)).setValue(value);
+            }
         };
         McNumberInput.decorators = [
             { type: core.Directive, args: [{
                         selector: "input[mcInput][type=\"number\"]",
                         exportAs: 'mcNumericalInput',
-                        providers: [
-                            { provide: formField.McFormFieldNumberControl, useExisting: McNumberInput }
-                        ],
                         host: {
                             '(blur)': 'focusChanged(false)',
                             '(focus)': 'focusChanged(true)',
@@ -420,7 +344,7 @@
         McNumberInput.ctorParameters = function () { return [
             { type: platform.Platform },
             { type: core.ElementRef },
-            { type: forms.NgModel },
+            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: String, decorators: [{ type: core.Attribute, args: ['step',] }] },
             { type: String, decorators: [{ type: core.Attribute, args: ['big-step',] }] },
             { type: String, decorators: [{ type: core.Attribute, args: ['min',] }] },
@@ -434,15 +358,53 @@
         };
         return McNumberInput;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /** @type {?} */
+    var MC_INPUT_INVALID_TYPES = [
+        'button',
+        'checkbox',
+        'file',
+        'hidden',
+        'image',
+        'radio',
+        'range',
+        'reset',
+        'submit'
+    ];
+    /** @type {?} */
+    var nextUniqueId = 0;
+    var McInputBase = /** @class */ (function () {
+        function McInputBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
+            this.defaultErrorStateMatcher = defaultErrorStateMatcher;
+            this.parentForm = parentForm;
+            this.parentFormGroup = parentFormGroup;
+            this.ngControl = ngControl;
+        }
+        return McInputBase;
+    }());
+    // tslint:disable-next-line:naming-convention
+    /** @type {?} */
+    var McInputMixinBase = core$1.mixinErrorState(McInputBase);
     var McInput = /** @class */ (function (_super) {
         __extends(McInput, _super);
         // tslint:disable-next-line: naming-convention
-        function McInput(elementRef, rawValidators, mcValidation, ngControl, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        function McInput(elementRef, rawValidators, mcValidation, ngControl, numberInput, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.rawValidators = rawValidators;
             _this.mcValidation = mcValidation;
-            _this.ngModel = ngModel;
+            _this.numberInput = numberInput;
             _this.formControlName = formControlName;
             /**
              * Implemented as part of McFormFieldControl.
@@ -687,7 +649,9 @@
          */
         function () {
             this.focusChanged(false);
-            (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity();
+            if (this.ngControl) {
+                (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity();
+            }
         };
         /** Callback for the cases where the focused state of the input changes. */
         /**
@@ -847,7 +811,7 @@
             { type: Array, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
             { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
-            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: McNumberInput, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
@@ -1057,8 +1021,12 @@
     exports.McInputMono = McInputMono;
     exports.McNumberInput = McNumberInput;
     exports.SMALL_STEP = SMALL_STEP;
-    exports.stepDown = stepDown;
-    exports.stepUp = stepUp;
+    exports.add = add;
+    exports.getPrecision = getPrecision;
+    exports.isDigit = isDigit;
+    exports.isFloat = isFloat;
+    exports.isInt = isInt;
+    exports.normalizeSplitter = normalizeSplitter;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵb25 = MinValidator;
     exports.ɵc25 = MAX_VALIDATOR;
