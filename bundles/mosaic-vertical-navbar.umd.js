@@ -119,6 +119,7 @@
                         styles: [".mc-vertical-navbar__badge{position:absolute;width:64px;top:0;left:0}.mc-vertical-navbar__badge .mc-badge{position:absolute;right:4px;top:4px}.mc-vertical-navbar__item-icon{margin-right:16px}.mc-vertical-navbar__item-icon .mc-icon{font-size:32px}.mc-vertical-navbar__title{white-space:nowrap}.mc-vertical-navbar__item-dropdown-icon{margin-left:auto;padding-left:16px}a[mc-vertical-navbar-item],mc-vertical-navbar-item{height:64px;margin:1px 0;width:100%;position:relative;display:flex;align-items:center;box-sizing:border-box;cursor:pointer;text-decoration:none}a[mc-vertical-navbar-item] .mc-vertical-navbar__item,mc-vertical-navbar-item .mc-vertical-navbar__item{padding-left:16px;padding-right:16px;display:flex;align-items:center;width:100%;height:100%}a[mc-vertical-navbar-item].mc-progress,mc-vertical-navbar-item.mc-progress{cursor:pointer}a[mc-vertical-navbar-item].mc-vertical-navbar__item_active,mc-vertical-navbar-item.mc-vertical-navbar__item_active{cursor:default}a[mc-vertical-navbar-item][disabled],mc-vertical-navbar-item[disabled]{cursor:default;pointer-events:none}"],
                         inputs: ['disabled'],
                         host: {
+                            class: 'mc-vertical-navbar-item',
                             '[attr.disabled]': 'disabled || null',
                             '[attr.tabindex]': 'disabled ? -1 : 0'
                         }
@@ -261,7 +262,7 @@
     exports.McVerticalNavbarMixinBase = McVerticalNavbarMixinBase;
     exports.McVerticalNavbarModule = McVerticalNavbarModule;
     exports.McVerticalNavbarTitle = McVerticalNavbarTitle;
-    exports.ɵa23 = toggleVerticalNavbarAnimation;
+    exports.ɵa24 = toggleVerticalNavbarAnimation;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

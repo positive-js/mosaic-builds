@@ -4,12 +4,6 @@ export declare class McListBase {
 }
 export declare class McList extends McListBase {
 }
-/**
- * Directive whose purpose is to add the mc- CSS styling to this selector.
- * @docs-private
- */
-export declare class McListSubheaderCssStyler {
-}
 export declare class McListItemBase {
 }
 export declare class McListItem extends McListItemBase implements AfterContentInit {

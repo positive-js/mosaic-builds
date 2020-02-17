@@ -19,28 +19,14 @@ import { debounceTime } from 'rxjs/operators';
  */
 /** @type {?} */
 var COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
-/** @type {?} */
-var MC_ICON = 'mc-icon';
-/** @type {?} */
-var MC_NAVBAR = 'mc-navbar';
-/** @type {?} */
-var MC_NAVBAR_CONTAINER = 'mc-navbar-container';
-/** @type {?} */
-var MC_NAVBAR_ITEM = 'mc-navbar-item';
-/** @type {?} */
-var MC_NAVBAR_BRAND = 'mc-navbar-brand';
-/** @type {?} */
-var MC_NAVBAR_TITLE = 'mc-navbar-title';
-/** @type {?} */
-var MC_NAVBAR_LOGO = 'mc-navbar-logo';
 var McNavbarLogo = /** @class */ (function () {
     function McNavbarLogo() {
     }
     McNavbarLogo.decorators = [
         { type: Directive, args: [{
-                    selector: MC_NAVBAR_LOGO,
+                    selector: 'mc-navbar-logo',
                     host: {
-                        class: MC_NAVBAR_LOGO
+                        class: 'mc-navbar-logo'
                     }
                 },] },
     ];
@@ -51,9 +37,9 @@ var McNavbarBrand = /** @class */ (function () {
     }
     McNavbarBrand.decorators = [
         { type: Directive, args: [{
-                    selector: MC_NAVBAR_BRAND,
+                    selector: 'mc-navbar-brand',
                     host: {
-                        class: MC_NAVBAR_BRAND
+                        class: 'mc-navbar-brand'
                     }
                 },] },
     ];
@@ -64,9 +50,9 @@ var McNavbarTitle = /** @class */ (function () {
     }
     McNavbarTitle.decorators = [
         { type: Directive, args: [{
-                    selector: MC_NAVBAR_TITLE,
+                    selector: 'mc-navbar-title',
                     host: {
-                        class: MC_NAVBAR_TITLE
+                        class: 'mc-navbar-title'
                     }
                 },] },
     ];
@@ -158,7 +144,7 @@ var McNavbarItem = /** @class */ (function (_super) {
     };
     McNavbarItem.decorators = [
         { type: Component, args: [{
-                    selector: MC_NAVBAR_ITEM,
+                    selector: 'mc-navbar-item',
                     template: "<ng-content></ng-content>",
                     encapsulation: ViewEncapsulation.None,
                     inputs: ['disabled'],
@@ -196,7 +182,7 @@ var McNavbarContainer = /** @class */ (function () {
     });
     McNavbarContainer.decorators = [
         { type: Directive, args: [{
-                    selector: MC_NAVBAR_CONTAINER
+                    selector: 'mc-navbar-container'
                 },] },
     ];
     McNavbarContainer.propDecorators = {
@@ -347,11 +333,11 @@ var McNavbar = /** @class */ (function () {
         this._elementRef = _elementRef;
         this.forceRecalculateItemsWidth = false;
         this.resizeDebounceInterval = 100;
-        this.firstLevelElement = MC_NAVBAR_CONTAINER;
+        this.firstLevelElement = 'mc-navbar-container';
         this.secondLevelElements = [
-            MC_NAVBAR_ITEM,
-            MC_NAVBAR_BRAND,
-            MC_NAVBAR_TITLE
+            'mc-navbar-item',
+            'mc-navbar-brand',
+            'mc-navbar-title'
         ];
         /** @type {?} */
         var resizeObserver = fromEvent(window, 'resize')
@@ -516,11 +502,11 @@ var McNavbar = /** @class */ (function () {
      */
     function (element) {
         /** @type {?} */
-        var icon = element.querySelector("[" + MC_ICON + "]," + MC_NAVBAR_LOGO + ",[" + MC_NAVBAR_LOGO + "]");
+        var icon = element.querySelector("[mc-icon],mc-navbar-logo,[mc-navbar-logo]");
         if (!icon) {
             return [];
         }
-        return Array.from(element.querySelectorAll(MC_NAVBAR_TITLE))
+        return Array.from(element.querySelectorAll('mc-navbar-title'))
             .map((/**
          * @param {?} el
          * @return {?}
@@ -529,8 +515,8 @@ var McNavbar = /** @class */ (function () {
     };
     McNavbar.decorators = [
         { type: Component, args: [{
-                    selector: MC_NAVBAR,
-                    template: "\n        <nav class=\"mc-navbar\">\n            <ng-content select=\"[" + MC_NAVBAR_CONTAINER + "]," + MC_NAVBAR_CONTAINER + "\"></ng-content>\n        </nav>\n    ",
+                    selector: 'mc-navbar',
+                    template: "\n        <nav class=\"mc-navbar\">\n            <ng-content select=\"[mc-navbar-container], mc-navbar-container\"></ng-content>\n        </nav>\n    ",
                     styles: [".mc-navbar-left,.mc-navbar-right,mc-navbar-container{height:100%;display:flex;flex-shrink:0;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar{position:relative;height:48px;padding:0 0;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar [mc-icon]+mc-navbar-title{margin-left:8px}.mc-navbar [mc-icon]{min-width:16px;min-height:16px}.mc-navbar mc-navbar-title:not(.mc-navbar-collapsed-title)+[mc-icon]{margin-left:8px}.mc-navbar-brand,.mc-navbar-item,.mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{height:100%;position:relative;display:flex;align-items:center;padding-left:16px;padding-right:16px}.mc-navbar-brand,mc-navbar-brand{padding-left:0;padding-right:12px;margin-right:24px}.mc-navbar-brand .mc-navbar-title,mc-navbar-brand .mc-navbar-title{padding-left:12px;padding-right:0}.mc-navbar-title{white-space:nowrap}.mc-navbar-item:not([disabled]){cursor:pointer}.mc-navbar-item .mc-navbar-title,mc-navbar-brand{padding:0}mc-navbar-item.mc-progress:not([disabled]){cursor:pointer}.mc-navbar-item[disabled],mc-navbar-item[disabled] .mc-navbar-item{cursor:default}mc-navbar-title.mc-navbar-collapsed-title{display:none}"],
                     encapsulation: ViewEncapsulation.None
                 },] },

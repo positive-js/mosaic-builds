@@ -364,123 +364,106 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
 }
 
 
-$black-12-opacity: rgba(black, 0.12);
-$black-6-opacity:  rgba(black, 0.06);
-
-$white-12-opacity: rgba(white, 0.12);
-
-$dark-text-default:     #4d4d4d;
-$dark-text-secondary:   #999999;
-$dark-text-disabled:    #b3b3b3;
-
-$dark-icon-secondary:   #cccccc;
-
-$light-text-default:    #f0f0f0;
-$light-text-secondary:  #999999;
-$light-text-disabled:   #999999;
-
-$light-icon-secondary:  #999999;
-
 $mc-blue: (
-    40: #f5fafd,
-    60: #ebf4fb,
-    100: #d8eaf7,
-    200: #aad1ec,
-    300: #7fbae1,
-    400: #57a4d7,
-    500: #338fcc,
-    560: #277bb3,
-    600: #206ea2,
-    700: #114e77,
-    800: #07314d,
+    40: #F5FAFD,
+    60: #EBF4FB,
+    100: #D8EAF7,
+    200: #AAD1EC,
+    300: #7FBAE1,
+    400: #57A4D7,
+    500: #338FCC,
+    560: #277BB3,
+    600: #206EA2,
+    700: #114E77,
+    800: #07314D,
     A100: rgba(0, 153, 255, 0.15),
     A200: rgba(0, 153, 255, 0.3),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
         600: white,
         700: white,
         800: white,
-        A100: $dark-text-default,
+        A100: #4D4D4D,
         A200: white,
     )
 );
 
 $mc-green: (
-    40: #f6fbf4,
-    60: #edf8e9,
-    100: #dcf1d4,
-    200: #b4dea4,
-    300: #8fcc79,
-    400: #6fba53,
-    500: #52a832,
+    40: #F6FBF4,
+    60: #EDF8E9,
+    100: #DCF1D4,
+    200: #B4DEA4,
+    300: #8FCC79,
+    400: #6FBA53,
+    500: #52A832,
     560: #449327,
-    600: #3b8520,
+    600: #3B8520,
     700: #276211,
-    800: #163f07,
+    800: #163F07,
     A100: rgba(68, 255, 0, 0.15),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
         600: white,
         700: white,
         800: white,
-        A100: $dark-text-default,
+        A100: #4D4D4D,
     )
 );
 
 $mc-red: (
-    40: #fef7f6,
-    60: #fcefec,
-    100: #fadeda,
-    200: #f4b7ae,
-    300: #ed9284,
-    400: #e76e5c,
-    500: #e04d36,
-    560: #c43e29,
-    600: #b23522,
+    40: #FEF7F6,
+    60: #FCEFEC,
+    100: #FADEDA,
+    200: #F4B7AE,
+    300: #ED9284,
+    400: #E76E5C,
+    500: #E04D36,
+    560: #C43E29,
+    600: #B23522,
     700: #832112,
     800: #541208,
     A100: rgba(224, 79, 56, 0.15),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
         600: white,
         700: white,
         800: white,
-        A100: $dark-text-default,
+        A100: #4D4D4D,
     )
 );
 
 $mc-grey: (
-    40: #f5f5f5,
-    60: #f0f0f0,
-    100: #e6e6e6,
-    200: #cccccc,
-    300: #b3b3b3,
+    40: #F5F5F5,
+    60: #F0F0F0,
+    100: #E6E6E6,
+    200: #CCCCCC,
+    300: #B3B3B3,
     400: #999999,
     500: #808080,
     560: #707070,
     600: #666666,
-    700: #4d4d4d,
+    700: #4D4D4D,
     800: #333333,
     A40: rgba(0, 0, 0, 0.04),
     A60: rgba(0, 0, 0, 0.06),
@@ -489,11 +472,11 @@ $mc-grey: (
     A300: rgba(0, 0, 0, 0.3),
     A500: rgba(0, 0, 0, 0.5),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
@@ -504,113 +487,428 @@ $mc-grey: (
 );
 
 $mc-yellow: (
-    40: #fdfaf3,
-    60: #fcf5e8,
-    100: #f8ebd1,
-    200: #f0d49b,
-    300: #e7bd68,
-    400: #dfa739,
-    500: #d6930d,
-    560: #bb800a,
-    600: #aa7408,
-    700: #7d5504,
+    40: #FDFAF3,
+    60: #FCF5E8,
+    100: #F8EBD1,
+    200: #F0D49B,
+    300: #E7BD68,
+    400: #DFA739,
+    500: #D6930D,
+    560: #BB800A,
+    600: #AA7408,
+    700: #7D5504,
     800: #503602,
     A100: rgba(255, 170, 0, 0.15),
     contrast: (
-        40: $dark-text-default,
-        60: $dark-text-default,
-        100: $dark-text-default,
-        200: $dark-text-default,
-        300: $dark-text-default,
+        40: #4D4D4D,
+        60: #4D4D4D,
+        100: #4D4D4D,
+        200: #4D4D4D,
+        300: #4D4D4D,
         400: white,
         500: white,
         560: white,
         600: white,
         700: white,
         800: white,
-        A100: $dark-text-default,
+        A100: #4D4D4D,
     )
 );
 
 
 $mc-light-theme-foreground: (
-    base:              black, //скорей всего это fg-default-text
-    disabled:          $dark-text-disabled,
-    disabled-button:   rgba(black, 0.26),
-    hint-text:         rgba(black, 0.38),
-    icon:              rgba(black, 0.54),
-    secondary-text:    rgba(black, 0.54), //скорей всего это fg-less-contrast-text
+    text:                       map-get($mc-grey, 700),
+    text-less-contrast:         map-get($mc-grey, 400),
+    text-disabled:              map-get($mc-grey, 300),
 
-    // ↓ новое
-    text:               $dark-text-default,
-    less-contrast-text: $dark-text-secondary,
-    disabled-text:      $dark-text-disabled,
+    divider:                    map-get($mc-grey, 100),
+    border:                     map-get($mc-grey, 200),
 
-    default-icon:       rgba(transparent, 0.45),
-
-    divider:            map-get($mc-grey, 100)
+    icon:                       map-get($mc-grey, 400),
 );
 
 $mc-dark-theme-foreground: (
-    base:               white,
-    disabled:           rgba(white, 0.3),
-    disabled-button:    rgba(white, 0.3),
-    hint-text:          rgba(white, 0.3),
-    icon:               white,
-    secondary-text:     rgba(white, 0.7),
+    text:                       map-get($mc-grey, 60),
+    text-less-contrast:         map-get($mc-grey, 400),
+    text-disabled:              map-get($mc-grey, 400),
 
-    // ↓ новое
-    text:               $light-text-default,
-    less-contrast-text: $light-text-secondary,
-    disabled-text:      $light-text-disabled,
+    divider:                    map-get($mc-grey, 600),
+    border:                     map-get($mc-grey, 500),
 
-    default-icon:       rgba(white, 1),
-
-    divider:            map-get($mc-grey, 600)
+    icon:                       map-get($mc-grey, 400),
 );
 
 $mc-light-theme-background: (
-    disabled-button:      $black-12-opacity,
-    selected-button:      grey,
-    focused-button:       $black-6-opacity,
-    disabled-list-option: #CCC,
+    background:                 white,
+    background-popup:           white,
+    background-popup-footer:    map-get($mc-grey, 60),
+    background-disabled:        map-get($mc-grey, 60),
 
-    // ↓ новое
-    background:           white,
-    // todo not used
-    bg-content:           map-get($mc-grey, 60),
-    bg-dropdowns:         map-get($mc-grey, 700),
-
-    button-bg:            map-get($mc-grey, 60),
-    button-border:        map-get($mc-grey, 200),
-    disabled-overlay:     rgba(white, 0.3),
-
-    hover:                rgba(black, 0.05),
-
-    in-shadow:            inset 0 1px 2px 0 rgba(black, 0.2),
+    overlay-hovered:            rgba(black, 0.05),
+    overlay-disabled:           rgba(white, 0.3)
 );
 
 $mc-dark-theme-background: (
-    disabled-button:      $white-12-opacity,
-    selected-button:      grey,
-    focused-button:       $black-6-opacity,
-    disabled-list-option: #CCC,
+    background:                 map-get($mc-grey, 800),
+    background-popup:           map-get($mc-grey, 700),
+    background-popup-footer:    transparent,
+    background-disabled:        map-get($mc-grey, 600),
 
-    // ↓ новое
-    background:           map-get($mc-grey, 800),
-    // todo not used
-    bg-content:           map-get($mc-grey,  60),
-    bg-dropdowns:         white,
-
-    // цвет бордера зависит от палитры
-    button-bg:            map-get($mc-grey, 600),
-    button-border:        map-get($mc-grey, 500),
-    disabled-overlay:     rgba(black, 0.2),
-
-    hover:                rgba(white, 0.05),
-
-    in-shadow:            inset 1px 2px 2px 0 rgba(black, 0.2),
+    overlay-hovered:            rgba(white, 0.05),
+    overlay-disabled:           rgba(black, 0.2)
 );
+
+@function mc-light-theme-components($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
+    $focused-color: map-get(map-get($theme, states), focused-color);
+
+    $popup-common: (
+        shadow: 0 3px 3px 0 mc-color($second, A200),
+        border-color: mc-color($second),
+        background: white,
+
+        footer_background-color: map-get($second, 60)
+    );
+
+    $button: (
+        state-active_shadow: inset 0 1px 2px 0 rgba(black, 0.2),
+
+        primary: (
+            color: mc-contrast($primary, 500),
+            border-color: map-get($primary, 560),
+            background: map-get($primary, 500),
+            icon-color: mc-contrast($primary, 500),
+
+            state-active_border-color: darken(mc-color($primary, 560), 5),
+            state-active_background: darken(mc-color($primary, 500), 5)
+        ),
+
+        second: (
+            border-color: mc-color($foreground, border),
+            background: map-get($background, background-disabled),
+            color: map-get($foreground, text),
+            icon-color: map-get($foreground, text-less-contrast),
+
+            state-active_border-color: darken(mc-color($foreground, border), 5),
+            state-active_background: darken(map-get($background, background-disabled), 5)
+        ),
+
+        error: (
+            border-color: mc-color($foreground, border),
+            background: map-get($background, background-disabled),
+            color: mc-color($error),
+            icon-color: mc-color($error, 400),
+
+            state-active_border-color: darken(mc-color($foreground, border), 5),
+            state-active_background: darken(map-get($background, background-disabled), 5)
+        )
+    );
+
+    $checkbox: (
+        border-color: mc-color($second),
+
+        state-checked_border-color: mc-color($primary, darker),
+        state-checked_background: mc-color($primary),
+
+        state-focused_border-color: mc-color($primary),
+        state-focused_shadow: (inset 0 0 0 1px map-get($background, background), 0 0 0 1px mc-color($primary))
+    );
+
+    $modal: (
+        shadow: (0 0 0 1px mc-color($second, 300), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
+    );
+
+    $navbar: (
+        background-color: mc-color($primary, 700),
+        color: mc-color($primary, 100),
+
+        item_color: mc-color($primary, 100),
+
+        item_state-active_color: lighten(mc-color($primary, 700), 5%),
+        item_state-hover_color: lighten(mc-color($primary, 700), 5%),
+        item_state-progress_color: lighten(mc-color($primary, 800), 15%),
+        item_state-disabled_opacity: lighten(mc-color($primary, 800), 15%)
+    );
+
+    $popover: (
+        background-color: map-get($background, background),
+        border-color: map-get($foreground, text-disabled),
+
+        footer_background-color: map-get($background, background-disabled),
+    );
+
+    $progress-bar: (
+        background: mc-color($second, 60),
+    );
+
+    $radio: (
+        outer-circle_border-color: mc-color($second),
+        inner-circle_border-color: transparent,
+
+        outer-circle_checked-state_border-color: mc-color($primary),
+        outer-circle_focused-state_border-color: $focused-color,
+        outer-circle_focused-state_shadow: 0 0 0 2px $focused-color,
+
+        inner-circle_checked-state_border-color: mc-color($primary),
+        inner-circle_focused-state_shadow: 0 0 0 1px map-get($background, background)
+    );
+
+    $sidepanel: (
+        border_color: mc-color($second, 300)
+    );
+
+    $tabs: (
+        border-color: mc-color($second, 300),
+        state-active_color: mc-color($primary),
+    );
+
+    $tags: (
+        primary: (
+            background: mc-color($primary, 100),
+            border-color: mc-color($primary, 100),
+            focused-state_color: mc-color($primary),
+        ),
+
+        second: (
+            background: mc-color($second, 100),
+            border-color: mc-color($second, 100),
+            focused-state_color: mc-color($primary),
+        ),
+
+        error: (
+            background: mc-color($error, 100),
+            border-color: mc-color($error, 100),
+            focused-state_color: mc-color($error)
+        )
+    );
+
+    $toggle: (
+        border-color: mc-color($foreground, border),
+        background: linear-gradient(to bottom, mc-color($second, lighter), mc-color($background, background-disabled)),
+
+        circle_border-color: mc-color($foreground, border),
+        circle_background: linear-gradient(to bottom, white, mc-color($second, lighter)),
+
+        focused-state_color: (inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary))
+    );
+
+    $tooltip: (
+        background-color: map-get($second, 700),
+        color: mc-contrast($second, 700),
+        shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+    );
+
+    $vertical-navbar: (
+        background-color: mc-color($primary, 700),
+        color: mc-contrast($primary, 700),
+
+        toggle-button_color: mc-contrast($primary, 700),
+
+        state-hover_background-color: lighten(mc-color($primary, 700), 5%),
+        state-active_background-color: lighten(mc-color($primary, 700), 5%),
+        state-progress_background-color: lighten(mc-color($primary, 800), 15%)
+    );
+
+    @return (
+        popup-common: $popup-common,
+        button: $button,
+        checkbox: $checkbox,
+        modal: $modal,
+        navbar: $navbar,
+        popover: $popover,
+        progress-bar: $progress-bar,
+        radio: $radio,
+        sidepanel: $sidepanel,
+        tabs: $tabs,
+        tags: $tags,
+        toggle: $toggle,
+        tooltip: $tooltip,
+        vertical-navbar: $vertical-navbar,
+    );
+}
+
+@function mc-dark-theme-components($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $primary: map-get($theme, primary);
+    $second: map-get($theme, second);
+    $error: map-get($theme, error);
+
+    $focused-color: map-get(map-get($theme, states), focused-color);
+
+    $popup-common: (
+        shadow: 0 3px 3px 0 mc-color($second, A200),
+        border-color: mc-color($second),
+        background: map-get($mc-grey, 700),
+
+        footer_background-color: transparent,
+    );
+
+    $button: (
+        state-active_shadow: inset 1px 2px 2px 0 rgba(black, 0.2),
+
+        primary: (
+            color: mc-contrast($primary, 500),
+            border-color: map-get($primary, 560),
+            background: map-get($primary, 500),
+            icon-color: mc-contrast($primary, 500),
+
+            state-active_border-color: darken(mc-color($primary, 560), 5),
+            state-active_background: darken(mc-color($primary, 500), 5),
+        ),
+
+        second: (
+            color: map-get($foreground, text),
+            border-color: mc-color($foreground, border),
+            background: map-get($background, background-disabled),
+            icon-color: map-get($foreground, text-less-contrast),
+
+            state-active_border-color: darken(mc-color($foreground, border), 5),
+            state-active_background: darken(map-get($background, background-disabled), 5),
+        ),
+
+        error: (
+            color: mc-color($error),
+            border-color: mc-color($foreground, border),
+            background: map-get($background, background-disabled),
+            icon-color: mc-color($error, 400),
+
+            state-active_border-color: darken(mc-color($foreground, border), 5),
+            state-active_background: darken(map-get($background, background-disabled), 5)
+        )
+    );
+
+    $checkbox: (
+        border-color: mc-color($second),
+
+        state-checked_border-color: mc-color($primary, lighter),
+        state-checked_background: mc-color($primary, 600),
+
+        state-focused_border-color: mc-color($primary),
+        state-focused_shadow: (inset 0 0 0 1px map-get($background, background), 0 0 0 1px mc-color($primary))
+    );
+
+    $datepicker: ();
+
+    $modal: (
+        shadow: (0 0 0 1px mc-color($second, 800), 0 6px 12px 0 rgba(0, 0, 0, 0.5))
+    );
+
+    $navbar: (
+        background-color: mc-color($primary, 700),
+        color: mc-color($primary, 100),
+
+        item_color: mc-color($primary, 100),
+
+        item_state-active_color: lighten(mc-color($primary, 700), 5%),
+        item_state-hover_color: lighten(mc-color($primary, 700), 5%),
+        item_state-progress_color: lighten(mc-color($primary, 800), 15%),
+        item_state-disabled_opacity: lighten(mc-color($primary, 800), 15%),
+    );
+
+    $popover: (
+        background-color: map-get($background, background),
+        border-color: map-get($background, background),
+
+        footer_background-color: map-get($background, background-disabled),
+    );
+
+    $progress-bar: (
+        background-color: mc-color($second, 600),
+    );
+
+    $radio: (
+        outer-circle_border-color: mc-color($second),
+        inner-circle_border-color: transparent,
+
+        outer-circle_checked-state_border-color: mc-color($primary),
+        outer-circle_focused-state_border-color: $focused-color,
+        outer-circle_focused-state_shadow: 0 0 0 2px $focused-color,
+
+        inner-circle_checked-state_border-color: mc-color($primary, 600),
+        inner-circle_focused-state_shadow: 0 0 0 1px map-get($background, background)
+    );
+
+    $sidepanel: (
+        border_color: mc-color($second, 800),
+    );
+
+    $tabs: (
+        border-color: mc-color($second, 300),
+        state-active_color: mc-color($primary),
+    );
+
+    $tags: (
+        primary: (
+            background: mc-color($primary, 700),
+            border-color: mc-color($primary, 700),
+            focused-state_color: mc-color($primary),
+        ),
+
+        second: (
+            background: mc-color($second, 700),
+            border-color: mc-color($second, 700),
+            focused-state_color: mc-color($primary),
+        ),
+
+        error: (
+            background: mc-color($error, 700),
+            border-color: mc-color($error, 700),
+            focused-state_color: mc-color($error)
+        )
+    );
+
+    $toggle: (
+        border-color: mc-color($foreground, border),
+        background: map-get($background, background),
+
+        circle_border-color: mc-color($foreground, border),
+        circle_background: white,
+
+        focused-state_color: (inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary)),
+    );
+
+    $tooltip: (
+        background-color: white,
+        color: mc-color($second, 700),
+        shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2)
+    );
+
+    $vertical-navbar: (
+        background-color: mc-color($primary, 700),
+        color: mc-contrast($primary, 700),
+
+        toggle-button_color: mc-contrast($primary, 700),
+
+        state-hover_background-color: lighten(mc-color($primary, 700), 5%),
+        state-active_background-color: lighten(mc-color($primary, 700), 5%),
+        state-progress_background-color: lighten(mc-color($primary, 800), 15%),
+    );
+
+    @return (
+        popup-common: $popup-common,
+        button: $button,
+        checkbox: $checkbox,
+        modal: $modal,
+        navbar: $navbar,
+        popover: $popover,
+        progress-bar: $progress-bar,
+        radio: $radio,
+        sidepanel: $sidepanel,
+        tabs: $tabs,
+        tags: $tags,
+        toggle: $toggle,
+        tooltip: $tooltip,
+        vertical-navbar: $vertical-navbar,
+    );
+}
 
 
 
@@ -652,7 +950,6 @@ $mc-dark-theme-background: (
     @return rgba($color, $opacity);
 }
 
-// todo additional palette should be refactored asap (possibly to separated palette)
 @function mc-light-theme(
     $primary,
     $second,
@@ -662,7 +959,13 @@ $mc-dark-theme-background: (
     $success: mc-palette($mc-green),
     $warning: mc-palette($mc-yellow)
 ) {
-    @return (
+    $states: (
+        focused-color: mc-color($primary),
+        selected-color: mc-color($primary, 100),
+        pressed-shadow: inset 0 1px 2px 0 rgba(black, 0.2)
+    );
+
+    $theme: (
         is-dark: false,
 
         primary: $primary,
@@ -675,7 +978,11 @@ $mc-dark-theme-background: (
         warning: $warning,
         success: $success,
         info: $info,
+
+        states: $states
     );
+
+    @return map_merge($theme, (components: mc-light-theme-components($theme)));
 }
 
 @function mc-dark-theme(
@@ -687,7 +994,13 @@ $mc-dark-theme-background: (
     $success: mc-palette($mc-green),
     $warning: mc-palette($mc-yellow)
 ) {
-    @return (
+    $states: (
+        focused-color: mc-color($primary),
+        selected-color: mc-color($primary, 700),
+        pressed-shadow: inset 1px 2px 2px 0 rgba(black, 0.2)
+    );
+
+    $theme: (
         is-dark: true,
 
         primary: $primary,
@@ -700,7 +1013,11 @@ $mc-dark-theme-background: (
         warning: $warning,
         success: $success,
         info: $info,
+
+        states: $states
     );
+
+    @return map_merge($theme, (components: mc-dark-theme-components($theme)));
 }
 
 
@@ -712,11 +1029,11 @@ $mc-dark-theme-background: (
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $is-dark: map-get($theme, is-dark);
 
     .mc-pseudo-checkbox {
         border-color: mc-color($second);
-        background-color: map-get($background, background);;
+        background-color: map-get($background, background);
 
         & .mc-checkbox-checkmark,
         & .mc-checkbox-mixedmark {
@@ -724,19 +1041,19 @@ $mc-dark-theme-background: (
         }
 
         &.mc-checked {
-            border-color: mc-color($primary, if($is-dark-theme, lighter, darker));
+            border-color: mc-color($primary, if($is-dark, lighter, darker));
 
-            background: if($is-dark-theme, mc-color($primary, 600), mc-color($primary));
+            background: if($is-dark, mc-color($primary, 600), mc-color($primary));
         }
 
         &.mc-disabled {
-            border-color: map-get($background, button-border);
+            border-color: map-get($foreground, border);
 
-            background-color: map-get($background, button-bg);
+            background-color: map-get($background, background-disabled);
 
             .mc-checkbox-checkmark,
             .mc-checkbox-mixedmark {
-                color: map-get($foreground, disabled-text);
+                color: map-get($foreground, text-disabled);
             }
         }
     }
@@ -1217,188 +1534,103 @@ $fonts: (
 }
 
 
+@mixin popup-params($theme) {
+    $popup-common: map-get(map-get($theme, components), popup-common);
+
+    box-shadow: map-get($popup-common, shadow);
+    border-color: map-get($popup-common, border-color);
+
+    background-color: map-get($popup-common, background);
+}
+
 
 @mixin mc-autocomplete-theme($theme) {
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $is-dark: map-get($theme, is-dark);
 
     .mc-autocomplete-panel {
+        @include popup-params($theme);
+
         color: mc-color($foreground, text);
 
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
-
-        border-color: mc-color($second);
-
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
-
         .mc-selected {
-            background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+            $popup-common: map-get(map-get($theme, components), popup-common);
+
+            background-color: map-get($popup-common, background);
         }
     }
 }
 
-@mixin mc-autocomplete-typography($config) {
+@mixin mc-autocomplete-typography($config) {}
+
+@mixin mc-button-color($params) {
+    color: map-get($params, color);
+    border-color: map-get($params, border-color);
+    background: map-get($params, background);
+
+    .mc-icon {
+        color: map-get($params, icon-color);
+    }
+
+    &:active,
+    &.mc-active {
+        border-color: map-get($params, state-active_border-color);
+        background: map-get($params, state-active_background);
+    }
 }
 
+@mixin mc-button-theme($theme) {
+    $background: map-get($theme, background);
 
+    $button: map-get(map-get($theme, components), button);
 
-
-@mixin _mc-button-primary-color($palette, $foreground, $background) {
-    border-color: map-get($palette, 560);
-    background: mc-color($palette, 500);
-    color: mc-contrast($palette, 500);
+    $state-active_shadow: map-get($button, state-active_shadow);
 
     .mc-button-overlay {
         background: transparent;
     }
 
-    .mc-icon {
-        color: mc-contrast($palette, 500);
-    }
-
-    &:hover,
-    &.mc-hover {
-        & .mc-button-overlay {
-            background: map-get($background, hover);
-        }
-    }
-
-    &:active,
-    &.mc-active {
-        border-color: darken(mc-color($palette, 560), 5);
-        background: darken(mc-color($palette, 500), 5);
-        box-shadow: map-get($background, in-shadow);
-    }
-
-    &.mc-disabled,
-    &[disabled] {
-        border-color: map-get($palette, 500);
-        color: transparentize(mc-contrast($palette, 500), 0.5);
-
-        & .mc-button-overlay {
-            background: mc-color($background, disabled-overlay);
-        }
-
-        .mc-icon {
-            color: transparentize(mc-contrast($palette, 500), 0.5);
-        }
-    }
-}
-
-@mixin _mc-button-second-color($palette, $foreground, $background) {
-    border-color: mc-color($background, button-border);
-    background: map-get($background, button-bg);
-    color: map-get($foreground, text);
-
-    .mc-icon {
-        color: map-get($foreground, text);
-    }
-
-    &:hover,
-    &.mc-hover {
-        & .mc-button-overlay {
-            background: map-get($background, hover);
-        }
-    }
-
-    &:active,
-    &.mc-active {
-        border-color: darken(mc-color($background, button-border), 5);
-        background: darken(map-get($background, button-bg), 5);
-        box-shadow: map-get($background, in-shadow);
-    }
-
-    &.mc-disabled,
-    &[disabled] {
-        border-color: mc-color($background, button-bg);
-        color: map-get($foreground, disabled-text);
-
-        & .mc-button-overlay {
-            background: mc-color($background, disabled-overlay);
-        }
-
-        .mc-icon {
-            color: map-get($foreground, disabled-text);
-        }
-    }
-}
-
-@mixin _mc-button-error-color($second, $error, $foreground, $background) {
-    @include _mc-button-second-color($second, $foreground, $background);
-
-    color: mc-color($error);
-
-    .mc-icon {
-        color: mc-color($error, 400);
-    }
-
-    &.mc-disabled,
-    &[disabled] {
-        border-color: mc-color($background, button-bg);
-        color: map-get($foreground, disabled-text);
-
-        & .mc-button-overlay {
-            background: mc-color($background, disabled-overlay);
-        }
-
-        .mc-icon {
-            color: map-get($foreground, disabled-text);
-        }
-    }
-}
-
-@mixin _mc-button-theme-color($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-    $error: map-get($theme, error);
-    $is-dark: map-get($theme, is-dark);
-
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    &.mc-primary {
-        @include _mc-button-primary-color($primary, $foreground, $background);
-    }
-
-    &.mc-second {
-        @include _mc-button-second-color($second, $foreground, $background);
-    }
-
-    &.mc-error {
-        @include _mc-button-error-color($second, $error, $foreground, $background);
-    }
-
-    &.mc-primary,
-    &.mc-second,
-    &.mc-error {
-        -webkit-font-smoothing: antialiased;
-
-        &.cdk-keyboard-focused {
-            $focus-color: mc-color($primary);
-
-            border-color: $focus-color;
-            box-shadow: 0 0 0 1px $focus-color;
-        }
-    }
-}
-
-@mixin mc-button-theme($theme) {
     .mc-button,
     .mc-icon-button {
-        @include _mc-button-theme-color($theme);
+        -webkit-font-smoothing: antialiased;
+
+        &.mc-primary {
+            @include mc-button-color(map-get($button, primary));
+        }
+
+        &.mc-second {
+            @include mc-button-color(map-get($button, second));
+        }
+
+        &.mc-error {
+            @include mc-button-color(map-get($button, error));
+        }
+
+        &:hover,
+        &.mc-hover {
+            & .mc-button-overlay {
+                background: map-get($background, overlay-hovered);
+            }
+        }
+
+        &:active,
+        &.mc-active {
+            box-shadow: $state-active_shadow;
+        }
+
+        &.mc-primary,
+        &.mc-second,
+        &.mc-error {
+            &.cdk-keyboard-focused {
+                $focused-color: map-get(map-get($theme, states), focused-color);
+
+                border-color: $focused-color;
+                box-shadow: 0 0 0 1px $focused-color;
+            }
+        }
 
         &.mc-button_transparent {
             border-color: transparent;
             background-color: transparent;
-
-            &.mc-disabled,
-            &[disabled] {
-                border-color: transparent;
-            }
 
             &:active,
             &.mc-active {
@@ -1406,6 +1638,16 @@ $fonts: (
                 background-color: transparent;
                 box-shadow: none;
             }
+
+            &.mc-disabled,
+            &[disabled] {
+                border-color: transparent;
+            }
+        }
+
+        &.mc-disabled,
+        &[disabled] {
+            opacity: 0.3;
         }
     }
 }
@@ -1424,52 +1666,6 @@ $fonts: (
         .mc-icon {
             line-height: mc-line-height($config, body);
         }
-    }
-}
-
-
-
-@mixin mc-button-toggle-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-    $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-    $divider-color: mc-color($foreground, divider);
-
-    .mc-button-toggle-standalone {
-        box-shadow: none;
-    }
-
-    .mc-button-toggle-vertical {
-        .mc-button-toggle + .mc-button-toggle {
-            border-left: none;
-            border-right: none;
-        }
-    }
-
-    .mc-button-toggle[disabled] {
-        outline: 0;
-    }
-
-    .mc-button-toggle-checked:not([disabled]) {
-        .mc-button,
-        .mc-icon-button {
-            background: darken(map-get($background, button-bg), 5);
-        }
-
-        &:not(.cdk-keyboard-focused) {
-            .mc-button,
-            .mc-icon-button {
-                border-color: darken(mc-color($background, button-border), 5);
-                box-shadow: map-get($background, in-shadow);
-            }
-        }
-    }
-}
-
-@mixin mc-button-toggle-typography($config) {
-    .mc-button-toggle {
-        font-family: mc-font-family($config);
     }
 }
 
@@ -1513,18 +1709,20 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
 
 
 @mixin mc-checkbox-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $checkbox: map-get(map-get($theme, components), checkbox);
 
-    $focus-color: mc-color($primary);
+    $border-color: map-get($checkbox, border-color);
+    $state-checked_border-color: map-get($checkbox, state-checked_border-color);
+    $state-checked_background: map-get($checkbox, state-checked_background);
+
+    $state-focused_shadow: map-get($checkbox, state-focused_shadow);
+    $state-focused_border-color: map-get($checkbox, state-focused_border-color);
 
     .mc-checkbox-frame {
-        border-color: mc-color($second);
+        border-color: $border-color;
 
         & .mc-checkbox-checkmark,
         & .mc-checkbox-mixedmark {
@@ -1537,38 +1735,39 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
 
         &:hover {
             .mc-checkbox-frame {
-                background: mix(map-get($background, background), map-get($background, hover), 5);
+                background: map-get($background, overlay-hovered);
             }
         }
 
         &.mc-checked,
         &.mc-indeterminate {
             .mc-checkbox-frame {
-                border-color: mc-color($primary, if($is-dark, lighter, darker));
+                border-color: $state-checked_border-color;
 
-                background: if($is-dark, mc-color($primary, 600), mc-color($primary));
+                background: $state-checked_background;
             }
         }
 
         & .mc-checkbox-input.cdk-keyboard-focused {
             + .mc-checkbox-frame {
-                border-color: $focus-color;
-                box-shadow: inset 0 0 0 1px white, 0 0 0 1px $focus-color;
+                border-color: $state-focused_border-color;
+
+                box-shadow: $state-focused_shadow;
             }
         }
 
         &.mc-disabled {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
 
             .mc-checkbox-frame {
-                border-color: map-get($background, button-border);
+                border-color: map-get($foreground, text-disabled);
 
-                background-color: map-get($background, button-bg);
-            }
+                background-color: map-get($background, background-disabled);
 
-            .mc-checkbox-checkmark,
-            .mc-checkbox-mixedmark {
-                color: map-get($foreground, disabled-text);
+                & .mc-checkbox-checkmark,
+                & .mc-checkbox-mixedmark {
+                    color: map-get($foreground, text-disabled);
+                }
             }
         }
     }
@@ -1579,6 +1778,7 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
         @include mc-typography-level-to-styles($config, body);
     }
 }
+
 
 
 
@@ -1602,19 +1802,11 @@ $mc-datepicker-today-fade-amount: 0.2;
 @mixin mc-datepicker-theme($theme) {
     $primary: map-get($theme, primary);
     $second: map-get($theme, second);
+    $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
-
-    .mc-calendar {
-        border: {
-            color: mc-color($second);
-            width: 1px;
-            style: solid;
-        }
-    }
+    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-calendar__table-header {
         color: mc-color($second, 400);
@@ -1626,7 +1818,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         background: transparent;
 
         .mc-icon {
-            color: mc-color($second, 400);
+            color: map-get($foreground, icon);
         }
     }
 
@@ -1644,16 +1836,16 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__body_disabled > .mc-calendar__body-cell-content:not(.mc-calendar__body_selected) {
-        color: mc-color($foreground, disabled-text);
+        color: mc-color($foreground, text-disabled);
     }
 
     .cdk-keyboard-focused .mc-calendar__body_active,
     .cdk-program-focused .mc-calendar__body_active {
         & > .mc-calendar__body-cell-content {
-            $focus-color: mc-color($primary);
+            $focused-color: map-get(map-get($theme, states), focused-color);
 
-            border-color: $focus-color;
-            box-shadow: 0 0 0 1px $focus-color;
+            border-color: $focused-color;
+            box-shadow: 0 0 0 1px $focused-color;
         }
     }
 
@@ -1664,7 +1856,8 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__controls {
-        .mc-button, .mc-icon-button {
+        .mc-button,
+        .mc-icon-button {
             border-radius: 0;
             border-color: transparent;
             background-color: transparent;
@@ -1680,30 +1873,30 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-calendar__body-today {
-        color: mc-color($primary, 500);
+        color: mc-color($primary);
     }
 
     .mc-calendar__body_disabled > .mc-calendar__body-today:not(.mc-calendar__body_selected) {
         border-color: fade-out(mc-color($foreground, text), $mc-datepicker-today-fade-amount);
     }
 
-    @include _mc-datepicker-color(mc-color($primary, if($is-dark, 700, 100)));
+    @include _mc-datepicker-color($selected-color);
 
     .mc-datepicker__content {
-        box-shadow: 0 1px 10px 0 rgba(black, 0.12);
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+        @include popup-params($theme);
+
         color: mc-color($foreground, text);
 
         &.mc-warn {
-            @include _mc-datepicker-color(mc-color(map-get($theme, error)));
+            @include _mc-datepicker-color(mc-color($error));
         }
     }
 
     .mc-datepicker-toggle_active {
-        color: mc-color(map-get($theme, primary));
+        color: mc-color($primary);
 
         &.mc-warn {
-            color: mc-color(map-get($theme, error));
+            color: mc-color($error);
         }
     }
 }
@@ -1747,21 +1940,15 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 
-@mixin mc-dropdown-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
 
+@mixin mc-dropdown-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-dropdown__panel {
-        border-color: mc-color($second);
-
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
-
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+        @include popup-params($theme);
     }
 
     .mc-dropdown__item {
@@ -1769,13 +1956,14 @@ $mc-datepicker-today-fade-amount: 0.2;
 
         background: transparent;
 
-        &:hover,
-        &.mc-hovered {
-            background: mc-color($background, hover);
+        &:hover {
+            background: mc-color($background, overlay-hovered);
         }
 
         &.cdk-keyboard-focused {
-            outline: mc-color($primary) solid 2px;
+            $focused-color: map-get(map-get($theme, states), focused-color);
+
+            outline: $focused-color solid 2px;
             outline-offset: -2px;
 
             &.mc-link {
@@ -1784,25 +1972,23 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
 
         &.mc-selected {
-            background: mc-color($primary, if($is-dark, 700, 100));
+            background: $selected-color;
         }
 
         &[disabled],
         &.mc-disabled {
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
 
             background: transparent;
         }
 
         .mc-dropdown__item-caption {
-            color: mc-color($foreground, less-contrast-text);
+            color: mc-color($foreground, text-less-contrast);
         }
     }
 
-    .mc-dropdown__item_highlighted {
-        &:not([disabled]):not(.mc-disabled){
-            background: mc-color($background, hover);
-        }
+    .mc-dropdown__item_highlighted:not([disabled]):not(.mc-disabled) {
+        background: mc-color($background, overlay-hovered);
     }
 }
 
@@ -1822,49 +2008,37 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 @mixin mc-form-field-theme($theme) {
-    $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $is-dark: map-get($theme, is-dark);
 
     .mc-form-field {
-        background: {
-            color: map-get($background, background);
-        }
+        background-color: map-get($background, background);
 
         &:not(.mc-form-field_without-borders) {
             .mc-form-field__container {
-                border: {
-                    color: mc-color($second);
-                }
+                border-color: mc-color($second);
             }
 
             &:hover .mc-form-field__container {
-                border: {
-                    color: mc-color($second, if($is-dark-theme, lighter, darker));
-                }
+                border-color: mc-color($second, if($is-dark, lighter, darker));
             }
 
             &.mc-focused:not(.ng-invalid) .mc-form-field__container {
-                border: {
-                    color: mc-color($primary);
-                }
+                $focused-color: map-get(map-get($theme, states), focused-color);
 
-                box-shadow: 0 0 0 1px mc-color($primary);
+                border-color: $focused-color;
+                box-shadow: 0 0 0 1px $focused-color;
             }
 
             &.ng-invalid .mc-form-field__container {
-                background: {
-                    color: if($is-dark-theme, transparent, mc-color($error, lighter));
-                }
+                background-color: if($is-dark, transparent, mc-color($error, lighter));
 
-                border: {
-                    color: mc-color($error);
-                }
+                border-color: mc-color($error);
 
                 .mc-input,
                 .mc-textarea {
@@ -1877,29 +2051,21 @@ $mc-datepicker-today-fade-amount: 0.2;
             }
 
             &.mc-disabled .mc-form-field__container {
-                border: {
-                    color: mix(map-get($background, button-border), map-get($background, disabled-overlay));
-                }
+                border-color: mix(map-get($foreground, border), map-get($background, overlay-disabled));
 
-                background: {
-                    color: mix(map-get($background, button-bg), map-get($background, disabled-overlay));
-                }
+                background-color: mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
 
                 .mc-icon,
                 .mc-input,
                 .mc-textarea {
-                    color: mc-color($foreground, disabled-text);
+                    color: mc-color($foreground, text-disabled);
                 }
             }
         }
     }
 
     .mc-form-field__hint {
-        color: mc-color($second, 400);
-    }
-
-    .mc-form-field__prefix .mc-icon {
-        color: map-get($foreground, disabled-text);
+        color: mc-color($foreground, text-less-contrast);
     }
 }
 
@@ -1920,18 +2086,18 @@ $mc-datepicker-today-fade-amount: 0.2;
     $foreground: map-get($theme, foreground);
 
     .mc-input {
-        color: map-get($foreground, text);;
+        color: map-get($foreground, text);
 
         &::placeholder {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
 
         &::-ms-input-placeholder {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
 
         &::-webkit-input-placeholder {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
     }
 }
@@ -1959,7 +2125,6 @@ $mc-datepicker-today-fade-amount: 0.2;
 
     $color: mc-color($primary);
     $color_hover: mc-color($primary, if($is-dark, lighter, darker));
-    $color_disabled: mc-color($foreground, disabled-text);
 
     .mc-link {
         color: $color;
@@ -1981,7 +2146,9 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
 
         &.cdk-keyboard-focused {
-            outline: $color solid 2px;
+            $focused-color: map-get(map-get($theme, states), focused-color);
+
+            outline: $focused-color solid 2px;
             outline-offset: 2px;
         }
 
@@ -2004,9 +2171,6 @@ $mc-datepicker-today-fade-amount: 0.2;
 
         &.mc-link_dashed .mc-link__text {
             border-bottom-style: dashed;
-        }
-
-        &.mc-link_dashed .mc-link__text {
             border-bottom-width: 1px;
             border-bottom-color: rgba($color, .5);
 
@@ -2033,6 +2197,8 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
 
         &[disabled] {
+            $color_disabled: mc-color($foreground, text-disabled);
+
             color: $color_disabled;
 
             cursor: default;
@@ -2123,19 +2289,12 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 @mixin mc-list-theme($theme) {
-    $primary: map-get($theme, primary);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark-theme: map-get($theme, is-dark);
-
-    .mc-list,
-    .mc-list-selection {
-        .mc-subheader {
-            color: mc-color($foreground, secondary-text);
-        }
-    }
+    $states: map-get($theme, states);
+    $selected-color: map-get($states, selected-color);
+    $focused-color: map-get($states, focused-color);
 
     .mc-list-item {
         color: mc-color($foreground, text);
@@ -2146,24 +2305,23 @@ $mc-datepicker-today-fade-amount: 0.2;
 
         color: mc-color($foreground, text);
 
-        &:hover,
-        &.mc-hovered {
-            background: mc-color($background, hover);
+        &:hover {
+            background: mc-color($background, overlay-hovered);
         }
 
         &.mc-focused {
-            border-color: mc-color($primary);
+            border-color: $focused-color;
         }
 
         &.mc-selected {
-            background: mc-color($primary, if($is-dark-theme, 700, 100));
+            background: $selected-color;
         }
 
         &.mc-disabled,
         &[disabled] {
             background: transparent;
 
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 }
@@ -2172,16 +2330,6 @@ $mc-datepicker-today-fade-amount: 0.2;
     .mc-list-item,
     .mc-list-option {
         @include mc-typography-level-to-styles($config, body);
-    }
-
-    .mc-list,
-    .mc-list-selection {
-        // todo now we are not use it
-        .mc-subheader {
-            font-family: mc-font-family($config, subheading);
-            font-size: mc-font-size($config, subheading);
-            font-weight: mc-font-weight($config, subheading);
-        }
     }
 }
 
@@ -2192,23 +2340,24 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 @mixin mc-modal-theme($theme) {
-    $primary: map-get($theme, primary);
     $second: map-get($theme, second);
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $popup-common: map-get(map-get($theme, components), popup-common);
+    $footer_background-color: map-get($popup-common, footer_background-color);
 
-    $inner-border: mc-color($second, if($is-dark, 600, 60));
+    $modal: map-get(map-get($theme, components), modal);
+
+    $divider-color: mc-color($foreground, divider);
 
     .mc-modal {
         .mc-modal-content {
+            // почему у модалки такой бэкграунд ?
             background-color: map-get($background, background);
 
-            box-shadow:
-                0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
-                0 6px 12px 0 rgba(0, 0, 0, 0.5);
+            box-shadow: map-get($modal, shadow);
         }
 
         .mc-modal-title {
@@ -2216,35 +2365,33 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
 
         .mc-modal-header {
-            border-bottom: 1px solid $inner-border;
+            border-bottom: 1px solid $divider-color;
         }
 
         .mc-modal-footer {
-            border-top: 1px solid $inner-border;
-            background-color: if($is-dark, transparent, mc-color($second, 60));
+            border-top: 1px solid $divider-color;
+            background-color: $footer_background-color;
         }
 
         .mc-modal-close {
-            border: $mc-button-border-size solid transparent;
+            border: 1px solid transparent;
 
-            &:hover .mc-button-overlay {
-                background-color: transparent;
-            }
+            &:hover {
+                .mc-button-overlay {
+                    background: map-get($background, overlay-hovered);
+                }
 
-            &:hover,
-            &.cdk-keyboard-focused {
                 .mc-icon {
-                    color: mix(map-get($foreground, text), mc-color($second), 90%);
+                    color: inherit;
                 }
             }
         }
     }
 
     .mc-confirm {
-        // todo почему футер внезапно перестал быть футером ?
         .mc-confirm-btns {
-            border-top: 1px solid $inner-border;
-            background-color: if($is-dark, transparent, mc-color($second, 60));
+            border-top: 1px solid $divider-color;
+            background-color: $footer_background-color;
         }
     }
 }
@@ -2264,52 +2411,52 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 
-@mixin _mc-navbar-theme-color($theme) {
-    $palette: map-get($theme, primary);
-    $focus-color: mc-color($primary);
 
-    background-color: mc-color($palette, 700);
+@mixin mc-navbar-theme($theme) {
+    $focused-color: map-get(map-get($theme, states), focused-color);
 
-    [mc-icon], .mc-icon {
-        color: mc-color($palette, 100);
-    }
+    $navbar: map-get(map-get($theme, components), navbar);
 
-    mc-navbar-item.mc-navbar-item-active {
-        $active-lighten: 5%;
-        background-color: lighten(mc-color($palette, 700), $active-lighten)
-    }
+    .mc-navbar {
+        background-color: map-get($navbar, background-color);
 
-    mc-navbar-item[disabled] {
-        > mc-navbar-title, .mc-navbar-title, [mc-icon] {
-            opacity: 0.3;
+        .mc-navbar-title,
+        .mc-icon {
+            color: map-get($navbar, color);
         }
     }
 
-    mc-navbar-item, .mc-navbar-item, .mc-navbar-title {
-        color: mc-color($palette, 100);
-    }
-
-    mc-navbar-item, .mc-navbar-item {
-        outline: 0;
-    }
-
-    mc-navbar-item:not([disabled]), .mc-navbar-item:not([disabled]) {
+    .mc-navbar-item {
         outline: 0;
 
-        &.cdk-keyboard-focused  {
-            box-shadow: inset 0 0 0 2px $focus-color;
+        color: map-get($navbar, item_color);
+
+        &:not([disabled]) {
+            outline: 0;
+
+            &.cdk-keyboard-focused {
+                box-shadow: inset 0 0 0 2px $focused-color;
+            }
         }
 
-    }
+        &.mc-navbar-item-active {
+            background-color: map-get($navbar, item_state-active_color);
+        }
 
-    mc-navbar-item:hover:not([disabled]):not(.mc-progress) {
-        $hover-lighten: 5%;
-        background-color: lighten(mc-color($palette, 700), $hover-lighten)
-    }
+        &:hover:not([disabled]):not(.mc-progress) {
+            background-color: map-get($navbar, item_state-hover_color);
+        }
 
-    mc-navbar-item.mc-progress:hover:not([disabled]) {
-        $bg-lighten: 15%;
-        background-color: lighten(mc-color($palette, 800), $bg-lighten);
+        &.mc-progress:hover:not([disabled]) {
+            background-color: map-get($navbar, item_state-progress_color);
+        }
+
+        &[disabled] {
+            .mc-navbar-title,
+            .mc-icon {
+                opacity: map-get($navbar, item_state-disabled_opacity);
+            }
+        }
     }
 
     .mc-navbar-brand {
@@ -2319,21 +2466,9 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 }
 
-@mixin mc-navbar-theme($theme) {
-    .mc-navbar {
-        @include _mc-navbar-theme-color($theme);
-    }
-}
-
 @mixin mc-navbar-typography($config) {
     .mc-navbar-title {
         @include mc-typography-level-to-styles($config, body);
-    }
-
-    .mc-navbar-item {
-        .mc-navbar-title {
-            @include mc-typography-level-to-styles($config, body);
-        }
     }
 
     .mc-navbar-brand {
@@ -2350,14 +2485,13 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 @mixin mc-popover-theme($theme) {
-    $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    $is-dark: map-get($theme, is-dark);
+    $popover: map-get(map-get($theme, components), popover);
 
-    $primary-background-color: map-get($background, background);
-    $secondary-background-color: if($is-dark, map-get($background, background), map-get($background, button-bg));
-    $border-color: if($is-dark, $primary-background-color, map-get($foreground, disabled));
+    $background-color: map-get($popover, background-color);
+    $footer_background-color: map-get($popover, footer_background-color);
+    $border-color: map-get($popover, border-color);
 
     .mc-popover {
         border-color: $border-color;
@@ -2366,20 +2500,21 @@ $mc-datepicker-today-fade-amount: 0.2;
 
     .mc-popover__container {
         color: map-get($foreground, text);
-        background-color: $primary-background-color;
+        background-color: $background-color;
     }
 
     .mc-popover__header {
         border-bottom-color: map-get($foreground, divider);
     }
 
-    .mc-popover__header, .mc-popover__content {
-        background-color: $primary-background-color;
+    .mc-popover__header,
+    .mc-popover__content {
+        background-color: $background-color;
     }
 
     .mc-popover__footer {
-        background-color: $secondary-background-color;
-        border-top-color: if($is-dark, map-get($foreground, divider), $secondary-background-color);
+        background-color: $footer_background-color;
+        border-top-color: map-get($foreground, divider);
     }
 
     .mc-popover .mc-popover__arrow {
@@ -2388,46 +2523,46 @@ $mc-datepicker-today-fade-amount: 0.2;
 
     .mc-popover_placement-top .mc-popover__arrow,
     .mc-popover_placement-top-left .mc-popover__arrow,
-    .mc-popover_placement-top-right .mc-popover__arrow{
-        background-color: $primary-background-color;
-        border-top-color: $primary-background-color;
-        border-left-color: $primary-background-color;
+    .mc-popover_placement-top-right .mc-popover__arrow {
+        background-color: $background-color;
+        border-top-color: $background-color;
+        border-left-color: $background-color;
     }
 
     .mc-popover_placement-top .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-top-left .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-top-right .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $secondary-background-color;
-        border-top-color: $secondary-background-color;
-        border-left-color: $secondary-background-color;
+        background-color: $footer_background-color;
+        border-top-color: $footer_background-color;
+        border-left-color: $footer_background-color;
     }
 
     .mc-popover_placement-right .mc-popover__arrow,
     .mc-popover_placement-right-top .mc-popover__arrow,
-    .mc-popover_placement-right-bottom .mc-popover__arrow{
-        background-color: $primary-background-color;
-        border-top-color: $primary-background-color;
-        border-right-color: $primary-background-color;
+    .mc-popover_placement-right-bottom .mc-popover__arrow {
+        background-color: $background-color;
+        border-top-color: $background-color;
+        border-right-color: $background-color;
     }
 
     .mc-popover_placement-right-bottom .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $secondary-background-color;
-        border-top-color: $secondary-background-color;
-        border-right-color: $secondary-background-color;
+        background-color: $footer_background-color;
+        border-top-color: $footer_background-color;
+        border-right-color: $footer_background-color;
     }
 
     .mc-popover_placement-left .mc-popover__arrow,
     .mc-popover_placement-left-top .mc-popover__arrow,
     .mc-popover_placement-left-bottom .mc-popover__arrow {
-        background-color: $primary-background-color;
-        border-bottom-color: $primary-background-color;
-        border-left-color: $primary-background-color;
+        background-color: $background-color;
+        border-bottom-color: $background-color;
+        border-left-color: $background-color;
     }
 
     .mc-popover_placement-left-bottom .mc-popover__arrow.mc-popover__arrow_with-footer {
-        background-color: $secondary-background-color;
-        border-bottom-color: $secondary-background-color;
-        border-left-color: $secondary-background-color;
+        background-color: $footer_background-color;
+        border-bottom-color: $footer_background-color;
+        border-left-color: $footer_background-color;
     }
 
     .mc-popover_placement-bottom .mc-popover__arrow,
@@ -2435,10 +2570,10 @@ $mc-datepicker-today-fade-amount: 0.2;
     .mc-popover_placement-bottom-right .mc-popover__arrow,
     .mc-popover_placement-bottom .mc-popover__arrow.mc-popover__arrow_with-footer,
     .mc-popover_placement-bottom-left .mc-popover__arrow.mc-popover__arrow_with-footer,
-    .mc-popover_placement-bottom-right .mc-popover__arrow.mc-popover__arrow_with-footer{
-        background-color: $primary-background-color;
-        border-right-color: $primary-background-color;
-        border-bottom-color: $primary-background-color;
+    .mc-popover_placement-bottom-right .mc-popover__arrow.mc-popover__arrow_with-footer {
+        background-color: $background-color;
+        border-right-color: $background-color;
+        border-bottom-color: $background-color;
     }
 }
 
@@ -2459,15 +2594,20 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 @mixin mc-radio-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $radio: map-get(map-get($theme, components), radio);
 
-    $focus-color: mc-color($primary);
+    $outer-circle_border-color: map-get($radio, outer-circle_border-color);
+    $inner-circle_border-color: map-get($radio, inner-circle_border-color);
+
+    $outer-circle_checked-state_border-color: map-get($radio, outer-circle_checked-state_border-color);
+    $inner-circle_checked-state_border-color: map-get($radio, inner-circle_checked-state_border-color);
+
+    $outer-circle_focused-state_border-color: map-get($radio, outer-circle_focused-state_border-color);
+    $outer-circle_focused-state_shadow: map-get($radio, outer-circle_focused-state_shadow);
+    $inner-circle_focused-state_shadow: map-get($radio, inner-circle_focused-state_shadow);
 
     .mc-radio-group {
         color: map-get($foreground, text);
@@ -2475,61 +2615,58 @@ $mc-datepicker-today-fade-amount: 0.2;
 
     .mc-radio-button {
         & .mc-radio-button__outer-circle {
+            border-color: $outer-circle_border-color;
             background: map-get($background, background);
-            border-color: mc-color($second);
+        }
+
+        & .mc-radio-button__inner-circle {
+            border-color: $inner-circle_border-color;
         }
 
         &:hover {
             & .mc-radio-button__outer-circle {
-                background: mix(map-get($background, background), map-get($background, hover), 5);
+                background: map-get($background, overlay-hovered);
             }
         }
 
         &.mc-checked {
             & .mc-radio-button__outer-circle {
+                border-color: $outer-circle_checked-state_border-color;
                 background: white;
-
-                border-color: mc-color($primary, if($is-dark, lighter, darker));
             }
 
             & .mc-radio-button__inner-circle {
                 display: block;
-
-                border-color: if($is-dark, mc-color($primary, 600), mc-color($primary));
+                border-color: $inner-circle_checked-state_border-color;
             }
         }
 
-        &.cdk-keyboard-focused .mc-radio-input {
-            + .mc-radio-label-content .mc-radio-button__outer-circle {
-                border-color: $focus-color;
-
-                box-shadow: 0 0 0 2px $focus-color;
+        &.cdk-keyboard-focused {
+            & .mc-radio-button__outer-circle {
+                border-color: $outer-circle_focused-state_border-color;
+                box-shadow: $outer-circle_focused-state_shadow;
             }
 
-            + .mc-radio-label-content .mc-radio-button__inner-circle {
-                box-shadow: 0 0 0 1px white;
+            & .mc-radio-button__inner-circle {
+                box-shadow: $inner-circle_focused-state_shadow;
             }
         }
 
         &.mc-disabled {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
 
             & .mc-radio-label {
                 cursor: default;
             }
 
             & .mc-radio-button__outer-circle {
-                border-color: map-get($background, button-border);
-
-                background: map-get($background, button-bg);
+                border-color: map-get($foreground, border);
+                background: map-get($background, background-disabled);
             }
 
             & .mc-radio-button__inner-circle {
-                border-color: map-get($background, button-bg);
-
-                box-shadow: none;
-
-                background: mc-color($second, 200);
+                border-color: map-get($background, background-disabled);
+                background: map-get($foreground, icon);
             }
         }
     }
@@ -2546,15 +2683,13 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 
+
 @mixin mc-select-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
     $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $popup-common: map-get(map-get($theme, components), popup-common);
 
     .mc-select {
         color: map-get($foreground, text);
@@ -2564,34 +2699,24 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 
     .mc-select__placeholder {
-        color: map-get($foreground, disabled-text);
+        color: map-get($foreground, text-disabled);
     }
 
     .mc-select__panel {
-        border: {
-            color: mc-color($second);
-        }
-
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
-
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
-    }
-
-    .mc-select__no-options-message {
-        color: mc-color($second, 400);
+        @include popup-params($theme);
     }
 
     .mc-select__search-container {
-        border-bottom: {
-            width: 1px;
-            style: solid;
-            color: mc-color($second);
-        }
+        border-bottom-color: map-get($popup-common, border-color);
+    }
+
+    .mc-select__no-options-message {
+        color: mc-color($foreground, text-less-contrast);
     }
 }
 
@@ -2607,15 +2732,14 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 @mixin mc-sidepanel-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $divider-color: mc-color($foreground, divider);
 
-    $inner-border: mc-color($second, if($is-dark, 600, 60));
+    $popup-common: map-get(map-get($theme, components), popup-common);
+
+    $sidepanel: map-get(map-get($theme, components), sidepanel);
 
     .mc-sidepanel-content {
         background-color: map-get($background, background);
@@ -2625,7 +2749,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         &.mc-sidepanel-container_right {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, border_color),
                     -6px 0 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -2633,7 +2757,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         &.mc-sidepanel-container_left {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, border_color),
                     6px 0 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -2641,7 +2765,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         &.mc-sidepanel-container_bottom {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, border_color),
                     0 -6px 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
@@ -2649,24 +2773,19 @@ $mc-datepicker-today-fade-amount: 0.2;
         &.mc-sidepanel-container_top {
             .mc-sidepanel-content {
                 box-shadow:
-                    0 0 0 1px mc-color($second, if($is-dark, 800, 300)),
+                    0 0 0 1px map-get($sidepanel, border_color),
                     0 6px 12px 0 rgba(0, 0, 0, 0.24);
             }
         }
     }
 
     .mc-sidepanel-header {
-        border-bottom: 1px solid $inner-border;
+        border-bottom: 1px solid $divider-color;
     }
 
     .mc-sidepanel-footer {
-        border-top: 1px solid $inner-border;
-        background-color: if($is-dark, transparent, mc-color($second, 60));
-    }
-
-    .mc-sidepanel-close-x:hover .mc-icon,
-    .mc-sidepanel-close:hover .mc-sidepanel-close-x .mc-icon {
-        color: mix(map-get($foreground, text), mc-color($second), 90%);
+        border-top: 1px solid $divider-color;
+        background-color: map-get($popup-common, footer_background-color);
     }
 }
 
@@ -2681,15 +2800,14 @@ $mc-datepicker-today-fade-amount: 0.2;
 }
 
 @mixin mc-tabs-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
-
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark: map-get($theme, is-dark);
+    $focused-color: map-get(map-get($theme, states), focused-color);
 
-    $border-color: mc-color($second, 300);
+    $tabs: map-get(map-get($theme, components), tabs);
+    $border-color: map-get($tabs, border-color);
+    $state-active_color: map-get($tabs, state-active_color);
 
     .mc-tab-label,
     .mc-tab-light-label,
@@ -2703,24 +2821,22 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
 
         &:hover .mc-tab-overlay {
-            background: mc-color($background, hover);
+            background: mc-color($background, overlay-hovered);
         }
 
-        &.cdk-keyboard-focused {
-            &:after {
-                border-color: mc-color($primary);
-            }
+        &.cdk-keyboard-focused:after {
+            border-color: $focused-color;
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
 
             cursor: default;
 
-            background: if($is-dark, mc-color($second, 600), transparent);
+            background: mc-color($background, background-disabled);
 
             & .mc-tab-overlay {
-                background: mc-color($background, disabled-overlay);
+                background: mc-color($background, overlay-disabled);
             }
         }
     }
@@ -2749,13 +2865,13 @@ $mc-datepicker-today-fade-amount: 0.2;
             border-bottom-color: transparent;
 
             &:before {
-                background-color: mc-color($second, 300);
+                background-color: $border-color;
             }
         }
 
         &.mc-active {
             &:before {
-                background-color: mc-color($primary);
+                background-color: $state-active_color;
             }
 
             & .mc-tab-overlay {
@@ -2784,35 +2900,17 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 
-
-@mixin _mc-tag-color($main-color, $focus-color, $foreground, $background, $is-dark-theme) {
-    color: mc-color($foreground, text);
-
-    background: mc-color($main-color, if($is-dark-theme, 700, 100));
-    border-color: mc-color($main-color, if($is-dark-theme, 700, 100));
+@mixin mc-tag-color($params) {
+    background: map-get($params, background);
+    border-color: map-get($params, border-color);
 
     &.mc-active,
     &.mc-focused {
-        border-color: mc-color($focus-color);
-        box-shadow: 0 0 0 1px mc-color($focus-color);
-    }
-
-    &.mc-disabled {
-        border-color: mix(mc-color($main-color), transparent, 10%);
-        background: mix(mc-color($main-color), transparent, 10%);
-
-        color: mix(mc-color($main-color), transparent, 50%);
-    }
-
-    &:not(.mc-disabled) .mc-icon {
-        color: mix(mc-color($main-color, 400), mc-color($background, hover));
-
-        &:hover {
-            cursor: pointer;
-            color: mc-color($main-color, if($is-dark-theme, lighter, darker));
-        }
+        border-color: map-get($params, focused-state_color);
+        box-shadow: 0 0 0 1px map-get($params, focused-state_color);
     }
 }
+
 
 @mixin mc-tag-theme($theme) {
     $primary: map-get($theme, primary);
@@ -2822,42 +2920,69 @@ $mc-datepicker-today-fade-amount: 0.2;
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $tags: map-get(map-get($theme, components), tags);
 
     .mc-tag {
+        color: mc-color($foreground, text);
+
         &.mc-primary {
-            @include _mc-tag-color($primary, $primary, $foreground, $background, $is-dark-theme);
+            @include mc-tag-color(map-get($tags, primary));
         }
 
         &.mc-second {
-            @include _mc-tag-color($second, $primary, $foreground, $background, $is-dark-theme);
+            @include mc-tag-color(map-get($tags, second));
         }
 
         &.mc-error {
-            @include _mc-tag-color($error, $error, $foreground, $background, $is-dark-theme);
+            @include mc-tag-color(map-get($tags, error));
         }
 
-        &:hover:not(.mc-disabled),
-        &.mc-hovered:not(.mc-disabled) {
+        &:hover:not(.mc-disabled) {
             & .mc-tag-overlay {
-                background: mc-color($background, hover);
+                background: mc-color($background, overlay-hovered);
+            }
+        }
+
+        .mc-icon {
+            color: map-get($foreground, icon);
+
+            &:hover {
+                cursor: pointer;
+                color: inherit;
+            }
+        }
+
+        &.mc-disabled {
+            color: mc-color($foreground, text-disabled);
+
+            border-color: transparent;
+
+            background-color: map-get($background, background-disabled);
+
+            & .mc-tag-overlay {
+                background: mc-color($background, overlay-disabled);
+            }
+
+            & .mc-icon {
+                color: map-get($foreground, icon);
+                cursor: default;
             }
         }
     }
 
     .mc-tag-input {
-        color: map-get($foreground, text);;
+        color: map-get($foreground, text);
 
         &::placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, text-disabled);
         }
 
         &::-ms-input-placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, text-disabled);
         }
 
         &::-webkit-input-placeholder {
-            color: map-get($foreground, disabled-text);;
+            color: map-get($foreground, text-disabled);
         }
     }
 }
@@ -2887,20 +3012,19 @@ $mc-datepicker-today-fade-amount: 0.2;
 @mixin mc-textarea-theme($theme) {
     $foreground: map-get($theme, foreground);
 
-    .mc-input,
     .mc-textarea {
         color: map-get($foreground, text);
 
         &::placeholder {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
 
         &::-ms-input-placeholder {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
 
         &::-webkit-input-placeholder {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
         }
     }
 }
@@ -2919,81 +3043,70 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 
-$hover-darken: 5%;
-
 @mixin mc-toggle-theme($theme) {
     $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
     $error: map-get($theme, error);
 
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    $is-dark: map-get($theme, is-dark);
+    $toggle: map-get(map-get($theme, components), toggle);
+
+    $border-color: map-get($toggle, border-color);
+    $background_color: map-get($toggle, background);
+    $circle_border-color: map-get($toggle, circle_border-color);
+    $circle_background: map-get($toggle, circle_background);
+
+    $focused-state_color: map-get($toggle, focused-state_color);
 
     .mc-toggle {
         color: map-get($foreground, text);
 
         .mc-toggle-bar {
-            background: map-get($background, button-bg);
-            border-color: mc-color($background, button-border);
+            border-color: $border-color;
+
+            background: $background_color;
         }
 
         .mc-toggle__circle {
-            border-color: mc-color($background, button-border);
+            border-color: $circle_border-color;
 
-            background: linear-gradient(to bottom, white, if($is-dark, white, mc-color($second, lighter)));
-        }
-
-        &.mc-toggle_off {
-            .mc-toggle-bar {
-                background: linear-gradient(to bottom, mc-color($second, lighter), mc-color($background, button-bg));
-
-                @if $is-dark {
-                    background: map-get($background, background);
-                }
-            }
+            background: $circle_background;
         }
 
         &:hover {
-            & .mc-toggle__focus-frame {
-                background: map-get($background, hover);
+            & .mc-toggle__overlay {
+                background: map-get($background, overlay-hovered);
             }
         }
 
         &.cdk-keyboard-focused {
-            & .mc-toggle__focus-frame {
-                box-shadow: inset 0 0 0 1px map-get($background, background), 0 0 0 2px mc-color($primary);
+            & .mc-toggle__overlay {
+                box-shadow: $focused-state_color;
             }
         }
 
-        &.mc-primary:not(.mc-toggle_off) {
-            .mc-toggle-bar {
-                border-color: mc-color($primary);
-                background: mc-color($primary);
+        &.mc-active {
+            &.mc-primary {
+                .mc-toggle-bar {
+                    border-color: mc-color($primary);
+                    background: mc-color($primary);
+                }
             }
-        }
 
-        &.mc-error:not(.mc-toggle_off) {
-            .mc-toggle-bar {
-                border-color: mc-color($error);
-                background: mc-color($error);
+            &.mc-error {
+                .mc-toggle-bar {
+                    border-color: mc-color($error);
+                    background: mc-color($error);
+                }
             }
         }
 
         &.mc-disabled {
-            color: map-get($foreground, disabled-text);
+            color: map-get($foreground, text-disabled);
 
-            &.mc-toggle_off {
-                .mc-toggle-bar {
-                    @if $is-dark {
-                        background: map-get($mc-grey, 700);
-                    }
-                }
-            }
-
-            & .mc-toggle__focus-frame {
-                background: map-get($background, disabled-overlay);
+            & .mc-toggle__overlay {
+                background: map-get($background, overlay-disabled);
             }
         }
     }
@@ -3017,18 +3130,16 @@ $hover-darken: 5%;
 
 
 @mixin mc-tooltip-theme($theme) {
-    $second: map-get($theme, second);
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
+    $tooltip: map-get(map-get($theme, components), tooltip);
 
-    $is-dark: map-get($theme, is-dark);
-
-    $background-color: mc-color($background, bg-dropdowns);
-    $border-color: if($is-dark, $background-color, map-get($foreground, disabled));
+    $shadow: map-get($tooltip, shadow);
+    $background-color: map-get($tooltip, background-color);
+    $color: map-get($tooltip, color);
 
     .mc-tooltip-inner {
-        color: if($is-dark, mc-color($second, 700), mc-contrast($second, 700));
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+        color: $color;
+
+        box-shadow: $shadow;
         background-color: $background-color;
     }
 
@@ -3054,8 +3165,7 @@ $hover-darken: 5%;
 }
 
 @mixin mc-tooltip-typography($config) {
-    .mc-tooltip,
-    .mc-tooltip-inner {
+    .mc-tooltip {
         @include mc-typography-level-to-styles($config, caption);
     }
 }
@@ -3065,15 +3175,11 @@ $hover-darken: 5%;
 
 
 
+
 @mixin mc-tree-select-theme($theme) {
-    $primary: map-get($theme, primary);
-    $second: map-get($theme, second);
     $error: map-get($theme, error);
 
     $foreground: map-get($theme, foreground);
-    $background: map-get($theme, background);
-
-    $is-dark: map-get($theme, is-dark);
 
     .mc-tree-select {
         color: map-get($foreground, text);
@@ -3083,22 +3189,16 @@ $hover-darken: 5%;
         }
 
         &.mc-disabled {
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 
     .mc-tree-select__placeholder {
-        color: mc-color($foreground, disabled-text);
+        color: mc-color($foreground, text-disabled);
     }
 
     .mc-tree-select__panel {
-        border: {
-            color: mc-color($second);
-        }
-
-        box-shadow: 0 3px 3px 0 mc-color($second, A200);
-
-        background-color: if($is-dark, map-get($second, 700), map-get($background, background));
+        @include popup-params($theme);
     }
 }
 
@@ -3115,12 +3215,11 @@ $hover-darken: 5%;
 
 
 @mixin mc-tree-theme($theme) {
-    $primary: map-get($theme, primary);
-
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $selected-color: map-get(map-get($theme, states), selected-color);
+    $focused-color: map-get(map-get($theme, states), focused-color);
 
     .mc-tree-selection {
         &:focus {
@@ -3131,23 +3230,22 @@ $hover-darken: 5%;
     .mc-tree-option {
         color: mc-color($foreground, text);
 
-        &:hover,
-        &.mc-hovered {
-            background-color: mc-color($background, hover);
+        &:hover {
+            background-color: mc-color($background, overlay-hovered);
         }
 
         &.mc-focused {
-            border-color: mc-color($primary);
+            border-color: $focused-color;
         }
 
         &.mc-selected {
-            background: mc-color($primary, if($is-dark-theme, 700, 100));
+            background: $selected-color;
         }
 
         &[disabled] {
             background-color: transparent;
 
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 }
@@ -3162,64 +3260,68 @@ $hover-darken: 5%;
 
 
 
-@mixin _mc-vertical-navbar-theme-color($theme) {
-    $palette: map-get($theme, primary);
+@mixin mc-vertical-navbar-theme($theme) {
+    $focused-color: map-get(map-get($theme, states), focused-color);
 
-    background-color: mc-color($palette, 700);
+    $navbar: map-get(map-get($theme, components), vertical-navbar);
 
-    :focus {
-        outline: 0;
-    }
+    $color: map-get($navbar, color);
+    $background-color: map-get($navbar, background-color);
+    $toggle-button_color: map-get($navbar, toggle-button_color);
 
-    .cdk-keyboard-focused, .cdk-program-focused {
-        outline: 2px solid mc-color($palette, 500);
-        outline-offset: -2px;
-    }
+    $state-hover_background-color: map-get($navbar, state-hover_background-color);
+    $state-active_background-color: map-get($navbar, state-active_background-color);
+    $state-progress_background-color: map-get($navbar, state-progress_background-color);
 
-    .mc-vertical-navbar__toggle-button {
-        color: mc-contrast($palette, 700);
-    }
+    .mc-vertical-navbar {
+        background-color: $background-color;
 
-    a[mc-vertical-navbar-header], .mc-vertical-navbar__toggle-button {
-        &:hover {
-            background-color: lighten(mc-color($palette, 700), 5%)
-        }
-    }
-
-    .mc-vertical-navbar__title {
-        color: mc-contrast($palette, 700);
-    }
-
-    mc-vertical-navbar-item, a[mc-vertical-navbar-item] {
-
-        color: mc-contrast($palette, 700);
-
-        &.mc-vertical-navbar__item_active {
-            $active-lighten: 5%;
-            background-color: lighten(mc-color($palette, 700), $active-lighten)
+        :focus {
+            outline: 0;
         }
 
-        &:hover:not([disabled]):not(.mc-progress) {
-            $hover-lighten: 5%;
-            background-color: lighten(mc-color($palette, 700), $hover-lighten)
+        .cdk-keyboard-focused {
+            outline: 2px solid $focused-color;
+            outline-offset: -2px;
         }
 
-        &.mc-progress:hover:not([disabled]) {
-            $bg-lighten: 15%;
-            background-color: lighten(mc-color($palette, 800), $bg-lighten);
+        .mc-vertical-navbar__toggle-button {
+            color: $toggle-button_color;
         }
 
-        &[disabled] {
-            > mc-vertical-navbar-title, .mc-vertical-navbar__title, [mc-icon] {
-                opacity: 0.3;
+        .mc-vertical-navbar__header,
+        .mc-vertical-navbar__toggle-button {
+            &:hover {
+                background-color: $state-hover_background-color;
             }
         }
-    }
-}
 
-@mixin mc-vertical-navbar-theme($theme) {
-    .mc-vertical-navbar {
-        @include _mc-vertical-navbar-theme-color($theme);
+        .mc-vertical-navbar__title {
+            color: $color;
+        }
+
+        .mc-vertical-navbar-item {
+            color: $color;
+
+            &.mc-vertical-navbar__item_active {
+                background-color: $state-active_background-color;
+            }
+
+            &:hover:not([disabled]):not(.mc-progress) {
+                background-color: $state-hover_background-color;
+            }
+
+            &.mc-progress:hover:not([disabled]) {
+                background-color: $state-progress_background-color;
+            }
+
+            &[disabled] {
+                .mc-vertical-navbar__title,
+                .mc-icon {
+                    opacity: 0.3;
+                }
+            }
+        }
     }
 }
 
@@ -3244,15 +3346,14 @@ $hover-darken: 5%;
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $is-dark-theme: map-get($theme, is-dark);
+    $selected-color: map-get(map-get($theme, states), selected-color);
 
     .mc-option {
         color: mc-color($foreground, text);
 
-        &:hover:not(.mc-disabled),
-        &.mc-hovered:not(.mc-disabled) {
+        &:hover:not(.mc-disabled) {
             .mc-option-overlay {
-                background: mc-color($background, hover);
+                background: mc-color($background, overlay-hovered);
             }
         }
 
@@ -3261,14 +3362,13 @@ $hover-darken: 5%;
         }
 
         &.mc-selected {
-            // todo пока непонятно откуда брать эти цвета
-            background: mc-color($primary, if($is-dark-theme, 700, 100));
+            background: $selected-color;
         }
 
         &.mc-disabled {
             background: transparent;
 
-            color: mc-color($foreground, disabled-text);
+            color: mc-color($foreground, text-disabled);
         }
     }
 }
@@ -3292,7 +3392,7 @@ $hover-darken: 5%;
     }
 
     .mc-disabled .mc-optgroup-label {
-        color: mc-color($foreground, disabled-text);
+        color: mc-color($foreground, text-disabled);
     }
 }
 
@@ -3314,7 +3414,6 @@ $hover-darken: 5%;
     @include mc-alert-typography($config);
     @include mc-autocomplete-typography($config);
     @include mc-badge-typography($config);
-    @include mc-button-toggle-typography($config);
     @include mc-button-typography($config);
     @include mc-checkbox-typography($config);
     @include mc-datepicker-typography($config);
@@ -3375,8 +3474,7 @@ $hover-darken: 5%;
 
 
 
-
-@mixin normal-state($color, $second, $is-dark) {
+@mixin card-type($color, $second, $is-dark) {
     box-shadow:
         inset -1px 0 0 0 mc-color($second, if($is-dark, darker, lighter)),
         inset 0 1px 0 0 mc-color($second, if($is-dark, darker, lighter)),
@@ -3388,7 +3486,6 @@ $hover-darken: 5%;
 }
 
 @mixin mc-card-theme($theme) {
-    $primary: map-get($theme, primary);
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
@@ -3401,42 +3498,47 @@ $hover-darken: 5%;
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
+    $selected-color: map-get(map-get($theme, states), selected-color);
+
     .mc-card {
         color: map-get($foreground, text);
-        
+
         &.mc-card_info {
-            @include normal-state($info, $second, $is-dark);
+            @include card-type($info, $second, $is-dark);
         }
-        
+
         &.mc-card_warning {
-            @include normal-state($warning, $second, $is-dark);
+            @include card-type($warning, $second, $is-dark);
         }
 
         &.mc-card_success {
-            @include normal-state($success, $second, $is-dark);
+            @include card-type($success, $second, $is-dark);
         }
 
         &.mc-card_error {
-            @include normal-state($error, $second, $is-dark);
+            @include card-type($error, $second, $is-dark);
         }
 
         &.mc-card_white {
-            background-color: mix(map-get($background, background), white, 90%);
+            $popup-common: map-get(map-get($theme, components), popup-common);
+
+            background-color: map-get($popup-common, background);
         }
 
         &.mc-card_selected {
-            background-color: mc-color($primary, if($is-dark, 700, 100));
+            background-color: $selected-color;
         }
 
-        // todo мне кажется тут можно сделать без overlay
         &:not(.mc-card_readonly):hover {
             .mc-card__overlay {
-                background: map-get($background, hover);
+                background: map-get($background, overlay-hovered);
             }
         }
 
         &.cdk-keyboard-focused {
-            box-shadow: 0 0 0 2px mc-color($primary);
+            $focused-color: map-get(map-get($theme, states), focused-color);
+
+            box-shadow: 0 0 0 2px $focused-color;
         }
     }
 }
@@ -3465,8 +3567,10 @@ $hover-darken: 5%;
 
     // Дефолтные серые иконки default-icon: лупа в поле, иконки дропдаунов v, все иконки вне полей.
     .mc-icon:not(.mc-icon_light) {
+        color: map-get($foreground, icon);
+
         &.mc-primary {
-            color: mix(map-get($foreground, default-icon), $primary-color, 30%);
+            color: mix(map-get($foreground, icon), $primary-color, 30%);
 
             &[disabled],
             &.mc-disabled {
@@ -3475,8 +3579,7 @@ $hover-darken: 5%;
         }
 
         &.mc-second {
-            // todo Миша, less-contrast-text - в темной теме не такой как на макетах.
-            color: map-get($foreground, less-contrast-text);
+            color: map-get($foreground, text-less-contrast);
 
             &[disabled],
             &.mc-disabled {
@@ -3485,7 +3588,7 @@ $hover-darken: 5%;
         }
 
         &.mc-error {
-            color: mix(map-get($foreground, default-icon), $error-color, 30%);
+            color: mix(map-get($foreground, icon), $error-color, 30%);
 
             &[disabled],
             &.mc-disabled {
@@ -3557,10 +3660,10 @@ $hover-darken: 5%;
     $second: map-get($theme, second);
     $error: map-get($theme, error);
 
-    $is-dark: map-get($theme, is-dark);
+    $progress-bar: map-get(map-get($theme, components), progress-bar);
 
     .mc-progress-bar {
-        background-color: mc-color($second, if($is-dark, 600, 60));
+        background-color: map-get($progress-bar, background);
 
         &.mc-primary .mc-progress-bar__line {
             background-color: mc-color($primary);
@@ -3605,22 +3708,14 @@ $hover-darken: 5%;
 
 
 @mixin mc-splitter-theme($theme) {
-    $second: map-get($theme, second);
-
-    $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
-
-    $is-dark: map-get($theme, is-dark);
 
     .mc-gutter {
         cursor: col-resize;
 
-        &:hover {
-            background-color: mix(map-get($background, button-bg), map-get($background, hover));
-        }
-
+        &:hover,
         &.mc-gutter_dragged {
-            background-color: mix(map-get($background, button-bg), map-get($background, hover));
+            background-color: mix(map-get($background, background-disabled), map-get($background, overlay-hovered));
         }
 
         &.mc-gutter_vertical {
@@ -3628,7 +3723,7 @@ $hover-darken: 5%;
         }
 
         &[disabled] {
-            background-color: mix(map-get($background, disabled-overlay), map-get($background, hover));
+            background-color: mix(map-get($background, overlay-disabled), map-get($background, overlay-hovered));
 
             cursor: default;
         }
@@ -3673,13 +3768,12 @@ $hover-darken: 5%;
 
 
 @mixin mosaic-theme($theme) {
-
     @include mc-core-theme($theme);
+
     @include mc-alert-theme($theme);
     @include mc-autocomplete-theme($theme);
     @include mc-badge-theme($theme);
     @include mc-button-theme($theme);
-    @include mc-button-toggle-theme($theme);
     @include mc-card-theme($theme);
     @include mc-checkbox-theme($theme);
     @include mc-datepicker-theme($theme);
@@ -3701,10 +3795,8 @@ $hover-darken: 5%;
     @include mc-select-theme($theme);
     @include mc-sidepanel-theme($theme);
     @include mc-splitter-theme($theme);
-    @include mc-splitter-theme($theme);
     @include mc-tabs-theme($theme);
     @include mc-tag-theme($theme);
-    @include mc-textarea-theme($theme);
     @include mc-textarea-theme($theme);
     @include mc-toggle-theme($theme);
     @include mc-tooltip-theme($theme);
