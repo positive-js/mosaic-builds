@@ -180,7 +180,7 @@ class McListOption {
         if (this.disabled) {
             return;
         }
-        this.listSelection.setFocusedOption(this, $event);
+        this.listSelection.setSelectedOptionsByClick(this, hasModifierKey($event, 'shiftKey'), hasModifierKey($event, 'ctrlKey'));
     }
     /**
      * @return {?}
@@ -235,7 +235,7 @@ McListOption.decorators = [
                 selector: 'mc-list-option',
                 host: {
                     '[attr.tabindex]': 'tabIndex',
-                    class: 'mc-list-option',
+                    class: 'mc-list-option mc-no-select',
                     '[class.mc-selected]': 'selected',
                     '[class.mc-focused]': 'hasFocus',
                     '[class.mc-disabled]': 'disabled',
@@ -333,6 +333,10 @@ class McListSelection extends McListSelectionMixinBase {
         }
         else if (multiple !== null) {
             this.multipleMode = MultipleMode.CHECKBOX;
+        }
+        if (this.multipleMode === MultipleMode.CHECKBOX) {
+            this.autoSelect = false;
+            this.noUnselect = false;
         }
         this._tabIndex = parseInt(tabIndex) || 0;
         this.selectionModel = new SelectionModel(this.multiple);
@@ -493,53 +497,21 @@ class McListSelection extends McListSelectionMixinBase {
         }
         this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.options.first.getHeight()));
     }
-    // Sets the focused option of the selection-list.
     /**
      * @param {?} option
-     * @param {?=} $event
+     * @param {?} shiftKey
+     * @param {?} ctrlKey
      * @return {?}
      */
-    setFocusedOption(option, $event) {
-        this.keyManager.setActiveItem(option);
-        /** @type {?} */
-        const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
-        /** @type {?} */
-        const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
-        if (withShift && this.multiple) {
-            /** @type {?} */
-            const previousIndex = this.keyManager.previousActiveItemIndex;
-            /** @type {?} */
-            const activeIndex = this.keyManager.activeItemIndex;
-            if (previousIndex < activeIndex) {
-                this.options.forEach((/**
-                 * @param {?} item
-                 * @param {?} index
-                 * @return {?}
-                 */
-                (item, index) => {
-                    if (index >= previousIndex && index <= activeIndex) {
-                        item.setSelected(true);
-                    }
-                }));
-            }
-            else {
-                this.options.forEach((/**
-                 * @param {?} item
-                 * @param {?} index
-                 * @return {?}
-                 */
-                (item, index) => {
-                    if (index >= activeIndex && index <= previousIndex) {
-                        item.setSelected(true);
-                    }
-                }));
-            }
+    setSelectedOptionsByClick(option, shiftKey, ctrlKey) {
+        if (shiftKey && this.multiple) {
+            this.setSelectedOptions(option);
         }
-        else if (withCtrl) {
+        else if (ctrlKey) {
             if (!this.canDeselectLast(option)) {
                 return;
             }
-            option.toggle();
+            this.selectionModel.toggle(option);
         }
         else {
             if (this.autoSelect) {
@@ -553,6 +525,72 @@ class McListSelection extends McListSelectionMixinBase {
         }
         this.emitChangeEvent(option);
         this.reportValueChange();
+    }
+    /**
+     * @param {?} option
+     * @param {?} shiftKey
+     * @param {?} ctrlKey
+     * @return {?}
+     */
+    setSelectedOptionsByKey(option, shiftKey, ctrlKey) {
+        if (shiftKey && this.multiple) {
+            this.setSelectedOptions(option);
+        }
+        else if (ctrlKey) {
+            if (!this.canDeselectLast(option)) {
+                return;
+            }
+        }
+        else {
+            if (this.autoSelect) {
+                this.options.forEach((/**
+                 * @param {?} item
+                 * @return {?}
+                 */
+                (item) => item.setSelected(false)));
+                option.setSelected(true);
+            }
+        }
+        this.emitChangeEvent(option);
+        this.reportValueChange();
+    }
+    /**
+     * @param {?} option
+     * @return {?}
+     */
+    setSelectedOptions(option) {
+        /** @type {?} */
+        const selectedOptionState = option.selected;
+        /** @type {?} */
+        let fromIndex = this.keyManager.previousActiveItemIndex;
+        /** @type {?} */
+        let toIndex = this.keyManager.previousActiveItemIndex = this.keyManager.activeItemIndex;
+        if (toIndex === fromIndex) {
+            return;
+        }
+        if (fromIndex > toIndex) {
+            [fromIndex, toIndex] = [toIndex, fromIndex];
+        }
+        this.options
+            .toArray()
+            .slice(fromIndex, toIndex + 1)
+            .filter((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => !item.disabled))
+            .forEach((/**
+         * @param {?} renderedOption
+         * @return {?}
+         */
+        (renderedOption) => {
+            /** @type {?} */
+            const isLastRenderedOption = renderedOption === this.keyManager.activeItem;
+            if (isLastRenderedOption && renderedOption.selected && this.noUnselect) {
+                return;
+            }
+            renderedOption.setSelected(!selectedOptionState);
+        }));
     }
     // Implemented as part of ControlValueAccessor.
     /**
@@ -697,7 +735,7 @@ class McListSelection extends McListSelectionMixinBase {
                 return;
         }
         event.preventDefault();
-        this.setFocusedOption((/** @type {?} */ (this.keyManager.activeItem)), event);
+        this.setSelectedOptionsByKey((/** @type {?} */ (this.keyManager.activeItem)), hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey'));
     }
     // Reports a value change to the ControlValueAccessor
     /**

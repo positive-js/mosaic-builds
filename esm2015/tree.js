@@ -10,11 +10,11 @@ import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNodeToggle, CdkTree, CdkTree
 import { MultipleMode, getMcSelectNonArrayValueError, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { map, take, takeUntil } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { hasModifierKey, PAGE_DOWN, PAGE_UP, END, HOME, ENTER, SPACE, RIGHT_ARROW, LEFT_ARROW, UP_ARROW, DOWN_ARROW } from '@ptsecurity/cdk/keycodes';
 import { Subject, merge, BehaviorSubject } from 'rxjs';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { PAGE_DOWN, PAGE_UP, END, HOME, ENTER, SPACE, RIGHT_ARROW, LEFT_ARROW, hasModifierKey } from '@ptsecurity/cdk/keycodes';
 
 /**
  * @fileoverview added by tsickle
@@ -336,9 +336,13 @@ class McTreeOption extends CdkTreeNode {
         this.changeDetectorRef.markForCheck();
     }
     /**
+     * @param {?=} focusOrigin
      * @return {?}
      */
-    focus() {
+    focus(focusOrigin) {
+        if (focusOrigin === 'program') {
+            return;
+        }
         if (this.disabled || this.hasFocus) {
             return;
         }
@@ -414,9 +418,11 @@ class McTreeOption extends CdkTreeNode {
         if (!this.disabled) {
             this.changeDetectorRef.markForCheck();
             this.emitSelectionChangeEvent(true);
-            if (this.tree.setSelectedOption) {
-                this.tree.setSelectedOption(this, $event);
-            }
+            /** @type {?} */
+            const shiftKey = $event ? hasModifierKey($event, 'shiftKey') : false;
+            /** @type {?} */
+            const ctrlKey = $event ? hasModifierKey($event, 'ctrlKey') : false;
+            this.tree.setSelectedOptionsByClick(this, shiftKey, ctrlKey);
         }
     }
     /**
@@ -529,6 +535,7 @@ class McTreeSelection extends CdkTree {
         this.resetFocusedItemOnBlur = true;
         this.navigationChange = new EventEmitter();
         this.selectionChange = new EventEmitter();
+        this.multipleMode = null;
         this.userTabIndex = null;
         this._autoSelect = true;
         this._noUnselectLast = true;
@@ -667,9 +674,9 @@ class McTreeSelection extends CdkTree {
         () => {
             if (this.keyManager.activeItem) {
                 this.emitNavigationEvent(this.keyManager.activeItem);
+                // todo need check this logic
                 if (this.autoSelect && !this.keyManager.activeItem.disabled) {
                     this.updateOptionsFocus();
-                    this.setSelectedOption(this.keyManager.activeItem);
                 }
             }
         }));
@@ -748,10 +755,19 @@ class McTreeSelection extends CdkTree {
      * @return {?}
      */
     onKeyDown(event) {
+        this.keyManager.setFocusOrigin('keyboard');
+        console.log('onKeyDown: '); // tslint:disable-line:no-console
+        // tslint:disable-line:no-console
         // tslint:disable-next-line: deprecation
         /** @type {?} */
         const keyCode = event.keyCode;
         switch (keyCode) {
+            case DOWN_ARROW:
+                this.keyManager.setNextItemActive();
+                break;
+            case UP_ARROW:
+                this.keyManager.setPreviousItemActive();
+                break;
             case LEFT_ARROW:
                 if (this.keyManager.activeItem) {
                     this.treeControl.collapse((/** @type {?} */ (this.keyManager.activeItem.data)));
@@ -786,7 +802,10 @@ class McTreeSelection extends CdkTree {
                 event.preventDefault();
                 break;
             default:
-                this.keyManager.onKeydown(event);
+                return;
+        }
+        if (this.keyManager.activeItem) {
+            this.setSelectedOptionsByKey(this.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey'));
         }
     }
     /**
@@ -800,71 +819,90 @@ class McTreeSelection extends CdkTree {
     }
     /**
      * @param {?} option
-     * @param {?=} $event
+     * @param {?} shiftKey
+     * @param {?} ctrlKey
      * @return {?}
      */
-    setSelectedOption(option, $event) {
-        /** @type {?} */
-        const withShift = $event ? hasModifierKey($event, 'shiftKey') : false;
-        /** @type {?} */
-        const withCtrl = $event ? hasModifierKey($event, 'ctrlKey') : false;
-        if (this.multiple) {
-            if (withShift) {
-                /** @type {?} */
-                const previousIndex = this.keyManager.previousActiveItemIndex;
-                /** @type {?} */
-                const activeIndex = this.keyManager.activeItemIndex;
-                /** @type {?} */
-                const activeOption = this.renderedOptions.toArray()[activeIndex];
-                /** @type {?} */
-                const targetSelected = !activeOption.selected;
-                if (previousIndex < activeIndex) {
-                    this.renderedOptions.forEach((/**
-                     * @param {?} item
-                     * @param {?} index
-                     * @return {?}
-                     */
-                    (item, index) => {
-                        if (index >= previousIndex && index <= activeIndex) {
-                            item.setSelected(targetSelected);
-                        }
-                    }));
-                }
-                else {
-                    this.renderedOptions.forEach((/**
-                     * @param {?} item
-                     * @param {?} index
-                     * @return {?}
-                     */
-                    (item, index) => {
-                        if (index >= activeIndex && index <= previousIndex) {
-                            item.setSelected(targetSelected);
-                        }
-                    }));
-                }
-            }
-            else if (withCtrl) {
-                if (!this.canDeselectLast(option)) {
-                    return;
-                }
-                this.selectionModel.toggle(option.data);
-            }
-            else {
-                if (this.multipleMode === MultipleMode.KEYBOARD) {
-                    this.selectionModel.clear();
-                }
-                this.selectionModel.toggle(option.data);
-            }
+    setSelectedOptionsByKey(option, shiftKey, ctrlKey) {
+        if (shiftKey && this.multiple) {
+            this.setSelectedOptions(option);
         }
-        else {
+        else if (ctrlKey) {
             if (!this.canDeselectLast(option)) {
                 return;
             }
-            if (this.autoSelect) {
-                this.selectionModel.toggle(option.data);
-            }
+        }
+        else if (this.autoSelect) {
+            this.selectionModel.clear();
+            this.selectionModel.toggle(option.data);
         }
         this.emitChangeEvent(option);
+    }
+    /**
+     * @param {?} option
+     * @param {?} shiftKey
+     * @param {?} ctrlKey
+     * @return {?}
+     */
+    setSelectedOptionsByClick(option, shiftKey, ctrlKey) {
+        if (!shiftKey && !ctrlKey) {
+            this.keyManager.setActiveItem(option);
+        }
+        if (shiftKey && this.multiple) {
+            this.setSelectedOptions(option);
+        }
+        else if (ctrlKey) {
+            if (!this.canDeselectLast(option)) {
+                return;
+            }
+            this.selectionModel.toggle(option.data);
+        }
+        else if (this.autoSelect) {
+            this.selectionModel.clear();
+            this.selectionModel.toggle(option.data);
+        }
+        else {
+            this.selectionModel.toggle(option.data);
+        }
+        this.emitChangeEvent(option);
+    }
+    /**
+     * @param {?} option
+     * @return {?}
+     */
+    setSelectedOptions(option) {
+        /** @type {?} */
+        const selectedOptionState = option.selected;
+        /** @type {?} */
+        let fromIndex = this.keyManager.previousActiveItemIndex;
+        /** @type {?} */
+        let toIndex = this.keyManager.previousActiveItemIndex = this.keyManager.activeItemIndex;
+        if (toIndex === fromIndex) {
+            return;
+        }
+        if (fromIndex > toIndex) {
+            [fromIndex, toIndex] = [toIndex, fromIndex];
+        }
+        this.renderedOptions
+            .toArray()
+            .slice(fromIndex, toIndex + 1)
+            .filter((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => !item.disabled))
+            .forEach((/**
+         * @param {?} renderedOption
+         * @return {?}
+         */
+        (renderedOption) => {
+            /** @type {?} */
+            const isLastRenderedOption = renderedOption === this.keyManager.activeItem;
+            if (isLastRenderedOption && renderedOption.selected && this.noUnselectLast) {
+                return;
+            }
+            renderedOption.setSelected(!selectedOptionState);
+        }));
     }
     /**
      * @param {?} option
@@ -1089,6 +1127,17 @@ class McTreeSelection extends CdkTree {
         (event) => {
             /** @type {?} */
             const index = this.renderedOptions.toArray().indexOf((/** @type {?} */ (event.option)));
+            this.renderedOptions
+                .filter((/**
+             * @param {?} option
+             * @return {?}
+             */
+            (option) => option.hasFocus))
+                .forEach((/**
+             * @param {?} option
+             * @return {?}
+             */
+            (option) => option.hasFocus = false));
             if (this.isValidIndex(index)) {
                 this.keyManager.updateActiveItem(index);
             }

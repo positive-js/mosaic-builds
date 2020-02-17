@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, EventEmitter, ElementRef, InjectionToken, AfterContentInit, NgZone } from '@angular/core';
+import { FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
@@ -38,7 +39,7 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     ngAfterContentInit(): void;
     toggle(): void;
     setSelected(selected: boolean): void;
-    focus(): void;
+    focus(focusOrigin?: FocusOrigin): void;
     blur(): void;
     getHeight(): number;
     select(): void;

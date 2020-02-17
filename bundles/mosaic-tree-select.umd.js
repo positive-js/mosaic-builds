@@ -488,7 +488,9 @@
             this.initKeyManager();
             this.options = this.tree.renderedOptions;
             this.tree.autoSelect = this.autoSelect;
-            this.tree.multipleMode = this.multiple ? core$1.MultipleMode.CHECKBOX : null;
+            if (this.tree.multipleMode === null) {
+                this.tree.multipleMode = this.multiple ? core$1.MultipleMode.CHECKBOX : null;
+            }
             if (this.multiple) {
                 this.tree.noUnselectLast = false;
             }
@@ -525,6 +527,7 @@
              */
             function (event) {
                 if (event.added.length) {
+                    _this.tree.keyManager.setFocusOrigin('program');
                     _this.tree.keyManager.setActiveItem((/** @type {?} */ (_this.options.find((/**
                      * @param {?} option
                      * @return {?}
@@ -1231,13 +1234,14 @@
             else {
                 /** @type {?} */
                 var previouslyFocusedIndex = this.tree.keyManager.activeItemIndex;
+                this.tree.keyManager.setFocusOrigin('keyboard');
                 this.tree.keyManager.onKeydown(event);
                 if (this.multiple && isArrowKey && event.shiftKey && this.tree.keyManager.activeItem &&
                     this.tree.keyManager.activeItemIndex !== previouslyFocusedIndex) {
                     this.tree.keyManager.activeItem.selectViaInteraction(event);
                 }
                 if (this.autoSelect && this.tree.keyManager.activeItem) {
-                    this.tree.setSelectedOption(this.tree.keyManager.activeItem);
+                    this.tree.setSelectedOptionsByKey(this.tree.keyManager.activeItem, keycodes.hasModifierKey(event, 'shiftKey'), keycodes.hasModifierKey(event, 'ctrlKey'));
                 }
             }
         };

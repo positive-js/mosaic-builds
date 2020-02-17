@@ -238,7 +238,7 @@
             if (this.disabled) {
                 return;
             }
-            this.listSelection.setFocusedOption(this, $event);
+            this.listSelection.setSelectedOptionsByClick(this, keycodes.hasModifierKey($event, 'shiftKey'), keycodes.hasModifierKey($event, 'ctrlKey'));
         };
         /**
          * @return {?}
@@ -303,7 +303,7 @@
                         selector: 'mc-list-option',
                         host: {
                             '[attr.tabindex]': 'tabIndex',
-                            class: 'mc-list-option',
+                            class: 'mc-list-option mc-no-select',
                             '[class.mc-selected]': 'selected',
                             '[class.mc-focused]': 'hasFocus',
                             '[class.mc-disabled]': 'disabled',
@@ -396,6 +396,10 @@
             }
             else if (multiple !== null) {
                 _this.multipleMode = core$1.MultipleMode.CHECKBOX;
+            }
+            if (_this.multipleMode === core$1.MultipleMode.CHECKBOX) {
+                _this.autoSelect = false;
+                _this.noUnselect = false;
             }
             _this._tabIndex = parseInt(tabIndex) || 0;
             _this.selectionModel = new collections.SelectionModel(_this.multiple);
@@ -601,61 +605,27 @@
             }
             this.keyManager.withScrollSize(Math.floor(this.getHeight() / this.options.first.getHeight()));
         };
-        // Sets the focused option of the selection-list.
-        // Sets the focused option of the selection-list.
         /**
          * @param {?} option
-         * @param {?=} $event
+         * @param {?} shiftKey
+         * @param {?} ctrlKey
          * @return {?}
          */
-        McListSelection.prototype.setFocusedOption = 
-        // Sets the focused option of the selection-list.
-        /**
+        McListSelection.prototype.setSelectedOptionsByClick = /**
          * @param {?} option
-         * @param {?=} $event
+         * @param {?} shiftKey
+         * @param {?} ctrlKey
          * @return {?}
          */
-        function (option, $event) {
-            this.keyManager.setActiveItem(option);
-            /** @type {?} */
-            var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
-            /** @type {?} */
-            var withCtrl = $event ? keycodes.hasModifierKey($event, 'ctrlKey') : false;
-            if (withShift && this.multiple) {
-                /** @type {?} */
-                var previousIndex_1 = this.keyManager.previousActiveItemIndex;
-                /** @type {?} */
-                var activeIndex_1 = this.keyManager.activeItemIndex;
-                if (previousIndex_1 < activeIndex_1) {
-                    this.options.forEach((/**
-                     * @param {?} item
-                     * @param {?} index
-                     * @return {?}
-                     */
-                    function (item, index) {
-                        if (index >= previousIndex_1 && index <= activeIndex_1) {
-                            item.setSelected(true);
-                        }
-                    }));
-                }
-                else {
-                    this.options.forEach((/**
-                     * @param {?} item
-                     * @param {?} index
-                     * @return {?}
-                     */
-                    function (item, index) {
-                        if (index >= activeIndex_1 && index <= previousIndex_1) {
-                            item.setSelected(true);
-                        }
-                    }));
-                }
+        function (option, shiftKey, ctrlKey) {
+            if (shiftKey && this.multiple) {
+                this.setSelectedOptions(option);
             }
-            else if (withCtrl) {
+            else if (ctrlKey) {
                 if (!this.canDeselectLast(option)) {
                     return;
                 }
-                option.toggle();
+                this.selectionModel.toggle(option);
             }
             else {
                 if (this.autoSelect) {
@@ -669,6 +639,84 @@
             }
             this.emitChangeEvent(option);
             this.reportValueChange();
+        };
+        /**
+         * @param {?} option
+         * @param {?} shiftKey
+         * @param {?} ctrlKey
+         * @return {?}
+         */
+        McListSelection.prototype.setSelectedOptionsByKey = /**
+         * @param {?} option
+         * @param {?} shiftKey
+         * @param {?} ctrlKey
+         * @return {?}
+         */
+        function (option, shiftKey, ctrlKey) {
+            if (shiftKey && this.multiple) {
+                this.setSelectedOptions(option);
+            }
+            else if (ctrlKey) {
+                if (!this.canDeselectLast(option)) {
+                    return;
+                }
+            }
+            else {
+                if (this.autoSelect) {
+                    this.options.forEach((/**
+                     * @param {?} item
+                     * @return {?}
+                     */
+                    function (item) { return item.setSelected(false); }));
+                    option.setSelected(true);
+                }
+            }
+            this.emitChangeEvent(option);
+            this.reportValueChange();
+        };
+        /**
+         * @param {?} option
+         * @return {?}
+         */
+        McListSelection.prototype.setSelectedOptions = /**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) {
+            var _this = this;
+            var _a;
+            /** @type {?} */
+            var selectedOptionState = option.selected;
+            /** @type {?} */
+            var fromIndex = this.keyManager.previousActiveItemIndex;
+            /** @type {?} */
+            var toIndex = this.keyManager.previousActiveItemIndex = this.keyManager.activeItemIndex;
+            if (toIndex === fromIndex) {
+                return;
+            }
+            if (fromIndex > toIndex) {
+                _a = [toIndex, fromIndex], fromIndex = _a[0], toIndex = _a[1];
+            }
+            this.options
+                .toArray()
+                .slice(fromIndex, toIndex + 1)
+                .filter((/**
+             * @param {?} item
+             * @return {?}
+             */
+            function (item) { return !item.disabled; }))
+                .forEach((/**
+             * @param {?} renderedOption
+             * @return {?}
+             */
+            function (renderedOption) {
+                /** @type {?} */
+                var isLastRenderedOption = renderedOption === _this.keyManager.activeItem;
+                if (isLastRenderedOption && renderedOption.selected && _this.noUnselect) {
+                    return;
+                }
+                renderedOption.setSelected(!selectedOptionState);
+            }));
         };
         // Implemented as part of ControlValueAccessor.
         // Implemented as part of ControlValueAccessor.
@@ -868,7 +916,7 @@
                     return;
             }
             event.preventDefault();
-            this.setFocusedOption((/** @type {?} */ (this.keyManager.activeItem)), event);
+            this.setSelectedOptionsByKey((/** @type {?} */ (this.keyManager.activeItem)), keycodes.hasModifierKey(event, 'shiftKey'), keycodes.hasModifierKey(event, 'ctrlKey'));
         };
         // Reports a value change to the ControlValueAccessor
         // Reports a value change to the ControlValueAccessor

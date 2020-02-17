@@ -16,7 +16,7 @@ import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
-import { LEFT_ARROW, RIGHT_ARROW, HOME, END, PAGE_UP, PAGE_DOWN, ENTER, SPACE, A, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
+import { LEFT_ARROW, RIGHT_ARROW, HOME, END, PAGE_UP, PAGE_DOWN, ENTER, SPACE, A, hasModifierKey, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl, McFormField } from '@ptsecurity/mosaic/form-field';
 import { Subject, defer, merge } from 'rxjs';
 import { filter, map, take, switchMap, distinctUntilChanged, takeUntil } from 'rxjs/operators';
@@ -432,7 +432,9 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this.initKeyManager();
         this.options = this.tree.renderedOptions;
         this.tree.autoSelect = this.autoSelect;
-        this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
+        if (this.tree.multipleMode === null) {
+            this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
+        }
         if (this.multiple) {
             this.tree.noUnselectLast = false;
         }
@@ -469,6 +471,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
          */
         (event) => {
             if (event.added.length) {
+                this.tree.keyManager.setFocusOrigin('program');
                 this.tree.keyManager.setActiveItem((/** @type {?} */ (this.options.find((/**
                  * @param {?} option
                  * @return {?}
@@ -980,13 +983,14 @@ class McTreeSelect extends McTreeSelectMixinBase {
         else {
             /** @type {?} */
             const previouslyFocusedIndex = this.tree.keyManager.activeItemIndex;
+            this.tree.keyManager.setFocusOrigin('keyboard');
             this.tree.keyManager.onKeydown(event);
             if (this.multiple && isArrowKey && event.shiftKey && this.tree.keyManager.activeItem &&
                 this.tree.keyManager.activeItemIndex !== previouslyFocusedIndex) {
                 this.tree.keyManager.activeItem.selectViaInteraction(event);
             }
             if (this.autoSelect && this.tree.keyManager.activeItem) {
-                this.tree.setSelectedOption(this.tree.keyManager.activeItem);
+                this.tree.setSelectedOptionsByKey(this.tree.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey'));
             }
         }
     }

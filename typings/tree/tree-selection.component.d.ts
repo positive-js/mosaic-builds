@@ -55,7 +55,9 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     blur(): void;
     onKeyDown(event: KeyboardEvent): void;
     updateScrollSize(): void;
-    setSelectedOption(option: T, $event?: KeyboardEvent): void;
+    setSelectedOptionsByKey(option: T, shiftKey: boolean, ctrlKey: boolean): void;
+    setSelectedOptionsByClick(option: T, shiftKey: boolean, ctrlKey: boolean): void;
+    setSelectedOptions(option: T): void;
     setFocusedOption(option: T): void;
     toggleFocusedOption(): void;
     renderNodeChanges(data: T[], dataDiffer?: IterableDiffer<T>, viewContainer?: any, parentData?: T): void;

@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/core'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/common', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/core', 'rxjs/operators', '@angular/cdk/coercion', 'rxjs', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}), global.ng.common, global.ng.core, global.ng.cdk.tree, global.ng.mosaic.core, global.rxjs.operators, global.ng.cdk.coercion, global.rxjs, global.ng.cdk.collections, global.ng.forms, global.ng.cdk.a11y, global.ng.cdk.keycodes));
-}(this, (function (exports, common, core, tree, core$1, operators, coercion, rxjs, collections, forms, a11y, keycodes) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/core'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/common', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/core', 'rxjs/operators', '@angular/cdk/coercion', '@ptsecurity/cdk/keycodes', 'rxjs', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tree = {}), global.ng.common, global.ng.core, global.ng.cdk.tree, global.ng.mosaic.core, global.rxjs.operators, global.ng.cdk.coercion, global.ng.cdk.keycodes, global.rxjs, global.ng.cdk.collections, global.ng.forms, global.ng.cdk.a11y));
+}(this, (function (exports, common, core, tree, core$1, operators, coercion, keycodes, rxjs, collections, forms, a11y) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -409,13 +409,18 @@
             this.changeDetectorRef.markForCheck();
         };
         /**
+         * @param {?=} focusOrigin
          * @return {?}
          */
         McTreeOption.prototype.focus = /**
+         * @param {?=} focusOrigin
          * @return {?}
          */
-        function () {
+        function (focusOrigin) {
             var _this = this;
+            if (focusOrigin === 'program') {
+                return;
+            }
             if (this.disabled || this.hasFocus) {
                 return;
             }
@@ -508,9 +513,11 @@
             if (!this.disabled) {
                 this.changeDetectorRef.markForCheck();
                 this.emitSelectionChangeEvent(true);
-                if (this.tree.setSelectedOption) {
-                    this.tree.setSelectedOption(this, $event);
-                }
+                /** @type {?} */
+                var shiftKey = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
+                /** @type {?} */
+                var ctrlKey = $event ? keycodes.hasModifierKey($event, 'ctrlKey') : false;
+                this.tree.setSelectedOptionsByClick(this, shiftKey, ctrlKey);
             }
         };
         /**
@@ -629,6 +636,7 @@
             _this.resetFocusedItemOnBlur = true;
             _this.navigationChange = new core.EventEmitter();
             _this.selectionChange = new core.EventEmitter();
+            _this.multipleMode = null;
             _this.userTabIndex = null;
             _this._autoSelect = true;
             _this._noUnselectLast = true;
@@ -804,9 +812,9 @@
             function () {
                 if (_this.keyManager.activeItem) {
                     _this.emitNavigationEvent(_this.keyManager.activeItem);
+                    // todo need check this logic
                     if (_this.autoSelect && !_this.keyManager.activeItem.disabled) {
                         _this.updateOptionsFocus();
-                        _this.setSelectedOption(_this.keyManager.activeItem);
                     }
                 }
             }));
@@ -898,10 +906,19 @@
          * @return {?}
          */
         function (event) {
+            this.keyManager.setFocusOrigin('keyboard');
+            console.log('onKeyDown: '); // tslint:disable-line:no-console
+            // tslint:disable-line:no-console
             // tslint:disable-next-line: deprecation
             /** @type {?} */
             var keyCode = event.keyCode;
             switch (keyCode) {
+                case keycodes.DOWN_ARROW:
+                    this.keyManager.setNextItemActive();
+                    break;
+                case keycodes.UP_ARROW:
+                    this.keyManager.setPreviousItemActive();
+                    break;
                 case keycodes.LEFT_ARROW:
                     if (this.keyManager.activeItem) {
                         this.treeControl.collapse((/** @type {?} */ (this.keyManager.activeItem.data)));
@@ -936,7 +953,10 @@
                     event.preventDefault();
                     break;
                 default:
-                    this.keyManager.onKeydown(event);
+                    return;
+            }
+            if (this.keyManager.activeItem) {
+                this.setSelectedOptionsByKey(this.keyManager.activeItem, keycodes.hasModifierKey(event, 'shiftKey'), keycodes.hasModifierKey(event, 'ctrlKey'));
             }
         };
         /**
@@ -953,76 +973,108 @@
         };
         /**
          * @param {?} option
-         * @param {?=} $event
+         * @param {?} shiftKey
+         * @param {?} ctrlKey
          * @return {?}
          */
-        McTreeSelection.prototype.setSelectedOption = /**
+        McTreeSelection.prototype.setSelectedOptionsByKey = /**
          * @param {?} option
-         * @param {?=} $event
+         * @param {?} shiftKey
+         * @param {?} ctrlKey
          * @return {?}
          */
-        function (option, $event) {
-            /** @type {?} */
-            var withShift = $event ? keycodes.hasModifierKey($event, 'shiftKey') : false;
-            /** @type {?} */
-            var withCtrl = $event ? keycodes.hasModifierKey($event, 'ctrlKey') : false;
-            if (this.multiple) {
-                if (withShift) {
-                    /** @type {?} */
-                    var previousIndex_1 = this.keyManager.previousActiveItemIndex;
-                    /** @type {?} */
-                    var activeIndex_1 = this.keyManager.activeItemIndex;
-                    /** @type {?} */
-                    var activeOption = this.renderedOptions.toArray()[activeIndex_1];
-                    /** @type {?} */
-                    var targetSelected_1 = !activeOption.selected;
-                    if (previousIndex_1 < activeIndex_1) {
-                        this.renderedOptions.forEach((/**
-                         * @param {?} item
-                         * @param {?} index
-                         * @return {?}
-                         */
-                        function (item, index) {
-                            if (index >= previousIndex_1 && index <= activeIndex_1) {
-                                item.setSelected(targetSelected_1);
-                            }
-                        }));
-                    }
-                    else {
-                        this.renderedOptions.forEach((/**
-                         * @param {?} item
-                         * @param {?} index
-                         * @return {?}
-                         */
-                        function (item, index) {
-                            if (index >= activeIndex_1 && index <= previousIndex_1) {
-                                item.setSelected(targetSelected_1);
-                            }
-                        }));
-                    }
-                }
-                else if (withCtrl) {
-                    if (!this.canDeselectLast(option)) {
-                        return;
-                    }
-                    this.selectionModel.toggle(option.data);
-                }
-                else {
-                    if (this.multipleMode === core$1.MultipleMode.KEYBOARD) {
-                        this.selectionModel.clear();
-                    }
-                    this.selectionModel.toggle(option.data);
-                }
+        function (option, shiftKey, ctrlKey) {
+            if (shiftKey && this.multiple) {
+                this.setSelectedOptions(option);
             }
-            else {
+            else if (ctrlKey) {
                 if (!this.canDeselectLast(option)) {
                     return;
                 }
-                if (this.autoSelect) {
-                    this.selectionModel.toggle(option.data);
-                }
+            }
+            else if (this.autoSelect) {
+                this.selectionModel.clear();
+                this.selectionModel.toggle(option.data);
             }
             this.emitChangeEvent(option);
+        };
+        /**
+         * @param {?} option
+         * @param {?} shiftKey
+         * @param {?} ctrlKey
+         * @return {?}
+         */
+        McTreeSelection.prototype.setSelectedOptionsByClick = /**
+         * @param {?} option
+         * @param {?} shiftKey
+         * @param {?} ctrlKey
+         * @return {?}
+         */
+        function (option, shiftKey, ctrlKey) {
+            if (!shiftKey && !ctrlKey) {
+                this.keyManager.setActiveItem(option);
+            }
+            if (shiftKey && this.multiple) {
+                this.setSelectedOptions(option);
+            }
+            else if (ctrlKey) {
+                if (!this.canDeselectLast(option)) {
+                    return;
+                }
+                this.selectionModel.toggle(option.data);
+            }
+            else if (this.autoSelect) {
+                this.selectionModel.clear();
+                this.selectionModel.toggle(option.data);
+            }
+            else {
+                this.selectionModel.toggle(option.data);
+            }
+            this.emitChangeEvent(option);
+        };
+        /**
+         * @param {?} option
+         * @return {?}
+         */
+        McTreeSelection.prototype.setSelectedOptions = /**
+         * @param {?} option
+         * @return {?}
+         */
+        function (option) {
+            var _this = this;
+            var _a;
+            /** @type {?} */
+            var selectedOptionState = option.selected;
+            /** @type {?} */
+            var fromIndex = this.keyManager.previousActiveItemIndex;
+            /** @type {?} */
+            var toIndex = this.keyManager.previousActiveItemIndex = this.keyManager.activeItemIndex;
+            if (toIndex === fromIndex) {
+                return;
+            }
+            if (fromIndex > toIndex) {
+                _a = [toIndex, fromIndex], fromIndex = _a[0], toIndex = _a[1];
+            }
+            this.renderedOptions
+                .toArray()
+                .slice(fromIndex, toIndex + 1)
+                .filter((/**
+             * @param {?} item
+             * @return {?}
+             */
+            function (item) { return !item.disabled; }))
+                .forEach((/**
+             * @param {?} renderedOption
+             * @return {?}
+             */
+            function (renderedOption) {
+                /** @type {?} */
+                var isLastRenderedOption = renderedOption === _this.keyManager.activeItem;
+                if (isLastRenderedOption && renderedOption.selected && _this.noUnselectLast) {
+                    return;
+                }
+                renderedOption.setSelected(!selectedOptionState);
+            }));
         };
         /**
          * @param {?} option
@@ -1329,6 +1381,17 @@
             function (event) {
                 /** @type {?} */
                 var index = _this.renderedOptions.toArray().indexOf((/** @type {?} */ (event.option)));
+                _this.renderedOptions
+                    .filter((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.hasFocus; }))
+                    .forEach((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.hasFocus = false; }));
                 if (_this.isValidIndex(index)) {
                     _this.keyManager.updateActiveItem(index);
                 }

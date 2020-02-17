@@ -83,7 +83,9 @@ export declare class McListSelection extends McListSelectionMixinBase implements
     selectAll(): void;
     deselectAll(): void;
     updateScrollSize(): void;
-    setFocusedOption(option: McListOption, $event?: KeyboardEvent): void;
+    setSelectedOptionsByClick(option: McListOption, shiftKey: boolean, ctrlKey: boolean): void;
+    setSelectedOptionsByKey(option: McListOption, shiftKey: boolean, ctrlKey: boolean): void;
+    setSelectedOptions(option: McListOption): void;
     writeValue(values: string[]): void;
     registerOnChange(fn: (value: any) => void): void;
     registerOnTouched(fn: () => void): void;
