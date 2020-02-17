@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('@angular/cdk/coercion'), require('@angular/cdk/bidi'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('rxjs/operators'), require('@ptsecurity/mosaic/icon')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tags', ['exports', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/cdk/keycodes', '@angular/cdk/coercion', '@angular/cdk/bidi', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', 'rxjs', 'rxjs/operators', '@ptsecurity/mosaic/icon'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tags = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.cdk.keycodes, global.ng.cdk.coercion, global.ng.cdk.bidi, global.ng.cdk.collections, global.ng.forms, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.mosaic.formField, global.rxjs, global.rxjs.operators, global.ng.mosaic.icon));
-}(this, (function (exports, platform, common, core, keycodes, coercion, bidi, collections, forms, a11y, core$1, formField, rxjs, operators, icon) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('@angular/cdk/coercion'), require('@angular/forms'), require('@angular/cdk/bidi'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('rxjs/operators'), require('@ptsecurity/mosaic/icon')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tags', ['exports', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/cdk/keycodes', '@angular/cdk/coercion', '@angular/forms', '@angular/cdk/bidi', '@angular/cdk/collections', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', 'rxjs', 'rxjs/operators', '@ptsecurity/mosaic/icon'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tags = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.cdk.keycodes, global.ng.cdk.coercion, global.ng.forms, global.ng.cdk.bidi, global.ng.cdk.collections, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.mosaic.formField, global.rxjs, global.rxjs.operators, global.ng.mosaic.icon));
+}(this, (function (exports, platform, common, core, keycodes, coercion, forms, bidi, collections, a11y, core$1, formField, rxjs, operators, icon) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1218,7 +1218,15 @@
          * @return {?}
          */
         function (inputElement) {
+            var _this = this;
             this.tagInput = inputElement;
+            // todo need rethink about it
+            if (this.ngControl && inputElement.ngControl) {
+                (/** @type {?} */ (inputElement.ngControl.statusChanges)).subscribe((/**
+                 * @return {?}
+                 */
+                function () { return (/** @type {?} */ (_this.ngControl.control)).setErrors((/** @type {?} */ (inputElement.ngControl)).errors); }));
+            }
         };
         // Implemented as part of ControlValueAccessor.
         // Implemented as part of ControlValueAccessor.
@@ -2016,10 +2024,11 @@
      * May be placed inside or outside of an `<mc-tag-list>`.
      */
     var McTagInput = /** @class */ (function () {
-        function McTagInput(elementRef, renderer, defaultOptions) {
+        function McTagInput(elementRef, renderer, defaultOptions, ngControl) {
             this.elementRef = elementRef;
             this.renderer = renderer;
             this.defaultOptions = defaultOptions;
+            this.ngControl = ngControl;
             /**
              * Whether the control is focused.
              */
@@ -2290,7 +2299,8 @@
         McTagInput.ctorParameters = function () { return [
             { type: core.ElementRef },
             { type: core.Renderer2 },
-            { type: undefined, decorators: [{ type: core.Inject, args: [MC_TAGS_DEFAULT_OPTIONS,] }] }
+            { type: undefined, decorators: [{ type: core.Inject, args: [MC_TAGS_DEFAULT_OPTIONS,] }] },
+            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] }
         ]; };
         McTagInput.propDecorators = {
             separatorKeyCodes: [{ type: core.Input, args: ['mcTagInputSeparatorKeyCodes',] }],

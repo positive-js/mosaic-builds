@@ -9,9 +9,9 @@ import { CommonModule } from '@angular/common';
 import { InjectionToken, Directive, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, NgZone, ContentChildren, ContentChild, forwardRef, Output, Input, Optional, Inject, Self, Renderer2, NgModule } from '@angular/core';
 import { SPACE, BACKSPACE, DELETE, HOME, END, hasModifierKey, ENTER } from '@ptsecurity/cdk/keycodes';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
 import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
-import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { mixinColor, mixinDisabled, mixinErrorState, setMosaicValidation, ErrorStateMatcher, MC_VALIDATION } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -970,6 +970,13 @@ class McTagList extends McTagListMixinBase {
      */
     registerInput(inputElement) {
         this.tagInput = inputElement;
+        // todo need rethink about it
+        if (this.ngControl && inputElement.ngControl) {
+            (/** @type {?} */ (inputElement.ngControl.statusChanges)).subscribe((/**
+             * @return {?}
+             */
+            () => (/** @type {?} */ (this.ngControl.control)).setErrors((/** @type {?} */ (inputElement.ngControl)).errors)));
+        }
     }
     // Implemented as part of ControlValueAccessor.
     /**
@@ -1557,11 +1564,13 @@ class McTagInput {
      * @param {?} elementRef
      * @param {?} renderer
      * @param {?} defaultOptions
+     * @param {?} ngControl
      */
-    constructor(elementRef, renderer, defaultOptions) {
+    constructor(elementRef, renderer, defaultOptions, ngControl) {
         this.elementRef = elementRef;
         this.renderer = renderer;
         this.defaultOptions = defaultOptions;
+        this.ngControl = ngControl;
         /**
          * Whether the control is focused.
          */
@@ -1766,7 +1775,8 @@ McTagInput.decorators = [
 McTagInput.ctorParameters = () => [
     { type: ElementRef },
     { type: Renderer2 },
-    { type: undefined, decorators: [{ type: Inject, args: [MC_TAGS_DEFAULT_OPTIONS,] }] }
+    { type: undefined, decorators: [{ type: Inject, args: [MC_TAGS_DEFAULT_OPTIONS,] }] },
+    { type: NgControl, decorators: [{ type: Optional }, { type: Self }] }
 ];
 McTagInput.propDecorators = {
     separatorKeyCodes: [{ type: Input, args: ['mcTagInputSeparatorKeyCodes',] }],

@@ -1,4 +1,5 @@
 import { ElementRef, EventEmitter, OnChanges, Renderer2 } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { McTagsDefaultOptions } from './tag-default-options';
 import { McTagList } from './tag-list.component';
 import { McTagTextControl } from './tag-text-control';
@@ -17,6 +18,7 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     private elementRef;
     private renderer;
     private defaultOptions;
+    ngControl: NgControl;
     /** Whether the control is focused. */
     focused: boolean;
     /**
@@ -48,7 +50,7 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     private oneSymbolWidth;
     /** The native input element to which this directive is attached. */
     private inputElement;
-    constructor(elementRef: ElementRef<HTMLInputElement>, renderer: Renderer2, defaultOptions: McTagsDefaultOptions);
+    constructor(elementRef: ElementRef<HTMLInputElement>, renderer: Renderer2, defaultOptions: McTagsDefaultOptions, ngControl: NgControl);
     ngOnChanges(): void;
     /** Utility method to make host definition/tests more clear. */
     keydown(event?: KeyboardEvent): void;

@@ -22678,7 +22678,15 @@
          * @return {?}
          */
         function (inputElement) {
+            var _this = this;
             this.tagInput = inputElement;
+            // todo need rethink about it
+            if (this.ngControl && inputElement.ngControl) {
+                (/** @type {?} */ (inputElement.ngControl.statusChanges)).subscribe((/**
+                 * @return {?}
+                 */
+                function () { return (/** @type {?} */ (_this.ngControl.control)).setErrors((/** @type {?} */ (inputElement.ngControl)).errors); }));
+            }
         };
         // Implemented as part of ControlValueAccessor.
         // Implemented as part of ControlValueAccessor.
@@ -23476,10 +23484,11 @@
      * May be placed inside or outside of an `<mc-tag-list>`.
      */
     var McTagInput = /** @class */ (function () {
-        function McTagInput(elementRef, renderer, defaultOptions) {
+        function McTagInput(elementRef, renderer, defaultOptions, ngControl) {
             this.elementRef = elementRef;
             this.renderer = renderer;
             this.defaultOptions = defaultOptions;
+            this.ngControl = ngControl;
             /**
              * Whether the control is focused.
              */
@@ -23750,7 +23759,8 @@
         McTagInput.ctorParameters = function () { return [
             { type: core.ElementRef },
             { type: core.Renderer2 },
-            { type: undefined, decorators: [{ type: core.Inject, args: [MC_TAGS_DEFAULT_OPTIONS,] }] }
+            { type: undefined, decorators: [{ type: core.Inject, args: [MC_TAGS_DEFAULT_OPTIONS,] }] },
+            { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] }
         ]; };
         McTagInput.propDecorators = {
             separatorKeyCodes: [{ type: core.Input, args: ['mcTagInputSeparatorKeyCodes',] }],
@@ -32559,34 +32569,34 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa14 = McTabHeaderBase;
+    exports.ɵa15 = McTabHeaderBase;
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa24 = toggleVerticalNavbarAnimation;
+    exports.ɵa23 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
-    exports.ɵa28 = McModalControlService;
+    exports.ɵa27 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
-    exports.ɵb14 = McTabLabelWrapperBase;
+    exports.ɵb15 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
     exports.ɵb25 = MinValidator;
-    exports.ɵb28 = McModalTitle;
-    exports.ɵc14 = McTabLabelWrapperMixinBase;
+    exports.ɵb27 = McModalTitle;
+    exports.ɵc15 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
     exports.ɵc25 = MAX_VALIDATOR;
-    exports.ɵc28 = McModalBody;
-    exports.ɵd14 = McTabBase;
+    exports.ɵc27 = McModalBody;
+    exports.ɵd15 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
     exports.ɵd25 = MaxValidator;
-    exports.ɵd28 = McModalFooter;
-    exports.ɵe14 = McTabMixinBase;
+    exports.ɵd27 = McModalFooter;
+    exports.ɵe15 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
-    exports.ɵe28 = CssUnitPipe;
-    exports.ɵf14 = McTabNavBase;
+    exports.ɵe27 = CssUnitPipe;
+    exports.ɵf15 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
-    exports.ɵg14 = McTabNavMixinBase;
+    exports.ɵg15 = McTabNavMixinBase;
     exports.ɵg20 = McSidepanelActions;
-    exports.ɵh14 = McTabLinkBase;
-    exports.ɵi14 = McTabLinkMixinBase;
+    exports.ɵh15 = McTabLinkBase;
+    exports.ɵi15 = McTabLinkMixinBase;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
