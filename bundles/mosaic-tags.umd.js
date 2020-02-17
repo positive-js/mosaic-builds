@@ -2279,7 +2279,6 @@
                             '[id]': 'id',
                             '[attr.disabled]': 'disabled || null',
                             '[attr.placeholder]': 'placeholder || null',
-                            '[attr.aria-invalid]': '_tagList && _tagList.ngControl ? _tagList.ngControl.invalid : null',
                             '(keydown)': 'keydown($event)',
                             '(blur)': 'blur()',
                             '(focus)': 'onFocus()',
