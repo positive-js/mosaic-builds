@@ -23430,7 +23430,7 @@
                             '[id]': 'uid'
                         },
                         providers: [{ provide: McFormFieldControl, useExisting: McTagList }],
-                        styles: [".mc-tag-list{display:flex;flex-direction:row}.mc-tags-list__list-container{display:flex;flex-wrap:wrap;flex:1 1 100%;min-width:0;min-height:28px;padding:2px 6px}.mc-tags-list__list-container .mc-tag-input{max-width:100%;flex:1 1 auto;height:22px;margin:2px 4px}.mc-tags-list__cleaner .mc-cleaner{height:32px}.mc-tag-input{border:none;outline:0;background:0 0}"],
+                        styles: [".mc-tag-list{display:flex;flex-direction:row}.mc-tags-list__list-container{display:flex;flex-wrap:wrap;flex:1 1 100%;min-width:0;min-height:28px;padding:1px 6px}.mc-tags-list__list-container .mc-tag-input{max-width:100%;flex:1 1 auto;height:22px;margin:2px 4px}.mc-tags-list__cleaner .mc-cleaner{height:30px}.mc-tag-input{border:none;outline:0;background:0 0}"],
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     },] },
@@ -32572,25 +32572,25 @@
     exports.ɵa15 = McTabHeaderBase;
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa23 = toggleVerticalNavbarAnimation;
+    exports.ɵa22 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
-    exports.ɵa27 = McModalControlService;
+    exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
     exports.ɵb15 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
     exports.ɵb25 = MinValidator;
-    exports.ɵb27 = McModalTitle;
+    exports.ɵb28 = McModalTitle;
     exports.ɵc15 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
     exports.ɵc25 = MAX_VALIDATOR;
-    exports.ɵc27 = McModalBody;
+    exports.ɵc28 = McModalBody;
     exports.ɵd15 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
     exports.ɵd25 = MaxValidator;
-    exports.ɵd27 = McModalFooter;
+    exports.ɵd28 = McModalFooter;
     exports.ɵe15 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
-    exports.ɵe27 = CssUnitPipe;
+    exports.ɵe28 = CssUnitPipe;
     exports.ɵf15 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
     exports.ɵg15 = McTabNavMixinBase;
