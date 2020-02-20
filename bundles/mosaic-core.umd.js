@@ -1820,13 +1820,13 @@
              */
             function () {
                 // tslint:disable-next-line: no-unnecessary-type-assertion
-                (/** @type {?} */ (ngControl.control)).updateValueAndValidity();
+                (/** @type {?} */ (ngControl.control)).updateValueAndValidity({ emitEvent: false });
             }));
         }
         if (component.ngModel) {
             setMosaicValidationForModelControl(component, component.rawValidators, parentForm);
         }
-        else if (component.formControlName) {
+        else if (component.formControlName || component.ngControl) {
             setMosaicValidationForFormControl(component, parentForm, ngControl);
         }
     }
@@ -1895,7 +1895,7 @@
          */
         function () {
             // changed required validation logic
-            if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
+            if (ngControl.invalid && (parentForm && !parentForm.submitted) && (/** @type {?} */ (ngControl.errors)).required) {
                 setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
             }
             // changed all other validation logic

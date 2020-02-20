@@ -1820,13 +1820,13 @@
              */
             function () {
                 // tslint:disable-next-line: no-unnecessary-type-assertion
-                (/** @type {?} */ (ngControl.control)).updateValueAndValidity();
+                (/** @type {?} */ (ngControl.control)).updateValueAndValidity({ emitEvent: false });
             }));
         }
         if (component.ngModel) {
             setMosaicValidationForModelControl(component, component.rawValidators, parentForm);
         }
-        else if (component.formControlName) {
+        else if (component.formControlName || component.ngControl) {
             setMosaicValidationForFormControl(component, parentForm, ngControl);
         }
     }
@@ -1895,7 +1895,7 @@
          */
         function () {
             // changed required validation logic
-            if (ngControl.invalid && !parentForm.submitted && (/** @type {?} */ (ngControl.errors)).required) {
+            if (ngControl.invalid && (parentForm && !parentForm.submitted) && (/** @type {?} */ (ngControl.errors)).required) {
                 setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
             }
             // changed all other validation logic
@@ -5796,12 +5796,13 @@
     var McInput = /** @class */ (function (_super) {
         __extends(McInput, _super);
         // tslint:disable-next-line: naming-convention
-        function McInput(elementRef, rawValidators, mcValidation, ngControl, numberInput, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        function McInput(elementRef, rawValidators, mcValidation, ngControl, numberInput, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.rawValidators = rawValidators;
             _this.mcValidation = mcValidation;
             _this.numberInput = numberInput;
+            _this.ngModel = ngModel;
             _this.formControlName = formControlName;
             /**
              * Implemented as part of McFormFieldControl.
@@ -6047,7 +6048,7 @@
         function () {
             this.focusChanged(false);
             if (this.ngControl) {
-                (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity();
+                (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity({ emitEvent: false });
             }
         };
         /** Callback for the cases where the focused state of the input changes. */
@@ -6209,6 +6210,7 @@
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_VALIDATION,] }] },
             { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: McNumberInput, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
@@ -32570,24 +32572,24 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa1 = mcSidebarAnimations;
     exports.ɵa15 = McTabHeaderBase;
+    exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
     exports.ɵa22 = toggleVerticalNavbarAnimation;
-    exports.ɵa25 = MIN_VALIDATOR;
+    exports.ɵa24 = MIN_VALIDATOR;
     exports.ɵa27 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
     exports.ɵb15 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
-    exports.ɵb25 = MinValidator;
+    exports.ɵb24 = MinValidator;
     exports.ɵb27 = McModalTitle;
     exports.ɵc15 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
-    exports.ɵc25 = MAX_VALIDATOR;
+    exports.ɵc24 = MAX_VALIDATOR;
     exports.ɵc27 = McModalBody;
     exports.ɵd15 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
-    exports.ɵd25 = MaxValidator;
+    exports.ɵd24 = MaxValidator;
     exports.ɵd27 = McModalFooter;
     exports.ɵe15 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;

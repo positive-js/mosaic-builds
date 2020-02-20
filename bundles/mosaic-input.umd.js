@@ -399,12 +399,13 @@
     var McInput = /** @class */ (function (_super) {
         __extends(McInput, _super);
         // tslint:disable-next-line: naming-convention
-        function McInput(elementRef, rawValidators, mcValidation, ngControl, numberInput, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        function McInput(elementRef, rawValidators, mcValidation, ngControl, numberInput, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.rawValidators = rawValidators;
             _this.mcValidation = mcValidation;
             _this.numberInput = numberInput;
+            _this.ngModel = ngModel;
             _this.formControlName = formControlName;
             /**
              * Implemented as part of McFormFieldControl.
@@ -650,7 +651,7 @@
         function () {
             this.focusChanged(false);
             if (this.ngControl) {
-                (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity();
+                (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity({ emitEvent: false });
             }
         };
         /** Callback for the cases where the focused state of the input changes. */
@@ -812,6 +813,7 @@
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
             { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: McNumberInput, decorators: [{ type: core.Optional }, { type: core.Self }] },
+            { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: forms.NgForm, decorators: [{ type: core.Optional }] },
             { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
@@ -1027,10 +1029,10 @@
     exports.isFloat = isFloat;
     exports.isInt = isInt;
     exports.normalizeSplitter = normalizeSplitter;
-    exports.ɵa25 = MIN_VALIDATOR;
-    exports.ɵb25 = MinValidator;
-    exports.ɵc25 = MAX_VALIDATOR;
-    exports.ɵd25 = MaxValidator;
+    exports.ɵa24 = MIN_VALIDATOR;
+    exports.ɵb24 = MinValidator;
+    exports.ɵc24 = MAX_VALIDATOR;
+    exports.ɵd24 = MaxValidator;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -6,7 +6,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { Directive, ElementRef, Optional, Self, Attribute, Input, InjectionToken, Inject, forwardRef, NgModule } from '@angular/core';
-import { NgControl, NG_VALIDATORS, FormControlName, NgForm, FormGroupDirective, Validators, FormsModule } from '@angular/forms';
+import { NgControl, NG_VALIDATORS, NgModel, FormControlName, NgForm, FormGroupDirective, Validators, FormsModule } from '@angular/forms';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinErrorState, setMosaicValidation, MC_VALIDATION, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
 import { __extends } from 'tslib';
@@ -376,12 +376,13 @@ var McInputMixinBase = mixinErrorState(McInputBase);
 var McInput = /** @class */ (function (_super) {
     __extends(McInput, _super);
     // tslint:disable-next-line: naming-convention
-    function McInput(elementRef, rawValidators, mcValidation, ngControl, numberInput, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+    function McInput(elementRef, rawValidators, mcValidation, ngControl, numberInput, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
         var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
         _this.elementRef = elementRef;
         _this.rawValidators = rawValidators;
         _this.mcValidation = mcValidation;
         _this.numberInput = numberInput;
+        _this.ngModel = ngModel;
         _this.formControlName = formControlName;
         /**
          * Implemented as part of McFormFieldControl.
@@ -627,7 +628,7 @@ var McInput = /** @class */ (function (_super) {
     function () {
         this.focusChanged(false);
         if (this.ngControl) {
-            (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity();
+            (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity({ emitEvent: false });
         }
     };
     /** Callback for the cases where the focused state of the input changes. */
@@ -789,6 +790,7 @@ var McInput = /** @class */ (function (_super) {
         { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_VALIDATION,] }] },
         { type: NgControl, decorators: [{ type: Optional }, { type: Self }] },
         { type: McNumberInput, decorators: [{ type: Optional }, { type: Self }] },
+        { type: NgModel, decorators: [{ type: Optional }, { type: Self }] },
         { type: FormControlName, decorators: [{ type: Optional }, { type: Self }] },
         { type: NgForm, decorators: [{ type: Optional }] },
         { type: FormGroupDirective, decorators: [{ type: Optional }] },
@@ -989,5 +991,5 @@ var McInputModule = /** @class */ (function () {
     return McInputModule;
 }());
 
-export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter, MIN_VALIDATOR as ɵa25, MinValidator as ɵb25, MAX_VALIDATOR as ɵc25, MaxValidator as ɵd25 };
+export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter, MIN_VALIDATOR as ɵa24, MinValidator as ɵb24, MAX_VALIDATOR as ɵc24, MaxValidator as ɵd24 };
 //# sourceMappingURL=input.es5.js.map

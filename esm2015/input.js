@@ -6,7 +6,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { Directive, ElementRef, Optional, Self, Attribute, Input, InjectionToken, Inject, forwardRef, NgModule } from '@angular/core';
-import { NgControl, NG_VALIDATORS, FormControlName, NgForm, FormGroupDirective, Validators, FormsModule } from '@angular/forms';
+import { NgControl, NG_VALIDATORS, NgModel, FormControlName, NgForm, FormGroupDirective, Validators, FormsModule } from '@angular/forms';
 import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinErrorState, setMosaicValidation, MC_VALIDATION, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -361,18 +361,20 @@ class McInput extends McInputMixinBase {
      * @param {?} mcValidation
      * @param {?} ngControl
      * @param {?} numberInput
+     * @param {?} ngModel
      * @param {?} formControlName
      * @param {?} parentForm
      * @param {?} parentFormGroup
      * @param {?} defaultErrorStateMatcher
      * @param {?} inputValueAccessor
      */
-    constructor(elementRef, rawValidators, mcValidation, ngControl, numberInput, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+    constructor(elementRef, rawValidators, mcValidation, ngControl, numberInput, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         this.elementRef = elementRef;
         this.rawValidators = rawValidators;
         this.mcValidation = mcValidation;
         this.numberInput = numberInput;
+        this.ngModel = ngModel;
         this.formControlName = formControlName;
         /**
          * Implemented as part of McFormFieldControl.
@@ -558,7 +560,7 @@ class McInput extends McInputMixinBase {
     onBlur() {
         this.focusChanged(false);
         if (this.ngControl) {
-            (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity();
+            (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity({ emitEvent: false });
         }
     }
     /**
@@ -671,6 +673,7 @@ McInput.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_VALIDATION,] }] },
     { type: NgControl, decorators: [{ type: Optional }, { type: Self }] },
     { type: McNumberInput, decorators: [{ type: Optional }, { type: Self }] },
+    { type: NgModel, decorators: [{ type: Optional }, { type: Self }] },
     { type: FormControlName, decorators: [{ type: Optional }, { type: Self }] },
     { type: NgForm, decorators: [{ type: Optional }] },
     { type: FormGroupDirective, decorators: [{ type: Optional }] },
@@ -825,5 +828,5 @@ McInputModule.decorators = [
             },] },
 ];
 
-export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter, MIN_VALIDATOR as ɵa25, MinValidator as ɵb25, MAX_VALIDATOR as ɵc25, MaxValidator as ɵd25 };
+export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter, MIN_VALIDATOR as ɵa24, MinValidator as ɵb24, MAX_VALIDATOR as ɵc24, MaxValidator as ɵd24 };
 //# sourceMappingURL=input.js.map
