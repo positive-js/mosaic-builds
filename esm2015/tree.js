@@ -756,8 +756,6 @@ class McTreeSelection extends CdkTree {
      */
     onKeyDown(event) {
         this.keyManager.setFocusOrigin('keyboard');
-        console.log('onKeyDown: '); // tslint:disable-line:no-console
-        // tslint:disable-line:no-console
         // tslint:disable-next-line: deprecation
         /** @type {?} */
         const keyCode = event.keyCode;

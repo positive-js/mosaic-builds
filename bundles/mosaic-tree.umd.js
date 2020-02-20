@@ -907,8 +907,6 @@
          */
         function (event) {
             this.keyManager.setFocusOrigin('keyboard');
-            console.log('onKeyDown: '); // tslint:disable-line:no-console
-            // tslint:disable-line:no-console
             // tslint:disable-next-line: deprecation
             /** @type {?} */
             var keyCode = event.keyCode;

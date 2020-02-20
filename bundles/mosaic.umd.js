@@ -18462,8 +18462,6 @@
          */
         function (event) {
             this.keyManager.setFocusOrigin('keyboard');
-            console.log('onKeyDown: '); // tslint:disable-line:no-console
-            // tslint:disable-line:no-console
             // tslint:disable-next-line: deprecation
             /** @type {?} */
             var keyCode = event.keyCode;
@@ -23345,6 +23343,9 @@
                 // receive focus.
                 if (_this.isValidIndex(tagIndex) && tag.hasFocus) {
                     _this.lastDestroyedTagIndex = tagIndex;
+                }
+                else if (_this.isValidIndex(tagIndex) && !tag.hasFocus) {
+                    _this.focusInput();
                 }
             }));
         };
@@ -32569,28 +32570,28 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
+    exports.ɵa1 = mcSidebarAnimations;
     exports.ɵa15 = McTabHeaderBase;
-    exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa24 = toggleVerticalNavbarAnimation;
+    exports.ɵa22 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
-    exports.ɵa28 = McModalControlService;
+    exports.ɵa27 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
     exports.ɵb15 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
     exports.ɵb25 = MinValidator;
-    exports.ɵb28 = McModalTitle;
+    exports.ɵb27 = McModalTitle;
     exports.ɵc15 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
     exports.ɵc25 = MAX_VALIDATOR;
-    exports.ɵc28 = McModalBody;
+    exports.ɵc27 = McModalBody;
     exports.ɵd15 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
     exports.ɵd25 = MaxValidator;
-    exports.ɵd28 = McModalFooter;
+    exports.ɵd27 = McModalFooter;
     exports.ɵe15 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
-    exports.ɵe28 = CssUnitPipe;
+    exports.ɵe27 = CssUnitPipe;
     exports.ɵf15 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
     exports.ɵg15 = McTabNavMixinBase;

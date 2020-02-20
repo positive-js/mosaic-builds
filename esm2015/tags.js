@@ -1443,6 +1443,9 @@ class McTagList extends McTagListMixinBase {
             if (this.isValidIndex(tagIndex) && tag.hasFocus) {
                 this.lastDestroyedTagIndex = tagIndex;
             }
+            else if (this.isValidIndex(tagIndex) && !tag.hasFocus) {
+                this.focusInput();
+            }
         }));
     }
     /**

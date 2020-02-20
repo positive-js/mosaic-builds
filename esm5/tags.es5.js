@@ -1867,6 +1867,9 @@ var McTagList = /** @class */ (function (_super) {
             if (_this.isValidIndex(tagIndex) && tag.hasFocus) {
                 _this.lastDestroyedTagIndex = tagIndex;
             }
+            else if (_this.isValidIndex(tagIndex) && !tag.hasFocus) {
+                _this.focusInput();
+            }
         }));
     };
     /** Checks whether an event comes from inside a tag element. */
