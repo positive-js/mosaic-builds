@@ -32215,7 +32215,7 @@
      * Current version.
      * @type {?}
      */
-    var VERSION = new core.Version('8.3.2-beta.1');
+    var VERSION = new core.Version('8.4.0');
 
     exports.ARROW_DOWN_KEYCODE = ARROW_DOWN_KEYCODE;
     exports.ARROW_LEFT_KEYCODE = ARROW_LEFT_KEYCODE;
@@ -32569,10 +32569,10 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa1 = mcSidebarAnimations;
     exports.ɵa15 = McTabHeaderBase;
+    exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa23 = toggleVerticalNavbarAnimation;
+    exports.ɵa24 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
