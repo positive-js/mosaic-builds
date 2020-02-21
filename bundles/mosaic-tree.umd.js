@@ -101,10 +101,10 @@
             /** @type {?} */
             var nodeLevel = (this.treeNode.data && this.tree.treeControl.getLevel)
                 ? this.tree.treeControl.getLevel(this.treeNode.data)
-                : null;
+                : 0;
             /** @type {?} */
             var level = this.level || nodeLevel;
-            return level ? (level * this._indent) + this.leftPadding + "px" : this.baseLeftPadding + "px";
+            return level > 0 ? (level * this._indent) + this.leftPadding + "px" : this.leftPadding + "px";
         };
         /**
          * @return {?}

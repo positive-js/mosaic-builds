@@ -17658,10 +17658,10 @@
             /** @type {?} */
             var nodeLevel = (this.treeNode.data && this.tree.treeControl.getLevel)
                 ? this.tree.treeControl.getLevel(this.treeNode.data)
-                : null;
+                : 0;
             /** @type {?} */
             var level = this.level || nodeLevel;
-            return level ? (level * this._indent) + this.leftPadding + "px" : this.baseLeftPadding + "px";
+            return level > 0 ? (level * this._indent) + this.leftPadding + "px" : this.leftPadding + "px";
         };
         /**
          * @return {?}
@@ -32576,24 +32576,24 @@
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
     exports.ɵa22 = toggleVerticalNavbarAnimation;
-    exports.ɵa24 = MIN_VALIDATOR;
-    exports.ɵa27 = McModalControlService;
+    exports.ɵa25 = MIN_VALIDATOR;
+    exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
     exports.ɵb15 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
-    exports.ɵb24 = MinValidator;
-    exports.ɵb27 = McModalTitle;
+    exports.ɵb25 = MinValidator;
+    exports.ɵb28 = McModalTitle;
     exports.ɵc15 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
-    exports.ɵc24 = MAX_VALIDATOR;
-    exports.ɵc27 = McModalBody;
+    exports.ɵc25 = MAX_VALIDATOR;
+    exports.ɵc28 = McModalBody;
     exports.ɵd15 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
-    exports.ɵd24 = MaxValidator;
-    exports.ɵd27 = McModalFooter;
+    exports.ɵd25 = MaxValidator;
+    exports.ɵd28 = McModalFooter;
     exports.ɵe15 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
-    exports.ɵe27 = CssUnitPipe;
+    exports.ɵe28 = CssUnitPipe;
     exports.ɵf15 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
     exports.ɵg15 = McTabNavMixinBase;
