@@ -5343,7 +5343,7 @@
             { type: core.Component, args: [{
                         selector: 'mc-checkbox',
                         template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label><div class=\"mc-checkbox-inner-container\" [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\"><input #input type=\"checkbox\" class=\"mc-checkbox-input cdk-visually-hidden\" [id]=\"inputId\" [required]=\"required\" [checked]=\"checked\" [attr.value]=\"value\" [disabled]=\"disabled\" [attr.name]=\"name\" [tabIndex]=\"tabIndex\" [indeterminate]=\"indeterminate\" [attr.aria-label]=\"ariaLabel || null\" [attr.aria-labelledby]=\"ariaLabelledby\" [attr.aria-checked]=\"getAriaChecked()\" (change)=\"onInteractionEvent($event)\" (click)=\"onInputClick($event)\"><div class=\"mc-checkbox-frame\"><i class=\"mc-checkbox-checkmark mc mc-check_16\"></i> <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i></div></div><span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"onLabelTextChange()\"><ng-content></ng-content></span></label>",
-                        styles: [".mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox.mc-checked .mc-checkbox-checkmark{display:block}.mc-checkbox.mc-checked .mc-checkbox-mixedmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-checkmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:block}.mc-checkbox.mc-disabled{cursor:default}.mc-checkbox.mc-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin:auto;margin-right:8px;order:0;position:relative;vertical-align:middle;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;left:-1px;right:0;bottom:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}"],
+                        styles: [".mc-checkbox-frame{top:0;left:0;right:0;bottom:0;position:absolute;border-radius:3px;box-sizing:border-box;pointer-events:none}.mc-checkbox{display:inline-block;cursor:pointer;-webkit-tap-highlight-color:transparent}.mc-checkbox.mc-checked .mc-checkbox-checkmark{display:block}.mc-checkbox.mc-checked .mc-checkbox-mixedmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-checkmark{display:none}.mc-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:block}.mc-checkbox.mc-disabled{cursor:default}.mc-checkbox.mc-disabled .mc-checkbox-frame{box-shadow:none}.mc-checkbox-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap;width:100%}.mc-checkbox-inner-container{display:inline-block;height:16px;line-height:0;margin-right:8px;order:0;position:relative;align-self:center;white-space:nowrap;width:16px;flex-shrink:0}[dir=rtl] .mc-checkbox-inner-container{margin-left:8px;margin-right:auto}.mc-checkbox-inner-container-no-side-margin{margin-left:0;margin-right:0}.mc-checkbox-frame{background-color:transparent;border-width:1px;border-style:solid;box-shadow:inset 0 0 1px 0 rgba(0,0,0,.2)}.mc-checkbox-checkmark,.mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;left:-1px;right:0;bottom:0}.mc-checkbox-label-before .mc-checkbox-inner-container{order:1;margin-left:8px;margin-right:auto}[dir=rtl] .mc-checkbox-label-before .mc-checkbox-inner-container{margin-left:auto;margin-right:8px}"],
                         exportAs: 'mcCheckbox',
                         host: {
                             class: 'mc-checkbox',
@@ -32572,34 +32572,34 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa1 = mcSidebarAnimations;
-    exports.ɵa15 = McTabHeaderBase;
-    exports.ɵa19 = mcSidepanelTransformAnimation;
-    exports.ɵa24 = toggleVerticalNavbarAnimation;
+    exports.ɵa14 = McTabHeaderBase;
+    exports.ɵa2 = mcSidebarAnimations;
+    exports.ɵa20 = mcSidepanelTransformAnimation;
+    exports.ɵa22 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
-    exports.ɵb15 = McTabLabelWrapperBase;
-    exports.ɵb19 = mcSidepanelAnimations;
+    exports.ɵb14 = McTabLabelWrapperBase;
+    exports.ɵb20 = mcSidepanelAnimations;
     exports.ɵb25 = MinValidator;
     exports.ɵb28 = McModalTitle;
-    exports.ɵc15 = McTabLabelWrapperMixinBase;
-    exports.ɵc19 = McSidepanelClose;
+    exports.ɵc14 = McTabLabelWrapperMixinBase;
+    exports.ɵc20 = McSidepanelClose;
     exports.ɵc25 = MAX_VALIDATOR;
     exports.ɵc28 = McModalBody;
-    exports.ɵd15 = McTabBase;
-    exports.ɵd19 = McSidepanelHeader;
+    exports.ɵd14 = McTabBase;
+    exports.ɵd20 = McSidepanelHeader;
     exports.ɵd25 = MaxValidator;
     exports.ɵd28 = McModalFooter;
-    exports.ɵe15 = McTabMixinBase;
-    exports.ɵe19 = McSidepanelBody;
+    exports.ɵe14 = McTabMixinBase;
+    exports.ɵe20 = McSidepanelBody;
     exports.ɵe28 = CssUnitPipe;
-    exports.ɵf15 = McTabNavBase;
-    exports.ɵf19 = McSidepanelFooter;
-    exports.ɵg15 = McTabNavMixinBase;
-    exports.ɵg19 = McSidepanelActions;
-    exports.ɵh15 = McTabLinkBase;
-    exports.ɵi15 = McTabLinkMixinBase;
+    exports.ɵf14 = McTabNavBase;
+    exports.ɵf20 = McSidepanelFooter;
+    exports.ɵg14 = McTabNavMixinBase;
+    exports.ɵg20 = McSidepanelActions;
+    exports.ɵh14 = McTabLinkBase;
+    exports.ɵi14 = McTabLinkMixinBase;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
