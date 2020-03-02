@@ -16,7 +16,7 @@ export { McDivider, McDividerModule } from '@ptsecurity/mosaic/divider';
 export { MC_DROPDOWN_DEFAULT_OPTIONS, MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY, MC_DROPDOWN_PANEL, MC_DROPDOWN_SCROLL_STRATEGY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER, McDropdown, McDropdownContent, McDropdownItem, McDropdownItemBase, McDropdownItemMixinBase, McDropdownModule, McDropdownTrigger, NESTED_PANEL_TOP_PADDING, fadeInItems, mcDropdownAnimations, throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY, throwMcDropdownMissingError, transformDropdown } from '@ptsecurity/mosaic/dropdown';
 export { McCleaner, McFormField, McFormFieldBase, McFormFieldControl, McFormFieldMixinBase, McFormFieldModule, McFormFieldWithoutBorders, McHint, McPrefix, McStepper, McSuffix, getMcFormFieldMissingControlError, getMcFormFieldYouCanNotUseCleanerInNumberInputError } from '@ptsecurity/mosaic/form-field';
 export { McIcon, McIconBase, McIconCSSStyler, McIconMixinBase, McIconModule } from '@ptsecurity/mosaic/icon';
-export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter, ɵa26, ɵb26, ɵc26, ɵd26 } from '@ptsecurity/mosaic/input';
+export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter, ɵa25, ɵb25, ɵc25, ɵd25 } from '@ptsecurity/mosaic/input';
 export { MC_SELECTION_LIST_VALUE_ACCESSOR, McList, McListBase, McListItem, McListItemBase, McListModule, McListOption, McListSelection, McListSelectionBase, McListSelectionChange, McListSelectionMixinBase } from '@ptsecurity/mosaic/list';
 export { McLink, McLinkBase, McLinkMixinBase, McLinkModule } from '@ptsecurity/mosaic/link';
 export { McModalComponent, McModalModule, McModalRef, McModalService, ɵa28, ɵb28, ɵc28, ɵd28, ɵe28 } from '@ptsecurity/mosaic/modal';
@@ -37,7 +37,7 @@ export { MC_SIDEPANEL_DATA, MC_SIDEPANEL_DEFAULT_OPTIONS, MC_SIDEPANEL_WITH_INDE
 export { McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule } from '@ptsecurity/mosaic/splitter';
 export { McToggleBase, McToggleChange, McToggleComponent, McToggleMixinBase, McToggleModule } from '@ptsecurity/mosaic/toggle';
 export { MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McToolTipModule, McTooltip, McTooltipComponent, getMcTooltipInvalidPositionError, mcTooltipScrollStrategyFactory } from '@ptsecurity/mosaic/tooltip';
-export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, ɵa22 } from '@ptsecurity/mosaic/vertical-navbar';
+export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, ɵa23 } from '@ptsecurity/mosaic/vertical-navbar';
 
 /**
  * @fileoverview added by tsickle
@@ -47,7 +47,7 @@ export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerti
  * Current version.
  * @type {?}
  */
-var VERSION = new Version('8.4.1');
+var VERSION = new Version('8.4.2');
 
 export { VERSION };
 //# sourceMappingURL=mosaic.es5.js.map

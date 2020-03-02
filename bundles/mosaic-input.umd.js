@@ -1029,10 +1029,10 @@
     exports.isFloat = isFloat;
     exports.isInt = isInt;
     exports.normalizeSplitter = normalizeSplitter;
-    exports.ɵa26 = MIN_VALIDATOR;
-    exports.ɵb26 = MinValidator;
-    exports.ɵc26 = MAX_VALIDATOR;
-    exports.ɵd26 = MaxValidator;
+    exports.ɵa25 = MIN_VALIDATOR;
+    exports.ɵb25 = MinValidator;
+    exports.ɵc25 = MAX_VALIDATOR;
+    exports.ɵd25 = MaxValidator;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

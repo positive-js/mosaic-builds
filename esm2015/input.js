@@ -828,5 +828,5 @@ McInputModule.decorators = [
             },] },
 ];
 
-export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter, MIN_VALIDATOR as ɵa26, MinValidator as ɵb26, MAX_VALIDATOR as ɵc26, MaxValidator as ɵd26 };
+export { BIG_STEP, MC_INPUT_VALUE_ACCESSOR, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter, MIN_VALIDATOR as ɵa25, MinValidator as ɵb25, MAX_VALIDATOR as ɵc25, MaxValidator as ɵd25 };
 //# sourceMappingURL=input.js.map
