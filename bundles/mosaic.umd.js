@@ -1887,7 +1887,10 @@
         var originalValidator = (/** @type {?} */ (ngControl.control)).validator;
         // changed required validation logic after initialization
         if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
-            setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () { return setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator))); }));
         }
         // check dynamic updates
         (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**
@@ -6047,8 +6050,11 @@
          */
         function () {
             this.focusChanged(false);
-            if (this.ngControl) {
-                (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity({ emitEvent: false });
+            if (this.ngControl && this.ngControl.control) {
+                /** @type {?} */
+                var control = this.ngControl.control;
+                control.updateValueAndValidity({ emitEvent: false });
+                ((/** @type {?} */ (control.statusChanges))).emit(control.status);
             }
         };
         /** Callback for the cases where the focused state of the input changes. */
@@ -32575,7 +32581,7 @@
     exports.ɵa15 = McTabHeaderBase;
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa23 = toggleVerticalNavbarAnimation;
+    exports.ɵa22 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;

@@ -37,7 +37,7 @@ export { MC_SIDEPANEL_DATA, MC_SIDEPANEL_DEFAULT_OPTIONS, MC_SIDEPANEL_WITH_INDE
 export { McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule } from '@ptsecurity/mosaic/splitter';
 export { McToggleBase, McToggleChange, McToggleComponent, McToggleMixinBase, McToggleModule } from '@ptsecurity/mosaic/toggle';
 export { MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McToolTipModule, McTooltip, McTooltipComponent, getMcTooltipInvalidPositionError, mcTooltipScrollStrategyFactory } from '@ptsecurity/mosaic/tooltip';
-export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, ɵa23 } from '@ptsecurity/mosaic/vertical-navbar';
+export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, ɵa22 } from '@ptsecurity/mosaic/vertical-navbar';
 
 /**
  * @fileoverview added by tsickle

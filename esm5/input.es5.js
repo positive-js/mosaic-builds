@@ -627,8 +627,11 @@ var McInput = /** @class */ (function (_super) {
      */
     function () {
         this.focusChanged(false);
-        if (this.ngControl) {
-            (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity({ emitEvent: false });
+        if (this.ngControl && this.ngControl.control) {
+            /** @type {?} */
+            var control = this.ngControl.control;
+            control.updateValueAndValidity({ emitEvent: false });
+            ((/** @type {?} */ (control.statusChanges))).emit(control.status);
         }
     };
     /** Callback for the cases where the focused state of the input changes. */

@@ -1887,7 +1887,10 @@
         var originalValidator = (/** @type {?} */ (ngControl.control)).validator;
         // changed required validation logic after initialization
         if (ngControl.invalid && (/** @type {?} */ (ngControl.errors)).required) {
-            setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator)));
+            Promise.resolve().then((/**
+             * @return {?}
+             */
+            function () { return setValidState((/** @type {?} */ (ngControl.control)), (/** @type {?} */ (originalValidator))); }));
         }
         // check dynamic updates
         (/** @type {?} */ (ngControl.statusChanges)).subscribe((/**

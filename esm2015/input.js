@@ -559,8 +559,11 @@ class McInput extends McInputMixinBase {
      */
     onBlur() {
         this.focusChanged(false);
-        if (this.ngControl) {
-            (/** @type {?} */ (this.ngControl.control)).updateValueAndValidity({ emitEvent: false });
+        if (this.ngControl && this.ngControl.control) {
+            /** @type {?} */
+            const control = this.ngControl.control;
+            control.updateValueAndValidity({ emitEvent: false });
+            ((/** @type {?} */ (control.statusChanges))).emit(control.status);
         }
     }
     /**
