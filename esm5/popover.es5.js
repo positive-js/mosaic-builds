@@ -1018,6 +1018,7 @@ var McPopover = /** @class */ (function () {
                     _this.mcVisibleChange.emit(data);
                     _this.isPopoverOpen = data;
                 }));
+                this.mcVisibleChange.emit(this.popover.mcVisible);
                 this.popover.afterHidden()
                     .pipe(takeUntil(this.destroyed))
                     .subscribe((/**

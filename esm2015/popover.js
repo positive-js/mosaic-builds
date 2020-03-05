@@ -860,6 +860,7 @@ class McPopover {
                     this.mcVisibleChange.emit(data);
                     this.isPopoverOpen = data;
                 }));
+                this.mcVisibleChange.emit(this.popover.mcVisible);
                 this.popover.afterHidden()
                     .pipe(takeUntil(this.destroyed))
                     .subscribe((/**

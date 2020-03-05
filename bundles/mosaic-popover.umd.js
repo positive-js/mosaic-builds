@@ -1036,6 +1036,7 @@
                         _this.mcVisibleChange.emit(data);
                         _this.isPopoverOpen = data;
                     }));
+                    this.mcVisibleChange.emit(this.popover.mcVisible);
                     this.popover.afterHidden()
                         .pipe(operators.takeUntil(this.destroyed))
                         .subscribe((/**
