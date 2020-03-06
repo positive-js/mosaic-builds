@@ -23,12 +23,12 @@
         left: 0;
 
         $lighter: transparent;
-        $darker: rgba(0, 0, 0, .05);
+        $darker: rgba(0, 0, 0, 0.05);
         background: linear-gradient(
-                135deg,
-                $darker 10px, $lighter 10px,
-                $lighter 20px, $darker 20px,
-                $darker 30px, $lighter 30px
+            135deg,
+            $darker 10px, $lighter 10px,
+            $lighter 20px, $darker 20px,
+            $darker 30px, $lighter 30px
         ) repeat;
         background-size: 29px 29px;
         animation: mc-progress 1s linear infinite;
@@ -1748,14 +1748,6 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
             }
         }
 
-        & .mc-checkbox-input.cdk-keyboard-focused {
-            + .mc-checkbox-frame {
-                border-color: $state-focused_border-color;
-
-                box-shadow: $state-focused_shadow;
-            }
-        }
-
         &.mc-disabled {
             color: map-get($foreground, text-disabled);
 
@@ -1768,6 +1760,14 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
                 & .mc-checkbox-mixedmark {
                     color: map-get($foreground, text-disabled);
                 }
+            }
+        }
+
+        & .mc-checkbox-input.cdk-keyboard-focused {
+            + .mc-checkbox-frame {
+                border-color: $state-focused_border-color;
+
+                box-shadow: $state-focused_shadow;
             }
         }
     }
@@ -2028,13 +2028,6 @@ $mc-datepicker-today-fade-amount: 0.2;
                 border-color: mc-color($second, if($is-dark, lighter, darker));
             }
 
-            &.mc-focused:not(.ng-invalid) .mc-form-field__container {
-                $focused-color: map-get(map-get($theme, states), focused-color);
-
-                border-color: $focused-color;
-                box-shadow: 0 0 0 1px $focused-color;
-            }
-
             &.ng-invalid .mc-form-field__container {
                 background-color: if($is-dark, transparent, mc-color($error, lighter));
 
@@ -2046,14 +2039,25 @@ $mc-datepicker-today-fade-amount: 0.2;
                 }
             }
 
-            &.ng-invalid.mc-focused .mc-form-field__container {
-                box-shadow: 0 0 0 1px mc-color($error);
+            &.mc-focused {
+                &:not(.ng-invalid) .mc-form-field__container {
+                    $focused-color: map-get(map-get($theme, states), focused-color);
+
+                    border-color: $focused-color;
+                    box-shadow: 0 0 0 1px $focused-color;
+                }
+
+                &.ng-invalid .mc-form-field__container {
+                    box-shadow: 0 0 0 1px mc-color($error);
+                }
             }
 
+            /* stylelint-disable no-descending-specificity */
             &.mc-disabled .mc-form-field__container {
                 border-color: mix(map-get($foreground, border), map-get($background, overlay-disabled));
 
-                background-color: mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
+                background-color:
+                    mix(map-get($background, background-disabled), map-get($background, overlay-disabled));
 
                 .mc-icon,
                 .mc-input,
@@ -2061,6 +2065,7 @@ $mc-datepicker-today-fade-amount: 0.2;
                     color: mc-color($foreground, text-disabled);
                 }
             }
+            /* stylelint-enable no-descending-specificity */
         }
     }
 
@@ -2164,37 +2169,35 @@ $mc-datepicker-today-fade-amount: 0.2;
             margin-right: 4px;
         }
 
-        &.mc-link_underlined .mc-link__text {
-            border-bottom-style: solid;
-            border-bottom-color: rgba($color, .32);
-        }
-
         &.mc-link_dashed .mc-link__text {
             border-bottom-style: dashed;
             border-bottom-width: 1px;
-            border-bottom-color: rgba($color, .5);
+            border-bottom-color: rgba($color, 0.5);
 
             &:visited {
-                border-bottom-color: rgba($color, .5);
+                border-bottom-color: rgba($color, 0.5);
             }
 
             &:hover {
-                border-bottom-color: rgba($color_hover, .5);
+                border-bottom-color: rgba($color_hover, 0.5);
             }
         }
 
+        /* stylelint-disable no-descending-specificity */
         &.mc-link_underlined .mc-link__text {
+            border-bottom-style: solid;
             border-bottom-width: 1px;
-            border-bottom-color: rgba($color, .32);
+            border-bottom-color: rgba($color, 0.32);
 
             &:visited {
-                border-bottom-color: rgba($color, .32);
+                border-bottom-color: rgba($color, 0.32);
             }
 
             &:hover {
-                border-bottom-color: rgba($color_hover, .32);
+                border-bottom-color: rgba($color_hover, 0.32);
             }
         }
+        /* stylelint-enable no-descending-specificity */
 
         &[disabled] {
             $color_disabled: mc-color($foreground, text-disabled);
@@ -2205,7 +2208,7 @@ $mc-datepicker-today-fade-amount: 0.2;
             pointer-events: none;
 
             &.mc-link_underlined .mc-link__text {
-                border-bottom-color: rgba($color_disabled, .64);
+                border-bottom-color: rgba($color_disabled, 0.64);
             }
 
             &.mc-link_dashed .mc-link__text {
@@ -2426,6 +2429,12 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
     }
 
+    .mc-navbar-brand {
+        .mc-navbar-title {
+            opacity: 0.5;
+        }
+    }
+
     .mc-navbar-item {
         outline: 0;
 
@@ -2456,12 +2465,6 @@ $mc-datepicker-today-fade-amount: 0.2;
             .mc-icon {
                 opacity: map-get($navbar, item_state-disabled_opacity);
             }
-        }
-    }
-
-    .mc-navbar-brand {
-        .mc-navbar-title {
-            opacity: 0.5;
         }
     }
 }
@@ -2937,7 +2940,7 @@ $mc-datepicker-today-fade-amount: 0.2;
             @include mc-tag-color(map-get($tags, error));
         }
 
-        &:hover:not(.mc-disabled) {
+        &:hover {
             & .mc-tag-overlay {
                 background: mc-color($background, overlay-hovered);
             }
