@@ -1802,7 +1802,7 @@
      * This function do next:
      * - run validation on submitting parent form
      * - prevent validation in required validator if form doesn't submitted
-     * - if control focused validation will be prevented
+     * - if control has focus validation will be prevented
      * @param {?} component
      * @return {?}
      */
@@ -23629,15 +23629,29 @@
          * @return {?}
          */
         function () {
-            if (this.addOnBlur) {
-                this.emittagEnd();
-            }
             this.focused = false;
             // Blur the tag list if it is not focused
             if (!this._tagList.focused) {
+                this.triggerValidation();
                 this._tagList.blur();
             }
+            // tslint:disable-next-line: no-unnecessary-type-assertion
+            if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
+                this.emittagEnd();
+            }
             this._tagList.stateChanges.next();
+        };
+        /**
+         * @return {?}
+         */
+        McTagInput.prototype.triggerValidation = /**
+         * @return {?}
+         */
+        function () {
+            if (!this.hasControl()) {
+                return;
+            }
+            ((/** @type {?} */ (this.ngControl.statusChanges))).emit(this.ngControl.status);
         };
         /** Checks to see if the (tagEnd) event needs to be emitted. */
         /**
@@ -23713,6 +23727,17 @@
          */
         function () {
             this.inputElement.focus();
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        McTagInput.prototype.hasControl = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            return !!this.ngControl;
         };
         /**
          * @private
@@ -32579,34 +32604,34 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa16 = McTabHeaderBase;
+    exports.ɵa15 = McTabHeaderBase;
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa23 = toggleVerticalNavbarAnimation;
+    exports.ɵa22 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
-    exports.ɵb16 = McTabLabelWrapperBase;
+    exports.ɵb15 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
     exports.ɵb25 = MinValidator;
     exports.ɵb28 = McModalTitle;
-    exports.ɵc16 = McTabLabelWrapperMixinBase;
+    exports.ɵc15 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
     exports.ɵc25 = MAX_VALIDATOR;
     exports.ɵc28 = McModalBody;
-    exports.ɵd16 = McTabBase;
+    exports.ɵd15 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
     exports.ɵd25 = MaxValidator;
     exports.ɵd28 = McModalFooter;
-    exports.ɵe16 = McTabMixinBase;
+    exports.ɵe15 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
     exports.ɵe28 = CssUnitPipe;
-    exports.ɵf16 = McTabNavBase;
+    exports.ɵf15 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
-    exports.ɵg16 = McTabNavMixinBase;
+    exports.ɵg15 = McTabNavMixinBase;
     exports.ɵg20 = McSidepanelActions;
-    exports.ɵh16 = McTabLinkBase;
-    exports.ɵi16 = McTabLinkMixinBase;
+    exports.ɵh15 = McTabLinkBase;
+    exports.ɵi15 = McTabLinkMixinBase;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -56,6 +56,7 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     keydown(event?: KeyboardEvent): void;
     /** Checks to see if the blur should emit the (tagEnd) event. */
     blur(): void;
+    triggerValidation(): void;
     /** Checks to see if the (tagEnd) event needs to be emitted. */
     emittagEnd(event?: KeyboardEvent): void;
     onInput(): void;
@@ -63,6 +64,7 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     onFocus(): void;
     /** Focuses the input. */
     focus(): void;
+    private hasControl;
     private setDefaultInputWidth;
     /** Checks whether a keycode is one of the configured separators. */
     private isSeparatorKey;

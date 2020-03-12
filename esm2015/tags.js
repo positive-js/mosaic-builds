@@ -1668,15 +1668,26 @@ class McTagInput {
      * @return {?}
      */
     blur() {
-        if (this.addOnBlur) {
-            this.emittagEnd();
-        }
         this.focused = false;
         // Blur the tag list if it is not focused
         if (!this._tagList.focused) {
+            this.triggerValidation();
             this._tagList.blur();
         }
+        // tslint:disable-next-line: no-unnecessary-type-assertion
+        if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
+            this.emittagEnd();
+        }
         this._tagList.stateChanges.next();
+    }
+    /**
+     * @return {?}
+     */
+    triggerValidation() {
+        if (!this.hasControl()) {
+            return;
+        }
+        ((/** @type {?} */ (this.ngControl.statusChanges))).emit(this.ngControl.status);
     }
     /**
      * Checks to see if the (tagEnd) event needs to be emitted.
@@ -1732,6 +1743,13 @@ class McTagInput {
      */
     focus() {
         this.inputElement.focus();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    hasControl() {
+        return !!this.ngControl;
     }
     /**
      * @private

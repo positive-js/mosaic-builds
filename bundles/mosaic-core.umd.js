@@ -1802,7 +1802,7 @@
      * This function do next:
      * - run validation on submitting parent form
      * - prevent validation in required validator if form doesn't submitted
-     * - if control focused validation will be prevented
+     * - if control has focus validation will be prevented
      * @param {?} component
      * @return {?}
      */

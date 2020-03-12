@@ -2162,15 +2162,29 @@
          * @return {?}
          */
         function () {
-            if (this.addOnBlur) {
-                this.emittagEnd();
-            }
             this.focused = false;
             // Blur the tag list if it is not focused
             if (!this._tagList.focused) {
+                this.triggerValidation();
                 this._tagList.blur();
             }
+            // tslint:disable-next-line: no-unnecessary-type-assertion
+            if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
+                this.emittagEnd();
+            }
             this._tagList.stateChanges.next();
+        };
+        /**
+         * @return {?}
+         */
+        McTagInput.prototype.triggerValidation = /**
+         * @return {?}
+         */
+        function () {
+            if (!this.hasControl()) {
+                return;
+            }
+            ((/** @type {?} */ (this.ngControl.statusChanges))).emit(this.ngControl.status);
         };
         /** Checks to see if the (tagEnd) event needs to be emitted. */
         /**
@@ -2246,6 +2260,17 @@
          */
         function () {
             this.inputElement.focus();
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        McTagInput.prototype.hasControl = /**
+         * @private
+         * @return {?}
+         */
+        function () {
+            return !!this.ngControl;
         };
         /**
          * @private
