@@ -1145,10 +1145,9 @@ var McTagList = /** @class */ (function (_super) {
              */
             function () {
                 _this.tagChanges.emit(_this.tags.toArray());
-                _this.changeDetectorRef.markForCheck();
+                _this.stateChanges.next();
+                _this.propagateTagsChanges();
             }));
-            _this.stateChanges.next();
-            _this.propagateTagsChanges();
         }));
     };
     /**

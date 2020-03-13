@@ -930,10 +930,9 @@ class McTagList extends McTagListMixinBase {
              */
             () => {
                 this.tagChanges.emit(this.tags.toArray());
-                this.changeDetectorRef.markForCheck();
+                this.stateChanges.next();
+                this.propagateTagsChanges();
             }));
-            this.stateChanges.next();
-            this.propagateTagsChanges();
         }));
     }
     /**
