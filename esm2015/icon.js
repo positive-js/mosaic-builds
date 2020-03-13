@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { Directive, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Attribute, NgModule } from '@angular/core';
-import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 /**

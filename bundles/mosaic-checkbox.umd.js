@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/common')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/checkbox', ['exports', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/common'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.checkbox = {}), global.ng.core, global.ng.forms, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.common));
-}(this, (function (exports, core, forms, a11y, core$1, common) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/mosaic/core'), require('@angular/common')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/checkbox', ['exports', '@angular/cdk/a11y', '@angular/core', '@angular/forms', '@ptsecurity/mosaic/core', '@angular/common'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.checkbox = {}), global.ng.cdk.a11y, global.ng.core, global.ng.forms, global.ng.mosaic.core, global.ng.common));
+}(this, (function (exports, a11y, core, forms, core$1, common) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.

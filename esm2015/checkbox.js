@@ -4,9 +4,9 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { InjectionToken, forwardRef, EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Attribute, Optional, Inject, Input, Output, ViewChild, Directive, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, CheckboxRequiredValidator } from '@angular/forms';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { mixinTabIndex, mixinColor, mixinDisabled, toBoolean } from '@ptsecurity/mosaic/core';
 import { CommonModule } from '@angular/common';
 

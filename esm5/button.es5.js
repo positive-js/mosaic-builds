@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { Directive, ElementRef, Renderer2, Component, ChangeDetectionStrategy, ViewEncapsulation, NgModule } from '@angular/core';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { __extends } from 'tslib';
 import { mixinColor, mixinDisabled } from '@ptsecurity/mosaic/core';
 

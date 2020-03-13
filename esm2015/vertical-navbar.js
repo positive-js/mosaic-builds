@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { Directive, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, Optional, Self, Input, ChangeDetectorRef, NgModule } from '@angular/core';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { mixinDisabled } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';

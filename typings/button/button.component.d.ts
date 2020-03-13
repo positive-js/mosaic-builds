@@ -1,5 +1,5 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy, Renderer2 } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanColor, CanDisable, CanDisableCtor, CanColorCtor } from '@ptsecurity/mosaic/core';
 export declare class McButtonCssStyler {
     private renderer;

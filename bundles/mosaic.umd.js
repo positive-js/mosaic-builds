@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/cdk/bidi'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/platform'), require('rxjs/operators'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/datetime'), require('@angular/cdk/a11y'), require('@ptsecurity/cdk/tree')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@angular/cdk/bidi', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay', '@angular/forms', '@ptsecurity/cdk/a11y', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/platform', 'rxjs/operators', '@angular/cdk/collections', '@ptsecurity/cdk/datetime', '@angular/cdk/a11y', '@ptsecurity/cdk/tree'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = {}), global.ng.core, global.ng.cdk.bidi, global.ng.cdk.coercion, global.rxjs, global.ng.common, global.ng.cdk.keycodes, global.ng.animations, global.ng.cdk.overlay, global.ng.forms, global.ng.cdk.a11y, global.ng.cdk.portal, global.ng.cdk.scrolling, global.ng.cdk.platform, global.rxjs.operators, global.ng.cdk.collections, global.ng.cdk.datetime, global.ng.cdk.a11y, global.ng.cdk.tree));
-}(this, (function (exports, core, bidi, coercion, rxjs, common, keycodes, animations, overlay, forms, a11y, portal, scrolling, platform, operators, collections, datetime, a11y$1, tree) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/cdk/bidi'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/common'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations'), require('@angular/cdk/overlay'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('rxjs/operators'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/cdk/tree')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic', ['exports', '@angular/core', '@angular/cdk/bidi', '@angular/cdk/coercion', 'rxjs', '@angular/common', '@ptsecurity/cdk/keycodes', '@angular/animations', '@angular/cdk/overlay', '@angular/forms', '@ptsecurity/cdk/a11y', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/a11y', '@angular/cdk/platform', 'rxjs/operators', '@angular/cdk/collections', '@ptsecurity/cdk/datetime', '@ptsecurity/cdk/tree'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = {}), global.ng.core, global.ng.cdk.bidi, global.ng.cdk.coercion, global.rxjs, global.ng.common, global.ng.cdk.keycodes, global.ng.animations, global.ng.cdk.overlay, global.ng.forms, global.ng.cdk.a11y, global.ng.cdk.portal, global.ng.cdk.scrolling, global.ng.cdk.a11y, global.ng.cdk.platform, global.rxjs.operators, global.ng.cdk.collections, global.ng.cdk.datetime, global.ng.cdk.tree));
+}(this, (function (exports, core, bidi, coercion, rxjs, common, keycodes, animations, overlay, forms, a11y, portal, scrolling, a11y$1, platform, operators, collections, datetime, tree) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1980,7 +1980,7 @@
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            a11y.A11yModule,
+                            a11y$1.A11yModule,
                             platform.PlatformModule
                         ],
                         exports: [
@@ -2763,7 +2763,7 @@
                         selector: 'mc-autocomplete',
                         exportAs: 'mcAutocomplete',
                         template: "<ng-template><div class=\"mc-autocomplete-panel\" role=\"listbox\" [id]=\"id\" [ngClass]=\"classList\" #panel><ng-content></ng-content></div></ng-template>",
-                        styles: [".mc-autocomplete-trigger{text-overflow:ellipsis}.mc-autocomplete-panel{visibility:hidden;position:relative;overflow:auto;-webkit-overflow-scrolling:touch;margin-top:-1px;min-width:100%;width:100%;max-width:none;max-height:256px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-autocomplete-panel.mc-autocomplete_visible{visibility:visible}.mc-autocomplete-panel.mc-autocomplete_hidden{visibility:hidden}.mc-autocomplete-panel-above .mc-autocomplete-panel{border-radius:0;border-top-left-radius:3px;border-top-right-radius:3px}.mc-autocomplete-panel .mc-divider-horizontal{margin-top:-1px}@media screen and (-ms-high-contrast:active){.mc-autocomplete-panel{outline:solid 1px}}"],
+                        styles: [".mc-autocomplete-trigger{text-overflow:ellipsis}.mc-autocomplete-panel{visibility:hidden;position:relative;overflow:auto;-webkit-overflow-scrolling:touch;margin-top:-1px;min-width:100%;width:100%;max-width:none;max-height:256px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-autocomplete-panel.mc-autocomplete_visible{visibility:visible}.mc-autocomplete-panel.mc-autocomplete_hidden{visibility:hidden}.mc-autocomplete-panel-above .mc-autocomplete-panel{border-radius:0;border-top-left-radius:3px;border-top-right-radius:3px}.mc-autocomplete-panel .mc-divider-horizontal{margin-top:-1px}@media (-ms-high-contrast:active){.mc-autocomplete-panel{outline:solid 1px}}"],
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
                         host: { class: 'mc-autocomplete' },
@@ -3919,7 +3919,7 @@
         /** @nocollapse */
         McButton.ctorParameters = function () { return [
             { type: core.ElementRef },
-            { type: a11y.FocusMonitor }
+            { type: a11y$1.FocusMonitor }
         ]; };
         return McButton;
     }(McButtonMixinBase));
@@ -3959,7 +3959,7 @@
         ];
         /** @nocollapse */
         McAnchor.ctorParameters = function () { return [
-            { type: a11y.FocusMonitor },
+            { type: a11y$1.FocusMonitor },
             { type: core.ElementRef }
         ]; };
         return McAnchor;
@@ -3976,7 +3976,7 @@
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            a11y.A11yModule,
+                            a11y$1.A11yModule,
                             platform.PlatformModule
                         ],
                         exports: [
@@ -4641,7 +4641,7 @@
         McButtonToggle.ctorParameters = function () { return [
             { type: McButtonToggleGroup, decorators: [{ type: core.Optional }] },
             { type: core.ChangeDetectorRef },
-            { type: a11y.FocusMonitor },
+            { type: a11y$1.FocusMonitor },
             { type: core.ElementRef }
         ]; };
         McButtonToggle.propDecorators = {
@@ -4785,7 +4785,7 @@
         /** @nocollapse */
         McCard.ctorParameters = function () { return [
             { type: core.ElementRef },
-            { type: a11y.FocusMonitor }
+            { type: a11y$1.FocusMonitor }
         ]; };
         McCard.propDecorators = {
             tabIndex: [{ type: core.HostBinding, args: ['attr.tabIndex',] }, { type: core.Input }],
@@ -4807,7 +4807,7 @@
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            a11y.A11yModule,
+                            a11y$1.A11yModule,
                             platform.PlatformModule
                         ],
                         exports: [McCard],
@@ -5367,7 +5367,7 @@
         McCheckbox.ctorParameters = function () { return [
             { type: core.ElementRef },
             { type: core.ChangeDetectorRef },
-            { type: a11y.FocusMonitor },
+            { type: a11y$1.FocusMonitor },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_CHECKBOX_CLICK_ACTION,] }] }
         ]; };
@@ -6409,7 +6409,7 @@
         }
         McInputModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [common.CommonModule, a11y.A11yModule, McCommonModule, forms.FormsModule],
+                        imports: [common.CommonModule, a11y$1.A11yModule, McCommonModule, forms.FormsModule],
                         exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator],
                         declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator]
                     },] },
@@ -6627,7 +6627,7 @@
             { type: core.Component, args: [{
                         selector: '[mc-calendar-body]',
                         template: "<tr *ngIf=\"firstRowOffset < labelMinRequiredCells\" aria-hidden=\"true\"><td class=\"mc-calendar__body-label\" [attr.colspan]=\"numCols\" [style.paddingTop]=\"cellPadding\" [style.paddingBottom]=\"cellPadding\">{{label}}</td></tr><tr *ngFor=\"let row of rows; let rowIndex = index\" role=\"row\"><td *ngIf=\"rowIndex === 0 && firstRowOffset\" aria-hidden=\"true\" class=\"mc-calendar__body-label\" [attr.colspan]=\"firstRowOffset\" [style.paddingTop]=\"cellPadding\" [style.paddingBottom]=\"cellPadding\">{{firstRowOffset >= labelMinRequiredCells ? label : ''}}</td><td *ngFor=\"let item of row; let colIndex = index\" role=\"gridcell\" class=\"mc-calendar__body-cell\" [ngClass]=\"item.cssClasses\" [tabindex]=\"isActiveCell(rowIndex, colIndex) ? 0 : -1\" [class.mc-calendar__body_disabled]=\"!item.enabled\" [class.mc-calendar__body_active]=\"isActiveCell(rowIndex, colIndex)\" [attr.aria-label]=\"item.ariaLabel\" [attr.aria-disabled]=\"!item.enabled || null\" [attr.aria-selected]=\"selectedValue === item.value\" (click)=\"cellClicked(item)\" [style.width]=\"cellWidth\" [style.paddingTop]=\"cellPadding\" [style.paddingBottom]=\"cellPadding\"><div class=\"mc-calendar__body-cell-content\" [class.mc-calendar__body_selected]=\"selectedValue === item.value\" [class.mc-calendar__body-today]=\"todayValue === item.value\">{{item.displayValue}}</div></td></tr>",
-                        styles: [".mc-calendar__body{min-width:224px}.mc-calendar__body-label{height:0;line-height:0;text-align:left;padding-left:4.71429%;padding-right:4.71429%}.mc-calendar__body-cell{position:relative;height:0;line-height:0;text-align:center;outline:0;cursor:pointer}.mc-calendar__body_disabled{cursor:default}.mc-calendar__body-cell-content{position:absolute;top:5%;left:5%;padding:8px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:90%;height:90%;line-height:1;border-width:1px;border-style:solid}@media screen and (-ms-high-contrast:active){.mc-calendar__body-cell-content{border:none}}mc-month-view .mc-calendar__body-cell-content{justify-content:flex-end}mc-multi-year-view .mc-calendar__body-cell-content,mc-year-view .mc-calendar__body-cell-content{justify-content:center}@media screen and (-ms-high-contrast:active){.mc-calendar__body_selected,.mc-datepicker__popup:not(:empty){outline:solid 1px}.mc-calendar__body-today{outline:dotted 1px}}[dir=rtl] .mc-calendar__body-label{text-align:right}"],
+                        styles: [".mc-calendar__body{min-width:224px}.mc-calendar__body-label{height:0;line-height:0;text-align:left;padding-left:4.71429%;padding-right:4.71429%}.mc-calendar__body-cell{position:relative;height:0;line-height:0;text-align:center;outline:0;cursor:pointer}.mc-calendar__body_disabled{cursor:default}.mc-calendar__body-cell-content{position:absolute;top:5%;left:5%;padding:8px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:90%;height:90%;line-height:1;border-width:1px;border-style:solid}@media (-ms-high-contrast:active){.mc-calendar__body-cell-content{border:none}}mc-month-view .mc-calendar__body-cell-content{justify-content:flex-end}mc-multi-year-view .mc-calendar__body-cell-content,mc-year-view .mc-calendar__body-cell-content{justify-content:center}@media (-ms-high-contrast:active){.mc-calendar__body_selected,.mc-datepicker__popup:not(:empty){outline:solid 1px}.mc-calendar__body-today{outline:dotted 1px}}[dir=rtl] .mc-calendar__body-label{text-align:right}"],
                         host: {
                             class: 'mc-calendar__body',
                             role: 'grid',
@@ -9976,7 +9976,7 @@
                             common.CommonModule,
                             McButtonModule,
                             overlay.OverlayModule,
-                            a11y.A11yModule,
+                            a11y$1.A11yModule,
                             portal.PortalModule,
                             McIconModule
                         ],
@@ -10423,7 +10423,7 @@
         /** @nocollapse */
         McDropdownItem.ctorParameters = function () { return [
             { type: core.ElementRef },
-            { type: a11y.FocusMonitor },
+            { type: a11y$1.FocusMonitor },
             { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_DROPDOWN_PANEL,] }] }
         ]; };
@@ -11825,7 +11825,7 @@
             { type: McDropdown, decorators: [{ type: core.Optional }] },
             { type: McDropdownItem, decorators: [{ type: core.Optional }, { type: core.Self }] },
             { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
-            { type: a11y.FocusMonitor }
+            { type: a11y$1.FocusMonitor }
         ]; };
         McDropdownTrigger.propDecorators = {
             dropdown: [{ type: core.Input, args: ['mcDropdownTriggerFor',] }],
@@ -13097,7 +13097,7 @@
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            a11y.A11yModule,
+                            a11y$1.A11yModule,
                             McPseudoCheckboxModule,
                             McLineModule,
                             McOptionModule
@@ -13207,7 +13207,7 @@
         /** @nocollapse */
         McLink.ctorParameters = function () { return [
             { type: core.ElementRef },
-            { type: a11y.FocusMonitor },
+            { type: a11y$1.FocusMonitor },
             { type: core.ChangeDetectorRef },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] }
         ]; };
@@ -13228,7 +13228,7 @@
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            a11y.A11yModule
+                            a11y$1.A11yModule
                         ],
                         declarations: [McLink],
                         exports: [McLink]
@@ -14882,7 +14882,7 @@
         /** @nocollapse */
         McNavbarItem.ctorParameters = function () { return [
             { type: core.ElementRef },
-            { type: a11y.FocusMonitor }
+            { type: a11y$1.FocusMonitor }
         ]; };
         McNavbarItem.propDecorators = {
             tabIndex: [{ type: core.Input }],
@@ -15263,7 +15263,7 @@
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            a11y.A11yModule,
+                            a11y$1.A11yModule,
                             platform.PlatformModule
                         ],
                         exports: [
@@ -17595,7 +17595,7 @@
         }
         McRadioModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [common.CommonModule, a11y.A11yModule, McCommonModule],
+                        imports: [common.CommonModule, a11y$1.A11yModule, McCommonModule],
                         exports: [McRadioGroup, McRadioButton],
                         declarations: [McRadioGroup, McRadioButton]
                     },] },
@@ -21448,7 +21448,7 @@
         McTabLink.ctorParameters = function () { return [
             { type: core.ElementRef },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-            { type: a11y.FocusMonitor }
+            { type: a11y$1.FocusMonitor }
         ]; };
         McTabLink.propDecorators = {
             active: [{ type: core.Input }]
@@ -21469,7 +21469,7 @@
                             common.CommonModule,
                             McCommonModule,
                             portal.PortalModule,
-                            a11y.A11yModule
+                            a11y$1.A11yModule
                         ],
                         // Don't export all components because some are only to be used internally.
                         exports: [
@@ -27668,7 +27668,7 @@
         }
         McTextareaModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [common.CommonModule, a11y.A11yModule, McCommonModule, forms.FormsModule],
+                        imports: [common.CommonModule, a11y$1.A11yModule, McCommonModule, forms.FormsModule],
                         exports: [McTextarea],
                         declarations: [McTextarea]
                     },] },
@@ -28810,16 +28810,12 @@
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            a11y.A11yModule,
+                            a11y$1.A11yModule,
                             platform.PlatformModule,
                             forms.FormsModule
                         ],
-                        declarations: [
-                            McTimepicker
-                        ],
-                        exports: [
-                            McTimepicker
-                        ]
+                        declarations: [McTimepicker],
+                        exports: [McTimepicker]
                     },] },
         ];
         return McTimepickerModule;
@@ -30987,7 +30983,7 @@
         /** @nocollapse */
         McToggleComponent.ctorParameters = function () { return [
             { type: core.ElementRef },
-            { type: a11y.FocusMonitor },
+            { type: a11y$1.FocusMonitor },
             { type: core.ChangeDetectorRef },
             { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] }
         ]; };
@@ -31015,7 +31011,7 @@
         }
         McToggleModule.decorators = [
             { type: core.NgModule, args: [{
-                        imports: [common.CommonModule, a11y.A11yModule, McCommonModule],
+                        imports: [common.CommonModule, a11y$1.A11yModule, McCommonModule],
                         exports: [McToggleComponent],
                         declarations: [McToggleComponent]
                     },] },
@@ -32116,7 +32112,7 @@
         /** @nocollapse */
         McVerticalNavbarItem.ctorParameters = function () { return [
             { type: core.ElementRef },
-            { type: a11y.FocusMonitor },
+            { type: a11y$1.FocusMonitor },
             { type: McDropdownTrigger, decorators: [{ type: core.Optional }, { type: core.Self }] }
         ]; };
         McVerticalNavbarItem.propDecorators = {
@@ -32231,7 +32227,7 @@
             { type: core.NgModule, args: [{
                         imports: [
                             common.CommonModule,
-                            a11y.A11yModule,
+                            a11y$1.A11yModule,
                             platform.PlatformModule,
                             McIconModule
                         ],
@@ -32604,34 +32600,34 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa15 = McTabHeaderBase;
+    exports.ɵa14 = McTabHeaderBase;
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
     exports.ɵa22 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;
-    exports.ɵb15 = McTabLabelWrapperBase;
+    exports.ɵb14 = McTabLabelWrapperBase;
     exports.ɵb20 = mcSidepanelAnimations;
     exports.ɵb25 = MinValidator;
     exports.ɵb28 = McModalTitle;
-    exports.ɵc15 = McTabLabelWrapperMixinBase;
+    exports.ɵc14 = McTabLabelWrapperMixinBase;
     exports.ɵc20 = McSidepanelClose;
     exports.ɵc25 = MAX_VALIDATOR;
     exports.ɵc28 = McModalBody;
-    exports.ɵd15 = McTabBase;
+    exports.ɵd14 = McTabBase;
     exports.ɵd20 = McSidepanelHeader;
     exports.ɵd25 = MaxValidator;
     exports.ɵd28 = McModalFooter;
-    exports.ɵe15 = McTabMixinBase;
+    exports.ɵe14 = McTabMixinBase;
     exports.ɵe20 = McSidepanelBody;
     exports.ɵe28 = CssUnitPipe;
-    exports.ɵf15 = McTabNavBase;
+    exports.ɵf14 = McTabNavBase;
     exports.ɵf20 = McSidepanelFooter;
-    exports.ɵg15 = McTabNavMixinBase;
+    exports.ɵg14 = McTabNavMixinBase;
     exports.ɵg20 = McSidepanelActions;
-    exports.ɵh15 = McTabLinkBase;
-    exports.ɵi15 = McTabLinkMixinBase;
+    exports.ɵh14 = McTabLinkBase;
+    exports.ɵi14 = McTabLinkMixinBase;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

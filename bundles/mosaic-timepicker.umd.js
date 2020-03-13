@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@angular/cdk/coercion'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/input'), require('rxjs')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/timepicker', ['exports', '@angular/cdk/platform', '@angular/common', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@angular/cdk/coercion', '@ptsecurity/cdk/datetime', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/input', 'rxjs'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.timepicker = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.forms, global.ng.cdk.a11y, global.ng.cdk.coercion, global.ng.cdk.datetime, global.ng.mosaic.core, global.ng.mosaic.formField, global.ng.mosaic.input, global.rxjs));
-}(this, (function (exports, platform, common, core, forms, a11y, coercion, datetime, core$1, formField, input, rxjs) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@angular/cdk/coercion'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/input'), require('rxjs')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/timepicker', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@angular/forms', '@angular/cdk/coercion', '@ptsecurity/cdk/datetime', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/input', 'rxjs'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.timepicker = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.forms, global.ng.cdk.coercion, global.ng.cdk.datetime, global.ng.mosaic.core, global.ng.mosaic.formField, global.ng.mosaic.input, global.rxjs));
+}(this, (function (exports, a11y, platform, common, core, forms, coercion, datetime, core$1, formField, input, rxjs) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1177,12 +1177,8 @@
                             platform.PlatformModule,
                             forms.FormsModule
                         ],
-                        declarations: [
-                            McTimepicker
-                        ],
-                        exports: [
-                            McTimepicker
-                        ]
+                        declarations: [McTimepicker],
+                        exports: [McTimepicker]
                     },] },
         ];
         return McTimepickerModule;

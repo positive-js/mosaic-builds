@@ -1,5 +1,5 @@
+import { FocusOrigin } from '@angular/cdk/a11y';
 import { ChangeDetectorRef, EventEmitter, ElementRef, InjectionToken, AfterContentInit, NgZone } from '@angular/core';
-import { FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';

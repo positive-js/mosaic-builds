@@ -1,7 +1,7 @@
+import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, OnDestroy, ViewContainerRef } from '@angular/core';
-import { FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { McDropdownItem } from './dropdown-item';
 import { McDropdownPanel } from './dropdown-panel';
 import { McDropdown } from './dropdown.component';

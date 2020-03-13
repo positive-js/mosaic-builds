@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/card', ['exports', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.card = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.cdk.a11y, global.ng.cdk.keycodes));
-}(this, (function (exports, platform, common, core, a11y, keycodes) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/keycodes')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/card', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/cdk/keycodes'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.card = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.cdk.keycodes));
+}(this, (function (exports, a11y, platform, common, core, keycodes) { 'use strict';
 
     /**
      * @fileoverview added by tsickle

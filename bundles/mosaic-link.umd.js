@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/link', ['exports', '@angular/common', '@angular/core', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.link = {}), global.ng.common, global.ng.core, global.ng.cdk.a11y, global.ng.mosaic.core));
-}(this, (function (exports, common, core, a11y, core$1) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/link', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.link = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ng.mosaic.core));
+}(this, (function (exports, a11y, common, core, core$1) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.

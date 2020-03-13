@@ -4,12 +4,11 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { forwardRef, EventEmitter, Directive, ChangeDetectorRef, Input, Output, ContentChildren, Component, ViewEncapsulation, ChangeDetectionStrategy, Optional, ElementRef, ViewChild, NgModule } from '@angular/core';
-import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled, toBoolean, mixinColor, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
 import { __extends } from 'tslib';
-import { FocusMonitor } from '@angular/cdk/a11y';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 

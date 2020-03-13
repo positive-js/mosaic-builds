@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/list', ['exports', '@angular/common', '@angular/core', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.list = {}), global.ng.common, global.ng.core, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.collections, global.ng.forms, global.ng.cdk.keycodes, global.rxjs, global.rxjs.operators));
-}(this, (function (exports, common, core, a11y, core$1, coercion, collections, forms, keycodes, rxjs, operators) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/list', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.list = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ng.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.collections, global.ng.forms, global.ng.cdk.a11y, global.ng.cdk.keycodes, global.rxjs, global.rxjs.operators));
+}(this, (function (exports, a11y, common, core, core$1, coercion, collections, forms, a11y$1, keycodes, rxjs, operators) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -479,7 +479,7 @@
         function () {
             var _this = this;
             this.horizontal = core$1.toBoolean(this.horizontal);
-            this.keyManager = new a11y.FocusKeyManager(this.options)
+            this.keyManager = new a11y$1.FocusKeyManager(this.options)
                 .withTypeAhead()
                 .withVerticalOrientation(!this.horizontal)
                 .withHorizontalOrientation(this.horizontal ? 'ltr' : null);

@@ -1,5 +1,6 @@
+import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy } from '@angular/core';
-import { IFocusableOption, FocusMonitor, FocusOrigin } from '@ptsecurity/cdk/a11y';
+import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { McDropdownPanel } from './dropdown-panel';

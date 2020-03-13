@@ -1,7 +1,7 @@
 import { AnimationEvent } from '@angular/animations';
+import { FocusOrigin } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, TemplateRef, QueryList, OnInit } from '@angular/core';
-import { FocusOrigin } from '@ptsecurity/cdk/a11y';
 import { Observable, Subject } from 'rxjs';
 import { McDropdownContent } from './dropdown-content';
 import { McDropdownItem } from './dropdown-item';

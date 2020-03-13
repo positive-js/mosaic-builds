@@ -10,8 +10,8 @@ import { NgControl, NgForm, FormGroupDirective, FormsModule } from '@angular/for
 import { mixinErrorState, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject, fromEvent } from 'rxjs';
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
-import { A11yModule } from '@ptsecurity/cdk/a11y';
 
 /**
  * @fileoverview added by tsickle

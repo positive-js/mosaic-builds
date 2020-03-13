@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/button-toggle', ['exports', '@angular/core', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.buttonToggle = {}), global.ng.core, global.ng.mosaic.button, global.ng.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.collections, global.ng.forms, global.ng.cdk.a11y));
-}(this, (function (exports, core, button, core$1, coercion, collections, forms, a11y) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/a11y'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/button-toggle', ['exports', '@angular/core', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/core', '@angular/cdk/a11y', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.buttonToggle = {}), global.ng.core, global.ng.mosaic.button, global.ng.mosaic.core, global.ng.cdk.a11y, global.ng.cdk.coercion, global.ng.cdk.collections, global.ng.forms));
+}(this, (function (exports, core, button, core$1, a11y, coercion, collections, forms) { 'use strict';
 
     /**
      * @fileoverview added by tsickle

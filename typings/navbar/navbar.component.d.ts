@@ -1,5 +1,5 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { AfterViewInit, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 export declare type McNavbarContainerPositionType = 'left' | 'right';
 export declare class McNavbarLogo {

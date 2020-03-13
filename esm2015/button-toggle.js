@@ -7,10 +7,10 @@
 import { forwardRef, EventEmitter, Directive, ChangeDetectorRef, Input, ContentChildren, Output, Component, ViewEncapsulation, ChangeDetectionStrategy, Optional, ElementRef, ViewChild, NgModule } from '@angular/core';
 import { McButton, McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 
 /**
  * @fileoverview added by tsickle

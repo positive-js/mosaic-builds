@@ -4,14 +4,15 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Inject, forwardRef, Optional, ContentChildren, ViewChild, Input, EventEmitter, Attribute, Output, NgModule } from '@angular/core';
-import { FocusKeyManager, A11yModule } from '@ptsecurity/cdk/a11y';
 import { toBoolean, McOptgroup, McLine, mixinTabIndex, mixinDisabled, MultipleMode, McLineSetter, McPseudoCheckboxModule, McLineModule, McOptionModule } from '@ptsecurity/mosaic/core';
 import { __extends } from 'tslib';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { hasModifierKey, PAGE_DOWN, PAGE_UP, END, HOME, UP_ARROW, DOWN_ARROW, TAB, ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
 import { Subject, merge } from 'rxjs';
 import { take, takeUntil, startWith } from 'rxjs/operators';

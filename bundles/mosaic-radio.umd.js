@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/a11y'), require('@angular/cdk/collections'), require('@angular/forms')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/radio', ['exports', '@angular/common', '@angular/core', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/a11y', '@angular/cdk/collections', '@angular/forms'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.radio = {}), global.ng.common, global.ng.core, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.cdk.a11y, global.ng.cdk.collections, global.ng.forms));
-}(this, (function (exports, common, core, a11y, core$1, a11y$1, collections, forms) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/collections'), require('@angular/forms')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/radio', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@angular/cdk/collections', '@angular/forms'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.radio = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ng.mosaic.core, global.ng.cdk.collections, global.ng.forms));
+}(this, (function (exports, a11y, common, core, core$1, collections, forms) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -858,7 +858,7 @@
             { type: McRadioGroup, decorators: [{ type: core.Optional }] },
             { type: core.ElementRef },
             { type: core.ChangeDetectorRef },
-            { type: a11y$1.FocusMonitor },
+            { type: a11y.FocusMonitor },
             { type: collections.UniqueSelectionDispatcher }
         ]; };
         McRadioButton.propDecorators = {

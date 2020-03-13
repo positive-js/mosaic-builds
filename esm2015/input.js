@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { Directive, ElementRef, Optional, Self, Attribute, Input, InjectionToken, Inject, forwardRef, NgModule } from '@angular/core';
 import { NgControl, NG_VALIDATORS, NgModel, FormControlName, NgForm, FormGroupDirective, Validators, FormsModule } from '@angular/forms';
-import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinErrorState, setMosaicValidation, MC_VALIDATION, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Platform, getSupportedInputTypes } from '@angular/cdk/platform';

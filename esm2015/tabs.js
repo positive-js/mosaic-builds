@@ -4,10 +4,10 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { CdkPortal, TemplatePortal, CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Directive, TemplateRef, Component, ChangeDetectionStrategy, ViewEncapsulation, ViewContainerRef, ContentChild, ViewChild, Input, EventEmitter, ElementRef, Optional, ChangeDetectorRef, Output, ComponentFactoryResolver, Inject, forwardRef, NgZone, ContentChildren, InjectionToken, Attribute, NgModule } from '@angular/core';
-import { FocusKeyManager, FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinDisabled, mixinColor, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
 import { Subject, Subscription, of, merge } from 'rxjs';
 import { Directionality } from '@angular/cdk/bidi';
@@ -15,6 +15,7 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { coerceNumberProperty, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ViewportRuler } from '@angular/cdk/scrolling';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { SPACE, ENTER, END, HOME } from '@ptsecurity/cdk/keycodes';
 
 /**
@@ -1576,5 +1577,5 @@ McTabsModule.decorators = [
             },] },
 ];
 
-export { MC_TABS_CONFIG, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McLightTabsCssStyler, McStretchTabsCssStyler, McTab, McTabBody, McTabBodyPortal, McTabChangeEvent, McTabContent, McTabGroup, McTabGroupBase, McTabGroupMixinBase, McTabHeader, McTabLabel, McTabLabelWrapper, McTabLink, McTabNav, McTabsModule, mcTabsAnimations, McTabHeaderBase as ɵa15, McTabLabelWrapperBase as ɵb15, McTabLabelWrapperMixinBase as ɵc15, McTabBase as ɵd15, McTabMixinBase as ɵe15, McTabNavBase as ɵf15, McTabNavMixinBase as ɵg15, McTabLinkBase as ɵh15, McTabLinkMixinBase as ɵi15 };
+export { MC_TABS_CONFIG, McAlignTabsCenterCssStyler, McAlignTabsEndCssStyler, McLightTabsCssStyler, McStretchTabsCssStyler, McTab, McTabBody, McTabBodyPortal, McTabChangeEvent, McTabContent, McTabGroup, McTabGroupBase, McTabGroupMixinBase, McTabHeader, McTabLabel, McTabLabelWrapper, McTabLink, McTabNav, McTabsModule, mcTabsAnimations, McTabHeaderBase as ɵa14, McTabLabelWrapperBase as ɵb14, McTabLabelWrapperMixinBase as ɵc14, McTabBase as ɵd14, McTabMixinBase as ɵe14, McTabNavBase as ɵf14, McTabNavMixinBase as ɵg14, McTabLinkBase as ɵh14, McTabLinkMixinBase as ɵi14 };
 //# sourceMappingURL=tabs.js.map

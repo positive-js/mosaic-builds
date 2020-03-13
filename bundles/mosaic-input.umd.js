@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/platform'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('@ptsecurity/cdk/keycodes')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/input', ['exports', '@angular/common', '@angular/core', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/platform', '@ptsecurity/mosaic/form-field', 'rxjs', '@ptsecurity/cdk/keycodes'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.input = {}), global.ng.common, global.ng.core, global.ng.forms, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.platform, global.ng.mosaic.formField, global.rxjs, global.ng.cdk.keycodes));
-}(this, (function (exports, common, core, forms, a11y, core$1, coercion, platform, formField, rxjs, keycodes) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/platform'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('@ptsecurity/cdk/keycodes')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/input', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@angular/forms', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/platform', '@ptsecurity/mosaic/form-field', 'rxjs', '@ptsecurity/cdk/keycodes'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.input = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ng.forms, global.ng.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.platform, global.ng.mosaic.formField, global.rxjs, global.ng.cdk.keycodes));
+}(this, (function (exports, a11y, common, core, forms, core$1, coercion, platform, formField, rxjs, keycodes) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.

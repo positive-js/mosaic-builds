@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/portal'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('@angular/cdk/bidi'), require('rxjs/operators'), require('@angular/animations'), require('@angular/cdk/coercion'), require('@angular/cdk/scrolling'), require('@ptsecurity/cdk/keycodes')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tabs', ['exports', '@angular/cdk/portal', '@angular/common', '@angular/core', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', 'rxjs', '@angular/cdk/bidi', 'rxjs/operators', '@angular/animations', '@angular/cdk/coercion', '@angular/cdk/scrolling', '@ptsecurity/cdk/keycodes'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tabs = {}), global.ng.cdk.portal, global.ng.common, global.ng.core, global.ng.cdk.a11y, global.ng.mosaic.core, global.rxjs, global.ng.cdk.bidi, global.rxjs.operators, global.ng.animations, global.ng.cdk.coercion, global.ng.cdk.scrolling, global.ng.cdk.keycodes));
-}(this, (function (exports, portal, common, core, a11y, core$1, rxjs, bidi, operators, animations, coercion, scrolling, keycodes) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/portal'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('@angular/cdk/bidi'), require('rxjs/operators'), require('@angular/animations'), require('@angular/cdk/coercion'), require('@angular/cdk/scrolling'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tabs', ['exports', '@angular/cdk/a11y', '@angular/cdk/portal', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', 'rxjs', '@angular/cdk/bidi', 'rxjs/operators', '@angular/animations', '@angular/cdk/coercion', '@angular/cdk/scrolling', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.tabs = {}), global.ng.cdk.a11y, global.ng.cdk.portal, global.ng.common, global.ng.core, global.ng.mosaic.core, global.rxjs, global.ng.cdk.bidi, global.rxjs.operators, global.ng.animations, global.ng.cdk.coercion, global.ng.cdk.scrolling, global.ng.cdk.a11y, global.ng.cdk.keycodes));
+}(this, (function (exports, a11y, portal, common, core, core$1, rxjs, bidi, operators, animations, coercion, scrolling, a11y$1, keycodes) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -855,7 +855,7 @@
             function () {
                 _this.updatePagination();
             });
-            this.keyManager = new a11y.FocusKeyManager(this.labelWrappers)
+            this.keyManager = new a11y$1.FocusKeyManager(this.labelWrappers)
                 .withHorizontalOrientation(this.getLayoutDirection())
                 .withWrap();
             this.keyManager.updateActiveItem(0);
@@ -2025,15 +2025,15 @@
     exports.McTabNav = McTabNav;
     exports.McTabsModule = McTabsModule;
     exports.mcTabsAnimations = mcTabsAnimations;
-    exports.ɵa15 = McTabHeaderBase;
-    exports.ɵb15 = McTabLabelWrapperBase;
-    exports.ɵc15 = McTabLabelWrapperMixinBase;
-    exports.ɵd15 = McTabBase;
-    exports.ɵe15 = McTabMixinBase;
-    exports.ɵf15 = McTabNavBase;
-    exports.ɵg15 = McTabNavMixinBase;
-    exports.ɵh15 = McTabLinkBase;
-    exports.ɵi15 = McTabLinkMixinBase;
+    exports.ɵa14 = McTabHeaderBase;
+    exports.ɵb14 = McTabLabelWrapperBase;
+    exports.ɵc14 = McTabLabelWrapperMixinBase;
+    exports.ɵd14 = McTabBase;
+    exports.ɵe14 = McTabMixinBase;
+    exports.ɵf14 = McTabNavBase;
+    exports.ɵg14 = McTabNavMixinBase;
+    exports.ɵh14 = McTabLinkBase;
+    exports.ɵi14 = McTabLinkMixinBase;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

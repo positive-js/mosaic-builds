@@ -1,6 +1,6 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { ChangeDetectorRef, ElementRef, EventEmitter } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 declare type ToggleLabelPositionType = 'left' | 'right';
 export declare class McToggleBase {

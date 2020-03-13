@@ -4,9 +4,9 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { Directive, ElementRef, ChangeDetectorRef, Attribute, Input, NgModule } from '@angular/core';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinTabIndex, mixinDisabled, toBoolean } from '@ptsecurity/mosaic/core';
 
 /**

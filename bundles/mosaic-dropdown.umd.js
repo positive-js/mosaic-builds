@@ -5,10 +5,10 @@
  * Use of this source code is governed by an MIT-style license.
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/overlay'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/icon'), require('@angular/cdk/portal'), require('rxjs'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/bidi'), require('@angular/cdk/platform'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('@angular/animations')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/dropdown', ['exports', '@angular/cdk/overlay', '@angular/common', '@angular/core', '@ptsecurity/mosaic/icon', '@angular/cdk/portal', 'rxjs', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/bidi', '@angular/cdk/platform', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/coercion', '@angular/animations'], factory) :
-    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.dropdown = {}), global.ng.cdk.overlay, global.ng.common, global.ng.core, global.ng.mosaic.icon, global.ng.cdk.portal, global.rxjs, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.cdk.bidi, global.ng.cdk.platform, global.ng.cdk.keycodes, global.rxjs.operators, global.ng.cdk.coercion, global.ng.animations));
-}(this, (function (exports, overlay, common, core, icon, portal, rxjs, a11y, core$1, bidi, platform, keycodes, operators, coercion, animations) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/overlay'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/icon'), require('@angular/cdk/portal'), require('rxjs'), require('@angular/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/bidi'), require('@angular/cdk/platform'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('@ptsecurity/cdk/a11y'), require('@angular/animations')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/dropdown', ['exports', '@angular/cdk/overlay', '@angular/common', '@angular/core', '@ptsecurity/mosaic/icon', '@angular/cdk/portal', 'rxjs', '@angular/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/bidi', '@angular/cdk/platform', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/coercion', '@ptsecurity/cdk/a11y', '@angular/animations'], factory) :
+    (global = global || self, factory((global.ng = global.ng || {}, global.ng.mosaic = global.ng.mosaic || {}, global.ng.mosaic.dropdown = {}), global.ng.cdk.overlay, global.ng.common, global.ng.core, global.ng.mosaic.icon, global.ng.cdk.portal, global.rxjs, global.ng.cdk.a11y, global.ng.mosaic.core, global.ng.cdk.bidi, global.ng.cdk.platform, global.ng.cdk.keycodes, global.rxjs.operators, global.ng.cdk.coercion, global.ng.cdk.a11y, global.ng.animations));
+}(this, (function (exports, overlay, common, core, icon, portal, rxjs, a11y, core$1, bidi, platform, keycodes, operators, coercion, a11y$1, animations) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -672,7 +672,7 @@
          */
         function () {
             var _this = this;
-            this.keyManager = new a11y.FocusKeyManager(this.items).withWrap().withTypeAhead();
+            this.keyManager = new a11y$1.FocusKeyManager(this.items).withWrap().withTypeAhead();
             this.tabSubscription = this.keyManager.tabOut.subscribe((/**
              * @return {?}
              */

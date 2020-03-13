@@ -1,6 +1,6 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { McButton } from '@ptsecurity/mosaic/button';
 /** Acceptable types for a button toggle. */
 export declare type ToggleType = 'checkbox' | 'radio';

@@ -1,5 +1,5 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy, EventEmitter } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 export declare class McCard implements OnDestroy {
     private _elementRef;
     private _focusMonitor;

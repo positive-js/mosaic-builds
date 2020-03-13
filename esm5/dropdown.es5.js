@@ -11,13 +11,14 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { TemplatePortal, DomPortalOutlet } from '@angular/cdk/portal';
 import { Subject, merge, Subscription, of, asapScheduler } from 'rxjs';
 import { __extends } from 'tslib';
-import { FocusMonitor, FocusKeyManager } from '@ptsecurity/cdk/a11y';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { mixinDisabled } from '@ptsecurity/mosaic/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { UP_ARROW, DOWN_ARROW, RIGHT_ARROW, LEFT_ARROW, ESCAPE, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
 import { startWith, switchMap, take, filter, takeUntil, delay } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { trigger, state, style, transition, group, query, animate } from '@angular/animations';
 
 /**

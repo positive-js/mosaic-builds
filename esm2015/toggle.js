@@ -4,9 +4,9 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { EventEmitter, Component, forwardRef, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, Attribute, ViewChild, Input, Output, NgModule } from '@angular/core';
-import { FocusMonitor, A11yModule } from '@ptsecurity/cdk/a11y';
 import { mixinTabIndex, mixinColor, mixinDisabled, ThemePalette, McCommonModule } from '@ptsecurity/mosaic/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';

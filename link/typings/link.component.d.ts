@@ -1,5 +1,5 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 export declare class McLinkBase {
     elementRef: ElementRef;

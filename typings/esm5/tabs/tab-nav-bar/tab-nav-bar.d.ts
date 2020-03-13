@@ -1,5 +1,5 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 /** @docs-private */
 export declare class McTabNavBase {

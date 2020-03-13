@@ -4,11 +4,11 @@
  *
  * Use of this source code is governed by an MIT-style license.
  */
+import { A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { Directive, forwardRef, ElementRef, Optional, Self, Inject, Renderer2, Input, NgModule } from '@angular/core';
 import { NgControl, NgForm, FormGroupDirective, FormsModule } from '@angular/forms';
-import { A11yModule } from '@ptsecurity/cdk/a11y';
 import { __extends } from 'tslib';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
@@ -1155,12 +1155,8 @@ var McTimepickerModule = /** @class */ (function () {
                         PlatformModule,
                         FormsModule
                     ],
-                    declarations: [
-                        McTimepicker
-                    ],
-                    exports: [
-                        McTimepicker
-                    ]
+                    declarations: [McTimepicker],
+                    exports: [McTimepicker]
                 },] },
     ];
     return McTimepickerModule;

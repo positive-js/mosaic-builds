@@ -1,5 +1,5 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy } from '@angular/core';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 export declare class McVerticalNavbarItemIcon {

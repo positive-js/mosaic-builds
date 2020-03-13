@@ -1,6 +1,6 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { FocusMonitor } from '@ptsecurity/cdk/a11y';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { McCheckboxClickAction } from './checkbox-config';
 /**
