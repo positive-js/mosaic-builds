@@ -1110,7 +1110,7 @@
          */
         function () {
             var _this = this;
-            if (this.empty || !this.multiple) {
+            if (this.customTrigger || this.empty || !this.multiple) {
                 return;
             }
             /** @type {?} */

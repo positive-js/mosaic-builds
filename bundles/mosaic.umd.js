@@ -24916,7 +24916,7 @@
          */
         function () {
             var _this = this;
-            if (this.empty || !this.multiple) {
+            if (this.customTrigger || this.empty || !this.multiple) {
                 return;
             }
             /** @type {?} */
@@ -26703,7 +26703,7 @@
          */
         function () {
             var _this = this;
-            if (this.empty || !this.multiple) {
+            if (this.customTrigger || this.empty || !this.multiple) {
                 return;
             }
             /** @type {?} */
@@ -32602,7 +32602,7 @@
     exports.ɵa15 = McTabHeaderBase;
     exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa24 = toggleVerticalNavbarAnimation;
+    exports.ɵa23 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;

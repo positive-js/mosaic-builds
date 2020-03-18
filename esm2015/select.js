@@ -855,7 +855,7 @@ class McSelect extends McSelectMixinBase {
      * @return {?}
      */
     calculateHiddenItems() {
-        if (this.empty || !this.multiple) {
+        if (this.customTrigger || this.empty || !this.multiple) {
             return;
         }
         /** @type {?} */
