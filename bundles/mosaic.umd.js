@@ -18118,7 +18118,7 @@
             { type: core.Component, args: [{
                         selector: 'mc-tree-option',
                         exportAs: 'mcTreeOption',
-                        template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : 'unchecked'\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                        template: "<ng-content select=\"[mc-icon]\"></ng-content><ng-content select=\"mc-tree-node-toggle\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : 'unchecked'\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                         host: {
                             '[attr.id]': 'id',
                             '[attr.tabindex]': '-1',
@@ -32599,10 +32599,10 @@
     exports.transformDropdown = transformDropdown;
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
-    exports.ɵa1 = mcSidebarAnimations;
     exports.ɵa15 = McTabHeaderBase;
+    exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa20 = mcSidepanelTransformAnimation;
-    exports.ɵa23 = toggleVerticalNavbarAnimation;
+    exports.ɵa24 = toggleVerticalNavbarAnimation;
     exports.ɵa25 = MIN_VALIDATOR;
     exports.ɵa28 = McModalControlService;
     exports.ɵa3 = mcSanityChecksFactory;

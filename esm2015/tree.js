@@ -449,7 +449,7 @@ McTreeOption.decorators = [
     { type: Component, args: [{
                 selector: 'mc-tree-option',
                 exportAs: 'mcTreeOption',
-                template: "<ng-content select=\"[mc-icon]\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : 'unchecked'\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
+                template: "<ng-content select=\"[mc-icon]\"></ng-content><ng-content select=\"mc-tree-node-toggle\"></ng-content><mc-pseudo-checkbox *ngIf=\"showCheckbox\" [state]=\"selected ? 'checked' : 'unchecked'\" [disabled]=\"disabled\"></mc-pseudo-checkbox><span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span><div class=\"mc-option-overlay\"></div>",
                 host: {
                     '[attr.id]': 'id',
                     '[attr.tabindex]': '-1',
