@@ -732,10 +732,11 @@ class McTreeSelection extends CdkTree {
         this.destroy.complete();
     }
     /**
+     * @param {?} $event
      * @return {?}
      */
-    focus() {
-        if (this.renderedOptions.length === 0) {
+    focus($event) {
+        if (this.renderedOptions.length === 0 || this.isFocusReceivedFromNestedOption($event)) {
             return;
         }
         this.keyManager.setFirstItemActive();
@@ -1205,6 +1206,17 @@ class McTreeSelection extends CdkTree {
     canDeselectLast(option) {
         return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && option.selected);
     }
+    /**
+     * @private
+     * @param {?} $event
+     * @return {?}
+     */
+    isFocusReceivedFromNestedOption($event) {
+        if (!$event || !$event.relatedTarget) {
+            return false;
+        }
+        return ((/** @type {?} */ ($event.relatedTarget))).classList.contains('mc-tree-option');
+    }
 }
 McTreeSelection.decorators = [
     { type: Component, args: [{
@@ -1214,8 +1226,8 @@ McTreeSelection.decorators = [
                 host: {
                     class: 'mc-tree-selection',
                     '[attr.tabindex]': 'tabIndex',
-                    '(focus)': 'focus()',
                     '(blur)': 'blur()',
+                    '(focus)': 'focus($event)',
                     '(keydown)': 'onKeyDown($event)',
                     '(window:resize)': 'updateScrollSize()'
                 },

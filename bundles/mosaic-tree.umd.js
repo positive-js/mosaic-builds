@@ -873,13 +873,15 @@
             this.destroy.complete();
         };
         /**
+         * @param {?} $event
          * @return {?}
          */
         McTreeSelection.prototype.focus = /**
+         * @param {?} $event
          * @return {?}
          */
-        function () {
-            if (this.renderedOptions.length === 0) {
+        function ($event) {
+            if (this.renderedOptions.length === 0 || this.isFocusReceivedFromNestedOption($event)) {
                 return;
             }
             this.keyManager.setFirstItemActive();
@@ -1489,6 +1491,22 @@
         function (option) {
             return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && option.selected);
         };
+        /**
+         * @private
+         * @param {?} $event
+         * @return {?}
+         */
+        McTreeSelection.prototype.isFocusReceivedFromNestedOption = /**
+         * @private
+         * @param {?} $event
+         * @return {?}
+         */
+        function ($event) {
+            if (!$event || !$event.relatedTarget) {
+                return false;
+            }
+            return ((/** @type {?} */ ($event.relatedTarget))).classList.contains('mc-tree-option');
+        };
         McTreeSelection.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-tree-selection',
@@ -1497,8 +1515,8 @@
                         host: {
                             class: 'mc-tree-selection',
                             '[attr.tabindex]': 'tabIndex',
-                            '(focus)': 'focus()',
                             '(blur)': 'blur()',
+                            '(focus)': 'focus($event)',
                             '(keydown)': 'onKeyDown($event)',
                             '(window:resize)': 'updateScrollSize()'
                         },

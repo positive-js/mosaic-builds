@@ -51,7 +51,7 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
-    focus(): void;
+    focus($event: any): void;
     blur(): void;
     onKeyDown(event: KeyboardEvent): void;
     updateScrollSize(): void;
@@ -94,5 +94,6 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     private markOptionsForCheck;
     private updateOptionsFocus;
     private canDeselectLast;
+    private isFocusReceivedFromNestedOption;
 }
 export {};
