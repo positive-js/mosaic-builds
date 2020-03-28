@@ -10,19 +10,19 @@
       "from": "./card"
     },
     {
+      "from": "./table"
+    },
+    {
       "from": "./sidebar"
     },
     {
       "from": "./divider"
     },
     {
-      "from": "./toggle"
-    },
-    {
       "from": "./tabs"
     },
     {
-      "from": "./popover"
+      "from": "./progress-bar"
     },
     {
       "from": "./checkbox"
@@ -31,13 +31,13 @@
       "from": "./tree"
     },
     {
-      "from": "./radio"
-    },
-    {
       "from": "./tooltip"
     },
     {
-      "from": "./progress-spinner"
+      "from": "./toggle"
+    },
+    {
+      "from": "./radio"
     },
     {
       "from": "./link"
@@ -46,10 +46,13 @@
       "from": "./list"
     },
     {
-      "from": "./progress-bar"
+      "from": "./progress-spinner"
     },
     {
       "from": "./navbar"
+    },
+    {
+      "from": "./popover"
     },
     {
       "from": "./icon"
@@ -76,7 +79,7 @@
       "from": "./modal"
     },
     {
-      "from": "./tags"
+      "from": "./input"
     },
     {
       "from": "./autocomplete"
@@ -85,7 +88,7 @@
       "from": "./textarea"
     },
     {
-      "from": "./input"
+      "from": "./tags"
     },
     {
       "from": "./vertical-navbar"
@@ -94,10 +97,10 @@
       "from": "./timepicker"
     },
     {
-      "from": "./select"
+      "from": "./datepicker"
     },
     {
-      "from": "./datepicker"
+      "from": "./select"
     },
     {
       "from": "./tree-select"

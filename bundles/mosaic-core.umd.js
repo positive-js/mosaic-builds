@@ -1965,7 +1965,7 @@
     exports.setMosaicValidationForFormControl = setMosaicValidationForFormControl;
     exports.setMosaicValidationForModelControl = setMosaicValidationForModelControl;
     exports.toBoolean = toBoolean;
-    exports.ɵa3 = mcSanityChecksFactory;
+    exports.ɵa4 = mcSanityChecksFactory;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
