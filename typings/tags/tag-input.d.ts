@@ -26,7 +26,7 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
      *
      * Defaults to `[ENTER]`.
      */
-    separatorKeyCodes: number[] | Set<number>;
+    separatorKeyCodes: number[];
     /** Emitted when a tag is to be added. */
     tagEnd: EventEmitter<McTagInputEvent>;
     /** The input's placeholder text. */
@@ -58,12 +58,14 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     blur(): void;
     triggerValidation(): void;
     /** Checks to see if the (tagEnd) event needs to be emitted. */
-    emittagEnd(event?: KeyboardEvent): void;
+    emitTagEnd(event?: KeyboardEvent): void;
     onInput(): void;
+    onPaste($event: ClipboardEvent): void;
     updateInputWidth(): void;
     onFocus(): void;
     /** Focuses the input. */
     focus(): void;
+    private separatorKeyToSymbol;
     private hasControl;
     private setDefaultInputWidth;
     /** Checks whether a keycode is one of the configured separators. */

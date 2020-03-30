@@ -257,5 +257,5 @@ McSidebarModule.decorators = [
             },] },
 ];
 
-export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions, mcSidebarAnimations as ɵa3 };
+export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions, mcSidebarAnimations as ɵa2 };
 //# sourceMappingURL=sidebar.js.map

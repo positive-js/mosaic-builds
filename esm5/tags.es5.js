@@ -7,7 +7,7 @@
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { InjectionToken, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, NgZone, ContentChildren, ContentChild, forwardRef, Output, Input, Directive, Optional, Inject, Self, Renderer2, NgModule } from '@angular/core';
-import { SPACE, BACKSPACE, DELETE, HOME, END, hasModifierKey, ENTER } from '@ptsecurity/cdk/keycodes';
+import { SPACE, BACKSPACE, DELETE, HOME, END, ENTER, TAB, COMMA, hasModifierKey } from '@ptsecurity/cdk/keycodes';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
 import { __extends } from 'tslib';
@@ -2130,7 +2130,7 @@ var McTagInput = /** @class */ (function () {
      * @return {?}
      */
     function (event) {
-        this.emittagEnd(event);
+        this.emitTagEnd(event);
     };
     /** Checks to see if the blur should emit the (tagEnd) event. */
     /**
@@ -2150,7 +2150,7 @@ var McTagInput = /** @class */ (function () {
         }
         // tslint:disable-next-line: no-unnecessary-type-assertion
         if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
-            this.emittagEnd();
+            this.emitTagEnd();
         }
         this._tagList.stateChanges.next();
     };
@@ -2172,7 +2172,7 @@ var McTagInput = /** @class */ (function () {
      * @param {?=} event
      * @return {?}
      */
-    McTagInput.prototype.emittagEnd = /**
+    McTagInput.prototype.emitTagEnd = /**
      * Checks to see if the (tagEnd) event needs to be emitted.
      * @param {?=} event
      * @return {?}
@@ -2199,6 +2199,47 @@ var McTagInput = /** @class */ (function () {
         this.updateInputWidth();
         // Let tag list know whenever the value changes.
         this._tagList.stateChanges.next();
+    };
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
+    McTagInput.prototype.onPaste = /**
+     * @param {?} $event
+     * @return {?}
+     */
+    function ($event) {
+        var _this = this;
+        if (!$event.clipboardData) {
+            return;
+        }
+        /** @type {?} */
+        var data = $event.clipboardData.getData('text');
+        if (data && data.length === 0) {
+            return;
+        }
+        /** @type {?} */
+        var items = [];
+        for (var _i = 0, _a = this.separatorKeyCodes; _i < _a.length; _i++) {
+            var key = _a[_i];
+            /** @type {?} */
+            var separator = this.separatorKeyToSymbol(key);
+            if (data.search(separator) > -1) {
+                items.push.apply(items, data.split(separator));
+                break;
+            }
+        }
+        if (items.length === 0) {
+            items.push(data);
+        }
+        items.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        function (item) { return _this.tagEnd.emit({ input: _this.inputElement, value: item }); }));
+        this.updateInputWidth();
+        $event.preventDefault();
+        $event.stopPropagation();
     };
     /**
      * @return {?}
@@ -2243,6 +2284,30 @@ var McTagInput = /** @class */ (function () {
     };
     /**
      * @private
+     * @param {?} k
+     * @return {?}
+     */
+    McTagInput.prototype.separatorKeyToSymbol = /**
+     * @private
+     * @param {?} k
+     * @return {?}
+     */
+    function (k) {
+        var _a;
+        /** @type {?} */
+        var sep = (_a = {},
+            _a[ENTER] = /\r?\n/,
+            _a[TAB] = /\t/,
+            _a[SPACE] = / /,
+            _a[COMMA] = /,/,
+            _a)[k];
+        if (sep) {
+            return sep;
+        }
+        return k;
+    };
+    /**
+     * @private
      * @return {?}
      */
     McTagInput.prototype.hasControl = /**
@@ -2280,12 +2345,8 @@ var McTagInput = /** @class */ (function () {
         if (hasModifierKey(event)) {
             return false;
         }
-        /** @type {?} */
-        var separators = this.separatorKeyCodes;
         // tslint:disable-next-line: deprecation
-        /** @type {?} */
-        var keyCode = event.keyCode;
-        return Array.isArray(separators) ? separators.indexOf(keyCode) > -1 : separators.has(keyCode);
+        return this.separatorKeyCodes.indexOf(event.keyCode) > -1;
     };
     McTagInput.decorators = [
         { type: Directive, args: [{
@@ -2299,7 +2360,8 @@ var McTagInput = /** @class */ (function () {
                         '(keydown)': 'keydown($event)',
                         '(blur)': 'blur()',
                         '(focus)': 'onFocus()',
-                        '(input)': 'onInput()'
+                        '(input)': 'onInput()',
+                        '(paste)': 'onPaste($event)'
                     }
                 },] },
     ];

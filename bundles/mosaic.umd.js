@@ -23634,7 +23634,7 @@
          * @return {?}
          */
         function (event) {
-            this.emittagEnd(event);
+            this.emitTagEnd(event);
         };
         /** Checks to see if the blur should emit the (tagEnd) event. */
         /**
@@ -23654,7 +23654,7 @@
             }
             // tslint:disable-next-line: no-unnecessary-type-assertion
             if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
-                this.emittagEnd();
+                this.emitTagEnd();
             }
             this._tagList.stateChanges.next();
         };
@@ -23676,7 +23676,7 @@
          * @param {?=} event
          * @return {?}
          */
-        McTagInput.prototype.emittagEnd = /**
+        McTagInput.prototype.emitTagEnd = /**
          * Checks to see if the (tagEnd) event needs to be emitted.
          * @param {?=} event
          * @return {?}
@@ -23703,6 +23703,47 @@
             this.updateInputWidth();
             // Let tag list know whenever the value changes.
             this._tagList.stateChanges.next();
+        };
+        /**
+         * @param {?} $event
+         * @return {?}
+         */
+        McTagInput.prototype.onPaste = /**
+         * @param {?} $event
+         * @return {?}
+         */
+        function ($event) {
+            var _this = this;
+            if (!$event.clipboardData) {
+                return;
+            }
+            /** @type {?} */
+            var data = $event.clipboardData.getData('text');
+            if (data && data.length === 0) {
+                return;
+            }
+            /** @type {?} */
+            var items = [];
+            for (var _i = 0, _a = this.separatorKeyCodes; _i < _a.length; _i++) {
+                var key = _a[_i];
+                /** @type {?} */
+                var separator = this.separatorKeyToSymbol(key);
+                if (data.search(separator) > -1) {
+                    items.push.apply(items, data.split(separator));
+                    break;
+                }
+            }
+            if (items.length === 0) {
+                items.push(data);
+            }
+            items.forEach((/**
+             * @param {?} item
+             * @return {?}
+             */
+            function (item) { return _this.tagEnd.emit({ input: _this.inputElement, value: item }); }));
+            this.updateInputWidth();
+            $event.preventDefault();
+            $event.stopPropagation();
         };
         /**
          * @return {?}
@@ -23747,6 +23788,30 @@
         };
         /**
          * @private
+         * @param {?} k
+         * @return {?}
+         */
+        McTagInput.prototype.separatorKeyToSymbol = /**
+         * @private
+         * @param {?} k
+         * @return {?}
+         */
+        function (k) {
+            var _a;
+            /** @type {?} */
+            var sep = (_a = {},
+                _a[keycodes.ENTER] = /\r?\n/,
+                _a[keycodes.TAB] = /\t/,
+                _a[keycodes.SPACE] = / /,
+                _a[keycodes.COMMA] = /,/,
+                _a)[k];
+            if (sep) {
+                return sep;
+            }
+            return k;
+        };
+        /**
+         * @private
          * @return {?}
          */
         McTagInput.prototype.hasControl = /**
@@ -23784,12 +23849,8 @@
             if (keycodes.hasModifierKey(event)) {
                 return false;
             }
-            /** @type {?} */
-            var separators = this.separatorKeyCodes;
             // tslint:disable-next-line: deprecation
-            /** @type {?} */
-            var keyCode = event.keyCode;
-            return Array.isArray(separators) ? separators.indexOf(keyCode) > -1 : separators.has(keyCode);
+            return this.separatorKeyCodes.indexOf(event.keyCode) > -1;
         };
         McTagInput.decorators = [
             { type: core.Directive, args: [{
@@ -23803,7 +23864,8 @@
                             '(keydown)': 'keydown($event)',
                             '(blur)': 'blur()',
                             '(focus)': 'onFocus()',
-                            '(input)': 'onInput()'
+                            '(input)': 'onInput()',
+                            '(paste)': 'onPaste($event)'
                         }
                     },] },
         ];
@@ -32618,27 +32680,27 @@
     exports.yearsPerPage = yearsPerPage;
     exports.yearsPerRow = yearsPerRow;
     exports.ɵa16 = McTabHeaderBase;
+    exports.ɵa2 = mcSidebarAnimations;
     exports.ɵa21 = mcSidepanelTransformAnimation;
     exports.ɵa24 = toggleVerticalNavbarAnimation;
     exports.ɵa26 = MIN_VALIDATOR;
-    exports.ɵa27 = McModalControlService;
-    exports.ɵa3 = mcSidebarAnimations;
+    exports.ɵa28 = McModalControlService;
     exports.ɵa4 = mcSanityChecksFactory;
     exports.ɵb16 = McTabLabelWrapperBase;
     exports.ɵb21 = mcSidepanelAnimations;
     exports.ɵb26 = MinValidator;
-    exports.ɵb27 = McModalTitle;
+    exports.ɵb28 = McModalTitle;
     exports.ɵc16 = McTabLabelWrapperMixinBase;
     exports.ɵc21 = McSidepanelClose;
     exports.ɵc26 = MAX_VALIDATOR;
-    exports.ɵc27 = McModalBody;
+    exports.ɵc28 = McModalBody;
     exports.ɵd16 = McTabBase;
     exports.ɵd21 = McSidepanelHeader;
     exports.ɵd26 = MaxValidator;
-    exports.ɵd27 = McModalFooter;
+    exports.ɵd28 = McModalFooter;
     exports.ɵe16 = McTabMixinBase;
     exports.ɵe21 = McSidepanelBody;
-    exports.ɵe27 = CssUnitPipe;
+    exports.ɵe28 = CssUnitPipe;
     exports.ɵf16 = McTabNavBase;
     exports.ɵf21 = McSidepanelFooter;
     exports.ɵg16 = McTabNavMixinBase;

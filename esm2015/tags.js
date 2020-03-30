@@ -7,7 +7,7 @@
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { InjectionToken, Directive, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, NgZone, ContentChildren, ContentChild, forwardRef, Output, Input, Optional, Inject, Self, Renderer2, NgModule } from '@angular/core';
-import { SPACE, BACKSPACE, DELETE, HOME, END, hasModifierKey, ENTER } from '@ptsecurity/cdk/keycodes';
+import { SPACE, BACKSPACE, DELETE, HOME, END, hasModifierKey, ENTER, TAB, COMMA } from '@ptsecurity/cdk/keycodes';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
 import { Directionality } from '@angular/cdk/bidi';
@@ -1660,7 +1660,7 @@ class McTagInput {
      * @return {?}
      */
     keydown(event) {
-        this.emittagEnd(event);
+        this.emitTagEnd(event);
     }
     /**
      * Checks to see if the blur should emit the (tagEnd) event.
@@ -1675,7 +1675,7 @@ class McTagInput {
         }
         // tslint:disable-next-line: no-unnecessary-type-assertion
         if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
-            this.emittagEnd();
+            this.emitTagEnd();
         }
         this._tagList.stateChanges.next();
     }
@@ -1693,7 +1693,7 @@ class McTagInput {
      * @param {?=} event
      * @return {?}
      */
-    emittagEnd(event) {
+    emitTagEnd(event) {
         if (!this.inputElement.value && !!event) {
             this._tagList.keydown(event);
         }
@@ -1712,6 +1712,41 @@ class McTagInput {
         this.updateInputWidth();
         // Let tag list know whenever the value changes.
         this._tagList.stateChanges.next();
+    }
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
+    onPaste($event) {
+        if (!$event.clipboardData) {
+            return;
+        }
+        /** @type {?} */
+        const data = $event.clipboardData.getData('text');
+        if (data && data.length === 0) {
+            return;
+        }
+        /** @type {?} */
+        const items = [];
+        for (const key of this.separatorKeyCodes) {
+            /** @type {?} */
+            const separator = this.separatorKeyToSymbol(key);
+            if (data.search(separator) > -1) {
+                items.push(...data.split(separator));
+                break;
+            }
+        }
+        if (items.length === 0) {
+            items.push(data);
+        }
+        items.forEach((/**
+         * @param {?} item
+         * @return {?}
+         */
+        (item) => this.tagEnd.emit({ input: this.inputElement, value: item })));
+        this.updateInputWidth();
+        $event.preventDefault();
+        $event.stopPropagation();
     }
     /**
      * @return {?}
@@ -1745,6 +1780,24 @@ class McTagInput {
     }
     /**
      * @private
+     * @param {?} k
+     * @return {?}
+     */
+    separatorKeyToSymbol(k) {
+        /** @type {?} */
+        const sep = {
+            [ENTER]: /\r?\n/,
+            [TAB]: /\t/,
+            [SPACE]: / /,
+            [COMMA]: /,/
+        }[k];
+        if (sep) {
+            return sep;
+        }
+        return k;
+    }
+    /**
+     * @private
      * @return {?}
      */
     hasControl() {
@@ -1767,12 +1820,8 @@ class McTagInput {
         if (hasModifierKey(event)) {
             return false;
         }
-        /** @type {?} */
-        const separators = this.separatorKeyCodes;
         // tslint:disable-next-line: deprecation
-        /** @type {?} */
-        const keyCode = event.keyCode;
-        return Array.isArray(separators) ? separators.indexOf(keyCode) > -1 : separators.has(keyCode);
+        return this.separatorKeyCodes.indexOf(event.keyCode) > -1;
     }
 }
 McTagInput.decorators = [
@@ -1787,7 +1836,8 @@ McTagInput.decorators = [
                     '(keydown)': 'keydown($event)',
                     '(blur)': 'blur()',
                     '(focus)': 'onFocus()',
-                    '(input)': 'onInput()'
+                    '(input)': 'onInput()',
+                    '(paste)': 'onPaste($event)'
                 }
             },] },
 ];
