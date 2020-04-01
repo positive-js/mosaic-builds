@@ -3876,6 +3876,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
     }
 
+    /* stylelint-disable no-descending-specificity */
     & > thead {
         & > tr > th {
             padding-top: 8px;
@@ -3891,6 +3892,7 @@ $mc-datepicker-today-fade-amount: 0.2;
             border-bottom: 1px solid transparent;
         }
     }
+    /* stylelint-enable no-descending-specificity */
 }
 
 

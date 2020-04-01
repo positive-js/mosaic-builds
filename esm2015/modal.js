@@ -1116,5 +1116,5 @@ McModalModule.decorators = [
             },] },
 ];
 
-export { McModalComponent, McModalModule, McModalRef, McModalService, McModalControlService as ɵa27, McModalTitle as ɵb27, McModalBody as ɵc27, McModalFooter as ɵd27, CssUnitPipe as ɵe27 };
+export { McModalComponent, McModalModule, McModalRef, McModalService, McModalControlService as ɵa29, McModalTitle as ɵb29, McModalBody as ɵc29, McModalFooter as ɵd29, CssUnitPipe as ɵe29 };
 //# sourceMappingURL=modal.js.map
