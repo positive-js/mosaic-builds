@@ -32681,7 +32681,7 @@
     exports.yearsPerRow = yearsPerRow;
     exports.ɵa16 = McTabHeaderBase;
     exports.ɵa21 = mcSidepanelTransformAnimation;
-    exports.ɵa24 = toggleVerticalNavbarAnimation;
+    exports.ɵa25 = toggleVerticalNavbarAnimation;
     exports.ɵa26 = MIN_VALIDATOR;
     exports.ɵa27 = McModalControlService;
     exports.ɵa3 = mcSidebarAnimations;
