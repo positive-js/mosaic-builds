@@ -1,0 +1,34 @@
+/**
+ * @fileoverview added by tsickle
+ * Generated from: sidepanel-animations.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AnimationCurves } from '@ptsecurity/mosaic/core';
+import { McSidepanelPosition } from './sidepanel-config';
+/** @enum {string} */
+const McSidepanelAnimationState = {
+    Void: "void",
+    Visible: "visible",
+    Hidden: "hidden",
+};
+export { McSidepanelAnimationState };
+// TODO Find a way to use dynamic keys and avoid error "Expression form not supported."
+// tslint:disable-next-line
+/** @type {?} */
+export const mcSidepanelTransformAnimation = {
+    right: { in: 'translateX(100%)', out: 'translateX(0%)' },
+    left: { in: 'translateX(-100%)', out: 'translateX(0%)' },
+    top: { in: 'translateY(-100%)', out: 'translateY(0%)' },
+    bottom: { in: 'translateY(100%)', out: 'translateY(0%)' }
+};
+/** @type {?} */
+export const mcSidepanelAnimations = {
+    sidepanelState: trigger('state', [
+        state('hidden', style({ transform: '{{transformIn}}' }), { params: { transformIn: mcSidepanelTransformAnimation[McSidepanelPosition.Right].in } }),
+        state('visible', style({ transform: '{{transformOut}}' }), { params: { transformOut: mcSidepanelTransformAnimation[McSidepanelPosition.Right].out } }),
+        transition('visible => void, visible => hidden', animate(`200ms ${AnimationCurves.AccelerationCurve}`)),
+        transition('void => visible', animate(`200ms ${AnimationCurves.DecelerationCurve}`))
+    ])
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2lkZXBhbmVsLWFuaW1hdGlvbnMuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9AcHRzZWN1cml0eS9tb3NhaWMvc2lkZXBhbmVsLyIsInNvdXJjZXMiOlsic2lkZXBhbmVsLWFuaW1hdGlvbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxPQUFPLEVBQUUsT0FBTyxFQUE0QixLQUFLLEVBQUUsS0FBSyxFQUFFLFVBQVUsRUFBRSxPQUFPLEVBQUUsTUFBTSxxQkFBcUIsQ0FBQztBQUMzRyxPQUFPLEVBQUUsZUFBZSxFQUFFLE1BQU0seUJBQXlCLENBQUM7QUFFMUQsT0FBTyxFQUFFLG1CQUFtQixFQUFFLE1BQU0sb0JBQW9CLENBQUM7O0FBR3pELE1BQVkseUJBQXlCO0lBQ2pDLElBQUksUUFBUztJQUNiLE9BQU8sV0FBWTtJQUNuQixNQUFNLFVBQVc7RUFDcEI7Ozs7O0FBSUQsTUFBTSxPQUFPLDZCQUE2QixHQUE2RDtJQUNuRyxLQUFLLEVBQUUsRUFBRSxFQUFFLEVBQUUsa0JBQWtCLEVBQUUsR0FBRyxFQUFFLGdCQUFnQixFQUFFO0lBQ3hELElBQUksRUFBRSxFQUFFLEVBQUUsRUFBRSxtQkFBbUIsRUFBRSxHQUFHLEVBQUUsZ0JBQWdCLEVBQUU7SUFDeEQsR0FBRyxFQUFFLEVBQUUsRUFBRSxFQUFFLG1CQUFtQixFQUFFLEdBQUcsRUFBRSxnQkFBZ0IsRUFBRTtJQUN2RCxNQUFNLEVBQUUsRUFBRSxFQUFFLEVBQUUsa0JBQWtCLEVBQUUsR0FBRyxFQUFFLGdCQUFnQixFQUFFO0NBQzVEOztBQUVELE1BQU0sT0FBTyxxQkFBcUIsR0FFOUI7SUFDQSxjQUFjLEVBQUUsT0FBTyxDQUFDLE9BQU8sRUFBRTtRQUM3QixLQUFLLENBQUMsUUFBUSxFQUNWLEtBQUssQ0FBQyxFQUFFLFNBQVMsRUFBRSxpQkFBaUIsRUFBRSxDQUFDLEVBQ3ZDLEVBQUUsTUFBTSxFQUFFLEVBQUUsV0FBVyxFQUFFLDZCQUE2QixDQUFDLG1CQUFtQixDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsRUFBRSxFQUFDLENBQzFGO1FBQ0QsS0FBSyxDQUFDLFNBQVMsRUFDWCxLQUFLLENBQUMsRUFBRSxTQUFTLEVBQUUsa0JBQWtCLEVBQUUsQ0FBQyxFQUN4QyxFQUFFLE1BQU0sRUFBRSxFQUFFLFlBQVksRUFBRSw2QkFBNkIsQ0FBQyxtQkFBbUIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxHQUFHLEVBQUUsRUFBQyxDQUM1RjtRQUNELFVBQVUsQ0FBQyxvQ0FBb0MsRUFDM0MsT0FBTyxDQUFDLFNBQVMsZUFBZSxDQUFDLGlCQUFpQixFQUFFLENBQUMsQ0FBQztRQUMxRCxVQUFVLENBQUMsaUJBQWlCLEVBQ3hCLE9BQU8sQ0FBQyxTQUFTLGVBQWUsQ0FBQyxpQkFBaUIsRUFBRSxDQUFDLENBQUM7S0FDN0QsQ0FBQztDQUNMIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgYW5pbWF0ZSwgQW5pbWF0aW9uVHJpZ2dlck1ldGFkYXRhLCBzdGF0ZSwgc3R5bGUsIHRyYW5zaXRpb24sIHRyaWdnZXIgfSBmcm9tICdAYW5ndWxhci9hbmltYXRpb25zJztcbmltcG9ydCB7IEFuaW1hdGlvbkN1cnZlcyB9IGZyb20gJ0BwdHNlY3VyaXR5L21vc2FpYy9jb3JlJztcblxuaW1wb3J0IHsgTWNTaWRlcGFuZWxQb3NpdGlvbiB9IGZyb20gJy4vc2lkZXBhbmVsLWNvbmZpZyc7XG5cblxuZXhwb3J0IGVudW0gTWNTaWRlcGFuZWxBbmltYXRpb25TdGF0ZSB7XG4gICAgVm9pZCA9ICd2b2lkJyxcbiAgICBWaXNpYmxlID0gJ3Zpc2libGUnLFxuICAgIEhpZGRlbiA9ICdoaWRkZW4nXG59XG5cbi8vIFRPRE8gRmluZCBhIHdheSB0byB1c2UgZHluYW1pYyBrZXlzIGFuZCBhdm9pZCBlcnJvciBcIkV4cHJlc3Npb24gZm9ybSBub3Qgc3VwcG9ydGVkLlwiXG4vLyB0c2xpbnQ6ZGlzYWJsZS1uZXh0LWxpbmVcbmV4cG9ydCBjb25zdCBtY1NpZGVwYW5lbFRyYW5zZm9ybUFuaW1hdGlvbjogUmVjb3JkPE1jU2lkZXBhbmVsUG9zaXRpb24sIHsgaW46IHN0cmluZzsgb3V0OiBzdHJpbmcgfT4gPSB7XG4gICAgcmlnaHQ6IHsgaW46ICd0cmFuc2xhdGVYKDEwMCUpJywgb3V0OiAndHJhbnNsYXRlWCgwJSknIH0sXG4gICAgbGVmdDogeyBpbjogJ3RyYW5zbGF0ZVgoLTEwMCUpJywgb3V0OiAndHJhbnNsYXRlWCgwJSknIH0sXG4gICAgdG9wOiB7IGluOiAndHJhbnNsYXRlWSgtMTAwJSknLCBvdXQ6ICd0cmFuc2xhdGVZKDAlKScgfSxcbiAgICBib3R0b206IHsgaW46ICd0cmFuc2xhdGVZKDEwMCUpJywgb3V0OiAndHJhbnNsYXRlWSgwJSknIH1cbn07XG5cbmV4cG9ydCBjb25zdCBtY1NpZGVwYW5lbEFuaW1hdGlvbnM6IHtcbiAgICByZWFkb25seSBzaWRlcGFuZWxTdGF0ZTogQW5pbWF0aW9uVHJpZ2dlck1ldGFkYXRhO1xufSA9IHtcbiAgICBzaWRlcGFuZWxTdGF0ZTogdHJpZ2dlcignc3RhdGUnLCBbXG4gICAgICAgIHN0YXRlKCdoaWRkZW4nLFxuICAgICAgICAgICAgc3R5bGUoeyB0cmFuc2Zvcm06ICd7e3RyYW5zZm9ybUlufX0nIH0pLFxuICAgICAgICAgICAgeyBwYXJhbXM6IHsgdHJhbnNmb3JtSW46IG1jU2lkZXBhbmVsVHJhbnNmb3JtQW5pbWF0aW9uW01jU2lkZXBhbmVsUG9zaXRpb24uUmlnaHRdLmluIH19XG4gICAgICAgICksXG4gICAgICAgIHN0YXRlKCd2aXNpYmxlJyxcbiAgICAgICAgICAgIHN0eWxlKHsgdHJhbnNmb3JtOiAne3t0cmFuc2Zvcm1PdXR9fScgfSksXG4gICAgICAgICAgICB7IHBhcmFtczogeyB0cmFuc2Zvcm1PdXQ6IG1jU2lkZXBhbmVsVHJhbnNmb3JtQW5pbWF0aW9uW01jU2lkZXBhbmVsUG9zaXRpb24uUmlnaHRdLm91dCB9fVxuICAgICAgICApLFxuICAgICAgICB0cmFuc2l0aW9uKCd2aXNpYmxlID0+IHZvaWQsIHZpc2libGUgPT4gaGlkZGVuJyxcbiAgICAgICAgICAgIGFuaW1hdGUoYDIwMG1zICR7QW5pbWF0aW9uQ3VydmVzLkFjY2VsZXJhdGlvbkN1cnZlfWApKSxcbiAgICAgICAgdHJhbnNpdGlvbigndm9pZCA9PiB2aXNpYmxlJyxcbiAgICAgICAgICAgIGFuaW1hdGUoYDIwMG1zICR7QW5pbWF0aW9uQ3VydmVzLkRlY2VsZXJhdGlvbkN1cnZlfWApKVxuICAgIF0pXG59O1xuIl19

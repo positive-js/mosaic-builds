@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/splitter",
-    "typings": "../splitter.d.ts",
-    "main": "../bundles/mosaic-splitter.umd.js",
-    "module": "../esm5/splitter.es5.js",
-    "es2015": "../esm2015/splitter.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-splitter.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-splitter.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-splitter.js",
+  "esm5": "../esm5/splitter/ptsecurity-mosaic-splitter.js",
+  "esm2015": "../esm2015/splitter/ptsecurity-mosaic-splitter.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-splitter.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-splitter.js",
+  "typings": "ptsecurity-mosaic-splitter.d.ts",
+  "metadata": "ptsecurity-mosaic-splitter.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/splitter"
 }

@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/checkbox",
-    "typings": "../checkbox.d.ts",
-    "main": "../bundles/mosaic-checkbox.umd.js",
-    "module": "../esm5/checkbox.es5.js",
-    "es2015": "../esm2015/checkbox.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-checkbox.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-checkbox.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-checkbox.js",
+  "esm5": "../esm5/checkbox/ptsecurity-mosaic-checkbox.js",
+  "esm2015": "../esm2015/checkbox/ptsecurity-mosaic-checkbox.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-checkbox.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-checkbox.js",
+  "typings": "ptsecurity-mosaic-checkbox.d.ts",
+  "metadata": "ptsecurity-mosaic-checkbox.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/checkbox"
 }

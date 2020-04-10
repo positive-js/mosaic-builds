@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/icon",
-    "typings": "../icon.d.ts",
-    "main": "../bundles/mosaic-icon.umd.js",
-    "module": "../esm5/icon.es5.js",
-    "es2015": "../esm2015/icon.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-icon.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-icon.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-icon.js",
+  "esm5": "../esm5/icon/ptsecurity-mosaic-icon.js",
+  "esm2015": "../esm2015/icon/ptsecurity-mosaic-icon.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-icon.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-icon.js",
+  "typings": "ptsecurity-mosaic-icon.d.ts",
+  "metadata": "ptsecurity-mosaic-icon.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/icon"
 }

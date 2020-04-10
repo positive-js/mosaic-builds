@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/card",
-    "typings": "../card.d.ts",
-    "main": "../bundles/mosaic-card.umd.js",
-    "module": "../esm5/card.es5.js",
-    "es2015": "../esm2015/card.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-card.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-card.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-card.js",
+  "esm5": "../esm5/card/ptsecurity-mosaic-card.js",
+  "esm2015": "../esm2015/card/ptsecurity-mosaic-card.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-card.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-card.js",
+  "typings": "ptsecurity-mosaic-card.d.ts",
+  "metadata": "ptsecurity-mosaic-card.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/card"
 }

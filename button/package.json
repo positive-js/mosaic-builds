@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/button",
-    "typings": "../button.d.ts",
-    "main": "../bundles/mosaic-button.umd.js",
-    "module": "../esm5/button.es5.js",
-    "es2015": "../esm2015/button.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-button.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-button.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-button.js",
+  "esm5": "../esm5/button/ptsecurity-mosaic-button.js",
+  "esm2015": "../esm2015/button/ptsecurity-mosaic-button.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-button.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-button.js",
+  "typings": "ptsecurity-mosaic-button.d.ts",
+  "metadata": "ptsecurity-mosaic-button.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/button"
 }

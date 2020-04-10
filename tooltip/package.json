@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/tooltip",
-    "typings": "../tooltip.d.ts",
-    "main": "../bundles/mosaic-tooltip.umd.js",
-    "module": "../esm5/tooltip.es5.js",
-    "es2015": "../esm2015/tooltip.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-tooltip.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-tooltip.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-tooltip.js",
+  "esm5": "../esm5/tooltip/ptsecurity-mosaic-tooltip.js",
+  "esm2015": "../esm2015/tooltip/ptsecurity-mosaic-tooltip.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-tooltip.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-tooltip.js",
+  "typings": "ptsecurity-mosaic-tooltip.d.ts",
+  "metadata": "ptsecurity-mosaic-tooltip.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/tooltip"
 }

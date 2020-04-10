@@ -1,0 +1,7 @@
+/**
+ * @fileoverview added by tsickle
+ * Generated from: index.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY, McAutocompleteSelectedEvent, MC_AUTOCOMPLETE_DEFAULT_OPTIONS, McAutocomplete, McAutocompleteModule, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY, getMcAutocompleteMissingPanelError, AUTOCOMPLETE_OPTION_HEIGHT, AUTOCOMPLETE_PANEL_HEIGHT, AUTOCOMPLETE_BORDER_WIDTH, MC_AUTOCOMPLETE_SCROLL_STRATEGY, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER, MAT_AUTOCOMPLETE_VALUE_ACCESSOR, McAutocompleteTrigger, McAutocompleteOrigin } from './public-api';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9AcHRzZWN1cml0eS9tb3NhaWMvYXV0b2NvbXBsZXRlLyIsInNvdXJjZXMiOlsiaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSw0ZEFBYyxjQUFjLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL3B1YmxpYy1hcGknO1xuIl19

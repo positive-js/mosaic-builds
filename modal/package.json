@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/modal",
-    "typings": "../modal.d.ts",
-    "main": "../bundles/mosaic-modal.umd.js",
-    "module": "../esm5/modal.es5.js",
-    "es2015": "../esm2015/modal.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-modal.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-modal.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-modal.js",
+  "esm5": "../esm5/modal/ptsecurity-mosaic-modal.js",
+  "esm2015": "../esm2015/modal/ptsecurity-mosaic-modal.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-modal.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-modal.js",
+  "typings": "ptsecurity-mosaic-modal.d.ts",
+  "metadata": "ptsecurity-mosaic-modal.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/modal"
 }

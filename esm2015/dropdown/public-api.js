@@ -1,0 +1,15 @@
+/**
+ * @fileoverview added by tsickle
+ * Generated from: public-api.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { McDropdownModule } from './dropdown.module';
+export { MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY, MC_DROPDOWN_DEFAULT_OPTIONS, McDropdown } from './dropdown.component';
+export { McDropdownItemBase, McDropdownItemMixinBase, McDropdownItem } from './dropdown-item';
+export { MC_DROPDOWN_PANEL } from './dropdown-panel';
+export { throwMcDropdownMissingError, throwMcDropdownInvalidPositionX, throwMcDropdownInvalidPositionY } from './dropdown-errors';
+export { mcDropdownAnimations, fadeInItems, transformDropdown } from './dropdown-animations';
+export {} from './dropdown-positions';
+export { McDropdownContent } from './dropdown-content';
+export { MC_DROPDOWN_SCROLL_STRATEGY_FACTORY, MC_DROPDOWN_SCROLL_STRATEGY, MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER, NESTED_PANEL_TOP_PADDING, McDropdownTrigger } from './dropdown-trigger';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BwdHNlY3VyaXR5L21vc2FpYy9kcm9wZG93bi8iLCJzb3VyY2VzIjpbInB1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxpQ0FBYyxtQkFBbUIsQ0FBQztBQUNsQyw2RkFBYyxzQkFBc0IsQ0FBQztBQUNyQyw0RUFBYyxpQkFBaUIsQ0FBQztBQUNoQyxrQ0FBYyxrQkFBa0IsQ0FBQztBQUNqQyw4R0FBYyxtQkFBbUIsQ0FBQztBQUNsQyxxRUFBYyx1QkFBdUIsQ0FBQztBQUN0QyxlQUFjLHNCQUFzQixDQUFDO0FBQ3JDLGtDQUFjLG9CQUFvQixDQUFDO0FBQ25DLDRLQUFjLG9CQUFvQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9kcm9wZG93bi5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi9kcm9wZG93bi5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9kcm9wZG93bi1pdGVtJztcbmV4cG9ydCAqIGZyb20gJy4vZHJvcGRvd24tcGFuZWwnO1xuZXhwb3J0ICogZnJvbSAnLi9kcm9wZG93bi1lcnJvcnMnO1xuZXhwb3J0ICogZnJvbSAnLi9kcm9wZG93bi1hbmltYXRpb25zJztcbmV4cG9ydCAqIGZyb20gJy4vZHJvcGRvd24tcG9zaXRpb25zJztcbmV4cG9ydCAqIGZyb20gJy4vZHJvcGRvd24tY29udGVudCc7XG5leHBvcnQgKiBmcm9tICcuL2Ryb3Bkb3duLXRyaWdnZXInO1xuIl19

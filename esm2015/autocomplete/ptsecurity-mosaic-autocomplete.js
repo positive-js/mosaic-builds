@@ -1,0 +1,10 @@
+/**
+ * @fileoverview added by tsickle
+ * Generated from: ptsecurity-mosaic-autocomplete.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+export { MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY, McAutocompleteSelectedEvent, MC_AUTOCOMPLETE_DEFAULT_OPTIONS, McAutocomplete, McAutocompleteModule, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY, getMcAutocompleteMissingPanelError, AUTOCOMPLETE_OPTION_HEIGHT, AUTOCOMPLETE_PANEL_HEIGHT, AUTOCOMPLETE_BORDER_WIDTH, MC_AUTOCOMPLETE_SCROLL_STRATEGY, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER, MAT_AUTOCOMPLETE_VALUE_ACCESSOR, McAutocompleteTrigger, McAutocompleteOrigin } from './index';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHRzZWN1cml0eS1tb3NhaWMtYXV0b2NvbXBsZXRlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHB0c2VjdXJpdHkvbW9zYWljL2F1dG9jb21wbGV0ZS8iLCJzb3VyY2VzIjpbInB0c2VjdXJpdHktbW9zYWljLWF1dG9jb21wbGV0ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUlBLDRkQUFjLFNBQVMsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogR2VuZXJhdGVkIGJ1bmRsZSBpbmRleC4gRG8gbm90IGVkaXQuXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9pbmRleCc7XG4iXX0=

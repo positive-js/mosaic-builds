@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/tabs",
-    "typings": "../tabs.d.ts",
-    "main": "../bundles/mosaic-tabs.umd.js",
-    "module": "../esm5/tabs.es5.js",
-    "es2015": "../esm2015/tabs.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-tabs.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-tabs.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-tabs.js",
+  "esm5": "../esm5/tabs/ptsecurity-mosaic-tabs.js",
+  "esm2015": "../esm2015/tabs/ptsecurity-mosaic-tabs.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-tabs.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-tabs.js",
+  "typings": "ptsecurity-mosaic-tabs.d.ts",
+  "metadata": "ptsecurity-mosaic-tabs.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/tabs"
 }

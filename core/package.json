@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/core",
-    "typings": "../core.d.ts",
-    "main": "../bundles/mosaic-core.umd.js",
-    "module": "../esm5/core.es5.js",
-    "es2015": "../esm2015/core.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-core.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-core.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-core.js",
+  "esm5": "../esm5/core/ptsecurity-mosaic-core.js",
+  "esm2015": "../esm2015/core/ptsecurity-mosaic-core.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-core.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-core.js",
+  "typings": "ptsecurity-mosaic-core.d.ts",
+  "metadata": "ptsecurity-mosaic-core.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/core"
 }

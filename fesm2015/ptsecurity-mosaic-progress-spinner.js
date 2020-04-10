@@ -1,0 +1,134 @@
+import { PlatformModule } from '@angular/cdk/platform';
+import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Input, NgModule } from '@angular/core';
+import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: progress-spinner.component.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+let idIterator = 0;
+/** @type {?} */
+const MIN_PERCENT = 0;
+/** @type {?} */
+const MAX_PERCENT = 100;
+class McProgressSpinnerBase {
+    // tslint:disable-next-line:naming-convention
+    /**
+     * @param {?} _elementRef
+     */
+    constructor(_elementRef) {
+        this._elementRef = _elementRef;
+    }
+}
+if (false) {
+    /** @type {?} */
+    McProgressSpinnerBase.prototype._elementRef;
+}
+// tslint:disable-next-line:naming-convention
+/** @type {?} */
+const McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
+/** @type {?} */
+const MAX_DASH_ARRAY = 273;
+class McProgressSpinner extends McProgressSpinnerMixinBase {
+    /**
+     * @param {?} elementRef
+     */
+    constructor(elementRef) {
+        super(elementRef);
+        this.id = `mc-progress-spinner-${idIterator++}`;
+        this.value = 0;
+        this.mode = 'determinate';
+        this.color = ThemePalette.Primary;
+    }
+    /**
+     * @return {?}
+     */
+    get percentage() {
+        return Math.max(MIN_PERCENT, Math.min(MAX_PERCENT, this.value)) / MAX_PERCENT;
+    }
+    /**
+     * @return {?}
+     */
+    get dashOffsetPercent() {
+        return `${MAX_DASH_ARRAY - this.percentage * MAX_DASH_ARRAY}%`;
+    }
+}
+McProgressSpinner.decorators = [
+    { type: Component, args: [{
+                selector: 'mc-progress-spinner',
+                template: "<div class=\"mc-progress-spinner__inner\"\n     [ngClass]=\"{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}\">\n    <svg focusable=\"false\"\n         preserveAspectRatio=\"xMidYMid meet\"\n         viewBox=\"0 0 100 100\"\n         class=\"mc-progress-spinner__svg\">\n        <circle cx=\"50%\"\n                cy=\"50%\"\n                r=\"42.5%\"\n                class=\"mc-progress-spinner__circle\"\n                [ngStyle]=\"{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}\">\n        </circle>\n    </svg>\n</div>\n\n",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                encapsulation: ViewEncapsulation.None,
+                host: {
+                    class: 'mc-progress-spinner',
+                    '[attr.id]': 'id'
+                },
+                styles: ["@-webkit-keyframes mc-progress-spinner-indeterminate{100%{transform:rotateZ(270deg)}}@keyframes mc-progress-spinner-indeterminate{100%{transform:rotateZ(270deg)}}.mc-progress-spinner{display:inline-block;width:16px;height:16px;overflow:hidden}.mc-progress-spinner__circle{fill:none;stroke:#000;stroke-dasharray:273%;stroke-width:13%;transition:stroke-dashoffset .3s;transform-origin:center center}.mc-progress-spinner__inner{width:100%;height:100%;transform:rotateZ(-90deg)}.mc-progress-spinner__inner--indeterminate{-webkit-animation:1.5s cubic-bezier(.455,.03,.515,.955) infinite mc-progress-spinner-indeterminate;animation:1.5s cubic-bezier(.455,.03,.515,.955) infinite mc-progress-spinner-indeterminate}.mc-progress-spinner__inner--indeterminate .mc-progress-spinner__circle{stroke-dashoffset:80%}.mc-progress-spinner__svg{width:100%;height:100%}"]
+            }] }
+];
+/** @nocollapse */
+McProgressSpinner.ctorParameters = () => [
+    { type: ElementRef }
+];
+McProgressSpinner.propDecorators = {
+    id: [{ type: Input }],
+    value: [{ type: Input }],
+    mode: [{ type: Input }],
+    color: [{ type: Input }]
+};
+if (false) {
+    /** @type {?} */
+    McProgressSpinner.prototype.id;
+    /** @type {?} */
+    McProgressSpinner.prototype.value;
+    /** @type {?} */
+    McProgressSpinner.prototype.mode;
+    /** @type {?} */
+    McProgressSpinner.prototype.color;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: progress-spinner.module.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class McProgressSpinnerModule {
+}
+McProgressSpinnerModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    PlatformModule
+                ],
+                exports: [
+                    McProgressSpinner
+                ],
+                declarations: [
+                    McProgressSpinner
+                ]
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: public-api.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: index.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: ptsecurity-mosaic-progress-spinner.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+export { McProgressSpinner, McProgressSpinnerBase, McProgressSpinnerMixinBase, McProgressSpinnerModule };
+//# sourceMappingURL=ptsecurity-mosaic-progress-spinner.js.map

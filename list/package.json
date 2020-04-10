@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/list",
-    "typings": "../list.d.ts",
-    "main": "../bundles/mosaic-list.umd.js",
-    "module": "../esm5/list.es5.js",
-    "es2015": "../esm2015/list.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-list.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-list.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-list.js",
+  "esm5": "../esm5/list/ptsecurity-mosaic-list.js",
+  "esm2015": "../esm2015/list/ptsecurity-mosaic-list.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-list.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-list.js",
+  "typings": "ptsecurity-mosaic-list.d.ts",
+  "metadata": "ptsecurity-mosaic-list.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/list"
 }

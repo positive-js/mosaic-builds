@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/dropdown",
-    "typings": "../dropdown.d.ts",
-    "main": "../bundles/mosaic-dropdown.umd.js",
-    "module": "../esm5/dropdown.es5.js",
-    "es2015": "../esm2015/dropdown.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-dropdown.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-dropdown.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-dropdown.js",
+  "esm5": "../esm5/dropdown/ptsecurity-mosaic-dropdown.js",
+  "esm2015": "../esm2015/dropdown/ptsecurity-mosaic-dropdown.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-dropdown.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-dropdown.js",
+  "typings": "ptsecurity-mosaic-dropdown.d.ts",
+  "metadata": "ptsecurity-mosaic-dropdown.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/dropdown"
 }

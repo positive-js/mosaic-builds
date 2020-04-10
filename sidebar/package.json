@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/sidebar",
-    "typings": "../sidebar.d.ts",
-    "main": "../bundles/mosaic-sidebar.umd.js",
-    "module": "../esm5/sidebar.es5.js",
-    "es2015": "../esm2015/sidebar.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-sidebar.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-sidebar.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-sidebar.js",
+  "esm5": "../esm5/sidebar/ptsecurity-mosaic-sidebar.js",
+  "esm2015": "../esm2015/sidebar/ptsecurity-mosaic-sidebar.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-sidebar.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-sidebar.js",
+  "typings": "ptsecurity-mosaic-sidebar.d.ts",
+  "metadata": "ptsecurity-mosaic-sidebar.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/sidebar"
 }

@@ -1,8 +1,13 @@
 {
-    "name": "@ptsecurity/mosaic/button-toggle",
-    "typings": "../button-toggle.d.ts",
-    "main": "../bundles/mosaic-button-toggle.umd.js",
-    "module": "../esm5/button-toggle.es5.js",
-    "es2015": "../esm2015/button-toggle.js",
-    "sideEffects": false
+  "main": "../bundles/ptsecurity-mosaic-button-toggle.umd.js",
+  "module": "../fesm5/ptsecurity-mosaic-button-toggle.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-button-toggle.js",
+  "esm5": "../esm5/button-toggle/ptsecurity-mosaic-button-toggle.js",
+  "esm2015": "../esm2015/button-toggle/ptsecurity-mosaic-button-toggle.js",
+  "fesm5": "../fesm5/ptsecurity-mosaic-button-toggle.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-button-toggle.js",
+  "typings": "ptsecurity-mosaic-button-toggle.d.ts",
+  "metadata": "ptsecurity-mosaic-button-toggle.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/button-toggle"
 }
