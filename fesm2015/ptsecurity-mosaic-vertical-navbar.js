@@ -1,9 +1,9 @@
 import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { Directive, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, Optional, Self, Input, ChangeDetectorRef, NgModule } from '@angular/core';
+import { Directive, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, Optional, Self, ChangeDetectorRef, Input, NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { mixinDisabled } from '@ptsecurity/mosaic/core';
+import { mixinTabIndex, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
@@ -52,7 +52,7 @@ if (false) {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-const McVerticalNavbarMixinBase = mixinDisabled(McVerticalNavbarItemBase);
+const McVerticalNavbarMixinBase = mixinTabIndex(mixinDisabled(McVerticalNavbarItemBase));
 class McVerticalNavbarItem extends McVerticalNavbarMixinBase {
     /**
      * @param {?} element
@@ -64,7 +64,6 @@ class McVerticalNavbarItem extends McVerticalNavbarMixinBase {
         this.element = element;
         this.focusMonitor = focusMonitor;
         this.trigger = trigger;
-        this.tabIndex = 0;
         this.focusMonitor.monitor(this.element.nativeElement).subscribe();
     }
     /**
@@ -86,11 +85,11 @@ McVerticalNavbarItem.decorators = [
                 template: "<div class=\"mc-vertical-navbar__item\">\n    <ng-content></ng-content>\n    <i *ngIf=\"hasDropdownAttached\" mc-icon=\"mc-angle-right-M_16\" class=\"mc-vertical-navbar__item-dropdown-icon\"></i>\n</div>\n",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
-                inputs: ['disabled'],
+                inputs: ['disabled', 'tabIndex'],
                 host: {
                     class: 'mc-vertical-navbar-item',
                     '[attr.disabled]': 'disabled || null',
-                    '[attr.tabindex]': 'disabled ? -1 : 0'
+                    '[attr.tabindex]': 'tabIndex'
                 },
                 styles: [".mc-vertical-navbar__badge{position:absolute;width:64px;top:0;left:0}.mc-vertical-navbar__badge .mc-badge{position:absolute;right:4px;top:4px}.mc-vertical-navbar__item-icon{margin-right:16px}.mc-vertical-navbar__item-icon .mc-icon{font-size:32px}.mc-vertical-navbar__title{white-space:nowrap}.mc-vertical-navbar__item-dropdown-icon{margin-left:auto;padding-left:16px}a[mc-vertical-navbar-item],mc-vertical-navbar-item{height:64px;margin:1px 0;width:100%;position:relative;display:flex;align-items:center;box-sizing:border-box;cursor:pointer;text-decoration:none}a[mc-vertical-navbar-item] .mc-vertical-navbar__item,mc-vertical-navbar-item .mc-vertical-navbar__item{padding-left:16px;padding-right:16px;display:flex;align-items:center;width:100%;height:100%}a[mc-vertical-navbar-item].mc-progress,mc-vertical-navbar-item.mc-progress{cursor:pointer}a[mc-vertical-navbar-item].mc-vertical-navbar__item_active,mc-vertical-navbar-item.mc-vertical-navbar__item_active{cursor:default}a[mc-vertical-navbar-item][disabled],mc-vertical-navbar-item[disabled]{cursor:default;pointer-events:none}"]
             }] }
@@ -101,12 +100,7 @@ McVerticalNavbarItem.ctorParameters = () => [
     { type: FocusMonitor },
     { type: McDropdownTrigger, decorators: [{ type: Optional }, { type: Self }] }
 ];
-McVerticalNavbarItem.propDecorators = {
-    tabIndex: [{ type: Input }]
-};
 if (false) {
-    /** @type {?} */
-    McVerticalNavbarItem.prototype.tabIndex;
     /**
      * @type {?}
      * @private

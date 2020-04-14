@@ -28,7 +28,7 @@ if (false) {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
+var McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase, ThemePalette.Primary);
 /** @type {?} */
 var MAX_DASH_ARRAY = 273;
 var McProgressSpinner = /** @class */ (function (_super) {
@@ -38,7 +38,6 @@ var McProgressSpinner = /** @class */ (function (_super) {
         _this.id = "mc-progress-spinner-" + idIterator++;
         _this.value = 0;
         _this.mode = 'determinate';
-        _this.color = ThemePalette.Primary;
         return _this;
     }
     Object.defineProperty(McProgressSpinner.prototype, "percentage", {
@@ -67,6 +66,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
                     template: "<div class=\"mc-progress-spinner__inner\"\n     [ngClass]=\"{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}\">\n    <svg focusable=\"false\"\n         preserveAspectRatio=\"xMidYMid meet\"\n         viewBox=\"0 0 100 100\"\n         class=\"mc-progress-spinner__svg\">\n        <circle cx=\"50%\"\n                cy=\"50%\"\n                r=\"42.5%\"\n                class=\"mc-progress-spinner__circle\"\n                [ngStyle]=\"{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}\">\n        </circle>\n    </svg>\n</div>\n\n",
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
+                    inputs: ['color'],
                     host: {
                         class: 'mc-progress-spinner',
                         '[attr.id]': 'id'
@@ -81,8 +81,7 @@ var McProgressSpinner = /** @class */ (function (_super) {
     McProgressSpinner.propDecorators = {
         id: [{ type: Input }],
         value: [{ type: Input }],
-        mode: [{ type: Input }],
-        color: [{ type: Input }]
+        mode: [{ type: Input }]
     };
     return McProgressSpinner;
 }(McProgressSpinnerMixinBase));
@@ -93,8 +92,6 @@ if (false) {
     McProgressSpinner.prototype.value;
     /** @type {?} */
     McProgressSpinner.prototype.mode;
-    /** @type {?} */
-    McProgressSpinner.prototype.color;
 }
 
 /**

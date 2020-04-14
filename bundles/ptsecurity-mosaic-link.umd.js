@@ -238,12 +238,11 @@
     var McLinkMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McLinkBase));
     var McLink = /** @class */ (function (_super) {
         __extends(McLink, _super);
-        function McLink(elementRef, focusMonitor, changeDetector, tabIndex) {
+        function McLink(elementRef, focusMonitor, changeDetector) {
             var _this = _super.call(this, elementRef) || this;
             _this.focusMonitor = focusMonitor;
             _this.changeDetector = changeDetector;
             _this._disabled = false;
-            _this.tabIndex = parseInt(tabIndex) || 0;
             _this.focusMonitor.monitor(elementRef.nativeElement, true);
             return _this;
         }
@@ -300,7 +299,7 @@
             { type: core.Directive, args: [{
                         selector: 'a.mc-link',
                         exportAs: 'mcLink',
-                        inputs: ['disabled'],
+                        inputs: ['tabIndex'],
                         host: {
                             '[attr.disabled]': 'disabled || null',
                             '[attr.tabindex]': 'tabIndex'
@@ -311,8 +310,7 @@
         McLink.ctorParameters = function () { return [
             { type: core.ElementRef },
             { type: a11y.FocusMonitor },
-            { type: core.ChangeDetectorRef },
-            { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] }
+            { type: core.ChangeDetectorRef }
         ]; };
         McLink.propDecorators = {
             disabled: [{ type: core.Input }]

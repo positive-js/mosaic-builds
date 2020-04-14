@@ -1,13 +1,13 @@
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { McDropdownPanel } from './dropdown-panel';
 /** @docs-private */
 export declare class McDropdownItemBase {
 }
-export declare const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase;
+export declare const McDropdownItemMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McDropdownItemBase;
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
  * It exists mostly to set the role attribute.
@@ -30,12 +30,10 @@ export declare class McDropdownItem extends McDropdownItemMixinBase implements I
     /** Focuses the dropdown item. */
     focus(origin?: FocusOrigin): void;
     ngOnDestroy(): void;
-    /** Used to set the `tabindex`. */
-    getTabIndex(): string;
     /** Returns the host DOM element. */
     getHostElement(): HTMLElement;
     /** Prevents the default element actions if it is disabled. */
-    checkDisabled(event: MouseEvent): void;
+    haltDisabledEvents(event: MouseEvent): void;
     /** Emits to the hover stream. */
     handleMouseEnter(): void;
     /** Gets the label to be used when determining whether the option should be focused. */

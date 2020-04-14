@@ -184,20 +184,11 @@ class McTooltipComponent {
 McTooltipComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mc-tooltip-component',
-                inputs: [
-                    'mcMouseEnterDelay',
-                    'mcMouseLeaveDelay',
-                    'mcTitle',
-                    'mcVisible',
-                    'mcTrigger',
-                    'mcPlacement'
-                ],
-                outputs: ['mcVisibleChange'],
                 animations: [fadeAnimation],
                 template: "\n    <div class=\"mc-tooltip\"\n         [ngClass]=\"classMap\"\n         [@fadeAnimation]=\"''+($visible | async)\">\n        <div class=\"mc-tooltip-content\">\n            <div class=\"mc-tooltip-arrow\"></div>\n            <div class=\"mc-tooltip-inner\">\n                <ng-container>{{ mcTitle }}</ng-container>\n            </div>\n        </div>\n    </div>\n\n",
-                preserveWhitespaces: false,
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
+                preserveWhitespaces: false,
                 host: {
                     '(body:click)': 'this.handleBodyInteraction()'
                 },
@@ -360,7 +351,9 @@ class McTooltip {
     /**
      * @return {?}
      */
-    get disabled() { return this._disabled; }
+    get disabled() {
+        return this._disabled;
+    }
     /**
      * @param {?} value
      * @return {?}
@@ -438,7 +431,9 @@ class McTooltip {
     /**
      * @return {?}
      */
-    get mcTooltipClass() { return this._mcTooltipClass; }
+    get mcTooltipClass() {
+        return this._mcTooltipClass;
+    }
     /**
      * @param {?} value
      * @return {?}
@@ -502,10 +497,11 @@ class McTooltip {
             .withViewportMargin(VIEWPORT_MARGIN)
             .withPositions([...DEFAULT_4_POSITIONS]);
         /** @type {?} */
-        const scrollableAncestors = this.scrollDispatcher
-            .getAncestorScrollContainers(this.elementRef);
+        const scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
         strategy.withScrollableContainers(scrollableAncestors);
-        strategy.positionChanges.pipe(takeUntil(this.destroyed)).subscribe((/**
+        strategy.positionChanges
+            .pipe(takeUntil(this.destroyed))
+            .subscribe((/**
          * @param {?} change
          * @return {?}
          */
@@ -600,10 +596,8 @@ class McTooltip {
      * @return {?}
      */
     updateCompValue(key, value) {
-        if (this.isDynamicTooltip && value) {
-            if (this.tooltip) {
-                this.tooltip[key] = value;
-            }
+        if (this.isDynamicTooltip && value && this.tooltip) {
+            this.tooltip[key] = value;
         }
     }
     /**
@@ -624,7 +618,9 @@ class McTooltip {
          * @param {?} event
          * @return {?}
          */
-        (listener, event) => this.elementRef.nativeElement.removeEventListener(event, listener)));
+        (listener, event) => {
+            this.elementRef.nativeElement.removeEventListener(event, listener);
+        }));
         this.manualListeners.clear();
         this.$unsubscribe.next();
         this.$unsubscribe.complete();

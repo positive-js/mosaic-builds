@@ -117,8 +117,7 @@ class McTab extends McTabMixinBase {
      * @return {?}
      */
     ngOnChanges(changes) {
-        if (changes.hasOwnProperty('textLabel') ||
-            changes.hasOwnProperty('disabled')) {
+        if (changes.hasOwnProperty('textLabel') || changes.hasOwnProperty('disabled')) {
             this.stateChanges.next();
         }
     }
@@ -306,7 +305,8 @@ class McTabBody {
          */
         this.dirChangeSubscription = Subscription.EMPTY;
         if (this.dir && changeDetectorRef) {
-            this.dirChangeSubscription = this.dir.change.subscribe((/**
+            this.dirChangeSubscription = this.dir.change
+                .subscribe((/**
              * @param {?} direction
              * @return {?}
              */
@@ -379,9 +379,7 @@ class McTabBody {
      * @return {?}
      */
     isCenterPosition(position) {
-        return position === 'center' ||
-            position === 'left-origin-center' ||
-            position === 'right-origin-center';
+        return position === 'center' || position === 'left-origin-center' || position === 'right-origin-center';
     }
     /**
      * Computes the position state that will be used for the tab-body animation trigger.
@@ -779,9 +777,7 @@ class McTabHeader extends McTabHeaderBase {
      * @return {?}
      */
     set focusIndex(value) {
-        if (!this.isValidIndex(value) ||
-            this.focusIndex === value ||
-            !this.keyManager) {
+        if (!this.isValidIndex(value) || this.focusIndex === value || !this.keyManager) {
             return;
         }
         this.keyManager.setActiveItem(value);
@@ -1676,10 +1672,10 @@ McTabGroup.decorators = [
     { type: Component, args: [{
                 selector: 'mc-tab-group',
                 exportAs: 'mcTabGroup',
-                template: "<mc-tab-header #tabHeader\n               [selectedIndex]=\"selectedIndex\"\n               (indexFocused)=\"focusChanged($event)\"\n               (selectFocusedIndex)=\"selectedIndex = $event\">\n    <div role=\"tab\"\n         mcTabLabelWrapper\n         cdkMonitorElementFocus\n         [class.mc-tab-label]=\"!lightTab\"\n         [class.mc-tab-light-label]=\"lightTab\"\n         *ngFor=\"let tab of tabs; let i = index\"\n         [id]=\"getTabLabelId(i)\"\n         [attr.tabIndex]=\"getTabIndex(tab, i)\"\n         [attr.aria-posinset]=\"i + 1\"\n         [attr.aria-setsize]=\"tabs.length\"\n         [attr.aria-controls]=\"getTabContentId(i)\"\n         [attr.aria-selected]=\"selectedIndex == i\"\n         [attr.aria-label]=\"tab.ariaLabel || null\"\n         [attr.aria-labelledby]=\"(!tab.ariaLabel && tab.ariaLabelledby) ? tab.ariaLabelledby : null\"\n         [class.mc-active]=\"selectedIndex == i\"\n         [disabled]=\"tab.disabled\"\n         (click)=\"handleClick(tab, tabHeader, i)\">\n\n        <div class=\"mc-tab-label__content\">\n            <!-- If there is a label template, use it. -->\n            <ng-template [ngIf]=\"tab.templateLabel\">\n                <ng-template [cdkPortalOutlet]=\"tab.templateLabel\"></ng-template>\n            </ng-template>\n\n            <!-- If there is not a label template, fall back to the text label. -->\n            <ng-template [ngIf]=\"!tab.templateLabel\">{{tab.textLabel}}</ng-template>\n        </div>\n\n        <div class=\"mc-tab-overlay\"></div>\n    </div>\n</mc-tab-header>\n\n<div class=\"mc-tab-body__wrapper\"\n     #tabBodyWrapper>\n    <mc-tab-body role=\"tabpanel\"\n                 *ngFor=\"let tab of tabs; let i = index\"\n                 [id]=\"getTabContentId(i)\"\n                 [attr.aria-labelledby]=\"getTabLabelId(i)\"\n                 [class.mc-tab-body__active]=\"selectedIndex == i\"\n                 [content]=\"tab.content\"\n                 [position]=\"tab.position\"\n                 [origin]=\"tab.origin\"\n                 [animationDuration]=\"animationDuration\"\n                 (onCentered)=\"removeTabBodyWrapperHeight()\"\n                 (onCentering)=\"setTabBodyWrapperHeight($event)\">\n    </mc-tab-body>\n</div>\n",
+                template: "<mc-tab-header #tabHeader\n               [selectedIndex]=\"selectedIndex\"\n               (indexFocused)=\"focusChanged($event)\"\n               (selectFocusedIndex)=\"selectedIndex = $event\">\n    <div role=\"tab\"\n         mcTabLabelWrapper\n         cdkMonitorElementFocus\n         [class.mc-tab-label]=\"!lightTab\"\n         [class.mc-tab-light-label]=\"lightTab\"\n         *ngFor=\"let tab of tabs; let i = index\"\n         [id]=\"getTabLabelId(i)\"\n         [attr.tabindex]=\"getTabIndex(tab, i)\"\n         [attr.aria-posinset]=\"i + 1\"\n         [attr.aria-setsize]=\"tabs.length\"\n         [attr.aria-controls]=\"getTabContentId(i)\"\n         [attr.aria-selected]=\"selectedIndex == i\"\n         [attr.aria-label]=\"tab.ariaLabel || null\"\n         [attr.aria-labelledby]=\"(!tab.ariaLabel && tab.ariaLabelledby) ? tab.ariaLabelledby : null\"\n         [class.mc-active]=\"selectedIndex == i\"\n         [disabled]=\"tab.disabled\"\n         (click)=\"handleClick(tab, tabHeader, i)\">\n\n        <div class=\"mc-tab-label__content\">\n            <!-- If there is a label template, use it. -->\n            <ng-template [ngIf]=\"tab.templateLabel\">\n                <ng-template [cdkPortalOutlet]=\"tab.templateLabel\"></ng-template>\n            </ng-template>\n\n            <!-- If there is not a label template, fall back to the text label. -->\n            <ng-template [ngIf]=\"!tab.templateLabel\">{{tab.textLabel}}</ng-template>\n        </div>\n\n        <div class=\"mc-tab-overlay\"></div>\n    </div>\n</mc-tab-header>\n\n<div class=\"mc-tab-body__wrapper\"\n     #tabBodyWrapper>\n    <mc-tab-body role=\"tabpanel\"\n                 *ngFor=\"let tab of tabs; let i = index\"\n                 [id]=\"getTabContentId(i)\"\n                 [attr.aria-labelledby]=\"getTabLabelId(i)\"\n                 [class.mc-tab-body__active]=\"selectedIndex == i\"\n                 [content]=\"tab.content\"\n                 [position]=\"tab.position\"\n                 [origin]=\"tab.origin\"\n                 [animationDuration]=\"animationDuration\"\n                 (onCentered)=\"removeTabBodyWrapperHeight()\"\n                 (onCentering)=\"setTabBodyWrapperHeight($event)\">\n    </mc-tab-body>\n</div>\n",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
-                inputs: ['color'],
+                inputs: ['color', 'disabled'],
                 host: {
                     class: 'mc-tab-group',
                     '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',
@@ -1857,10 +1853,9 @@ const McTabLinkMixinBase = mixinTabIndex(mixinDisabled(McTabLinkBase));
 class McTabLink extends McTabLinkMixinBase {
     /**
      * @param {?} elementRef
-     * @param {?} tabIndex
      * @param {?} focusMonitor
      */
-    constructor(elementRef, tabIndex, focusMonitor) {
+    constructor(elementRef, focusMonitor) {
         super();
         this.elementRef = elementRef;
         this.focusMonitor = focusMonitor;
@@ -1868,7 +1863,6 @@ class McTabLink extends McTabLinkMixinBase {
          * Whether the tab link is active or not.
          */
         this.isActive = false;
-        this.tabIndex = parseInt(tabIndex) || 0;
         this.focusMonitor.monitor(this.elementRef.nativeElement);
     }
     /**
@@ -1903,7 +1897,7 @@ McTabLink.decorators = [
                     class: 'mc-tab-link',
                     '[attr.aria-current]': 'active',
                     '[attr.aria-disabled]': 'disabled.toString()',
-                    '[attr.tabIndex]': 'tabIndex',
+                    '[attr.tabindex]': 'tabIndex',
                     '[class.mc-disabled]': 'disabled',
                     '[class.mc-active]': 'active'
                 }
@@ -1912,7 +1906,6 @@ McTabLink.decorators = [
 /** @nocollapse */
 McTabLink.ctorParameters = () => [
     { type: ElementRef },
-    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
     { type: FocusMonitor }
 ];
 McTabLink.propDecorators = {

@@ -299,8 +299,8 @@ McTextarea.decorators = [
                     '[attr.id]': 'id',
                     '[attr.placeholder]': 'placeholder',
                     '[attr.aria-invalid]': 'errorState',
-                    '[disabled]': 'disabled',
-                    '[required]': 'required',
+                    '[attr.disabled]': 'disabled || null',
+                    '[attr.required]': 'required',
                     '(blur)': 'focusChanged(false)',
                     '(focus)': 'focusChanged(true)'
                 },

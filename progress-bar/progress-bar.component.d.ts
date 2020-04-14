@@ -1,5 +1,5 @@
 import { ElementRef } from '@angular/core';
-import { CanColor, CanColorCtor, ThemePalette } from '@ptsecurity/mosaic/core';
+import { CanColor, CanColorCtor } from '@ptsecurity/mosaic/core';
 export declare type ProgressBarMode = 'determinate' | 'indeterminate';
 export declare class McProgressBarBase {
     _elementRef: ElementRef;
@@ -10,7 +10,6 @@ export declare class McProgressBar extends McProgressBarMixinBase implements Can
     id: string;
     value: number;
     mode: ProgressBarMode;
-    color: ThemePalette;
     constructor(elementRef: ElementRef);
     get percentage(): number;
 }

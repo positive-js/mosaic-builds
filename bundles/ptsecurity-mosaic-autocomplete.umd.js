@@ -446,12 +446,14 @@
                         selector: 'mc-autocomplete',
                         exportAs: 'mcAutocomplete',
                         template: "<ng-template>\n    <div class=\"mc-autocomplete-panel\" role=\"listbox\" [id]=\"id\" [ngClass]=\"classList\" #panel>\n        <ng-content></ng-content>\n    </div>\n</ng-template>\n",
+                        host: {
+                            class: 'mc-autocomplete'
+                        },
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
-                        host: { class: 'mc-autocomplete' },
-                        providers: [
-                            { provide: core$1.MC_OPTION_PARENT_COMPONENT, useExisting: McAutocomplete }
-                        ],
+                        providers: [{
+                                provide: core$1.MC_OPTION_PARENT_COMPONENT, useExisting: McAutocomplete
+                            }],
                         styles: [".mc-autocomplete-trigger{text-overflow:ellipsis}.mc-autocomplete-panel{visibility:hidden;position:relative;overflow:auto;-webkit-overflow-scrolling:touch;margin-top:-1px;min-width:100%;width:100%;max-width:none;max-height:256px;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-autocomplete-panel.mc-autocomplete_visible{visibility:visible}.mc-autocomplete-panel.mc-autocomplete_hidden{visibility:hidden}.mc-autocomplete-panel-above .mc-autocomplete-panel{border-radius:3px 3px 0 0}.mc-autocomplete-panel .mc-divider-horizontal{margin-top:-1px}.cdk-high-contrast-active .mc-autocomplete-panel{outline:solid 1px}.cdk-high-contrast-active :host .mc-autocomplete-panel{outline:solid 1px}"]
                     }] }
         ];

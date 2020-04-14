@@ -32,7 +32,7 @@ export declare class McToggleComponent extends McToggleMixinBase implements Cont
     private _checked;
     readonly change: EventEmitter<McToggleChange>;
     private uniqueId;
-    constructor(_elementRef: ElementRef, _focusMonitor: FocusMonitor, _changeDetectorRef: ChangeDetectorRef, tabIndex: string);
+    constructor(_elementRef: ElementRef, _focusMonitor: FocusMonitor, _changeDetectorRef: ChangeDetectorRef);
     ngOnDestroy(): void;
     focus(): void;
     getAriaChecked(): boolean;

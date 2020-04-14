@@ -1,8 +1,6 @@
 import { ElementRef, EventEmitter, OnDestroy } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, ValidationErrors, Validator } from '@angular/forms';
 import { DateAdapter, McDateFormats } from '@ptsecurity/cdk/datetime';
-import { ThemePalette } from '@ptsecurity/mosaic/core';
-import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { McDatepicker } from './datepicker';
 /** @docs-private */
 export declare const MC_DATEPICKER_VALUE_ACCESSOR: any;
@@ -31,7 +29,6 @@ export declare class McDatepickerInput<D> implements ControlValueAccessor, OnDes
     elementRef: ElementRef<HTMLInputElement>;
     dateAdapter: DateAdapter<D>;
     private dateFormats;
-    private formField;
     /** The datepicker that this input is associated with. */
     set mcDatepicker(value: McDatepicker<D>);
     /** Function that can be used to filter out dates within the datepicker. */
@@ -68,7 +65,7 @@ export declare class McDatepickerInput<D> implements ControlValueAccessor, OnDes
     private lastValueValid;
     /** The combined form control validator for this input. */
     private validator;
-    constructor(elementRef: ElementRef<HTMLInputElement>, dateAdapter: DateAdapter<D>, dateFormats: McDateFormats, formField: McFormField);
+    constructor(elementRef: ElementRef<HTMLInputElement>, dateAdapter: DateAdapter<D>, dateFormats: McDateFormats);
     onTouched: () => void;
     ngOnDestroy(): void;
     /** @docs-private */
@@ -82,8 +79,6 @@ export declare class McDatepickerInput<D> implements ControlValueAccessor, OnDes
     onKeydown(event: KeyboardEvent): void;
     onInput(value: string): void;
     onChange(): void;
-    /** Returns the palette used by the input's form field, if any. */
-    getThemePalette(): ThemePalette | undefined;
     /** Handles blur events on the input. */
     onBlur(): void;
     private cvaOnChange;

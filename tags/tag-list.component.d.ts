@@ -99,7 +99,9 @@ export declare class McTagList extends McTagListMixinBase implements McFormField
      */
     get selectable(): boolean;
     set selectable(value: boolean);
+    get tabIndex(): number;
     set tabIndex(value: number);
+    private _tabIndex;
     /**
      * Event that emits whenever the raw value of the tag-list changes. This is here primarily
      * to facilitate the two-way binding for the `value` input.
@@ -124,7 +126,6 @@ export declare class McTagList extends McTagListMixinBase implements McFormField
     cleaner: McCleaner;
     /** The tag components contained within this tag list. */
     tags: QueryList<McTag>;
-    _tabIndex: number;
     private _value;
     private _required;
     private _placeholder;

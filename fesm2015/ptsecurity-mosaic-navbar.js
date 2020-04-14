@@ -1,8 +1,8 @@
 import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { Directive, Component, ViewEncapsulation, ElementRef, Input, HostBinding, NgModule } from '@angular/core';
-import { mixinDisabled } from '@ptsecurity/mosaic/core';
+import { Directive, Component, ViewEncapsulation, ElementRef, Input, NgModule } from '@angular/core';
+import { mixinTabIndex, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -57,7 +57,7 @@ if (false) {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-const McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
+const McNavbarMixinBase = mixinTabIndex(mixinDisabled(McNavbarItemBase));
 class McNavbarItem extends McNavbarMixinBase {
     /**
      * @param {?} elementRef
@@ -67,7 +67,6 @@ class McNavbarItem extends McNavbarMixinBase {
         super(elementRef);
         this.elementRef = elementRef;
         this._focusMonitor = _focusMonitor;
-        this.tabIndex = 0;
     }
     /**
      * @param {?} value
@@ -123,11 +122,11 @@ McNavbarItem.decorators = [
                 selector: 'mc-navbar-item',
                 template: `<ng-content></ng-content>`,
                 encapsulation: ViewEncapsulation.None,
-                inputs: ['disabled'],
+                inputs: ['disabled', 'tabIndex'],
                 host: {
-                    '[attr.tabIndex]': 'disabled ? -1 : tabIndex',
-                    '[attr.disabled]': 'disabled || null',
-                    class: 'mc-navbar-item'
+                    class: 'mc-navbar-item',
+                    '[attr.tabindex]': 'tabIndex',
+                    '[attr.disabled]': 'disabled || null'
                 }
             }] }
 ];
@@ -137,12 +136,9 @@ McNavbarItem.ctorParameters = () => [
     { type: FocusMonitor }
 ];
 McNavbarItem.propDecorators = {
-    tabIndex: [{ type: Input }],
     collapsedTitle: [{ type: Input }]
 };
 if (false) {
-    /** @type {?} */
-    McNavbarItem.prototype.tabIndex;
     /** @type {?} */
     McNavbarItem.prototype.elementRef;
     /**
@@ -155,21 +151,18 @@ class McNavbarContainer {
     constructor() {
         this.position = 'left';
     }
-    /**
-     * @return {?}
-     */
-    get cssClasses() {
-        return this.position === 'left' ? 'mc-navbar-left' : 'mc-navbar-right';
-    }
 }
 McNavbarContainer.decorators = [
     { type: Directive, args: [{
-                selector: 'mc-navbar-container'
+                selector: 'mc-navbar-container',
+                host: {
+                    '[class.mc-navbar-left]': 'this.position === "left"',
+                    '[class.mc-navbar-right]': 'this.position !== "left"'
+                }
             },] }
 ];
 McNavbarContainer.propDecorators = {
-    position: [{ type: Input }],
-    cssClasses: [{ type: HostBinding, args: ['class',] }]
+    position: [{ type: Input }]
 };
 if (false) {
     /** @type {?} */

@@ -1,6 +1,6 @@
 import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
-import { Directive, ElementRef, ChangeDetectorRef, Attribute, Input, NgModule } from '@angular/core';
+import { Directive, ElementRef, ChangeDetectorRef, Input, NgModule } from '@angular/core';
 import { __extends } from 'tslib';
 import { mixinTabIndex, mixinDisabled, toBoolean } from '@ptsecurity/mosaic/core';
 
@@ -24,12 +24,11 @@ if (false) {
 var McLinkMixinBase = mixinTabIndex(mixinDisabled(McLinkBase));
 var McLink = /** @class */ (function (_super) {
     __extends(McLink, _super);
-    function McLink(elementRef, focusMonitor, changeDetector, tabIndex) {
+    function McLink(elementRef, focusMonitor, changeDetector) {
         var _this = _super.call(this, elementRef) || this;
         _this.focusMonitor = focusMonitor;
         _this.changeDetector = changeDetector;
         _this._disabled = false;
-        _this.tabIndex = parseInt(tabIndex) || 0;
         _this.focusMonitor.monitor(elementRef.nativeElement, true);
         return _this;
     }
@@ -86,7 +85,7 @@ var McLink = /** @class */ (function (_super) {
         { type: Directive, args: [{
                     selector: 'a.mc-link',
                     exportAs: 'mcLink',
-                    inputs: ['disabled'],
+                    inputs: ['tabIndex'],
                     host: {
                         '[attr.disabled]': 'disabled || null',
                         '[attr.tabindex]': 'tabIndex'
@@ -97,8 +96,7 @@ var McLink = /** @class */ (function (_super) {
     McLink.ctorParameters = function () { return [
         { type: ElementRef },
         { type: FocusMonitor },
-        { type: ChangeDetectorRef },
-        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] }
+        { type: ChangeDetectorRef }
     ]; };
     McLink.propDecorators = {
         disabled: [{ type: Input }]

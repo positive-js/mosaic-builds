@@ -28,7 +28,7 @@ if (false) {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var McProgressBarMixinBase = mixinColor(McProgressBarBase);
+var McProgressBarMixinBase = mixinColor(McProgressBarBase, ThemePalette.Primary);
 var McProgressBar = /** @class */ (function (_super) {
     __extends(McProgressBar, _super);
     function McProgressBar(elementRef) {
@@ -36,7 +36,6 @@ var McProgressBar = /** @class */ (function (_super) {
         _this.id = "mc-progress-bar-" + idIterator++;
         _this.value = 0;
         _this.mode = 'determinate';
-        _this.color = ThemePalette.Primary;
         return _this;
     }
     Object.defineProperty(McProgressBar.prototype, "percentage", {
@@ -55,6 +54,7 @@ var McProgressBar = /** @class */ (function (_super) {
                     template: "\n<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\">\n    <div\n        *ngSwitchCase=\"'indeterminate'\"\n        class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\">\n    </div>\n    <div\n        *ngSwitchDefault\n        class=\"mc-progress-bar__line mc-progress-bar__line--determinate\"\n        [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\">\n    </div>\n</div>\n",
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
+                    inputs: ['color'],
                     host: {
                         class: 'mc-progress-bar',
                         '[attr.id]': 'id'
@@ -69,8 +69,7 @@ var McProgressBar = /** @class */ (function (_super) {
     McProgressBar.propDecorators = {
         id: [{ type: Input }],
         value: [{ type: Input }],
-        mode: [{ type: Input }],
-        color: [{ type: Input }]
+        mode: [{ type: Input }]
     };
     return McProgressBar;
 }(McProgressBarMixinBase));
@@ -81,8 +80,6 @@ if (false) {
     McProgressBar.prototype.value;
     /** @type {?} */
     McProgressBar.prototype.mode;
-    /** @type {?} */
-    McProgressBar.prototype.color;
 }
 
 /**

@@ -146,8 +146,8 @@ McTreeNodeToggleComponent.decorators = [
                 host: {
                     class: 'mc-tree-node-toggle',
                     '(click)': 'toggle($event)',
-                    '[class.mc-disabled]': 'disabled',
-                    '[class.mc-opened]': 'iconState'
+                    '[class.mc-opened]': 'iconState',
+                    '[attr.disabled]': 'disabled || null'
                 },
                 encapsulation: ViewEncapsulation.None,
                 providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleComponent }]
@@ -196,7 +196,7 @@ McTreeNodeToggleDirective.decorators = [
                 selector: '[mcTreeNodeToggle]',
                 host: {
                     '(click)': 'toggle($event)',
-                    '[class.mc-disabled]': 'disabled'
+                    '[attr.disabled]': 'disabled || null'
                 },
                 providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]
             },] }
@@ -636,10 +636,9 @@ class McTreeSelection extends CdkTree {
      * @param {?} elementRef
      * @param {?} differs
      * @param {?} changeDetectorRef
-     * @param {?} tabIndex
      * @param {?} multiple
      */
-    constructor(elementRef, differs, changeDetectorRef, tabIndex, multiple) {
+    constructor(elementRef, differs, changeDetectorRef, multiple) {
         super(differs, changeDetectorRef);
         this.elementRef = elementRef;
         this.resetFocusedItemOnBlur = true;
@@ -666,7 +665,6 @@ class McTreeSelection extends CdkTree {
          * @return {?}
          */
         () => { });
-        this.tabIndex = parseInt(tabIndex) || 0;
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
             this.multipleMode = multiple;
         }
@@ -678,6 +676,19 @@ class McTreeSelection extends CdkTree {
             this.noUnselectLast = false;
         }
         this.selectionModel = new SelectionModel(this.multiple);
+    }
+    /**
+     * @return {?}
+     */
+    get autoSelect() {
+        return this._autoSelect;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set autoSelect(value) {
+        this._autoSelect = coerceBooleanProperty(value);
     }
     /**
      * @return {?}
@@ -704,19 +715,6 @@ class McTreeSelection extends CdkTree {
      */
     get multiple() {
         return !!this.multipleMode;
-    }
-    /**
-     * @return {?}
-     */
-    get autoSelect() {
-        return this._autoSelect;
-    }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
-    set autoSelect(value) {
-        this._autoSelect = coerceBooleanProperty(value);
     }
     /**
      * @return {?}
@@ -753,7 +751,7 @@ class McTreeSelection extends CdkTree {
      * @return {?}
      */
     get tabIndex() {
-        return this._tabIndex;
+        return this.disabled ? -1 : this._tabIndex;
     }
     /**
      * @param {?} value
@@ -1336,6 +1334,7 @@ McTreeSelection.decorators = [
                 host: {
                     class: 'mc-tree-selection',
                     '[attr.tabindex]': 'tabIndex',
+                    '[attr.disabled]': 'disabled || null',
                     '(blur)': 'blur()',
                     '(focus)': 'focus($event)',
                     '(keydown)': 'onKeyDown($event)',
@@ -1348,7 +1347,7 @@ McTreeSelection.decorators = [
                     { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
                     { provide: CdkTree, useExisting: McTreeSelection }
                 ],
-                styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle.mc-disabled{cursor:default}"]
+                styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px;cursor:pointer}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}"]
             }] }
 ];
 /** @nocollapse */
@@ -1356,8 +1355,7 @@ McTreeSelection.ctorParameters = () => [
     { type: ElementRef },
     { type: IterableDiffers },
     { type: ChangeDetectorRef },
-    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
-    { type: String, decorators: [{ type: Attribute, args: ['multiple',] }] }
+    { type: MultipleMode, decorators: [{ type: Attribute, args: ['multiple',] }] }
 ];
 McTreeSelection.propDecorators = {
     nodeOutlet: [{ type: ViewChild, args: [CdkTreeNodeOutlet, { static: true },] }],

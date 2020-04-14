@@ -321,9 +321,8 @@
      */
     var McCheckbox = /** @class */ (function (_super) {
         __extends(McCheckbox, _super);
-        // tslint:disable-next-line:naming-convention
-        function McCheckbox(_elementRef, _changeDetectorRef, _focusMonitor, tabIndex, _clickAction) {
-            var _this = _super.call(this, _elementRef) || this;
+        function McCheckbox(elementRef, _changeDetectorRef, _focusMonitor, _clickAction) {
+            var _this = _super.call(this, elementRef) || this;
             _this._changeDetectorRef = _changeDetectorRef;
             _this._focusMonitor = _focusMonitor;
             _this._clickAction = _clickAction;
@@ -352,6 +351,9 @@
              * Event emitted when the checkbox's `indeterminate` value changes.
              */
             _this.indeterminateChange = new core.EventEmitter();
+            _this._checked = false;
+            _this._disabled = false;
+            _this._indeterminate = false;
             _this.uniqueId = "mc-checkbox-" + ++nextUniqueId;
             _this.currentAnimationClass = '';
             _this.currentCheckState = TransitionCheckState.Init;
@@ -364,15 +366,11 @@
              * @return {?}
              */
             function () { });
-            _this._checked = false;
-            _this._disabled = false;
-            _this._indeterminate = false;
             // tslint:disable-next-line:no-empty
             _this.controlValueAccessorChangeFn = (/**
              * @return {?}
              */
             function () { });
-            _this.tabIndex = parseInt(tabIndex) || 0;
             _this.id = _this.uniqueId;
             return _this;
         }
@@ -407,31 +405,6 @@
             enumerable: true,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
-        McCheckbox.prototype.ngAfterViewInit = /**
-         * @return {?}
-         */
-        function () {
-            var _this = this;
-            this._focusMonitor
-                .monitor(this.inputElement.nativeElement)
-                .subscribe((/**
-             * @param {?} focusOrigin
-             * @return {?}
-             */
-            function (focusOrigin) { return _this.onInputFocusChange(focusOrigin); }));
-        };
-        /**
-         * @return {?}
-         */
-        McCheckbox.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
-            this._focusMonitor.stopMonitoring(this.inputElement.nativeElement);
-        };
         Object.defineProperty(McCheckbox.prototype, "checked", {
             /**
              * Whether the checkbox is checked.
@@ -520,6 +493,31 @@
             enumerable: true,
             configurable: true
         });
+        /**
+         * @return {?}
+         */
+        McCheckbox.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
+            this._focusMonitor
+                .monitor(this.inputElement.nativeElement)
+                .subscribe((/**
+             * @param {?} focusOrigin
+             * @return {?}
+             */
+            function (focusOrigin) { return _this.onInputFocusChange(focusOrigin); }));
+        };
+        /**
+         * @return {?}
+         */
+        McCheckbox.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
+            this._focusMonitor.stopMonitoring(this.inputElement.nativeElement);
+        };
         /** Method being called whenever the label text changes. */
         /**
          * Method being called whenever the label text changes.
@@ -764,8 +762,8 @@
         McCheckbox.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-checkbox',
-                        template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label>\n    <div class=\"mc-checkbox-inner-container\"\n         [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\">\n        <input #input\n               type=\"checkbox\"\n               class=\"mc-checkbox-input cdk-visually-hidden\"\n               [id]=\"inputId\"\n               [required]=\"required\"\n               [checked]=\"checked\"\n               [attr.value]=\"value\"\n               [disabled]=\"disabled\"\n               [attr.name]=\"name\"\n               [tabIndex]=\"tabIndex\"\n               [indeterminate]=\"indeterminate\"\n               [attr.aria-label]=\"ariaLabel || null\"\n               [attr.aria-labelledby]=\"ariaLabelledby\"\n               [attr.aria-checked]=\"getAriaChecked()\"\n               (change)=\"onInteractionEvent($event)\"\n               (click)=\"onInputClick($event)\">\n        <div class=\"mc-checkbox-frame\">\n            <i class=\"mc-checkbox-checkmark mc mc-check_16\"></i>\n            <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>\n        </div>\n    </div>\n\n    <span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"onLabelTextChange()\">\n    <ng-content></ng-content>\n  </span>\n</label>\n",
                         exportAs: 'mcCheckbox',
+                        template: "<label [attr.for]=\"inputId\" class=\"mc-checkbox-layout\" #label>\n    <div class=\"mc-checkbox-inner-container\"\n         [class.mc-checkbox-inner-container-no-side-margin]=\"!checkboxLabel.textContent || !checkboxLabel.textContent.trim()\">\n        <input #input\n               type=\"checkbox\"\n               class=\"mc-checkbox-input cdk-visually-hidden\"\n               [id]=\"inputId\"\n               [required]=\"required\"\n               [checked]=\"checked\"\n               [attr.value]=\"value\"\n               [disabled]=\"disabled\"\n               [attr.name]=\"name\"\n               [tabIndex]=\"tabIndex\"\n               [indeterminate]=\"indeterminate\"\n               [attr.aria-label]=\"ariaLabel || null\"\n               [attr.aria-labelledby]=\"ariaLabelledby\"\n               [attr.aria-checked]=\"getAriaChecked()\"\n               (change)=\"onInteractionEvent($event)\"\n               (click)=\"onInputClick($event)\">\n        <div class=\"mc-checkbox-frame\">\n            <i class=\"mc-checkbox-checkmark mc mc-check_16\"></i>\n            <i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>\n        </div>\n    </div>\n\n    <span class=\"mc-checkbox-label\" #checkboxLabel (cdkObserveContent)=\"onLabelTextChange()\">\n    <ng-content></ng-content>\n  </span>\n</label>\n",
                         host: {
                             class: 'mc-checkbox',
                             '[id]': 'id',
@@ -787,7 +785,6 @@
             { type: core.ElementRef },
             { type: core.ChangeDetectorRef },
             { type: a11y.FocusMonitor },
-            { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
             { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_CHECKBOX_CLICK_ACTION,] }] }
         ]; };
         McCheckbox.propDecorators = {
@@ -858,28 +855,7 @@
          * @type {?}
          * @private
          */
-        McCheckbox.prototype.uniqueId;
-        /**
-         * @type {?}
-         * @private
-         */
-        McCheckbox.prototype.currentAnimationClass;
-        /**
-         * @type {?}
-         * @private
-         */
-        McCheckbox.prototype.currentCheckState;
-        /**
-         * @type {?}
-         * @private
-         */
         McCheckbox.prototype._required;
-        /**
-         * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-         * \@docs-private
-         * @type {?}
-         */
-        McCheckbox.prototype.onTouched;
         /**
          * @type {?}
          * @private
@@ -895,6 +871,27 @@
          * @private
          */
         McCheckbox.prototype._indeterminate;
+        /**
+         * @type {?}
+         * @private
+         */
+        McCheckbox.prototype.uniqueId;
+        /**
+         * @type {?}
+         * @private
+         */
+        McCheckbox.prototype.currentAnimationClass;
+        /**
+         * @type {?}
+         * @private
+         */
+        McCheckbox.prototype.currentCheckState;
+        /**
+         * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+         * \@docs-private
+         * @type {?}
+         */
+        McCheckbox.prototype.onTouched;
         /**
          * @type {?}
          * @private

@@ -296,6 +296,58 @@ class McFormField extends McFormFieldMixinBase {
     /**
      * @return {?}
      */
+    get hasHint() {
+        return this.hint && this.hint.length > 0;
+    }
+    /**
+     * @return {?}
+     */
+    get hasSuffix() {
+        return this.suffix && this.suffix.length > 0;
+    }
+    /**
+     * @return {?}
+     */
+    get hasPrefix() {
+        return this.prefix && this.prefix.length > 0;
+    }
+    /**
+     * @return {?}
+     */
+    get hasCleaner() {
+        return !!this.cleaner;
+    }
+    /**
+     * @return {?}
+     */
+    get hasStepper() {
+        return !!this.stepper;
+    }
+    /**
+     * @return {?}
+     */
+    get canShowCleaner() {
+        return this.hasCleaner &&
+            this.control &&
+            this.control.ngControl
+            ? this.control.ngControl.value && !this.control.disabled
+            : false;
+    }
+    /**
+     * @return {?}
+     */
+    get disabled() {
+        return this.control && this.control.disabled;
+    }
+    /**
+     * @return {?}
+     */
+    get canShowStepper() {
+        return this.control && !this.disabled && (this.control.focused || this.hovered);
+    }
+    /**
+     * @return {?}
+     */
     ngAfterContentInit() {
         if (((/** @type {?} */ (this.control))).numberInput && this.hasCleaner) {
             this.cleaner = null;
@@ -410,58 +462,6 @@ class McFormField extends McFormFieldMixinBase {
             throw getMcFormFieldMissingControlError();
         }
     }
-    /**
-     * @return {?}
-     */
-    get hasHint() {
-        return this.hint && this.hint.length > 0;
-    }
-    /**
-     * @return {?}
-     */
-    get hasSuffix() {
-        return this.suffix && this.suffix.length > 0;
-    }
-    /**
-     * @return {?}
-     */
-    get hasPrefix() {
-        return this.prefix && this.prefix.length > 0;
-    }
-    /**
-     * @return {?}
-     */
-    get hasCleaner() {
-        return !!this.cleaner;
-    }
-    /**
-     * @return {?}
-     */
-    get hasStepper() {
-        return !!this.stepper;
-    }
-    /**
-     * @return {?}
-     */
-    get canShowCleaner() {
-        return this.hasCleaner &&
-            this.control &&
-            this.control.ngControl
-            ? this.control.ngControl.value && !this.control.disabled
-            : false;
-    }
-    /**
-     * @return {?}
-     */
-    get disabled() {
-        return this.control && this.control.disabled;
-    }
-    /**
-     * @return {?}
-     */
-    get canShowStepper() {
-        return this.control && !this.disabled && (this.control.focused || this.hovered);
-    }
 }
 McFormField.decorators = [
     { type: Component, args: [{
@@ -471,11 +471,11 @@ McFormField.decorators = [
                 host: {
                     class: 'mc-form-field',
                     '[class.mc-form-field_invalid]': 'control.errorState',
-                    '[class.mc-disabled]': 'control.disabled',
                     '[class.mc-form-field_has-prefix]': 'hasPrefix',
                     '[class.mc-form-field_has-suffix]': 'hasSuffix',
                     '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
                     '[class.mc-form-field_has-stepper]': 'canShowStepper',
+                    '[class.mc-disabled]': 'control.disabled',
                     '[class.mc-focused]': 'control.focused',
                     '[class.ng-untouched]': 'shouldForward("untouched")',
                     '[class.ng-touched]': 'shouldForward("touched")',

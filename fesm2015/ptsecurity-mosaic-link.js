@@ -1,6 +1,6 @@
 import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
-import { Directive, ElementRef, ChangeDetectorRef, Attribute, Input, NgModule } from '@angular/core';
+import { Directive, ElementRef, ChangeDetectorRef, Input, NgModule } from '@angular/core';
 import { mixinTabIndex, mixinDisabled, toBoolean } from '@ptsecurity/mosaic/core';
 
 /**
@@ -28,14 +28,12 @@ class McLink extends McLinkMixinBase {
      * @param {?} elementRef
      * @param {?} focusMonitor
      * @param {?} changeDetector
-     * @param {?} tabIndex
      */
-    constructor(elementRef, focusMonitor, changeDetector, tabIndex) {
+    constructor(elementRef, focusMonitor, changeDetector) {
         super(elementRef);
         this.focusMonitor = focusMonitor;
         this.changeDetector = changeDetector;
         this._disabled = false;
-        this.tabIndex = parseInt(tabIndex) || 0;
         this.focusMonitor.monitor(elementRef.nativeElement, true);
     }
     /**
@@ -79,7 +77,7 @@ McLink.decorators = [
     { type: Directive, args: [{
                 selector: 'a.mc-link',
                 exportAs: 'mcLink',
-                inputs: ['disabled'],
+                inputs: ['tabIndex'],
                 host: {
                     '[attr.disabled]': 'disabled || null',
                     '[attr.tabindex]': 'tabIndex'
@@ -90,8 +88,7 @@ McLink.decorators = [
 McLink.ctorParameters = () => [
     { type: ElementRef },
     { type: FocusMonitor },
-    { type: ChangeDetectorRef },
-    { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] }
+    { type: ChangeDetectorRef }
 ];
 McLink.propDecorators = {
     disabled: [{ type: Input }]

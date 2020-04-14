@@ -27,6 +27,6 @@ export declare class McTabLink extends McTabLinkMixinBase implements OnDestroy, 
     set active(value: boolean);
     /** Whether the tab link is active or not. */
     protected isActive: boolean;
-    constructor(elementRef: ElementRef, tabIndex: string, focusMonitor: FocusMonitor);
+    constructor(elementRef: ElementRef, focusMonitor: FocusMonitor);
     ngOnDestroy(): void;
 }

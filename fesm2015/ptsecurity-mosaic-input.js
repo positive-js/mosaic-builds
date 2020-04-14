@@ -697,15 +697,15 @@ McInput.decorators = [
                     // the native input element. Otherwise property bindings for those don't work.
                     '[attr.id]': 'id',
                     '[attr.placeholder]': 'placeholder',
-                    '[disabled]': 'disabled',
+                    '[attr.disabled]': 'disabled || null',
                     '[required]': 'required',
                     '(blur)': 'onBlur()',
                     '(focus)': 'focusChanged(true)',
                     '(input)': 'onInput()'
                 },
-                providers: [
-                    { provide: McFormFieldControl, useExisting: McInput }
-                ]
+                providers: [{
+                        provide: McFormFieldControl, useExisting: McInput
+                    }]
             },] }
 ];
 /** @nocollapse */

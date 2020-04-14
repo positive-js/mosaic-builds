@@ -54,21 +54,27 @@ export declare class McListSelectionChange {
     constructor(source: McListSelection, option: McListOption);
 }
 export declare class McListSelectionBase {
+    elementRef: ElementRef;
+    constructor(elementRef: ElementRef);
 }
 export declare const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase;
 export declare class McListSelection extends McListSelectionMixinBase implements CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor {
-    private element;
     private changeDetectorRef;
     keyManager: FocusKeyManager<McListOption>;
     options: QueryList<McListOption>;
-    autoSelect: boolean;
-    noUnselect: boolean;
+    get autoSelect(): boolean;
+    set autoSelect(value: boolean);
+    private _autoSelect;
+    get noUnselectLast(): boolean;
+    set noUnselectLast(value: boolean);
+    private _noUnselectLast;
     multipleMode: MultipleMode | null;
     get multiple(): boolean;
     horizontal: boolean;
     get tabIndex(): any;
     set tabIndex(value: any);
     private _tabIndex;
+    userTabIndex: number | null;
     get showCheckbox(): boolean;
     readonly selectionChange: EventEmitter<McListSelectionChange>;
     selectionModel: SelectionModel<McListOption>;
@@ -79,7 +85,7 @@ export declare class McListSelection extends McListSelectionMixinBase implements
     private readonly destroyed;
     private optionFocusSubscription;
     private optionBlurSubscription;
-    constructor(element: ElementRef, changeDetectorRef: ChangeDetectorRef, tabIndex: string, autoSelect: string, noUnselect: string, multiple: string);
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, multiple: MultipleMode);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     focus(): void;

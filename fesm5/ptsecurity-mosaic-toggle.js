@@ -1,6 +1,6 @@
 import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
-import { EventEmitter, Component, forwardRef, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, Attribute, ViewChild, Input, Output, NgModule } from '@angular/core';
+import { EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, forwardRef, ElementRef, ChangeDetectorRef, ViewChild, Input, Output, NgModule } from '@angular/core';
 import { mixinTabIndex, mixinColor, mixinDisabled, ThemePalette, McCommonModule } from '@ptsecurity/mosaic/core';
 import { __extends } from 'tslib';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -40,8 +40,7 @@ if (false) {
 }
 var McToggleComponent = /** @class */ (function (_super) {
     __extends(McToggleComponent, _super);
-    // tslint:disable-next-line:naming-convention
-    function McToggleComponent(_elementRef, _focusMonitor, _changeDetectorRef, tabIndex) {
+    function McToggleComponent(_elementRef, _focusMonitor, _changeDetectorRef) {
         var _this = _super.call(this, _elementRef) || this;
         _this._elementRef = _elementRef;
         _this._focusMonitor = _focusMonitor;
@@ -66,7 +65,6 @@ var McToggleComponent = /** @class */ (function (_super) {
          */
         function (_) { });
         _this.id = _this.uniqueId;
-        _this.tabIndex = parseInt(tabIndex) || 0;
         _this._focusMonitor.monitor(_this._elementRef.nativeElement, true);
         return _this;
     }
@@ -258,15 +256,9 @@ var McToggleComponent = /** @class */ (function (_super) {
                     selector: 'mc-toggle',
                     exportAs: 'mcToggle',
                     template: "<label [attr.for]=\"inputId\" class=\"mc-toggle-layout\" #label>\n    <div class=\"mc-toggle__container\" [class.left]=\"labelPosition === 'left'\">\n        <input #input\n               type=\"checkbox\"\n               class=\"mc-toggle-input cdk-visually-hidden\"\n               [id]=\"inputId\"\n               [checked]=\"checked\"\n               [attr.value]=\"value\"\n               [disabled]=\"disabled\"\n               [attr.name]=\"name\"\n               [tabIndex]=\"tabIndex\"\n               [attr.aria-label]=\"ariaLabel || null\"\n               [attr.aria-labelledby]=\"ariaLabelledby\"\n               [attr.aria-checked]=\"getAriaChecked()\"\n               (click)=\"onInputClick($event)\"\n               (change)=\"onInteractionEvent($event)\"/>\n        <div class=\"mc-toggle-bar-container\">\n            <div class=\"mc-toggle__overlay\"></div>\n            <div class=\"mc-toggle-bar\">\n                <div class=\"mc-toggle__circle\" [@switch]=\"checked\"></div>\n            </div>\n        </div>\n        <div class=\"mc-toggle__content\"\n             [class.left]=\"labelPosition === 'left'\"\n             [class.right]=\"labelPosition === 'right'\">\n            <span class=\"mc-toggle-label\" (cdkObserveContent)=\"onLabelTextChange()\">\n                <ng-content></ng-content>\n            </span>\n        </div>\n    </div>\n</label>\n",
-                    providers: [
-                        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef((/**
-                             * @return {?}
-                             */
-                            function () { return McToggleComponent; })), multi: true }
-                    ],
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     encapsulation: ViewEncapsulation.None,
-                    inputs: ['disabled', 'color', 'tabIndex'],
+                    inputs: ['color', 'tabIndex'],
                     host: {
                         class: 'mc-toggle',
                         '[id]': 'id',
@@ -281,6 +273,12 @@ var McToggleComponent = /** @class */ (function (_super) {
                             transition('true <=> false', animate('150ms'))
                         ])
                     ],
+                    providers: [{
+                            provide: NG_VALUE_ACCESSOR, useExisting: forwardRef((/**
+                             * @return {?}
+                             */
+                            function () { return McToggleComponent; })), multi: true
+                        }],
                     styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-toggle .mc-toggle-bar{position:relative;border-width:1px;border-style:solid}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{display:flex;align-items:center;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:8px}.mc-toggle__content.right{margin-left:8px}.mc-toggle__circle{position:absolute;border-width:1px;border-style:solid;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}.mc-toggle__overlay{position:absolute;top:0;left:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:16px;width:28px;border-radius:9px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__overlay{border-radius:9px;height:16px;width:28px}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:16px;width:16px}.mc-toggle.mc-toggle_small .mc-toggle-bar{height:14px;width:24px;border-radius:8px}.mc-toggle.mc-toggle_small .mc-toggle__overlay{border-radius:8px;height:14px;width:24px}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:14px;width:14px}.mc-toggle:not(.mc-disabled){cursor:pointer}"]
                 }] }
     ];
@@ -288,8 +286,7 @@ var McToggleComponent = /** @class */ (function (_super) {
     McToggleComponent.ctorParameters = function () { return [
         { type: ElementRef },
         { type: FocusMonitor },
-        { type: ChangeDetectorRef },
-        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] }
+        { type: ChangeDetectorRef }
     ]; };
     McToggleComponent.propDecorators = {
         inputElement: [{ type: ViewChild, args: ['input', { static: false },] }],

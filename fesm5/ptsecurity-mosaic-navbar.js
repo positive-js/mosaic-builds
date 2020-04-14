@@ -1,9 +1,9 @@
 import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { Directive, Component, ViewEncapsulation, ElementRef, Input, HostBinding, NgModule } from '@angular/core';
+import { Directive, Component, ViewEncapsulation, ElementRef, Input, NgModule } from '@angular/core';
 import { __extends } from 'tslib';
-import { mixinDisabled } from '@ptsecurity/mosaic/core';
+import { mixinTabIndex, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -65,14 +65,13 @@ if (false) {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var McNavbarMixinBase = mixinDisabled(McNavbarItemBase);
+var McNavbarMixinBase = mixinTabIndex(mixinDisabled(McNavbarItemBase));
 var McNavbarItem = /** @class */ (function (_super) {
     __extends(McNavbarItem, _super);
     function McNavbarItem(elementRef, _focusMonitor) {
         var _this = _super.call(this, elementRef) || this;
         _this.elementRef = elementRef;
         _this._focusMonitor = _focusMonitor;
-        _this.tabIndex = 0;
         return _this;
     }
     Object.defineProperty(McNavbarItem.prototype, "collapsedTitle", {
@@ -146,11 +145,11 @@ var McNavbarItem = /** @class */ (function (_super) {
                     selector: 'mc-navbar-item',
                     template: "<ng-content></ng-content>",
                     encapsulation: ViewEncapsulation.None,
-                    inputs: ['disabled'],
+                    inputs: ['disabled', 'tabIndex'],
                     host: {
-                        '[attr.tabIndex]': 'disabled ? -1 : tabIndex',
-                        '[attr.disabled]': 'disabled || null',
-                        class: 'mc-navbar-item'
+                        class: 'mc-navbar-item',
+                        '[attr.tabindex]': 'tabIndex',
+                        '[attr.disabled]': 'disabled || null'
                     }
                 }] }
     ];
@@ -160,14 +159,11 @@ var McNavbarItem = /** @class */ (function (_super) {
         { type: FocusMonitor }
     ]; };
     McNavbarItem.propDecorators = {
-        tabIndex: [{ type: Input }],
         collapsedTitle: [{ type: Input }]
     };
     return McNavbarItem;
 }(McNavbarMixinBase));
 if (false) {
-    /** @type {?} */
-    McNavbarItem.prototype.tabIndex;
     /** @type {?} */
     McNavbarItem.prototype.elementRef;
     /**
@@ -180,24 +176,17 @@ var McNavbarContainer = /** @class */ (function () {
     function McNavbarContainer() {
         this.position = 'left';
     }
-    Object.defineProperty(McNavbarContainer.prototype, "cssClasses", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this.position === 'left' ? 'mc-navbar-left' : 'mc-navbar-right';
-        },
-        enumerable: true,
-        configurable: true
-    });
     McNavbarContainer.decorators = [
         { type: Directive, args: [{
-                    selector: 'mc-navbar-container'
+                    selector: 'mc-navbar-container',
+                    host: {
+                        '[class.mc-navbar-left]': 'this.position === "left"',
+                        '[class.mc-navbar-right]': 'this.position !== "left"'
+                    }
                 },] }
     ];
     McNavbarContainer.propDecorators = {
-        position: [{ type: Input }],
-        cssClasses: [{ type: HostBinding, args: ['class',] }]
+        position: [{ type: Input }]
     };
     return McNavbarContainer;
 }());

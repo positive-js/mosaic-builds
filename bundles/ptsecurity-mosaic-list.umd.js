@@ -254,8 +254,11 @@
              * @return {?}
              */
             function () {
-                return (this.listSelection && this.listSelection.disabled) || (this.group && this.group.disabled) ||
-                    this._disabled;
+                /** @type {?} */
+                var listSelectionDisabled = this.listSelection && this.listSelection.disabled;
+                /** @type {?} */
+                var groupDisabled = this.group && this.group.disabled;
+                return listSelectionDisabled || groupDisabled || this._disabled;
             },
             set: /**
              * @param {?} value
@@ -490,11 +493,12 @@
                         exportAs: 'mcListOption',
                         selector: 'mc-list-option',
                         host: {
-                            '[attr.tabindex]': 'tabIndex',
                             class: 'mc-list-option mc-no-select',
                             '[class.mc-selected]': 'selected',
                             '[class.mc-focused]': 'hasFocus',
                             '[class.mc-disabled]': 'disabled',
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null',
                             '(focus)': 'focus()',
                             '(blur)': 'blur()',
                             '(click)': 'handleClick($event)'
@@ -600,21 +604,28 @@
         McListSelectionChange.prototype.option;
     }
     var McListSelectionBase = /** @class */ (function () {
-        function McListSelectionBase() {
+        function McListSelectionBase(elementRef) {
+            this.elementRef = elementRef;
         }
         return McListSelectionBase;
     }());
+    if (false) {
+        /** @type {?} */
+        McListSelectionBase.prototype.elementRef;
+    }
     // tslint:disable-next-line:naming-convention
     /** @type {?} */
     var McListSelectionMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McListSelectionBase));
     var McListSelection = /** @class */ (function (_super) {
         __extends(McListSelection, _super);
-        function McListSelection(element, changeDetectorRef, tabIndex, autoSelect, noUnselect, multiple) {
-            var _this = _super.call(this) || this;
-            _this.element = element;
+        function McListSelection(elementRef, changeDetectorRef, multiple) {
+            var _this = _super.call(this, elementRef) || this;
             _this.changeDetectorRef = changeDetectorRef;
+            _this._autoSelect = true;
+            _this._noUnselectLast = true;
             _this.horizontal = false;
             _this._tabIndex = 0;
+            _this.userTabIndex = null;
             // Emits a change event whenever the selected state of an option changes.
             _this.selectionChange = new core.EventEmitter();
             /**
@@ -633,8 +644,6 @@
              * @return {?}
              */
             function (_) { });
-            _this.autoSelect = autoSelect === null ? true : core$1.toBoolean(autoSelect);
-            _this.noUnselect = noUnselect === null ? true : core$1.toBoolean(noUnselect);
             if (multiple === core$1.MultipleMode.CHECKBOX || multiple === core$1.MultipleMode.KEYBOARD) {
                 _this.multipleMode = multiple;
             }
@@ -643,12 +652,45 @@
             }
             if (_this.multipleMode === core$1.MultipleMode.CHECKBOX) {
                 _this.autoSelect = false;
-                _this.noUnselect = false;
+                _this.noUnselectLast = false;
             }
-            _this._tabIndex = parseInt(tabIndex) || 0;
             _this.selectionModel = new collections.SelectionModel(_this.multiple);
             return _this;
         }
+        Object.defineProperty(McListSelection.prototype, "autoSelect", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._autoSelect;
+            },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                this._autoSelect = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(McListSelection.prototype, "noUnselectLast", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._noUnselectLast;
+            },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                this._noUnselectLast = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(McListSelection.prototype, "multiple", {
             get: /**
              * @return {?}
@@ -664,13 +706,14 @@
              * @return {?}
              */
             function () {
-                return this._tabIndex;
+                return this.disabled ? -1 : this._tabIndex;
             },
             set: /**
              * @param {?} value
              * @return {?}
              */
             function (value) {
+                this.userTabIndex = value;
                 this._tabIndex = value;
             },
             enumerable: true,
@@ -738,7 +781,7 @@
                  * @return {?}
                  */
                 function () {
-                    _this._tabIndex = 0;
+                    _this._tabIndex = _this.userTabIndex || 0;
                     _this.changeDetectorRef.markForCheck();
                 }));
             }));
@@ -975,7 +1018,7 @@
             function (renderedOption) {
                 /** @type {?} */
                 var isLastRenderedOption = renderedOption === _this.keyManager.activeItem;
-                if (isLastRenderedOption && renderedOption.selected && _this.noUnselect) {
+                if (isLastRenderedOption && renderedOption.selected && _this.noUnselectLast) {
                     return;
                 }
                 renderedOption.setSelected(!selectedOptionState);
@@ -1101,7 +1144,7 @@
          * @return {?}
          */
         function (listOption) {
-            return !(this.noUnselect && this.selectionModel.selected.length === 1 && listOption.selected);
+            return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && listOption.selected);
         };
         /**
          * @return {?}
@@ -1110,7 +1153,7 @@
          * @return {?}
          */
         function () {
-            return this.element.nativeElement.getClientRects()[0].height;
+            return this.elementRef.nativeElement.getClientRects()[0].height;
         };
         // Removes an option from the selection list and updates the active item.
         // Removes an option from the selection list and updates the active item.
@@ -1220,7 +1263,7 @@
          * @return {?}
          */
         function () {
-            this._tabIndex = this.options.length === 0 ? -1 : 0;
+            this._tabIndex = this.userTabIndex || (this.options.length === 0 ? -1 : 0);
         };
         /**
          * @private
@@ -1399,8 +1442,9 @@
                         encapsulation: core.ViewEncapsulation.None,
                         inputs: ['disabled'],
                         host: {
-                            '[attr.tabindex]': 'tabIndex',
                             class: 'mc-list-selection',
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null',
                             '(focus)': 'focus()',
                             '(blur)': 'blur()',
                             '(keydown)': 'onKeyDown($event)',
@@ -1408,20 +1452,19 @@
                         },
                         providers: [MC_SELECTION_LIST_VALUE_ACCESSOR],
                         preserveWhitespaces: false,
-                        styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-list,.mc-list-selection{display:block;outline:0}.mc-list-item,.mc-list-option{display:block;height:28px;border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 15px}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:72px}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:88px}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-bottom:16px}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;height:24px;border-radius:50%;padding:4px;font-size:24px}.mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:62px;width:calc(100% - 62px)}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:auto;margin-right:62px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider-inset,.mc-list-option .mc-divider.mc-divider-inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}"]
+                        styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider_vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-list,.mc-list-selection{display:block;outline:0}.mc-list-item,.mc-list-option{display:block;height:28px;border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 15px}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:72px}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:88px}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-bottom:16px}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;height:24px;border-radius:50%;padding:4px;font-size:24px}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:62px;width:calc(100% - 62px)}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:62px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}"]
                     }] }
         ];
         /** @nocollapse */
         McListSelection.ctorParameters = function () { return [
             { type: core.ElementRef },
             { type: core.ChangeDetectorRef },
-            { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-            { type: String, decorators: [{ type: core.Attribute, args: ['auto-select',] }] },
-            { type: String, decorators: [{ type: core.Attribute, args: ['no-unselect',] }] },
-            { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] }
+            { type: core$1.MultipleMode, decorators: [{ type: core.Attribute, args: ['multiple',] }] }
         ]; };
         McListSelection.propDecorators = {
             options: [{ type: core.ContentChildren, args: [McListOption, { descendants: true },] }],
+            autoSelect: [{ type: core.Input }],
+            noUnselectLast: [{ type: core.Input }],
             horizontal: [{ type: core.Input }],
             tabIndex: [{ type: core.Input }],
             selectionChange: [{ type: core.Output }]
@@ -1433,10 +1476,16 @@
         McListSelection.prototype.keyManager;
         /** @type {?} */
         McListSelection.prototype.options;
-        /** @type {?} */
-        McListSelection.prototype.autoSelect;
-        /** @type {?} */
-        McListSelection.prototype.noUnselect;
+        /**
+         * @type {?}
+         * @private
+         */
+        McListSelection.prototype._autoSelect;
+        /**
+         * @type {?}
+         * @private
+         */
+        McListSelection.prototype._noUnselectLast;
         /** @type {?} */
         McListSelection.prototype.multipleMode;
         /** @type {?} */
@@ -1446,6 +1495,8 @@
          * @private
          */
         McListSelection.prototype._tabIndex;
+        /** @type {?} */
+        McListSelection.prototype.userTabIndex;
         /** @type {?} */
         McListSelection.prototype.selectionChange;
         /** @type {?} */
@@ -1482,11 +1533,6 @@
          * @type {?}
          * @private
          */
-        McListSelection.prototype.element;
-        /**
-         * @type {?}
-         * @private
-         */
         McListSelection.prototype.changeDetectorRef;
     }
 
@@ -1495,15 +1541,8 @@
      * Generated from: list.component.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var McListBase = /** @class */ (function () {
-        function McListBase() {
-        }
-        return McListBase;
-    }());
-    var McList = /** @class */ (function (_super) {
-        __extends(McList, _super);
+    var McList = /** @class */ (function () {
         function McList() {
-            return _super !== null && _super.apply(this, arguments) || this;
         }
         McList.decorators = [
             { type: core.Component, args: [{
@@ -1512,25 +1551,14 @@
                         template: '<ng-content></ng-content>',
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
                         encapsulation: core.ViewEncapsulation.None,
-                        styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-list,.mc-list-selection{display:block;outline:0}.mc-list-item,.mc-list-option{display:block;height:28px;border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 15px}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:72px}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:88px}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-bottom:16px}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;height:24px;border-radius:50%;padding:4px;font-size:24px}.mc-list-item .mc-list-icon~.mc-divider-inset,.mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:62px;width:calc(100% - 62px)}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider-inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider-inset{margin-left:auto;margin-right:62px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider-inset,.mc-list-option .mc-divider.mc-divider-inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}"]
+                        styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider_vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-list,.mc-list-selection{display:block;outline:0}.mc-list-item,.mc-list-option{display:block;height:28px;border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 15px}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:72px}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:88px}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-bottom:16px}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;height:24px;border-radius:50%;padding:4px;font-size:24px}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:62px;width:calc(100% - 62px)}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:62px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}"]
                     }] }
         ];
         return McList;
-    }(McListBase));
-    // Boilerplate for applying mixins to McListItem.
-    var   
-    // Boilerplate for applying mixins to McListItem.
-    McListItemBase = /** @class */ (function () {
-        function McListItemBase() {
-        }
-        return McListItemBase;
     }());
-    var McListItem = /** @class */ (function (_super) {
-        __extends(McListItem, _super);
-        function McListItem(_element) {
-            var _this = _super.call(this) || this;
-            _this._element = _element;
-            return _this;
+    var McListItem = /** @class */ (function () {
+        function McListItem(elementRef) {
+            this.elementRef = elementRef;
         }
         /**
          * @return {?}
@@ -1540,7 +1568,7 @@
          */
         function () {
             // tslint:disable-next-line:no-unused-expression
-            new core$1.McLineSetter(this.lines, this._element);
+            new core$1.McLineSetter(this.lines, this.elementRef);
         };
         /**
          * @return {?}
@@ -1549,7 +1577,7 @@
          * @return {?}
          */
         function () {
-            this._element.nativeElement.classList.add('mc-focused');
+            this.elementRef.nativeElement.classList.add('mc-focused');
         };
         /**
          * @return {?}
@@ -1558,7 +1586,7 @@
          * @return {?}
          */
         function () {
-            this._element.nativeElement.classList.remove('mc-focused');
+            this.elementRef.nativeElement.classList.remove('mc-focused');
         };
         /**
          * @return {?}
@@ -1567,7 +1595,7 @@
          * @return {?}
          */
         function () {
-            return this._element.nativeElement;
+            return this.elementRef.nativeElement;
         };
         McListItem.decorators = [
             { type: core.Component, args: [{
@@ -1591,7 +1619,7 @@
             lines: [{ type: core.ContentChildren, args: [core$1.McLine,] }]
         };
         return McListItem;
-    }(McListItemBase));
+    }());
     if (false) {
         /** @type {?} */
         McListItem.prototype.lines;
@@ -1599,7 +1627,7 @@
          * @type {?}
          * @private
          */
-        McListItem.prototype._element;
+        McListItem.prototype.elementRef;
     }
 
     /**
@@ -1639,9 +1667,7 @@
 
     exports.MC_SELECTION_LIST_VALUE_ACCESSOR = MC_SELECTION_LIST_VALUE_ACCESSOR;
     exports.McList = McList;
-    exports.McListBase = McListBase;
     exports.McListItem = McListItem;
-    exports.McListItemBase = McListItemBase;
     exports.McListModule = McListModule;
     exports.McListOption = McListOption;
     exports.McListSelection = McListSelection;

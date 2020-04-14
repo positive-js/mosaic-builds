@@ -371,8 +371,8 @@
                         host: {
                             class: 'mc-tree-node-toggle',
                             '(click)': 'toggle($event)',
-                            '[class.mc-disabled]': 'disabled',
-                            '[class.mc-opened]': 'iconState'
+                            '[class.mc-opened]': 'iconState',
+                            '[attr.disabled]': 'disabled || null'
                         },
                         encapsulation: core.ViewEncapsulation.None,
                         providers: [{ provide: tree.CdkTreeNodeToggle, useExisting: McTreeNodeToggleComponent }]
@@ -420,7 +420,7 @@
                         selector: '[mcTreeNodeToggle]',
                         host: {
                             '(click)': 'toggle($event)',
-                            '[class.mc-disabled]': 'disabled'
+                            '[attr.disabled]': 'disabled || null'
                         },
                         providers: [{ provide: tree.CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]
                     },] }
@@ -925,7 +925,7 @@
      */
     var McTreeSelection = /** @class */ (function (_super) {
         __extends(McTreeSelection, _super);
-        function McTreeSelection(elementRef, differs, changeDetectorRef, tabIndex, multiple) {
+        function McTreeSelection(elementRef, differs, changeDetectorRef, multiple) {
             var _this = _super.call(this, differs, changeDetectorRef) || this;
             _this.elementRef = elementRef;
             _this.resetFocusedItemOnBlur = true;
@@ -952,7 +952,6 @@
              * @return {?}
              */
             function () { });
-            _this.tabIndex = parseInt(tabIndex) || 0;
             if (multiple === core$1.MultipleMode.CHECKBOX || multiple === core$1.MultipleMode.KEYBOARD) {
                 _this.multipleMode = multiple;
             }
@@ -966,6 +965,23 @@
             _this.selectionModel = new collections.SelectionModel(_this.multiple);
             return _this;
         }
+        Object.defineProperty(McTreeSelection.prototype, "autoSelect", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this._autoSelect;
+            },
+            set: /**
+             * @param {?} value
+             * @return {?}
+             */
+            function (value) {
+                this._autoSelect = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(McTreeSelection.prototype, "optionFocusChanges", {
             get: /**
              * @return {?}
@@ -1000,23 +1016,6 @@
              */
             function () {
                 return !!this.multipleMode;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(McTreeSelection.prototype, "autoSelect", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this._autoSelect;
-            },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
-                this._autoSelect = coercion.coerceBooleanProperty(value);
             },
             enumerable: true,
             configurable: true
@@ -1065,7 +1064,7 @@
              * @return {?}
              */
             function () {
-                return this._tabIndex;
+                return this.disabled ? -1 : this._tabIndex;
             },
             set: /**
              * @param {?} value
@@ -1810,6 +1809,7 @@
                         host: {
                             class: 'mc-tree-selection',
                             '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null',
                             '(blur)': 'blur()',
                             '(focus)': 'focus($event)',
                             '(keydown)': 'onKeyDown($event)',
@@ -1822,7 +1822,7 @@
                             { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
                             { provide: tree.CdkTree, useExisting: McTreeSelection }
                         ],
-                        styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle.mc-disabled{cursor:default}"]
+                        styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px;cursor:pointer}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}"]
                     }] }
         ];
         /** @nocollapse */
@@ -1830,8 +1830,7 @@
             { type: core.ElementRef },
             { type: core.IterableDiffers },
             { type: core.ChangeDetectorRef },
-            { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] },
-            { type: String, decorators: [{ type: core.Attribute, args: ['multiple',] }] }
+            { type: core$1.MultipleMode, decorators: [{ type: core.Attribute, args: ['multiple',] }] }
         ]; };
         McTreeSelection.propDecorators = {
             nodeOutlet: [{ type: core.ViewChild, args: [tree.CdkTreeNodeOutlet, { static: true },] }],

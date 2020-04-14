@@ -6,7 +6,7 @@ import { TemplatePortal, DomPortalOutlet } from '@angular/cdk/portal';
 import { Subject, Subscription, merge, of, asapScheduler } from 'rxjs';
 import { __extends, __spread, __read } from 'tslib';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { mixinDisabled } from '@ptsecurity/mosaic/core';
+import { mixinTabIndex, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { UP_ARROW, DOWN_ARROW, RIGHT_ARROW, LEFT_ARROW, ESCAPE, SPACE, ENTER } from '@ptsecurity/cdk/keycodes';
@@ -253,7 +253,7 @@ McDropdownItemBase = /** @class */ (function () {
 }());
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-var McDropdownItemMixinBase = mixinDisabled(McDropdownItemBase);
+var McDropdownItemMixinBase = mixinTabIndex(mixinDisabled(McDropdownItemBase));
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
  * It exists mostly to set the role attribute.
@@ -328,18 +328,6 @@ var McDropdownItem = /** @class */ (function (_super) {
         }
         this.hovered.complete();
     };
-    /** Used to set the `tabindex`. */
-    /**
-     * Used to set the `tabindex`.
-     * @return {?}
-     */
-    McDropdownItem.prototype.getTabIndex = /**
-     * Used to set the `tabindex`.
-     * @return {?}
-     */
-    function () {
-        return this.disabled ? '-1' : '0';
-    };
     /** Returns the host DOM element. */
     /**
      * Returns the host DOM element.
@@ -358,7 +346,7 @@ var McDropdownItem = /** @class */ (function (_super) {
      * @param {?} event
      * @return {?}
      */
-    McDropdownItem.prototype.checkDisabled = /**
+    McDropdownItem.prototype.haltDisabledEvents = /**
      * Prevents the default element actions if it is disabled.
      * @param {?} event
      * @return {?}
@@ -416,14 +404,14 @@ var McDropdownItem = /** @class */ (function (_super) {
         { type: Component, args: [{
                     selector: 'mc-dropdown-item, [mc-dropdown-item]',
                     exportAs: 'mcDropdownItem',
-                    inputs: ['disabled'],
+                    inputs: ['disabled', 'tabIndex'],
                     host: {
                         class: 'mc-dropdown__item',
                         '[class.mc-dropdown__item_highlighted]': 'highlighted',
-                        '[attr.role]': 'role',
-                        '[attr.tabindex]': 'getTabIndex()',
                         '[class.mc-disabled]': 'disabled',
-                        '(click)': 'checkDisabled($event)',
+                        '[attr.role]': 'role',
+                        '[attr.tabindex]': 'tabIndex',
+                        '(click)': 'haltDisabledEvents($event)',
                         '(mouseenter)': 'handleMouseEnter()'
                     },
                     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -838,7 +826,9 @@ var McDropdown = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.keyManager = new FocusKeyManager(this.items).withWrap().withTypeAhead();
+        this.keyManager = new FocusKeyManager(this.items)
+            .withWrap()
+            .withTypeAhead();
         this.tabSubscription = this.keyManager.tabOut.subscribe((/**
          * @return {?}
          */

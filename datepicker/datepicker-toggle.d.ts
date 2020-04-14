@@ -21,7 +21,7 @@ export declare class McDatepickerToggle<D> implements AfterContentInit, OnChange
     button: McButton;
     private stateChanges;
     private _disabled;
-    constructor(intl: McDatepickerIntl, changeDetectorRef: ChangeDetectorRef, defaultTabIndex: string);
+    constructor(intl: McDatepickerIntl, changeDetectorRef: ChangeDetectorRef);
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     ngAfterContentInit(): void;

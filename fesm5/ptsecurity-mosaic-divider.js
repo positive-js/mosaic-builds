@@ -59,14 +59,14 @@ var McDivider = /** @class */ (function () {
                         class: 'mc-divider',
                         role: 'separator',
                         '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
-                        '[class.mc-divider-vertical]': 'vertical',
-                        '[class.mc-divider-inset]': 'inset'
+                        '[class.mc-divider_vertical]': 'vertical',
+                        '[class.mc-divider_inset]': 'inset'
                     },
                     template: '',
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     preserveWhitespaces: false,
-                    styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider-vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider-inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider-inset{margin-left:auto;margin-right:80px}"]
+                    styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider_vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px}"]
                 }] }
     ];
     McDivider.propDecorators = {

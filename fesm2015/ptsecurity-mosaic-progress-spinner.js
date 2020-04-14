@@ -29,7 +29,7 @@ if (false) {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-const McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase);
+const McProgressSpinnerMixinBase = mixinColor(McProgressSpinnerBase, ThemePalette.Primary);
 /** @type {?} */
 const MAX_DASH_ARRAY = 273;
 class McProgressSpinner extends McProgressSpinnerMixinBase {
@@ -41,7 +41,6 @@ class McProgressSpinner extends McProgressSpinnerMixinBase {
         this.id = `mc-progress-spinner-${idIterator++}`;
         this.value = 0;
         this.mode = 'determinate';
-        this.color = ThemePalette.Primary;
     }
     /**
      * @return {?}
@@ -62,6 +61,7 @@ McProgressSpinner.decorators = [
                 template: "<div class=\"mc-progress-spinner__inner\"\n     [ngClass]=\"{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}\">\n    <svg focusable=\"false\"\n         preserveAspectRatio=\"xMidYMid meet\"\n         viewBox=\"0 0 100 100\"\n         class=\"mc-progress-spinner__svg\">\n        <circle cx=\"50%\"\n                cy=\"50%\"\n                r=\"42.5%\"\n                class=\"mc-progress-spinner__circle\"\n                [ngStyle]=\"{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}\">\n        </circle>\n    </svg>\n</div>\n\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 encapsulation: ViewEncapsulation.None,
+                inputs: ['color'],
                 host: {
                     class: 'mc-progress-spinner',
                     '[attr.id]': 'id'
@@ -76,8 +76,7 @@ McProgressSpinner.ctorParameters = () => [
 McProgressSpinner.propDecorators = {
     id: [{ type: Input }],
     value: [{ type: Input }],
-    mode: [{ type: Input }],
-    color: [{ type: Input }]
+    mode: [{ type: Input }]
 };
 if (false) {
     /** @type {?} */
@@ -86,8 +85,6 @@ if (false) {
     McProgressSpinner.prototype.value;
     /** @type {?} */
     McProgressSpinner.prototype.mode;
-    /** @type {?} */
-    McProgressSpinner.prototype.color;
 }
 
 /**

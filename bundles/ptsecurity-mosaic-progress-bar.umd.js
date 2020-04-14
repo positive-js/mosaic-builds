@@ -242,7 +242,7 @@
     }
     // tslint:disable-next-line:naming-convention
     /** @type {?} */
-    var McProgressBarMixinBase = core$1.mixinColor(McProgressBarBase);
+    var McProgressBarMixinBase = core$1.mixinColor(McProgressBarBase, core$1.ThemePalette.Primary);
     var McProgressBar = /** @class */ (function (_super) {
         __extends(McProgressBar, _super);
         function McProgressBar(elementRef) {
@@ -250,7 +250,6 @@
             _this.id = "mc-progress-bar-" + idIterator++;
             _this.value = 0;
             _this.mode = 'determinate';
-            _this.color = core$1.ThemePalette.Primary;
             return _this;
         }
         Object.defineProperty(McProgressBar.prototype, "percentage", {
@@ -269,6 +268,7 @@
                         template: "\n<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\">\n    <div\n        *ngSwitchCase=\"'indeterminate'\"\n        class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\">\n    </div>\n    <div\n        *ngSwitchDefault\n        class=\"mc-progress-bar__line mc-progress-bar__line--determinate\"\n        [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\">\n    </div>\n</div>\n",
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
                         encapsulation: core.ViewEncapsulation.None,
+                        inputs: ['color'],
                         host: {
                             class: 'mc-progress-bar',
                             '[attr.id]': 'id'
@@ -283,8 +283,7 @@
         McProgressBar.propDecorators = {
             id: [{ type: core.Input }],
             value: [{ type: core.Input }],
-            mode: [{ type: core.Input }],
-            color: [{ type: core.Input }]
+            mode: [{ type: core.Input }]
         };
         return McProgressBar;
     }(McProgressBarMixinBase));
@@ -295,8 +294,6 @@
         McProgressBar.prototype.value;
         /** @type {?} */
         McProgressBar.prototype.mode;
-        /** @type {?} */
-        McProgressBar.prototype.color;
     }
 
     /**

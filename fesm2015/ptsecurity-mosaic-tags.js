@@ -459,7 +459,7 @@ McTag.decorators = [
                 selector: 'mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]',
                 exportAs: 'mcTag',
                 template: "<div class=\"mc-tag__wrapper\">\n    <span class=\"mc-tag__text\"><ng-content></ng-content></span>\n    <ng-content select=\"[mc-icon]\"></ng-content>\n    <div class=\"mc-tag-overlay\"></div>\n</div>\n",
-                inputs: ['color', 'disabled'],
+                inputs: ['color'],
                 host: {
                     class: 'mc-tag',
                     '[attr.tabindex]': 'tabindex',
@@ -468,7 +468,6 @@ McTag.decorators = [
                     '[class.mc-focused]': 'hasFocus',
                     '[class.mc-tag-with-avatar]': 'avatar',
                     '[class.mc-tag-with-trailing-icon]': 'trailingIcon || removeIcon',
-                    '[class.mc-tag-disabled]': 'disabled',
                     '[class.mc-disabled]': 'disabled',
                     '(click)': 'handleClick($event)',
                     '(keydown)': 'handleKeydown($event)',
@@ -500,7 +499,8 @@ McTag.propDecorators = {
     selected: [{ type: Input }],
     value: [{ type: Input }],
     selectable: [{ type: Input }],
-    removable: [{ type: Input }]
+    removable: [{ type: Input }],
+    disabled: [{ type: Input }]
 };
 if (false) {
     /**
@@ -735,6 +735,7 @@ class McTagList extends McTagListMixinBase {
         this.ngModel = ngModel;
         this.formControlName = formControlName;
         this.controlType = 'mc-tag-list';
+        this._tabIndex = 0;
         /**
          * Event that emits whenever the raw value of the tag-list changes. This is here primarily
          * to facilitate the two-way binding for the `value` input.
@@ -756,8 +757,6 @@ class McTagList extends McTagListMixinBase {
          * Event emitted when the selected tag list value has been changed by the user.
          */
         this.change = new EventEmitter();
-        // tslint:disable-next-line: naming-convention orthodox-getter-and-setter
-        this._tabIndex = 0;
         this._required = false;
         this._disabled = false;
         this._selectable = true;
@@ -999,6 +998,12 @@ class McTagList extends McTagListMixinBase {
              */
             (tag) => tag.tagListSelectable = this._selectable));
         }
+    }
+    /**
+     * @return {?}
+     */
+    get tabIndex() {
+        return this._tabIndex;
     }
     /**
      * @param {?} value
@@ -1645,18 +1650,17 @@ McTagList.decorators = [
                 template: "<div class=\"mc-tags-list__list-container\">\n    <ng-content></ng-content>\n</div>\n\n<div class=\"mc-tags-list__cleaner\"\n     *ngIf=\"canShowCleaner\">\n    <ng-content select=\"mc-cleaner\"></ng-content>\n</div>\n",
                 host: {
                     class: 'mc-tag-list',
-                    '[attr.tabindex]': 'disabled ? null : _tabIndex',
                     '[class.mc-disabled]': 'disabled',
                     '[class.mc-invalid]': 'errorState',
-                    '[class.mc-required]': 'required',
+                    '[attr.tabindex]': 'disabled ? null : tabIndex',
+                    '[id]': 'uid',
                     '(focus)': 'focus()',
                     '(blur)': 'blur()',
-                    '(keydown)': 'keydown($event)',
-                    '[id]': 'uid'
+                    '(keydown)': 'keydown($event)'
                 },
-                providers: [{ provide: McFormFieldControl, useExisting: McTagList }],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
+                providers: [{ provide: McFormFieldControl, useExisting: McTagList }],
                 styles: [".mc-tag-list{display:flex;flex-direction:row}.mc-tag-input{border:none;outline:0;background:0 0}.mc-tags-list__list-container{display:flex;flex-wrap:wrap;flex:1 1 100%;min-width:0;min-height:28px;padding:1px 6px}.mc-tags-list__list-container .mc-tag-input{max-width:100%;flex:1 1 auto;height:22px;margin:2px 4px}.mc-tags-list__cleaner .mc-cleaner{height:30px}"]
             }] }
 ];
@@ -1697,6 +1701,11 @@ McTagList.propDecorators = {
 if (false) {
     /** @type {?} */
     McTagList.prototype.controlType;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTagList.prototype._tabIndex;
     /**
      * Event that emits whenever the raw value of the tag-list changes. This is here primarily
      * to facilitate the two-way binding for the `value` input.
@@ -1740,8 +1749,6 @@ if (false) {
      * @type {?}
      */
     McTagList.prototype.tags;
-    /** @type {?} */
-    McTagList.prototype._tabIndex;
     /**
      * @type {?}
      * @private
@@ -2150,7 +2157,7 @@ McTagInput.decorators = [
                 selector: 'input[mcTagInputFor]',
                 exportAs: 'mcTagInput, mcTagInputFor',
                 host: {
-                    class: 'mc-tag-input mc-input-element',
+                    class: 'mc-tag-input',
                     '[id]': 'id',
                     '[attr.disabled]': 'disabled || null',
                     '[attr.placeholder]': 'placeholder || null',

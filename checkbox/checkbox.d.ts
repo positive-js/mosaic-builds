@@ -70,23 +70,12 @@ export declare class McCheckbox extends McCheckboxMixinBase implements ControlVa
     value: string;
     /** The native `<input type="checkbox">` element */
     inputElement: ElementRef;
-    private uniqueId;
-    private currentAnimationClass;
-    private currentCheckState;
     /** Returns the unique id for the visual hidden input. */
     get inputId(): string;
     /** Whether the checkbox is required. */
     get required(): boolean;
     set required(value: boolean);
     private _required;
-    constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, _focusMonitor: FocusMonitor, tabIndex: string, _clickAction: McCheckboxClickAction);
-    /**
-     * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
-     * @docs-private
-     */
-    onTouched: () => any;
-    ngAfterViewInit(): void;
-    ngOnDestroy(): void;
     /**
      * Whether the checkbox is checked.
      */
@@ -109,6 +98,17 @@ export declare class McCheckbox extends McCheckboxMixinBase implements ControlVa
     get indeterminate(): boolean;
     set indeterminate(value: boolean);
     private _indeterminate;
+    private uniqueId;
+    private currentAnimationClass;
+    private currentCheckState;
+    constructor(elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, _focusMonitor: FocusMonitor, _clickAction: McCheckboxClickAction);
+    /**
+     * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
+     * @docs-private
+     */
+    onTouched: () => any;
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
     /** Method being called whenever the label text changes. */
     onLabelTextChange(): void;
     writeValue(value: any): void;

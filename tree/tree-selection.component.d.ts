@@ -33,12 +33,12 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     readonly selectionChange: EventEmitter<McTreeSelectionChange<T>>;
     multipleMode: MultipleMode | null;
     userTabIndex: number | null;
-    get optionFocusChanges(): Observable<McTreeOptionEvent>;
-    get optionBlurChanges(): Observable<McTreeOptionEvent>;
-    get multiple(): boolean;
     get autoSelect(): boolean;
     set autoSelect(value: boolean);
     private _autoSelect;
+    get optionFocusChanges(): Observable<McTreeOptionEvent>;
+    get optionBlurChanges(): Observable<McTreeOptionEvent>;
+    get multiple(): boolean;
     get noUnselectLast(): boolean;
     set noUnselectLast(value: boolean);
     private _noUnselectLast;
@@ -52,7 +52,7 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     private readonly destroy;
     private optionFocusSubscription;
     private optionBlurSubscription;
-    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, tabIndex: string, multiple: string);
+    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, multiple: MultipleMode);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     focus($event: any): void;

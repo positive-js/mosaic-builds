@@ -430,20 +430,11 @@
         McTooltipComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-tooltip-component',
-                        inputs: [
-                            'mcMouseEnterDelay',
-                            'mcMouseLeaveDelay',
-                            'mcTitle',
-                            'mcVisible',
-                            'mcTrigger',
-                            'mcPlacement'
-                        ],
-                        outputs: ['mcVisibleChange'],
                         animations: [core$1.fadeAnimation],
                         template: "\n    <div class=\"mc-tooltip\"\n         [ngClass]=\"classMap\"\n         [@fadeAnimation]=\"''+($visible | async)\">\n        <div class=\"mc-tooltip-content\">\n            <div class=\"mc-tooltip-arrow\"></div>\n            <div class=\"mc-tooltip-inner\">\n                <ng-container>{{ mcTitle }}</ng-container>\n            </div>\n        </div>\n    </div>\n\n",
-                        preserveWhitespaces: false,
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
+                        preserveWhitespaces: false,
                         host: {
                             '(body:click)': 'this.handleBodyInteraction()'
                         },
@@ -608,7 +599,9 @@
             get: /**
              * @return {?}
              */
-            function () { return this._disabled; },
+            function () {
+                return this._disabled;
+            },
             set: /**
              * @param {?} value
              * @return {?}
@@ -706,7 +699,9 @@
             get: /**
              * @return {?}
              */
-            function () { return this._mcTooltipClass; },
+            function () {
+                return this._mcTooltipClass;
+            },
             enumerable: true,
             configurable: true
         });
@@ -795,10 +790,11 @@
                 .withViewportMargin(VIEWPORT_MARGIN)
                 .withPositions(__spread(core$1.DEFAULT_4_POSITIONS));
             /** @type {?} */
-            var scrollableAncestors = this.scrollDispatcher
-                .getAncestorScrollContainers(this.elementRef);
+            var scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
             strategy.withScrollableContainers(scrollableAncestors);
-            strategy.positionChanges.pipe(operators.takeUntil(this.destroyed)).subscribe((/**
+            strategy.positionChanges
+                .pipe(operators.takeUntil(this.destroyed))
+                .subscribe((/**
              * @param {?} change
              * @return {?}
              */
@@ -912,10 +908,8 @@
          * @return {?}
          */
         function (key, value) {
-            if (this.isDynamicTooltip && value) {
-                if (this.tooltip) {
-                    this.tooltip[key] = value;
-                }
+            if (this.isDynamicTooltip && value && this.tooltip) {
+                this.tooltip[key] = value;
             }
         };
         /**
@@ -944,7 +938,7 @@
              * @return {?}
              */
             function (listener, event) {
-                return _this.elementRef.nativeElement.removeEventListener(event, listener);
+                _this.elementRef.nativeElement.removeEventListener(event, listener);
             }));
             this.manualListeners.clear();
             this.$unsubscribe.next();

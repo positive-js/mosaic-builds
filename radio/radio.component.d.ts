@@ -17,6 +17,8 @@ export declare class McRadioChange {
 }
 /** @docs-private */
 export declare class McRadioGroupBase {
+    _elementRef: ElementRef;
+    constructor(_elementRef: ElementRef);
 }
 export declare const McRadioGroupMixinBase: CanDisableCtor & typeof McRadioGroupBase;
 /**
@@ -72,7 +74,7 @@ export declare class McRadioGroup extends McRadioGroupMixinBase implements After
     private _disabled;
     /** Whether the radio group is required. */
     private _required;
-    constructor(_changeDetector: ChangeDetectorRef);
+    constructor(elementRef: ElementRef, _changeDetector: ChangeDetectorRef);
     /** The method to be called in order to update ngModel */
     controlValueAccessorChangeFn: (value: any) => void;
     /**

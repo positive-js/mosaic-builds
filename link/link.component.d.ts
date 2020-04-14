@@ -12,7 +12,7 @@ export declare class McLink extends McLinkMixinBase implements OnDestroy, HasTab
     get disabled(): any;
     set disabled(value: any);
     private _disabled;
-    constructor(elementRef: ElementRef, focusMonitor: FocusMonitor, changeDetector: ChangeDetectorRef, tabIndex: string);
+    constructor(elementRef: ElementRef, focusMonitor: FocusMonitor, changeDetector: ChangeDetectorRef);
     ngOnDestroy(): void;
     focus(): void;
     getHostElement(): any;

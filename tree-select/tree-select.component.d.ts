@@ -137,10 +137,6 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     private _id;
     /** Whether the select is focused. */
     get focused(): boolean;
-    /**
-     * @deprecated Setter to be removed as this property is intended to be readonly.
-     * @breaking-change 8.0.0
-     */
     set focused(value: boolean);
     private _focused;
     get panelOpen(): boolean;
@@ -154,7 +150,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     /** Emits whenever the component is destroyed. */
     private readonly destroy;
     private tempValues;
-    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, viewportRuler: ViewportRuler, ngZone: NgZone, renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, tabIndex: string, scrollStrategyFactory: any, rawValidators: Validator[], mcValidation: McValidationOptions, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, parentFormField: McFormField, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName);
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, viewportRuler: ViewportRuler, ngZone: NgZone, renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, scrollStrategyFactory: any, rawValidators: Validator[], mcValidation: McValidationOptions, dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, parentFormField: McFormField, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngAfterViewInit(): void;

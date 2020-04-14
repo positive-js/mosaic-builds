@@ -1,6 +1,6 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { AfterViewInit, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 export declare type McNavbarContainerPositionType = 'left' | 'right';
 export declare class McNavbarLogo {
 }
@@ -12,11 +12,10 @@ export declare class McNavbarItemBase {
     elementRef: ElementRef;
     constructor(elementRef: ElementRef);
 }
-export declare const McNavbarMixinBase: CanDisableCtor & typeof McNavbarItemBase;
+export declare const McNavbarMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McNavbarItemBase;
 export declare class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
     elementRef: ElementRef;
     private _focusMonitor;
-    tabIndex: number;
     set collapsedTitle(value: string);
     constructor(elementRef: ElementRef, _focusMonitor: FocusMonitor);
     ngOnInit(): void;
@@ -25,7 +24,6 @@ export declare class McNavbarItem extends McNavbarMixinBase implements OnInit, O
 }
 export declare class McNavbarContainer {
     position: McNavbarContainerPositionType;
-    get cssClasses(): string;
 }
 export declare class McNavbar implements AfterViewInit, OnDestroy {
     private _elementRef;

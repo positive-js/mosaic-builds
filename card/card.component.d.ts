@@ -1,18 +1,23 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy, EventEmitter } from '@angular/core';
-export declare class McCard implements OnDestroy {
-    private _elementRef;
+import { CanColorCtor } from '@ptsecurity/mosaic/core';
+export declare class McCardBase {
+    _elementRef: ElementRef;
+    constructor(_elementRef: ElementRef);
+}
+export declare const McCardBaseMixin: CanColorCtor & typeof McCardBase;
+export declare class McCard extends McCardBaseMixin implements OnDestroy {
     private _focusMonitor;
-    get tabIndex(): number | null;
-    set tabIndex(value: number | null);
     readonly: boolean;
     selected: boolean;
     selectedChange: EventEmitter<boolean>;
+    get tabIndex(): number | null;
+    set tabIndex(value: number | null);
     private _tabIndex;
-    constructor(_elementRef: ElementRef, _focusMonitor: FocusMonitor);
+    constructor(elementRef: ElementRef, _focusMonitor: FocusMonitor);
     ngOnDestroy(): void;
     focus(): void;
     onClick($event: MouseEvent): void;
-    private get hostElement();
     onKeyDown($event: KeyboardEvent): void;
+    private get hostElement();
 }

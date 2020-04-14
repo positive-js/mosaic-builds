@@ -296,10 +296,10 @@ var McSidepanelContainerComponent = /** @class */ (function (_super) {
                     animations: [mcSidepanelAnimations.sidepanelState],
                     host: {
                         class: 'mc-sidepanel-container',
-                        tabindex: '-1',
                         role: 'dialog',
                         'aria-modal': 'true',
                         '[attr.id]': 'id',
+                        '[attr.tabindex]': '-1',
                         '[@state]': "{\n            value: animationState,\n            params: animationTransform\n        }",
                         '(@state.start)': 'onAnimation($event)',
                         '(@state.done)': 'onAnimation($event)'

@@ -2,7 +2,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { DOCUMENT, CommonModule } from '@angular/common';
-import { Injectable, ɵɵdefineInjectable, EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, NgZone, Input, Output, ChangeDetectorRef, Optional, Inject, ViewChild, forwardRef, InjectionToken, ViewContainerRef, Directive, Attribute, ContentChild, NgModule } from '@angular/core';
+import { Injectable, ɵɵdefineInjectable, EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, NgZone, Input, Output, ChangeDetectorRef, Optional, Inject, ViewChild, forwardRef, InjectionToken, ViewContainerRef, Directive, ContentChild, NgModule } from '@angular/core';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { MC_DATE_FORMATS, DateAdapter } from '@ptsecurity/cdk/datetime';
@@ -10,10 +10,8 @@ import { Subject, Subscription, merge, of } from 'rxjs';
 import { Directionality } from '@angular/cdk/bidi';
 import { SPACE, ENTER, PAGE_DOWN, PAGE_UP, END, HOME, DOWN_ARROW, UP_ARROW, RIGHT_ARROW, LEFT_ARROW, ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { take, filter } from 'rxjs/operators';
-import { __extends } from 'tslib';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { mixinColor } from '@ptsecurity/mosaic/core';
-import { McFormFieldControl, McFormField } from '@ptsecurity/mosaic/form-field';
+import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators } from '@angular/forms';
 import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
@@ -300,16 +298,16 @@ var McCalendarBody = /** @class */ (function () {
     McCalendarBody.decorators = [
         { type: Component, args: [{
                     selector: '[mc-calendar-body]',
-                    template: "<!--\n  If there's not enough space in the first row, create a separate label row. We mark this row as\n  aria-hidden because we don't want it to be read out as one of the weeks in the month.\n-->\n<tr *ngIf=\"firstRowOffset < labelMinRequiredCells\" aria-hidden=\"true\">\n    <td class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"numCols\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{label}}\n    </td>\n</tr>\n\n<!-- Create the first row separately so we can include a special spacer cell. -->\n<tr *ngFor=\"let row of rows; let rowIndex = index\" role=\"row\">\n    <!--\n      We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.\n      The aspect ratio of the table cells is maintained by setting the top and bottom padding as a\n      percentage of the width (a variant of the trick described here:\n      https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).\n    -->\n    <td *ngIf=\"rowIndex === 0 && firstRowOffset\"\n        aria-hidden=\"true\"\n        class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"firstRowOffset\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{firstRowOffset >= labelMinRequiredCells ? label : ''}}\n    </td>\n    <td *ngFor=\"let item of row; let colIndex = index\"\n        role=\"gridcell\"\n        class=\"mc-calendar__body-cell\"\n        [ngClass]=\"item.cssClasses\"\n        [tabindex]=\"isActiveCell(rowIndex, colIndex) ? 0 : -1\"\n        [class.mc-calendar__body_disabled]=\"!item.enabled\"\n        [class.mc-calendar__body_active]=\"isActiveCell(rowIndex, colIndex)\"\n        [attr.aria-label]=\"item.ariaLabel\"\n        [attr.aria-disabled]=\"!item.enabled || null\"\n        [attr.aria-selected]=\"selectedValue === item.value\"\n        (click)=\"cellClicked(item)\"\n        [style.width]=\"cellWidth\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        <div class=\"mc-calendar__body-cell-content\"\n             [class.mc-calendar__body_selected]=\"selectedValue === item.value\"\n             [class.mc-calendar__body-today]=\"todayValue === item.value\">\n            {{item.displayValue}}\n        </div>\n    </td>\n</tr>\n",
+                    exportAs: 'mcCalendarBody',
+                    template: "<!--\n  If there's not enough space in the first row, create a separate label row. We mark this row as\n  aria-hidden because we don't want it to be read out as one of the weeks in the month.\n-->\n<tr *ngIf=\"firstRowOffset < labelMinRequiredCells\" aria-hidden=\"true\">\n    <td class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"numCols\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{label}}\n    </td>\n</tr>\n\n<!-- Create the first row separately so we can include a special spacer cell. -->\n<tr *ngFor=\"let row of rows; let rowIndex = index\" role=\"row\">\n    <!--\n      We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.\n      The aspect ratio of the table cells is maintained by setting the top and bottom padding as a\n      percentage of the width (a variant of the trick described here:\n      https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).\n    -->\n    <td *ngIf=\"rowIndex === 0 && firstRowOffset\"\n        aria-hidden=\"true\"\n        class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"firstRowOffset\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{firstRowOffset >= labelMinRequiredCells ? label : ''}}\n    </td>\n    <td *ngFor=\"let item of row; let colIndex = index\"\n        role=\"gridcell\"\n        class=\"mc-calendar__body-cell\"\n        [ngClass]=\"item.cssClasses\"\n        [tabindex]=\"isActiveCell(rowIndex, colIndex) ? 0 : -1\"\n        [class.mc-calendar__body_disabled]=\"!item.enabled\"\n        [class.mc-calendar__body_active]=\"isActiveCell(rowIndex, colIndex)\"\n        [attr.aria-label]=\"item.ariaLabel\"\n        [attr.aria-disabled]=\"!item.enabled || null\"\n        [attr.aria-selected]=\"selectedValue === item.value\"\n        (click)=\"cellClicked(item)\"\n        [style.width]=\"cellWidth\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        <div class=\"mc-calendar__body-cell-content\"\n             [class.mc-selected]=\"selectedValue === item.value\"\n             [class.mc-calendar__body-today]=\"todayValue === item.value\">\n            {{item.displayValue}}\n        </div>\n    </td>\n</tr>\n",
                     host: {
                         class: 'mc-calendar__body',
                         role: 'grid',
                         'aria-readonly': 'true'
                     },
-                    exportAs: 'mcCalendarBody',
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: [".mc-calendar__body{min-width:224px}.mc-calendar__body-label{height:0;line-height:0;text-align:left;padding-left:4.71429%;padding-right:4.71429%}.mc-calendar__body-cell{position:relative;height:0;line-height:0;text-align:center;outline:0;cursor:pointer}.mc-calendar__body_disabled{cursor:default}.mc-calendar__body-cell-content{position:absolute;top:5%;left:5%;padding:8px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:90%;height:90%;line-height:1;border-width:1px;border-style:solid}.cdk-high-contrast-active .mc-calendar__body-cell-content{border:none}.cdk-high-contrast-active :host .mc-calendar__body-cell-content{border:none}mc-month-view .mc-calendar__body-cell-content{justify-content:flex-end}mc-multi-year-view .mc-calendar__body-cell-content,mc-year-view .mc-calendar__body-cell-content{justify-content:center}.cdk-high-contrast-active .mc-calendar__body_selected,.cdk-high-contrast-active .mc-datepicker__popup:not(:empty){outline:solid 1px}.cdk-high-contrast-active .mc-calendar__body-today{outline:dotted 1px}.cdk-high-contrast-active :host .mc-calendar__body_selected,.cdk-high-contrast-active :host .mc-datepicker__popup:not(:empty){outline:solid 1px}.cdk-high-contrast-active :host .mc-calendar__body-today{outline:dotted 1px}[dir=rtl] .mc-calendar__body-label{text-align:right}"]
+                    styles: [".mc-calendar__body{min-width:224px}.mc-calendar__body-label{height:0;line-height:0;text-align:left;padding-left:4.71429%;padding-right:4.71429%}.mc-calendar__body-cell{position:relative;height:0;line-height:0;text-align:center;outline:0;cursor:pointer}.mc-calendar__body_disabled{cursor:default}.mc-calendar__body-cell-content{position:absolute;top:5%;left:5%;padding:8px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:90%;height:90%;line-height:1;border-width:1px;border-style:solid}.cdk-high-contrast-active .mc-calendar__body-cell-content{border:none}.cdk-high-contrast-active :host .mc-calendar__body-cell-content{border:none}mc-month-view .mc-calendar__body-cell-content{justify-content:flex-end}mc-multi-year-view .mc-calendar__body-cell-content,mc-year-view .mc-calendar__body-cell-content{justify-content:center}.cdk-high-contrast-active .mc-datepicker__popup:not(:empty),.cdk-high-contrast-active .mc-selected{outline:solid 1px}.cdk-high-contrast-active .mc-calendar__body-today{outline:dotted 1px}.cdk-high-contrast-active :host .mc-datepicker__popup:not(:empty),.cdk-high-contrast-active :host .mc-selected{outline:solid 1px}.cdk-high-contrast-active :host .mc-calendar__body-today{outline:dotted 1px}[dir=rtl] .mc-calendar__body-label{text-align:right}"]
                 }] }
     ];
     /** @nocollapse */
@@ -813,8 +811,8 @@ var McMonthView = /** @class */ (function () {
     McMonthView.decorators = [
         { type: Component, args: [{
                     selector: 'mc-month-view',
-                    template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th *ngFor=\"let day of weekdays\" [attr.aria-label]=\"day.long\">{{day.narrow}}</th>\n    </tr>\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"7\" aria-hidden=\"true\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"monthLabel\"\n           [rows]=\"weeks\"\n           [todayValue]=\"todayDate\"\n           [selectedValue]=\"selectedDate\"\n           [labelMinRequiredCells]=\"3\"\n           [activeCell]=\"dateAdapter.getDate(activeDate) - 1\"\n           (selectedValueChange)=\"dateSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                     exportAs: 'mcMonthView',
+                    template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th *ngFor=\"let day of weekdays\" [attr.aria-label]=\"day.long\">{{day.narrow}}</th>\n    </tr>\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"7\" aria-hidden=\"true\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"monthLabel\"\n           [rows]=\"weeks\"\n           [todayValue]=\"todayDate\"\n           [selectedValue]=\"selectedDate\"\n           [labelMinRequiredCells]=\"3\"\n           [activeCell]=\"dateAdapter.getDate(activeDate) - 1\"\n           (selectedValueChange)=\"dateSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
@@ -1292,8 +1290,8 @@ var McMultiYearView = /** @class */ (function () {
     McMultiYearView.decorators = [
         { type: Component, args: [{
                     selector: 'mc-multi-year-view',
-                    template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [rows]=\"years\"\n           [todayValue]=\"todayYear\"\n           [selectedValue]=\"selectedYear\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"getActiveCell()\"\n           (selectedValueChange)=\"onYearSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                     exportAs: 'mcMultiYearView',
+                    template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [rows]=\"years\"\n           [todayValue]=\"todayYear\"\n           [selectedValue]=\"selectedYear\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"getActiveCell()\"\n           (selectedValueChange)=\"onYearSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
@@ -1824,8 +1822,8 @@ var McYearView = /** @class */ (function () {
     McYearView.decorators = [
         { type: Component, args: [{
                     selector: 'mc-year-view',
-                    template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"yearLabel\"\n           [rows]=\"months\"\n           [todayValue]=\"todayMonth\"\n           [selectedValue]=\"selectedMonth\"\n           [labelMinRequiredCells]=\"2\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"dateAdapter.getMonth(activeDate)\"\n           (selectedValueChange)=\"onMonthSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                     exportAs: 'mcYearView',
+                    template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"yearLabel\"\n           [rows]=\"months\"\n           [todayValue]=\"todayMonth\"\n           [selectedValue]=\"selectedMonth\"\n           [labelMinRequiredCells]=\"2\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"dateAdapter.getMonth(activeDate)\"\n           (selectedValueChange)=\"onMonthSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush
                 }] }
@@ -2529,11 +2527,11 @@ var McCalendar = /** @class */ (function () {
     McCalendar.decorators = [
         { type: Component, args: [{
                     selector: 'mc-calendar',
+                    exportAs: 'mcCalendar',
                     template: "<ng-template [cdkPortalOutlet]=\"calendarHeaderPortal\"></ng-template>\n\n<div class=\"mc-calendar__content\" [ngSwitch]=\"currentView\" cdkMonitorSubtreeFocus tabindex=\"-1\">\n    <mc-month-view\n        *ngSwitchCase=\"'month'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        [dateClass]=\"dateClass\"\n        (selectedChange)=\"dateSelected($event)\"\n        (userSelection)=\"userSelected()\">\n    </mc-month-view>\n\n    <mc-year-view\n        *ngSwitchCase=\"'year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (monthSelected)=\"monthSelectedInYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'month')\">\n    </mc-year-view>\n\n    <mc-multi-year-view\n        *ngSwitchCase=\"'multi-year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (yearSelected)=\"yearSelectedInMultiYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'year')\">\n    </mc-multi-year-view>\n</div>\n",
                     host: {
                         class: 'mc-calendar'
                     },
-                    exportAs: 'mcCalendar',
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     styles: [".mc-calendar{display:block}.mc-calendar__header{padding:8px 8px 0}.mc-calendar__content{padding:0 8px 8px;outline:0}.mc-calendar__controls{display:flex;margin:5% calc(33% / 7 - 16px)}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__previous-button::after{border-left-width:2px;transform:translateX(2px) rotate(-45deg)}.mc-calendar__next-button::after{border-right-width:2px;transform:translateX(-2px) rotate(45deg)}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;padding:0 0 8px}.mc-calendar__table-header-divider{position:relative;height:1px}.mc-calendar__table-header-divider::after{content:'';position:absolute;top:0;left:-8px;right:-8px;height:1px}"]
@@ -2770,29 +2768,6 @@ var MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     deps: [Overlay],
     useFactory: MC_DATEPICKER_SCROLL_STRATEGY_FACTORY
 };
-// Boilerplate for applying mixins to McDatepickerContent.
-/**
- * \@docs-private
- */
-var  
-// Boilerplate for applying mixins to McDatepickerContent.
-/**
- * \@docs-private
- */
-McDatepickerContentBase = /** @class */ (function () {
-    // tslint:disable-next-line:naming-convention
-    function McDatepickerContentBase(_elementRef) {
-        this._elementRef = _elementRef;
-    }
-    return McDatepickerContentBase;
-}());
-if (false) {
-    /** @type {?} */
-    McDatepickerContentBase.prototype._elementRef;
-}
-// tslint:disable-next-line:naming-convention
-/** @type {?} */
-var McDatepickerContentMixinBase = mixinColor(McDatepickerContentBase);
 /**
  * Component used as the content for the datepicker dialog and popup. We use this instead of using
  * McCalendar directly as the content so we can control the initial focus. This also gives us a
@@ -2801,10 +2776,8 @@ var McDatepickerContentMixinBase = mixinColor(McDatepickerContentBase);
  * \@docs-private
  * @template D
  */
-var McDatepickerContent = /** @class */ (function (_super) {
-    __extends(McDatepickerContent, _super);
-    function McDatepickerContent(elementRef) {
-        return _super.call(this, elementRef) || this;
+var McDatepickerContent = /** @class */ (function () {
+    function McDatepickerContent() {
     }
     /**
      * @return {?}
@@ -2818,6 +2791,7 @@ var McDatepickerContent = /** @class */ (function (_super) {
     McDatepickerContent.decorators = [
         { type: Component, args: [{
                     selector: 'mc-datepicker__content',
+                    exportAs: 'mcDatepickerContent',
                     template: "<mc-calendar [id]=\"datepicker.id\"\n             [ngClass]=\"datepicker.panelClass\"\n             [startAt]=\"datepicker.startAt\"\n             [startView]=\"datepicker.startView\"\n             [minDate]=\"datepicker.minDate\"\n             [maxDate]=\"datepicker.maxDate\"\n             [dateFilter]=\"datepicker.dateFilter\"\n             [headerComponent]=\"datepicker.calendarHeaderComponent\"\n             [selected]=\"datepicker.selected\"\n             [dateClass]=\"datepicker.dateClass\"\n             [@fadeInCalendar]=\"'enter'\"\n             (selectedChange)=\"datepicker.select($event)\"\n             (yearSelected)=\"datepicker.selectYear($event)\"\n             (monthSelected)=\"datepicker.selectMonth($event)\"\n             (userSelection)=\"datepicker.close()\">\n</mc-calendar>\n",
                     host: {
                         class: 'mc-datepicker__content',
@@ -2827,22 +2801,16 @@ var McDatepickerContent = /** @class */ (function (_super) {
                         mcDatepickerAnimations.transformPanel,
                         mcDatepickerAnimations.fadeInCalendar
                     ],
-                    exportAs: 'mcDatepickerContent',
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    inputs: ['color'],
                     styles: [".mc-datepicker__content{display:block;border-width:1px;border-style:solid}.mc-datepicker__content .mc-calendar{width:296px;height:344px}.mc-datepicker__content .mc-calendar__next-button[disabled],.mc-datepicker__content .mc-calendar__previous-button[disabled]{border:0}@media all and (orientation:landscape){.mc-calendar{width:64vh;height:80vh}}@media all and (orientation:portrait){.mc-calendar{width:80vw;height:100vw}}"]
                 }] }
     ];
-    /** @nocollapse */
-    McDatepickerContent.ctorParameters = function () { return [
-        { type: ElementRef }
-    ]; };
     McDatepickerContent.propDecorators = {
         calendar: [{ type: ViewChild, args: [McCalendar, { static: false },] }]
     };
     return McDatepickerContent;
-}(McDatepickerContentMixinBase));
+}());
 if (false) {
     /**
      * Reference to the internal calendar component.
@@ -2854,11 +2822,6 @@ if (false) {
      * @type {?}
      */
     McDatepickerContent.prototype.datepicker;
-    /**
-     * Whether the datepicker is above or below the input.
-     * @type {?}
-     */
-    McDatepickerContent.prototype.isAbove;
 }
 // TODO: We use a component instead of a directive here so the user can use implicit
 // template reference variables (e.g. #d vs #d="mcDatepicker"). We can change this to a directive
@@ -2942,27 +2905,6 @@ var McDatepicker = /** @class */ (function () {
          */
         function (value) {
             this._startAt = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McDatepicker.prototype, "color", {
-        /** Color palette to use on the datepicker's calendar. */
-        get: /**
-         * Color palette to use on the datepicker's calendar.
-         * @return {?}
-         */
-        function () {
-            // @ts-ignore:next-line
-            return this._color ||
-                (this.datepickerInput ? this.datepickerInput.getThemePalette() : undefined);
-        },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this._color = value;
         },
         enumerable: true,
         configurable: true
@@ -3261,7 +3203,6 @@ var McDatepicker = /** @class */ (function () {
         if (!this.popupRef.hasAttached()) {
             this.popupComponentRef = this.popupRef.attach(this.calendarPortal);
             this.popupComponentRef.instance.datepicker = this;
-            this.setColor();
             // Update the position once the calendar has rendered.
             this.ngZone.onStable.asObservable().pipe(take(1)).subscribe((/**
              * @return {?}
@@ -3370,24 +3311,6 @@ var McDatepicker = /** @class */ (function () {
     function (obj) {
         return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
     };
-    /** Passes the current theme color along to the calendar overlay. */
-    /**
-     * Passes the current theme color along to the calendar overlay.
-     * @private
-     * @return {?}
-     */
-    McDatepicker.prototype.setColor = /**
-     * Passes the current theme color along to the calendar overlay.
-     * @private
-     * @return {?}
-     */
-    function () {
-        /** @type {?} */
-        var color = this.color;
-        if (this.popupComponentRef) {
-            this.popupComponentRef.instance.color = color;
-        }
-    };
     McDatepicker.decorators = [
         { type: Component, args: [{
                     selector: 'mc-datepicker',
@@ -3410,7 +3333,6 @@ var McDatepicker = /** @class */ (function () {
     ]; };
     McDatepicker.propDecorators = {
         startAt: [{ type: Input }],
-        color: [{ type: Input }],
         disabled: [{ type: Input }],
         opened: [{ type: Input }],
         calendarHeaderComponent: [{ type: Input }],
@@ -3519,11 +3441,6 @@ if (false) {
      * @private
      */
     McDatepicker.prototype.validSelected;
-    /**
-     * @type {?}
-     * @private
-     */
-    McDatepicker.prototype._color;
     /**
      * A portal containing the calendar for this datepicker.
      * @type {?}
@@ -3651,12 +3568,11 @@ if (false) {
  * @template D
  */
 var McDatepickerInput = /** @class */ (function () {
-    function McDatepickerInput(elementRef, dateAdapter, dateFormats, formField) {
+    function McDatepickerInput(elementRef, dateAdapter, dateFormats) {
         var _this = this;
         this.elementRef = elementRef;
         this.dateAdapter = dateAdapter;
         this.dateFormats = dateFormats;
-        this.formField = formField;
         /**
          * Emits when a `change` event is fired on this `<input>`.
          */
@@ -4058,18 +3974,6 @@ var McDatepickerInput = /** @class */ (function () {
     function () {
         this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
     };
-    /** Returns the palette used by the input's form field, if any. */
-    /**
-     * Returns the palette used by the input's form field, if any.
-     * @return {?}
-     */
-    McDatepickerInput.prototype.getThemePalette = /**
-     * Returns the palette used by the input's form field, if any.
-     * @return {?}
-     */
-    function () {
-        return this.formField ? this.formField.color : undefined;
-    };
     /** Handles blur events on the input. */
     /**
      * Handles blur events on the input.
@@ -4123,6 +4027,7 @@ var McDatepickerInput = /** @class */ (function () {
     McDatepickerInput.decorators = [
         { type: Directive, args: [{
                     selector: 'input[mcDatepicker]',
+                    exportAs: 'mcDatepickerInput',
                     providers: [
                         MC_DATEPICKER_VALUE_ACCESSOR,
                         MC_DATEPICKER_VALIDATORS,
@@ -4133,21 +4038,19 @@ var McDatepickerInput = /** @class */ (function () {
                         '[attr.aria-owns]': '(datepicker?.opened && datepicker.id) || null',
                         '[attr.min]': 'min ? dateAdapter.toIso8601(min) : null',
                         '[attr.max]': 'max ? dateAdapter.toIso8601(max) : null',
-                        '[disabled]': 'disabled',
+                        '[attr.disabled]': 'disabled || null',
                         '(input)': 'onInput($event.target.value)',
                         '(change)': 'onChange()',
                         '(blur)': 'onBlur()',
                         '(keydown)': 'onKeydown($event)'
-                    },
-                    exportAs: 'mcDatepickerInput'
+                    }
                 },] }
     ];
     /** @nocollapse */
     McDatepickerInput.ctorParameters = function () { return [
         { type: ElementRef },
         { type: DateAdapter, decorators: [{ type: Optional }] },
-        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DATE_FORMATS,] }] },
-        { type: McFormField, decorators: [{ type: Optional }] }
+        { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DATE_FORMATS,] }] }
     ]; };
     McDatepickerInput.propDecorators = {
         mcDatepicker: [{ type: Input }],
@@ -4273,11 +4176,6 @@ if (false) {
      * @private
      */
     McDatepickerInput.prototype.dateFormats;
-    /**
-     * @type {?}
-     * @private
-     */
-    McDatepickerInput.prototype.formField;
 }
 
 /**
@@ -4302,13 +4200,10 @@ var McDatepickerToggleIcon = /** @class */ (function () {
  * @template D
  */
 var McDatepickerToggle = /** @class */ (function () {
-    function McDatepickerToggle(intl, changeDetectorRef, defaultTabIndex) {
+    function McDatepickerToggle(intl, changeDetectorRef) {
         this.intl = intl;
         this.changeDetectorRef = changeDetectorRef;
         this.stateChanges = Subscription.EMPTY;
-        /** @type {?} */
-        var parsedTabIndex = Number(defaultTabIndex);
-        this.tabIndex = (parsedTabIndex || parsedTabIndex === 0) ? parsedTabIndex : null;
     }
     Object.defineProperty(McDatepickerToggle.prototype, "disabled", {
         /** Whether the toggle button is disabled. */
@@ -4402,15 +4297,10 @@ var McDatepickerToggle = /** @class */ (function () {
     McDatepickerToggle.decorators = [
         { type: Component, args: [{
                     selector: 'mc-datepicker-toggle',
-                    template: "<button\n    #button\n    mc-button\n    type=\"button\"\n    class=\"mc-datepicker-toggle__button\"\n    aria-haspopup=\"true\"\n    [attr.aria-label]=\"intl.openCalendarLabel\"\n    [attr.tabindex]=\"disabled ? -1 : tabIndex\"\n    [disabled]=\"disabled\"\n    (click)=\"open($event)\">\n\n    <i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i>\n\n    <ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content>\n</button>\n",
+                    template: "<button\n    #button\n    mc-button\n    type=\"button\"\n    class=\"mc-datepicker-toggle__button\"\n    aria-haspopup=\"true\"\n    [attr.aria-label]=\"intl.openCalendarLabel\"\n    [attr.tabindex]=\"tabIndex\"\n    [disabled]=\"disabled\"\n    (click)=\"open($event)\">\n\n    <i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i>\n\n    <ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content>\n</button>\n",
                     host: {
                         class: 'mc-datepicker-toggle',
-                        // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the
-                        // consumer may have provided, while still being able to receive focus.
-                        '[attr.tabindex]': '-1',
-                        '[class.mc-datepicker-toggle_active]': 'datepicker && datepicker.opened',
-                        '[class.mc-warn]': 'datepicker && datepicker.color === "error"',
-                        '(focus)': 'button.focus()'
+                        '[class.mc-active]': 'datepicker && datepicker.opened'
                     },
                     exportAs: 'mcDatepickerToggle',
                     encapsulation: ViewEncapsulation.None,
@@ -4421,8 +4311,7 @@ var McDatepickerToggle = /** @class */ (function () {
     /** @nocollapse */
     McDatepickerToggle.ctorParameters = function () { return [
         { type: McDatepickerIntl },
-        { type: ChangeDetectorRef },
-        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] }
+        { type: ChangeDetectorRef }
     ]; };
     McDatepickerToggle.propDecorators = {
         disabled: [{ type: Input }],
@@ -4549,5 +4438,5 @@ var McDatepickerModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, MC_DATEPICKER_VALIDATORS, MC_DATEPICKER_VALUE_ACCESSOR, McCalendar, McCalendarBody, McCalendarCell, McCalendarHeader, McDatepicker, McDatepickerContent, McDatepickerContentBase, McDatepickerContentMixinBase, McDatepickerInput, McDatepickerInputEvent, McDatepickerIntl, McDatepickerModule, McDatepickerToggle, McDatepickerToggleIcon, McMonthView, McMultiYearView, McYearView, mcDatepickerAnimations, yearsPerPage, yearsPerRow };
+export { MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, MC_DATEPICKER_VALIDATORS, MC_DATEPICKER_VALUE_ACCESSOR, McCalendar, McCalendarBody, McCalendarCell, McCalendarHeader, McDatepicker, McDatepickerContent, McDatepickerInput, McDatepickerInputEvent, McDatepickerIntl, McDatepickerModule, McDatepickerToggle, McDatepickerToggleIcon, McMonthView, McMultiYearView, McYearView, mcDatepickerAnimations, yearsPerPage, yearsPerRow };
 //# sourceMappingURL=ptsecurity-mosaic-datepicker.js.map

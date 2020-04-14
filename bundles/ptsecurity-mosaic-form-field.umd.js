@@ -526,6 +526,90 @@
             _this.canCleanerClearByEsc = true;
             return _this;
         }
+        Object.defineProperty(McFormField.prototype, "hasHint", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.hint && this.hint.length > 0;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(McFormField.prototype, "hasSuffix", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.suffix && this.suffix.length > 0;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(McFormField.prototype, "hasPrefix", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.prefix && this.prefix.length > 0;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(McFormField.prototype, "hasCleaner", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return !!this.cleaner;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(McFormField.prototype, "hasStepper", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return !!this.stepper;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(McFormField.prototype, "canShowCleaner", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.hasCleaner &&
+                    this.control &&
+                    this.control.ngControl
+                    ? this.control.ngControl.value && !this.control.disabled
+                    : false;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(McFormField.prototype, "disabled", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.control && this.control.disabled;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(McFormField.prototype, "canShowStepper", {
+            get: /**
+             * @return {?}
+             */
+            function () {
+                return this.control && !this.disabled && (this.control.focused || this.hovered);
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * @return {?}
          */
@@ -690,90 +774,6 @@
                 throw getMcFormFieldMissingControlError();
             }
         };
-        Object.defineProperty(McFormField.prototype, "hasHint", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this.hint && this.hint.length > 0;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(McFormField.prototype, "hasSuffix", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this.suffix && this.suffix.length > 0;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(McFormField.prototype, "hasPrefix", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this.prefix && this.prefix.length > 0;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(McFormField.prototype, "hasCleaner", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return !!this.cleaner;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(McFormField.prototype, "hasStepper", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return !!this.stepper;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(McFormField.prototype, "canShowCleaner", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this.hasCleaner &&
-                    this.control &&
-                    this.control.ngControl
-                    ? this.control.ngControl.value && !this.control.disabled
-                    : false;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(McFormField.prototype, "disabled", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this.control && this.control.disabled;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(McFormField.prototype, "canShowStepper", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this.control && !this.disabled && (this.control.focused || this.hovered);
-            },
-            enumerable: true,
-            configurable: true
-        });
         McFormField.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-form-field',
@@ -782,11 +782,11 @@
                         host: {
                             class: 'mc-form-field',
                             '[class.mc-form-field_invalid]': 'control.errorState',
-                            '[class.mc-disabled]': 'control.disabled',
                             '[class.mc-form-field_has-prefix]': 'hasPrefix',
                             '[class.mc-form-field_has-suffix]': 'hasSuffix',
                             '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
                             '[class.mc-form-field_has-stepper]': 'canShowStepper',
+                            '[class.mc-disabled]': 'control.disabled',
                             '[class.mc-focused]': 'control.focused',
                             '[class.ng-untouched]': 'shouldForward("untouched")',
                             '[class.ng-touched]': 'shouldForward("touched")',

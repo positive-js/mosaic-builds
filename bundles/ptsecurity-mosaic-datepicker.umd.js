@@ -1,222 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/overlay'), require('@angular/cdk/portal'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/icon'), require('@ptsecurity/cdk/datetime'), require('rxjs'), require('@angular/cdk/bidi'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@angular/animations'), require('@angular/forms'), require('@ptsecurity/mosaic/input')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/datepicker', ['exports', '@angular/cdk/a11y', '@angular/cdk/overlay', '@angular/cdk/portal', '@angular/common', '@angular/core', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/icon', '@ptsecurity/cdk/datetime', 'rxjs', '@angular/cdk/bidi', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/coercion', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@angular/animations', '@angular/forms', '@ptsecurity/mosaic/input'], factory) :
-    (global = global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.datepicker = {}), global.ng.cdk.a11y, global.ng.cdk.overlay, global.ng.cdk.portal, global.ng.common, global.ng.core, global.ptsecurity.mosaic.button, global.ptsecurity.mosaic.icon, global.datetime, global.rxjs, global.ng.cdk.bidi, global.keycodes, global.rxjs.operators, global.ng.cdk.coercion, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic['form-field'], global.ng.animations, global.ng.forms, global.ptsecurity.mosaic.input));
-}(this, (function (exports, a11y, overlay, portal, common, core, button, icon, datetime, rxjs, bidi, keycodes, operators, coercion, core$1, formField, animations, forms, input) { 'use strict';
-
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
-
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
-
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
-    ***************************************************************************** */
-    /* global Reflect, Promise */
-
-    var extendStatics = function(d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-
-    function __extends(d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    }
-
-    var __assign = function() {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-
-    function __rest(s, e) {
-        var t = {};
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-            t[p] = s[p];
-        if (s != null && typeof Object.getOwnPropertySymbols === "function")
-            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                    t[p[i]] = s[p[i]];
-            }
-        return t;
-    }
-
-    function __decorate(decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    }
-
-    function __param(paramIndex, decorator) {
-        return function (target, key) { decorator(target, key, paramIndex); }
-    }
-
-    function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-    }
-
-    function __awaiter(thisArg, _arguments, P, generator) {
-        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-        return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-            step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-    }
-
-    function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-        function verb(n) { return function (v) { return step([n, v]); }; }
-        function step(op) {
-            if (f) throw new TypeError("Generator is already executing.");
-            while (_) try {
-                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-                if (y = 0, t) op = [op[0] & 2, t.value];
-                switch (op[0]) {
-                    case 0: case 1: t = op; break;
-                    case 4: _.label++; return { value: op[1], done: false };
-                    case 5: _.label++; y = op[1]; op = [0]; continue;
-                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                    default:
-                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                        if (t[2]) _.ops.pop();
-                        _.trys.pop(); continue;
-                }
-                op = body.call(thisArg, _);
-            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-        }
-    }
-
-    function __exportStar(m, exports) {
-        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
-
-    function __values(o) {
-        var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-        if (m) return m.call(o);
-        if (o && typeof o.length === "number") return {
-            next: function () {
-                if (o && i >= o.length) o = void 0;
-                return { value: o && o[i++], done: !o };
-            }
-        };
-        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-    }
-
-    function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m) return o;
-        var i = m.call(o), r, ar = [], e;
-        try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-        }
-        catch (error) { e = { error: error }; }
-        finally {
-            try {
-                if (r && !r.done && (m = i["return"])) m.call(i);
-            }
-            finally { if (e) throw e.error; }
-        }
-        return ar;
-    }
-
-    function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-            ar = ar.concat(__read(arguments[i]));
-        return ar;
-    }
-
-    function __spreadArrays() {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-        for (var r = Array(s), k = 0, i = 0; i < il; i++)
-            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-                r[k] = a[j];
-        return r;
-    };
-
-    function __await(v) {
-        return this instanceof __await ? (this.v = v, this) : new __await(v);
-    }
-
-    function __asyncGenerator(thisArg, _arguments, generator) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g = generator.apply(thisArg, _arguments || []), i, q = [];
-        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
-        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
-        function fulfill(value) { resume("next", value); }
-        function reject(value) { resume("throw", value); }
-        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
-    }
-
-    function __asyncDelegator(o) {
-        var i, p;
-        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
-    }
-
-    function __asyncValues(o) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var m = o[Symbol.asyncIterator], i;
-        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-    }
-
-    function __makeTemplateObject(cooked, raw) {
-        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-        return cooked;
-    };
-
-    function __importStar(mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-        result.default = mod;
-        return result;
-    }
-
-    function __importDefault(mod) {
-        return (mod && mod.__esModule) ? mod : { default: mod };
-    }
-
-    function __classPrivateFieldGet(receiver, privateMap) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to get private field on non-instance");
-        }
-        return privateMap.get(receiver);
-    }
-
-    function __classPrivateFieldSet(receiver, privateMap, value) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to set private field on non-instance");
-        }
-        privateMap.set(receiver, value);
-        return value;
-    }
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/overlay'), require('@angular/cdk/portal'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/icon'), require('@ptsecurity/cdk/datetime'), require('rxjs'), require('@angular/cdk/bidi'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('@ptsecurity/mosaic/form-field'), require('@angular/animations'), require('@angular/forms'), require('@ptsecurity/mosaic/input')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/datepicker', ['exports', '@angular/cdk/a11y', '@angular/cdk/overlay', '@angular/cdk/portal', '@angular/common', '@angular/core', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/icon', '@ptsecurity/cdk/datetime', 'rxjs', '@angular/cdk/bidi', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/coercion', '@ptsecurity/mosaic/form-field', '@angular/animations', '@angular/forms', '@ptsecurity/mosaic/input'], factory) :
+    (global = global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.datepicker = {}), global.ng.cdk.a11y, global.ng.cdk.overlay, global.ng.cdk.portal, global.ng.common, global.ng.core, global.ptsecurity.mosaic.button, global.ptsecurity.mosaic.icon, global.datetime, global.rxjs, global.ng.cdk.bidi, global.keycodes, global.rxjs.operators, global.ng.cdk.coercion, global.ptsecurity.mosaic['form-field'], global.ng.animations, global.ng.forms, global.ptsecurity.mosaic.input));
+}(this, (function (exports, a11y, overlay, portal, common, core, button, icon, datetime, rxjs, bidi, keycodes, operators, coercion, formField, animations, forms, input) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -500,16 +286,16 @@
         McCalendarBody.decorators = [
             { type: core.Component, args: [{
                         selector: '[mc-calendar-body]',
-                        template: "<!--\n  If there's not enough space in the first row, create a separate label row. We mark this row as\n  aria-hidden because we don't want it to be read out as one of the weeks in the month.\n-->\n<tr *ngIf=\"firstRowOffset < labelMinRequiredCells\" aria-hidden=\"true\">\n    <td class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"numCols\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{label}}\n    </td>\n</tr>\n\n<!-- Create the first row separately so we can include a special spacer cell. -->\n<tr *ngFor=\"let row of rows; let rowIndex = index\" role=\"row\">\n    <!--\n      We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.\n      The aspect ratio of the table cells is maintained by setting the top and bottom padding as a\n      percentage of the width (a variant of the trick described here:\n      https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).\n    -->\n    <td *ngIf=\"rowIndex === 0 && firstRowOffset\"\n        aria-hidden=\"true\"\n        class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"firstRowOffset\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{firstRowOffset >= labelMinRequiredCells ? label : ''}}\n    </td>\n    <td *ngFor=\"let item of row; let colIndex = index\"\n        role=\"gridcell\"\n        class=\"mc-calendar__body-cell\"\n        [ngClass]=\"item.cssClasses\"\n        [tabindex]=\"isActiveCell(rowIndex, colIndex) ? 0 : -1\"\n        [class.mc-calendar__body_disabled]=\"!item.enabled\"\n        [class.mc-calendar__body_active]=\"isActiveCell(rowIndex, colIndex)\"\n        [attr.aria-label]=\"item.ariaLabel\"\n        [attr.aria-disabled]=\"!item.enabled || null\"\n        [attr.aria-selected]=\"selectedValue === item.value\"\n        (click)=\"cellClicked(item)\"\n        [style.width]=\"cellWidth\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        <div class=\"mc-calendar__body-cell-content\"\n             [class.mc-calendar__body_selected]=\"selectedValue === item.value\"\n             [class.mc-calendar__body-today]=\"todayValue === item.value\">\n            {{item.displayValue}}\n        </div>\n    </td>\n</tr>\n",
+                        exportAs: 'mcCalendarBody',
+                        template: "<!--\n  If there's not enough space in the first row, create a separate label row. We mark this row as\n  aria-hidden because we don't want it to be read out as one of the weeks in the month.\n-->\n<tr *ngIf=\"firstRowOffset < labelMinRequiredCells\" aria-hidden=\"true\">\n    <td class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"numCols\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{label}}\n    </td>\n</tr>\n\n<!-- Create the first row separately so we can include a special spacer cell. -->\n<tr *ngFor=\"let row of rows; let rowIndex = index\" role=\"row\">\n    <!--\n      We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.\n      The aspect ratio of the table cells is maintained by setting the top and bottom padding as a\n      percentage of the width (a variant of the trick described here:\n      https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).\n    -->\n    <td *ngIf=\"rowIndex === 0 && firstRowOffset\"\n        aria-hidden=\"true\"\n        class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"firstRowOffset\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{firstRowOffset >= labelMinRequiredCells ? label : ''}}\n    </td>\n    <td *ngFor=\"let item of row; let colIndex = index\"\n        role=\"gridcell\"\n        class=\"mc-calendar__body-cell\"\n        [ngClass]=\"item.cssClasses\"\n        [tabindex]=\"isActiveCell(rowIndex, colIndex) ? 0 : -1\"\n        [class.mc-calendar__body_disabled]=\"!item.enabled\"\n        [class.mc-calendar__body_active]=\"isActiveCell(rowIndex, colIndex)\"\n        [attr.aria-label]=\"item.ariaLabel\"\n        [attr.aria-disabled]=\"!item.enabled || null\"\n        [attr.aria-selected]=\"selectedValue === item.value\"\n        (click)=\"cellClicked(item)\"\n        [style.width]=\"cellWidth\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        <div class=\"mc-calendar__body-cell-content\"\n             [class.mc-selected]=\"selectedValue === item.value\"\n             [class.mc-calendar__body-today]=\"todayValue === item.value\">\n            {{item.displayValue}}\n        </div>\n    </td>\n</tr>\n",
                         host: {
                             class: 'mc-calendar__body',
                             role: 'grid',
                             'aria-readonly': 'true'
                         },
-                        exportAs: 'mcCalendarBody',
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
-                        styles: [".mc-calendar__body{min-width:224px}.mc-calendar__body-label{height:0;line-height:0;text-align:left;padding-left:4.71429%;padding-right:4.71429%}.mc-calendar__body-cell{position:relative;height:0;line-height:0;text-align:center;outline:0;cursor:pointer}.mc-calendar__body_disabled{cursor:default}.mc-calendar__body-cell-content{position:absolute;top:5%;left:5%;padding:8px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:90%;height:90%;line-height:1;border-width:1px;border-style:solid}.cdk-high-contrast-active .mc-calendar__body-cell-content{border:none}.cdk-high-contrast-active :host .mc-calendar__body-cell-content{border:none}mc-month-view .mc-calendar__body-cell-content{justify-content:flex-end}mc-multi-year-view .mc-calendar__body-cell-content,mc-year-view .mc-calendar__body-cell-content{justify-content:center}.cdk-high-contrast-active .mc-calendar__body_selected,.cdk-high-contrast-active .mc-datepicker__popup:not(:empty){outline:solid 1px}.cdk-high-contrast-active .mc-calendar__body-today{outline:dotted 1px}.cdk-high-contrast-active :host .mc-calendar__body_selected,.cdk-high-contrast-active :host .mc-datepicker__popup:not(:empty){outline:solid 1px}.cdk-high-contrast-active :host .mc-calendar__body-today{outline:dotted 1px}[dir=rtl] .mc-calendar__body-label{text-align:right}"]
+                        styles: [".mc-calendar__body{min-width:224px}.mc-calendar__body-label{height:0;line-height:0;text-align:left;padding-left:4.71429%;padding-right:4.71429%}.mc-calendar__body-cell{position:relative;height:0;line-height:0;text-align:center;outline:0;cursor:pointer}.mc-calendar__body_disabled{cursor:default}.mc-calendar__body-cell-content{position:absolute;top:5%;left:5%;padding:8px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:90%;height:90%;line-height:1;border-width:1px;border-style:solid}.cdk-high-contrast-active .mc-calendar__body-cell-content{border:none}.cdk-high-contrast-active :host .mc-calendar__body-cell-content{border:none}mc-month-view .mc-calendar__body-cell-content{justify-content:flex-end}mc-multi-year-view .mc-calendar__body-cell-content,mc-year-view .mc-calendar__body-cell-content{justify-content:center}.cdk-high-contrast-active .mc-datepicker__popup:not(:empty),.cdk-high-contrast-active .mc-selected{outline:solid 1px}.cdk-high-contrast-active .mc-calendar__body-today{outline:dotted 1px}.cdk-high-contrast-active :host .mc-datepicker__popup:not(:empty),.cdk-high-contrast-active :host .mc-selected{outline:solid 1px}.cdk-high-contrast-active :host .mc-calendar__body-today{outline:dotted 1px}[dir=rtl] .mc-calendar__body-label{text-align:right}"]
                     }] }
         ];
         /** @nocollapse */
@@ -1013,8 +799,8 @@
         McMonthView.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-month-view',
-                        template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th *ngFor=\"let day of weekdays\" [attr.aria-label]=\"day.long\">{{day.narrow}}</th>\n    </tr>\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"7\" aria-hidden=\"true\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"monthLabel\"\n           [rows]=\"weeks\"\n           [todayValue]=\"todayDate\"\n           [selectedValue]=\"selectedDate\"\n           [labelMinRequiredCells]=\"3\"\n           [activeCell]=\"dateAdapter.getDate(activeDate) - 1\"\n           (selectedValueChange)=\"dateSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                         exportAs: 'mcMonthView',
+                        template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th *ngFor=\"let day of weekdays\" [attr.aria-label]=\"day.long\">{{day.narrow}}</th>\n    </tr>\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"7\" aria-hidden=\"true\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"monthLabel\"\n           [rows]=\"weeks\"\n           [todayValue]=\"todayDate\"\n           [selectedValue]=\"selectedDate\"\n           [labelMinRequiredCells]=\"3\"\n           [activeCell]=\"dateAdapter.getDate(activeDate) - 1\"\n           (selectedValueChange)=\"dateSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
@@ -1492,8 +1278,8 @@
         McMultiYearView.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-multi-year-view',
-                        template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [rows]=\"years\"\n           [todayValue]=\"todayYear\"\n           [selectedValue]=\"selectedYear\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"getActiveCell()\"\n           (selectedValueChange)=\"onYearSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                         exportAs: 'mcMultiYearView',
+                        template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [rows]=\"years\"\n           [todayValue]=\"todayYear\"\n           [selectedValue]=\"selectedYear\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"getActiveCell()\"\n           (selectedValueChange)=\"onYearSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
@@ -2024,8 +1810,8 @@
         McYearView.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-year-view',
-                        template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"yearLabel\"\n           [rows]=\"months\"\n           [todayValue]=\"todayMonth\"\n           [selectedValue]=\"selectedMonth\"\n           [labelMinRequiredCells]=\"2\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"dateAdapter.getMonth(activeDate)\"\n           (selectedValueChange)=\"onMonthSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                         exportAs: 'mcYearView',
+                        template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"yearLabel\"\n           [rows]=\"months\"\n           [todayValue]=\"todayMonth\"\n           [selectedValue]=\"selectedMonth\"\n           [labelMinRequiredCells]=\"2\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"dateAdapter.getMonth(activeDate)\"\n           (selectedValueChange)=\"onMonthSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush
                     }] }
@@ -2729,11 +2515,11 @@
         McCalendar.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-calendar',
+                        exportAs: 'mcCalendar',
                         template: "<ng-template [cdkPortalOutlet]=\"calendarHeaderPortal\"></ng-template>\n\n<div class=\"mc-calendar__content\" [ngSwitch]=\"currentView\" cdkMonitorSubtreeFocus tabindex=\"-1\">\n    <mc-month-view\n        *ngSwitchCase=\"'month'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        [dateClass]=\"dateClass\"\n        (selectedChange)=\"dateSelected($event)\"\n        (userSelection)=\"userSelected()\">\n    </mc-month-view>\n\n    <mc-year-view\n        *ngSwitchCase=\"'year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (monthSelected)=\"monthSelectedInYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'month')\">\n    </mc-year-view>\n\n    <mc-multi-year-view\n        *ngSwitchCase=\"'multi-year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (yearSelected)=\"yearSelectedInMultiYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'year')\">\n    </mc-multi-year-view>\n</div>\n",
                         host: {
                             class: 'mc-calendar'
                         },
-                        exportAs: 'mcCalendar',
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
                         styles: [".mc-calendar{display:block}.mc-calendar__header{padding:8px 8px 0}.mc-calendar__content{padding:0 8px 8px;outline:0}.mc-calendar__controls{display:flex;margin:5% calc(33% / 7 - 16px)}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__previous-button::after{border-left-width:2px;transform:translateX(2px) rotate(-45deg)}.mc-calendar__next-button::after{border-right-width:2px;transform:translateX(-2px) rotate(45deg)}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;padding:0 0 8px}.mc-calendar__table-header-divider{position:relative;height:1px}.mc-calendar__table-header-divider::after{content:'';position:absolute;top:0;left:-8px;right:-8px;height:1px}"]
@@ -2970,29 +2756,6 @@
         deps: [overlay.Overlay],
         useFactory: MC_DATEPICKER_SCROLL_STRATEGY_FACTORY
     };
-    // Boilerplate for applying mixins to McDatepickerContent.
-    /**
-     * \@docs-private
-     */
-    var   
-    // Boilerplate for applying mixins to McDatepickerContent.
-    /**
-     * \@docs-private
-     */
-    McDatepickerContentBase = /** @class */ (function () {
-        // tslint:disable-next-line:naming-convention
-        function McDatepickerContentBase(_elementRef) {
-            this._elementRef = _elementRef;
-        }
-        return McDatepickerContentBase;
-    }());
-    if (false) {
-        /** @type {?} */
-        McDatepickerContentBase.prototype._elementRef;
-    }
-    // tslint:disable-next-line:naming-convention
-    /** @type {?} */
-    var McDatepickerContentMixinBase = core$1.mixinColor(McDatepickerContentBase);
     /**
      * Component used as the content for the datepicker dialog and popup. We use this instead of using
      * McCalendar directly as the content so we can control the initial focus. This also gives us a
@@ -3001,10 +2764,8 @@
      * \@docs-private
      * @template D
      */
-    var McDatepickerContent = /** @class */ (function (_super) {
-        __extends(McDatepickerContent, _super);
-        function McDatepickerContent(elementRef) {
-            return _super.call(this, elementRef) || this;
+    var McDatepickerContent = /** @class */ (function () {
+        function McDatepickerContent() {
         }
         /**
          * @return {?}
@@ -3018,6 +2779,7 @@
         McDatepickerContent.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-datepicker__content',
+                        exportAs: 'mcDatepickerContent',
                         template: "<mc-calendar [id]=\"datepicker.id\"\n             [ngClass]=\"datepicker.panelClass\"\n             [startAt]=\"datepicker.startAt\"\n             [startView]=\"datepicker.startView\"\n             [minDate]=\"datepicker.minDate\"\n             [maxDate]=\"datepicker.maxDate\"\n             [dateFilter]=\"datepicker.dateFilter\"\n             [headerComponent]=\"datepicker.calendarHeaderComponent\"\n             [selected]=\"datepicker.selected\"\n             [dateClass]=\"datepicker.dateClass\"\n             [@fadeInCalendar]=\"'enter'\"\n             (selectedChange)=\"datepicker.select($event)\"\n             (yearSelected)=\"datepicker.selectYear($event)\"\n             (monthSelected)=\"datepicker.selectMonth($event)\"\n             (userSelection)=\"datepicker.close()\">\n</mc-calendar>\n",
                         host: {
                             class: 'mc-datepicker__content',
@@ -3027,22 +2789,16 @@
                             mcDatepickerAnimations.transformPanel,
                             mcDatepickerAnimations.fadeInCalendar
                         ],
-                        exportAs: 'mcDatepickerContent',
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
-                        inputs: ['color'],
                         styles: [".mc-datepicker__content{display:block;border-width:1px;border-style:solid}.mc-datepicker__content .mc-calendar{width:296px;height:344px}.mc-datepicker__content .mc-calendar__next-button[disabled],.mc-datepicker__content .mc-calendar__previous-button[disabled]{border:0}@media all and (orientation:landscape){.mc-calendar{width:64vh;height:80vh}}@media all and (orientation:portrait){.mc-calendar{width:80vw;height:100vw}}"]
                     }] }
         ];
-        /** @nocollapse */
-        McDatepickerContent.ctorParameters = function () { return [
-            { type: core.ElementRef }
-        ]; };
         McDatepickerContent.propDecorators = {
             calendar: [{ type: core.ViewChild, args: [McCalendar, { static: false },] }]
         };
         return McDatepickerContent;
-    }(McDatepickerContentMixinBase));
+    }());
     if (false) {
         /**
          * Reference to the internal calendar component.
@@ -3054,11 +2810,6 @@
          * @type {?}
          */
         McDatepickerContent.prototype.datepicker;
-        /**
-         * Whether the datepicker is above or below the input.
-         * @type {?}
-         */
-        McDatepickerContent.prototype.isAbove;
     }
     // TODO: We use a component instead of a directive here so the user can use implicit
     // template reference variables (e.g. #d vs #d="mcDatepicker"). We can change this to a directive
@@ -3142,27 +2893,6 @@
              */
             function (value) {
                 this._startAt = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(McDatepicker.prototype, "color", {
-            /** Color palette to use on the datepicker's calendar. */
-            get: /**
-             * Color palette to use on the datepicker's calendar.
-             * @return {?}
-             */
-            function () {
-                // @ts-ignore:next-line
-                return this._color ||
-                    (this.datepickerInput ? this.datepickerInput.getThemePalette() : undefined);
-            },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
-                this._color = value;
             },
             enumerable: true,
             configurable: true
@@ -3461,7 +3191,6 @@
             if (!this.popupRef.hasAttached()) {
                 this.popupComponentRef = this.popupRef.attach(this.calendarPortal);
                 this.popupComponentRef.instance.datepicker = this;
-                this.setColor();
                 // Update the position once the calendar has rendered.
                 this.ngZone.onStable.asObservable().pipe(operators.take(1)).subscribe((/**
                  * @return {?}
@@ -3570,24 +3299,6 @@
         function (obj) {
             return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
         };
-        /** Passes the current theme color along to the calendar overlay. */
-        /**
-         * Passes the current theme color along to the calendar overlay.
-         * @private
-         * @return {?}
-         */
-        McDatepicker.prototype.setColor = /**
-         * Passes the current theme color along to the calendar overlay.
-         * @private
-         * @return {?}
-         */
-        function () {
-            /** @type {?} */
-            var color = this.color;
-            if (this.popupComponentRef) {
-                this.popupComponentRef.instance.color = color;
-            }
-        };
         McDatepicker.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-datepicker',
@@ -3610,7 +3321,6 @@
         ]; };
         McDatepicker.propDecorators = {
             startAt: [{ type: core.Input }],
-            color: [{ type: core.Input }],
             disabled: [{ type: core.Input }],
             opened: [{ type: core.Input }],
             calendarHeaderComponent: [{ type: core.Input }],
@@ -3719,11 +3429,6 @@
          * @private
          */
         McDatepicker.prototype.validSelected;
-        /**
-         * @type {?}
-         * @private
-         */
-        McDatepicker.prototype._color;
         /**
          * A portal containing the calendar for this datepicker.
          * @type {?}
@@ -3851,12 +3556,11 @@
      * @template D
      */
     var McDatepickerInput = /** @class */ (function () {
-        function McDatepickerInput(elementRef, dateAdapter, dateFormats, formField) {
+        function McDatepickerInput(elementRef, dateAdapter, dateFormats) {
             var _this = this;
             this.elementRef = elementRef;
             this.dateAdapter = dateAdapter;
             this.dateFormats = dateFormats;
-            this.formField = formField;
             /**
              * Emits when a `change` event is fired on this `<input>`.
              */
@@ -4258,18 +3962,6 @@
         function () {
             this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
         };
-        /** Returns the palette used by the input's form field, if any. */
-        /**
-         * Returns the palette used by the input's form field, if any.
-         * @return {?}
-         */
-        McDatepickerInput.prototype.getThemePalette = /**
-         * Returns the palette used by the input's form field, if any.
-         * @return {?}
-         */
-        function () {
-            return this.formField ? this.formField.color : undefined;
-        };
         /** Handles blur events on the input. */
         /**
          * Handles blur events on the input.
@@ -4323,6 +4015,7 @@
         McDatepickerInput.decorators = [
             { type: core.Directive, args: [{
                         selector: 'input[mcDatepicker]',
+                        exportAs: 'mcDatepickerInput',
                         providers: [
                             MC_DATEPICKER_VALUE_ACCESSOR,
                             MC_DATEPICKER_VALIDATORS,
@@ -4333,21 +4026,19 @@
                             '[attr.aria-owns]': '(datepicker?.opened && datepicker.id) || null',
                             '[attr.min]': 'min ? dateAdapter.toIso8601(min) : null',
                             '[attr.max]': 'max ? dateAdapter.toIso8601(max) : null',
-                            '[disabled]': 'disabled',
+                            '[attr.disabled]': 'disabled || null',
                             '(input)': 'onInput($event.target.value)',
                             '(change)': 'onChange()',
                             '(blur)': 'onBlur()',
                             '(keydown)': 'onKeydown($event)'
-                        },
-                        exportAs: 'mcDatepickerInput'
+                        }
                     },] }
         ];
         /** @nocollapse */
         McDatepickerInput.ctorParameters = function () { return [
             { type: core.ElementRef },
             { type: datetime.DateAdapter, decorators: [{ type: core.Optional }] },
-            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [datetime.MC_DATE_FORMATS,] }] },
-            { type: formField.McFormField, decorators: [{ type: core.Optional }] }
+            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [datetime.MC_DATE_FORMATS,] }] }
         ]; };
         McDatepickerInput.propDecorators = {
             mcDatepicker: [{ type: core.Input }],
@@ -4473,11 +4164,6 @@
          * @private
          */
         McDatepickerInput.prototype.dateFormats;
-        /**
-         * @type {?}
-         * @private
-         */
-        McDatepickerInput.prototype.formField;
     }
 
     /**
@@ -4502,13 +4188,10 @@
      * @template D
      */
     var McDatepickerToggle = /** @class */ (function () {
-        function McDatepickerToggle(intl, changeDetectorRef, defaultTabIndex) {
+        function McDatepickerToggle(intl, changeDetectorRef) {
             this.intl = intl;
             this.changeDetectorRef = changeDetectorRef;
             this.stateChanges = rxjs.Subscription.EMPTY;
-            /** @type {?} */
-            var parsedTabIndex = Number(defaultTabIndex);
-            this.tabIndex = (parsedTabIndex || parsedTabIndex === 0) ? parsedTabIndex : null;
         }
         Object.defineProperty(McDatepickerToggle.prototype, "disabled", {
             /** Whether the toggle button is disabled. */
@@ -4602,15 +4285,10 @@
         McDatepickerToggle.decorators = [
             { type: core.Component, args: [{
                         selector: 'mc-datepicker-toggle',
-                        template: "<button\n    #button\n    mc-button\n    type=\"button\"\n    class=\"mc-datepicker-toggle__button\"\n    aria-haspopup=\"true\"\n    [attr.aria-label]=\"intl.openCalendarLabel\"\n    [attr.tabindex]=\"disabled ? -1 : tabIndex\"\n    [disabled]=\"disabled\"\n    (click)=\"open($event)\">\n\n    <i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i>\n\n    <ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content>\n</button>\n",
+                        template: "<button\n    #button\n    mc-button\n    type=\"button\"\n    class=\"mc-datepicker-toggle__button\"\n    aria-haspopup=\"true\"\n    [attr.aria-label]=\"intl.openCalendarLabel\"\n    [attr.tabindex]=\"tabIndex\"\n    [disabled]=\"disabled\"\n    (click)=\"open($event)\">\n\n    <i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i>\n\n    <ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content>\n</button>\n",
                         host: {
                             class: 'mc-datepicker-toggle',
-                            // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the
-                            // consumer may have provided, while still being able to receive focus.
-                            '[attr.tabindex]': '-1',
-                            '[class.mc-datepicker-toggle_active]': 'datepicker && datepicker.opened',
-                            '[class.mc-warn]': 'datepicker && datepicker.color === "error"',
-                            '(focus)': 'button.focus()'
+                            '[class.mc-active]': 'datepicker && datepicker.opened'
                         },
                         exportAs: 'mcDatepickerToggle',
                         encapsulation: core.ViewEncapsulation.None,
@@ -4621,8 +4299,7 @@
         /** @nocollapse */
         McDatepickerToggle.ctorParameters = function () { return [
             { type: McDatepickerIntl },
-            { type: core.ChangeDetectorRef },
-            { type: String, decorators: [{ type: core.Attribute, args: ['tabindex',] }] }
+            { type: core.ChangeDetectorRef }
         ]; };
         McDatepickerToggle.propDecorators = {
             disabled: [{ type: core.Input }],
@@ -4742,8 +4419,6 @@
     exports.McCalendarHeader = McCalendarHeader;
     exports.McDatepicker = McDatepicker;
     exports.McDatepickerContent = McDatepickerContent;
-    exports.McDatepickerContentBase = McDatepickerContentBase;
-    exports.McDatepickerContentMixinBase = McDatepickerContentMixinBase;
     exports.McDatepickerInput = McDatepickerInput;
     exports.McDatepickerInputEvent = McDatepickerInputEvent;
     exports.McDatepickerIntl = McDatepickerIntl;

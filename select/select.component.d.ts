@@ -15,15 +15,6 @@ export declare class McSelectChange {
     value: any;
     constructor(source: McSelect, value: any);
 }
-export declare class McSelectBase {
-    elementRef: ElementRef;
-    defaultErrorStateMatcher: ErrorStateMatcher;
-    parentForm: NgForm;
-    parentFormGroup: FormGroupDirective;
-    ngControl: NgControl;
-    constructor(elementRef: ElementRef, defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
-}
-declare const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor & typeof McSelectBase;
 export declare class McSelectSearch implements AfterContentInit, OnDestroy {
     input: McInput;
     searchChangesSubscription: Subscription;
@@ -39,6 +30,15 @@ export declare class McSelectSearchEmptyResult {
 }
 export declare class McSelectTrigger {
 }
+export declare class McSelectBase {
+    elementRef: ElementRef;
+    defaultErrorStateMatcher: ErrorStateMatcher;
+    parentForm: NgForm;
+    parentFormGroup: FormGroupDirective;
+    ngControl: NgControl;
+    constructor(elementRef: ElementRef, defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
+}
+declare const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor & typeof McSelectBase;
 export declare class McSelect extends McSelectMixinBase implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable, HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
     private readonly _viewportRuler;
     private readonly _changeDetectorRef;
@@ -155,10 +155,6 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private _id;
     /** Whether the select is focused. */
     get focused(): boolean;
-    /**
-     * @deprecated Setter to be removed as this property is intended to be readonly.
-     * @breaking-change 8.0.0
-     */
     set focused(value: boolean);
     private _focused;
     get panelOpen(): boolean;
@@ -171,7 +167,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private readonly uid;
     /** Emits whenever the component is destroyed. */
     private readonly destroy;
-    constructor(_viewportRuler: ViewportRuler, _changeDetectorRef: ChangeDetectorRef, _ngZone: NgZone, _renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, elementRef: ElementRef, rawValidators: Validator[], _dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, _parentFormField: McFormField, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName, tabIndex: string, _scrollStrategyFactory: any, mcValidation: McValidationOptions);
+    constructor(_viewportRuler: ViewportRuler, _changeDetectorRef: ChangeDetectorRef, _ngZone: NgZone, _renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, elementRef: ElementRef, rawValidators: Validator[], _dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, _parentFormField: McFormField, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName, _scrollStrategyFactory: any, mcValidation: McValidationOptions);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngAfterViewInit(): void;

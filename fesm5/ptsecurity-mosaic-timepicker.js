@@ -1099,8 +1099,8 @@ var McTimepicker = /** @class */ (function (_super) {
                         // the native input element. Otherwise property bindings for those don't work.
                         '[attr.id]': 'id',
                         '[attr.placeholder]': 'placeholder',
-                        '[disabled]': 'disabled',
-                        '[required]': 'required',
+                        '[attr.disabled]': 'disabled || null',
+                        '[attr.required]': 'required',
                         '[attr.time-format]': 'timeFormat',
                         '[attr.min-time]': 'minTime',
                         '[attr.max-time]': 'maxTime',
@@ -1112,15 +1112,12 @@ var McTimepicker = /** @class */ (function (_super) {
                         '(paste)': 'onPaste($event)',
                         '(keydown)': 'onKeyDown($event)'
                     },
-                    providers: [
-                        {
-                            provide: McFormFieldControl,
-                            useExisting: forwardRef((/**
+                    providers: [{
+                            provide: McFormFieldControl, useExisting: forwardRef((/**
                              * @return {?}
                              */
                             function () { return McTimepicker; }))
-                        }
-                    ]
+                        }]
                 },] }
     ];
     /** @nocollapse */

@@ -276,14 +276,13 @@
     }
     // tslint:disable-next-line:naming-convention
     /** @type {?} */
-    var McNavbarMixinBase = core$1.mixinDisabled(McNavbarItemBase);
+    var McNavbarMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McNavbarItemBase));
     var McNavbarItem = /** @class */ (function (_super) {
         __extends(McNavbarItem, _super);
         function McNavbarItem(elementRef, _focusMonitor) {
             var _this = _super.call(this, elementRef) || this;
             _this.elementRef = elementRef;
             _this._focusMonitor = _focusMonitor;
-            _this.tabIndex = 0;
             return _this;
         }
         Object.defineProperty(McNavbarItem.prototype, "collapsedTitle", {
@@ -357,11 +356,11 @@
                         selector: 'mc-navbar-item',
                         template: "<ng-content></ng-content>",
                         encapsulation: core.ViewEncapsulation.None,
-                        inputs: ['disabled'],
+                        inputs: ['disabled', 'tabIndex'],
                         host: {
-                            '[attr.tabIndex]': 'disabled ? -1 : tabIndex',
-                            '[attr.disabled]': 'disabled || null',
-                            class: 'mc-navbar-item'
+                            class: 'mc-navbar-item',
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null'
                         }
                     }] }
         ];
@@ -371,14 +370,11 @@
             { type: a11y.FocusMonitor }
         ]; };
         McNavbarItem.propDecorators = {
-            tabIndex: [{ type: core.Input }],
             collapsedTitle: [{ type: core.Input }]
         };
         return McNavbarItem;
     }(McNavbarMixinBase));
     if (false) {
-        /** @type {?} */
-        McNavbarItem.prototype.tabIndex;
         /** @type {?} */
         McNavbarItem.prototype.elementRef;
         /**
@@ -391,24 +387,17 @@
         function McNavbarContainer() {
             this.position = 'left';
         }
-        Object.defineProperty(McNavbarContainer.prototype, "cssClasses", {
-            get: /**
-             * @return {?}
-             */
-            function () {
-                return this.position === 'left' ? 'mc-navbar-left' : 'mc-navbar-right';
-            },
-            enumerable: true,
-            configurable: true
-        });
         McNavbarContainer.decorators = [
             { type: core.Directive, args: [{
-                        selector: 'mc-navbar-container'
+                        selector: 'mc-navbar-container',
+                        host: {
+                            '[class.mc-navbar-left]': 'this.position === "left"',
+                            '[class.mc-navbar-right]': 'this.position !== "left"'
+                        }
                     },] }
         ];
         McNavbarContainer.propDecorators = {
-            position: [{ type: core.Input }],
-            cssClasses: [{ type: core.HostBinding, args: ['class',] }]
+            position: [{ type: core.Input }]
         };
         return McNavbarContainer;
     }());

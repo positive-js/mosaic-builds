@@ -1306,8 +1306,8 @@
                             // the native input element. Otherwise property bindings for those don't work.
                             '[attr.id]': 'id',
                             '[attr.placeholder]': 'placeholder',
-                            '[disabled]': 'disabled',
-                            '[required]': 'required',
+                            '[attr.disabled]': 'disabled || null',
+                            '[attr.required]': 'required',
                             '[attr.time-format]': 'timeFormat',
                             '[attr.min-time]': 'minTime',
                             '[attr.max-time]': 'maxTime',
@@ -1319,15 +1319,12 @@
                             '(paste)': 'onPaste($event)',
                             '(keydown)': 'onKeyDown($event)'
                         },
-                        providers: [
-                            {
-                                provide: formField.McFormFieldControl,
-                                useExisting: core.forwardRef((/**
+                        providers: [{
+                                provide: formField.McFormFieldControl, useExisting: core.forwardRef((/**
                                  * @return {?}
                                  */
                                 function () { return McTimepicker; }))
-                            }
-                        ]
+                            }]
                     },] }
         ];
         /** @nocollapse */

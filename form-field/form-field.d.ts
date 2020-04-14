@@ -25,6 +25,14 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     labelId: string;
     hovered: boolean;
     canCleanerClearByEsc: boolean;
+    get hasHint(): boolean;
+    get hasSuffix(): boolean;
+    get hasPrefix(): boolean;
+    get hasCleaner(): boolean;
+    get hasStepper(): boolean;
+    get canShowCleaner(): boolean;
+    get disabled(): boolean;
+    get canShowStepper(): boolean;
     constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef);
     ngAfterContentInit(): void;
     ngAfterContentChecked(): void;
@@ -42,14 +50,6 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     shouldForward(prop: keyof NgControl): boolean;
     /** Throws an error if the form field's control is missing. */
     protected validateControlChild(): void;
-    get hasHint(): boolean;
-    get hasSuffix(): boolean;
-    get hasPrefix(): boolean;
-    get hasCleaner(): boolean;
-    get hasStepper(): boolean;
-    get canShowCleaner(): boolean;
-    get disabled(): boolean;
-    get canShowStepper(): boolean;
 }
 export declare class McFormFieldWithoutBorders {
 }

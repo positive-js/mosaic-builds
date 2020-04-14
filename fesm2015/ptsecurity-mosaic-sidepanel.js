@@ -254,10 +254,10 @@ McSidepanelContainerComponent.decorators = [
                 animations: [mcSidepanelAnimations.sidepanelState],
                 host: {
                     class: 'mc-sidepanel-container',
-                    tabindex: '-1',
                     role: 'dialog',
                     'aria-modal': 'true',
                     '[attr.id]': 'id',
+                    '[attr.tabindex]': '-1',
                     '[@state]': `{
             value: animationState,
             params: animationTransform

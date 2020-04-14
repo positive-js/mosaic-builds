@@ -29,7 +29,7 @@ if (false) {
 }
 // tslint:disable-next-line:naming-convention
 /** @type {?} */
-const McProgressBarMixinBase = mixinColor(McProgressBarBase);
+const McProgressBarMixinBase = mixinColor(McProgressBarBase, ThemePalette.Primary);
 class McProgressBar extends McProgressBarMixinBase {
     /**
      * @param {?} elementRef
@@ -39,7 +39,6 @@ class McProgressBar extends McProgressBarMixinBase {
         this.id = `mc-progress-bar-${idIterator++}`;
         this.value = 0;
         this.mode = 'determinate';
-        this.color = ThemePalette.Primary;
     }
     /**
      * @return {?}
@@ -54,6 +53,7 @@ McProgressBar.decorators = [
                 template: "\n<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\">\n    <div\n        *ngSwitchCase=\"'indeterminate'\"\n        class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\">\n    </div>\n    <div\n        *ngSwitchDefault\n        class=\"mc-progress-bar__line mc-progress-bar__line--determinate\"\n        [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\">\n    </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 encapsulation: ViewEncapsulation.None,
+                inputs: ['color'],
                 host: {
                     class: 'mc-progress-bar',
                     '[attr.id]': 'id'
@@ -68,8 +68,7 @@ McProgressBar.ctorParameters = () => [
 McProgressBar.propDecorators = {
     id: [{ type: Input }],
     value: [{ type: Input }],
-    mode: [{ type: Input }],
-    color: [{ type: Input }]
+    mode: [{ type: Input }]
 };
 if (false) {
     /** @type {?} */
@@ -78,8 +77,6 @@ if (false) {
     McProgressBar.prototype.value;
     /** @type {?} */
     McProgressBar.prototype.mode;
-    /** @type {?} */
-    McProgressBar.prototype.color;
 }
 
 /**

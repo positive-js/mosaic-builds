@@ -263,7 +263,7 @@
     }
     // tslint:disable-next-line:naming-convention
     /** @type {?} */
-    var McVerticalNavbarMixinBase = core$1.mixinDisabled(McVerticalNavbarItemBase);
+    var McVerticalNavbarMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McVerticalNavbarItemBase));
     var McVerticalNavbarItem = /** @class */ (function (_super) {
         __extends(McVerticalNavbarItem, _super);
         function McVerticalNavbarItem(element, focusMonitor, trigger) {
@@ -271,7 +271,6 @@
             _this.element = element;
             _this.focusMonitor = focusMonitor;
             _this.trigger = trigger;
-            _this.tabIndex = 0;
             _this.focusMonitor.monitor(_this.element.nativeElement).subscribe();
             return _this;
         }
@@ -300,11 +299,11 @@
                         template: "<div class=\"mc-vertical-navbar__item\">\n    <ng-content></ng-content>\n    <i *ngIf=\"hasDropdownAttached\" mc-icon=\"mc-angle-right-M_16\" class=\"mc-vertical-navbar__item-dropdown-icon\"></i>\n</div>\n",
                         encapsulation: core.ViewEncapsulation.None,
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
-                        inputs: ['disabled'],
+                        inputs: ['disabled', 'tabIndex'],
                         host: {
                             class: 'mc-vertical-navbar-item',
                             '[attr.disabled]': 'disabled || null',
-                            '[attr.tabindex]': 'disabled ? -1 : 0'
+                            '[attr.tabindex]': 'tabIndex'
                         },
                         styles: [".mc-vertical-navbar__badge{position:absolute;width:64px;top:0;left:0}.mc-vertical-navbar__badge .mc-badge{position:absolute;right:4px;top:4px}.mc-vertical-navbar__item-icon{margin-right:16px}.mc-vertical-navbar__item-icon .mc-icon{font-size:32px}.mc-vertical-navbar__title{white-space:nowrap}.mc-vertical-navbar__item-dropdown-icon{margin-left:auto;padding-left:16px}a[mc-vertical-navbar-item],mc-vertical-navbar-item{height:64px;margin:1px 0;width:100%;position:relative;display:flex;align-items:center;box-sizing:border-box;cursor:pointer;text-decoration:none}a[mc-vertical-navbar-item] .mc-vertical-navbar__item,mc-vertical-navbar-item .mc-vertical-navbar__item{padding-left:16px;padding-right:16px;display:flex;align-items:center;width:100%;height:100%}a[mc-vertical-navbar-item].mc-progress,mc-vertical-navbar-item.mc-progress{cursor:pointer}a[mc-vertical-navbar-item].mc-vertical-navbar__item_active,mc-vertical-navbar-item.mc-vertical-navbar__item_active{cursor:default}a[mc-vertical-navbar-item][disabled],mc-vertical-navbar-item[disabled]{cursor:default;pointer-events:none}"]
                     }] }
@@ -315,14 +314,9 @@
             { type: a11y.FocusMonitor },
             { type: dropdown.McDropdownTrigger, decorators: [{ type: core.Optional }, { type: core.Self }] }
         ]; };
-        McVerticalNavbarItem.propDecorators = {
-            tabIndex: [{ type: core.Input }]
-        };
         return McVerticalNavbarItem;
     }(McVerticalNavbarMixinBase));
     if (false) {
-        /** @type {?} */
-        McVerticalNavbarItem.prototype.tabIndex;
         /**
          * @type {?}
          * @private

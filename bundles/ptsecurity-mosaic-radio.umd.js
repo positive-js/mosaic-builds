@@ -261,10 +261,16 @@
      * \@docs-private
      */
     McRadioGroupBase = /** @class */ (function () {
-        function McRadioGroupBase() {
+        // tslint:disable-next-line:naming-convention
+        function McRadioGroupBase(_elementRef) {
+            this._elementRef = _elementRef;
         }
         return McRadioGroupBase;
     }());
+    if (false) {
+        /** @type {?} */
+        McRadioGroupBase.prototype._elementRef;
+    }
     // tslint:disable-next-line:naming-convention
     /** @type {?} */
     var McRadioGroupMixinBase = core$1.mixinDisabled(McRadioGroupBase);
@@ -284,8 +290,8 @@
     };
     var McRadioGroup = /** @class */ (function (_super) {
         __extends(McRadioGroup, _super);
-        function McRadioGroup(_changeDetector) {
-            var _this = _super.call(this) || this;
+        function McRadioGroup(elementRef, _changeDetector) {
+            var _this = _super.call(this, elementRef) || this;
             _this._changeDetector = _changeDetector;
             /**
              * Event emitted when the group value changes.
@@ -666,16 +672,16 @@
             { type: core.Directive, args: [{
                         selector: 'mc-radio-group',
                         exportAs: 'mcRadioGroup',
-                        providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR],
                         host: {
                             role: 'radiogroup',
                             class: 'mc-radio-group'
                         },
-                        inputs: ['disabled']
+                        providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR]
                     },] }
         ];
         /** @nocollapse */
         McRadioGroup.ctorParameters = function () { return [
+            { type: core.ElementRef },
             { type: core.ChangeDetectorRef }
         ]; };
         McRadioGroup.propDecorators = {
@@ -1120,7 +1126,7 @@
                         host: {
                             class: 'mc-radio-button',
                             '[attr.id]': 'id',
-                            '[class.mc-checked]': 'checked',
+                            '[class.mc-selected]': 'checked',
                             '[class.mc-disabled]': 'disabled'
                         },
                         styles: [".mc-radio-button{display:inline-block}.mc-radio-label{display:inline-flex;align-items:center;vertical-align:middle;cursor:pointer;white-space:nowrap;width:100%}.mc-radio-label-content{display:inline-block;position:relative;order:0;line-height:inherit;padding-left:26px;padding-right:0}.mc-radio-label-content .mc-radio-button__inner-circle,.mc-radio-label-content .mc-radio-button__outer-circle{box-sizing:content-box;position:absolute;content:'';border-style:solid;border-radius:50%}.mc-radio-label-content .mc-radio-button__outer-circle{left:0;top:calc(50% - 8px);width:14px;height:14px;border-width:1px}.mc-radio-label-content .mc-radio-button__inner-circle{display:none;left:1px;top:calc(50% - 7px);width:6px;height:6px;border-width:4px}[dir=rtl] .mc-radio-label-content{padding-right:26px;padding-left:0}.mc-radio-input{position:absolute;outline:0;opacity:0}"]

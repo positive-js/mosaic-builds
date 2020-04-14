@@ -456,7 +456,7 @@
     }());
     // tslint:disable-next-line:naming-convention
     /** @type {?} */
-    var McDropdownItemMixinBase = core$1.mixinDisabled(McDropdownItemBase);
+    var McDropdownItemMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McDropdownItemBase));
     /**
      * This directive is intended to be used inside an mc-dropdown tag.
      * It exists mostly to set the role attribute.
@@ -531,18 +531,6 @@
             }
             this.hovered.complete();
         };
-        /** Used to set the `tabindex`. */
-        /**
-         * Used to set the `tabindex`.
-         * @return {?}
-         */
-        McDropdownItem.prototype.getTabIndex = /**
-         * Used to set the `tabindex`.
-         * @return {?}
-         */
-        function () {
-            return this.disabled ? '-1' : '0';
-        };
         /** Returns the host DOM element. */
         /**
          * Returns the host DOM element.
@@ -561,7 +549,7 @@
          * @param {?} event
          * @return {?}
          */
-        McDropdownItem.prototype.checkDisabled = /**
+        McDropdownItem.prototype.haltDisabledEvents = /**
          * Prevents the default element actions if it is disabled.
          * @param {?} event
          * @return {?}
@@ -619,14 +607,14 @@
             { type: core.Component, args: [{
                         selector: 'mc-dropdown-item, [mc-dropdown-item]',
                         exportAs: 'mcDropdownItem',
-                        inputs: ['disabled'],
+                        inputs: ['disabled', 'tabIndex'],
                         host: {
                             class: 'mc-dropdown__item',
                             '[class.mc-dropdown__item_highlighted]': 'highlighted',
-                            '[attr.role]': 'role',
-                            '[attr.tabindex]': 'getTabIndex()',
                             '[class.mc-disabled]': 'disabled',
-                            '(click)': 'checkDisabled($event)',
+                            '[attr.role]': 'role',
+                            '[attr.tabindex]': 'tabIndex',
+                            '(click)': 'haltDisabledEvents($event)',
                             '(mouseenter)': 'handleMouseEnter()'
                         },
                         changeDetection: core.ChangeDetectionStrategy.OnPush,
@@ -1041,7 +1029,9 @@
          */
         function () {
             var _this = this;
-            this.keyManager = new a11y$1.FocusKeyManager(this.items).withWrap().withTypeAhead();
+            this.keyManager = new a11y$1.FocusKeyManager(this.items)
+                .withWrap()
+                .withTypeAhead();
             this.tabSubscription = this.keyManager.tabOut.subscribe((/**
              * @return {?}
              */

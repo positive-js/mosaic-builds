@@ -164,8 +164,8 @@ var McTreeNodeToggleComponent = /** @class */ (function (_super) {
                     host: {
                         class: 'mc-tree-node-toggle',
                         '(click)': 'toggle($event)',
-                        '[class.mc-disabled]': 'disabled',
-                        '[class.mc-opened]': 'iconState'
+                        '[class.mc-opened]': 'iconState',
+                        '[attr.disabled]': 'disabled || null'
                     },
                     encapsulation: ViewEncapsulation.None,
                     providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleComponent }]
@@ -213,7 +213,7 @@ var McTreeNodeToggleDirective = /** @class */ (function (_super) {
                     selector: '[mcTreeNodeToggle]',
                     host: {
                         '(click)': 'toggle($event)',
-                        '[class.mc-disabled]': 'disabled'
+                        '[attr.disabled]': 'disabled || null'
                     },
                     providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]
                 },] }
@@ -718,7 +718,7 @@ if (false) {
  */
 var McTreeSelection = /** @class */ (function (_super) {
     __extends(McTreeSelection, _super);
-    function McTreeSelection(elementRef, differs, changeDetectorRef, tabIndex, multiple) {
+    function McTreeSelection(elementRef, differs, changeDetectorRef, multiple) {
         var _this = _super.call(this, differs, changeDetectorRef) || this;
         _this.elementRef = elementRef;
         _this.resetFocusedItemOnBlur = true;
@@ -745,7 +745,6 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function () { });
-        _this.tabIndex = parseInt(tabIndex) || 0;
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
             _this.multipleMode = multiple;
         }
@@ -759,6 +758,23 @@ var McTreeSelection = /** @class */ (function (_super) {
         _this.selectionModel = new SelectionModel(_this.multiple);
         return _this;
     }
+    Object.defineProperty(McTreeSelection.prototype, "autoSelect", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._autoSelect;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._autoSelect = coerceBooleanProperty(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McTreeSelection.prototype, "optionFocusChanges", {
         get: /**
          * @return {?}
@@ -793,23 +809,6 @@ var McTreeSelection = /** @class */ (function (_super) {
          */
         function () {
             return !!this.multipleMode;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McTreeSelection.prototype, "autoSelect", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            return this._autoSelect;
-        },
-        set: /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
-            this._autoSelect = coerceBooleanProperty(value);
         },
         enumerable: true,
         configurable: true
@@ -858,7 +857,7 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function () {
-            return this._tabIndex;
+            return this.disabled ? -1 : this._tabIndex;
         },
         set: /**
          * @param {?} value
@@ -1603,6 +1602,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                     host: {
                         class: 'mc-tree-selection',
                         '[attr.tabindex]': 'tabIndex',
+                        '[attr.disabled]': 'disabled || null',
                         '(blur)': 'blur()',
                         '(focus)': 'focus($event)',
                         '(keydown)': 'onKeyDown($event)',
@@ -1615,7 +1615,7 @@ var McTreeSelection = /** @class */ (function (_super) {
                         { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
                         { provide: CdkTree, useExisting: McTreeSelection }
                     ],
-                    styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle.mc-disabled{cursor:default}"]
+                    styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;height:28px;word-wrap:break-word;border:2px solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:0}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px;cursor:pointer}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}"]
                 }] }
     ];
     /** @nocollapse */
@@ -1623,8 +1623,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         { type: ElementRef },
         { type: IterableDiffers },
         { type: ChangeDetectorRef },
-        { type: String, decorators: [{ type: Attribute, args: ['tabindex',] }] },
-        { type: String, decorators: [{ type: Attribute, args: ['multiple',] }] }
+        { type: MultipleMode, decorators: [{ type: Attribute, args: ['multiple',] }] }
     ]; };
     McTreeSelection.propDecorators = {
         nodeOutlet: [{ type: ViewChild, args: [CdkTreeNodeOutlet, { static: true },] }],
