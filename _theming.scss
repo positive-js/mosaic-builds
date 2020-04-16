@@ -625,9 +625,10 @@ $mc-dark-theme-background: (
     $popup-common: (
         shadow: 0 3px 3px 0 mc-color($second, A200),
         border-color: mc-color($second),
-        background: white,
+        divider-color: mc-color($second, 200),
 
-        footer_background-color: map-get($second, 60)
+        background: map-get($background, background-popup),
+        footer_background-color: map-get($background, background-popup-footer)
     );
 
     $button: (
@@ -691,10 +692,7 @@ $mc-dark-theme-background: (
     );
 
     $popover: (
-        background-color: map-get($background, background),
-        border-color: map-get($foreground, text-disabled),
-
-        footer_background-color: map-get($background, background-disabled),
+        border-color: map-get($foreground, border),
     );
 
     $progress-bar: (
@@ -812,9 +810,10 @@ $mc-dark-theme-background: (
     $popup-common: (
         shadow: 0 3px 3px 0 mc-color($second, A200),
         border-color: mc-color($second),
-        background: map-get($mc-grey, 700),
+        divider-color: mc-color($foreground, divider),
 
-        footer_background-color: transparent,
+        background: map-get($background, background-popup),
+        footer_background-color: map-get($background, background-popup-footer)
     );
 
     $button: (
@@ -880,10 +879,7 @@ $mc-dark-theme-background: (
     );
 
     $popover: (
-        background-color: map-get($background, background),
-        border-color: map-get($background, background),
-
-        footer_background-color: map-get($background, background-disabled),
+        border-color: mc-color($second, 700),
     );
 
     $progress-bar: (
@@ -2418,17 +2414,18 @@ $mc-datepicker-today-fade-amount: 0.2;
 
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
+    $is-dark: map-get($theme, is-dark);
 
     $popup-common: map-get(map-get($theme, components), popup-common);
     $footer_background-color: map-get($popup-common, footer_background-color);
 
     $modal: map-get(map-get($theme, components), modal);
 
-    $divider-color: mc-color($foreground, divider);
+    $divider-color: mc-color($popup-common, divider-color);
 
     .mc-modal {
         .mc-modal-content {
-            // почему у модалки такой бэкграунд ?
+            // У модалки должен быть фон background. Чтобы поповеры и дропдауны было видно поверх модалки
             background-color: map-get($background, background);
 
             box-shadow: map-get($modal, shadow);
@@ -2443,7 +2440,7 @@ $mc-datepicker-today-fade-amount: 0.2;
         }
 
         .mc-modal-footer {
-            border-top: 1px solid $divider-color;
+            border-top: 1px solid if($is-dark, $divider-color, transparent);
             background-color: $footer_background-color;
         }
 
@@ -2464,7 +2461,7 @@ $mc-datepicker-today-fade-amount: 0.2;
 
     .mc-confirm {
         .mc-confirm-btns {
-            border-top: 1px solid $divider-color;
+            border-top: 1px solid if($is-dark, $divider-color, transparent);
             background-color: $footer_background-color;
         }
     }
@@ -2560,12 +2557,15 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 @mixin mc-popover-theme($theme) {
     $foreground: map-get($theme, foreground);
+    $is-dark: map-get($theme, is-dark);
 
+    $popup-common: map-get(map-get($theme, components), popup-common);
     $popover: map-get(map-get($theme, components), popover);
 
-    $background-color: map-get($popover, background-color);
-    $footer_background-color: map-get($popover, footer_background-color);
+    $background-color: map-get($popup-common, background);
+    $footer_background-color: if($is-dark, $background-color, map-get($popup-common, footer_background-color));
     $border-color: map-get($popover, border-color);
+    $divider-color: map-get($popup-common, divider-color);
 
     .mc-popover {
         border-color: $border-color;
@@ -2578,7 +2578,7 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-popover__header {
-        border-bottom-color: map-get($foreground, divider);
+        border-bottom-color: $divider-color;
     }
 
     .mc-popover__header,
@@ -2588,7 +2588,7 @@ $mc-datepicker-today-fade-amount: 0.2;
 
     .mc-popover__footer {
         background-color: $footer_background-color;
-        border-top-color: map-get($foreground, divider);
+        border-top-color: if($is-dark, $divider-color, transparent);
     }
 
     .mc-popover .mc-popover__arrow {
@@ -2808,12 +2808,13 @@ $mc-datepicker-today-fade-amount: 0.2;
 @mixin mc-sidepanel-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
-
-    $divider-color: mc-color($foreground, divider);
+    $is-dark: map-get($theme, is-dark);
 
     $popup-common: map-get(map-get($theme, components), popup-common);
 
     $sidepanel: map-get(map-get($theme, components), sidepanel);
+
+    $divider-color: mc-color($popup-common, divider-color);
 
     .mc-sidepanel-content {
         background-color: map-get($background, background);
@@ -2858,7 +2859,7 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-sidepanel-footer {
-        border-top: 1px solid $divider-color;
+        border-top: 1px solid  if($is-dark, $divider-color, transparent);
         background-color: map-get($popup-common, footer_background-color);
     }
 }
