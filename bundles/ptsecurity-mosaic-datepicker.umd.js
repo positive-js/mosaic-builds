@@ -78,7 +78,7 @@
         McDatepickerIntl.decorators = [
             { type: core.Injectable, args: [{ providedIn: 'root' },] }
         ];
-        /** @nocollapse */ McDatepickerIntl.ɵprov = core["ɵɵdefineInjectable"]({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
+        /** @nocollapse */ McDatepickerIntl.ɵprov = core.ɵɵdefineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
         return McDatepickerIntl;
     }());
     if (false) {

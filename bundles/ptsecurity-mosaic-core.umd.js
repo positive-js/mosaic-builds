@@ -852,7 +852,7 @@
         ErrorStateMatcher.decorators = [
             { type: core.Injectable, args: [{ providedIn: 'root' },] }
         ];
-        /** @nocollapse */ ErrorStateMatcher.ɵprov = core["ɵɵdefineInjectable"]({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+        /** @nocollapse */ ErrorStateMatcher.ɵprov = core.ɵɵdefineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
         return ErrorStateMatcher;
     }());
 
@@ -1042,7 +1042,7 @@
         McDecimalPipe.ctorParameters = function () { return [
             { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [MC_LOCALE_ID,] }] }
         ]; };
-        /** @nocollapse */ McDecimalPipe.ɵprov = core["ɵɵdefineInjectable"]({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(core["ɵɵinject"](MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
+        /** @nocollapse */ McDecimalPipe.ɵprov = core.ɵɵdefineInjectable({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(core.ɵɵinject(MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
         return McDecimalPipe;
     }());
     if (false) {
@@ -1795,7 +1795,7 @@
         McMeasureScrollbarService.ctorParameters = function () { return [
             { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
         ]; };
-        /** @nocollapse */ McMeasureScrollbarService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core["ɵɵinject"](common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
+        /** @nocollapse */ McMeasureScrollbarService.ɵprov = core.ɵɵdefineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(core.ɵɵinject(common.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
         return McMeasureScrollbarService;
     }());
     if (false) {
