@@ -1,0 +1,21 @@
+{
+    "extends": "../../../tsconfig.json",
+    "compilerOptions": {
+        "rootDir": ".",
+        "resolveJsonModule": true,
+        "downlevelIteration": true,
+        "target": "es6",
+        "types": [
+            "node",
+            "jasmine"
+        ]
+    },
+    "files": [
+        "./collection.json",
+        "./migration.json"
+    ],
+    "include": [
+        "**/*.ts",
+        "**/*.json"
+    ]
+}

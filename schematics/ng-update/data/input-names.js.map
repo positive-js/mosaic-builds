@@ -1,0 +1,1 @@
+{"version":3,"file":"input-names.js","sourceRoot":"","sources":["../../../../../packages/mosaic/schematics/ng-update/data/input-names.ts"],"names":[],"mappings":";;AAGa,QAAA,UAAU,GAAyC,EAE/D,CAAC","sourcesContent":["import { InputNameUpgradeData, VersionChanges } from '@angular/cdk/schematics';\n\n\nexport const inputNames: VersionChanges<InputNameUpgradeData> = {\n\n};\n"]}

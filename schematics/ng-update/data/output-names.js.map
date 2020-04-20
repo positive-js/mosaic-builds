@@ -1,0 +1,1 @@
+{"version":3,"file":"output-names.js","sourceRoot":"","sources":["../../../../../packages/mosaic/schematics/ng-update/data/output-names.ts"],"names":[],"mappings":";;AAGa,QAAA,WAAW,GAA0C,EAEjE,CAAC","sourcesContent":["import { OutputNameUpgradeData, VersionChanges } from '@angular/cdk/schematics';\n\n\nexport const outputNames: VersionChanges<OutputNameUpgradeData> = {\n\n};\n"]}
