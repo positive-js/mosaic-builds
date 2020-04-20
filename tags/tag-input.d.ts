@@ -54,13 +54,12 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     private inputElement;
     constructor(elementRef: ElementRef<HTMLInputElement>, renderer: Renderer2, defaultOptions: McTagsDefaultOptions, ngControl: NgControl);
     ngOnChanges(): void;
-    /** Utility method to make host definition/tests more clear. */
-    keydown(event?: KeyboardEvent): void;
+    onKeydown(event: KeyboardEvent): void;
     /** Checks to see if the blur should emit the (tagEnd) event. */
     blur(): void;
     triggerValidation(): void;
     /** Checks to see if the (tagEnd) event needs to be emitted. */
-    emitTagEnd(event?: KeyboardEvent): void;
+    emitTagEnd(): void;
     onInput(): void;
     onPaste($event: ClipboardEvent): void;
     updateInputWidth(): void;

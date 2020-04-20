@@ -2660,19 +2660,22 @@
         function () {
             this._tagList.stateChanges.next();
         };
-        /** Utility method to make host definition/tests more clear. */
         /**
-         * Utility method to make host definition/tests more clear.
-         * @param {?=} event
+         * @param {?} event
          * @return {?}
          */
-        McTagInput.prototype.keydown = /**
-         * Utility method to make host definition/tests more clear.
-         * @param {?=} event
+        McTagInput.prototype.onKeydown = /**
+         * @param {?} event
          * @return {?}
          */
         function (event) {
-            this.emitTagEnd(event);
+            if (!this.inputElement.value) {
+                this._tagList.keydown(event);
+            }
+            if (this.isSeparatorKey(event)) {
+                this.emitTagEnd();
+                event.preventDefault();
+            }
         };
         /** Checks to see if the blur should emit the (tagEnd) event. */
         /**
@@ -2691,7 +2694,7 @@
                 this._tagList.blur();
             }
             // tslint:disable-next-line: no-unnecessary-type-assertion
-            if (this.addOnBlur && !(this.hasControl() && this.ngControl.invalid)) {
+            if (this.addOnBlur) {
                 this.emitTagEnd();
             }
             this._tagList.stateChanges.next();
@@ -2711,24 +2714,16 @@
         /** Checks to see if the (tagEnd) event needs to be emitted. */
         /**
          * Checks to see if the (tagEnd) event needs to be emitted.
-         * @param {?=} event
          * @return {?}
          */
         McTagInput.prototype.emitTagEnd = /**
          * Checks to see if the (tagEnd) event needs to be emitted.
-         * @param {?=} event
          * @return {?}
          */
-        function (event) {
-            if (!this.inputElement.value && !!event) {
-                this._tagList.keydown(event);
-            }
-            if (!event || this.isSeparatorKey(event)) {
+        function () {
+            if (!this.hasControl() || (this.hasControl() && !this.ngControl.invalid)) {
                 this.tagEnd.emit({ input: this.inputElement, value: this.inputElement.value });
                 this.updateInputWidth();
-                if (event) {
-                    event.preventDefault();
-                }
             }
         };
         /**
@@ -2909,7 +2904,7 @@
                             '[id]': 'id',
                             '[attr.disabled]': 'disabled || null',
                             '[attr.placeholder]': 'placeholder || null',
-                            '(keydown)': 'keydown($event)',
+                            '(keydown)': 'onKeydown($event)',
                             '(blur)': 'blur()',
                             '(focus)': 'onFocus()',
                             '(input)': 'onInput()',
