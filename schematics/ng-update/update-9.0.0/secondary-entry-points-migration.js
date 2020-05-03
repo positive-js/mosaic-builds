@@ -11,12 +11,12 @@ const currentMosaicModuleSpecifier = '@ptsecurity/mosaic';
 const MOSAIC_AC_FILEPATH_REGEX = new RegExp(`${legacyMosaicModuleSpecifier}/(.*?)/`);
 // tslint:disable-next-line:no-var-requires
 const ENTRY_POINT_MAPPINGS = require('./mosaic-symbols.json');
-class SecondaryEntryPointsRule extends schematics_1.MigrationRule {
+class SecondaryEntryPointsMigration extends schematics_1.Migration {
     constructor() {
         super(...arguments);
         this.printer = ts.createPrinter();
         // Only enable this rule if the migration targets version 8.
-        this.ruleEnabled = this.targetVersion === schematics_1.TargetVersion.V8 || this.targetVersion === schematics_1.TargetVersion.V9;
+        this.enabled = this.targetVersion === schematics_1.TargetVersion.V8 || this.targetVersion === schematics_1.TargetVersion.V9;
     }
     // tslint:disable-next-line:max-func-body-length
     visitNode(declaration) {
@@ -87,14 +87,14 @@ class SecondaryEntryPointsRule extends schematics_1.MigrationRule {
             this.createFailureAtNode(declaration.moduleSpecifier, ONLY_SUBPACKAGE_FAILURE_STR);
             return;
         }
-        const recorder = this.getUpdateRecorder(declaration.moduleSpecifier.getSourceFile().fileName);
+        const recorder = this.fileSystem.edit(declaration.moduleSpecifier.getSourceFile().fileName);
         // Perform the replacement that switches the primary entry-point import to
         // the individual secondary entry-point imports.
         recorder.remove(declaration.getStart(), declaration.getWidth());
         recorder.insertRight(declaration.getStart(), newImportStatements);
     }
 }
-exports.SecondaryEntryPointsRule = SecondaryEntryPointsRule;
+exports.SecondaryEntryPointsMigration = SecondaryEntryPointsMigration;
 /**
  * Creates a string literal from the specified text.
  * @param text Text of the string literal.
@@ -142,4 +142,4 @@ function resolveModuleName(node, typeChecker) {
     const matches = sourceFile.match(MOSAIC_AC_FILEPATH_REGEX);
     return matches ? matches[1] : null;
 }
-//# sourceMappingURL=secondary-entry-points-rule.js.map
+//# sourceMappingURL=secondary-entry-points-migration.js.map
