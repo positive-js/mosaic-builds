@@ -1,28 +1,23 @@
-import { DoCheck, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { AbstractControl, ControlValueAccessor, ValidationErrors, Validator } from '@angular/forms';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 import { TimeFormats } from './timepicker.constants';
-export declare class McTimepickerBase {
-    defaultErrorStateMatcher: ErrorStateMatcher;
-    parentForm: NgForm;
-    parentFormGroup: FormGroupDirective;
-    ngControl: NgControl;
-    constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
-}
-export declare const McTimepickerMixinBase: CanUpdateErrorStateCtor & typeof McTimepickerBase;
-export declare class McTimepicker<D> extends McTimepickerMixinBase implements McFormFieldControl<any>, OnDestroy, DoCheck, CanUpdateErrorState, ControlValueAccessor {
+/** @docs-private */
+export declare const MC_TIMEPICKER_VALUE_ACCESSOR: any;
+/** @docs-private */
+export declare const MC_TIMEPICKER_VALIDATORS: any;
+export declare class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, ControlValueAccessor, Validator {
     private readonly elementRef;
-    ngControl: NgControl;
-    private readonly renderer;
     private dateAdapter;
+    private readonly renderer;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     readonly stateChanges: Subject<void>;
+    readonly errorState: boolean;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -33,13 +28,13 @@ export declare class McTimepicker<D> extends McTimepickerMixinBase implements Mc
      * @docs-private
      */
     controlType: string;
-    /** An object used to control when error messages are shown. */
-    errorStateMatcher: ErrorStateMatcher;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
     placeholder: string;
+    private lastValueValid;
+    private control;
     get disabled(): boolean;
     set disabled(value: boolean);
     private _disabled;
@@ -53,31 +48,35 @@ export declare class McTimepicker<D> extends McTimepickerMixinBase implements Mc
     get required(): boolean;
     set required(value: boolean);
     private _required;
+    get format(): TimeFormats;
+    set format(formatValue: TimeFormats);
+    private _format;
+    get min(): D | null;
+    set min(value: D | null);
+    private _min;
+    get max(): D | null;
+    set max(value: D | null);
+    private _max;
+    get value(): D | null;
+    set value(value: D | null);
+    private _value;
+    get viewValue(): string;
+    get ngControl(): any;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    get value(): string;
-    set value(value: string);
-    get timeFormat(): TimeFormats;
-    set timeFormat(formatValue: TimeFormats);
-    private _timeFormat;
-    get minTime(): string | null;
-    set minTime(value: string | null);
-    private _minTime;
-    get maxTime(): string | null;
-    set maxTime(maxValue: string | null);
-    private _maxTime;
+    get empty(): boolean;
+    get selectionStart(): number | null;
+    set selectionStart(value: number | null);
+    get selectionEnd(): number | null;
+    set selectionEnd(value: number | null);
     private readonly uid;
-    private readonly inputValueAccessor;
-    private originalValue;
-    private previousNativeValue;
-    private currentDateTimeInput;
+    private validator;
     private onChange;
     private onTouched;
-    constructor(elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, renderer: Renderer2, dateAdapter: DateAdapter<any>);
+    constructor(elementRef: ElementRef, dateAdapter: DateAdapter<any>, renderer: Renderer2);
     ngOnDestroy(): void;
-    ngDoCheck(): void;
     focus(): void;
     focusChanged(isFocused: boolean): void;
     onBlur(): void;
@@ -87,36 +86,21 @@ export declare class McTimepicker<D> extends McTimepickerMixinBase implements Mc
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    get empty(): boolean;
-    /**
-     * Implemented as part of McFormFieldControl.
-     * @docs-private
-     */
     onContainerClick(): void;
-    writeValue(value: D | null): void;
     onKeyDown(event: KeyboardEvent): void;
+    validate(control: AbstractControl): ValidationErrors | null;
+    registerOnValidatorChange(fn: () => void): void;
+    writeValue(value: D | null): void;
     registerOnChange(fn: (value: D) => void): void;
     registerOnTouched(fn: () => void): void;
-    saveOriginalValue(value: D): void;
-    /** Does some manual dirty checking on the native input `value` property. */
-    private dirtyCheckNativeValue;
+    setDisabledState(isDisabled: boolean): void;
     /** Checks whether the input is invalid based on the native validation. */
     private isBadInput;
-    private applyInputChanges;
-    private upDownTimeByArrowKeys;
-    private switchSelectionBetweenTimeparts;
-    /**
-     * @description Microsoft EDGE doesn't support KeyboaedEvent.code thus we need this helper
-     */
-    private getKeyCode;
+    private verticalArrowKeyHandler;
+    private horizontalArrowKeyHandler;
     private createSelectionOfTimeComponentInInput;
     private incrementTime;
-    /**
-     * @description Decrement part of time
-     */
     private decrementTime;
-    private getCursorPositionOfPrevTimePartStart;
-    private getCursorPositionOfNextTimePartStart;
     /**
      * @description Get params for arrow-keys (up/down) time valie edit.
      * @param cursorPosition Current cursor position in timeString
@@ -126,16 +110,13 @@ export declare class McTimepicker<D> extends McTimepickerMixinBase implements Mc
      * @description Create time string for displaying inside input element of UI
      */
     private getTimeStringFromDate;
-    private getParsedTimeParts;
-    /**
-     * @description Create Date object from separate parts of time
-     */
-    private getDateFromTimeDigits;
     private getDateFromTimeString;
-    private getTimeDigitsFromDate;
     private parseValidator;
-    private minTimeValidator;
-    private maxTimeValidator;
-    private isTimeLowerThenMin;
-    private isTimeGreaterThenMax;
+    private minValidator;
+    private maxValidator;
+    private compareTime;
+    private getValidDateOrNull;
+    private updateView;
+    private setControl;
+    private validatorOnChange;
 }
