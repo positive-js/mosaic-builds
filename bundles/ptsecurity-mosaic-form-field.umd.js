@@ -230,7 +230,7 @@
             { type: core.Component, args: [{
                         selector: 'mc-cleaner',
                         exportAs: 'mcCleaner',
-                        template: '<i class="mc-icon_light" mc-icon="mc-close-M_16" color="second"></i>',
+                        template: '<i class="mc-icon_light" mc-icon="mc-close-circle_16" color="second"></i>',
                         host: {
                             class: 'mc-cleaner'
                         }

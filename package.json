@@ -1,6 +1,6 @@
 {
     "name": "@ptsecurity/mosaic",
-    "version": "9.0.0-beta.2-6ebb307b",
+    "version": "9.0.0-beta.2-a2e69751",
     "description": "Mosaic",
     "repository": {
         "type": "git",
@@ -22,9 +22,9 @@
         "@angular/core": "^9.1.0",
         "@angular/common": "^9.1.0",
         "@angular/forms": "^9.1.0",
-        "@ptsecurity/cdk": "^9.0.0-beta.2-6ebb307b",
-        "@ptsecurity/mosaic-moment-adapter": "^9.0.0-beta.2-6ebb307b",
-        "@ptsecurity/mosaic-icons": "^3.0.0",
+        "@ptsecurity/cdk": "^9.0.0-beta.2-a2e69751",
+        "@ptsecurity/mosaic-moment-adapter": "^9.0.0-beta.2-a2e69751",
+        "@ptsecurity/mosaic-icons": "^5.0.0",
         "tslib": "^1.7.1"
     },
     "schematics": "./schematics/collection.json",
