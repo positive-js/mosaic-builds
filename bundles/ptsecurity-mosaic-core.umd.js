@@ -1534,6 +1534,133 @@
         POSITION_MAP.left, POSITION_MAP.leftTop, POSITION_MAP.leftBottom
     ]);
     /** @type {?} */
+    var TOP_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.top,
+        POSITION_MAP.bottom,
+        POSITION_MAP.rightBottom,
+        POSITION_MAP.leftBottom,
+        POSITION_MAP.bottomLeft,
+        POSITION_MAP.bottomRight
+    ]);
+    /** @type {?} */
+    var BOTTOM_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.bottom,
+        POSITION_MAP.top,
+        POSITION_MAP.topLeft,
+        POSITION_MAP.topRight,
+        POSITION_MAP.rightBottom,
+        POSITION_MAP.leftBottom
+    ]);
+    /** @type {?} */
+    var RIGHT_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.right,
+        POSITION_MAP.left,
+        POSITION_MAP.leftTop,
+        POSITION_MAP.leftBottom,
+        POSITION_MAP.top,
+        POSITION_MAP.bottom
+    ]);
+    /** @type {?} */
+    var LEFT_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.left,
+        POSITION_MAP.right,
+        POSITION_MAP.rightTop,
+        POSITION_MAP.rightBottom,
+        POSITION_MAP.top,
+        POSITION_MAP.bottom
+    ]);
+    /** @type {?} */
+    var RIGHT_TOP_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.rightTop,
+        POSITION_MAP.leftTop,
+        POSITION_MAP.left,
+        POSITION_MAP.leftBottom,
+        POSITION_MAP.topLeft,
+        POSITION_MAP.bottomLeft
+    ]);
+    /** @type {?} */
+    var RIGHT_BOTTOM_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.rightBottom,
+        POSITION_MAP.leftBottom,
+        POSITION_MAP.left,
+        POSITION_MAP.leftTop,
+        POSITION_MAP.topLeft,
+        POSITION_MAP.bottomLeft
+    ]);
+    /** @type {?} */
+    var LEFT_TOP_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.leftTop,
+        POSITION_MAP.rightTop,
+        POSITION_MAP.right,
+        POSITION_MAP.rightBottom,
+        POSITION_MAP.topRight,
+        POSITION_MAP.bottomRight
+    ]);
+    /** @type {?} */
+    var LEFT_BOTTOM_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.leftBottom,
+        POSITION_MAP.rightBottom,
+        POSITION_MAP.right,
+        POSITION_MAP.rightTop,
+        POSITION_MAP.topRight,
+        POSITION_MAP.bottomRight
+    ]);
+    /** @type {?} */
+    var TOP_LEFT_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.topLeft,
+        POSITION_MAP.topRight,
+        POSITION_MAP.bottomLeft,
+        POSITION_MAP.bottom,
+        POSITION_MAP.bottomRight,
+        POSITION_MAP.leftBottom,
+        POSITION_MAP.rightBottom
+    ]);
+    /** @type {?} */
+    var TOP_RIGHT_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.topRight,
+        POSITION_MAP.topLeft,
+        POSITION_MAP.bottomRight,
+        POSITION_MAP.bottom,
+        POSITION_MAP.bottomLeft,
+        POSITION_MAP.leftBottom,
+        POSITION_MAP.rightBottom
+    ]);
+    /** @type {?} */
+    var BOTTOM_RIGHT_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.bottomRight,
+        POSITION_MAP.bottomLeft,
+        POSITION_MAP.topRight,
+        POSITION_MAP.top,
+        POSITION_MAP.topLeft,
+        POSITION_MAP.leftTop,
+        POSITION_MAP.rightTop
+    ]);
+    /** @type {?} */
+    var BOTTOM_LEFT_POSITION_PRIORITY = objectValues([
+        POSITION_MAP.bottomLeft,
+        POSITION_MAP.bottomRight,
+        POSITION_MAP.topLeft,
+        POSITION_MAP.top,
+        POSITION_MAP.topRight,
+        POSITION_MAP.rightTop,
+        POSITION_MAP.leftTop
+    ]);
+    /** @type {?} */
+    var POSITION_PRIORITY_STRATEGY = {
+        top: TOP_POSITION_PRIORITY,
+        topLeft: TOP_LEFT_POSITION_PRIORITY,
+        topRight: TOP_RIGHT_POSITION_PRIORITY,
+        bottom: BOTTOM_POSITION_PRIORITY,
+        bottomLeft: BOTTOM_LEFT_POSITION_PRIORITY,
+        bottomRight: BOTTOM_RIGHT_POSITION_PRIORITY,
+        left: LEFT_POSITION_PRIORITY,
+        leftTop: LEFT_TOP_POSITION_PRIORITY,
+        leftBottom: LEFT_BOTTOM_POSITION_PRIORITY,
+        right: RIGHT_POSITION_PRIORITY,
+        rightTop: RIGHT_TOP_POSITION_PRIORITY,
+        rightBottom: RIGHT_BOTTOM_POSITION_PRIORITY
+    };
+    /** @type {?} */
     var POSITION_TO_CSS_MAP = {
         top: 'top',
         topLeft: 'top-left',
@@ -1547,6 +1674,13 @@
         bottom: 'bottom',
         bottomLeft: 'bottom-left',
         bottomRight: 'bottom-right'
+    };
+    /** @type {?} */
+    var DEFAULT_4_POSITIONS_TO_CSS_MAP = {
+        top: 'top',
+        bottom: 'bottom',
+        right: 'right',
+        left: 'left'
     };
     /**
      * @template T, S
@@ -2433,10 +2567,17 @@
     }());
 
     exports.AnimationCurves = AnimationCurves;
+    exports.BOTTOM_LEFT_POSITION_PRIORITY = BOTTOM_LEFT_POSITION_PRIORITY;
+    exports.BOTTOM_POSITION_PRIORITY = BOTTOM_POSITION_PRIORITY;
+    exports.BOTTOM_RIGHT_POSITION_PRIORITY = BOTTOM_RIGHT_POSITION_PRIORITY;
     exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
+    exports.DEFAULT_4_POSITIONS_TO_CSS_MAP = DEFAULT_4_POSITIONS_TO_CSS_MAP;
     exports.DEFAULT_MC_LOCALE_ID = DEFAULT_MC_LOCALE_ID;
     exports.EXTENDED_OVERLAY_POSITIONS = EXTENDED_OVERLAY_POSITIONS;
     exports.ErrorStateMatcher = ErrorStateMatcher;
+    exports.LEFT_BOTTOM_POSITION_PRIORITY = LEFT_BOTTOM_POSITION_PRIORITY;
+    exports.LEFT_POSITION_PRIORITY = LEFT_POSITION_PRIORITY;
+    exports.LEFT_TOP_POSITION_PRIORITY = LEFT_TOP_POSITION_PRIORITY;
     exports.MC_LABEL_GLOBAL_OPTIONS = MC_LABEL_GLOBAL_OPTIONS;
     exports.MC_LOCALE_ID = MC_LOCALE_ID;
     exports.MC_OPTION_PARENT_COMPONENT = MC_OPTION_PARENT_COMPONENT;
@@ -2464,12 +2605,19 @@
     exports.MultipleMode = MultipleMode;
     exports.NUMBER_FORMAT_REGEXP = NUMBER_FORMAT_REGEXP;
     exports.POSITION_MAP = POSITION_MAP;
+    exports.POSITION_PRIORITY_STRATEGY = POSITION_PRIORITY_STRATEGY;
     exports.POSITION_TO_CSS_MAP = POSITION_TO_CSS_MAP;
+    exports.RIGHT_BOTTOM_POSITION_PRIORITY = RIGHT_BOTTOM_POSITION_PRIORITY;
+    exports.RIGHT_POSITION_PRIORITY = RIGHT_POSITION_PRIORITY;
+    exports.RIGHT_TOP_POSITION_PRIORITY = RIGHT_TOP_POSITION_PRIORITY;
     exports.SELECT_PANEL_INDENT_PADDING_X = SELECT_PANEL_INDENT_PADDING_X;
     exports.SELECT_PANEL_MAX_HEIGHT = SELECT_PANEL_MAX_HEIGHT;
     exports.SELECT_PANEL_PADDING_X = SELECT_PANEL_PADDING_X;
     exports.SELECT_PANEL_VIEWPORT_PADDING = SELECT_PANEL_VIEWPORT_PADDING;
     exports.ShowOnDirtyErrorStateMatcher = ShowOnDirtyErrorStateMatcher;
+    exports.TOP_LEFT_POSITION_PRIORITY = TOP_LEFT_POSITION_PRIORITY;
+    exports.TOP_POSITION_PRIORITY = TOP_POSITION_PRIORITY;
+    exports.TOP_RIGHT_POSITION_PRIORITY = TOP_RIGHT_POSITION_PRIORITY;
     exports.ThemePalette = ThemePalette;
     exports.countGroupLabelsBeforeOption = countGroupLabelsBeforeOption;
     exports.fadeAnimation = fadeAnimation;

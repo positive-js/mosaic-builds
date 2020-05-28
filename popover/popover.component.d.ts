@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { Directionality } from '@angular/cdk/bidi';
-import { ConnectedOverlayPositionChange, ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, ScrollDispatcher, ScrollStrategy, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, ScrollStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -78,9 +78,15 @@ export declare class McPopover implements OnInit, OnDestroy {
     isDynamicPopover: boolean;
     overlayRef: OverlayRef | null;
     portal: ComponentPortal<McPopoverComponent>;
-    availablePositions: any;
+    availablePositions: {
+        [key: string]: ConnectionPositionPair;
+    };
+    defaultPositionsMap: {
+        [key: string]: string;
+    };
     popover: McPopoverComponent | null;
     mcVisibleChange: EventEmitter<boolean>;
+    mcPositionStrategyPlacementChange: EventEmitter<string>;
     get mcHeader(): string | TemplateRef<any>;
     set mcHeader(value: string | TemplateRef<any>);
     private _mcHeader;
@@ -106,6 +112,9 @@ export declare class McPopover implements OnInit, OnDestroy {
     get mcPopoverSize(): string;
     set mcPopoverSize(value: string);
     private popoverSize;
+    get mcPlacementPriority(): string | string[] | null;
+    set mcPlacementPriority(value: string | string[] | null);
+    private _mcPlacementPriority;
     get mcPlacement(): string;
     set mcPlacement(value: string);
     private _mcPlacement;
@@ -118,37 +127,28 @@ export declare class McPopover implements OnInit, OnDestroy {
     get isOpen(): boolean;
     private manualListeners;
     private readonly destroyed;
+    private backDropSubscription;
     constructor(overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
     /** Create the overlay config and position strategy */
     createOverlay(): OverlayRef;
     detach(): void;
     onPositionChange($event: ConnectedOverlayPositionChange): void;
-    handlePositionUpdate(): void;
+    handlePositionUpdate(updatedPlacement: string): void;
     updateCompValue(key: string, value: any): void;
     ngOnInit(): void;
     ngOnDestroy(): void;
     handleKeydown(e: KeyboardEvent): void;
     handleTouchend(): void;
     initElementRefListeners(): void;
+    registerResizeHandler(): void;
+    deregisterResizeHandler(): void;
+    resetListeners(): void;
     show(): void;
     hide(): void;
+    updateOverlayBackdropClick(): void;
     /** Updates the position of the current popover. */
     updatePosition(reapplyPosition?: boolean): void;
-    /**
-     * Returns the origin position and a fallback position based on the user's position preference.
-     * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
-     */
-    getOrigin(): {
-        main: OriginConnectionPosition;
-        fallback: OriginConnectionPosition;
-    };
-    getOriginXaxis(): HorizontalConnectionPos;
-    getOriginYaxis(): VerticalConnectionPos;
-    /** Returns the overlay position and a fallback position based on the user's preference */
-    getOverlayPosition(): {
-        main: OverlayConnectionPosition;
-        fallback: OverlayConnectionPosition;
-    };
-    /** Inverts an overlay position. */
-    private invertPosition;
+    private getPriorityPlacementStrategy;
+    private getPrioritizedPositions;
+    private resizeListener;
 }

@@ -1325,6 +1325,133 @@ var EXTENDED_OVERLAY_POSITIONS = objectValues([
     POSITION_MAP.left, POSITION_MAP.leftTop, POSITION_MAP.leftBottom
 ]);
 /** @type {?} */
+var TOP_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.top,
+    POSITION_MAP.bottom,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.bottomRight
+]);
+/** @type {?} */
+var BOTTOM_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.bottom,
+    POSITION_MAP.top,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.topRight,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.leftBottom
+]);
+/** @type {?} */
+var RIGHT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.right,
+    POSITION_MAP.left,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.top,
+    POSITION_MAP.bottom
+]);
+/** @type {?} */
+var LEFT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.left,
+    POSITION_MAP.right,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.top,
+    POSITION_MAP.bottom
+]);
+/** @type {?} */
+var RIGHT_TOP_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.rightTop,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.left,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.bottomLeft
+]);
+/** @type {?} */
+var RIGHT_BOTTOM_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.left,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.bottomLeft
+]);
+/** @type {?} */
+var LEFT_TOP_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.leftTop,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.right,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomRight
+]);
+/** @type {?} */
+var LEFT_BOTTOM_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.rightBottom,
+    POSITION_MAP.right,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomRight
+]);
+/** @type {?} */
+var TOP_LEFT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.topLeft,
+    POSITION_MAP.topRight,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.bottom,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.rightBottom
+]);
+/** @type {?} */
+var TOP_RIGHT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.topRight,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.bottom,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.leftBottom,
+    POSITION_MAP.rightBottom
+]);
+/** @type {?} */
+var BOTTOM_RIGHT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.topRight,
+    POSITION_MAP.top,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.leftTop,
+    POSITION_MAP.rightTop
+]);
+/** @type {?} */
+var BOTTOM_LEFT_POSITION_PRIORITY = objectValues([
+    POSITION_MAP.bottomLeft,
+    POSITION_MAP.bottomRight,
+    POSITION_MAP.topLeft,
+    POSITION_MAP.top,
+    POSITION_MAP.topRight,
+    POSITION_MAP.rightTop,
+    POSITION_MAP.leftTop
+]);
+/** @type {?} */
+var POSITION_PRIORITY_STRATEGY = {
+    top: TOP_POSITION_PRIORITY,
+    topLeft: TOP_LEFT_POSITION_PRIORITY,
+    topRight: TOP_RIGHT_POSITION_PRIORITY,
+    bottom: BOTTOM_POSITION_PRIORITY,
+    bottomLeft: BOTTOM_LEFT_POSITION_PRIORITY,
+    bottomRight: BOTTOM_RIGHT_POSITION_PRIORITY,
+    left: LEFT_POSITION_PRIORITY,
+    leftTop: LEFT_TOP_POSITION_PRIORITY,
+    leftBottom: LEFT_BOTTOM_POSITION_PRIORITY,
+    right: RIGHT_POSITION_PRIORITY,
+    rightTop: RIGHT_TOP_POSITION_PRIORITY,
+    rightBottom: RIGHT_BOTTOM_POSITION_PRIORITY
+};
+/** @type {?} */
 var POSITION_TO_CSS_MAP = {
     top: 'top',
     topLeft: 'top-left',
@@ -1338,6 +1465,13 @@ var POSITION_TO_CSS_MAP = {
     bottom: 'bottom',
     bottomLeft: 'bottom-left',
     bottomRight: 'bottom-right'
+};
+/** @type {?} */
+var DEFAULT_4_POSITIONS_TO_CSS_MAP = {
+    top: 'top',
+    bottom: 'bottom',
+    right: 'right',
+    left: 'left'
 };
 /**
  * @template T, S
@@ -2247,5 +2381,5 @@ var McOptionModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { AnimationCurves, DEFAULT_4_POSITIONS, DEFAULT_MC_LOCALE_ID, EXTENDED_OVERLAY_POSITIONS, ErrorStateMatcher, MC_LABEL_GLOBAL_OPTIONS, MC_LOCALE_ID, MC_OPTION_PARENT_COMPONENT, MC_SANITY_CHECKS, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_VALIDATION, McCommonModule, McDecimalPipe, McFormattersModule, McHighlightModule, McHighlightPipe, McLine, McLineModule, McLineSetter, McMeasureScrollbarService, McOptgroup, McOptgroupBase, McOptgroupMixinBase, McOption, McOptionModule, McOptionSelectionChange, McPseudoCheckbox, McPseudoCheckboxModule, MultipleMode, NUMBER_FORMAT_REGEXP, POSITION_MAP, POSITION_TO_CSS_MAP, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, ShowOnDirtyErrorStateMatcher, ThemePalette, countGroupLabelsBeforeOption, fadeAnimation, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, getOptionScrollPosition, isBoolean, mcSelectAnimations, mcSelectScrollStrategyProviderFactory, mixinColor, mixinDisabled, mixinErrorState, mixinTabIndex, selectEvents, setMosaicValidation, setMosaicValidationForFormControl, setMosaicValidationForModelControl, toBoolean, mcSanityChecksFactory as ɵa };
+export { AnimationCurves, BOTTOM_LEFT_POSITION_PRIORITY, BOTTOM_POSITION_PRIORITY, BOTTOM_RIGHT_POSITION_PRIORITY, DEFAULT_4_POSITIONS, DEFAULT_4_POSITIONS_TO_CSS_MAP, DEFAULT_MC_LOCALE_ID, EXTENDED_OVERLAY_POSITIONS, ErrorStateMatcher, LEFT_BOTTOM_POSITION_PRIORITY, LEFT_POSITION_PRIORITY, LEFT_TOP_POSITION_PRIORITY, MC_LABEL_GLOBAL_OPTIONS, MC_LOCALE_ID, MC_OPTION_PARENT_COMPONENT, MC_SANITY_CHECKS, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_VALIDATION, McCommonModule, McDecimalPipe, McFormattersModule, McHighlightModule, McHighlightPipe, McLine, McLineModule, McLineSetter, McMeasureScrollbarService, McOptgroup, McOptgroupBase, McOptgroupMixinBase, McOption, McOptionModule, McOptionSelectionChange, McPseudoCheckbox, McPseudoCheckboxModule, MultipleMode, NUMBER_FORMAT_REGEXP, POSITION_MAP, POSITION_PRIORITY_STRATEGY, POSITION_TO_CSS_MAP, RIGHT_BOTTOM_POSITION_PRIORITY, RIGHT_POSITION_PRIORITY, RIGHT_TOP_POSITION_PRIORITY, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, ShowOnDirtyErrorStateMatcher, TOP_LEFT_POSITION_PRIORITY, TOP_POSITION_PRIORITY, TOP_RIGHT_POSITION_PRIORITY, ThemePalette, countGroupLabelsBeforeOption, fadeAnimation, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, getOptionScrollPosition, isBoolean, mcSelectAnimations, mcSelectScrollStrategyProviderFactory, mixinColor, mixinDisabled, mixinErrorState, mixinTabIndex, selectEvents, setMosaicValidation, setMosaicValidationForFormControl, setMosaicValidationForModelControl, toBoolean, mcSanityChecksFactory as ɵa };
 //# sourceMappingURL=ptsecurity-mosaic-core.js.map
