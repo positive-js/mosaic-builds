@@ -24,6 +24,9 @@ export declare class McTooltipComponent {
     private _mcTrigger;
     get mcPlacement(): string;
     set mcPlacement(value: string);
+    get mcTooltipClass(): string;
+    set mcTooltipClass(value: string);
+    private _mcTooltipClass;
     private _mcPlacement;
     get mcVisible(): boolean;
     set mcVisible(value: boolean);
@@ -88,12 +91,8 @@ export declare class McTooltip implements OnInit, OnDestroy {
     get mcPlacement(): string;
     set mcPlacement(value: string);
     private _mcPlacement;
-    get mcTooltipClass(): string | string[] | Set<string> | {
-        [key: string]: any;
-    };
-    set mсTooltipClass(value: string | string[] | Set<string> | {
-        [key: string]: any;
-    });
+    get mcTooltipClass(): string;
+    set mcTooltipClass(value: string);
     private _mcTooltipClass;
     get mcVisible(): boolean;
     set mcVisible(externalValue: boolean);

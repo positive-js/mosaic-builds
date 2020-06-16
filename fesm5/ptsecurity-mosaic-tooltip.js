@@ -95,6 +95,23 @@ var McTooltipComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(McTooltipComponent.prototype, "mcTooltipClass", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._mcTooltipClass;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._mcTooltipClass = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McTooltipComponent.prototype, "mcVisible", {
         get: /**
          * @return {?}
@@ -176,7 +193,11 @@ var McTooltipComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.classMap = this.prefix + "-" + this.mcPlacement;
+        var _a;
+        this.classMap = (_a = {},
+            _a[this.prefix + "-" + this.mcPlacement] = true,
+            _a[this.mcTooltipClass] = true,
+            _a);
     };
     /**
      * @return {?}
@@ -223,7 +244,7 @@ var McTooltipComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'mc-tooltip-component',
                     animations: [fadeAnimation],
-                    template: "\n    <div class=\"mc-tooltip\"\n         [ngClass]=\"classMap\"\n         [@fadeAnimation]=\"''+($visible | async)\">\n        <div class=\"mc-tooltip-content\">\n            <div class=\"mc-tooltip-arrow\"></div>\n            <div class=\"mc-tooltip-inner\">\n                <ng-container>{{ mcTitle }}</ng-container>\n            </div>\n        </div>\n    </div>\n\n",
+                    template: "<div class=\"mc-tooltip\"\n     [ngClass]=\"classMap\"\n     [@fadeAnimation]=\"''+($visible | async)\">\n    <div class=\"mc-tooltip-content\">\n        <div class=\"mc-tooltip-arrow\"></div>\n        <div class=\"mc-tooltip-inner\">\n            <ng-container>{{ mcTitle }}</ng-container>\n        </div>\n    </div>\n</div>\n",
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     preserveWhitespaces: false,
@@ -244,6 +265,7 @@ var McTooltipComponent = /** @class */ (function () {
         mcTitle: [{ type: Input }],
         mcTrigger: [{ type: Input }],
         mcPlacement: [{ type: Input }],
+        mcTooltipClass: [{ type: Input }],
         mcVisible: [{ type: Input }]
     };
     return McTooltipComponent;
@@ -281,6 +303,11 @@ if (false) {
      * @private
      */
     McTooltipComponent.prototype._mcTrigger;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTooltipComponent.prototype._mcTooltipClass;
     /**
      * @type {?}
      * @private
@@ -494,18 +521,17 @@ var McTooltip = /** @class */ (function () {
         function () {
             return this._mcTooltipClass;
         },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(McTooltip.prototype, "m\u0441TooltipClass", {
         set: /**
          * @param {?} value
          * @return {?}
          */
         function (value) {
-            this._mcTooltipClass = value;
-            if (this.tooltip) {
-                this.tooltip.setClassMap();
+            if (value) {
+                this._mcTooltipClass = value;
+                this.updateCompValue('mcTooltipClass', value);
+            }
+            else {
+                this._mcTooltipClass = '';
             }
         },
         enumerable: true,
@@ -831,7 +857,7 @@ var McTooltip = /** @class */ (function () {
                     'mcTooltipDisabled',
                     'mcMouseEnterDelay',
                     'mcMouseLeaveDelay',
-                    'mсTooltipClass'
+                    'mcTooltipClass'
                 ];
                 properties.forEach((/**
                  * @param {?} property
