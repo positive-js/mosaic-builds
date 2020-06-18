@@ -1,4 +1,4 @@
-import { ViewportRuler, CdkConnectedOverlay, OverlayModule } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { Directive, ContentChild, EventEmitter, isDevMode, Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, NgZone, Renderer2, ElementRef, Optional, Inject, Self, ViewChild, ViewChildren, ContentChildren, Input, Output, NgModule } from '@angular/core';
 import { mixinTabIndex, mixinDisabled, mixinErrorState, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, setMosaicValidation, getMcSelectNonArrayValueError, countGroupLabelsBeforeOption, getOptionScrollPosition, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, mcSelectAnimations, MC_OPTION_PARENT_COMPONENT, ErrorStateMatcher, MC_SELECT_SCROLL_STRATEGY, MC_VALIDATION, McOption, McOptgroup, McOptionModule, MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/core';
@@ -169,7 +169,6 @@ if (false) {
 const McSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McSelectBase)));
 class McSelect extends McSelectMixinBase {
     /**
-     * @param {?} _viewportRuler
      * @param {?} _changeDetectorRef
      * @param {?} _ngZone
      * @param {?} _renderer
@@ -186,9 +185,8 @@ class McSelect extends McSelectMixinBase {
      * @param {?} _scrollStrategyFactory
      * @param {?} mcValidation
      */
-    constructor(_viewportRuler, _changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, ngModel, formControlName, _scrollStrategyFactory, mcValidation) {
+    constructor(_changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, ngModel, formControlName, _scrollStrategyFactory, mcValidation) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
-        this._viewportRuler = _viewportRuler;
         this._changeDetectorRef = _changeDetectorRef;
         this._ngZone = _ngZone;
         this._renderer = _renderer;
@@ -513,7 +511,6 @@ class McSelect extends McSelectMixinBase {
             else {
                 this.openedChange.emit(false);
                 this.panelDoneAnimating = false;
-                this.overlayDir.offsetX = 0;
                 this._changeDetectorRef.markForCheck();
             }
         }));
@@ -830,7 +827,7 @@ class McSelect extends McSelectMixinBase {
          */
         () => {
             this._changeDetectorRef.detectChanges();
-            this.calculateOverlayOffsetX();
+            this.setOverlayPosition();
             this.optionsContainer.nativeElement.scrollTop = this.scrollTop;
             this.updateScrollSize();
         }));
@@ -1377,11 +1374,13 @@ class McSelect extends McSelectMixinBase {
      * @private
      * @return {?}
      */
-    calculateOverlayOffsetX() {
+    setOverlayPosition() {
+        this.resetOverlay();
         /** @type {?} */
-        const overlayRect = this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
+        const overlayRect = this.getOverlayRect();
+        // Window width without scrollbar
         /** @type {?} */
-        const viewportSize = this._viewportRuler.getViewportSize();
+        const windowWidth = this.getBackdropWidth();
         /** @type {?} */
         const isRtl = this.isRtl();
         /* tslint:disable-next-line:no-magic-numbers */
@@ -1390,30 +1389,96 @@ class McSelect extends McSelectMixinBase {
         /** @type {?} */
         let offsetX;
         /** @type {?} */
+        let overlayMaxWidth;
+        /** @type {?} */
         const selected = this.selectionModel.selected[0] || this.options.first;
         offsetX = selected && selected.group ? SELECT_PANEL_INDENT_PADDING_X : SELECT_PANEL_PADDING_X;
         // Invert the offset in LTR.
         if (!isRtl) {
             offsetX *= -1;
         }
-        // Determine how much the select overflows on each side.
+        // Determine if select overflows on either side.
         /** @type {?} */
         const leftOverflow = 0 - (overlayRect.left + offsetX - (isRtl ? paddingWidth : 0));
         /** @type {?} */
-        const rightOverflow = overlayRect.right + offsetX - viewportSize.width
+        const rightOverflow = overlayRect.right + offsetX - windowWidth
             + (isRtl ? 0 : paddingWidth);
         // If the element overflows on either side, reduce the offset to allow it to fit.
-        if (leftOverflow > 0) {
-            offsetX += leftOverflow + SELECT_PANEL_VIEWPORT_PADDING;
-        }
-        else if (rightOverflow > 0) {
-            offsetX -= rightOverflow + SELECT_PANEL_VIEWPORT_PADDING;
+        if (leftOverflow > 0 || rightOverflow > 0) {
+            [offsetX, overlayMaxWidth] = this.calculateOverlayXPosition(overlayRect, windowWidth, offsetX);
+            this.overlayDir.overlayRef.overlayElement.style.maxWidth = `${overlayMaxWidth}px`;
         }
         // Set the offset directly in order to avoid having to go through change detection and
         // potentially triggering "changed after it was checked" errors. Round the value to avoid
         // blurry content in some browsers.
         this.overlayDir.offsetX = Math.round(offsetX);
         this.overlayDir.overlayRef.updatePosition();
+    }
+    /**
+     * @private
+     * @param {?} overlayRect
+     * @param {?} windowWidth
+     * @param {?} basicOffsetX
+     * @return {?}
+     */
+    calculateOverlayXPosition(overlayRect, windowWidth, basicOffsetX) {
+        /** @type {?} */
+        let offsetX = basicOffsetX;
+        /** @type {?} */
+        const leftIndent = this.triggerRect.left;
+        /** @type {?} */
+        const rightIndent = windowWidth - this.triggerRect.right;
+        // Setting direction of dropdown expansion
+        /** @type {?} */
+        const isRightDirection = leftIndent <= rightIndent;
+        /** @type {?} */
+        let maxDropdownWidth;
+        /** @type {?} */
+        let overlayMaxWidth;
+        /** @type {?} */
+        const triggerWidth = this.triggerRect.width + SELECT_PANEL_INDENT_PADDING_X;
+        if (isRightDirection) {
+            maxDropdownWidth = rightIndent + triggerWidth - SELECT_PANEL_VIEWPORT_PADDING;
+            overlayMaxWidth = overlayRect.width < maxDropdownWidth ? overlayRect.width : maxDropdownWidth;
+        }
+        else {
+            /** @type {?} */
+            let leftOffset;
+            maxDropdownWidth = leftIndent + triggerWidth - SELECT_PANEL_VIEWPORT_PADDING;
+            if (overlayRect.width < maxDropdownWidth) {
+                overlayMaxWidth = overlayRect.width;
+                leftOffset = this.triggerRect.right - overlayMaxWidth;
+            }
+            else {
+                overlayMaxWidth = maxDropdownWidth;
+                leftOffset = this.triggerRect.right - (overlayMaxWidth - SELECT_PANEL_INDENT_PADDING_X);
+            }
+            offsetX -= this.triggerRect.left - leftOffset;
+        }
+        return [offsetX, overlayMaxWidth];
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    resetOverlay() {
+        this.overlayDir.offsetX = 0;
+        this.overlayDir.overlayRef.overlayElement.style.maxWidth = 'unset';
+        this.overlayDir.overlayRef.updatePosition();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    getOverlayRect() {
+        return this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    getBackdropWidth() {
+        return this.scrollStrategy._overlayRef.backdropElement.clientWidth;
     }
 }
 McSelect.decorators = [
@@ -1444,12 +1509,11 @@ McSelect.decorators = [
                     { provide: McFormFieldControl, useExisting: McSelect },
                     { provide: MC_OPTION_PARENT_COMPONENT, useExisting: McSelect }
                 ],
-                styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider_vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px}.mc-select{box-sizing:border-box;display:inline-block;vertical-align:top;width:100%;outline:0}.mc-select .mc-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;cursor:pointer;padding-right:7px;padding-left:15px}.mc-select .mc-select__trigger.mc-select__trigger_multiple{padding-left:7px}.mc-select.mc-disabled .mc-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-select__no-options-message{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;cursor:default;outline:0;padding:0 16px}.mc-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-select__matcher>span{width:100%}.mc-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:28px;margin:0;padding-left:0}.mc-select__match-list .mc-tag{margin-right:4px}.mc-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-select__match-container .mc-select__match-hidden-text{flex:0 0 70px;-ms-grid-row-align:center;align-self:center;padding:0 8px;text-align:right}.mc-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-select__arrow-wrapper{-ms-grid-row-align:center;align-self:center}.mc-form-field-appearance-fill .mc-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-select__arrow-wrapper{transform:translateY(-25%)}.mc-select__panel{min-width:100%;overflow:hidden;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px;padding:4px 0}.mc-select__panel .mc-optgroup-label,.mc-select__panel .mc-option{font-size:inherit;line-height:32px;height:32px}.mc-select__content{max-height:224px;overflow:auto}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-form-field-type-mc-select .mc-form-field-label{width:calc(100% - 18px)}.mc-select__search-container{border-bottom-width:1px;border-bottom-style:solid}"]
+                styles: [".mc-divider{display:block;margin:0;border-top-width:1px;border-top-style:solid}.mc-divider.mc-divider_vertical{border-top:0;border-right-width:1px;border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px}.mc-select{box-sizing:border-box;display:inline-block;vertical-align:top;width:100%;outline:0}.mc-select .mc-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;cursor:pointer;padding-right:7px;padding-left:15px}.mc-select .mc-select__trigger.mc-select__trigger_multiple{padding-left:7px}.mc-select.mc-disabled .mc-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-select__no-options-message{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;cursor:default;outline:0;padding:0 16px}.mc-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-select__matcher>span{width:100%}.mc-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:28px;margin:0;padding-left:0}.mc-select__match-list .mc-tag{margin-right:4px}.mc-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-select__match-container .mc-select__match-hidden-text{flex:0 0 70px;-ms-grid-row-align:center;align-self:center;padding:0 8px;text-align:right}.mc-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-select__arrow-wrapper{-ms-grid-row-align:center;align-self:center}.mc-form-field-appearance-fill .mc-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-select__arrow-wrapper{transform:translateY(-25%)}.mc-select__panel{min-width:100%;max-width:640px;overflow:hidden;border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-right-radius:3px}.mc-select__panel .mc-optgroup-label,.mc-select__panel .mc-option{font-size:inherit;line-height:32px;height:32px}.mc-select__content{max-height:232px;padding:4px 0;overflow:auto}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-form-field-type-mc-select .mc-form-field-label{width:calc(100% - 18px)}.mc-select__search-container{border-bottom-width:1px;border-bottom-style:solid}"]
             }] }
 ];
 /** @nocollapse */
 McSelect.ctorParameters = () => [
-    { type: ViewportRuler },
     { type: ChangeDetectorRef },
     { type: NgZone },
     { type: Renderer2 },
@@ -1707,11 +1771,6 @@ if (false) {
      * @private
      */
     McSelect.prototype._compareWith;
-    /**
-     * @type {?}
-     * @private
-     */
-    McSelect.prototype._viewportRuler;
     /**
      * @type {?}
      * @private

@@ -1,6 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CdkConnectedOverlay, ViewportRuler } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, NgZone, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, FormControlName, FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
@@ -40,7 +40,6 @@ export declare class McSelectBase {
 }
 declare const McSelectMixinBase: CanDisableCtor & HasTabIndexCtor & CanUpdateErrorStateCtor & typeof McSelectBase;
 export declare class McSelect extends McSelectMixinBase implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy, OnInit, DoCheck, ControlValueAccessor, CanDisable, HasTabIndex, McFormFieldControl<any>, CanUpdateErrorState {
-    private readonly _viewportRuler;
     private readonly _changeDetectorRef;
     private readonly _ngZone;
     private readonly _renderer;
@@ -167,7 +166,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private readonly uid;
     /** Emits whenever the component is destroyed. */
     private readonly destroy;
-    constructor(_viewportRuler: ViewportRuler, _changeDetectorRef: ChangeDetectorRef, _ngZone: NgZone, _renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, elementRef: ElementRef, rawValidators: Validator[], _dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, _parentFormField: McFormField, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName, _scrollStrategyFactory: any, mcValidation: McValidationOptions);
+    constructor(_changeDetectorRef: ChangeDetectorRef, _ngZone: NgZone, _renderer: Renderer2, defaultErrorStateMatcher: ErrorStateMatcher, elementRef: ElementRef, rawValidators: Validator[], _dir: Directionality, parentForm: NgForm, parentFormGroup: FormGroupDirective, _parentFormField: McFormField, ngControl: NgControl, ngModel: NgModel, formControlName: FormControlName, _scrollStrategyFactory: any, mcValidation: McValidationOptions);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngAfterViewInit(): void;
@@ -295,7 +294,11 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
      * can't be calculated until the panel has been attached, because we need to know the
      * content width in order to constrain the panel within the viewport.
      */
-    private calculateOverlayOffsetX;
+    private setOverlayPosition;
+    private calculateOverlayXPosition;
+    private resetOverlay;
+    private getOverlayRect;
+    private getBackdropWidth;
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
     private _compareWith;
 }
