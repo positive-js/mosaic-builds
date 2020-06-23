@@ -118,7 +118,7 @@ class McTimepicker {
          * @return {?}
          */
         () => {
-            return this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
+            return this.empty || this.lastValueValid ? null : { mcTimepickerParse: { text: this.viewValue } };
         });
         this.minValidator = (/**
          * @param {?} control

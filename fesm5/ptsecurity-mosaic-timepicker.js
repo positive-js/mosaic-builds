@@ -115,7 +115,7 @@ var McTimepicker = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return _this.lastValueValid ? null : { mcTimepickerParse: { text: _this.viewValue } };
+            return _this.empty || _this.lastValueValid ? null : { mcTimepickerParse: { text: _this.viewValue } };
         });
         this.minValidator = (/**
          * @param {?} control
