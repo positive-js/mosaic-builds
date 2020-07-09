@@ -935,12 +935,17 @@
             }
             else {
                 if (this.autoSelect) {
-                    this.options.forEach((/**
-                     * @param {?} item
-                     * @return {?}
-                     */
-                    function (item) { return item.setSelected(false); }));
-                    option.setSelected(true);
+                    if (this.multipleMode !== core$1.MultipleMode.KEYBOARD) {
+                        this.selectionModel.toggle(option);
+                    }
+                    if (this.multipleMode === core$1.MultipleMode.KEYBOARD || !this.multiple) {
+                        this.options.forEach((/**
+                         * @param {?} item
+                         * @return {?}
+                         */
+                        function (item) { return item.setSelected(false); }));
+                        option.setSelected(true);
+                    }
                 }
             }
             this.emitChangeEvent(option);
@@ -968,7 +973,7 @@
                 }
             }
             else {
-                if (this.autoSelect) {
+                if (this.multipleMode === core$1.MultipleMode.KEYBOARD || !this.multiple) {
                     this.options.forEach((/**
                      * @param {?} item
                      * @return {?}

@@ -728,12 +728,17 @@ var McListSelection = /** @class */ (function (_super) {
         }
         else {
             if (this.autoSelect) {
-                this.options.forEach((/**
-                 * @param {?} item
-                 * @return {?}
-                 */
-                function (item) { return item.setSelected(false); }));
-                option.setSelected(true);
+                if (this.multipleMode !== MultipleMode.KEYBOARD) {
+                    this.selectionModel.toggle(option);
+                }
+                if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
+                    this.options.forEach((/**
+                     * @param {?} item
+                     * @return {?}
+                     */
+                    function (item) { return item.setSelected(false); }));
+                    option.setSelected(true);
+                }
             }
         }
         this.emitChangeEvent(option);
@@ -761,7 +766,7 @@ var McListSelection = /** @class */ (function (_super) {
             }
         }
         else {
-            if (this.autoSelect) {
+            if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
                 this.options.forEach((/**
                  * @param {?} item
                  * @return {?}

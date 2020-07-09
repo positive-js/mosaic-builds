@@ -612,12 +612,17 @@ class McListSelection extends McListSelectionMixinBase {
         }
         else {
             if (this.autoSelect) {
-                this.options.forEach((/**
-                 * @param {?} item
-                 * @return {?}
-                 */
-                (item) => item.setSelected(false)));
-                option.setSelected(true);
+                if (this.multipleMode !== MultipleMode.KEYBOARD) {
+                    this.selectionModel.toggle(option);
+                }
+                if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
+                    this.options.forEach((/**
+                     * @param {?} item
+                     * @return {?}
+                     */
+                    (item) => item.setSelected(false)));
+                    option.setSelected(true);
+                }
             }
         }
         this.emitChangeEvent(option);
@@ -639,7 +644,7 @@ class McListSelection extends McListSelectionMixinBase {
             }
         }
         else {
-            if (this.autoSelect) {
+            if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
                 this.options.forEach((/**
                  * @param {?} item
                  * @return {?}
