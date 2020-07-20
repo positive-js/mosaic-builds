@@ -45,8 +45,27 @@ class McListOption {
         this.hasFocus = false;
         this.onFocus = new Subject();
         this.onBlur = new Subject();
+        /**
+         * This is set to true after the first OnChanges cycle so we don't clear the value of `selected`
+         * in the first cycle.
+         */
+        this.inputsInitialized = false;
         this._disabled = false;
         this._selected = false;
+    }
+    /**
+     * @return {?}
+     */
+    get value() { return this._value; }
+    /**
+     * @param {?} newValue
+     * @return {?}
+     */
+    set value(newValue) {
+        if (this.selected && newValue !== this.value && this.inputsInitialized) {
+            this.selected = false;
+        }
+        this._value = newValue;
     }
     /**
      * @return {?}
@@ -111,24 +130,32 @@ class McListOption {
      * @return {?}
      */
     ngOnInit() {
-        if (this._selected) {
-            // List options that are selected at initialization can't be reported properly to the form
-            // control. This is because it takes some time until the selection-list knows about all
-            // available options. Also it can happen that the ControlValueAccessor has an initial value
-            // that should be used instead. Deferring the value change report to the next tick ensures
-            // that the form control value is not being overwritten.
-            /** @type {?} */
-            const wasSelected = this._selected;
-            Promise.resolve().then((/**
-             * @return {?}
-             */
-            () => {
-                if (this._selected || wasSelected) {
-                    this.selected = true;
-                    this.changeDetector.markForCheck();
-                }
-            }));
+        /** @type {?} */
+        const list = this.listSelection;
+        if (list._value && list._value.some((/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => list.compareWith(value, this._value)))) {
+            this.setSelected(true);
         }
+        /** @type {?} */
+        const wasSelected = this._selected;
+        // List options that are selected at initialization can't be reported properly to the form
+        // control. This is because it takes some time until the selection-list knows about all
+        // available options. Also it can happen that the ControlValueAccessor has an initial value
+        // that should be used instead. Deferring the value change report to the next tick ensures
+        // that the form control value is not being overwritten.
+        Promise.resolve().then((/**
+         * @return {?}
+         */
+        () => {
+            if (this._selected || wasSelected) {
+                this.selected = true;
+                this.changeDetector.markForCheck();
+            }
+        }));
+        this.inputsInitialized = true;
     }
     /**
      * @return {?}
@@ -290,8 +317,18 @@ if (false) {
     McListOption.prototype.text;
     /** @type {?} */
     McListOption.prototype.checkboxPosition;
-    /** @type {?} */
-    McListOption.prototype.value;
+    /**
+     * This is set to true after the first OnChanges cycle so we don't clear the value of `selected`
+     * in the first cycle.
+     * @type {?}
+     * @private
+     */
+    McListOption.prototype.inputsInitialized;
+    /**
+     * @type {?}
+     * @private
+     */
+    McListOption.prototype._value;
     /**
      * @type {?}
      * @private
@@ -387,6 +424,17 @@ class McListSelection extends McListSelectionMixinBase {
          * Emits whenever the component is destroyed.
          */
         this.destroyed = new Subject();
+        /**
+         * Function used for comparing an option against the selected value when determining which
+         * options should appear as selected. The first argument is the value of an options. The second
+         * one is a value from the selected value. A boolean must be returned.
+         */
+        this.compareWith = (/**
+         * @param {?} a1
+         * @param {?} a2
+         * @return {?}
+         */
+        (a1, a2) => a1 === a2);
         // View to model callback that should be called if the list or its options lost focus.
         // tslint:disable-next-line:no-empty
         this.onTouched = (/**
@@ -507,9 +555,8 @@ class McListSelection extends McListSelectionMixinBase {
                 this.changeDetectorRef.markForCheck();
             }));
         }));
-        if (this.tempValues) {
-            this.setOptionsFromValues(this.tempValues);
-            this.tempValues = null;
+        if (this._value) {
+            this.setOptionsFromValues(this._value);
         }
         this.selectionModel.changed
             .pipe(takeUntil(this.destroyed))
@@ -700,11 +747,9 @@ class McListSelection extends McListSelectionMixinBase {
      * @return {?}
      */
     writeValue(values) {
+        this._value = values;
         if (this.options) {
             this.setOptionsFromValues(values || []);
-        }
-        else {
-            this.tempValues = values;
         }
     }
     // Implemented as part of ControlValueAccessor.
@@ -845,7 +890,10 @@ class McListSelection extends McListSelectionMixinBase {
      */
     reportValueChange() {
         if (this.options) {
-            this.onChange(this.getSelectedOptionValues());
+            /** @type {?} */
+            const value = this.getSelectedOptionValues();
+            this.onChange(value);
+            this._value = value;
         }
     }
     // Emits a change event if the selected state of an option changed.
@@ -1011,7 +1059,8 @@ McListSelection.propDecorators = {
     noUnselectLast: [{ type: Input }],
     horizontal: [{ type: Input }],
     tabIndex: [{ type: Input }],
-    selectionChange: [{ type: Output }]
+    selectionChange: [{ type: Output }],
+    compareWith: [{ type: Input }]
 };
 if (false) {
     /** @type {?} */
@@ -1043,11 +1092,8 @@ if (false) {
     McListSelection.prototype.selectionChange;
     /** @type {?} */
     McListSelection.prototype.selectionModel;
-    /**
-     * @type {?}
-     * @private
-     */
-    McListSelection.prototype.tempValues;
+    /** @type {?} */
+    McListSelection.prototype._value;
     /**
      * Emits whenever the component is destroyed.
      * @type {?}
@@ -1064,6 +1110,13 @@ if (false) {
      * @private
      */
     McListSelection.prototype.optionBlurSubscription;
+    /**
+     * Function used for comparing an option against the selected value when determining which
+     * options should appear as selected. The first argument is the value of an options. The second
+     * one is a value from the selected value. A boolean must be returned.
+     * @type {?}
+     */
+    McListSelection.prototype.compareWith;
     /** @type {?} */
     McListSelection.prototype.onTouched;
     /**

@@ -24,7 +24,14 @@ export declare class McListOption implements OnDestroy, OnInit, IFocusableOption
     lines: QueryList<McLine>;
     text: ElementRef;
     checkboxPosition: 'before' | 'after';
-    value: any;
+    /**
+     * This is set to true after the first OnChanges cycle so we don't clear the value of `selected`
+     * in the first cycle.
+     */
+    private inputsInitialized;
+    get value(): any;
+    set value(newValue: any);
+    private _value;
     get disabled(): any;
     set disabled(value: any);
     private _disabled;
@@ -80,12 +87,18 @@ export declare class McListSelection extends McListSelectionMixinBase implements
     selectionModel: SelectionModel<McListOption>;
     get optionFocusChanges(): Observable<McOptionEvent>;
     get optionBlurChanges(): Observable<McOptionEvent>;
-    private tempValues;
+    _value: string[] | null;
     /** Emits whenever the component is destroyed. */
     private readonly destroyed;
     private optionFocusSubscription;
     private optionBlurSubscription;
     constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, multiple: MultipleMode);
+    /**
+     * Function used for comparing an option against the selected value when determining which
+     * options should appear as selected. The first argument is the value of an options. The second
+     * one is a value from the selected value. A boolean must be returned.
+     */
+    compareWith: (o1: any, o2: any) => boolean;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     focus(): void;
