@@ -282,11 +282,16 @@
             if (!this.input.ngControl) {
                 throw Error('McSelectSearch does not work without ngControl');
             }
-            this.searchChangesSubscription = (/** @type {?} */ (this.input.ngControl.valueChanges)).subscribe((/**
+            Promise.resolve().then((/**
              * @return {?}
              */
             function () {
-                _this.isSearchChanged = true;
+                _this.searchChangesSubscription = (/** @type {?} */ (_this.input.ngControl.valueChanges)).subscribe((/**
+                 * @return {?}
+                 */
+                function () {
+                    _this.isSearchChanged = true;
+                }));
             }));
         };
         /**
@@ -1737,7 +1742,7 @@
                     Promise.resolve().then((/**
                      * @return {?}
                      */
-                    function () { return _this.keyManager.setFirstItemActive(); }));
+                    function () { return _this.keyManager.updateActiveItem(0); }));
                     _this.search.isSearchChanged = false;
                 }
                 if (event.isUserInput && !_this.multiple && _this._panelOpen) {

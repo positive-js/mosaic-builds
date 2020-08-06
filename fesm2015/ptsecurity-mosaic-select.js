@@ -72,11 +72,16 @@ class McSelectSearch {
         if (!this.input.ngControl) {
             throw Error('McSelectSearch does not work without ngControl');
         }
-        this.searchChangesSubscription = (/** @type {?} */ (this.input.ngControl.valueChanges)).subscribe((/**
+        Promise.resolve().then((/**
          * @return {?}
          */
         () => {
-            this.isSearchChanged = true;
+            this.searchChangesSubscription = (/** @type {?} */ (this.input.ngControl.valueChanges)).subscribe((/**
+             * @return {?}
+             */
+            () => {
+                this.isSearchChanged = true;
+            }));
         }));
     }
     /**
@@ -1220,7 +1225,7 @@ class McSelect extends McSelectMixinBase {
                 Promise.resolve().then((/**
                  * @return {?}
                  */
-                () => this.keyManager.setFirstItemActive()));
+                () => this.keyManager.updateActiveItem(0)));
                 this.search.isSearchChanged = false;
             }
             if (event.isUserInput && !this.multiple && this._panelOpen) {
