@@ -16,8 +16,8 @@ export declare class McTooltipComponent {
     mcVisibleChange: EventEmitter<boolean>;
     mcMouseEnterDelay: number;
     mcMouseLeaveDelay: number;
-    get mcTitle(): string | TemplateRef<void>;
-    set mcTitle(value: string | TemplateRef<void>);
+    get mcTitle(): string | TemplateRef<any>;
+    set mcTitle(value: string | TemplateRef<any>);
     private _mcTitle;
     get mcTrigger(): string;
     set mcTrigger(value: string);
@@ -43,6 +43,8 @@ export declare class McTooltipComponent {
     afterHidden(): Observable<void>;
     markForCheck(): void;
     handleBodyInteraction(): void;
+    get isTemplateRef(): boolean;
+    get isNonEmptyString(): boolean;
 }
 export declare const MC_TOOLTIP_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
@@ -72,10 +74,10 @@ export declare class McTooltip implements OnInit, OnDestroy {
     tooltip: McTooltipComponent | null;
     mcVisibleChange: EventEmitter<boolean>;
     private $unsubscribe;
-    get mcTitle(): string;
-    set mcTitle(title: string);
+    get mcTitle(): string | TemplateRef<any>;
+    set mcTitle(title: string | TemplateRef<any>);
     private _mcTitle;
-    set setTitle(title: string);
+    set setTitle(title: string | TemplateRef<any>);
     get disabled(): boolean;
     set disabled(value: boolean);
     private _disabled;
