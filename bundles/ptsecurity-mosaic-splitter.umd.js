@@ -56,7 +56,7 @@
         function McGutterDirective(elementRef, renderer) {
             this.elementRef = elementRef;
             this.renderer = renderer;
-            this._direction = "vertical" /* Vertical */;
+            this._direction = Direction.Vertical;
             this._order = 0;
             this._size = 6;
             this.dragged = false;
@@ -135,7 +135,7 @@
          * @return {?}
          */
         function () {
-            return this.direction === "vertical" /* Vertical */;
+            return this.direction === Direction.Vertical;
         };
         /**
          * @private
@@ -319,7 +319,7 @@
          */
         function () {
             if (!this.direction) {
-                this.direction = "horizontal" /* Horizontal */;
+                this.direction = Direction.Horizontal;
             }
             this.setStyle("flex-direction" /* FlexDirection */, this.isVertical() ? 'column' : 'row');
         };
@@ -418,7 +418,7 @@
          * @return {?}
          */
         function () {
-            return this.direction === "vertical" /* Vertical */;
+            return this.direction === Direction.Vertical;
         };
         /**
          * @private
@@ -637,7 +637,7 @@
         function () {
             this.splitter.addArea(this);
             this.removeStyle("max-width" /* MaxWidth */);
-            if (this.splitter.direction === "vertical" /* Vertical */) {
+            if (this.splitter.direction === Direction.Vertical) {
                 this.setStyle("width" /* Width */, '100%');
                 this.removeStyle("height" /* Height */);
             }
@@ -710,7 +710,7 @@
          * @return {?}
          */
         function () {
-            return this.splitter.direction === "vertical" /* Vertical */;
+            return this.splitter.direction === Direction.Vertical;
         };
         /**
          * @private
@@ -842,6 +842,7 @@
         return McSplitterModule;
     }());
 
+    exports.Direction = Direction;
     exports.McGutterDirective = McGutterDirective;
     exports.McSplitterAreaDirective = McSplitterAreaDirective;
     exports.McSplitterComponent = McSplitterComponent;

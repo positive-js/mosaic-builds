@@ -59,7 +59,7 @@ class McGutterDirective {
     constructor(elementRef, renderer) {
         this.elementRef = elementRef;
         this.renderer = renderer;
-        this._direction = "vertical" /* Vertical */;
+        this._direction = Direction.Vertical;
         this._order = 0;
         this._size = 6;
         this.dragged = false;
@@ -120,7 +120,7 @@ class McGutterDirective {
      * @return {?}
      */
     isVertical() {
-        return this.direction === "vertical" /* Vertical */;
+        return this.direction === Direction.Vertical;
     }
     /**
      * @private
@@ -280,7 +280,7 @@ class McSplitterComponent {
      */
     ngOnInit() {
         if (!this.direction) {
-            this.direction = "horizontal" /* Horizontal */;
+            this.direction = Direction.Horizontal;
         }
         this.setStyle("flex-direction" /* FlexDirection */, this.isVertical() ? 'column' : 'row');
     }
@@ -365,7 +365,7 @@ class McSplitterComponent {
      * @return {?}
      */
     isVertical() {
-        return this.direction === "vertical" /* Vertical */;
+        return this.direction === Direction.Vertical;
     }
     /**
      * @private
@@ -559,7 +559,7 @@ class McSplitterAreaDirective {
     ngOnInit() {
         this.splitter.addArea(this);
         this.removeStyle("max-width" /* MaxWidth */);
-        if (this.splitter.direction === "vertical" /* Vertical */) {
+        if (this.splitter.direction === Direction.Vertical) {
             this.setStyle("width" /* Width */, '100%');
             this.removeStyle("height" /* Height */);
         }
@@ -611,7 +611,7 @@ class McSplitterAreaDirective {
      * @return {?}
      */
     isVertical() {
-        return this.splitter.direction === "vertical" /* Vertical */;
+        return this.splitter.direction === Direction.Vertical;
     }
     /**
      * @private
@@ -734,5 +734,5 @@ McSplitterModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule };
+export { Direction, McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule };
 //# sourceMappingURL=ptsecurity-mosaic-splitter.js.map

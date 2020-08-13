@@ -5,7 +5,7 @@ interface IArea {
     order: number;
     initialSize: number;
 }
-export declare const enum Direction {
+export declare enum Direction {
     Horizontal = "horizontal",
     Vertical = "vertical"
 }

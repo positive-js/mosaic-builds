@@ -55,7 +55,7 @@ var McGutterDirective = /** @class */ (function () {
     function McGutterDirective(elementRef, renderer) {
         this.elementRef = elementRef;
         this.renderer = renderer;
-        this._direction = "vertical" /* Vertical */;
+        this._direction = Direction.Vertical;
         this._order = 0;
         this._size = 6;
         this.dragged = false;
@@ -134,7 +134,7 @@ var McGutterDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this.direction === "vertical" /* Vertical */;
+        return this.direction === Direction.Vertical;
     };
     /**
      * @private
@@ -318,7 +318,7 @@ var McSplitterComponent = /** @class */ (function () {
      */
     function () {
         if (!this.direction) {
-            this.direction = "horizontal" /* Horizontal */;
+            this.direction = Direction.Horizontal;
         }
         this.setStyle("flex-direction" /* FlexDirection */, this.isVertical() ? 'column' : 'row');
     };
@@ -417,7 +417,7 @@ var McSplitterComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this.direction === "vertical" /* Vertical */;
+        return this.direction === Direction.Vertical;
     };
     /**
      * @private
@@ -636,7 +636,7 @@ var McSplitterAreaDirective = /** @class */ (function () {
     function () {
         this.splitter.addArea(this);
         this.removeStyle("max-width" /* MaxWidth */);
-        if (this.splitter.direction === "vertical" /* Vertical */) {
+        if (this.splitter.direction === Direction.Vertical) {
             this.setStyle("width" /* Width */, '100%');
             this.removeStyle("height" /* Height */);
         }
@@ -709,7 +709,7 @@ var McSplitterAreaDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return this.splitter.direction === "vertical" /* Vertical */;
+        return this.splitter.direction === Direction.Vertical;
     };
     /**
      * @private
@@ -859,5 +859,5 @@ var McSplitterModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule };
+export { Direction, McGutterDirective, McSplitterAreaDirective, McSplitterComponent, McSplitterModule };
 //# sourceMappingURL=ptsecurity-mosaic-splitter.js.map
