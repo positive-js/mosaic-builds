@@ -36,7 +36,7 @@ export declare class McToggleComponent extends McToggleMixinBase implements Cont
     ngOnDestroy(): void;
     focus(): void;
     getAriaChecked(): boolean;
-    onInteractionEvent(event: Event): void;
+    onChangeEvent(event: Event): void;
     onLabelTextChange(): void;
     onInputClick(event: MouseEvent): void;
     writeValue(value: any): void;
