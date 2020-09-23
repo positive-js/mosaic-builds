@@ -5,7 +5,7 @@ import { forwardRef, Directive, ElementRef, Optional, Renderer2, Input, NgModule
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormsModule } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { hasModifierKey, BACKSPACE, DELETE, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
+import { hasModifierKey, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject, noop } from 'rxjs';
 
@@ -445,7 +445,9 @@ var McTimepicker = /** @class */ (function () {
     function () {
         /** @type {?} */
         var newTimeObj = this.getDateFromTimeString(this.viewValue);
+        this.lastValueValid = !!newTimeObj;
         if (!newTimeObj) {
+            this.control.updateValueAndValidity();
             return;
         }
         /** @type {?} */
@@ -489,7 +491,7 @@ var McTimepicker = /** @class */ (function () {
         // tslint:disable-next-line: deprecation
         /** @type {?} */
         var keyCode = event.keyCode;
-        if (hasModifierKey(event) || [BACKSPACE, DELETE].includes(keyCode)) {
+        if (hasModifierKey(event)) {
             return;
         }
         else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {

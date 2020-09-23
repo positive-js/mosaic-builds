@@ -440,7 +440,9 @@
         function () {
             /** @type {?} */
             var newTimeObj = this.getDateFromTimeString(this.viewValue);
+            this.lastValueValid = !!newTimeObj;
             if (!newTimeObj) {
+                this.control.updateValueAndValidity();
                 return;
             }
             /** @type {?} */
@@ -484,7 +486,7 @@
             // tslint:disable-next-line: deprecation
             /** @type {?} */
             var keyCode = event.keyCode;
-            if (keycodes.hasModifierKey(event) || [keycodes.BACKSPACE, keycodes.DELETE].includes(keyCode)) {
+            if (keycodes.hasModifierKey(event)) {
                 return;
             }
             else if ([keycodes.UP_ARROW, keycodes.DOWN_ARROW].includes(keyCode)) {
