@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Directive, Input, Component, ViewEncapsulation, InjectionToken, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Inject, Output, forwardRef, IterableDiffers, Attribute, ViewChild, ContentChildren, NgModule } from '@angular/core';
-import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNodeToggle, CdkTree, CdkTreeNode, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
+import { Directive, Input, Component, ViewEncapsulation, InjectionToken, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Inject, Output, forwardRef, QueryList, IterableDiffers, Attribute, ViewChild, ContentChildren, NgModule } from '@angular/core';
+import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { MultipleMode, getMcSelectNonArrayValueError, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { __extends, __spread, __read } from 'tslib';
 import { map, take, takeUntil } from 'rxjs/operators';
@@ -129,12 +129,14 @@ if (false) {
 /**
  * @template T
  */
-var McTreeNodeToggleComponent = /** @class */ (function (_super) {
-    __extends(McTreeNodeToggleComponent, _super);
+var McTreeNodeToggleComponent = /** @class */ (function () {
     function McTreeNodeToggleComponent(tree, treeNode) {
-        var _this = _super.call(this, tree, treeNode) || this;
-        _this.disabled = false;
-        _this.tree.treeControl.filterValue
+        var _this = this;
+        this.tree = tree;
+        this.treeNode = treeNode;
+        this.disabled = false;
+        this._recursive = false;
+        this.tree.treeControl.filterValue
             .pipe(map((/**
          * @param {?} value
          * @return {?}
@@ -145,8 +147,24 @@ var McTreeNodeToggleComponent = /** @class */ (function (_super) {
          * @return {?}
          */
         function (state) { return _this.disabled = state; }));
-        return _this;
     }
+    Object.defineProperty(McTreeNodeToggleComponent.prototype, "recursive", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._recursive;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._recursive = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(McTreeNodeToggleComponent.prototype, "iconState", {
         get: /**
          * @return {?}
@@ -157,18 +175,31 @@ var McTreeNodeToggleComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McTreeNodeToggleComponent.prototype.toggle = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        this.recursive
+            ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
+            : this.tree.treeControl.toggle(this.treeNode.data);
+        event.stopPropagation();
+    };
     McTreeNodeToggleComponent.decorators = [
         { type: Component, args: [{
                     selector: 'mc-tree-node-toggle',
                     template: "\n        <i class=\"mc mc-icon mc-angle-down-S_16\"></i>\n    ",
                     host: {
                         class: 'mc-tree-node-toggle',
-                        '(click)': 'toggle($event)',
                         '[class.mc-opened]': 'iconState',
-                        '[attr.disabled]': 'disabled || null'
+                        '[attr.disabled]': 'disabled || null',
+                        '(click)': 'toggle($event)'
                     },
-                    encapsulation: ViewEncapsulation.None,
-                    providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleComponent }]
+                    encapsulation: ViewEncapsulation.None
                 }] }
     ];
     /** @nocollapse */
@@ -177,25 +208,43 @@ var McTreeNodeToggleComponent = /** @class */ (function (_super) {
         { type: CdkTreeNode }
     ]; };
     McTreeNodeToggleComponent.propDecorators = {
-        node: [{ type: Input }]
+        node: [{ type: Input }],
+        recursive: [{ type: Input, args: ['cdkTreeNodeToggleRecursive',] }]
     };
     return McTreeNodeToggleComponent;
-}(CdkTreeNodeToggle));
+}());
 if (false) {
     /** @type {?} */
     McTreeNodeToggleComponent.prototype.disabled;
     /** @type {?} */
     McTreeNodeToggleComponent.prototype.node;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleComponent.prototype._recursive;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleComponent.prototype.tree;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleComponent.prototype.treeNode;
 }
 /**
  * @template T
  */
-var McTreeNodeToggleDirective = /** @class */ (function (_super) {
-    __extends(McTreeNodeToggleDirective, _super);
+var McTreeNodeToggleDirective = /** @class */ (function () {
     function McTreeNodeToggleDirective(tree, treeNode) {
-        var _this = _super.call(this, tree, treeNode) || this;
-        _this.disabled = false;
-        _this.tree.treeControl.filterValue
+        var _this = this;
+        this.tree = tree;
+        this.treeNode = treeNode;
+        this.disabled = false;
+        this._recursive = false;
+        this.tree.treeControl.filterValue
             .pipe(map((/**
          * @param {?} value
          * @return {?}
@@ -206,16 +255,45 @@ var McTreeNodeToggleDirective = /** @class */ (function (_super) {
          * @return {?}
          */
         function (state) { return _this.disabled = state; }));
-        return _this;
     }
+    Object.defineProperty(McTreeNodeToggleDirective.prototype, "recursive", {
+        get: /**
+         * @return {?}
+         */
+        function () {
+            return this._recursive;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._recursive = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    McTreeNodeToggleDirective.prototype.toggle = /**
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        this.recursive
+            ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
+            : this.tree.treeControl.toggle(this.treeNode.data);
+        event.stopPropagation();
+    };
     McTreeNodeToggleDirective.decorators = [
         { type: Directive, args: [{
                     selector: '[mcTreeNodeToggle]',
                     host: {
-                        '(click)': 'toggle($event)',
-                        '[attr.disabled]': 'disabled || null'
-                    },
-                    providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]
+                        '[attr.disabled]': 'disabled || null',
+                        '(click)': 'toggle($event)'
+                    }
                 },] }
     ];
     /** @nocollapse */
@@ -223,11 +301,29 @@ var McTreeNodeToggleDirective = /** @class */ (function (_super) {
         { type: CdkTree },
         { type: CdkTreeNode }
     ]; };
+    McTreeNodeToggleDirective.propDecorators = {
+        recursive: [{ type: Input, args: ['cdkTreeNodeToggleRecursive',] }]
+    };
     return McTreeNodeToggleDirective;
-}(CdkTreeNodeToggle));
+}());
 if (false) {
     /** @type {?} */
     McTreeNodeToggleDirective.prototype.disabled;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleDirective.prototype._recursive;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleDirective.prototype.tree;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleDirective.prototype.treeNode;
 }
 
 /**
@@ -721,11 +817,13 @@ var McTreeSelection = /** @class */ (function (_super) {
     function McTreeSelection(elementRef, differs, changeDetectorRef, multiple) {
         var _this = _super.call(this, differs, changeDetectorRef) || this;
         _this.elementRef = elementRef;
+        _this.renderedOptions = new QueryList();
         _this.resetFocusedItemOnBlur = true;
         _this.navigationChange = new EventEmitter();
         _this.selectionChange = new EventEmitter();
         _this.multipleMode = null;
         _this.userTabIndex = null;
+        _this.sortedNodes = [];
         _this._autoSelect = true;
         _this._noUnselectLast = true;
         _this._disabled = false;
@@ -745,6 +843,30 @@ var McTreeSelection = /** @class */ (function (_super) {
          * @return {?}
          */
         function () { });
+        _this.updateRenderedOptions = (/**
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
+            var orderedOptions = [];
+            _this.sortedNodes.forEach((/**
+             * @param {?} node
+             * @return {?}
+             */
+            function (node) {
+                /** @type {?} */
+                var found = _this.unorderedOptions.find((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                function (option) { return option.value === _this.treeControl.getValue(node); }));
+                if (found) {
+                    orderedOptions.push(found);
+                }
+            }));
+            _this.renderedOptions.reset(orderedOptions);
+            _this.renderedOptions.notifyOnChanges();
+        });
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
             _this.multipleMode = multiple;
         }
@@ -888,6 +1010,7 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function () {
         var _this = this;
+        this.unorderedOptions.changes.subscribe(this.updateRenderedOptions);
         this.keyManager = new FocusKeyManager(this.renderedOptions)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
@@ -1206,48 +1329,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         if (dataDiffer === void 0) { dataDiffer = this.dataDiffer; }
         if (viewContainer === void 0) { viewContainer = this.nodeOutlet.viewContainer; }
         _super.prototype.renderNodeChanges.call(this, data, dataDiffer, viewContainer, parentData);
-        /** @type {?} */
-        var arrayOfInstances = [];
-        /** @type {?} */
-        var changeDetectorRefs = [];
-        viewContainer._embeddedViews.forEach((/**
-         * @param {?} view
-         * @return {?}
-         */
-        function (view) {
-            /** @type {?} */
-            var viewDef = view.def;
-            viewDef.nodes.forEach((/**
-             * @param {?} node
-             * @return {?}
-             */
-            function (node) {
-                if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
-                    /** @type {?} */
-                    var nodeData = view.nodes[node.nodeIndex];
-                    arrayOfInstances.push((/** @type {?} */ (nodeData.instance)));
-                    changeDetectorRefs.push(nodeData.instance.changeDetectorRef);
-                }
-            }));
-        }));
-        setTimeout((/**
-         * @return {?}
-         */
-        function () {
-            changeDetectorRefs.forEach((/**
-             * @param {?} changeDetectorRef
-             * @return {?}
-             */
-            function (changeDetectorRef) {
-                if (!changeDetectorRef.destroyed) {
-                    changeDetectorRef.detectChanges();
-                }
-            }));
-        }));
-        if (this.renderedOptions) {
-            this.renderedOptions.reset(arrayOfInstances);
-            this.renderedOptions.notifyOnChanges();
-        }
+        this.sortedNodes = this.getSortedNodes(viewContainer);
         this.updateScrollSize();
         this.nodeOutlet.changeDetectorRef.detectChanges();
     };
@@ -1308,7 +1390,7 @@ var McTreeSelection = /** @class */ (function (_super) {
         if (this.multiple && value && !Array.isArray(value)) {
             throw getMcSelectNonArrayValueError();
         }
-        if (this.renderedOptions) {
+        if (this.renderedOptions.length) {
             this.setOptionsFromValues(this.multiple ? value : [value]);
         }
     };
@@ -1398,6 +1480,26 @@ var McTreeSelection = /** @class */ (function (_super) {
      */
     function () {
         this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    };
+    /**
+     * @private
+     * @param {?} viewContainer
+     * @return {?}
+     */
+    McTreeSelection.prototype.getSortedNodes = /**
+     * @private
+     * @param {?} viewContainer
+     * @return {?}
+     */
+    function (viewContainer) {
+        /** @type {?} */
+        var array = [];
+        for (var i = 0; i < viewContainer.length; i++) {
+            /** @type {?} */
+            var viewRef = (/** @type {?} */ (viewContainer.get(i)));
+            array.push(viewRef.context.$implicit);
+        }
+        return array;
     };
     /**
      * @private
@@ -1536,7 +1638,7 @@ var McTreeSelection = /** @class */ (function (_super) {
      * @return {?}
      */
     function () {
-        if (this.renderedOptions) {
+        if (this.renderedOptions.length) {
             this.renderedOptions.forEach((/**
              * @param {?} option
              * @return {?}
@@ -1627,7 +1729,7 @@ var McTreeSelection = /** @class */ (function (_super) {
     ]; };
     McTreeSelection.propDecorators = {
         nodeOutlet: [{ type: ViewChild, args: [CdkTreeNodeOutlet, { static: true },] }],
-        renderedOptions: [{ type: ContentChildren, args: [McTreeOption,] }],
+        unorderedOptions: [{ type: ContentChildren, args: [McTreeOption,] }],
         treeControl: [{ type: Input }],
         navigationChange: [{ type: Output }],
         selectionChange: [{ type: Output }],
@@ -1641,6 +1743,8 @@ var McTreeSelection = /** @class */ (function (_super) {
 if (false) {
     /** @type {?} */
     McTreeSelection.prototype.nodeOutlet;
+    /** @type {?} */
+    McTreeSelection.prototype.unorderedOptions;
     /** @type {?} */
     McTreeSelection.prototype.renderedOptions;
     /** @type {?} */
@@ -1659,6 +1763,11 @@ if (false) {
     McTreeSelection.prototype.multipleMode;
     /** @type {?} */
     McTreeSelection.prototype.userTabIndex;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeSelection.prototype.sortedNodes;
     /**
      * @type {?}
      * @private
@@ -1704,6 +1813,11 @@ if (false) {
      * @type {?}
      */
     McTreeSelection.prototype.onTouched;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeSelection.prototype.updateRenderedOptions;
     /**
      * @type {?}
      * @private

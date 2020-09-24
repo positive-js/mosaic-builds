@@ -13,7 +13,7 @@ import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormCont
 import { DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, ENTER, SPACE, HOME, END, PAGE_UP, PAGE_DOWN, A, hasModifierKey } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl, McFormField } from '@ptsecurity/mosaic/form-field';
 import { Subject, defer, merge } from 'rxjs';
-import { filter, map, take, switchMap, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { filter, map, startWith, switchMap, take, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -209,11 +209,14 @@ class McTreeSelect extends McTreeSelectMixinBase {
          */
         () => {
             if (this.options) {
-                return merge(...this.options.map((/**
+                return this.options.changes.pipe(startWith(this.options), switchMap((/**
+                 * @return {?}
+                 */
+                () => merge(...this.options.map((/**
                  * @param {?} option
                  * @return {?}
                  */
-                (option) => option.onSelectionChange)));
+                (option) => option.onSelectionChange))))));
             }
             return this.ngZone.onStable
                 .asObservable()

@@ -397,11 +397,14 @@
              */
             function () {
                 if (_this.options) {
-                    return rxjs.merge.apply(void 0, __spread(_this.options.map((/**
+                    return _this.options.changes.pipe(operators.startWith(_this.options), operators.switchMap((/**
+                     * @return {?}
+                     */
+                    function () { return rxjs.merge.apply(void 0, __spread(_this.options.map((/**
                      * @param {?} option
                      * @return {?}
                      */
-                    function (option) { return option.onSelectionChange; }))));
+                    function (option) { return option.onSelectionChange; })))); })));
                 }
                 return _this.ngZone.onStable
                     .asObservable()

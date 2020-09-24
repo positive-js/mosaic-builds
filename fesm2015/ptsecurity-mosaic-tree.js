@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Directive, Input, Component, ViewEncapsulation, InjectionToken, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Inject, Output, forwardRef, IterableDiffers, Attribute, ViewChild, ContentChildren, NgModule } from '@angular/core';
-import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNodeToggle, CdkTree, CdkTreeNode, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
+import { Directive, Input, Component, ViewEncapsulation, InjectionToken, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Inject, Output, forwardRef, QueryList, IterableDiffers, Attribute, ViewChild, ContentChildren, NgModule } from '@angular/core';
+import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
 import { MultipleMode, getMcSelectNonArrayValueError, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { map, take, takeUntil } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -110,14 +110,16 @@ if (false) {
 /**
  * @template T
  */
-class McTreeNodeToggleComponent extends CdkTreeNodeToggle {
+class McTreeNodeToggleComponent {
     /**
      * @param {?} tree
      * @param {?} treeNode
      */
     constructor(tree, treeNode) {
-        super(tree, treeNode);
+        this.tree = tree;
+        this.treeNode = treeNode;
         this.disabled = false;
+        this._recursive = false;
         this.tree.treeControl.filterValue
             .pipe(map((/**
          * @param {?} value
@@ -133,8 +135,31 @@ class McTreeNodeToggleComponent extends CdkTreeNodeToggle {
     /**
      * @return {?}
      */
+    get recursive() {
+        return this._recursive;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set recursive(value) {
+        this._recursive = value;
+    }
+    /**
+     * @return {?}
+     */
     get iconState() {
         return this.disabled || this.tree.treeControl.isExpanded(this.node);
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    toggle(event) {
+        this.recursive
+            ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
+            : this.tree.treeControl.toggle(this.treeNode.data);
+        event.stopPropagation();
     }
 }
 McTreeNodeToggleComponent.decorators = [
@@ -145,12 +170,11 @@ McTreeNodeToggleComponent.decorators = [
     `,
                 host: {
                     class: 'mc-tree-node-toggle',
-                    '(click)': 'toggle($event)',
                     '[class.mc-opened]': 'iconState',
-                    '[attr.disabled]': 'disabled || null'
+                    '[attr.disabled]': 'disabled || null',
+                    '(click)': 'toggle($event)'
                 },
-                encapsulation: ViewEncapsulation.None,
-                providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleComponent }]
+                encapsulation: ViewEncapsulation.None
             }] }
 ];
 /** @nocollapse */
@@ -159,25 +183,43 @@ McTreeNodeToggleComponent.ctorParameters = () => [
     { type: CdkTreeNode }
 ];
 McTreeNodeToggleComponent.propDecorators = {
-    node: [{ type: Input }]
+    node: [{ type: Input }],
+    recursive: [{ type: Input, args: ['cdkTreeNodeToggleRecursive',] }]
 };
 if (false) {
     /** @type {?} */
     McTreeNodeToggleComponent.prototype.disabled;
     /** @type {?} */
     McTreeNodeToggleComponent.prototype.node;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleComponent.prototype._recursive;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleComponent.prototype.tree;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleComponent.prototype.treeNode;
 }
 /**
  * @template T
  */
-class McTreeNodeToggleDirective extends CdkTreeNodeToggle {
+class McTreeNodeToggleDirective {
     /**
      * @param {?} tree
      * @param {?} treeNode
      */
     constructor(tree, treeNode) {
-        super(tree, treeNode);
+        this.tree = tree;
+        this.treeNode = treeNode;
         this.disabled = false;
+        this._recursive = false;
         this.tree.treeControl.filterValue
             .pipe(map((/**
          * @param {?} value
@@ -190,15 +232,37 @@ class McTreeNodeToggleDirective extends CdkTreeNodeToggle {
          */
         (state) => this.disabled = state));
     }
+    /**
+     * @return {?}
+     */
+    get recursive() {
+        return this._recursive;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set recursive(value) {
+        this._recursive = value;
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    toggle(event) {
+        this.recursive
+            ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
+            : this.tree.treeControl.toggle(this.treeNode.data);
+        event.stopPropagation();
+    }
 }
 McTreeNodeToggleDirective.decorators = [
     { type: Directive, args: [{
                 selector: '[mcTreeNodeToggle]',
                 host: {
-                    '(click)': 'toggle($event)',
-                    '[attr.disabled]': 'disabled || null'
-                },
-                providers: [{ provide: CdkTreeNodeToggle, useExisting: McTreeNodeToggleDirective }]
+                    '[attr.disabled]': 'disabled || null',
+                    '(click)': 'toggle($event)'
+                }
             },] }
 ];
 /** @nocollapse */
@@ -206,9 +270,27 @@ McTreeNodeToggleDirective.ctorParameters = () => [
     { type: CdkTree },
     { type: CdkTreeNode }
 ];
+McTreeNodeToggleDirective.propDecorators = {
+    recursive: [{ type: Input, args: ['cdkTreeNodeToggleRecursive',] }]
+};
 if (false) {
     /** @type {?} */
     McTreeNodeToggleDirective.prototype.disabled;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleDirective.prototype._recursive;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleDirective.prototype.tree;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeNodeToggleDirective.prototype.treeNode;
 }
 
 /**
@@ -641,11 +723,13 @@ class McTreeSelection extends CdkTree {
     constructor(elementRef, differs, changeDetectorRef, multiple) {
         super(differs, changeDetectorRef);
         this.elementRef = elementRef;
+        this.renderedOptions = new QueryList();
         this.resetFocusedItemOnBlur = true;
         this.navigationChange = new EventEmitter();
         this.selectionChange = new EventEmitter();
         this.multipleMode = null;
         this.userTabIndex = null;
+        this.sortedNodes = [];
         this._autoSelect = true;
         this._noUnselectLast = true;
         this._disabled = false;
@@ -665,6 +749,30 @@ class McTreeSelection extends CdkTree {
          * @return {?}
          */
         () => { });
+        this.updateRenderedOptions = (/**
+         * @return {?}
+         */
+        () => {
+            /** @type {?} */
+            const orderedOptions = [];
+            this.sortedNodes.forEach((/**
+             * @param {?} node
+             * @return {?}
+             */
+            (node) => {
+                /** @type {?} */
+                const found = this.unorderedOptions.find((/**
+                 * @param {?} option
+                 * @return {?}
+                 */
+                (option) => option.value === this.treeControl.getValue(node)));
+                if (found) {
+                    orderedOptions.push(found);
+                }
+            }));
+            this.renderedOptions.reset(orderedOptions);
+            this.renderedOptions.notifyOnChanges();
+        });
         if (multiple === MultipleMode.CHECKBOX || multiple === MultipleMode.KEYBOARD) {
             this.multipleMode = multiple;
         }
@@ -771,6 +879,7 @@ class McTreeSelection extends CdkTree {
      * @return {?}
      */
     ngAfterContentInit() {
+        this.unorderedOptions.changes.subscribe(this.updateRenderedOptions);
         this.keyManager = new FocusKeyManager(this.renderedOptions)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
@@ -1038,48 +1147,7 @@ class McTreeSelection extends CdkTree {
      */
     renderNodeChanges(data, dataDiffer = this.dataDiffer, viewContainer = this.nodeOutlet.viewContainer, parentData) {
         super.renderNodeChanges(data, dataDiffer, viewContainer, parentData);
-        /** @type {?} */
-        const arrayOfInstances = [];
-        /** @type {?} */
-        const changeDetectorRefs = [];
-        viewContainer._embeddedViews.forEach((/**
-         * @param {?} view
-         * @return {?}
-         */
-        (view) => {
-            /** @type {?} */
-            const viewDef = view.def;
-            viewDef.nodes.forEach((/**
-             * @param {?} node
-             * @return {?}
-             */
-            (node) => {
-                if (viewDef.nodeMatchedQueries === node.matchedQueryIds) {
-                    /** @type {?} */
-                    const nodeData = view.nodes[node.nodeIndex];
-                    arrayOfInstances.push((/** @type {?} */ (nodeData.instance)));
-                    changeDetectorRefs.push(nodeData.instance.changeDetectorRef);
-                }
-            }));
-        }));
-        setTimeout((/**
-         * @return {?}
-         */
-        () => {
-            changeDetectorRefs.forEach((/**
-             * @param {?} changeDetectorRef
-             * @return {?}
-             */
-            (changeDetectorRef) => {
-                if (!changeDetectorRef.destroyed) {
-                    changeDetectorRef.detectChanges();
-                }
-            }));
-        }));
-        if (this.renderedOptions) {
-            this.renderedOptions.reset(arrayOfInstances);
-            this.renderedOptions.notifyOnChanges();
-        }
+        this.sortedNodes = this.getSortedNodes(viewContainer);
         this.updateScrollSize();
         this.nodeOutlet.changeDetectorRef.detectChanges();
     }
@@ -1122,7 +1190,7 @@ class McTreeSelection extends CdkTree {
         if (this.multiple && value && !Array.isArray(value)) {
             throw getMcSelectNonArrayValueError();
         }
-        if (this.renderedOptions) {
+        if (this.renderedOptions.length) {
             this.setOptionsFromValues(this.multiple ? value : [value]);
         }
     }
@@ -1182,6 +1250,21 @@ class McTreeSelection extends CdkTree {
      */
     updateTabIndex() {
         this._tabIndex = this.renderedOptions.length === 0 ? -1 : 0;
+    }
+    /**
+     * @private
+     * @param {?} viewContainer
+     * @return {?}
+     */
+    getSortedNodes(viewContainer) {
+        /** @type {?} */
+        const array = [];
+        for (let i = 0; i < viewContainer.length; i++) {
+            /** @type {?} */
+            const viewRef = (/** @type {?} */ (viewContainer.get(i)));
+            array.push(viewRef.context.$implicit);
+        }
+        return array;
     }
     /**
      * @private
@@ -1281,7 +1364,7 @@ class McTreeSelection extends CdkTree {
      * @return {?}
      */
     markOptionsForCheck() {
-        if (this.renderedOptions) {
+        if (this.renderedOptions.length) {
             this.renderedOptions.forEach((/**
              * @param {?} option
              * @return {?}
@@ -1359,7 +1442,7 @@ McTreeSelection.ctorParameters = () => [
 ];
 McTreeSelection.propDecorators = {
     nodeOutlet: [{ type: ViewChild, args: [CdkTreeNodeOutlet, { static: true },] }],
-    renderedOptions: [{ type: ContentChildren, args: [McTreeOption,] }],
+    unorderedOptions: [{ type: ContentChildren, args: [McTreeOption,] }],
     treeControl: [{ type: Input }],
     navigationChange: [{ type: Output }],
     selectionChange: [{ type: Output }],
@@ -1371,6 +1454,8 @@ McTreeSelection.propDecorators = {
 if (false) {
     /** @type {?} */
     McTreeSelection.prototype.nodeOutlet;
+    /** @type {?} */
+    McTreeSelection.prototype.unorderedOptions;
     /** @type {?} */
     McTreeSelection.prototype.renderedOptions;
     /** @type {?} */
@@ -1389,6 +1474,11 @@ if (false) {
     McTreeSelection.prototype.multipleMode;
     /** @type {?} */
     McTreeSelection.prototype.userTabIndex;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeSelection.prototype.sortedNodes;
     /**
      * @type {?}
      * @private
@@ -1434,6 +1524,11 @@ if (false) {
      * @type {?}
      */
     McTreeSelection.prototype.onTouched;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeSelection.prototype.updateRenderedOptions;
     /**
      * @type {?}
      * @private

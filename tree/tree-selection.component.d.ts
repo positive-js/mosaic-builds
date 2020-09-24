@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
@@ -24,6 +24,7 @@ interface SelectionModelOption {
 export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
     private elementRef;
     nodeOutlet: CdkTreeNodeOutlet;
+    unorderedOptions: QueryList<T>;
     renderedOptions: QueryList<T>;
     keyManager: FocusKeyManager<T>;
     selectionModel: SelectionModel<SelectionModelOption>;
@@ -33,6 +34,7 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     readonly selectionChange: EventEmitter<McTreeSelectionChange<T>>;
     multipleMode: MultipleMode | null;
     userTabIndex: number | null;
+    private sortedNodes;
     get autoSelect(): boolean;
     set autoSelect(value: boolean);
     private _autoSelect;
@@ -64,7 +66,7 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     setSelectedOptions(option: T): void;
     setFocusedOption(option: T): void;
     toggleFocusedOption(): void;
-    renderNodeChanges(data: T[], dataDiffer?: IterableDiffer<T>, viewContainer?: any, parentData?: T): void;
+    renderNodeChanges(data: T[], dataDiffer?: IterableDiffer<T>, viewContainer?: ViewContainerRef, parentData?: T): void;
     getHeight(): number;
     getItemHeight(): number;
     emitNavigationEvent(option: T): void;
@@ -83,6 +85,8 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     setOptionsFromValues(values: any[]): void;
     getSelectedValues(): any[];
     protected updateTabIndex(): void;
+    private updateRenderedOptions;
+    private getSortedNodes;
     private allowFocusEscape;
     private resetOptions;
     private dropSubscriptions;
