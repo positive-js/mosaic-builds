@@ -1068,11 +1068,13 @@
                 /** @type {?} */
                 var clickTarget = ( /** @type {?} */(event.target));
                 /** @type {?} */
-                var formField = _this.formField ?
-                    _this.formField._elementRef.nativeElement : null;
+                var formField = _this.formField ? _this.formField._elementRef.nativeElement : null;
+                /** @type {?} */
+                var customOrigin = _this.connectedTo ? _this.connectedTo.elementRef.nativeElement : null;
                 return _this.overlayAttached &&
                     clickTarget !== _this.elementRef.nativeElement &&
                     (!formField || !formField.contains(clickTarget)) &&
+                    (!customOrigin || !customOrigin.contains(clickTarget)) &&
                     (!!_this.overlayRef && !_this.overlayRef.overlayElement.contains(clickTarget));
             })));
         };

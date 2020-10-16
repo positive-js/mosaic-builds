@@ -760,11 +760,13 @@ class McAutocompleteTrigger {
             /** @type {?} */
             const clickTarget = (/** @type {?} */ (event.target));
             /** @type {?} */
-            const formField = this.formField ?
-                this.formField._elementRef.nativeElement : null;
+            const formField = this.formField ? this.formField._elementRef.nativeElement : null;
+            /** @type {?} */
+            const customOrigin = this.connectedTo ? this.connectedTo.elementRef.nativeElement : null;
             return this.overlayAttached &&
                 clickTarget !== this.elementRef.nativeElement &&
                 (!formField || !formField.contains(clickTarget)) &&
+                (!customOrigin || !customOrigin.contains(clickTarget)) &&
                 (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget));
         })));
     }
