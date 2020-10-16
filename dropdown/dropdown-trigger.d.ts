@@ -50,6 +50,7 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private overlayRef;
     private closeSubscription;
     private hoverSubscription;
+    private outsidePointerEventsSubscription;
     constructor(_overlay: Overlay, _element: ElementRef<HTMLElement>, _viewContainerRef: ViewContainerRef, _scrollStrategy: any, _parent: McDropdown, _dropdownItemInstance: McDropdownItem, _dir: Directionality, _focusMonitor?: FocusMonitor | undefined);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;

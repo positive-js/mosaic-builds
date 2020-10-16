@@ -481,6 +481,8 @@
         McDropdownPanel.prototype.backdropClass;
         /** @type {?|undefined} */
         McDropdownPanel.prototype.hasBackdrop;
+        /** @type {?|undefined} */
+        McDropdownPanel.prototype.closeOnOutsideClick;
         /**
          * @param {?=} origin
          * @return {?}
@@ -835,6 +837,8 @@
          * @type {?|undefined}
          */
         McDropdownDefaultOptions.prototype.hasBackdrop;
+        /** @type {?|undefined} */
+        McDropdownDefaultOptions.prototype.closeOnOutsideClick;
     }
     /**
      * Injection token to be used to override the default options for `mc-dropdown`.
@@ -868,6 +872,7 @@
             this._elementRef = _elementRef;
             this._ngZone = _ngZone;
             this._defaultOptions = _defaultOptions;
+            this._closeOnOutsideClick = this._defaultOptions.closeOnOutsideClick;
             this._xPosition = this._defaultOptions.xPosition;
             this._yPosition = this._defaultOptions.yPosition;
             this._overlapTriggerX = this._defaultOptions.overlapTriggerX;
@@ -1000,6 +1005,22 @@
              */
             set: function (value) {
                 this._hasBackdrop = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McDropdown.prototype, "closeOnOutsideClick", {
+            /**
+             * Close menu when an outside click is detected
+             * @return {?}
+             */
+            get: function () { return this._closeOnOutsideClick; },
+            /**
+             * @param {?} value
+             * @return {?}
+             */
+            set: function (value) {
+                this._closeOnOutsideClick = coercion.coerceBooleanProperty(value);
             },
             enumerable: false,
             configurable: true
@@ -1259,6 +1280,7 @@
         overlapTriggerY: [{ type: core.Input }],
         overlapTriggerX: [{ type: core.Input }],
         hasBackdrop: [{ type: core.Input }],
+        closeOnOutsideClick: [{ type: core.Input }],
         panelClass: [{ type: core.Input, args: ['class',] }],
         backdropClass: [{ type: core.Input }],
         templateRef: [{ type: core.ViewChild, args: [core.TemplateRef, { static: false },] }],
@@ -1267,6 +1289,11 @@
         closed: [{ type: core.Output }]
     };
     if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        McDropdown.prototype._closeOnOutsideClick;
         /**
          * @type {?}
          * @private
@@ -1468,6 +1495,7 @@
             this.overlayRef = null;
             this.closeSubscription = rxjs.Subscription.EMPTY;
             this.hoverSubscription = rxjs.Subscription.EMPTY;
+            this.outsidePointerEventsSubscription = rxjs.Subscription.EMPTY;
             /**
              * Handles touch start events on the trigger.
              * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
@@ -1585,6 +1613,16 @@
             var overlayRef = this.createOverlay();
             /** @type {?} */
             var overlayConfig = overlayRef.getConfig();
+            // Listen for outside click and close the menu when it occurs
+            if (this.dropdown.closeOnOutsideClick) {
+                this.outsidePointerEventsSubscription = overlayRef.outsidePointerEvents().subscribe(( /**
+                 * @return {?}
+                 */function () {
+                    if (_this.dropdownOpened) {
+                        _this.close();
+                    }
+                }));
+            }
             this.setPosition(( /** @type {?} */(overlayConfig.positionStrategy)));
             overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersNestedDropdown() :
                 this.dropdown.hasBackdrop;
@@ -1891,6 +1929,7 @@
         McDropdownTrigger.prototype.cleanUpSubscriptions = function () {
             this.closeSubscription.unsubscribe();
             this.hoverSubscription.unsubscribe();
+            this.outsidePointerEventsSubscription.unsubscribe();
         };
         /**
          * Returns a stream that emits whenever an action that should close the dropdown occurs.
@@ -2048,6 +2087,11 @@
          * @private
          */
         McDropdownTrigger.prototype.hoverSubscription;
+        /**
+         * @type {?}
+         * @private
+         */
+        McDropdownTrigger.prototype.outsidePointerEventsSubscription;
         /**
          * Handles touch start events on the trigger.
          * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.

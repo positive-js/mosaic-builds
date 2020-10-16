@@ -188,6 +188,8 @@ if (false) {
     McDropdownPanel.prototype.backdropClass;
     /** @type {?|undefined} */
     McDropdownPanel.prototype.hasBackdrop;
+    /** @type {?|undefined} */
+    McDropdownPanel.prototype.closeOnOutsideClick;
     /**
      * @param {?=} origin
      * @return {?}
@@ -555,6 +557,8 @@ if (false) {
      * @type {?|undefined}
      */
     McDropdownDefaultOptions.prototype.hasBackdrop;
+    /** @type {?|undefined} */
+    McDropdownDefaultOptions.prototype.closeOnOutsideClick;
 }
 /**
  * Injection token to be used to override the default options for `mc-dropdown`.
@@ -588,6 +592,7 @@ class McDropdown {
         this._elementRef = _elementRef;
         this._ngZone = _ngZone;
         this._defaultOptions = _defaultOptions;
+        this._closeOnOutsideClick = this._defaultOptions.closeOnOutsideClick;
         this._xPosition = this._defaultOptions.xPosition;
         this._yPosition = this._defaultOptions.yPosition;
         this._overlapTriggerX = this._defaultOptions.overlapTriggerX;
@@ -703,6 +708,18 @@ class McDropdown {
      */
     set hasBackdrop(value) {
         this._hasBackdrop = coerceBooleanProperty(value);
+    }
+    /**
+     * Close menu when an outside click is detected
+     * @return {?}
+     */
+    get closeOnOutsideClick() { return this._closeOnOutsideClick; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set closeOnOutsideClick(value) {
+        this._closeOnOutsideClick = coerceBooleanProperty(value);
     }
     /**
      * This method takes classes set on the host mc-dropdown element and applies them on the
@@ -954,6 +971,7 @@ McDropdown.propDecorators = {
     overlapTriggerY: [{ type: Input }],
     overlapTriggerX: [{ type: Input }],
     hasBackdrop: [{ type: Input }],
+    closeOnOutsideClick: [{ type: Input }],
     panelClass: [{ type: Input, args: ['class',] }],
     backdropClass: [{ type: Input }],
     templateRef: [{ type: ViewChild, args: [TemplateRef, { static: false },] }],
@@ -962,6 +980,11 @@ McDropdown.propDecorators = {
     closed: [{ type: Output }]
 };
 if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    McDropdown.prototype._closeOnOutsideClick;
     /**
      * @type {?}
      * @private
@@ -1168,6 +1191,7 @@ class McDropdownTrigger {
         this.overlayRef = null;
         this.closeSubscription = Subscription.EMPTY;
         this.hoverSubscription = Subscription.EMPTY;
+        this.outsidePointerEventsSubscription = Subscription.EMPTY;
         /**
          * Handles touch start events on the trigger.
          * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
@@ -1273,6 +1297,17 @@ class McDropdownTrigger {
         const overlayRef = this.createOverlay();
         /** @type {?} */
         const overlayConfig = overlayRef.getConfig();
+        // Listen for outside click and close the menu when it occurs
+        if (this.dropdown.closeOnOutsideClick) {
+            this.outsidePointerEventsSubscription = overlayRef.outsidePointerEvents().subscribe((/**
+             * @return {?}
+             */
+            () => {
+                if (this.dropdownOpened) {
+                    this.close();
+                }
+            }));
+        }
         this.setPosition((/** @type {?} */ (overlayConfig.positionStrategy)));
         overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersNestedDropdown() :
             this.dropdown.hasBackdrop;
@@ -1581,6 +1616,7 @@ class McDropdownTrigger {
     cleanUpSubscriptions() {
         this.closeSubscription.unsubscribe();
         this.hoverSubscription.unsubscribe();
+        this.outsidePointerEventsSubscription.unsubscribe();
     }
     /**
      * Returns a stream that emits whenever an action that should close the dropdown occurs.
@@ -1740,6 +1776,11 @@ if (false) {
      * @private
      */
     McDropdownTrigger.prototype.hoverSubscription;
+    /**
+     * @type {?}
+     * @private
+     */
+    McDropdownTrigger.prototype.outsidePointerEventsSubscription;
     /**
      * Handles touch start events on the trigger.
      * Needs to be an arrow function so we can easily use addEventListener and removeEventListener.
