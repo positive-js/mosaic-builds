@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mosaicUpgradeData = void 0;
 const data_1 = require("./data");
 exports.mosaicUpgradeData = {
     attributeSelectors: data_1.attributeSelectors,

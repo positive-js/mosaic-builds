@@ -12,7 +12,7 @@ import { filter, take } from 'rxjs/operators';
 /**
  * @fileoverview added by tsickle
  * Generated from: sidepanel-config.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to access the data that was passed in to a sidepanel.
@@ -92,7 +92,7 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: sidepanel-animations.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @enum {string} */
 const McSidepanelAnimationState = {
@@ -122,7 +122,7 @@ const mcSidepanelAnimations = {
 /**
  * @fileoverview added by tsickle
  * Generated from: sidepanel-container.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const MC_SIDEPANEL_WITH_INDENT = new InjectionToken('mc-sidepanel-with-indent');
@@ -265,7 +265,7 @@ McSidepanelContainerComponent.decorators = [
                     '(@state.start)': 'onAnimation($event)',
                     '(@state.done)': 'onAnimation($event)'
                 },
-                styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-sidepanel-container{outline:0;display:flex;flex:1;position:fixed;min-height:0}.mc-sidepanel-container .flex{min-height:0}.mc-sidepanel-container_left,.mc-sidepanel-container_right{width:33%;min-width:400px;height:100%;top:0}.mc-sidepanel-container_left .mc-sidepanel-indent,.mc-sidepanel-container_right .mc-sidepanel-indent{width:16px;height:100%}.mc-sidepanel-container_right{right:0;transform:translateX(100%)}.mc-sidepanel-container_right .mc-sidepanel-wrapper{flex-direction:row}.mc-sidepanel-container_left{left:0;transform:translateX(-100%)}.mc-sidepanel-container_left .mc-sidepanel-wrapper{flex-direction:row-reverse}.mc-sidepanel-container_bottom,.mc-sidepanel-container_top{flex-direction:column;height:33%;min-height:400px;width:100%;left:0}.mc-sidepanel-container_bottom .mc-sidepanel-indent,.mc-sidepanel-container_top .mc-sidepanel-indent{height:16px;width:100%}.mc-sidepanel-container_top{top:0;transform:translateY(-100%)}.mc-sidepanel-container_top .mc-sidepanel-wrapper{flex-direction:column-reverse}.mc-sidepanel-container_bottom{bottom:0;transform:translateY(100%)}.mc-sidepanel-container_bottom .mc-sidepanel-wrapper{flex-direction:column}.mc-sidepanel-wrapper{display:flex;flex:1;min-height:0;width:100%}.mc-sidepanel-indent{display:flex;flex:0 0 auto}.mc-sidepanel-indent .mc-sidepanel-close{width:100%;height:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;background:0 0;padding:0}.mc-sidepanel-content{display:flex;flex-direction:column;flex:1;min-height:0;width:100%}.mc-sidepanel-header{padding:14px 16px;display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-header .mc-sidepanel-close{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:0;border:none;background:0 0;padding:0 0 0 8px}.mc-sidepanel-title{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mc-sidepanel-body{overflow-y:auto;display:flex;flex:1;flex-direction:column;min-height:0}.mc-sidepanel-footer{padding:16px;display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-footer .mc-sidepanel-actions{display:flex;align-items:center;flex-direction:row;flex:1}.mc-sidepanel-footer .mc-sidepanel-actions[align=left]{justify-content:start}.mc-sidepanel-footer .mc-sidepanel-actions[align=right]{justify-content:flex-end}.mc-sidepanel-footer button+button{margin-left:16px}"]
+                styles: [".mc-no-select{-moz-user-select:none;-ms-user-select:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.mc-sidepanel-container{display:flex;flex:1;min-height:0;outline:none;position:fixed}.mc-sidepanel-container .flex{min-height:0}.mc-sidepanel-container_left,.mc-sidepanel-container_right{height:100%;min-width:400px;top:0;width:33%}.mc-sidepanel-container_left .mc-sidepanel-indent,.mc-sidepanel-container_right .mc-sidepanel-indent{height:100%;width:16px}.mc-sidepanel-container_right{right:0;transform:translateX(100%)}.mc-sidepanel-container_right .mc-sidepanel-wrapper{flex-direction:row}.mc-sidepanel-container_left{left:0;transform:translateX(-100%)}.mc-sidepanel-container_left .mc-sidepanel-wrapper{flex-direction:row-reverse}.mc-sidepanel-container_bottom,.mc-sidepanel-container_top{flex-direction:column;height:33%;left:0;min-height:400px;width:100%}.mc-sidepanel-container_bottom .mc-sidepanel-indent,.mc-sidepanel-container_top .mc-sidepanel-indent{height:16px;width:100%}.mc-sidepanel-container_top{top:0;transform:translateY(-100%)}.mc-sidepanel-container_top .mc-sidepanel-wrapper{flex-direction:column-reverse}.mc-sidepanel-container_bottom{bottom:0;transform:translateY(100%)}.mc-sidepanel-container_bottom .mc-sidepanel-wrapper{flex-direction:column}.mc-sidepanel-wrapper{display:flex;flex:1;min-height:0;width:100%}.mc-sidepanel-indent{display:flex;flex:0 0 auto}.mc-sidepanel-indent .mc-sidepanel-close{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;background:transparent;border:none;cursor:pointer;height:100%;outline:none;padding:0;user-select:none;width:100%}.mc-sidepanel-content{display:flex;flex:1;flex-direction:column;min-height:0;width:100%}.mc-sidepanel-header{align-items:center;display:flex;flex:0 0 auto;flex-flow:row nowrap;justify-content:space-between;padding:14px 16px}.mc-sidepanel-header .mc-sidepanel-close{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;background:transparent;border:none;cursor:pointer;outline:none;padding:0 0 0 8px;user-select:none}.mc-sidepanel-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-sidepanel-body{display:flex;flex:1;flex-direction:column;min-height:0;overflow-y:auto}.mc-sidepanel-footer{align-items:center;display:flex;flex:0 0 auto;flex-flow:row nowrap;justify-content:space-between;padding:16px}.mc-sidepanel-footer .mc-sidepanel-actions{align-items:center;display:flex;flex:1;flex-direction:row}.mc-sidepanel-footer .mc-sidepanel-actions[align=left]{justify-content:start}.mc-sidepanel-footer .mc-sidepanel-actions[align=right]{justify-content:flex-end}.mc-sidepanel-footer button+button{margin-left:16px}"]
             }] }
 ];
 /** @nocollapse */
@@ -329,7 +329,7 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: sidepanel-ref.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Counter for unique sidepanel ids.
 /** @type {?} */
@@ -470,7 +470,7 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: sidepanel.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Injection token that can be used to specify default sidepanel options.
@@ -577,6 +577,7 @@ class McSidepanelService {
     attachContainer(overlayRef, config) {
         /** @type {?} */
         const openedSidepanelsWithSamePosition = this.getOpenedSidepanelsWithSamePosition(config);
+        // tslint:disable-next-line:deprecation
         /** @type {?} */
         const injector = new PortalInjector(this.injector, new WeakMap([
             [McSidepanelConfig, config],
@@ -599,7 +600,9 @@ class McSidepanelService {
      * @param {?} sidepanelContainer Sidepanel container element that wraps all of the contents.
      * @return {?} The custom injector that can be used inside the sidepanel.
      */
-    createInjector(config, sidepanelRef, sidepanelContainer) {
+    createInjector(config, sidepanelRef, 
+    // tslint:disable-next-line:deprecation
+    sidepanelContainer) {
         // The McSidepanelContainerComponent is injected in the portal as the McSidepanelContainerComponent and
         // the sidepanel's content are created out of the same ViewContainerRef and as such, are siblings for injector
         // purposes. To allow the hierarchy that is expected, the McSidepanelContainerComponent is explicitly
@@ -610,6 +613,7 @@ class McSidepanelService {
             [MC_SIDEPANEL_DATA, config.data],
             [McSidepanelRef, sidepanelRef]
         ]);
+        // tslint:disable-next-line:deprecation
         return new PortalInjector(this.injector, injectionTokens);
     }
     /**
@@ -728,7 +732,7 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: sidepanel-directives.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * Button that will close the current sidepanel.
@@ -903,7 +907,7 @@ function getClosestSidepanel(element, openSidepanels) {
 /**
  * @fileoverview added by tsickle
  * Generated from: sidepanel.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McSidepanelModule {
 }
@@ -940,19 +944,19 @@ McSidepanelModule.decorators = [
 /**
  * @fileoverview added by tsickle
  * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
  * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
  * Generated from: ptsecurity-mosaic-sidepanel.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { MC_SIDEPANEL_DATA, MC_SIDEPANEL_DEFAULT_OPTIONS, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelConfig, McSidepanelContainerComponent, McSidepanelModule, McSidepanelPosition, McSidepanelRef, McSidepanelService, mcSidepanelTransformAnimation as ɵa, mcSidepanelAnimations as ɵb, McSidepanelClose as ɵc, McSidepanelHeader as ɵd, McSidepanelBody as ɵe, McSidepanelFooter as ɵf, McSidepanelActions as ɵg };

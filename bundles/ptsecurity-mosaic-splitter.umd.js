@@ -1,13 +1,13 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/icon'), require('@angular/cdk/coercion')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/splitter', ['exports', '@angular/common', '@angular/core', '@ptsecurity/mosaic/icon', '@angular/cdk/coercion'], factory) :
-    (global = global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.splitter = {}), global.ng.common, global.ng.core, global.ptsecurity.mosaic.icon, global.ng.cdk.coercion));
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.splitter = {}), global.ng.common, global.ng.core, global.ptsecurity.mosaic.icon, global.ng.cdk.coercion));
 }(this, (function (exports, common, core, icon, coercion) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
      * Generated from: splitter.component.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * @record
@@ -53,6 +53,10 @@
         Vertical: "vertical",
     };
     var McGutterDirective = /** @class */ (function () {
+        /**
+         * @param {?} elementRef
+         * @param {?} renderer
+         */
         function McGutterDirective(elementRef, renderer) {
             this.elementRef = elementRef;
             this.renderer = renderer;
@@ -62,63 +66,60 @@
             this.dragged = false;
         }
         Object.defineProperty(McGutterDirective.prototype, "direction", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._direction;
             },
-            set: /**
+            /**
              * @param {?} direction
              * @return {?}
              */
-            function (direction) {
+            set: function (direction) {
                 this._direction = direction;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McGutterDirective.prototype, "order", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._order;
             },
-            set: /**
+            /**
              * @param {?} order
              * @return {?}
              */
-            function (order) {
+            set: function (order) {
                 this._order = coercion.coerceNumberProperty(order);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McGutterDirective.prototype, "size", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._size;
             },
-            set: /**
+            /**
              * @param {?} size
              * @return {?}
              */
-            function (size) {
+            set: function (size) {
                 this._size = coercion.coerceNumberProperty(size);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
          * @return {?}
          */
-        McGutterDirective.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
+        McGutterDirective.prototype.ngOnInit = function () {
             this.setStyle("flex-basis" /* FlexBasis */, coercion.coerceCssPixelValue(this.size));
             this.setStyle(this.isVertical() ? "height" /* Height */ : "width" /* Width */, coercion.coerceCssPixelValue(this.size));
             this.setStyle("order" /* Order */, this.order);
@@ -131,10 +132,7 @@
         /**
          * @return {?}
          */
-        McGutterDirective.prototype.isVertical = /**
-         * @return {?}
-         */
-        function () {
+        McGutterDirective.prototype.isVertical = function () {
             return this.direction === Direction.Vertical;
         };
         /**
@@ -143,38 +141,32 @@
          * @param {?} value
          * @return {?}
          */
-        McGutterDirective.prototype.setStyle = /**
-         * @private
-         * @param {?} property
-         * @param {?} value
-         * @return {?}
-         */
-        function (property, value) {
+        McGutterDirective.prototype.setStyle = function (property, value) {
             this.renderer.setStyle(this.elementRef.nativeElement, property, value);
-        };
-        McGutterDirective.decorators = [
-            { type: core.Directive, args: [{
-                        selector: 'mc-gutter',
-                        host: {
-                            class: 'mc-gutter',
-                            '[class.mc-gutter_vertical]': 'isVertical()',
-                            '[class.mc-gutter_dragged]': 'dragged',
-                            '(mousedown)': 'dragged = true'
-                        }
-                    },] }
-        ];
-        /** @nocollapse */
-        McGutterDirective.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: core.Renderer2 }
-        ]; };
-        McGutterDirective.propDecorators = {
-            direction: [{ type: core.Input }],
-            order: [{ type: core.Input }],
-            size: [{ type: core.Input }]
         };
         return McGutterDirective;
     }());
+    McGutterDirective.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'mc-gutter',
+                    host: {
+                        class: 'mc-gutter',
+                        '[class.mc-gutter_vertical]': 'isVertical()',
+                        '[class.mc-gutter_dragged]': 'dragged',
+                        '(mousedown)': 'dragged = true'
+                    }
+                },] }
+    ];
+    /** @nocollapse */
+    McGutterDirective.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: core.Renderer2 }
+    ]; };
+    McGutterDirective.propDecorators = {
+        direction: [{ type: core.Input }],
+        order: [{ type: core.Input }],
+        size: [{ type: core.Input }]
+    };
     if (false) {
         /**
          * @type {?}
@@ -205,6 +197,12 @@
         McGutterDirective.prototype.renderer;
     }
     var McSplitterComponent = /** @class */ (function () {
+        /**
+         * @param {?} elementRef
+         * @param {?} changeDetectorRef
+         * @param {?} ngZone
+         * @param {?} renderer
+         */
         function McSplitterComponent(elementRef, changeDetectorRef, ngZone, renderer) {
             this.elementRef = elementRef;
             this.changeDetectorRef = changeDetectorRef;
@@ -219,84 +217,80 @@
             this._gutterSize = 6;
         }
         Object.defineProperty(McSplitterComponent.prototype, "hideGutters", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._hideGutters;
             },
-            set: /**
+            /**
              * @param {?} value
              * @return {?}
              */
-            function (value) {
+            set: function (value) {
                 this._hideGutters = coercion.coerceBooleanProperty(value);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McSplitterComponent.prototype, "direction", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._direction;
             },
-            set: /**
+            /**
              * @param {?} direction
              * @return {?}
              */
-            function (direction) {
+            set: function (direction) {
                 this._direction = direction;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McSplitterComponent.prototype, "disabled", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._disabled;
             },
-            set: /**
+            /**
              * @param {?} disabled
              * @return {?}
              */
-            function (disabled) {
+            set: function (disabled) {
                 this._disabled = coercion.coerceBooleanProperty(disabled);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McSplitterComponent.prototype, "gutterSize", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._gutterSize;
             },
-            set: /**
+            /**
              * @param {?} gutterSize
              * @return {?}
              */
-            function (gutterSize) {
+            set: function (gutterSize) {
                 /** @type {?} */
                 var size = coercion.coerceNumberProperty(gutterSize);
                 this._gutterSize = size > 0 ? size : this.gutterSize;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
          * @param {?} area
          * @return {?}
          */
-        McSplitterComponent.prototype.addArea = /**
-         * @param {?} area
-         * @return {?}
-         */
-        function (area) {
+        McSplitterComponent.prototype.addArea = function (area) {
             /** @type {?} */
             var index = this.areas.length;
             /** @type {?} */
@@ -314,10 +308,7 @@
         /**
          * @return {?}
          */
-        McSplitterComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
+        McSplitterComponent.prototype.ngOnInit = function () {
             if (!this.direction) {
                 this.direction = Direction.Horizontal;
             }
@@ -329,13 +320,7 @@
          * @param {?} rightAreaIndex
          * @return {?}
          */
-        McSplitterComponent.prototype.onMouseDown = /**
-         * @param {?} event
-         * @param {?} leftAreaIndex
-         * @param {?} rightAreaIndex
-         * @return {?}
-         */
-        function (event, leftAreaIndex, rightAreaIndex) {
+        McSplitterComponent.prototype.onMouseDown = function (event, leftAreaIndex, rightAreaIndex) {
             var _this = this;
             if (this.disabled) {
                 return;
@@ -352,34 +337,29 @@
             };
             leftArea.initialSize = leftArea.area.getSize();
             rightArea.initialSize = rightArea.area.getSize();
-            this.areas.forEach((/**
+            this.areas.forEach(( /**
              * @param {?} item
              * @return {?}
-             */
-            function (item) {
+             */function (item) {
                 /** @type {?} */
                 var size = item.area.getSize();
                 item.area.disableFlex();
                 item.area.setSize(size);
             }));
-            this.ngZone.runOutsideAngular((/**
+            this.ngZone.runOutsideAngular(( /**
              * @return {?}
-             */
-            function () {
-                _this.listeners.push(_this.renderer.listen('document', 'mouseup', (/**
+             */function () {
+                _this.listeners.push(_this.renderer.listen('document', 'mouseup', ( /**
                  * @return {?}
-                 */
-                function () { return _this.onMouseUp(); })));
+                 */function () { return _this.onMouseUp(); })));
             }));
-            this.ngZone.runOutsideAngular((/**
+            this.ngZone.runOutsideAngular(( /**
              * @return {?}
-             */
-            function () {
-                _this.listeners.push(_this.renderer.listen('document', 'mousemove', (/**
+             */function () {
+                _this.listeners.push(_this.renderer.listen('document', 'mousemove', ( /**
                  * @param {?} e
                  * @return {?}
-                 */
-                function (e) { return _this.onMouseMove(e, startPoint, leftArea, rightArea); })));
+                 */function (e) { return _this.onMouseMove(e, startPoint, leftArea, rightArea); })));
             }));
             this.isDragging = true;
         };
@@ -387,19 +367,14 @@
          * @param {?} area
          * @return {?}
          */
-        McSplitterComponent.prototype.removeArea = /**
-         * @param {?} area
-         * @return {?}
-         */
-        function (area) {
+        McSplitterComponent.prototype.removeArea = function (area) {
             /** @type {?} */
             var indexToRemove = -1;
-            this.areas.some((/**
+            this.areas.some(( /**
              * @param {?} item
              * @param {?} index
              * @return {?}
-             */
-            function (item, index) {
+             */function (item, index) {
                 if (item.area === area) {
                     indexToRemove = index;
                     return true;
@@ -414,27 +389,19 @@
         /**
          * @return {?}
          */
-        McSplitterComponent.prototype.isVertical = /**
-         * @return {?}
-         */
-        function () {
+        McSplitterComponent.prototype.isVertical = function () {
             return this.direction === Direction.Vertical;
         };
         /**
          * @private
          * @return {?}
          */
-        McSplitterComponent.prototype.updateGutter = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        McSplitterComponent.prototype.updateGutter = function () {
             var _this = this;
-            this.gutters.forEach((/**
+            this.gutters.forEach(( /**
              * @param {?} gutter
              * @return {?}
-             */
-            function (gutter) {
+             */function (gutter) {
                 if (gutter.dragged) {
                     gutter.dragged = false;
                     _this.changeDetectorRef.detectChanges();
@@ -449,15 +416,7 @@
          * @param {?} rightArea
          * @return {?}
          */
-        McSplitterComponent.prototype.onMouseMove = /**
-         * @private
-         * @param {?} event
-         * @param {?} startPoint
-         * @param {?} leftArea
-         * @param {?} rightArea
-         * @return {?}
-         */
-        function (event, startPoint, leftArea, rightArea) {
+        McSplitterComponent.prototype.onMouseMove = function (event, startPoint, leftArea, rightArea) {
             if (!this.isDragging || this.disabled) {
                 return;
             }
@@ -498,11 +457,7 @@
          * @private
          * @return {?}
          */
-        McSplitterComponent.prototype.onMouseUp = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        McSplitterComponent.prototype.onMouseUp = function () {
             while (this.listeners.length > 0) {
                 /** @type {?} */
                 var unsubscribe = this.listeners.pop();
@@ -519,45 +474,39 @@
          * @param {?} value
          * @return {?}
          */
-        McSplitterComponent.prototype.setStyle = /**
-         * @private
-         * @param {?} property
-         * @param {?} value
-         * @return {?}
-         */
-        function (property, value) {
+        McSplitterComponent.prototype.setStyle = function (property, value) {
             this.renderer.setStyle(this.elementRef.nativeElement, property, value);
-        };
-        McSplitterComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'mc-splitter',
-                        exportAs: 'mcSplitter',
-                        host: {
-                            class: 'mc-splitter'
-                        },
-                        preserveWhitespaces: false,
-                        template: "<ng-content></ng-content>\n\n<ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\">\n    <mc-gutter *ngIf=\"last === false\"\n               [direction]=\"direction\"\n               [attr.disabled]=\"disabled || null\"\n               [style.display]=\"hideGutters ? 'none' : 'flex'\"\n               [size]=\"gutterSize\"\n               [order]=\"index * 2 + 1\"\n               (mousedown)=\"onMouseDown($event, index, index + 1)\">\n    </mc-gutter>\n</ng-template>\n",
-                        encapsulation: core.ViewEncapsulation.None,
-                        changeDetection: core.ChangeDetectionStrategy.OnPush,
-                        styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;overflow:hidden}.mc-gutter.mc-gutter_vertical>.mc-icon{transform:rotate(90deg)}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        McSplitterComponent.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: core.ChangeDetectorRef },
-            { type: core.NgZone },
-            { type: core.Renderer2 }
-        ]; };
-        McSplitterComponent.propDecorators = {
-            gutters: [{ type: core.ViewChildren, args: [McGutterDirective,] }],
-            hideGutters: [{ type: core.Input }],
-            direction: [{ type: core.Input }],
-            disabled: [{ type: core.Input }],
-            gutterSize: [{ type: core.Input }]
         };
         return McSplitterComponent;
     }());
+    McSplitterComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'mc-splitter',
+                    exportAs: 'mcSplitter',
+                    host: {
+                        class: 'mc-splitter'
+                    },
+                    preserveWhitespaces: false,
+                    template: "<ng-content></ng-content>\n\n<ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\">\n    <mc-gutter *ngIf=\"last === false\"\n               [direction]=\"direction\"\n               [attr.disabled]=\"disabled || null\"\n               [style.display]=\"hideGutters ? 'none' : 'flex'\"\n               [size]=\"gutterSize\"\n               [order]=\"index * 2 + 1\"\n               (mousedown)=\"onMouseDown($event, index, index + 1)\">\n    </mc-gutter>\n</ng-template>\n",
+                    encapsulation: core.ViewEncapsulation.None,
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    styles: [".mc-splitter{align-items:stretch;display:flex;flex-wrap:nowrap}.mc-gutter,.mc-splitter,.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{align-items:center;display:flex;flex-grow:0;flex-shrink:0;justify-content:center}.mc-gutter.mc-gutter_vertical>.mc-icon{transform:rotate(90deg)}"]
+                }] }
+    ];
+    /** @nocollapse */
+    McSplitterComponent.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: core.ChangeDetectorRef },
+        { type: core.NgZone },
+        { type: core.Renderer2 }
+    ]; };
+    McSplitterComponent.propDecorators = {
+        gutters: [{ type: core.ViewChildren, args: [McGutterDirective,] }],
+        hideGutters: [{ type: core.Input }],
+        direction: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        gutterSize: [{ type: core.Input }]
+    };
     if (false) {
         /** @type {?} */
         McSplitterComponent.prototype.areas;
@@ -614,6 +563,11 @@
         McSplitterComponent.prototype.renderer;
     }
     var McSplitterAreaDirective = /** @class */ (function () {
+        /**
+         * @param {?} elementRef
+         * @param {?} renderer
+         * @param {?} splitter
+         */
         function McSplitterAreaDirective(elementRef, renderer, splitter) {
             this.elementRef = elementRef;
             this.renderer = renderer;
@@ -622,19 +576,13 @@
         /**
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.disableFlex = /**
-         * @return {?}
-         */
-        function () {
+        McSplitterAreaDirective.prototype.disableFlex = function () {
             this.renderer.removeStyle(this.elementRef.nativeElement, 'flex');
         };
         /**
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.ngOnInit = /**
-         * @return {?}
-         */
-        function () {
+        McSplitterAreaDirective.prototype.ngOnInit = function () {
             this.splitter.addArea(this);
             this.removeStyle("max-width" /* MaxWidth */);
             if (this.splitter.direction === Direction.Vertical) {
@@ -649,32 +597,21 @@
         /**
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
+        McSplitterAreaDirective.prototype.ngOnDestroy = function () {
             this.splitter.removeArea(this);
         };
         /**
          * @param {?} order
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.setOrder = /**
-         * @param {?} order
-         * @return {?}
-         */
-        function (order) {
+        McSplitterAreaDirective.prototype.setOrder = function (order) {
             this.setStyle("order" /* Order */, order);
         };
         /**
          * @param {?} size
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.setSize = /**
-         * @param {?} size
-         * @return {?}
-         */
-        function (size) {
+        McSplitterAreaDirective.prototype.setSize = function (size) {
             if (size) {
                 /** @type {?} */
                 var sz = coercion.coerceNumberProperty(size);
@@ -684,19 +621,13 @@
         /**
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.getSize = /**
-         * @return {?}
-         */
-        function () {
+        McSplitterAreaDirective.prototype.getSize = function () {
             return this.elementRef.nativeElement[this.getOffsetSizeProperty()];
         };
         /**
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.getMinSize = /**
-         * @return {?}
-         */
-        function () {
+        McSplitterAreaDirective.prototype.getMinSize = function () {
             /** @type {?} */
             var styles = getComputedStyle(this.elementRef.nativeElement);
             return parseFloat(styles[this.getMinSizeProperty()]);
@@ -705,22 +636,14 @@
          * @private
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.isVertical = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        McSplitterAreaDirective.prototype.isVertical = function () {
             return this.splitter.direction === Direction.Vertical;
         };
         /**
          * @private
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.getMinSizeProperty = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        McSplitterAreaDirective.prototype.getMinSizeProperty = function () {
             return this.isVertical()
                 ? "min-height" /* MinHeight */
                 : "minWidth" /* MinWidth */;
@@ -729,11 +652,7 @@
          * @private
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.getOffsetSizeProperty = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        McSplitterAreaDirective.prototype.getOffsetSizeProperty = function () {
             return this.isVertical()
                 ? "offsetHeight" /* OffsetHeight */
                 : "offsetWidth" /* OffsetWidth */;
@@ -742,11 +661,7 @@
          * @private
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.getSizeProperty = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        McSplitterAreaDirective.prototype.getSizeProperty = function () {
             return this.isVertical()
                 ? "height" /* Height */
                 : "width" /* Width */;
@@ -757,13 +672,7 @@
          * @param {?} value
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.setStyle = /**
-         * @private
-         * @param {?} style
-         * @param {?} value
-         * @return {?}
-         */
-        function (style, value) {
+        McSplitterAreaDirective.prototype.setStyle = function (style, value) {
             this.renderer.setStyle(this.elementRef.nativeElement, style, value);
         };
         /**
@@ -771,30 +680,25 @@
          * @param {?} style
          * @return {?}
          */
-        McSplitterAreaDirective.prototype.removeStyle = /**
-         * @private
-         * @param {?} style
-         * @return {?}
-         */
-        function (style) {
+        McSplitterAreaDirective.prototype.removeStyle = function (style) {
             this.renderer.removeStyle(this.elementRef.nativeElement, style);
         };
-        McSplitterAreaDirective.decorators = [
-            { type: core.Directive, args: [{
-                        selector: '[mc-splitter-area]',
-                        host: {
-                            class: 'mc-splitter-area'
-                        }
-                    },] }
-        ];
-        /** @nocollapse */
-        McSplitterAreaDirective.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: core.Renderer2 },
-            { type: McSplitterComponent }
-        ]; };
         return McSplitterAreaDirective;
     }());
+    McSplitterAreaDirective.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[mc-splitter-area]',
+                    host: {
+                        class: 'mc-splitter-area'
+                    }
+                },] }
+    ];
+    /** @nocollapse */
+    McSplitterAreaDirective.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: core.Renderer2 },
+        { type: McSplitterComponent }
+    ]; };
     if (false) {
         /**
          * @type {?}
@@ -816,31 +720,49 @@
     /**
      * @fileoverview added by tsickle
      * Generated from: splitter.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var McSplitterModule = /** @class */ (function () {
         function McSplitterModule() {
         }
-        McSplitterModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            icon.McIconModule
-                        ],
-                        exports: [
-                            McGutterDirective,
-                            McSplitterAreaDirective,
-                            McSplitterComponent
-                        ],
-                        declarations: [
-                            McGutterDirective,
-                            McSplitterAreaDirective,
-                            McSplitterComponent
-                        ]
-                    },] }
-        ];
         return McSplitterModule;
     }());
+    McSplitterModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        icon.McIconModule
+                    ],
+                    exports: [
+                        McGutterDirective,
+                        McSplitterAreaDirective,
+                        McSplitterComponent
+                    ],
+                    declarations: [
+                        McGutterDirective,
+                        McSplitterAreaDirective,
+                        McSplitterComponent
+                    ]
+                },] }
+    ];
+
+    /**
+     * @fileoverview added by tsickle
+     * Generated from: public-api.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * Generated from: index.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * Generated from: ptsecurity-mosaic-splitter.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     exports.Direction = Direction;
     exports.McGutterDirective = McGutterDirective;

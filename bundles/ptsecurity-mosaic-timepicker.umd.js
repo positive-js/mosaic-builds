@@ -1,14 +1,14 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@angular/cdk/coercion'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/form-field'), require('rxjs')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/timepicker', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@angular/forms', '@angular/cdk/coercion', '@ptsecurity/cdk/datetime', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/form-field', 'rxjs'], factory) :
-    (global = global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.timepicker = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.forms, global.ng.cdk.coercion, global.datetime, global.keycodes, global.ptsecurity.mosaic['form-field'], global.rxjs));
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.timepicker = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.forms, global.ng.cdk.coercion, global.datetime, global.keycodes, global.ptsecurity.mosaic['form-field'], global.rxjs));
 }(this, (function (exports, a11y, platform, common, core, forms, coercion, datetime, keycodes, formField, rxjs) { 'use strict';
 
     var _a;
     /**
      * @fileoverview added by tsickle
      * Generated from: timepicker.constants.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @enum {number} */
     var TimeParts = {
@@ -49,7 +49,7 @@
     /**
      * @fileoverview added by tsickle
      * Generated from: timepicker.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
      * \@docs-private
@@ -57,10 +57,9 @@
      */
     var MC_TIMEPICKER_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: core.forwardRef((/**
+        useExisting: core.forwardRef(( /**
          * @return {?}
-         */
-        function () { return McTimepicker; })),
+         */function () { return McTimepicker; })),
         multi: true
     };
     /**
@@ -69,10 +68,9 @@
      */
     var MC_TIMEPICKER_VALIDATORS = {
         provide: forms.NG_VALIDATORS,
-        useExisting: core.forwardRef((/**
+        useExisting: core.forwardRef(( /**
          * @return {?}
-         */
-        function () { return McTimepicker; })),
+         */function () { return McTimepicker; })),
         multi: true
     };
     /** @type {?} */
@@ -81,6 +79,11 @@
      * @template D
      */
     var McTimepicker = /** @class */ (function () {
+        /**
+         * @param {?} elementRef
+         * @param {?} dateAdapter
+         * @param {?} renderer
+         */
         function McTimepicker(elementRef, dateAdapter, renderer) {
             var _this = this;
             this.elementRef = elementRef;
@@ -106,28 +109,25 @@
             this._min = null;
             this._max = null;
             this.uid = "mc-timepicker-" + uniqueComponentIdSuffix++;
-            this.parseValidator = (/**
+            this.parseValidator = ( /**
              * @return {?}
-             */
-            function () {
+             */function () {
                 return _this.empty || _this.lastValueValid ? null : { mcTimepickerParse: { text: _this.viewValue } };
             });
-            this.minValidator = (/**
+            this.minValidator = ( /**
              * @param {?} control
              * @return {?}
-             */
-            function (control) {
+             */function (control) {
                 /** @type {?} */
                 var controlValue = _this.getValidDateOrNull(_this.dateAdapter.deserialize(control.value));
                 return (!_this.min || !controlValue || _this.compareTime(_this.min, controlValue) <= 0) ?
                     null :
                     { mcTimepickerLowerThenMin: { min: _this.min, actual: controlValue } };
             });
-            this.maxValidator = (/**
+            this.maxValidator = ( /**
              * @param {?} control
              * @return {?}
-             */
-            function (control) {
+             */function (control) {
                 /** @type {?} */
                 var controlValue = _this.getValidDateOrNull(_this.dateAdapter.deserialize(control.value));
                 return (!_this.max || !controlValue || _this.compareTime(_this.max, controlValue) >= 0) ?
@@ -135,10 +135,9 @@
                     { mcTimepickerHigherThenMax: { max: _this.max, actual: controlValue } };
             });
             // tslint:disable-next-line:no-empty
-            this.validatorOnChange = (/**
+            this.validatorOnChange = ( /**
              * @return {?}
-             */
-            function () { });
+             */function () { });
             if (!this.dateAdapter) {
                 throw Error("McTimepicker: No provider found for DateAdapter. You must import one of the existing " +
                     "modules at your application root or provide a custom implementation or use exists ones.");
@@ -150,17 +149,17 @@
             this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
         }
         Object.defineProperty(McTimepicker.prototype, "disabled", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._disabled;
             },
-            set: /**
+            /**
              * @param {?} value
              * @return {?}
              */
-            function (value) {
+            set: function (value) {
                 this._disabled = coercion.coerceBooleanProperty(value);
                 // Browsers may not fire the blur event if the input is disabled too quickly.
                 // Reset from here to ensure that the element doesn't become stuck.
@@ -169,231 +168,212 @@
                 }
                 this.stateChanges.next();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "id", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._id;
             },
-            set: /**
+            /**
              * @param {?} value
              * @return {?}
              */
-            function (value) {
+            set: function (value) {
                 this._id = value || this.uid;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "required", {
             /**
              * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-            get: /**
-             * Implemented as part of McFormFieldControl.
              * \@docs-private
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._required;
             },
-            set: /**
+            /**
              * @param {?} value
              * @return {?}
              */
-            function (value) {
+            set: function (value) {
                 this._required = coercion.coerceBooleanProperty(value);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "format", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._format;
             },
-            set: /**
+            /**
              * @param {?} formatValue
              * @return {?}
              */
-            function (formatValue) {
+            set: function (formatValue) {
                 this._format = Object
                     .keys(TimeFormats)
-                    .map((/**
-                 * @param {?} timeFormatKey
-                 * @return {?}
-                 */
-                function (timeFormatKey) { return TimeFormats[timeFormatKey]; }))
+                    .map(( /**
+             * @param {?} timeFormatKey
+             * @return {?}
+             */function (timeFormatKey) { return TimeFormats[timeFormatKey]; }))
                     .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
                 this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._format];
                 if (this.value) {
                     this.updateView();
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "min", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._min;
             },
-            set: /**
+            /**
              * @param {?} value
              * @return {?}
              */
-            function (value) {
+            set: function (value) {
                 this._min = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
                 this.validatorOnChange();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "max", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._max;
             },
-            set: /**
+            /**
              * @param {?} value
              * @return {?}
              */
-            function (value) {
+            set: function (value) {
                 this._max = this.getValidDateOrNull(this.dateAdapter.deserialize(value));
                 this.validatorOnChange();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "value", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this._value;
             },
-            set: /**
+            /**
              * @param {?} value
              * @return {?}
              */
-            function (value) {
+            set: function (value) {
                 /** @type {?} */
                 var newValue = this.dateAdapter.deserialize(value);
                 this.lastValueValid = !newValue || this.dateAdapter.isValid(newValue);
                 this._value = this.getValidDateOrNull(newValue);
                 this.updateView();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "viewValue", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this.elementRef.nativeElement.value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "ngControl", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this.control;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "empty", {
             /**
              * Implemented as part of McFormFieldControl.
-             * @docs-private
-             */
-            get: /**
-             * Implemented as part of McFormFieldControl.
              * \@docs-private
              * @return {?}
              */
-            function () {
+            get: function () {
                 return !this.viewValue && !this.isBadInput();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "selectionStart", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this.elementRef.nativeElement.selectionStart;
             },
-            set: /**
+            /**
              * @param {?} value
              * @return {?}
              */
-            function (value) {
+            set: function (value) {
                 this.elementRef.nativeElement.selectionStart = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTimepicker.prototype, "selectionEnd", {
-            get: /**
+            /**
              * @return {?}
              */
-            function () {
+            get: function () {
                 return this.elementRef.nativeElement.selectionEnd;
             },
-            set: /**
+            /**
              * @param {?} value
              * @return {?}
              */
-            function (value) {
+            set: function (value) {
                 this.elementRef.nativeElement.selectionEnd = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
          * @return {?}
          */
-        McTimepicker.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
+        McTimepicker.prototype.ngOnDestroy = function () {
             this.stateChanges.complete();
         };
         /**
          * @return {?}
          */
-        McTimepicker.prototype.focus = /**
-         * @return {?}
-         */
-        function () {
+        McTimepicker.prototype.focus = function () {
             this.elementRef.nativeElement.focus();
         };
         /**
          * @param {?} isFocused
          * @return {?}
          */
-        McTimepicker.prototype.focusChanged = /**
-         * @param {?} isFocused
-         * @return {?}
-         */
-        function (isFocused) {
+        McTimepicker.prototype.focusChanged = function (isFocused) {
             if (isFocused !== this.focused) {
                 this.focused = isFocused;
                 this.onTouched();
@@ -403,10 +383,7 @@
         /**
          * @return {?}
          */
-        McTimepicker.prototype.onBlur = /**
-         * @return {?}
-         */
-        function () {
+        McTimepicker.prototype.onBlur = function () {
             this.lastValueValid = !!this.getDateFromTimeString(this.viewValue);
             this.control.updateValueAndValidity();
             this.focusChanged(false);
@@ -415,11 +392,7 @@
          * @param {?} $event
          * @return {?}
          */
-        McTimepicker.prototype.onPaste = /**
-         * @param {?} $event
-         * @return {?}
-         */
-        function ($event) {
+        McTimepicker.prototype.onPaste = function ($event) {
             /** @type {?} */
             var newTimeObj = this.getDateFromTimeString($event.clipboardData.getData('text'));
             if (!newTimeObj) {
@@ -434,10 +407,7 @@
         /**
          * @return {?}
          */
-        McTimepicker.prototype.onInput = /**
-         * @return {?}
-         */
-        function () {
+        McTimepicker.prototype.onInput = function () {
             /** @type {?} */
             var newTimeObj = this.getDateFromTimeString(this.viewValue);
             this.lastValueValid = !!newTimeObj;
@@ -452,36 +422,23 @@
             this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.getTimeStringFromDate(newTimeObj, this.format));
             this.selectionStart = selectionStart;
             this.selectionEnd = selectionEnd;
-            this.createSelectionOfTimeComponentInInput(((/** @type {?} */ (selectionStart))) + 1);
+            this.createSelectionOfTimeComponentInInput((( /** @type {?} */(selectionStart))) + 1);
             this.onChange(newTimeObj);
             this.stateChanges.next();
         };
         /**
          * Implemented as part of McFormFieldControl.
-         * @docs-private
-         */
-        /**
-         * Implemented as part of McFormFieldControl.
          * \@docs-private
          * @return {?}
          */
-        McTimepicker.prototype.onContainerClick = /**
-         * Implemented as part of McFormFieldControl.
-         * \@docs-private
-         * @return {?}
-         */
-        function () {
+        McTimepicker.prototype.onContainerClick = function () {
             this.focus();
         };
         /**
          * @param {?} event
          * @return {?}
          */
-        McTimepicker.prototype.onKeyDown = /**
-         * @param {?} event
-         * @return {?}
-         */
-        function (event) {
+        McTimepicker.prototype.onKeyDown = function (event) {
             var _this = this;
             // tslint:disable-next-line: deprecation
             /** @type {?} */
@@ -498,20 +455,15 @@
                 this.horizontalArrowKeyHandler(keyCode);
                 return;
             }
-            setTimeout((/**
+            setTimeout(( /**
              * @return {?}
-             */
-            function () { return _this.onInput(); }));
+             */function () { return _this.onInput(); }));
         };
         /**
          * @param {?} control
          * @return {?}
          */
-        McTimepicker.prototype.validate = /**
-         * @param {?} control
-         * @return {?}
-         */
-        function (control) {
+        McTimepicker.prototype.validate = function (control) {
             this.setControl(control);
             return this.validator ? this.validator(control) : null;
         };
@@ -519,71 +471,45 @@
          * @param {?} fn
          * @return {?}
          */
-        McTimepicker.prototype.registerOnValidatorChange = /**
-         * @param {?} fn
-         * @return {?}
-         */
-        function (fn) {
+        McTimepicker.prototype.registerOnValidatorChange = function (fn) {
             this.validatorOnChange = fn;
         };
         /**
          * @param {?} value
          * @return {?}
          */
-        McTimepicker.prototype.writeValue = /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        McTimepicker.prototype.writeValue = function (value) {
             this.value = value;
         };
         /**
          * @param {?} fn
          * @return {?}
          */
-        McTimepicker.prototype.registerOnChange = /**
-         * @param {?} fn
-         * @return {?}
-         */
-        function (fn) {
+        McTimepicker.prototype.registerOnChange = function (fn) {
             this.onChange = fn;
         };
         /**
          * @param {?} fn
          * @return {?}
          */
-        McTimepicker.prototype.registerOnTouched = /**
-         * @param {?} fn
-         * @return {?}
-         */
-        function (fn) {
+        McTimepicker.prototype.registerOnTouched = function (fn) {
             this.onTouched = fn;
         };
         /**
          * @param {?} isDisabled
          * @return {?}
          */
-        McTimepicker.prototype.setDisabledState = /**
-         * @param {?} isDisabled
-         * @return {?}
-         */
-        function (isDisabled) {
+        McTimepicker.prototype.setDisabledState = function (isDisabled) {
             this.disabled = isDisabled;
         };
-        /** Checks whether the input is invalid based on the native validation. */
         /**
          * Checks whether the input is invalid based on the native validation.
          * @private
          * @return {?}
          */
-        McTimepicker.prototype.isBadInput = /**
-         * Checks whether the input is invalid based on the native validation.
-         * @private
-         * @return {?}
-         */
-        function () {
+        McTimepicker.prototype.isBadInput = function () {
             /** @type {?} */
-            var validity = ((/** @type {?} */ (this.elementRef.nativeElement))).validity;
+            var validity = (( /** @type {?} */(this.elementRef.nativeElement))).validity;
             return validity && validity.badInput;
         };
         /**
@@ -591,19 +517,14 @@
          * @param {?} keyCode
          * @return {?}
          */
-        McTimepicker.prototype.verticalArrowKeyHandler = /**
-         * @private
-         * @param {?} keyCode
-         * @return {?}
-         */
-        function (keyCode) {
+        McTimepicker.prototype.verticalArrowKeyHandler = function (keyCode) {
             if (!this.value) {
                 return;
             }
             /** @type {?} */
             var changedTime;
             /** @type {?} */
-            var newEditParams = this.getTimeEditMetrics((/** @type {?} */ (this.selectionStart)));
+            var newEditParams = this.getTimeEditMetrics(( /** @type {?} */(this.selectionStart)));
             if (keyCode === keycodes.UP_ARROW) {
                 changedTime = this.incrementTime(this.value, newEditParams.modifiedTimePart);
             }
@@ -621,17 +542,12 @@
          * @param {?} keyCode
          * @return {?}
          */
-        McTimepicker.prototype.horizontalArrowKeyHandler = /**
-         * @private
-         * @param {?} keyCode
-         * @return {?}
-         */
-        function (keyCode) {
+        McTimepicker.prototype.horizontalArrowKeyHandler = function (keyCode) {
             if (!this.value) {
                 return;
             }
             /** @type {?} */
-            var cursorPos = (/** @type {?} */ (this.selectionStart));
+            var cursorPos = ( /** @type {?} */(this.selectionStart));
             if (keyCode === keycodes.LEFT_ARROW) {
                 cursorPos = cursorPos === 0 ? this.viewValue.length : cursorPos - 1;
             }
@@ -647,17 +563,11 @@
          * @param {?} cursorPos
          * @return {?}
          */
-        McTimepicker.prototype.createSelectionOfTimeComponentInInput = /**
-         * @private
-         * @param {?} cursorPos
-         * @return {?}
-         */
-        function (cursorPos) {
+        McTimepicker.prototype.createSelectionOfTimeComponentInInput = function (cursorPos) {
             var _this = this;
-            setTimeout((/**
+            setTimeout(( /**
              * @return {?}
-             */
-            function () {
+             */function () {
                 /** @type {?} */
                 var newEditParams = _this.getTimeEditMetrics(cursorPos);
                 _this.selectionStart = newEditParams.cursorStartPosition;
@@ -670,13 +580,7 @@
          * @param {?=} whatToIncrement
          * @return {?}
          */
-        McTimepicker.prototype.incrementTime = /**
-         * @private
-         * @param {?} dateVal
-         * @param {?=} whatToIncrement
-         * @return {?}
-         */
-        function (dateVal, whatToIncrement) {
+        McTimepicker.prototype.incrementTime = function (dateVal, whatToIncrement) {
             if (whatToIncrement === void 0) { whatToIncrement = TimeParts.seconds; }
             /** @type {?} */
             var hours = this.dateAdapter.getHours(dateVal);
@@ -713,13 +617,7 @@
          * @param {?=} whatToDecrement
          * @return {?}
          */
-        McTimepicker.prototype.decrementTime = /**
-         * @private
-         * @param {?} dateVal
-         * @param {?=} whatToDecrement
-         * @return {?}
-         */
-        function (dateVal, whatToDecrement) {
+        McTimepicker.prototype.decrementTime = function (dateVal, whatToDecrement) {
             if (whatToDecrement === void 0) { whatToDecrement = TimeParts.seconds; }
             /** @type {?} */
             var hours = this.dateAdapter.getHours(dateVal);
@@ -751,22 +649,12 @@
             return this.dateAdapter.createDateTime(this.dateAdapter.getYear(this.value), this.dateAdapter.getMonth(this.value), this.dateAdapter.getDate(this.value), hours, minutes, seconds, this.dateAdapter.getMilliseconds(this.value));
         };
         /**
-         * @description Get params for arrow-keys (up/down) time valie edit.
-         * @param cursorPosition Current cursor position in timeString
-         */
-        /**
          * \@description Get params for arrow-keys (up/down) time valie edit.
          * @private
          * @param {?} cursorPosition Current cursor position in timeString
          * @return {?}
          */
-        McTimepicker.prototype.getTimeEditMetrics = /**
-         * \@description Get params for arrow-keys (up/down) time valie edit.
-         * @private
-         * @param {?} cursorPosition Current cursor position in timeString
-         * @return {?}
-         */
-        function (cursorPosition) {
+        McTimepicker.prototype.getTimeEditMetrics = function (cursorPosition) {
             /** @type {?} */
             var timeString = this.viewValue;
             /** @type {?} */
@@ -799,23 +687,13 @@
             return { modifiedTimePart: modifiedTimePart, cursorStartPosition: cursorStartPosition, cursorEndPosition: cursorEndPosition };
         };
         /**
-         * @description Create time string for displaying inside input element of UI
-         */
-        /**
          * \@description Create time string for displaying inside input element of UI
          * @private
          * @param {?} value
          * @param {?} timeFormat
          * @return {?}
          */
-        McTimepicker.prototype.getTimeStringFromDate = /**
-         * \@description Create time string for displaying inside input element of UI
-         * @private
-         * @param {?} value
-         * @param {?} timeFormat
-         * @return {?}
-         */
-        function (value, timeFormat) {
+        McTimepicker.prototype.getTimeStringFromDate = function (value, timeFormat) {
             if (!value || !this.dateAdapter.isValid(value)) {
                 return '';
             }
@@ -826,12 +704,7 @@
          * @param {?} timeString
          * @return {?}
          */
-        McTimepicker.prototype.getDateFromTimeString = /**
-         * @private
-         * @param {?} timeString
-         * @return {?}
-         */
-        function (timeString) {
+        McTimepicker.prototype.getDateFromTimeString = function (timeString) {
             if (!timeString) {
                 return null;
             }
@@ -883,13 +756,7 @@
          * @param {?} second
          * @return {?}
          */
-        McTimepicker.prototype.compareTime = /**
-         * @private
-         * @param {?} first
-         * @param {?} second
-         * @return {?}
-         */
-        function (first, second) {
+        McTimepicker.prototype.compareTime = function (first, second) {
             /** @type {?} */
             var result = this.dateAdapter.getHours(first) - this.dateAdapter.getHours(second) ||
                 this.dateAdapter.getMinutes(first) - this.dateAdapter.getMinutes(second);
@@ -908,23 +775,14 @@
          * @param {?} obj
          * @return {?}
          */
-        McTimepicker.prototype.getValidDateOrNull = /**
-         * @private
-         * @param {?} obj
-         * @return {?}
-         */
-        function (obj) {
+        McTimepicker.prototype.getValidDateOrNull = function (obj) {
             return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
         };
         /**
          * @private
          * @return {?}
          */
-        McTimepicker.prototype.updateView = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        McTimepicker.prototype.updateView = function () {
             /** @type {?} */
             var formattedValue = this.getTimeStringFromDate(this.value, this.format);
             this.renderer.setProperty(this.elementRef.nativeElement, 'value', formattedValue);
@@ -934,58 +792,53 @@
          * @param {?} control
          * @return {?}
          */
-        McTimepicker.prototype.setControl = /**
-         * @private
-         * @param {?} control
-         * @return {?}
-         */
-        function (control) {
+        McTimepicker.prototype.setControl = function (control) {
             if (!this.control) {
                 this.control = control;
             }
         };
-        McTimepicker.decorators = [
-            { type: core.Directive, args: [{
-                        selector: 'input[mcTimepicker]',
-                        exportAs: 'mcTimepickerInput',
-                        host: {
-                            class: 'mc-timepicker mc-input',
-                            // Native input properties that are overwritten by Angular inputs need to be synced with
-                            // the native input element. Otherwise property bindings for those don't work.
-                            '[attr.id]': 'id',
-                            '[attr.placeholder]': 'placeholder',
-                            '[attr.disabled]': 'disabled || null',
-                            '[attr.required]': 'required',
-                            '(blur)': 'onBlur()',
-                            '(focus)': 'focusChanged(true)',
-                            '(paste)': 'onPaste($event)',
-                            '(keydown)': 'onKeyDown($event)'
-                        },
-                        providers: [
-                            MC_TIMEPICKER_VALIDATORS,
-                            MC_TIMEPICKER_VALUE_ACCESSOR,
-                            { provide: formField.McFormFieldControl, useExisting: McTimepicker }
-                        ]
-                    },] }
-        ];
-        /** @nocollapse */
-        McTimepicker.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: datetime.DateAdapter, decorators: [{ type: core.Optional }] },
-            { type: core.Renderer2 }
-        ]; };
-        McTimepicker.propDecorators = {
-            placeholder: [{ type: core.Input }],
-            disabled: [{ type: core.Input }],
-            id: [{ type: core.Input }],
-            required: [{ type: core.Input }],
-            format: [{ type: core.Input }],
-            min: [{ type: core.Input }],
-            max: [{ type: core.Input }],
-            value: [{ type: core.Input }]
-        };
         return McTimepicker;
     }());
+    McTimepicker.decorators = [
+        { type: core.Directive, args: [{
+                    selector: 'input[mcTimepicker]',
+                    exportAs: 'mcTimepickerInput',
+                    host: {
+                        class: 'mc-timepicker mc-input',
+                        // Native input properties that are overwritten by Angular inputs need to be synced with
+                        // the native input element. Otherwise property bindings for those don't work.
+                        '[attr.id]': 'id',
+                        '[attr.placeholder]': 'placeholder',
+                        '[attr.disabled]': 'disabled || null',
+                        '[attr.required]': 'required',
+                        '(blur)': 'onBlur()',
+                        '(focus)': 'focusChanged(true)',
+                        '(paste)': 'onPaste($event)',
+                        '(keydown)': 'onKeyDown($event)'
+                    },
+                    providers: [
+                        MC_TIMEPICKER_VALIDATORS,
+                        MC_TIMEPICKER_VALUE_ACCESSOR,
+                        { provide: formField.McFormFieldControl, useExisting: McTimepicker }
+                    ]
+                },] }
+    ];
+    /** @nocollapse */
+    McTimepicker.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: datetime.DateAdapter, decorators: [{ type: core.Optional }] },
+        { type: core.Renderer2 }
+    ]; };
+    McTimepicker.propDecorators = {
+        placeholder: [{ type: core.Input }],
+        disabled: [{ type: core.Input }],
+        id: [{ type: core.Input }],
+        required: [{ type: core.Input }],
+        format: [{ type: core.Input }],
+        min: [{ type: core.Input }],
+        max: [{ type: core.Input }],
+        value: [{ type: core.Input }]
+    };
     if (false) {
         /**
          * Implemented as part of McFormFieldControl.
@@ -1118,25 +971,43 @@
     /**
      * @fileoverview added by tsickle
      * Generated from: timepicker.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var McTimepickerModule = /** @class */ (function () {
         function McTimepickerModule() {
         }
-        McTimepickerModule.decorators = [
-            { type: core.NgModule, args: [{
-                        imports: [
-                            common.CommonModule,
-                            a11y.A11yModule,
-                            platform.PlatformModule,
-                            forms.FormsModule
-                        ],
-                        declarations: [McTimepicker],
-                        exports: [McTimepicker]
-                    },] }
-        ];
         return McTimepickerModule;
     }());
+    McTimepickerModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        a11y.A11yModule,
+                        platform.PlatformModule,
+                        forms.FormsModule
+                    ],
+                    declarations: [McTimepicker],
+                    exports: [McTimepicker]
+                },] }
+    ];
+
+    /**
+     * @fileoverview added by tsickle
+     * Generated from: public-api.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * Generated from: index.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @fileoverview added by tsickle
+     * Generated from: ptsecurity-mosaic-timepicker.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
 
     exports.AM_PM_FORMAT_REGEXP = AM_PM_FORMAT_REGEXP;
     exports.DEFAULT_TIME_FORMAT = DEFAULT_TIME_FORMAT;

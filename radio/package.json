@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-radio.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-radio.js",
+  "module": "../fesm2015/ptsecurity-mosaic-radio.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-radio.js",
-  "esm5": "../esm5/radio/ptsecurity-mosaic-radio.js",
   "esm2015": "../esm2015/radio/ptsecurity-mosaic-radio.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-radio.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-radio.js",
   "typings": "ptsecurity-mosaic-radio.d.ts",
   "metadata": "ptsecurity-mosaic-radio.metadata.json",

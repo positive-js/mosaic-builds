@@ -12,7 +12,7 @@ import { filter } from 'rxjs/operators';
 /**
  * @fileoverview added by tsickle
  * Generated from: modal-control.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -148,7 +148,7 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: modal-ref.class.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * API class that public to users to handle the modal instance.
@@ -223,7 +223,7 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: modal-util.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -281,7 +281,7 @@ const modalUtilObject = new ModalUtil(document);
 /**
  * @fileoverview added by tsickle
  * Generated from: modal.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // Duration when perform animations (ms)
 /** @type {?} */
@@ -889,7 +889,7 @@ McModalComponent.decorators = [
                 host: {
                     '(keydown)': 'onKeyDown($event)'
                 },
-                styles: ["@-webkit-keyframes mcFadeIn{0%{opacity:0}100%{opacity:1}}@keyframes mcFadeIn{0%{opacity:0}100%{opacity:1}}@-webkit-keyframes mcFadeOut{0%{opacity:1}100%{opacity:0}}@keyframes mcFadeOut{0%{opacity:1}100%{opacity:0}}@-webkit-keyframes mcZoomIn{0%{opacity:0;transform:translate(0,-25%)}100%{opacity:1;transform:scale(1)}}@keyframes mcZoomIn{0%{opacity:0;transform:translate(0,-25%)}100%{opacity:1;transform:scale(1)}}@-webkit-keyframes mcZoomOut{0%{transform:scale(1)}100%{opacity:0;transform:translate(0,-30%)}}@keyframes mcZoomOut{0%{transform:scale(1)}100%{opacity:0;transform:translate(0,-30%)}}.fade-appear,.fade-enter,.fade-leave{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-play-state:paused;animation-play-state:paused}.fade-appear.fade-appear-active,.fade-enter.fade-enter-active{-webkit-animation-name:mcFadeIn;animation-name:mcFadeIn;-webkit-animation-play-state:running;animation-play-state:running}.fade-leave.fade-leave-active{-webkit-animation-name:mcFadeOut;animation-name:mcFadeOut;-webkit-animation-play-state:running;animation-play-state:running;pointer-events:none}.className-appear,.className-enter{opacity:0;transform:translate(0,-25%);-webkit-animation-timing-function:cubic-bezier(.075,.82,.165,1);animation-timing-function:cubic-bezier(.075,.82,.165,1)}.zoom-appear,.zoom-enter,.zoom-leave{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-play-state:paused;animation-play-state:paused}.zoom-appear.zoom-appear-active,.zoom-enter.zoom-enter-active{-webkit-animation-name:mcZoomIn;animation-name:mcZoomIn;-webkit-animation-play-state:running;animation-play-state:running}.zoom-leave.zoom-leave-active{-webkit-animation-name:mcZoomOut;animation-name:mcZoomOut;-webkit-animation-play-state:running;animation-play-state:running;pointer-events:none}.className-leave{transform:translate(0,0);-webkit-animation-timing-function:cubic-bezier(.785,.135,.15,.86);animation-timing-function:cubic-bezier(.785,.135,.15,.86)}.mc-confirm .mc-modal-close,.mc-confirm .mc-modal-header{display:none}.mc-confirm .mc-modal-body{padding:24px}.mc-confirm-body-wrapper{zoom:1}.mc-confirm-body-wrapper:after,.mc-confirm-body-wrapper:before{content:\"\";display:table}.mc-confirm-body-wrapper:after{clear:both}.mc-confirm-body .mc-confirm-title{display:block;overflow:auto}.mc-confirm .mc-confirm-btns{border-radius:0 0 4px 4px;text-align:right}.mc-confirm .mc-confirm-btns button+button{margin:16px}.mc-modal{box-sizing:border-box;position:relative;top:48px;width:auto;margin:0 auto;padding:0 0 24px;list-style:none}.mc-modal.zoom-appear,.mc-modal.zoom-enter{-webkit-animation-duration:.3s;animation-duration:.3s;transform:none;opacity:0}.mc-modal .mc-modal-close{position:absolute;z-index:10;top:0;right:0;width:56px;height:56px}.mc-modal-wrap{position:fixed;z-index:1000;top:0;right:0;bottom:0;left:0;overflow:auto;-webkit-overflow-scrolling:touch;outline:0}.mc-modal-title{margin:0}.mc-modal-content{position:relative;border-radius:4px;background-clip:padding-box;background-color:#fff}.mc-modal-header{padding:14px 16px;display:block;border-radius:4px 4px 0 0}.mc-modal-body{display:block;padding:16px 24px 24px;max-height:calc(100vh - 260px);word-wrap:break-word;overflow-y:auto}.mc-modal-footer{display:block;padding:16px;border-radius:0 0 4px 4px;text-align:right}.mc-modal-footer button+button{margin-left:16px;margin-bottom:0}.mc-modal-mask{position:fixed;z-index:1000;top:0;right:0;left:0;bottom:0;height:100%}.mc-modal-mask.mc-modal-mask-hidden{display:none}.mc-modal-open{overflow:hidden}"]
+                styles: ["@-webkit-keyframes mcFadeIn{0%{opacity:0}to{opacity:1}}@keyframes mcFadeIn{0%{opacity:0}to{opacity:1}}@-webkit-keyframes mcFadeOut{0%{opacity:1}to{opacity:0}}@keyframes mcFadeOut{0%{opacity:1}to{opacity:0}}@-webkit-keyframes mcZoomIn{0%{opacity:0;transform:translateY(-25%)}to{opacity:1;transform:scale(1)}}@keyframes mcZoomIn{0%{opacity:0;transform:translateY(-25%)}to{opacity:1;transform:scale(1)}}@-webkit-keyframes mcZoomOut{0%{transform:scale(1)}to{opacity:0;transform:translateY(-30%)}}@keyframes mcZoomOut{0%{transform:scale(1)}to{opacity:0;transform:translateY(-30%)}}.fade-appear,.fade-enter,.fade-leave{-webkit-animation-duration:.3s;-webkit-animation-fill-mode:both;-webkit-animation-play-state:paused;animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.fade-appear.fade-appear-active,.fade-enter.fade-enter-active{-webkit-animation-name:mcFadeIn;-webkit-animation-play-state:running;animation-name:mcFadeIn;animation-play-state:running}.fade-leave.fade-leave-active{-webkit-animation-name:mcFadeOut;-webkit-animation-play-state:running;animation-name:mcFadeOut;animation-play-state:running;pointer-events:none}.className-appear,.className-enter{opacity:0}.className-appear,.className-enter,.className-leave{-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}.zoom-appear,.zoom-enter,.zoom-leave{-webkit-animation-duration:.3s;-webkit-animation-fill-mode:both;-webkit-animation-play-state:paused;animation-duration:.3s;animation-fill-mode:both;animation-play-state:paused}.zoom-appear.zoom-appear-active,.zoom-enter.zoom-enter-active{-webkit-animation-name:mcZoomIn;-webkit-animation-play-state:running;animation-name:mcZoomIn;animation-play-state:running}.zoom-leave.zoom-leave-active{-webkit-animation-name:mcZoomOut;-webkit-animation-play-state:running;animation-name:mcZoomOut;animation-play-state:running;pointer-events:none}.className-appear,.className-enter{-webkit-animation-timing-function:cubic-bezier(.075,.82,.165,1);animation-timing-function:cubic-bezier(.075,.82,.165,1);transform:translateY(-25%)}.className-leave{-webkit-animation-timing-function:cubic-bezier(.785,.135,.15,.86);animation-timing-function:cubic-bezier(.785,.135,.15,.86);transform:translate(0)}.mc-confirm .mc-modal-close,.mc-confirm .mc-modal-header{display:none}.mc-confirm .mc-modal-body{padding:24px}.mc-confirm-body-wrapper{zoom:1}.mc-confirm-body-wrapper:after,.mc-confirm-body-wrapper:before{content:\"\";display:table}.mc-confirm-body-wrapper:after{clear:both}.mc-confirm-body .mc-confirm-title{display:block;overflow:auto}.mc-confirm .mc-confirm-btns{border-radius:0 0 4px 4px;text-align:right}.mc-confirm .mc-confirm-btns button+button{margin:16px}.mc-modal{box-sizing:border-box;list-style:none;margin:0 auto;padding:0 0 24px;position:relative;top:48px;width:auto}.mc-modal.zoom-appear,.mc-modal.zoom-enter{-webkit-animation-duration:.3s;animation-duration:.3s;opacity:0;transform:none}.mc-modal .mc-modal-close{height:56px;position:absolute;right:0;top:0;width:56px;z-index:10}.mc-modal-wrap{-webkit-overflow-scrolling:touch;bottom:0;left:0;outline:0;overflow:auto;position:fixed;right:0;top:0;z-index:1000}.mc-modal-title{margin:0}.mc-modal-content{background-clip:padding-box;background-color:#fff;border-radius:4px;position:relative}.mc-modal-header{border-radius:4px 4px 0 0;display:block;padding:14px 16px}.mc-modal-body{display:block;max-height:calc(100vh - 260px);overflow-y:auto;padding:16px 24px 24px;word-wrap:break-word}.mc-modal-footer{border-radius:0 0 4px 4px;display:block;padding:16px;text-align:right}.mc-modal-footer button+button{margin-bottom:0;margin-left:16px}.mc-modal-mask{bottom:0;height:100%;left:0;position:fixed;right:0;top:0;z-index:1000}.mc-modal-mask.mc-modal-mask-hidden{display:none}.mc-modal-open{overflow:hidden}"]
             }] }
 ];
 /** @nocollapse */
@@ -1095,7 +1095,7 @@ function isPromise(obj) {
 /**
  * @fileoverview added by tsickle
  * Generated from: css-unit.pipe.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CssUnitPipe {
     /**
@@ -1118,7 +1118,7 @@ CssUnitPipe.decorators = [
 /**
  * @fileoverview added by tsickle
  * Generated from: modal.directive.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McModalTitle {
 }
@@ -1154,7 +1154,7 @@ McModalFooter.decorators = [
 /**
  * @fileoverview added by tsickle
  * Generated from: modal.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // A builder used for managing service creating modals
 class ModalBuilderForService {
@@ -1383,7 +1383,7 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: modal.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McModalModule {
 }
@@ -1411,7 +1411,7 @@ McModalModule.decorators = [
 /**
  * @fileoverview added by tsickle
  * Generated from: modal.type.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
  * @record
@@ -1524,19 +1524,19 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
  * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
  * Generated from: ptsecurity-mosaic-modal.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McModalComponent, McModalModule, McModalRef, McModalService, McModalControlService as ɵa, McModalTitle as ɵb, McModalBody as ɵc, McModalFooter as ɵd, CssUnitPipe as ɵe };

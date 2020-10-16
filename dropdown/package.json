@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-dropdown.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-dropdown.js",
+  "module": "../fesm2015/ptsecurity-mosaic-dropdown.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-dropdown.js",
-  "esm5": "../esm5/dropdown/ptsecurity-mosaic-dropdown.js",
   "esm2015": "../esm2015/dropdown/ptsecurity-mosaic-dropdown.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-dropdown.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-dropdown.js",
   "typings": "ptsecurity-mosaic-dropdown.d.ts",
   "metadata": "ptsecurity-mosaic-dropdown.metadata.json",

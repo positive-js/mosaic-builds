@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-divider.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-divider.js",
+  "module": "../fesm2015/ptsecurity-mosaic-divider.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-divider.js",
-  "esm5": "../esm5/divider/ptsecurity-mosaic-divider.js",
   "esm2015": "../esm2015/divider/ptsecurity-mosaic-divider.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-divider.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-divider.js",
   "typings": "ptsecurity-mosaic-divider.d.ts",
   "metadata": "ptsecurity-mosaic-divider.metadata.json",

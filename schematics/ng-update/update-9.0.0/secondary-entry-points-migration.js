@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecondaryEntryPointsMigration = void 0;
 const schematics_1 = require("@angular/cdk/schematics");
 const ts = require("typescript");
 const ONLY_SUBPACKAGE_FAILURE_STR = `Importing from "@ptsecurity/mosaic" is deprecated. ` +
@@ -11,6 +12,7 @@ const currentMosaicModuleSpecifier = '@ptsecurity/mosaic';
 const MOSAIC_AC_FILEPATH_REGEX = new RegExp(`${legacyMosaicModuleSpecifier}/(.*?)/`);
 // tslint:disable-next-line:no-var-requires
 const ENTRY_POINT_MAPPINGS = require('./mosaic-symbols.json');
+// tslint:disable-next-line:no-null-keyword
 class SecondaryEntryPointsMigration extends schematics_1.Migration {
     constructor() {
         super(...arguments);
@@ -54,6 +56,7 @@ class SecondaryEntryPointsMigration extends schematics_1.Migration {
         for (const element of declaration.importClause.namedBindings.elements) {
             const elementName = element.propertyName ? element.propertyName : element.name;
             const moduleName = resolveModuleName(elementName, this.typeChecker) ||
+                // tslint:disable-next-line:no-null-keyword
                 ENTRY_POINT_MAPPINGS[elementName.text] || null;
             if (!moduleName) {
                 this.createFailureAtNode(element, `"${element.getText()}" was not found in the Mosaic library.`);
@@ -87,7 +90,8 @@ class SecondaryEntryPointsMigration extends schematics_1.Migration {
             this.createFailureAtNode(declaration.moduleSpecifier, ONLY_SUBPACKAGE_FAILURE_STR);
             return;
         }
-        const recorder = this.fileSystem.edit(declaration.moduleSpecifier.getSourceFile().fileName);
+        const filePath = this.fileSystem.resolve(declaration.moduleSpecifier.getSourceFile().fileName);
+        const recorder = this.fileSystem.edit(filePath);
         // Perform the replacement that switches the primary entry-point import to
         // the individual secondary entry-point imports.
         recorder.remove(declaration.getStart(), declaration.getWidth());
@@ -129,6 +133,7 @@ function resolveModuleName(node, typeChecker) {
     // the symbol, add failure to report that the given symbol can't be found.
     if (!symbol ||
         !(symbol.valueDeclaration || (symbol.declarations && symbol.declarations.length !== 0))) {
+        // tslint:disable-next-line:no-null-keyword
         return null;
     }
     // The filename for the source file of the node that contains the
@@ -140,6 +145,7 @@ function resolveModuleName(node, typeChecker) {
     // filename. This will always match since only "@ptsecurity/mosaic"
     // elements are analyzed.
     const matches = sourceFile.match(MOSAIC_AC_FILEPATH_REGEX);
+    // tslint:disable-next-line:no-null-keyword
     return matches ? matches[1] : null;
 }
 //# sourceMappingURL=secondary-entry-points-migration.js.map

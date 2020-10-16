@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-tags.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-tags.js",
+  "module": "../fesm2015/ptsecurity-mosaic-tags.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-tags.js",
-  "esm5": "../esm5/tags/ptsecurity-mosaic-tags.js",
   "esm2015": "../esm2015/tags/ptsecurity-mosaic-tags.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-tags.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-tags.js",
   "typings": "ptsecurity-mosaic-tags.d.ts",
   "metadata": "ptsecurity-mosaic-tags.metadata.json",

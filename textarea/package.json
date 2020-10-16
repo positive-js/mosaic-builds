@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-textarea.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-textarea.js",
+  "module": "../fesm2015/ptsecurity-mosaic-textarea.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-textarea.js",
-  "esm5": "../esm5/textarea/ptsecurity-mosaic-textarea.js",
   "esm2015": "../esm2015/textarea/ptsecurity-mosaic-textarea.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-textarea.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-textarea.js",
   "typings": "ptsecurity-mosaic-textarea.d.ts",
   "metadata": "ptsecurity-mosaic-textarea.metadata.json",

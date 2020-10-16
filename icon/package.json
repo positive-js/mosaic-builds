@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-icon.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-icon.js",
+  "module": "../fesm2015/ptsecurity-mosaic-icon.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-icon.js",
-  "esm5": "../esm5/icon/ptsecurity-mosaic-icon.js",
   "esm2015": "../esm2015/icon/ptsecurity-mosaic-icon.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-icon.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-icon.js",
   "typings": "ptsecurity-mosaic-icon.d.ts",
   "metadata": "ptsecurity-mosaic-icon.metadata.json",

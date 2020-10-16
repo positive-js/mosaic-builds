@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-sidepanel.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-sidepanel.js",
+  "module": "../fesm2015/ptsecurity-mosaic-sidepanel.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-sidepanel.js",
-  "esm5": "../esm5/sidepanel/ptsecurity-mosaic-sidepanel.js",
   "esm2015": "../esm2015/sidepanel/ptsecurity-mosaic-sidepanel.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-sidepanel.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-sidepanel.js",
   "typings": "ptsecurity-mosaic-sidepanel.d.ts",
   "metadata": "ptsecurity-mosaic-sidepanel.metadata.json",

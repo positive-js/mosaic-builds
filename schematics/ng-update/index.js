@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateToV9 = void 0;
 const schematics_1 = require("@angular/cdk/schematics");
 const chalk_1 = require("chalk");
 const secondary_entry_points_migration_1 = require("./update-9.0.0/secondary-entry-points-migration");

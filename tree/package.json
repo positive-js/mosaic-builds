@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-tree.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-tree.js",
+  "module": "../fesm2015/ptsecurity-mosaic-tree.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-tree.js",
-  "esm5": "../esm5/tree/ptsecurity-mosaic-tree.js",
   "esm2015": "../esm2015/tree/ptsecurity-mosaic-tree.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-tree.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-tree.js",
   "typings": "ptsecurity-mosaic-tree.d.ts",
   "metadata": "ptsecurity-mosaic-tree.metadata.json",

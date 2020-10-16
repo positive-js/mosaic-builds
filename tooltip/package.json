@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-tooltip.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-tooltip.js",
+  "module": "../fesm2015/ptsecurity-mosaic-tooltip.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-tooltip.js",
-  "esm5": "../esm5/tooltip/ptsecurity-mosaic-tooltip.js",
   "esm2015": "../esm2015/tooltip/ptsecurity-mosaic-tooltip.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-tooltip.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-tooltip.js",
   "typings": "ptsecurity-mosaic-tooltip.d.ts",
   "metadata": "ptsecurity-mosaic-tooltip.metadata.json",

@@ -8,7 +8,7 @@ import { mixinColor } from '@ptsecurity/mosaic/core';
 /**
  * @fileoverview added by tsickle
  * Generated from: card.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McCardBase {
     // tslint:disable-next-line:naming-convention
@@ -114,7 +114,7 @@ McCard.decorators = [
                     '(keydown)': 'onKeyDown($event)',
                     '(click)': 'onClick($event)'
                 },
-                styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer;border-left:4px solid transparent}.mc-card:focus{outline:0}.mc-card .mc-card__overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;background:0 0}.mc-card.mc-card_readonly{cursor:auto}"]
+                styles: [".mc-card{border-left:4px solid transparent;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;position:relative}.mc-card:focus{outline:none}.mc-card .mc-card__overlay{background:transparent;bottom:0;left:0;pointer-events:none;position:absolute;right:0;top:0}.mc-card.mc-card_readonly{cursor:auto}"]
             }] }
 ];
 /** @nocollapse */
@@ -150,7 +150,7 @@ if (false) {
 /**
  * @fileoverview added by tsickle
  * Generated from: card.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class McCardModule {
 }
@@ -169,19 +169,19 @@ McCardModule.decorators = [
 /**
  * @fileoverview added by tsickle
  * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
  * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
  * Generated from: ptsecurity-mosaic-card.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { McCard, McCardBase, McCardBaseMixin, McCardModule };

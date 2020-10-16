@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-table.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-table.js",
+  "module": "../fesm2015/ptsecurity-mosaic-table.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-table.js",
-  "esm5": "../esm5/table/ptsecurity-mosaic-table.js",
   "esm2015": "../esm2015/table/ptsecurity-mosaic-table.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-table.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-table.js",
   "typings": "ptsecurity-mosaic-table.d.ts",
   "metadata": "ptsecurity-mosaic-table.metadata.json",

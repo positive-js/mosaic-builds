@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-link.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-link.js",
+  "module": "../fesm2015/ptsecurity-mosaic-link.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-link.js",
-  "esm5": "../esm5/link/ptsecurity-mosaic-link.js",
   "esm2015": "../esm2015/link/ptsecurity-mosaic-link.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-link.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-link.js",
   "typings": "ptsecurity-mosaic-link.d.ts",
   "metadata": "ptsecurity-mosaic-link.metadata.json",

@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-timepicker.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-timepicker.js",
+  "module": "../fesm2015/ptsecurity-mosaic-timepicker.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-timepicker.js",
-  "esm5": "../esm5/timepicker/ptsecurity-mosaic-timepicker.js",
   "esm2015": "../esm2015/timepicker/ptsecurity-mosaic-timepicker.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-timepicker.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-timepicker.js",
   "typings": "ptsecurity-mosaic-timepicker.d.ts",
   "metadata": "ptsecurity-mosaic-timepicker.metadata.json",

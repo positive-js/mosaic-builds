@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-select.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-select.js",
+  "module": "../fesm2015/ptsecurity-mosaic-select.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-select.js",
-  "esm5": "../esm5/select/ptsecurity-mosaic-select.js",
   "esm2015": "../esm2015/select/ptsecurity-mosaic-select.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-select.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-select.js",
   "typings": "ptsecurity-mosaic-select.d.ts",
   "metadata": "ptsecurity-mosaic-select.metadata.json",

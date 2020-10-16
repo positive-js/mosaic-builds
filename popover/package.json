@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-popover.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-popover.js",
+  "module": "../fesm2015/ptsecurity-mosaic-popover.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-popover.js",
-  "esm5": "../esm5/popover/ptsecurity-mosaic-popover.js",
   "esm2015": "../esm2015/popover/ptsecurity-mosaic-popover.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-popover.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-popover.js",
   "typings": "ptsecurity-mosaic-popover.d.ts",
   "metadata": "ptsecurity-mosaic-popover.metadata.json",

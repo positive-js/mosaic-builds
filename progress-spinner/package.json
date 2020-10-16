@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-progress-spinner.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-progress-spinner.js",
+  "module": "../fesm2015/ptsecurity-mosaic-progress-spinner.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-progress-spinner.js",
-  "esm5": "../esm5/progress-spinner/ptsecurity-mosaic-progress-spinner.js",
   "esm2015": "../esm2015/progress-spinner/ptsecurity-mosaic-progress-spinner.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-progress-spinner.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-progress-spinner.js",
   "typings": "ptsecurity-mosaic-progress-spinner.d.ts",
   "metadata": "ptsecurity-mosaic-progress-spinner.metadata.json",

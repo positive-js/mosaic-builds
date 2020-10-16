@@ -1,10 +1,8 @@
 {
   "main": "../bundles/ptsecurity-mosaic-datepicker.umd.js",
-  "module": "../fesm5/ptsecurity-mosaic-datepicker.js",
+  "module": "../fesm2015/ptsecurity-mosaic-datepicker.js",
   "es2015": "../fesm2015/ptsecurity-mosaic-datepicker.js",
-  "esm5": "../esm5/datepicker/ptsecurity-mosaic-datepicker.js",
   "esm2015": "../esm2015/datepicker/ptsecurity-mosaic-datepicker.js",
-  "fesm5": "../fesm5/ptsecurity-mosaic-datepicker.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-datepicker.js",
   "typings": "ptsecurity-mosaic-datepicker.d.ts",
   "metadata": "ptsecurity-mosaic-datepicker.metadata.json",
