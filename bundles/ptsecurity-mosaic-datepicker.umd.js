@@ -2606,12 +2606,7 @@
              * @return {?}
              */
             set: function (value) {
-                if (value) {
-                    this.open();
-                }
-                else {
-                    this.close();
-                }
+                coercion.coerceBooleanProperty(value) ? this.open() : this.close();
             },
             enumerable: false,
             configurable: true

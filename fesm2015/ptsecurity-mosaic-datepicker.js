@@ -2516,12 +2516,7 @@ class McDatepicker {
      * @return {?}
      */
     set opened(value) {
-        if (value) {
-            this.open();
-        }
-        else {
-            this.close();
-        }
+        coerceBooleanProperty(value) ? this.open() : this.close();
     }
     /**
      * The currently selected date.
