@@ -21,7 +21,6 @@ export interface McDropdownDefaultOptions {
     backdropClass: string;
     /** Whether the dropdown has a backdrop. */
     hasBackdrop?: boolean;
-    closeOnOutsideClick?: boolean;
 }
 /** Injection token to be used to override the default options for `mc-dropdown`. */
 export declare const MC_DROPDOWN_DEFAULT_OPTIONS: InjectionToken<McDropdownDefaultOptions>;
@@ -46,10 +45,6 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     /** Whether the dropdown has a backdrop. */
     get hasBackdrop(): boolean | undefined;
     set hasBackdrop(value: boolean | undefined);
-    /** Close menu when an outside click is detected */
-    get closeOnOutsideClick(): boolean | undefined;
-    set closeOnOutsideClick(value: boolean | undefined);
-    private _closeOnOutsideClick;
     /**
      * This method takes classes set on the host mc-dropdown element and applies them on the
      * dropdown template that displays in the overlay container.  Otherwise, it's difficult
