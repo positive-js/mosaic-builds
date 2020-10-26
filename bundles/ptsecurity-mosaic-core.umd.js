@@ -596,11 +596,6 @@
     }
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: common-behaviors/tabindex.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
      * @record
      */
     function HasTabIndex() { }
@@ -617,39 +612,59 @@
      */
     function mixinTabIndex(base, defaultTabIndex) {
         if (defaultTabIndex === void 0) { defaultTabIndex = 0; }
-        return /** @class */ (function (_super) {
-            __extends(class_1, _super);
+        // Note: We cast `base` to `unknown` and then `Constructor`. It could be an abstract class,
+        // but given we `extend` it from another class, we can assume a constructor being accessible.
+        // tslint:disable-next-line:naming-convention
+        /**
+         * @abstract
+         */
+        var Mixin = /** @class */ (function (_super) {
+            __extends(Mixin, _super);
             /**
              * @param {...?} args
              */
-            function class_1() {
+            function Mixin() {
                 var args = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
                 var _this = _super.apply(this, __spread(args)) || this;
+                // tslint:disable-next-line:orthodox-getter-and-setter
                 _this._tabIndex = defaultTabIndex;
+                _this.defaultTabIndex = defaultTabIndex;
                 return _this;
             }
-            Object.defineProperty(class_1.prototype, "tabIndex", {
+            Object.defineProperty(Mixin.prototype, "tabIndex", {
                 /**
                  * @return {?}
                  */
-                get: function () {
-                    return this.disabled ? -1 : this._tabIndex;
-                },
+                get: function () { return this.disabled ? -1 : this._tabIndex; },
                 /**
                  * @param {?} value
                  * @return {?}
                  */
                 set: function (value) {
-                    this._tabIndex = value != null ? value : defaultTabIndex;
+                    // If the specified tabIndex value is null or undefined, fall back to the default value.
+                    this._tabIndex = value != null ? coercion.coerceNumberProperty(value) : this.defaultTabIndex;
                 },
                 enumerable: false,
                 configurable: true
             });
-            return class_1;
+            return Mixin;
         }(base));
+        if (false) {
+            /**
+             * @type {?}
+             * @private
+             */
+            Mixin.prototype._tabIndex;
+            /** @type {?} */
+            Mixin.prototype.defaultTabIndex;
+        }
+        // Since we don't directly extend from `base` with it's original types, and we instruct
+        // TypeScript that `T` actually is instantiatable through `new`, the types don't overlap.
+        // This is a limitation in TS as abstract classes cannot be typed properly dynamically.
+        return ( /** @type {?} */(( /** @type {?} */(Mixin))));
     }
 
     /**
@@ -1414,17 +1429,9 @@
             ])
         ])
     };
-    /**
-     * @deprecated
-     * \@breaking-change 7.0.0
-     * @type {?}
-     */
+    /** @type {?} */
     var transformPanel = mcSelectAnimations.transformPanel;
-    /**
-     * @deprecated
-     * \@breaking-change 7.0.0
-     * @type {?}
-     */
+    /** @type {?} */
     var fadeInContent = mcSelectAnimations.fadeInContent;
 
     /**

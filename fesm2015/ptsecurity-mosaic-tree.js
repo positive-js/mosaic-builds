@@ -47,10 +47,26 @@ class McTreeNodePadding extends CdkTreeNodePadding {
     constructor() {
         super(...arguments);
         this.baseLeftPadding = 12;
-        /* tslint:disable-next-line:naming-convention orthodox-getter-and-setter*/
-        this._indent = 20;
         this.iconWidth = 20;
     }
+    /**
+     * @return {?}
+     */
+    get level() { return this._level; }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set level(value) { this.setLevelInput(value); }
+    /**
+     * @return {?}
+     */
+    get indent() { return this._indent; }
+    /**
+     * @param {?} indent
+     * @return {?}
+     */
+    set indent(indent) { this.setIndentInput(indent); }
     /**
      * @return {?}
      */
@@ -89,13 +105,7 @@ McTreeNodePadding.propDecorators = {
 };
 if (false) {
     /** @type {?} */
-    McTreeNodePadding.prototype.level;
-    /** @type {?} */
-    McTreeNodePadding.prototype.indent;
-    /** @type {?} */
     McTreeNodePadding.prototype.baseLeftPadding;
-    /** @type {?} */
-    McTreeNodePadding.prototype._indent;
     /** @type {?} */
     McTreeNodePadding.prototype.withIcon;
     /** @type {?} */

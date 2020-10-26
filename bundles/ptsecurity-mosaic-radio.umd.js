@@ -771,7 +771,9 @@
     // Boilerplate for applying mixins to McRadioButton.
     /**
      * \@docs-private
+     * @abstract
      */
+    // tslint:disable-next-line:naming-convention
     var McRadioButtonBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
         /**
@@ -1248,7 +1250,6 @@
 
     exports.MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR = MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR;
     exports.McRadioButton = McRadioButton;
-    exports.McRadioButtonBase = McRadioButtonBase;
     exports.McRadioButtonMixinBase = McRadioButtonMixinBase;
     exports.McRadioChange = McRadioChange;
     exports.McRadioGroup = McRadioGroup;

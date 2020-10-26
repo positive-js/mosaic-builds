@@ -8,13 +8,5 @@ export declare const mcSelectAnimations: {
     readonly transformPanel: AnimationTriggerMetadata;
     readonly fadeInContent: AnimationTriggerMetadata;
 };
-/**
- * @deprecated
- * @breaking-change 7.0.0
- */
 export declare const transformPanel: AnimationTriggerMetadata;
-/**
- * @deprecated
- * @breaking-change 7.0.0
- */
 export declare const fadeInContent: AnimationTriggerMetadata;

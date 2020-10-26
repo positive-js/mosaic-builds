@@ -1,6 +1,6 @@
 import { BidiModule } from '@angular/cdk/bidi';
 import { InjectionToken, isDevMode, NgModule, Optional, Inject, Directive, Injectable, ɵɵdefineInjectable, Pipe, ɵɵinject, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, EventEmitter, ElementRef, ChangeDetectorRef, Output } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { RequiredValidator } from '@angular/forms';
 import { CommonModule, DOCUMENT } from '@angular/common';
@@ -301,28 +301,48 @@ if (false) {
  * @return {?}
  */
 function mixinTabIndex(base, defaultTabIndex = 0) {
-    return class extends base {
+    // Note: We cast `base` to `unknown` and then `Constructor`. It could be an abstract class,
+    // but given we `extend` it from another class, we can assume a constructor being accessible.
+    // tslint:disable-next-line:naming-convention
+    /**
+     * @abstract
+     */
+    class Mixin extends base {
         /**
          * @param {...?} args
          */
         constructor(...args) {
             super(...args);
+            // tslint:disable-next-line:orthodox-getter-and-setter
             this._tabIndex = defaultTabIndex;
+            this.defaultTabIndex = defaultTabIndex;
         }
         /**
          * @return {?}
          */
-        get tabIndex() {
-            return this.disabled ? -1 : this._tabIndex;
-        }
+        get tabIndex() { return this.disabled ? -1 : this._tabIndex; }
         /**
          * @param {?} value
          * @return {?}
          */
         set tabIndex(value) {
-            this._tabIndex = value != null ? value : defaultTabIndex;
+            // If the specified tabIndex value is null or undefined, fall back to the default value.
+            this._tabIndex = value != null ? coerceNumberProperty(value) : this.defaultTabIndex;
         }
-    };
+    }
+    if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        Mixin.prototype._tabIndex;
+        /** @type {?} */
+        Mixin.prototype.defaultTabIndex;
+    }
+    // Since we don't directly extend from `base` with it's original types, and we instruct
+    // TypeScript that `T` actually is instantiatable through `new`, the types don't overlap.
+    // This is a limitation in TS as abstract classes cannot be typed properly dynamically.
+    return (/** @type {?} */ ((/** @type {?} */ (Mixin))));
 }
 
 /**
@@ -1067,17 +1087,9 @@ const mcSelectAnimations = {
         ])
     ])
 };
-/**
- * @deprecated
- * \@breaking-change 7.0.0
- * @type {?}
- */
+/** @type {?} */
 const transformPanel = mcSelectAnimations.transformPanel;
-/**
- * @deprecated
- * \@breaking-change 7.0.0
- * @type {?}
- */
+/** @type {?} */
 const fadeInContent = mcSelectAnimations.fadeInContent;
 
 /**

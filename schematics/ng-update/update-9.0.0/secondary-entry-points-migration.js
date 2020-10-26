@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SecondaryEntryPointsMigration = void 0;
+// tslint:disable
 const schematics_1 = require("@angular/cdk/schematics");
 const ts = require("typescript");
 const ONLY_SUBPACKAGE_FAILURE_STR = `Importing from "@ptsecurity/mosaic" is deprecated. ` +

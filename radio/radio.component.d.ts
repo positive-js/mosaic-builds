@@ -122,9 +122,9 @@ export declare class McRadioGroup extends McRadioGroupMixinBase implements After
     private updateSelectedRadioFromValue;
 }
 /** @docs-private */
-export declare class McRadioButtonBase {
+declare abstract class McRadioButtonBase {
     _elementRef: ElementRef;
-    disabled: boolean;
+    abstract disabled: boolean;
     constructor(_elementRef: ElementRef);
 }
 export declare const McRadioButtonMixinBase: CanColorCtor & HasTabIndexCtor & typeof McRadioButtonBase;
@@ -199,3 +199,4 @@ export declare class McRadioButton extends McRadioButtonMixinBase implements OnI
     /** Dispatch change event with current value. */
     private emitChangeEvent;
 }
+export {};

@@ -338,11 +338,35 @@
         function McTreeNodePadding() {
             var _this = _super.apply(this, __spread(arguments)) || this;
             _this.baseLeftPadding = 12;
-            /* tslint:disable-next-line:naming-convention orthodox-getter-and-setter*/
-            _this._indent = 20;
             _this.iconWidth = 20;
             return _this;
         }
+        Object.defineProperty(McTreeNodePadding.prototype, "level", {
+            /**
+             * @return {?}
+             */
+            get: function () { return this._level; },
+            /**
+             * @param {?} value
+             * @return {?}
+             */
+            set: function (value) { this.setLevelInput(value); },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTreeNodePadding.prototype, "indent", {
+            /**
+             * @return {?}
+             */
+            get: function () { return this._indent; },
+            /**
+             * @param {?} indent
+             * @return {?}
+             */
+            set: function (indent) { this.setIndentInput(indent); },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(McTreeNodePadding.prototype, "leftPadding", {
             /**
              * @return {?}
@@ -386,13 +410,7 @@
     };
     if (false) {
         /** @type {?} */
-        McTreeNodePadding.prototype.level;
-        /** @type {?} */
-        McTreeNodePadding.prototype.indent;
-        /** @type {?} */
         McTreeNodePadding.prototype.baseLeftPadding;
-        /** @type {?} */
-        McTreeNodePadding.prototype._indent;
         /** @type {?} */
         McTreeNodePadding.prototype.withIcon;
         /** @type {?} */

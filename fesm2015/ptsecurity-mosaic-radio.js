@@ -452,7 +452,9 @@ if (false) {
 // Boilerplate for applying mixins to McRadioButton.
 /**
  * \@docs-private
+ * @abstract
  */
+// tslint:disable-next-line:naming-convention
 class McRadioButtonBase {
     // tslint:disable-next-line:naming-convention
     /**
@@ -898,5 +900,5 @@ McRadioModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioButton, McRadioButtonBase, McRadioButtonMixinBase, McRadioChange, McRadioGroup, McRadioGroupBase, McRadioGroupMixinBase, McRadioModule };
+export { MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR, McRadioButton, McRadioButtonMixinBase, McRadioChange, McRadioGroup, McRadioGroupBase, McRadioGroupMixinBase, McRadioModule };
 //# sourceMappingURL=ptsecurity-mosaic-radio.js.map
