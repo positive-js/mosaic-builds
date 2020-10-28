@@ -387,6 +387,10 @@
                     event.stopPropagation();
                 }
             }
+            // tslint:disable-next-line:deprecation
+            if ([keycodes.SPACE, keycodes.HOME, keycodes.END].includes(event.keyCode)) {
+                event.stopPropagation();
+            }
         };
         return McSelectSearch;
     }());
@@ -985,6 +989,7 @@
                 .subscribe(( /**
          * @return {?}
          */function () {
+                _this.scrollActiveOptionIntoView();
                 if (_this.triggerFontSize && _this.overlayDir.overlayRef && _this.overlayDir.overlayRef.overlayElement) {
                     _this.overlayDir.overlayRef.overlayElement.style.fontSize = _this.triggerFontSize + "px";
                 }
@@ -1113,13 +1118,14 @@
          * @return {?}
          */
         McSelect.prototype.handleKeydown = function (event) {
-            if (!this.disabled) {
-                if (this.panelOpen) {
-                    this.handleOpenKeydown(event);
-                }
-                else {
-                    this.handleClosedKeydown(event);
-                }
+            if (this.disabled) {
+                return;
+            }
+            if (this.panelOpen) {
+                this.handleOpenKeydown(event);
+            }
+            else {
+                this.handleClosedKeydown(event);
             }
         };
         /**
@@ -1358,8 +1364,6 @@
             var keyCode = event.keyCode;
             /** @type {?} */
             var isArrowKey = keyCode === keycodes.DOWN_ARROW || keyCode === keycodes.UP_ARROW;
-            /** @type {?} */
-            var manager = this.keyManager;
             if (isArrowKey && event.altKey) {
                 // Close the select on ALT + arrow key to match the native <select>
                 event.preventDefault();
@@ -1367,23 +1371,23 @@
             }
             else if (keyCode === keycodes.HOME) {
                 event.preventDefault();
-                manager.setFirstItemActive();
+                this.keyManager.setFirstItemActive();
             }
             else if (keyCode === keycodes.END) {
                 event.preventDefault();
-                manager.setLastItemActive();
+                this.keyManager.setLastItemActive();
             }
             else if (keyCode === keycodes.PAGE_UP) {
                 event.preventDefault();
-                manager.setPreviousPageItemActive();
+                this.keyManager.setPreviousPageItemActive();
             }
             else if (keyCode === keycodes.PAGE_DOWN) {
                 event.preventDefault();
-                manager.setNextPageItemActive();
+                this.keyManager.setNextPageItemActive();
             }
-            else if ((keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) && manager.activeItem) {
+            else if ((keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) && this.keyManager.activeItem) {
                 event.preventDefault();
-                manager.activeItem.selectViaInteraction();
+                this.keyManager.activeItem.selectViaInteraction();
             }
             else if (this._multiple && keyCode === keycodes.A && event.ctrlKey) {
                 event.preventDefault();
@@ -1406,11 +1410,14 @@
             }
             else {
                 /** @type {?} */
-                var previouslyFocusedIndex = manager.activeItemIndex;
-                manager.onKeydown(event);
-                if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem &&
-                    manager.activeItemIndex !== previouslyFocusedIndex) {
-                    manager.activeItem.selectViaInteraction();
+                var previouslyFocusedIndex = this.keyManager.activeItemIndex;
+                this.keyManager.onKeydown(event);
+                if (this._multiple && isArrowKey && event.shiftKey && this.keyManager.activeItem &&
+                    this.keyManager.activeItemIndex !== previouslyFocusedIndex) {
+                    this.keyManager.activeItem.selectViaInteraction();
+                }
+                if (this.search) {
+                    this.search.focus();
                 }
             }
         };
@@ -1689,11 +1696,10 @@
          * @return {?}
          */
         McSelect.prototype.scrollActiveOptionIntoView = function () {
-            /** @type {?} */
-            var activeOptionIndex = this.keyManager.activeItemIndex || 0;
-            /** @type {?} */
-            var labelCount = core$1.countGroupLabelsBeforeOption(activeOptionIndex, this.options, this.optionGroups);
-            this.optionsContainer.nativeElement.scrollTop = core$1.getOptionScrollPosition(activeOptionIndex + labelCount, this.getItemHeight(), this.optionsContainer.nativeElement.scrollTop, core$1.SELECT_PANEL_MAX_HEIGHT);
+            if (!this.keyManager.activeItem) {
+                return;
+            }
+            this.keyManager.activeItem.focus();
         };
         /**
          * Sets the x-offset of the overlay panel in relation to the trigger's top start corner.

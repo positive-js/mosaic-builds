@@ -1,7 +1,7 @@
 import { CdkConnectedOverlay, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { Directive, ContentChild, EventEmitter, isDevMode, Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, NgZone, Renderer2, ElementRef, Optional, Inject, Self, ViewChild, ViewChildren, ContentChildren, Input, Output, NgModule } from '@angular/core';
-import { mixinTabIndex, mixinDisabled, mixinErrorState, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, setMosaicValidation, getMcSelectNonArrayValueError, countGroupLabelsBeforeOption, getOptionScrollPosition, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, mcSelectAnimations, MC_OPTION_PARENT_COMPONENT, ErrorStateMatcher, MC_SELECT_SCROLL_STRATEGY, MC_VALIDATION, McOption, McOptgroup, McOptionModule, MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/core';
+import { mixinTabIndex, mixinDisabled, mixinErrorState, getMcSelectDynamicMultipleError, getMcSelectNonFunctionValueError, setMosaicValidation, getMcSelectNonArrayValueError, SELECT_PANEL_PADDING_X, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, mcSelectAnimations, MC_OPTION_PARENT_COMPONENT, ErrorStateMatcher, MC_SELECT_SCROLL_STRATEGY, MC_VALIDATION, McOption, McOptgroup, McOptionModule, MC_SELECT_SCROLL_STRATEGY_PROVIDER } from '@ptsecurity/mosaic/core';
 import { McFormField, McFormFieldControl, McFormFieldModule } from '@ptsecurity/mosaic/form-field';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { McTag, McTagsModule } from '@ptsecurity/mosaic/tags';
@@ -10,7 +10,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
-import { ESCAPE, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, ENTER, SPACE, HOME, END, PAGE_UP, PAGE_DOWN, A } from '@ptsecurity/cdk/keycodes';
+import { ESCAPE, SPACE, HOME, END, DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, ENTER, PAGE_UP, PAGE_DOWN, A } from '@ptsecurity/cdk/keycodes';
 import { McInput } from '@ptsecurity/mosaic/input';
 import { Subscription, Subject, defer, merge } from 'rxjs';
 import { take, switchMap, filter, map, distinctUntilChanged, takeUntil, startWith } from 'rxjs/operators';
@@ -101,6 +101,10 @@ class McSelectSearch {
                 this.reset();
                 event.stopPropagation();
             }
+        }
+        // tslint:disable-next-line:deprecation
+        if ([SPACE, HOME, END].includes(event.keyCode)) {
+            event.stopPropagation();
         }
     }
 }
@@ -665,6 +669,7 @@ class McSelect extends McSelectMixinBase {
          * @return {?}
          */
         () => {
+            this.scrollActiveOptionIntoView();
             if (this.triggerFontSize && this.overlayDir.overlayRef && this.overlayDir.overlayRef.overlayElement) {
                 this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
             }
@@ -777,13 +782,14 @@ class McSelect extends McSelectMixinBase {
      * @return {?}
      */
     handleKeydown(event) {
-        if (!this.disabled) {
-            if (this.panelOpen) {
-                this.handleOpenKeydown(event);
-            }
-            else {
-                this.handleClosedKeydown(event);
-            }
+        if (this.disabled) {
+            return;
+        }
+        if (this.panelOpen) {
+            this.handleOpenKeydown(event);
+        }
+        else {
+            this.handleClosedKeydown(event);
         }
     }
     /**
@@ -1022,8 +1028,6 @@ class McSelect extends McSelectMixinBase {
         const keyCode = event.keyCode;
         /** @type {?} */
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
-        /** @type {?} */
-        const manager = this.keyManager;
         if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
@@ -1031,23 +1035,23 @@ class McSelect extends McSelectMixinBase {
         }
         else if (keyCode === HOME) {
             event.preventDefault();
-            manager.setFirstItemActive();
+            this.keyManager.setFirstItemActive();
         }
         else if (keyCode === END) {
             event.preventDefault();
-            manager.setLastItemActive();
+            this.keyManager.setLastItemActive();
         }
         else if (keyCode === PAGE_UP) {
             event.preventDefault();
-            manager.setPreviousPageItemActive();
+            this.keyManager.setPreviousPageItemActive();
         }
         else if (keyCode === PAGE_DOWN) {
             event.preventDefault();
-            manager.setNextPageItemActive();
+            this.keyManager.setNextPageItemActive();
         }
-        else if ((keyCode === ENTER || keyCode === SPACE) && manager.activeItem) {
+        else if ((keyCode === ENTER || keyCode === SPACE) && this.keyManager.activeItem) {
             event.preventDefault();
-            manager.activeItem.selectViaInteraction();
+            this.keyManager.activeItem.selectViaInteraction();
         }
         else if (this._multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();
@@ -1072,11 +1076,14 @@ class McSelect extends McSelectMixinBase {
         }
         else {
             /** @type {?} */
-            const previouslyFocusedIndex = manager.activeItemIndex;
-            manager.onKeydown(event);
-            if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem &&
-                manager.activeItemIndex !== previouslyFocusedIndex) {
-                manager.activeItem.selectViaInteraction();
+            const previouslyFocusedIndex = this.keyManager.activeItemIndex;
+            this.keyManager.onKeydown(event);
+            if (this._multiple && isArrowKey && event.shiftKey && this.keyManager.activeItem &&
+                this.keyManager.activeItemIndex !== previouslyFocusedIndex) {
+                this.keyManager.activeItem.selectViaInteraction();
+            }
+            if (this.search) {
+                this.search.focus();
             }
         }
     }
@@ -1364,11 +1371,10 @@ class McSelect extends McSelectMixinBase {
      * @return {?}
      */
     scrollActiveOptionIntoView() {
-        /** @type {?} */
-        const activeOptionIndex = this.keyManager.activeItemIndex || 0;
-        /** @type {?} */
-        const labelCount = countGroupLabelsBeforeOption(activeOptionIndex, this.options, this.optionGroups);
-        this.optionsContainer.nativeElement.scrollTop = getOptionScrollPosition(activeOptionIndex + labelCount, this.getItemHeight(), this.optionsContainer.nativeElement.scrollTop, SELECT_PANEL_MAX_HEIGHT);
+        if (!this.keyManager.activeItem) {
+            return;
+        }
+        this.keyManager.activeItem.focus();
     }
     /**
      * Sets the x-offset of the overlay panel in relation to the trigger's top start corner.
