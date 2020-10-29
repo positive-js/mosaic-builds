@@ -385,6 +385,7 @@ class McTimepicker {
         this.selectionStart = selectionStart;
         this.selectionEnd = selectionEnd;
         this.createSelectionOfTimeComponentInInput(((/** @type {?} */ (selectionStart))) + 1);
+        this.value = newTimeObj;
         this.onChange(newTimeObj);
         this.stateChanges.next();
     }
@@ -405,21 +406,21 @@ class McTimepicker {
         /** @type {?} */
         const keyCode = event.keyCode;
         if (hasModifierKey(event)) {
-            return;
+            noop();
         }
         else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
             event.preventDefault();
             this.verticalArrowKeyHandler(keyCode);
-            return;
         }
         else if ([LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
             this.horizontalArrowKeyHandler(keyCode);
-            return;
         }
-        setTimeout((/**
-         * @return {?}
-         */
-        () => this.onInput()));
+        else {
+            setTimeout((/**
+             * @return {?}
+             */
+            () => this.onInput()));
+        }
     }
     /**
      * @param {?} control

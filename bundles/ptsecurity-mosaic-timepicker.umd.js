@@ -423,6 +423,7 @@
             this.selectionStart = selectionStart;
             this.selectionEnd = selectionEnd;
             this.createSelectionOfTimeComponentInInput((( /** @type {?} */(selectionStart))) + 1);
+            this.value = newTimeObj;
             this.onChange(newTimeObj);
             this.stateChanges.next();
         };
@@ -444,20 +445,20 @@
             /** @type {?} */
             var keyCode = event.keyCode;
             if (keycodes.hasModifierKey(event)) {
-                return;
+                rxjs.noop();
             }
             else if ([keycodes.UP_ARROW, keycodes.DOWN_ARROW].includes(keyCode)) {
                 event.preventDefault();
                 this.verticalArrowKeyHandler(keyCode);
-                return;
             }
             else if ([keycodes.LEFT_ARROW, keycodes.RIGHT_ARROW].includes(keyCode)) {
                 this.horizontalArrowKeyHandler(keyCode);
-                return;
             }
-            setTimeout(( /**
-             * @return {?}
-             */function () { return _this.onInput(); }));
+            else {
+                setTimeout(( /**
+                 * @return {?}
+                 */function () { return _this.onInput(); }));
+            }
         };
         /**
          * @param {?} control
