@@ -14,6 +14,14 @@ import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
  * Generated from: tooltip.component.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/** @enum {string} */
+const ArrowPlacements = {
+    Top: "top",
+    Center: "center",
+    Bottom: "bottom",
+    Right: "right",
+    Left: "left",
+};
 class McTooltipComponent {
     /**
      * @param {?} cdr
@@ -114,6 +122,19 @@ class McTooltipComponent {
         else {
             this.hide();
         }
+    }
+    /**
+     * @return {?}
+     */
+    get mcArrowPlacement() {
+        return this._mcArrowPlacement;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set mcArrowPlacement(value) {
+        this._mcArrowPlacement = value;
     }
     /**
      * @return {?}
@@ -232,7 +253,8 @@ McTooltipComponent.propDecorators = {
     mcTrigger: [{ type: Input }],
     mcPlacement: [{ type: Input }],
     mcTooltipClass: [{ type: Input }],
-    mcVisible: [{ type: Input }]
+    mcVisible: [{ type: Input }],
+    mcArrowPlacement: [{ type: Input }]
 };
 if (false) {
     /** @type {?} */
@@ -271,17 +293,22 @@ if (false) {
      * @type {?}
      * @private
      */
-    McTooltipComponent.prototype._mcTooltipClass;
-    /**
-     * @type {?}
-     * @private
-     */
     McTooltipComponent.prototype._mcPlacement;
     /**
      * @type {?}
      * @private
      */
+    McTooltipComponent.prototype._mcTooltipClass;
+    /**
+     * @type {?}
+     * @private
+     */
     McTooltipComponent.prototype._mcVisible;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTooltipComponent.prototype._mcArrowPlacement;
     /**
      * Subject for notifying that the tooltip has been hidden from the view
      * @type {?}
@@ -506,6 +533,19 @@ class McTooltip {
     /**
      * @return {?}
      */
+    get mcArrowPlacement() {
+        return this._mcArrowPlacement;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set mcArrowPlacement(value) {
+        this._mcArrowPlacement = value;
+    }
+    /**
+     * @return {?}
+     */
     get isOpen() {
         return this.isTooltipOpen;
     }
@@ -614,14 +654,32 @@ class McTooltip {
         }
         if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
             /** @type {?} */
-            const pos = (this.overlayRef.overlayElement.clientHeight -
-                this.hostView.element.nativeElement.clientHeight) / 2;
-            // tslint:disable-line
+            const halfDelimeter = 2;
             /** @type {?} */
-            const currentContainer = this.overlayRef.overlayElement.style.top || '0px';
-            this.overlayRef.overlayElement.style.top =
-                `${parseInt(currentContainer.split('px')[0], 10) + pos - 1}px`;
-            // TODO: обновлять положение стрелки\указателя\"дятла"
+            const overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
+            /** @type {?} */
+            const currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
+            if (this.mcArrowPlacement === ArrowPlacements.Center) {
+                /** @type {?} */
+                const arrowElemRef = this.getTooltipArrowElem();
+                /** @type {?} */
+                const currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
+                /** @type {?} */
+                const currentContainerHeightHalfed = currentContainerHeight / halfDelimeter;
+                /** @type {?} */
+                const tooltipHeightHalfed = overlayElemHeight / halfDelimeter;
+                this.overlayRef.overlayElement.style.top = `${(currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed + 1}px`;
+                if (arrowElemRef) {
+                    arrowElemRef.setAttribute('style', `top: ${tooltipHeightHalfed - 1}px`);
+                }
+            }
+            else {
+                /** @type {?} */
+                const pos = (overlayElemHeight - currentContainerHeight) / halfDelimeter;
+                /** @type {?} */
+                const defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
+                this.overlayRef.overlayElement.style.top = `${defaultTooltipPlacementTop + pos - 1}px`;
+            }
         }
     }
     // tslint:disable-next-line:no-any
@@ -894,6 +952,16 @@ class McTooltip {
         }
         return { x: newX, y: newY };
     }
+    /**
+     * @private
+     * @return {?}
+     */
+    getTooltipArrowElem() {
+        var _a;
+        /** @type {?} */
+        const arrowClassName = 'mc-tooltip-arrow';
+        return (_a = this.overlayRef) === null || _a === void 0 ? void 0 : _a.overlayElement.getElementsByClassName(arrowClassName)[0];
+    }
 }
 McTooltip.decorators = [
     { type: Directive, args: [{
@@ -926,6 +994,7 @@ McTooltip.propDecorators = {
     mcPlacement: [{ type: Input, args: ['mcPlacement',] }],
     mcTooltipClass: [{ type: Input, args: ['mcTooltipClass',] }],
     mcVisible: [{ type: Input, args: ['mcVisible',] }],
+    mcArrowPlacement: [{ type: Input, args: ['mcArrowPlacement',] }],
     isOpen: [{ type: HostBinding, args: ['class.mc-tooltip-open',] }],
     isParentDisabled: [{ type: HostBinding, args: ['class.disabled',] }]
 };
@@ -991,6 +1060,11 @@ if (false) {
      * @private
      */
     McTooltip.prototype._mcVisible;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTooltip.prototype._mcArrowPlacement;
     /**
      * @type {?}
      * @private
@@ -1073,5 +1147,5 @@ McToolTipModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McToolTipModule, McTooltip, McTooltipComponent, getMcTooltipInvalidPositionError, mcTooltipScrollStrategyFactory };
+export { ArrowPlacements, MC_TOOLTIP_SCROLL_STRATEGY, MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER, McToolTipModule, McTooltip, McTooltipComponent, getMcTooltipInvalidPositionError, mcTooltipScrollStrategyFactory };
 //# sourceMappingURL=ptsecurity-mosaic-tooltip.js.map

@@ -3,6 +3,13 @@ import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, Overla
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
+export declare enum ArrowPlacements {
+    Top = "top",
+    Center = "center",
+    Bottom = "bottom",
+    Right = "right",
+    Left = "left"
+}
 export declare class McTooltipComponent {
     cdr: ChangeDetectorRef;
     prefix: string;
@@ -24,13 +31,16 @@ export declare class McTooltipComponent {
     private _mcTrigger;
     get mcPlacement(): string;
     set mcPlacement(value: string);
+    private _mcPlacement;
     get mcTooltipClass(): string;
     set mcTooltipClass(value: string);
     private _mcTooltipClass;
-    private _mcPlacement;
     get mcVisible(): boolean;
     set mcVisible(value: boolean);
     private _mcVisible;
+    get mcArrowPlacement(): ArrowPlacements;
+    set mcArrowPlacement(value: ArrowPlacements);
+    private _mcArrowPlacement;
     /** Subject for notifying that the tooltip has been hidden from the view */
     private readonly onHideSubject;
     private closeOnInteraction;
@@ -99,6 +109,9 @@ export declare class McTooltip implements OnInit, OnDestroy {
     get mcVisible(): boolean;
     set mcVisible(externalValue: boolean);
     private _mcVisible;
+    get mcArrowPlacement(): ArrowPlacements;
+    set mcArrowPlacement(value: ArrowPlacements);
+    private _mcArrowPlacement;
     get isOpen(): boolean;
     get isParentDisabled(): boolean;
     private manualListeners;
@@ -134,4 +147,5 @@ export declare class McTooltip implements OnInit, OnDestroy {
     };
     /** Inverts an overlay position. */
     private invertPosition;
+    private getTooltipArrowElem;
 }
