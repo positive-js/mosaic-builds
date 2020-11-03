@@ -14,13 +14,14 @@ import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
  * Generated from: tooltip.component.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @enum {string} */
+// tslint:disable-next-line:naming-convention
+/** @type {?} */
 const ArrowPlacements = {
-    Top: "top",
-    Center: "center",
-    Bottom: "bottom",
-    Right: "right",
-    Left: "left",
+    Top: (/** @type {?} */ ('top')),
+    Center: (/** @type {?} */ ('center')),
+    Bottom: (/** @type {?} */ ('bottom')),
+    Right: (/** @type {?} */ ('right')),
+    Left: (/** @type {?} */ ('left'))
 };
 class McTooltipComponent {
     /**

@@ -1,15 +1,16 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, ScrollStrategy, OverlayConnectionPosition, OriginConnectionPosition } from '@angular/cdk/overlay';
+import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, ScrollStrategy, OverlayConnectionPosition, OriginConnectionPosition, HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
-export declare enum ArrowPlacements {
-    Top = "top",
-    Center = "center",
-    Bottom = "bottom",
-    Right = "right",
-    Left = "left"
-}
+export declare type ArrowPlacements = HorizontalConnectionPos | VerticalConnectionPos;
+export declare const ArrowPlacements: {
+    Top: ArrowPlacements;
+    Center: ArrowPlacements;
+    Bottom: ArrowPlacements;
+    Right: ArrowPlacements;
+    Left: ArrowPlacements;
+};
 export declare class McTooltipComponent {
     cdr: ChangeDetectorRef;
     prefix: string;

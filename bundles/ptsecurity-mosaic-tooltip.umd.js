@@ -305,13 +305,14 @@
         return value;
     }
 
-    /** @enum {string} */
+    // tslint:disable-next-line:naming-convention
+    /** @type {?} */
     var ArrowPlacements = {
-        Top: "top",
-        Center: "center",
-        Bottom: "bottom",
-        Right: "right",
-        Left: "left",
+        Top: ( /** @type {?} */('top')),
+        Center: ( /** @type {?} */('center')),
+        Bottom: ( /** @type {?} */('bottom')),
+        Right: ( /** @type {?} */('right')),
+        Left: ( /** @type {?} */('left'))
     };
     var McTooltipComponent = /** @class */ (function () {
         /**
