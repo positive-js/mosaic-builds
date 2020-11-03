@@ -112,19 +112,17 @@ export declare class McTooltip implements OnInit, OnDestroy {
     get mcArrowPlacement(): ArrowPlacements;
     set mcArrowPlacement(value: ArrowPlacements);
     private _mcArrowPlacement;
-    get isOpen(): boolean;
-    get isParentDisabled(): boolean;
     private manualListeners;
     private readonly destroyed;
     constructor(overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
     /** Create the overlay config and position strategy */
     createOverlay(): OverlayRef;
     detach(): void;
     onPositionChange($event: ConnectedOverlayPositionChange): void;
     handlePositioningUpdate(): void;
     updateCompValue(key: string, value: any): void;
-    ngOnInit(): void;
-    ngOnDestroy(): void;
     handleKeydown(e: KeyboardEvent): void;
     handleTouchend(): void;
     initElementRefListeners(): void;

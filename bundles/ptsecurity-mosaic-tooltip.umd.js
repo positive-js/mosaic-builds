@@ -834,7 +834,9 @@
                 else {
                     this._mcPlacement = 'top';
                 }
-                this.updatePosition();
+                if (this.mcVisible) {
+                    this.updatePosition();
+                }
             },
             enumerable: false,
             configurable: true
@@ -907,26 +909,31 @@
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(McTooltip.prototype, "isOpen", {
-            /**
+        /**
+         * @return {?}
+         */
+        McTooltip.prototype.ngOnInit = function () {
+            this.initElementRefListeners();
+        };
+        /**
+         * @return {?}
+         */
+        McTooltip.prototype.ngOnDestroy = function () {
+            var _this = this;
+            if (this.overlayRef) {
+                this.overlayRef.dispose();
+            }
+            this.manualListeners.forEach(( /**
+             * @param {?} listener
+             * @param {?} event
              * @return {?}
-             */
-            get: function () {
-                return this.isTooltipOpen;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltip.prototype, "isParentDisabled", {
-            /**
-             * @return {?}
-             */
-            get: function () {
-                return this.parentDisabled;
-            },
-            enumerable: false,
-            configurable: true
-        });
+             */function (listener, event) {
+                _this.elementRef.nativeElement.removeEventListener(event, listener);
+            }));
+            this.manualListeners.clear();
+            this.$unsubscribe.next();
+            this.$unsubscribe.complete();
+        };
         /**
          * Create the overlay config and position strategy
          * @return {?}
@@ -1019,12 +1026,10 @@
          * @return {?}
          */
         McTooltip.prototype.handlePositioningUpdate = function () {
-            if (!this.overlayRef) {
-                this.overlayRef = this.createOverlay();
-            }
+            this.overlayRef = this.createOverlay();
             if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
                 /** @type {?} */
-                var halfDelimeter = 2;
+                var halfDelimiter = 2;
                 /** @type {?} */
                 var overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
                 /** @type {?} */
@@ -1033,19 +1038,19 @@
                     /** @type {?} */
                     var arrowElemRef = this.getTooltipArrowElem();
                     /** @type {?} */
-                    var currentContainerPositionTop = parseInt(this.hostView.element.nativeElement.offsetTop, 10);
+                    var containerPositionTop = this.hostView.element.nativeElement.getBoundingClientRect().top;
                     /** @type {?} */
-                    var currentContainerHeightHalfed = currentContainerHeight / halfDelimeter;
+                    var halfOfContainerHeight = currentContainerHeight / halfDelimiter;
                     /** @type {?} */
-                    var tooltipHeightHalfed = overlayElemHeight / halfDelimeter;
-                    this.overlayRef.overlayElement.style.top = (currentContainerPositionTop + currentContainerHeightHalfed) - tooltipHeightHalfed + 1 + "px";
+                    var halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
+                    this.overlayRef.overlayElement.style.top = (containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1 + "px";
                     if (arrowElemRef) {
-                        arrowElemRef.setAttribute('style', "top: " + (tooltipHeightHalfed - 1) + "px");
+                        arrowElemRef.setAttribute('style', "top: " + (halfOfTooltipHeight - 1) + "px");
                     }
                 }
                 else {
                     /** @type {?} */
-                    var pos = (overlayElemHeight - currentContainerHeight) / halfDelimeter;
+                    var pos = (overlayElemHeight - currentContainerHeight) / halfDelimiter;
                     /** @type {?} */
                     var defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
                     this.overlayRef.overlayElement.style.top = defaultTooltipPlacementTop + pos - 1 + "px";
@@ -1063,31 +1068,6 @@
                 this.tooltip[key] = value;
                 this.tooltip.markForCheck();
             }
-        };
-        /**
-         * @return {?}
-         */
-        McTooltip.prototype.ngOnInit = function () {
-            this.initElementRefListeners();
-        };
-        /**
-         * @return {?}
-         */
-        McTooltip.prototype.ngOnDestroy = function () {
-            var _this = this;
-            if (this.overlayRef) {
-                this.overlayRef.dispose();
-            }
-            this.manualListeners.forEach(( /**
-             * @param {?} listener
-             * @param {?} event
-             * @return {?}
-             */function (listener, event) {
-                _this.elementRef.nativeElement.removeEventListener(event, listener);
-            }));
-            this.manualListeners.clear();
-            this.$unsubscribe.next();
-            this.$unsubscribe.complete();
         };
         /**
          * @param {?} e
@@ -1143,46 +1123,47 @@
          */
         McTooltip.prototype.show = function () {
             var _this = this;
-            if (!this.disabled) {
-                if (!this.tooltip) {
-                    /** @type {?} */
-                    var overlayRef = this.createOverlay();
-                    this.detach();
-                    this.portal = this.portal || new portal.ComponentPortal(McTooltipComponent, this.hostView);
-                    this.tooltip = overlayRef.attach(this.portal).instance;
-                    this.tooltip.afterHidden()
-                        .pipe(operators.takeUntil(this.destroyed))
-                        .subscribe(( /**
-                 * @return {?}
-                 */function () { return _this.detach(); }));
-                    this.isDynamicTooltip = true;
-                    /** @type {?} */
-                    var properties = [
-                        'mcTitle',
-                        'mcPlacement',
-                        'mcTrigger',
-                        'mcTooltipDisabled',
-                        'mcMouseEnterDelay',
-                        'mcMouseLeaveDelay',
-                        'mcTooltipClass'
-                    ];
-                    properties.forEach(( /**
-                     * @param {?} property
-                     * @return {?}
-                     */function (property) { return _this.updateCompValue(property, _this[property]); }));
-                    this.tooltip.mcVisibleChange.pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
-                        .subscribe(( /**
-                 * @param {?} data
-                 * @return {?}
-                 */function (data) {
-                        _this.mcVisible = data;
-                        _this.mcVisibleChange.emit(data);
-                        _this.isTooltipOpen = data;
-                    }));
-                }
-                this.updatePosition();
-                this.tooltip.show();
+            if (this.disabled) {
+                return;
             }
+            if (!this.tooltip) {
+                this.overlayRef = this.createOverlay();
+                this.detach();
+                this.portal = this.portal || new portal.ComponentPortal(McTooltipComponent, this.hostView);
+                this.tooltip = this.overlayRef.attach(this.portal).instance;
+                this.tooltip.afterHidden()
+                    .pipe(operators.takeUntil(this.destroyed))
+                    .subscribe(( /**
+             * @return {?}
+             */function () { return _this.detach(); }));
+                this.isDynamicTooltip = true;
+                /** @type {?} */
+                var properties = [
+                    'mcTitle',
+                    'mcPlacement',
+                    'mcTrigger',
+                    'mcTooltipDisabled',
+                    'mcMouseEnterDelay',
+                    'mcMouseLeaveDelay',
+                    'mcTooltipClass'
+                ];
+                properties.forEach(( /**
+                 * @param {?} property
+                 * @return {?}
+                 */function (property) { return _this.updateCompValue(property, _this[property]); }));
+                this.tooltip.mcVisibleChange
+                    .pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
+                    .subscribe(( /**
+             * @param {?} data
+             * @return {?}
+             */function (data) {
+                    _this.mcVisible = data;
+                    _this.mcVisibleChange.emit(data);
+                    _this.isTooltipOpen = data;
+                }));
+            }
+            this.updatePosition();
+            this.tooltip.show();
         };
         /**
          * @return {?}
@@ -1332,6 +1313,8 @@
                     selector: '[mcTooltip], [attribute^="mcTooltip"]',
                     exportAs: 'mcTooltip',
                     host: {
+                        '[class.mc-tooltip-open]': 'isTooltipOpen',
+                        '[class.disabled]': 'parentDisabled',
                         '(keydown)': 'handleKeydown($event)',
                         '(touchend)': 'handleTouchend()'
                     }
@@ -1352,15 +1335,13 @@
         mcTitle: [{ type: core$1.Input, args: ['mcTooltip',] }],
         setTitle: [{ type: core$1.Input, args: ['mcTitle',] }],
         disabled: [{ type: core$1.Input, args: ['mcTooltipDisabled',] }],
-        mcMouseEnterDelay: [{ type: core$1.Input, args: ['mcMouseEnterDelay',] }],
-        mcMouseLeaveDelay: [{ type: core$1.Input, args: ['mcMouseLeaveDelay',] }],
-        mcTrigger: [{ type: core$1.Input, args: ['mcTrigger',] }],
-        mcPlacement: [{ type: core$1.Input, args: ['mcPlacement',] }],
-        mcTooltipClass: [{ type: core$1.Input, args: ['mcTooltipClass',] }],
-        mcVisible: [{ type: core$1.Input, args: ['mcVisible',] }],
-        mcArrowPlacement: [{ type: core$1.Input, args: ['mcArrowPlacement',] }],
-        isOpen: [{ type: core$1.HostBinding, args: ['class.mc-tooltip-open',] }],
-        isParentDisabled: [{ type: core$1.HostBinding, args: ['class.disabled',] }]
+        mcMouseEnterDelay: [{ type: core$1.Input }],
+        mcMouseLeaveDelay: [{ type: core$1.Input }],
+        mcTrigger: [{ type: core$1.Input }],
+        mcPlacement: [{ type: core$1.Input }],
+        mcTooltipClass: [{ type: core$1.Input }],
+        mcVisible: [{ type: core$1.Input }],
+        mcArrowPlacement: [{ type: core$1.Input }]
     };
     if (false) {
         /** @type {?} */
