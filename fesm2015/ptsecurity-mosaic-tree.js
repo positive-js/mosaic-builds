@@ -948,6 +948,7 @@ class McTreeSelection extends CdkTree {
                         option.select();
                     }
                 }));
+                option.changeDetectorRef.detectChanges();
             }));
         }));
     }

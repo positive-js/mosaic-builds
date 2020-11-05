@@ -1309,6 +1309,7 @@
                             option.select();
                         }
                     }));
+                    option.changeDetectorRef.detectChanges();
                 }));
             }));
         };
