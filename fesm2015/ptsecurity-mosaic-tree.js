@@ -135,7 +135,7 @@ class McTreeNodeToggleComponent {
          * @param {?} value
          * @return {?}
          */
-        (value) => value.length > 0)))
+        (value) => (value === null || value === void 0 ? void 0 : value.length) > 0)))
             .subscribe((/**
          * @param {?} state
          * @return {?}

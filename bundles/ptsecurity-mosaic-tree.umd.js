@@ -440,7 +440,7 @@
                 .pipe(operators.map(( /**
          * @param {?} value
          * @return {?}
-         */function (value) { return value.length > 0; })))
+         */function (value) { return (value === null || value === void 0 ? void 0 : value.length) > 0; })))
                 .subscribe(( /**
          * @param {?} state
          * @return {?}
