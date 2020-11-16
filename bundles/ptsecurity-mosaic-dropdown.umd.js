@@ -832,7 +832,7 @@
         McDropdownDefaultOptions.prototype.backdropClass;
         /**
          * Whether the dropdown has a backdrop.
-         * @type {?|undefined}
+         * @type {?}
          */
         McDropdownDefaultOptions.prototype.hasBackdrop;
     }
@@ -855,7 +855,8 @@
             overlapTriggerY: false,
             xPosition: 'after',
             yPosition: 'below',
-            backdropClass: 'cdk-overlay-transparent-backdrop'
+            backdropClass: 'cdk-overlay-transparent-backdrop',
+            hasBackdrop: false
         };
     }
     var McDropdown = /** @class */ (function () {
@@ -1586,7 +1587,7 @@
             /** @type {?} */
             var overlayConfig = overlayRef.getConfig();
             this.setPosition(( /** @type {?} */(overlayConfig.positionStrategy)));
-            overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersNestedDropdown() :
+            overlayConfig.hasBackdrop = this.dropdown.hasBackdrop ? !this.triggersNestedDropdown() :
                 this.dropdown.hasBackdrop;
             overlayRef.attach(this.getPortal());
             if (this.dropdown.lazyContent) {
@@ -1902,6 +1903,8 @@
             /** @type {?} */
             var backdrop = ( /** @type {?} */(this.overlayRef)).backdropClick();
             /** @type {?} */
+            var outsidePointerEvents = ( /** @type {?} */(this.overlayRef)).outsidePointerEvents();
+            /** @type {?} */
             var detachments = ( /** @type {?} */(this.overlayRef)).detachments();
             /** @type {?} */
             var parentClose = this._parent ? this._parent.closed : rxjs.of();
@@ -1912,7 +1915,7 @@
              */function (active) { return active !== _this._dropdownItemInstance; })), operators.filter(( /**
              * @return {?}
              */function () { return _this._opened; }))) : rxjs.of();
-            return rxjs.merge(backdrop, parentClose, hover, detachments);
+            return rxjs.merge(backdrop, outsidePointerEvents, parentClose, hover, detachments);
         };
         /**
          * Handles the cases where the user hovers over the trigger.

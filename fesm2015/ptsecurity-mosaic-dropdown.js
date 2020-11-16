@@ -552,7 +552,7 @@ if (false) {
     McDropdownDefaultOptions.prototype.backdropClass;
     /**
      * Whether the dropdown has a backdrop.
-     * @type {?|undefined}
+     * @type {?}
      */
     McDropdownDefaultOptions.prototype.hasBackdrop;
 }
@@ -575,7 +575,8 @@ function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY() {
         overlapTriggerY: false,
         xPosition: 'after',
         yPosition: 'below',
-        backdropClass: 'cdk-overlay-transparent-backdrop'
+        backdropClass: 'cdk-overlay-transparent-backdrop',
+        hasBackdrop: false
     };
 }
 class McDropdown {
@@ -1274,7 +1275,7 @@ class McDropdownTrigger {
         /** @type {?} */
         const overlayConfig = overlayRef.getConfig();
         this.setPosition((/** @type {?} */ (overlayConfig.positionStrategy)));
-        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop == null ? !this.triggersNestedDropdown() :
+        overlayConfig.hasBackdrop = this.dropdown.hasBackdrop ? !this.triggersNestedDropdown() :
             this.dropdown.hasBackdrop;
         overlayRef.attach(this.getPortal());
         if (this.dropdown.lazyContent) {
@@ -1591,6 +1592,8 @@ class McDropdownTrigger {
         /** @type {?} */
         const backdrop = (/** @type {?} */ (this.overlayRef)).backdropClick();
         /** @type {?} */
+        const outsidePointerEvents = (/** @type {?} */ (this.overlayRef)).outsidePointerEvents();
+        /** @type {?} */
         const detachments = (/** @type {?} */ (this.overlayRef)).detachments();
         /** @type {?} */
         const parentClose = this._parent ? this._parent.closed : of();
@@ -1603,7 +1606,7 @@ class McDropdownTrigger {
          * @return {?}
          */
         () => this._opened))) : of();
-        return merge(backdrop, parentClose, hover, detachments);
+        return merge(backdrop, outsidePointerEvents, parentClose, hover, detachments);
     }
     /**
      * Handles the cases where the user hovers over the trigger.

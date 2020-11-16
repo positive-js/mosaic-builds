@@ -20,7 +20,7 @@ export interface McDropdownDefaultOptions {
     /** Class to be applied to the dropdown's backdrop. */
     backdropClass: string;
     /** Whether the dropdown has a backdrop. */
-    hasBackdrop?: boolean;
+    hasBackdrop: boolean;
 }
 /** Injection token to be used to override the default options for `mc-dropdown`. */
 export declare const MC_DROPDOWN_DEFAULT_OPTIONS: InjectionToken<McDropdownDefaultOptions>;
@@ -43,8 +43,8 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     get overlapTriggerX(): boolean;
     set overlapTriggerX(value: boolean);
     /** Whether the dropdown has a backdrop. */
-    get hasBackdrop(): boolean | undefined;
-    set hasBackdrop(value: boolean | undefined);
+    get hasBackdrop(): boolean;
+    set hasBackdrop(value: boolean);
     /**
      * This method takes classes set on the host mc-dropdown element and applies them on the
      * dropdown template that displays in the overlay container.  Otherwise, it's difficult
