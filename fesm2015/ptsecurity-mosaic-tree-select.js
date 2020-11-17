@@ -12,7 +12,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { NG_VALIDATORS, NgForm, FormGroupDirective, NgControl, NgModel, FormControlName } from '@angular/forms';
 import { DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, ENTER, SPACE, HOME, END, PAGE_UP, PAGE_DOWN, A, hasModifierKey } from '@ptsecurity/cdk/keycodes';
 import { McFormFieldControl, McFormField } from '@ptsecurity/mosaic/form-field';
-import { Subject, defer, merge } from 'rxjs';
+import { Subject, defer, merge, Subscription } from 'rxjs';
 import { filter, map, startWith, switchMap, take, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 /**
@@ -197,6 +197,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
          * \@docs-private
          */
         this.valueChange = new EventEmitter();
+        this.backdropClass = 'cdk-overlay-transparent-backdrop';
         /**
          * Combined stream of all of the child options' change events.
          */
@@ -225,7 +226,9 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this._multiple = false;
         this._autoSelect = true;
         this._value = null;
+        this._hasBackdrop = false;
         this._focused = false;
+        this.closeSubscription = Subscription.EMPTY;
         this._panelOpen = false;
         /**
          * The scroll position of the overlay panel, calculated to center the selected option.
@@ -373,6 +376,19 @@ class McTreeSelect extends McTreeSelectMixinBase {
     set id(value) {
         this._id = value || this.uid;
         this.stateChanges.next();
+    }
+    /**
+     * @return {?}
+     */
+    get hasBackdrop() {
+        return this._hasBackdrop;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set hasBackdrop(value) {
+        this._hasBackdrop = coerceBooleanProperty(value);
     }
     /**
      * Whether the select is focused.
@@ -537,6 +553,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this.destroy.next();
         this.destroy.complete();
         this.stateChanges.complete();
+        this.closeSubscription.unsubscribe();
     }
     /**
      * @param {?} hiddenItemsText
@@ -762,6 +779,11 @@ class McTreeSelect extends McTreeSelectMixinBase {
             this.panel.nativeElement.scrollTop = this.scrollTop;
             this.tree.updateScrollSize();
         }));
+        this.closeSubscription = this.closingActions()
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.close()));
     }
     /**
      * Returns the theme to be used on the panel.
@@ -849,6 +871,19 @@ class McTreeSelect extends McTreeSelectMixinBase {
             }
         }
         this.changeDetectorRef.markForCheck();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    closingActions() {
+        /** @type {?} */
+        const backdrop = (/** @type {?} */ (this.overlayDir.overlayRef)).backdropClick();
+        /** @type {?} */
+        const outsidePointerEvents = (/** @type {?} */ (this.overlayDir.overlayRef)).outsidePointerEvents();
+        /** @type {?} */
+        const detachments = (/** @type {?} */ (this.overlayDir.overlayRef)).detachments();
+        return merge(backdrop, outsidePointerEvents, detachments);
     }
     /**
      * @private
@@ -1165,7 +1200,7 @@ McTreeSelect.decorators = [
     { type: Component, args: [{
                 selector: 'mc-tree-select',
                 exportAs: 'mcTreeSelect',
-                template: "<div cdk-overlay-origin\n     class=\"mc-tree-select__trigger\"\n     [class.mc-tree-select__trigger_multiple]=\"multiple\"\n     #origin=\"cdkOverlayOrigin\"\n     #trigger>\n    <div class=\"mc-tree-select__matcher\" [ngSwitch]=\"empty\">\n        <span class=\"mc-tree-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\\u00A0' }}</span>\n        <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\">\n            <div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-tree-select__match-container\">\n                <span *ngSwitchCase=\"false\" class=\"mc-tree-select__matcher-text\">{{ triggerValue }}</span>\n                <div *ngSwitchCase=\"true\" class=\"mc-tree-select__multiple-matcher\">\n                    <div class=\"mc-tree-select__match-list\">\n                        <mc-tag *ngFor=\"let option of triggerValues\"\n                            [selectable]=\"false\"\n                            [disabled]=\"disabled\"\n                            [class.mc-error]=\"errorState\">\n\n                            {{ tree.treeControl.getViewValue(option) }}\n                            <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveSelectedOption(option, $event)\"></i>\n                        </mc-tag>\n                    </div>\n                    <div class=\"mc-tree-select__match-hidden-text\"\n                         [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\"\n                         #hiddenItemsCounter>\n                        {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}\n                    </div>\n                </div>\n            </div>\n            <ng-content select=\"mc-tree-select-trigger\" *ngSwitchCase=\"true\"></ng-content>\n        </span>\n    </div>\n\n    <div class=\"mc-select__cleaner\" *ngIf=\"canShowCleaner\" (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <div class=\"mc-tree-select__arrow-wrapper\">\n        <i class=\"mc-tree-select__arrow\" mc-icon=\"mc-angle-down-L_16\"></i>\n    </div>\n</div>\n\n<ng-template\n    cdk-connected-overlay\n    cdkConnectedOverlayLockPosition\n    cdkConnectedOverlayHasBackdrop\n    cdkConnectedOverlayBackdropClass=\"cdk-overlay-transparent-backdrop\"\n    [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\"\n    [cdkConnectedOverlayOrigin]=\"origin\"\n    [cdkConnectedOverlayOpen]=\"panelOpen\"\n    [cdkConnectedOverlayPositions]=\"positions\"\n    [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\"\n    [cdkConnectedOverlayOffsetY]=\"offsetY\"\n    (backdropClick)=\"close()\"\n    (attach)=\"onAttached()\"\n    (detach)=\"close()\">\n\n    <div #panel\n         class=\"mc-tree-select__panel {{ getPanelTheme() }}\"\n         [ngClass]=\"panelClass\"\n         [style.transformOrigin]=\"transformOrigin\"\n         [style.font-size.px]=\"triggerFontSize\"\n         (keydown)=\"handleKeydown($event)\">\n\n        <div #optionsContainer\n             class=\"mc-tree-select__content\"\n             [@fadeInContent]=\"'showing'\"\n             (@fadeInContent.done)=\"panelDoneAnimatingStream.next($event.toState)\">\n            <ng-content select=\"mc-tree-selection\"></ng-content>\n        </div>\n    </div>\n</ng-template>\n",
+                template: "<div cdk-overlay-origin\n     class=\"mc-tree-select__trigger\"\n     [class.mc-tree-select__trigger_multiple]=\"multiple\"\n     #origin=\"cdkOverlayOrigin\"\n     #trigger>\n    <div class=\"mc-tree-select__matcher\" [ngSwitch]=\"empty\">\n        <span class=\"mc-tree-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\\u00A0' }}</span>\n        <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\">\n            <div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-tree-select__match-container\">\n                <span *ngSwitchCase=\"false\" class=\"mc-tree-select__matcher-text\">{{ triggerValue }}</span>\n                <div *ngSwitchCase=\"true\" class=\"mc-tree-select__multiple-matcher\">\n                    <div class=\"mc-tree-select__match-list\">\n                        <mc-tag *ngFor=\"let option of triggerValues\"\n                            [selectable]=\"false\"\n                            [disabled]=\"disabled\"\n                            [class.mc-error]=\"errorState\">\n\n                            {{ tree.treeControl.getViewValue(option) }}\n                            <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveSelectedOption(option, $event)\"></i>\n                        </mc-tag>\n                    </div>\n                    <div class=\"mc-tree-select__match-hidden-text\"\n                         [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\"\n                         #hiddenItemsCounter>\n                        {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}\n                    </div>\n                </div>\n            </div>\n            <ng-content select=\"mc-tree-select-trigger\" *ngSwitchCase=\"true\"></ng-content>\n        </span>\n    </div>\n\n    <div class=\"mc-select__cleaner\" *ngIf=\"canShowCleaner\" (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <div class=\"mc-tree-select__arrow-wrapper\">\n        <i class=\"mc-tree-select__arrow\" mc-icon=\"mc-angle-down-L_16\"></i>\n    </div>\n</div>\n\n<ng-template\n    cdk-connected-overlay\n    cdkConnectedOverlayLockPosition\n    [cdkConnectedOverlayHasBackdrop]=\"hasBackdrop\"\n    [cdkConnectedOverlayBackdropClass]=\"backdropClass\"\n    [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\"\n    [cdkConnectedOverlayOrigin]=\"origin\"\n    [cdkConnectedOverlayOpen]=\"panelOpen\"\n    [cdkConnectedOverlayPositions]=\"positions\"\n    [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\"\n    [cdkConnectedOverlayOffsetY]=\"offsetY\"\n    (backdropClick)=\"close()\"\n    (attach)=\"onAttached()\"\n    (detach)=\"close()\">\n\n    <div #panel\n         class=\"mc-tree-select__panel {{ getPanelTheme() }}\"\n         [ngClass]=\"panelClass\"\n         [style.transformOrigin]=\"transformOrigin\"\n         [style.font-size.px]=\"triggerFontSize\"\n         (keydown)=\"handleKeydown($event)\">\n\n        <div #optionsContainer\n             class=\"mc-tree-select__content\"\n             [@fadeInContent]=\"'showing'\"\n             (@fadeInContent.done)=\"panelDoneAnimatingStream.next($event.toState)\">\n            <ng-content select=\"mc-tree-selection\"></ng-content>\n        </div>\n    </div>\n</ng-template>\n",
                 inputs: ['disabled', 'tabIndex'],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
@@ -1228,6 +1263,7 @@ McTreeSelect.propDecorators = {
     selectionChange: [{ type: Output }],
     valueChange: [{ type: Output }],
     panelClass: [{ type: Input }],
+    backdropClass: [{ type: Input }],
     errorStateMatcher: [{ type: Input }],
     sortComparator: [{ type: Input }],
     placeholder: [{ type: Input }],
@@ -1236,6 +1272,7 @@ McTreeSelect.propDecorators = {
     autoSelect: [{ type: Input }],
     compareWith: [{ type: Input }],
     id: [{ type: Input }],
+    hasBackdrop: [{ type: Input }],
     hiddenItemsTextFormatter: [{ type: Input }]
 };
 if (false) {
@@ -1346,6 +1383,8 @@ if (false) {
      * @type {?}
      */
     McTreeSelect.prototype.panelClass;
+    /** @type {?} */
+    McTreeSelect.prototype.backdropClass;
     /**
      * Object used to control when error messages are shown.
      * @type {?}
@@ -1396,7 +1435,17 @@ if (false) {
      * @type {?}
      * @private
      */
+    McTreeSelect.prototype._hasBackdrop;
+    /**
+     * @type {?}
+     * @private
+     */
     McTreeSelect.prototype._focused;
+    /**
+     * @type {?}
+     * @private
+     */
+    McTreeSelect.prototype.closeSubscription;
     /**
      * @type {?}
      * @private

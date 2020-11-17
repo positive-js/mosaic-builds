@@ -100,6 +100,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     panelClass: string | string[] | Set<string> | {
         [key: string]: any;
     };
+    backdropClass: string;
     /** Object used to control when error messages are shown. */
     errorStateMatcher: ErrorStateMatcher;
     /**
@@ -133,12 +134,16 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     get id(): string;
     set id(value: string);
     private _id;
+    get hasBackdrop(): boolean;
+    set hasBackdrop(value: boolean);
+    private _hasBackdrop;
     /** Whether the select is focused. */
     get focused(): boolean;
     set focused(value: boolean);
     private _focused;
     get panelOpen(): boolean;
     get canShowCleaner(): boolean;
+    private closeSubscription;
     private _panelOpen;
     private originalOnKeyDown;
     /** The scroll position of the overlay panel, calculated to center the selected option. */
@@ -221,6 +226,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     /** Invoked when an option is clicked. */
     onRemoveSelectedOption(selectedOption: any, $event: any): void;
     calculateHiddenItems(): void;
+    private closingActions;
     private getTotalItemsWidthInMatcher;
     private getItemWidth;
     private handleClosedKeydown;
