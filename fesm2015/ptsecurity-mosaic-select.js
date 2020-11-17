@@ -255,6 +255,7 @@ class McSelect extends McSelectMixinBase {
             }
         ];
         this.hiddenItemsText = '...ещё';
+        this.backdropClass = 'cdk-overlay-transparent-backdrop';
         /**
          * Combined stream of all of the child options' change events.
          */
@@ -316,10 +317,12 @@ class McSelect extends McSelectMixinBase {
          * \@docs-private
          */
         this.valueChange = new EventEmitter();
+        this._hasBackdrop = false;
         this._required = false;
         this._multiple = false;
         this._focused = false;
         this._panelOpen = false;
+        this.closeSubscription = Subscription.EMPTY;
         /**
          * The scroll position of the overlay panel, calculated to center the selected option.
          */
@@ -362,6 +365,19 @@ class McSelect extends McSelectMixinBase {
         }
         // Force setter to be called in case id was not specified.
         this.id = this.id;
+    }
+    /**
+     * @return {?}
+     */
+    get hasBackdrop() {
+        return this._hasBackdrop;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set hasBackdrop(value) {
+        this._hasBackdrop = coerceBooleanProperty(value);
     }
     /**
      * @return {?}
@@ -497,6 +513,41 @@ class McSelect extends McSelectMixinBase {
     /**
      * @return {?}
      */
+    get selected() {
+        return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
+    }
+    /**
+     * @return {?}
+     */
+    get triggerValue() {
+        if (this.empty) {
+            return '';
+        }
+        return this.selectionModel.selected[0].viewValue;
+    }
+    /**
+     * @return {?}
+     */
+    get triggerValues() {
+        if (this.empty) {
+            return [];
+        }
+        /** @type {?} */
+        const selectedOptions = this.selectionModel.selected;
+        if (this.isRtl()) {
+            selectedOptions.reverse();
+        }
+        return selectedOptions;
+    }
+    /**
+     * @return {?}
+     */
+    get empty() {
+        return !this.selectionModel || this.selectionModel.isEmpty();
+    }
+    /**
+     * @return {?}
+     */
     ngOnInit() {
         this.selectionModel = new SelectionModel(this.multiple);
         this.stateChanges.next();
@@ -599,6 +650,7 @@ class McSelect extends McSelectMixinBase {
         this.destroy.next();
         this.destroy.complete();
         this.stateChanges.complete();
+        this.closeSubscription.unsubscribe();
     }
     /**
      * @param {?} hiddenItemsText
@@ -622,15 +674,16 @@ class McSelect extends McSelectMixinBase {
      * @return {?}
      */
     resetSearch() {
-        if (this.search) {
-            this.search.reset();
-            /*
-            todo the incorrect behaviour of keyManager is possible here
-            to avoid first item selection (to provide correct options flipping on closed select)
-            we should process options update like it is the first options appearance
-             */
-            this.search.isSearchChanged = false;
+        if (!this.search) {
+            return;
         }
+        this.search.reset();
+        /*
+        todo the incorrect behaviour of keyManager is possible here
+        to avoid first item selection (to provide correct options flipping on closed select)
+        we should process options update like it is the first options appearance
+        */
+        this.search.isSearchChanged = false;
     }
     /**
      * Toggles the overlay panel open or closed.
@@ -737,41 +790,6 @@ class McSelect extends McSelectMixinBase {
     /**
      * @return {?}
      */
-    get selected() {
-        return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
-    }
-    /**
-     * @return {?}
-     */
-    get triggerValue() {
-        if (this.empty) {
-            return '';
-        }
-        return this.selectionModel.selected[0].viewValue;
-    }
-    /**
-     * @return {?}
-     */
-    get triggerValues() {
-        if (this.empty) {
-            return [];
-        }
-        /** @type {?} */
-        const selectedOptions = this.selectionModel.selected;
-        if (this.isRtl()) {
-            selectedOptions.reverse();
-        }
-        return selectedOptions;
-    }
-    /**
-     * @return {?}
-     */
-    get empty() {
-        return !this.selectionModel || this.selectionModel.isEmpty();
-    }
-    /**
-     * @return {?}
-     */
     isRtl() {
         return this._dir ? this._dir.value === 'rtl' : false;
     }
@@ -828,6 +846,11 @@ class McSelect extends McSelectMixinBase {
             this.optionsContainer.nativeElement.scrollTop = this.scrollTop;
             this.updateScrollSize();
         }));
+        this.closeSubscription = this.closingActions()
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.close()));
     }
     /**
      * Returns the theme to be used on the panel.
@@ -919,6 +942,19 @@ class McSelect extends McSelectMixinBase {
      */
     getItemHeight() {
         return this.options.first ? this.options.first.getHeight() : 0;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    closingActions() {
+        /** @type {?} */
+        const backdrop = (/** @type {?} */ (this.overlayDir.overlayRef)).backdropClick();
+        /** @type {?} */
+        const outsidePointerEvents = (/** @type {?} */ (this.overlayDir.overlayRef)).outsidePointerEvents();
+        /** @type {?} */
+        const detachments = (/** @type {?} */ (this.overlayDir.overlayRef)).detachments();
+        return merge(backdrop, outsidePointerEvents, detachments);
     }
     /**
      * @private
@@ -1377,7 +1413,7 @@ class McSelect extends McSelectMixinBase {
         const overlayRect = this.getOverlayRect();
         // Window width without scrollbar
         /** @type {?} */
-        const windowWidth = this.getBackdropWidth();
+        const windowWidth = this.getOverlayWidth();
         /** @type {?} */
         const isRtl = this.isRtl();
         /* tslint:disable-next-line:no-magic-numbers */
@@ -1474,15 +1510,15 @@ class McSelect extends McSelectMixinBase {
      * @private
      * @return {?}
      */
-    getBackdropWidth() {
-        return this.scrollStrategy._overlayRef.backdropElement.clientWidth;
+    getOverlayWidth() {
+        return this.scrollStrategy._overlayRef.hostElement.clientWidth;
     }
 }
 McSelect.decorators = [
     { type: Component, args: [{
                 selector: 'mc-select',
                 exportAs: 'mcSelect',
-                template: "<div cdk-overlay-origin\n     class=\"mc-select__trigger\"\n     (click)=\"toggle()\"\n     [class.mc-select__trigger_multiple]=\"multiple\"\n     #origin=\"cdkOverlayOrigin\"\n     #trigger>\n    <div class=\"mc-select__matcher\" [ngSwitch]=\"empty\">\n        <span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\\u00A0' }}</span>\n        <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\">\n            <div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\">\n                <span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span>\n                <div *ngSwitchCase=\"true\" class=\"mc-select__match-list\">\n                    <mc-tag *ngFor=\"let option of triggerValues\"\n                            [disabled]=\"disabled\"\n                            [selectable]=\"false\"\n                            [class.mc-error]=\"errorState\">\n                        {{ option.viewValue }}\n                        <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveMatcherItem(option, $event)\"></i>\n                    </mc-tag>\n                </div>\n                <div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">\n                    {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}\n                </div>\n            </div>\n            <ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content>\n        </span>\n    </div>\n\n    <div class=\"mc-select__cleaner\" *ngIf=\"canShowCleaner\" (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <div class=\"mc-select__arrow-wrapper\">\n        <i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\"></i>\n    </div>\n</div>\n\n<ng-template\n    cdk-connected-overlay\n    cdkConnectedOverlayLockPosition\n    cdkConnectedOverlayHasBackdrop\n    cdkConnectedOverlayBackdropClass=\"cdk-overlay-transparent-backdrop\"\n    [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\"\n    [cdkConnectedOverlayOrigin]=\"origin\"\n    [cdkConnectedOverlayOpen]=\"panelOpen\"\n    [cdkConnectedOverlayPositions]=\"positions\"\n    [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\"\n    [cdkConnectedOverlayOffsetY]=\"offsetY\"\n    (backdropClick)=\"close()\"\n    (attach)=\"onAttached()\"\n    (detach)=\"close()\">\n    <div\n        #panel\n        class=\"mc-select__panel {{ getPanelTheme() }}\"\n        [ngClass]=\"panelClass\"\n        [style.transformOrigin]=\"transformOrigin\"\n        [style.font-size.px]=\"triggerFontSize\"\n        (keydown)=\"handleKeydown($event)\">\n\n        <div *ngIf=\"search\" class=\"mc-select__search-container\">\n            <ng-content select=\"[mcSelectSearch]\"></ng-content>\n        </div>\n\n        <div #optionsContainer\n             class=\"mc-select__content\"\n             [@fadeInContent]=\"'showing'\"\n             (@fadeInContent.done)=\"panelDoneAnimatingStream.next($event.toState)\">\n\n            <div *ngIf=\"isEmptySearchResult\" class=\"mc-select__no-options-message\">\n                <ng-content select=\"[mc-select-search-empty-result]\"></ng-content>\n            </div>\n            <ng-content select=\"mc-option,mc-optgroup\"></ng-content>\n        </div>\n    </div>\n</ng-template>\n",
+                template: "<div cdk-overlay-origin\n     class=\"mc-select__trigger\"\n     (click)=\"toggle()\"\n     [class.mc-select__trigger_multiple]=\"multiple\"\n     #origin=\"cdkOverlayOrigin\"\n     #trigger>\n    <div class=\"mc-select__matcher\" [ngSwitch]=\"empty\">\n        <span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\\u00A0' }}</span>\n        <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\">\n            <div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\">\n                <span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span>\n                <div *ngSwitchCase=\"true\" class=\"mc-select__match-list\">\n                    <mc-tag *ngFor=\"let option of triggerValues\"\n                            [disabled]=\"disabled\"\n                            [selectable]=\"false\"\n                            [class.mc-error]=\"errorState\">\n                        {{ option.viewValue }}\n                        <i mc-icon=\"mc-close-S_16\" (click)=\"onRemoveMatcherItem(option, $event)\"></i>\n                    </mc-tag>\n                </div>\n                <div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">\n                    {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}\n                </div>\n            </div>\n            <ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content>\n        </span>\n    </div>\n\n    <div class=\"mc-select__cleaner\" *ngIf=\"canShowCleaner\" (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <div class=\"mc-select__arrow-wrapper\">\n        <i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\"></i>\n    </div>\n</div>\n\n<ng-template\n    cdk-connected-overlay\n    cdkConnectedOverlayLockPosition\n    [cdkConnectedOverlayHasBackdrop]=\"hasBackdrop\"\n    [cdkConnectedOverlayBackdropClass]=\"backdropClass\"\n    [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\"\n    [cdkConnectedOverlayOrigin]=\"origin\"\n    [cdkConnectedOverlayOpen]=\"panelOpen\"\n    [cdkConnectedOverlayPositions]=\"positions\"\n    [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\"\n    [cdkConnectedOverlayOffsetY]=\"offsetY\"\n    (backdropClick)=\"close()\"\n    (attach)=\"onAttached()\"\n    (detach)=\"close()\">\n    <div\n        #panel\n        class=\"mc-select__panel {{ getPanelTheme() }}\"\n        [ngClass]=\"panelClass\"\n        [style.transformOrigin]=\"transformOrigin\"\n        [style.font-size.px]=\"triggerFontSize\"\n        (keydown)=\"handleKeydown($event)\">\n\n        <div *ngIf=\"search\" class=\"mc-select__search-container\">\n            <ng-content select=\"[mcSelectSearch]\"></ng-content>\n        </div>\n\n        <div #optionsContainer\n             class=\"mc-select__content\"\n             [@fadeInContent]=\"'showing'\"\n             (@fadeInContent.done)=\"panelDoneAnimatingStream.next($event.toState)\">\n\n            <div *ngIf=\"isEmptySearchResult\" class=\"mc-select__no-options-message\">\n                <ng-content select=\"[mc-select-search-empty-result]\"></ng-content>\n            </div>\n            <ng-content select=\"mc-option,mc-optgroup\"></ng-content>\n        </div>\n    </div>\n</ng-template>\n",
                 inputs: ['disabled', 'tabIndex'],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
@@ -1540,6 +1576,7 @@ McSelect.propDecorators = {
     search: [{ type: ContentChild, args: [McSelectSearch, { static: false },] }],
     hiddenItemsText: [{ type: Input }],
     panelClass: [{ type: Input }],
+    backdropClass: [{ type: Input }],
     errorStateMatcher: [{ type: Input }],
     sortComparator: [{ type: Input }],
     openedChange: [{ type: Output }],
@@ -1547,6 +1584,7 @@ McSelect.propDecorators = {
     closedStream: [{ type: Output, args: ['closed',] }],
     selectionChange: [{ type: Output }],
     valueChange: [{ type: Output }],
+    hasBackdrop: [{ type: Input }],
     placeholder: [{ type: Input }],
     required: [{ type: Input }],
     multiple: [{ type: Input }],
@@ -1651,6 +1689,8 @@ if (false) {
      * @type {?}
      */
     McSelect.prototype.panelClass;
+    /** @type {?} */
+    McSelect.prototype.backdropClass;
     /**
      * Object used to control when error messages are shown.
      * @type {?}
@@ -1698,6 +1738,11 @@ if (false) {
      * @type {?}
      * @private
      */
+    McSelect.prototype._hasBackdrop;
+    /**
+     * @type {?}
+     * @private
+     */
     McSelect.prototype._placeholder;
     /**
      * @type {?}
@@ -1729,6 +1774,11 @@ if (false) {
      * @private
      */
     McSelect.prototype._panelOpen;
+    /**
+     * @type {?}
+     * @private
+     */
+    McSelect.prototype.closeSubscription;
     /**
      * The scroll position of the overlay panel, calculated to center the selected option.
      * @type {?}

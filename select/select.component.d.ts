@@ -104,6 +104,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     panelClass: string | string[] | Set<string> | {
         [key: string]: any;
     };
+    backdropClass: string;
     /** Object used to control when error messages are shown. */
     errorStateMatcher: ErrorStateMatcher;
     /**
@@ -127,6 +128,9 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
      * @docs-private
      */
     readonly valueChange: EventEmitter<any>;
+    get hasBackdrop(): boolean;
+    set hasBackdrop(value: boolean);
+    private _hasBackdrop;
     get placeholder(): string;
     set placeholder(value: string);
     private _placeholder;
@@ -158,6 +162,11 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private _panelOpen;
     get isEmptySearchResult(): boolean;
     get canShowCleaner(): boolean;
+    get selected(): McOption | McOption[];
+    get triggerValue(): string;
+    get triggerValues(): McOption[];
+    get empty(): boolean;
+    private closeSubscription;
     /** The scroll position of the overlay panel, calculated to center the selected option. */
     private scrollTop;
     /** Unique id for this input. */
@@ -214,10 +223,6 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
      * @param isDisabled Sets whether the component is disabled.
      */
     setDisabledState(isDisabled: boolean): void;
-    get selected(): McOption | McOption[];
-    get triggerValue(): string;
-    get triggerValues(): McOption[];
-    get empty(): boolean;
     isRtl(): boolean;
     handleKeydown(event: KeyboardEvent): void;
     onFocus(): void;
@@ -243,6 +248,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     onRemoveMatcherItem(option: McOption, $event: any): void;
     calculateHiddenItems(): void;
     getItemHeight(): number;
+    private closingActions;
     private getHeightOfOptionsContainer;
     private updateScrollSize;
     private getTotalItemsWidthInMatcher;
@@ -291,7 +297,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private calculateOverlayXPosition;
     private resetOverlay;
     private getOverlayRect;
-    private getBackdropWidth;
+    private getOverlayWidth;
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
     private _compareWith;
 }
