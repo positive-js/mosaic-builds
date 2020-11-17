@@ -744,14 +744,17 @@
             this.direction = direction;
             this.isPopoverOpen = false;
             this.isDynamicPopover = false;
+            this.backdropClass = 'cdk-overlay-transparent-backdrop';
             this.mcVisibleChange = new core$1.EventEmitter();
             this.mcPositionStrategyPlacementChange = new core$1.EventEmitter();
+            this._hasBackdrop = false;
             this.$unsubscribe = new rxjs.Subject();
             this._disabled = false;
             this._mcTrigger = PopoverTriggers.Click;
             this.popoverSize = 'normal';
             this._mcPlacementPriority = null;
             this._mcPlacement = 'top';
+            this.closeSubscription = rxjs.Subscription.EMPTY;
             this.manualListeners = new Map();
             this.destroyed = new rxjs.Subject();
             this.resizeListener = ( /**
@@ -760,6 +763,23 @@
             this.availablePositions = core.POSITION_MAP;
             this.defaultPositionsMap = core.DEFAULT_4_POSITIONS_TO_CSS_MAP;
         }
+        Object.defineProperty(McPopover.prototype, "hasBackdrop", {
+            /**
+             * @return {?}
+             */
+            get: function () {
+                return this._hasBackdrop;
+            },
+            /**
+             * @param {?} value
+             * @return {?}
+             */
+            set: function (value) {
+                this._hasBackdrop = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(McPopover.prototype, "mcHeader", {
             /**
              * @return {?}
@@ -1042,8 +1062,7 @@
                 .withViewportMargin(VIEWPORT_MARGIN)
                 .withPositions(__spread(core.EXTENDED_OVERLAY_POSITIONS));
             /** @type {?} */
-            var scrollableAncestors = this.scrollDispatcher
-                .getAncestorScrollContainers(this.elementRef);
+            var scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
             strategy.withScrollableContainers(scrollableAncestors);
             strategy.positionChanges
                 .pipe(operators.takeUntil(this.destroyed))
@@ -1067,10 +1086,13 @@
                 positionStrategy: strategy,
                 panelClass: 'mc-popover__panel',
                 scrollStrategy: this.scrollStrategy(),
-                hasBackdrop: this.mcTrigger === PopoverTriggers.Click,
-                backdropClass: 'no-class'
+                hasBackdrop: this.hasBackdrop,
+                backdropClass: this.backdropClass
             });
-            this.updateOverlayBackdropClick();
+            this.closeSubscription = this.closingActions()
+                .subscribe(( /**
+         * @return {?}
+         */function () { return _this.hide(); }));
             this.updatePosition();
             this.overlayRef.detachments()
                 .pipe(operators.takeUntil(this.destroyed))
@@ -1198,6 +1220,7 @@
             this.manualListeners.clear();
             this.$unsubscribe.next();
             this.$unsubscribe.complete();
+            this.closeSubscription.unsubscribe();
         };
         /**
          * @param {?} e
@@ -1307,49 +1330,50 @@
          */
         McPopover.prototype.show = function () {
             var _this = this;
-            if (!this.disabled) {
-                if (!this.popover) {
-                    this.detach();
-                    /** @type {?} */
-                    var overlayRef = this.createOverlay();
-                    this.portal = this.portal || new portal.ComponentPortal(McPopoverComponent, this.hostView);
-                    this.popover = overlayRef.attach(this.portal).instance;
-                    this.popover.afterHidden()
-                        .pipe(operators.takeUntil(this.destroyed))
-                        .subscribe(( /**
-                 * @return {?}
-                 */function () { return _this.detach(); }));
-                    this.isDynamicPopover = true;
-                    /** @type {?} */
-                    var properties = [
-                        'mcPlacement',
-                        'mcPopoverSize',
-                        'mcTrigger',
-                        'mcMouseEnterDelay',
-                        'mcMouseLeaveDelay',
-                        'classList',
-                        'mcVisible',
-                        'mcHeader',
-                        'mcContent',
-                        'mcFooter'
-                    ];
-                    properties.forEach(( /**
-                     * @param {?} property
-                     * @return {?}
-                     */function (property) { return _this.updateCompValue(property, _this[property]); }));
-                    this.popover.mcVisibleChange
-                        .pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
-                        .subscribe(( /**
-                 * @param {?} data
-                 * @return {?}
-                 */function (data) {
-                        _this.mcVisible = data;
-                        _this.mcVisibleChange.emit(data);
-                        _this.isPopoverOpen = data;
-                    }));
-                }
-                this.popover.show();
+            if (this.disabled) {
+                return;
             }
+            if (!this.popover) {
+                this.detach();
+                /** @type {?} */
+                var overlayRef = this.createOverlay();
+                this.portal = this.portal || new portal.ComponentPortal(McPopoverComponent, this.hostView);
+                this.popover = overlayRef.attach(this.portal).instance;
+                this.popover.afterHidden()
+                    .pipe(operators.takeUntil(this.destroyed))
+                    .subscribe(( /**
+             * @return {?}
+             */function () { return _this.detach(); }));
+                this.isDynamicPopover = true;
+                /** @type {?} */
+                var properties = [
+                    'mcPlacement',
+                    'mcPopoverSize',
+                    'mcTrigger',
+                    'mcMouseEnterDelay',
+                    'mcMouseLeaveDelay',
+                    'classList',
+                    'mcVisible',
+                    'mcHeader',
+                    'mcContent',
+                    'mcFooter'
+                ];
+                properties.forEach(( /**
+                 * @param {?} property
+                 * @return {?}
+                 */function (property) { return _this.updateCompValue(property, _this[property]); }));
+                this.popover.mcVisibleChange
+                    .pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
+                    .subscribe(( /**
+             * @param {?} data
+             * @return {?}
+             */function (data) {
+                    _this.mcVisible = data;
+                    _this.mcVisibleChange.emit(data);
+                    _this.isPopoverOpen = data;
+                }));
+            }
+            this.popover.show();
         };
         /**
          * @return {?}
@@ -1357,27 +1381,6 @@
         McPopover.prototype.hide = function () {
             if (this.popover) {
                 this.popover.hide();
-            }
-        };
-        /**
-         * @return {?}
-         */
-        McPopover.prototype.updateOverlayBackdropClick = function () {
-            var _this = this;
-            if (this.mcTrigger === PopoverTriggers.Click && this.overlayRef) {
-                this.backDropSubscription = this.overlayRef.backdropClick()
-                    .subscribe(( /**
-             * @return {?}
-             */function () {
-                    if (!_this.popover) {
-                        return;
-                    }
-                    _this.popover.hide();
-                }));
-            }
-            else if (this.backDropSubscription && this.overlayRef) {
-                this.backDropSubscription.unsubscribe();
-                this.overlayRef.detachBackdrop();
             }
         };
         /**
@@ -1400,6 +1403,19 @@
                     position.reapplyLastPosition();
                 }));
             }
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        McPopover.prototype.closingActions = function () {
+            /** @type {?} */
+            var backdrop = ( /** @type {?} */(this.overlayRef)).backdropClick();
+            /** @type {?} */
+            var outsidePointerEvents = ( /** @type {?} */(this.overlayRef)).outsidePointerEvents();
+            /** @type {?} */
+            var detachments = ( /** @type {?} */(this.overlayRef)).detachments();
+            return rxjs.merge(backdrop, outsidePointerEvents, detachments);
         };
         /**
          * @private
@@ -1461,8 +1477,10 @@
         { type: bidi.Directionality, decorators: [{ type: core$1.Optional }] }
     ]; };
     McPopover.propDecorators = {
+        backdropClass: [{ type: core$1.Input }],
         mcVisibleChange: [{ type: core$1.Output, args: ['mcPopoverVisibleChange',] }],
         mcPositionStrategyPlacementChange: [{ type: core$1.Output, args: ['mcPopoverPositionStrategyPlacementChange',] }],
+        hasBackdrop: [{ type: core$1.Input }],
         mcHeader: [{ type: core$1.Input, args: ['mcPopoverHeader',] }],
         mcContent: [{ type: core$1.Input, args: ['mcPopoverContent',] }],
         mcFooter: [{ type: core$1.Input, args: ['mcPopoverFooter',] }],
@@ -1492,9 +1510,16 @@
         /** @type {?} */
         McPopover.prototype.popover;
         /** @type {?} */
+        McPopover.prototype.backdropClass;
+        /** @type {?} */
         McPopover.prototype.mcVisibleChange;
         /** @type {?} */
         McPopover.prototype.mcPositionStrategyPlacementChange;
+        /**
+         * @type {?}
+         * @private
+         */
+        McPopover.prototype._hasBackdrop;
         /**
          * @type {?}
          * @private
@@ -1559,6 +1584,11 @@
          * @type {?}
          * @private
          */
+        McPopover.prototype.closeSubscription;
+        /**
+         * @type {?}
+         * @private
+         */
         McPopover.prototype._mcVisible;
         /**
          * @type {?}
@@ -1570,11 +1600,6 @@
          * @private
          */
         McPopover.prototype.destroyed;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.backDropSubscription;
         /**
          * @type {?}
          * @private

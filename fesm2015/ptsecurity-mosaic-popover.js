@@ -7,7 +7,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { EXTENDED_OVERLAY_POSITIONS, POSITION_MAP, POSITION_TO_CSS_MAP, DEFAULT_4_POSITIONS_TO_CSS_MAP, POSITION_PRIORITY_STRATEGY } from '@ptsecurity/mosaic/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, merge } from 'rxjs';
 import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
@@ -422,14 +422,17 @@ class McPopover {
         this.direction = direction;
         this.isPopoverOpen = false;
         this.isDynamicPopover = false;
+        this.backdropClass = 'cdk-overlay-transparent-backdrop';
         this.mcVisibleChange = new EventEmitter();
         this.mcPositionStrategyPlacementChange = new EventEmitter();
+        this._hasBackdrop = false;
         this.$unsubscribe = new Subject();
         this._disabled = false;
         this._mcTrigger = PopoverTriggers.Click;
         this.popoverSize = 'normal';
         this._mcPlacementPriority = null;
         this._mcPlacement = 'top';
+        this.closeSubscription = Subscription.EMPTY;
         this.manualListeners = new Map();
         this.destroyed = new Subject();
         this.resizeListener = (/**
@@ -438,6 +441,19 @@ class McPopover {
         () => this.updatePosition());
         this.availablePositions = POSITION_MAP;
         this.defaultPositionsMap = DEFAULT_4_POSITIONS_TO_CSS_MAP;
+    }
+    /**
+     * @return {?}
+     */
+    get hasBackdrop() {
+        return this._hasBackdrop;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set hasBackdrop(value) {
+        this._hasBackdrop = coerceBooleanProperty(value);
     }
     /**
      * @return {?}
@@ -668,8 +684,7 @@ class McPopover {
             .withViewportMargin(VIEWPORT_MARGIN)
             .withPositions([...EXTENDED_OVERLAY_POSITIONS]);
         /** @type {?} */
-        const scrollableAncestors = this.scrollDispatcher
-            .getAncestorScrollContainers(this.elementRef);
+        const scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
         strategy.withScrollableContainers(scrollableAncestors);
         strategy.positionChanges
             .pipe(takeUntil(this.destroyed))
@@ -695,10 +710,14 @@ class McPopover {
             positionStrategy: strategy,
             panelClass: 'mc-popover__panel',
             scrollStrategy: this.scrollStrategy(),
-            hasBackdrop: this.mcTrigger === PopoverTriggers.Click,
-            backdropClass: 'no-class'
+            hasBackdrop: this.hasBackdrop,
+            backdropClass: this.backdropClass
         });
-        this.updateOverlayBackdropClick();
+        this.closeSubscription = this.closingActions()
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.hide()));
         this.updatePosition();
         this.overlayRef.detachments()
             .pipe(takeUntil(this.destroyed))
@@ -827,6 +846,7 @@ class McPopover {
         this.manualListeners.clear();
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
+        this.closeSubscription.unsubscribe();
     }
     /**
      * @param {?} e
@@ -942,52 +962,53 @@ class McPopover {
      * @return {?}
      */
     show() {
-        if (!this.disabled) {
-            if (!this.popover) {
-                this.detach();
-                /** @type {?} */
-                const overlayRef = this.createOverlay();
-                this.portal = this.portal || new ComponentPortal(McPopoverComponent, this.hostView);
-                this.popover = overlayRef.attach(this.portal).instance;
-                this.popover.afterHidden()
-                    .pipe(takeUntil(this.destroyed))
-                    .subscribe((/**
-                 * @return {?}
-                 */
-                () => this.detach()));
-                this.isDynamicPopover = true;
-                /** @type {?} */
-                const properties = [
-                    'mcPlacement',
-                    'mcPopoverSize',
-                    'mcTrigger',
-                    'mcMouseEnterDelay',
-                    'mcMouseLeaveDelay',
-                    'classList',
-                    'mcVisible',
-                    'mcHeader',
-                    'mcContent',
-                    'mcFooter'
-                ];
-                properties.forEach((/**
-                 * @param {?} property
-                 * @return {?}
-                 */
-                (property) => this.updateCompValue(property, this[property])));
-                this.popover.mcVisibleChange
-                    .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
-                    .subscribe((/**
-                 * @param {?} data
-                 * @return {?}
-                 */
-                (data) => {
-                    this.mcVisible = data;
-                    this.mcVisibleChange.emit(data);
-                    this.isPopoverOpen = data;
-                }));
-            }
-            this.popover.show();
+        if (this.disabled) {
+            return;
         }
+        if (!this.popover) {
+            this.detach();
+            /** @type {?} */
+            const overlayRef = this.createOverlay();
+            this.portal = this.portal || new ComponentPortal(McPopoverComponent, this.hostView);
+            this.popover = overlayRef.attach(this.portal).instance;
+            this.popover.afterHidden()
+                .pipe(takeUntil(this.destroyed))
+                .subscribe((/**
+             * @return {?}
+             */
+            () => this.detach()));
+            this.isDynamicPopover = true;
+            /** @type {?} */
+            const properties = [
+                'mcPlacement',
+                'mcPopoverSize',
+                'mcTrigger',
+                'mcMouseEnterDelay',
+                'mcMouseLeaveDelay',
+                'classList',
+                'mcVisible',
+                'mcHeader',
+                'mcContent',
+                'mcFooter'
+            ];
+            properties.forEach((/**
+             * @param {?} property
+             * @return {?}
+             */
+            (property) => this.updateCompValue(property, this[property])));
+            this.popover.mcVisibleChange
+                .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
+                .subscribe((/**
+             * @param {?} data
+             * @return {?}
+             */
+            (data) => {
+                this.mcVisible = data;
+                this.mcVisibleChange.emit(data);
+                this.isPopoverOpen = data;
+            }));
+        }
+        this.popover.show();
     }
     /**
      * @return {?}
@@ -995,27 +1016,6 @@ class McPopover {
     hide() {
         if (this.popover) {
             this.popover.hide();
-        }
-    }
-    /**
-     * @return {?}
-     */
-    updateOverlayBackdropClick() {
-        if (this.mcTrigger === PopoverTriggers.Click && this.overlayRef) {
-            this.backDropSubscription = this.overlayRef.backdropClick()
-                .subscribe((/**
-             * @return {?}
-             */
-            () => {
-                if (!this.popover) {
-                    return;
-                }
-                this.popover.hide();
-            }));
-        }
-        else if (this.backDropSubscription && this.overlayRef) {
-            this.backDropSubscription.unsubscribe();
-            this.overlayRef.detachBackdrop();
         }
     }
     /**
@@ -1038,6 +1038,19 @@ class McPopover {
                 position.reapplyLastPosition();
             }));
         }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    closingActions() {
+        /** @type {?} */
+        const backdrop = (/** @type {?} */ (this.overlayRef)).backdropClick();
+        /** @type {?} */
+        const outsidePointerEvents = (/** @type {?} */ (this.overlayRef)).outsidePointerEvents();
+        /** @type {?} */
+        const detachments = (/** @type {?} */ (this.overlayRef)).detachments();
+        return merge(backdrop, outsidePointerEvents, detachments);
     }
     /**
      * @private
@@ -1098,8 +1111,10 @@ McPopover.ctorParameters = () => [
     { type: Directionality, decorators: [{ type: Optional }] }
 ];
 McPopover.propDecorators = {
+    backdropClass: [{ type: Input }],
     mcVisibleChange: [{ type: Output, args: ['mcPopoverVisibleChange',] }],
     mcPositionStrategyPlacementChange: [{ type: Output, args: ['mcPopoverPositionStrategyPlacementChange',] }],
+    hasBackdrop: [{ type: Input }],
     mcHeader: [{ type: Input, args: ['mcPopoverHeader',] }],
     mcContent: [{ type: Input, args: ['mcPopoverContent',] }],
     mcFooter: [{ type: Input, args: ['mcPopoverFooter',] }],
@@ -1129,9 +1144,16 @@ if (false) {
     /** @type {?} */
     McPopover.prototype.popover;
     /** @type {?} */
+    McPopover.prototype.backdropClass;
+    /** @type {?} */
     McPopover.prototype.mcVisibleChange;
     /** @type {?} */
     McPopover.prototype.mcPositionStrategyPlacementChange;
+    /**
+     * @type {?}
+     * @private
+     */
+    McPopover.prototype._hasBackdrop;
     /**
      * @type {?}
      * @private
@@ -1196,6 +1218,11 @@ if (false) {
      * @type {?}
      * @private
      */
+    McPopover.prototype.closeSubscription;
+    /**
+     * @type {?}
+     * @private
+     */
     McPopover.prototype._mcVisible;
     /**
      * @type {?}
@@ -1207,11 +1234,6 @@ if (false) {
      * @private
      */
     McPopover.prototype.destroyed;
-    /**
-     * @type {?}
-     * @private
-     */
-    McPopover.prototype.backDropSubscription;
     /**
      * @type {?}
      * @private

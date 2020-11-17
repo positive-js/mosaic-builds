@@ -85,8 +85,12 @@ export declare class McPopover implements OnInit, OnDestroy {
         [key: string]: string;
     };
     popover: McPopoverComponent | null;
+    backdropClass: string;
     mcVisibleChange: EventEmitter<boolean>;
     mcPositionStrategyPlacementChange: EventEmitter<string>;
+    get hasBackdrop(): boolean;
+    set hasBackdrop(value: boolean);
+    private _hasBackdrop;
     get mcHeader(): string | TemplateRef<any>;
     set mcHeader(value: string | TemplateRef<any>);
     private _mcHeader;
@@ -123,11 +127,11 @@ export declare class McPopover implements OnInit, OnDestroy {
     private _classList;
     get mcVisible(): boolean;
     set mcVisible(externalValue: boolean);
+    private closeSubscription;
     private _mcVisible;
     get isOpen(): boolean;
     private manualListeners;
     private readonly destroyed;
-    private backDropSubscription;
     constructor(overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
     /** Create the overlay config and position strategy */
     createOverlay(): OverlayRef;
@@ -145,9 +149,9 @@ export declare class McPopover implements OnInit, OnDestroy {
     resetListeners(): void;
     show(): void;
     hide(): void;
-    updateOverlayBackdropClick(): void;
     /** Updates the position of the current popover. */
     updatePosition(reapplyPosition?: boolean): void;
+    private closingActions;
     private getPriorityPlacementStrategy;
     private getPrioritizedPositions;
     private resizeListener;
