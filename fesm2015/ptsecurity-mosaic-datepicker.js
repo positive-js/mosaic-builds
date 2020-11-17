@@ -2418,6 +2418,7 @@ class McDatepicker {
         this.dateAdapter = dateAdapter;
         this.dir = dir;
         this.document = document;
+        this._hasBackdrop = false;
         /**
          * The view that the calendar should start in.
          */
@@ -2432,6 +2433,7 @@ class McDatepicker {
          * This doesn't imply a change on the selected date.
          */
         this.monthSelected = new EventEmitter();
+        this.backdropClass = 'cdk-overlay-transparent-backdrop';
         /**
          * Emits when the datepicker has been opened.
          */
@@ -2463,10 +2465,24 @@ class McDatepicker {
          * Subscription to value changes in the associated input element.
          */
         this.inputSubscription = Subscription.EMPTY;
+        this.closeSubscription = Subscription.EMPTY;
         if (!this.dateAdapter) {
             throw createMissingDateImplError('DateAdapter');
         }
         this.scrollStrategy = scrollStrategy;
+    }
+    /**
+     * @return {?}
+     */
+    get hasBackdrop() {
+        return this._hasBackdrop;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    set hasBackdrop(value) {
+        this._hasBackdrop = coerceBooleanProperty(value);
     }
     /**
      * The date to open the calendar to initially.
@@ -2564,6 +2580,7 @@ class McDatepicker {
     ngOnDestroy() {
         this.close();
         this.inputSubscription.unsubscribe();
+        this.closeSubscription.unsubscribe();
         this.disabledChange.complete();
         if (this.popupRef) {
             this.popupRef.dispose();
@@ -2692,12 +2709,12 @@ class McDatepicker {
             this.popupComponentRef = this.popupRef.attach(this.calendarPortal);
             this.popupComponentRef.instance.datepicker = this;
             // Update the position once the calendar has rendered.
-            this.ngZone.onStable.asObservable().pipe(take(1)).subscribe((/**
+            this.ngZone.onStable.asObservable()
+                .pipe(take(1))
+                .subscribe((/**
              * @return {?}
              */
-            () => {
-                this.popupRef.updatePosition();
-            }));
+            () => this.popupRef.updatePosition()));
         }
     }
     /**
@@ -2709,15 +2726,26 @@ class McDatepicker {
         /** @type {?} */
         const overlayConfig = new OverlayConfig({
             positionStrategy: this.createPopupPositionStrategy(),
-            hasBackdrop: true,
-            backdropClass: 'mc-overlay-transparent-backdrop',
+            hasBackdrop: this.hasBackdrop,
+            backdropClass: this.backdropClass,
             direction: this.dir,
             scrollStrategy: this.scrollStrategy(),
             panelClass: 'mc-datepicker__popup'
         });
         this.popupRef = this.overlay.create(overlayConfig);
         this.popupRef.overlayElement.setAttribute('role', 'dialog');
-        merge(this.popupRef.backdropClick(), this.popupRef.detachments(), this.popupRef.keydownEvents().pipe(filter((/**
+        this.closeSubscription = this.closingActions()
+            .subscribe((/**
+         * @return {?}
+         */
+        () => this.close()));
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    closingActions() {
+        return merge(this.popupRef.backdropClick(), this.popupRef.outsidePointerEvents(), this.popupRef.detachments(), this.popupRef.keydownEvents().pipe(filter((/**
          * @param {?} event
          * @return {?}
          */
@@ -2725,10 +2753,7 @@ class McDatepicker {
             // Closing on alt + up is only valid when there's an input associated with the datepicker.
             // tslint:disable-next-line:deprecation
             return event.keyCode === ESCAPE || (this.datepickerInput && event.altKey && event.keyCode === UP_ARROW);
-        })))).subscribe((/**
-         * @return {?}
-         */
-        () => this.close()));
+        }))));
     }
     /**
      * Create the popup PositionStrategy.
@@ -2799,6 +2824,7 @@ McDatepicker.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [DOCUMENT,] }] }
 ];
 McDatepicker.propDecorators = {
+    hasBackdrop: [{ type: Input }],
     startAt: [{ type: Input }],
     disabled: [{ type: Input }],
     opened: [{ type: Input }],
@@ -2808,10 +2834,16 @@ McDatepicker.propDecorators = {
     monthSelected: [{ type: Output }],
     panelClass: [{ type: Input }],
     dateClass: [{ type: Input }],
+    backdropClass: [{ type: Input }],
     openedStream: [{ type: Output, args: ['opened',] }],
     closedStream: [{ type: Output, args: ['closed',] }]
 };
 if (false) {
+    /**
+     * @type {?}
+     * @private
+     */
+    McDatepicker.prototype._hasBackdrop;
     /**
      * An input indicating the type of the custom header component for the calendar, if set.
      * @type {?}
@@ -2844,6 +2876,8 @@ if (false) {
      * @type {?}
      */
     McDatepicker.prototype.dateClass;
+    /** @type {?} */
+    McDatepicker.prototype.backdropClass;
     /**
      * Emits when the datepicker has been opened.
      * @type {?}
@@ -2930,6 +2964,11 @@ if (false) {
      * @private
      */
     McDatepicker.prototype.inputSubscription;
+    /**
+     * @type {?}
+     * @private
+     */
+    McDatepicker.prototype.closeSubscription;
     /**
      * @type {?}
      * @private

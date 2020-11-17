@@ -2499,6 +2499,7 @@
             this.dateAdapter = dateAdapter;
             this.dir = dir;
             this.document = document;
+            this._hasBackdrop = false;
             /**
              * The view that the calendar should start in.
              */
@@ -2513,6 +2514,7 @@
              * This doesn't imply a change on the selected date.
              */
             this.monthSelected = new i0.EventEmitter();
+            this.backdropClass = 'cdk-overlay-transparent-backdrop';
             /**
              * Emits when the datepicker has been opened.
              */
@@ -2544,11 +2546,29 @@
              * Subscription to value changes in the associated input element.
              */
             this.inputSubscription = rxjs.Subscription.EMPTY;
+            this.closeSubscription = rxjs.Subscription.EMPTY;
             if (!this.dateAdapter) {
                 throw createMissingDateImplError('DateAdapter');
             }
             this.scrollStrategy = scrollStrategy;
         }
+        Object.defineProperty(McDatepicker.prototype, "hasBackdrop", {
+            /**
+             * @return {?}
+             */
+            get: function () {
+                return this._hasBackdrop;
+            },
+            /**
+             * @param {?} value
+             * @return {?}
+             */
+            set: function (value) {
+                this._hasBackdrop = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(McDatepicker.prototype, "startAt", {
             /**
              * The date to open the calendar to initially.
@@ -2677,6 +2697,7 @@
         McDatepicker.prototype.ngOnDestroy = function () {
             this.close();
             this.inputSubscription.unsubscribe();
+            this.closeSubscription.unsubscribe();
             this.disabledChange.complete();
             if (this.popupRef) {
                 this.popupRef.dispose();
@@ -2806,11 +2827,11 @@
                 this.popupComponentRef = this.popupRef.attach(this.calendarPortal);
                 this.popupComponentRef.instance.datepicker = this;
                 // Update the position once the calendar has rendered.
-                this.ngZone.onStable.asObservable().pipe(operators.take(1)).subscribe(( /**
-                 * @return {?}
-                 */function () {
-                    _this.popupRef.updatePosition();
-                }));
+                this.ngZone.onStable.asObservable()
+                    .pipe(operators.take(1))
+                    .subscribe(( /**
+             * @return {?}
+             */function () { return _this.popupRef.updatePosition(); }));
             }
         };
         /**
@@ -2823,24 +2844,33 @@
             /** @type {?} */
             var overlayConfig = new overlay.OverlayConfig({
                 positionStrategy: this.createPopupPositionStrategy(),
-                hasBackdrop: true,
-                backdropClass: 'mc-overlay-transparent-backdrop',
+                hasBackdrop: this.hasBackdrop,
+                backdropClass: this.backdropClass,
                 direction: this.dir,
                 scrollStrategy: this.scrollStrategy(),
                 panelClass: 'mc-datepicker__popup'
             });
             this.popupRef = this.overlay.create(overlayConfig);
             this.popupRef.overlayElement.setAttribute('role', 'dialog');
-            rxjs.merge(this.popupRef.backdropClick(), this.popupRef.detachments(), this.popupRef.keydownEvents().pipe(operators.filter(( /**
+            this.closeSubscription = this.closingActions()
+                .subscribe(( /**
+         * @return {?}
+         */function () { return _this.close(); }));
+        };
+        /**
+         * @private
+         * @return {?}
+         */
+        McDatepicker.prototype.closingActions = function () {
+            var _this = this;
+            return rxjs.merge(this.popupRef.backdropClick(), this.popupRef.outsidePointerEvents(), this.popupRef.detachments(), this.popupRef.keydownEvents().pipe(operators.filter(( /**
              * @param {?} event
              * @return {?}
              */function (event) {
                 // Closing on alt + up is only valid when there's an input associated with the datepicker.
                 // tslint:disable-next-line:deprecation
                 return event.keyCode === keycodes.ESCAPE || (_this.datepickerInput && event.altKey && event.keyCode === keycodes.UP_ARROW);
-            })))).subscribe(( /**
-             * @return {?}
-             */function () { return _this.close(); }));
+            }))));
         };
         /**
          * Create the popup PositionStrategy.
@@ -2912,6 +2942,7 @@
         { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [common.DOCUMENT,] }] }
     ]; };
     McDatepicker.propDecorators = {
+        hasBackdrop: [{ type: i0.Input }],
         startAt: [{ type: i0.Input }],
         disabled: [{ type: i0.Input }],
         opened: [{ type: i0.Input }],
@@ -2921,10 +2952,16 @@
         monthSelected: [{ type: i0.Output }],
         panelClass: [{ type: i0.Input }],
         dateClass: [{ type: i0.Input }],
+        backdropClass: [{ type: i0.Input }],
         openedStream: [{ type: i0.Output, args: ['opened',] }],
         closedStream: [{ type: i0.Output, args: ['closed',] }]
     };
     if (false) {
+        /**
+         * @type {?}
+         * @private
+         */
+        McDatepicker.prototype._hasBackdrop;
         /**
          * An input indicating the type of the custom header component for the calendar, if set.
          * @type {?}
@@ -2957,6 +2994,8 @@
          * @type {?}
          */
         McDatepicker.prototype.dateClass;
+        /** @type {?} */
+        McDatepicker.prototype.backdropClass;
         /**
          * Emits when the datepicker has been opened.
          * @type {?}
@@ -3043,6 +3082,11 @@
          * @private
          */
         McDatepicker.prototype.inputSubscription;
+        /**
+         * @type {?}
+         * @private
+         */
+        McDatepicker.prototype.closeSubscription;
         /**
          * @type {?}
          * @private

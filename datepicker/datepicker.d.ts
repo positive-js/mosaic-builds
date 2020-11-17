@@ -39,6 +39,9 @@ export declare class McDatepicker<D> implements OnDestroy {
     private dateAdapter;
     private dir;
     private document;
+    get hasBackdrop(): boolean;
+    set hasBackdrop(value: boolean);
+    private _hasBackdrop;
     /** The date to open the calendar to initially. */
     get startAt(): D | null;
     set startAt(value: D | null);
@@ -75,6 +78,7 @@ export declare class McDatepicker<D> implements OnDestroy {
     panelClass: string | string[];
     /** Function that can be used to add custom CSS classes to dates. */
     dateClass: (date: D) => McCalendarCellCssClasses;
+    backdropClass: string;
     /** Emits when the datepicker has been opened. */
     openedStream: EventEmitter<void>;
     /** Emits when the datepicker has been closed. */
@@ -103,6 +107,7 @@ export declare class McDatepicker<D> implements OnDestroy {
     private focusedElementBeforeOpen;
     /** Subscription to value changes in the associated input element. */
     private inputSubscription;
+    private closeSubscription;
     constructor(overlay: Overlay, ngZone: NgZone, viewContainerRef: ViewContainerRef, scrollStrategy: any, dateAdapter: DateAdapter<D>, dir: Directionality, document: any);
     ngOnDestroy(): void;
     /** Selects the given date */
@@ -124,6 +129,7 @@ export declare class McDatepicker<D> implements OnDestroy {
     private openAsPopup;
     /** Create the popup. */
     private createPopup;
+    private closingActions;
     /** Create the popup PositionStrategy. */
     private createPopupPositionStrategy;
     /**
