@@ -1116,10 +1116,12 @@ class McTagList extends McTagListMixinBase {
      * @return {?}
      */
     registerInput(inputElement) {
+        var _a;
         this.tagInput = inputElement;
         // todo need rethink about it
-        if (this.ngControl && inputElement.ngControl) {
-            (/** @type {?} */ (inputElement.ngControl.statusChanges)).subscribe((/**
+        if (this.ngControl && ((_a = inputElement.ngControl) === null || _a === void 0 ? void 0 : _a.statusChanges)) {
+            inputElement.ngControl.statusChanges
+                .subscribe((/**
              * @return {?}
              */
             () => (/** @type {?} */ (this.ngControl.control)).setErrors((/** @type {?} */ (inputElement.ngControl)).errors)));

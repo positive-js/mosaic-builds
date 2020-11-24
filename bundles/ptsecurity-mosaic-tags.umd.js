@@ -1932,12 +1932,14 @@
          */
         McTagList.prototype.registerInput = function (inputElement) {
             var _this = this;
+            var _a;
             this.tagInput = inputElement;
             // todo need rethink about it
-            if (this.ngControl && inputElement.ngControl) {
-                ( /** @type {?} */(inputElement.ngControl.statusChanges)).subscribe(( /**
-                 * @return {?}
-                 */function () { return ( /** @type {?} */(_this.ngControl.control)).setErrors(( /** @type {?} */(inputElement.ngControl)).errors); }));
+            if (this.ngControl && ((_a = inputElement.ngControl) === null || _a === void 0 ? void 0 : _a.statusChanges)) {
+                inputElement.ngControl.statusChanges
+                    .subscribe(( /**
+             * @return {?}
+             */function () { return ( /** @type {?} */(_this.ngControl.control)).setErrors(( /** @type {?} */(inputElement.ngControl)).errors); }));
             }
         };
         // Implemented as part of ControlValueAccessor.
