@@ -2027,6 +2027,7 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 
+
 @mixin mc-dropdown-theme($theme) {
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
@@ -2038,6 +2039,8 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-dropdown__item {
+        @include user-select(text);
+
         color: mc-color($foreground, text);
 
         background: transparent;
