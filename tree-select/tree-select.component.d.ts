@@ -203,7 +203,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     get selected(): any;
     get selectedValues(): any;
     get triggerValue(): string;
-    get triggerValues(): string[];
+    get triggerValues(): McTreeOption[];
     get empty(): boolean;
     isRtl(): boolean;
     handleKeydown(event: KeyboardEvent): void;
