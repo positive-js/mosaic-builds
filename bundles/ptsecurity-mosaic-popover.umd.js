@@ -1090,6 +1090,9 @@
                 backdropClass: this.backdropClass
             });
             this.closeSubscription = this.closingActions()
+                // need for close popover on trigger click, because popover fire unexpected events: hide and then show
+                // todo need fix it
+                .pipe(operators.delay(0))
                 .subscribe(( /**
          * @return {?}
          */function () { return _this.hide(); }));
@@ -1399,9 +1402,7 @@
             if (reapplyPosition) {
                 setTimeout(( /**
                  * @return {?}
-                 */function () {
-                    position.reapplyLastPosition();
-                }));
+                 */function () { return position.reapplyLastPosition(); }));
             }
         };
         /**

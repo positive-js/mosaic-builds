@@ -8,7 +8,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { EXTENDED_OVERLAY_POSITIONS, POSITION_MAP, POSITION_TO_CSS_MAP, DEFAULT_4_POSITIONS_TO_CSS_MAP, POSITION_PRIORITY_STRATEGY } from '@ptsecurity/mosaic/core';
 import { BehaviorSubject, Subject, Subscription, merge } from 'rxjs';
-import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { takeUntil, delay, distinctUntilChanged } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 /**
@@ -714,6 +714,9 @@ class McPopover {
             backdropClass: this.backdropClass
         });
         this.closeSubscription = this.closingActions()
+            // need for close popover on trigger click, because popover fire unexpected events: hide and then show
+            // todo need fix it
+            .pipe(delay(0))
             .subscribe((/**
          * @return {?}
          */
@@ -1034,9 +1037,7 @@ class McPopover {
             setTimeout((/**
              * @return {?}
              */
-            () => {
-                position.reapplyLastPosition();
-            }));
+            () => position.reapplyLastPosition()));
         }
     }
     /**

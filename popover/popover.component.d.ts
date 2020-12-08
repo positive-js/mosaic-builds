@@ -32,8 +32,8 @@ export declare class McPopoverComponent {
     get mcVisible(): boolean;
     set mcVisible(value: boolean);
     private _mcVisible;
-    get classList(): string | string[];
-    set classList(value: string | string[]);
+    get classList(): string;
+    set classList(value: string);
     private _classList;
     get getCssClassesList(): string;
     get getPlacementClass(): string;
