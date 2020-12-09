@@ -2626,12 +2626,12 @@ class McDatepicker {
             throw Error('A McDatepicker can only be associated with a single input.');
         }
         this.datepickerInput = input;
-        this.inputSubscription =
-            this.datepickerInput.valueChange.subscribe((/**
-             * @param {?} value
-             * @return {?}
-             */
-            (value) => this.selected = value));
+        this.inputSubscription = this.datepickerInput.valueChange
+            .subscribe((/**
+         * @param {?} value
+         * @return {?}
+         */
+        (value) => this.selected = value));
     }
     /**
      * Open the calendar.
@@ -3179,12 +3179,11 @@ class McDatepickerInput {
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
         // Update the displayed date when the locale changes.
-        this.localeSubscription = dateAdapter.localeChanges.subscribe((/**
+        this.localeSubscription = dateAdapter.localeChanges
+            .subscribe((/**
          * @return {?}
          */
-        () => {
-            this.value = this.value;
-        }));
+        () => this.value = this.value));
     }
     /**
      * The datepicker that this input is associated with.
@@ -3198,7 +3197,8 @@ class McDatepickerInput {
         this.datepicker = value;
         this.datepicker.registerInput(this);
         this.datepickerSubscription.unsubscribe();
-        this.datepickerSubscription = this.datepicker.selectedChanged.subscribe((/**
+        this.datepickerSubscription = this.datepicker.selectedChanged
+            .subscribe((/**
          * @param {?} selected
          * @return {?}
          */
@@ -3206,7 +3206,6 @@ class McDatepickerInput {
             this.value = selected;
             this.cvaOnChange(selected);
             this.onTouched();
-            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
             this.dateChange.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
         }));
     }

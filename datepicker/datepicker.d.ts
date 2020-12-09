@@ -3,7 +3,7 @@ import { Overlay, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
 import { AfterViewInit, EventEmitter, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { McCalendar } from './calendar';
 import { McCalendarCellCssClasses } from './calendar-body';
 import { McDatepickerInput } from './datepicker-input';
@@ -89,7 +89,7 @@ export declare class McDatepicker<D> implements OnDestroy {
     popupRef: OverlayRef;
     /** The input element this datepicker is associated with. */
     datepickerInput: McDatepickerInput<D>;
-    readonly stateChanges: Observable<void>;
+    readonly stateChanges: Subject<void>;
     /** Emits when the datepicker is disabled. */
     readonly disabledChange: Subject<boolean>;
     /** Emits new selected date when selected date changes. */

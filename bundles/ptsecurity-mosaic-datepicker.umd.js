@@ -2744,11 +2744,11 @@
                 throw Error('A McDatepicker can only be associated with a single input.');
             }
             this.datepickerInput = input;
-            this.inputSubscription =
-                this.datepickerInput.valueChange.subscribe(( /**
-                 * @param {?} value
-                 * @return {?}
-                 */function (value) { return _this.selected = value; }));
+            this.inputSubscription = this.datepickerInput.valueChange
+                .subscribe(( /**
+         * @param {?} value
+         * @return {?}
+         */function (value) { return _this.selected = value; }));
         };
         /**
          * Open the calendar.
@@ -3290,11 +3290,10 @@
                 throw createMissingDateImplError('MC_DATE_FORMATS');
             }
             // Update the displayed date when the locale changes.
-            this.localeSubscription = dateAdapter.localeChanges.subscribe(( /**
-             * @return {?}
-             */function () {
-                _this.value = _this.value;
-            }));
+            this.localeSubscription = dateAdapter.localeChanges
+                .subscribe(( /**
+         * @return {?}
+         */function () { return _this.value = _this.value; }));
         }
         Object.defineProperty(McDatepickerInput.prototype, "mcDatepicker", {
             /**
@@ -3310,14 +3309,14 @@
                 this.datepicker = value;
                 this.datepicker.registerInput(this);
                 this.datepickerSubscription.unsubscribe();
-                this.datepickerSubscription = this.datepicker.selectedChanged.subscribe(( /**
-                 * @param {?} selected
-                 * @return {?}
-                 */function (selected) {
+                this.datepickerSubscription = this.datepicker.selectedChanged
+                    .subscribe(( /**
+             * @param {?} selected
+             * @return {?}
+             */function (selected) {
                     _this.value = selected;
                     _this.cvaOnChange(selected);
                     _this.onTouched();
-                    _this.dateInput.emit(new McDatepickerInputEvent(_this, _this.elementRef.nativeElement));
                     _this.dateChange.emit(new McDatepickerInputEvent(_this, _this.elementRef.nativeElement));
                 }));
             },
