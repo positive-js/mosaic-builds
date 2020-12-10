@@ -2505,8 +2505,7 @@ class McDatepicker {
      * @return {?}
      */
     get disabled() {
-        return this._disabled === undefined && this.datepickerInput ?
-            this.datepickerInput.disabled : !!this._disabled;
+        return this._disabled === undefined && this.datepickerInput ? this.datepickerInput.disabled : this._disabled;
     }
     /**
      * @param {?} value
