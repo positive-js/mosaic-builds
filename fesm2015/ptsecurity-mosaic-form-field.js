@@ -3,8 +3,8 @@ import { Component, Directive, Input, EventEmitter, Output, ViewEncapsulation, C
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { mixinColor } from '@ptsecurity/mosaic/core';
-import { EMPTY, merge } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { Subject, EMPTY, merge } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 
 /**
  * @fileoverview added by tsickle
@@ -292,6 +292,7 @@ class McFormField extends McFormFieldMixinBase {
         this.labelId = `mc-form-field-label-${nextUniqueId$1++}`;
         this.hovered = false;
         this.canCleanerClearByEsc = true;
+        this.$unsubscribe = new Subject();
     }
     /**
      * @return {?}
@@ -373,6 +374,7 @@ class McFormField extends McFormFieldMixinBase {
         /** @type {?} */
         const valueChanges = this.control.ngControl && this.control.ngControl.valueChanges || EMPTY;
         merge(valueChanges)
+            .pipe(takeUntil(this.$unsubscribe))
             .subscribe((/**
          * @return {?}
          */
@@ -453,6 +455,13 @@ class McFormField extends McFormFieldMixinBase {
         return ngControl && ngControl[prop];
     }
     /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        this.$unsubscribe.next();
+        this.$unsubscribe.complete();
+    }
+    /**
      * Throws an error if the form field's control is missing.
      * @protected
      * @return {?}
@@ -529,6 +538,11 @@ if (false) {
     McFormField.prototype.hovered;
     /** @type {?} */
     McFormField.prototype.canCleanerClearByEsc;
+    /**
+     * @type {?}
+     * @private
+     */
+    McFormField.prototype.$unsubscribe;
     /** @type {?} */
     McFormField.prototype._elementRef;
     /**

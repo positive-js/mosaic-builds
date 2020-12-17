@@ -593,6 +593,7 @@
             _this.labelId = "mc-form-field-label-" + nextUniqueId$1++;
             _this.hovered = false;
             _this.canCleanerClearByEsc = true;
+            _this.$unsubscribe = new rxjs.Subject();
             return _this;
         }
         Object.defineProperty(McFormField.prototype, "hasHint", {
@@ -707,6 +708,7 @@
             /** @type {?} */
             var valueChanges = this.control.ngControl && this.control.ngControl.valueChanges || rxjs.EMPTY;
             rxjs.merge(valueChanges)
+                .pipe(operators.takeUntil(this.$unsubscribe))
                 .subscribe(( /**
          * @return {?}
          */function () { return _this._changeDetectorRef.markForCheck(); }));
@@ -786,6 +788,13 @@
             return ngControl && ngControl[prop];
         };
         /**
+         * @return {?}
+         */
+        McFormField.prototype.ngOnDestroy = function () {
+            this.$unsubscribe.next();
+            this.$unsubscribe.complete();
+        };
+        /**
          * Throws an error if the form field's control is missing.
          * @protected
          * @return {?}
@@ -863,6 +872,11 @@
         McFormField.prototype.hovered;
         /** @type {?} */
         McFormField.prototype.canCleanerClearByEsc;
+        /**
+         * @type {?}
+         * @private
+         */
+        McFormField.prototype.$unsubscribe;
         /** @type {?} */
         McFormField.prototype._elementRef;
         /**

@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, QueryList } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, OnDestroy, QueryList } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { CanColor, CanColorCtor } from '@ptsecurity/mosaic/core';
 import { McCleaner } from './cleaner';
@@ -12,7 +12,7 @@ export declare class McFormFieldBase {
     constructor(_elementRef: ElementRef);
 }
 export declare const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase;
-export declare class McFormField extends McFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor {
+export declare class McFormField extends McFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor, OnDestroy {
     _elementRef: ElementRef;
     private _changeDetectorRef;
     control: McFormFieldControl<any>;
@@ -25,6 +25,7 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     labelId: string;
     hovered: boolean;
     canCleanerClearByEsc: boolean;
+    private $unsubscribe;
     get hasHint(): boolean;
     get hasSuffix(): boolean;
     get hasPrefix(): boolean;
@@ -48,6 +49,7 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     getConnectedOverlayOrigin(): ElementRef;
     /** Determines whether a class from the NgControl should be forwarded to the host element. */
     shouldForward(prop: keyof NgControl): boolean;
+    ngOnDestroy(): void;
     /** Throws an error if the form field's control is missing. */
     protected validateControlChild(): void;
 }
