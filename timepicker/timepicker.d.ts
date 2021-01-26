@@ -94,6 +94,7 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy
     registerOnChange(fn: (value: D) => void): void;
     registerOnTouched(fn: () => void): void;
     setDisabledState(isDisabled: boolean): void;
+    private formatUserInput;
     /** Checks whether the input is invalid based on the native validation. */
     private isBadInput;
     private verticalArrowKeyHandler;

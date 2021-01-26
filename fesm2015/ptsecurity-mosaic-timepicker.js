@@ -371,7 +371,9 @@ class McTimepicker {
      */
     onInput() {
         /** @type {?} */
-        const newTimeObj = this.getDateFromTimeString(this.viewValue);
+        const formattedValue = this.formatUserInput(this.viewValue);
+        /** @type {?} */
+        const newTimeObj = this.getDateFromTimeString(formattedValue);
         this.lastValueValid = !!newTimeObj;
         if (!newTimeObj) {
             this.control.updateValueAndValidity();
@@ -464,6 +466,20 @@ class McTimepicker {
      */
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
+    }
+    /**
+     * @private
+     * @param {?} value
+     * @return {?}
+     */
+    formatUserInput(value) {
+        /** @type {?} */
+        const match = value.match(/(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
+        if (match && match.groups) {
+            const { number, symbol } = match.groups;
+            return value.replace(number + symbol, `0${number}`);
+        }
+        return value;
     }
     /**
      * Checks whether the input is invalid based on the native validation.
