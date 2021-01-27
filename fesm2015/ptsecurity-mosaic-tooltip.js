@@ -225,7 +225,7 @@ class McTooltipComponent {
      * @return {?}
      */
     get isNonEmptyString() {
-        return typeof this.mcTitle === 'string' && this._mcTitle !== '';
+        return (typeof this.mcTitle === 'string' || typeof this.mcTitle === 'number') && this._mcTitle !== '';
     }
 }
 McTooltipComponent.decorators = [

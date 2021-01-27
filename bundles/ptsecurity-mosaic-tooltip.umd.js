@@ -546,7 +546,7 @@
              * @return {?}
              */
             get: function () {
-                return typeof this.mcTitle === 'string' && this._mcTitle !== '';
+                return (typeof this.mcTitle === 'string' || typeof this.mcTitle === 'number') && this._mcTitle !== '';
             },
             enumerable: false,
             configurable: true
