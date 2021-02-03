@@ -344,7 +344,10 @@ class McFormField extends McFormFieldMixinBase {
      * @return {?}
      */
     get canShowStepper() {
-        return this.control && !this.disabled && (this.control.focused || this.hovered);
+        var _a;
+        return this.hasStepper &&
+            !this.disabled &&
+            (((_a = this.control) === null || _a === void 0 ? void 0 : _a.focused) || this.hovered);
     }
     /**
      * @return {?}
