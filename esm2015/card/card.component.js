@@ -111,7 +111,7 @@ McCard.decorators = [
                     '(keydown)': 'onKeyDown($event)',
                     '(click)': 'onClick($event)'
                 },
-                styles: [".mc-card{border-left:4px solid transparent;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;position:relative}.mc-card:focus{outline:none}.mc-card .mc-card__overlay{background:transparent;bottom:0;left:0;pointer-events:none;position:absolute;right:0;top:0}.mc-card.mc-card_readonly{cursor:auto}"]
+                styles: [".mc-card{border-left:var(--mc-card-size-vertical-line,4px) solid transparent;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;position:relative}.mc-card:focus{outline:none}.mc-card .mc-card__overlay{background:transparent;bottom:0;left:0;pointer-events:none;position:absolute;right:0;top:0}.mc-card.mc-card_readonly{cursor:auto}"]
             }] }
 ];
 /** @nocollapse */

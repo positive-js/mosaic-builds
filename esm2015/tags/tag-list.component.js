@@ -1016,7 +1016,7 @@ McTagList.decorators = [
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 providers: [{ provide: McFormFieldControl, useExisting: McTagList }],
-                styles: [".mc-tag-list{display:flex;flex-direction:row}.mc-tag-input{background:transparent;border:none;outline:none}.mc-tags-list__list-container{display:flex;flex:1 1 100%;flex-wrap:wrap;min-height:28px;min-width:0;padding:1px 6px}.mc-tags-list__list-container .mc-tag-input{flex:1 1 auto;height:22px;margin:2px 4px;max-width:100%}.mc-tags-list__cleaner .mc-cleaner{height:30px}"]
+                styles: [".mc-tag-list{display:flex;flex-direction:row}.mc-tag-input{background:transparent;border:none;outline:none}.mc-tags-list__list-container{display:flex;flex:1 1 100%;flex-wrap:wrap;min-height:var(--mc-tag-list-size-min-height,28px);min-width:0;padding:var(--mc-tag-list-size-padding,1px 6px)}.mc-tags-list__list-container .mc-tag-input{flex:1 1 auto;height:var(--mc-tag-input-size-height,22px);margin:var(--mc-tag-input-size-margin,2px 4px);max-width:100%}.mc-tags-list__cleaner .mc-cleaner{height:30px}"]
             }] }
 ];
 /** @nocollapse */

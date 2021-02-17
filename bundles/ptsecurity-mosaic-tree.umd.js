@@ -1799,7 +1799,7 @@
                         { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
                         { provide: tree.CdkTree, useExisting: McTreeSelection }
                     ],
-                    styles: [".mc-tree-selection{display:block}.mc-tree-option{align-items:center;border:2px solid transparent;display:flex;height:28px;word-wrap:break-word}.mc-tree-option>.mc-icon{cursor:pointer;margin-right:4px}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{cursor:pointer;margin-right:4px}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}"]
+                    styles: [".mc-tree-selection{display:block}.mc-tree-option{align-items:center;border:var(--mc-tree-size-border-width,2px) solid transparent;display:flex;height:var(--mc-tree-size-node-height,28px);word-wrap:break-word}.mc-tree-option>.mc-icon{cursor:pointer;margin-right:4px}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{cursor:pointer;margin-right:4px}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}"]
                 }] }
     ];
     /** @nocollapse */

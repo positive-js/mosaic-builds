@@ -1495,7 +1495,7 @@ McPseudoCheckbox.decorators = [
                 preserveWhitespaces: false,
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 encapsulation: ViewEncapsulation.None,
-                styles: [".mc-pseudo-checkbox{border-radius:3px;border-style:solid;border-width:1px;box-sizing:border-box;cursor:pointer;display:inline-block;flex-shrink:0;height:16px;position:relative;vertical-align:middle;width:16px}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;left:-1px;position:absolute;top:-1px}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark,.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}"]
+                styles: [".mc-pseudo-checkbox{border-radius:3px;border-style:solid;border-width:var(--mc-checkbox-size-border-width,1px);box-sizing:border-box;cursor:pointer;display:inline-block;flex-shrink:0;height:var(--mc-checkbox-size-width,16px);position:relative;vertical-align:middle;width:var(--mc-checkbox-size-width,16px)}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;left:calc(var(--mc-checkbox-size-border-width, 1px)*-1);position:absolute;top:calc(var(--mc-checkbox-size-border-width, 1px)*-1)}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark,.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}"]
             }] }
 ];
 McPseudoCheckbox.propDecorators = {
@@ -1646,7 +1646,7 @@ McOptgroup.decorators = [
                     class: 'mc-optgroup',
                     '[class.mc-disabled]': 'disabled'
                 },
-                styles: [".mc-optgroup-label{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;cursor:default;padding-left:17px;user-select:none}"]
+                styles: [".mc-optgroup-label{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;cursor:default;padding-left:var(--mc-optgroup-size-padding-left,17px);user-select:none}"]
             }] }
 ];
 McOptgroup.propDecorators = {
@@ -1961,7 +1961,7 @@ McOption.decorators = [
                 template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : ''\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-option{-webkit-tap-highlight-color:transparent;align-items:center;border:2px solid transparent;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:row;height:32px;max-width:100%;outline:none;padding:0 16px;position:relative}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{border-radius:inherit;bottom:-2px;left:-2px;pointer-events:none;position:absolute;right:-2px;top:-2px}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}"]
+                styles: [".mc-option{-webkit-tap-highlight-color:transparent;align-items:center;border:var(--mc-option-size-border-width,2px) solid transparent;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:row;height:var(--mc-option-size-height,32px);max-width:100%;outline:none;padding:var(--mc-option-size-padding,0 16px);position:relative}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{border-radius:inherit;bottom:calc(var(--mc-option-size-border-width, 2px)*-1);left:calc(var(--mc-option-size-border-width, 2px)*-1);pointer-events:none;position:absolute;right:calc(var(--mc-option-size-border-width, 2px)*-1);top:calc(var(--mc-option-size-border-width, 2px)*-1)}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}"]
             }] }
 ];
 /** @nocollapse */

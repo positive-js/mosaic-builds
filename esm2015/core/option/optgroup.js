@@ -39,7 +39,7 @@ McOptgroup.decorators = [
                     class: 'mc-optgroup',
                     '[class.mc-disabled]': 'disabled'
                 },
-                styles: [".mc-optgroup-label{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;cursor:default;padding-left:17px;user-select:none}"]
+                styles: [".mc-optgroup-label{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;cursor:default;padding-left:var(--mc-optgroup-size-padding-left,17px);user-select:none}"]
             }] }
 ];
 McOptgroup.propDecorators = {
