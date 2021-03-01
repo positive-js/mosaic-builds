@@ -1007,19 +1007,12 @@
                 }
                 this.selectionModel.toggle(option);
             }
+            else if (this.autoSelect) {
+                this.selectionModel.clear();
+                this.selectionModel.toggle(option);
+            }
             else {
-                if (this.autoSelect) {
-                    if (this.multipleMode !== core.MultipleMode.KEYBOARD) {
-                        this.selectionModel.toggle(option);
-                    }
-                    if (this.multipleMode === core.MultipleMode.KEYBOARD || !this.multiple) {
-                        this.options.forEach(( /**
-                         * @param {?} item
-                         * @return {?}
-                         */function (item) { return item.setSelected(false); }));
-                        option.setSelected(true);
-                    }
-                }
+                this.selectionModel.toggle(option);
             }
             this.emitChangeEvent(option);
             this.reportValueChange();

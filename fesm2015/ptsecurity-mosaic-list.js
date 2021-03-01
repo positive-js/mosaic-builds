@@ -657,20 +657,12 @@ class McListSelection extends McListSelectionMixinBase {
             }
             this.selectionModel.toggle(option);
         }
+        else if (this.autoSelect) {
+            this.selectionModel.clear();
+            this.selectionModel.toggle(option);
+        }
         else {
-            if (this.autoSelect) {
-                if (this.multipleMode !== MultipleMode.KEYBOARD) {
-                    this.selectionModel.toggle(option);
-                }
-                if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
-                    this.options.forEach((/**
-                     * @param {?} item
-                     * @return {?}
-                     */
-                    (item) => item.setSelected(false)));
-                    option.setSelected(true);
-                }
-            }
+            this.selectionModel.toggle(option);
         }
         this.emitChangeEvent(option);
         this.reportValueChange();
