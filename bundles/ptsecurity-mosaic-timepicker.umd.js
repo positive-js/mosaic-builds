@@ -26,8 +26,8 @@
     };
     /** @type {?} */
     var TIMEFORMAT_PLACEHOLDERS = (_a = {},
-        _a[TimeFormats.HHmmss] = '  :  :  ',
-        _a[TimeFormats.HHmm] = '  :  ',
+        _a[TimeFormats.HHmmss] = 'чч:мм:сс',
+        _a[TimeFormats.HHmm] = 'чч:мм',
         _a);
     /** @type {?} */
     var DEFAULT_TIME_FORMAT = TimeFormats.HHmm;
@@ -48,7 +48,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * Generated from: timepicker.ts
+     * Generated from: timepicker.directive.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /**
@@ -75,6 +75,14 @@
     };
     /** @type {?} */
     var uniqueComponentIdSuffix = 0;
+    /** @type {?} */
+    var shortFormatSize = 5;
+    /** @type {?} */
+    var fullFormatSize = 8;
+    /** @type {?} */
+    var validationTooltipShowDelay = 10;
+    /** @type {?} */
+    var validationTooltipHideDelay = 3000;
     /**
      * @template D
      */
@@ -104,15 +112,42 @@
              * \@docs-private
              */
             this.controlType = 'mc-timepicker';
-            this.lastValueValid = false;
             this._format = DEFAULT_TIME_FORMAT;
             this._min = null;
             this._max = null;
+            this.incorrectInput = new core.EventEmitter();
             this.uid = "mc-timepicker-" + uniqueComponentIdSuffix++;
+            this.lastValueValid = false;
+            this.onInput = ( /**
+             * @return {?}
+             */function () {
+                /** @type {?} */
+                var formattedValue = _this.formatUserInput(_this.viewValue);
+                /** @type {?} */
+                var newTimeObj = _this.getDateFromTimeString(formattedValue);
+                _this.lastValueValid = !!newTimeObj;
+                if (!newTimeObj) {
+                    _this.control.updateValueAndValidity();
+                    return;
+                }
+                /** @type {?} */
+                var selectionStart = _this.selectionStart;
+                /** @type {?} */
+                var selectionEnd = _this.selectionEnd;
+                _this.setViewValue(_this.getTimeStringFromDate(newTimeObj, _this.format));
+                _this.selectionStart = selectionStart;
+                _this.selectionEnd = selectionEnd;
+                _this.createSelectionOfTimeComponentInInput((( /** @type {?} */(selectionStart))) + 1);
+                _this.value = newTimeObj;
+                _this.onChange(newTimeObj);
+                _this.stateChanges.next();
+            });
             this.parseValidator = ( /**
              * @return {?}
              */function () {
-                return _this.empty || _this.lastValueValid ? null : { mcTimepickerParse: { text: _this.viewValue } };
+                return _this.focused ||
+                    _this.empty ||
+                    _this.lastValueValid ? null : { mcTimepickerParse: { text: _this.viewValue } };
             });
             this.minValidator = ( /**
              * @param {?} control
@@ -291,6 +326,64 @@
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(McTimepicker.prototype, "mcValidationTooltip", {
+            /**
+             * @param {?} tooltip
+             * @return {?}
+             */
+            set: function (tooltip) {
+                if (!tooltip) {
+                    return;
+                }
+                tooltip.mcMouseEnterDelay = validationTooltipShowDelay;
+                tooltip.mcTrigger = 'manual';
+                tooltip.mcTooltipClass = 'mc-tooltip_warning';
+                tooltip.initElementRefListeners();
+                this.incorrectInput.subscribe(( /**
+                 * @return {?}
+                 */function () {
+                    if (tooltip.isTooltipOpen) {
+                        return;
+                    }
+                    tooltip.show();
+                    setTimeout(( /**
+                     * @return {?}
+                     */function () { return tooltip.hide(); }), validationTooltipHideDelay);
+                }));
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTimepicker.prototype, "hasSelection", {
+            /**
+             * @return {?}
+             */
+            get: function () {
+                return this.selectionStart !== this.selectionEnd;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTimepicker.prototype, "isFullFormat", {
+            /**
+             * @return {?}
+             */
+            get: function () {
+                return this.format === TimeFormats.HHmmss;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTimepicker.prototype, "isShortFormat", {
+            /**
+             * @return {?}
+             */
+            get: function () {
+                return this.format === TimeFormats.HHmm;
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(McTimepicker.prototype, "viewValue", {
             /**
              * @return {?}
@@ -366,6 +459,12 @@
         /**
          * @return {?}
          */
+        McTimepicker.prototype.getSize = function () {
+            return this.isFullFormat ? fullFormatSize : shortFormatSize;
+        };
+        /**
+         * @return {?}
+         */
         McTimepicker.prototype.focus = function () {
             this.elementRef.nativeElement.focus();
         };
@@ -385,46 +484,23 @@
          */
         McTimepicker.prototype.onBlur = function () {
             this.lastValueValid = !!this.getDateFromTimeString(this.viewValue);
-            this.control.updateValueAndValidity();
             this.focusChanged(false);
+            this.control.updateValueAndValidity();
         };
         /**
          * @param {?} $event
          * @return {?}
          */
         McTimepicker.prototype.onPaste = function ($event) {
-            /** @type {?} */
-            var newTimeObj = this.getDateFromTimeString($event.clipboardData.getData('text'));
-            if (!newTimeObj) {
-                return;
-            }
             $event.preventDefault();
-            this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.getTimeStringFromDate(newTimeObj, this.format));
-            this.value = newTimeObj;
-            this.onChange(newTimeObj);
-            this.stateChanges.next();
-        };
-        /**
-         * @return {?}
-         */
-        McTimepicker.prototype.onInput = function () {
             /** @type {?} */
-            var formattedValue = this.formatUserInput(this.viewValue);
+            var value = this.formatUserPaste($event.clipboardData.getData('text'));
             /** @type {?} */
-            var newTimeObj = this.getDateFromTimeString(formattedValue);
-            this.lastValueValid = !!newTimeObj;
+            var newTimeObj = this.getDateFromTimeString(value);
             if (!newTimeObj) {
-                this.control.updateValueAndValidity();
                 return;
             }
-            /** @type {?} */
-            var selectionStart = this.selectionStart;
-            /** @type {?} */
-            var selectionEnd = this.selectionEnd;
-            this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.getTimeStringFromDate(newTimeObj, this.format));
-            this.selectionStart = selectionStart;
-            this.selectionEnd = selectionEnd;
-            this.createSelectionOfTimeComponentInInput((( /** @type {?} */(selectionStart))) + 1);
+            this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.format));
             this.value = newTimeObj;
             this.onChange(newTimeObj);
             this.stateChanges.next();
@@ -442,12 +518,26 @@
          * @return {?}
          */
         McTimepicker.prototype.onKeyDown = function (event) {
-            var _this = this;
             // tslint:disable-next-line: deprecation
             /** @type {?} */
             var keyCode = event.keyCode;
-            if (keycodes.hasModifierKey(event)) {
+            if (keycodes.isLetterKey(event) && !event.ctrlKey && !event.metaKey) {
+                event.preventDefault();
+                this.incorrectInput.emit();
+            }
+            else if ((keycodes.hasModifierKey(event) && (keycodes.isVerticalMovement(keyCode) || keycodes.isHorizontalMovement(keyCode))) ||
+                event.ctrlKey || event.metaKey ||
+                [keycodes.DELETE, keycodes.BACKSPACE].includes(keyCode)) {
                 rxjs.noop();
+            }
+            else if (keyCode === keycodes.SPACE) {
+                this.spaceKeyHandler(event);
+            }
+            else if ([keycodes.HOME, keycodes.PAGE_UP].includes(keyCode)) {
+                this.createSelectionOfTimeComponentInInput(0);
+            }
+            else if ([keycodes.END, keycodes.PAGE_DOWN].includes(keyCode)) {
+                this.createSelectionOfTimeComponentInInput(this.viewValue.length);
             }
             else if ([keycodes.UP_ARROW, keycodes.DOWN_ARROW].includes(keyCode)) {
                 event.preventDefault();
@@ -456,10 +546,22 @@
             else if ([keycodes.LEFT_ARROW, keycodes.RIGHT_ARROW].includes(keyCode)) {
                 this.horizontalArrowKeyHandler(keyCode);
             }
+            else if (/^\D$/.test(event.key)) {
+                event.preventDefault();
+                /** @type {?} */
+                var newValue = this.getNewValue(event.key, ( /** @type {?} */(this.selectionStart)));
+                /** @type {?} */
+                var formattedValue = this.replaceSymbols(newValue);
+                if (newValue !== formattedValue) {
+                    this.setViewValue(formattedValue);
+                    setTimeout(this.onInput);
+                }
+                else {
+                    this.incorrectInput.emit();
+                }
+            }
             else {
-                setTimeout(( /**
-                 * @return {?}
-                 */function () { return _this.onInput(); }));
+                setTimeout(this.onInput);
             }
         };
         /**
@@ -510,14 +612,72 @@
          * @param {?} value
          * @return {?}
          */
-        McTimepicker.prototype.formatUserInput = function (value) {
-            /** @type {?} */
-            var match = value.match(/(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
-            if (match && match.groups) {
-                var _a = match.groups, number = _a.number, symbol = _a.symbol;
-                return value.replace(number + symbol, "0" + number);
+        McTimepicker.prototype.formatUserPaste = function (value) {
+            var _a;
+            if (value.match(AM_PM_FORMAT_REGEXP)) {
+                return value;
             }
-            return value;
+            /** @type {?} */
+            var match = value.match(/^(\D+)?(?<hours>\d+)?(\D+)?(\D+)?(?<minutes>\d+)?(\D+)?(\D+)?(?<seconds>\d+)?(\D+)?$/);
+            if (!((_a = match === null || match === void 0 ? void 0 : match.groups) === null || _a === void 0 ? void 0 : _a.hours)) {
+                this.setViewValue(value);
+                return value;
+            }
+            return this.replaceNumbers(Object.values(match.groups)
+                // tslint:disable-next-line:no-magic-numbers
+                .map(( /**
+         * @param {?} group
+         * @return {?}
+         */function (group) { return (group || '').padStart(2, '0'); }))
+                .join(':'));
+        };
+        /**
+         * @private
+         * @param {?} value
+         * @return {?}
+         */
+        McTimepicker.prototype.formatUserInput = function (value) {
+            return this.replaceNumbers(this.replaceSymbols(value));
+        };
+        /**
+         * @private
+         * @param {?} value
+         * @return {?}
+         */
+        McTimepicker.prototype.replaceSymbols = function (value) {
+            /** @type {?} */
+            var formattedValue = value;
+            /** @type {?} */
+            var match = value.match(/^(\d\d:){0,2}(?<number>[0-9])(?<symbol>\W)(:\d\d){0,2}$/);
+            if (match === null || match === void 0 ? void 0 : match.groups) {
+                var _b = match.groups, number = _b.number, symbol = _b.symbol;
+                formattedValue = value.replace(number + symbol, "0" + number);
+            }
+            return formattedValue;
+        };
+        /**
+         * @private
+         * @param {?} value
+         * @return {?}
+         */
+        McTimepicker.prototype.replaceNumbers = function (value) {
+            /** @type {?} */
+            var formattedValue = value;
+            /** @type {?} */
+            var match = value.match(/^(?<hours>\d{0,4}):?(?<minutes>\d{0,4}):?(?<seconds>\d{0,4})$/);
+            if (match === null || match === void 0 ? void 0 : match.groups) {
+                var _b = match.groups, hours = _b.hours, minutes = _b.minutes, seconds = _b.seconds;
+                if (hours.length && parseInt(hours) > HOURS_PER_DAY) {
+                    formattedValue = formattedValue.replace(hours, HOURS_PER_DAY.toString());
+                }
+                if (minutes.length && parseInt(minutes) > MINUTES_PER_HOUR) {
+                    formattedValue = formattedValue.replace(minutes, MINUTES_PER_HOUR.toString());
+                }
+                if (seconds.length && parseInt(seconds) > SECONDS_PER_MINUTE) {
+                    formattedValue = formattedValue.replace(seconds, SECONDS_PER_MINUTE.toString());
+                }
+            }
+            return formattedValue;
         };
         /**
          * Checks whether the input is invalid based on the native validation.
@@ -528,6 +688,41 @@
             /** @type {?} */
             var validity = (( /** @type {?} */(this.elementRef.nativeElement))).validity;
             return validity && validity.badInput;
+        };
+        /**
+         * @private
+         * @param {?} event
+         * @return {?}
+         */
+        McTimepicker.prototype.spaceKeyHandler = function (event) {
+            event.preventDefault();
+            if (this.selectionStart === this.selectionEnd) {
+                /** @type {?} */
+                var value = this.getNewValue(event.key, ( /** @type {?} */(this.selectionStart)));
+                /** @type {?} */
+                var formattedValue = this.replaceSymbols(value);
+                if (value !== formattedValue) {
+                    this.setViewValue(formattedValue);
+                    setTimeout(this.onInput);
+                }
+            }
+            else if (this.selectionStart !== this.selectionEnd) {
+                /** @type {?} */
+                var cursorPos = ( /** @type {?} */(this.selectionStart));
+                /** @type {?} */
+                var nextDividerPos = this.viewValue.indexOf(':', cursorPos);
+                cursorPos = nextDividerPos ? nextDividerPos + 1 : 0;
+                this.createSelectionOfTimeComponentInInput(cursorPos);
+            }
+        };
+        /**
+         * @private
+         * @param {?} key
+         * @param {?} position
+         * @return {?}
+         */
+        McTimepicker.prototype.getNewValue = function (key, position) {
+            return [this.viewValue.slice(0, position), key, this.viewValue.slice(position)].join('');
         };
         /**
          * @private
@@ -797,12 +992,20 @@
         };
         /**
          * @private
+         * @param {?} value
+         * @return {?}
+         */
+        McTimepicker.prototype.setViewValue = function (value) {
+            this.renderer.setProperty(this.elementRef.nativeElement, 'value', value);
+        };
+        /**
+         * @private
          * @return {?}
          */
         McTimepicker.prototype.updateView = function () {
             /** @type {?} */
             var formattedValue = this.getTimeStringFromDate(this.value, this.format);
-            this.renderer.setProperty(this.elementRef.nativeElement, 'value', formattedValue);
+            this.setViewValue(formattedValue);
         };
         /**
          * @private
@@ -819,15 +1022,17 @@
     McTimepicker.decorators = [
         { type: core.Directive, args: [{
                     selector: 'input[mcTimepicker]',
-                    exportAs: 'mcTimepickerInput',
+                    exportAs: 'mcTimepicker',
                     host: {
-                        class: 'mc-timepicker mc-input',
+                        class: 'mc-input mc-timepicker',
                         // Native input properties that are overwritten by Angular inputs need to be synced with
                         // the native input element. Otherwise property bindings for those don't work.
                         '[attr.id]': 'id',
                         '[attr.placeholder]': 'placeholder',
                         '[attr.disabled]': 'disabled || null',
                         '[attr.required]': 'required',
+                        '[attr.size]': 'getSize()',
+                        '[attr.autocomplete]': '"off"',
                         '(blur)': 'onBlur()',
                         '(focus)': 'focusChanged(true)',
                         '(paste)': 'onPaste($event)',
@@ -854,7 +1059,9 @@
         format: [{ type: core.Input }],
         min: [{ type: core.Input }],
         max: [{ type: core.Input }],
-        value: [{ type: core.Input }]
+        value: [{ type: core.Input }],
+        mcValidationTooltip: [{ type: core.Input }],
+        incorrectInput: [{ type: core.Output }]
     };
     if (false) {
         /**
@@ -883,16 +1090,6 @@
          * @type {?}
          */
         McTimepicker.prototype.placeholder;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTimepicker.prototype.lastValueValid;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTimepicker.prototype.control;
         /**
          * @type {?}
          * @private
@@ -928,6 +1125,8 @@
          * @private
          */
         McTimepicker.prototype._value;
+        /** @type {?} */
+        McTimepicker.prototype.incorrectInput;
         /**
          * @type {?}
          * @private
@@ -942,12 +1141,24 @@
          * @type {?}
          * @private
          */
+        McTimepicker.prototype.lastValueValid;
+        /**
+         * @type {?}
+         * @private
+         */
+        McTimepicker.prototype.control;
+        /**
+         * @type {?}
+         * @private
+         */
         McTimepicker.prototype.onChange;
         /**
          * @type {?}
          * @private
          */
         McTimepicker.prototype.onTouched;
+        /** @type {?} */
+        McTimepicker.prototype.onInput;
         /**
          * @type {?}
          * @private

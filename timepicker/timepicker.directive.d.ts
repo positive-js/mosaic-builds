@@ -1,7 +1,8 @@
-import { ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { ElementRef, EventEmitter, OnDestroy, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, ValidationErrors, Validator } from '@angular/forms';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 import { TimeFormats } from './timepicker.constants';
 /** @docs-private */
@@ -9,9 +10,9 @@ export declare const MC_TIMEPICKER_VALUE_ACCESSOR: any;
 /** @docs-private */
 export declare const MC_TIMEPICKER_VALIDATORS: any;
 export declare class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, ControlValueAccessor, Validator {
-    private readonly elementRef;
+    private elementRef;
     private dateAdapter;
-    private readonly renderer;
+    private renderer;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -33,8 +34,6 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy
      * @docs-private
      */
     placeholder: string;
-    private lastValueValid;
-    private control;
     get disabled(): boolean;
     set disabled(value: boolean);
     private _disabled;
@@ -60,6 +59,11 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy
     get value(): D | null;
     set value(value: D | null);
     private _value;
+    set mcValidationTooltip(tooltip: McTooltip);
+    incorrectInput: EventEmitter<void>;
+    get hasSelection(): boolean;
+    get isFullFormat(): boolean;
+    get isShortFormat(): boolean;
     get viewValue(): string;
     get ngControl(): any;
     /**
@@ -72,16 +76,19 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy
     get selectionEnd(): number | null;
     set selectionEnd(value: number | null);
     private readonly uid;
-    private validator;
+    private readonly validator;
+    private lastValueValid;
+    private control;
     private onChange;
     private onTouched;
     constructor(elementRef: ElementRef, dateAdapter: DateAdapter<any>, renderer: Renderer2);
     ngOnDestroy(): void;
+    getSize(): number;
     focus(): void;
     focusChanged(isFocused: boolean): void;
     onBlur(): void;
     onPaste($event: any): void;
-    onInput(): void;
+    onInput: () => void;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -94,9 +101,14 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy
     registerOnChange(fn: (value: D) => void): void;
     registerOnTouched(fn: () => void): void;
     setDisabledState(isDisabled: boolean): void;
+    private formatUserPaste;
     private formatUserInput;
+    private replaceSymbols;
+    private replaceNumbers;
     /** Checks whether the input is invalid based on the native validation. */
     private isBadInput;
+    private spaceKeyHandler;
+    private getNewValue;
     private verticalArrowKeyHandler;
     private horizontalArrowKeyHandler;
     private createSelectionOfTimeComponentInInput;
@@ -117,6 +129,7 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy
     private maxValidator;
     private compareTime;
     private getValidDateOrNull;
+    private setViewValue;
     private updateView;
     private setControl;
     private validatorOnChange;

@@ -564,7 +564,7 @@
                     host: {
                         '(body:click)': 'this.handleBodyInteraction()'
                     },
-                    styles: [".mc-tooltip{box-sizing:border-box;display:block;list-style:none;max-width:var(--mc-tooltip-size-max-width,240px);position:relative;visibility:visible;white-space:pre-line;z-index:1060}.mc-tooltip_placement-top{padding-bottom:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-right{padding-left:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-bottom{padding-top:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-left{padding-right:var(--mc-tooltip-size-distance,9px)}.mc-tooltip-inner{border-radius:var(--mc-tooltip-size-border-radius,3px);height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;min-height:var(--mc-tooltip-size-min-height,32px);padding:var(--mc-tooltip-size-padding,8px 16px);text-align:left;text-decoration:none;vertical-align:center}.mc-tooltip-arrow{height:var(--mc-tooltip-size-arrow-size,12px);position:absolute;transform:rotate(45deg);width:var(--mc-tooltip-size-arrow-size,12px)}.mc-tooltip_placement-top .mc-tooltip-arrow{bottom:var(--mc-tooltip-size-distance,9px)-var(--mc-tooltip-size-arrow-width,5px);left:50%;margin-left:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1)}.mc-tooltip_placement-right .mc-tooltip-arrow{left:var(--mc-tooltip-size-distance,9px)-var(--mc-tooltip-size-arrow-width,5px);margin-top:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1);top:16px}.mc-tooltip_placement-left .mc-tooltip-arrow{margin-top:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1);right:var(--mc-tooltip-size-distance,9px)-var(--mc-tooltip-size-arrow-width,5px);top:16px}.mc-tooltip_placement-bottom .mc-tooltip-arrow{left:50%;margin-left:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1);top:var(--mc-tooltip-size-distance,9px)-var(--mc-tooltip-size-arrow-width,5px)}"]
+                    styles: [".mc-tooltip{box-sizing:border-box;display:block;list-style:none;max-width:var(--mc-tooltip-size-max-width,240px);position:relative;visibility:visible;white-space:pre-line;z-index:1060}.mc-tooltip_placement-top{padding-bottom:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-right{padding-left:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-bottom{padding-top:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-left{padding-right:var(--mc-tooltip-size-distance,9px)}.mc-tooltip-inner{border-radius:var(--mc-tooltip-size-border-radius,3px);height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;padding:var(--mc-tooltip-size-padding,8px 16px);text-align:left;text-decoration:none;vertical-align:center}.mc-tooltip-arrow{height:var(--mc-tooltip-size-arrow-size,12px);position:absolute;transform:rotate(45deg);width:var(--mc-tooltip-size-arrow-size,12px)}.mc-tooltip_placement-top .mc-tooltip-arrow{bottom:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));left:50%;margin-left:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1)}.mc-tooltip_placement-right .mc-tooltip-arrow{left:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));margin-top:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1);top:16px}.mc-tooltip_placement-left .mc-tooltip-arrow{margin-top:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1);right:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));top:16px}.mc-tooltip_placement-bottom .mc-tooltip-arrow{left:50%;margin-left:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1);top:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px))}"]
                 }] }
     ];
     /** @nocollapse */
@@ -1090,6 +1090,7 @@
          */
         McTooltip.prototype.initElementRefListeners = function () {
             var _this = this;
+            this.clearListeners();
             if (this.mcTrigger === 'hover') {
                 this.manualListeners
                     .set('mouseenter', ( /**
@@ -1118,6 +1119,20 @@
              * @return {?}
              */function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
             }
+        };
+        /**
+         * @return {?}
+         */
+        McTooltip.prototype.clearListeners = function () {
+            var _this = this;
+            this.manualListeners.forEach(( /**
+             * @param {?} listener
+             * @param {?} event
+             * @return {?}
+             */function (listener, event) {
+                _this.elementRef.nativeElement.removeEventListener(event, listener);
+            }));
+            this.manualListeners.clear();
         };
         /**
          * @return {?}

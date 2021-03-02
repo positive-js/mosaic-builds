@@ -127,6 +127,7 @@ export declare class McTooltip implements OnInit, OnDestroy {
     handleKeydown(e: KeyboardEvent): void;
     handleTouchend(): void;
     initElementRefListeners(): void;
+    clearListeners(): void;
     show(): void;
     hide(): void;
     /** Updates the position of the current tooltip. */

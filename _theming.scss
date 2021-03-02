@@ -96,7 +96,7 @@
 
 
 // Do not edit directly
-// Generated on Fri, 05 Feb 2021 11:12:27 GMT
+// Generated on Wed, 24 Feb 2021 10:23:59 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -664,6 +664,7 @@ $textarea-size-min-height: 50px;
 $textarea-size-padding: 5px 16px;
 $textarea-font-default: body;
 $textarea-font-mono: body-mono;
+$timepicker-size-padding-right: 16px;
 $toggle-light-color-scheme-border: #B3B3B3;
 $toggle-light-color-scheme-background: linear-gradient(to bottom, #E6E6E6, #F0F0F0);
 $toggle-light-color-scheme-circle-border: #B3B3B3;
@@ -690,7 +691,6 @@ $tooltip-dark-color-scheme-background: white;
 $tooltip-dark-color-scheme-text: white;
 $tooltip-dark-color-scheme-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 $tooltip-size-max-width: 240px;
-$tooltip-size-min-height: 32px; // 16px for font + 16px for padding = total 32px
 $tooltip-size-border-radius: 3px;
 $tooltip-size-arrow-size: 12px;
 $tooltip-size-arrow-width: 5px;
@@ -1255,7 +1255,7 @@ A100: #4D4D4D,
 
 /*
   Do not edit directly
-  Generated on Fri, 05 Feb 2021 11:12:27 GMT
+  Generated on Fri, 19 Feb 2021 10:23:21 GMT
 */
 
 $typography-display-1-font-size: 56px !default;
@@ -3669,6 +3669,10 @@ $mc-datepicker-today-fade-amount: 0.2;
     .mc-form-field {
         background-color: map-get($form-field, background);
 
+        & .mc-form-field__hint {
+            color: map-get($foreground, text-less-contrast);
+        }
+
         &:not(.mc-form-field_without-borders) {
             .mc-form-field__container {
                 border-color: map-get($form-field, border);
@@ -3678,12 +3682,18 @@ $mc-datepicker-today-fade-amount: 0.2;
                 border-color: map-get($form-field, state-hover-border);
             }
 
-            &.ng-invalid .mc-form-field__container {
-                border-color: map-get($form-field, state-invalid-border);
-                background-color: map-get($form-field, state-invalid-background);
+            &.ng-invalid {
+                & .mc-form-field__container {
+                    border-color: map-get($form-field, state-invalid-border);
+                    background-color: map-get($form-field, state-invalid-background);
 
-                .mc-input,
-                .mc-textarea {
+                    .mc-input,
+                    .mc-textarea {
+                        color: mc-color($error);
+                    }
+                }
+
+                & .mc-form-field__hint {
                     color: mc-color($error);
                 }
             }
@@ -3717,10 +3727,6 @@ $mc-datepicker-today-fade-amount: 0.2;
             }
             /* stylelint-enable no-descending-specificity */
         }
-    }
-
-    .mc-form-field__hint {
-        color: map-get($foreground, text-less-contrast);
     }
 }
 
