@@ -307,27 +307,15 @@
 
     var McCardBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
-        /**
-         * @param {?} _elementRef
-         */
         function McCardBase(_elementRef) {
             this._elementRef = _elementRef;
         }
         return McCardBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McCardBase.prototype._elementRef;
-    }
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McCardBaseMixin = core.mixinColor(McCardBase);
     var McCard = /** @class */ (function (_super) {
         __extends(McCard, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} _focusMonitor
-         */
         function McCard(elementRef, _focusMonitor) {
             var _this = _super.call(this, elementRef) || this;
             _this._focusMonitor = _focusMonitor;
@@ -339,48 +327,27 @@
             return _this;
         }
         Object.defineProperty(McCard.prototype, "tabIndex", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this.readonly ? null : this._tabIndex;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._tabIndex = value;
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McCard.prototype.ngOnDestroy = function () {
             this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
         };
-        /**
-         * @return {?}
-         */
         McCard.prototype.focus = function () {
             this.hostElement.focus();
         };
-        /**
-         * @param {?} $event
-         * @return {?}
-         */
         McCard.prototype.onClick = function ($event) {
             if (!this.readonly) {
                 $event.stopPropagation();
                 this.selectedChange.emit(!this.selected);
             }
         };
-        /**
-         * @param {?} $event
-         * @return {?}
-         */
         McCard.prototype.onKeyDown = function ($event) {
             // tslint:disable-next-line:deprecation
             switch ($event.keyCode) {
@@ -394,10 +361,6 @@
             }
         };
         Object.defineProperty(McCard.prototype, "hostElement", {
-            /**
-             * @private
-             * @return {?}
-             */
             get: function () {
                 return this._elementRef.nativeElement;
             },
@@ -421,8 +384,8 @@
                         '(keydown)': 'onKeyDown($event)',
                         '(click)': 'onClick($event)'
                     },
-                    styles: [".mc-card{border-left:var(--mc-card-size-vertical-line,4px) solid transparent;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;position:relative}.mc-card:focus{outline:none}.mc-card .mc-card__overlay{background:transparent;bottom:0;left:0;pointer-events:none;position:absolute;right:0;top:0}.mc-card.mc-card_readonly{cursor:auto}"]
-                }] }
+                    styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer;border-left:var(--mc-card-size-vertical-line,4px) solid transparent}.mc-card:focus{outline:none}.mc-card .mc-card__overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;background:transparent}.mc-card.mc-card_readonly{cursor:auto}"]
+                },] }
     ];
     /** @nocollapse */
     McCard.ctorParameters = function () { return [
@@ -435,30 +398,7 @@
         selectedChange: [{ type: core$1.Output }],
         tabIndex: [{ type: core$1.Input }]
     };
-    if (false) {
-        /** @type {?} */
-        McCard.prototype.readonly;
-        /** @type {?} */
-        McCard.prototype.selected;
-        /** @type {?} */
-        McCard.prototype.selectedChange;
-        /**
-         * @type {?}
-         * @private
-         */
-        McCard.prototype._tabIndex;
-        /**
-         * @type {?}
-         * @private
-         */
-        McCard.prototype._focusMonitor;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: card.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McCardModule = /** @class */ (function () {
         function McCardModule() {
         }
@@ -477,21 +417,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-card.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.McCard = McCard;

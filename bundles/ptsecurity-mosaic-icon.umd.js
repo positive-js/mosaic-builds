@@ -319,27 +319,15 @@
     ];
     var McIconBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
-        /**
-         * @param {?} _elementRef
-         */
         function McIconBase(_elementRef) {
             this._elementRef = _elementRef;
         }
         return McIconBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McIconBase.prototype._elementRef;
-    }
     // tslint:disable-next-line: naming-convention
-    /** @type {?} */
     var McIconMixinBase = core$1.mixinColor(McIconBase, core$1.ThemePalette.Empty);
     var McIcon = /** @class */ (function (_super) {
         __extends(McIcon, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} iconName
-         */
         function McIcon(elementRef, iconName) {
             var _this = _super.call(this, elementRef) || this;
             if (iconName) {
@@ -347,9 +335,6 @@
             }
             return _this;
         }
-        /**
-         * @return {?}
-         */
         McIcon.prototype.getHostElement = function () {
             return this._elementRef.nativeElement;
         };
@@ -363,7 +348,7 @@
                     encapsulation: core.ViewEncapsulation.None,
                     inputs: ['color'],
                     styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"]
-                }] }
+                },] }
     ];
     /** @nocollapse */
     McIcon.ctorParameters = function () { return [
@@ -371,11 +356,6 @@
         { type: String, decorators: [{ type: core.Attribute, args: ['mc-icon',] }] }
     ]; };
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: icon.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McIconModule = /** @class */ (function () {
         function McIconModule() {
         }
@@ -400,21 +380,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-icon.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.McIcon = McIcon;

@@ -305,36 +305,21 @@
         return value;
     }
 
-    /** @type {?} */
     var idIterator = 0;
-    /** @type {?} */
     var MIN_PERCENT = 0;
-    /** @type {?} */
     var MAX_PERCENT = 100;
     var McProgressSpinnerBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
-        /**
-         * @param {?} _elementRef
-         */
         function McProgressSpinnerBase(_elementRef) {
             this._elementRef = _elementRef;
         }
         return McProgressSpinnerBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McProgressSpinnerBase.prototype._elementRef;
-    }
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McProgressSpinnerMixinBase = core.mixinColor(McProgressSpinnerBase, core.ThemePalette.Primary);
-    /** @type {?} */
     var MAX_DASH_ARRAY = 273;
     var McProgressSpinner = /** @class */ (function (_super) {
         __extends(McProgressSpinner, _super);
-        /**
-         * @param {?} elementRef
-         */
         function McProgressSpinner(elementRef) {
             var _this = _super.call(this, elementRef) || this;
             _this.id = "mc-progress-spinner-" + idIterator++;
@@ -343,9 +328,6 @@
             return _this;
         }
         Object.defineProperty(McProgressSpinner.prototype, "percentage", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return Math.max(MIN_PERCENT, Math.min(MAX_PERCENT, this.value)) / MAX_PERCENT;
             },
@@ -353,9 +335,6 @@
             configurable: true
         });
         Object.defineProperty(McProgressSpinner.prototype, "dashOffsetPercent", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return MAX_DASH_ARRAY - this.percentage * MAX_DASH_ARRAY + "%";
             },
@@ -375,8 +354,8 @@
                         class: 'mc-progress-spinner',
                         '[attr.id]': 'id'
                     },
-                    styles: ["@-webkit-keyframes mc-progress-spinner-indeterminate{to{transform:rotate(270deg)}}@keyframes mc-progress-spinner-indeterminate{to{transform:rotate(270deg)}}.mc-progress-spinner{display:inline-block;height:var(--mc-progress-spinner-size-size,16px);overflow:hidden;width:var(--mc-progress-spinner-size-size,16px)}.mc-progress-spinner__circle{fill:none;stroke:#000;stroke-dasharray:273%;stroke-width:13%;transform-origin:center center;transition:stroke-dashoffset .3s}.mc-progress-spinner__inner{height:100%;transform:rotate(-90deg);width:100%}.mc-progress-spinner__inner--indeterminate{-webkit-animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite;animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite}.mc-progress-spinner__inner--indeterminate .mc-progress-spinner__circle{stroke-dashoffset:80%}.mc-progress-spinner__svg{height:100%;width:100%}"]
-                }] }
+                    styles: ["@-webkit-keyframes mc-progress-spinner-indeterminate{to{transform:rotate(270deg)}}@keyframes mc-progress-spinner-indeterminate{to{transform:rotate(270deg)}}.mc-progress-spinner{display:inline-block;width:var(--mc-progress-spinner-size-size,16px);height:var(--mc-progress-spinner-size-size,16px);overflow:hidden}.mc-progress-spinner__circle{fill:none;stroke:#000;stroke-dasharray:273%;stroke-width:13%;transition:stroke-dashoffset .3s;transform-origin:center center}.mc-progress-spinner__inner{width:100%;height:100%;transform:rotate(-90deg)}.mc-progress-spinner__inner--indeterminate{-webkit-animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite;animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite}.mc-progress-spinner__inner--indeterminate .mc-progress-spinner__circle{stroke-dashoffset:80%}.mc-progress-spinner__svg{width:100%;height:100%}"]
+                },] }
     ];
     /** @nocollapse */
     McProgressSpinner.ctorParameters = function () { return [
@@ -387,20 +366,7 @@
         value: [{ type: core$1.Input }],
         mode: [{ type: core$1.Input }]
     };
-    if (false) {
-        /** @type {?} */
-        McProgressSpinner.prototype.id;
-        /** @type {?} */
-        McProgressSpinner.prototype.value;
-        /** @type {?} */
-        McProgressSpinner.prototype.mode;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: progress-spinner.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McProgressSpinnerModule = /** @class */ (function () {
         function McProgressSpinnerModule() {
         }
@@ -422,21 +388,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-progress-spinner.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.McProgressSpinner = McProgressSpinner;

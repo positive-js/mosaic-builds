@@ -306,28 +306,18 @@
     }
 
     var McButtonCssStyler = /** @class */ (function () {
-        /**
-         * @param {?} elementRef
-         * @param {?} renderer
-         */
         function McButtonCssStyler(elementRef, renderer) {
             this.renderer = renderer;
             this.icons = [];
             this.nativeElement = elementRef.nativeElement;
         }
         Object.defineProperty(McButtonCssStyler.prototype, "isIconButton", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this.icons.length > 0;
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McButtonCssStyler.prototype.ngAfterContentInit = function () {
             /**
              * Here we had to use native selectors due to number of angular issues about ContentChildren limitations
@@ -338,16 +328,10 @@
             this.icons = Array.from(this.nativeElement.querySelectorAll('.mc-icon'));
             this.addClassModificatorForIcons();
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McButtonCssStyler.prototype.addClassModificatorForIcons = function () {
-            /** @type {?} */
             var twoIcons = 2;
             var _a = __read(this.icons, 2), firstIconElement = _a[0], secondIconElement = _a[1];
             if (this.icons.length === 1) {
-                /** @type {?} */
                 var COMMENT_NODE = 8;
                 if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {
                     this.renderer.addClass(firstIconElement, 'mc-icon_left');
@@ -379,64 +363,29 @@
         { type: core.ElementRef },
         { type: core.Renderer2 }
     ]; };
-    if (false) {
-        /** @type {?} */
-        McButtonCssStyler.prototype.nativeElement;
-        /**
-         * @type {?}
-         * @private
-         */
-        McButtonCssStyler.prototype.icons;
-        /**
-         * @type {?}
-         * @private
-         */
-        McButtonCssStyler.prototype.renderer;
-    }
     var McButtonBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
-        /**
-         * @param {?} _elementRef
-         */
         function McButtonBase(_elementRef) {
             this._elementRef = _elementRef;
         }
         return McButtonBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McButtonBase.prototype._elementRef;
-    }
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McButtonMixinBase = core$1.mixinTabIndex(core$1.mixinColor(core$1.mixinDisabled(McButtonBase)));
     var McButton = /** @class */ (function (_super) {
         __extends(McButton, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} _focusMonitor
-         */
         function McButton(elementRef, _focusMonitor) {
             var _this = _super.call(this, elementRef) || this;
             _this._focusMonitor = _focusMonitor;
             _this._focusMonitor.monitor(_this._elementRef.nativeElement, true);
             return _this;
         }
-        /**
-         * @return {?}
-         */
         McButton.prototype.ngOnDestroy = function () {
             this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
         };
-        /**
-         * @return {?}
-         */
         McButton.prototype.focus = function () {
             this.getHostElement().focus();
         };
-        /**
-         * @return {?}
-         */
         McButton.prototype.getHostElement = function () {
             return this._elementRef.nativeElement;
         };
@@ -452,34 +401,19 @@
                     host: {
                         '[attr.disabled]': 'disabled || null'
                     },
-                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;border:none;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px);box-sizing:border-box;cursor:pointer;display:inline-block;outline:none;position:relative;text-align:center;text-decoration:none;user-select:none;vertical-align:baseline;white-space:nowrap}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default;pointer-events:none}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{line-height:20px;margin:auto}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{border-radius:inherit;bottom:-1px;left:-1px;pointer-events:none;position:absolute;right:-1px;top:-1px}"]
-                }] }
+                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px)}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{pointer-events:none;cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}"]
+                },] }
     ];
     /** @nocollapse */
     McButton.ctorParameters = function () { return [
         { type: core.ElementRef },
         { type: a11y.FocusMonitor }
     ]; };
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        McButton.prototype._focusMonitor;
-    }
     var McAnchor = /** @class */ (function (_super) {
         __extends(McAnchor, _super);
-        /**
-         * @param {?} focusMonitor
-         * @param {?} elementRef
-         */
         function McAnchor(focusMonitor, elementRef) {
             return _super.call(this, elementRef, focusMonitor) || this;
         }
-        /**
-         * @param {?} event
-         * @return {?}
-         */
         McAnchor.prototype.haltDisabledEvents = function (event) {
             if (this.disabled) {
                 event.preventDefault();
@@ -500,8 +434,8 @@
                         '[attr.disabled]': 'disabled || null',
                         '(click)': 'haltDisabledEvents($event)'
                     },
-                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;border:none;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px);box-sizing:border-box;cursor:pointer;display:inline-block;outline:none;position:relative;text-align:center;text-decoration:none;user-select:none;vertical-align:baseline;white-space:nowrap}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default;pointer-events:none}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{line-height:20px;margin:auto}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{border-radius:inherit;bottom:-1px;left:-1px;pointer-events:none;position:absolute;right:-1px;top:-1px}"]
-                }] }
+                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px)}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{pointer-events:none;cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}"]
+                },] }
     ];
     /** @nocollapse */
     McAnchor.ctorParameters = function () { return [
@@ -509,11 +443,6 @@
         { type: core.ElementRef }
     ]; };
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: button.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McButtonModule = /** @class */ (function () {
         function McButtonModule() {
         }
@@ -540,21 +469,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-button.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.McAnchor = McAnchor;

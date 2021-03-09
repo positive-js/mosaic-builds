@@ -305,44 +305,26 @@
         return value;
     }
 
-    /** @type {?} */
     var nextUniqueId = 0;
     var McToggleBase = /** @class */ (function () {
         // tslint:disable-next-line: naming-convention
-        /**
-         * @param {?} _elementRef
-         */
         function McToggleBase(_elementRef) {
             this._elementRef = _elementRef;
         }
         return McToggleBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McToggleBase.prototype._elementRef;
-    }
     // tslint:disable-next-line: naming-convention
-    /** @type {?} */
     var McToggleMixinBase = core.mixinTabIndex(core.mixinColor(core.mixinDisabled(McToggleBase), core.ThemePalette.Primary));
     var McToggleChange = /** @class */ (function () {
         function McToggleChange() {
         }
         return McToggleChange;
     }());
-    if (false) {
-        /** @type {?} */
-        McToggleChange.prototype.source;
-        /** @type {?} */
-        McToggleChange.prototype.checked;
-    }
     var McToggleComponent = /** @class */ (function (_super) {
         __extends(McToggleComponent, _super);
-        /**
-         * @param {?} _elementRef
-         * @param {?} _focusMonitor
-         * @param {?} _changeDetectorRef
-         */
-        function McToggleComponent(_elementRef, _focusMonitor, _changeDetectorRef) {
+        function McToggleComponent(
+        // tslint:disable-next-line:naming-convention
+        _elementRef, _focusMonitor, _changeDetectorRef) {
             var _this = _super.call(this, _elementRef) || this;
             _this._elementRef = _elementRef;
             _this._focusMonitor = _focusMonitor;
@@ -356,22 +338,14 @@
             _this.change = new core$1.EventEmitter();
             _this.uniqueId = "mc-toggle-" + ++nextUniqueId;
             // tslint:disable-next-line:no-empty
-            _this.onTouchedCallback = ( /**
-             * @return {?}
-             */function () { });
+            _this.onTouchedCallback = function () { };
             // tslint:disable-next-line:no-empty
-            _this.onChangeCallback = ( /**
-             * @param {?} _
-             * @return {?}
-             */function (_) { });
+            _this.onChangeCallback = function (_) { };
             _this.id = _this.uniqueId;
             _this._focusMonitor.monitor(_this._elementRef.nativeElement, true);
             return _this;
         }
         Object.defineProperty(McToggleComponent.prototype, "inputId", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return (this.id || this.uniqueId) + "-input";
             },
@@ -379,16 +353,9 @@
             configurable: true
         });
         Object.defineProperty(McToggleComponent.prototype, "disabled", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._disabled;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value !== this._disabled) {
                     this._disabled = value;
@@ -399,16 +366,9 @@
             configurable: true
         });
         Object.defineProperty(McToggleComponent.prototype, "checked", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._checked;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value !== this._checked) {
                     this._checked = value;
@@ -418,88 +378,43 @@
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McToggleComponent.prototype.ngOnDestroy = function () {
             this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
         };
-        /**
-         * @return {?}
-         */
         McToggleComponent.prototype.focus = function () {
             this._focusMonitor.focusVia(this.inputElement.nativeElement, 'keyboard');
         };
-        /**
-         * @return {?}
-         */
         McToggleComponent.prototype.getAriaChecked = function () {
             return this.checked;
         };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
         McToggleComponent.prototype.onChangeEvent = function (event) {
             event.stopPropagation();
             this.updateModelValue();
             this.emitChangeEvent();
         };
-        /**
-         * @return {?}
-         */
         McToggleComponent.prototype.onLabelTextChange = function () {
             this._changeDetectorRef.markForCheck();
         };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
         McToggleComponent.prototype.onInputClick = function (event) {
             event.stopPropagation();
         };
-        /**
-         * @param {?} value
-         * @return {?}
-         */
         McToggleComponent.prototype.writeValue = function (value) {
             this.checked = !!value;
         };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
         McToggleComponent.prototype.registerOnChange = function (fn) {
             this.onChangeCallback = fn;
         };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
         McToggleComponent.prototype.registerOnTouched = function (fn) {
             this.onTouchedCallback = fn;
         };
-        /**
-         * @param {?} isDisabled
-         * @return {?}
-         */
         McToggleComponent.prototype.setDisabledState = function (isDisabled) {
             this.disabled = isDisabled;
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McToggleComponent.prototype.updateModelValue = function () {
             this._checked = !this.checked;
             this.onTouchedCallback();
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McToggleComponent.prototype.emitChangeEvent = function () {
-            /** @type {?} */
             var event = new McToggleChange();
             event.source = this;
             event.checked = this.checked;
@@ -532,13 +447,11 @@
                     ],
                     providers: [{
                             provide: forms.NG_VALUE_ACCESSOR,
-                            useExisting: core$1.forwardRef(( /**
-                             * @return {?}
-                             */function () { return McToggleComponent; })),
+                            useExisting: core$1.forwardRef(function () { return McToggleComponent; }),
                             multi: true
                         }],
-                    styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{align-items:baseline;cursor:inherit;display:inline-flex;vertical-align:middle;white-space:nowrap}.mc-toggle .mc-toggle-bar{border-style:solid;border-width:1px;position:relative}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{align-items:center;display:flex;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:var(--mc-toggle-size-label-margin,8px)}.mc-toggle__content.right{margin-left:var(--mc-toggle-size-label-margin,8px)}.mc-toggle__circle{border-radius:100%;border-style:solid;border-width:1px;margin-left:-1px;margin-top:-1px;position:absolute;transform:translateX(-1px)}.mc-toggle__overlay{left:0;position:absolute;top:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{border-radius:var(--mc-toggle-size-border-radius,9px);height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-width,28px)}.mc-toggle:not(.mc-toggle_small) .mc-toggle__overlay{border-radius:var(--mc-toggle-size-border-radius,9px);height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-width,28px)}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-height,16px)}.mc-toggle.mc-toggle_small .mc-toggle-bar,.mc-toggle.mc-toggle_small .mc-toggle__overlay{border-radius:var(--mc-toggle-small-size-border-radius,8px);height:var(--mc-toggle-small-size-height,14px);width:var(--mc-toggle-small-size-width,24px)}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:var(--mc-toggle-small-size-height,14px);width:var(--mc-toggle-small-size-height,14px)}.mc-toggle:not(.mc-disabled){cursor:pointer}"]
-                }] }
+                    styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-toggle .mc-toggle-bar{position:relative;border-width:1px;border-style:solid}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{display:flex;align-items:center;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:var(--mc-toggle-size-label-margin,8px)}.mc-toggle__content.right{margin-left:var(--mc-toggle-size-label-margin,8px)}.mc-toggle__circle{position:absolute;border-width:1px;border-style:solid;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}.mc-toggle__overlay{position:absolute;top:0;left:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-width,28px);border-radius:var(--mc-toggle-size-border-radius,9px)}.mc-toggle:not(.mc-toggle_small) .mc-toggle__overlay{border-radius:var(--mc-toggle-size-border-radius,9px);height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-width,28px)}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-height,16px)}.mc-toggle.mc-toggle_small .mc-toggle-bar,.mc-toggle.mc-toggle_small .mc-toggle__overlay{height:var(--mc-toggle-small-size-height,14px);width:var(--mc-toggle-small-size-width,24px);border-radius:var(--mc-toggle-small-size-border-radius,8px)}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:var(--mc-toggle-small-size-height,14px);width:var(--mc-toggle-small-size-height,14px)}.mc-toggle:not(.mc-disabled){cursor:pointer}"]
+                },] }
     ];
     /** @nocollapse */
     McToggleComponent.ctorParameters = function () { return [
@@ -558,67 +471,7 @@
         checked: [{ type: core$1.Input }],
         change: [{ type: core$1.Output }]
     };
-    if (false) {
-        /** @type {?} */
-        McToggleComponent.prototype.inputElement;
-        /** @type {?} */
-        McToggleComponent.prototype.labelPosition;
-        /** @type {?} */
-        McToggleComponent.prototype.ariaLabel;
-        /** @type {?} */
-        McToggleComponent.prototype.ariaLabelledby;
-        /** @type {?} */
-        McToggleComponent.prototype.id;
-        /** @type {?} */
-        McToggleComponent.prototype.name;
-        /** @type {?} */
-        McToggleComponent.prototype.value;
-        /**
-         * @type {?}
-         * @private
-         */
-        McToggleComponent.prototype._disabled;
-        /**
-         * @type {?}
-         * @private
-         */
-        McToggleComponent.prototype._checked;
-        /** @type {?} */
-        McToggleComponent.prototype.change;
-        /**
-         * @type {?}
-         * @private
-         */
-        McToggleComponent.prototype.uniqueId;
-        /**
-         * @type {?}
-         * @private
-         */
-        McToggleComponent.prototype.onTouchedCallback;
-        /**
-         * @type {?}
-         * @private
-         */
-        McToggleComponent.prototype.onChangeCallback;
-        /** @type {?} */
-        McToggleComponent.prototype._elementRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McToggleComponent.prototype._focusMonitor;
-        /**
-         * @type {?}
-         * @private
-         */
-        McToggleComponent.prototype._changeDetectorRef;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: toggle.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McToggleModule = /** @class */ (function () {
         function McToggleModule() {
         }
@@ -633,21 +486,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-toggle.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.McToggleBase = McToggleBase;

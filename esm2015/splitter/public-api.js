@@ -1,8 +1,3 @@
-/**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { McSplitterModule } from './splitter.module';
-export { Direction, McGutterDirective, McSplitterComponent, McSplitterAreaDirective } from './splitter.component';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIvaG9tZS9jaXJjbGVjaS9tb3NhaWMvcGFja2FnZXMvbW9zYWljL3NwbGl0dGVyLyIsInNvdXJjZXMiOlsicHVibGljLWFwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLGlDQUFjLG1CQUFtQixDQUFDO0FBQ2xDLDJGQUFjLHNCQUFzQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9zcGxpdHRlci5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi9zcGxpdHRlci5jb21wb25lbnQnO1xuIl19
+export * from './splitter.module';
+export * from './splitter.component';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3BhY2thZ2VzL21vc2FpYy9zcGxpdHRlci9wdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWMsbUJBQW1CLENBQUM7QUFDbEMsY0FBYyxzQkFBc0IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vc3BsaXR0ZXIubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vc3BsaXR0ZXIuY29tcG9uZW50JztcbiJdfQ==

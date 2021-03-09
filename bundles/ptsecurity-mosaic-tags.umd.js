@@ -4,27 +4,7 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.tags = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.keycodes, global.ng.cdk.coercion, global.ng.forms, global.ng.cdk.bidi, global.ng.cdk.collections, global.a11y, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic['form-field'], global.rxjs, global.rxjs.operators, global.ptsecurity.mosaic.icon));
 }(this, (function (exports, platform, common, core, keycodes, coercion, forms, bidi, collections, a11y, core$1, formField, rxjs, operators, icon) { 'use strict';
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: tag-default-options.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * Default options, for the chips module, that can be overridden.
-     * @record
-     */
-    function McTagsDefaultOptions() { }
-    if (false) {
-        /**
-         * The list of key codes that will trigger a chipEnd event.
-         * @type {?}
-         */
-        McTagsDefaultOptions.prototype.separatorKeyCodes;
-    }
-    /**
-     * Injection token to be used to override the default options for the chips module.
-     * @type {?}
-     */
+    /** Injection token to be used to override the default options for the chips module. */
     var MC_TAGS_DEFAULT_OPTIONS = new core.InjectionToken('mc-tags-default-options');
 
     /*! *****************************************************************************
@@ -328,45 +308,19 @@
         return value;
     }
 
-    /**
-     * Represents an input event on a `mcTagInput`.
-     * @record
-     */
-    function McTagInputEvent() { }
-    if (false) {
-        /**
-         * The native `<input>` element that the event is being fired for.
-         * @type {?}
-         */
-        McTagInputEvent.prototype.input;
-        /**
-         * The value of the input.
-         * @type {?}
-         */
-        McTagInputEvent.prototype.value;
-    }
     // Increasing integer for generating unique ids.
-    /** @type {?} */
-    var nextUniqueId = 0;
+    var nextUniqueId$1 = 0;
     /**
      * Directive that adds tag-specific behaviors to an input element inside `<mc-form-field>`.
      * May be placed inside or outside of an `<mc-tag-list>`.
      */
     var McTagInput = /** @class */ (function () {
-        /**
-         * @param {?} elementRef
-         * @param {?} renderer
-         * @param {?} defaultOptions
-         * @param {?} ngControl
-         */
         function McTagInput(elementRef, renderer, defaultOptions, ngControl) {
             this.elementRef = elementRef;
             this.renderer = renderer;
             this.defaultOptions = defaultOptions;
             this.ngControl = ngControl;
-            /**
-             * Whether the control is focused.
-             */
+            /** Whether the control is focused. */
             this.focused = false;
             /**
              * The list of key codes that will trigger a tagEnd event.
@@ -374,31 +328,21 @@
              * Defaults to `[ENTER]`.
              */
             this.separatorKeyCodes = this.defaultOptions.separatorKeyCodes;
-            /**
-             * Emitted when a tag is to be added.
-             */
+            /** Emitted when a tag is to be added. */
             this.tagEnd = new core.EventEmitter();
-            /**
-             * The input's placeholder text.
-             */
+            /** The input's placeholder text. */
             this.placeholder = '';
-            /**
-             * Unique id for the input.
-             */
-            this.id = "mc-tag-list-input-" + nextUniqueId++;
+            /** Unique id for the input. */
+            this.id = "mc-tag-list-input-" + nextUniqueId$1++;
             this._addOnBlur = true;
             this._disabled = false;
             this.countOfSymbolsForUpdateWidth = 3;
             // tslint:disable-next-line: no-unnecessary-type-assertion
-            this.inputElement = ( /** @type {?} */(this.elementRef.nativeElement));
+            this.inputElement = this.elementRef.nativeElement;
             this.setDefaultInputWidth();
         }
         Object.defineProperty(McTagInput.prototype, "tagList", {
-            /**
-             * Register input for tag list
-             * @param {?} value
-             * @return {?}
-             */
+            /** Register input for tag list */
             set: function (value) {
                 if (value) {
                     this._tagList = value;
@@ -411,15 +355,10 @@
         Object.defineProperty(McTagInput.prototype, "addOnBlur", {
             /**
              * Whether or not the tagEnd event will be emitted when the input is blurred.
-             * @return {?}
              */
             get: function () {
                 return this._addOnBlur;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._addOnBlur = coercion.coerceBooleanProperty(value);
             },
@@ -427,17 +366,10 @@
             configurable: true
         });
         Object.defineProperty(McTagInput.prototype, "disabled", {
-            /**
-             * Whether the input is disabled.
-             * @return {?}
-             */
+            /** Whether the input is disabled. */
             get: function () {
                 return this._disabled || (this._tagList && this._tagList.disabled);
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._disabled = coercion.coerceBooleanProperty(value);
             },
@@ -445,26 +377,16 @@
             configurable: true
         });
         Object.defineProperty(McTagInput.prototype, "empty", {
-            /**
-             * Whether the input is empty.
-             * @return {?}
-             */
+            /** Whether the input is empty. */
             get: function () {
                 return !this.inputElement.value;
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McTagInput.prototype.ngOnChanges = function () {
             this._tagList.stateChanges.next();
         };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
         McTagInput.prototype.onKeydown = function (event) {
             if (!this.inputElement.value) {
                 this._tagList.keydown(event);
@@ -474,10 +396,7 @@
                 event.preventDefault();
             }
         };
-        /**
-         * Checks to see if the blur should emit the (tagEnd) event.
-         * @return {?}
-         */
+        /** Checks to see if the blur should emit the (tagEnd) event. */
         McTagInput.prototype.blur = function () {
             this.focused = false;
             // Blur the tag list if it is not focused
@@ -491,54 +410,38 @@
             }
             this._tagList.stateChanges.next();
         };
-        /**
-         * @return {?}
-         */
         McTagInput.prototype.triggerValidation = function () {
             if (!this.hasControl()) {
                 return;
             }
-            (( /** @type {?} */(this.ngControl.statusChanges))).emit(this.ngControl.status);
+            this.ngControl.statusChanges.emit(this.ngControl.status);
         };
-        /**
-         * Checks to see if the (tagEnd) event needs to be emitted.
-         * @return {?}
-         */
+        /** Checks to see if the (tagEnd) event needs to be emitted. */
         McTagInput.prototype.emitTagEnd = function () {
             if (!this.hasControl() || (this.hasControl() && !this.ngControl.invalid)) {
                 this.tagEnd.emit({ input: this.inputElement, value: this.inputElement.value });
                 this.updateInputWidth();
             }
         };
-        /**
-         * @return {?}
-         */
         McTagInput.prototype.onInput = function () {
             this.updateInputWidth();
             // Let tag list know whenever the value changes.
             this._tagList.stateChanges.next();
         };
-        /**
-         * @param {?} $event
-         * @return {?}
-         */
         McTagInput.prototype.onPaste = function ($event) {
             var e_1, _a;
             var _this = this;
             if (!$event.clipboardData) {
                 return;
             }
-            /** @type {?} */
             var data = $event.clipboardData.getData('text');
             if (data && data.length === 0) {
                 return;
             }
-            /** @type {?} */
             var items = [];
             try {
                 for (var _b = __values(this.separatorKeyCodes), _c = _b.next(); !_c.done; _c = _b.next()) {
                     var key = _c.value;
-                    /** @type {?} */
                     var separator = this.separatorKeyToSymbol(key);
                     if (data.search(separator) > -1) {
                         items.push.apply(items, __spread(data.split(separator)));
@@ -556,19 +459,12 @@
             if (items.length === 0) {
                 items.push(data);
             }
-            items.forEach(( /**
-             * @param {?} item
-             * @return {?}
-             */function (item) { return _this.tagEnd.emit({ input: _this.inputElement, value: item }); }));
+            items.forEach(function (item) { return _this.tagEnd.emit({ input: _this.inputElement, value: item }); });
             this.updateInputWidth();
             $event.preventDefault();
             $event.stopPropagation();
         };
-        /**
-         * @return {?}
-         */
         McTagInput.prototype.updateInputWidth = function () {
-            /** @type {?} */
             var length = this.inputElement.value.length;
             this.renderer.setStyle(this.inputElement, 'max-width', 0);
             this.oneSymbolWidth = this.inputElement.scrollWidth / length;
@@ -580,28 +476,16 @@
                 this.setDefaultInputWidth();
             }
         };
-        /**
-         * @return {?}
-         */
         McTagInput.prototype.onFocus = function () {
             this.focused = true;
             this._tagList.stateChanges.next();
         };
-        /**
-         * Focuses the input.
-         * @return {?}
-         */
+        /** Focuses the input. */
         McTagInput.prototype.focus = function () {
             this.inputElement.focus();
         };
-        /**
-         * @private
-         * @param {?} k
-         * @return {?}
-         */
         McTagInput.prototype.separatorKeyToSymbol = function (k) {
             var _a;
-            /** @type {?} */
             var sep = (_a = {},
                 _a[keycodes.ENTER] = /\r?\n/,
                 _a[keycodes.TAB] = /\t/,
@@ -613,26 +497,13 @@
             }
             return k;
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McTagInput.prototype.hasControl = function () {
             return !!this.ngControl;
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McTagInput.prototype.setDefaultInputWidth = function () {
             this.renderer.setStyle(this.inputElement, 'width', '30px');
         };
-        /**
-         * Checks whether a keycode is one of the configured separators.
-         * @private
-         * @param {?} event
-         * @return {?}
-         */
+        /** Checks whether a keycode is one of the configured separators. */
         McTagInput.prototype.isSeparatorKey = function (event) {
             if (keycodes.hasModifierKey(event)) {
                 return false;
@@ -675,98 +546,9 @@
         addOnBlur: [{ type: core.Input, args: ['mcTagInputAddOnBlur',] }],
         disabled: [{ type: core.Input }]
     };
-    if (false) {
-        /**
-         * Whether the control is focused.
-         * @type {?}
-         */
-        McTagInput.prototype.focused;
-        /**
-         * The list of key codes that will trigger a tagEnd event.
-         *
-         * Defaults to `[ENTER]`.
-         * @type {?}
-         */
-        McTagInput.prototype.separatorKeyCodes;
-        /**
-         * Emitted when a tag is to be added.
-         * @type {?}
-         */
-        McTagInput.prototype.tagEnd;
-        /**
-         * The input's placeholder text.
-         * @type {?}
-         */
-        McTagInput.prototype.placeholder;
-        /**
-         * Unique id for the input.
-         * @type {?}
-         */
-        McTagInput.prototype.id;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagInput.prototype._tagList;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagInput.prototype._addOnBlur;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagInput.prototype._disabled;
-        /** @type {?} */
-        McTagInput.prototype.countOfSymbolsForUpdateWidth;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagInput.prototype.oneSymbolWidth;
-        /**
-         * The native input element to which this directive is attached.
-         * @type {?}
-         * @private
-         */
-        McTagInput.prototype.inputElement;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagInput.prototype.elementRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagInput.prototype.renderer;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagInput.prototype.defaultOptions;
-        /** @type {?} */
-        McTagInput.prototype.ngControl;
-    }
 
-    /**
-     * @record
-     */
-    function McTagEvent() { }
-    if (false) {
-        /** @type {?} */
-        McTagEvent.prototype.tag;
-    }
-    /**
-     * Event object emitted by McTag when selected or deselected.
-     */
+    /** Event object emitted by McTag when selected or deselected. */
     var McTagSelectionChange = /** @class */ (function () {
-        /**
-         * @param {?} source
-         * @param {?} selected
-         * @param {?=} isUserInput
-         */
         function McTagSelectionChange(source, selected, isUserInput) {
             if (isUserInput === void 0) { isUserInput = false; }
             this.source = source;
@@ -775,19 +557,10 @@
         }
         return McTagSelectionChange;
     }());
-    if (false) {
-        /** @type {?} */
-        McTagSelectionChange.prototype.source;
-        /** @type {?} */
-        McTagSelectionChange.prototype.selected;
-        /** @type {?} */
-        McTagSelectionChange.prototype.isUserInput;
-    }
-    /** @type {?} */
     var TAG_ATTRIBUTE_NAMES = ['mc-basic-tag'];
     /**
      * Dummy directive to add CSS class to tag avatar.
-     * \@docs-private
+     * @docs-private
      */
     var McTagAvatar = /** @class */ (function () {
         function McTagAvatar() {
@@ -802,7 +575,7 @@
     ];
     /**
      * Dummy directive to add CSS class to tag trailing icon.
-     * \@docs-private
+     * @docs-private
      */
     var McTagTrailingIcon = /** @class */ (function () {
         function McTagTrailingIcon() {
@@ -817,60 +590,33 @@
     ];
     var McTagBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
-        /**
-         * @param {?} _elementRef
-         */
         function McTagBase(_elementRef) {
             this._elementRef = _elementRef;
         }
         return McTagBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McTagBase.prototype._elementRef;
-    }
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McTagMixinBase = core$1.mixinColor(core$1.mixinDisabled(McTagBase));
     var McTag = /** @class */ (function (_super) {
         __extends(McTag, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} changeDetectorRef
-         * @param {?} _ngZone
-         */
         function McTag(elementRef, changeDetectorRef, _ngZone) {
             var _this = _super.call(this, elementRef) || this;
             _this.elementRef = elementRef;
             _this.changeDetectorRef = changeDetectorRef;
             _this._ngZone = _ngZone;
-            /**
-             * Emits when the tag is focused.
-             */
+            /** Emits when the tag is focused. */
             _this.onFocus = new rxjs.Subject();
-            /**
-             * Emits when the tag is blured.
-             */
+            /** Emits when the tag is blured. */
             _this.onBlur = new rxjs.Subject();
-            /**
-             * Whether the tag has focus.
-             */
+            /** Whether the tag has focus. */
             _this.hasFocus = false;
-            /**
-             * Whether the tag list is selectable
-             */
+            /** Whether the tag list is selectable */
             _this.tagListSelectable = true;
-            /**
-             * Emitted when the tag is selected or deselected.
-             */
+            /** Emitted when the tag is selected or deselected. */
             _this.selectionChange = new core.EventEmitter();
-            /**
-             * Emitted when the tag is destroyed.
-             */
+            /** Emitted when the tag is destroyed. */
             _this.destroyed = new core.EventEmitter();
-            /**
-             * Emitted when a tag is to be removed.
-             */
+            /** Emitted when a tag is to be removed. */
             _this.removed = new core.EventEmitter();
             _this._selected = false;
             _this._selectable = true;
@@ -881,19 +627,11 @@
             return _this;
         }
         Object.defineProperty(McTag.prototype, "selected", {
-            /**
-             * Whether the tag is selected.
-             * @return {?}
-             */
+            /** Whether the tag is selected. */
             get: function () {
                 return this._selected;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
-                /** @type {?} */
                 var coercedValue = coercion.coerceBooleanProperty(value);
                 if (coercedValue !== this._selected) {
                     this._selected = coercedValue;
@@ -904,19 +642,12 @@
             configurable: true
         });
         Object.defineProperty(McTag.prototype, "value", {
-            /**
-             * The value of the tag. Defaults to the content inside `<mc-tag>` tags.
-             * @return {?}
-             */
+            /** The value of the tag. Defaults to the content inside `<mc-tag>` tags. */
             get: function () {
                 return this._value !== undefined
                     ? this._value
                     : this.elementRef.nativeElement.textContent;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._value = value;
             },
@@ -929,15 +660,10 @@
              * changes to its selected state are always ignored. By default a tag is
              * selectable, and it becomes non-selectable if its parent tag list is
              * not selectable.
-             * @return {?}
              */
             get: function () {
                 return this._selectable && this.tagListSelectable;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._selectable = coercion.coerceBooleanProperty(value);
             },
@@ -947,15 +673,10 @@
         Object.defineProperty(McTag.prototype, "removable", {
             /**
              * Determines whether or not the tag displays the remove styling and emits (removed) events.
-             * @return {?}
              */
             get: function () {
                 return this._removable;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._removable = coercion.coerceBooleanProperty(value);
             },
@@ -963,9 +684,6 @@
             configurable: true
         });
         Object.defineProperty(McTag.prototype, "tabindex", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 if (!this.selectable) {
                     return null;
@@ -976,16 +694,9 @@
             configurable: true
         });
         Object.defineProperty(McTag.prototype, "disabled", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._disabled;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value !== this.disabled) {
                     this._disabled = value;
@@ -994,23 +705,12 @@
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McTag.prototype.ngAfterContentInit = function () {
             this.addClassModificatorForIcons();
         };
-        /**
-         * @return {?}
-         */
         McTag.prototype.addClassModificatorForIcons = function () {
-            /** @type {?} */
-            var icons = this.contentChildren.map(( /**
-             * @param {?} item
-             * @return {?}
-             */function (item) { return item._elementRef.nativeElement; }));
+            var icons = this.contentChildren.map(function (item) { return item._elementRef.nativeElement; });
             if (icons.length === 1) {
-                /** @type {?} */
                 var iconElement = icons[0];
                 if (!iconElement.previousElementSibling && !iconElement.nextElementSibling) {
                     if (iconElement.nextSibling) {
@@ -1024,17 +724,12 @@
                 }
             }
             else if (icons.length > 1) {
-                /** @type {?} */
                 var firstIconElement = icons[0];
-                /** @type {?} */
                 var secondIconElement = icons[1];
                 firstIconElement.classList.add('mc-icon_left');
                 secondIconElement.classList.add('mc-icon_right');
             }
         };
-        /**
-         * @return {?}
-         */
         McTag.prototype.addHostClassName = function () {
             var e_1, _a;
             try {
@@ -1043,7 +738,7 @@
                     var attr = TAG_ATTRIBUTE_NAMES_1_1.value;
                     if (this.elementRef.nativeElement.hasAttribute(attr) ||
                         this.elementRef.nativeElement.tagName.toLowerCase() === attr) {
-                        (( /** @type {?} */(this.elementRef.nativeElement))).classList.add(attr);
+                        this.elementRef.nativeElement.classList.add(attr);
                         return;
                     }
                 }
@@ -1055,55 +750,36 @@
                 }
                 finally { if (e_1) throw e_1.error; }
             }
-            (( /** @type {?} */(this.elementRef.nativeElement))).classList.add('mc-standard-tag');
+            this.elementRef.nativeElement.classList.add('mc-standard-tag');
         };
-        /**
-         * @return {?}
-         */
         McTag.prototype.ngOnDestroy = function () {
             this.destroyed.emit({ tag: this });
         };
-        /**
-         * @return {?}
-         */
         McTag.prototype.select = function () {
             if (!this._selected) {
                 this._selected = true;
                 this.dispatchSelectionChange();
             }
         };
-        /**
-         * @return {?}
-         */
         McTag.prototype.deselect = function () {
             if (this._selected) {
                 this._selected = false;
                 this.dispatchSelectionChange();
             }
         };
-        /**
-         * @return {?}
-         */
         McTag.prototype.selectViaInteraction = function () {
             if (!this._selected) {
                 this._selected = true;
                 this.dispatchSelectionChange(true);
             }
         };
-        /**
-         * @param {?=} isUserInput
-         * @return {?}
-         */
         McTag.prototype.toggleSelected = function (isUserInput) {
             if (isUserInput === void 0) { isUserInput = false; }
             this._selected = !this.selected;
             this.dispatchSelectionChange(isUserInput);
             return this.selected;
         };
-        /**
-         * Allows for programmatic focusing of the tag.
-         * @return {?}
-         */
+        /** Allows for programmatic focusing of the tag. */
         McTag.prototype.focus = function () {
             var _this = this;
             if (!this.selectable) {
@@ -1112,12 +788,10 @@
             if (!this.hasFocus) {
                 this.elementRef.nativeElement.focus();
                 this.onFocus.next({ tag: this });
-                Promise.resolve().then(( /**
-                 * @return {?}
-                 */function () {
+                Promise.resolve().then(function () {
                     _this.hasFocus = true;
                     _this.changeDetectorRef.markForCheck();
-                }));
+                });
             }
         };
         /**
@@ -1125,17 +799,12 @@
          * BACKSPACE keys are pressed.
          *
          * Informs any listeners of the removal request. Does not remove the tag from the DOM.
-         * @return {?}
          */
         McTag.prototype.remove = function () {
             if (this.removable) {
                 this.removed.emit({ tag: this });
             }
         };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
         McTag.prototype.handleClick = function (event) {
             if (this.disabled) {
                 event.preventDefault();
@@ -1144,10 +813,6 @@
                 event.stopPropagation();
             }
         };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
         McTag.prototype.handleKeydown = function (event) {
             if (this.disabled) {
                 return;
@@ -1172,9 +837,6 @@
                 default:
             }
         };
-        /**
-         * @return {?}
-         */
         McTag.prototype.blur = function () {
             var _this = this;
             // When animations are enabled, Angular may end up removing the tag from the DOM a little
@@ -1184,22 +846,13 @@
             this._ngZone.onStable
                 .asObservable()
                 .pipe(operators.take(1))
-                .subscribe(( /**
-         * @return {?}
-         */function () {
-                _this._ngZone.run(( /**
-                 * @return {?}
-                 */function () {
+                .subscribe(function () {
+                _this._ngZone.run(function () {
                     _this.hasFocus = false;
                     _this.onBlur.next({ tag: _this });
-                }));
-            }));
+                });
+            });
         };
-        /**
-         * @private
-         * @param {?=} isUserInput
-         * @return {?}
-         */
         McTag.prototype.dispatchSelectionChange = function (isUserInput) {
             if (isUserInput === void 0) { isUserInput = false; }
             this.selectionChange.emit({
@@ -1232,8 +885,8 @@
                     },
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-tag{border-radius:var(--mc-tags-size-border-radius,4px);border-style:solid;border-width:var(--mc-tags-size-border-width,1px);box-sizing:border-box;cursor:default;display:inline-block;height:var(--mc-tags-size-height,24px);margin:var(--mc-tags-size-margin,2px);outline:none;overflow:hidden;position:relative}.mc-tag.mc-left-icon{padding-left:var(--mc-tags-size-icon-padding,3px)}.mc-tag.mc-right-icon{padding-right:var(--mc-tags-size-icon-padding,3px)}.mc-tag__wrapper{align-items:center;display:flex;flex:1 1 100%;height:100%}.mc-tag__wrapper .mc-icon{align-items:center;display:flex;flex-shrink:0;height:var(--mc-tags-size-height,24px);justify-content:center;width:var(--mc-tags-size-height,24px)}.mc-tag__wrapper .mc-icon_left{margin-right:var(--mc-tags-size-icon-padding,3px)}.mc-tag__wrapper .mc-icon_right{margin-left:var(--mc-tags-size-icon-padding,3px)}.mc-tag-overlay{border-radius:inherit;bottom:-1px;left:-1px;pointer-events:none;position:absolute;right:-1px;top:-1px}.mc-tag__text{margin-left:calc(var(--mc-tags-size-text-margin, 8px) - var(--mc-tags-size-border-width, 1px));overflow:hidden;text-overflow:ellipsis;white-space:nowrap}"]
-                }] }
+                    styles: [".mc-tag{position:relative;display:inline-block;overflow:hidden;margin:var(--mc-tags-size-margin,2px);height:var(--mc-tags-size-height,24px);border-width:var(--mc-tags-size-border-width,1px);border-style:solid;border-radius:var(--mc-tags-size-border-radius,4px);cursor:default;outline:none;box-sizing:border-box}.mc-tag.mc-left-icon{padding-left:var(--mc-tags-size-icon-padding,3px)}.mc-tag.mc-right-icon{padding-right:var(--mc-tags-size-icon-padding,3px)}.mc-tag__wrapper{display:flex;align-items:center;height:100%;flex:1 1 100%}.mc-tag__wrapper .mc-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:var(--mc-tags-size-height,24px);height:var(--mc-tags-size-height,24px)}.mc-tag__wrapper .mc-icon_left{margin-right:var(--mc-tags-size-icon-padding,3px)}.mc-tag__wrapper .mc-icon_right{margin-left:var(--mc-tags-size-icon-padding,3px)}.mc-tag-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}.mc-tag__text{margin-left:calc(var(--mc-tags-size-text-margin, 8px) - var(--mc-tags-size-border-width, 1px));text-overflow:ellipsis;white-space:nowrap;overflow:hidden}"]
+                },] }
     ];
     /** @nocollapse */
     McTag.ctorParameters = function () { return [
@@ -1245,9 +898,7 @@
         contentChildren: [{ type: core.ContentChildren, args: [icon.McIcon,] }],
         avatar: [{ type: core.ContentChild, args: [McTagAvatar, { static: false },] }],
         trailingIcon: [{ type: core.ContentChild, args: [McTagTrailingIcon, { static: false },] }],
-        removeIcon: [{ type: core.ContentChild, args: [core.forwardRef(( /**
-                                 * @return {?}
-                                 */function () { return McTagRemove; })), { static: false },] }],
+        removeIcon: [{ type: core.ContentChild, args: [core.forwardRef(function () { return McTagRemove; }), { static: false },] }],
         selectionChange: [{ type: core.Output }],
         destroyed: [{ type: core.Output }],
         removed: [{ type: core.Output }],
@@ -1257,96 +908,6 @@
         removable: [{ type: core.Input }],
         disabled: [{ type: core.Input }]
     };
-    if (false) {
-        /**
-         * Emits when the tag is focused.
-         * @type {?}
-         */
-        McTag.prototype.onFocus;
-        /**
-         * Emits when the tag is blured.
-         * @type {?}
-         */
-        McTag.prototype.onBlur;
-        /** @type {?} */
-        McTag.prototype.nativeElement;
-        /**
-         * Whether the tag has focus.
-         * @type {?}
-         */
-        McTag.prototype.hasFocus;
-        /**
-         * Whether the tag list is selectable
-         * @type {?}
-         */
-        McTag.prototype.tagListSelectable;
-        /** @type {?} */
-        McTag.prototype.contentChildren;
-        /**
-         * The tag avatar
-         * @type {?}
-         */
-        McTag.prototype.avatar;
-        /**
-         * The tag's trailing icon.
-         * @type {?}
-         */
-        McTag.prototype.trailingIcon;
-        /**
-         * The tag's remove toggler.
-         * @type {?}
-         */
-        McTag.prototype.removeIcon;
-        /**
-         * Emitted when the tag is selected or deselected.
-         * @type {?}
-         */
-        McTag.prototype.selectionChange;
-        /**
-         * Emitted when the tag is destroyed.
-         * @type {?}
-         */
-        McTag.prototype.destroyed;
-        /**
-         * Emitted when a tag is to be removed.
-         * @type {?}
-         */
-        McTag.prototype.removed;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTag.prototype._selected;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTag.prototype._value;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTag.prototype._selectable;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTag.prototype._removable;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTag.prototype._disabled;
-        /** @type {?} */
-        McTag.prototype.elementRef;
-        /** @type {?} */
-        McTag.prototype.changeDetectorRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTag.prototype._ngZone;
-    }
     /**
      *
      * Example:
@@ -1359,24 +920,13 @@
      * styles to properly center the icon within the tag.
      */
     var McTagRemove = /** @class */ (function () {
-        /**
-         * @param {?} parentTag
-         */
         function McTagRemove(parentTag) {
             this.parentTag = parentTag;
         }
-        /**
-         * @param {?} $event
-         * @return {?}
-         */
         McTagRemove.prototype.focus = function ($event) {
             $event.stopPropagation();
         };
-        /**
-         * Calls the parent tag's public `remove()` method if applicable.
-         * @param {?} event
-         * @return {?}
-         */
+        /** Calls the parent tag's public `remove()` method if applicable. */
         McTagRemove.prototype.handleClick = function (event) {
             if (this.parentTag.removable) {
                 this.parentTag.remove();
@@ -1405,21 +955,8 @@
     McTagRemove.ctorParameters = function () { return [
         { type: McTag }
     ]; };
-    if (false) {
-        /**
-         * @type {?}
-         * @protected
-         */
-        McTagRemove.prototype.parentTag;
-    }
 
     var McTagListBase = /** @class */ (function () {
-        /**
-         * @param {?} defaultErrorStateMatcher
-         * @param {?} parentForm
-         * @param {?} parentFormGroup
-         * @param {?} ngControl
-         */
         function McTagListBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
             this.defaultErrorStateMatcher = defaultErrorStateMatcher;
             this.parentForm = parentForm;
@@ -1428,57 +965,20 @@
         }
         return McTagListBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McTagListBase.prototype.defaultErrorStateMatcher;
-        /** @type {?} */
-        McTagListBase.prototype.parentForm;
-        /** @type {?} */
-        McTagListBase.prototype.parentFormGroup;
-        /** @type {?} */
-        McTagListBase.prototype.ngControl;
-    }
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McTagListMixinBase = core$1.mixinErrorState(McTagListBase);
     // Increasing integer for generating unique ids for tag-list components.
-    /** @type {?} */
-    var nextUniqueId$1 = 0;
-    /**
-     * Change event object that is emitted when the tag list value has changed.
-     */
+    var nextUniqueId = 0;
+    /** Change event object that is emitted when the tag list value has changed. */
     var McTagListChange = /** @class */ (function () {
-        /**
-         * @param {?} source
-         * @param {?} value
-         */
         function McTagListChange(source, value) {
             this.source = source;
             this.value = value;
         }
         return McTagListChange;
     }());
-    if (false) {
-        /** @type {?} */
-        McTagListChange.prototype.source;
-        /** @type {?} */
-        McTagListChange.prototype.value;
-    }
     var McTagList = /** @class */ (function (_super) {
         __extends(McTagList, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} changeDetectorRef
-         * @param {?} defaultErrorStateMatcher
-         * @param {?} rawValidators
-         * @param {?} mcValidation
-         * @param {?} dir
-         * @param {?} parentForm
-         * @param {?} parentFormGroup
-         * @param {?} ngControl
-         * @param {?} ngModel
-         * @param {?} formControlName
-         */
         function McTagList(elementRef, changeDetectorRef, defaultErrorStateMatcher, rawValidators, mcValidation, dir, parentForm, parentFormGroup, ngControl, ngModel, formControlName) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
@@ -1493,23 +993,19 @@
             /**
              * Event that emits whenever the raw value of the tag-list changes. This is here primarily
              * to facilitate the two-way binding for the `value` input.
-             * \@docs-private
+             * @docs-private
              */
             _this.valueChange = new core.EventEmitter();
-            _this.uid = "mc-tag-list-" + nextUniqueId$1++;
+            _this.uid = "mc-tag-list-" + nextUniqueId++;
             /**
              * User defined tab index.
              * When it is not null, use user defined tab index. Otherwise use tabIndex
              */
             _this.userTabIndex = null;
             _this.tagChanges = new core.EventEmitter();
-            /**
-             * Orientation of the tag list.
-             */
+            /** Orientation of the tag list. */
             _this.orientation = 'horizontal';
-            /**
-             * Event emitted when the selected tag list value has been changed by the user.
-             */
+            /** Event emitted when the selected tag list value has been changed by the user. */
             _this.change = new core.EventEmitter();
             _this._required = false;
             _this._disabled = false;
@@ -1521,89 +1017,52 @@
              * appropriate tag that should receive focus until the array of tags updated completely.
              */
             _this.lastDestroyedTagIndex = null;
-            /**
-             * Subject that emits when the component has been destroyed.
-             */
+            /** Subject that emits when the component has been destroyed. */
             _this.destroyed = new rxjs.Subject();
             // tslint:disable-next-line:no-empty
-            _this.onTouched = ( /**
-             * @return {?}
-             */function () { });
+            _this.onTouched = function () { };
             // tslint:disable-next-line:no-empty
-            _this.onChange = ( /**
-             * @return {?}
-             */function () { });
-            _this._compareWith = ( /**
-             * @param {?} o1
-             * @param {?} o2
-             * @return {?}
-             */function (o1, o2) { return o1 === o2; });
+            _this.onChange = function () { };
+            _this._compareWith = function (o1, o2) { return o1 === o2; };
             if (_this.ngControl) {
                 _this.ngControl.valueAccessor = _this;
             }
             return _this;
         }
         Object.defineProperty(McTagList.prototype, "tagSelectionChanges", {
-            /**
-             * Combined stream of all of the child tags' selection change events.
-             * @return {?}
-             */
+            /** Combined stream of all of the child tags' selection change events. */
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.tags.map(( /**
-                 * @param {?} tag
-                 * @return {?}
-                 */function (tag) { return tag.selectionChange; }))));
+                return rxjs.merge.apply(void 0, __spread(this.tags.map(function (tag) { return tag.selectionChange; })));
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTagList.prototype, "tagFocusChanges", {
-            /**
-             * Combined stream of all of the child tags' focus change events.
-             * @return {?}
-             */
+            /** Combined stream of all of the child tags' focus change events. */
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.tags.map(( /**
-                 * @param {?} tag
-                 * @return {?}
-                 */function (tag) { return tag.onFocus; }))));
+                return rxjs.merge.apply(void 0, __spread(this.tags.map(function (tag) { return tag.onFocus; })));
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTagList.prototype, "tagBlurChanges", {
-            /**
-             * Combined stream of all of the child tags' blur change events.
-             * @return {?}
-             */
+            /** Combined stream of all of the child tags' blur change events. */
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.tags.map(( /**
-                 * @param {?} tag
-                 * @return {?}
-                 */function (tag) { return tag.onBlur; }))));
+                return rxjs.merge.apply(void 0, __spread(this.tags.map(function (tag) { return tag.onBlur; })));
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTagList.prototype, "tagRemoveChanges", {
-            /**
-             * Combined stream of all of the child tags' remove change events.
-             * @return {?}
-             */
+            /** Combined stream of all of the child tags' remove change events. */
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.tags.map(( /**
-                 * @param {?} tag
-                 * @return {?}
-                 */function (tag) { return tag.destroyed; }))));
+                return rxjs.merge.apply(void 0, __spread(this.tags.map(function (tag) { return tag.destroyed; })));
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTagList.prototype, "selected", {
-            /**
-             * The array of selected tags inside tag list.
-             * @return {?}
-             */
+            /** The array of selected tags inside tag list. */
             get: function () {
                 return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
             },
@@ -1611,9 +1070,6 @@
             configurable: true
         });
         Object.defineProperty(McTagList.prototype, "canShowCleaner", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this.cleaner && this.tags.length > 0;
             },
@@ -1621,17 +1077,10 @@
             configurable: true
         });
         Object.defineProperty(McTagList.prototype, "multiple", {
-            /**
-             * Whether the user should be allowed to select multiple tags.
-             * @return {?}
-             */
+            /** Whether the user should be allowed to select multiple tags. */
             get: function () {
                 return this._multiple;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._multiple = coercion.coerceBooleanProperty(value);
             },
@@ -1643,15 +1092,10 @@
              * A function to compare the option values with the selected values. The first argument
              * is a value from an option. The second is a value from the selection. A boolean
              * should be returned.
-             * @return {?}
              */
             get: function () {
                 return this._compareWith;
             },
-            /**
-             * @param {?} fn
-             * @return {?}
-             */
             set: function (fn) {
                 this._compareWith = fn;
                 if (this.selectionModel) {
@@ -1665,16 +1109,11 @@
         Object.defineProperty(McTagList.prototype, "value", {
             /**
              * Implemented as part of McFormFieldControl.
-             * \@docs-private
-             * @return {?}
+             * @docs-private
              */
             get: function () {
                 return this._value;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this.writeValue(value);
                 this._value = value;
@@ -1685,8 +1124,7 @@
         Object.defineProperty(McTagList.prototype, "id", {
             /**
              * Implemented as part of McFormFieldControl.
-             * \@docs-private
-             * @return {?}
+             * @docs-private
              */
             get: function () {
                 return this.tagInput ? this.tagInput.id : this.uid;
@@ -1697,16 +1135,11 @@
         Object.defineProperty(McTagList.prototype, "required", {
             /**
              * Implemented as part of McFormFieldControl.
-             * \@docs-private
-             * @return {?}
+             * @docs-private
              */
             get: function () {
                 return this._required;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._required = coercion.coerceBooleanProperty(value);
                 this.stateChanges.next();
@@ -1717,16 +1150,11 @@
         Object.defineProperty(McTagList.prototype, "placeholder", {
             /**
              * Implemented as part of McFormFieldControl.
-             * \@docs-private
-             * @return {?}
+             * @docs-private
              */
             get: function () {
                 return this.tagInput ? this.tagInput.placeholder : this._placeholder;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._placeholder = value;
                 this.stateChanges.next();
@@ -1735,10 +1163,7 @@
             configurable: true
         });
         Object.defineProperty(McTagList.prototype, "focused", {
-            /**
-             * Whether any tags or the mcTagInput inside of this tag-list has focus.
-             * @return {?}
-             */
+            /** Whether any tags or the mcTagInput inside of this tag-list has focus. */
             get: function () {
                 return (this.tagInput && this.tagInput.focused) || this.hasFocusedTag();
             },
@@ -1748,8 +1173,7 @@
         Object.defineProperty(McTagList.prototype, "empty", {
             /**
              * Implemented as part of McFormFieldControl.
-             * \@docs-private
-             * @return {?}
+             * @docs-private
              */
             get: function () {
                 return (!this.tagInput || this.tagInput.empty) && this.tags.length === 0;
@@ -1760,8 +1184,7 @@
         Object.defineProperty(McTagList.prototype, "shouldLabelFloat", {
             /**
              * Implemented as part of McFormFieldControl.
-             * \@docs-private
-             * @return {?}
+             * @docs-private
              */
             get: function () {
                 return !this.empty || this.focused;
@@ -1772,16 +1195,11 @@
         Object.defineProperty(McTagList.prototype, "disabled", {
             /**
              * Implemented as part of McFormFieldControl.
-             * \@docs-private
-             * @return {?}
+             * @docs-private
              */
             get: function () {
                 return this.ngControl ? !!this.ngControl.disabled : this._disabled;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._disabled = coercion.coerceBooleanProperty(value);
                 this.syncTagsDisabledState();
@@ -1793,39 +1211,24 @@
             /**
              * Whether or not this tag list is selectable. When a tag list is not selectable,
              * the selected states for all the tags inside the tag list are always ignored.
-             * @return {?}
              */
             get: function () {
                 return this._selectable;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 var _this = this;
                 this._selectable = coercion.coerceBooleanProperty(value);
                 if (this.tags) {
-                    this.tags.forEach(( /**
-                     * @param {?} tag
-                     * @return {?}
-                     */function (tag) { return tag.tagListSelectable = _this._selectable; }));
+                    this.tags.forEach(function (tag) { return tag.tagListSelectable = _this._selectable; });
                 }
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTagList.prototype, "tabIndex", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._tabIndex;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this.userTabIndex = value;
                 this._tabIndex = value;
@@ -1833,9 +1236,6 @@
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McTagList.prototype.ngAfterContentInit = function () {
             var _this = this;
             if (this.mcValidation.useValidation) {
@@ -1847,38 +1247,27 @@
             if (this.dir) {
                 this.dir.change
                     .pipe(operators.takeUntil(this.destroyed))
-                    .subscribe(( /**
-             * @param {?} dir
-             * @return {?}
-             */function (dir) { return _this.keyManager.withHorizontalOrientation(dir); }));
+                    .subscribe(function (dir) { return _this.keyManager.withHorizontalOrientation(dir); });
             }
             // Prevents the tag list from capturing focus and redirecting
             // it back to the first tag when the user tabs out.
             this.keyManager.tabOut
                 .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(( /**
-         * @return {?}
-         */function () {
+                .subscribe(function () {
                 _this._tabIndex = -1;
-                setTimeout(( /**
-                 * @return {?}
-                 */function () {
+                setTimeout(function () {
                     _this._tabIndex = _this.userTabIndex || 0;
                     _this.changeDetectorRef.markForCheck();
-                }));
-            }));
+                });
+            });
             // When the list changes, re-subscribe
             this.tags.changes
                 .pipe(operators.startWith(null), operators.takeUntil(this.destroyed))
-                .subscribe(( /**
-         * @return {?}
-         */function () {
+                .subscribe(function () {
                 if (_this.disabled) {
                     // Since this happens after the content has been
                     // checked, we need to defer it to the next tick.
-                    Promise.resolve().then(( /**
-                     * @return {?}
-                     */function () { _this.syncTagsDisabledState(); }));
+                    Promise.resolve().then(function () { _this.syncTagsDisabledState(); });
                 }
                 _this.resetTags();
                 // Reset tags selected/deselected status
@@ -1889,25 +1278,17 @@
                 _this.updateFocusForDestroyedTags();
                 // Defer setting the value in order to avoid the "Expression
                 // has changed after it was checked" errors from Angular.
-                Promise.resolve().then(( /**
-                 * @return {?}
-                 */function () {
+                Promise.resolve().then(function () {
                     _this.tagChanges.emit(_this.tags.toArray());
                     _this.stateChanges.next();
                     _this.propagateTagsChanges();
-                }));
-            }));
+                });
+            });
         };
-        /**
-         * @return {?}
-         */
         McTagList.prototype.ngOnInit = function () {
             this.selectionModel = new collections.SelectionModel(this.multiple, undefined, false);
             this.stateChanges.next();
         };
-        /**
-         * @return {?}
-         */
         McTagList.prototype.ngDoCheck = function () {
             if (this.ngControl) {
                 // We need to re-evaluate this on every change detection cycle, because there are some
@@ -1916,20 +1297,13 @@
                 this.updateErrorState();
             }
         };
-        /**
-         * @return {?}
-         */
         McTagList.prototype.ngOnDestroy = function () {
             this.destroyed.next();
             this.destroyed.complete();
             this.stateChanges.complete();
             this.dropSubscriptions();
         };
-        /**
-         * Associates an HTML input element with this tag list.
-         * @param {?} inputElement
-         * @return {?}
-         */
+        /** Associates an HTML input element with this tag list. */
         McTagList.prototype.registerInput = function (inputElement) {
             var _this = this;
             var _a;
@@ -1937,51 +1311,31 @@
             // todo need rethink about it
             if (this.ngControl && ((_a = inputElement.ngControl) === null || _a === void 0 ? void 0 : _a.statusChanges)) {
                 inputElement.ngControl.statusChanges
-                    .subscribe(( /**
-             * @return {?}
-             */function () { return ( /** @type {?} */(_this.ngControl.control)).setErrors(( /** @type {?} */(inputElement.ngControl)).errors); }));
+                    .subscribe(function () { return _this.ngControl.control.setErrors(inputElement.ngControl.errors); });
             }
         };
         // Implemented as part of ControlValueAccessor.
-        /**
-         * @param {?} value
-         * @return {?}
-         */
         McTagList.prototype.writeValue = function (value) {
             if (this.tags) {
                 this.setSelectionByValue(value, false);
             }
         };
         // Implemented as part of ControlValueAccessor.
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
         McTagList.prototype.registerOnChange = function (fn) {
             this.onChange = fn;
         };
         // Implemented as part of ControlValueAccessor.
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
         McTagList.prototype.registerOnTouched = function (fn) {
             this.onTouched = fn;
         };
         // Implemented as part of ControlValueAccessor.
-        /**
-         * @param {?} isDisabled
-         * @return {?}
-         */
         McTagList.prototype.setDisabledState = function (isDisabled) {
             this.disabled = isDisabled;
             this.stateChanges.next();
         };
         /**
          * Implemented as part of McFormFieldControl.
-         * \@docs-private
-         * @param {?} event
-         * @return {?}
+         * @docs-private
          */
         McTagList.prototype.onContainerClick = function (event) {
             if (!this.originatesFromTag(event)) {
@@ -1991,7 +1345,6 @@
         /**
          * Focuses the first non-disabled tag in this tag list, or the associated input when there
          * are no eligible tags.
-         * @return {?}
          */
         McTagList.prototype.focus = function () {
             if (this.disabled) {
@@ -2011,10 +1364,7 @@
                 this.stateChanges.next();
             }
         };
-        /**
-         * Attempt to focus an input if we have one.
-         * @return {?}
-         */
+        /** Attempt to focus an input if we have one. */
         McTagList.prototype.focusInput = function () {
             if (this.tagInput) {
                 this.tagInput.focus();
@@ -2022,12 +1372,9 @@
         };
         /**
          * Pass events to the keyboard manager. Available here for tests.
-         * @param {?} event
-         * @return {?}
          */
         McTagList.prototype.keydown = function (event) {
-            /** @type {?} */
-            var target = ( /** @type {?} */(event.target));
+            var target = event.target;
             // If they are on an empty input and hit backspace, focus the last tag
             // tslint:disable-next-line: deprecation
             if (event.keyCode === keycodes.BACKSPACE && this.isInputEmpty(target)) {
@@ -2051,28 +1398,16 @@
                 this.stateChanges.next();
             }
         };
-        /**
-         * @param {?} value
-         * @param {?=} isUserInput
-         * @return {?}
-         */
         McTagList.prototype.setSelectionByValue = function (value, isUserInput) {
             var _this = this;
             if (isUserInput === void 0) { isUserInput = true; }
             this.clearSelection();
-            this.tags.forEach(( /**
-             * @param {?} tag
-             * @return {?}
-             */function (tag) { return tag.deselect(); }));
+            this.tags.forEach(function (tag) { return tag.deselect(); });
             if (Array.isArray(value)) {
-                value.forEach(( /**
-                 * @param {?} currentValue
-                 * @return {?}
-                 */function (currentValue) { return _this.selectValue(currentValue, isUserInput); }));
+                value.forEach(function (currentValue) { return _this.selectValue(currentValue, isUserInput); });
                 this.sortValues();
             }
             else {
-                /** @type {?} */
                 var correspondingTag = this.selectValue(value, isUserInput);
                 // Shift focus to the active item. Note that we shouldn't do this in multiple
                 // mode, because we don't know what tag the user interacted with last.
@@ -2081,10 +1416,7 @@
                 }
             }
         };
-        /**
-         * When blurred, mark the field as touched when focus moved outside the tag list.
-         * @return {?}
-         */
+        /** When blurred, mark the field as touched when focus moved outside the tag list. */
         McTagList.prototype.blur = function () {
             var _this = this;
             if (!this.hasFocusedTag()) {
@@ -2096,13 +1428,11 @@
                     // If the focus is not moved to tag input, mark the field as touched. If the focus moved
                     // to tag input, do nothing.
                     // Timeout is needed to wait for the focus() event trigger on tag input.
-                    setTimeout(( /**
-                     * @return {?}
-                     */function () {
+                    setTimeout(function () {
                         if (!_this.focused) {
                             _this.markAsTouched();
                         }
-                    }));
+                    });
                 }
                 else {
                     // If there's no tag input, then mark the field as touched.
@@ -2110,10 +1440,7 @@
                 }
             }
         };
-        /**
-         * Mark the field as touched
-         * @return {?}
-         */
+        /** Mark the field as touched */
         McTagList.prototype.markAsTouched = function () {
             this.onTouched();
             this.changeDetectorRef.markForCheck();
@@ -2121,8 +1448,6 @@
         };
         /**
          * Check the tab index as you should not be allowed to focus an empty list.
-         * @protected
-         * @return {?}
          */
         McTagList.prototype.updateTabIndex = function () {
             // If we have 0 tags, we should not allow keyboard focus
@@ -2131,13 +1456,10 @@
         /**
          * If the amount of tags changed, we need to update the
          * key manager state and focus the next closest tag.
-         * @protected
-         * @return {?}
          */
         McTagList.prototype.updateFocusForDestroyedTags = function () {
             if (this.lastDestroyedTagIndex != null) {
                 if (this.tags.length) {
-                    /** @type {?} */
                     var newTagIndex = Math.min(this.lastDestroyedTagIndex, this.tags.length - 1);
                     this.keyManager.setActiveItem(newTagIndex);
                 }
@@ -2150,43 +1472,29 @@
         /**
          * Utility to ensure all indexes are valid.
          *
-         * @private
-         * @param {?} index The index to be checked.
-         * @return {?} True if the index is valid for our list of tags.
+         * @param index The index to be checked.
+         * @returns True if the index is valid for our list of tags.
          */
         McTagList.prototype.isValidIndex = function (index) {
             return index >= 0 && index < this.tags.length;
         };
-        /**
-         * @private
-         * @param {?} element
-         * @return {?}
-         */
         McTagList.prototype.isInputEmpty = function (element) {
             if (element && element.nodeName.toLowerCase() === 'input') {
-                /** @type {?} */
-                var input = ( /** @type {?} */(element));
+                var input = element;
                 return !input.value;
             }
             return false;
         };
         /**
          * Finds and selects the tag based on its value.
-         * @private
-         * @param {?} value
-         * @param {?=} isUserInput
-         * @return {?} Tag that has the corresponding value.
+         * @returns Tag that has the corresponding value.
          */
         McTagList.prototype.selectValue = function (value, isUserInput) {
             var _this = this;
             if (isUserInput === void 0) { isUserInput = true; }
-            /** @type {?} */
-            var correspondingTag = this.tags.find(( /**
-             * @param {?} tag
-             * @return {?}
-             */function (tag) {
+            var correspondingTag = this.tags.find(function (tag) {
                 return tag.value != null && _this._compareWith(tag.value, value);
-            }));
+            });
             if (correspondingTag) {
                 if (isUserInput) {
                     correspondingTag.selectViaInteraction();
@@ -2198,77 +1506,52 @@
             }
             return correspondingTag;
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McTagList.prototype.initializeSelection = function () {
             var _this = this;
             // Defer setting the value in order to avoid the "Expression
             // has changed after it was checked" errors from Angular.
-            Promise.resolve().then(( /**
-             * @return {?}
-             */function () {
+            Promise.resolve().then(function () {
                 if (_this.ngControl || _this._value) {
                     _this.setSelectionByValue(_this.ngControl ? _this.ngControl.value : _this._value, false);
                     _this.stateChanges.next();
                 }
-            }));
+            });
         };
         /**
          * Deselects every tag in the list.
-         * @private
-         * @param {?=} skip Tag that should not be deselected.
-         * @return {?}
+         * @param skip Tag that should not be deselected.
          */
         McTagList.prototype.clearSelection = function (skip) {
             this.selectionModel.clear();
-            this.tags.forEach(( /**
-             * @param {?} tag
-             * @return {?}
-             */function (tag) {
+            this.tags.forEach(function (tag) {
                 if (tag !== skip) {
                     tag.deselect();
                 }
-            }));
+            });
             this.stateChanges.next();
         };
         /**
          * Sorts the model values, ensuring that they keep the same
          * order that they have in the panel.
-         * @private
-         * @return {?}
          */
         McTagList.prototype.sortValues = function () {
             var _this = this;
             if (this._multiple) {
                 this.selectionModel.clear();
-                this.tags.forEach(( /**
-                 * @param {?} tag
-                 * @return {?}
-                 */function (tag) {
+                this.tags.forEach(function (tag) {
                     if (tag.selected) {
                         _this.selectionModel.select(tag);
                     }
-                }));
+                });
                 this.stateChanges.next();
             }
         };
-        /**
-         * Emits change event to set the model value.
-         * @private
-         * @param {?=} fallbackValue
-         * @return {?}
-         */
+        /** Emits change event to set the model value. */
         // todo need rethink this method and selection logic
         McTagList.prototype.propagateChanges = function (fallbackValue) {
-            /** @type {?} */
             var valueToEmit = null;
             if (Array.isArray(this.selected)) {
-                valueToEmit = this.selected.map(( /**
-                 * @param {?} tag
-                 * @return {?}
-                 */function (tag) { return tag.value; }));
+                valueToEmit = this.selected.map(function (tag) { return tag.value; });
             }
             else {
                 valueToEmit = this.selected ? this.selected.value : fallbackValue;
@@ -2279,36 +1562,20 @@
             this.onChange(valueToEmit);
             this.changeDetectorRef.markForCheck();
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McTagList.prototype.propagateTagsChanges = function () {
-            /** @type {?} */
-            var valueToEmit = this.tags.map(( /**
-             * @param {?} tag
-             * @return {?}
-             */function (tag) { return tag.value; }));
+            var valueToEmit = this.tags.map(function (tag) { return tag.value; });
             this._value = valueToEmit;
             this.change.emit(new McTagListChange(this, valueToEmit));
             this.valueChange.emit(valueToEmit);
             this.onChange(valueToEmit);
             this.changeDetectorRef.markForCheck();
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McTagList.prototype.resetTags = function () {
             this.dropSubscriptions();
             this.listenToTagsFocus();
             this.listenToTagsSelection();
             this.listenToTagsRemoved();
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McTagList.prototype.dropSubscriptions = function () {
             if (this.tagFocusSubscription) {
                 this.tagFocusSubscription.unsubscribe();
@@ -2327,17 +1594,10 @@
                 this.tagRemoveSubscription = null;
             }
         };
-        /**
-         * Listens to user-generated selection events on each tag.
-         * @private
-         * @return {?}
-         */
+        /** Listens to user-generated selection events on each tag. */
         McTagList.prototype.listenToTagsSelection = function () {
             var _this = this;
-            this.tagSelectionSubscription = this.tagSelectionChanges.subscribe(( /**
-             * @param {?} event
-             * @return {?}
-             */function (event) {
+            this.tagSelectionSubscription = this.tagSelectionChanges.subscribe(function (event) {
                 if (event.source.selected) {
                     _this.selectionModel.select(event.source);
                 }
@@ -2346,58 +1606,36 @@
                 }
                 // For single selection tag list, make sure the deselected value is unselected.
                 if (!_this.multiple) {
-                    _this.tags.forEach(( /**
-                     * @param {?} tag
-                     * @return {?}
-                     */function (tag) {
+                    _this.tags.forEach(function (tag) {
                         if (!_this.selectionModel.isSelected(tag) && tag.selected) {
                             tag.deselect();
                         }
-                    }));
+                    });
                 }
                 if (event.isUserInput) {
                     _this.propagateChanges();
                 }
-            }));
+            });
         };
-        /**
-         * Listens to user-generated selection events on each tag.
-         * @private
-         * @return {?}
-         */
+        /** Listens to user-generated selection events on each tag. */
         McTagList.prototype.listenToTagsFocus = function () {
             var _this = this;
-            this.tagFocusSubscription = this.tagFocusChanges.subscribe(( /**
-             * @param {?} event
-             * @return {?}
-             */function (event) {
-                /** @type {?} */
+            this.tagFocusSubscription = this.tagFocusChanges.subscribe(function (event) {
                 var tagIndex = _this.tags.toArray().indexOf(event.tag);
                 if (_this.isValidIndex(tagIndex)) {
                     _this.keyManager.updateActiveItem(tagIndex);
                 }
                 _this.stateChanges.next();
-            }));
-            this.tagBlurSubscription = this.tagBlurChanges.subscribe(( /**
-             * @return {?}
-             */function () {
+            });
+            this.tagBlurSubscription = this.tagBlurChanges.subscribe(function () {
                 _this.blur();
                 _this.stateChanges.next();
-            }));
+            });
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McTagList.prototype.listenToTagsRemoved = function () {
             var _this = this;
-            this.tagRemoveSubscription = this.tagRemoveChanges.subscribe(( /**
-             * @param {?} event
-             * @return {?}
-             */function (event) {
-                /** @type {?} */
+            this.tagRemoveSubscription = this.tagRemoveChanges.subscribe(function (event) {
                 var tag = event.tag;
-                /** @type {?} */
                 var tagIndex = _this.tags.toArray().indexOf(event.tag);
                 // In case the tag that will be removed is currently focused, we temporarily store
                 // the index in order to be able to determine an appropriate sibling tag that will
@@ -2408,17 +1646,11 @@
                 else if (_this.isValidIndex(tagIndex) && !tag.hasFocus) {
                     _this.focusInput();
                 }
-            }));
+            });
         };
-        /**
-         * Checks whether an event comes from inside a tag element.
-         * @private
-         * @param {?} event
-         * @return {?}
-         */
+        /** Checks whether an event comes from inside a tag element. */
         McTagList.prototype.originatesFromTag = function (event) {
-            /** @type {?} */
-            var currentElement = ( /** @type {?} */(event.target));
+            var currentElement = event.target;
             while (currentElement && currentElement !== this.elementRef.nativeElement) {
                 if (currentElement.classList.contains('mc-tag')) {
                     return true;
@@ -2427,31 +1659,17 @@
             }
             return false;
         };
-        /**
-         * Checks whether any of the tags is focused.
-         * @private
-         * @return {?}
-         */
+        /** Checks whether any of the tags is focused. */
         McTagList.prototype.hasFocusedTag = function () {
-            return this.tags.some(( /**
-             * @param {?} tag
-             * @return {?}
-             */function (tag) { return tag.hasFocus; }));
+            return this.tags.some(function (tag) { return tag.hasFocus; });
         };
-        /**
-         * Syncs the list's disabled state with the individual tags.
-         * @private
-         * @return {?}
-         */
+        /** Syncs the list's disabled state with the individual tags. */
         McTagList.prototype.syncTagsDisabledState = function () {
             var _this = this;
             if (this.tags) {
-                this.tags.forEach(( /**
-                 * @param {?} tag
-                 * @return {?}
-                 */function (tag) {
+                this.tags.forEach(function (tag) {
                     tag.disabled = _this._disabled;
-                }));
+                });
             }
         };
         return McTagList;
@@ -2474,8 +1692,8 @@
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     providers: [{ provide: formField.McFormFieldControl, useExisting: McTagList }],
-                    styles: [".mc-tag-list{display:flex;flex-direction:row}.mc-tag-input{background:transparent;border:none;outline:none}.mc-tags-list__list-container{display:flex;flex:1 1 100%;flex-wrap:wrap;min-height:var(--mc-tag-list-size-min-height,28px);min-width:0;padding:var(--mc-tag-list-size-padding,1px 6px)}.mc-tags-list__list-container .mc-tag-input{flex:1 1 auto;height:var(--mc-tag-input-size-height,22px);margin:var(--mc-tag-input-size-margin,2px 4px);max-width:100%}.mc-tags-list__cleaner .mc-cleaner{height:30px}"]
-                }] }
+                    styles: [".mc-tag-list{display:flex;flex-direction:row}.mc-tag-input{border:none;outline:none;background:transparent}.mc-tags-list__list-container{display:flex;flex-wrap:wrap;flex:1 1 100%;min-width:0;min-height:var(--mc-tag-list-size-min-height,28px);padding:var(--mc-tag-list-size-padding,1px 6px)}.mc-tags-list__list-container .mc-tag-input{max-width:100%;flex:1 1 auto;height:var(--mc-tag-input-size-height,22px);margin:var(--mc-tag-input-size-margin,2px 4px)}.mc-tags-list__cleaner .mc-cleaner{height:30px}"]
+                },] }
     ];
     /** @nocollapse */
     McTagList.ctorParameters = function () { return [
@@ -2511,174 +1729,8 @@
                         descendants: true
                     },] }]
     };
-    if (false) {
-        /** @type {?} */
-        McTagList.prototype.controlType;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype._tabIndex;
-        /**
-         * Event that emits whenever the raw value of the tag-list changes. This is here primarily
-         * to facilitate the two-way binding for the `value` input.
-         * \@docs-private
-         * @type {?}
-         */
-        McTagList.prototype.valueChange;
-        /** @type {?} */
-        McTagList.prototype.uid;
-        /**
-         * User defined tab index.
-         * When it is not null, use user defined tab index. Otherwise use tabIndex
-         * @type {?}
-         */
-        McTagList.prototype.userTabIndex;
-        /** @type {?} */
-        McTagList.prototype.keyManager;
-        /** @type {?} */
-        McTagList.prototype.selectionModel;
-        /** @type {?} */
-        McTagList.prototype.tagChanges;
-        /**
-         * An object used to control when error messages are shown.
-         * @type {?}
-         */
-        McTagList.prototype.errorStateMatcher;
-        /**
-         * Orientation of the tag list.
-         * @type {?}
-         */
-        McTagList.prototype.orientation;
-        /**
-         * Event emitted when the selected tag list value has been changed by the user.
-         * @type {?}
-         */
-        McTagList.prototype.change;
-        /** @type {?} */
-        McTagList.prototype.cleaner;
-        /**
-         * The tag components contained within this tag list.
-         * @type {?}
-         */
-        McTagList.prototype.tags;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype._value;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype._required;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype._placeholder;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype._disabled;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype._selectable;
-        /**
-         * The tag input to add more tags
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.tagInput;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype._multiple;
-        /**
-         * When a tag is destroyed, we store the index of the destroyed tag until the tags
-         * query list notifies about the update. This is necessary because we cannot determine an
-         * appropriate tag that should receive focus until the array of tags updated completely.
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.lastDestroyedTagIndex;
-        /**
-         * Subject that emits when the component has been destroyed.
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.destroyed;
-        /**
-         * Subscription to focus changes in the tags.
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.tagFocusSubscription;
-        /**
-         * Subscription to blur changes in the tags.
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.tagBlurSubscription;
-        /**
-         * Subscription to selection changes in tags.
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.tagSelectionSubscription;
-        /**
-         * Subscription to remove changes in tags.
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.tagRemoveSubscription;
-        /** @type {?} */
-        McTagList.prototype.onTouched;
-        /** @type {?} */
-        McTagList.prototype.onChange;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype._compareWith;
-        /**
-         * @type {?}
-         * @protected
-         */
-        McTagList.prototype.elementRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.changeDetectorRef;
-        /** @type {?} */
-        McTagList.prototype.rawValidators;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.mcValidation;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTagList.prototype.dir;
-        /** @type {?} */
-        McTagList.prototype.ngModel;
-        /** @type {?} */
-        McTagList.prototype.formControlName;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: tag.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var ɵ0 = ({ separatorKeyCodes: [keycodes.ENTER] });
+    var ɵ0 = { separatorKeyCodes: [keycodes.ENTER] };
     var McTagsModule = /** @class */ (function () {
         function McTagsModule() {
         }
@@ -2706,27 +1758,13 @@
                     providers: [{
                             provide: MC_TAGS_DEFAULT_OPTIONS,
                             // tslint:disable-next-line: no-object-literal-type-assertion
-                            useValue: ( /** @type {?} */(ɵ0))
+                            useValue: ɵ0
                         }]
                 },] }
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-tags.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.MC_TAGS_DEFAULT_OPTIONS = MC_TAGS_DEFAULT_OPTIONS;
@@ -2743,6 +1781,7 @@
     exports.McTagSelectionChange = McTagSelectionChange;
     exports.McTagTrailingIcon = McTagTrailingIcon;
     exports.McTagsModule = McTagsModule;
+    exports.ɵ0 = ɵ0;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

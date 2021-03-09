@@ -3,32 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Directive, ElementRef, ChangeDetectorRef, Input, NgModule } from '@angular/core';
 import { mixinTabIndex, mixinDisabled, toBoolean } from '@ptsecurity/mosaic/core';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: link.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McLinkBase {
-    /**
-     * @param {?} elementRef
-     */
     constructor(elementRef) {
         this.elementRef = elementRef;
     }
 }
-if (false) {
-    /** @type {?} */
-    McLinkBase.prototype.elementRef;
-}
 // tslint:disable-next-line: naming-convention
-/** @type {?} */
 const McLinkMixinBase = mixinTabIndex(mixinDisabled(McLinkBase));
 class McLink extends McLinkMixinBase {
-    /**
-     * @param {?} elementRef
-     * @param {?} focusMonitor
-     * @param {?} changeDetector
-     */
     constructor(elementRef, focusMonitor, changeDetector) {
         super(elementRef);
         this.focusMonitor = focusMonitor;
@@ -36,39 +18,22 @@ class McLink extends McLinkMixinBase {
         this._disabled = false;
         this.focusMonitor.monitor(elementRef.nativeElement, true);
     }
-    /**
-     * @return {?}
-     */
     get disabled() {
         return this._disabled;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set disabled(value) {
-        /** @type {?} */
         const newValue = toBoolean(value);
         if (newValue !== this._disabled) {
             this._disabled = newValue;
             this.changeDetector.markForCheck();
         }
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
     }
-    /**
-     * @return {?}
-     */
     focus() {
         this.getHostElement().focus();
     }
-    /**
-     * @return {?}
-     */
     getHostElement() {
         return this.elementRef.nativeElement;
     }
@@ -93,29 +58,7 @@ McLink.ctorParameters = () => [
 McLink.propDecorators = {
     disabled: [{ type: Input }]
 };
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    McLink.prototype._disabled;
-    /**
-     * @type {?}
-     * @private
-     */
-    McLink.prototype.focusMonitor;
-    /**
-     * @type {?}
-     * @private
-     */
-    McLink.prototype.changeDetector;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: link.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McLinkModule {
 }
 McLinkModule.decorators = [
@@ -130,21 +73,7 @@ McLinkModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-link.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McLink, McLinkBase, McLinkMixinBase, McLinkModule };

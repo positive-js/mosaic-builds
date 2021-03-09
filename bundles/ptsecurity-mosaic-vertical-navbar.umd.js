@@ -330,32 +330,19 @@
                     host: {
                         class: 'mc-vertical-navbar__badge'
                     }
-                }] }
+                },] }
     ];
     var McVerticalNavbarItemBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
-        /**
-         * @param {?} _elementRef
-         */
         function McVerticalNavbarItemBase(_elementRef) {
             this._elementRef = _elementRef;
         }
         return McVerticalNavbarItemBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McVerticalNavbarItemBase.prototype._elementRef;
-    }
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McVerticalNavbarMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McVerticalNavbarItemBase));
     var McVerticalNavbarItem = /** @class */ (function (_super) {
         __extends(McVerticalNavbarItem, _super);
-        /**
-         * @param {?} element
-         * @param {?} focusMonitor
-         * @param {?} trigger
-         */
         function McVerticalNavbarItem(element, focusMonitor, trigger) {
             var _this = _super.call(this, element) || this;
             _this.element = element;
@@ -365,18 +352,12 @@
             return _this;
         }
         Object.defineProperty(McVerticalNavbarItem.prototype, "hasDropdownAttached", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return !!this.trigger;
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McVerticalNavbarItem.prototype.ngOnDestroy = function () {
             this.focusMonitor.stopMonitoring(this.element.nativeElement);
         };
@@ -394,8 +375,8 @@
                         '[attr.disabled]': 'disabled || null',
                         '[attr.tabindex]': 'tabIndex'
                     },
-                    styles: [".mc-vertical-navbar__badge{left:0;position:absolute;top:0;width:var(--mc-navbar-badge-size-width,64px)}.mc-vertical-navbar__badge .mc-badge{position:absolute;right:4px;top:4px}.mc-vertical-navbar__item-icon{margin-right:var(--mc-vertical-navbar-item-size-icon-margin-right,16px)}.mc-vertical-navbar__item-icon .mc-icon{font-size:var(--mc-vertical-navbar-item-font-icon-size,32px)}.mc-vertical-navbar__title{white-space:nowrap}.mc-vertical-navbar__item-dropdown-icon{margin-left:auto;padding-left:var(--mc-vertical-navbar-item-size-padding-horizontal,16px)}a[mc-vertical-navbar-item],mc-vertical-navbar-item{align-items:center;box-sizing:border-box;cursor:pointer;display:flex;height:var(--mc-vertical-navbar-item-size-height,64px);margin:var(--mc-vertical-navbar-item-size-margin,1px 0);position:relative;text-decoration:none;width:100%}a[mc-vertical-navbar-item] .mc-vertical-navbar__item,mc-vertical-navbar-item .mc-vertical-navbar__item{align-items:center;display:flex;height:100%;padding-left:var(--mc-vertical-navbar-item-size-padding-horizontal,16px);padding-right:var(--mc-vertical-navbar-item-size-padding-horizontal,16px);width:100%}a[mc-vertical-navbar-item].mc-progress,mc-vertical-navbar-item.mc-progress{cursor:pointer}a[mc-vertical-navbar-item].mc-vertical-navbar__item_active,mc-vertical-navbar-item.mc-vertical-navbar__item_active{cursor:default}a[mc-vertical-navbar-item][disabled],mc-vertical-navbar-item[disabled]{cursor:default;pointer-events:none}"]
-                }] }
+                    styles: [".mc-vertical-navbar__badge{position:absolute;width:var(--mc-navbar-badge-size-width,64px);top:0;left:0}.mc-vertical-navbar__badge .mc-badge{position:absolute;right:4px;top:4px}.mc-vertical-navbar__item-icon{margin-right:var(--mc-vertical-navbar-item-size-icon-margin-right,16px)}.mc-vertical-navbar__item-icon .mc-icon{font-size:var(--mc-vertical-navbar-item-font-icon-size,32px)}.mc-vertical-navbar__title{white-space:nowrap}.mc-vertical-navbar__item-dropdown-icon{margin-left:auto;padding-left:var(--mc-vertical-navbar-item-size-padding-horizontal,16px)}a[mc-vertical-navbar-item],mc-vertical-navbar-item{display:flex;align-items:center;box-sizing:border-box;position:relative;margin:var(--mc-vertical-navbar-item-size-margin,1px 0);width:100%;height:var(--mc-vertical-navbar-item-size-height,64px);cursor:pointer;text-decoration:none}a[mc-vertical-navbar-item] .mc-vertical-navbar__item,mc-vertical-navbar-item .mc-vertical-navbar__item{display:flex;align-items:center;width:100%;height:100%;padding-left:var(--mc-vertical-navbar-item-size-padding-horizontal,16px);padding-right:var(--mc-vertical-navbar-item-size-padding-horizontal,16px)}a[mc-vertical-navbar-item].mc-progress,mc-vertical-navbar-item.mc-progress{cursor:pointer}a[mc-vertical-navbar-item].mc-vertical-navbar__item_active,mc-vertical-navbar-item.mc-vertical-navbar__item_active{cursor:default}a[mc-vertical-navbar-item][disabled],mc-vertical-navbar-item[disabled]{cursor:default;pointer-events:none}"]
+                },] }
     ];
     /** @nocollapse */
     McVerticalNavbarItem.ctorParameters = function () { return [
@@ -403,32 +384,7 @@
         { type: a11y.FocusMonitor },
         { type: dropdown.McDropdownTrigger, decorators: [{ type: core.Optional }, { type: core.Self }] }
     ]; };
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        McVerticalNavbarItem.prototype.element;
-        /**
-         * @type {?}
-         * @private
-         */
-        McVerticalNavbarItem.prototype.focusMonitor;
-        /**
-         * @type {?}
-         * @private
-         */
-        McVerticalNavbarItem.prototype.trigger;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: vertical-navbar.animation.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * @return {?}
-     */
     function toggleVerticalNavbarAnimation() {
         return animations.trigger('toggle', [
             animations.state('0', animations.style({
@@ -441,11 +397,6 @@
         ]);
     }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: vertical-navbar.component.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McVerticalNavbarHeader = /** @class */ (function () {
         function McVerticalNavbarHeader() {
         }
@@ -473,16 +424,10 @@
                 },] }
     ];
     var McVerticalNavbar = /** @class */ (function () {
-        /**
-         * @param {?} cd
-         */
         function McVerticalNavbar(cd) {
             this.cd = cd;
             this.expanded = false;
         }
-        /**
-         * @return {?}
-         */
         McVerticalNavbar.prototype.toggle = function () {
             this.expanded = !this.expanded;
             this.cd.markForCheck();
@@ -498,8 +443,8 @@
                     animations: [
                         toggleVerticalNavbarAnimation()
                     ],
-                    styles: [".mc-vertical-navbar{align-items:flex-start;display:flex;flex-direction:column;height:100%;left:0;min-height:100%;overflow:hidden;position:fixed;top:0;z-index:100}.mc-vertical-navbar .mc-vertical-navbar__header-area{align-items:stretch;box-sizing:border-box;display:flex;min-height:64px;width:100%}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__header{-ms-grid-row-align:stretch;align-items:center;align-self:stretch;display:flex;height:100%;justify-content:stretch;text-decoration:none}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__toggle-button{-ms-grid-row-align:stretch;align-items:center;align-self:stretch;cursor:pointer;display:flex;flex:0 0 auto;justify-content:center;width:64px}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__title{padding:0 16px}"]
-                }] }
+                    styles: [".mc-vertical-navbar{height:100%;position:fixed;left:0;top:0;z-index:100;display:flex;flex-direction:column;align-items:flex-start;min-height:100%;overflow:hidden}.mc-vertical-navbar .mc-vertical-navbar__header-area{display:flex;width:100%;align-items:stretch;box-sizing:border-box;min-height:64px}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__header{display:flex;height:100%;justify-content:stretch;text-decoration:none;align-self:stretch;align-items:center}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__toggle-button{cursor:pointer;display:flex;flex:0 0 auto;justify-content:center;align-items:center;align-self:stretch;width:64px}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__title{padding:0 16px}"]
+                },] }
     ];
     /** @nocollapse */
     McVerticalNavbar.ctorParameters = function () { return [
@@ -508,22 +453,7 @@
     McVerticalNavbar.propDecorators = {
         expanded: [{ type: core.Input }]
     };
-    if (false) {
-        /** @type {?} */
-        McVerticalNavbar.prototype.expanded;
-        /**
-         * @type {?}
-         * @private
-         */
-        McVerticalNavbar.prototype.cd;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: vertical-navbar.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
     var COMPONENTS = [
         McVerticalNavbar,
         McVerticalNavbarTitle,
@@ -551,21 +481,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-vertical-navbar.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.McVerticalNavbar = McVerticalNavbar;

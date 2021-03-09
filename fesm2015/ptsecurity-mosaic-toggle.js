@@ -5,44 +5,21 @@ import { mixinTabIndex, mixinColor, mixinDisabled, ThemePalette, McCommonModule 
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: toggle.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
 let nextUniqueId = 0;
 class McToggleBase {
     // tslint:disable-next-line: naming-convention
-    /**
-     * @param {?} _elementRef
-     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
-if (false) {
-    /** @type {?} */
-    McToggleBase.prototype._elementRef;
-}
 // tslint:disable-next-line: naming-convention
-/** @type {?} */
 const McToggleMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McToggleBase), ThemePalette.Primary));
 class McToggleChange {
 }
-if (false) {
-    /** @type {?} */
-    McToggleChange.prototype.source;
-    /** @type {?} */
-    McToggleChange.prototype.checked;
-}
 class McToggleComponent extends McToggleMixinBase {
-    /**
-     * @param {?} _elementRef
-     * @param {?} _focusMonitor
-     * @param {?} _changeDetectorRef
-     */
-    constructor(_elementRef, _focusMonitor, _changeDetectorRef) {
+    constructor(
+    // tslint:disable-next-line:naming-convention
+    _elementRef, _focusMonitor, _changeDetectorRef) {
         super(_elementRef);
         this._elementRef = _elementRef;
         this._focusMonitor = _focusMonitor;
@@ -56,139 +33,70 @@ class McToggleComponent extends McToggleMixinBase {
         this.change = new EventEmitter();
         this.uniqueId = `mc-toggle-${++nextUniqueId}`;
         // tslint:disable-next-line:no-empty
-        this.onTouchedCallback = (/**
-         * @return {?}
-         */
-        () => { });
+        this.onTouchedCallback = () => { };
         // tslint:disable-next-line:no-empty
-        this.onChangeCallback = (/**
-         * @param {?} _
-         * @return {?}
-         */
-        (_) => { });
+        this.onChangeCallback = (_) => { };
         this.id = this.uniqueId;
         this._focusMonitor.monitor(this._elementRef.nativeElement, true);
     }
-    /**
-     * @return {?}
-     */
     get inputId() {
         return `${this.id || this.uniqueId}-input`;
     }
-    /**
-     * @return {?}
-     */
     get disabled() {
         return this._disabled;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set disabled(value) {
         if (value !== this._disabled) {
             this._disabled = value;
             this._changeDetectorRef.markForCheck();
         }
     }
-    /**
-     * @return {?}
-     */
     get checked() {
         return this._checked;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set checked(value) {
         if (value !== this._checked) {
             this._checked = value;
             this._changeDetectorRef.markForCheck();
         }
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
-    /**
-     * @return {?}
-     */
     focus() {
         this._focusMonitor.focusVia(this.inputElement.nativeElement, 'keyboard');
     }
-    /**
-     * @return {?}
-     */
     getAriaChecked() {
         return this.checked;
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     onChangeEvent(event) {
         event.stopPropagation();
         this.updateModelValue();
         this.emitChangeEvent();
     }
-    /**
-     * @return {?}
-     */
     onLabelTextChange() {
         this._changeDetectorRef.markForCheck();
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     onInputClick(event) {
         event.stopPropagation();
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     writeValue(value) {
         this.checked = !!value;
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
     registerOnChange(fn) {
         this.onChangeCallback = fn;
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
     registerOnTouched(fn) {
         this.onTouchedCallback = fn;
     }
-    /**
-     * @param {?} isDisabled
-     * @return {?}
-     */
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
     }
-    /**
-     * @private
-     * @return {?}
-     */
     updateModelValue() {
         this._checked = !this.checked;
         this.onTouchedCallback();
     }
-    /**
-     * @private
-     * @return {?}
-     */
     emitChangeEvent() {
-        /** @type {?} */
         const event = new McToggleChange();
         event.source = this;
         event.checked = this.checked;
@@ -219,15 +127,10 @@ McToggleComponent.decorators = [
                     ])
                 ],
                 providers: [{
-                        provide: NG_VALUE_ACCESSOR,
-                        useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => McToggleComponent)),
-                        multi: true
+                        provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => McToggleComponent), multi: true
                     }],
-                styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{align-items:baseline;cursor:inherit;display:inline-flex;vertical-align:middle;white-space:nowrap}.mc-toggle .mc-toggle-bar{border-style:solid;border-width:1px;position:relative}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{align-items:center;display:flex;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:var(--mc-toggle-size-label-margin,8px)}.mc-toggle__content.right{margin-left:var(--mc-toggle-size-label-margin,8px)}.mc-toggle__circle{border-radius:100%;border-style:solid;border-width:1px;margin-left:-1px;margin-top:-1px;position:absolute;transform:translateX(-1px)}.mc-toggle__overlay{left:0;position:absolute;top:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{border-radius:var(--mc-toggle-size-border-radius,9px);height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-width,28px)}.mc-toggle:not(.mc-toggle_small) .mc-toggle__overlay{border-radius:var(--mc-toggle-size-border-radius,9px);height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-width,28px)}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-height,16px)}.mc-toggle.mc-toggle_small .mc-toggle-bar,.mc-toggle.mc-toggle_small .mc-toggle__overlay{border-radius:var(--mc-toggle-small-size-border-radius,8px);height:var(--mc-toggle-small-size-height,14px);width:var(--mc-toggle-small-size-width,24px)}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:var(--mc-toggle-small-size-height,14px);width:var(--mc-toggle-small-size-height,14px)}.mc-toggle:not(.mc-disabled){cursor:pointer}"]
-            }] }
+                styles: [".mc-toggle{display:inline-block}.mc-toggle .mc-toggle-layout{cursor:inherit;align-items:baseline;vertical-align:middle;display:inline-flex;white-space:nowrap}.mc-toggle .mc-toggle-bar{position:relative;border-width:1px;border-style:solid}.mc-toggle .mc-toggle-bar.mc-toggle-label-position-left{order:1}.mc-toggle .mc-toggle-bar-container{position:relative}.mc-toggle__container{display:flex;align-items:center;position:relative}.mc-toggle__container.left{flex-direction:row-reverse}.mc-toggle__content.left{margin-right:var(--mc-toggle-size-label-margin,8px)}.mc-toggle__content.right{margin-left:var(--mc-toggle-size-label-margin,8px)}.mc-toggle__circle{position:absolute;border-width:1px;border-style:solid;border-radius:100%;margin-top:-1px;margin-left:-1px;transform:translateX(-1px)}.mc-toggle__overlay{position:absolute;top:0;left:0;z-index:1}.mc-toggle:not(.mc-toggle_small) .mc-toggle-bar{height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-width,28px);border-radius:var(--mc-toggle-size-border-radius,9px)}.mc-toggle:not(.mc-toggle_small) .mc-toggle__overlay{border-radius:var(--mc-toggle-size-border-radius,9px);height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-width,28px)}.mc-toggle:not(.mc-toggle_small) .mc-toggle__circle{height:var(--mc-toggle-size-height,16px);width:var(--mc-toggle-size-height,16px)}.mc-toggle.mc-toggle_small .mc-toggle-bar,.mc-toggle.mc-toggle_small .mc-toggle__overlay{height:var(--mc-toggle-small-size-height,14px);width:var(--mc-toggle-small-size-width,24px);border-radius:var(--mc-toggle-small-size-border-radius,8px)}.mc-toggle.mc-toggle_small .mc-toggle__circle{height:var(--mc-toggle-small-size-height,14px);width:var(--mc-toggle-small-size-height,14px)}.mc-toggle:not(.mc-disabled){cursor:pointer}"]
+            },] }
 ];
 /** @nocollapse */
 McToggleComponent.ctorParameters = () => [
@@ -247,67 +150,7 @@ McToggleComponent.propDecorators = {
     checked: [{ type: Input }],
     change: [{ type: Output }]
 };
-if (false) {
-    /** @type {?} */
-    McToggleComponent.prototype.inputElement;
-    /** @type {?} */
-    McToggleComponent.prototype.labelPosition;
-    /** @type {?} */
-    McToggleComponent.prototype.ariaLabel;
-    /** @type {?} */
-    McToggleComponent.prototype.ariaLabelledby;
-    /** @type {?} */
-    McToggleComponent.prototype.id;
-    /** @type {?} */
-    McToggleComponent.prototype.name;
-    /** @type {?} */
-    McToggleComponent.prototype.value;
-    /**
-     * @type {?}
-     * @private
-     */
-    McToggleComponent.prototype._disabled;
-    /**
-     * @type {?}
-     * @private
-     */
-    McToggleComponent.prototype._checked;
-    /** @type {?} */
-    McToggleComponent.prototype.change;
-    /**
-     * @type {?}
-     * @private
-     */
-    McToggleComponent.prototype.uniqueId;
-    /**
-     * @type {?}
-     * @private
-     */
-    McToggleComponent.prototype.onTouchedCallback;
-    /**
-     * @type {?}
-     * @private
-     */
-    McToggleComponent.prototype.onChangeCallback;
-    /** @type {?} */
-    McToggleComponent.prototype._elementRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McToggleComponent.prototype._focusMonitor;
-    /**
-     * @type {?}
-     * @private
-     */
-    McToggleComponent.prototype._changeDetectorRef;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: toggle.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McToggleModule {
 }
 McToggleModule.decorators = [
@@ -319,21 +162,7 @@ McToggleModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-toggle.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McToggleBase, McToggleChange, McToggleComponent, McToggleMixinBase, McToggleModule };

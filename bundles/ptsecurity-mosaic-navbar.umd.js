@@ -305,7 +305,6 @@
         return value;
     }
 
-    /** @type {?} */
     var COLLAPSED_CLASS = 'mc-navbar-collapsed-title';
     var McNavbarLogo = /** @class */ (function () {
         function McNavbarLogo() {
@@ -347,27 +346,15 @@
                 },] }
     ];
     var McNavbarItemBase = /** @class */ (function () {
-        /**
-         * @param {?} elementRef
-         */
         function McNavbarItemBase(elementRef) {
             this.elementRef = elementRef;
         }
         return McNavbarItemBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McNavbarItemBase.prototype.elementRef;
-    }
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McNavbarMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McNavbarItemBase));
     var McNavbarItem = /** @class */ (function (_super) {
         __extends(McNavbarItem, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} _focusMonitor
-         */
         function McNavbarItem(elementRef, _focusMonitor) {
             var _this = _super.call(this, elementRef) || this;
             _this.elementRef = elementRef;
@@ -375,54 +362,30 @@
             return _this;
         }
         Object.defineProperty(McNavbarItem.prototype, "collapsedTitle", {
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this.elementRef.nativeElement.setAttribute('computedTitle', encodeURI(value));
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McNavbarItem.prototype.ngOnInit = function () {
             this.denyClickIfDisabled();
             this._focusMonitor.monitor(this.elementRef.nativeElement, true);
         };
-        /**
-         * @return {?}
-         */
         McNavbarItem.prototype.ngOnDestroy = function () {
             this._focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         };
         // This method is required due to angular 2 issue https://github.com/angular/angular/issues/11200
-        /**
-         * @private
-         * @return {?}
-         */
         McNavbarItem.prototype.denyClickIfDisabled = function () {
             var _this = this;
-            /** @type {?} */
             var events = this.elementRef.nativeElement.eventListeners('click');
-            events.forEach(( /**
-             * @param {?} event
-             * @return {?}
-             */function (event) { return _this.elementRef.nativeElement.removeEventListener('click', event); }));
-            this.elementRef.nativeElement.addEventListener('click', ( /**
-             * @param {?} event
-             * @return {?}
-             */function (event) {
+            events.forEach(function (event) { return _this.elementRef.nativeElement.removeEventListener('click', event); });
+            this.elementRef.nativeElement.addEventListener('click', function (event) {
                 if (_this.elementRef.nativeElement.hasAttribute('disabled')) {
                     event.stopImmediatePropagation();
                 }
-            }), true);
-            events.forEach(( /**
-             * @param {?} event
-             * @return {?}
-             */function (event) { return _this.elementRef.nativeElement.addEventListener('click', event); }));
+            }, true);
+            events.forEach(function (event) { return _this.elementRef.nativeElement.addEventListener('click', event); });
         };
         return McNavbarItem;
     }(McNavbarMixinBase));
@@ -437,7 +400,7 @@
                         '[attr.tabindex]': 'tabIndex',
                         '[attr.disabled]': 'disabled || null'
                     }
-                }] }
+                },] }
     ];
     /** @nocollapse */
     McNavbarItem.ctorParameters = function () { return [
@@ -447,15 +410,6 @@
     McNavbarItem.propDecorators = {
         collapsedTitle: [{ type: core.Input }]
     };
-    if (false) {
-        /** @type {?} */
-        McNavbarItem.prototype.elementRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McNavbarItem.prototype._focusMonitor;
-    }
     var McNavbarContainer = /** @class */ (function () {
         function McNavbarContainer() {
             this.position = 'left';
@@ -474,32 +428,16 @@
     McNavbarContainer.propDecorators = {
         position: [{ type: core.Input }]
     };
-    if (false) {
-        /** @type {?} */
-        McNavbarContainer.prototype.position;
-    }
     var CollapsibleItem = /** @class */ (function () {
-        /**
-         * @param {?} element
-         * @param {?} width
-         */
         function CollapsibleItem(element, width) {
             this.element = element;
             this.width = width;
             this.collapsed = false;
         }
-        /**
-         * @param {?} collapsed
-         * @return {?}
-         */
         CollapsibleItem.prototype.processCollapsed = function (collapsed) {
             this.collapsed = collapsed;
             this.updateCollapsedClass();
         };
-        /**
-         * @private
-         * @return {?}
-         */
         CollapsibleItem.prototype.updateCollapsedClass = function () {
             if (this.collapsed) {
                 this.element.classList.add(COLLAPSED_CLASS);
@@ -510,23 +448,7 @@
         };
         return CollapsibleItem;
     }());
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        CollapsibleItem.prototype.collapsed;
-        /** @type {?} */
-        CollapsibleItem.prototype.element;
-        /** @type {?} */
-        CollapsibleItem.prototype.width;
-    }
     var CachedItemWidth = /** @class */ (function () {
-        /**
-         * @param {?} element
-         * @param {?} width
-         * @param {?=} itemsForCollapse
-         */
         function CachedItemWidth(element, width, itemsForCollapse) {
             if (itemsForCollapse === void 0) { itemsForCollapse = []; }
             this.element = element;
@@ -534,9 +456,6 @@
             this.itemsForCollapse = itemsForCollapse;
         }
         Object.defineProperty(CachedItemWidth.prototype, "canCollapse", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this.itemsForCollapse.length > 0;
             },
@@ -544,9 +463,6 @@
             configurable: true
         });
         Object.defineProperty(CachedItemWidth.prototype, "collapsedItemsWidth", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 if (this._collapsedItemsWidth !== undefined) {
                     return this._collapsedItemsWidth;
@@ -557,47 +473,22 @@
             enumerable: false,
             configurable: true
         });
-        /**
-         * @param {?} collapsed
-         * @return {?}
-         */
         CachedItemWidth.prototype.processCollapsed = function (collapsed) {
             if (this.itemsForCollapse.length > 0) {
                 this.updateTitle(collapsed);
             }
-            this.itemsForCollapse.forEach(( /**
-             * @param {?} item
-             * @return {?}
-             */function (item) { return item.processCollapsed(collapsed); }));
+            this.itemsForCollapse.forEach(function (item) { return item.processCollapsed(collapsed); });
         };
-        /**
-         * @private
-         * @return {?}
-         */
         CachedItemWidth.prototype.calculateAndCacheCollapsedItemsWidth = function () {
             this._collapsedItemsWidth = this.itemsForCollapse
-                .reduce(( /**
-         * @param {?} acc
-         * @param {?} item
-         * @return {?}
-         */function (acc, item) { return acc + item.width; }), 0);
+                .reduce(function (acc, item) { return acc + item.width; }, 0);
         };
-        /**
-         * @private
-         * @return {?}
-         */
         CachedItemWidth.prototype.getTitle = function () {
-            /** @type {?} */
             var computedTitle = this.element.getAttribute('computedTitle');
             return computedTitle
                 ? decodeURI(computedTitle)
                 : (this.itemsForCollapse.length > 0 ? this.itemsForCollapse[0].element.innerText : '');
         };
-        /**
-         * @private
-         * @param {?} collapsed
-         * @return {?}
-         */
         CachedItemWidth.prototype.updateTitle = function (collapsed) {
             if (collapsed) {
                 this.element.setAttribute('title', this.getTitle());
@@ -608,23 +499,7 @@
         };
         return CachedItemWidth;
     }());
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        CachedItemWidth.prototype._collapsedItemsWidth;
-        /** @type {?} */
-        CachedItemWidth.prototype.element;
-        /** @type {?} */
-        CachedItemWidth.prototype.width;
-        /** @type {?} */
-        CachedItemWidth.prototype.itemsForCollapse;
-    }
     var McNavbar = /** @class */ (function () {
-        /**
-         * @param {?} _elementRef
-         */
         function McNavbar(_elementRef) {
             this._elementRef = _elementRef;
             this.forceRecalculateItemsWidth = false;
@@ -635,16 +510,11 @@
                 'mc-navbar-brand',
                 'mc-navbar-title'
             ];
-            /** @type {?} */
             var resizeObserver = rxjs.fromEvent(window, 'resize')
                 .pipe(operators.debounceTime(this.resizeDebounceInterval));
             this.resizeSubscription = resizeObserver.subscribe(this.updateCollapsed.bind(this));
         }
         Object.defineProperty(McNavbar.prototype, "maxAllowedWidth", {
-            /**
-             * @private
-             * @return {?}
-             */
             get: function () {
                 return this._elementRef.nativeElement.querySelector('nav').getBoundingClientRect().width;
             },
@@ -652,10 +522,6 @@
             configurable: true
         });
         Object.defineProperty(McNavbar.prototype, "itemsWidths", {
-            /**
-             * @private
-             * @return {?}
-             */
             get: function () {
                 if (this._itemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
                     return this._itemsWidths;
@@ -667,10 +533,6 @@
             configurable: true
         });
         Object.defineProperty(McNavbar.prototype, "totalItemsWidth", {
-            /**
-             * @private
-             * @return {?}
-             */
             get: function () {
                 if (this.totalItemsWidths !== undefined && !this.forceRecalculateItemsWidth) {
                     return this.totalItemsWidths;
@@ -681,14 +543,9 @@
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McNavbar.prototype.updateCollapsed = function () {
-            /** @type {?} */
             var collapseDelta = this.totalItemsWidth - this.maxAllowedWidth;
             for (var i = this.itemsWidths.length - 1; i >= 0; i--) {
-                /** @type {?} */
                 var item = this.itemsWidths[i];
                 if (!item.canCollapse) {
                     continue;
@@ -697,85 +554,40 @@
                 collapseDelta -= item.collapsedItemsWidth;
             }
         };
-        /**
-         * @return {?}
-         */
         McNavbar.prototype.ngAfterViewInit = function () {
             var _this = this;
             // Note: this wait is required for loading and rendering fonts for icons;
             // unfortunately we cannot control font rendering
-            setTimeout(( /**
-             * @return {?}
-             */function () { return _this.updateCollapsed(); }), 0);
+            setTimeout(function () { return _this.updateCollapsed(); }, 0);
         };
-        /**
-         * @return {?}
-         */
         McNavbar.prototype.ngOnDestroy = function () {
             this.resizeSubscription.unsubscribe();
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McNavbar.prototype.calculateAndCacheTotalItemsWidth = function () {
             this.totalItemsWidths = this.itemsWidths
-                .reduce(( /**
-         * @param {?} acc
-         * @param {?} item
-         * @return {?}
-         */function (acc, item) { return acc + item.width; }), 0);
+                .reduce(function (acc, item) { return acc + item.width; }, 0);
         };
-        /**
-         * @private
-         * @param {?} element
-         * @return {?}
-         */
         McNavbar.prototype.getOuterElementWidth = function (element) {
-            /** @type {?} */
             var baseWidth = element.getBoundingClientRect().width;
-            /** @type {?} */
             var marginRight = parseInt(getComputedStyle(element).getPropertyValue('margin-right'));
-            /** @type {?} */
             var marginLeft = parseInt(getComputedStyle(element).getPropertyValue('margin-left'));
             return baseWidth + marginRight + marginLeft;
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McNavbar.prototype.calculateAndCacheItemsWidth = function () {
             var _this = this;
-            /** @type {?} */
             var allItemsSelector = this.secondLevelElements
-                .map(( /**
-         * @param {?} e
-         * @return {?}
-         */function (e) { return _this.firstLevelElement + ">" + e; }));
-            /** @type {?} */
+                .map(function (e) { return _this.firstLevelElement + ">" + e; });
             var allItems = Array.from(this._elementRef.nativeElement.querySelectorAll(allItemsSelector));
             this._itemsWidths = allItems
-                .map(( /**
-         * @param {?} el
-         * @return {?}
-         */function (el) { return new CachedItemWidth(el, _this.getOuterElementWidth(el), _this.getItemsForCollapse(el)); }));
+                .map(function (el) { return new CachedItemWidth(el, _this.getOuterElementWidth(el), _this.getItemsForCollapse(el)); });
         };
-        /**
-         * @private
-         * @param {?} element
-         * @return {?}
-         */
         McNavbar.prototype.getItemsForCollapse = function (element) {
-            /** @type {?} */
             var icon = element.querySelector("[mc-icon],mc-navbar-logo,[mc-navbar-logo]");
             if (!icon) {
                 return [];
             }
             return Array.from(element.querySelectorAll('mc-navbar-title'))
-                .map(( /**
-         * @param {?} el
-         * @return {?}
-         */function (el) { return new CollapsibleItem(( /** @type {?} */(el)), el.getBoundingClientRect().width); }));
+                .map(function (el) { return new CollapsibleItem(el, el.getBoundingClientRect().width); });
         };
         return McNavbar;
     }());
@@ -784,61 +596,14 @@
                     selector: 'mc-navbar',
                     template: "\n        <nav class=\"mc-navbar\">\n            <ng-content select=\"[mc-navbar-container], mc-navbar-container\"></ng-content>\n        </nav>\n    ",
                     encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-navbar-left,.mc-navbar-right,mc-navbar-container{flex-shrink:0;height:100%}.mc-navbar,.mc-navbar-left,.mc-navbar-right,mc-navbar-container{align-items:center;display:flex;flex-direction:row;justify-content:space-between}.mc-navbar{height:var(--mc-navbar-size-height,48px);position:relative}.mc-navbar [mc-icon]+mc-navbar-title{margin-left:var(--mc-navbar-size-icon-margin-left,8px)}.mc-navbar [mc-icon]{min-height:16px;min-width:16px}.mc-navbar mc-navbar-title:not(.mc-navbar-collapsed-title)+[mc-icon]{margin-left:var(--mc-navbar-size-icon-margin-left,8px)}.mc-navbar-brand,.mc-navbar-item,.mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{align-items:center;display:flex;height:100%;padding-left:var(--mc-navbar-item-size-padding,16px);padding-right:var(--mc-navbar-item-size-padding,16px);position:relative}.mc-navbar-brand,mc-navbar-brand{margin-right:var(--mc-navbar-brand-size-margin-right,24px);padding-left:0;padding-right:var(--mc-navbar-brand-size-padding,12px)}.mc-navbar-brand .mc-navbar-title,mc-navbar-brand .mc-navbar-title{padding-left:var(--mc-navbar-brand-size-padding,12px);padding-right:0}.mc-navbar-title{white-space:nowrap}.mc-navbar-item:not([disabled]){cursor:pointer}.mc-navbar-item .mc-navbar-title,mc-navbar-brand{padding:0}mc-navbar-item.mc-progress:not([disabled]){cursor:pointer}.mc-navbar-item[disabled],mc-navbar-item[disabled] .mc-navbar-item{cursor:default}mc-navbar-title.mc-navbar-collapsed-title{display:none}"]
-                }] }
+                    styles: [".mc-navbar-left,.mc-navbar-right,mc-navbar-container{flex-shrink:0;height:100%}.mc-navbar,.mc-navbar-left,.mc-navbar-right,mc-navbar-container{display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar{position:relative;height:var(--mc-navbar-size-height,48px)}.mc-navbar [mc-icon]+mc-navbar-title{margin-left:var(--mc-navbar-size-icon-margin-left,8px)}.mc-navbar [mc-icon]{min-width:16px;min-height:16px}.mc-navbar mc-navbar-title:not(.mc-navbar-collapsed-title)+[mc-icon]{margin-left:var(--mc-navbar-size-icon-margin-left,8px)}.mc-navbar-brand,.mc-navbar-item,.mc-navbar-title,mc-navbar-brand,mc-navbar-item,mc-navbar-item:first-child{height:100%;position:relative;display:flex;align-items:center;padding-left:var(--mc-navbar-item-size-padding,16px);padding-right:var(--mc-navbar-item-size-padding,16px)}.mc-navbar-brand,mc-navbar-brand{padding-left:0;padding-right:var(--mc-navbar-brand-size-padding,12px);margin-right:var(--mc-navbar-brand-size-margin-right,24px)}.mc-navbar-brand .mc-navbar-title,mc-navbar-brand .mc-navbar-title{padding-left:var(--mc-navbar-brand-size-padding,12px);padding-right:0}.mc-navbar-title{white-space:nowrap}.mc-navbar-item:not([disabled]){cursor:pointer}.mc-navbar-item .mc-navbar-title,mc-navbar-brand{padding:0}mc-navbar-item.mc-progress:not([disabled]){cursor:pointer}.mc-navbar-item[disabled],mc-navbar-item[disabled] .mc-navbar-item{cursor:default}mc-navbar-title.mc-navbar-collapsed-title{display:none}"]
+                },] }
     ];
     /** @nocollapse */
     McNavbar.ctorParameters = function () { return [
         { type: core.ElementRef }
     ]; };
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        McNavbar.prototype.forceRecalculateItemsWidth;
-        /**
-         * @type {?}
-         * @private
-         */
-        McNavbar.prototype.resizeDebounceInterval;
-        /**
-         * @type {?}
-         * @private
-         */
-        McNavbar.prototype.firstLevelElement;
-        /**
-         * @type {?}
-         * @private
-         */
-        McNavbar.prototype.secondLevelElements;
-        /**
-         * @type {?}
-         * @private
-         */
-        McNavbar.prototype.totalItemsWidths;
-        /**
-         * @type {?}
-         * @private
-         */
-        McNavbar.prototype._itemsWidths;
-        /**
-         * @type {?}
-         * @private
-         */
-        McNavbar.prototype.resizeSubscription;
-        /**
-         * @type {?}
-         * @private
-         */
-        McNavbar.prototype._elementRef;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: navbar.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McNavbarModule = /** @class */ (function () {
         function McNavbarModule() {
         }
@@ -871,21 +636,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-navbar.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.McNavbar = McNavbar;

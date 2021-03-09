@@ -4,30 +4,15 @@ import { CommonModule } from '@angular/common';
 import { Directive, ElementRef, Renderer2, Component, ChangeDetectionStrategy, ViewEncapsulation, NgModule } from '@angular/core';
 import { mixinTabIndex, mixinColor, mixinDisabled } from '@ptsecurity/mosaic/core';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: button.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McButtonCssStyler {
-    /**
-     * @param {?} elementRef
-     * @param {?} renderer
-     */
     constructor(elementRef, renderer) {
         this.renderer = renderer;
         this.icons = [];
         this.nativeElement = elementRef.nativeElement;
     }
-    /**
-     * @return {?}
-     */
     get isIconButton() {
         return this.icons.length > 0;
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         /**
          * Here we had to use native selectors due to number of angular issues about ContentChildren limitations
@@ -38,16 +23,10 @@ class McButtonCssStyler {
         this.icons = Array.from(this.nativeElement.querySelectorAll('.mc-icon'));
         this.addClassModificatorForIcons();
     }
-    /**
-     * @private
-     * @return {?}
-     */
     addClassModificatorForIcons() {
-        /** @type {?} */
         const twoIcons = 2;
         const [firstIconElement, secondIconElement] = this.icons;
         if (this.icons.length === 1) {
-            /** @type {?} */
             const COMMENT_NODE = 8;
             if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {
                 this.renderer.addClass(firstIconElement, 'mc-icon_left');
@@ -78,61 +57,26 @@ McButtonCssStyler.ctorParameters = () => [
     { type: ElementRef },
     { type: Renderer2 }
 ];
-if (false) {
-    /** @type {?} */
-    McButtonCssStyler.prototype.nativeElement;
-    /**
-     * @type {?}
-     * @private
-     */
-    McButtonCssStyler.prototype.icons;
-    /**
-     * @type {?}
-     * @private
-     */
-    McButtonCssStyler.prototype.renderer;
-}
 class McButtonBase {
     // tslint:disable-next-line:naming-convention
-    /**
-     * @param {?} _elementRef
-     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
-if (false) {
-    /** @type {?} */
-    McButtonBase.prototype._elementRef;
-}
 // tslint:disable-next-line:naming-convention
-/** @type {?} */
 const McButtonMixinBase = mixinTabIndex(mixinColor(mixinDisabled(McButtonBase)));
 class McButton extends McButtonMixinBase {
-    /**
-     * @param {?} elementRef
-     * @param {?} _focusMonitor
-     */
     constructor(elementRef, _focusMonitor) {
         super(elementRef);
         this._focusMonitor = _focusMonitor;
         this._focusMonitor.monitor(this._elementRef.nativeElement, true);
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
-    /**
-     * @return {?}
-     */
     focus() {
         this.getHostElement().focus();
     }
-    /**
-     * @return {?}
-     */
     getHostElement() {
         return this._elementRef.nativeElement;
     }
@@ -147,33 +91,18 @@ McButton.decorators = [
                 host: {
                     '[attr.disabled]': 'disabled || null'
                 },
-                styles: [".mc-button,.mc-icon-button,.mc-light-button{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;border:none;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px);box-sizing:border-box;cursor:pointer;display:inline-block;outline:none;position:relative;text-align:center;text-decoration:none;user-select:none;vertical-align:baseline;white-space:nowrap}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default;pointer-events:none}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{line-height:20px;margin:auto}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{border-radius:inherit;bottom:-1px;left:-1px;pointer-events:none;position:absolute;right:-1px;top:-1px}"]
-            }] }
+                styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px)}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{pointer-events:none;cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}"]
+            },] }
 ];
 /** @nocollapse */
 McButton.ctorParameters = () => [
     { type: ElementRef },
     { type: FocusMonitor }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    McButton.prototype._focusMonitor;
-}
 class McAnchor extends McButton {
-    /**
-     * @param {?} focusMonitor
-     * @param {?} elementRef
-     */
     constructor(focusMonitor, elementRef) {
         super(elementRef, focusMonitor);
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     haltDisabledEvents(event) {
         if (this.disabled) {
             event.preventDefault();
@@ -193,8 +122,8 @@ McAnchor.decorators = [
                     '[attr.disabled]': 'disabled || null',
                     '(click)': 'haltDisabledEvents($event)'
                 },
-                styles: [".mc-button,.mc-icon-button,.mc-light-button{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;border:none;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px);box-sizing:border-box;cursor:pointer;display:inline-block;outline:none;position:relative;text-align:center;text-decoration:none;user-select:none;vertical-align:baseline;white-space:nowrap}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{cursor:default;pointer-events:none}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{line-height:20px;margin:auto}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{border-radius:inherit;bottom:-1px;left:-1px;pointer-events:none;position:absolute;right:-1px;top:-1px}"]
-            }] }
+                styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px)}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}.mc-button[disabled],.mc-icon-button[disabled],.mc-light-button[disabled]{pointer-events:none;cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}"]
+            },] }
 ];
 /** @nocollapse */
 McAnchor.ctorParameters = () => [
@@ -202,11 +131,6 @@ McAnchor.ctorParameters = () => [
     { type: ElementRef }
 ];
 
-/**
- * @fileoverview added by tsickle
- * Generated from: button.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McButtonModule {
 }
 McButtonModule.decorators = [
@@ -230,21 +154,7 @@ McButtonModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-button.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McAnchor, McButton, McButtonBase, McButtonCssStyler, McButtonMixinBase, McButtonModule };

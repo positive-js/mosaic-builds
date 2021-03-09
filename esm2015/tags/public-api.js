@@ -1,11 +1,6 @@
-/**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { McTagsModule } from './tag.module';
-export { McTagSelectionChange, McTagAvatar, McTagTrailingIcon, McTagBase, McTagMixinBase, McTag, McTagRemove } from './tag.component';
-export { McTagListBase, McTagListMixinBase, McTagListChange, McTagList } from './tag-list.component';
-export { McTagInput } from './tag-input';
-export { MC_TAGS_DEFAULT_OPTIONS } from './tag-default-options';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIvaG9tZS9jaXJjbGVjaS9tb3NhaWMvcGFja2FnZXMvbW9zYWljL3RhZ3MvIiwic291cmNlcyI6WyJwdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNkJBQWMsY0FBYyxDQUFDO0FBQzdCLG9IQUFjLGlCQUFpQixDQUFDO0FBQ2hDLDhFQUFjLHNCQUFzQixDQUFDO0FBQ3JDLDJCQUFjLGFBQWEsQ0FBQztBQUM1Qix3Q0FBYyx1QkFBdUIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vdGFnLm1vZHVsZSc7XG5leHBvcnQgKiBmcm9tICcuL3RhZy5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi90YWctbGlzdC5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi90YWctaW5wdXQnO1xuZXhwb3J0ICogZnJvbSAnLi90YWctZGVmYXVsdC1vcHRpb25zJztcbiJdfQ==
+export * from './tag.module';
+export * from './tag.component';
+export * from './tag-list.component';
+export * from './tag-input';
+export * from './tag-default-options';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3BhY2thZ2VzL21vc2FpYy90YWdzL3B1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYyxjQUFjLENBQUM7QUFDN0IsY0FBYyxpQkFBaUIsQ0FBQztBQUNoQyxjQUFjLHNCQUFzQixDQUFDO0FBQ3JDLGNBQWMsYUFBYSxDQUFDO0FBQzVCLGNBQWMsdUJBQXVCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL3RhZy5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi90YWcuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vdGFnLWxpc3QuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vdGFnLWlucHV0JztcbmV4cG9ydCAqIGZyb20gJy4vdGFnLWRlZmF1bHQtb3B0aW9ucyc7XG4iXX0=

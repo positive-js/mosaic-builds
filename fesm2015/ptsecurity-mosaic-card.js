@@ -5,32 +5,15 @@ import { EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, El
 import { SPACE } from '@ptsecurity/cdk/keycodes';
 import { mixinColor } from '@ptsecurity/mosaic/core';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: card.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McCardBase {
     // tslint:disable-next-line:naming-convention
-    /**
-     * @param {?} _elementRef
-     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
-if (false) {
-    /** @type {?} */
-    McCardBase.prototype._elementRef;
-}
 // tslint:disable-next-line:naming-convention
-/** @type {?} */
 const McCardBaseMixin = mixinColor(McCardBase);
 class McCard extends McCardBaseMixin {
-    /**
-     * @param {?} elementRef
-     * @param {?} _focusMonitor
-     */
     constructor(elementRef, _focusMonitor) {
         super(elementRef);
         this._focusMonitor = _focusMonitor;
@@ -40,45 +23,24 @@ class McCard extends McCardBaseMixin {
         this._tabIndex = 0;
         this._focusMonitor.monitor(this._elementRef.nativeElement, false);
     }
-    /**
-     * @return {?}
-     */
     get tabIndex() {
         return this.readonly ? null : this._tabIndex;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set tabIndex(value) {
         this._tabIndex = value;
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         this._focusMonitor.stopMonitoring(this._elementRef.nativeElement);
     }
-    /**
-     * @return {?}
-     */
     focus() {
         this.hostElement.focus();
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
     onClick($event) {
         if (!this.readonly) {
             $event.stopPropagation();
             this.selectedChange.emit(!this.selected);
         }
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
     onKeyDown($event) {
         // tslint:disable-next-line:deprecation
         switch ($event.keyCode) {
@@ -91,10 +53,6 @@ class McCard extends McCardBaseMixin {
             default:
         }
     }
-    /**
-     * @private
-     * @return {?}
-     */
     get hostElement() {
         return this._elementRef.nativeElement;
     }
@@ -114,8 +72,8 @@ McCard.decorators = [
                     '(keydown)': 'onKeyDown($event)',
                     '(click)': 'onClick($event)'
                 },
-                styles: [".mc-card{border-left:var(--mc-card-size-vertical-line,4px) solid transparent;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;position:relative}.mc-card:focus{outline:none}.mc-card .mc-card__overlay{background:transparent;bottom:0;left:0;pointer-events:none;position:absolute;right:0;top:0}.mc-card.mc-card_readonly{cursor:auto}"]
-            }] }
+                styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer;border-left:var(--mc-card-size-vertical-line,4px) solid transparent}.mc-card:focus{outline:none}.mc-card .mc-card__overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;background:transparent}.mc-card.mc-card_readonly{cursor:auto}"]
+            },] }
 ];
 /** @nocollapse */
 McCard.ctorParameters = () => [
@@ -128,30 +86,7 @@ McCard.propDecorators = {
     selectedChange: [{ type: Output }],
     tabIndex: [{ type: Input }]
 };
-if (false) {
-    /** @type {?} */
-    McCard.prototype.readonly;
-    /** @type {?} */
-    McCard.prototype.selected;
-    /** @type {?} */
-    McCard.prototype.selectedChange;
-    /**
-     * @type {?}
-     * @private
-     */
-    McCard.prototype._tabIndex;
-    /**
-     * @type {?}
-     * @private
-     */
-    McCard.prototype._focusMonitor;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: card.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McCardModule {
 }
 McCardModule.decorators = [
@@ -167,21 +102,7 @@ McCardModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-card.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McCard, McCardBase, McCardBaseMixin, McCardModule };

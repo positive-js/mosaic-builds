@@ -6,11 +6,6 @@ import { mixinColor } from '@ptsecurity/mosaic/core';
 import { Subject, EMPTY, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: cleaner.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McCleaner {
 }
 McCleaner.decorators = [
@@ -21,123 +16,25 @@ McCleaner.decorators = [
                 host: {
                     class: 'mc-cleaner'
                 }
-            }] }
+            },] }
 ];
 
-/**
- * @fileoverview added by tsickle
- * Generated from: form-field-control.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * An interface which allows a control to work inside of a `MсFormField`.
- * @abstract
- * @template T
- */
+/** An interface which allows a control to work inside of a `MсFormField`. */
 // tslint:disable-next-line:naming-convention
 class McFormFieldControl {
 }
-if (false) {
-    /**
-     * The value of the control.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.value;
-    /**
-     * Stream that emits whenever the state of the control changes such that the parent `MсFormField`
-     * needs to run change detection.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.stateChanges;
-    /**
-     * The element ID for this control.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.id;
-    /**
-     * The placeholder for this control.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.placeholder;
-    /**
-     * Gets the NgControl for this control.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.ngControl;
-    /**
-     * Whether the control is focused.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.focused;
-    /**
-     * Whether the control is empty.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.empty;
-    /**
-     * Whether the control is required.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.required;
-    /**
-     * Whether the control is disabled.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.disabled;
-    /**
-     * Whether the control is in an error state.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.errorState;
-    /**
-     * An optional name for the control type that can be used to distinguish `mc-form-field` elements
-     * based on their control type. The form field will add a class,
-     * `mc-form-field-type-{{controlType}}` to its root element.
-     * @type {?}
-     */
-    McFormFieldControl.prototype.controlType;
-    /**
-     * Handles a click on the control's container.
-     * @abstract
-     * @param {?} event
-     * @return {?}
-     */
-    McFormFieldControl.prototype.onContainerClick = function (event) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    McFormFieldControl.prototype.focus = function () { };
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: form-field-errors.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @return {?}
- */
 function getMcFormFieldMissingControlError() {
     return Error('mc-form-field must contain a McFormFieldControl.');
 }
-/**
- * @return {?}
- */
 function getMcFormFieldYouCanNotUseCleanerInNumberInputError() {
     return Error(`You can't use mc-cleaner with input that have type="number"`);
 }
 
-/**
- * @fileoverview added by tsickle
- * Generated from: hint.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-let nextUniqueId = 0;
+let nextUniqueId$1 = 0;
 class McHint {
     constructor() {
-        this.id = `mc-hint-${nextUniqueId++}`;
+        this.id = `mc-hint-${nextUniqueId$1++}`;
     }
 }
 McHint.decorators = [
@@ -152,16 +49,7 @@ McHint.decorators = [
 McHint.propDecorators = {
     id: [{ type: Input }]
 };
-if (false) {
-    /** @type {?} */
-    McHint.prototype.id;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: prefix.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McPrefix {
 }
 McPrefix.decorators = [
@@ -170,49 +58,26 @@ McPrefix.decorators = [
             },] }
 ];
 
-/**
- * @fileoverview added by tsickle
- * Generated from: stepper.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McStepper {
     constructor() {
         this.stepUp = new EventEmitter();
         this.stepDown = new EventEmitter();
     }
-    /**
-     * @param {?} numberInput
-     * @return {?}
-     */
     connectTo(numberInput) {
         if (!numberInput) {
             return;
         }
-        this.stepUp.subscribe((/**
-         * @return {?}
-         */
-        () => {
+        this.stepUp.subscribe(() => {
             numberInput.stepUp(numberInput.step);
-        }));
-        this.stepDown.subscribe((/**
-         * @return {?}
-         */
-        () => {
+        });
+        this.stepDown.subscribe(() => {
             numberInput.stepDown(numberInput.step);
-        }));
+        });
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
     onStepUp($event) {
         this.stepUp.emit();
         $event.preventDefault();
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
     onStepDown($event) {
         this.stepDown.emit();
         $event.preventDefault();
@@ -229,24 +94,13 @@ McStepper.decorators = [
            (mousedown)="onStepDown($event)">
         </i>
     `
-            }] }
+            },] }
 ];
 McStepper.propDecorators = {
     stepUp: [{ type: Output }],
     stepDown: [{ type: Output }]
 };
-if (false) {
-    /** @type {?} */
-    McStepper.prototype.stepUp;
-    /** @type {?} */
-    McStepper.prototype.stepDown;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: suffix.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McSuffix {
 }
 McSuffix.decorators = [
@@ -255,78 +109,42 @@ McSuffix.decorators = [
             },] }
 ];
 
-/**
- * @fileoverview added by tsickle
- * Generated from: form-field.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-let nextUniqueId$1 = 0;
+let nextUniqueId = 0;
 class McFormFieldBase {
     // tslint:disable-next-line:naming-convention
-    /**
-     * @param {?} _elementRef
-     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
-if (false) {
-    /** @type {?} */
-    McFormFieldBase.prototype._elementRef;
-}
 // tslint:disable-next-line:naming-convention
-/** @type {?} */
 const McFormFieldMixinBase = mixinColor(McFormFieldBase);
 class McFormField extends McFormFieldMixinBase {
     // tslint:disable-next-line:naming-convention
-    /**
-     * @param {?} _elementRef
-     * @param {?} _changeDetectorRef
-     */
     constructor(_elementRef, _changeDetectorRef) {
         super(_elementRef);
         this._elementRef = _elementRef;
         this._changeDetectorRef = _changeDetectorRef;
         // Unique id for the internal form field label.
-        this.labelId = `mc-form-field-label-${nextUniqueId$1++}`;
+        this.labelId = `mc-form-field-label-${nextUniqueId++}`;
         this.hovered = false;
         this.canCleanerClearByEsc = true;
         this.$unsubscribe = new Subject();
     }
-    /**
-     * @return {?}
-     */
     get hasHint() {
         return this.hint && this.hint.length > 0;
     }
-    /**
-     * @return {?}
-     */
     get hasSuffix() {
         return this.suffix && this.suffix.length > 0;
     }
-    /**
-     * @return {?}
-     */
     get hasPrefix() {
         return this.prefix && this.prefix.length > 0;
     }
-    /**
-     * @return {?}
-     */
     get hasCleaner() {
         return !!this.cleaner;
     }
-    /**
-     * @return {?}
-     */
     get hasStepper() {
         return !!this.stepper;
     }
-    /**
-     * @return {?}
-     */
     get canShowCleaner() {
         return this.hasCleaner &&
             this.control &&
@@ -334,26 +152,17 @@ class McFormField extends McFormFieldMixinBase {
             ? this.control.ngControl.value && !this.control.disabled
             : false;
     }
-    /**
-     * @return {?}
-     */
     get disabled() {
         return this.control && this.control.disabled;
     }
-    /**
-     * @return {?}
-     */
     get canShowStepper() {
         var _a;
         return this.hasStepper &&
             !this.disabled &&
             (((_a = this.control) === null || _a === void 0 ? void 0 : _a.focused) || this.hovered);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
-        if (((/** @type {?} */ (this.control))).numberInput && this.hasCleaner) {
+        if (this.control.numberInput && this.hasCleaner) {
             this.cleaner = null;
             throw getMcFormFieldYouCanNotUseCleanerInNumberInputError();
         }
@@ -364,42 +173,25 @@ class McFormField extends McFormFieldMixinBase {
         // Subscribe to changes in the child control state in order to update the form field UI.
         this.control.stateChanges
             .pipe(startWith())
-            .subscribe((/**
-         * @return {?}
-         */
-        () => {
+            .subscribe(() => {
             this._changeDetectorRef.markForCheck();
-        }));
+        });
         if (this.hasStepper) {
-            this.stepper.connectTo(((/** @type {?} */ (this.control))).numberInput);
+            this.stepper.connectTo(this.control.numberInput);
         }
         // Run change detection if the value changes.
-        /** @type {?} */
         const valueChanges = this.control.ngControl && this.control.ngControl.valueChanges || EMPTY;
         merge(valueChanges)
             .pipe(takeUntil(this.$unsubscribe))
-            .subscribe((/**
-         * @return {?}
-         */
-        () => this._changeDetectorRef.markForCheck()));
+            .subscribe(() => this._changeDetectorRef.markForCheck());
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentChecked() {
         this.validateControlChild();
     }
-    /**
-     * @return {?}
-     */
     ngAfterViewInit() {
         // Avoid animations on load.
         this._changeDetectorRef.detectChanges();
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
     clearValue($event) {
         $event.stopPropagation();
         if (this.control && this.control.ngControl) {
@@ -407,19 +199,11 @@ class McFormField extends McFormFieldMixinBase {
             this.control.focus();
         }
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
     onContainerClick($event) {
         if (this.control.onContainerClick) {
             this.control.onContainerClick($event);
         }
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     onKeyDown(event) {
         // tslint:disable-next-line:deprecation
         if (this.canCleanerClearByEsc && event.keyCode === ESCAPE && this.control.focused && this.hasCleaner) {
@@ -429,10 +213,6 @@ class McFormField extends McFormFieldMixinBase {
             event.preventDefault();
         }
     }
-    /**
-     * @param {?} isHovered
-     * @return {?}
-     */
     onHoverChanged(isHovered) {
         if (isHovered !== this.hovered) {
             this.hovered = isHovered;
@@ -442,33 +222,20 @@ class McFormField extends McFormFieldMixinBase {
     /**
      * Gets an ElementRef for the element that a overlay attached to the form-field should be
      * positioned relative to.
-     * @return {?}
      */
     getConnectedOverlayOrigin() {
         return this.connectionContainerRef || this._elementRef;
     }
-    /**
-     * Determines whether a class from the NgControl should be forwarded to the host element.
-     * @param {?} prop
-     * @return {?}
-     */
+    /** Determines whether a class from the NgControl should be forwarded to the host element. */
     shouldForward(prop) {
-        /** @type {?} */
         const ngControl = this.control ? this.control.ngControl : null;
         return ngControl && ngControl[prop];
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
     }
-    /**
-     * Throws an error if the form field's control is missing.
-     * @protected
-     * @return {?}
-     */
+    /** Throws an error if the form field's control is missing. */
     validateControlChild() {
         if (!this.control) {
             throw getMcFormFieldMissingControlError();
@@ -503,8 +270,8 @@ McFormField.decorators = [
                 inputs: ['color'],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-form-field{border-radius:var(--mc-form-field-size-border-radius,3px);display:inline-block;position:relative;width:100%}.mc-form-field:hover{z-index:1}.mc-form-field.mc-focused{z-index:2}.mc-hint{display:block}.mc-form-field__hint>.mc-hint{margin-top:var(--mc-form-field-hint-size-margin-top,4px)}.mc-form-field__container{border:var(--mc-form-field-size-border-width,1px) solid transparent;border-radius:var(--mc-form-field-size-border-radius,3px);position:relative}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{align-items:center;bottom:0;display:flex;flex-direction:row;justify-content:center;position:absolute;top:0;width:32px}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:var(--mc-form-field-size-button-width,32px)}.mc-form-field_has-prefix .mc-input{padding-left:var(--mc-form-field-size-button-width,32px)}.mc-cleaner{cursor:pointer;display:flex;height:100%;width:var(--mc-form-field-size-button-width,32px)}.mc-cleaner .mc-icon{align-items:center;display:flex;height:100%;justify-content:center;width:100%}.mc-form-field__cleaner .mc-cleaner,mc-stepper{bottom:0;position:absolute;right:0;top:0}mc-stepper{align-items:center;display:flex;flex-direction:column;justify-content:center;width:var(--mc-form-field-size-button-width,32px)}mc-stepper .mc-stepper-step-down,mc-stepper .mc-stepper-step-up{cursor:pointer;text-align:center;width:var(--mc-form-field-size-button-width,32px)}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)}", ".mc-input{background:transparent;border:none;box-sizing:border-box;margin:0;min-height:var(--mc-input-size-min-height,30px);outline:none;padding:0;padding:var(--mc-input-size-padding,5px 16px);width:var(--mc-input-size-width,100%)}.mc-input::-ms-clear,.mc-input::-ms-reveal{display:none;height:0;width:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset}", ".mc-timepicker{padding-right:calc(var(--mc-timepicker-size-padding-right, 16px) - var(--mc-form-field-size-border-width, 1px))}.mc-form-field-type-mc-timepicker{width:auto}", ".mc-textarea{-webkit-appearance:none;background:transparent;border:none;box-sizing:border-box;display:inline-block;margin:0;outline:none;overflow:auto;padding:var(--mc-textarea-size-padding,5px 16px);resize:none;vertical-align:bottom;width:100%}.mc-textarea:not(.mc-textarea-resizable){box-sizing:border-box;overflow-y:hidden}.mc-textarea.mc-textarea-resizable{min-height:var(--mc-textarea-size-min-height,50px);resize:vertical}.mc-textarea:invalid{box-shadow:unset}"]
-            }] }
+                styles: [".mc-form-field{position:relative;display:inline-block;width:100%;border-radius:var(--mc-form-field-size-border-radius,3px)}.mc-form-field:hover{z-index:1}.mc-form-field.mc-focused{z-index:2}.mc-hint{display:block}.mc-form-field__hint>.mc-hint{margin-top:var(--mc-form-field-hint-size-margin-top,4px)}.mc-form-field__container{position:relative;border:var(--mc-form-field-size-border-width,1px) solid transparent;border-radius:var(--mc-form-field-size-border-radius,3px)}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input,.mc-form-field_has-suffix .mc-input{padding-right:var(--mc-form-field-size-button-width,32px)}.mc-form-field_has-prefix .mc-input{padding-left:var(--mc-form-field-size-button-width,32px)}.mc-cleaner{display:flex;width:var(--mc-form-field-size-button-width,32px);height:100%;cursor:pointer}.mc-cleaner .mc-icon{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.mc-form-field__cleaner .mc-cleaner,mc-stepper{position:absolute;top:0;bottom:0;right:0}mc-stepper{display:flex;flex-direction:column;justify-content:center;align-items:center;width:var(--mc-form-field-size-button-width,32px)}mc-stepper .mc-stepper-step-down,mc-stepper .mc-stepper-step-up{cursor:pointer;width:var(--mc-form-field-size-button-width,32px);text-align:center}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)}", ".mc-input{background:transparent;padding:0;margin:0;border:none;outline:none;box-sizing:border-box;padding:var(--mc-input-size-padding,5px 16px);width:var(--mc-input-size-width,100%);min-height:var(--mc-input-size-min-height,30px)}.mc-input::-ms-clear,.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset}", ".mc-timepicker{padding-right:calc(var(--mc-timepicker-size-padding-right, 16px) - var(--mc-form-field-size-border-width, 1px))}.mc-form-field-type-mc-timepicker{width:auto}", ".mc-textarea{background:transparent;margin:0;border:none;outline:none;resize:none;overflow:auto;width:100%;box-sizing:border-box;padding:var(--mc-textarea-size-padding,5px 16px);display:inline-block;-webkit-appearance:none;vertical-align:bottom}.mc-textarea:not(.mc-textarea-resizable){box-sizing:border-box;overflow-y:hidden}.mc-textarea.mc-textarea-resizable{resize:vertical;min-height:var(--mc-textarea-size-min-height,50px)}.mc-textarea:invalid{box-shadow:unset}"]
+            },] }
 ];
 /** @nocollapse */
 McFormField.ctorParameters = () => [
@@ -520,40 +287,6 @@ McFormField.propDecorators = {
     prefix: [{ type: ContentChildren, args: [McPrefix,] }],
     connectionContainerRef: [{ type: ViewChild, args: ['connectionContainer', { static: true },] }]
 };
-if (false) {
-    /** @type {?} */
-    McFormField.prototype.control;
-    /** @type {?} */
-    McFormField.prototype.stepper;
-    /** @type {?} */
-    McFormField.prototype.cleaner;
-    /** @type {?} */
-    McFormField.prototype.hint;
-    /** @type {?} */
-    McFormField.prototype.suffix;
-    /** @type {?} */
-    McFormField.prototype.prefix;
-    /** @type {?} */
-    McFormField.prototype.connectionContainerRef;
-    /** @type {?} */
-    McFormField.prototype.labelId;
-    /** @type {?} */
-    McFormField.prototype.hovered;
-    /** @type {?} */
-    McFormField.prototype.canCleanerClearByEsc;
-    /**
-     * @type {?}
-     * @private
-     */
-    McFormField.prototype.$unsubscribe;
-    /** @type {?} */
-    McFormField.prototype._elementRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McFormField.prototype._changeDetectorRef;
-}
 class McFormFieldWithoutBorders {
 }
 McFormFieldWithoutBorders.decorators = [
@@ -564,11 +297,6 @@ McFormFieldWithoutBorders.decorators = [
             },] }
 ];
 
-/**
- * @fileoverview added by tsickle
- * Generated from: form-field.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McFormFieldModule {
 }
 McFormFieldModule.decorators = [
@@ -596,21 +324,7 @@ McFormFieldModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-form-field.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McCleaner, McFormField, McFormFieldBase, McFormFieldControl, McFormFieldMixinBase, McFormFieldModule, McFormFieldWithoutBorders, McHint, McPrefix, McStepper, McSuffix, getMcFormFieldMissingControlError, getMcFormFieldYouCanNotUseCleanerInNumberInputError };

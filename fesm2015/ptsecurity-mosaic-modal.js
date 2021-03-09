@@ -9,27 +9,7 @@ import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { filter } from 'rxjs/operators';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: modal-control.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @record
- */
-function IRegisteredMeta() { }
-if (false) {
-    /** @type {?} */
-    IRegisteredMeta.prototype.modalRef;
-    /** @type {?} */
-    IRegisteredMeta.prototype.afterOpenSubscription;
-    /** @type {?} */
-    IRegisteredMeta.prototype.afterCloseSubscription;
-}
 class McModalControlService {
-    /**
-     * @param {?} parentService
-     */
     constructor(parentService) {
         this.parentService = parentService;
         // @ts-ignore
@@ -40,72 +20,36 @@ class McModalControlService {
         this.rootRegisteredMetaMap = this.parentService ? null : new Map();
     }
     // Track singleton afterAllClose through over the injection tree
-    /**
-     * @return {?}
-     */
     get afterAllClose() {
         return this.parentService ? this.parentService.afterAllClose : this.rootAfterAllClose;
     }
     // Track singleton openModals array through over the injection tree
-    /**
-     * @return {?}
-     */
     get openModals() {
         return this.parentService ? this.parentService.openModals : this.rootOpenModals;
     }
     // Registered modal for later usage
-    /**
-     * @private
-     * @return {?}
-     */
     get registeredMetaMap() {
         return this.parentService ? this.parentService.registeredMetaMap : this.rootRegisteredMetaMap;
     }
     // Register a modal to listen its open/close
-    /**
-     * @param {?} modalRef
-     * @return {?}
-     */
     registerModal(modalRef) {
         if (!this.hasRegistered(modalRef)) {
-            /** @type {?} */
-            const afterOpenSubscription = modalRef.afterOpen.subscribe((/**
-             * @return {?}
-             */
-            () => this.openModals.push(modalRef)));
-            /** @type {?} */
-            const afterCloseSubscription = modalRef.afterClose.subscribe((/**
-             * @return {?}
-             */
-            () => this.removeOpenModal(modalRef)));
+            const afterOpenSubscription = modalRef.afterOpen.subscribe(() => this.openModals.push(modalRef));
+            const afterCloseSubscription = modalRef.afterClose.subscribe(() => this.removeOpenModal(modalRef));
             this.registeredMetaMap.set(modalRef, { modalRef, afterOpenSubscription, afterCloseSubscription });
         }
     }
-    /**
-     * @param {?} modalRef
-     * @return {?}
-     */
     hasRegistered(modalRef) {
         return this.registeredMetaMap.has(modalRef);
     }
     // Close all registered opened modals
-    /**
-     * @return {?}
-     */
     closeAll() {
-        /** @type {?} */
         let i = this.openModals.length;
         while (i--) {
             this.openModals[i].close();
         }
     }
-    /**
-     * @private
-     * @param {?} modalRef
-     * @return {?}
-     */
     removeOpenModal(modalRef) {
-        /** @type {?} */
         const index = this.openModals.indexOf(modalRef);
         if (index > -1) {
             this.openModals.splice(index, 1);
@@ -122,184 +66,35 @@ McModalControlService.decorators = [
 McModalControlService.ctorParameters = () => [
     { type: McModalControlService, decorators: [{ type: Optional }, { type: SkipSelf }] }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalControlService.prototype.rootOpenModals;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalControlService.prototype.rootAfterAllClose;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalControlService.prototype.rootRegisteredMetaMap;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalControlService.prototype.parentService;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: modal-ref.class.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /**
  * API class that public to users to handle the modal instance.
  * McModalRef is aim to avoid accessing to the modal instance directly by users.
- * @abstract
- * @template T, R
  */
 // tslint:disable-next-line:naming-convention
 class McModalRef {
 }
-if (false) {
-    /** @type {?} */
-    McModalRef.prototype.afterOpen;
-    /** @type {?} */
-    McModalRef.prototype.afterClose;
-    /**
-     * @abstract
-     * @return {?}
-     */
-    McModalRef.prototype.open = function () { };
-    /**
-     * @abstract
-     * @param {?=} result
-     * @return {?}
-     */
-    McModalRef.prototype.close = function (result) { };
-    /**
-     * @abstract
-     * @param {?=} result
-     * @return {?}
-     */
-    McModalRef.prototype.destroy = function (result) { };
-    /**
-     * Trigger the mcOnOk/mcOnCancel by manual
-     * @abstract
-     * @return {?}
-     */
-    McModalRef.prototype.triggerOk = function () { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    McModalRef.prototype.triggerCancel = function () { };
-    /**
-     * Return the component instance of mcContent when specify mcContent as a Component
-     * Note: this method may return undefined if the Component has not ready yet.
-     * (it only available after Modal's ngOnInit)
-     * @abstract
-     * @return {?}
-     */
-    McModalRef.prototype.getContentComponent = function () { };
-    /**
-     * Get the dom element of this Modal
-     * @abstract
-     * @return {?}
-     */
-    McModalRef.prototype.getElement = function () { };
-    /**
-     * Get the instance of the Modal itself
-     * @abstract
-     * @return {?}
-     */
-    McModalRef.prototype.getInstance = function () { };
-    /**
-     * Call markForCheck for change detector
-     * @abstract
-     * @return {?}
-     */
-    McModalRef.prototype.markForCheck = function () { };
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: modal-util.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @record
- */
-function IClickPosition() { }
-if (false) {
-    /** @type {?} */
-    IClickPosition.prototype.x;
-    /** @type {?} */
-    IClickPosition.prototype.y;
-}
 class ModalUtil {
-    /**
-     * @param {?} document
-     */
     constructor(document) {
         this.document = document;
         this.lastPosition = { x: -1, y: -1 };
         this.listenDocumentClick();
     }
-    /**
-     * @return {?}
-     */
     getLastClickPosition() {
         return this.lastPosition;
     }
-    /**
-     * @return {?}
-     */
     listenDocumentClick() {
-        this.document.addEventListener('click', (/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => {
+        this.document.addEventListener('click', (event) => {
             this.lastPosition = { x: event.clientX, y: event.clientY };
-        }));
+        });
     }
 }
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    ModalUtil.prototype.lastPosition;
-    /**
-     * @type {?}
-     * @private
-     */
-    ModalUtil.prototype.document;
-}
-/** @type {?} */
 const modalUtilObject = new ModalUtil(document);
 
-/**
- * @fileoverview added by tsickle
- * Generated from: modal.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 // Duration when perform animations (ms)
-/** @type {?} */
 const MODAL_ANIMATE_DURATION = 200;
-/**
- * @template T, R
- */
 class McModalComponent extends McModalRef {
-    /**
-     * @param {?} overlay
-     * @param {?} renderer
-     * @param {?} cfr
-     * @param {?} elementRef
-     * @param {?} viewContainer
-     * @param {?} modalControl
-     * @param {?} changeDetector
-     * @param {?} document
-     */
     constructor(overlay, renderer, cfr, elementRef, viewContainer, modalControl, changeDetector, document) {
         super();
         this.overlay = overlay;
@@ -330,109 +125,46 @@ class McModalComponent extends McModalRef {
         this.mcOnCancel = new EventEmitter();
         // The origin point that animation based on
         this.transformOrigin = '0px 0px 0px';
-        this.mcGetContainer = (/**
-         * @return {?}
-         */
-        () => this.overlay.create());
+        this.mcGetContainer = () => this.overlay.create();
     }
-    /**
-     * @return {?}
-     */
     get mcVisible() { return this._mcVisible; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set mcVisible(value) { this._mcVisible = value; }
-    /**
-     * @return {?}
-     */
     get mcClosable() { return this._mcClosable; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set mcClosable(value) { this._mcClosable = value; }
-    /**
-     * @return {?}
-     */
     get mcMask() { return this._mcMask; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set mcMask(value) { this._mcMask = value; }
-    /**
-     * @return {?}
-     */
     get mcMaskClosable() { return this._mcMaskClosable; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set mcMaskClosable(value) { this._mcMaskClosable = value; }
-    /**
-     * @return {?}
-     */
     get mcOkLoading() { return this._mcOkLoading; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set mcOkLoading(value) { this._mcOkLoading = value; }
-    /**
-     * @return {?}
-     */
     get mcCancelLoading() { return this._mcCancelLoading; }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set mcCancelLoading(value) { this._mcCancelLoading = value; }
     // Observable alias for mcAfterOpen
-    /**
-     * @return {?}
-     */
     get afterOpen() {
         return this.mcAfterOpen.asObservable();
     }
     // Observable alias for mcAfterClose
-    /**
-     * @return {?}
-     */
     get afterClose() {
         return this.mcAfterClose.asObservable();
     }
-    /**
-     * @return {?}
-     */
     get okText() {
         return this.mcOkText;
     }
-    /**
-     * @return {?}
-     */
     get cancelText() {
         return this.mcCancelText;
     }
     // Indicate whether this dialog should hidden
-    /**
-     * @return {?}
-     */
     get hidden() {
         return !this.mcVisible && !this.animationState;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         // Create component along without View
         if (this.isComponent(this.mcContent)) {
-            this.createDynamicComponent((/** @type {?} */ (this.mcContent)));
+            this.createDynamicComponent(this.mcContent);
         }
         // Setup default button options
         if (this.isModalButtons(this.mcFooter)) {
-            this.mcFooter = this.formatModalButtons((/** @type {?} */ (this.mcFooter)));
+            this.mcFooter = this.formatModalButtons(this.mcFooter);
         }
         if (this.isComponent(this.mcComponent)) {
             this.createDynamicComponent(this.mcComponent);
@@ -454,19 +186,12 @@ class McModalComponent extends McModalRef {
     // here we can't support "mcContent"(Component) etc. as inputs that initialized dynamically.
     // BUT: User also can change "mcContent" dynamically to trigger UI changes
     // (provided you don't use Component that needs initializations)
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
     ngOnChanges(changes) {
         if (changes.mcVisible) {
             // Do not trigger animation while initializing
             this.handleVisibleStateChange(this.mcVisible, !changes.mcVisible.firstChange);
         }
     }
-    /**
-     * @return {?}
-     */
     ngAfterViewInit() {
         // If using Component, it is the time to attach View while bodyContainer is ready
         if (this.contentComponentRef) {
@@ -474,106 +199,59 @@ class McModalComponent extends McModalRef {
         }
         for (const autoFocusedButton of this.autoFocusedButtons.toArray()) {
             if (autoFocusedButton.nativeElement.autofocus) {
-                ((/** @type {?} */ (autoFocusedButton.nativeElement))).focus();
+                autoFocusedButton.nativeElement.focus();
                 break;
             }
         }
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         if (this.container instanceof OverlayRef) {
             this.container.dispose();
         }
     }
-    /**
-     * @return {?}
-     */
     open() {
         this.changeVisibleFromInside(true);
     }
-    /**
-     * @param {?=} result
-     * @return {?}
-     */
     close(result) {
         this.changeVisibleFromInside(false, result);
     }
     // Destroy equals Close
-    /**
-     * @param {?=} result
-     * @return {?}
-     */
     destroy(result) {
         this.close(result);
     }
-    /**
-     * @return {?}
-     */
     markForCheck() {
         this.changeDetector.markForCheck();
     }
-    /**
-     * @return {?}
-     */
     triggerOk() {
         this.onClickOkCancel('ok');
     }
-    /**
-     * @return {?}
-     */
     triggerCancel() {
         this.onClickOkCancel('cancel');
     }
-    /**
-     * @return {?}
-     */
     getInstance() {
         return this;
     }
-    /**
-     * @return {?}
-     */
     getContentComponentRef() {
         return this.contentComponentRef;
     }
-    /**
-     * @return {?}
-     */
     getContentComponent() {
         return this.contentComponentRef && this.contentComponentRef.instance;
     }
-    /**
-     * @return {?}
-     */
     getElement() {
         return this.elementRef && this.elementRef.nativeElement;
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
     onClickMask($event) {
         if (this.mcMask &&
             this.mcMaskClosable &&
-            ((/** @type {?} */ ($event.target))).classList.contains('mc-modal-wrap') &&
+            $event.target.classList.contains('mc-modal-wrap') &&
             this.mcVisible) {
             this.onClickOkCancel('cancel');
         }
     }
     // tslint:disable-next-line: no-reserved-keywords
-    /**
-     * @param {?} type
-     * @return {?}
-     */
     isModalType(type) {
         return this.mcModalType === type;
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     onKeyDown(event) {
         // tslint:disable-next-line:deprecation .key isn't supported in Edge
         if (event.keyCode === ESCAPE && this.container && (this.container instanceof OverlayRef)) {
@@ -582,9 +260,6 @@ class McModalComponent extends McModalRef {
         }
     }
     // AoT
-    /**
-     * @return {?}
-     */
     onClickCloseBtn() {
         if (this.mcVisible) {
             this.onClickOkCancel('cancel');
@@ -592,40 +267,23 @@ class McModalComponent extends McModalRef {
     }
     // AoT
     // tslint:disable-next-line: no-reserved-keywords
-    /**
-     * @param {?} type
-     * @return {?}
-     */
     onClickOkCancel(type) {
-        /** @type {?} */
         const trigger = { ok: this.mcOnOk, cancel: this.mcOnCancel }[type];
-        /** @type {?} */
         const loadingKey = { ok: 'mcOkLoading', cancel: 'mcCancelLoading' }[type];
         if (trigger instanceof EventEmitter) {
             trigger.emit(this.getContentComponent());
         }
         else if (typeof trigger === 'function') {
-            /** @type {?} */
             const result = trigger(this.getContentComponent());
             // Users can return "false" to prevent closing by default
-            /** @type {?} */
-            const caseClose = (/**
-             * @param {?} doClose
-             * @return {?}
-             */
-            (doClose) => (doClose !== false) && this.close((/** @type {?} */ (doClose))));
+            const caseClose = (doClose) => (doClose !== false) && this.close(doClose);
             if (isPromise(result)) {
                 this[loadingKey] = true;
-                /** @type {?} */
-                const handleThen = (/**
-                 * @param {?} doClose
-                 * @return {?}
-                 */
-                (doClose) => {
+                const handleThen = (doClose) => {
                     this[loadingKey] = false;
                     caseClose(doClose);
-                });
-                ((/** @type {?} */ (result))).then(handleThen).catch(handleThen);
+                };
+                result.then(handleThen).catch(handleThen);
             }
             else {
                 caseClose(result);
@@ -633,48 +291,25 @@ class McModalComponent extends McModalRef {
         }
     }
     // AoT
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     isNonEmptyString(value) {
         return typeof value === 'string' && value !== '';
     }
     // AoT
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     isTemplateRef(value) {
         return value instanceof TemplateRef;
     }
     // AoT
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     isComponent(value) {
         return value instanceof Type;
     }
     // AoT
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     isModalButtons(value) {
         return Array.isArray(value) && value.length > 0;
     }
     // Lookup a button's property, if the prop is a function, call & then return the result, otherwise, return itself.
     // AoT
-    /**
-     * @param {?} options
-     * @param {?} prop
-     * @return {?}
-     */
     getButtonCallableProp(options, prop) {
-        /** @type {?} */
         const value = options[prop];
-        /** @type {?} */
         const args = [];
         if (this.contentComponentRef) {
             args.push(this.contentComponentRef.instance);
@@ -683,34 +318,16 @@ class McModalComponent extends McModalRef {
     }
     // On mcFooter's modal button click
     // AoT
-    /**
-     * @param {?} button
-     * @return {?}
-     */
     onButtonClick(button) {
         // Call onClick directly
         // tslint:disable-next-line:no-inferred-empty-object-type  rule seems to be broken
-        /** @type {?} */
         const result = this.getButtonCallableProp(button, 'onClick');
         if (isPromise(result)) {
             button.loading = true;
-            ((/** @type {?} */ (result))).then((/**
-             * @return {?}
-             */
-            () => button.loading = false)).catch((/**
-             * @return {?}
-             */
-            () => button.loading = false));
+            result.then(() => button.loading = false).catch(() => button.loading = false);
         }
     }
     // Do rest things when visible state changed
-    /**
-     * @private
-     * @param {?} visible
-     * @param {?=} animation
-     * @param {?=} closeResult
-     * @return {?}
-     */
     handleVisibleStateChange(visible, animation = true, closeResult) {
         // Hide scrollbar at the first time when shown up
         if (visible) {
@@ -719,10 +336,7 @@ class McModalComponent extends McModalRef {
         return Promise
             .resolve(animation && this.animateTo(visible))
             // Emit open/close event after animations over
-            .then((/**
-         * @return {?}
-         */
-        () => {
+            .then(() => {
             if (visible) {
                 this.mcAfterOpen.emit();
             }
@@ -731,15 +345,9 @@ class McModalComponent extends McModalRef {
                 // Show/hide scrollbar when animation is over
                 this.changeBodyOverflow();
             }
-        }));
+        });
     }
     // Change mcVisible from inside
-    /**
-     * @private
-     * @param {?} visible
-     * @param {?=} closeResult
-     * @return {?}
-     */
     changeVisibleFromInside(visible, closeResult) {
         if (this.mcVisible !== visible) {
             // Change mcVisible value immediately
@@ -749,11 +357,6 @@ class McModalComponent extends McModalRef {
         }
         return Promise.resolve();
     }
-    /**
-     * @private
-     * @param {?} state
-     * @return {?}
-     */
     changeAnimationState(state) {
         this.animationState = state;
         if (state) {
@@ -777,46 +380,24 @@ class McModalComponent extends McModalRef {
             this.changeDetector.markForCheck();
         }
     }
-    /**
-     * @private
-     * @param {?} isVisible
-     * @return {?}
-     */
     animateTo(isVisible) {
         // Figure out the lastest click position when shows up
         if (isVisible) {
             // [NOTE] Using timeout due to the document.click event is fired later than visible change,
             // so if not postponed to next event-loop, we can't get the lastest click position
-            window.setTimeout((/**
-             * @return {?}
-             */
-            () => this.updateTransformOrigin()));
+            window.setTimeout(() => this.updateTransformOrigin());
         }
         this.changeAnimationState(isVisible ? 'enter' : 'leave');
         // Return when animation is over
-        return new Promise((/**
-         * @param {?} resolve
-         * @return {?}
-         */
-        (resolve) => window.setTimeout((/**
-         * @return {?}
-         */
-        () => {
-            this.changeAnimationState(null);
-            resolve();
-        }), MODAL_ANIMATE_DURATION)));
+        return new Promise((resolve) => {
+            return window.setTimeout(() => {
+                this.changeAnimationState(null);
+                resolve();
+            }, MODAL_ANIMATE_DURATION);
+        });
     }
-    /**
-     * @private
-     * @param {?} buttons
-     * @return {?}
-     */
     formatModalButtons(buttons) {
-        return buttons.map((/**
-         * @param {?} button
-         * @return {?}
-         */
-        (button) => {
+        return buttons.map((button) => {
             return Object.assign({
                 type: 'default',
                 size: 'default',
@@ -825,19 +406,15 @@ class McModalComponent extends McModalRef {
                 loading: false,
                 disabled: false
             }, button);
-        }));
+        });
     }
     /**
      * Create a component dynamically but not attach to any View
      * (this action will be executed when bodyContainer is ready)
-     * @private
-     * @param {?} component Component class
-     * @return {?}
+     * @param component Component class
      */
     createDynamicComponent(component) {
-        /** @type {?} */
         const factory = this.cfr.resolveComponentFactory(component);
-        /** @type {?} */
         const childInjector = Injector.create({
             providers: [{ provide: McModalRef, useValue: this }],
             parent: this.viewContainer.injector
@@ -851,14 +428,8 @@ class McModalComponent extends McModalRef {
         this.contentComponentRef.changeDetectorRef.detectChanges();
     }
     // Update transform-origin to the last click position on document
-    /**
-     * @private
-     * @return {?}
-     */
     updateTransformOrigin() {
-        /** @type {?} */
-        const modalElement = (/** @type {?} */ (this.modalContainer.nativeElement));
-        /** @type {?} */
+        const modalElement = this.modalContainer.nativeElement;
         const lastPosition = modalUtilObject.getLastClickPosition();
         if (lastPosition) {
             this.transformOrigin = `${lastPosition.x - modalElement.offsetLeft}px ${lastPosition.y - modalElement.offsetTop}px 0px`;
@@ -866,12 +437,9 @@ class McModalComponent extends McModalRef {
     }
     /**
      * Take care of the body's overflow to decide the existense of scrollbar
-     * @private
-     * @param {?=} plusNum The number that the openModals.length will increase soon
-     * @return {?}
+     * @param plusNum The number that the openModals.length will increase soon
      */
     changeBodyOverflow(plusNum = 0) {
-        /** @type {?} */
         const openModals = this.modalControl.openModals;
         if (openModals.length + plusNum > 0) {
             this.renderer.setStyle(this.document.body, 'overflow', 'hidden');
@@ -889,8 +457,8 @@ McModalComponent.decorators = [
                 host: {
                     '(keydown)': 'onKeyDown($event)'
                 },
-                styles: [".mc-confirm .mc-modal-close,.mc-confirm .mc-modal-header{display:none}.mc-confirm .mc-modal-body{padding:var(--mc-modal-confirm-size-padding,24px)}.mc-confirm-body-wrapper{zoom:1}.mc-confirm-body-wrapper:after,.mc-confirm-body-wrapper:before{content:\"\";display:table}.mc-confirm-body-wrapper:after{clear:both}.mc-confirm-body .mc-confirm-title{display:block;overflow:auto}.mc-confirm .mc-confirm-btns{border-radius:var(--mc-modal-footer-size-border-radius,0 0 4px 4px);text-align:right}.mc-confirm .mc-confirm-btns button+button{margin:16px}.mc-modal{box-sizing:border-box;list-style:none;margin:0 auto;padding:var(--mc-modal-size-padding,0 0 24px);position:relative;top:var(--mc-modal-size-top,48px);width:auto}.mc-modal.zoom-appear,.mc-modal.zoom-enter{-webkit-animation-duration:.3s;animation-duration:.3s;opacity:0;transform:none}.mc-modal .mc-modal-close{height:var(--mc-modal-size-close-width,56px);position:absolute;right:0;top:0;width:var(--mc-modal-size-close-width,56px);z-index:10}.mc-modal-wrap{-webkit-overflow-scrolling:touch;bottom:0;left:0;outline:0;overflow:auto;position:fixed;right:0;top:0;z-index:1000}.mc-modal-title{margin:0}.mc-modal-content{background-clip:padding-box;background-color:#fff;border-radius:var(--mc-modal-size-border-radius,4px);position:relative}.mc-modal-header{border-radius:var(--mc-modal-header-size-border-radius,4px 4px 0 0);display:block;padding:var(--mc-modal-header-size-padding,14px 16px)}.mc-modal-body{display:block;max-height:var(--mc-modal-body-size-max-height,calc(100vh - 260px));overflow-y:auto;padding:var(--mc-modal-body-size-padding,16px 24px 24px);word-wrap:break-word}.mc-modal-footer{border-radius:var(--mc-modal-footer-size-border-radius,0 0 4px 4px);display:block;padding:var(--mc-modal-footer-size-padding,16px 16px);text-align:right}.mc-modal-footer button+button{margin-bottom:0;margin-left:16px}.mc-modal-mask{bottom:0;height:100%;left:0;position:fixed;right:0;top:0;z-index:1000}.mc-modal-mask.mc-modal-mask-hidden{display:none}.mc-modal-open{overflow:hidden}"]
-            }] }
+                styles: [".mc-confirm .mc-modal-close,.mc-confirm .mc-modal-header{display:none}.mc-confirm .mc-modal-body{padding:var(--mc-modal-confirm-size-padding,24px)}.mc-confirm-body-wrapper{zoom:1}.mc-confirm-body-wrapper:after,.mc-confirm-body-wrapper:before{content:\"\";display:table}.mc-confirm-body-wrapper:after{clear:both}.mc-confirm-body .mc-confirm-title{display:block;overflow:auto}.mc-confirm .mc-confirm-btns{border-radius:var(--mc-modal-footer-size-border-radius,0 0 4px 4px);text-align:right}.mc-confirm .mc-confirm-btns button+button{margin:16px}.mc-modal{box-sizing:border-box;position:relative;top:var(--mc-modal-size-top,48px);width:auto;margin:0 auto;padding:var(--mc-modal-size-padding,0 0 24px);list-style:none}.mc-modal.zoom-appear,.mc-modal.zoom-enter{-webkit-animation-duration:.3s;animation-duration:.3s;transform:none;opacity:0}.mc-modal .mc-modal-close{position:absolute;z-index:10;top:0;right:0;width:var(--mc-modal-size-close-width,56px);height:var(--mc-modal-size-close-width,56px)}.mc-modal-wrap{position:fixed;z-index:1000;top:0;right:0;bottom:0;left:0;overflow:auto;-webkit-overflow-scrolling:touch;outline:0}.mc-modal-title{margin:0}.mc-modal-content{position:relative;border-radius:var(--mc-modal-size-border-radius,4px);background-clip:padding-box;background-color:#fff}.mc-modal-header{display:block;border-radius:var(--mc-modal-header-size-border-radius,4px 4px 0 0);padding:var(--mc-modal-header-size-padding,14px 16px)}.mc-modal-body{display:block;overflow-y:auto;max-height:var(--mc-modal-body-size-max-height,calc(100vh - 260px));padding:var(--mc-modal-body-size-padding,16px 24px 24px);word-wrap:break-word}.mc-modal-footer{display:block;border-radius:var(--mc-modal-footer-size-border-radius,0 0 4px 4px);padding:var(--mc-modal-footer-size-padding,16px 16px);text-align:right}.mc-modal-footer button+button{margin-left:16px;margin-bottom:0}.mc-modal-mask{position:fixed;z-index:1000;top:0;right:0;left:0;bottom:0;height:100%}.mc-modal-mask.mc-modal-mask-hidden{display:none}.mc-modal-open{overflow:hidden}"]
+            },] }
 ];
 /** @nocollapse */
 McModalComponent.ctorParameters = () => [
@@ -937,174 +505,17 @@ McModalComponent.propDecorators = {
     autoFocusedButtons: [{ type: ViewChildren, args: ['autoFocusedButton', { read: ElementRef },] }],
     mcGetContainer: [{ type: Input }]
 };
-if (false) {
-    /** @type {?} */
-    McModalComponent.prototype.mcModalType;
-    /** @type {?} */
-    McModalComponent.prototype.mcComponent;
-    /** @type {?} */
-    McModalComponent.prototype.mcContent;
-    /** @type {?} */
-    McModalComponent.prototype.mcComponentParams;
-    /** @type {?} */
-    McModalComponent.prototype.mcFooter;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype._mcVisible;
-    /** @type {?} */
-    McModalComponent.prototype.mcVisibleChange;
-    /** @type {?} */
-    McModalComponent.prototype.mcZIndex;
-    /** @type {?} */
-    McModalComponent.prototype.mcWidth;
-    /** @type {?} */
-    McModalComponent.prototype.mcWrapClassName;
-    /** @type {?} */
-    McModalComponent.prototype.mcClassName;
-    /** @type {?} */
-    McModalComponent.prototype.mcStyle;
-    /** @type {?} */
-    McModalComponent.prototype.mcTitle;
-    /** @type {?} */
-    McModalComponent.prototype.mcCloseByESC;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype._mcClosable;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype._mcMask;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype._mcMaskClosable;
-    /** @type {?} */
-    McModalComponent.prototype.mcMaskStyle;
-    /** @type {?} */
-    McModalComponent.prototype.mcBodyStyle;
-    /** @type {?} */
-    McModalComponent.prototype.mcAfterOpen;
-    /** @type {?} */
-    McModalComponent.prototype.mcAfterClose;
-    /** @type {?} */
-    McModalComponent.prototype.mcOkText;
-    /** @type {?} */
-    McModalComponent.prototype.mcOkType;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype._mcOkLoading;
-    /** @type {?} */
-    McModalComponent.prototype.mcOnOk;
-    /** @type {?} */
-    McModalComponent.prototype.mcCancelText;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype._mcCancelLoading;
-    /** @type {?} */
-    McModalComponent.prototype.mcOnCancel;
-    /** @type {?} */
-    McModalComponent.prototype.modalContainer;
-    /** @type {?} */
-    McModalComponent.prototype.bodyContainer;
-    /** @type {?} */
-    McModalComponent.prototype.autoFocusedButtons;
-    /** @type {?} */
-    McModalComponent.prototype.maskAnimationClassMap;
-    /** @type {?} */
-    McModalComponent.prototype.modalAnimationClassMap;
-    /** @type {?} */
-    McModalComponent.prototype.transformOrigin;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.contentComponentRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.animationState;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.container;
-    /** @type {?} */
-    McModalComponent.prototype.mcGetContainer;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.overlay;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.renderer;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.cfr;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.elementRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.viewContainer;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.modalControl;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.changeDetector;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalComponent.prototype.document;
-}
 ////////////
-/**
- * @param {?} obj
- * @return {?}
- */
 function isPromise(obj) {
     // tslint:disable-next-line: no-unbound-method
-    return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof ((/** @type {?} */ (obj))).then === 'function' && typeof ((/** @type {?} */ (obj))).catch === 'function';
+    return !!obj &&
+        (typeof obj === 'object' || typeof obj === 'function') &&
+        typeof obj.then === 'function' &&
+        typeof obj.catch === 'function';
 }
 
-/**
- * @fileoverview added by tsickle
- * Generated from: css-unit.pipe.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class CssUnitPipe {
-    /**
-     * @param {?} value
-     * @param {?=} defaultUnit
-     * @return {?}
-     */
     transform(value, defaultUnit = 'px') {
-        /** @type {?} */
         const formatted = +value;
         return isNaN(formatted) ? `${value}` : `${formatted}${defaultUnit}`;
     }
@@ -1115,11 +526,6 @@ CssUnitPipe.decorators = [
             },] }
 ];
 
-/**
- * @fileoverview added by tsickle
- * Generated from: modal.directive.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McModalTitle {
 }
 McModalTitle.decorators = [
@@ -1151,17 +557,8 @@ McModalFooter.decorators = [
             },] }
 ];
 
-/**
- * @fileoverview added by tsickle
- * Generated from: modal.service.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 // A builder used for managing service creating modals
 class ModalBuilderForService {
-    /**
-     * @param {?} overlay
-     * @param {?=} options
-     */
     constructor(overlay, options = {}) {
         this.overlay = overlay;
         this.createModal();
@@ -1169,46 +566,25 @@ class ModalBuilderForService {
             options.mcGetContainer = undefined;
         }
         this.changeProps(options);
-        (/** @type {?} */ (this.modalRef)).instance.open();
-        (/** @type {?} */ (this.modalRef)).instance.mcAfterClose.subscribe((/**
-         * @return {?}
-         */
-        () => this.destroyModal()));
+        this.modalRef.instance.open();
+        this.modalRef.instance.mcAfterClose.subscribe(() => this.destroyModal());
         this.overlayRef.keydownEvents()
             // @ts-ignore
-            .pipe(filter((/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => {
+            .pipe(filter((event) => {
             // tslint:disable-next-line:deprecation replacement .key isn't supported in Edge
             return event.keyCode === ESCAPE && options.mcCloseByESC;
-        })))
-            .subscribe((/**
-         * @return {?}
-         */
-        () => (/** @type {?} */ (this.modalRef)).instance.close()));
+        }))
+            .subscribe(() => this.modalRef.instance.close());
     }
-    /**
-     * @return {?}
-     */
     getInstance() {
         return this.modalRef && this.modalRef.instance;
     }
-    /**
-     * @return {?}
-     */
     destroyModal() {
         if (this.modalRef) {
             this.overlayRef.dispose();
             this.modalRef = null;
         }
     }
-    /**
-     * @private
-     * @param {?} options
-     * @return {?}
-     */
     changeProps(options) {
         if (this.modalRef) {
             // here not limit user's inputs at runtime
@@ -1216,74 +592,32 @@ class ModalBuilderForService {
         }
     }
     // Create component to ApplicationRef
-    /**
-     * @private
-     * @return {?}
-     */
     createModal() {
         this.overlayRef = this.overlay.create();
         this.modalRef = this.overlayRef.attach(new ComponentPortal(McModalComponent));
     }
 }
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    ModalBuilderForService.prototype.modalRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    ModalBuilderForService.prototype.overlayRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    ModalBuilderForService.prototype.overlay;
-}
 class McModalService {
-    /**
-     * @param {?} overlay
-     * @param {?} modalControl
-     */
     constructor(overlay, modalControl) {
         this.overlay = overlay;
         this.modalControl = modalControl;
     }
     // Track of the current close modals (we assume invisible is close this time)
-    /**
-     * @return {?}
-     */
     get openModals() {
         return this.modalControl.openModals;
     }
-    /**
-     * @return {?}
-     */
     get afterAllClose() {
         return this.modalControl.afterAllClose.asObservable();
     }
     // Closes all of the currently-open dialogs
-    /**
-     * @return {?}
-     */
     closeAll() {
         this.modalControl.closeAll();
     }
-    /**
-     * @template T
-     * @param {?=} options
-     * @return {?}
-     */
     create(options = {}) {
         if (typeof options.mcOnCancel !== 'function') {
             // Leave a empty function to close this modal by default
             // tslint:disable-next-line
-            options.mcOnCancel = (/**
-             * @return {?}
-             */
-            () => { });
+            options.mcOnCancel = () => { };
         }
         if (!('mcCloseByESC' in options)) {
             options.mcCloseByESC = true;
@@ -1292,14 +626,8 @@ class McModalService {
             // tslint:disable-next-line
             options.mcWidth = 480;
         }
-        return (/** @type {?} */ (new ModalBuilderForService(this.overlay, options).getInstance()));
+        return new ModalBuilderForService(this.overlay, options).getInstance();
     }
-    /**
-     * @template T
-     * @param {?=} options
-     * @param {?=} confirmType
-     * @return {?}
-     */
     confirm(options = {}, confirmType = 'confirm') {
         if ('mcFooter' in options) {
             console.warn(`The Confirm-Modal doesn't support "mcFooter", this property will be ignored.`);
@@ -1308,48 +636,23 @@ class McModalService {
         if (typeof options.mcOnOk !== 'function') {
             // Leave a empty function to close this modal by default
             // tslint:disable-next-line
-            options.mcOnOk = (/**
-             * @return {?}
-             */
-            () => { });
+            options.mcOnOk = () => { };
         }
         options.mcModalType = 'confirm';
         options.mcClassName = `mc-confirm mc-confirm-${confirmType} ${options.mcClassName || ''}`;
         return this.create(options);
     }
-    /**
-     * @template T
-     * @param {?=} options
-     * @return {?}
-     */
     open(options = {}) {
         options.mcModalType = 'custom';
         return this.create(options);
     }
-    /**
-     * @template T
-     * @param {?=} options
-     * @return {?}
-     */
     success(options = {}) {
         return this.simpleConfirm(options, 'success');
     }
     // tslint:disable-next-line: no-reserved-keywords
-    /**
-     * @template T
-     * @param {?=} options
-     * @return {?}
-     */
     delete(options = {}) {
         return this.simpleConfirm(options, 'warn');
     }
-    /**
-     * @private
-     * @template T
-     * @param {?=} options
-     * @param {?=} confirmType
-     * @return {?}
-     */
     simpleConfirm(options = {}, confirmType) {
         // Remove the Cancel button if the user not specify a Cancel button
         if (!('mcCancelText' in options)) {
@@ -1367,24 +670,7 @@ McModalService.ctorParameters = () => [
     { type: Overlay },
     { type: McModalControlService }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalService.prototype.overlay;
-    /**
-     * @type {?}
-     * @private
-     */
-    McModalService.prototype.modalControl;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: modal.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McModalModule {
 }
 McModalModule.decorators = [
@@ -1409,134 +695,7 @@ McModalModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: modal.type.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @record
- * @template T, R
- */
-function IModalOptions() { }
-if (false) {
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcModalType;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcVisible;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcZIndex;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcWidth;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcWrapClassName;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcClassName;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcStyle;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcTitle;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcContent;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcComponent;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcComponentParams;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcClosable;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcMask;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcMaskClosable;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcMaskStyle;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcBodyStyle;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcFooter;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcGetContainer;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcAfterOpen;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcAfterClose;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcCloseByESC;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcOkText;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcOkType;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcOkLoading;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcOnOk;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcCancelText;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcCancelLoading;
-    /** @type {?|undefined} */
-    IModalOptions.prototype.mcOnCancel;
-}
-/**
- * @record
- * @template T
- */
-function IModalOptionsForService() { }
-if (false) {
-    /** @type {?|undefined} */
-    IModalOptionsForService.prototype.mcOnOk;
-    /** @type {?|undefined} */
-    IModalOptionsForService.prototype.mcOnCancel;
-}
-/**
- * @record
- * @template T
- */
-function IModalButtonOptions() { }
-if (false) {
-    /** @type {?} */
-    IModalButtonOptions.prototype.label;
-    /** @type {?|undefined} */
-    IModalButtonOptions.prototype.type;
-    /** @type {?|undefined} */
-    IModalButtonOptions.prototype.shape;
-    /** @type {?|undefined} */
-    IModalButtonOptions.prototype.ghost;
-    /** @type {?|undefined} */
-    IModalButtonOptions.prototype.size;
-    /** @type {?|undefined} */
-    IModalButtonOptions.prototype.autoLoading;
-    /** @type {?|undefined} */
-    IModalButtonOptions.prototype.show;
-    /** @type {?|undefined} */
-    IModalButtonOptions.prototype.loading;
-    /** @type {?|undefined} */
-    IModalButtonOptions.prototype.disabled;
-    /** @type {?|undefined} */
-    IModalButtonOptions.prototype.autoFocus;
-    /**
-     * @this {?}
-     * @param {?=} contentComponentInstance
-     * @return {?}
-     */
-    IModalButtonOptions.prototype.onClick = function (contentComponentInstance) { };
-}
-
-/**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-modal.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McModalComponent, McModalModule, McModalRef, McModalService, McModalControlService as ɵa, McModalTitle as ɵb, McModalBody as ɵc, McModalFooter as ɵd, CssUnitPipe as ɵe };

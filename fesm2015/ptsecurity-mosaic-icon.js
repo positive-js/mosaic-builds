@@ -4,11 +4,6 @@ import { CommonModule } from '@angular/common';
 import { Directive, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Attribute, NgModule } from '@angular/core';
 import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: icon.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 // tslint:disable-next-line:naming-convention
 class McIconCSSStyler {
 }
@@ -20,34 +15,19 @@ McIconCSSStyler.decorators = [
 ];
 class McIconBase {
     // tslint:disable-next-line:naming-convention
-    /**
-     * @param {?} _elementRef
-     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
-if (false) {
-    /** @type {?} */
-    McIconBase.prototype._elementRef;
-}
 // tslint:disable-next-line: naming-convention
-/** @type {?} */
 const McIconMixinBase = mixinColor(McIconBase, ThemePalette.Empty);
 class McIcon extends McIconMixinBase {
-    /**
-     * @param {?} elementRef
-     * @param {?} iconName
-     */
     constructor(elementRef, iconName) {
         super(elementRef);
         if (iconName) {
             elementRef.nativeElement.classList.add(iconName);
         }
     }
-    /**
-     * @return {?}
-     */
     getHostElement() {
         return this._elementRef.nativeElement;
     }
@@ -60,7 +40,7 @@ McIcon.decorators = [
                 encapsulation: ViewEncapsulation.None,
                 inputs: ['color'],
                 styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"]
-            }] }
+            },] }
 ];
 /** @nocollapse */
 McIcon.ctorParameters = () => [
@@ -68,11 +48,6 @@ McIcon.ctorParameters = () => [
     { type: String, decorators: [{ type: Attribute, args: ['mc-icon',] }] }
 ];
 
-/**
- * @fileoverview added by tsickle
- * Generated from: icon.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McIconModule {
 }
 McIconModule.decorators = [
@@ -94,21 +69,7 @@ McIconModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-icon.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McIcon, McIconBase, McIconCSSStyler, McIconMixinBase, McIconModule };

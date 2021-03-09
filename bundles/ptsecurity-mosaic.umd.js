@@ -3,7 +3,9 @@
 	factory();
 }((function () { 'use strict';
 
-
+	/**
+	 * Generated bundle index. Do not edit.
+	 */
 
 })));
 //# sourceMappingURL=ptsecurity-mosaic.umd.js.map

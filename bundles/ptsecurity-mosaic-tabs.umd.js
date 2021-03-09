@@ -305,18 +305,8 @@
         return value;
     }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: tab-content.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
-     * Decorates the `ng-template` tags and reads out the template from it.
-     */
+    /** Decorates the `ng-template` tags and reads out the template from it. */
     var McTabContent = /** @class */ (function () {
-        /**
-         * @param {?} template
-         */
         function McTabContent(template) {
             this.template = template;
         }
@@ -329,14 +319,8 @@
     McTabContent.ctorParameters = function () { return [
         { type: core.TemplateRef }
     ]; };
-    if (false) {
-        /** @type {?} */
-        McTabContent.prototype.template;
-    }
 
-    /**
-     * Used to flag tab labels for use with the portal directive
-     */
+    /** Used to flag tab labels for use with the portal directive */
     var McTabLabel = /** @class */ (function (_super) {
         __extends(McTabLabel, _super);
         function McTabLabel() {
@@ -350,9 +334,7 @@
                 },] }
     ];
     // TODO: workaround for https://github.com/angular/material2/issues/12760
-    (( /** @type {?} */(McTabLabel))).ctorParameters = ( /**
-     * @return {?}
-     */function () { return (( /** @type {?} */(portal.CdkPortal))).ctorParameters; });
+    McTabLabel.ctorParameters = function () { return portal.CdkPortal.ctorParameters; };
 
     var McTabBase = /** @class */ (function () {
         function McTabBase() {
@@ -360,23 +342,15 @@
         return McTabBase;
     }());
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McTabMixinBase = core$1.mixinDisabled(McTabBase);
     var McTab = /** @class */ (function (_super) {
         __extends(McTab, _super);
-        /**
-         * @param {?} viewContainerRef
-         */
         function McTab(viewContainerRef) {
             var _this = _super.call(this) || this;
             _this.viewContainerRef = viewContainerRef;
-            /**
-             * Plain text label for the tab, used when there is no template label.
-             */
+            /** Plain text label for the tab, used when there is no template label. */
             _this.textLabel = '';
-            /**
-             * Emits whenever the internal state of the tab changes.
-             */
+            /** Emits whenever the internal state of the tab changes. */
             _this.stateChanges = new rxjs.Subject();
             /**
              * The relatively indexed position where 0 represents the center, negative is left, and positive
@@ -392,41 +366,26 @@
              * Whether the tab is currently active.
              */
             _this.isActive = false;
-            /**
-             * Portal that will be the hosted content of the tab
-             */
+            /** Portal that will be the hosted content of the tab */
             _this.contentPortal = null;
             return _this;
         }
         Object.defineProperty(McTab.prototype, "content", {
-            /**
-             * \@docs-private
-             * @return {?}
-             */
+            /** @docs-private */
             get: function () {
                 return this.contentPortal;
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * @param {?} changes
-         * @return {?}
-         */
         McTab.prototype.ngOnChanges = function (changes) {
             if (changes.hasOwnProperty('textLabel') || changes.hasOwnProperty('disabled')) {
                 this.stateChanges.next();
             }
         };
-        /**
-         * @return {?}
-         */
         McTab.prototype.ngOnDestroy = function () {
             this.stateChanges.complete();
         };
-        /**
-         * @return {?}
-         */
         McTab.prototype.ngOnInit = function () {
             this.contentPortal = new portal.TemplatePortal(this.explicitContent || this.implicitContent, this.viewContainerRef);
         };
@@ -443,7 +402,7 @@
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
                     exportAs: 'mcTab'
-                }] }
+                },] }
     ];
     /** @nocollapse */
     McTab.ctorParameters = function () { return [
@@ -458,85 +417,9 @@
         ariaLabel: [{ type: core.Input, args: ['aria-label',] }],
         ariaLabelledby: [{ type: core.Input, args: ['aria-labelledby',] }]
     };
-    if (false) {
-        /**
-         * Content for the tab label given by `<ng-template mc-tab-label>`.
-         * @type {?}
-         */
-        McTab.prototype.templateLabel;
-        /**
-         * Template provided in the tab content that will be used if present, used to enable lazy-loading
-         * @type {?}
-         */
-        McTab.prototype.explicitContent;
-        /**
-         * Template inside the McTab view that contains an `<ng-content>`.
-         * @type {?}
-         */
-        McTab.prototype.implicitContent;
-        /**
-         * Plain text label for the tab, used when there is no template label.
-         * @type {?}
-         */
-        McTab.prototype.textLabel;
-        /** @type {?} */
-        McTab.prototype.tabId;
-        /**
-         * Aria label for the tab.
-         * @type {?}
-         */
-        McTab.prototype.ariaLabel;
-        /**
-         * Reference to the element that the tab is labelled by.
-         * Will be cleared if `aria-label` is set at the same time.
-         * @type {?}
-         */
-        McTab.prototype.ariaLabelledby;
-        /**
-         * Emits whenever the internal state of the tab changes.
-         * @type {?}
-         */
-        McTab.prototype.stateChanges;
-        /**
-         * The relatively indexed position where 0 represents the center, negative is left, and positive
-         * represents the right.
-         * @type {?}
-         */
-        McTab.prototype.position;
-        /**
-         * The initial relatively index origin of the tab if it was created and selected after there
-         * was already a selected tab. Provides context of what position the tab should originate from.
-         * @type {?}
-         */
-        McTab.prototype.origin;
-        /**
-         * Whether the tab is currently active.
-         * @type {?}
-         */
-        McTab.prototype.isActive;
-        /**
-         * Portal that will be the hosted content of the tab
-         * @type {?}
-         * @private
-         */
-        McTab.prototype.contentPortal;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTab.prototype.viewContainerRef;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: tabs-animations.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
     var mcTabsAnimations = {
-        /**
-         * Animation translates a tab along the X axis.
-         */
+        /** Animation translates a tab along the X axis. */
         translateTab: animations.trigger('translateTab', [
             // Note: transitions to `none` instead of 0, because some browsers might blur the content.
             animations.state('center, void, left-origin-center, right-origin-center', animations.style({ transform: 'none' })),
@@ -560,61 +443,37 @@
 
     /**
      * Wrapper for the contents of a tab.
-     * \@docs-private
+     * @docs-private
      */
     var McTabBody = /** @class */ (function () {
-        /**
-         * @param {?} elementRef
-         * @param {?} dir
-         * @param {?} changeDetectorRef
-         */
         function McTabBody(elementRef, dir, changeDetectorRef) {
             var _this = this;
             this.elementRef = elementRef;
             this.dir = dir;
-            /**
-             * Event emitted when the tab begins to animate towards the center as the active tab.
-             */
+            /** Event emitted when the tab begins to animate towards the center as the active tab. */
             this.onCentering = new core.EventEmitter();
-            /**
-             * Event emitted before the centering of the tab begins.
-             */
+            /** Event emitted before the centering of the tab begins. */
             this.beforeCentering = new core.EventEmitter();
-            /**
-             * Event emitted before the centering of the tab begins.
-             */
+            /** Event emitted before the centering of the tab begins. */
             this.afterLeavingCenter = new core.EventEmitter();
-            /**
-             * Event emitted when the tab completes its animation towards the center.
-             */
+            /** Event emitted when the tab completes its animation towards the center. */
             this.onCentered = new core.EventEmitter(true);
             // Note that the default value will always be overwritten by `McTabBody`, but we need one
             // anyway to prevent the animations module from throwing an error if the body is used on its own.
-            /**
-             * Duration for the tab's animation.
-             */
+            /** Duration for the tab's animation. */
             this.animationDuration = '0ms';
-            /**
-             * Subscription to the directionality change observable.
-             */
+            /** Subscription to the directionality change observable. */
             this.dirChangeSubscription = rxjs.Subscription.EMPTY;
             if (this.dir && changeDetectorRef) {
                 this.dirChangeSubscription = this.dir.change
-                    .subscribe(( /**
-             * @param {?} direction
-             * @return {?}
-             */function (direction) {
+                    .subscribe(function (direction) {
                     _this.computePositionAnimationState(direction);
                     changeDetectorRef.markForCheck();
-                }));
+                });
             }
         }
         Object.defineProperty(McTabBody.prototype, "position", {
-            /**
-             * The shifted index position of the tab body, where zero represents the active center tab.
-             * @param {?} position
-             * @return {?}
-             */
+            /** The shifted index position of the tab body, where zero represents the active center tab. */
             set: function (position) {
                 this.positionIndex = position;
                 this.computePositionAnimationState();
@@ -625,35 +484,22 @@
         /**
          * After initialized, check if the content is centered and has an origin. If so, set the
          * special position states that transition the tab from the left or right before centering.
-         * @return {?}
          */
         McTabBody.prototype.ngOnInit = function () {
             if (this.bodyPosition === 'center' && this.origin != null) {
                 this.bodyPosition = this.computePositionFromOrigin();
             }
         };
-        /**
-         * @return {?}
-         */
         McTabBody.prototype.ngOnDestroy = function () {
             this.dirChangeSubscription.unsubscribe();
         };
-        /**
-         * @param {?} e
-         * @return {?}
-         */
         McTabBody.prototype.onTranslateTabStarted = function (e) {
-            /** @type {?} */
             var isCentering = this.isCenterPosition(e.toState);
             this.beforeCentering.emit(isCentering);
             if (isCentering) {
                 this.onCentering.emit(this.elementRef.nativeElement.clientHeight);
             }
         };
-        /**
-         * @param {?} e
-         * @return {?}
-         */
         McTabBody.prototype.onTranslateTabComplete = function (e) {
             // If the transition to the center is complete, emit an event.
             if (this.isCenterPosition(e.toState) && this.isCenterPosition(this.bodyPosition)) {
@@ -663,27 +509,15 @@
                 this.afterLeavingCenter.emit();
             }
         };
-        /**
-         * The text direction of the containing app.
-         * @return {?}
-         */
+        /** The text direction of the containing app. */
         McTabBody.prototype.getLayoutDirection = function () {
             return this.dir && this.dir.value === 'rtl' ? 'rtl' : 'ltr';
         };
-        /**
-         * Whether the provided position state is considered center, regardless of origin.
-         * @param {?} position
-         * @return {?}
-         */
+        /** Whether the provided position state is considered center, regardless of origin. */
         McTabBody.prototype.isCenterPosition = function (position) {
             return position === 'center' || position === 'left-origin-center' || position === 'right-origin-center';
         };
-        /**
-         * Computes the position state that will be used for the tab-body animation trigger.
-         * @private
-         * @param {?=} dir
-         * @return {?}
-         */
+        /** Computes the position state that will be used for the tab-body animation trigger. */
         McTabBody.prototype.computePositionAnimationState = function (dir) {
             if (dir === void 0) { dir = this.getLayoutDirection(); }
             if (this.positionIndex < 0) {
@@ -699,11 +533,8 @@
         /**
          * Computes the position state based on the specified origin position. This is used if the
          * tab is becoming visible immediately after creation.
-         * @private
-         * @return {?}
          */
         McTabBody.prototype.computePositionFromOrigin = function () {
-            /** @type {?} */
             var dir = this.getLayoutDirection();
             if ((dir === 'ltr' && this.origin <= 0) || (dir === 'rtl' && this.origin > 0)) {
                 return 'left-origin-center';
@@ -723,7 +554,7 @@
                         class: 'mc-tab-body'
                     },
                     styles: [".mc-tab-body__content{height:100%;overflow:auto}.mc-tab-body__content .mc-tab-group_dynamic-height{overflow:hidden}"]
-                }] }
+                },] }
     ];
     /** @nocollapse */
     McTabBody.ctorParameters = function () { return [
@@ -742,126 +573,37 @@
         origin: [{ type: core.Input }],
         animationDuration: [{ type: core.Input }]
     };
-    if (false) {
-        /**
-         * Tab body position state. Used by the animation trigger for the current state.
-         * @type {?}
-         */
-        McTabBody.prototype.bodyPosition;
-        /**
-         * Event emitted when the tab begins to animate towards the center as the active tab.
-         * @type {?}
-         */
-        McTabBody.prototype.onCentering;
-        /**
-         * Event emitted before the centering of the tab begins.
-         * @type {?}
-         */
-        McTabBody.prototype.beforeCentering;
-        /**
-         * Event emitted before the centering of the tab begins.
-         * @type {?}
-         */
-        McTabBody.prototype.afterLeavingCenter;
-        /**
-         * Event emitted when the tab completes its animation towards the center.
-         * @type {?}
-         */
-        McTabBody.prototype.onCentered;
-        /**
-         * The portal host inside of this container into which the tab body content will be loaded.
-         * @type {?}
-         */
-        McTabBody.prototype.portalHost;
-        /**
-         * The tab body content to display.
-         * @type {?}
-         */
-        McTabBody.prototype.content;
-        /**
-         * Position that will be used when the tab is immediately becoming visible after creation.
-         * @type {?}
-         */
-        McTabBody.prototype.origin;
-        /**
-         * Duration for the tab's animation.
-         * @type {?}
-         */
-        McTabBody.prototype.animationDuration;
-        /**
-         * Current position of the tab-body in the tab-group. Zero means that the tab is visible.
-         * @type {?}
-         * @private
-         */
-        McTabBody.prototype.positionIndex;
-        /**
-         * Subscription to the directionality change observable.
-         * @type {?}
-         * @private
-         */
-        McTabBody.prototype.dirChangeSubscription;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabBody.prototype.elementRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabBody.prototype.dir;
-    }
     /**
      * The portal host directive for the contents of the tab.
-     * \@docs-private
+     * @docs-private
      */
     var McTabBodyPortal = /** @class */ (function (_super) {
         __extends(McTabBodyPortal, _super);
-        /**
-         * @param {?} componentFactoryResolver
-         * @param {?} viewContainerRef
-         * @param {?} host
-         */
         function McTabBodyPortal(componentFactoryResolver, viewContainerRef, host) {
             var _this = _super.call(this, componentFactoryResolver, viewContainerRef) || this;
             _this.host = host;
-            /**
-             * Subscription to events for when the tab body begins centering.
-             */
+            /** Subscription to events for when the tab body begins centering. */
             _this.centeringSub = rxjs.Subscription.EMPTY;
-            /**
-             * Subscription to events for when the tab body finishes leaving from center position.
-             */
+            /** Subscription to events for when the tab body finishes leaving from center position. */
             _this.leavingSub = rxjs.Subscription.EMPTY;
             return _this;
         }
-        /**
-         * Set initial visibility or set up subscription for changing visibility.
-         * @return {?}
-         */
+        /** Set initial visibility or set up subscription for changing visibility. */
         McTabBodyPortal.prototype.ngOnInit = function () {
             var _this = this;
             _super.prototype.ngOnInit.call(this);
             this.centeringSub = this.host.beforeCentering
                 .pipe(operators.startWith(this.host.isCenterPosition(this.host.bodyPosition)))
-                .subscribe(( /**
-         * @param {?} isCentering
-         * @return {?}
-         */function (isCentering) {
+                .subscribe(function (isCentering) {
                 if (isCentering && !_this.hasAttached()) {
                     _this.attach(_this.host.content);
                 }
-            }));
-            this.leavingSub = this.host.afterLeavingCenter.subscribe(( /**
-             * @return {?}
-             */function () {
+            });
+            this.leavingSub = this.host.afterLeavingCenter.subscribe(function () {
                 _this.detach();
-            }));
+            });
         };
-        /**
-         * Clean up centering subscription.
-         * @return {?}
-         */
+        /** Clean up centering subscription. */
         McTabBodyPortal.prototype.ngOnDestroy = function () {
             _super.prototype.ngOnDestroy.call(this);
             this.centeringSub.unsubscribe();
@@ -878,29 +620,8 @@
     McTabBodyPortal.ctorParameters = function () { return [
         { type: core.ComponentFactoryResolver },
         { type: core.ViewContainerRef },
-        { type: McTabBody, decorators: [{ type: core.Inject, args: [core.forwardRef(( /**
-                                         * @return {?}
-                                         */function () { return McTabBody; })),] }] }
+        { type: McTabBody, decorators: [{ type: core.Inject, args: [core.forwardRef(function () { return McTabBody; }),] }] }
     ]; };
-    if (false) {
-        /**
-         * Subscription to events for when the tab body begins centering.
-         * @type {?}
-         * @private
-         */
-        McTabBodyPortal.prototype.centeringSub;
-        /**
-         * Subscription to events for when the tab body finishes leaving from center position.
-         * @type {?}
-         * @private
-         */
-        McTabBodyPortal.prototype.leavingSub;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabBodyPortal.prototype.host;
-    }
 
     var McLightTabsCssStyler = /** @class */ (function () {
         function McLightTabsCssStyler() {
@@ -946,68 +667,26 @@
                     host: { class: 'mc-tab-group_stretch-labels' }
                 },] }
     ];
-    /**
-     * Used to generate unique ID's for each tab component
-     * @type {?}
-     */
+    /** Used to generate unique ID's for each tab component */
     var nextId = 0;
-    /**
-     * A simple change event emitted on focus or selection changes.
-     */
+    /** A simple change event emitted on focus or selection changes. */
     var McTabChangeEvent = /** @class */ (function () {
         function McTabChangeEvent() {
         }
         return McTabChangeEvent;
     }());
-    if (false) {
-        /**
-         * Index of the currently-selected tab.
-         * @type {?}
-         */
-        McTabChangeEvent.prototype.index;
-        /**
-         * Reference to the currently-selected tab.
-         * @type {?}
-         */
-        McTabChangeEvent.prototype.tab;
-    }
-    /**
-     * Object that can be used to configure the default options for the tabs module.
-     * @record
-     */
-    function IMcTabsConfig() { }
-    if (false) {
-        /**
-         * Duration for the tab animation. Must be a valid CSS value (e.g. 600ms).
-         * @type {?|undefined}
-         */
-        IMcTabsConfig.prototype.animationDuration;
-    }
-    /**
-     * Injection token that can be used to provide the default options the tabs module.
-     * @type {?}
-     */
+    /** Injection token that can be used to provide the default options the tabs module. */
     var MC_TABS_CONFIG = new core.InjectionToken('MC_TABS_CONFIG');
     // Boilerplate for applying mixins to McTabGroup.
-    /**
-     * \@docs-private
-     */
+    /** @docs-private */
     var McTabGroupBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
-        /**
-         * @param {?} _elementRef
-         */
         function McTabGroupBase(_elementRef) {
             this._elementRef = _elementRef;
         }
         return McTabGroupBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McTabGroupBase.prototype._elementRef;
-    }
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McTabGroupMixinBase = core$1.mixinColor(core$1.mixinDisabled(McTabGroupBase));
     /**
      * Tab-group component.  Supports basic tab pairs (label + content) and includes
@@ -1015,50 +694,26 @@
      */
     var McTabGroup = /** @class */ (function (_super) {
         __extends(McTabGroup, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} changeDetectorRef
-         * @param {?} lightTabs
-         * @param {?=} defaultConfig
-         */
         function McTabGroup(elementRef, changeDetectorRef, lightTabs, defaultConfig) {
             var _this = _super.call(this, elementRef) || this;
             _this.changeDetectorRef = changeDetectorRef;
-            /**
-             * Position of the tab header.
-             */
+            /** Position of the tab header. */
             _this.headerPosition = 'above';
-            /**
-             * Output to enable support for two-way binding on `[(selectedIndex)]`
-             */
+            /** Output to enable support for two-way binding on `[(selectedIndex)]` */
             _this.selectedIndexChange = new core.EventEmitter();
-            /**
-             * Event emitted when focus has changed within a tab group.
-             */
+            /** Event emitted when focus has changed within a tab group. */
             _this.focusChange = new core.EventEmitter();
-            /**
-             * Event emitted when the body animation has completed
-             */
+            /** Event emitted when the body animation has completed */
             _this.animationDone = new core.EventEmitter();
-            /**
-             * Event emitted when the tab selection has changed.
-             */
+            /** Event emitted when the tab selection has changed. */
             _this.selectedTabChange = new core.EventEmitter(true);
-            /**
-             * The tab index that should be selected after the content has been checked.
-             */
+            /** The tab index that should be selected after the content has been checked. */
             _this.indexToSelect = 0;
-            /**
-             * Snapshot of the height of the tab body wrapper before another tab is activated.
-             */
+            /** Snapshot of the height of the tab body wrapper before another tab is activated. */
             _this.tabBodyWrapperHeight = 0;
-            /**
-             * Subscription to tabs being added/removed.
-             */
+            /** Subscription to tabs being added/removed. */
             _this.tabsSubscription = rxjs.Subscription.EMPTY;
-            /**
-             * Subscription to changes in the tab labels.
-             */
+            /** Subscription to changes in the tab labels. */
             _this.tabLabelSubscription = rxjs.Subscription.EMPTY;
             _this._dynamicHeight = false;
             _this._selectedIndex = null;
@@ -1069,29 +724,15 @@
             return _this;
         }
         Object.defineProperty(McTabGroup.prototype, "dynamicHeight", {
-            /**
-             * Whether the tab group should grow to the size of the active tab.
-             * @return {?}
-             */
+            /** Whether the tab group should grow to the size of the active tab. */
             get: function () { return this._dynamicHeight; },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) { this._dynamicHeight = coercion.coerceBooleanProperty(value); },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(McTabGroup.prototype, "selectedIndex", {
-            /**
-             * The index of the active tab.
-             * @return {?}
-             */
+            /** The index of the active tab. */
             get: function () { return this._selectedIndex; },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this.indexToSelect = coercion.coerceNumberProperty(value, null);
             },
@@ -1103,72 +744,52 @@
          * and what the selected index should be. This is where we can know exactly what position
          * each tab should be in according to the new selected index, and additionally we know how
          * a new selected tab should transition in (from the left or right).
-         * @return {?}
          */
         McTabGroup.prototype.ngAfterContentChecked = function () {
             var _this = this;
             // Don't clamp the `indexToSelect` immediately in the setter because it can happen that
             // the amount of tabs changes before the actual change detection runs.
-            /** @type {?} */
             var indexToSelect = this.indexToSelect = this.clampTabIndex(this.indexToSelect);
             // If there is a change in selected index, emit a change event. Should not trigger if
             // the selected index has not yet been initialized.
             if (this._selectedIndex !== indexToSelect) {
-                /** @type {?} */
                 var isFirstRun_1 = this._selectedIndex == null;
                 if (!isFirstRun_1) {
                     this.selectedTabChange.emit(this.createChangeEvent(indexToSelect));
                 }
                 // Changing these values after change detection has run
                 // since the checked content may contain references to them.
-                Promise.resolve().then(( /**
-                 * @return {?}
-                 */function () {
-                    _this.tabs.forEach(( /**
-                     * @param {?} tab
-                     * @param {?} index
-                     * @return {?}
-                     */function (tab, index) { return tab.isActive = index === indexToSelect; }));
+                Promise.resolve().then(function () {
+                    _this.tabs.forEach(function (tab, index) { return tab.isActive = index === indexToSelect; });
                     if (!isFirstRun_1) {
                         _this.selectedIndexChange.emit(indexToSelect);
                     }
-                }));
+                });
             }
             // Setup the position for each tab and optionally setup an origin on the next selected tab.
-            this.tabs.forEach(( /**
-             * @param {?} tab
-             * @param {?} index
-             * @return {?}
-             */function (tab, index) {
+            this.tabs.forEach(function (tab, index) {
                 tab.position = index - indexToSelect;
                 // If there is already a selected tab, then set up an origin for the next selected tab
                 // if it doesn't have one already.
                 if (_this._selectedIndex != null && tab.position === 0 && !tab.origin) {
                     tab.origin = indexToSelect - _this._selectedIndex;
                 }
-            }));
+            });
             if (this._selectedIndex !== indexToSelect) {
                 this._selectedIndex = indexToSelect;
                 this.changeDetectorRef.markForCheck();
             }
         };
-        /**
-         * @return {?}
-         */
         McTabGroup.prototype.ngAfterContentInit = function () {
             var _this = this;
             this.subscribeToTabLabels();
             // Subscribe to changes in the amount of tabs, in order to be
             // able to re-render the content as new tabs are added or removed.
-            this.tabsSubscription = this.tabs.changes.subscribe(( /**
-             * @return {?}
-             */function () {
-                /** @type {?} */
+            this.tabsSubscription = this.tabs.changes.subscribe(function () {
                 var indexToSelect = _this.clampTabIndex(_this.indexToSelect);
                 // Maintain the previously-selected tab if a new tab is added or removed and there is no
                 // explicit change that selects a different tab.
                 if (indexToSelect === _this._selectedIndex) {
-                    /** @type {?} */
                     var tabs = _this.tabs.toArray();
                     for (var i = 0; i < tabs.length; i++) {
                         if (tabs[i].isActive) {
@@ -1182,49 +803,31 @@
                 }
                 _this.subscribeToTabLabels();
                 _this.changeDetectorRef.markForCheck();
-            }));
+            });
         };
-        /**
-         * @return {?}
-         */
         McTabGroup.prototype.ngOnDestroy = function () {
             this.tabsSubscription.unsubscribe();
             this.tabLabelSubscription.unsubscribe();
         };
-        /**
-         * @param {?} index
-         * @return {?}
-         */
         McTabGroup.prototype.focusChanged = function (index) {
             this.focusChange.emit(this.createChangeEvent(index));
         };
-        /**
-         * Returns a unique id for each tab label element
-         * @param {?} i
-         * @return {?}
-         */
+        /** Returns a unique id for each tab label element */
         McTabGroup.prototype.getTabLabelId = function (i) {
             return "mc-tab-label-" + this.groupId + "-" + i;
         };
-        /**
-         * Returns a unique id for each tab content element
-         * @param {?} i
-         * @return {?}
-         */
+        /** Returns a unique id for each tab content element */
         McTabGroup.prototype.getTabContentId = function (i) {
             return "mc-tab-content-" + this.groupId + "-" + i;
         };
         /**
          * Sets the height of the body wrapper to the height of the activating tab if dynamic
          * height property is true.
-         * @param {?} tabHeight
-         * @return {?}
          */
         McTabGroup.prototype.setTabBodyWrapperHeight = function (tabHeight) {
             if (!this._dynamicHeight || !this.tabBodyWrapperHeight) {
                 return;
             }
-            /** @type {?} */
             var wrapper = this.tabBodyWrapper.nativeElement;
             wrapper.style.height = this.tabBodyWrapperHeight + "px";
             // This conditional forces the browser to paint the height so that
@@ -1233,46 +836,26 @@
                 wrapper.style.height = tabHeight + "px";
             }
         };
-        /**
-         * Removes the height of the tab body wrapper.
-         * @return {?}
-         */
+        /** Removes the height of the tab body wrapper. */
         McTabGroup.prototype.removeTabBodyWrapperHeight = function () {
             this.tabBodyWrapperHeight = this.tabBodyWrapper.nativeElement.clientHeight;
             this.tabBodyWrapper.nativeElement.style.height = '';
             this.animationDone.emit();
         };
-        /**
-         * Handle click events, setting new selected index if appropriate.
-         * @param {?} tab
-         * @param {?} tabHeader
-         * @param {?} index
-         * @return {?}
-         */
+        /** Handle click events, setting new selected index if appropriate. */
         McTabGroup.prototype.handleClick = function (tab, tabHeader, index) {
             if (!tab.disabled) {
                 this.selectedIndex = tabHeader.focusIndex = index;
             }
         };
-        /**
-         * Retrieves the tabindex for the tab.
-         * @param {?} tab
-         * @param {?} index
-         * @return {?}
-         */
+        /** Retrieves the tabindex for the tab. */
         McTabGroup.prototype.getTabIndex = function (tab, index) {
             if (tab.disabled) {
                 return null;
             }
             return this.selectedIndex === index ? 0 : -1;
         };
-        /**
-         * @private
-         * @param {?} index
-         * @return {?}
-         */
         McTabGroup.prototype.createChangeEvent = function (index) {
-            /** @type {?} */
             var event = new McTabChangeEvent();
             event.index = index;
             if (this.tabs && this.tabs.length) {
@@ -1281,31 +864,19 @@
             return event;
         };
         /**
-         * Subscribes to changes in the tab labels. This is needed, because the \@Input for the label is
+         * Subscribes to changes in the tab labels. This is needed, because the @Input for the label is
          * on the McTab component, whereas the data binding is inside the McTabGroup. In order for the
          * binding to be updated, we need to subscribe to changes in it and trigger change detection
          * manually.
-         * @private
-         * @return {?}
          */
         McTabGroup.prototype.subscribeToTabLabels = function () {
             var _this = this;
             if (this.tabLabelSubscription) {
                 this.tabLabelSubscription.unsubscribe();
             }
-            this.tabLabelSubscription = rxjs.merge.apply(void 0, __spread(this.tabs.map(( /**
-             * @param {?} tab
-             * @return {?}
-             */function (tab) { return tab.stateChanges; })))).subscribe(( /**
-         * @return {?}
-         */function () { return _this.changeDetectorRef.markForCheck(); }));
+            this.tabLabelSubscription = rxjs.merge.apply(void 0, __spread(this.tabs.map(function (tab) { return tab.stateChanges; }))).subscribe(function () { return _this.changeDetectorRef.markForCheck(); });
         };
-        /**
-         * Clamps the given index to the bounds of 0 and the tabs length.
-         * @private
-         * @param {?} index
-         * @return {?}
-         */
+        /** Clamps the given index to the bounds of 0 and the tabs length. */
         McTabGroup.prototype.clampTabIndex = function (index) {
             // Note the `|| 0`, which ensures that values like NaN can't get through
             // and which would otherwise throw the component into an infinite loop
@@ -1327,8 +898,8 @@
                         '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',
                         '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
                     },
-                    styles: [".mc-tab-label.cdk-keyboard-focused:after,.mc-tab-light-label.cdk-keyboard-focused:after,.mc-tab-light-label.mc-active:before,.mc-tab-light-label:hover:before{content:\"\";display:block;position:absolute}.mc-tab-light-label.mc-active:before,.mc-tab-light-label:hover:before{bottom:calc(var(--mc-tabs-size-border-width, 1px)*-1);height:var(--mc-tabs-size-highlight-height,4px);left:0;right:0}.mc-tab-group{box-sizing:border-box;display:flex;flex-direction:column;text-align:center;white-space:nowrap}.mc-tab-group.mc-tab-group_inverted-header{flex-direction:column-reverse}.mc-tab-label{align-items:center;border-bottom-style:solid;border-bottom-width:var(--mc-tabs-size-border-width,1px);border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-top-style:solid;border-top-width:var(--mc-tabs-size-border-width,1px);box-sizing:border-box;cursor:pointer;display:inline-flex;height:var(--mc-tabs-size-height,40px);justify-content:center;outline:none;padding-left:var(--mc-tabs-size-padding-horizontal,16px);padding-right:var(--mc-tabs-size-padding-horizontal,16px);position:relative;text-align:center;white-space:nowrap}.mc-tab-label.cdk-keyboard-focused{z-index:1}.mc-tab-label.cdk-keyboard-focused:after{border-bottom:none;border-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-width:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width)*2);bottom:calc(var(--mc-tabs-size-border-width, 1px)*-1);left:calc(var(--mc-tabs-size-border-width, 1px)*-1);right:calc(var(--mc-tabs-size-border-width, 1px)*-1);top:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width)*2)}.mc-tab-label.mc-disabled{pointer-events:none}.mc-tab-label .mc-tab-overlay{bottom:0;left:0;pointer-events:none;position:absolute;right:0;top:-1px}.mc-tab-label.mc-active{border-style:solid;border-width:var(--mc-tabs-size-border-width,1px);padding-left:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));padding-right:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px))}.mc-tab-label.mc-active.cdk-keyboard-focused:after{left:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width)*2);right:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width)*2);z-index:1}.mc-tab-label .mc-tab-overlay{border-top:var(--mc-tabs-size-border-width,1px) solid transparent;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px)}.mc-tab-light-label{align-items:center;border-bottom-style:solid;border-bottom-width:var(--mc-tabs-size-border-width,1px);box-sizing:border-box;cursor:pointer;display:inline-flex;height:var(--mc-tabs-size-height,40px);justify-content:center;outline:none;padding-left:var(--mc-tabs-size-padding-horizontal,16px);padding-right:var(--mc-tabs-size-padding-horizontal,16px);position:relative;text-align:center;white-space:nowrap}.mc-tab-light-label.cdk-keyboard-focused{z-index:1}.mc-tab-light-label.cdk-keyboard-focused:after{border-bottom:none;border-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-width:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width)*2);bottom:calc(var(--mc-tabs-size-border-width, 1px)*-1);left:calc(var(--mc-tabs-size-border-width, 1px)*-1);right:calc(var(--mc-tabs-size-border-width, 1px)*-1);top:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width)*2)}.mc-tab-light-label.mc-disabled{pointer-events:none}.mc-tab-light-label .mc-tab-overlay{bottom:0;left:0;pointer-events:none;right:0;top:-1px}.mc-tab-light-label.cdk-keyboard-focused+:hover:before{left:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width)*2 - var(--mc-tabs-size-border-width, 1px))}.mc-tab-light-label.cdk-keyboard-focused:after{top:calc(var(--mc-tabs-size-border-width, 1px)*-1)}.mc-tab-light-label .mc-tab-overlay{position:absolute;top:0}.mc-tab-header__content{padding:1px 1px 0}.mc-tab-body__wrapper{display:flex;overflow:hidden;position:relative}.mc-tab-body{bottom:0;display:block;flex-basis:100%;left:0;overflow:hidden;position:absolute;right:0;top:0}.mc-tab-body.mc-tab-body__active{flex-grow:1;overflow-x:hidden;overflow-y:auto;position:relative;z-index:1}.mc-tab-group.mc-tab-group_dynamic-height .mc-tab-body.mc-tab-body__active{overflow-y:hidden}"]
-                }] }
+                    styles: [".mc-tab-label.cdk-keyboard-focused:after,.mc-tab-light-label.cdk-keyboard-focused:after,.mc-tab-light-label.mc-active:before,.mc-tab-light-label:hover:before{display:block;position:absolute;content:\"\"}.mc-tab-light-label.mc-active:before,.mc-tab-light-label:hover:before{bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:0;height:var(--mc-tabs-size-highlight-height,4px);right:0}.mc-tab-group{display:flex;flex-direction:column;box-sizing:border-box;text-align:center;white-space:nowrap}.mc-tab-group.mc-tab-group_inverted-header{flex-direction:column-reverse}.mc-tab-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:var(--mc-tabs-size-height,40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:var(--mc-tabs-size-padding-horizontal,16px);padding-left:var(--mc-tabs-size-padding-horizontal,16px);outline:none;border-bottom-width:var(--mc-tabs-size-border-width,1px);border-bottom-style:solid;border-top-width:var(--mc-tabs-size-border-width,1px);border-top-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px)}.mc-tab-label.cdk-keyboard-focused{z-index:1}.mc-tab-label.cdk-keyboard-focused:after{top:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width) * 2);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * var(--mc-tabs-size-border-width, 1px));border-width:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2);border-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-bottom:none}.mc-tab-label.mc-disabled{pointer-events:none}.mc-tab-label .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-label.mc-active{padding-right:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));padding-left:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));border-width:var(--mc-tabs-size-border-width,1px);border-style:solid}.mc-tab-label.mc-active.cdk-keyboard-focused:after{z-index:1;right:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width) * 2);left:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width) * 2)}.mc-tab-label .mc-tab-overlay{border-top:var(--mc-tabs-size-border-width,1px) solid transparent;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px)}.mc-tab-light-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:var(--mc-tabs-size-height,40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:var(--mc-tabs-size-padding-horizontal,16px);padding-left:var(--mc-tabs-size-padding-horizontal,16px);outline:none;border-bottom-width:var(--mc-tabs-size-border-width,1px);border-bottom-style:solid}.mc-tab-light-label.cdk-keyboard-focused{z-index:1}.mc-tab-light-label.cdk-keyboard-focused:after{top:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width) * 2);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * var(--mc-tabs-size-border-width, 1px));border-width:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2);border-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-bottom:none}.mc-tab-light-label.mc-disabled{pointer-events:none}.mc-tab-light-label .mc-tab-overlay{top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-light-label.cdk-keyboard-focused+:hover:before{left:calc(calc(var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2) - var(--mc-tabs-size-border-width, 1px))}.mc-tab-light-label.cdk-keyboard-focused:after{top:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-light-label .mc-tab-overlay{position:absolute;top:0}.mc-tab-header__content{padding:1px 1px 0}.mc-tab-body__wrapper{display:flex;overflow:hidden;position:relative}.mc-tab-body{top:0;left:0;right:0;bottom:0;position:absolute;display:block;overflow:hidden;flex-basis:100%}.mc-tab-body.mc-tab-body__active{overflow-x:hidden;overflow-y:auto;position:relative;z-index:1;flex-grow:1}.mc-tab-group.mc-tab-group_dynamic-height .mc-tab-body.mc-tab-body__active{overflow-y:hidden}"]
+                },] }
     ];
     /** @nocollapse */
     McTabGroup.ctorParameters = function () { return [
@@ -1350,133 +921,34 @@
         animationDone: [{ type: core.Output }],
         selectedTabChange: [{ type: core.Output }]
     };
-    if (false) {
-        /** @type {?} */
-        McTabGroup.prototype.lightTab;
-        /** @type {?} */
-        McTabGroup.prototype.tabs;
-        /** @type {?} */
-        McTabGroup.prototype.tabBodyWrapper;
-        /** @type {?} */
-        McTabGroup.prototype.tabHeader;
-        /**
-         * Position of the tab header.
-         * @type {?}
-         */
-        McTabGroup.prototype.headerPosition;
-        /**
-         * Duration for the tab animation. Must be a valid CSS value (e.g. 600ms).
-         * @type {?}
-         */
-        McTabGroup.prototype.animationDuration;
-        /**
-         * Output to enable support for two-way binding on `[(selectedIndex)]`
-         * @type {?}
-         */
-        McTabGroup.prototype.selectedIndexChange;
-        /**
-         * Event emitted when focus has changed within a tab group.
-         * @type {?}
-         */
-        McTabGroup.prototype.focusChange;
-        /**
-         * Event emitted when the body animation has completed
-         * @type {?}
-         */
-        McTabGroup.prototype.animationDone;
-        /**
-         * Event emitted when the tab selection has changed.
-         * @type {?}
-         */
-        McTabGroup.prototype.selectedTabChange;
-        /**
-         * The tab index that should be selected after the content has been checked.
-         * @type {?}
-         * @private
-         */
-        McTabGroup.prototype.indexToSelect;
-        /**
-         * Snapshot of the height of the tab body wrapper before another tab is activated.
-         * @type {?}
-         * @private
-         */
-        McTabGroup.prototype.tabBodyWrapperHeight;
-        /**
-         * Subscription to tabs being added/removed.
-         * @type {?}
-         * @private
-         */
-        McTabGroup.prototype.tabsSubscription;
-        /**
-         * Subscription to changes in the tab labels.
-         * @type {?}
-         * @private
-         */
-        McTabGroup.prototype.tabLabelSubscription;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabGroup.prototype._dynamicHeight;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabGroup.prototype._selectedIndex;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabGroup.prototype.groupId;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabGroup.prototype.changeDetectorRef;
-    }
 
     // Boilerplate for applying mixins to McTabLabelWrapper.
-    /**
-     * \@docs-private
-     */
+    /** @docs-private */
     var McTabLabelWrapperBase = /** @class */ (function () {
         function McTabLabelWrapperBase() {
         }
         return McTabLabelWrapperBase;
     }());
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McTabLabelWrapperMixinBase = core$1.mixinDisabled(McTabLabelWrapperBase);
     /**
      * Used in the `mc-tab-group` view to display tab labels.
-     * \@docs-private
+     * @docs-private
      */
     var McTabLabelWrapper = /** @class */ (function (_super) {
         __extends(McTabLabelWrapper, _super);
-        /**
-         * @param {?} elementRef
-         */
         function McTabLabelWrapper(elementRef) {
             var _this = _super.call(this) || this;
             _this.elementRef = elementRef;
             return _this;
         }
-        /**
-         * Sets focus on the wrapper element
-         * @return {?}
-         */
+        /** Sets focus on the wrapper element */
         McTabLabelWrapper.prototype.focus = function () {
             this.elementRef.nativeElement.focus();
         };
-        /**
-         * @return {?}
-         */
         McTabLabelWrapper.prototype.getOffsetLeft = function () {
             return this.elementRef.nativeElement.offsetLeft;
         };
-        /**
-         * @return {?}
-         */
         McTabLabelWrapper.prototype.getOffsetWidth = function () {
             return this.elementRef.nativeElement.offsetWidth;
         };
@@ -1496,25 +968,16 @@
     McTabLabelWrapper.ctorParameters = function () { return [
         { type: core.ElementRef }
     ]; };
-    if (false) {
-        /** @type {?} */
-        McTabLabelWrapper.prototype.elementRef;
-    }
 
-    /** @type {?} */
     var VIEWPORT_THROTTLE_TIME = 150;
-    /** @type {?} */
     var SCROLL_DISTANCE_DELIMITER = 3;
     /**
      * The distance in pixels that will be overshot when scrolling a tab label into view. This helps
      * provide a small affordance to the label next to it.
-     * @type {?}
      */
     var EXAGGERATED_OVERSCROLL = 60;
     // Boilerplate for applying mixins to McTabHeader.
-    /**
-     * \@docs-private
-     */
+    /** @docs-private */
     var McTabHeaderBase = /** @class */ (function () {
         function McTabHeaderBase() {
         }
@@ -1525,17 +988,10 @@
      * When the tabs list's width exceeds the width of the header container,
      * then arrows will be displayed to allow the user to scroll
      * left and right across the header.
-     * \@docs-private
+     * @docs-private
      */
     var McTabHeader = /** @class */ (function (_super) {
         __extends(McTabHeader, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} changeDetectorRef
-         * @param {?} viewportRuler
-         * @param {?} dir
-         * @param {?} ngZone
-         */
         function McTabHeader(elementRef, changeDetectorRef, viewportRuler, dir, ngZone) {
             var _this = _super.call(this) || this;
             _this.elementRef = elementRef;
@@ -1543,55 +999,31 @@
             _this.viewportRuler = viewportRuler;
             _this.dir = dir;
             _this.ngZone = ngZone;
-            /**
-             * Whether the controls for pagination should be displayed
-             */
+            /** Whether the controls for pagination should be displayed */
             _this.showPaginationControls = false;
-            /**
-             * Whether the tab list can be scrolled more towards the end of the tab label list.
-             */
+            /** Whether the tab list can be scrolled more towards the end of the tab label list. */
             _this.disableScrollAfter = true;
-            /**
-             * Whether the tab list can be scrolled more towards the beginning of the tab label list.
-             */
+            /** Whether the tab list can be scrolled more towards the beginning of the tab label list. */
             _this.disableScrollBefore = true;
-            /**
-             * Event emitted when the option is selected.
-             */
+            /** Event emitted when the option is selected. */
             _this.selectFocusedIndex = new core.EventEmitter();
-            /**
-             * Event emitted when a label is focused.
-             */
+            /** Event emitted when a label is focused. */
             _this.indexFocused = new core.EventEmitter();
-            /**
-             * The distance in pixels that the tab labels should be translated to the left.
-             */
+            /** The distance in pixels that the tab labels should be translated to the left. */
             _this._scrollDistance = 0;
-            /**
-             * Whether the header should scroll to the selected index after the view has been checked.
-             */
+            /** Whether the header should scroll to the selected index after the view has been checked. */
             _this.selectedIndexChanged = false;
-            /**
-             * Emits when the component is destroyed.
-             */
+            /** Emits when the component is destroyed. */
             _this.destroyed = new rxjs.Subject();
             _this._selectedIndex = 0;
             return _this;
         }
         Object.defineProperty(McTabHeader.prototype, "selectedIndex", {
-            /**
-             * The index of the active tab.
-             * @return {?}
-             */
+            /** The index of the active tab. */
             get: function () {
                 return this._selectedIndex;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
-                /** @type {?} */
                 var coercedValue = coercion.coerceNumberProperty(value);
                 this.selectedIndexChanged = this._selectedIndex !== coercedValue;
                 this._selectedIndex = coercedValue;
@@ -1603,18 +1035,11 @@
             configurable: true
         });
         Object.defineProperty(McTabHeader.prototype, "focusIndex", {
-            /**
-             * Tracks which element has focus; used for keyboard navigation
-             * @return {?}
-             */
+            /** Tracks which element has focus; used for keyboard navigation */
             get: function () {
                 return this.keyManager ? this.keyManager.activeItemIndex : 0;
             },
-            /**
-             * When the focus index is set, we must manually send focus to the correct label
-             * @param {?} value
-             * @return {?}
-             */
+            /** When the focus index is set, we must manually send focus to the correct label */
             set: function (value) {
                 if (!this.isValidIndex(value) || this.focusIndex === value || !this.keyManager) {
                     return;
@@ -1625,17 +1050,10 @@
             configurable: true
         });
         Object.defineProperty(McTabHeader.prototype, "scrollDistance", {
-            /**
-             * Sets the distance in pixels that the tab header should be transformed in the X-axis.
-             * @return {?}
-             */
+            /** Sets the distance in pixels that the tab header should be transformed in the X-axis. */
             get: function () {
                 return this._scrollDistance;
             },
-            /**
-             * @param {?} v
-             * @return {?}
-             */
             set: function (v) {
                 this._scrollDistance = Math.max(0, Math.min(this.getMaxScrollDistance(), v));
                 // Mark that the scroll distance has changed so that after the view is checked, the CSS
@@ -1646,9 +1064,6 @@
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McTabHeader.prototype.ngAfterContentChecked = function () {
             // If the number of tab labels have changed, check if scrolling should be enabled
             if (this.tabLabelCount !== this.labelWrappers.length) {
@@ -1672,10 +1087,6 @@
                 this.changeDetectorRef.markForCheck();
             }
         };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
         McTabHeader.prototype.handleKeydown = function (event) {
             // tslint:disable-next-line: deprecation
             switch (event.keyCode) {
@@ -1696,21 +1107,13 @@
                     this.keyManager.onKeydown(event);
             }
         };
-        /**
-         * @return {?}
-         */
         McTabHeader.prototype.ngAfterContentInit = function () {
             var _this = this;
-            /** @type {?} */
             var dirChange = this.dir ? this.dir.change : rxjs.of(null);
-            /** @type {?} */
             var resize = this.viewportRuler.change(VIEWPORT_THROTTLE_TIME);
-            /** @type {?} */
-            var realign = ( /**
-             * @return {?}
-             */function () {
+            var realign = function () {
                 _this.updatePagination();
-            });
+            };
             this.keyManager = new a11y.FocusKeyManager(this.labelWrappers)
                 .withHorizontalOrientation(this.getLayoutDirection())
                 .withWrap();
@@ -1724,52 +1127,39 @@
             // the key manager if the direction has changed.
             rxjs.merge(dirChange, resize)
                 .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(( /**
-         * @return {?}
-         */function () {
+                .subscribe(function () {
                 realign();
                 _this.keyManager.withHorizontalOrientation(_this.getLayoutDirection());
-            }));
+            });
             // If there is a change in the focus key manager we need to emit the `indexFocused`
             // event in order to provide a public event that notifies about focus changes. Also we realign
             // the tabs container by scrolling the new focused tab into the visible section.
             this.keyManager.change
                 .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(( /**
-         * @param {?} newFocusIndex
-         * @return {?}
-         */function (newFocusIndex) {
+                .subscribe(function (newFocusIndex) {
                 _this.indexFocused.emit(newFocusIndex);
                 _this.setTabFocus(newFocusIndex);
-            }));
+            });
         };
-        /**
-         * @return {?}
-         */
         McTabHeader.prototype.ngOnDestroy = function () {
             this.destroyed.next();
             this.destroyed.complete();
         };
         /**
          * Callback for when the MutationObserver detects that the content has changed.
-         * @return {?}
          */
         McTabHeader.prototype.onContentChanges = function () {
             var _this = this;
-            /** @type {?} */
             var textContent = this.elementRef.nativeElement.textContent;
             // We need to diff the text content of the header, because the MutationObserver callback
             // will fire even if the text content didn't change which is inefficient and is prone
             // to infinite loops if a poorly constructed expression is passed in.
             if (textContent !== this.currentTextContent) {
                 this.currentTextContent = textContent;
-                /** @type {?} */
-                var zoneCallback = ( /**
-                 * @return {?}
-                 */function () {
+                var zoneCallback = function () {
                     _this.updatePagination();
                     _this.changeDetectorRef.markForCheck();
-                });
+                };
                 // The content observer runs outside the `NgZone` by default, which
                 // means that we need to bring the callback back in ourselves.
                 // TODO: Remove null check for `_ngZone` once it's a required parameter.
@@ -1782,7 +1172,6 @@
          * WARNING: Calling this method can be very costly in terms of performance.  It should be called
          * as infrequently as possible from outside of the Tabs component as it causes a reflow of the
          * page.
-         * @return {?}
          */
         McTabHeader.prototype.updatePagination = function () {
             this.checkPaginationEnabled();
@@ -1792,14 +1181,11 @@
         /**
          * Determines if an index is valid.  If the tabs are not ready yet, we assume that the user is
          * providing a valid index and return true.
-         * @param {?} index
-         * @return {?}
          */
         McTabHeader.prototype.isValidIndex = function (index) {
             if (!this.labelWrappers) {
                 return true;
             }
-            /** @type {?} */
             var tab = this.labelWrappers
                 ? this.labelWrappers.toArray()[index]
                 : null;
@@ -1808,8 +1194,6 @@
         /**
          * Sets focus on the HTML element for the label wrapper and scrolls it into the view if
          * scrolling is enabled.
-         * @param {?} tabIndex
-         * @return {?}
          */
         McTabHeader.prototype.setTabFocus = function (tabIndex) {
             if (this.showPaginationControls) {
@@ -1820,9 +1204,7 @@
                 // Do not let the browser manage scrolling to focus the element, this will be handled
                 // by using translation. In LTR, the scroll left should be 0. In RTL, the scroll width
                 // should be the full width minus the offset width.
-                /** @type {?} */
                 var containerEl = this.tabListContainer.nativeElement;
-                /** @type {?} */
                 var dir = this.getLayoutDirection();
                 if (dir === 'ltr') {
                     containerEl.scrollLeft = 0;
@@ -1833,21 +1215,13 @@
                 }
             }
         };
-        /**
-         * The layout direction of the containing app.
-         * @return {?}
-         */
+        /** The layout direction of the containing app. */
         McTabHeader.prototype.getLayoutDirection = function () {
             return this.dir && this.dir.value === 'rtl' ? 'rtl' : 'ltr';
         };
-        /**
-         * Performs the CSS transformation on the tab list that will cause the list to scroll.
-         * @return {?}
-         */
+        /** Performs the CSS transformation on the tab list that will cause the list to scroll. */
         McTabHeader.prototype.updateTabScrollPosition = function () {
-            /** @type {?} */
             var scrollDistance = this.scrollDistance;
-            /** @type {?} */
             var translateX = this.getLayoutDirection() === 'ltr'
                 ? -scrollDistance
                 : scrollDistance;
@@ -1869,11 +1243,8 @@
          *
          * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
          * should be called sparingly.
-         * @param {?} scrollDir
-         * @return {?}
          */
         McTabHeader.prototype.scrollHeader = function (scrollDir) {
-            /** @type {?} */
             var viewLength = this.tabListContainer.nativeElement.offsetWidth;
             // Move the scroll distance one-third the length of the tab list's viewport.
             this.scrollDistance +=
@@ -1884,11 +1255,8 @@
          *
          * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
          * should be called sparingly.
-         * @param {?} labelIndex
-         * @return {?}
          */
         McTabHeader.prototype.scrollToLabel = function (labelIndex) {
-            /** @type {?} */
             var selectedLabel = this.labelWrappers
                 ? this.labelWrappers.toArray()[labelIndex]
                 : null;
@@ -1896,11 +1264,8 @@
                 return;
             }
             // The view length is the visible width of the tab labels.
-            /** @type {?} */
             var viewLength = this.tabListContainer.nativeElement.offsetWidth;
-            /** @type {?} */
             var labelBeforePos;
-            /** @type {?} */
             var labelAfterPos;
             if (this.getLayoutDirection() === 'ltr') {
                 labelBeforePos = selectedLabel.getOffsetLeft();
@@ -1912,9 +1277,7 @@
                         selectedLabel.getOffsetLeft();
                 labelBeforePos = labelAfterPos - selectedLabel.getOffsetWidth();
             }
-            /** @type {?} */
             var beforeVisiblePos = this.scrollDistance;
-            /** @type {?} */
             var afterVisiblePos = this.scrollDistance + viewLength;
             if (labelBeforePos < beforeVisiblePos) {
                 // Scroll header to move label to the before direction
@@ -1934,10 +1297,8 @@
          *
          * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
          * should be called sparingly.
-         * @return {?}
          */
         McTabHeader.prototype.checkPaginationEnabled = function () {
-            /** @type {?} */
             var isEnabled = this.tabList.nativeElement.scrollWidth >
                 this.elementRef.nativeElement.offsetWidth;
             if (!isEnabled) {
@@ -1956,7 +1317,6 @@
          *
          * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
          * should be called sparingly.
-         * @return {?}
          */
         McTabHeader.prototype.checkScrollingControls = function () {
             // Check if the pagination arrows should be activated.
@@ -1971,12 +1331,9 @@
          *
          * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
          * should be called sparingly.
-         * @return {?}
          */
         McTabHeader.prototype.getMaxScrollDistance = function () {
-            /** @type {?} */
             var lengthOfTabList = this.tabList.nativeElement.scrollWidth;
-            /** @type {?} */
             var viewLength = this.tabListContainer.nativeElement.offsetWidth;
             return lengthOfTabList - viewLength || 0;
         };
@@ -1993,8 +1350,8 @@
                         '[class.mc-tab-header__pagination-controls_enabled]': 'showPaginationControls',
                         '[class.mc-tab-header_rtl]': 'getLayoutDirection() == \'rtl\''
                     },
-                    styles: [".mc-tab-header{display:flex}.mc-tab-header__pagination{align-items:center;cursor:pointer;display:none;justify-content:center;min-width:32px;position:relative;z-index:2}.mc-tab-header__pagination .mc-tab-header__pagination-controls_enabled{display:flex}.mc-tab-header__pagination-chevron{border-style:solid;border-width:2px 2px 0 0;content:\"\";height:8px;width:8px}.mc-tab-header__pagination_after,.mc-tab-header_rtl .mc-tab-header__pagination_before{padding-right:4px}.mc-tab-header__pagination_after .mc-tab-header__pagination-chevron,.mc-tab-header_rtl .mc-tab-header__pagination_before .mc-tab-header__pagination-chevron{transform:rotate(45deg)}.mc-tab-header__pagination_before,.mc-tab-header_rtl .mc-tab-header__pagination_after{padding-left:4px}.mc-tab-header__pagination_before .mc-tab-header__pagination-chevron,.mc-tab-header_rtl .mc-tab-header__pagination_after .mc-tab-header__pagination-chevron{transform:rotate(-135deg)}.mc-tab-header_disabled{box-shadow:none;cursor:default}.mc-tab-header__content{display:flex;flex-grow:1;overflow:hidden;z-index:1}.mc-tab-list{flex-grow:1;position:relative;transition:transform .5s cubic-bezier(.35,0,.25,1)}.mc-tab-list__content{display:flex}.mc-tab-group_align-labels-center .mc-tab-list__content{justify-content:center}.mc-tab-group_align-labels-end .mc-tab-list__content{justify-content:flex-end}.mc-tab-group_stretch-labels .mc-tab-label,.mc-tab-group_stretch-labels .mc-tab-light-label{flex-basis:0;flex-grow:1}"]
-                }] }
+                    styles: [".mc-tab-header{display:flex}.mc-tab-header__pagination{position:relative;display:none;justify-content:center;align-items:center;min-width:32px;cursor:pointer;z-index:2}.mc-tab-header__pagination .mc-tab-header__pagination-controls_enabled{display:flex}.mc-tab-header__pagination-chevron{border-style:solid;border-width:2px 2px 0 0;content:\"\";height:8px;width:8px}.mc-tab-header__pagination_after,.mc-tab-header_rtl .mc-tab-header__pagination_before{padding-right:4px}.mc-tab-header__pagination_after .mc-tab-header__pagination-chevron,.mc-tab-header_rtl .mc-tab-header__pagination_before .mc-tab-header__pagination-chevron{transform:rotate(45deg)}.mc-tab-header__pagination_before,.mc-tab-header_rtl .mc-tab-header__pagination_after{padding-left:4px}.mc-tab-header__pagination_before .mc-tab-header__pagination-chevron,.mc-tab-header_rtl .mc-tab-header__pagination_after .mc-tab-header__pagination-chevron{transform:rotate(-135deg)}.mc-tab-header_disabled{box-shadow:none;cursor:default}.mc-tab-header__content{display:flex;flex-grow:1;overflow:hidden;z-index:1}.mc-tab-list{flex-grow:1;position:relative;transition:transform .5s cubic-bezier(.35,0,.25,1)}.mc-tab-list__content{display:flex}.mc-tab-group_align-labels-center .mc-tab-list__content{justify-content:center}.mc-tab-group_align-labels-end .mc-tab-list__content{justify-content:flex-end}.mc-tab-group_stretch-labels .mc-tab-label,.mc-tab-group_stretch-labels .mc-tab-light-label{flex-basis:0;flex-grow:1}"]
+                },] }
     ];
     /** @nocollapse */
     McTabHeader.ctorParameters = function () { return [
@@ -2012,142 +1369,23 @@
         selectFocusedIndex: [{ type: core.Output }],
         indexFocused: [{ type: core.Output }]
     };
-    if (false) {
-        /** @type {?} */
-        McTabHeader.prototype.labelWrappers;
-        /** @type {?} */
-        McTabHeader.prototype.tabListContainer;
-        /** @type {?} */
-        McTabHeader.prototype.tabList;
-        /**
-         * Whether the controls for pagination should be displayed
-         * @type {?}
-         */
-        McTabHeader.prototype.showPaginationControls;
-        /**
-         * Whether the tab list can be scrolled more towards the end of the tab label list.
-         * @type {?}
-         */
-        McTabHeader.prototype.disableScrollAfter;
-        /**
-         * Whether the tab list can be scrolled more towards the beginning of the tab label list.
-         * @type {?}
-         */
-        McTabHeader.prototype.disableScrollBefore;
-        /**
-         * Event emitted when the option is selected.
-         * @type {?}
-         */
-        McTabHeader.prototype.selectFocusedIndex;
-        /**
-         * Event emitted when a label is focused.
-         * @type {?}
-         */
-        McTabHeader.prototype.indexFocused;
-        /**
-         * The distance in pixels that the tab labels should be translated to the left.
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype._scrollDistance;
-        /**
-         * Whether the header should scroll to the selected index after the view has been checked.
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.selectedIndexChanged;
-        /**
-         * Emits when the component is destroyed.
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.destroyed;
-        /**
-         * The number of tab labels that are displayed on the header. When this changes, the header
-         * should re-evaluate the scroll position.
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.tabLabelCount;
-        /**
-         * Whether the scroll distance has changed and should be applied after the view is checked.
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.scrollDistanceChanged;
-        /**
-         * Used to manage focus between the tabs.
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.keyManager;
-        /**
-         * Cached text content of the header.
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.currentTextContent;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype._selectedIndex;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.elementRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.changeDetectorRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.viewportRuler;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.dir;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabHeader.prototype.ngZone;
-    }
 
     // Boilerplate for applying mixins to McTabNav.
-    /**
-     * \@docs-private
-     */
+    /** @docs-private */
     var McTabNavBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
-        /**
-         * @param {?} _elementRef
-         */
         function McTabNavBase(_elementRef) {
             this._elementRef = _elementRef;
         }
         return McTabNavBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McTabNavBase.prototype._elementRef;
-    }
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McTabNavMixinBase = core$1.mixinColor(McTabNavBase);
     /**
      * Navigation component matching the styles of the tab group header.
      */
     var McTabNav = /** @class */ (function (_super) {
         __extends(McTabNav, _super);
-        /**
-         * @param {?} elementRef
-         */
         function McTabNav(elementRef) {
             return _super.call(this, elementRef) || this;
         }
@@ -2162,8 +1400,8 @@
                     host: { class: 'mc-tab-nav-bar' },
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    styles: [".mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-active:before,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link:hover:before,.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused:after{content:\"\";display:block;position:absolute}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-active:before,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link:hover:before{bottom:calc(var(--mc-tabs-size-border-width, 1px)*-1);height:var(--mc-tabs-size-highlight-height,4px);left:0;right:0}.mc-tab-link{-webkit-tap-highlight-color:transparent;text-decoration:none;vertical-align:top}.mc-tab-group_stretch-labels .mc-tab-link{flex-basis:0;flex-grow:1}.mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar{display:flex}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link{align-items:center;border-bottom-style:solid;border-bottom-width:var(--mc-tabs-size-border-width,1px);border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-top-style:solid;border-top-width:var(--mc-tabs-size-border-width,1px);box-sizing:border-box;cursor:pointer;display:inline-flex;height:var(--mc-tabs-size-height,40px);justify-content:center;outline:none;padding-left:var(--mc-tabs-size-padding-horizontal,16px);padding-right:var(--mc-tabs-size-padding-horizontal,16px);position:relative;text-align:center;white-space:nowrap}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused:after{border-bottom:none;border-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-width:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width)*2);bottom:calc(var(--mc-tabs-size-border-width, 1px)*-1);left:calc(var(--mc-tabs-size-border-width, 1px)*-1);right:calc(var(--mc-tabs-size-border-width, 1px)*-1);top:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width)*2)}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link .mc-tab-overlay{bottom:0;left:0;pointer-events:none;position:absolute;right:0;top:-1px}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-active{border-style:solid;border-width:var(--mc-tabs-size-border-width,1px);padding-left:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));padding-right:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px))}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-active.cdk-keyboard-focused:after{left:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width)*2);right:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width)*2);z-index:1}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link .mc-tab-overlay{border-top:var(--mc-tabs-size-border-width,1px) solid transparent;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px)}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link{align-items:center;border-bottom-style:solid;border-bottom-width:var(--mc-tabs-size-border-width,1px);box-sizing:border-box;cursor:pointer;display:inline-flex;height:var(--mc-tabs-size-height,40px);justify-content:center;outline:none;padding-left:var(--mc-tabs-size-padding-horizontal,16px);padding-right:var(--mc-tabs-size-padding-horizontal,16px);position:relative;text-align:center;white-space:nowrap}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after{border-bottom:none;border-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-width:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width)*2);bottom:calc(var(--mc-tabs-size-border-width, 1px)*-1);left:calc(var(--mc-tabs-size-border-width, 1px)*-1);right:calc(var(--mc-tabs-size-border-width, 1px)*-1);top:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width)*2)}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link .mc-tab-overlay{bottom:0;left:0;pointer-events:none;right:0;top:-1px}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused+:hover:before{left:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width)*2 - var(--mc-tabs-size-border-width, 1px))}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after{top:calc(var(--mc-tabs-size-border-width, 1px)*-1)}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link .mc-tab-overlay{position:absolute;top:0}.mc-tab-links{display:flex;flex-grow:1;padding:1px 1px 0;position:relative}.mc-tab-links .mc-tab-group_align-labels-center{justify-content:center}.mc-tab-links .mc-tab-group_align-labels-end{justify-content:flex-end}"]
-                }] }
+                    styles: [".mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-active:before,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link:hover:before,.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused:after{display:block;position:absolute;content:\"\"}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-active:before,.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link:hover:before{bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:0;height:var(--mc-tabs-size-highlight-height,4px);right:0}.mc-tab-link{vertical-align:top;text-decoration:none;-webkit-tap-highlight-color:transparent}.mc-tab-group_stretch-labels .mc-tab-link{flex-basis:0;flex-grow:1}.mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar{display:flex}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:var(--mc-tabs-size-height,40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:var(--mc-tabs-size-padding-horizontal,16px);padding-left:var(--mc-tabs-size-padding-horizontal,16px);outline:none;border-bottom-width:var(--mc-tabs-size-border-width,1px);border-bottom-style:solid;border-top-width:var(--mc-tabs-size-border-width,1px);border-top-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px)}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.cdk-keyboard-focused:after{top:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width) * 2);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * var(--mc-tabs-size-border-width, 1px));border-width:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2);border-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-bottom:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link .mc-tab-overlay{position:absolute;top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-active{padding-right:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));padding-left:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));border-width:var(--mc-tabs-size-border-width,1px);border-style:solid}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link.mc-active.cdk-keyboard-focused:after{z-index:1;right:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width) * 2);left:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width) * 2)}.mc-tab-nav-bar:not(.mc-tab-group_light) .mc-tab-link .mc-tab-overlay{border-top:var(--mc-tabs-size-border-width,1px) solid transparent;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px)}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:var(--mc-tabs-size-height,40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:var(--mc-tabs-size-padding-horizontal,16px);padding-left:var(--mc-tabs-size-padding-horizontal,16px);outline:none;border-bottom-width:var(--mc-tabs-size-border-width,1px);border-bottom-style:solid}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after{top:-calc(var(--mc-tabs-size-border-width,$tabs-size-border-width) * 2);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * var(--mc-tabs-size-border-width, 1px));border-width:calc(var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2);border-style:solid;border-top-left-radius:var(--mc-tabs-size-border-radius,3px);border-top-right-radius:var(--mc-tabs-size-border-radius,3px);border-bottom:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.mc-disabled{pointer-events:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link .mc-tab-overlay{top:-1px;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused+:hover:before{left:calc(calc(var(--mc-tabs-size-border-width, $tabs-size-border-width) * 2) - var(--mc-tabs-size-border-width, 1px))}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link.cdk-keyboard-focused:after{top:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-nav-bar.mc-tab-group_light .mc-tab-link .mc-tab-overlay{position:absolute;top:0}.mc-tab-links{display:flex;position:relative;padding:1px 1px 0;flex-grow:1}.mc-tab-links .mc-tab-group_align-labels-center{justify-content:center}.mc-tab-links .mc-tab-group_align-labels-end{justify-content:flex-end}"]
+                },] }
     ];
     /** @nocollapse */
     McTabNav.ctorParameters = function () { return [
@@ -2176,40 +1414,26 @@
         return McTabLinkBase;
     }());
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var McTabLinkMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McTabLinkBase));
     /**
      * Link inside of a `mc-tab-nav-bar`.
      */
     var McTabLink = /** @class */ (function (_super) {
         __extends(McTabLink, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} focusMonitor
-         */
         function McTabLink(elementRef, focusMonitor) {
             var _this = _super.call(this) || this;
             _this.elementRef = elementRef;
             _this.focusMonitor = focusMonitor;
-            /**
-             * Whether the tab link is active or not.
-             */
+            /** Whether the tab link is active or not. */
             _this.isActive = false;
             _this.focusMonitor.monitor(_this.elementRef.nativeElement);
             return _this;
         }
         Object.defineProperty(McTabLink.prototype, "active", {
-            /**
-             * Whether the link is active.
-             * @return {?}
-             */
+            /** Whether the link is active. */
             get: function () {
                 return this.isActive;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value !== this.isActive) {
                     this.isActive = value;
@@ -2218,9 +1442,6 @@
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McTabLink.prototype.ngOnDestroy = function () {
             this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         };
@@ -2249,27 +1470,7 @@
     McTabLink.propDecorators = {
         active: [{ type: core.Input }]
     };
-    if (false) {
-        /**
-         * Whether the tab link is active or not.
-         * @type {?}
-         * @protected
-         */
-        McTabLink.prototype.isActive;
-        /** @type {?} */
-        McTabLink.prototype.elementRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTabLink.prototype.focusMonitor;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: tabs.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McTabsModule = /** @class */ (function () {
         function McTabsModule() {
         }
@@ -2317,27 +1518,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: tab-nav-bar/index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-tabs.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.MC_TABS_CONFIG = MC_TABS_CONFIG;

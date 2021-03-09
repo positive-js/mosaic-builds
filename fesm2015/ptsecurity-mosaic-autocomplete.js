@@ -14,91 +14,40 @@ import { defer, merge, Subscription, Subject, of, fromEvent } from 'rxjs';
 import { take, switchMap, filter, map, tap, delay } from 'rxjs/operators';
 
 /**
- * @fileoverview added by tsickle
- * Generated from: autocomplete.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  * Autocomplete IDs need to be unique across components, so this counter exists outside of
  * the component definition.
- * @type {?}
  */
 let uniqueAutocompleteIdCounter = 0;
 class McAutocompleteSelectedEvent {
-    /**
-     * @param {?} source
-     * @param {?} option
-     */
     constructor(source, option) {
         this.source = source;
         this.option = option;
     }
 }
-if (false) {
-    /** @type {?} */
-    McAutocompleteSelectedEvent.prototype.source;
-    /** @type {?} */
-    McAutocompleteSelectedEvent.prototype.option;
-}
-/**
- * Default `mc-autocomplete` options that can be overridden.
- * @record
- */
-function McAutocompleteDefaultOptions() { }
-if (false) {
-    /**
-     * Whether the first option should be highlighted when an autocomplete panel is opened.
-     * @type {?|undefined}
-     */
-    McAutocompleteDefaultOptions.prototype.autoActiveFirstOption;
-}
-/**
- * Injection token to be used to override the default options for `mc-autocomplete`.
- * @type {?}
- */
+/** Injection token to be used to override the default options for `mc-autocomplete`. */
 const MC_AUTOCOMPLETE_DEFAULT_OPTIONS = new InjectionToken('mc-autocomplete-default-options', {
     providedIn: 'root',
     factory: MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY
 });
 // tslint:disable-next-line naming-convention
-/**
- * @return {?}
- */
 function MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY() {
     return { autoActiveFirstOption: true };
 }
 class McAutocomplete {
-    /**
-     * @param {?} changeDetectorRef
-     * @param {?} elementRef
-     * @param {?} defaults
-     */
     constructor(changeDetectorRef, elementRef, defaults) {
         this.changeDetectorRef = changeDetectorRef;
         this.elementRef = elementRef;
-        /**
-         * Unique ID to be used by autocomplete trigger's "aria-owns" property.
-         */
+        /** Unique ID to be used by autocomplete trigger's "aria-owns" property. */
         this.id = `mc-autocomplete-${uniqueAutocompleteIdCounter++}`;
-        /**
-         * Whether the autocomplete panel should be visible, depending on option length.
-         */
+        /** Whether the autocomplete panel should be visible, depending on option length. */
         this.showPanel = false;
-        /**
-         * Function that maps an option's control value to its display value in the trigger.
-         */
+        /** Function that maps an option's control value to its display value in the trigger. */
         this.displayWith = null;
-        /**
-         * Event that is emitted whenever an option from the list is selected.
-         */
+        /** Event that is emitted whenever an option from the list is selected. */
         this.optionSelected = new EventEmitter();
-        /**
-         * Event that is emitted when the autocomplete panel is opened.
-         */
+        /** Event that is emitted when the autocomplete panel is opened. */
         this.opened = new EventEmitter();
-        /**
-         * Event that is emitted when the autocomplete panel is closed.
-         */
+        /** Event that is emitted when the autocomplete panel is closed. */
         this.closed = new EventEmitter();
         this._classList = {};
         this._isOpen = false;
@@ -107,98 +56,55 @@ class McAutocomplete {
     /**
      * Takes classes set on the host mc-autocomplete element and applies them to the panel
      * inside the overlay container to allow for easy styling.
-     * @return {?}
      */
     get classList() {
         return this._classList;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set classList(value) {
         if (value && value.length) {
             value.split(' ')
-                .forEach((/**
-             * @param {?} className
-             * @return {?}
-             */
-            (className) => this._classList[className.trim()] = true));
+                .forEach((className) => this._classList[className.trim()] = true);
             this.elementRef.nativeElement.className = '';
         }
     }
     /**
      * Whether the first option should be highlighted when the autocomplete panel is opened.
      * Can be configured globally through the `MC_AUTOCOMPLETE_DEFAULT_OPTIONS` token.
-     * @return {?}
      */
     get autoActiveFirstOption() {
         return this._autoActiveFirstOption;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set autoActiveFirstOption(value) {
         this._autoActiveFirstOption = coerceBooleanProperty(value);
     }
-    /**
-     * @return {?}
-     */
     get isOpen() {
         return this._isOpen && this.showPanel;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set isOpen(value) {
         this._isOpen = value;
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.keyManager = new ActiveDescendantKeyManager(this.options);
         this.setVisibility();
     }
-    /**
-     * @param {?} scrollTop
-     * @return {?}
-     */
     setScrollTop(scrollTop) {
         if (this.panel) {
             this.panel.nativeElement.scrollTop = scrollTop;
         }
     }
-    /**
-     * @return {?}
-     */
     getScrollTop() {
         return this.panel ? this.panel.nativeElement.scrollTop : 0;
     }
-    /**
-     * @return {?}
-     */
     setVisibility() {
         this.showPanel = !!this.options.length;
         this._classList['mc-autocomplete_visible'] = this.showPanel;
         this._classList['mc-autocomplete_hidden'] = !this.showPanel;
         this.changeDetectorRef.markForCheck();
     }
-    /**
-     * @param {?} option
-     * @return {?}
-     */
     emitSelectEvent(option) {
-        /** @type {?} */
         const event = new McAutocompleteSelectedEvent(this, option);
         this.optionSelected.emit(event);
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     onKeydown(event) {
         this.keyManager.onKeydown(event);
     }
@@ -216,8 +122,8 @@ McAutocomplete.decorators = [
                 providers: [{
                         provide: MC_OPTION_PARENT_COMPONENT, useExisting: McAutocomplete
                     }],
-                styles: [".mc-autocomplete-trigger{text-overflow:ellipsis}.mc-autocomplete-panel{-webkit-overflow-scrolling:touch;border-bottom-left-radius:var(--mc-autocomplete-size-panel-border-radius,3px);border-bottom-right-radius:var(--mc-autocomplete-size-panel-border-radius,3px);border-style:solid;border-width:1px;margin-top:-1px;max-height:var(--mc-autocomplete-size-panel-max-height,256px);max-width:none;min-width:100%;overflow:auto;padding:var(--mc-autocomplete-size-panel-padding,4px 0);position:relative;visibility:hidden;width:100%}.mc-autocomplete-panel.mc-autocomplete_visible{visibility:visible}.mc-autocomplete-panel.mc-autocomplete_hidden{visibility:hidden}.mc-autocomplete-panel-above .mc-autocomplete-panel{border-radius:var(--mc-autocomplete-size-panel-border-radius,3px) var(--mc-autocomplete-size-panel-border-radius,3px) 0 0}.mc-autocomplete-panel .mc-divider-horizontal{margin-top:-1px}.cdk-high-contrast-active .mc-autocomplete-panel,.cdk-high-contrast-active :host .mc-autocomplete-panel{outline:1px solid}"]
-            }] }
+                styles: [".mc-autocomplete-trigger{text-overflow:ellipsis}.mc-autocomplete-panel{visibility:hidden;position:relative;overflow:auto;-webkit-overflow-scrolling:touch;margin-top:-1px;min-width:100%;width:100%;max-width:none;max-height:var(--mc-autocomplete-size-panel-max-height,256px);border-width:1px;border-style:solid;border-bottom-left-radius:var(--mc-autocomplete-size-panel-border-radius,3px);border-bottom-right-radius:var(--mc-autocomplete-size-panel-border-radius,3px);padding:var(--mc-autocomplete-size-panel-padding,4px 0)}.mc-autocomplete-panel.mc-autocomplete_visible{visibility:visible}.mc-autocomplete-panel.mc-autocomplete_hidden{visibility:hidden}.mc-autocomplete-panel-above .mc-autocomplete-panel{border-radius:var(--mc-autocomplete-size-panel-border-radius,3px) var(--mc-autocomplete-size-panel-border-radius,3px) 0 0}.mc-autocomplete-panel .mc-divider-horizontal{margin-top:-1px}.cdk-high-contrast-active .mc-autocomplete-panel,.cdk-high-contrast-active :host .mc-autocomplete-panel{outline:1px solid}"]
+            },] }
 ];
 /** @nocollapse */
 McAutocomplete.ctorParameters = () => [
@@ -238,96 +144,12 @@ McAutocomplete.propDecorators = {
     classList: [{ type: Input, args: ['class',] }],
     autoActiveFirstOption: [{ type: Input }]
 };
-if (false) {
-    /**
-     * Unique ID to be used by autocomplete trigger's "aria-owns" property.
-     * @type {?}
-     */
-    McAutocomplete.prototype.id;
-    /**
-     * Manages active item in option list based on key events.
-     * @type {?}
-     */
-    McAutocomplete.prototype.keyManager;
-    /**
-     * Whether the autocomplete panel should be visible, depending on option length.
-     * @type {?}
-     */
-    McAutocomplete.prototype.showPanel;
-    /** @type {?} */
-    McAutocomplete.prototype.template;
-    /** @type {?} */
-    McAutocomplete.prototype.panel;
-    /** @type {?} */
-    McAutocomplete.prototype.options;
-    /** @type {?} */
-    McAutocomplete.prototype.optionGroups;
-    /**
-     * Function that maps an option's control value to its display value in the trigger.
-     * @type {?}
-     */
-    McAutocomplete.prototype.displayWith;
-    /**
-     * Specify the width of the autocomplete panel.  Can be any CSS sizing value, otherwise it will
-     * match the width of its host.
-     * @type {?}
-     */
-    McAutocomplete.prototype.panelWidth;
-    /**
-     * Event that is emitted whenever an option from the list is selected.
-     * @type {?}
-     */
-    McAutocomplete.prototype.optionSelected;
-    /**
-     * Event that is emitted when the autocomplete panel is opened.
-     * @type {?}
-     */
-    McAutocomplete.prototype.opened;
-    /**
-     * Event that is emitted when the autocomplete panel is closed.
-     * @type {?}
-     */
-    McAutocomplete.prototype.closed;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocomplete.prototype._classList;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocomplete.prototype._autoActiveFirstOption;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocomplete.prototype._isOpen;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocomplete.prototype.changeDetectorRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocomplete.prototype.elementRef;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: autocomplete-origin.directive.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /**
  * Directive applied to an element to make it usable
  * as a connection point for an autocomplete panel.
  */
 class McAutocompleteOrigin {
-    /**
-     * @param {?} elementRef
-     */
     constructor(elementRef) {
         this.elementRef = elementRef;
     }
@@ -342,45 +164,23 @@ McAutocompleteOrigin.decorators = [
 McAutocompleteOrigin.ctorParameters = () => [
     { type: ElementRef }
 ];
-if (false) {
-    /** @type {?} */
-    McAutocompleteOrigin.prototype.elementRef;
-}
 
 /**
- * @fileoverview added by tsickle
- * Generated from: autocomplete-trigger.directive.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * The following style constants are necessary to save here in order
+ * to properly calculate the scrollTop of the panel. Because we are not
+ * actually focusing the active item, scroll must be handled manually.
  */
-/**
- * The height of each autocomplete option.
- * @type {?}
- */
+/** The height of each autocomplete option. */
 const AUTOCOMPLETE_OPTION_HEIGHT = 32;
-/**
- * The total height of the autocomplete panel.
- * @type {?}
- */
+/** The total height of the autocomplete panel. */
 const AUTOCOMPLETE_PANEL_HEIGHT = 256;
-/** @type {?} */
 const AUTOCOMPLETE_BORDER_WIDTH = 2;
-/**
- * Injection token that determines the scroll handling while the autocomplete panel is open.
- * @type {?}
- */
+/** Injection token that determines the scroll handling while the autocomplete panel is open. */
 const MC_AUTOCOMPLETE_SCROLL_STRATEGY = new InjectionToken('mc-autocomplete-scroll-strategy');
 // tslint:disable-next-line naming-convention
-/**
- * @param {?} overlay
- * @return {?}
- */
 function MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY(overlay) {
-    return (/**
-     * @return {?}
-     */
-    () => overlay.scrollStrategies.reposition());
+    return () => overlay.scrollStrategies.reposition();
 }
-/** @type {?} */
 const MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     provide: MC_AUTOCOMPLETE_SCROLL_STRATEGY,
     deps: [Overlay],
@@ -388,21 +188,16 @@ const MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 };
 /**
  * Provider that allows the autocomplete to register as a ControlValueAccessor.
- * \@docs-private
- * @type {?}
+ * @docs-private
  */
 const MAT_AUTOCOMPLETE_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef((/**
-     * @return {?}
-     */
-    () => McAutocompleteTrigger)),
+    useExisting: forwardRef(() => McAutocompleteTrigger),
     multi: true
 };
 /**
  * Creates an error to be thrown when attempting to use an autocomplete trigger without a panel.
- * \@docs-private
- * @return {?}
+ * @docs-private
  */
 function getMcAutocompleteMissingPanelError() {
     return Error('Attempting to open an undefined instance of `mc-autocomplete`. ' +
@@ -410,19 +205,9 @@ function getMcAutocompleteMissingPanelError() {
         'you\'re attempting to open it after the ngAfterContentInit hook.');
 }
 class McAutocompleteTrigger {
-    /**
-     * @param {?} elementRef
-     * @param {?} viewContainerRef
-     * @param {?} changeDetectorRef
-     * @param {?} overlay
-     * @param {?} zone
-     * @param {?} scrollStrategy
-     * @param {?} dir
-     * @param {?} formField
-     * @param {?} document
-     * @param {?=} viewportRuler
-     */
-    constructor(elementRef, viewContainerRef, changeDetectorRef, overlay, zone, scrollStrategy, dir, formField, document, viewportRuler) {
+    constructor(elementRef, viewContainerRef, changeDetectorRef, overlay, zone, scrollStrategy, dir, formField, document, 
+    // @breaking-change 8.0.0 Make `_viewportRuler` required.
+    viewportRuler) {
         this.elementRef = elementRef;
         this.viewContainerRef = viewContainerRef;
         this.changeDetectorRef = changeDetectorRef;
@@ -433,37 +218,25 @@ class McAutocompleteTrigger {
         this.document = document;
         this.viewportRuler = viewportRuler;
         // @ts-ignore
-        this.optionSelections = defer((/**
-         * @return {?}
-         */
-        () => {
+        this.optionSelections = defer(() => {
             if (this.autocomplete && this.autocomplete.options) {
-                return merge(...this.autocomplete.options.map((/**
-                 * @param {?} option
-                 * @return {?}
-                 */
-                (option) => option.onSelectionChange)));
+                return merge(...this.autocomplete.options.map((option) => option.onSelectionChange));
             }
             // If there are any subscribers before `ngAfterViewInit`, the `autocomplete` will be undefined.
             // Return a stream that we'll replace with the real one once everything is in place.
             return this.zone.onStable
                 .asObservable()
-                .pipe(take(1), switchMap((/**
-             * @return {?}
-             */
-            () => this.optionSelections)));
-        }));
+                .pipe(take(1), switchMap(() => this.optionSelections));
+        });
         /**
          * `autocomplete` attribute to be set on the input element.
-         * \@docs-private
+         * @docs-private
          */
         this.autocompleteAttribute = 'off';
         this._autocompleteDisabled = false;
         this.overlayAttached = false;
         this.componentDestroyed = false;
-        /**
-         * Subscription to viewport size changes.
-         */
+        /** Subscription to viewport size changes. */
         this.viewportSubscription = Subscription.EMPTY;
         /**
          * Whether the autocomplete can open the next time it is focused. Used to prevent a focused,
@@ -471,84 +244,52 @@ class McAutocompleteTrigger {
          * comes back.
          */
         this.canOpenOnNextFocus = true;
-        /**
-         * Stream of keyboard events that can close the panel.
-         */
+        /** Stream of keyboard events that can close the panel. */
         this.closeKeyEventStream = new Subject();
-        /**
-         * `View -> model callback called when value changes`
-         */
+        /** `View -> model callback called when value changes` */
         // tslint:disable-next-line no-empty
-        this.onChange = (/**
-         * @return {?}
-         */
-        () => { });
-        /**
-         * `View -> model callback called when autocomplete has been touched`
-         */
+        this.onChange = () => { };
+        /** `View -> model callback called when autocomplete has been touched` */
         // tslint:disable-next-line no-empty
-        this.onTouched = (/**
-         * @return {?}
-         */
-        () => { });
+        this.onTouched = () => { };
         /**
          * Event handler for when the window is blurred. Needs to be an
          * arrow function in order to preserve the context.
          */
-        this.windowBlurHandler = (/**
-         * @return {?}
-         */
-        () => {
+        this.windowBlurHandler = () => {
             // If the user blurred the window while the autocomplete is focused, it means that it'll be
             // refocused when they come back. In this case we want to skip the first focus event, if the
             // pane was closed, in order to avoid reopening it unintentionally.
             this.canOpenOnNextFocus = this.document.activeElement !== this.elementRef.nativeElement || this.panelOpen;
-        });
+        };
         // tslint:disable-next-line no-typeof-undefined
         if (typeof window !== 'undefined') {
-            zone.runOutsideAngular((/**
-             * @return {?}
-             */
-            () => {
+            zone.runOutsideAngular(() => {
                 window.addEventListener('blur', this.windowBlurHandler);
-            }));
+            });
         }
         this.scrollStrategy = scrollStrategy;
     }
-    /**
-     * The currently active option, coerced to MatOption type.
-     * @return {?}
-     */
+    /** The currently active option, coerced to MatOption type. */
     get activeOption() {
         if (this.autocomplete && this.autocomplete.keyManager) {
             return this.autocomplete.keyManager.activeItem;
         }
         return null;
     }
-    /**
-     * @return {?}
-     */
     get panelOpen() {
         return this.overlayAttached && this.autocomplete.showPanel;
     }
     /**
      * Whether the autocomplete is disabled. When disabled, the element will
      * act as a regular input and the user won't be able to open the panel.
-     * @return {?}
      */
     get autocompleteDisabled() {
         return this._autocompleteDisabled;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set autocompleteDisabled(value) {
         this._autocompleteDisabled = coerceBooleanProperty(value);
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         // tslint:disable-next-line no-typeof-undefined
         if (typeof window !== 'undefined') {
@@ -559,16 +300,10 @@ class McAutocompleteTrigger {
         this.destroyPanel();
         this.closeKeyEventStream.complete();
     }
-    /**
-     * Opens the autocomplete suggestion panel.
-     * @return {?}
-     */
+    /** Opens the autocomplete suggestion panel. */
     openPanel() {
         this.attachOverlay();
     }
-    /**
-     * @return {?}
-     */
     closePanel() {
         if (!this.overlayAttached) {
             return;
@@ -594,77 +329,41 @@ class McAutocompleteTrigger {
     /**
      * Updates the position of the autocomplete suggestion panel to ensure that it fits all options
      * within the viewport.
-     * @return {?}
      */
     updatePosition() {
         if (this.overlayAttached) {
-            (/** @type {?} */ (this.overlayRef)).updatePosition();
+            this.overlayRef.updatePosition();
         }
     }
     /**
      * A stream of actions that should close the autocomplete panel, including
      * when an option is selected, on blur, and when TAB is pressed.
-     * @return {?}
      */
     get panelClosingActions() {
-        return merge(this.optionSelections, this.autocomplete.keyManager.tabOut.pipe(filter((/**
-         * @return {?}
-         */
-        () => this.overlayAttached))), this.closeKeyEventStream, this.getOutsideClickStream(), this.overlayRef ?
-            this.overlayRef.detachments().pipe(filter((/**
-             * @return {?}
-             */
-            () => this.overlayAttached))) :
+        return merge(this.optionSelections, this.autocomplete.keyManager.tabOut.pipe(filter(() => this.overlayAttached)), this.closeKeyEventStream, this.getOutsideClickStream(), this.overlayRef ?
+            this.overlayRef.detachments().pipe(filter(() => this.overlayAttached)) :
             of()).pipe(
         // Normalize the output so we return a consistent type.
-        map((/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => event instanceof McOptionSelectionChange ? event : null)));
+        map((event) => event instanceof McOptionSelectionChange ? event : null));
     }
     // Implemented as part of ControlValueAccessor.
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     writeValue(value) {
-        Promise.resolve(null).then((/**
-         * @return {?}
-         */
-        () => this.setTriggerValue(value)));
+        Promise.resolve(null).then(() => this.setTriggerValue(value));
     }
     // Implemented as part of ControlValueAccessor.
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
     registerOnChange(fn) {
         this.onChange = fn;
     }
     // Implemented as part of ControlValueAccessor.
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
     registerOnTouched(fn) {
         this.onTouched = fn;
     }
     // Implemented as part of ControlValueAccessor.
-    /**
-     * @param {?} isDisabled
-     * @return {?}
-     */
     setDisabledState(isDisabled) {
         this.elementRef.nativeElement.disabled = isDisabled;
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     handleKeydown(event) {
         // tslint:disable-next-line deprecation
-        /** @type {?} */
         const keyCode = event.keyCode;
         // Prevent the default action on all escape key presses. This is here primarily to bring IE
         // in line with other browsers. By default, pressing escape on IE will cause it to revert
@@ -679,7 +378,6 @@ class McAutocompleteTrigger {
             event.preventDefault();
         }
         else if (this.autocomplete) {
-            /** @type {?} */
             const prevActiveItem = this.autocomplete.keyManager.activeItem;
             if (this.panelOpen || keyCode === TAB) {
                 this.autocomplete.onKeydown(event);
@@ -687,21 +385,14 @@ class McAutocompleteTrigger {
             else if (keyCode === DOWN_ARROW && this.canOpen()) {
                 this.openPanel();
             }
-            /** @type {?} */
             const isArrowKey = keyCode === UP_ARROW || keyCode === DOWN_ARROW;
             if (isArrowKey || this.autocomplete.keyManager.activeItem !== prevActiveItem) {
                 this.scrollToOption();
             }
         }
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     handleInput(event) {
-        /** @type {?} */
-        const target = (/** @type {?} */ (event.target));
-        /** @type {?} */
+        const target = event.target;
         let value = target.value;
         // Based on `NumberValueAccessor` from forms.
         if (target.type === 'number') {
@@ -720,9 +411,6 @@ class McAutocompleteTrigger {
             }
         }
     }
-    /**
-     * @return {?}
-     */
     handleFocus() {
         if (!this.canOpenOnNextFocus) {
             this.canOpenOnNextFocus = true;
@@ -732,43 +420,28 @@ class McAutocompleteTrigger {
             this.attachOverlay();
         }
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
     handleClick($event) {
         if (this.canOpen() && this.document.activeElement === $event.target) {
             this.openPanel();
         }
     }
-    /**
-     * Stream of clicks outside of the autocomplete panel.
-     * @private
-     * @return {?}
-     */
+    /** Stream of clicks outside of the autocomplete panel. */
     getOutsideClickStream() {
-        return merge((/** @type {?} */ (
+        return merge(
         // tslint:disable-next-line: no-unnecessary-type-assertion
-        fromEvent(this.document, 'click'))), (/** @type {?} */ (
+        fromEvent(this.document, 'click'), 
         // tslint:disable-next-line: no-unnecessary-type-assertion
-        fromEvent(this.document, 'touchend'))))
-            .pipe(filter((/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => {
-            /** @type {?} */
-            const clickTarget = (/** @type {?} */ (event.target));
-            /** @type {?} */
+        fromEvent(this.document, 'touchend'))
+            .pipe(filter((event) => {
+            const clickTarget = event.target;
             const formField = this.formField ? this.formField._elementRef.nativeElement : null;
-            /** @type {?} */
             const customOrigin = this.connectedTo ? this.connectedTo.elementRef.nativeElement : null;
             return this.overlayAttached &&
                 clickTarget !== this.elementRef.nativeElement &&
                 (!formField || !formField.contains(clickTarget)) &&
                 (!customOrigin || !customOrigin.contains(clickTarget)) &&
                 (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget));
-        })));
+        }));
     }
     /**
      * Given that we are not actually focusing active options, we must manually adjust scroll
@@ -778,34 +451,22 @@ class McAutocompleteTrigger {
      * bottom of the panel. If that offset is above the top of the visible panel, the new scrollTop
      * will become the offset. If that offset is visible within the panel already, the scrollTop is
      * not adjusted.
-     * @private
-     * @return {?}
      */
     scrollToOption() {
-        /** @type {?} */
         const index = this.autocomplete.keyManager.activeItemIndex || 0;
-        /** @type {?} */
         const labelCount = countGroupLabelsBeforeOption(index, this.autocomplete.options, this.autocomplete.optionGroups);
-        /** @type {?} */
         const newScrollPosition = getOptionScrollPosition(index + labelCount, AUTOCOMPLETE_OPTION_HEIGHT, this.autocomplete.getScrollTop(), AUTOCOMPLETE_PANEL_HEIGHT);
         this.autocomplete.setScrollTop(newScrollPosition);
     }
     /**
      * This method listens to a stream of panel closing actions and resets the
      * stream every time the option list changes.
-     * @private
-     * @return {?}
      */
     subscribeToClosingActions() {
-        /** @type {?} */
         const firstStable = this.zone.onStable.asObservable()
             .pipe(take(1));
-        /** @type {?} */
         const optionChanges = this.autocomplete.options.changes
-            .pipe(tap((/**
-         * @return {?}
-         */
-        () => this.positionStrategy.reapplyLastPosition())), 
+            .pipe(tap(() => this.positionStrategy.reapplyLastPosition()), 
         // Defer emitting to the stream until the next tick, because changing
         // bindings in here will cause "changed after checked" errors.
         delay(0));
@@ -814,16 +475,12 @@ class McAutocompleteTrigger {
             .pipe(
         // create a new stream of panelClosingActions, replacing any previous streams
         // that were created, and flatten it so our stream only emits closing events...
-        switchMap((/**
-         * @return {?}
-         */
-        () => {
-            /** @type {?} */
+        switchMap(() => {
             const wasOpen = this.panelOpen;
             this.resetActiveItem();
             this.autocomplete.setVisibility();
             if (this.panelOpen) {
-                (/** @type {?} */ (this.overlayRef)).updatePosition();
+                this.overlayRef.updatePosition();
                 // If the `panelOpen` state changed, we need to make sure to emit the `opened`
                 // event, because we may not have emitted it when the panel was attached. This
                 // can happen if the users opens the panel and there are no options, but the
@@ -833,21 +490,13 @@ class McAutocompleteTrigger {
                 }
             }
             return this.panelClosingActions;
-        })), 
+        }), 
         // when the first closing event occurs...
         take(1))
             // set the value, close the panel, and complete.
-            .subscribe((/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => this.setValueAndClose(event)));
+            .subscribe((event) => this.setValueAndClose(event));
     }
-    /**
-     * Destroys the autocomplete suggestion panel.
-     * @private
-     * @return {?}
-     */
+    /** Destroys the autocomplete suggestion panel. */
     destroyPanel() {
         if (this.overlayRef) {
             this.closePanel();
@@ -855,19 +504,12 @@ class McAutocompleteTrigger {
             this.overlayRef = null;
         }
     }
-    /**
-     * @private
-     * @param {?} value
-     * @return {?}
-     */
     setTriggerValue(value) {
-        /** @type {?} */
         const toDisplay = this.autocomplete && this.autocomplete.displayWith ?
             this.autocomplete.displayWith(value) :
             value;
         // Simply falling back to an empty string if the display value is falsy does not work properly.
         // The display value can also be the number zero and shouldn't fall back to an empty string.
-        /** @type {?} */
         const inputValue = toDisplay != null ? toDisplay : '';
         // If it's used within a `MatFormField`, we should set it through the property so it can go
         // through change detection.
@@ -879,13 +521,9 @@ class McAutocompleteTrigger {
         }
         this.previousValue = inputValue;
     }
-    /**
-     * This method closes the panel, and if a value is specified, also sets the associated
+    /** This method closes the panel, and if a value is specified, also sets the associated
      * control to that value. It will also mark the control as dirty if this interaction
      * stemmed from the user.
-     * @private
-     * @param {?} event
-     * @return {?}
      */
     setValueAndClose(event) {
         if (event && event.source) {
@@ -897,32 +535,18 @@ class McAutocompleteTrigger {
         }
         this.closePanel();
     }
-    /**
-     * Clear any previous selected option and emit a selection change event for this option
-     * @private
-     * @param {?} skip
-     * @return {?}
-     */
+    /** Clear any previous selected option and emit a selection change event for this option */
     clearPreviousSelectedOption(skip) {
-        this.autocomplete.options.forEach((/**
-         * @param {?} option
-         * @return {?}
-         */
-        (option) => {
+        this.autocomplete.options.forEach((option) => {
             if (option !== skip && option.selected) {
                 option.deselect();
             }
-        }));
+        });
     }
-    /**
-     * @private
-     * @return {?}
-     */
     attachOverlay() {
         if (!this.autocomplete) {
             throw getMcAutocompleteMissingPanelError();
         }
-        /** @type {?} */
         let overlayRef = this.overlayRef;
         if (!overlayRef) {
             this.portal = new TemplatePortal(this.autocomplete.template, this.viewContainerRef);
@@ -930,11 +554,7 @@ class McAutocompleteTrigger {
             this.overlayRef = overlayRef;
             // Use the `keydownEvents` in order to take advantage of
             // the overlay event targeting provided by the CDK overlay.
-            overlayRef.keydownEvents().subscribe((/**
-             * @param {?} event
-             * @return {?}
-             */
-            (event) => {
+            overlayRef.keydownEvents().subscribe((event) => {
                 // Close when pressing ESCAPE or ALT + UP_ARROW, based on the a11y guidelines.
                 // See: https://www.w3.org/TR/wai-aria-practices-1.1/#textbox-keyboard-interaction
                 // tslint:disable-next-line deprecation
@@ -942,21 +562,17 @@ class McAutocompleteTrigger {
                     this.resetActiveItem();
                     this.closeKeyEventStream.next();
                 }
-            }));
+            });
             if (this.viewportRuler) {
-                this.viewportSubscription = this.viewportRuler.change().subscribe((/**
-                 * @return {?}
-                 */
-                () => {
+                this.viewportSubscription = this.viewportRuler.change().subscribe(() => {
                     if (this.panelOpen && overlayRef) {
                         overlayRef.updateSize({ width: this.getPanelWidth() });
                     }
-                }));
+                });
             }
         }
         else {
-            /** @type {?} */
-            const position = (/** @type {?} */ (overlayRef.getConfig().positionStrategy));
+            const position = overlayRef.getConfig().positionStrategy;
             // Update the trigger, panel width and direction, in case anything has changed.
             position.setOrigin(this.getConnectedElement());
             overlayRef.updateSize({ width: this.getPanelWidth() });
@@ -965,7 +581,6 @@ class McAutocompleteTrigger {
             overlayRef.attach(this.portal);
             this.closingActionsSubscription = this.subscribeToClosingActions();
         }
-        /** @type {?} */
         const wasOpen = this.panelOpen;
         this.autocomplete.setVisibility();
         this.autocomplete.isOpen = this.overlayAttached = true;
@@ -975,10 +590,6 @@ class McAutocompleteTrigger {
             this.autocomplete.opened.emit();
         }
     }
-    /**
-     * @private
-     * @return {?}
-     */
     getOverlayConfig() {
         return new OverlayConfig({
             positionStrategy: this.getOverlayPosition(),
@@ -987,16 +598,12 @@ class McAutocompleteTrigger {
             direction: this.dir
         });
     }
-    /**
-     * @private
-     * @return {?}
-     */
     getOverlayPosition() {
         this.positionStrategy = this.overlay.position()
             .flexibleConnectedTo(this.getConnectedElement())
             .withFlexibleDimensions(false)
             .withPush(false)
-            .withPositions((/** @type {?} */ ([
+            .withPositions([
             {
                 originX: 'start',
                 originY: 'bottom',
@@ -1013,48 +620,29 @@ class McAutocompleteTrigger {
                 // border-radius based on the overlay position.
                 panelClass: 'mc-autocomplete-panel-above'
             }
-        ])));
+        ]);
         return this.positionStrategy;
     }
-    /**
-     * @private
-     * @return {?}
-     */
     getConnectedElement() {
         if (this.connectedTo) {
             return this.connectedTo.elementRef;
         }
         return this.formField ? this.formField.getConnectedOverlayOrigin() : this.elementRef;
     }
-    /**
-     * @private
-     * @return {?}
-     */
     getPanelWidth() {
         return this.autocomplete.panelWidth || this.getHostWidth() - AUTOCOMPLETE_BORDER_WIDTH;
     }
-    /**
-     * @private
-     * @return {?}
-     */
     getHostWidth() {
         return this.getConnectedElement().nativeElement.getBoundingClientRect().width;
     }
     /**
      * Resets the active item to -1 so arrow events will activate the
      * correct options, or to 0 if the consumer opted into it.
-     * @private
-     * @return {?}
      */
     resetActiveItem() {
         this.autocomplete.keyManager.setActiveItem(this.autocomplete.autoActiveFirstOption ? 0 : -1);
     }
-    /**
-     * @private
-     * @return {?}
-     */
     canOpen() {
-        /** @type {?} */
         const element = this.elementRef.nativeElement;
         return !element.readOnly && !element.disabled && !this._autocompleteDisabled;
     }
@@ -1096,163 +684,7 @@ McAutocompleteTrigger.propDecorators = {
     autocompleteAttribute: [{ type: Input, args: ['autocomplete',] }],
     autocompleteDisabled: [{ type: Input, args: ['mcAutocompleteDisabled',] }]
 };
-if (false) {
-    /** @type {?} */
-    McAutocompleteTrigger.prototype.optionSelections;
-    /**
-     * The autocomplete panel to be attached to this trigger.
-     * @type {?}
-     */
-    McAutocompleteTrigger.prototype.autocomplete;
-    /**
-     * Reference relative to which to position the autocomplete panel.
-     * Defaults to the autocomplete trigger element.
-     * @type {?}
-     */
-    McAutocompleteTrigger.prototype.connectedTo;
-    /**
-     * `autocomplete` attribute to be set on the input element.
-     * \@docs-private
-     * @type {?}
-     */
-    McAutocompleteTrigger.prototype.autocompleteAttribute;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype._autocompleteDisabled;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.overlayAttached;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.overlayRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.portal;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.componentDestroyed;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.scrollStrategy;
-    /**
-     * Old value of the native input. Used to work around issues with the `input` event on IE.
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.previousValue;
-    /**
-     * Strategy that is used to position the panel.
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.positionStrategy;
-    /**
-     * The subscription for closing actions (some are bound to document).
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.closingActionsSubscription;
-    /**
-     * Subscription to viewport size changes.
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.viewportSubscription;
-    /**
-     * Whether the autocomplete can open the next time it is focused. Used to prevent a focused,
-     * closed autocomplete from being reopened if the user switches to another browser tab and then
-     * comes back.
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.canOpenOnNextFocus;
-    /**
-     * Stream of keyboard events that can close the panel.
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.closeKeyEventStream;
-    /**
-     * `View -> model callback called when value changes`
-     * @type {?}
-     */
-    McAutocompleteTrigger.prototype.onChange;
-    /**
-     * `View -> model callback called when autocomplete has been touched`
-     * @type {?}
-     */
-    McAutocompleteTrigger.prototype.onTouched;
-    /**
-     * Event handler for when the window is blurred. Needs to be an
-     * arrow function in order to preserve the context.
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.windowBlurHandler;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.elementRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.viewContainerRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.changeDetectorRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.overlay;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.zone;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.dir;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.formField;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.document;
-    /**
-     * @type {?}
-     * @private
-     */
-    McAutocompleteTrigger.prototype.viewportRuler;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: autocomplete.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McAutocompleteModule {
 }
 McAutocompleteModule.decorators = [
@@ -1271,21 +703,7 @@ McAutocompleteModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-autocomplete.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { AUTOCOMPLETE_BORDER_WIDTH, AUTOCOMPLETE_OPTION_HEIGHT, AUTOCOMPLETE_PANEL_HEIGHT, MAT_AUTOCOMPLETE_VALUE_ACCESSOR, MC_AUTOCOMPLETE_DEFAULT_OPTIONS, MC_AUTOCOMPLETE_DEFAULT_OPTIONS_FACTORY, MC_AUTOCOMPLETE_SCROLL_STRATEGY, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY, MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER, McAutocomplete, McAutocompleteModule, McAutocompleteOrigin, McAutocompleteSelectedEvent, McAutocompleteTrigger, getMcAutocompleteMissingPanelError };

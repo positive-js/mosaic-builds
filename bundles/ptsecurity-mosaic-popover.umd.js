@@ -305,16 +305,8 @@
         return value;
     }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: popover-animations.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /** @type {?} */
     var mcPopoverAnimations = {
-        /**
-         * Animation that transitions a tooltip in and out.
-         */
+        /** Animation that transitions a tooltip in and out. */
         popoverState: animations.trigger('state', [
             animations.state('initial', animations.style({
                 opacity: 0,
@@ -328,51 +320,38 @@
         ])
     };
 
-    /** @enum {string} */
-    var PopoverTriggers = {
-        Click: "click",
-        Focus: "focus",
-        Hover: "hover",
-    };
-    /** @enum {string} */
-    var PopoverVisibility = {
-        Initial: "initial",
-        Visible: "visible",
-        Hidden: "hidden",
-    };
+    var PopoverTriggers;
+    (function (PopoverTriggers) {
+        PopoverTriggers["Click"] = "click";
+        PopoverTriggers["Focus"] = "focus";
+        PopoverTriggers["Hover"] = "hover";
+    })(PopoverTriggers || (PopoverTriggers = {}));
+    exports.PopoverVisibility = void 0;
+    (function (PopoverVisibility) {
+        PopoverVisibility["Initial"] = "initial";
+        PopoverVisibility["Visible"] = "visible";
+        PopoverVisibility["Hidden"] = "hidden";
+    })(exports.PopoverVisibility || (exports.PopoverVisibility = {}));
     var McPopoverComponent = /** @class */ (function () {
-        /**
-         * @param {?} changeDetectorRef
-         * @param {?} componentElementRef
-         */
         function McPopoverComponent(changeDetectorRef, componentElementRef) {
             this.changeDetectorRef = changeDetectorRef;
             this.componentElementRef = componentElementRef;
             this.positions = __spread(core.EXTENDED_OVERLAY_POSITIONS);
-            this.popoverVisibility = PopoverVisibility.Initial;
+            this.popoverVisibility = exports.PopoverVisibility.Initial;
             this.closeOnInteraction = false;
             this.mcVisibleChange = new core$1.EventEmitter();
             this._mcTrigger = PopoverTriggers.Hover;
             this._mcPlacement = 'top';
             this._mcVisible = new rxjs.BehaviorSubject(false);
             this._classList = [];
-            /**
-             * Subject for notifying that the popover has been hidden from the view
-             */
+            /** Subject for notifying that the popover has been hidden from the view */
             this.onHideSubject = new rxjs.Subject();
             this.availablePositions = core.POSITION_MAP;
         }
         Object.defineProperty(McPopoverComponent.prototype, "mcTrigger", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcTrigger;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcTrigger = value;
             },
@@ -380,16 +359,9 @@
             configurable: true
         });
         Object.defineProperty(McPopoverComponent.prototype, "mcPlacement", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcPlacement;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value !== this._mcPlacement) {
                     this._mcPlacement = value;
@@ -403,16 +375,9 @@
             configurable: true
         });
         Object.defineProperty(McPopoverComponent.prototype, "mcPopoverSize", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this.popoverSize;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value !== this.popoverSize) {
                     this.popoverSize = value;
@@ -425,18 +390,10 @@
             configurable: true
         });
         Object.defineProperty(McPopoverComponent.prototype, "mcVisible", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcVisible.value;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
-                /** @type {?} */
                 var visible = coercion.coerceBooleanProperty(value);
                 if (this._mcVisible.value !== visible) {
                     this._mcVisible.next(visible);
@@ -447,18 +404,10 @@
             configurable: true
         });
         Object.defineProperty(McPopoverComponent.prototype, "classList", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._classList.join(' ');
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
-                /** @type {?} */
                 var list = [];
                 if (Array.isArray(value)) {
                     list = value;
@@ -472,9 +421,6 @@
             configurable: true
         });
         Object.defineProperty(McPopoverComponent.prototype, "getCssClassesList", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this.classList + " mc-popover-" + this.mcPopoverSize + " mc-popover_placement-" + this.getPlacementClass;
             },
@@ -482,9 +428,6 @@
             configurable: true
         });
         Object.defineProperty(McPopoverComponent.prototype, "getPlacementClass", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return core.POSITION_TO_CSS_MAP[this.mcPlacement];
             },
@@ -492,32 +435,22 @@
             configurable: true
         });
         Object.defineProperty(McPopoverComponent.prototype, "isOpen", {
-            /**
-             * @return {?}
-             */
             get: function () {
-                return this.popoverVisibility === PopoverVisibility.Visible;
+                return this.popoverVisibility === exports.PopoverVisibility.Visible;
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * @param {?} e
-         * @return {?}
-         */
         McPopoverComponent.prototype.handleKeydown = function (e) {
             // tslint:disable-next-line: deprecation
             if (this.isOpen && e.keyCode === keycodes.ESCAPE) {
                 this.hide();
             }
         };
-        /**
-         * @return {?}
-         */
         McPopoverComponent.prototype.show = function () {
             if (this.isNonEmptyContent()) {
                 this.closeOnInteraction = true;
-                this.popoverVisibility = PopoverVisibility.Visible;
+                this.popoverVisibility = exports.PopoverVisibility.Visible;
                 this._mcVisible.next(true);
                 this.mcVisibleChange.emit(true);
                 // Mark for check so if any parent component has set the
@@ -525,79 +458,45 @@
                 this.markForCheck();
             }
         };
-        /**
-         * @return {?}
-         */
         McPopoverComponent.prototype.hide = function () {
-            this.popoverVisibility = PopoverVisibility.Hidden;
+            this.popoverVisibility = exports.PopoverVisibility.Hidden;
             this._mcVisible.next(false);
             this.mcVisibleChange.emit(false);
             // Mark for check so if any parent component has set the
             // ChangeDetectionStrategy to OnPush it will be checked anyways
             this.markForCheck();
         };
-        /**
-         * @return {?}
-         */
         McPopoverComponent.prototype.isNonEmptyContent = function () {
             return !!this.mcContent && (this.isTemplateRef(this.mcContent) || this.isNonEmptyString(this.mcContent));
         };
-        /**
-         * Returns an observable that notifies when the popover has been hidden from view.
-         * @return {?}
-         */
+        /** Returns an observable that notifies when the popover has been hidden from view. */
         McPopoverComponent.prototype.afterHidden = function () {
             return this.onHideSubject.asObservable();
         };
-        /**
-         * @return {?}
-         */
         McPopoverComponent.prototype.isVisible = function () {
-            return this.popoverVisibility === PopoverVisibility.Visible;
+            return this.popoverVisibility === exports.PopoverVisibility.Visible;
         };
-        /**
-         * @return {?}
-         */
         McPopoverComponent.prototype.markForCheck = function () {
             this.changeDetectorRef.markForCheck();
         };
-        /**
-         * @param {?} value
-         * @return {?}
-         */
         McPopoverComponent.prototype.isTemplateRef = function (value) {
             return value instanceof core$1.TemplateRef;
         };
-        /**
-         * @param {?} value
-         * @return {?}
-         */
         McPopoverComponent.prototype.isNonEmptyString = function (value) {
             return typeof value === 'string' && value !== '';
         };
-        /**
-         * @return {?}
-         */
         McPopoverComponent.prototype.animationStart = function () {
             this.closeOnInteraction = false;
         };
-        /**
-         * @param {?} event
-         * @return {?}
-         */
         McPopoverComponent.prototype.animationDone = function (event) {
-            /** @type {?} */
-            var toState = ( /** @type {?} */(event.toState));
-            if (toState === PopoverVisibility.Hidden && !this.isVisible()) {
+            var toState = event.toState;
+            if (toState === exports.PopoverVisibility.Hidden && !this.isVisible()) {
                 this.onHideSubject.next();
             }
-            if (toState === PopoverVisibility.Visible || toState === PopoverVisibility.Hidden) {
+            if (toState === exports.PopoverVisibility.Visible || toState === exports.PopoverVisibility.Hidden) {
                 this.closeOnInteraction = true;
             }
         };
-        /**
-         * @return {?}
-         */
         McPopoverComponent.prototype.ngOnDestroy = function () {
             this.onHideSubject.complete();
         };
@@ -615,8 +514,8 @@
                         '[class]': 'getCssClassesList',
                         '(keydown)': 'handleKeydown($event)'
                     },
-                    styles: ["@-webkit-keyframes mc-progress{0%{background-position:0 0}to{background-position:29px 0}}@keyframes mc-progress{0%{background-position:0 0}to{background-position:29px 0}}.mc-progress{position:relative}.mc-progress:after{-webkit-animation:mc-progress 1s linear infinite;animation:mc-progress 1s linear infinite;background:linear-gradient(135deg,rgba(0,0,0,.05) 10px,transparent 0,transparent 20px,rgba(0,0,0,.05) 0,rgba(0,0,0,.05) 30px,transparent 0) repeat;background-size:29px 29px;border-radius:inherit;bottom:0;content:\"\";left:0;position:absolute;right:0;top:0}.cdk-overlay-container{height:100%;pointer-events:none;position:fixed;width:100%}.cdk-overlay-backdrop,.cdk-overlay-container{box-sizing:border-box;left:0;margin:0;padding:0;top:0;z-index:1000}.cdk-overlay-backdrop{-webkit-tap-highlight-color:transparent;bottom:0;opacity:0;pointer-events:auto;position:absolute;right:0;transition:opacity .4s cubic-bezier(.25,.8,.25,1)}.cdk-overlay-pane{max-height:100%;max-width:100%;pointer-events:auto}.cdk-overlay-connected-position-bounding-box,.cdk-overlay-pane{box-sizing:border-box;margin:0;padding:0;position:absolute;z-index:1000}.cdk-overlay-connected-position-bounding-box{display:flex;flex-direction:column;min-height:1px;min-width:1px}.mc-popover{border-radius:var(--mc-popover-size-border-radius,4px);border-style:solid;border-width:var(--mc-popover-size-border-width,1px);box-sizing:border-box;display:block;list-style:none;position:relative;visibility:visible;white-space:pre-line;z-index:1030}.mc-popover-small,.mc-popover-small .mc-popover{max-width:var(--mc-popover-size-small-width,200px)}.mc-popover-normal,.mc-popover-normal .mc-popover{max-width:var(--mc-popover-size-normal-width,400px)}.mc-popover-large,.mc-popover-large .mc-popover{max-width:var(--mc-popover-size-large-width,640px)}.mc-popover__container{border-radius:var(--mc-popover-size-border-radius,4px);overflow:hidden}.mc-popover__header{border-bottom-style:solid;border-bottom-width:var(--mc-popover-size-border-width,1px);padding:var(--mc-popover-header-size-padding,10px 16px)}.mc-popover__content{padding:var(--mc-popover-size-padding,16px)}.mc-popover__footer{border-top-style:solid;border-top-width:var(--mc-popover-size-border-width,1px);margin-top:var(--mc-popover-footer-size-margin-top,8px);padding:var(--mc-popover-footer-size-padding,12px 16px)}.mc-popover_placement-top-left .mc-popover,.mc-popover_placement-top-right .mc-popover,.mc-popover_placement-top .mc-popover{margin-bottom:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*2)}.mc-popover_placement-right-bottom .mc-popover,.mc-popover_placement-right-top .mc-popover,.mc-popover_placement-right .mc-popover{margin-left:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*2)}.mc-popover_placement-bottom-left .mc-popover,.mc-popover_placement-bottom-right .mc-popover,.mc-popover_placement-bottom .mc-popover{margin-top:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*2)}.mc-popover_placement-left-bottom .mc-popover,.mc-popover_placement-left-top .mc-popover,.mc-popover_placement-left .mc-popover{margin-right:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*2)}.mc-popover__arrow{border:1px solid;height:14px;position:absolute;transform:rotate(45deg);width:14px;z-index:-1}.mc-popover_placement-top .mc-popover__arrow{bottom:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px);left:50%;margin-left:calc(var(--mc-popover-size-arrow-width, 4px)*-1)}.mc-popover_placement-top-left .mc-popover__arrow{bottom:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px);left:20px;margin-left:0}.mc-popover_placement-top-right .mc-popover__arrow{bottom:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px);margin-left:0;right:20px}.mc-popover_placement-right .mc-popover__arrow{top:50%}.mc-popover_placement-right-top .mc-popover__arrow,.mc-popover_placement-right .mc-popover__arrow{left:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px);margin-top:calc(var(--mc-popover-size-arrow-width, 4px)*-1)}.mc-popover_placement-right-top .mc-popover__arrow{top:18px}.mc-popover_placement-right-bottom .mc-popover__arrow{bottom:14px;left:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px);margin-top:calc(var(--mc-popover-size-arrow-width, 4px)*-1)}.mc-popover_placement-left .mc-popover__arrow{top:50%}.mc-popover_placement-left-top .mc-popover__arrow,.mc-popover_placement-left .mc-popover__arrow{margin-top:calc(var(--mc-popover-size-arrow-width, 4px)*-1);right:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px)}.mc-popover_placement-left-top .mc-popover__arrow{top:18px}.mc-popover_placement-left-bottom .mc-popover__arrow{bottom:14px;margin-top:calc(var(--mc-popover-size-arrow-width, 4px)*-1);right:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px)}.mc-popover_placement-bottom .mc-popover__arrow{left:50%;margin-left:calc(var(--mc-popover-size-arrow-width, 4px)*-1);top:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px)}.mc-popover_placement-bottom-left .mc-popover__arrow{left:20px;margin-left:0;top:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px)}.mc-popover_placement-bottom-right .mc-popover__arrow{margin-left:0;right:20px;top:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width)*-1 + -2px)}"]
-                }] }
+                    styles: ["@-webkit-keyframes mc-progress{0%{background-position:0 0}to{background-position:29px 0}}@keyframes mc-progress{0%{background-position:0 0}to{background-position:29px 0}}.mc-progress{position:relative}.mc-progress:after{content:\"\";position:absolute;border-radius:inherit;top:0;right:0;bottom:0;left:0;background:linear-gradient(135deg,rgba(0,0,0,.05) 10px,transparent 0,transparent 20px,rgba(0,0,0,.05) 0,rgba(0,0,0,.05) 30px,transparent 0) repeat;background-size:29px 29px;-webkit-animation:mc-progress 1s linear infinite;animation:mc-progress 1s linear infinite}.cdk-overlay-container{pointer-events:none;height:100%;width:100%;position:fixed}.cdk-overlay-backdrop,.cdk-overlay-container{top:0;left:0;z-index:1000;box-sizing:border-box;margin:0;padding:0}.cdk-overlay-backdrop{bottom:0;right:0;-webkit-tap-highlight-color:transparent;transition:opacity .4s cubic-bezier(.25,.8,.25,1);opacity:0;position:absolute;pointer-events:auto}.cdk-overlay-pane{pointer-events:auto;max-width:100%;max-height:100%}.cdk-overlay-connected-position-bounding-box,.cdk-overlay-pane{box-sizing:border-box;position:absolute;margin:0;padding:0;z-index:1000}.cdk-overlay-connected-position-bounding-box{display:flex;flex-direction:column;min-width:1px;min-height:1px}.mc-popover{position:relative;display:block;border-radius:var(--mc-popover-size-border-radius,4px);border-width:var(--mc-popover-size-border-width,1px);border-style:solid;box-sizing:border-box;visibility:visible;z-index:1030;list-style:none;white-space:pre-line}.mc-popover-small,.mc-popover-small .mc-popover{max-width:var(--mc-popover-size-small-width,200px)}.mc-popover-normal,.mc-popover-normal .mc-popover{max-width:var(--mc-popover-size-normal-width,400px)}.mc-popover-large,.mc-popover-large .mc-popover{max-width:var(--mc-popover-size-large-width,640px)}.mc-popover__container{border-radius:var(--mc-popover-size-border-radius,4px);overflow:hidden}.mc-popover__header{padding:var(--mc-popover-header-size-padding,10px 16px);border-bottom-width:var(--mc-popover-size-border-width,1px);border-bottom-style:solid}.mc-popover__content{padding:var(--mc-popover-size-padding,16px)}.mc-popover__footer{margin-top:var(--mc-popover-footer-size-margin-top,8px);padding:var(--mc-popover-footer-size-padding,12px 16px);border-top-width:var(--mc-popover-size-border-width,1px);border-top-style:solid}.mc-popover_placement-top-left .mc-popover,.mc-popover_placement-top-right .mc-popover,.mc-popover_placement-top .mc-popover{margin-bottom:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width) * 2)}.mc-popover_placement-right-bottom .mc-popover,.mc-popover_placement-right-top .mc-popover,.mc-popover_placement-right .mc-popover{margin-left:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width) * 2)}.mc-popover_placement-bottom-left .mc-popover,.mc-popover_placement-bottom-right .mc-popover,.mc-popover_placement-bottom .mc-popover{margin-top:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width) * 2)}.mc-popover_placement-left-bottom .mc-popover,.mc-popover_placement-left-top .mc-popover,.mc-popover_placement-left .mc-popover{margin-right:calc(var(--mc-popover-size-arrow-width, $popover-size-arrow-width) * 2)}.mc-popover__arrow{position:absolute;z-index:-1;width:14px;height:14px;border:1px solid;transform:rotate(45deg)}.mc-popover_placement-top .mc-popover__arrow{bottom:calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));left:50%;margin-left:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-top-left .mc-popover__arrow{left:20px}.mc-popover_placement-top-left .mc-popover__arrow,.mc-popover_placement-top-right .mc-popover__arrow{bottom:calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));margin-left:0}.mc-popover_placement-top-right .mc-popover__arrow{right:20px}.mc-popover_placement-right .mc-popover__arrow{top:50%}.mc-popover_placement-right-top .mc-popover__arrow,.mc-popover_placement-right .mc-popover__arrow{left:calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-right-top .mc-popover__arrow{top:18px}.mc-popover_placement-right-bottom .mc-popover__arrow{left:calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));bottom:14px;margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-left .mc-popover__arrow{top:50%}.mc-popover_placement-left-top .mc-popover__arrow,.mc-popover_placement-left .mc-popover__arrow{right:calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-left-top .mc-popover__arrow{top:18px}.mc-popover_placement-left-bottom .mc-popover__arrow{right:calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));bottom:14px;margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-bottom .mc-popover__arrow{top:calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));left:50%;margin-left:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-bottom-left .mc-popover__arrow{top:calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));left:20px;margin-left:0}.mc-popover_placement-bottom-right .mc-popover__arrow{top:calc(-1 * (var(--mc-popover-size-arrow-width, $popover-size-arrow-width) + 2px));right:20px;margin-left:0}"]
+                },] }
     ];
     /** @nocollapse */
     McPopoverComponent.ctorParameters = function () { return [
@@ -626,113 +525,32 @@
     McPopoverComponent.propDecorators = {
         mcVisibleChange: [{ type: core$1.Output, args: ['mcPopoverVisibleChange',] }]
     };
-    if (false) {
-        /** @type {?} */
-        McPopoverComponent.prototype.positions;
-        /** @type {?} */
-        McPopoverComponent.prototype.availablePositions;
-        /** @type {?} */
-        McPopoverComponent.prototype.popoverVisibility;
-        /** @type {?} */
-        McPopoverComponent.prototype.closeOnInteraction;
-        /** @type {?} */
-        McPopoverComponent.prototype.mcContent;
-        /** @type {?} */
-        McPopoverComponent.prototype.mcHeader;
-        /** @type {?} */
-        McPopoverComponent.prototype.mcFooter;
-        /** @type {?} */
-        McPopoverComponent.prototype.mcVisibleChange;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopoverComponent.prototype._mcTrigger;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopoverComponent.prototype._mcPlacement;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopoverComponent.prototype.popoverSize;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopoverComponent.prototype._mcVisible;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopoverComponent.prototype._classList;
-        /**
-         * Subject for notifying that the popover has been hidden from the view
-         * @type {?}
-         * @private
-         */
-        McPopoverComponent.prototype.onHideSubject;
-        /** @type {?} */
-        McPopoverComponent.prototype.changeDetectorRef;
-        /** @type {?} */
-        McPopoverComponent.prototype.componentElementRef;
-    }
-    /** @type {?} */
     var MC_POPOVER_SCROLL_STRATEGY = new core$1.InjectionToken('mc-popover-scroll-strategy');
-    /**
-     * \@docs-private
-     * @param {?} overlay
-     * @return {?}
-     */
+    /** @docs-private */
     function mcPopoverScrollStrategyFactory(overlay) {
-        return ( /**
-         * @return {?}
-         */function () { return overlay.scrollStrategies.reposition({ scrollThrottle: 20 }); });
+        return function () { return overlay.scrollStrategies.reposition({ scrollThrottle: 20 }); };
     }
-    /**
-     * \@docs-private
-     * @type {?}
-     */
+    /** @docs-private */
     var MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
         provide: MC_POPOVER_SCROLL_STRATEGY,
         deps: [overlay.Overlay],
         useFactory: mcPopoverScrollStrategyFactory
     };
-    /**
-     * Creates an error to be thrown if the user supplied an invalid popover position.
-     * @param {?} position
-     * @return {?}
-     */
+    /** Creates an error to be thrown if the user supplied an invalid popover position. */
     function getMcPopoverInvalidPositionError(position) {
         return Error("McPopover position \"" + position + "\" is invalid.");
     }
-    /** @type {?} */
     var VIEWPORT_MARGIN = 8;
     /* Constant distance between popover container border
     *  corner according to popover placement and middle of arrow
     * */
-    /** @type {?} */
-    var POPOVER_ARROW_BORDER_DISTANCE = 20;
-    // tslint:disable-line
+    var POPOVER_ARROW_BORDER_DISTANCE = 20; // tslint:disable-line
     /* Constant value for min height and width of anchor element used for popover.
     *  Set as POPOVER_ARROW_BORDER_DISTANCE multiplied by 2
     *  plus 2px border for both sides of element. Used in check of position management.
     * */
-    /** @type {?} */
-    var ANCHOR_MIN_HEIGHT_WIDTH = 44;
-    // tslint:disable-line
+    var ANCHOR_MIN_HEIGHT_WIDTH = 44; // tslint:disable-line
     var McPopover = /** @class */ (function () {
-        /**
-         * @param {?} overlay
-         * @param {?} elementRef
-         * @param {?} ngZone
-         * @param {?} scrollDispatcher
-         * @param {?} hostView
-         * @param {?} scrollStrategy
-         * @param {?} direction
-         */
         function McPopover(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
             var _this = this;
             this.overlay = overlay;
@@ -757,23 +575,14 @@
             this.closeSubscription = rxjs.Subscription.EMPTY;
             this.manualListeners = new Map();
             this.destroyed = new rxjs.Subject();
-            this.resizeListener = ( /**
-             * @return {?}
-             */function () { return _this.updatePosition(); });
+            this.resizeListener = function () { return _this.updatePosition(); };
             this.availablePositions = core.POSITION_MAP;
             this.defaultPositionsMap = core.DEFAULT_4_POSITIONS_TO_CSS_MAP;
         }
         Object.defineProperty(McPopover.prototype, "hasBackdrop", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._hasBackdrop;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._hasBackdrop = coercion.coerceBooleanProperty(value);
             },
@@ -781,16 +590,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcHeader", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcHeader;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcHeader = value;
                 this.updateCompValue('mcHeader', value);
@@ -802,16 +604,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcContent", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcContent;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcContent = value;
                 this.updateCompValue('mcContent', value);
@@ -823,16 +618,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcFooter", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcFooter;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcFooter = value;
                 this.updateCompValue('mcFooter', value);
@@ -844,16 +632,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "disabled", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._disabled;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._disabled = coercion.coerceBooleanProperty(value);
             },
@@ -861,16 +642,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcMouseEnterDelay", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcMouseEnterDelay;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcMouseEnterDelay = value;
                 this.updateCompValue('mcMouseEnterDelay', value);
@@ -879,16 +653,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcMouseLeaveDelay", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcMouseLeaveDelay;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcMouseLeaveDelay = value;
                 this.updateCompValue('mcMouseLeaveDelay', value);
@@ -897,16 +664,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcTrigger", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcTrigger;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value) {
                     this._mcTrigger = value;
@@ -921,16 +681,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcPopoverSize", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this.popoverSize;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value && (value === 'small' || value === 'normal' || value === 'large')) {
                     this.popoverSize = value;
@@ -944,16 +697,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcPlacementPriority", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcPlacementPriority;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value && value.length > 0) {
                     this._mcPlacementPriority = value;
@@ -966,16 +712,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcPlacement", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcPlacement;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value) {
                     this._mcPlacement = value;
@@ -989,16 +728,9 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "classList", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._classList;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._classList = value;
                 this.updateCompValue('classList', this._classList);
@@ -1007,18 +739,10 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "mcVisible", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcVisible;
             },
-            /**
-             * @param {?} externalValue
-             * @return {?}
-             */
             set: function (externalValue) {
-                /** @type {?} */
                 var value = coercion.coerceBooleanProperty(externalValue);
                 if (this._mcVisible !== value) {
                     this._mcVisible = value;
@@ -1035,52 +759,39 @@
             configurable: true
         });
         Object.defineProperty(McPopover.prototype, "isOpen", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this.isPopoverOpen;
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * Create the overlay config and position strategy
-         * @return {?}
-         */
+        /** Create the overlay config and position strategy */
         McPopover.prototype.createOverlay = function () {
             var _this = this;
             if (this.overlayRef) {
                 this.overlayRef.dispose();
             }
             // Create connected position strategy that listens for scroll events to reposition.
-            /** @type {?} */
             var strategy = this.overlay.position()
                 .flexibleConnectedTo(this.elementRef)
                 .withTransformOriginOn('.mc-popover')
                 .withFlexibleDimensions(false)
                 .withViewportMargin(VIEWPORT_MARGIN)
                 .withPositions(__spread(core.EXTENDED_OVERLAY_POSITIONS));
-            /** @type {?} */
             var scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
             strategy.withScrollableContainers(scrollableAncestors);
             strategy.positionChanges
                 .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(( /**
-         * @param {?} change
-         * @return {?}
-         */function (change) {
+                .subscribe(function (change) {
                 if (_this.popover) {
                     _this.onPositionChange(change);
                     if (change.scrollableViewProperties.isOverlayClipped && _this.popover.mcVisible) {
                         // After position changes occur and the overlay is clipped by
                         // a parent scrollable then close the popover.
-                        _this.ngZone.run(( /**
-                         * @return {?}
-                         */function () { return _this.hide(); }));
+                        _this.ngZone.run(function () { return _this.hide(); });
                     }
                 }
-            }));
+            });
             this.overlayRef = this.overlay.create({
                 direction: this.direction,
                 positionStrategy: strategy,
@@ -1093,38 +804,23 @@
                 // need for close popover on trigger click, because popover fire unexpected events: hide and then show
                 // todo need fix it
                 .pipe(operators.delay(0))
-                .subscribe(( /**
-         * @return {?}
-         */function () { return _this.hide(); }));
+                .subscribe(function () { return _this.hide(); });
             this.updatePosition();
             this.overlayRef.detachments()
                 .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(( /**
-         * @return {?}
-         */function () { return _this.detach(); }));
+                .subscribe(function () { return _this.detach(); });
             return this.overlayRef;
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.detach = function () {
             if (this.overlayRef && this.overlayRef.hasAttached()) {
                 this.overlayRef.detach();
             }
             this.popover = null;
         };
-        /**
-         * @param {?} $event
-         * @return {?}
-         */
         McPopover.prototype.onPositionChange = function ($event) {
             var _this = this;
-            /** @type {?} */
             var updatedPlacement = this.mcPlacement;
-            Object.keys(this.availablePositions).some(( /**
-             * @param {?} key
-             * @return {?}
-             */function (key) {
+            Object.keys(this.availablePositions).some(function (key) {
                 if ($event.connectionPair.originX === _this.availablePositions[key].originX &&
                     $event.connectionPair.originY === _this.availablePositions[key].originY &&
                     $event.connectionPair.overlayX === _this.availablePositions[key].overlayX &&
@@ -1133,7 +829,7 @@
                     return true;
                 }
                 return false;
-            }));
+            });
             this.updateCompValue('mcPlacement', updatedPlacement);
             this.mcPositionStrategyPlacementChange.emit(updatedPlacement);
             if (this.popover) {
@@ -1144,34 +840,21 @@
                 this.handlePositionUpdate(updatedPlacement);
             }
         };
-        /**
-         * @param {?} updatedPlacement
-         * @return {?}
-         */
         McPopover.prototype.handlePositionUpdate = function (updatedPlacement) {
             if (!this.overlayRef) {
                 this.overlayRef = this.createOverlay();
             }
-            /** @type {?} */
             var currentContainer = this.overlayRef.overlayElement.style;
-            /** @type {?} */
             var elementHeight = this.hostView.element.nativeElement.clientHeight;
-            /** @type {?} */
             var elementWidth = this.hostView.element.nativeElement.clientWidth;
-            /** @type {?} */
-            var verticalOffset = Math.floor(elementHeight / 2);
-            // tslint:disable-line
-            /** @type {?} */
-            var horizontalOffset = Math.floor(elementWidth / 2 - 6);
-            // tslint:disable-line
-            /** @type {?} */
+            var verticalOffset = Math.floor(elementHeight / 2); // tslint:disable-line
+            var horizontalOffset = Math.floor(elementWidth / 2 - 6); // tslint:disable-line
             var offsets = {
                 top: verticalOffset,
                 bottom: verticalOffset,
                 right: horizontalOffset,
                 left: horizontalOffset
             };
-            /** @type {?} */
             var styleProperty = updatedPlacement.split(/(?=[A-Z])/)[1].toLowerCase();
             if (((styleProperty === 'top' || styleProperty === 'bottom') &&
                 elementHeight > ANCHOR_MIN_HEIGHT_WIDTH) ||
@@ -1187,11 +870,6 @@
                     offsets[styleProperty] - POPOVER_ARROW_BORDER_DISTANCE + "px";
         };
         // tslint:disable-next-line:no-any
-        /**
-         * @param {?} key
-         * @param {?} value
-         * @return {?}
-         */
         McPopover.prototype.updateCompValue = function (key, value) {
             if (this.isDynamicPopover && value) {
                 if (this.popover) {
@@ -1199,138 +877,78 @@
                 }
             }
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.ngOnInit = function () {
             this.initElementRefListeners();
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.ngOnDestroy = function () {
             var _this = this;
             if (this.overlayRef) {
                 this.overlayRef.dispose();
             }
-            this.manualListeners.forEach(( /**
-             * @param {?} listener
-             * @param {?} event
-             * @return {?}
-             */function (listener, event) {
+            this.manualListeners.forEach(function (listener, event) {
                 _this.elementRef.nativeElement.removeEventListener(event, listener);
-            }));
+            });
             this.manualListeners.clear();
             this.$unsubscribe.next();
             this.$unsubscribe.complete();
             this.closeSubscription.unsubscribe();
         };
-        /**
-         * @param {?} e
-         * @return {?}
-         */
         McPopover.prototype.handleKeydown = function (e) {
             // tslint:disable-next-line: deprecation
             if (this.isOpen && e.keyCode === keycodes.ESCAPE) {
                 this.hide();
             }
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.handleTouchend = function () {
             this.hide();
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.initElementRefListeners = function () {
             var _this = this;
             if (this.mcTrigger === PopoverTriggers.Click) {
                 this.manualListeners
-                    .set('click', ( /**
-             * @return {?}
-             */function () { return _this.show(); }))
-                    .forEach(( /**
-             * @param {?} listener
-             * @param {?} event
-             * @return {?}
-             */function (listener, event) {
+                    .set('click', function () { return _this.show(); })
+                    .forEach(function (listener, event) {
                     _this.elementRef.nativeElement.addEventListener(event, listener);
-                }));
+                });
             }
             else if (this.mcTrigger === PopoverTriggers.Hover) {
                 this.manualListeners
-                    .set('mouseenter', ( /**
-             * @return {?}
-             */function () { return _this.show(); }))
-                    .set('mouseleave', ( /**
-             * @return {?}
-             */function () { return _this.hide(); }))
-                    .forEach(( /**
-             * @param {?} listener
-             * @param {?} event
-             * @return {?}
-             */function (listener, event) {
+                    .set('mouseenter', function () { return _this.show(); })
+                    .set('mouseleave', function () { return _this.hide(); })
+                    .forEach(function (listener, event) {
                     _this.elementRef.nativeElement.addEventListener(event, listener);
-                }));
+                });
             }
             else if (this.mcTrigger === PopoverTriggers.Focus) {
                 this.manualListeners
-                    .set('focus', ( /**
-             * @return {?}
-             */function () { return _this.show(); }))
-                    .set('blur', ( /**
-             * @return {?}
-             */function () { return _this.hide(); }))
-                    .forEach(( /**
-             * @param {?} listener
-             * @param {?} event
-             * @return {?}
-             */function (listener, event) {
+                    .set('focus', function () { return _this.show(); })
+                    .set('blur', function () { return _this.hide(); })
+                    .forEach(function (listener, event) {
                     _this.elementRef.nativeElement.addEventListener(event, listener);
-                }));
+                });
             }
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.registerResizeHandler = function () {
             var _this = this;
             // The resize handler is currently responsible for detecting slider dimension
             // changes and therefore doesn't cause a value change that needs to be propagated.
-            this.ngZone.runOutsideAngular(( /**
-             * @return {?}
-             */function () {
+            this.ngZone.runOutsideAngular(function () {
                 window.addEventListener('resize', _this.resizeListener);
-            }));
+            });
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.deregisterResizeHandler = function () {
             window.removeEventListener('resize', this.resizeListener);
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.resetListeners = function () {
             var _this = this;
             if (this.manualListeners.size) {
-                this.manualListeners.forEach(( /**
-                 * @param {?} listener
-                 * @param {?} event
-                 * @return {?}
-                 */function (listener, event) {
+                this.manualListeners.forEach(function (listener, event) {
                     _this.elementRef.nativeElement.removeEventListener(event, listener);
-                }));
+                });
                 this.manualListeners.clear();
                 this.initElementRefListeners();
             }
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.show = function () {
             var _this = this;
             if (this.disabled) {
@@ -1338,17 +956,13 @@
             }
             if (!this.popover) {
                 this.detach();
-                /** @type {?} */
                 var overlayRef = this.createOverlay();
                 this.portal = this.portal || new portal.ComponentPortal(McPopoverComponent, this.hostView);
                 this.popover = overlayRef.attach(this.portal).instance;
                 this.popover.afterHidden()
                     .pipe(operators.takeUntil(this.destroyed))
-                    .subscribe(( /**
-             * @return {?}
-             */function () { return _this.detach(); }));
+                    .subscribe(function () { return _this.detach(); });
                 this.isDynamicPopover = true;
-                /** @type {?} */
                 var properties = [
                     'mcPlacement',
                     'mcPopoverSize',
@@ -1361,93 +975,56 @@
                     'mcContent',
                     'mcFooter'
                 ];
-                properties.forEach(( /**
-                 * @param {?} property
-                 * @return {?}
-                 */function (property) { return _this.updateCompValue(property, _this[property]); }));
+                properties.forEach(function (property) { return _this.updateCompValue(property, _this[property]); });
                 this.popover.mcVisibleChange
                     .pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
-                    .subscribe(( /**
-             * @param {?} data
-             * @return {?}
-             */function (data) {
+                    .subscribe(function (data) {
                     _this.mcVisible = data;
                     _this.mcVisibleChange.emit(data);
                     _this.isPopoverOpen = data;
-                }));
+                });
             }
             this.popover.show();
         };
-        /**
-         * @return {?}
-         */
         McPopover.prototype.hide = function () {
             if (this.popover) {
                 this.popover.hide();
             }
         };
-        /**
-         * Updates the position of the current popover.
-         * @param {?=} reapplyPosition
-         * @return {?}
-         */
+        /** Updates the position of the current popover. */
         McPopover.prototype.updatePosition = function (reapplyPosition) {
             if (reapplyPosition === void 0) { reapplyPosition = false; }
             if (!this.overlayRef) {
                 this.overlayRef = this.createOverlay();
             }
-            /** @type {?} */
-            var position = ( /** @type {?} */(this.overlayRef.getConfig().positionStrategy));
+            var position = this.overlayRef.getConfig().positionStrategy;
             position.withPositions(this.getPrioritizedPositions()).withPush(true);
             if (reapplyPosition) {
-                setTimeout(( /**
-                 * @return {?}
-                 */function () { return position.reapplyLastPosition(); }));
+                setTimeout(function () { return position.reapplyLastPosition(); });
             }
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McPopover.prototype.closingActions = function () {
-            /** @type {?} */
-            var backdrop = ( /** @type {?} */(this.overlayRef)).backdropClick();
-            /** @type {?} */
-            var outsidePointerEvents = ( /** @type {?} */(this.overlayRef)).outsidePointerEvents();
-            /** @type {?} */
-            var detachments = ( /** @type {?} */(this.overlayRef)).detachments();
+            var backdrop = this.overlayRef.backdropClick();
+            var outsidePointerEvents = this.overlayRef.outsidePointerEvents();
+            var detachments = this.overlayRef.detachments();
             return rxjs.merge(backdrop, outsidePointerEvents, detachments);
         };
-        /**
-         * @private
-         * @param {?} value
-         * @return {?}
-         */
         McPopover.prototype.getPriorityPlacementStrategy = function (value) {
             var _this = this;
-            /** @type {?} */
             var result = [];
-            /** @type {?} */
             var possiblePositions = Object.keys(this.availablePositions);
             if (Array.isArray(value)) {
-                value.forEach(( /**
-                 * @param {?} position
-                 * @return {?}
-                 */function (position) {
+                value.forEach(function (position) {
                     if (possiblePositions.includes(position)) {
                         result.push(_this.availablePositions[position]);
                     }
-                }));
+                });
             }
             else if (possiblePositions.includes(value)) {
                 result.push(this.availablePositions[value]);
             }
             return result;
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McPopover.prototype.getPrioritizedPositions = function () {
             if (this.mcPlacementPriority) {
                 return this.getPriorityPlacementStrategy(this.mcPlacementPriority);
@@ -1495,159 +1072,7 @@
         classList: [{ type: core$1.Input, args: ['mcPopoverClass',] }],
         mcVisible: [{ type: core$1.Input, args: ['mcPopoverVisible',] }]
     };
-    if (false) {
-        /** @type {?} */
-        McPopover.prototype.isPopoverOpen;
-        /** @type {?} */
-        McPopover.prototype.isDynamicPopover;
-        /** @type {?} */
-        McPopover.prototype.overlayRef;
-        /** @type {?} */
-        McPopover.prototype.portal;
-        /** @type {?} */
-        McPopover.prototype.availablePositions;
-        /** @type {?} */
-        McPopover.prototype.defaultPositionsMap;
-        /** @type {?} */
-        McPopover.prototype.popover;
-        /** @type {?} */
-        McPopover.prototype.backdropClass;
-        /** @type {?} */
-        McPopover.prototype.mcVisibleChange;
-        /** @type {?} */
-        McPopover.prototype.mcPositionStrategyPlacementChange;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._hasBackdrop;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._mcHeader;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._mcContent;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._mcFooter;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.$unsubscribe;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._disabled;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._mcMouseEnterDelay;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._mcMouseLeaveDelay;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._mcTrigger;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.popoverSize;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._mcPlacementPriority;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._mcPlacement;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._classList;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.closeSubscription;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype._mcVisible;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.manualListeners;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.destroyed;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.resizeListener;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.overlay;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.elementRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.ngZone;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.scrollDispatcher;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.hostView;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.scrollStrategy;
-        /**
-         * @type {?}
-         * @private
-         */
-        McPopover.prototype.direction;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: popover.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McPopoverModule = /** @class */ (function () {
         function McPopoverModule() {
         }
@@ -1664,21 +1089,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-popover.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.MC_POPOVER_SCROLL_STRATEGY = MC_POPOVER_SCROLL_STRATEGY;
@@ -1686,7 +1097,6 @@
     exports.McPopover = McPopover;
     exports.McPopoverComponent = McPopoverComponent;
     exports.McPopoverModule = McPopoverModule;
-    exports.PopoverVisibility = PopoverVisibility;
     exports.getMcPopoverInvalidPositionError = getMcPopoverInvalidPositionError;
     exports.mcPopoverAnimations = mcPopoverAnimations;
     exports.mcPopoverScrollStrategyFactory = mcPopoverScrollStrategyFactory;

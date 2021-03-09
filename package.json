@@ -1,6 +1,6 @@
 {
     "name": "@ptsecurity/mosaic",
-    "version": "10.1.0-119df94",
+    "version": "10.1.0-dde4d589",
     "description": "Mosaic",
     "repository": {
         "type": "git",
@@ -17,13 +17,13 @@
     },
     "homepage": "https://github.com/positive-js/mosaic#readme",
     "peerDependencies": {
-        "@angular/animations": "^10.1.6",
-        "@angular/cdk": "^10.2.5",
-        "@angular/core": "^10.1.6",
-        "@angular/common": "^10.1.6",
-        "@angular/forms": "^10.1.6",
-        "@ptsecurity/cdk": "^10.1.0-119df94",
-        "@ptsecurity/mosaic-moment-adapter": "^10.1.0-119df94",
+        "@angular/animations": "^11.2.4",
+        "@angular/cdk": "^11.2.2",
+        "@angular/core": "^11.2.4",
+        "@angular/common": "^11.2.4",
+        "@angular/forms": "^11.2.4",
+        "@ptsecurity/cdk": "^10.1.0-dde4d589",
+        "@ptsecurity/mosaic-moment-adapter": "^10.1.0-dde4d589",
         "@ptsecurity/mosaic-icons": "^5.0.0"
     },
     "dependencies": {

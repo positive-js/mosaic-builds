@@ -1,4 +1,3 @@
-import { Platform } from '@angular/cdk/platform';
 import { ElementRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -11,7 +10,6 @@ export declare function isDigit(value: string): boolean;
 export declare function getPrecision(value: number): number;
 export declare function add(value1: number, value2: number): number;
 export declare class McNumberInput {
-    private platform;
     private elementRef;
     private ngControl;
     bigStep: number;
@@ -22,7 +20,7 @@ export declare class McNumberInput {
     focused: boolean;
     readonly stateChanges: Subject<void>;
     get nativeElement(): HTMLInputElement;
-    constructor(platform: Platform, elementRef: ElementRef, ngControl: NgControl, step: string, bigStep: string, min: string, max: string);
+    constructor(elementRef: ElementRef, ngControl: NgControl, step: string, bigStep: string, min: string, max: string);
     focusChanged(isFocused: boolean): void;
     onKeyDown(event: KeyboardEvent): void;
     onPaste(event: any): void;

@@ -15,35 +15,15 @@ import { McFormFieldControl, McFormField } from '@ptsecurity/mosaic/form-field';
 import { Subject, defer, merge, Subscription } from 'rxjs';
 import { filter, map, startWith, switchMap, take, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: tree-select.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
+/* tslint:disable:no-empty */
 let nextUniqueId = 0;
-/**
- * Change event object that is emitted when the select value has changed.
- */
+/** Change event object that is emitted when the select value has changed. */
 class McTreeSelectChange {
-    /**
-     * @param {?} source
-     * @param {?} value
-     * @param {?=} isUserInput
-     */
     constructor(source, value, isUserInput = false) {
         this.source = source;
         this.value = value;
         this.isUserInput = isUserInput;
     }
-}
-if (false) {
-    /** @type {?} */
-    McTreeSelectChange.prototype.source;
-    /** @type {?} */
-    McTreeSelectChange.prototype.value;
-    /** @type {?} */
-    McTreeSelectChange.prototype.isUserInput;
 }
 class McTreeSelectTrigger {
 }
@@ -51,13 +31,6 @@ McTreeSelectTrigger.decorators = [
     { type: Directive, args: [{ selector: 'mc-tree-select-trigger' },] }
 ];
 class McTreeSelectBase {
-    /**
-     * @param {?} elementRef
-     * @param {?} defaultErrorStateMatcher
-     * @param {?} parentForm
-     * @param {?} parentFormGroup
-     * @param {?} ngControl
-     */
     constructor(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
         this.elementRef = elementRef;
         this.defaultErrorStateMatcher = defaultErrorStateMatcher;
@@ -66,40 +39,9 @@ class McTreeSelectBase {
         this.ngControl = ngControl;
     }
 }
-if (false) {
-    /** @type {?} */
-    McTreeSelectBase.prototype.elementRef;
-    /** @type {?} */
-    McTreeSelectBase.prototype.defaultErrorStateMatcher;
-    /** @type {?} */
-    McTreeSelectBase.prototype.parentForm;
-    /** @type {?} */
-    McTreeSelectBase.prototype.parentFormGroup;
-    /** @type {?} */
-    McTreeSelectBase.prototype.ngControl;
-}
 // tslint:disable-next-line:naming-convention
-/** @type {?} */
 const McTreeSelectMixinBase = mixinTabIndex(mixinDisabled(mixinErrorState(McTreeSelectBase)));
 class McTreeSelect extends McTreeSelectMixinBase {
-    /**
-     * @param {?} elementRef
-     * @param {?} changeDetectorRef
-     * @param {?} viewportRuler
-     * @param {?} ngZone
-     * @param {?} renderer
-     * @param {?} defaultErrorStateMatcher
-     * @param {?} scrollStrategyFactory
-     * @param {?} rawValidators
-     * @param {?} mcValidation
-     * @param {?} dir
-     * @param {?} parentForm
-     * @param {?} parentFormGroup
-     * @param {?} parentFormField
-     * @param {?} ngControl
-     * @param {?} ngModel
-     * @param {?} formControlName
-     */
     constructor(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, scrollStrategyFactory, rawValidators, mcValidation, dir, parentForm, parentFormGroup, parentFormField, ngControl, ngModel, formControlName) {
         super(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         this.changeDetectorRef = changeDetectorRef;
@@ -113,26 +55,16 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this.parentFormField = parentFormField;
         this.ngModel = ngModel;
         this.formControlName = formControlName;
-        /**
-         * A name for this control that can be used by `mc-form-field`.
-         */
+        /** A name for this control that can be used by `mc-form-field`. */
         this.controlType = 'mc-select';
         this.hiddenItems = 0;
-        /**
-         * The cached font-size of the trigger element.
-         */
+        /** The cached font-size of the trigger element. */
         this.triggerFontSize = 0;
-        /**
-         * The value of the select panel's transform-origin property.
-         */
+        /** The value of the select panel's transform-origin property. */
         this.transformOrigin = 'top';
-        /**
-         * Emits when the panel element is finished transforming in.
-         */
+        /** Emits when the panel element is finished transforming in. */
         this.panelDoneAnimatingStream = new Subject();
-        /**
-         * Strategy that will be used to handle scrolling while the select panel is open.
-         */
+        /** Strategy that will be used to handle scrolling while the select panel is open. */
         this.scrollStrategy = this.scrollStrategyFactory();
         /**
          * The y-offset of the overlay panel in relation to the trigger's top start corner.
@@ -161,67 +93,30 @@ class McTreeSelect extends McTreeSelectMixinBase {
             }
         ];
         this.hiddenItemsText = '...ещё';
-        /**
-         * Event emitted when the select panel has been toggled.
-         */
+        /** Event emitted when the select panel has been toggled. */
         this.openedChange = new EventEmitter();
-        /**
-         * Event emitted when the select has been opened.
-         */
-        this.openedStream = this.openedChange.pipe(filter((/**
-         * @param {?} o
-         * @return {?}
-         */
-        (o) => o)), map((/**
-         * @return {?}
-         */
-        () => { })));
-        /**
-         * Event emitted when the select has been closed.
-         */
-        this.closedStream = this.openedChange.pipe(filter((/**
-         * @param {?} o
-         * @return {?}
-         */
-        (o) => !o)), map((/**
-         * @return {?}
-         */
-        () => { })));
-        /**
-         * Event emitted when the selected value has been changed by the user.
-         */
+        /** Event emitted when the select has been opened. */
+        this.openedStream = this.openedChange.pipe(filter((o) => o), map(() => { }));
+        /** Event emitted when the select has been closed. */
+        this.closedStream = this.openedChange.pipe(filter((o) => !o), map(() => { }));
+        /** Event emitted when the selected value has been changed by the user. */
         this.selectionChange = new EventEmitter();
         /**
          * Event that emits whenever the raw value of the select changes. This is here primarily
          * to facilitate the two-way binding for the `value` input.
-         * \@docs-private
+         * @docs-private
          */
         this.valueChange = new EventEmitter();
         this.backdropClass = 'cdk-overlay-transparent-backdrop';
-        /**
-         * Combined stream of all of the child options' change events.
-         */
-        this.optionSelectionChanges = (/** @type {?} */ (defer((/**
-         * @return {?}
-         */
-        () => {
+        /** Combined stream of all of the child options' change events. */
+        this.optionSelectionChanges = defer(() => {
             if (this.options) {
-                return this.options.changes.pipe(startWith(this.options), switchMap((/**
-                 * @return {?}
-                 */
-                () => merge(...this.options.map((/**
-                 * @param {?} option
-                 * @return {?}
-                 */
-                (option) => option.onSelectionChange))))));
+                return this.options.changes.pipe(startWith(this.options), switchMap(() => merge(...this.options.map((option) => option.onSelectionChange))));
             }
             return this.ngZone.onStable
                 .asObservable()
-                .pipe(take(1), switchMap((/**
-             * @return {?}
-             */
-            () => this.optionSelectionChanges)));
-        }))));
+                .pipe(take(1), switchMap(() => this.optionSelectionChanges));
+        });
         this._required = false;
         this._multiple = false;
         this._autoSelect = true;
@@ -230,41 +125,18 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this._focused = false;
         this.closeSubscription = Subscription.EMPTY;
         this._panelOpen = false;
-        /**
-         * The scroll position of the overlay panel, calculated to center the selected option.
-         */
+        /** The scroll position of the overlay panel, calculated to center the selected option. */
         this.scrollTop = 0;
-        /**
-         * Unique id for this input.
-         */
+        /** Unique id for this input. */
         this.uid = `mc-select-${nextUniqueId++}`;
-        /**
-         * Emits whenever the component is destroyed.
-         */
+        /** Emits whenever the component is destroyed. */
         this.destroy = new Subject();
-        /**
-         * `View -> model callback called when value changes`
-         */
-        this.onChange = (/**
-         * @return {?}
-         */
-        () => { });
-        /**
-         * `View -> model callback called when select has been touched`
-         */
-        this.onTouched = (/**
-         * @return {?}
-         */
-        () => { });
-        /**
-         * Comparison function to specify which option is displayed. Defaults to object equality.
-         */
-        this._compareWith = (/**
-         * @param {?} o1
-         * @param {?} o2
-         * @return {?}
-         */
-        (o1, o2) => o1 === o2);
+        /** `View -> model callback called when value changes` */
+        this.onChange = () => { };
+        /** `View -> model callback called when select has been touched` */
+        this.onTouched = () => { };
+        /** Comparison function to specify which option is displayed. Defaults to object equality. */
+        this._compareWith = (o1, o2) => o1 === o2;
         if (this.ngControl) {
             // Note: we provide the value accessor through here, instead of
             // the `providers` to avoid running into a circular import.
@@ -273,63 +145,35 @@ class McTreeSelect extends McTreeSelectMixinBase {
         // Force setter to be called in case id was not specified.
         this.id = this.id;
     }
-    /**
-     * @return {?}
-     */
     get placeholder() {
         return this._placeholder;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set placeholder(value) {
         this._placeholder = value;
         this.stateChanges.next();
     }
-    /**
-     * @return {?}
-     */
     get required() {
         return this._required;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set required(value) {
         this._required = coerceBooleanProperty(value);
         this.stateChanges.next();
     }
-    /**
-     * @return {?}
-     */
     get multiple() {
         return this._multiple;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set multiple(value) {
         if (this.selectionModel) {
             throw getMcSelectDynamicMultipleError();
         }
         this._multiple = coerceBooleanProperty(value);
     }
-    /**
-     * @return {?}
-     */
     get autoSelect() {
         if (this.multiple) {
             return false;
         }
         return this._autoSelect;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set autoSelect(value) {
         this._autoSelect = coerceBooleanProperty(value);
     }
@@ -337,15 +181,10 @@ class McTreeSelect extends McTreeSelectMixinBase {
      * Function to compare the option values with the selected values. The first argument
      * is a value from an option. The second is a value from the selection. A boolean
      * should be returned.
-     * @return {?}
      */
     get compareWith() {
         return this._compareWith;
     }
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
     set compareWith(fn) {
         /* tslint:disable-next-line:strict-type-predicates */
         if (typeof fn !== 'function') {
@@ -357,68 +196,35 @@ class McTreeSelect extends McTreeSelectMixinBase {
             this.initializeSelection();
         }
     }
-    /**
-     * @return {?}
-     */
     get value() {
         return this.multiple ? this.tree.getSelectedValues() : this.tree.getSelectedValues()[0];
     }
-    /**
-     * @return {?}
-     */
     get id() {
         return this._id;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set id(value) {
         this._id = value || this.uid;
         this.stateChanges.next();
     }
-    /**
-     * @return {?}
-     */
     get hasBackdrop() {
         return this._hasBackdrop;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set hasBackdrop(value) {
         this._hasBackdrop = coerceBooleanProperty(value);
     }
-    /**
-     * Whether the select is focused.
-     * @return {?}
-     */
+    /** Whether the select is focused. */
     get focused() {
         return this._focused || this._panelOpen;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set focused(value) {
         this._focused = value;
     }
-    /**
-     * @return {?}
-     */
     get panelOpen() {
         return this._panelOpen;
     }
-    /**
-     * @return {?}
-     */
     get canShowCleaner() {
         return this.cleaner && this.selectionModel.hasValue();
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.stateChanges.next();
         // We need `distinctUntilChanged` here, because some browsers will
@@ -426,10 +232,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
         // https://github.com/angular/angular/issues/24084
         this.panelDoneAnimatingStream
             .pipe(distinctUntilChanged(), takeUntil(this.destroy))
-            .subscribe((/**
-         * @return {?}
-         */
-        () => {
+            .subscribe(() => {
             if (this.panelOpen) {
                 this.scrollTop = 0;
                 this.openedChange.emit(true);
@@ -439,11 +242,8 @@ class McTreeSelect extends McTreeSelectMixinBase {
                 this.overlayDir.offsetX = 0;
                 this.changeDetectorRef.markForCheck();
             }
-        }));
+        });
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         if (!this.tree) {
             return;
@@ -469,76 +269,41 @@ class McTreeSelect extends McTreeSelectMixinBase {
         }
         this.optionSelectionChanges
             .pipe(takeUntil(this.destroy))
-            .subscribe((/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => {
+            .subscribe((event) => {
             if (!this.multiple && this.panelOpen && event.isUserInput) {
                 this.close();
             }
-        }));
+        });
         this.tree.selectionChange
             .pipe(takeUntil(this.destroy))
-            .subscribe((/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => {
+            .subscribe((event) => {
             this.onChange(this.selectedValues);
             this.selectionChange.emit(new McTreeSelectChange(this, event.option));
-        }));
+        });
         this.selectionModel.changed
             .pipe(takeUntil(this.destroy))
-            .subscribe((/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => {
+            .subscribe((event) => {
             if (event.added.length) {
                 this.tree.keyManager.setFocusOrigin('program');
-                this.tree.keyManager.setActiveItem((/** @type {?} */ (this.options.find((/**
-                 * @param {?} option
-                 * @return {?}
-                 */
-                (option) => option.data === event.added[0])))));
+                this.tree.keyManager.setActiveItem(this.options.find((option) => option.data === event.added[0]));
             }
-        }));
+        });
     }
-    /**
-     * @return {?}
-     */
     ngAfterViewInit() {
         if (!this.tree) {
             return;
         }
         this.tags.changes
-            .subscribe((/**
-         * @return {?}
-         */
-        () => {
-            setTimeout((/**
-             * @return {?}
-             */
-            () => this.calculateHiddenItems()), 0);
-        }));
-        setTimeout((/**
-         * @return {?}
-         */
-        () => this.calculateHiddenItems()), 0);
+            .subscribe(() => {
+            setTimeout(() => this.calculateHiddenItems(), 0);
+        });
+        setTimeout(() => this.calculateHiddenItems(), 0);
     }
-    /**
-     * @return {?}
-     */
     ngDoCheck() {
         if (this.ngControl) {
             this.updateErrorState();
         }
     }
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
     ngOnChanges(changes) {
         // Updating the disabled state is handled by `mixinDisabled`, but we need to additionally let
         // the parent form field know to run change detection when the disabled state changes.
@@ -546,27 +311,15 @@ class McTreeSelect extends McTreeSelectMixinBase {
             this.stateChanges.next();
         }
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         this.destroy.next();
         this.destroy.complete();
         this.stateChanges.complete();
         this.closeSubscription.unsubscribe();
     }
-    /**
-     * @param {?} hiddenItemsText
-     * @param {?} hiddenItems
-     * @return {?}
-     */
     hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) {
         return `${hiddenItemsText} ${hiddenItems}`;
     }
-    /**
-     * @param {?} $event
-     * @return {?}
-     */
     clearValue($event) {
         $event.stopPropagation();
         this.selectionModel.clear();
@@ -574,9 +327,6 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this.setSelectionByValue([]);
         this.onChange(this.selectedValues);
     }
-    /**
-     * @return {?}
-     */
     toggle() {
         if (this.panelOpen) {
             this.close();
@@ -585,9 +335,6 @@ class McTreeSelect extends McTreeSelectMixinBase {
             this.open();
         }
     }
-    /**
-     * @return {?}
-     */
     open() {
         if (this.disabled || !this.options || !this.options.length || this._panelOpen) {
             return;
@@ -597,27 +344,18 @@ class McTreeSelect extends McTreeSelectMixinBase {
         // `parseInt` ignores the trailing 'px' and converts this to a number.
         this.triggerFontSize = parseInt(getComputedStyle(this.trigger.nativeElement)['font-size']);
         this._panelOpen = true;
-        setTimeout((/**
-         * @return {?}
-         */
-        () => this.highlightCorrectOption()));
+        setTimeout(() => this.highlightCorrectOption());
         this.changeDetectorRef.markForCheck();
         // Set the font size on the panel element once it exists.
         this.ngZone.onStable.asObservable()
             .pipe(take(1))
-            .subscribe((/**
-         * @return {?}
-         */
-        () => {
+            .subscribe(() => {
             if (this.triggerFontSize && this.overlayDir.overlayRef && this.overlayDir.overlayRef.overlayElement) {
                 this.overlayDir.overlayRef.overlayElement.style.fontSize = `${this.triggerFontSize}px`;
             }
-        }));
+        });
     }
-    /**
-     * Closes the overlay panel and focuses the host element.
-     * @return {?}
-     */
+    /** Closes the overlay panel and focuses the host element. */
     close() {
         if (!this._panelOpen) {
             return;
@@ -625,17 +363,13 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this._panelOpen = false;
         this.changeDetectorRef.markForCheck();
         this.onTouched();
-        setTimeout((/**
-         * @return {?}
-         */
-        () => this.focus()), 0);
+        setTimeout(() => this.focus(), 0);
     }
     /**
      * Sets the select's value. Part of the ControlValueAccessor interface
      * required to integrate with Angular's core forms API.
      *
-     * @param {?} value New value to be written to the model.
-     * @return {?}
+     * @param value New value to be written to the model.
      */
     writeValue(value) {
         if (this.tree) {
@@ -650,8 +384,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
      * changes from user input. Part of the ControlValueAccessor interface
      * required to integrate with Angular's core forms API.
      *
-     * @param {?} fn Callback to be triggered when the value changes.
-     * @return {?}
+     * @param fn Callback to be triggered when the value changes.
      */
     registerOnChange(fn) {
         this.onChange = fn;
@@ -661,8 +394,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
      * by the user. Part of the ControlValueAccessor interface required
      * to integrate with Angular's core forms API.
      *
-     * @param {?} fn Callback to be triggered when the component has been touched.
-     * @return {?}
+     * @param fn Callback to be triggered when the component has been touched.
      */
     registerOnTouched(fn) {
         this.onTouched = fn;
@@ -671,80 +403,40 @@ class McTreeSelect extends McTreeSelectMixinBase {
      * Disables the select. Part of the ControlValueAccessor interface required
      * to integrate with Angular's core forms API.
      *
-     * @param {?} isDisabled Sets whether the component is disabled.
-     * @return {?}
+     * @param isDisabled Sets whether the component is disabled.
      */
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
         this.changeDetectorRef.markForCheck();
         this.stateChanges.next();
     }
-    /**
-     * @return {?}
-     */
     get selected() {
         return this.multiple ? this.selectionModel.selected : this.selectionModel.selected[0];
     }
-    /**
-     * @return {?}
-     */
     get selectedValues() {
-        /** @type {?} */
-        const selectedValues = this.selectionModel.selected.map((/**
-         * @param {?} value
-         * @return {?}
-         */
-        (value) => this.tree.treeControl.getValue(value)));
+        const selectedValues = this.selectionModel.selected.map((value) => this.tree.treeControl.getValue(value));
         return this.multiple ? selectedValues : selectedValues[0];
     }
-    /**
-     * @return {?}
-     */
     get triggerValue() {
         if (this.empty) {
             return '';
         }
         return this.tree.treeControl.getViewValue(this.selected);
     }
-    /**
-     * @return {?}
-     */
     get triggerValues() {
         if (this.empty) {
             return [];
         }
         return this.selectedValues
-            .map((/**
-         * @param {?} value
-         * @return {?}
-         */
-        (value) => this.tree.renderedOptions.find((/**
-         * @param {?} option
-         * @return {?}
-         */
-        (option) => option.value === value))))
-            .filter((/**
-         * @param {?} option
-         * @return {?}
-         */
-        (option) => option));
+            .map((value) => this.tree.renderedOptions.find((option) => option.value === value))
+            .filter((option) => option);
     }
-    /**
-     * @return {?}
-     */
     get empty() {
         return !this.selectionModel || this.selectionModel.isEmpty();
     }
-    /**
-     * @return {?}
-     */
     isRtl() {
         return this.dir ? this.dir.value === 'rtl' : false;
     }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
     handleKeydown(event) {
         if (!this.disabled) {
             if (this.panelOpen) {
@@ -755,9 +447,6 @@ class McTreeSelect extends McTreeSelectMixinBase {
             }
         }
     }
-    /**
-     * @return {?}
-     */
     onFocus() {
         if (!this.disabled) {
             this._focused = true;
@@ -767,7 +456,6 @@ class McTreeSelect extends McTreeSelectMixinBase {
     /**
      * Calls the touched callback only if the panel is closed. Otherwise, the trigger will
      * "blur" to the panel when it opens, causing a false positive.
-     * @return {?}
      */
     onBlur() {
         this._focused = false;
@@ -777,102 +465,61 @@ class McTreeSelect extends McTreeSelectMixinBase {
             this.stateChanges.next();
         }
     }
-    /**
-     * Callback that is invoked when the overlay panel has been attached.
-     * @return {?}
-     */
+    /** Callback that is invoked when the overlay panel has been attached. */
     onAttached() {
         this.overlayDir.positionChange
             .pipe(take(1))
-            .subscribe((/**
-         * @return {?}
-         */
-        () => {
+            .subscribe(() => {
             this.changeDetectorRef.detectChanges();
             this.calculateOverlayOffsetX();
             this.panel.nativeElement.scrollTop = this.scrollTop;
             this.tree.updateScrollSize();
-        }));
+        });
         this.closeSubscription = this.closingActions()
-            .subscribe((/**
-         * @return {?}
-         */
-        () => this.close()));
+            .subscribe(() => this.close());
     }
-    /**
-     * Returns the theme to be used on the panel.
-     * @return {?}
-     */
+    /** Returns the theme to be used on the panel. */
     getPanelTheme() {
         return this.parentFormField ? `mc-${this.parentFormField.color}` : '';
     }
-    /**
-     * @return {?}
-     */
     focus() {
         this.elementRef.nativeElement.focus();
     }
     /**
      * Implemented as part of McFormFieldControl.
-     * \@docs-private
-     * @return {?}
+     * @docs-private
      */
     onContainerClick() {
         this.focus();
     }
-    /**
-     * Invoked when an option is clicked.
-     * @param {?} selectedOption
-     * @param {?} $event
-     * @return {?}
-     */
+    /** Invoked when an option is clicked. */
     onRemoveSelectedOption(selectedOption, $event) {
         $event.stopPropagation();
         this.selectionModel
-            .deselect(this.selected.find((/**
-         * @param {?} value
-         * @return {?}
-         */
-        (value) => this.tree.treeControl.getValue(value) === selectedOption.value)));
+            .deselect(this.selected.find((value) => this.tree.treeControl.getValue(value) === selectedOption.value));
         this.onChange(this.selectedValues);
     }
-    /**
-     * @return {?}
-     */
     calculateHiddenItems() {
         if (this.customTrigger || this.empty || !this.multiple) {
             return;
         }
-        /** @type {?} */
         let visibleItems = 0;
-        /** @type {?} */
         const totalItemsWidth = this.getTotalItemsWidthInMatcher();
-        /** @type {?} */
         let totalVisibleItemsWidth = 0;
-        this.tags.forEach((/**
-         * @param {?} tag
-         * @return {?}
-         */
-        (tag) => {
+        this.tags.forEach((tag) => {
             if (tag.nativeElement.offsetTop < tag.nativeElement.offsetHeight) {
                 totalVisibleItemsWidth += this.getItemWidth(tag.nativeElement);
                 visibleItems++;
             }
-        }));
+        });
         this.hiddenItems = this.selectionModel.selected.length - visibleItems;
         if (this.hiddenItems) {
-            /** @type {?} */
             const itemsCounter = this.trigger.nativeElement.querySelector('.mc-tree-select__match-hidden-text');
-            /** @type {?} */
             const matcherList = this.trigger.nativeElement.querySelector('.mc-tree-select__match-list');
-            /** @type {?} */
             const itemsCounterShowed = itemsCounter.offsetTop < itemsCounter.offsetHeight;
             // const itemsCounterWidth: number = itemsCounter.getBoundingClientRect().width;
-            /** @type {?} */
             const itemsCounterWidth = 86;
-            /** @type {?} */
             const matcherListWidth = matcherList.getBoundingClientRect().width;
-            /** @type {?} */
             const matcherWidth = matcherListWidth + itemsCounterWidth;
             if (itemsCounterShowed && (totalItemsWidth < matcherWidth)) {
                 this.hiddenItems = 0;
@@ -888,25 +535,13 @@ class McTreeSelect extends McTreeSelectMixinBase {
         }
         this.changeDetectorRef.markForCheck();
     }
-    /**
-     * @private
-     * @return {?}
-     */
     closingActions() {
-        /** @type {?} */
-        const backdrop = (/** @type {?} */ (this.overlayDir.overlayRef)).backdropClick();
-        /** @type {?} */
-        const outsidePointerEvents = (/** @type {?} */ (this.overlayDir.overlayRef)).outsidePointerEvents();
-        /** @type {?} */
-        const detachments = (/** @type {?} */ (this.overlayDir.overlayRef)).detachments();
+        const backdrop = this.overlayDir.overlayRef.backdropClick();
+        const outsidePointerEvents = this.overlayDir.overlayRef.outsidePointerEvents();
+        const detachments = this.overlayDir.overlayRef.detachments();
         return merge(backdrop, outsidePointerEvents, detachments);
     }
-    /**
-     * @private
-     * @return {?}
-     */
     getTotalItemsWidthInMatcher() {
-        /** @type {?} */
         const triggerClone = this.trigger.nativeElement.cloneNode(true);
         triggerClone.querySelector('.mc-tree-select__match-hidden-text').remove();
         this.renderer.setStyle(triggerClone, 'position', 'absolute');
@@ -914,47 +549,25 @@ class McTreeSelect extends McTreeSelectMixinBase {
         this.renderer.setStyle(triggerClone, 'top', '-100%');
         this.renderer.setStyle(triggerClone, 'left', '0');
         this.renderer.appendChild(this.trigger.nativeElement, triggerClone);
-        /** @type {?} */
         let totalItemsWidth = 0;
-        triggerClone.querySelectorAll('mc-tag').forEach((/**
-         * @param {?} item
-         * @return {?}
-         */
-        (item) => {
+        triggerClone.querySelectorAll('mc-tag').forEach((item) => {
             totalItemsWidth += this.getItemWidth(item);
-        }));
+        });
         triggerClone.remove();
         return totalItemsWidth;
     }
-    /**
-     * @private
-     * @param {?} element
-     * @return {?}
-     */
     getItemWidth(element) {
-        /** @type {?} */
         const computedStyle = window.getComputedStyle(element);
-        /** @type {?} */
-        const width = parseInt((/** @type {?} */ (computedStyle.width)));
-        /** @type {?} */
-        const marginLeft = parseInt((/** @type {?} */ (computedStyle.marginLeft)));
-        /** @type {?} */
-        const marginRight = parseInt((/** @type {?} */ (computedStyle.marginRight)));
+        const width = parseInt(computedStyle.width);
+        const marginLeft = parseInt(computedStyle.marginLeft);
+        const marginRight = parseInt(computedStyle.marginRight);
         return width + marginLeft + marginRight;
     }
-    /**
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
     handleClosedKeydown(event) {
         // tslint:disable-next-line: deprecation
-        /** @type {?} */
         const keyCode = event.keyCode;
-        /** @type {?} */
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW ||
             keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
-        /** @type {?} */
         const isOpenKey = keyCode === ENTER || keyCode === SPACE;
         // Open the select on ALT + arrow key to match the native <select>
         if (isOpenKey || ((this.multiple || event.altKey) && isArrowKey)) {
@@ -966,16 +579,9 @@ class McTreeSelect extends McTreeSelectMixinBase {
             this.tree.keyManager.onKeydown(event);
         }
     }
-    /**
-     * @private
-     * @param {?} event
-     * @return {?}
-     */
     handleOpenKeydown(event) {
         /* tslint:disable-next-line */
-        /** @type {?} */
         const keyCode = event.keyCode;
-        /** @type {?} */
         const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW;
         if (isArrowKey && event.altKey) {
             // Close the select on ALT + arrow key to match the native <select>
@@ -1012,27 +618,17 @@ class McTreeSelect extends McTreeSelectMixinBase {
         }
         else if (this.multiple && keyCode === A && event.ctrlKey) {
             event.preventDefault();
-            /** @type {?} */
-            const hasDeselectedOptions = this.options.some((/**
-             * @param {?} option
-             * @return {?}
-             */
-            (option) => !option.selected));
-            this.options.forEach((/**
-             * @param {?} option
-             * @return {?}
-             */
-            (option) => {
+            const hasDeselectedOptions = this.options.some((option) => !option.selected);
+            this.options.forEach((option) => {
                 if (hasDeselectedOptions && !option.disabled) {
                     option.select();
                 }
                 else {
                     option.deselect();
                 }
-            }));
+            });
         }
         else {
-            /** @type {?} */
             const previouslyFocusedIndex = this.tree.keyManager.activeItemIndex;
             this.tree.keyManager.setFocusOrigin('keyboard');
             this.tree.keyManager.onKeydown(event);
@@ -1045,26 +641,16 @@ class McTreeSelect extends McTreeSelectMixinBase {
             }
         }
     }
-    /**
-     * @private
-     * @return {?}
-     */
     initializeSelection() {
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
-        Promise.resolve().then((/**
-         * @return {?}
-         */
-        () => {
+        Promise.resolve().then(() => {
             this.setSelectionByValue(this.ngControl ? this.ngControl.value : this._value);
-        }));
+        });
     }
     /**
      * Sets the selected option based on a value. If no option can be
      * found with the designated value, the select trigger is cleared.
-     * @private
-     * @param {?} value
-     * @return {?}
      */
     setSelectionByValue(value) {
         if (this.multiple && value) {
@@ -1079,91 +665,55 @@ class McTreeSelect extends McTreeSelectMixinBase {
         }
         this.changeDetectorRef.detectChanges();
     }
-    /**
-     * @private
-     * @return {?}
-     */
     initKeyManager() {
         this.originalOnKeyDown = this.tree.onKeyDown;
-        this.tree.onKeyDown = (/**
-         * @return {?}
-         */
-        () => { });
+        this.tree.onKeyDown = () => { };
         this.tree.keyManager.tabOut
             .pipe(takeUntil(this.destroy))
-            .subscribe((/**
-         * @return {?}
-         */
-        () => {
+            .subscribe(() => {
             // Restore focus to the trigger before closing. Ensures that the focus
             // position won't be lost if the user got focus into the overlay.
             this.focus();
             this.close();
-        }));
+        });
         this.tree.keyManager.change
             .pipe(takeUntil(this.destroy))
-            .subscribe((/**
-         * @return {?}
-         */
-        () => {
+            .subscribe(() => {
             if (this._panelOpen && this.panel) {
                 this.scrollActiveOptionIntoView();
             }
             else if (!this._panelOpen && !this.multiple && this.tree.keyManager.activeItem) {
                 this.tree.keyManager.activeItem.selectViaInteraction();
             }
-        }));
+        });
     }
-    /**
-     * Sorts the selected values in the selected based on their order in the panel.
-     * @private
-     * @return {?}
-     */
+    /** Sorts the selected values in the selected based on their order in the panel. */
     sortValues() {
         if (this.multiple) {
-            /** @type {?} */
             const options = this.options.toArray();
-            this.selectionModel.sort((/**
-             * @param {?} a
-             * @param {?} b
-             * @return {?}
-             */
-            (a, b) => {
+            this.selectionModel.sort((a, b) => {
                 return this.sortComparator ? this.sortComparator(a, b, options) :
                     options.indexOf(a) - options.indexOf(b);
-            }));
+            });
             this.stateChanges.next();
         }
     }
     /**
      * Highlights the selected item. If no option is selected, it will highlight
      * the first item instead.
-     * @private
-     * @return {?}
      */
     highlightCorrectOption() {
         if (this.empty || !this.tree.keyManager) {
             return;
         }
-        /** @type {?} */
         const firstSelectedValue = this.multiple ? this.selectedValues[0] : this.selectedValues;
-        /** @type {?} */
-        const selectedOption = this.options.find((/**
-         * @param {?} option
-         * @return {?}
-         */
-        (option) => option.value === firstSelectedValue));
+        const selectedOption = this.options.find((option) => option.value === firstSelectedValue);
         if (selectedOption) {
             this.tree.keyManager.setActiveItem(selectedOption);
         }
     }
-    /**
-     * Scrolls the active option into view.
-     * @private
-     * @return {?}
-     */
+    /** Scrolls the active option into view. */
     scrollActiveOptionIntoView() {
-        /** @type {?} */
         const activeOptionIndex = this.tree.keyManager.activeItemIndex || 0;
         this.panel.nativeElement.scrollTop = getOptionScrollPosition(activeOptionIndex, this.tree.getItemHeight(), this.panel.nativeElement.scrollTop, SELECT_PANEL_MAX_HEIGHT);
     }
@@ -1173,29 +723,20 @@ class McTreeSelect extends McTreeSelectMixinBase {
      * the panel opens. Will change based on LTR or RTL text direction. Note that the offset
      * can't be calculated until the panel has been attached, because we need to know the
      * content width in order to constrain the panel within the viewport.
-     * @private
-     * @return {?}
      */
     calculateOverlayOffsetX() {
-        /** @type {?} */
         const overlayRect = this.overlayDir.overlayRef.overlayElement.getBoundingClientRect();
-        /** @type {?} */
         const viewportSize = this.viewportRuler.getViewportSize();
-        /** @type {?} */
         const isRtl = this.isRtl();
         /* tslint:disable-next-line:no-magic-numbers */
-        /** @type {?} */
         const paddingWidth = SELECT_PANEL_PADDING_X * 2;
-        /** @type {?} */
         let offsetX = SELECT_PANEL_PADDING_X;
         // Invert the offset in LTR.
         if (!isRtl) {
             offsetX *= -1;
         }
         // Determine how much the select overflows on each side.
-        /** @type {?} */
         const leftOverflow = 0 - (overlayRect.left + offsetX - (isRtl ? paddingWidth : 0));
-        /** @type {?} */
         const rightOverflow = overlayRect.right + offsetX - viewportSize.width
             + (isRtl ? 0 : paddingWidth);
         // If the element overflows on either side, reduce the offset to allow it to fit.
@@ -1241,8 +782,8 @@ McTreeSelect.decorators = [
                     { provide: McFormFieldControl, useExisting: McTreeSelect },
                     { provide: CdkTree, useExisting: McTreeSelect }
                 ],
-                styles: [".mc-option{-webkit-tap-highlight-color:transparent;align-items:center;border:var(--mc-option-size-border-width,2px) solid transparent;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:row;height:var(--mc-option-size-height,32px);max-width:100%;outline:none;padding:var(--mc-option-size-padding,0 16px);position:relative}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{border-radius:inherit;bottom:calc(var(--mc-option-size-border-width, 2px)*-1);left:calc(var(--mc-option-size-border-width, 2px)*-1);pointer-events:none;position:absolute;right:calc(var(--mc-option-size-border-width, 2px)*-1);top:calc(var(--mc-option-size-border-width, 2px)*-1)}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tree-select{box-sizing:border-box;display:inline-block;outline:none;vertical-align:top;width:100%}.mc-tree-select.mc-disabled .mc-tree-select__trigger{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;cursor:default;user-select:none}.mc-tree-select__trigger{box-sizing:border-box;cursor:pointer;display:flex;height:var(--mc-select-size-height,30px);padding-left:calc(var(--mc-select-size-left-padding, 16px) - var(--mc-form-field-size-border-width, 1px));padding-right:calc(var(--mc-select-size-right-padding, 8px) - var(--mc-form-field-size-border-width, 1px));position:relative}.mc-tree-select__trigger.mc-tree-select__trigger_multiple{padding-left:calc(var(--mc-select-size-left-padding-multiple, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tree-select__placeholder{margin-left:8px}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tag.mc-disabled .mc-tag__text{margin-right:7px}.mc-tree-select__matcher{align-items:center;display:flex;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%}.mc-tree-select__matcher>span{width:100%}.mc-tree-select__multiple-matcher{display:flex;width:100%}.mc-tree-select__match-list{display:flex;flex-wrap:wrap;max-height:var(--mc-select-size-height,30px)-var(--mc-select-panel-size-border-width,1px);overflow:hidden}.mc-tree-select__match-list .mc-tag{margin-right:4px}.mc-tree-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-tree-select__match-container .mc-tree-select__match-hidden-text{-ms-grid-row-align:center;align-self:center;flex:0 0 70px;padding:0 8px;text-align:right}.mc-tree-select__match-item{border:1px solid transparent;border-radius:3px;display:flex;margin-right:4px;max-width:100%;padding-left:7px}.mc-tree-select__arrow-wrapper{-ms-grid-row-align:center;align-self:center}.mc-form-field-appearance-fill .mc-tree-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-tree-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-tree-select__arrow-wrapper{transform:translateY(-25%)}.mc-tree-select__panel{border-bottom-left-radius:var(--mc-select-panel-size-border-radius,3px);border-bottom-right-radius:var(--mc-select-panel-size-border-radius,3px);border-style:solid;border-width:var(--mc-select-panel-size-border-width,1px);max-height:var(--mc-select-panel-size-max-height,232px);min-width:100%;overflow:auto;padding:4px 0}.mc-tree-select__panel .mc-optgroup-label,.mc-tree-select__panel .mc-tree-select-option{font-size:inherit;height:var(--mc-option-size-height,32px);line-height:var(--mc-option-size-height,32px)}.mc-tree-select__content,.mc-tree-select__content .mc-tree-selection{height:100%}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}"]
-            }] }
+                styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:var(--mc-option-size-height,32px);border:var(--mc-option-size-border-width,2px) solid transparent;cursor:pointer;outline:none;padding:var(--mc-option-size-padding,0 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.mc-tree-select{box-sizing:border-box;display:inline-block;width:100%;outline:none}.mc-tree-select.mc-disabled .mc-tree-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-tree-select__trigger{display:flex;box-sizing:border-box;position:relative;height:var(--mc-select-size-height,30px);cursor:pointer;padding-left:calc(var(--mc-select-size-left-padding, 16px) - var(--mc-form-field-size-border-width, 1px));padding-right:calc(var(--mc-select-size-right-padding, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-tree-select__trigger.mc-tree-select__trigger_multiple{padding-left:calc(var(--mc-select-size-left-padding-multiple, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tree-select__placeholder{margin-left:8px}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tag.mc-disabled .mc-tag__text{margin-right:7px}.mc-tree-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tree-select__matcher>span{width:100%}.mc-tree-select__multiple-matcher{display:flex;width:100%}.mc-tree-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:calc(var(--mc-select-size-height, 30px) - var(--mc-select-panel-size-border-width, 1px))}.mc-tree-select__match-list .mc-tag{margin-right:4px}.mc-tree-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-tree-select__match-container .mc-tree-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-tree-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-tree-select__arrow-wrapper{align-self:center}.mc-form-field-appearance-fill .mc-tree-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-tree-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-tree-select__arrow-wrapper{transform:translateY(-25%)}.mc-tree-select__panel{max-height:var(--mc-select-panel-size-max-height,232px);min-width:100%;overflow:auto;border-width:var(--mc-select-panel-size-border-width,1px);border-style:solid;border-bottom-left-radius:var(--mc-select-panel-size-border-radius,3px);border-bottom-right-radius:var(--mc-select-panel-size-border-radius,3px);padding:4px 0}.mc-tree-select__panel .mc-optgroup-label,.mc-tree-select__panel .mc-tree-select-option{font-size:inherit;line-height:var(--mc-option-size-height,32px);height:var(--mc-option-size-height,32px)}.mc-tree-select__content,.mc-tree-select__content .mc-tree-selection{height:100%}.mc-form-field-type-mc-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}"]
+            },] }
 ];
 /** @nocollapse */
 McTreeSelect.ctorParameters = () => [
@@ -1291,276 +832,7 @@ McTreeSelect.propDecorators = {
     hasBackdrop: [{ type: Input }],
     hiddenItemsTextFormatter: [{ type: Input }]
 };
-if (false) {
-    /**
-     * A name for this control that can be used by `mc-form-field`.
-     * @type {?}
-     */
-    McTreeSelect.prototype.controlType;
-    /** @type {?} */
-    McTreeSelect.prototype.hiddenItems;
-    /**
-     * The last measured value for the trigger's client bounding rect.
-     * @type {?}
-     */
-    McTreeSelect.prototype.triggerRect;
-    /**
-     * The cached font-size of the trigger element.
-     * @type {?}
-     */
-    McTreeSelect.prototype.triggerFontSize;
-    /**
-     * Deals with the selection logic.
-     * @type {?}
-     */
-    McTreeSelect.prototype.selectionModel;
-    /**
-     * The value of the select panel's transform-origin property.
-     * @type {?}
-     */
-    McTreeSelect.prototype.transformOrigin;
-    /**
-     * Emits when the panel element is finished transforming in.
-     * @type {?}
-     */
-    McTreeSelect.prototype.panelDoneAnimatingStream;
-    /**
-     * Strategy that will be used to handle scrolling while the select panel is open.
-     * @type {?}
-     */
-    McTreeSelect.prototype.scrollStrategy;
-    /**
-     * The y-offset of the overlay panel in relation to the trigger's top start corner.
-     * This must be adjusted to align the selected option text over the trigger text.
-     * when the panel opens. Will change based on the y-position of the selected option.
-     * @type {?}
-     */
-    McTreeSelect.prototype.offsetY;
-    /**
-     * This position config ensures that the top "start" corner of the overlay
-     * is aligned with with the top "start" of the origin by default (overlapping
-     * the trigger completely). If the panel cannot fit below the trigger, it
-     * will fall back to a position above the trigger.
-     * @type {?}
-     */
-    McTreeSelect.prototype.positions;
-    /** @type {?} */
-    McTreeSelect.prototype.options;
-    /** @type {?} */
-    McTreeSelect.prototype.trigger;
-    /** @type {?} */
-    McTreeSelect.prototype.panel;
-    /** @type {?} */
-    McTreeSelect.prototype.overlayDir;
-    /** @type {?} */
-    McTreeSelect.prototype.hiddenItemsCounter;
-    /** @type {?} */
-    McTreeSelect.prototype.tags;
-    /** @type {?} */
-    McTreeSelect.prototype.cleaner;
-    /**
-     * User-supplied override of the trigger element.
-     * @type {?}
-     */
-    McTreeSelect.prototype.customTrigger;
-    /** @type {?} */
-    McTreeSelect.prototype.tree;
-    /** @type {?} */
-    McTreeSelect.prototype.hiddenItemsText;
-    /**
-     * Event emitted when the select panel has been toggled.
-     * @type {?}
-     */
-    McTreeSelect.prototype.openedChange;
-    /**
-     * Event emitted when the select has been opened.
-     * @type {?}
-     */
-    McTreeSelect.prototype.openedStream;
-    /**
-     * Event emitted when the select has been closed.
-     * @type {?}
-     */
-    McTreeSelect.prototype.closedStream;
-    /**
-     * Event emitted when the selected value has been changed by the user.
-     * @type {?}
-     */
-    McTreeSelect.prototype.selectionChange;
-    /**
-     * Event that emits whenever the raw value of the select changes. This is here primarily
-     * to facilitate the two-way binding for the `value` input.
-     * \@docs-private
-     * @type {?}
-     */
-    McTreeSelect.prototype.valueChange;
-    /**
-     * Classes to be passed to the select panel. Supports the same syntax as `ngClass`.
-     * @type {?}
-     */
-    McTreeSelect.prototype.panelClass;
-    /** @type {?} */
-    McTreeSelect.prototype.backdropClass;
-    /**
-     * Object used to control when error messages are shown.
-     * @type {?}
-     */
-    McTreeSelect.prototype.errorStateMatcher;
-    /**
-     * Function used to sort the values in a select in multiple mode.
-     * Follows the same logic as `Array.prototype.sort`.
-     * @type {?}
-     */
-    McTreeSelect.prototype.sortComparator;
-    /**
-     * Combined stream of all of the child options' change events.
-     * @type {?}
-     */
-    McTreeSelect.prototype.optionSelectionChanges;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._placeholder;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._required;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._multiple;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._autoSelect;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._value;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._id;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._hasBackdrop;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._focused;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.closeSubscription;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._panelOpen;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.originalOnKeyDown;
-    /**
-     * The scroll position of the overlay panel, calculated to center the selected option.
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.scrollTop;
-    /**
-     * Unique id for this input.
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.uid;
-    /**
-     * Emits whenever the component is destroyed.
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.destroy;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.tempValues;
-    /**
-     * `View -> model callback called when value changes`
-     * @type {?}
-     */
-    McTreeSelect.prototype.onChange;
-    /**
-     * `View -> model callback called when select has been touched`
-     * @type {?}
-     */
-    McTreeSelect.prototype.onTouched;
-    /**
-     * Comparison function to specify which option is displayed. Defaults to object equality.
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype._compareWith;
-    /** @type {?} */
-    McTreeSelect.prototype.changeDetectorRef;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.viewportRuler;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.ngZone;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.renderer;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.scrollStrategyFactory;
-    /** @type {?} */
-    McTreeSelect.prototype.rawValidators;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.mcValidation;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.dir;
-    /**
-     * @type {?}
-     * @private
-     */
-    McTreeSelect.prototype.parentFormField;
-    /** @type {?} */
-    McTreeSelect.prototype.ngModel;
-    /** @type {?} */
-    McTreeSelect.prototype.formControlName;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: tree-select.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McTreeSelectModule {
 }
 McTreeSelectModule.decorators = [
@@ -1581,21 +853,7 @@ McTreeSelectModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-tree-select.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McTreeSelect, McTreeSelectChange, McTreeSelectModule, McTreeSelectTrigger };

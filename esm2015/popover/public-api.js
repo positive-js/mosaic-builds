@@ -1,9 +1,4 @@
-/**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { McPopoverModule } from './popover.module';
-export { mcPopoverScrollStrategyFactory, getMcPopoverInvalidPositionError, PopoverVisibility, McPopoverComponent, MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover } from './popover.component';
-export { mcPopoverAnimations } from './popover-animations';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIvaG9tZS9jaXJjbGVjaS9tb3NhaWMvcGFja2FnZXMvbW9zYWljL3BvcG92ZXIvIiwic291cmNlcyI6WyJwdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsZ0NBQWMsa0JBQWtCLENBQUM7QUFDakMsNE1BQWMscUJBQXFCLENBQUM7QUFDcEMsb0NBQWMsc0JBQXNCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL3BvcG92ZXIubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vcG9wb3Zlci5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9wb3BvdmVyLWFuaW1hdGlvbnMnO1xuIl19
+export * from './popover.module';
+export * from './popover.component';
+export * from './popover-animations';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3BhY2thZ2VzL21vc2FpYy9wb3BvdmVyL3B1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYyxrQkFBa0IsQ0FBQztBQUNqQyxjQUFjLHFCQUFxQixDQUFDO0FBQ3BDLGNBQWMsc0JBQXNCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL3BvcG92ZXIubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vcG9wb3Zlci5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9wb3BvdmVyLWFuaW1hdGlvbnMnO1xuIl19

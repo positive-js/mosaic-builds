@@ -306,28 +306,15 @@
     }
 
     var McLinkBase = /** @class */ (function () {
-        /**
-         * @param {?} elementRef
-         */
         function McLinkBase(elementRef) {
             this.elementRef = elementRef;
         }
         return McLinkBase;
     }());
-    if (false) {
-        /** @type {?} */
-        McLinkBase.prototype.elementRef;
-    }
     // tslint:disable-next-line: naming-convention
-    /** @type {?} */
     var McLinkMixinBase = core.mixinTabIndex(core.mixinDisabled(McLinkBase));
     var McLink = /** @class */ (function (_super) {
         __extends(McLink, _super);
-        /**
-         * @param {?} elementRef
-         * @param {?} focusMonitor
-         * @param {?} changeDetector
-         */
         function McLink(elementRef, focusMonitor, changeDetector) {
             var _this = _super.call(this, elementRef) || this;
             _this.focusMonitor = focusMonitor;
@@ -337,18 +324,10 @@
             return _this;
         }
         Object.defineProperty(McLink.prototype, "disabled", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._disabled;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
-                /** @type {?} */
                 var newValue = core.toBoolean(value);
                 if (newValue !== this._disabled) {
                     this._disabled = newValue;
@@ -358,21 +337,12 @@
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McLink.prototype.ngOnDestroy = function () {
             this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         };
-        /**
-         * @return {?}
-         */
         McLink.prototype.focus = function () {
             this.getHostElement().focus();
         };
-        /**
-         * @return {?}
-         */
         McLink.prototype.getHostElement = function () {
             return this.elementRef.nativeElement;
         };
@@ -398,29 +368,7 @@
     McLink.propDecorators = {
         disabled: [{ type: core$1.Input }]
     };
-    if (false) {
-        /**
-         * @type {?}
-         * @private
-         */
-        McLink.prototype._disabled;
-        /**
-         * @type {?}
-         * @private
-         */
-        McLink.prototype.focusMonitor;
-        /**
-         * @type {?}
-         * @private
-         */
-        McLink.prototype.changeDetector;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: link.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McLinkModule = /** @class */ (function () {
         function McLinkModule() {
         }
@@ -438,21 +386,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-link.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.McLink = McLink;

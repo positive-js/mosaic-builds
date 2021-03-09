@@ -306,18 +306,14 @@
     }
 
     // tslint:disable-next-line:naming-convention
-    /** @type {?} */
     var ArrowPlacements = {
-        Top: ( /** @type {?} */('top')),
-        Center: ( /** @type {?} */('center')),
-        Bottom: ( /** @type {?} */('bottom')),
-        Right: ( /** @type {?} */('right')),
-        Left: ( /** @type {?} */('left'))
+        Top: 'top',
+        Center: 'center',
+        Bottom: 'bottom',
+        Right: 'right',
+        Left: 'left'
     };
     var McTooltipComponent = /** @class */ (function () {
-        /**
-         * @param {?} cdr
-         */
         function McTooltipComponent(cdr) {
             this.cdr = cdr;
             this.prefix = 'mc-tooltip_placement';
@@ -329,25 +325,16 @@
             this._mcTrigger = 'hover';
             this._mcPlacement = 'top';
             this._mcVisible = new rxjs.BehaviorSubject(false);
-            /**
-             * Subject for notifying that the tooltip has been hidden from the view
-             */
+            /** Subject for notifying that the tooltip has been hidden from the view */
             this.onHideSubject = new rxjs.Subject();
             this.closeOnInteraction = false;
             this.availablePositions = core.POSITION_MAP;
             this.$visible = this._mcVisible.asObservable();
         }
         Object.defineProperty(McTooltipComponent.prototype, "mcTitle", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcTitle;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcTitle = value;
             },
@@ -355,16 +342,9 @@
             configurable: true
         });
         Object.defineProperty(McTooltipComponent.prototype, "mcTrigger", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcTrigger;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcTrigger = value;
             },
@@ -372,16 +352,9 @@
             configurable: true
         });
         Object.defineProperty(McTooltipComponent.prototype, "mcPlacement", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcPlacement;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value !== this._mcPlacement) {
                     this._mcPlacement = value;
@@ -395,16 +368,9 @@
             configurable: true
         });
         Object.defineProperty(McTooltipComponent.prototype, "mcTooltipClass", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcTooltipClass;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcTooltipClass = value;
             },
@@ -412,18 +378,10 @@
             configurable: true
         });
         Object.defineProperty(McTooltipComponent.prototype, "mcVisible", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcVisible.value;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
-                /** @type {?} */
                 var visible = coercion.coerceBooleanProperty(value);
                 if (visible && this._mcVisible.value !== visible) {
                     this.show();
@@ -436,25 +394,15 @@
             configurable: true
         });
         Object.defineProperty(McTooltipComponent.prototype, "mcArrowPlacement", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcArrowPlacement;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcArrowPlacement = value;
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McTooltipComponent.prototype.show = function () {
             var _this = this;
             if (this.hideTid) {
@@ -464,39 +412,29 @@
                 if (this.mcTrigger !== 'manual') {
                     this.closeOnInteraction = true;
                 }
-                this.showTid = setTimeout(( /**
-                 * @return {?}
-                 */function () {
+                this.showTid = setTimeout(function () {
                     _this._mcVisible.next(true);
                     _this.mcVisibleChange.emit(true);
                     // Mark for check so if any parent component has set the
                     // ChangeDetectionStrategy to OnPush it will be checked anyways
                     _this.markForCheck();
-                }), this.mcMouseEnterDelay);
+                }, this.mcMouseEnterDelay);
             }
         };
-        /**
-         * @return {?}
-         */
         McTooltipComponent.prototype.hide = function () {
             var _this = this;
             if (this.showTid) {
                 clearTimeout(this.showTid);
             }
-            this.hideTid = setTimeout(( /**
-             * @return {?}
-             */function () {
+            this.hideTid = setTimeout(function () {
                 _this._mcVisible.next(false);
                 _this.mcVisibleChange.emit(false);
                 _this.onHideSubject.next();
                 // Mark for check so if any parent component has set the
                 // ChangeDetectionStrategy to OnPush it will be checked anyways
                 _this.markForCheck();
-            }), this.mcMouseLeaveDelay);
+            }, this.mcMouseLeaveDelay);
         };
-        /**
-         * @return {?}
-         */
         McTooltipComponent.prototype.setClassMap = function () {
             var _b;
             this.classMap = (_b = {},
@@ -504,37 +442,22 @@
                 _b[this.mcTooltipClass] = true,
                 _b);
         };
-        /**
-         * @return {?}
-         */
         McTooltipComponent.prototype.isContentEmpty = function () {
             return this.isTitleString ? (this.mcTitle === '' || !this.mcTitle) : false;
         };
-        /**
-         * Returns an observable that notifies when the tooltip has been hidden from view.
-         * @return {?}
-         */
+        /** Returns an observable that notifies when the tooltip has been hidden from view. */
         McTooltipComponent.prototype.afterHidden = function () {
             return this.onHideSubject.asObservable();
         };
-        /**
-         * @return {?}
-         */
         McTooltipComponent.prototype.markForCheck = function () {
             this.cdr.markForCheck();
         };
-        /**
-         * @return {?}
-         */
         McTooltipComponent.prototype.handleBodyInteraction = function () {
             if (this.closeOnInteraction) {
                 this.hide();
             }
         };
         Object.defineProperty(McTooltipComponent.prototype, "isTemplateRef", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this.mcTitle instanceof core$1.TemplateRef;
             },
@@ -542,9 +465,6 @@
             configurable: true
         });
         Object.defineProperty(McTooltipComponent.prototype, "isNonEmptyString", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return (typeof this.mcTitle === 'string' || typeof this.mcTitle === 'number') && this._mcTitle !== '';
             },
@@ -564,8 +484,8 @@
                     host: {
                         '(body:click)': 'this.handleBodyInteraction()'
                     },
-                    styles: [".mc-tooltip{box-sizing:border-box;display:block;list-style:none;max-width:var(--mc-tooltip-size-max-width,240px);position:relative;visibility:visible;white-space:pre-line;z-index:1060}.mc-tooltip_placement-top{padding-bottom:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-right{padding-left:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-bottom{padding-top:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-left{padding-right:var(--mc-tooltip-size-distance,9px)}.mc-tooltip-inner{border-radius:var(--mc-tooltip-size-border-radius,3px);height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;padding:var(--mc-tooltip-size-padding,8px 16px);text-align:left;text-decoration:none;vertical-align:center}.mc-tooltip-arrow{height:var(--mc-tooltip-size-arrow-size,12px);position:absolute;transform:rotate(45deg);width:var(--mc-tooltip-size-arrow-size,12px)}.mc-tooltip_placement-top .mc-tooltip-arrow{bottom:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));left:50%;margin-left:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1)}.mc-tooltip_placement-right .mc-tooltip-arrow{left:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));margin-top:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1);top:16px}.mc-tooltip_placement-left .mc-tooltip-arrow{margin-top:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1);right:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));top:16px}.mc-tooltip_placement-bottom .mc-tooltip-arrow{left:50%;margin-left:calc(var(--mc-tooltip-size-arrow-width, 5px)*-1);top:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px))}"]
-                }] }
+                    styles: [".mc-tooltip{display:block;box-sizing:border-box;visibility:visible;position:relative;z-index:1060;max-width:var(--mc-tooltip-size-max-width,240px);list-style:none;white-space:pre-line}.mc-tooltip_placement-top{padding-bottom:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-right{padding-left:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-bottom{padding-top:var(--mc-tooltip-size-distance,9px)}.mc-tooltip_placement-left{padding-right:var(--mc-tooltip-size-distance,9px)}.mc-tooltip-inner{padding:var(--mc-tooltip-size-padding,8px 16px);text-align:left;text-decoration:none;border-radius:var(--mc-tooltip-size-border-radius,3px);height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;vertical-align:center}.mc-tooltip-arrow{position:absolute;width:var(--mc-tooltip-size-arrow-size,12px);height:var(--mc-tooltip-size-arrow-size,12px);transform:rotate(45deg)}.mc-tooltip_placement-top .mc-tooltip-arrow{bottom:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));left:50%;margin-left:calc(-1 * var(--mc-tooltip-size-arrow-width, 5px))}.mc-tooltip_placement-right .mc-tooltip-arrow{left:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));top:16px;margin-top:calc(-1 * var(--mc-tooltip-size-arrow-width, 5px))}.mc-tooltip_placement-left .mc-tooltip-arrow{right:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));top:16px;margin-top:calc(-1 * var(--mc-tooltip-size-arrow-width, 5px))}.mc-tooltip_placement-bottom .mc-tooltip-arrow{top:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));left:50%;margin-left:calc(-1 * var(--mc-tooltip-size-arrow-width, 5px))}"]
+                },] }
     ];
     /** @nocollapse */
     McTooltipComponent.ctorParameters = function () { return [
@@ -582,114 +502,23 @@
         mcVisible: [{ type: core$1.Input }],
         mcArrowPlacement: [{ type: core$1.Input }]
     };
-    if (false) {
-        /** @type {?} */
-        McTooltipComponent.prototype.prefix;
-        /** @type {?} */
-        McTooltipComponent.prototype.positions;
-        /** @type {?} */
-        McTooltipComponent.prototype.classMap;
-        /** @type {?} */
-        McTooltipComponent.prototype.isTitleString;
-        /** @type {?} */
-        McTooltipComponent.prototype.showTid;
-        /** @type {?} */
-        McTooltipComponent.prototype.hideTid;
-        /** @type {?} */
-        McTooltipComponent.prototype.availablePositions;
-        /** @type {?} */
-        McTooltipComponent.prototype.$visible;
-        /** @type {?} */
-        McTooltipComponent.prototype.mcVisibleChange;
-        /** @type {?} */
-        McTooltipComponent.prototype.mcMouseEnterDelay;
-        /** @type {?} */
-        McTooltipComponent.prototype.mcMouseLeaveDelay;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltipComponent.prototype._mcTitle;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltipComponent.prototype._mcTrigger;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltipComponent.prototype._mcPlacement;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltipComponent.prototype._mcTooltipClass;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltipComponent.prototype._mcVisible;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltipComponent.prototype._mcArrowPlacement;
-        /**
-         * Subject for notifying that the tooltip has been hidden from the view
-         * @type {?}
-         * @private
-         */
-        McTooltipComponent.prototype.onHideSubject;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltipComponent.prototype.closeOnInteraction;
-        /** @type {?} */
-        McTooltipComponent.prototype.cdr;
-    }
-    /** @type {?} */
     var MC_TOOLTIP_SCROLL_STRATEGY = new core$1.InjectionToken('mc-tooltip-scroll-strategy');
-    /**
-     * \@docs-private
-     * @param {?} overlay
-     * @return {?}
-     */
+    /** @docs-private */
     function mcTooltipScrollStrategyFactory(overlay) {
-        return ( /**
-         * @return {?}
-         */function () { return overlay.scrollStrategies.reposition({ scrollThrottle: 20 }); });
+        return function () { return overlay.scrollStrategies.reposition({ scrollThrottle: 20 }); };
     }
-    /**
-     * \@docs-private
-     * @type {?}
-     */
+    /** @docs-private */
     var MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = {
         provide: MC_TOOLTIP_SCROLL_STRATEGY,
         deps: [overlay.Overlay],
         useFactory: mcTooltipScrollStrategyFactory
     };
-    /**
-     * Creates an error to be thrown if the user supplied an invalid tooltip position.
-     * @param {?} position
-     * @return {?}
-     */
+    /** Creates an error to be thrown if the user supplied an invalid tooltip position. */
     function getMcTooltipInvalidPositionError(position) {
         return Error("McTooltip position \"" + position + "\" is invalid.");
     }
-    /** @type {?} */
     var VIEWPORT_MARGIN = 8;
     var McTooltip = /** @class */ (function () {
-        /**
-         * @param {?} overlay
-         * @param {?} elementRef
-         * @param {?} ngZone
-         * @param {?} scrollDispatcher
-         * @param {?} hostView
-         * @param {?} scrollStrategy
-         * @param {?} direction
-         */
         function McTooltip(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
             this.overlay = overlay;
             this.elementRef = elementRef;
@@ -711,16 +540,9 @@
             this.availablePositions = core.POSITION_MAP;
         }
         Object.defineProperty(McTooltip.prototype, "mcTitle", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcTitle;
             },
-            /**
-             * @param {?} title
-             * @return {?}
-             */
             set: function (title) {
                 this._mcTitle = title;
                 this.updateCompValue('mcTitle', title);
@@ -729,10 +551,6 @@
             configurable: true
         });
         Object.defineProperty(McTooltip.prototype, "setTitle", {
-            /**
-             * @param {?} title
-             * @return {?}
-             */
             set: function (title) {
                 this.mcTitle = title;
             },
@@ -740,16 +558,9 @@
             configurable: true
         });
         Object.defineProperty(McTooltip.prototype, "disabled", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._disabled;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._disabled = coercion.coerceBooleanProperty(value);
                 this.updateCompValue('mcTooltipDisabled', value);
@@ -758,16 +569,9 @@
             configurable: true
         });
         Object.defineProperty(McTooltip.prototype, "mcMouseEnterDelay", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcMouseEnterDelay;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcMouseEnterDelay = value;
                 this.updateCompValue('mcMouseEnterDelay', value);
@@ -776,16 +580,9 @@
             configurable: true
         });
         Object.defineProperty(McTooltip.prototype, "mcMouseLeaveDelay", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcMouseLeaveDelay;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcMouseLeaveDelay = value;
                 this.updateCompValue('mcMouseLeaveDelay', value);
@@ -794,16 +591,9 @@
             configurable: true
         });
         Object.defineProperty(McTooltip.prototype, "mcTrigger", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcTrigger;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value) {
                     this._mcTrigger = value;
@@ -817,16 +607,9 @@
             configurable: true
         });
         Object.defineProperty(McTooltip.prototype, "mcPlacement", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcPlacement;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value) {
                     this._mcPlacement = value;
@@ -843,16 +626,9 @@
             configurable: true
         });
         Object.defineProperty(McTooltip.prototype, "mcTooltipClass", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcTooltipClass;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 if (value) {
                     this._mcTooltipClass = value;
@@ -866,18 +642,10 @@
             configurable: true
         });
         Object.defineProperty(McTooltip.prototype, "mcVisible", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcVisible;
             },
-            /**
-             * @param {?} externalValue
-             * @return {?}
-             */
             set: function (externalValue) {
-                /** @type {?} */
                 var value = coercion.coerceBooleanProperty(externalValue);
                 if (this._mcVisible !== value) {
                     this._mcVisible = value;
@@ -894,84 +662,57 @@
             configurable: true
         });
         Object.defineProperty(McTooltip.prototype, "mcArrowPlacement", {
-            /**
-             * @return {?}
-             */
             get: function () {
                 return this._mcArrowPlacement;
             },
-            /**
-             * @param {?} value
-             * @return {?}
-             */
             set: function (value) {
                 this._mcArrowPlacement = value;
             },
             enumerable: false,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
         McTooltip.prototype.ngOnInit = function () {
             this.initElementRefListeners();
         };
-        /**
-         * @return {?}
-         */
         McTooltip.prototype.ngOnDestroy = function () {
             var _this = this;
             if (this.overlayRef) {
                 this.overlayRef.dispose();
             }
-            this.manualListeners.forEach(( /**
-             * @param {?} listener
-             * @param {?} event
-             * @return {?}
-             */function (listener, event) {
+            this.manualListeners.forEach(function (listener, event) {
                 _this.elementRef.nativeElement.removeEventListener(event, listener);
-            }));
+            });
             this.manualListeners.clear();
             this.$unsubscribe.next();
             this.$unsubscribe.complete();
         };
-        /**
-         * Create the overlay config and position strategy
-         * @return {?}
-         */
+        /** Create the overlay config and position strategy */
         McTooltip.prototype.createOverlay = function () {
             var _this = this;
             if (this.overlayRef) {
                 return this.overlayRef;
             }
             // Create connected position strategy that listens for scroll events to reposition.
-            /** @type {?} */
             var strategy = this.overlay.position()
                 .flexibleConnectedTo(this.elementRef)
                 .withTransformOriginOn('.mc-tooltip')
                 .withFlexibleDimensions(false)
                 .withViewportMargin(VIEWPORT_MARGIN)
                 .withPositions(__spread(core.DEFAULT_4_POSITIONS));
-            /** @type {?} */
             var scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
             strategy.withScrollableContainers(scrollableAncestors);
             strategy.positionChanges
                 .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(( /**
-         * @param {?} change
-         * @return {?}
-         */function (change) {
+                .subscribe(function (change) {
                 if (_this.tooltip) {
                     _this.onPositionChange(change);
                     if (change.scrollableViewProperties.isOverlayClipped && _this.tooltip.mcVisible) {
                         // After position changes occur and the overlay is clipped by
                         // a parent scrollable then close the tooltip.
-                        _this.ngZone.run(( /**
-                         * @return {?}
-                         */function () { return _this.hide(); }));
+                        _this.ngZone.run(function () { return _this.hide(); });
                     }
                 }
-            }));
+            });
             this.overlayRef = this.overlay.create({
                 direction: this.direction,
                 positionStrategy: strategy,
@@ -981,32 +722,19 @@
             this.updatePosition();
             this.overlayRef.detachments()
                 .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(( /**
-         * @return {?}
-         */function () { return _this.detach(); }));
+                .subscribe(function () { return _this.detach(); });
             return this.overlayRef;
         };
-        /**
-         * @return {?}
-         */
         McTooltip.prototype.detach = function () {
             if (this.overlayRef && this.overlayRef.hasAttached()) {
                 this.overlayRef.detach();
             }
             this.tooltip = null;
         };
-        /**
-         * @param {?} $event
-         * @return {?}
-         */
         McTooltip.prototype.onPositionChange = function ($event) {
             var _this = this;
-            /** @type {?} */
             var updatedPlacement = this.mcPlacement;
-            Object.keys(this.availablePositions).some(( /**
-             * @param {?} key
-             * @return {?}
-             */function (key) {
+            Object.keys(this.availablePositions).some(function (key) {
                 if ($event.connectionPair.originX === _this.availablePositions[key].originX &&
                     $event.connectionPair.originY === _this.availablePositions[key].originY &&
                     $event.connectionPair.overlayX === _this.availablePositions[key].overlayX &&
@@ -1015,7 +743,7 @@
                     return true;
                 }
                 return false;
-            }));
+            });
             this.updateCompValue('mcPlacement', updatedPlacement);
             if (this.tooltip) {
                 this.tooltip.setClassMap();
@@ -1023,26 +751,16 @@
             }
             this.handlePositioningUpdate();
         };
-        /**
-         * @return {?}
-         */
         McTooltip.prototype.handlePositioningUpdate = function () {
             this.overlayRef = this.createOverlay();
             if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
-                /** @type {?} */
                 var halfDelimiter = 2;
-                /** @type {?} */
                 var overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
-                /** @type {?} */
                 var currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
                 if (this.mcArrowPlacement === ArrowPlacements.Center) {
-                    /** @type {?} */
                     var arrowElemRef = this.getTooltipArrowElem();
-                    /** @type {?} */
                     var containerPositionTop = this.hostView.element.nativeElement.getBoundingClientRect().top;
-                    /** @type {?} */
                     var halfOfContainerHeight = currentContainerHeight / halfDelimiter;
-                    /** @type {?} */
                     var halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
                     this.overlayRef.overlayElement.style.top = (containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1 + "px";
                     if (arrowElemRef) {
@@ -1050,93 +768,50 @@
                     }
                 }
                 else {
-                    /** @type {?} */
                     var pos = (overlayElemHeight - currentContainerHeight) / halfDelimiter;
-                    /** @type {?} */
                     var defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
                     this.overlayRef.overlayElement.style.top = defaultTooltipPlacementTop + pos - 1 + "px";
                 }
             }
         };
         // tslint:disable-next-line:no-any
-        /**
-         * @param {?} key
-         * @param {?} value
-         * @return {?}
-         */
         McTooltip.prototype.updateCompValue = function (key, value) {
             if (this.isDynamicTooltip && value && this.tooltip) {
                 this.tooltip[key] = value;
                 this.tooltip.markForCheck();
             }
         };
-        /**
-         * @param {?} e
-         * @return {?}
-         */
         McTooltip.prototype.handleKeydown = function (e) {
             if (this.isTooltipOpen && e.keyCode === keycodes.ESCAPE) { // tslint:disable-line
                 this.hide();
             }
         };
-        /**
-         * @return {?}
-         */
         McTooltip.prototype.handleTouchend = function () {
             this.hide();
         };
-        /**
-         * @return {?}
-         */
         McTooltip.prototype.initElementRefListeners = function () {
             var _this = this;
             this.clearListeners();
             if (this.mcTrigger === 'hover') {
                 this.manualListeners
-                    .set('mouseenter', ( /**
-             * @return {?}
-             */function () { return _this.show(); }))
-                    .set('mouseleave', ( /**
-             * @return {?}
-             */function () { return _this.hide(); }))
-                    .forEach(( /**
-             * @param {?} listener
-             * @param {?} event
-             * @return {?}
-             */function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
+                    .set('mouseenter', function () { return _this.show(); })
+                    .set('mouseleave', function () { return _this.hide(); })
+                    .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
             }
             if (this.mcTrigger === 'focus') {
                 this.manualListeners
-                    .set('focus', ( /**
-             * @return {?}
-             */function () { return _this.show(); }))
-                    .set('blur', ( /**
-             * @return {?}
-             */function () { return _this.hide(); }))
-                    .forEach(( /**
-             * @param {?} listener
-             * @param {?} event
-             * @return {?}
-             */function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); }));
+                    .set('focus', function () { return _this.show(); })
+                    .set('blur', function () { return _this.hide(); })
+                    .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
             }
         };
-        /**
-         * @return {?}
-         */
         McTooltip.prototype.clearListeners = function () {
             var _this = this;
-            this.manualListeners.forEach(( /**
-             * @param {?} listener
-             * @param {?} event
-             * @return {?}
-             */function (listener, event) {
+            this.manualListeners.forEach(function (listener, event) {
                 _this.elementRef.nativeElement.removeEventListener(event, listener);
-            }));
+            });
             this.manualListeners.clear();
         };
-        /**
-         * @return {?}
-         */
         McTooltip.prototype.show = function () {
             var _this = this;
             if (this.disabled) {
@@ -1149,11 +824,8 @@
                 this.tooltip = this.overlayRef.attach(this.portal).instance;
                 this.tooltip.afterHidden()
                     .pipe(operators.takeUntil(this.destroyed))
-                    .subscribe(( /**
-             * @return {?}
-             */function () { return _this.detach(); }));
+                    .subscribe(function () { return _this.detach(); });
                 this.isDynamicTooltip = true;
-                /** @type {?} */
                 var properties = [
                     'mcTitle',
                     'mcPlacement',
@@ -1163,45 +835,30 @@
                     'mcMouseLeaveDelay',
                     'mcTooltipClass'
                 ];
-                properties.forEach(( /**
-                 * @param {?} property
-                 * @return {?}
-                 */function (property) { return _this.updateCompValue(property, _this[property]); }));
+                properties.forEach(function (property) { return _this.updateCompValue(property, _this[property]); });
                 this.tooltip.mcVisibleChange
                     .pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
-                    .subscribe(( /**
-             * @param {?} data
-             * @return {?}
-             */function (data) {
+                    .subscribe(function (data) {
                     _this.mcVisible = data;
                     _this.mcVisibleChange.emit(data);
                     _this.isTooltipOpen = data;
-                }));
+                });
             }
             this.updatePosition();
             this.tooltip.show();
         };
-        /**
-         * @return {?}
-         */
         McTooltip.prototype.hide = function () {
             if (this.tooltip) {
                 this.tooltip.hide();
             }
         };
-        /**
-         * Updates the position of the current tooltip.
-         * @return {?}
-         */
+        /** Updates the position of the current tooltip. */
         McTooltip.prototype.updatePosition = function () {
             if (!this.overlayRef) {
                 this.overlayRef = this.createOverlay();
             }
-            /** @type {?} */
-            var position = ( /** @type {?} */(this.overlayRef.getConfig().positionStrategy));
-            /** @type {?} */
+            var position = this.overlayRef.getConfig().positionStrategy;
             var origin = this.getOrigin();
-            /** @type {?} */
             var overlay = this.getOverlayPosition();
             position.withPositions([
                 Object.assign(Object.assign({}, origin.main), overlay.main),
@@ -1215,14 +872,10 @@
         /**
          * Returns the origin position and a fallback position based on the user's position preference.
          * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
-         * @return {?}
          */
         McTooltip.prototype.getOrigin = function () {
-            /** @type {?} */
             var position = this.mcPlacement;
-            /** @type {?} */
             var isLtr = !this.direction || this.direction.value === 'ltr';
-            /** @type {?} */
             var originPosition;
             if (position === 'top' || position === 'bottom') {
                 originPosition = { originX: 'center', originY: position === 'top' ? 'top' : 'bottom' };
@@ -1246,16 +899,10 @@
                 fallback: { originX: x, originY: y }
             };
         };
-        /**
-         * Returns the overlay position and a fallback position based on the user's preference
-         * @return {?}
-         */
+        /** Returns the overlay position and a fallback position based on the user's preference */
         McTooltip.prototype.getOverlayPosition = function () {
-            /** @type {?} */
             var position = this.mcPlacement;
-            /** @type {?} */
             var isLtr = !this.direction || this.direction.value === 'ltr';
-            /** @type {?} */
             var overlayPosition;
             if (position === 'top') {
                 overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
@@ -1282,17 +929,9 @@
                 fallback: { overlayX: x, overlayY: y }
             };
         };
-        /**
-         * Inverts an overlay position.
-         * @private
-         * @param {?} x
-         * @param {?} y
-         * @return {?}
-         */
+        /** Inverts an overlay position. */
         McTooltip.prototype.invertPosition = function (x, y) {
-            /** @type {?} */
             var newX = x;
-            /** @type {?} */
             var newY = y;
             if (this.mcPlacement === 'top' || this.mcPlacement === 'bottom') {
                 if (y === 'top') {
@@ -1312,13 +951,8 @@
             }
             return { x: newX, y: newY };
         };
-        /**
-         * @private
-         * @return {?}
-         */
         McTooltip.prototype.getTooltipArrowElem = function () {
             var _a;
-            /** @type {?} */
             var arrowClassName = 'mc-tooltip-arrow';
             return (_a = this.overlayRef) === null || _a === void 0 ? void 0 : _a.overlayElement.getElementsByClassName(arrowClassName)[0];
         };
@@ -1359,125 +993,7 @@
         mcVisible: [{ type: core$1.Input }],
         mcArrowPlacement: [{ type: core$1.Input }]
     };
-    if (false) {
-        /** @type {?} */
-        McTooltip.prototype.isTooltipOpen;
-        /** @type {?} */
-        McTooltip.prototype.isDynamicTooltip;
-        /** @type {?} */
-        McTooltip.prototype.parentDisabled;
-        /** @type {?} */
-        McTooltip.prototype.overlayRef;
-        /** @type {?} */
-        McTooltip.prototype.portal;
-        /** @type {?} */
-        McTooltip.prototype.availablePositions;
-        /** @type {?} */
-        McTooltip.prototype.tooltip;
-        /** @type {?} */
-        McTooltip.prototype.mcVisibleChange;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.$unsubscribe;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype._mcTitle;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype._disabled;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype._mcMouseEnterDelay;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype._mcMouseLeaveDelay;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype._mcTrigger;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype._mcPlacement;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype._mcTooltipClass;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype._mcVisible;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype._mcArrowPlacement;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.manualListeners;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.destroyed;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.overlay;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.elementRef;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.ngZone;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.scrollDispatcher;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.hostView;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.scrollStrategy;
-        /**
-         * @type {?}
-         * @private
-         */
-        McTooltip.prototype.direction;
-    }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: tooltip.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var McToolTipModule = /** @class */ (function () {
         function McToolTipModule() {
         }
@@ -1494,21 +1010,7 @@
     ];
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: public-api.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: index.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: ptsecurity-mosaic-tooltip.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * Generated bundle index. Do not edit.
      */
 
     exports.ArrowPlacements = ArrowPlacements;

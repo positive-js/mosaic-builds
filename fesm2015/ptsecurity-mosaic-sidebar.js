@@ -3,17 +3,11 @@ import { Directive, Input, EventEmitter, Component, ViewEncapsulation, ChangeDet
 import { isControl, isInput, isLeftBracket, isRightBracket } from '@ptsecurity/cdk/keycodes';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: sidebar-animations.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-const McSidebarAnimationState = {
-    Opened: "opened",
-    Closed: "closed",
-};
-/** @type {?} */
+var McSidebarAnimationState;
+(function (McSidebarAnimationState) {
+    McSidebarAnimationState["Opened"] = "opened";
+    McSidebarAnimationState["Closed"] = "closed";
+})(McSidebarAnimationState || (McSidebarAnimationState = {}));
 const mcSidebarAnimations = {
     sidebarState: trigger('state', [
         state('opened', style({
@@ -31,30 +25,11 @@ const mcSidebarAnimations = {
     ])
 };
 
-/**
- * @fileoverview added by tsickle
- * Generated from: sidebar.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {string} */
-const SidebarPositions = {
-    Left: "left",
-    Right: "right",
-};
-/**
- * @record
- */
-function McSidebarParams() { }
-if (false) {
-    /** @type {?} */
-    McSidebarParams.prototype.openedStateMinWidth;
-    /** @type {?} */
-    McSidebarParams.prototype.openedStateWidth;
-    /** @type {?} */
-    McSidebarParams.prototype.openedStateMaxWidth;
-    /** @type {?} */
-    McSidebarParams.prototype.closedStateWidth;
-}
+var SidebarPositions;
+(function (SidebarPositions) {
+    SidebarPositions["Left"] = "left";
+    SidebarPositions["Right"] = "right";
+})(SidebarPositions || (SidebarPositions = {}));
 class McSidebarOpened {
 }
 McSidebarOpened.decorators = [
@@ -68,14 +43,6 @@ McSidebarOpened.propDecorators = {
     width: [{ type: Input }],
     maxWidth: [{ type: Input }]
 };
-if (false) {
-    /** @type {?} */
-    McSidebarOpened.prototype.minWidth;
-    /** @type {?} */
-    McSidebarOpened.prototype.width;
-    /** @type {?} */
-    McSidebarOpened.prototype.maxWidth;
-}
 class McSidebarClosed {
 }
 McSidebarClosed.decorators = [
@@ -87,15 +54,7 @@ McSidebarClosed.decorators = [
 McSidebarClosed.propDecorators = {
     width: [{ type: Input }]
 };
-if (false) {
-    /** @type {?} */
-    McSidebarClosed.prototype.width;
-}
 class McSidebar {
-    /**
-     * @param {?} ngZone
-     * @param {?} elementRef
-     */
     constructor(ngZone, elementRef) {
         this.ngZone = ngZone;
         this.elementRef = elementRef;
@@ -109,68 +68,40 @@ class McSidebar {
         this.stateChanged = new EventEmitter();
         this.internalState = true;
     }
-    /**
-     * @return {?}
-     */
     get opened() {
         return this._opened;
     }
-    /**
-     * @param {?} value
-     * @return {?}
-     */
     set opened(value) {
         if (this._opened) {
             this.saveWidth();
         }
         this._opened = value;
     }
-    /**
-     * @return {?}
-     */
     get animationState() {
         return this._opened ? McSidebarAnimationState.Opened : McSidebarAnimationState.Closed;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         if (this.position === SidebarPositions.Left || this.position === SidebarPositions.Right) {
             this.registerKeydownListener();
         }
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         if (this.position === SidebarPositions.Left || this.position === SidebarPositions.Right) {
             this.unRegisterKeydownListener();
         }
     }
-    /**
-     * @return {?}
-     */
     toggle() {
         this.opened = !this.opened;
     }
-    /**
-     * @return {?}
-     */
     onAnimationStart() {
         if (this._opened) {
             this.internalState = this._opened;
         }
     }
-    /**
-     * @return {?}
-     */
     onAnimationDone() {
         this.internalState = this._opened;
         this.stateChanged.emit(this._opened);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.params = {
             openedStateWidth: this.openedContent.width || 'inherit',
@@ -179,47 +110,25 @@ class McSidebar {
             closedStateWidth: this.closedContent.width || '32px'
         };
     }
-    /**
-     * @private
-     * @return {?}
-     */
     registerKeydownListener() {
-        this.documentKeydownListener = (/**
-         * @param {?} event
-         * @return {?}
-         */
-        (event) => {
+        this.documentKeydownListener = (event) => {
             if (isControl(event) || isInput(event)) {
                 return;
             }
             if ((this.position === SidebarPositions.Left && isLeftBracket(event)) ||
                 (this.position === SidebarPositions.Right && isRightBracket(event))) {
-                this.ngZone.run((/**
-                 * @return {?}
-                 */
-                () => this._opened = !this._opened));
+                this.ngZone.run(() => this._opened = !this._opened);
             }
-        });
-        this.ngZone.runOutsideAngular((/**
-         * @return {?}
-         */
-        () => {
+        };
+        this.ngZone.runOutsideAngular(() => {
             // tslint:disable-next-line: no-unbound-method
             document.addEventListener('keypress', this.documentKeydownListener, true);
-        }));
+        });
     }
-    /**
-     * @private
-     * @return {?}
-     */
     unRegisterKeydownListener() {
         // tslint:disable-next-line: no-unbound-method
         document.removeEventListener('keypress', this.documentKeydownListener, true);
     }
-    /**
-     * @private
-     * @return {?}
-     */
     saveWidth() {
         this.params.openedStateWidth = `${this.elementRef.nativeElement.offsetWidth}px`;
     }
@@ -242,7 +151,7 @@ McSidebar.decorators = [
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 styles: [".mc-sidebar{display:inline-block;height:100%;overflow:hidden}.mc-sidebar-closed,.mc-sidebar-opened{height:100%}"]
-            }] }
+            },] }
 ];
 /** @nocollapse */
 McSidebar.ctorParameters = () => [
@@ -256,46 +165,7 @@ McSidebar.propDecorators = {
     openedContent: [{ type: ContentChild, args: [McSidebarOpened, { static: false },] }],
     closedContent: [{ type: ContentChild, args: [McSidebarClosed, { static: false },] }]
 };
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    McSidebar.prototype._opened;
-    /** @type {?} */
-    McSidebar.prototype.position;
-    /** @type {?} */
-    McSidebar.prototype.params;
-    /** @type {?} */
-    McSidebar.prototype.stateChanged;
-    /** @type {?} */
-    McSidebar.prototype.openedContent;
-    /** @type {?} */
-    McSidebar.prototype.closedContent;
-    /** @type {?} */
-    McSidebar.prototype.internalState;
-    /**
-     * @type {?}
-     * @private
-     */
-    McSidebar.prototype.documentKeydownListener;
-    /**
-     * @type {?}
-     * @private
-     */
-    McSidebar.prototype.ngZone;
-    /**
-     * @type {?}
-     * @private
-     */
-    McSidebar.prototype.elementRef;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: sidebar.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McSidebarModule {
 }
 McSidebarModule.decorators = [
@@ -315,21 +185,7 @@ McSidebarModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-sidebar.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions, mcSidebarAnimations as ɵa };

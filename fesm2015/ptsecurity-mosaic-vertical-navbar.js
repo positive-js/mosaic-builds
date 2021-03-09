@@ -7,11 +7,6 @@ import { mixinTabIndex, mixinDisabled } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-/**
- * @fileoverview added by tsickle
- * Generated from: vertical-navbar-item.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McVerticalNavbarItemIcon {
 }
 McVerticalNavbarItemIcon.decorators = [
@@ -35,30 +30,17 @@ McVerticalNavbarItemBadge.decorators = [
                 host: {
                     class: 'mc-vertical-navbar__badge'
                 }
-            }] }
+            },] }
 ];
 class McVerticalNavbarItemBase {
     // tslint:disable-next-line:naming-convention
-    /**
-     * @param {?} _elementRef
-     */
     constructor(_elementRef) {
         this._elementRef = _elementRef;
     }
 }
-if (false) {
-    /** @type {?} */
-    McVerticalNavbarItemBase.prototype._elementRef;
-}
 // tslint:disable-next-line:naming-convention
-/** @type {?} */
 const McVerticalNavbarMixinBase = mixinTabIndex(mixinDisabled(McVerticalNavbarItemBase));
 class McVerticalNavbarItem extends McVerticalNavbarMixinBase {
-    /**
-     * @param {?} element
-     * @param {?} focusMonitor
-     * @param {?} trigger
-     */
     constructor(element, focusMonitor, trigger) {
         super(element);
         this.element = element;
@@ -66,15 +48,9 @@ class McVerticalNavbarItem extends McVerticalNavbarMixinBase {
         this.trigger = trigger;
         this.focusMonitor.monitor(this.element.nativeElement).subscribe();
     }
-    /**
-     * @return {?}
-     */
     get hasDropdownAttached() {
         return !!this.trigger;
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
         this.focusMonitor.stopMonitoring(this.element.nativeElement);
     }
@@ -91,8 +67,8 @@ McVerticalNavbarItem.decorators = [
                     '[attr.disabled]': 'disabled || null',
                     '[attr.tabindex]': 'tabIndex'
                 },
-                styles: [".mc-vertical-navbar__badge{left:0;position:absolute;top:0;width:var(--mc-navbar-badge-size-width,64px)}.mc-vertical-navbar__badge .mc-badge{position:absolute;right:4px;top:4px}.mc-vertical-navbar__item-icon{margin-right:var(--mc-vertical-navbar-item-size-icon-margin-right,16px)}.mc-vertical-navbar__item-icon .mc-icon{font-size:var(--mc-vertical-navbar-item-font-icon-size,32px)}.mc-vertical-navbar__title{white-space:nowrap}.mc-vertical-navbar__item-dropdown-icon{margin-left:auto;padding-left:var(--mc-vertical-navbar-item-size-padding-horizontal,16px)}a[mc-vertical-navbar-item],mc-vertical-navbar-item{align-items:center;box-sizing:border-box;cursor:pointer;display:flex;height:var(--mc-vertical-navbar-item-size-height,64px);margin:var(--mc-vertical-navbar-item-size-margin,1px 0);position:relative;text-decoration:none;width:100%}a[mc-vertical-navbar-item] .mc-vertical-navbar__item,mc-vertical-navbar-item .mc-vertical-navbar__item{align-items:center;display:flex;height:100%;padding-left:var(--mc-vertical-navbar-item-size-padding-horizontal,16px);padding-right:var(--mc-vertical-navbar-item-size-padding-horizontal,16px);width:100%}a[mc-vertical-navbar-item].mc-progress,mc-vertical-navbar-item.mc-progress{cursor:pointer}a[mc-vertical-navbar-item].mc-vertical-navbar__item_active,mc-vertical-navbar-item.mc-vertical-navbar__item_active{cursor:default}a[mc-vertical-navbar-item][disabled],mc-vertical-navbar-item[disabled]{cursor:default;pointer-events:none}"]
-            }] }
+                styles: [".mc-vertical-navbar__badge{position:absolute;width:var(--mc-navbar-badge-size-width,64px);top:0;left:0}.mc-vertical-navbar__badge .mc-badge{position:absolute;right:4px;top:4px}.mc-vertical-navbar__item-icon{margin-right:var(--mc-vertical-navbar-item-size-icon-margin-right,16px)}.mc-vertical-navbar__item-icon .mc-icon{font-size:var(--mc-vertical-navbar-item-font-icon-size,32px)}.mc-vertical-navbar__title{white-space:nowrap}.mc-vertical-navbar__item-dropdown-icon{margin-left:auto;padding-left:var(--mc-vertical-navbar-item-size-padding-horizontal,16px)}a[mc-vertical-navbar-item],mc-vertical-navbar-item{display:flex;align-items:center;box-sizing:border-box;position:relative;margin:var(--mc-vertical-navbar-item-size-margin,1px 0);width:100%;height:var(--mc-vertical-navbar-item-size-height,64px);cursor:pointer;text-decoration:none}a[mc-vertical-navbar-item] .mc-vertical-navbar__item,mc-vertical-navbar-item .mc-vertical-navbar__item{display:flex;align-items:center;width:100%;height:100%;padding-left:var(--mc-vertical-navbar-item-size-padding-horizontal,16px);padding-right:var(--mc-vertical-navbar-item-size-padding-horizontal,16px)}a[mc-vertical-navbar-item].mc-progress,mc-vertical-navbar-item.mc-progress{cursor:pointer}a[mc-vertical-navbar-item].mc-vertical-navbar__item_active,mc-vertical-navbar-item.mc-vertical-navbar__item_active{cursor:default}a[mc-vertical-navbar-item][disabled],mc-vertical-navbar-item[disabled]{cursor:default;pointer-events:none}"]
+            },] }
 ];
 /** @nocollapse */
 McVerticalNavbarItem.ctorParameters = () => [
@@ -100,32 +76,7 @@ McVerticalNavbarItem.ctorParameters = () => [
     { type: FocusMonitor },
     { type: McDropdownTrigger, decorators: [{ type: Optional }, { type: Self }] }
 ];
-if (false) {
-    /**
-     * @type {?}
-     * @private
-     */
-    McVerticalNavbarItem.prototype.element;
-    /**
-     * @type {?}
-     * @private
-     */
-    McVerticalNavbarItem.prototype.focusMonitor;
-    /**
-     * @type {?}
-     * @private
-     */
-    McVerticalNavbarItem.prototype.trigger;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: vertical-navbar.animation.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
- * @return {?}
- */
 function toggleVerticalNavbarAnimation() {
     return trigger('toggle', [
         state('0', style({
@@ -138,11 +89,6 @@ function toggleVerticalNavbarAnimation() {
     ]);
 }
 
-/**
- * @fileoverview added by tsickle
- * Generated from: vertical-navbar.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class McVerticalNavbarHeader {
 }
 McVerticalNavbarHeader.decorators = [
@@ -164,16 +110,10 @@ McVerticalNavbarTitle.decorators = [
             },] }
 ];
 class McVerticalNavbar {
-    /**
-     * @param {?} cd
-     */
     constructor(cd) {
         this.cd = cd;
         this.expanded = false;
     }
-    /**
-     * @return {?}
-     */
     toggle() {
         this.expanded = !this.expanded;
         this.cd.markForCheck();
@@ -188,8 +128,8 @@ McVerticalNavbar.decorators = [
                 animations: [
                     toggleVerticalNavbarAnimation()
                 ],
-                styles: [".mc-vertical-navbar{align-items:flex-start;display:flex;flex-direction:column;height:100%;left:0;min-height:100%;overflow:hidden;position:fixed;top:0;z-index:100}.mc-vertical-navbar .mc-vertical-navbar__header-area{align-items:stretch;box-sizing:border-box;display:flex;min-height:64px;width:100%}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__header{-ms-grid-row-align:stretch;align-items:center;align-self:stretch;display:flex;height:100%;justify-content:stretch;text-decoration:none}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__toggle-button{-ms-grid-row-align:stretch;align-items:center;align-self:stretch;cursor:pointer;display:flex;flex:0 0 auto;justify-content:center;width:64px}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__title{padding:0 16px}"]
-            }] }
+                styles: [".mc-vertical-navbar{height:100%;position:fixed;left:0;top:0;z-index:100;display:flex;flex-direction:column;align-items:flex-start;min-height:100%;overflow:hidden}.mc-vertical-navbar .mc-vertical-navbar__header-area{display:flex;width:100%;align-items:stretch;box-sizing:border-box;min-height:64px}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__header{display:flex;height:100%;justify-content:stretch;text-decoration:none;align-self:stretch;align-items:center}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__toggle-button{cursor:pointer;display:flex;flex:0 0 auto;justify-content:center;align-items:center;align-self:stretch;width:64px}.mc-vertical-navbar .mc-vertical-navbar__header-area .mc-vertical-navbar__title{padding:0 16px}"]
+            },] }
 ];
 /** @nocollapse */
 McVerticalNavbar.ctorParameters = () => [
@@ -198,22 +138,7 @@ McVerticalNavbar.ctorParameters = () => [
 McVerticalNavbar.propDecorators = {
     expanded: [{ type: Input }]
 };
-if (false) {
-    /** @type {?} */
-    McVerticalNavbar.prototype.expanded;
-    /**
-     * @type {?}
-     * @private
-     */
-    McVerticalNavbar.prototype.cd;
-}
 
-/**
- * @fileoverview added by tsickle
- * Generated from: vertical-navbar.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
 const COMPONENTS = [
     McVerticalNavbar,
     McVerticalNavbarTitle,
@@ -238,21 +163,7 @@ McVerticalNavbarModule.decorators = [
 ];
 
 /**
- * @fileoverview added by tsickle
- * Generated from: public-api.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: index.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-
-/**
- * @fileoverview added by tsickle
- * Generated from: ptsecurity-mosaic-vertical-navbar.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
 export { McVerticalNavbar, McVerticalNavbarHeader, McVerticalNavbarItem, McVerticalNavbarItemBadge, McVerticalNavbarItemIcon, McVerticalNavbarMixinBase, McVerticalNavbarModule, McVerticalNavbarTitle, toggleVerticalNavbarAnimation as ɵa };
