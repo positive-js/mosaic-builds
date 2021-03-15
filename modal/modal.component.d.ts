@@ -84,6 +84,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     getContentComponentRef(): ComponentRef<T>;
     getContentComponent(): T;
     getElement(): HTMLElement;
+    getMcFooter(): HTMLElement;
     onClickMask($event: MouseEvent): void;
     isModalType(type: ModalType): boolean;
     onKeyDown(event: KeyboardEvent): void;
