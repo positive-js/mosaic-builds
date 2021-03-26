@@ -485,7 +485,9 @@
                 return _this;
             }
             Object.defineProperty(Mixin.prototype, "tabIndex", {
-                get: function () { return this.disabled ? -1 : this._tabIndex; },
+                get: function () {
+                    return this.disabled ? -1 : this._tabIndex;
+                },
                 set: function (value) {
                     // If the specified tabIndex value is null or undefined, fall back to the default value.
                     this._tabIndex = value != null ? coercion.coerceNumberProperty(value) : this.defaultTabIndex;

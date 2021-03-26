@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/link', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.link = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core));
-}(this, (function (exports, a11y, common, core$1, core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/icon')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/link', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/icon'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.link = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic.icon));
+}(this, (function (exports, a11y, common, core$1, core, icon) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -314,20 +314,24 @@
     }
 
     var McLinkBase = /** @class */ (function () {
-        function McLinkBase(elementRef) {
-            this.elementRef = elementRef;
+        function McLinkBase() {
         }
         return McLinkBase;
     }());
     // tslint:disable-next-line: naming-convention
     var McLinkMixinBase = core.mixinTabIndex(core.mixinDisabled(McLinkBase));
+    var baseURLRegex = /^http(s)?:\/\//;
     var McLink = /** @class */ (function (_super) {
         __extends(McLink, _super);
         function McLink(elementRef, focusMonitor, changeDetector) {
-            var _this = _super.call(this, elementRef) || this;
+            var _this = _super.call(this) || this;
+            _this.elementRef = elementRef;
             _this.focusMonitor = focusMonitor;
             _this.changeDetector = changeDetector;
             _this._disabled = false;
+            _this._pseudo = false;
+            _this._noUnderline = false;
+            _this._useVisited = false;
             _this.focusMonitor.monitor(elementRef.nativeElement, true);
             return _this;
         }
@@ -345,6 +349,55 @@
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(McLink.prototype, "pseudo", {
+            get: function () {
+                return this._pseudo;
+            },
+            set: function (value) {
+                this._pseudo = core.toBoolean(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McLink.prototype, "noUnderline", {
+            get: function () {
+                return this._noUnderline;
+            },
+            set: function (value) {
+                this._noUnderline = core.toBoolean(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McLink.prototype, "useVisited", {
+            get: function () {
+                return this._useVisited;
+            },
+            set: function (value) {
+                this._useVisited = core.toBoolean(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McLink.prototype, "hasIcon", {
+            get: function () {
+                return !!this.icon;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McLink.prototype, "print", {
+            get: function () {
+                var _a;
+                return this._print || ((_a = this.getHostElement().href) === null || _a === void 0 ? void 0 : _a.replace(baseURLRegex, ''));
+            },
+            set: function (value) {
+                this.printMode = core.toBoolean(value);
+                this._print = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
         McLink.prototype.ngOnDestroy = function () {
             this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
         };
@@ -358,12 +411,20 @@
     }(McLinkMixinBase));
     McLink.decorators = [
         { type: core$1.Directive, args: [{
-                    selector: 'a.mc-link',
+                    selector: '[mc-link]',
                     exportAs: 'mcLink',
                     inputs: ['tabIndex'],
                     host: {
+                        class: 'mc-link',
+                        '[class.mc-link_no-underline]': 'noUnderline',
+                        '[class.mc-link_use-visited]': 'useVisited',
+                        '[class.mc-link_pseudo]': 'pseudo',
+                        '[class.mc-link_print]': 'printMode',
+                        '[class.mc-text-only]': '!hasIcon',
+                        '[class.mc-text-with-icon]': 'hasIcon',
                         '[attr.disabled]': 'disabled || null',
-                        '[attr.tabindex]': 'tabIndex'
+                        '[attr.tabindex]': 'tabIndex',
+                        '[attr.print]': 'print'
                     }
                 },] }
     ];
@@ -374,7 +435,12 @@
         { type: core$1.ChangeDetectorRef }
     ]; };
     McLink.propDecorators = {
-        disabled: [{ type: core$1.Input }]
+        disabled: [{ type: core$1.Input }],
+        pseudo: [{ type: core$1.Input }],
+        noUnderline: [{ type: core$1.Input }],
+        useVisited: [{ type: core$1.Input }],
+        print: [{ type: core$1.Input }],
+        icon: [{ type: core$1.ContentChild, args: [icon.McIcon,] }]
     };
 
     var McLinkModule = /** @class */ (function () {
@@ -401,6 +467,7 @@
     exports.McLinkBase = McLinkBase;
     exports.McLinkMixinBase = McLinkMixinBase;
     exports.McLinkModule = McLinkModule;
+    exports.baseURLRegex = baseURLRegex;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

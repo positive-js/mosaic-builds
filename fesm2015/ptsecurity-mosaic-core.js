@@ -149,7 +149,9 @@ function mixinTabIndex(base, defaultTabIndex = 0) {
             this._tabIndex = defaultTabIndex;
             this.defaultTabIndex = defaultTabIndex;
         }
-        get tabIndex() { return this.disabled ? -1 : this._tabIndex; }
+        get tabIndex() {
+            return this.disabled ? -1 : this._tabIndex;
+        }
         set tabIndex(value) {
             // If the specified tabIndex value is null or undefined, fall back to the default value.
             this._tabIndex = value != null ? coerceNumberProperty(value) : this.defaultTabIndex;
