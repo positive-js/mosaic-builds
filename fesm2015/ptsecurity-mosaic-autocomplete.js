@@ -640,7 +640,12 @@ class McAutocompleteTrigger {
      * correct options, or to 0 if the consumer opted into it.
      */
     resetActiveItem() {
-        this.autocomplete.keyManager.setActiveItem(this.autocomplete.autoActiveFirstOption ? 0 : -1);
+        if (this.autocomplete.autoActiveFirstOption) {
+            this.autocomplete.keyManager.setFirstItemActive();
+        }
+        else {
+            this.autocomplete.keyManager.setActiveItem(-1);
+        }
     }
     canOpen() {
         const element = this.elementRef.nativeElement;
