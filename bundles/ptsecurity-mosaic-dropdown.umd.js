@@ -1055,6 +1055,7 @@
         McDropdownTrigger.prototype.handleKeydown = function (event) {
             // tslint:disable-next-line:deprecation
             var keyCode = event.key || event.keyCode;
+            this.openedBy = 'keyboard';
             if (keyCode === keycodes.SPACE || keyCode === keycodes.ENTER) {
                 this.open();
             }
@@ -1115,7 +1116,7 @@
             this.dropdown.parent = this.triggersNestedDropdown() ? this._parent : undefined;
             this.dropdown.direction = this.dir;
             this.setIsOpened(true);
-            this.dropdown.focusFirstItem(this.openedBy || 'program');
+            this.dropdown.focusFirstItem(this.openedBy);
         };
         /**
          * This method resets the dropdown when it's closed, most importantly restoring

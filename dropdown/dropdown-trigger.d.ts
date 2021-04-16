@@ -35,7 +35,7 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** References the dropdown instance that the trigger is associated with. */
     get dropdown(): McDropdownPanel;
     set dropdown(dropdown: McDropdownPanel);
-    openedBy: 'mouse' | 'touch' | null;
+    openedBy: 'mouse' | 'touch' | 'keyboard' | null;
     /** Data to be passed along to any lazily-rendered content. */
     data: any;
     /** Event emitted when the associated dropdown is opened. */
