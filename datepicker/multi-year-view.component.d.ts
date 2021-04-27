@@ -1,7 +1,7 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { AfterContentInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
-import { McCalendarBody, McCalendarCell } from './calendar-body';
+import { McCalendarBody, McCalendarCell } from './calendar-body.component';
 export declare const yearsPerPage = 24;
 export declare const yearsPerRow = 4;
 /**
@@ -9,7 +9,7 @@ export declare const yearsPerRow = 4;
  * @docs-private
  */
 export declare class McMultiYearView<D> implements AfterContentInit {
-    private changeDetectorRef;
+    private readonly changeDetectorRef;
     dateAdapter: DateAdapter<D>;
     private dir?;
     /** The date to display in this multi-year view (everything other than the year is ignored). */

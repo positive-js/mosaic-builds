@@ -40,7 +40,7 @@ class McTextarea extends McTextareaMixinBase {
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        this.controlType = 'mc-textarea';
+        this.controlType = 'textarea';
         this.uid = `mc-textsrea-${nextUniqueId++}`;
         this._disabled = false;
         this._required = false;

@@ -746,6 +746,8 @@
                 },] }
     ];
 
+    var validationTooltipShowDelay = 10;
+    var validationTooltipHideDelay = 3000;
     var MC_VALIDATION = new i0.InjectionToken('McUseValidation', { factory: function () { return ({ useValidation: true }); } });
     function setValidState(control, validator) {
         if (!control) {
@@ -1731,6 +1733,8 @@
     exports.setMosaicValidationForFormControl = setMosaicValidationForFormControl;
     exports.setMosaicValidationForModelControl = setMosaicValidationForModelControl;
     exports.toBoolean = toBoolean;
+    exports.validationTooltipHideDelay = validationTooltipHideDelay;
+    exports.validationTooltipShowDelay = validationTooltipShowDelay;
     exports.ɵa = mcSanityChecksFactory;
 
     Object.defineProperty(exports, '__esModule', { value: true });

@@ -517,7 +517,7 @@
              * Implemented as part of McFormFieldControl.
              * @docs-private
              */
-            _this.controlType = 'mc-input';
+            _this.controlType = 'input';
             _this.uid = "mc-input-" + nextUniqueId++;
             _this.neverEmptyInputTypes = [
                 'date',

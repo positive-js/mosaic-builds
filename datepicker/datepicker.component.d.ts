@@ -4,9 +4,9 @@ import { ComponentType } from '@angular/cdk/portal';
 import { AfterViewInit, EventEmitter, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { Subject } from 'rxjs';
-import { McCalendar } from './calendar';
-import { McCalendarCellCssClasses } from './calendar-body';
-import { McDatepickerInput } from './datepicker-input';
+import { McCalendarCellCssClasses } from './calendar-body.component';
+import { McCalendar, McCalendarView } from './calendar.component';
+import { McDatepickerInput } from './datepicker-input.directive';
 /** Injection token that determines the scroll handling while the calendar is open. */
 export declare const MC_DATEPICKER_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
@@ -36,7 +36,7 @@ export declare class McDatepicker<D> implements OnDestroy {
     private overlay;
     private ngZone;
     private viewContainerRef;
-    private dateAdapter;
+    private readonly dateAdapter;
     private dir;
     private document;
     get hasBackdrop(): boolean;
@@ -45,12 +45,15 @@ export declare class McDatepicker<D> implements OnDestroy {
     /** The date to open the calendar to initially. */
     get startAt(): D | null;
     set startAt(value: D | null);
+    private _startAt;
     /** Whether the datepicker pop-up should be disabled. */
     get disabled(): boolean;
     set disabled(value: boolean);
+    private _disabled;
     /** Whether the calendar is open. */
     get opened(): boolean;
     set opened(value: boolean);
+    private _opened;
     /** The currently selected date. */
     get selected(): D | null;
     set selected(value: D | null);
@@ -63,7 +66,7 @@ export declare class McDatepicker<D> implements OnDestroy {
     /** An input indicating the type of the custom header component for the calendar, if set. */
     calendarHeaderComponent: ComponentType<any>;
     /** The view that the calendar should start in. */
-    startView: 'month' | 'year' | 'multi-year';
+    startView: McCalendarView;
     /**
      * Emits selected year in multiyear view.
      * This doesn't imply a change on the selected date.
@@ -95,9 +98,6 @@ export declare class McDatepicker<D> implements OnDestroy {
     /** Emits new selected date when selected date changes. */
     readonly selectedChanged: Subject<D>;
     private scrollStrategy;
-    private _startAt;
-    private _disabled;
-    private _opened;
     private validSelected;
     /** A portal containing the calendar for this datepicker. */
     private calendarPortal;
@@ -124,7 +124,8 @@ export declare class McDatepicker<D> implements OnDestroy {
     /** Open the calendar. */
     open(): void;
     /** Close the calendar. */
-    close(): void;
+    close(restoreFocus?: boolean): void;
+    toggle(): void;
     /** Open the calendar as a popup. */
     private openAsPopup;
     /** Create the popup. */

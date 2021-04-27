@@ -2,22 +2,26 @@ import { ComponentType, Portal } from '@angular/cdk/portal';
 import { AfterContentInit, AfterViewChecked, ChangeDetectorRef, EventEmitter, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { DateAdapter, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { Subject } from 'rxjs';
-import { McCalendarCellCssClasses } from './calendar-body';
+import { McCalendarCellCssClasses } from './calendar-body.component';
 import { McDatepickerIntl } from './datepicker-intl';
-import { McMonthView } from './month-view';
-import { McMultiYearView } from './multi-year-view';
-import { McYearView } from './year-view';
+import { McMonthView } from './month-view.component';
+import { McMultiYearView } from './multi-year-view.component';
+import { McYearView } from './year-view.component';
 /**
  * Possible views for the calendar.
  * @docs-private
  */
-export declare type McCalendarView = 'month' | 'year' | 'multi-year';
+export declare enum McCalendarView {
+    Month = "month",
+    Year = "year",
+    MultiYear = "multi-year"
+}
 /** Default header for McCalendar */
 export declare class McCalendarHeader<D> {
-    private intl;
+    private readonly intl;
     calendar: McCalendar<D>;
-    private dateAdapter;
-    private dateFormats;
+    private readonly dateAdapter;
+    private readonly dateFormats;
     constructor(intl: McDatepickerIntl, calendar: McCalendar<D>, dateAdapter: DateAdapter<D>, dateFormats: McDateFormats, changeDetectorRef: ChangeDetectorRef);
     /** The label for the current calendar view. */
     get periodButtonText(): string;
@@ -44,8 +48,8 @@ export declare class McCalendarHeader<D> {
  * @docs-private
  */
 export declare class McCalendar<D> implements AfterContentInit, AfterViewChecked, OnDestroy, OnChanges {
-    private dateAdapter;
-    private dateFormats;
+    private readonly dateAdapter;
+    private readonly dateFormats;
     private changeDetectorRef;
     /** A date representing the period (month or year) to start the calendar in. */
     get startAt(): D | null;
@@ -102,7 +106,7 @@ export declare class McCalendar<D> implements AfterContentInit, AfterViewChecked
      * Emits whenever there is a state change that the header may need to respond to.
      */
     stateChanges: Subject<void>;
-    private intlChanges;
+    private readonly intlChanges;
     /**
      * Used for scheduling that focus should be moved to the active cell on the next tick.
      * We need to schedule it, rather than do it immediately, because we have to wait
@@ -131,7 +135,7 @@ export declare class McCalendar<D> implements AfterContentInit, AfterViewChecked
     monthSelectedInYearView(normalizedMonth: D): void;
     userSelected(): void;
     /** Handles year/month selection in the multi-year/year views. */
-    goToDateInView(date: D, view: 'month' | 'year' | 'multi-year'): void;
+    goToDateInView(date: D, view: McCalendarView | string): void;
     /**
      * @param obj The object to check.
      * @returns The given object if it is both a date instance and valid, otherwise null.

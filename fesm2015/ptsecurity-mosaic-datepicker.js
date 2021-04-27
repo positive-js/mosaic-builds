@@ -2,60 +2,20 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { DOCUMENT, CommonModule } from '@angular/common';
-import { ɵɵdefineInjectable, Injectable, EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, NgZone, Input, Output, ChangeDetectorRef, Optional, Inject, ViewChild, forwardRef, InjectionToken, ViewContainerRef, Directive, ContentChild, NgModule } from '@angular/core';
+import { EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, NgZone, Input, Output, ɵɵdefineInjectable, Injectable, ChangeDetectorRef, Optional, Inject, ViewChild, forwardRef, InjectionToken, ViewContainerRef, Directive, Renderer2, ContentChild, NgModule } from '@angular/core';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { take } from 'rxjs/operators';
 import { MC_DATE_FORMATS, DateAdapter } from '@ptsecurity/cdk/datetime';
 import { Subject, Subscription, merge, of } from 'rxjs';
 import { Directionality } from '@angular/cdk/bidi';
-import { SPACE, ENTER, PAGE_DOWN, PAGE_UP, END, HOME, DOWN_ARROW, UP_ARROW, RIGHT_ARROW, LEFT_ARROW, ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { take, filter } from 'rxjs/operators';
+import { SPACE, ENTER, PAGE_DOWN, PAGE_UP, END, HOME, DOWN_ARROW, UP_ARROW, RIGHT_ARROW, LEFT_ARROW, TAB, ESCAPE, isLetterKey, hasModifierKey, isVerticalMovement, isHorizontalMovement, DELETE, BACKSPACE } from '@ptsecurity/cdk/keycodes';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators } from '@angular/forms';
-import { MC_INPUT_VALUE_ACCESSOR } from '@ptsecurity/mosaic/input';
-
-/** @docs-private */
-function createMissingDateImplError(provider) {
-    return Error(`McDatepicker: No provider found for ${provider}. You must import one of the existing ` +
-        `modules at your application root or provide a custom implementation or use exists ones.`);
-}
-
-/** Datepicker data that requires internationalization. */
-class McDatepickerIntl {
-    constructor() {
-        /**
-         * Stream that emits whenever the labels here are changed. Use this to notify
-         * components if the labels have changed after initialization.
-         */
-        this.changes = new Subject();
-        /** A label for the calendar popup (used by screen readers). */
-        this.calendarLabel = 'Calendar';
-        /** A label for the button used to open the calendar popup (used by screen readers). */
-        this.openCalendarLabel = 'Open calendar';
-        /** A label for the previous month button (used by screen readers). */
-        this.prevMonthLabel = 'Previous month';
-        /** A label for the next month button (used by screen readers). */
-        this.nextMonthLabel = 'Next month';
-        /** A label for the previous year button (used by screen readers). */
-        this.prevYearLabel = 'Previous year';
-        /** A label for the next year button (used by screen readers). */
-        this.nextYearLabel = 'Next year';
-        /** A label for the previous multi-year button (used by screen readers). */
-        this.prevMultiYearLabel = 'Previous 20 years';
-        /** A label for the next multi-year button (used by screen readers). */
-        this.nextMultiYearLabel = 'Next 20 years';
-        /** A label for the 'switch to month view' button (used by screen readers). */
-        this.switchToMonthViewLabel = 'Choose date';
-        /** A label for the 'switch to year view' button (used by screen readers). */
-        this.switchToMultiYearViewLabel = 'Choose month and year';
-    }
-}
-/** @nocollapse */ McDatepickerIntl.ɵprov = ɵɵdefineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
-McDatepickerIntl.decorators = [
-    { type: Injectable, args: [{ providedIn: 'root' },] }
-];
+import { validationTooltipShowDelay, validationTooltipHideDelay } from '@ptsecurity/mosaic/core';
+import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import '@ptsecurity/mosaic/tooltip';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 // tslint:disable:no-magic-numbers
 /**
@@ -134,7 +94,7 @@ McCalendarBody.decorators = [
     { type: Component, args: [{
                 selector: '[mc-calendar-body]',
                 exportAs: 'mcCalendarBody',
-                template: "<!--\n  If there's not enough space in the first row, create a separate label row. We mark this row as\n  aria-hidden because we don't want it to be read out as one of the weeks in the month.\n-->\n<tr *ngIf=\"firstRowOffset < labelMinRequiredCells\" aria-hidden=\"true\">\n    <td class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"numCols\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{label}}\n    </td>\n</tr>\n\n<!-- Create the first row separately so we can include a special spacer cell. -->\n<tr *ngFor=\"let row of rows; let rowIndex = index\" role=\"row\">\n    <!--\n      We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.\n      The aspect ratio of the table cells is maintained by setting the top and bottom padding as a\n      percentage of the width (a variant of the trick described here:\n      https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).\n    -->\n    <td *ngIf=\"rowIndex === 0 && firstRowOffset\"\n        aria-hidden=\"true\"\n        class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"firstRowOffset\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{firstRowOffset >= labelMinRequiredCells ? label : ''}}\n    </td>\n    <td *ngFor=\"let item of row; let colIndex = index\"\n        role=\"gridcell\"\n        class=\"mc-calendar__body-cell\"\n        [ngClass]=\"item.cssClasses\"\n        [tabindex]=\"isActiveCell(rowIndex, colIndex) ? 0 : -1\"\n        [class.mc-calendar__body_disabled]=\"!item.enabled\"\n        [class.mc-calendar__body_active]=\"isActiveCell(rowIndex, colIndex)\"\n        [attr.aria-label]=\"item.ariaLabel\"\n        [attr.aria-disabled]=\"!item.enabled || null\"\n        [attr.aria-selected]=\"selectedValue === item.value\"\n        (click)=\"cellClicked(item)\"\n        [style.width]=\"cellWidth\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        <div class=\"mc-calendar__body-cell-content\"\n             [class.mc-selected]=\"selectedValue === item.value\"\n             [class.mc-calendar__body-today]=\"todayValue === item.value\">\n            {{item.displayValue}}\n        </div>\n    </td>\n</tr>\n",
+                template: "<!--\n  If there's not enough space in the first row, create a separate label row. We mark this row as\n  aria-hidden because we don't want it to be read out as one of the weeks in the month.\n-->\n<tr *ngIf=\"firstRowOffset < labelMinRequiredCells\">\n    <td class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"numCols\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{ label }}\n    </td>\n</tr>\n\n<!-- Create the first row separately so we can include a special spacer cell. -->\n<tr *ngFor=\"let row of rows; let rowIndex = index\">\n    <!--\n      We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.\n      The aspect ratio of the table cells is maintained by setting the top and bottom padding as a\n      percentage of the width (a variant of the trick described here:\n      https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).\n    -->\n    <td *ngIf=\"rowIndex === 0 && firstRowOffset\"\n        class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"firstRowOffset\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        {{ firstRowOffset >= labelMinRequiredCells ? label : '' }}\n    </td>\n    <td *ngFor=\"let item of row; let colIndex = index\"\n        class=\"mc-calendar__body-cell\"\n        [ngClass]=\"item.cssClasses\"\n        [tabindex]=\"isActiveCell(rowIndex, colIndex) ? 0 : -1\"\n        [class.mc-calendar__body_disabled]=\"!item.enabled\"\n        [class.mc-calendar__body_active]=\"isActiveCell(rowIndex, colIndex)\"\n        (click)=\"cellClicked(item)\"\n        [style.width]=\"cellWidth\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        <div class=\"mc-calendar__body-cell-content\"\n             [class.mc-selected]=\"selectedValue === item.value\"\n             [class.mc-calendar__body-today]=\"todayValue === item.value\">\n            {{ item.displayValue }}\n        </div>\n    </td>\n</tr>\n",
                 host: {
                     class: 'mc-calendar__body',
                     role: 'grid',
@@ -161,6 +121,47 @@ McCalendarBody.propDecorators = {
     cellAspectRatio: [{ type: Input }],
     selectedValueChange: [{ type: Output }]
 };
+
+/** @docs-private */
+function createMissingDateImplError(provider) {
+    return Error(`McDatepicker: No provider found for ${provider}. You must import one of the existing ` +
+        `modules at your application root or provide a custom implementation or use exists ones.`);
+}
+
+/** Datepicker data that requires internationalization. */
+class McDatepickerIntl {
+    constructor() {
+        /**
+         * Stream that emits whenever the labels here are changed. Use this to notify
+         * components if the labels have changed after initialization.
+         */
+        this.changes = new Subject();
+        /** A label for the calendar popup (used by screen readers). */
+        this.calendarLabel = 'Calendar';
+        /** A label for the button used to open the calendar popup (used by screen readers). */
+        this.openCalendarLabel = 'Open calendar';
+        /** A label for the previous month button (used by screen readers). */
+        this.prevMonthLabel = 'Previous month';
+        /** A label for the next month button (used by screen readers). */
+        this.nextMonthLabel = 'Next month';
+        /** A label for the previous year button (used by screen readers). */
+        this.prevYearLabel = 'Previous year';
+        /** A label for the next year button (used by screen readers). */
+        this.nextYearLabel = 'Next year';
+        /** A label for the previous multi-year button (used by screen readers). */
+        this.prevMultiYearLabel = 'Previous 20 years';
+        /** A label for the next multi-year button (used by screen readers). */
+        this.nextMultiYearLabel = 'Next 20 years';
+        /** A label for the 'switch to month view' button (used by screen readers). */
+        this.switchToMonthViewLabel = 'Choose date';
+        /** A label for the 'switch to year view' button (used by screen readers). */
+        this.switchToMultiYearViewLabel = 'Choose month and year';
+    }
+}
+/** @nocollapse */ McDatepickerIntl.ɵprov = ɵɵdefineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
+McDatepickerIntl.decorators = [
+    { type: Injectable, args: [{ providedIn: 'root' },] }
+];
 
 // tslint:disable:no-magic-numbers
 const DAYS_PER_WEEK = 7;
@@ -325,14 +326,16 @@ class McMonthView {
         const daysInMonth = this.dateAdapter.getNumDaysInMonth(this.activeDate);
         const dateNames = this.dateAdapter.getDateNames();
         this.weeks = [[]];
-        for (let i = 0, cell = this.firstWeekOffset; i < daysInMonth; i++, cell++) {
+        let cell = this.firstWeekOffset;
+        for (let i = 0; i < daysInMonth; i++) {
+            cell++;
             if (cell === DAYS_PER_WEEK) {
                 this.weeks.push([]);
                 cell = 0;
             }
             const date = this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), this.dateAdapter.getMonth(this.activeDate), i + 1);
             const enabled = this.shouldEnableDate(date);
-            const ariaLabel = this.dateAdapter.format(date, this.dateFormats.display.dateA11yLabel);
+            const ariaLabel = this.dateAdapter.format(date, this.dateFormats.dateA11yLabel);
             const cellClasses = this.dateClass ? this.dateClass(date) : undefined;
             this.weeks[this.weeks.length - 1]
                 .push(new McCalendarCell(i + 1, dateNames[i], ariaLabel, enabled, cellClasses));
@@ -374,7 +377,7 @@ McMonthView.decorators = [
     { type: Component, args: [{
                 selector: 'mc-month-view',
                 exportAs: 'mcMonthView',
-                template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th *ngFor=\"let day of weekdays\" [attr.aria-label]=\"day.long\">{{day.narrow}}</th>\n    </tr>\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"7\" aria-hidden=\"true\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"monthLabel\"\n           [rows]=\"weeks\"\n           [todayValue]=\"todayDate\"\n           [selectedValue]=\"selectedDate\"\n           [labelMinRequiredCells]=\"3\"\n           [activeCell]=\"dateAdapter.getDate(activeDate) - 1\"\n           (selectedValueChange)=\"dateSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
+                template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n        <tr>\n            <th *ngFor=\"let day of weekdays\" [attr.aria-label]=\"day.long\">{{day.narrow}}</th>\n        </tr>\n        <tr>\n            <th class=\"mc-calendar__table-header-divider\" colspan=\"7\"></th>\n        </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"monthLabel\"\n           [rows]=\"weeks\"\n           [todayValue]=\"todayDate\"\n           [selectedValue]=\"selectedDate\"\n           [labelMinRequiredCells]=\"3\"\n           [activeCell]=\"dateAdapter.getDate(activeDate) - 1\"\n           (selectedValueChange)=\"dateSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
@@ -667,10 +670,11 @@ class McYearView {
     }
     /** Handles when a new month is selected. */
     onMonthSelected(month) {
-        const normalizedDate = this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1);
+        const year = this.dateAdapter.getYear(this.activeDate);
+        const normalizedDate = this.dateAdapter.createDate(year, month, 1);
         this.monthSelected.emit(normalizedDate);
         const daysInMonth = this.dateAdapter.getNumDaysInMonth(normalizedDate);
-        this.selectedChange.emit(this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth)));
+        this.selectedChange.emit(this.dateAdapter.createDate(year, month, Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth)));
     }
     /** Handles keydown events on the calendar body when calendar is in year view. */
     handleCalendarBodyKeydown(event) {
@@ -750,7 +754,7 @@ class McYearView {
     }
     /** Creates an McCalendarCell for the given month. */
     createCellForMonth(month, monthName) {
-        const ariaLabel = this.dateAdapter.format(this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1), this.dateFormats.display.monthYearA11yLabel);
+        const ariaLabel = this.dateAdapter.format(this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1), this.dateFormats.monthYearA11yLabel);
         const newMonthName = monthName[0].toLocaleUpperCase() + monthName.substr(1);
         return new McCalendarCell(month, newMonthName, ariaLabel, this.shouldEnableMonth(month));
     }
@@ -838,6 +842,16 @@ McYearView.propDecorators = {
     mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody, { static: false },] }]
 };
 
+/**
+ * Possible views for the calendar.
+ * @docs-private
+ */
+var McCalendarView;
+(function (McCalendarView) {
+    McCalendarView["Month"] = "month";
+    McCalendarView["Year"] = "year";
+    McCalendarView["MultiYear"] = "multi-year";
+})(McCalendarView || (McCalendarView = {}));
 /** Default header for McCalendar */
 class McCalendarHeader {
     constructor(intl, calendar, dateAdapter, dateFormats, changeDetectorRef) {
@@ -849,12 +863,11 @@ class McCalendarHeader {
     }
     /** The label for the current calendar view. */
     get periodButtonText() {
-        if (this.calendar.currentView === 'month') {
-            const label = this.dateAdapter
-                .format(this.calendar.activeDate, this.dateFormats.display.monthYearLabel);
+        if (this.calendar.currentView === McCalendarView.Month) {
+            const label = this.dateAdapter.format(this.calendar.activeDate, this.dateFormats.monthYearLabel);
             return label[0].toLocaleUpperCase() + label.substr(1);
         }
-        if (this.calendar.currentView === 'year') {
+        if (this.calendar.currentView === McCalendarView.Year) {
             return this.dateAdapter.getYearName(this.calendar.activeDate);
         }
         const activeYear = this.dateAdapter.getYear(this.calendar.activeDate);
@@ -867,73 +880,87 @@ class McCalendarHeader {
         return `${firstYearInView} \u2013 ${lastYearInView}`;
     }
     get periodButtonLabel() {
-        return this.calendar.currentView === 'month' ?
+        return this.calendar.currentView === McCalendarView.Month ?
             this.intl.switchToMultiYearViewLabel : this.intl.switchToMonthViewLabel;
     }
     /** The label for the previous button. */
     get prevButtonLabel() {
         return {
-            month: this.intl.prevMonthLabel,
-            year: this.intl.prevYearLabel,
-            'multi-year': this.intl.prevMultiYearLabel
+            [McCalendarView.Month]: this.intl.prevMonthLabel,
+            [McCalendarView.Year]: this.intl.prevYearLabel,
+            [McCalendarView.MultiYear]: this.intl.prevMultiYearLabel
         }[this.calendar.currentView];
     }
     /** The label for the next button. */
     get nextButtonLabel() {
         return {
-            month: this.intl.nextMonthLabel,
-            year: this.intl.nextYearLabel,
-            'multi-year': this.intl.nextMultiYearLabel
+            [McCalendarView.Month]: this.intl.nextMonthLabel,
+            [McCalendarView.Year]: this.intl.nextYearLabel,
+            [McCalendarView.MultiYear]: this.intl.nextMultiYearLabel
         }[this.calendar.currentView];
     }
     /** Handles user clicks on the period label. */
     currentPeriodClicked() {
-        this.calendar.currentView = this.calendar.currentView === 'month' ? 'multi-year' : 'month';
+        if ([McCalendarView.Month, McCalendarView.MultiYear].includes(this.calendar.currentView)) {
+            this.calendar.currentView = McCalendarView.Year;
+        }
+        else if (this.calendar.currentView === McCalendarView.Year) {
+            this.calendar.currentView = McCalendarView.Month;
+        }
     }
     /** Handles user clicks on the previous button. */
     previousClicked() {
-        this.calendar.activeDate = this.calendar.currentView === 'month' ?
-            this.dateAdapter.addCalendarMonths(this.calendar.activeDate, -1) :
-            this.dateAdapter.addCalendarYears(this.calendar.activeDate, this.calendar.currentView === 'year' ? -1 : -yearsPerPage);
+        if (this.calendar.currentView === McCalendarView.Month) {
+            this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, -1);
+        }
+        else {
+            this.calendar.activeDate = this.dateAdapter.addCalendarYears(this.calendar.activeDate, this.calendar.currentView === McCalendarView.Year ? -1 : -yearsPerPage);
+        }
     }
     /** Handles user clicks on the next button. */
     nextClicked() {
-        this.calendar.activeDate = this.calendar.currentView === 'month' ?
-            this.dateAdapter.addCalendarMonths(this.calendar.activeDate, 1) :
-            this.dateAdapter.addCalendarYears(this.calendar.activeDate, this.calendar.currentView === 'year' ? 1 : yearsPerPage);
+        if (this.calendar.currentView === McCalendarView.Month) {
+            this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, 1);
+        }
+        else {
+            this.calendar.activeDate = this.dateAdapter.addCalendarYears(this.calendar.activeDate, this.calendar.currentView === McCalendarView.Year ? 1 : yearsPerPage);
+        }
     }
     /** Whether the previous period button is enabled. */
     previousEnabled() {
         if (!this.calendar.minDate) {
             return true;
         }
-        return !this.calendar.minDate ||
-            !this.isSameView(this.calendar.activeDate, this.calendar.minDate);
+        return !this.calendar.minDate || !this.isSameView(this.calendar.activeDate, this.calendar.minDate);
     }
     /** Whether the next period button is enabled. */
     nextEnabled() {
-        return !this.calendar.maxDate ||
-            !this.isSameView(this.calendar.activeDate, this.calendar.maxDate);
+        return !this.calendar.maxDate || !this.isSameView(this.calendar.activeDate, this.calendar.maxDate);
     }
     /** Whether the two dates represent the same view in the current view mode (month or year). */
-    isSameView(date1, date2) {
-        if (this.calendar.currentView === 'month') {
-            return this.dateAdapter.getYear(date1) === this.dateAdapter.getYear(date2) &&
-                this.dateAdapter.getMonth(date1) === this.dateAdapter.getMonth(date2);
+    isSameView(firstDate, secondDate) {
+        const firstYear = this.dateAdapter.getYear(firstDate);
+        const secondYear = this.dateAdapter.getYear(secondDate);
+        const firstMonth = this.dateAdapter.getMonth(firstDate);
+        const secondMonth = this.dateAdapter.getMonth(secondDate);
+        if (this.calendar.currentView === McCalendarView.Month) {
+            return firstYear === secondYear && firstMonth === secondMonth;
         }
-        if (this.calendar.currentView === 'year') {
-            return this.dateAdapter.getYear(date1) === this.dateAdapter.getYear(date2);
+        if (this.calendar.currentView === McCalendarView.Year) {
+            return firstYear === secondYear;
         }
         // Otherwise we are in 'multi-year' view.
-        return Math.floor(this.dateAdapter.getYear(date1) / yearsPerPage) ===
-            Math.floor(this.dateAdapter.getYear(date2) / yearsPerPage);
+        return Math.floor(firstYear / yearsPerPage) === Math.floor(secondYear / yearsPerPage);
     }
 }
 McCalendarHeader.decorators = [
     { type: Component, args: [{
                 selector: 'mc-calendar-header',
-                template: "<div class=\"mc-calendar__header\">\n    <div class=\"mc-calendar__controls\">\n        <button mc-button type=\"button\" class=\"mc-calendar__period-button\"\n                (click)=\"currentPeriodClicked()\" [attr.aria-label]=\"periodButtonLabel\">\n            {{periodButtonText}}\n            <i class=\"mc mc-icon\"\n               [class.mc-angle-up-M_16]=\"calendar.currentView !== 'month'\"\n               [class.mc-angle-down-M_16]=\"calendar.currentView === 'month'\"></i>\n        </button>\n\n        <div class=\"mc-calendar-spacer\"></div>\n\n        <ng-content></ng-content>\n\n        <button mc-button type=\"button\" class=\"mc-calendar__previous-button\"\n                [disabled]=\"!previousEnabled()\" (click)=\"previousClicked()\"\n                [attr.aria-label]=\"prevButtonLabel\">\n            <i mc-icon=\"mc-angle-left-L_16\"></i>\n        </button>\n\n        <button mc-button type=\"button\" class=\"mc-calendar__next-button\"\n                [disabled]=\"!nextEnabled()\" (click)=\"nextClicked()\"\n                [attr.aria-label]=\"nextButtonLabel\">\n            <i mc-icon=\"mc-angle-right-L_16\"></i>\n        </button>\n    </div>\n</div>\n",
+                template: "<button mc-button\n        [tabindex]=\"'-1'\"\n        class=\"mc-button_transparent mc-calendar__period-button\"\n        (click)=\"currentPeriodClicked()\">\n    {{ periodButtonText }}\n\n    <i class=\"mc mc-icon\"\n       [class.mc-angle-up-M_16]=\"calendar.currentView !== 'month'\"\n       [class.mc-angle-down-M_16]=\"calendar.currentView === 'month'\">\n    </i>\n</button>\n\n<div class=\"mc-calendar-spacer\"></div>\n\n<button mc-button\n        [tabindex]=\"'-1'\"\n        class=\"mc-button_transparent mc-calendar__previous-button\"\n        [disabled]=\"!previousEnabled()\"\n        (click)=\"previousClicked()\">\n\n    <i mc-icon=\"mc-angle-left-L_16\"></i>\n</button>\n\n<button mc-button\n        [tabindex]=\"'-1'\"\n        class=\"mc-button_transparent mc-calendar__next-button\"\n        [disabled]=\"!nextEnabled()\"\n        (click)=\"nextClicked()\">\n\n    <i mc-icon=\"mc-angle-right-L_16\"></i>\n</button>\n",
                 exportAs: 'mcCalendarHeader',
+                host: {
+                    class: 'mc-calendar-header'
+                },
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
@@ -956,7 +983,7 @@ class McCalendar {
         this.dateFormats = dateFormats;
         this.changeDetectorRef = changeDetectorRef;
         /** Whether the calendar should be started in month or year view. */
-        this.startView = 'month';
+        this.startView = McCalendarView.Month;
         /** Emits when the currently selected date changes. */
         this.selectedChange = new EventEmitter();
         /**
@@ -1073,8 +1100,8 @@ class McCalendar {
     }
     /** Updates today's date after an update of the active date */
     updateTodaysDate() {
-        const view = this.currentView === 'month' ? this.monthView :
-            (this.currentView === 'year' ? this.yearView : this.multiYearView);
+        const view = this.currentView === McCalendarView.Month ? this.monthView :
+            (this.currentView === McCalendarView.Year ? this.yearView : this.multiYearView);
         view.ngAfterContentInit();
     }
     /** Handles date selection in the month view. */
@@ -1115,13 +1142,13 @@ McCalendar.decorators = [
     { type: Component, args: [{
                 selector: 'mc-calendar',
                 exportAs: 'mcCalendar',
-                template: "<ng-template [cdkPortalOutlet]=\"calendarHeaderPortal\"></ng-template>\n\n<div class=\"mc-calendar__content\" [ngSwitch]=\"currentView\" cdkMonitorSubtreeFocus tabindex=\"-1\">\n    <mc-month-view\n        *ngSwitchCase=\"'month'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        [dateClass]=\"dateClass\"\n        (selectedChange)=\"dateSelected($event)\"\n        (userSelection)=\"userSelected()\">\n    </mc-month-view>\n\n    <mc-year-view\n        *ngSwitchCase=\"'year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (monthSelected)=\"monthSelectedInYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'month')\">\n    </mc-year-view>\n\n    <mc-multi-year-view\n        *ngSwitchCase=\"'multi-year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (yearSelected)=\"yearSelectedInMultiYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'year')\">\n    </mc-multi-year-view>\n</div>\n",
+                template: "<ng-template [cdkPortalOutlet]=\"calendarHeaderPortal\"></ng-template>\n\n<div class=\"mc-calendar__content\" [ngSwitch]=\"currentView\">\n    <mc-month-view\n        *ngSwitchCase=\"'month'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        [dateClass]=\"dateClass\"\n        (selectedChange)=\"dateSelected($event)\"\n        (userSelection)=\"userSelected()\">\n    </mc-month-view>\n\n    <mc-year-view\n        *ngSwitchCase=\"'year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (monthSelected)=\"monthSelectedInYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'multi-year')\">\n    </mc-year-view>\n\n    <mc-multi-year-view\n        *ngSwitchCase=\"'multi-year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (yearSelected)=\"yearSelectedInMultiYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'month')\">\n    </mc-multi-year-view>\n</div>\n",
                 host: {
                     class: 'mc-calendar'
                 },
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-calendar{display:block}.mc-calendar__header{padding:var(--mc-datepicker-calendar-size-padding,8px) var(--mc-datepicker-calendar-size-padding,8px) 0 var(--mc-datepicker-calendar-size-padding,8px)}.mc-calendar__content{padding:0 var(--mc-datepicker-calendar-size-padding,8px) var(--mc-datepicker-calendar-size-padding,8px) var(--mc-datepicker-calendar-size-padding,8px);outline:none}.mc-calendar__controls{display:flex}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__previous-button:after{border-left-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-prev-icon-transform,translateX(2px) rotate(-45deg))}.mc-calendar__next-button:after{border-right-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-nex-icon-transform,translateX(-2px) rotate(45deg))}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;padding:0 0 var(--mc-datepicker-calendar-size-padding,8px) 0}.mc-calendar__table-header-divider{position:relative;height:var(--mc-datepicker-calendar-size-divider-width,1px)}.mc-calendar__table-header-divider:after{content:\"\";position:absolute;top:0;left:calc(-1 * var(--mc-datepicker-calendar-size-padding, 8px));right:calc(-1 * var(--mc-datepicker-calendar-size-padding, 8px));height:var(--mc-datepicker-calendar-size-divider-width,1px)}"]
+                styles: [".mc-calendar{display:block}.mc-calendar-header{display:flex;padding:var(--mc-datepicker-calendar-size-padding-top,16px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-blocks,12px) var(--mc-datepicker-calendar-size-padding-horizontal,8px)}.mc-calendar__content{padding:0 var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px);outline:none}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__previous-button:after{border-left-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-prev-icon-transform,translateX(2px) rotate(-45deg))}.mc-calendar__next-button:after{border-right-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-nex-icon-transform,translateX(-2px) rotate(45deg))}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;height:30px}.mc-calendar__table-header th.mc-calendar__table-header-divider{position:relative;height:calc(var(--mc-datepicker-calendar-size-padding-blocks, 12px) - 2px)}.mc-calendar__table-header th.mc-calendar__table-header-divider:after{content:\"\";position:absolute;top:0;left:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));right:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));height:var(--mc-datepicker-calendar-size-divider-width,1px)}"]
             },] }
 ];
 /** @nocollapse */
@@ -1205,7 +1232,7 @@ const MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
  */
 class McDatepickerContent {
     ngAfterViewInit() {
-        this.calendar.focusActiveCell();
+        // this.calendar.focusActiveCell();
     }
 }
 McDatepickerContent.decorators = [
@@ -1223,7 +1250,7 @@ McDatepickerContent.decorators = [
                 ],
                 encapsulation: ViewEncapsulation.None,
                 changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-calendar{display:block}.mc-calendar__header{padding:var(--mc-datepicker-calendar-size-padding,8px) var(--mc-datepicker-calendar-size-padding,8px) 0 var(--mc-datepicker-calendar-size-padding,8px)}.mc-calendar__content{padding:0 var(--mc-datepicker-calendar-size-padding,8px) var(--mc-datepicker-calendar-size-padding,8px) var(--mc-datepicker-calendar-size-padding,8px);outline:none}.mc-calendar__controls{display:flex}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__previous-button:after{border-left-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-prev-icon-transform,translateX(2px) rotate(-45deg))}.mc-calendar__next-button:after{border-right-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-nex-icon-transform,translateX(-2px) rotate(45deg))}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;padding:0 0 var(--mc-datepicker-calendar-size-padding,8px) 0}.mc-calendar__table-header-divider{position:relative;height:var(--mc-datepicker-calendar-size-divider-width,1px)}.mc-calendar__table-header-divider:after{content:\"\";position:absolute;top:0;left:calc(-1 * var(--mc-datepicker-calendar-size-padding, 8px));right:calc(-1 * var(--mc-datepicker-calendar-size-padding, 8px));height:var(--mc-datepicker-calendar-size-divider-width,1px)}.mc-datepicker__content{display:block;border-width:1px;border-style:solid}.mc-datepicker__content .mc-calendar{width:296px;height:344px}.mc-datepicker__content .mc-calendar__next-button[disabled],.mc-datepicker__content .mc-calendar__previous-button[disabled]{border:0}@media (orientation:landscape){.mc-calendar{width:64vh;height:80vh}}@media (orientation:portrait){.mc-calendar{width:80vw;height:100vw}}"]
+                styles: [".mc-calendar{display:block}.mc-calendar-header{display:flex;padding:var(--mc-datepicker-calendar-size-padding-top,16px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-blocks,12px) var(--mc-datepicker-calendar-size-padding-horizontal,8px)}.mc-calendar__content{padding:0 var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px);outline:none}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__previous-button:after{border-left-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-prev-icon-transform,translateX(2px) rotate(-45deg))}.mc-calendar__next-button:after{border-right-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-nex-icon-transform,translateX(-2px) rotate(45deg))}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;height:30px}.mc-calendar__table-header th.mc-calendar__table-header-divider{position:relative;height:calc(var(--mc-datepicker-calendar-size-padding-blocks, 12px) - 2px)}.mc-calendar__table-header th.mc-calendar__table-header-divider:after{content:\"\";position:absolute;top:0;left:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));right:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));height:var(--mc-datepicker-calendar-size-divider-width,1px)}.mc-datepicker__content{display:block;border-width:1px;border-style:solid}.mc-datepicker__content .mc-calendar{width:296px;height:348px}.mc-datepicker__content .mc-calendar__next-button[disabled],.mc-datepicker__content .mc-calendar__previous-button[disabled]{border:0}"]
             },] }
 ];
 McDatepickerContent.propDecorators = {
@@ -1242,8 +1269,9 @@ class McDatepicker {
         this.dir = dir;
         this.document = document;
         this._hasBackdrop = false;
+        this._opened = false;
         /** The view that the calendar should start in. */
-        this.startView = 'month';
+        this.startView = McCalendarView.Month;
         /**
          * Emits selected year in multiyear view.
          * This doesn't imply a change on the selected date.
@@ -1266,7 +1294,6 @@ class McDatepicker {
         this.disabledChange = new Subject();
         /** Emits new selected date when selected date changes. */
         this.selectedChanged = new Subject();
-        this._opened = false;
         this.validSelected = null;
         /** The element that was focused before the datepicker was opened. */
         this.focusedElementBeforeOpen = null;
@@ -1368,7 +1395,14 @@ class McDatepicker {
         }
         this.datepickerInput = input;
         this.inputSubscription = this.datepickerInput.valueChange
-            .subscribe((value) => this.selected = value);
+            .subscribe((value) => {
+            this.selected = value;
+            // @ts-ignore
+            if (this.popupComponentRef) {
+                this.popupComponentRef.instance.calendar.monthView.init();
+                this.popupComponentRef.instance.calendar.activeDate = value;
+            }
+        });
     }
     /** Open the calendar. */
     open() {
@@ -1386,7 +1420,7 @@ class McDatepicker {
         this.openedStream.emit();
     }
     /** Close the calendar. */
-    close() {
+    close(restoreFocus = true) {
         if (!this._opened) {
             return;
         }
@@ -1403,22 +1437,31 @@ class McDatepicker {
                 this._opened = false;
                 this.closedStream.emit();
                 this.focusedElementBeforeOpen = null;
-                this.datepickerInput.elementRef.nativeElement.focus();
+                if (restoreFocus) {
+                    this.datepickerInput.elementRef.nativeElement.focus();
+                }
             }
         };
-        if (this.focusedElementBeforeOpen &&
-            typeof this.focusedElementBeforeOpen.focus === 'function') {
+        if (this.focusedElementBeforeOpen && typeof this.focusedElementBeforeOpen.focus === 'function') {
             // Because IE moves focus asynchronously, we can't count on it being restored before we've
             // marked the datepicker as closed. If the event fires out of sequence and the element that
             // we're refocusing opens the datepicker on focus, the user could be stuck with not being
             // able to close the calendar at all. We work around it by making the logic, that marks
             // the datepicker as closed, async as well.
-            this.focusedElementBeforeOpen.focus();
+            if (restoreFocus) {
+                this.focusedElementBeforeOpen.focus();
+            }
             setTimeout(completeClose);
         }
         else {
             completeClose();
         }
+    }
+    toggle() {
+        if (this.datepickerInput.isReadOnly) {
+            return;
+        }
+        this._opened ? this.close() : this.open();
     }
     /** Open the calendar as a popup. */
     openAsPopup() {
@@ -1448,16 +1491,11 @@ class McDatepicker {
             panelClass: 'mc-datepicker__popup'
         });
         this.popupRef = this.overlay.create(overlayConfig);
-        this.popupRef.overlayElement.setAttribute('role', 'dialog');
         this.closeSubscription = this.closingActions()
             .subscribe(() => this.close());
     }
     closingActions() {
-        return merge(this.popupRef.backdropClick(), this.popupRef.outsidePointerEvents(), this.popupRef.detachments(), this.popupRef.keydownEvents().pipe(filter((event) => {
-            // Closing on alt + up is only valid when there's an input associated with the datepicker.
-            // tslint:disable-next-line:deprecation
-            return event.keyCode === ESCAPE || (this.datepickerInput && event.altKey && event.keyCode === UP_ARROW);
-        })));
+        return merge(this.popupRef.backdropClick(), this.popupRef.outsidePointerEvents());
     }
     /** Create the popup PositionStrategy. */
     createPopupPositionStrategy() {
@@ -1538,7 +1576,82 @@ McDatepicker.propDecorators = {
     closedStream: [{ type: Output, args: ['closed',] }]
 };
 
-// tslint:disable:no-empty
+// @ts-nocheck
+// tslint:disable:naming-convention
+var DateParts;
+(function (DateParts) {
+    DateParts["year"] = "y";
+    DateParts["month"] = "m";
+    DateParts["day"] = "d";
+})(DateParts || (DateParts = {}));
+class DateDigit {
+    constructor(value, start, length) {
+        this.value = value;
+        this.start = start;
+        this.length = length;
+        this.maxDays = 31;
+        this.maxMonth = 11;
+        if (value === DateParts.day) {
+            this.parse = this.parseDay;
+        }
+        else if (value === DateParts.month) {
+            this.parse = this.parseMonth;
+        }
+        else if (value === DateParts.year) {
+            this.parse = this.parseYear;
+        }
+    }
+    get end() {
+        return this.start + this.length;
+    }
+    get isDay() {
+        return this.value === DateParts.day;
+    }
+    get isMonth() {
+        return this.value === DateParts.month;
+    }
+    get isYear() {
+        return this.value === DateParts.year;
+    }
+    get fullName() {
+        if (this.isDay) {
+            return 'date';
+        }
+        if (this.isMonth) {
+            return 'month';
+        }
+        if (this.isYear) {
+            return 'year';
+        }
+    }
+    parseDay(value) {
+        const parsedValue = parseInt(value);
+        if (parsedValue === 0) {
+            return 1;
+        }
+        if (parsedValue > this.maxDays) {
+            return this.maxDays;
+        }
+        return parsedValue;
+    }
+    parseMonth(value) {
+        const parsedValue = parseInt(value);
+        if (parsedValue === 0) {
+            return 1;
+        }
+        if (parsedValue > this.maxMonth) {
+            return this.maxMonth;
+        }
+        return parsedValue - 1;
+    }
+    parseYear(value) {
+        const parsedValue = parseInt(value);
+        if (parsedValue === 0) {
+            return 1;
+        }
+        return parsedValue;
+    }
+}
 /** @docs-private */
 const MC_DATEPICKER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -1567,34 +1680,94 @@ class McDatepickerInputEvent {
         this.value = this.target.value;
     }
 }
+let uniqueComponentIdSuffix = 0;
 /** Directive used to connect an input to a McDatepicker. */
 class McDatepickerInput {
-    constructor(elementRef, dateAdapter, dateFormats) {
+    constructor(elementRef, renderer, dateAdapter, dateFormats) {
         this.elementRef = elementRef;
+        this.renderer = renderer;
         this.dateAdapter = dateAdapter;
         this.dateFormats = dateFormats;
-        /** Emits when a `change` event is fired on this `<input>`. */
-        this.dateChange = new EventEmitter();
-        /** Emits when an `input` event is fired on this `<input>`. */
-        this.dateInput = new EventEmitter();
+        this.stateChanges = new Subject();
+        this.controlType = 'datepicker';
+        this.focused = false;
         /** Emits when the value changes (either due to user input or programmatic change). */
         this.valueChange = new EventEmitter();
         /** Emits when the disabled state has changed */
         this.disabledChange = new EventEmitter();
+        this._disabled = false;
+        this.incorrectInput = new EventEmitter();
+        /** Emits when a `change` event is fired on this `<input>`. */
+        this.dateChange = new EventEmitter();
+        /** Emits when an `input` event is fired on this `<input>`. */
+        this.dateInput = new EventEmitter();
+        this.uid = `mc-datepicker-${uniqueComponentIdSuffix++}`;
         this.datepickerSubscription = Subscription.EMPTY;
         this.localeSubscription = Subscription.EMPTY;
         /** Whether the last value set on the input was valid. */
         this.lastValueValid = false;
-        this.onTouched = () => {
+        this.onTouched = () => { };
+        this.onInput = () => {
+            this.correctCursorPosition();
+            const formattedValue = this.replaceSymbols(this.viewValue);
+            const newTimeObj = this.getDateFromString(formattedValue);
+            this.lastValueValid = !!newTimeObj;
+            if (!newTimeObj) {
+                this.control.updateValueAndValidity();
+                this._value = null;
+                return;
+            }
+            this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
+            this.selectNextDigitByCursor(this.selectionStart);
+            this.updateValue(newTimeObj);
         };
-        this.cvaOnChange = () => {
+        this.parseOnBlur = () => {
+            if (!this.viewValue) {
+                return null;
+            }
+            const date = this.getDefaultValue();
+            const viewDigits = this.viewValue
+                .split(this.separator)
+                .map((value) => value)
+                .filter((value) => value);
+            const [firsViewDigit, secondViewDigit, thirdViewDigit] = viewDigits;
+            // tslint:disable-next-line:no-magic-numbers
+            if (viewDigits.length !== 3) {
+                this.lastValueValid = false;
+                this._value = null;
+                return setTimeout(() => this.control.updateValueAndValidity());
+            }
+            date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+            date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
+            date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
+            const [digitWithYear, viewDigitWithYear] = [this.firstDigit, this.secondDigit, this.thirdDigit]
+                .reduce((acc, digit, index) => digit.value === DateParts.year ? [digit, viewDigits[index]] : acc, []);
+            // tslint:disable-next-line:no-magic-numbers
+            if (viewDigitWithYear.length < 3) {
+                // tslint:disable-next-line:no-magic-numbers
+                date.year += date.year < 30 ? 2000 : 1900;
+            }
+            else if (viewDigitWithYear.length < digitWithYear.length) {
+                this.lastValueValid = false;
+                this._value = null;
+                return setTimeout(() => this.control.updateValueAndValidity());
+            }
+            const newTimeObj = this.getValidDateOrNull(this.dateAdapter.createDateTime(date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
+            this.lastValueValid = !!newTimeObj;
+            this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
+            this.updateValue(newTimeObj);
         };
-        this.validatorOnChange = () => {
+        this.updateLocaleParams = () => {
+            this.setFormat(this.dateFormats.dateInput);
+            this.value = this.value;
         };
+        this.cvaOnChange = () => { };
+        this.validatorOnChange = () => { };
         /** The form control validator for whether the input parses. */
         this.parseValidator = () => {
-            return this.lastValueValid ?
-                null : { mcDatepickerParse: { text: this.elementRef.nativeElement.value } };
+            return this.focused ||
+                this.empty ||
+                this.lastValueValid ? null : { mcDatepickerParse: { text: this.elementRef.nativeElement.value } };
         };
         /** The form control validator for the min date. */
         this.minValidator = (control) => {
@@ -1628,9 +1801,15 @@ class McDatepickerInput {
         if (!this.dateFormats) {
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
-        // Update the displayed date when the locale changes.
+        this.setFormat(dateFormats.dateInput);
         this.localeSubscription = dateAdapter.localeChanges
-            .subscribe(() => this.value = this.value);
+            .subscribe(this.updateLocaleParams);
+    }
+    get required() {
+        return this._required;
+    }
+    set required(value) {
+        this._required = coerceBooleanProperty(value);
     }
     /** The datepicker that this input is associated with. */
     set mcDatepicker(value) {
@@ -1658,16 +1837,14 @@ class McDatepickerInput {
         return this._value;
     }
     set value(value) {
-        // tslint:disable-next-line:no-parameter-reassignment
-        value = this.dateAdapter.deserialize(value);
-        this.lastValueValid = !value || this.dateAdapter.isValid(value);
-        // tslint:disable-next-line:no-parameter-reassignment
-        value = this.getValidDateOrNull(value);
+        let newValue = this.dateAdapter.deserialize(value);
+        this.lastValueValid = !newValue || this.dateAdapter.isValid(newValue);
+        newValue = this.getValidDateOrNull(newValue);
         const oldDate = this.value;
-        this._value = value;
-        this.formatValue(value);
-        if (!this.dateAdapter.sameDate(oldDate, value)) {
-            this.valueChange.emit(value);
+        this._value = newValue;
+        this.formatValue(newValue);
+        if (!this.dateAdapter.sameDate(oldDate, newValue)) {
+            this.valueChange.emit(newValue);
         }
     }
     /** The minimum valid date. */
@@ -1688,7 +1865,7 @@ class McDatepickerInput {
     }
     /** Whether the datepicker-input is disabled. */
     get disabled() {
-        return !!this._disabled;
+        return this._disabled;
     }
     set disabled(value) {
         const newValue = coerceBooleanProperty(value);
@@ -1705,6 +1882,65 @@ class McDatepickerInput {
             element.blur();
         }
     }
+    get id() {
+        return this._id;
+    }
+    set id(value) {
+        this._id = value || this.uid;
+    }
+    set mcValidationTooltip(tooltip) {
+        if (!tooltip) {
+            return;
+        }
+        tooltip.mcMouseEnterDelay = validationTooltipShowDelay;
+        tooltip.mcTrigger = 'manual';
+        tooltip.mcTooltipClass = 'mc-tooltip_warning';
+        tooltip.initElementRefListeners();
+        this.incorrectInput.subscribe(() => {
+            if (tooltip.isTooltipOpen) {
+                return;
+            }
+            tooltip.show();
+            setTimeout(() => tooltip.hide(), validationTooltipHideDelay);
+        });
+    }
+    get empty() {
+        return !this.viewValue && !this.isBadInput();
+    }
+    get viewValue() {
+        return this.elementRef.nativeElement.value;
+    }
+    get ngControl() {
+        return this.control;
+    }
+    get isReadOnly() {
+        return this.elementRef.nativeElement.readOnly;
+    }
+    get selectionStart() {
+        return this.elementRef.nativeElement.selectionStart;
+    }
+    set selectionStart(value) {
+        this.elementRef.nativeElement.selectionStart = value;
+    }
+    get selectionEnd() {
+        return this.elementRef.nativeElement.selectionEnd;
+    }
+    set selectionEnd(value) {
+        this.elementRef.nativeElement.selectionEnd = value;
+    }
+    onContainerClick() {
+        this.focus();
+    }
+    focus() {
+        this.elementRef.nativeElement.focus();
+    }
+    focusChanged(isFocused) {
+        if (isFocused !== this.focused) {
+            this.focused = isFocused;
+            this.onTouched();
+            this.stateChanges.next();
+        }
+    }
     ngOnDestroy() {
         this.datepickerSubscription.unsubscribe();
         this.localeSubscription.unsubscribe();
@@ -1716,8 +1952,9 @@ class McDatepickerInput {
         this.validatorOnChange = fn;
     }
     /** @docs-private */
-    validate(c) {
-        return this.validator ? this.validator(c) : null;
+    validate(control) {
+        this.setControl(control);
+        return this.validator ? this.validator(control) : null;
     }
     // Implemented as part of ControlValueAccessor.
     writeValue(value) {
@@ -1735,23 +1972,55 @@ class McDatepickerInput {
     setDisabledState(isDisabled) {
         this.disabled = isDisabled;
     }
-    onKeydown(event) {
-        // tslint:disable-next-line:deprecation
-        const isAltDownArrow = event.altKey && event.keyCode === DOWN_ARROW;
-        if (this.datepicker && isAltDownArrow && !this.elementRef.nativeElement.readOnly) {
-            this.datepicker.open();
-            event.preventDefault();
+    onKeyDown(event) {
+        if (this.isReadOnly) {
+            return;
         }
-    }
-    onInput(value) {
-        let date = this.dateAdapter.parse(value, this.dateFormats.parse.dateInput);
-        this.lastValueValid = !date || this.dateAdapter.isValid(date);
-        date = this.getValidDateOrNull(date);
-        if (!this.dateAdapter.sameDate(date, this._value)) {
-            this._value = date;
-            this.cvaOnChange(date);
-            this.valueChange.emit(date);
-            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
+        // tslint:disable-next-line: deprecation
+        const keyCode = event.keyCode;
+        if (this.isLetterKey(event)) {
+            event.preventDefault();
+            this.incorrectInput.emit();
+        }
+        else if (this.isKeyForOpen(event)) {
+            event.preventDefault();
+            this.datepicker.open();
+        }
+        else if (this.isKeyForClose(event)) {
+            event.preventDefault();
+            this.datepicker.close();
+        }
+        else if (keyCode === TAB) {
+            this.datepicker.close(false);
+        }
+        else if (this.isKeyForByPass(event)) {
+            return;
+        }
+        else if (keyCode === SPACE) {
+            this.spaceKeyHandler(event);
+        }
+        else if ([UP_ARROW, DOWN_ARROW].includes(keyCode)) {
+            event.preventDefault();
+            this.verticalArrowKeyHandler(keyCode);
+        }
+        else if ([LEFT_ARROW, RIGHT_ARROW, HOME, PAGE_UP, END, PAGE_DOWN].includes(keyCode)) {
+            event.preventDefault();
+            this.changeCaretPosition(keyCode);
+        }
+        else if (/^\D$/.test(event.key)) {
+            event.preventDefault();
+            const newValue = this.getNewValue(event.key, this.selectionStart);
+            const formattedValue = this.replaceSymbols(newValue);
+            if (newValue !== formattedValue) {
+                this.setViewValue(formattedValue, true);
+                setTimeout(this.onInput);
+            }
+            else {
+                this.incorrectInput.emit();
+            }
+        }
+        else {
+            setTimeout(this.onInput);
         }
     }
     onChange() {
@@ -1760,15 +2029,293 @@ class McDatepickerInput {
     /** Handles blur events on the input. */
     onBlur() {
         // Reformat the input only if we have a valid value.
-        if (this.value) {
-            this.formatValue(this.value);
+        this.parseOnBlur();
+        this.focusChanged(false);
+    }
+    onPaste($event) {
+        var _a, _b, _c;
+        $event.preventDefault();
+        const rawValue = $event.clipboardData.getData('text');
+        const match = rawValue.match(/^(?<first>\d+)\W(?<second>\d+)\W(?<third>\d+)$/);
+        if (!((_a = match === null || match === void 0 ? void 0 : match.groups) === null || _a === void 0 ? void 0 : _a.first) || !((_b = match === null || match === void 0 ? void 0 : match.groups) === null || _b === void 0 ? void 0 : _b.second) || !((_c = match === null || match === void 0 ? void 0 : match.groups) === null || _c === void 0 ? void 0 : _c.third)) {
+            this.setViewValue(rawValue);
+            return rawValue;
         }
-        this.onTouched();
+        const value = [match.groups.first, match.groups.second, match.groups.third].join(this.separator);
+        const newTimeObj = this.getDateFromString(value);
+        if (!newTimeObj) {
+            this.setViewValue(value);
+            return value;
+        }
+        this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput));
+        this.updateValue(newTimeObj);
+    }
+    setFormat(format) {
+        this.separator = format.match(/[aA-zZ]+(?<separator>\W|\D)[aA-zZ]+/).groups.separator;
+        this.separatorPositions = format
+            .split('')
+            .reduce((acc, item, index) => this.separator === item ? [...acc, index + 1] : acc, []);
+        this.getDigitPositions(format);
+    }
+    updateValue(newValue) {
+        if (!this.dateAdapter.sameDate(newValue, this.value)) {
+            this._value = newValue;
+            this.cvaOnChange(newValue);
+            this.valueChange.emit(newValue);
+            this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
+        }
+        this.control.updateValueAndValidity();
+    }
+    isKeyForClose(event) {
+        // tslint:disable-next-line: deprecation
+        return (event.altKey && event.keyCode === UP_ARROW) || event.keyCode === ESCAPE;
+    }
+    isKeyForOpen(event) {
+        // tslint:disable-next-line: deprecation
+        return event.altKey && event.keyCode === DOWN_ARROW;
+    }
+    isLetterKey(event) {
+        return isLetterKey(event) && !event.ctrlKey && !event.metaKey;
+    }
+    isKeyForByPass(event) {
+        // tslint:disable-next-line: deprecation
+        return (hasModifierKey(event) && (isVerticalMovement(event.keyCode) || isHorizontalMovement(event.keyCode))) ||
+            event.ctrlKey ||
+            event.metaKey ||
+            // tslint:disable-next-line: deprecation
+            [DELETE, BACKSPACE].includes(event.keyCode);
+    }
+    spaceKeyHandler(event) {
+        event.preventDefault();
+        if (this.selectionStart === this.selectionEnd) {
+            const value = this.getNewValue(event.key, this.selectionStart);
+            this.setViewValue(value);
+            setTimeout(this.onInput);
+        }
+        else if (this.selectionStart !== this.selectionEnd) {
+            this.selectNextDigit(this.selectionStart, true);
+        }
+    }
+    getNewValue(key, position) {
+        return [this.viewValue.slice(0, position), key, this.viewValue.slice(position)].join('');
+    }
+    setViewValue(value, savePosition = false) {
+        if (savePosition) {
+            const selectionStart = this.selectionStart;
+            const selectionEnd = this.selectionEnd;
+            this.renderer.setProperty(this.elementRef.nativeElement, 'value', value);
+            this.selectionStart = selectionStart;
+            this.selectionEnd = selectionEnd;
+        }
+        else {
+            this.renderer.setProperty(this.elementRef.nativeElement, 'value', value);
+        }
+    }
+    replaceSymbols(value) {
+        return value
+            .split(this.separator)
+            .map((part) => part.replace(/^([0-9]+)\W$/, '0$1'))
+            .join(this.separator);
+    }
+    getDateFromString(timeString) {
+        if (!timeString || timeString.length < this.firstDigit.length) {
+            return null;
+        }
+        const date = this.getDefaultValue();
+        const viewDigits = timeString
+            .split(this.separator)
+            .map((value) => value);
+        const [firsViewDigit, secondViewDigit, thirdViewDigit] = viewDigits;
+        if (viewDigits.length === 1) {
+            if (firsViewDigit.length < this.firstDigit.length) {
+                return null;
+            }
+            date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+            date.month = 0;
+            // tslint:disable-next-line:no-magic-numbers
+        }
+        else if (viewDigits.length === 2) {
+            if (firsViewDigit.length < this.firstDigit.length || secondViewDigit.length < this.secondDigit.length) {
+                return null;
+            }
+            date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+            date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
+            // tslint:disable-next-line:no-magic-numbers
+        }
+        else if (viewDigits.length === 3) {
+            if (firsViewDigit.length < this.firstDigit.length ||
+                secondViewDigit.length < this.secondDigit.length ||
+                thirdViewDigit.length < this.thirdDigit.length) {
+                return null;
+            }
+            date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
+            date[this.secondDigit.fullName] = this.secondDigit.parse(secondViewDigit);
+            date[this.thirdDigit.fullName] = this.thirdDigit.parse(thirdViewDigit);
+        }
+        else {
+            return null;
+        }
+        return this.getValidDateOrNull(this.dateAdapter.createDateTime(date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
+    }
+    getDefaultValue() {
+        const defaultValue = this.value || this.dateAdapter.today();
+        return {
+            year: this.dateAdapter.getYear(defaultValue),
+            month: this.dateAdapter.getMonth(defaultValue),
+            date: this.dateAdapter.getDate(defaultValue),
+            hours: this.dateAdapter.getHours(defaultValue),
+            minutes: this.dateAdapter.getMinutes(defaultValue),
+            seconds: this.dateAdapter.getSeconds(defaultValue),
+            milliseconds: this.dateAdapter.getMilliseconds(defaultValue)
+        };
+    }
+    getTimeStringFromDate(value, timeFormat) {
+        if (!value || !this.dateAdapter.isValid(value)) {
+            return '';
+        }
+        return this.dateAdapter.format(value, timeFormat);
+    }
+    getDateEditMetrics(cursorPosition) {
+        for (const digit of [this.firstDigit, this.secondDigit, this.thirdDigit]) {
+            if (cursorPosition >= digit.start && cursorPosition <= digit.end) {
+                return [digit.value, digit.start, digit.end];
+            }
+        }
+        return [this.thirdDigit.value, this.thirdDigit.start, this.thirdDigit.end];
+    }
+    incrementDate(dateVal, whatToIncrement) {
+        let year = this.dateAdapter.getYear(dateVal);
+        let month = this.dateAdapter.getMonth(dateVal);
+        let day = this.dateAdapter.getDate(dateVal);
+        switch (whatToIncrement) {
+            case DateParts.day:
+                day++;
+                if (day > this.dateAdapter.getNumDaysInMonth(dateVal)) {
+                    day = 1;
+                }
+                break;
+            case DateParts.month:
+                month++;
+                // tslint:disable-next-line:no-magic-numbers
+                if (month > 11) {
+                    month = 0;
+                }
+                const lastDay = this.getLastDayFor(year, month);
+                if (day > lastDay) {
+                    day = lastDay;
+                }
+                break;
+            case DateParts.year:
+                year++;
+                break;
+            default:
+        }
+        return this.createDate(year, month, day);
+    }
+    getLastDayFor(year, month) {
+        return this.dateAdapter.getNumDaysInMonth(this.createDate(year, month, 1));
+    }
+    decrementDate(dateVal, whatToDecrement) {
+        let year = this.dateAdapter.getYear(dateVal);
+        let month = this.dateAdapter.getMonth(dateVal);
+        let day = this.dateAdapter.getDate(dateVal);
+        switch (whatToDecrement) {
+            case DateParts.day:
+                day--;
+                if (day < 1) {
+                    day = this.dateAdapter.getNumDaysInMonth(dateVal);
+                }
+                break;
+            case DateParts.month:
+                month--;
+                if (month < 0) {
+                    // tslint:disable-next-line:no-magic-numbers
+                    month = 11;
+                }
+                const lastDay = this.getLastDayFor(year, month);
+                if (day > lastDay) {
+                    day = lastDay;
+                }
+                break;
+            case DateParts.year:
+                year--;
+                break;
+            default:
+        }
+        return this.createDate(year, month, day);
+    }
+    verticalArrowKeyHandler(keyCode) {
+        if (!this.value) {
+            return;
+        }
+        let changedTime;
+        const [modifiedTimePart, selectionStart, selectionEnd] = this.getDateEditMetrics(this.selectionStart);
+        if (keyCode === UP_ARROW) {
+            changedTime = this.incrementDate(this.value, modifiedTimePart);
+        }
+        if (keyCode === DOWN_ARROW) {
+            changedTime = this.decrementDate(this.value, modifiedTimePart);
+        }
+        this.value = changedTime;
+        this.selectionStart = selectionStart;
+        this.selectionEnd = selectionEnd;
+        this.onChange();
+        this.stateChanges.next();
+    }
+    changeCaretPosition(keyCode) {
+        if (!this.value) {
+            return;
+        }
+        let cursorPos = this.selectionStart;
+        if ([HOME, PAGE_UP].includes(keyCode)) {
+            cursorPos = 0;
+        }
+        else if ([END, PAGE_DOWN].includes(keyCode)) {
+            cursorPos = this.viewValue.length;
+        }
+        else if (keyCode === LEFT_ARROW) {
+            cursorPos = cursorPos === 0 ? this.viewValue.length : cursorPos - 1;
+        }
+        else if (keyCode === RIGHT_ARROW) {
+            const nextSeparatorPos = this.viewValue.indexOf(this.separator, cursorPos);
+            cursorPos = nextSeparatorPos ? nextSeparatorPos + 1 : 0;
+        }
+        this.selectDigitByCursor(cursorPos);
+    }
+    selectDigitByCursor(cursorPos) {
+        setTimeout(() => {
+            const [, selectionStart, selectionEnd] = this.getDateEditMetrics(cursorPos);
+            this.selectionStart = selectionStart;
+            this.selectionEnd = selectionEnd;
+        });
+    }
+    selectNextDigitByCursor(cursorPos) {
+        setTimeout(() => {
+            const [, , endPositionOfCurrentDigit] = this.getDateEditMetrics(cursorPos);
+            const [, selectionStart, selectionEnd] = this.getDateEditMetrics(endPositionOfCurrentDigit + 1);
+            this.selectionStart = selectionStart;
+            this.selectionEnd = selectionEnd;
+        });
+    }
+    selectNextDigit(cursorPos, cycle = false) {
+        setTimeout(() => {
+            const lastValue = cycle ? 0 : cursorPos;
+            const nextSeparatorPos = this.viewValue.indexOf(this.separator, cursorPos);
+            const newCursorPos = nextSeparatorPos > 0 ? nextSeparatorPos + 1 : lastValue;
+            const [, selectionStart, selectionEnd] = this.getDateEditMetrics(newCursorPos);
+            this.selectionStart = selectionStart;
+            this.selectionEnd = selectionEnd;
+        });
+    }
+    /** Checks whether the input is invalid based on the native validation. */
+    isBadInput() {
+        const validity = this.elementRef.nativeElement.validity;
+        return validity && validity.badInput;
     }
     /** Formats a value and sets it on the input element. */
     formatValue(value) {
-        this.elementRef.nativeElement.value =
-            value ? this.dateAdapter.format(value, this.dateFormats.display.dateInput) : '';
+        const formattedValue = value ? this.dateAdapter.format(value, this.dateFormats.dateInput) : '';
+        this.setViewValue(formattedValue);
     }
     /**
      * @param obj The object to check.
@@ -1776,6 +2323,47 @@ class McDatepickerInput {
      */
     getValidDateOrNull(obj) {
         return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
+    }
+    setControl(control) {
+        if (!this.control) {
+            this.control = control;
+        }
+    }
+    getDigitPositions(format) {
+        const formatInLowerCase = format.toLowerCase();
+        formatInLowerCase
+            .split('')
+            .reduce(({ prev, length, start }, value, index, arr) => {
+            if (value === this.separator || (arr.length - 1) === index) {
+                if (!this.firstDigit) {
+                    this.firstDigit = new DateDigit(prev, start, length);
+                }
+                else if (!this.secondDigit) {
+                    this.secondDigit = new DateDigit(prev, start, length);
+                }
+                else if (!this.thirdDigit) {
+                    this.thirdDigit = new DateDigit(prev, start, arr.length - start);
+                }
+                // tslint:disable:no-parameter-reassignment
+                length = 0;
+                start = index + 1;
+            }
+            else {
+                length++;
+            }
+            return { prev: value, length, start };
+        }, { length: 0, start: 0 });
+        if (!this.firstDigit || !this.secondDigit || !this.thirdDigit) {
+            Error(`Can' t use this format: ${format}`);
+        }
+    }
+    createDate(year, month, day) {
+        return this.dateAdapter.createDateTime(year, month, day, this.dateAdapter.getHours(this.value), this.dateAdapter.getMinutes(this.value), this.dateAdapter.getSeconds(this.value), this.dateAdapter.getMilliseconds(this.value));
+    }
+    correctCursorPosition() {
+        if (this.selectionStart && this.separatorPositions.includes(this.selectionStart)) {
+            this.selectionStart = this.selectionStart - 1;
+        }
     }
 }
 McDatepickerInput.decorators = [
@@ -1785,34 +2373,43 @@ McDatepickerInput.decorators = [
                 providers: [
                     MC_DATEPICKER_VALUE_ACCESSOR,
                     MC_DATEPICKER_VALIDATORS,
-                    { provide: MC_INPUT_VALUE_ACCESSOR, useExisting: McDatepickerInput }
+                    { provide: McFormFieldControl, useExisting: McDatepickerInput }
                 ],
                 host: {
-                    '[attr.aria-haspopup]': 'true',
-                    '[attr.aria-owns]': '(datepicker?.opened && datepicker.id) || null',
+                    class: 'mc-input mc-datepicker',
+                    '[attr.placeholder]': 'placeholder',
+                    '[attr.required]': 'required',
+                    '[attr.disabled]': 'disabled || null',
                     '[attr.min]': 'min ? dateAdapter.toIso8601(min) : null',
                     '[attr.max]': 'max ? dateAdapter.toIso8601(max) : null',
-                    '[attr.disabled]': 'disabled || null',
-                    '(input)': 'onInput($event.target.value)',
+                    '[attr.autocomplete]': '"off"',
+                    '(paste)': 'onPaste($event)',
                     '(change)': 'onChange()',
+                    '(focus)': 'focusChanged(true)',
                     '(blur)': 'onBlur()',
-                    '(keydown)': 'onKeydown($event)'
+                    '(keydown)': 'onKeyDown($event)'
                 }
             },] }
 ];
 /** @nocollapse */
 McDatepickerInput.ctorParameters = () => [
     { type: ElementRef },
+    { type: Renderer2 },
     { type: DateAdapter, decorators: [{ type: Optional }] },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DATE_FORMATS,] }] }
 ];
 McDatepickerInput.propDecorators = {
+    placeholder: [{ type: Input }],
+    required: [{ type: Input }],
     mcDatepicker: [{ type: Input }],
     mcDatepickerFilter: [{ type: Input }],
     value: [{ type: Input }],
     min: [{ type: Input }],
     max: [{ type: Input }],
     disabled: [{ type: Input }],
+    id: [{ type: Input }],
+    mcValidationTooltip: [{ type: Input }],
+    incorrectInput: [{ type: Output }],
     dateChange: [{ type: Output }],
     dateInput: [{ type: Output }]
 };
@@ -1833,7 +2430,7 @@ class McDatepickerToggle {
     }
     /** Whether the toggle button is disabled. */
     get disabled() {
-        return this._disabled === undefined ? this.datepicker.disabled : !!this._disabled;
+        return this._disabled === undefined ? this.datepicker.disabled : this._disabled;
     }
     set disabled(value) {
         this._disabled = coerceBooleanProperty(value);
@@ -1869,7 +2466,7 @@ class McDatepickerToggle {
 McDatepickerToggle.decorators = [
     { type: Component, args: [{
                 selector: 'mc-datepicker-toggle',
-                template: "<button\n    #button\n    mc-button\n    type=\"button\"\n    class=\"mc-datepicker-toggle__button\"\n    aria-haspopup=\"true\"\n    [attr.aria-label]=\"intl.openCalendarLabel\"\n    [attr.tabindex]=\"tabIndex\"\n    [disabled]=\"disabled\"\n    (click)=\"open($event)\">\n\n    <i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i>\n\n    <ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content>\n</button>\n",
+                template: "<!--todo need simplify this-->\n<button\n    #button\n    mc-button\n    type=\"button\"\n    class=\"mc-datepicker-toggle__button\"\n    aria-haspopup=\"true\"\n    [attr.aria-label]=\"intl.openCalendarLabel\"\n    [attr.tabindex]=\"tabIndex\"\n    [disabled]=\"disabled\"\n    (click)=\"open($event)\">\n\n    <i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i>\n\n    <ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content>\n</button>\n",
                 host: {
                     class: 'mc-datepicker-toggle',
                     '[class.mc-active]': 'datepicker && datepicker.opened'
@@ -1947,5 +2544,5 @@ McDatepickerModule.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, MC_DATEPICKER_VALIDATORS, MC_DATEPICKER_VALUE_ACCESSOR, McCalendar, McCalendarBody, McCalendarCell, McCalendarHeader, McDatepicker, McDatepickerContent, McDatepickerInput, McDatepickerInputEvent, McDatepickerIntl, McDatepickerModule, McDatepickerToggle, McDatepickerToggleIcon, McMonthView, McMultiYearView, McYearView, mcDatepickerAnimations, yearsPerPage, yearsPerRow };
+export { MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, MC_DATEPICKER_VALIDATORS, MC_DATEPICKER_VALUE_ACCESSOR, McCalendar, McCalendarBody, McCalendarCell, McCalendarHeader, McCalendarView, McDatepicker, McDatepickerContent, McDatepickerInput, McDatepickerInputEvent, McDatepickerIntl, McDatepickerModule, McDatepickerToggle, McDatepickerToggleIcon, McMonthView, McMultiYearView, McYearView, mcDatepickerAnimations, yearsPerPage, yearsPerRow };
 //# sourceMappingURL=ptsecurity-mosaic-datepicker.js.map

@@ -9,7 +9,7 @@ import { TimeFormats } from './timepicker.constants';
 export declare const MC_TIMEPICKER_VALUE_ACCESSOR: any;
 /** @docs-private */
 export declare const MC_TIMEPICKER_VALIDATORS: any;
-export declare class McTimepicker<D> implements McFormFieldControl<D>, OnDestroy, ControlValueAccessor, Validator {
+export declare class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAccessor, Validator, OnDestroy {
     private elementRef;
     private dateAdapter;
     private renderer;

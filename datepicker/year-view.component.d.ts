@@ -1,14 +1,14 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { AfterContentInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { DateAdapter, McDateFormats } from '@ptsecurity/cdk/datetime';
-import { McCalendarBody, McCalendarCell } from './calendar-body';
+import { McCalendarBody, McCalendarCell } from './calendar-body.component';
 /**
  * An internal component used to display a single year in the datepicker.
  * @docs-private
  */
 export declare class McYearView<D> implements AfterContentInit {
     private changeDetectorRef;
-    private dateFormats;
+    private readonly dateFormats;
     dateAdapter: DateAdapter<D>;
     private dir?;
     /** The date to display in this year view (everything other than the year is ignored). */

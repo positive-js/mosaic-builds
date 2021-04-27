@@ -996,7 +996,7 @@
             _this.dir = dir;
             _this.ngModel = ngModel;
             _this.formControlName = formControlName;
-            _this.controlType = 'mc-tag-list';
+            _this.controlType = 'tag-list';
             _this._tabIndex = 0;
             /**
              * Event that emits whenever the raw value of the tag-list changes. This is here primarily

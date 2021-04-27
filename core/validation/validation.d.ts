@@ -1,5 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { NgControl, NgForm, Validator } from '@angular/forms';
+export declare const validationTooltipShowDelay = 10;
+export declare const validationTooltipHideDelay = 3000;
 export interface McValidationOptions {
     useValidation: boolean;
 }

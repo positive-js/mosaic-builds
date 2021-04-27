@@ -348,7 +348,7 @@
              * Implemented as part of McFormFieldControl.
              * @docs-private
              */
-            _this.controlType = 'mc-textarea';
+            _this.controlType = 'textarea';
             _this.uid = "mc-textsrea-" + nextUniqueId++;
             _this._disabled = false;
             _this._required = false;

@@ -6,6 +6,7 @@ import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormsModule } from '@angu
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { isLetterKey, hasModifierKey, isVerticalMovement, isHorizontalMovement, DELETE, BACKSPACE, SPACE, HOME, PAGE_UP, END, PAGE_DOWN, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
+import { validationTooltipShowDelay, validationTooltipHideDelay } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import '@ptsecurity/mosaic/tooltip';
 import { Subject, noop } from 'rxjs';
@@ -50,8 +51,6 @@ const MC_TIMEPICKER_VALIDATORS = {
 let uniqueComponentIdSuffix = 0;
 const shortFormatSize = 5;
 const fullFormatSize = 8;
-const validationTooltipShowDelay = 10;
-const validationTooltipHideDelay = 3000;
 class McTimepicker {
     constructor(elementRef, dateAdapter, renderer) {
         this.elementRef = elementRef;
@@ -71,7 +70,7 @@ class McTimepicker {
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        this.controlType = 'mc-timepicker';
+        this.controlType = 'timepicker';
         this._format = DEFAULT_TIME_FORMAT;
         this._min = null;
         this._max = null;

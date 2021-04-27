@@ -26,8 +26,8 @@ export declare class McCalendarCell {
  * @docs-private
  */
 export declare class McCalendarBody implements OnChanges {
-    private elementRef;
-    private ngZone;
+    private readonly elementRef;
+    private readonly ngZone;
     /** The label for the table. (e.g. "Jan 2017"). */
     label: string;
     /** The cells to display in the table. */

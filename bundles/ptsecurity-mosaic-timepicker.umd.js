@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@angular/cdk/coercion'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/form-field'), require('rxjs')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/timepicker', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@angular/forms', '@angular/cdk/coercion', '@ptsecurity/cdk/datetime', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/form-field', 'rxjs'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.timepicker = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.forms, global.ng.cdk.coercion, global.datetime, global.keycodes, global.ptsecurity.mosaic['form-field'], global.rxjs));
-}(this, (function (exports, a11y, platform, common, core, forms, coercion, datetime, keycodes, formField, rxjs) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@angular/cdk/coercion'), require('@ptsecurity/cdk/datetime'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('rxjs')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/timepicker', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@angular/forms', '@angular/cdk/coercion', '@ptsecurity/cdk/datetime', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', 'rxjs'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.timepicker = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ng.forms, global.ng.cdk.coercion, global.datetime, global.keycodes, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic['form-field'], global.rxjs));
+}(this, (function (exports, a11y, platform, common, core, forms, coercion, datetime, keycodes, core$1, formField, rxjs) { 'use strict';
 
     var _a;
     // tslint:disable:naming-convention
@@ -45,8 +45,6 @@
     var uniqueComponentIdSuffix = 0;
     var shortFormatSize = 5;
     var fullFormatSize = 8;
-    var validationTooltipShowDelay = 10;
-    var validationTooltipHideDelay = 3000;
     var McTimepicker = /** @class */ (function () {
         function McTimepicker(elementRef, dateAdapter, renderer) {
             var _this = this;
@@ -67,7 +65,7 @@
              * Implemented as part of McFormFieldControl.
              * @docs-private
              */
-            this.controlType = 'mc-timepicker';
+            this.controlType = 'timepicker';
             this._format = DEFAULT_TIME_FORMAT;
             this._min = null;
             this._max = null;
@@ -218,7 +216,7 @@
                 if (!tooltip) {
                     return;
                 }
-                tooltip.mcMouseEnterDelay = validationTooltipShowDelay;
+                tooltip.mcMouseEnterDelay = core$1.validationTooltipShowDelay;
                 tooltip.mcTrigger = 'manual';
                 tooltip.mcTooltipClass = 'mc-tooltip_warning';
                 tooltip.initElementRefListeners();
@@ -227,7 +225,7 @@
                         return;
                     }
                     tooltip.show();
-                    setTimeout(function () { return tooltip.hide(); }, validationTooltipHideDelay);
+                    setTimeout(function () { return tooltip.hide(); }, core$1.validationTooltipHideDelay);
                 });
             },
             enumerable: false,

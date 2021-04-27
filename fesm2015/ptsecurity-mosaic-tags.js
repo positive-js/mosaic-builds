@@ -402,7 +402,7 @@ class McTagList extends McTagListMixinBase {
         this.dir = dir;
         this.ngModel = ngModel;
         this.formControlName = formControlName;
-        this.controlType = 'mc-tag-list';
+        this.controlType = 'tag-list';
         this._tabIndex = 0;
         /**
          * Event that emits whenever the raw value of the tag-list changes. This is here primarily

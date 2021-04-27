@@ -1,7 +1,7 @@
 import { AfterContentInit, ChangeDetectorRef, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { McButton } from '@ptsecurity/mosaic/button';
-import { McDatepicker } from './datepicker';
 import { McDatepickerIntl } from './datepicker-intl';
+import { McDatepicker } from './datepicker.component';
 /** Can be used to override the icon of a `mcDatepickerToggle`. */
 export declare class McDatepickerToggleIcon {
 }

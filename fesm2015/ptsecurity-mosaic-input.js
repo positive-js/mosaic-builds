@@ -206,7 +206,7 @@ class McInput extends McInputMixinBase {
          * Implemented as part of McFormFieldControl.
          * @docs-private
          */
-        this.controlType = 'mc-input';
+        this.controlType = 'input';
         this.uid = `mc-input-${nextUniqueId++}`;
         this.neverEmptyInputTypes = [
             'date',
