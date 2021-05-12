@@ -77,7 +77,7 @@
                 var newTimeObj = _this.getDateFromTimeString(formattedValue);
                 _this.lastValueValid = !!newTimeObj;
                 if (!newTimeObj) {
-                    _this.control.updateValueAndValidity();
+                    _this.onChange(null);
                     return;
                 }
                 var selectionStart = _this.selectionStart;
@@ -314,9 +314,8 @@
             }
         };
         McTimepicker.prototype.onBlur = function () {
-            this.lastValueValid = !!this.getDateFromTimeString(this.viewValue);
             this.focusChanged(false);
-            this.control.updateValueAndValidity();
+            this.onInput();
         };
         McTimepicker.prototype.onPaste = function ($event) {
             $event.preventDefault();

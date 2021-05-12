@@ -82,7 +82,7 @@ class McTimepicker {
             const newTimeObj = this.getDateFromTimeString(formattedValue);
             this.lastValueValid = !!newTimeObj;
             if (!newTimeObj) {
-                this.control.updateValueAndValidity();
+                this.onChange(null);
                 return;
             }
             const selectionStart = this.selectionStart;
@@ -255,9 +255,8 @@ class McTimepicker {
         }
     }
     onBlur() {
-        this.lastValueValid = !!this.getDateFromTimeString(this.viewValue);
         this.focusChanged(false);
-        this.control.updateValueAndValidity();
+        this.onInput();
     }
     onPaste($event) {
         $event.preventDefault();
