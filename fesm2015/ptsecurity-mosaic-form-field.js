@@ -12,7 +12,7 @@ McCleaner.decorators = [
     { type: Component, args: [{
                 selector: 'mc-cleaner',
                 exportAs: 'mcCleaner',
-                template: '<i class="mc-icon_light" mc-icon="mc-close-circle_16" color="second"></i>',
+                template: `<i class="mc-icon_light" mc-icon="mc-close-circle_16" [color]="'primary'"></i>`,
                 host: {
                     class: 'mc-cleaner'
                 }

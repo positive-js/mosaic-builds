@@ -130,7 +130,7 @@ class McSidepanelContainerComponent extends BasePortalOutlet {
 McSidepanelContainerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'mc-sidepanel-container',
-                template: "<div class=\"mc-sidepanel-wrapper\">\n\n    <button *ngIf=\"withIndent\"\n            class=\"mc-sidepanel-indent mc-button_transparent\"\n            mc-button\n            mcSidepanelClose>\n        <i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" color=\"second\"></i>\n    </button>\n\n    <div class=\"mc-sidepanel-content\">\n        <ng-template cdkPortalOutlet></ng-template>\n    </div>\n</div>\n\n",
+                template: "<div class=\"mc-sidepanel-wrapper\">\n\n    <button *ngIf=\"withIndent\"\n            class=\"mc-sidepanel-indent mc-button_transparent\"\n            mc-button\n            mcSidepanelClose>\n        <i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" [color]=\"'second'\"></i>\n    </button>\n\n    <div class=\"mc-sidepanel-content\">\n        <ng-template cdkPortalOutlet></ng-template>\n    </div>\n</div>\n\n",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 encapsulation: ViewEncapsulation.None,
                 animations: [mcSidepanelAnimations.sidepanelState],
@@ -420,7 +420,7 @@ McSidepanelHeader.decorators = [
         </div>
         <button *ngIf="closeable" mc-sidepanel-close>
             <span class="mc-sidepanel-close-x">
-                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" color="second"></i>
+                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="'second'"></i>
             </span>
         </button>
     `,
