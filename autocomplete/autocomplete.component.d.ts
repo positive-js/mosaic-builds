@@ -57,6 +57,9 @@ export declare class McAutocomplete implements AfterContentInit {
     get isOpen(): boolean;
     set isOpen(value: boolean);
     private _isOpen;
+    get openOnFocus(): boolean;
+    set openOnFocus(value: boolean);
+    private _openOnFocus;
     constructor(changeDetectorRef: ChangeDetectorRef, elementRef: ElementRef<HTMLElement>, defaults: McAutocompleteDefaultOptions);
     ngAfterContentInit(): void;
     setScrollTop(scrollTop: number): void;

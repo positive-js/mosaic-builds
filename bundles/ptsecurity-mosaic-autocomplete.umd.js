@@ -43,6 +43,7 @@
             this.closed = new core.EventEmitter();
             this._classList = {};
             this._isOpen = false;
+            this._openOnFocus = true;
             this._autoActiveFirstOption = !!defaults.autoActiveFirstOption;
         }
         Object.defineProperty(McAutocomplete.prototype, "classList", {
@@ -84,6 +85,16 @@
             },
             set: function (value) {
                 this._isOpen = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McAutocomplete.prototype, "openOnFocus", {
+            get: function () {
+                return this._openOnFocus;
+            },
+            set: function (value) {
+                this._openOnFocus = value;
             },
             enumerable: false,
             configurable: true
@@ -148,7 +159,8 @@
         opened: [{ type: core.Output }],
         closed: [{ type: core.Output }],
         classList: [{ type: core.Input, args: ['class',] }],
-        autoActiveFirstOption: [{ type: core.Input }]
+        autoActiveFirstOption: [{ type: core.Input }],
+        openOnFocus: [{ type: core.Input }]
     };
 
     /**
@@ -750,7 +762,7 @@
             if (!this.canOpenOnNextFocus) {
                 this.canOpenOnNextFocus = true;
             }
-            else if (this.canOpen()) {
+            else if (this.canOpen() && this.autocomplete.openOnFocus) {
                 this.previousValue = this.elementRef.nativeElement.value;
                 this.attachOverlay();
             }

@@ -1,8 +1,30 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@angular/forms'), require('@angular/common'), require('@angular/cdk/overlay'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@angular/forms', '@angular/common', '@angular/cdk/overlay', '@angular/animations', '@ptsecurity/cdk/keycodes'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.ng.forms, global.ng.common, global.ng.cdk.overlay, global.ng.animations, global.keycodes));
-}(this, (function (exports, bidi, i0, coercion, rxjs, forms, i1, overlay, animations, keycodes) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@ptsecurity/cdk/datetime'), require('messageformat'), require('@angular/forms'), require('@angular/common'), require('@angular/cdk/overlay'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@ptsecurity/cdk/datetime', 'messageformat', '@angular/forms', '@angular/common', '@angular/cdk/overlay', '@angular/animations', '@ptsecurity/cdk/keycodes'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.datetime, global.MessageFormat, global.ng.forms, global.ng.common, global.ng.cdk.overlay, global.ng.animations, global.keycodes));
+}(this, (function (exports, bidi, i0, coercion, rxjs, datetime, MessageFormat, forms, i1, overlay, animations, keycodes) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var MessageFormat__namespace = /*#__PURE__*/_interopNamespace(MessageFormat);
 
     function isBoolean(val) { return typeof val === 'boolean'; }
     function toBoolean(value) {
@@ -635,6 +657,439 @@
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
 
+    var enUS = {
+        relativeTemplates: {
+            short: {
+                SECONDS_AGO: 'Just now',
+                MINUTES_AGO: '{MINUTES_PASSED}{NBSP}min ago',
+                TODAY: '{TIME}',
+                YESTERDAY: 'Yesterday, {TIME}',
+                BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
+            },
+            long: {
+                SECONDS_AGO: 'Just now',
+                MINUTES_AGO: '{MINUTES_PASSED, plural, =1{#{NBSP}minute} other{#{NBSP}minutes}} ago',
+                TODAY: '{TIME}',
+                YESTERDAY: 'Yesterday, {TIME}',
+                BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
+            }
+        },
+        absoluteTemplates: {
+            short: {
+                DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE}, {YEAR}}}',
+                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{SHORT_DATE}, {TIME}}\n                    other{{SHORT_DATE}, {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{{MILLISECONDS}}\n                    other{}\n            }"
+            },
+            long: {
+                DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
+                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{DATE}, {TIME}}\n                    other{{DATE}, {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{{MILLISECONDS}}\n                    other{}\n            }"
+            }
+        },
+        rangeTemplates: {
+            closedRange: {
+                short: {
+                    START_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE}, {YEAR}}}',
+                    END_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}}\n                                other{{SHORT_DATE}, {YEAR}}\n                        }}\n                }",
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}, {TIME}}\n                                other{{SHORT_DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{TIME}, {SHORT_DATE}}\n                                other{{TIME}, {SHORT_DATE}, {YEAR}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}, {TIME}}\n                                other{{SHORT_DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                        other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                }"
+                },
+                middle: {
+                    START_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}}\n                                other{{DATE}, {YEAR}}\n                        }}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{TIME}, {DATE}}\n                                other{{TIME}, {DATE}, {YEAR}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                        other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                }"
+                },
+                long: {
+                    START_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
+                    END_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}}\n                                other{{DATE}, {YEAR}}\n                        }}\n                }",
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, from{NBSP}{TIME}}\n                                other{{DATE}, {YEAR}, from{NBSP}{TIME}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{to{NBSP}{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE}, {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME} {END_DATETIME}}\n                        other{From {START_DATETIME} to{NBSP}{END_DATETIME}}\n                }"
+                }
+            },
+            openedRange: {
+                short: {
+                    START_DATE: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}}\n                        other{{SHORT_DATE} {YEAR}}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
+                    DATE: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{From{NBSP}{START_DATE}}\n                        other{Until{NBSP}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}, {TIME}}\n                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                }",
+                    END_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}, {TIME}}\n                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                }",
+                    DATETIME: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{From{NBSP}{START_DATETIME}}\n                        other{Until{NBSP}{END_DATETIME}}\n                }"
+                },
+                long: {
+                    START_DATE: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}}\n                        other{{DATE} {YEAR}}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
+                    DATE: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{From{NBSP}{START_DATE}}\n                        other{Until{NBSP}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}, {TIME}}\n                        other{{DATE} {YEAR}, {TIME}}\n                }",
+                    END_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}, {TIME}}\n                        other{{DATE} {YEAR}, {TIME}}\n                }",
+                    DATETIME: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{From{NBSP}{START_DATETIME}}\n                        other{Until{NBSP}{END_DATETIME}}\n                }"
+                }
+            }
+        }
+    };
+
+    var ruRU = {
+        relativeTemplates: {
+            short: {
+                SECONDS_AGO: 'Только что',
+                MINUTES_AGO: '{MINUTES_PASSED}{NBSP}мин назад',
+                TODAY: '{TIME}',
+                YESTERDAY: 'Вчера, {TIME}',
+                BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}'
+            },
+            long: {
+                SECONDS_AGO: 'Только что',
+                MINUTES_AGO: '{MINUTES_PASSED, plural, =1{#{NBSP}минуту} =2{#{NBSP}минуты} other{#{NBSP}минут}} назад',
+                TODAY: '{TIME}',
+                YESTERDAY: 'Вчера, {TIME}',
+                BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}'
+            }
+        },
+        absoluteTemplates: {
+            short: {
+                DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
+                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{SHORT_DATE}, {TIME}}\n                    other{{SHORT_DATE} {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{{MILLISECONDS}}\n                    other{}\n            }"
+            },
+            long: {
+                DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
+                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{DATE}, {TIME}}\n                    other{{DATE} {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{{MILLISECONDS}}\n                    other{}\n            }"
+            }
+        },
+        rangeTemplates: {
+            closedRange: {
+                short: {
+                    START_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}}\n                                other{{SHORT_DATE} {YEAR}}\n                        }}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}, {TIME}}\n                                other{{SHORT_DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{TIME}, {SHORT_DATE}}\n                                other{{TIME}, {SHORT_DATE} {YEAR}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{SHORT_DATE}, {TIME}}\n                                other{{SHORT_DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                        other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                }"
+                },
+                middle: {
+                    START_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}}\n                                other{{DATE} {YEAR}}\n                        }}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{TIME}, {DATE}}\n                                other{{TIME}, {DATE} {YEAR}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME}{DASH}{END_DATETIME}}\n                        other{{START_DATETIME}{LONG_DASH}{END_DATETIME}}\n                }"
+                },
+                long: {
+                    START_DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{DAY}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}}\n                                other{{DATE} {YEAR}}\n                        }}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
+                    DATE: "{\n                    SAME_MONTH,\n                    select,\n                        yes{{START_DATE}{DASH}{END_DATE}}\n                        other{{START_DATE}{LONG_DASH}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, \u0441{NBSP}{TIME}}\n                                other{{DATE} {YEAR}, \u0441{NBSP}{TIME}}\n                        }}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    END_DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{\u043F\u043E{NBSP}{TIME}}\n                        other{{\n                            CURRENT_YEAR,\n                            select,\n                                yes{{DATE}, {TIME}}\n                                other{{DATE} {YEAR}, {TIME}}\n                        }}\n                }",
+                    DATETIME: "{\n                    SAME_DAY,\n                    select,\n                        yes{{START_DATETIME} {END_DATETIME}}\n                        other{\u0421{NBSP}{START_DATETIME} \u043F\u043E{NBSP}{END_DATETIME}}\n                }"
+                }
+            },
+            openedRange: {
+                short: {
+                    START_DATE: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}}\n                        other{{SHORT_DATE} {YEAR}}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
+                    DATE: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{\u0421{NBSP}{START_DATE}}\n                        other{\u041F\u043E{NBSP}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}, {TIME}}\n                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                }",
+                    END_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{SHORT_DATE}, {TIME}}\n                        other{{SHORT_DATE} {YEAR}, {TIME}}\n                }",
+                    DATETIME: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{\u0421{NBSP}{START_DATETIME}}\n                        other{\u041F\u043E{NBSP}{END_DATETIME}}\n                }"
+                },
+                long: {
+                    START_DATE: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}}\n                        other{{DATE} {YEAR}}\n                }",
+                    END_DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
+                    DATE: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{\u0421{NBSP}{START_DATE}}\n                        other{\u041F\u043E{NBSP}{END_DATE}}\n                }",
+                    START_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}, {TIME}}\n                        other{{DATE} {YEAR}, {TIME}}\n                }",
+                    END_DATETIME: "{\n                    CURRENT_YEAR,\n                    select,\n                        yes{{DATE}, {TIME}}\n                        other{{DATE} {YEAR}, {TIME}}\n                }",
+                    DATETIME: "{\n                    RANGE_TYPE,\n                    select,\n                        onlyStart{\u0421{NBSP}{START_DATETIME}}\n                        other{\u041F\u043E{NBSP}{END_DATETIME}}\n                }"
+                }
+            }
+        }
+    };
+
+    // tslint:disable:no-magic-numbers
+    var DateFormatter = /** @class */ (function () {
+        function DateFormatter(adapter, locale) {
+            this.adapter = adapter;
+            this.invalidDateErrorText = 'Invalid date';
+            this.config = locale === 'en' ? enUS : ruRU;
+            this.messageFormat = new MessageFormat__namespace(locale);
+        }
+        DateFormatter.prototype.setLocale = function (locale) {
+            this.config = locale === 'en' ? enUS : ruRU;
+            this.adapter.setLocale(locale);
+        };
+        /**
+         * @param date - date
+         * @param template - template
+         * @returns relative date by template
+         */
+        DateFormatter.prototype.relativeDate = function (date, template) {
+            if (!this.adapter.isDateInstance(date)) {
+                throw new Error(this.invalidDateErrorText);
+            }
+            var totalSeconds = Math.abs(this.adapter.diffNow(date, 'seconds'));
+            var totalMinutes = Math.floor(Math.abs(this.adapter.diffNow(date, 'minutes')));
+            var isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
+            var isYesterday = this.adapter.diffNow(date, 'days') <= -1 && this.adapter.diffNow(date, 'days') > -2;
+            var templateVariables = Object.assign(Object.assign({}, this.adapter.config.variables), template.variables);
+            var variables = this.compileVariables(date, templateVariables);
+            var newTemplate;
+            if (totalSeconds <= 59) { // seconds ago
+                variables.SECONDS_PASSED = totalSeconds;
+                newTemplate = template.SECONDS_AGO;
+            }
+            else if (totalMinutes <= 59) { // minutes ago
+                variables.MINUTES_PASSED = totalMinutes;
+                newTemplate = template.MINUTES_AGO;
+            }
+            else if (isToday) {
+                newTemplate = template.TODAY;
+            }
+            else if (isYesterday) {
+                newTemplate = template.YESTERDAY;
+            }
+            else { // before yesterday
+                newTemplate = template.BEFORE_YESTERDAY;
+            }
+            return this.messageFormat.compile(newTemplate)(variables);
+        };
+        /**
+         * @param date - date
+         * @returns relative date in short format
+         */
+        DateFormatter.prototype.relativeShortDate = function (date) {
+            return this.relativeDate(date, this.config.relativeTemplates.short);
+        };
+        /**
+         * @param date - date
+         * @returns relative date in long format
+         */
+        DateFormatter.prototype.relativeLongDate = function (date) {
+            return this.relativeDate(date, this.config.relativeTemplates.long);
+        };
+        /**
+         * @param date - date
+         * @param params - parameters
+         * @param datetime - should time be shown as well
+         * @param milliseconds - should time with milliseconds be shown as well
+         * @returns absolute date in common format
+         */
+        DateFormatter.prototype.absoluteDate = function (date, params, datetime, milliseconds) {
+            if (datetime === void 0) { datetime = false; }
+            if (milliseconds === void 0) { milliseconds = false; }
+            if (!this.adapter.isDateInstance(date)) {
+                throw new Error(this.invalidDateErrorText);
+            }
+            var variables = this.compileVariables(date, Object.assign(Object.assign({}, this.adapter.config.variables), params.variables));
+            variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
+            var template = datetime ? params.DATETIME : params.DATE;
+            return this.messageFormat.compile(template)(variables);
+        };
+        /**
+         * @param date - date
+         * @returns absolute date in short format
+         */
+        DateFormatter.prototype.absoluteShortDate = function (date) {
+            return this.absoluteDate(date, this.config.absoluteTemplates.short);
+        };
+        /**
+         * @param date - date
+         * @param options - AbsoluteDateTimeOptions
+         * @returns absolute date in short format with time
+         */
+        DateFormatter.prototype.absoluteShortDateTime = function (date, options) {
+            return this.absoluteDate(date, this.config.absoluteTemplates.short, true, options === null || options === void 0 ? void 0 : options.milliseconds);
+        };
+        /**
+         * @param date - date
+         * @returns absolute date in long format
+         */
+        DateFormatter.prototype.absoluteLongDate = function (date) {
+            return this.absoluteDate(date, this.config.absoluteTemplates.long);
+        };
+        /**
+         * @param date - date
+         * @param options - AbsoluteDateTimeOptions
+         * @returns absolute date in long format with time
+         */
+        DateFormatter.prototype.absoluteLongDateTime = function (date, options) {
+            return this.absoluteDate(date, this.config.absoluteTemplates.long, true, options === null || options === void 0 ? void 0 : options.milliseconds);
+        };
+        /**
+         * @param startDate - start date
+         * @param endDate - end date
+         * @param template - template
+         * @returns opened date
+         */
+        DateFormatter.prototype.openedRangeDate = function (startDate, endDate, template) {
+            if (!this.adapter.isDateInstance(startDate) && !this.adapter.isDateInstance(endDate)) {
+                throw new Error(this.invalidDateErrorText);
+            }
+            var variables = Object.assign(Object.assign({}, this.adapter.config.variables), template.variables);
+            var params = {};
+            if (startDate) {
+                var startDateVariables = this.compileVariables(startDate, variables);
+                params = Object.assign(Object.assign({}, variables), { START_DATE: this.messageFormat.compile(template.START_DATE)(startDateVariables), RANGE_TYPE: 'onlyStart' });
+            }
+            else if (endDate) {
+                var endDateVariables = this.compileVariables(endDate, variables);
+                params = Object.assign(Object.assign({}, variables), { END_DATE: this.messageFormat.compile(template.END_DATE)(endDateVariables), RANGE_TYPE: 'onlyEnd' });
+            }
+            return this.messageFormat.compile(template.DATE)(params);
+        };
+        /**
+         * @param startDate - start date
+         * @param endDate - end date
+         * @param template - template
+         * @returns opened date
+         */
+        DateFormatter.prototype.openedRangeDateTime = function (startDate, endDate, template) {
+            if (!this.adapter.isDateInstance(startDate) && !this.adapter.isDateInstance(endDate)) {
+                throw new Error(this.invalidDateErrorText);
+            }
+            var variables = Object.assign(Object.assign({}, this.adapter.config.variables), template.variables);
+            var params = {};
+            if (startDate) {
+                var startDateVariables = this.compileVariables(startDate, variables);
+                params = Object.assign(Object.assign({}, variables), { START_DATETIME: this.messageFormat.compile(template.START_DATETIME)(startDateVariables), RANGE_TYPE: 'onlyStart' });
+            }
+            else if (endDate) {
+                var endDateVariables = this.compileVariables(endDate, variables);
+                params = Object.assign(Object.assign({}, variables), { END_DATETIME: this.messageFormat.compile(template.END_DATETIME)(endDateVariables), RANGE_TYPE: 'onlyEnd' });
+            }
+            return this.messageFormat.compile(template.DATETIME)(params);
+        };
+        /**
+         * @param startDate - start date
+         * @param endDate - end date
+         * @param template - template
+         * @returns range date in template format
+         */
+        DateFormatter.prototype.rangeDate = function (startDate, endDate, template) {
+            if (!this.adapter.isDateInstance(startDate) || !this.adapter.isDateInstance(endDate)) {
+                throw new Error(this.invalidDateErrorText);
+            }
+            var variables = Object.assign(Object.assign({}, this.adapter.config.variables), template.variables);
+            var sameMonth = this.hasSame(startDate, endDate, 'month');
+            var startDateVariables = this.compileVariables(startDate, variables);
+            startDateVariables.SAME_MONTH = sameMonth;
+            var endDateVariables = this.compileVariables(endDate, variables);
+            endDateVariables.SAME_MONTH = sameMonth;
+            var bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' && endDateVariables.CURRENT_YEAR === 'yes';
+            startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+            endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+            var params = Object.assign(Object.assign({}, variables), { START_DATE: this.messageFormat.compile(template.START_DATE)(startDateVariables), END_DATE: this.messageFormat.compile(template.END_DATE)(endDateVariables), SAME_MONTH: sameMonth });
+            return this.messageFormat.compile(template.DATE)(params);
+        };
+        /**
+         * @param startDate - start date
+         * @param endDate - end date
+         * @param template - template
+         * @returns range date in template format with time
+         */
+        DateFormatter.prototype.rangeDateTime = function (startDate, endDate, template) {
+            if (!this.adapter.isDateInstance(startDate) || !this.adapter.isDateInstance(endDate)) {
+                throw new Error(this.invalidDateErrorText);
+            }
+            var variables = Object.assign(Object.assign({}, this.adapter.config.variables), template.variables);
+            var sameMonth = this.hasSame(startDate, endDate, 'month');
+            var sameDay = this.hasSame(startDate, endDate, 'day');
+            var startDateVariables = this.compileVariables(startDate, variables);
+            startDateVariables.SAME_MONTH = sameMonth;
+            startDateVariables.SAME_DAY = sameDay;
+            var endDateVariables = this.compileVariables(endDate, variables);
+            endDateVariables.SAME_MONTH = sameMonth;
+            endDateVariables.SAME_DAY = sameDay;
+            var bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' && endDateVariables.CURRENT_YEAR === 'yes';
+            startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+            endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
+            var params = Object.assign(Object.assign({}, variables), { START_DATETIME: this.messageFormat.compile(template.START_DATETIME)(startDateVariables), END_DATETIME: this.messageFormat.compile(template.END_DATETIME)(endDateVariables), SAME_MONTH: sameMonth, SAME_DAY: sameDay });
+            return this.messageFormat.compile(template.DATETIME)(params);
+        };
+        /**
+         * @param startDate - start date
+         * @param endDate - end date
+         * @returns range date in short format
+         */
+        DateFormatter.prototype.rangeShortDate = function (startDate, endDate) {
+            var rangeTemplates = this.config.rangeTemplates;
+            if (startDate && endDate) {
+                return this.rangeDate(startDate, endDate, rangeTemplates.closedRange.short);
+            }
+            return this.openedRangeDate(startDate, endDate || null, rangeTemplates.openedRange.short);
+        };
+        /**
+         * @param startDate - start date
+         * @param endDate - end date
+         * @returns range date in short format with time
+         */
+        DateFormatter.prototype.rangeShortDateTime = function (startDate, endDate) {
+            var rangeTemplates = this.config.rangeTemplates;
+            if (startDate && endDate) {
+                return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.short);
+            }
+            return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.short);
+        };
+        /**
+         * @param startDate - start date
+         * @param endDate - end date
+         * @returns range date in long format
+         */
+        DateFormatter.prototype.rangeLongDate = function (startDate, endDate) {
+            var rangeTemplates = this.config.rangeTemplates;
+            if (startDate && endDate) {
+                return this.rangeDate(startDate, endDate, rangeTemplates.closedRange.long);
+            }
+            return this.openedRangeDate(startDate, endDate || null, rangeTemplates.openedRange.long);
+        };
+        /**
+         * @param startDate - start date
+         * @param endDate - end date
+         * @returns range date in long format with time
+         */
+        DateFormatter.prototype.rangeLongDateTime = function (startDate, endDate) {
+            var rangeTemplates = this.config.rangeTemplates;
+            if (startDate && endDate) {
+                return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.long);
+            }
+            return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.long);
+        };
+        /**
+         * @param startDate - start date
+         * @param endDate - end date
+         * @returns range middle date with time
+         */
+        DateFormatter.prototype.rangeMiddleDateTime = function (startDate, endDate) {
+            return this.rangeDateTime(startDate, endDate, this.config.rangeTemplates.closedRange.middle);
+        };
+        DateFormatter.prototype.compileVariables = function (date, variables) {
+            var compiledVariables = {};
+            // tslint:disable-next-line:no-for-in
+            for (var key in variables) {
+                if (!variables.hasOwnProperty(key)) {
+                    continue;
+                }
+                var value = variables[key];
+                compiledVariables[key] = this.adapter.format(date, value);
+            }
+            compiledVariables.CURRENT_YEAR = this.hasSame(date, this.adapter.today(), 'year');
+            return compiledVariables;
+        };
+        DateFormatter.prototype.hasSame = function (startDate, endDate, unit) {
+            return this.adapter.hasSame(startDate, endDate, unit) ? 'yes' : 'no';
+        };
+        return DateFormatter;
+    }());
+    DateFormatter.decorators = [
+        { type: i0.Injectable }
+    ];
+    /** @nocollapse */
+    DateFormatter.ctorParameters = function () { return [
+        { type: datetime.DateAdapter },
+        { type: String, decorators: [{ type: i0.Inject, args: [datetime.MC_DATE_LOCALE,] }] }
+    ]; };
+
     /* tslint:disable:naming-convention */
     var MC_LOCALE_ID = new i0.InjectionToken('McLocaleId');
     var DEFAULT_MC_LOCALE_ID = 'ru';
@@ -737,12 +1192,9 @@
     }());
     McFormattersModule.decorators = [
         { type: i0.NgModule, args: [{
-                    exports: [
-                        McDecimalPipe
-                    ],
-                    declarations: [
-                        McDecimalPipe
-                    ]
+                    exports: [McDecimalPipe],
+                    declarations: [McDecimalPipe],
+                    providers: [DateFormatter]
                 },] }
     ];
 
@@ -1671,6 +2123,7 @@
     exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
     exports.DEFAULT_4_POSITIONS_TO_CSS_MAP = DEFAULT_4_POSITIONS_TO_CSS_MAP;
     exports.DEFAULT_MC_LOCALE_ID = DEFAULT_MC_LOCALE_ID;
+    exports.DateFormatter = DateFormatter;
     exports.EXTENDED_OVERLAY_POSITIONS = EXTENDED_OVERLAY_POSITIONS;
     exports.ErrorStateMatcher = ErrorStateMatcher;
     exports.LEFT_BOTTOM_POSITION_PRIORITY = LEFT_BOTTOM_POSITION_PRIORITY;

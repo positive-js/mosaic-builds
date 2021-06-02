@@ -51,6 +51,7 @@ class McAutocomplete {
         this.closed = new EventEmitter();
         this._classList = {};
         this._isOpen = false;
+        this._openOnFocus = true;
         this._autoActiveFirstOption = !!defaults.autoActiveFirstOption;
     }
     /**
@@ -82,6 +83,12 @@ class McAutocomplete {
     }
     set isOpen(value) {
         this._isOpen = value;
+    }
+    get openOnFocus() {
+        return this._openOnFocus;
+    }
+    set openOnFocus(value) {
+        this._openOnFocus = value;
     }
     ngAfterContentInit() {
         this.keyManager = new ActiveDescendantKeyManager(this.options);
@@ -142,7 +149,8 @@ McAutocomplete.propDecorators = {
     opened: [{ type: Output }],
     closed: [{ type: Output }],
     classList: [{ type: Input, args: ['class',] }],
-    autoActiveFirstOption: [{ type: Input }]
+    autoActiveFirstOption: [{ type: Input }],
+    openOnFocus: [{ type: Input }]
 };
 
 /**
@@ -415,7 +423,7 @@ class McAutocompleteTrigger {
         if (!this.canOpenOnNextFocus) {
             this.canOpenOnNextFocus = true;
         }
-        else if (this.canOpen()) {
+        else if (this.canOpen() && this.autocomplete.openOnFocus) {
             this.previousValue = this.elementRef.nativeElement.value;
             this.attachOverlay();
         }

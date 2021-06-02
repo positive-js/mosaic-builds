@@ -650,8 +650,11 @@ class McTreeSelection extends CdkTree {
         if (this.multiple && value && !Array.isArray(value)) {
             throw getMcSelectNonArrayValueError();
         }
-        if (this.renderedOptions.length) {
+        if (value) {
             this.setOptionsFromValues(this.multiple ? value : [value]);
+        }
+        else {
+            this.selectionModel.clear();
         }
     }
     registerOnChange(fn) {
@@ -738,9 +741,7 @@ class McTreeSelection extends CdkTree {
         return this.renderedOptions.some((option) => option.hasFocus);
     }
     markOptionsForCheck() {
-        if (this.renderedOptions.length) {
-            this.renderedOptions.forEach((option) => option.markForCheck());
-        }
+        this.renderedOptions.forEach((option) => option.markForCheck());
     }
     updateOptionsFocus() {
         this.renderedOptions

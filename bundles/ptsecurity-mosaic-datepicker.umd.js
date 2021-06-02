@@ -314,10 +314,9 @@
         McMonthView.prototype.init = function () {
             this.selectedDate = this.getDateInCurrentMonth(this.selected);
             this.todayDate = this.getDateInCurrentMonth(this.dateAdapter.today());
-            this.monthLabel =
-                this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate)];
+            this.monthLabel = this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate) - this.dateAdapter.firstMonth];
             this.monthLabel = this.monthLabel[0].toLocaleUpperCase() + this.monthLabel.substr(1);
-            var firstOfMonth = this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), this.dateAdapter.getMonth(this.activeDate), 1);
+            var firstOfMonth = this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), this.dateAdapter.getMonth(this.activeDate));
             this.firstWeekOffset =
                 (DAYS_PER_WEEK + this.dateAdapter.getDayOfWeek(firstOfMonth) -
                     this.dateAdapter.getFirstDayOfWeek()) % DAYS_PER_WEEK;
@@ -505,9 +504,9 @@
         };
         /** Handles when a new year is selected. */
         McMultiYearView.prototype.onYearSelected = function (year) {
-            this.yearSelected.emit(this.dateAdapter.createDate(year, 0, 1));
+            this.yearSelected.emit(this.dateAdapter.createDate(year));
             var month = this.dateAdapter.getMonth(this.activeDate);
-            var daysInMonth = this.dateAdapter.getNumDaysInMonth(this.dateAdapter.createDate(year, month, 1));
+            var daysInMonth = this.dateAdapter.getNumDaysInMonth(this.dateAdapter.createDate(year, month));
             this.selectedChange.emit(this.dateAdapter.createDate(year, month, Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth)));
         };
         /** Handles keydown events on the calendar body when calendar is in multi-year view. */
@@ -569,7 +568,7 @@
         };
         /** Creates an McCalendarCell for the given year. */
         McMultiYearView.prototype.createCellForYear = function (year) {
-            var yearName = this.dateAdapter.getYearName(this.dateAdapter.createDate(year, 0, 1));
+            var yearName = this.dateAdapter.getYearName(this.dateAdapter.createDate(year));
             return new McCalendarCell(year, yearName, yearName, this.shouldEnableYear(year));
         };
         /** Whether the given year is enabled. */
@@ -584,7 +583,7 @@
             if (!this.dateFilter) {
                 return true;
             }
-            var firstOfYear = this.dateAdapter.createDate(year, 0, 1);
+            var firstOfYear = this.dateAdapter.createDate(year);
             // If any date in the year is enabled count the year as enabled.
             for (var date = firstOfYear; this.dateAdapter.getYear(date) === year; date = this.dateAdapter.addCalendarDays(date, 1)) {
                 if (this.dateFilter(date)) {
@@ -713,7 +712,7 @@
         /** Handles when a new month is selected. */
         McYearView.prototype.onMonthSelected = function (month) {
             var year = this.dateAdapter.getYear(this.activeDate);
-            var normalizedDate = this.dateAdapter.createDate(year, month, 1);
+            var normalizedDate = this.dateAdapter.createDate(year, month);
             this.monthSelected.emit(normalizedDate);
             var daysInMonth = this.dateAdapter.getNumDaysInMonth(normalizedDate);
             this.selectedChange.emit(this.dateAdapter.createDate(year, month, Math.min(this.dateAdapter.getDate(this.activeDate), daysInMonth)));
@@ -780,7 +779,8 @@
             var monthNames = this.dateAdapter.getMonthNames('short');
             // First row of months only contains 5 elements so we can fit the year label on the same row.
             // tslint:disable-next-line:no-magic-numbers
-            this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]].map(function (row) { return row.map(function (month) { return _this.createCellForMonth(month, monthNames[month]); }); });
+            this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]]
+                .map(function (row) { return row.map(function (month) { return _this.createCellForMonth(month + _this.dateAdapter.firstMonth, monthNames[month]); }); });
             this.changeDetectorRef.markForCheck();
         };
         /** Focuses the active cell after the microtask queue is empty. */
@@ -797,7 +797,7 @@
         };
         /** Creates an McCalendarCell for the given month. */
         McYearView.prototype.createCellForMonth = function (month, monthName) {
-            var ariaLabel = this.dateAdapter.format(this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month, 1), this.dateFormats.monthYearA11yLabel);
+            var ariaLabel = this.dateAdapter.format(this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), month), this.dateFormats.monthYearA11yLabel);
             var newMonthName = monthName[0].toLocaleUpperCase() + monthName.substr(1);
             return new McCalendarCell(month, newMonthName, ariaLabel, this.shouldEnableMonth(month));
         };
@@ -812,7 +812,7 @@
             if (!this.dateFilter) {
                 return true;
             }
-            var firstOfMonth = this.dateAdapter.createDate(activeYear, month, 1);
+            var firstOfMonth = this.dateAdapter.createDate(activeYear, month);
             // If any date in the month is enabled count the month as enabled.
             for (var date = firstOfMonth; this.dateAdapter.getMonth(date) === month; date = this.dateAdapter.addCalendarDays(date, 1)) {
                 if (this.dateFilter(date)) {
@@ -918,10 +918,10 @@
                 var activeYear = this.dateAdapter.getYear(this.calendar.activeDate);
                 var firstYearInView = this.dateAdapter.getYearName(
                 // tslint:disable-next-line:no-magic-numbers
-                this.dateAdapter.createDate(activeYear - activeYear % 24, 0, 1));
+                this.dateAdapter.createDate(activeYear - activeYear % 24));
                 var lastYearInView = this.dateAdapter.getYearName(
                 // tslint:disable-next-line:no-magic-numbers
-                this.dateAdapter.createDate(activeYear + yearsPerPage - 1 - activeYear % 24, 0, 1));
+                this.dateAdapter.createDate(activeYear + yearsPerPage - 1 - activeYear % 24));
                 return firstYearInView + " \u2013 " + lastYearInView;
             },
             enumerable: false,
@@ -1582,12 +1582,13 @@
         DateParts["day"] = "d";
     })(DateParts || (DateParts = {}));
     var DateDigit = /** @class */ (function () {
-        function DateDigit(value, start, length) {
+        function DateDigit(value, start, length, firstMonth) {
+            if (firstMonth === void 0) { firstMonth = 0; }
             this.value = value;
             this.start = start;
             this.length = length;
+            this.firstMonth = firstMonth;
             this.maxDays = 31;
-            this.maxMonth = 11;
             if (value === DateParts.day) {
                 this.parse = this.parseDay;
             }
@@ -1598,6 +1599,14 @@
                 this.parse = this.parseYear;
             }
         }
+        Object.defineProperty(DateDigit.prototype, "maxMonth", {
+            get: function () {
+                // tslint:disable-next-line:no-magic-numbers binary-expression-operand-order
+                return 11 + this.firstMonth;
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(DateDigit.prototype, "end", {
             get: function () {
                 return this.start + this.length;
@@ -1659,7 +1668,7 @@
             if (parsedValue > this.maxMonth) {
                 return this.maxMonth;
             }
-            return parsedValue - 1;
+            return parsedValue;
         };
         DateDigit.prototype.parseYear = function (value) {
             var parsedValue = parseInt(value);
@@ -2290,9 +2299,8 @@
                     break;
                 case DateParts.month:
                     month++;
-                    // tslint:disable-next-line:no-magic-numbers
-                    if (month > 11) {
-                        month = 0;
+                    if (month > this.dateAdapter.lastMonth) {
+                        month = this.dateAdapter.firstMonth;
                     }
                     var lastDay = this.getLastDayFor(year, month);
                     if (day > lastDay) {
@@ -2322,9 +2330,8 @@
                     break;
                 case DateParts.month:
                     month--;
-                    if (month < 0) {
-                        // tslint:disable-next-line:no-magic-numbers
-                        month = 11;
+                    if (month < this.dateAdapter.firstMonth) {
+                        month = this.dateAdapter.lastMonth;
                     }
                     var lastDay = this.getLastDayFor(year, month);
                     if (day > lastDay) {
@@ -2436,13 +2443,13 @@
                 var prev = _d.prev, length = _d.length, start = _d.start;
                 if (value === _this.separator || (arr.length - 1) === index) {
                     if (!_this.firstDigit) {
-                        _this.firstDigit = new DateDigit(prev, start, length);
+                        _this.firstDigit = new DateDigit(prev, start, length, _this.dateAdapter.firstMonth);
                     }
                     else if (!_this.secondDigit) {
-                        _this.secondDigit = new DateDigit(prev, start, length);
+                        _this.secondDigit = new DateDigit(prev, start, length, _this.dateAdapter.firstMonth);
                     }
                     else if (!_this.thirdDigit) {
-                        _this.thirdDigit = new DateDigit(prev, start, arr.length - start);
+                        _this.thirdDigit = new DateDigit(prev, start, arr.length - start, _this.dateAdapter.firstMonth);
                     }
                     // tslint:disable:no-parameter-reassignment
                     length = 0;
@@ -2657,9 +2664,6 @@
     var McDatepickerContent = /** @class */ (function () {
         function McDatepickerContent() {
         }
-        McDatepickerContent.prototype.ngAfterViewInit = function () {
-            // this.calendar.focusActiveCell();
-        };
         return McDatepickerContent;
     }());
     McDatepickerContent.decorators = [
@@ -2860,10 +2864,11 @@
             this.datepickerInput = input;
             this.inputSubscription = this.datepickerInput.valueChange
                 .subscribe(function (value) {
+                var _a;
                 _this.selected = value;
                 // @ts-ignore
                 if (_this.popupComponentRef) {
-                    _this.popupComponentRef.instance.calendar.monthView.init();
+                    (_a = _this.popupComponentRef.instance.calendar.monthView) === null || _a === void 0 ? void 0 : _a.init();
                     _this.popupComponentRef.instance.calendar.activeDate = value;
                 }
             });

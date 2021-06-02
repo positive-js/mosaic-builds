@@ -1063,8 +1063,11 @@
             if (this.multiple && value && !Array.isArray(value)) {
                 throw core$1.getMcSelectNonArrayValueError();
             }
-            if (this.renderedOptions.length) {
+            if (value) {
                 this.setOptionsFromValues(this.multiple ? value : [value]);
+            }
+            else {
+                this.selectionModel.clear();
             }
         };
         McTreeSelection.prototype.registerOnChange = function (fn) {
@@ -1156,9 +1159,7 @@
             return this.renderedOptions.some(function (option) { return option.hasFocus; });
         };
         McTreeSelection.prototype.markOptionsForCheck = function () {
-            if (this.renderedOptions.length) {
-                this.renderedOptions.forEach(function (option) { return option.markForCheck(); });
-            }
+            this.renderedOptions.forEach(function (option) { return option.markForCheck(); });
         };
         McTreeSelection.prototype.updateOptionsFocus = function () {
             this.renderedOptions

@@ -1,7 +1,7 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
-import { AfterViewInit, EventEmitter, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
+import { EventEmitter, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { Subject } from 'rxjs';
 import { McCalendarCellCssClasses } from './calendar-body.component';
@@ -24,12 +24,11 @@ export declare const MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER: {
  * future. (e.g. confirmation buttons).
  * @docs-private
  */
-export declare class McDatepickerContent<D> implements AfterViewInit {
+export declare class McDatepickerContent<D> {
     /** Reference to the internal calendar component. */
     calendar: McCalendar<D>;
     /** Reference to the datepicker that created the overlay. */
     datepicker: McDatepicker<D>;
-    ngAfterViewInit(): void;
 }
 /** Component responsible for managing the datepicker popup/dialog. */
 export declare class McDatepicker<D> implements OnDestroy {
