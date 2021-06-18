@@ -1145,16 +1145,16 @@
      * Generated bundle index. Do not edit.
      */
 
+    exports.McModalBody = McModalBody;
     exports.McModalComponent = McModalComponent;
+    exports.McModalFooter = McModalFooter;
+    exports.McModalMainAction = McModalMainAction;
     exports.McModalModule = McModalModule;
     exports.McModalRef = McModalRef;
     exports.McModalService = McModalService;
+    exports.McModalTitle = McModalTitle;
     exports.ɵa = McModalControlService;
-    exports.ɵb = McModalTitle;
-    exports.ɵc = McModalBody;
-    exports.ɵd = McModalFooter;
-    exports.ɵe = McModalMainAction;
-    exports.ɵf = CssUnitPipe;
+    exports.ɵb = CssUnitPipe;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -876,13 +876,17 @@
      */
 
     exports.BIG_STEP = BIG_STEP;
+    exports.MAX_VALIDATOR = MAX_VALIDATOR;
     exports.MC_INPUT_VALUE_ACCESSOR = MC_INPUT_VALUE_ACCESSOR;
+    exports.MIN_VALIDATOR = MIN_VALIDATOR;
+    exports.MaxValidator = MaxValidator;
     exports.McInput = McInput;
     exports.McInputBase = McInputBase;
     exports.McInputMixinBase = McInputMixinBase;
     exports.McInputModule = McInputModule;
     exports.McInputMono = McInputMono;
     exports.McNumberInput = McNumberInput;
+    exports.MinValidator = MinValidator;
     exports.SMALL_STEP = SMALL_STEP;
     exports.add = add;
     exports.getPrecision = getPrecision;
@@ -890,10 +894,6 @@
     exports.isFloat = isFloat;
     exports.isInt = isInt;
     exports.normalizeSplitter = normalizeSplitter;
-    exports.ɵa = MIN_VALIDATOR;
-    exports.ɵb = MinValidator;
-    exports.ɵc = MAX_VALIDATOR;
-    exports.ɵd = MaxValidator;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

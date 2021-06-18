@@ -1,4 +1,5 @@
 import { InjectionToken, PipeTransform } from '@angular/core';
+import * as ɵngcc0 from '@angular/core';
 export declare const MC_LOCALE_ID: InjectionToken<string>;
 export declare const DEFAULT_MC_LOCALE_ID = "ru";
 export declare const NUMBER_FORMAT_REGEXP: RegExp;
@@ -20,4 +21,8 @@ export declare class McDecimalPipe implements PipeTransform {
      * When not supplied, uses the value of `MC_LOCALE_ID`, which is `ru` by default.
      */
     transform(value: any, digitsInfo?: string, locale?: string): string | null;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<McDecimalPipe, [{ optional: true; }]>;
+    static ɵpipe: ɵngcc0.ɵɵPipeDefWithMeta<McDecimalPipe, "mcNumber">;
 }
+
+//# sourceMappingURL=formatter.d.ts.map

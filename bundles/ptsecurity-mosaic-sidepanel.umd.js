@@ -1,8 +1,109 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/overlay'), require('@angular/cdk/portal'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/icon'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/sidepanel', ['exports', '@angular/cdk/overlay', '@angular/cdk/portal', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/icon', '@angular/animations', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.sidepanel = {}), global.ng.cdk.overlay, global.ng.cdk.portal, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic.icon, global.ng.animations, global.keycodes, global.rxjs, global.rxjs.operators));
-}(this, (function (exports, overlay, portal, common, core, core$1, icon, animations, keycodes, rxjs, operators) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/animations'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/overlay'), require('@angular/cdk/portal'), require('@angular/common'), require('@ptsecurity/mosaic/icon')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/sidepanel', ['exports', '@angular/core', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/animations', '@ptsecurity/mosaic/core', '@angular/cdk/overlay', '@angular/cdk/portal', '@angular/common', '@ptsecurity/mosaic/icon'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.sidepanel = {}), global.ng.core, global.keycodes, global.rxjs, global.rxjs.operators, global.ng.animations, global.ptsecurity.mosaic.core, global.ng.cdk.overlay, global.ng.cdk.portal, global.ng.common, global.ptsecurity.mosaic.icon));
+}(this, (function (exports, core, keycodes, rxjs, operators, animations, core$1, overlay, portal, common, icon) { 'use strict';
+
+    /** Injection token that can be used to access the data that was passed in to a sidepanel. */
+    var MC_SIDEPANEL_DATA = new core.InjectionToken('McSidepanelData');
+    exports.McSidepanelPosition = void 0;
+    (function (McSidepanelPosition) {
+        McSidepanelPosition["Right"] = "right";
+        McSidepanelPosition["Left"] = "left";
+        McSidepanelPosition["Top"] = "top";
+        McSidepanelPosition["Bottom"] = "bottom";
+    })(exports.McSidepanelPosition || (exports.McSidepanelPosition = {}));
+    var McSidepanelConfig = /** @class */ (function () {
+        function McSidepanelConfig() {
+            /** Data being injected into the child component. */
+            this.data = null;
+            this.position = exports.McSidepanelPosition.Right;
+            /** Whether the sidepanel has a backdrop. */
+            this.hasBackdrop = true;
+            /** When we open multiple sidepanels, backdrop appears only once, except cases then this flag is true. */
+            this.requiredBackdrop = false;
+            /** Whether the user can use escape or clicking outside to close the sidepanel. */
+            this.disableClose = false;
+            /** Custom class for the overlay pane. */
+            this.overlayPanelClass = '';
+        }
+        return McSidepanelConfig;
+    }());
+
+    var McSidepanelAnimationState;
+    (function (McSidepanelAnimationState) {
+        McSidepanelAnimationState["Void"] = "void";
+        McSidepanelAnimationState["Visible"] = "visible";
+        McSidepanelAnimationState["Hidden"] = "hidden";
+    })(McSidepanelAnimationState || (McSidepanelAnimationState = {}));
+    // TODO Find a way to use dynamic keys and avoid error "Expression form not supported."
+    // tslint:disable-next-line
+    var mcSidepanelTransformAnimation = {
+        right: { in: 'translateX(100%)', out: 'translateX(0%)' },
+        left: { in: 'translateX(-100%)', out: 'translateX(0%)' },
+        top: { in: 'translateY(-100%)', out: 'translateY(0%)' },
+        bottom: { in: 'translateY(100%)', out: 'translateY(0%)' }
+    };
+    var mcSidepanelAnimations = {
+        sidepanelState: animations.trigger('state', [
+            animations.state('hidden', animations.style({ transform: '{{transformIn}}' }), { params: { transformIn: mcSidepanelTransformAnimation[exports.McSidepanelPosition.Right].in } }),
+            animations.state('visible', animations.style({ transform: '{{transformOut}}' }), { params: { transformOut: mcSidepanelTransformAnimation[exports.McSidepanelPosition.Right].out } }),
+            animations.transition('visible => void, visible => hidden', animations.animate("200ms " + core$1.AnimationCurves.AccelerationCurve)),
+            animations.transition('void => visible', animations.animate("200ms " + core$1.AnimationCurves.DecelerationCurve))
+        ])
+    };
+
+    // Counter for unique sidepanel ids.
+    var uniqueId = 0;
+    var McSidepanelRef = /** @class */ (function () {
+        function McSidepanelRef(containerInstance, overlayRef, config) {
+            var _this = this;
+            this.containerInstance = containerInstance;
+            this.overlayRef = overlayRef;
+            this.config = config;
+            /** Subject for notifying the user that the sidepanel has been closed and dismissed. */
+            this.afterClosed$ = new rxjs.Subject();
+            /** Subject for notifying the user that the sidepanel has opened and appeared. */
+            this.afterOpened$ = new rxjs.Subject();
+            this.id = this.config.id || "mc-sidepanel-" + uniqueId++;
+            this.containerInstance.id = this.id;
+            // Emit when opening animation completes
+            containerInstance.animationStateChanged.pipe(operators.filter(function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible; }), operators.take(1)).subscribe(function () {
+                _this.afterOpened$.next();
+                _this.afterOpened$.complete();
+            });
+            // Dispose overlay when closing animation is complete
+            containerInstance.animationStateChanged.pipe(operators.filter(function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden; }), operators.take(1)).subscribe(function () {
+                overlayRef.dispose();
+                _this.afterClosed$.next(_this.result);
+                _this.afterClosed$.complete();
+            });
+            if (!containerInstance.sidepanelConfig.disableClose) {
+                rxjs.merge(overlayRef.backdropClick(), overlayRef.keydownEvents().pipe(
+                // tslint:disable:deprecation
+                // keyCode is deprecated, but IE11 and Edge don't support code property, which we need use instead
+                operators.filter(function (event) { return event.keyCode === keycodes.ESCAPE; }))).subscribe(function () { return _this.close(); });
+            }
+        }
+        McSidepanelRef.prototype.close = function (result) {
+            var _this = this;
+            if (!this.afterClosed$.closed) {
+                // Transition the backdrop in parallel to the sidepanel.
+                this.containerInstance.animationStateChanged.pipe(operators.filter(function (event) { return event.phaseName === 'done'; }), operators.take(1)).subscribe(function () { return _this.overlayRef.detachBackdrop(); });
+                this.result = result;
+                this.containerInstance.exit();
+            }
+        };
+        /** Gets an observable that is notified when the sidepanel is finished closing. */
+        McSidepanelRef.prototype.afterClosed = function () {
+            return this.afterClosed$.asObservable();
+        };
+        /** Gets an observable that is notified when the sidepanel has opened and appeared. */
+        McSidepanelRef.prototype.afterOpened = function () {
+            return this.afterOpened$.asObservable();
+        };
+        return McSidepanelRef;
+    }());
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -313,55 +414,6 @@
         return value;
     }
 
-    /** Injection token that can be used to access the data that was passed in to a sidepanel. */
-    var MC_SIDEPANEL_DATA = new core.InjectionToken('McSidepanelData');
-    exports.McSidepanelPosition = void 0;
-    (function (McSidepanelPosition) {
-        McSidepanelPosition["Right"] = "right";
-        McSidepanelPosition["Left"] = "left";
-        McSidepanelPosition["Top"] = "top";
-        McSidepanelPosition["Bottom"] = "bottom";
-    })(exports.McSidepanelPosition || (exports.McSidepanelPosition = {}));
-    var McSidepanelConfig = /** @class */ (function () {
-        function McSidepanelConfig() {
-            /** Data being injected into the child component. */
-            this.data = null;
-            this.position = exports.McSidepanelPosition.Right;
-            /** Whether the sidepanel has a backdrop. */
-            this.hasBackdrop = true;
-            /** When we open multiple sidepanels, backdrop appears only once, except cases then this flag is true. */
-            this.requiredBackdrop = false;
-            /** Whether the user can use escape or clicking outside to close the sidepanel. */
-            this.disableClose = false;
-            /** Custom class for the overlay pane. */
-            this.overlayPanelClass = '';
-        }
-        return McSidepanelConfig;
-    }());
-
-    var McSidepanelAnimationState;
-    (function (McSidepanelAnimationState) {
-        McSidepanelAnimationState["Void"] = "void";
-        McSidepanelAnimationState["Visible"] = "visible";
-        McSidepanelAnimationState["Hidden"] = "hidden";
-    })(McSidepanelAnimationState || (McSidepanelAnimationState = {}));
-    // TODO Find a way to use dynamic keys and avoid error "Expression form not supported."
-    // tslint:disable-next-line
-    var mcSidepanelTransformAnimation = {
-        right: { in: 'translateX(100%)', out: 'translateX(0%)' },
-        left: { in: 'translateX(-100%)', out: 'translateX(0%)' },
-        top: { in: 'translateY(-100%)', out: 'translateY(0%)' },
-        bottom: { in: 'translateY(100%)', out: 'translateY(0%)' }
-    };
-    var mcSidepanelAnimations = {
-        sidepanelState: animations.trigger('state', [
-            animations.state('hidden', animations.style({ transform: '{{transformIn}}' }), { params: { transformIn: mcSidepanelTransformAnimation[exports.McSidepanelPosition.Right].in } }),
-            animations.state('visible', animations.style({ transform: '{{transformOut}}' }), { params: { transformOut: mcSidepanelTransformAnimation[exports.McSidepanelPosition.Right].out } }),
-            animations.transition('visible => void, visible => hidden', animations.animate("200ms " + core$1.AnimationCurves.AccelerationCurve)),
-            animations.transition('void => visible', animations.animate("200ms " + core$1.AnimationCurves.DecelerationCurve))
-        ])
-    };
-
     var MC_SIDEPANEL_WITH_INDENT = new core.InjectionToken('mc-sidepanel-with-indent');
     var MC_SIDEPANEL_WITH_SHADOW = new core.InjectionToken('mc-sidepanel-with-shadow');
     var McSidepanelContainerComponent = /** @class */ (function (_super) {
@@ -466,58 +518,6 @@
     McSidepanelContainerComponent.propDecorators = {
         portalOutlet: [{ type: core.ViewChild, args: [portal.CdkPortalOutlet, { static: true },] }]
     };
-
-    // Counter for unique sidepanel ids.
-    var uniqueId = 0;
-    var McSidepanelRef = /** @class */ (function () {
-        function McSidepanelRef(containerInstance, overlayRef, config) {
-            var _this = this;
-            this.containerInstance = containerInstance;
-            this.overlayRef = overlayRef;
-            this.config = config;
-            /** Subject for notifying the user that the sidepanel has been closed and dismissed. */
-            this.afterClosed$ = new rxjs.Subject();
-            /** Subject for notifying the user that the sidepanel has opened and appeared. */
-            this.afterOpened$ = new rxjs.Subject();
-            this.id = this.config.id || "mc-sidepanel-" + uniqueId++;
-            this.containerInstance.id = this.id;
-            // Emit when opening animation completes
-            containerInstance.animationStateChanged.pipe(operators.filter(function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible; }), operators.take(1)).subscribe(function () {
-                _this.afterOpened$.next();
-                _this.afterOpened$.complete();
-            });
-            // Dispose overlay when closing animation is complete
-            containerInstance.animationStateChanged.pipe(operators.filter(function (event) { return event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden; }), operators.take(1)).subscribe(function () {
-                overlayRef.dispose();
-                _this.afterClosed$.next(_this.result);
-                _this.afterClosed$.complete();
-            });
-            if (!containerInstance.sidepanelConfig.disableClose) {
-                rxjs.merge(overlayRef.backdropClick(), overlayRef.keydownEvents().pipe(
-                // tslint:disable:deprecation
-                // keyCode is deprecated, but IE11 and Edge don't support code property, which we need use instead
-                operators.filter(function (event) { return event.keyCode === keycodes.ESCAPE; }))).subscribe(function () { return _this.close(); });
-            }
-        }
-        McSidepanelRef.prototype.close = function (result) {
-            var _this = this;
-            if (!this.afterClosed$.closed) {
-                // Transition the backdrop in parallel to the sidepanel.
-                this.containerInstance.animationStateChanged.pipe(operators.filter(function (event) { return event.phaseName === 'done'; }), operators.take(1)).subscribe(function () { return _this.overlayRef.detachBackdrop(); });
-                this.result = result;
-                this.containerInstance.exit();
-            }
-        };
-        /** Gets an observable that is notified when the sidepanel is finished closing. */
-        McSidepanelRef.prototype.afterClosed = function () {
-            return this.afterClosed$.asObservable();
-        };
-        /** Gets an observable that is notified when the sidepanel has opened and appeared. */
-        McSidepanelRef.prototype.afterOpened = function () {
-            return this.afterOpened$.asObservable();
-        };
-        return McSidepanelRef;
-    }());
 
     /** Injection token that can be used to specify default sidepanel options. */
     var MC_SIDEPANEL_DEFAULT_OPTIONS = new core.InjectionToken('mc-sidepanel-default-options');
@@ -846,18 +846,18 @@
     exports.MC_SIDEPANEL_DEFAULT_OPTIONS = MC_SIDEPANEL_DEFAULT_OPTIONS;
     exports.MC_SIDEPANEL_WITH_INDENT = MC_SIDEPANEL_WITH_INDENT;
     exports.MC_SIDEPANEL_WITH_SHADOW = MC_SIDEPANEL_WITH_SHADOW;
+    exports.McSidepanelActions = McSidepanelActions;
+    exports.McSidepanelBody = McSidepanelBody;
+    exports.McSidepanelClose = McSidepanelClose;
     exports.McSidepanelConfig = McSidepanelConfig;
     exports.McSidepanelContainerComponent = McSidepanelContainerComponent;
+    exports.McSidepanelFooter = McSidepanelFooter;
+    exports.McSidepanelHeader = McSidepanelHeader;
     exports.McSidepanelModule = McSidepanelModule;
     exports.McSidepanelRef = McSidepanelRef;
     exports.McSidepanelService = McSidepanelService;
     exports.ɵa = mcSidepanelTransformAnimation;
     exports.ɵb = mcSidepanelAnimations;
-    exports.ɵc = McSidepanelClose;
-    exports.ɵd = McSidepanelHeader;
-    exports.ɵe = McSidepanelBody;
-    exports.ɵf = McSidepanelFooter;
-    exports.ɵg = McSidepanelActions;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

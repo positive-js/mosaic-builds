@@ -1,13 +1,13 @@
-import { OverlayConfig, Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { BasePortalOutlet, CdkPortalOutlet, TemplatePortal, ComponentPortal, PortalInjector, PortalModule } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
 import { InjectionToken, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, ChangeDetectorRef, Inject, ViewChild, TemplateRef, Injectable, Injector, Optional, SkipSelf, Directive, Input, NgModule } from '@angular/core';
-import { AnimationCurves, McCommonModule } from '@ptsecurity/mosaic/core';
-import { McIconModule } from '@ptsecurity/mosaic/icon';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { Subject, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AnimationCurves, McCommonModule } from '@ptsecurity/mosaic/core';
+import { OverlayConfig, Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { BasePortalOutlet, CdkPortalOutlet, TemplatePortal, ComponentPortal, PortalInjector, PortalModule } from '@angular/cdk/portal';
+import { CommonModule } from '@angular/common';
+import { McIconModule } from '@ptsecurity/mosaic/icon';
 
 /** Injection token that can be used to access the data that was passed in to a sidepanel. */
 const MC_SIDEPANEL_DATA = new InjectionToken('McSidepanelData');
@@ -56,6 +56,55 @@ const mcSidepanelAnimations = {
         transition('void => visible', animate(`200ms ${AnimationCurves.DecelerationCurve}`))
     ])
 };
+
+// Counter for unique sidepanel ids.
+let uniqueId = 0;
+class McSidepanelRef {
+    constructor(containerInstance, overlayRef, config) {
+        this.containerInstance = containerInstance;
+        this.overlayRef = overlayRef;
+        this.config = config;
+        /** Subject for notifying the user that the sidepanel has been closed and dismissed. */
+        this.afterClosed$ = new Subject();
+        /** Subject for notifying the user that the sidepanel has opened and appeared. */
+        this.afterOpened$ = new Subject();
+        this.id = this.config.id || `mc-sidepanel-${uniqueId++}`;
+        this.containerInstance.id = this.id;
+        // Emit when opening animation completes
+        containerInstance.animationStateChanged.pipe(filter((event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible), take(1)).subscribe(() => {
+            this.afterOpened$.next();
+            this.afterOpened$.complete();
+        });
+        // Dispose overlay when closing animation is complete
+        containerInstance.animationStateChanged.pipe(filter((event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden), take(1)).subscribe(() => {
+            overlayRef.dispose();
+            this.afterClosed$.next(this.result);
+            this.afterClosed$.complete();
+        });
+        if (!containerInstance.sidepanelConfig.disableClose) {
+            merge(overlayRef.backdropClick(), overlayRef.keydownEvents().pipe(
+            // tslint:disable:deprecation
+            // keyCode is deprecated, but IE11 and Edge don't support code property, which we need use instead
+            filter((event) => event.keyCode === ESCAPE))).subscribe(() => this.close());
+        }
+    }
+    close(result) {
+        if (!this.afterClosed$.closed) {
+            // Transition the backdrop in parallel to the sidepanel.
+            this.containerInstance.animationStateChanged.pipe(filter((event) => event.phaseName === 'done'), take(1)).subscribe(() => this.overlayRef.detachBackdrop());
+            this.result = result;
+            this.containerInstance.exit();
+        }
+    }
+    /** Gets an observable that is notified when the sidepanel is finished closing. */
+    afterClosed() {
+        return this.afterClosed$.asObservable();
+    }
+    /** Gets an observable that is notified when the sidepanel has opened and appeared. */
+    afterOpened() {
+        return this.afterOpened$.asObservable();
+    }
+}
 
 const MC_SIDEPANEL_WITH_INDENT = new InjectionToken('mc-sidepanel-with-indent');
 const MC_SIDEPANEL_WITH_SHADOW = new InjectionToken('mc-sidepanel-with-shadow');
@@ -161,55 +210,6 @@ McSidepanelContainerComponent.ctorParameters = () => [
 McSidepanelContainerComponent.propDecorators = {
     portalOutlet: [{ type: ViewChild, args: [CdkPortalOutlet, { static: true },] }]
 };
-
-// Counter for unique sidepanel ids.
-let uniqueId = 0;
-class McSidepanelRef {
-    constructor(containerInstance, overlayRef, config) {
-        this.containerInstance = containerInstance;
-        this.overlayRef = overlayRef;
-        this.config = config;
-        /** Subject for notifying the user that the sidepanel has been closed and dismissed. */
-        this.afterClosed$ = new Subject();
-        /** Subject for notifying the user that the sidepanel has opened and appeared. */
-        this.afterOpened$ = new Subject();
-        this.id = this.config.id || `mc-sidepanel-${uniqueId++}`;
-        this.containerInstance.id = this.id;
-        // Emit when opening animation completes
-        containerInstance.animationStateChanged.pipe(filter((event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Visible), take(1)).subscribe(() => {
-            this.afterOpened$.next();
-            this.afterOpened$.complete();
-        });
-        // Dispose overlay when closing animation is complete
-        containerInstance.animationStateChanged.pipe(filter((event) => event.phaseName === 'done' && event.toState === McSidepanelAnimationState.Hidden), take(1)).subscribe(() => {
-            overlayRef.dispose();
-            this.afterClosed$.next(this.result);
-            this.afterClosed$.complete();
-        });
-        if (!containerInstance.sidepanelConfig.disableClose) {
-            merge(overlayRef.backdropClick(), overlayRef.keydownEvents().pipe(
-            // tslint:disable:deprecation
-            // keyCode is deprecated, but IE11 and Edge don't support code property, which we need use instead
-            filter((event) => event.keyCode === ESCAPE))).subscribe(() => this.close());
-        }
-    }
-    close(result) {
-        if (!this.afterClosed$.closed) {
-            // Transition the backdrop in parallel to the sidepanel.
-            this.containerInstance.animationStateChanged.pipe(filter((event) => event.phaseName === 'done'), take(1)).subscribe(() => this.overlayRef.detachBackdrop());
-            this.result = result;
-            this.containerInstance.exit();
-        }
-    }
-    /** Gets an observable that is notified when the sidepanel is finished closing. */
-    afterClosed() {
-        return this.afterClosed$.asObservable();
-    }
-    /** Gets an observable that is notified when the sidepanel has opened and appeared. */
-    afterOpened() {
-        return this.afterOpened$.asObservable();
-    }
-}
 
 /** Injection token that can be used to specify default sidepanel options. */
 const MC_SIDEPANEL_DEFAULT_OPTIONS = new InjectionToken('mc-sidepanel-default-options');
@@ -520,5 +520,5 @@ McSidepanelModule.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { MC_SIDEPANEL_DATA, MC_SIDEPANEL_DEFAULT_OPTIONS, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelConfig, McSidepanelContainerComponent, McSidepanelModule, McSidepanelPosition, McSidepanelRef, McSidepanelService, mcSidepanelTransformAnimation as ɵa, mcSidepanelAnimations as ɵb, McSidepanelClose as ɵc, McSidepanelHeader as ɵd, McSidepanelBody as ɵe, McSidepanelFooter as ɵf, McSidepanelActions as ɵg };
+export { MC_SIDEPANEL_DATA, MC_SIDEPANEL_DEFAULT_OPTIONS, MC_SIDEPANEL_WITH_INDENT, MC_SIDEPANEL_WITH_SHADOW, McSidepanelActions, McSidepanelBody, McSidepanelClose, McSidepanelConfig, McSidepanelContainerComponent, McSidepanelFooter, McSidepanelHeader, McSidepanelModule, McSidepanelPosition, McSidepanelRef, McSidepanelService, mcSidepanelTransformAnimation as ɵa, mcSidepanelAnimations as ɵb };
 //# sourceMappingURL=ptsecurity-mosaic-sidepanel.js.map

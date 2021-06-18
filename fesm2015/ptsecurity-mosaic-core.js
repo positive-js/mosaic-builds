@@ -1,5 +1,5 @@
 import { BidiModule } from '@angular/cdk/bidi';
-import { InjectionToken, isDevMode, NgModule, Optional, Inject, Directive, Injectable, ɵɵdefineInjectable, ɵɵinject, Pipe, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, EventEmitter, ElementRef, ChangeDetectorRef, Output } from '@angular/core';
+import { InjectionToken, isDevMode, NgModule, Optional, Inject, Directive, Injectable, ɵɵdefineInjectable, ɵɵinject, Pipe, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, EventEmitter, ElementRef, ChangeDetectorRef, Output, ContentChildren } from '@angular/core';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
@@ -2076,9 +2076,86 @@ McOptionModule.decorators = [
             },] }
 ];
 
+class McFormElement {
+    constructor(element) {
+        this.element = element;
+        this.margin = false;
+        this.isRow = false;
+        this.isFieldSet = false;
+        this.hasLegend = false;
+        this.isHorizontal = false;
+    }
+    ngAfterContentInit() {
+        const classList = this.element.nativeElement.classList;
+        this.isRow = classList.contains('mc-form__row');
+        this.isHorizontal = classList.contains('mc-horizontal');
+        this.isFieldSet = classList.contains('mc-form__fieldset');
+        if (this.isFieldSet && this.element.nativeElement.firstElementChild) {
+            this.hasLegend = this.element.nativeElement.firstElementChild.classList.contains('mc-form__legend');
+        }
+    }
+}
+McFormElement.decorators = [
+    { type: Directive, args: [{
+                selector: '.mc-form__row, .mc-form__fieldset, .mc-form__legend',
+                exportAs: 'mcFormElement',
+                host: {
+                    '[class.mc-form-row_margin]': 'margin'
+                }
+            },] }
+];
+/** @nocollapse */
+McFormElement.ctorParameters = () => [
+    { type: ElementRef }
+];
+McFormElement.propDecorators = {
+    elements: [{ type: ContentChildren, args: [McFormElement,] }]
+};
+class McForm {
+    ngAfterContentInit() {
+        this.handleElements(this.elements);
+    }
+    handleElements(elements) {
+        elements.forEach((element, index) => {
+            const nextElement = elements.get(index + 1);
+            if (element.isFieldSet && !element.isHorizontal) {
+                this.handleElements(element.elements);
+            }
+            element.margin = !!(nextElement && !nextElement.hasLegend);
+        });
+    }
+}
+McForm.decorators = [
+    { type: Directive, args: [{
+                selector: '.mc-form-vertical, .mc-form-horizontal',
+                exportAs: 'mcForm',
+                host: {
+                    class: 'mc-form'
+                }
+            },] }
+];
+McForm.propDecorators = {
+    elements: [{ type: ContentChildren, args: [McFormElement,] }]
+};
+
+class McFormsModule {
+}
+McFormsModule.decorators = [
+    { type: NgModule, args: [{
+                exports: [
+                    McForm,
+                    McFormElement
+                ],
+                declarations: [
+                    McForm,
+                    McFormElement
+                ]
+            },] }
+];
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { AnimationCurves, BOTTOM_LEFT_POSITION_PRIORITY, BOTTOM_POSITION_PRIORITY, BOTTOM_RIGHT_POSITION_PRIORITY, DEFAULT_4_POSITIONS, DEFAULT_4_POSITIONS_TO_CSS_MAP, DEFAULT_MC_LOCALE_ID, DateFormatter, EXTENDED_OVERLAY_POSITIONS, ErrorStateMatcher, LEFT_BOTTOM_POSITION_PRIORITY, LEFT_POSITION_PRIORITY, LEFT_TOP_POSITION_PRIORITY, MC_LABEL_GLOBAL_OPTIONS, MC_LOCALE_ID, MC_OPTION_PARENT_COMPONENT, MC_SANITY_CHECKS, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_VALIDATION, McCommonModule, McDecimalPipe, McFormattersModule, McHighlightModule, McHighlightPipe, McLine, McLineModule, McLineSetter, McMeasureScrollbarService, McOptgroup, McOptgroupBase, McOptgroupMixinBase, McOption, McOptionModule, McOptionSelectionChange, McPseudoCheckbox, McPseudoCheckboxModule, MultipleMode, NUMBER_FORMAT_REGEXP, POSITION_MAP, POSITION_PRIORITY_STRATEGY, POSITION_TO_CSS_MAP, RIGHT_BOTTOM_POSITION_PRIORITY, RIGHT_POSITION_PRIORITY, RIGHT_TOP_POSITION_PRIORITY, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, ShowOnDirtyErrorStateMatcher, TOP_LEFT_POSITION_PRIORITY, TOP_POSITION_PRIORITY, TOP_RIGHT_POSITION_PRIORITY, ThemePalette, countGroupLabelsBeforeOption, fadeAnimation, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, getOptionScrollPosition, isBoolean, mcSelectAnimations, mcSelectScrollStrategyProviderFactory, mixinColor, mixinDisabled, mixinErrorState, mixinTabIndex, selectEvents, setMosaicValidation, setMosaicValidationForFormControl, setMosaicValidationForModelControl, toBoolean, validationTooltipHideDelay, validationTooltipShowDelay, mcSanityChecksFactory as ɵa };
+export { AnimationCurves, BOTTOM_LEFT_POSITION_PRIORITY, BOTTOM_POSITION_PRIORITY, BOTTOM_RIGHT_POSITION_PRIORITY, DEFAULT_4_POSITIONS, DEFAULT_4_POSITIONS_TO_CSS_MAP, DEFAULT_MC_LOCALE_ID, DateFormatter, EXTENDED_OVERLAY_POSITIONS, ErrorStateMatcher, LEFT_BOTTOM_POSITION_PRIORITY, LEFT_POSITION_PRIORITY, LEFT_TOP_POSITION_PRIORITY, MC_LABEL_GLOBAL_OPTIONS, MC_LOCALE_ID, MC_OPTION_PARENT_COMPONENT, MC_SANITY_CHECKS, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_VALIDATION, McCommonModule, McDecimalPipe, McForm, McFormElement, McFormattersModule, McFormsModule, McHighlightModule, McHighlightPipe, McLine, McLineModule, McLineSetter, McMeasureScrollbarService, McOptgroup, McOptgroupBase, McOptgroupMixinBase, McOption, McOptionModule, McOptionSelectionChange, McPseudoCheckbox, McPseudoCheckboxModule, MultipleMode, NUMBER_FORMAT_REGEXP, POSITION_MAP, POSITION_PRIORITY_STRATEGY, POSITION_TO_CSS_MAP, RIGHT_BOTTOM_POSITION_PRIORITY, RIGHT_POSITION_PRIORITY, RIGHT_TOP_POSITION_PRIORITY, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, ShowOnDirtyErrorStateMatcher, TOP_LEFT_POSITION_PRIORITY, TOP_POSITION_PRIORITY, TOP_RIGHT_POSITION_PRIORITY, ThemePalette, countGroupLabelsBeforeOption, fadeAnimation, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, getOptionScrollPosition, isBoolean, mcSelectAnimations, mcSelectScrollStrategyProviderFactory, mixinColor, mixinDisabled, mixinErrorState, mixinTabIndex, selectEvents, setMosaicValidation, setMosaicValidationForFormControl, setMosaicValidationForModelControl, toBoolean, validationTooltipHideDelay, validationTooltipShowDelay, mcSanityChecksFactory as ɵa };
 //# sourceMappingURL=ptsecurity-mosaic-core.js.map

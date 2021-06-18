@@ -2113,6 +2113,91 @@
                 },] }
     ];
 
+    var McFormElement = /** @class */ (function () {
+        function McFormElement(element) {
+            this.element = element;
+            this.margin = false;
+            this.isRow = false;
+            this.isFieldSet = false;
+            this.hasLegend = false;
+            this.isHorizontal = false;
+        }
+        McFormElement.prototype.ngAfterContentInit = function () {
+            var classList = this.element.nativeElement.classList;
+            this.isRow = classList.contains('mc-form__row');
+            this.isHorizontal = classList.contains('mc-horizontal');
+            this.isFieldSet = classList.contains('mc-form__fieldset');
+            if (this.isFieldSet && this.element.nativeElement.firstElementChild) {
+                this.hasLegend = this.element.nativeElement.firstElementChild.classList.contains('mc-form__legend');
+            }
+        };
+        return McFormElement;
+    }());
+    McFormElement.decorators = [
+        { type: i0.Directive, args: [{
+                    selector: '.mc-form__row, .mc-form__fieldset, .mc-form__legend',
+                    exportAs: 'mcFormElement',
+                    host: {
+                        '[class.mc-form-row_margin]': 'margin'
+                    }
+                },] }
+    ];
+    /** @nocollapse */
+    McFormElement.ctorParameters = function () { return [
+        { type: i0.ElementRef }
+    ]; };
+    McFormElement.propDecorators = {
+        elements: [{ type: i0.ContentChildren, args: [McFormElement,] }]
+    };
+    var McForm = /** @class */ (function () {
+        function McForm() {
+        }
+        McForm.prototype.ngAfterContentInit = function () {
+            this.handleElements(this.elements);
+        };
+        McForm.prototype.handleElements = function (elements) {
+            var _this = this;
+            elements.forEach(function (element, index) {
+                var nextElement = elements.get(index + 1);
+                if (element.isFieldSet && !element.isHorizontal) {
+                    _this.handleElements(element.elements);
+                }
+                element.margin = !!(nextElement && !nextElement.hasLegend);
+            });
+        };
+        return McForm;
+    }());
+    McForm.decorators = [
+        { type: i0.Directive, args: [{
+                    selector: '.mc-form-vertical, .mc-form-horizontal',
+                    exportAs: 'mcForm',
+                    host: {
+                        class: 'mc-form'
+                    }
+                },] }
+    ];
+    McForm.propDecorators = {
+        elements: [{ type: i0.ContentChildren, args: [McFormElement,] }]
+    };
+
+    var McFormsModule = /** @class */ (function () {
+        function McFormsModule() {
+        }
+        return McFormsModule;
+    }());
+    McFormsModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    exports: [
+                        McForm,
+                        McFormElement
+                    ],
+                    declarations: [
+                        McForm,
+                        McFormElement
+                    ]
+                },] }
+    ];
+
     /**
      * Generated bundle index. Do not edit.
      */
@@ -2138,7 +2223,10 @@
     exports.MC_VALIDATION = MC_VALIDATION;
     exports.McCommonModule = McCommonModule;
     exports.McDecimalPipe = McDecimalPipe;
+    exports.McForm = McForm;
+    exports.McFormElement = McFormElement;
     exports.McFormattersModule = McFormattersModule;
+    exports.McFormsModule = McFormsModule;
     exports.McHighlightModule = McHighlightModule;
     exports.McHighlightPipe = McHighlightPipe;
     exports.McLine = McLine;

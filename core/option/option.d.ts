@@ -2,6 +2,7 @@ import { AfterViewChecked, ChangeDetectorRef, ElementRef, EventEmitter, Injectio
 import { Subject } from 'rxjs';
 import { McOptgroup } from './optgroup';
 /** Event object emitted by McOption when selected or deselected. */
+import * as ɵngcc0 from '@angular/core';
 export declare class McOptionSelectionChange {
     source: McOption;
     isUserInput: boolean;
@@ -91,6 +92,8 @@ export declare class McOption implements AfterViewChecked, OnDestroy {
     getHostElement(): HTMLElement;
     /** Emits the selection change event. */
     private emitSelectionChangeEvent;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<McOption, [null, null, { optional: true; }, { optional: true; }]>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<McOption, "mc-option", ["mcOption"], { "showCheckbox": "showCheckbox"; "disabled": "disabled"; "value": "value"; }, { "onSelectionChange": "onSelectionChange"; }, never, ["*"]>;
 }
 /**
  * Counts the amount of option group labels that precede the specified option.
@@ -109,3 +112,5 @@ export declare function countGroupLabelsBeforeOption(optionIndex: number, option
  * @docs-private
  */
 export declare function getOptionScrollPosition(optionIndex: number, optionHeight: number, currentScrollPosition: number, panelHeight: number): number;
+
+//# sourceMappingURL=option.d.ts.map
