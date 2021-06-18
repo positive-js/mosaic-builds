@@ -1,14 +1,15 @@
 import { AfterContentChecked, AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, QueryList, InjectionToken } from '@angular/core';
-import { CanColor, CanColorCtor } from '@ptsecurity/mosaic/core';
-import { McTab } from './tab';
-import { McTabHeader } from './tab-header';
-export declare class McLightTabsCssStyler {
+import { McTabHeader } from './tab-header.component';
+import { McTab } from './tab.component';
+export declare class McOldTabsCssStyler {
 }
 export declare class McAlignTabsCenterCssStyler {
 }
 export declare class McAlignTabsEndCssStyler {
 }
 export declare class McStretchTabsCssStyler {
+}
+export declare class McVerticalTabsCssStyler {
 }
 /** A simple change event emitted on focus or selection changes. */
 export declare class McTabChangeEvent {
@@ -31,23 +32,24 @@ export declare class McTabGroupBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const McTabGroupMixinBase: CanColorCtor & typeof McTabGroupBase;
+export declare const McTabGroupMixinBase: import("../../../dist/mosaic/core/common-behaviors/constructor").Constructor<import("../../../dist/mosaic/core/ptsecurity-mosaic-core").CanDisable> & typeof McTabGroupBase;
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
  * keyboard navigation.
  */
-export declare class McTabGroup extends McTabGroupMixinBase implements AfterContentInit, AfterContentChecked, OnDestroy, CanColor {
-    private changeDetectorRef;
-    lightTab: boolean;
+export declare class McTabGroup extends McTabGroupMixinBase implements AfterContentInit, AfterContentChecked, OnDestroy {
+    private readonly changeDetectorRef;
+    oldTab: boolean;
+    vertical: boolean;
+    tabs: QueryList<McTab>;
+    tabBodyWrapper: ElementRef;
+    tabHeader: McTabHeader;
     /** Whether the tab group should grow to the size of the active tab. */
     get dynamicHeight(): boolean;
     set dynamicHeight(value: boolean);
     /** The index of the active tab. */
     get selectedIndex(): number | null;
     set selectedIndex(value: number | null);
-    tabs: QueryList<McTab>;
-    tabBodyWrapper: ElementRef;
-    tabHeader: McTabHeader;
     /** Position of the tab header. */
     headerPosition: McTabHeaderPosition;
     /** Duration for the tab animation. Must be a valid CSS value (e.g. 600ms). */
@@ -70,8 +72,8 @@ export declare class McTabGroup extends McTabGroupMixinBase implements AfterCont
     private tabLabelSubscription;
     private _dynamicHeight;
     private _selectedIndex;
-    private groupId;
-    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, lightTabs: string, defaultConfig?: IMcTabsConfig);
+    private readonly groupId;
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, lightTabs: string, vertical: string, defaultConfig?: IMcTabsConfig);
     /**
      * After the content is checked, this component knows what tabs have been defined
      * and what the selected index should be. This is where we can know exactly what position

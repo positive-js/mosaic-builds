@@ -1,32 +1,35 @@
+import { FocusableOption } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
+import { Platform } from '@angular/cdk/platform';
 import { ViewportRuler } from '@angular/cdk/scrolling';
-import { AfterContentChecked, AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, NgZone, OnDestroy, QueryList } from '@angular/core';
-import { McTabLabelWrapper } from './tab-label-wrapper';
+import { ChangeDetectorRef, ElementRef, NgZone, QueryList, EventEmitter, AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
 /**
  * The directions that scrolling can go in when the header's tabs exceed the header width. 'After'
  * will scroll the header towards the end of the tabs list and 'before' will scroll towards the
  * beginning of the list.
  */
 export declare type ScrollDirection = 'after' | 'before';
-/** @docs-private */
-export declare class McTabHeaderBase {
-}
+/** Item inside a paginated tab header. */
+export declare type McPaginatedTabHeaderItem = FocusableOption & {
+    elementRef: ElementRef;
+};
 /**
- * The header of the tab group which displays a list of all the tabs in the tab group.
- * When the tabs list's width exceeds the width of the header container,
- * then arrows will be displayed to allow the user to scroll
- * left and right across the header.
+ * Base class for a tab header that supported pagination.
  * @docs-private
  */
-export declare class McTabHeader extends McTabHeaderBase implements AfterContentChecked, AfterContentInit, OnDestroy {
-    private elementRef;
-    private changeDetectorRef;
+export declare abstract class McPaginatedTabHeader implements AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy {
+    protected elementRef: ElementRef<HTMLElement>;
+    protected changeDetectorRef: ChangeDetectorRef;
     private viewportRuler;
-    private dir;
     private ngZone;
+    private platform;
+    private dir;
+    animationMode?: string | undefined;
     /** The index of the active tab. */
     get selectedIndex(): number;
     set selectedIndex(value: number);
+    private _selectedIndex;
     /** Tracks which element has focus; used for keyboard navigation */
     get focusIndex(): number;
     /** When the focus index is set, we must manually send focus to the correct label */
@@ -34,25 +37,31 @@ export declare class McTabHeader extends McTabHeaderBase implements AfterContent
     /** Sets the distance in pixels that the tab header should be transformed in the X-axis. */
     get scrollDistance(): number;
     set scrollDistance(v: number);
-    labelWrappers: QueryList<McTabLabelWrapper>;
-    tabListContainer: ElementRef;
-    tabList: ElementRef;
+    /** The distance in pixels that the tab labels should be translated to the left. */
+    private _scrollDistance;
+    abstract items: QueryList<McPaginatedTabHeaderItem>;
+    abstract tabListContainer: ElementRef<HTMLElement>;
+    abstract tabList: ElementRef<HTMLElement>;
+    abstract nextPaginator: ElementRef<HTMLElement>;
+    abstract previousPaginator: ElementRef<HTMLElement>;
+    /** Event emitted when the option is selected. */
+    readonly selectFocusedIndex: EventEmitter<number>;
+    /** Event emitted when a label is focused. */
+    readonly indexFocused: EventEmitter<number>;
     /** Whether the controls for pagination should be displayed */
     showPaginationControls: boolean;
     /** Whether the tab list can be scrolled more towards the end of the tab label list. */
     disableScrollAfter: boolean;
     /** Whether the tab list can be scrolled more towards the beginning of the tab label list. */
     disableScrollBefore: boolean;
-    /** Event emitted when the option is selected. */
-    readonly selectFocusedIndex: EventEmitter<number>;
-    /** Event emitted when a label is focused. */
-    readonly indexFocused: EventEmitter<number>;
-    /** The distance in pixels that the tab labels should be translated to the left. */
-    private _scrollDistance;
-    /** Whether the header should scroll to the selected index after the view has been checked. */
-    private selectedIndexChanged;
+    /**
+     * Whether pagination should be disabled. This can be used to avoid unnecessary
+     * layout recalculations if it's known that pagination won't be required.
+     */
+    disablePagination: boolean;
     /** Emits when the component is destroyed. */
-    private readonly destroyed;
+    protected readonly destroyed: Subject<void>;
+    protected vertical: boolean;
     /**
      * The number of tab labels that are displayed on the header. When this changes, the header
      * should re-evaluate the scroll position.
@@ -64,20 +73,25 @@ export declare class McTabHeader extends McTabHeaderBase implements AfterContent
     private keyManager;
     /** Cached text content of the header. */
     private currentTextContent;
-    private _selectedIndex;
-    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, viewportRuler: ViewportRuler, dir: Directionality, ngZone: NgZone);
-    ngAfterContentChecked(): void;
-    handleKeydown(event: KeyboardEvent): void;
+    /** Stream that will stop the automated scrolling. */
+    private stopScrolling;
+    /** Whether the header should scroll to the selected index after the view has been checked. */
+    private selectedIndexChanged;
+    constructor(elementRef: ElementRef<HTMLElement>, changeDetectorRef: ChangeDetectorRef, viewportRuler: ViewportRuler, ngZone: NgZone, platform: Platform, dir: Directionality, animationMode?: string | undefined);
+    /** Called when the user has selected an item via the keyboard. */
+    ngAfterViewInit(): void;
     ngAfterContentInit(): void;
+    ngAfterContentChecked(): void;
     ngOnDestroy(): void;
+    handleKeydown(event: KeyboardEvent): void;
     /**
      * Callback for when the MutationObserver detects that the content has changed.
      */
     onContentChanges(): void;
     /**
-     * Updating the view whether pagination should be enabled or not
+     * Updates the view whether pagination should be enabled or not.
      *
-     * WARNING: Calling this method can be very costly in terms of performance.  It should be called
+     * WARNING: Calling this method can be very costly in terms of performance. It should be called
      * as infrequently as possible from outside of the Tabs component as it causes a reflow of the
      * page.
      */
@@ -104,7 +118,12 @@ export declare class McTabHeader extends McTabHeaderBase implements AfterContent
      * This is an expensive call that forces a layout reflow to compute box and scroll metrics and
      * should be called sparingly.
      */
-    scrollHeader(scrollDir: ScrollDirection): void;
+    scrollHeader(direction: ScrollDirection): {
+        maxScrollDistance: number;
+        distance: number;
+    };
+    /** Handles click events on the pagination arrows. */
+    handlePaginatorClick(direction: ScrollDirection): void;
     /**
      * Moves the tab list such that the desired tab label (marked by index) is moved into view.
      *
@@ -139,4 +158,19 @@ export declare class McTabHeader extends McTabHeaderBase implements AfterContent
      * should be called sparingly.
      */
     getMaxScrollDistance(): number;
+    /** Stops the currently-running paginator interval.  */
+    stopInterval(): void;
+    /**
+     * Handles the user pressing down on one of the paginators.
+     * Starts scrolling the header after a certain amount of time.
+     * @param direction In which direction the paginator should be scrolled.
+     */
+    handlePaginatorPress(direction: ScrollDirection, mouseEvent?: MouseEvent): void;
+    protected abstract itemSelected(event: KeyboardEvent): void;
+    /**
+     * Scrolls the header to a given position.
+     * @param position Position to which to scroll.
+     * @returns Information on the current scroll distance and the maximum.
+     */
+    private scrollTo;
 }

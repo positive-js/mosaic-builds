@@ -25,8 +25,8 @@ export declare type McTabBodyOriginState = 'left' | 'right';
  * @docs-private
  */
 export declare class McTabBody implements OnInit, OnDestroy {
-    private elementRef;
-    private dir;
+    private readonly elementRef;
+    private readonly dir;
     /** The shifted index position of the tab body, where zero represents the active center tab. */
     set position(position: number);
     /** Tab body position state. Used by the animation trigger for the current state. */
@@ -50,7 +50,7 @@ export declare class McTabBody implements OnInit, OnDestroy {
     /** Current position of the tab-body in the tab-group. Zero means that the tab is visible. */
     private positionIndex;
     /** Subscription to the directionality change observable. */
-    private dirChangeSubscription;
+    private readonly dirChangeSubscription;
     constructor(elementRef: ElementRef<HTMLElement>, dir: Directionality, changeDetectorRef: ChangeDetectorRef);
     /**
      * After initialized, check if the content is centered and has an origin. If so, set the
@@ -77,7 +77,7 @@ export declare class McTabBody implements OnInit, OnDestroy {
  * @docs-private
  */
 export declare class McTabBodyPortal extends CdkPortalOutlet implements OnInit, OnDestroy {
-    private host;
+    private readonly host;
     /** Subscription to events for when the tab body begins centering. */
     private centeringSub;
     /** Subscription to events for when the tab body finishes leaving from center position. */

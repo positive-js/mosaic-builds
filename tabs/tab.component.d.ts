@@ -2,16 +2,17 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
-import { McTabLabel } from './tab-label';
+import { McTabLabel } from './tab-label.directive';
 export declare class McTabBase {
 }
 export declare const McTabMixinBase: CanDisableCtor & typeof McTabBase;
 export declare class McTab extends McTabMixinBase implements OnInit, CanDisable, OnChanges, OnDestroy {
-    private viewContainerRef;
+    private readonly viewContainerRef;
     /** @docs-private */
     get content(): TemplatePortal | null;
-    /** Content for the tab label given by `<ng-template mc-tab-label>`. */
-    templateLabel: McTabLabel;
+    get templateLabel(): McTabLabel;
+    set templateLabel(value: McTabLabel);
+    private _templateLabel;
     /**
      * Template provided in the tab content that will be used if present, used to enable lazy-loading
      */
@@ -20,14 +21,10 @@ export declare class McTab extends McTabMixinBase implements OnInit, CanDisable,
     implicitContent: TemplateRef<any>;
     /** Plain text label for the tab, used when there is no template label. */
     textLabel: string;
+    empty: boolean;
+    tooltipTitle: string;
+    tooltipPlacement: string;
     tabId: string;
-    /** Aria label for the tab. */
-    ariaLabel: string;
-    /**
-     * Reference to the element that the tab is labelled by.
-     * Will be cleared if `aria-label` is set at the same time.
-     */
-    ariaLabelledby: string;
     /** Emits whenever the internal state of the tab changes. */
     readonly stateChanges: Subject<void>;
     /**
@@ -50,4 +47,11 @@ export declare class McTab extends McTabMixinBase implements OnInit, CanDisable,
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     ngOnInit(): void;
+    /**
+     * This has been extracted to a util because of TS 4 and VE.
+     * View Engine doesn't support property rename inheritance.
+     * TS 4.0 doesn't allow properties to override accessors or vice-versa.
+     * @docs-private
+     */
+    protected setTemplateLabelInput(value: McTabLabel): void;
 }

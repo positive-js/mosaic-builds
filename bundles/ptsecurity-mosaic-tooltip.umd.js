@@ -800,13 +800,13 @@
         McTooltip.prototype.initElementRefListeners = function () {
             var _this = this;
             this.clearListeners();
-            if (this.mcTrigger === 'hover') {
+            if (this.mcTrigger.includes('hover')) {
                 this.manualListeners
                     .set('mouseenter', function () { return _this.show(); })
                     .set('mouseleave', function () { return _this.hide(); })
                     .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
             }
-            if (this.mcTrigger === 'focus') {
+            if (this.mcTrigger.includes('focus')) {
                 this.manualListeners
                     .set('focus', function () { return _this.show(); })
                     .set('blur', function () { return _this.hide(); })
