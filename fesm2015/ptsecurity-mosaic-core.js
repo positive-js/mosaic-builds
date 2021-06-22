@@ -1,10 +1,12 @@
 import { BidiModule } from '@angular/cdk/bidi';
-import { InjectionToken, isDevMode, NgModule, Optional, Inject, Directive, Injectable, ɵɵdefineInjectable, ɵɵinject, Pipe, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, EventEmitter, ElementRef, ChangeDetectorRef, Output, ContentChildren } from '@angular/core';
+import * as i0 from '@angular/core';
+import { InjectionToken, isDevMode, NgModule, Optional, Inject, Directive, Injectable, Pipe, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, EventEmitter, ElementRef, ChangeDetectorRef, Output, ContentChildren } from '@angular/core';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { DateAdapter, MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import * as MessageFormat from 'messageformat';
 import { RequiredValidator } from '@angular/forms';
+import * as i1 from '@angular/common';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Overlay } from '@angular/cdk/overlay';
 import { trigger, state, style, transition, animate, group } from '@angular/animations';
@@ -271,7 +273,7 @@ class ErrorStateMatcher {
         return !!(control && control.invalid && (control.touched || (form && form.submitted)));
     }
 }
-/** @nocollapse */ ErrorStateMatcher.ɵprov = ɵɵdefineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
+/** @nocollapse */ ErrorStateMatcher.ɵprov = i0.ɵɵdefineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
 ErrorStateMatcher.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] }
 ];
@@ -1197,7 +1199,7 @@ class McDecimalPipe {
         }
     }
 }
-/** @nocollapse */ McDecimalPipe.ɵprov = ɵɵdefineInjectable({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(ɵɵinject(MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
+/** @nocollapse */ McDecimalPipe.ɵprov = i0.ɵɵdefineInjectable({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(i0.ɵɵinject(MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
 McDecimalPipe.decorators = [
     { type: Injectable, args: [{ providedIn: 'root' },] },
     { type: Pipe, args: [{ name: 'mcNumber' },] }
@@ -1772,7 +1774,7 @@ class McMeasureScrollbarService {
         this._scrollBarWidth = width;
     }
 }
-/** @nocollapse */ McMeasureScrollbarService.ɵprov = ɵɵdefineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(ɵɵinject(DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
+/** @nocollapse */ McMeasureScrollbarService.ɵprov = i0.ɵɵdefineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(i0.ɵɵinject(i1.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
 McMeasureScrollbarService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
