@@ -2,7 +2,6 @@ import { DateAdapter } from '@ptsecurity/cdk/datetime';
 /**
  * interface for absolute date or datetime formatter template
  */
-import * as ɵngcc0 from '@angular/core';
 export interface FormatterAbsoluteTemplate {
     variables?: {
         [name: string]: string;
@@ -174,8 +173,4 @@ export declare class DateFormatter<D> {
     rangeMiddleDateTime(startDate: D, endDate: D): string;
     private compileVariables;
     private hasSame;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<DateFormatter<any>, never>;
-    static ɵprov: ɵngcc0.ɵɵInjectableDef<DateFormatter<any>>;
 }
-
-//# sourceMappingURL=formatter.d.ts.map

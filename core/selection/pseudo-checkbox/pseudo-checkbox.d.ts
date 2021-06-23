@@ -1,4 +1,3 @@
-import * as ɵngcc0 from '@angular/core';
 export declare type McPseudoCheckboxState = 'unchecked' | 'checked' | 'indeterminate';
 /**
  * Component that shows a simplified checkbox without including any kind of "real" checkbox.
@@ -16,8 +15,4 @@ export declare type McPseudoCheckboxState = 'unchecked' | 'checked' | 'indetermi
 export declare class McPseudoCheckbox {
     state: McPseudoCheckboxState;
     disabled: boolean;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<McPseudoCheckbox, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<McPseudoCheckbox, "mc-pseudo-checkbox", never, { "state": "state"; "disabled": "disabled"; }, {}, never, never>;
 }
-
-//# sourceMappingURL=pseudo-checkbox.d.ts.map

@@ -1,6 +1,4 @@
 import { InjectionToken } from '@angular/core';
-import * as ɵngcc0 from '@angular/core';
-import * as ɵngcc1 from '@angular/cdk/bidi';
 export declare const MC_SANITY_CHECKS: InjectionToken<boolean>;
 export declare function mcSanityChecksFactory(): boolean;
 /**
@@ -19,9 +17,4 @@ export declare class McCommonModule {
     private isTestEnv;
     private checkDoctypeIsDefined;
     private checkThemeIsPresent;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<McCommonModule, [{ optional: true; }]>;
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<McCommonModule, never, [typeof ɵngcc1.BidiModule], [typeof ɵngcc1.BidiModule]>;
-    static ɵinj: ɵngcc0.ɵɵInjectorDef<McCommonModule>;
 }
-
-//# sourceMappingURL=common-module.d.ts.map
