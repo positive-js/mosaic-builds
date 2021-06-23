@@ -77,6 +77,9 @@ class McButton extends McButtonMixinBase {
     focus() {
         this.getHostElement().focus();
     }
+    focusViaKeyboard() {
+        this._focusMonitor.focusVia(this.getHostElement(), 'keyboard');
+    }
     getHostElement() {
         return this._elementRef.nativeElement;
     }

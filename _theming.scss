@@ -96,7 +96,7 @@
 
 
 // Do not edit directly
-// Generated on Fri, 04 Jun 2021 09:40:53 GMT
+// Generated on Tue, 22 Jun 2021 11:43:43 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -506,11 +506,17 @@ $list-size-multi-line-padding: 16px;
 $list-size-icon-width: 24px;
 $list-font-item: body;
 $modal-light-color-scheme-shadow: (0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
+$modal-light-color-scheme-body-top-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
+$modal-light-color-scheme-body-bottom-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.16);
 $modal-light-color-scheme-background-mask: rgba(0, 0, 0, 0.5);
 $modal-dark-color-scheme-shadow: (0 0 0 1px #333333, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
+$modal-dark-color-scheme-body-top-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
+$modal-dark-color-scheme-body-bottom-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.16);
 $modal-dark-color-scheme-background-mask: rgba(0, 0, 0, 0.5);
+$modal-size-small: 400px;
+$modal-size-normal: 640px;
+$modal-size-large: 960px;
 $modal-size-top: 48px;
-$modal-size-padding: 0 0 24px;
 $modal-size-close-width: 56px;
 $modal-size-border-radius: 4px;
 $modal-size-border-width: 1px;
@@ -2333,7 +2339,9 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
 
     $modal: (
         background-mask: $modal-light-color-scheme-background-mask,
-        shadow: $modal-light-color-scheme-shadow
+        shadow: $modal-light-color-scheme-shadow,
+        body-top-shadow: $modal-light-color-scheme-body-top-shadow,
+        body-bottom-shadow: $modal-light-color-scheme-body-bottom-shadow
     );
 
     $navbar: (
@@ -2598,7 +2606,9 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
 
     $modal: (
         background-mask: $modal-dark-color-scheme-background-mask,
-        shadow: $modal-dark-color-scheme-shadow
+        shadow: $modal-dark-color-scheme-shadow,
+        body-top-shadow: $modal-dark-color-scheme-body-top-shadow,
+        body-bottom-shadow: $modal-dark-color-scheme-body-bottom-shadow
     );
 
     $navbar: (
@@ -4202,6 +4212,14 @@ $mc-datepicker-today-fade-amount: 0.2;
             border-bottom-width: var(--mc-modal-size-border-width, $modal-size-border-width);
             border-bottom-style: solid;
             border-bottom-color: map-get($popup, divider);
+        }
+
+        .mc-modal-header.mc-modal-body_top-overflow {
+            box-shadow: map-get($modal, body-top-shadow);
+        }
+
+        .mc-modal-footer.mc-modal-body_bottom-overflow {
+            box-shadow: map-get($modal, body-bottom-shadow);
         }
 
         .mc-modal-footer {

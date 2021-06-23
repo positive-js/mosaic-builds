@@ -3,7 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, ComponentFactoryResolver, ComponentRe
 import { Observable } from 'rxjs';
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
-import { IModalButtonOptions, IModalOptions, ModalType, OnClickCallback } from './modal.type';
+import { IModalButtonOptions, IModalOptions, ModalSize, ModalType, OnClickCallback } from './modal.type';
 export declare const MODAL_ANIMATE_DURATION = 200;
 export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R> implements OnInit, OnChanges, AfterViewInit, OnDestroy, IModalOptions {
     private overlay;
@@ -25,6 +25,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     mcVisibleChange: EventEmitter<boolean>;
     mcZIndex: number;
     mcWidth: number | string;
+    mcSize: ModalSize;
     mcWrapClassName: string;
     mcClassName: string;
     mcStyle: object;
@@ -57,6 +58,9 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     modalContainer: ElementRef;
     bodyContainer: ViewContainerRef;
     autoFocusedButtons: QueryList<ElementRef>;
+    modalBody: ElementRef;
+    isTopOverflow: boolean;
+    isBottomOverflow: boolean;
     maskAnimationClassMap: object;
     modalAnimationClassMap: object;
     transformOrigin: string;
@@ -74,6 +78,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     ngOnChanges(changes: SimpleChanges): void;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
+    checkOverflow(): void;
     open(): void;
     close(result?: R): void;
     destroy(result?: R): void;

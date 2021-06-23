@@ -20,6 +20,7 @@ export declare class McButton extends McButtonMixinBase implements OnDestroy, Ca
     constructor(elementRef: ElementRef, _focusMonitor: FocusMonitor);
     ngOnDestroy(): void;
     focus(): void;
+    focusViaKeyboard(): void;
     getHostElement(): any;
 }
 export declare class McAnchor extends McButton {

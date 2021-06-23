@@ -403,6 +403,9 @@
         McButton.prototype.focus = function () {
             this.getHostElement().focus();
         };
+        McButton.prototype.focusViaKeyboard = function () {
+            this._focusMonitor.focusVia(this.getHostElement(), 'keyboard');
+        };
         McButton.prototype.getHostElement = function () {
             return this._elementRef.nativeElement;
         };

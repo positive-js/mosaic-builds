@@ -3,11 +3,17 @@ import { EventEmitter, TemplateRef, Type } from '@angular/core';
 export declare type OnClickCallback<T> = ((instance: T) => (false | void | {}) | Promise<false | void | {}>);
 export declare type ModalType = 'default' | 'confirm' | 'custom';
 export declare type ConfirmType = 'confirm' | 'success' | 'warn';
+export declare enum ModalSize {
+    Small = "small",
+    Normal = "normal",
+    Large = "large"
+}
 export interface IModalOptions<T = any, R = any> {
     mcModalType?: ModalType;
     mcVisible?: boolean;
     mcZIndex?: number;
     mcWidth?: number | string;
+    mcSize?: ModalSize;
     mcWrapClassName?: string;
     mcClassName?: string;
     mcStyle?: object;
