@@ -306,7 +306,7 @@ const enUS = {
             }{
                 SHOW_MILLISECONDS,
                 select,
-                    yes{{MILLISECONDS}}
+                    yes{:{SECONDS}{MILLISECONDS}}
                     other{}
             }`
         },
@@ -320,7 +320,7 @@ const enUS = {
             }{
                 SHOW_MILLISECONDS,
                 select,
-                    yes{{MILLISECONDS}}
+                    yes{:{SECONDS}{MILLISECONDS}}
                     other{}
             }`
         }
@@ -586,7 +586,7 @@ const ruRU = {
             }{
                 SHOW_MILLISECONDS,
                 select,
-                    yes{{MILLISECONDS}}
+                    yes{:{SECONDS}{MILLISECONDS}}
                     other{}
             }`
         },
@@ -600,7 +600,7 @@ const ruRU = {
             }{
                 SHOW_MILLISECONDS,
                 select,
-                    yes{{MILLISECONDS}}
+                    yes{:{SECONDS}{MILLISECONDS}}
                     other{}
             }`
         }

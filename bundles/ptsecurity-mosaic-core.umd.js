@@ -688,11 +688,11 @@
         absoluteTemplates: {
             short: {
                 DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE}, {YEAR}}}',
-                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{SHORT_DATE}, {TIME}}\n                    other{{SHORT_DATE}, {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{{MILLISECONDS}}\n                    other{}\n            }"
+                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{SHORT_DATE}, {TIME}}\n                    other{{SHORT_DATE}, {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{:{SECONDS}{MILLISECONDS}}\n                    other{}\n            }"
             },
             long: {
                 DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
-                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{DATE}, {TIME}}\n                    other{{DATE}, {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{{MILLISECONDS}}\n                    other{}\n            }"
+                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{DATE}, {TIME}}\n                    other{{DATE}, {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{:{SECONDS}{MILLISECONDS}}\n                    other{}\n            }"
             }
         },
         rangeTemplates: {
@@ -763,11 +763,11 @@
         absoluteTemplates: {
             short: {
                 DATE: '{CURRENT_YEAR, select, yes{{SHORT_DATE}} other{{SHORT_DATE} {YEAR}}}',
-                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{SHORT_DATE}, {TIME}}\n                    other{{SHORT_DATE} {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{{MILLISECONDS}}\n                    other{}\n            }"
+                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{SHORT_DATE}, {TIME}}\n                    other{{SHORT_DATE} {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{:{SECONDS}{MILLISECONDS}}\n                    other{}\n            }"
             },
             long: {
                 DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
-                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{DATE}, {TIME}}\n                    other{{DATE} {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{{MILLISECONDS}}\n                    other{}\n            }"
+                DATETIME: "{\n                CURRENT_YEAR,\n                select,\n                    yes{{DATE}, {TIME}}\n                    other{{DATE} {YEAR}, {TIME}}\n            }{\n                SHOW_MILLISECONDS,\n                select,\n                    yes{:{SECONDS}{MILLISECONDS}}\n                    other{}\n            }"
             }
         },
         rangeTemplates: {
