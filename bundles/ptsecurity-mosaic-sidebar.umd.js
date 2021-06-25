@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('@angular/animations')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/sidebar', ['exports', '@angular/common', '@angular/core', '@ptsecurity/cdk/keycodes', '@angular/animations'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.sidebar = {}), global.ng.common, global.ng.core, global.keycodes, global.ng.animations));
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.sidebar = {}), global.ng.common, global.ng.core, global.mc.cdk.keycodes, global.ng.animations));
 }(this, (function (exports, common, core, keycodes, animations) { 'use strict';
 
     var McSidebarAnimationState;
