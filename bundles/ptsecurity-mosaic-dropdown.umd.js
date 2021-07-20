@@ -1095,20 +1095,24 @@
             this.overlayRef.detach();
             if (dropdown instanceof McDropdown) {
                 dropdown.resetAnimation();
+                // Wait for the exit animation to finish before reseting dropdown toState.
+                var dropdownAnimationDoneSubscription = dropdown.animationDone
+                    .pipe(operators.filter(function (event) { return event.toState === 'void'; }), operators.take(1));
                 if (dropdown.lazyContent) {
-                    // Wait for the exit animation to finish before detaching the content.
-                    dropdown.animationDone
-                        .pipe(operators.filter(function (event) { return event.toState === 'void'; }), operators.take(1), 
-                    // Interrupt if the content got re-attached.
-                    operators.takeUntil(dropdown.lazyContent.attached))
-                        .subscribe({ next: function () { return dropdown.lazyContent.detach(); }, error: undefined, complete: function () {
-                            // No matter whether the content got re-attached, reset the dropdown.
-                            _this.reset();
-                        } });
+                    dropdownAnimationDoneSubscription
+                        .pipe(
+                    // Interrupt if the lazy content got re-attached.
+                    operators.takeUntil(dropdown.lazyContent.attached));
                 }
-                else {
-                    this.reset();
-                }
+                dropdownAnimationDoneSubscription
+                    .subscribe({
+                    // If lazy content has attached we're need to detach it.
+                    next: dropdown.lazyContent ? function () { return dropdown.lazyContent.detach(); } : undefined,
+                    error: undefined,
+                    complete: function () {
+                        _this.reset();
+                    }
+                });
             }
             else {
                 this.reset();
