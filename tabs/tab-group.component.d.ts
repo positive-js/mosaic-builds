@@ -1,4 +1,5 @@
 import { AfterContentChecked, AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, QueryList, InjectionToken } from '@angular/core';
+import { CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McTabHeader } from './tab-header.component';
 import { McTab } from './tab.component';
 export declare class McOldTabsCssStyler {
@@ -32,7 +33,7 @@ export declare class McTabGroupBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
 }
-export declare const McTabGroupMixinBase: import("../../../dist/mosaic/core/common-behaviors/constructor").Constructor<import("../../../dist/mosaic/core/ptsecurity-mosaic-core").CanDisable> & typeof McTabGroupBase;
+export declare const McTabGroupMixinBase: CanDisableCtor & typeof McTabGroupBase;
 /**
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
  * keyboard navigation.
