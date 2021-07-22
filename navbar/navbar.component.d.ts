@@ -1,48 +1,25 @@
-import { FocusMonitor } from '@angular/cdk/a11y';
-import { AfterViewInit, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { CanDisable, CanDisableCtor, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
+import { AfterContentInit, AfterViewInit, ElementRef, OnDestroy, QueryList } from '@angular/core';
+import { Subject } from 'rxjs';
+import { McNavbarItem, McNavbarItemBase } from './navbar-item.component';
 export declare type McNavbarContainerPositionType = 'left' | 'right';
-export declare class McNavbarLogo {
-}
-export declare class McNavbarBrand {
-}
-export declare class McNavbarTitle {
-}
-export declare class McNavbarItemBase {
-    elementRef: ElementRef;
-    constructor(elementRef: ElementRef);
-}
-export declare const McNavbarMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McNavbarItemBase;
-export declare class McNavbarItem extends McNavbarMixinBase implements OnInit, OnDestroy, CanDisable {
-    elementRef: ElementRef;
-    private _focusMonitor;
-    set collapsedTitle(value: string);
-    constructor(elementRef: ElementRef, _focusMonitor: FocusMonitor);
-    ngOnInit(): void;
-    ngOnDestroy(): void;
-    private denyClickIfDisabled;
-}
 export declare class McNavbarContainer {
-    position: McNavbarContainerPositionType;
 }
-export declare class McNavbar implements AfterViewInit, OnDestroy {
-    private _elementRef;
-    private readonly forceRecalculateItemsWidth;
+export declare class McNavbar implements AfterViewInit, AfterContentInit, OnDestroy {
+    private elementRef;
+    navbarBaseItems: QueryList<McNavbarItemBase>;
+    navbarItems: QueryList<McNavbarItem>;
+    readonly resizeStream: Subject<Event>;
     private readonly resizeDebounceInterval;
-    private readonly firstLevelElement;
-    private readonly secondLevelElements;
-    private totalItemsWidths;
-    private get maxAllowedWidth();
-    private get itemsWidths();
-    private _itemsWidths;
+    private get width();
     private get totalItemsWidth();
+    private get collapsableItems();
     private resizeSubscription;
-    constructor(_elementRef: ElementRef);
-    updateCollapsed(): void;
+    constructor(elementRef: ElementRef);
+    ngAfterContentInit(): void;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
-    private calculateAndCacheTotalItemsWidth;
-    private getOuterElementWidth;
-    private calculateAndCacheItemsWidth;
-    private getItemsForCollapse;
+    updateCollapsed: () => void;
+    private collapseItems;
+    private unCollapseItems;
+    private setItemsState;
 }

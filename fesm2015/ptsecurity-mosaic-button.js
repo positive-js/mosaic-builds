@@ -1,32 +1,29 @@
 import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { Directive, ElementRef, Renderer2, Component, ChangeDetectionStrategy, ViewEncapsulation, NgModule } from '@angular/core';
+import { Directive, ElementRef, Renderer2, ContentChildren, Component, ChangeDetectionStrategy, ViewEncapsulation, NgModule } from '@angular/core';
 import { mixinTabIndex, mixinColor, mixinDisabled } from '@ptsecurity/mosaic/core';
+import { McIcon } from '@ptsecurity/mosaic/icon';
 
 class McButtonCssStyler {
     constructor(elementRef, renderer) {
         this.renderer = renderer;
-        this.icons = [];
         this.nativeElement = elementRef.nativeElement;
     }
     get isIconButton() {
         return this.icons.length > 0;
     }
     ngAfterContentInit() {
-        /**
-         * Here we had to use native selectors due to number of angular issues about ContentChildren limitations
-         * https://github.com/angular/angular/issues/16299
-         * https://github.com/angular/angular/issues/8563
-         * https://github.com/angular/angular/issues/14769
-         */
-        this.icons = Array.from(this.nativeElement.querySelectorAll('.mc-icon'));
-        this.addClassModificatorForIcons();
+        this.updateClassModifierForIcons();
     }
-    addClassModificatorForIcons() {
+    updateClassModifierForIcons() {
         const twoIcons = 2;
-        const [firstIconElement, secondIconElement] = this.icons;
+        const [firstIconElement, secondIconElement] = this.icons.map((item) => item.getHostElement());
         if (this.icons.length === 1) {
+            this.renderer.removeClass(firstIconElement, 'mc-icon_left');
+            this.renderer.removeClass(this.nativeElement, 'mc-icon-button_left');
+            this.renderer.removeClass(firstIconElement, 'mc-icon_right');
+            this.renderer.removeClass(this.nativeElement, 'mc-icon-button_right');
             const COMMENT_NODE = 8;
             if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {
                 this.renderer.addClass(firstIconElement, 'mc-icon_left');
@@ -57,6 +54,9 @@ McButtonCssStyler.ctorParameters = () => [
     { type: ElementRef },
     { type: Renderer2 }
 ];
+McButtonCssStyler.propDecorators = {
+    icons: [{ type: ContentChildren, args: [McIcon, { descendants: true },] }]
+};
 class McButtonBase {
     // tslint:disable-next-line:naming-convention
     constructor(_elementRef) {

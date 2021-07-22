@@ -1,14 +1,15 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { ElementRef, OnDestroy, Renderer2, QueryList, AfterContentInit } from '@angular/core';
 import { CanColor, CanDisable, CanDisableCtor, CanColorCtor, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
-export declare class McButtonCssStyler {
+import { McIcon } from '@ptsecurity/mosaic/icon';
+export declare class McButtonCssStyler implements AfterContentInit {
     private renderer;
+    icons: QueryList<McIcon>;
     nativeElement: Element;
     get isIconButton(): boolean;
-    private icons;
     constructor(elementRef: ElementRef, renderer: Renderer2);
     ngAfterContentInit(): void;
-    private addClassModificatorForIcons;
+    updateClassModifierForIcons(): void;
 }
 export declare class McButtonBase {
     _elementRef: ElementRef;

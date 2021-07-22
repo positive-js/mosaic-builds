@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/button', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.button = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core));
-}(this, (function (exports, a11y, platform, common, core, core$1) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/icon')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/button', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/icon'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.button = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic.icon));
+}(this, (function (exports, a11y, platform, common, core, core$1, icon) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -325,7 +325,6 @@
     var McButtonCssStyler = /** @class */ (function () {
         function McButtonCssStyler(elementRef, renderer) {
             this.renderer = renderer;
-            this.icons = [];
             this.nativeElement = elementRef.nativeElement;
         }
         Object.defineProperty(McButtonCssStyler.prototype, "isIconButton", {
@@ -336,19 +335,16 @@
             configurable: true
         });
         McButtonCssStyler.prototype.ngAfterContentInit = function () {
-            /**
-             * Here we had to use native selectors due to number of angular issues about ContentChildren limitations
-             * https://github.com/angular/angular/issues/16299
-             * https://github.com/angular/angular/issues/8563
-             * https://github.com/angular/angular/issues/14769
-             */
-            this.icons = Array.from(this.nativeElement.querySelectorAll('.mc-icon'));
-            this.addClassModificatorForIcons();
+            this.updateClassModifierForIcons();
         };
-        McButtonCssStyler.prototype.addClassModificatorForIcons = function () {
+        McButtonCssStyler.prototype.updateClassModifierForIcons = function () {
             var twoIcons = 2;
-            var _a = __read(this.icons, 2), firstIconElement = _a[0], secondIconElement = _a[1];
+            var _a = __read(this.icons.map(function (item) { return item.getHostElement(); }), 2), firstIconElement = _a[0], secondIconElement = _a[1];
             if (this.icons.length === 1) {
+                this.renderer.removeClass(firstIconElement, 'mc-icon_left');
+                this.renderer.removeClass(this.nativeElement, 'mc-icon-button_left');
+                this.renderer.removeClass(firstIconElement, 'mc-icon_right');
+                this.renderer.removeClass(this.nativeElement, 'mc-icon-button_right');
                 var COMMENT_NODE = 8;
                 if (firstIconElement.nextSibling && firstIconElement.nextSibling.nodeType !== COMMENT_NODE) {
                     this.renderer.addClass(firstIconElement, 'mc-icon_left');
@@ -380,6 +376,9 @@
         { type: core.ElementRef },
         { type: core.Renderer2 }
     ]; };
+    McButtonCssStyler.propDecorators = {
+        icons: [{ type: core.ContentChildren, args: [icon.McIcon, { descendants: true },] }]
+    };
     var McButtonBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
         function McButtonBase(_elementRef) {
