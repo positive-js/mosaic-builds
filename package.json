@@ -1,6 +1,6 @@
 {
     "name": "@ptsecurity/mosaic",
-    "version": "11.2.1-58051b8d",
+    "version": "11.2.1-4ed1d37d",
     "description": "Mosaic",
     "repository": {
         "type": "git",
@@ -22,9 +22,9 @@
         "@angular/core": "^11.2.4",
         "@angular/common": "^11.2.4",
         "@angular/forms": "^11.2.4",
-        "@ptsecurity/cdk": "^11.2.1-58051b8d",
-        "@ptsecurity/mosaic-moment-adapter": "^11.2.1-58051b8d",
-        "@ptsecurity/mosaic-luxon-adapter": "^11.2.1-58051b8d",
+        "@ptsecurity/cdk": "^11.2.1-4ed1d37d",
+        "@ptsecurity/mosaic-moment-adapter": "^11.2.1-4ed1d37d",
+        "@ptsecurity/mosaic-luxon-adapter": "^11.2.1-4ed1d37d",
         "@ptsecurity/mosaic-icons": "^5.0.0"
     },
     "dependencies": {

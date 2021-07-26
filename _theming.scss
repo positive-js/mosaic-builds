@@ -96,7 +96,7 @@
 
 
 // Do not edit directly
-// Generated on Wed, 21 Jul 2021 11:14:57 GMT
+// Generated on Fri, 23 Jul 2021 08:52:49 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -725,9 +725,15 @@ $toggle-small-font-default: caption;
 $tooltip-light-color-scheme-background: #4D4D4D;
 $tooltip-light-color-scheme-text: white;
 $tooltip-light-color-scheme-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+$tooltip-light-color-scheme-warning-background: #FCF5E8;
+$tooltip-light-color-scheme-warning-text: white;
+$tooltip-light-color-scheme-warning-border: #F0D49B;
 $tooltip-dark-color-scheme-background: #F5F5F5;
 $tooltip-dark-color-scheme-text: #4D4D4D;
 $tooltip-dark-color-scheme-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+$tooltip-dark-color-scheme-warning-background: #FCF5E8;
+$tooltip-dark-color-scheme-warning-text: white;
+$tooltip-dark-color-scheme-warning-border: #F0D49B;
 $tooltip-size-max-width: 240px;
 $tooltip-size-border-radius: 3px;
 $tooltip-size-arrow-size: 12px;
@@ -2413,7 +2419,13 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
     $tooltip: (
         background: $tooltip-light-color-scheme-background,
         color: $tooltip-light-color-scheme-text,
-        shadow: $tooltip-light-color-scheme-shadow
+        shadow: $tooltip-light-color-scheme-shadow,
+
+        warning: (
+            background: $tooltip-light-color-scheme-warning-background,
+            color: $tooltip-light-color-scheme-warning-text,
+            border-color: $tooltip-light-color-scheme-warning-border
+        )
     );
 
     @return (
@@ -2668,7 +2680,13 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
     $tooltip: (
         background: $tooltip-dark-color-scheme-background,
         color: $tooltip-dark-color-scheme-text,
-        shadow: $tooltip-dark-color-scheme-shadow
+        shadow: $tooltip-dark-color-scheme-shadow,
+
+        warning: (
+            background: $tooltip-dark-color-scheme-warning-background,
+            color: $tooltip-dark-color-scheme-warning-text,
+            border-color: $tooltip-dark-color-scheme-warning-border
+        )
     );
 
     @return (
@@ -4654,7 +4672,7 @@ $mc-datepicker-today-fade-amount: 0.2;
             border-left-color: map-get($foreground, divider);
         }
 
-        &.mc-disabled {
+        &[disabled] {
             pointer-events: none;
 
             & .mc-icon {
@@ -4696,7 +4714,7 @@ $mc-datepicker-today-fade-amount: 0.2;
             }
         }
 
-        &.mc-disabled {
+        &[disabled] {
             cursor: default;
 
             & .mc-tab-overlay {
@@ -4749,7 +4767,7 @@ $mc-datepicker-today-fade-amount: 0.2;
             }
         }
 
-        &.mc-disabled {
+        &[disabled] {
             cursor: default;
 
             & .mc-tab-overlay {
@@ -4810,7 +4828,7 @@ $mc-datepicker-today-fade-amount: 0.2;
             }
         }
 
-        &.mc-disabled {
+        &[disabled] {
             cursor: default;
             background: transparent;
 
@@ -4847,7 +4865,7 @@ $mc-datepicker-today-fade-amount: 0.2;
             }
         }
 
-        &.mc-disabled {
+        &[disabled] {
             & .mc-tab-overlay {
                 background: map-get($tabs, state-disabled-overlay);
             }
@@ -5118,8 +5136,6 @@ $mc-datepicker-today-fade-amount: 0.2;
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
 
-    $warning: map-get($theme, warning);
-
     $tooltip: map-get(map-get($theme, components), tooltip);
 
     .mc-tooltip-inner {
@@ -5134,14 +5150,16 @@ $mc-datepicker-today-fade-amount: 0.2;
     }
 
     .mc-tooltip.mc-tooltip_warning {
-        $color: $palette-grey-700;
-        $tooltip-color-background: mc-color($warning, 60);
-        $border-color: mc-color($warning, 200);
+        $tooltip_warning: map-get($tooltip, warning);
+
+        $color: map-get($tooltip_warning, color);
+        $background: map-get($tooltip_warning, background);
+        $border-color: map-get($tooltip_warning, border-color);
 
         .mc-tooltip-arrow {
             border: 1px solid transparent;
 
-            background-color: $tooltip-color-background;
+            background-color: $background;
         }
 
         .mc-tooltip-inner {
@@ -5150,7 +5168,7 @@ $mc-datepicker-today-fade-amount: 0.2;
 
             color: $color;
 
-            background-color: $tooltip-color-background;
+            background-color: $background;
         }
 
         &.mc-tooltip_placement-top .mc-tooltip-arrow {
