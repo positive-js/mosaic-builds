@@ -1022,7 +1022,7 @@
         };
         McPopover.prototype.closingActions = function () {
             var backdrop = this.overlayRef.backdropClick();
-            var outsidePointerEvents = this.overlayRef.outsidePointerEvents();
+            var outsidePointerEvents = this.hasBackdrop ? rxjs.NEVER : this.overlayRef.outsidePointerEvents();
             var detachments = this.overlayRef.detachments();
             return rxjs.merge(backdrop, outsidePointerEvents, detachments);
         };

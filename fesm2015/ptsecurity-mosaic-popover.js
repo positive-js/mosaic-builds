@@ -7,7 +7,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { EXTENDED_OVERLAY_POSITIONS, POSITION_MAP, POSITION_TO_CSS_MAP, DEFAULT_4_POSITIONS_TO_CSS_MAP, POSITION_PRIORITY_STRATEGY } from '@ptsecurity/mosaic/core';
-import { BehaviorSubject, Subject, Subscription, merge } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, NEVER, merge } from 'rxjs';
 import { takeUntil, delay, distinctUntilChanged } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
@@ -613,7 +613,7 @@ class McPopover {
     }
     closingActions() {
         const backdrop = this.overlayRef.backdropClick();
-        const outsidePointerEvents = this.overlayRef.outsidePointerEvents();
+        const outsidePointerEvents = this.hasBackdrop ? NEVER : this.overlayRef.outsidePointerEvents();
         const detachments = this.overlayRef.detachments();
         return merge(backdrop, outsidePointerEvents, detachments);
     }
