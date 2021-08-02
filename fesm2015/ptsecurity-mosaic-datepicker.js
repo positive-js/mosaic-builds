@@ -2053,6 +2053,9 @@ class McDatepickerInput {
         this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput));
         this.updateValue(newTimeObj);
     }
+    toISO8601(value) {
+        return this.dateAdapter.toIso8601(value);
+    }
     setFormat(format) {
         this.separator = format.match(/[aA-zZ]+(?<separator>\W|\D)[aA-zZ]+/).groups.separator;
         this.separatorPositions = format
@@ -2381,8 +2384,8 @@ McDatepickerInput.decorators = [
                     '[attr.placeholder]': 'placeholder',
                     '[attr.required]': 'required',
                     '[attr.disabled]': 'disabled || null',
-                    '[attr.min]': 'min ? dateAdapter.toIso8601(min) : null',
-                    '[attr.max]': 'max ? dateAdapter.toIso8601(max) : null',
+                    '[attr.min]': 'min ? toISO8601(min) : null',
+                    '[attr.max]': 'max ? toISO8601(max) : null',
                     '[attr.autocomplete]': '"off"',
                     '(paste)': 'onPaste($event)',
                     '(change)': 'onChange()',

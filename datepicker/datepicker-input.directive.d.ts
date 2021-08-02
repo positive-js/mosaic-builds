@@ -118,6 +118,7 @@ export declare class McDatepickerInput<D> implements McFormFieldControl<D>, Cont
     /** Handles blur events on the input. */
     onBlur(): void;
     onPaste($event: any): any;
+    toISO8601(value: D): string;
     private updateLocaleParams;
     private setFormat;
     private updateValue;

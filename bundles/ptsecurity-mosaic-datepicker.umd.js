@@ -2171,6 +2171,9 @@
             this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput));
             this.updateValue(newTimeObj);
         };
+        McDatepickerInput.prototype.toISO8601 = function (value) {
+            return this.dateAdapter.toIso8601(value);
+        };
         McDatepickerInput.prototype.setFormat = function (format) {
             var _this = this;
             this.separator = format.match(/[aA-zZ]+(?<separator>\W|\D)[aA-zZ]+/).groups.separator;
@@ -2519,8 +2522,8 @@
                         '[attr.placeholder]': 'placeholder',
                         '[attr.required]': 'required',
                         '[attr.disabled]': 'disabled || null',
-                        '[attr.min]': 'min ? dateAdapter.toIso8601(min) : null',
-                        '[attr.max]': 'max ? dateAdapter.toIso8601(max) : null',
+                        '[attr.min]': 'min ? toISO8601(min) : null',
+                        '[attr.max]': 'max ? toISO8601(max) : null',
                         '[attr.autocomplete]': '"off"',
                         '(paste)': 'onPaste($event)',
                         '(change)': 'onChange()',
