@@ -405,7 +405,7 @@
     }());
     McNavbarItemBase.decorators = [
         { type: core.Directive, args: [{
-                    selector: 'mc-navbar-item, mc-navbar-divider, mc-navbar-brand',
+                    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
                     host: {
                         '[class.mc-vertical]': 'vertical',
                         '[class.mc-horizontal]': 'horizontal',
@@ -429,11 +429,22 @@
             var _this = _super.call(this, elementRef) || this;
             _this.focusMonitor = focusMonitor;
             _this.elementRef = elementRef;
+            _this._collapsable = true;
             _this.collapsed = false;
             _this._collapsedTitle = null;
             _this._tabIndex = 0;
             return _this;
         }
+        Object.defineProperty(McNavbarItem.prototype, "collapsable", {
+            get: function () {
+                return this._collapsable;
+            },
+            set: function (value) {
+                this._collapsable = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(McNavbarItem.prototype, "collapsedTitle", {
             get: function () {
                 return this.collapsed ? (this._collapsedTitle || this.title.text) : null;
@@ -455,13 +466,13 @@
             configurable: true
         });
         McNavbarItem.prototype.ngOnDestroy = function () {
-            this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+            this.focusMonitor.stopMonitoring(this.elementRef);
         };
         McNavbarItem.prototype.ngAfterContentInit = function () {
             if (this.button) {
                 return;
             }
-            this.focusMonitor.monitor(this.elementRef.nativeElement, true);
+            this.focusMonitor.monitor(this.elementRef, true);
         };
         McNavbarItem.prototype.getTitleWidth = function () {
             return this.title.outerElementWidth;
@@ -470,7 +481,7 @@
     }(McNavbarMixinBase));
     McNavbarItem.decorators = [
         { type: core.Component, args: [{
-                    selector: 'mc-navbar-item',
+                    selector: 'mc-navbar-item, [mc-navbar-item]',
                     exportAs: 'mcNavbarItem',
                     template: "<ng-content></ng-content>",
                     host: {
@@ -484,7 +495,7 @@
                     inputs: ['disabled'],
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
                     encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-navbar-title{display:inline-block;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.mc-navbar-item{position:relative;display:flex;align-items:center;height:var(--mc-navbar-item-size-height,48px);padding-left:var(--mc-navbar-item-size-padding,16px);padding-right:var(--mc-navbar-item-size-padding,16px)}.mc-navbar-item .mc-icon{min-width:16px;min-height:16px}.mc-navbar-item.mc-vertical .mc-navbar-title{padding-left:26px}.mc-navbar-item.mc-vertical .mc-icon+.mc-navbar-title,.mc-navbar-item.mc-vertical .mc-navbar-title+.mc-icon{padding-left:var(--mc-vertical-navbar-size-icon-margin,10px)}.mc-navbar-item.mc-vertical .mc-badge{position:absolute;display:flex;align-items:center;justify-content:center}.mc-navbar-item.mc-vertical.mc-opened .mc-badge{right:16px;height:24px;padding-right:7px;padding-left:7px}.mc-navbar-item.mc-vertical.mc-closed .mc-badge{top:8px;right:8px;height:16px;padding-right:4px;padding-left:4px}.mc-navbar-item.mc-vertical.mc-closed .mc-navbar-title{display:none}.mc-navbar-item.mc-vertical.mc-closed.mc-navbar-item_button{padding-left:8px;padding-right:8px}.mc-navbar-item.mc-horizontal .mc-icon+.mc-navbar-title,.mc-navbar-item.mc-horizontal .mc-navbar-title+.mc-icon{padding-left:var(--mc-navbar-size-icon-margin,4px)}.mc-navbar-item.mc-horizontal.mc-navbar-item_collapsed .mc-navbar-title{display:none}.mc-navbar-item.mc-navbar-item_button .mc-icon-button{flex:1}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper{justify-content:center}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper .mc-icon.mc-icon_left{margin-left:unset}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper .mc-icon.mc-icon_right{margin-right:unset}", ".mc-navbar-logo{display:flex}.mc-navbar-brand{position:relative;display:flex;align-items:center}.mc-navbar-brand .mc-navbar-title{cursor:default}.mc-navbar-brand.mc-horizontal{height:100%;padding-right:var(--mc-navbar-brand-size-margin-right,24px)}.mc-navbar-brand.mc-horizontal .mc-navbar-title{padding-left:var(--mc-navbar-brand-size-padding,12px);padding-right:0;cursor:default}.mc-navbar-brand.mc-vertical{flex-direction:column;padding-left:16px}.mc-navbar-brand.mc-vertical .mc-navbar-logo{flex-direction:column;width:48px;height:48px}.mc-navbar-brand.mc-vertical .mc-navbar-title{display:flex;align-items:center;height:var(--mc-navbar-item-size-height,48px);padding-left:0}.mc-navbar-brand.mc-vertical.mc-opened{align-items:unset}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-item{position:absolute;top:0;right:0}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-logo{justify-content:flex-end}.mc-navbar-brand.mc-vertical.mc-closed{padding:0}.mc-navbar-brand.mc-vertical.mc-closed .mc-navbar-logo{align-items:center;justify-content:center}.mc-navbar-brand.mc-vertical.mc-closed .mc-navbar-title{display:none}", ".mc-navbar-divider{display:block}.mc-navbar-divider.mc-vertical{height:1px;margin:8px 16px}.mc-navbar-divider.mc-vertical.mc-closed{margin-right:10px;margin-left:10px}.mc-navbar-divider.mc-horizontal{width:1px;height:28px;margin-left:8px;margin-right:8px}"]
+                    styles: [".mc-navbar-title{display:inline-block;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.mc-navbar-item{position:relative;display:flex;align-items:center;height:var(--mc-navbar-item-size-height,48px);padding-left:var(--mc-navbar-item-size-padding,16px);padding-right:var(--mc-navbar-item-size-padding,16px)}.mc-navbar-item .mc-icon{min-width:16px;min-height:16px}a.mc-navbar-item{text-decoration:none}.mc-navbar-item.mc-vertical .mc-navbar-title{padding-left:26px}.mc-navbar-item.mc-vertical .mc-icon+.mc-navbar-title,.mc-navbar-item.mc-vertical .mc-navbar-title+.mc-icon{padding-left:var(--mc-vertical-navbar-size-icon-margin,10px)}.mc-navbar-item.mc-vertical .mc-badge{position:absolute;display:flex;align-items:center;justify-content:center}.mc-navbar-item.mc-vertical.mc-opened .mc-badge{right:16px;height:24px;padding-right:7px;padding-left:7px}.mc-navbar-item.mc-vertical.mc-closed .mc-badge{top:8px;right:8px;height:16px;padding-right:4px;padding-left:4px}.mc-navbar-item.mc-vertical.mc-closed .mc-navbar-title{display:none}.mc-navbar-item.mc-vertical.mc-closed.mc-navbar-item_button{padding-left:8px;padding-right:8px}.mc-navbar-item.mc-horizontal .mc-icon+.mc-navbar-title,.mc-navbar-item.mc-horizontal .mc-navbar-title+.mc-icon{padding-left:var(--mc-navbar-size-icon-margin,4px)}.mc-navbar-item.mc-horizontal.mc-navbar-item_collapsed .mc-navbar-title{display:none}.mc-navbar-item.mc-navbar-item_button .mc-icon-button{flex:1}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper{justify-content:center}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper .mc-icon.mc-icon_left{margin-left:unset}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper .mc-icon.mc-icon_right{margin-right:unset}", ".mc-navbar-logo{display:flex}.mc-navbar-brand{position:relative;display:flex;align-items:center}.mc-navbar-brand .mc-navbar-title{cursor:default}.mc-navbar-brand.mc-horizontal{height:100%;padding-right:var(--mc-navbar-brand-size-margin-right,24px)}.mc-navbar-brand.mc-horizontal .mc-navbar-title{padding-left:var(--mc-navbar-brand-size-padding,12px);padding-right:0;cursor:default}.mc-navbar-brand.mc-vertical{flex-direction:column;padding-left:16px}.mc-navbar-brand.mc-vertical .mc-navbar-logo{flex-direction:column;width:48px;height:48px}.mc-navbar-brand.mc-vertical .mc-navbar-title{display:flex;align-items:center;height:var(--mc-navbar-item-size-height,48px);padding-left:0}.mc-navbar-brand.mc-vertical.mc-opened{align-items:unset}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-item{position:absolute;top:0;right:0}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-logo{justify-content:flex-end}.mc-navbar-brand.mc-vertical.mc-closed{padding:0}.mc-navbar-brand.mc-vertical.mc-closed .mc-navbar-logo{align-items:center;justify-content:center}.mc-navbar-brand.mc-vertical.mc-closed .mc-navbar-title{display:none}", ".mc-navbar-divider{display:block}.mc-navbar-divider.mc-vertical{height:1px;margin:8px 16px}.mc-navbar-divider.mc-vertical.mc-closed{margin-right:10px;margin-left:10px}.mc-navbar-divider.mc-horizontal{width:1px;height:28px;margin-left:8px;margin-right:8px}"]
                 },] }
     ];
     /** @nocollapse */
@@ -496,6 +507,7 @@
         button: [{ type: core.ContentChild, args: [button.McButtonCssStyler,] }],
         title: [{ type: core.ContentChild, args: [McNavbarTitle,] }],
         icon: [{ type: core.ContentChild, args: [icon.McIcon,] }],
+        collapsable: [{ type: core.Input }],
         collapsedTitle: [{ type: core.Input }]
     };
 
@@ -529,7 +541,7 @@
                 }
             };
             this.setItemsState = function () {
-                _this.navbarBaseItems.forEach(function (item) { return item.horizontal = true; });
+                Promise.resolve().then(function () { var _a; return (_a = _this.navbarBaseItems) === null || _a === void 0 ? void 0 : _a.forEach(function (item) { return item.horizontal = true; }); });
             };
             this.resizeSubscription = this.resizeStream
                 .pipe(operators.debounceTime(this.resizeDebounceInterval))
@@ -554,7 +566,7 @@
             get: function () {
                 return this.navbarItems
                     .toArray()
-                    .filter(function (item) { return item.icon && item.title; })
+                    .filter(function (item) { return item.icon && item.title && item.collapsable; })
                     .reverse();
             },
             enumerable: false,
@@ -574,7 +586,7 @@
             this.resizeSubscription.unsubscribe();
         };
         McNavbar.prototype.collapseItems = function (collapseDelta) {
-            var e_1, _a;
+            var e_1, _b;
             var delta = collapseDelta;
             var unCollapsedItems = this.collapsableItems
                 .filter(function (item) { return !item.collapsed; });
@@ -591,7 +603,7 @@
             catch (e_1_1) { e_1 = { error: e_1_1 }; }
             finally {
                 try {
-                    if (unCollapsedItems_1_1 && !unCollapsedItems_1_1.done && (_a = unCollapsedItems_1.return)) _a.call(unCollapsedItems_1);
+                    if (unCollapsedItems_1_1 && !unCollapsedItems_1_1.done && (_b = unCollapsedItems_1.return)) _b.call(unCollapsedItems_1);
                 }
                 finally { if (e_1) throw e_1.error; }
             }
@@ -644,8 +656,7 @@
             var _this = this;
             this._expanded = false;
             this.setItemsState = function () {
-                var _a;
-                (_a = _this.navbarBaseItems) === null || _a === void 0 ? void 0 : _a.forEach(function (item) { return item.vertical = true; });
+                Promise.resolve().then(function () { var _a; return (_a = _this.navbarBaseItems) === null || _a === void 0 ? void 0 : _a.forEach(function (item) { return item.vertical = true; }); });
             };
         }
         Object.defineProperty(McVerticalNavbar.prototype, "expanded", {
