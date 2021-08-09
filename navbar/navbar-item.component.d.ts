@@ -33,9 +33,6 @@ export declare class McNavbarItem extends McNavbarMixinBase implements OnDestroy
     button: McButtonCssStyler;
     title: McNavbarTitle;
     icon: McIcon;
-    get collapsable(): boolean;
-    set collapsable(value: boolean);
-    private _collapsable;
     collapsed: boolean;
     get collapsedTitle(): string | null;
     set collapsedTitle(value: string | null);
