@@ -503,7 +503,7 @@
             _this._required = false;
             _this._multiple = false;
             _this._focused = false;
-            _this._panelOpen = false;
+            _this.panelOpen = false;
             _this.closeSubscription = rxjs.Subscription.EMPTY;
             /** The scroll position of the overlay panel, calculated to center the selected option. */
             _this.scrollTop = 0;
@@ -622,17 +622,10 @@
         Object.defineProperty(McSelect.prototype, "focused", {
             /** Whether the select is focused. */
             get: function () {
-                return this._focused || this._panelOpen;
+                return this._focused || this.panelOpen;
             },
             set: function (value) {
                 this._focused = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McSelect.prototype, "panelOpen", {
-            get: function () {
-                return this._panelOpen;
             },
             enumerable: false,
             configurable: true
@@ -789,14 +782,15 @@
         /** Opens the overlay panel. */
         McSelect.prototype.open = function () {
             var _this = this;
-            if (this.disabled || !this.options || !this.options.length || this._panelOpen) {
+            var _a;
+            if (this.disabled || !((_a = this.options) === null || _a === void 0 ? void 0 : _a.length) || this.panelOpen) {
                 return;
             }
             this.triggerRect = this.trigger.nativeElement.getBoundingClientRect();
             // Note: The computed font-size will be a string pixel value (e.g. "16px").
             // `parseInt` ignores the trailing 'px' and converts this to a number.
             this.triggerFontSize = parseInt(getComputedStyle(this.trigger.nativeElement)['font-size']);
-            this._panelOpen = true;
+            this.panelOpen = true;
             this.keyManager.withHorizontalOrientation(null);
             this.highlightCorrectOption();
             this._changeDetectorRef.markForCheck();
@@ -812,12 +806,12 @@
         };
         /** Closes the overlay panel and focuses the host element. */
         McSelect.prototype.close = function () {
-            if (!this._panelOpen) {
+            if (!this.panelOpen) {
                 return;
             }
             // the order of calls is important
             this.resetSearch();
-            this._panelOpen = false;
+            this.panelOpen = false;
             this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();
             this.onTouched();
@@ -926,7 +920,6 @@
          */
         McSelect.prototype.onContainerClick = function () {
             this.focus();
-            this.open();
         };
         /** Invoked when an option is clicked. */
         McSelect.prototype.onRemoveMatcherItem = function (option, $event) {
@@ -974,10 +967,9 @@
             return this.options.first ? this.options.first.getHeight() : 0;
         };
         McSelect.prototype.closingActions = function () {
-            var backdrop = this.overlayDir.overlayRef.backdropClick();
-            var outsidePointerEvents = this.overlayDir.overlayRef.outsidePointerEvents();
-            var detachments = this.overlayDir.overlayRef.detachments();
-            return rxjs.merge(backdrop, outsidePointerEvents, detachments);
+            var _this = this;
+            return rxjs.merge(this.overlayDir.overlayRef.outsidePointerEvents()
+                .pipe(operators.filter(function (event) { return !_this.elementRef.nativeElement.contains(event.target); })), this.overlayDir.overlayRef.detachments());
         };
         McSelect.prototype.getHeightOfOptionsContainer = function () {
             return this.optionsContainer.nativeElement.getClientRects()[0].height;
@@ -1015,9 +1007,8 @@
         McSelect.prototype.handleClosedKeydown = function (event) {
             /* tslint:disable-next-line */
             var keyCode = event.keyCode;
-            var isArrowKey = keyCode === keycodes.DOWN_ARROW || keyCode === keycodes.UP_ARROW ||
-                keyCode === keycodes.LEFT_ARROW || keyCode === keycodes.RIGHT_ARROW;
-            var isOpenKey = keyCode === keycodes.ENTER || keyCode === keycodes.SPACE;
+            var isArrowKey = [keycodes.DOWN_ARROW, keycodes.UP_ARROW, keycodes.LEFT_ARROW, keycodes.RIGHT_ARROW].includes(keyCode);
+            var isOpenKey = [keycodes.ENTER, keycodes.SPACE].includes(keyCode);
             // Open the select on ALT + arrow key to match the native <select>
             if (isOpenKey || ((this.multiple || event.altKey) && isArrowKey)) {
                 event.preventDefault(); // prevents the page from scrolling down when pressing space
@@ -1161,10 +1152,10 @@
             this.keyManager.change
                 .pipe(operators.takeUntil(this.destroy))
                 .subscribe(function () {
-                if (_this._panelOpen && _this.panel) {
+                if (_this.panelOpen && _this.panel) {
                     _this.scrollActiveOptionIntoView();
                 }
-                else if (!_this._panelOpen && !_this.multiple && _this.keyManager.activeItem) {
+                else if (!_this.panelOpen && !_this.multiple && _this.keyManager.activeItem) {
                     _this.keyManager.activeItem.selectViaInteraction();
                 }
             });
@@ -1181,7 +1172,7 @@
                     Promise.resolve().then(function () { return _this.keyManager.updateActiveItem(0); });
                     _this.search.isSearchChanged = false;
                 }
-                if (event.isUserInput && !_this.multiple && _this._panelOpen) {
+                if (event.isUserInput && !_this.multiple && _this.panelOpen) {
                     _this.close();
                     _this.focus();
                 }
@@ -1290,7 +1281,7 @@
          * content width in order to constrain the panel within the viewport.
          */
         McSelect.prototype.setOverlayPosition = function () {
-            var _a;
+            var _b;
             this.resetOverlay();
             var overlayRect = this.getOverlayRect();
             // Window width without scrollbar
@@ -1312,7 +1303,7 @@
                 + (isRtl ? 0 : paddingWidth);
             // If the element overflows on either side, reduce the offset to allow it to fit.
             if (leftOverflow > 0 || rightOverflow > 0) {
-                _a = __read(this.calculateOverlayXPosition(overlayRect, windowWidth, offsetX), 2), offsetX = _a[0], overlayMaxWidth = _a[1];
+                _b = __read(this.calculateOverlayXPosition(overlayRect, windowWidth, offsetX), 2), offsetX = _b[0], overlayMaxWidth = _b[1];
                 this.overlayDir.overlayRef.overlayElement.style.maxWidth = overlayMaxWidth + "px";
             }
             // Set the offset directly in order to avoid having to go through change detection and

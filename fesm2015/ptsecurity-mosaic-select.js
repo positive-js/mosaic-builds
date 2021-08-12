@@ -186,7 +186,7 @@ class McSelect extends McSelectMixinBase {
         this._required = false;
         this._multiple = false;
         this._focused = false;
-        this._panelOpen = false;
+        this.panelOpen = false;
         this.closeSubscription = Subscription.EMPTY;
         /** The scroll position of the overlay panel, calculated to center the selected option. */
         this.scrollTop = 0;
@@ -275,13 +275,10 @@ class McSelect extends McSelectMixinBase {
     }
     /** Whether the select is focused. */
     get focused() {
-        return this._focused || this._panelOpen;
+        return this._focused || this.panelOpen;
     }
     set focused(value) {
         this._focused = value;
-    }
-    get panelOpen() {
-        return this._panelOpen;
     }
     get isEmptySearchResult() {
         return this.search && this.options.length === 0 && !!this.search.input.value;
@@ -407,14 +404,15 @@ class McSelect extends McSelectMixinBase {
     }
     /** Opens the overlay panel. */
     open() {
-        if (this.disabled || !this.options || !this.options.length || this._panelOpen) {
+        var _a;
+        if (this.disabled || !((_a = this.options) === null || _a === void 0 ? void 0 : _a.length) || this.panelOpen) {
             return;
         }
         this.triggerRect = this.trigger.nativeElement.getBoundingClientRect();
         // Note: The computed font-size will be a string pixel value (e.g. "16px").
         // `parseInt` ignores the trailing 'px' and converts this to a number.
         this.triggerFontSize = parseInt(getComputedStyle(this.trigger.nativeElement)['font-size']);
-        this._panelOpen = true;
+        this.panelOpen = true;
         this.keyManager.withHorizontalOrientation(null);
         this.highlightCorrectOption();
         this._changeDetectorRef.markForCheck();
@@ -430,12 +428,12 @@ class McSelect extends McSelectMixinBase {
     }
     /** Closes the overlay panel and focuses the host element. */
     close() {
-        if (!this._panelOpen) {
+        if (!this.panelOpen) {
             return;
         }
         // the order of calls is important
         this.resetSearch();
-        this._panelOpen = false;
+        this.panelOpen = false;
         this.keyManager.withHorizontalOrientation(this.isRtl() ? 'rtl' : 'ltr');
         this._changeDetectorRef.markForCheck();
         this.onTouched();
@@ -543,7 +541,6 @@ class McSelect extends McSelectMixinBase {
      */
     onContainerClick() {
         this.focus();
-        this.open();
     }
     /** Invoked when an option is clicked. */
     onRemoveMatcherItem(option, $event) {
@@ -590,10 +587,8 @@ class McSelect extends McSelectMixinBase {
         return this.options.first ? this.options.first.getHeight() : 0;
     }
     closingActions() {
-        const backdrop = this.overlayDir.overlayRef.backdropClick();
-        const outsidePointerEvents = this.overlayDir.overlayRef.outsidePointerEvents();
-        const detachments = this.overlayDir.overlayRef.detachments();
-        return merge(backdrop, outsidePointerEvents, detachments);
+        return merge(this.overlayDir.overlayRef.outsidePointerEvents()
+            .pipe(filter((event) => !this.elementRef.nativeElement.contains(event.target))), this.overlayDir.overlayRef.detachments());
     }
     getHeightOfOptionsContainer() {
         return this.optionsContainer.nativeElement.getClientRects()[0].height;
@@ -630,9 +625,8 @@ class McSelect extends McSelectMixinBase {
     handleClosedKeydown(event) {
         /* tslint:disable-next-line */
         const keyCode = event.keyCode;
-        const isArrowKey = keyCode === DOWN_ARROW || keyCode === UP_ARROW ||
-            keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW;
-        const isOpenKey = keyCode === ENTER || keyCode === SPACE;
+        const isArrowKey = [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW].includes(keyCode);
+        const isOpenKey = [ENTER, SPACE].includes(keyCode);
         // Open the select on ALT + arrow key to match the native <select>
         if (isOpenKey || ((this.multiple || event.altKey) && isArrowKey)) {
             event.preventDefault(); // prevents the page from scrolling down when pressing space
@@ -775,10 +769,10 @@ class McSelect extends McSelectMixinBase {
         this.keyManager.change
             .pipe(takeUntil(this.destroy))
             .subscribe(() => {
-            if (this._panelOpen && this.panel) {
+            if (this.panelOpen && this.panel) {
                 this.scrollActiveOptionIntoView();
             }
-            else if (!this._panelOpen && !this.multiple && this.keyManager.activeItem) {
+            else if (!this.panelOpen && !this.multiple && this.keyManager.activeItem) {
                 this.keyManager.activeItem.selectViaInteraction();
             }
         });
@@ -794,7 +788,7 @@ class McSelect extends McSelectMixinBase {
                 Promise.resolve().then(() => this.keyManager.updateActiveItem(0));
                 this.search.isSearchChanged = false;
             }
-            if (event.isUserInput && !this.multiple && this._panelOpen) {
+            if (event.isUserInput && !this.multiple && this.panelOpen) {
                 this.close();
                 this.focus();
             }

@@ -158,8 +158,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     get focused(): boolean;
     set focused(value: boolean);
     private _focused;
-    get panelOpen(): boolean;
-    private _panelOpen;
+    panelOpen: boolean;
     get isEmptySearchResult(): boolean;
     get canShowCleaner(): boolean;
     get selected(): McOption | McOption[];
