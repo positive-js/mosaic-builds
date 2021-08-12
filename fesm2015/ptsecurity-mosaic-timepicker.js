@@ -1,7 +1,7 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { forwardRef, EventEmitter, Directive, ElementRef, Optional, Renderer2, Input, Output, NgModule } from '@angular/core';
+import { forwardRef, EventEmitter, Directive, ElementRef, Renderer2, Optional, Input, Output, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormsModule } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
@@ -52,10 +52,10 @@ let uniqueComponentIdSuffix = 0;
 const shortFormatSize = 5;
 const fullFormatSize = 8;
 class McTimepicker {
-    constructor(elementRef, dateAdapter, renderer) {
+    constructor(elementRef, renderer, dateAdapter) {
         this.elementRef = elementRef;
-        this.dateAdapter = dateAdapter;
         this.renderer = renderer;
+        this.dateAdapter = dateAdapter;
         /**
          * Implemented as part of McFormFieldControl.
          * @docs-private
@@ -71,12 +71,14 @@ class McTimepicker {
          * @docs-private
          */
         this.controlType = 'timepicker';
+        this._placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
         this._format = DEFAULT_TIME_FORMAT;
         this._min = null;
         this._max = null;
         this.incorrectInput = new EventEmitter();
         this.uid = `mc-timepicker-${uniqueComponentIdSuffix++}`;
         this.lastValueValid = false;
+        this.defaultPlaceholder = true;
         this.onInput = () => {
             const formattedValue = this.formatUserInput(this.viewValue);
             const newTimeObj = this.getDateFromTimeString(formattedValue);
@@ -122,7 +124,17 @@ class McTimepicker {
         this.onChange = noop;
         // Force setter to be called in case id was not specified.
         this.id = this.id;
-        this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
+    }
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    get placeholder() {
+        return this._placeholder;
+    }
+    set placeholder(value) {
+        this._placeholder = value;
+        this.defaultPlaceholder = false;
     }
     get disabled() {
         return this._disabled;
@@ -160,7 +172,9 @@ class McTimepicker {
             .keys(TimeFormats)
             .map((timeFormatKey) => TimeFormats[timeFormatKey])
             .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
-        this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._format];
+        if (this.defaultPlaceholder) {
+            this._placeholder = TIMEFORMAT_PLACEHOLDERS[this._format];
+        }
         if (this.value) {
             this.updateView();
         }
@@ -636,8 +650,8 @@ McTimepicker.decorators = [
 /** @nocollapse */
 McTimepicker.ctorParameters = () => [
     { type: ElementRef },
-    { type: DateAdapter, decorators: [{ type: Optional }] },
-    { type: Renderer2 }
+    { type: Renderer2 },
+    { type: DateAdapter, decorators: [{ type: Optional }] }
 ];
 McTimepicker.propDecorators = {
     placeholder: [{ type: Input }],

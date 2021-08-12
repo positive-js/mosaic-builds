@@ -11,8 +11,8 @@ export declare const MC_TIMEPICKER_VALUE_ACCESSOR: any;
 export declare const MC_TIMEPICKER_VALIDATORS: any;
 export declare class McTimepicker<D> implements McFormFieldControl<D>, ControlValueAccessor, Validator, OnDestroy {
     private elementRef;
-    private dateAdapter;
     private renderer;
+    private dateAdapter;
     /**
      * Implemented as part of McFormFieldControl.
      * @docs-private
@@ -33,7 +33,9 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, ControlVa
      * Implemented as part of McFormFieldControl.
      * @docs-private
      */
-    placeholder: string;
+    get placeholder(): string;
+    set placeholder(value: string);
+    private _placeholder;
     get disabled(): boolean;
     set disabled(value: boolean);
     private _disabled;
@@ -79,9 +81,10 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, ControlVa
     private readonly validator;
     private lastValueValid;
     private control;
+    private defaultPlaceholder;
     private onChange;
     private onTouched;
-    constructor(elementRef: ElementRef, dateAdapter: DateAdapter<any>, renderer: Renderer2);
+    constructor(elementRef: ElementRef, renderer: Renderer2, dateAdapter: DateAdapter<any>);
     ngOnDestroy(): void;
     getSize(): number;
     focus(): void;

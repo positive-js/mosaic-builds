@@ -46,11 +46,11 @@
     var shortFormatSize = 5;
     var fullFormatSize = 8;
     var McTimepicker = /** @class */ (function () {
-        function McTimepicker(elementRef, dateAdapter, renderer) {
+        function McTimepicker(elementRef, renderer, dateAdapter) {
             var _this = this;
             this.elementRef = elementRef;
-            this.dateAdapter = dateAdapter;
             this.renderer = renderer;
+            this.dateAdapter = dateAdapter;
             /**
              * Implemented as part of McFormFieldControl.
              * @docs-private
@@ -66,12 +66,14 @@
              * @docs-private
              */
             this.controlType = 'timepicker';
+            this._placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
             this._format = DEFAULT_TIME_FORMAT;
             this._min = null;
             this._max = null;
             this.incorrectInput = new core.EventEmitter();
             this.uid = "mc-timepicker-" + uniqueComponentIdSuffix++;
             this.lastValueValid = false;
+            this.defaultPlaceholder = true;
             this.onInput = function () {
                 var formattedValue = _this.formatUserInput(_this.viewValue);
                 var newTimeObj = _this.getDateFromTimeString(formattedValue);
@@ -117,8 +119,22 @@
             this.onChange = rxjs.noop;
             // Force setter to be called in case id was not specified.
             this.id = this.id;
-            this.placeholder = TIMEFORMAT_PLACEHOLDERS[DEFAULT_TIME_FORMAT];
         }
+        Object.defineProperty(McTimepicker.prototype, "placeholder", {
+            /**
+             * Implemented as part of McFormFieldControl.
+             * @docs-private
+             */
+            get: function () {
+                return this._placeholder;
+            },
+            set: function (value) {
+                this._placeholder = value;
+                this.defaultPlaceholder = false;
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(McTimepicker.prototype, "disabled", {
             get: function () {
                 return this._disabled;
@@ -168,7 +184,9 @@
                     .keys(exports.TimeFormats)
                     .map(function (timeFormatKey) { return exports.TimeFormats[timeFormatKey]; })
                     .indexOf(formatValue) > -1 ? formatValue : DEFAULT_TIME_FORMAT;
-                this.placeholder = TIMEFORMAT_PLACEHOLDERS[this._format];
+                if (this.defaultPlaceholder) {
+                    this._placeholder = TIMEFORMAT_PLACEHOLDERS[this._format];
+                }
                 if (this.value) {
                     this.updateView();
                 }
@@ -699,8 +717,8 @@
     /** @nocollapse */
     McTimepicker.ctorParameters = function () { return [
         { type: core.ElementRef },
-        { type: datetime.DateAdapter, decorators: [{ type: core.Optional }] },
-        { type: core.Renderer2 }
+        { type: core.Renderer2 },
+        { type: datetime.DateAdapter, decorators: [{ type: core.Optional }] }
     ]; };
     McTimepicker.propDecorators = {
         placeholder: [{ type: core.Input }],
