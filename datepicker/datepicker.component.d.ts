@@ -1,7 +1,7 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
-import { EventEmitter, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, EventEmitter, InjectionToken, NgZone, OnDestroy, ViewContainerRef } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { Subject } from 'rxjs';
 import { McCalendarCellCssClasses } from './calendar-body.component';
@@ -24,11 +24,21 @@ export declare const MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER: {
  * future. (e.g. confirmation buttons).
  * @docs-private
  */
-export declare class McDatepickerContent<D> {
-    /** Reference to the internal calendar component. */
-    calendar: McCalendar<D>;
+export declare class McDatepickerContent<D> implements OnDestroy {
+    private changeDetectorRef;
+    /** Emits when an animation has finished. */
+    readonly animationDone: Subject<void>;
     /** Reference to the datepicker that created the overlay. */
     datepicker: McDatepicker<D>;
+    /** Current state of the animation. */
+    animationState: 'enter' | 'void';
+    /** Reference to the internal calendar component. */
+    calendar: McCalendar<D>;
+    private subscriptions;
+    constructor(changeDetectorRef: ChangeDetectorRef);
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
+    startExitAnimation(): void;
 }
 /** Component responsible for managing the datepicker popup/dialog. */
 export declare class McDatepicker<D> implements OnDestroy {
@@ -88,7 +98,7 @@ export declare class McDatepicker<D> implements OnDestroy {
     /** The id for the datepicker calendar. */
     id: string;
     /** A reference to the overlay when the calendar is opened as a popup. */
-    popupRef: OverlayRef;
+    popupRef: OverlayRef | null;
     /** The input element this datepicker is associated with. */
     datepickerInput: McDatepickerInput<D>;
     readonly stateChanges: Subject<void>;
@@ -125,10 +135,13 @@ export declare class McDatepicker<D> implements OnDestroy {
     /** Close the calendar. */
     close(restoreFocus?: boolean): void;
     toggle(): void;
+    /** Destroys the current overlay. */
+    private destroyOverlay;
     /** Open the calendar as a popup. */
     private openAsPopup;
     /** Create the popup. */
     private createPopup;
+    private restoreFocus;
     private closingActions;
     /** Create the popup PositionStrategy. */
     private createPopupPositionStrategy;

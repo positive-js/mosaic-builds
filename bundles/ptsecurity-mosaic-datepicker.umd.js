@@ -2696,8 +2696,26 @@
      * @docs-private
      */
     var McDatepickerContent = /** @class */ (function () {
-        function McDatepickerContent() {
+        function McDatepickerContent(changeDetectorRef) {
+            this.changeDetectorRef = changeDetectorRef;
+            /** Emits when an animation has finished. */
+            this.animationDone = new rxjs.Subject();
+            this.subscriptions = new rxjs.Subscription();
         }
+        McDatepickerContent.prototype.ngAfterViewInit = function () {
+            var _this = this;
+            this.subscriptions.add(this.datepicker.stateChanges.subscribe(function () {
+                _this.changeDetectorRef.markForCheck();
+            }));
+        };
+        McDatepickerContent.prototype.ngOnDestroy = function () {
+            this.subscriptions.unsubscribe();
+            this.animationDone.complete();
+        };
+        McDatepickerContent.prototype.startExitAnimation = function () {
+            this.animationState = 'void';
+            this.changeDetectorRef.markForCheck();
+        };
         return McDatepickerContent;
     }());
     McDatepickerContent.decorators = [
@@ -2707,7 +2725,8 @@
                     template: "<mc-calendar [id]=\"datepicker.id\"\n             [ngClass]=\"datepicker.panelClass\"\n             [startAt]=\"datepicker.startAt\"\n             [startView]=\"datepicker.startView\"\n             [minDate]=\"datepicker.minDate\"\n             [maxDate]=\"datepicker.maxDate\"\n             [dateFilter]=\"datepicker.dateFilter\"\n             [headerComponent]=\"datepicker.calendarHeaderComponent\"\n             [selected]=\"datepicker.selected\"\n             [dateClass]=\"datepicker.dateClass\"\n             [@fadeInCalendar]=\"'enter'\"\n             (selectedChange)=\"datepicker.select($event)\"\n             (yearSelected)=\"datepicker.selectYear($event)\"\n             (monthSelected)=\"datepicker.selectMonth($event)\"\n             (userSelection)=\"datepicker.close()\">\n</mc-calendar>\n",
                     host: {
                         class: 'mc-datepicker__content',
-                        '[@transformPanel]': '"enter"'
+                        '[@transformPanel]': 'animationState',
+                        '(@transformPanel.done)': 'animationDone.next()'
                     },
                     animations: [
                         mcDatepickerAnimations.transformPanel,
@@ -2718,8 +2737,12 @@
                     styles: [".mc-calendar{display:block}.mc-calendar-header{display:flex;padding:var(--mc-datepicker-calendar-size-padding-top,16px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-blocks,12px) var(--mc-datepicker-calendar-size-padding-horizontal,8px)}.mc-calendar__content{padding:0 var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px);outline:none}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__previous-button:after{border-left-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-prev-icon-transform,translateX(2px) rotate(-45deg))}.mc-calendar__next-button:after{border-right-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-nex-icon-transform,translateX(-2px) rotate(45deg))}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;height:30px}.mc-calendar__table-header th.mc-calendar__table-header-divider{position:relative;height:calc(var(--mc-datepicker-calendar-size-padding-blocks, 12px) - 2px)}.mc-calendar__table-header th.mc-calendar__table-header-divider:after{content:\"\";position:absolute;top:0;left:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));right:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));height:var(--mc-datepicker-calendar-size-divider-width,1px)}.mc-datepicker__content{display:block;border-width:1px;border-style:solid}.mc-datepicker__content .mc-calendar{width:296px;height:348px}.mc-datepicker__content .mc-calendar__next-button[disabled],.mc-datepicker__content .mc-calendar__previous-button[disabled]{border:0}"]
                 },] }
     ];
+    /** @nocollapse */
+    McDatepickerContent.ctorParameters = function () { return [
+        { type: i0.ChangeDetectorRef }
+    ]; };
     McDatepickerContent.propDecorators = {
-        calendar: [{ type: i0.ViewChild, args: [McCalendar, { static: false },] }]
+        calendar: [{ type: i0.ViewChild, args: [McCalendar,] }]
     };
     // TODO: We use a component instead of a directive here so the user can use implicit
     // template reference variables (e.g. #d vs #d="mcDatepicker"). We can change this to a directive
@@ -2865,10 +2888,7 @@
             this.inputSubscription.unsubscribe();
             this.closeSubscription.unsubscribe();
             this.disabledChange.complete();
-            if (this.popupRef) {
-                this.popupRef.dispose();
-                this.popupComponentRef = null;
-            }
+            this.destroyOverlay();
         };
         /** Selects the given date */
         McDatepicker.prototype.select = function (date) {
@@ -2929,44 +2949,32 @@
             if (!this._opened) {
                 return;
             }
-            if (this.popupRef && this.popupRef.hasAttached()) {
-                this.popupRef.detach();
+            if (this.popupComponentRef) {
+                var instance = this.popupComponentRef.instance;
+                instance.startExitAnimation();
+                instance.animationDone
+                    .pipe(operators.take(1))
+                    .subscribe(function () { return _this.destroyOverlay(); });
             }
-            if (this.calendarPortal && this.calendarPortal.isAttached) {
-                this.calendarPortal.detach();
+            if (restoreFocus) {
+                this.focusedElementBeforeOpen.focus();
             }
-            var completeClose = function () {
-                // The `_opened` could've been reset already if
-                // we got two events in quick succession.
-                if (_this._opened) {
-                    _this._opened = false;
-                    _this.closedStream.emit();
-                    _this.focusedElementBeforeOpen = null;
-                    if (restoreFocus) {
-                        _this.datepickerInput.elementRef.nativeElement.focus();
-                    }
-                }
-            };
-            if (this.focusedElementBeforeOpen && typeof this.focusedElementBeforeOpen.focus === 'function') {
-                // Because IE moves focus asynchronously, we can't count on it being restored before we've
-                // marked the datepicker as closed. If the event fires out of sequence and the element that
-                // we're refocusing opens the datepicker on focus, the user could be stuck with not being
-                // able to close the calendar at all. We work around it by making the logic, that marks
-                // the datepicker as closed, async as well.
-                if (restoreFocus) {
-                    this.focusedElementBeforeOpen.focus();
-                }
-                setTimeout(completeClose);
-            }
-            else {
-                completeClose();
-            }
+            this._opened = false;
+            this.closedStream.emit();
+            this.focusedElementBeforeOpen = null;
         };
         McDatepicker.prototype.toggle = function () {
             if (this.datepickerInput.isReadOnly) {
                 return;
             }
             this._opened ? this.close() : this.open();
+        };
+        /** Destroys the current overlay. */
+        McDatepicker.prototype.destroyOverlay = function () {
+            if (this.popupRef) {
+                this.popupRef.dispose();
+                this.popupRef = this.popupComponentRef = null;
+            }
         };
         /** Open the calendar as a popup. */
         McDatepicker.prototype.openAsPopup = function () {
@@ -2999,10 +3007,13 @@
             });
             this.popupRef = this.overlay.create(overlayConfig);
             this.closeSubscription = this.closingActions()
-                .subscribe(function () { return _this.close(); });
+                .subscribe(function () { return _this.close(_this.restoreFocus()); });
+        };
+        McDatepicker.prototype.restoreFocus = function () {
+            return this.document.activeElement === this.document.body;
         };
         McDatepicker.prototype.closingActions = function () {
-            return rxjs.merge(this.popupRef.backdropClick(), this.popupRef.outsidePointerEvents());
+            return rxjs.merge(this.popupRef.backdropClick(), this.popupRef.outsidePointerEvents(), this.popupRef.detachments());
         };
         /** Create the popup PositionStrategy. */
         McDatepicker.prototype.createPopupPositionStrategy = function () {
