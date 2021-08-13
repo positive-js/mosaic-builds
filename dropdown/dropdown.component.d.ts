@@ -1,35 +1,16 @@
 import { AnimationEvent } from '@angular/animations';
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
-import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, TemplateRef, QueryList, OnInit } from '@angular/core';
+import { AfterContentInit, ElementRef, EventEmitter, NgZone, OnDestroy, TemplateRef, QueryList, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { McDropdownContent } from './dropdown-content';
-import { McDropdownItem } from './dropdown-item';
-import { McDropdownPanel } from './dropdown-panel';
-import { DropdownPositionX, DropdownPositionY } from './dropdown-positions';
-/** Default `mc-dropdown` options that can be overridden. */
-export interface McDropdownDefaultOptions {
-    /** The x-axis position of the dropdown. */
-    xPosition: DropdownPositionX;
-    /** The y-axis position of the dropdown. */
-    yPosition: DropdownPositionY;
-    /** Whether the dropdown should overlap the dropdown trigger horizontally. */
-    overlapTriggerX: boolean;
-    /** Whether the dropdown should overlap the dropdown trigger vertically. */
-    overlapTriggerY: boolean;
-    /** Class to be applied to the dropdown's backdrop. */
-    backdropClass: string;
-    /** Whether the dropdown has a backdrop. */
-    hasBackdrop: boolean;
-}
-/** Injection token to be used to override the default options for `mc-dropdown`. */
-export declare const MC_DROPDOWN_DEFAULT_OPTIONS: InjectionToken<McDropdownDefaultOptions>;
-/** @docs-private */
-export declare function MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY(): McDropdownDefaultOptions;
-export declare class McDropdown implements AfterContentInit, McDropdownPanel<McDropdownItem>, OnInit, OnDestroy {
-    private _elementRef;
-    private _ngZone;
-    private _defaultOptions;
+import { McDropdownContent } from './dropdown-content.directive';
+import { McDropdownItem } from './dropdown-item.component';
+import { DropdownPositionX, DropdownPositionY, McDropdownDefaultOptions, McDropdownPanel } from './dropdown.types';
+export declare class McDropdown implements AfterContentInit, McDropdownPanel, OnInit, OnDestroy {
+    private elementRef;
+    private ngZone;
+    private defaultOptions;
+    navigationWithWrap: boolean;
     /** Position of the dropdown in the X axis. */
     get xPosition(): DropdownPositionX;
     set xPosition(value: DropdownPositionX);
@@ -57,6 +38,7 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     private _overlapTriggerX;
     private _overlapTriggerY;
     private _hasBackdrop;
+    triggerWidth: string;
     /** Config object to be passed into the dropdown's ngClass */
     classList: {
         [key: string]: boolean;
@@ -85,16 +67,14 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
      */
     lazyContent: McDropdownContent;
     /** Event emitted when the dropdown is closed. */
-    readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'>;
+    readonly closed: EventEmitter<import("./dropdown.types").DropdownCloseReason>;
     private previousPanelClass;
     private keyManager;
-    /** Dropdown items inside the current dropdown. */
-    private itemsArray;
-    /** Emits whenever the amount of dropdown items changes. */
-    private itemChanges;
+    /** Only the direct descendant menu items. */
+    private directDescendantItems;
     /** Subscription to tab events on the dropdown panel */
     private tabSubscription;
-    constructor(_elementRef: ElementRef<HTMLElement>, _ngZone: NgZone, _defaultOptions: McDropdownDefaultOptions);
+    constructor(elementRef: ElementRef<HTMLElement>, ngZone: NgZone, defaultOptions: McDropdownDefaultOptions);
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
@@ -102,7 +82,6 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     hovered(): Observable<McDropdownItem>;
     /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
     handleKeydown(event: KeyboardEvent): void;
-    handleClick(): void;
     /**
      * Focus the first item in the dropdown.
      * @param origin Action from which the focus originated. Used to set the correct styling.
@@ -113,16 +92,6 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
      * the user to start from the first option when pressing the down arrow.
      */
     resetActiveItem(): void;
-    /**
-     * Registers a dropdown item with the dropdown.
-     * @docs-private
-     */
-    addItem(item: McDropdownItem): void;
-    /**
-     * Removes an item from the dropdown.
-     * @docs-private
-     */
-    removeItem(item: McDropdownItem): void;
     /**
      * Adds classes to the dropdown panel based on its position. Can be used by
      * consumers to add specific styling based on the position.
@@ -138,4 +107,11 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel<McD
     /** Callback that is invoked when the panel animation completes. */
     onAnimationDone(event: AnimationEvent): void;
     onAnimationStart(event: AnimationEvent): void;
+    /**
+     * Sets up a stream that will keep track of any newly-added menu items and will update the list
+     * of direct descendants. We collect the descendants this way, because `_allItems` can include
+     * items that are part of child menus, and using a custom way of registering items is unreliable
+     * when it comes to maintaining the item order.
+     */
+    private updateDirectDescendants;
 }

@@ -2,9 +2,9 @@ import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, OnDestroy, ViewContainerRef } from '@angular/core';
-import { McDropdownItem } from './dropdown-item';
-import { McDropdownPanel } from './dropdown-panel';
+import { McDropdownItem } from './dropdown-item.component';
 import { McDropdown } from './dropdown.component';
+import { McDropdownPanel } from './dropdown.types';
 /** Injection token that determines the scroll handling while the dropdown is open. */
 export declare const MC_DROPDOWN_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
@@ -16,33 +16,41 @@ export declare const MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER: {
     useFactory: typeof MC_DROPDOWN_SCROLL_STRATEGY_FACTORY;
 };
 /** Default top padding of the nested dropdown panel. */
-export declare const NESTED_PANEL_TOP_PADDING = 2;
+export declare const NESTED_PANEL_TOP_PADDING = 4;
+export declare const NESTED_PANEL_LEFT_PADDING = 8;
 /**
  * This directive is intended to be used in conjunction with an mc-dropdown tag.  It is
  * responsible for toggling the display of the provided dropdown instance.
  */
 export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
-    private _overlay;
-    private _element;
-    private _viewContainerRef;
-    private _scrollStrategy;
-    private _parent;
-    private _dropdownItemInstance;
+    private overlay;
+    private elementRef;
+    private viewContainerRef;
+    private scrollStrategy;
+    private parent;
+    private dropdownItemInstance;
     private _dir;
-    private _focusMonitor?;
-    /** The text direction of the containing app. */
-    get dir(): Direction;
+    private focusMonitor?;
+    /** Data to be passed along to any lazily-rendered content. */
+    data: any;
+    openByArrowDown: boolean;
+    /**
+     * Whether focus should be restored when the menu is closed.
+     * Note that disabling this option can have accessibility implications
+     * and it's up to you to manage focus, if you decide to turn it off.
+     */
+    restoreFocus: boolean;
     /** References the dropdown instance that the trigger is associated with. */
     get dropdown(): McDropdownPanel;
     set dropdown(dropdown: McDropdownPanel);
-    openedBy: 'mouse' | 'touch' | 'keyboard' | null;
-    /** Data to be passed along to any lazily-rendered content. */
-    data: any;
+    private _dropdown;
     /** Event emitted when the associated dropdown is opened. */
     readonly dropdownOpened: EventEmitter<void>;
     /** Event emitted when the associated dropdown is closed. */
     readonly dropdownClosed: EventEmitter<void>;
-    private _dropdown;
+    openedBy: Exclude<FocusOrigin, 'program' | null> | undefined;
+    /** The text direction of the containing app. */
+    get dir(): Direction;
     /** Whether the dropdown is open. */
     get opened(): boolean;
     private _opened;
@@ -50,11 +58,11 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private overlayRef;
     private closeSubscription;
     private hoverSubscription;
-    constructor(_overlay: Overlay, _element: ElementRef<HTMLElement>, _viewContainerRef: ViewContainerRef, _scrollStrategy: any, _parent: McDropdown, _dropdownItemInstance: McDropdownItem, _dir: Directionality, _focusMonitor?: FocusMonitor | undefined);
+    constructor(overlay: Overlay, elementRef: ElementRef<HTMLElement>, viewContainerRef: ViewContainerRef, scrollStrategy: any, parent: McDropdown, dropdownItemInstance: McDropdownItem, _dir: Directionality, focusMonitor?: FocusMonitor | undefined);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     /** Whether the dropdown triggers a nested dropdown or a top-level one. */
-    triggersNestedDropdown(): boolean;
+    isNested(): boolean;
     /** Toggles the dropdown between the open and closed states. */
     toggle(): void;
     /** Opens the dropdown. */
@@ -125,4 +133,5 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private handleHover;
     /** Gets the portal that should be attached to the overlay. */
     private getPortal;
+    private getWidth;
 }
