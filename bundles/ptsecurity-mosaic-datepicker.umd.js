@@ -354,9 +354,7 @@
             var daysInMonth = this.dateAdapter.getNumDaysInMonth(this.activeDate);
             var dateNames = this.dateAdapter.getDateNames();
             this.weeks = [[]];
-            var cell = this.firstWeekOffset;
-            for (var i = 0; i < daysInMonth; i++) {
-                cell++;
+            for (var i = 0, cell = this.firstWeekOffset; i < daysInMonth; i++, cell++) {
                 if (cell === DAYS_PER_WEEK) {
                     this.weeks.push([]);
                     cell = 0;

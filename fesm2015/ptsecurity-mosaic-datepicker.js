@@ -326,9 +326,7 @@ class McMonthView {
         const daysInMonth = this.dateAdapter.getNumDaysInMonth(this.activeDate);
         const dateNames = this.dateAdapter.getDateNames();
         this.weeks = [[]];
-        let cell = this.firstWeekOffset;
-        for (let i = 0; i < daysInMonth; i++) {
-            cell++;
+        for (let i = 0, cell = this.firstWeekOffset; i < daysInMonth; i++, cell++) {
             if (cell === DAYS_PER_WEEK) {
                 this.weeks.push([]);
                 cell = 0;
