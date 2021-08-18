@@ -189,7 +189,7 @@ class McMonthView {
             throw createMissingDateImplError('MC_DATE_FORMATS');
         }
         const firstDayOfWeek = this.dateAdapter.getFirstDayOfWeek();
-        const narrowWeekdays = this.dateAdapter.getDayOfWeekNames('narrow');
+        const narrowWeekdays = this.dateAdapter.getDayOfWeekNames('short');
         const longWeekdays = this.dateAdapter.getDayOfWeekNames('long');
         // Rotate the labels for days of the week based on the configured first day of the week.
         const weekdays = longWeekdays.map((long, i) => {

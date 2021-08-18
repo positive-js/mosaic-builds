@@ -201,7 +201,7 @@
                 throw createMissingDateImplError('MC_DATE_FORMATS');
             }
             var firstDayOfWeek = this.dateAdapter.getFirstDayOfWeek();
-            var narrowWeekdays = this.dateAdapter.getDayOfWeekNames('narrow');
+            var narrowWeekdays = this.dateAdapter.getDayOfWeekNames('short');
             var longWeekdays = this.dateAdapter.getDayOfWeekNames('long');
             // Rotate the labels for days of the week based on the configured first day of the week.
             var weekdays = longWeekdays.map(function (long, i) {
