@@ -558,38 +558,38 @@ class McTimepicker {
         if (!timeString) {
             return null;
         }
-        const hoursAndMinutesAndSeconds = timeString.match(HOURS_MINUTES_SECONDS_REGEXP);
-        const hoursAndMinutes = timeString.match(HOURS_MINUTES_REGEXP);
-        const hoursOnly = timeString.match(HOURS_ONLY_REGEXP);
-        const hoursAndMinutesInAmPm = timeString.match(AM_PM_FORMAT_REGEXP);
+        const HMS = timeString.match(HOURS_MINUTES_SECONDS_REGEXP);
+        const HM = timeString.match(HOURS_MINUTES_REGEXP);
+        const H = timeString.match(HOURS_ONLY_REGEXP);
+        const amPm = timeString.match(AM_PM_FORMAT_REGEXP);
         let hours = 0;
         let minutes = 0;
         let seconds = 0;
         // tslint:disable:no-magic-numbers
-        if (hoursAndMinutesInAmPm) {
-            hours = Number(hoursAndMinutesInAmPm[1]);
-            minutes = Number(hoursAndMinutesInAmPm[2]);
-            if (/[p]/i.test(hoursAndMinutesInAmPm[3]) || (/[a]/i.test(hoursAndMinutesInAmPm[3]) && hours === 12)) {
+        if (amPm) {
+            hours = Number(amPm[1]);
+            minutes = Number(amPm[2]);
+            if (/[p]/i.test(amPm[3]) || (/[a]/i.test(amPm[3]) && hours === 12)) {
                 hours += 12;
             }
         }
-        else if (hoursAndMinutesAndSeconds) {
-            hours = Number(hoursAndMinutesAndSeconds[1]);
-            minutes = Number(hoursAndMinutesAndSeconds[2]);
-            seconds = Number(hoursAndMinutesAndSeconds[3]);
+        else if (HMS) {
+            hours = Number(HMS[1]);
+            minutes = Number(HMS[2]);
+            seconds = Number(HMS[3]);
         }
-        else if (hoursAndMinutes) {
-            hours = Number(hoursAndMinutes[1]);
-            minutes = Number(hoursAndMinutes[2]);
+        else if (HM) {
+            hours = Number(HM[1]);
+            minutes = Number(HM[2]);
         }
-        else if (hoursOnly) {
-            hours = Number(hoursOnly[1]);
+        else if (H) {
+            hours = Number(H[1]);
         }
         else {
             return null;
         }
         // tslint:enable
-        const resultDate = this.dateAdapter.createDateTime(this.dateAdapter.getYear(this.value), this.dateAdapter.getMonth(this.value), this.dateAdapter.getDate(this.value), hours, minutes, seconds, this.dateAdapter.getMilliseconds(this.value));
+        const resultDate = this.dateAdapter.createDateTime(this.dateAdapter.getYear(this.value), this.dateAdapter.getMonth(this.value), this.dateAdapter.getDate(this.value), hours, minutes || 0, seconds || 0, this.dateAdapter.getMilliseconds(this.value));
         return this.getValidDateOrNull(resultDate);
     }
     compareTime(first, second) {

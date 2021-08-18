@@ -4335,6 +4335,16 @@ $mc-datepicker-today-fade-amount: 0.2;
         background-color: map-get($navbar, background);
     }
 
+    .mc-navbar-brand.mc-hovered:not(.mc-closed) {
+        background-color: map-get($navbar-item, state-hover);
+    }
+
+    .mc-navbar-brand.mc-vertical.mc-closed {
+        & .mc-navbar-logo:hover {
+            background-color: map-get($navbar-item, state-hover);
+        }
+    }
+
     .mc-navbar-title {
         color: map-get($navbar-item, color);
     }

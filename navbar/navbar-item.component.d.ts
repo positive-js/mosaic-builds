@@ -3,17 +3,26 @@ import { AfterContentInit, ElementRef, OnDestroy } from '@angular/core';
 import { McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
+import { Subject } from 'rxjs';
 export declare class McNavbarLogo {
+    readonly hovered: Subject<boolean>;
 }
 export declare class McNavbarTitle implements AfterContentInit {
     private elementRef;
+    readonly hovered: Subject<boolean>;
     outerElementWidth: number;
     get text(): string;
     constructor(elementRef: ElementRef);
     getOuterElementWidth(): number;
     ngAfterContentInit(): void;
 }
-export declare class McNavbarBrand {
+export declare class McNavbarBrand implements AfterContentInit, OnDestroy {
+    logo: McNavbarLogo;
+    title: McNavbarTitle;
+    hovered: boolean;
+    private destroyed;
+    ngAfterContentInit(): void;
+    ngOnDestroy(): void;
 }
 export declare class McNavbarDivider {
 }
