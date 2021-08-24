@@ -5565,7 +5565,7 @@ $mc-datepicker-today-fade-amount: 0.2;
 @mixin mc-divider-theme($theme) {
     $foreground: map-get($theme, foreground);
 
-    .mc-divider_horizontal {
+    .mc-divider {
         border-top-color: map-get($foreground, divider);
     }
 

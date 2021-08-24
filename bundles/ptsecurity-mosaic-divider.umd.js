@@ -38,14 +38,16 @@
                     selector: 'mc-divider',
                     host: {
                         class: 'mc-divider',
+                        role: 'separator',
+                        '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
                         '[class.mc-divider_vertical]': 'vertical',
-                        '[class.mc-divider_horizontal]': '!vertical',
                         '[class.mc-divider_inset]': 'inset'
                     },
                     template: '',
                     encapsulation: core.ViewEncapsulation.None,
                     changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    styles: [".mc-divider{display:block;margin:0}.mc-divider.mc-divider_horizontal{border-top-width:var(--mc-divider-size-width,1px);border-top-style:solid}.mc-divider.mc-divider_vertical{height:100%;border-right-width:var(--mc-divider-size-width,1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:var(--mc-divider-size-inset-margin,80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:var(--mc-divider-size-inset-margin,80px)}"]
+                    preserveWhitespaces: false,
+                    styles: [".mc-divider{display:block;margin:0;border-top-width:var(--mc-divider-size-width,1px);border-top-style:solid}.mc-divider.mc-divider_vertical{border-top:0;border-right-width:var(--mc-divider-size-width,1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:var(--mc-divider-size-inset-margin,80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:var(--mc-divider-size-inset-margin,80px)}"]
                 },] }
     ];
     McDivider.propDecorators = {
