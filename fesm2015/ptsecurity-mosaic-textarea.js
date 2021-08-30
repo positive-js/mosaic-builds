@@ -1,7 +1,7 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { InjectionToken, Directive, ElementRef, Optional, Self, Inject, NgZone, Input, NgModule } from '@angular/core';
-import { NgControl, NgForm, FormGroupDirective, FormsModule } from '@angular/forms';
-import { mixinErrorState, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
+import { NgControl, NgForm, NG_VALIDATORS, NgModel, FormGroupDirective, FormsModule } from '@angular/forms';
+import { mixinErrorState, setMosaicValidation, MC_VALIDATION, ErrorStateMatcher, McCommonModule } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject, fromEvent } from 'rxjs';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -20,10 +20,13 @@ class McTextareaBase {
 // tslint:disable-next-line:naming-convention
 const McTextareaMixinBase = mixinErrorState(McTextareaBase);
 class McTextarea extends McTextareaMixinBase {
-    constructor(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, ngZone) {
+    constructor(elementRef, ngControl, parentForm, rawValidators, mcValidation, ngModel, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, ngZone) {
         super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
         this.elementRef = elementRef;
         this.ngControl = ngControl;
+        this.rawValidators = rawValidators;
+        this.mcValidation = mcValidation;
+        this.ngModel = ngModel;
         this.ngZone = ngZone;
         this.canGrow = true;
         /**
@@ -122,6 +125,14 @@ class McTextarea extends McTextareaMixinBase {
         this.stateChanges.complete();
         this.growSubscription.unsubscribe();
     }
+    ngAfterContentInit() {
+        if (!this.ngControl) {
+            return;
+        }
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation(this);
+        }
+    }
     ngDoCheck() {
         if (this.ngControl) {
             // We need to re-evaluate this on every change detection cycle, because there are some
@@ -211,6 +222,9 @@ McTextarea.ctorParameters = () => [
     { type: ElementRef },
     { type: NgControl, decorators: [{ type: Optional }, { type: Self }] },
     { type: NgForm, decorators: [{ type: Optional }] },
+    { type: Array, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [NG_VALIDATORS,] }] },
+    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_VALIDATION,] }] },
+    { type: NgModel, decorators: [{ type: Optional }, { type: Self }] },
     { type: FormGroupDirective, decorators: [{ type: Optional }] },
     { type: ErrorStateMatcher },
     { type: undefined, decorators: [{ type: Optional }, { type: Self }, { type: Inject, args: [MC_TEXTAREA_VALUE_ACCESSOR,] }] },

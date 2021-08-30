@@ -337,10 +337,13 @@
     var McTextareaMixinBase = core$1.mixinErrorState(McTextareaBase);
     var McTextarea = /** @class */ (function (_super) {
         __extends(McTextarea, _super);
-        function McTextarea(elementRef, ngControl, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, ngZone) {
+        function McTextarea(elementRef, ngControl, parentForm, rawValidators, mcValidation, ngModel, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor, ngZone) {
             var _this = _super.call(this, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) || this;
             _this.elementRef = elementRef;
             _this.ngControl = ngControl;
+            _this.rawValidators = rawValidators;
+            _this.mcValidation = mcValidation;
+            _this.ngModel = ngModel;
             _this.ngZone = ngZone;
             _this.canGrow = true;
             /**
@@ -457,6 +460,14 @@
             this.stateChanges.complete();
             this.growSubscription.unsubscribe();
         };
+        McTextarea.prototype.ngAfterContentInit = function () {
+            if (!this.ngControl) {
+                return;
+            }
+            if (this.mcValidation.useValidation) {
+                core$1.setMosaicValidation(this);
+            }
+        };
         McTextarea.prototype.ngDoCheck = function () {
             if (this.ngControl) {
                 // We need to re-evaluate this on every change detection cycle, because there are some
@@ -552,6 +563,9 @@
         { type: core.ElementRef },
         { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
         { type: forms.NgForm, decorators: [{ type: core.Optional }] },
+        { type: Array, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
+        { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
         { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
         { type: core$1.ErrorStateMatcher },
         { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_TEXTAREA_VALUE_ACCESSOR,] }] },

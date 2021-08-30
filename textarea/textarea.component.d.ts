@@ -1,6 +1,6 @@
-import { DoCheck, ElementRef, OnChanges, OnDestroy, InjectionToken, NgZone, OnInit } from '@angular/core';
-import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher } from '@ptsecurity/mosaic/core';
+import { DoCheck, ElementRef, OnChanges, OnDestroy, InjectionToken, NgZone, OnInit, AfterContentInit } from '@angular/core';
+import { FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
+import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, McValidationOptions } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 export declare const MC_TEXTAREA_VALUE_ACCESSOR: InjectionToken<{
@@ -14,9 +14,12 @@ export declare class McTextareaBase {
     constructor(defaultErrorStateMatcher: ErrorStateMatcher, parentForm: NgForm, parentFormGroup: FormGroupDirective, ngControl: NgControl);
 }
 export declare const McTextareaMixinBase: CanUpdateErrorStateCtor & typeof McTextareaBase;
-export declare class McTextarea extends McTextareaMixinBase implements McFormFieldControl<any>, OnInit, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState {
+export declare class McTextarea extends McTextareaMixinBase implements McFormFieldControl<any>, OnInit, OnChanges, OnDestroy, DoCheck, CanUpdateErrorState, AfterContentInit {
     protected elementRef: ElementRef;
     ngControl: NgControl;
+    rawValidators: Validator[];
+    private mcValidation;
+    ngModel: NgModel;
     private ngZone;
     canGrow: boolean;
     /** An object used to control when error messages are shown. */
@@ -75,10 +78,11 @@ export declare class McTextarea extends McTextareaMixinBase implements McFormFie
     private lineHeight;
     private freeRowsHeight;
     private minHeight;
-    constructor(elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, ngZone: NgZone);
+    constructor(elementRef: ElementRef, ngControl: NgControl, parentForm: NgForm, rawValidators: Validator[], mcValidation: McValidationOptions, ngModel: NgModel, parentFormGroup: FormGroupDirective, defaultErrorStateMatcher: ErrorStateMatcher, inputValueAccessor: any, ngZone: NgZone);
     ngOnInit(): void;
     ngOnChanges(): void;
     ngOnDestroy(): void;
+    ngAfterContentInit(): void;
     ngDoCheck(): void;
     /** Grow textarea height to avoid vertical scroll  */
     grow(): void;
