@@ -2147,7 +2147,7 @@ class McDatepickerInput {
                 return null;
             }
             date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
-            date.month = 0;
+            date.month = this.dateAdapter.firstMonth;
             // tslint:disable-next-line:no-magic-numbers
         }
         else if (viewDigits.length === 2) {
