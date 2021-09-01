@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/icon'), require('@angular/cdk/coercion'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('rxjs/operators'), require('@angular/animations')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/navbar', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/mosaic/icon', '@angular/cdk/coercion', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/core', 'rxjs', 'rxjs/operators', '@angular/animations'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.navbar = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ptsecurity.mosaic.icon, global.ng.cdk.coercion, global.ptsecurity.mosaic.button, global.ptsecurity.mosaic.core, global.rxjs, global.rxjs.operators, global.ng.animations));
-}(this, (function (exports, a11y, platform, common, core, icon, coercion, button, core$1, rxjs, operators, animations) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/icon'), require('@angular/cdk/coercion'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('rxjs/operators'), require('@angular/animations'), require('@ptsecurity/mosaic/design-tokens')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/navbar', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/mosaic/icon', '@angular/cdk/coercion', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/core', 'rxjs', 'rxjs/operators', '@angular/animations', '@ptsecurity/mosaic/design-tokens'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.navbar = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ptsecurity.mosaic.icon, global.ng.cdk.coercion, global.ptsecurity.mosaic.button, global.ptsecurity.mosaic.core, global.rxjs, global.rxjs.operators, global.ng.animations, global.ptsecurity.mosaic['design-tokens']));
+}(this, (function (exports, a11y, platform, common, core, icon, coercion, button, core$1, rxjs, operators, animations, designTokens) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -669,8 +669,8 @@
 
     function toggleVerticalNavbarAnimation() {
         return animations.trigger('toggle', [
-            animations.state('0', animations.style({ width: '48px' })),
-            animations.state('1', animations.style({ width: '240px' })),
+            animations.state('0', animations.style({ width: "var(--mc-vertical-navbar-size-states-closed-width, " + designTokens.VerticalNavbarSizeStatesClosedWidth + ")" })),
+            animations.state('1', animations.style({ width: "var(--mc-vertical-navbar-size-states-opened-width, " + designTokens.VerticalNavbarSizeStatesOpenedWidth + ")" })),
             animations.transition('0 <=> 1', animations.animate('200ms cubic-bezier(0, 1, 0.5, 1)'))
         ]);
     }

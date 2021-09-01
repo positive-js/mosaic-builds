@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/ptsecurity-mosaic-design-tokens.umd.js",
+  "module": "../fesm2015/ptsecurity-mosaic-design-tokens.js",
+  "es2015": "../fesm2015/ptsecurity-mosaic-design-tokens.js",
+  "esm2015": "../esm2015/design-tokens/ptsecurity-mosaic-design-tokens.js",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-design-tokens.js",
+  "typings": "ptsecurity-mosaic-design-tokens.d.ts",
+  "metadata": "ptsecurity-mosaic-design-tokens.metadata.json",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/design-tokens"
+}
