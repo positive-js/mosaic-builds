@@ -1,14 +1,14 @@
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
 import { IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { CanDisable } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { Subject } from 'rxjs';
 import { McDropdownPanel } from './dropdown.types';
 /** @docs-private */
-declare const McDropdownItemMixinBase: import("../../../dist/mosaic/core/common-behaviors/constructor").Constructor<CanDisable> & {
-    new (): {};
-};
+declare class McDropdownItemBase {
+}
+declare const McDropdownItemMixinBase: CanDisableCtor & typeof McDropdownItemBase;
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
  * It exists mostly to set the role attribute.

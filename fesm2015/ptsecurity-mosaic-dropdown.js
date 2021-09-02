@@ -103,9 +103,10 @@ McDropdownContent.ctorParameters = () => [
 
 // Boilerplate for applying mixins to McDropdownItem.
 /** @docs-private */
+class McDropdownItemBase {
+}
 // tslint:disable-next-line:naming-convention
-const McDropdownItemMixinBase = mixinDisabled(class {
-});
+const McDropdownItemMixinBase = mixinDisabled(McDropdownItemBase);
 /**
  * This directive is intended to be used inside an mc-dropdown tag.
  * It exists mostly to set the role attribute.

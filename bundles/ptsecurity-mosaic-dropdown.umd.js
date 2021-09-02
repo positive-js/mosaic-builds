@@ -412,12 +412,13 @@
 
     // Boilerplate for applying mixins to McDropdownItem.
     /** @docs-private */
-    // tslint:disable-next-line:naming-convention
-    var McDropdownItemMixinBase = core$1.mixinDisabled(/** @class */ (function () {
-        function class_1() {
+    var McDropdownItemBase = /** @class */ (function () {
+        function McDropdownItemBase() {
         }
-        return class_1;
-    }()));
+        return McDropdownItemBase;
+    }());
+    // tslint:disable-next-line:naming-convention
+    var McDropdownItemMixinBase = core$1.mixinDisabled(McDropdownItemBase);
     /**
      * This directive is intended to be used inside an mc-dropdown tag.
      * It exists mostly to set the role attribute.
