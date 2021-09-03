@@ -207,7 +207,9 @@
             var weekdays = longWeekdays.map(function (long, i) {
                 return { long: long, narrow: narrowWeekdays[i] };
             });
-            this.weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
+            this.weekdays = weekdays
+                .slice(firstDayOfWeek)
+                .concat(weekdays.slice(0, firstDayOfWeek));
             this._activeDate = this.dateAdapter.today();
         }
         Object.defineProperty(McMonthView.prototype, "activeDate", {
@@ -336,7 +338,7 @@
         McMonthView.prototype.init = function () {
             this.selectedDate = this.getDateInCurrentMonth(this.selected);
             this.todayDate = this.getDateInCurrentMonth(this.dateAdapter.today());
-            this.monthLabel = this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate) - this.dateAdapter.firstMonth];
+            this.monthLabel = this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate)];
             this.monthLabel = this.monthLabel[0].toLocaleUpperCase() + this.monthLabel.substr(1);
             var firstOfMonth = this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), this.dateAdapter.getMonth(this.activeDate));
             this.firstWeekOffset =
@@ -800,7 +802,7 @@
             // First row of months only contains 5 elements so we can fit the year label on the same row.
             // tslint:disable-next-line:no-magic-numbers
             this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]]
-                .map(function (row) { return row.map(function (month) { return _this.createCellForMonth(month + _this.dateAdapter.firstMonth, monthNames[month]); }); });
+                .map(function (row) { return row.map(function (month) { return _this.createCellForMonth(month, monthNames[month]); }); });
             this.changeDetectorRef.markForCheck();
         };
         /** Focuses the active cell after the microtask queue is empty. */
@@ -1611,13 +1613,12 @@
         DateParts["day"] = "d";
     })(DateParts || (DateParts = {}));
     var DateDigit = /** @class */ (function () {
-        function DateDigit(value, start, length, firstMonth) {
-            if (firstMonth === void 0) { firstMonth = 0; }
+        function DateDigit(value, start, length) {
             this.value = value;
             this.start = start;
             this.length = length;
-            this.firstMonth = firstMonth;
             this.maxDays = 31;
+            this.maxMonth = 12;
             if (value === DateParts.day) {
                 this.parse = this.parseDay;
             }
@@ -1628,14 +1629,6 @@
                 this.parse = this.parseYear;
             }
         }
-        Object.defineProperty(DateDigit.prototype, "maxMonth", {
-            get: function () {
-                // tslint:disable-next-line:no-magic-numbers binary-expression-operand-order
-                return 11 + this.firstMonth;
-            },
-            enumerable: false,
-            configurable: true
-        });
         Object.defineProperty(DateDigit.prototype, "end", {
             get: function () {
                 return this.start + this.length;
@@ -1810,7 +1803,7 @@
                     _this._value = null;
                     return setTimeout(function () { return _this.control.updateValueAndValidity(); });
                 }
-                var newTimeObj = _this.getValidDateOrNull(_this.dateAdapter.createDateTime(date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
+                var newTimeObj = _this.getValidDateOrNull(_this.dateAdapter.createDateTime(date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
                 _this.lastValueValid = !!newTimeObj;
                 _this.setViewValue(_this.getTimeStringFromDate(newTimeObj, _this.dateFormats.dateInput), true);
                 _this.updateValue(newTimeObj);
@@ -2255,7 +2248,7 @@
                     return null;
                 }
                 date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
-                date.month = this.dateAdapter.firstMonth;
+                date.month = 1;
                 // tslint:disable-next-line:no-magic-numbers
             }
             else if (viewDigits.length === 2) {
@@ -2279,7 +2272,7 @@
             else {
                 return null;
             }
-            return this.getValidDateOrNull(this.dateAdapter.createDateTime(date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
+            return this.getValidDateOrNull(this.dateAdapter.createDateTime(date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
         };
         McDatepickerInput.prototype.getDefaultValue = function () {
             var defaultValue = this.value || this.dateAdapter.today();
@@ -2331,8 +2324,9 @@
                     break;
                 case DateParts.month:
                     month++;
-                    if (month > this.dateAdapter.lastMonth) {
-                        month = this.dateAdapter.firstMonth;
+                    // tslint:disable-next-line:no-magic-numbers
+                    if (month > 11) {
+                        month = 0;
                     }
                     var lastDay = this.getLastDayFor(year, month);
                     if (day > lastDay) {
@@ -2362,8 +2356,9 @@
                     break;
                 case DateParts.month:
                     month--;
-                    if (month < this.dateAdapter.firstMonth) {
-                        month = this.dateAdapter.lastMonth;
+                    if (month < 0) {
+                        // tslint:disable-next-line:no-magic-numbers
+                        month = 11;
                     }
                     var lastDay = this.getLastDayFor(year, month);
                     if (day > lastDay) {
@@ -2475,13 +2470,13 @@
                 var prev = _d.prev, length = _d.length, start = _d.start;
                 if (value === _this.separator || (arr.length - 1) === index) {
                     if (!_this.firstDigit) {
-                        _this.firstDigit = new DateDigit(prev, start, length, _this.dateAdapter.firstMonth);
+                        _this.firstDigit = new DateDigit(prev, start, length);
                     }
                     else if (!_this.secondDigit) {
-                        _this.secondDigit = new DateDigit(prev, start, length, _this.dateAdapter.firstMonth);
+                        _this.secondDigit = new DateDigit(prev, start, length);
                     }
                     else if (!_this.thirdDigit) {
-                        _this.thirdDigit = new DateDigit(prev, start, arr.length - start, _this.dateAdapter.firstMonth);
+                        _this.thirdDigit = new DateDigit(prev, start, arr.length - start);
                     }
                     // tslint:disable:no-parameter-reassignment
                     length = 0;

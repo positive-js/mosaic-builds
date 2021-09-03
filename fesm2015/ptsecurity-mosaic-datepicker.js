@@ -195,7 +195,9 @@ class McMonthView {
         const weekdays = longWeekdays.map((long, i) => {
             return { long, narrow: narrowWeekdays[i] };
         });
-        this.weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
+        this.weekdays = weekdays
+            .slice(firstDayOfWeek)
+            .concat(weekdays.slice(0, firstDayOfWeek));
         this._activeDate = this.dateAdapter.today();
     }
     /**
@@ -308,7 +310,7 @@ class McMonthView {
     init() {
         this.selectedDate = this.getDateInCurrentMonth(this.selected);
         this.todayDate = this.getDateInCurrentMonth(this.dateAdapter.today());
-        this.monthLabel = this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate) - this.dateAdapter.firstMonth];
+        this.monthLabel = this.dateAdapter.getMonthNames('short')[this.dateAdapter.getMonth(this.activeDate)];
         this.monthLabel = this.monthLabel[0].toLocaleUpperCase() + this.monthLabel.substr(1);
         const firstOfMonth = this.dateAdapter.createDate(this.dateAdapter.getYear(this.activeDate), this.dateAdapter.getMonth(this.activeDate));
         this.firstWeekOffset =
@@ -736,7 +738,7 @@ class McYearView {
         // First row of months only contains 5 elements so we can fit the year label on the same row.
         // tslint:disable-next-line:no-magic-numbers
         this.months = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]]
-            .map((row) => row.map((month) => this.createCellForMonth(month + this.dateAdapter.firstMonth, monthNames[month])));
+            .map((row) => row.map((month) => this.createCellForMonth(month, monthNames[month])));
         this.changeDetectorRef.markForCheck();
     }
     /** Focuses the active cell after the microtask queue is empty. */
@@ -1594,12 +1596,12 @@ var DateParts;
     DateParts["day"] = "d";
 })(DateParts || (DateParts = {}));
 class DateDigit {
-    constructor(value, start, length, firstMonth = 0) {
+    constructor(value, start, length) {
         this.value = value;
         this.start = start;
         this.length = length;
-        this.firstMonth = firstMonth;
         this.maxDays = 31;
+        this.maxMonth = 12;
         if (value === DateParts.day) {
             this.parse = this.parseDay;
         }
@@ -1609,10 +1611,6 @@ class DateDigit {
         else if (value === DateParts.year) {
             this.parse = this.parseYear;
         }
-    }
-    get maxMonth() {
-        // tslint:disable-next-line:no-magic-numbers binary-expression-operand-order
-        return 11 + this.firstMonth;
     }
     get end() {
         return this.start + this.length;
@@ -1765,7 +1763,7 @@ class McDatepickerInput {
                 this._value = null;
                 return setTimeout(() => this.control.updateValueAndValidity());
             }
-            const newTimeObj = this.getValidDateOrNull(this.dateAdapter.createDateTime(date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
+            const newTimeObj = this.getValidDateOrNull(this.dateAdapter.createDateTime(date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
             this.lastValueValid = !!newTimeObj;
             this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
             this.updateValue(newTimeObj);
@@ -2147,7 +2145,7 @@ class McDatepickerInput {
                 return null;
             }
             date[this.firstDigit.fullName] = this.firstDigit.parse(firsViewDigit);
-            date.month = this.dateAdapter.firstMonth;
+            date.month = 1;
             // tslint:disable-next-line:no-magic-numbers
         }
         else if (viewDigits.length === 2) {
@@ -2171,7 +2169,7 @@ class McDatepickerInput {
         else {
             return null;
         }
-        return this.getValidDateOrNull(this.dateAdapter.createDateTime(date.year, date.month, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
+        return this.getValidDateOrNull(this.dateAdapter.createDateTime(date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
     }
     getDefaultValue() {
         const defaultValue = this.value || this.dateAdapter.today();
@@ -2212,8 +2210,9 @@ class McDatepickerInput {
                 break;
             case DateParts.month:
                 month++;
-                if (month > this.dateAdapter.lastMonth) {
-                    month = this.dateAdapter.firstMonth;
+                // tslint:disable-next-line:no-magic-numbers
+                if (month > 11) {
+                    month = 0;
                 }
                 const lastDay = this.getLastDayFor(year, month);
                 if (day > lastDay) {
@@ -2243,8 +2242,9 @@ class McDatepickerInput {
                 break;
             case DateParts.month:
                 month--;
-                if (month < this.dateAdapter.firstMonth) {
-                    month = this.dateAdapter.lastMonth;
+                if (month < 0) {
+                    // tslint:disable-next-line:no-magic-numbers
+                    month = 11;
                 }
                 const lastDay = this.getLastDayFor(year, month);
                 if (day > lastDay) {
@@ -2350,13 +2350,13 @@ class McDatepickerInput {
             .reduce(({ prev, length, start }, value, index, arr) => {
             if (value === this.separator || (arr.length - 1) === index) {
                 if (!this.firstDigit) {
-                    this.firstDigit = new DateDigit(prev, start, length, this.dateAdapter.firstMonth);
+                    this.firstDigit = new DateDigit(prev, start, length);
                 }
                 else if (!this.secondDigit) {
-                    this.secondDigit = new DateDigit(prev, start, length, this.dateAdapter.firstMonth);
+                    this.secondDigit = new DateDigit(prev, start, length);
                 }
                 else if (!this.thirdDigit) {
-                    this.thirdDigit = new DateDigit(prev, start, arr.length - start, this.dateAdapter.firstMonth);
+                    this.thirdDigit = new DateDigit(prev, start, arr.length - start);
                 }
                 // tslint:disable:no-parameter-reassignment
                 length = 0;
