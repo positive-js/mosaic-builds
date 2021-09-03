@@ -1949,7 +1949,7 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
     }
 
     & .mc-form-row_margin {
-        margin-bottom: var(--mc-forms-size-horizontal-row-margin-bottom, #{$forms-size-horizontal-row-margin-bottom});
+        margin-bottom: var(--mc-forms-size-vertical-row-margin-bottom, #{$forms-size-vertical-row-margin-bottom});
     }
 
     & .mc-form__label {
