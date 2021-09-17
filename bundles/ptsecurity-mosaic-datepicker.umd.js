@@ -1612,6 +1612,7 @@
         DateParts["month"] = "m";
         DateParts["day"] = "d";
     })(DateParts || (DateParts = {}));
+    var MAX_YEAR = 9999;
     var DateDigit = /** @class */ (function () {
         function DateDigit(value, start, length) {
             this.value = value;
@@ -1697,6 +1698,9 @@
             if (parsedValue === 0) {
                 return 1;
             }
+            if (parsedValue > MAX_YEAR) {
+                return MAX_YEAR;
+            }
             return parsedValue;
         };
         return DateDigit;
@@ -1764,8 +1768,11 @@
                 var newTimeObj = _this.getDateFromString(formattedValue);
                 _this.lastValueValid = !!newTimeObj;
                 if (!newTimeObj) {
-                    _this.control.updateValueAndValidity();
-                    _this._value = null;
+                    if (!_this.viewValue) {
+                        _this._value = null;
+                        _this.cvaOnChange(null);
+                    }
+                    _this.control.updateValueAndValidity({ emitEvent: false });
                     return;
                 }
                 _this.setViewValue(_this.getTimeStringFromDate(newTimeObj, _this.dateFormats.dateInput), true);
@@ -2180,7 +2187,7 @@
                 this.valueChange.emit(newValue);
                 this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
             }
-            this.control.updateValueAndValidity();
+            this.control.updateValueAndValidity({ emitEvent: false });
         };
         McDatepickerInput.prototype.isKeyForClose = function (event) {
             // tslint:disable-next-line: deprecation
@@ -2197,9 +2204,7 @@
             // tslint:disable-next-line: deprecation
             return (keycodes.hasModifierKey(event) && (keycodes.isVerticalMovement(event.keyCode) || keycodes.isHorizontalMovement(event.keyCode))) ||
                 event.ctrlKey ||
-                event.metaKey ||
-                // tslint:disable-next-line: deprecation
-                [keycodes.DELETE, keycodes.BACKSPACE].includes(event.keyCode);
+                event.metaKey;
         };
         McDatepickerInput.prototype.spaceKeyHandler = function (event) {
             event.preventDefault();
@@ -2335,6 +2340,9 @@
                     break;
                 case DateParts.year:
                     year++;
+                    if (year > MAX_YEAR) {
+                        year = 1;
+                    }
                     break;
                 default:
             }
@@ -2367,6 +2375,9 @@
                     break;
                 case DateParts.year:
                     year--;
+                    if (year < 1) {
+                        year = MAX_YEAR;
+                    }
                     break;
                 default:
             }
@@ -2387,6 +2398,7 @@
             this.value = changedTime;
             this.selectionStart = selectionStart;
             this.selectionEnd = selectionEnd;
+            this.cvaOnChange(changedTime);
             this.onChange();
             this.stateChanges.next();
         };
@@ -2913,7 +2925,6 @@
                 .subscribe(function (value) {
                 var _a;
                 _this.selected = value;
-                // @ts-ignore
                 if (_this.popupComponentRef) {
                     (_a = _this.popupComponentRef.instance.calendar.monthView) === null || _a === void 0 ? void 0 : _a.init();
                     _this.popupComponentRef.instance.calendar.activeDate = value;
@@ -3145,6 +3156,7 @@
      * Generated bundle index. Do not edit.
      */
 
+    exports.MAX_YEAR = MAX_YEAR;
     exports.MC_DATEPICKER_SCROLL_STRATEGY = MC_DATEPICKER_SCROLL_STRATEGY;
     exports.MC_DATEPICKER_SCROLL_STRATEGY_FACTORY = MC_DATEPICKER_SCROLL_STRATEGY_FACTORY;
     exports.MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER;

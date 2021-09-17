@@ -10,7 +10,7 @@ import { take } from 'rxjs/operators';
 import { MC_DATE_FORMATS, DateAdapter } from '@ptsecurity/cdk/datetime';
 import { Subject, Subscription, merge, of } from 'rxjs';
 import { Directionality } from '@angular/cdk/bidi';
-import { SPACE, ENTER, PAGE_DOWN, PAGE_UP, END, HOME, DOWN_ARROW, UP_ARROW, RIGHT_ARROW, LEFT_ARROW, TAB, ESCAPE, isLetterKey, hasModifierKey, isVerticalMovement, isHorizontalMovement, DELETE, BACKSPACE } from '@ptsecurity/cdk/keycodes';
+import { SPACE, ENTER, PAGE_DOWN, PAGE_UP, END, HOME, DOWN_ARROW, UP_ARROW, RIGHT_ARROW, LEFT_ARROW, TAB, ESCAPE, isLetterKey, hasModifierKey, isVerticalMovement, isHorizontalMovement } from '@ptsecurity/cdk/keycodes';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators } from '@angular/forms';
 import { validationTooltipShowDelay, validationTooltipHideDelay } from '@ptsecurity/mosaic/core';
@@ -1417,7 +1417,6 @@ class McDatepicker {
             .subscribe((value) => {
             var _a;
             this.selected = value;
-            // @ts-ignore
             if (this.popupComponentRef) {
                 (_a = this.popupComponentRef.instance.calendar.monthView) === null || _a === void 0 ? void 0 : _a.init();
                 this.popupComponentRef.instance.calendar.activeDate = value;
@@ -1595,6 +1594,7 @@ var DateParts;
     DateParts["month"] = "m";
     DateParts["day"] = "d";
 })(DateParts || (DateParts = {}));
+const MAX_YEAR = 9999;
 class DateDigit {
     constructor(value, start, length) {
         this.value = value;
@@ -1660,6 +1660,9 @@ class DateDigit {
         if (parsedValue === 0) {
             return 1;
         }
+        if (parsedValue > MAX_YEAR) {
+            return MAX_YEAR;
+        }
         return parsedValue;
     }
 }
@@ -1724,8 +1727,11 @@ class McDatepickerInput {
             const newTimeObj = this.getDateFromString(formattedValue);
             this.lastValueValid = !!newTimeObj;
             if (!newTimeObj) {
-                this.control.updateValueAndValidity();
-                this._value = null;
+                if (!this.viewValue) {
+                    this._value = null;
+                    this.cvaOnChange(null);
+                }
+                this.control.updateValueAndValidity({ emitEvent: false });
                 return;
             }
             this.setViewValue(this.getTimeStringFromDate(newTimeObj, this.dateFormats.dateInput), true);
@@ -2078,7 +2084,7 @@ class McDatepickerInput {
             this.valueChange.emit(newValue);
             this.dateInput.emit(new McDatepickerInputEvent(this, this.elementRef.nativeElement));
         }
-        this.control.updateValueAndValidity();
+        this.control.updateValueAndValidity({ emitEvent: false });
     }
     isKeyForClose(event) {
         // tslint:disable-next-line: deprecation
@@ -2095,9 +2101,7 @@ class McDatepickerInput {
         // tslint:disable-next-line: deprecation
         return (hasModifierKey(event) && (isVerticalMovement(event.keyCode) || isHorizontalMovement(event.keyCode))) ||
             event.ctrlKey ||
-            event.metaKey ||
-            // tslint:disable-next-line: deprecation
-            [DELETE, BACKSPACE].includes(event.keyCode);
+            event.metaKey;
     }
     spaceKeyHandler(event) {
         event.preventDefault();
@@ -2221,6 +2225,9 @@ class McDatepickerInput {
                 break;
             case DateParts.year:
                 year++;
+                if (year > MAX_YEAR) {
+                    year = 1;
+                }
                 break;
             default:
         }
@@ -2253,6 +2260,9 @@ class McDatepickerInput {
                 break;
             case DateParts.year:
                 year--;
+                if (year < 1) {
+                    year = MAX_YEAR;
+                }
                 break;
             default:
         }
@@ -2273,6 +2283,7 @@ class McDatepickerInput {
         this.value = changedTime;
         this.selectionStart = selectionStart;
         this.selectionEnd = selectionEnd;
+        this.cvaOnChange(changedTime);
         this.onChange();
         this.stateChanges.next();
     }
@@ -2558,5 +2569,5 @@ McDatepickerModule.decorators = [
  * Generated bundle index. Do not edit.
  */
 
-export { MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, MC_DATEPICKER_VALIDATORS, MC_DATEPICKER_VALUE_ACCESSOR, McCalendar, McCalendarBody, McCalendarCell, McCalendarHeader, McCalendarView, McDatepicker, McDatepickerContent, McDatepickerInput, McDatepickerInputEvent, McDatepickerIntl, McDatepickerModule, McDatepickerToggle, McDatepickerToggleIcon, McMonthView, McMultiYearView, McYearView, mcDatepickerAnimations, yearsPerPage, yearsPerRow };
+export { MAX_YEAR, MC_DATEPICKER_SCROLL_STRATEGY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY, MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER, MC_DATEPICKER_VALIDATORS, MC_DATEPICKER_VALUE_ACCESSOR, McCalendar, McCalendarBody, McCalendarCell, McCalendarHeader, McCalendarView, McDatepicker, McDatepickerContent, McDatepickerInput, McDatepickerInputEvent, McDatepickerIntl, McDatepickerModule, McDatepickerToggle, McDatepickerToggleIcon, McMonthView, McMultiYearView, McYearView, mcDatepickerAnimations, yearsPerPage, yearsPerRow };
 //# sourceMappingURL=ptsecurity-mosaic-datepicker.js.map

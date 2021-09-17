@@ -5,6 +5,7 @@ import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 import { McDatepicker } from './datepicker.component';
+export declare const MAX_YEAR = 9999;
 /** @docs-private */
 export declare const MC_DATEPICKER_VALUE_ACCESSOR: any;
 /** @docs-private */
