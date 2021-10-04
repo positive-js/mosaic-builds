@@ -976,6 +976,7 @@
         McTreeSelection.prototype.setSelectedOptionsByKey = function (option, shiftKey, ctrlKey) {
             if (shiftKey && this.multiple) {
                 this.setSelectedOptions(option);
+                this.emitChangeEvent(option);
             }
             else if (ctrlKey) {
                 if (!this.canDeselectLast(option)) {
@@ -985,8 +986,8 @@
             else if (this.autoSelect) {
                 this.selectionModel.clear();
                 this.selectionModel.toggle(option.data);
+                this.emitChangeEvent(option);
             }
-            this.emitChangeEvent(option);
         };
         McTreeSelection.prototype.setSelectedOptionsByClick = function (option, shiftKey, ctrlKey) {
             if (!shiftKey && !ctrlKey) {
