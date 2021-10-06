@@ -257,12 +257,11 @@
                 if (!tooltip) {
                     return;
                 }
-                tooltip.mcMouseEnterDelay = core.validationTooltipShowDelay;
-                tooltip.mcTrigger = 'manual';
-                tooltip.mcTooltipClass = 'mc-tooltip_warning';
-                tooltip.initElementRefListeners();
+                tooltip.enterDelay = core.validationTooltipShowDelay;
+                tooltip.trigger = 'manual';
+                tooltip.initListeners();
                 this.incorrectInput.subscribe(function () {
-                    if (tooltip.isTooltipOpen) {
+                    if (tooltip.isOpen) {
                         return;
                     }
                     tooltip.show();

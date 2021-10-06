@@ -207,12 +207,11 @@ class McTimepicker {
         if (!tooltip) {
             return;
         }
-        tooltip.mcMouseEnterDelay = validationTooltipShowDelay;
-        tooltip.mcTrigger = 'manual';
-        tooltip.mcTooltipClass = 'mc-tooltip_warning';
-        tooltip.initElementRefListeners();
+        tooltip.enterDelay = validationTooltipShowDelay;
+        tooltip.trigger = 'manual';
+        tooltip.initListeners();
         this.incorrectInput.subscribe(() => {
-            if (tooltip.isTooltipOpen) {
+            if (tooltip.isOpen) {
                 return;
             }
             tooltip.show();

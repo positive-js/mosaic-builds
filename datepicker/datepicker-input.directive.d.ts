@@ -2,7 +2,7 @@ import { ElementRef, EventEmitter, OnDestroy, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, ValidationErrors, Validator } from '@angular/forms';
 import { DateAdapter, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { McTooltip } from '@ptsecurity/mosaic/tooltip';
+import { McWarningTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 import { McDatepicker } from './datepicker.component';
 import * as i0 from "@angular/core";
@@ -72,7 +72,7 @@ export declare class McDatepickerInput<D> implements McFormFieldControl<D>, Cont
     get id(): string;
     set id(value: string);
     private _id;
-    set mcValidationTooltip(tooltip: McTooltip);
+    set mcValidationTooltip(tooltip: McWarningTooltipTrigger);
     incorrectInput: EventEmitter<void>;
     /** Emits when a `change` event is fired on this `<input>`. */
     readonly dateChange: EventEmitter<McDatepickerInputEvent<D>>;

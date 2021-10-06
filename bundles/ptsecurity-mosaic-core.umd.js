@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@ptsecurity/cdk/datetime'), require('messageformat'), require('@angular/forms'), require('@angular/common'), require('@angular/cdk/overlay'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@ptsecurity/cdk/datetime', 'messageformat', '@angular/forms', '@angular/common', '@angular/cdk/overlay', '@angular/animations', '@ptsecurity/cdk/keycodes'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.mc.cdk.datetime, global.messageformat, global.ng.forms, global.ng.common, global.ng.cdk.overlay, global.ng.animations, global.mc.cdk.keycodes));
-}(this, (function (exports, bidi, i0, coercion, rxjs, i1, MessageFormat, forms, i3, overlay, animations, keycodes) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@ptsecurity/cdk/datetime'), require('messageformat'), require('@angular/forms'), require('@angular/common'), require('@angular/cdk/overlay'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes'), require('@angular/cdk/portal'), require('rxjs/operators')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@ptsecurity/cdk/datetime', 'messageformat', '@angular/forms', '@angular/common', '@angular/cdk/overlay', '@angular/animations', '@ptsecurity/cdk/keycodes', '@angular/cdk/portal', 'rxjs/operators'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.mc.cdk.datetime, global.messageformat, global.ng.forms, global.ng.common, global.ng.cdk.overlay, global.ng.animations, global.mc.cdk.keycodes, global.ng.cdk.portal, global.rxjs.operators));
+}(this, (function (exports, i2, i0, coercion, rxjs, i1, MessageFormat, forms, i3, i1$1, animations, keycodes, portal, operators) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -24,10 +24,12 @@
         return Object.freeze(n);
     }
 
+    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
     var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
     var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
     var MessageFormat__namespace = /*#__PURE__*/_interopNamespace(MessageFormat);
     var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
+    var i1__namespace$1 = /*#__PURE__*/_interopNamespace(i1$1);
 
     function isBoolean(val) { return typeof val === 'boolean'; }
     function toBoolean(value) {
@@ -100,13 +102,13 @@
         return McCommonModule;
     }());
     /** @nocollapse */ McCommonModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, deps: [{ token: MC_SANITY_CHECKS, optional: true }], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    /** @nocollapse */ McCommonModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, imports: [bidi.BidiModule], exports: [bidi.BidiModule] });
-    /** @nocollapse */ McCommonModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, imports: [[bidi.BidiModule], bidi.BidiModule] });
+    /** @nocollapse */ McCommonModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, imports: [i2.BidiModule], exports: [i2.BidiModule] });
+    /** @nocollapse */ McCommonModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, imports: [[i2.BidiModule], i2.BidiModule] });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
-                        imports: [bidi.BidiModule],
-                        exports: [bidi.BidiModule]
+                        imports: [i2.BidiModule],
+                        exports: [i2.BidiModule]
                     }]
             }], ctorParameters: function () {
             return [{ type: undefined, decorators: [{
@@ -1396,7 +1398,7 @@
     /** @docs-private */
     var MC_SELECT_SCROLL_STRATEGY_PROVIDER = {
         provide: MC_SELECT_SCROLL_STRATEGY,
-        deps: [overlay.Overlay],
+        deps: [i1$1.Overlay],
         useFactory: mcSelectScrollStrategyProviderFactory
     };
 
@@ -1486,13 +1488,19 @@
             overlayY: 'bottom'
         }
     };
-    var DEFAULT_4_POSITIONS = objectValues([
-        POSITION_MAP.top, POSITION_MAP.right, POSITION_MAP.bottom, POSITION_MAP.left
-    ]);
     var EXTENDED_OVERLAY_POSITIONS = objectValues([
-        POSITION_MAP.top, POSITION_MAP.topLeft, POSITION_MAP.topRight, POSITION_MAP.right, POSITION_MAP.rightTop,
-        POSITION_MAP.rightBottom, POSITION_MAP.bottom, POSITION_MAP.bottomLeft, POSITION_MAP.bottomRight,
-        POSITION_MAP.left, POSITION_MAP.leftTop, POSITION_MAP.leftBottom
+        POSITION_MAP.top,
+        POSITION_MAP.topLeft,
+        POSITION_MAP.topRight,
+        POSITION_MAP.right,
+        POSITION_MAP.rightTop,
+        POSITION_MAP.rightBottom,
+        POSITION_MAP.bottom,
+        POSITION_MAP.bottomLeft,
+        POSITION_MAP.bottomRight,
+        POSITION_MAP.left,
+        POSITION_MAP.leftTop,
+        POSITION_MAP.leftBottom
     ]);
     var TOP_POSITION_PRIORITY = objectValues([
         POSITION_MAP.top,
@@ -1622,15 +1630,9 @@
         bottomLeft: 'bottom-left',
         bottomRight: 'bottom-right'
     };
-    var DEFAULT_4_POSITIONS_TO_CSS_MAP = {
-        top: 'top',
-        bottom: 'bottom',
-        right: 'right',
-        left: 'left'
-    };
     function arrayMap(array, iteratee) {
         var index = -1;
-        var length = array == null ? 0 : array.length;
+        var length = array === null ? 0 : array.length;
         var result = Array(length);
         while (++index < length) {
             result[index] = iteratee(array[index], index, array);
@@ -1638,12 +1640,10 @@
         return result;
     }
     function baseValues(object, props) {
-        return arrayMap(props, function (key) {
-            return object[key];
-        });
+        return arrayMap(props, function (key) { return object[key]; });
     }
     function objectValues(object) {
-        return object == null ? [] : baseValues(object, Object.keys(object));
+        return object === null ? [] : baseValues(object, Object.keys(object));
     }
 
     var fadeAnimation = animations.trigger('fadeAnimation', [
@@ -2268,6 +2268,409 @@
                     }]
             }] });
 
+    exports.PopUpPlacements = void 0;
+    (function (PopUpPlacements) {
+        PopUpPlacements["Top"] = "top";
+        PopUpPlacements["TopLeft"] = "topLeft";
+        PopUpPlacements["TopRight"] = "topRight";
+        PopUpPlacements["Right"] = "right";
+        PopUpPlacements["RightTop"] = "rightTop";
+        PopUpPlacements["RightBottom"] = "rightBottom";
+        PopUpPlacements["Left"] = "left";
+        PopUpPlacements["LeftTop"] = "leftTop";
+        PopUpPlacements["LeftBottom"] = "leftBottom";
+        PopUpPlacements["Bottom"] = "bottom";
+        PopUpPlacements["BottomLeft"] = "bottomLeft";
+        PopUpPlacements["BottomRight"] = "bottomRight";
+    })(exports.PopUpPlacements || (exports.PopUpPlacements = {}));
+    exports.PopUpVisibility = void 0;
+    (function (PopUpVisibility) {
+        PopUpVisibility["Initial"] = "initial";
+        PopUpVisibility["Visible"] = "visible";
+        PopUpVisibility["Hidden"] = "hidden";
+    })(exports.PopUpVisibility || (exports.PopUpVisibility = {}));
+    exports.PopUpTriggers = void 0;
+    (function (PopUpTriggers) {
+        PopUpTriggers["Click"] = "click";
+        PopUpTriggers["Focus"] = "focus";
+        PopUpTriggers["Hover"] = "hover";
+    })(exports.PopUpTriggers || (exports.PopUpTriggers = {}));
+    exports.PopUpSizes = void 0;
+    (function (PopUpSizes) {
+        PopUpSizes["Small"] = "small";
+        PopUpSizes["Normal"] = "normal";
+        PopUpSizes["Large"] = "large";
+    })(exports.PopUpSizes || (exports.PopUpSizes = {}));
+
+    // tslint:disable-next-line:naming-convention
+    var McPopUp = /** @class */ (function () {
+        function McPopUp(changeDetectorRef) {
+            this.changeDetectorRef = changeDetectorRef;
+            this.classMap = {};
+            this.visibility = exports.PopUpVisibility.Initial;
+            this.visibleChange = new i0.EventEmitter();
+            /** Subject for notifying that the tooltip has been hidden from the view */
+            this.onHideSubject = new rxjs.Subject();
+            this.closeOnInteraction = false;
+        }
+        McPopUp.prototype.ngOnDestroy = function () {
+            clearTimeout(this.showTimeoutId);
+            clearTimeout(this.hideTimeoutId);
+            this.onHideSubject.complete();
+        };
+        McPopUp.prototype.isTemplateRef = function (value) {
+            return value instanceof i0.TemplateRef;
+        };
+        McPopUp.prototype.show = function (delay) {
+            var _this = this;
+            if (this.hideTimeoutId) {
+                clearTimeout(this.hideTimeoutId);
+            }
+            this.closeOnInteraction = true;
+            this.showTimeoutId = setTimeout(function () {
+                _this.showTimeoutId = undefined;
+                _this.visibility = exports.PopUpVisibility.Visible;
+                _this.visibleChange.emit(true);
+                // Mark for check so if any parent component has set the
+                // ChangeDetectionStrategy to OnPush it will be checked anyways
+                _this.markForCheck();
+            }, delay);
+        };
+        McPopUp.prototype.hide = function (delay) {
+            var _this = this;
+            if (this.showTimeoutId) {
+                clearTimeout(this.showTimeoutId);
+            }
+            this.hideTimeoutId = setTimeout(function () {
+                _this.hideTimeoutId = undefined;
+                _this.visibility = exports.PopUpVisibility.Hidden;
+                _this.visibleChange.emit(false);
+                _this.onHideSubject.next();
+                // Mark for check so if any parent component has set the
+                // ChangeDetectionStrategy to OnPush it will be checked anyways
+                _this.markForCheck();
+            }, delay);
+        };
+        McPopUp.prototype.isVisible = function () {
+            return this.visibility === exports.PopUpVisibility.Visible;
+        };
+        McPopUp.prototype.updateClassMap = function (placement, customClass, classMap) {
+            var _a;
+            this.classMap = Object.assign((_a = {}, _a[this.prefix + "_placement-" + placement] = true, _a[customClass] = !!customClass, _a), classMap);
+        };
+        /** Returns an observable that notifies when the tooltip has been hidden from view. */
+        McPopUp.prototype.afterHidden = function () {
+            return this.onHideSubject.asObservable();
+        };
+        McPopUp.prototype.markForCheck = function () {
+            this.changeDetectorRef.markForCheck();
+        };
+        McPopUp.prototype.animationStart = function () {
+            this.closeOnInteraction = false;
+        };
+        McPopUp.prototype.animationDone = function (_a) {
+            var toState = _a.toState;
+            if (toState === exports.PopUpVisibility.Hidden && !this.isVisible()) {
+                this.onHideSubject.next();
+            }
+            if (toState === exports.PopUpVisibility.Visible || toState === exports.PopUpVisibility.Hidden) {
+                this.closeOnInteraction = true;
+            }
+        };
+        McPopUp.prototype.handleBodyInteraction = function () {
+            if (this.closeOnInteraction) {
+                this.hide(0);
+            }
+        };
+        return McPopUp;
+    }());
+    /** @nocollapse */ McPopUp.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPopUp, deps: [{ token: i0__namespace.ChangeDetectorRef }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McPopUp.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopUp, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPopUp, decorators: [{
+                type: i0.Directive
+            }], ctorParameters: function () { return [{ type: i0__namespace.ChangeDetectorRef }]; } });
+
+    var VIEWPORT_MARGIN = 8;
+    // tslint:disable-next-line:naming-convention
+    var McPopUpTrigger = /** @class */ (function () {
+        function McPopUpTrigger(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
+            var _this = this;
+            this.overlay = overlay;
+            this.elementRef = elementRef;
+            this.ngZone = ngZone;
+            this.scrollDispatcher = scrollDispatcher;
+            this.hostView = hostView;
+            this.scrollStrategy = scrollStrategy;
+            this.direction = direction;
+            this.isOpen = false;
+            this.enterDelay = 0;
+            this.leaveDelay = 0;
+            this.placementChange = new i0.EventEmitter();
+            this.visibleChange = new i0.EventEmitter();
+            this._placementPriority = null;
+            this._placement = exports.PopUpPlacements.Top;
+            this._visible = false;
+            // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
+            this._disabled = false;
+            this.listeners = new Map();
+            this.destroyed = new rxjs.Subject();
+            this.detach = function () {
+                if (_this.overlayRef && _this.overlayRef.hasAttached()) {
+                    _this.overlayRef.detach();
+                }
+                _this.instance = null;
+            };
+            this.onPositionChange = function ($event) {
+                if (!_this.instance) {
+                    return;
+                }
+                var newPlacement = _this.placement;
+                var _a = $event.connectionPair, originX = _a.originX, originY = _a.originY, overlayX = _a.overlayX, overlayY = _a.overlayY;
+                Object.keys(_this.availablePositions).some(function (key) {
+                    if (originX === _this.availablePositions[key].originX && originY === _this.availablePositions[key].originY &&
+                        overlayX === _this.availablePositions[key].overlayX && overlayY === _this.availablePositions[key].overlayY) {
+                        newPlacement = key;
+                        return true;
+                    }
+                    return false;
+                });
+                _this.placementChange.emit(newPlacement);
+                _this.updateClassMap(newPlacement);
+                if ($event.scrollableViewProperties.isOverlayClipped && _this.instance.isVisible()) {
+                    // After position changes occur and the overlay is clipped by
+                    // a parent scrollable then close the tooltip.
+                    _this.ngZone.run(function () { return _this.hide(); });
+                }
+            };
+            this.addEventListener = function (listener, event) {
+                _this.elementRef.nativeElement.addEventListener(event, listener);
+            };
+            this.removeEventListener = function (listener, event) {
+                _this.elementRef.nativeElement.removeEventListener(event, listener);
+            };
+            this.availablePositions = POSITION_MAP;
+        }
+        Object.defineProperty(McPopUpTrigger.prototype, "placementPriority", {
+            get: function () {
+                return this._placementPriority;
+            },
+            set: function (value) {
+                if (value && value.length > 0) {
+                    this._placementPriority = value;
+                }
+                else {
+                    this._placementPriority = null;
+                }
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McPopUpTrigger.prototype, "placement", {
+            get: function () {
+                return this._placement;
+            },
+            set: function (value) {
+                if (POSITION_TO_CSS_MAP[value]) {
+                    this._placement = value;
+                    this.updateClassMap();
+                }
+                else {
+                    this._placement = exports.PopUpPlacements.Top;
+                    console.warn("Unknown position: " + value + ". Will used default position: " + this._placement);
+                }
+                if (this.visible) {
+                    this.updatePosition();
+                }
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McPopUpTrigger.prototype, "visible", {
+            get: function () {
+                return this._visible;
+            },
+            set: function (externalValue) {
+                var value = coercion.coerceBooleanProperty(externalValue);
+                if (this._visible !== value) {
+                    this._visible = value;
+                    if (value) {
+                        this.show();
+                    }
+                    else {
+                        this.hide();
+                    }
+                }
+            },
+            enumerable: false,
+            configurable: true
+        });
+        McPopUpTrigger.prototype.ngOnInit = function () {
+            this.initListeners();
+        };
+        McPopUpTrigger.prototype.ngOnDestroy = function () {
+            if (this.overlayRef) {
+                this.overlayRef.dispose();
+            }
+            this.listeners.forEach(this.removeEventListener);
+            this.listeners.clear();
+            this.destroyed.next();
+            this.destroyed.complete();
+        };
+        McPopUpTrigger.prototype.handleKeydown = function (event) {
+            if (this.isOpen && event.keyCode === keycodes.ESCAPE) { // tslint:disable-line
+                this.hide();
+            }
+        };
+        McPopUpTrigger.prototype.handleTouchend = function () {
+            this.hide();
+        };
+        McPopUpTrigger.prototype.show = function (delay) {
+            var _this = this;
+            if (delay === void 0) { delay = this.enterDelay; }
+            if (this.disabled || this.instance) {
+                return;
+            }
+            this.overlayRef = this.createOverlay();
+            this.detach();
+            this.portal = this.portal || new portal.ComponentPortal(this.getOverlayHandleComponentType(), this.hostView);
+            this.instance = this.overlayRef.attach(this.portal).instance;
+            this.instance.afterHidden()
+                .pipe(operators.takeUntil(this.destroyed))
+                .subscribe(this.detach);
+            this.updateClassMap();
+            this.updateData();
+            this.instance.visibleChange
+                .pipe(operators.takeUntil(this.destroyed), operators.distinctUntilChanged())
+                .subscribe(function (value) {
+                _this.visible = value;
+                _this.visibleChange.emit(value);
+                _this.isOpen = value;
+            });
+            this.updatePosition();
+            this.instance.show(delay);
+        };
+        McPopUpTrigger.prototype.hide = function (delay) {
+            if (delay === void 0) { delay = this.leaveDelay; }
+            if (this.instance) {
+                this.instance.hide(delay);
+            }
+        };
+        /** Create the overlay config and position strategy */
+        McPopUpTrigger.prototype.createOverlay = function () {
+            var _this = this;
+            if (this.overlayRef) {
+                return this.overlayRef;
+            }
+            // Create connected position strategy that listens for scroll events to reposition.
+            var strategy = this.overlay.position()
+                .flexibleConnectedTo(this.elementRef)
+                .withTransformOriginOn(this.originSelector)
+                .withFlexibleDimensions(false)
+                .withViewportMargin(VIEWPORT_MARGIN)
+                .withPositions(__spreadArray([], __read(EXTENDED_OVERLAY_POSITIONS)))
+                .withScrollableContainers(this.scrollDispatcher.getAncestorScrollContainers(this.elementRef));
+            strategy.positionChanges
+                .pipe(operators.takeUntil(this.destroyed))
+                .subscribe(this.onPositionChange);
+            this.overlayRef = this.overlay.create(Object.assign(Object.assign({}, this.overlayConfig), { direction: this.direction, positionStrategy: strategy, scrollStrategy: this.scrollStrategy() }));
+            this.closingActions()
+                .pipe(operators.takeUntil(this.destroyed))
+                .pipe(operators.delay(0))
+                .subscribe(function () { return _this.hide(); });
+            this.overlayRef.outsidePointerEvents()
+                .subscribe(function () { return _this.instance.handleBodyInteraction(); });
+            this.overlayRef.detachments()
+                .pipe(operators.takeUntil(this.destroyed))
+                .subscribe(this.detach);
+            return this.overlayRef;
+        };
+        McPopUpTrigger.prototype.initListeners = function () {
+            var _this = this;
+            this.clearListeners();
+            if (this.trigger.includes(exports.PopUpTriggers.Click)) {
+                this.listeners
+                    .set('click', function () { return _this.show(); })
+                    .forEach(this.addEventListener);
+            }
+            if (this.trigger.includes(exports.PopUpTriggers.Hover)) {
+                this.listeners
+                    .set('mouseenter', function () { return _this.show(); })
+                    .set('mouseleave', function () { return _this.hide(); })
+                    .forEach(this.addEventListener);
+            }
+            if (this.trigger.includes(exports.PopUpTriggers.Focus)) {
+                this.listeners
+                    .set('focus', function () { return _this.show(); })
+                    .set('blur', function () { return _this.hide(); })
+                    .forEach(this.addEventListener);
+            }
+        };
+        /** Updates the position of the current popover. */
+        McPopUpTrigger.prototype.updatePosition = function (reapplyPosition) {
+            if (reapplyPosition === void 0) { reapplyPosition = false; }
+            this.overlayRef = this.createOverlay();
+            var position = this.overlayRef.getConfig().positionStrategy
+                .withPositions(this.getPrioritizedPositions())
+                .withPush(true);
+            if (reapplyPosition) {
+                setTimeout(function () { return position.reapplyLastPosition(); });
+            }
+        };
+        McPopUpTrigger.prototype.getPriorityPlacementStrategy = function (value) {
+            var _this = this;
+            var result = [];
+            var possiblePositions = Object.keys(this.availablePositions);
+            if (Array.isArray(value)) {
+                value.forEach(function (position) {
+                    if (possiblePositions.includes(position)) {
+                        result.push(_this.availablePositions[position]);
+                    }
+                });
+            }
+            else if (possiblePositions.includes(value)) {
+                result.push(this.availablePositions[value]);
+            }
+            return result;
+        };
+        McPopUpTrigger.prototype.getPrioritizedPositions = function () {
+            if (this.placementPriority) {
+                return this.getPriorityPlacementStrategy(this.placementPriority);
+            }
+            return POSITION_PRIORITY_STRATEGY[this.placement];
+        };
+        McPopUpTrigger.prototype.clearListeners = function () {
+            this.listeners.forEach(this.removeEventListener);
+            this.listeners.clear();
+        };
+        return McPopUpTrigger;
+    }());
+    /** @nocollapse */ McPopUpTrigger.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPopUpTrigger, deps: "invalid", target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McPopUpTrigger.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopUpTrigger, inputs: { enterDelay: ["mcEnterDelay", "enterDelay"], leaveDelay: ["mcLeaveDelay", "leaveDelay"], placementPriority: ["mcPlacementPriority", "placementPriority"], placement: ["mcPlacement", "placement"], visible: ["mcVisible", "visible"] }, outputs: { placementChange: "mcPlacementChange", visibleChange: "mcVisibleChange" }, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPopUpTrigger, decorators: [{
+                type: i0.Directive
+            }], ctorParameters: function () { return [{ type: i1__namespace$1.Overlay }, { type: i0__namespace.ElementRef }, { type: i0__namespace.NgZone }, { type: i1__namespace$1.ScrollDispatcher }, { type: i0__namespace.ViewContainerRef }, { type: undefined }, { type: i2__namespace.Directionality }]; }, propDecorators: { enterDelay: [{
+                    type: i0.Input,
+                    args: ['mcEnterDelay']
+                }], leaveDelay: [{
+                    type: i0.Input,
+                    args: ['mcLeaveDelay']
+                }], placementChange: [{
+                    type: i0.Output,
+                    args: ['mcPlacementChange']
+                }], visibleChange: [{
+                    type: i0.Output,
+                    args: ['mcVisibleChange']
+                }], placementPriority: [{
+                    type: i0.Input,
+                    args: ['mcPlacementPriority']
+                }], placement: [{
+                    type: i0.Input,
+                    args: ['mcPlacement']
+                }], visible: [{
+                    type: i0.Input,
+                    args: ['mcVisible']
+                }] } });
+
     /**
      * Generated bundle index. Do not edit.
      */
@@ -2275,8 +2678,6 @@
     exports.BOTTOM_LEFT_POSITION_PRIORITY = BOTTOM_LEFT_POSITION_PRIORITY;
     exports.BOTTOM_POSITION_PRIORITY = BOTTOM_POSITION_PRIORITY;
     exports.BOTTOM_RIGHT_POSITION_PRIORITY = BOTTOM_RIGHT_POSITION_PRIORITY;
-    exports.DEFAULT_4_POSITIONS = DEFAULT_4_POSITIONS;
-    exports.DEFAULT_4_POSITIONS_TO_CSS_MAP = DEFAULT_4_POSITIONS_TO_CSS_MAP;
     exports.DEFAULT_MC_LOCALE_ID = DEFAULT_MC_LOCALE_ID;
     exports.DateFormatter = DateFormatter;
     exports.EXTENDED_OVERLAY_POSITIONS = EXTENDED_OVERLAY_POSITIONS;
@@ -2309,6 +2710,8 @@
     exports.McOption = McOption;
     exports.McOptionModule = McOptionModule;
     exports.McOptionSelectionChange = McOptionSelectionChange;
+    exports.McPopUp = McPopUp;
+    exports.McPopUpTrigger = McPopUpTrigger;
     exports.McPseudoCheckbox = McPseudoCheckbox;
     exports.McPseudoCheckboxModule = McPseudoCheckboxModule;
     exports.NUMBER_FORMAT_REGEXP = NUMBER_FORMAT_REGEXP;

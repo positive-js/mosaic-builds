@@ -1,64 +1,33 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, OverlayRef, ScrollDispatcher, ScrollStrategy, OverlayConnectionPosition, OriginConnectionPosition, HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Overlay, ScrollDispatcher, ScrollStrategy } from '@angular/cdk/overlay';
+import { OverlayConfig } from '@angular/cdk/overlay/overlay-config';
+import { ChangeDetectorRef, ElementRef, InjectionToken, NgZone, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { McPopUp, McPopUpTrigger } from '@ptsecurity/mosaic/core';
 import * as i0 from "@angular/core";
-export declare type ArrowPlacements = HorizontalConnectionPos | VerticalConnectionPos;
-export declare const ArrowPlacements: {
-    Top: ArrowPlacements;
-    Center: ArrowPlacements;
-    Bottom: ArrowPlacements;
-    Right: ArrowPlacements;
-    Left: ArrowPlacements;
+export declare enum TooltipModifier {
+    Default = "default",
+    Warning = "warning",
+    Extended = "extended"
+}
+export declare const MC_TOOLTIP_OPEN_TIME: InjectionToken<() => ScrollStrategy>;
+/** @docs-private */
+export declare const MC_TOOLTIP_OPEN_TIME_PROVIDER: {
+    provide: InjectionToken<() => ScrollStrategy>;
+    useValue: {
+        value: number;
+    };
 };
-export declare class McTooltipComponent {
-    cdr: ChangeDetectorRef;
+export declare const MIN_TIME_FOR_DELAY = 2000;
+export declare class McTooltipComponent extends McPopUp {
+    private openTime;
     prefix: string;
-    positions: ConnectionPositionPair[];
-    classMap: {};
-    isTitleString: boolean;
-    showTid: any;
-    hideTid: any;
-    availablePositions: any;
-    $visible: Observable<boolean>;
-    mcVisibleChange: EventEmitter<boolean>;
-    mcMouseEnterDelay: number;
-    mcMouseLeaveDelay: number;
-    get mcTitle(): string | TemplateRef<any>;
-    set mcTitle(value: string | TemplateRef<any>);
-    private _mcTitle;
-    get mcTrigger(): string;
-    set mcTrigger(value: string);
-    private _mcTrigger;
-    get mcPlacement(): string;
-    set mcPlacement(value: string);
-    private _mcPlacement;
-    get mcTooltipClass(): string;
-    set mcTooltipClass(value: string);
-    private _mcTooltipClass;
-    get mcVisible(): boolean;
-    set mcVisible(value: boolean);
-    private _mcVisible;
-    get mcArrowPlacement(): ArrowPlacements;
-    set mcArrowPlacement(value: ArrowPlacements);
-    private _mcArrowPlacement;
-    /** Subject for notifying that the tooltip has been hidden from the view */
-    private readonly onHideSubject;
-    private closeOnInteraction;
-    constructor(cdr: ChangeDetectorRef);
-    show(): void;
-    hide(): void;
-    setClassMap(): void;
-    isContentEmpty(): boolean;
-    /** Returns an observable that notifies when the tooltip has been hidden from view. */
-    afterHidden(): Observable<void>;
-    markForCheck(): void;
-    handleBodyInteraction(): void;
-    get isTemplateRef(): boolean;
-    get isNonEmptyString(): boolean;
+    constructor(changeDetectorRef: ChangeDetectorRef, openTime: any);
+    show(delay: number): void;
+    updateClassMap(placement: string, customClass: string, { modifier }: {
+        modifier: any;
+    }): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTooltipComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTooltipComponent, "mc-tooltip-component", never, { "mcMouseEnterDelay": "mcMouseEnterDelay"; "mcMouseLeaveDelay": "mcMouseLeaveDelay"; "mcTitle": "mcTitle"; "mcTrigger": "mcTrigger"; "mcPlacement": "mcPlacement"; "mcTooltipClass": "mcTooltipClass"; "mcVisible": "mcVisible"; "mcArrowPlacement": "mcArrowPlacement"; }, { "mcVisibleChange": "mcVisibleChange"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTooltipComponent, "mc-tooltip-component", never, {}, {}, never, never>;
 }
 export declare const MC_TOOLTIP_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
@@ -69,88 +38,45 @@ export declare const MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER: {
     deps: (typeof Overlay)[];
     useFactory: typeof mcTooltipScrollStrategyFactory;
 };
-/** Creates an error to be thrown if the user supplied an invalid tooltip position. */
-export declare function getMcTooltipInvalidPositionError(position: string): Error;
-export declare class McTooltip implements OnInit, OnDestroy {
-    private overlay;
-    private elementRef;
-    private ngZone;
-    private scrollDispatcher;
-    private hostView;
-    private scrollStrategy;
-    private direction;
-    isTooltipOpen: boolean;
-    isDynamicTooltip: boolean;
-    parentDisabled: boolean;
-    overlayRef: OverlayRef | null;
-    portal: ComponentPortal<McTooltipComponent>;
-    availablePositions: any;
-    tooltip: McTooltipComponent | null;
-    mcVisibleChange: EventEmitter<boolean>;
-    private $unsubscribe;
-    get mcTitle(): string | TemplateRef<any>;
-    set mcTitle(title: string | TemplateRef<any>);
-    private _mcTitle;
-    set setTitle(title: string | TemplateRef<any>);
+export declare class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
+    get content(): string | TemplateRef<any>;
+    set content(content: string | TemplateRef<any>);
     get disabled(): boolean;
     set disabled(value: boolean);
-    private _disabled;
-    get mcMouseEnterDelay(): number;
-    set mcMouseEnterDelay(value: number);
-    private _mcMouseEnterDelay;
-    get mcMouseLeaveDelay(): number;
-    set mcMouseLeaveDelay(value: number);
-    private _mcMouseLeaveDelay;
-    get mcTrigger(): string;
-    set mcTrigger(value: string);
-    private _mcTrigger;
-    get mcPlacement(): string;
-    set mcPlacement(value: string);
-    private _mcPlacement;
-    get mcTooltipClass(): string;
-    set mcTooltipClass(value: string);
-    private _mcTooltipClass;
-    get mcVisible(): boolean;
-    set mcVisible(externalValue: boolean);
-    private _mcVisible;
-    get mcArrowPlacement(): ArrowPlacements;
-    set mcArrowPlacement(value: ArrowPlacements);
-    private _mcArrowPlacement;
-    private manualListeners;
-    private readonly destroyed;
+    enterDelay: number;
+    get trigger(): string;
+    set trigger(value: string);
+    private _trigger;
+    get customClass(): string;
+    set customClass(value: string);
+    protected originSelector: string;
+    protected overlayConfig: OverlayConfig;
+    protected modifier: TooltipModifier;
     constructor(overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
-    ngOnInit(): void;
-    ngOnDestroy(): void;
-    /** Create the overlay config and position strategy */
-    createOverlay(): OverlayRef;
-    detach(): void;
-    onPositionChange($event: ConnectedOverlayPositionChange): void;
-    handlePositioningUpdate(): void;
-    updateCompValue(key: string, value: any): void;
-    handleKeydown(e: KeyboardEvent): void;
-    handleTouchend(): void;
-    initElementRefListeners(): void;
-    clearListeners(): void;
-    show(): void;
-    hide(): void;
-    /** Updates the position of the current tooltip. */
-    updatePosition(): void;
-    /**
-     * Returns the origin position and a fallback position based on the user's position preference.
-     * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
-     */
-    getOrigin(): {
-        main: OriginConnectionPosition;
-        fallback: OriginConnectionPosition;
-    };
-    /** Returns the overlay position and a fallback position based on the user's preference */
-    getOverlayPosition(): {
-        main: OverlayConnectionPosition;
-        fallback: OverlayConnectionPosition;
-    };
-    /** Inverts an overlay position. */
-    private invertPosition;
-    private getTooltipArrowElem;
-    static ɵfac: i0.ɵɵFactoryDeclaration<McTooltip, [null, null, null, null, null, null, { optional: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McTooltip, "[mcTooltip], [attribute^=\"mcTooltip\"]", ["mcTooltip"], { "mcTitle": "mcTooltip"; "setTitle": "mcTitle"; "disabled": "mcTooltipDisabled"; "mcMouseEnterDelay": "mcMouseEnterDelay"; "mcMouseLeaveDelay": "mcMouseLeaveDelay"; "mcTrigger": "mcTrigger"; "mcPlacement": "mcPlacement"; "mcTooltipClass": "mcTooltipClass"; "mcVisible": "mcVisible"; "mcArrowPlacement": "mcArrowPlacement"; }, { "mcVisibleChange": "mcVisibleChange"; }, never>;
+    updateData(): void;
+    closingActions(): import("rxjs").Observable<void | MouseEvent>;
+    getOverlayHandleComponentType(): Type<McTooltipComponent>;
+    updateClassMap(newPlacement?: string): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTooltipTrigger, [null, null, null, null, null, null, { optional: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTooltipTrigger, "[mcTooltip]", ["mcTooltip"], { "content": "mcTooltip"; "disabled": "mcTooltipDisabled"; "enterDelay": "mcEnterDelay"; "trigger": "mcTrigger"; "customClass": "mcTooltipClass"; }, {}, never>;
+}
+export declare class McWarningTooltipTrigger extends McTooltipTrigger {
+    get content(): string | TemplateRef<any>;
+    set content(content: string | TemplateRef<any>);
+    protected modifier: TooltipModifier;
+    constructor(overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
+    static ɵfac: i0.ɵɵFactoryDeclaration<McWarningTooltipTrigger, [null, null, null, null, null, null, { optional: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McWarningTooltipTrigger, "[mcWarningTooltip]", ["mcWarningTooltip"], { "content": "mcWarningTooltip"; }, {}, never>;
+}
+export declare class McExtendedTooltipTrigger extends McTooltipTrigger {
+    get content(): string | TemplateRef<any>;
+    set content(content: string | TemplateRef<any>);
+    get header(): string | TemplateRef<any>;
+    set header(header: string | TemplateRef<any>);
+    private _header;
+    protected modifier: TooltipModifier;
+    constructor(overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
+    updateData(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McExtendedTooltipTrigger, [null, null, null, null, null, null, { optional: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McExtendedTooltipTrigger, "[mcExtendedTooltip]", ["mcExtendedTooltip"], { "content": "mcExtendedTooltip"; "header": "mcTooltipHeader"; }, {}, never>;
 }

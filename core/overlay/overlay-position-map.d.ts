@@ -2,7 +2,6 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 export declare const POSITION_MAP: {
     [key: string]: ConnectionPositionPair;
 };
-export declare const DEFAULT_4_POSITIONS: ConnectionPositionPair[];
 export declare const EXTENDED_OVERLAY_POSITIONS: ConnectionPositionPair[];
 export declare const TOP_POSITION_PRIORITY: ConnectionPositionPair[];
 export declare const BOTTOM_POSITION_PRIORITY: ConnectionPositionPair[];
@@ -31,8 +30,5 @@ export declare const POSITION_PRIORITY_STRATEGY: {
     rightBottom: ConnectionPositionPair[];
 };
 export declare const POSITION_TO_CSS_MAP: {
-    [key: string]: string;
-};
-export declare const DEFAULT_4_POSITIONS_TO_CSS_MAP: {
     [key: string]: string;
 };

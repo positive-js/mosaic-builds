@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/overlay'), require('@angular/common'), require('@angular/core'), require('@angular/cdk/coercion'), require('@angular/cdk/portal'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('rxjs/operators'), require('@angular/cdk/bidi')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tooltip', ['exports', '@angular/cdk/overlay', '@angular/common', '@angular/core', '@angular/cdk/coercion', '@angular/cdk/portal', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core', 'rxjs', 'rxjs/operators', '@angular/cdk/bidi'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.tooltip = {}), global.ng.cdk.overlay, global.ng.common, global.ng.core, global.ng.cdk.coercion, global.ng.cdk.portal, global.mc.cdk.keycodes, global.ptsecurity.mosaic.core, global.rxjs, global.rxjs.operators, global.ng.cdk.bidi));
-}(this, (function (exports, i2, i1, i0, coercion, portal, keycodes, core, rxjs, operators, i3) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/overlay'), require('@angular/common'), require('@angular/core'), require('@angular/cdk/coercion'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('@angular/animations'), require('@angular/cdk/bidi')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tooltip', ['exports', '@angular/cdk/overlay', '@angular/common', '@angular/core', '@angular/cdk/coercion', '@ptsecurity/mosaic/core', 'rxjs', '@angular/animations', '@angular/cdk/bidi'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.tooltip = {}), global.ng.cdk.overlay, global.ng.common, global.ng.core, global.ng.cdk.coercion, global.ptsecurity.mosaic.core, global.rxjs, global.ng.animations, global.ng.cdk.bidi));
+}(this, (function (exports, i2, i1, i0, coercion, core, rxjs, animations, i3) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -347,209 +347,79 @@
         return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
     }
 
-    // tslint:disable-next-line:naming-convention
-    var ArrowPlacements = {
-        Top: 'top',
-        Center: 'center',
-        Bottom: 'bottom',
-        Right: 'right',
-        Left: 'left'
+    /**
+     * Animations used by McTooltip.
+     * @docs-private
+     */
+    var mcTooltipAnimations = {
+        /** Animation that transitions a tooltip in and out. */
+        tooltipState: animations.trigger('state', [
+            animations.state('initial, void, hidden', animations.style({ opacity: 0, transform: 'scale(0)' })),
+            animations.state('visible', animations.style({ transform: 'scale(1)' })),
+            animations.transition('* => visible', animations.animate('200ms cubic-bezier(0, 0, 0.2, 1)', animations.keyframes([
+                animations.style({ opacity: 0, transform: 'scale(0)', offset: 0 }),
+                animations.style({ opacity: 0.5, transform: 'scale(0.99)', offset: 0.5 }),
+                animations.style({ opacity: 1, transform: 'scale(1)', offset: 1 })
+            ]))),
+            animations.transition('* => hidden', animations.animate('100ms cubic-bezier(0, 0, 0.2, 1)', animations.style({ opacity: 0 })))
+        ])
     };
-    var McTooltipComponent = /** @class */ (function () {
-        function McTooltipComponent(cdr) {
-            this.cdr = cdr;
-            this.prefix = 'mc-tooltip_placement';
-            this.positions = __spreadArray([], __read(core.DEFAULT_4_POSITIONS));
-            this.classMap = {};
-            this.mcVisibleChange = new i0.EventEmitter();
-            this.mcMouseEnterDelay = 400;
-            this.mcMouseLeaveDelay = 0;
-            this._mcTrigger = 'hover';
-            this._mcPlacement = 'top';
-            this._mcVisible = new rxjs.BehaviorSubject(false);
-            /** Subject for notifying that the tooltip has been hidden from the view */
-            this.onHideSubject = new rxjs.Subject();
-            this.closeOnInteraction = false;
-            this.availablePositions = core.POSITION_MAP;
-            this.$visible = this._mcVisible.asObservable();
+
+    exports.TooltipModifier = void 0;
+    (function (TooltipModifier) {
+        TooltipModifier["Default"] = "default";
+        TooltipModifier["Warning"] = "warning";
+        TooltipModifier["Extended"] = "extended";
+    })(exports.TooltipModifier || (exports.TooltipModifier = {}));
+    var MC_TOOLTIP_OPEN_TIME = new i0.InjectionToken('mc-tooltip-open-time');
+    /** @docs-private */
+    var MC_TOOLTIP_OPEN_TIME_PROVIDER = {
+        provide: MC_TOOLTIP_OPEN_TIME,
+        useValue: { value: 0 }
+    };
+    var MIN_TIME_FOR_DELAY = 2000;
+    var McTooltipComponent = /** @class */ (function (_super) {
+        __extends(McTooltipComponent, _super);
+        function McTooltipComponent(changeDetectorRef, openTime) {
+            var _this = _super.call(this, changeDetectorRef) || this;
+            _this.openTime = openTime;
+            _this.prefix = 'mc-tooltip';
+            return _this;
         }
-        Object.defineProperty(McTooltipComponent.prototype, "mcTitle", {
-            get: function () {
-                return this._mcTitle;
-            },
-            set: function (value) {
-                this._mcTitle = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltipComponent.prototype, "mcTrigger", {
-            get: function () {
-                return this._mcTrigger;
-            },
-            set: function (value) {
-                this._mcTrigger = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltipComponent.prototype, "mcPlacement", {
-            get: function () {
-                return this._mcPlacement;
-            },
-            set: function (value) {
-                if (value !== this._mcPlacement) {
-                    this._mcPlacement = value;
-                    this.positions.unshift(core.POSITION_MAP[this.mcPlacement]);
-                }
-                else if (!value) {
-                    this._mcPlacement = 'top';
-                }
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltipComponent.prototype, "mcTooltipClass", {
-            get: function () {
-                return this._mcTooltipClass;
-            },
-            set: function (value) {
-                this._mcTooltipClass = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltipComponent.prototype, "mcVisible", {
-            get: function () {
-                return this._mcVisible.value;
-            },
-            set: function (value) {
-                var visible = coercion.coerceBooleanProperty(value);
-                if (visible && this._mcVisible.value !== visible) {
-                    this.show();
-                }
-                else {
-                    this.hide();
-                }
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltipComponent.prototype, "mcArrowPlacement", {
-            get: function () {
-                return this._mcArrowPlacement;
-            },
-            set: function (value) {
-                this._mcArrowPlacement = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        McTooltipComponent.prototype.show = function () {
-            var _this = this;
-            if (this.hideTid) {
-                clearTimeout(this.hideTid);
-            }
-            if (!this.isContentEmpty()) {
-                if (this.mcTrigger !== 'manual') {
-                    this.closeOnInteraction = true;
-                }
-                this.showTid = setTimeout(function () {
-                    _this._mcVisible.next(true);
-                    _this.mcVisibleChange.emit(true);
-                    // Mark for check so if any parent component has set the
-                    // ChangeDetectionStrategy to OnPush it will be checked anyways
-                    _this.markForCheck();
-                }, this.mcMouseEnterDelay);
-            }
+        McTooltipComponent.prototype.show = function (delay) {
+            // tslint:disable-next-line:no-magic-numbers
+            _super.prototype.show.call(this, Date.now() - this.openTime.value < MIN_TIME_FOR_DELAY ? 0 : delay);
+            this.openTime.value = Date.now();
         };
-        McTooltipComponent.prototype.hide = function () {
-            var _this = this;
-            if (this.showTid) {
-                clearTimeout(this.showTid);
-            }
-            this.hideTid = setTimeout(function () {
-                _this._mcVisible.next(false);
-                _this.mcVisibleChange.emit(false);
-                _this.onHideSubject.next();
-                // Mark for check so if any parent component has set the
-                // ChangeDetectionStrategy to OnPush it will be checked anyways
-                _this.markForCheck();
-            }, this.mcMouseLeaveDelay);
-        };
-        McTooltipComponent.prototype.setClassMap = function () {
+        McTooltipComponent.prototype.updateClassMap = function (placement, customClass, _a) {
             var _b;
-            this.classMap = (_b = {},
-                _b[this.prefix + "-" + this.mcPlacement] = true,
-                _b[this.mcTooltipClass] = true,
+            var modifier = _a.modifier;
+            var classMap = (_b = {},
+                _b[this.prefix + "_" + modifier] = true,
                 _b);
+            _super.prototype.updateClassMap.call(this, placement, customClass, classMap);
         };
-        McTooltipComponent.prototype.isContentEmpty = function () {
-            return this.isTitleString ? (this.mcTitle === '' || !this.mcTitle) : false;
-        };
-        /** Returns an observable that notifies when the tooltip has been hidden from view. */
-        McTooltipComponent.prototype.afterHidden = function () {
-            return this.onHideSubject.asObservable();
-        };
-        McTooltipComponent.prototype.markForCheck = function () {
-            this.cdr.markForCheck();
-        };
-        McTooltipComponent.prototype.handleBodyInteraction = function () {
-            if (this.closeOnInteraction) {
-                this.hide();
-            }
-        };
-        Object.defineProperty(McTooltipComponent.prototype, "isTemplateRef", {
-            get: function () {
-                return this.mcTitle instanceof i0.TemplateRef;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltipComponent.prototype, "isNonEmptyString", {
-            get: function () {
-                return (typeof this.mcTitle === 'string' || typeof this.mcTitle === 'number') && this._mcTitle !== '';
-            },
-            enumerable: false,
-            configurable: true
-        });
         return McTooltipComponent;
-    }());
-    /** @nocollapse */ McTooltipComponent.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTooltipComponent, deps: [{ token: i0__namespace.ChangeDetectorRef }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McTooltipComponent.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTooltipComponent, selector: "mc-tooltip-component", inputs: { mcMouseEnterDelay: "mcMouseEnterDelay", mcMouseLeaveDelay: "mcMouseLeaveDelay", mcTitle: "mcTitle", mcTrigger: "mcTrigger", mcPlacement: "mcPlacement", mcTooltipClass: "mcTooltipClass", mcVisible: "mcVisible", mcArrowPlacement: "mcArrowPlacement" }, outputs: { mcVisibleChange: "mcVisibleChange" }, host: { listeners: { "body:click": "this.handleBodyInteraction()" } }, ngImport: i0__namespace, template: "<div class=\"mc-tooltip\"\n     [ngClass]=\"classMap\"\n     [@fadeAnimation]=\"''+($visible | async)\">\n    <div class=\"mc-tooltip-content\">\n        <div class=\"mc-tooltip-arrow\"></div>\n        <div class=\"mc-tooltip-inner\">\n            <ng-container *ngIf=\"isTemplateRef\" [ngTemplateOutlet]=\"mcTitle\"></ng-container>\n            <ng-container *ngIf=\"isNonEmptyString\">\n                <div [innerHTML]=\"mcTitle\"></div>\n            </ng-container>\n        </div>\n    </div>\n</div>\n", styles: [".mc-tooltip{display:block;box-sizing:border-box;visibility:visible;position:relative;z-index:1060;max-width:240px;max-width:var(--mc-tooltip-size-max-width, 240px);list-style:none;white-space:pre-line}.mc-tooltip_placement-top{padding-bottom:9px;padding-bottom:var(--mc-tooltip-size-distance, 9px)}.mc-tooltip_placement-right{padding-left:9px;padding-left:var(--mc-tooltip-size-distance, 9px)}.mc-tooltip_placement-bottom{padding-top:9px;padding-top:var(--mc-tooltip-size-distance, 9px)}.mc-tooltip_placement-left{padding-right:9px;padding-right:var(--mc-tooltip-size-distance, 9px)}.mc-tooltip-inner{padding:8px 16px;padding:var(--mc-tooltip-size-padding, 8px 16px);text-align:left;text-decoration:none;border-radius:3px;border-radius:var(--mc-tooltip-size-border-radius, 3px);height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;vertical-align:center}.mc-tooltip-arrow{position:absolute;width:12px;width:var(--mc-tooltip-size-arrow-size, 12px);height:12px;height:var(--mc-tooltip-size-arrow-size, 12px);transform:rotate(45deg)}.mc-tooltip_placement-top .mc-tooltip-arrow{bottom:calc(9px - 5px);bottom:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));left:50%;margin-left:calc(-1 * 5px);margin-left:calc(-1 * var(--mc-tooltip-size-arrow-width, 5px))}.mc-tooltip_placement-right .mc-tooltip-arrow{left:calc(9px - 5px);left:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));top:16px;margin-top:calc(-1 * 5px);margin-top:calc(-1 * var(--mc-tooltip-size-arrow-width, 5px))}.mc-tooltip_placement-left .mc-tooltip-arrow{right:calc(9px - 5px);right:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));top:16px;margin-top:calc(-1 * 5px);margin-top:calc(-1 * var(--mc-tooltip-size-arrow-width, 5px))}.mc-tooltip_placement-bottom .mc-tooltip-arrow{top:calc(9px - 5px);top:calc(var(--mc-tooltip-size-distance, 9px) - var(--mc-tooltip-size-arrow-width, 5px));left:50%;margin-left:calc(-1 * 5px);margin-left:calc(-1 * var(--mc-tooltip-size-arrow-width, 5px))}\n"], directives: [{ type: i1__namespace.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { type: i1__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i1__namespace.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet"] }], pipes: { "async": i1__namespace.AsyncPipe }, animations: [core.fadeAnimation], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    }(core.McPopUp));
+    /** @nocollapse */ McTooltipComponent.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTooltipComponent, deps: [{ token: i0__namespace.ChangeDetectorRef }, { token: MC_TOOLTIP_OPEN_TIME }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McTooltipComponent.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTooltipComponent, selector: "mc-tooltip-component", providers: [MC_TOOLTIP_OPEN_TIME_PROVIDER], usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-tooltip\"\n     [ngClass]=\"classMap\"\n     [@state]=\"visibility\"\n     (@state.start)=\"animationStart()\"\n     (@state.done)=\"animationDone($event)\">\n\n    <div class=\"mc-tooltip__inner\">\n        <div class=\"mc-tooltip__arrow\"></div>\n\n        <div class=\"mc-tooltip__header\" *ngIf=\"header\">\n            <ng-container *ngIf=\"isTemplateRef(header)\" [ngTemplateOutlet]=\"header\"></ng-container>\n            <ng-container *ngIf=\"!isTemplateRef(header)\">\n                <div>{{ header }}</div>\n            </ng-container>\n        </div>\n        <div class=\"mc-tooltip__content\">\n            <ng-container *ngIf=\"isTemplateRef(content)\" [ngTemplateOutlet]=\"content\"></ng-container>\n            <ng-container *ngIf=\"!isTemplateRef(content)\">\n                <div>{{ content }}</div>\n            </ng-container>\n        </div>\n    </div>\n</div>\n", styles: [".mc-tooltip__inner{border-radius:3px;border-radius:var(--mc-tooltip-size-border-radius, 3px)}.mc-tooltip{box-sizing:border-box;border-radius:3px;border-radius:var(--mc-tooltip-size-border-radius, 3px);z-index:1060;white-space:pre-line}.mc-tooltip.mc-tooltip_placement-top,.mc-tooltip.mc-tooltip_placement-top-left,.mc-tooltip.mc-tooltip_placement-top-right{margin-bottom:calc(9px);margin-bottom:calc(var(--mc-tooltip-size-trigger-margin, 9px))}.mc-tooltip.mc-tooltip_placement-right,.mc-tooltip.mc-tooltip_placement-right-top,.mc-tooltip.mc-tooltip_placement-right-bottom{margin-left:calc(9px);margin-left:calc(var(--mc-tooltip-size-trigger-margin, 9px))}.mc-tooltip.mc-tooltip_placement-bottom,.mc-tooltip.mc-tooltip_placement-bottom-left,.mc-tooltip.mc-tooltip_placement-bottom-right{margin-top:calc(9px);margin-top:calc(var(--mc-tooltip-size-trigger-margin, 9px))}.mc-tooltip.mc-tooltip_placement-left,.mc-tooltip.mc-tooltip_placement-left-top,.mc-tooltip.mc-tooltip_placement-left-bottom{margin-right:calc(9px);margin-right:calc(var(--mc-tooltip-size-trigger-margin, 9px))}.mc-tooltip.mc-tooltip_default,.mc-tooltip.mc-tooltip_warning{max-width:300px;max-width:var(--mc-tooltip-size-max-width, 300px)}.mc-tooltip.mc-tooltip_default .mc-tooltip__inner,.mc-tooltip.mc-tooltip_warning .mc-tooltip__inner{padding:8px 16px;padding:var(--mc-tooltip-size-padding, 8px 16px)}.mc-tooltip.mc-tooltip_extended{max-height:480px;max-height:var(--mc-extended-tooltip-size-max-height, 480px)}.mc-tooltip.mc-tooltip_extended .mc-tooltip__header{height:40px;height:var(--mc-extended-tooltip-header-size-height, 40px);padding:10px 16px;padding:var(--mc-extended-tooltip-header-size-padding, 10px 16px);border-top-left-radius:3px;border-top-left-radius:var(--mc-tooltip-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tooltip-size-border-radius, 3px)}.mc-tooltip.mc-tooltip_extended .mc-tooltip__content{padding:8px 16px;padding:var(--mc-extended-tooltip-size-padding, 8px 16px)}.mc-tooltip__arrow{position:absolute;width:12px;width:var(--mc-tooltip-size-arrow-size, 12px);height:12px;height:var(--mc-tooltip-size-arrow-size, 12px);transform:rotate(45deg)}.mc-tooltip_placement-top .mc-tooltip__arrow{bottom:calc((11px / -2));bottom:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));left:50%;margin-left:calc((11px / -2));margin-left:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)))}.mc-tooltip_placement-top-left .mc-tooltip__arrow{bottom:calc((11px / -2));bottom:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));left:calc(18px - (9px / 2));left:calc(18px - (var(--mc-tooltip-size-trigger-margin, 9px) / 2))}.mc-tooltip_placement-top-right .mc-tooltip__arrow{bottom:calc((11px / -2));bottom:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));right:calc(18px - (9px / 2));right:calc(18px - (var(--mc-tooltip-size-trigger-margin, 9px) / 2))}.mc-tooltip_placement-right .mc-tooltip__arrow{left:calc((11px / -2));left:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));top:50%;margin-top:calc((11px / -2));margin-top:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)))}.mc-tooltip_placement-right-top .mc-tooltip__arrow{left:calc((11px / -2));left:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));top:calc(18px - (9px / 2));top:calc(18px - (var(--mc-tooltip-size-trigger-margin, 9px) / 2))}.mc-tooltip_placement-right-bottom .mc-tooltip__arrow{left:calc((11px / -2));left:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));bottom:calc(18px - (9px / 2));bottom:calc(18px - (var(--mc-tooltip-size-trigger-margin, 9px) / 2))}.mc-tooltip_placement-left .mc-tooltip__arrow{right:calc((11px / -2));right:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));top:50%;margin-top:calc((11px / -2));margin-top:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)))}.mc-tooltip_placement-left-top .mc-tooltip__arrow{right:calc((11px / -2));right:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));top:calc(18px - (9px / 2));top:calc(18px - (var(--mc-tooltip-size-trigger-margin, 9px) / 2))}.mc-tooltip_placement-left-bottom .mc-tooltip__arrow{right:calc((11px / -2));right:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));bottom:calc(18px - (9px / 2));bottom:calc(18px - (var(--mc-tooltip-size-trigger-margin, 9px) / 2))}.mc-tooltip_placement-bottom .mc-tooltip__arrow{top:calc((11px / -2));top:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));left:50%;margin-left:calc((11px / -2));margin-left:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)))}.mc-tooltip_placement-bottom-left .mc-tooltip__arrow{top:calc((11px / -2));top:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));left:calc(18px - (9px / 2));left:calc(18px - (var(--mc-tooltip-size-trigger-margin, 9px) / 2))}.mc-tooltip_placement-bottom-right .mc-tooltip__arrow{top:calc((11px / -2));top:calc(var(--mc-tooltip-size-arrow-size, (11px / -2)));right:calc(18px - (9px / 2));right:calc(18px - (var(--mc-tooltip-size-trigger-margin, 9px) / 2))}\n"], directives: [{ type: i1__namespace.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { type: i1__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i1__namespace.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet"] }], animations: [mcTooltipAnimations.tooltipState], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTooltipComponent, decorators: [{
                 type: i0.Component,
                 args: [{
                         selector: 'mc-tooltip-component',
-                        animations: [core.fadeAnimation],
+                        animations: [mcTooltipAnimations.tooltipState],
                         templateUrl: './tooltip.component.html',
                         styleUrls: ['./tooltip.scss'],
                         encapsulation: i0.ViewEncapsulation.None,
                         changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                        preserveWhitespaces: false,
-                        host: {
-                            '(body:click)': 'this.handleBodyInteraction()'
-                        }
+                        providers: [MC_TOOLTIP_OPEN_TIME_PROVIDER]
                     }]
-            }], ctorParameters: function () { return [{ type: i0__namespace.ChangeDetectorRef }]; }, propDecorators: { mcVisibleChange: [{
-                    type: i0.Output
-                }], mcMouseEnterDelay: [{
-                    type: i0.Input
-                }], mcMouseLeaveDelay: [{
-                    type: i0.Input
-                }], mcTitle: [{
-                    type: i0.Input
-                }], mcTrigger: [{
-                    type: i0.Input
-                }], mcPlacement: [{
-                    type: i0.Input
-                }], mcTooltipClass: [{
-                    type: i0.Input
-                }], mcVisible: [{
-                    type: i0.Input
-                }], mcArrowPlacement: [{
-                    type: i0.Input
-                }] } });
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ChangeDetectorRef }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [MC_TOOLTIP_OPEN_TIME]
+                        }] }];
+        } });
     var MC_TOOLTIP_SCROLL_STRATEGY = new i0.InjectionToken('mc-tooltip-scroll-strategy');
     /** @docs-private */
     function mcTooltipScrollStrategyFactory(overlay) {
@@ -561,461 +431,103 @@
         deps: [i2.Overlay],
         useFactory: mcTooltipScrollStrategyFactory
     };
-    /** Creates an error to be thrown if the user supplied an invalid tooltip position. */
-    function getMcTooltipInvalidPositionError(position) {
-        return Error("McTooltip position \"" + position + "\" is invalid.");
-    }
-    var VIEWPORT_MARGIN = 8;
-    var McTooltip = /** @class */ (function () {
-        function McTooltip(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
-            this.overlay = overlay;
-            this.elementRef = elementRef;
-            this.ngZone = ngZone;
-            this.scrollDispatcher = scrollDispatcher;
-            this.hostView = hostView;
-            this.scrollStrategy = scrollStrategy;
-            this.direction = direction;
-            this.isTooltipOpen = false;
-            this.isDynamicTooltip = false;
-            this.parentDisabled = false;
-            this.mcVisibleChange = new i0.EventEmitter();
-            this.$unsubscribe = new rxjs.Subject();
-            this._disabled = false;
-            this._mcTrigger = 'hover';
-            this._mcPlacement = 'top';
-            this.manualListeners = new Map();
-            this.destroyed = new rxjs.Subject();
-            this.availablePositions = core.POSITION_MAP;
+    var McTooltipTrigger = /** @class */ (function (_super) {
+        __extends(McTooltipTrigger, _super);
+        function McTooltipTrigger(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
+            var _this = _super.call(this, overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) || this;
+            _this.enterDelay = 400;
+            _this._trigger = core.PopUpTriggers.Hover + ", " + core.PopUpTriggers.Focus;
+            _this.originSelector = '.mc-tooltip';
+            _this.overlayConfig = {
+                panelClass: 'mc-tooltip-panel'
+            };
+            _this.modifier = exports.TooltipModifier.Default;
+            return _this;
         }
-        Object.defineProperty(McTooltip.prototype, "mcTitle", {
+        Object.defineProperty(McTooltipTrigger.prototype, "content", {
             get: function () {
-                return this._mcTitle;
+                return this._content;
             },
-            set: function (title) {
-                this._mcTitle = title;
-                this.updateCompValue('mcTitle', title);
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltip.prototype, "setTitle", {
-            set: function (title) {
-                this.mcTitle = title;
+            set: function (content) {
+                this._content = content;
+                this.updateData();
             },
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(McTooltip.prototype, "disabled", {
+        Object.defineProperty(McTooltipTrigger.prototype, "disabled", {
             get: function () {
                 return this._disabled;
             },
             set: function (value) {
                 this._disabled = coercion.coerceBooleanProperty(value);
-                this.updateCompValue('mcTooltipDisabled', value);
             },
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(McTooltip.prototype, "mcMouseEnterDelay", {
+        Object.defineProperty(McTooltipTrigger.prototype, "trigger", {
             get: function () {
-                return this._mcMouseEnterDelay;
-            },
-            set: function (value) {
-                this._mcMouseEnterDelay = value;
-                this.updateCompValue('mcMouseEnterDelay', value);
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltip.prototype, "mcMouseLeaveDelay", {
-            get: function () {
-                return this._mcMouseLeaveDelay;
-            },
-            set: function (value) {
-                this._mcMouseLeaveDelay = value;
-                this.updateCompValue('mcMouseLeaveDelay', value);
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltip.prototype, "mcTrigger", {
-            get: function () {
-                return this._mcTrigger;
+                return this._trigger;
             },
             set: function (value) {
                 if (value) {
-                    this._mcTrigger = value;
-                    this.updateCompValue('mcTrigger', value);
+                    this._trigger = value;
                 }
                 else {
-                    this._mcTrigger = 'hover';
+                    this._trigger = core.PopUpTriggers.Hover + ", " + core.PopUpTriggers.Focus;
                 }
+                this.initListeners();
             },
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(McTooltip.prototype, "mcPlacement", {
+        Object.defineProperty(McTooltipTrigger.prototype, "customClass", {
             get: function () {
-                return this._mcPlacement;
+                return this._customClass;
             },
             set: function (value) {
                 if (value) {
-                    this._mcPlacement = value;
-                    this.updateCompValue('mcPlacement', value);
+                    this._customClass = value;
+                    this.updateClassMap();
                 }
                 else {
-                    this._mcPlacement = 'top';
-                }
-                if (this.mcVisible) {
-                    this.updatePosition();
+                    this._customClass = '';
                 }
             },
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(McTooltip.prototype, "mcTooltipClass", {
-            get: function () {
-                return this._mcTooltipClass;
-            },
-            set: function (value) {
-                if (value) {
-                    this._mcTooltipClass = value;
-                    this.updateCompValue('mcTooltipClass', value);
-                }
-                else {
-                    this._mcTooltipClass = '';
-                }
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltip.prototype, "mcVisible", {
-            get: function () {
-                return this._mcVisible;
-            },
-            set: function (externalValue) {
-                var value = coercion.coerceBooleanProperty(externalValue);
-                if (this._mcVisible !== value) {
-                    this._mcVisible = value;
-                    this.updateCompValue('mcVisible', value);
-                    if (value) {
-                        this.show();
-                    }
-                    else {
-                        this.hide();
-                    }
-                }
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTooltip.prototype, "mcArrowPlacement", {
-            get: function () {
-                return this._mcArrowPlacement;
-            },
-            set: function (value) {
-                this._mcArrowPlacement = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        McTooltip.prototype.ngOnInit = function () {
-            this.initElementRefListeners();
-        };
-        McTooltip.prototype.ngOnDestroy = function () {
-            var _this = this;
-            if (this.overlayRef) {
-                this.overlayRef.dispose();
-            }
-            this.manualListeners.forEach(function (listener, event) {
-                _this.elementRef.nativeElement.removeEventListener(event, listener);
-            });
-            this.manualListeners.clear();
-            this.$unsubscribe.next();
-            this.$unsubscribe.complete();
-        };
-        /** Create the overlay config and position strategy */
-        McTooltip.prototype.createOverlay = function () {
-            var _this = this;
-            if (this.overlayRef) {
-                return this.overlayRef;
-            }
-            // Create connected position strategy that listens for scroll events to reposition.
-            var strategy = this.overlay.position()
-                .flexibleConnectedTo(this.elementRef)
-                .withTransformOriginOn('.mc-tooltip')
-                .withFlexibleDimensions(false)
-                .withViewportMargin(VIEWPORT_MARGIN)
-                .withPositions(__spreadArray([], __read(core.DEFAULT_4_POSITIONS)));
-            var scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
-            strategy.withScrollableContainers(scrollableAncestors);
-            strategy.positionChanges
-                .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(function (change) {
-                if (_this.tooltip) {
-                    _this.onPositionChange(change);
-                    if (change.scrollableViewProperties.isOverlayClipped && _this.tooltip.mcVisible) {
-                        // After position changes occur and the overlay is clipped by
-                        // a parent scrollable then close the tooltip.
-                        _this.ngZone.run(function () { return _this.hide(); });
-                    }
-                }
-            });
-            this.overlayRef = this.overlay.create({
-                direction: this.direction,
-                positionStrategy: strategy,
-                panelClass: 'mc-tooltip-panel',
-                scrollStrategy: this.scrollStrategy()
-            });
-            this.updatePosition();
-            this.overlayRef.detachments()
-                .pipe(operators.takeUntil(this.destroyed))
-                .subscribe(function () { return _this.detach(); });
-            return this.overlayRef;
-        };
-        McTooltip.prototype.detach = function () {
-            if (this.overlayRef && this.overlayRef.hasAttached()) {
-                this.overlayRef.detach();
-            }
-            this.tooltip = null;
-        };
-        McTooltip.prototype.onPositionChange = function ($event) {
-            var _this = this;
-            var updatedPlacement = this.mcPlacement;
-            Object.keys(this.availablePositions).some(function (key) {
-                if ($event.connectionPair.originX === _this.availablePositions[key].originX &&
-                    $event.connectionPair.originY === _this.availablePositions[key].originY &&
-                    $event.connectionPair.overlayX === _this.availablePositions[key].overlayX &&
-                    $event.connectionPair.overlayY === _this.availablePositions[key].overlayY) {
-                    updatedPlacement = key;
-                    return true;
-                }
-                return false;
-            });
-            this.updateCompValue('mcPlacement', updatedPlacement);
-            if (this.tooltip) {
-                this.tooltip.setClassMap();
-                this.tooltip.markForCheck();
-            }
-            this.handlePositioningUpdate();
-        };
-        McTooltip.prototype.handlePositioningUpdate = function () {
-            this.overlayRef = this.createOverlay();
-            if (this.mcPlacement === 'right' || this.mcPlacement === 'left') {
-                var halfDelimiter = 2;
-                var overlayElemHeight = this.overlayRef.overlayElement.clientHeight;
-                var currentContainerHeight = this.hostView.element.nativeElement.clientHeight;
-                if (this.mcArrowPlacement === ArrowPlacements.Center) {
-                    var arrowElemRef = this.getTooltipArrowElem();
-                    var containerPositionTop = this.hostView.element.nativeElement.getBoundingClientRect().top;
-                    var halfOfContainerHeight = currentContainerHeight / halfDelimiter;
-                    var halfOfTooltipHeight = overlayElemHeight / halfDelimiter;
-                    this.overlayRef.overlayElement.style.top = (containerPositionTop + halfOfContainerHeight) - halfOfTooltipHeight + 1 + "px";
-                    if (arrowElemRef) {
-                        arrowElemRef.setAttribute('style', "top: " + (halfOfTooltipHeight - 1) + "px");
-                    }
-                }
-                else {
-                    var pos = (overlayElemHeight - currentContainerHeight) / halfDelimiter;
-                    var defaultTooltipPlacementTop = parseInt(this.overlayRef.overlayElement.style.top || '0px', 10);
-                    this.overlayRef.overlayElement.style.top = defaultTooltipPlacementTop + pos - 1 + "px";
-                }
-            }
-        };
-        // tslint:disable-next-line:no-any
-        McTooltip.prototype.updateCompValue = function (key, value) {
-            if (this.isDynamicTooltip && value && this.tooltip) {
-                this.tooltip[key] = value;
-                this.tooltip.markForCheck();
-            }
-        };
-        McTooltip.prototype.handleKeydown = function (e) {
-            if (this.isTooltipOpen && e.keyCode === keycodes.ESCAPE) { // tslint:disable-line
-                this.hide();
-            }
-        };
-        McTooltip.prototype.handleTouchend = function () {
-            this.hide();
-        };
-        McTooltip.prototype.initElementRefListeners = function () {
-            var _this = this;
-            this.clearListeners();
-            if (this.mcTrigger.includes('hover')) {
-                this.manualListeners
-                    .set('mouseenter', function () { return _this.show(); })
-                    .set('mouseleave', function () { return _this.hide(); })
-                    .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
-            }
-            if (this.mcTrigger.includes('focus')) {
-                this.manualListeners
-                    .set('focus', function () { return _this.show(); })
-                    .set('blur', function () { return _this.hide(); })
-                    .forEach(function (listener, event) { return _this.elementRef.nativeElement.addEventListener(event, listener); });
-            }
-        };
-        McTooltip.prototype.clearListeners = function () {
-            var _this = this;
-            this.manualListeners.forEach(function (listener, event) {
-                _this.elementRef.nativeElement.removeEventListener(event, listener);
-            });
-            this.manualListeners.clear();
-        };
-        McTooltip.prototype.show = function () {
-            var _this = this;
-            if (this.disabled) {
+        McTooltipTrigger.prototype.updateData = function () {
+            if (!this.instance) {
                 return;
             }
-            if (!this.tooltip) {
-                this.overlayRef = this.createOverlay();
-                this.detach();
-                this.portal = this.portal || new portal.ComponentPortal(McTooltipComponent, this.hostView);
-                this.tooltip = this.overlayRef.attach(this.portal).instance;
-                this.tooltip.afterHidden()
-                    .pipe(operators.takeUntil(this.destroyed))
-                    .subscribe(function () { return _this.detach(); });
-                this.isDynamicTooltip = true;
-                var properties = [
-                    'mcTitle',
-                    'mcPlacement',
-                    'mcTrigger',
-                    'mcTooltipDisabled',
-                    'mcMouseEnterDelay',
-                    'mcMouseLeaveDelay',
-                    'mcTooltipClass'
-                ];
-                properties.forEach(function (property) { return _this.updateCompValue(property, _this[property]); });
-                this.tooltip.mcVisibleChange
-                    .pipe(operators.takeUntil(this.$unsubscribe), operators.distinctUntilChanged())
-                    .subscribe(function (data) {
-                    _this.mcVisible = data;
-                    _this.mcVisibleChange.emit(data);
-                    _this.isTooltipOpen = data;
-                });
-            }
-            this.updatePosition();
-            this.tooltip.show();
+            this.instance.content = this.content;
         };
-        McTooltip.prototype.hide = function () {
-            if (this.tooltip) {
-                this.tooltip.hide();
-            }
+        McTooltipTrigger.prototype.closingActions = function () {
+            return rxjs.merge(this.overlayRef.outsidePointerEvents(), this.overlayRef.detachments());
         };
-        /** Updates the position of the current tooltip. */
-        McTooltip.prototype.updatePosition = function () {
-            if (!this.overlayRef) {
-                this.overlayRef = this.createOverlay();
-            }
-            var position = this.overlayRef.getConfig().positionStrategy;
-            var origin = this.getOrigin();
-            var overlay = this.getOverlayPosition();
-            position.withPositions([
-                Object.assign(Object.assign({}, origin.main), overlay.main),
-                Object.assign(Object.assign({}, origin.fallback), overlay.fallback)
-            ]);
-            if (this.tooltip) {
-                position.apply();
-                window.dispatchEvent(new Event('resize'));
-            }
+        McTooltipTrigger.prototype.getOverlayHandleComponentType = function () {
+            return McTooltipComponent;
         };
-        /**
-         * Returns the origin position and a fallback position based on the user's position preference.
-         * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
-         */
-        McTooltip.prototype.getOrigin = function () {
-            var position = this.mcPlacement;
-            var isLtr = !this.direction || this.direction.value === 'ltr';
-            var originPosition;
-            if (position === 'top' || position === 'bottom') {
-                originPosition = { originX: 'center', originY: position === 'top' ? 'top' : 'bottom' };
+        McTooltipTrigger.prototype.updateClassMap = function (newPlacement) {
+            if (newPlacement === void 0) { newPlacement = this.placement; }
+            if (!this.instance) {
+                return;
             }
-            else if (position === 'top' ||
-                (position === 'left' && isLtr) ||
-                (position === 'right' && !isLtr)) {
-                originPosition = { originX: 'start', originY: 'center' };
-            }
-            else if (position === 'bottom' ||
-                (position === 'right' && isLtr) ||
-                (position === 'left' && !isLtr)) {
-                originPosition = { originX: 'end', originY: 'center' };
-            }
-            else {
-                throw getMcTooltipInvalidPositionError(position);
-            }
-            var _b = this.invertPosition(originPosition.originX, originPosition.originY), x = _b.x, y = _b.y;
-            return {
-                main: originPosition,
-                fallback: { originX: x, originY: y }
-            };
+            this.instance.updateClassMap(core.POSITION_TO_CSS_MAP[newPlacement], this.customClass, { modifier: this.modifier });
+            this.instance.markForCheck();
         };
-        /** Returns the overlay position and a fallback position based on the user's preference */
-        McTooltip.prototype.getOverlayPosition = function () {
-            var position = this.mcPlacement;
-            var isLtr = !this.direction || this.direction.value === 'ltr';
-            var overlayPosition;
-            if (position === 'top') {
-                overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
-            }
-            else if (position === 'bottom') {
-                overlayPosition = { overlayX: 'center', overlayY: 'top' };
-            }
-            else if (position === 'top' ||
-                (position === 'left' && isLtr) ||
-                (position === 'right' && !isLtr)) {
-                overlayPosition = { overlayX: 'end', overlayY: 'center' };
-            }
-            else if (position === 'bottom' ||
-                (position === 'right' && isLtr) ||
-                (position === 'left' && !isLtr)) {
-                overlayPosition = { overlayX: 'start', overlayY: 'center' };
-            }
-            else {
-                throw getMcTooltipInvalidPositionError(position);
-            }
-            var _b = this.invertPosition(overlayPosition.overlayX, overlayPosition.overlayY), x = _b.x, y = _b.y;
-            return {
-                main: overlayPosition,
-                fallback: { overlayX: x, overlayY: y }
-            };
-        };
-        /** Inverts an overlay position. */
-        McTooltip.prototype.invertPosition = function (x, y) {
-            var newX = x;
-            var newY = y;
-            if (this.mcPlacement === 'top' || this.mcPlacement === 'bottom') {
-                if (y === 'top') {
-                    newY = 'bottom';
-                }
-                else if (y === 'bottom') {
-                    newY = 'top';
-                }
-            }
-            else {
-                if (x === 'end') {
-                    newX = 'start';
-                }
-                else if (x === 'start') {
-                    newX = 'end';
-                }
-            }
-            return { x: newX, y: newY };
-        };
-        McTooltip.prototype.getTooltipArrowElem = function () {
-            var _a;
-            var arrowClassName = 'mc-tooltip-arrow';
-            return (_a = this.overlayRef) === null || _a === void 0 ? void 0 : _a.overlayElement.getElementsByClassName(arrowClassName)[0];
-        };
-        return McTooltip;
-    }());
-    /** @nocollapse */ McTooltip.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTooltip, deps: [{ token: i2__namespace.Overlay }, { token: i0__namespace.ElementRef }, { token: i0__namespace.NgZone }, { token: i2__namespace.ScrollDispatcher }, { token: i0__namespace.ViewContainerRef }, { token: MC_TOOLTIP_SCROLL_STRATEGY }, { token: i3__namespace.Directionality, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McTooltip.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTooltip, selector: "[mcTooltip], [attribute^=\"mcTooltip\"]", inputs: { mcTitle: ["mcTooltip", "mcTitle"], setTitle: ["mcTitle", "setTitle"], disabled: ["mcTooltipDisabled", "disabled"], mcMouseEnterDelay: "mcMouseEnterDelay", mcMouseLeaveDelay: "mcMouseLeaveDelay", mcTrigger: "mcTrigger", mcPlacement: "mcPlacement", mcTooltipClass: "mcTooltipClass", mcVisible: "mcVisible", mcArrowPlacement: "mcArrowPlacement" }, outputs: { mcVisibleChange: "mcVisibleChange" }, host: { listeners: { "keydown": "handleKeydown($event)", "touchend": "handleTouchend()" }, properties: { "class.mc-tooltip-open": "isTooltipOpen", "class.disabled": "parentDisabled" } }, exportAs: ["mcTooltip"], ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTooltip, decorators: [{
+        return McTooltipTrigger;
+    }(core.McPopUpTrigger));
+    /** @nocollapse */ McTooltipTrigger.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTooltipTrigger, deps: [{ token: i2__namespace.Overlay }, { token: i0__namespace.ElementRef }, { token: i0__namespace.NgZone }, { token: i2__namespace.ScrollDispatcher }, { token: i0__namespace.ViewContainerRef }, { token: MC_TOOLTIP_SCROLL_STRATEGY }, { token: i3__namespace.Directionality, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTooltipTrigger.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTooltipTrigger, selector: "[mcTooltip]", inputs: { content: ["mcTooltip", "content"], disabled: ["mcTooltipDisabled", "disabled"], enterDelay: ["mcEnterDelay", "enterDelay"], trigger: ["mcTrigger", "trigger"], customClass: ["mcTooltipClass", "customClass"] }, host: { listeners: { "keydown": "handleKeydown($event)", "touchend": "handleTouchend()" }, properties: { "class.mc-tooltip_open": "isOpen" } }, exportAs: ["mcTooltip"], usesInheritance: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTooltipTrigger, decorators: [{
                 type: i0.Directive,
                 args: [{
-                        selector: '[mcTooltip], [attribute^="mcTooltip"]',
+                        selector: '[mcTooltip]',
                         exportAs: 'mcTooltip',
                         host: {
-                            '[class.mc-tooltip-open]': 'isTooltipOpen',
-                            '[class.disabled]': 'parentDisabled',
+                            '[class.mc-tooltip_open]': 'isOpen',
                             '(keydown)': 'handleKeydown($event)',
                             '(touchend)': 'handleTouchend()'
                         }
@@ -1027,31 +539,130 @@
                         }] }, { type: i3__namespace.Directionality, decorators: [{
                             type: i0.Optional
                         }] }];
-        }, propDecorators: { mcVisibleChange: [{
-                    type: i0.Output
-                }], mcTitle: [{
+        }, propDecorators: { content: [{
                     type: i0.Input,
                     args: ['mcTooltip']
-                }], setTitle: [{
-                    type: i0.Input,
-                    args: ['mcTitle']
                 }], disabled: [{
                     type: i0.Input,
                     args: ['mcTooltipDisabled']
-                }], mcMouseEnterDelay: [{
-                    type: i0.Input
-                }], mcMouseLeaveDelay: [{
-                    type: i0.Input
-                }], mcTrigger: [{
-                    type: i0.Input
-                }], mcPlacement: [{
-                    type: i0.Input
-                }], mcTooltipClass: [{
-                    type: i0.Input
-                }], mcVisible: [{
-                    type: i0.Input
-                }], mcArrowPlacement: [{
-                    type: i0.Input
+                }], enterDelay: [{
+                    type: i0.Input,
+                    args: ['mcEnterDelay']
+                }], trigger: [{
+                    type: i0.Input,
+                    args: ['mcTrigger']
+                }], customClass: [{
+                    type: i0.Input,
+                    args: ['mcTooltipClass']
+                }] } });
+    var McWarningTooltipTrigger = /** @class */ (function (_super) {
+        __extends(McWarningTooltipTrigger, _super);
+        function McWarningTooltipTrigger(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
+            var _this = _super.call(this, overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) || this;
+            _this.modifier = exports.TooltipModifier.Warning;
+            return _this;
+        }
+        Object.defineProperty(McWarningTooltipTrigger.prototype, "content", {
+            get: function () {
+                return this._content;
+            },
+            set: function (content) {
+                this._content = content;
+                this.updateData();
+            },
+            enumerable: false,
+            configurable: true
+        });
+        return McWarningTooltipTrigger;
+    }(McTooltipTrigger));
+    /** @nocollapse */ McWarningTooltipTrigger.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McWarningTooltipTrigger, deps: [{ token: i2__namespace.Overlay }, { token: i0__namespace.ElementRef }, { token: i0__namespace.NgZone }, { token: i2__namespace.ScrollDispatcher }, { token: i0__namespace.ViewContainerRef }, { token: MC_TOOLTIP_SCROLL_STRATEGY }, { token: i3__namespace.Directionality, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McWarningTooltipTrigger.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McWarningTooltipTrigger, selector: "[mcWarningTooltip]", inputs: { content: ["mcWarningTooltip", "content"] }, host: { listeners: { "keydown": "handleKeydown($event)", "touchend": "handleTouchend()" }, properties: { "class.mc-tooltip_open": "isOpen" } }, exportAs: ["mcWarningTooltip"], usesInheritance: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McWarningTooltipTrigger, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[mcWarningTooltip]',
+                        exportAs: 'mcWarningTooltip',
+                        host: {
+                            '[class.mc-tooltip_open]': 'isOpen',
+                            '(keydown)': 'handleKeydown($event)',
+                            '(touchend)': 'handleTouchend()'
+                        }
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i2__namespace.Overlay }, { type: i0__namespace.ElementRef }, { type: i0__namespace.NgZone }, { type: i2__namespace.ScrollDispatcher }, { type: i0__namespace.ViewContainerRef }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [MC_TOOLTIP_SCROLL_STRATEGY]
+                        }] }, { type: i3__namespace.Directionality, decorators: [{
+                            type: i0.Optional
+                        }] }];
+        }, propDecorators: { content: [{
+                    type: i0.Input,
+                    args: ['mcWarningTooltip']
+                }] } });
+    var McExtendedTooltipTrigger = /** @class */ (function (_super) {
+        __extends(McExtendedTooltipTrigger, _super);
+        function McExtendedTooltipTrigger(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
+            var _this = _super.call(this, overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) || this;
+            _this.modifier = exports.TooltipModifier.Extended;
+            return _this;
+        }
+        Object.defineProperty(McExtendedTooltipTrigger.prototype, "content", {
+            get: function () {
+                return this._content;
+            },
+            set: function (content) {
+                this._content = content;
+                this.updateData();
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McExtendedTooltipTrigger.prototype, "header", {
+            get: function () {
+                return this._header;
+            },
+            set: function (header) {
+                this._header = header;
+                this.updateData();
+            },
+            enumerable: false,
+            configurable: true
+        });
+        McExtendedTooltipTrigger.prototype.updateData = function () {
+            if (!this.instance) {
+                return;
+            }
+            _super.prototype.updateData.call(this);
+            this.instance.header = this.header;
+        };
+        return McExtendedTooltipTrigger;
+    }(McTooltipTrigger));
+    /** @nocollapse */ McExtendedTooltipTrigger.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McExtendedTooltipTrigger, deps: [{ token: i2__namespace.Overlay }, { token: i0__namespace.ElementRef }, { token: i0__namespace.NgZone }, { token: i2__namespace.ScrollDispatcher }, { token: i0__namespace.ViewContainerRef }, { token: MC_TOOLTIP_SCROLL_STRATEGY }, { token: i3__namespace.Directionality, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McExtendedTooltipTrigger.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McExtendedTooltipTrigger, selector: "[mcExtendedTooltip]", inputs: { content: ["mcExtendedTooltip", "content"], header: ["mcTooltipHeader", "header"] }, host: { listeners: { "keydown": "handleKeydown($event)", "touchend": "handleTouchend()" }, properties: { "class.mc-tooltip_open": "isOpen" } }, exportAs: ["mcExtendedTooltip"], usesInheritance: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McExtendedTooltipTrigger, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[mcExtendedTooltip]',
+                        exportAs: 'mcExtendedTooltip',
+                        host: {
+                            '[class.mc-tooltip_open]': 'isOpen',
+                            '(keydown)': 'handleKeydown($event)',
+                            '(touchend)': 'handleTouchend()'
+                        }
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i2__namespace.Overlay }, { type: i0__namespace.ElementRef }, { type: i0__namespace.NgZone }, { type: i2__namespace.ScrollDispatcher }, { type: i0__namespace.ViewContainerRef }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [MC_TOOLTIP_SCROLL_STRATEGY]
+                        }] }, { type: i3__namespace.Directionality, decorators: [{
+                            type: i0.Optional
+                        }] }];
+        }, propDecorators: { content: [{
+                    type: i0.Input,
+                    args: ['mcExtendedTooltip']
+                }], header: [{
+                    type: i0.Input,
+                    args: ['mcTooltipHeader']
                 }] } });
 
     var McToolTipModule = /** @class */ (function () {
@@ -1060,15 +671,37 @@
         return McToolTipModule;
     }());
     /** @nocollapse */ McToolTipModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McToolTipModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    /** @nocollapse */ McToolTipModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McToolTipModule, declarations: [McTooltipComponent, McTooltip], imports: [i1.CommonModule, i2.OverlayModule], exports: [McTooltipComponent, McTooltip] });
-    /** @nocollapse */ McToolTipModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McToolTipModule, providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER], imports: [[i1.CommonModule, i2.OverlayModule]] });
+    /** @nocollapse */ McToolTipModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McToolTipModule, declarations: [McTooltipComponent,
+            McTooltipTrigger,
+            McExtendedTooltipTrigger,
+            McWarningTooltipTrigger], imports: [i1.CommonModule, i2.OverlayModule], exports: [McTooltipComponent,
+            McTooltipTrigger,
+            McExtendedTooltipTrigger,
+            McWarningTooltipTrigger] });
+    /** @nocollapse */ McToolTipModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McToolTipModule, providers: [
+            MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
+            MC_TOOLTIP_OPEN_TIME_PROVIDER
+        ], imports: [[i1.CommonModule, i2.OverlayModule]] });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McToolTipModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
-                        declarations: [McTooltipComponent, McTooltip],
-                        exports: [McTooltipComponent, McTooltip],
+                        declarations: [
+                            McTooltipComponent,
+                            McTooltipTrigger,
+                            McExtendedTooltipTrigger,
+                            McWarningTooltipTrigger
+                        ],
+                        exports: [
+                            McTooltipComponent,
+                            McTooltipTrigger,
+                            McExtendedTooltipTrigger,
+                            McWarningTooltipTrigger
+                        ],
                         imports: [i1.CommonModule, i2.OverlayModule],
-                        providers: [MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
+                        providers: [
+                            MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
+                            MC_TOOLTIP_OPEN_TIME_PROVIDER
+                        ],
                         entryComponents: [McTooltipComponent]
                     }]
             }] });
@@ -1077,13 +710,16 @@
      * Generated bundle index. Do not edit.
      */
 
-    exports.ArrowPlacements = ArrowPlacements;
+    exports.MC_TOOLTIP_OPEN_TIME = MC_TOOLTIP_OPEN_TIME;
+    exports.MC_TOOLTIP_OPEN_TIME_PROVIDER = MC_TOOLTIP_OPEN_TIME_PROVIDER;
     exports.MC_TOOLTIP_SCROLL_STRATEGY = MC_TOOLTIP_SCROLL_STRATEGY;
     exports.MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER;
+    exports.MIN_TIME_FOR_DELAY = MIN_TIME_FOR_DELAY;
+    exports.McExtendedTooltipTrigger = McExtendedTooltipTrigger;
     exports.McToolTipModule = McToolTipModule;
-    exports.McTooltip = McTooltip;
     exports.McTooltipComponent = McTooltipComponent;
-    exports.getMcTooltipInvalidPositionError = getMcTooltipInvalidPositionError;
+    exports.McTooltipTrigger = McTooltipTrigger;
+    exports.McWarningTooltipTrigger = McWarningTooltipTrigger;
     exports.mcTooltipScrollStrategyFactory = mcTooltipScrollStrategyFactory;
 
     Object.defineProperty(exports, '__esModule', { value: true });

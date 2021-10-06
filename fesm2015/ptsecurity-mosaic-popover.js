@@ -1,17 +1,13 @@
-import { A11yModule } from '@angular/cdk/a11y';
 import * as i2 from '@angular/cdk/overlay';
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { EventEmitter, TemplateRef, Component, ViewEncapsulation, ChangeDetectionStrategy, Output, InjectionToken, Directive, Inject, Optional, Input, NgModule } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, InjectionToken, Directive, Inject, Optional, Input, NgModule } from '@angular/core';
 import * as i3 from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { EXTENDED_OVERLAY_POSITIONS, POSITION_MAP, POSITION_TO_CSS_MAP, DEFAULT_4_POSITIONS_TO_CSS_MAP, POSITION_PRIORITY_STRATEGY } from '@ptsecurity/mosaic/core';
-import { BehaviorSubject, Subject, Subscription, NEVER, merge } from 'rxjs';
-import { takeUntil, delay, distinctUntilChanged } from 'rxjs/operators';
+import { McPopUp, McPopUpTrigger, PopUpTriggers, PopUpSizes, POSITION_TO_CSS_MAP } from '@ptsecurity/mosaic/core';
+import { merge, NEVER } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 const mcPopoverAnimations = {
@@ -29,176 +25,32 @@ const mcPopoverAnimations = {
     ])
 };
 
-var PopoverTriggers;
-(function (PopoverTriggers) {
-    PopoverTriggers["Click"] = "click";
-    PopoverTriggers["Focus"] = "focus";
-    PopoverTriggers["Hover"] = "hover";
-})(PopoverTriggers || (PopoverTriggers = {}));
-var PopoverVisibility;
-(function (PopoverVisibility) {
-    PopoverVisibility["Initial"] = "initial";
-    PopoverVisibility["Visible"] = "visible";
-    PopoverVisibility["Hidden"] = "hidden";
-})(PopoverVisibility || (PopoverVisibility = {}));
-class McPopoverComponent {
-    constructor(changeDetectorRef, componentElementRef) {
-        this.changeDetectorRef = changeDetectorRef;
-        this.componentElementRef = componentElementRef;
-        this.positions = [...EXTENDED_OVERLAY_POSITIONS];
-        this.popoverVisibility = PopoverVisibility.Initial;
-        this.closeOnInteraction = false;
-        this.mcVisibleChange = new EventEmitter();
-        this._mcTrigger = PopoverTriggers.Hover;
-        this._mcPlacement = 'top';
-        this._mcVisible = new BehaviorSubject(false);
-        this._classList = [];
-        /** Subject for notifying that the popover has been hidden from the view */
-        this.onHideSubject = new Subject();
-        this.availablePositions = POSITION_MAP;
+class McPopoverComponent extends McPopUp {
+    constructor(changeDetectorRef) {
+        super(changeDetectorRef);
+        this.prefix = 'mc-popover';
     }
-    get mcTrigger() {
-        return this._mcTrigger;
-    }
-    set mcTrigger(value) {
-        this._mcTrigger = value;
-    }
-    get mcPlacement() {
-        return this._mcPlacement;
-    }
-    set mcPlacement(value) {
-        if (value !== this._mcPlacement) {
-            this._mcPlacement = value;
-            this.positions.unshift(POSITION_MAP[this.mcPlacement]);
-        }
-        else if (!value) {
-            this._mcPlacement = 'top';
-        }
-    }
-    get mcPopoverSize() {
-        return this.popoverSize;
-    }
-    set mcPopoverSize(value) {
-        if (value !== this.popoverSize) {
-            this.popoverSize = value;
-        }
-        else if (!value) {
-            this.popoverSize = 'normal';
-        }
-    }
-    get mcVisible() {
-        return this._mcVisible.value;
-    }
-    set mcVisible(value) {
-        const visible = coerceBooleanProperty(value);
-        if (this._mcVisible.value !== visible) {
-            this._mcVisible.next(visible);
-            this.mcVisibleChange.emit(visible);
-        }
-    }
-    get classList() {
-        return this._classList.join(' ');
-    }
-    set classList(value) {
-        let list = [];
-        if (Array.isArray(value)) {
-            list = value;
-        }
-        else {
-            list.push(value);
-        }
-        this._classList = list;
-    }
-    get getCssClassesList() {
-        return `${this.classList} mc-popover-${this.mcPopoverSize} mc-popover_placement-${this.getPlacementClass}`;
-    }
-    get getPlacementClass() {
-        return POSITION_TO_CSS_MAP[this.mcPlacement];
-    }
-    get isOpen() {
-        return this.popoverVisibility === PopoverVisibility.Visible;
-    }
-    handleKeydown(e) {
-        // tslint:disable-next-line: deprecation
-        if (this.isOpen && e.keyCode === ESCAPE) {
-            this.hide();
-        }
-    }
-    show() {
-        if (this.isNonEmptyContent()) {
-            this.closeOnInteraction = true;
-            this.popoverVisibility = PopoverVisibility.Visible;
-            this._mcVisible.next(true);
-            this.mcVisibleChange.emit(true);
-            // Mark for check so if any parent component has set the
-            // ChangeDetectionStrategy to OnPush it will be checked anyways
-            this.markForCheck();
-        }
-    }
-    hide() {
-        this.popoverVisibility = PopoverVisibility.Hidden;
-        this._mcVisible.next(false);
-        this.mcVisibleChange.emit(false);
-        // Mark for check so if any parent component has set the
-        // ChangeDetectionStrategy to OnPush it will be checked anyways
-        this.markForCheck();
-    }
-    isNonEmptyContent() {
-        return !!this.mcContent && (this.isTemplateRef(this.mcContent) || this.isNonEmptyString(this.mcContent));
-    }
-    /** Returns an observable that notifies when the popover has been hidden from view. */
-    afterHidden() {
-        return this.onHideSubject.asObservable();
-    }
-    isVisible() {
-        return this.popoverVisibility === PopoverVisibility.Visible;
-    }
-    markForCheck() {
-        this.changeDetectorRef.markForCheck();
-    }
-    isTemplateRef(value) {
-        return value instanceof TemplateRef;
-    }
-    isNonEmptyString(value) {
-        return typeof value === 'string' && value !== '';
-    }
-    animationStart() {
-        this.closeOnInteraction = false;
-    }
-    animationDone(event) {
-        const toState = event.toState;
-        if (toState === PopoverVisibility.Hidden && !this.isVisible()) {
-            this.onHideSubject.next();
-        }
-        if (toState === PopoverVisibility.Visible || toState === PopoverVisibility.Hidden) {
-            this.closeOnInteraction = true;
-        }
-    }
-    ngOnDestroy() {
-        this.onHideSubject.complete();
+    updateClassMap(placement, customClass, size) {
+        super.updateClassMap(placement, customClass, { [`${this.prefix}_${size}`]: !!size });
     }
 }
-/** @nocollapse */ McPopoverComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverComponent, deps: [{ token: i0.ChangeDetectorRef }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McPopoverComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McPopoverComponent, selector: "mc-popover", outputs: { mcVisibleChange: "mcPopoverVisibleChange" }, host: { listeners: { "keydown": "handleKeydown($event)" }, properties: { "class": "getCssClassesList" } }, ngImport: i0, template: "<div class=\"mc-popover\"\n     [ngClass]=\"classList\"\n     [@state]=\"popoverVisibility\"\n     (@state.start)=\"animationStart()\"\n     (@state.done)=\"animationDone($event)\">\n    <div class=\"mc-popover__container\">\n        <div class=\"mc-popover__header\" *ngIf=\"mcHeader\">\n            <ng-container *ngIf=\"isTemplateRef(mcHeader)\" [ngTemplateOutlet]=\"mcHeader\"></ng-container>\n            <ng-container *ngIf=\"isNonEmptyString(mcHeader)\">\n                <div [innerHTML]=\"mcHeader\"></div>\n            </ng-container>\n        </div>\n        <div class=\"mc-popover__content\" *ngIf=\"mcContent\">\n            <ng-container *ngIf=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container>\n            <ng-container *ngIf=\"isNonEmptyString(mcContent)\">\n                <div [innerHTML]=\"mcContent\"></div>\n            </ng-container>\n        </div>\n        <div class=\"mc-popover__footer\" *ngIf=\"mcFooter\">\n            <ng-container *ngIf=\"isTemplateRef(mcFooter)\" [ngTemplateOutlet]=\"mcFooter\"></ng-container>\n            <ng-container *ngIf=\"isNonEmptyString(mcFooter)\">\n                <div [innerHTML]=\"mcFooter\"></div>\n            </ng-container>\n        </div>\n    </div>\n    <div class=\"mc-popover__arrow\"\n         [ngClass]=\"{ 'mc-popover__arrow_with-footer': mcFooter }\"></div>\n</div>\n", styles: ["@keyframes mc-progress{0%{background-position:0 0}to{background-position:29px 0}}.mc-progress{position:relative}.mc-progress:after{content:\"\";position:absolute;border-radius:inherit;top:0;right:0;bottom:0;left:0;background:linear-gradient(135deg,rgba(0,0,0,.05) 10px,transparent 10px,transparent 20px,rgba(0,0,0,.05) 20px,rgba(0,0,0,.05) 30px,transparent 30px) repeat;background-size:29px 29px;animation:mc-progress 1s linear infinite}.cdk-overlay-container{pointer-events:none;top:0;left:0;height:100%;width:100%;position:fixed;z-index:1000;box-sizing:border-box;margin:0;padding:0}.cdk-overlay-backdrop{top:0;bottom:0;left:0;right:0;-webkit-tap-highlight-color:transparent;transition:opacity .4s cubic-bezier(.25,.8,.25,1);opacity:0;position:absolute;pointer-events:auto;z-index:1000;box-sizing:border-box;margin:0;padding:0}.cdk-overlay-pane{box-sizing:border-box;position:absolute;pointer-events:auto;margin:0;padding:0;z-index:1000;max-width:100%;max-height:100%}.cdk-overlay-connected-position-bounding-box{box-sizing:border-box;position:absolute;z-index:1000;display:flex;flex-direction:column;margin:0;padding:0;min-width:1px;min-height:1px}.mc-popover{position:relative;display:block;border-radius:4px;border-radius:var(--mc-popover-size-border-radius, 4px);border-width:1px;border-width:var(--mc-popover-size-border-width, 1px);border-style:solid;box-sizing:border-box;visibility:visible;z-index:1030;list-style:none;white-space:pre-line}.mc-popover-small{max-width:200px;max-width:var(--mc-popover-size-small-width, 200px)}.mc-popover-small .mc-popover{max-width:200px;max-width:var(--mc-popover-size-small-width, 200px)}.mc-popover-normal{max-width:400px;max-width:var(--mc-popover-size-normal-width, 400px)}.mc-popover-normal .mc-popover{max-width:400px;max-width:var(--mc-popover-size-normal-width, 400px)}.mc-popover-large{max-width:640px;max-width:var(--mc-popover-size-large-width, 640px)}.mc-popover-large .mc-popover{max-width:640px;max-width:var(--mc-popover-size-large-width, 640px)}.mc-popover__container{border-radius:4px;border-radius:var(--mc-popover-size-border-radius, 4px);overflow:hidden}.mc-popover__header{padding:10px 16px;padding:var(--mc-popover-header-size-padding, 10px 16px);border-bottom-width:1px;border-bottom-width:var(--mc-popover-size-border-width, 1px);border-bottom-style:solid}.mc-popover__content{padding:16px;padding:var(--mc-popover-size-padding, 16px)}.mc-popover__footer{margin-top:8px;margin-top:var(--mc-popover-footer-size-margin-top, 8px);padding:12px 16px;padding:var(--mc-popover-footer-size-padding, 12px 16px);border-top-width:1px;border-top-width:var(--mc-popover-size-border-width, 1px);border-top-style:solid}.mc-popover_placement-top .mc-popover,.mc-popover_placement-top-left .mc-popover,.mc-popover_placement-top-right .mc-popover{margin-bottom:calc(4px * 2);margin-bottom:calc(var(--mc-popover-size-arrow-width, 4px) * 2)}.mc-popover_placement-right .mc-popover,.mc-popover_placement-right-top .mc-popover,.mc-popover_placement-right-bottom .mc-popover{margin-left:calc(4px * 2);margin-left:calc(var(--mc-popover-size-arrow-width, 4px) * 2)}.mc-popover_placement-bottom .mc-popover,.mc-popover_placement-bottom-left .mc-popover,.mc-popover_placement-bottom-right .mc-popover{margin-top:calc(4px * 2);margin-top:calc(var(--mc-popover-size-arrow-width, 4px) * 2)}.mc-popover_placement-left .mc-popover,.mc-popover_placement-left-top .mc-popover,.mc-popover_placement-left-bottom .mc-popover{margin-right:calc(4px * 2);margin-right:calc(var(--mc-popover-size-arrow-width, 4px) * 2)}.mc-popover__arrow{position:absolute;z-index:-1;width:14px;height:14px;border:solid 1px;transform:rotate(45deg)}.mc-popover_placement-top .mc-popover__arrow{bottom:calc(-1 * (4px + 2px));bottom:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));left:50%;margin-left:calc(-1 * 4px);margin-left:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-top-left .mc-popover__arrow{bottom:calc(-1 * (4px + 2px));bottom:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));left:20px;margin-left:0}.mc-popover_placement-top-right .mc-popover__arrow{bottom:calc(-1 * (4px + 2px));bottom:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));right:20px;margin-left:0}.mc-popover_placement-right .mc-popover__arrow{left:calc(-1 * (4px + 2px));left:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));top:50%;margin-top:calc(-1 * 4px);margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-right-top .mc-popover__arrow{left:calc(-1 * (4px + 2px));left:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));top:18px;margin-top:calc(-1 * 4px);margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-right-bottom .mc-popover__arrow{left:calc(-1 * (4px + 2px));left:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));bottom:14px;margin-top:calc(-1 * 4px);margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-left .mc-popover__arrow{right:calc(-1 * (4px + 2px));right:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));top:50%;margin-top:calc(-1 * 4px);margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-left-top .mc-popover__arrow{right:calc(-1 * (4px + 2px));right:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));top:18px;margin-top:calc(-1 * 4px);margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-left-bottom .mc-popover__arrow{right:calc(-1 * (4px + 2px));right:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));bottom:14px;margin-top:calc(-1 * 4px);margin-top:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-bottom .mc-popover__arrow{top:calc(-1 * (4px + 2px));top:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));left:50%;margin-left:calc(-1 * 4px);margin-left:calc(-1 * var(--mc-popover-size-arrow-width, 4px))}.mc-popover_placement-bottom-left .mc-popover__arrow{top:calc(-1 * (4px + 2px));top:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));left:20px;margin-left:0}.mc-popover_placement-bottom-right .mc-popover__arrow{top:calc(-1 * (4px + 2px));top:calc(-1 * (var(--mc-popover-size-arrow-width, 4px) + 2px));right:20px;margin-left:0}\n"], directives: [{ type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet"] }], animations: [mcPopoverAnimations.popoverState], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+/** @nocollapse */ McPopoverComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverComponent, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McPopoverComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McPopoverComponent, selector: "mc-popover-component", host: { listeners: { "keydown.esc": "hide(0)" } }, usesInheritance: true, ngImport: i0, template: "<div class=\"mc-popover\"\n     [ngClass]=\"classMap\"\n     [@state]=\"visibility\"\n     (@state.start)=\"animationStart()\"\n     (@state.done)=\"animationDone($event)\">\n\n    <div class=\"mc-popover__container\">\n        <div class=\"mc-popover__header\" *ngIf=\"header\">\n            <ng-container *ngIf=\"isTemplateRef(header)\" [ngTemplateOutlet]=\"header\"></ng-container>\n            <ng-container *ngIf=\"!isTemplateRef(header)\">\n                <div>{{ header }}</div>\n            </ng-container>\n        </div>\n\n        <div class=\"mc-popover__content\" *ngIf=\"content\">\n            <ng-container *ngIf=\"isTemplateRef(content)\" [ngTemplateOutlet]=\"content\"></ng-container>\n            <ng-container *ngIf=\"!isTemplateRef(content)\">\n                <div>{{ content }}</div>\n            </ng-container>\n        </div>\n\n        <div class=\"mc-popover__footer\" *ngIf=\"footer\">\n            <ng-container *ngIf=\"isTemplateRef(footer)\" [ngTemplateOutlet]=\"footer\"></ng-container>\n            <ng-container *ngIf=\"!isTemplateRef(footer)\">\n                <div>{{ footer }}</div>\n            </ng-container>\n        </div>\n    </div>\n\n    <div class=\"mc-popover__arrow\" [class.mc-popover__arrow_with-footer]=\"footer\"></div>\n</div>\n", styles: ["@keyframes mc-progress{0%{background-position:0 0}to{background-position:29px 0}}.mc-progress{position:relative}.mc-progress:after{content:\"\";position:absolute;border-radius:inherit;top:0;right:0;bottom:0;left:0;background:linear-gradient(135deg,rgba(0,0,0,.05) 10px,transparent 10px,transparent 20px,rgba(0,0,0,.05) 20px,rgba(0,0,0,.05) 30px,transparent 30px) repeat;background-size:29px 29px;animation:mc-progress 1s linear infinite}.cdk-overlay-container{pointer-events:none;top:0;left:0;height:100%;width:100%;position:fixed;z-index:1000;box-sizing:border-box;margin:0;padding:0}.cdk-overlay-backdrop{top:0;bottom:0;left:0;right:0;-webkit-tap-highlight-color:transparent;transition:opacity .4s cubic-bezier(.25,.8,.25,1);opacity:0;position:absolute;pointer-events:auto;z-index:1000;box-sizing:border-box;margin:0;padding:0}.cdk-overlay-pane{box-sizing:border-box;position:absolute;pointer-events:auto;margin:0;padding:0;z-index:1000;max-width:100%;max-height:100%}.cdk-overlay-connected-position-bounding-box{box-sizing:border-box;position:absolute;z-index:1000;display:flex;flex-direction:column;margin:0;padding:0;min-width:1px;min-height:1px}.mc-popover{position:relative;border-radius:3px;border-radius:var(--mc-popover-size-border-radius, 3px);border-width:1px;border-style:solid;box-sizing:border-box;z-index:1030;list-style:none;white-space:pre-line}.mc-popover.mc-popover_small{max-width:200px;max-width:var(--mc-popover-size-small-width, 200px)}.mc-popover.mc-popover_normal{max-width:400px;max-width:var(--mc-popover-size-normal-width, 400px)}.mc-popover.mc-popover_large{max-width:640px;max-width:var(--mc-popover-size-large-width, 640px)}.mc-popover.mc-popover_placement-top,.mc-popover.mc-popover_placement-top-left,.mc-popover.mc-popover_placement-top-right{margin-bottom:calc(9px);margin-bottom:calc(var(--mc-popover-size-trigger-margin, 9px))}.mc-popover.mc-popover_placement-right,.mc-popover.mc-popover_placement-right-top,.mc-popover.mc-popover_placement-right-bottom{margin-left:calc(9px);margin-left:calc(var(--mc-popover-size-trigger-margin, 9px))}.mc-popover.mc-popover_placement-bottom,.mc-popover.mc-popover_placement-bottom-left,.mc-popover.mc-popover_placement-bottom-right{margin-top:calc(9px);margin-top:calc(var(--mc-popover-size-trigger-margin, 9px))}.mc-popover.mc-popover_placement-left,.mc-popover.mc-popover_placement-left-top,.mc-popover.mc-popover_placement-left-bottom{margin-right:calc(9px);margin-right:calc(var(--mc-popover-size-trigger-margin, 9px))}.mc-popover__container{display:flex;flex-direction:column;max-height:480px;max-height:var(--mc-popover-size-max-height, 480px);border-radius:3px;border-radius:var(--mc-popover-size-border-radius, 3px);overflow:hidden}.mc-popover__header{height:10px 16px;height:var(--mc-popover-header-size-height, 10px 16px);padding:10px 16px;padding:var(--mc-popover-header-size-padding, 10px 16px);border-bottom-width:1px;border-bottom-style:solid}.mc-popover__content{overflow:hidden;padding:16px;padding:var(--mc-popover-size-padding, 16px)}.mc-popover__footer{box-sizing:border-box;margin-top:8px;margin-top:var(--mc-popover-footer-size-margin-top, 8px);height:56px;height:var(--mc-popover-footer-size-height, 56px);padding:12px 16px;padding:var(--mc-popover-footer-size-padding, 12px 16px);border-top-width:1px;border-top-style:solid}.mc-popover__arrow{position:absolute;z-index:-1;width:12px;width:var(--mc-popover-size-arrow-size, 12px);height:12px;height:var(--mc-popover-size-arrow-size, 12px);border:solid 1px;transform:rotate(45deg)}.mc-popover_placement-top .mc-popover__arrow{bottom:calc((11px / -2));bottom:calc((var(--mc-popover-size-arrow-size, 11px) / -2));left:50%;margin-left:calc((11px / -2));margin-left:calc((var(--mc-popover-size-arrow-size, 11px) / -2))}.mc-popover_placement-top-left .mc-popover__arrow{bottom:calc((11px / -2));bottom:calc((var(--mc-popover-size-arrow-size, 11px) / -2));left:calc(18px - 9px);left:calc(18px - var(--mc-popover-size-trigger-margin, 9px))}.mc-popover_placement-top-right .mc-popover__arrow{bottom:calc((11px / -2));bottom:calc((var(--mc-popover-size-arrow-size, 11px) / -2));right:calc(18px - 9px);right:calc(18px - var(--mc-popover-size-trigger-margin, 9px))}.mc-popover_placement-right .mc-popover__arrow{left:calc((11px / -2));left:calc((var(--mc-popover-size-arrow-size, 11px) / -2));top:50%;margin-top:calc((11px / -2));margin-top:calc((var(--mc-popover-size-arrow-size, 11px) / -2))}.mc-popover_placement-right-top .mc-popover__arrow{left:calc((11px / -2));left:calc((var(--mc-popover-size-arrow-size, 11px) / -2));top:calc(18px - 9px);top:calc(18px - var(--mc-popover-size-trigger-margin, 9px))}.mc-popover_placement-right-bottom .mc-popover__arrow{left:calc((11px / -2));left:calc((var(--mc-popover-size-arrow-size, 11px) / -2));bottom:calc(18px - 9px);bottom:calc(18px - var(--mc-popover-size-trigger-margin, 9px))}.mc-popover_placement-left .mc-popover__arrow{right:calc((11px / -2));right:calc((var(--mc-popover-size-arrow-size, 11px) / -2));top:50%;margin-top:calc((11px / -2));margin-top:calc((var(--mc-popover-size-arrow-size, 11px) / -2))}.mc-popover_placement-left-top .mc-popover__arrow{right:calc((11px / -2));right:calc((var(--mc-popover-size-arrow-size, 11px) / -2));top:calc(18px - 9px);top:calc(18px - var(--mc-popover-size-trigger-margin, 9px))}.mc-popover_placement-left-bottom .mc-popover__arrow{right:calc((11px / -2));right:calc((var(--mc-popover-size-arrow-size, 11px) / -2));bottom:calc(18px - 9px);bottom:calc(18px - var(--mc-popover-size-trigger-margin, 9px))}.mc-popover_placement-bottom .mc-popover__arrow{top:calc((11px / -2));top:calc((var(--mc-popover-size-arrow-size, 11px) / -2));left:50%;margin-left:calc((11px / -2));margin-left:calc((var(--mc-popover-size-arrow-size, 11px) / -2))}.mc-popover_placement-bottom-left .mc-popover__arrow{top:calc((11px / -2));top:calc((var(--mc-popover-size-arrow-size, 11px) / -2));left:calc(18px - 9px);left:calc(18px - var(--mc-popover-size-trigger-margin, 9px))}.mc-popover_placement-bottom-right .mc-popover__arrow{top:calc((11px / -2));top:calc((var(--mc-popover-size-arrow-size, 11px) / -2));right:calc(18px - 9px);right:calc(18px - var(--mc-popover-size-trigger-margin, 9px))}\n"], directives: [{ type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i1.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet"] }], animations: [mcPopoverAnimations.popoverState], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverComponent, decorators: [{
             type: Component,
             args: [{
-                    selector: 'mc-popover',
+                    selector: 'mc-popover-component',
                     templateUrl: './popover.component.html',
                     preserveWhitespaces: false,
                     styleUrls: ['./popover.scss'],
+                    host: {
+                        '(keydown.esc)': 'hide(0)'
+                    },
                     encapsulation: ViewEncapsulation.None,
                     changeDetection: ChangeDetectionStrategy.OnPush,
-                    animations: [mcPopoverAnimations.popoverState],
-                    host: {
-                        '[class]': 'getCssClassesList',
-                        '(keydown)': 'handleKeydown($event)'
-                    }
+                    animations: [mcPopoverAnimations.popoverState]
                 }]
-        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }, { type: i0.ElementRef }]; }, propDecorators: { mcVisibleChange: [{
-                type: Output,
-                args: ['mcPopoverVisibleChange']
-            }] } });
+        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }]; } });
 const MC_POPOVER_SCROLL_STRATEGY = new InjectionToken('mc-popover-scroll-strategy');
 /** @docs-private */
 function mcPopoverScrollStrategyFactory(overlay) {
@@ -214,43 +66,20 @@ const MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 function getMcPopoverInvalidPositionError(position) {
     return Error(`McPopover position "${position}" is invalid.`);
 }
-const VIEWPORT_MARGIN = 8;
-/* Constant distance between popover container border
-*  corner according to popover placement and middle of arrow
-* */
-const POPOVER_ARROW_BORDER_DISTANCE = 20; // tslint:disable-line
-/* Constant value for min height and width of anchor element used for popover.
-*  Set as POPOVER_ARROW_BORDER_DISTANCE multiplied by 2
-*  plus 2px border for both sides of element. Used in check of position management.
-* */
-const ANCHOR_MIN_HEIGHT_WIDTH = 44; // tslint:disable-line
-class McPopover {
+class McPopoverTrigger extends McPopUpTrigger {
     constructor(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
-        this.overlay = overlay;
-        this.elementRef = elementRef;
-        this.ngZone = ngZone;
-        this.scrollDispatcher = scrollDispatcher;
-        this.hostView = hostView;
-        this.scrollStrategy = scrollStrategy;
-        this.direction = direction;
-        this.isPopoverOpen = false;
-        this.isDynamicPopover = false;
-        this.backdropClass = 'cdk-overlay-transparent-backdrop';
-        this.mcVisibleChange = new EventEmitter();
-        this.mcPositionStrategyPlacementChange = new EventEmitter();
+        super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
         this._hasBackdrop = false;
-        this.$unsubscribe = new Subject();
-        this._disabled = false;
-        this._mcTrigger = PopoverTriggers.Click;
-        this.popoverSize = 'normal';
-        this._mcPlacementPriority = null;
-        this._mcPlacement = 'top';
-        this.closeSubscription = Subscription.EMPTY;
-        this.manualListeners = new Map();
-        this.destroyed = new Subject();
-        this.resizeListener = () => this.updatePosition();
-        this.availablePositions = POSITION_MAP;
-        this.defaultPositionsMap = DEFAULT_4_POSITIONS_TO_CSS_MAP;
+        this._trigger = PopUpTriggers.Click;
+        this._size = PopUpSizes.Normal;
+        this._closeOnScroll = false;
+        this.backdropClass = 'cdk-overlay-transparent-backdrop';
+        this.originSelector = '.mc-popover';
+        this.overlayConfig = {
+            panelClass: 'mc-popover__panel',
+            hasBackdrop: this.hasBackdrop,
+            backdropClass: this.backdropClass
+        };
     }
     get hasBackdrop() {
         return this._hasBackdrop;
@@ -258,35 +87,26 @@ class McPopover {
     set hasBackdrop(value) {
         this._hasBackdrop = coerceBooleanProperty(value);
     }
-    get mcHeader() {
-        return this._mcHeader;
+    get header() {
+        return this._header;
     }
-    set mcHeader(value) {
-        this._mcHeader = value;
-        this.updateCompValue('mcHeader', value);
-        if (this.isPopoverOpen) {
-            this.updatePosition(true);
-        }
+    set header(value) {
+        this._header = value;
+        this.updateData();
     }
-    get mcContent() {
-        return this._mcContent;
+    get content() {
+        return this._content;
     }
-    set mcContent(value) {
-        this._mcContent = value;
-        this.updateCompValue('mcContent', value);
-        if (this.isPopoverOpen) {
-            this.updatePosition(true);
-        }
+    set content(value) {
+        this._content = value;
+        this.updateData();
     }
-    get mcFooter() {
-        return this._mcFooter;
+    get footer() {
+        return this._footer;
     }
-    set mcFooter(value) {
-        this._mcFooter = value;
-        this.updateCompValue('mcFooter', value);
-        if (this.isPopoverOpen) {
-            this.updatePosition(true);
-        }
+    set footer(value) {
+        this._footer = value;
+        this.updateData();
     }
     get disabled() {
         return this._disabled;
@@ -294,363 +114,89 @@ class McPopover {
     set disabled(value) {
         this._disabled = coerceBooleanProperty(value);
     }
-    get mcMouseEnterDelay() {
-        return this._mcMouseEnterDelay;
+    get trigger() {
+        return this._trigger;
     }
-    set mcMouseEnterDelay(value) {
-        this._mcMouseEnterDelay = value;
-        this.updateCompValue('mcMouseEnterDelay', value);
-    }
-    get mcMouseLeaveDelay() {
-        return this._mcMouseLeaveDelay;
-    }
-    set mcMouseLeaveDelay(value) {
-        this._mcMouseLeaveDelay = value;
-        this.updateCompValue('mcMouseLeaveDelay', value);
-    }
-    get mcTrigger() {
-        return this._mcTrigger;
-    }
-    set mcTrigger(value) {
+    set trigger(value) {
         if (value) {
-            this._mcTrigger = value;
-            this.updateCompValue('mcTrigger', value);
+            this._trigger = value;
         }
         else {
-            this._mcTrigger = PopoverTriggers.Click;
+            this._trigger = PopUpTriggers.Click;
         }
-        this.resetListeners();
+        this.initListeners();
     }
-    get mcPopoverSize() {
-        return this.popoverSize;
+    get size() {
+        return this._size;
     }
-    set mcPopoverSize(value) {
-        if (value && (value === 'small' || value === 'normal' || value === 'large')) {
-            this.popoverSize = value;
-            this.updateCompValue('mcPopoverSize', value);
-        }
-        else {
-            this.popoverSize = 'normal';
-        }
-    }
-    get mcPlacementPriority() {
-        return this._mcPlacementPriority;
-    }
-    set mcPlacementPriority(value) {
-        if (value && value.length > 0) {
-            this._mcPlacementPriority = value;
+    set size(value) {
+        if ([PopUpSizes.Small, PopUpSizes.Normal, PopUpSizes.Large].includes(value)) {
+            this._size = value;
+            this.updateClassMap();
         }
         else {
-            this._mcPlacementPriority = null;
+            this._size = PopUpSizes.Normal;
         }
     }
-    get mcPlacement() {
-        return this._mcPlacement;
+    get customClass() {
+        return this._customClass;
     }
-    set mcPlacement(value) {
-        if (value) {
-            this._mcPlacement = value;
-            this.updateCompValue('mcPlacement', value);
-        }
-        else {
-            this._mcPlacement = 'top';
-        }
+    set customClass(value) {
+        this._customClass = value;
+        this.updateClassMap();
     }
-    get classList() {
-        return this._classList;
+    get closeOnScroll() {
+        return this._closeOnScroll;
     }
-    set classList(value) {
-        this._classList = value;
-        this.updateCompValue('classList', this._classList);
+    set closeOnScroll(value) {
+        this._closeOnScroll = coerceBooleanProperty(value);
     }
-    get mcVisible() {
-        return this._mcVisible;
-    }
-    set mcVisible(externalValue) {
-        const value = coerceBooleanProperty(externalValue);
-        if (this._mcVisible !== value) {
-            this._mcVisible = value;
-            this.updateCompValue('mcVisible', value);
-            if (value) {
-                this.show();
-            }
-            else {
-                this.hide();
-            }
-        }
-    }
-    get isOpen() {
-        return this.isPopoverOpen;
-    }
-    /** Create the overlay config and position strategy */
-    createOverlay() {
-        if (this.overlayRef) {
-            this.overlayRef.dispose();
-        }
-        // Create connected position strategy that listens for scroll events to reposition.
-        const strategy = this.overlay.position()
-            .flexibleConnectedTo(this.elementRef)
-            .withTransformOriginOn('.mc-popover')
-            .withFlexibleDimensions(false)
-            .withViewportMargin(VIEWPORT_MARGIN)
-            .withPositions([...EXTENDED_OVERLAY_POSITIONS]);
-        const scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(this.elementRef);
-        strategy.withScrollableContainers(scrollableAncestors);
-        strategy.positionChanges
-            .pipe(takeUntil(this.destroyed))
-            .subscribe((change) => {
-            if (this.popover) {
-                this.onPositionChange(change);
-                if (change.scrollableViewProperties.isOverlayClipped && this.popover.mcVisible) {
-                    // After position changes occur and the overlay is clipped by
-                    // a parent scrollable then close the popover.
-                    this.ngZone.run(() => this.hide());
-                }
-            }
-        });
-        this.overlayRef = this.overlay.create({
-            direction: this.direction,
-            positionStrategy: strategy,
-            panelClass: 'mc-popover__panel',
-            scrollStrategy: this.scrollStrategy(),
-            hasBackdrop: this.hasBackdrop,
-            backdropClass: this.backdropClass
-        });
-        this.closeSubscription = this.closingActions()
-            // need for close popover on trigger click, because popover fire unexpected events: hide and then show
-            // todo need fix it
-            .pipe(delay(0))
-            .subscribe(() => this.hide());
-        this.updatePosition();
-        this.overlayRef.detachments()
-            .pipe(takeUntil(this.destroyed))
-            .subscribe(() => this.detach());
-        return this.overlayRef;
-    }
-    detach() {
-        if (this.overlayRef && this.overlayRef.hasAttached()) {
-            this.overlayRef.detach();
-        }
-        this.popover = null;
-    }
-    onPositionChange($event) {
-        let updatedPlacement = this.mcPlacement;
-        Object.keys(this.availablePositions).some((key) => {
-            if ($event.connectionPair.originX === this.availablePositions[key].originX &&
-                $event.connectionPair.originY === this.availablePositions[key].originY &&
-                $event.connectionPair.overlayX === this.availablePositions[key].overlayX &&
-                $event.connectionPair.overlayY === this.availablePositions[key].overlayY) {
-                updatedPlacement = key;
-                return true;
-            }
-            return false;
-        });
-        this.updateCompValue('mcPlacement', updatedPlacement);
-        this.mcPositionStrategyPlacementChange.emit(updatedPlacement);
-        if (this.popover) {
-            this.updateCompValue('classList', this.classList);
-            this.popover.markForCheck();
-        }
-        if (!this.defaultPositionsMap[updatedPlacement]) {
-            this.handlePositionUpdate(updatedPlacement);
-        }
-    }
-    handlePositionUpdate(updatedPlacement) {
-        if (!this.overlayRef) {
-            this.overlayRef = this.createOverlay();
-        }
-        const currentContainer = this.overlayRef.overlayElement.style;
-        const elementHeight = this.hostView.element.nativeElement.clientHeight;
-        const elementWidth = this.hostView.element.nativeElement.clientWidth;
-        const verticalOffset = Math.floor(elementHeight / 2); // tslint:disable-line
-        const horizontalOffset = Math.floor(elementWidth / 2 - 6); // tslint:disable-line
-        const offsets = {
-            top: verticalOffset,
-            bottom: verticalOffset,
-            right: horizontalOffset,
-            left: horizontalOffset
-        };
-        const styleProperty = updatedPlacement.split(/(?=[A-Z])/)[1].toLowerCase();
-        if (((styleProperty === 'top' || styleProperty === 'bottom') &&
-            elementHeight > ANCHOR_MIN_HEIGHT_WIDTH) ||
-            ((styleProperty === 'left' || styleProperty === 'right') &&
-                elementWidth > ANCHOR_MIN_HEIGHT_WIDTH)) {
+    updateData() {
+        if (!this.instance) {
             return;
         }
-        if (!this.overlayRef.overlayElement.style[styleProperty]) {
-            this.overlayRef.overlayElement.style[styleProperty] = '0px';
-        }
-        this.overlayRef.overlayElement.style[styleProperty] =
-            `${parseInt(currentContainer[styleProperty].split('px')[0], 10) +
-                offsets[styleProperty] - POPOVER_ARROW_BORDER_DISTANCE}px`;
-    }
-    // tslint:disable-next-line:no-any
-    updateCompValue(key, value) {
-        if (this.isDynamicPopover && value) {
-            if (this.popover) {
-                this.popover[key] = value;
-            }
-        }
-    }
-    ngOnInit() {
-        this.initElementRefListeners();
-    }
-    ngOnDestroy() {
-        if (this.overlayRef) {
-            this.overlayRef.dispose();
-        }
-        this.manualListeners.forEach((listener, event) => {
-            this.elementRef.nativeElement.removeEventListener(event, listener);
-        });
-        this.manualListeners.clear();
-        this.$unsubscribe.next();
-        this.$unsubscribe.complete();
-        this.closeSubscription.unsubscribe();
-    }
-    handleKeydown(e) {
-        // tslint:disable-next-line: deprecation
-        if (this.isOpen && e.keyCode === ESCAPE) {
-            this.hide();
-        }
-    }
-    handleTouchend() {
-        this.hide();
-    }
-    initElementRefListeners() {
-        if (this.mcTrigger === PopoverTriggers.Click) {
-            this.manualListeners
-                .set('click', () => this.show())
-                .forEach((listener, event) => {
-                this.elementRef.nativeElement.addEventListener(event, listener);
-            });
-        }
-        else if (this.mcTrigger === PopoverTriggers.Hover) {
-            this.manualListeners
-                .set('mouseenter', () => this.show())
-                .set('mouseleave', () => this.hide())
-                .forEach((listener, event) => {
-                this.elementRef.nativeElement.addEventListener(event, listener);
-            });
-        }
-        else if (this.mcTrigger === PopoverTriggers.Focus) {
-            this.manualListeners
-                .set('focus', () => this.show())
-                .set('blur', () => this.hide())
-                .forEach((listener, event) => {
-                this.elementRef.nativeElement.addEventListener(event, listener);
-            });
-        }
-    }
-    registerResizeHandler() {
-        // The resize handler is currently responsible for detecting slider dimension
-        // changes and therefore doesn't cause a value change that needs to be propagated.
-        this.ngZone.runOutsideAngular(() => {
-            window.addEventListener('resize', this.resizeListener);
-        });
-    }
-    deregisterResizeHandler() {
-        window.removeEventListener('resize', this.resizeListener);
-    }
-    resetListeners() {
-        if (this.manualListeners.size) {
-            this.manualListeners.forEach((listener, event) => {
-                this.elementRef.nativeElement.removeEventListener(event, listener);
-            });
-            this.manualListeners.clear();
-            this.initElementRefListeners();
-        }
-    }
-    show() {
-        if (this.disabled) {
-            return;
-        }
-        if (!this.popover) {
-            this.detach();
-            const overlayRef = this.createOverlay();
-            this.portal = this.portal || new ComponentPortal(McPopoverComponent, this.hostView);
-            this.popover = overlayRef.attach(this.portal).instance;
-            this.popover.afterHidden()
-                .pipe(takeUntil(this.destroyed))
-                .subscribe(() => this.detach());
-            this.isDynamicPopover = true;
-            const properties = [
-                'mcPlacement',
-                'mcPopoverSize',
-                'mcTrigger',
-                'mcMouseEnterDelay',
-                'mcMouseLeaveDelay',
-                'classList',
-                'mcVisible',
-                'mcHeader',
-                'mcContent',
-                'mcFooter'
-            ];
-            properties.forEach((property) => this.updateCompValue(property, this[property]));
-            this.popover.mcVisibleChange
-                .pipe(takeUntil(this.$unsubscribe), distinctUntilChanged())
-                .subscribe((data) => {
-                this.mcVisible = data;
-                this.mcVisibleChange.emit(data);
-                this.isPopoverOpen = data;
-            });
-        }
-        this.popover.show();
-    }
-    hide() {
-        if (this.popover) {
-            this.popover.hide();
+        this.instance.header = this.header;
+        this.instance.content = this.content;
+        this.instance.footer = this.footer;
+        if (this.isOpen) {
+            this.updatePosition(true);
         }
     }
     /** Updates the position of the current popover. */
     updatePosition(reapplyPosition = false) {
-        if (!this.overlayRef) {
-            this.overlayRef = this.createOverlay();
-        }
-        const position = this.overlayRef.getConfig().positionStrategy;
-        position.withPositions(this.getPrioritizedPositions()).withPush(true);
+        this.overlayRef = this.createOverlay();
+        const position = this.overlayRef.getConfig().positionStrategy
+            .withPositions(this.getPrioritizedPositions())
+            .withPush(true);
         if (reapplyPosition) {
             setTimeout(() => position.reapplyLastPosition());
         }
     }
+    getOverlayHandleComponentType() {
+        return McPopoverComponent;
+    }
+    updateClassMap(newPlacement = this.placement) {
+        if (!this.instance) {
+            return;
+        }
+        this.instance.updateClassMap(POSITION_TO_CSS_MAP[newPlacement], this.customClass, this.size);
+        this.instance.markForCheck();
+    }
     closingActions() {
-        const backdrop = this.overlayRef.backdropClick();
-        const outsidePointerEvents = this.hasBackdrop ? NEVER : this.overlayRef.outsidePointerEvents();
-        const detachments = this.overlayRef.detachments();
-        return merge(backdrop, outsidePointerEvents, detachments);
-    }
-    getPriorityPlacementStrategy(value) {
-        const result = [];
-        const possiblePositions = Object.keys(this.availablePositions);
-        if (Array.isArray(value)) {
-            value.forEach((position) => {
-                if (possiblePositions.includes(position)) {
-                    result.push(this.availablePositions[position]);
-                }
-            });
-        }
-        else if (possiblePositions.includes(value)) {
-            result.push(this.availablePositions[value]);
-        }
-        return result;
-    }
-    getPrioritizedPositions() {
-        if (this.mcPlacementPriority) {
-            return this.getPriorityPlacementStrategy(this.mcPlacementPriority);
-        }
-        return POSITION_PRIORITY_STRATEGY[this.mcPlacement];
+        return merge(this.overlayRef.backdropClick(), this.hasBackdrop ? NEVER : this.overlayRef.outsidePointerEvents(), this.closeOnScroll ? this.scrollDispatcher.scrolled() : NEVER, this.overlayRef.detachments());
     }
 }
-/** @nocollapse */ McPopover.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopover, deps: [{ token: i2.Overlay }, { token: i0.ElementRef }, { token: i0.NgZone }, { token: i2.ScrollDispatcher }, { token: i0.ViewContainerRef }, { token: MC_POPOVER_SCROLL_STRATEGY }, { token: i3.Directionality, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ McPopover.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopover, selector: "[mcPopover]", inputs: { backdropClass: "backdropClass", hasBackdrop: "hasBackdrop", mcHeader: ["mcPopoverHeader", "mcHeader"], mcContent: ["mcPopoverContent", "mcContent"], mcFooter: ["mcPopoverFooter", "mcFooter"], disabled: ["mcPopoverDisabled", "disabled"], mcMouseEnterDelay: ["mcPopoverMouseEnterDelay", "mcMouseEnterDelay"], mcMouseLeaveDelay: ["mcPopoverMouseLeaveDelay", "mcMouseLeaveDelay"], mcTrigger: ["mcPopoverTrigger", "mcTrigger"], mcPopoverSize: "mcPopoverSize", mcPlacementPriority: ["mcPopoverPlacementPriority", "mcPlacementPriority"], mcPlacement: ["mcPopoverPlacement", "mcPlacement"], classList: ["mcPopoverClass", "classList"], mcVisible: ["mcPopoverVisible", "mcVisible"] }, outputs: { mcVisibleChange: "mcPopoverVisibleChange", mcPositionStrategyPlacementChange: "mcPopoverPositionStrategyPlacementChange" }, host: { listeners: { "keydown": "handleKeydown($event)", "touchend": "handleTouchend()" }, properties: { "class.mc-popover_open": "isOpen" } }, exportAs: ["mcPopover"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopover, decorators: [{
+/** @nocollapse */ McPopoverTrigger.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverTrigger, deps: [{ token: i2.Overlay }, { token: i0.ElementRef }, { token: i0.NgZone }, { token: i2.ScrollDispatcher }, { token: i0.ViewContainerRef }, { token: MC_POPOVER_SCROLL_STRATEGY }, { token: i3.Directionality, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McPopoverTrigger.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopoverTrigger, selector: "[mcPopover]", inputs: { hasBackdrop: "hasBackdrop", header: ["mcPopoverHeader", "header"], content: ["mcPopoverContent", "content"], footer: ["mcPopoverFooter", "footer"], disabled: ["mcPopoverDisabled", "disabled"], trigger: ["mcTrigger", "trigger"], size: ["mcPopoverSize", "size"], customClass: ["mcPopoverClass", "customClass"], closeOnScroll: "closeOnScroll", backdropClass: "backdropClass" }, host: { listeners: { "keydown": "handleKeydown($event)", "touchend": "handleTouchend()" }, properties: { "class.mc-popover_open": "isOpen" } }, exportAs: ["mcPopover"], usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverTrigger, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mcPopover]',
                     exportAs: 'mcPopover',
                     host: {
+                        '[class.mc-popover_open]': 'isOpen',
                         '(keydown)': 'handleKeydown($event)',
-                        '(touchend)': 'handleTouchend()',
-                        '[class.mc-popover_open]': 'isOpen'
+                        '(touchend)': 'handleTouchend()'
                     }
                 }]
         }], ctorParameters: function () { return [{ type: i2.Overlay }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i2.ScrollDispatcher }, { type: i0.ViewContainerRef }, { type: undefined, decorators: [{
@@ -658,64 +204,45 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
                     args: [MC_POPOVER_SCROLL_STRATEGY]
                 }] }, { type: i3.Directionality, decorators: [{
                     type: Optional
-                }] }]; }, propDecorators: { backdropClass: [{
+                }] }]; }, propDecorators: { hasBackdrop: [{
                 type: Input
-            }], mcVisibleChange: [{
-                type: Output,
-                args: ['mcPopoverVisibleChange']
-            }], mcPositionStrategyPlacementChange: [{
-                type: Output,
-                args: ['mcPopoverPositionStrategyPlacementChange']
-            }], hasBackdrop: [{
-                type: Input
-            }], mcHeader: [{
+            }], header: [{
                 type: Input,
                 args: ['mcPopoverHeader']
-            }], mcContent: [{
+            }], content: [{
                 type: Input,
                 args: ['mcPopoverContent']
-            }], mcFooter: [{
+            }], footer: [{
                 type: Input,
                 args: ['mcPopoverFooter']
             }], disabled: [{
                 type: Input,
                 args: ['mcPopoverDisabled']
-            }], mcMouseEnterDelay: [{
+            }], trigger: [{
                 type: Input,
-                args: ['mcPopoverMouseEnterDelay']
-            }], mcMouseLeaveDelay: [{
-                type: Input,
-                args: ['mcPopoverMouseLeaveDelay']
-            }], mcTrigger: [{
-                type: Input,
-                args: ['mcPopoverTrigger']
-            }], mcPopoverSize: [{
+                args: ['mcTrigger']
+            }], size: [{
                 type: Input,
                 args: ['mcPopoverSize']
-            }], mcPlacementPriority: [{
-                type: Input,
-                args: ['mcPopoverPlacementPriority']
-            }], mcPlacement: [{
-                type: Input,
-                args: ['mcPopoverPlacement']
-            }], classList: [{
+            }], customClass: [{
                 type: Input,
                 args: ['mcPopoverClass']
-            }], mcVisible: [{
-                type: Input,
-                args: ['mcPopoverVisible']
+            }], closeOnScroll: [{
+                type: Input
+            }], backdropClass: [{
+                type: Input
             }] } });
 
 class McPopoverModule {
 }
 /** @nocollapse */ McPopoverModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ McPopoverModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverModule, declarations: [McPopoverComponent, McPopover], imports: [CommonModule, OverlayModule], exports: [A11yModule, McPopoverComponent, McPopover] });
-/** @nocollapse */ McPopoverModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverModule, providers: [MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER], imports: [[CommonModule, OverlayModule], A11yModule] });
+/** @nocollapse */ McPopoverModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverModule, declarations: [McPopoverComponent, McPopoverTrigger], imports: [CommonModule, OverlayModule], exports: [McPopoverComponent, McPopoverTrigger] });
+/** @nocollapse */ McPopoverModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverModule, providers: [MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER], imports: [[CommonModule, OverlayModule]] });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverModule, decorators: [{
             type: NgModule,
             args: [{
-                    declarations: [McPopoverComponent, McPopover],
-                    exports: [A11yModule, McPopoverComponent, McPopover],
+                    declarations: [McPopoverComponent, McPopoverTrigger],
+                    exports: [McPopoverComponent, McPopoverTrigger],
                     imports: [CommonModule, OverlayModule],
                     providers: [MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER],
                     entryComponents: [McPopoverComponent]
@@ -726,5 +253,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopover, McPopoverComponent, McPopoverModule, PopoverVisibility, getMcPopoverInvalidPositionError, mcPopoverAnimations, mcPopoverScrollStrategyFactory };
+export { MC_POPOVER_SCROLL_STRATEGY, MC_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER, McPopoverComponent, McPopoverModule, McPopoverTrigger, getMcPopoverInvalidPositionError, mcPopoverAnimations, mcPopoverScrollStrategyFactory };
 //# sourceMappingURL=ptsecurity-mosaic-popover.js.map

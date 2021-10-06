@@ -2,7 +2,7 @@ import { ElementRef, EventEmitter, OnDestroy, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, ValidationErrors, Validator } from '@angular/forms';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
-import { McTooltip } from '@ptsecurity/mosaic/tooltip';
+import { McWarningTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 import { TimeFormats } from './timepicker.constants';
 import * as i0 from "@angular/core";
@@ -62,7 +62,7 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, ControlVa
     get value(): D | null;
     set value(value: D | null);
     private _value;
-    set mcValidationTooltip(tooltip: McTooltip);
+    set mcValidationTooltip(tooltip: McWarningTooltipTrigger);
     incorrectInput: EventEmitter<void>;
     get hasSelection(): boolean;
     get isFullFormat(): boolean;

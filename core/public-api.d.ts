@@ -13,3 +13,4 @@ export * from './selection/index';
 export * from './services/measure-scrollbar.service';
 export * from './option/index';
 export * from './forms/index';
+export * from './pop-up/index';
