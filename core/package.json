@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/core/ptsecurity-mosaic-core.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-core.js",
   "typings": "ptsecurity-mosaic-core.d.ts",
-  "metadata": "ptsecurity-mosaic-core.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/core"
 }

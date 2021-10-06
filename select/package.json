@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/select/ptsecurity-mosaic-select.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-select.js",
   "typings": "ptsecurity-mosaic-select.d.ts",
-  "metadata": "ptsecurity-mosaic-select.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/select"
 }

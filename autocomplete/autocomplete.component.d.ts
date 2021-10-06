@@ -1,6 +1,7 @@
 import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, QueryList, TemplateRef } from '@angular/core';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { McOptgroup, McOption } from '@ptsecurity/mosaic/core';
+import * as i0 from "@angular/core";
 export declare class McAutocompleteSelectedEvent {
     source: McAutocomplete;
     option: McOption;
@@ -67,4 +68,6 @@ export declare class McAutocomplete implements AfterContentInit {
     setVisibility(): void;
     emitSelectEvent(option: McOption): void;
     onKeydown(event: KeyboardEvent): any;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McAutocomplete, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McAutocomplete, "mc-autocomplete", ["mcAutocomplete"], { "displayWith": "displayWith"; "panelWidth": "panelWidth"; "classList": "class"; "autoActiveFirstOption": "autoActiveFirstOption"; "openOnFocus": "openOnFocus"; }, { "optionSelected": "optionSelected"; "opened": "opened"; "closed": "closed"; }, ["options", "optionGroups"], ["*"]>;
 }

@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/modal/ptsecurity-mosaic-modal.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-modal.js",
   "typings": "ptsecurity-mosaic-modal.d.ts",
-  "metadata": "ptsecurity-mosaic-modal.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/modal"
 }

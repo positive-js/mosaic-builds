@@ -1,16 +1,43 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/cdk/overlay'), require('@angular/common'), require('@ptsecurity/mosaic/icon'), require('@angular/cdk/portal'), require('rxjs'), require('@angular/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/bidi'), require('@angular/cdk/platform'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('@angular/cdk/keycodes'), require('@ptsecurity/cdk/a11y'), require('@angular/animations')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/dropdown', ['exports', '@angular/core', '@angular/cdk/overlay', '@angular/common', '@ptsecurity/mosaic/icon', '@angular/cdk/portal', 'rxjs', '@angular/cdk/a11y', '@ptsecurity/mosaic/core', '@angular/cdk/bidi', '@angular/cdk/platform', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/coercion', '@angular/cdk/keycodes', '@ptsecurity/cdk/a11y', '@angular/animations'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.dropdown = {}), global.ng.core, global.ng.cdk.overlay, global.ng.common, global.ptsecurity.mosaic.icon, global.ng.cdk.portal, global.rxjs, global.ng.cdk.a11y, global.ptsecurity.mosaic.core, global.ng.cdk.bidi, global.ng.cdk.platform, global.mc.cdk.keycodes, global.rxjs.operators, global.ng.cdk.coercion, global.ng.cdk.keycodes, global.mc.cdk.a11y, global.ng.animations));
-}(this, (function (exports, core, overlay, common, icon, portal, rxjs, a11y, core$1, bidi, platform, keycodes$1, operators, coercion, keycodes, a11y$1, animations) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/cdk/overlay'), require('@angular/common'), require('@ptsecurity/mosaic/icon'), require('@angular/cdk/portal'), require('rxjs'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/coercion'), require('@angular/cdk/keycodes'), require('@ptsecurity/cdk/a11y'), require('@angular/animations'), require('@angular/cdk/bidi')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/dropdown', ['exports', '@angular/core', '@angular/cdk/overlay', '@angular/common', '@ptsecurity/mosaic/icon', '@angular/cdk/portal', 'rxjs', '@ptsecurity/mosaic/core', '@angular/cdk/a11y', '@angular/cdk/platform', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/coercion', '@angular/cdk/keycodes', '@ptsecurity/cdk/a11y', '@angular/animations', '@angular/cdk/bidi'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.dropdown = {}), global.ng.core, global.ng.cdk.overlay, global.ng.common, global.ptsecurity.mosaic.icon, global.ng.cdk.portal, global.rxjs, global.ptsecurity.mosaic.core, global.ng.cdk.a11y, global.ng.cdk.platform, global.mc.cdk.keycodes, global.rxjs.operators, global.ng.cdk.coercion, global.ng.cdk.keycodes, global.mc.cdk.a11y, global.ng.animations, global.ng.cdk.bidi));
+}(this, (function (exports, i0, i1$1, i3, i2, portal, rxjs, core, i1, platform, keycodes$1, operators, coercion, keycodes, a11y, animations, i4) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var i1__namespace$1 = /*#__PURE__*/_interopNamespace(i1$1);
+    var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
+    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
+    var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
+    var i4__namespace = /*#__PURE__*/_interopNamespace(i4);
 
     /**
      * Injection token used to provide the parent dropdown to dropdown-specific components.
      * @docs-private
      */
-    var MC_DROPDOWN_PANEL = new core.InjectionToken('MC_DROPDOWN_PANEL');
+    var MC_DROPDOWN_PANEL = new i0.InjectionToken('MC_DROPDOWN_PANEL');
     /** Injection token to be used to override the default options for `mc-dropdown`. */
-    var MC_DROPDOWN_DEFAULT_OPTIONS = new core.InjectionToken('mc-dropdown-default-options', {
+    var MC_DROPDOWN_DEFAULT_OPTIONS = new i0.InjectionToken('mc-dropdown-default-options', {
         providedIn: 'root',
         factory: MC_DROPDOWN_DEFAULT_OPTIONS_FACTORY
     });
@@ -77,20 +104,19 @@
         };
         return McDropdownContent;
     }());
-    McDropdownContent.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'ng-template[mcDropdownContent]'
-                },] }
-    ];
-    /** @nocollapse */
-    McDropdownContent.ctorParameters = function () { return [
-        { type: core.TemplateRef },
-        { type: core.ComponentFactoryResolver },
-        { type: core.ApplicationRef },
-        { type: core.Injector },
-        { type: core.ViewContainerRef },
-        { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
-    ]; };
+    /** @nocollapse */ McDropdownContent.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownContent, deps: [{ token: i0__namespace.TemplateRef }, { token: i0__namespace.ComponentFactoryResolver }, { token: i0__namespace.ApplicationRef }, { token: i0__namespace.Injector }, { token: i0__namespace.ViewContainerRef }, { token: i3.DOCUMENT }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McDropdownContent.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McDropdownContent, selector: "ng-template[mcDropdownContent]", ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownContent, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'ng-template[mcDropdownContent]'
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.TemplateRef }, { type: i0__namespace.ComponentFactoryResolver }, { type: i0__namespace.ApplicationRef }, { type: i0__namespace.Injector }, { type: i0__namespace.ViewContainerRef }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [i3.DOCUMENT]
+                        }] }];
+        } });
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -418,7 +444,7 @@
         return McDropdownItemBase;
     }());
     // tslint:disable-next-line:naming-convention
-    var McDropdownItemMixinBase = core$1.mixinDisabled(McDropdownItemBase);
+    var McDropdownItemMixinBase = core.mixinDisabled(McDropdownItemBase);
     /**
      * This directive is intended to be used inside an mc-dropdown tag.
      * It exists mostly to set the role attribute.
@@ -512,35 +538,43 @@
         };
         return McDropdownItem;
     }(McDropdownItemMixinBase));
-    McDropdownItem.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-dropdown-item, [mc-dropdown-item]',
-                    exportAs: 'mcDropdownItem',
-                    template: "<div class=\"mc-dropdown-item-wrapper\">\n    <ng-content></ng-content>\n</div>\n<i *ngIf=\"isNested\" mc-icon=\"mc-angle-right-M_16\" class=\"mc-dropdown-trigger__icon\"></i>\n",
-                    inputs: ['disabled'],
-                    host: {
-                        class: 'mc-dropdown-item',
-                        '[class.mc-dropdown-item_with-icon]': 'icon',
-                        '[class.mc-dropdown-item_highlighted]': 'highlighted',
-                        '[attr.disabled]': 'disabled || null',
-                        '[attr.tabindex]': 'getTabIndex()'
-                    },
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-dropdown-item{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;display:flex;align-items:center;position:relative;box-sizing:border-box;width:100%;border:1px solid transparent;outline:none;padding:0;text-align:left;white-space:nowrap}.mc-dropdown-item:not([disabled]){cursor:pointer}.mc-dropdown-item .mc-dropdown-item__caption{margin-top:4px}.mc-dropdown-item.mc-dropdown-item_with-icon .mc-dropdown-item__caption{margin-left:24px}.mc-dropdown-item .docs-navbar-version__num{margin-right:4px}.mc-dropdown-item-wrapper{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:var(--mc-dropdown-item-size-padding,5px 15px)}.mc-dropdown-item-wrapper [mc-icon]{padding:var(--mc-dropdown-item-size-icon-padding,0 8px 2px 0)}.mc-dropdown-trigger__icon{margin-left:auto;padding-right:var(--dropdown-trigger-size-icon-padding-right,8px)}.mc-dropdown__group-header{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;padding:var(--mc-dropdown-item-size-padding,6px 15px)}.mc-dropdown__group-header.mc-dropdown__group-header_small{padding:var(--mc-dropdown-item-size-padding,8px 15px)}.mc-dropdown__divider{height:var(--mc-dropdown-item-size-padding,1px);margin:var(--mc-dropdown-item-size-padding,4px 0)}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McDropdownItem.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: a11y.FocusMonitor },
-        { type: undefined, decorators: [{ type: core.Inject, args: [MC_DROPDOWN_PANEL,] }, { type: core.Optional }] }
-    ]; };
-    McDropdownItem.propDecorators = {
-        icon: [{ type: core.ContentChild, args: [icon.McIcon,] }],
-        checkDisabled: [{ type: core.HostListener, args: ['click', ['$event'],] }],
-        handleMouseEnter: [{ type: core.HostListener, args: ['mouseenter',] }]
-    };
+    /** @nocollapse */ McDropdownItem.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownItem, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.FocusMonitor }, { token: MC_DROPDOWN_PANEL, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McDropdownItem.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McDropdownItem, selector: "mc-dropdown-item, [mc-dropdown-item]", inputs: { disabled: "disabled" }, host: { listeners: { "click": "checkDisabled($event)", "mouseenter": "handleMouseEnter()" }, properties: { "class.mc-dropdown-item_with-icon": "icon", "class.mc-dropdown-item_highlighted": "highlighted", "attr.disabled": "disabled || null", "attr.tabindex": "getTabIndex()" }, classAttribute: "mc-dropdown-item" }, queries: [{ propertyName: "icon", first: true, predicate: i2.McIcon, descendants: true }], exportAs: ["mcDropdownItem"], usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-dropdown-item-wrapper\">\n    <ng-content></ng-content>\n</div>\n<i *ngIf=\"isNested\" mc-icon=\"mc-angle-right-M_16\" class=\"mc-dropdown-trigger__icon\"></i>\n", styles: [".mc-dropdown-item{-webkit-user-select:none;user-select:none;display:flex;align-items:center;position:relative;box-sizing:border-box;width:100%;border:1px solid transparent;outline:none;padding:0;text-align:left;white-space:nowrap}.mc-dropdown-item:not([disabled]){cursor:pointer}.mc-dropdown-item .mc-dropdown-item__caption{margin-top:4px}.mc-dropdown-item.mc-dropdown-item_with-icon .mc-dropdown-item__caption{margin-left:24px}.mc-dropdown-item .docs-navbar-version__num{margin-right:4px}.mc-dropdown-item-wrapper{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:5px 15px;padding:var(--mc-dropdown-item-size-padding, 5px 15px)}.mc-dropdown-item-wrapper [mc-icon]{padding:0 8px 2px 0;padding:var(--mc-dropdown-item-size-icon-padding, 0 8px 2px 0)}.mc-dropdown-trigger__icon{margin-left:auto;padding-right:8px;padding-right:var(--dropdown-trigger-size-icon-padding-right, 8px)}.mc-dropdown__group-header{-webkit-user-select:none;user-select:none;padding:6px 15px;padding:var(--mc-dropdown-item-size-padding, 6px 15px)}.mc-dropdown__group-header.mc-dropdown__group-header_small{padding:8px 15px;padding:var(--mc-dropdown-item-size-padding, 8px 15px)}.mc-dropdown__divider{height:1px;height:var(--mc-dropdown-item-size-padding, 1px);margin:4px 0;margin:var(--mc-dropdown-item-size-padding, 4px 0)}\n"], components: [{ type: i2__namespace.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i3__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i2__namespace.McIconCSSStyler, selector: "[mc-icon]" }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownItem, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-dropdown-item, [mc-dropdown-item]',
+                        exportAs: 'mcDropdownItem',
+                        templateUrl: 'dropdown-item.html',
+                        styleUrls: ['dropdown-item.scss'],
+                        inputs: ['disabled'],
+                        host: {
+                            class: 'mc-dropdown-item',
+                            '[class.mc-dropdown-item_with-icon]': 'icon',
+                            '[class.mc-dropdown-item_highlighted]': 'highlighted',
+                            '[attr.disabled]': 'disabled || null',
+                            '[attr.tabindex]': 'getTabIndex()'
+                        },
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i1__namespace.FocusMonitor }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [MC_DROPDOWN_PANEL]
+                        }, {
+                            type: i0.Optional
+                        }] }];
+        }, propDecorators: { icon: [{
+                    type: i0.ContentChild,
+                    args: [i2.McIcon]
+                }], checkDisabled: [{
+                    type: i0.HostListener,
+                    args: ['click', ['$event']]
+                }], handleMouseEnter: [{
+                    type: i0.HostListener,
+                    args: ['mouseenter']
+                }] } });
 
     /**
      * Throws an exception for the case when dropdown trigger doesn't have a valid mc-dropdown instance
@@ -627,9 +661,9 @@
             /** Class to be added to the backdrop element. */
             this.backdropClass = this.defaultOptions.backdropClass;
             /** Event emitted when the dropdown is closed. */
-            this.closed = new core.EventEmitter();
+            this.closed = new i0.EventEmitter();
             /** Only the direct descendant menu items. */
-            this.directDescendantItems = new core.QueryList();
+            this.directDescendantItems = new i0.QueryList();
             /** Subscription to tab events on the dropdown panel */
             this.tabSubscription = rxjs.Subscription.EMPTY;
         }
@@ -728,7 +762,7 @@
         McDropdown.prototype.ngAfterContentInit = function () {
             var _this = this;
             this.updateDirectDescendants();
-            this.keyManager = new a11y$1.FocusKeyManager(this.directDescendantItems)
+            this.keyManager = new a11y.FocusKeyManager(this.directDescendantItems)
                 .withTypeAhead();
             if (this.navigationWithWrap) {
                 this.keyManager.withWrap();
@@ -739,7 +773,7 @@
             // change back to the key manager. Note that we don't need to unsubscribe here because focused
             // is internal and we know that it gets completed on destroy.
             this.directDescendantItems.changes
-                .pipe(operators.startWith(this.directDescendantItems), operators.switchMap(function (items) { return rxjs.merge.apply(void 0, __spread(items.map(function (item) { return item.focused; }))); }))
+                .pipe(operators.startWith(this.directDescendantItems), operators.switchMap(function (items) { return rxjs.merge.apply(void 0, __spreadArray([], __read(items.map(function (item) { return item.focused; })))); }))
                 .subscribe(function (focusedItem) { return _this.keyManager.updateActiveItem(focusedItem); });
         };
         McDropdown.prototype.ngOnDestroy = function () {
@@ -750,7 +784,7 @@
         /** Stream that emits whenever the hovered dropdown item changes. */
         McDropdown.prototype.hovered = function () {
             var itemChanges = this.directDescendantItems.changes;
-            return itemChanges.pipe(operators.startWith(this.directDescendantItems), operators.switchMap(function (items) { return rxjs.merge.apply(void 0, __spread(items.map(function (item) { return item.hovered; }))); }));
+            return itemChanges.pipe(operators.startWith(this.directDescendantItems), operators.switchMap(function (items) { return rxjs.merge.apply(void 0, __spreadArray([], __read(items.map(function (item) { return item.hovered; })))); }));
         };
         /** Handle a keyboard event from the dropdown, delegating to the appropriate action. */
         McDropdown.prototype.handleKeydown = function (event) {
@@ -865,46 +899,67 @@
         };
         return McDropdown;
     }());
-    McDropdown.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-dropdown',
-                    exportAs: 'mcDropdown',
-                    template: "<ng-template>\n    <div class=\"mc-dropdown__panel\"\n         [ngClass]=\"classList\"\n         [class.mc-dropdown__panel_nested]=\"parent\"\n         [style.min-width]=\"triggerWidth\"\n         (keydown)=\"handleKeydown($event)\"\n         (click)=\"closed.emit('click')\"\n         [@transformDropdown]=\"panelAnimationState\"\n         (@transformDropdown.start)=\"onAnimationStart($event)\"\n         (@transformDropdown.done)=\"onAnimationDone($event)\"\n         tabindex=\"-1\">\n\n        <div class=\"mc-dropdown__content\">\n            <ng-content></ng-content>\n        </div>\n    </div>\n</ng-template>\n",
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    animations: [
-                        mcDropdownAnimations.transformDropdown,
-                        mcDropdownAnimations.fadeInItems
-                    ],
-                    providers: [
-                        { provide: MC_DROPDOWN_PANEL, useExisting: McDropdown }
-                    ],
-                    styles: [".mc-dropdown__panel{margin-top:-1px;max-width:var(--mc-dropdown-panel-size-max-width,640px);border-width:var(--mc-dropdown-panel-size-border-width,1px);border-style:solid;border-bottom-left-radius:var(--mc-dropdown-panel-size-border-radius,3px);border-bottom-right-radius:var(--mc-dropdown-panel-size-border-radius,3px);padding:var(--mc-dropdown-panel-size-padding,4px 0)}.mc-dropdown__panel.mc-dropdown__panel_nested{border-top-left-radius:var(--mc-dropdown-panel-size-border-radius,3px);border-top-right-radius:var(--mc-dropdown-panel-size-border-radius,3px)}.mc-dropdown__panel.ng-animating{pointer-events:none}.mc-dropdown__content{display:flex;flex-direction:column}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McDropdown.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.NgZone },
-        { type: undefined, decorators: [{ type: core.Inject, args: [MC_DROPDOWN_DEFAULT_OPTIONS,] }] }
-    ]; };
-    McDropdown.propDecorators = {
-        navigationWithWrap: [{ type: core.Input }],
-        xPosition: [{ type: core.Input }],
-        yPosition: [{ type: core.Input }],
-        overlapTriggerY: [{ type: core.Input }],
-        overlapTriggerX: [{ type: core.Input }],
-        hasBackdrop: [{ type: core.Input }],
-        panelClass: [{ type: core.Input, args: ['class',] }],
-        backdropClass: [{ type: core.Input }],
-        templateRef: [{ type: core.ViewChild, args: [core.TemplateRef, { static: false },] }],
-        items: [{ type: core.ContentChildren, args: [McDropdownItem, { descendants: true },] }],
-        lazyContent: [{ type: core.ContentChild, args: [McDropdownContent, { static: false },] }],
-        closed: [{ type: core.Output }]
-    };
+    /** @nocollapse */ McDropdown.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdown, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.NgZone }, { token: MC_DROPDOWN_DEFAULT_OPTIONS }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McDropdown.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McDropdown, selector: "mc-dropdown", inputs: { navigationWithWrap: "navigationWithWrap", xPosition: "xPosition", yPosition: "yPosition", overlapTriggerY: "overlapTriggerY", overlapTriggerX: "overlapTriggerX", hasBackdrop: "hasBackdrop", panelClass: ["class", "panelClass"], backdropClass: "backdropClass" }, outputs: { closed: "closed" }, providers: [
+            { provide: MC_DROPDOWN_PANEL, useExisting: McDropdown }
+        ], queries: [{ propertyName: "lazyContent", first: true, predicate: McDropdownContent, descendants: true }, { propertyName: "items", predicate: McDropdownItem, descendants: true }], viewQueries: [{ propertyName: "templateRef", first: true, predicate: i0.TemplateRef, descendants: true }], exportAs: ["mcDropdown"], ngImport: i0__namespace, template: "<ng-template>\n    <div class=\"mc-dropdown__panel\"\n         [ngClass]=\"classList\"\n         [class.mc-dropdown__panel_nested]=\"parent\"\n         [style.min-width]=\"triggerWidth\"\n         (keydown)=\"handleKeydown($event)\"\n         (click)=\"closed.emit('click')\"\n         [@transformDropdown]=\"panelAnimationState\"\n         (@transformDropdown.start)=\"onAnimationStart($event)\"\n         (@transformDropdown.done)=\"onAnimationDone($event)\"\n         tabindex=\"-1\">\n\n        <div class=\"mc-dropdown__content\">\n            <ng-content></ng-content>\n        </div>\n    </div>\n</ng-template>\n", styles: [".mc-dropdown__panel{margin-top:-1px;max-width:640px;max-width:var(--mc-dropdown-panel-size-max-width, 640px);border-width:1px;border-width:var(--mc-dropdown-panel-size-border-width, 1px);border-style:solid;border-bottom-left-radius:3px;border-bottom-left-radius:var(--mc-dropdown-panel-size-border-radius, 3px);border-bottom-right-radius:3px;border-bottom-right-radius:var(--mc-dropdown-panel-size-border-radius, 3px);padding:4px 0;padding:var(--mc-dropdown-panel-size-padding, 4px 0)}.mc-dropdown__panel.mc-dropdown__panel_nested{border-top-left-radius:3px;border-top-left-radius:var(--mc-dropdown-panel-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-dropdown-panel-size-border-radius, 3px)}.mc-dropdown__panel.ng-animating{pointer-events:none}.mc-dropdown__content{display:flex;flex-direction:column}\n"], directives: [{ type: i3__namespace.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }], animations: [
+            mcDropdownAnimations.transformDropdown,
+            mcDropdownAnimations.fadeInItems
+        ], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdown, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-dropdown',
+                        exportAs: 'mcDropdown',
+                        templateUrl: 'dropdown.html',
+                        styleUrls: ['dropdown.scss'],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None,
+                        animations: [
+                            mcDropdownAnimations.transformDropdown,
+                            mcDropdownAnimations.fadeInItems
+                        ],
+                        providers: [
+                            { provide: MC_DROPDOWN_PANEL, useExisting: McDropdown }
+                        ]
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.NgZone }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [MC_DROPDOWN_DEFAULT_OPTIONS]
+                        }] }];
+        }, propDecorators: { navigationWithWrap: [{
+                    type: i0.Input
+                }], xPosition: [{
+                    type: i0.Input
+                }], yPosition: [{
+                    type: i0.Input
+                }], overlapTriggerY: [{
+                    type: i0.Input
+                }], overlapTriggerX: [{
+                    type: i0.Input
+                }], hasBackdrop: [{
+                    type: i0.Input
+                }], panelClass: [{
+                    type: i0.Input,
+                    args: ['class']
+                }], backdropClass: [{
+                    type: i0.Input
+                }], templateRef: [{
+                    type: i0.ViewChild,
+                    args: [i0.TemplateRef, { static: false }]
+                }], items: [{
+                    type: i0.ContentChildren,
+                    args: [McDropdownItem, { descendants: true }]
+                }], lazyContent: [{
+                    type: i0.ContentChild,
+                    args: [McDropdownContent, { static: false }]
+                }], closed: [{
+                    type: i0.Output
+                }] } });
 
     /** Injection token that determines the scroll handling while the dropdown is open. */
-    var MC_DROPDOWN_SCROLL_STRATEGY = new core.InjectionToken('mc-dropdown-scroll-strategy');
+    var MC_DROPDOWN_SCROLL_STRATEGY = new i0.InjectionToken('mc-dropdown-scroll-strategy');
     /** @docs-private */
     // tslint:disable-next-line:naming-convention
     function MC_DROPDOWN_SCROLL_STRATEGY_FACTORY(overlay) {
@@ -913,7 +968,7 @@
     /** @docs-private */
     var MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER = {
         provide: MC_DROPDOWN_SCROLL_STRATEGY,
-        deps: [overlay.Overlay],
+        deps: [i1$1.Overlay],
         useFactory: MC_DROPDOWN_SCROLL_STRATEGY_FACTORY
     };
     /** Default top padding of the nested dropdown panel. */
@@ -944,9 +999,9 @@
              */
             this.restoreFocus = true;
             /** Event emitted when the associated dropdown is opened. */
-            this.dropdownOpened = new core.EventEmitter();
+            this.dropdownOpened = new i0.EventEmitter();
             /** Event emitted when the associated dropdown is closed. */
-            this.dropdownClosed = new core.EventEmitter();
+            this.dropdownClosed = new i0.EventEmitter();
             this._opened = false;
             this.overlayRef = null;
             this.closeSubscription = rxjs.Subscription.EMPTY;
@@ -1213,7 +1268,7 @@
          * @returns OverlayConfig
          */
         McDropdownTrigger.prototype.getOverlayConfig = function () {
-            return new overlay.OverlayConfig({
+            return new i1$1.OverlayConfig({
                 positionStrategy: this.overlay.position()
                     .flexibleConnectedTo(this.elementRef)
                     .withLockedPosition()
@@ -1355,66 +1410,94 @@
         };
         return McDropdownTrigger;
     }());
-    McDropdownTrigger.decorators = [
-        { type: core.Directive, args: [{
-                    selector: "[mcDropdownTriggerFor]",
-                    exportAs: 'mcDropdownTrigger',
-                    host: {
-                        class: 'mc-dropdown-trigger',
-                        '[class.mc-pressed]': 'opened',
-                        '(mousedown)': 'handleMousedown($event)',
-                        '(keydown)': 'handleKeydown($event)',
-                        '(click)': 'handleClick($event)'
-                    }
-                },] }
-    ];
-    /** @nocollapse */
-    McDropdownTrigger.ctorParameters = function () { return [
-        { type: overlay.Overlay },
-        { type: core.ElementRef },
-        { type: core.ViewContainerRef },
-        { type: undefined, decorators: [{ type: core.Inject, args: [MC_DROPDOWN_SCROLL_STRATEGY,] }] },
-        { type: McDropdown, decorators: [{ type: core.Optional }] },
-        { type: McDropdownItem, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
-        { type: a11y.FocusMonitor }
-    ]; };
-    McDropdownTrigger.propDecorators = {
-        data: [{ type: core.Input, args: ['mcDropdownTriggerData',] }],
-        openByArrowDown: [{ type: core.Input }],
-        restoreFocus: [{ type: core.Input, args: ['mcDropdownTriggerRestoreFocus',] }],
-        dropdown: [{ type: core.Input, args: ['mcDropdownTriggerFor',] }],
-        dropdownOpened: [{ type: core.Output }],
-        dropdownClosed: [{ type: core.Output }]
-    };
+    /** @nocollapse */ McDropdownTrigger.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownTrigger, deps: [{ token: i1__namespace$1.Overlay }, { token: i0__namespace.ElementRef }, { token: i0__namespace.ViewContainerRef }, { token: MC_DROPDOWN_SCROLL_STRATEGY }, { token: McDropdown, optional: true }, { token: McDropdownItem, optional: true, self: true }, { token: i4__namespace.Directionality, optional: true }, { token: i1__namespace.FocusMonitor }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McDropdownTrigger.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McDropdownTrigger, selector: "[mcDropdownTriggerFor]", inputs: { data: ["mcDropdownTriggerData", "data"], openByArrowDown: "openByArrowDown", restoreFocus: ["mcDropdownTriggerRestoreFocus", "restoreFocus"], dropdown: ["mcDropdownTriggerFor", "dropdown"] }, outputs: { dropdownOpened: "dropdownOpened", dropdownClosed: "dropdownClosed" }, host: { listeners: { "mousedown": "handleMousedown($event)", "keydown": "handleKeydown($event)", "click": "handleClick($event)" }, properties: { "class.mc-pressed": "opened" }, classAttribute: "mc-dropdown-trigger" }, exportAs: ["mcDropdownTrigger"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownTrigger, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: "[mcDropdownTriggerFor]",
+                        exportAs: 'mcDropdownTrigger',
+                        host: {
+                            class: 'mc-dropdown-trigger',
+                            '[class.mc-pressed]': 'opened',
+                            '(mousedown)': 'handleMousedown($event)',
+                            '(keydown)': 'handleKeydown($event)',
+                            '(click)': 'handleClick($event)'
+                        }
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i1__namespace$1.Overlay }, { type: i0__namespace.ElementRef }, { type: i0__namespace.ViewContainerRef }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [MC_DROPDOWN_SCROLL_STRATEGY]
+                        }] }, { type: McDropdown, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: McDropdownItem, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: i4__namespace.Directionality, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i1__namespace.FocusMonitor }];
+        }, propDecorators: { data: [{
+                    type: i0.Input,
+                    args: ['mcDropdownTriggerData']
+                }], openByArrowDown: [{
+                    type: i0.Input
+                }], restoreFocus: [{
+                    type: i0.Input,
+                    args: ['mcDropdownTriggerRestoreFocus']
+                }], dropdown: [{
+                    type: i0.Input,
+                    args: ['mcDropdownTriggerFor']
+                }], dropdownOpened: [{
+                    type: i0.Output
+                }], dropdownClosed: [{
+                    type: i0.Output
+                }] } });
 
     var McDropdownModule = /** @class */ (function () {
         function McDropdownModule() {
         }
         return McDropdownModule;
     }());
-    McDropdownModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        overlay.OverlayModule,
-                        icon.McIconModule
-                    ],
-                    exports: [
-                        McDropdown,
-                        McDropdownItem,
-                        McDropdownTrigger,
-                        McDropdownContent
-                    ],
-                    declarations: [
-                        McDropdown,
-                        McDropdownItem,
-                        McDropdownTrigger,
-                        McDropdownContent
-                    ],
-                    providers: [MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER]
-                },] }
-    ];
+    /** @nocollapse */ McDropdownModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McDropdownModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownModule, declarations: [McDropdown,
+            McDropdownItem,
+            McDropdownTrigger,
+            McDropdownContent], imports: [i3.CommonModule,
+            i1$1.OverlayModule,
+            i2.McIconModule], exports: [McDropdown,
+            McDropdownItem,
+            McDropdownTrigger,
+            McDropdownContent] });
+    /** @nocollapse */ McDropdownModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownModule, providers: [MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER], imports: [[
+                i3.CommonModule,
+                i1$1.OverlayModule,
+                i2.McIconModule
+            ]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdownModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [
+                            i3.CommonModule,
+                            i1$1.OverlayModule,
+                            i2.McIconModule
+                        ],
+                        exports: [
+                            McDropdown,
+                            McDropdownItem,
+                            McDropdownTrigger,
+                            McDropdownContent
+                        ],
+                        declarations: [
+                            McDropdown,
+                            McDropdownItem,
+                            McDropdownTrigger,
+                            McDropdownContent
+                        ],
+                        providers: [MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.

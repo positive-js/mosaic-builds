@@ -2,6 +2,7 @@ import { Directionality } from '@angular/cdk/bidi';
 import { AfterContentInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { DateAdapter, McDateFormats } from '@ptsecurity/cdk/datetime';
 import { McCalendarBody, McCalendarCell, McCalendarCellCssClasses } from './calendar-body.component';
+import * as i0 from "@angular/core";
 /**
  * An internal component used to display a single month in the datepicker.
  * @docs-private
@@ -87,4 +88,6 @@ export declare class McMonthView<D> implements AfterContentInit {
     private getValidDateOrNull;
     /** Determines whether the user has the RTL layout direction. */
     private isRtl;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McMonthView<any>, [null, { optional: true; }, { optional: true; }, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McMonthView<any>, "mc-month-view", ["mcMonthView"], { "activeDate": "activeDate"; "selected": "selected"; "minDate": "minDate"; "maxDate": "maxDate"; "dateFilter": "dateFilter"; "dateClass": "dateClass"; }, { "selectedChange": "selectedChange"; "userSelection": "userSelection"; "activeDateChange": "activeDateChange"; }, never, never>;
 }

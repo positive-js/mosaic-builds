@@ -3,6 +3,7 @@ import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, Overla
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
+import * as i0 from "@angular/core";
 export declare type ArrowPlacements = HorizontalConnectionPos | VerticalConnectionPos;
 export declare const ArrowPlacements: {
     Top: ArrowPlacements;
@@ -56,6 +57,8 @@ export declare class McTooltipComponent {
     handleBodyInteraction(): void;
     get isTemplateRef(): boolean;
     get isNonEmptyString(): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTooltipComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTooltipComponent, "mc-tooltip-component", never, { "mcMouseEnterDelay": "mcMouseEnterDelay"; "mcMouseLeaveDelay": "mcMouseLeaveDelay"; "mcTitle": "mcTitle"; "mcTrigger": "mcTrigger"; "mcPlacement": "mcPlacement"; "mcTooltipClass": "mcTooltipClass"; "mcVisible": "mcVisible"; "mcArrowPlacement": "mcArrowPlacement"; }, { "mcVisibleChange": "mcVisibleChange"; }, never, never>;
 }
 export declare const MC_TOOLTIP_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
@@ -148,4 +151,6 @@ export declare class McTooltip implements OnInit, OnDestroy {
     /** Inverts an overlay position. */
     private invertPosition;
     private getTooltipArrowElem;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTooltip, [null, null, null, null, null, null, { optional: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTooltip, "[mcTooltip], [attribute^=\"mcTooltip\"]", ["mcTooltip"], { "mcTitle": "mcTooltip"; "setTitle": "mcTitle"; "disabled": "mcTooltipDisabled"; "mcMouseEnterDelay": "mcMouseEnterDelay"; "mcMouseLeaveDelay": "mcMouseLeaveDelay"; "mcTrigger": "mcTrigger"; "mcPlacement": "mcPlacement"; "mcTooltipClass": "mcTooltipClass"; "mcVisible": "mcVisible"; "mcArrowPlacement": "mcArrowPlacement"; }, { "mcVisibleChange": "mcVisibleChange"; }, never>;
 }

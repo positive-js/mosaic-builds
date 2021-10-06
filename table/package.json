@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/table/ptsecurity-mosaic-table.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-table.js",
   "typings": "ptsecurity-mosaic-table.d.ts",
-  "metadata": "ptsecurity-mosaic-table.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/table"
 }

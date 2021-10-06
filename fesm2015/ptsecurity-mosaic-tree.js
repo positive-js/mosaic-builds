@@ -1,8 +1,12 @@
+import * as i2 from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { Directive, Input, Component, ViewEncapsulation, InjectionToken, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, NgZone, Inject, Output, forwardRef, QueryList, IterableDiffers, Attribute, ViewChild, ContentChildren, NgModule } from '@angular/core';
-import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTree, CdkTreeNode, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
+import * as i0 from '@angular/core';
+import { Directive, Input, Component, ViewEncapsulation, InjectionToken, EventEmitter, ChangeDetectionStrategy, Inject, Output, forwardRef, QueryList, Attribute, ViewChild, ContentChildren, NgModule } from '@angular/core';
+import * as i1 from '@ptsecurity/cdk/tree';
+import { CdkTreeNodeDef, CdkTreeNodePadding, CdkTreeNode, CdkTree, CdkTreeNodeOutlet, CdkTreeModule } from '@ptsecurity/cdk/tree';
+import * as i1$1 from '@ptsecurity/mosaic/core';
 import { MultipleMode, getMcSelectNonArrayValueError, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
-import { map, take, takeUntil } from 'rxjs/operators';
+import { map, take, takeUntil, delay } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey, PAGE_DOWN, PAGE_UP, END, HOME, ENTER, SPACE, RIGHT_ARROW, LEFT_ARROW, UP_ARROW, DOWN_ARROW } from '@ptsecurity/cdk/keycodes';
 import { Subject, merge, BehaviorSubject } from 'rxjs';
@@ -12,16 +16,19 @@ import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 
 class McTreeNodeDef extends CdkTreeNodeDef {
 }
-McTreeNodeDef.decorators = [
-    { type: Directive, args: [{
-                selector: '[mcTreeNodeDef]',
-                inputs: ['when: mcTreeNodeDefWhen'],
-                providers: [{ provide: CdkTreeNodeDef, useExisting: McTreeNodeDef }]
-            },] }
-];
-McTreeNodeDef.propDecorators = {
-    data: [{ type: Input, args: ['mcTreeNode',] }]
-};
+/** @nocollapse */ McTreeNodeDef.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeNodeDef, deps: null, target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McTreeNodeDef.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeDef, selector: "[mcTreeNodeDef]", inputs: { when: ["mcTreeNodeDefWhen", "when"], data: ["mcTreeNode", "data"] }, providers: [{ provide: CdkTreeNodeDef, useExisting: McTreeNodeDef }], usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeNodeDef, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mcTreeNodeDef]',
+                    inputs: ['when: mcTreeNodeDefWhen'],
+                    providers: [{ provide: CdkTreeNodeDef, useExisting: McTreeNodeDef }]
+                }]
+        }], propDecorators: { data: [{
+                type: Input,
+                args: ['mcTreeNode']
+            }] } });
 
 class McTreeNodePadding extends CdkTreeNodePadding {
     constructor() {
@@ -48,16 +55,21 @@ class McTreeNodePadding extends CdkTreeNodePadding {
         this.setPadding();
     }
 }
-McTreeNodePadding.decorators = [
-    { type: Directive, args: [{
-                selector: '[mcTreeNodePadding]',
-                providers: [{ provide: CdkTreeNodePadding, useExisting: McTreeNodePadding }]
-            },] }
-];
-McTreeNodePadding.propDecorators = {
-    level: [{ type: Input, args: ['mcTreeNodePadding',] }],
-    indent: [{ type: Input, args: ['mcTreeNodePaddingIndent',] }]
-};
+/** @nocollapse */ McTreeNodePadding.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeNodePadding, deps: null, target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McTreeNodePadding.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodePadding, selector: "[mcTreeNodePadding]", inputs: { level: ["mcTreeNodePadding", "level"], indent: ["mcTreeNodePaddingIndent", "indent"] }, providers: [{ provide: CdkTreeNodePadding, useExisting: McTreeNodePadding }], usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeNodePadding, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mcTreeNodePadding]',
+                    providers: [{ provide: CdkTreeNodePadding, useExisting: McTreeNodePadding }]
+                }]
+        }], propDecorators: { level: [{
+                type: Input,
+                args: ['mcTreeNodePadding']
+            }], indent: [{
+                type: Input,
+                args: ['mcTreeNodePaddingIndent']
+            }] } });
 
 class McTreeNodeToggleComponent {
     constructor(tree, treeNode) {
@@ -85,30 +97,31 @@ class McTreeNodeToggleComponent {
         event.stopPropagation();
     }
 }
-McTreeNodeToggleComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-tree-node-toggle',
-                template: `
+/** @nocollapse */ McTreeNodeToggleComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeNodeToggleComponent, deps: [{ token: i1.CdkTree }, { token: i1.CdkTreeNode }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McTreeNodeToggleComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeToggleComponent, selector: "mc-tree-node-toggle", inputs: { node: "node", recursive: ["cdkTreeNodeToggleRecursive", "recursive"] }, host: { listeners: { "click": "toggle($event)" }, properties: { "class.mc-opened": "iconState", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-node-toggle" }, ngImport: i0, template: `
+        <i class="mc mc-icon mc-angle-down-S_16"></i>
+    `, isInline: true, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeNodeToggleComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-tree-node-toggle',
+                    template: `
         <i class="mc mc-icon mc-angle-down-S_16"></i>
     `,
-                host: {
-                    class: 'mc-tree-node-toggle',
-                    '[class.mc-opened]': 'iconState',
-                    '[attr.disabled]': 'disabled || null',
-                    '(click)': 'toggle($event)'
-                },
-                encapsulation: ViewEncapsulation.None
-            },] }
-];
-/** @nocollapse */
-McTreeNodeToggleComponent.ctorParameters = () => [
-    { type: CdkTree },
-    { type: CdkTreeNode }
-];
-McTreeNodeToggleComponent.propDecorators = {
-    node: [{ type: Input }],
-    recursive: [{ type: Input, args: ['cdkTreeNodeToggleRecursive',] }]
-};
+                    host: {
+                        class: 'mc-tree-node-toggle',
+                        '[class.mc-opened]': 'iconState',
+                        '[attr.disabled]': 'disabled || null',
+                        '(click)': 'toggle($event)'
+                    },
+                    encapsulation: ViewEncapsulation.None
+                }]
+        }], ctorParameters: function () { return [{ type: i1.CdkTree }, { type: i1.CdkTreeNode }]; }, propDecorators: { node: [{
+                type: Input
+            }], recursive: [{
+                type: Input,
+                args: ['cdkTreeNodeToggleRecursive']
+            }] } });
 class McTreeNodeToggleDirective {
     constructor(tree, treeNode) {
         this.tree = tree;
@@ -132,23 +145,21 @@ class McTreeNodeToggleDirective {
         event.stopPropagation();
     }
 }
-McTreeNodeToggleDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mcTreeNodeToggle]',
-                host: {
-                    '[attr.disabled]': 'disabled || null',
-                    '(click)': 'toggle($event)'
-                }
-            },] }
-];
-/** @nocollapse */
-McTreeNodeToggleDirective.ctorParameters = () => [
-    { type: CdkTree },
-    { type: CdkTreeNode }
-];
-McTreeNodeToggleDirective.propDecorators = {
-    recursive: [{ type: Input, args: ['cdkTreeNodeToggleRecursive',] }]
-};
+/** @nocollapse */ McTreeNodeToggleDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeNodeToggleDirective, deps: [{ token: i1.CdkTree }, { token: i1.CdkTreeNode }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McTreeNodeToggleDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeToggleDirective, selector: "[mcTreeNodeToggle]", inputs: { recursive: ["cdkTreeNodeToggleRecursive", "recursive"] }, host: { listeners: { "click": "toggle($event)" }, properties: { "attr.disabled": "disabled || null" } }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeNodeToggleDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mcTreeNodeToggle]',
+                    host: {
+                        '[attr.disabled]': 'disabled || null',
+                        '(click)': 'toggle($event)'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: i1.CdkTree }, { type: i1.CdkTreeNode }]; }, propDecorators: { recursive: [{
+                type: Input,
+                args: ['cdkTreeNodeToggleRecursive']
+            }] } });
 
 /**
  * Injection token used to provide the parent component to options.
@@ -302,39 +313,39 @@ class McTreeOption extends CdkTreeNode {
         this.changeDetectorRef.markForCheck();
     }
 }
-McTreeOption.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-tree-option',
-                exportAs: 'mcTreeOption',
-                template: "<ng-content select=\"[mc-icon]\"></ng-content>\n\n<ng-content select=\"mc-tree-node-toggle\"></ng-content>\n\n<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n",
-                host: {
-                    '[attr.id]': 'id',
-                    '[attr.tabindex]': '-1',
-                    '[attr.disabled]': 'disabled || null',
-                    class: 'mc-tree-option',
-                    '[class.mc-selected]': 'selected',
-                    '[class.mc-focused]': 'hasFocus',
-                    '(focus)': 'focus()',
-                    '(blur)': 'blur()',
-                    '(click)': 'selectViaInteraction($event)'
-                },
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-                providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
-            },] }
-];
-/** @nocollapse */
-McTreeOption.ctorParameters = () => [
-    { type: ElementRef },
-    { type: ChangeDetectorRef },
-    { type: NgZone },
-    { type: undefined, decorators: [{ type: Inject, args: [MC_TREE_OPTION_PARENT_COMPONENT,] }] }
-];
-McTreeOption.propDecorators = {
-    disabled: [{ type: Input }],
-    showCheckbox: [{ type: Input }],
-    onSelectionChange: [{ type: Output }]
-};
+/** @nocollapse */ McTreeOption.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeOption, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: i0.NgZone }, { token: MC_TREE_OPTION_PARENT_COMPONENT }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McTreeOption.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeOption, selector: "mc-tree-option", inputs: { disabled: "disabled", showCheckbox: "showCheckbox" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "focus": "focus()", "blur": "blur()", "click": "selectViaInteraction($event)" }, properties: { "attr.id": "id", "attr.tabindex": "-1", "attr.disabled": "disabled || null", "class.mc-selected": "selected", "class.mc-focused": "hasFocus" }, classAttribute: "mc-tree-option" }, providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }], exportAs: ["mcTreeOption"], usesInheritance: true, ngImport: i0, template: "<ng-content select=\"[mc-icon]\"></ng-content>\n\n<ng-content select=\"mc-tree-node-toggle\"></ng-content>\n\n<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", components: [{ type: i1$1.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeOption, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-tree-option',
+                    exportAs: 'mcTreeOption',
+                    templateUrl: './tree-option.html',
+                    host: {
+                        '[attr.id]': 'id',
+                        '[attr.tabindex]': '-1',
+                        '[attr.disabled]': 'disabled || null',
+                        class: 'mc-tree-option',
+                        '[class.mc-selected]': 'selected',
+                        '[class.mc-focused]': 'hasFocus',
+                        '(focus)': 'focus()',
+                        '(blur)': 'blur()',
+                        '(click)': 'selectViaInteraction($event)'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [{ provide: CdkTreeNode, useExisting: McTreeOption }]
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: i0.NgZone }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [MC_TREE_OPTION_PARENT_COMPONENT]
+                }] }]; }, propDecorators: { disabled: [{
+                type: Input
+            }], showCheckbox: [{
+                type: Input
+            }], onSelectionChange: [{
+                type: Output
+            }] } });
 
 /* tslint:disable:no-empty */
 const MC_SELECTION_TREE_VALUE_ACCESSOR = {
@@ -439,7 +450,8 @@ class McTreeSelection extends CdkTree {
         return this.multipleMode === MultipleMode.CHECKBOX;
     }
     ngAfterContentInit() {
-        this.unorderedOptions.changes.subscribe(this.updateRenderedOptions);
+        this.unorderedOptions.changes
+            .subscribe(this.updateRenderedOptions);
         this.keyManager = new FocusKeyManager(this.renderedOptions)
             .withVerticalOrientation(true)
             .withHorizontalOrientation(null);
@@ -464,20 +476,19 @@ class McTreeSelection extends CdkTree {
             this.renderedOptions.notifyOnChanges();
         });
         this.renderedOptions.changes
-            .pipe(takeUntil(this.destroy))
+            .pipe(takeUntil(this.destroy), delay(0))
             .subscribe((options) => {
             this.resetOptions();
             // Check to see if we need to update our tab index
             this.updateTabIndex();
-            // todo need to do optimisation
             options.forEach((option) => {
-                option.deselect();
-                this.getSelectedValues().forEach((selectedValue) => {
-                    if (option.value === selectedValue) {
-                        option.select();
-                    }
-                });
-                option.changeDetectorRef.detectChanges();
+                if (this.getSelectedValues().includes(option.value)) {
+                    option.select();
+                }
+                else {
+                    option.deselect();
+                }
+                option.markForCheck();
             });
         });
     }
@@ -759,48 +770,60 @@ class McTreeSelection extends CdkTree {
         return $event.relatedTarget.classList.contains('mc-tree-option');
     }
 }
-McTreeSelection.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-tree-selection',
-                exportAs: 'mcTreeSelection',
-                template: '<ng-container cdkTreeNodeOutlet></ng-container>',
-                host: {
-                    class: 'mc-tree-selection',
-                    '[attr.tabindex]': 'tabIndex',
-                    '[attr.disabled]': 'disabled || null',
-                    '(blur)': 'blur()',
-                    '(focus)': 'focus($event)',
-                    '(keydown)': 'onKeyDown($event)',
-                    '(window:resize)': 'updateScrollSize()'
-                },
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                providers: [
-                    MC_SELECTION_TREE_VALUE_ACCESSOR,
-                    { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
-                    { provide: CdkTree, useExisting: McTreeSelection }
-                ],
-                styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;padding-right:var(--mc-tree-size-padding-right,16px);height:var(--mc-tree-size-node-height,28px);word-wrap:break-word;border:var(--mc-tree-size-border-width,2px) solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px;cursor:pointer}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}"]
-            },] }
-];
-/** @nocollapse */
-McTreeSelection.ctorParameters = () => [
-    { type: ElementRef },
-    { type: IterableDiffers },
-    { type: ChangeDetectorRef },
-    { type: MultipleMode, decorators: [{ type: Attribute, args: ['multiple',] }] }
-];
-McTreeSelection.propDecorators = {
-    nodeOutlet: [{ type: ViewChild, args: [CdkTreeNodeOutlet, { static: true },] }],
-    unorderedOptions: [{ type: ContentChildren, args: [McTreeOption,] }],
-    treeControl: [{ type: Input }],
-    navigationChange: [{ type: Output }],
-    selectionChange: [{ type: Output }],
-    autoSelect: [{ type: Input }],
-    noUnselectLast: [{ type: Input }],
-    disabled: [{ type: Input }],
-    tabIndex: [{ type: Input }]
-};
+/** @nocollapse */ McTreeSelection.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeSelection, deps: [{ token: i0.ElementRef }, { token: i0.IterableDiffers }, { token: i0.ChangeDetectorRef }, { token: 'multiple', attribute: true }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McTreeSelection.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeSelection, selector: "mc-tree-selection", inputs: { treeControl: "treeControl", autoSelect: "autoSelect", noUnselectLast: "noUnselectLast", disabled: "disabled", tabIndex: "tabIndex" }, outputs: { navigationChange: "navigationChange", selectionChange: "selectionChange" }, host: { listeners: { "blur": "blur()", "focus": "focus($event)", "keydown": "onKeyDown($event)", "window:resize": "updateScrollSize()" }, properties: { "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-selection" }, providers: [
+        MC_SELECTION_TREE_VALUE_ACCESSOR,
+        { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
+        { provide: CdkTree, useExisting: McTreeSelection }
+    ], queries: [{ propertyName: "unorderedOptions", predicate: McTreeOption }], viewQueries: [{ propertyName: "nodeOutlet", first: true, predicate: CdkTreeNodeOutlet, descendants: true, static: true }], exportAs: ["mcTreeSelection"], usesInheritance: true, ngImport: i0, template: '<ng-container cdkTreeNodeOutlet></ng-container>', isInline: true, styles: [".mc-tree-selection{display:block}.mc-tree-option{display:flex;align-items:center;padding-right:16px;padding-right:var(--mc-tree-size-padding-right, 16px);height:28px;height:var(--mc-tree-size-node-height, 28px);word-wrap:break-word;border:2px solid transparent;border:var(--mc-tree-size-border-width, 2px) solid transparent}.mc-tree-option>.mc-icon{margin-right:4px;cursor:pointer}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-node-toggle{margin-right:4px;cursor:pointer}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}\n"], directives: [{ type: i1.CdkTreeNodeOutlet, selector: "[cdkTreeNodeOutlet]" }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeSelection, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-tree-selection',
+                    exportAs: 'mcTreeSelection',
+                    template: '<ng-container cdkTreeNodeOutlet></ng-container>',
+                    styleUrls: ['./tree.scss'],
+                    host: {
+                        class: 'mc-tree-selection',
+                        '[attr.tabindex]': 'tabIndex',
+                        '[attr.disabled]': 'disabled || null',
+                        '(blur)': 'blur()',
+                        '(focus)': 'focus($event)',
+                        '(keydown)': 'onKeyDown($event)',
+                        '(window:resize)': 'updateScrollSize()'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    providers: [
+                        MC_SELECTION_TREE_VALUE_ACCESSOR,
+                        { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
+                        { provide: CdkTree, useExisting: McTreeSelection }
+                    ]
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.IterableDiffers }, { type: i0.ChangeDetectorRef }, { type: i1$1.MultipleMode, decorators: [{
+                    type: Attribute,
+                    args: ['multiple']
+                }] }]; }, propDecorators: { nodeOutlet: [{
+                type: ViewChild,
+                args: [CdkTreeNodeOutlet, { static: true }]
+            }], unorderedOptions: [{
+                type: ContentChildren,
+                args: [McTreeOption]
+            }], treeControl: [{
+                type: Input
+            }], navigationChange: [{
+                type: Output
+            }], selectionChange: [{
+                type: Output
+            }], autoSelect: [{
+                type: Input
+            }], noUnselectLast: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], tabIndex: [{
+                type: Input
+            }] } });
 
 const MC_TREE_DIRECTIVES = [
     McTreeSelection,
@@ -812,13 +835,27 @@ const MC_TREE_DIRECTIVES = [
 ];
 class McTreeModule {
 }
-McTreeModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule, CdkTreeModule, McPseudoCheckboxModule],
-                exports: MC_TREE_DIRECTIVES,
-                declarations: MC_TREE_DIRECTIVES
-            },] }
-];
+/** @nocollapse */ McTreeModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McTreeModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeModule, declarations: [McTreeSelection,
+        McTreeOption,
+        McTreeNodeDef,
+        McTreeNodePadding,
+        McTreeNodeToggleComponent,
+        McTreeNodeToggleDirective], imports: [CommonModule, CdkTreeModule, McPseudoCheckboxModule], exports: [McTreeSelection,
+        McTreeOption,
+        McTreeNodeDef,
+        McTreeNodePadding,
+        McTreeNodeToggleComponent,
+        McTreeNodeToggleDirective] });
+/** @nocollapse */ McTreeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeModule, imports: [[CommonModule, CdkTreeModule, McPseudoCheckboxModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTreeModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [CommonModule, CdkTreeModule, McPseudoCheckboxModule],
+                    exports: MC_TREE_DIRECTIVES,
+                    declarations: MC_TREE_DIRECTIVES
+                }]
+        }] });
 
 /**
  * Tree flattener to convert a normal type of node to node with children & level information.

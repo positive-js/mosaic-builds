@@ -1,5 +1,6 @@
 import { OnChanges, Provider, SimpleChanges } from '@angular/core';
 import { AbstractControl, ValidationErrors, Validator } from '@angular/forms';
+import * as i0 from "@angular/core";
 export declare const MIN_VALIDATOR: Provider;
 /**
  * A directive which installs the {@link MinValidator} for any `formControlName`,
@@ -15,6 +16,8 @@ export declare class MinValidator implements Validator, OnChanges {
     validate(c: AbstractControl): ValidationErrors | null;
     registerOnValidatorChange(fn: () => void): void;
     private createValidator;
+    static ɵfac: i0.ɵɵFactoryDeclaration<MinValidator, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<MinValidator, "[min][formControlName],[min][formControl],[min][ngModel]", never, { "min": "min"; }, {}, never>;
 }
 export declare const MAX_VALIDATOR: Provider;
 /**
@@ -31,4 +34,6 @@ export declare class MaxValidator implements Validator, OnChanges {
     validate(c: AbstractControl): ValidationErrors | null;
     registerOnValidatorChange(fn: () => void): void;
     private createValidator;
+    static ɵfac: i0.ɵɵFactoryDeclaration<MaxValidator, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<MaxValidator, "[max][formControlName],[max][formControl],[max][ngModel]", never, { "max": "max"; }, {}, never>;
 }

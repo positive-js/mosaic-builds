@@ -4,6 +4,7 @@ import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, McVali
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 import { McNumberInput } from './input-number';
+import * as i0 from "@angular/core";
 export declare class McInputBase {
     defaultErrorStateMatcher: ErrorStateMatcher;
     parentForm: NgForm;
@@ -105,6 +106,10 @@ export declare class McInput extends McInputMixinBase implements McFormFieldCont
     protected isNeverEmpty(): boolean;
     /** Checks whether the input is invalid based on the native validation. */
     protected isBadInput(): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McInput, [null, { optional: true; self: true; }, { optional: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; }, { optional: true; }, null, { optional: true; self: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McInput, "input[mcInput]", ["mcInput"], { "errorStateMatcher": "errorStateMatcher"; "placeholder": "placeholder"; "disabled": "disabled"; "id": "id"; "required": "required"; "type": "type"; "value": "value"; }, {}, never>;
 }
 export declare class McInputMono {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McInputMono, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McInputMono, "input[mcInputMonospace]", ["McInputMonospace"], {}, {}, never>;
 }

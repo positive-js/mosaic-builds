@@ -3,6 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy }
 import { ControlValueAccessor } from '@angular/forms';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { McCheckboxClickAction } from './checkbox-config';
+import * as i0 from "@angular/core";
 /**
  * Provider Expression that allows mc-checkbox to register as a ControlValueAccessor.
  * This allows it to support [(ngModel)].
@@ -134,4 +135,6 @@ export declare class McCheckbox extends McCheckboxMixinBase implements ControlVa
     private emitChangeEvent;
     /** Function is called whenever the focus changes for the input element. */
     private onInputFocusChange;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McCheckbox, [null, null, null, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McCheckbox, "mc-checkbox", ["mcCheckbox"], { "color": "color"; "tabIndex": "tabIndex"; "ariaLabel": "aria-label"; "ariaLabelledby": "aria-labelledby"; "id": "id"; "labelPosition": "labelPosition"; "name": "name"; "value": "value"; "required": "required"; "checked": "checked"; "disabled": "disabled"; "indeterminate": "indeterminate"; }, { "change": "change"; "indeterminateChange": "indeterminateChange"; }, never, ["*"]>;
 }

@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/textarea/ptsecurity-mosaic-textarea.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-textarea.js",
   "typings": "ptsecurity-mosaic-textarea.d.ts",
-  "metadata": "ptsecurity-mosaic-textarea.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/textarea"
 }

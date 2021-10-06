@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/toggle/ptsecurity-mosaic-toggle.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-toggle.js",
   "typings": "ptsecurity-mosaic-toggle.d.ts",
-  "metadata": "ptsecurity-mosaic-toggle.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/toggle"
 }

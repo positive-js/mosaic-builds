@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/popover/ptsecurity-mosaic-popover.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-popover.js",
   "typings": "ptsecurity-mosaic-popover.d.ts",
-  "metadata": "ptsecurity-mosaic-popover.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/popover"
 }

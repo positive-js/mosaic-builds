@@ -2,7 +2,32 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/icon'), require('@angular/cdk/coercion'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/core'), require('rxjs'), require('rxjs/operators'), require('@angular/animations'), require('@ptsecurity/mosaic/design-tokens')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/navbar', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/mosaic/icon', '@angular/cdk/coercion', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/core', 'rxjs', 'rxjs/operators', '@angular/animations', '@ptsecurity/mosaic/design-tokens'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.navbar = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ptsecurity.mosaic.icon, global.ng.cdk.coercion, global.ptsecurity.mosaic.button, global.ptsecurity.mosaic.core, global.rxjs, global.rxjs.operators, global.ng.animations, global.ptsecurity.mosaic['design-tokens']));
-}(this, (function (exports, a11y, platform, common, core, icon, coercion, button, core$1, rxjs, operators, animations, designTokens) { 'use strict';
+}(this, (function (exports, i1, platform, i3, i0, i2, coercion, button, core, rxjs, operators, animations, designTokens) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
+    var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -328,16 +353,19 @@
         }
         return McNavbarLogo;
     }());
-    McNavbarLogo.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-navbar-logo, [mc-navbar-logo]',
-                    host: {
-                        class: 'mc-navbar-logo',
-                        '(mouseenter)': 'hovered.next(true)',
-                        '(mouseleave)': 'hovered.next(false)'
-                    }
-                },] }
-    ];
+    /** @nocollapse */ McNavbarLogo.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarLogo, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McNavbarLogo.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McNavbarLogo, selector: "mc-navbar-logo, [mc-navbar-logo]", host: { listeners: { "mouseenter": "hovered.next(true)", "mouseleave": "hovered.next(false)" }, classAttribute: "mc-navbar-logo" }, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarLogo, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'mc-navbar-logo, [mc-navbar-logo]',
+                        host: {
+                            class: 'mc-navbar-logo',
+                            '(mouseenter)': 'hovered.next(true)',
+                            '(mouseleave)': 'hovered.next(false)'
+                        }
+                    }]
+            }] });
     var McNavbarTitle = /** @class */ (function () {
         function McNavbarTitle(elementRef) {
             this.elementRef = elementRef;
@@ -359,20 +387,19 @@
         };
         return McNavbarTitle;
     }());
-    McNavbarTitle.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-navbar-title, [mc-navbar-title]',
-                    host: {
-                        class: 'mc-navbar-title',
-                        '(mouseenter)': 'hovered.next(true)',
-                        '(mouseleave)': 'hovered.next(false)'
-                    }
-                },] }
-    ];
-    /** @nocollapse */
-    McNavbarTitle.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
+    /** @nocollapse */ McNavbarTitle.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarTitle, deps: [{ token: i0__namespace.ElementRef }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McNavbarTitle.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McNavbarTitle, selector: "mc-navbar-title, [mc-navbar-title]", host: { listeners: { "mouseenter": "hovered.next(true)", "mouseleave": "hovered.next(false)" }, classAttribute: "mc-navbar-title" }, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarTitle, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'mc-navbar-title, [mc-navbar-title]',
+                        host: {
+                            class: 'mc-navbar-title',
+                            '(mouseenter)': 'hovered.next(true)',
+                            '(mouseleave)': 'hovered.next(false)'
+                        }
+                    }]
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }]; } });
     var McNavbarBrand = /** @class */ (function () {
         function McNavbarBrand() {
             this.hovered = false;
@@ -390,32 +417,40 @@
         };
         return McNavbarBrand;
     }());
-    McNavbarBrand.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-navbar-brand, [mc-navbar-brand]',
-                    host: {
-                        class: 'mc-navbar-brand',
-                        '[class.mc-hovered]': 'hovered'
-                    }
-                },] }
-    ];
-    McNavbarBrand.propDecorators = {
-        logo: [{ type: core.ContentChild, args: [McNavbarLogo,] }],
-        title: [{ type: core.ContentChild, args: [McNavbarTitle,] }]
-    };
+    /** @nocollapse */ McNavbarBrand.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarBrand, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McNavbarBrand.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McNavbarBrand, selector: "mc-navbar-brand, [mc-navbar-brand]", host: { properties: { "class.mc-hovered": "hovered" }, classAttribute: "mc-navbar-brand" }, queries: [{ propertyName: "logo", first: true, predicate: McNavbarLogo, descendants: true }, { propertyName: "title", first: true, predicate: McNavbarTitle, descendants: true }], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarBrand, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'mc-navbar-brand, [mc-navbar-brand]',
+                        host: {
+                            class: 'mc-navbar-brand',
+                            '[class.mc-hovered]': 'hovered'
+                        }
+                    }]
+            }], propDecorators: { logo: [{
+                    type: i0.ContentChild,
+                    args: [McNavbarLogo]
+                }], title: [{
+                    type: i0.ContentChild,
+                    args: [McNavbarTitle]
+                }] } });
     var McNavbarDivider = /** @class */ (function () {
         function McNavbarDivider() {
         }
         return McNavbarDivider;
     }());
-    McNavbarDivider.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-navbar-divider',
-                    host: {
-                        class: 'mc-navbar-divider'
-                    }
-                },] }
-    ];
+    /** @nocollapse */ McNavbarDivider.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarDivider, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McNavbarDivider.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McNavbarDivider, selector: "mc-navbar-divider", host: { classAttribute: "mc-navbar-divider" }, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarDivider, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'mc-navbar-divider',
+                        host: {
+                            class: 'mc-navbar-divider'
+                        }
+                    }]
+            }] });
     var McNavbarItemBase = /** @class */ (function () {
         function McNavbarItemBase(elementRef) {
             this.elementRef = elementRef;
@@ -426,26 +461,25 @@
         };
         return McNavbarItemBase;
     }());
-    McNavbarItemBase.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
-                    host: {
-                        '[class.mc-vertical]': 'vertical',
-                        '[class.mc-horizontal]': 'horizontal',
-                        '[class.mc-opened]': 'vertical && !closed',
-                        '[class.mc-closed]': 'vertical && closed'
-                    }
-                },] }
-    ];
-    /** @nocollapse */
-    McNavbarItemBase.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
-    McNavbarItemBase.propDecorators = {
-        button: [{ type: core.ContentChild, args: [button.McButtonCssStyler,] }]
-    };
+    /** @nocollapse */ McNavbarItemBase.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarItemBase, deps: [{ token: i0__namespace.ElementRef }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McNavbarItemBase.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McNavbarItemBase, selector: "mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]", host: { properties: { "class.mc-vertical": "vertical", "class.mc-horizontal": "horizontal", "class.mc-opened": "vertical && !closed", "class.mc-closed": "vertical && closed" } }, queries: [{ propertyName: "button", first: true, predicate: button.McButtonCssStyler, descendants: true }], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarItemBase, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
+                        host: {
+                            '[class.mc-vertical]': 'vertical',
+                            '[class.mc-horizontal]': 'horizontal',
+                            '[class.mc-opened]': 'vertical && !closed',
+                            '[class.mc-closed]': 'vertical && closed'
+                        }
+                    }]
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }]; }, propDecorators: { button: [{
+                    type: i0.ContentChild,
+                    args: [button.McButtonCssStyler]
+                }] } });
     // tslint:disable-next-line:naming-convention
-    var McNavbarMixinBase = core$1.mixinDisabled(McNavbarItemBase);
+    var McNavbarMixinBase = core.mixinDisabled(McNavbarItemBase);
     var McNavbarItem = /** @class */ (function (_super) {
         __extends(McNavbarItem, _super);
         function McNavbarItem(focusMonitor, elementRef) {
@@ -502,52 +536,64 @@
         };
         return McNavbarItem;
     }(McNavbarMixinBase));
-    McNavbarItem.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-navbar-item, [mc-navbar-item]',
-                    exportAs: 'mcNavbarItem',
-                    template: "<ng-content></ng-content>",
-                    host: {
-                        class: 'mc-navbar-item',
-                        '[class.mc-navbar-item_collapsed]': 'collapsed',
-                        '[class.mc-navbar-item_button]': 'button',
-                        '[attr.title]': 'collapsedTitle',
-                        '[attr.tabindex]': 'tabIndex',
-                        '[attr.disabled]': 'disabled || null'
-                    },
-                    inputs: ['disabled'],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-navbar-title{display:inline-block;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.mc-navbar-item{position:relative;display:flex;align-items:center;height:var(--mc-navbar-item-size-height,48px);padding-left:var(--mc-navbar-item-size-padding,16px);padding-right:var(--mc-navbar-item-size-padding,16px)}.mc-navbar-item .mc-icon{min-width:16px;min-height:16px}.mc-navbar-item.mc-vertical .mc-navbar-title{padding-left:26px}.mc-navbar-item.mc-vertical .mc-icon+.mc-navbar-title,.mc-navbar-item.mc-vertical .mc-navbar-title+.mc-icon{padding-left:var(--mc-vertical-navbar-size-icon-margin,10px)}.mc-navbar-item.mc-vertical .mc-badge{position:absolute;display:flex;align-items:center;justify-content:center}.mc-navbar-item.mc-vertical.mc-opened .mc-badge{right:16px;height:24px;padding-right:7px;padding-left:7px}.mc-navbar-item.mc-vertical.mc-closed .mc-badge{top:8px;right:8px;height:16px;padding-right:4px;padding-left:4px}.mc-navbar-item.mc-vertical.mc-closed .mc-navbar-title{display:none}.mc-navbar-item.mc-vertical.mc-closed.mc-navbar-item_button{padding-left:8px;padding-right:8px}.mc-navbar-item.mc-horizontal .mc-icon+.mc-navbar-title,.mc-navbar-item.mc-horizontal .mc-navbar-title+.mc-icon{padding-left:var(--mc-navbar-size-icon-margin,4px)}.mc-navbar-item.mc-horizontal.mc-navbar-item_collapsed .mc-navbar-title{display:none}.mc-navbar-item.mc-navbar-item_button .mc-icon-button{flex:1}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper{justify-content:center}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper .mc-icon.mc-icon_left{margin-left:unset}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper .mc-icon.mc-icon_right{margin-right:unset}a.mc-navbar-item,a.mc-navbar-title{text-decoration:none}", ".mc-navbar-logo{display:flex}.mc-navbar-brand{position:relative;display:flex;align-items:center}.mc-navbar-brand .mc-navbar-title{cursor:pointer}a.mc-navbar-brand{text-decoration:none}.mc-navbar-brand.mc-horizontal{height:var(--mc-navbar-item-size-height,48px);padding-right:var(--mc-navbar-brand-size-margin-right,24px)}.mc-navbar-brand.mc-horizontal .mc-navbar-title{padding-left:var(--mc-navbar-brand-size-padding,12px);padding-right:0}.mc-navbar-brand.mc-vertical{flex-direction:column}.mc-navbar-brand.mc-vertical .mc-navbar-logo{flex-direction:column;height:var(--mc-navbar-item-size-height,48px)}.mc-navbar-brand.mc-vertical .mc-navbar-title{display:flex;align-items:center;height:var(--mc-navbar-item-size-height,48px);padding-left:0}.mc-navbar-brand.mc-vertical.mc-opened{align-items:unset}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-item{position:absolute;top:0;right:0}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-logo{padding-left:16px;justify-content:flex-end}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-title{padding-left:16px}.mc-navbar-brand.mc-vertical.mc-closed{padding:0}.mc-navbar-brand.mc-vertical.mc-closed .mc-navbar-logo{align-items:center;justify-content:center;width:48px}.mc-navbar-brand.mc-vertical.mc-closed .mc-navbar-title{display:none}", ".mc-navbar-divider{display:block}.mc-navbar-divider.mc-vertical{height:1px;margin:8px 16px}.mc-navbar-divider.mc-vertical.mc-closed{margin-right:10px;margin-left:10px}.mc-navbar-divider.mc-horizontal{width:1px;height:28px;margin-left:8px;margin-right:8px}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McNavbarItem.ctorParameters = function () { return [
-        { type: a11y.FocusMonitor },
-        { type: core.ElementRef }
-    ]; };
-    McNavbarItem.propDecorators = {
-        button: [{ type: core.ContentChild, args: [button.McButtonCssStyler,] }],
-        title: [{ type: core.ContentChild, args: [McNavbarTitle,] }],
-        icon: [{ type: core.ContentChild, args: [icon.McIcon,] }],
-        collapsable: [{ type: core.Input }],
-        collapsed: [{ type: core.Input }],
-        collapsedTitle: [{ type: core.Input }]
-    };
+    /** @nocollapse */ McNavbarItem.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarItem, deps: [{ token: i1__namespace.FocusMonitor }, { token: i0__namespace.ElementRef }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McNavbarItem.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McNavbarItem, selector: "mc-navbar-item, [mc-navbar-item]", inputs: { disabled: "disabled", collapsable: "collapsable", collapsed: "collapsed", collapsedTitle: "collapsedTitle" }, host: { properties: { "class.mc-navbar-item_collapsed": "collapsed", "class.mc-navbar-item_button": "button", "attr.title": "collapsedTitle", "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-navbar-item" }, queries: [{ propertyName: "button", first: true, predicate: button.McButtonCssStyler, descendants: true }, { propertyName: "title", first: true, predicate: McNavbarTitle, descendants: true }, { propertyName: "icon", first: true, predicate: i2.McIcon, descendants: true }], exportAs: ["mcNavbarItem"], usesInheritance: true, ngImport: i0__namespace, template: "<ng-content></ng-content>", isInline: true, styles: [".mc-navbar-title{display:inline-block;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.mc-navbar-item{position:relative;display:flex;align-items:center;height:48px;height:var(--mc-navbar-item-size-height, 48px);padding-left:16px;padding-left:var(--mc-navbar-item-size-padding, 16px);padding-right:16px;padding-right:var(--mc-navbar-item-size-padding, 16px)}.mc-navbar-item .mc-icon{min-width:16px;min-height:16px}.mc-navbar-item.mc-vertical .mc-navbar-title{padding-left:26px}.mc-navbar-item.mc-vertical .mc-icon+.mc-navbar-title,.mc-navbar-item.mc-vertical .mc-navbar-title+.mc-icon{padding-left:10px;padding-left:var(--mc-vertical-navbar-size-icon-margin, 10px)}.mc-navbar-item.mc-vertical .mc-badge{position:absolute;display:flex;align-items:center;justify-content:center}.mc-navbar-item.mc-vertical.mc-opened .mc-badge{right:16px;height:24px;padding-right:7px;padding-left:7px}.mc-navbar-item.mc-vertical.mc-closed .mc-badge{top:8px;right:8px;height:16px;padding-right:4px;padding-left:4px}.mc-navbar-item.mc-vertical.mc-closed .mc-navbar-title{display:none}.mc-navbar-item.mc-vertical.mc-closed.mc-navbar-item_button{padding-left:8px;padding-right:8px}.mc-navbar-item.mc-horizontal .mc-icon+.mc-navbar-title,.mc-navbar-item.mc-horizontal .mc-navbar-title+.mc-icon{padding-left:4px;padding-left:var(--mc-navbar-size-icon-margin, 4px)}.mc-navbar-item.mc-horizontal.mc-navbar-item_collapsed .mc-navbar-title{display:none}.mc-navbar-item.mc-navbar-item_button .mc-icon-button{flex:1}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper{justify-content:center}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper .mc-icon.mc-icon_left{margin-left:unset}.mc-navbar-item.mc-navbar-item_button .mc-icon-button .mc-button-wrapper .mc-icon.mc-icon_right{margin-right:unset}a.mc-navbar-item,a.mc-navbar-title{text-decoration:none}\n", ".mc-navbar-logo{display:flex}.mc-navbar-brand{position:relative;display:flex;align-items:center}.mc-navbar-brand .mc-navbar-title{cursor:pointer}a.mc-navbar-brand{text-decoration:none}.mc-navbar-brand.mc-horizontal{height:48px;height:var(--mc-navbar-item-size-height, 48px);padding-right:24px;padding-right:var(--mc-navbar-brand-size-margin-right, 24px)}.mc-navbar-brand.mc-horizontal .mc-navbar-title{padding-left:12px;padding-left:var(--mc-navbar-brand-size-padding, 12px);padding-right:0}.mc-navbar-brand.mc-vertical{flex-direction:column}.mc-navbar-brand.mc-vertical .mc-navbar-logo{flex-direction:column;height:48px;height:var(--mc-navbar-item-size-height, 48px)}.mc-navbar-brand.mc-vertical .mc-navbar-title{display:flex;align-items:center;height:48px;height:var(--mc-navbar-item-size-height, 48px);padding-left:0}.mc-navbar-brand.mc-vertical.mc-opened{align-items:unset}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-item{position:absolute;top:0;right:0}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-logo{padding-left:16px;justify-content:flex-end}.mc-navbar-brand.mc-vertical.mc-opened .mc-navbar-title{padding-left:16px}.mc-navbar-brand.mc-vertical.mc-closed{padding:0}.mc-navbar-brand.mc-vertical.mc-closed .mc-navbar-logo{align-items:center;justify-content:center;width:48px}.mc-navbar-brand.mc-vertical.mc-closed .mc-navbar-title{display:none}\n", ".mc-navbar-divider{display:block}.mc-navbar-divider.mc-vertical{height:1px;margin:8px 16px}.mc-navbar-divider.mc-vertical.mc-closed{margin-right:10px;margin-left:10px}.mc-navbar-divider.mc-horizontal{width:1px;height:28px;margin-left:8px;margin-right:8px}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarItem, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-navbar-item, [mc-navbar-item]',
+                        exportAs: 'mcNavbarItem',
+                        template: "<ng-content></ng-content>",
+                        styleUrls: [
+                            './navbar-item.scss',
+                            './navbar-brand.scss',
+                            './navbar-divider.scss'
+                        ],
+                        host: {
+                            class: 'mc-navbar-item',
+                            '[class.mc-navbar-item_collapsed]': 'collapsed',
+                            '[class.mc-navbar-item_button]': 'button',
+                            '[attr.title]': 'collapsedTitle',
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null'
+                        },
+                        inputs: ['disabled'],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None
+                    }]
+            }], ctorParameters: function () { return [{ type: i1__namespace.FocusMonitor }, { type: i0__namespace.ElementRef }]; }, propDecorators: { button: [{
+                    type: i0.ContentChild,
+                    args: [button.McButtonCssStyler]
+                }], title: [{
+                    type: i0.ContentChild,
+                    args: [McNavbarTitle]
+                }], icon: [{
+                    type: i0.ContentChild,
+                    args: [i2.McIcon]
+                }], collapsable: [{
+                    type: i0.Input
+                }], collapsed: [{
+                    type: i0.Input
+                }], collapsedTitle: [{
+                    type: i0.Input
+                }] } });
 
     var McNavbarContainer = /** @class */ (function () {
         function McNavbarContainer() {
         }
         return McNavbarContainer;
     }());
-    McNavbarContainer.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-navbar-container',
-                    host: {
-                        class: 'mc-navbar-container'
-                    }
-                },] }
-    ];
+    /** @nocollapse */ McNavbarContainer.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarContainer, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McNavbarContainer.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McNavbarContainer, selector: "mc-navbar-container", host: { classAttribute: "mc-navbar-container" }, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarContainer, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'mc-navbar-container',
+                        host: {
+                            class: 'mc-navbar-container'
+                        }
+                    }]
+            }] });
     var McNavbar = /** @class */ (function () {
         function McNavbar(elementRef) {
             var _this = this;
@@ -645,27 +691,28 @@
         };
         return McNavbar;
     }());
-    McNavbar.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-navbar',
-                    template: "<ng-content select=\"[mc-navbar-container], mc-navbar-container\"></ng-content>",
-                    host: {
-                        class: 'mc-navbar',
-                        '(window:resize)': 'resizeStream.next($event)'
-                    },
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-navbar{position:relative}.mc-navbar,.mc-navbar-container{display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar-container{flex-shrink:0}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McNavbar.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
-    McNavbar.propDecorators = {
-        navbarBaseItems: [{ type: core.ContentChildren, args: [McNavbarItemBase, { descendants: true },] }],
-        navbarItems: [{ type: core.ContentChildren, args: [McNavbarItem, { descendants: true },] }]
-    };
+    /** @nocollapse */ McNavbar.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbar, deps: [{ token: i0__namespace.ElementRef }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McNavbar.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McNavbar, selector: "mc-navbar", host: { listeners: { "window:resize": "resizeStream.next($event)" }, classAttribute: "mc-navbar" }, queries: [{ propertyName: "navbarBaseItems", predicate: McNavbarItemBase, descendants: true }, { propertyName: "navbarItems", predicate: McNavbarItem, descendants: true }], ngImport: i0__namespace, template: "<ng-content select=\"[mc-navbar-container], mc-navbar-container\"></ng-content>", isInline: true, styles: [".mc-navbar{position:relative;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar-container{display:flex;flex-shrink:0;flex-direction:row;justify-content:space-between;align-items:center}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbar, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-navbar',
+                        template: "<ng-content select=\"[mc-navbar-container], mc-navbar-container\"></ng-content>",
+                        styleUrls: ['./navbar.scss'],
+                        host: {
+                            class: 'mc-navbar',
+                            '(window:resize)': 'resizeStream.next($event)'
+                        },
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None
+                    }]
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }]; }, propDecorators: { navbarBaseItems: [{
+                    type: i0.ContentChildren,
+                    args: [McNavbarItemBase, { descendants: true }]
+                }], navbarItems: [{
+                    type: i0.ContentChildren,
+                    args: [McNavbarItem, { descendants: true }]
+                }] } });
 
     function toggleVerticalNavbarAnimation() {
         return animations.trigger('toggle', [
@@ -712,27 +759,31 @@
         };
         return McVerticalNavbar;
     }());
-    McVerticalNavbar.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-vertical-navbar',
-                    exportAs: 'McVerticalNavbar',
-                    template: "\n        <ng-content select=\"[mc-navbar-container], mc-navbar-container\"></ng-content>\n        <ng-content select=\"[mc-navbar-toggle], mc-navbar-toggle\"></ng-content>\n    ",
-                    host: {
-                        class: 'mc-vertical-navbar',
-                        '[class.mc-closed]': '!expanded',
-                        '[class.mc-opened]': 'expanded',
-                        '[@toggle]': 'expanded'
-                    },
-                    animations: [toggleVerticalNavbarAnimation()],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-vertical-navbar{display:flex;flex-direction:column}.mc-vertical-navbar .mc-navbar-container{flex-direction:column;align-items:unset}.mc-vertical-navbar.mc-opened{width:var(--mc-vertical-navbar-size-states-opened-width,240px)}.mc-vertical-navbar.mc-closed{width:var(--mc-vertical-navbar-size-states-closed-width,48px)}"]
-                },] }
-    ];
-    McVerticalNavbar.propDecorators = {
-        expanded: [{ type: core.Input }],
-        navbarBaseItems: [{ type: core.ContentChildren, args: [McNavbarItemBase, { descendants: true },] }]
-    };
+    /** @nocollapse */ McVerticalNavbar.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McVerticalNavbar, deps: [], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McVerticalNavbar.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McVerticalNavbar, selector: "mc-vertical-navbar", inputs: { expanded: "expanded" }, host: { properties: { "class.mc-closed": "!expanded", "class.mc-opened": "expanded", "@toggle": "expanded" }, classAttribute: "mc-vertical-navbar" }, queries: [{ propertyName: "navbarBaseItems", predicate: McNavbarItemBase, descendants: true }], exportAs: ["McVerticalNavbar"], ngImport: i0__namespace, template: "\n        <ng-content select=\"[mc-navbar-container], mc-navbar-container\"></ng-content>\n        <ng-content select=\"[mc-navbar-toggle], mc-navbar-toggle\"></ng-content>\n    ", isInline: true, styles: [".mc-vertical-navbar{display:flex;flex-direction:column}.mc-vertical-navbar .mc-navbar-container{flex-direction:column;align-items:unset}.mc-vertical-navbar.mc-opened{width:240px;width:var(--mc-vertical-navbar-size-states-opened-width, 240px)}.mc-vertical-navbar.mc-closed{width:48px;width:var(--mc-vertical-navbar-size-states-closed-width, 48px)}\n"], animations: [toggleVerticalNavbarAnimation()], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McVerticalNavbar, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-vertical-navbar',
+                        exportAs: 'McVerticalNavbar',
+                        template: "\n        <ng-content select=\"[mc-navbar-container], mc-navbar-container\"></ng-content>\n        <ng-content select=\"[mc-navbar-toggle], mc-navbar-toggle\"></ng-content>\n    ",
+                        styleUrls: ['./vertical-navbar.scss'],
+                        host: {
+                            class: 'mc-vertical-navbar',
+                            '[class.mc-closed]': '!expanded',
+                            '[class.mc-opened]': 'expanded',
+                            '[@toggle]': 'expanded'
+                        },
+                        animations: [toggleVerticalNavbarAnimation()],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None
+                    }]
+            }], propDecorators: { expanded: [{
+                    type: i0.Input
+                }], navbarBaseItems: [{
+                    type: i0.ContentChildren,
+                    args: [McNavbarItemBase, { descendants: true }]
+                }] } });
     var McNavbarToggleBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
         function McNavbarToggleBase(_elementRef) {
@@ -741,7 +792,7 @@
         return McNavbarToggleBase;
     }());
     // tslint:disable-next-line:naming-convention
-    var McNavbarToggleMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(McNavbarToggleBase));
+    var McNavbarToggleMixinBase = core.mixinTabIndex(core.mixinDisabled(McNavbarToggleBase));
     var McNavbarToggle = /** @class */ (function (_super) {
         __extends(McNavbarToggle, _super);
         function McNavbarToggle(mcNavbar, focusMonitor, elementRef) {
@@ -759,70 +810,97 @@
         };
         return McNavbarToggle;
     }(McNavbarToggleMixinBase));
-    McNavbarToggle.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-navbar-toggle',
-                    template: "\n        <i mc-icon\n           [class.mc-angle-left-M_16]=\"mcNavbar.expanded\"\n           [class.mc-angle-right-M_16]=\"!mcNavbar.expanded\"\n           *ngIf=\"!customIcon\">\n        </i>\n\n        <ng-content select=\"[mc-icon]\"></ng-content>\n        <ng-content select=\"mc-navbar-title\" *ngIf=\"mcNavbar.expanded\"></ng-content>\n    ",
-                    host: {
-                        class: 'mc-navbar-item mc-navbar-toggle mc-vertical',
-                        '[attr.tabindex]': 'tabIndex',
-                        '[attr.disabled]': 'disabled || null'
-                    },
-                    inputs: ['tabIndex'],
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-navbar{position:relative}.mc-navbar,.mc-navbar-container{display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar-container{flex-shrink:0}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McNavbarToggle.ctorParameters = function () { return [
-        { type: McVerticalNavbar },
-        { type: a11y.FocusMonitor },
-        { type: core.ElementRef }
-    ]; };
-    McNavbarToggle.propDecorators = {
-        customIcon: [{ type: core.ContentChild, args: [icon.McIcon,] }]
-    };
+    /** @nocollapse */ McNavbarToggle.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarToggle, deps: [{ token: McVerticalNavbar }, { token: i1__namespace.FocusMonitor }, { token: i0__namespace.ElementRef }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McNavbarToggle.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McNavbarToggle, selector: "mc-navbar-toggle", inputs: { tabIndex: "tabIndex" }, host: { properties: { "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-navbar-item mc-navbar-toggle mc-vertical" }, queries: [{ propertyName: "customIcon", first: true, predicate: i2.McIcon, descendants: true }], usesInheritance: true, ngImport: i0__namespace, template: "\n        <i mc-icon\n           [class.mc-angle-left-M_16]=\"mcNavbar.expanded\"\n           [class.mc-angle-right-M_16]=\"!mcNavbar.expanded\"\n           *ngIf=\"!customIcon\">\n        </i>\n\n        <ng-content select=\"[mc-icon]\"></ng-content>\n        <ng-content select=\"mc-navbar-title\" *ngIf=\"mcNavbar.expanded\"></ng-content>\n    ", isInline: true, styles: [".mc-navbar{position:relative;display:flex;flex-direction:row;justify-content:space-between;align-items:center}.mc-navbar-container{display:flex;flex-shrink:0;flex-direction:row;justify-content:space-between;align-items:center}\n"], components: [{ type: i2__namespace.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i3__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i2__namespace.McIconCSSStyler, selector: "[mc-icon]" }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarToggle, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-navbar-toggle',
+                        template: "\n        <i mc-icon\n           [class.mc-angle-left-M_16]=\"mcNavbar.expanded\"\n           [class.mc-angle-right-M_16]=\"!mcNavbar.expanded\"\n           *ngIf=\"!customIcon\">\n        </i>\n\n        <ng-content select=\"[mc-icon]\"></ng-content>\n        <ng-content select=\"mc-navbar-title\" *ngIf=\"mcNavbar.expanded\"></ng-content>\n    ",
+                        styleUrls: ['./navbar.scss'],
+                        host: {
+                            class: 'mc-navbar-item mc-navbar-toggle mc-vertical',
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null'
+                        },
+                        inputs: ['tabIndex'],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None
+                    }]
+            }], ctorParameters: function () { return [{ type: McVerticalNavbar }, { type: i1__namespace.FocusMonitor }, { type: i0__namespace.ElementRef }]; }, propDecorators: { customIcon: [{
+                    type: i0.ContentChild,
+                    args: [i2.McIcon]
+                }] } });
 
     var McNavbarModule = /** @class */ (function () {
         function McNavbarModule() {
         }
         return McNavbarModule;
     }());
-    McNavbarModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        platform.PlatformModule,
-                        icon.McIconModule
-                    ],
-                    exports: [
-                        McNavbar,
-                        McNavbarContainer,
-                        McNavbarTitle,
-                        McNavbarItem,
-                        McNavbarBrand,
-                        McNavbarLogo,
-                        McNavbarToggle,
-                        McVerticalNavbar,
-                        McNavbarDivider,
-                        McNavbarItemBase
-                    ],
-                    declarations: [
-                        McNavbar,
-                        McNavbarContainer,
-                        McNavbarTitle,
-                        McNavbarItem,
-                        McNavbarBrand,
-                        McNavbarLogo,
-                        McNavbarToggle,
-                        McVerticalNavbar,
-                        McNavbarDivider,
-                        McNavbarItemBase
-                    ]
-                },] }
-    ];
+    /** @nocollapse */ McNavbarModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McNavbarModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarModule, declarations: [McNavbar,
+            McNavbarContainer,
+            McNavbarTitle,
+            McNavbarItem,
+            McNavbarBrand,
+            McNavbarLogo,
+            McNavbarToggle,
+            McVerticalNavbar,
+            McNavbarDivider,
+            McNavbarItemBase], imports: [i3.CommonModule,
+            i1.A11yModule,
+            platform.PlatformModule,
+            i2.McIconModule], exports: [McNavbar,
+            McNavbarContainer,
+            McNavbarTitle,
+            McNavbarItem,
+            McNavbarBrand,
+            McNavbarLogo,
+            McNavbarToggle,
+            McVerticalNavbar,
+            McNavbarDivider,
+            McNavbarItemBase] });
+    /** @nocollapse */ McNavbarModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarModule, imports: [[
+                i3.CommonModule,
+                i1.A11yModule,
+                platform.PlatformModule,
+                i2.McIconModule
+            ]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNavbarModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [
+                            i3.CommonModule,
+                            i1.A11yModule,
+                            platform.PlatformModule,
+                            i2.McIconModule
+                        ],
+                        exports: [
+                            McNavbar,
+                            McNavbarContainer,
+                            McNavbarTitle,
+                            McNavbarItem,
+                            McNavbarBrand,
+                            McNavbarLogo,
+                            McNavbarToggle,
+                            McVerticalNavbar,
+                            McNavbarDivider,
+                            McNavbarItemBase
+                        ],
+                        declarations: [
+                            McNavbar,
+                            McNavbarContainer,
+                            McNavbarTitle,
+                            McNavbarItem,
+                            McNavbarBrand,
+                            McNavbarLogo,
+                            McNavbarToggle,
+                            McVerticalNavbar,
+                            McNavbarDivider,
+                            McNavbarItemBase
+                        ]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.
@@ -842,7 +920,6 @@
     exports.McNavbarToggleBase = McNavbarToggleBase;
     exports.McNavbarToggleMixinBase = McNavbarToggleMixinBase;
     exports.McVerticalNavbar = McVerticalNavbar;
-    exports.ɵa = toggleVerticalNavbarAnimation;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

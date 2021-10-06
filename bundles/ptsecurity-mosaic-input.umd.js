@@ -2,7 +2,31 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/platform'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('@ptsecurity/cdk/keycodes')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/input', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@angular/forms', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/platform', '@ptsecurity/mosaic/form-field', 'rxjs', '@ptsecurity/cdk/keycodes'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.input = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ng.forms, global.ptsecurity.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.platform, global.ptsecurity.mosaic['form-field'], global.rxjs, global.mc.cdk.keycodes));
-}(this, (function (exports, a11y, common, core, forms, core$1, coercion, platform, formField, rxjs, keycodes) { 'use strict';
+}(this, (function (exports, a11y, common, i0, i1, i3, coercion, platform, formField, rxjs, keycodes) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
+    var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -326,6 +350,8 @@
         return Error("Input type \"" + inputType + "\" isn't supported by mcInput.");
     }
 
+    var MC_INPUT_VALUE_ACCESSOR = new i0.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
+
     var BIG_STEP = 10;
     var SMALL_STEP = 1;
     function normalizeSplitter(value) {
@@ -448,35 +474,47 @@
         };
         return McNumberInput;
     }());
-    McNumberInput.decorators = [
-        { type: core.Directive, args: [{
-                    selector: "input[mcInput][type=\"number\"]",
-                    exportAs: 'mcNumericalInput',
-                    host: {
-                        '(blur)': 'focusChanged(false)',
-                        '(focus)': 'focusChanged(true)',
-                        '(paste)': 'onPaste($event)',
-                        '(keydown)': 'onKeyDown($event)'
-                    }
-                },] }
-    ];
-    /** @nocollapse */
-    McNumberInput.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['step',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['big-step',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['min',] }] },
-        { type: String, decorators: [{ type: core.Attribute, args: ['max',] }] }
-    ]; };
-    McNumberInput.propDecorators = {
-        bigStep: [{ type: core.Input }],
-        step: [{ type: core.Input }],
-        min: [{ type: core.Input }],
-        max: [{ type: core.Input }]
-    };
-
-    var MC_INPUT_VALUE_ACCESSOR = new core.InjectionToken('MC_INPUT_VALUE_ACCESSOR');
+    /** @nocollapse */ McNumberInput.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNumberInput, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.NgControl, optional: true, self: true }, { token: 'step', attribute: true }, { token: 'big-step', attribute: true }, { token: 'min', attribute: true }, { token: 'max', attribute: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McNumberInput.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McNumberInput, selector: "input[mcInput][type=\"number\"]", inputs: { bigStep: "bigStep", step: "step", min: "min", max: "max" }, host: { listeners: { "blur": "focusChanged(false)", "focus": "focusChanged(true)", "paste": "onPaste($event)", "keydown": "onKeyDown($event)" } }, exportAs: ["mcNumericalInput"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNumberInput, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: "input[mcInput][type=\"number\"]",
+                        exportAs: 'mcNumericalInput',
+                        host: {
+                            '(blur)': 'focusChanged(false)',
+                            '(focus)': 'focusChanged(true)',
+                            '(paste)': 'onPaste($event)',
+                            '(keydown)': 'onKeyDown($event)'
+                        }
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i1__namespace.NgControl, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Attribute,
+                            args: ['step']
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Attribute,
+                            args: ['big-step']
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Attribute,
+                            args: ['min']
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Attribute,
+                            args: ['max']
+                        }] }];
+        }, propDecorators: { bigStep: [{
+                    type: i0.Input
+                }], step: [{
+                    type: i0.Input
+                }], min: [{
+                    type: i0.Input
+                }], max: [{
+                    type: i0.Input
+                }] } });
 
     var MC_INPUT_INVALID_TYPES = [
         'button',
@@ -500,7 +538,7 @@
         return McInputBase;
     }());
     // tslint:disable-next-line:naming-convention
-    var McInputMixinBase = core$1.mixinErrorState(McInputBase);
+    var McInputMixinBase = i3.mixinErrorState(McInputBase);
     var McInput = /** @class */ (function (_super) {
         __extends(McInput, _super);
         // tslint:disable-next-line: naming-convention
@@ -640,7 +678,7 @@
                 return;
             }
             if (this.mcValidation.useValidation) {
-                core$1.setMosaicValidation(this);
+                i3.setMosaicValidation(this);
             }
         };
         McInput.prototype.ngOnChanges = function () {
@@ -733,66 +771,106 @@
         };
         return McInput;
     }(McInputMixinBase));
-    McInput.decorators = [
-        { type: core.Directive, args: [{
-                    selector: "input[mcInput]",
-                    exportAs: 'mcInput',
-                    host: {
-                        class: 'mc-input',
-                        // Native input properties that are overwritten by Angular inputs need to be synced with
-                        // the native input element. Otherwise property bindings for those don't work.
-                        '[attr.id]': 'id',
-                        '[attr.placeholder]': 'placeholder',
-                        '[attr.disabled]': 'disabled || null',
-                        '[required]': 'required',
-                        '(blur)': 'onBlur()',
-                        '(focus)': 'focusChanged(true)',
-                        '(input)': 'onInput()'
-                    },
-                    providers: [{
-                            provide: formField.McFormFieldControl, useExisting: McInput
-                        }]
-                },] }
-    ];
-    /** @nocollapse */
-    McInput.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: Array, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
-        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: McNumberInput, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.NgForm, decorators: [{ type: core.Optional }] },
-        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
-        { type: core$1.ErrorStateMatcher },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Self }, { type: core.Inject, args: [MC_INPUT_VALUE_ACCESSOR,] }] }
-    ]; };
-    McInput.propDecorators = {
-        errorStateMatcher: [{ type: core.Input }],
-        placeholder: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        id: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        type: [{ type: core.Input }],
-        value: [{ type: core.Input }]
-    };
+    /** @nocollapse */ McInput.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInput, deps: [{ token: i0__namespace.ElementRef }, { token: i1.NG_VALIDATORS, optional: true, self: true }, { token: i3.MC_VALIDATION, optional: true }, { token: i1__namespace.NgControl, optional: true, self: true }, { token: McNumberInput, optional: true, self: true }, { token: i1__namespace.NgModel, optional: true, self: true }, { token: i1__namespace.FormControlName, optional: true, self: true }, { token: i1__namespace.NgForm, optional: true }, { token: i1__namespace.FormGroupDirective, optional: true }, { token: i3__namespace.ErrorStateMatcher }, { token: MC_INPUT_VALUE_ACCESSOR, optional: true, self: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McInput.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McInput, selector: "input[mcInput]", inputs: { errorStateMatcher: "errorStateMatcher", placeholder: "placeholder", disabled: "disabled", id: "id", required: "required", type: "type", value: "value" }, host: { listeners: { "blur": "onBlur()", "focus": "focusChanged(true)", "input": "onInput()" }, properties: { "attr.id": "id", "attr.placeholder": "placeholder", "attr.disabled": "disabled || null", "required": "required" }, classAttribute: "mc-input" }, providers: [{
+                provide: formField.McFormFieldControl, useExisting: McInput
+            }], exportAs: ["mcInput"], usesInheritance: true, usesOnChanges: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInput, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: "input[mcInput]",
+                        exportAs: 'mcInput',
+                        host: {
+                            class: 'mc-input',
+                            // Native input properties that are overwritten by Angular inputs need to be synced with
+                            // the native input element. Otherwise property bindings for those don't work.
+                            '[attr.id]': 'id',
+                            '[attr.placeholder]': 'placeholder',
+                            '[attr.disabled]': 'disabled || null',
+                            '[required]': 'required',
+                            '(blur)': 'onBlur()',
+                            '(focus)': 'focusChanged(true)',
+                            '(input)': 'onInput()'
+                        },
+                        providers: [{
+                                provide: formField.McFormFieldControl, useExisting: McInput
+                            }]
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }, {
+                            type: i0.Inject,
+                            args: [i1.NG_VALIDATORS]
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [i3.MC_VALIDATION]
+                        }] }, { type: i1__namespace.NgControl, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: McNumberInput, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: i1__namespace.NgModel, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: i1__namespace.FormControlName, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: i1__namespace.NgForm, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i1__namespace.FormGroupDirective, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i3__namespace.ErrorStateMatcher }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }, {
+                            type: i0.Inject,
+                            args: [MC_INPUT_VALUE_ACCESSOR]
+                        }] }];
+        }, propDecorators: { errorStateMatcher: [{
+                    type: i0.Input
+                }], placeholder: [{
+                    type: i0.Input
+                }], disabled: [{
+                    type: i0.Input
+                }], id: [{
+                    type: i0.Input
+                }], required: [{
+                    type: i0.Input
+                }], type: [{
+                    type: i0.Input
+                }], value: [{
+                    type: i0.Input
+                }] } });
     var McInputMono = /** @class */ (function () {
         function McInputMono() {
         }
         return McInputMono;
     }());
-    McInputMono.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'input[mcInputMonospace]',
-                    exportAs: 'McInputMonospace',
-                    host: { class: 'mc-input_monospace' }
-                },] }
-    ];
+    /** @nocollapse */ McInputMono.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputMono, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McInputMono.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McInputMono, selector: "input[mcInputMonospace]", host: { classAttribute: "mc-input_monospace" }, exportAs: ["McInputMonospace"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputMono, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'input[mcInputMonospace]',
+                        exportAs: 'McInputMonospace',
+                        host: { class: 'mc-input_monospace' }
+                    }]
+            }] });
 
     var MIN_VALIDATOR = {
-        provide: forms.NG_VALIDATORS,
-        useExisting: core.forwardRef(function () { return MinValidator; }),
+        provide: i1.NG_VALIDATORS,
+        useExisting: i0.forwardRef(function () { return MinValidator; }),
         multi: true
     };
     /**
@@ -814,22 +892,24 @@
         };
         MinValidator.prototype.validate = function (c) { return this.validator(c); };
         MinValidator.prototype.registerOnValidatorChange = function (fn) { this.onChange = fn; };
-        MinValidator.prototype.createValidator = function () { this.validator = forms.Validators.min(parseInt(this.min, 10)); };
+        MinValidator.prototype.createValidator = function () { this.validator = i1.Validators.min(parseInt(this.min, 10)); };
         return MinValidator;
     }());
-    MinValidator.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[min][formControlName],[min][formControl],[min][ngModel]',
-                    providers: [MIN_VALIDATOR],
-                    host: { '[attr.min]': 'min ? min : null' }
-                },] }
-    ];
-    MinValidator.propDecorators = {
-        min: [{ type: core.Input }]
-    };
+    /** @nocollapse */ MinValidator.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MinValidator, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ MinValidator.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: MinValidator, selector: "[min][formControlName],[min][formControl],[min][ngModel]", inputs: { min: "min" }, host: { properties: { "attr.min": "min ? min : null" } }, providers: [MIN_VALIDATOR], usesOnChanges: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MinValidator, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[min][formControlName],[min][formControl],[min][ngModel]',
+                        providers: [MIN_VALIDATOR],
+                        host: { '[attr.min]': 'min ? min : null' }
+                    }]
+            }], propDecorators: { min: [{
+                    type: i0.Input
+                }] } });
     var MAX_VALIDATOR = {
-        provide: forms.NG_VALIDATORS,
-        useExisting: core.forwardRef(function () { return MaxValidator; }),
+        provide: i1.NG_VALIDATORS,
+        useExisting: i0.forwardRef(function () { return MaxValidator; }),
         multi: true
     };
     /**
@@ -851,34 +931,40 @@
         };
         MaxValidator.prototype.validate = function (c) { return this.validator(c); };
         MaxValidator.prototype.registerOnValidatorChange = function (fn) { this.onChange = fn; };
-        MaxValidator.prototype.createValidator = function () { this.validator = forms.Validators.max(parseInt(this.max, 10)); };
+        MaxValidator.prototype.createValidator = function () { this.validator = i1.Validators.max(parseInt(this.max, 10)); };
         return MaxValidator;
     }());
-    MaxValidator.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[max][formControlName],[max][formControl],[max][ngModel]',
-                    providers: [MAX_VALIDATOR],
-                    host: {
-                        '[attr.max]': 'max ? max : null'
-                    }
-                },] }
-    ];
-    MaxValidator.propDecorators = {
-        max: [{ type: core.Input }]
-    };
+    /** @nocollapse */ MaxValidator.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MaxValidator, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ MaxValidator.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: MaxValidator, selector: "[max][formControlName],[max][formControl],[max][ngModel]", inputs: { max: "max" }, host: { properties: { "attr.max": "max ? max : null" } }, providers: [MAX_VALIDATOR], usesOnChanges: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MaxValidator, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[max][formControlName],[max][formControl],[max][ngModel]',
+                        providers: [MAX_VALIDATOR],
+                        host: {
+                            '[attr.max]': 'max ? max : null'
+                        }
+                    }]
+            }], propDecorators: { max: [{
+                    type: i0.Input
+                }] } });
 
     var McInputModule = /** @class */ (function () {
         function McInputModule() {
         }
         return McInputModule;
     }());
-    McInputModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, a11y.A11yModule, core$1.McCommonModule, forms.FormsModule],
-                    exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator],
-                    declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator]
-                },] }
-    ];
+    /** @nocollapse */ McInputModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McInputModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputModule, declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator], imports: [common.CommonModule, a11y.A11yModule, i3.McCommonModule, i1.FormsModule], exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator] });
+    /** @nocollapse */ McInputModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputModule, imports: [[common.CommonModule, a11y.A11yModule, i3.McCommonModule, i1.FormsModule]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [common.CommonModule, a11y.A11yModule, i3.McCommonModule, i1.FormsModule],
+                        exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator],
+                        declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.

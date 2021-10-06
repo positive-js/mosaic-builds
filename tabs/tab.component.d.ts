@@ -3,6 +3,7 @@ import { OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ViewContainer
 import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { McTabLabel } from './tab-label.directive';
+import * as i0 from "@angular/core";
 export declare class McTabBase {
 }
 export declare const McTabMixinBase: CanDisableCtor & typeof McTabBase;
@@ -54,4 +55,6 @@ export declare class McTab extends McTabMixinBase implements OnInit, CanDisable,
      * @docs-private
      */
     protected setTemplateLabelInput(value: McTabLabel): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTab, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTab, "mc-tab", ["mcTab"], { "disabled": "disabled"; "textLabel": "label"; "empty": "empty"; "tooltipTitle": "tooltipTitle"; "tooltipPlacement": "tooltipPlacement"; "tabId": "tabId"; }, {}, ["templateLabel", "explicitContent"], ["*"]>;
 }

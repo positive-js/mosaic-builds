@@ -1,8 +1,38 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/overlay'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/icon'), require('@ptsecurity/mosaic/tags'), require('@ptsecurity/mosaic/tree'), require('@angular/cdk/bidi'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('rxjs/operators')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree-select', ['exports', '@angular/cdk/overlay', '@angular/common', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/icon', '@ptsecurity/mosaic/tags', '@ptsecurity/mosaic/tree', '@angular/cdk/bidi', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/form-field', 'rxjs', 'rxjs/operators'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic['tree-select'] = {}), global.ng.cdk.overlay, global.ng.common, global.ng.core, global.mc.cdk.tree, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic.icon, global.ptsecurity.mosaic.tags, global.ptsecurity.mosaic.tree, global.ng.cdk.bidi, global.ng.cdk.coercion, global.ng.cdk.collections, global.ng.forms, global.mc.cdk.keycodes, global.ptsecurity.mosaic['form-field'], global.rxjs, global.rxjs.operators));
-}(this, (function (exports, overlay, common, core, tree, core$1, icon, tags, tree$1, bidi, coercion, collections, forms, keycodes, formField, rxjs, operators) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/overlay'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/tree'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/icon'), require('@ptsecurity/mosaic/tags'), require('@ptsecurity/mosaic/tree'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('rxjs/operators'), require('@angular/cdk/bidi')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree-select', ['exports', '@angular/cdk/overlay', '@angular/common', '@angular/core', '@ptsecurity/cdk/tree', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/icon', '@ptsecurity/mosaic/tags', '@ptsecurity/mosaic/tree', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/form-field', 'rxjs', 'rxjs/operators', '@angular/cdk/bidi'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic['tree-select'] = {}), global.ng.cdk.overlay, global.ng.common, global.ng.core, global.mc.cdk.tree, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic.icon, global.ptsecurity.mosaic.tags, global.ptsecurity.mosaic.tree, global.ng.cdk.coercion, global.ng.cdk.collections, global.ng.forms, global.mc.cdk.keycodes, global.ptsecurity.mosaic['form-field'], global.rxjs, global.rxjs.operators, global.ng.cdk.bidi));
+}(this, (function (exports, i1, i8, i0, tree, i2, i7, i6, tree$1, coercion, collections, i4, keycodes, i5, rxjs, operators, i3) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
+    var i8__namespace = /*#__PURE__*/_interopNamespace(i8);
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
+    var i7__namespace = /*#__PURE__*/_interopNamespace(i7);
+    var i6__namespace = /*#__PURE__*/_interopNamespace(i6);
+    var i4__namespace = /*#__PURE__*/_interopNamespace(i4);
+    var i5__namespace = /*#__PURE__*/_interopNamespace(i5);
+    var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -338,9 +368,12 @@
         }
         return McTreeSelectTrigger;
     }());
-    McTreeSelectTrigger.decorators = [
-        { type: core.Directive, args: [{ selector: 'mc-tree-select-trigger' },] }
-    ];
+    /** @nocollapse */ McTreeSelectTrigger.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelectTrigger, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTreeSelectTrigger.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeSelectTrigger, selector: "mc-tree-select-trigger", ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelectTrigger, decorators: [{
+                type: i0.Directive,
+                args: [{ selector: 'mc-tree-select-trigger' }]
+            }] });
     var McTreeSelectBase = /** @class */ (function () {
         function McTreeSelectBase(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
             this.elementRef = elementRef;
@@ -352,7 +385,7 @@
         return McTreeSelectBase;
     }());
     // tslint:disable-next-line:naming-convention
-    var McTreeSelectMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(core$1.mixinErrorState(McTreeSelectBase)));
+    var McTreeSelectMixinBase = i2.mixinTabIndex(i2.mixinDisabled(i2.mixinErrorState(McTreeSelectBase)));
     var McTreeSelect = /** @class */ (function (_super) {
         __extends(McTreeSelect, _super);
         function McTreeSelect(elementRef, changeDetectorRef, viewportRuler, ngZone, renderer, defaultErrorStateMatcher, scrollStrategyFactory, rawValidators, mcValidation, dir, parentForm, parentFormGroup, parentFormField, ngControl, ngModel, formControlName) {
@@ -407,24 +440,24 @@
             ];
             _this.hiddenItemsText = '...ещё';
             /** Event emitted when the select panel has been toggled. */
-            _this.openedChange = new core.EventEmitter();
+            _this.openedChange = new i0.EventEmitter();
             /** Event emitted when the select has been opened. */
             _this.openedStream = _this.openedChange.pipe(operators.filter(function (o) { return o; }), operators.map(function () { }));
             /** Event emitted when the select has been closed. */
             _this.closedStream = _this.openedChange.pipe(operators.filter(function (o) { return !o; }), operators.map(function () { }));
             /** Event emitted when the selected value has been changed by the user. */
-            _this.selectionChange = new core.EventEmitter();
+            _this.selectionChange = new i0.EventEmitter();
             /**
              * Event that emits whenever the raw value of the select changes. This is here primarily
              * to facilitate the two-way binding for the `value` input.
              * @docs-private
              */
-            _this.valueChange = new core.EventEmitter();
+            _this.valueChange = new i0.EventEmitter();
             _this.backdropClass = 'cdk-overlay-transparent-backdrop';
             /** Combined stream of all of the child options' change events. */
             _this.optionSelectionChanges = rxjs.defer(function () {
                 if (_this.options) {
-                    return _this.options.changes.pipe(operators.startWith(_this.options), operators.switchMap(function () { return rxjs.merge.apply(void 0, __spread(_this.options.map(function (option) { return option.onSelectionChange; }))); }));
+                    return _this.options.changes.pipe(operators.startWith(_this.options), operators.switchMap(function () { return rxjs.merge.apply(void 0, __spreadArray([], __read(_this.options.map(function (option) { return option.onSelectionChange; })))); }));
                 }
                 return _this.ngZone.onStable
                     .asObservable()
@@ -487,7 +520,7 @@
             },
             set: function (value) {
                 if (this.selectionModel) {
-                    throw core$1.getMcSelectDynamicMultipleError();
+                    throw i2.getMcSelectDynamicMultipleError();
                 }
                 this._multiple = coercion.coerceBooleanProperty(value);
             },
@@ -519,7 +552,7 @@
             set: function (fn) {
                 /* tslint:disable-next-line:strict-type-predicates */
                 if (typeof fn !== 'function') {
-                    throw core$1.getMcSelectNonFunctionValueError();
+                    throw i2.getMcSelectNonFunctionValueError();
                 }
                 this._compareWith = fn;
                 if (this.selectionModel) {
@@ -609,7 +642,7 @@
                 return;
             }
             if (this.mcValidation.useValidation) {
-                core$1.setMosaicValidation(this);
+                i2.setMosaicValidation(this);
             }
             this.tree.resetFocusedItemOnBlur = false;
             this.selectionModel = this.tree.selectionModel = new collections.SelectionModel(this.multiple);
@@ -618,7 +651,7 @@
             this.options = this.tree.renderedOptions;
             this.tree.autoSelect = this.autoSelect;
             if (this.tree.multipleMode === null) {
-                this.tree.multipleMode = this.multiple ? core$1.MultipleMode.CHECKBOX : null;
+                this.tree.multipleMode = this.multiple ? i2.MultipleMode.CHECKBOX : null;
             }
             if (this.multiple) {
                 this.tree.noUnselectLast = false;
@@ -1045,7 +1078,7 @@
         McTreeSelect.prototype.setSelectionByValue = function (value) {
             if (this.multiple && value) {
                 if (!Array.isArray(value)) {
-                    throw core$1.getMcSelectNonArrayValueError();
+                    throw i2.getMcSelectNonArrayValueError();
                 }
                 this.tree.setOptionsFromValues(value);
                 this.sortValues();
@@ -1107,7 +1140,7 @@
         /** Scrolls the active option into view. */
         McTreeSelect.prototype.scrollActiveOptionIntoView = function () {
             var activeOptionIndex = this.tree.keyManager.activeItemIndex || 0;
-            this.panel.nativeElement.scrollTop = core$1.getOptionScrollPosition(activeOptionIndex, this.tree.getItemHeight(), this.panel.nativeElement.scrollTop, core$1.SELECT_PANEL_MAX_HEIGHT);
+            this.panel.nativeElement.scrollTop = i2.getOptionScrollPosition(activeOptionIndex, this.tree.getItemHeight(), this.panel.nativeElement.scrollTop, i2.SELECT_PANEL_MAX_HEIGHT);
         };
         /**
          * Sets the x-offset of the overlay panel in relation to the trigger's top start corner.
@@ -1121,8 +1154,8 @@
             var viewportSize = this.viewportRuler.getViewportSize();
             var isRtl = this.isRtl();
             /* tslint:disable-next-line:no-magic-numbers */
-            var paddingWidth = core$1.SELECT_PANEL_PADDING_X * 2;
-            var offsetX = core$1.SELECT_PANEL_PADDING_X;
+            var paddingWidth = i2.SELECT_PANEL_PADDING_X * 2;
+            var offsetX = i2.SELECT_PANEL_PADDING_X;
             // Invert the offset in LTR.
             if (!isRtl) {
                 offsetX *= -1;
@@ -1133,10 +1166,10 @@
                 + (isRtl ? 0 : paddingWidth);
             // If the element overflows on either side, reduce the offset to allow it to fit.
             if (leftOverflow > 0) {
-                offsetX += leftOverflow + core$1.SELECT_PANEL_VIEWPORT_PADDING;
+                offsetX += leftOverflow + i2.SELECT_PANEL_VIEWPORT_PADDING;
             }
             else if (rightOverflow > 0) {
-                offsetX -= rightOverflow + core$1.SELECT_PANEL_VIEWPORT_PADDING;
+                offsetX -= rightOverflow + i2.SELECT_PANEL_VIEWPORT_PADDING;
             }
             // Set the offset directly in order to avoid having to go through change detection and
             // potentially triggering "changed after it was checked" errors. Round the value to avoid
@@ -1146,107 +1179,184 @@
         };
         return McTreeSelect;
     }(McTreeSelectMixinBase));
-    McTreeSelect.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-tree-select',
-                    exportAs: 'mcTreeSelect',
-                    template: "<div cdk-overlay-origin\n     class=\"mc-tree-select__trigger\"\n     [class.mc-tree-select__trigger_multiple]=\"multiple\"\n     #origin=\"cdkOverlayOrigin\"\n     #trigger>\n    <div class=\"mc-tree-select__matcher\" [ngSwitch]=\"empty\">\n        <span class=\"mc-tree-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\\u00A0' }}</span>\n        <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\">\n            <div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-tree-select__match-container\">\n                <span *ngSwitchCase=\"false\" class=\"mc-tree-select__matcher-text\">{{ triggerValue }}</span>\n                <div *ngSwitchCase=\"true\" class=\"mc-tree-select__multiple-matcher\">\n                    <div class=\"mc-tree-select__match-list\">\n                        <mc-tag *ngFor=\"let option of triggerValues\"\n                            [selectable]=\"false\"\n                            [disabled]=\"option.disabled || disabled\"\n                            [class.mc-error]=\"errorState\">\n\n                            {{ option.viewValue }}\n                            <i mc-icon=\"mc-close-S_16\"\n                               *ngIf=\"!option.disabled && !disabled\"\n                               (click)=\"onRemoveSelectedOption(option, $event)\">\n                            </i>\n                        </mc-tag>\n                    </div>\n                    <div class=\"mc-tree-select__match-hidden-text\"\n                         [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\"\n                         #hiddenItemsCounter>\n                        {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}\n                    </div>\n                </div>\n            </div>\n            <ng-content select=\"mc-tree-select-trigger\" *ngSwitchCase=\"true\"></ng-content>\n        </span>\n    </div>\n\n    <div class=\"mc-select__cleaner\" *ngIf=\"canShowCleaner\" (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <div class=\"mc-tree-select__arrow-wrapper\">\n        <i class=\"mc-tree-select__arrow\" mc-icon=\"mc-angle-down-L_16\"></i>\n    </div>\n</div>\n\n<ng-template\n    cdk-connected-overlay\n    cdkConnectedOverlayLockPosition\n    [cdkConnectedOverlayHasBackdrop]=\"hasBackdrop\"\n    [cdkConnectedOverlayBackdropClass]=\"backdropClass\"\n    [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\"\n    [cdkConnectedOverlayOrigin]=\"origin\"\n    [cdkConnectedOverlayOpen]=\"panelOpen\"\n    [cdkConnectedOverlayPositions]=\"positions\"\n    [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\"\n    [cdkConnectedOverlayOffsetY]=\"offsetY\"\n    (backdropClick)=\"close()\"\n    (attach)=\"onAttached()\"\n    (detach)=\"close()\">\n\n    <div #panel\n         class=\"mc-tree-select__panel {{ getPanelTheme() }}\"\n         [ngClass]=\"panelClass\"\n         [style.transformOrigin]=\"transformOrigin\"\n         [style.font-size.px]=\"triggerFontSize\"\n         (keydown)=\"handleKeydown($event)\">\n\n        <div #optionsContainer\n             class=\"mc-tree-select__content\"\n             [@fadeInContent]=\"'showing'\"\n             (@fadeInContent.done)=\"panelDoneAnimatingStream.next($event.toState)\">\n            <ng-content select=\"mc-tree-selection\"></ng-content>\n        </div>\n    </div>\n</ng-template>\n",
-                    inputs: ['disabled', 'tabIndex'],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    host: {
-                        class: 'mc-tree-select',
-                        '[class.mc-disabled]': 'disabled',
-                        '[class.mc-invalid]': 'errorState',
-                        '[attr.id]': 'id',
-                        '[attr.tabindex]': 'tabIndex',
-                        '[attr.disabled]': 'disabled || null',
-                        '(click)': 'toggle()',
-                        '(keydown)': 'handleKeydown($event)',
-                        '(focus)': 'onFocus()',
-                        '(blur)': 'onBlur()',
-                        '(window:resize)': 'calculateHiddenItems()'
-                    },
-                    animations: [
-                        core$1.mcSelectAnimations.transformPanel,
-                        core$1.mcSelectAnimations.fadeInContent
-                    ],
-                    providers: [
-                        { provide: formField.McFormFieldControl, useExisting: McTreeSelect },
-                        { provide: tree.CdkTree, useExisting: McTreeSelect }
-                    ],
-                    styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:var(--mc-option-size-height,32px);border:var(--mc-option-size-border-width,2px) solid transparent;cursor:pointer;outline:none;padding-left:var(--mc-option-size-horizontal-padding,16px);padding-right:var(--mc-option-size-horizontal-padding,16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.mc-tree-select{box-sizing:border-box;display:inline-block;width:100%;outline:none}.mc-tree-select.mc-disabled .mc-tree-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-tree-select__trigger{display:flex;box-sizing:border-box;position:relative;height:var(--mc-select-size-height,30px);cursor:pointer;padding-left:calc(var(--mc-select-size-left-padding, 16px) - var(--mc-form-field-size-border-width, 1px));padding-right:calc(var(--mc-select-size-right-padding, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-tree-select__trigger.mc-tree-select__trigger_multiple{padding-left:calc(var(--mc-select-size-left-padding-multiple, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tree-select__placeholder{margin-left:8px}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tag.mc-disabled .mc-tag__text{margin-right:7px}.mc-tree-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tree-select__matcher>span{width:100%}.mc-tree-select__multiple-matcher{display:flex;width:100%}.mc-tree-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:calc(var(--mc-select-size-height, 30px) - var(--mc-select-panel-size-border-width, 1px))}.mc-tree-select__match-list .mc-tag{margin-right:4px}.mc-tree-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-tree-select__match-container .mc-tree-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-tree-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-tree-select__arrow-wrapper{align-self:center}.mc-form-field-appearance-fill .mc-tree-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-tree-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-tree-select__arrow-wrapper{transform:translateY(-25%)}.mc-tree-select__panel{max-height:var(--mc-select-panel-size-max-height,232px);min-width:100%;overflow:auto;border-width:var(--mc-select-panel-size-border-width,1px);border-style:solid;border-bottom-left-radius:var(--mc-select-panel-size-border-radius,3px);border-bottom-right-radius:var(--mc-select-panel-size-border-radius,3px);padding:4px 0}.mc-tree-select__panel .mc-optgroup-label,.mc-tree-select__panel .mc-tree-select-option{font-size:inherit;line-height:var(--mc-option-size-height,32px);height:var(--mc-option-size-height,32px)}.mc-tree-select__content,.mc-tree-select__content .mc-tree-selection{height:100%}.mc-form-field-type-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McTreeSelect.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef },
-        { type: overlay.ViewportRuler },
-        { type: core.NgZone },
-        { type: core.Renderer2 },
-        { type: core$1.ErrorStateMatcher },
-        { type: undefined, decorators: [{ type: core.Inject, args: [core$1.MC_SELECT_SCROLL_STRATEGY,] }] },
-        { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
-        { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
-        { type: forms.NgForm, decorators: [{ type: core.Optional }] },
-        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
-        { type: formField.McFormField, decorators: [{ type: core.Optional }] },
-        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] }
-    ]; };
-    McTreeSelect.propDecorators = {
-        trigger: [{ type: core.ViewChild, args: ['trigger', { static: false },] }],
-        panel: [{ type: core.ViewChild, args: ['panel', { static: false },] }],
-        overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay, { static: false },] }],
-        hiddenItemsCounter: [{ type: core.ViewChild, args: ['hiddenItemsCounter', { static: false },] }],
-        tags: [{ type: core.ViewChildren, args: [tags.McTag,] }],
-        cleaner: [{ type: core.ContentChild, args: ['mcSelectCleaner', { static: true },] }],
-        customTrigger: [{ type: core.ContentChild, args: [McTreeSelectTrigger, { static: false },] }],
-        tree: [{ type: core.ContentChild, args: [tree$1.McTreeSelection, { static: false },] }],
-        hiddenItemsText: [{ type: core.Input }],
-        openedChange: [{ type: core.Output }],
-        openedStream: [{ type: core.Output, args: ['opened',] }],
-        closedStream: [{ type: core.Output, args: ['closed',] }],
-        selectionChange: [{ type: core.Output }],
-        valueChange: [{ type: core.Output }],
-        panelClass: [{ type: core.Input }],
-        backdropClass: [{ type: core.Input }],
-        errorStateMatcher: [{ type: core.Input }],
-        sortComparator: [{ type: core.Input }],
-        placeholder: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        multiple: [{ type: core.Input }],
-        autoSelect: [{ type: core.Input }],
-        compareWith: [{ type: core.Input }],
-        id: [{ type: core.Input }],
-        hasBackdrop: [{ type: core.Input }],
-        hiddenItemsTextFormatter: [{ type: core.Input }]
-    };
+    /** @nocollapse */ McTreeSelect.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelect, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: i1__namespace.ViewportRuler }, { token: i0__namespace.NgZone }, { token: i0__namespace.Renderer2 }, { token: i2__namespace.ErrorStateMatcher }, { token: i2.MC_SELECT_SCROLL_STRATEGY }, { token: i4.NG_VALIDATORS, optional: true }, { token: i2.MC_VALIDATION, optional: true }, { token: i3__namespace.Directionality, optional: true }, { token: i4__namespace.NgForm, optional: true }, { token: i4__namespace.FormGroupDirective, optional: true }, { token: i5__namespace.McFormField, optional: true }, { token: i4__namespace.NgControl, optional: true, self: true }, { token: i4__namespace.NgModel, optional: true, self: true }, { token: i4__namespace.FormControlName, optional: true, self: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McTreeSelect.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeSelect, selector: "mc-tree-select", inputs: { disabled: "disabled", tabIndex: "tabIndex", hiddenItemsText: "hiddenItemsText", panelClass: "panelClass", backdropClass: "backdropClass", errorStateMatcher: "errorStateMatcher", sortComparator: "sortComparator", placeholder: "placeholder", required: "required", multiple: "multiple", autoSelect: "autoSelect", compareWith: "compareWith", id: "id", hasBackdrop: "hasBackdrop", hiddenItemsTextFormatter: "hiddenItemsTextFormatter" }, outputs: { openedChange: "openedChange", openedStream: "opened", closedStream: "closed", selectionChange: "selectionChange", valueChange: "valueChange" }, host: { listeners: { "click": "toggle()", "keydown": "handleKeydown($event)", "focus": "onFocus()", "blur": "onBlur()", "window:resize": "calculateHiddenItems()" }, properties: { "class.mc-disabled": "disabled", "class.mc-invalid": "errorState", "attr.id": "id", "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-select" }, providers: [
+            { provide: i5.McFormFieldControl, useExisting: McTreeSelect },
+            { provide: tree.CdkTree, useExisting: McTreeSelect }
+        ], queries: [{ propertyName: "cleaner", first: true, predicate: ["mcSelectCleaner"], descendants: true, static: true }, { propertyName: "customTrigger", first: true, predicate: McTreeSelectTrigger, descendants: true }, { propertyName: "tree", first: true, predicate: tree$1.McTreeSelection, descendants: true }], viewQueries: [{ propertyName: "trigger", first: true, predicate: ["trigger"], descendants: true }, { propertyName: "panel", first: true, predicate: ["panel"], descendants: true }, { propertyName: "overlayDir", first: true, predicate: i1.CdkConnectedOverlay, descendants: true }, { propertyName: "hiddenItemsCounter", first: true, predicate: ["hiddenItemsCounter"], descendants: true }, { propertyName: "tags", predicate: i6.McTag, descendants: true }], exportAs: ["mcTreeSelect"], usesInheritance: true, usesOnChanges: true, ngImport: i0__namespace, template: "<div cdk-overlay-origin\n     class=\"mc-tree-select__trigger\"\n     [class.mc-tree-select__trigger_multiple]=\"multiple\"\n     #origin=\"cdkOverlayOrigin\"\n     #trigger>\n    <div class=\"mc-tree-select__matcher\" [ngSwitch]=\"empty\">\n        <span class=\"mc-tree-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\\u00A0' }}</span>\n        <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\">\n            <div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-tree-select__match-container\">\n                <span *ngSwitchCase=\"false\" class=\"mc-tree-select__matcher-text\">{{ triggerValue }}</span>\n                <div *ngSwitchCase=\"true\" class=\"mc-tree-select__multiple-matcher\">\n                    <div class=\"mc-tree-select__match-list\">\n                        <mc-tag *ngFor=\"let option of triggerValues\"\n                            [selectable]=\"false\"\n                            [disabled]=\"option.disabled || disabled\"\n                            [class.mc-error]=\"errorState\">\n\n                            {{ option.viewValue }}\n                            <i mc-icon=\"mc-close-S_16\"\n                               *ngIf=\"!option.disabled && !disabled\"\n                               (click)=\"onRemoveSelectedOption(option, $event)\">\n                            </i>\n                        </mc-tag>\n                    </div>\n                    <div class=\"mc-tree-select__match-hidden-text\"\n                         [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\"\n                         #hiddenItemsCounter>\n                        {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}\n                    </div>\n                </div>\n            </div>\n            <ng-content select=\"mc-tree-select-trigger\" *ngSwitchCase=\"true\"></ng-content>\n        </span>\n    </div>\n\n    <div class=\"mc-select__cleaner\" *ngIf=\"canShowCleaner\" (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <div class=\"mc-tree-select__arrow-wrapper\">\n        <i class=\"mc-tree-select__arrow\" mc-icon=\"mc-angle-down-L_16\"></i>\n    </div>\n</div>\n\n<ng-template\n    cdk-connected-overlay\n    cdkConnectedOverlayLockPosition\n    [cdkConnectedOverlayHasBackdrop]=\"hasBackdrop\"\n    [cdkConnectedOverlayBackdropClass]=\"backdropClass\"\n    [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\"\n    [cdkConnectedOverlayOrigin]=\"origin\"\n    [cdkConnectedOverlayOpen]=\"panelOpen\"\n    [cdkConnectedOverlayPositions]=\"positions\"\n    [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\"\n    [cdkConnectedOverlayOffsetY]=\"offsetY\"\n    (backdropClick)=\"close()\"\n    (attach)=\"onAttached()\"\n    (detach)=\"close()\">\n\n    <div #panel\n         class=\"mc-tree-select__panel {{ getPanelTheme() }}\"\n         [ngClass]=\"panelClass\"\n         [style.transformOrigin]=\"transformOrigin\"\n         [style.font-size.px]=\"triggerFontSize\"\n         (keydown)=\"handleKeydown($event)\">\n\n        <div #optionsContainer\n             class=\"mc-tree-select__content\"\n             [@fadeInContent]=\"'showing'\"\n             (@fadeInContent.done)=\"panelDoneAnimatingStream.next($event.toState)\">\n            <ng-content select=\"mc-tree-selection\"></ng-content>\n        </div>\n    </div>\n</ng-template>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);border:2px solid transparent;border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * 2px);top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * 2px);left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * 2px);right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * 2px);bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.mc-tree-select{box-sizing:border-box;display:inline-block;width:100%;outline:none}.mc-tree-select.mc-disabled .mc-tree-select__trigger{-webkit-user-select:none;user-select:none;cursor:default}.mc-tree-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;height:var(--mc-select-size-height, 30px);cursor:pointer;padding-left:calc(16px - 1px);padding-left:calc(var(--mc-select-size-left-padding, 16px) - var(--mc-form-field-size-border-width, 1px));padding-right:calc(8px - 1px);padding-right:calc(var(--mc-select-size-right-padding, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-tree-select__trigger.mc-tree-select__trigger_multiple{padding-left:calc(8px - 1px);padding-left:calc(var(--mc-select-size-left-padding-multiple, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tree-select__placeholder{margin-left:8px}.mc-tree-select__trigger.mc-tree-select__trigger_multiple .mc-tag.mc-disabled .mc-tag__text{margin-right:7px}.mc-tree-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tree-select__matcher>span{width:100%}.mc-tree-select__multiple-matcher{display:flex;width:100%}.mc-tree-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:calc(30px - 1px);max-height:calc(var(--mc-select-size-height, 30px) - var(--mc-select-panel-size-border-width, 1px))}.mc-tree-select__match-list .mc-tag{margin-right:4px}.mc-tree-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-tree-select__match-container .mc-tree-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-tree-select__match-item{display:flex;border:1px solid transparent;border-radius:3px;padding-left:7px;margin-right:4px;max-width:100%}.mc-tree-select__arrow-wrapper{align-self:center}.mc-form-field-appearance-fill .mc-tree-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-tree-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-tree-select__arrow-wrapper{transform:translateY(-25%)}.mc-tree-select__panel{max-height:232px;max-height:var(--mc-select-panel-size-max-height, 232px);min-width:100%;overflow:auto;border-width:1px;border-width:var(--mc-select-panel-size-border-width, 1px);border-style:solid;border-bottom-left-radius:3px;border-bottom-left-radius:var(--mc-select-panel-size-border-radius, 3px);border-bottom-right-radius:3px;border-bottom-right-radius:var(--mc-select-panel-size-border-radius, 3px);padding:4px 0}.mc-tree-select__panel .mc-optgroup-label,.mc-tree-select__panel .mc-tree-select-option{font-size:inherit;line-height:32px;line-height:var(--mc-option-size-height, 32px);height:32px;height:var(--mc-option-size-height, 32px)}.mc-tree-select__content{height:100%}.mc-tree-select__content .mc-tree-selection{height:100%}.mc-form-field-type-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}\n"], components: [{ type: i6__namespace.McTag, selector: "mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]", inputs: ["color", "selected", "value", "selectable", "removable", "disabled"], outputs: ["selectionChange", "destroyed", "removed"], exportAs: ["mcTag"] }, { type: i7__namespace.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i1__namespace.CdkOverlayOrigin, selector: "[cdk-overlay-origin], [overlay-origin], [cdkOverlayOrigin]", exportAs: ["cdkOverlayOrigin"] }, { type: i8__namespace.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i8__namespace.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { type: i8__namespace.NgSwitchDefault, selector: "[ngSwitchDefault]" }, { type: i8__namespace.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: i8__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i7__namespace.McIconCSSStyler, selector: "[mc-icon]" }, { type: i1__namespace.CdkConnectedOverlay, selector: "[cdk-connected-overlay], [connected-overlay], [cdkConnectedOverlay]", inputs: ["cdkConnectedOverlayViewportMargin", "cdkConnectedOverlayOpen", "cdkConnectedOverlayDisableClose", "cdkConnectedOverlayScrollStrategy", "cdkConnectedOverlayOffsetX", "cdkConnectedOverlayOffsetY", "cdkConnectedOverlayHasBackdrop", "cdkConnectedOverlayLockPosition", "cdkConnectedOverlayFlexibleDimensions", "cdkConnectedOverlayGrowAfterOpen", "cdkConnectedOverlayPush", "cdkConnectedOverlayPositions", "cdkConnectedOverlayOrigin", "cdkConnectedOverlayPositionStrategy", "cdkConnectedOverlayWidth", "cdkConnectedOverlayHeight", "cdkConnectedOverlayMinWidth", "cdkConnectedOverlayMinHeight", "cdkConnectedOverlayBackdropClass", "cdkConnectedOverlayPanelClass", "cdkConnectedOverlayTransformOriginOn"], outputs: ["backdropClick", "positionChange", "attach", "detach", "overlayKeydown", "overlayOutsideClick"], exportAs: ["cdkConnectedOverlay"] }, { type: i8__namespace.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }], animations: [
+            i2.mcSelectAnimations.transformPanel,
+            i2.mcSelectAnimations.fadeInContent
+        ], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelect, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-tree-select',
+                        exportAs: 'mcTreeSelect',
+                        templateUrl: 'tree-select.html',
+                        styleUrls: ['./tree-select.scss'],
+                        inputs: ['disabled', 'tabIndex'],
+                        encapsulation: i0.ViewEncapsulation.None,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        host: {
+                            class: 'mc-tree-select',
+                            '[class.mc-disabled]': 'disabled',
+                            '[class.mc-invalid]': 'errorState',
+                            '[attr.id]': 'id',
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null',
+                            '(click)': 'toggle()',
+                            '(keydown)': 'handleKeydown($event)',
+                            '(focus)': 'onFocus()',
+                            '(blur)': 'onBlur()',
+                            '(window:resize)': 'calculateHiddenItems()'
+                        },
+                        animations: [
+                            i2.mcSelectAnimations.transformPanel,
+                            i2.mcSelectAnimations.fadeInContent
+                        ],
+                        providers: [
+                            { provide: i5.McFormFieldControl, useExisting: McTreeSelect },
+                            { provide: tree.CdkTree, useExisting: McTreeSelect }
+                        ]
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.ChangeDetectorRef }, { type: i1__namespace.ViewportRuler }, { type: i0__namespace.NgZone }, { type: i0__namespace.Renderer2 }, { type: i2__namespace.ErrorStateMatcher }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [i2.MC_SELECT_SCROLL_STRATEGY]
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [i4.NG_VALIDATORS]
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [i2.MC_VALIDATION]
+                        }] }, { type: i3__namespace.Directionality, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i4__namespace.NgForm, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i4__namespace.FormGroupDirective, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i5__namespace.McFormField, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i4__namespace.NgControl, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: i4__namespace.NgModel, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: i4__namespace.FormControlName, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }];
+        }, propDecorators: { trigger: [{
+                    type: i0.ViewChild,
+                    args: ['trigger', { static: false }]
+                }], panel: [{
+                    type: i0.ViewChild,
+                    args: ['panel', { static: false }]
+                }], overlayDir: [{
+                    type: i0.ViewChild,
+                    args: [i1.CdkConnectedOverlay, { static: false }]
+                }], hiddenItemsCounter: [{
+                    type: i0.ViewChild,
+                    args: ['hiddenItemsCounter', { static: false }]
+                }], tags: [{
+                    type: i0.ViewChildren,
+                    args: [i6.McTag]
+                }], cleaner: [{
+                    type: i0.ContentChild,
+                    args: ['mcSelectCleaner', { static: true }]
+                }], customTrigger: [{
+                    type: i0.ContentChild,
+                    args: [McTreeSelectTrigger, { static: false }]
+                }], tree: [{
+                    type: i0.ContentChild,
+                    args: [tree$1.McTreeSelection, { static: false }]
+                }], hiddenItemsText: [{
+                    type: i0.Input
+                }], openedChange: [{
+                    type: i0.Output
+                }], openedStream: [{
+                    type: i0.Output,
+                    args: ['opened']
+                }], closedStream: [{
+                    type: i0.Output,
+                    args: ['closed']
+                }], selectionChange: [{
+                    type: i0.Output
+                }], valueChange: [{
+                    type: i0.Output
+                }], panelClass: [{
+                    type: i0.Input
+                }], backdropClass: [{
+                    type: i0.Input
+                }], errorStateMatcher: [{
+                    type: i0.Input
+                }], sortComparator: [{
+                    type: i0.Input
+                }], placeholder: [{
+                    type: i0.Input
+                }], required: [{
+                    type: i0.Input
+                }], multiple: [{
+                    type: i0.Input
+                }], autoSelect: [{
+                    type: i0.Input
+                }], compareWith: [{
+                    type: i0.Input
+                }], id: [{
+                    type: i0.Input
+                }], hasBackdrop: [{
+                    type: i0.Input
+                }], hiddenItemsTextFormatter: [{
+                    type: i0.Input
+                }] } });
 
     var McTreeSelectModule = /** @class */ (function () {
         function McTreeSelectModule() {
         }
         return McTreeSelectModule;
     }());
-    McTreeSelectModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        overlay.OverlayModule,
-                        tree.CdkTreeModule,
-                        tree$1.McTreeModule,
-                        icon.McIconModule,
-                        tags.McTagsModule,
-                        core$1.McPseudoCheckboxModule
-                    ],
-                    exports: [McTreeSelect, McTreeSelectTrigger, common.CommonModule],
-                    declarations: [McTreeSelect, McTreeSelectTrigger],
-                    providers: [core$1.MC_SELECT_SCROLL_STRATEGY_PROVIDER]
-                },] }
-    ];
+    /** @nocollapse */ McTreeSelectModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelectModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McTreeSelectModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelectModule, declarations: [McTreeSelect, McTreeSelectTrigger], imports: [i8.CommonModule,
+            i1.OverlayModule,
+            tree.CdkTreeModule,
+            tree$1.McTreeModule,
+            i7.McIconModule,
+            i6.McTagsModule,
+            i2.McPseudoCheckboxModule], exports: [McTreeSelect, McTreeSelectTrigger, i8.CommonModule] });
+    /** @nocollapse */ McTreeSelectModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelectModule, providers: [i2.MC_SELECT_SCROLL_STRATEGY_PROVIDER], imports: [[
+                i8.CommonModule,
+                i1.OverlayModule,
+                tree.CdkTreeModule,
+                tree$1.McTreeModule,
+                i7.McIconModule,
+                i6.McTagsModule,
+                i2.McPseudoCheckboxModule
+            ], i8.CommonModule] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelectModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [
+                            i8.CommonModule,
+                            i1.OverlayModule,
+                            tree.CdkTreeModule,
+                            tree$1.McTreeModule,
+                            i7.McIconModule,
+                            i6.McTagsModule,
+                            i2.McPseudoCheckboxModule
+                        ],
+                        exports: [McTreeSelect, McTreeSelectTrigger, i8.CommonModule],
+                        declarations: [McTreeSelect, McTreeSelectTrigger],
+                        providers: [i2.MC_SELECT_SCROLL_STRATEGY_PROVIDER]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.

@@ -8,6 +8,7 @@ import { McCleaner, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Observable } from 'rxjs';
 import { McTagTextControl } from './tag-text-control';
 import { McTag, McTagEvent, McTagSelectionChange } from './tag.component';
+import * as i0 from "@angular/core";
 export declare class McTagListBase {
     defaultErrorStateMatcher: ErrorStateMatcher;
     parentForm: NgForm;
@@ -234,4 +235,6 @@ export declare class McTagList extends McTagListMixinBase implements McFormField
     private hasFocusedTag;
     /** Syncs the list's disabled state with the individual tags. */
     private syncTagsDisabledState;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTagList, [null, null, null, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; self: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTagList, "mc-tag-list", ["mcTagList"], { "multiple": "multiple"; "compareWith": "compareWith"; "value": "value"; "required": "required"; "placeholder": "placeholder"; "disabled": "disabled"; "selectable": "selectable"; "tabIndex": "tabIndex"; "errorStateMatcher": "errorStateMatcher"; "orientation": "orientation"; }, { "valueChange": "valueChange"; "change": "change"; }, ["cleaner", "tags"], ["*", "mc-cleaner"]>;
 }

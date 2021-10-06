@@ -1,11 +1,37 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('@angular/cdk/coercion'), require('@angular/forms'), require('@angular/cdk/bidi'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('rxjs/operators'), require('@ptsecurity/mosaic/icon')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tags', ['exports', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/cdk/keycodes', '@angular/cdk/coercion', '@angular/forms', '@angular/cdk/bidi', '@angular/cdk/collections', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', 'rxjs', 'rxjs/operators', '@ptsecurity/mosaic/icon'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.tags = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.mc.cdk.keycodes, global.ng.cdk.coercion, global.ng.forms, global.ng.cdk.bidi, global.ng.cdk.collections, global.mc.cdk.a11y, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic['form-field'], global.rxjs, global.rxjs.operators, global.ptsecurity.mosaic.icon));
-}(this, (function (exports, platform, common, core, keycodes, coercion, forms, bidi, collections, a11y, core$1, formField, rxjs, operators, icon) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('@angular/cdk/coercion'), require('@angular/forms'), require('@angular/cdk/collections'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('rxjs/operators'), require('@ptsecurity/mosaic/icon'), require('@angular/cdk/bidi')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tags', ['exports', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/cdk/keycodes', '@angular/cdk/coercion', '@angular/forms', '@angular/cdk/collections', '@ptsecurity/cdk/a11y', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', 'rxjs', 'rxjs/operators', '@ptsecurity/mosaic/icon', '@angular/cdk/bidi'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.tags = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.mc.cdk.keycodes, global.ng.cdk.coercion, global.ng.forms, global.ng.cdk.collections, global.mc.cdk.a11y, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic['form-field'], global.rxjs, global.rxjs.operators, global.ptsecurity.mosaic.icon, global.ng.cdk.bidi));
+}(this, (function (exports, platform, i4, i0, keycodes, coercion, i3, collections, a11y, i1, formField, rxjs, operators, icon, i2) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i4__namespace = /*#__PURE__*/_interopNamespace(i4);
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
+    var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
+    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
 
     /** Injection token to be used to override the default options for the chips module. */
-    var MC_TAGS_DEFAULT_OPTIONS = new core.InjectionToken('mc-tags-default-options');
+    var MC_TAGS_DEFAULT_OPTIONS = new i0.InjectionToken('mc-tags-default-options');
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -346,7 +372,7 @@
              */
             this.separatorKeyCodes = this.defaultOptions.separatorKeyCodes;
             /** Emitted when a tag is to be added. */
-            this.tagEnd = new core.EventEmitter();
+            this.tagEnd = new i0.EventEmitter();
             /** The input's placeholder text. */
             this.placeholder = '';
             /** Unique id for the input. */
@@ -461,7 +487,7 @@
                     var key = _c.value;
                     var separator = this.separatorKeyToSymbol(key);
                     if (data.search(separator) > -1) {
-                        items.push.apply(items, __spread(data.split(separator)));
+                        items.push.apply(items, __spreadArray([], __read(data.split(separator))));
                         break;
                     }
                 }
@@ -530,39 +556,53 @@
         };
         return McTagInput;
     }());
-    McTagInput.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'input[mcTagInputFor]',
-                    exportAs: 'mcTagInput, mcTagInputFor',
-                    host: {
-                        class: 'mc-tag-input',
-                        '[id]': 'id',
-                        '[attr.disabled]': 'disabled || null',
-                        '[attr.placeholder]': 'placeholder || null',
-                        '(keydown)': 'onKeydown($event)',
-                        '(blur)': 'blur()',
-                        '(focus)': 'onFocus()',
-                        '(input)': 'onInput()',
-                        '(paste)': 'onPaste($event)'
-                    }
-                },] }
-    ];
-    /** @nocollapse */
-    McTagInput.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.Renderer2 },
-        { type: undefined, decorators: [{ type: core.Inject, args: [MC_TAGS_DEFAULT_OPTIONS,] }] },
-        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] }
-    ]; };
-    McTagInput.propDecorators = {
-        separatorKeyCodes: [{ type: core.Input, args: ['mcTagInputSeparatorKeyCodes',] }],
-        tagEnd: [{ type: core.Output, args: ['mcTagInputTokenEnd',] }],
-        placeholder: [{ type: core.Input }],
-        id: [{ type: core.Input }],
-        tagList: [{ type: core.Input, args: ['mcTagInputFor',] }],
-        addOnBlur: [{ type: core.Input, args: ['mcTagInputAddOnBlur',] }],
-        disabled: [{ type: core.Input }]
-    };
+    /** @nocollapse */ McTagInput.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagInput, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.Renderer2 }, { token: MC_TAGS_DEFAULT_OPTIONS }, { token: i3__namespace.NgControl, optional: true, self: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTagInput.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTagInput, selector: "input[mcTagInputFor]", inputs: { separatorKeyCodes: ["mcTagInputSeparatorKeyCodes", "separatorKeyCodes"], placeholder: "placeholder", id: "id", tagList: ["mcTagInputFor", "tagList"], addOnBlur: ["mcTagInputAddOnBlur", "addOnBlur"], disabled: "disabled" }, outputs: { tagEnd: "mcTagInputTokenEnd" }, host: { listeners: { "keydown": "onKeydown($event)", "blur": "blur()", "focus": "onFocus()", "input": "onInput()", "paste": "onPaste($event)" }, properties: { "id": "id", "attr.disabled": "disabled || null", "attr.placeholder": "placeholder || null" }, classAttribute: "mc-tag-input" }, exportAs: ["mcTagInput", "mcTagInputFor"], usesOnChanges: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagInput, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'input[mcTagInputFor]',
+                        exportAs: 'mcTagInput, mcTagInputFor',
+                        host: {
+                            class: 'mc-tag-input',
+                            '[id]': 'id',
+                            '[attr.disabled]': 'disabled || null',
+                            '[attr.placeholder]': 'placeholder || null',
+                            '(keydown)': 'onKeydown($event)',
+                            '(blur)': 'blur()',
+                            '(focus)': 'onFocus()',
+                            '(input)': 'onInput()',
+                            '(paste)': 'onPaste($event)'
+                        }
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.Renderer2 }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [MC_TAGS_DEFAULT_OPTIONS]
+                        }] }, { type: i3__namespace.NgControl, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }];
+        }, propDecorators: { separatorKeyCodes: [{
+                    type: i0.Input,
+                    args: ['mcTagInputSeparatorKeyCodes']
+                }], tagEnd: [{
+                    type: i0.Output,
+                    args: ['mcTagInputTokenEnd']
+                }], placeholder: [{
+                    type: i0.Input
+                }], id: [{
+                    type: i0.Input
+                }], tagList: [{
+                    type: i0.Input,
+                    args: ['mcTagInputFor']
+                }], addOnBlur: [{
+                    type: i0.Input,
+                    args: ['mcTagInputAddOnBlur']
+                }], disabled: [{
+                    type: i0.Input
+                }] } });
 
     /** Event object emitted by McTag when selected or deselected. */
     var McTagSelectionChange = /** @class */ (function () {
@@ -584,12 +624,15 @@
         }
         return McTagAvatar;
     }());
-    McTagAvatar.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-tag-avatar, [mcTagAvatar]',
-                    host: { class: 'mc-tag-avatar' }
-                },] }
-    ];
+    /** @nocollapse */ McTagAvatar.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagAvatar, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTagAvatar.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTagAvatar, selector: "mc-tag-avatar, [mcTagAvatar]", host: { classAttribute: "mc-tag-avatar" }, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagAvatar, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'mc-tag-avatar, [mcTagAvatar]',
+                        host: { class: 'mc-tag-avatar' }
+                    }]
+            }] });
     /**
      * Dummy directive to add CSS class to tag trailing icon.
      * @docs-private
@@ -599,12 +642,15 @@
         }
         return McTagTrailingIcon;
     }());
-    McTagTrailingIcon.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'mc-tag-trailing-icon, [mcTagTrailingIcon]',
-                    host: { class: 'mc-tag-trailing-icon' }
-                },] }
-    ];
+    /** @nocollapse */ McTagTrailingIcon.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagTrailingIcon, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTagTrailingIcon.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTagTrailingIcon, selector: "mc-tag-trailing-icon, [mcTagTrailingIcon]", host: { classAttribute: "mc-tag-trailing-icon" }, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagTrailingIcon, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'mc-tag-trailing-icon, [mcTagTrailingIcon]',
+                        host: { class: 'mc-tag-trailing-icon' }
+                    }]
+            }] });
     var McTagBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
         function McTagBase(_elementRef) {
@@ -613,7 +659,7 @@
         return McTagBase;
     }());
     // tslint:disable-next-line:naming-convention
-    var McTagMixinBase = core$1.mixinColor(core$1.mixinDisabled(McTagBase));
+    var McTagMixinBase = i1.mixinColor(i1.mixinDisabled(McTagBase));
     var McTag = /** @class */ (function (_super) {
         __extends(McTag, _super);
         function McTag(elementRef, changeDetectorRef, _ngZone) {
@@ -630,11 +676,11 @@
             /** Whether the tag list is selectable */
             _this.tagListSelectable = true;
             /** Emitted when the tag is selected or deselected. */
-            _this.selectionChange = new core.EventEmitter();
+            _this.selectionChange = new i0.EventEmitter();
             /** Emitted when the tag is destroyed. */
-            _this.destroyed = new core.EventEmitter();
+            _this.destroyed = new i0.EventEmitter();
             /** Emitted when a tag is to be removed. */
-            _this.removed = new core.EventEmitter();
+            _this.removed = new i0.EventEmitter();
             _this._selected = false;
             _this._selectable = true;
             _this._removable = true;
@@ -880,51 +926,62 @@
         };
         return McTag;
     }(McTagMixinBase));
-    McTag.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]',
-                    exportAs: 'mcTag',
-                    template: "<div class=\"mc-tag__wrapper\">\n    <span class=\"mc-tag__text\"><ng-content></ng-content></span>\n    <ng-content select=\"[mc-icon]\"></ng-content>\n    <div class=\"mc-tag-overlay\"></div>\n</div>\n",
-                    inputs: ['color'],
-                    host: {
-                        class: 'mc-tag',
-                        '[attr.tabindex]': 'tabindex',
-                        '[attr.disabled]': 'disabled || null',
-                        '[class.mc-selected]': 'selected',
-                        '[class.mc-focused]': 'hasFocus',
-                        '[class.mc-tag-with-avatar]': 'avatar',
-                        '[class.mc-tag-with-trailing-icon]': 'trailingIcon || removeIcon',
-                        '[class.mc-disabled]': 'disabled',
-                        '(click)': 'handleClick($event)',
-                        '(keydown)': 'handleKeydown($event)',
-                        '(focus)': 'focus()',
-                        '(blur)': 'blur()'
-                    },
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    styles: [".mc-tag{position:relative;display:inline-block;overflow:hidden;margin:var(--mc-tags-size-margin,2px);height:var(--mc-tags-size-height,24px);border-width:var(--mc-tags-size-border-width,1px);border-style:solid;border-radius:var(--mc-tags-size-border-radius,4px);cursor:default;outline:none;box-sizing:border-box}.mc-tag.mc-left-icon{padding-left:var(--mc-tags-size-icon-padding,3px)}.mc-tag.mc-right-icon{padding-right:var(--mc-tags-size-icon-padding,3px)}.mc-tag__wrapper{display:flex;align-items:center;height:100%;flex:1 1 100%}.mc-tag__wrapper .mc-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:var(--mc-tags-size-height,24px);height:var(--mc-tags-size-height,24px)}.mc-tag__wrapper .mc-icon_left{margin-right:var(--mc-tags-size-icon-padding,3px)}.mc-tag__wrapper .mc-icon_right{margin-left:var(--mc-tags-size-icon-padding,3px)}.mc-tag-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}.mc-tag__text{margin-left:calc(var(--mc-tags-size-text-margin, 8px) - var(--mc-tags-size-border-width, 1px));text-overflow:ellipsis;white-space:nowrap;overflow:hidden}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McTag.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef },
-        { type: core.NgZone }
-    ]; };
-    McTag.propDecorators = {
-        contentChildren: [{ type: core.ContentChildren, args: [icon.McIcon,] }],
-        avatar: [{ type: core.ContentChild, args: [McTagAvatar, { static: false },] }],
-        trailingIcon: [{ type: core.ContentChild, args: [McTagTrailingIcon, { static: false },] }],
-        removeIcon: [{ type: core.ContentChild, args: [core.forwardRef(function () { return McTagRemove; }), { static: false },] }],
-        selectionChange: [{ type: core.Output }],
-        destroyed: [{ type: core.Output }],
-        removed: [{ type: core.Output }],
-        selected: [{ type: core.Input }],
-        value: [{ type: core.Input }],
-        selectable: [{ type: core.Input }],
-        removable: [{ type: core.Input }],
-        disabled: [{ type: core.Input }]
-    };
+    /** @nocollapse */ McTag.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTag, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: i0__namespace.NgZone }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McTag.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTag, selector: "mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]", inputs: { color: "color", selected: "selected", value: "value", selectable: "selectable", removable: "removable", disabled: "disabled" }, outputs: { selectionChange: "selectionChange", destroyed: "destroyed", removed: "removed" }, host: { listeners: { "click": "handleClick($event)", "keydown": "handleKeydown($event)", "focus": "focus()", "blur": "blur()" }, properties: { "attr.tabindex": "tabindex", "attr.disabled": "disabled || null", "class.mc-selected": "selected", "class.mc-focused": "hasFocus", "class.mc-tag-with-avatar": "avatar", "class.mc-tag-with-trailing-icon": "trailingIcon || removeIcon", "class.mc-disabled": "disabled" }, classAttribute: "mc-tag" }, queries: [{ propertyName: "avatar", first: true, predicate: McTagAvatar, descendants: true }, { propertyName: "trailingIcon", first: true, predicate: McTagTrailingIcon, descendants: true }, { propertyName: "removeIcon", first: true, predicate: McTagRemove, descendants: true }, { propertyName: "contentChildren", predicate: icon.McIcon }], exportAs: ["mcTag"], usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-tag__wrapper\">\n    <span class=\"mc-tag__text\"><ng-content></ng-content></span>\n    <ng-content select=\"[mc-icon]\"></ng-content>\n    <div class=\"mc-tag-overlay\"></div>\n</div>\n", styles: [".mc-tag{position:relative;display:inline-block;overflow:hidden;margin:2px;margin:var(--mc-tags-size-margin, 2px);height:24px;height:var(--mc-tags-size-height, 24px);border-width:1px;border-width:var(--mc-tags-size-border-width, 1px);border-style:solid;border-radius:4px;border-radius:var(--mc-tags-size-border-radius, 4px);cursor:default;outline:none;box-sizing:border-box}.mc-tag.mc-left-icon{padding-left:3px;padding-left:var(--mc-tags-size-icon-padding, 3px)}.mc-tag.mc-right-icon{padding-right:3px;padding-right:var(--mc-tags-size-icon-padding, 3px)}.mc-tag__wrapper{display:flex;align-items:center;height:100%;flex:1 1 100%}.mc-tag__wrapper .mc-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:24px;width:var(--mc-tags-size-height, 24px);height:24px;height:var(--mc-tags-size-height, 24px)}.mc-tag__wrapper .mc-icon_left{margin-right:3px;margin-right:var(--mc-tags-size-icon-padding, 3px)}.mc-tag__wrapper .mc-icon_right{margin-left:3px;margin-left:var(--mc-tags-size-icon-padding, 3px)}.mc-tag-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}.mc-tag__text{margin-left:calc(8px - 1px);margin-left:calc(var(--mc-tags-size-text-margin, 8px) - var(--mc-tags-size-border-width, 1px));text-overflow:ellipsis;white-space:nowrap;overflow:hidden}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTag, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]',
+                        exportAs: 'mcTag',
+                        templateUrl: 'tag.partial.html',
+                        styleUrls: ['./tag.scss'],
+                        inputs: ['color'],
+                        host: {
+                            class: 'mc-tag',
+                            '[attr.tabindex]': 'tabindex',
+                            '[attr.disabled]': 'disabled || null',
+                            '[class.mc-selected]': 'selected',
+                            '[class.mc-focused]': 'hasFocus',
+                            '[class.mc-tag-with-avatar]': 'avatar',
+                            '[class.mc-tag-with-trailing-icon]': 'trailingIcon || removeIcon',
+                            '[class.mc-disabled]': 'disabled',
+                            '(click)': 'handleClick($event)',
+                            '(keydown)': 'handleKeydown($event)',
+                            '(focus)': 'focus()',
+                            '(blur)': 'blur()'
+                        },
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None
+                    }]
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.ChangeDetectorRef }, { type: i0__namespace.NgZone }]; }, propDecorators: { contentChildren: [{
+                    type: i0.ContentChildren,
+                    args: [icon.McIcon]
+                }], avatar: [{
+                    type: i0.ContentChild,
+                    args: [McTagAvatar, { static: false }]
+                }], trailingIcon: [{
+                    type: i0.ContentChild,
+                    args: [McTagTrailingIcon, { static: false }]
+                }], removeIcon: [{
+                    type: i0.ContentChild,
+                    args: [i0.forwardRef(function () { return McTagRemove; }), { static: false }]
+                }], selectionChange: [{
+                    type: i0.Output
+                }], destroyed: [{
+                    type: i0.Output
+                }], removed: [{
+                    type: i0.Output
+                }], selected: [{
+                    type: i0.Input
+                }], value: [{
+                    type: i0.Input
+                }], selectable: [{
+                    type: i0.Input
+                }], removable: [{
+                    type: i0.Input
+                }], disabled: [{
+                    type: i0.Input
+                }] } });
     /**
      *
      * Example:
@@ -957,21 +1014,20 @@
         };
         return McTagRemove;
     }());
-    McTagRemove.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcTagRemove]',
-                    host: {
-                        class: 'mc-tag-remove mc-tag-trailing-icon',
-                        '[attr.tabindex]': '-1',
-                        '(click)': 'handleClick($event)',
-                        '(focus)': 'focus($event)'
-                    }
-                },] }
-    ];
-    /** @nocollapse */
-    McTagRemove.ctorParameters = function () { return [
-        { type: McTag }
-    ]; };
+    /** @nocollapse */ McTagRemove.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagRemove, deps: [{ token: McTag }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTagRemove.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTagRemove, selector: "[mcTagRemove]", host: { listeners: { "click": "handleClick($event)", "focus": "focus($event)" }, properties: { "attr.tabindex": "-1" }, classAttribute: "mc-tag-remove mc-tag-trailing-icon" }, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagRemove, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[mcTagRemove]',
+                        host: {
+                            class: 'mc-tag-remove mc-tag-trailing-icon',
+                            '[attr.tabindex]': '-1',
+                            '(click)': 'handleClick($event)',
+                            '(focus)': 'focus($event)'
+                        }
+                    }]
+            }], ctorParameters: function () { return [{ type: McTag }]; } });
 
     var McTagListBase = /** @class */ (function () {
         function McTagListBase(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
@@ -983,7 +1039,7 @@
         return McTagListBase;
     }());
     // tslint:disable-next-line:naming-convention
-    var McTagListMixinBase = core$1.mixinErrorState(McTagListBase);
+    var McTagListMixinBase = i1.mixinErrorState(McTagListBase);
     // Increasing integer for generating unique ids for tag-list components.
     var nextUniqueId = 0;
     /** Change event object that is emitted when the tag list value has changed. */
@@ -1012,18 +1068,18 @@
              * to facilitate the two-way binding for the `value` input.
              * @docs-private
              */
-            _this.valueChange = new core.EventEmitter();
+            _this.valueChange = new i0.EventEmitter();
             _this.uid = "mc-tag-list-" + nextUniqueId++;
             /**
              * User defined tab index.
              * When it is not null, use user defined tab index. Otherwise use tabIndex
              */
             _this.userTabIndex = null;
-            _this.tagChanges = new core.EventEmitter();
+            _this.tagChanges = new i0.EventEmitter();
             /** Orientation of the tag list. */
             _this.orientation = 'horizontal';
             /** Event emitted when the selected tag list value has been changed by the user. */
-            _this.change = new core.EventEmitter();
+            _this.change = new i0.EventEmitter();
             _this._required = false;
             _this._disabled = false;
             _this._selectable = true;
@@ -1049,7 +1105,7 @@
         Object.defineProperty(McTagList.prototype, "tagSelectionChanges", {
             /** Combined stream of all of the child tags' selection change events. */
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.tags.map(function (tag) { return tag.selectionChange; })));
+                return rxjs.merge.apply(void 0, __spreadArray([], __read(this.tags.map(function (tag) { return tag.selectionChange; }))));
             },
             enumerable: false,
             configurable: true
@@ -1057,7 +1113,7 @@
         Object.defineProperty(McTagList.prototype, "tagFocusChanges", {
             /** Combined stream of all of the child tags' focus change events. */
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.tags.map(function (tag) { return tag.onFocus; })));
+                return rxjs.merge.apply(void 0, __spreadArray([], __read(this.tags.map(function (tag) { return tag.onFocus; }))));
             },
             enumerable: false,
             configurable: true
@@ -1065,7 +1121,7 @@
         Object.defineProperty(McTagList.prototype, "tagBlurChanges", {
             /** Combined stream of all of the child tags' blur change events. */
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.tags.map(function (tag) { return tag.onBlur; })));
+                return rxjs.merge.apply(void 0, __spreadArray([], __read(this.tags.map(function (tag) { return tag.onBlur; }))));
             },
             enumerable: false,
             configurable: true
@@ -1073,7 +1129,7 @@
         Object.defineProperty(McTagList.prototype, "tagRemoveChanges", {
             /** Combined stream of all of the child tags' remove change events. */
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.tags.map(function (tag) { return tag.destroyed; })));
+                return rxjs.merge.apply(void 0, __spreadArray([], __read(this.tags.map(function (tag) { return tag.destroyed; }))));
             },
             enumerable: false,
             configurable: true
@@ -1256,7 +1312,7 @@
         McTagList.prototype.ngAfterContentInit = function () {
             var _this = this;
             if (this.mcValidation.useValidation) {
-                core$1.setMosaicValidation(this);
+                i1.setMosaicValidation(this);
             }
             this.keyManager = new a11y.FocusKeyManager(this.tags)
                 .withVerticalOrientation()
@@ -1691,94 +1747,145 @@
         };
         return McTagList;
     }(McTagListMixinBase));
-    McTagList.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-tag-list',
-                    exportAs: 'mcTagList',
-                    template: "<div class=\"mc-tags-list__list-container\">\n    <ng-content></ng-content>\n</div>\n\n<div class=\"mc-tags-list__cleaner\"\n     *ngIf=\"canShowCleaner\">\n    <ng-content select=\"mc-cleaner\"></ng-content>\n</div>\n",
-                    host: {
-                        class: 'mc-tag-list',
-                        '[class.mc-disabled]': 'disabled',
-                        '[class.mc-invalid]': 'errorState',
-                        '[attr.tabindex]': 'disabled ? null : tabIndex',
-                        '[id]': 'uid',
-                        '(focus)': 'focus()',
-                        '(blur)': 'blur()',
-                        '(keydown)': 'keydown($event)'
-                    },
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    providers: [{ provide: formField.McFormFieldControl, useExisting: McTagList }],
-                    styles: [".mc-tag-list{display:flex;flex-direction:row;box-sizing:border-box}.mc-tag-input{border:none;outline:none;background:transparent}.mc-tags-list__list-container{display:flex;flex-wrap:wrap;flex:1 1 100%;box-sizing:border-box;min-width:0;min-height:var(--mc-tag-list-size-min-height,30px);padding:var(--mc-tag-list-size-padding,1px 6px)}.mc-tags-list__list-container .mc-tag-input{max-width:100%;flex:1 1 auto;height:var(--mc-tag-input-size-height,22px);margin:var(--mc-tag-input-size-margin,2px 4px)}.mc-tags-list__cleaner .mc-cleaner{height:30px}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McTagList.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.ChangeDetectorRef },
-        { type: core$1.ErrorStateMatcher },
-        { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] },
-        { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
-        { type: forms.NgForm, decorators: [{ type: core.Optional }] },
-        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
-        { type: forms.NgControl, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] }
-    ]; };
-    McTagList.propDecorators = {
-        multiple: [{ type: core.Input }],
-        compareWith: [{ type: core.Input }],
-        value: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        placeholder: [{ type: core.Input }],
-        disabled: [{ type: core.Input }],
-        selectable: [{ type: core.Input }],
-        tabIndex: [{ type: core.Input }],
-        valueChange: [{ type: core.Output }],
-        errorStateMatcher: [{ type: core.Input }],
-        orientation: [{ type: core.Input, args: ['orientation',] }],
-        change: [{ type: core.Output }],
-        cleaner: [{ type: core.ContentChild, args: ['mcTagListCleaner', { static: true },] }],
-        tags: [{ type: core.ContentChildren, args: [McTag, {
-                        // Need to use `descendants: true`,
-                        // Ivy will no longer match indirect descendants if it's left as false.
-                        descendants: true
-                    },] }]
-    };
+    /** @nocollapse */ McTagList.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagList, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: i1__namespace.ErrorStateMatcher }, { token: i3.NG_VALIDATORS, optional: true }, { token: i1.MC_VALIDATION, optional: true }, { token: i2__namespace.Directionality, optional: true }, { token: i3__namespace.NgForm, optional: true }, { token: i3__namespace.FormGroupDirective, optional: true }, { token: i3__namespace.NgControl, optional: true, self: true }, { token: i3__namespace.NgModel, optional: true, self: true }, { token: i3__namespace.FormControlName, optional: true, self: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McTagList.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTagList, selector: "mc-tag-list", inputs: { multiple: "multiple", compareWith: "compareWith", value: "value", required: "required", placeholder: "placeholder", disabled: "disabled", selectable: "selectable", tabIndex: "tabIndex", errorStateMatcher: "errorStateMatcher", orientation: "orientation" }, outputs: { valueChange: "valueChange", change: "change" }, host: { listeners: { "focus": "focus()", "blur": "blur()", "keydown": "keydown($event)" }, properties: { "class.mc-disabled": "disabled", "class.mc-invalid": "errorState", "attr.tabindex": "disabled ? null : tabIndex", "id": "uid" }, classAttribute: "mc-tag-list" }, providers: [{ provide: formField.McFormFieldControl, useExisting: McTagList }], queries: [{ propertyName: "cleaner", first: true, predicate: ["mcTagListCleaner"], descendants: true, static: true }, { propertyName: "tags", predicate: McTag, descendants: true }], exportAs: ["mcTagList"], usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-tags-list__list-container\">\n    <ng-content></ng-content>\n</div>\n\n<div class=\"mc-tags-list__cleaner\"\n     *ngIf=\"canShowCleaner\">\n    <ng-content select=\"mc-cleaner\"></ng-content>\n</div>\n", styles: [".mc-tag-list{display:flex;flex-direction:row;box-sizing:border-box}.mc-tag-input{border:none;outline:none;background:transparent}.mc-tags-list__list-container{display:flex;flex-wrap:wrap;flex:1 1 100%;box-sizing:border-box;min-width:0;min-height:30px;min-height:var(--mc-tag-list-size-min-height, 30px);padding:1px 6px;padding:var(--mc-tag-list-size-padding, 1px 6px)}.mc-tags-list__list-container .mc-tag-input{max-width:100%;flex:1 1 auto;height:22px;height:var(--mc-tag-input-size-height, 22px);margin:2px 4px;margin:var(--mc-tag-input-size-margin, 2px 4px)}.mc-tags-list__cleaner .mc-cleaner{height:30px}\n"], directives: [{ type: i4__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagList, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-tag-list',
+                        exportAs: 'mcTagList',
+                        templateUrl: 'tag-list.partial.html',
+                        styleUrls: ['tag-list.scss'],
+                        host: {
+                            class: 'mc-tag-list',
+                            '[class.mc-disabled]': 'disabled',
+                            '[class.mc-invalid]': 'errorState',
+                            '[attr.tabindex]': 'disabled ? null : tabIndex',
+                            '[id]': 'uid',
+                            '(focus)': 'focus()',
+                            '(blur)': 'blur()',
+                            '(keydown)': 'keydown($event)'
+                        },
+                        encapsulation: i0.ViewEncapsulation.None,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        providers: [{ provide: formField.McFormFieldControl, useExisting: McTagList }]
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.ChangeDetectorRef }, { type: i1__namespace.ErrorStateMatcher }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [i3.NG_VALIDATORS]
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [i1.MC_VALIDATION]
+                        }] }, { type: i2__namespace.Directionality, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i3__namespace.NgForm, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i3__namespace.FormGroupDirective, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i3__namespace.NgControl, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: i3__namespace.NgModel, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: i3__namespace.FormControlName, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }];
+        }, propDecorators: { multiple: [{
+                    type: i0.Input
+                }], compareWith: [{
+                    type: i0.Input
+                }], value: [{
+                    type: i0.Input
+                }], required: [{
+                    type: i0.Input
+                }], placeholder: [{
+                    type: i0.Input
+                }], disabled: [{
+                    type: i0.Input
+                }], selectable: [{
+                    type: i0.Input
+                }], tabIndex: [{
+                    type: i0.Input
+                }], valueChange: [{
+                    type: i0.Output
+                }], errorStateMatcher: [{
+                    type: i0.Input
+                }], orientation: [{
+                    type: i0.Input,
+                    args: ['orientation']
+                }], change: [{
+                    type: i0.Output
+                }], cleaner: [{
+                    type: i0.ContentChild,
+                    args: ['mcTagListCleaner', { static: true }]
+                }], tags: [{
+                    type: i0.ContentChildren,
+                    args: [McTag, {
+                            // Need to use `descendants: true`,
+                            // Ivy will no longer match indirect descendants if it's left as false.
+                            descendants: true
+                        }]
+                }] } });
 
-    var ɵ0 = { separatorKeyCodes: [keycodes.ENTER] };
     var McTagsModule = /** @class */ (function () {
         function McTagsModule() {
         }
         return McTagsModule;
     }());
-    McTagsModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [common.CommonModule, platform.PlatformModule],
-                    exports: [
-                        McTagList,
-                        McTag,
-                        McTagInput,
-                        McTagTrailingIcon,
-                        McTagAvatar,
-                        McTagRemove
-                    ],
-                    declarations: [
-                        McTagList,
-                        McTag,
-                        McTagInput,
-                        McTagTrailingIcon,
-                        McTagAvatar,
-                        McTagRemove
-                    ],
-                    providers: [{
-                            provide: MC_TAGS_DEFAULT_OPTIONS,
-                            // tslint:disable-next-line: no-object-literal-type-assertion
-                            useValue: ɵ0
-                        }]
-                },] }
-    ];
+    /** @nocollapse */ McTagsModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagsModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McTagsModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagsModule, declarations: [McTagList,
+            McTag,
+            McTagInput,
+            McTagTrailingIcon,
+            McTagAvatar,
+            McTagRemove], imports: [i4.CommonModule, platform.PlatformModule], exports: [McTagList,
+            McTag,
+            McTagInput,
+            McTagTrailingIcon,
+            McTagAvatar,
+            McTagRemove] });
+    /** @nocollapse */ McTagsModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagsModule, providers: [{
+                provide: MC_TAGS_DEFAULT_OPTIONS,
+                // tslint:disable-next-line: no-object-literal-type-assertion
+                useValue: { separatorKeyCodes: [keycodes.ENTER] }
+            }], imports: [[i4.CommonModule, platform.PlatformModule]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTagsModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [i4.CommonModule, platform.PlatformModule],
+                        exports: [
+                            McTagList,
+                            McTag,
+                            McTagInput,
+                            McTagTrailingIcon,
+                            McTagAvatar,
+                            McTagRemove
+                        ],
+                        declarations: [
+                            McTagList,
+                            McTag,
+                            McTagInput,
+                            McTagTrailingIcon,
+                            McTagAvatar,
+                            McTagRemove
+                        ],
+                        providers: [{
+                                provide: MC_TAGS_DEFAULT_OPTIONS,
+                                // tslint:disable-next-line: no-object-literal-type-assertion
+                                useValue: { separatorKeyCodes: [keycodes.ENTER] }
+                            }]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.
@@ -1798,7 +1905,6 @@
     exports.McTagSelectionChange = McTagSelectionChange;
     exports.McTagTrailingIcon = McTagTrailingIcon;
     exports.McTagsModule = McTagsModule;
-    exports.ɵ0 = ɵ0;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

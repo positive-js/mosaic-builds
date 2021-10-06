@@ -1,5 +1,6 @@
 import { TemplateRef, ComponentFactoryResolver, ApplicationRef, Injector, ViewContainerRef, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
+import * as i0 from "@angular/core";
 /**
  * Dropdown content that will be rendered lazily once the dropdown is opened.
  */
@@ -26,4 +27,6 @@ export declare class McDropdownContent implements OnDestroy {
      */
     detach(): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McDropdownContent, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McDropdownContent, "ng-template[mcDropdownContent]", never, {}, {}, never>;
 }

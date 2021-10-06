@@ -1,11 +1,17 @@
-import { OverlayRef, Overlay, OverlayModule } from '@angular/cdk/overlay';
+import * as i1 from '@angular/cdk/overlay';
+import { OverlayRef, OverlayModule } from '@angular/cdk/overlay';
+import * as i5 from '@angular/common';
 import { DOCUMENT, CommonModule } from '@angular/common';
-import { Injectable, Optional, SkipSelf, EventEmitter, TemplateRef, Type, Injector, Component, ViewEncapsulation, ChangeDetectionStrategy, Renderer2, ComponentFactoryResolver, ElementRef, ViewContainerRef, ChangeDetectorRef, Inject, Input, Output, ViewChild, ViewChildren, Pipe, Directive, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { Injectable, Optional, SkipSelf, Directive, Pipe, EventEmitter, TemplateRef, Type, Injector, ViewContainerRef, ElementRef, Component, ViewEncapsulation, ChangeDetectionStrategy, Inject, Input, Output, ViewChild, ViewChildren, NgModule } from '@angular/core';
 import { ESCAPE, ENTER } from '@ptsecurity/cdk/keycodes';
 import { Subject } from 'rxjs';
-import { A11yModule } from '@angular/cdk/a11y';
+import * as i3 from '@ptsecurity/mosaic/button';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import * as i4 from '@ptsecurity/mosaic/icon';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import * as i6 from '@angular/cdk/a11y';
+import { A11yModule } from '@angular/cdk/a11y';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { filter } from 'rxjs/operators';
 
@@ -59,13 +65,15 @@ class McModalControlService {
         }
     }
 }
-McModalControlService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-McModalControlService.ctorParameters = () => [
-    { type: McModalControlService, decorators: [{ type: Optional }, { type: SkipSelf }] }
-];
+/** @nocollapse */ McModalControlService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalControlService, deps: [{ token: McModalControlService, optional: true, skipSelf: true }], target: i0.ɵɵFactoryTarget.Injectable });
+/** @nocollapse */ McModalControlService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalControlService });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalControlService, decorators: [{
+            type: Injectable
+        }], ctorParameters: function () { return [{ type: McModalControlService, decorators: [{
+                    type: Optional
+                }, {
+                    type: SkipSelf
+                }] }]; } });
 
 /**
  * API class that public to users to handle the modal instance.
@@ -98,6 +106,71 @@ var ModalSize;
     ModalSize["Normal"] = "normal";
     ModalSize["Large"] = "large";
 })(ModalSize || (ModalSize = {}));
+
+class McModalTitle {
+}
+/** @nocollapse */ McModalTitle.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalTitle, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McModalTitle.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McModalTitle, selector: "[mc-modal-title], mc-modal-title, [mcModalTitle]", host: { classAttribute: "mc-modal-header mc-modal-title" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalTitle, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: `[mc-modal-title], mc-modal-title, [mcModalTitle]`,
+                    host: {
+                        class: 'mc-modal-header mc-modal-title'
+                    }
+                }]
+        }] });
+class McModalBody {
+}
+/** @nocollapse */ McModalBody.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalBody, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McModalBody.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McModalBody, selector: "[mc-modal-body], mc-modal-body, [mcModalBody]", host: { classAttribute: "mc-modal-body" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalBody, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: `[mc-modal-body], mc-modal-body, [mcModalBody]`,
+                    host: {
+                        class: 'mc-modal-body'
+                    }
+                }]
+        }] });
+class McModalFooter {
+}
+/** @nocollapse */ McModalFooter.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalFooter, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McModalFooter.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McModalFooter, selector: "[mc-modal-footer], mc-modal-footer, [mcModalFooter]", host: { classAttribute: "mc-modal-footer" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalFooter, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: `[mc-modal-footer], mc-modal-footer, [mcModalFooter]`,
+                    host: {
+                        class: 'mc-modal-footer'
+                    }
+                }]
+        }] });
+class McModalMainAction {
+}
+/** @nocollapse */ McModalMainAction.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalMainAction, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McModalMainAction.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McModalMainAction, selector: "[mc-modal-main-action]", ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalMainAction, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: `[mc-modal-main-action]`
+                }]
+        }] });
+
+class CssUnitPipe {
+    transform(value, defaultUnit = 'px') {
+        const formatted = +value;
+        return isNaN(formatted) ? `${value}` : `${formatted}${defaultUnit}`;
+    }
+}
+/** @nocollapse */ CssUnitPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: CssUnitPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+/** @nocollapse */ CssUnitPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: CssUnitPipe, name: "toCssUnit" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: CssUnitPipe, decorators: [{
+            type: Pipe,
+            args: [{
+                    name: 'toCssUnit'
+                }]
+        }] });
 
 // Duration when perform animations (ms)
 const MODAL_ANIMATE_DURATION = 200;
@@ -428,7 +501,7 @@ class McModalComponent extends McModalRef {
         return new Promise((resolve) => {
             return window.setTimeout(() => {
                 this.changeAnimationState(null);
-                resolve();
+                resolve(null);
             }, MODAL_ANIMATE_DURATION);
         });
     }
@@ -485,65 +558,100 @@ class McModalComponent extends McModalRef {
         }
     }
 }
-McModalComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-modal',
-                template: "<!-- Compatible: the <ng-content> can appear only once -->\n<ng-template #tplOriginContent>\n    <ng-content></ng-content>\n</ng-template>\n\n<div>\n    <div *ngIf=\"mcMask\"\n         class=\"mc-modal-mask\"\n         [ngClass]=\"maskAnimationClassMap\"\n         [class.mc-modal-mask-hidden]=\"hidden\"\n         [ngStyle]=\"mcMaskStyle\"\n         [style.zIndex]=\"mcZIndex\"\n    ></div>\n    <div (mousedown)=\"onClickMask($event)\"\n         class=\"mc-modal-wrap {{ mcWrapClassName }}\"\n         [style.zIndex]=\"mcZIndex\"\n         [style.display]=\"hidden ? 'none' : ''\"\n         tabindex=\"-1\">\n\n        <div #modalContainer\n             class=\"mc-modal {{ mcClassName }} mc-modal_{{ mcSize }}\"\n             [ngClass]=\"modalAnimationClassMap\"\n             [ngStyle]=\"mcStyle\"\n             [style.width]=\"mcWidth | toCssUnit\"\n             [style.transform-origin]=\"transformOrigin\">\n\n            <div class=\"mc-modal-content\" cdkTrapFocus>\n                <button *ngIf=\"mcClosable\"\n                        mc-button\n                        (click)=\"onClickCloseBtn()\"\n                        class=\"mc-modal-close mc-button_transparent\">\n                    <i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" [color]=\"'second'\"></i>\n                </button>\n                <ng-container [ngSwitch]=\"true\">\n                    <ng-container *ngSwitchCase=\"isModalType('default')\"\n                                  [ngTemplateOutlet]=\"tplContentDefault\"></ng-container>\n                    <ng-container *ngSwitchCase=\"isModalType('confirm')\"\n                                  [ngTemplateOutlet]=\"tplContentConfirm\"></ng-container>\n                    <ng-container *ngSwitchCase=\"isModalType('custom')\"\n                                  [ngTemplateOutlet]=\"tplContentCustom\"></ng-container>\n                </ng-container>\n            </div>\n        </div>\n    </div>\n</div>\n\n<ng-template #tplContentCustom>\n    <ng-container #bodyContainer></ng-container>\n</ng-template>\n\n\n<!-- [Predefined] Default Modal Content -->\n<ng-template #tplContentDefault>\n    <div *ngIf=\"mcTitle\" class=\"mc-modal-header\" [class.mc-modal-body_top-overflow]=\"isTopOverflow\">\n        <div class=\"mc-modal-title\">\n            <ng-container [ngSwitch]=\"true\">\n                <ng-container *ngSwitchCase=\"isTemplateRef(mcTitle)\" [ngTemplateOutlet]=\"mcTitle\"></ng-container>\n                <ng-container *ngSwitchCase=\"isNonEmptyString(mcTitle)\">\n                    <div [innerHTML]=\"mcTitle\"></div>\n                </ng-container>\n            </ng-container>\n        </div>\n    </div>\n    <div class=\"mc-modal-body\" #modalBody [ngStyle]=\"mcBodyStyle\" (scroll)=\"checkOverflow()\">\n        <ng-container #bodyContainer>\n            <ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\">\n                <ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container>\n                <ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\">\n                    <div [innerHTML]=\"mcContent\"></div>\n                </ng-container>\n                <ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container>\n            </ng-container>\n        </ng-container>\n    </div>\n    <div *ngIf=\"mcFooter !== null\" class=\"mc-modal-footer\" [class.mc-modal-body_bottom-overflow]=\"isBottomOverflow\">\n        <ng-container [ngSwitch]=\"true\">\n            <ng-container *ngSwitchCase=\"isTemplateRef(mcFooter)\" [ngTemplateOutlet]=\"mcFooter\"></ng-container>\n            <ng-container *ngSwitchCase=\"isNonEmptyString(mcFooter)\">\n                <div [innerHTML]=\"mcFooter\"></div>\n            </ng-container>\n            <ng-container *ngSwitchCase=\"isModalButtons(mcFooter)\">\n                <ng-container *ngFor=\"let button of mcFooter\">\n                    <button\n                        mc-button\n                        #autoFocusedButton\n                        [attr.autofocus]=\"button.autoFocus\"\n                        [attr.mc-modal-main-action]=\"button.mcModalMainAction\"\n                        *ngIf=\"getButtonCallableProp(button, 'show')\"\n                        [disabled]=\"getButtonCallableProp(button, 'disabled')\"\n                        [class.mc-progress]=\"getButtonCallableProp(button, 'loading')\"\n                        (click)=\"onButtonClick(button)\"\n                        [color]=\"button.type\">\n                        {{ button.label }}\n                    </button>\n                </ng-container>\n            </ng-container>\n            <ng-container *ngSwitchDefault>\n                <button\n                    #autoFocusedButton\n                    [attr.autofocus]=\"true\"\n                    *ngIf=\"mcOkText !== null\"\n                    mc-button\n                    [color]=\"'primary'\"\n                    (click)=\"onClickOkCancel('ok')\">\n\n                    {{ okText }}\n                </button>\n                <button *ngIf=\"mcCancelText!==null\" mc-button (click)=\"onClickOkCancel('cancel')\">\n                    {{ cancelText }}\n                </button>\n            </ng-container>\n        </ng-container>\n    </div>\n</ng-template>\n<!-- /[Predefined] Default Modal Content -->\n\n<!-- [Predefined] Confirm Modal Content -->\n<ng-template #tplContentConfirm>\n    <div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\">\n        <div class=\"mc-confirm-body-wrapper\">\n            <div class=\"mc-confirm-body\">\n                <div class=\"mc-confirm-content\">\n                    <ng-container #bodyContainer>\n                        <ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\">\n                            <ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\"\n                                          [ngTemplateOutlet]=\"mcContent\"></ng-container>\n                            <ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\">\n                                <div [innerHTML]=\"mcContent\"></div>\n                            </ng-container>\n                            <ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container>\n                        </ng-container>\n                    </ng-container>\n                </div>\n            </div>\n        </div> <!-- /.mc-confirm-body-wrapper -->\n    </div>\n    <div class=\"mc-confirm-btns\">\n        <button\n            mc-button\n            #autoFocusedButton\n            [color]=\"mcOkType\"\n            [attr.autofocus]=\"true\"\n            *ngIf=\"mcOkText !== ''\"\n            (click)=\"onClickOkCancel('ok')\">\n\n            {{ okText }}\n        </button>\n\n        <button mc-button [color]=\"'second'\" *ngIf=\"mcCancelText !== ''\" (click)=\"onClickOkCancel('cancel')\">\n            {{ cancelText }}\n        </button>\n    </div>\n</ng-template>\n<!-- /[Predefined] Confirm Modal Content -->\n",
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                host: {
-                    '(keydown)': 'onKeyDown($event)'
-                },
-                styles: [".mc-confirm .mc-modal-close,.mc-confirm .mc-modal-header{display:none}.mc-confirm .mc-modal-body{padding:var(--mc-modal-confirm-size-padding,24px)}.mc-confirm-body-wrapper{zoom:1}.mc-confirm-body-wrapper:after,.mc-confirm-body-wrapper:before{content:\"\";display:table}.mc-confirm-body-wrapper:after{clear:both}.mc-confirm-body .mc-confirm-title{display:block;overflow:auto}.mc-confirm .mc-confirm-btns{border-radius:var(--mc-modal-footer-size-border-radius,0 0 4px 4px);text-align:right}.mc-confirm .mc-confirm-btns button+button{margin:16px}.mc-modal{box-sizing:border-box;position:relative;top:var(--mc-modal-size-top,48px);width:auto;margin:0 auto;list-style:none}.mc-modal.zoom-appear,.mc-modal.zoom-enter{-webkit-animation-duration:.3s;animation-duration:.3s;transform:none;opacity:0}.mc-modal.mc-modal_small{width:var(--mc-modal-size-small,400px)}.mc-modal.mc-modal_normal{width:var(--mc-modal-size-normal,640px)}.mc-modal.mc-modal_large{width:var(--mc-modal-size-large,960px)}.mc-modal .mc-modal-close{position:absolute;z-index:10;top:0;right:0;width:var(--mc-modal-size-close-width,56px);height:var(--mc-modal-size-close-width,56px)}.mc-modal-wrap{position:fixed;z-index:1000;top:0;right:0;bottom:0;left:0;overflow:auto;-webkit-overflow-scrolling:touch;outline:0}.mc-modal-title{margin:0}.mc-modal-content{position:relative;border-radius:var(--mc-modal-size-border-radius,4px);background-clip:padding-box;background-color:#fff}.mc-modal-header{display:block;border-radius:var(--mc-modal-header-size-border-radius,4px 4px 0 0);padding:var(--mc-modal-header-size-padding,14px 16px)}.mc-modal-body{display:block;overflow-y:auto;max-height:var(--mc-modal-body-size-max-height,calc(100vh - 260px));padding:var(--mc-modal-body-size-padding,16px 24px 24px);word-wrap:break-word}.mc-modal-footer{display:block;border-radius:var(--mc-modal-footer-size-border-radius,0 0 4px 4px);padding:var(--mc-modal-footer-size-padding,16px 16px);text-align:right}.mc-modal-footer button+button{margin-left:16px;margin-bottom:0}.mc-modal-mask{position:fixed;z-index:1000;top:0;right:0;left:0;bottom:0;height:100%}.mc-modal-mask.mc-modal-mask-hidden{display:none}.mc-modal-open{overflow:hidden}"]
-            },] }
-];
-/** @nocollapse */
-McModalComponent.ctorParameters = () => [
-    { type: Overlay },
-    { type: Renderer2 },
-    { type: ComponentFactoryResolver },
-    { type: ElementRef },
-    { type: ViewContainerRef },
-    { type: McModalControlService },
-    { type: ChangeDetectorRef },
-    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
-];
-McModalComponent.propDecorators = {
-    mcModalType: [{ type: Input }],
-    mcComponent: [{ type: Input }],
-    mcContent: [{ type: Input }],
-    mcComponentParams: [{ type: Input }],
-    mcFooter: [{ type: Input }],
-    mcVisible: [{ type: Input }],
-    mcVisibleChange: [{ type: Output }],
-    mcZIndex: [{ type: Input }],
-    mcWidth: [{ type: Input }],
-    mcSize: [{ type: Input }],
-    mcWrapClassName: [{ type: Input }],
-    mcClassName: [{ type: Input }],
-    mcStyle: [{ type: Input }],
-    mcTitle: [{ type: Input }],
-    mcCloseByESC: [{ type: Input }],
-    mcClosable: [{ type: Input }],
-    mcMask: [{ type: Input }],
-    mcMaskClosable: [{ type: Input }],
-    mcMaskStyle: [{ type: Input }],
-    mcBodyStyle: [{ type: Input }],
-    mcAfterOpen: [{ type: Output }],
-    mcAfterClose: [{ type: Output }],
-    mcOkText: [{ type: Input }],
-    mcOkType: [{ type: Input }],
-    mcOkLoading: [{ type: Input }],
-    mcOnOk: [{ type: Input }, { type: Output }],
-    mcCancelText: [{ type: Input }],
-    mcCancelLoading: [{ type: Input }],
-    mcOnCancel: [{ type: Input }, { type: Output }],
-    modalContainer: [{ type: ViewChild, args: ['modalContainer', { static: true },] }],
-    bodyContainer: [{ type: ViewChild, args: ['bodyContainer', { read: ViewContainerRef, static: false },] }],
-    autoFocusedButtons: [{ type: ViewChildren, args: ['autoFocusedButton', { read: ElementRef },] }],
-    modalBody: [{ type: ViewChild, args: ['modalBody',] }],
-    mcGetContainer: [{ type: Input }]
-};
+/** @nocollapse */ McModalComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalComponent, deps: [{ token: i1.Overlay }, { token: i0.Renderer2 }, { token: i0.ComponentFactoryResolver }, { token: i0.ElementRef }, { token: i0.ViewContainerRef }, { token: McModalControlService }, { token: i0.ChangeDetectorRef }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McModalComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McModalComponent, selector: "mc-modal", inputs: { mcModalType: "mcModalType", mcComponent: "mcComponent", mcContent: "mcContent", mcComponentParams: "mcComponentParams", mcFooter: "mcFooter", mcVisible: "mcVisible", mcZIndex: "mcZIndex", mcWidth: "mcWidth", mcSize: "mcSize", mcWrapClassName: "mcWrapClassName", mcClassName: "mcClassName", mcStyle: "mcStyle", mcTitle: "mcTitle", mcCloseByESC: "mcCloseByESC", mcClosable: "mcClosable", mcMask: "mcMask", mcMaskClosable: "mcMaskClosable", mcMaskStyle: "mcMaskStyle", mcBodyStyle: "mcBodyStyle", mcOkText: "mcOkText", mcOkType: "mcOkType", mcOkLoading: "mcOkLoading", mcOnOk: "mcOnOk", mcCancelText: "mcCancelText", mcCancelLoading: "mcCancelLoading", mcOnCancel: "mcOnCancel", mcGetContainer: "mcGetContainer" }, outputs: { mcVisibleChange: "mcVisibleChange", mcAfterOpen: "mcAfterOpen", mcAfterClose: "mcAfterClose", mcOnOk: "mcOnOk", mcOnCancel: "mcOnCancel" }, host: { listeners: { "keydown": "onKeyDown($event)" } }, viewQueries: [{ propertyName: "modalContainer", first: true, predicate: ["modalContainer"], descendants: true, static: true }, { propertyName: "bodyContainer", first: true, predicate: ["bodyContainer"], descendants: true, read: ViewContainerRef }, { propertyName: "modalBody", first: true, predicate: ["modalBody"], descendants: true }, { propertyName: "autoFocusedButtons", predicate: ["autoFocusedButton"], descendants: true, read: ElementRef }], usesInheritance: true, usesOnChanges: true, ngImport: i0, template: "<!-- Compatible: the <ng-content> can appear only once -->\n<ng-template #tplOriginContent>\n    <ng-content></ng-content>\n</ng-template>\n\n<div>\n    <div *ngIf=\"mcMask\"\n         class=\"mc-modal-mask\"\n         [ngClass]=\"maskAnimationClassMap\"\n         [class.mc-modal-mask-hidden]=\"hidden\"\n         [ngStyle]=\"mcMaskStyle\"\n         [style.zIndex]=\"mcZIndex\"\n    ></div>\n    <div (mousedown)=\"onClickMask($event)\"\n         class=\"mc-modal-wrap {{ mcWrapClassName }}\"\n         [style.zIndex]=\"mcZIndex\"\n         [style.display]=\"hidden ? 'none' : ''\"\n         tabindex=\"-1\">\n\n        <div #modalContainer\n             class=\"mc-modal {{ mcClassName }} mc-modal_{{ mcSize }}\"\n             [ngClass]=\"modalAnimationClassMap\"\n             [ngStyle]=\"mcStyle\"\n             [style.width]=\"mcWidth | toCssUnit\"\n             [style.transform-origin]=\"transformOrigin\">\n\n            <div class=\"mc-modal-content\" cdkTrapFocus>\n                <button *ngIf=\"mcClosable\"\n                        mc-button\n                        (click)=\"onClickCloseBtn()\"\n                        class=\"mc-modal-close mc-button_transparent\">\n                    <i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" [color]=\"'second'\"></i>\n                </button>\n                <ng-container [ngSwitch]=\"true\">\n                    <ng-container *ngSwitchCase=\"isModalType('default')\"\n                                  [ngTemplateOutlet]=\"tplContentDefault\"></ng-container>\n                    <ng-container *ngSwitchCase=\"isModalType('confirm')\"\n                                  [ngTemplateOutlet]=\"tplContentConfirm\"></ng-container>\n                    <ng-container *ngSwitchCase=\"isModalType('custom')\"\n                                  [ngTemplateOutlet]=\"tplContentCustom\"></ng-container>\n                </ng-container>\n            </div>\n        </div>\n    </div>\n</div>\n\n<ng-template #tplContentCustom>\n    <ng-container #bodyContainer></ng-container>\n</ng-template>\n\n\n<!-- [Predefined] Default Modal Content -->\n<ng-template #tplContentDefault>\n    <div *ngIf=\"mcTitle\" class=\"mc-modal-header\" [class.mc-modal-body_top-overflow]=\"isTopOverflow\">\n        <div class=\"mc-modal-title\">\n            <ng-container [ngSwitch]=\"true\">\n                <ng-container *ngSwitchCase=\"isTemplateRef(mcTitle)\" [ngTemplateOutlet]=\"mcTitle\"></ng-container>\n                <ng-container *ngSwitchCase=\"isNonEmptyString(mcTitle)\">\n                    <div [innerHTML]=\"mcTitle\"></div>\n                </ng-container>\n            </ng-container>\n        </div>\n    </div>\n    <div class=\"mc-modal-body\" #modalBody [ngStyle]=\"mcBodyStyle\" (scroll)=\"checkOverflow()\">\n        <ng-container #bodyContainer>\n            <ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\">\n                <ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\" [ngTemplateOutlet]=\"mcContent\"></ng-container>\n                <ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\">\n                    <div [innerHTML]=\"mcContent\"></div>\n                </ng-container>\n                <ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container>\n            </ng-container>\n        </ng-container>\n    </div>\n    <div *ngIf=\"mcFooter !== null\" class=\"mc-modal-footer\" [class.mc-modal-body_bottom-overflow]=\"isBottomOverflow\">\n        <ng-container [ngSwitch]=\"true\">\n            <ng-container *ngSwitchCase=\"isTemplateRef(mcFooter)\" [ngTemplateOutlet]=\"mcFooter\"></ng-container>\n            <ng-container *ngSwitchCase=\"isNonEmptyString(mcFooter)\">\n                <div [innerHTML]=\"mcFooter\"></div>\n            </ng-container>\n            <ng-container *ngSwitchCase=\"isModalButtons(mcFooter)\">\n                <ng-container *ngFor=\"let button of mcFooter\">\n                    <button\n                        mc-button\n                        #autoFocusedButton\n                        [attr.autofocus]=\"button.autoFocus\"\n                        [attr.mc-modal-main-action]=\"button.mcModalMainAction\"\n                        *ngIf=\"getButtonCallableProp(button, 'show')\"\n                        [disabled]=\"getButtonCallableProp(button, 'disabled')\"\n                        [class.mc-progress]=\"getButtonCallableProp(button, 'loading')\"\n                        (click)=\"onButtonClick(button)\"\n                        [color]=\"button.type\">\n                        {{ button.label }}\n                    </button>\n                </ng-container>\n            </ng-container>\n            <ng-container *ngSwitchDefault>\n                <button\n                    #autoFocusedButton\n                    [attr.autofocus]=\"true\"\n                    *ngIf=\"mcOkText !== null\"\n                    mc-button\n                    [color]=\"'primary'\"\n                    (click)=\"onClickOkCancel('ok')\">\n\n                    {{ okText }}\n                </button>\n                <button *ngIf=\"mcCancelText!==null\" mc-button (click)=\"onClickOkCancel('cancel')\">\n                    {{ cancelText }}\n                </button>\n            </ng-container>\n        </ng-container>\n    </div>\n</ng-template>\n<!-- /[Predefined] Default Modal Content -->\n\n<!-- [Predefined] Confirm Modal Content -->\n<ng-template #tplContentConfirm>\n    <div class=\"mc-modal-body\" [ngStyle]=\"mcBodyStyle\">\n        <div class=\"mc-confirm-body-wrapper\">\n            <div class=\"mc-confirm-body\">\n                <div class=\"mc-confirm-content\">\n                    <ng-container #bodyContainer>\n                        <ng-container *ngIf=\"!isComponent(mcContent)\" [ngSwitch]=\"true\">\n                            <ng-container *ngSwitchCase=\"isTemplateRef(mcContent)\"\n                                          [ngTemplateOutlet]=\"mcContent\"></ng-container>\n                            <ng-container *ngSwitchCase=\"isNonEmptyString(mcContent)\">\n                                <div [innerHTML]=\"mcContent\"></div>\n                            </ng-container>\n                            <ng-container *ngSwitchDefault [ngTemplateOutlet]=\"tplOriginContent\"></ng-container>\n                        </ng-container>\n                    </ng-container>\n                </div>\n            </div>\n        </div> <!-- /.mc-confirm-body-wrapper -->\n    </div>\n    <div class=\"mc-confirm-btns\">\n        <button\n            mc-button\n            #autoFocusedButton\n            [color]=\"mcOkType\"\n            [attr.autofocus]=\"true\"\n            *ngIf=\"mcOkText !== ''\"\n            (click)=\"onClickOkCancel('ok')\">\n\n            {{ okText }}\n        </button>\n\n        <button mc-button [color]=\"'second'\" *ngIf=\"mcCancelText !== ''\" (click)=\"onClickOkCancel('cancel')\">\n            {{ cancelText }}\n        </button>\n    </div>\n</ng-template>\n<!-- /[Predefined] Confirm Modal Content -->\n", styles: [".mc-confirm .mc-modal-header{display:none}.mc-confirm .mc-modal-close{display:none}.mc-confirm .mc-modal-body{padding:24px;padding:var(--mc-modal-confirm-size-padding, 24px)}.mc-confirm-body-wrapper{zoom:1}.mc-confirm-body-wrapper:before,.mc-confirm-body-wrapper:after{content:\"\";display:table}.mc-confirm-body-wrapper:after{clear:both}.mc-confirm-body .mc-confirm-title{display:block;overflow:auto}.mc-confirm .mc-confirm-btns{border-radius:0 0 4px 4px;border-radius:var(--mc-modal-footer-size-border-radius, 0 0 4px 4px);text-align:right}.mc-confirm .mc-confirm-btns button+button{margin:16px}.mc-modal{box-sizing:border-box;position:relative;top:48px;top:var(--mc-modal-size-top, 48px);width:auto;margin:0 auto;list-style:none}.mc-modal.zoom-enter,.mc-modal.zoom-appear{animation-duration:.3s;transform:none;opacity:0}.mc-modal.mc-modal_small{width:400px;width:var(--mc-modal-size-small, 400px)}.mc-modal.mc-modal_normal{width:640px;width:var(--mc-modal-size-normal, 640px)}.mc-modal.mc-modal_large{width:960px;width:var(--mc-modal-size-large, 960px)}.mc-modal .mc-modal-close{position:absolute;z-index:10;top:0;right:0;width:56px;width:var(--mc-modal-size-close-width, 56px);height:56px;height:var(--mc-modal-size-close-width, 56px)}.mc-modal-wrap{position:fixed;z-index:1000;top:0;right:0;bottom:0;left:0;overflow:auto;-webkit-overflow-scrolling:touch;outline:0}.mc-modal-title{margin:0}.mc-modal-content{position:relative;border-radius:4px;border-radius:var(--mc-modal-size-border-radius, 4px);background-clip:padding-box;background-color:#fff}.mc-modal-header{display:block;border-radius:4px 4px 0 0;border-radius:var(--mc-modal-header-size-border-radius, 4px 4px 0 0);padding:14px 16px;padding:var(--mc-modal-header-size-padding, 14px 16px)}.mc-modal-body{display:block;overflow-y:auto;max-height:calc(100vh - 260px);max-height:var(--mc-modal-body-size-max-height, calc(100vh - 260px));padding:16px 24px 24px;padding:var(--mc-modal-body-size-padding, 16px 24px 24px);word-wrap:break-word}.mc-modal-footer{display:block;border-radius:0 0 4px 4px;border-radius:var(--mc-modal-footer-size-border-radius, 0 0 4px 4px);padding:16px;padding:var(--mc-modal-footer-size-padding, 16px 16px);text-align:right}.mc-modal-footer button+button{margin-left:16px;margin-bottom:0}.mc-modal-mask{position:fixed;z-index:1000;top:0;right:0;left:0;bottom:0;height:100%}.mc-modal-mask.mc-modal-mask-hidden{display:none}.mc-modal-open{overflow:hidden}\n"], components: [{ type: i3.McButton, selector: "button[mc-button]", inputs: ["disabled", "color"] }, { type: i4.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i5.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i5.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { type: i5.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { type: i6.CdkTrapFocus, selector: "[cdkTrapFocus]", inputs: ["cdkTrapFocus", "cdkTrapFocusAutoCapture"], exportAs: ["cdkTrapFocus"] }, { type: i3.McButtonCssStyler, selector: "button[mc-button], a[mc-button]" }, { type: i4.McIconCSSStyler, selector: "[mc-icon]" }, { type: i5.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i5.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { type: i5.NgTemplateOutlet, selector: "[ngTemplateOutlet]", inputs: ["ngTemplateOutletContext", "ngTemplateOutlet"] }, { type: i5.NgSwitchDefault, selector: "[ngSwitchDefault]" }, { type: i5.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: McModalMainAction, selector: "[mc-modal-main-action]" }], pipes: { "toCssUnit": CssUnitPipe }, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-modal',
+                    templateUrl: './modal.component.html',
+                    styleUrls: ['./modal.scss'],
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    host: {
+                        '(keydown)': 'onKeyDown($event)'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: i1.Overlay }, { type: i0.Renderer2 }, { type: i0.ComponentFactoryResolver }, { type: i0.ElementRef }, { type: i0.ViewContainerRef }, { type: McModalControlService }, { type: i0.ChangeDetectorRef }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [DOCUMENT]
+                }] }]; }, propDecorators: { mcModalType: [{
+                type: Input
+            }], mcComponent: [{
+                type: Input
+            }], mcContent: [{
+                type: Input
+            }], mcComponentParams: [{
+                type: Input
+            }], mcFooter: [{
+                type: Input
+            }], mcVisible: [{
+                type: Input
+            }], mcVisibleChange: [{
+                type: Output
+            }], mcZIndex: [{
+                type: Input
+            }], mcWidth: [{
+                type: Input
+            }], mcSize: [{
+                type: Input
+            }], mcWrapClassName: [{
+                type: Input
+            }], mcClassName: [{
+                type: Input
+            }], mcStyle: [{
+                type: Input
+            }], mcTitle: [{
+                type: Input
+            }], mcCloseByESC: [{
+                type: Input
+            }], mcClosable: [{
+                type: Input
+            }], mcMask: [{
+                type: Input
+            }], mcMaskClosable: [{
+                type: Input
+            }], mcMaskStyle: [{
+                type: Input
+            }], mcBodyStyle: [{
+                type: Input
+            }], mcAfterOpen: [{
+                type: Output
+            }], mcAfterClose: [{
+                type: Output
+            }], mcOkText: [{
+                type: Input
+            }], mcOkType: [{
+                type: Input
+            }], mcOkLoading: [{
+                type: Input
+            }], mcOnOk: [{
+                type: Input
+            }, {
+                type: Output
+            }], mcCancelText: [{
+                type: Input
+            }], mcCancelLoading: [{
+                type: Input
+            }], mcOnCancel: [{
+                type: Input
+            }, {
+                type: Output
+            }], modalContainer: [{
+                type: ViewChild,
+                args: ['modalContainer', { static: true }]
+            }], bodyContainer: [{
+                type: ViewChild,
+                args: ['bodyContainer', { read: ViewContainerRef, static: false }]
+            }], autoFocusedButtons: [{
+                type: ViewChildren,
+                args: ['autoFocusedButton', { read: ElementRef }]
+            }], modalBody: [{
+                type: ViewChild,
+                args: ['modalBody']
+            }], mcGetContainer: [{
+                type: Input
+            }] } });
 ////////////
 function isPromise(obj) {
     // tslint:disable-next-line: no-unbound-method
@@ -552,56 +660,6 @@ function isPromise(obj) {
         typeof obj.then === 'function' &&
         typeof obj.catch === 'function';
 }
-
-class CssUnitPipe {
-    transform(value, defaultUnit = 'px') {
-        const formatted = +value;
-        return isNaN(formatted) ? `${value}` : `${formatted}${defaultUnit}`;
-    }
-}
-CssUnitPipe.decorators = [
-    { type: Pipe, args: [{
-                name: 'toCssUnit'
-            },] }
-];
-
-class McModalTitle {
-}
-McModalTitle.decorators = [
-    { type: Directive, args: [{
-                selector: `[mc-modal-title], mc-modal-title, [mcModalTitle]`,
-                host: {
-                    class: 'mc-modal-header mc-modal-title'
-                }
-            },] }
-];
-class McModalBody {
-}
-McModalBody.decorators = [
-    { type: Directive, args: [{
-                selector: `[mc-modal-body], mc-modal-body, [mcModalBody]`,
-                host: {
-                    class: 'mc-modal-body'
-                }
-            },] }
-];
-class McModalFooter {
-}
-McModalFooter.decorators = [
-    { type: Directive, args: [{
-                selector: `[mc-modal-footer], mc-modal-footer, [mcModalFooter]`,
-                host: {
-                    class: 'mc-modal-footer'
-                }
-            },] }
-];
-class McModalMainAction {
-}
-McModalMainAction.decorators = [
-    { type: Directive, args: [{
-                selector: `[mc-modal-main-action]`
-            },] }
-];
 
 // A builder used for managing service creating modals
 class ModalBuilderForService {
@@ -704,51 +762,73 @@ class McModalService {
         return this.confirm(options, confirmType);
     }
 }
-McModalService.decorators = [
-    { type: Injectable }
-];
-/** @nocollapse */
-McModalService.ctorParameters = () => [
-    { type: Overlay },
-    { type: McModalControlService }
-];
+/** @nocollapse */ McModalService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalService, deps: [{ token: i1.Overlay }, { token: McModalControlService }], target: i0.ɵɵFactoryTarget.Injectable });
+/** @nocollapse */ McModalService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalService });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalService, decorators: [{
+            type: Injectable
+        }], ctorParameters: function () { return [{ type: i1.Overlay }, { type: McModalControlService }]; } });
 
 class McModalModule {
 }
-McModalModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    OverlayModule,
-                    A11yModule,
-                    McButtonModule,
-                    McIconModule
-                ],
-                exports: [
-                    McModalComponent,
-                    McModalTitle,
-                    McModalBody,
-                    McModalFooter
-                ],
-                declarations: [
-                    McModalComponent,
-                    McModalTitle,
-                    McModalBody,
-                    McModalFooter,
-                    CssUnitPipe,
-                    McModalMainAction
-                ],
-                providers: [
-                    McModalControlService,
-                    McModalService
-                ],
-                entryComponents: [McModalComponent]
-            },] }
-];
+/** @nocollapse */ McModalModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McModalModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalModule, declarations: [McModalComponent,
+        McModalTitle,
+        McModalBody,
+        McModalFooter,
+        CssUnitPipe,
+        McModalMainAction], imports: [CommonModule,
+        OverlayModule,
+        A11yModule,
+        McButtonModule,
+        McIconModule], exports: [McModalComponent,
+        McModalTitle,
+        McModalBody,
+        McModalFooter] });
+/** @nocollapse */ McModalModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalModule, providers: [
+        McModalControlService,
+        McModalService
+    ], imports: [[
+            CommonModule,
+            OverlayModule,
+            A11yModule,
+            McButtonModule,
+            McIconModule
+        ]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McModalModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        CommonModule,
+                        OverlayModule,
+                        A11yModule,
+                        McButtonModule,
+                        McIconModule
+                    ],
+                    exports: [
+                        McModalComponent,
+                        McModalTitle,
+                        McModalBody,
+                        McModalFooter
+                    ],
+                    declarations: [
+                        McModalComponent,
+                        McModalTitle,
+                        McModalBody,
+                        McModalFooter,
+                        CssUnitPipe,
+                        McModalMainAction
+                    ],
+                    providers: [
+                        McModalControlService,
+                        McModalService
+                    ],
+                    entryComponents: [McModalComponent]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { McModalBody, McModalComponent, McModalFooter, McModalMainAction, McModalModule, McModalRef, McModalService, McModalTitle, ModalSize, McModalControlService as ɵa, CssUnitPipe as ɵb };
+export { McModalBody, McModalComponent, McModalFooter, McModalMainAction, McModalModule, McModalRef, McModalService, McModalTitle, ModalSize };
 //# sourceMappingURL=ptsecurity-mosaic-modal.js.map

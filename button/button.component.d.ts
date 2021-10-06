@@ -2,6 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy, Renderer2, QueryList, AfterContentInit } from '@angular/core';
 import { CanColor, CanDisable, CanDisableCtor, CanColorCtor, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
+import * as i0 from "@angular/core";
 export declare class McButtonCssStyler implements AfterContentInit {
     private renderer;
     icons: QueryList<McIcon>;
@@ -10,6 +11,8 @@ export declare class McButtonCssStyler implements AfterContentInit {
     constructor(elementRef: ElementRef, renderer: Renderer2);
     ngAfterContentInit(): void;
     updateClassModifierForIcons(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McButtonCssStyler, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McButtonCssStyler, "button[mc-button], a[mc-button]", never, {}, {}, ["icons"]>;
 }
 export declare class McButtonBase {
     _elementRef: ElementRef;
@@ -23,8 +26,12 @@ export declare class McButton extends McButtonMixinBase implements OnDestroy, Ca
     focus(): void;
     focusViaKeyboard(): void;
     getHostElement(): any;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McButton, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McButton, "button[mc-button]", never, { "disabled": "disabled"; "color": "color"; }, {}, never, ["*"]>;
 }
 export declare class McAnchor extends McButton {
     constructor(focusMonitor: FocusMonitor, elementRef: ElementRef);
     haltDisabledEvents(event: Event): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McAnchor, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McAnchor, "a[mc-button]", never, { "disabled": "disabled"; "color": "color"; "tabIndex": "tabIndex"; }, {}, never, ["*"]>;
 }

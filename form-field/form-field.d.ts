@@ -7,6 +7,7 @@ import { McHint } from './hint';
 import { McPrefix } from './prefix';
 import { McStepper } from './stepper';
 import { McSuffix } from './suffix';
+import * as i0 from "@angular/core";
 export declare class McFormFieldBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
@@ -52,6 +53,10 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     ngOnDestroy(): void;
     /** Throws an error if the form field's control is missing. */
     protected validateControlChild(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McFormField, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McFormField, "mc-form-field", ["mcFormField"], { "color": "color"; }, {}, ["control", "stepper", "cleaner", "hint", "suffix", "prefix"], ["[mcPrefix]", "*", "[mcSuffix]", "mc-cleaner", "mc-stepper", "mc-hint"]>;
 }
 export declare class McFormFieldWithoutBorders {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McFormFieldWithoutBorders, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McFormFieldWithoutBorders, "mc-form-field[mcFormFieldWithoutBorders]", ["mcFormFieldWithoutBorders"], {}, {}, never>;
 }

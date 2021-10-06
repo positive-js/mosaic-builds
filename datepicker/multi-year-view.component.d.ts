@@ -2,6 +2,7 @@ import { Directionality } from '@angular/cdk/bidi';
 import { AfterContentInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
 import { McCalendarBody, McCalendarCell } from './calendar-body.component';
+import * as i0 from "@angular/core";
 export declare const yearsPerPage = 24;
 export declare const yearsPerRow = 4;
 /**
@@ -66,4 +67,6 @@ export declare class McMultiYearView<D> implements AfterContentInit {
     private getValidDateOrNull;
     /** Determines whether the user has the RTL layout direction. */
     private isRtl;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McMultiYearView<any>, [null, { optional: true; }, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McMultiYearView<any>, "mc-multi-year-view", ["mcMultiYearView"], { "activeDate": "activeDate"; "selected": "selected"; "minDate": "minDate"; "maxDate": "maxDate"; "dateFilter": "dateFilter"; }, { "selectedChange": "selectedChange"; "yearSelected": "yearSelected"; "activeDateChange": "activeDateChange"; }, never, never>;
 }

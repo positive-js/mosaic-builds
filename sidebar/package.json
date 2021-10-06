@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/sidebar/ptsecurity-mosaic-sidebar.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-sidebar.js",
   "typings": "ptsecurity-mosaic-sidebar.d.ts",
-  "metadata": "ptsecurity-mosaic-sidebar.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/sidebar"
 }

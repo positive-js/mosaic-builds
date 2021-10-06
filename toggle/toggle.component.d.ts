@@ -2,6 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { ChangeDetectorRef, ElementRef, EventEmitter } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
+import * as i0 from "@angular/core";
 declare type ToggleLabelPositionType = 'left' | 'right';
 export declare class McToggleBase {
     _elementRef: ElementRef;
@@ -47,5 +48,7 @@ export declare class McToggleComponent extends McToggleMixinBase implements Cont
     private onChangeCallback;
     private updateModelValue;
     private emitChangeEvent;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McToggleComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McToggleComponent, "mc-toggle", ["mcToggle"], { "color": "color"; "tabIndex": "tabIndex"; "labelPosition": "labelPosition"; "ariaLabel": "aria-label"; "ariaLabelledby": "aria-labelledby"; "id": "id"; "name": "name"; "value": "value"; "disabled": "disabled"; "checked": "checked"; }, { "change": "change"; }, never, ["*"]>;
 }
 export {};

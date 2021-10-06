@@ -1,7 +1,9 @@
-import { forwardRef, EventEmitter, Directive, ChangeDetectorRef, Input, ContentChildren, Output, Component, ViewEncapsulation, ChangeDetectionStrategy, Optional, ElementRef, ViewChild, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { forwardRef, EventEmitter, Directive, Input, ContentChildren, Output, Component, ViewEncapsulation, ChangeDetectionStrategy, Optional, ViewChild, NgModule } from '@angular/core';
+import * as i2 from '@ptsecurity/mosaic/button';
 import { McButton, McButtonModule } from '@ptsecurity/mosaic/button';
 import { McCommonModule } from '@ptsecurity/mosaic/core';
-import { FocusMonitor } from '@angular/cdk/a11y';
+import * as i1 from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -203,31 +205,36 @@ class McButtonToggleGroup {
         }
     }
 }
-McButtonToggleGroup.decorators = [
-    { type: Directive, args: [{
-                selector: 'mc-button-toggle-group',
-                providers: [MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR],
-                host: {
-                    role: 'group',
-                    class: 'mc-button-toggle-group',
-                    '[class.mc-button-toggle_vertical]': 'vertical'
-                },
-                exportAs: 'mcButtonToggleGroup'
-            },] }
-];
-/** @nocollapse */
-McButtonToggleGroup.ctorParameters = () => [
-    { type: ChangeDetectorRef }
-];
-McButtonToggleGroup.propDecorators = {
-    vertical: [{ type: Input }],
-    value: [{ type: Input }],
-    multiple: [{ type: Input }],
-    buttonToggles: [{ type: ContentChildren, args: [forwardRef(() => McButtonToggle),] }],
-    disabled: [{ type: Input }],
-    valueChange: [{ type: Output }],
-    change: [{ type: Output }]
-};
+/** @nocollapse */ McButtonToggleGroup.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McButtonToggleGroup, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McButtonToggleGroup.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McButtonToggleGroup, selector: "mc-button-toggle-group", inputs: { vertical: "vertical", value: "value", multiple: "multiple", disabled: "disabled" }, outputs: { valueChange: "valueChange", change: "change" }, host: { attributes: { "role": "group" }, properties: { "class.mc-button-toggle_vertical": "vertical" }, classAttribute: "mc-button-toggle-group" }, providers: [MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR], queries: [{ propertyName: "buttonToggles", predicate: McButtonToggle }], exportAs: ["mcButtonToggleGroup"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McButtonToggleGroup, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'mc-button-toggle-group',
+                    providers: [MC_BUTTON_TOGGLE_GROUP_VALUE_ACCESSOR],
+                    host: {
+                        role: 'group',
+                        class: 'mc-button-toggle-group',
+                        '[class.mc-button-toggle_vertical]': 'vertical'
+                    },
+                    exportAs: 'mcButtonToggleGroup'
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }]; }, propDecorators: { vertical: [{
+                type: Input
+            }], value: [{
+                type: Input
+            }], multiple: [{
+                type: Input
+            }], buttonToggles: [{
+                type: ContentChildren,
+                args: [forwardRef(() => McButtonToggle)]
+            }], disabled: [{
+                type: Input
+            }], valueChange: [{
+                type: Output
+            }], change: [{
+                type: Output
+            }] } });
 /** Single button inside of a toggle group. */
 class McButtonToggle {
     constructor(buttonToggleGroup, changeDetectorRef, focusMonitor, element) {
@@ -309,11 +316,24 @@ class McButtonToggle {
         this.changeDetectorRef.markForCheck();
     }
 }
-McButtonToggle.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-button-toggle',
-                exportAs: 'mcButtonToggle',
-                template: `
+/** @nocollapse */ McButtonToggle.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McButtonToggle, deps: [{ token: McButtonToggleGroup, optional: true }, { token: i0.ChangeDetectorRef }, { token: i1.FocusMonitor }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McButtonToggle.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McButtonToggle, selector: "mc-button-toggle", inputs: { checked: "checked", value: "value", tabIndex: "tabIndex", disabled: "disabled" }, outputs: { change: "change" }, host: { properties: { "class.mc-button-toggle-standalone": "!buttonToggleGroup" }, classAttribute: "mc-button-toggle" }, viewQueries: [{ propertyName: "mcButton", first: true, predicate: McButton, descendants: true }], exportAs: ["mcButtonToggle"], ngImport: i0, template: `
+        <button
+            mc-button
+            type="button"
+            [class.mc-active]="checked"
+            [disabled]="disabled"
+            [tabIndex]="tabIndex"
+            (click)="onToggleClick()">
+            <ng-content></ng-content>
+        </button>
+    `, isInline: true, styles: [".mc-group{display:flex;flex-direction:row}.mc-group .mc-group_justified>.mc-group-item{width:100%}.mc-group .mc-group-item+.mc-group-item{margin-left:calc(-1 * 1px);margin-left:calc(-1 * var(--mc-button-size-border-width, 1px))}.mc-group>.mc-group-item:first-child:not(:last-child){border-bottom-right-radius:0;border-top-right-radius:0}.mc-group>.mc-group-item:first-child:not(:last-child)>.mc-form-field__container{border-bottom-right-radius:0;border-top-right-radius:0}.mc-group>.mc-group-item:last-child:not(:first-child){border-bottom-left-radius:0;border-top-left-radius:0}.mc-group>.mc-group-item:last-child:not(:first-child)>.mc-form-field__container{border-bottom-left-radius:0;border-top-left-radius:0}.mc-group>.mc-group-item:not(:first-child):not(:last-child){border-radius:0}.mc-group>.mc-group-item:not(:first-child):not(:last-child)>.mc-form-field__container{border-radius:0}.mc-vertical-group{display:flex;flex-direction:column}.mc-vertical-group>.mc-group-item:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px;border-top-right-radius:var(--mc-button-size-border-radius, 3px)}.mc-vertical-group>.mc-group-item:first-child:not(:last-child)>.mc-form-field__container{border-bottom-right-radius:0;border-bottom-left-radius:0}.mc-vertical-group>.mc-group-item:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:3px;border-bottom-left-radius:var(--mc-button-size-border-radius, 3px)}.mc-vertical-group>.mc-group-item:last-child:not(:first-child)>.mc-form-field__container{border-top-right-radius:0;border-top-left-radius:0}.mc-vertical-group>.mc-group-item:not(:first-child):not(:last-child){border-radius:0}.mc-vertical-group>.mc-group-item:not(:first-child):not(:last-child)>.mc-form-field__container{border-radius:0}.mc-vertical-group .mc-group-item+.mc-group-item{margin-top:calc(-1 * 1px);margin-top:calc(-1 * var(--mc-button-size-border-width, 1px))}.mc-button-toggle-group{display:flex;flex-direction:row}.mc-button-toggle-group .mc-button-toggle:first-of-type:not(:last-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:first-of-type:not(:last-of-type)>.mc-icon-button{border-bottom-right-radius:0;border-top-right-radius:0;border-bottom-left-radius:3px;border-bottom-left-radius:var(--mc-button-toggle-size-border-radius, 3px);border-top-left-radius:3px;border-top-left-radius:var(--mc-button-toggle-size-border-radius, 3px)}.mc-button-toggle-group .mc-button-toggle:last-of-type:not(:first-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:last-of-type:not(:first-of-type)>.mc-icon-button{border-bottom-left-radius:0;border-top-left-radius:0;border-bottom-right-radius:3px;border-bottom-right-radius:var(--mc-button-toggle-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-button-toggle-size-border-radius, 3px)}.mc-button-toggle-group .mc-button-toggle:not(:first-of-type):not(:last-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:not(:first-of-type):not(:last-of-type)>.mc-icon-button{border-radius:0}.mc-button-toggle-group .mc-button-toggle[disabled]{outline:0}.mc-button-toggle-group:not(.mc-button-toggle_vertical) .mc-button-toggle:not([disabled])+.mc-button-toggle:not([disabled]){margin-left:calc(-1 * 1px);margin-left:calc(-1 * var(--mc-button-toggle-size-border-size, 1px))}.mc-button-toggle_vertical{flex-direction:column}.mc-button-toggle_vertical .mc-button-toggle+.mc-button-toggle{border-left:none;border-right:none}.mc-button-toggle_vertical .mc-button-toggle:not([disabled])+.mc-button-toggle:not([disabled]){margin-top:calc(-1 * 1px);margin-top:calc(-1 * var(--mc-button-toggle-size-border-size, 1px))}.mc-button-toggle_vertical .mc-button-toggle .mc-button,.mc-button-toggle_vertical .mc-button-toggle .mc-icon-button{width:100%}.mc-button-toggle_vertical .mc-button-toggle:first-child:not(:last-child)>.mc-button,.mc-button-toggle_vertical .mc-button-toggle:first-child:not(:last-child)>.mc-icon-button{border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:3px;border-top-right-radius:var(--mc-button-toggle-size-border-radius, 3px);border-top-left-radius:3px;border-top-left-radius:var(--mc-button-toggle-size-border-radius, 3px)}.mc-button-toggle_vertical .mc-button-toggle:last-child:not(:first-child)>.mc-button,.mc-button-toggle_vertical .mc-button-toggle:last-child:not(:first-child)>.mc-icon-button{border-top-right-radius:0;border-top-left-radius:0;border-bottom-right-radius:3px;border-bottom-right-radius:var(--mc-button-toggle-size-border-radius, 3px);border-bottom-left-radius:3px;border-bottom-left-radius:var(--mc-button-toggle-size-border-radius, 3px)}.mc-button-toggle_vertical .mc-button-toggle:not(:first-child):not(:last-child)>.mc-button,.mc-button-toggle_vertical .mc-button-toggle:not(:first-child):not(:last-child)>.mc-icon-button{border-radius:0}.mc-button-toggle-standalone{box-shadow:none}\n"], components: [{ type: i2.McButton, selector: "button[mc-button]", inputs: ["disabled", "color"] }], directives: [{ type: i2.McButtonCssStyler, selector: "button[mc-button], a[mc-button]" }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McButtonToggle, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-button-toggle',
+                    exportAs: 'mcButtonToggle',
+                    template: `
         <button
             mc-button
             type="button"
@@ -324,40 +344,44 @@ McButtonToggle.decorators = [
             <ng-content></ng-content>
         </button>
     `,
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                host: {
-                    class: 'mc-button-toggle',
-                    '[class.mc-button-toggle-standalone]': '!buttonToggleGroup'
-                },
-                styles: [".mc-group{display:flex;flex-direction:row}.mc-group .mc-group_justified>.mc-group-item{width:100%}.mc-group .mc-group-item+.mc-group-item{margin-left:calc(-1 * var(--mc-button-size-border-width, 1px))}.mc-group>.mc-group-item:first-child:not(:last-child),.mc-group>.mc-group-item:first-child:not(:last-child)>.mc-form-field__container{border-bottom-right-radius:0;border-top-right-radius:0}.mc-group>.mc-group-item:last-child:not(:first-child),.mc-group>.mc-group-item:last-child:not(:first-child)>.mc-form-field__container{border-bottom-left-radius:0;border-top-left-radius:0}.mc-group>.mc-group-item:not(:first-child):not(:last-child),.mc-group>.mc-group-item:not(:first-child):not(:last-child)>.mc-form-field__container{border-radius:0}.mc-vertical-group{display:flex;flex-direction:column}.mc-vertical-group>.mc-group-item:first-child:not(:last-child){border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:var(--mc-button-size-border-radius,3px)}.mc-vertical-group>.mc-group-item:first-child:not(:last-child)>.mc-form-field__container{border-bottom-right-radius:0;border-bottom-left-radius:0}.mc-vertical-group>.mc-group-item:last-child:not(:first-child){border-top-right-radius:0;border-top-left-radius:0;border-bottom-left-radius:var(--mc-button-size-border-radius,3px)}.mc-vertical-group>.mc-group-item:last-child:not(:first-child)>.mc-form-field__container{border-top-right-radius:0;border-top-left-radius:0}.mc-vertical-group>.mc-group-item:not(:first-child):not(:last-child),.mc-vertical-group>.mc-group-item:not(:first-child):not(:last-child)>.mc-form-field__container{border-radius:0}.mc-vertical-group .mc-group-item+.mc-group-item{margin-top:calc(-1 * var(--mc-button-size-border-width, 1px))}.mc-button-toggle-group{display:flex;flex-direction:row}.mc-button-toggle-group .mc-button-toggle:first-of-type:not(:last-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:first-of-type:not(:last-of-type)>.mc-icon-button{border-bottom-right-radius:0;border-top-right-radius:0;border-bottom-left-radius:var(--mc-button-toggle-size-border-radius,3px);border-top-left-radius:var(--mc-button-toggle-size-border-radius,3px)}.mc-button-toggle-group .mc-button-toggle:last-of-type:not(:first-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:last-of-type:not(:first-of-type)>.mc-icon-button{border-bottom-left-radius:0;border-top-left-radius:0;border-bottom-right-radius:var(--mc-button-toggle-size-border-radius,3px);border-top-right-radius:var(--mc-button-toggle-size-border-radius,3px)}.mc-button-toggle-group .mc-button-toggle:not(:first-of-type):not(:last-of-type)>.mc-button,.mc-button-toggle-group .mc-button-toggle:not(:first-of-type):not(:last-of-type)>.mc-icon-button{border-radius:0}.mc-button-toggle-group .mc-button-toggle[disabled]{outline:0}.mc-button-toggle-group:not(.mc-button-toggle_vertical) .mc-button-toggle:not([disabled])+.mc-button-toggle:not([disabled]){margin-left:calc(-1 * var(--mc-button-toggle-size-border-size, 1px))}.mc-button-toggle_vertical{flex-direction:column}.mc-button-toggle_vertical .mc-button-toggle+.mc-button-toggle{border-left:none;border-right:none}.mc-button-toggle_vertical .mc-button-toggle:not([disabled])+.mc-button-toggle:not([disabled]){margin-top:calc(-1 * var(--mc-button-toggle-size-border-size, 1px))}.mc-button-toggle_vertical .mc-button-toggle .mc-button,.mc-button-toggle_vertical .mc-button-toggle .mc-icon-button{width:100%}.mc-button-toggle_vertical .mc-button-toggle:first-child:not(:last-child)>.mc-button,.mc-button-toggle_vertical .mc-button-toggle:first-child:not(:last-child)>.mc-icon-button{border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-right-radius:var(--mc-button-toggle-size-border-radius,3px);border-top-left-radius:var(--mc-button-toggle-size-border-radius,3px)}.mc-button-toggle_vertical .mc-button-toggle:last-child:not(:first-child)>.mc-button,.mc-button-toggle_vertical .mc-button-toggle:last-child:not(:first-child)>.mc-icon-button{border-top-right-radius:0;border-top-left-radius:0;border-bottom-right-radius:var(--mc-button-toggle-size-border-radius,3px);border-bottom-left-radius:var(--mc-button-toggle-size-border-radius,3px)}.mc-button-toggle_vertical .mc-button-toggle:not(:first-child):not(:last-child)>.mc-button,.mc-button-toggle_vertical .mc-button-toggle:not(:first-child):not(:last-child)>.mc-icon-button{border-radius:0}.mc-button-toggle-standalone{box-shadow:none}"]
-            },] }
-];
-/** @nocollapse */
-McButtonToggle.ctorParameters = () => [
-    { type: McButtonToggleGroup, decorators: [{ type: Optional }] },
-    { type: ChangeDetectorRef },
-    { type: FocusMonitor },
-    { type: ElementRef }
-];
-McButtonToggle.propDecorators = {
-    checked: [{ type: Input }],
-    mcButton: [{ type: ViewChild, args: [McButton, { static: false },] }],
-    value: [{ type: Input }],
-    tabIndex: [{ type: Input }],
-    disabled: [{ type: Input }],
-    change: [{ type: Output }]
-};
+                    styleUrls: ['button-toggle.scss'],
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    host: {
+                        class: 'mc-button-toggle',
+                        '[class.mc-button-toggle-standalone]': '!buttonToggleGroup'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: McButtonToggleGroup, decorators: [{
+                    type: Optional
+                }] }, { type: i0.ChangeDetectorRef }, { type: i1.FocusMonitor }, { type: i0.ElementRef }]; }, propDecorators: { checked: [{
+                type: Input
+            }], mcButton: [{
+                type: ViewChild,
+                args: [McButton, { static: false }]
+            }], value: [{
+                type: Input
+            }], tabIndex: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], change: [{
+                type: Output
+            }] } });
 
 class McButtonToggleModule {
 }
-McButtonToggleModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [McCommonModule, McButtonModule],
-                exports: [McCommonModule, McButtonToggleGroup, McButtonToggle],
-                declarations: [McButtonToggleGroup, McButtonToggle]
-            },] }
-];
+/** @nocollapse */ McButtonToggleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McButtonToggleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McButtonToggleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McButtonToggleModule, declarations: [McButtonToggleGroup, McButtonToggle], imports: [McCommonModule, McButtonModule], exports: [McCommonModule, McButtonToggleGroup, McButtonToggle] });
+/** @nocollapse */ McButtonToggleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McButtonToggleModule, imports: [[McCommonModule, McButtonModule], McCommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McButtonToggleModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [McCommonModule, McButtonModule],
+                    exports: [McCommonModule, McButtonToggleGroup, McButtonToggle],
+                    declarations: [McButtonToggleGroup, McButtonToggle]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.

@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { McCalendarCellCssClasses } from './calendar-body.component';
 import { McCalendar, McCalendarView } from './calendar.component';
 import { McDatepickerInput } from './datepicker-input.directive';
+import * as i0 from "@angular/core";
 /** Injection token that determines the scroll handling while the calendar is open. */
 export declare const MC_DATEPICKER_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
@@ -39,6 +40,8 @@ export declare class McDatepickerContent<D> implements OnDestroy {
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     startExitAnimation(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McDatepickerContent<any>, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McDatepickerContent<any>, "mc-datepicker__content", ["mcDatepickerContent"], {}, {}, never, never>;
 }
 /** Component responsible for managing the datepicker popup/dialog. */
 export declare class McDatepicker<D> implements OnDestroy {
@@ -150,4 +153,6 @@ export declare class McDatepicker<D> implements OnDestroy {
      * @returns The given object if it is both a date instance and valid, otherwise null.
      */
     private getValidDateOrNull;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McDatepicker<any>, [null, null, null, null, { optional: true; }, { optional: true; }, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McDatepicker<any>, "mc-datepicker", ["mcDatepicker"], { "hasBackdrop": "hasBackdrop"; "startAt": "startAt"; "disabled": "disabled"; "opened": "opened"; "calendarHeaderComponent": "calendarHeaderComponent"; "startView": "startView"; "panelClass": "panelClass"; "dateClass": "dateClass"; "backdropClass": "backdropClass"; }, { "yearSelected": "yearSelected"; "monthSelected": "monthSelected"; "openedStream": "opened"; "closedStream": "closed"; }, never, never>;
 }

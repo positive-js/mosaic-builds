@@ -1,15 +1,18 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { InjectionToken, EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, Inject, ViewChild, TemplateRef, ContentChildren, Input, Output, Directive, forwardRef, ViewContainerRef, NgZone, Optional, Host, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { InjectionToken, EventEmitter, TemplateRef, Component, ViewEncapsulation, ChangeDetectionStrategy, Inject, ViewChild, ContentChildren, Input, Output, Directive, forwardRef, Optional, Host, NgModule } from '@angular/core';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
 import { MC_OPTION_PARENT_COMPONENT, McOption, McOptgroup, McOptionSelectionChange, countGroupLabelsBeforeOption, getOptionScrollPosition, McOptionModule, McCommonModule } from '@ptsecurity/mosaic/core';
-import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
+import * as i1 from '@angular/common';
 import { DOCUMENT, CommonModule } from '@angular/common';
-import { Directionality } from '@angular/cdk/bidi';
+import * as i1$1 from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
+import * as i2 from '@angular/cdk/bidi';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { ViewportRuler } from '@angular/cdk/scrolling';
+import * as i4 from '@angular/cdk/scrolling';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ESCAPE, ENTER, TAB, DOWN_ARROW, UP_ARROW } from '@ptsecurity/cdk/keycodes';
-import { McFormField } from '@ptsecurity/mosaic/form-field';
+import * as i3 from '@ptsecurity/mosaic/form-field';
 import { defer, merge, Subscription, Subject, of, fromEvent } from 'rxjs';
 import { take, switchMap, filter, map, tap, delay } from 'rxjs/operators';
 
@@ -116,42 +119,59 @@ class McAutocomplete {
         this.keyManager.onKeydown(event);
     }
 }
-McAutocomplete.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-autocomplete',
-                exportAs: 'mcAutocomplete',
-                template: "<ng-template>\n    <div class=\"mc-autocomplete-panel\" role=\"listbox\" [id]=\"id\" [ngClass]=\"classList\" #panel>\n        <ng-content></ng-content>\n    </div>\n</ng-template>\n",
-                host: {
-                    class: 'mc-autocomplete'
-                },
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                providers: [{
-                        provide: MC_OPTION_PARENT_COMPONENT, useExisting: McAutocomplete
-                    }],
-                styles: [".mc-autocomplete-trigger{text-overflow:ellipsis}.mc-autocomplete-panel{visibility:hidden;position:relative;overflow:auto;-webkit-overflow-scrolling:touch;margin-top:-1px;min-width:100%;width:100%;max-width:none;max-height:var(--mc-autocomplete-size-panel-max-height,256px);border-width:1px;border-style:solid;border-bottom-left-radius:var(--mc-autocomplete-size-panel-border-radius,3px);border-bottom-right-radius:var(--mc-autocomplete-size-panel-border-radius,3px);padding:var(--mc-autocomplete-size-panel-padding,4px 0)}.mc-autocomplete-panel.mc-autocomplete_visible{visibility:visible}.mc-autocomplete-panel.mc-autocomplete_hidden{visibility:hidden}.mc-autocomplete-panel-above .mc-autocomplete-panel{border-radius:var(--mc-autocomplete-size-panel-border-radius,3px) var(--mc-autocomplete-size-panel-border-radius,3px) 0 0}.mc-autocomplete-panel .mc-divider-horizontal{margin-top:-1px}.cdk-high-contrast-active .mc-autocomplete-panel,.cdk-high-contrast-active :host .mc-autocomplete-panel{outline:1px solid}"]
-            },] }
-];
-/** @nocollapse */
-McAutocomplete.ctorParameters = () => [
-    { type: ChangeDetectorRef },
-    { type: ElementRef },
-    { type: undefined, decorators: [{ type: Inject, args: [MC_AUTOCOMPLETE_DEFAULT_OPTIONS,] }] }
-];
-McAutocomplete.propDecorators = {
-    template: [{ type: ViewChild, args: [TemplateRef, { static: true },] }],
-    panel: [{ type: ViewChild, args: ['panel', { static: false },] }],
-    options: [{ type: ContentChildren, args: [McOption, { descendants: true },] }],
-    optionGroups: [{ type: ContentChildren, args: [McOptgroup,] }],
-    displayWith: [{ type: Input }],
-    panelWidth: [{ type: Input }],
-    optionSelected: [{ type: Output }],
-    opened: [{ type: Output }],
-    closed: [{ type: Output }],
-    classList: [{ type: Input, args: ['class',] }],
-    autoActiveFirstOption: [{ type: Input }],
-    openOnFocus: [{ type: Input }]
-};
+/** @nocollapse */ McAutocomplete.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocomplete, deps: [{ token: i0.ChangeDetectorRef }, { token: i0.ElementRef }, { token: MC_AUTOCOMPLETE_DEFAULT_OPTIONS }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McAutocomplete.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McAutocomplete, selector: "mc-autocomplete", inputs: { displayWith: "displayWith", panelWidth: "panelWidth", classList: ["class", "classList"], autoActiveFirstOption: "autoActiveFirstOption", openOnFocus: "openOnFocus" }, outputs: { optionSelected: "optionSelected", opened: "opened", closed: "closed" }, host: { classAttribute: "mc-autocomplete" }, providers: [{
+            provide: MC_OPTION_PARENT_COMPONENT, useExisting: McAutocomplete
+        }], queries: [{ propertyName: "options", predicate: McOption, descendants: true }, { propertyName: "optionGroups", predicate: McOptgroup }], viewQueries: [{ propertyName: "template", first: true, predicate: TemplateRef, descendants: true, static: true }, { propertyName: "panel", first: true, predicate: ["panel"], descendants: true }], exportAs: ["mcAutocomplete"], ngImport: i0, template: "<ng-template>\n    <div class=\"mc-autocomplete-panel\" role=\"listbox\" [id]=\"id\" [ngClass]=\"classList\" #panel>\n        <ng-content></ng-content>\n    </div>\n</ng-template>\n", styles: [".mc-autocomplete-trigger{text-overflow:ellipsis}.mc-autocomplete-panel{visibility:hidden;position:relative;overflow:auto;-webkit-overflow-scrolling:touch;margin-top:-1px;min-width:100%;width:100%;max-width:none;max-height:256px;max-height:var(--mc-autocomplete-size-panel-max-height, 256px);border-width:1px;border-style:solid;border-bottom-left-radius:3px;border-bottom-left-radius:var(--mc-autocomplete-size-panel-border-radius, 3px);border-bottom-right-radius:3px;border-bottom-right-radius:var(--mc-autocomplete-size-panel-border-radius, 3px);padding:4px 0;padding:var(--mc-autocomplete-size-panel-padding, 4px 0)}.mc-autocomplete-panel.mc-autocomplete_visible{visibility:visible}.mc-autocomplete-panel.mc-autocomplete_hidden{visibility:hidden}.mc-autocomplete-panel-above .mc-autocomplete-panel{border-radius:3px 3px 0 0;border-radius:var(--mc-autocomplete-size-panel-border-radius, 3px) var(--mc-autocomplete-size-panel-border-radius, 3px) 0 0}.mc-autocomplete-panel .mc-divider-horizontal{margin-top:-1px}.cdk-high-contrast-active .mc-autocomplete-panel{outline:solid 1px}.cdk-high-contrast-active :host .mc-autocomplete-panel{outline:solid 1px}\n"], directives: [{ type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocomplete, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-autocomplete',
+                    exportAs: 'mcAutocomplete',
+                    templateUrl: 'autocomplete.html',
+                    styleUrls: ['autocomplete.scss'],
+                    host: {
+                        class: 'mc-autocomplete'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    providers: [{
+                            provide: MC_OPTION_PARENT_COMPONENT, useExisting: McAutocomplete
+                        }]
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }, { type: i0.ElementRef }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [MC_AUTOCOMPLETE_DEFAULT_OPTIONS]
+                }] }]; }, propDecorators: { template: [{
+                type: ViewChild,
+                args: [TemplateRef, { static: true }]
+            }], panel: [{
+                type: ViewChild,
+                args: ['panel', { static: false }]
+            }], options: [{
+                type: ContentChildren,
+                args: [McOption, { descendants: true }]
+            }], optionGroups: [{
+                type: ContentChildren,
+                args: [McOptgroup]
+            }], displayWith: [{
+                type: Input
+            }], panelWidth: [{
+                type: Input
+            }], optionSelected: [{
+                type: Output
+            }], opened: [{
+                type: Output
+            }], closed: [{
+                type: Output
+            }], classList: [{
+                type: Input,
+                args: ['class']
+            }], autoActiveFirstOption: [{
+                type: Input
+            }], openOnFocus: [{
+                type: Input
+            }] } });
 
 /**
  * Directive applied to an element to make it usable
@@ -162,16 +182,15 @@ class McAutocompleteOrigin {
         this.elementRef = elementRef;
     }
 }
-McAutocompleteOrigin.decorators = [
-    { type: Directive, args: [{
-                selector: '[mcAutocompleteOrigin]',
-                exportAs: 'mcAutocompleteOrigin'
-            },] }
-];
-/** @nocollapse */
-McAutocompleteOrigin.ctorParameters = () => [
-    { type: ElementRef }
-];
+/** @nocollapse */ McAutocompleteOrigin.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocompleteOrigin, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McAutocompleteOrigin.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McAutocompleteOrigin, selector: "[mcAutocompleteOrigin]", exportAs: ["mcAutocompleteOrigin"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocompleteOrigin, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mcAutocompleteOrigin]',
+                    exportAs: 'mcAutocompleteOrigin'
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }]; } });
 
 /**
  * The following style constants are necessary to save here in order
@@ -660,60 +679,79 @@ class McAutocompleteTrigger {
         return !element.readOnly && !element.disabled && !this._autocompleteDisabled;
     }
 }
-McAutocompleteTrigger.decorators = [
-    { type: Directive, args: [{
-                selector: `input[mcAutocomplete], textarea[mcAutocomplete]`,
-                host: {
-                    class: 'mc-autocomplete-trigger',
-                    '[attr.autocomplete]': 'autocompleteAttribute',
-                    // Note: we use `focusin`, as opposed to `focus`, in order to open the panel
-                    // a little earlier. This avoids issues where IE delays the focusing of the input.
-                    '(focusin)': 'handleFocus()',
-                    '(blur)': 'onTouched()',
-                    '(input)': 'handleInput($event)',
-                    '(keydown)': 'handleKeydown($event)',
-                    '(click)': 'handleClick($event)'
-                },
-                exportAs: 'mcAutocompleteTrigger',
-                providers: [MAT_AUTOCOMPLETE_VALUE_ACCESSOR]
-            },] }
-];
-/** @nocollapse */
-McAutocompleteTrigger.ctorParameters = () => [
-    { type: ElementRef },
-    { type: ViewContainerRef },
-    { type: ChangeDetectorRef },
-    { type: Overlay },
-    { type: NgZone },
-    { type: undefined, decorators: [{ type: Inject, args: [MC_AUTOCOMPLETE_SCROLL_STRATEGY,] }] },
-    { type: Directionality, decorators: [{ type: Optional }] },
-    { type: McFormField, decorators: [{ type: Optional }, { type: Host }] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [DOCUMENT,] }] },
-    { type: ViewportRuler }
-];
-McAutocompleteTrigger.propDecorators = {
-    autocomplete: [{ type: Input, args: ['mcAutocomplete',] }],
-    connectedTo: [{ type: Input, args: ['mcAutocompleteConnectedTo',] }],
-    autocompleteAttribute: [{ type: Input, args: ['autocomplete',] }],
-    autocompleteDisabled: [{ type: Input, args: ['mcAutocompleteDisabled',] }]
-};
+/** @nocollapse */ McAutocompleteTrigger.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocompleteTrigger, deps: [{ token: i0.ElementRef }, { token: i0.ViewContainerRef }, { token: i0.ChangeDetectorRef }, { token: i1$1.Overlay }, { token: i0.NgZone }, { token: MC_AUTOCOMPLETE_SCROLL_STRATEGY }, { token: i2.Directionality, optional: true }, { token: i3.McFormField, host: true, optional: true }, { token: DOCUMENT, optional: true }, { token: i4.ViewportRuler }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McAutocompleteTrigger.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McAutocompleteTrigger, selector: "input[mcAutocomplete], textarea[mcAutocomplete]", inputs: { autocomplete: ["mcAutocomplete", "autocomplete"], connectedTo: ["mcAutocompleteConnectedTo", "connectedTo"], autocompleteAttribute: ["autocomplete", "autocompleteAttribute"], autocompleteDisabled: ["mcAutocompleteDisabled", "autocompleteDisabled"] }, host: { listeners: { "focusin": "handleFocus()", "blur": "onTouched()", "input": "handleInput($event)", "keydown": "handleKeydown($event)", "click": "handleClick($event)" }, properties: { "attr.autocomplete": "autocompleteAttribute" }, classAttribute: "mc-autocomplete-trigger" }, providers: [MAT_AUTOCOMPLETE_VALUE_ACCESSOR], exportAs: ["mcAutocompleteTrigger"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocompleteTrigger, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: `input[mcAutocomplete], textarea[mcAutocomplete]`,
+                    host: {
+                        class: 'mc-autocomplete-trigger',
+                        '[attr.autocomplete]': 'autocompleteAttribute',
+                        // Note: we use `focusin`, as opposed to `focus`, in order to open the panel
+                        // a little earlier. This avoids issues where IE delays the focusing of the input.
+                        '(focusin)': 'handleFocus()',
+                        '(blur)': 'onTouched()',
+                        '(input)': 'handleInput($event)',
+                        '(keydown)': 'handleKeydown($event)',
+                        '(click)': 'handleClick($event)'
+                    },
+                    exportAs: 'mcAutocompleteTrigger',
+                    providers: [MAT_AUTOCOMPLETE_VALUE_ACCESSOR]
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ViewContainerRef }, { type: i0.ChangeDetectorRef }, { type: i1$1.Overlay }, { type: i0.NgZone }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [MC_AUTOCOMPLETE_SCROLL_STRATEGY]
+                }] }, { type: i2.Directionality, decorators: [{
+                    type: Optional
+                }] }, { type: i3.McFormField, decorators: [{
+                    type: Optional
+                }, {
+                    type: Host
+                }] }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [DOCUMENT]
+                }] }, { type: i4.ViewportRuler }]; }, propDecorators: { autocomplete: [{
+                type: Input,
+                args: ['mcAutocomplete']
+            }], connectedTo: [{
+                type: Input,
+                args: ['mcAutocompleteConnectedTo']
+            }], autocompleteAttribute: [{
+                type: Input,
+                args: ['autocomplete']
+            }], autocompleteDisabled: [{
+                type: Input,
+                args: ['mcAutocompleteDisabled']
+            }] } });
 
 class McAutocompleteModule {
 }
-McAutocompleteModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [McOptionModule, OverlayModule, McCommonModule, CommonModule],
-                exports: [
-                    McAutocomplete,
-                    McOptionModule,
-                    McAutocompleteTrigger,
-                    McAutocompleteOrigin,
-                    McCommonModule
-                ],
-                declarations: [McAutocomplete, McAutocompleteTrigger, McAutocompleteOrigin],
-                providers: [MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER]
-            },] }
-];
+/** @nocollapse */ McAutocompleteModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocompleteModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McAutocompleteModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocompleteModule, declarations: [McAutocomplete, McAutocompleteTrigger, McAutocompleteOrigin], imports: [McOptionModule, OverlayModule, McCommonModule, CommonModule], exports: [McAutocomplete,
+        McOptionModule,
+        McAutocompleteTrigger,
+        McAutocompleteOrigin,
+        McCommonModule] });
+/** @nocollapse */ McAutocompleteModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocompleteModule, providers: [MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER], imports: [[McOptionModule, OverlayModule, McCommonModule, CommonModule], McOptionModule,
+        McCommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McAutocompleteModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [McOptionModule, OverlayModule, McCommonModule, CommonModule],
+                    exports: [
+                        McAutocomplete,
+                        McOptionModule,
+                        McAutocompleteTrigger,
+                        McAutocompleteOrigin,
+                        McCommonModule
+                    ],
+                    declarations: [McAutocomplete, McAutocompleteTrigger, McAutocompleteOrigin],
+                    providers: [MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.

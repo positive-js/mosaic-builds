@@ -2,7 +2,30 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/icon')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/button', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/icon'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.button = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic.icon));
-}(this, (function (exports, a11y, platform, common, core, core$1, icon) { 'use strict';
+}(this, (function (exports, i1, platform, common, i0, core, icon) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -362,23 +385,21 @@
         };
         return McButtonCssStyler;
     }());
-    McButtonCssStyler.decorators = [
-        { type: core.Directive, args: [{
-                    selector: 'button[mc-button], a[mc-button]',
-                    host: {
-                        '[class.mc-button]': '!isIconButton',
-                        '[class.mc-icon-button]': 'isIconButton'
-                    }
-                },] }
-    ];
-    /** @nocollapse */
-    McButtonCssStyler.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: core.Renderer2 }
-    ]; };
-    McButtonCssStyler.propDecorators = {
-        icons: [{ type: core.ContentChildren, args: [icon.McIcon, { descendants: true },] }]
-    };
+    /** @nocollapse */ McButtonCssStyler.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McButtonCssStyler, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.Renderer2 }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McButtonCssStyler.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McButtonCssStyler, selector: "button[mc-button], a[mc-button]", host: { properties: { "class.mc-button": "!isIconButton", "class.mc-icon-button": "isIconButton" } }, queries: [{ propertyName: "icons", predicate: icon.McIcon, descendants: true }], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McButtonCssStyler, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: 'button[mc-button], a[mc-button]',
+                        host: {
+                            '[class.mc-button]': '!isIconButton',
+                            '[class.mc-icon-button]': 'isIconButton'
+                        }
+                    }]
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.Renderer2 }]; }, propDecorators: { icons: [{
+                    type: i0.ContentChildren,
+                    args: [icon.McIcon, { descendants: true }]
+                }] } });
     var McButtonBase = /** @class */ (function () {
         // tslint:disable-next-line:naming-convention
         function McButtonBase(_elementRef) {
@@ -387,7 +408,7 @@
         return McButtonBase;
     }());
     // tslint:disable-next-line:naming-convention
-    var McButtonMixinBase = core$1.mixinTabIndex(core$1.mixinColor(core$1.mixinDisabled(McButtonBase)));
+    var McButtonMixinBase = core.mixinTabIndex(core.mixinColor(core.mixinDisabled(McButtonBase)));
     var McButton = /** @class */ (function (_super) {
         __extends(McButton, _super);
         function McButton(elementRef, _focusMonitor) {
@@ -410,24 +431,22 @@
         };
         return McButton;
     }(McButtonMixinBase));
-    McButton.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'button[mc-button]',
-                    template: "<div class=\"mc-button-wrapper\">\n    <ng-content></ng-content>\n</div>\n<div class=\"mc-button-overlay\"></div>\n",
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    inputs: ['disabled', 'color'],
-                    host: {
-                        '[attr.disabled]': 'disabled || null'
-                    },
-                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px)}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}[disabled].mc-button,[disabled].mc-icon-button,[disabled].mc-light-button{pointer-events:none;cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McButton.ctorParameters = function () { return [
-        { type: core.ElementRef },
-        { type: a11y.FocusMonitor }
-    ]; };
+    /** @nocollapse */ McButton.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McButton, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.FocusMonitor }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McButton.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McButton, selector: "button[mc-button]", inputs: { disabled: "disabled", color: "color" }, host: { properties: { "attr.disabled": "disabled || null" } }, usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-button-wrapper\">\n    <ng-content></ng-content>\n</div>\n<div class=\"mc-button-overlay\"></div>\n", styles: [".mc-icon-button,.mc-light-button,.mc-button{-webkit-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;border:1px solid transparent;border:var(--mc-button-size-border-width, 1px) solid transparent;border-radius:3px;border-radius:var(--mc-button-size-border-radius, 3px)}.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner,.mc-button::-moz-focus-inner{border:0}.mc-icon-button:focus,.mc-light-button:focus,.mc-button:focus{outline:none}[disabled].mc-icon-button,[disabled].mc-light-button,[disabled].mc-button{pointer-events:none;cursor:default}.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button,.cdk-focused.mc-button{z-index:1}.mc-button{padding:calc(6px - 1px) calc(16px - 1px);padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(6px - 1px) calc(8px - 1px);padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(16px - 1px);padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(16px - 1px);padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:8px;margin-right:var(--mc-icon-button-size-icon-padding, 8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:8px;margin-left:var(--mc-icon-button-size-icon-padding, 8px)}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McButton, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'button[mc-button]',
+                        templateUrl: './button.component.html',
+                        styleUrls: ['./button.scss'],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None,
+                        inputs: ['disabled', 'color'],
+                        host: {
+                            '[attr.disabled]': 'disabled || null'
+                        }
+                    }]
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }, { type: i1__namespace.FocusMonitor }]; } });
     var McAnchor = /** @class */ (function (_super) {
         __extends(McAnchor, _super);
         function McAnchor(focusMonitor, elementRef) {
@@ -441,51 +460,63 @@
         };
         return McAnchor;
     }(McButton));
-    McAnchor.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'a[mc-button]',
-                    template: "<div class=\"mc-button-wrapper\">\n    <ng-content></ng-content>\n</div>\n<div class=\"mc-button-overlay\"></div>\n",
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core.ViewEncapsulation.None,
-                    inputs: ['disabled', 'color', 'tabIndex'],
-                    host: {
-                        '[attr.tabindex]': 'tabIndex',
-                        '[attr.disabled]': 'disabled || null',
-                        '(click)': 'haltDisabledEvents($event)'
-                    },
-                    styles: [".mc-button,.mc-icon-button,.mc-light-button{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;border:var(--mc-button-size-border-width,1px) solid transparent;border-radius:var(--mc-button-size-border-radius,3px)}.mc-button::-moz-focus-inner,.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner{border:0}.mc-button:focus,.mc-icon-button:focus,.mc-light-button:focus{outline:none}[disabled].mc-button,[disabled].mc-icon-button,[disabled].mc-light-button{pointer-events:none;cursor:default}.cdk-focused.mc-button,.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button{z-index:1}.mc-button{padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:var(--mc-icon-button-size-icon-padding,8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:var(--mc-icon-button-size-icon-padding,8px)}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McAnchor.ctorParameters = function () { return [
-        { type: a11y.FocusMonitor },
-        { type: core.ElementRef }
-    ]; };
+    /** @nocollapse */ McAnchor.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McAnchor, deps: [{ token: i1__namespace.FocusMonitor }, { token: i0__namespace.ElementRef }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McAnchor.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McAnchor, selector: "a[mc-button]", inputs: { disabled: "disabled", color: "color", tabIndex: "tabIndex" }, host: { listeners: { "click": "haltDisabledEvents($event)" }, properties: { "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" } }, usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-button-wrapper\">\n    <ng-content></ng-content>\n</div>\n<div class=\"mc-button-overlay\"></div>\n", styles: [".mc-icon-button,.mc-light-button,.mc-button{-webkit-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;position:relative;box-sizing:border-box;display:inline-block;white-space:nowrap;text-decoration:none;text-align:center;vertical-align:baseline;border:1px solid transparent;border:var(--mc-button-size-border-width, 1px) solid transparent;border-radius:3px;border-radius:var(--mc-button-size-border-radius, 3px)}.mc-icon-button::-moz-focus-inner,.mc-light-button::-moz-focus-inner,.mc-button::-moz-focus-inner{border:0}.mc-icon-button:focus,.mc-light-button:focus,.mc-button:focus{outline:none}[disabled].mc-icon-button,[disabled].mc-light-button,[disabled].mc-button{pointer-events:none;cursor:default}.cdk-focused.mc-icon-button,.cdk-focused.mc-light-button,.cdk-focused.mc-button{z-index:1}.mc-button{padding:calc(6px - 1px) calc(16px - 1px);padding:calc(var(--mc-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-button-size-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button{padding:calc(6px - 1px) calc(8px - 1px);padding:calc(var(--mc-icon-button-size-vertical-padding, 6px) - var(--mc-button-size-border-width, 1px)) calc(var(--mc-icon-button-size-horizontal-padding, 8px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_left{padding-right:calc(16px - 1px);padding-right:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button.mc-icon-button_right{padding-left:calc(16px - 1px);padding-left:calc(var(--mc-icon-button-size-icon-horizontal-padding, 16px) - var(--mc-button-size-border-width, 1px))}.mc-icon-button .mc-button-wrapper{display:flex}.mc-icon-button .mc-button-wrapper .mc-icon{margin:auto;line-height:20px}.mc-icon-button .mc-button-wrapper .mc-icon_left{margin-right:8px;margin-right:var(--mc-icon-button-size-icon-padding, 8px)}.mc-icon-button .mc-button-wrapper .mc-icon_right{margin-left:8px;margin-left:var(--mc-icon-button-size-icon-padding, 8px)}.mc-button-overlay{position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;pointer-events:none;border-radius:inherit}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McAnchor, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'a[mc-button]',
+                        templateUrl: './button.component.html',
+                        styleUrls: ['button.scss'],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None,
+                        inputs: ['disabled', 'color', 'tabIndex'],
+                        host: {
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null',
+                            '(click)': 'haltDisabledEvents($event)'
+                        }
+                    }]
+            }], ctorParameters: function () { return [{ type: i1__namespace.FocusMonitor }, { type: i0__namespace.ElementRef }]; } });
 
     var McButtonModule = /** @class */ (function () {
         function McButtonModule() {
         }
         return McButtonModule;
     }());
-    McButtonModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y.A11yModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McButton,
-                        McAnchor,
-                        McButtonCssStyler
-                    ],
-                    declarations: [
-                        McButton,
-                        McAnchor,
-                        McButtonCssStyler
-                    ]
-                },] }
-    ];
+    /** @nocollapse */ McButtonModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McButtonModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McButtonModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McButtonModule, declarations: [McButton,
+            McAnchor,
+            McButtonCssStyler], imports: [common.CommonModule,
+            i1.A11yModule,
+            platform.PlatformModule], exports: [McButton,
+            McAnchor,
+            McButtonCssStyler] });
+    /** @nocollapse */ McButtonModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McButtonModule, imports: [[
+                common.CommonModule,
+                i1.A11yModule,
+                platform.PlatformModule
+            ]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McButtonModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [
+                            common.CommonModule,
+                            i1.A11yModule,
+                            platform.PlatformModule
+                        ],
+                        exports: [
+                            McButton,
+                            McAnchor,
+                            McButtonCssStyler
+                        ],
+                        declarations: [
+                            McButton,
+                            McAnchor,
+                            McButtonCssStyler
+                        ]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.

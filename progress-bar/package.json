@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/progress-bar/ptsecurity-mosaic-progress-bar.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-progress-bar.js",
   "typings": "ptsecurity-mosaic-progress-bar.d.ts",
-  "metadata": "ptsecurity-mosaic-progress-bar.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/progress-bar"
 }

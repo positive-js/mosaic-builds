@@ -8,6 +8,7 @@ import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/f
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { Observable, Subject } from 'rxjs';
+import * as i0 from "@angular/core";
 /** Change event object that is emitted when the select value has changed. */
 export declare class McTreeSelectChange {
     source: McTreeSelect;
@@ -16,6 +17,8 @@ export declare class McTreeSelectChange {
     constructor(source: McTreeSelect, value: any, isUserInput?: boolean);
 }
 export declare class McTreeSelectTrigger {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelectTrigger, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeSelectTrigger, "mc-tree-select-trigger", never, {}, {}, never>;
 }
 declare class McTreeSelectBase {
     elementRef: ElementRef;
@@ -80,7 +83,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     cleaner: McCleaner;
     /** User-supplied override of the trigger element. */
     customTrigger: McTreeSelectTrigger;
-    tree: McTreeSelection<McTreeOption>;
+    tree: McTreeSelection;
     hiddenItemsText: string;
     /** Event emitted when the select panel has been toggled. */
     readonly openedChange: EventEmitter<boolean>;
@@ -257,5 +260,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     private calculateOverlayOffsetX;
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
     private _compareWith;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelect, [null, null, null, null, null, null, null, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; self: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeSelect, "mc-tree-select", ["mcTreeSelect"], { "disabled": "disabled"; "tabIndex": "tabIndex"; "hiddenItemsText": "hiddenItemsText"; "panelClass": "panelClass"; "backdropClass": "backdropClass"; "errorStateMatcher": "errorStateMatcher"; "sortComparator": "sortComparator"; "placeholder": "placeholder"; "required": "required"; "multiple": "multiple"; "autoSelect": "autoSelect"; "compareWith": "compareWith"; "id": "id"; "hasBackdrop": "hasBackdrop"; "hiddenItemsTextFormatter": "hiddenItemsTextFormatter"; }, { "openedChange": "openedChange"; "openedStream": "opened"; "closedStream": "closed"; "selectionChange": "selectionChange"; "valueChange": "valueChange"; }, ["cleaner", "customTrigger", "tree"], ["mc-tree-select-trigger", "mc-cleaner", "mc-tree-selection"]>;
 }
 export {};

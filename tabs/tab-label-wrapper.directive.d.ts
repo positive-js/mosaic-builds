@@ -1,5 +1,6 @@
 import { AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
 import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
+import * as i0 from "@angular/core";
 /** @docs-private */
 export declare class McTabLabelWrapperBase {
 }
@@ -18,4 +19,6 @@ export declare class McTabLabelWrapper extends McTabLabelWrapperMixinBase implem
     getOffsetLeft(): number;
     getOffsetWidth(): number;
     private addClassModifierForIcons;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTabLabelWrapper, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTabLabelWrapper, "[mcTabLabelWrapper]", never, { "disabled": "disabled"; }, {}, never>;
 }

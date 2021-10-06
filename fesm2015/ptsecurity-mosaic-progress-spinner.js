@@ -1,6 +1,8 @@
 import { PlatformModule } from '@angular/cdk/platform';
+import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Input, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, NgModule } from '@angular/core';
 import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 let idIterator = 0;
@@ -29,46 +31,54 @@ class McProgressSpinner extends McProgressSpinnerMixinBase {
         return `${MAX_DASH_ARRAY - this.percentage * MAX_DASH_ARRAY}%`;
     }
 }
-McProgressSpinner.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-progress-spinner',
-                template: "<div class=\"mc-progress-spinner__inner\"\n     [ngClass]=\"{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}\">\n    <svg focusable=\"false\"\n         preserveAspectRatio=\"xMidYMid meet\"\n         viewBox=\"0 0 100 100\"\n         class=\"mc-progress-spinner__svg\">\n        <circle cx=\"50%\"\n                cy=\"50%\"\n                r=\"42.5%\"\n                class=\"mc-progress-spinner__circle\"\n                [ngStyle]=\"{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}\">\n        </circle>\n    </svg>\n</div>\n\n",
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-                inputs: ['color'],
-                host: {
-                    class: 'mc-progress-spinner',
-                    '[attr.id]': 'id'
-                },
-                styles: ["@-webkit-keyframes mc-progress-spinner-indeterminate{to{transform:rotate(270deg)}}@keyframes mc-progress-spinner-indeterminate{to{transform:rotate(270deg)}}.mc-progress-spinner{display:inline-block;width:var(--mc-progress-spinner-size-size,16px);height:var(--mc-progress-spinner-size-size,16px);overflow:hidden}.mc-progress-spinner__circle{fill:none;stroke:#000;stroke-dasharray:273%;stroke-width:13%;transition:stroke-dashoffset .3s;transform-origin:center center}.mc-progress-spinner__inner{width:100%;height:100%;transform:rotate(-90deg)}.mc-progress-spinner__inner--indeterminate{-webkit-animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite;animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite}.mc-progress-spinner__inner--indeterminate .mc-progress-spinner__circle{stroke-dashoffset:80%}.mc-progress-spinner__svg{width:100%;height:100%}"]
-            },] }
-];
-/** @nocollapse */
-McProgressSpinner.ctorParameters = () => [
-    { type: ElementRef }
-];
-McProgressSpinner.propDecorators = {
-    id: [{ type: Input }],
-    value: [{ type: Input }],
-    mode: [{ type: Input }]
-};
+/** @nocollapse */ McProgressSpinner.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McProgressSpinner, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McProgressSpinner.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McProgressSpinner, selector: "mc-progress-spinner", inputs: { color: "color", id: "id", value: "value", mode: "mode" }, host: { properties: { "attr.id": "id" }, classAttribute: "mc-progress-spinner" }, usesInheritance: true, ngImport: i0, template: "<div class=\"mc-progress-spinner__inner\"\n     [ngClass]=\"{'mc-progress-spinner__inner--indeterminate': mode === 'indeterminate'}\">\n    <svg focusable=\"false\"\n         preserveAspectRatio=\"xMidYMid meet\"\n         viewBox=\"0 0 100 100\"\n         class=\"mc-progress-spinner__svg\">\n        <circle cx=\"50%\"\n                cy=\"50%\"\n                r=\"42.5%\"\n                class=\"mc-progress-spinner__circle\"\n                [ngStyle]=\"{'stroke-dashoffset': mode === 'determinate' ? dashOffsetPercent : null}\">\n        </circle>\n    </svg>\n</div>\n\n", styles: ["@keyframes mc-progress-spinner-indeterminate{to{transform:rotate(270deg)}}.mc-progress-spinner{display:inline-block;width:16px;width:var(--mc-progress-spinner-size-size, 16px);height:16px;height:var(--mc-progress-spinner-size-size, 16px);overflow:hidden}.mc-progress-spinner__circle{fill:none;stroke:#000;stroke-dasharray:273%;stroke-width:13%;transition:stroke-dashoffset .3s;transform-origin:center center}.mc-progress-spinner__inner{width:100%;height:100%;transform:rotate(-90deg)}.mc-progress-spinner__inner--indeterminate{animation:mc-progress-spinner-indeterminate 1.5s cubic-bezier(.455,.03,.515,.955) infinite}.mc-progress-spinner__inner--indeterminate .mc-progress-spinner__circle{stroke-dashoffset:80%}.mc-progress-spinner__svg{width:100%;height:100%}\n"], directives: [{ type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { type: i1.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McProgressSpinner, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-progress-spinner',
+                    templateUrl: './progress-spinner.component.html',
+                    styleUrls: ['./progress-spinner.scss'],
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    inputs: ['color'],
+                    host: {
+                        class: 'mc-progress-spinner',
+                        '[attr.id]': 'id'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }]; }, propDecorators: { id: [{
+                type: Input
+            }], value: [{
+                type: Input
+            }], mode: [{
+                type: Input
+            }] } });
 
 class McProgressSpinnerModule {
 }
-McProgressSpinnerModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    PlatformModule
-                ],
-                exports: [
-                    McProgressSpinner
-                ],
-                declarations: [
-                    McProgressSpinner
-                ]
-            },] }
-];
+/** @nocollapse */ McProgressSpinnerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McProgressSpinnerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McProgressSpinnerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McProgressSpinnerModule, declarations: [McProgressSpinner], imports: [CommonModule,
+        PlatformModule], exports: [McProgressSpinner] });
+/** @nocollapse */ McProgressSpinnerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McProgressSpinnerModule, imports: [[
+            CommonModule,
+            PlatformModule
+        ]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McProgressSpinnerModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        CommonModule,
+                        PlatformModule
+                    ],
+                    exports: [
+                        McProgressSpinner
+                    ],
+                    declarations: [
+                        McProgressSpinner
+                    ]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.

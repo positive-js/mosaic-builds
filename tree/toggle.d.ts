@@ -1,4 +1,5 @@
 import { CdkTree, CdkTreeNode } from '@ptsecurity/cdk/tree';
+import * as i0 from "@angular/core";
 export declare class McTreeNodeToggleComponent<T> {
     private tree;
     private treeNode;
@@ -10,6 +11,8 @@ export declare class McTreeNodeToggleComponent<T> {
     get iconState(): any;
     constructor(tree: CdkTree<T>, treeNode: CdkTreeNode<T>);
     toggle(event: Event): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeNodeToggleComponent<any>, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeNodeToggleComponent<any>, "mc-tree-node-toggle", never, { "node": "node"; "recursive": "cdkTreeNodeToggleRecursive"; }, {}, never, never>;
 }
 export declare class McTreeNodeToggleDirective<T> {
     private tree;
@@ -20,4 +23,6 @@ export declare class McTreeNodeToggleDirective<T> {
     private _recursive;
     constructor(tree: CdkTree<T>, treeNode: CdkTreeNode<T>);
     toggle(event: Event): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeNodeToggleDirective<any>, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeNodeToggleDirective<any>, "[mcTreeNodeToggle]", never, { "recursive": "cdkTreeNodeToggleRecursive"; }, {}, never>;
 }

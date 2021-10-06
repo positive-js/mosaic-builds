@@ -3,6 +3,7 @@ import { ChangeDetectorRef, EventEmitter, ElementRef, InjectionToken, AfterConte
 import { CdkTreeNode } from '@ptsecurity/cdk/tree';
 import { CanDisable } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
+import * as i0 from "@angular/core";
 export interface McTreeOptionEvent {
     option: McTreeOption;
 }
@@ -52,4 +53,6 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     emitSelectionChangeEvent(isUserInput?: boolean): void;
     getHostElement(): HTMLElement;
     markForCheck(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeOption, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, never, ["[mc-icon]", "mc-tree-node-toggle", "*"]>;
 }

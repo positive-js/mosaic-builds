@@ -2,6 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { McButton } from '@ptsecurity/mosaic/button';
+import * as i0 from "@angular/core";
 /** Acceptable types for a button toggle. */
 export declare type ToggleType = 'checkbox' | 'radio';
 /**
@@ -97,6 +98,8 @@ export declare class McButtonToggleGroup implements ControlValueAccessor, OnInit
     private clearSelection;
     /** Selects a value if there's a toggle that corresponds to it. */
     private selectValue;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McButtonToggleGroup, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McButtonToggleGroup, "mc-button-toggle-group", ["mcButtonToggleGroup"], { "vertical": "vertical"; "value": "value"; "multiple": "multiple"; "disabled": "disabled"; }, { "valueChange": "valueChange"; "change": "change"; }, ["buttonToggles"]>;
 }
 /** Single button inside of a toggle group. */
 export declare class McButtonToggle implements OnInit, OnDestroy {
@@ -133,4 +136,6 @@ export declare class McButtonToggle implements OnInit, OnDestroy {
      * update bound properties of the radio button.
      */
     markForCheck(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McButtonToggle, [{ optional: true; }, null, null, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McButtonToggle, "mc-button-toggle", ["mcButtonToggle"], { "checked": "checked"; "value": "value"; "tabIndex": "tabIndex"; "disabled": "disabled"; }, { "change": "change"; }, never, ["*"]>;
 }

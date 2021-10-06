@@ -3,6 +3,7 @@ import { ComponentType } from '@angular/cdk/portal';
 import { InjectionToken, Injector, OnDestroy, TemplateRef } from '@angular/core';
 import { McSidepanelConfig } from './sidepanel-config';
 import { McSidepanelRef } from './sidepanel-ref';
+import * as i0 from "@angular/core";
 /** Injection token that can be used to specify default sidepanel options. */
 export declare const MC_SIDEPANEL_DEFAULT_OPTIONS: InjectionToken<McSidepanelConfig<any>>;
 export declare class McSidepanelService implements OnDestroy {
@@ -51,4 +52,6 @@ export declare class McSidepanelService implements OnDestroy {
      * @param sidepanelRef Sidepanel to be removed.
      */
     private removeOpenSidepanel;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McSidepanelService, [null, null, { optional: true; }, { optional: true; skipSelf: true; }]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<McSidepanelService>;
 }

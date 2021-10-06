@@ -1,4 +1,5 @@
 import { DateAdapter } from '@ptsecurity/cdk/datetime';
+import * as i0 from "@angular/core";
 /**
  * interface for absolute date or datetime formatter template
  */
@@ -173,4 +174,6 @@ export declare class DateFormatter<D> {
     rangeMiddleDateTime(startDate: D, endDate: D): string;
     private compileVariables;
     private hasSame;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DateFormatter<any>, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<DateFormatter<any>>;
 }

@@ -4,6 +4,7 @@ import { ConnectedOverlayPositionChange, ConnectionPositionPair, Overlay, Overla
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
+import * as i0 from "@angular/core";
 export declare enum PopoverVisibility {
     Initial = "initial",
     Visible = "visible",
@@ -54,6 +55,8 @@ export declare class McPopoverComponent {
     animationStart(): void;
     animationDone(event: AnimationEvent): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McPopoverComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McPopoverComponent, "mc-popover", never, {}, { "mcVisibleChange": "mcPopoverVisibleChange"; }, never, never>;
 }
 export declare const MC_POPOVER_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
@@ -155,4 +158,6 @@ export declare class McPopover implements OnInit, OnDestroy {
     private getPriorityPlacementStrategy;
     private getPrioritizedPositions;
     private resizeListener;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McPopover, [null, null, null, null, null, null, { optional: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McPopover, "[mcPopover]", ["mcPopover"], { "backdropClass": "backdropClass"; "hasBackdrop": "hasBackdrop"; "mcHeader": "mcPopoverHeader"; "mcContent": "mcPopoverContent"; "mcFooter": "mcPopoverFooter"; "disabled": "mcPopoverDisabled"; "mcMouseEnterDelay": "mcPopoverMouseEnterDelay"; "mcMouseLeaveDelay": "mcPopoverMouseLeaveDelay"; "mcTrigger": "mcPopoverTrigger"; "mcPopoverSize": "mcPopoverSize"; "mcPlacementPriority": "mcPopoverPlacementPriority"; "mcPlacement": "mcPopoverPlacement"; "classList": "mcPopoverClass"; "mcVisible": "mcPopoverVisible"; }, { "mcVisibleChange": "mcPopoverVisibleChange"; "mcPositionStrategyPlacementChange": "mcPopoverPositionStrategyPlacementChange"; }, never>;
 }

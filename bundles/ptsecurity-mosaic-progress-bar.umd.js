@@ -2,7 +2,30 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/progress-bar', ['exports', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic['progress-bar'] = {}), global.ng.cdk.platform, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core));
-}(this, (function (exports, platform, common, core$1, core) { 'use strict';
+}(this, (function (exports, platform, i1, i0, core) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -352,49 +375,57 @@
         });
         return McProgressBar;
     }(McProgressBarMixinBase));
-    McProgressBar.decorators = [
-        { type: core$1.Component, args: [{
-                    selector: 'mc-progress-bar',
-                    template: "\n<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\">\n    <div\n        *ngSwitchCase=\"'indeterminate'\"\n        class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\">\n    </div>\n    <div\n        *ngSwitchDefault\n        class=\"mc-progress-bar__line mc-progress-bar__line--determinate\"\n        [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\">\n    </div>\n</div>\n",
-                    changeDetection: core$1.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core$1.ViewEncapsulation.None,
-                    inputs: ['color'],
-                    host: {
-                        class: 'mc-progress-bar',
-                        '[attr.id]': 'id'
-                    },
-                    styles: ["@-webkit-keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}to{transform:scaleX(.4) translateX(250%)}}@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translateX(-150%)}to{transform:scaleX(.4) translateX(250%)}}.mc-progress-bar{display:block;height:var(--mc-progress-bar-size-height,4px);overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{-webkit-animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite;animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McProgressBar.ctorParameters = function () { return [
-        { type: core$1.ElementRef }
-    ]; };
-    McProgressBar.propDecorators = {
-        id: [{ type: core$1.Input }],
-        value: [{ type: core$1.Input }],
-        mode: [{ type: core$1.Input }]
-    };
+    /** @nocollapse */ McProgressBar.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McProgressBar, deps: [{ token: i0__namespace.ElementRef }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McProgressBar.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McProgressBar, selector: "mc-progress-bar", inputs: { color: "color", id: "id", value: "value", mode: "mode" }, host: { properties: { "attr.id": "id" }, classAttribute: "mc-progress-bar" }, usesInheritance: true, ngImport: i0__namespace, template: "\n<div class=\"mc-progress-bar__inner\" [ngSwitch]=\"mode\" [id]=\"id\">\n    <div\n        *ngSwitchCase=\"'indeterminate'\"\n        class=\"mc-progress-bar__line mc-progress-bar__line--indeterminate\">\n    </div>\n    <div\n        *ngSwitchDefault\n        class=\"mc-progress-bar__line mc-progress-bar__line--determinate\"\n        [ngStyle]=\"{transform: 'scaleX(' + percentage + ')'}\">\n    </div>\n</div>\n", styles: ["@keyframes mc-progress-bar-indeterminate{0%{transform:scaleX(.25) translate(-150%)}to{transform:scaleX(.4) translate(250%)}}.mc-progress-bar{display:block;height:4px;height:var(--mc-progress-bar-size-height, 4px);overflow:hidden}.mc-progress-bar__inner{height:100%}.mc-progress-bar__line{height:100%;transform-origin:top left}.mc-progress-bar__line--determinate{transition:transform .3s}.mc-progress-bar__line--indeterminate{animation:mc-progress-bar-indeterminate 2.1s cubic-bezier(.455,.03,.515,.955) infinite}\n"], directives: [{ type: i1__namespace.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i1__namespace.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { type: i1__namespace.NgSwitchDefault, selector: "[ngSwitchDefault]" }, { type: i1__namespace.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McProgressBar, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-progress-bar',
+                        templateUrl: './progress-bar.component.html',
+                        styleUrls: ['./progress-bar.scss'],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None,
+                        inputs: ['color'],
+                        host: {
+                            class: 'mc-progress-bar',
+                            '[attr.id]': 'id'
+                        }
+                    }]
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }]; }, propDecorators: { id: [{
+                    type: i0.Input
+                }], value: [{
+                    type: i0.Input
+                }], mode: [{
+                    type: i0.Input
+                }] } });
 
     var McProgressBarModule = /** @class */ (function () {
         function McProgressBarModule() {
         }
         return McProgressBarModule;
     }());
-    McProgressBarModule.decorators = [
-        { type: core$1.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        platform.PlatformModule
-                    ],
-                    exports: [
-                        McProgressBar
-                    ],
-                    declarations: [
-                        McProgressBar
-                    ]
-                },] }
-    ];
+    /** @nocollapse */ McProgressBarModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McProgressBarModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McProgressBarModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McProgressBarModule, declarations: [McProgressBar], imports: [i1.CommonModule,
+            platform.PlatformModule], exports: [McProgressBar] });
+    /** @nocollapse */ McProgressBarModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McProgressBarModule, imports: [[
+                i1.CommonModule,
+                platform.PlatformModule
+            ]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McProgressBarModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [
+                            i1.CommonModule,
+                            platform.PlatformModule
+                        ],
+                        exports: [
+                            McProgressBar
+                        ],
+                        declarations: [
+                            McProgressBar
+                        ]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.

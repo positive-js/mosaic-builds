@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/progress-spinner/ptsecurity-mosaic-progress-spinner.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-progress-spinner.js",
   "typings": "ptsecurity-mosaic-progress-spinner.d.ts",
-  "metadata": "ptsecurity-mosaic-progress-spinner.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/progress-spinner"
 }

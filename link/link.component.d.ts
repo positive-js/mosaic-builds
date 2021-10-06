@@ -2,6 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
+import * as i0 from "@angular/core";
 export declare class McLinkBase {
 }
 export declare const McLinkMixinBase: HasTabIndexCtor & CanDisableCtor & typeof McLinkBase;
@@ -32,4 +33,6 @@ export declare class McLink extends McLinkMixinBase implements OnDestroy, HasTab
     ngOnDestroy(): void;
     focus(): void;
     getHostElement(): any;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McLink, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McLink, "[mc-link]", ["mcLink"], { "tabIndex": "tabIndex"; "disabled": "disabled"; "pseudo": "pseudo"; "noUnderline": "noUnderline"; "useVisited": "useVisited"; "print": "print"; }, {}, ["icon"]>;
 }

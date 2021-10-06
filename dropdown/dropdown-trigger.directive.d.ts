@@ -5,6 +5,7 @@ import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, OnDestroy, 
 import { McDropdownItem } from './dropdown-item.component';
 import { McDropdown } from './dropdown.component';
 import { McDropdownPanel } from './dropdown.types';
+import * as i0 from "@angular/core";
 /** Injection token that determines the scroll handling while the dropdown is open. */
 export declare const MC_DROPDOWN_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
 /** @docs-private */
@@ -134,4 +135,6 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     /** Gets the portal that should be attached to the overlay. */
     private getPortal;
     private getWidth;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McDropdownTrigger, [null, null, null, null, { optional: true; }, { optional: true; self: true; }, { optional: true; }, null]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McDropdownTrigger, "[mcDropdownTriggerFor]", ["mcDropdownTrigger"], { "data": "mcDropdownTriggerData"; "openByArrowDown": "openByArrowDown"; "restoreFocus": "mcDropdownTriggerRestoreFocus"; "dropdown": "mcDropdownTriggerFor"; }, { "dropdownOpened": "dropdownOpened"; "dropdownClosed": "dropdownClosed"; }, never>;
 }

@@ -8,6 +8,7 @@ import { McFormField } from '@ptsecurity/mosaic/form-field';
 import { Observable } from 'rxjs';
 import { McAutocompleteOrigin } from './autocomplete-origin.directive';
 import { McAutocomplete } from './autocomplete.component';
+import * as i0 from "@angular/core";
 /**
  * The following style constants are necessary to save here in order
  * to properly calculate the scrollTop of the panel. Because we are not
@@ -161,4 +162,6 @@ export declare class McAutocompleteTrigger implements ControlValueAccessor, OnDe
      */
     private resetActiveItem;
     private canOpen;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McAutocompleteTrigger, [null, null, null, null, null, null, { optional: true; }, { optional: true; host: true; }, { optional: true; }, null]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McAutocompleteTrigger, "input[mcAutocomplete], textarea[mcAutocomplete]", ["mcAutocompleteTrigger"], { "autocomplete": "mcAutocomplete"; "connectedTo": "mcAutocompleteConnectedTo"; "autocompleteAttribute": "autocomplete"; "autocompleteDisabled": "mcAutocompleteDisabled"; }, {}, never>;
 }

@@ -2,15 +2,26 @@ import { AfterContentChecked, AfterContentInit, ChangeDetectorRef, ElementRef, E
 import { CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McTabHeader } from './tab-header.component';
 import { McTab } from './tab.component';
+import * as i0 from "@angular/core";
 export declare class McOldTabsCssStyler {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McOldTabsCssStyler, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McOldTabsCssStyler, "mc-tab-group[mc-old-tabs]", never, {}, {}, never>;
 }
 export declare class McAlignTabsCenterCssStyler {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McAlignTabsCenterCssStyler, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McAlignTabsCenterCssStyler, "mc-tab-group[mc-align-tabs-center], [mc-tab-nav-bar][mc-align-tabs-center]", never, {}, {}, never>;
 }
 export declare class McAlignTabsEndCssStyler {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McAlignTabsEndCssStyler, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McAlignTabsEndCssStyler, "mc-tab-group[mc-align-tabs-end], [mc-tab-nav-bar][mc-align-tabs-end]", never, {}, {}, never>;
 }
 export declare class McStretchTabsCssStyler {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McStretchTabsCssStyler, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McStretchTabsCssStyler, "mc-tab-group[mc-stretch-tabs], [mc-tab-nav-bar][mc-stretch-tabs]", never, {}, {}, never>;
 }
 export declare class McVerticalTabsCssStyler {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McVerticalTabsCssStyler, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McVerticalTabsCssStyler, "mc-tab-group[vertical], [mc-tab-nav-bar][vertical]", never, {}, {}, never>;
 }
 /** A simple change event emitted on focus or selection changes. */
 export declare class McTabChangeEvent {
@@ -110,4 +121,6 @@ export declare class McTabGroup extends McTabGroupMixinBase implements AfterCont
     private subscribeToTabLabels;
     /** Clamps the given index to the bounds of 0 and the tabs length. */
     private clampTabIndex;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTabGroup, [null, null, { attribute: "mc-old-tabs"; }, { attribute: "vertical"; }, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTabGroup, "mc-tab-group", ["mcTabGroup"], { "disabled": "disabled"; "dynamicHeight": "dynamicHeight"; "selectedIndex": "selectedIndex"; "headerPosition": "headerPosition"; "animationDuration": "animationDuration"; }, { "selectedIndexChange": "selectedIndexChange"; "focusChange": "focusChange"; "animationDone": "animationDone"; "selectedTabChange": "selectedTabChange"; }, ["tabs"], never>;
 }

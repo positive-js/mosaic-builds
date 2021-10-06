@@ -2,7 +2,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@ptsecurity/cdk/datetime'), require('messageformat'), require('@angular/forms'), require('@angular/common'), require('@angular/cdk/overlay'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@ptsecurity/cdk/datetime', 'messageformat', '@angular/forms', '@angular/common', '@angular/cdk/overlay', '@angular/animations', '@ptsecurity/cdk/keycodes'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.mc.cdk.datetime, global.messageformat, global.ng.forms, global.ng.common, global.ng.cdk.overlay, global.ng.animations, global.mc.cdk.keycodes));
-}(this, (function (exports, bidi, i0, coercion, rxjs, datetime, MessageFormat, forms, i1, overlay, animations, keycodes) { 'use strict';
+}(this, (function (exports, bidi, i0, coercion, rxjs, i1, MessageFormat, forms, i3, overlay, animations, keycodes) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -25,8 +25,9 @@
     }
 
     var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
-    var MessageFormat__namespace = /*#__PURE__*/_interopNamespace(MessageFormat);
     var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
+    var MessageFormat__namespace = /*#__PURE__*/_interopNamespace(MessageFormat);
+    var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
 
     function isBoolean(val) { return typeof val === 'boolean'; }
     function toBoolean(value) {
@@ -98,16 +99,23 @@
         };
         return McCommonModule;
     }());
-    McCommonModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    imports: [bidi.BidiModule],
-                    exports: [bidi.BidiModule]
-                },] }
-    ];
-    /** @nocollapse */
-    McCommonModule.ctorParameters = function () { return [
-        { type: Boolean, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [MC_SANITY_CHECKS,] }] }
-    ]; };
+    /** @nocollapse */ McCommonModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, deps: [{ token: MC_SANITY_CHECKS, optional: true }], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McCommonModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, imports: [bidi.BidiModule], exports: [bidi.BidiModule] });
+    /** @nocollapse */ McCommonModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, imports: [[bidi.BidiModule], bidi.BidiModule] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCommonModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [bidi.BidiModule],
+                        exports: [bidi.BidiModule]
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [MC_SANITY_CHECKS]
+                        }] }];
+        } });
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -435,7 +443,7 @@
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
-                var _this = _super.apply(this, __spread(args)) || this;
+                var _this = _super.apply(this, __spreadArray([], __read(args))) || this;
                 _this._disabled = false;
                 return _this;
             }
@@ -461,7 +469,6 @@
         ThemePalette["Default"] = "second";
         ThemePalette["Empty"] = "";
     })(exports.ThemePalette || (exports.ThemePalette = {}));
-    /** Mixin to augment a directive with a `color` property. */
     function mixinColor(base, defaultColor) {
         if (defaultColor === void 0) { defaultColor = exports.ThemePalette.Default; }
         return /** @class */ (function (_super) {
@@ -471,14 +478,12 @@
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
-                var _this = _super.apply(this, __spread(args)) || this;
+                var _this = _super.apply(this, __spreadArray([], __read(args))) || this;
                 _this.color = defaultColor;
                 return _this;
             }
             Object.defineProperty(class_1.prototype, "color", {
-                get: function () {
-                    return this._color;
-                },
+                get: function () { return this._color; },
                 set: function (value) {
                     var colorPalette = value || defaultColor;
                     if (colorPalette !== this._color) {
@@ -498,26 +503,21 @@
         }(base));
     }
 
-    // Mixin to augment a directive with a `tabIndex` property.
     function mixinTabIndex(base, defaultTabIndex) {
         if (defaultTabIndex === void 0) { defaultTabIndex = 0; }
-        // Note: We cast `base` to `unknown` and then `Constructor`. It could be an abstract class,
-        // but given we `extend` it from another class, we can assume a constructor being accessible.
-        // tslint:disable-next-line:naming-convention
-        var Mixin = /** @class */ (function (_super) {
-            __extends(Mixin, _super);
-            function Mixin() {
+        return /** @class */ (function (_super) {
+            __extends(class_1, _super);
+            function class_1() {
                 var args = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
-                var _this = _super.apply(this, __spread(args)) || this;
-                // tslint:disable-next-line:orthodox-getter-and-setter
-                _this._tabIndex = defaultTabIndex;
+                var _this = _super.apply(this, __spreadArray([], __read(args))) || this;
                 _this.defaultTabIndex = defaultTabIndex;
+                _this._tabIndex = defaultTabIndex;
                 return _this;
             }
-            Object.defineProperty(Mixin.prototype, "tabIndex", {
+            Object.defineProperty(class_1.prototype, "tabIndex", {
                 get: function () {
                     return this.disabled ? -1 : this._tabIndex;
                 },
@@ -528,12 +528,8 @@
                 enumerable: false,
                 configurable: true
             });
-            return Mixin;
+            return class_1;
         }(base));
-        // Since we don't directly extend from `base` with it's original types, and we instruct
-        // TypeScript that `T` actually is instantiatable through `new`, the types don't overlap.
-        // This is a limitation in TS as abstract classes cannot be typed properly dynamically.
-        return Mixin;
     }
 
     /**
@@ -548,7 +544,7 @@
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
-                var _this = _super.apply(this, __spread(args)) || this;
+                var _this = _super.apply(this, __spreadArray([], __read(args))) || this;
                 /** Whether the component is in an error state. */
                 _this.errorState = false;
                 /**
@@ -583,12 +579,15 @@
         }
         return McLine;
     }());
-    McLine.decorators = [
-        { type: i0.Directive, args: [{
-                    selector: '[mc-line], [mcLine]',
-                    host: { class: 'mc-line' }
-                },] }
-    ];
+    /** @nocollapse */ McLine.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLine, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McLine.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McLine, selector: "[mc-line], [mcLine]", host: { classAttribute: "mc-line" }, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLine, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[mc-line], [mcLine]',
+                        host: { class: 'mc-line' }
+                    }]
+            }] });
     /**
      * Helper that takes a query list of lines and sets the correct class on the host.
      * @docs-private
@@ -634,13 +633,17 @@
         }
         return McLineModule;
     }());
-    McLineModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    imports: [],
-                    exports: [McLine],
-                    declarations: [McLine]
-                },] }
-    ];
+    /** @nocollapse */ McLineModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLineModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McLineModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLineModule, declarations: [McLine], exports: [McLine] });
+    /** @nocollapse */ McLineModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLineModule, imports: [[]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLineModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [],
+                        exports: [McLine],
+                        declarations: [McLine]
+                    }]
+            }] });
 
     /** Error state matcher that matches when a control is invalid and dirty. */
     var ShowOnDirtyErrorStateMatcher = /** @class */ (function () {
@@ -651,9 +654,11 @@
         };
         return ShowOnDirtyErrorStateMatcher;
     }());
-    ShowOnDirtyErrorStateMatcher.decorators = [
-        { type: i0.Injectable }
-    ];
+    /** @nocollapse */ ShowOnDirtyErrorStateMatcher.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: ShowOnDirtyErrorStateMatcher, deps: [], target: i0__namespace.ɵɵFactoryTarget.Injectable });
+    /** @nocollapse */ ShowOnDirtyErrorStateMatcher.ɵprov = i0__namespace.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: ShowOnDirtyErrorStateMatcher });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: ShowOnDirtyErrorStateMatcher, decorators: [{
+                type: i0.Injectable
+            }] });
     /** Provider that defines how form controls behave with regards to displaying error messages. */
     var ErrorStateMatcher = /** @class */ (function () {
         function ErrorStateMatcher() {
@@ -663,10 +668,12 @@
         };
         return ErrorStateMatcher;
     }());
-    /** @nocollapse */ ErrorStateMatcher.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function ErrorStateMatcher_Factory() { return new ErrorStateMatcher(); }, token: ErrorStateMatcher, providedIn: "root" });
-    ErrorStateMatcher.decorators = [
-        { type: i0.Injectable, args: [{ providedIn: 'root' },] }
-    ];
+    /** @nocollapse */ ErrorStateMatcher.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: ErrorStateMatcher, deps: [], target: i0__namespace.ɵɵFactoryTarget.Injectable });
+    /** @nocollapse */ ErrorStateMatcher.ɵprov = i0__namespace.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: ErrorStateMatcher, providedIn: 'root' });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: ErrorStateMatcher, decorators: [{
+                type: i0.Injectable,
+                args: [{ providedIn: 'root' }]
+            }] });
 
     var enUS = {
         relativeTemplates: {
@@ -1092,14 +1099,16 @@
         };
         return DateFormatter;
     }());
-    DateFormatter.decorators = [
-        { type: i0.Injectable }
-    ];
-    /** @nocollapse */
-    DateFormatter.ctorParameters = function () { return [
-        { type: datetime.DateAdapter },
-        { type: String, decorators: [{ type: i0.Inject, args: [datetime.MC_DATE_LOCALE,] }] }
-    ]; };
+    /** @nocollapse */ DateFormatter.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: DateFormatter, deps: [{ token: i1__namespace.DateAdapter }, { token: i1.MC_DATE_LOCALE }], target: i0__namespace.ɵɵFactoryTarget.Injectable });
+    /** @nocollapse */ DateFormatter.ɵprov = i0__namespace.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: DateFormatter });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: DateFormatter, decorators: [{
+                type: i0.Injectable
+            }], ctorParameters: function () {
+            return [{ type: i1__namespace.DateAdapter }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [i1.MC_DATE_LOCALE]
+                        }] }];
+        } });
 
     /* tslint:disable:naming-convention */
     var MC_LOCALE_ID = new i0.InjectionToken('McLocaleId');
@@ -1186,28 +1195,40 @@
         };
         return McDecimalPipe;
     }());
-    /** @nocollapse */ McDecimalPipe.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function McDecimalPipe_Factory() { return new McDecimalPipe(i0__namespace.ɵɵinject(MC_LOCALE_ID, 8)); }, token: McDecimalPipe, providedIn: "root" });
-    McDecimalPipe.decorators = [
-        { type: i0.Injectable, args: [{ providedIn: 'root' },] },
-        { type: i0.Pipe, args: [{ name: 'mcNumber' },] }
-    ];
-    /** @nocollapse */
-    McDecimalPipe.ctorParameters = function () { return [
-        { type: String, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [MC_LOCALE_ID,] }] }
-    ]; };
+    /** @nocollapse */ McDecimalPipe.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDecimalPipe, deps: [{ token: MC_LOCALE_ID, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Pipe });
+    /** @nocollapse */ McDecimalPipe.ɵpipe = i0__namespace.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDecimalPipe, name: "mcNumber" });
+    /** @nocollapse */ McDecimalPipe.ɵprov = i0__namespace.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDecimalPipe, providedIn: 'root' });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDecimalPipe, decorators: [{
+                type: i0.Injectable,
+                args: [{ providedIn: 'root' }]
+            }, {
+                type: i0.Pipe,
+                args: [{ name: 'mcNumber' }]
+            }], ctorParameters: function () {
+            return [{ type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [MC_LOCALE_ID]
+                        }] }];
+        } });
 
     var McFormattersModule = /** @class */ (function () {
         function McFormattersModule() {
         }
         return McFormattersModule;
     }());
-    McFormattersModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    exports: [McDecimalPipe],
-                    declarations: [McDecimalPipe],
-                    providers: [DateFormatter]
-                },] }
-    ];
+    /** @nocollapse */ McFormattersModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormattersModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McFormattersModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormattersModule, declarations: [McDecimalPipe], exports: [McDecimalPipe] });
+    /** @nocollapse */ McFormattersModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormattersModule, providers: [DateFormatter] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormattersModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        exports: [McDecimalPipe],
+                        declarations: [McDecimalPipe],
+                        providers: [DateFormatter]
+                    }]
+            }] });
 
     var validationTooltipShowDelay = 10;
     var validationTooltipHideDelay = 3000;
@@ -1302,22 +1323,29 @@
         };
         return McHighlightPipe;
     }());
-    McHighlightPipe.decorators = [
-        { type: i0.Pipe, args: [{ name: 'mcHighlight' },] }
-    ];
+    /** @nocollapse */ McHighlightPipe.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightPipe, deps: [], target: i0__namespace.ɵɵFactoryTarget.Pipe });
+    /** @nocollapse */ McHighlightPipe.ɵpipe = i0__namespace.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightPipe, name: "mcHighlight" });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightPipe, decorators: [{
+                type: i0.Pipe,
+                args: [{ name: 'mcHighlight' }]
+            }] });
 
     var McHighlightModule = /** @class */ (function () {
         function McHighlightModule() {
         }
         return McHighlightModule;
     }());
-    McHighlightModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    imports: [i1.CommonModule],
-                    exports: [McHighlightPipe],
-                    declarations: [McHighlightPipe]
-                },] }
-    ];
+    /** @nocollapse */ McHighlightModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McHighlightModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, declarations: [McHighlightPipe], imports: [i3.CommonModule], exports: [McHighlightPipe] });
+    /** @nocollapse */ McHighlightModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, imports: [[i3.CommonModule]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [i3.CommonModule],
+                        exports: [McHighlightPipe],
+                        declarations: [McHighlightPipe]
+                    }]
+            }] });
 
     var selectEvents = 'selectEvents';
 
@@ -1707,39 +1735,46 @@
         }
         return McPseudoCheckbox;
     }());
-    McPseudoCheckbox.decorators = [
-        { type: i0.Component, args: [{
-                    selector: 'mc-pseudo-checkbox',
-                    template: "<i class=\"mc-checkbox-checkmark mc mc-check_16\"></i>\n<i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>\n",
-                    host: {
-                        class: 'mc-pseudo-checkbox',
-                        '[class.mc-indeterminate]': 'state === "indeterminate"',
-                        '[class.mc-checked]': 'state === "checked"',
-                        '[class.mc-disabled]': 'disabled'
-                    },
-                    preserveWhitespaces: false,
-                    changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                    encapsulation: i0.ViewEncapsulation.None,
-                    styles: [".mc-pseudo-checkbox{position:relative;display:inline-block;box-sizing:border-box;width:var(--mc-checkbox-size-width,16px);height:var(--mc-checkbox-size-width,16px);border-radius:3px;border-width:var(--mc-checkbox-size-border-width,1px);border-style:solid;cursor:pointer;vertical-align:middle;flex-shrink:0}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;position:absolute;top:calc(-1 * var(--mc-checkbox-size-border-width, 1px));left:calc(-1 * var(--mc-checkbox-size-border-width, 1px))}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark,.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}"]
-                },] }
-    ];
-    McPseudoCheckbox.propDecorators = {
-        state: [{ type: i0.Input }],
-        disabled: [{ type: i0.Input }]
-    };
+    /** @nocollapse */ McPseudoCheckbox.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckbox, deps: [], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McPseudoCheckbox.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: { state: "state", disabled: "disabled" }, host: { properties: { "class.mc-indeterminate": "state === \"indeterminate\"", "class.mc-checked": "state === \"checked\"", "class.mc-disabled": "disabled" }, classAttribute: "mc-pseudo-checkbox" }, ngImport: i0__namespace, template: "<i class=\"mc-checkbox-checkmark mc mc-check_16\"></i>\n<i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>\n", styles: [".mc-pseudo-checkbox{position:relative;display:inline-block;box-sizing:border-box;width:16px;width:var(--mc-checkbox-size-width, 16px);height:16px;height:var(--mc-checkbox-size-width, 16px);border-radius:3px;border-width:1px;border-width:var(--mc-checkbox-size-border-width, 1px);border-style:solid;cursor:pointer;vertical-align:middle;flex-shrink:0}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;position:absolute;top:calc(-1 * 1px);top:calc(-1 * var(--mc-checkbox-size-border-width, 1px));left:calc(-1 * 1px);left:calc(-1 * var(--mc-checkbox-size-border-width, 1px))}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark{display:inline-block}.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckbox, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-pseudo-checkbox',
+                        templateUrl: 'pseudo-checkbox.partial.html',
+                        styleUrls: ['pseudo-checkbox.scss'],
+                        host: {
+                            class: 'mc-pseudo-checkbox',
+                            '[class.mc-indeterminate]': 'state === "indeterminate"',
+                            '[class.mc-checked]': 'state === "checked"',
+                            '[class.mc-disabled]': 'disabled'
+                        },
+                        preserveWhitespaces: false,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None
+                    }]
+            }], propDecorators: { state: [{
+                    type: i0.Input
+                }], disabled: [{
+                    type: i0.Input
+                }] } });
 
     var McPseudoCheckboxModule = /** @class */ (function () {
         function McPseudoCheckboxModule() {
         }
         return McPseudoCheckboxModule;
     }());
-    McPseudoCheckboxModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    imports: [i1.CommonModule],
-                    exports: [McPseudoCheckbox],
-                    declarations: [McPseudoCheckbox]
-                },] }
-    ];
+    /** @nocollapse */ McPseudoCheckboxModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McPseudoCheckboxModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, declarations: [McPseudoCheckbox], imports: [i3.CommonModule], exports: [McPseudoCheckbox] });
+    /** @nocollapse */ McPseudoCheckboxModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, imports: [[i3.CommonModule]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [i3.CommonModule],
+                        exports: [McPseudoCheckbox],
+                        declarations: [McPseudoCheckbox]
+                    }]
+            }] });
 
     var McMeasureScrollbarService = /** @class */ (function () {
         function McMeasureScrollbarService(document) {
@@ -1779,16 +1814,19 @@
         };
         return McMeasureScrollbarService;
     }());
-    /** @nocollapse */ McMeasureScrollbarService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function McMeasureScrollbarService_Factory() { return new McMeasureScrollbarService(i0__namespace.ɵɵinject(i1__namespace.DOCUMENT)); }, token: McMeasureScrollbarService, providedIn: "root" });
-    McMeasureScrollbarService.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root'
-                },] }
-    ];
-    /** @nocollapse */
-    McMeasureScrollbarService.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: i0.Inject, args: [i1.DOCUMENT,] }] }
-    ]; };
+    /** @nocollapse */ McMeasureScrollbarService.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McMeasureScrollbarService, deps: [{ token: i3.DOCUMENT }], target: i0__namespace.ɵɵFactoryTarget.Injectable });
+    /** @nocollapse */ McMeasureScrollbarService.ɵprov = i0__namespace.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McMeasureScrollbarService, providedIn: 'root' });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McMeasureScrollbarService, decorators: [{
+                type: i0.Injectable,
+                args: [{
+                        providedIn: 'root'
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [i3.DOCUMENT]
+                        }] }];
+        } });
 
     /** @docs-private */
     var McOptgroupBase = /** @class */ (function () {
@@ -1805,31 +1843,33 @@
     var McOptgroup = /** @class */ (function (_super) {
         __extends(McOptgroup, _super);
         function McOptgroup() {
-            var _this = _super.apply(this, __spread(arguments)) || this;
+            var _this = _super.apply(this, __spreadArray([], __read(arguments))) || this;
             /** Unique id for the underlying label. */
             _this.labelId = "mc-optgroup-label-" + uniqueOptgroupIdCounter++;
             return _this;
         }
         return McOptgroup;
     }(McOptgroupMixinBase));
-    McOptgroup.decorators = [
-        { type: i0.Component, args: [{
-                    selector: 'mc-optgroup',
-                    exportAs: 'mcOptgroup',
-                    template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label>\n<ng-content select=\"mc-option, mc-list-option, ng-container\"></ng-content>\n",
-                    encapsulation: i0.ViewEncapsulation.None,
-                    changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                    inputs: ['disabled'],
-                    host: {
-                        class: 'mc-optgroup',
-                        '[class.mc-disabled]': 'disabled'
-                    },
-                    styles: [".mc-optgroup-label{padding-left:var(--mc-optgroup-size-padding-left,17px);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}"]
-                },] }
-    ];
-    McOptgroup.propDecorators = {
-        label: [{ type: i0.Input }]
-    };
+    /** @nocollapse */ McOptgroup.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptgroup, deps: null, target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McOptgroup.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McOptgroup, selector: "mc-optgroup", inputs: { disabled: "disabled", label: "label" }, host: { properties: { "class.mc-disabled": "disabled" }, classAttribute: "mc-optgroup" }, exportAs: ["mcOptgroup"], usesInheritance: true, ngImport: i0__namespace, template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label>\n<ng-content select=\"mc-option, mc-list-option, ng-container\"></ng-content>\n", styles: [".mc-optgroup-label{padding-left:17px;padding-left:var(--mc-optgroup-size-padding-left, 17px);-webkit-user-select:none;user-select:none;cursor:default}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptgroup, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-optgroup',
+                        exportAs: 'mcOptgroup',
+                        templateUrl: 'optgroup.html',
+                        styleUrls: ['./optgroup.scss'],
+                        encapsulation: i0.ViewEncapsulation.None,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        inputs: ['disabled'],
+                        host: {
+                            class: 'mc-optgroup',
+                            '[class.mc-disabled]': 'disabled'
+                        }
+                    }]
+            }], propDecorators: { label: [{
+                    type: i0.Input
+                }] } });
 
     /**
      * Option IDs need to be unique across components, so this counter exists outside of
@@ -2037,40 +2077,47 @@
         };
         return McOption;
     }());
-    McOption.decorators = [
-        { type: i0.Component, args: [{
-                    selector: 'mc-option',
-                    exportAs: 'mcOption',
-                    host: {
-                        '[attr.tabindex]': 'getTabIndex()',
-                        class: 'mc-option',
-                        '[class.mc-selected]': 'selected',
-                        '[class.mc-option-multiple]': 'multiple',
-                        '[class.mc-active]': 'active',
-                        '[class.mc-disabled]': 'disabled',
-                        '[id]': 'id',
-                        '(click)': 'selectViaInteraction()',
-                        '(keydown)': 'handleKeydown($event)'
-                    },
-                    template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : ''\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n",
-                    encapsulation: i0.ViewEncapsulation.None,
-                    changeDetection: i0.ChangeDetectionStrategy.OnPush,
-                    styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:var(--mc-option-size-height,32px);border:var(--mc-option-size-border-width,2px) solid transparent;cursor:pointer;outline:none;padding-left:var(--mc-option-size-horizontal-padding,16px);padding-right:var(--mc-option-size-horizontal-padding,16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McOption.ctorParameters = function () { return [
-        { type: i0.ElementRef },
-        { type: i0.ChangeDetectorRef },
-        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [MC_OPTION_PARENT_COMPONENT,] }] },
-        { type: McOptgroup, decorators: [{ type: i0.Optional }] }
-    ]; };
-    McOption.propDecorators = {
-        value: [{ type: i0.Input }],
-        showCheckbox: [{ type: i0.Input }],
-        onSelectionChange: [{ type: i0.Output }],
-        disabled: [{ type: i0.Input }]
-    };
+    /** @nocollapse */ McOption.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOption, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: MC_OPTION_PARENT_COMPONENT, optional: true }, { token: McOptgroup, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McOption.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McOption, selector: "mc-option", inputs: { value: "value", showCheckbox: "showCheckbox", disabled: "disabled" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "click": "selectViaInteraction()", "keydown": "handleKeydown($event)" }, properties: { "attr.tabindex": "getTabIndex()", "class.mc-selected": "selected", "class.mc-option-multiple": "multiple", "class.mc-active": "active", "class.mc-disabled": "disabled", "id": "id" }, classAttribute: "mc-option" }, exportAs: ["mcOption"], ngImport: i0__namespace, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : ''\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);border:2px solid transparent;border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * 2px);top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * 2px);left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * 2px);right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * 2px);bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}\n"], components: [{ type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i3__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOption, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-option',
+                        exportAs: 'mcOption',
+                        host: {
+                            '[attr.tabindex]': 'getTabIndex()',
+                            class: 'mc-option',
+                            '[class.mc-selected]': 'selected',
+                            '[class.mc-option-multiple]': 'multiple',
+                            '[class.mc-active]': 'active',
+                            '[class.mc-disabled]': 'disabled',
+                            '[id]': 'id',
+                            '(click)': 'selectViaInteraction()',
+                            '(keydown)': 'handleKeydown($event)'
+                        },
+                        styleUrls: ['option.scss'],
+                        templateUrl: 'option.html',
+                        encapsulation: i0.ViewEncapsulation.None,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.ChangeDetectorRef }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [MC_OPTION_PARENT_COMPONENT]
+                        }] }, { type: McOptgroup, decorators: [{
+                            type: i0.Optional
+                        }] }];
+        }, propDecorators: { value: [{
+                    type: i0.Input
+                }], showCheckbox: [{
+                    type: i0.Input
+                }], onSelectionChange: [{
+                    type: i0.Output
+                }], disabled: [{
+                    type: i0.Input
+                }] } });
     /**
      * Counts the amount of option group labels that precede the specified option.
      * @param optionIndex Index of the option at which to start counting.
@@ -2116,13 +2163,17 @@
         }
         return McOptionModule;
     }());
-    McOptionModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    imports: [i1.CommonModule, McPseudoCheckboxModule],
-                    exports: [McOption, McOptgroup],
-                    declarations: [McOption, McOptgroup]
-                },] }
-    ];
+    /** @nocollapse */ McOptionModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McOptionModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, declarations: [McOption, McOptgroup], imports: [i3.CommonModule, McPseudoCheckboxModule], exports: [McOption, McOptgroup] });
+    /** @nocollapse */ McOptionModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, imports: [[i3.CommonModule, McPseudoCheckboxModule]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [i3.CommonModule, McPseudoCheckboxModule],
+                        exports: [McOption, McOptgroup],
+                        declarations: [McOption, McOptgroup]
+                    }]
+            }] });
 
     var McFormElement = /** @class */ (function () {
         function McFormElement(element) {
@@ -2144,22 +2195,21 @@
         };
         return McFormElement;
     }());
-    McFormElement.decorators = [
-        { type: i0.Directive, args: [{
-                    selector: '.mc-form__row, .mc-form__fieldset, .mc-form__legend',
-                    exportAs: 'mcFormElement',
-                    host: {
-                        '[class.mc-form-row_margin]': 'margin'
-                    }
-                },] }
-    ];
-    /** @nocollapse */
-    McFormElement.ctorParameters = function () { return [
-        { type: i0.ElementRef }
-    ]; };
-    McFormElement.propDecorators = {
-        elements: [{ type: i0.ContentChildren, args: [McFormElement,] }]
-    };
+    /** @nocollapse */ McFormElement.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormElement, deps: [{ token: i0__namespace.ElementRef }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McFormElement.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McFormElement, selector: ".mc-form__row, .mc-form__fieldset, .mc-form__legend", host: { properties: { "class.mc-form-row_margin": "margin" } }, queries: [{ propertyName: "elements", predicate: McFormElement }], exportAs: ["mcFormElement"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormElement, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '.mc-form__row, .mc-form__fieldset, .mc-form__legend',
+                        exportAs: 'mcFormElement',
+                        host: {
+                            '[class.mc-form-row_margin]': 'margin'
+                        }
+                    }]
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }]; }, propDecorators: { elements: [{
+                    type: i0.ContentChildren,
+                    args: [McFormElement]
+                }] } });
     var McForm = /** @class */ (function () {
         function McForm() {
         }
@@ -2178,36 +2228,45 @@
         };
         return McForm;
     }());
-    McForm.decorators = [
-        { type: i0.Directive, args: [{
-                    selector: '.mc-form-vertical, .mc-form-horizontal',
-                    exportAs: 'mcForm',
-                    host: {
-                        class: 'mc-form'
-                    }
-                },] }
-    ];
-    McForm.propDecorators = {
-        elements: [{ type: i0.ContentChildren, args: [McFormElement,] }]
-    };
+    /** @nocollapse */ McForm.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McForm, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McForm.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McForm, selector: ".mc-form-vertical, .mc-form-horizontal", host: { classAttribute: "mc-form" }, queries: [{ propertyName: "elements", predicate: McFormElement }], exportAs: ["mcForm"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McForm, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '.mc-form-vertical, .mc-form-horizontal',
+                        exportAs: 'mcForm',
+                        host: {
+                            class: 'mc-form'
+                        }
+                    }]
+            }], propDecorators: { elements: [{
+                    type: i0.ContentChildren,
+                    args: [McFormElement]
+                }] } });
 
     var McFormsModule = /** @class */ (function () {
         function McFormsModule() {
         }
         return McFormsModule;
     }());
-    McFormsModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    exports: [
-                        McForm,
-                        McFormElement
-                    ],
-                    declarations: [
-                        McForm,
-                        McFormElement
-                    ]
-                },] }
-    ];
+    /** @nocollapse */ McFormsModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormsModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McFormsModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormsModule, declarations: [McForm,
+            McFormElement], exports: [McForm,
+            McFormElement] });
+    /** @nocollapse */ McFormsModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormsModule });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McFormsModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        exports: [
+                            McForm,
+                            McFormElement
+                        ],
+                        declarations: [
+                            McForm,
+                            McFormElement
+                        ]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.
@@ -2287,7 +2346,6 @@
     exports.toBoolean = toBoolean;
     exports.validationTooltipHideDelay = validationTooltipHideDelay;
     exports.validationTooltipShowDelay = validationTooltipShowDelay;
-    exports.ɵa = mcSanityChecksFactory;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

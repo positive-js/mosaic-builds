@@ -1,4 +1,5 @@
 import { ElementRef, EventEmitter, NgZone, OnChanges, SimpleChanges } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * Extra CSS classes that can be associated with a calendar cell.
  */
@@ -14,12 +15,8 @@ export declare class McCalendarCell {
     displayValue: string;
     ariaLabel: string;
     enabled: boolean;
-    cssClasses?: string | Set<string> | {
-        [key: string]: any;
-    } | string[] | undefined;
-    constructor(value: number, displayValue: string, ariaLabel: string, enabled: boolean, cssClasses?: string | Set<string> | {
-        [key: string]: any;
-    } | string[] | undefined);
+    cssClasses?: McCalendarCellCssClasses | undefined;
+    constructor(value: number, displayValue: string, ariaLabel: string, enabled: boolean, cssClasses?: McCalendarCellCssClasses | undefined);
 }
 /**
  * An internal component used to display calendar data in a table.
@@ -61,4 +58,6 @@ export declare class McCalendarBody implements OnChanges {
     isActiveCell(rowIndex: number, colIndex: number): boolean;
     /** Focuses the active cell after the microtask queue is empty. */
     focusActiveCell(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McCalendarBody, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McCalendarBody, "[mc-calendar-body]", ["mcCalendarBody"], { "label": "label"; "rows": "rows"; "todayValue": "todayValue"; "selectedValue": "selectedValue"; "labelMinRequiredCells": "labelMinRequiredCells"; "numCols": "numCols"; "activeCell": "activeCell"; "cellAspectRatio": "cellAspectRatio"; }, { "selectedValueChange": "selectedValueChange"; }, never, never>;
 }

@@ -1,5 +1,7 @@
+import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { Directive, ElementRef, Renderer2, Input, Component, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef, NgZone, ViewChildren, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { Directive, Input, Component, ViewEncapsulation, ChangeDetectionStrategy, ViewChildren, NgModule } from '@angular/core';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { coerceNumberProperty, coerceCssPixelValue, coerceBooleanProperty } from '@angular/cdk/coercion';
 
@@ -52,27 +54,26 @@ class McGutterDirective {
         this.renderer.setStyle(this.elementRef.nativeElement, property, value);
     }
 }
-McGutterDirective.decorators = [
-    { type: Directive, args: [{
-                selector: 'mc-gutter',
-                host: {
-                    class: 'mc-gutter',
-                    '[class.mc-gutter_vertical]': 'isVertical()',
-                    '[class.mc-gutter_dragged]': 'dragged',
-                    '(mousedown)': 'dragged = true'
-                }
-            },] }
-];
-/** @nocollapse */
-McGutterDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-McGutterDirective.propDecorators = {
-    direction: [{ type: Input }],
-    order: [{ type: Input }],
-    size: [{ type: Input }]
-};
+/** @nocollapse */ McGutterDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McGutterDirective, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McGutterDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McGutterDirective, selector: "mc-gutter", inputs: { direction: "direction", order: "order", size: "size" }, host: { listeners: { "mousedown": "dragged = true" }, properties: { "class.mc-gutter_vertical": "isVertical()", "class.mc-gutter_dragged": "dragged" }, classAttribute: "mc-gutter" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McGutterDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'mc-gutter',
+                    host: {
+                        class: 'mc-gutter',
+                        '[class.mc-gutter_vertical]': 'isVertical()',
+                        '[class.mc-gutter_dragged]': 'dragged',
+                        '(mousedown)': 'dragged = true'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.Renderer2 }]; }, propDecorators: { direction: [{
+                type: Input
+            }], order: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }] } });
 class McSplitterComponent {
     constructor(elementRef, changeDetectorRef, ngZone, renderer) {
         this.elementRef = elementRef;
@@ -226,34 +227,34 @@ class McSplitterComponent {
         this.renderer.setStyle(this.elementRef.nativeElement, property, value);
     }
 }
-McSplitterComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-splitter',
-                exportAs: 'mcSplitter',
-                host: {
-                    class: 'mc-splitter'
-                },
-                preserveWhitespaces: false,
-                template: "<ng-content></ng-content>\n\n<ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\">\n    <mc-gutter *ngIf=\"last === false\"\n               [direction]=\"direction\"\n               [attr.disabled]=\"disabled || null\"\n               [style.display]=\"hideGutters ? 'none' : 'flex'\"\n               [size]=\"gutterSize\"\n               [order]=\"index * 2 + 1\"\n               (mousedown)=\"onMouseDown($event, index, index + 1)\">\n    </mc-gutter>\n</ng-template>\n",
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch}.mc-gutter,.mc-splitter,.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center}.mc-gutter.mc-gutter_vertical>.mc-icon{transform:rotate(90deg)}"]
-            },] }
-];
-/** @nocollapse */
-McSplitterComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: ChangeDetectorRef },
-    { type: NgZone },
-    { type: Renderer2 }
-];
-McSplitterComponent.propDecorators = {
-    gutters: [{ type: ViewChildren, args: [McGutterDirective,] }],
-    hideGutters: [{ type: Input }],
-    direction: [{ type: Input }],
-    disabled: [{ type: Input }],
-    gutterSize: [{ type: Input }]
-};
+/** @nocollapse */ McSplitterComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSplitterComponent, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: i0.NgZone }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McSplitterComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McSplitterComponent, selector: "mc-splitter", inputs: { hideGutters: "hideGutters", direction: "direction", disabled: "disabled", gutterSize: "gutterSize" }, host: { classAttribute: "mc-splitter" }, viewQueries: [{ propertyName: "gutters", predicate: McGutterDirective, descendants: true }], exportAs: ["mcSplitter"], ngImport: i0, template: "<ng-content></ng-content>\n\n<ng-template ngFor let-area [ngForOf]=\"areas\" let-index=\"index\" let-last=\"last\">\n    <mc-gutter *ngIf=\"last === false\"\n               [direction]=\"direction\"\n               [attr.disabled]=\"disabled || null\"\n               [style.display]=\"hideGutters ? 'none' : 'flex'\"\n               [size]=\"gutterSize\"\n               [order]=\"index * 2 + 1\"\n               (mousedown)=\"onMouseDown($event, index, index + 1)\">\n    </mc-gutter>\n</ng-template>\n", styles: [".mc-splitter{display:flex;flex-wrap:nowrap;align-items:stretch;overflow:hidden}.mc-splitter .mc-splitter-area{overflow:hidden}.mc-gutter{display:flex;flex-grow:0;flex-shrink:0;justify-content:center;align-items:center;overflow:hidden}.mc-gutter.mc-gutter_vertical>.mc-icon{transform:rotate(90deg)}\n"], directives: [{ type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: McGutterDirective, selector: "mc-gutter", inputs: ["direction", "order", "size"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSplitterComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-splitter',
+                    exportAs: 'mcSplitter',
+                    host: {
+                        class: 'mc-splitter'
+                    },
+                    preserveWhitespaces: false,
+                    styleUrls: ['splitter.scss'],
+                    templateUrl: './splitter.component.html',
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: i0.NgZone }, { type: i0.Renderer2 }]; }, propDecorators: { gutters: [{
+                type: ViewChildren,
+                args: [McGutterDirective]
+            }], hideGutters: [{
+                type: Input
+            }], direction: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], gutterSize: [{
+                type: Input
+            }] } });
 class McSplitterAreaDirective {
     constructor(elementRef, renderer, splitter) {
         this.elementRef = elementRef;
@@ -319,41 +320,50 @@ class McSplitterAreaDirective {
         this.renderer.removeStyle(this.elementRef.nativeElement, style);
     }
 }
-McSplitterAreaDirective.decorators = [
-    { type: Directive, args: [{
-                selector: '[mc-splitter-area]',
-                host: {
-                    class: 'mc-splitter-area'
-                }
-            },] }
-];
-/** @nocollapse */
-McSplitterAreaDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 },
-    { type: McSplitterComponent }
-];
+/** @nocollapse */ McSplitterAreaDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSplitterAreaDirective, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }, { token: McSplitterComponent }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McSplitterAreaDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McSplitterAreaDirective, selector: "[mc-splitter-area]", host: { classAttribute: "mc-splitter-area" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSplitterAreaDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mc-splitter-area]',
+                    host: {
+                        class: 'mc-splitter-area'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.Renderer2 }, { type: McSplitterComponent }]; } });
 
 class McSplitterModule {
 }
-McSplitterModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    McIconModule
-                ],
-                exports: [
-                    McGutterDirective,
-                    McSplitterAreaDirective,
-                    McSplitterComponent
-                ],
-                declarations: [
-                    McGutterDirective,
-                    McSplitterAreaDirective,
-                    McSplitterComponent
-                ]
-            },] }
-];
+/** @nocollapse */ McSplitterModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSplitterModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McSplitterModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSplitterModule, declarations: [McGutterDirective,
+        McSplitterAreaDirective,
+        McSplitterComponent], imports: [CommonModule,
+        McIconModule], exports: [McGutterDirective,
+        McSplitterAreaDirective,
+        McSplitterComponent] });
+/** @nocollapse */ McSplitterModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSplitterModule, imports: [[
+            CommonModule,
+            McIconModule
+        ]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSplitterModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        CommonModule,
+                        McIconModule
+                    ],
+                    exports: [
+                        McGutterDirective,
+                        McSplitterAreaDirective,
+                        McSplitterComponent
+                    ],
+                    declarations: [
+                        McGutterDirective,
+                        McSplitterAreaDirective,
+                        McSplitterComponent
+                    ]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.

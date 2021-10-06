@@ -1,4 +1,5 @@
 import { Subject } from 'rxjs';
+import * as i0 from "@angular/core";
 /** Datepicker data that requires internationalization. */
 export declare class McDatepickerIntl {
     /**
@@ -26,4 +27,6 @@ export declare class McDatepickerIntl {
     switchToMonthViewLabel: string;
     /** A label for the 'switch to year view' button (used by screen readers). */
     switchToMultiYearViewLabel: string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McDatepickerIntl, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<McDatepickerIntl>;
 }

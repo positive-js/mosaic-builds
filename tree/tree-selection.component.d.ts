@@ -6,32 +6,33 @@ import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tre
 import { CanDisable, HasTabIndex, MultipleMode } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 import { McTreeOption, McTreeOptionEvent } from './tree-option.component';
+import * as i0 from "@angular/core";
 export declare const MC_SELECTION_TREE_VALUE_ACCESSOR: any;
 export declare class McTreeNavigationChange<T> {
-    source: McTreeSelection<any>;
+    source: McTreeSelection;
     option: T;
-    constructor(source: McTreeSelection<any>, option: T);
+    constructor(source: McTreeSelection, option: T);
 }
 export declare class McTreeSelectionChange<T> {
-    source: McTreeSelection<any>;
+    source: McTreeSelection;
     option: T;
-    constructor(source: McTreeSelection<any>, option: T);
+    constructor(source: McTreeSelection, option: T);
 }
 interface SelectionModelOption {
     id: number | string;
     value: string;
 }
-export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
+export declare class McTreeSelection extends CdkTree<McTreeOption> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
     private elementRef;
     nodeOutlet: CdkTreeNodeOutlet;
-    unorderedOptions: QueryList<T>;
-    renderedOptions: QueryList<T>;
-    keyManager: FocusKeyManager<T>;
+    unorderedOptions: QueryList<McTreeOption>;
+    renderedOptions: QueryList<McTreeOption>;
+    keyManager: FocusKeyManager<McTreeOption>;
     selectionModel: SelectionModel<SelectionModelOption>;
     resetFocusedItemOnBlur: boolean;
-    treeControl: FlatTreeControl<T>;
-    readonly navigationChange: EventEmitter<McTreeNavigationChange<T>>;
-    readonly selectionChange: EventEmitter<McTreeSelectionChange<T>>;
+    treeControl: FlatTreeControl<McTreeOption>;
+    readonly navigationChange: EventEmitter<McTreeNavigationChange<McTreeOption>>;
+    readonly selectionChange: EventEmitter<McTreeSelectionChange<McTreeOption>>;
     multipleMode: MultipleMode | null;
     userTabIndex: number | null;
     private sortedNodes;
@@ -61,16 +62,16 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     blur(): void;
     onKeyDown(event: KeyboardEvent): void;
     updateScrollSize(): void;
-    setSelectedOptionsByKey(option: T, shiftKey: boolean, ctrlKey: boolean): void;
-    setSelectedOptionsByClick(option: T, shiftKey: boolean, ctrlKey: boolean): void;
-    setSelectedOptions(option: T): void;
-    setFocusedOption(option: T): void;
+    setSelectedOptionsByKey(option: McTreeOption, shiftKey: boolean, ctrlKey: boolean): void;
+    setSelectedOptionsByClick(option: McTreeOption, shiftKey: boolean, ctrlKey: boolean): void;
+    setSelectedOptions(option: McTreeOption): void;
+    setFocusedOption(option: McTreeOption): void;
     toggleFocusedOption(): void;
-    renderNodeChanges(data: T[], dataDiffer?: IterableDiffer<T>, viewContainer?: ViewContainerRef, parentData?: T): void;
+    renderNodeChanges(data: McTreeOption[], dataDiffer?: IterableDiffer<McTreeOption>, viewContainer?: ViewContainerRef, parentData?: McTreeOption): void;
     getHeight(): number;
     getItemHeight(): number;
-    emitNavigationEvent(option: T): void;
-    emitChangeEvent(option: T): void;
+    emitNavigationEvent(option: McTreeOption): void;
+    emitChangeEvent(option: McTreeOption): void;
     writeValue(value: any): void;
     /** `View -> model callback called when value changes` */
     onChange: (value: any) => void;
@@ -103,5 +104,7 @@ export declare class McTreeSelection<T extends McTreeOption> extends CdkTree<T> 
     private updateOptionsFocus;
     private canDeselectLast;
     private isFocusReceivedFromNestedOption;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelection, [null, null, null, { attribute: "multiple"; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeSelection, "mc-tree-selection", ["mcTreeSelection"], { "treeControl": "treeControl"; "autoSelect": "autoSelect"; "noUnselectLast": "noUnselectLast"; "disabled": "disabled"; "tabIndex": "tabIndex"; }, { "navigationChange": "navigationChange"; "selectionChange": "selectionChange"; }, ["unorderedOptions"], never>;
 }
 export {};

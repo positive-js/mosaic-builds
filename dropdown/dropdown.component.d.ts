@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { McDropdownContent } from './dropdown-content.directive';
 import { McDropdownItem } from './dropdown-item.component';
 import { DropdownPositionX, DropdownPositionY, McDropdownDefaultOptions, McDropdownPanel } from './dropdown.types';
+import * as i0 from "@angular/core";
 export declare class McDropdown implements AfterContentInit, McDropdownPanel, OnInit, OnDestroy {
     private elementRef;
     private ngZone;
@@ -67,7 +68,7 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel, On
      */
     lazyContent: McDropdownContent;
     /** Event emitted when the dropdown is closed. */
-    readonly closed: EventEmitter<import("./dropdown.types").DropdownCloseReason>;
+    readonly closed: EventEmitter<void | "click" | "keydown" | "tab">;
     private previousPanelClass;
     private keyManager;
     /** Only the direct descendant menu items. */
@@ -114,4 +115,6 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel, On
      * when it comes to maintaining the item order.
      */
     private updateDirectDescendants;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McDropdown, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McDropdown, "mc-dropdown", ["mcDropdown"], { "navigationWithWrap": "navigationWithWrap"; "xPosition": "xPosition"; "yPosition": "yPosition"; "overlapTriggerY": "overlapTriggerY"; "overlapTriggerX": "overlapTriggerX"; "hasBackdrop": "hasBackdrop"; "panelClass": "class"; "backdropClass": "backdropClass"; }, { "closed": "closed"; }, ["lazyContent", "items"], ["*"]>;
 }

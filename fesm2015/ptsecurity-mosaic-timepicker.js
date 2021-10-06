@@ -1,10 +1,11 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { forwardRef, EventEmitter, Directive, ElementRef, Renderer2, Optional, Input, Output, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { forwardRef, EventEmitter, Directive, Optional, Input, Output, NgModule } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormsModule } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DateAdapter } from '@ptsecurity/cdk/datetime';
+import * as i1 from '@ptsecurity/cdk/datetime';
 import { isLetterKey, hasModifierKey, isVerticalMovement, isHorizontalMovement, DELETE, BACKSPACE, SPACE, HOME, PAGE_UP, END, PAGE_DOWN, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
 import { validationTooltipShowDelay, validationTooltipHideDelay } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
@@ -621,65 +622,88 @@ class McTimepicker {
         }
     }
 }
-McTimepicker.decorators = [
-    { type: Directive, args: [{
-                selector: 'input[mcTimepicker]',
-                exportAs: 'mcTimepicker',
-                host: {
-                    class: 'mc-input mc-timepicker',
-                    // Native input properties that are overwritten by Angular inputs need to be synced with
-                    // the native input element. Otherwise property bindings for those don't work.
-                    '[attr.id]': 'id',
-                    '[attr.placeholder]': 'placeholder',
-                    '[attr.disabled]': 'disabled || null',
-                    '[attr.required]': 'required',
-                    '[attr.size]': 'getSize()',
-                    '[attr.autocomplete]': '"off"',
-                    '(blur)': 'onBlur()',
-                    '(focus)': 'focusChanged(true)',
-                    '(paste)': 'onPaste($event)',
-                    '(keydown)': 'onKeyDown($event)'
-                },
-                providers: [
-                    MC_TIMEPICKER_VALIDATORS,
-                    MC_TIMEPICKER_VALUE_ACCESSOR,
-                    { provide: McFormFieldControl, useExisting: McTimepicker }
-                ]
-            },] }
-];
-/** @nocollapse */
-McTimepicker.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 },
-    { type: DateAdapter, decorators: [{ type: Optional }] }
-];
-McTimepicker.propDecorators = {
-    placeholder: [{ type: Input }],
-    disabled: [{ type: Input }],
-    id: [{ type: Input }],
-    required: [{ type: Input }],
-    format: [{ type: Input }],
-    min: [{ type: Input }],
-    max: [{ type: Input }],
-    value: [{ type: Input }],
-    mcValidationTooltip: [{ type: Input }],
-    incorrectInput: [{ type: Output }]
-};
+/** @nocollapse */ McTimepicker.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTimepicker, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }, { token: i1.DateAdapter, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McTimepicker.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTimepicker, selector: "input[mcTimepicker]", inputs: { placeholder: "placeholder", disabled: "disabled", id: "id", required: "required", format: "format", min: "min", max: "max", value: "value", mcValidationTooltip: "mcValidationTooltip" }, outputs: { incorrectInput: "incorrectInput" }, host: { listeners: { "blur": "onBlur()", "focus": "focusChanged(true)", "paste": "onPaste($event)", "keydown": "onKeyDown($event)" }, properties: { "attr.id": "id", "attr.placeholder": "placeholder", "attr.disabled": "disabled || null", "attr.required": "required", "attr.size": "getSize()", "attr.autocomplete": "\"off\"" }, classAttribute: "mc-input mc-timepicker" }, providers: [
+        MC_TIMEPICKER_VALIDATORS,
+        MC_TIMEPICKER_VALUE_ACCESSOR,
+        { provide: McFormFieldControl, useExisting: McTimepicker }
+    ], exportAs: ["mcTimepicker"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTimepicker, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'input[mcTimepicker]',
+                    exportAs: 'mcTimepicker',
+                    host: {
+                        class: 'mc-input mc-timepicker',
+                        // Native input properties that are overwritten by Angular inputs need to be synced with
+                        // the native input element. Otherwise property bindings for those don't work.
+                        '[attr.id]': 'id',
+                        '[attr.placeholder]': 'placeholder',
+                        '[attr.disabled]': 'disabled || null',
+                        '[attr.required]': 'required',
+                        '[attr.size]': 'getSize()',
+                        '[attr.autocomplete]': '"off"',
+                        '(blur)': 'onBlur()',
+                        '(focus)': 'focusChanged(true)',
+                        '(paste)': 'onPaste($event)',
+                        '(keydown)': 'onKeyDown($event)'
+                    },
+                    providers: [
+                        MC_TIMEPICKER_VALIDATORS,
+                        MC_TIMEPICKER_VALUE_ACCESSOR,
+                        { provide: McFormFieldControl, useExisting: McTimepicker }
+                    ]
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.Renderer2 }, { type: i1.DateAdapter, decorators: [{
+                    type: Optional
+                }] }]; }, propDecorators: { placeholder: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], format: [{
+                type: Input
+            }], min: [{
+                type: Input
+            }], max: [{
+                type: Input
+            }], value: [{
+                type: Input
+            }], mcValidationTooltip: [{
+                type: Input
+            }], incorrectInput: [{
+                type: Output
+            }] } });
 
 class McTimepickerModule {
 }
-McTimepickerModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    A11yModule,
-                    PlatformModule,
-                    FormsModule
-                ],
-                declarations: [McTimepicker],
-                exports: [McTimepicker]
-            },] }
-];
+/** @nocollapse */ McTimepickerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTimepickerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McTimepickerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTimepickerModule, declarations: [McTimepicker], imports: [CommonModule,
+        A11yModule,
+        PlatformModule,
+        FormsModule], exports: [McTimepicker] });
+/** @nocollapse */ McTimepickerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTimepickerModule, imports: [[
+            CommonModule,
+            A11yModule,
+            PlatformModule,
+            FormsModule
+        ]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTimepickerModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        CommonModule,
+                        A11yModule,
+                        PlatformModule,
+                        FormsModule
+                    ],
+                    declarations: [McTimepicker],
+                    exports: [McTimepicker]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.

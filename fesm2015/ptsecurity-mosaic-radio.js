@@ -1,8 +1,10 @@
-import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
+import * as i1 from '@angular/cdk/a11y';
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
-import { forwardRef, EventEmitter, Directive, ElementRef, ChangeDetectorRef, Input, Output, ContentChildren, Component, ViewEncapsulation, ChangeDetectionStrategy, Optional, ViewChild, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { forwardRef, EventEmitter, Directive, Input, Output, ContentChildren, Component, ViewEncapsulation, ChangeDetectionStrategy, Optional, ViewChild, NgModule } from '@angular/core';
 import { mixinDisabled, toBoolean, mixinColor, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
-import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
+import * as i2 from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // Increasing integer for generating unique ids for radio components.
@@ -208,32 +210,37 @@ class McRadioGroup extends McRadioGroupMixinBase {
         }
     }
 }
-McRadioGroup.decorators = [
-    { type: Directive, args: [{
-                selector: 'mc-radio-group',
-                exportAs: 'mcRadioGroup',
-                host: {
-                    role: 'radiogroup',
-                    class: 'mc-radio-group'
-                },
-                providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR]
-            },] }
-];
-/** @nocollapse */
-McRadioGroup.ctorParameters = () => [
-    { type: ElementRef },
-    { type: ChangeDetectorRef }
-];
-McRadioGroup.propDecorators = {
-    name: [{ type: Input }],
-    labelPosition: [{ type: Input }],
-    value: [{ type: Input }],
-    selected: [{ type: Input }],
-    disabled: [{ type: Input }],
-    required: [{ type: Input }],
-    change: [{ type: Output }],
-    radios: [{ type: ContentChildren, args: [forwardRef(() => McRadioButton), { descendants: true },] }]
-};
+/** @nocollapse */ McRadioGroup.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McRadioGroup, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McRadioGroup.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McRadioGroup, selector: "mc-radio-group", inputs: { name: "name", labelPosition: "labelPosition", value: "value", selected: "selected", disabled: "disabled", required: "required" }, outputs: { change: "change" }, host: { attributes: { "role": "radiogroup" }, classAttribute: "mc-radio-group" }, providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR], queries: [{ propertyName: "radios", predicate: McRadioButton, descendants: true }], exportAs: ["mcRadioGroup"], usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McRadioGroup, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'mc-radio-group',
+                    exportAs: 'mcRadioGroup',
+                    host: {
+                        role: 'radiogroup',
+                        class: 'mc-radio-group'
+                    },
+                    providers: [MC_RADIO_GROUP_CONTROL_VALUE_ACCESSOR]
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { name: [{
+                type: Input
+            }], labelPosition: [{
+                type: Input
+            }], value: [{
+                type: Input
+            }], selected: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], change: [{
+                type: Output
+            }], radios: [{
+                type: ContentChildren,
+                args: [forwardRef(() => McRadioButton), { descendants: true }]
+            }] } });
 // Boilerplate for applying mixins to McRadioButton.
 /** @docs-private */
 // tslint:disable-next-line:naming-convention
@@ -406,56 +413,72 @@ class McRadioButton extends McRadioButtonMixinBase {
         this.change.emit(new McRadioChange(this, this._value));
     }
 }
-McRadioButton.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-radio-button',
-                template: "<label class=\"mc-radio-label\" [attr.for]=\"inputId\" #label>\n    <input type=\"radio\"\n           class=\"mc-radio-input cdk-visually-hidden\"\n           #input\n           [id]=\"inputId\"\n           [checked]=\"checked\"\n           [disabled]=\"disabled\"\n           [tabIndex]=\"tabIndex\"\n           [attr.name]=\"name\"\n           [required]=\"required\"\n           [attr.aria-label]=\"ariaLabel\"\n           [attr.aria-labelledby]=\"ariaLabelledby\"\n           [attr.aria-describedby]=\"ariaDescribedby\"\n           (change)=\"onInputChange($event)\"\n           (click)=\"onInputClick($event)\">\n\n    <div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\">\n        <div class=\"mc-radio-button__outer-circle\"></div>\n        <div class=\"mc-radio-button__inner-circle\"></div>\n        <ng-content></ng-content>\n    </div>\n</label>\n",
-                inputs: ['color', 'tabIndex'],
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                exportAs: 'mcRadioButton',
-                host: {
-                    class: 'mc-radio-button',
-                    '[attr.id]': 'id',
-                    '[class.mc-selected]': 'checked',
-                    '[class.mc-disabled]': 'disabled'
-                },
-                styles: [".mc-radio-button{display:inline-block}.mc-radio-label{display:inline-flex;align-items:center;vertical-align:middle;cursor:pointer;white-space:nowrap;width:100%}.mc-radio-label-content{display:inline-block;position:relative;order:0;line-height:inherit;padding-left:calc(var(--mc-radio-size-size, 14px) + var(--mc-radio-size-padding, 8px));padding-right:0}.mc-radio-label-content .mc-radio-button__inner-circle,.mc-radio-label-content .mc-radio-button__outer-circle{box-sizing:content-box;position:absolute;content:\"\";border-style:solid;border-radius:50%}.mc-radio-label-content .mc-radio-button__outer-circle{left:0;top:calc(50% - 8px);width:var(--mc-radio-size-size,14px);height:var(--mc-radio-size-size,14px);border-width:1px}.mc-radio-label-content .mc-radio-button__inner-circle{display:none;left:1px;top:calc(50% - 7px);width:6px;height:6px;border-width:4px}[dir=rtl] .mc-radio-label-content{padding-right:var(--mc-radio-size-padding,8px);padding-left:0}.mc-radio-input{position:absolute;outline:none;opacity:0}"]
-            },] }
-];
-/** @nocollapse */
-McRadioButton.ctorParameters = () => [
-    { type: McRadioGroup, decorators: [{ type: Optional }] },
-    { type: ElementRef },
-    { type: ChangeDetectorRef },
-    { type: FocusMonitor },
-    { type: UniqueSelectionDispatcher }
-];
-McRadioButton.propDecorators = {
-    checked: [{ type: Input }],
-    value: [{ type: Input }],
-    disabled: [{ type: Input }],
-    required: [{ type: Input }],
-    labelPosition: [{ type: Input }],
-    name: [{ type: Input }],
-    ariaLabel: [{ type: Input, args: ['aria-label',] }],
-    ariaLabelledby: [{ type: Input, args: ['aria-labelledby',] }],
-    ariaDescribedby: [{ type: Input, args: ['aria-describedby',] }],
-    inputElement: [{ type: ViewChild, args: ['input', { static: false },] }],
-    change: [{ type: Output }],
-    isFocused: [{ type: Input }],
-    id: [{ type: Input }]
-};
+/** @nocollapse */ McRadioButton.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McRadioButton, deps: [{ token: McRadioGroup, optional: true }, { token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: i1.FocusMonitor }, { token: i2.UniqueSelectionDispatcher }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McRadioButton.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McRadioButton, selector: "mc-radio-button", inputs: { color: "color", tabIndex: "tabIndex", checked: "checked", value: "value", disabled: "disabled", required: "required", labelPosition: "labelPosition", name: "name", ariaLabel: ["aria-label", "ariaLabel"], ariaLabelledby: ["aria-labelledby", "ariaLabelledby"], ariaDescribedby: ["aria-describedby", "ariaDescribedby"], isFocused: "isFocused", id: "id" }, outputs: { change: "change" }, host: { properties: { "attr.id": "id", "class.mc-selected": "checked", "class.mc-disabled": "disabled" }, classAttribute: "mc-radio-button" }, viewQueries: [{ propertyName: "inputElement", first: true, predicate: ["input"], descendants: true }], exportAs: ["mcRadioButton"], usesInheritance: true, ngImport: i0, template: "<label class=\"mc-radio-label\" [attr.for]=\"inputId\" #label>\n    <input type=\"radio\"\n           class=\"mc-radio-input cdk-visually-hidden\"\n           #input\n           [id]=\"inputId\"\n           [checked]=\"checked\"\n           [disabled]=\"disabled\"\n           [tabIndex]=\"tabIndex\"\n           [attr.name]=\"name\"\n           [required]=\"required\"\n           [attr.aria-label]=\"ariaLabel\"\n           [attr.aria-labelledby]=\"ariaLabelledby\"\n           [attr.aria-describedby]=\"ariaDescribedby\"\n           (change)=\"onInputChange($event)\"\n           (click)=\"onInputClick($event)\">\n\n    <div class=\"mc-radio-label-content\" [class.mc-radio-label-before]=\"labelPosition == 'before'\">\n        <div class=\"mc-radio-button__outer-circle\"></div>\n        <div class=\"mc-radio-button__inner-circle\"></div>\n        <ng-content></ng-content>\n    </div>\n</label>\n", styles: [".mc-radio-button{display:inline-block}.mc-radio-label{display:inline-flex;align-items:center;vertical-align:middle;cursor:pointer;white-space:nowrap;width:100%}.mc-radio-label-content{display:inline-block;position:relative;order:0;line-height:inherit;padding-left:calc(14px + 8px);padding-left:calc(var(--mc-radio-size-size, 14px) + var(--mc-radio-size-padding, 8px));padding-right:0}.mc-radio-label-content .mc-radio-button__outer-circle,.mc-radio-label-content .mc-radio-button__inner-circle{box-sizing:content-box;position:absolute;content:\"\";border-style:solid;border-radius:50%}.mc-radio-label-content .mc-radio-button__outer-circle{left:0;top:calc(50% - 8px);width:14px;width:var(--mc-radio-size-size, 14px);height:14px;height:var(--mc-radio-size-size, 14px);border-width:1px}.mc-radio-label-content .mc-radio-button__inner-circle{display:none;left:1px;top:calc(50% - 7px);width:6px;height:6px;border-width:4px}[dir=rtl] .mc-radio-label-content{padding-right:8px;padding-right:var(--mc-radio-size-padding, 8px);padding-left:0}.mc-radio-input{position:absolute;outline:none;opacity:0}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McRadioButton, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-radio-button',
+                    templateUrl: 'radio.component.html',
+                    styleUrls: ['radio.scss'],
+                    inputs: ['color', 'tabIndex'],
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    exportAs: 'mcRadioButton',
+                    host: {
+                        class: 'mc-radio-button',
+                        '[attr.id]': 'id',
+                        '[class.mc-selected]': 'checked',
+                        '[class.mc-disabled]': 'disabled'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: McRadioGroup, decorators: [{
+                    type: Optional
+                }] }, { type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: i1.FocusMonitor }, { type: i2.UniqueSelectionDispatcher }]; }, propDecorators: { checked: [{
+                type: Input
+            }], value: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], labelPosition: [{
+                type: Input
+            }], name: [{
+                type: Input
+            }], ariaLabel: [{
+                type: Input,
+                args: ['aria-label']
+            }], ariaLabelledby: [{
+                type: Input,
+                args: ['aria-labelledby']
+            }], ariaDescribedby: [{
+                type: Input,
+                args: ['aria-describedby']
+            }], inputElement: [{
+                type: ViewChild,
+                args: ['input', { static: false }]
+            }], change: [{
+                type: Output
+            }], isFocused: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }] } });
 
 class McRadioModule {
 }
-McRadioModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule, A11yModule, McCommonModule],
-                exports: [McRadioGroup, McRadioButton],
-                declarations: [McRadioGroup, McRadioButton]
-            },] }
-];
+/** @nocollapse */ McRadioModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McRadioModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McRadioModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McRadioModule, declarations: [McRadioGroup, McRadioButton], imports: [CommonModule, A11yModule, McCommonModule], exports: [McRadioGroup, McRadioButton] });
+/** @nocollapse */ McRadioModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McRadioModule, imports: [[CommonModule, A11yModule, McCommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McRadioModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [CommonModule, A11yModule, McCommonModule],
+                    exports: [McRadioGroup, McRadioButton],
+                    declarations: [McRadioGroup, McRadioButton]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.

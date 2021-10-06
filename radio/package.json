@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/radio/ptsecurity-mosaic-radio.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-radio.js",
   "typings": "ptsecurity-mosaic-radio.d.ts",
-  "metadata": "ptsecurity-mosaic-radio.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/radio"
 }

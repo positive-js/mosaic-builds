@@ -4,6 +4,7 @@ import { ViewportRuler } from '@angular/cdk/scrolling';
 import { ChangeDetectorRef, ElementRef, NgZone, QueryList } from '@angular/core';
 import { McPaginatedTabHeader } from './paginated-tab-header';
 import { McTabLabelWrapper } from './tab-label-wrapper.directive';
+import * as i0 from "@angular/core";
 /**
  * The directions that scrolling can go in when the header's tabs exceed the header width. 'After'
  * will scroll the header towards the end of the tabs list and 'before' will scroll towards the
@@ -29,4 +30,6 @@ export declare class McTabHeader extends McPaginatedTabHeader {
     previousPaginator: ElementRef<HTMLElement>;
     constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, viewportRuler: ViewportRuler, ngZone: NgZone, platform: Platform, dir: Directionality, animationMode?: string);
     itemSelected(event: KeyboardEvent): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTabHeader, [null, null, null, null, null, { optional: true; }, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTabHeader, "mc-tab-header", never, { "selectedIndex": "selectedIndex"; "vertical": "vertical"; }, { "selectFocusedIndex": "selectFocusedIndex"; "indexFocused": "indexFocused"; }, ["items"], ["*"]>;
 }

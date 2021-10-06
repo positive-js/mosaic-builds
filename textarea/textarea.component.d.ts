@@ -3,6 +3,7 @@ import { FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angu
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, McValidationOptions } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
+import * as i0 from "@angular/core";
 export declare const MC_TEXTAREA_VALUE_ACCESSOR: InjectionToken<{
     value: any;
 }>;
@@ -104,4 +105,6 @@ export declare class McTextarea extends McTextareaMixinBase implements McFormFie
     protected dirtyCheckNativeValue(): void;
     /** Checks whether the textarea is invalid based on the native validation. */
     protected isBadInput(): boolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTextarea, [null, { optional: true; self: true; }, { optional: true; }, { optional: true; self: true; }, { optional: true; }, { optional: true; self: true; }, { optional: true; }, null, { optional: true; self: true; }, null]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTextarea, "textarea[mcTextarea]", ["mcTextarea"], { "canGrow": "canGrow"; "errorStateMatcher": "errorStateMatcher"; "disabled": "disabled"; "id": "id"; "placeholder": "placeholder"; "required": "required"; "value": "value"; }, {}, never>;
 }

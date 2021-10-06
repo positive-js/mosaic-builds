@@ -3,6 +3,7 @@ import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor, HasTabIndex, HasTabIndexCtor } from '@ptsecurity/mosaic/core';
+import * as i0 from "@angular/core";
 /** Change event object emitted by McRadio. */
 export declare class McRadioChange {
     /** The McRadioButton that emits the change event. */
@@ -120,6 +121,8 @@ export declare class McRadioGroup extends McRadioGroupMixinBase implements After
     private updateRadioButtonNames;
     /** Updates the `selected` radio button from the internal _value state. */
     private updateSelectedRadioFromValue;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McRadioGroup, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McRadioGroup, "mc-radio-group", ["mcRadioGroup"], { "name": "name"; "labelPosition": "labelPosition"; "value": "value"; "selected": "selected"; "disabled": "disabled"; "required": "required"; }, { "change": "change"; }, ["radios"]>;
 }
 /** @docs-private */
 declare abstract class McRadioButtonBase {
@@ -198,5 +201,7 @@ export declare class McRadioButton extends McRadioButtonMixinBase implements OnI
     private readonly removeUniqueSelectionListener;
     /** Dispatch change event with current value. */
     private emitChangeEvent;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McRadioButton, [{ optional: true; }, null, null, null, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McRadioButton, "mc-radio-button", ["mcRadioButton"], { "color": "color"; "tabIndex": "tabIndex"; "checked": "checked"; "value": "value"; "disabled": "disabled"; "required": "required"; "labelPosition": "labelPosition"; "name": "name"; "ariaLabel": "aria-label"; "ariaLabelledby": "aria-labelledby"; "ariaDescribedby": "aria-describedby"; "isFocused": "isFocused"; "id": "id"; }, { "change": "change"; }, never, ["*"]>;
 }
 export {};

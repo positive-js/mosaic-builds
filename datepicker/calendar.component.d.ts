@@ -7,6 +7,7 @@ import { McDatepickerIntl } from './datepicker-intl';
 import { McMonthView } from './month-view.component';
 import { McMultiYearView } from './multi-year-view.component';
 import { McYearView } from './year-view.component';
+import * as i0 from "@angular/core";
 /**
  * Possible views for the calendar.
  * @docs-private
@@ -42,6 +43,8 @@ export declare class McCalendarHeader<D> {
     nextEnabled(): boolean;
     /** Whether the two dates represent the same view in the current view mode (month or year). */
     private isSameView;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McCalendarHeader<any>, [null, null, { optional: true; }, { optional: true; }, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McCalendarHeader<any>, "mc-calendar-header", ["mcCalendarHeader"], {}, {}, never, never>;
 }
 /**
  * A calendar that is used as part of the datepicker.
@@ -143,4 +146,6 @@ export declare class McCalendar<D> implements AfterContentInit, AfterViewChecked
     private getValidDateOrNull;
     /** Returns the component instance that corresponds to the current calendar view. */
     private getCurrentViewComponent;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McCalendar<any>, [null, { optional: true; }, { optional: true; }, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McCalendar<any>, "mc-calendar", ["mcCalendar"], { "startAt": "startAt"; "selected": "selected"; "minDate": "minDate"; "maxDate": "maxDate"; "headerComponent": "headerComponent"; "startView": "startView"; "dateFilter": "dateFilter"; "dateClass": "dateClass"; }, { "selectedChange": "selectedChange"; "yearSelected": "yearSelected"; "monthSelected": "monthSelected"; "userSelection": "userSelection"; }, never, never>;
 }

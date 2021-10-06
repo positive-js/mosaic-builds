@@ -1,6 +1,7 @@
 import { ElementRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
+import * as i0 from "@angular/core";
 export declare const BIG_STEP = 10;
 export declare const SMALL_STEP = 1;
 export declare function normalizeSplitter(value: string): string;
@@ -27,4 +28,6 @@ export declare class McNumberInput {
     stepUp(step: number): void;
     stepDown(step: number): void;
     private viewToModelUpdate;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McNumberInput, [null, { optional: true; self: true; }, { attribute: "step"; }, { attribute: "big-step"; }, { attribute: "min"; }, { attribute: "max"; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McNumberInput, "input[mcInput][type=\"number\"]", ["mcNumericalInput"], { "bigStep": "bigStep"; "step": "step"; "min": "min"; "max": "max"; }, {}, never>;
 }

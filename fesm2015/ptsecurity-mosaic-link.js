@@ -1,6 +1,8 @@
-import { FocusMonitor, A11yModule } from '@angular/cdk/a11y';
+import * as i1 from '@angular/cdk/a11y';
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
-import { Directive, ElementRef, ChangeDetectorRef, Input, ContentChild, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { Directive, Input, ContentChild, NgModule } from '@angular/core';
 import { mixinTabIndex, mixinDisabled, toBoolean } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 
@@ -70,52 +72,62 @@ class McLink extends McLinkMixinBase {
         return this.elementRef.nativeElement;
     }
 }
-McLink.decorators = [
-    { type: Directive, args: [{
-                selector: '[mc-link]',
-                exportAs: 'mcLink',
-                inputs: ['tabIndex'],
-                host: {
-                    class: 'mc-link',
-                    '[class.mc-link_no-underline]': 'noUnderline',
-                    '[class.mc-link_use-visited]': 'useVisited',
-                    '[class.mc-link_pseudo]': 'pseudo',
-                    '[class.mc-link_print]': 'printMode',
-                    '[class.mc-text-only]': '!hasIcon',
-                    '[class.mc-text-with-icon]': 'hasIcon',
-                    '[attr.disabled]': 'disabled || null',
-                    '[attr.tabindex]': 'tabIndex',
-                    '[attr.print]': 'print'
-                }
-            },] }
-];
-/** @nocollapse */
-McLink.ctorParameters = () => [
-    { type: ElementRef },
-    { type: FocusMonitor },
-    { type: ChangeDetectorRef }
-];
-McLink.propDecorators = {
-    disabled: [{ type: Input }],
-    pseudo: [{ type: Input }],
-    noUnderline: [{ type: Input }],
-    useVisited: [{ type: Input }],
-    print: [{ type: Input }],
-    icon: [{ type: ContentChild, args: [McIcon,] }]
-};
+/** @nocollapse */ McLink.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McLink, deps: [{ token: i0.ElementRef }, { token: i1.FocusMonitor }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McLink.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McLink, selector: "[mc-link]", inputs: { tabIndex: "tabIndex", disabled: "disabled", pseudo: "pseudo", noUnderline: "noUnderline", useVisited: "useVisited", print: "print" }, host: { properties: { "class.mc-link_no-underline": "noUnderline", "class.mc-link_use-visited": "useVisited", "class.mc-link_pseudo": "pseudo", "class.mc-link_print": "printMode", "class.mc-text-only": "!hasIcon", "class.mc-text-with-icon": "hasIcon", "attr.disabled": "disabled || null", "attr.tabindex": "tabIndex", "attr.print": "print" }, classAttribute: "mc-link" }, queries: [{ propertyName: "icon", first: true, predicate: McIcon, descendants: true }], exportAs: ["mcLink"], usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McLink, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mc-link]',
+                    exportAs: 'mcLink',
+                    inputs: ['tabIndex'],
+                    host: {
+                        class: 'mc-link',
+                        '[class.mc-link_no-underline]': 'noUnderline',
+                        '[class.mc-link_use-visited]': 'useVisited',
+                        '[class.mc-link_pseudo]': 'pseudo',
+                        '[class.mc-link_print]': 'printMode',
+                        '[class.mc-text-only]': '!hasIcon',
+                        '[class.mc-text-with-icon]': 'hasIcon',
+                        '[attr.disabled]': 'disabled || null',
+                        '[attr.tabindex]': 'tabIndex',
+                        '[attr.print]': 'print'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i1.FocusMonitor }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { disabled: [{
+                type: Input
+            }], pseudo: [{
+                type: Input
+            }], noUnderline: [{
+                type: Input
+            }], useVisited: [{
+                type: Input
+            }], print: [{
+                type: Input
+            }], icon: [{
+                type: ContentChild,
+                args: [McIcon]
+            }] } });
 
 class McLinkModule {
 }
-McLinkModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    A11yModule
-                ],
-                declarations: [McLink],
-                exports: [McLink]
-            },] }
-];
+/** @nocollapse */ McLinkModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McLinkModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McLinkModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McLinkModule, declarations: [McLink], imports: [CommonModule,
+        A11yModule], exports: [McLink] });
+/** @nocollapse */ McLinkModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McLinkModule, imports: [[
+            CommonModule,
+            A11yModule
+        ]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McLinkModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        CommonModule,
+                        A11yModule
+                    ],
+                    declarations: [McLink],
+                    exports: [McLink]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.

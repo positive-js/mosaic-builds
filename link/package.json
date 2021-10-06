@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/link/ptsecurity-mosaic-link.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-link.js",
   "typings": "ptsecurity-mosaic-link.d.ts",
-  "metadata": "ptsecurity-mosaic-link.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/link"
 }

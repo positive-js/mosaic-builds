@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/form-field/ptsecurity-mosaic-form-field.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-form-field.js",
   "typings": "ptsecurity-mosaic-form-field.d.ts",
-  "metadata": "ptsecurity-mosaic-form-field.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/form-field"
 }

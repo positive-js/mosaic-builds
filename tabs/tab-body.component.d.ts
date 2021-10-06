@@ -2,6 +2,7 @@ import { AnimationEvent } from '@angular/animations';
 import { Directionality, Direction } from '@angular/cdk/bidi';
 import { TemplatePortal, CdkPortalOutlet } from '@angular/cdk/portal';
 import { ChangeDetectorRef, EventEmitter, OnDestroy, OnInit, ElementRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import * as i0 from "@angular/core";
 /**
  * These position states are used internally as animation states for the tab body. Setting the
  * position state to left, right, or center will transition the tab body from its current
@@ -71,6 +72,8 @@ export declare class McTabBody implements OnInit, OnDestroy {
      * tab is becoming visible immediately after creation.
      */
     private computePositionFromOrigin;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTabBody, [null, { optional: true; }, null]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTabBody, "mc-tab-body", never, { "position": "position"; "content": "content"; "origin": "origin"; "animationDuration": "animationDuration"; }, { "onCentering": "onCentering"; "beforeCentering": "beforeCentering"; "afterLeavingCenter": "afterLeavingCenter"; "onCentered": "onCentered"; }, never, never>;
 }
 /**
  * The portal host directive for the contents of the tab.
@@ -87,4 +90,6 @@ export declare class McTabBodyPortal extends CdkPortalOutlet implements OnInit, 
     ngOnInit(): void;
     /** Clean up centering subscription. */
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTabBodyPortal, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTabBodyPortal, "[mcTabBodyHost]", never, {}, {}, never>;
 }

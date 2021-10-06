@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/datepicker/ptsecurity-mosaic-datepicker.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-datepicker.js",
   "typings": "ptsecurity-mosaic-datepicker.d.ts",
-  "metadata": "ptsecurity-mosaic-datepicker.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/datepicker"
 }

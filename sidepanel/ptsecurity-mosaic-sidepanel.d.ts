@@ -1,5 +1,5 @@
 /**
  * Generated bundle index. Do not edit.
  */
+/// <amd-module name="@ptsecurity/mosaic/sidepanel" />
 export * from './index';
-export { mcSidepanelAnimations as ɵb, mcSidepanelTransformAnimation as ɵa } from './sidepanel-animations';

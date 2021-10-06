@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/button/ptsecurity-mosaic-button.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-button.js",
   "typings": "ptsecurity-mosaic-button.d.ts",
-  "metadata": "ptsecurity-mosaic-button.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/button"
 }

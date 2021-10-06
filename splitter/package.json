@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/splitter/ptsecurity-mosaic-splitter.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-splitter.js",
   "typings": "ptsecurity-mosaic-splitter.d.ts",
-  "metadata": "ptsecurity-mosaic-splitter.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/splitter"
 }

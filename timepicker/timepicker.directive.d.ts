@@ -5,6 +5,7 @@ import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 import { TimeFormats } from './timepicker.constants';
+import * as i0 from "@angular/core";
 /** @docs-private */
 export declare const MC_TIMEPICKER_VALUE_ACCESSOR: any;
 /** @docs-private */
@@ -136,4 +137,6 @@ export declare class McTimepicker<D> implements McFormFieldControl<D>, ControlVa
     private updateView;
     private setControl;
     private validatorOnChange;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTimepicker<any>, [null, null, { optional: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTimepicker<any>, "input[mcTimepicker]", ["mcTimepicker"], { "placeholder": "placeholder"; "disabled": "disabled"; "id": "id"; "required": "required"; "format": "format"; "min": "min"; "max": "max"; "value": "value"; "mcValidationTooltip": "mcValidationTooltip"; }, { "incorrectInput": "incorrectInput"; }, never>;
 }

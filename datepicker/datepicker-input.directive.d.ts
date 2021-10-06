@@ -5,6 +5,7 @@ import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { McTooltip } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
 import { McDatepicker } from './datepicker.component';
+import * as i0 from "@angular/core";
 export declare const MAX_YEAR = 9999;
 /** @docs-private */
 export declare const MC_DATEPICKER_VALUE_ACCESSOR: any;
@@ -166,4 +167,6 @@ export declare class McDatepickerInput<D> implements McFormFieldControl<D>, Cont
     private getDigitPositions;
     private createDate;
     private correctCursorPosition;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McDatepickerInput<any>, [null, null, { optional: true; }, { optional: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McDatepickerInput<any>, "input[mcDatepicker]", ["mcDatepickerInput"], { "placeholder": "placeholder"; "required": "required"; "mcDatepicker": "mcDatepicker"; "mcDatepickerFilter": "mcDatepickerFilter"; "value": "value"; "min": "min"; "max": "max"; "disabled": "disabled"; "id": "id"; "mcValidationTooltip": "mcValidationTooltip"; }, { "incorrectInput": "incorrectInput"; "dateChange": "dateChange"; "dateInput": "dateInput"; }, never>;
 }

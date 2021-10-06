@@ -1,8 +1,38 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/overlay'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/icon'), require('@ptsecurity/mosaic/tags'), require('@angular/cdk/bidi'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/input'), require('rxjs'), require('rxjs/operators')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/select', ['exports', '@angular/cdk/overlay', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/icon', '@ptsecurity/mosaic/tags', '@angular/cdk/bidi', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/input', 'rxjs', 'rxjs/operators'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.select = {}), global.ng.cdk.overlay, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic['form-field'], global.ptsecurity.mosaic.icon, global.ptsecurity.mosaic.tags, global.ng.cdk.bidi, global.ng.cdk.coercion, global.ng.cdk.collections, global.ng.forms, global.mc.cdk.a11y, global.mc.cdk.keycodes, global.ptsecurity.mosaic.input, global.rxjs, global.rxjs.operators));
-}(this, (function (exports, overlay, common, core, core$1, formField, icon, tags, bidi, coercion, collections, forms, a11y, keycodes, input, rxjs, operators) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/overlay'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('@ptsecurity/mosaic/icon'), require('@ptsecurity/mosaic/tags'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/input'), require('rxjs'), require('rxjs/operators'), require('@angular/cdk/bidi')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/select', ['exports', '@angular/cdk/overlay', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', '@ptsecurity/mosaic/icon', '@ptsecurity/mosaic/tags', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/input', 'rxjs', 'rxjs/operators', '@angular/cdk/bidi'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.select = {}), global.ng.cdk.overlay, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic['form-field'], global.ptsecurity.mosaic.icon, global.ptsecurity.mosaic.tags, global.ng.cdk.coercion, global.ng.cdk.collections, global.ng.forms, global.mc.cdk.a11y, global.mc.cdk.keycodes, global.ptsecurity.mosaic.input, global.rxjs, global.rxjs.operators, global.ng.cdk.bidi));
+}(this, (function (exports, i7, i8, i0, i2, i1, i6, i5, coercion, collections, i4, a11y, keycodes, input, rxjs, operators, i3) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i7__namespace = /*#__PURE__*/_interopNamespace(i7);
+    var i8__namespace = /*#__PURE__*/_interopNamespace(i8);
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
+    var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
+    var i6__namespace = /*#__PURE__*/_interopNamespace(i6);
+    var i5__namespace = /*#__PURE__*/_interopNamespace(i5);
+    var i4__namespace = /*#__PURE__*/_interopNamespace(i4);
+    var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -375,41 +405,46 @@
         };
         return McSelectSearch;
     }());
-    McSelectSearch.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mcSelectSearch]',
-                    exportAs: 'mcSelectSearch',
-                    host: {
-                        '(keydown)': 'handleKeydown($event)'
-                    }
-                },] }
-    ];
-    /** @nocollapse */
-    McSelectSearch.ctorParameters = function () { return [
-        { type: formField.McFormField }
-    ]; };
-    McSelectSearch.propDecorators = {
-        input: [{ type: core.ContentChild, args: [input.McInput, { static: false },] }]
-    };
+    /** @nocollapse */ McSelectSearch.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectSearch, deps: [{ token: i1__namespace.McFormField }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McSelectSearch.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McSelectSearch, selector: "[mcSelectSearch]", host: { listeners: { "keydown": "handleKeydown($event)" } }, queries: [{ propertyName: "input", first: true, predicate: input.McInput, descendants: true }], exportAs: ["mcSelectSearch"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectSearch, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[mcSelectSearch]',
+                        exportAs: 'mcSelectSearch',
+                        host: {
+                            '(keydown)': 'handleKeydown($event)'
+                        }
+                    }]
+            }], ctorParameters: function () { return [{ type: i1__namespace.McFormField }]; }, propDecorators: { input: [{
+                    type: i0.ContentChild,
+                    args: [input.McInput, { static: false }]
+                }] } });
     var McSelectSearchEmptyResult = /** @class */ (function () {
         function McSelectSearchEmptyResult() {
         }
         return McSelectSearchEmptyResult;
     }());
-    McSelectSearchEmptyResult.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[mc-select-search-empty-result]',
-                    exportAs: 'mcSelectSearchEmptyResult'
-                },] }
-    ];
+    /** @nocollapse */ McSelectSearchEmptyResult.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectSearchEmptyResult, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McSelectSearchEmptyResult.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McSelectSearchEmptyResult, selector: "[mc-select-search-empty-result]", exportAs: ["mcSelectSearchEmptyResult"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectSearchEmptyResult, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[mc-select-search-empty-result]',
+                        exportAs: 'mcSelectSearchEmptyResult'
+                    }]
+            }] });
     var McSelectTrigger = /** @class */ (function () {
         function McSelectTrigger() {
         }
         return McSelectTrigger;
     }());
-    McSelectTrigger.decorators = [
-        { type: core.Directive, args: [{ selector: 'mc-select-trigger' },] }
-    ];
+    /** @nocollapse */ McSelectTrigger.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectTrigger, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McSelectTrigger.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McSelectTrigger, selector: "mc-select-trigger", ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectTrigger, decorators: [{
+                type: i0.Directive,
+                args: [{ selector: 'mc-select-trigger' }]
+            }] });
     var McSelectBase = /** @class */ (function () {
         function McSelectBase(elementRef, defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
             this.elementRef = elementRef;
@@ -421,7 +456,7 @@
         return McSelectBase;
     }());
     // tslint:disable-next-line:naming-convention
-    var McSelectMixinBase = core$1.mixinTabIndex(core$1.mixinDisabled(core$1.mixinErrorState(McSelectBase)));
+    var McSelectMixinBase = i2.mixinTabIndex(i2.mixinDisabled(i2.mixinErrorState(McSelectBase)));
     var McSelect = /** @class */ (function (_super) {
         __extends(McSelect, _super);
         function McSelect(_changeDetectorRef, _ngZone, _renderer, defaultErrorStateMatcher, elementRef, rawValidators, _dir, parentForm, parentFormGroup, _parentFormField, ngControl, ngModel, formControlName, _scrollStrategyFactory, mcValidation) {
@@ -479,26 +514,26 @@
             /** Combined stream of all of the child options' change events. */
             _this.optionSelectionChanges = rxjs.defer(function () {
                 if (_this.options) {
-                    return rxjs.merge.apply(void 0, __spread(_this.options.map(function (option) { return option.onSelectionChange; }), _this.selectionModel.selected.map(function (option) { return option.onSelectionChange; })));
+                    return rxjs.merge.apply(void 0, __spreadArray(__spreadArray([], __read(_this.options.map(function (option) { return option.onSelectionChange; }))), __read(_this.selectionModel.selected.map(function (option) { return option.onSelectionChange; }))));
                 }
                 return _this._ngZone.onStable
                     .asObservable()
                     .pipe(operators.take(1), operators.switchMap(function () { return _this.optionSelectionChanges; }));
             });
             /** Event emitted when the select panel has been toggled. */
-            _this.openedChange = new core.EventEmitter();
+            _this.openedChange = new i0.EventEmitter();
             /** Event emitted when the select has been opened. */
             _this.openedStream = _this.openedChange.pipe(operators.filter(function (o) { return o; }), operators.map(function () { }));
             /** Event emitted when the select has been closed. */
             _this.closedStream = _this.openedChange.pipe(operators.filter(function (o) { return !o; }), operators.map(function () { }));
             /** Event emitted when the selected value has been changed by the user. */
-            _this.selectionChange = new core.EventEmitter();
+            _this.selectionChange = new i0.EventEmitter();
             /**
              * Event that emits whenever the raw value of the select changes. This is here primarily
              * to facilitate the two-way binding for the `value` input.
              * @docs-private
              */
-            _this.valueChange = new core.EventEmitter();
+            _this.valueChange = new i0.EventEmitter();
             _this._hasBackdrop = false;
             _this._required = false;
             _this._multiple = false;
@@ -564,7 +599,7 @@
             },
             set: function (value) {
                 if (this.selectionModel) {
-                    throw core$1.getMcSelectDynamicMultipleError();
+                    throw i2.getMcSelectDynamicMultipleError();
                 }
                 this._multiple = coercion.coerceBooleanProperty(value);
             },
@@ -583,7 +618,7 @@
             set: function (fn) {
                 /* tslint:disable-next-line:strict-type-predicates */
                 if (typeof fn !== 'function') {
-                    throw core$1.getMcSelectNonFunctionValueError();
+                    throw i2.getMcSelectNonFunctionValueError();
                 }
                 this._compareWith = fn;
                 if (this.selectionModel) {
@@ -708,7 +743,7 @@
         McSelect.prototype.ngAfterContentInit = function () {
             var _this = this;
             if (this.mcValidation.useValidation) {
-                core$1.setMosaicValidation(this);
+                i2.setMosaicValidation(this);
             }
             this.initKeyManager();
             this.selectionModel.changed
@@ -1089,7 +1124,7 @@
             this.previousSelectionModelSelected = this.selectionModel.selected;
             if (this.multiple && value) {
                 if (!Array.isArray(value)) {
-                    throw core$1.getMcSelectNonArrayValueError();
+                    throw i2.getMcSelectNonArrayValueError();
                 }
                 this.selectionModel.clear();
                 value.forEach(function (currentValue) { return _this.selectValue(currentValue); });
@@ -1108,13 +1143,13 @@
         };
         McSelect.prototype.getCorrespondOption = function (value) {
             var _this = this;
-            return __spread(this.options.toArray(), this.previousSelectionModelSelected).find(function (option) {
+            return __spreadArray(__spreadArray([], __read(this.options.toArray())), __read(this.previousSelectionModelSelected)).find(function (option) {
                 try {
                     // Treat null as a special reset value.
                     return option.value != null && _this.compareWith(option.value, value);
                 }
                 catch (error) {
-                    if (core.isDevMode()) {
+                    if (i0.isDevMode()) {
                         // Notify developers of errors in their comparator.
                         console.warn(error);
                     }
@@ -1179,7 +1214,7 @@
             });
             // Listen to changes in the internal state of the options and react accordingly.
             // Handles cases like the labels of the selected options changing.
-            rxjs.merge.apply(void 0, __spread(this.options.map(function (option) { return option.stateChanges; }))).pipe(operators.takeUntil(changedOrDestroyed))
+            rxjs.merge.apply(void 0, __spreadArray([], __read(this.options.map(function (option) { return option.stateChanges; })))).pipe(operators.takeUntil(changedOrDestroyed))
                 .subscribe(function () {
                 _this._changeDetectorRef.markForCheck();
                 _this.stateChanges.next();
@@ -1288,11 +1323,11 @@
             var windowWidth = this.getOverlayWidth();
             var isRtl = this.isRtl();
             /* tslint:disable-next-line:no-magic-numbers */
-            var paddingWidth = core$1.SELECT_PANEL_PADDING_X * 2;
+            var paddingWidth = i2.SELECT_PANEL_PADDING_X * 2;
             var offsetX;
             var overlayMaxWidth;
             var selected = this.selectionModel.selected[0] || this.options.first;
-            offsetX = selected && selected.group ? core$1.SELECT_PANEL_INDENT_PADDING_X : core$1.SELECT_PANEL_PADDING_X;
+            offsetX = selected && selected.group ? i2.SELECT_PANEL_INDENT_PADDING_X : i2.SELECT_PANEL_PADDING_X;
             // Invert the offset in LTR.
             if (!isRtl) {
                 offsetX *= -1;
@@ -1320,21 +1355,21 @@
             var isRightDirection = leftIndent <= rightIndent;
             var maxDropdownWidth;
             var overlayMaxWidth;
-            var triggerWidth = this.triggerRect.width + core$1.SELECT_PANEL_INDENT_PADDING_X;
+            var triggerWidth = this.triggerRect.width + i2.SELECT_PANEL_INDENT_PADDING_X;
             if (isRightDirection) {
-                maxDropdownWidth = rightIndent + triggerWidth - core$1.SELECT_PANEL_VIEWPORT_PADDING;
+                maxDropdownWidth = rightIndent + triggerWidth - i2.SELECT_PANEL_VIEWPORT_PADDING;
                 overlayMaxWidth = overlayRect.width < maxDropdownWidth ? overlayRect.width : maxDropdownWidth;
             }
             else {
                 var leftOffset = void 0;
-                maxDropdownWidth = leftIndent + triggerWidth - core$1.SELECT_PANEL_VIEWPORT_PADDING;
+                maxDropdownWidth = leftIndent + triggerWidth - i2.SELECT_PANEL_VIEWPORT_PADDING;
                 if (overlayRect.width < maxDropdownWidth) {
                     overlayMaxWidth = overlayRect.width;
                     leftOffset = this.triggerRect.right - overlayMaxWidth;
                 }
                 else {
                     overlayMaxWidth = maxDropdownWidth;
-                    leftOffset = this.triggerRect.right - (overlayMaxWidth - core$1.SELECT_PANEL_INDENT_PADDING_X);
+                    leftOffset = this.triggerRect.right - (overlayMaxWidth - i2.SELECT_PANEL_INDENT_PADDING_X);
                 }
                 offsetX -= this.triggerRect.left - leftOffset;
             }
@@ -1353,118 +1388,207 @@
         };
         return McSelect;
     }(McSelectMixinBase));
-    McSelect.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'mc-select',
-                    exportAs: 'mcSelect',
-                    template: "<div cdk-overlay-origin\n     class=\"mc-select__trigger\"\n     (click)=\"toggle()\"\n     [class.mc-select__trigger_multiple]=\"multiple\"\n     #origin=\"cdkOverlayOrigin\"\n     #trigger>\n    <div class=\"mc-select__matcher\" [ngSwitch]=\"empty\">\n        <span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\\u00A0' }}</span>\n        <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\">\n            <div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\">\n                <span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span>\n                <div *ngSwitchCase=\"true\" class=\"mc-select__match-list\">\n                    <mc-tag *ngFor=\"let option of triggerValues\"\n                            [disabled]=\"option.disabled || disabled\"\n                            [selectable]=\"false\"\n                            [class.mc-error]=\"errorState\">\n                        {{ option.viewValue }}\n                        <i mc-icon=\"mc-close-S_16\"\n                           *ngIf=\"!option.disabled && !disabled\"\n                           (click)=\"onRemoveMatcherItem(option, $event)\">\n                        </i>\n                    </mc-tag>\n                </div>\n                <div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">\n                    {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}\n                </div>\n            </div>\n            <ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content>\n        </span>\n    </div>\n\n    <div class=\"mc-select__cleaner\" *ngIf=\"canShowCleaner\" (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <div class=\"mc-select__arrow-wrapper\">\n        <i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\"></i>\n    </div>\n</div>\n\n<ng-template\n    cdk-connected-overlay\n    cdkConnectedOverlayLockPosition\n    [cdkConnectedOverlayHasBackdrop]=\"hasBackdrop\"\n    [cdkConnectedOverlayBackdropClass]=\"backdropClass\"\n    [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\"\n    [cdkConnectedOverlayOrigin]=\"origin\"\n    [cdkConnectedOverlayOpen]=\"panelOpen\"\n    [cdkConnectedOverlayPositions]=\"positions\"\n    [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\"\n    [cdkConnectedOverlayOffsetY]=\"offsetY\"\n    (backdropClick)=\"close()\"\n    (attach)=\"onAttached()\"\n    (detach)=\"close()\">\n    <div\n        #panel\n        class=\"mc-select__panel {{ getPanelTheme() }}\"\n        [ngClass]=\"panelClass\"\n        [style.transformOrigin]=\"transformOrigin\"\n        [style.font-size.px]=\"triggerFontSize\"\n        (keydown)=\"handleKeydown($event)\">\n\n        <div *ngIf=\"search\" class=\"mc-select__search-container\">\n            <ng-content select=\"[mcSelectSearch]\"></ng-content>\n        </div>\n\n        <div #optionsContainer\n             class=\"mc-select__content\"\n             [@fadeInContent]=\"'showing'\"\n             (@fadeInContent.done)=\"panelDoneAnimatingStream.next($event.toState)\">\n\n            <div *ngIf=\"isEmptySearchResult\" class=\"mc-select__no-options-message\">\n                <ng-content select=\"[mc-select-search-empty-result]\"></ng-content>\n            </div>\n            <ng-content></ng-content>\n        </div>\n    </div>\n</ng-template>\n",
-                    inputs: ['disabled', 'tabIndex'],
-                    encapsulation: core.ViewEncapsulation.None,
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    host: {
-                        '[attr.id]': 'id',
-                        '[attr.tabindex]': 'tabIndex',
-                        '[attr.disabled]': 'disabled || null',
-                        class: 'mc-select',
-                        '[class.mc-disabled]': 'disabled',
-                        '[class.mc-invalid]': 'errorState',
-                        '(keydown)': 'handleKeydown($event)',
-                        '(focus)': 'onFocus()',
-                        '(blur)': 'onBlur()',
-                        '(window:resize)': 'calculateHiddenItems()'
-                    },
-                    animations: [
-                        core$1.mcSelectAnimations.transformPanel,
-                        core$1.mcSelectAnimations.fadeInContent
-                    ],
-                    providers: [
-                        { provide: formField.McFormFieldControl, useExisting: McSelect },
-                        { provide: core$1.MC_OPTION_PARENT_COMPONENT, useExisting: McSelect }
-                    ],
-                    styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:var(--mc-option-size-height,32px);border:var(--mc-option-size-border-width,2px) solid transparent;cursor:pointer;outline:none;padding-left:var(--mc-option-size-horizontal-padding,16px);padding-right:var(--mc-option-size-horizontal-padding,16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.mc-select{box-sizing:border-box;display:inline-block;width:100%;outline:none}.mc-select .mc-select__trigger{display:flex;box-sizing:border-box;position:relative;height:var(--mc-select-size-height,30px);cursor:pointer;padding-left:calc(var(--mc-select-size-left-padding, 16px) - var(--mc-form-field-size-border-width, 1px));padding-right:calc(var(--mc-select-size-right-padding, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-select .mc-select__trigger.mc-select__trigger_multiple{padding-left:calc(var(--mc-select-size-left-padding-multiple, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-select .mc-select__trigger.mc-select__trigger_multiple .mc-tag.mc-disabled .mc-tag__text{margin-right:7px}.mc-select.mc-disabled .mc-select__trigger{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.mc-select__no-options-message{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:var(--mc-option-size-height,32px);cursor:default;outline:none;padding-left:var(--mc-option-size-horizontal-padding,16px);padding-right:var(--mc-option-size-horizontal-padding,16px)}.mc-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-select__matcher>span{width:100%}.mc-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:calc(var(--mc-select-size-height, 30px) - var(--mc-select-panel-size-border-width, 1px))}.mc-select__match-list .mc-tag{margin-right:4px}.mc-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-select__match-container .mc-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-select__arrow-wrapper{align-self:center}.mc-form-field-appearance-fill .mc-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-select__arrow-wrapper{transform:translateY(-25%)}.mc-select__panel{min-width:100%;max-width:var(--mc-select-panel-size-max-width,640px);overflow:hidden;border-width:var(--mc-select-panel-size-border-width,1px);border-style:solid;border-bottom-left-radius:var(--mc-select-panel-size-border-radius,3px);border-bottom-right-radius:var(--mc-select-panel-size-border-radius,3px)}.mc-select__panel .mc-optgroup-label,.mc-select__panel .mc-option{font-size:inherit;line-height:var(--mc-option-size-height,32px);height:var(--mc-option-size-height,32px)}.mc-select__content{max-height:var(--mc-select-panel-size-max-height,232px);padding:var(--mc-select-panel-size-vertical-padding,4px) 0;overflow:auto}.mc-select__content .cdk-virtual-scroll-viewport{min-height:var(--mc-select-panel-size-max-height,232px)-8px;max-height:var(--mc-select-panel-size-max-height,232px)-8px}.mc-form-field-type-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-select__search-container{border-bottom-width:1px;border-bottom-style:solid}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McSelect.ctorParameters = function () { return [
-        { type: core.ChangeDetectorRef },
-        { type: core.NgZone },
-        { type: core.Renderer2 },
-        { type: core$1.ErrorStateMatcher },
-        { type: core.ElementRef },
-        { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [forms.NG_VALIDATORS,] }] },
-        { type: bidi.Directionality, decorators: [{ type: core.Optional }] },
-        { type: forms.NgForm, decorators: [{ type: core.Optional }] },
-        { type: forms.FormGroupDirective, decorators: [{ type: core.Optional }] },
-        { type: formField.McFormField, decorators: [{ type: core.Optional }] },
-        { type: forms.NgControl, decorators: [{ type: core.Self }, { type: core.Optional }] },
-        { type: forms.NgModel, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: forms.FormControlName, decorators: [{ type: core.Optional }, { type: core.Self }] },
-        { type: undefined, decorators: [{ type: core.Inject, args: [core$1.MC_SELECT_SCROLL_STRATEGY,] }] },
-        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$1.MC_VALIDATION,] }] }
-    ]; };
-    McSelect.propDecorators = {
-        trigger: [{ type: core.ViewChild, args: ['trigger', { static: false },] }],
-        panel: [{ type: core.ViewChild, args: ['panel', { static: false },] }],
-        optionsContainer: [{ type: core.ViewChild, args: ['optionsContainer', { static: false },] }],
-        overlayDir: [{ type: core.ViewChild, args: [overlay.CdkConnectedOverlay, { static: false },] }],
-        tags: [{ type: core.ViewChildren, args: [tags.McTag,] }],
-        customTrigger: [{ type: core.ContentChild, args: [McSelectTrigger, { static: false },] }],
-        cleaner: [{ type: core.ContentChild, args: ['mcSelectCleaner', { static: true },] }],
-        options: [{ type: core.ContentChildren, args: [core$1.McOption, { descendants: true },] }],
-        optionGroups: [{ type: core.ContentChildren, args: [core$1.McOptgroup,] }],
-        search: [{ type: core.ContentChild, args: [McSelectSearch, { static: false },] }],
-        hiddenItemsText: [{ type: core.Input }],
-        panelClass: [{ type: core.Input }],
-        backdropClass: [{ type: core.Input }],
-        errorStateMatcher: [{ type: core.Input }],
-        sortComparator: [{ type: core.Input }],
-        openedChange: [{ type: core.Output }],
-        openedStream: [{ type: core.Output, args: ['opened',] }],
-        closedStream: [{ type: core.Output, args: ['closed',] }],
-        selectionChange: [{ type: core.Output }],
-        valueChange: [{ type: core.Output }],
-        hasBackdrop: [{ type: core.Input }],
-        placeholder: [{ type: core.Input }],
-        required: [{ type: core.Input }],
-        multiple: [{ type: core.Input }],
-        compareWith: [{ type: core.Input }],
-        value: [{ type: core.Input }],
-        id: [{ type: core.Input }],
-        hiddenItemsTextFormatter: [{ type: core.Input }]
-    };
+    /** @nocollapse */ McSelect.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelect, deps: [{ token: i0__namespace.ChangeDetectorRef }, { token: i0__namespace.NgZone }, { token: i0__namespace.Renderer2 }, { token: i2__namespace.ErrorStateMatcher }, { token: i0__namespace.ElementRef }, { token: i4.NG_VALIDATORS, optional: true }, { token: i3__namespace.Directionality, optional: true }, { token: i4__namespace.NgForm, optional: true }, { token: i4__namespace.FormGroupDirective, optional: true }, { token: i1__namespace.McFormField, optional: true }, { token: i4__namespace.NgControl, optional: true, self: true }, { token: i4__namespace.NgModel, optional: true, self: true }, { token: i4__namespace.FormControlName, optional: true, self: true }, { token: i2.MC_SELECT_SCROLL_STRATEGY }, { token: i2.MC_VALIDATION, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McSelect.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McSelect, selector: "mc-select", inputs: { disabled: "disabled", tabIndex: "tabIndex", hiddenItemsText: "hiddenItemsText", panelClass: "panelClass", backdropClass: "backdropClass", errorStateMatcher: "errorStateMatcher", sortComparator: "sortComparator", hasBackdrop: "hasBackdrop", placeholder: "placeholder", required: "required", multiple: "multiple", compareWith: "compareWith", value: "value", id: "id", hiddenItemsTextFormatter: "hiddenItemsTextFormatter" }, outputs: { openedChange: "openedChange", openedStream: "opened", closedStream: "closed", selectionChange: "selectionChange", valueChange: "valueChange" }, host: { listeners: { "keydown": "handleKeydown($event)", "focus": "onFocus()", "blur": "onBlur()", "window:resize": "calculateHiddenItems()" }, properties: { "attr.id": "id", "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null", "class.mc-disabled": "disabled", "class.mc-invalid": "errorState" }, classAttribute: "mc-select" }, providers: [
+            { provide: i1.McFormFieldControl, useExisting: McSelect },
+            { provide: i2.MC_OPTION_PARENT_COMPONENT, useExisting: McSelect }
+        ], queries: [{ propertyName: "customTrigger", first: true, predicate: McSelectTrigger, descendants: true }, { propertyName: "cleaner", first: true, predicate: ["mcSelectCleaner"], descendants: true, static: true }, { propertyName: "search", first: true, predicate: McSelectSearch, descendants: true }, { propertyName: "options", predicate: i2.McOption, descendants: true }, { propertyName: "optionGroups", predicate: i2.McOptgroup }], viewQueries: [{ propertyName: "trigger", first: true, predicate: ["trigger"], descendants: true }, { propertyName: "panel", first: true, predicate: ["panel"], descendants: true }, { propertyName: "optionsContainer", first: true, predicate: ["optionsContainer"], descendants: true }, { propertyName: "overlayDir", first: true, predicate: i7.CdkConnectedOverlay, descendants: true }, { propertyName: "tags", predicate: i5.McTag, descendants: true }], exportAs: ["mcSelect"], usesInheritance: true, usesOnChanges: true, ngImport: i0__namespace, template: "<div cdk-overlay-origin\n     class=\"mc-select__trigger\"\n     (click)=\"toggle()\"\n     [class.mc-select__trigger_multiple]=\"multiple\"\n     #origin=\"cdkOverlayOrigin\"\n     #trigger>\n    <div class=\"mc-select__matcher\" [ngSwitch]=\"empty\">\n        <span class=\"mc-select__placeholder\" *ngSwitchCase=\"true\">{{ placeholder || '\\u00A0' }}</span>\n        <span *ngSwitchCase=\"false\" [ngSwitch]=\"!!customTrigger\">\n            <div *ngSwitchDefault [ngSwitch]=\"multiple\" class=\"mc-select__match-container\">\n                <span *ngSwitchCase=\"false\" class=\"mc-select__matcher-text\">{{ triggerValue }}</span>\n                <div *ngSwitchCase=\"true\" class=\"mc-select__match-list\">\n                    <mc-tag *ngFor=\"let option of triggerValues\"\n                            [disabled]=\"option.disabled || disabled\"\n                            [selectable]=\"false\"\n                            [class.mc-error]=\"errorState\">\n                        {{ option.viewValue }}\n                        <i mc-icon=\"mc-close-S_16\"\n                           *ngIf=\"!option.disabled && !disabled\"\n                           (click)=\"onRemoveMatcherItem(option, $event)\">\n                        </i>\n                    </mc-tag>\n                </div>\n                <div class=\"mc-select__match-hidden-text\" [style.display]=\"hiddenItems > 0 ? 'block' : 'none'\">\n                    {{ hiddenItemsTextFormatter(hiddenItemsText, hiddenItems) }}\n                </div>\n            </div>\n            <ng-content select=\"mc-select-trigger\" *ngSwitchCase=\"true\"></ng-content>\n        </span>\n    </div>\n\n    <div class=\"mc-select__cleaner\" *ngIf=\"canShowCleaner\" (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <div class=\"mc-select__arrow-wrapper\">\n        <i class=\"mc-select__arrow\" mc-icon=\"mc-angle-down-L_16\"></i>\n    </div>\n</div>\n\n<ng-template\n    cdk-connected-overlay\n    cdkConnectedOverlayLockPosition\n    [cdkConnectedOverlayHasBackdrop]=\"hasBackdrop\"\n    [cdkConnectedOverlayBackdropClass]=\"backdropClass\"\n    [cdkConnectedOverlayScrollStrategy]=\"scrollStrategy\"\n    [cdkConnectedOverlayOrigin]=\"origin\"\n    [cdkConnectedOverlayOpen]=\"panelOpen\"\n    [cdkConnectedOverlayPositions]=\"positions\"\n    [cdkConnectedOverlayMinWidth]=\"triggerRect?.width\"\n    [cdkConnectedOverlayOffsetY]=\"offsetY\"\n    (backdropClick)=\"close()\"\n    (attach)=\"onAttached()\"\n    (detach)=\"close()\">\n    <div\n        #panel\n        class=\"mc-select__panel {{ getPanelTheme() }}\"\n        [ngClass]=\"panelClass\"\n        [style.transformOrigin]=\"transformOrigin\"\n        [style.font-size.px]=\"triggerFontSize\"\n        (keydown)=\"handleKeydown($event)\">\n\n        <div *ngIf=\"search\" class=\"mc-select__search-container\">\n            <ng-content select=\"[mcSelectSearch]\"></ng-content>\n        </div>\n\n        <div #optionsContainer\n             class=\"mc-select__content\"\n             [@fadeInContent]=\"'showing'\"\n             (@fadeInContent.done)=\"panelDoneAnimatingStream.next($event.toState)\">\n\n            <div *ngIf=\"isEmptySearchResult\" class=\"mc-select__no-options-message\">\n                <ng-content select=\"[mc-select-search-empty-result]\"></ng-content>\n            </div>\n            <ng-content></ng-content>\n        </div>\n    </div>\n</ng-template>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);border:2px solid transparent;border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * 2px);top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * 2px);left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * 2px);right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * 2px);bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.mc-select{box-sizing:border-box;display:inline-block;width:100%;outline:none}.mc-select .mc-select__trigger{display:flex;box-sizing:border-box;position:relative;height:30px;height:var(--mc-select-size-height, 30px);cursor:pointer;padding-left:calc(16px - 1px);padding-left:calc(var(--mc-select-size-left-padding, 16px) - var(--mc-form-field-size-border-width, 1px));padding-right:calc(8px - 1px);padding-right:calc(var(--mc-select-size-right-padding, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-select .mc-select__trigger.mc-select__trigger_multiple{padding-left:calc(8px - 1px);padding-left:calc(var(--mc-select-size-left-padding-multiple, 8px) - var(--mc-form-field-size-border-width, 1px))}.mc-select .mc-select__trigger.mc-select__trigger_multiple .mc-tag.mc-disabled .mc-tag__text{margin-right:7px}.mc-select.mc-disabled .mc-select__trigger{-webkit-user-select:none;user-select:none;cursor:default}.mc-select__no-options-message{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);cursor:default;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px)}.mc-select__matcher{display:flex;align-items:center;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-select__matcher>span{width:100%}.mc-select__match-list{display:flex;flex-wrap:wrap;overflow:hidden;max-height:calc(30px - 1px);max-height:calc(var(--mc-select-size-height, 30px) - var(--mc-select-panel-size-border-width, 1px))}.mc-select__match-list .mc-tag{margin-right:4px}.mc-select__match-container{display:flex;flex-direction:row;justify-content:space-between;width:100%}.mc-select__match-container .mc-select__match-hidden-text{flex:0 0 70px;align-self:center;padding:0 8px;text-align:right}.mc-select__arrow-wrapper{align-self:center}.mc-form-field-appearance-fill .mc-select__arrow-wrapper,.mc-form-field-appearance-standard .mc-select__arrow-wrapper{transform:translateY(-50%)}.mc-form-field-appearance-outline .mc-select__arrow-wrapper{transform:translateY(-25%)}.mc-select__panel{min-width:100%;max-width:640px;max-width:var(--mc-select-panel-size-max-width, 640px);overflow:hidden;border-width:1px;border-width:var(--mc-select-panel-size-border-width, 1px);border-style:solid;border-bottom-left-radius:3px;border-bottom-left-radius:var(--mc-select-panel-size-border-radius, 3px);border-bottom-right-radius:3px;border-bottom-right-radius:var(--mc-select-panel-size-border-radius, 3px)}.mc-select__panel .mc-optgroup-label,.mc-select__panel .mc-option{font-size:inherit;line-height:32px;line-height:var(--mc-option-size-height, 32px);height:32px;height:var(--mc-option-size-height, 32px)}.mc-select__content{max-height:232px;max-height:var(--mc-select-panel-size-max-height, 232px);padding:4px 0;padding:var(--mc-select-panel-size-vertical-padding, 4px) 0;overflow:auto}.mc-select__content .cdk-virtual-scroll-viewport{min-height:232px-8px;min-height:var(--mc-select-panel-size-max-height, 232px)-8px;max-height:232px-8px;max-height:var(--mc-select-panel-size-max-height, 232px)-8px}.mc-form-field-type-select:not(.mc-disabled) .mc-form-field-flex{cursor:pointer}.mc-select__search-container{border-bottom-width:1px;border-bottom-style:solid}\n"], components: [{ type: i5__namespace.McTag, selector: "mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]", inputs: ["color", "selected", "value", "selectable", "removable", "disabled"], outputs: ["selectionChange", "destroyed", "removed"], exportAs: ["mcTag"] }, { type: i6__namespace.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i7__namespace.CdkOverlayOrigin, selector: "[cdk-overlay-origin], [overlay-origin], [cdkOverlayOrigin]", exportAs: ["cdkOverlayOrigin"] }, { type: i8__namespace.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i8__namespace.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { type: i8__namespace.NgSwitchDefault, selector: "[ngSwitchDefault]" }, { type: i8__namespace.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: i8__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i6__namespace.McIconCSSStyler, selector: "[mc-icon]" }, { type: i7__namespace.CdkConnectedOverlay, selector: "[cdk-connected-overlay], [connected-overlay], [cdkConnectedOverlay]", inputs: ["cdkConnectedOverlayViewportMargin", "cdkConnectedOverlayOpen", "cdkConnectedOverlayDisableClose", "cdkConnectedOverlayScrollStrategy", "cdkConnectedOverlayOffsetX", "cdkConnectedOverlayOffsetY", "cdkConnectedOverlayHasBackdrop", "cdkConnectedOverlayLockPosition", "cdkConnectedOverlayFlexibleDimensions", "cdkConnectedOverlayGrowAfterOpen", "cdkConnectedOverlayPush", "cdkConnectedOverlayPositions", "cdkConnectedOverlayOrigin", "cdkConnectedOverlayPositionStrategy", "cdkConnectedOverlayWidth", "cdkConnectedOverlayHeight", "cdkConnectedOverlayMinWidth", "cdkConnectedOverlayMinHeight", "cdkConnectedOverlayBackdropClass", "cdkConnectedOverlayPanelClass", "cdkConnectedOverlayTransformOriginOn"], outputs: ["backdropClick", "positionChange", "attach", "detach", "overlayKeydown", "overlayOutsideClick"], exportAs: ["cdkConnectedOverlay"] }, { type: i8__namespace.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }], animations: [
+            i2.mcSelectAnimations.transformPanel,
+            i2.mcSelectAnimations.fadeInContent
+        ], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelect, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-select',
+                        exportAs: 'mcSelect',
+                        templateUrl: 'select.html',
+                        styleUrls: ['./select.scss'],
+                        inputs: ['disabled', 'tabIndex'],
+                        encapsulation: i0.ViewEncapsulation.None,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        host: {
+                            '[attr.id]': 'id',
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null',
+                            class: 'mc-select',
+                            '[class.mc-disabled]': 'disabled',
+                            '[class.mc-invalid]': 'errorState',
+                            '(keydown)': 'handleKeydown($event)',
+                            '(focus)': 'onFocus()',
+                            '(blur)': 'onBlur()',
+                            '(window:resize)': 'calculateHiddenItems()'
+                        },
+                        animations: [
+                            i2.mcSelectAnimations.transformPanel,
+                            i2.mcSelectAnimations.fadeInContent
+                        ],
+                        providers: [
+                            { provide: i1.McFormFieldControl, useExisting: McSelect },
+                            { provide: i2.MC_OPTION_PARENT_COMPONENT, useExisting: McSelect }
+                        ]
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ChangeDetectorRef }, { type: i0__namespace.NgZone }, { type: i0__namespace.Renderer2 }, { type: i2__namespace.ErrorStateMatcher }, { type: i0__namespace.ElementRef }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [i4.NG_VALIDATORS]
+                        }] }, { type: i3__namespace.Directionality, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i4__namespace.NgForm, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i4__namespace.FormGroupDirective, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i1__namespace.McFormField, decorators: [{
+                            type: i0.Optional
+                        }] }, { type: i4__namespace.NgControl, decorators: [{
+                            type: i0.Self
+                        }, {
+                            type: i0.Optional
+                        }] }, { type: i4__namespace.NgModel, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: i4__namespace.FormControlName, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Self
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [i2.MC_SELECT_SCROLL_STRATEGY]
+                        }] }, { type: undefined, decorators: [{
+                            type: i0.Optional
+                        }, {
+                            type: i0.Inject,
+                            args: [i2.MC_VALIDATION]
+                        }] }];
+        }, propDecorators: { trigger: [{
+                    type: i0.ViewChild,
+                    args: ['trigger', { static: false }]
+                }], panel: [{
+                    type: i0.ViewChild,
+                    args: ['panel', { static: false }]
+                }], optionsContainer: [{
+                    type: i0.ViewChild,
+                    args: ['optionsContainer', { static: false }]
+                }], overlayDir: [{
+                    type: i0.ViewChild,
+                    args: [i7.CdkConnectedOverlay, { static: false }]
+                }], tags: [{
+                    type: i0.ViewChildren,
+                    args: [i5.McTag]
+                }], customTrigger: [{
+                    type: i0.ContentChild,
+                    args: [McSelectTrigger, { static: false }]
+                }], cleaner: [{
+                    type: i0.ContentChild,
+                    args: ['mcSelectCleaner', { static: true }]
+                }], options: [{
+                    type: i0.ContentChildren,
+                    args: [i2.McOption, { descendants: true }]
+                }], optionGroups: [{
+                    type: i0.ContentChildren,
+                    args: [i2.McOptgroup]
+                }], search: [{
+                    type: i0.ContentChild,
+                    args: [McSelectSearch, { static: false }]
+                }], hiddenItemsText: [{
+                    type: i0.Input
+                }], panelClass: [{
+                    type: i0.Input
+                }], backdropClass: [{
+                    type: i0.Input
+                }], errorStateMatcher: [{
+                    type: i0.Input
+                }], sortComparator: [{
+                    type: i0.Input
+                }], openedChange: [{
+                    type: i0.Output
+                }], openedStream: [{
+                    type: i0.Output,
+                    args: ['opened']
+                }], closedStream: [{
+                    type: i0.Output,
+                    args: ['closed']
+                }], selectionChange: [{
+                    type: i0.Output
+                }], valueChange: [{
+                    type: i0.Output
+                }], hasBackdrop: [{
+                    type: i0.Input
+                }], placeholder: [{
+                    type: i0.Input
+                }], required: [{
+                    type: i0.Input
+                }], multiple: [{
+                    type: i0.Input
+                }], compareWith: [{
+                    type: i0.Input
+                }], value: [{
+                    type: i0.Input
+                }], id: [{
+                    type: i0.Input
+                }], hiddenItemsTextFormatter: [{
+                    type: i0.Input
+                }] } });
 
     var McSelectModule = /** @class */ (function () {
         function McSelectModule() {
         }
         return McSelectModule;
     }());
-    McSelectModule.decorators = [
-        { type: core.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        overlay.OverlayModule,
-                        core$1.McOptionModule,
-                        icon.McIconModule,
-                        tags.McTagsModule
-                    ],
-                    exports: [
-                        formField.McFormFieldModule,
-                        McSelect,
-                        McSelectSearch,
-                        McSelectSearchEmptyResult,
-                        McSelectTrigger,
-                        core$1.McOptionModule,
-                        common.CommonModule
-                    ],
-                    declarations: [
-                        McSelect,
-                        McSelectSearch,
-                        McSelectSearchEmptyResult,
-                        McSelectTrigger
-                    ],
-                    providers: [core$1.MC_SELECT_SCROLL_STRATEGY_PROVIDER]
-                },] }
-    ];
+    /** @nocollapse */ McSelectModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McSelectModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectModule, declarations: [McSelect,
+            McSelectSearch,
+            McSelectSearchEmptyResult,
+            McSelectTrigger], imports: [i8.CommonModule,
+            i7.OverlayModule,
+            i2.McOptionModule,
+            i6.McIconModule,
+            i5.McTagsModule], exports: [i1.McFormFieldModule,
+            McSelect,
+            McSelectSearch,
+            McSelectSearchEmptyResult,
+            McSelectTrigger,
+            i2.McOptionModule,
+            i8.CommonModule] });
+    /** @nocollapse */ McSelectModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectModule, providers: [i2.MC_SELECT_SCROLL_STRATEGY_PROVIDER], imports: [[
+                i8.CommonModule,
+                i7.OverlayModule,
+                i2.McOptionModule,
+                i6.McIconModule,
+                i5.McTagsModule
+            ], i1.McFormFieldModule,
+            i2.McOptionModule,
+            i8.CommonModule] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSelectModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [
+                            i8.CommonModule,
+                            i7.OverlayModule,
+                            i2.McOptionModule,
+                            i6.McIconModule,
+                            i5.McTagsModule
+                        ],
+                        exports: [
+                            i1.McFormFieldModule,
+                            McSelect,
+                            McSelectSearch,
+                            McSelectSearchEmptyResult,
+                            McSelectTrigger,
+                            i2.McOptionModule,
+                            i8.CommonModule
+                        ],
+                        declarations: [
+                            McSelect,
+                            McSelectSearch,
+                            McSelectSearchEmptyResult,
+                            McSelectTrigger
+                        ],
+                        providers: [i2.MC_SELECT_SCROLL_STRATEGY_PROVIDER]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.

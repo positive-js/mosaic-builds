@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/input/ptsecurity-mosaic-input.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-input.js",
   "typings": "ptsecurity-mosaic-input.d.ts",
-  "metadata": "ptsecurity-mosaic-input.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/input"
 }

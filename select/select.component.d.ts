@@ -9,6 +9,7 @@ import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/f
 import { McInput } from '@ptsecurity/mosaic/input';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { Observable, Subject, Subscription } from 'rxjs';
+import * as i0 from "@angular/core";
 /** Change event object that is emitted when the select value has changed. */
 export declare class McSelectChange {
     source: McSelect;
@@ -25,10 +26,16 @@ export declare class McSelectSearch implements AfterContentInit, OnDestroy {
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     handleKeydown(event: KeyboardEvent): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McSelectSearch, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McSelectSearch, "[mcSelectSearch]", ["mcSelectSearch"], {}, {}, ["input"]>;
 }
 export declare class McSelectSearchEmptyResult {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McSelectSearchEmptyResult, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McSelectSearchEmptyResult, "[mc-select-search-empty-result]", ["mcSelectSearchEmptyResult"], {}, {}, never>;
 }
 export declare class McSelectTrigger {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McSelectTrigger, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McSelectTrigger, "mc-select-trigger", never, {}, {}, never>;
 }
 export declare class McSelectBase {
     elementRef: ElementRef;
@@ -299,5 +306,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
     private getOverlayWidth;
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
     private _compareWith;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McSelect, [null, null, null, null, null, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; self: true; }, null, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McSelect, "mc-select", ["mcSelect"], { "disabled": "disabled"; "tabIndex": "tabIndex"; "hiddenItemsText": "hiddenItemsText"; "panelClass": "panelClass"; "backdropClass": "backdropClass"; "errorStateMatcher": "errorStateMatcher"; "sortComparator": "sortComparator"; "hasBackdrop": "hasBackdrop"; "placeholder": "placeholder"; "required": "required"; "multiple": "multiple"; "compareWith": "compareWith"; "value": "value"; "id": "id"; "hiddenItemsTextFormatter": "hiddenItemsTextFormatter"; }, { "openedChange": "openedChange"; "openedStream": "opened"; "closedStream": "closed"; "selectionChange": "selectionChange"; "valueChange": "valueChange"; }, ["customTrigger", "cleaner", "search", "options", "optionGroups"], ["mc-select-trigger", "mc-cleaner", "[mcSelectSearch]", "[mc-select-search-empty-result]", "*"]>;
 }
 export {};

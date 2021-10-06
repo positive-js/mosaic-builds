@@ -5,6 +5,7 @@ import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { Subject } from 'rxjs';
 import { McDropdownPanel } from './dropdown.types';
+import * as i0 from "@angular/core";
 /** @docs-private */
 declare class McDropdownItemBase {
 }
@@ -42,5 +43,7 @@ export declare class McDropdownItem extends McDropdownItemMixinBase implements I
     handleMouseEnter(): void;
     /** Gets the label to be used when determining whether the option should be focused. */
     getLabel(): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McDropdownItem, [null, null, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McDropdownItem, "mc-dropdown-item, [mc-dropdown-item]", ["mcDropdownItem"], { "disabled": "disabled"; }, {}, ["icon"], ["*"]>;
 }
 export {};

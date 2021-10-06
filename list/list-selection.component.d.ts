@@ -4,6 +4,7 @@ import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { McLine, CanDisable, CanDisableCtor, HasTabIndexCtor, HasTabIndex, MultipleMode, McOptgroup } from '@ptsecurity/mosaic/core';
 import { Observable, Subject } from 'rxjs';
+import * as i0 from "@angular/core";
 export interface McOptionEvent {
     option: McListOption;
 }
@@ -53,6 +54,8 @@ export declare class McListOption implements OnDestroy, OnInit, IFocusableOption
     focus(): void;
     blur(): void;
     getHostElement(): HTMLElement;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McListOption, [null, null, null, null, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McListOption, "mc-list-option", ["mcListOption"], { "checkboxPosition": "checkboxPosition"; "value": "value"; "disabled": "disabled"; "showCheckbox": "showCheckbox"; "selected": "selected"; }, {}, ["lines"], ["*"]>;
 }
 export declare const MC_SELECTION_LIST_VALUE_ACCESSOR: any;
 export declare class McListSelectionChange {
@@ -138,4 +141,6 @@ export declare class McListSelection extends McListSelectionMixinBase implements
     private isValidIndex;
     private getOptionIndex;
     private onChange;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McListSelection, [null, null, { attribute: "multiple"; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McListSelection, "mc-list-selection", ["mcListSelection"], { "disabled": "disabled"; "autoSelect": "autoSelect"; "noUnselectLast": "noUnselectLast"; "horizontal": "horizontal"; "tabIndex": "tabIndex"; "compareWith": "compareWith"; }, { "selectionChange": "selectionChange"; }, ["options"], ["*"]>;
 }

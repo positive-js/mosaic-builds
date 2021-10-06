@@ -1,15 +1,21 @@
 import { A11yModule } from '@angular/cdk/a11y';
+import * as i3$1 from '@angular/cdk/overlay';
 import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
+import * as i8 from '@angular/cdk/portal';
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
+import * as i1 from '@angular/common';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, ElementRef, NgZone, Input, Output, Injectable, ChangeDetectorRef, Optional, Inject, ViewChild, forwardRef, InjectionToken, ViewContainerRef, Directive, Renderer2, ContentChild, NgModule } from '@angular/core';
+import { EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, Input, Output, Injectable, Optional, Inject, ViewChild, forwardRef, InjectionToken, Directive, ContentChild, NgModule } from '@angular/core';
+import * as i3 from '@ptsecurity/mosaic/button';
 import { McButtonModule } from '@ptsecurity/mosaic/button';
+import * as i4 from '@ptsecurity/mosaic/icon';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { take } from 'rxjs/operators';
-import { MC_DATE_FORMATS, DateAdapter } from '@ptsecurity/cdk/datetime';
+import * as i1$1 from '@ptsecurity/cdk/datetime';
+import { MC_DATE_FORMATS } from '@ptsecurity/cdk/datetime';
 import { Subject, Subscription, merge, of } from 'rxjs';
-import { Directionality } from '@angular/cdk/bidi';
+import * as i2 from '@angular/cdk/bidi';
 import { SPACE, ENTER, PAGE_DOWN, PAGE_UP, END, HOME, DOWN_ARROW, UP_ARROW, RIGHT_ARROW, LEFT_ARROW, TAB, ESCAPE, isLetterKey, hasModifierKey, isVerticalMovement, isHorizontalMovement } from '@ptsecurity/cdk/keycodes';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators } from '@angular/forms';
@@ -91,37 +97,42 @@ class McCalendarBody {
         });
     }
 }
-McCalendarBody.decorators = [
-    { type: Component, args: [{
-                selector: '[mc-calendar-body]',
-                exportAs: 'mcCalendarBody',
-                template: "<!--\n  If there's not enough space in the first row, create a separate label row. We mark this row as\n  aria-hidden because we don't want it to be read out as one of the weeks in the month.\n-->\n<tr *ngIf=\"firstRowOffset < labelMinRequiredCells\">\n    <td class=\"mc-calendar__body-label\" [attr.colspan]=\"numCols\">\n        {{ label }}\n    </td>\n</tr>\n\n<!-- Create the first row separately so we can include a special spacer cell. -->\n<tr *ngFor=\"let row of rows; let rowIndex = index\">\n    <!--\n      We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.\n      The aspect ratio of the table cells is maintained by setting the top and bottom padding as a\n      percentage of the width (a variant of the trick described here:\n      https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).\n    -->\n    <td *ngIf=\"rowIndex === 0 && firstRowOffset\"\n        class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"firstRowOffset\">\n        {{ firstRowOffset >= labelMinRequiredCells ? label : '' }}\n    </td>\n    <td *ngFor=\"let item of row; let colIndex = index\"\n        class=\"mc-calendar__body-cell\"\n        [ngClass]=\"item.cssClasses\"\n        [tabindex]=\"isActiveCell(rowIndex, colIndex) ? 0 : -1\"\n        [class.mc-calendar__body_disabled]=\"!item.enabled\"\n        [class.mc-calendar__body_active]=\"isActiveCell(rowIndex, colIndex)\"\n        (click)=\"cellClicked(item)\"\n        [style.width]=\"cellWidth\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        <div class=\"mc-calendar__body-cell-content\"\n             [class.mc-selected]=\"selectedValue === item.value\"\n             [class.mc-calendar__body-today]=\"todayValue === item.value\">\n            {{ item.displayValue }}\n        </div>\n    </td>\n</tr>\n",
-                host: {
-                    class: 'mc-calendar__body',
-                    role: 'grid',
-                    'aria-readonly': 'true'
-                },
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-calendar__body{min-width:calc(7 * var(--mc-datepicker-body-size-cell-min-size, $datepicker-body-size-cell-min-size))}.mc-calendar__body-label{text-align:left;padding:var(--mc-datepicker-body-size-label-paddings,8px 28px 12px 12px)}.mc-calendar__body-cell{position:relative;height:0;line-height:0;text-align:center;outline:none;cursor:pointer}.mc-calendar__body_disabled{cursor:default}.mc-calendar__body-cell-content{position:absolute;top:var(--mc-datepicker-body-size-cell-margin,5%);left:var(--mc-datepicker-body-size-cell-margin,5%);padding:var(--mc-datepicker-body-size-cell-padding,8px);display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:90%;height:90%;line-height:1;border-width:var(--mc-datepicker-body-size-cell-border-width,1px);border-style:solid}.cdk-high-contrast-active .mc-calendar__body-cell-content,.cdk-high-contrast-active :host .mc-calendar__body-cell-content{border:none}mc-month-view .mc-calendar__body-cell-content{justify-content:flex-end}mc-multi-year-view .mc-calendar__body-cell-content,mc-year-view .mc-calendar__body-cell-content{justify-content:center}.cdk-high-contrast-active .mc-datepicker__popup:not(:empty),.cdk-high-contrast-active .mc-selected{outline:1px solid}.cdk-high-contrast-active .mc-calendar__body-today{outline:1px dotted}.cdk-high-contrast-active :host .mc-datepicker__popup:not(:empty),.cdk-high-contrast-active :host .mc-selected{outline:1px solid}.cdk-high-contrast-active :host .mc-calendar__body-today{outline:1px dotted}[dir=rtl] .mc-calendar__body-label{text-align:right}"]
-            },] }
-];
-/** @nocollapse */
-McCalendarBody.ctorParameters = () => [
-    { type: ElementRef },
-    { type: NgZone }
-];
-McCalendarBody.propDecorators = {
-    label: [{ type: Input }],
-    rows: [{ type: Input }],
-    todayValue: [{ type: Input }],
-    selectedValue: [{ type: Input }],
-    labelMinRequiredCells: [{ type: Input }],
-    numCols: [{ type: Input }],
-    activeCell: [{ type: Input }],
-    cellAspectRatio: [{ type: Input }],
-    selectedValueChange: [{ type: Output }]
-};
+/** @nocollapse */ McCalendarBody.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McCalendarBody, deps: [{ token: i0.ElementRef }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McCalendarBody.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McCalendarBody, selector: "[mc-calendar-body]", inputs: { label: "label", rows: "rows", todayValue: "todayValue", selectedValue: "selectedValue", labelMinRequiredCells: "labelMinRequiredCells", numCols: "numCols", activeCell: "activeCell", cellAspectRatio: "cellAspectRatio" }, outputs: { selectedValueChange: "selectedValueChange" }, host: { attributes: { "role": "grid", "aria-readonly": "true" }, classAttribute: "mc-calendar__body" }, exportAs: ["mcCalendarBody"], usesOnChanges: true, ngImport: i0, template: "<!--\n  If there's not enough space in the first row, create a separate label row. We mark this row as\n  aria-hidden because we don't want it to be read out as one of the weeks in the month.\n-->\n<tr *ngIf=\"firstRowOffset < labelMinRequiredCells\">\n    <td class=\"mc-calendar__body-label\" [attr.colspan]=\"numCols\">\n        {{ label }}\n    </td>\n</tr>\n\n<!-- Create the first row separately so we can include a special spacer cell. -->\n<tr *ngFor=\"let row of rows; let rowIndex = index\">\n    <!--\n      We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.\n      The aspect ratio of the table cells is maintained by setting the top and bottom padding as a\n      percentage of the width (a variant of the trick described here:\n      https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).\n    -->\n    <td *ngIf=\"rowIndex === 0 && firstRowOffset\"\n        class=\"mc-calendar__body-label\"\n        [attr.colspan]=\"firstRowOffset\">\n        {{ firstRowOffset >= labelMinRequiredCells ? label : '' }}\n    </td>\n    <td *ngFor=\"let item of row; let colIndex = index\"\n        class=\"mc-calendar__body-cell\"\n        [ngClass]=\"item.cssClasses\"\n        [tabindex]=\"isActiveCell(rowIndex, colIndex) ? 0 : -1\"\n        [class.mc-calendar__body_disabled]=\"!item.enabled\"\n        [class.mc-calendar__body_active]=\"isActiveCell(rowIndex, colIndex)\"\n        (click)=\"cellClicked(item)\"\n        [style.width]=\"cellWidth\"\n        [style.paddingTop]=\"cellPadding\"\n        [style.paddingBottom]=\"cellPadding\">\n        <div class=\"mc-calendar__body-cell-content\"\n             [class.mc-selected]=\"selectedValue === item.value\"\n             [class.mc-calendar__body-today]=\"todayValue === item.value\">\n            {{ item.displayValue }}\n        </div>\n    </td>\n</tr>\n", styles: [".mc-calendar__body{min-width:calc(7 * $datepicker-body-size-cell-min-size);min-width:calc(7 * var(--mc-datepicker-body-size-cell-min-size, $datepicker-body-size-cell-min-size))}.mc-calendar__body-label{text-align:left;padding:8px 28px 12px 12px;padding:var(--mc-datepicker-body-size-label-paddings, 8px 28px 12px 12px)}.mc-calendar__body-cell{position:relative;height:0;line-height:0;text-align:center;outline:none;cursor:pointer}.mc-calendar__body_disabled{cursor:default}.mc-calendar__body-cell-content{position:absolute;top:5%;top:var(--mc-datepicker-body-size-cell-margin, 5%);left:5%;left:var(--mc-datepicker-body-size-cell-margin, 5%);padding:8px;padding:var(--mc-datepicker-body-size-cell-padding, 8px);display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:90%;height:90%;line-height:1;border-width:1px;border-width:var(--mc-datepicker-body-size-cell-border-width, 1px);border-style:solid}.cdk-high-contrast-active .mc-calendar__body-cell-content{border:none}.cdk-high-contrast-active :host .mc-calendar__body-cell-content{border:none}mc-month-view .mc-calendar__body-cell-content{justify-content:flex-end}mc-multi-year-view .mc-calendar__body-cell-content,mc-year-view .mc-calendar__body-cell-content{justify-content:center}.cdk-high-contrast-active .mc-datepicker__popup:not(:empty),.cdk-high-contrast-active .mc-selected{outline:solid 1px}.cdk-high-contrast-active .mc-calendar__body-today{outline:dotted 1px}.cdk-high-contrast-active :host .mc-datepicker__popup:not(:empty),.cdk-high-contrast-active :host .mc-selected{outline:solid 1px}.cdk-high-contrast-active :host .mc-calendar__body-today{outline:dotted 1px}[dir=rtl] .mc-calendar__body-label{text-align:right}\n"], directives: [{ type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McCalendarBody, decorators: [{
+            type: Component,
+            args: [{
+                    selector: '[mc-calendar-body]',
+                    exportAs: 'mcCalendarBody',
+                    templateUrl: 'calendar-body.html',
+                    styleUrls: ['calendar-body.scss'],
+                    host: {
+                        class: 'mc-calendar__body',
+                        role: 'grid',
+                        'aria-readonly': 'true'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.NgZone }]; }, propDecorators: { label: [{
+                type: Input
+            }], rows: [{
+                type: Input
+            }], todayValue: [{
+                type: Input
+            }], selectedValue: [{
+                type: Input
+            }], labelMinRequiredCells: [{
+                type: Input
+            }], numCols: [{
+                type: Input
+            }], activeCell: [{
+                type: Input
+            }], cellAspectRatio: [{
+                type: Input
+            }], selectedValueChange: [{
+                type: Output
+            }] } });
 
 /** @docs-private */
 function createMissingDateImplError(provider) {
@@ -159,10 +170,12 @@ class McDatepickerIntl {
         this.switchToMultiYearViewLabel = 'Choose month and year';
     }
 }
-/** @nocollapse */ McDatepickerIntl.ɵprov = i0.ɵɵdefineInjectable({ factory: function McDatepickerIntl_Factory() { return new McDatepickerIntl(); }, token: McDatepickerIntl, providedIn: "root" });
-McDatepickerIntl.decorators = [
-    { type: Injectable, args: [{ providedIn: 'root' },] }
-];
+/** @nocollapse */ McDatepickerIntl.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerIntl, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+/** @nocollapse */ McDatepickerIntl.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerIntl, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerIntl, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }] });
 
 // tslint:disable:no-magic-numbers
 const DAYS_PER_WEEK = 7;
@@ -373,34 +386,48 @@ class McMonthView {
         return this.dir && this.dir.value === 'rtl';
     }
 }
-McMonthView.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-month-view',
-                exportAs: 'mcMonthView',
-                template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n        <tr>\n            <th *ngFor=\"let day of weekdays\" [attr.aria-label]=\"day.long\">{{day.narrow}}</th>\n        </tr>\n        <tr>\n            <th class=\"mc-calendar__table-header-divider\" colspan=\"7\"></th>\n        </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"monthLabel\"\n           [rows]=\"weeks\"\n           [todayValue]=\"todayDate\"\n           [selectedValue]=\"selectedDate\"\n           [labelMinRequiredCells]=\"3\"\n           [activeCell]=\"dateAdapter.getDate(activeDate) - 1\"\n           (selectedValueChange)=\"dateSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] }
-];
-/** @nocollapse */
-McMonthView.ctorParameters = () => [
-    { type: ChangeDetectorRef },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DATE_FORMATS,] }] },
-    { type: DateAdapter, decorators: [{ type: Optional }] },
-    { type: Directionality, decorators: [{ type: Optional }] }
-];
-McMonthView.propDecorators = {
-    activeDate: [{ type: Input }],
-    selected: [{ type: Input }],
-    minDate: [{ type: Input }],
-    maxDate: [{ type: Input }],
-    dateFilter: [{ type: Input }],
-    dateClass: [{ type: Input }],
-    selectedChange: [{ type: Output }],
-    userSelection: [{ type: Output }],
-    activeDateChange: [{ type: Output }],
-    mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody, { static: false },] }]
-};
+/** @nocollapse */ McMonthView.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McMonthView, deps: [{ token: i0.ChangeDetectorRef }, { token: MC_DATE_FORMATS, optional: true }, { token: i1$1.DateAdapter, optional: true }, { token: i2.Directionality, optional: true }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McMonthView.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McMonthView, selector: "mc-month-view", inputs: { activeDate: "activeDate", selected: "selected", minDate: "minDate", maxDate: "maxDate", dateFilter: "dateFilter", dateClass: "dateClass" }, outputs: { selectedChange: "selectedChange", userSelection: "userSelection", activeDateChange: "activeDateChange" }, viewQueries: [{ propertyName: "mcCalendarBody", first: true, predicate: McCalendarBody, descendants: true }], exportAs: ["mcMonthView"], ngImport: i0, template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n        <tr>\n            <th *ngFor=\"let day of weekdays\" [attr.aria-label]=\"day.long\">{{day.narrow}}</th>\n        </tr>\n        <tr>\n            <th class=\"mc-calendar__table-header-divider\" colspan=\"7\"></th>\n        </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"monthLabel\"\n           [rows]=\"weeks\"\n           [todayValue]=\"todayDate\"\n           [selectedValue]=\"selectedDate\"\n           [labelMinRequiredCells]=\"3\"\n           [activeCell]=\"dateAdapter.getDate(activeDate) - 1\"\n           (selectedValueChange)=\"dateSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n", components: [{ type: McCalendarBody, selector: "[mc-calendar-body]", inputs: ["label", "rows", "todayValue", "selectedValue", "labelMinRequiredCells", "numCols", "activeCell", "cellAspectRatio"], outputs: ["selectedValueChange"], exportAs: ["mcCalendarBody"] }], directives: [{ type: i1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McMonthView, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-month-view',
+                    exportAs: 'mcMonthView',
+                    templateUrl: 'month-view.html',
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [MC_DATE_FORMATS]
+                }] }, { type: i1$1.DateAdapter, decorators: [{
+                    type: Optional
+                }] }, { type: i2.Directionality, decorators: [{
+                    type: Optional
+                }] }]; }, propDecorators: { activeDate: [{
+                type: Input
+            }], selected: [{
+                type: Input
+            }], minDate: [{
+                type: Input
+            }], maxDate: [{
+                type: Input
+            }], dateFilter: [{
+                type: Input
+            }], dateClass: [{
+                type: Input
+            }], selectedChange: [{
+                type: Output
+            }], userSelection: [{
+                type: Output
+            }], activeDateChange: [{
+                type: Output
+            }], mcCalendarBody: [{
+                type: ViewChild,
+                args: [McCalendarBody, { static: false }]
+            }] } });
 
 // tslint:disable:no-magic-numbers
 const yearsPerPage = 24;
@@ -580,32 +607,41 @@ class McMultiYearView {
         return this.dir && this.dir.value === 'rtl';
     }
 }
-McMultiYearView.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-multi-year-view',
-                exportAs: 'mcMultiYearView',
-                template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [rows]=\"years\"\n           [todayValue]=\"todayYear\"\n           [selectedValue]=\"selectedYear\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"getActiveCell()\"\n           (selectedValueChange)=\"onYearSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] }
-];
-/** @nocollapse */
-McMultiYearView.ctorParameters = () => [
-    { type: ChangeDetectorRef },
-    { type: DateAdapter, decorators: [{ type: Optional }] },
-    { type: Directionality, decorators: [{ type: Optional }] }
-];
-McMultiYearView.propDecorators = {
-    activeDate: [{ type: Input }],
-    selected: [{ type: Input }],
-    minDate: [{ type: Input }],
-    maxDate: [{ type: Input }],
-    dateFilter: [{ type: Input }],
-    selectedChange: [{ type: Output }],
-    yearSelected: [{ type: Output }],
-    activeDateChange: [{ type: Output }],
-    mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody, { static: false },] }]
-};
+/** @nocollapse */ McMultiYearView.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McMultiYearView, deps: [{ token: i0.ChangeDetectorRef }, { token: i1$1.DateAdapter, optional: true }, { token: i2.Directionality, optional: true }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McMultiYearView.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McMultiYearView, selector: "mc-multi-year-view", inputs: { activeDate: "activeDate", selected: "selected", minDate: "minDate", maxDate: "maxDate", dateFilter: "dateFilter" }, outputs: { selectedChange: "selectedChange", yearSelected: "yearSelected", activeDateChange: "activeDateChange" }, viewQueries: [{ propertyName: "mcCalendarBody", first: true, predicate: McCalendarBody, descendants: true }], exportAs: ["mcMultiYearView"], ngImport: i0, template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [rows]=\"years\"\n           [todayValue]=\"todayYear\"\n           [selectedValue]=\"selectedYear\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"getActiveCell()\"\n           (selectedValueChange)=\"onYearSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n", components: [{ type: McCalendarBody, selector: "[mc-calendar-body]", inputs: ["label", "rows", "todayValue", "selectedValue", "labelMinRequiredCells", "numCols", "activeCell", "cellAspectRatio"], outputs: ["selectedValueChange"], exportAs: ["mcCalendarBody"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McMultiYearView, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-multi-year-view',
+                    exportAs: 'mcMultiYearView',
+                    templateUrl: 'multi-year-view.html',
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }, { type: i1$1.DateAdapter, decorators: [{
+                    type: Optional
+                }] }, { type: i2.Directionality, decorators: [{
+                    type: Optional
+                }] }]; }, propDecorators: { activeDate: [{
+                type: Input
+            }], selected: [{
+                type: Input
+            }], minDate: [{
+                type: Input
+            }], maxDate: [{
+                type: Input
+            }], dateFilter: [{
+                type: Input
+            }], selectedChange: [{
+                type: Output
+            }], yearSelected: [{
+                type: Output
+            }], activeDateChange: [{
+                type: Output
+            }], mcCalendarBody: [{
+                type: ViewChild,
+                args: [McCalendarBody, { static: false }]
+            }] } });
 
 /**
  * An internal component used to display a single year in the datepicker.
@@ -815,33 +851,46 @@ class McYearView {
         return this.dir && this.dir.value === 'rtl';
     }
 }
-McYearView.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-year-view',
-                exportAs: 'mcYearView',
-                template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"yearLabel\"\n           [rows]=\"months\"\n           [todayValue]=\"todayMonth\"\n           [selectedValue]=\"selectedMonth\"\n           [labelMinRequiredCells]=\"2\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"dateAdapter.getMonth(activeDate)\"\n           (selectedValueChange)=\"onMonthSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n",
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] }
-];
-/** @nocollapse */
-McYearView.ctorParameters = () => [
-    { type: ChangeDetectorRef },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DATE_FORMATS,] }] },
-    { type: DateAdapter, decorators: [{ type: Optional }] },
-    { type: Directionality, decorators: [{ type: Optional }] }
-];
-McYearView.propDecorators = {
-    activeDate: [{ type: Input }],
-    selected: [{ type: Input }],
-    minDate: [{ type: Input }],
-    maxDate: [{ type: Input }],
-    dateFilter: [{ type: Input }],
-    selectedChange: [{ type: Output }],
-    monthSelected: [{ type: Output }],
-    activeDateChange: [{ type: Output }],
-    mcCalendarBody: [{ type: ViewChild, args: [McCalendarBody, { static: false },] }]
-};
+/** @nocollapse */ McYearView.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McYearView, deps: [{ token: i0.ChangeDetectorRef }, { token: MC_DATE_FORMATS, optional: true }, { token: i1$1.DateAdapter, optional: true }, { token: i2.Directionality, optional: true }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McYearView.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McYearView, selector: "mc-year-view", inputs: { activeDate: "activeDate", selected: "selected", minDate: "minDate", maxDate: "maxDate", dateFilter: "dateFilter" }, outputs: { selectedChange: "selectedChange", monthSelected: "monthSelected", activeDateChange: "activeDateChange" }, viewQueries: [{ propertyName: "mcCalendarBody", first: true, predicate: McCalendarBody, descendants: true }], exportAs: ["mcYearView"], ngImport: i0, template: "<table class=\"mc-calendar__table\">\n    <thead class=\"mc-calendar__table-header\">\n    <tr>\n        <th class=\"mc-calendar__table-header-divider\" colspan=\"4\"></th>\n    </tr>\n    </thead>\n    <tbody mc-calendar-body\n           [label]=\"yearLabel\"\n           [rows]=\"months\"\n           [todayValue]=\"todayMonth\"\n           [selectedValue]=\"selectedMonth\"\n           [labelMinRequiredCells]=\"2\"\n           [numCols]=\"4\"\n           [cellAspectRatio]=\"4 / 7\"\n           [activeCell]=\"dateAdapter.getMonth(activeDate)\"\n           (selectedValueChange)=\"onMonthSelected($event)\"\n           (keydown)=\"handleCalendarBodyKeydown($event)\">\n    </tbody>\n</table>\n", components: [{ type: McCalendarBody, selector: "[mc-calendar-body]", inputs: ["label", "rows", "todayValue", "selectedValue", "labelMinRequiredCells", "numCols", "activeCell", "cellAspectRatio"], outputs: ["selectedValueChange"], exportAs: ["mcCalendarBody"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McYearView, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-year-view',
+                    exportAs: 'mcYearView',
+                    templateUrl: 'year-view.html',
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [MC_DATE_FORMATS]
+                }] }, { type: i1$1.DateAdapter, decorators: [{
+                    type: Optional
+                }] }, { type: i2.Directionality, decorators: [{
+                    type: Optional
+                }] }]; }, propDecorators: { activeDate: [{
+                type: Input
+            }], selected: [{
+                type: Input
+            }], minDate: [{
+                type: Input
+            }], maxDate: [{
+                type: Input
+            }], dateFilter: [{
+                type: Input
+            }], selectedChange: [{
+                type: Output
+            }], monthSelected: [{
+                type: Output
+            }], activeDateChange: [{
+                type: Output
+            }], mcCalendarBody: [{
+                type: ViewChild,
+                args: [McCalendarBody, { static: false }]
+            }] } });
 
 /**
  * Possible views for the calendar.
@@ -954,26 +1003,31 @@ class McCalendarHeader {
         return Math.floor(firstYear / yearsPerPage) === Math.floor(secondYear / yearsPerPage);
     }
 }
-McCalendarHeader.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-calendar-header',
-                template: "<button mc-button\n        [tabindex]=\"'-1'\"\n        class=\"mc-button_transparent mc-calendar__period-button\"\n        (click)=\"currentPeriodClicked()\">\n    {{ periodButtonText }}\n\n    <i class=\"mc mc-icon\"\n       [class.mc-angle-up-M_16]=\"calendar.currentView !== 'month'\"\n       [class.mc-angle-down-M_16]=\"calendar.currentView === 'month'\">\n    </i>\n</button>\n\n<div class=\"mc-calendar-spacer\"></div>\n\n<button mc-button\n        [tabindex]=\"'-1'\"\n        class=\"mc-button_transparent mc-calendar__previous-button\"\n        [disabled]=\"!previousEnabled()\"\n        (click)=\"previousClicked()\">\n\n    <i mc-icon=\"mc-angle-left-L_16\"></i>\n</button>\n\n<button mc-button\n        [tabindex]=\"'-1'\"\n        class=\"mc-button_transparent mc-calendar__next-button\"\n        [disabled]=\"!nextEnabled()\"\n        (click)=\"nextClicked()\">\n\n    <i mc-icon=\"mc-angle-right-L_16\"></i>\n</button>\n",
-                exportAs: 'mcCalendarHeader',
-                host: {
-                    class: 'mc-calendar-header'
-                },
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush
-            },] }
-];
-/** @nocollapse */
-McCalendarHeader.ctorParameters = () => [
-    { type: McDatepickerIntl },
-    { type: McCalendar, decorators: [{ type: Inject, args: [forwardRef(() => McCalendar),] }] },
-    { type: DateAdapter, decorators: [{ type: Optional }] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DATE_FORMATS,] }] },
-    { type: ChangeDetectorRef }
-];
+/** @nocollapse */ McCalendarHeader.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McCalendarHeader, deps: [{ token: McDatepickerIntl }, { token: forwardRef(() => McCalendar) }, { token: i1$1.DateAdapter, optional: true }, { token: MC_DATE_FORMATS, optional: true }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McCalendarHeader.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McCalendarHeader, selector: "mc-calendar-header", host: { classAttribute: "mc-calendar-header" }, exportAs: ["mcCalendarHeader"], ngImport: i0, template: "<button mc-button\n        [tabindex]=\"'-1'\"\n        class=\"mc-button_transparent mc-calendar__period-button\"\n        (click)=\"currentPeriodClicked()\">\n    {{ periodButtonText }}\n\n    <i class=\"mc mc-icon\"\n       [class.mc-angle-up-M_16]=\"calendar.currentView !== 'month'\"\n       [class.mc-angle-down-M_16]=\"calendar.currentView === 'month'\">\n    </i>\n</button>\n\n<div class=\"mc-calendar-spacer\"></div>\n\n<button mc-button\n        [tabindex]=\"'-1'\"\n        class=\"mc-button_transparent mc-calendar__previous-button\"\n        [disabled]=\"!previousEnabled()\"\n        (click)=\"previousClicked()\">\n\n    <i mc-icon=\"mc-angle-left-L_16\"></i>\n</button>\n\n<button mc-button\n        [tabindex]=\"'-1'\"\n        class=\"mc-button_transparent mc-calendar__next-button\"\n        [disabled]=\"!nextEnabled()\"\n        (click)=\"nextClicked()\">\n\n    <i mc-icon=\"mc-angle-right-L_16\"></i>\n</button>\n", components: [{ type: i3.McButton, selector: "button[mc-button]", inputs: ["disabled", "color"] }, { type: i4.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i3.McButtonCssStyler, selector: "button[mc-button], a[mc-button]" }, { type: i4.McIconCSSStyler, selector: "[mc-icon]" }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McCalendarHeader, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-calendar-header',
+                    templateUrl: 'calendar-header.html',
+                    exportAs: 'mcCalendarHeader',
+                    host: {
+                        class: 'mc-calendar-header'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: McDatepickerIntl }, { type: McCalendar, decorators: [{
+                    type: Inject,
+                    args: [forwardRef(() => McCalendar)]
+                }] }, { type: i1$1.DateAdapter, decorators: [{
+                    type: Optional
+                }] }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [MC_DATE_FORMATS]
+                }] }, { type: i0.ChangeDetectorRef }]; } });
 /**
  * A calendar that is used as part of the datepicker.
  * @docs-private
@@ -1139,43 +1193,62 @@ class McCalendar {
         return this.monthView || this.yearView || this.multiYearView;
     }
 }
-McCalendar.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-calendar',
-                exportAs: 'mcCalendar',
-                template: "<ng-template [cdkPortalOutlet]=\"calendarHeaderPortal\"></ng-template>\n\n<div class=\"mc-calendar__content\" [ngSwitch]=\"currentView\">\n    <mc-month-view\n        *ngSwitchCase=\"'month'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        [dateClass]=\"dateClass\"\n        (selectedChange)=\"dateSelected($event)\"\n        (userSelection)=\"userSelected()\">\n    </mc-month-view>\n\n    <mc-year-view\n        *ngSwitchCase=\"'year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (monthSelected)=\"monthSelectedInYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'multi-year')\">\n    </mc-year-view>\n\n    <mc-multi-year-view\n        *ngSwitchCase=\"'multi-year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (yearSelected)=\"yearSelectedInMultiYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'month')\">\n    </mc-multi-year-view>\n</div>\n",
-                host: {
-                    class: 'mc-calendar'
-                },
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-calendar{display:block}.mc-calendar-header{display:flex;padding:var(--mc-datepicker-calendar-size-padding-top,16px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-blocks,12px) var(--mc-datepicker-calendar-size-padding-horizontal,8px)}.mc-calendar__content{padding:0 var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px);outline:none}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__period-button .mc-icon{vertical-align:baseline}.mc-calendar__previous-button:after{border-left-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-prev-icon-transform,translateX(2px) rotate(-45deg))}.mc-calendar__next-button:after{border-right-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-nex-icon-transform,translateX(-2px) rotate(45deg))}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;height:30px}.mc-calendar__table-header th.mc-calendar__table-header-divider{position:relative;height:calc(var(--mc-datepicker-calendar-size-padding-blocks, 12px) - 2px)}.mc-calendar__table-header th.mc-calendar__table-header-divider:after{content:\"\";position:absolute;top:0;left:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));right:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));height:var(--mc-datepicker-calendar-size-divider-width,1px)}"]
-            },] }
-];
-/** @nocollapse */
-McCalendar.ctorParameters = () => [
-    { type: McDatepickerIntl },
-    { type: DateAdapter, decorators: [{ type: Optional }] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DATE_FORMATS,] }] },
-    { type: ChangeDetectorRef }
-];
-McCalendar.propDecorators = {
-    startAt: [{ type: Input }],
-    selected: [{ type: Input }],
-    minDate: [{ type: Input }],
-    maxDate: [{ type: Input }],
-    headerComponent: [{ type: Input }],
-    startView: [{ type: Input }],
-    dateFilter: [{ type: Input }],
-    dateClass: [{ type: Input }],
-    selectedChange: [{ type: Output }],
-    yearSelected: [{ type: Output }],
-    monthSelected: [{ type: Output }],
-    userSelection: [{ type: Output }],
-    monthView: [{ type: ViewChild, args: [McMonthView, { static: false },] }],
-    yearView: [{ type: ViewChild, args: [McYearView, { static: false },] }],
-    multiYearView: [{ type: ViewChild, args: [McMultiYearView, { static: false },] }]
-};
+/** @nocollapse */ McCalendar.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McCalendar, deps: [{ token: McDatepickerIntl }, { token: i1$1.DateAdapter, optional: true }, { token: MC_DATE_FORMATS, optional: true }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McCalendar.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McCalendar, selector: "mc-calendar", inputs: { startAt: "startAt", selected: "selected", minDate: "minDate", maxDate: "maxDate", headerComponent: "headerComponent", startView: "startView", dateFilter: "dateFilter", dateClass: "dateClass" }, outputs: { selectedChange: "selectedChange", yearSelected: "yearSelected", monthSelected: "monthSelected", userSelection: "userSelection" }, host: { classAttribute: "mc-calendar" }, viewQueries: [{ propertyName: "monthView", first: true, predicate: McMonthView, descendants: true }, { propertyName: "yearView", first: true, predicate: McYearView, descendants: true }, { propertyName: "multiYearView", first: true, predicate: McMultiYearView, descendants: true }], exportAs: ["mcCalendar"], usesOnChanges: true, ngImport: i0, template: "<ng-template [cdkPortalOutlet]=\"calendarHeaderPortal\"></ng-template>\n\n<div class=\"mc-calendar__content\" [ngSwitch]=\"currentView\">\n    <mc-month-view\n        *ngSwitchCase=\"'month'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        [dateClass]=\"dateClass\"\n        (selectedChange)=\"dateSelected($event)\"\n        (userSelection)=\"userSelected()\">\n    </mc-month-view>\n\n    <mc-year-view\n        *ngSwitchCase=\"'year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (monthSelected)=\"monthSelectedInYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'multi-year')\">\n    </mc-year-view>\n\n    <mc-multi-year-view\n        *ngSwitchCase=\"'multi-year'\"\n        [(activeDate)]=\"activeDate\"\n        [selected]=\"selected\"\n        [dateFilter]=\"dateFilter\"\n        [maxDate]=\"maxDate\"\n        [minDate]=\"minDate\"\n        (yearSelected)=\"yearSelectedInMultiYearView($event)\"\n        (selectedChange)=\"goToDateInView($event, 'month')\">\n    </mc-multi-year-view>\n</div>\n", styles: [".mc-calendar{display:block}.mc-calendar-header{display:flex;padding:16px 8px 12px;padding:var(--mc-datepicker-calendar-size-padding-top, 16px) var(--mc-datepicker-calendar-size-padding-horizontal, 8px) var(--mc-datepicker-calendar-size-padding-blocks, 12px) var(--mc-datepicker-calendar-size-padding-horizontal, 8px)}.mc-calendar__content{padding:0 8px 8px;padding:0 var(--mc-datepicker-calendar-size-padding-horizontal, 8px) var(--mc-datepicker-calendar-size-padding-horizontal, 8px) var(--mc-datepicker-calendar-size-padding-horizontal, 8px);outline:none}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__period-button .mc-icon{vertical-align:baseline}.mc-calendar__previous-button:after{border-left-width:2px;border-left-width:var(--mc-datepicker-calendar-size-icon-border-width, 2px);transform:translate(2px) rotate(-45deg);transform:var(--mc-datepicker-calendar-size-icon-prev-icon-transform, translateX(2px) rotate(-45deg))}.mc-calendar__next-button:after{border-right-width:2px;border-right-width:var(--mc-datepicker-calendar-size-icon-border-width, 2px);transform:translate(-2px) rotate(45deg);transform:var(--mc-datepicker-calendar-size-icon-nex-icon-transform, translateX(-2px) rotate(45deg))}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;height:30px}.mc-calendar__table-header th.mc-calendar__table-header-divider{position:relative;height:calc(12px - 2px);height:calc(var(--mc-datepicker-calendar-size-padding-blocks, 12px) - 2px)}.mc-calendar__table-header th.mc-calendar__table-header-divider:after{content:\"\";position:absolute;top:0;left:calc(-1 * 8px);left:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));right:calc(-1 * 8px);right:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));height:1px;height:var(--mc-datepicker-calendar-size-divider-width, 1px)}\n"], components: [{ type: McMonthView, selector: "mc-month-view", inputs: ["activeDate", "selected", "minDate", "maxDate", "dateFilter", "dateClass"], outputs: ["selectedChange", "userSelection", "activeDateChange"], exportAs: ["mcMonthView"] }, { type: McYearView, selector: "mc-year-view", inputs: ["activeDate", "selected", "minDate", "maxDate", "dateFilter"], outputs: ["selectedChange", "monthSelected", "activeDateChange"], exportAs: ["mcYearView"] }, { type: McMultiYearView, selector: "mc-multi-year-view", inputs: ["activeDate", "selected", "minDate", "maxDate", "dateFilter"], outputs: ["selectedChange", "yearSelected", "activeDateChange"], exportAs: ["mcMultiYearView"] }], directives: [{ type: i8.CdkPortalOutlet, selector: "[cdkPortalOutlet]", inputs: ["cdkPortalOutlet"], outputs: ["attached"], exportAs: ["cdkPortalOutlet"] }, { type: i1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McCalendar, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-calendar',
+                    exportAs: 'mcCalendar',
+                    templateUrl: 'calendar.html',
+                    styleUrls: ['calendar.scss'],
+                    host: {
+                        class: 'mc-calendar'
+                    },
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: McDatepickerIntl }, { type: i1$1.DateAdapter, decorators: [{
+                    type: Optional
+                }] }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [MC_DATE_FORMATS]
+                }] }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { startAt: [{
+                type: Input
+            }], selected: [{
+                type: Input
+            }], minDate: [{
+                type: Input
+            }], maxDate: [{
+                type: Input
+            }], headerComponent: [{
+                type: Input
+            }], startView: [{
+                type: Input
+            }], dateFilter: [{
+                type: Input
+            }], dateClass: [{
+                type: Input
+            }], selectedChange: [{
+                type: Output
+            }], yearSelected: [{
+                type: Output
+            }], monthSelected: [{
+                type: Output
+            }], userSelection: [{
+                type: Output
+            }], monthView: [{
+                type: ViewChild,
+                args: [McMonthView, { static: false }]
+            }], yearView: [{
+                type: ViewChild,
+                args: [McYearView, { static: false }]
+            }], multiYearView: [{
+                type: ViewChild,
+                args: [McMultiYearView, { static: false }]
+            }] } });
 
 /**
  * Animations used by the mosaic datepicker.
@@ -1252,32 +1325,34 @@ class McDatepickerContent {
         this.changeDetectorRef.markForCheck();
     }
 }
-McDatepickerContent.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-datepicker__content',
-                exportAs: 'mcDatepickerContent',
-                template: "<mc-calendar [id]=\"datepicker.id\"\n             [ngClass]=\"datepicker.panelClass\"\n             [startAt]=\"datepicker.startAt\"\n             [startView]=\"datepicker.startView\"\n             [minDate]=\"datepicker.minDate\"\n             [maxDate]=\"datepicker.maxDate\"\n             [dateFilter]=\"datepicker.dateFilter\"\n             [headerComponent]=\"datepicker.calendarHeaderComponent\"\n             [selected]=\"datepicker.selected\"\n             [dateClass]=\"datepicker.dateClass\"\n             [@fadeInCalendar]=\"'enter'\"\n             (selectedChange)=\"datepicker.select($event)\"\n             (yearSelected)=\"datepicker.selectYear($event)\"\n             (monthSelected)=\"datepicker.selectMonth($event)\"\n             (userSelection)=\"datepicker.close()\">\n</mc-calendar>\n",
-                host: {
-                    class: 'mc-datepicker__content',
-                    '[@transformPanel]': 'animationState',
-                    '(@transformPanel.done)': 'animationDone.next()'
-                },
-                animations: [
-                    mcDatepickerAnimations.transformPanel,
-                    mcDatepickerAnimations.fadeInCalendar
-                ],
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-calendar{display:block}.mc-calendar-header{display:flex;padding:var(--mc-datepicker-calendar-size-padding-top,16px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-blocks,12px) var(--mc-datepicker-calendar-size-padding-horizontal,8px)}.mc-calendar__content{padding:0 var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px) var(--mc-datepicker-calendar-size-padding-horizontal,8px);outline:none}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__period-button .mc-icon{vertical-align:baseline}.mc-calendar__previous-button:after{border-left-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-prev-icon-transform,translateX(2px) rotate(-45deg))}.mc-calendar__next-button:after{border-right-width:var(--mc-datepicker-calendar-size-icon-border-width,2px);transform:var(--mc-datepicker-calendar-size-icon-nex-icon-transform,translateX(-2px) rotate(45deg))}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;height:30px}.mc-calendar__table-header th.mc-calendar__table-header-divider{position:relative;height:calc(var(--mc-datepicker-calendar-size-padding-blocks, 12px) - 2px)}.mc-calendar__table-header th.mc-calendar__table-header-divider:after{content:\"\";position:absolute;top:0;left:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));right:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));height:var(--mc-datepicker-calendar-size-divider-width,1px)}.mc-datepicker__content{display:block;border-width:1px;border-style:solid}.mc-datepicker__content .mc-calendar{width:296px;height:348px}.mc-datepicker__content .mc-calendar__next-button[disabled],.mc-datepicker__content .mc-calendar__previous-button[disabled]{border:0}"]
-            },] }
-];
-/** @nocollapse */
-McDatepickerContent.ctorParameters = () => [
-    { type: ChangeDetectorRef }
-];
-McDatepickerContent.propDecorators = {
-    calendar: [{ type: ViewChild, args: [McCalendar,] }]
-};
+/** @nocollapse */ McDatepickerContent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerContent, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McDatepickerContent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McDatepickerContent, selector: "mc-datepicker__content", host: { listeners: { "@transformPanel.done": "animationDone.next()" }, properties: { "@transformPanel": "animationState" }, classAttribute: "mc-datepicker__content" }, viewQueries: [{ propertyName: "calendar", first: true, predicate: McCalendar, descendants: true }], exportAs: ["mcDatepickerContent"], ngImport: i0, template: "<mc-calendar [id]=\"datepicker.id\"\n             [ngClass]=\"datepicker.panelClass\"\n             [startAt]=\"datepicker.startAt\"\n             [startView]=\"datepicker.startView\"\n             [minDate]=\"datepicker.minDate\"\n             [maxDate]=\"datepicker.maxDate\"\n             [dateFilter]=\"datepicker.dateFilter\"\n             [headerComponent]=\"datepicker.calendarHeaderComponent\"\n             [selected]=\"datepicker.selected\"\n             [dateClass]=\"datepicker.dateClass\"\n             [@fadeInCalendar]=\"'enter'\"\n             (selectedChange)=\"datepicker.select($event)\"\n             (yearSelected)=\"datepicker.selectYear($event)\"\n             (monthSelected)=\"datepicker.selectMonth($event)\"\n             (userSelection)=\"datepicker.close()\">\n</mc-calendar>\n", styles: [".mc-calendar{display:block}.mc-calendar-header{display:flex;padding:16px 8px 12px;padding:var(--mc-datepicker-calendar-size-padding-top, 16px) var(--mc-datepicker-calendar-size-padding-horizontal, 8px) var(--mc-datepicker-calendar-size-padding-blocks, 12px) var(--mc-datepicker-calendar-size-padding-horizontal, 8px)}.mc-calendar__content{padding:0 8px 8px;padding:0 var(--mc-datepicker-calendar-size-padding-horizontal, 8px) var(--mc-datepicker-calendar-size-padding-horizontal, 8px) var(--mc-datepicker-calendar-size-padding-horizontal, 8px);outline:none}.mc-calendar-spacer{flex:1 1 auto}.mc-calendar__period-button{min-width:0}.mc-calendar__period-button .mc-icon{vertical-align:baseline}.mc-calendar__previous-button:after{border-left-width:2px;border-left-width:var(--mc-datepicker-calendar-size-icon-border-width, 2px);transform:translate(2px) rotate(-45deg);transform:var(--mc-datepicker-calendar-size-icon-prev-icon-transform, translateX(2px) rotate(-45deg))}.mc-calendar__next-button:after{border-right-width:2px;border-right-width:var(--mc-datepicker-calendar-size-icon-border-width, 2px);transform:translate(-2px) rotate(45deg);transform:var(--mc-datepicker-calendar-size-icon-nex-icon-transform, translateX(-2px) rotate(45deg))}.mc-calendar__table{border-spacing:0;border-collapse:collapse;width:100%}.mc-calendar__table-header th{text-align:center;height:30px}.mc-calendar__table-header th.mc-calendar__table-header-divider{position:relative;height:calc(12px - 2px);height:calc(var(--mc-datepicker-calendar-size-padding-blocks, 12px) - 2px)}.mc-calendar__table-header th.mc-calendar__table-header-divider:after{content:\"\";position:absolute;top:0;left:calc(-1 * 8px);left:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));right:calc(-1 * 8px);right:calc(-1 * var(--mc-datepicker-calendar-size-padding-horizontal, 8px));height:1px;height:var(--mc-datepicker-calendar-size-divider-width, 1px)}.mc-datepicker__content{display:block;border-width:1px;border-style:solid}.mc-datepicker__content .mc-calendar{width:296px;height:348px}.mc-datepicker__content .mc-calendar__next-button[disabled],.mc-datepicker__content .mc-calendar__previous-button[disabled]{border:0}\n"], components: [{ type: McCalendar, selector: "mc-calendar", inputs: ["startAt", "selected", "minDate", "maxDate", "headerComponent", "startView", "dateFilter", "dateClass"], outputs: ["selectedChange", "yearSelected", "monthSelected", "userSelection"], exportAs: ["mcCalendar"] }], directives: [{ type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }], animations: [
+        mcDatepickerAnimations.transformPanel,
+        mcDatepickerAnimations.fadeInCalendar
+    ], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerContent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-datepicker__content',
+                    exportAs: 'mcDatepickerContent',
+                    templateUrl: 'datepicker-content.html',
+                    styleUrls: ['datepicker-content.scss'],
+                    host: {
+                        class: 'mc-datepicker__content',
+                        '[@transformPanel]': 'animationState',
+                        '(@transformPanel.done)': 'animationDone.next()'
+                    },
+                    animations: [
+                        mcDatepickerAnimations.transformPanel,
+                        mcDatepickerAnimations.fadeInCalendar
+                    ],
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }]; }, propDecorators: { calendar: [{
+                type: ViewChild,
+                args: [McCalendar]
+            }] } });
 // TODO: We use a component instead of a directive here so the user can use implicit
 // template reference variables (e.g. #d vs #d="mcDatepicker"). We can change this to a directive
 // if angular adds support for `exportAs: '$implicit'` on directives.
@@ -1550,41 +1625,59 @@ class McDatepicker {
         return (this.dateAdapter.isDateInstance(obj) && this.dateAdapter.isValid(obj)) ? obj : null;
     }
 }
-McDatepicker.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-datepicker',
-                template: '',
-                exportAs: 'mcDatepicker',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-                providers: [{ provide: McFormFieldControl, useExisting: McDatepicker }]
-            },] }
-];
-/** @nocollapse */
-McDatepicker.ctorParameters = () => [
-    { type: Overlay },
-    { type: NgZone },
-    { type: ViewContainerRef },
-    { type: undefined, decorators: [{ type: Inject, args: [MC_DATEPICKER_SCROLL_STRATEGY,] }] },
-    { type: DateAdapter, decorators: [{ type: Optional }] },
-    { type: Directionality, decorators: [{ type: Optional }] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [DOCUMENT,] }] }
-];
-McDatepicker.propDecorators = {
-    hasBackdrop: [{ type: Input }],
-    startAt: [{ type: Input }],
-    disabled: [{ type: Input }],
-    opened: [{ type: Input }],
-    calendarHeaderComponent: [{ type: Input }],
-    startView: [{ type: Input }],
-    yearSelected: [{ type: Output }],
-    monthSelected: [{ type: Output }],
-    panelClass: [{ type: Input }],
-    dateClass: [{ type: Input }],
-    backdropClass: [{ type: Input }],
-    openedStream: [{ type: Output, args: ['opened',] }],
-    closedStream: [{ type: Output, args: ['closed',] }]
-};
+/** @nocollapse */ McDatepicker.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepicker, deps: [{ token: i3$1.Overlay }, { token: i0.NgZone }, { token: i0.ViewContainerRef }, { token: MC_DATEPICKER_SCROLL_STRATEGY }, { token: i1$1.DateAdapter, optional: true }, { token: i2.Directionality, optional: true }, { token: DOCUMENT, optional: true }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McDatepicker.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McDatepicker, selector: "mc-datepicker", inputs: { hasBackdrop: "hasBackdrop", startAt: "startAt", disabled: "disabled", opened: "opened", calendarHeaderComponent: "calendarHeaderComponent", startView: "startView", panelClass: "panelClass", dateClass: "dateClass", backdropClass: "backdropClass" }, outputs: { yearSelected: "yearSelected", monthSelected: "monthSelected", openedStream: "opened", closedStream: "closed" }, providers: [{ provide: McFormFieldControl, useExisting: McDatepicker }], exportAs: ["mcDatepicker"], ngImport: i0, template: '', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepicker, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-datepicker',
+                    template: '',
+                    exportAs: 'mcDatepicker',
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    providers: [{ provide: McFormFieldControl, useExisting: McDatepicker }]
+                }]
+        }], ctorParameters: function () { return [{ type: i3$1.Overlay }, { type: i0.NgZone }, { type: i0.ViewContainerRef }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [MC_DATEPICKER_SCROLL_STRATEGY]
+                }] }, { type: i1$1.DateAdapter, decorators: [{
+                    type: Optional
+                }] }, { type: i2.Directionality, decorators: [{
+                    type: Optional
+                }] }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [DOCUMENT]
+                }] }]; }, propDecorators: { hasBackdrop: [{
+                type: Input
+            }], startAt: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], opened: [{
+                type: Input
+            }], calendarHeaderComponent: [{
+                type: Input
+            }], startView: [{
+                type: Input
+            }], yearSelected: [{
+                type: Output
+            }], monthSelected: [{
+                type: Output
+            }], panelClass: [{
+                type: Input
+            }], dateClass: [{
+                type: Input
+            }], backdropClass: [{
+                type: Input
+            }], openedStream: [{
+                type: Output,
+                args: ['opened']
+            }], closedStream: [{
+                type: Output,
+                args: ['closed']
+            }] } });
 
 // @ts-nocheck
 // tslint:disable:naming-convention
@@ -2391,62 +2484,83 @@ class McDatepickerInput {
         }
     }
 }
-McDatepickerInput.decorators = [
-    { type: Directive, args: [{
-                selector: 'input[mcDatepicker]',
-                exportAs: 'mcDatepickerInput',
-                providers: [
-                    MC_DATEPICKER_VALUE_ACCESSOR,
-                    MC_DATEPICKER_VALIDATORS,
-                    { provide: McFormFieldControl, useExisting: McDatepickerInput }
-                ],
-                host: {
-                    class: 'mc-input mc-datepicker',
-                    '[attr.placeholder]': 'placeholder',
-                    '[attr.required]': 'required',
-                    '[attr.disabled]': 'disabled || null',
-                    '[attr.min]': 'min ? toISO8601(min) : null',
-                    '[attr.max]': 'max ? toISO8601(max) : null',
-                    '[attr.autocomplete]': '"off"',
-                    '(paste)': 'onPaste($event)',
-                    '(change)': 'onChange()',
-                    '(focus)': 'focusChanged(true)',
-                    '(blur)': 'onBlur()',
-                    '(keydown)': 'onKeyDown($event)'
-                }
-            },] }
-];
-/** @nocollapse */
-McDatepickerInput.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 },
-    { type: DateAdapter, decorators: [{ type: Optional }] },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [MC_DATE_FORMATS,] }] }
-];
-McDatepickerInput.propDecorators = {
-    placeholder: [{ type: Input }],
-    required: [{ type: Input }],
-    mcDatepicker: [{ type: Input }],
-    mcDatepickerFilter: [{ type: Input }],
-    value: [{ type: Input }],
-    min: [{ type: Input }],
-    max: [{ type: Input }],
-    disabled: [{ type: Input }],
-    id: [{ type: Input }],
-    mcValidationTooltip: [{ type: Input }],
-    incorrectInput: [{ type: Output }],
-    dateChange: [{ type: Output }],
-    dateInput: [{ type: Output }]
-};
+/** @nocollapse */ McDatepickerInput.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerInput, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }, { token: i1$1.DateAdapter, optional: true }, { token: MC_DATE_FORMATS, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McDatepickerInput.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McDatepickerInput, selector: "input[mcDatepicker]", inputs: { placeholder: "placeholder", required: "required", mcDatepicker: "mcDatepicker", mcDatepickerFilter: "mcDatepickerFilter", value: "value", min: "min", max: "max", disabled: "disabled", id: "id", mcValidationTooltip: "mcValidationTooltip" }, outputs: { incorrectInput: "incorrectInput", dateChange: "dateChange", dateInput: "dateInput" }, host: { listeners: { "paste": "onPaste($event)", "change": "onChange()", "focus": "focusChanged(true)", "blur": "onBlur()", "keydown": "onKeyDown($event)" }, properties: { "attr.placeholder": "placeholder", "attr.required": "required", "attr.disabled": "disabled || null", "attr.min": "min ? toISO8601(min) : null", "attr.max": "max ? toISO8601(max) : null", "attr.autocomplete": "\"off\"" }, classAttribute: "mc-input mc-datepicker" }, providers: [
+        MC_DATEPICKER_VALUE_ACCESSOR,
+        MC_DATEPICKER_VALIDATORS,
+        { provide: McFormFieldControl, useExisting: McDatepickerInput }
+    ], exportAs: ["mcDatepickerInput"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerInput, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'input[mcDatepicker]',
+                    exportAs: 'mcDatepickerInput',
+                    providers: [
+                        MC_DATEPICKER_VALUE_ACCESSOR,
+                        MC_DATEPICKER_VALIDATORS,
+                        { provide: McFormFieldControl, useExisting: McDatepickerInput }
+                    ],
+                    host: {
+                        class: 'mc-input mc-datepicker',
+                        '[attr.placeholder]': 'placeholder',
+                        '[attr.required]': 'required',
+                        '[attr.disabled]': 'disabled || null',
+                        '[attr.min]': 'min ? toISO8601(min) : null',
+                        '[attr.max]': 'max ? toISO8601(max) : null',
+                        '[attr.autocomplete]': '"off"',
+                        '(paste)': 'onPaste($event)',
+                        '(change)': 'onChange()',
+                        '(focus)': 'focusChanged(true)',
+                        '(blur)': 'onBlur()',
+                        '(keydown)': 'onKeyDown($event)'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.Renderer2 }, { type: i1$1.DateAdapter, decorators: [{
+                    type: Optional
+                }] }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [MC_DATE_FORMATS]
+                }] }]; }, propDecorators: { placeholder: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], mcDatepicker: [{
+                type: Input
+            }], mcDatepickerFilter: [{
+                type: Input
+            }], value: [{
+                type: Input
+            }], min: [{
+                type: Input
+            }], max: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], mcValidationTooltip: [{
+                type: Input
+            }], incorrectInput: [{
+                type: Output
+            }], dateChange: [{
+                type: Output
+            }], dateInput: [{
+                type: Output
+            }] } });
 
 /** Can be used to override the icon of a `mcDatepickerToggle`. */
 class McDatepickerToggleIcon {
 }
-McDatepickerToggleIcon.decorators = [
-    { type: Directive, args: [{
-                selector: '[mcDatepickerToggleIcon]'
-            },] }
-];
+/** @nocollapse */ McDatepickerToggleIcon.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerToggleIcon, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McDatepickerToggleIcon.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McDatepickerToggleIcon, selector: "[mcDatepickerToggleIcon]", ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerToggleIcon, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mcDatepickerToggleIcon]'
+                }]
+        }] });
 class McDatepickerToggle {
     constructor(intl, changeDetectorRef) {
         this.intl = intl;
@@ -2488,82 +2602,126 @@ class McDatepickerToggle {
         this.stateChanges = merge(this.intl.changes, datepickerDisabled, inputDisabled, datepickerToggled).subscribe(() => this.changeDetectorRef.markForCheck());
     }
 }
-McDatepickerToggle.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-datepicker-toggle',
-                template: "<!--todo need simplify this-->\n<button\n    #button\n    mc-button\n    type=\"button\"\n    class=\"mc-datepicker-toggle__button\"\n    aria-haspopup=\"true\"\n    [attr.aria-label]=\"intl.openCalendarLabel\"\n    [attr.tabindex]=\"tabIndex\"\n    [disabled]=\"disabled\"\n    (click)=\"open($event)\">\n\n    <i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i>\n\n    <ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content>\n</button>\n",
-                host: {
-                    class: 'mc-datepicker-toggle',
-                    '[class.mc-active]': 'datepicker && datepicker.opened'
-                },
-                exportAs: 'mcDatepickerToggle',
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-datepicker-toggle:focus{outline:0}.mc-datepicker-toggle__button.mc-icon-button{width:var(--mc-datepicker-toggle-size-width,30px);height:var(--mc-datepicker-toggle-size-height,30px);margin-left:2px}.mc-form-field-appearance-legacy .mc-form-field-prefix .mc-datepicker-toggle__default-icon,.mc-form-field-appearance-legacy .mc-form-field-suffix .mc-datepicker-toggle__default-icon{width:1em}.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-prefix .mc-datepicker-toggle__default-icon,.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-suffix .mc-datepicker-toggle__default-icon{display:block;width:1.5em;height:1.5em}.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-prefix .mc-icon-button .mc-datepicker-toggle__default-icon,.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-suffix .mc-icon-button .mc-datepicker-toggle__default-icon{margin:auto}"]
-            },] }
-];
-/** @nocollapse */
-McDatepickerToggle.ctorParameters = () => [
-    { type: McDatepickerIntl },
-    { type: ChangeDetectorRef }
-];
-McDatepickerToggle.propDecorators = {
-    disabled: [{ type: Input }],
-    datepicker: [{ type: Input, args: ['for',] }],
-    tabIndex: [{ type: Input }],
-    customIcon: [{ type: ContentChild, args: [McDatepickerToggleIcon, { static: false },] }],
-    button: [{ type: ViewChild, args: ['button', { static: false },] }]
-};
+/** @nocollapse */ McDatepickerToggle.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerToggle, deps: [{ token: McDatepickerIntl }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McDatepickerToggle.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McDatepickerToggle, selector: "mc-datepicker-toggle", inputs: { disabled: "disabled", datepicker: ["for", "datepicker"], tabIndex: "tabIndex" }, host: { properties: { "class.mc-active": "datepicker && datepicker.opened" }, classAttribute: "mc-datepicker-toggle" }, queries: [{ propertyName: "customIcon", first: true, predicate: McDatepickerToggleIcon, descendants: true }], viewQueries: [{ propertyName: "button", first: true, predicate: ["button"], descendants: true }], exportAs: ["mcDatepickerToggle"], usesOnChanges: true, ngImport: i0, template: "<!--todo need simplify this-->\n<button\n    #button\n    mc-button\n    type=\"button\"\n    class=\"mc-datepicker-toggle__button\"\n    aria-haspopup=\"true\"\n    [attr.aria-label]=\"intl.openCalendarLabel\"\n    [attr.tabindex]=\"tabIndex\"\n    [disabled]=\"disabled\"\n    (click)=\"open($event)\">\n\n    <i *ngIf=\"!customIcon\" mc-icon=\"mc-calendar_16\" class=\"mc-datepicker-toggle__default-icon\"></i>\n\n    <ng-content select=\"[mcDatepickerToggleIcon]\"></ng-content>\n</button>\n", styles: [".mc-datepicker-toggle:focus{outline:0}.mc-datepicker-toggle__button.mc-icon-button{width:30px;width:var(--mc-datepicker-toggle-size-width, 30px);height:30px;height:var(--mc-datepicker-toggle-size-height, 30px);margin-left:2px}.mc-form-field-appearance-legacy .mc-form-field-prefix .mc-datepicker-toggle__default-icon,.mc-form-field-appearance-legacy .mc-form-field-suffix .mc-datepicker-toggle__default-icon{width:1em}.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-prefix .mc-datepicker-toggle__default-icon,.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-suffix .mc-datepicker-toggle__default-icon{display:block;width:1.5em;height:1.5em}.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-prefix .mc-icon-button .mc-datepicker-toggle__default-icon,.mc-form-field:not(.mc-form-field-appearance-legacy) .mc-form-field-suffix .mc-icon-button .mc-datepicker-toggle__default-icon{margin:auto}\n"], components: [{ type: i3.McButton, selector: "button[mc-button]", inputs: ["disabled", "color"] }, { type: i4.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i3.McButtonCssStyler, selector: "button[mc-button], a[mc-button]" }, { type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i4.McIconCSSStyler, selector: "[mc-icon]" }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerToggle, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-datepicker-toggle',
+                    templateUrl: 'datepicker-toggle.html',
+                    styleUrls: ['datepicker-toggle.scss'],
+                    host: {
+                        class: 'mc-datepicker-toggle',
+                        '[class.mc-active]': 'datepicker && datepicker.opened'
+                    },
+                    exportAs: 'mcDatepickerToggle',
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: McDatepickerIntl }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { disabled: [{
+                type: Input
+            }], datepicker: [{
+                type: Input,
+                args: ['for']
+            }], tabIndex: [{
+                type: Input
+            }], customIcon: [{
+                type: ContentChild,
+                args: [McDatepickerToggleIcon, { static: false }]
+            }], button: [{
+                type: ViewChild,
+                args: ['button', { static: false }]
+            }] } });
 
 class McDatepickerModule {
 }
-McDatepickerModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    McButtonModule,
-                    OverlayModule,
-                    A11yModule,
-                    PortalModule,
-                    McIconModule
-                ],
-                exports: [
-                    McCalendar,
-                    McCalendarBody,
-                    McDatepicker,
-                    McDatepickerContent,
-                    McDatepickerInput,
-                    McDatepickerToggle,
-                    McDatepickerToggleIcon,
-                    McMonthView,
-                    McYearView,
-                    McMultiYearView,
-                    McCalendarHeader,
-                    McButtonModule
-                ],
-                declarations: [
-                    McCalendar,
-                    McCalendarBody,
-                    McDatepicker,
-                    McDatepickerContent,
-                    McDatepickerInput,
-                    McDatepickerToggle,
-                    McDatepickerToggleIcon,
-                    McMonthView,
-                    McYearView,
-                    McMultiYearView,
-                    McCalendarHeader
-                ],
-                providers: [
-                    McDatepickerIntl,
-                    MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER
-                ],
-                entryComponents: [
-                    McDatepickerContent,
-                    McCalendarHeader
-                ]
-            },] }
-];
+/** @nocollapse */ McDatepickerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McDatepickerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerModule, declarations: [McCalendar,
+        McCalendarBody,
+        McDatepicker,
+        McDatepickerContent,
+        McDatepickerInput,
+        McDatepickerToggle,
+        McDatepickerToggleIcon,
+        McMonthView,
+        McYearView,
+        McMultiYearView,
+        McCalendarHeader], imports: [CommonModule,
+        McButtonModule,
+        OverlayModule,
+        A11yModule,
+        PortalModule,
+        McIconModule], exports: [McCalendar,
+        McCalendarBody,
+        McDatepicker,
+        McDatepickerContent,
+        McDatepickerInput,
+        McDatepickerToggle,
+        McDatepickerToggleIcon,
+        McMonthView,
+        McYearView,
+        McMultiYearView,
+        McCalendarHeader,
+        McButtonModule] });
+/** @nocollapse */ McDatepickerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerModule, providers: [
+        McDatepickerIntl,
+        MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER
+    ], imports: [[
+            CommonModule,
+            McButtonModule,
+            OverlayModule,
+            A11yModule,
+            PortalModule,
+            McIconModule
+        ], McButtonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McDatepickerModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        CommonModule,
+                        McButtonModule,
+                        OverlayModule,
+                        A11yModule,
+                        PortalModule,
+                        McIconModule
+                    ],
+                    exports: [
+                        McCalendar,
+                        McCalendarBody,
+                        McDatepicker,
+                        McDatepickerContent,
+                        McDatepickerInput,
+                        McDatepickerToggle,
+                        McDatepickerToggleIcon,
+                        McMonthView,
+                        McYearView,
+                        McMultiYearView,
+                        McCalendarHeader,
+                        McButtonModule
+                    ],
+                    declarations: [
+                        McCalendar,
+                        McCalendarBody,
+                        McDatepicker,
+                        McDatepickerContent,
+                        McDatepickerInput,
+                        McDatepickerToggle,
+                        McDatepickerToggleIcon,
+                        McMonthView,
+                        McYearView,
+                        McMultiYearView,
+                        McCalendarHeader
+                    ],
+                    providers: [
+                        McDatepickerIntl,
+                        MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER
+                    ],
+                    entryComponents: [
+                        McDatepickerContent,
+                        McCalendarHeader
+                    ]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.

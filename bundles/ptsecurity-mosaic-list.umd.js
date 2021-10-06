@@ -2,7 +2,31 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/list', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.list = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.collections, global.ng.forms, global.mc.cdk.a11y, global.mc.cdk.keycodes, global.rxjs, global.rxjs.operators));
-}(this, (function (exports, a11y$1, common, core$1, core, coercion, collections, forms, a11y, keycodes, rxjs, operators) { 'use strict';
+}(this, (function (exports, a11y$1, i2, i0, i1, coercion, collections, forms, a11y, keycodes, rxjs, operators) { 'use strict';
+
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -363,7 +387,7 @@
                 return listSelectionDisabled || groupDisabled || this._disabled;
             },
             set: function (value) {
-                var newValue = core.toBoolean(value);
+                var newValue = i1.toBoolean(value);
                 if (newValue !== this._disabled) {
                     this._disabled = newValue;
                     this.changeDetector.markForCheck();
@@ -387,7 +411,7 @@
                 return this.listSelection.selectionModel && this.listSelection.selectionModel.isSelected(this) || false;
             },
             set: function (value) {
-                var isSelected = core.toBoolean(value);
+                var isSelected = i1.toBoolean(value);
                 if (isSelected !== this._selected) {
                     this.setSelected(isSelected);
                     this.listSelection.reportValueChange();
@@ -492,47 +516,56 @@
         };
         return McListOption;
     }());
-    McListOption.decorators = [
-        { type: core$1.Component, args: [{
-                    exportAs: 'mcListOption',
-                    selector: 'mc-list-option',
-                    host: {
-                        class: 'mc-list-option mc-no-select',
-                        '[class.mc-selected]': 'selected',
-                        '[class.mc-focused]': 'hasFocus',
-                        '[class.mc-disabled]': 'disabled',
-                        '[attr.tabindex]': 'tabIndex',
-                        '[attr.disabled]': 'disabled || null',
-                        '(focus)': 'focus()',
-                        '(blur)': 'blur()',
-                        '(click)': 'handleClick($event)'
-                    },
-                    template: "<div class=\"mc-list-item-content\">\n    <mc-pseudo-checkbox\n        *ngIf=\"showCheckbox\"\n        [state]=\"selected ? 'checked' : 'unchecked'\"\n        [disabled]=\"disabled\">\n    </mc-pseudo-checkbox>\n\n    <div class=\"mc-list-text\" #text>\n        <ng-content></ng-content>\n    </div>\n</div>\n",
-                    encapsulation: core$1.ViewEncapsulation.None,
-                    preserveWhitespaces: false,
-                    changeDetection: core$1.ChangeDetectionStrategy.OnPush
-                },] }
-    ];
-    /** @nocollapse */
-    McListOption.ctorParameters = function () { return [
-        { type: core$1.ElementRef },
-        { type: core$1.ChangeDetectorRef },
-        { type: core$1.NgZone },
-        { type: McListSelection, decorators: [{ type: core$1.Inject, args: [core$1.forwardRef(function () { return McListSelection; }),] }] },
-        { type: core.McOptgroup, decorators: [{ type: core$1.Optional }] }
-    ]; };
-    McListOption.propDecorators = {
-        lines: [{ type: core$1.ContentChildren, args: [core.McLine,] }],
-        text: [{ type: core$1.ViewChild, args: ['text', { static: false },] }],
-        checkboxPosition: [{ type: core$1.Input }],
-        value: [{ type: core$1.Input }],
-        disabled: [{ type: core$1.Input }],
-        showCheckbox: [{ type: core$1.Input }],
-        selected: [{ type: core$1.Input }]
-    };
+    /** @nocollapse */ McListOption.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListOption, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: i0__namespace.NgZone }, { token: i0.forwardRef(function () { return McListSelection; }) }, { token: i1__namespace.McOptgroup, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McListOption.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McListOption, selector: "mc-list-option", inputs: { checkboxPosition: "checkboxPosition", value: "value", disabled: "disabled", showCheckbox: "showCheckbox", selected: "selected" }, host: { listeners: { "focus": "focus()", "blur": "blur()", "click": "handleClick($event)" }, properties: { "class.mc-selected": "selected", "class.mc-focused": "hasFocus", "class.mc-disabled": "disabled", "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-list-option mc-no-select" }, queries: [{ propertyName: "lines", predicate: i1.McLine }], viewQueries: [{ propertyName: "text", first: true, predicate: ["text"], descendants: true }], exportAs: ["mcListOption"], ngImport: i0__namespace, template: "<div class=\"mc-list-item-content\">\n    <mc-pseudo-checkbox\n        *ngIf=\"showCheckbox\"\n        [state]=\"selected ? 'checked' : 'unchecked'\"\n        [disabled]=\"disabled\">\n    </mc-pseudo-checkbox>\n\n    <div class=\"mc-list-text\" #text>\n        <ng-content></ng-content>\n    </div>\n</div>\n", components: [{ type: i1__namespace.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListOption, decorators: [{
+                type: i0.Component,
+                args: [{
+                        exportAs: 'mcListOption',
+                        selector: 'mc-list-option',
+                        host: {
+                            class: 'mc-list-option mc-no-select',
+                            '[class.mc-selected]': 'selected',
+                            '[class.mc-focused]': 'hasFocus',
+                            '[class.mc-disabled]': 'disabled',
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null',
+                            '(focus)': 'focus()',
+                            '(blur)': 'blur()',
+                            '(click)': 'handleClick($event)'
+                        },
+                        templateUrl: 'list-option.html',
+                        encapsulation: i0.ViewEncapsulation.None,
+                        preserveWhitespaces: false,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.ChangeDetectorRef }, { type: i0__namespace.NgZone }, { type: McListSelection, decorators: [{
+                            type: i0.Inject,
+                            args: [i0.forwardRef(function () { return McListSelection; })]
+                        }] }, { type: i1__namespace.McOptgroup, decorators: [{
+                            type: i0.Optional
+                        }] }];
+        }, propDecorators: { lines: [{
+                    type: i0.ContentChildren,
+                    args: [i1.McLine]
+                }], text: [{
+                    type: i0.ViewChild,
+                    args: ['text', { static: false }]
+                }], checkboxPosition: [{
+                    type: i0.Input
+                }], value: [{
+                    type: i0.Input
+                }], disabled: [{
+                    type: i0.Input
+                }], showCheckbox: [{
+                    type: i0.Input
+                }], selected: [{
+                    type: i0.Input
+                }] } });
     var MC_SELECTION_LIST_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
-        useExisting: core$1.forwardRef(function () { return McListSelection; }),
+        useExisting: i0.forwardRef(function () { return McListSelection; }),
         multi: true
     };
     var McListSelectionChange = /** @class */ (function () {
@@ -549,7 +582,7 @@
         return McListSelectionBase;
     }());
     // tslint:disable-next-line:naming-convention
-    var McListSelectionMixinBase = core.mixinTabIndex(core.mixinDisabled(McListSelectionBase));
+    var McListSelectionMixinBase = i1.mixinTabIndex(i1.mixinDisabled(McListSelectionBase));
     var McListSelection = /** @class */ (function (_super) {
         __extends(McListSelection, _super);
         function McListSelection(elementRef, changeDetectorRef, multiple) {
@@ -561,7 +594,7 @@
             _this._tabIndex = 0;
             _this.userTabIndex = null;
             // Emits a change event whenever the selected state of an option changes.
-            _this.selectionChange = new core$1.EventEmitter();
+            _this.selectionChange = new i0.EventEmitter();
             /** Emits whenever the component is destroyed. */
             _this.destroyed = new rxjs.Subject();
             /**
@@ -575,13 +608,13 @@
             _this.onTouched = function () { };
             // View to model callback that should be called whenever the selected options change.
             _this.onChange = function (_) { };
-            if (multiple === core.MultipleMode.CHECKBOX || multiple === core.MultipleMode.KEYBOARD) {
+            if (multiple === i1.MultipleMode.CHECKBOX || multiple === i1.MultipleMode.KEYBOARD) {
                 _this.multipleMode = multiple;
             }
             else if (multiple !== null) {
-                _this.multipleMode = core.MultipleMode.CHECKBOX;
+                _this.multipleMode = i1.MultipleMode.CHECKBOX;
             }
-            if (_this.multipleMode === core.MultipleMode.CHECKBOX) {
+            if (_this.multipleMode === i1.MultipleMode.CHECKBOX) {
                 _this.autoSelect = false;
                 _this.noUnselectLast = false;
             }
@@ -628,28 +661,28 @@
         });
         Object.defineProperty(McListSelection.prototype, "showCheckbox", {
             get: function () {
-                return this.multipleMode === core.MultipleMode.CHECKBOX;
+                return this.multipleMode === i1.MultipleMode.CHECKBOX;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(McListSelection.prototype, "optionFocusChanges", {
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.options.map(function (option) { return option.onFocus; })));
+                return rxjs.merge.apply(void 0, __spreadArray([], __read(this.options.map(function (option) { return option.onFocus; }))));
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(McListSelection.prototype, "optionBlurChanges", {
             get: function () {
-                return rxjs.merge.apply(void 0, __spread(this.options.map(function (option) { return option.onBlur; })));
+                return rxjs.merge.apply(void 0, __spreadArray([], __read(this.options.map(function (option) { return option.onBlur; }))));
             },
             enumerable: false,
             configurable: true
         });
         McListSelection.prototype.ngAfterContentInit = function () {
             var _this = this;
-            this.horizontal = core.toBoolean(this.horizontal);
+            this.horizontal = i1.toBoolean(this.horizontal);
             this.keyManager = new a11y.FocusKeyManager(this.options)
                 .withTypeAhead()
                 .withVerticalOrientation(!this.horizontal)
@@ -767,7 +800,7 @@
                 }
             }
             else {
-                if (this.multipleMode === core.MultipleMode.KEYBOARD || !this.multiple) {
+                if (this.multipleMode === i1.MultipleMode.KEYBOARD || !this.multiple) {
                     this.options.forEach(function (item) { return item.setSelected(false); });
                     option.setSelected(true);
                 }
@@ -961,43 +994,51 @@
         };
         return McListSelection;
     }(McListSelectionMixinBase));
-    McListSelection.decorators = [
-        { type: core$1.Component, args: [{
-                    exportAs: 'mcListSelection',
-                    selector: 'mc-list-selection',
-                    template: '<ng-content></ng-content>',
-                    changeDetection: core$1.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core$1.ViewEncapsulation.None,
-                    inputs: ['disabled'],
-                    host: {
-                        class: 'mc-list-selection',
-                        '[attr.tabindex]': 'tabIndex',
-                        '[attr.disabled]': 'disabled || null',
-                        '(focus)': 'focus()',
-                        '(blur)': 'blur()',
-                        '(keydown)': 'onKeyDown($event)',
-                        '(window:resize)': 'updateScrollSize()'
-                    },
-                    providers: [MC_SELECTION_LIST_VALUE_ACCESSOR],
-                    preserveWhitespaces: false,
-                    styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-divider{display:block;margin:0}.mc-divider.mc-divider_horizontal{border-top-width:var(--mc-divider-size-width,1px);border-top-style:solid}.mc-divider.mc-divider_vertical{height:100%;border-right-width:var(--mc-divider-size-width,1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:var(--mc-divider-size-inset-margin,80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:var(--mc-divider-size-inset-margin,80px)}.mc-list,.mc-list-selection{display:block;outline:none}.mc-list-item,.mc-list-option{display:block;height:var(--mc-list-size-item-height,28px);border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 var(--mc-list-size-horizontal-padding,16px)}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:var(--mc-list-size-two-line-height,72px)}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:var(--mc-list-size-three-line-height,88px)}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:var(--mc-list-size-multi-line-padding,16px);padding-bottom:var(--mc-list-size-multi-line-padding,16px)}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:var(--mc-list-size-icon-width,24px);height:var(--mc-list-size-icon-width,24px);border-radius:50%;padding:var(--mc-list-size-icon-padding,4px);font-size:var(--mc-list-size-icon-width,24px)}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:32pxvar(--mc-list-size-icon-width,24px)8px;width:100%-32pxvar(--mc-list-size-icon-width,24px)8px}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:32pxvar(--mc-list-size-icon-width,24px)8px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}"]
-                },] }
-    ];
-    /** @nocollapse */
-    McListSelection.ctorParameters = function () { return [
-        { type: core$1.ElementRef },
-        { type: core$1.ChangeDetectorRef },
-        { type: core.MultipleMode, decorators: [{ type: core$1.Attribute, args: ['multiple',] }] }
-    ]; };
-    McListSelection.propDecorators = {
-        options: [{ type: core$1.ContentChildren, args: [McListOption, { descendants: true },] }],
-        autoSelect: [{ type: core$1.Input }],
-        noUnselectLast: [{ type: core$1.Input }],
-        horizontal: [{ type: core$1.Input }],
-        tabIndex: [{ type: core$1.Input }],
-        selectionChange: [{ type: core$1.Output }],
-        compareWith: [{ type: core$1.Input }]
-    };
+    /** @nocollapse */ McListSelection.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListSelection, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: 'multiple', attribute: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McListSelection.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McListSelection, selector: "mc-list-selection", inputs: { disabled: "disabled", autoSelect: "autoSelect", noUnselectLast: "noUnselectLast", horizontal: "horizontal", tabIndex: "tabIndex", compareWith: "compareWith" }, outputs: { selectionChange: "selectionChange" }, host: { listeners: { "focus": "focus()", "blur": "blur()", "keydown": "onKeyDown($event)", "window:resize": "updateScrollSize()" }, properties: { "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-list-selection" }, providers: [MC_SELECTION_LIST_VALUE_ACCESSOR], queries: [{ propertyName: "options", predicate: McListOption, descendants: true }], exportAs: ["mcListSelection"], usesInheritance: true, ngImport: i0__namespace, template: '<ng-content></ng-content>', isInline: true, styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.mc-divider{display:block;margin:0}.mc-divider.mc-divider_horizontal{border-top-width:1px;border-top-width:var(--mc-divider-size-width, 1px);border-top-style:solid}.mc-divider.mc-divider_vertical{height:100%;border-right-width:1px;border-right-width:var(--mc-divider-size-width, 1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px;margin-left:var(--mc-divider-size-inset-margin, 80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px;margin-right:var(--mc-divider-size-inset-margin, 80px)}.mc-list,.mc-list-selection{display:block;outline:none}.mc-list-item,.mc-list-option{display:block;height:28px;height:var(--mc-list-size-item-height, 28px);border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 16px;padding:0 var(--mc-list-size-horizontal-padding, 16px)}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:72px;height:var(--mc-list-size-two-line-height, 72px)}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:88px;height:var(--mc-list-size-three-line-height, 88px)}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-top:var(--mc-list-size-multi-line-padding, 16px);padding-bottom:16px;padding-bottom:var(--mc-list-size-multi-line-padding, 16px)}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:normal;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;width:var(--mc-list-size-icon-width, 24px);height:24px;height:var(--mc-list-size-icon-width, 24px);border-radius:50%;padding:4px;padding:var(--mc-list-size-icon-padding, 4px);font-size:24px;font-size:var(--mc-list-size-icon-width, 24px)}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:32pxvar(--mc-list-size-icon-width,24px)8px;width:100%-32pxvar(--mc-list-size-icon-width,24px)8px}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:32pxvar(--mc-list-size-icon-width,24px)8px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListSelection, decorators: [{
+                type: i0.Component,
+                args: [{
+                        exportAs: 'mcListSelection',
+                        selector: 'mc-list-selection',
+                        template: '<ng-content></ng-content>',
+                        styleUrls: ['./list.scss'],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None,
+                        inputs: ['disabled'],
+                        host: {
+                            class: 'mc-list-selection',
+                            '[attr.tabindex]': 'tabIndex',
+                            '[attr.disabled]': 'disabled || null',
+                            '(focus)': 'focus()',
+                            '(blur)': 'blur()',
+                            '(keydown)': 'onKeyDown($event)',
+                            '(window:resize)': 'updateScrollSize()'
+                        },
+                        providers: [MC_SELECTION_LIST_VALUE_ACCESSOR],
+                        preserveWhitespaces: false
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.ChangeDetectorRef }, { type: i1__namespace.MultipleMode, decorators: [{
+                            type: i0.Attribute,
+                            args: ['multiple']
+                        }] }];
+        }, propDecorators: { options: [{
+                    type: i0.ContentChildren,
+                    args: [McListOption, { descendants: true }]
+                }], autoSelect: [{
+                    type: i0.Input
+                }], noUnselectLast: [{
+                    type: i0.Input
+                }], horizontal: [{
+                    type: i0.Input
+                }], tabIndex: [{
+                    type: i0.Input
+                }], selectionChange: [{
+                    type: i0.Output
+                }], compareWith: [{
+                    type: i0.Input
+                }] } });
 
     // todo пока не делаем, перенесено из материала, но у нас в доках таких простых списков нет.
     var McList = /** @class */ (function () {
@@ -1005,23 +1046,26 @@
         }
         return McList;
     }());
-    McList.decorators = [
-        { type: core$1.Component, args: [{
-                    selector: 'mc-list',
-                    host: { class: 'mc-list' },
-                    template: '<ng-content></ng-content>',
-                    changeDetection: core$1.ChangeDetectionStrategy.OnPush,
-                    encapsulation: core$1.ViewEncapsulation.None,
-                    styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.mc-divider{display:block;margin:0}.mc-divider.mc-divider_horizontal{border-top-width:var(--mc-divider-size-width,1px);border-top-style:solid}.mc-divider.mc-divider_vertical{height:100%;border-right-width:var(--mc-divider-size-width,1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:var(--mc-divider-size-inset-margin,80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:var(--mc-divider-size-inset-margin,80px)}.mc-list,.mc-list-selection{display:block;outline:none}.mc-list-item,.mc-list-option{display:block;height:var(--mc-list-size-item-height,28px);border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 var(--mc-list-size-horizontal-padding,16px)}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:var(--mc-list-size-two-line-height,72px)}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:var(--mc-list-size-three-line-height,88px)}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:var(--mc-list-size-multi-line-padding,16px);padding-bottom:var(--mc-list-size-multi-line-padding,16px)}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:400;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:var(--mc-list-size-icon-width,24px);height:var(--mc-list-size-icon-width,24px);border-radius:50%;padding:var(--mc-list-size-icon-padding,4px);font-size:var(--mc-list-size-icon-width,24px)}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:32pxvar(--mc-list-size-icon-width,24px)8px;width:100%-32pxvar(--mc-list-size-icon-width,24px)8px}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:32pxvar(--mc-list-size-icon-width,24px)8px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}"]
-                },] }
-    ];
+    /** @nocollapse */ McList.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McList, deps: [], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McList.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McList, selector: "mc-list", host: { classAttribute: "mc-list" }, ngImport: i0__namespace, template: '<ng-content></ng-content>', isInline: true, styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.mc-divider{display:block;margin:0}.mc-divider.mc-divider_horizontal{border-top-width:1px;border-top-width:var(--mc-divider-size-width, 1px);border-top-style:solid}.mc-divider.mc-divider_vertical{height:100%;border-right-width:1px;border-right-width:var(--mc-divider-size-width, 1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px;margin-left:var(--mc-divider-size-inset-margin, 80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px;margin-right:var(--mc-divider-size-inset-margin, 80px)}.mc-list,.mc-list-selection{display:block;outline:none}.mc-list-item,.mc-list-option{display:block;height:28px;height:var(--mc-list-size-item-height, 28px);border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 16px;padding:0 var(--mc-list-size-horizontal-padding, 16px)}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:72px;height:var(--mc-list-size-two-line-height, 72px)}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:88px;height:var(--mc-list-size-three-line-height, 88px)}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-top:var(--mc-list-size-multi-line-padding, 16px);padding-bottom:16px;padding-bottom:var(--mc-list-size-multi-line-padding, 16px)}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:normal;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;width:var(--mc-list-size-icon-width, 24px);height:24px;height:var(--mc-list-size-icon-width, 24px);border-radius:50%;padding:4px;padding:var(--mc-list-size-icon-padding, 4px);font-size:24px;font-size:var(--mc-list-size-icon-width, 24px)}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:32pxvar(--mc-list-size-icon-width,24px)8px;width:100%-32pxvar(--mc-list-size-icon-width,24px)8px}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:32pxvar(--mc-list-size-icon-width,24px)8px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McList, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-list',
+                        host: { class: 'mc-list' },
+                        template: '<ng-content></ng-content>',
+                        styleUrls: ['./list.scss'],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush,
+                        encapsulation: i0.ViewEncapsulation.None
+                    }]
+            }] });
     var McListItem = /** @class */ (function () {
         function McListItem(elementRef) {
             this.elementRef = elementRef;
         }
         McListItem.prototype.ngAfterContentInit = function () {
             // tslint:disable-next-line:no-unused-expression
-            new core.McLineSetter(this.lines, this.elementRef);
+            new i1.McLineSetter(this.lines, this.elementRef);
         };
         McListItem.prototype.handleFocus = function () {
             this.elementRef.nativeElement.classList.add('mc-focused');
@@ -1034,57 +1078,77 @@
         };
         return McListItem;
     }());
-    McListItem.decorators = [
-        { type: core$1.Component, args: [{
-                    selector: 'mc-list-item, a[mc-list-item]',
-                    host: {
-                        class: 'mc-list-item',
-                        '(focus)': 'handleFocus()',
-                        '(blur)': 'handleBlur()'
-                    },
-                    template: "<div class=\"mc-list-item-content\">\n    <ng-content select=\"[mc-list-icon], [mcListIcon]\"></ng-content>\n\n    <div class=\"mc-list-text\">\n        <ng-content select=\"[mc-line], [mcLine]\"></ng-content>\n    </div>\n\n    <ng-content></ng-content>\n</div>\n",
-                    encapsulation: core$1.ViewEncapsulation.None,
-                    preserveWhitespaces: false,
-                    changeDetection: core$1.ChangeDetectionStrategy.OnPush
-                },] }
-    ];
-    /** @nocollapse */
-    McListItem.ctorParameters = function () { return [
-        { type: core$1.ElementRef }
-    ]; };
-    McListItem.propDecorators = {
-        lines: [{ type: core$1.ContentChildren, args: [core.McLine,] }]
-    };
+    /** @nocollapse */ McListItem.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListItem, deps: [{ token: i0__namespace.ElementRef }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McListItem.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McListItem, selector: "mc-list-item, a[mc-list-item]", host: { listeners: { "focus": "handleFocus()", "blur": "handleBlur()" }, classAttribute: "mc-list-item" }, queries: [{ propertyName: "lines", predicate: i1.McLine }], ngImport: i0__namespace, template: "<div class=\"mc-list-item-content\">\n    <ng-content select=\"[mc-list-icon], [mcListIcon]\"></ng-content>\n\n    <div class=\"mc-list-text\">\n        <ng-content select=\"[mc-line], [mcLine]\"></ng-content>\n    </div>\n\n    <ng-content></ng-content>\n</div>\n", changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListItem, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-list-item, a[mc-list-item]',
+                        host: {
+                            class: 'mc-list-item',
+                            '(focus)': 'handleFocus()',
+                            '(blur)': 'handleBlur()'
+                        },
+                        templateUrl: './list-item.html',
+                        encapsulation: i0.ViewEncapsulation.None,
+                        preserveWhitespaces: false,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }]
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }]; }, propDecorators: { lines: [{
+                    type: i0.ContentChildren,
+                    args: [i1.McLine]
+                }] } });
 
     var McListModule = /** @class */ (function () {
         function McListModule() {
         }
         return McListModule;
     }());
-    McListModule.decorators = [
-        { type: core$1.NgModule, args: [{
-                    imports: [
-                        common.CommonModule,
-                        a11y$1.A11yModule,
-                        core.McPseudoCheckboxModule,
-                        core.McLineModule,
-                        core.McOptionModule
-                    ],
-                    exports: [
-                        McList,
-                        McListSelection,
-                        McListItem,
-                        McListOption,
-                        core.McOptionModule
-                    ],
-                    declarations: [
-                        McList,
-                        McListSelection,
-                        McListItem,
-                        McListOption
-                    ]
-                },] }
-    ];
+    /** @nocollapse */ McListModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McListModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListModule, declarations: [McList,
+            McListSelection,
+            McListItem,
+            McListOption], imports: [i2.CommonModule,
+            a11y$1.A11yModule,
+            i1.McPseudoCheckboxModule,
+            i1.McLineModule,
+            i1.McOptionModule], exports: [McList,
+            McListSelection,
+            McListItem,
+            McListOption,
+            i1.McOptionModule] });
+    /** @nocollapse */ McListModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListModule, imports: [[
+                i2.CommonModule,
+                a11y$1.A11yModule,
+                i1.McPseudoCheckboxModule,
+                i1.McLineModule,
+                i1.McOptionModule
+            ], i1.McOptionModule] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McListModule, decorators: [{
+                type: i0.NgModule,
+                args: [{
+                        imports: [
+                            i2.CommonModule,
+                            a11y$1.A11yModule,
+                            i1.McPseudoCheckboxModule,
+                            i1.McLineModule,
+                            i1.McOptionModule
+                        ],
+                        exports: [
+                            McList,
+                            McListSelection,
+                            McListItem,
+                            McListOption,
+                            i1.McOptionModule
+                        ],
+                        declarations: [
+                            McList,
+                            McListSelection,
+                            McListItem,
+                            McListOption
+                        ]
+                    }]
+            }] });
 
     /**
      * Generated bundle index. Do not edit.

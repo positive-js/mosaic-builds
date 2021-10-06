@@ -1,18 +1,22 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
-import { Directive, Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Attribute, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { Directive, Component, ChangeDetectionStrategy, ViewEncapsulation, Attribute, NgModule } from '@angular/core';
 import { mixinColor, ThemePalette } from '@ptsecurity/mosaic/core';
 
 // tslint:disable-next-line:naming-convention
 class McIconCSSStyler {
 }
-McIconCSSStyler.decorators = [
-    { type: Directive, args: [{
-                selector: '[mc-icon]',
-                host: { class: 'mc mc-icon' }
-            },] }
-];
+/** @nocollapse */ McIconCSSStyler.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McIconCSSStyler, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McIconCSSStyler.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McIconCSSStyler, selector: "[mc-icon]", host: { classAttribute: "mc mc-icon" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McIconCSSStyler, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mc-icon]',
+                    host: { class: 'mc mc-icon' }
+                }]
+        }] });
 class McIconBase {
     // tslint:disable-next-line:naming-convention
     constructor(_elementRef) {
@@ -32,41 +36,54 @@ class McIcon extends McIconMixinBase {
         return this._elementRef.nativeElement;
     }
 }
-McIcon.decorators = [
-    { type: Component, args: [{
-                selector: `[mc-icon]`,
-                template: '<ng-content></ng-content>',
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                encapsulation: ViewEncapsulation.None,
-                inputs: ['color'],
-                styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}"]
-            },] }
-];
-/** @nocollapse */
-McIcon.ctorParameters = () => [
-    { type: ElementRef },
-    { type: String, decorators: [{ type: Attribute, args: ['mc-icon',] }] }
-];
+/** @nocollapse */ McIcon.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McIcon, deps: [{ token: i0.ElementRef }, { token: 'mc-icon', attribute: true }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McIcon.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McIcon, selector: "[mc-icon]", inputs: { color: "color" }, usesInheritance: true, ngImport: i0, template: '<ng-content></ng-content>', isInline: true, styles: [".mc-icon-rotate_90{transform:rotate(90deg)}.mc-icon-rotate_180{transform:rotate(180deg)}.mc-icon-rotate_270{transform:rotate(270deg)}.mc-icon-flip-h{transform:scaleY(-1)}.mc-icon-flip-v{transform:scaleX(-1)}.mc-icon-flip-vh{transform:scale(-1)}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McIcon, decorators: [{
+            type: Component,
+            args: [{
+                    selector: `[mc-icon]`,
+                    template: '<ng-content></ng-content>',
+                    styleUrls: ['icon.scss'],
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    inputs: ['color']
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: undefined, decorators: [{
+                    type: Attribute,
+                    args: ['mc-icon']
+                }] }]; } });
 
 class McIconModule {
 }
-McIconModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    A11yModule,
-                    PlatformModule
-                ],
-                exports: [
-                    McIcon,
-                    McIconCSSStyler
-                ],
-                declarations: [
-                    McIcon,
-                    McIconCSSStyler
-                ]
-            },] }
-];
+/** @nocollapse */ McIconModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McIconModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McIconModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McIconModule, declarations: [McIcon,
+        McIconCSSStyler], imports: [CommonModule,
+        A11yModule,
+        PlatformModule], exports: [McIcon,
+        McIconCSSStyler] });
+/** @nocollapse */ McIconModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McIconModule, imports: [[
+            CommonModule,
+            A11yModule,
+            PlatformModule
+        ]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McIconModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [
+                        CommonModule,
+                        A11yModule,
+                        PlatformModule
+                    ],
+                    exports: [
+                        McIcon,
+                        McIconCSSStyler
+                    ],
+                    declarations: [
+                        McIcon,
+                        McIconCSSStyler
+                    ]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.

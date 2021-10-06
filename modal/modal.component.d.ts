@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { IModalButtonOptions, IModalOptions, ModalSize, ModalType, OnClickCallback } from './modal.type';
+import * as i0 from "@angular/core";
 export declare const MODAL_ANIMATE_DURATION = 200;
 export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R> implements OnInit, OnChanges, AfterViewInit, OnDestroy, IModalOptions {
     private overlay;
@@ -118,4 +119,6 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
      * @param plusNum The number that the openModals.length will increase soon
      */
     private changeBodyOverflow;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McModalComponent<any, any>, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McModalComponent<any, any>, "mc-modal", never, { "mcModalType": "mcModalType"; "mcComponent": "mcComponent"; "mcContent": "mcContent"; "mcComponentParams": "mcComponentParams"; "mcFooter": "mcFooter"; "mcVisible": "mcVisible"; "mcZIndex": "mcZIndex"; "mcWidth": "mcWidth"; "mcSize": "mcSize"; "mcWrapClassName": "mcWrapClassName"; "mcClassName": "mcClassName"; "mcStyle": "mcStyle"; "mcTitle": "mcTitle"; "mcCloseByESC": "mcCloseByESC"; "mcClosable": "mcClosable"; "mcMask": "mcMask"; "mcMaskClosable": "mcMaskClosable"; "mcMaskStyle": "mcMaskStyle"; "mcBodyStyle": "mcBodyStyle"; "mcOkText": "mcOkText"; "mcOkType": "mcOkType"; "mcOkLoading": "mcOkLoading"; "mcOnOk": "mcOnOk"; "mcCancelText": "mcCancelText"; "mcCancelLoading": "mcCancelLoading"; "mcOnCancel": "mcOnCancel"; "mcGetContainer": "mcGetContainer"; }, { "mcVisibleChange": "mcVisibleChange"; "mcAfterOpen": "mcAfterOpen"; "mcAfterClose": "mcAfterClose"; "mcOnOk": "mcOnOk"; "mcOnCancel": "mcOnCancel"; }, never, ["*"]>;
 }

@@ -4,6 +4,7 @@ import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
 import { McModalComponent } from './modal.component';
 import { ConfirmType, IModalOptionsForService } from './modal.type';
+import * as i0 from "@angular/core";
 export declare class ModalBuilderForService {
     private overlay;
     private modalRef;
@@ -27,4 +28,6 @@ export declare class McModalService {
     success<T>(options?: IModalOptionsForService<T>): McModalRef<T>;
     delete<T>(options?: IModalOptionsForService<T>): McModalRef<T>;
     private simpleConfirm;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McModalService, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<McModalService>;
 }

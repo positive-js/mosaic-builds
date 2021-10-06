@@ -124,6 +124,7 @@ function getDeclarationSymbolOfNode(node, checker) {
     return symbol;
 }
 function resolveModuleName(node, typeChecker) {
+    var _a;
     // Get the symbol for the named binding element. Note that we cannot determine the
     // value declaration based on the type of the element as types are not necessarily
     // specific to a given secondary entry-point (e.g. exports with the type of "string")
@@ -132,15 +133,17 @@ function resolveModuleName(node, typeChecker) {
     const symbol = getDeclarationSymbolOfNode(node, typeChecker);
     // If the symbol can't be found, or no declaration could be found within
     // the symbol, add failure to report that the given symbol can't be found.
-    if (!symbol ||
-        !(symbol.valueDeclaration || (symbol.declarations && symbol.declarations.length !== 0))) {
+    if (!symbol || !(symbol.valueDeclaration || (symbol.declarations && symbol.declarations.length !== 0))) {
         // tslint:disable-next-line:no-null-keyword
         return null;
     }
     // The filename for the source file of the node that contains the
     // first declaration of the symbol. All symbol declarations must be
     // part of a defining node, so parent can be asserted to be defined.
-    const resolvedNode = symbol.valueDeclaration || symbol.declarations[0];
+    const resolvedNode = symbol.valueDeclaration || ((_a = symbol.declarations) === null || _a === void 0 ? void 0 : _a[0]);
+    if (!resolvedNode) {
+        return null;
+    }
     const sourceFile = resolvedNode.getSourceFile().fileName;
     // File the module the symbol belongs to from a regex match of the
     // filename. This will always match since only "@ptsecurity/mosaic"

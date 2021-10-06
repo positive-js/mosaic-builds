@@ -4,6 +4,7 @@ import { Platform } from '@angular/cdk/platform';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { ChangeDetectorRef, ElementRef, NgZone, QueryList, EventEmitter, AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
+import * as i0 from "@angular/core";
 /**
  * The directions that scrolling can go in when the header's tabs exceed the header width. 'After'
  * will scroll the header towards the end of the tabs list and 'before' will scroll towards the
@@ -173,4 +174,6 @@ export declare abstract class McPaginatedTabHeader implements AfterContentChecke
      * @returns Information on the current scroll distance and the maximum.
      */
     private scrollTo;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McPaginatedTabHeader, [null, null, null, null, null, { optional: true; }, { optional: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McPaginatedTabHeader, never, never, { "disablePagination": "disablePagination"; }, {}, never>;
 }

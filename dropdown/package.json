@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/dropdown/ptsecurity-mosaic-dropdown.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-dropdown.js",
   "typings": "ptsecurity-mosaic-dropdown.d.ts",
-  "metadata": "ptsecurity-mosaic-dropdown.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/dropdown"
 }

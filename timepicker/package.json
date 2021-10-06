@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/timepicker/ptsecurity-mosaic-timepicker.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-timepicker.js",
   "typings": "ptsecurity-mosaic-timepicker.d.ts",
-  "metadata": "ptsecurity-mosaic-timepicker.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/timepicker"
 }

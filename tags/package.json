@@ -5,7 +5,6 @@
   "esm2015": "../esm2015/tags/ptsecurity-mosaic-tags.js",
   "fesm2015": "../fesm2015/ptsecurity-mosaic-tags.js",
   "typings": "ptsecurity-mosaic-tags.d.ts",
-  "metadata": "ptsecurity-mosaic-tags.metadata.json",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/tags"
 }

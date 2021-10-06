@@ -1922,7 +1922,7 @@ $layout-gutter-width:      ($baseline-grid * 2) !default;
     .layout-padding-sm > *,
     .layout-padding    > .flex-sm
     {
-        padding: $layout-gutter-width / 4;
+        padding: div($layout-gutter-width, 4);
     }
 
     .layout-padding,
@@ -1938,7 +1938,7 @@ $layout-gutter-width:      ($baseline-grid * 2) !default;
     .layout-padding        > .flex-gt-sm,
     .layout-padding        > .flex-md
     {
-        padding: $layout-gutter-width / 2;
+        padding: div($layout-gutter-width, 2);
     }
 
     // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
@@ -1950,15 +1950,14 @@ $layout-gutter-width:      ($baseline-grid * 2) !default;
     .layout-padding        > .flex-lg,
     .layout-padding        > .flex-gt-lg
     {
-        padding: $layout-gutter-width / 1;
+        padding: div($layout-gutter-width, 1);
     }
 
     // Margin enhancements
 
     .layout-margin-sm      > *,
-    .layout-margin         > .flex-sm
-    {
-        margin: $layout-gutter-width / 4;
+    .layout-margin         > .flex-sm {
+        margin: div($layout-gutter-width, 4);
     }
 
     .layout-margin,
@@ -1974,7 +1973,7 @@ $layout-gutter-width:      ($baseline-grid * 2) !default;
     .layout-margin         > .flex-gt-sm,
     .layout-margin         > .flex-md
     {
-        margin: $layout-gutter-width / 2;
+        margin: div($layout-gutter-width, 2);
     }
 
     // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
@@ -1986,7 +1985,7 @@ $layout-gutter-width:      ($baseline-grid * 2) !default;
     .layout-margin        > .flex-lg,
     .layout-margin        > .flex-gt-lg
     {
-        margin: $layout-gutter-width / 1;
+        margin: div($layout-gutter-width, 1);
     }
 
     .layout-wrap {

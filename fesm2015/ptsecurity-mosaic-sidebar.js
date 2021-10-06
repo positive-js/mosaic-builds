@@ -1,5 +1,7 @@
+import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { Directive, Input, EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, NgZone, ElementRef, Output, ContentChild, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { Directive, Input, EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, Output, ContentChild, NgModule } from '@angular/core';
 import { isControl, isInput, isLeftBracket, isRightBracket } from '@ptsecurity/cdk/keycodes';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
@@ -32,28 +34,34 @@ var SidebarPositions;
 })(SidebarPositions || (SidebarPositions = {}));
 class McSidebarOpened {
 }
-McSidebarOpened.decorators = [
-    { type: Directive, args: [{
-                selector: '[mc-sidebar-opened]',
-                exportAs: 'mcSidebarOpened'
-            },] }
-];
-McSidebarOpened.propDecorators = {
-    minWidth: [{ type: Input }],
-    width: [{ type: Input }],
-    maxWidth: [{ type: Input }]
-};
+/** @nocollapse */ McSidebarOpened.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarOpened, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McSidebarOpened.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McSidebarOpened, selector: "[mc-sidebar-opened]", inputs: { minWidth: "minWidth", width: "width", maxWidth: "maxWidth" }, exportAs: ["mcSidebarOpened"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarOpened, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mc-sidebar-opened]',
+                    exportAs: 'mcSidebarOpened'
+                }]
+        }], propDecorators: { minWidth: [{
+                type: Input
+            }], width: [{
+                type: Input
+            }], maxWidth: [{
+                type: Input
+            }] } });
 class McSidebarClosed {
 }
-McSidebarClosed.decorators = [
-    { type: Directive, args: [{
-                selector: '[mc-sidebar-closed]',
-                exportAs: 'mcSidebarClosed'
-            },] }
-];
-McSidebarClosed.propDecorators = {
-    width: [{ type: Input }]
-};
+/** @nocollapse */ McSidebarClosed.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarClosed, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McSidebarClosed.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McSidebarClosed, selector: "[mc-sidebar-closed]", inputs: { width: "width" }, exportAs: ["mcSidebarClosed"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarClosed, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mc-sidebar-closed]',
+                    exportAs: 'mcSidebarClosed'
+                }]
+        }], propDecorators: { width: [{
+                type: Input
+            }] } });
 class McSidebar {
     constructor(ngZone, elementRef) {
         this.ngZone = ngZone;
@@ -133,60 +141,71 @@ class McSidebar {
         this.params.openedStateWidth = `${this.elementRef.nativeElement.offsetWidth}px`;
     }
 }
-McSidebar.decorators = [
-    { type: Component, args: [{
-                selector: 'mc-sidebar',
-                exportAs: 'mcSidebar',
-                template: "<ng-container [ngSwitch]=\"internalState\">\n    <ng-container *ngSwitchCase=\"true\">\n        <ng-content select=\"[mc-sidebar-opened]\"></ng-content>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"false\">\n        <ng-content select=\"[mc-sidebar-closed]\"></ng-content>\n    </ng-container>\n</ng-container>\n",
-                host: {
-                    class: 'mc-sidebar',
-                    '[@state]': `{
+/** @nocollapse */ McSidebar.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebar, deps: [{ token: i0.NgZone }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McSidebar.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McSidebar, selector: "mc-sidebar", inputs: { opened: "opened", position: "position" }, outputs: { stateChanged: "stateChanged" }, host: { listeners: { "@state.start": "onAnimationStart()", "@state.done": "onAnimationDone()" }, properties: { "@state": "{\n            value: animationState,\n            params: params\n        }" }, classAttribute: "mc-sidebar" }, queries: [{ propertyName: "openedContent", first: true, predicate: McSidebarOpened, descendants: true }, { propertyName: "closedContent", first: true, predicate: McSidebarClosed, descendants: true }], exportAs: ["mcSidebar"], ngImport: i0, template: "<ng-container [ngSwitch]=\"internalState\">\n    <ng-container *ngSwitchCase=\"true\">\n        <ng-content select=\"[mc-sidebar-opened]\"></ng-content>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"false\">\n        <ng-content select=\"[mc-sidebar-closed]\"></ng-content>\n    </ng-container>\n</ng-container>\n", styles: [".mc-sidebar{display:inline-block;height:100%;overflow:hidden}.mc-sidebar-opened,.mc-sidebar-closed{height:100%}\n"], directives: [{ type: i1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }], animations: [mcSidebarAnimations.sidebarState], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebar, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-sidebar',
+                    exportAs: 'mcSidebar',
+                    templateUrl: 'sidebar.component.html',
+                    styleUrls: ['./sidebar.scss'],
+                    host: {
+                        class: 'mc-sidebar',
+                        '[@state]': `{
             value: animationState,
             params: params
         }`,
-                    '(@state.start)': 'onAnimationStart()',
-                    '(@state.done)': 'onAnimationDone()'
-                },
-                animations: [mcSidebarAnimations.sidebarState],
-                encapsulation: ViewEncapsulation.None,
-                changeDetection: ChangeDetectionStrategy.OnPush,
-                styles: [".mc-sidebar{display:inline-block;height:100%;overflow:hidden}.mc-sidebar-closed,.mc-sidebar-opened{height:100%}"]
-            },] }
-];
-/** @nocollapse */
-McSidebar.ctorParameters = () => [
-    { type: NgZone },
-    { type: ElementRef }
-];
-McSidebar.propDecorators = {
-    opened: [{ type: Input }],
-    position: [{ type: Input }],
-    stateChanged: [{ type: Output }],
-    openedContent: [{ type: ContentChild, args: [McSidebarOpened, { static: false },] }],
-    closedContent: [{ type: ContentChild, args: [McSidebarClosed, { static: false },] }]
-};
+                        '(@state.start)': 'onAnimationStart()',
+                        '(@state.done)': 'onAnimationDone()'
+                    },
+                    animations: [mcSidebarAnimations.sidebarState],
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: i0.NgZone }, { type: i0.ElementRef }]; }, propDecorators: { opened: [{
+                type: Input
+            }], position: [{
+                type: Input
+            }], stateChanged: [{
+                type: Output
+            }], openedContent: [{
+                type: ContentChild,
+                args: [McSidebarOpened, { static: false }]
+            }], closedContent: [{
+                type: ContentChild,
+                args: [McSidebarClosed, { static: false }]
+            }] } });
 
 class McSidebarModule {
 }
-McSidebarModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule],
-                declarations: [
-                    McSidebarClosed,
-                    McSidebarOpened,
-                    McSidebar
-                ],
-                exports: [
-                    McSidebarClosed,
-                    McSidebarOpened,
-                    McSidebar
-                ]
-            },] }
-];
+/** @nocollapse */ McSidebarModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McSidebarModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarModule, declarations: [McSidebarClosed,
+        McSidebarOpened,
+        McSidebar], imports: [CommonModule], exports: [McSidebarClosed,
+        McSidebarOpened,
+        McSidebar] });
+/** @nocollapse */ McSidebarModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    imports: [CommonModule],
+                    declarations: [
+                        McSidebarClosed,
+                        McSidebarOpened,
+                        McSidebar
+                    ],
+                    exports: [
+                        McSidebarClosed,
+                        McSidebarOpened,
+                        McSidebar
+                    ]
+                }]
+        }] });
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions, mcSidebarAnimations as ɵa };
+export { McSidebar, McSidebarClosed, McSidebarModule, McSidebarOpened, SidebarPositions };
 //# sourceMappingURL=ptsecurity-mosaic-sidebar.js.map

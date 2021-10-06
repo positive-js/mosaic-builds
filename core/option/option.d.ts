@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, OnDestroy, QueryList } from '@angular/core';
 import { Subject } from 'rxjs';
 import { McOptgroup } from './optgroup';
+import * as i0 from "@angular/core";
 /** Event object emitted by McOption when selected or deselected. */
 export declare class McOptionSelectionChange {
     source: McOption;
@@ -91,6 +92,8 @@ export declare class McOption implements AfterViewChecked, OnDestroy {
     getHostElement(): HTMLElement;
     /** Emits the selection change event. */
     private emitSelectionChangeEvent;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McOption, [null, null, { optional: true; }, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McOption, "mc-option", ["mcOption"], { "value": "value"; "showCheckbox": "showCheckbox"; "disabled": "disabled"; }, { "onSelectionChange": "onSelectionChange"; }, never, ["*"]>;
 }
 /**
  * Counts the amount of option group labels that precede the specified option.

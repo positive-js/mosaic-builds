@@ -3,6 +3,7 @@ import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, TemplatePortal } fr
 import { ChangeDetectorRef, ComponentRef, ElementRef, EmbeddedViewRef, EventEmitter, InjectionToken, OnDestroy } from '@angular/core';
 import { McSidepanelAnimationState } from './sidepanel-animations';
 import { McSidepanelConfig } from './sidepanel-config';
+import * as i0 from "@angular/core";
 export declare const MC_SIDEPANEL_WITH_INDENT: InjectionToken<boolean>;
 export declare const MC_SIDEPANEL_WITH_SHADOW: InjectionToken<boolean>;
 export declare class McSidepanelContainerComponent extends BasePortalOutlet implements OnDestroy {
@@ -39,4 +40,6 @@ export declare class McSidepanelContainerComponent extends BasePortalOutlet impl
     private setAnimation;
     private setPanelClass;
     private validatePortalAttached;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McSidepanelContainerComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McSidepanelContainerComponent, "mc-sidepanel-container", never, {}, {}, never, never>;
 }

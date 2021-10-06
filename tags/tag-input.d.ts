@@ -3,6 +3,7 @@ import { NgControl } from '@angular/forms';
 import { McTagsDefaultOptions } from './tag-default-options';
 import { McTagList } from './tag-list.component';
 import { McTagTextControl } from './tag-text-control';
+import * as i0 from "@angular/core";
 /** Represents an input event on a `mcTagInput`. */
 export interface McTagInputEvent {
     /** The native `<input>` element that the event is being fired for. */
@@ -71,4 +72,6 @@ export declare class McTagInput implements McTagTextControl, OnChanges {
     private setDefaultInputWidth;
     /** Checks whether a keycode is one of the configured separators. */
     private isSeparatorKey;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTagInput, [null, null, null, { optional: true; self: true; }]>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTagInput, "input[mcTagInputFor]", ["mcTagInput", "mcTagInputFor"], { "separatorKeyCodes": "mcTagInputSeparatorKeyCodes"; "placeholder": "placeholder"; "id": "id"; "tagList": "mcTagInputFor"; "addOnBlur": "mcTagInputAddOnBlur"; "disabled": "disabled"; }, { "tagEnd": "mcTagInputTokenEnd"; }, never>;
 }

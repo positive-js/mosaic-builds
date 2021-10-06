@@ -3,6 +3,7 @@ import { IFocusableOption } from '@ptsecurity/cdk/a11y';
 import { CanColor, CanColorCtor, CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
 import { McIcon } from '@ptsecurity/mosaic/icon';
 import { Subject } from 'rxjs';
+import * as i0 from "@angular/core";
 export interface McTagEvent {
     tag: McTag;
 }
@@ -18,12 +19,16 @@ export declare class McTagSelectionChange {
  * @docs-private
  */
 export declare class McTagAvatar {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTagAvatar, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTagAvatar, "mc-tag-avatar, [mcTagAvatar]", never, {}, {}, never>;
 }
 /**
  * Dummy directive to add CSS class to tag trailing icon.
  * @docs-private
  */
 export declare class McTagTrailingIcon {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTagTrailingIcon, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTagTrailingIcon, "mc-tag-trailing-icon, [mcTagTrailingIcon]", never, {}, {}, never>;
 }
 export declare class McTagBase {
     _elementRef: ElementRef;
@@ -105,6 +110,8 @@ export declare class McTag extends McTagMixinBase implements IFocusableOption, O
     handleKeydown(event: KeyboardEvent): void;
     blur(): void;
     private dispatchSelectionChange;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTag, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTag, "mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]", ["mcTag"], { "color": "color"; "selected": "selected"; "value": "value"; "selectable": "selectable"; "removable": "removable"; "disabled": "disabled"; }, { "selectionChange": "selectionChange"; "destroyed": "destroyed"; "removed": "removed"; }, ["avatar", "trailingIcon", "removeIcon", "contentChildren"], ["*", "[mc-icon]"]>;
 }
 /**
  *
@@ -123,4 +130,6 @@ export declare class McTagRemove {
     focus($event: any): void;
     /** Calls the parent tag's public `remove()` method if applicable. */
     handleClick(event: Event): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTagRemove, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTagRemove, "[mcTagRemove]", never, {}, {}, never>;
 }
