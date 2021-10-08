@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 15 Sep 2021 10:49:02 GMT
+ * Generated on Thu, 07 Oct 2021 08:29:06 GMT
  */
 export declare const LightColorSchemePrimaryDefault = "#338FCC";
 export declare const LightColorSchemePrimaryPalette: {
@@ -7140,6 +7140,10 @@ export declare const CheckboxSizeToggleBoxShadow = "inset 0 0 1px 0 rgba(0, 0, 0
 export declare const CheckboxFontDefault = "body";
 export declare const DatepickerToggleSizeWidth = "30px";
 export declare const DatepickerToggleSizeHeight = "30px";
+export declare const DatepickerBodyLightColorSchemeStatesSelectedColor = "#338FCC";
+export declare const DatepickerBodyLightColorSchemeStatesSelectedBackground = "#D8EAF7";
+export declare const DatepickerBodyDarkColorSchemeStatesSelectedColor = "#338FCC";
+export declare const DatepickerBodyDarkColorSchemeStatesSelectedBackground = "#114E77";
 export declare const DatepickerBodySizeLabelPaddings = "8px 28px 12px 12px";
 export declare const DatepickerBodySizeCellMinSize = "32px";
 export declare const DatepickerBodySizeCellMargin = "5%";

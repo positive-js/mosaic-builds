@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/animations'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/overlay'), require('@angular/cdk/portal'), require('@ptsecurity/mosaic/button'), require('@ptsecurity/mosaic/icon'), require('@angular/common')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/sidepanel', ['exports', '@angular/core', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/animations', '@ptsecurity/mosaic/core', '@angular/cdk/overlay', '@angular/cdk/portal', '@ptsecurity/mosaic/button', '@ptsecurity/mosaic/icon', '@angular/common'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.sidepanel = {}), global.ng.core, global.mc.cdk.keycodes, global.rxjs, global.rxjs.operators, global.ng.animations, global.ptsecurity.mosaic.core, global.ng.cdk.overlay, global.ng.cdk.portal, global.ptsecurity.mosaic.button, global.ptsecurity.mosaic.icon, global.ng.common));
-}(this, (function (exports, i0, keycodes, rxjs, operators, animations, core, i1, i5, i2, i3, i4) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('rxjs'), require('rxjs/operators'), require('@angular/animations'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/overlay'), require('@angular/cdk/portal'), require('@angular/common'), require('@ptsecurity/mosaic/icon'), require('@ptsecurity/mosaic/button')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/sidepanel', ['exports', '@angular/core', '@ptsecurity/cdk/keycodes', 'rxjs', 'rxjs/operators', '@angular/animations', '@ptsecurity/mosaic/core', '@angular/cdk/overlay', '@angular/cdk/portal', '@angular/common', '@ptsecurity/mosaic/icon', '@ptsecurity/mosaic/button'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.sidepanel = {}), global.ng.core, global.mc.cdk.keycodes, global.rxjs, global.rxjs.operators, global.ng.animations, global.ptsecurity.mosaic.core, global.ng.cdk.overlay, global.ng.cdk.portal, global.ng.common, global.ptsecurity.mosaic.icon, global.ptsecurity.mosaic.button));
+}(this, (function (exports, i0, keycodes, rxjs, operators, animations, core, i1, i3, i2, i3$1, button) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -26,10 +26,9 @@
 
     var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
     var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
-    var i5__namespace = /*#__PURE__*/_interopNamespace(i5);
-    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
     var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
-    var i4__namespace = /*#__PURE__*/_interopNamespace(i4);
+    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
+    var i3__namespace$1 = /*#__PURE__*/_interopNamespace(i3$1);
 
     /** Injection token that can be used to access the data that was passed in to a sidepanel. */
     var MC_SIDEPANEL_DATA = new i0.InjectionToken('McSidepanelData');
@@ -512,9 +511,6 @@
             var element = this.elementRef.nativeElement;
             var position = this.sidepanelConfig.position;
             element.classList.add("mc-sidepanel-container_" + position);
-            if (this.withShadow) {
-                element.classList.add('mc-sidepanel-container_shadowed');
-            }
         };
         McSidepanelContainerComponent.prototype.validatePortalAttached = function () {
             if (this.portalOutlet.hasAttached()) {
@@ -522,9 +518,9 @@
             }
         };
         return McSidepanelContainerComponent;
-    }(i5.BasePortalOutlet));
+    }(i3.BasePortalOutlet));
     /** @nocollapse */ McSidepanelContainerComponent.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSidepanelContainerComponent, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: McSidepanelConfig }, { token: MC_SIDEPANEL_WITH_INDENT }, { token: MC_SIDEPANEL_WITH_SHADOW }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McSidepanelContainerComponent.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McSidepanelContainerComponent, selector: "mc-sidepanel-container", host: { attributes: { "role": "dialog", "aria-modal": "true" }, listeners: { "@state.start": "onAnimation($event)", "@state.done": "onAnimation($event)" }, properties: { "attr.id": "id", "attr.tabindex": "-1", "@state": "{\n            value: animationState,\n            params: animationTransform\n        }" }, classAttribute: "mc-sidepanel-container" }, viewQueries: [{ propertyName: "portalOutlet", first: true, predicate: i5.CdkPortalOutlet, descendants: true, static: true }], usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-sidepanel-wrapper\">\n\n    <button *ngIf=\"withIndent\"\n            class=\"mc-sidepanel-indent mc-button_transparent\"\n            mc-button\n            (click)=\"exit()\">\n        <i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" [color]=\"'second'\"></i>\n    </button>\n\n    <div class=\"mc-sidepanel-content\">\n        <ng-template cdkPortalOutlet></ng-template>\n    </div>\n</div>\n", styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.mc-sidepanel-container{outline:none;display:flex;flex:1;position:fixed;min-height:0}.mc-sidepanel-container .flex{min-height:0}.mc-sidepanel-container_left,.mc-sidepanel-container_right{width:33%;min-width:400px;height:100%;top:0}.mc-sidepanel-container_left .mc-sidepanel-indent,.mc-sidepanel-container_right .mc-sidepanel-indent{width:16px;height:100%}.mc-sidepanel-container_right{right:0;transform:translate(100%)}.mc-sidepanel-container_right .mc-sidepanel-wrapper{flex-direction:row}.mc-sidepanel-container_left{left:0;transform:translate(-100%)}.mc-sidepanel-container_left .mc-sidepanel-wrapper{flex-direction:row-reverse}.mc-sidepanel-container_top,.mc-sidepanel-container_bottom{flex-direction:column;height:33%;min-height:400px;width:100%;left:0}.mc-sidepanel-container_top .mc-sidepanel-indent,.mc-sidepanel-container_bottom .mc-sidepanel-indent{height:16px;width:100%}.mc-sidepanel-container_top{top:0;transform:translateY(-100%)}.mc-sidepanel-container_top .mc-sidepanel-wrapper{flex-direction:column-reverse}.mc-sidepanel-container_bottom{bottom:0;transform:translateY(100%)}.mc-sidepanel-container_bottom .mc-sidepanel-wrapper{flex-direction:column}.mc-sidepanel-wrapper{display:flex;flex:1;min-height:0;width:100%}.mc-sidepanel-indent{display:flex;flex:0 0 auto}.mc-sidepanel-indent .mc-sidepanel-close{width:100%;height:100%;-webkit-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;background:transparent;padding:0}.mc-sidepanel-content{display:flex;flex-direction:column;flex:1;min-height:0;width:100%}.mc-sidepanel-header{padding:14px 16px;padding:var(--mc-sidepanel-header-size-padding, 14px 16px);display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-header .mc-sidepanel-close{-webkit-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;background:transparent;padding:0 0 0 8px;padding:var(--mc-sidepanel-header-size-close-padding, 0 0 0 8px)}.mc-sidepanel-title{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mc-sidepanel-body{overflow-y:auto;display:flex;flex:1;flex-direction:column;min-height:0}.mc-sidepanel-footer{padding:16px;padding:var(--mc-sidepanel-footer-size-padding, 16px);display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-footer .mc-sidepanel-actions{display:flex;align-items:center;flex-direction:row;flex:1}.mc-sidepanel-footer .mc-sidepanel-actions[align=left]{justify-content:start}.mc-sidepanel-footer .mc-sidepanel-actions[align=right]{justify-content:flex-end}.mc-sidepanel-footer button+button{margin-left:16px}\n"], components: [{ type: i2__namespace.McButton, selector: "button[mc-button]", inputs: ["disabled", "color"] }, { type: i3__namespace.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i4__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i2__namespace.McButtonCssStyler, selector: "button[mc-button], a[mc-button]" }, { type: i3__namespace.McIconCSSStyler, selector: "[mc-icon]" }, { type: i5__namespace.CdkPortalOutlet, selector: "[cdkPortalOutlet]", inputs: ["cdkPortalOutlet"], outputs: ["attached"], exportAs: ["cdkPortalOutlet"] }], animations: [mcSidepanelAnimations.sidepanelState], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    /** @nocollapse */ McSidepanelContainerComponent.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McSidepanelContainerComponent, selector: "mc-sidepanel-container", host: { attributes: { "role": "dialog", "aria-modal": "true" }, listeners: { "@state.start": "onAnimation($event)", "@state.done": "onAnimation($event)" }, properties: { "class.mc-sidepanel_nested": "withIndent", "class.mc-sidepanel-container_shadowed": "withShadow", "attr.id": "id", "attr.tabindex": "-1", "@state": "{\n            value: animationState,\n            params: animationTransform\n        }" }, classAttribute: "mc-sidepanel-container" }, viewQueries: [{ propertyName: "portalOutlet", first: true, predicate: i3.CdkPortalOutlet, descendants: true, static: true }], usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-sidepanel-wrapper\">\n\n    <div *ngIf=\"withIndent\" class=\"mc-sidepanel-indent\" (click)=\"exit()\"></div>\n\n    <div class=\"mc-sidepanel-content\">\n        <ng-template cdkPortalOutlet></ng-template>\n    </div>\n</div>\n", styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.mc-sidepanel-container{outline:none;display:flex;flex:1;position:fixed;min-height:0}.mc-sidepanel-container .flex{min-height:0}.mc-sidepanel-container_left,.mc-sidepanel-container_right{width:33%;min-width:400px;height:100%;top:0}.mc-sidepanel-container_left .mc-sidepanel-indent,.mc-sidepanel-container_right .mc-sidepanel-indent{width:16px;height:100%}.mc-sidepanel-container_right{right:0;transform:translate(100%)}.mc-sidepanel-container_right .mc-sidepanel-wrapper{flex-direction:row}.mc-sidepanel-container_left{left:0;transform:translate(-100%)}.mc-sidepanel-container_left .mc-sidepanel-wrapper{flex-direction:row-reverse}.mc-sidepanel-container_top,.mc-sidepanel-container_bottom{flex-direction:column;height:33%;min-height:400px;width:100%;left:0}.mc-sidepanel-container_top .mc-sidepanel-indent,.mc-sidepanel-container_bottom .mc-sidepanel-indent{height:16px;width:100%}.mc-sidepanel-container_top{top:0;transform:translateY(-100%)}.mc-sidepanel-container_top .mc-sidepanel-wrapper{flex-direction:column-reverse}.mc-sidepanel-container_bottom{bottom:0;transform:translateY(100%)}.mc-sidepanel-container_bottom .mc-sidepanel-wrapper{flex-direction:column}.mc-sidepanel-wrapper{display:flex;flex:1;min-height:0;width:100%}.mc-sidepanel-indent{display:flex;flex:0 0 auto}.mc-sidepanel-indent .mc-sidepanel-close{width:100%;height:100%;-webkit-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;background:transparent;padding:0}.mc-sidepanel-content{display:flex;flex-direction:column;flex:1;min-height:0;width:100%}.mc-sidepanel-header{padding:14px 16px;padding:var(--mc-sidepanel-header-size-padding, 14px 16px);display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-header .mc-sidepanel-close{-webkit-user-select:none;user-select:none;cursor:pointer;outline:none;border:none;background:transparent;padding:0 0 0 8px;padding:var(--mc-sidepanel-header-size-close-padding, 0 0 0 8px)}.mc-sidepanel-title{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mc-sidepanel-body{overflow-y:auto;display:flex;flex:1;flex-direction:column;min-height:0}.mc-sidepanel-footer{padding:16px;padding:var(--mc-sidepanel-footer-size-padding, 16px);display:flex;flex-flow:row nowrap;justify-content:space-between;align-items:center;flex:0 0 auto}.mc-sidepanel-footer .mc-sidepanel-actions{display:flex;align-items:center;flex-direction:row;flex:1}.mc-sidepanel-footer .mc-sidepanel-actions[align=left]{justify-content:start}.mc-sidepanel-footer .mc-sidepanel-actions[align=right]{justify-content:flex-end}.mc-sidepanel-footer button+button{margin-left:16px}\n"], directives: [{ type: i2__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i3__namespace.CdkPortalOutlet, selector: "[cdkPortalOutlet]", inputs: ["cdkPortalOutlet"], outputs: ["attached"], exportAs: ["cdkPortalOutlet"] }], animations: [mcSidepanelAnimations.sidepanelState], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSidepanelContainerComponent, decorators: [{
                 type: i0.Component,
                 args: [{
@@ -536,6 +532,8 @@
                         animations: [mcSidepanelAnimations.sidepanelState],
                         host: {
                             class: 'mc-sidepanel-container',
+                            '[class.mc-sidepanel_nested]': 'withIndent',
+                            '[class.mc-sidepanel-container_shadowed]': 'withShadow',
                             role: 'dialog',
                             'aria-modal': 'true',
                             '[attr.id]': 'id',
@@ -555,7 +553,7 @@
                         }] }];
         }, propDecorators: { portalOutlet: [{
                     type: i0.ViewChild,
-                    args: [i5.CdkPortalOutlet, { static: true }]
+                    args: [i3.CdkPortalOutlet, { static: true }]
                 }] } });
 
     /** Injection token that can be used to specify default sidepanel options. */
@@ -592,14 +590,14 @@
             var container = this.attachContainer(overlayRef, fullConfig);
             var ref = new McSidepanelRef(container, overlayRef, fullConfig);
             if (componentOrTemplateRef instanceof i0.TemplateRef) {
-                container.attachTemplatePortal(new i5.TemplatePortal(componentOrTemplateRef, null, {
+                container.attachTemplatePortal(new i3.TemplatePortal(componentOrTemplateRef, null, {
                     $implicit: fullConfig.data,
                     sidepanelRef: ref
                 }));
             }
             else {
                 var injector = this.createInjector(fullConfig, ref, container);
-                var portal = new i5.ComponentPortal(componentOrTemplateRef, undefined, injector);
+                var portal = new i3.ComponentPortal(componentOrTemplateRef, undefined, injector);
                 var contentRef = container.attachComponentPortal(portal);
                 ref.instance = contentRef.instance;
             }
@@ -627,12 +625,12 @@
         McSidepanelService.prototype.attachContainer = function (overlayRef, config) {
             var openedSidepanelsWithSamePosition = this.getOpenedSidepanelsWithSamePosition(config);
             // tslint:disable-next-line:deprecation
-            var injector = new i5.PortalInjector(this.injector, new WeakMap([
+            var injector = new i3.PortalInjector(this.injector, new WeakMap([
                 [McSidepanelConfig, config],
                 [MC_SIDEPANEL_WITH_INDENT, openedSidepanelsWithSamePosition.length >= 1],
                 [MC_SIDEPANEL_WITH_SHADOW, openedSidepanelsWithSamePosition.length < 2] // tslint:disable-line
             ]));
-            var containerPortal = new i5.ComponentPortal(McSidepanelContainerComponent, undefined, injector);
+            var containerPortal = new i3.ComponentPortal(McSidepanelContainerComponent, undefined, injector);
             var containerRef = overlayRef.attach(containerPortal);
             return containerRef.instance;
         };
@@ -657,7 +655,7 @@
                 [McSidepanelRef, sidepanelRef]
             ]);
             // tslint:disable-next-line:deprecation
-            return new i5.PortalInjector(this.injector, injectionTokens);
+            return new i3.PortalInjector(this.injector, injectionTokens);
         };
         /**
          * Creates a new overlay and places it in the correct location.
@@ -779,7 +777,7 @@
         return McSidepanelHeader;
     }());
     /** @nocollapse */ McSidepanelHeader.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSidepanelHeader, deps: [], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McSidepanelHeader.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McSidepanelHeader, selector: "mc-sidepanel-header", inputs: { closeable: "closeable" }, host: { classAttribute: "mc-sidepanel-header" }, ngImport: i0__namespace, template: "\n        <div class=\"mc-sidepanel-title\">\n            <ng-content></ng-content>\n        </div>\n        <button *ngIf=\"closeable\" mc-sidepanel-close>\n            <span class=\"mc-sidepanel-close-x\">\n                <i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" [color]=\"'second'\"></i>\n            </span>\n        </button>\n    ", isInline: true, components: [{ type: i3__namespace.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i4__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: McSidepanelClose, selector: "button[mc-sidepanel-close], button[mcSidepanelClose]", inputs: ["mc-sidepanel-close", "mcSidepanelClose"] }, { type: i3__namespace.McIconCSSStyler, selector: "[mc-icon]" }] });
+    /** @nocollapse */ McSidepanelHeader.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McSidepanelHeader, selector: "mc-sidepanel-header", inputs: { closeable: "closeable" }, host: { classAttribute: "mc-sidepanel-header" }, ngImport: i0__namespace, template: "\n        <div class=\"mc-sidepanel-title\">\n            <ng-content></ng-content>\n        </div>\n        <button *ngIf=\"closeable\" mc-sidepanel-close>\n            <span class=\"mc-sidepanel-close-x\">\n                <i mc-icon=\"mc-close-L_16\" class=\"mc-icon mc-icon_light\" [color]=\"'second'\"></i>\n            </span>\n        </button>\n    ", isInline: true, components: [{ type: i3__namespace$1.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i2__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: McSidepanelClose, selector: "button[mc-sidepanel-close], button[mcSidepanelClose]", inputs: ["mc-sidepanel-close", "mcSidepanelClose"] }, { type: i3__namespace$1.McIconCSSStyler, selector: "[mc-icon]" }] });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSidepanelHeader, decorators: [{
                 type: i0.Component,
                 args: [{
@@ -873,35 +871,35 @@
             McSidepanelHeader,
             McSidepanelBody,
             McSidepanelFooter,
-            McSidepanelActions], imports: [i4.CommonModule,
+            McSidepanelActions], imports: [i2.CommonModule,
             i1.OverlayModule,
-            i5.PortalModule,
+            i3.PortalModule,
             core.McCommonModule,
-            i2.McButtonModule,
-            i3.McIconModule], exports: [McSidepanelContainerComponent,
+            button.McButtonModule,
+            i3$1.McIconModule], exports: [McSidepanelContainerComponent,
             McSidepanelClose,
             McSidepanelHeader,
             McSidepanelBody,
             McSidepanelFooter,
             McSidepanelActions] });
     /** @nocollapse */ McSidepanelModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSidepanelModule, providers: [McSidepanelService], imports: [[
-                i4.CommonModule,
+                i2.CommonModule,
                 i1.OverlayModule,
-                i5.PortalModule,
+                i3.PortalModule,
                 core.McCommonModule,
-                i2.McButtonModule,
-                i3.McIconModule
+                button.McButtonModule,
+                i3$1.McIconModule
             ]] });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McSidepanelModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
                         imports: [
-                            i4.CommonModule,
+                            i2.CommonModule,
                             i1.OverlayModule,
-                            i5.PortalModule,
+                            i3.PortalModule,
                             core.McCommonModule,
-                            i2.McButtonModule,
-                            i3.McIconModule
+                            button.McButtonModule,
+                            i3$1.McIconModule
                         ],
                         providers: [McSidepanelService],
                         declarations: [
