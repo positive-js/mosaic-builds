@@ -335,9 +335,6 @@ class McSidepanelService {
         });
     }
     getBackdropClass(config) {
-        if (config.hasBackdrop && config.backdropClass) {
-            return config.backdropClass;
-        }
         const hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some((sidepanelRef) => sidepanelRef.config.hasBackdrop);
         return config.requiredBackdrop || !hasOpenedSidepanelWithBackdrop ? 'cdk-overlay-dark-backdrop' :
             'cdk-overlay-transparent-backdrop';

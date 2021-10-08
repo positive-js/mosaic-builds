@@ -679,9 +679,6 @@
             });
         };
         McSidepanelService.prototype.getBackdropClass = function (config) {
-            if (config.hasBackdrop && config.backdropClass) {
-                return config.backdropClass;
-            }
             var hasOpenedSidepanelWithBackdrop = this.openedSidepanels.some(function (sidepanelRef) { return sidepanelRef.config.hasBackdrop; });
             return config.requiredBackdrop || !hasOpenedSidepanelWithBackdrop ? 'cdk-overlay-dark-backdrop' :
                 'cdk-overlay-transparent-backdrop';
