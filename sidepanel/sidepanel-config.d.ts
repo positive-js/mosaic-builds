@@ -15,6 +15,7 @@ export declare class McSidepanelConfig<D = any> {
     position?: McSidepanelPosition;
     /** Whether the sidepanel has a backdrop. */
     hasBackdrop?: boolean;
+    backdropClass?: string;
     /** When we open multiple sidepanels, backdrop appears only once, except cases then this flag is true. */
     requiredBackdrop?: boolean;
     /** Whether the user can use escape or clicking outside to close the sidepanel. */

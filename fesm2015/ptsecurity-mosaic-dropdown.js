@@ -81,7 +81,8 @@ class McDropdownContent {
      * @docs-private
      */
     detach() {
-        if (this.portal.isAttached) {
+        var _a;
+        if ((_a = this.portal) === null || _a === void 0 ? void 0 : _a.isAttached) {
             this.portal.detach();
         }
     }
@@ -708,6 +709,7 @@ class McDropdownTrigger {
         overlayConfig.hasBackdrop = this.dropdown.hasBackdrop ? !this.isNested() : this.dropdown.hasBackdrop;
         overlayRef.attach(this.getPortal());
         if (this.dropdown.lazyContent) {
+            this.dropdown.lazyContent.detach();
             this.dropdown.lazyContent.attach(this.data);
         }
         this.closeSubscription = this.closingActions()
@@ -794,14 +796,7 @@ class McDropdownTrigger {
                     .pipe(takeUntil(this.dropdown.lazyContent.attached));
             }
             dropdownAnimationDoneSubscription
-                .subscribe({
-                // If lazy content has attached we're need to detach it.
-                next: this.dropdown.lazyContent ? () => { var _a; return (_a = this.dropdown.lazyContent) === null || _a === void 0 ? void 0 : _a.detach(); } : undefined,
-                error: undefined,
-                complete: () => {
-                    this.reset();
-                }
-            });
+                .subscribe(() => this.reset());
         }
         else {
             this.reset();
