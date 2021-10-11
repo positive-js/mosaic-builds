@@ -368,6 +368,7 @@ class McTagRemove {
     /** Calls the parent tag's public `remove()` method if applicable. */
     handleClick(event) {
         if (this.parentTag.removable) {
+            this.parentTag.hasFocus = true;
             this.parentTag.remove();
         }
         // We need to stop event propagation because otherwise the event will bubble up to the
@@ -969,20 +970,23 @@ class McTagList extends McTagListMixinBase {
     }
     /** Listens to user-generated selection events on each tag. */
     listenToTagsFocus() {
-        this.tagFocusSubscription = this.tagFocusChanges.subscribe((event) => {
+        this.tagFocusSubscription = this.tagFocusChanges
+            .subscribe((event) => {
             const tagIndex = this.tags.toArray().indexOf(event.tag);
             if (this.isValidIndex(tagIndex)) {
                 this.keyManager.updateActiveItem(tagIndex);
             }
             this.stateChanges.next();
         });
-        this.tagBlurSubscription = this.tagBlurChanges.subscribe(() => {
+        this.tagBlurSubscription = this.tagBlurChanges
+            .subscribe(() => {
             this.blur();
             this.stateChanges.next();
         });
     }
     listenToTagsRemoved() {
-        this.tagRemoveSubscription = this.tagRemoveChanges.subscribe((event) => {
+        this.tagRemoveSubscription = this.tagRemoveChanges
+            .subscribe((event) => {
             const tag = event.tag;
             const tagIndex = this.tags.toArray().indexOf(event.tag);
             // In case the tag that will be removed is currently focused, we temporarily store
@@ -990,9 +994,6 @@ class McTagList extends McTagListMixinBase {
             // receive focus.
             if (this.isValidIndex(tagIndex) && tag.hasFocus) {
                 this.lastDestroyedTagIndex = tagIndex;
-            }
-            else if (this.isValidIndex(tagIndex) && !tag.hasFocus) {
-                this.focusInput();
             }
         });
     }

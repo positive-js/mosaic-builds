@@ -1003,6 +1003,7 @@
         /** Calls the parent tag's public `remove()` method if applicable. */
         McTagRemove.prototype.handleClick = function (event) {
             if (this.parentTag.removable) {
+                this.parentTag.hasFocus = true;
                 this.parentTag.remove();
             }
             // We need to stop event propagation because otherwise the event will bubble up to the
@@ -1693,21 +1694,24 @@
         /** Listens to user-generated selection events on each tag. */
         McTagList.prototype.listenToTagsFocus = function () {
             var _this = this;
-            this.tagFocusSubscription = this.tagFocusChanges.subscribe(function (event) {
+            this.tagFocusSubscription = this.tagFocusChanges
+                .subscribe(function (event) {
                 var tagIndex = _this.tags.toArray().indexOf(event.tag);
                 if (_this.isValidIndex(tagIndex)) {
                     _this.keyManager.updateActiveItem(tagIndex);
                 }
                 _this.stateChanges.next();
             });
-            this.tagBlurSubscription = this.tagBlurChanges.subscribe(function () {
+            this.tagBlurSubscription = this.tagBlurChanges
+                .subscribe(function () {
                 _this.blur();
                 _this.stateChanges.next();
             });
         };
         McTagList.prototype.listenToTagsRemoved = function () {
             var _this = this;
-            this.tagRemoveSubscription = this.tagRemoveChanges.subscribe(function (event) {
+            this.tagRemoveSubscription = this.tagRemoveChanges
+                .subscribe(function (event) {
                 var tag = event.tag;
                 var tagIndex = _this.tags.toArray().indexOf(event.tag);
                 // In case the tag that will be removed is currently focused, we temporarily store
@@ -1715,9 +1719,6 @@
                 // receive focus.
                 if (_this.isValidIndex(tagIndex) && tag.hasFocus) {
                     _this.lastDestroyedTagIndex = tagIndex;
-                }
-                else if (_this.isValidIndex(tagIndex) && !tag.hasFocus) {
-                    _this.focusInput();
                 }
             });
         };
