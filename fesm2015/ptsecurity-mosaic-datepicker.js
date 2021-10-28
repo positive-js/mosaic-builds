@@ -2082,6 +2082,7 @@ class McDatepickerInput {
         this.disabled = isDisabled;
     }
     onKeyDown(event) {
+        var _a;
         if (this.isReadOnly) {
             return;
         }
@@ -2093,7 +2094,7 @@ class McDatepickerInput {
         }
         else if (this.isKeyForOpen(event)) {
             event.preventDefault();
-            this.datepicker.open();
+            (_a = this.datepicker) === null || _a === void 0 ? void 0 : _a.open();
         }
         else if (this.isKeyForClose(event)) {
             event.preventDefault();
