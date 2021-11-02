@@ -2,12 +2,24 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { CdkTree, CdkTreeNodeOutlet, FlatTreeControl } from '@ptsecurity/cdk/tree';
 import { CanDisable, HasTabIndex, MultipleMode } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
+import { FlatTreeControl } from './control/flat-tree-control';
+import { McTreeNodeOutlet } from './outlet';
+import { McTreeBase } from './tree-base';
 import { McTreeOption, McTreeOptionEvent } from './tree-option.component';
 import * as i0 from "@angular/core";
 export declare const MC_SELECTION_TREE_VALUE_ACCESSOR: any;
+export declare class McTreeSelectAllEvent<T> {
+    source: McTreeSelection;
+    options: T[];
+    constructor(source: McTreeSelection, options: T[]);
+}
+export declare class McTreeCopyEvent<T> {
+    source: McTreeSelection;
+    option: T;
+    constructor(source: McTreeSelection, option: T);
+}
 export declare class McTreeNavigationChange<T> {
     source: McTreeSelection;
     option: T;
@@ -22,19 +34,21 @@ interface SelectionModelOption {
     id: number | string;
     value: string;
 }
-export declare class McTreeSelection extends CdkTree<McTreeOption> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
+export declare class McTreeSelection extends McTreeBase<McTreeOption> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
     private elementRef;
-    nodeOutlet: CdkTreeNodeOutlet;
-    unorderedOptions: QueryList<McTreeOption>;
     renderedOptions: QueryList<McTreeOption>;
     keyManager: FocusKeyManager<McTreeOption>;
     selectionModel: SelectionModel<SelectionModelOption>;
     resetFocusedItemOnBlur: boolean;
+    multipleMode: MultipleMode | null;
+    userTabIndex: number | null;
+    nodeOutlet: McTreeNodeOutlet;
+    unorderedOptions: QueryList<McTreeOption>;
     treeControl: FlatTreeControl<McTreeOption>;
     readonly navigationChange: EventEmitter<McTreeNavigationChange<McTreeOption>>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange<McTreeOption>>;
-    multipleMode: MultipleMode | null;
-    userTabIndex: number | null;
+    readonly onSelectAll: EventEmitter<McTreeSelectAllEvent<McTreeOption>>;
+    readonly onCopy: EventEmitter<McTreeCopyEvent<McTreeOption>>;
     private sortedNodes;
     get autoSelect(): boolean;
     set autoSelect(value: boolean);
@@ -68,10 +82,10 @@ export declare class McTreeSelection extends CdkTree<McTreeOption> implements Co
     setFocusedOption(option: McTreeOption): void;
     toggleFocusedOption(): void;
     renderNodeChanges(data: McTreeOption[], dataDiffer?: IterableDiffer<McTreeOption>, viewContainer?: ViewContainerRef, parentData?: McTreeOption): void;
-    getHeight(): number;
-    getItemHeight(): number;
     emitNavigationEvent(option: McTreeOption): void;
     emitChangeEvent(option: McTreeOption): void;
+    selectAllOptions(): void;
+    copyActiveOption(): void;
     writeValue(value: any): void;
     /** `View -> model callback called when value changes` */
     onChange: (value: any) => void;
@@ -85,7 +99,9 @@ export declare class McTreeSelection extends CdkTree<McTreeOption> implements Co
     setDisabledState(isDisabled: boolean): void;
     setOptionsFromValues(values: any[]): void;
     getSelectedValues(): any[];
-    protected updateTabIndex(): void;
+    getItemHeight(): number;
+    private getHeight;
+    private updateTabIndex;
     private updateRenderedOptions;
     private getSortedNodes;
     private allowFocusEscape;
@@ -105,6 +121,6 @@ export declare class McTreeSelection extends CdkTree<McTreeOption> implements Co
     private canDeselectLast;
     private isFocusReceivedFromNestedOption;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelection, [null, null, null, { attribute: "multiple"; }]>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeSelection, "mc-tree-selection", ["mcTreeSelection"], { "treeControl": "treeControl"; "autoSelect": "autoSelect"; "noUnselectLast": "noUnselectLast"; "disabled": "disabled"; "tabIndex": "tabIndex"; }, { "navigationChange": "navigationChange"; "selectionChange": "selectionChange"; }, ["unorderedOptions"], never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeSelection, "mc-tree-selection", ["mcTreeSelection"], { "treeControl": "treeControl"; "autoSelect": "autoSelect"; "noUnselectLast": "noUnselectLast"; "disabled": "disabled"; "tabIndex": "tabIndex"; }, { "navigationChange": "navigationChange"; "selectionChange": "selectionChange"; "onSelectAll": "onSelectAll"; "onCopy": "onCopy"; }, ["unorderedOptions"], never>;
 }
 export {};

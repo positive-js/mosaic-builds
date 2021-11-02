@@ -933,9 +933,9 @@
 	var ExtendedTooltipHeaderSizeHeight = "40px";
 	var ExtendedTooltipHeaderSizePadding = "10px 16px";
 	var ExtendedTooltipHeaderFontDefault = "subheading";
+	var TreeSizeNodeHeight = "32px";
+	var TreeSizePaddingLeft = "8px";
 	var TreeSizePaddingRight = "16px";
-	var TreeSizeBorderWidth = "2px";
-	var TreeSizeNodeHeight = "28px";
 	var TreeFontNode = "body";
 
 	/**
@@ -1763,8 +1763,8 @@
 	exports.TooltipSizePadding = TooltipSizePadding;
 	exports.TooltipSizeTriggerMargin = TooltipSizeTriggerMargin;
 	exports.TreeFontNode = TreeFontNode;
-	exports.TreeSizeBorderWidth = TreeSizeBorderWidth;
 	exports.TreeSizeNodeHeight = TreeSizeNodeHeight;
+	exports.TreeSizePaddingLeft = TreeSizePaddingLeft;
 	exports.TreeSizePaddingRight = TreeSizePaddingRight;
 	exports.TypographyBodyCapsFontFamily = TypographyBodyCapsFontFamily;
 	exports.TypographyBodyCapsFontSize = TypographyBodyCapsFontSize;

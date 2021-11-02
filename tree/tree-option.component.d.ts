@@ -1,8 +1,9 @@
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { ChangeDetectorRef, EventEmitter, ElementRef, InjectionToken, AfterContentInit, NgZone } from '@angular/core';
-import { CdkTreeNode } from '@ptsecurity/cdk/tree';
-import { CanDisable } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
+import { McTreeNodeActionComponent } from './action';
+import { McTreeNodeToggleBaseDirective } from './toggle';
+import { McTreeNode } from './tree-base';
 import * as i0 from "@angular/core";
 export interface McTreeOptionEvent {
     option: McTreeOption;
@@ -16,12 +17,14 @@ export declare class McTreeOptionChange {
     isUserInput: boolean;
     constructor(source: McTreeOption, isUserInput?: boolean);
 }
-export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements CanDisable, AfterContentInit {
+export declare class McTreeOption extends McTreeNode<McTreeOption> implements AfterContentInit {
     private changeDetectorRef;
     private ngZone;
     tree: any;
     readonly onFocus: Subject<McTreeOptionEvent>;
     readonly onBlur: Subject<McTreeOptionEvent>;
+    toggleElement: McTreeNodeToggleBaseDirective<McTreeOption>;
+    actionButton: McTreeNodeActionComponent;
     get value(): any;
     set value(value: any);
     private _value;
@@ -37,9 +40,9 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     private _selected;
     get id(): string;
     private _id;
-    get multiple(): boolean;
     get viewValue(): string;
     hasFocus: boolean;
+    get isExpandable(): boolean;
     constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, ngZone: NgZone, tree: any);
     ngAfterContentInit(): void;
     toggle(): void;
@@ -49,10 +52,11 @@ export declare class McTreeOption extends CdkTreeNode<McTreeOption> implements C
     getHeight(): number;
     select(): void;
     deselect(): void;
+    onKeydown($event: any): void;
     selectViaInteraction($event?: KeyboardEvent): void;
     emitSelectionChangeEvent(isUserInput?: boolean): void;
     getHostElement(): HTMLElement;
     markForCheck(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeOption, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, never, ["[mc-icon]", "mc-tree-node-toggle", "*"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, ["toggleElement", "actionButton"], ["mc-tree-node-toggle", "[mc-icon]", "*", "mc-tree-node-action"]>;
 }

@@ -298,7 +298,7 @@ class McTimepicker {
             event.preventDefault();
             this.incorrectInput.emit();
         }
-        else if ((hasModifierKey(event) && (isVerticalMovement(keyCode) || isHorizontalMovement(keyCode))) ||
+        else if ((hasModifierKey(event) && (isVerticalMovement(event) || isHorizontalMovement(event))) ||
             event.ctrlKey || event.metaKey ||
             [DELETE, BACKSPACE].includes(keyCode)) {
             noop();

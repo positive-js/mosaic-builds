@@ -1,6 +1,7 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { FlatTreeControl, TreeControl } from '@ptsecurity/cdk/tree';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { FlatTreeControl } from '../control/flat-tree-control';
+import { TreeControl } from '../control/tree-control';
 /**
  * Tree flattener to convert a normal type of node to node with children & level information.
  * Transform nested nodes of type `T` to flattened nodes of type `F`.

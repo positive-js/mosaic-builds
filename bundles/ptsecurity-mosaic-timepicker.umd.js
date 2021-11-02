@@ -383,7 +383,7 @@
                 event.preventDefault();
                 this.incorrectInput.emit();
             }
-            else if ((keycodes.hasModifierKey(event) && (keycodes.isVerticalMovement(keyCode) || keycodes.isHorizontalMovement(keyCode))) ||
+            else if ((keycodes.hasModifierKey(event) && (keycodes.isVerticalMovement(event) || keycodes.isHorizontalMovement(event))) ||
                 event.ctrlKey || event.metaKey ||
                 [keycodes.DELETE, keycodes.BACKSPACE].includes(keyCode)) {
                 rxjs.noop();

@@ -883,6 +883,10 @@
                 event.element.scrollTop = 0;
             }
         };
+        McDropdown.prototype.close = function () {
+            var focusOrigin = this.keyManager.getFocusOrigin() === 'keyboard' ? 'keydown' : 'click';
+            this.closed.emit(focusOrigin);
+        };
         /**
          * Sets up a stream that will keep track of any newly-added menu items and will update the list
          * of direct descendants. We collect the descendants this way, because `_allItems` can include
@@ -903,7 +907,7 @@
     /** @nocollapse */ McDropdown.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McDropdown, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.NgZone }, { token: MC_DROPDOWN_DEFAULT_OPTIONS }], target: i0__namespace.ɵɵFactoryTarget.Component });
     /** @nocollapse */ McDropdown.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McDropdown, selector: "mc-dropdown", inputs: { navigationWithWrap: "navigationWithWrap", xPosition: "xPosition", yPosition: "yPosition", overlapTriggerY: "overlapTriggerY", overlapTriggerX: "overlapTriggerX", hasBackdrop: "hasBackdrop", panelClass: ["class", "panelClass"], backdropClass: "backdropClass" }, outputs: { closed: "closed" }, providers: [
             { provide: MC_DROPDOWN_PANEL, useExisting: McDropdown }
-        ], queries: [{ propertyName: "lazyContent", first: true, predicate: McDropdownContent, descendants: true }, { propertyName: "items", predicate: McDropdownItem, descendants: true }], viewQueries: [{ propertyName: "templateRef", first: true, predicate: i0.TemplateRef, descendants: true }], exportAs: ["mcDropdown"], ngImport: i0__namespace, template: "<ng-template>\n    <div class=\"mc-dropdown__panel\"\n         [ngClass]=\"classList\"\n         [class.mc-dropdown__panel_nested]=\"parent\"\n         [style.min-width]=\"triggerWidth\"\n         (keydown)=\"handleKeydown($event)\"\n         (click)=\"closed.emit('click')\"\n         [@transformDropdown]=\"panelAnimationState\"\n         (@transformDropdown.start)=\"onAnimationStart($event)\"\n         (@transformDropdown.done)=\"onAnimationDone($event)\"\n         tabindex=\"-1\">\n\n        <div class=\"mc-dropdown__content\">\n            <ng-content></ng-content>\n        </div>\n    </div>\n</ng-template>\n", styles: [".mc-dropdown__panel{margin-top:-1px;max-width:640px;max-width:var(--mc-dropdown-panel-size-max-width, 640px);border-width:1px;border-width:var(--mc-dropdown-panel-size-border-width, 1px);border-style:solid;border-bottom-left-radius:3px;border-bottom-left-radius:var(--mc-dropdown-panel-size-border-radius, 3px);border-bottom-right-radius:3px;border-bottom-right-radius:var(--mc-dropdown-panel-size-border-radius, 3px);padding:4px 0;padding:var(--mc-dropdown-panel-size-padding, 4px 0)}.mc-dropdown__panel.mc-dropdown__panel_nested{border-top-left-radius:3px;border-top-left-radius:var(--mc-dropdown-panel-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-dropdown-panel-size-border-radius, 3px)}.mc-dropdown__panel.ng-animating{pointer-events:none}.mc-dropdown__content{display:flex;flex-direction:column}\n"], directives: [{ type: i3__namespace.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }], animations: [
+        ], queries: [{ propertyName: "lazyContent", first: true, predicate: McDropdownContent, descendants: true }, { propertyName: "items", predicate: McDropdownItem, descendants: true }], viewQueries: [{ propertyName: "templateRef", first: true, predicate: i0.TemplateRef, descendants: true }], exportAs: ["mcDropdown"], ngImport: i0__namespace, template: "<ng-template>\n    <div class=\"mc-dropdown__panel\"\n         [ngClass]=\"classList\"\n         [class.mc-dropdown__panel_nested]=\"parent\"\n         [style.min-width]=\"triggerWidth\"\n         (keydown)=\"handleKeydown($event)\"\n         (click)=\"close()\"\n         [@transformDropdown]=\"panelAnimationState\"\n         (@transformDropdown.start)=\"onAnimationStart($event)\"\n         (@transformDropdown.done)=\"onAnimationDone($event)\"\n         tabindex=\"-1\">\n\n        <div class=\"mc-dropdown__content\">\n            <ng-content></ng-content>\n        </div>\n    </div>\n</ng-template>\n", styles: [".mc-dropdown__panel{margin-top:-1px;max-width:640px;max-width:var(--mc-dropdown-panel-size-max-width, 640px);border-width:1px;border-width:var(--mc-dropdown-panel-size-border-width, 1px);border-style:solid;border-bottom-left-radius:3px;border-bottom-left-radius:var(--mc-dropdown-panel-size-border-radius, 3px);border-bottom-right-radius:3px;border-bottom-right-radius:var(--mc-dropdown-panel-size-border-radius, 3px);padding:4px 0;padding:var(--mc-dropdown-panel-size-padding, 4px 0)}.mc-dropdown__panel.mc-dropdown__panel_nested{border-top-left-radius:3px;border-top-left-radius:var(--mc-dropdown-panel-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-dropdown-panel-size-border-radius, 3px)}.mc-dropdown__panel.ng-animating{pointer-events:none}.mc-dropdown__content{display:flex;flex-direction:column}\n"], directives: [{ type: i3__namespace.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }], animations: [
             mcDropdownAnimations.transformDropdown,
             mcDropdownAnimations.fadeInItems
         ], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
@@ -1111,12 +1115,10 @@
         };
         /**
          * Focuses the dropdown trigger.
-         * @param origin Source of the dropdown trigger's focus.
          */
-        McDropdownTrigger.prototype.focus = function (origin) {
-            if (origin === void 0) { origin = 'program'; }
-            if (this.focusMonitor) {
-                this.focusMonitor.focusVia(this.elementRef.nativeElement, origin);
+        McDropdownTrigger.prototype.focus = function (origin, options) {
+            if (this.focusMonitor && origin) {
+                this.focusMonitor.focusVia(this.elementRef.nativeElement, origin, options);
             }
             else {
                 this.elementRef.nativeElement.focus();
@@ -1164,31 +1166,43 @@
         /** Closes the dropdown and does the necessary cleanup. */
         McDropdownTrigger.prototype.destroy = function (reason) {
             var _this = this;
-            var _a;
             if (!this.overlayRef || !this.opened) {
                 return;
             }
+            this.lastDestroyReason = reason;
             this.dropdown.resetActiveItem();
             this.closeSubscription.unsubscribe();
             this.overlayRef.detach();
-            if (this.restoreFocus && reason === 'keydown' && this.isNested()) {
+            if (this.restoreFocus && (reason === 'keydown' || !this.openedBy || !this.isNested())) {
                 this.focus(this.openedBy);
             }
+            this.openedBy = undefined;
             if (this.dropdown instanceof McDropdown) {
                 this.dropdown.resetAnimation();
-                // Wait for the exit animation to finish before reseting dropdown toState.
-                var dropdownAnimationDoneSubscription = this.dropdown.animationDone
+                var animationSubscription = this.dropdown.animationDone
                     .pipe(operators.filter(function (event) { return event.toState === 'void'; }), operators.take(1));
                 if (this.dropdown.lazyContent) {
-                    dropdownAnimationDoneSubscription
-                        .pipe(operators.takeUntil(this.dropdown.lazyContent.attached));
+                    // Wait for the exit animation to finish before detaching the content.
+                    animationSubscription
+                        .pipe(
+                    // Interrupt if the content got re-attached.
+                    operators.takeUntil(this.dropdown.lazyContent.attached))
+                        .subscribe({
+                        next: function () { return _this.dropdown.lazyContent.detach(); },
+                        // No matter whether the content got re-attached, reset the this.dropdown.
+                        complete: function () { return _this.setIsOpened(false); }
+                    });
                 }
-                dropdownAnimationDoneSubscription
-                    .subscribe(function () { return _this.reset(); });
+                else {
+                    animationSubscription
+                        .subscribe(function () { return _this.setIsOpened(false); });
+                }
             }
             else {
-                this.reset();
-                (_a = this.dropdown.lazyContent) === null || _a === void 0 ? void 0 : _a.detach();
+                this.setIsOpened(false);
+                if (this.dropdown.lazyContent) {
+                    this.dropdown.lazyContent.detach();
+                }
             }
         };
         /**
@@ -1201,27 +1215,8 @@
             if (!this.dropdown.parent) {
                 this.dropdown.triggerWidth = this.getWidth();
             }
+            this.dropdown.focusFirstItem(this.openedBy || 'program');
             this.setIsOpened(true);
-            this.dropdown.focusFirstItem(this.openedBy);
-        };
-        /**
-         * This method resets the dropdown when it's closed, most importantly restoring
-         * focus to the dropdown trigger if the dropdown was opened via the keyboard.
-         */
-        McDropdownTrigger.prototype.reset = function () {
-            this.setIsOpened(false);
-            // We should reset focus if the user is navigating using a keyboard or
-            // if we have a top-level trigger which might cause focus to be lost
-            // when clicking on the backdrop.
-            if (!this.openedBy) {
-                // Note that the focus style will show up both for `program` and
-                // `keyboard` so we don't have to specify which one it is.
-                this.focus();
-            }
-            else if (!this.isNested()) {
-                this.focus(this.openedBy);
-            }
-            this.openedBy = undefined;
         };
         // set state rather than toggle to support triggers sharing a dropdown
         McDropdownTrigger.prototype.setIsOpened = function (isOpen) {

@@ -108,6 +108,7 @@ export declare class McDropdown implements AfterContentInit, McDropdownPanel, On
     /** Callback that is invoked when the panel animation completes. */
     onAnimationDone(event: AnimationEvent): void;
     onAnimationStart(event: AnimationEvent): void;
+    close(): void;
     /**
      * Sets up a stream that will keep track of any newly-added menu items and will update the list
      * of direct descendants. We collect the descendants this way, because `_allItems` can include

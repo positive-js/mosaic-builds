@@ -4,7 +4,7 @@ import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { AfterContentInit, ElementRef, EventEmitter, InjectionToken, OnDestroy, ViewContainerRef } from '@angular/core';
 import { McDropdownItem } from './dropdown-item.component';
 import { McDropdown } from './dropdown.component';
-import { McDropdownPanel } from './dropdown.types';
+import { DropdownCloseReason, McDropdownPanel } from './dropdown.types';
 import * as i0 from "@angular/core";
 /** Injection token that determines the scroll handling while the dropdown is open. */
 export declare const MC_DROPDOWN_SCROLL_STRATEGY: InjectionToken<() => ScrollStrategy>;
@@ -32,6 +32,7 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     private dropdownItemInstance;
     private _dir;
     private focusMonitor?;
+    lastDestroyReason: DropdownCloseReason;
     /** Data to be passed along to any lazily-rendered content. */
     data: any;
     openByArrowDown: boolean;
@@ -72,9 +73,8 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
     close(): void;
     /**
      * Focuses the dropdown trigger.
-     * @param origin Source of the dropdown trigger's focus.
      */
-    focus(origin?: FocusOrigin): void;
+    focus(origin?: FocusOrigin, options?: FocusOptions): void;
     /** Handles mouse presses on the trigger. */
     handleMousedown(event: MouseEvent): void;
     /** Handles key presses on the trigger. */
@@ -93,11 +93,6 @@ export declare class McDropdownTrigger implements AfterContentInit, OnDestroy {
      * the dropdown was opened via the keyboard.
      */
     private init;
-    /**
-     * This method resets the dropdown when it's closed, most importantly restoring
-     * focus to the dropdown trigger if the dropdown was opened via the keyboard.
-     */
-    private reset;
     private setIsOpened;
     /**
      * This method checks that a valid instance of McDropdown has been passed into
