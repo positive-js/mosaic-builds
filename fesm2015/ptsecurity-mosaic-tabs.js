@@ -5,15 +5,15 @@ import { CdkPortalOutlet, CdkPortal, TemplatePortal, PortalModule } from '@angul
 import * as i3$1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, Optional, Input, Output, ViewChild, forwardRef, Directive, Inject, ContentChildren, InjectionToken, TemplateRef, ContentChild, Attribute, NgModule } from '@angular/core';
-import { mixinDisabled, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
+import { EventEmitter, Component, ViewEncapsulation, ChangeDetectionStrategy, Optional, Input, Output, ViewChild, forwardRef, Directive, Inject, InjectionToken, TemplateRef, ContentChild, ContentChildren, Attribute, NgModule } from '@angular/core';
+import { mixinDisabled, PopUpPlacements, mixinTabIndex, McCommonModule } from '@ptsecurity/mosaic/core';
 import * as i4 from '@ptsecurity/mosaic/icon';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import * as i6 from '@ptsecurity/mosaic/tooltip';
 import { McToolTipModule } from '@ptsecurity/mosaic/tooltip';
 import * as i3 from '@angular/cdk/bidi';
 import { Subscription, Subject, fromEvent, of, merge, timer } from 'rxjs';
-import { startWith, takeUntil, delay } from 'rxjs/operators';
+import { startWith, takeUntil, debounceTime, delay } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { coerceNumberProperty, coerceBooleanProperty } from '@angular/cdk/coercion';
 import * as i2 from '@angular/cdk/platform';
@@ -596,7 +596,7 @@ class McPaginatedTabHeader {
      * should be called sparingly.
      */
     checkPaginationEnabled() {
-        if (this.disablePagination) {
+        if (this.disablePagination || this.vertical) {
             this.showPaginationControls = false;
         }
         else {
@@ -704,6 +704,146 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
                 type: Input
             }] } });
 
+const MC_TAB_LABEL = new InjectionToken('McTabLabel');
+/** Used to flag tab labels for use with the portal directive */
+class McTabLabel extends CdkPortal {
+}
+/** @nocollapse */ McTabLabel.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabLabel, deps: null, target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McTabLabel.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTabLabel, selector: "[mc-tab-label], [mcTabLabel]", providers: [{ provide: MC_TAB_LABEL, useExisting: McTabLabel }], usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabLabel, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mc-tab-label], [mcTabLabel]',
+                    providers: [{ provide: MC_TAB_LABEL, useExisting: McTabLabel }]
+                }]
+        }] });
+
+class McTabBase {
+}
+// tslint:disable-next-line:naming-convention
+const McTabMixinBase = mixinDisabled(McTabBase);
+class McTab extends McTabMixinBase {
+    constructor(viewContainerRef) {
+        super();
+        this.viewContainerRef = viewContainerRef;
+        this._tooltipTitle = '';
+        this.tooltipPlacement = PopUpPlacements.Right;
+        /** Plain text label for the tab, used when there is no template label. */
+        this.textLabel = '';
+        this.empty = false;
+        /** Emits whenever the internal state of the tab changes. */
+        this.stateChanges = new Subject();
+        /**
+         * The relatively indexed position where 0 represents the center, negative is left, and positive
+         * represents the right.
+         */
+        this.position = null;
+        /**
+         * The initial relatively index origin of the tab if it was created and selected after there
+         * was already a selected tab. Provides context of what position the tab should originate from.
+         */
+        this.origin = null;
+        /**
+         * Whether the tab is currently active.
+         */
+        this.isActive = false;
+        this._overflowTooltipTitle = '';
+        /** Portal that will be the hosted content of the tab */
+        this.contentPortal = null;
+    }
+    /** @docs-private */
+    get content() {
+        return this.contentPortal;
+    }
+    get templateLabel() {
+        return this._templateLabel;
+    }
+    set templateLabel(value) {
+        this.setTemplateLabelInput(value);
+    }
+    get tooltipTitle() {
+        return this.overflowTooltipTitle + this._tooltipTitle;
+    }
+    set tooltipTitle(value) {
+        this._tooltipTitle = value;
+    }
+    get isOverflown() {
+        return !!this._overflowTooltipTitle;
+    }
+    get overflowTooltipTitle() {
+        if (this.isOverflown) {
+            return `${this._overflowTooltipTitle}\n`;
+        }
+        return '';
+    }
+    set overflowTooltipTitle(value) {
+        this._overflowTooltipTitle = value;
+    }
+    ngOnChanges(changes) {
+        if (changes.hasOwnProperty('textLabel') || changes.hasOwnProperty('disabled')) {
+            this.stateChanges.next();
+        }
+    }
+    ngOnDestroy() {
+        this.stateChanges.complete();
+    }
+    ngOnInit() {
+        this.contentPortal = new TemplatePortal(this.explicitContent || this.implicitContent, this.viewContainerRef);
+    }
+    /**
+     * This has been extracted to a util because of TS 4 and VE.
+     * View Engine doesn't support property rename inheritance.
+     * TS 4.0 doesn't allow properties to override accessors or vice-versa.
+     * @docs-private
+     */
+    setTemplateLabelInput(value) {
+        // Only update the templateLabel via query if there is actually
+        // a McTabLabel found. This works around an issue where a user may have
+        // manually set `templateLabel` during creation mode, which would then get clobbered
+        // by `undefined` when this query resolves.
+        if (value) {
+            this._templateLabel = value;
+        }
+    }
+}
+/** @nocollapse */ McTab.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTab, deps: [{ token: i0.ViewContainerRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McTab.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTab, selector: "mc-tab", inputs: { disabled: "disabled", tooltipTitle: "tooltipTitle", tooltipPlacement: "tooltipPlacement", textLabel: ["label", "textLabel"], empty: "empty", tabId: "tabId" }, queries: [{ propertyName: "templateLabel", first: true, predicate: MC_TAB_LABEL, descendants: true }, { propertyName: "explicitContent", first: true, predicate: McTabContent, descendants: true, read: TemplateRef, static: true }], viewQueries: [{ propertyName: "implicitContent", first: true, predicate: TemplateRef, descendants: true, static: true }], exportAs: ["mcTab"], usesInheritance: true, usesOnChanges: true, ngImport: i0, template: '<ng-template><ng-content></ng-content></ng-template>', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTab, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-tab',
+                    exportAs: 'mcTab',
+                    // Create a template for the content of the <mc-tab> so that we can grab a reference to this
+                    // TemplateRef and use it in a Portal to render the tab content in the appropriate place in the
+                    // tab-group.
+                    template: '<ng-template><ng-content></ng-content></ng-template>',
+                    inputs: ['disabled'],
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ViewContainerRef }]; }, propDecorators: { templateLabel: [{
+                type: ContentChild,
+                args: [MC_TAB_LABEL]
+            }], explicitContent: [{
+                type: ContentChild,
+                args: [McTabContent, { read: TemplateRef, static: true }]
+            }], implicitContent: [{
+                type: ViewChild,
+                args: [TemplateRef, { static: true }]
+            }], tooltipTitle: [{
+                type: Input
+            }], tooltipPlacement: [{
+                type: Input
+            }], textLabel: [{
+                type: Input,
+                args: ['label']
+            }], empty: [{
+                type: Input
+            }], tabId: [{
+                type: Input,
+                args: ['tabId']
+            }] } });
+
 // Boilerplate for applying mixins to McTabLabelWrapper.
 /** @docs-private */
 class McTabLabelWrapperBase {
@@ -733,6 +873,15 @@ class McTabLabelWrapper extends McTabLabelWrapperMixinBase {
     getOffsetWidth() {
         return this.elementRef.nativeElement.offsetWidth;
     }
+    checkOverflow() {
+        this.tab.overflowTooltipTitle = this.isOverflown() ? this.getInnerText() : '';
+    }
+    isOverflown() {
+        return this.labelContent.nativeElement.scrollWidth > this.labelContent.nativeElement.clientWidth;
+    }
+    getInnerText() {
+        return this.labelContent.nativeElement.innerText;
+    }
     addClassModifierForIcons(icons) {
         const twoIcons = 2;
         const [firstIconElement, secondIconElement] = icons;
@@ -752,7 +901,7 @@ class McTabLabelWrapper extends McTabLabelWrapperMixinBase {
     }
 }
 /** @nocollapse */ McTabLabelWrapper.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabLabelWrapper, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ McTabLabelWrapper.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: { disabled: "disabled" }, host: { properties: { "attr.disabled": "disabled || null" } }, usesInheritance: true, ngImport: i0 });
+/** @nocollapse */ McTabLabelWrapper.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: { disabled: "disabled", tab: "tab" }, host: { properties: { "attr.disabled": "disabled || null" } }, queries: [{ propertyName: "labelContent", first: true, predicate: ["labelContent"], descendants: true }], usesInheritance: true, ngImport: i0 });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabLabelWrapper, decorators: [{
             type: Directive,
             args: [{
@@ -762,7 +911,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
                         '[attr.disabled]': 'disabled || null'
                     }
                 }]
-        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.Renderer2 }]; } });
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.Renderer2 }]; }, propDecorators: { labelContent: [{
+                type: ContentChild,
+                args: ['labelContent']
+            }], tab: [{
+                type: Input
+            }] } });
 
 /**
  * The header of the tab group which displays a list of all the tabs in the tab group.
@@ -784,7 +938,7 @@ class McTabHeader extends McPaginatedTabHeader {
     }
 }
 /** @nocollapse */ McTabHeader.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabHeader, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: i1.ViewportRuler }, { token: i0.NgZone }, { token: i2.Platform }, { token: i3.Directionality, optional: true }, { token: ANIMATION_MODULE_TYPE, optional: true }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McTabHeader.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabHeader, selector: "mc-tab-header", inputs: { selectedIndex: "selectedIndex", vertical: "vertical" }, outputs: { selectFocusedIndex: "selectFocusedIndex", indexFocused: "indexFocused" }, host: { properties: { "class.mc-tab-header_vertical": "vertical", "class.mc-tab-header__pagination-controls_enabled": "showPaginationControls", "class.mc-tab-header_rtl": "getLayoutDirection() == 'rtl'" }, classAttribute: "mc-tab-header" }, queries: [{ propertyName: "items", predicate: McTabLabelWrapper }], viewQueries: [{ propertyName: "tabListContainer", first: true, predicate: ["tabListContainer"], descendants: true, static: true }, { propertyName: "tabList", first: true, predicate: ["tabList"], descendants: true, static: true }, { propertyName: "nextPaginator", first: true, predicate: ["nextPaginator"], descendants: true }, { propertyName: "previousPaginator", first: true, predicate: ["previousPaginator"], descendants: true }], usesInheritance: true, ngImport: i0, template: "<div class=\"mc-tab-header__pagination mc-tab-header__pagination_before mc-elevation-z4\"\n     #previousPaginator\n     [class.mc-disabled]=\"disableScrollBefore\"\n     (click)=\"handlePaginatorClick('before')\"\n     (mousedown)=\"handlePaginatorPress('before', $event)\"\n     (touchend)=\"stopInterval()\">\n\n    <i mc-icon=\"mc-angle-left-M_16\"></i>\n</div>\n\n<div class=\"mc-tab-header__content\"\n     #tabListContainer\n     (keydown)=\"handleKeydown($event)\">\n\n    <div class=\"mc-tab-list\"\n         #tabList\n         (cdkObserveContent)=\"onContentChanges()\">\n        <div class=\"mc-tab-list__content\">\n            <ng-content></ng-content>\n        </div>\n    </div>\n</div>\n\n<div class=\"mc-tab-header__pagination mc-tab-header__pagination_after mc-elevation-z4\"\n     #nextPaginator\n     [class.mc-disabled]=\"disableScrollAfter\"\n     (mousedown)=\"handlePaginatorPress('after', $event)\"\n     (click)=\"handlePaginatorClick('after')\"\n     (touchend)=\"stopInterval()\">\n\n    <i mc-icon=\"mc-angle-right-M_16\"></i>\n</div>\n", styles: [".mc-tab-label.cdk-keyboard-focused:after{display:block;content:\"\";position:absolute;top:0;right:calc(-1 * 1px);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_horizontal.cdk-keyboard-focused:after,.mc-tab-label_old.cdk-keyboard-focused:after{border-width:calc(1px * 2);border-width:calc(var(--mc-tabs-size-border-width, 1px) * 2);border-style:solid;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px);border-bottom-color:transparent}.mc-tab-header{display:flex;overflow:hidden;position:relative;flex-shrink:0}.mc-tab-list__content{display:flex}.mc-tab-group_align-labels-center .mc-tab-list__content{justify-content:center}.mc-tab-group_align-labels-end .mc-tab-list__content{justify-content:flex-end}.mc-tab-header_vertical .mc-tab-list__content{flex-direction:column}.mc-tab-header__pagination{-webkit-user-select:none;user-select:none;position:relative;display:none;justify-content:center;align-items:center;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;touch-action:none;padding-left:12px;padding-right:12px;border-bottom-style:solid;border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination.mc-tab-header__pagination_before{border-right-style:solid;border-right-width:1px;border-right-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination.mc-tab-header__pagination_after{border-left-style:solid;border-left-width:1px;border-left-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination-controls_enabled .mc-tab-header__pagination{display:flex}.mc-tab-header__content{display:flex;flex-grow:1;z-index:1;overflow:hidden}.mc-tab-list{flex-grow:1;position:relative;transition:transform .5s cubic-bezier(.35,0,.25,1)}.mc-tab-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;height:var(--mc-tabs-size-height, 40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-right:var(--mc-tabs-size-padding-horizontal, 16px);padding-left:16px;padding-left:var(--mc-tabs-size-padding-horizontal, 16px);outline:none;-webkit-user-select:none;user-select:none}.mc-tab-label .mc-tab-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-label.mc-active{cursor:default}.mc-tab-label.mc-active:before{display:block;content:\"\";position:absolute}.mc-tab-label.mc-active[disabled] .mc-tab-overlay{bottom:-1px}.mc-tab-label.cdk-keyboard-focused{z-index:1}.mc-tab-label:first-child.cdk-keyboard-focused:after{left:0}.mc-tab-label:last-child.cdk-keyboard-focused:after{right:0}.mc-tab-label[disabled]{pointer-events:none}.mc-tab-label .mc-tab-label__template{display:flex;flex-direction:row;align-items:baseline}.mc-tab-label .mc-tab-label__template>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-label .mc-tab-label__template>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-label_old{border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px);border-bottom-style:solid;border-width:1px;border-width:var(--mc-tabs-size-border-width, 1px);border-style:solid;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px);border-left:none;border-left-color:transparent;border-right:none;border-right-color:transparent}.mc-tab-label_old.mc-active{border-width:1px;border-width:var(--mc-tabs-size-border-width, 1px);border-style:solid;padding-right:calc(16px - 1px);padding-right:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));padding-left:calc(16px - 1px);padding-left:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_old.mc-active.cdk-keyboard-focused:after{right:calc(-2 * 1px);right:calc(-2 * var(--mc-tabs-size-border-width, 1px));left:calc(-2 * 1px);left:calc(-2 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_old.cdk-keyboard-focused:after{top:-1px}.mc-tab-label_old .mc-tab-overlay{top:-1px;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px)}.mc-tab-label_horizontal{border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px);border-bottom-style:solid}.mc-tab-label_horizontal.mc-active:before{bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:0;right:0;height:4px;height:var(--mc-tabs-size-highlight-height, 4px)}.mc-tab-label_vertical{justify-content:flex-start}.mc-tab-label_vertical.mc-active:before{top:0;bottom:0;left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px));width:5px;width:var(--mc-tabs-size-highlight-height, 5px)}.mc-tab-label_vertical.cdk-keyboard-focused:after{right:0;left:0;border-width:calc(1px * 2);border-width:calc(var(--mc-tabs-size-border-width, 1px) * 2);border-style:solid}.mc-tab-group_stretch-labels .mc-tab-label,.mc-tab-group_stretch-labels .mc-tab-label_old{flex-basis:0;flex-grow:1}\n"], components: [{ type: i4.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i4.McIconCSSStyler, selector: "[mc-icon]" }], changeDetection: i0.ChangeDetectionStrategy.Default, encapsulation: i0.ViewEncapsulation.None });
+/** @nocollapse */ McTabHeader.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabHeader, selector: "mc-tab-header", inputs: { selectedIndex: "selectedIndex", vertical: "vertical" }, outputs: { selectFocusedIndex: "selectFocusedIndex", indexFocused: "indexFocused" }, host: { properties: { "class.mc-tab-header_vertical": "vertical", "class.mc-tab-header__pagination-controls_enabled": "showPaginationControls", "class.mc-tab-header_rtl": "getLayoutDirection() == 'rtl'" }, classAttribute: "mc-tab-header" }, queries: [{ propertyName: "items", predicate: McTabLabelWrapper }], viewQueries: [{ propertyName: "tabListContainer", first: true, predicate: ["tabListContainer"], descendants: true, static: true }, { propertyName: "tabList", first: true, predicate: ["tabList"], descendants: true, static: true }, { propertyName: "nextPaginator", first: true, predicate: ["nextPaginator"], descendants: true }, { propertyName: "previousPaginator", first: true, predicate: ["previousPaginator"], descendants: true }], usesInheritance: true, ngImport: i0, template: "<div class=\"mc-tab-header__pagination mc-tab-header__pagination_before\"\n     #previousPaginator\n     [class.mc-disabled]=\"disableScrollBefore\"\n     (click)=\"handlePaginatorClick('before')\"\n     (mousedown)=\"handlePaginatorPress('before', $event)\"\n     (touchend)=\"stopInterval()\">\n\n    <i mc-icon=\"mc-angle-left-M_16\"></i>\n</div>\n\n<div class=\"mc-tab-header__content\"\n     #tabListContainer\n     (keydown)=\"handleKeydown($event)\">\n\n    <div class=\"mc-tab-list\"\n         #tabList\n         (cdkObserveContent)=\"onContentChanges()\">\n        <div class=\"mc-tab-list__content\">\n            <ng-content></ng-content>\n        </div>\n    </div>\n</div>\n\n<div class=\"mc-tab-header__pagination mc-tab-header__pagination_after\"\n     #nextPaginator\n     [class.mc-disabled]=\"disableScrollAfter\"\n     (mousedown)=\"handlePaginatorPress('after', $event)\"\n     (click)=\"handlePaginatorClick('after')\"\n     (touchend)=\"stopInterval()\">\n\n    <i mc-icon=\"mc-angle-right-M_16\"></i>\n</div>\n", styles: [".mc-tab-label.cdk-keyboard-focused:after{display:block;content:\"\";position:absolute;top:0;right:calc(-1 * 1px);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_horizontal.cdk-keyboard-focused:after,.mc-tab-label_old.cdk-keyboard-focused:after{border-width:calc(1px * 2);border-width:calc(var(--mc-tabs-size-border-width, 1px) * 2);border-style:solid;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px);border-bottom-color:transparent}.mc-tab-header{display:flex;overflow:hidden;position:relative;flex-shrink:0}.mc-tab-list__content{display:flex}.mc-tab-group_align-labels-center .mc-tab-list__content{justify-content:center}.mc-tab-group_align-labels-end .mc-tab-list__content{justify-content:flex-end}.mc-tab-header_vertical .mc-tab-list__content{flex-direction:column}.mc-tab-header__pagination{-webkit-user-select:none;user-select:none;position:relative;display:none;justify-content:center;align-items:center;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;touch-action:none;padding-left:12px;padding-right:12px;border-bottom-style:solid;border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination.mc-tab-header__pagination_before{border-right-style:solid;border-right-width:1px;border-right-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination.mc-tab-header__pagination_after{border-left-style:solid;border-left-width:1px;border-left-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination-controls_enabled .mc-tab-header__pagination{display:flex}.mc-tab-header__content{display:flex;flex-grow:1;z-index:1;overflow:hidden}.mc-tab-list{position:relative;width:100%;transition:transform .5s cubic-bezier(.35,0,.25,1)}.mc-tab-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;height:var(--mc-tabs-size-height, 40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-right:var(--mc-tabs-size-padding-horizontal, 16px);padding-left:16px;padding-left:var(--mc-tabs-size-padding-horizontal, 16px);outline:none;-webkit-user-select:none;user-select:none}.mc-tab-label .mc-tab-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-label.mc-active{cursor:default}.mc-tab-label.mc-active:before{display:block;content:\"\";position:absolute}.mc-tab-label.mc-active[disabled] .mc-tab-overlay{bottom:-1px}.mc-tab-label.cdk-keyboard-focused{z-index:1}.mc-tab-label:first-child.cdk-keyboard-focused:after{left:0}.mc-tab-label:last-child.cdk-keyboard-focused:after{right:0}.mc-tab-label[disabled]{pointer-events:none}.mc-tab-label .mc-tab-label__content>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-label .mc-tab-label__content>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-label.mc-tab-label_vertical .mc-tab-label__content{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tab-label_old{border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px);border-bottom-style:solid;border-width:1px;border-width:var(--mc-tabs-size-border-width, 1px);border-style:solid;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px);border-left:none;border-left-color:transparent;border-right:none;border-right-color:transparent}.mc-tab-label_old.mc-active{border-width:1px;border-width:var(--mc-tabs-size-border-width, 1px);border-style:solid;padding-right:calc(16px - 1px);padding-right:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));padding-left:calc(16px - 1px);padding-left:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_old.mc-active.cdk-keyboard-focused:after{right:calc(-2 * 1px);right:calc(-2 * var(--mc-tabs-size-border-width, 1px));left:calc(-2 * 1px);left:calc(-2 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_old.cdk-keyboard-focused:after{top:-1px}.mc-tab-label_old .mc-tab-overlay{top:-1px;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px)}.mc-tab-label_horizontal{border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px);border-bottom-style:solid}.mc-tab-label_horizontal.mc-active:before{bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:0;right:0;height:4px;height:var(--mc-tabs-size-highlight-height, 4px)}.mc-tab-label_vertical{justify-content:flex-start}.mc-tab-label_vertical.mc-active:before{top:0;bottom:0;left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px));width:5px;width:var(--mc-tabs-size-highlight-height, 5px)}.mc-tab-label_vertical.cdk-keyboard-focused:after{right:0;left:0;border-width:calc(1px * 2);border-width:calc(var(--mc-tabs-size-border-width, 1px) * 2);border-style:solid}.mc-tab-group_stretch-labels .mc-tab-label,.mc-tab-group_stretch-labels .mc-tab-label_old{flex-basis:0;flex-grow:1}\n"], components: [{ type: i4.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i4.McIconCSSStyler, selector: "[mc-icon]" }], changeDetection: i0.ChangeDetectionStrategy.Default, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabHeader, decorators: [{
             type: Component,
             args: [{
@@ -826,123 +980,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
             }], previousPaginator: [{
                 type: ViewChild,
                 args: ['previousPaginator']
-            }] } });
-
-const MC_TAB_LABEL = new InjectionToken('McTabLabel');
-/** Used to flag tab labels for use with the portal directive */
-class McTabLabel extends CdkPortal {
-}
-/** @nocollapse */ McTabLabel.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabLabel, deps: null, target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ McTabLabel.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTabLabel, selector: "[mc-tab-label], [mcTabLabel]", providers: [{ provide: MC_TAB_LABEL, useExisting: McTabLabel }], usesInheritance: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabLabel, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: '[mc-tab-label], [mcTabLabel]',
-                    providers: [{ provide: MC_TAB_LABEL, useExisting: McTabLabel }]
-                }]
-        }] });
-
-class McTabBase {
-}
-// tslint:disable-next-line:naming-convention
-const McTabMixinBase = mixinDisabled(McTabBase);
-class McTab extends McTabMixinBase {
-    constructor(viewContainerRef) {
-        super();
-        this.viewContainerRef = viewContainerRef;
-        /** Plain text label for the tab, used when there is no template label. */
-        this.textLabel = '';
-        this.empty = false;
-        this.tooltipTitle = '';
-        this.tooltipPlacement = '';
-        /** Emits whenever the internal state of the tab changes. */
-        this.stateChanges = new Subject();
-        /**
-         * The relatively indexed position where 0 represents the center, negative is left, and positive
-         * represents the right.
-         */
-        this.position = null;
-        /**
-         * The initial relatively index origin of the tab if it was created and selected after there
-         * was already a selected tab. Provides context of what position the tab should originate from.
-         */
-        this.origin = null;
-        /**
-         * Whether the tab is currently active.
-         */
-        this.isActive = false;
-        /** Portal that will be the hosted content of the tab */
-        this.contentPortal = null;
-    }
-    /** @docs-private */
-    get content() {
-        return this.contentPortal;
-    }
-    get templateLabel() { return this._templateLabel; }
-    set templateLabel(value) { this.setTemplateLabelInput(value); }
-    ngOnChanges(changes) {
-        if (changes.hasOwnProperty('textLabel') || changes.hasOwnProperty('disabled')) {
-            this.stateChanges.next();
-        }
-    }
-    ngOnDestroy() {
-        this.stateChanges.complete();
-    }
-    ngOnInit() {
-        this.contentPortal = new TemplatePortal(this.explicitContent || this.implicitContent, this.viewContainerRef);
-    }
-    /**
-     * This has been extracted to a util because of TS 4 and VE.
-     * View Engine doesn't support property rename inheritance.
-     * TS 4.0 doesn't allow properties to override accessors or vice-versa.
-     * @docs-private
-     */
-    setTemplateLabelInput(value) {
-        // Only update the templateLabel via query if there is actually
-        // a McTabLabel found. This works around an issue where a user may have
-        // manually set `templateLabel` during creation mode, which would then get clobbered
-        // by `undefined` when this query resolves.
-        if (value) {
-            this._templateLabel = value;
-        }
-    }
-}
-/** @nocollapse */ McTab.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTab, deps: [{ token: i0.ViewContainerRef }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McTab.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTab, selector: "mc-tab", inputs: { disabled: "disabled", textLabel: ["label", "textLabel"], empty: "empty", tooltipTitle: "tooltipTitle", tooltipPlacement: "tooltipPlacement", tabId: "tabId" }, queries: [{ propertyName: "templateLabel", first: true, predicate: MC_TAB_LABEL, descendants: true }, { propertyName: "explicitContent", first: true, predicate: McTabContent, descendants: true, read: TemplateRef, static: true }], viewQueries: [{ propertyName: "implicitContent", first: true, predicate: TemplateRef, descendants: true, static: true }], exportAs: ["mcTab"], usesInheritance: true, usesOnChanges: true, ngImport: i0, template: '<ng-template><ng-content></ng-content></ng-template>', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTab, decorators: [{
-            type: Component,
-            args: [{
-                    selector: 'mc-tab',
-                    exportAs: 'mcTab',
-                    // Create a template for the content of the <mc-tab> so that we can grab a reference to this
-                    // TemplateRef and use it in a Portal to render the tab content in the appropriate place in the
-                    // tab-group.
-                    template: '<ng-template><ng-content></ng-content></ng-template>',
-                    inputs: ['disabled'],
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    encapsulation: ViewEncapsulation.None
-                }]
-        }], ctorParameters: function () { return [{ type: i0.ViewContainerRef }]; }, propDecorators: { templateLabel: [{
-                type: ContentChild,
-                args: [MC_TAB_LABEL]
-            }], explicitContent: [{
-                type: ContentChild,
-                args: [McTabContent, { read: TemplateRef, static: true }]
-            }], implicitContent: [{
-                type: ViewChild,
-                args: [TemplateRef, { static: true }]
-            }], textLabel: [{
-                type: Input,
-                args: ['label']
-            }], empty: [{
-                type: Input
-            }], tooltipTitle: [{
-                type: Input
-            }], tooltipPlacement: [{
-                type: Input
-            }], tabId: [{
-                type: Input,
-                args: ['tabId']
             }] } });
 
 class McOldTabsCssStyler {
@@ -1025,6 +1062,9 @@ class McTabGroup extends McTabGroupMixinBase {
     constructor(elementRef, changeDetectorRef, lightTabs, vertical, defaultConfig) {
         super(elementRef);
         this.changeDetectorRef = changeDetectorRef;
+        this.resizeStream = new Subject();
+        this._dynamicHeight = false;
+        this._selectedIndex = null;
         /** Position of the tab header. */
         this.headerPosition = 'above';
         /** Output to enable support for two-way binding on `[(selectedIndex)]` */
@@ -1043,20 +1083,29 @@ class McTabGroup extends McTabGroupMixinBase {
         this.tabsSubscription = Subscription.EMPTY;
         /** Subscription to changes in the tab labels. */
         this.tabLabelSubscription = Subscription.EMPTY;
-        this._dynamicHeight = false;
-        this._selectedIndex = null;
+        this.resizeSubscription = Subscription.EMPTY;
+        this.resizeDebounceInterval = 100;
+        this.checkOverflow = () => {
+            this.tabHeader.items
+                .forEach((headerTab) => headerTab.checkOverflow());
+        };
         this.oldTab = coerceBooleanProperty(lightTabs);
         this.vertical = coerceBooleanProperty(vertical);
         this.groupId = nextId++;
         this.animationDuration = (defaultConfig === null || defaultConfig === void 0 ? void 0 : defaultConfig.animationDuration) || '0ms';
+        this.subscribeToResize();
     }
     /** Whether the tab group should grow to the size of the active tab. */
-    get dynamicHeight() { return this._dynamicHeight; }
+    get dynamicHeight() {
+        return this._dynamicHeight;
+    }
     set dynamicHeight(value) {
         this._dynamicHeight = coerceBooleanProperty(value);
     }
     /** The index of the active tab. */
-    get selectedIndex() { return this._selectedIndex; }
+    get selectedIndex() {
+        return this._selectedIndex;
+    }
     set selectedIndex(value) {
         this.indexToSelect = coerceNumberProperty(value, null);
     }
@@ -1104,7 +1153,8 @@ class McTabGroup extends McTabGroupMixinBase {
         this.subscribeToTabLabels();
         // Subscribe to changes in the amount of tabs, in order to be
         // able to re-render the content as new tabs are added or removed.
-        this.tabsSubscription = this.tabs.changes.subscribe(() => {
+        this.tabsSubscription = this.tabs.changes
+            .subscribe(() => {
             const indexToSelect = this.clampTabIndex(this.indexToSelect);
             // Maintain the previously-selected tab if a new tab is added or removed and there is no
             // explicit change that selects a different tab.
@@ -1124,9 +1174,13 @@ class McTabGroup extends McTabGroupMixinBase {
             this.changeDetectorRef.markForCheck();
         });
     }
+    ngAfterViewInit() {
+        this.checkOverflow();
+    }
     ngOnDestroy() {
         this.tabsSubscription.unsubscribe();
         this.tabLabelSubscription.unsubscribe();
+        this.resizeSubscription.unsubscribe();
     }
     focusChanged(index) {
         this.focusChange.emit(this.createChangeEvent(index));
@@ -1196,6 +1250,17 @@ class McTabGroup extends McTabGroupMixinBase {
         this.tabLabelSubscription = merge(...this.tabs.map((tab) => tab.stateChanges))
             .subscribe(() => this.changeDetectorRef.markForCheck());
     }
+    subscribeToResize() {
+        if (!this.vertical) {
+            return;
+        }
+        if (this.resizeSubscription) {
+            this.resizeSubscription.unsubscribe();
+        }
+        this.resizeSubscription = this.resizeStream
+            .pipe(debounceTime(this.resizeDebounceInterval))
+            .subscribe(this.checkOverflow);
+    }
     /** Clamps the given index to the bounds of 0 and the tabs length. */
     clampTabIndex(index) {
         // Note the `|| 0`, which ensures that values like NaN can't get through
@@ -1205,7 +1270,7 @@ class McTabGroup extends McTabGroupMixinBase {
     }
 }
 /** @nocollapse */ McTabGroup.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabGroup, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: 'mc-old-tabs', attribute: true }, { token: 'vertical', attribute: true }, { token: MC_TABS_CONFIG, optional: true }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McTabGroup.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabGroup, selector: "mc-tab-group", inputs: { disabled: "disabled", dynamicHeight: "dynamicHeight", selectedIndex: "selectedIndex", headerPosition: "headerPosition", animationDuration: "animationDuration" }, outputs: { selectedIndexChange: "selectedIndexChange", focusChange: "focusChange", animationDone: "animationDone", selectedTabChange: "selectedTabChange" }, host: { properties: { "class.mc-tab-group_dynamic-height": "dynamicHeight", "class.mc-tab-group_inverted-header": "headerPosition === \"below\"" }, classAttribute: "mc-tab-group" }, queries: [{ propertyName: "tabs", predicate: McTab }], viewQueries: [{ propertyName: "tabBodyWrapper", first: true, predicate: ["tabBodyWrapper"], descendants: true }, { propertyName: "tabHeader", first: true, predicate: ["tabHeader"], descendants: true }], exportAs: ["mcTabGroup"], usesInheritance: true, ngImport: i0, template: "<mc-tab-header\n    #tabHeader\n    [vertical]=\"vertical\"\n    [selectedIndex]=\"selectedIndex\"\n    (indexFocused)=\"focusChanged($event)\"\n    (selectFocusedIndex)=\"selectedIndex = $event\">\n\n    <div class=\"mc-tab-label\"\n         mcTabLabelWrapper\n         cdkMonitorElementFocus\n         [attr.tabindex]=\"getTabIndex(tab, i)\"\n         [class.mc-tab-label_old]=\"oldTab\"\n         [class.mc-tab-label_horizontal]=\"!vertical && !oldTab\"\n         [class.mc-tab-label_vertical]=\"vertical && !oldTab\"\n         [class.mc-tab-label_empty]=\"tab.empty\"\n         [class.mc-active]=\"selectedIndex == i\"\n         *ngFor=\"let tab of tabs; let i = index\"\n         [id]=\"getTabLabelId(i)\"\n         [disabled]=\"tab.disabled\"\n         (click)=\"handleClick(tab, tabHeader, i)\"\n\n         [mcTooltip]=\"tab.tooltipTitle\"\n         [mcTooltipDisabled]=\"!tab.empty\"\n         [mcTrigger]=\"'hover, focus'\"\n         [mcPlacement]=\"tab.tooltipPlacement\">\n\n        <div class=\"mc-tab-label__content\"\n            [class.mc-tab-label__template]=\"tab.templateLabel\">\n            <!-- If there is a label template, use it. -->\n            <ng-template [ngIf]=\"tab.templateLabel\">\n                <ng-template [cdkPortalOutlet]=\"tab.templateLabel\"></ng-template>\n            </ng-template>\n\n            <!-- If there is not a label template, fall back to the text label. -->\n            <ng-template [ngIf]=\"!tab.templateLabel\">{{ tab.textLabel }}</ng-template>\n        </div>\n\n        <div class=\"mc-tab-overlay\"></div>\n    </div>\n</mc-tab-header>\n\n<div class=\"mc-tab-body__wrapper\" #tabBodyWrapper>\n    <mc-tab-body\n        *ngFor=\"let tab of tabs; let i = index\"\n        [id]=\"getTabContentId(i)\"\n        [class.mc-tab-body__active]=\"selectedIndex == i\"\n        [content]=\"tab.content\"\n        [position]=\"tab.position\"\n        [origin]=\"tab.origin\"\n        [animationDuration]=\"animationDuration\"\n        (onCentered)=\"removeTabBodyWrapperHeight()\"\n        (onCentering)=\"setTabBodyWrapperHeight($event)\">\n    </mc-tab-body>\n</div>\n", styles: [".mc-tab-group{display:flex;flex-direction:column;box-sizing:border-box;text-align:center;white-space:nowrap}.mc-tab-group.mc-tab-group_inverted-header{flex-direction:column-reverse}.mc-tab-group_vertical{flex-direction:row}.mc-tab-group_vertical .mc-tab-header__content{overflow-y:auto;padding-top:8px;padding-bottom:1px;border-right-width:1px;border-right-width:var(--mc-tabs-size-border-width, 1px);border-right-style:solid}.mc-tab-body__wrapper{display:flex;overflow:hidden;position:relative}.mc-tab-body{top:0;left:0;right:0;bottom:0;position:absolute;display:block;overflow:hidden;flex-basis:100%}.mc-tab-body.mc-tab-body__active{overflow-x:hidden;overflow-y:auto;position:relative;z-index:1;flex-grow:1}.mc-tab-group.mc-tab-group_dynamic-height .mc-tab-body.mc-tab-body__active{overflow-y:hidden}\n"], components: [{ type: McTabHeader, selector: "mc-tab-header", inputs: ["selectedIndex", "vertical"], outputs: ["selectFocusedIndex", "indexFocused"] }, { type: McTabBody, selector: "mc-tab-body", inputs: ["position", "content", "origin", "animationDuration"], outputs: ["onCentering", "beforeCentering", "afterLeavingCenter", "onCentered"] }], directives: [{ type: i3$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: ["disabled"] }, { type: i1$1.CdkMonitorFocus, selector: "[cdkMonitorElementFocus], [cdkMonitorSubtreeFocus]", outputs: ["cdkFocusChange"] }, { type: i6.McTooltipTrigger, selector: "[mcTooltip]", inputs: ["mcTooltip", "mcTooltipDisabled", "mcEnterDelay", "mcTrigger", "mcTooltipClass"], exportAs: ["mcTooltip"] }, { type: i3$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i7.CdkPortalOutlet, selector: "[cdkPortalOutlet]", inputs: ["cdkPortalOutlet"], outputs: ["attached"], exportAs: ["cdkPortalOutlet"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+/** @nocollapse */ McTabGroup.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabGroup, selector: "mc-tab-group", inputs: { disabled: "disabled", dynamicHeight: "dynamicHeight", selectedIndex: "selectedIndex", headerPosition: "headerPosition", animationDuration: "animationDuration" }, outputs: { selectedIndexChange: "selectedIndexChange", focusChange: "focusChange", animationDone: "animationDone", selectedTabChange: "selectedTabChange" }, host: { listeners: { "window:resize": "resizeStream.next()" }, properties: { "class.mc-tab-group_dynamic-height": "dynamicHeight", "class.mc-tab-group_inverted-header": "headerPosition === \"below\"" }, classAttribute: "mc-tab-group" }, queries: [{ propertyName: "tabs", predicate: McTab }], viewQueries: [{ propertyName: "tabBodyWrapper", first: true, predicate: ["tabBodyWrapper"], descendants: true }, { propertyName: "tabHeader", first: true, predicate: ["tabHeader"], descendants: true }], exportAs: ["mcTabGroup"], usesInheritance: true, ngImport: i0, template: "<mc-tab-header\n    #tabHeader\n    [vertical]=\"vertical\"\n    [selectedIndex]=\"selectedIndex\"\n    (indexFocused)=\"focusChanged($event)\"\n    (selectFocusedIndex)=\"selectedIndex = $event\">\n\n    <div class=\"mc-tab-label\"\n         mcTabLabelWrapper\n         cdkMonitorElementFocus\n         [attr.tabindex]=\"getTabIndex(tab, i)\"\n         [class.mc-tab-label_old]=\"oldTab\"\n         [class.mc-tab-label_horizontal]=\"!vertical && !oldTab\"\n         [class.mc-tab-label_vertical]=\"vertical && !oldTab\"\n         [class.mc-tab-label_empty]=\"tab.empty\"\n         [class.mc-active]=\"selectedIndex == i\"\n         *ngFor=\"let tab of tabs; let i = index\"\n         [tab]=\"tab\"\n         [id]=\"getTabLabelId(i)\"\n         [disabled]=\"tab.disabled\"\n         (click)=\"handleClick(tab, tabHeader, i)\"\n\n         [mcTooltip]=\"tab.tooltipTitle\"\n         [mcTooltipDisabled]=\"!tab.empty && !tab.isOverflown\"\n         [mcTrigger]=\"'hover, focus'\"\n         [mcPlacement]=\"tab.tooltipPlacement\">\n\n        <div #labelContent class=\"mc-tab-label__content\"\n            [class.mc-tab-label__template]=\"tab.templateLabel\">\n            <!-- If there is a label template, use it. -->\n            <ng-template [ngIf]=\"tab.templateLabel\">\n                <ng-template [cdkPortalOutlet]=\"tab.templateLabel\"></ng-template>\n            </ng-template>\n\n            <!-- If there is not a label template, fall back to the text label. -->\n            <ng-template [ngIf]=\"!tab.templateLabel\">{{ tab.textLabel }}</ng-template>\n        </div>\n\n        <div class=\"mc-tab-overlay\"></div>\n    </div>\n</mc-tab-header>\n\n<div class=\"mc-tab-body__wrapper\" #tabBodyWrapper>\n    <mc-tab-body\n        *ngFor=\"let tab of tabs; let i = index\"\n        [id]=\"getTabContentId(i)\"\n        [class.mc-tab-body__active]=\"selectedIndex == i\"\n        [content]=\"tab.content\"\n        [position]=\"tab.position\"\n        [origin]=\"tab.origin\"\n        [animationDuration]=\"animationDuration\"\n        (onCentered)=\"removeTabBodyWrapperHeight()\"\n        (onCentering)=\"setTabBodyWrapperHeight($event)\">\n    </mc-tab-body>\n</div>\n", styles: [".mc-tab-group{display:flex;flex-direction:column;box-sizing:border-box;text-align:center;white-space:nowrap}.mc-tab-group.mc-tab-group_inverted-header{flex-direction:column-reverse}.mc-tab-group_vertical{flex-direction:row}.mc-tab-group_vertical .mc-tab-header__content{overflow-y:auto;padding-top:8px;padding-bottom:1px;border-right-width:1px;border-right-width:var(--mc-tabs-size-border-width, 1px);border-right-style:solid}.mc-tab-body__wrapper{display:flex;overflow:hidden;position:relative}.mc-tab-body{top:0;left:0;right:0;bottom:0;position:absolute;display:block;overflow:hidden;flex-basis:100%}.mc-tab-body.mc-tab-body__active{overflow-x:hidden;overflow-y:auto;position:relative;z-index:1;flex-grow:1}.mc-tab-group.mc-tab-group_dynamic-height .mc-tab-body.mc-tab-body__active{overflow-y:hidden}\n"], components: [{ type: McTabHeader, selector: "mc-tab-header", inputs: ["selectedIndex", "vertical"], outputs: ["selectFocusedIndex", "indexFocused"] }, { type: McTabBody, selector: "mc-tab-body", inputs: ["position", "content", "origin", "animationDuration"], outputs: ["onCentering", "beforeCentering", "afterLeavingCenter", "onCentered"] }], directives: [{ type: i3$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: ["disabled", "tab"] }, { type: i1$1.CdkMonitorFocus, selector: "[cdkMonitorElementFocus], [cdkMonitorSubtreeFocus]", outputs: ["cdkFocusChange"] }, { type: i6.McTooltipTrigger, selector: "[mcTooltip]", inputs: ["mcTooltip", "mcTooltipDisabled", "mcEnterDelay", "mcTrigger", "mcTooltipClass"], exportAs: ["mcTooltip"] }, { type: i3$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i7.CdkPortalOutlet, selector: "[cdkPortalOutlet]", inputs: ["cdkPortalOutlet"], outputs: ["attached"], exportAs: ["cdkPortalOutlet"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabGroup, decorators: [{
             type: Component,
             args: [{
@@ -1219,7 +1284,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
                     host: {
                         class: 'mc-tab-group',
                         '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',
-                        '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
+                        '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"',
+                        '(window:resize)': 'resizeStream.next()'
                     }
                 }]
         }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: undefined, decorators: [{
@@ -1349,7 +1415,7 @@ class McTabNav {
     }
 }
 /** @nocollapse */ McTabNav.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabNav, deps: [{ token: 'vertical', attribute: true }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McTabNav.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabNav, selector: "[mc-tab-nav-bar]", host: { classAttribute: "mc-tab-nav-bar" }, queries: [{ propertyName: "links", predicate: McTabLink }], exportAs: ["mcTabNavBar", "mcTabNav"], ngImport: i0, template: '<ng-content></ng-content>', isInline: true, styles: [".mc-tab-link.cdk-keyboard-focused:after{display:block;content:\"\";position:absolute;top:0;right:calc(-1 * 1px);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-link{vertical-align:top;text-decoration:none;-webkit-tap-highlight-color:transparent;position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;height:var(--mc-tabs-size-height, 40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-right:var(--mc-tabs-size-padding-horizontal, 16px);padding-left:16px;padding-left:var(--mc-tabs-size-padding-horizontal, 16px);outline:none}.mc-tab-link .mc-tab-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-link.mc-active{cursor:default}.mc-tab-link.mc-active:before{display:block;content:\"\";position:absolute}.mc-tab-link.mc-active[disabled] .mc-tab-overlay{bottom:-1px}.mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-link:first-child.cdk-keyboard-focused:after{left:0}.mc-tab-link:last-child.cdk-keyboard-focused:after{right:0}.mc-tab-link[disabled]{pointer-events:none}.mc-tab-link .mc-tab-label__template{display:flex;flex-direction:row;align-items:baseline}.mc-tab-link .mc-tab-label__template>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link .mc-tab-label__template>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link .mc-tab-group_stretch-labels .mc-tab-link{flex-basis:0;flex-grow:1}.mc-tab-link>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-nav-bar{display:flex;flex-grow:1;position:relative;padding:1px 1px 0}.mc-tab-nav-bar .mc-tab-group_align-labels-center{justify-content:center}.mc-tab-nav-bar .mc-tab-group_align-labels-end{justify-content:flex-end}.mc-tab-nav-bar.mc-tab-group_vertical{flex-direction:column;flex-grow:0}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+/** @nocollapse */ McTabNav.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabNav, selector: "[mc-tab-nav-bar]", host: { classAttribute: "mc-tab-nav-bar" }, queries: [{ propertyName: "links", predicate: McTabLink }], exportAs: ["mcTabNavBar", "mcTabNav"], ngImport: i0, template: '<ng-content></ng-content>', isInline: true, styles: [".mc-tab-link.cdk-keyboard-focused:after{display:block;content:\"\";position:absolute;top:0;right:calc(-1 * 1px);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-link{vertical-align:top;text-decoration:none;-webkit-tap-highlight-color:transparent;position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;height:var(--mc-tabs-size-height, 40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-right:var(--mc-tabs-size-padding-horizontal, 16px);padding-left:16px;padding-left:var(--mc-tabs-size-padding-horizontal, 16px);outline:none}.mc-tab-link .mc-tab-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-link.mc-active{cursor:default}.mc-tab-link.mc-active:before{display:block;content:\"\";position:absolute}.mc-tab-link.mc-active[disabled] .mc-tab-overlay{bottom:-1px}.mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-link:first-child.cdk-keyboard-focused:after{left:0}.mc-tab-link:last-child.cdk-keyboard-focused:after{right:0}.mc-tab-link[disabled]{pointer-events:none}.mc-tab-link .mc-tab-label__content>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link .mc-tab-label__content>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link.mc-tab-label_vertical .mc-tab-label__content{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tab-link .mc-tab-group_stretch-labels .mc-tab-link{flex-basis:0;flex-grow:1}.mc-tab-link>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-nav-bar{display:flex;flex-grow:1;position:relative;padding:1px 1px 0}.mc-tab-nav-bar .mc-tab-group_align-labels-center{justify-content:center}.mc-tab-nav-bar .mc-tab-group_align-labels-end{justify-content:flex-end}.mc-tab-nav-bar.mc-tab-group_vertical{flex-direction:column;flex-grow:0}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McTabNav, decorators: [{
             type: Component,
             args: [{

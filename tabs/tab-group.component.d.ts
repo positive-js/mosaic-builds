@@ -1,5 +1,6 @@
-import { AfterContentChecked, AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, QueryList, InjectionToken } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, QueryList, InjectionToken, AfterViewInit } from '@angular/core';
 import { CanDisableCtor } from '@ptsecurity/mosaic/core';
+import { Subject } from 'rxjs';
 import { McTabHeader } from './tab-header.component';
 import { McTab } from './tab.component';
 import * as i0 from "@angular/core";
@@ -49,8 +50,9 @@ export declare const McTabGroupMixinBase: CanDisableCtor & typeof McTabGroupBase
  * Tab-group component.  Supports basic tab pairs (label + content) and includes
  * keyboard navigation.
  */
-export declare class McTabGroup extends McTabGroupMixinBase implements AfterContentInit, AfterContentChecked, OnDestroy {
+export declare class McTabGroup extends McTabGroupMixinBase implements AfterContentInit, AfterViewInit, AfterContentChecked, OnDestroy {
     private readonly changeDetectorRef;
+    readonly resizeStream: Subject<Event>;
     oldTab: boolean;
     vertical: boolean;
     tabs: QueryList<McTab>;
@@ -59,9 +61,11 @@ export declare class McTabGroup extends McTabGroupMixinBase implements AfterCont
     /** Whether the tab group should grow to the size of the active tab. */
     get dynamicHeight(): boolean;
     set dynamicHeight(value: boolean);
+    private _dynamicHeight;
     /** The index of the active tab. */
     get selectedIndex(): number | null;
     set selectedIndex(value: number | null);
+    private _selectedIndex;
     /** Position of the tab header. */
     headerPosition: McTabHeaderPosition;
     /** Duration for the tab animation. Must be a valid CSS value (e.g. 600ms). */
@@ -82,9 +86,9 @@ export declare class McTabGroup extends McTabGroupMixinBase implements AfterCont
     private tabsSubscription;
     /** Subscription to changes in the tab labels. */
     private tabLabelSubscription;
-    private _dynamicHeight;
-    private _selectedIndex;
+    private resizeSubscription;
     private readonly groupId;
+    private readonly resizeDebounceInterval;
     constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, lightTabs: string, vertical: string, defaultConfig?: IMcTabsConfig);
     /**
      * After the content is checked, this component knows what tabs have been defined
@@ -94,6 +98,7 @@ export declare class McTabGroup extends McTabGroupMixinBase implements AfterCont
      */
     ngAfterContentChecked(): void;
     ngAfterContentInit(): void;
+    ngAfterViewInit(): void;
     ngOnDestroy(): void;
     focusChanged(index: number): void;
     /** Returns a unique id for each tab label element */
@@ -111,6 +116,7 @@ export declare class McTabGroup extends McTabGroupMixinBase implements AfterCont
     handleClick(tab: McTab, tabHeader: McTabHeader, index: number): void;
     /** Retrieves the tabindex for the tab. */
     getTabIndex(tab: McTab, index: number): number | null;
+    private checkOverflow;
     private createChangeEvent;
     /**
      * Subscribes to changes in the tab labels. This is needed, because the @Input for the label is
@@ -119,6 +125,7 @@ export declare class McTabGroup extends McTabGroupMixinBase implements AfterCont
      * manually.
      */
     private subscribeToTabLabels;
+    private subscribeToResize;
     /** Clamps the given index to the bounds of 0 and the tabs length. */
     private clampTabIndex;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTabGroup, [null, null, { attribute: "mc-old-tabs"; }, { attribute: "vertical"; }, { optional: true; }]>;

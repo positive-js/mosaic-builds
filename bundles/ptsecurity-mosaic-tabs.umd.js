@@ -613,11 +613,11 @@
         function McTab(viewContainerRef) {
             var _this = _super.call(this) || this;
             _this.viewContainerRef = viewContainerRef;
+            _this._tooltipTitle = '';
+            _this.tooltipPlacement = core.PopUpPlacements.Right;
             /** Plain text label for the tab, used when there is no template label. */
             _this.textLabel = '';
             _this.empty = false;
-            _this.tooltipTitle = '';
-            _this.tooltipPlacement = '';
             /** Emits whenever the internal state of the tab changes. */
             _this.stateChanges = new rxjs.Subject();
             /**
@@ -634,6 +634,7 @@
              * Whether the tab is currently active.
              */
             _this.isActive = false;
+            _this._overflowTooltipTitle = '';
             /** Portal that will be the hosted content of the tab */
             _this.contentPortal = null;
             return _this;
@@ -647,8 +648,42 @@
             configurable: true
         });
         Object.defineProperty(McTab.prototype, "templateLabel", {
-            get: function () { return this._templateLabel; },
-            set: function (value) { this.setTemplateLabelInput(value); },
+            get: function () {
+                return this._templateLabel;
+            },
+            set: function (value) {
+                this.setTemplateLabelInput(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTab.prototype, "tooltipTitle", {
+            get: function () {
+                return this.overflowTooltipTitle + this._tooltipTitle;
+            },
+            set: function (value) {
+                this._tooltipTitle = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTab.prototype, "isOverflown", {
+            get: function () {
+                return !!this._overflowTooltipTitle;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTab.prototype, "overflowTooltipTitle", {
+            get: function () {
+                if (this.isOverflown) {
+                    return this._overflowTooltipTitle + "\n";
+                }
+                return '';
+            },
+            set: function (value) {
+                this._overflowTooltipTitle = value;
+            },
             enumerable: false,
             configurable: true
         });
@@ -681,7 +716,7 @@
         return McTab;
     }(McTabMixinBase));
     /** @nocollapse */ McTab.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTab, deps: [{ token: i0__namespace.ViewContainerRef }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McTab.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTab, selector: "mc-tab", inputs: { disabled: "disabled", textLabel: ["label", "textLabel"], empty: "empty", tooltipTitle: "tooltipTitle", tooltipPlacement: "tooltipPlacement", tabId: "tabId" }, queries: [{ propertyName: "templateLabel", first: true, predicate: MC_TAB_LABEL, descendants: true }, { propertyName: "explicitContent", first: true, predicate: McTabContent, descendants: true, read: i0.TemplateRef, static: true }], viewQueries: [{ propertyName: "implicitContent", first: true, predicate: i0.TemplateRef, descendants: true, static: true }], exportAs: ["mcTab"], usesInheritance: true, usesOnChanges: true, ngImport: i0__namespace, template: '<ng-template><ng-content></ng-content></ng-template>', isInline: true, changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    /** @nocollapse */ McTab.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTab, selector: "mc-tab", inputs: { disabled: "disabled", tooltipTitle: "tooltipTitle", tooltipPlacement: "tooltipPlacement", textLabel: ["label", "textLabel"], empty: "empty", tabId: "tabId" }, queries: [{ propertyName: "templateLabel", first: true, predicate: MC_TAB_LABEL, descendants: true }, { propertyName: "explicitContent", first: true, predicate: McTabContent, descendants: true, read: i0.TemplateRef, static: true }], viewQueries: [{ propertyName: "implicitContent", first: true, predicate: i0.TemplateRef, descendants: true, static: true }], exportAs: ["mcTab"], usesInheritance: true, usesOnChanges: true, ngImport: i0__namespace, template: '<ng-template><ng-content></ng-content></ng-template>', isInline: true, changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTab, decorators: [{
                 type: i0.Component,
                 args: [{
@@ -704,14 +739,14 @@
                 }], implicitContent: [{
                     type: i0.ViewChild,
                     args: [i0.TemplateRef, { static: true }]
+                }], tooltipTitle: [{
+                    type: i0.Input
+                }], tooltipPlacement: [{
+                    type: i0.Input
                 }], textLabel: [{
                     type: i0.Input,
                     args: ['label']
                 }], empty: [{
-                    type: i0.Input
-                }], tooltipTitle: [{
-                    type: i0.Input
-                }], tooltipPlacement: [{
                     type: i0.Input
                 }], tabId: [{
                     type: i0.Input,
@@ -1093,7 +1128,7 @@
          * should be called sparingly.
          */
         McPaginatedTabHeader.prototype.checkPaginationEnabled = function () {
-            if (this.disablePagination) {
+            if (this.disablePagination || this.vertical) {
                 this.showPaginationControls = false;
             }
             else {
@@ -1239,6 +1274,15 @@
         McTabLabelWrapper.prototype.getOffsetWidth = function () {
             return this.elementRef.nativeElement.offsetWidth;
         };
+        McTabLabelWrapper.prototype.checkOverflow = function () {
+            this.tab.overflowTooltipTitle = this.isOverflown() ? this.getInnerText() : '';
+        };
+        McTabLabelWrapper.prototype.isOverflown = function () {
+            return this.labelContent.nativeElement.scrollWidth > this.labelContent.nativeElement.clientWidth;
+        };
+        McTabLabelWrapper.prototype.getInnerText = function () {
+            return this.labelContent.nativeElement.innerText;
+        };
         McTabLabelWrapper.prototype.addClassModifierForIcons = function (icons) {
             var twoIcons = 2;
             var _a = __read(icons, 2), firstIconElement = _a[0], secondIconElement = _a[1];
@@ -1259,7 +1303,7 @@
         return McTabLabelWrapper;
     }(McTabLabelWrapperMixinBase));
     /** @nocollapse */ McTabLabelWrapper.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTabLabelWrapper, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.Renderer2 }], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McTabLabelWrapper.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: { disabled: "disabled" }, host: { properties: { "attr.disabled": "disabled || null" } }, usesInheritance: true, ngImport: i0__namespace });
+    /** @nocollapse */ McTabLabelWrapper.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: { disabled: "disabled", tab: "tab" }, host: { properties: { "attr.disabled": "disabled || null" } }, queries: [{ propertyName: "labelContent", first: true, predicate: ["labelContent"], descendants: true }], usesInheritance: true, ngImport: i0__namespace });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTabLabelWrapper, decorators: [{
                 type: i0.Directive,
                 args: [{
@@ -1269,7 +1313,12 @@
                             '[attr.disabled]': 'disabled || null'
                         }
                     }]
-            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.Renderer2 }]; } });
+            }], ctorParameters: function () { return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.Renderer2 }]; }, propDecorators: { labelContent: [{
+                    type: i0.ContentChild,
+                    args: ['labelContent']
+                }], tab: [{
+                    type: i0.Input
+                }] } });
 
     /**
      * The header of the tab group which displays a list of all the tabs in the tab group.
@@ -1294,7 +1343,7 @@
         return McTabHeader;
     }(McPaginatedTabHeader));
     /** @nocollapse */ McTabHeader.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTabHeader, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: i1__namespace.ViewportRuler }, { token: i0__namespace.NgZone }, { token: i2__namespace.Platform }, { token: i3__namespace.Directionality, optional: true }, { token: animations$1.ANIMATION_MODULE_TYPE, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McTabHeader.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabHeader, selector: "mc-tab-header", inputs: { selectedIndex: "selectedIndex", vertical: "vertical" }, outputs: { selectFocusedIndex: "selectFocusedIndex", indexFocused: "indexFocused" }, host: { properties: { "class.mc-tab-header_vertical": "vertical", "class.mc-tab-header__pagination-controls_enabled": "showPaginationControls", "class.mc-tab-header_rtl": "getLayoutDirection() == 'rtl'" }, classAttribute: "mc-tab-header" }, queries: [{ propertyName: "items", predicate: McTabLabelWrapper }], viewQueries: [{ propertyName: "tabListContainer", first: true, predicate: ["tabListContainer"], descendants: true, static: true }, { propertyName: "tabList", first: true, predicate: ["tabList"], descendants: true, static: true }, { propertyName: "nextPaginator", first: true, predicate: ["nextPaginator"], descendants: true }, { propertyName: "previousPaginator", first: true, predicate: ["previousPaginator"], descendants: true }], usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-tab-header__pagination mc-tab-header__pagination_before mc-elevation-z4\"\n     #previousPaginator\n     [class.mc-disabled]=\"disableScrollBefore\"\n     (click)=\"handlePaginatorClick('before')\"\n     (mousedown)=\"handlePaginatorPress('before', $event)\"\n     (touchend)=\"stopInterval()\">\n\n    <i mc-icon=\"mc-angle-left-M_16\"></i>\n</div>\n\n<div class=\"mc-tab-header__content\"\n     #tabListContainer\n     (keydown)=\"handleKeydown($event)\">\n\n    <div class=\"mc-tab-list\"\n         #tabList\n         (cdkObserveContent)=\"onContentChanges()\">\n        <div class=\"mc-tab-list__content\">\n            <ng-content></ng-content>\n        </div>\n    </div>\n</div>\n\n<div class=\"mc-tab-header__pagination mc-tab-header__pagination_after mc-elevation-z4\"\n     #nextPaginator\n     [class.mc-disabled]=\"disableScrollAfter\"\n     (mousedown)=\"handlePaginatorPress('after', $event)\"\n     (click)=\"handlePaginatorClick('after')\"\n     (touchend)=\"stopInterval()\">\n\n    <i mc-icon=\"mc-angle-right-M_16\"></i>\n</div>\n", styles: [".mc-tab-label.cdk-keyboard-focused:after{display:block;content:\"\";position:absolute;top:0;right:calc(-1 * 1px);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_horizontal.cdk-keyboard-focused:after,.mc-tab-label_old.cdk-keyboard-focused:after{border-width:calc(1px * 2);border-width:calc(var(--mc-tabs-size-border-width, 1px) * 2);border-style:solid;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px);border-bottom-color:transparent}.mc-tab-header{display:flex;overflow:hidden;position:relative;flex-shrink:0}.mc-tab-list__content{display:flex}.mc-tab-group_align-labels-center .mc-tab-list__content{justify-content:center}.mc-tab-group_align-labels-end .mc-tab-list__content{justify-content:flex-end}.mc-tab-header_vertical .mc-tab-list__content{flex-direction:column}.mc-tab-header__pagination{-webkit-user-select:none;user-select:none;position:relative;display:none;justify-content:center;align-items:center;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;touch-action:none;padding-left:12px;padding-right:12px;border-bottom-style:solid;border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination.mc-tab-header__pagination_before{border-right-style:solid;border-right-width:1px;border-right-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination.mc-tab-header__pagination_after{border-left-style:solid;border-left-width:1px;border-left-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination-controls_enabled .mc-tab-header__pagination{display:flex}.mc-tab-header__content{display:flex;flex-grow:1;z-index:1;overflow:hidden}.mc-tab-list{flex-grow:1;position:relative;transition:transform .5s cubic-bezier(.35,0,.25,1)}.mc-tab-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;height:var(--mc-tabs-size-height, 40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-right:var(--mc-tabs-size-padding-horizontal, 16px);padding-left:16px;padding-left:var(--mc-tabs-size-padding-horizontal, 16px);outline:none;-webkit-user-select:none;user-select:none}.mc-tab-label .mc-tab-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-label.mc-active{cursor:default}.mc-tab-label.mc-active:before{display:block;content:\"\";position:absolute}.mc-tab-label.mc-active[disabled] .mc-tab-overlay{bottom:-1px}.mc-tab-label.cdk-keyboard-focused{z-index:1}.mc-tab-label:first-child.cdk-keyboard-focused:after{left:0}.mc-tab-label:last-child.cdk-keyboard-focused:after{right:0}.mc-tab-label[disabled]{pointer-events:none}.mc-tab-label .mc-tab-label__template{display:flex;flex-direction:row;align-items:baseline}.mc-tab-label .mc-tab-label__template>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-label .mc-tab-label__template>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-label_old{border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px);border-bottom-style:solid;border-width:1px;border-width:var(--mc-tabs-size-border-width, 1px);border-style:solid;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px);border-left:none;border-left-color:transparent;border-right:none;border-right-color:transparent}.mc-tab-label_old.mc-active{border-width:1px;border-width:var(--mc-tabs-size-border-width, 1px);border-style:solid;padding-right:calc(16px - 1px);padding-right:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));padding-left:calc(16px - 1px);padding-left:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_old.mc-active.cdk-keyboard-focused:after{right:calc(-2 * 1px);right:calc(-2 * var(--mc-tabs-size-border-width, 1px));left:calc(-2 * 1px);left:calc(-2 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_old.cdk-keyboard-focused:after{top:-1px}.mc-tab-label_old .mc-tab-overlay{top:-1px;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px)}.mc-tab-label_horizontal{border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px);border-bottom-style:solid}.mc-tab-label_horizontal.mc-active:before{bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:0;right:0;height:4px;height:var(--mc-tabs-size-highlight-height, 4px)}.mc-tab-label_vertical{justify-content:flex-start}.mc-tab-label_vertical.mc-active:before{top:0;bottom:0;left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px));width:5px;width:var(--mc-tabs-size-highlight-height, 5px)}.mc-tab-label_vertical.cdk-keyboard-focused:after{right:0;left:0;border-width:calc(1px * 2);border-width:calc(var(--mc-tabs-size-border-width, 1px) * 2);border-style:solid}.mc-tab-group_stretch-labels .mc-tab-label,.mc-tab-group_stretch-labels .mc-tab-label_old{flex-basis:0;flex-grow:1}\n"], components: [{ type: i4__namespace.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i4__namespace.McIconCSSStyler, selector: "[mc-icon]" }], changeDetection: i0__namespace.ChangeDetectionStrategy.Default, encapsulation: i0__namespace.ViewEncapsulation.None });
+    /** @nocollapse */ McTabHeader.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabHeader, selector: "mc-tab-header", inputs: { selectedIndex: "selectedIndex", vertical: "vertical" }, outputs: { selectFocusedIndex: "selectFocusedIndex", indexFocused: "indexFocused" }, host: { properties: { "class.mc-tab-header_vertical": "vertical", "class.mc-tab-header__pagination-controls_enabled": "showPaginationControls", "class.mc-tab-header_rtl": "getLayoutDirection() == 'rtl'" }, classAttribute: "mc-tab-header" }, queries: [{ propertyName: "items", predicate: McTabLabelWrapper }], viewQueries: [{ propertyName: "tabListContainer", first: true, predicate: ["tabListContainer"], descendants: true, static: true }, { propertyName: "tabList", first: true, predicate: ["tabList"], descendants: true, static: true }, { propertyName: "nextPaginator", first: true, predicate: ["nextPaginator"], descendants: true }, { propertyName: "previousPaginator", first: true, predicate: ["previousPaginator"], descendants: true }], usesInheritance: true, ngImport: i0__namespace, template: "<div class=\"mc-tab-header__pagination mc-tab-header__pagination_before\"\n     #previousPaginator\n     [class.mc-disabled]=\"disableScrollBefore\"\n     (click)=\"handlePaginatorClick('before')\"\n     (mousedown)=\"handlePaginatorPress('before', $event)\"\n     (touchend)=\"stopInterval()\">\n\n    <i mc-icon=\"mc-angle-left-M_16\"></i>\n</div>\n\n<div class=\"mc-tab-header__content\"\n     #tabListContainer\n     (keydown)=\"handleKeydown($event)\">\n\n    <div class=\"mc-tab-list\"\n         #tabList\n         (cdkObserveContent)=\"onContentChanges()\">\n        <div class=\"mc-tab-list__content\">\n            <ng-content></ng-content>\n        </div>\n    </div>\n</div>\n\n<div class=\"mc-tab-header__pagination mc-tab-header__pagination_after\"\n     #nextPaginator\n     [class.mc-disabled]=\"disableScrollAfter\"\n     (mousedown)=\"handlePaginatorPress('after', $event)\"\n     (click)=\"handlePaginatorClick('after')\"\n     (touchend)=\"stopInterval()\">\n\n    <i mc-icon=\"mc-angle-right-M_16\"></i>\n</div>\n", styles: [".mc-tab-label.cdk-keyboard-focused:after{display:block;content:\"\";position:absolute;top:0;right:calc(-1 * 1px);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_horizontal.cdk-keyboard-focused:after,.mc-tab-label_old.cdk-keyboard-focused:after{border-width:calc(1px * 2);border-width:calc(var(--mc-tabs-size-border-width, 1px) * 2);border-style:solid;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px);border-bottom-color:transparent}.mc-tab-header{display:flex;overflow:hidden;position:relative;flex-shrink:0}.mc-tab-list__content{display:flex}.mc-tab-group_align-labels-center .mc-tab-list__content{justify-content:center}.mc-tab-group_align-labels-end .mc-tab-list__content{justify-content:flex-end}.mc-tab-header_vertical .mc-tab-list__content{flex-direction:column}.mc-tab-header__pagination{-webkit-user-select:none;user-select:none;position:relative;display:none;justify-content:center;align-items:center;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;touch-action:none;padding-left:12px;padding-right:12px;border-bottom-style:solid;border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination.mc-tab-header__pagination_before{border-right-style:solid;border-right-width:1px;border-right-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination.mc-tab-header__pagination_after{border-left-style:solid;border-left-width:1px;border-left-width:var(--mc-tabs-size-border-width, 1px)}.mc-tab-header__pagination-controls_enabled .mc-tab-header__pagination{display:flex}.mc-tab-header__content{display:flex;flex-grow:1;z-index:1;overflow:hidden}.mc-tab-list{position:relative;width:100%;transition:transform .5s cubic-bezier(.35,0,.25,1)}.mc-tab-label{position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;height:var(--mc-tabs-size-height, 40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-right:var(--mc-tabs-size-padding-horizontal, 16px);padding-left:16px;padding-left:var(--mc-tabs-size-padding-horizontal, 16px);outline:none;-webkit-user-select:none;user-select:none}.mc-tab-label .mc-tab-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-label.mc-active{cursor:default}.mc-tab-label.mc-active:before{display:block;content:\"\";position:absolute}.mc-tab-label.mc-active[disabled] .mc-tab-overlay{bottom:-1px}.mc-tab-label.cdk-keyboard-focused{z-index:1}.mc-tab-label:first-child.cdk-keyboard-focused:after{left:0}.mc-tab-label:last-child.cdk-keyboard-focused:after{right:0}.mc-tab-label[disabled]{pointer-events:none}.mc-tab-label .mc-tab-label__content>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-label .mc-tab-label__content>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-label.mc-tab-label_vertical .mc-tab-label__content{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tab-label_old{border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px);border-bottom-style:solid;border-width:1px;border-width:var(--mc-tabs-size-border-width, 1px);border-style:solid;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px);border-left:none;border-left-color:transparent;border-right:none;border-right-color:transparent}.mc-tab-label_old.mc-active{border-width:1px;border-width:var(--mc-tabs-size-border-width, 1px);border-style:solid;padding-right:calc(16px - 1px);padding-right:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px));padding-left:calc(16px - 1px);padding-left:calc(var(--mc-tabs-size-padding-horizontal, 16px) - var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_old.mc-active.cdk-keyboard-focused:after{right:calc(-2 * 1px);right:calc(-2 * var(--mc-tabs-size-border-width, 1px));left:calc(-2 * 1px);left:calc(-2 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-label_old.cdk-keyboard-focused:after{top:-1px}.mc-tab-label_old .mc-tab-overlay{top:-1px;border-top-left-radius:3px;border-top-left-radius:var(--mc-tabs-size-border-radius, 3px);border-top-right-radius:3px;border-top-right-radius:var(--mc-tabs-size-border-radius, 3px)}.mc-tab-label_horizontal{border-bottom-width:1px;border-bottom-width:var(--mc-tabs-size-border-width, 1px);border-bottom-style:solid}.mc-tab-label_horizontal.mc-active:before{bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:0;right:0;height:4px;height:var(--mc-tabs-size-highlight-height, 4px)}.mc-tab-label_vertical{justify-content:flex-start}.mc-tab-label_vertical.mc-active:before{top:0;bottom:0;left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px));width:5px;width:var(--mc-tabs-size-highlight-height, 5px)}.mc-tab-label_vertical.cdk-keyboard-focused:after{right:0;left:0;border-width:calc(1px * 2);border-width:calc(var(--mc-tabs-size-border-width, 1px) * 2);border-style:solid}.mc-tab-group_stretch-labels .mc-tab-label,.mc-tab-group_stretch-labels .mc-tab-label_old{flex-basis:0;flex-grow:1}\n"], components: [{ type: i4__namespace.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i4__namespace.McIconCSSStyler, selector: "[mc-icon]" }], changeDetection: i0__namespace.ChangeDetectionStrategy.Default, encapsulation: i0__namespace.ViewEncapsulation.None });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTabHeader, decorators: [{
                 type: i0.Component,
                 args: [{
@@ -1440,6 +1489,9 @@
         function McTabGroup(elementRef, changeDetectorRef, lightTabs, vertical, defaultConfig) {
             var _this = _super.call(this, elementRef) || this;
             _this.changeDetectorRef = changeDetectorRef;
+            _this.resizeStream = new rxjs.Subject();
+            _this._dynamicHeight = false;
+            _this._selectedIndex = null;
             /** Position of the tab header. */
             _this.headerPosition = 'above';
             /** Output to enable support for two-way binding on `[(selectedIndex)]` */
@@ -1458,17 +1510,24 @@
             _this.tabsSubscription = rxjs.Subscription.EMPTY;
             /** Subscription to changes in the tab labels. */
             _this.tabLabelSubscription = rxjs.Subscription.EMPTY;
-            _this._dynamicHeight = false;
-            _this._selectedIndex = null;
+            _this.resizeSubscription = rxjs.Subscription.EMPTY;
+            _this.resizeDebounceInterval = 100;
+            _this.checkOverflow = function () {
+                _this.tabHeader.items
+                    .forEach(function (headerTab) { return headerTab.checkOverflow(); });
+            };
             _this.oldTab = coercion.coerceBooleanProperty(lightTabs);
             _this.vertical = coercion.coerceBooleanProperty(vertical);
             _this.groupId = nextId++;
             _this.animationDuration = (defaultConfig === null || defaultConfig === void 0 ? void 0 : defaultConfig.animationDuration) || '0ms';
+            _this.subscribeToResize();
             return _this;
         }
         Object.defineProperty(McTabGroup.prototype, "dynamicHeight", {
             /** Whether the tab group should grow to the size of the active tab. */
-            get: function () { return this._dynamicHeight; },
+            get: function () {
+                return this._dynamicHeight;
+            },
             set: function (value) {
                 this._dynamicHeight = coercion.coerceBooleanProperty(value);
             },
@@ -1477,7 +1536,9 @@
         });
         Object.defineProperty(McTabGroup.prototype, "selectedIndex", {
             /** The index of the active tab. */
-            get: function () { return this._selectedIndex; },
+            get: function () {
+                return this._selectedIndex;
+            },
             set: function (value) {
                 this.indexToSelect = coercion.coerceNumberProperty(value, null);
             },
@@ -1530,7 +1591,8 @@
             this.subscribeToTabLabels();
             // Subscribe to changes in the amount of tabs, in order to be
             // able to re-render the content as new tabs are added or removed.
-            this.tabsSubscription = this.tabs.changes.subscribe(function () {
+            this.tabsSubscription = this.tabs.changes
+                .subscribe(function () {
                 var indexToSelect = _this.clampTabIndex(_this.indexToSelect);
                 // Maintain the previously-selected tab if a new tab is added or removed and there is no
                 // explicit change that selects a different tab.
@@ -1550,9 +1612,13 @@
                 _this.changeDetectorRef.markForCheck();
             });
         };
+        McTabGroup.prototype.ngAfterViewInit = function () {
+            this.checkOverflow();
+        };
         McTabGroup.prototype.ngOnDestroy = function () {
             this.tabsSubscription.unsubscribe();
             this.tabLabelSubscription.unsubscribe();
+            this.resizeSubscription.unsubscribe();
         };
         McTabGroup.prototype.focusChanged = function (index) {
             this.focusChange.emit(this.createChangeEvent(index));
@@ -1622,6 +1688,17 @@
             }
             this.tabLabelSubscription = rxjs.merge.apply(void 0, __spreadArray([], __read(this.tabs.map(function (tab) { return tab.stateChanges; })))).subscribe(function () { return _this.changeDetectorRef.markForCheck(); });
         };
+        McTabGroup.prototype.subscribeToResize = function () {
+            if (!this.vertical) {
+                return;
+            }
+            if (this.resizeSubscription) {
+                this.resizeSubscription.unsubscribe();
+            }
+            this.resizeSubscription = this.resizeStream
+                .pipe(operators.debounceTime(this.resizeDebounceInterval))
+                .subscribe(this.checkOverflow);
+        };
         /** Clamps the given index to the bounds of 0 and the tabs length. */
         McTabGroup.prototype.clampTabIndex = function (index) {
             // Note the `|| 0`, which ensures that values like NaN can't get through
@@ -1632,7 +1709,7 @@
         return McTabGroup;
     }(McTabGroupMixinBase));
     /** @nocollapse */ McTabGroup.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTabGroup, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: 'mc-old-tabs', attribute: true }, { token: 'vertical', attribute: true }, { token: MC_TABS_CONFIG, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McTabGroup.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabGroup, selector: "mc-tab-group", inputs: { disabled: "disabled", dynamicHeight: "dynamicHeight", selectedIndex: "selectedIndex", headerPosition: "headerPosition", animationDuration: "animationDuration" }, outputs: { selectedIndexChange: "selectedIndexChange", focusChange: "focusChange", animationDone: "animationDone", selectedTabChange: "selectedTabChange" }, host: { properties: { "class.mc-tab-group_dynamic-height": "dynamicHeight", "class.mc-tab-group_inverted-header": "headerPosition === \"below\"" }, classAttribute: "mc-tab-group" }, queries: [{ propertyName: "tabs", predicate: McTab }], viewQueries: [{ propertyName: "tabBodyWrapper", first: true, predicate: ["tabBodyWrapper"], descendants: true }, { propertyName: "tabHeader", first: true, predicate: ["tabHeader"], descendants: true }], exportAs: ["mcTabGroup"], usesInheritance: true, ngImport: i0__namespace, template: "<mc-tab-header\n    #tabHeader\n    [vertical]=\"vertical\"\n    [selectedIndex]=\"selectedIndex\"\n    (indexFocused)=\"focusChanged($event)\"\n    (selectFocusedIndex)=\"selectedIndex = $event\">\n\n    <div class=\"mc-tab-label\"\n         mcTabLabelWrapper\n         cdkMonitorElementFocus\n         [attr.tabindex]=\"getTabIndex(tab, i)\"\n         [class.mc-tab-label_old]=\"oldTab\"\n         [class.mc-tab-label_horizontal]=\"!vertical && !oldTab\"\n         [class.mc-tab-label_vertical]=\"vertical && !oldTab\"\n         [class.mc-tab-label_empty]=\"tab.empty\"\n         [class.mc-active]=\"selectedIndex == i\"\n         *ngFor=\"let tab of tabs; let i = index\"\n         [id]=\"getTabLabelId(i)\"\n         [disabled]=\"tab.disabled\"\n         (click)=\"handleClick(tab, tabHeader, i)\"\n\n         [mcTooltip]=\"tab.tooltipTitle\"\n         [mcTooltipDisabled]=\"!tab.empty\"\n         [mcTrigger]=\"'hover, focus'\"\n         [mcPlacement]=\"tab.tooltipPlacement\">\n\n        <div class=\"mc-tab-label__content\"\n            [class.mc-tab-label__template]=\"tab.templateLabel\">\n            <!-- If there is a label template, use it. -->\n            <ng-template [ngIf]=\"tab.templateLabel\">\n                <ng-template [cdkPortalOutlet]=\"tab.templateLabel\"></ng-template>\n            </ng-template>\n\n            <!-- If there is not a label template, fall back to the text label. -->\n            <ng-template [ngIf]=\"!tab.templateLabel\">{{ tab.textLabel }}</ng-template>\n        </div>\n\n        <div class=\"mc-tab-overlay\"></div>\n    </div>\n</mc-tab-header>\n\n<div class=\"mc-tab-body__wrapper\" #tabBodyWrapper>\n    <mc-tab-body\n        *ngFor=\"let tab of tabs; let i = index\"\n        [id]=\"getTabContentId(i)\"\n        [class.mc-tab-body__active]=\"selectedIndex == i\"\n        [content]=\"tab.content\"\n        [position]=\"tab.position\"\n        [origin]=\"tab.origin\"\n        [animationDuration]=\"animationDuration\"\n        (onCentered)=\"removeTabBodyWrapperHeight()\"\n        (onCentering)=\"setTabBodyWrapperHeight($event)\">\n    </mc-tab-body>\n</div>\n", styles: [".mc-tab-group{display:flex;flex-direction:column;box-sizing:border-box;text-align:center;white-space:nowrap}.mc-tab-group.mc-tab-group_inverted-header{flex-direction:column-reverse}.mc-tab-group_vertical{flex-direction:row}.mc-tab-group_vertical .mc-tab-header__content{overflow-y:auto;padding-top:8px;padding-bottom:1px;border-right-width:1px;border-right-width:var(--mc-tabs-size-border-width, 1px);border-right-style:solid}.mc-tab-body__wrapper{display:flex;overflow:hidden;position:relative}.mc-tab-body{top:0;left:0;right:0;bottom:0;position:absolute;display:block;overflow:hidden;flex-basis:100%}.mc-tab-body.mc-tab-body__active{overflow-x:hidden;overflow-y:auto;position:relative;z-index:1;flex-grow:1}.mc-tab-group.mc-tab-group_dynamic-height .mc-tab-body.mc-tab-body__active{overflow-y:hidden}\n"], components: [{ type: McTabHeader, selector: "mc-tab-header", inputs: ["selectedIndex", "vertical"], outputs: ["selectFocusedIndex", "indexFocused"] }, { type: McTabBody, selector: "mc-tab-body", inputs: ["position", "content", "origin", "animationDuration"], outputs: ["onCentering", "beforeCentering", "afterLeavingCenter", "onCentered"] }], directives: [{ type: i3__namespace$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: ["disabled"] }, { type: i1__namespace$1.CdkMonitorFocus, selector: "[cdkMonitorElementFocus], [cdkMonitorSubtreeFocus]", outputs: ["cdkFocusChange"] }, { type: i6__namespace.McTooltipTrigger, selector: "[mcTooltip]", inputs: ["mcTooltip", "mcTooltipDisabled", "mcEnterDelay", "mcTrigger", "mcTooltipClass"], exportAs: ["mcTooltip"] }, { type: i3__namespace$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i7__namespace.CdkPortalOutlet, selector: "[cdkPortalOutlet]", inputs: ["cdkPortalOutlet"], outputs: ["attached"], exportAs: ["cdkPortalOutlet"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    /** @nocollapse */ McTabGroup.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabGroup, selector: "mc-tab-group", inputs: { disabled: "disabled", dynamicHeight: "dynamicHeight", selectedIndex: "selectedIndex", headerPosition: "headerPosition", animationDuration: "animationDuration" }, outputs: { selectedIndexChange: "selectedIndexChange", focusChange: "focusChange", animationDone: "animationDone", selectedTabChange: "selectedTabChange" }, host: { listeners: { "window:resize": "resizeStream.next()" }, properties: { "class.mc-tab-group_dynamic-height": "dynamicHeight", "class.mc-tab-group_inverted-header": "headerPosition === \"below\"" }, classAttribute: "mc-tab-group" }, queries: [{ propertyName: "tabs", predicate: McTab }], viewQueries: [{ propertyName: "tabBodyWrapper", first: true, predicate: ["tabBodyWrapper"], descendants: true }, { propertyName: "tabHeader", first: true, predicate: ["tabHeader"], descendants: true }], exportAs: ["mcTabGroup"], usesInheritance: true, ngImport: i0__namespace, template: "<mc-tab-header\n    #tabHeader\n    [vertical]=\"vertical\"\n    [selectedIndex]=\"selectedIndex\"\n    (indexFocused)=\"focusChanged($event)\"\n    (selectFocusedIndex)=\"selectedIndex = $event\">\n\n    <div class=\"mc-tab-label\"\n         mcTabLabelWrapper\n         cdkMonitorElementFocus\n         [attr.tabindex]=\"getTabIndex(tab, i)\"\n         [class.mc-tab-label_old]=\"oldTab\"\n         [class.mc-tab-label_horizontal]=\"!vertical && !oldTab\"\n         [class.mc-tab-label_vertical]=\"vertical && !oldTab\"\n         [class.mc-tab-label_empty]=\"tab.empty\"\n         [class.mc-active]=\"selectedIndex == i\"\n         *ngFor=\"let tab of tabs; let i = index\"\n         [tab]=\"tab\"\n         [id]=\"getTabLabelId(i)\"\n         [disabled]=\"tab.disabled\"\n         (click)=\"handleClick(tab, tabHeader, i)\"\n\n         [mcTooltip]=\"tab.tooltipTitle\"\n         [mcTooltipDisabled]=\"!tab.empty && !tab.isOverflown\"\n         [mcTrigger]=\"'hover, focus'\"\n         [mcPlacement]=\"tab.tooltipPlacement\">\n\n        <div #labelContent class=\"mc-tab-label__content\"\n            [class.mc-tab-label__template]=\"tab.templateLabel\">\n            <!-- If there is a label template, use it. -->\n            <ng-template [ngIf]=\"tab.templateLabel\">\n                <ng-template [cdkPortalOutlet]=\"tab.templateLabel\"></ng-template>\n            </ng-template>\n\n            <!-- If there is not a label template, fall back to the text label. -->\n            <ng-template [ngIf]=\"!tab.templateLabel\">{{ tab.textLabel }}</ng-template>\n        </div>\n\n        <div class=\"mc-tab-overlay\"></div>\n    </div>\n</mc-tab-header>\n\n<div class=\"mc-tab-body__wrapper\" #tabBodyWrapper>\n    <mc-tab-body\n        *ngFor=\"let tab of tabs; let i = index\"\n        [id]=\"getTabContentId(i)\"\n        [class.mc-tab-body__active]=\"selectedIndex == i\"\n        [content]=\"tab.content\"\n        [position]=\"tab.position\"\n        [origin]=\"tab.origin\"\n        [animationDuration]=\"animationDuration\"\n        (onCentered)=\"removeTabBodyWrapperHeight()\"\n        (onCentering)=\"setTabBodyWrapperHeight($event)\">\n    </mc-tab-body>\n</div>\n", styles: [".mc-tab-group{display:flex;flex-direction:column;box-sizing:border-box;text-align:center;white-space:nowrap}.mc-tab-group.mc-tab-group_inverted-header{flex-direction:column-reverse}.mc-tab-group_vertical{flex-direction:row}.mc-tab-group_vertical .mc-tab-header__content{overflow-y:auto;padding-top:8px;padding-bottom:1px;border-right-width:1px;border-right-width:var(--mc-tabs-size-border-width, 1px);border-right-style:solid}.mc-tab-body__wrapper{display:flex;overflow:hidden;position:relative}.mc-tab-body{top:0;left:0;right:0;bottom:0;position:absolute;display:block;overflow:hidden;flex-basis:100%}.mc-tab-body.mc-tab-body__active{overflow-x:hidden;overflow-y:auto;position:relative;z-index:1;flex-grow:1}.mc-tab-group.mc-tab-group_dynamic-height .mc-tab-body.mc-tab-body__active{overflow-y:hidden}\n"], components: [{ type: McTabHeader, selector: "mc-tab-header", inputs: ["selectedIndex", "vertical"], outputs: ["selectFocusedIndex", "indexFocused"] }, { type: McTabBody, selector: "mc-tab-body", inputs: ["position", "content", "origin", "animationDuration"], outputs: ["onCentering", "beforeCentering", "afterLeavingCenter", "onCentered"] }], directives: [{ type: i3__namespace$1.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: ["disabled", "tab"] }, { type: i1__namespace$1.CdkMonitorFocus, selector: "[cdkMonitorElementFocus], [cdkMonitorSubtreeFocus]", outputs: ["cdkFocusChange"] }, { type: i6__namespace.McTooltipTrigger, selector: "[mcTooltip]", inputs: ["mcTooltip", "mcTooltipDisabled", "mcEnterDelay", "mcTrigger", "mcTooltipClass"], exportAs: ["mcTooltip"] }, { type: i3__namespace$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i7__namespace.CdkPortalOutlet, selector: "[cdkPortalOutlet]", inputs: ["cdkPortalOutlet"], outputs: ["attached"], exportAs: ["cdkPortalOutlet"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTabGroup, decorators: [{
                 type: i0.Component,
                 args: [{
@@ -1646,7 +1723,8 @@
                         host: {
                             class: 'mc-tab-group',
                             '[class.mc-tab-group_dynamic-height]': 'dynamicHeight',
-                            '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"'
+                            '[class.mc-tab-group_inverted-header]': 'headerPosition === "below"',
+                            '(window:resize)': 'resizeStream.next()'
                         }
                     }]
             }], ctorParameters: function () {
@@ -1790,7 +1868,7 @@
         return McTabNav;
     }());
     /** @nocollapse */ McTabNav.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTabNav, deps: [{ token: 'vertical', attribute: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McTabNav.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabNav, selector: "[mc-tab-nav-bar]", host: { classAttribute: "mc-tab-nav-bar" }, queries: [{ propertyName: "links", predicate: McTabLink }], exportAs: ["mcTabNavBar", "mcTabNav"], ngImport: i0__namespace, template: '<ng-content></ng-content>', isInline: true, styles: [".mc-tab-link.cdk-keyboard-focused:after{display:block;content:\"\";position:absolute;top:0;right:calc(-1 * 1px);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-link{vertical-align:top;text-decoration:none;-webkit-tap-highlight-color:transparent;position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;height:var(--mc-tabs-size-height, 40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-right:var(--mc-tabs-size-padding-horizontal, 16px);padding-left:16px;padding-left:var(--mc-tabs-size-padding-horizontal, 16px);outline:none}.mc-tab-link .mc-tab-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-link.mc-active{cursor:default}.mc-tab-link.mc-active:before{display:block;content:\"\";position:absolute}.mc-tab-link.mc-active[disabled] .mc-tab-overlay{bottom:-1px}.mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-link:first-child.cdk-keyboard-focused:after{left:0}.mc-tab-link:last-child.cdk-keyboard-focused:after{right:0}.mc-tab-link[disabled]{pointer-events:none}.mc-tab-link .mc-tab-label__template{display:flex;flex-direction:row;align-items:baseline}.mc-tab-link .mc-tab-label__template>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link .mc-tab-label__template>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link .mc-tab-group_stretch-labels .mc-tab-link{flex-basis:0;flex-grow:1}.mc-tab-link>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-nav-bar{display:flex;flex-grow:1;position:relative;padding:1px 1px 0}.mc-tab-nav-bar .mc-tab-group_align-labels-center{justify-content:center}.mc-tab-nav-bar .mc-tab-group_align-labels-end{justify-content:flex-end}.mc-tab-nav-bar.mc-tab-group_vertical{flex-direction:column;flex-grow:0}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    /** @nocollapse */ McTabNav.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTabNav, selector: "[mc-tab-nav-bar]", host: { classAttribute: "mc-tab-nav-bar" }, queries: [{ propertyName: "links", predicate: McTabLink }], exportAs: ["mcTabNavBar", "mcTabNav"], ngImport: i0__namespace, template: '<ng-content></ng-content>', isInline: true, styles: [".mc-tab-link.cdk-keyboard-focused:after{display:block;content:\"\";position:absolute;top:0;right:calc(-1 * 1px);right:calc(-1 * var(--mc-tabs-size-border-width, 1px));bottom:calc(-1 * 1px);bottom:calc(-1 * var(--mc-tabs-size-border-width, 1px));left:calc(-1 * 1px);left:calc(-1 * var(--mc-tabs-size-border-width, 1px))}.mc-tab-link{vertical-align:top;text-decoration:none;-webkit-tap-highlight-color:transparent;position:relative;box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;height:40px;height:var(--mc-tabs-size-height, 40px);text-align:center;white-space:nowrap;cursor:pointer;padding-right:16px;padding-right:var(--mc-tabs-size-padding-horizontal, 16px);padding-left:16px;padding-left:var(--mc-tabs-size-padding-horizontal, 16px);outline:none}.mc-tab-link .mc-tab-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.mc-tab-link.mc-active{cursor:default}.mc-tab-link.mc-active:before{display:block;content:\"\";position:absolute}.mc-tab-link.mc-active[disabled] .mc-tab-overlay{bottom:-1px}.mc-tab-link.cdk-keyboard-focused{z-index:1}.mc-tab-link:first-child.cdk-keyboard-focused:after{left:0}.mc-tab-link:last-child.cdk-keyboard-focused:after{right:0}.mc-tab-link[disabled]{pointer-events:none}.mc-tab-link .mc-tab-label__content>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link .mc-tab-label__content>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link.mc-tab-label_vertical .mc-tab-label__content{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mc-tab-link .mc-tab-group_stretch-labels .mc-tab-link{flex-basis:0;flex-grow:1}.mc-tab-link>.mc-icon.mc-icon_left{margin-right:8px;margin-right:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-link>.mc-icon.mc-icon_right{margin-left:8px;margin-left:var(--mc-tabs-size-label-icon-margin, 8px)}.mc-tab-nav-bar{display:flex;flex-grow:1;position:relative;padding:1px 1px 0}.mc-tab-nav-bar .mc-tab-group_align-labels-center{justify-content:center}.mc-tab-nav-bar .mc-tab-group_align-labels-end{justify-content:flex-end}.mc-tab-nav-bar.mc-tab-group_vertical{flex-direction:column;flex-grow:0}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTabNav, decorators: [{
                 type: i0.Component,
                 args: [{

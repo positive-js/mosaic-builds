@@ -1,6 +1,6 @@
 import { TemplatePortal } from '@angular/cdk/portal';
 import { OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
-import { CanDisable, CanDisableCtor } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, PopUpPlacements } from '@ptsecurity/mosaic/core';
 import { Subject } from 'rxjs';
 import { McTabLabel } from './tab-label.directive';
 import * as i0 from "@angular/core";
@@ -20,11 +20,13 @@ export declare class McTab extends McTabMixinBase implements OnInit, CanDisable,
     explicitContent: TemplateRef<any>;
     /** Template inside the McTab view that contains an `<ng-content>`. */
     implicitContent: TemplateRef<any>;
+    get tooltipTitle(): string;
+    set tooltipTitle(value: string);
+    private _tooltipTitle;
+    tooltipPlacement: PopUpPlacements;
     /** Plain text label for the tab, used when there is no template label. */
     textLabel: string;
     empty: boolean;
-    tooltipTitle: string;
-    tooltipPlacement: string;
     tabId: string;
     /** Emits whenever the internal state of the tab changes. */
     readonly stateChanges: Subject<void>;
@@ -42,6 +44,10 @@ export declare class McTab extends McTabMixinBase implements OnInit, CanDisable,
      * Whether the tab is currently active.
      */
     isActive: boolean;
+    get isOverflown(): boolean;
+    get overflowTooltipTitle(): string;
+    set overflowTooltipTitle(value: string);
+    private _overflowTooltipTitle;
     /** Portal that will be the hosted content of the tab */
     private contentPortal;
     constructor(viewContainerRef: ViewContainerRef);
@@ -56,5 +62,5 @@ export declare class McTab extends McTabMixinBase implements OnInit, CanDisable,
      */
     protected setTemplateLabelInput(value: McTabLabel): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTab, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTab, "mc-tab", ["mcTab"], { "disabled": "disabled"; "textLabel": "label"; "empty": "empty"; "tooltipTitle": "tooltipTitle"; "tooltipPlacement": "tooltipPlacement"; "tabId": "tabId"; }, {}, ["templateLabel", "explicitContent"], ["*"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTab, "mc-tab", ["mcTab"], { "disabled": "disabled"; "tooltipTitle": "tooltipTitle"; "tooltipPlacement": "tooltipPlacement"; "textLabel": "label"; "empty": "empty"; "tabId": "tabId"; }, {}, ["templateLabel", "explicitContent"], ["*"]>;
 }
