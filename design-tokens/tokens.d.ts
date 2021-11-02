@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Oct 2021 12:39:11 GMT
+ * Generated on Thu, 28 Oct 2021 12:33:10 GMT
  */
 export declare const LightColorSchemePrimaryDefault = "#338FCC";
 export declare const LightColorSchemePrimaryPalette: {
@@ -7348,10 +7348,7 @@ export declare const LinkAnimationStateHoverTransition = "color 0ms";
 export declare const LinkFontDefault = "body";
 export declare const ListSizeHorizontalPadding = "16px";
 export declare const ListSizeIconPadding = "4px";
-export declare const ListSizeItemHeight = "28px";
-export declare const ListSizeTwoLineHeight = "72px";
-export declare const ListSizeThreeLineHeight = "88px";
-export declare const ListSizeMultiLinePadding = "16px";
+export declare const ListSizeItemHeight = "32px";
 export declare const ListSizeIconWidth = "24px";
 export declare const ListFontItem = "body";
 export declare const ModalLightColorSchemeShadow = "(0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5))";

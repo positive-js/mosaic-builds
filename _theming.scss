@@ -96,7 +96,7 @@
 
 
 // Do not edit directly
-// Generated on Mon, 18 Oct 2021 12:39:11 GMT
+// Generated on Thu, 28 Oct 2021 12:33:10 GMT
 
 $light-color-scheme-primary-default: #338FCC;
 $light-color-scheme-second-default: #B3B3B3;
@@ -618,10 +618,7 @@ $link-animation-state-hover-transition: color 0ms;
 $link-font-default: body;
 $list-size-horizontal-padding: 16px;
 $list-size-icon-padding: 4px;
-$list-size-item-height: 28px;
-$list-size-two-line-height: 72px;
-$list-size-three-line-height: 88px;
-$list-size-multi-line-padding: 16px;
+$list-size-item-height: 32px;
 $list-size-icon-width: 24px;
 $list-font-item: body;
 $modal-light-color-scheme-shadow: (0 0 0 1px #B3B3B3, 0 6px 12px 0 rgba(0, 0, 0, 0.5));
@@ -1845,21 +1842,6 @@ $mosaic: (
     text-overflow: ellipsis;
 }
 
-// Mixin to provide all mc-line styles, changing secondary font size based on whether the list is in dense mode.
-@mixin mc-line-base($secondary-font-size) {
-    .mc-line {
-        @include mc-truncate-line();
-
-        display: block;
-        box-sizing: border-box;
-
-        // all lines but the top line should have smaller text
-        &:nth-child(n + 2) {
-            font-size: $secondary-font-size;
-        }
-    }
-}
-
 // This mixin normalizes default element styles, e.g. font weight for heading text.
 @mixin mc-normalize-text() {
     & > * {
@@ -1887,12 +1869,16 @@ $mosaic: (
     }
 }
 
-.mc-no-select {
+@mixin mc-no-select() {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.mc-no-select {
+    @include mc-no-select;
 }
 
 .cdk-overlay-container {
@@ -5945,33 +5931,6 @@ $mc-datepicker-today-fade-amount: 0.2;
             color: mc-color($second, if($is-dark, 700, 300));
         }
     }
-
-    .mc-tree-node-action {
-        &.cdk-keyboard-focused {
-            border-color: map-get(map-get($theme, states), focused-color);
-        }
-
-        &:active,
-        &.mc-pressed {
-            & .mc-icon {
-                color: mc-color($second, if($is-dark, 300, 700));
-            }
-
-            background-color: mc-color($second, A100);
-        }
-
-        &:hover .mc-icon {
-            color: mc-color($second, if($is-dark, 300, 700));
-        }
-
-        &[disabled] {
-            & .mc-icon {
-                color: mc-color($second, if($is-dark, 700, 300));
-            }
-
-            background-color: transparent;
-        }
-    }
     /* stylelint-enable no-descending-specificity */
 }
 
@@ -6439,6 +6398,46 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 
 
+
+
+@mixin mc-option-action-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    $second: map-get($theme, second);
+
+    $is-dark: map-get($theme, is-dark);
+
+    .mc-option-action {
+        &.cdk-keyboard-focused {
+            border-color: map-get(map-get($theme, states), focused-color);
+        }
+
+        &:active,
+        &.mc-pressed {
+            & .mc-icon {
+                color: mc-color($second, if($is-dark, 300, 700));
+            }
+
+            background-color: mc-color($second, A100);
+        }
+
+        &:hover .mc-icon {
+            color: mc-color($second, if($is-dark, 300, 700));
+        }
+
+        &[disabled] {
+            & .mc-icon {
+                color: mc-color($second, if($is-dark, 700, 300));
+            }
+
+            background-color: transparent;
+        }
+    }
+}
+
+
+
 @mixin mc-highlight-theme($theme) {
     .mc-highlight {
         color: inherit;
@@ -6488,6 +6487,7 @@ $mc-datepicker-today-fade-amount: 0.2;
     @include mc-navbar-theme($theme);
     @include mc-option-theme($theme);
     @include mc-optgroup-theme($theme);
+    @include mc-option-action-theme($theme);
     @include mc-panel-theme($theme);
     @include mc-popover-theme($theme);
     @include mc-progress-bar-theme($theme);

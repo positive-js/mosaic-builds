@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ChangeDetectorRef, ElementRef, EventEmitter, IterableDiffer, IterableDiffers, QueryList, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
@@ -36,6 +37,7 @@ interface SelectionModelOption {
 }
 export declare class McTreeSelection extends McTreeBase<McTreeOption> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
     private elementRef;
+    private clipboard;
     renderedOptions: QueryList<McTreeOption>;
     keyManager: FocusKeyManager<McTreeOption>;
     selectionModel: SelectionModel<SelectionModelOption>;
@@ -69,7 +71,7 @@ export declare class McTreeSelection extends McTreeBase<McTreeOption> implements
     private readonly destroy;
     private optionFocusSubscription;
     private optionBlurSubscription;
-    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, multiple: MultipleMode);
+    constructor(elementRef: ElementRef, differs: IterableDiffers, changeDetectorRef: ChangeDetectorRef, multiple: MultipleMode, clipboard: Clipboard);
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     focus($event: any): void;
@@ -100,6 +102,7 @@ export declare class McTreeSelection extends McTreeBase<McTreeOption> implements
     setOptionsFromValues(values: any[]): void;
     getSelectedValues(): any[];
     getItemHeight(): number;
+    private onCopyDefaultHandler;
     private getHeight;
     private updateTabIndex;
     private updateRenderedOptions;
@@ -120,7 +123,7 @@ export declare class McTreeSelection extends McTreeBase<McTreeOption> implements
     private updateOptionsFocus;
     private canDeselectLast;
     private isFocusReceivedFromNestedOption;
-    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelection, [null, null, null, { attribute: "multiple"; }]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelection, [null, null, null, { attribute: "multiple"; }, { optional: true; }]>;
     static ɵcmp: i0.ɵɵComponentDeclaration<McTreeSelection, "mc-tree-selection", ["mcTreeSelection"], { "treeControl": "treeControl"; "autoSelect": "autoSelect"; "noUnselectLast": "noUnselectLast"; "disabled": "disabled"; "tabIndex": "tabIndex"; }, { "navigationChange": "navigationChange"; "selectionChange": "selectionChange"; "onSelectAll": "onSelectAll"; "onCopy": "onCopy"; }, ["unorderedOptions"], never>;
 }
 export {};

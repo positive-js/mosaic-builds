@@ -1,21 +1,22 @@
-import * as i2 from '@angular/cdk/bidi';
+import * as i2$1 from '@angular/cdk/bidi';
 import { BidiModule } from '@angular/cdk/bidi';
 import * as i0 from '@angular/core';
-import { InjectionToken, isDevMode, NgModule, Optional, Inject, Directive, Injectable, Pipe, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, EventEmitter, Output, ContentChildren, TemplateRef } from '@angular/core';
+import { InjectionToken, isDevMode, NgModule, Optional, Inject, Directive, Injectable, Pipe, Component, ChangeDetectionStrategy, ViewEncapsulation, Input, EventEmitter, Output, ContentChild, ContentChildren, TemplateRef } from '@angular/core';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import * as i1 from '@ptsecurity/cdk/datetime';
 import { MC_DATE_LOCALE } from '@ptsecurity/cdk/datetime';
 import * as MessageFormat from 'messageformat';
 import { RequiredValidator } from '@angular/forms';
-import * as i3 from '@angular/common';
+import * as i2 from '@angular/common';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import * as i1$1 from '@angular/cdk/overlay';
+import * as i1$2 from '@angular/cdk/overlay';
 import { Overlay } from '@angular/cdk/overlay';
 import { trigger, state, style, transition, animate, group } from '@angular/animations';
-import { ENTER, SPACE, ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { ENTER, SPACE, TAB, ESCAPE } from '@ptsecurity/cdk/keycodes';
+import * as i1$1 from '@angular/cdk/a11y';
 import { takeUntil, distinctUntilChanged, delay } from 'rxjs/operators';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 function isBoolean(val) { return typeof val === 'boolean'; }
 function toBoolean(value) {
@@ -2029,7 +2030,7 @@ class McOption {
     }
 }
 /** @nocollapse */ McOption.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McOption, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: MC_OPTION_PARENT_COMPONENT, optional: true }, { token: McOptgroup, optional: true }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McOption.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McOption, selector: "mc-option", inputs: { value: "value", showCheckbox: "showCheckbox", disabled: "disabled" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "click": "selectViaInteraction()", "keydown": "handleKeydown($event)" }, properties: { "attr.tabindex": "getTabIndex()", "class.mc-selected": "selected", "class.mc-option-multiple": "multiple", "class.mc-active": "active", "class.mc-disabled": "disabled", "id": "id" }, classAttribute: "mc-option" }, exportAs: ["mcOption"], ngImport: i0, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : ''\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);border:2px solid transparent;border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * 2px);top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * 2px);left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * 2px);right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * 2px);bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}\n"], components: [{ type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i3.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+/** @nocollapse */ McOption.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McOption, selector: "mc-option", inputs: { value: "value", showCheckbox: "showCheckbox", disabled: "disabled" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "click": "selectViaInteraction()", "keydown": "handleKeydown($event)" }, properties: { "attr.tabindex": "getTabIndex()", "class.mc-selected": "selected", "class.mc-option-multiple": "multiple", "class.mc-active": "active", "class.mc-disabled": "disabled", "id": "id" }, classAttribute: "mc-option" }, exportAs: ["mcOption"], ngImport: i0, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : ''\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);border:2px solid transparent;border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * 2px);top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * 2px);left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * 2px);right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * 2px);bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}\n"], components: [{ type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McOption, decorators: [{
             type: Component,
             args: [{
@@ -2107,17 +2108,139 @@ function getOptionScrollPosition(optionIndex, optionHeight, currentScrollPositio
     return currentScrollPosition;
 }
 
+const MC_OPTION_ACTION_PARENT = new InjectionToken('MC_OPTION_ACTION_PARENT');
+class McOptionActionBase {
+}
+// tslint:disable-next-line:naming-convention
+const McOptionActionMixinBase = mixinTabIndex(mixinDisabled(McOptionActionBase));
+class McOptionActionComponent extends McOptionActionMixinBase {
+    constructor(elementRef, focusMonitor, option) {
+        super();
+        this.elementRef = elementRef;
+        this.focusMonitor = focusMonitor;
+        this.option = option;
+        this.hasFocus = false;
+        this.destroy = new Subject();
+        this.focusMonitor.monitor(this.elementRef.nativeElement);
+    }
+    get active() {
+        var _a;
+        return this.hasFocus || !!((_a = this.option.dropdownTrigger) === null || _a === void 0 ? void 0 : _a.opened);
+    }
+    ngAfterViewInit() {
+        if (!this.option.dropdownTrigger) {
+            return;
+        }
+        this.option.dropdownTrigger.restoreFocus = false;
+        this.option.dropdownTrigger.dropdownClosed
+            .pipe(takeUntil(this.destroy))
+            .subscribe(() => {
+            this.preventShowingTooltip();
+            const destroyReason = this.option.dropdownTrigger.lastDestroyReason === 'keydown' ?
+                'keyboard' :
+                'program';
+            this.focus(destroyReason);
+        });
+    }
+    ngOnDestroy() {
+        this.destroy.next();
+        this.destroy.complete();
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+    }
+    focus(origin, options) {
+        if (this.focusMonitor && origin) {
+            this.focusMonitor.focusVia(this.elementRef.nativeElement, origin, options);
+        }
+        else {
+            this.elementRef.nativeElement.focus();
+        }
+        this.hasFocus = true;
+    }
+    onFocus($event) {
+        $event.stopPropagation();
+        this.hasFocus = true;
+    }
+    onBlur() {
+        this.hasFocus = false;
+    }
+    onClick($event) {
+        $event.stopPropagation();
+    }
+    onKeyDown($event) {
+        if ([SPACE, ENTER].includes($event.keyCode) && this.option.dropdownTrigger) {
+            this.option.dropdownTrigger.openedBy = 'keyboard';
+            this.option.dropdownTrigger.toggle();
+        }
+        else if ($event.shiftKey && $event.keyCode === TAB) {
+            this.hasFocus = false;
+            this.option.focus();
+        }
+        else if ($event.keyCode === TAB) {
+            return;
+        }
+        $event.preventDefault();
+        $event.stopPropagation();
+    }
+    preventShowingTooltip() {
+        if (!this.option.tooltipTrigger) {
+            return;
+        }
+        this.option.tooltipTrigger.disabled = true;
+        setTimeout(() => this.option.tooltipTrigger.disabled = false);
+    }
+}
+/** @nocollapse */ McOptionActionComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McOptionActionComponent, deps: [{ token: i0.ElementRef }, { token: i1$1.FocusMonitor }, { token: MC_OPTION_ACTION_PARENT }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McOptionActionComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McOptionActionComponent, selector: "mc-option-action", inputs: { disabled: "disabled" }, host: { listeners: { "focus": "onFocus($event)", "blur": "onBlur()", "click": "onClick($event)", "keydown": "onKeyDown($event)" }, properties: { "class.mc-opened": "false", "attr.disabled": "disabled || null", "attr.tabIndex": "-1" }, classAttribute: "mc-option-action" }, queries: [{ propertyName: "customIcon", first: true, predicate: ["customIcon"], descendants: true }], exportAs: ["mcOptionAction"], usesInheritance: true, ngImport: i0, template: `
+        <ng-container [ngSwitch]="!!customIcon">
+            <i class="mc mc-icon mc-ellipsis_16" *ngSwitchCase="false"></i>
+            <ng-content select="[mc-icon]" *ngSwitchCase="true"></ng-content>
+        </ng-container>
+    `, isInline: true, styles: [".mc-option-action{box-sizing:unset;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:-2px;width:28px;height:100%;cursor:pointer;outline:none;border:2px solid transparent;background:transparent}.mc-option-action[disabled]{cursor:default}\n"], directives: [{ type: i2.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i2.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McOptionActionComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-option-action',
+                    exportAs: 'mcOptionAction',
+                    template: `
+        <ng-container [ngSwitch]="!!customIcon">
+            <i class="mc mc-icon mc-ellipsis_16" *ngSwitchCase="false"></i>
+            <ng-content select="[mc-icon]" *ngSwitchCase="true"></ng-content>
+        </ng-container>
+    `,
+                    styleUrls: ['./action.scss'],
+                    host: {
+                        class: 'mc-option-action',
+                        '[class.mc-opened]': 'false',
+                        '[attr.disabled]': 'disabled || null',
+                        '[attr.tabIndex]': '-1',
+                        '(focus)': 'onFocus($event)',
+                        '(blur)': 'onBlur()',
+                        '(click)': 'onClick($event)',
+                        '(keydown)': 'onKeyDown($event)'
+                    },
+                    inputs: ['disabled'],
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i1$1.FocusMonitor }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [MC_OPTION_ACTION_PARENT]
+                }] }]; }, propDecorators: { customIcon: [{
+                type: ContentChild,
+                args: ['customIcon']
+            }] } });
+
 class McOptionModule {
 }
 /** @nocollapse */ McOptionModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McOptionModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ McOptionModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McOptionModule, declarations: [McOption, McOptgroup], imports: [CommonModule, McPseudoCheckboxModule], exports: [McOption, McOptgroup] });
+/** @nocollapse */ McOptionModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McOptionModule, declarations: [McOption, McOptgroup, McOptionActionComponent], imports: [CommonModule, McPseudoCheckboxModule], exports: [McOption, McOptgroup, McOptionActionComponent] });
 /** @nocollapse */ McOptionModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McOptionModule, imports: [[CommonModule, McPseudoCheckboxModule]] });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McOptionModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, McPseudoCheckboxModule],
-                    exports: [McOption, McOptgroup],
-                    declarations: [McOption, McOptgroup]
+                    declarations: [McOption, McOptgroup, McOptionActionComponent],
+                    exports: [McOption, McOptgroup, McOptionActionComponent]
                 }]
         }] });
 
@@ -2560,7 +2683,7 @@ class McPopUpTrigger {
 /** @nocollapse */ McPopUpTrigger.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopUpTrigger, inputs: { enterDelay: ["mcEnterDelay", "enterDelay"], leaveDelay: ["mcLeaveDelay", "leaveDelay"], placementPriority: ["mcPlacementPriority", "placementPriority"], placement: ["mcPlacement", "placement"], visible: ["mcVisible", "visible"] }, outputs: { placementChange: "mcPlacementChange", visibleChange: "mcVisibleChange" }, ngImport: i0 });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopUpTrigger, decorators: [{
             type: Directive
-        }], ctorParameters: function () { return [{ type: i1$1.Overlay }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i1$1.ScrollDispatcher }, { type: i0.ViewContainerRef }, { type: undefined }, { type: i2.Directionality }]; }, propDecorators: { enterDelay: [{
+        }], ctorParameters: function () { return [{ type: i1$2.Overlay }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i1$2.ScrollDispatcher }, { type: i0.ViewContainerRef }, { type: undefined }, { type: i2$1.Directionality }]; }, propDecorators: { enterDelay: [{
                 type: Input,
                 args: ['mcEnterDelay']
             }], leaveDelay: [{
@@ -2587,5 +2710,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { AnimationCurves, BOTTOM_LEFT_POSITION_PRIORITY, BOTTOM_POSITION_PRIORITY, BOTTOM_RIGHT_POSITION_PRIORITY, DEFAULT_MC_LOCALE_ID, DateFormatter, EXTENDED_OVERLAY_POSITIONS, ErrorStateMatcher, LEFT_BOTTOM_POSITION_PRIORITY, LEFT_POSITION_PRIORITY, LEFT_TOP_POSITION_PRIORITY, MC_LABEL_GLOBAL_OPTIONS, MC_LOCALE_ID, MC_OPTION_PARENT_COMPONENT, MC_SANITY_CHECKS, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_VALIDATION, McCommonModule, McDecimalPipe, McForm, McFormElement, McFormattersModule, McFormsModule, McHighlightModule, McHighlightPipe, McLine, McLineModule, McLineSetter, McMeasureScrollbarService, McOptgroup, McOptgroupBase, McOptgroupMixinBase, McOption, McOptionModule, McOptionSelectionChange, McPopUp, McPopUpTrigger, McPseudoCheckbox, McPseudoCheckboxModule, MultipleMode, NUMBER_FORMAT_REGEXP, POSITION_MAP, POSITION_PRIORITY_STRATEGY, POSITION_TO_CSS_MAP, PopUpPlacements, PopUpSizes, PopUpTriggers, PopUpVisibility, RIGHT_BOTTOM_POSITION_PRIORITY, RIGHT_POSITION_PRIORITY, RIGHT_TOP_POSITION_PRIORITY, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, ShowOnDirtyErrorStateMatcher, TOP_LEFT_POSITION_PRIORITY, TOP_POSITION_PRIORITY, TOP_RIGHT_POSITION_PRIORITY, ThemePalette, countGroupLabelsBeforeOption, fadeAnimation, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, getOptionScrollPosition, isBoolean, mcSelectAnimations, mcSelectScrollStrategyProviderFactory, mixinColor, mixinDisabled, mixinErrorState, mixinTabIndex, selectEvents, setMosaicValidation, setMosaicValidationForFormControl, setMosaicValidationForModelControl, toBoolean, validationTooltipHideDelay, validationTooltipShowDelay };
+export { AnimationCurves, BOTTOM_LEFT_POSITION_PRIORITY, BOTTOM_POSITION_PRIORITY, BOTTOM_RIGHT_POSITION_PRIORITY, DEFAULT_MC_LOCALE_ID, DateFormatter, EXTENDED_OVERLAY_POSITIONS, ErrorStateMatcher, LEFT_BOTTOM_POSITION_PRIORITY, LEFT_POSITION_PRIORITY, LEFT_TOP_POSITION_PRIORITY, MC_LABEL_GLOBAL_OPTIONS, MC_LOCALE_ID, MC_OPTION_ACTION_PARENT, MC_OPTION_PARENT_COMPONENT, MC_SANITY_CHECKS, MC_SELECT_SCROLL_STRATEGY, MC_SELECT_SCROLL_STRATEGY_PROVIDER, MC_VALIDATION, McCommonModule, McDecimalPipe, McForm, McFormElement, McFormattersModule, McFormsModule, McHighlightModule, McHighlightPipe, McLine, McLineModule, McLineSetter, McMeasureScrollbarService, McOptgroup, McOptgroupBase, McOptgroupMixinBase, McOption, McOptionActionBase, McOptionActionComponent, McOptionActionMixinBase, McOptionModule, McOptionSelectionChange, McPopUp, McPopUpTrigger, McPseudoCheckbox, McPseudoCheckboxModule, MultipleMode, NUMBER_FORMAT_REGEXP, POSITION_MAP, POSITION_PRIORITY_STRATEGY, POSITION_TO_CSS_MAP, PopUpPlacements, PopUpSizes, PopUpTriggers, PopUpVisibility, RIGHT_BOTTOM_POSITION_PRIORITY, RIGHT_POSITION_PRIORITY, RIGHT_TOP_POSITION_PRIORITY, SELECT_PANEL_INDENT_PADDING_X, SELECT_PANEL_MAX_HEIGHT, SELECT_PANEL_PADDING_X, SELECT_PANEL_VIEWPORT_PADDING, ShowOnDirtyErrorStateMatcher, TOP_LEFT_POSITION_PRIORITY, TOP_POSITION_PRIORITY, TOP_RIGHT_POSITION_PRIORITY, ThemePalette, countGroupLabelsBeforeOption, fadeAnimation, getMcSelectDynamicMultipleError, getMcSelectNonArrayValueError, getMcSelectNonFunctionValueError, getOptionScrollPosition, isBoolean, mcSelectAnimations, mcSelectScrollStrategyProviderFactory, mixinColor, mixinDisabled, mixinErrorState, mixinTabIndex, selectEvents, setMosaicValidation, setMosaicValidationForFormControl, setMosaicValidationForModelControl, toBoolean, validationTooltipHideDelay, validationTooltipShowDelay };
 //# sourceMappingURL=ptsecurity-mosaic-core.js.map

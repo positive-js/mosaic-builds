@@ -2,14 +2,17 @@ import { A11yModule } from '@angular/cdk/a11y';
 import * as i2 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { forwardRef, Component, ViewEncapsulation, ChangeDetectionStrategy, Inject, Optional, ContentChildren, ViewChild, Input, EventEmitter, Attribute, Output, NgModule } from '@angular/core';
+import { forwardRef, Component, ViewEncapsulation, ChangeDetectionStrategy, Inject, Optional, ContentChild, ViewChild, Input, EventEmitter, Attribute, ContentChildren, Output, NgModule } from '@angular/core';
 import * as i1 from '@ptsecurity/mosaic/core';
-import { toBoolean, McLine, mixinTabIndex, mixinDisabled, MultipleMode, McLineSetter, McPseudoCheckboxModule, McLineModule, McOptionModule } from '@ptsecurity/mosaic/core';
+import { toBoolean, MC_OPTION_ACTION_PARENT, McOptionActionComponent, mixinTabIndex, mixinDisabled, MultipleMode, McLineSetter, McLine, McPseudoCheckboxModule, McLineModule, McOptionModule } from '@ptsecurity/mosaic/core';
+import * as i3 from '@angular/cdk/clipboard';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
-import { hasModifierKey, PAGE_DOWN, PAGE_UP, END, HOME, UP_ARROW, DOWN_ARROW, TAB, ENTER, SPACE } from '@ptsecurity/cdk/keycodes';
+import { hasModifierKey, TAB, SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW, isVerticalMovement, isSelectAll, isCopy, DOWN_ARROW, UP_ARROW, HOME, END, PAGE_UP, PAGE_DOWN } from '@ptsecurity/cdk/keycodes';
+import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Subject, merge } from 'rxjs';
 import { take, takeUntil, startWith } from 'rxjs/operators';
 
@@ -130,15 +133,26 @@ class McListOption {
         }
         this.listSelection.setSelectedOptionsByClick(this, hasModifierKey($event, 'shiftKey'), hasModifierKey($event, 'ctrlKey'));
     }
-    focus() {
-        if (!this.hasFocus) {
-            this.elementRef.nativeElement.focus();
-            this.onFocus.next({ option: this });
-            Promise.resolve().then(() => {
-                this.hasFocus = true;
-                this.changeDetector.markForCheck();
-            });
+    onKeydown($event) {
+        if (!this.actionButton) {
+            return;
         }
+        if ($event.keyCode === TAB && !$event.shiftKey && !this.actionButton.hasFocus) {
+            this.actionButton.focus();
+            $event.preventDefault();
+        }
+    }
+    focus() {
+        var _a;
+        if (this.disabled || this.hasFocus || ((_a = this.actionButton) === null || _a === void 0 ? void 0 : _a.hasFocus)) {
+            return;
+        }
+        this.elementRef.nativeElement.focus();
+        this.onFocus.next({ option: this });
+        Promise.resolve().then(() => {
+            this.hasFocus = true;
+            this.changeDetector.markForCheck();
+        });
     }
     blur() {
         // When animations are enabled, Angular may end up removing the option from the DOM a little
@@ -150,7 +164,11 @@ class McListOption {
             .pipe(take(1))
             .subscribe(() => {
             this.ngZone.run(() => {
+                var _a;
                 this.hasFocus = false;
+                if ((_a = this.actionButton) === null || _a === void 0 ? void 0 : _a.hasFocus) {
+                    return;
+                }
                 this.onBlur.next({ option: this });
             });
         });
@@ -160,36 +178,49 @@ class McListOption {
     }
 }
 /** @nocollapse */ McListOption.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McListOption, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: i0.NgZone }, { token: forwardRef(() => McListSelection) }, { token: i1.McOptgroup, optional: true }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McListOption.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McListOption, selector: "mc-list-option", inputs: { checkboxPosition: "checkboxPosition", value: "value", disabled: "disabled", showCheckbox: "showCheckbox", selected: "selected" }, host: { listeners: { "focusin": "focus()", "blur": "blur()", "click": "handleClick($event)" }, properties: { "class.mc-selected": "selected", "class.mc-focused": "hasFocus", "class.mc-disabled": "disabled", "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-list-option mc-no-select" }, queries: [{ propertyName: "lines", predicate: McLine }], viewQueries: [{ propertyName: "text", first: true, predicate: ["text"], descendants: true }], exportAs: ["mcListOption"], ngImport: i0, template: "<div class=\"mc-list-item-content\">\n    <mc-pseudo-checkbox\n        *ngIf=\"showCheckbox\"\n        [state]=\"selected ? 'checked' : 'unchecked'\"\n        [disabled]=\"disabled\">\n    </mc-pseudo-checkbox>\n\n    <div class=\"mc-list-text\" #text>\n        <ng-content></ng-content>\n    </div>\n</div>\n", components: [{ type: i1.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+/** @nocollapse */ McListOption.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McListOption, selector: "mc-list-option", inputs: { checkboxPosition: "checkboxPosition", value: "value", disabled: "disabled", showCheckbox: "showCheckbox", selected: "selected" }, host: { listeners: { "focusin": "focus()", "blur": "blur()", "click": "handleClick($event)", "keydown": "onKeydown($event)" }, properties: { "class.mc-selected": "selected", "class.mc-disabled": "disabled", "class.mc-focused": "hasFocus", "class.mc-action-button-focused": "actionButton?.active", "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-list-option" }, providers: [
+        { provide: MC_OPTION_ACTION_PARENT, useExisting: McListOption }
+    ], queries: [{ propertyName: "actionButton", first: true, predicate: McOptionActionComponent, descendants: true }, { propertyName: "tooltipTrigger", first: true, predicate: McTooltipTrigger, descendants: true }, { propertyName: "dropdownTrigger", first: true, predicate: McDropdownTrigger, descendants: true }], viewQueries: [{ propertyName: "text", first: true, predicate: ["text"], descendants: true }], exportAs: ["mcListOption"], ngImport: i0, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<div class=\"mc-list-text\" #text>\n    <ng-content></ng-content>\n</div>\n\n<ng-content select=\"mc-option-action\"></ng-content>\n", components: [{ type: i1.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McListOption, decorators: [{
             type: Component,
             args: [{
                     exportAs: 'mcListOption',
                     selector: 'mc-list-option',
+                    templateUrl: './list-option.html',
                     host: {
-                        class: 'mc-list-option mc-no-select',
+                        class: 'mc-list-option',
                         '[class.mc-selected]': 'selected',
-                        '[class.mc-focused]': 'hasFocus',
                         '[class.mc-disabled]': 'disabled',
+                        '[class.mc-focused]': 'hasFocus',
+                        '[class.mc-action-button-focused]': 'actionButton?.active',
                         '[attr.tabindex]': 'tabIndex',
                         '[attr.disabled]': 'disabled || null',
                         '(focusin)': 'focus()',
                         '(blur)': 'blur()',
-                        '(click)': 'handleClick($event)'
+                        '(click)': 'handleClick($event)',
+                        '(keydown)': 'onKeydown($event)'
                     },
-                    templateUrl: 'list-option.html',
                     encapsulation: ViewEncapsulation.None,
                     preserveWhitespaces: false,
-                    changeDetection: ChangeDetectionStrategy.OnPush
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    providers: [
+                        { provide: MC_OPTION_ACTION_PARENT, useExisting: McListOption }
+                    ]
                 }]
         }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: i0.NgZone }, { type: McListSelection, decorators: [{
                     type: Inject,
                     args: [forwardRef(() => McListSelection)]
                 }] }, { type: i1.McOptgroup, decorators: [{
                     type: Optional
-                }] }]; }, propDecorators: { lines: [{
-                type: ContentChildren,
-                args: [McLine]
+                }] }]; }, propDecorators: { actionButton: [{
+                type: ContentChild,
+                args: [McOptionActionComponent]
+            }], tooltipTrigger: [{
+                type: ContentChild,
+                args: [McTooltipTrigger]
+            }], dropdownTrigger: [{
+                type: ContentChild,
+                args: [McDropdownTrigger]
             }], text: [{
                 type: ViewChild,
                 args: ['text', { static: false }]
@@ -215,6 +246,18 @@ class McListSelectionChange {
         this.option = option;
     }
 }
+class McListSelectAllEvent {
+    constructor(source, options) {
+        this.source = source;
+        this.options = options;
+    }
+}
+class McListCopyEvent {
+    constructor(source, option) {
+        this.source = source;
+        this.option = option;
+    }
+}
 class McListSelectionBase {
     constructor(elementRef) {
         this.elementRef = elementRef;
@@ -223,9 +266,12 @@ class McListSelectionBase {
 // tslint:disable-next-line:naming-convention
 const McListSelectionMixinBase = mixinTabIndex(mixinDisabled(McListSelectionBase));
 class McListSelection extends McListSelectionMixinBase {
-    constructor(elementRef, changeDetectorRef, multiple) {
+    constructor(elementRef, changeDetectorRef, multiple, clipboard) {
         super(elementRef);
         this.changeDetectorRef = changeDetectorRef;
+        this.clipboard = clipboard;
+        this.onSelectAll = new EventEmitter();
+        this.onCopy = new EventEmitter();
         this._autoSelect = true;
         this._noUnselectLast = true;
         this.horizontal = false;
@@ -386,14 +432,12 @@ class McListSelection extends McListSelectionMixinBase {
                 return;
             }
         }
-        else {
-            if (this.multipleMode === MultipleMode.KEYBOARD || !this.multiple) {
-                this.options.forEach((item) => item.setSelected(false));
-                option.setSelected(true);
-            }
+        else if (this.autoSelect) {
+            this.options.forEach((item) => item.setSelected(false));
+            option.setSelected(true);
+            this.emitChangeEvent(option);
+            this.reportValueChange();
         }
-        this.emitChangeEvent(option);
-        this.reportValueChange();
     }
     setSelectedOptions(option) {
         const selectedOptionState = option.selected;
@@ -475,37 +519,48 @@ class McListSelection extends McListSelectionMixinBase {
     onKeyDown(event) {
         // tslint:disable-next-line: deprecation
         const keyCode = event.keyCode;
-        switch (keyCode) {
-            case SPACE:
-            case ENTER:
-                this.toggleFocusedOption();
-                break;
-            case TAB:
-                this.keyManager.tabOut.next();
-                return;
-            case DOWN_ARROW:
-                this.keyManager.setNextItemActive();
-                break;
-            case UP_ARROW:
-                this.keyManager.setPreviousItemActive();
-                break;
-            case HOME:
-                this.keyManager.setFirstItemActive();
-                break;
-            case END:
-                this.keyManager.setLastItemActive();
-                break;
-            case PAGE_UP:
-                this.keyManager.setPreviousPageItemActive();
-                break;
-            case PAGE_DOWN:
-                this.keyManager.setNextPageItemActive();
-                break;
-            default:
-                return;
+        if ([SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW].includes(keyCode) || isVerticalMovement(event)) {
+            event.preventDefault();
         }
-        event.preventDefault();
-        this.setSelectedOptionsByKey(this.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey'));
+        if (this.multiple && isSelectAll(event)) {
+            this.selectAllOptions();
+            event.preventDefault();
+            return;
+        }
+        else if (isCopy(event)) {
+            this.copyActiveOption();
+            event.preventDefault();
+            return;
+        }
+        else if ([SPACE, ENTER].includes(keyCode)) {
+            this.toggleFocusedOption();
+            return;
+        }
+        else if (keyCode === TAB) {
+            this.keyManager.tabOut.next();
+            return;
+        }
+        else if (keyCode === DOWN_ARROW) {
+            this.keyManager.setNextItemActive();
+        }
+        else if (keyCode === UP_ARROW) {
+            this.keyManager.setPreviousItemActive();
+        }
+        else if (keyCode === HOME) {
+            this.keyManager.setFirstItemActive();
+        }
+        else if (keyCode === END) {
+            this.keyManager.setLastItemActive();
+        }
+        else if (keyCode === PAGE_UP) {
+            this.keyManager.setPreviousPageItemActive();
+        }
+        else if (keyCode === PAGE_DOWN) {
+            this.keyManager.setNextPageItemActive();
+        }
+        if (this.keyManager.activeItem) {
+            this.setSelectedOptionsByKey(this.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey'));
+        }
     }
     // Reports a value change to the ControlValueAccessor
     reportValueChange() {
@@ -521,6 +576,10 @@ class McListSelection extends McListSelectionMixinBase {
     }
     updateTabIndex() {
         this._tabIndex = this.userTabIndex || (this.options.length === 0 ? -1 : 0);
+    }
+    onCopyDefaultHandler() {
+        var _a;
+        (_a = this.clipboard) === null || _a === void 0 ? void 0 : _a.copy(this.keyManager.activeItem.value);
     }
     resetOptions() {
         this.dropSubscriptions();
@@ -575,14 +634,29 @@ class McListSelection extends McListSelectionMixinBase {
     getOptionIndex(option) {
         return this.options.toArray().indexOf(option);
     }
+    selectAllOptions() {
+        const optionsToSelect = this.options
+            .filter((option) => !option.disabled);
+        optionsToSelect
+            .forEach((option) => option.setSelected(true));
+        this.onSelectAll.emit(new McListSelectAllEvent(this, optionsToSelect));
+    }
+    copyActiveOption() {
+        if (this.onCopy.observers.length) {
+            this.onCopy.emit(new McListCopyEvent(this, this.keyManager.activeItem));
+        }
+        else {
+            this.onCopyDefaultHandler();
+        }
+    }
 }
-/** @nocollapse */ McListSelection.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McListSelection, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: 'multiple', attribute: true }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McListSelection.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McListSelection, selector: "mc-list-selection", inputs: { disabled: "disabled", autoSelect: "autoSelect", noUnselectLast: "noUnselectLast", horizontal: "horizontal", tabIndex: "tabIndex", compareWith: "compareWith" }, outputs: { selectionChange: "selectionChange" }, host: { listeners: { "keydown": "onKeyDown($event)", "window:resize": "updateScrollSize()" }, properties: { "attr.tabindex": "-1", "attr.disabled": "disabled || null" }, classAttribute: "mc-list-selection" }, providers: [MC_SELECTION_LIST_VALUE_ACCESSOR], queries: [{ propertyName: "options", predicate: McListOption, descendants: true }], exportAs: ["mcListSelection"], usesInheritance: true, ngImport: i0, template: `
+/** @nocollapse */ McListSelection.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McListSelection, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: 'multiple', attribute: true }, { token: i3.Clipboard, optional: true }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McListSelection.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McListSelection, selector: "mc-list-selection", inputs: { disabled: "disabled", autoSelect: "autoSelect", noUnselectLast: "noUnselectLast", horizontal: "horizontal", tabIndex: "tabIndex", compareWith: "compareWith" }, outputs: { onSelectAll: "onSelectAll", onCopy: "onCopy", selectionChange: "selectionChange" }, host: { listeners: { "keydown": "onKeyDown($event)", "window:resize": "updateScrollSize()" }, properties: { "attr.tabindex": "-1", "attr.disabled": "disabled || null" }, classAttribute: "mc-list-selection" }, providers: [MC_SELECTION_LIST_VALUE_ACCESSOR], queries: [{ propertyName: "options", predicate: McListOption, descendants: true }], exportAs: ["mcListSelection"], usesInheritance: true, ngImport: i0, template: `
         <div [attr.tabindex]="tabIndex"
              (focus)="focus()"
              (blur)="blur()">
             <ng-content></ng-content>
-        </div>`, isInline: true, styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.mc-divider{display:block;margin:0}.mc-divider.mc-divider_horizontal{border-top-width:1px;border-top-width:var(--mc-divider-size-width, 1px);border-top-style:solid}.mc-divider.mc-divider_vertical{height:100%;border-right-width:1px;border-right-width:var(--mc-divider-size-width, 1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px;margin-left:var(--mc-divider-size-inset-margin, 80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px;margin-right:var(--mc-divider-size-inset-margin, 80px)}.mc-list,.mc-list-selection{display:block;outline:none}.mc-list-item,.mc-list-option{display:block;height:28px;height:var(--mc-list-size-item-height, 28px);border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 16px;padding:0 var(--mc-list-size-horizontal-padding, 16px)}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:72px;height:var(--mc-list-size-two-line-height, 72px)}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:88px;height:var(--mc-list-size-three-line-height, 88px)}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-top:var(--mc-list-size-multi-line-padding, 16px);padding-bottom:16px;padding-bottom:var(--mc-list-size-multi-line-padding, 16px)}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:normal;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;width:var(--mc-list-size-icon-width, 24px);height:24px;height:var(--mc-list-size-icon-width, 24px);border-radius:50%;padding:4px;padding:var(--mc-list-size-icon-padding, 4px);font-size:24px;font-size:var(--mc-list-size-icon-width, 24px)}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:32pxvar(--mc-list-size-icon-width,24px)8px;width:100%-32pxvar(--mc-list-size-icon-width,24px)8px}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:32pxvar(--mc-list-size-icon-width,24px)8px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+        </div>`, isInline: true, styles: [".mc-divider{display:block;margin:0}.mc-divider.mc-divider_horizontal{border-top-width:1px;border-top-width:var(--mc-divider-size-width, 1px);border-top-style:solid}.mc-divider.mc-divider_vertical{height:100%;border-right-width:1px;border-right-width:var(--mc-divider-size-width, 1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px;margin-left:var(--mc-divider-size-inset-margin, 80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px;margin-right:var(--mc-divider-size-inset-margin, 80px)}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.mc-list,.mc-list-selection{display:block;outline:none}.mc-list-item,.mc-list-option{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;position:relative;display:flex;align-items:center;box-sizing:border-box;height:32px;height:var(--mc-list-size-item-height, 32px);border:2px solid transparent;padding-left:16px;padding-left:var(--mc-list-size-horizontal-padding, 16px)}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding-right:16px;padding-right:var(--mc-list-size-horizontal-padding, 16px)}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:normal;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;width:var(--mc-list-size-icon-width, 24px);height:24px;height:var(--mc-list-size-icon-width, 24px);border-radius:50%;padding:4px;padding:var(--mc-list-size-icon-padding, 4px);font-size:24px;font-size:var(--mc-list-size-icon-width, 24px)}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:32pxvar(--mc-list-size-icon-width,24px)8px;width:100%-32pxvar(--mc-list-size-icon-width,24px)8px}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:32pxvar(--mc-list-size-icon-width,24px)8px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item.mc-progress:after,.mc-list-option.mc-progress:after{top:-2px;right:-2px;bottom:-2px;left:-2px}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-item .mc-option-action,.mc-list-option .mc-option-action{display:none}.mc-list-item:not([disabled]):hover .mc-option-action,.mc-list-item:not([disabled]).mc-focused .mc-option-action,.mc-list-item:not([disabled]).mc-action-button-focused .mc-option-action,.mc-list-option:not([disabled]):hover .mc-option-action,.mc-list-option:not([disabled]).mc-focused .mc-option-action,.mc-list-option:not([disabled]).mc-action-button-focused .mc-option-action{display:flex}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McListSelection, decorators: [{
             type: Component,
             args: [{
@@ -611,9 +685,15 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
         }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: i1.MultipleMode, decorators: [{
                     type: Attribute,
                     args: ['multiple']
+                }] }, { type: i3.Clipboard, decorators: [{
+                    type: Optional
                 }] }]; }, propDecorators: { options: [{
                 type: ContentChildren,
                 args: [McListOption, { descendants: true }]
+            }], onSelectAll: [{
+                type: Output
+            }], onCopy: [{
+                type: Output
             }], autoSelect: [{
                 type: Input
             }], noUnselectLast: [{
@@ -632,7 +712,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
 class McList {
 }
 /** @nocollapse */ McList.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McList, deps: [], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McList.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McList, selector: "mc-list", host: { classAttribute: "mc-list" }, ngImport: i0, template: '<ng-content></ng-content>', isInline: true, styles: [".mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.mc-divider{display:block;margin:0}.mc-divider.mc-divider_horizontal{border-top-width:1px;border-top-width:var(--mc-divider-size-width, 1px);border-top-style:solid}.mc-divider.mc-divider_vertical{height:100%;border-right-width:1px;border-right-width:var(--mc-divider-size-width, 1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px;margin-left:var(--mc-divider-size-inset-margin, 80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px;margin-right:var(--mc-divider-size-inset-margin, 80px)}.mc-list,.mc-list-selection{display:block;outline:none}.mc-list-item,.mc-list-option{display:block;height:28px;height:var(--mc-list-size-item-height, 28px);border:2px solid transparent}.mc-list-item .mc-list-item-content,.mc-list-option .mc-list-item-content{position:relative;box-sizing:border-box;display:flex;flex-direction:row;align-items:center;height:100%;padding:0 16px;padding:0 var(--mc-list-size-horizontal-padding, 16px)}.mc-list-item.mc-2-line,.mc-list-option.mc-2-line{height:72px;height:var(--mc-list-size-two-line-height, 72px)}.mc-list-item.mc-3-line,.mc-list-option.mc-3-line{height:88px;height:var(--mc-list-size-three-line-height, 88px)}.mc-list-item.mc-multi-line,.mc-list-option.mc-multi-line{height:auto}.mc-list-item.mc-multi-line .mc-list-item-content,.mc-list-option.mc-multi-line .mc-list-item-content{padding-top:16px;padding-top:var(--mc-list-size-multi-line-padding, 16px);padding-bottom:16px;padding-bottom:var(--mc-list-size-multi-line-padding, 16px)}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding:0}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:normal;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),.mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-right:0}[dir=rtl] .mc-list-item .mc-list-item-content .mc-list-text:not(:nth-child(2)),[dir=rtl] .mc-list-option .mc-list-item-content .mc-list-text:not(:nth-child(2)){padding-left:0}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;width:var(--mc-list-size-icon-width, 24px);height:24px;height:var(--mc-list-size-icon-width, 24px);border-radius:50%;padding:4px;padding:var(--mc-list-size-icon-padding, 4px);font-size:24px;font-size:var(--mc-list-size-icon-width, 24px)}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:32pxvar(--mc-list-size-icon-width,24px)8px;width:100%-32pxvar(--mc-list-size-icon-width,24px)8px}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:32pxvar(--mc-list-size-icon-width,24px)8px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+/** @nocollapse */ McList.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McList, selector: "mc-list", host: { classAttribute: "mc-list" }, ngImport: i0, template: '<ng-content></ng-content>', isInline: true, styles: [".mc-divider{display:block;margin:0}.mc-divider.mc-divider_horizontal{border-top-width:1px;border-top-width:var(--mc-divider-size-width, 1px);border-top-style:solid}.mc-divider.mc-divider_vertical{height:100%;border-right-width:1px;border-right-width:var(--mc-divider-size-width, 1px);border-right-style:solid}.mc-divider.mc-divider_inset{margin-left:80px;margin-left:var(--mc-divider-size-inset-margin, 80px)}[dir=rtl] .mc-divider.mc-divider_inset{margin-left:auto;margin-right:80px;margin-right:var(--mc-divider-size-inset-margin, 80px)}.mc-no-select{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.mc-list,.mc-list-selection{display:block;outline:none}.mc-list-item,.mc-list-option{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;position:relative;display:flex;align-items:center;box-sizing:border-box;height:32px;height:var(--mc-list-size-item-height, 32px);border:2px solid transparent;padding-left:16px;padding-left:var(--mc-list-size-horizontal-padding, 16px)}.mc-list-item .mc-list-text,.mc-list-option .mc-list-text{display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden;padding-right:16px;padding-right:var(--mc-list-size-horizontal-padding, 16px)}.mc-list-item .mc-list-text>*,.mc-list-option .mc-list-text>*{margin:0;padding:0;font-weight:normal;font-size:inherit}.mc-list-item .mc-list-text:empty,.mc-list-option .mc-list-text:empty{display:none}.mc-list-item .mc-list-icon,.mc-list-option .mc-list-icon{box-sizing:content-box;flex-shrink:0;width:24px;width:var(--mc-list-size-icon-width, 24px);height:24px;height:var(--mc-list-size-icon-width, 24px);border-radius:50%;padding:4px;padding:var(--mc-list-size-icon-padding, 4px);font-size:24px;font-size:var(--mc-list-size-icon-width, 24px)}.mc-list-item .mc-list-icon~.mc-divider_inset,.mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:32pxvar(--mc-list-size-icon-width,24px)8px;width:100%-32pxvar(--mc-list-size-icon-width,24px)8px}[dir=rtl] .mc-list-item .mc-list-icon~.mc-divider_inset,[dir=rtl] .mc-list-option .mc-list-icon~.mc-divider_inset{margin-left:auto;margin-right:32pxvar(--mc-list-size-icon-width,24px)8px}.mc-list-item .mc-divider,.mc-list-option .mc-divider{position:absolute;bottom:0;left:0;width:100%;margin:0}[dir=rtl] .mc-list-item .mc-divider,[dir=rtl] .mc-list-option .mc-divider{margin-left:auto;margin-right:0}.mc-list-item .mc-divider.mc-divider_inset,.mc-list-option .mc-divider.mc-divider_inset{position:absolute}.mc-list-item.mc-progress:after,.mc-list-option.mc-progress:after{top:-2px;right:-2px;bottom:-2px;left:-2px}.mc-list-item .mc-pseudo-checkbox,.mc-list-option .mc-pseudo-checkbox{margin-right:8px}.mc-list-item .mc-option-action,.mc-list-option .mc-option-action{display:none}.mc-list-item:not([disabled]):hover .mc-option-action,.mc-list-item:not([disabled]).mc-focused .mc-option-action,.mc-list-item:not([disabled]).mc-action-button-focused .mc-option-action,.mc-list-option:not([disabled]):hover .mc-option-action,.mc-list-option:not([disabled]).mc-focused .mc-option-action,.mc-list-option:not([disabled]).mc-action-button-focused .mc-option-action{display:flex}.mc-list-option:not([disabled]):not(.mc-disabled){cursor:pointer}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McList, decorators: [{
             type: Component,
             args: [{
@@ -663,7 +743,7 @@ class McListItem {
     }
 }
 /** @nocollapse */ McListItem.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McListItem, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McListItem.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McListItem, selector: "mc-list-item, a[mc-list-item]", host: { listeners: { "focus": "handleFocus()", "blur": "handleBlur()" }, classAttribute: "mc-list-item" }, queries: [{ propertyName: "lines", predicate: McLine }], ngImport: i0, template: "<div class=\"mc-list-item-content\">\n    <ng-content select=\"[mc-list-icon], [mcListIcon]\"></ng-content>\n\n    <div class=\"mc-list-text\">\n        <ng-content select=\"[mc-line], [mcLine]\"></ng-content>\n    </div>\n\n    <ng-content></ng-content>\n</div>\n", changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+/** @nocollapse */ McListItem.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McListItem, selector: "mc-list-item, a[mc-list-item]", host: { listeners: { "focus": "handleFocus()", "blur": "handleBlur()" }, classAttribute: "mc-list-item" }, queries: [{ propertyName: "lines", predicate: McLine }], ngImport: i0, template: "<ng-content select=\"[mc-list-icon], [mcListIcon]\"></ng-content>\n\n<div class=\"mc-list-text\">\n    <ng-content select=\"[mc-line], [mcLine]\"></ng-content>\n</div>\n\n<ng-content></ng-content>\n", changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McListItem, decorators: [{
             type: Component,
             args: [{
@@ -735,5 +815,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { MC_SELECTION_LIST_VALUE_ACCESSOR, McList, McListItem, McListModule, McListOption, McListSelection, McListSelectionBase, McListSelectionChange, McListSelectionMixinBase };
+export { MC_SELECTION_LIST_VALUE_ACCESSOR, McList, McListCopyEvent, McListItem, McListModule, McListOption, McListSelectAllEvent, McListSelection, McListSelectionBase, McListSelectionChange, McListSelectionMixinBase };
 //# sourceMappingURL=ptsecurity-mosaic-list.js.map

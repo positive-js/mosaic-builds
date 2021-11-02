@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/icon'), require('rxjs'), require('rxjs/operators'), require('@angular/cdk/a11y'), require('@angular/cdk/coercion'), require('@ptsecurity/mosaic/dropdown'), require('@ptsecurity/mosaic/tooltip'), require('@ptsecurity/mosaic/design-tokens'), require('@angular/cdk/bidi'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/icon', 'rxjs', 'rxjs/operators', '@angular/cdk/a11y', '@angular/cdk/coercion', '@ptsecurity/mosaic/dropdown', '@ptsecurity/mosaic/tooltip', '@ptsecurity/mosaic/design-tokens', '@angular/cdk/bidi', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.tree = {}), global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.mc.cdk.keycodes, global.ptsecurity.mosaic.icon, global.rxjs, global.rxjs.operators, global.ng.cdk.a11y, global.ng.cdk.coercion, global.ptsecurity.mosaic.dropdown, global.ptsecurity.mosaic.tooltip, global.ptsecurity.mosaic['design-tokens'], global.ng.cdk.bidi, global.ng.cdk.collections, global.ng.forms, global.mc.cdk.a11y));
-}(this, (function (exports, i5, i0, i1, keycodes, icon, rxjs, operators, i1$1, coercion, i3, i4, designTokens, i2, collections, forms, a11y) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@ptsecurity/mosaic/design-tokens'), require('rxjs'), require('rxjs/operators'), require('@angular/cdk/bidi'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/dropdown'), require('@ptsecurity/mosaic/tooltip'), require('@angular/cdk/collections'), require('@angular/forms'), require('@ptsecurity/cdk/a11y'), require('@angular/cdk/clipboard')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/tree', ['exports', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@ptsecurity/mosaic/design-tokens', 'rxjs', 'rxjs/operators', '@angular/cdk/bidi', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/dropdown', '@ptsecurity/mosaic/tooltip', '@angular/cdk/collections', '@angular/forms', '@ptsecurity/cdk/a11y', '@angular/cdk/clipboard'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.tree = {}), global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.ng.cdk.coercion, global.ptsecurity.mosaic['design-tokens'], global.rxjs, global.rxjs.operators, global.ng.cdk.bidi, global.mc.cdk.keycodes, global.ptsecurity.mosaic.dropdown, global.ptsecurity.mosaic.tooltip, global.ng.cdk.collections, global.ng.forms, global.mc.cdk.a11y, global.ng.cdk.clipboard));
+}(this, (function (exports, i2$1, i0, i1, coercion, designTokens, rxjs, operators, i2, keycodes, dropdown, tooltip, collections, forms, a11y, i1$1) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -24,331 +24,11 @@
         return Object.freeze(n);
     }
 
-    var i5__namespace = /*#__PURE__*/_interopNamespace(i5);
+    var i2__namespace$1 = /*#__PURE__*/_interopNamespace(i2$1);
     var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
     var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
-    var i1__namespace$1 = /*#__PURE__*/_interopNamespace(i1$1);
-    var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
-    var i4__namespace = /*#__PURE__*/_interopNamespace(i4);
     var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
-
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation.
-
-    Permission to use, copy, modify, and/or distribute this software for any
-    purpose with or without fee is hereby granted.
-
-    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-    PERFORMANCE OF THIS SOFTWARE.
-    ***************************************************************************** */
-    /* global Reflect, Promise */
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b)
-                if (Object.prototype.hasOwnProperty.call(b, p))
-                    d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    function __extends(d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    }
-    var __assign = function () {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s)
-                    if (Object.prototype.hasOwnProperty.call(s, p))
-                        t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-    function __rest(s, e) {
-        var t = {};
-        for (var p in s)
-            if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-                t[p] = s[p];
-        if (s != null && typeof Object.getOwnPropertySymbols === "function")
-            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                    t[p[i]] = s[p[i]];
-            }
-        return t;
-    }
-    function __decorate(decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-            r = Reflect.decorate(decorators, target, key, desc);
-        else
-            for (var i = decorators.length - 1; i >= 0; i--)
-                if (d = decorators[i])
-                    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    }
-    function __param(paramIndex, decorator) {
-        return function (target, key) { decorator(target, key, paramIndex); };
-    }
-    function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-            return Reflect.metadata(metadataKey, metadataValue);
-    }
-    function __awaiter(thisArg, _arguments, P, generator) {
-        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-        return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try {
-                step(generator.next(value));
-            }
-            catch (e) {
-                reject(e);
-            } }
-            function rejected(value) { try {
-                step(generator["throw"](value));
-            }
-            catch (e) {
-                reject(e);
-            } }
-            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-            step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-    }
-    function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function () { if (t[0] & 1)
-                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
-        function verb(n) { return function (v) { return step([n, v]); }; }
-        function step(op) {
-            if (f)
-                throw new TypeError("Generator is already executing.");
-            while (_)
-                try {
-                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
-                        return t;
-                    if (y = 0, t)
-                        op = [op[0] & 2, t.value];
-                    switch (op[0]) {
-                        case 0:
-                        case 1:
-                            t = op;
-                            break;
-                        case 4:
-                            _.label++;
-                            return { value: op[1], done: false };
-                        case 5:
-                            _.label++;
-                            y = op[1];
-                            op = [0];
-                            continue;
-                        case 7:
-                            op = _.ops.pop();
-                            _.trys.pop();
-                            continue;
-                        default:
-                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                                _ = 0;
-                                continue;
-                            }
-                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
-                                _.label = op[1];
-                                break;
-                            }
-                            if (op[0] === 6 && _.label < t[1]) {
-                                _.label = t[1];
-                                t = op;
-                                break;
-                            }
-                            if (t && _.label < t[2]) {
-                                _.label = t[2];
-                                _.ops.push(op);
-                                break;
-                            }
-                            if (t[2])
-                                _.ops.pop();
-                            _.trys.pop();
-                            continue;
-                    }
-                    op = body.call(thisArg, _);
-                }
-                catch (e) {
-                    op = [6, e];
-                    y = 0;
-                }
-                finally {
-                    f = t = 0;
-                }
-            if (op[0] & 5)
-                throw op[1];
-            return { value: op[0] ? op[1] : void 0, done: true };
-        }
-    }
-    var __createBinding = Object.create ? (function (o, m, k, k2) {
-        if (k2 === undefined)
-            k2 = k;
-        Object.defineProperty(o, k2, { enumerable: true, get: function () { return m[k]; } });
-    }) : (function (o, m, k, k2) {
-        if (k2 === undefined)
-            k2 = k;
-        o[k2] = m[k];
-    });
-    function __exportStar(m, o) {
-        for (var p in m)
-            if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p))
-                __createBinding(o, m, p);
-    }
-    function __values(o) {
-        var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-        if (m)
-            return m.call(o);
-        if (o && typeof o.length === "number")
-            return {
-                next: function () {
-                    if (o && i >= o.length)
-                        o = void 0;
-                    return { value: o && o[i++], done: !o };
-                }
-            };
-        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-    }
-    function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m)
-            return o;
-        var i = m.call(o), r, ar = [], e;
-        try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
-                ar.push(r.value);
-        }
-        catch (error) {
-            e = { error: error };
-        }
-        finally {
-            try {
-                if (r && !r.done && (m = i["return"]))
-                    m.call(i);
-            }
-            finally {
-                if (e)
-                    throw e.error;
-            }
-        }
-        return ar;
-    }
-    /** @deprecated */
-    function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-            ar = ar.concat(__read(arguments[i]));
-        return ar;
-    }
-    /** @deprecated */
-    function __spreadArrays() {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++)
-            s += arguments[i].length;
-        for (var r = Array(s), k = 0, i = 0; i < il; i++)
-            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-                r[k] = a[j];
-        return r;
-    }
-    function __spreadArray(to, from, pack) {
-        if (pack || arguments.length === 2)
-            for (var i = 0, l = from.length, ar; i < l; i++) {
-                if (ar || !(i in from)) {
-                    if (!ar)
-                        ar = Array.prototype.slice.call(from, 0, i);
-                    ar[i] = from[i];
-                }
-            }
-        return to.concat(ar || Array.prototype.slice.call(from));
-    }
-    function __await(v) {
-        return this instanceof __await ? (this.v = v, this) : new __await(v);
-    }
-    function __asyncGenerator(thisArg, _arguments, generator) {
-        if (!Symbol.asyncIterator)
-            throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g = generator.apply(thisArg, _arguments || []), i, q = [];
-        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-        function verb(n) { if (g[n])
-            i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-        function resume(n, v) { try {
-            step(g[n](v));
-        }
-        catch (e) {
-            settle(q[0][3], e);
-        } }
-        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
-        function fulfill(value) { resume("next", value); }
-        function reject(value) { resume("throw", value); }
-        function settle(f, v) { if (f(v), q.shift(), q.length)
-            resume(q[0][0], q[0][1]); }
-    }
-    function __asyncDelegator(o) {
-        var i, p;
-        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
-    }
-    function __asyncValues(o) {
-        if (!Symbol.asyncIterator)
-            throw new TypeError("Symbol.asyncIterator is not defined.");
-        var m = o[Symbol.asyncIterator], i;
-        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function (v) { resolve({ value: v, done: d }); }, reject); }
-    }
-    function __makeTemplateObject(cooked, raw) {
-        if (Object.defineProperty) {
-            Object.defineProperty(cooked, "raw", { value: raw });
-        }
-        else {
-            cooked.raw = raw;
-        }
-        return cooked;
-    }
-    ;
-    var __setModuleDefault = Object.create ? (function (o, v) {
-        Object.defineProperty(o, "default", { enumerable: true, value: v });
-    }) : function (o, v) {
-        o["default"] = v;
-    };
-    function __importStar(mod) {
-        if (mod && mod.__esModule)
-            return mod;
-        var result = {};
-        if (mod != null)
-            for (var k in mod)
-                if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
-                    __createBinding(result, mod, k);
-        __setModuleDefault(result, mod);
-        return result;
-    }
-    function __importDefault(mod) {
-        return (mod && mod.__esModule) ? mod : { default: mod };
-    }
-    function __classPrivateFieldGet(receiver, state, kind, f) {
-        if (kind === "a" && !f)
-            throw new TypeError("Private accessor was defined without a getter");
-        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
-            throw new TypeError("Cannot read private member from an object whose class did not declare it");
-        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-    }
-    function __classPrivateFieldSet(receiver, state, value, kind, f) {
-        if (kind === "m")
-            throw new TypeError("Private method is not writable");
-        if (kind === "a" && !f)
-            throw new TypeError("Private accessor was defined without a setter");
-        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
-            throw new TypeError("Cannot write private member to an object whose class did not declare it");
-        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-    }
+    var i1__namespace$1 = /*#__PURE__*/_interopNamespace(i1$1);
 
     /** Context provided to the tree node component. */
     var McTreeNodeOutletContext = /** @class */ (function () {
@@ -691,6 +371,574 @@
                         }] }];
         } });
 
+    /** Regex used to split a string on its CSS units. */
+    var cssUnitPattern = /([A-Za-z%]+)$/;
+    var McTreeNodePadding = /** @class */ (function () {
+        function McTreeNodePadding(treeNode, tree, renderer, element, dir) {
+            var _this = this;
+            var _a, _b;
+            this.treeNode = treeNode;
+            this.tree = tree;
+            this.renderer = renderer;
+            this.element = element;
+            this.dir = dir;
+            this._indent = 20;
+            /** CSS units used for the indentation value. */
+            this.indentUnits = 'px';
+            this.baseLeftPadding = parseInt(designTokens.TreeSizePaddingLeft);
+            this.iconWidth = 24;
+            this.destroyed = new rxjs.Subject();
+            (_b = (_a = this.dir) === null || _a === void 0 ? void 0 : _a.change) === null || _b === void 0 ? void 0 : _b.pipe(operators.takeUntil(this.destroyed)).subscribe(function () { return _this.setPadding(); });
+        }
+        Object.defineProperty(McTreeNodePadding.prototype, "level", {
+            get: function () {
+                return this._level;
+            },
+            set: function (value) {
+                this.setLevelInput(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTreeNodePadding.prototype, "indent", {
+            get: function () {
+                return this._indent;
+            },
+            set: function (indent) {
+                this.setIndentInput(indent);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTreeNodePadding.prototype, "leftPadding", {
+            get: function () {
+                return (this.withIcon ? 0 : this.iconWidth) + this.baseLeftPadding;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        McTreeNodePadding.prototype.ngOnInit = function () {
+            this.withIcon = this.tree.treeControl.isExpandable(this.treeNode.data);
+            this.setPadding();
+        };
+        McTreeNodePadding.prototype.ngOnDestroy = function () {
+            this.destroyed.next();
+            this.destroyed.complete();
+        };
+        McTreeNodePadding.prototype.paddingIndent = function () {
+            var nodeLevel = (this.treeNode.data && this.tree.treeControl.getLevel)
+                ? this.tree.treeControl.getLevel(this.treeNode.data)
+                : 0;
+            var level = this.level || nodeLevel;
+            return level > 0 ? (level * this._indent) + this.leftPadding + "px" : this.leftPadding + "px";
+        };
+        /**
+         * This has been extracted to a util because of TS 4 and VE.
+         * View Engine doesn't support property rename inheritance.
+         * TS 4.0 doesn't allow properties to override accessors or vice-versa.
+         * @docs-private
+         */
+        McTreeNodePadding.prototype.setLevelInput = function (value) {
+            // Set to null as the fallback value so that _setPadding can fall back to the node level if the
+            // consumer set the directive as `mcTreeNodePadding=""`. We still want to take this value if
+            // they set 0 explicitly.
+            this._level = coercion.coerceNumberProperty(value, null);
+            this.setPadding();
+        };
+        /**
+         * This has been extracted to a util because of TS 4 and VE.
+         * View Engine doesn't support property rename inheritance.
+         * TS 4.0 doesn't allow properties to override accessors or vice-versa.
+         * @docs-private
+         */
+        McTreeNodePadding.prototype.setIndentInput = function (indent) {
+            var value = indent;
+            var units = 'px';
+            if (typeof indent === 'string') {
+                var parts = indent.split(cssUnitPattern);
+                value = parts[0];
+                units = parts[1] || units;
+            }
+            this.indentUnits = units;
+            this._indent = coercion.coerceNumberProperty(value);
+            this.setPadding();
+        };
+        McTreeNodePadding.prototype.setPadding = function () {
+            var _a;
+            var padding = this.paddingIndent();
+            var paddingProp = ((_a = this.dir) === null || _a === void 0 ? void 0 : _a.value) === 'rtl' ? 'paddingRight' : 'paddingLeft';
+            this.renderer.setStyle(this.element.nativeElement, paddingProp, padding);
+        };
+        return McTreeNodePadding;
+    }());
+    /** @nocollapse */ McTreeNodePadding.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodePadding, deps: [{ token: McTreeNode }, { token: McTreeBase }, { token: i0__namespace.Renderer2 }, { token: i0__namespace.ElementRef }, { token: i2__namespace.Directionality, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTreeNodePadding.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodePadding, selector: "[mcTreeNodePadding]", inputs: { level: ["mcTreeNodePadding", "level"], indent: ["mcTreeNodePaddingIndent", "indent"] }, exportAs: ["mcTreeNodePadding"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodePadding, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[mcTreeNodePadding]',
+                        exportAs: 'mcTreeNodePadding'
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: McTreeNode }, { type: McTreeBase }, { type: i0__namespace.Renderer2 }, { type: i0__namespace.ElementRef }, { type: i2__namespace.Directionality, decorators: [{
+                            type: i0.Optional
+                        }] }];
+        }, propDecorators: { level: [{
+                    type: i0.Input,
+                    args: ['mcTreeNodePadding']
+                }], indent: [{
+                    type: i0.Input,
+                    args: ['mcTreeNodePaddingIndent']
+                }] } });
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b)
+                if (Object.prototype.hasOwnProperty.call(b, p))
+                    d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    function __extends(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+    var __assign = function () {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s)
+                    if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+    function __rest(s, e) {
+        var t = {};
+        for (var p in s)
+            if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+                t[p] = s[p];
+        if (s != null && typeof Object.getOwnPropertySymbols === "function")
+            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                    t[p[i]] = s[p[i]];
+            }
+        return t;
+    }
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+            r = Reflect.decorate(decorators, target, key, desc);
+        else
+            for (var i = decorators.length - 1; i >= 0; i--)
+                if (d = decorators[i])
+                    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+    function __param(paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); };
+    }
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+            return Reflect.metadata(metadataKey, metadataValue);
+    }
+    function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try {
+                step(generator.next(value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function rejected(value) { try {
+                step(generator["throw"](value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function () { if (t[0] & 1)
+                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f)
+                throw new TypeError("Generator is already executing.");
+            while (_)
+                try {
+                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+                        return t;
+                    if (y = 0, t)
+                        op = [op[0] & 2, t.value];
+                    switch (op[0]) {
+                        case 0:
+                        case 1:
+                            t = op;
+                            break;
+                        case 4:
+                            _.label++;
+                            return { value: op[1], done: false };
+                        case 5:
+                            _.label++;
+                            y = op[1];
+                            op = [0];
+                            continue;
+                        case 7:
+                            op = _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                        default:
+                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                                _ = 0;
+                                continue;
+                            }
+                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+                                _.label = op[1];
+                                break;
+                            }
+                            if (op[0] === 6 && _.label < t[1]) {
+                                _.label = t[1];
+                                t = op;
+                                break;
+                            }
+                            if (t && _.label < t[2]) {
+                                _.label = t[2];
+                                _.ops.push(op);
+                                break;
+                            }
+                            if (t[2])
+                                _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                    }
+                    op = body.call(thisArg, _);
+                }
+                catch (e) {
+                    op = [6, e];
+                    y = 0;
+                }
+                finally {
+                    f = t = 0;
+                }
+            if (op[0] & 5)
+                throw op[1];
+            return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+    var __createBinding = Object.create ? (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        Object.defineProperty(o, k2, { enumerable: true, get: function () { return m[k]; } });
+    }) : (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        o[k2] = m[k];
+    });
+    function __exportStar(m, o) {
+        for (var p in m)
+            if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p))
+                __createBinding(o, m, p);
+    }
+    function __values(o) {
+        var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+        if (m)
+            return m.call(o);
+        if (o && typeof o.length === "number")
+            return {
+                next: function () {
+                    if (o && i >= o.length)
+                        o = void 0;
+                    return { value: o && o[i++], done: !o };
+                }
+            };
+        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+    }
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m)
+            return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+                ar.push(r.value);
+        }
+        catch (error) {
+            e = { error: error };
+        }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"]))
+                    m.call(i);
+            }
+            finally {
+                if (e)
+                    throw e.error;
+            }
+        }
+        return ar;
+    }
+    /** @deprecated */
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
+    /** @deprecated */
+    function __spreadArrays() {
+        for (var s = 0, i = 0, il = arguments.length; i < il; i++)
+            s += arguments[i].length;
+        for (var r = Array(s), k = 0, i = 0; i < il; i++)
+            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+                r[k] = a[j];
+        return r;
+    }
+    function __spreadArray(to, from, pack) {
+        if (pack || arguments.length === 2)
+            for (var i = 0, l = from.length, ar; i < l; i++) {
+                if (ar || !(i in from)) {
+                    if (!ar)
+                        ar = Array.prototype.slice.call(from, 0, i);
+                    ar[i] = from[i];
+                }
+            }
+        return to.concat(ar || Array.prototype.slice.call(from));
+    }
+    function __await(v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+    }
+    function __asyncGenerator(thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []), i, q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+        function verb(n) { if (g[n])
+            i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try {
+            step(g[n](v));
+        }
+        catch (e) {
+            settle(q[0][3], e);
+        } }
+        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+        function fulfill(value) { resume("next", value); }
+        function reject(value) { resume("throw", value); }
+        function settle(f, v) { if (f(v), q.shift(), q.length)
+            resume(q[0][0], q[0][1]); }
+    }
+    function __asyncDelegator(o) {
+        var i, p;
+        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+    }
+    function __asyncValues(o) {
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator], i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function (v) { resolve({ value: v, done: d }); }, reject); }
+    }
+    function __makeTemplateObject(cooked, raw) {
+        if (Object.defineProperty) {
+            Object.defineProperty(cooked, "raw", { value: raw });
+        }
+        else {
+            cooked.raw = raw;
+        }
+        return cooked;
+    }
+    ;
+    var __setModuleDefault = Object.create ? (function (o, v) {
+        Object.defineProperty(o, "default", { enumerable: true, value: v });
+    }) : function (o, v) {
+        o["default"] = v;
+    };
+    function __importStar(mod) {
+        if (mod && mod.__esModule)
+            return mod;
+        var result = {};
+        if (mod != null)
+            for (var k in mod)
+                if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
+                    __createBinding(result, mod, k);
+        __setModuleDefault(result, mod);
+        return result;
+    }
+    function __importDefault(mod) {
+        return (mod && mod.__esModule) ? mod : { default: mod };
+    }
+    function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+    }
+    function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m")
+            throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+    }
+
+    var McTreeNodeToggleBase = /** @class */ (function () {
+        function McTreeNodeToggleBase() {
+        }
+        return McTreeNodeToggleBase;
+    }());
+    // tslint:disable-next-line:naming-convention
+    var McTreeNodeToggleMixinBase = i1.mixinDisabled(McTreeNodeToggleBase);
+    /** @docs-private */
+    var McTreeNodeToggleBaseDirective = /** @class */ (function (_super) {
+        __extends(McTreeNodeToggleBaseDirective, _super);
+        function McTreeNodeToggleBaseDirective(tree, treeNode) {
+            var _this = _super.call(this) || this;
+            _this.tree = tree;
+            _this.treeNode = treeNode;
+            _this._recursive = false;
+            _this.tree.treeControl.filterValue
+                .pipe(operators.map(function (value) { return (value === null || value === void 0 ? void 0 : value.length) > 0; }))
+                .subscribe(function (state) { return _this.disabled = state; });
+            return _this;
+        }
+        Object.defineProperty(McTreeNodeToggleBaseDirective.prototype, "recursive", {
+            get: function () {
+                return this._recursive;
+            },
+            set: function (value) {
+                this._recursive = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McTreeNodeToggleBaseDirective.prototype, "iconState", {
+            get: function () {
+                return this.tree.treeControl.isExpanded(this.node);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        McTreeNodeToggleBaseDirective.prototype.toggle = function (event) {
+            if (this.disabled) {
+                return;
+            }
+            this.recursive
+                ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
+                : this.tree.treeControl.toggle(this.treeNode.data);
+            event.stopPropagation();
+        };
+        return McTreeNodeToggleBaseDirective;
+    }(McTreeNodeToggleMixinBase));
+    /** @nocollapse */ McTreeNodeToggleBaseDirective.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleBaseDirective, deps: [{ token: McTreeBase }, { token: McTreeNode }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTreeNodeToggleBaseDirective.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeToggleBaseDirective, inputs: { node: "node", recursive: ["mcTreeNodeToggleRecursive", "recursive"] }, usesInheritance: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleBaseDirective, decorators: [{
+                type: i0.Directive
+            }], ctorParameters: function () { return [{ type: McTreeBase }, { type: McTreeNode }]; }, propDecorators: { node: [{
+                    type: i0.Input
+                }], recursive: [{
+                    type: i0.Input,
+                    args: ['mcTreeNodeToggleRecursive']
+                }] } });
+    var McTreeNodeToggleComponent = /** @class */ (function (_super) {
+        __extends(McTreeNodeToggleComponent, _super);
+        function McTreeNodeToggleComponent() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return McTreeNodeToggleComponent;
+    }(McTreeNodeToggleBaseDirective));
+    /** @nocollapse */ McTreeNodeToggleComponent.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleComponent, deps: null, target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McTreeNodeToggleComponent.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeToggleComponent, selector: "mc-tree-node-toggle", inputs: { disabled: "disabled" }, host: { listeners: { "click": "toggle($event)" }, properties: { "class.mc-opened": "iconState", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-node-toggle" }, exportAs: ["mcTreeNodeToggle"], usesInheritance: true, ngImport: i0__namespace, template: "<i class=\"mc mc-icon mc-angle-down-S_16\"></i>", isInline: true, styles: [".mc-tree-node-toggle{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:24px;height:100%;cursor:pointer}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleComponent, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-tree-node-toggle',
+                        exportAs: 'mcTreeNodeToggle',
+                        template: "<i class=\"mc mc-icon mc-angle-down-S_16\"></i>",
+                        styleUrls: ['./toggle.scss'],
+                        host: {
+                            class: 'mc-tree-node-toggle',
+                            '[class.mc-opened]': 'iconState',
+                            '[attr.disabled]': 'disabled || null',
+                            '(click)': 'toggle($event)'
+                        },
+                        inputs: ['disabled'],
+                        encapsulation: i0.ViewEncapsulation.None,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }]
+            }] });
+    var McTreeNodeToggleDirective = /** @class */ (function (_super) {
+        __extends(McTreeNodeToggleDirective, _super);
+        function McTreeNodeToggleDirective() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return McTreeNodeToggleDirective;
+    }(McTreeNodeToggleBaseDirective));
+    /** @nocollapse */ McTreeNodeToggleDirective.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleDirective, deps: null, target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTreeNodeToggleDirective.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeToggleDirective, selector: "[mcTreeNodeToggle]", host: { listeners: { "click": "toggle($event)" }, properties: { "attr.disabled": "disabled || null" } }, exportAs: ["mcTreeNodeToggle"], usesInheritance: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleDirective, decorators: [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[mcTreeNodeToggle]',
+                        exportAs: 'mcTreeNodeToggle',
+                        host: {
+                            '[attr.disabled]': 'disabled || null',
+                            '(click)': 'toggle($event)'
+                        }
+                    }]
+            }] });
+
+    var McTree = /** @class */ (function (_super) {
+        __extends(McTree, _super);
+        function McTree() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return McTree;
+    }(McTreeBase));
+    /** @nocollapse */ McTree.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTree, deps: null, target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McTree.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTree, selector: "mc-tree", host: { classAttribute: "mc-tree" }, exportAs: ["mcTree"], usesInheritance: true, ngImport: i0__namespace, template: "<ng-container mcTreeNodeOutlet></ng-container>", isInline: true, styles: [".mc-tree{display:block}\n"], directives: [{ type: McTreeNodeOutlet, selector: "[mcTreeNodeOutlet]" }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTree, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-tree',
+                        exportAs: 'mcTree',
+                        template: "<ng-container mcTreeNodeOutlet></ng-container>",
+                        styleUrls: ['./tree.scss'],
+                        host: {
+                            class: 'mc-tree'
+                        },
+                        encapsulation: i0.ViewEncapsulation.None,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }]
+            }] });
+
     /**
      * Injection token used to provide the parent component to options.
      */
@@ -898,7 +1146,10 @@
         return McTreeOption;
     }(McTreeNode));
     /** @nocollapse */ McTreeOption.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeOption, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: i0__namespace.NgZone }, { token: MC_TREE_OPTION_PARENT_COMPONENT }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McTreeOption.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeOption, selector: "mc-tree-option", inputs: { disabled: "disabled", showCheckbox: "showCheckbox" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "focusin": "focus()", "blur": "blur()", "click": "selectViaInteraction($event)", "keydown": "onKeydown($event)" }, properties: { "class.mc-selected": "selected", "class.mc-focused": "hasFocus", "class.mc-action-button-focused": "actionButton?.active", "attr.id": "id", "attr.tabindex": "-1", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-option" }, providers: [{ provide: McTreeNode, useExisting: McTreeOption }], queries: [{ propertyName: "toggleElement", first: true, predicate: ["mcTreeNodeToggle"], descendants: true }, { propertyName: "actionButton", first: true, predicate: McTreeNodeActionComponent, descendants: true }], exportAs: ["mcTreeOption"], usesInheritance: true, ngImport: i0__namespace, template: "<ng-content select=\"mc-tree-node-toggle\"></ng-content>\n\n<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<ng-content select=\"[mc-icon]\"></ng-content>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<ng-content select=\"mc-tree-node-action\"></ng-content>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-tree-option{box-sizing:border-box;display:flex;align-items:center;height:32px;height:var(--mc-tree-size-node-height, 32px);word-wrap:break-word;border:2px solid transparent}.mc-tree-option .mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-right:16px;margin-right:var(--mc-tree-size-padding-right, 16px)}.mc-tree-option>.mc-icon{margin-right:8px;cursor:pointer}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-option .mc-tree-node-action{display:none}.mc-tree-option:not([disabled]):hover .mc-tree-node-action,.mc-tree-option:not([disabled]).mc-focused .mc-tree-node-action,.mc-tree-option:not([disabled]).mc-action-button-focused .mc-tree-node-action{display:flex}\n"], components: [{ type: i1__namespace.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i5__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    /** @nocollapse */ McTreeOption.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeOption, selector: "mc-tree-option", inputs: { disabled: "disabled", showCheckbox: "showCheckbox" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "focusin": "focus()", "blur": "blur()", "click": "selectViaInteraction($event)", "keydown": "onKeydown($event)" }, properties: { "class.mc-selected": "selected", "class.mc-focused": "hasFocus", "class.mc-action-button-focused": "actionButton?.active", "attr.id": "id", "attr.tabindex": "-1", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-option" }, providers: [
+            { provide: McTreeNode, useExisting: McTreeOption },
+            { provide: i1.MC_OPTION_ACTION_PARENT, useExisting: McTreeOption }
+        ], queries: [{ propertyName: "toggleElement", first: true, predicate: ["mcTreeNodeToggle"], descendants: true }, { propertyName: "actionButton", first: true, predicate: i1.McOptionActionComponent, descendants: true }, { propertyName: "tooltipTrigger", first: true, predicate: tooltip.McTooltipTrigger, descendants: true }, { propertyName: "dropdownTrigger", first: true, predicate: dropdown.McDropdownTrigger, descendants: true }], exportAs: ["mcTreeOption"], usesInheritance: true, ngImport: i0__namespace, template: "<ng-content select=\"mc-tree-node-toggle\"></ng-content>\n\n<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<ng-content select=\"[mc-icon]\"></ng-content>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<ng-content select=\"mc-option-action\"></ng-content>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-tree-option{box-sizing:border-box;display:flex;align-items:center;height:32px;height:var(--mc-tree-size-node-height, 32px);word-wrap:break-word;border:2px solid transparent}.mc-tree-option .mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-right:16px;margin-right:var(--mc-tree-size-padding-right, 16px)}.mc-tree-option>.mc-icon{margin-right:8px;cursor:pointer}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-option .mc-option-action{display:none}.mc-tree-option:not([disabled]):hover .mc-option-action,.mc-tree-option:not([disabled]).mc-focused .mc-option-action,.mc-tree-option:not([disabled]).mc-action-button-focused .mc-option-action{display:flex}\n"], components: [{ type: i1__namespace.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2__namespace$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeOption, decorators: [{
                 type: i0.Component,
                 args: [{
@@ -921,7 +1172,10 @@
                         },
                         changeDetection: i0.ChangeDetectionStrategy.OnPush,
                         encapsulation: i0.ViewEncapsulation.None,
-                        providers: [{ provide: McTreeNode, useExisting: McTreeOption }]
+                        providers: [
+                            { provide: McTreeNode, useExisting: McTreeOption },
+                            { provide: i1.MC_OPTION_ACTION_PARENT, useExisting: McTreeOption }
+                        ]
                     }]
             }], ctorParameters: function () {
             return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.ChangeDetectorRef }, { type: i0__namespace.NgZone }, { type: undefined, decorators: [{
@@ -933,7 +1187,13 @@
                     args: ['mcTreeNodeToggle']
                 }], actionButton: [{
                     type: i0.ContentChild,
-                    args: [i0.forwardRef(function () { return McTreeNodeActionComponent; })]
+                    args: [i1.McOptionActionComponent]
+                }], tooltipTrigger: [{
+                    type: i0.ContentChild,
+                    args: [tooltip.McTooltipTrigger]
+                }], dropdownTrigger: [{
+                    type: i0.ContentChild,
+                    args: [dropdown.McDropdownTrigger]
                 }], disabled: [{
                     type: i0.Input
                 }], showCheckbox: [{
@@ -941,387 +1201,6 @@
                 }], onSelectionChange: [{
                     type: i0.Output
                 }] } });
-
-    var McTreeNodeActionBase = /** @class */ (function () {
-        function McTreeNodeActionBase() {
-        }
-        return McTreeNodeActionBase;
-    }());
-    // tslint:disable-next-line:naming-convention
-    var McTreeNodeActionMixinBase = i1.mixinTabIndex(i1.mixinDisabled(McTreeNodeActionBase));
-    var McTreeNodeActionComponent = /** @class */ (function (_super) {
-        __extends(McTreeNodeActionComponent, _super);
-        function McTreeNodeActionComponent(elementRef, focusMonitor, option, dropdownTrigger, tooltip) {
-            var _this = _super.call(this) || this;
-            _this.elementRef = elementRef;
-            _this.focusMonitor = focusMonitor;
-            _this.option = option;
-            _this.dropdownTrigger = dropdownTrigger;
-            _this.tooltip = tooltip;
-            _this.hasFocus = false;
-            _this.destroy = new rxjs.Subject();
-            return _this;
-        }
-        Object.defineProperty(McTreeNodeActionComponent.prototype, "active", {
-            get: function () {
-                var _a;
-                return ((_a = this.dropdownTrigger) === null || _a === void 0 ? void 0 : _a.opened) || this.hasFocus;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        McTreeNodeActionComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            if (this.dropdownTrigger) {
-                this.dropdownTrigger.restoreFocus = false;
-                this.dropdownTrigger.dropdownClosed
-                    .pipe(operators.takeUntil(this.destroy))
-                    .subscribe(function () {
-                    _this.preventShowingTooltip();
-                    var destroyReason = _this.dropdownTrigger.lastDestroyReason === 'keydown' ?
-                        'keyboard' :
-                        'program';
-                    _this.focus(destroyReason);
-                });
-            }
-            this.focusMonitor.monitor(this.elementRef.nativeElement);
-        };
-        McTreeNodeActionComponent.prototype.ngOnDestroy = function () {
-            this.destroy.next();
-            this.destroy.complete();
-            this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
-        };
-        McTreeNodeActionComponent.prototype.focus = function (origin, options) {
-            if (this.focusMonitor && origin) {
-                this.focusMonitor.focusVia(this.elementRef.nativeElement, origin, options);
-            }
-            else {
-                this.elementRef.nativeElement.focus();
-            }
-            this.hasFocus = true;
-        };
-        McTreeNodeActionComponent.prototype.onFocus = function ($event) {
-            $event.stopPropagation();
-            this.hasFocus = true;
-        };
-        McTreeNodeActionComponent.prototype.onBlur = function () {
-            this.hasFocus = false;
-        };
-        McTreeNodeActionComponent.prototype.onClick = function ($event) {
-            $event.stopPropagation();
-        };
-        McTreeNodeActionComponent.prototype.onKeyDown = function ($event) {
-            if ([keycodes.SPACE, keycodes.ENTER].includes($event.keyCode) && this.dropdownTrigger) {
-                this.dropdownTrigger.openedBy = 'keyboard';
-                this.dropdownTrigger.toggle();
-            }
-            else if ($event.shiftKey && $event.keyCode === keycodes.TAB) {
-                this.hasFocus = false;
-                this.option.focus();
-            }
-            else if ($event.keyCode === keycodes.TAB) {
-                return;
-            }
-            $event.preventDefault();
-            $event.stopPropagation();
-        };
-        McTreeNodeActionComponent.prototype.preventShowingTooltip = function () {
-            var _this = this;
-            if (!this.tooltip) {
-                return;
-            }
-            this.tooltip.disabled = true;
-            setTimeout(function () { return _this.tooltip.disabled = false; });
-        };
-        return McTreeNodeActionComponent;
-    }(McTreeNodeActionMixinBase));
-    /** @nocollapse */ McTreeNodeActionComponent.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeActionComponent, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace$1.FocusMonitor }, { token: McTreeOption }, { token: i3__namespace.McDropdownTrigger, optional: true, self: true }, { token: i4__namespace.McTooltipTrigger, optional: true, self: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McTreeNodeActionComponent.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeActionComponent, selector: "mc-tree-node-action", inputs: { disabled: "disabled" }, host: { listeners: { "focus": "onFocus($event)", "blur": "onBlur()", "click": "onClick($event)", "keydown": "onKeyDown($event)" }, properties: { "class.mc-opened": "false", "attr.disabled": "disabled || null", "attr.tabIndex": "-1" }, classAttribute: "mc-tree-node-action" }, queries: [{ propertyName: "customIcon", first: true, predicate: icon.McIcon, descendants: true }], exportAs: ["mcTreeNodeAction"], usesInheritance: true, ngImport: i0__namespace, template: "\n        <ng-container [ngSwitch]=\"!!customIcon\">\n            <i class=\"mc mc-icon mc-ellipsis_16\" *ngSwitchCase=\"false\"></i>\n            <ng-content select=\"[mc-icon]\" *ngSwitchCase=\"true\"></ng-content>\n        </ng-container>\n        ", isInline: true, styles: [".mc-tree-node-action{box-sizing:unset;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:-2px;width:28px;height:100%;cursor:pointer;outline:none;border:2px solid transparent;background:transparent}.mc-tree-node-action[disabled]{cursor:default}\n"], directives: [{ type: i5__namespace.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i5__namespace.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeActionComponent, decorators: [{
-                type: i0.Component,
-                args: [{
-                        selector: 'mc-tree-node-action',
-                        exportAs: 'mcTreeNodeAction',
-                        template: "\n        <ng-container [ngSwitch]=\"!!customIcon\">\n            <i class=\"mc mc-icon mc-ellipsis_16\" *ngSwitchCase=\"false\"></i>\n            <ng-content select=\"[mc-icon]\" *ngSwitchCase=\"true\"></ng-content>\n        </ng-container>\n        ",
-                        styleUrls: ['./action.scss'],
-                        host: {
-                            class: 'mc-tree-node-action',
-                            '[class.mc-opened]': 'false',
-                            '[attr.disabled]': 'disabled || null',
-                            '[attr.tabIndex]': '-1',
-                            '(focus)': 'onFocus($event)',
-                            '(blur)': 'onBlur()',
-                            '(click)': 'onClick($event)',
-                            '(keydown)': 'onKeyDown($event)'
-                        },
-                        inputs: ['disabled'],
-                        encapsulation: i0.ViewEncapsulation.None,
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }]
-            }], ctorParameters: function () {
-            return [{ type: i0__namespace.ElementRef }, { type: i1__namespace$1.FocusMonitor }, { type: McTreeOption }, { type: i3__namespace.McDropdownTrigger, decorators: [{
-                            type: i0.Optional
-                        }, {
-                            type: i0.Self
-                        }] }, { type: i4__namespace.McTooltipTrigger, decorators: [{
-                            type: i0.Optional
-                        }, {
-                            type: i0.Self
-                        }] }];
-        }, propDecorators: { customIcon: [{
-                    type: i0.ContentChild,
-                    args: [icon.McIcon]
-                }] } });
-
-    /** Regex used to split a string on its CSS units. */
-    var cssUnitPattern = /([A-Za-z%]+)$/;
-    var McTreeNodePadding = /** @class */ (function () {
-        function McTreeNodePadding(treeNode, tree, renderer, element, dir) {
-            var _this = this;
-            var _a, _b;
-            this.treeNode = treeNode;
-            this.tree = tree;
-            this.renderer = renderer;
-            this.element = element;
-            this.dir = dir;
-            this._indent = 20;
-            /** CSS units used for the indentation value. */
-            this.indentUnits = 'px';
-            this.baseLeftPadding = parseInt(designTokens.TreeSizePaddingLeft);
-            this.iconWidth = 24;
-            this.destroyed = new rxjs.Subject();
-            (_b = (_a = this.dir) === null || _a === void 0 ? void 0 : _a.change) === null || _b === void 0 ? void 0 : _b.pipe(operators.takeUntil(this.destroyed)).subscribe(function () { return _this.setPadding(); });
-        }
-        Object.defineProperty(McTreeNodePadding.prototype, "level", {
-            get: function () {
-                return this._level;
-            },
-            set: function (value) {
-                this.setLevelInput(value);
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTreeNodePadding.prototype, "indent", {
-            get: function () {
-                return this._indent;
-            },
-            set: function (indent) {
-                this.setIndentInput(indent);
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTreeNodePadding.prototype, "leftPadding", {
-            get: function () {
-                return (this.withIcon ? 0 : this.iconWidth) + this.baseLeftPadding;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        McTreeNodePadding.prototype.ngOnInit = function () {
-            this.withIcon = this.tree.treeControl.isExpandable(this.treeNode.data);
-            this.setPadding();
-        };
-        McTreeNodePadding.prototype.ngOnDestroy = function () {
-            this.destroyed.next();
-            this.destroyed.complete();
-        };
-        McTreeNodePadding.prototype.paddingIndent = function () {
-            var nodeLevel = (this.treeNode.data && this.tree.treeControl.getLevel)
-                ? this.tree.treeControl.getLevel(this.treeNode.data)
-                : 0;
-            var level = this.level || nodeLevel;
-            return level > 0 ? (level * this._indent) + this.leftPadding + "px" : this.leftPadding + "px";
-        };
-        /**
-         * This has been extracted to a util because of TS 4 and VE.
-         * View Engine doesn't support property rename inheritance.
-         * TS 4.0 doesn't allow properties to override accessors or vice-versa.
-         * @docs-private
-         */
-        McTreeNodePadding.prototype.setLevelInput = function (value) {
-            // Set to null as the fallback value so that _setPadding can fall back to the node level if the
-            // consumer set the directive as `mcTreeNodePadding=""`. We still want to take this value if
-            // they set 0 explicitly.
-            this._level = coercion.coerceNumberProperty(value, null);
-            this.setPadding();
-        };
-        /**
-         * This has been extracted to a util because of TS 4 and VE.
-         * View Engine doesn't support property rename inheritance.
-         * TS 4.0 doesn't allow properties to override accessors or vice-versa.
-         * @docs-private
-         */
-        McTreeNodePadding.prototype.setIndentInput = function (indent) {
-            var value = indent;
-            var units = 'px';
-            if (typeof indent === 'string') {
-                var parts = indent.split(cssUnitPattern);
-                value = parts[0];
-                units = parts[1] || units;
-            }
-            this.indentUnits = units;
-            this._indent = coercion.coerceNumberProperty(value);
-            this.setPadding();
-        };
-        McTreeNodePadding.prototype.setPadding = function () {
-            var _a;
-            var padding = this.paddingIndent();
-            var paddingProp = ((_a = this.dir) === null || _a === void 0 ? void 0 : _a.value) === 'rtl' ? 'paddingRight' : 'paddingLeft';
-            this.renderer.setStyle(this.element.nativeElement, paddingProp, padding);
-        };
-        return McTreeNodePadding;
-    }());
-    /** @nocollapse */ McTreeNodePadding.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodePadding, deps: [{ token: McTreeNode }, { token: McTreeBase }, { token: i0__namespace.Renderer2 }, { token: i0__namespace.ElementRef }, { token: i2__namespace.Directionality, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McTreeNodePadding.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodePadding, selector: "[mcTreeNodePadding]", inputs: { level: ["mcTreeNodePadding", "level"], indent: ["mcTreeNodePaddingIndent", "indent"] }, exportAs: ["mcTreeNodePadding"], ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodePadding, decorators: [{
-                type: i0.Directive,
-                args: [{
-                        selector: '[mcTreeNodePadding]',
-                        exportAs: 'mcTreeNodePadding'
-                    }]
-            }], ctorParameters: function () {
-            return [{ type: McTreeNode }, { type: McTreeBase }, { type: i0__namespace.Renderer2 }, { type: i0__namespace.ElementRef }, { type: i2__namespace.Directionality, decorators: [{
-                            type: i0.Optional
-                        }] }];
-        }, propDecorators: { level: [{
-                    type: i0.Input,
-                    args: ['mcTreeNodePadding']
-                }], indent: [{
-                    type: i0.Input,
-                    args: ['mcTreeNodePaddingIndent']
-                }] } });
-
-    var McTreeNodeToggleBase = /** @class */ (function () {
-        function McTreeNodeToggleBase() {
-        }
-        return McTreeNodeToggleBase;
-    }());
-    // tslint:disable-next-line:naming-convention
-    var McTreeNodeToggleMixinBase = i1.mixinDisabled(McTreeNodeToggleBase);
-    /** @docs-private */
-    var McTreeNodeToggleBaseDirective = /** @class */ (function (_super) {
-        __extends(McTreeNodeToggleBaseDirective, _super);
-        function McTreeNodeToggleBaseDirective(tree, treeNode) {
-            var _this = _super.call(this) || this;
-            _this.tree = tree;
-            _this.treeNode = treeNode;
-            _this._recursive = false;
-            _this.tree.treeControl.filterValue
-                .pipe(operators.map(function (value) { return (value === null || value === void 0 ? void 0 : value.length) > 0; }))
-                .subscribe(function (state) { return _this.disabled = state; });
-            return _this;
-        }
-        Object.defineProperty(McTreeNodeToggleBaseDirective.prototype, "recursive", {
-            get: function () {
-                return this._recursive;
-            },
-            set: function (value) {
-                this._recursive = coercion.coerceBooleanProperty(value);
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(McTreeNodeToggleBaseDirective.prototype, "iconState", {
-            get: function () {
-                return this.tree.treeControl.isExpanded(this.node);
-            },
-            enumerable: false,
-            configurable: true
-        });
-        McTreeNodeToggleBaseDirective.prototype.toggle = function (event) {
-            if (this.disabled) {
-                return;
-            }
-            this.recursive
-                ? this.tree.treeControl.toggleDescendants(this.treeNode.data)
-                : this.tree.treeControl.toggle(this.treeNode.data);
-            event.stopPropagation();
-        };
-        return McTreeNodeToggleBaseDirective;
-    }(McTreeNodeToggleMixinBase));
-    /** @nocollapse */ McTreeNodeToggleBaseDirective.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleBaseDirective, deps: [{ token: McTreeBase }, { token: McTreeNode }], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McTreeNodeToggleBaseDirective.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeToggleBaseDirective, inputs: { node: "node", recursive: ["mcTreeNodeToggleRecursive", "recursive"] }, usesInheritance: true, ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleBaseDirective, decorators: [{
-                type: i0.Directive
-            }], ctorParameters: function () { return [{ type: McTreeBase }, { type: McTreeNode }]; }, propDecorators: { node: [{
-                    type: i0.Input
-                }], recursive: [{
-                    type: i0.Input,
-                    args: ['mcTreeNodeToggleRecursive']
-                }] } });
-    var McTreeNodeToggleComponent = /** @class */ (function (_super) {
-        __extends(McTreeNodeToggleComponent, _super);
-        function McTreeNodeToggleComponent() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        return McTreeNodeToggleComponent;
-    }(McTreeNodeToggleBaseDirective));
-    /** @nocollapse */ McTreeNodeToggleComponent.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleComponent, deps: null, target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McTreeNodeToggleComponent.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeToggleComponent, selector: "mc-tree-node-toggle", inputs: { disabled: "disabled" }, host: { listeners: { "click": "toggle($event)" }, properties: { "class.mc-opened": "iconState", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-node-toggle" }, exportAs: ["mcTreeNodeToggle"], usesInheritance: true, ngImport: i0__namespace, template: "<i class=\"mc mc-icon mc-angle-down-S_16\"></i>", isInline: true, styles: [".mc-tree-node-toggle{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:24px;height:100%;cursor:pointer}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-opened .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleComponent, decorators: [{
-                type: i0.Component,
-                args: [{
-                        selector: 'mc-tree-node-toggle',
-                        exportAs: 'mcTreeNodeToggle',
-                        template: "<i class=\"mc mc-icon mc-angle-down-S_16\"></i>",
-                        styleUrls: ['./toggle.scss'],
-                        host: {
-                            class: 'mc-tree-node-toggle',
-                            '[class.mc-opened]': 'iconState',
-                            '[attr.disabled]': 'disabled || null',
-                            '(click)': 'toggle($event)'
-                        },
-                        inputs: ['disabled'],
-                        encapsulation: i0.ViewEncapsulation.None,
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }]
-            }] });
-    var McTreeNodeToggleDirective = /** @class */ (function (_super) {
-        __extends(McTreeNodeToggleDirective, _super);
-        function McTreeNodeToggleDirective() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        return McTreeNodeToggleDirective;
-    }(McTreeNodeToggleBaseDirective));
-    /** @nocollapse */ McTreeNodeToggleDirective.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleDirective, deps: null, target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McTreeNodeToggleDirective.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodeToggleDirective, selector: "[mcTreeNodeToggle]", host: { listeners: { "click": "toggle($event)" }, properties: { "attr.disabled": "disabled || null" } }, exportAs: ["mcTreeNodeToggle"], usesInheritance: true, ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodeToggleDirective, decorators: [{
-                type: i0.Directive,
-                args: [{
-                        selector: '[mcTreeNodeToggle]',
-                        exportAs: 'mcTreeNodeToggle',
-                        host: {
-                            '[attr.disabled]': 'disabled || null',
-                            '(click)': 'toggle($event)'
-                        }
-                    }]
-            }] });
-
-    var McTree = /** @class */ (function (_super) {
-        __extends(McTree, _super);
-        function McTree() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        return McTree;
-    }(McTreeBase));
-    /** @nocollapse */ McTree.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTree, deps: null, target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McTree.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTree, selector: "mc-tree", host: { classAttribute: "mc-tree" }, exportAs: ["mcTree"], usesInheritance: true, ngImport: i0__namespace, template: "<ng-container mcTreeNodeOutlet></ng-container>", isInline: true, styles: [".mc-tree{display:block}\n"], directives: [{ type: McTreeNodeOutlet, selector: "[mcTreeNodeOutlet]" }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTree, decorators: [{
-                type: i0.Component,
-                args: [{
-                        selector: 'mc-tree',
-                        exportAs: 'mcTree',
-                        template: "<ng-container mcTreeNodeOutlet></ng-container>",
-                        styleUrls: ['./tree.scss'],
-                        host: {
-                            class: 'mc-tree'
-                        },
-                        encapsulation: i0.ViewEncapsulation.None,
-                        changeDetection: i0.ChangeDetectionStrategy.OnPush
-                    }]
-            }] });
 
     var MC_SELECTION_TREE_VALUE_ACCESSOR = {
         provide: forms.NG_VALUE_ACCESSOR,
@@ -1358,9 +1237,10 @@
     }());
     var McTreeSelection = /** @class */ (function (_super) {
         __extends(McTreeSelection, _super);
-        function McTreeSelection(elementRef, differs, changeDetectorRef, multiple) {
+        function McTreeSelection(elementRef, differs, changeDetectorRef, multiple, clipboard) {
             var _this = _super.call(this, differs, changeDetectorRef) || this;
             _this.elementRef = elementRef;
+            _this.clipboard = clipboard;
             _this.renderedOptions = new i0.QueryList();
             _this.resetFocusedItemOnBlur = true;
             _this.multipleMode = null;
@@ -1693,7 +1573,12 @@
             this.onSelectAll.emit(new McTreeSelectAllEvent(this, optionsToSelect));
         };
         McTreeSelection.prototype.copyActiveOption = function () {
-            this.onCopy.emit(new McTreeNavigationChange(this, this.keyManager.activeItem));
+            if (this.onCopy.observers.length) {
+                this.onCopy.emit(new McTreeCopyEvent(this, this.keyManager.activeItem));
+            }
+            else {
+                this.onCopyDefaultHandler();
+            }
         };
         McTreeSelection.prototype.writeValue = function (value) {
             if (this.multiple && value && !Array.isArray(value)) {
@@ -1734,6 +1619,10 @@
         };
         McTreeSelection.prototype.getItemHeight = function () {
             return this.renderedOptions.first ? this.renderedOptions.first.getHeight() : 0;
+        };
+        McTreeSelection.prototype.onCopyDefaultHandler = function () {
+            var _a;
+            (_a = this.clipboard) === null || _a === void 0 ? void 0 : _a.copy(this.keyManager.activeItem.value);
         };
         McTreeSelection.prototype.getHeight = function () {
             var clientRects = this.elementRef.nativeElement.getClientRects();
@@ -1823,7 +1712,7 @@
         };
         return McTreeSelection;
     }(McTreeBase));
-    /** @nocollapse */ McTreeSelection.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelection, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.IterableDiffers }, { token: i0__namespace.ChangeDetectorRef }, { token: 'multiple', attribute: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McTreeSelection.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeSelection, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.IterableDiffers }, { token: i0__namespace.ChangeDetectorRef }, { token: 'multiple', attribute: true }, { token: i1__namespace$1.Clipboard, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
     /** @nocollapse */ McTreeSelection.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeSelection, selector: "mc-tree-selection", inputs: { treeControl: "treeControl", autoSelect: "autoSelect", noUnselectLast: "noUnselectLast", disabled: "disabled", tabIndex: "tabIndex" }, outputs: { navigationChange: "navigationChange", selectionChange: "selectionChange", onSelectAll: "onSelectAll", onCopy: "onCopy" }, host: { listeners: { "blur": "blur()", "focus": "focus($event)", "keydown": "onKeyDown($event)", "window:resize": "updateScrollSize()" }, properties: { "attr.tabindex": "tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-selection" }, providers: [
             MC_SELECTION_TREE_VALUE_ACCESSOR,
             { provide: MC_TREE_OPTION_PARENT_COMPONENT, useExisting: McTreeSelection },
@@ -1857,6 +1746,8 @@
             return [{ type: i0__namespace.ElementRef }, { type: i0__namespace.IterableDiffers }, { type: i0__namespace.ChangeDetectorRef }, { type: i1__namespace.MultipleMode, decorators: [{
                             type: i0.Attribute,
                             args: ['multiple']
+                        }] }, { type: i1__namespace$1.Clipboard, decorators: [{
+                            type: i0.Optional
                         }] }];
         }, propDecorators: { nodeOutlet: [{
                     type: i0.ViewChild,
@@ -1893,7 +1784,6 @@
         McTreeSelection,
         McTreeOption,
         McTreeNodePadding,
-        McTreeNodeActionComponent,
         McTreeNodeToggleComponent,
         McTreeNodeToggleDirective
     ];
@@ -1911,9 +1801,8 @@
             McTreeSelection,
             McTreeOption,
             McTreeNodePadding,
-            McTreeNodeActionComponent,
             McTreeNodeToggleComponent,
-            McTreeNodeToggleDirective], imports: [i5.CommonModule, i1.McPseudoCheckboxModule], exports: [McTreeNodeOutlet,
+            McTreeNodeToggleDirective], imports: [i2$1.CommonModule, i1.McPseudoCheckboxModule], exports: [McTreeNodeOutlet,
             McTreeNodeDef,
             McTreeNode,
             McTreeNodePadding,
@@ -1921,14 +1810,13 @@
             McTreeSelection,
             McTreeOption,
             McTreeNodePadding,
-            McTreeNodeActionComponent,
             McTreeNodeToggleComponent,
             McTreeNodeToggleDirective] });
-    /** @nocollapse */ McTreeModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeModule, imports: [[i5.CommonModule, i1.McPseudoCheckboxModule]] });
+    /** @nocollapse */ McTreeModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeModule, imports: [[i2$1.CommonModule, i1.McPseudoCheckboxModule]] });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
-                        imports: [i5.CommonModule, i1.McPseudoCheckboxModule],
+                        imports: [i2$1.CommonModule, i1.McPseudoCheckboxModule],
                         exports: MC_TREE_DIRECTIVES,
                         declarations: MC_TREE_DIRECTIVES
                     }]
@@ -2397,9 +2285,6 @@
     exports.McTreeNavigationChange = McTreeNavigationChange;
     exports.McTreeNestedDataSource = McTreeNestedDataSource;
     exports.McTreeNode = McTreeNode;
-    exports.McTreeNodeActionBase = McTreeNodeActionBase;
-    exports.McTreeNodeActionComponent = McTreeNodeActionComponent;
-    exports.McTreeNodeActionMixinBase = McTreeNodeActionMixinBase;
     exports.McTreeNodeDef = McTreeNodeDef;
     exports.McTreeNodeOutlet = McTreeNodeOutlet;
     exports.McTreeNodeOutletContext = McTreeNodeOutletContext;

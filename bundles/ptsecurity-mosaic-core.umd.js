@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@ptsecurity/cdk/datetime'), require('messageformat'), require('@angular/forms'), require('@angular/common'), require('@angular/cdk/overlay'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes'), require('@angular/cdk/portal'), require('rxjs/operators')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@ptsecurity/cdk/datetime', 'messageformat', '@angular/forms', '@angular/common', '@angular/cdk/overlay', '@angular/animations', '@ptsecurity/cdk/keycodes', '@angular/cdk/portal', 'rxjs/operators'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.mc.cdk.datetime, global.messageformat, global.ng.forms, global.ng.common, global.ng.cdk.overlay, global.ng.animations, global.mc.cdk.keycodes, global.ng.cdk.portal, global.rxjs.operators));
-}(this, (function (exports, i2, i0, coercion, rxjs, i1, MessageFormat, forms, i3, i1$1, animations, keycodes, portal, operators) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@ptsecurity/cdk/datetime'), require('messageformat'), require('@angular/forms'), require('@angular/common'), require('@angular/cdk/overlay'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/a11y'), require('@angular/cdk/portal')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@ptsecurity/cdk/datetime', 'messageformat', '@angular/forms', '@angular/common', '@angular/cdk/overlay', '@angular/animations', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/a11y', '@angular/cdk/portal'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.mc.cdk.datetime, global.messageformat, global.ng.forms, global.ng.common, global.ng.cdk.overlay, global.ng.animations, global.mc.cdk.keycodes, global.rxjs.operators, global.ng.cdk.a11y, global.ng.cdk.portal));
+}(this, (function (exports, i2, i0, coercion, rxjs, i1, MessageFormat, forms, i2$1, i1$1, animations, keycodes, operators, i1$2, portal) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -24,12 +24,13 @@
         return Object.freeze(n);
     }
 
-    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
+    var i2__namespace$1 = /*#__PURE__*/_interopNamespace(i2);
     var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
     var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
     var MessageFormat__namespace = /*#__PURE__*/_interopNamespace(MessageFormat);
-    var i3__namespace = /*#__PURE__*/_interopNamespace(i3);
-    var i1__namespace$1 = /*#__PURE__*/_interopNamespace(i1$1);
+    var i2__namespace = /*#__PURE__*/_interopNamespace(i2$1);
+    var i1__namespace$2 = /*#__PURE__*/_interopNamespace(i1$1);
+    var i1__namespace$1 = /*#__PURE__*/_interopNamespace(i1$2);
 
     function isBoolean(val) { return typeof val === 'boolean'; }
     function toBoolean(value) {
@@ -1338,12 +1339,12 @@
         return McHighlightModule;
     }());
     /** @nocollapse */ McHighlightModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    /** @nocollapse */ McHighlightModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, declarations: [McHighlightPipe], imports: [i3.CommonModule], exports: [McHighlightPipe] });
-    /** @nocollapse */ McHighlightModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, imports: [[i3.CommonModule]] });
+    /** @nocollapse */ McHighlightModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, declarations: [McHighlightPipe], imports: [i2$1.CommonModule], exports: [McHighlightPipe] });
+    /** @nocollapse */ McHighlightModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, imports: [[i2$1.CommonModule]] });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McHighlightModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
-                        imports: [i3.CommonModule],
+                        imports: [i2$1.CommonModule],
                         exports: [McHighlightPipe],
                         declarations: [McHighlightPipe]
                     }]
@@ -1765,12 +1766,12 @@
         return McPseudoCheckboxModule;
     }());
     /** @nocollapse */ McPseudoCheckboxModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    /** @nocollapse */ McPseudoCheckboxModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, declarations: [McPseudoCheckbox], imports: [i3.CommonModule], exports: [McPseudoCheckbox] });
-    /** @nocollapse */ McPseudoCheckboxModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, imports: [[i3.CommonModule]] });
+    /** @nocollapse */ McPseudoCheckboxModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, declarations: [McPseudoCheckbox], imports: [i2$1.CommonModule], exports: [McPseudoCheckbox] });
+    /** @nocollapse */ McPseudoCheckboxModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, imports: [[i2$1.CommonModule]] });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPseudoCheckboxModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
-                        imports: [i3.CommonModule],
+                        imports: [i2$1.CommonModule],
                         exports: [McPseudoCheckbox],
                         declarations: [McPseudoCheckbox]
                     }]
@@ -1814,7 +1815,7 @@
         };
         return McMeasureScrollbarService;
     }());
-    /** @nocollapse */ McMeasureScrollbarService.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McMeasureScrollbarService, deps: [{ token: i3.DOCUMENT }], target: i0__namespace.ɵɵFactoryTarget.Injectable });
+    /** @nocollapse */ McMeasureScrollbarService.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McMeasureScrollbarService, deps: [{ token: i2$1.DOCUMENT }], target: i0__namespace.ɵɵFactoryTarget.Injectable });
     /** @nocollapse */ McMeasureScrollbarService.ɵprov = i0__namespace.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McMeasureScrollbarService, providedIn: 'root' });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McMeasureScrollbarService, decorators: [{
                 type: i0.Injectable,
@@ -1824,7 +1825,7 @@
             }], ctorParameters: function () {
             return [{ type: undefined, decorators: [{
                             type: i0.Inject,
-                            args: [i3.DOCUMENT]
+                            args: [i2$1.DOCUMENT]
                         }] }];
         } });
 
@@ -2078,7 +2079,7 @@
         return McOption;
     }());
     /** @nocollapse */ McOption.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOption, deps: [{ token: i0__namespace.ElementRef }, { token: i0__namespace.ChangeDetectorRef }, { token: MC_OPTION_PARENT_COMPONENT, optional: true }, { token: McOptgroup, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McOption.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McOption, selector: "mc-option", inputs: { value: "value", showCheckbox: "showCheckbox", disabled: "disabled" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "click": "selectViaInteraction()", "keydown": "handleKeydown($event)" }, properties: { "attr.tabindex": "getTabIndex()", "class.mc-selected": "selected", "class.mc-option-multiple": "multiple", "class.mc-active": "active", "class.mc-disabled": "disabled", "id": "id" }, classAttribute: "mc-option" }, exportAs: ["mcOption"], ngImport: i0__namespace, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : ''\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);border:2px solid transparent;border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * 2px);top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * 2px);left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * 2px);right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * 2px);bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}\n"], components: [{ type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i3__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    /** @nocollapse */ McOption.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McOption, selector: "mc-option", inputs: { value: "value", showCheckbox: "showCheckbox", disabled: "disabled" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "click": "selectViaInteraction()", "keydown": "handleKeydown($event)" }, properties: { "attr.tabindex": "getTabIndex()", "class.mc-selected": "selected", "class.mc-option-multiple": "multiple", "class.mc-active": "active", "class.mc-disabled": "disabled", "id": "id" }, classAttribute: "mc-option" }, exportAs: ["mcOption"], ngImport: i0__namespace, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : ''\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);border:2px solid transparent;border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * 2px);top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * 2px);left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * 2px);right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * 2px);bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}\n"], components: [{ type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2__namespace.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOption, decorators: [{
                 type: i0.Component,
                 args: [{
@@ -2158,20 +2159,146 @@
         return currentScrollPosition;
     }
 
+    var MC_OPTION_ACTION_PARENT = new i0.InjectionToken('MC_OPTION_ACTION_PARENT');
+    var McOptionActionBase = /** @class */ (function () {
+        function McOptionActionBase() {
+        }
+        return McOptionActionBase;
+    }());
+    // tslint:disable-next-line:naming-convention
+    var McOptionActionMixinBase = mixinTabIndex(mixinDisabled(McOptionActionBase));
+    var McOptionActionComponent = /** @class */ (function (_super) {
+        __extends(McOptionActionComponent, _super);
+        function McOptionActionComponent(elementRef, focusMonitor, option) {
+            var _this = _super.call(this) || this;
+            _this.elementRef = elementRef;
+            _this.focusMonitor = focusMonitor;
+            _this.option = option;
+            _this.hasFocus = false;
+            _this.destroy = new rxjs.Subject();
+            _this.focusMonitor.monitor(_this.elementRef.nativeElement);
+            return _this;
+        }
+        Object.defineProperty(McOptionActionComponent.prototype, "active", {
+            get: function () {
+                var _a;
+                return this.hasFocus || !!((_a = this.option.dropdownTrigger) === null || _a === void 0 ? void 0 : _a.opened);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        McOptionActionComponent.prototype.ngAfterViewInit = function () {
+            var _this = this;
+            if (!this.option.dropdownTrigger) {
+                return;
+            }
+            this.option.dropdownTrigger.restoreFocus = false;
+            this.option.dropdownTrigger.dropdownClosed
+                .pipe(operators.takeUntil(this.destroy))
+                .subscribe(function () {
+                _this.preventShowingTooltip();
+                var destroyReason = _this.option.dropdownTrigger.lastDestroyReason === 'keydown' ?
+                    'keyboard' :
+                    'program';
+                _this.focus(destroyReason);
+            });
+        };
+        McOptionActionComponent.prototype.ngOnDestroy = function () {
+            this.destroy.next();
+            this.destroy.complete();
+            this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        };
+        McOptionActionComponent.prototype.focus = function (origin, options) {
+            if (this.focusMonitor && origin) {
+                this.focusMonitor.focusVia(this.elementRef.nativeElement, origin, options);
+            }
+            else {
+                this.elementRef.nativeElement.focus();
+            }
+            this.hasFocus = true;
+        };
+        McOptionActionComponent.prototype.onFocus = function ($event) {
+            $event.stopPropagation();
+            this.hasFocus = true;
+        };
+        McOptionActionComponent.prototype.onBlur = function () {
+            this.hasFocus = false;
+        };
+        McOptionActionComponent.prototype.onClick = function ($event) {
+            $event.stopPropagation();
+        };
+        McOptionActionComponent.prototype.onKeyDown = function ($event) {
+            if ([keycodes.SPACE, keycodes.ENTER].includes($event.keyCode) && this.option.dropdownTrigger) {
+                this.option.dropdownTrigger.openedBy = 'keyboard';
+                this.option.dropdownTrigger.toggle();
+            }
+            else if ($event.shiftKey && $event.keyCode === keycodes.TAB) {
+                this.hasFocus = false;
+                this.option.focus();
+            }
+            else if ($event.keyCode === keycodes.TAB) {
+                return;
+            }
+            $event.preventDefault();
+            $event.stopPropagation();
+        };
+        McOptionActionComponent.prototype.preventShowingTooltip = function () {
+            var _this = this;
+            if (!this.option.tooltipTrigger) {
+                return;
+            }
+            this.option.tooltipTrigger.disabled = true;
+            setTimeout(function () { return _this.option.tooltipTrigger.disabled = false; });
+        };
+        return McOptionActionComponent;
+    }(McOptionActionMixinBase));
+    /** @nocollapse */ McOptionActionComponent.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionActionComponent, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace$1.FocusMonitor }, { token: MC_OPTION_ACTION_PARENT }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McOptionActionComponent.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McOptionActionComponent, selector: "mc-option-action", inputs: { disabled: "disabled" }, host: { listeners: { "focus": "onFocus($event)", "blur": "onBlur()", "click": "onClick($event)", "keydown": "onKeyDown($event)" }, properties: { "class.mc-opened": "false", "attr.disabled": "disabled || null", "attr.tabIndex": "-1" }, classAttribute: "mc-option-action" }, queries: [{ propertyName: "customIcon", first: true, predicate: ["customIcon"], descendants: true }], exportAs: ["mcOptionAction"], usesInheritance: true, ngImport: i0__namespace, template: "\n        <ng-container [ngSwitch]=\"!!customIcon\">\n            <i class=\"mc mc-icon mc-ellipsis_16\" *ngSwitchCase=\"false\"></i>\n            <ng-content select=\"[mc-icon]\" *ngSwitchCase=\"true\"></ng-content>\n        </ng-container>\n    ", isInline: true, styles: [".mc-option-action{box-sizing:unset;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:-2px;width:28px;height:100%;cursor:pointer;outline:none;border:2px solid transparent;background:transparent}.mc-option-action[disabled]{cursor:default}\n"], directives: [{ type: i2__namespace.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i2__namespace.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionActionComponent, decorators: [{
+                type: i0.Component,
+                args: [{
+                        selector: 'mc-option-action',
+                        exportAs: 'mcOptionAction',
+                        template: "\n        <ng-container [ngSwitch]=\"!!customIcon\">\n            <i class=\"mc mc-icon mc-ellipsis_16\" *ngSwitchCase=\"false\"></i>\n            <ng-content select=\"[mc-icon]\" *ngSwitchCase=\"true\"></ng-content>\n        </ng-container>\n    ",
+                        styleUrls: ['./action.scss'],
+                        host: {
+                            class: 'mc-option-action',
+                            '[class.mc-opened]': 'false',
+                            '[attr.disabled]': 'disabled || null',
+                            '[attr.tabIndex]': '-1',
+                            '(focus)': 'onFocus($event)',
+                            '(blur)': 'onBlur()',
+                            '(click)': 'onClick($event)',
+                            '(keydown)': 'onKeyDown($event)'
+                        },
+                        inputs: ['disabled'],
+                        encapsulation: i0.ViewEncapsulation.None,
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }]
+            }], ctorParameters: function () {
+            return [{ type: i0__namespace.ElementRef }, { type: i1__namespace$1.FocusMonitor }, { type: undefined, decorators: [{
+                            type: i0.Inject,
+                            args: [MC_OPTION_ACTION_PARENT]
+                        }] }];
+        }, propDecorators: { customIcon: [{
+                    type: i0.ContentChild,
+                    args: ['customIcon']
+                }] } });
+
     var McOptionModule = /** @class */ (function () {
         function McOptionModule() {
         }
         return McOptionModule;
     }());
     /** @nocollapse */ McOptionModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    /** @nocollapse */ McOptionModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, declarations: [McOption, McOptgroup], imports: [i3.CommonModule, McPseudoCheckboxModule], exports: [McOption, McOptgroup] });
-    /** @nocollapse */ McOptionModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, imports: [[i3.CommonModule, McPseudoCheckboxModule]] });
+    /** @nocollapse */ McOptionModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, declarations: [McOption, McOptgroup, McOptionActionComponent], imports: [i2$1.CommonModule, McPseudoCheckboxModule], exports: [McOption, McOptgroup, McOptionActionComponent] });
+    /** @nocollapse */ McOptionModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, imports: [[i2$1.CommonModule, McPseudoCheckboxModule]] });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McOptionModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
-                        imports: [i3.CommonModule, McPseudoCheckboxModule],
-                        exports: [McOption, McOptgroup],
-                        declarations: [McOption, McOptgroup]
+                        imports: [i2$1.CommonModule, McPseudoCheckboxModule],
+                        declarations: [McOption, McOptgroup, McOptionActionComponent],
+                        exports: [McOption, McOptgroup, McOptionActionComponent]
                     }]
             }] });
 
@@ -2648,7 +2775,7 @@
     /** @nocollapse */ McPopUpTrigger.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopUpTrigger, inputs: { enterDelay: ["mcEnterDelay", "enterDelay"], leaveDelay: ["mcLeaveDelay", "leaveDelay"], placementPriority: ["mcPlacementPriority", "placementPriority"], placement: ["mcPlacement", "placement"], visible: ["mcVisible", "visible"] }, outputs: { placementChange: "mcPlacementChange", visibleChange: "mcVisibleChange" }, ngImport: i0__namespace });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McPopUpTrigger, decorators: [{
                 type: i0.Directive
-            }], ctorParameters: function () { return [{ type: i1__namespace$1.Overlay }, { type: i0__namespace.ElementRef }, { type: i0__namespace.NgZone }, { type: i1__namespace$1.ScrollDispatcher }, { type: i0__namespace.ViewContainerRef }, { type: undefined }, { type: i2__namespace.Directionality }]; }, propDecorators: { enterDelay: [{
+            }], ctorParameters: function () { return [{ type: i1__namespace$2.Overlay }, { type: i0__namespace.ElementRef }, { type: i0__namespace.NgZone }, { type: i1__namespace$2.ScrollDispatcher }, { type: i0__namespace.ViewContainerRef }, { type: undefined }, { type: i2__namespace$1.Directionality }]; }, propDecorators: { enterDelay: [{
                     type: i0.Input,
                     args: ['mcEnterDelay']
                 }], leaveDelay: [{
@@ -2687,6 +2814,7 @@
     exports.LEFT_TOP_POSITION_PRIORITY = LEFT_TOP_POSITION_PRIORITY;
     exports.MC_LABEL_GLOBAL_OPTIONS = MC_LABEL_GLOBAL_OPTIONS;
     exports.MC_LOCALE_ID = MC_LOCALE_ID;
+    exports.MC_OPTION_ACTION_PARENT = MC_OPTION_ACTION_PARENT;
     exports.MC_OPTION_PARENT_COMPONENT = MC_OPTION_PARENT_COMPONENT;
     exports.MC_SANITY_CHECKS = MC_SANITY_CHECKS;
     exports.MC_SELECT_SCROLL_STRATEGY = MC_SELECT_SCROLL_STRATEGY;
@@ -2708,6 +2836,9 @@
     exports.McOptgroupBase = McOptgroupBase;
     exports.McOptgroupMixinBase = McOptgroupMixinBase;
     exports.McOption = McOption;
+    exports.McOptionActionBase = McOptionActionBase;
+    exports.McOptionActionComponent = McOptionActionComponent;
+    exports.McOptionActionMixinBase = McOptionActionMixinBase;
     exports.McOptionModule = McOptionModule;
     exports.McOptionSelectionChange = McOptionSelectionChange;
     exports.McPopUp = McPopUp;

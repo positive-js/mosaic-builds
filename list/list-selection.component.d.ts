@@ -1,8 +1,11 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterContentInit, ElementRef, EventEmitter, QueryList, ChangeDetectorRef, OnDestroy, OnInit, NgZone } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { FocusKeyManager, IFocusableOption } from '@ptsecurity/cdk/a11y';
-import { McLine, CanDisable, CanDisableCtor, HasTabIndexCtor, HasTabIndex, MultipleMode, McOptgroup } from '@ptsecurity/mosaic/core';
+import { CanDisable, CanDisableCtor, HasTabIndexCtor, HasTabIndex, MultipleMode, McOptgroup, McOptionActionComponent } from '@ptsecurity/mosaic/core';
+import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
+import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Observable, Subject } from 'rxjs';
 import * as i0 from "@angular/core";
 export interface McOptionEvent {
@@ -22,7 +25,9 @@ export declare class McListOption implements OnDestroy, OnInit, IFocusableOption
     hasFocus: boolean;
     readonly onFocus: Subject<McOptionEvent>;
     readonly onBlur: Subject<McOptionEvent>;
-    lines: QueryList<McLine>;
+    actionButton: McOptionActionComponent;
+    tooltipTrigger: McTooltipTrigger;
+    dropdownTrigger: McDropdownTrigger;
     text: ElementRef;
     checkboxPosition: 'before' | 'after';
     /**
@@ -51,17 +56,28 @@ export declare class McListOption implements OnDestroy, OnInit, IFocusableOption
     setSelected(selected: boolean): void;
     getHeight(): number;
     handleClick($event: any): void;
+    onKeydown($event: any): void;
     focus(): void;
     blur(): void;
     getHostElement(): HTMLElement;
     static ɵfac: i0.ɵɵFactoryDeclaration<McListOption, [null, null, null, null, { optional: true; }]>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McListOption, "mc-list-option", ["mcListOption"], { "checkboxPosition": "checkboxPosition"; "value": "value"; "disabled": "disabled"; "showCheckbox": "showCheckbox"; "selected": "selected"; }, {}, ["lines"], ["*"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McListOption, "mc-list-option", ["mcListOption"], { "checkboxPosition": "checkboxPosition"; "value": "value"; "disabled": "disabled"; "showCheckbox": "showCheckbox"; "selected": "selected"; }, {}, ["actionButton", "tooltipTrigger", "dropdownTrigger"], ["*", "mc-option-action"]>;
 }
 export declare const MC_SELECTION_LIST_VALUE_ACCESSOR: any;
 export declare class McListSelectionChange {
     source: McListSelection;
     option: McListOption;
     constructor(source: McListSelection, option: McListOption);
+}
+export declare class McListSelectAllEvent<T> {
+    source: McListSelection;
+    options: T[];
+    constructor(source: McListSelection, options: T[]);
+}
+export declare class McListCopyEvent<T> {
+    source: McListSelection;
+    option: T;
+    constructor(source: McListSelection, option: T);
 }
 export declare class McListSelectionBase {
     elementRef: ElementRef;
@@ -70,8 +86,11 @@ export declare class McListSelectionBase {
 export declare const McListSelectionMixinBase: CanDisableCtor & HasTabIndexCtor & typeof McListSelectionBase;
 export declare class McListSelection extends McListSelectionMixinBase implements CanDisable, HasTabIndex, AfterContentInit, ControlValueAccessor {
     private changeDetectorRef;
+    private clipboard;
     keyManager: FocusKeyManager<McListOption>;
     options: QueryList<McListOption>;
+    readonly onSelectAll: EventEmitter<McListSelectAllEvent<McListOption>>;
+    readonly onCopy: EventEmitter<McListCopyEvent<McListOption>>;
     get autoSelect(): boolean;
     set autoSelect(value: boolean);
     private _autoSelect;
@@ -95,7 +114,7 @@ export declare class McListSelection extends McListSelectionMixinBase implements
     private readonly destroyed;
     private optionFocusSubscription;
     private optionBlurSubscription;
-    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, multiple: MultipleMode);
+    constructor(elementRef: ElementRef, changeDetectorRef: ChangeDetectorRef, multiple: MultipleMode, clipboard: Clipboard);
     /**
      * Function used for comparing an option against the selected value when determining which
      * options should appear as selected. The first argument is the value of an options. The second
@@ -126,6 +145,7 @@ export declare class McListSelection extends McListSelectionMixinBase implements
     reportValueChange(): void;
     emitChangeEvent(option: McListOption): void;
     protected updateTabIndex(): void;
+    private onCopyDefaultHandler;
     private resetOptions;
     private dropSubscriptions;
     private listenToOptionsFocus;
@@ -141,6 +161,8 @@ export declare class McListSelection extends McListSelectionMixinBase implements
     private isValidIndex;
     private getOptionIndex;
     private onChange;
-    static ɵfac: i0.ɵɵFactoryDeclaration<McListSelection, [null, null, { attribute: "multiple"; }]>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McListSelection, "mc-list-selection", ["mcListSelection"], { "disabled": "disabled"; "autoSelect": "autoSelect"; "noUnselectLast": "noUnselectLast"; "horizontal": "horizontal"; "tabIndex": "tabIndex"; "compareWith": "compareWith"; }, { "selectionChange": "selectionChange"; }, ["options"], ["*"]>;
+    private selectAllOptions;
+    private copyActiveOption;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McListSelection, [null, null, { attribute: "multiple"; }, { optional: true; }]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McListSelection, "mc-list-selection", ["mcListSelection"], { "disabled": "disabled"; "autoSelect": "autoSelect"; "noUnselectLast": "noUnselectLast"; "horizontal": "horizontal"; "tabIndex": "tabIndex"; "compareWith": "compareWith"; }, { "onSelectAll": "onSelectAll"; "onCopy": "onCopy"; "selectionChange": "selectionChange"; }, ["options"], ["*"]>;
 }
