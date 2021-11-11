@@ -9,7 +9,7 @@ export declare const MIN_VALIDATOR: Provider;
  * @experimental
  */
 export declare class MinValidator implements Validator, OnChanges {
-    min: string;
+    min: number;
     private validator;
     private onChange;
     ngOnChanges(changes: SimpleChanges): void;
@@ -27,7 +27,7 @@ export declare const MAX_VALIDATOR: Provider;
  * @experimental
  */
 export declare class MaxValidator implements Validator, OnChanges {
-    max: string;
+    max: number | string;
     private validator;
     private onChange;
     ngOnChanges(changes: SimpleChanges): void;

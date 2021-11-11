@@ -890,9 +890,15 @@
                 }
             }
         };
-        MinValidator.prototype.validate = function (c) { return this.validator(c); };
-        MinValidator.prototype.registerOnValidatorChange = function (fn) { this.onChange = fn; };
-        MinValidator.prototype.createValidator = function () { this.validator = i1.Validators.min(parseInt(this.min, 10)); };
+        MinValidator.prototype.validate = function (c) {
+            return this.validator(c);
+        };
+        MinValidator.prototype.registerOnValidatorChange = function (fn) {
+            this.onChange = fn;
+        };
+        MinValidator.prototype.createValidator = function () {
+            this.validator = i1.Validators.min(parseInt(this.min, 10));
+        };
         return MinValidator;
     }());
     /** @nocollapse */ MinValidator.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MinValidator, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
@@ -902,7 +908,9 @@
                 args: [{
                         selector: '[min][formControlName],[min][formControl],[min][ngModel]',
                         providers: [MIN_VALIDATOR],
-                        host: { '[attr.min]': 'min ? min : null' }
+                        host: {
+                            '[attr.min]': 'min ? min : null'
+                        }
                     }]
             }], propDecorators: { min: [{
                     type: i0.Input
@@ -929,9 +937,15 @@
                 }
             }
         };
-        MaxValidator.prototype.validate = function (c) { return this.validator(c); };
-        MaxValidator.prototype.registerOnValidatorChange = function (fn) { this.onChange = fn; };
-        MaxValidator.prototype.createValidator = function () { this.validator = i1.Validators.max(parseInt(this.max, 10)); };
+        MaxValidator.prototype.validate = function (c) {
+            return this.validator(c);
+        };
+        MaxValidator.prototype.registerOnValidatorChange = function (fn) {
+            this.onChange = fn;
+        };
+        MaxValidator.prototype.createValidator = function () {
+            this.validator = i1.Validators.max(parseInt(this.max, 10));
+        };
         return MaxValidator;
     }());
     /** @nocollapse */ MaxValidator.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MaxValidator, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });

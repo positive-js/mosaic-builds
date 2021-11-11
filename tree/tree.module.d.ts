@@ -11,6 +11,6 @@ import * as i9 from "@angular/common";
 import * as i10 from "@ptsecurity/mosaic/core";
 export declare class McTreeModule {
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<McTreeModule, [typeof i1.McTreeNodeOutlet, typeof i2.McTreeNodeDef, typeof i3.McTreeNode, typeof i4.McTreeNodePadding, typeof i5.McTree, typeof i6.McTreeSelection, typeof i7.McTreeOption, typeof i4.McTreeNodePadding, typeof i8.McTreeNodeToggleComponent, typeof i8.McTreeNodeToggleDirective], [typeof i9.CommonModule, typeof i10.McPseudoCheckboxModule], [typeof i1.McTreeNodeOutlet, typeof i2.McTreeNodeDef, typeof i3.McTreeNode, typeof i4.McTreeNodePadding, typeof i5.McTree, typeof i6.McTreeSelection, typeof i7.McTreeOption, typeof i4.McTreeNodePadding, typeof i8.McTreeNodeToggleComponent, typeof i8.McTreeNodeToggleDirective]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<McTreeModule, [typeof i1.McTreeNodeOutlet, typeof i2.McTreeNodeDef, typeof i3.McTreeNode, typeof i4.McTreeNodePadding, typeof i5.McTree, typeof i6.McTreeSelection, typeof i7.McTreeOption, typeof i8.McTreeNodeToggleComponent, typeof i8.McTreeNodeToggleDirective], [typeof i9.CommonModule, typeof i10.McPseudoCheckboxModule], [typeof i1.McTreeNodeOutlet, typeof i2.McTreeNodeDef, typeof i3.McTreeNode, typeof i4.McTreeNodePadding, typeof i5.McTree, typeof i6.McTreeSelection, typeof i7.McTreeOption, typeof i8.McTreeNodeToggleComponent, typeof i8.McTreeNodeToggleDirective]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<McTreeModule>;
 }

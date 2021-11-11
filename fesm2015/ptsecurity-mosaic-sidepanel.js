@@ -1,10 +1,10 @@
 import * as i0 from '@angular/core';
 import { InjectionToken, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, Inject, ViewChild, TemplateRef, Injectable, Optional, SkipSelf, Directive, Input, NgModule } from '@angular/core';
+import { AnimationCurves, ThemePalette, McCommonModule } from '@ptsecurity/mosaic/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { Subject, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { AnimationCurves, McCommonModule } from '@ptsecurity/mosaic/core';
 import * as i1 from '@angular/cdk/overlay';
 import { OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import * as i4 from '@angular/cdk/portal';
@@ -427,6 +427,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
  * Header of a sidepanel.
  */
 class McSidepanelHeader {
+    constructor() {
+        this.themePalette = ThemePalette;
+    }
 }
 /** @nocollapse */ McSidepanelHeader.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidepanelHeader, deps: [], target: i0.ɵɵFactoryTarget.Component });
 /** @nocollapse */ McSidepanelHeader.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McSidepanelHeader, selector: "mc-sidepanel-header", inputs: { closeable: "closeable" }, host: { classAttribute: "mc-sidepanel-header" }, ngImport: i0, template: `
@@ -435,7 +438,7 @@ class McSidepanelHeader {
         </div>
         <button *ngIf="closeable" mc-sidepanel-close>
             <span class="mc-sidepanel-close-x">
-                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="'second'"></i>
+                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="themePalette.Primary"></i>
             </span>
         </button>
     `, isInline: true, components: [{ type: i3$1.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: McSidepanelClose, selector: "button[mc-sidepanel-close], button[mcSidepanelClose]", inputs: ["mc-sidepanel-close", "mcSidepanelClose"] }, { type: i3$1.McIconCSSStyler, selector: "[mc-icon]" }] });
@@ -449,7 +452,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
         </div>
         <button *ngIf="closeable" mc-sidepanel-close>
             <span class="mc-sidepanel-close-x">
-                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="'second'"></i>
+                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="themePalette.Primary"></i>
             </span>
         </button>
     `,

@@ -1,6 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CdkConnectedOverlay, ViewportRuler } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, ConnectedPosition, ViewportRuler } from '@angular/cdk/overlay';
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, NgZone, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, FormControlName, FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import { CanDisable, CanUpdateErrorState, ErrorStateMatcher, HasTabIndex, CanDisableCtor, HasTabIndexCtor, CanUpdateErrorStateCtor, McValidationOptions } from '@ptsecurity/mosaic/core';
@@ -68,12 +68,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
      * the trigger completely). If the panel cannot fit below the trigger, it
      * will fall back to a position above the trigger.
      */
-    positions: {
-        originX: string;
-        originY: string;
-        overlayX: string;
-        overlayY: string;
-    }[];
+    positions: ConnectedPosition[];
     options: QueryList<McTreeOption>;
     trigger: ElementRef;
     panel: ElementRef;

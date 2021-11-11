@@ -35,7 +35,7 @@ interface SelectionModelOption {
     id: number | string;
     value: string;
 }
-export declare class McTreeSelection extends McTreeBase<McTreeOption> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
+export declare class McTreeSelection extends McTreeBase<any> implements ControlValueAccessor, AfterContentInit, CanDisable, HasTabIndex {
     private elementRef;
     private clipboard;
     renderedOptions: QueryList<McTreeOption>;
@@ -46,7 +46,7 @@ export declare class McTreeSelection extends McTreeBase<McTreeOption> implements
     userTabIndex: number | null;
     nodeOutlet: McTreeNodeOutlet;
     unorderedOptions: QueryList<McTreeOption>;
-    treeControl: FlatTreeControl<McTreeOption>;
+    treeControl: FlatTreeControl<any>;
     readonly navigationChange: EventEmitter<McTreeNavigationChange<McTreeOption>>;
     readonly selectionChange: EventEmitter<McTreeSelectionChange<McTreeOption>>;
     readonly onSelectAll: EventEmitter<McTreeSelectAllEvent<McTreeOption>>;

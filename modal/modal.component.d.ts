@@ -1,5 +1,6 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectorRef, ComponentFactoryResolver, ComponentRef, ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { Observable } from 'rxjs';
 import { McModalControlService } from './modal-control.service';
 import { McModalRef } from './modal-ref.class';
@@ -15,6 +16,7 @@ export declare class McModalComponent<T = any, R = any> extends McModalRef<T, R>
     private modalControl;
     private changeDetector;
     private document;
+    themePalette: typeof ThemePalette;
     mcModalType: ModalType;
     mcComponent: Type<T>;
     mcContent: string | TemplateRef<{}> | Type<T>;

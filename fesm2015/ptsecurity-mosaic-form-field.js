@@ -4,21 +4,24 @@ import * as i0 from '@angular/core';
 import { Component, Directive, Input, EventEmitter, Output, ViewEncapsulation, ChangeDetectionStrategy, ContentChild, ContentChildren, ViewChild, NgModule } from '@angular/core';
 import * as i1 from '@ptsecurity/mosaic/icon';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
+import { ThemePalette, mixinColor } from '@ptsecurity/mosaic/core';
 import { ESCAPE } from '@ptsecurity/cdk/keycodes';
-import { mixinColor } from '@ptsecurity/mosaic/core';
 import { Subject, EMPTY, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
 class McCleaner {
+    constructor() {
+        this.themePalette = ThemePalette;
+    }
 }
 /** @nocollapse */ McCleaner.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McCleaner, deps: [], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McCleaner.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McCleaner, selector: "mc-cleaner", host: { classAttribute: "mc-cleaner" }, exportAs: ["mcCleaner"], ngImport: i0, template: `<i class="mc-icon_light" mc-icon="mc-close-circle_16" [color]="'primary'"></i>`, isInline: true, components: [{ type: i1.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i1.McIconCSSStyler, selector: "[mc-icon]" }] });
+/** @nocollapse */ McCleaner.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McCleaner, selector: "mc-cleaner", host: { classAttribute: "mc-cleaner" }, exportAs: ["mcCleaner"], ngImport: i0, template: `<i class="mc-icon_light" mc-icon="mc-close-circle_16" [color]="themePalette.Primary"></i>`, isInline: true, components: [{ type: i1.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i1.McIconCSSStyler, selector: "[mc-icon]" }] });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McCleaner, decorators: [{
             type: Component,
             args: [{
                     selector: 'mc-cleaner',
                     exportAs: 'mcCleaner',
-                    template: `<i class="mc-icon_light" mc-icon="mc-close-circle_16" [color]="'primary'"></i>`,
+                    template: `<i class="mc-icon_light" mc-icon="mc-close-circle_16" [color]="themePalette.Primary"></i>`,
                     host: {
                         class: 'mc-cleaner'
                     }

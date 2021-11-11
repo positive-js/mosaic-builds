@@ -1,6 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, ConnectedPosition } from '@angular/cdk/overlay';
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, DoCheck, ElementRef, EventEmitter, NgZone, OnChanges, OnDestroy, OnInit, QueryList, Renderer2, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, FormControlName, FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import { ActiveDescendantKeyManager } from '@ptsecurity/cdk/a11y';
@@ -87,12 +87,7 @@ export declare class McSelect extends McSelectMixinBase implements AfterContentI
      * the trigger completely). If the panel cannot fit below the trigger, it
      * will fall back to a position above the trigger.
      */
-    positions: {
-        originX: string;
-        originY: string;
-        overlayX: string;
-        overlayY: string;
-    }[];
+    positions: ConnectedPosition[];
     trigger: ElementRef;
     panel: ElementRef;
     optionsContainer: ElementRef;

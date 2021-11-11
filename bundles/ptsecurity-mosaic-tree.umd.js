@@ -472,7 +472,7 @@
         return McTreeNodePadding;
     }());
     /** @nocollapse */ McTreeNodePadding.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodePadding, deps: [{ token: McTreeNode }, { token: McTreeBase }, { token: i0__namespace.Renderer2 }, { token: i0__namespace.ElementRef }, { token: i2__namespace.Directionality, optional: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McTreeNodePadding.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodePadding, selector: "[mcTreeNodePadding]", inputs: { level: ["mcTreeNodePadding", "level"], indent: ["mcTreeNodePaddingIndent", "indent"] }, exportAs: ["mcTreeNodePadding"], ngImport: i0__namespace });
+    /** @nocollapse */ McTreeNodePadding.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTreeNodePadding, selector: "[mcTreeNodePadding]", inputs: { indent: ["mcTreeNodePaddingIndent", "indent"] }, exportAs: ["mcTreeNodePadding"], ngImport: i0__namespace });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeNodePadding, decorators: [{
                 type: i0.Directive,
                 args: [{
@@ -483,10 +483,7 @@
             return [{ type: McTreeNode }, { type: McTreeBase }, { type: i0__namespace.Renderer2 }, { type: i0__namespace.ElementRef }, { type: i2__namespace.Directionality, decorators: [{
                             type: i0.Optional
                         }] }];
-        }, propDecorators: { level: [{
-                    type: i0.Input,
-                    args: ['mcTreeNodePadding']
-                }], indent: [{
+        }, propDecorators: { indent: [{
                     type: i0.Input,
                     args: ['mcTreeNodePaddingIndent']
                 }] } });
@@ -1149,7 +1146,7 @@
     /** @nocollapse */ McTreeOption.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McTreeOption, selector: "mc-tree-option", inputs: { disabled: "disabled", showCheckbox: "showCheckbox" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "focusin": "focus()", "blur": "blur()", "click": "selectViaInteraction($event)", "keydown": "onKeydown($event)" }, properties: { "class.mc-selected": "selected", "class.mc-focused": "hasFocus", "class.mc-action-button-focused": "actionButton?.active", "attr.id": "id", "attr.tabindex": "-1", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-option" }, providers: [
             { provide: McTreeNode, useExisting: McTreeOption },
             { provide: i1.MC_OPTION_ACTION_PARENT, useExisting: McTreeOption }
-        ], queries: [{ propertyName: "toggleElement", first: true, predicate: ["mcTreeNodeToggle"], descendants: true }, { propertyName: "actionButton", first: true, predicate: i1.McOptionActionComponent, descendants: true }, { propertyName: "tooltipTrigger", first: true, predicate: tooltip.McTooltipTrigger, descendants: true }, { propertyName: "dropdownTrigger", first: true, predicate: dropdown.McDropdownTrigger, descendants: true }], exportAs: ["mcTreeOption"], usesInheritance: true, ngImport: i0__namespace, template: "<ng-content select=\"mc-tree-node-toggle\"></ng-content>\n\n<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<ng-content select=\"[mc-icon]\"></ng-content>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<ng-content select=\"mc-option-action\"></ng-content>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-tree-option{box-sizing:border-box;display:flex;align-items:center;height:32px;height:var(--mc-tree-size-node-height, 32px);word-wrap:break-word;border:2px solid transparent}.mc-tree-option .mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-right:16px;margin-right:var(--mc-tree-size-padding-right, 16px)}.mc-tree-option>.mc-icon{margin-right:8px;cursor:pointer}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option .mc-pseudo-checkbox{margin-right:8px}.mc-tree-option .mc-option-action{display:none}.mc-tree-option:not([disabled]):hover .mc-option-action,.mc-tree-option:not([disabled]).mc-focused .mc-option-action,.mc-tree-option:not([disabled]).mc-action-button-focused .mc-option-action{display:flex}\n"], components: [{ type: i1__namespace.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2__namespace$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+        ], queries: [{ propertyName: "toggleElement", first: true, predicate: ["mcTreeNodeToggle"], descendants: true }, { propertyName: "actionButton", first: true, predicate: i1.McOptionActionComponent, descendants: true }, { propertyName: "tooltipTrigger", first: true, predicate: tooltip.McTooltipTrigger, descendants: true }, { propertyName: "dropdownTrigger", first: true, predicate: dropdown.McDropdownTrigger, descendants: true }], exportAs: ["mcTreeOption"], usesInheritance: true, ngImport: i0__namespace, template: "<ng-content select=\"mc-tree-node-toggle\"></ng-content>\n\n<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<ng-content select=\"mc-checkbox\"></ng-content>\n\n<ng-content select=\"[mc-icon]\"></ng-content>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<ng-content select=\"mc-option-action\"></ng-content>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-tree-option{box-sizing:border-box;display:flex;align-items:center;height:32px;height:var(--mc-tree-size-node-height, 32px);word-wrap:break-word;border:2px solid transparent}.mc-tree-option .mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-right:16px;margin-right:var(--mc-tree-size-padding-right, 16px)}.mc-tree-option>.mc-icon{margin-right:8px;cursor:pointer}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option>.mc-pseudo-checkbox,.mc-tree-option>.mc-checkbox{margin-right:8px}.mc-tree-option .mc-option-action{display:none}.mc-tree-option:not([disabled]):hover .mc-option-action,.mc-tree-option:not([disabled]).mc-focused .mc-option-action,.mc-tree-option:not([disabled]).mc-action-button-focused .mc-option-action{display:flex}\n"], components: [{ type: i1__namespace.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2__namespace$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
     i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeOption, decorators: [{
                 type: i0.Component,
                 args: [{
@@ -1783,7 +1780,6 @@
         McTree,
         McTreeSelection,
         McTreeOption,
-        McTreeNodePadding,
         McTreeNodeToggleComponent,
         McTreeNodeToggleDirective
     ];
@@ -1800,7 +1796,6 @@
             McTree,
             McTreeSelection,
             McTreeOption,
-            McTreeNodePadding,
             McTreeNodeToggleComponent,
             McTreeNodeToggleDirective], imports: [i2$1.CommonModule, i1.McPseudoCheckboxModule], exports: [McTreeNodeOutlet,
             McTreeNodeDef,
@@ -1809,7 +1804,6 @@
             McTree,
             McTreeSelection,
             McTreeOption,
-            McTreeNodePadding,
             McTreeNodeToggleComponent,
             McTreeNodeToggleDirective] });
     /** @nocollapse */ McTreeModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTreeModule, imports: [[i2$1.CommonModule, i1.McPseudoCheckboxModule]] });

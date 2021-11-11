@@ -41,5 +41,5 @@ export declare class McTreeNodePadding<T> implements OnInit, OnDestroy {
     private setIndentInput;
     private setPadding;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeNodePadding<any>, [null, null, null, null, { optional: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeNodePadding<any>, "[mcTreeNodePadding]", ["mcTreeNodePadding"], { "level": "mcTreeNodePadding"; "indent": "mcTreeNodePaddingIndent"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeNodePadding<any>, "[mcTreeNodePadding]", ["mcTreeNodePadding"], { "indent": "mcTreeNodePaddingIndent"; }, {}, never>;
 }

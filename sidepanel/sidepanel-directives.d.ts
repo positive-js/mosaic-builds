@@ -1,4 +1,5 @@
 import { ElementRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ThemePalette } from '@ptsecurity/mosaic/core';
 import { McSidepanelRef } from './sidepanel-ref';
 import { McSidepanelService } from './sidepanel.service';
 import * as i0 from "@angular/core";
@@ -21,6 +22,7 @@ export declare class McSidepanelClose implements OnInit, OnChanges {
  * Header of a sidepanel.
  */
 export declare class McSidepanelHeader {
+    themePalette: typeof ThemePalette;
     closeable: boolean;
     static ɵfac: i0.ɵɵFactoryDeclaration<McSidepanelHeader, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<McSidepanelHeader, "mc-sidepanel-header", never, { "closeable": "closeable"; }, {}, never, ["*"]>;
