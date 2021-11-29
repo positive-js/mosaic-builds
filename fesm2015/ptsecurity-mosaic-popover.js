@@ -3,7 +3,7 @@ import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, InjectionToken, Directive, Inject, Optional, Input, NgModule } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, InjectionToken, EventEmitter, Directive, Inject, Optional, Input, Output, NgModule } from '@angular/core';
 import * as i3 from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { McPopUp, McPopUpTrigger, PopUpTriggers, PopUpSizes, POSITION_TO_CSS_MAP } from '@ptsecurity/mosaic/core';
@@ -74,12 +74,32 @@ class McPopoverTrigger extends McPopUpTrigger {
         this._size = PopUpSizes.Normal;
         this._closeOnScroll = false;
         this.backdropClass = 'cdk-overlay-transparent-backdrop';
+        this.placementChange = new EventEmitter();
+        this.visibleChange = new EventEmitter();
         this.originSelector = '.mc-popover';
         this.overlayConfig = {
             panelClass: 'mc-popover__panel',
             hasBackdrop: this.hasBackdrop,
             backdropClass: this.backdropClass
         };
+    }
+    get popoverVisible() {
+        return this.visible;
+    }
+    set popoverVisible(value) {
+        super.updateVisible(value);
+    }
+    get popoverPlacement() {
+        return this.placement;
+    }
+    set popoverPlacement(value) {
+        super.updatePlacement(value);
+    }
+    get popoverPlacementPriority() {
+        return this.placementPriority;
+    }
+    set popoverPlacementPriority(value) {
+        super.updatePlacementPriority(value);
     }
     get hasBackdrop() {
         return this._hasBackdrop;
@@ -187,7 +207,7 @@ class McPopoverTrigger extends McPopUpTrigger {
     }
 }
 /** @nocollapse */ McPopoverTrigger.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverTrigger, deps: [{ token: i2.Overlay }, { token: i0.ElementRef }, { token: i0.NgZone }, { token: i2.ScrollDispatcher }, { token: i0.ViewContainerRef }, { token: MC_POPOVER_SCROLL_STRATEGY }, { token: i3.Directionality, optional: true }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ McPopoverTrigger.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopoverTrigger, selector: "[mcPopover]", inputs: { hasBackdrop: "hasBackdrop", header: ["mcPopoverHeader", "header"], content: ["mcPopoverContent", "content"], footer: ["mcPopoverFooter", "footer"], disabled: ["mcPopoverDisabled", "disabled"], trigger: ["mcTrigger", "trigger"], size: ["mcPopoverSize", "size"], customClass: ["mcPopoverClass", "customClass"], closeOnScroll: "closeOnScroll", backdropClass: "backdropClass" }, host: { listeners: { "keydown": "handleKeydown($event)", "touchend": "handleTouchend()" }, properties: { "class.mc-popover_open": "isOpen" } }, exportAs: ["mcPopover"], usesInheritance: true, ngImport: i0 });
+/** @nocollapse */ McPopoverTrigger.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopoverTrigger, selector: "[mcPopover]", inputs: { popoverVisible: ["mcPopoverVisible", "popoverVisible"], popoverPlacement: ["mcPopoverPlacement", "popoverPlacement"], popoverPlacementPriority: ["mcPopoverPlacementPriority", "popoverPlacementPriority"], hasBackdrop: "hasBackdrop", header: ["mcPopoverHeader", "header"], content: ["mcPopoverContent", "content"], footer: ["mcPopoverFooter", "footer"], disabled: ["mcPopoverDisabled", "disabled"], trigger: ["mcTrigger", "trigger"], size: ["mcPopoverSize", "size"], customClass: ["mcPopoverClass", "customClass"], closeOnScroll: "closeOnScroll", backdropClass: "backdropClass" }, outputs: { placementChange: "mcPopoverPlacementChange", visibleChange: "mcPopoverVisibleChange" }, host: { listeners: { "keydown": "handleKeydown($event)", "touchend": "handleTouchend()" }, properties: { "class.mc-popover_open": "isOpen" } }, exportAs: ["mcPopover"], usesInheritance: true, ngImport: i0 });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopoverTrigger, decorators: [{
             type: Directive,
             args: [{
@@ -204,7 +224,16 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
                     args: [MC_POPOVER_SCROLL_STRATEGY]
                 }] }, { type: i3.Directionality, decorators: [{
                     type: Optional
-                }] }]; }, propDecorators: { hasBackdrop: [{
+                }] }]; }, propDecorators: { popoverVisible: [{
+                type: Input,
+                args: ['mcPopoverVisible']
+            }], popoverPlacement: [{
+                type: Input,
+                args: ['mcPopoverPlacement']
+            }], popoverPlacementPriority: [{
+                type: Input,
+                args: ['mcPopoverPlacementPriority']
+            }], hasBackdrop: [{
                 type: Input
             }], header: [{
                 type: Input,
@@ -231,6 +260,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
                 type: Input
             }], backdropClass: [{
                 type: Input
+            }], placementChange: [{
+                type: Output,
+                args: ['mcPopoverPlacementChange']
+            }], visibleChange: [{
+                type: Output,
+                args: ['mcPopoverVisibleChange']
             }] } });
 
 class McPopoverModule {

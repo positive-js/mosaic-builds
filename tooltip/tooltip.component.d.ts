@@ -1,8 +1,8 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, ScrollDispatcher, ScrollStrategy } from '@angular/cdk/overlay';
 import { OverlayConfig } from '@angular/cdk/overlay/overlay-config';
-import { ChangeDetectorRef, ElementRef, InjectionToken, NgZone, TemplateRef, Type, ViewContainerRef } from '@angular/core';
-import { McPopUp, McPopUpTrigger } from '@ptsecurity/mosaic/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, InjectionToken, NgZone, TemplateRef, Type, ViewContainerRef } from '@angular/core';
+import { McPopUp, McPopUpTrigger, PopUpPlacements } from '@ptsecurity/mosaic/core';
 import * as i0 from "@angular/core";
 export declare enum TooltipModifier {
     Default = "default",
@@ -39,16 +39,25 @@ export declare const MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER: {
     useFactory: typeof mcTooltipScrollStrategyFactory;
 };
 export declare class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent> {
+    get tooltipVisible(): boolean;
+    set tooltipVisible(value: boolean);
+    get tooltipPlacement(): PopUpPlacements;
+    set tooltipPlacement(value: PopUpPlacements);
+    get tooltipPlacementPriority(): string | string[] | null;
+    set tooltipPlacementPriority(value: string | string[] | null);
     get content(): string | TemplateRef<any>;
     set content(content: string | TemplateRef<any>);
     get disabled(): boolean;
     set disabled(value: boolean);
     enterDelay: number;
+    leaveDelay: number;
     get trigger(): string;
     set trigger(value: string);
     private _trigger;
     get customClass(): string;
     set customClass(value: string);
+    placementChange: EventEmitter<any>;
+    visibleChange: EventEmitter<boolean>;
     protected originSelector: string;
     protected overlayConfig: OverlayConfig;
     protected modifier: TooltipModifier;
@@ -58,7 +67,7 @@ export declare class McTooltipTrigger extends McPopUpTrigger<McTooltipComponent>
     getOverlayHandleComponentType(): Type<McTooltipComponent>;
     updateClassMap(newPlacement?: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTooltipTrigger, [null, null, null, null, null, null, { optional: true; }]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McTooltipTrigger, "[mcTooltip]", ["mcTooltip"], { "content": "mcTooltip"; "disabled": "mcTooltipDisabled"; "enterDelay": "mcEnterDelay"; "trigger": "mcTrigger"; "customClass": "mcTooltipClass"; }, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTooltipTrigger, "[mcTooltip]", ["mcTooltip"], { "tooltipVisible": "mcVisible"; "tooltipPlacement": "mcPlacement"; "tooltipPlacementPriority": "mcPlacementPriority"; "content": "mcTooltip"; "disabled": "mcTooltipDisabled"; "enterDelay": "mcEnterDelay"; "leaveDelay": "mcLeaveDelay"; "trigger": "mcTrigger"; "customClass": "mcTooltipClass"; }, { "placementChange": "mcPlacementChange"; "visibleChange": "mcVisibleChange"; }, never>;
 }
 export declare class McWarningTooltipTrigger extends McTooltipTrigger {
     get content(): string | TemplateRef<any>;

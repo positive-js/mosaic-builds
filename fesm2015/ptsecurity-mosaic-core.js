@@ -2460,11 +2460,9 @@ class McPopUpTrigger {
         this.isOpen = false;
         this.enterDelay = 0;
         this.leaveDelay = 0;
-        this.placementChange = new EventEmitter();
-        this.visibleChange = new EventEmitter();
-        this._placementPriority = null;
-        this._placement = PopUpPlacements.Top;
-        this._visible = false;
+        this.placement = PopUpPlacements.Top;
+        this.placementPriority = null;
+        this.visible = false;
         // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
         this._disabled = false;
         this.listeners = new Map();
@@ -2505,48 +2503,6 @@ class McPopUpTrigger {
         };
         this.availablePositions = POSITION_MAP;
     }
-    get placementPriority() {
-        return this._placementPriority;
-    }
-    set placementPriority(value) {
-        if (value && value.length > 0) {
-            this._placementPriority = value;
-        }
-        else {
-            this._placementPriority = null;
-        }
-    }
-    get placement() {
-        return this._placement;
-    }
-    set placement(value) {
-        if (POSITION_TO_CSS_MAP[value]) {
-            this._placement = value;
-            this.updateClassMap();
-        }
-        else {
-            this._placement = PopUpPlacements.Top;
-            console.warn(`Unknown position: ${value}. Will used default position: ${this._placement}`);
-        }
-        if (this.visible) {
-            this.updatePosition();
-        }
-    }
-    get visible() {
-        return this._visible;
-    }
-    set visible(externalValue) {
-        const value = coerceBooleanProperty(externalValue);
-        if (this._visible !== value) {
-            this._visible = value;
-            if (value) {
-                this.show();
-            }
-            else {
-                this.hide();
-            }
-        }
-    }
     ngOnInit() {
         this.initListeners();
     }
@@ -2558,6 +2514,39 @@ class McPopUpTrigger {
         this.listeners.clear();
         this.destroyed.next();
         this.destroyed.complete();
+    }
+    updatePlacement(value) {
+        if (POSITION_TO_CSS_MAP[value]) {
+            this.placement = value;
+            this.updateClassMap();
+        }
+        else {
+            this.placement = PopUpPlacements.Top;
+            console.warn(`Unknown position: ${value}. Will used default position: ${this.placement}`);
+        }
+        if (this.visible) {
+            this.updatePosition();
+        }
+    }
+    updatePlacementPriority(value) {
+        if (value && value.length > 0) {
+            this.placementPriority = value;
+        }
+        else {
+            this.placementPriority = null;
+        }
+    }
+    updateVisible(externalValue) {
+        const value = coerceBooleanProperty(externalValue);
+        if (this.visible !== value) {
+            this.visible = value;
+            if (value) {
+                this.show();
+            }
+            else {
+                this.hide();
+            }
+        }
     }
     handleKeydown(event) {
         if (this.isOpen && event.keyCode === ESCAPE) { // tslint:disable-line
@@ -2680,31 +2669,10 @@ class McPopUpTrigger {
     }
 }
 /** @nocollapse */ McPopUpTrigger.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopUpTrigger, deps: "invalid", target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ McPopUpTrigger.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopUpTrigger, inputs: { enterDelay: ["mcEnterDelay", "enterDelay"], leaveDelay: ["mcLeaveDelay", "leaveDelay"], placementPriority: ["mcPlacementPriority", "placementPriority"], placement: ["mcPlacement", "placement"], visible: ["mcVisible", "visible"] }, outputs: { placementChange: "mcPlacementChange", visibleChange: "mcVisibleChange" }, ngImport: i0 });
+/** @nocollapse */ McPopUpTrigger.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McPopUpTrigger, ngImport: i0 });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McPopUpTrigger, decorators: [{
             type: Directive
-        }], ctorParameters: function () { return [{ type: i1$2.Overlay }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i1$2.ScrollDispatcher }, { type: i0.ViewContainerRef }, { type: undefined }, { type: i2$1.Directionality }]; }, propDecorators: { enterDelay: [{
-                type: Input,
-                args: ['mcEnterDelay']
-            }], leaveDelay: [{
-                type: Input,
-                args: ['mcLeaveDelay']
-            }], placementChange: [{
-                type: Output,
-                args: ['mcPlacementChange']
-            }], visibleChange: [{
-                type: Output,
-                args: ['mcVisibleChange']
-            }], placementPriority: [{
-                type: Input,
-                args: ['mcPlacementPriority']
-            }], placement: [{
-                type: Input,
-                args: ['mcPlacement']
-            }], visible: [{
-                type: Input,
-                args: ['mcVisible']
-            }] } });
+        }], ctorParameters: function () { return [{ type: i1$2.Overlay }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i1$2.ScrollDispatcher }, { type: i0.ViewContainerRef }, { type: undefined }, { type: i2$1.Directionality }]; } });
 
 /**
  * Generated bundle index. Do not edit.

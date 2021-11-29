@@ -17,23 +17,17 @@ export declare abstract class McPopUpTrigger<T> {
     isOpen: boolean;
     enterDelay: number;
     leaveDelay: number;
-    placementChange: EventEmitter<string>;
-    visibleChange: EventEmitter<boolean>;
-    get placementPriority(): string | string[] | null;
-    set placementPriority(value: string | string[] | null);
-    private _placementPriority;
-    get placement(): PopUpPlacements;
-    set placement(value: PopUpPlacements);
-    private _placement;
-    get visible(): boolean;
-    set visible(externalValue: boolean);
-    private _visible;
     abstract disabled: boolean;
     abstract trigger: string;
     abstract customClass: string;
     abstract content: string | TemplateRef<any>;
+    abstract placementChange: EventEmitter<string>;
+    abstract visibleChange: EventEmitter<boolean>;
     protected abstract originSelector: string;
     protected abstract overlayConfig: OverlayConfig;
+    protected placement: PopUpPlacements;
+    protected placementPriority: string | string[] | null;
+    protected visible: boolean;
     protected _content: string | TemplateRef<any>;
     protected _disabled: boolean;
     protected _customClass: string;
@@ -52,6 +46,9 @@ export declare abstract class McPopUpTrigger<T> {
     abstract getOverlayHandleComponentType(): Type<T>;
     ngOnInit(): void;
     ngOnDestroy(): void;
+    updatePlacement(value: PopUpPlacements): void;
+    updatePlacementPriority(value: any): void;
+    updateVisible(externalValue: boolean): void;
     handleKeydown(event: KeyboardEvent): void;
     handleTouchend(): void;
     show(delay?: number): void;
@@ -69,5 +66,5 @@ export declare abstract class McPopUpTrigger<T> {
     private addEventListener;
     private removeEventListener;
     static ɵfac: i0.ɵɵFactoryDeclaration<McPopUpTrigger<any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McPopUpTrigger<any>, never, never, { "enterDelay": "mcEnterDelay"; "leaveDelay": "mcLeaveDelay"; "placementPriority": "mcPlacementPriority"; "placement": "mcPlacement"; "visible": "mcVisible"; }, { "placementChange": "mcPlacementChange"; "visibleChange": "mcVisibleChange"; }, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McPopUpTrigger<any>, never, never, {}, {}, never>;
 }
