@@ -558,7 +558,7 @@ class McListSelection extends McListSelectionMixinBase {
         else if (keyCode === PAGE_DOWN) {
             this.keyManager.setNextPageItemActive();
         }
-        if (this.keyManager.activeItem) {
+        if (this.keyManager.activeItem && isVerticalMovement(event)) {
             this.setSelectedOptionsByKey(this.keyManager.activeItem, hasModifierKey(event, 'shiftKey'), hasModifierKey(event, 'ctrlKey'));
         }
     }

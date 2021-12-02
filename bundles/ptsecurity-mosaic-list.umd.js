@@ -971,7 +971,7 @@
             else if (keyCode === keycodes.PAGE_DOWN) {
                 this.keyManager.setNextPageItemActive();
             }
-            if (this.keyManager.activeItem) {
+            if (this.keyManager.activeItem && keycodes.isVerticalMovement(event)) {
                 this.setSelectedOptionsByKey(this.keyManager.activeItem, keycodes.hasModifierKey(event, 'shiftKey'), keycodes.hasModifierKey(event, 'ctrlKey'));
             }
         };
