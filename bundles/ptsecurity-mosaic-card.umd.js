@@ -2,7 +2,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/cdk/platform'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/cdk/keycodes'), require('@ptsecurity/mosaic/core')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/card', ['exports', '@angular/cdk/a11y', '@angular/cdk/platform', '@angular/common', '@angular/core', '@ptsecurity/cdk/keycodes', '@ptsecurity/mosaic/core'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.card = {}), global.ng.cdk.a11y, global.ng.cdk.platform, global.ng.common, global.ng.core, global.mc.cdk.keycodes, global.ptsecurity.mosaic.core));
-}(this, (function (exports, i1, platform, common, i0, keycodes, core) { 'use strict';
+})(this, (function (exports, i1, platform, common, i0, keycodes, core) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -13,14 +13,12 @@
                     var d = Object.getOwnPropertyDescriptor(e, k);
                     Object.defineProperty(n, k, d.get ? d : {
                         enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
+                        get: function () { return e[k]; }
                     });
                 }
             });
         }
-        n['default'] = e;
+        n["default"] = e;
         return Object.freeze(n);
     }
 
@@ -409,9 +407,9 @@
         });
         return McCard;
     }(McCardBaseMixin));
-    /** @nocollapse */ McCard.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCard, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.FocusMonitor }], target: i0__namespace.ɵɵFactoryTarget.Component });
-    /** @nocollapse */ McCard.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McCard, selector: "mc-card", inputs: { color: "color", readonly: "readonly", selected: "selected", tabIndex: "tabIndex" }, outputs: { selectedChange: "selectedChange" }, host: { listeners: { "keydown": "onKeyDown($event)", "click": "onClick($event)" }, properties: { "class.mc-card_readonly": "readonly", "class.mc-selected": "selected", "attr.tabindex": "tabIndex" }, classAttribute: "mc-card" }, usesInheritance: true, ngImport: i0__namespace, template: "<ng-content></ng-content>\n<div class=\"mc-card__overlay\"></div>\n", styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer;border-left-width:4px;border-left-width:var(--mc-card-size-vertical-line, 4px);border-left-style:solid;border-left-color:transparent}.mc-card:focus{outline:none}.mc-card .mc-card__overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;background:transparent}.mc-card.mc-card_readonly{cursor:auto}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCard, decorators: [{
+    /** @nocollapse */ McCard.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McCard, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.FocusMonitor }], target: i0__namespace.ɵɵFactoryTarget.Component });
+    /** @nocollapse */ McCard.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.13", type: McCard, selector: "mc-card", inputs: { color: "color", readonly: "readonly", selected: "selected", tabIndex: "tabIndex" }, outputs: { selectedChange: "selectedChange" }, host: { listeners: { "keydown": "onKeyDown($event)", "click": "onClick($event)" }, properties: { "class.mc-card_readonly": "readonly", "class.mc-selected": "selected", "attr.tabindex": "tabIndex" }, classAttribute: "mc-card" }, usesInheritance: true, ngImport: i0__namespace, template: "<ng-content></ng-content>\n<div class=\"mc-card__overlay\"></div>\n", styles: [".mc-card{position:relative;box-sizing:border-box;display:flex;flex-direction:column;cursor:pointer;border-left-width:4px;border-left-width:var(--mc-card-size-vertical-line, 4px);border-left-style:solid;border-left-color:transparent}.mc-card:focus{outline:none}.mc-card .mc-card__overlay{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none;background:transparent}.mc-card.mc-card_readonly{cursor:auto}\n"], changeDetection: i0__namespace.ChangeDetectionStrategy.OnPush, encapsulation: i0__namespace.ViewEncapsulation.None });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McCard, decorators: [{
                 type: i0.Component,
                 args: [{
                         selector: 'mc-card',
@@ -444,16 +442,16 @@
         }
         return McCardModule;
     }());
-    /** @nocollapse */ McCardModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCardModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    /** @nocollapse */ McCardModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCardModule, declarations: [McCard], imports: [common.CommonModule,
+    /** @nocollapse */ McCardModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McCardModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McCardModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McCardModule, declarations: [McCard], imports: [common.CommonModule,
             i1.A11yModule,
             platform.PlatformModule], exports: [McCard] });
-    /** @nocollapse */ McCardModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCardModule, imports: [[
+    /** @nocollapse */ McCardModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McCardModule, imports: [[
                 common.CommonModule,
                 i1.A11yModule,
                 platform.PlatformModule
             ]] });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McCardModule, decorators: [{
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McCardModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
                         imports: [
@@ -477,5 +475,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=ptsecurity-mosaic-card.umd.js.map

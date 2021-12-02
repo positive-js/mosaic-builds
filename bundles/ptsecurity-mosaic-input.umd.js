@@ -1,8 +1,8 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/mosaic/core'), require('@angular/cdk/coercion'), require('@angular/cdk/platform'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('@ptsecurity/cdk/keycodes')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/input', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@angular/forms', '@ptsecurity/mosaic/core', '@angular/cdk/coercion', '@angular/cdk/platform', '@ptsecurity/mosaic/form-field', 'rxjs', '@ptsecurity/cdk/keycodes'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.input = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ng.forms, global.ptsecurity.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.platform, global.ptsecurity.mosaic['form-field'], global.rxjs, global.mc.cdk.keycodes));
-}(this, (function (exports, a11y, common, i0, i1, i3, coercion, platform, formField, rxjs, keycodes) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.input = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ng.forms, global.ptsecurity.mosaic.core, global.ng.cdk.coercion, global.ng.cdk.platform, global.ptsecurity.mosaic["form-field"], global.rxjs, global.mc.cdk.keycodes));
+})(this, (function (exports, a11y, common, i0, i1, i3, coercion, platform, formField, rxjs, keycodes) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -13,14 +13,12 @@
                     var d = Object.getOwnPropertyDescriptor(e, k);
                     Object.defineProperty(n, k, d.get ? d : {
                         enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
+                        get: function () { return e[k]; }
                     });
                 }
             });
         }
-        n['default'] = e;
+        n["default"] = e;
         return Object.freeze(n);
     }
 
@@ -474,9 +472,9 @@
         };
         return McNumberInput;
     }());
-    /** @nocollapse */ McNumberInput.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNumberInput, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.NgControl, optional: true, self: true }, { token: 'step', attribute: true }, { token: 'big-step', attribute: true }, { token: 'min', attribute: true }, { token: 'max', attribute: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McNumberInput.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McNumberInput, selector: "input[mcInput][type=\"number\"]", inputs: { bigStep: "bigStep", step: "step", min: "min", max: "max" }, host: { listeners: { "blur": "focusChanged(false)", "focus": "focusChanged(true)", "paste": "onPaste($event)", "keydown": "onKeyDown($event)" } }, exportAs: ["mcNumericalInput"], ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McNumberInput, decorators: [{
+    /** @nocollapse */ McNumberInput.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McNumberInput, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.NgControl, optional: true, self: true }, { token: 'step', attribute: true }, { token: 'big-step', attribute: true }, { token: 'min', attribute: true }, { token: 'max', attribute: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McNumberInput.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.13", type: McNumberInput, selector: "input[mcInput][type=\"number\"]", inputs: { bigStep: "bigStep", step: "step", min: "min", max: "max" }, host: { listeners: { "blur": "focusChanged(false)", "focus": "focusChanged(true)", "paste": "onPaste($event)", "keydown": "onKeyDown($event)" } }, exportAs: ["mcNumericalInput"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McNumberInput, decorators: [{
                 type: i0.Directive,
                 args: [{
                         selector: "input[mcInput][type=\"number\"]",
@@ -771,11 +769,11 @@
         };
         return McInput;
     }(McInputMixinBase));
-    /** @nocollapse */ McInput.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInput, deps: [{ token: i0__namespace.ElementRef }, { token: i1.NG_VALIDATORS, optional: true, self: true }, { token: i3.MC_VALIDATION, optional: true }, { token: i1__namespace.NgControl, optional: true, self: true }, { token: McNumberInput, optional: true, self: true }, { token: i1__namespace.NgModel, optional: true, self: true }, { token: i1__namespace.FormControlName, optional: true, self: true }, { token: i1__namespace.NgForm, optional: true }, { token: i1__namespace.FormGroupDirective, optional: true }, { token: i3__namespace.ErrorStateMatcher }, { token: MC_INPUT_VALUE_ACCESSOR, optional: true, self: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McInput.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McInput, selector: "input[mcInput]", inputs: { errorStateMatcher: "errorStateMatcher", placeholder: "placeholder", disabled: "disabled", id: "id", required: "required", type: "type", value: "value" }, host: { listeners: { "blur": "onBlur()", "focus": "focusChanged(true)", "input": "onInput()" }, properties: { "attr.id": "id", "attr.placeholder": "placeholder", "attr.disabled": "disabled || null", "required": "required" }, classAttribute: "mc-input" }, providers: [{
+    /** @nocollapse */ McInput.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McInput, deps: [{ token: i0__namespace.ElementRef }, { token: i1.NG_VALIDATORS, optional: true, self: true }, { token: i3.MC_VALIDATION, optional: true }, { token: i1__namespace.NgControl, optional: true, self: true }, { token: McNumberInput, optional: true, self: true }, { token: i1__namespace.NgModel, optional: true, self: true }, { token: i1__namespace.FormControlName, optional: true, self: true }, { token: i1__namespace.NgForm, optional: true }, { token: i1__namespace.FormGroupDirective, optional: true }, { token: i3__namespace.ErrorStateMatcher }, { token: MC_INPUT_VALUE_ACCESSOR, optional: true, self: true }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McInput.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.13", type: McInput, selector: "input[mcInput]", inputs: { errorStateMatcher: "errorStateMatcher", placeholder: "placeholder", disabled: "disabled", id: "id", required: "required", type: "type", value: "value" }, host: { listeners: { "blur": "onBlur()", "focus": "focusChanged(true)", "input": "onInput()" }, properties: { "attr.id": "id", "attr.placeholder": "placeholder", "attr.disabled": "disabled || null", "required": "required" }, classAttribute: "mc-input" }, providers: [{
                 provide: formField.McFormFieldControl, useExisting: McInput
             }], exportAs: ["mcInput"], usesInheritance: true, usesOnChanges: true, ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInput, decorators: [{
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McInput, decorators: [{
                 type: i0.Directive,
                 args: [{
                         selector: "input[mcInput]",
@@ -857,9 +855,9 @@
         }
         return McInputMono;
     }());
-    /** @nocollapse */ McInputMono.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputMono, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McInputMono.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McInputMono, selector: "input[mcInputMonospace]", host: { classAttribute: "mc-input_monospace" }, exportAs: ["McInputMonospace"], ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputMono, decorators: [{
+    /** @nocollapse */ McInputMono.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McInputMono, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McInputMono.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.13", type: McInputMono, selector: "input[mcInputMonospace]", host: { classAttribute: "mc-input_monospace" }, exportAs: ["McInputMonospace"], ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McInputMono, decorators: [{
                 type: i0.Directive,
                 args: [{
                         selector: 'input[mcInputMonospace]',
@@ -901,9 +899,9 @@
         };
         return MinValidator;
     }());
-    /** @nocollapse */ MinValidator.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MinValidator, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ MinValidator.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: MinValidator, selector: "[min][formControlName],[min][formControl],[min][ngModel]", inputs: { min: "min" }, host: { properties: { "attr.min": "min ? min : null" } }, providers: [MIN_VALIDATOR], usesOnChanges: true, ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MinValidator, decorators: [{
+    /** @nocollapse */ MinValidator.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: MinValidator, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ MinValidator.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.13", type: MinValidator, selector: "[min][formControlName],[min][formControl],[min][ngModel]", inputs: { min: "min" }, host: { properties: { "attr.min": "min ? min : null" } }, providers: [MIN_VALIDATOR], usesOnChanges: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: MinValidator, decorators: [{
                 type: i0.Directive,
                 args: [{
                         selector: '[min][formControlName],[min][formControl],[min][ngModel]',
@@ -948,9 +946,9 @@
         };
         return MaxValidator;
     }());
-    /** @nocollapse */ MaxValidator.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MaxValidator, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ MaxValidator.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: MaxValidator, selector: "[max][formControlName],[max][formControl],[max][ngModel]", inputs: { max: "max" }, host: { properties: { "attr.max": "max ? max : null" } }, providers: [MAX_VALIDATOR], usesOnChanges: true, ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: MaxValidator, decorators: [{
+    /** @nocollapse */ MaxValidator.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: MaxValidator, deps: [], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ MaxValidator.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.13", type: MaxValidator, selector: "[max][formControlName],[max][formControl],[max][ngModel]", inputs: { max: "max" }, host: { properties: { "attr.max": "max ? max : null" } }, providers: [MAX_VALIDATOR], usesOnChanges: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: MaxValidator, decorators: [{
                 type: i0.Directive,
                 args: [{
                         selector: '[max][formControlName],[max][formControl],[max][ngModel]',
@@ -968,10 +966,10 @@
         }
         return McInputModule;
     }());
-    /** @nocollapse */ McInputModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    /** @nocollapse */ McInputModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputModule, declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator], imports: [common.CommonModule, a11y.A11yModule, i3.McCommonModule, i1.FormsModule], exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator] });
-    /** @nocollapse */ McInputModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputModule, imports: [[common.CommonModule, a11y.A11yModule, i3.McCommonModule, i1.FormsModule]] });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McInputModule, decorators: [{
+    /** @nocollapse */ McInputModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McInputModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McInputModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McInputModule, declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator], imports: [common.CommonModule, a11y.A11yModule, i3.McCommonModule, i1.FormsModule], exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator] });
+    /** @nocollapse */ McInputModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McInputModule, imports: [[common.CommonModule, a11y.A11yModule, i3.McCommonModule, i1.FormsModule]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McInputModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
                         imports: [common.CommonModule, a11y.A11yModule, i3.McCommonModule, i1.FormsModule],
@@ -1006,5 +1004,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=ptsecurity-mosaic-input.umd.js.map

@@ -1,8 +1,8 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/coercion'), require('@angular/core'), require('@angular/forms'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/form-field'), require('rxjs'), require('@angular/cdk/a11y'), require('@angular/common')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/textarea', ['exports', '@angular/cdk/coercion', '@angular/core', '@angular/forms', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/form-field', 'rxjs', '@angular/cdk/a11y', '@angular/common'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.textarea = {}), global.ng.cdk.coercion, global.ng.core, global.ng.forms, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic['form-field'], global.rxjs, global.ng.cdk.a11y, global.ng.common));
-}(this, (function (exports, coercion, i0, i1, i2, formField, rxjs, a11y, common) { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.textarea = {}), global.ng.cdk.coercion, global.ng.core, global.ng.forms, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic["form-field"], global.rxjs, global.ng.cdk.a11y, global.ng.common));
+})(this, (function (exports, coercion, i0, i1, i2, formField, rxjs, a11y, common) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -13,14 +13,12 @@
                     var d = Object.getOwnPropertyDescriptor(e, k);
                     Object.defineProperty(n, k, d.get ? d : {
                         enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
+                        get: function () { return e[k]; }
                     });
                 }
             });
         }
-        n['default'] = e;
+        n["default"] = e;
         return Object.freeze(n);
     }
 
@@ -564,9 +562,9 @@
         };
         return McTextarea;
     }(McTextareaMixinBase));
-    /** @nocollapse */ McTextarea.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTextarea, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.NgControl, optional: true, self: true }, { token: i1__namespace.NgForm, optional: true }, { token: i1.NG_VALIDATORS, optional: true, self: true }, { token: i2.MC_VALIDATION, optional: true }, { token: i1__namespace.NgModel, optional: true, self: true }, { token: i1__namespace.FormGroupDirective, optional: true }, { token: i2__namespace.ErrorStateMatcher }, { token: MC_TEXTAREA_VALUE_ACCESSOR, optional: true, self: true }, { token: i0__namespace.NgZone }], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McTextarea.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McTextarea, selector: "textarea[mcTextarea]", inputs: { canGrow: "canGrow", errorStateMatcher: "errorStateMatcher", disabled: "disabled", id: "id", placeholder: "placeholder", required: "required", value: "value" }, host: { listeners: { "blur": "focusChanged(false)", "focus": "focusChanged(true)" }, properties: { "class.mc-textarea-resizable": "!canGrow", "attr.id": "id", "attr.placeholder": "placeholder", "attr.aria-invalid": "errorState", "attr.disabled": "disabled || null", "attr.required": "required" }, classAttribute: "mc-textarea" }, providers: [{ provide: formField.McFormFieldControl, useExisting: McTextarea }], exportAs: ["mcTextarea"], usesInheritance: true, usesOnChanges: true, ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTextarea, decorators: [{
+    /** @nocollapse */ McTextarea.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McTextarea, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.NgControl, optional: true, self: true }, { token: i1__namespace.NgForm, optional: true }, { token: i1.NG_VALIDATORS, optional: true, self: true }, { token: i2.MC_VALIDATION, optional: true }, { token: i1__namespace.NgModel, optional: true, self: true }, { token: i1__namespace.FormGroupDirective, optional: true }, { token: i2__namespace.ErrorStateMatcher }, { token: MC_TEXTAREA_VALUE_ACCESSOR, optional: true, self: true }, { token: i0__namespace.NgZone }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McTextarea.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.13", type: McTextarea, selector: "textarea[mcTextarea]", inputs: { canGrow: "canGrow", errorStateMatcher: "errorStateMatcher", disabled: "disabled", id: "id", placeholder: "placeholder", required: "required", value: "value" }, host: { listeners: { "blur": "focusChanged(false)", "focus": "focusChanged(true)" }, properties: { "class.mc-textarea-resizable": "!canGrow", "attr.id": "id", "attr.placeholder": "placeholder", "attr.aria-invalid": "errorState", "attr.disabled": "disabled || null", "attr.required": "required" }, classAttribute: "mc-textarea" }, providers: [{ provide: formField.McFormFieldControl, useExisting: McTextarea }], exportAs: ["mcTextarea"], usesInheritance: true, usesOnChanges: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McTextarea, decorators: [{
                 type: i0.Directive,
                 args: [{
                         selector: 'textarea[mcTextarea]',
@@ -638,10 +636,10 @@
         }
         return McTextareaModule;
     }());
-    /** @nocollapse */ McTextareaModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTextareaModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    /** @nocollapse */ McTextareaModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTextareaModule, declarations: [McTextarea], imports: [common.CommonModule, a11y.A11yModule, i2.McCommonModule, i1.FormsModule], exports: [McTextarea] });
-    /** @nocollapse */ McTextareaModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTextareaModule, imports: [[common.CommonModule, a11y.A11yModule, i2.McCommonModule, i1.FormsModule]] });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McTextareaModule, decorators: [{
+    /** @nocollapse */ McTextareaModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McTextareaModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McTextareaModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McTextareaModule, declarations: [McTextarea], imports: [common.CommonModule, a11y.A11yModule, i2.McCommonModule, i1.FormsModule], exports: [McTextarea] });
+    /** @nocollapse */ McTextareaModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McTextareaModule, imports: [[common.CommonModule, a11y.A11yModule, i2.McCommonModule, i1.FormsModule]] });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McTextareaModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
                         imports: [common.CommonModule, a11y.A11yModule, i2.McCommonModule, i1.FormsModule],
@@ -662,5 +660,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=ptsecurity-mosaic-textarea.umd.js.map

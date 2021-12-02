@@ -2,7 +2,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/a11y'), require('@angular/common'), require('@angular/core'), require('@ptsecurity/mosaic/core'), require('@ptsecurity/mosaic/icon')) :
     typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/link', ['exports', '@angular/cdk/a11y', '@angular/common', '@angular/core', '@ptsecurity/mosaic/core', '@ptsecurity/mosaic/icon'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.link = {}), global.ng.cdk.a11y, global.ng.common, global.ng.core, global.ptsecurity.mosaic.core, global.ptsecurity.mosaic.icon));
-}(this, (function (exports, i1, common, i0, core, icon) { 'use strict';
+})(this, (function (exports, i1, common, i0, core, icon) { 'use strict';
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -13,14 +13,12 @@
                     var d = Object.getOwnPropertyDescriptor(e, k);
                     Object.defineProperty(n, k, d.get ? d : {
                         enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
+                        get: function () { return e[k]; }
                     });
                 }
             });
         }
-        n['default'] = e;
+        n["default"] = e;
         return Object.freeze(n);
     }
 
@@ -441,9 +439,9 @@
         };
         return McLink;
     }(McLinkMixinBase));
-    /** @nocollapse */ McLink.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLink, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.FocusMonitor }, { token: i0__namespace.ChangeDetectorRef }], target: i0__namespace.ɵɵFactoryTarget.Directive });
-    /** @nocollapse */ McLink.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McLink, selector: "[mc-link]", inputs: { tabIndex: "tabIndex", disabled: "disabled", pseudo: "pseudo", noUnderline: "noUnderline", useVisited: "useVisited", print: "print" }, host: { properties: { "class.mc-link_no-underline": "noUnderline", "class.mc-link_use-visited": "useVisited", "class.mc-link_pseudo": "pseudo", "class.mc-link_print": "printMode", "class.mc-text-only": "!hasIcon", "class.mc-text-with-icon": "hasIcon", "attr.disabled": "disabled || null", "attr.tabindex": "tabIndex", "attr.print": "print" }, classAttribute: "mc-link" }, queries: [{ propertyName: "icon", first: true, predicate: icon.McIcon, descendants: true }], exportAs: ["mcLink"], usesInheritance: true, ngImport: i0__namespace });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLink, decorators: [{
+    /** @nocollapse */ McLink.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McLink, deps: [{ token: i0__namespace.ElementRef }, { token: i1__namespace.FocusMonitor }, { token: i0__namespace.ChangeDetectorRef }], target: i0__namespace.ɵɵFactoryTarget.Directive });
+    /** @nocollapse */ McLink.ɵdir = i0__namespace.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.13", type: McLink, selector: "[mc-link]", inputs: { tabIndex: "tabIndex", disabled: "disabled", pseudo: "pseudo", noUnderline: "noUnderline", useVisited: "useVisited", print: "print" }, host: { properties: { "class.mc-link_no-underline": "noUnderline", "class.mc-link_use-visited": "useVisited", "class.mc-link_pseudo": "pseudo", "class.mc-link_print": "printMode", "class.mc-text-only": "!hasIcon", "class.mc-text-with-icon": "hasIcon", "attr.disabled": "disabled || null", "attr.tabindex": "tabIndex", "attr.print": "print" }, classAttribute: "mc-link" }, queries: [{ propertyName: "icon", first: true, predicate: icon.McIcon, descendants: true }], exportAs: ["mcLink"], usesInheritance: true, ngImport: i0__namespace });
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McLink, decorators: [{
                 type: i0.Directive,
                 args: [{
                         selector: '[mc-link]',
@@ -482,14 +480,14 @@
         }
         return McLinkModule;
     }());
-    /** @nocollapse */ McLinkModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLinkModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    /** @nocollapse */ McLinkModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLinkModule, declarations: [McLink], imports: [common.CommonModule,
+    /** @nocollapse */ McLinkModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McLinkModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
+    /** @nocollapse */ McLinkModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McLinkModule, declarations: [McLink], imports: [common.CommonModule,
             i1.A11yModule], exports: [McLink] });
-    /** @nocollapse */ McLinkModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLinkModule, imports: [[
+    /** @nocollapse */ McLinkModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McLinkModule, imports: [[
                 common.CommonModule,
                 i1.A11yModule
             ]] });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: McLinkModule, decorators: [{
+    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: McLinkModule, decorators: [{
                 type: i0.NgModule,
                 args: [{
                         imports: [
@@ -513,5 +511,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=ptsecurity-mosaic-link.umd.js.map

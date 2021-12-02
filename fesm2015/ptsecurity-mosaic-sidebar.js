@@ -34,9 +34,9 @@ var SidebarPositions;
 })(SidebarPositions || (SidebarPositions = {}));
 class McSidebarOpened {
 }
-/** @nocollapse */ McSidebarOpened.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarOpened, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ McSidebarOpened.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McSidebarOpened, selector: "[mc-sidebar-opened]", inputs: { minWidth: "minWidth", width: "width", maxWidth: "maxWidth" }, exportAs: ["mcSidebarOpened"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarOpened, decorators: [{
+/** @nocollapse */ McSidebarOpened.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebarOpened, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McSidebarOpened.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.13", type: McSidebarOpened, selector: "[mc-sidebar-opened]", inputs: { minWidth: "minWidth", width: "width", maxWidth: "maxWidth" }, exportAs: ["mcSidebarOpened"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebarOpened, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mc-sidebar-opened]',
@@ -51,9 +51,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
             }] } });
 class McSidebarClosed {
 }
-/** @nocollapse */ McSidebarClosed.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarClosed, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ McSidebarClosed.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.5", type: McSidebarClosed, selector: "[mc-sidebar-closed]", inputs: { width: "width" }, exportAs: ["mcSidebarClosed"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarClosed, decorators: [{
+/** @nocollapse */ McSidebarClosed.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebarClosed, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ McSidebarClosed.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "12.2.13", type: McSidebarClosed, selector: "[mc-sidebar-closed]", inputs: { width: "width" }, exportAs: ["mcSidebarClosed"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebarClosed, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mc-sidebar-closed]',
@@ -141,9 +141,9 @@ class McSidebar {
         this.params.openedStateWidth = `${this.elementRef.nativeElement.offsetWidth}px`;
     }
 }
-/** @nocollapse */ McSidebar.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebar, deps: [{ token: i0.NgZone }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ McSidebar.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.5", type: McSidebar, selector: "mc-sidebar", inputs: { opened: "opened", position: "position" }, outputs: { stateChanged: "stateChanged" }, host: { listeners: { "@state.start": "onAnimationStart()", "@state.done": "onAnimationDone()" }, properties: { "@state": "{\n            value: animationState,\n            params: params\n        }" }, classAttribute: "mc-sidebar" }, queries: [{ propertyName: "openedContent", first: true, predicate: McSidebarOpened, descendants: true }, { propertyName: "closedContent", first: true, predicate: McSidebarClosed, descendants: true }], exportAs: ["mcSidebar"], ngImport: i0, template: "<ng-container [ngSwitch]=\"internalState\">\n    <ng-container *ngSwitchCase=\"true\">\n        <ng-content select=\"[mc-sidebar-opened]\"></ng-content>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"false\">\n        <ng-content select=\"[mc-sidebar-closed]\"></ng-content>\n    </ng-container>\n</ng-container>\n", styles: [".mc-sidebar{display:inline-block;height:100%;overflow:hidden}.mc-sidebar-opened,.mc-sidebar-closed{height:100%}\n"], directives: [{ type: i1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }], animations: [mcSidebarAnimations.sidebarState], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebar, decorators: [{
+/** @nocollapse */ McSidebar.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebar, deps: [{ token: i0.NgZone }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ McSidebar.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.13", type: McSidebar, selector: "mc-sidebar", inputs: { opened: "opened", position: "position" }, outputs: { stateChanged: "stateChanged" }, host: { listeners: { "@state.start": "onAnimationStart()", "@state.done": "onAnimationDone()" }, properties: { "@state": "{\n            value: animationState,\n            params: params\n        }" }, classAttribute: "mc-sidebar" }, queries: [{ propertyName: "openedContent", first: true, predicate: McSidebarOpened, descendants: true }, { propertyName: "closedContent", first: true, predicate: McSidebarClosed, descendants: true }], exportAs: ["mcSidebar"], ngImport: i0, template: "<ng-container [ngSwitch]=\"internalState\">\n    <ng-container *ngSwitchCase=\"true\">\n        <ng-content select=\"[mc-sidebar-opened]\"></ng-content>\n    </ng-container>\n\n    <ng-container *ngSwitchCase=\"false\">\n        <ng-content select=\"[mc-sidebar-closed]\"></ng-content>\n    </ng-container>\n</ng-container>\n", styles: [".mc-sidebar{display:inline-block;height:100%;overflow:hidden}.mc-sidebar-opened,.mc-sidebar-closed{height:100%}\n"], directives: [{ type: i1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }], animations: [mcSidebarAnimations.sidebarState], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebar, decorators: [{
             type: Component,
             args: [{
                     selector: 'mc-sidebar',
@@ -179,14 +179,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImpor
 
 class McSidebarModule {
 }
-/** @nocollapse */ McSidebarModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ McSidebarModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarModule, declarations: [McSidebarClosed,
+/** @nocollapse */ McSidebarModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebarModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ McSidebarModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebarModule, declarations: [McSidebarClosed,
         McSidebarOpened,
         McSidebar], imports: [CommonModule], exports: [McSidebarClosed,
         McSidebarOpened,
         McSidebar] });
-/** @nocollapse */ McSidebarModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0, type: McSidebarModule, decorators: [{
+/** @nocollapse */ McSidebarModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebarModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0, type: McSidebarModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],
