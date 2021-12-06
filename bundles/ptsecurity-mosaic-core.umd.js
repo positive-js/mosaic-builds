@@ -1,8 +1,10 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@ptsecurity/cdk/datetime'), require('messageformat'), require('@angular/forms'), require('@angular/common'), require('@angular/cdk/overlay'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/a11y'), require('@angular/cdk/portal')) :
-    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@ptsecurity/cdk/datetime', 'messageformat', '@angular/forms', '@angular/common', '@angular/cdk/overlay', '@angular/animations', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/a11y', '@angular/cdk/portal'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global.mc.cdk.datetime, global.messageformat, global.ng.forms, global.ng.common, global.ng.cdk.overlay, global.ng.animations, global.mc.cdk.keycodes, global.rxjs.operators, global.ng.cdk.a11y, global.ng.cdk.portal));
-})(this, (function (exports, i2, i0, coercion, rxjs, i1, MessageFormat, forms, i2$1, i1$1, animations, keycodes, operators, i1$2, portal) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/cdk/bidi'), require('@angular/core'), require('@angular/cdk/coercion'), require('rxjs'), require('@messageformat/core'), require('@ptsecurity/cdk/datetime'), require('@angular/forms'), require('@angular/common'), require('@angular/cdk/overlay'), require('@angular/animations'), require('@ptsecurity/cdk/keycodes'), require('rxjs/operators'), require('@angular/cdk/a11y'), require('@angular/cdk/portal')) :
+    typeof define === 'function' && define.amd ? define('@ptsecurity/mosaic/core', ['exports', '@angular/cdk/bidi', '@angular/core', '@angular/cdk/coercion', 'rxjs', '@messageformat/core', '@ptsecurity/cdk/datetime', '@angular/forms', '@angular/common', '@angular/cdk/overlay', '@angular/animations', '@ptsecurity/cdk/keycodes', 'rxjs/operators', '@angular/cdk/a11y', '@angular/cdk/portal'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ptsecurity = global.ptsecurity || {}, global.ptsecurity.mosaic = global.ptsecurity.mosaic || {}, global.ptsecurity.mosaic.core = {}), global.ng.cdk.bidi, global.ng.core, global.ng.cdk.coercion, global.rxjs, global["@messageformat/core"], global.mc.cdk.datetime, global.ng.forms, global.ng.common, global.ng.cdk.overlay, global.ng.animations, global.mc.cdk.keycodes, global.rxjs.operators, global.ng.cdk.a11y, global.ng.cdk.portal));
+})(this, (function (exports, i2, i0, coercion, rxjs, MessageFormat, i1, forms, i2$1, i1$1, animations, keycodes, operators, i1$2, portal) { 'use strict';
+
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
     function _interopNamespace(e) {
         if (e && e.__esModule) return e;
@@ -24,8 +26,8 @@
 
     var i2__namespace$1 = /*#__PURE__*/_interopNamespace(i2);
     var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var MessageFormat__default = /*#__PURE__*/_interopDefaultLegacy(MessageFormat);
     var i1__namespace = /*#__PURE__*/_interopNamespace(i1);
-    var MessageFormat__namespace = /*#__PURE__*/_interopNamespace(MessageFormat);
     var i2__namespace = /*#__PURE__*/_interopNamespace(i2$1);
     var i1__namespace$2 = /*#__PURE__*/_interopNamespace(i1$1);
     var i1__namespace$1 = /*#__PURE__*/_interopNamespace(i1$2);
@@ -832,7 +834,7 @@
             this.adapter = adapter;
             this.invalidDateErrorText = 'Invalid date';
             this.config = locale === 'en' ? enUS : ruRU;
-            this.messageFormat = new MessageFormat__namespace(locale);
+            this.messageFormat = new MessageFormat__default["default"](locale);
         }
         DateFormatter.prototype.setLocale = function (locale) {
             this.config = locale === 'en' ? enUS : ruRU;
