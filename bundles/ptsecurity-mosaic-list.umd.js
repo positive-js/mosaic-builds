@@ -475,7 +475,11 @@
             this.changeDetector.markForCheck();
         };
         McListOption.prototype.getHeight = function () {
-            return this.elementRef.nativeElement.getClientRects()[0].height;
+            var clientRects = this.elementRef.nativeElement.getClientRects();
+            if (clientRects.length) {
+                return clientRects[0].height;
+            }
+            return 0;
         };
         McListOption.prototype.handleClick = function ($event) {
             if (this.disabled) {
@@ -914,7 +918,11 @@
             return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && listOption.selected);
         };
         McListSelection.prototype.getHeight = function () {
-            return this.elementRef.nativeElement.getClientRects()[0].height;
+            var clientRects = this.elementRef.nativeElement.getClientRects();
+            if (clientRects.length) {
+                return clientRects[0].height;
+            }
+            return 0;
         };
         // Removes an option from the selection list and updates the active item.
         McListSelection.prototype.removeOptionFromList = function (option) {

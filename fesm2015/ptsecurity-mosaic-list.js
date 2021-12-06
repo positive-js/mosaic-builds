@@ -125,7 +125,11 @@ class McListOption {
         this.changeDetector.markForCheck();
     }
     getHeight() {
-        return this.elementRef.nativeElement.getClientRects()[0].height;
+        const clientRects = this.elementRef.nativeElement.getClientRects();
+        if (clientRects.length) {
+            return clientRects[0].height;
+        }
+        return 0;
     }
     handleClick($event) {
         if (this.disabled) {
@@ -501,7 +505,11 @@ class McListSelection extends McListSelectionMixinBase {
         return !(this.noUnselectLast && this.selectionModel.selected.length === 1 && listOption.selected);
     }
     getHeight() {
-        return this.elementRef.nativeElement.getClientRects()[0].height;
+        const clientRects = this.elementRef.nativeElement.getClientRects();
+        if (clientRects.length) {
+            return clientRects[0].height;
+        }
+        return 0;
     }
     // Removes an option from the selection list and updates the active item.
     removeOptionFromList(option) {
