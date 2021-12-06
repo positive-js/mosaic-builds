@@ -6,7 +6,7 @@ import { forwardRef, EventEmitter, Directive, Optional, Input, Output, NgModule 
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormsModule } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import * as i1 from '@ptsecurity/cdk/datetime';
-import { isLetterKey, hasModifierKey, isVerticalMovement, isHorizontalMovement, DELETE, BACKSPACE, SPACE, HOME, PAGE_UP, END, PAGE_DOWN, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
+import { isLetterKey, hasModifierKey, isVerticalMovement, isHorizontalMovement, DELETE, BACKSPACE, TAB, SPACE, HOME, PAGE_UP, END, PAGE_DOWN, UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@ptsecurity/cdk/keycodes';
 import { validationTooltipShowDelay, validationTooltipHideDelay } from '@ptsecurity/mosaic/core';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import '@ptsecurity/mosaic/tooltip';
@@ -300,7 +300,7 @@ class McTimepicker {
         }
         else if ((hasModifierKey(event) && (isVerticalMovement(event) || isHorizontalMovement(event))) ||
             event.ctrlKey || event.metaKey ||
-            [DELETE, BACKSPACE].includes(keyCode)) {
+            [DELETE, BACKSPACE, TAB].includes(keyCode)) {
             noop();
         }
         else if (keyCode === SPACE) {

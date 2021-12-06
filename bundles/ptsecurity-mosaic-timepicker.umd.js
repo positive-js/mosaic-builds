@@ -383,7 +383,7 @@
             }
             else if ((keycodes.hasModifierKey(event) && (keycodes.isVerticalMovement(event) || keycodes.isHorizontalMovement(event))) ||
                 event.ctrlKey || event.metaKey ||
-                [keycodes.DELETE, keycodes.BACKSPACE].includes(keyCode)) {
+                [keycodes.DELETE, keycodes.BACKSPACE, keycodes.TAB].includes(keyCode)) {
                 rxjs.noop();
             }
             else if (keyCode === keycodes.SPACE) {
