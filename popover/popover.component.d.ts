@@ -59,7 +59,7 @@ export declare class McPopoverTrigger extends McPopUpTrigger<McPopoverComponent>
     placementChange: EventEmitter<any>;
     visibleChange: EventEmitter<boolean>;
     protected originSelector: string;
-    protected overlayConfig: OverlayConfig;
+    protected get overlayConfig(): OverlayConfig;
     constructor(overlay: Overlay, elementRef: ElementRef, ngZone: NgZone, scrollDispatcher: ScrollDispatcher, hostView: ViewContainerRef, scrollStrategy: any, direction: Directionality);
     updateData(): void;
     /** Updates the position of the current popover. */

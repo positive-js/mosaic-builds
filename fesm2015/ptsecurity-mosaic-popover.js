@@ -77,11 +77,6 @@ class McPopoverTrigger extends McPopUpTrigger {
         this.placementChange = new EventEmitter();
         this.visibleChange = new EventEmitter();
         this.originSelector = '.mc-popover';
-        this.overlayConfig = {
-            panelClass: 'mc-popover__panel',
-            hasBackdrop: this.hasBackdrop,
-            backdropClass: this.backdropClass
-        };
     }
     get popoverVisible() {
         return this.visible;
@@ -170,6 +165,13 @@ class McPopoverTrigger extends McPopUpTrigger {
     }
     set closeOnScroll(value) {
         this._closeOnScroll = coerceBooleanProperty(value);
+    }
+    get overlayConfig() {
+        return {
+            panelClass: 'mc-popover__panel',
+            hasBackdrop: this.hasBackdrop,
+            backdropClass: this.backdropClass
+        };
     }
     updateData() {
         if (!this.instance) {

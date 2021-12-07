@@ -417,11 +417,6 @@
             _this.placementChange = new i0.EventEmitter();
             _this.visibleChange = new i0.EventEmitter();
             _this.originSelector = '.mc-popover';
-            _this.overlayConfig = {
-                panelClass: 'mc-popover__panel',
-                hasBackdrop: _this.hasBackdrop,
-                backdropClass: _this.backdropClass
-            };
             return _this;
         }
         Object.defineProperty(McPopoverTrigger.prototype, "popoverVisible", {
@@ -556,6 +551,17 @@
             },
             set: function (value) {
                 this._closeOnScroll = coercion.coerceBooleanProperty(value);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(McPopoverTrigger.prototype, "overlayConfig", {
+            get: function () {
+                return {
+                    panelClass: 'mc-popover__panel',
+                    hasBackdrop: this.hasBackdrop,
+                    backdropClass: this.backdropClass
+                };
             },
             enumerable: false,
             configurable: true
