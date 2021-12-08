@@ -6,7 +6,7 @@ import * as i0 from "@angular/core";
 export declare class McButtonCssStyler implements AfterContentInit {
     private renderer;
     icons: QueryList<McIcon>;
-    nativeElement: Element;
+    nativeElement: HTMLElement;
     get isIconButton(): boolean;
     constructor(elementRef: ElementRef, renderer: Renderer2);
     ngAfterContentInit(): void;
@@ -20,14 +20,17 @@ export declare class McButtonBase {
 }
 export declare const McButtonMixinBase: HasTabIndexCtor & CanDisableCtor & CanColorCtor & typeof McButtonBase;
 export declare class McButton extends McButtonMixinBase implements OnDestroy, CanDisable, CanColor {
-    private _focusMonitor;
-    constructor(elementRef: ElementRef, _focusMonitor: FocusMonitor);
+    private focusMonitor;
+    hasFocus: boolean;
+    constructor(elementRef: ElementRef, focusMonitor: FocusMonitor);
     ngOnDestroy(): void;
+    onFocus($event: any): void;
+    onBlur(): void;
+    getHostElement(): any;
     focus(): void;
     focusViaKeyboard(): void;
-    getHostElement(): any;
     static ɵfac: i0.ɵɵFactoryDeclaration<McButton, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McButton, "button[mc-button]", never, { "disabled": "disabled"; "color": "color"; }, {}, never, ["*"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McButton, "button[mc-button]", never, { "tabIndex": "tabIndex"; "disabled": "disabled"; "color": "color"; }, {}, never, ["*"]>;
 }
 export declare class McAnchor extends McButton {
     constructor(focusMonitor: FocusMonitor, elementRef: ElementRef);

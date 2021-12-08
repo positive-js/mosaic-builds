@@ -6,7 +6,7 @@
 
 	/**
 	 * Do not edit directly
-	 * Generated on Thu, 28 Oct 2021 12:33:10 GMT
+	 * Generated on Tue, 23 Nov 2021 14:04:36 GMT
 	 */
 	var LightColorSchemePrimaryDefault = "#338FCC";
 	var LightColorSchemePrimaryPalette = { "40": { "value": "#F5FAFD", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#F5FAFD" }, "name": "PaletteBlue40", "attributes": { "category": "palette", "type": "blue", "item": "40" }, "path": ["palette", "blue", "40"] }, "60": { "value": "#EBF4FB", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#EBF4FB" }, "name": "PaletteBlue60", "attributes": { "category": "palette", "type": "blue", "item": "60" }, "path": ["palette", "blue", "60"] }, "100": { "value": "#D8EAF7", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#D8EAF7" }, "name": "PaletteBlue100", "attributes": { "category": "palette", "type": "blue", "item": "100" }, "path": ["palette", "blue", "100"] }, "200": { "value": "#AAD1EC", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#AAD1EC" }, "name": "PaletteBlue200", "attributes": { "category": "palette", "type": "blue", "item": "200" }, "path": ["palette", "blue", "200"] }, "300": { "value": "#7FBAE1", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#7FBAE1" }, "name": "PaletteBlue300", "attributes": { "category": "palette", "type": "blue", "item": "300" }, "path": ["palette", "blue", "300"] }, "400": { "value": "#57A4D7", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#57A4D7" }, "name": "PaletteBlue400", "attributes": { "category": "palette", "type": "blue", "item": "400" }, "path": ["palette", "blue", "400"] }, "500": { "value": "#338FCC", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#338FCC" }, "name": "PaletteBlue500", "attributes": { "category": "palette", "type": "blue", "item": "500" }, "path": ["palette", "blue", "500"] }, "560": { "value": "#277BB3", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#277BB3" }, "name": "PaletteBlue560", "attributes": { "category": "palette", "type": "blue", "item": "560" }, "path": ["palette", "blue", "560"] }, "600": { "value": "#206EA2", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#206EA2" }, "name": "PaletteBlue600", "attributes": { "category": "palette", "type": "blue", "item": "600" }, "path": ["palette", "blue", "600"] }, "700": { "value": "#114E77", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#114E77" }, "name": "PaletteBlue700", "attributes": { "category": "palette", "type": "blue", "item": "700" }, "path": ["palette", "blue", "700"] }, "800": { "value": "#07314D", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#07314D" }, "name": "PaletteBlue800", "attributes": { "category": "palette", "type": "blue", "item": "800" }, "path": ["palette", "blue", "800"] }, "A100": { "value": "rgba(0, 153, 255, 0.15)", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "rgba(0, 153, 255, 0.15)" }, "name": "PaletteBlueA100", "attributes": { "category": "palette", "type": "blue", "item": "A100" }, "path": ["palette", "blue", "A100"] }, "A200": { "value": "rgba(0, 153, 255, 0.3)", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "rgba(0, 153, 255, 0.3)" }, "name": "PaletteBlueA200", "attributes": { "category": "palette", "type": "blue", "item": "A200" }, "path": ["palette", "blue", "A200"] }, "contrast": { "40": { "value": "#4D4D4D", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#4D4D4D" }, "name": "PaletteBlueContrast40", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "40" }, "path": ["palette", "blue", "contrast", "40"] }, "60": { "value": "#4D4D4D", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#4D4D4D" }, "name": "PaletteBlueContrast60", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "60" }, "path": ["palette", "blue", "contrast", "60"] }, "100": { "value": "#4D4D4D", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#4D4D4D" }, "name": "PaletteBlueContrast100", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "100" }, "path": ["palette", "blue", "contrast", "100"] }, "200": { "value": "#4D4D4D", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#4D4D4D" }, "name": "PaletteBlueContrast200", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "200" }, "path": ["palette", "blue", "contrast", "200"] }, "300": { "value": "#4D4D4D", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#4D4D4D" }, "name": "PaletteBlueContrast300", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "300" }, "path": ["palette", "blue", "contrast", "300"] }, "400": { "value": "white", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "white" }, "name": "PaletteBlueContrast400", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "400" }, "path": ["palette", "blue", "contrast", "400"] }, "500": { "value": "white", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "white" }, "name": "PaletteBlueContrast500", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "500" }, "path": ["palette", "blue", "contrast", "500"] }, "560": { "value": "white", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "white" }, "name": "PaletteBlueContrast560", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "560" }, "path": ["palette", "blue", "contrast", "560"] }, "600": { "value": "white", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "white" }, "name": "PaletteBlueContrast600", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "600" }, "path": ["palette", "blue", "contrast", "600"] }, "700": { "value": "white", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "white" }, "name": "PaletteBlueContrast700", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "700" }, "path": ["palette", "blue", "contrast", "700"] }, "800": { "value": "white", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "white" }, "name": "PaletteBlueContrast800", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "800" }, "path": ["palette", "blue", "contrast", "800"] }, "A100": { "value": "#4D4D4D", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "#4D4D4D" }, "name": "PaletteBlueContrastA100", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "A100" }, "path": ["palette", "blue", "contrast", "A100"] }, "A200": { "value": "white", "filePath": "packages/mosaic/design-tokens/tokens/properties/palette.json5", "isSource": true, "original": { "value": "white" }, "name": "PaletteBlueContrastA200", "attributes": { "category": "palette", "type": "blue", "item": "contrast", "subitem": "A200" }, "path": ["palette", "blue", "contrast", "A200"] } } };
@@ -678,23 +678,26 @@
 	var NavbarLightColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
 	var NavbarDarkColorSchemeBackground = "#114E77";
 	var NavbarDarkColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
-	var NavbarSizeIconMargin = "4px";
+	var NavbarSizeIconMargin = "6px";
 	var NavbarFontTitle = "body";
-	var VerticalNavbarSizeStatesOpenedWidth = "240px";
-	var VerticalNavbarSizeStatesClosedWidth = "48px";
-	var VerticalNavbarSizeIconMargin = "10px";
+	var VerticalNavbarSizeStatesExpandedWidth = "240px";
+	var VerticalNavbarSizeStatesCollapsedWidth = "56px";
+	var VerticalNavbarSizeIconMargin = "16px";
 	var NavbarItemLightColorSchemeText = "#D8EAF7";
-	var NavbarItemLightColorSchemeStatesActive = "#206EA2";
-	var NavbarItemLightColorSchemeStatesHover = "#206EA2";
+	var NavbarItemLightColorSchemeIcon = "#D8EAF7";
+	var NavbarItemLightColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
+	var NavbarItemLightColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 	var NavbarItemLightColorSchemeStatesProgress = "#07314D";
 	var NavbarItemLightColorSchemeStatesDisabledOpacity = 0.3;
 	var NavbarItemDarkColorSchemeText = "#D8EAF7";
-	var NavbarItemDarkColorSchemeStatesActive = "#114E77";
-	var NavbarItemDarkColorSchemeStatesHover = "#114E77";
+	var NavbarItemDarkColorSchemeIcon = "#D8EAF7";
+	var NavbarItemDarkColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
+	var NavbarItemDarkColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 	var NavbarItemDarkColorSchemeStatesProgress = "#07314D";
 	var NavbarItemDarkColorSchemeStatesDisabledOpacity = 0.3;
 	var NavbarItemSizePadding = "16px";
 	var NavbarItemSizeHeight = "48px";
+	var NavbarItemSizeHeightVertical = "56px";
 	var NavbarBrandSizePadding = "12px";
 	var NavbarBrandSizeMarginRight = "24px";
 	var NavbarBrandFontTitle = "title";
@@ -1406,17 +1409,20 @@
 	exports.NavbarDarkColorSchemeBackground = NavbarDarkColorSchemeBackground;
 	exports.NavbarDarkColorSchemeDividerBackground = NavbarDarkColorSchemeDividerBackground;
 	exports.NavbarFontTitle = NavbarFontTitle;
+	exports.NavbarItemDarkColorSchemeIcon = NavbarItemDarkColorSchemeIcon;
 	exports.NavbarItemDarkColorSchemeStatesActive = NavbarItemDarkColorSchemeStatesActive;
 	exports.NavbarItemDarkColorSchemeStatesDisabledOpacity = NavbarItemDarkColorSchemeStatesDisabledOpacity;
 	exports.NavbarItemDarkColorSchemeStatesHover = NavbarItemDarkColorSchemeStatesHover;
 	exports.NavbarItemDarkColorSchemeStatesProgress = NavbarItemDarkColorSchemeStatesProgress;
 	exports.NavbarItemDarkColorSchemeText = NavbarItemDarkColorSchemeText;
+	exports.NavbarItemLightColorSchemeIcon = NavbarItemLightColorSchemeIcon;
 	exports.NavbarItemLightColorSchemeStatesActive = NavbarItemLightColorSchemeStatesActive;
 	exports.NavbarItemLightColorSchemeStatesDisabledOpacity = NavbarItemLightColorSchemeStatesDisabledOpacity;
 	exports.NavbarItemLightColorSchemeStatesHover = NavbarItemLightColorSchemeStatesHover;
 	exports.NavbarItemLightColorSchemeStatesProgress = NavbarItemLightColorSchemeStatesProgress;
 	exports.NavbarItemLightColorSchemeText = NavbarItemLightColorSchemeText;
 	exports.NavbarItemSizeHeight = NavbarItemSizeHeight;
+	exports.NavbarItemSizeHeightVertical = NavbarItemSizeHeightVertical;
 	exports.NavbarItemSizePadding = NavbarItemSizePadding;
 	exports.NavbarLightColorSchemeBackground = NavbarLightColorSchemeBackground;
 	exports.NavbarLightColorSchemeDividerBackground = NavbarLightColorSchemeDividerBackground;
@@ -1863,8 +1869,8 @@
 	exports.TypographyTitleLineHeight = TypographyTitleLineHeight;
 	exports.TypographyTitleTextTransform = TypographyTitleTextTransform;
 	exports.VerticalNavbarSizeIconMargin = VerticalNavbarSizeIconMargin;
-	exports.VerticalNavbarSizeStatesClosedWidth = VerticalNavbarSizeStatesClosedWidth;
-	exports.VerticalNavbarSizeStatesOpenedWidth = VerticalNavbarSizeStatesOpenedWidth;
+	exports.VerticalNavbarSizeStatesCollapsedWidth = VerticalNavbarSizeStatesCollapsedWidth;
+	exports.VerticalNavbarSizeStatesExpandedWidth = VerticalNavbarSizeStatesExpandedWidth;
 
 	Object.defineProperty(exports, '__esModule', { value: true });
 

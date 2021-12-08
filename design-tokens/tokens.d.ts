@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 28 Oct 2021 12:33:10 GMT
+ * Generated on Tue, 23 Nov 2021 14:04:36 GMT
  */
 export declare const LightColorSchemePrimaryDefault = "#338FCC";
 export declare const LightColorSchemePrimaryPalette: {
@@ -7379,23 +7379,26 @@ export declare const NavbarLightColorSchemeBackground = "#114E77";
 export declare const NavbarLightColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
 export declare const NavbarDarkColorSchemeBackground = "#114E77";
 export declare const NavbarDarkColorSchemeDividerBackground = "rgba(255, 255, 255, 0.3)";
-export declare const NavbarSizeIconMargin = "4px";
+export declare const NavbarSizeIconMargin = "6px";
 export declare const NavbarFontTitle = "body";
-export declare const VerticalNavbarSizeStatesOpenedWidth = "240px";
-export declare const VerticalNavbarSizeStatesClosedWidth = "48px";
-export declare const VerticalNavbarSizeIconMargin = "10px";
+export declare const VerticalNavbarSizeStatesExpandedWidth = "240px";
+export declare const VerticalNavbarSizeStatesCollapsedWidth = "56px";
+export declare const VerticalNavbarSizeIconMargin = "16px";
 export declare const NavbarItemLightColorSchemeText = "#D8EAF7";
-export declare const NavbarItemLightColorSchemeStatesActive = "#206EA2";
-export declare const NavbarItemLightColorSchemeStatesHover = "#206EA2";
+export declare const NavbarItemLightColorSchemeIcon = "#D8EAF7";
+export declare const NavbarItemLightColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
+export declare const NavbarItemLightColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 export declare const NavbarItemLightColorSchemeStatesProgress = "#07314D";
 export declare const NavbarItemLightColorSchemeStatesDisabledOpacity = 0.3;
 export declare const NavbarItemDarkColorSchemeText = "#D8EAF7";
-export declare const NavbarItemDarkColorSchemeStatesActive = "#114E77";
-export declare const NavbarItemDarkColorSchemeStatesHover = "#114E77";
+export declare const NavbarItemDarkColorSchemeIcon = "#D8EAF7";
+export declare const NavbarItemDarkColorSchemeStatesActive = "rgba(0, 0, 0, 0.1)";
+export declare const NavbarItemDarkColorSchemeStatesHover = "rgba(255, 255, 255, 0.1)";
 export declare const NavbarItemDarkColorSchemeStatesProgress = "#07314D";
 export declare const NavbarItemDarkColorSchemeStatesDisabledOpacity = 0.3;
 export declare const NavbarItemSizePadding = "16px";
 export declare const NavbarItemSizeHeight = "48px";
+export declare const NavbarItemSizeHeightVertical = "56px";
 export declare const NavbarBrandSizePadding = "12px";
 export declare const NavbarBrandSizeMarginRight = "24px";
 export declare const NavbarBrandFontTitle = "title";
