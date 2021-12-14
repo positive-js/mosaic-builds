@@ -1890,6 +1890,9 @@
                     _this._value = null;
                     return setTimeout(function () { return _this.control.updateValueAndValidity(); });
                 }
+                if (Object.values(date).some(isNaN)) {
+                    return;
+                }
                 var newTimeObj = _this.getValidDateOrNull(_this.dateAdapter.createDateTime(date.year, date.month - 1, date.date, date.hours, date.minutes, date.seconds, date.milliseconds));
                 _this.lastValueValid = !!newTimeObj;
                 _this.setViewValue(_this.getTimeStringFromDate(newTimeObj, _this.dateFormats.dateInput), true);
@@ -2235,6 +2238,13 @@
             var _a, _b, _c;
             $event.preventDefault();
             var rawValue = $event.clipboardData.getData('text');
+            if (rawValue.match(/^\d\D/)) {
+                rawValue = "0" + rawValue;
+            }
+            rawValue.replace(/[^A-Za-z0-9]+/g, this.separator);
+            if (/[a-z]/gi.test(rawValue)) {
+                this.incorrectInput.emit();
+            }
             var match = rawValue.match(/^(?<first>\d+)\W(?<second>\d+)\W(?<third>\d+)$/);
             if (!((_a = match === null || match === void 0 ? void 0 : match.groups) === null || _a === void 0 ? void 0 : _a.first) || !((_b = match === null || match === void 0 ? void 0 : match.groups) === null || _b === void 0 ? void 0 : _b.second) || !((_c = match === null || match === void 0 ? void 0 : match.groups) === null || _c === void 0 ? void 0 : _c.third)) {
                 this.setViewValue(rawValue);
