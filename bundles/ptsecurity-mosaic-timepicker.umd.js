@@ -353,6 +353,7 @@
         };
         McTimepicker.prototype.onBlur = function () {
             this.focusChanged(false);
+            this.setViewValue(this.formatUserPaste(this.viewValue));
             this.onInput();
         };
         McTimepicker.prototype.onPaste = function ($event) {

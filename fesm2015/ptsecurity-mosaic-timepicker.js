@@ -270,6 +270,7 @@ class McTimepicker {
     }
     onBlur() {
         this.focusChanged(false);
+        this.setViewValue(this.formatUserPaste(this.viewValue));
         this.onInput();
     }
     onPaste($event) {
