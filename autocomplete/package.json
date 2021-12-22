@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-autocomplete.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-autocomplete.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-autocomplete.js",
-  "esm2015": "../esm2015/autocomplete/ptsecurity-mosaic-autocomplete.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-autocomplete.js",
+  "module": "../fesm2015/ptsecurity-mosaic-autocomplete.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-autocomplete.mjs",
+  "esm2020": "../esm2020/autocomplete/ptsecurity-mosaic-autocomplete.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-autocomplete.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-autocomplete.mjs",
   "typings": "ptsecurity-mosaic-autocomplete.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/autocomplete"

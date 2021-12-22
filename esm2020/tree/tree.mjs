@@ -1,0 +1,15 @@
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { McTreeBase } from './tree-base';
+import * as i0 from "@angular/core";
+import * as i1 from "./outlet";
+export class McTree extends McTreeBase {
+}
+/** @nocollapse */ /** @nocollapse */ McTree.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTree, deps: null, target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McTree.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.0", type: McTree, selector: "mc-tree", host: { classAttribute: "mc-tree" }, exportAs: ["mcTree"], usesInheritance: true, ngImport: i0, template: `<ng-container mcTreeNodeOutlet></ng-container>`, isInline: true, styles: [".mc-tree{display:block}\n"], directives: [{ type: i1.McTreeNodeOutlet, selector: "[mcTreeNodeOutlet]" }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTree, decorators: [{
+            type: Component,
+            args: [{ selector: 'mc-tree', exportAs: 'mcTree', template: `<ng-container mcTreeNodeOutlet></ng-container>`, host: {
+                        class: 'mc-tree'
+                    }, encapsulation: ViewEncapsulation.None, changeDetection: ChangeDetectionStrategy.OnPush, styles: [".mc-tree{display:block}\n"] }]
+        }] });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJlZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3BhY2thZ2VzL21vc2FpYy90cmVlL3RyZWUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUNILHVCQUF1QixFQUN2QixTQUFTLEVBQ1QsaUJBQWlCLEVBQ3BCLE1BQU0sZUFBZSxDQUFDO0FBRXZCLE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSxhQUFhLENBQUM7OztBQWN6QyxNQUFNLE9BQU8sTUFBTyxTQUFRLFVBQWU7O3lJQUE5QixNQUFNOzZIQUFOLE1BQU0saUlBUkwsZ0RBQWdEOzJGQVFqRCxNQUFNO2tCQVhsQixTQUFTOytCQUNJLFNBQVMsWUFDVCxRQUFRLFlBQ1IsZ0RBQWdELFFBRXBEO3dCQUNGLEtBQUssRUFBRSxTQUFTO3FCQUNuQixpQkFDYyxpQkFBaUIsQ0FBQyxJQUFJLG1CQUNwQix1QkFBdUIsQ0FBQyxNQUFNIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtcbiAgICBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneSxcbiAgICBDb21wb25lbnQsXG4gICAgVmlld0VuY2Fwc3VsYXRpb25cbn0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbmltcG9ydCB7IE1jVHJlZUJhc2UgfSBmcm9tICcuL3RyZWUtYmFzZSc7XG5cblxuQENvbXBvbmVudCh7XG4gICAgc2VsZWN0b3I6ICdtYy10cmVlJyxcbiAgICBleHBvcnRBczogJ21jVHJlZScsXG4gICAgdGVtcGxhdGU6IGA8bmctY29udGFpbmVyIG1jVHJlZU5vZGVPdXRsZXQ+PC9uZy1jb250YWluZXI+YCxcbiAgICBzdHlsZVVybHM6IFsnLi90cmVlLnNjc3MnXSxcbiAgICBob3N0OiB7XG4gICAgICAgIGNsYXNzOiAnbWMtdHJlZSdcbiAgICB9LFxuICAgIGVuY2Fwc3VsYXRpb246IFZpZXdFbmNhcHN1bGF0aW9uLk5vbmUsXG4gICAgY2hhbmdlRGV0ZWN0aW9uOiBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneS5PblB1c2hcbn0pXG5leHBvcnQgY2xhc3MgTWNUcmVlIGV4dGVuZHMgTWNUcmVlQmFzZTxhbnk+IHt9XG4iXX0=

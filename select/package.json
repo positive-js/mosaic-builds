@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-select.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-select.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-select.js",
-  "esm2015": "../esm2015/select/ptsecurity-mosaic-select.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-select.js",
+  "module": "../fesm2015/ptsecurity-mosaic-select.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-select.mjs",
+  "esm2020": "../esm2020/select/ptsecurity-mosaic-select.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-select.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-select.mjs",
   "typings": "ptsecurity-mosaic-select.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/select"

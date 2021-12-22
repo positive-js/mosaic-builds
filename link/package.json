@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-link.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-link.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-link.js",
-  "esm2015": "../esm2015/link/ptsecurity-mosaic-link.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-link.js",
+  "module": "../fesm2015/ptsecurity-mosaic-link.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-link.mjs",
+  "esm2020": "../esm2020/link/ptsecurity-mosaic-link.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-link.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-link.mjs",
   "typings": "ptsecurity-mosaic-link.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/link"

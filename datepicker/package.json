@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-datepicker.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-datepicker.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-datepicker.js",
-  "esm2015": "../esm2015/datepicker/ptsecurity-mosaic-datepicker.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-datepicker.js",
+  "module": "../fesm2015/ptsecurity-mosaic-datepicker.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-datepicker.mjs",
+  "esm2020": "../esm2020/datepicker/ptsecurity-mosaic-datepicker.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-datepicker.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-datepicker.mjs",
   "typings": "ptsecurity-mosaic-datepicker.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/datepicker"

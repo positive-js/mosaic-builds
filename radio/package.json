@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-radio.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-radio.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-radio.js",
-  "esm2015": "../esm2015/radio/ptsecurity-mosaic-radio.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-radio.js",
+  "module": "../fesm2015/ptsecurity-mosaic-radio.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-radio.mjs",
+  "esm2020": "../esm2020/radio/ptsecurity-mosaic-radio.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-radio.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-radio.mjs",
   "typings": "ptsecurity-mosaic-radio.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/radio"

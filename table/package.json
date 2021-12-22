@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-table.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-table.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-table.js",
-  "esm2015": "../esm2015/table/ptsecurity-mosaic-table.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-table.js",
+  "module": "../fesm2015/ptsecurity-mosaic-table.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-table.mjs",
+  "esm2020": "../esm2020/table/ptsecurity-mosaic-table.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-table.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-table.mjs",
   "typings": "ptsecurity-mosaic-table.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/table"

@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-textarea.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-textarea.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-textarea.js",
-  "esm2015": "../esm2015/textarea/ptsecurity-mosaic-textarea.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-textarea.js",
+  "module": "../fesm2015/ptsecurity-mosaic-textarea.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-textarea.mjs",
+  "esm2020": "../esm2020/textarea/ptsecurity-mosaic-textarea.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-textarea.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-textarea.mjs",
   "typings": "ptsecurity-mosaic-textarea.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/textarea"

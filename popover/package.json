@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-popover.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-popover.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-popover.js",
-  "esm2015": "../esm2015/popover/ptsecurity-mosaic-popover.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-popover.js",
+  "module": "../fesm2015/ptsecurity-mosaic-popover.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-popover.mjs",
+  "esm2020": "../esm2020/popover/ptsecurity-mosaic-popover.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-popover.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-popover.mjs",
   "typings": "ptsecurity-mosaic-popover.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/popover"

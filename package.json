@@ -1,6 +1,6 @@
 {
     "name": "@ptsecurity/mosaic",
-    "version": "12.2.1-ca7fbbce",
+    "version": "12.2.1-439f1b66",
     "description": "Mosaic",
     "repository": {
         "type": "git",
@@ -17,14 +17,14 @@
     },
     "homepage": "https://github.com/positive-js/mosaic#readme",
     "peerDependencies": {
-        "@angular/animations": "^12.2.5",
-        "@angular/cdk": "^11.2.2",
-        "@angular/core": "^12.2.5",
-        "@angular/common": "^12.2.5",
-        "@angular/forms": "^12.2.5",
-        "@ptsecurity/cdk": "^12.2.1-ca7fbbce",
-        "@ptsecurity/mosaic-moment-adapter": "^12.2.1-ca7fbbce",
-        "@ptsecurity/mosaic-luxon-adapter": "^12.2.1-ca7fbbce",
+        "@angular/animations": "^13.1.0",
+        "@angular/cdk": "^13.1.0",
+        "@angular/core": "^13.1.0",
+        "@angular/common": "^13.1.0",
+        "@angular/forms": "^13.1.0",
+        "@ptsecurity/cdk": "^12.2.1-439f1b66",
+        "@ptsecurity/mosaic-moment-adapter": "^12.2.1-439f1b66",
+        "@ptsecurity/mosaic-luxon-adapter": "^12.2.1-439f1b66",
         "@ptsecurity/mosaic-icons": "^5.0.0"
     },
     "dependencies": {
@@ -37,11 +37,296 @@
             "@ptsecurity/mosaic"
         ]
     },
-    "main": "bundles/ptsecurity-mosaic.umd.js",
-    "module": "fesm2015/ptsecurity-mosaic.js",
-    "es2015": "fesm2015/ptsecurity-mosaic.js",
-    "esm2015": "esm2015/ptsecurity-mosaic.js",
-    "fesm2015": "fesm2015/ptsecurity-mosaic.js",
+    "module": "fesm2015/ptsecurity-mosaic.mjs",
+    "es2020": "fesm2020/ptsecurity-mosaic.mjs",
+    "esm2020": "esm2020/ptsecurity-mosaic.mjs",
+    "fesm2020": "fesm2020/ptsecurity-mosaic.mjs",
+    "fesm2015": "fesm2015/ptsecurity-mosaic.mjs",
     "typings": "ptsecurity-mosaic.d.ts",
+    "exports": {
+        "./package.json": {
+            "default": "./package.json"
+        },
+        ".": {
+            "types": "./ptsecurity-mosaic.d.ts",
+            "esm2020": "./esm2020/ptsecurity-mosaic.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic.mjs"
+        },
+        "./autocomplete": {
+            "types": "./autocomplete/ptsecurity-mosaic-autocomplete.d.ts",
+            "esm2020": "./esm2020/autocomplete/ptsecurity-mosaic-autocomplete.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-autocomplete.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-autocomplete.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-autocomplete.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-autocomplete.mjs"
+        },
+        "./button-toggle": {
+            "types": "./button-toggle/ptsecurity-mosaic-button-toggle.d.ts",
+            "esm2020": "./esm2020/button-toggle/ptsecurity-mosaic-button-toggle.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-button-toggle.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-button-toggle.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-button-toggle.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-button-toggle.mjs"
+        },
+        "./button": {
+            "types": "./button/ptsecurity-mosaic-button.d.ts",
+            "esm2020": "./esm2020/button/ptsecurity-mosaic-button.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-button.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-button.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-button.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-button.mjs"
+        },
+        "./card": {
+            "types": "./card/ptsecurity-mosaic-card.d.ts",
+            "esm2020": "./esm2020/card/ptsecurity-mosaic-card.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-card.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-card.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-card.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-card.mjs"
+        },
+        "./checkbox": {
+            "types": "./checkbox/ptsecurity-mosaic-checkbox.d.ts",
+            "esm2020": "./esm2020/checkbox/ptsecurity-mosaic-checkbox.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-checkbox.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-checkbox.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-checkbox.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-checkbox.mjs"
+        },
+        "./core": {
+            "types": "./core/ptsecurity-mosaic-core.d.ts",
+            "esm2020": "./esm2020/core/ptsecurity-mosaic-core.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-core.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-core.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-core.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-core.mjs"
+        },
+        "./datepicker": {
+            "types": "./datepicker/ptsecurity-mosaic-datepicker.d.ts",
+            "esm2020": "./esm2020/datepicker/ptsecurity-mosaic-datepicker.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-datepicker.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-datepicker.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-datepicker.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-datepicker.mjs"
+        },
+        "./design-tokens": {
+            "types": "./design-tokens/ptsecurity-mosaic-design-tokens.d.ts",
+            "esm2020": "./esm2020/design-tokens/ptsecurity-mosaic-design-tokens.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-design-tokens.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-design-tokens.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-design-tokens.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-design-tokens.mjs"
+        },
+        "./divider": {
+            "types": "./divider/ptsecurity-mosaic-divider.d.ts",
+            "esm2020": "./esm2020/divider/ptsecurity-mosaic-divider.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-divider.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-divider.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-divider.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-divider.mjs"
+        },
+        "./dropdown": {
+            "types": "./dropdown/ptsecurity-mosaic-dropdown.d.ts",
+            "esm2020": "./esm2020/dropdown/ptsecurity-mosaic-dropdown.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-dropdown.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-dropdown.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-dropdown.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-dropdown.mjs"
+        },
+        "./form-field": {
+            "types": "./form-field/ptsecurity-mosaic-form-field.d.ts",
+            "esm2020": "./esm2020/form-field/ptsecurity-mosaic-form-field.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-form-field.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-form-field.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-form-field.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-form-field.mjs"
+        },
+        "./icon": {
+            "types": "./icon/ptsecurity-mosaic-icon.d.ts",
+            "esm2020": "./esm2020/icon/ptsecurity-mosaic-icon.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-icon.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-icon.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-icon.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-icon.mjs"
+        },
+        "./input": {
+            "types": "./input/ptsecurity-mosaic-input.d.ts",
+            "esm2020": "./esm2020/input/ptsecurity-mosaic-input.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-input.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-input.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-input.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-input.mjs"
+        },
+        "./link": {
+            "types": "./link/ptsecurity-mosaic-link.d.ts",
+            "esm2020": "./esm2020/link/ptsecurity-mosaic-link.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-link.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-link.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-link.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-link.mjs"
+        },
+        "./list": {
+            "types": "./list/ptsecurity-mosaic-list.d.ts",
+            "esm2020": "./esm2020/list/ptsecurity-mosaic-list.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-list.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-list.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-list.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-list.mjs"
+        },
+        "./modal": {
+            "types": "./modal/ptsecurity-mosaic-modal.d.ts",
+            "esm2020": "./esm2020/modal/ptsecurity-mosaic-modal.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-modal.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-modal.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-modal.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-modal.mjs"
+        },
+        "./navbar": {
+            "types": "./navbar/ptsecurity-mosaic-navbar.d.ts",
+            "esm2020": "./esm2020/navbar/ptsecurity-mosaic-navbar.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-navbar.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-navbar.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-navbar.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-navbar.mjs"
+        },
+        "./popover": {
+            "types": "./popover/ptsecurity-mosaic-popover.d.ts",
+            "esm2020": "./esm2020/popover/ptsecurity-mosaic-popover.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-popover.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-popover.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-popover.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-popover.mjs"
+        },
+        "./progress-bar": {
+            "types": "./progress-bar/ptsecurity-mosaic-progress-bar.d.ts",
+            "esm2020": "./esm2020/progress-bar/ptsecurity-mosaic-progress-bar.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-progress-bar.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-progress-bar.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-progress-bar.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-progress-bar.mjs"
+        },
+        "./progress-spinner": {
+            "types": "./progress-spinner/ptsecurity-mosaic-progress-spinner.d.ts",
+            "esm2020": "./esm2020/progress-spinner/ptsecurity-mosaic-progress-spinner.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-progress-spinner.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-progress-spinner.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-progress-spinner.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-progress-spinner.mjs"
+        },
+        "./radio": {
+            "types": "./radio/ptsecurity-mosaic-radio.d.ts",
+            "esm2020": "./esm2020/radio/ptsecurity-mosaic-radio.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-radio.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-radio.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-radio.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-radio.mjs"
+        },
+        "./select": {
+            "types": "./select/ptsecurity-mosaic-select.d.ts",
+            "esm2020": "./esm2020/select/ptsecurity-mosaic-select.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-select.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-select.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-select.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-select.mjs"
+        },
+        "./sidebar": {
+            "types": "./sidebar/ptsecurity-mosaic-sidebar.d.ts",
+            "esm2020": "./esm2020/sidebar/ptsecurity-mosaic-sidebar.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-sidebar.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-sidebar.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-sidebar.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-sidebar.mjs"
+        },
+        "./sidepanel": {
+            "types": "./sidepanel/ptsecurity-mosaic-sidepanel.d.ts",
+            "esm2020": "./esm2020/sidepanel/ptsecurity-mosaic-sidepanel.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-sidepanel.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-sidepanel.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-sidepanel.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-sidepanel.mjs"
+        },
+        "./splitter": {
+            "types": "./splitter/ptsecurity-mosaic-splitter.d.ts",
+            "esm2020": "./esm2020/splitter/ptsecurity-mosaic-splitter.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-splitter.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-splitter.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-splitter.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-splitter.mjs"
+        },
+        "./table": {
+            "types": "./table/ptsecurity-mosaic-table.d.ts",
+            "esm2020": "./esm2020/table/ptsecurity-mosaic-table.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-table.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-table.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-table.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-table.mjs"
+        },
+        "./tabs": {
+            "types": "./tabs/ptsecurity-mosaic-tabs.d.ts",
+            "esm2020": "./esm2020/tabs/ptsecurity-mosaic-tabs.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-tabs.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-tabs.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-tabs.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-tabs.mjs"
+        },
+        "./tags": {
+            "types": "./tags/ptsecurity-mosaic-tags.d.ts",
+            "esm2020": "./esm2020/tags/ptsecurity-mosaic-tags.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-tags.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-tags.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-tags.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-tags.mjs"
+        },
+        "./textarea": {
+            "types": "./textarea/ptsecurity-mosaic-textarea.d.ts",
+            "esm2020": "./esm2020/textarea/ptsecurity-mosaic-textarea.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-textarea.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-textarea.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-textarea.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-textarea.mjs"
+        },
+        "./timepicker": {
+            "types": "./timepicker/ptsecurity-mosaic-timepicker.d.ts",
+            "esm2020": "./esm2020/timepicker/ptsecurity-mosaic-timepicker.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-timepicker.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-timepicker.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-timepicker.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-timepicker.mjs"
+        },
+        "./toggle": {
+            "types": "./toggle/ptsecurity-mosaic-toggle.d.ts",
+            "esm2020": "./esm2020/toggle/ptsecurity-mosaic-toggle.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-toggle.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-toggle.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-toggle.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-toggle.mjs"
+        },
+        "./tooltip": {
+            "types": "./tooltip/ptsecurity-mosaic-tooltip.d.ts",
+            "esm2020": "./esm2020/tooltip/ptsecurity-mosaic-tooltip.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-tooltip.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-tooltip.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-tooltip.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-tooltip.mjs"
+        },
+        "./tree-select": {
+            "types": "./tree-select/ptsecurity-mosaic-tree-select.d.ts",
+            "esm2020": "./esm2020/tree-select/ptsecurity-mosaic-tree-select.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-tree-select.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-tree-select.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-tree-select.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-tree-select.mjs"
+        },
+        "./tree": {
+            "types": "./tree/ptsecurity-mosaic-tree.d.ts",
+            "esm2020": "./esm2020/tree/ptsecurity-mosaic-tree.mjs",
+            "es2020": "./fesm2020/ptsecurity-mosaic-tree.mjs",
+            "es2015": "./fesm2015/ptsecurity-mosaic-tree.mjs",
+            "node": "./fesm2015/ptsecurity-mosaic-tree.mjs",
+            "default": "./fesm2020/ptsecurity-mosaic-tree.mjs"
+        }
+    },
     "sideEffects": false
 }

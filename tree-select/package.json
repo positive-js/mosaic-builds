@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-tree-select.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-tree-select.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-tree-select.js",
-  "esm2015": "../esm2015/tree-select/ptsecurity-mosaic-tree-select.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-tree-select.js",
+  "module": "../fesm2015/ptsecurity-mosaic-tree-select.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-tree-select.mjs",
+  "esm2020": "../esm2020/tree-select/ptsecurity-mosaic-tree-select.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-tree-select.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-tree-select.mjs",
   "typings": "ptsecurity-mosaic-tree-select.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/tree-select"

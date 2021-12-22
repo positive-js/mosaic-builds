@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-timepicker.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-timepicker.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-timepicker.js",
-  "esm2015": "../esm2015/timepicker/ptsecurity-mosaic-timepicker.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-timepicker.js",
+  "module": "../fesm2015/ptsecurity-mosaic-timepicker.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-timepicker.mjs",
+  "esm2020": "../esm2020/timepicker/ptsecurity-mosaic-timepicker.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-timepicker.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-timepicker.mjs",
   "typings": "ptsecurity-mosaic-timepicker.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/timepicker"

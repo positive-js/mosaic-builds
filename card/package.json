@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-card.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-card.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-card.js",
-  "esm2015": "../esm2015/card/ptsecurity-mosaic-card.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-card.js",
+  "module": "../fesm2015/ptsecurity-mosaic-card.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-card.mjs",
+  "esm2020": "../esm2020/card/ptsecurity-mosaic-card.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-card.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-card.mjs",
   "typings": "ptsecurity-mosaic-card.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/card"

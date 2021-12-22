@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-icon.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-icon.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-icon.js",
-  "esm2015": "../esm2015/icon/ptsecurity-mosaic-icon.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-icon.js",
+  "module": "../fesm2015/ptsecurity-mosaic-icon.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-icon.mjs",
+  "esm2020": "../esm2020/icon/ptsecurity-mosaic-icon.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-icon.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-icon.mjs",
   "typings": "ptsecurity-mosaic-icon.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/icon"

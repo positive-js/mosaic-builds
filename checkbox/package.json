@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-checkbox.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-checkbox.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-checkbox.js",
-  "esm2015": "../esm2015/checkbox/ptsecurity-mosaic-checkbox.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-checkbox.js",
+  "module": "../fesm2015/ptsecurity-mosaic-checkbox.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-checkbox.mjs",
+  "esm2020": "../esm2020/checkbox/ptsecurity-mosaic-checkbox.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-checkbox.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-checkbox.mjs",
   "typings": "ptsecurity-mosaic-checkbox.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/checkbox"

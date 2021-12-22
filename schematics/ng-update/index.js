@@ -10,13 +10,13 @@ const mosaicMigrations = [
     secondary_entry_points_migration_1.SecondaryEntryPointsMigration
 ];
 function updateToV9() {
-    return schematics_1.createMigrationSchematicRule(schematics_1.TargetVersion.V9, mosaicMigrations, upgrade_data_1.mosaicUpgradeData, onMigrationComplete);
+    return (0, schematics_1.createMigrationSchematicRule)(schematics_1.TargetVersion.V9, mosaicMigrations, upgrade_data_1.mosaicUpgradeData, onMigrationComplete);
 }
 exports.updateToV9 = updateToV9;
 function onMigrationComplete(context, targetVersion, hasFailures) {
-    context.logger.info(chalk_1.green(`Updated Mosaic to ${targetVersion}`));
+    context.logger.info((0, chalk_1.green)(`Updated Mosaic to ${targetVersion}`));
     if (hasFailures) {
-        context.logger.warn(chalk_1.yellow(' Some issues were detected but could not be fixed automatically. Please check the ' +
+        context.logger.warn((0, chalk_1.yellow)(' Some issues were detected but could not be fixed automatically. Please check the ' +
             'output above and fix these issues manually.'));
     }
 }

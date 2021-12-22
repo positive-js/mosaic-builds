@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-navbar.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-navbar.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-navbar.js",
-  "esm2015": "../esm2015/navbar/ptsecurity-mosaic-navbar.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-navbar.js",
+  "module": "../fesm2015/ptsecurity-mosaic-navbar.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-navbar.mjs",
+  "esm2020": "../esm2020/navbar/ptsecurity-mosaic-navbar.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-navbar.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-navbar.mjs",
   "typings": "ptsecurity-mosaic-navbar.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/navbar"

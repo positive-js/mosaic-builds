@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-tags.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-tags.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-tags.js",
-  "esm2015": "../esm2015/tags/ptsecurity-mosaic-tags.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-tags.js",
+  "module": "../fesm2015/ptsecurity-mosaic-tags.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-tags.mjs",
+  "esm2020": "../esm2020/tags/ptsecurity-mosaic-tags.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-tags.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-tags.mjs",
   "typings": "ptsecurity-mosaic-tags.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/tags"

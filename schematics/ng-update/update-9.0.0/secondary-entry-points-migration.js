@@ -124,7 +124,6 @@ function getDeclarationSymbolOfNode(node, checker) {
     return symbol;
 }
 function resolveModuleName(node, typeChecker) {
-    var _a;
     // Get the symbol for the named binding element. Note that we cannot determine the
     // value declaration based on the type of the element as types are not necessarily
     // specific to a given secondary entry-point (e.g. exports with the type of "string")
@@ -140,7 +139,7 @@ function resolveModuleName(node, typeChecker) {
     // The filename for the source file of the node that contains the
     // first declaration of the symbol. All symbol declarations must be
     // part of a defining node, so parent can be asserted to be defined.
-    const resolvedNode = symbol.valueDeclaration || ((_a = symbol.declarations) === null || _a === void 0 ? void 0 : _a[0]);
+    const resolvedNode = symbol.valueDeclaration || symbol.declarations?.[0];
     if (!resolvedNode) {
         return null;
     }

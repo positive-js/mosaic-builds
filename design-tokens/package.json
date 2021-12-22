@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-design-tokens.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-design-tokens.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-design-tokens.js",
-  "esm2015": "../esm2015/design-tokens/ptsecurity-mosaic-design-tokens.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-design-tokens.js",
+  "module": "../fesm2015/ptsecurity-mosaic-design-tokens.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-design-tokens.mjs",
+  "esm2020": "../esm2020/design-tokens/ptsecurity-mosaic-design-tokens.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-design-tokens.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-design-tokens.mjs",
   "typings": "ptsecurity-mosaic-design-tokens.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/design-tokens"

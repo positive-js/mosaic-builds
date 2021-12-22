@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-toggle.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-toggle.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-toggle.js",
-  "esm2015": "../esm2015/toggle/ptsecurity-mosaic-toggle.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-toggle.js",
+  "module": "../fesm2015/ptsecurity-mosaic-toggle.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-toggle.mjs",
+  "esm2020": "../esm2020/toggle/ptsecurity-mosaic-toggle.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-toggle.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-toggle.mjs",
   "typings": "ptsecurity-mosaic-toggle.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/toggle"

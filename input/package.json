@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-input.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-input.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-input.js",
-  "esm2015": "../esm2015/input/ptsecurity-mosaic-input.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-input.js",
+  "module": "../fesm2015/ptsecurity-mosaic-input.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-input.mjs",
+  "esm2020": "../esm2020/input/ptsecurity-mosaic-input.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-input.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-input.mjs",
   "typings": "ptsecurity-mosaic-input.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/input"

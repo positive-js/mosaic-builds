@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-sidebar.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-sidebar.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-sidebar.js",
-  "esm2015": "../esm2015/sidebar/ptsecurity-mosaic-sidebar.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-sidebar.js",
+  "module": "../fesm2015/ptsecurity-mosaic-sidebar.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-sidebar.mjs",
+  "esm2020": "../esm2020/sidebar/ptsecurity-mosaic-sidebar.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-sidebar.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-sidebar.mjs",
   "typings": "ptsecurity-mosaic-sidebar.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/sidebar"

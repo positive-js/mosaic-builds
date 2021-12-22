@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-progress-spinner.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-progress-spinner.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-progress-spinner.js",
-  "esm2015": "../esm2015/progress-spinner/ptsecurity-mosaic-progress-spinner.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-progress-spinner.js",
+  "module": "../fesm2015/ptsecurity-mosaic-progress-spinner.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-progress-spinner.mjs",
+  "esm2020": "../esm2020/progress-spinner/ptsecurity-mosaic-progress-spinner.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-progress-spinner.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-progress-spinner.mjs",
   "typings": "ptsecurity-mosaic-progress-spinner.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/progress-spinner"

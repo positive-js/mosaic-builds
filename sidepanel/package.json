@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-sidepanel.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-sidepanel.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-sidepanel.js",
-  "esm2015": "../esm2015/sidepanel/ptsecurity-mosaic-sidepanel.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-sidepanel.js",
+  "module": "../fesm2015/ptsecurity-mosaic-sidepanel.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-sidepanel.mjs",
+  "esm2020": "../esm2020/sidepanel/ptsecurity-mosaic-sidepanel.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-sidepanel.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-sidepanel.mjs",
   "typings": "ptsecurity-mosaic-sidepanel.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/sidepanel"

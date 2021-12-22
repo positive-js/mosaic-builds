@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-form-field.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-form-field.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-form-field.js",
-  "esm2015": "../esm2015/form-field/ptsecurity-mosaic-form-field.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-form-field.js",
+  "module": "../fesm2015/ptsecurity-mosaic-form-field.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-form-field.mjs",
+  "esm2020": "../esm2020/form-field/ptsecurity-mosaic-form-field.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-form-field.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-form-field.mjs",
   "typings": "ptsecurity-mosaic-form-field.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/form-field"

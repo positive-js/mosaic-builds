@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-core.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-core.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-core.js",
-  "esm2015": "../esm2015/core/ptsecurity-mosaic-core.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-core.js",
+  "module": "../fesm2015/ptsecurity-mosaic-core.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-core.mjs",
+  "esm2020": "../esm2020/core/ptsecurity-mosaic-core.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-core.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-core.mjs",
   "typings": "ptsecurity-mosaic-core.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/core"

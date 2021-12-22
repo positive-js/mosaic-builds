@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-modal.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-modal.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-modal.js",
-  "esm2015": "../esm2015/modal/ptsecurity-mosaic-modal.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-modal.js",
+  "module": "../fesm2015/ptsecurity-mosaic-modal.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-modal.mjs",
+  "esm2020": "../esm2020/modal/ptsecurity-mosaic-modal.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-modal.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-modal.mjs",
   "typings": "ptsecurity-mosaic-modal.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/modal"

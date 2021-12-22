@@ -11,6 +11,7 @@ exports.mosaicUpgradeData = {
     inputNames: data_1.inputNames,
     methodCallChecks: data_1.methodCallChecks,
     outputNames: data_1.outputNames,
-    propertyNames: data_1.propertyNames
+    propertyNames: data_1.propertyNames,
+    symbolRemoval: data_1.symbolRemoval
 };
 //# sourceMappingURL=upgrade-data.js.map

@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-tabs.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-tabs.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-tabs.js",
-  "esm2015": "../esm2015/tabs/ptsecurity-mosaic-tabs.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-tabs.js",
+  "module": "../fesm2015/ptsecurity-mosaic-tabs.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-tabs.mjs",
+  "esm2020": "../esm2020/tabs/ptsecurity-mosaic-tabs.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-tabs.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-tabs.mjs",
   "typings": "ptsecurity-mosaic-tabs.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/tabs"

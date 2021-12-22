@@ -1,9 +1,9 @@
 {
-  "main": "../bundles/ptsecurity-mosaic-dropdown.umd.js",
-  "module": "../fesm2015/ptsecurity-mosaic-dropdown.js",
-  "es2015": "../fesm2015/ptsecurity-mosaic-dropdown.js",
-  "esm2015": "../esm2015/dropdown/ptsecurity-mosaic-dropdown.js",
-  "fesm2015": "../fesm2015/ptsecurity-mosaic-dropdown.js",
+  "module": "../fesm2015/ptsecurity-mosaic-dropdown.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-dropdown.mjs",
+  "esm2020": "../esm2020/dropdown/ptsecurity-mosaic-dropdown.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-dropdown.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-dropdown.mjs",
   "typings": "ptsecurity-mosaic-dropdown.d.ts",
   "sideEffects": false,
   "name": "@ptsecurity/mosaic/dropdown"
