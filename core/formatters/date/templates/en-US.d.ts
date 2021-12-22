@@ -1,18 +1,18 @@
 export declare const enUS: {
     relativeTemplates: {
         short: {
-            SECONDS_AGO: string;
-            MINUTES_AGO: string;
-            TODAY: string;
-            YESTERDAY: string;
             BEFORE_YESTERDAY: string;
+            YESTERDAY: string;
+            TODAY: string;
+            TOMORROW: string;
+            AFTER_TOMORROW: string;
         };
         long: {
-            SECONDS_AGO: string;
-            MINUTES_AGO: string;
-            TODAY: string;
-            YESTERDAY: string;
             BEFORE_YESTERDAY: string;
+            YESTERDAY: string;
+            TODAY: string;
+            TOMORROW: string;
+            AFTER_TOMORROW: string;
         };
     };
     absoluteTemplates: {

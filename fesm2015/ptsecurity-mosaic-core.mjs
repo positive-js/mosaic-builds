@@ -293,18 +293,18 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImpor
 const enUS = {
     relativeTemplates: {
         short: {
-            SECONDS_AGO: 'Just now',
-            MINUTES_AGO: '{MINUTES_PASSED}{NBSP}min ago',
-            TODAY: '{TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}',
             YESTERDAY: 'Yesterday, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
+            TODAY: 'Today, {TIME}',
+            TOMORROW: 'Tomorrow, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
         },
         long: {
-            SECONDS_AGO: 'Just now',
-            MINUTES_AGO: '{MINUTES_PASSED, plural, =1{#{NBSP}minute} other{#{NBSP}minutes}} ago',
-            TODAY: '{TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}',
             YESTERDAY: 'Yesterday, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
+            TODAY: 'Today, {TIME}',
+            TOMORROW: 'Tomorrow, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
         }
     },
     absoluteTemplates: {
@@ -573,18 +573,18 @@ const enUS = {
 const ruRU = {
     relativeTemplates: {
         short: {
-            SECONDS_AGO: 'Только что',
-            MINUTES_AGO: '{MINUTES_PASSED}{NBSP}мин назад',
-            TODAY: '{TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}',
             YESTERDAY: 'Вчера, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}'
+            TODAY: 'Сегодня, {TIME}',
+            TOMORROW: 'Завтра, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}'
         },
         long: {
-            SECONDS_AGO: 'Только что',
-            MINUTES_AGO: '{MINUTES_PASSED, plural, =1{#{NBSP}минуту} =2{#{NBSP}минуты} other{#{NBSP}минут}} назад',
-            TODAY: '{TIME}',
+            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}',
             YESTERDAY: 'Вчера, {TIME}',
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}'
+            TODAY: 'Сегодня, {TIME}',
+            TOMORROW: 'Завтра, {TIME}',
+            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}'
         }
     },
     absoluteTemplates: {
@@ -871,29 +871,28 @@ class DateFormatter {
         if (!this.adapter.isDateInstance(date)) {
             throw new Error(this.invalidDateErrorText);
         }
-        const totalSeconds = Math.abs(this.adapter.diffNow(date, 'seconds'));
-        const totalMinutes = Math.floor(Math.abs(this.adapter.diffNow(date, 'minutes')));
-        const isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
+        const isBeforeYesterday = this.adapter.diffNow(date, 'days') < -2;
         const isYesterday = this.adapter.diffNow(date, 'days') <= -1 && this.adapter.diffNow(date, 'days') > -2;
+        const isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
+        const isTomorrow = this.adapter.diffNow(date, 'days') >= 1 && this.adapter.diffNow(date, 'days') < 2;
+        const isAfterTomorrow = this.adapter.diffNow(date, 'days') > 1;
         const templateVariables = Object.assign(Object.assign({}, this.adapter.config.variables), template.variables);
         const variables = this.compileVariables(date, templateVariables);
         let newTemplate;
-        if (totalSeconds <= 59) { // seconds ago
-            variables.SECONDS_PASSED = totalSeconds;
-            newTemplate = template.SECONDS_AGO;
-        }
-        else if (totalMinutes <= 59) { // minutes ago
-            variables.MINUTES_PASSED = totalMinutes;
-            newTemplate = template.MINUTES_AGO;
-        }
-        else if (isToday) {
-            newTemplate = template.TODAY;
+        if (isBeforeYesterday) {
+            newTemplate = template.BEFORE_YESTERDAY;
         }
         else if (isYesterday) {
             newTemplate = template.YESTERDAY;
         }
-        else { // before yesterday
-            newTemplate = template.BEFORE_YESTERDAY;
+        else if (isToday) {
+            newTemplate = template.TODAY;
+        }
+        else if (isTomorrow) {
+            newTemplate = template.TOMORROW;
+        }
+        else if (isAfterTomorrow) {
+            newTemplate = template.AFTER_TOMORROW;
         }
         return this.messageFormat.compile(newTemplate)(variables);
     }
