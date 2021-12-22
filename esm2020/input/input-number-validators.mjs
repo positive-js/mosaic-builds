@@ -31,9 +31,9 @@ export class MinValidator {
         this.validator = Validators.min(parseInt(this.min, 10));
     }
 }
-/** @nocollapse */ /** @nocollapse */ MinValidator.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: MinValidator, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ MinValidator.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.0", type: MinValidator, selector: "[min][formControlName],[min][formControl],[min][ngModel]", inputs: { min: "min" }, host: { properties: { "attr.min": "min ? min : null" } }, providers: [MIN_VALIDATOR], usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: MinValidator, decorators: [{
+/** @nocollapse */ /** @nocollapse */ MinValidator.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: MinValidator, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ MinValidator.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: MinValidator, selector: "[min][formControlName],[min][formControl],[min][ngModel]", inputs: { min: "min" }, host: { properties: { "attr.min": "min ? min : null" } }, providers: [MIN_VALIDATOR], usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: MinValidator, decorators: [{
             type: Directive,
             args: [{
                     selector: '[min][formControlName],[min][formControl],[min][ngModel]',
@@ -75,9 +75,9 @@ export class MaxValidator {
         this.validator = Validators.max(parseInt(this.max, 10));
     }
 }
-/** @nocollapse */ /** @nocollapse */ MaxValidator.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: MaxValidator, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ MaxValidator.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.0", type: MaxValidator, selector: "[max][formControlName],[max][formControl],[max][ngModel]", inputs: { max: "max" }, host: { properties: { "attr.max": "max ? max : null" } }, providers: [MAX_VALIDATOR], usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: MaxValidator, decorators: [{
+/** @nocollapse */ /** @nocollapse */ MaxValidator.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: MaxValidator, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ MaxValidator.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: MaxValidator, selector: "[max][formControlName],[max][formControl],[max][ngModel]", inputs: { max: "max" }, host: { properties: { "attr.max": "max ? max : null" } }, providers: [MAX_VALIDATOR], usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: MaxValidator, decorators: [{
             type: Directive,
             args: [{
                     selector: '[max][formControlName],[max][formControl],[max][ngModel]',

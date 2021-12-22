@@ -9,8 +9,8 @@ import { McDropdown } from './dropdown.component';
 import * as i0 from "@angular/core";
 export class McDropdownModule {
 }
-/** @nocollapse */ /** @nocollapse */ McDropdownModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McDropdownModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McDropdownModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McDropdownModule, declarations: [McDropdown,
+/** @nocollapse */ /** @nocollapse */ McDropdownModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDropdownModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McDropdownModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDropdownModule, declarations: [McDropdown,
         McDropdownItem,
         McDropdownTrigger,
         McDropdownContent], imports: [CommonModule,
@@ -19,12 +19,12 @@ export class McDropdownModule {
         McDropdownItem,
         McDropdownTrigger,
         McDropdownContent] });
-/** @nocollapse */ /** @nocollapse */ McDropdownModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McDropdownModule, providers: [MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER], imports: [[
+/** @nocollapse */ /** @nocollapse */ McDropdownModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDropdownModule, providers: [MC_DROPDOWN_SCROLL_STRATEGY_FACTORY_PROVIDER], imports: [[
             CommonModule,
             OverlayModule,
             McIconModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McDropdownModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDropdownModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

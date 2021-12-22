@@ -5,18 +5,18 @@ import { McGutterDirective, McSplitterAreaDirective, McSplitterComponent } from 
 import * as i0 from "@angular/core";
 export class McSplitterModule {
 }
-/** @nocollapse */ /** @nocollapse */ McSplitterModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McSplitterModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McSplitterModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McSplitterModule, declarations: [McGutterDirective,
+/** @nocollapse */ /** @nocollapse */ McSplitterModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McSplitterModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McSplitterModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McSplitterModule, declarations: [McGutterDirective,
         McSplitterAreaDirective,
         McSplitterComponent], imports: [CommonModule,
         McIconModule], exports: [McGutterDirective,
         McSplitterAreaDirective,
         McSplitterComponent] });
-/** @nocollapse */ /** @nocollapse */ McSplitterModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McSplitterModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McSplitterModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McSplitterModule, imports: [[
             CommonModule,
             McIconModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McSplitterModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McSplitterModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

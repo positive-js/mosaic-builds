@@ -6,18 +6,18 @@ import { McButton, McButtonCssStyler } from './button.component';
 import * as i0 from "@angular/core";
 export class McButtonModule {
 }
-/** @nocollapse */ /** @nocollapse */ McButtonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McButtonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McButtonModule, declarations: [McButton,
+/** @nocollapse */ /** @nocollapse */ McButtonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McButtonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McButtonModule, declarations: [McButton,
         McButtonCssStyler], imports: [CommonModule,
         A11yModule,
         PlatformModule], exports: [McButton,
         McButtonCssStyler] });
-/** @nocollapse */ /** @nocollapse */ McButtonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McButtonModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McButtonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McButtonModule, imports: [[
             CommonModule,
             A11yModule,
             PlatformModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McButtonModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McButtonModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

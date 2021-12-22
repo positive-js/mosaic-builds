@@ -6,16 +6,16 @@ import { McCard } from './card.component';
 import * as i0 from "@angular/core";
 export class McCardModule {
 }
-/** @nocollapse */ /** @nocollapse */ McCardModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McCardModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McCardModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McCardModule, declarations: [McCard], imports: [CommonModule,
+/** @nocollapse */ /** @nocollapse */ McCardModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McCardModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McCardModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McCardModule, declarations: [McCard], imports: [CommonModule,
         A11yModule,
         PlatformModule], exports: [McCard] });
-/** @nocollapse */ /** @nocollapse */ McCardModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McCardModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McCardModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McCardModule, imports: [[
             CommonModule,
             A11yModule,
             PlatformModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McCardModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McCardModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

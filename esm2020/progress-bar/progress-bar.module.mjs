@@ -5,14 +5,14 @@ import { McProgressBar } from './progress-bar.component';
 import * as i0 from "@angular/core";
 export class McProgressBarModule {
 }
-/** @nocollapse */ /** @nocollapse */ McProgressBarModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McProgressBarModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McProgressBarModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McProgressBarModule, declarations: [McProgressBar], imports: [CommonModule,
+/** @nocollapse */ /** @nocollapse */ McProgressBarModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McProgressBarModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McProgressBarModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McProgressBarModule, declarations: [McProgressBar], imports: [CommonModule,
         PlatformModule], exports: [McProgressBar] });
-/** @nocollapse */ /** @nocollapse */ McProgressBarModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McProgressBarModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McProgressBarModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McProgressBarModule, imports: [[
             CommonModule,
             PlatformModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McProgressBarModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McProgressBarModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

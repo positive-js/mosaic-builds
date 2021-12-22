@@ -179,9 +179,9 @@ export class McTreeBase {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McTreeBase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTreeBase, deps: [{ token: i0.IterableDiffers }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McTreeBase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.0", type: McTreeBase, inputs: { treeControl: "treeControl", trackBy: "trackBy", dataSource: "dataSource" }, queries: [{ propertyName: "nodeDefs", predicate: McTreeNodeDef }], viewQueries: [{ propertyName: "nodeOutlet", first: true, predicate: McTreeNodeOutlet, descendants: true, static: true }], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTreeBase, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTreeBase.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTreeBase, deps: [{ token: i0.IterableDiffers }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McTreeBase.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: McTreeBase, inputs: { treeControl: "treeControl", trackBy: "trackBy", dataSource: "dataSource" }, queries: [{ propertyName: "nodeDefs", predicate: McTreeNodeDef }], viewQueries: [{ propertyName: "nodeOutlet", first: true, predicate: McTreeNodeOutlet, descendants: true, static: true }], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTreeBase, decorators: [{
             type: Directive
         }], ctorParameters: function () { return [{ type: i0.IterableDiffers }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { treeControl: [{
                 type: Input
@@ -228,9 +228,9 @@ export class McTreeNode {
  * in `McTree` and set the data to it.
  */
 McTreeNode.mostRecentTreeNode = null;
-/** @nocollapse */ /** @nocollapse */ McTreeNode.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTreeNode, deps: [{ token: i0.ElementRef }, { token: forwardRef(() => McTreeBase) }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McTreeNode.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.0", type: McTreeNode, selector: "mc-tree-node", exportAs: ["mcTreeNode"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTreeNode, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTreeNode.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTreeNode, deps: [{ token: i0.ElementRef }, { token: forwardRef(() => McTreeBase) }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McTreeNode.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: McTreeNode, selector: "mc-tree-node", exportAs: ["mcTreeNode"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTreeNode, decorators: [{
             type: Directive,
             args: [{
                     selector: 'mc-tree-node',

@@ -4,10 +4,10 @@ import { McHighlightPipe } from './highlight.pipe';
 import * as i0 from "@angular/core";
 export class McHighlightModule {
 }
-/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McHighlightModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McHighlightModule, declarations: [McHighlightPipe], imports: [CommonModule], exports: [McHighlightPipe] });
-/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McHighlightModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McHighlightModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McHighlightModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McHighlightModule, declarations: [McHighlightPipe], imports: [CommonModule], exports: [McHighlightPipe] });
+/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McHighlightModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McHighlightModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],

@@ -2,9 +2,9 @@ import { Directive } from '@angular/core';
 import * as i0 from "@angular/core";
 export class McTable {
 }
-/** @nocollapse */ /** @nocollapse */ McTable.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTable, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McTable.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.0", type: McTable, selector: "table[mc-table]", host: { classAttribute: "mc-table" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTable, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTable.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTable, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McTable.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: McTable, selector: "table[mc-table]", host: { classAttribute: "mc-table" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTable, decorators: [{
             type: Directive,
             args: [{
                     selector: 'table[mc-table]',

@@ -8,9 +8,9 @@ export class McHighlightPipe {
         return value.replace(new RegExp(`(${args})`, 'gi'), '<mark class="mc-highlight">$1</mark>');
     }
 }
-/** @nocollapse */ /** @nocollapse */ McHighlightPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McHighlightPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-/** @nocollapse */ /** @nocollapse */ McHighlightPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McHighlightPipe, name: "mcHighlight" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McHighlightPipe, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McHighlightPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McHighlightPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+/** @nocollapse */ /** @nocollapse */ McHighlightPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McHighlightPipe, name: "mcHighlight" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McHighlightPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'mcHighlight' }]
         }] });

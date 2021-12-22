@@ -2,9 +2,9 @@ import { Directive } from '@angular/core';
 import * as i0 from "@angular/core";
 export class McSuffix {
 }
-/** @nocollapse */ /** @nocollapse */ McSuffix.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McSuffix, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McSuffix.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.0", type: McSuffix, selector: "[mcSuffix]", ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McSuffix, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McSuffix.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McSuffix, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McSuffix.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: McSuffix, selector: "[mcSuffix]", ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McSuffix, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mcSuffix]'

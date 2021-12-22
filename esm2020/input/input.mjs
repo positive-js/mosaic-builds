@@ -239,11 +239,11 @@ export class McInput extends McInputMixinBase {
         return validity && validity.badInput;
     }
 }
-/** @nocollapse */ /** @nocollapse */ McInput.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McInput, deps: [{ token: i0.ElementRef }, { token: NG_VALIDATORS, optional: true, self: true }, { token: MC_VALIDATION, optional: true }, { token: i1.NgControl, optional: true, self: true }, { token: i2.McNumberInput, optional: true, self: true }, { token: i1.NgModel, optional: true, self: true }, { token: i1.FormControlName, optional: true, self: true }, { token: i1.NgForm, optional: true }, { token: i1.FormGroupDirective, optional: true }, { token: i3.ErrorStateMatcher }, { token: MC_INPUT_VALUE_ACCESSOR, optional: true, self: true }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McInput.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.0", type: McInput, selector: "input[mcInput]", inputs: { errorStateMatcher: "errorStateMatcher", placeholder: "placeholder", disabled: "disabled", id: "id", required: "required", type: "type", value: "value" }, host: { listeners: { "blur": "onBlur()", "focus": "focusChanged(true)", "input": "onInput()" }, properties: { "attr.id": "id", "attr.placeholder": "placeholder", "attr.disabled": "disabled || null", "required": "required" }, classAttribute: "mc-input" }, providers: [{
+/** @nocollapse */ /** @nocollapse */ McInput.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McInput, deps: [{ token: i0.ElementRef }, { token: NG_VALIDATORS, optional: true, self: true }, { token: MC_VALIDATION, optional: true }, { token: i1.NgControl, optional: true, self: true }, { token: i2.McNumberInput, optional: true, self: true }, { token: i1.NgModel, optional: true, self: true }, { token: i1.FormControlName, optional: true, self: true }, { token: i1.NgForm, optional: true }, { token: i1.FormGroupDirective, optional: true }, { token: i3.ErrorStateMatcher }, { token: MC_INPUT_VALUE_ACCESSOR, optional: true, self: true }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McInput.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: McInput, selector: "input[mcInput]", inputs: { errorStateMatcher: "errorStateMatcher", placeholder: "placeholder", disabled: "disabled", id: "id", required: "required", type: "type", value: "value" }, host: { listeners: { "blur": "onBlur()", "focus": "focusChanged(true)", "input": "onInput()" }, properties: { "attr.id": "id", "attr.placeholder": "placeholder", "attr.disabled": "disabled || null", "required": "required" }, classAttribute: "mc-input" }, providers: [{
             provide: McFormFieldControl, useExisting: McInput
         }], exportAs: ["mcInput"], usesInheritance: true, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McInput, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McInput, decorators: [{
             type: Directive,
             args: [{
                     selector: `input[mcInput]`,
@@ -320,9 +320,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImpor
             }] } });
 export class McInputMono {
 }
-/** @nocollapse */ /** @nocollapse */ McInputMono.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McInputMono, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McInputMono.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.0", type: McInputMono, selector: "input[mcInputMonospace]", host: { classAttribute: "mc-input_monospace" }, exportAs: ["McInputMonospace"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McInputMono, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McInputMono.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McInputMono, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McInputMono.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: McInputMono, selector: "input[mcInputMonospace]", host: { classAttribute: "mc-input_monospace" }, exportAs: ["McInputMonospace"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McInputMono, decorators: [{
             type: Directive,
             args: [{
                     selector: 'input[mcInputMonospace]',

@@ -7,9 +7,9 @@ import * as i0 from "@angular/core";
  */
 export class McLine {
 }
-/** @nocollapse */ /** @nocollapse */ McLine.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McLine, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McLine.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.0", type: McLine, selector: "[mc-line], [mcLine]", host: { classAttribute: "mc-line" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McLine, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McLine.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLine, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McLine.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: McLine, selector: "[mc-line], [mcLine]", host: { classAttribute: "mc-line" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLine, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mc-line], [mcLine]',
@@ -56,10 +56,10 @@ export class McLineSetter {
 }
 export class McLineModule {
 }
-/** @nocollapse */ /** @nocollapse */ McLineModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McLineModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McLineModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McLineModule, declarations: [McLine], exports: [McLine] });
-/** @nocollapse */ /** @nocollapse */ McLineModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McLineModule, imports: [[]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McLineModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McLineModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLineModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McLineModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLineModule, declarations: [McLine], exports: [McLine] });
+/** @nocollapse */ /** @nocollapse */ McLineModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLineModule, imports: [[]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLineModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [],

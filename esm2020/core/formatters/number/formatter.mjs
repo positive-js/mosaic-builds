@@ -87,10 +87,10 @@ export class McDecimalPipe {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McDecimalPipe, deps: [{ token: MC_LOCALE_ID, optional: true }], target: i0.ɵɵFactoryTarget.Pipe });
-/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McDecimalPipe, name: "mcNumber" });
-/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McDecimalPipe, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McDecimalPipe, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDecimalPipe, deps: [{ token: MC_LOCALE_ID, optional: true }], target: i0.ɵɵFactoryTarget.Pipe });
+/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDecimalPipe, name: "mcNumber" });
+/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDecimalPipe, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDecimalPipe, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }, {

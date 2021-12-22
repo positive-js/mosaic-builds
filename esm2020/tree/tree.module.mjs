@@ -23,8 +23,8 @@ const MC_TREE_DIRECTIVES = [
 ];
 export class McTreeModule {
 }
-/** @nocollapse */ /** @nocollapse */ McTreeModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McTreeModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTreeModule, declarations: [McTreeNodeOutlet,
+/** @nocollapse */ /** @nocollapse */ McTreeModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTreeModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McTreeModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTreeModule, declarations: [McTreeNodeOutlet,
         McTreeNodeDef,
         McTreeNode,
         McTreeNodePadding,
@@ -41,8 +41,8 @@ export class McTreeModule {
         McTreeOption,
         McTreeNodeToggleComponent,
         McTreeNodeToggleDirective] });
-/** @nocollapse */ /** @nocollapse */ McTreeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTreeModule, imports: [[CommonModule, McPseudoCheckboxModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McTreeModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTreeModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTreeModule, imports: [[CommonModule, McPseudoCheckboxModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTreeModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, McPseudoCheckboxModule],

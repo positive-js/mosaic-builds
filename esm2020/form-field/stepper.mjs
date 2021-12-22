@@ -25,8 +25,8 @@ export class McStepper {
         $event.preventDefault();
     }
 }
-/** @nocollapse */ /** @nocollapse */ McStepper.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McStepper, deps: [], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McStepper.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.0", type: McStepper, selector: "mc-stepper", outputs: { stepUp: "stepUp", stepDown: "stepDown" }, ngImport: i0, template: `
+/** @nocollapse */ /** @nocollapse */ McStepper.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McStepper, deps: [], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McStepper.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.1", type: McStepper, selector: "mc-stepper", outputs: { stepUp: "stepUp", stepDown: "stepDown" }, ngImport: i0, template: `
         <i class="mc mc-icon mc-icon_light mc-second mc-stepper-step-up mc-angle-down-L_16"
            (mousedown)="onStepUp($event)">
         </i>
@@ -34,7 +34,7 @@ export class McStepper {
            (mousedown)="onStepDown($event)">
         </i>
     `, isInline: true });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.0", ngImport: i0, type: McStepper, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McStepper, decorators: [{
             type: Component,
             args: [{
                     selector: 'mc-stepper',
