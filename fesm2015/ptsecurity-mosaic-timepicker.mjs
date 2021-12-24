@@ -589,7 +589,8 @@ class McTimepicker {
             return null;
         }
         // tslint:enable
-        const resultDate = this.dateAdapter.createDateTime(this.dateAdapter.getYear(this.value), this.dateAdapter.getMonth(this.value), this.dateAdapter.getDate(this.value), hours, minutes || 0, seconds || 0, this.dateAdapter.getMilliseconds(this.value));
+        const date = this.value || this.dateAdapter.today();
+        const resultDate = this.dateAdapter.createDateTime(this.dateAdapter.getYear(date), this.dateAdapter.getMonth(date), this.dateAdapter.getDate(date), hours, minutes || 0, seconds || 0, this.dateAdapter.getMilliseconds(date));
         return this.getValidDateOrNull(resultDate);
     }
     compareTime(first, second) {
