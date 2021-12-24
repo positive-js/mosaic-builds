@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ElementRef, NgZone, OnDestroy, OnInit, QueryList, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, QueryList, Renderer2 } from '@angular/core';
 import * as i0 from "@angular/core";
 interface IArea {
     area: McSplitterAreaDirective;
@@ -35,6 +35,7 @@ export declare class McSplitterComponent implements OnInit {
     changeDetectorRef: ChangeDetectorRef;
     private ngZone;
     private renderer;
+    gutterPositionChange: EventEmitter<void>;
     readonly areas: IArea[];
     gutters: QueryList<McGutterDirective>;
     private isDragging;
@@ -63,12 +64,13 @@ export declare class McSplitterComponent implements OnInit {
     private onMouseUp;
     private setStyle;
     static ɵfac: i0.ɵɵFactoryDeclaration<McSplitterComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McSplitterComponent, "mc-splitter", ["mcSplitter"], { "hideGutters": "hideGutters"; "direction": "direction"; "disabled": "disabled"; "gutterSize": "gutterSize"; }, {}, never, ["*"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McSplitterComponent, "mc-splitter", ["mcSplitter"], { "hideGutters": "hideGutters"; "direction": "direction"; "disabled": "disabled"; "gutterSize": "gutterSize"; }, { "gutterPositionChange": "gutterPositionChange"; }, never, ["*"]>;
 }
 export declare class McSplitterAreaDirective implements OnInit, OnDestroy {
     private elementRef;
     private renderer;
     private splitter;
+    sizeChange: EventEmitter<number>;
     constructor(elementRef: ElementRef, renderer: Renderer2, splitter: McSplitterComponent);
     disableFlex(): void;
     ngOnInit(): void;
@@ -83,7 +85,8 @@ export declare class McSplitterAreaDirective implements OnInit, OnDestroy {
     private getSizeProperty;
     private setStyle;
     private removeStyle;
+    private emitSizeChange;
     static ɵfac: i0.ɵɵFactoryDeclaration<McSplitterAreaDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McSplitterAreaDirective, "[mc-splitter-area]", never, {}, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McSplitterAreaDirective, "[mc-splitter-area]", never, {}, { "sizeChange": "sizeChange"; }, never>;
 }
 export {};
