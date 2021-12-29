@@ -1,5 +1,6 @@
 /**
  * Do not edit directly
+ * Generated on Tue, 23 Nov 2021 14:04:36 GMT
  */
 export declare const LightColorSchemePrimaryDefault = "#338FCC";
 export declare const LightColorSchemePrimaryPalette: {
