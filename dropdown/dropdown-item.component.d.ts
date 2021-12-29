@@ -43,6 +43,7 @@ export declare class McDropdownItem extends McDropdownItemMixinBase implements I
     handleMouseEnter(): void;
     /** Gets the label to be used when determining whether the option should be focused. */
     getLabel(): string;
+    haltDisabledEvents(event: Event): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<McDropdownItem, [null, null, { optional: true; }]>;
     static ɵcmp: i0.ɵɵComponentDeclaration<McDropdownItem, "mc-dropdown-item, [mc-dropdown-item]", ["mcDropdownItem"], { "disabled": "disabled"; }, {}, ["icon"], ["*"]>;
 }

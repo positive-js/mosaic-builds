@@ -4268,6 +4268,10 @@ $mc-datepicker-today-fade-amount: 0.2;
         background: map-get($background, overlay-hover);
     }
 
+    .mc-dropdown-item-overlay {
+        background: transparent;
+    }
+
     .mc-dropdown__divider {
         background-color: map-get($foreground, divider);
     }
