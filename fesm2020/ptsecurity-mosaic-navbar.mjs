@@ -15,7 +15,7 @@ import { SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW, isVerticalMovement, TAB, DOWN_AR
 import { McButton, McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { toBoolean, PopUpPlacements } from '@ptsecurity/mosaic/core';
 import * as i5 from '@ptsecurity/mosaic/dropdown';
-import { Subject, merge } from 'rxjs';
+import { Subject, merge, EMPTY } from 'rxjs';
 import { takeUntil, startWith, debounceTime, take } from 'rxjs/operators';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -476,7 +476,7 @@ class McNavbarBrand {
         return !!this.navbar?.bento;
     }
     ngAfterContentInit() {
-        merge(this.logo.hovered, this.title.hovered)
+        merge(this.logo ? this.logo.hovered : EMPTY, this.title ? this.title.hovered : EMPTY)
             .pipe(takeUntil(this.destroyed))
             .subscribe((value) => this.hovered = value);
         this.navbar?.animationDone

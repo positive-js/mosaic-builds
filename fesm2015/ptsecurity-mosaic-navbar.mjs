@@ -12,7 +12,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SPACE, ENTER, LEFT_ARROW, RIGHT_ARROW, isVerticalMovement, TAB, DOWN_ARROW, UP_ARROW, NUMPAD_DIVIDE, SLASH } from '@ptsecurity/cdk/keycodes';
 import { McButton, McButtonCssStyler } from '@ptsecurity/mosaic/button';
 import { toBoolean, PopUpPlacements } from '@ptsecurity/mosaic/core';
-import { Subject, merge } from 'rxjs';
+import { Subject, merge, EMPTY } from 'rxjs';
 import { takeUntil, startWith, debounceTime, take } from 'rxjs/operators';
 import { FocusKeyManager } from '@ptsecurity/cdk/a11y';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -479,7 +479,7 @@ class McNavbarBrand {
     }
     ngAfterContentInit() {
         var _a;
-        merge(this.logo.hovered, this.title.hovered)
+        merge(this.logo ? this.logo.hovered : EMPTY, this.title ? this.title.hovered : EMPTY)
             .pipe(takeUntil(this.destroyed))
             .subscribe((value) => this.hovered = value);
         (_a = this.navbar) === null || _a === void 0 ? void 0 : _a.animationDone.subscribe(() => { var _a; return (_a = this.title) === null || _a === void 0 ? void 0 : _a.checkTextOverflown(); });
