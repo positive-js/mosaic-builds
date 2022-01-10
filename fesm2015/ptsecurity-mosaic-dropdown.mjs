@@ -749,9 +749,17 @@ class McDropdownTrigger {
     handleKeydown(event) {
         // tslint:disable-next-line:deprecation
         const keyCode = event.keyCode;
-        // Pressing enter on the trigger will trigger the click handler later.
         if (keyCode === ENTER || keyCode === SPACE) {
             this.openedBy = 'keyboard';
+            event.preventDefault();
+            if (this.isNested()) {
+                // Stop event propagation to avoid closing the parent dropdown.
+                event.stopPropagation();
+                this.open();
+            }
+            else {
+                this.toggle();
+            }
         }
         if ((this.isNested() &&
             ((keyCode === RIGHT_ARROW && this.dir === 'ltr') || (keyCode === LEFT_ARROW && this.dir === 'rtl'))) ||
