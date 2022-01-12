@@ -8,8 +8,10 @@ export declare class McPopoverComponent extends McPopUp {
     prefix: string;
     header: string | TemplateRef<any>;
     footer: string | TemplateRef<any>;
+    isTrapFocus: boolean;
     constructor(changeDetectorRef: ChangeDetectorRef);
     updateClassMap(placement: string, customClass: string, size: PopUpSizes): void;
+    updateTrapFocus(isTrapFocus: boolean): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<McPopoverComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<McPopoverComponent, "mc-popover-component", never, {}, {}, never, never>;
 }
