@@ -1225,6 +1225,7 @@ var DateParts;
     DateParts["day"] = "d";
 })(DateParts || (DateParts = {}));
 const MAX_YEAR = 9999;
+const YEAR_LENGTH = 4;
 class DateDigit {
     constructor(value, start, length) {
         this.value = value;
@@ -1291,7 +1292,7 @@ class DateDigit {
             return 1;
         }
         if (parsedValue > MAX_YEAR) {
-            return MAX_YEAR;
+            return parseInt(value.substring(0, YEAR_LENGTH));
         }
         return parsedValue;
     }
