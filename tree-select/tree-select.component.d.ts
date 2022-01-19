@@ -5,6 +5,7 @@ import { AfterContentInit, AfterViewInit, ChangeDetectorRef, DoCheck, ElementRef
 import { ControlValueAccessor, FormControlName, FormGroupDirective, NgControl, NgForm, NgModel, Validator } from '@angular/forms';
 import { CanDisable, CanUpdateErrorState, ErrorStateMatcher, HasTabIndex, CanDisableCtor, HasTabIndexCtor, CanUpdateErrorStateCtor, McValidationOptions } from '@ptsecurity/mosaic/core';
 import { McCleaner, McFormField, McFormFieldControl } from '@ptsecurity/mosaic/form-field';
+import { McSelectSearch } from '@ptsecurity/mosaic/select';
 import { McTag } from '@ptsecurity/mosaic/tags';
 import { McTreeSelection, McTreeOption } from '@ptsecurity/mosaic/tree';
 import { Observable, Subject } from 'rxjs';
@@ -19,6 +20,10 @@ export declare class McTreeSelectChange {
 export declare class McTreeSelectTrigger {
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelectTrigger, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeSelectTrigger, "mc-tree-select-trigger", never, {}, {}, never>;
+}
+export declare class McTreeSelectFooter {
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelectFooter, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeSelectFooter, "mc-tree-select-footer", never, {}, {}, never>;
 }
 declare class McTreeSelectBase {
     elementRef: ElementRef;
@@ -70,6 +75,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
      */
     positions: ConnectedPosition[];
     options: QueryList<McTreeOption>;
+    optionsArray: McTreeOption[];
     trigger: ElementRef;
     panel: ElementRef;
     overlayDir: CdkConnectedOverlay;
@@ -79,6 +85,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     /** User-supplied override of the trigger element. */
     customTrigger: McTreeSelectTrigger;
     tree: McTreeSelection;
+    search: McSelectSearch;
     hiddenItemsText: string;
     /** Event emitted when the select panel has been toggled. */
     readonly openedChange: EventEmitter<boolean>;
@@ -141,6 +148,7 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     private _focused;
     get panelOpen(): boolean;
     get canShowCleaner(): boolean;
+    isEmptySearchResult: boolean;
     private closeSubscription;
     private _panelOpen;
     private originalOnKeyDown;
@@ -255,7 +263,8 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
     private calculateOverlayOffsetX;
     /** Comparison function to specify which option is displayed. Defaults to object equality. */
     private _compareWith;
+    private updateIsEmptySearchResult;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeSelect, [null, null, null, null, null, null, null, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; }, { optional: true; self: true; }, { optional: true; self: true; }, { optional: true; self: true; }]>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeSelect, "mc-tree-select", ["mcTreeSelect"], { "disabled": "disabled"; "tabIndex": "tabIndex"; "hiddenItemsText": "hiddenItemsText"; "panelClass": "panelClass"; "backdropClass": "backdropClass"; "errorStateMatcher": "errorStateMatcher"; "sortComparator": "sortComparator"; "placeholder": "placeholder"; "required": "required"; "multiple": "multiple"; "autoSelect": "autoSelect"; "compareWith": "compareWith"; "id": "id"; "hasBackdrop": "hasBackdrop"; "hiddenItemsTextFormatter": "hiddenItemsTextFormatter"; }, { "openedChange": "openedChange"; "openedStream": "opened"; "closedStream": "closed"; "selectionChange": "selectionChange"; "valueChange": "valueChange"; }, ["cleaner", "customTrigger", "tree"], ["mc-tree-select-trigger", "mc-cleaner", "mc-tree-selection"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeSelect, "mc-tree-select", ["mcTreeSelect"], { "disabled": "disabled"; "tabIndex": "tabIndex"; "hiddenItemsText": "hiddenItemsText"; "panelClass": "panelClass"; "backdropClass": "backdropClass"; "errorStateMatcher": "errorStateMatcher"; "sortComparator": "sortComparator"; "placeholder": "placeholder"; "required": "required"; "multiple": "multiple"; "autoSelect": "autoSelect"; "compareWith": "compareWith"; "id": "id"; "hasBackdrop": "hasBackdrop"; "hiddenItemsTextFormatter": "hiddenItemsTextFormatter"; }, { "openedChange": "openedChange"; "openedStream": "opened"; "closedStream": "closed"; "selectionChange": "selectionChange"; "valueChange": "valueChange"; }, ["cleaner", "customTrigger", "tree", "search"], ["mc-tree-select-trigger", "mc-cleaner", "[mcSelectSearch]", "[mc-select-search-empty-result]", "mc-tree-selection", "[mc-tree-selection-footer]"]>;
 }
 export {};

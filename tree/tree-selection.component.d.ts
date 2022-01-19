@@ -68,6 +68,7 @@ export declare class McTreeSelection extends McTreeBase<any> implements ControlV
     set tabIndex(value: any);
     private _tabIndex;
     get showCheckbox(): boolean;
+    get isEmpty(): boolean;
     private readonly destroy;
     private optionFocusSubscription;
     private optionBlurSubscription;

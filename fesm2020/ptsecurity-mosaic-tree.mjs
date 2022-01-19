@@ -623,7 +623,6 @@ class McTreeOption extends McTreeNode {
             .pipe(take(1))
             .subscribe(() => {
             this.ngZone.run(() => {
-                this.hasFocus = false;
                 if (this.actionButton?.hasFocus) {
                     return;
                 }
@@ -1025,6 +1024,9 @@ class McTreeSelection extends McTreeBase {
     }
     get showCheckbox() {
         return this.multipleMode === MultipleMode.CHECKBOX;
+    }
+    get isEmpty() {
+        return this.sortedNodes.length === 0;
     }
     ngAfterContentInit() {
         this.unorderedOptions.changes
