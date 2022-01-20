@@ -121,9 +121,9 @@ export class McNumberInput {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McNumberInput.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McNumberInput, deps: [{ token: i0.ElementRef }, { token: i1.NgControl, optional: true, self: true }, { token: 'step', attribute: true }, { token: 'big-step', attribute: true }, { token: 'min', attribute: true }, { token: 'max', attribute: true }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McNumberInput.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: McNumberInput, selector: "input[mcInput][type=\"number\"]", inputs: { bigStep: "bigStep", step: "step", min: "min", max: "max" }, host: { listeners: { "blur": "focusChanged(false)", "focus": "focusChanged(true)", "paste": "onPaste($event)", "keydown": "onKeyDown($event)" } }, exportAs: ["mcNumericalInput"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McNumberInput, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McNumberInput.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McNumberInput, deps: [{ token: i0.ElementRef }, { token: i1.NgControl, optional: true, self: true }, { token: 'step', attribute: true }, { token: 'big-step', attribute: true }, { token: 'min', attribute: true }, { token: 'max', attribute: true }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McNumberInput.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.2", type: McNumberInput, selector: "input[mcInput][type=\"number\"]", inputs: { bigStep: "bigStep", step: "step", min: "min", max: "max" }, host: { listeners: { "blur": "focusChanged(false)", "focus": "focusChanged(true)", "paste": "onPaste($event)", "keydown": "onKeyDown($event)" } }, exportAs: ["mcNumericalInput"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McNumberInput, decorators: [{
             type: Directive,
             args: [{
                     selector: `input[mcInput][type="number"]`,

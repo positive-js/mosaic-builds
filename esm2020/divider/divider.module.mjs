@@ -4,10 +4,10 @@ import { McDivider } from './divider.component';
 import * as i0 from "@angular/core";
 export class McDividerModule {
 }
-/** @nocollapse */ /** @nocollapse */ McDividerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDividerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McDividerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDividerModule, declarations: [McDivider], imports: [CommonModule], exports: [McDivider] });
-/** @nocollapse */ /** @nocollapse */ McDividerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDividerModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDividerModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McDividerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McDividerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McDividerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McDividerModule, declarations: [McDivider], imports: [CommonModule], exports: [McDivider] });
+/** @nocollapse */ /** @nocollapse */ McDividerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McDividerModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McDividerModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],

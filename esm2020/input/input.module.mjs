@@ -9,10 +9,10 @@ import { MaxValidator, MinValidator } from './input-number-validators';
 import * as i0 from "@angular/core";
 export class McInputModule {
 }
-/** @nocollapse */ /** @nocollapse */ McInputModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McInputModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McInputModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McInputModule, declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator], imports: [CommonModule, A11yModule, McCommonModule, FormsModule], exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator] });
-/** @nocollapse */ /** @nocollapse */ McInputModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McInputModule, imports: [[CommonModule, A11yModule, McCommonModule, FormsModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McInputModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McInputModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McInputModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McInputModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McInputModule, declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator], imports: [CommonModule, A11yModule, McCommonModule, FormsModule], exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator] });
+/** @nocollapse */ /** @nocollapse */ McInputModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McInputModule, imports: [[CommonModule, A11yModule, McCommonModule, FormsModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McInputModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, A11yModule, McCommonModule, FormsModule],

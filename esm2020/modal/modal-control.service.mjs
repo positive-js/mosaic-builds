@@ -51,9 +51,9 @@ export class McModalControlService {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McModalControlService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McModalControlService, deps: [{ token: McModalControlService, optional: true, skipSelf: true }], target: i0.ɵɵFactoryTarget.Injectable });
-/** @nocollapse */ /** @nocollapse */ McModalControlService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McModalControlService });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McModalControlService, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McModalControlService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McModalControlService, deps: [{ token: McModalControlService, optional: true, skipSelf: true }], target: i0.ɵɵFactoryTarget.Injectable });
+/** @nocollapse */ /** @nocollapse */ McModalControlService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McModalControlService });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McModalControlService, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: McModalControlService, decorators: [{
                     type: Optional

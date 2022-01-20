@@ -10,8 +10,8 @@ import { McVerticalNavbar } from './vertical-navbar.component';
 import * as i0 from "@angular/core";
 export class McNavbarModule {
 }
-/** @nocollapse */ /** @nocollapse */ McNavbarModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McNavbarModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McNavbarModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McNavbarModule, declarations: [McNavbar,
+/** @nocollapse */ /** @nocollapse */ McNavbarModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McNavbarModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McNavbarModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McNavbarModule, declarations: [McNavbar,
         McNavbarContainer,
         McNavbarTitle,
         McNavbarItem,
@@ -40,14 +40,14 @@ export class McNavbarModule {
         McNavbarRectangleElement,
         McNavbarSubTitle,
         McNavbarBento] });
-/** @nocollapse */ /** @nocollapse */ McNavbarModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McNavbarModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McNavbarModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McNavbarModule, imports: [[
             CommonModule,
             A11yModule,
             PlatformModule,
             McIconModule,
             McToolTipModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McNavbarModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McNavbarModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

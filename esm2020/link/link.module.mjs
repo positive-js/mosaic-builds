@@ -5,14 +5,14 @@ import { McLink } from './link.component';
 import * as i0 from "@angular/core";
 export class McLinkModule {
 }
-/** @nocollapse */ /** @nocollapse */ McLinkModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLinkModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McLinkModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLinkModule, declarations: [McLink], imports: [CommonModule,
+/** @nocollapse */ /** @nocollapse */ McLinkModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McLinkModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McLinkModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McLinkModule, declarations: [McLink], imports: [CommonModule,
         A11yModule], exports: [McLink] });
-/** @nocollapse */ /** @nocollapse */ McLinkModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLinkModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McLinkModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McLinkModule, imports: [[
             CommonModule,
             A11yModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McLinkModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McLinkModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

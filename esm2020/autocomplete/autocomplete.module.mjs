@@ -8,15 +8,15 @@ import { McAutocomplete } from './autocomplete.component';
 import * as i0 from "@angular/core";
 export class McAutocompleteModule {
 }
-/** @nocollapse */ /** @nocollapse */ McAutocompleteModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McAutocompleteModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McAutocompleteModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McAutocompleteModule, declarations: [McAutocomplete, McAutocompleteTrigger, McAutocompleteOrigin], imports: [McOptionModule, OverlayModule, McCommonModule, CommonModule], exports: [McAutocomplete,
+/** @nocollapse */ /** @nocollapse */ McAutocompleteModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McAutocompleteModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McAutocompleteModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McAutocompleteModule, declarations: [McAutocomplete, McAutocompleteTrigger, McAutocompleteOrigin], imports: [McOptionModule, OverlayModule, McCommonModule, CommonModule], exports: [McAutocomplete,
         McOptionModule,
         McAutocompleteTrigger,
         McAutocompleteOrigin,
         McCommonModule] });
-/** @nocollapse */ /** @nocollapse */ McAutocompleteModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McAutocompleteModule, providers: [MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER], imports: [[McOptionModule, OverlayModule, McCommonModule, CommonModule], McOptionModule,
+/** @nocollapse */ /** @nocollapse */ McAutocompleteModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McAutocompleteModule, providers: [MC_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY_PROVIDER], imports: [[McOptionModule, OverlayModule, McCommonModule, CommonModule], McOptionModule,
         McCommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McAutocompleteModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McAutocompleteModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [McOptionModule, OverlayModule, McCommonModule, CommonModule],

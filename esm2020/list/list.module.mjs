@@ -7,8 +7,8 @@ import { McList, McListItem } from './list.component';
 import * as i0 from "@angular/core";
 export class McListModule {
 }
-/** @nocollapse */ /** @nocollapse */ McListModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McListModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McListModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McListModule, declarations: [McList,
+/** @nocollapse */ /** @nocollapse */ McListModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McListModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McListModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McListModule, declarations: [McList,
         McListSelection,
         McListItem,
         McListOption], imports: [CommonModule,
@@ -20,14 +20,14 @@ export class McListModule {
         McListItem,
         McListOption,
         McOptionModule] });
-/** @nocollapse */ /** @nocollapse */ McListModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McListModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McListModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McListModule, imports: [[
             CommonModule,
             A11yModule,
             McPseudoCheckboxModule,
             McLineModule,
             McOptionModule
         ], McOptionModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McListModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McListModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

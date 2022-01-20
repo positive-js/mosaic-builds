@@ -7,10 +7,10 @@ import { McTextarea } from './textarea.component';
 import * as i0 from "@angular/core";
 export class McTextareaModule {
 }
-/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTextareaModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTextareaModule, declarations: [McTextarea], imports: [CommonModule, A11yModule, McCommonModule, FormsModule], exports: [McTextarea] });
-/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTextareaModule, imports: [[CommonModule, A11yModule, McCommonModule, FormsModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTextareaModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTextareaModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTextareaModule, declarations: [McTextarea], imports: [CommonModule, A11yModule, McCommonModule, FormsModule], exports: [McTextarea] });
+/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTextareaModule, imports: [[CommonModule, A11yModule, McCommonModule, FormsModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTextareaModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, A11yModule, McCommonModule, FormsModule],

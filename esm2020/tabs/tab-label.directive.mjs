@@ -5,9 +5,9 @@ export const MC_TAB_LABEL = new InjectionToken('McTabLabel');
 /** Used to flag tab labels for use with the portal directive */
 export class McTabLabel extends CdkPortal {
 }
-/** @nocollapse */ /** @nocollapse */ McTabLabel.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTabLabel, deps: null, target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McTabLabel.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.1", type: McTabLabel, selector: "[mc-tab-label], [mcTabLabel]", providers: [{ provide: MC_TAB_LABEL, useExisting: McTabLabel }], usesInheritance: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McTabLabel, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTabLabel.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTabLabel, deps: null, target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McTabLabel.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.1.2", type: McTabLabel, selector: "[mc-tab-label], [mcTabLabel]", providers: [{ provide: MC_TAB_LABEL, useExisting: McTabLabel }], usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTabLabel, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mc-tab-label], [mcTabLabel]',

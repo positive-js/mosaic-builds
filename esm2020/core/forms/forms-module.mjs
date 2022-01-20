@@ -3,12 +3,12 @@ import { McForm, McFormElement } from './forms.directive';
 import * as i0 from "@angular/core";
 export class McFormsModule {
 }
-/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McFormsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McFormsModule, declarations: [McForm,
+/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McFormsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McFormsModule, declarations: [McForm,
         McFormElement], exports: [McForm,
         McFormElement] });
-/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McFormsModule });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McFormsModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McFormsModule });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McFormsModule, decorators: [{
             type: NgModule,
             args: [{
                     exports: [

@@ -17,8 +17,8 @@ import { McYearView } from './year-view.component';
 import * as i0 from "@angular/core";
 export class McDatepickerModule {
 }
-/** @nocollapse */ /** @nocollapse */ McDatepickerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDatepickerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McDatepickerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDatepickerModule, declarations: [McCalendar,
+/** @nocollapse */ /** @nocollapse */ McDatepickerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McDatepickerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McDatepickerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McDatepickerModule, declarations: [McCalendar,
         McCalendarBody,
         McDatepicker,
         McDatepickerContent,
@@ -45,7 +45,7 @@ export class McDatepickerModule {
         McMultiYearView,
         McCalendarHeader,
         McButtonModule] });
-/** @nocollapse */ /** @nocollapse */ McDatepickerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDatepickerModule, providers: [
+/** @nocollapse */ /** @nocollapse */ McDatepickerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McDatepickerModule, providers: [
         McDatepickerIntl,
         MC_DATEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER
     ], imports: [[
@@ -56,7 +56,7 @@ export class McDatepickerModule {
             PortalModule,
             McIconModule
         ], McButtonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McDatepickerModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McDatepickerModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

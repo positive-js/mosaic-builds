@@ -5,10 +5,10 @@ import { McButtonToggle, McButtonToggleGroup } from './button-toggle.component';
 import * as i0 from "@angular/core";
 export class McButtonToggleModule {
 }
-/** @nocollapse */ /** @nocollapse */ McButtonToggleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McButtonToggleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McButtonToggleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McButtonToggleModule, declarations: [McButtonToggleGroup, McButtonToggle], imports: [McCommonModule, McButtonModule], exports: [McCommonModule, McButtonToggleGroup, McButtonToggle] });
-/** @nocollapse */ /** @nocollapse */ McButtonToggleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McButtonToggleModule, imports: [[McCommonModule, McButtonModule], McCommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImport: i0, type: McButtonToggleModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McButtonToggleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McButtonToggleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McButtonToggleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McButtonToggleModule, declarations: [McButtonToggleGroup, McButtonToggle], imports: [McCommonModule, McButtonModule], exports: [McCommonModule, McButtonToggleGroup, McButtonToggle] });
+/** @nocollapse */ /** @nocollapse */ McButtonToggleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McButtonToggleModule, imports: [[McCommonModule, McButtonModule], McCommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McButtonToggleModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [McCommonModule, McButtonModule],
