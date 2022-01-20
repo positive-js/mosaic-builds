@@ -2423,7 +2423,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.1", ngImpor
             type: Directive
         }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }]; } });
 
-const VIEWPORT_MARGIN = 8;
 // tslint:disable-next-line:naming-convention
 class McPopUpTrigger {
     constructor(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction) {
@@ -2571,7 +2570,6 @@ class McPopUpTrigger {
             .flexibleConnectedTo(this.elementRef)
             .withTransformOriginOn(this.originSelector)
             .withFlexibleDimensions(false)
-            .withViewportMargin(VIEWPORT_MARGIN)
             .withPositions([...EXTENDED_OVERLAY_POSITIONS])
             .withScrollableContainers(this.scrollDispatcher.getAncestorScrollContainers(this.elementRef));
         strategy.positionChanges
