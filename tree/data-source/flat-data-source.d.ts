@@ -1,4 +1,4 @@
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
+import { CollectionViewer, DataSource, SelectionChange } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FlatTreeControl } from '../control/flat-tree-control';
 import { TreeControl } from '../control/tree-control';
@@ -75,6 +75,6 @@ export declare class McTreeFlatDataSource<T, F> extends DataSource<F> {
     constructor(treeControl: FlatTreeControl<F>, treeFlattener: McTreeFlattener<T, F>, initialData?: T[]);
     connect(collectionViewer: CollectionViewer): Observable<F[]>;
     filterHandler(): F[];
-    expansionHandler(): F[];
+    expansionHandler(_change: SelectionChange<F>): F[];
     disconnect(): void;
 }
