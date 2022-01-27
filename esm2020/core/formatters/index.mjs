@@ -4,10 +4,10 @@ import { McDecimalPipe } from './number/formatter';
 import * as i0 from "@angular/core";
 export class McFormattersModule {
 }
-/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McFormattersModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McFormattersModule, declarations: [McDecimalPipe], exports: [McDecimalPipe] });
-/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McFormattersModule, providers: [DateFormatter] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McFormattersModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormattersModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormattersModule, declarations: [McDecimalPipe], exports: [McDecimalPipe] });
+/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormattersModule, providers: [DateFormatter] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormattersModule, decorators: [{
             type: NgModule,
             args: [{
                     exports: [McDecimalPipe],

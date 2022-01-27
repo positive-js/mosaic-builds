@@ -6,10 +6,10 @@ import { McToggleComponent } from './toggle.component';
 import * as i0 from "@angular/core";
 export class McToggleModule {
 }
-/** @nocollapse */ /** @nocollapse */ McToggleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McToggleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McToggleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McToggleModule, declarations: [McToggleComponent], imports: [CommonModule, A11yModule, McCommonModule], exports: [McToggleComponent] });
-/** @nocollapse */ /** @nocollapse */ McToggleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McToggleModule, imports: [[CommonModule, A11yModule, McCommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McToggleModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McToggleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McToggleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McToggleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McToggleModule, declarations: [McToggleComponent], imports: [CommonModule, A11yModule, McCommonModule], exports: [McToggleComponent] });
+/** @nocollapse */ /** @nocollapse */ McToggleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McToggleModule, imports: [[CommonModule, A11yModule, McCommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McToggleModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, A11yModule, McCommonModule],

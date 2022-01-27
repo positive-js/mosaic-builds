@@ -6,10 +6,10 @@ import { McRadioButton, McRadioGroup } from './radio.component';
 import * as i0 from "@angular/core";
 export class McRadioModule {
 }
-/** @nocollapse */ /** @nocollapse */ McRadioModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McRadioModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McRadioModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McRadioModule, declarations: [McRadioGroup, McRadioButton], imports: [CommonModule, A11yModule, McCommonModule], exports: [McRadioGroup, McRadioButton] });
-/** @nocollapse */ /** @nocollapse */ McRadioModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McRadioModule, imports: [[CommonModule, A11yModule, McCommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McRadioModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McRadioModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McRadioModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McRadioModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McRadioModule, declarations: [McRadioGroup, McRadioButton], imports: [CommonModule, A11yModule, McCommonModule], exports: [McRadioGroup, McRadioButton] });
+/** @nocollapse */ /** @nocollapse */ McRadioModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McRadioModule, imports: [[CommonModule, A11yModule, McCommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McRadioModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, A11yModule, McCommonModule],

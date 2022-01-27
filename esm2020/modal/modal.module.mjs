@@ -12,8 +12,8 @@ import { McModalService } from './modal.service';
 import * as i0 from "@angular/core";
 export class McModalModule {
 }
-/** @nocollapse */ /** @nocollapse */ McModalModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McModalModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McModalModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McModalModule, declarations: [McModalComponent,
+/** @nocollapse */ /** @nocollapse */ McModalModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McModalModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalModule, declarations: [McModalComponent,
         McModalTitle,
         McModalBody,
         McModalFooter,
@@ -27,7 +27,7 @@ export class McModalModule {
         McModalBody,
         McModalFooter,
         McModalMainAction] });
-/** @nocollapse */ /** @nocollapse */ McModalModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McModalModule, providers: [
+/** @nocollapse */ /** @nocollapse */ McModalModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalModule, providers: [
         McModalControlService,
         McModalService
     ], imports: [[
@@ -37,7 +37,7 @@ export class McModalModule {
             McButtonModule,
             McIconModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McModalModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

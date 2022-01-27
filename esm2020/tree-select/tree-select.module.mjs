@@ -10,15 +10,15 @@ import { McTreeSelect, McTreeSelectFooter, McTreeSelectTrigger } from './tree-se
 import * as i0 from "@angular/core";
 export class McTreeSelectModule {
 }
-/** @nocollapse */ /** @nocollapse */ McTreeSelectModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTreeSelectModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McTreeSelectModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTreeSelectModule, declarations: [McTreeSelect, McTreeSelectTrigger, McTreeSelectFooter], imports: [CommonModule,
+/** @nocollapse */ /** @nocollapse */ McTreeSelectModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeSelectModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McTreeSelectModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeSelectModule, declarations: [McTreeSelect, McTreeSelectTrigger, McTreeSelectFooter], imports: [CommonModule,
         OverlayModule,
         McTreeModule,
         McIconModule,
         McTagsModule,
         McPseudoCheckboxModule,
         McSelectModule], exports: [McTreeSelect, McTreeSelectTrigger, McTreeSelectFooter, CommonModule] });
-/** @nocollapse */ /** @nocollapse */ McTreeSelectModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTreeSelectModule, providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER], imports: [[
+/** @nocollapse */ /** @nocollapse */ McTreeSelectModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeSelectModule, providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER], imports: [[
             CommonModule,
             OverlayModule,
             McTreeModule,
@@ -27,7 +27,7 @@ export class McTreeSelectModule {
             McPseudoCheckboxModule,
             McSelectModule
         ], CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTreeSelectModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeSelectModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

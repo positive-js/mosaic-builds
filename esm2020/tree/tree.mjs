@@ -4,9 +4,9 @@ import * as i0 from "@angular/core";
 import * as i1 from "./outlet";
 export class McTree extends McTreeBase {
 }
-/** @nocollapse */ /** @nocollapse */ McTree.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTree, deps: null, target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McTree.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: McTree, selector: "mc-tree", host: { classAttribute: "mc-tree" }, exportAs: ["mcTree"], usesInheritance: true, ngImport: i0, template: `<ng-container mcTreeNodeOutlet></ng-container>`, isInline: true, styles: [".mc-tree{display:block}\n"], directives: [{ type: i1.McTreeNodeOutlet, selector: "[mcTreeNodeOutlet]" }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTree, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTree.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTree, deps: null, target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McTree.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.0", type: McTree, selector: "mc-tree", host: { classAttribute: "mc-tree" }, exportAs: ["mcTree"], usesInheritance: true, ngImport: i0, template: `<ng-container mcTreeNodeOutlet></ng-container>`, isInline: true, styles: [".mc-tree{display:block}\n"], directives: [{ type: i1.McTreeNodeOutlet, selector: "[mcTreeNodeOutlet]" }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTree, decorators: [{
             type: Component,
             args: [{ selector: 'mc-tree', exportAs: 'mcTree', template: `<ng-container mcTreeNodeOutlet></ng-container>`, host: {
                         class: 'mc-tree'

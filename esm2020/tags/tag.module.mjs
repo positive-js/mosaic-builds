@@ -9,8 +9,8 @@ import { McTag, McTagAvatar, McTagRemove, McTagTrailingIcon } from './tag.compon
 import * as i0 from "@angular/core";
 export class McTagsModule {
 }
-/** @nocollapse */ /** @nocollapse */ McTagsModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTagsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McTagsModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTagsModule, declarations: [McTagList,
+/** @nocollapse */ /** @nocollapse */ McTagsModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTagsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McTagsModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTagsModule, declarations: [McTagList,
         McTag,
         McTagInput,
         McTagTrailingIcon,
@@ -21,12 +21,12 @@ export class McTagsModule {
         McTagTrailingIcon,
         McTagAvatar,
         McTagRemove] });
-/** @nocollapse */ /** @nocollapse */ McTagsModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTagsModule, providers: [{
+/** @nocollapse */ /** @nocollapse */ McTagsModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTagsModule, providers: [{
             provide: MC_TAGS_DEFAULT_OPTIONS,
             // tslint:disable-next-line: no-object-literal-type-assertion
             useValue: { separatorKeyCodes: [ENTER] }
         }], imports: [[CommonModule, PlatformModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: McTagsModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTagsModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, PlatformModule],

@@ -6,9 +6,9 @@ export class CssUnitPipe {
         return isNaN(formatted) ? `${value}` : `${formatted}${defaultUnit}`;
     }
 }
-/** @nocollapse */ /** @nocollapse */ CssUnitPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: CssUnitPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-/** @nocollapse */ /** @nocollapse */ CssUnitPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: CssUnitPipe, name: "toCssUnit" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: CssUnitPipe, decorators: [{
+/** @nocollapse */ /** @nocollapse */ CssUnitPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: CssUnitPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+/** @nocollapse */ /** @nocollapse */ CssUnitPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: CssUnitPipe, name: "toCssUnit" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: CssUnitPipe, decorators: [{
             type: Pipe,
             args: [{
                     name: 'toCssUnit'
