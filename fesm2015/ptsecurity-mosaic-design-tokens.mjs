@@ -810,6 +810,7 @@ const TabsSizeLabelIconMargin$1 = "8px";
 const TabsFontDefault$1 = "body";
 const TagsLightColorSchemePrimaryBackground$1 = "#D8EAF7";
 const TagsLightColorSchemePrimaryBorder$1 = "#D8EAF7";
+const TagsLightColorSchemePrimaryText$1 = "#338FCC";
 const TagsLightColorSchemePrimaryIcon$1 = "mix(#57A4D7, rgba(black, 0.05))";
 const TagsLightColorSchemePrimaryStatesHoverIcon$1 = "#206EA2";
 const TagsLightColorSchemePrimaryStatesFocused$1 = "#338FCC";
@@ -817,6 +818,7 @@ const TagsLightColorSchemePrimaryStatesDisabledText$1 = "mix(#338FCC, transparen
 const TagsLightColorSchemePrimaryStatesDisabledBackground$1 = "mix(#338FCC, transparent, 10%)";
 const TagsLightColorSchemeSecondBackground$1 = "#E6E6E6";
 const TagsLightColorSchemeSecondBorder$1 = "#E6E6E6";
+const TagsLightColorSchemeSecondText$1 = "#4D4D4D";
 const TagsLightColorSchemeSecondIcon$1 = "mix(#999999, rgba(black, 0.05))";
 const TagsLightColorSchemeSecondStatesHoverIcon$1 = "#999999";
 const TagsLightColorSchemeSecondStatesFocused$1 = "#338FCC";
@@ -824,6 +826,7 @@ const TagsLightColorSchemeSecondStatesDisabledText$1 = "mix(#B3B3B3, transparent
 const TagsLightColorSchemeSecondStatesDisabledBackground$1 = "mix(#B3B3B3, transparent, 10%)";
 const TagsLightColorSchemeErrorBackground$1 = "#FADEDA";
 const TagsLightColorSchemeErrorBorder$1 = "#FADEDA";
+const TagsLightColorSchemeErrorText$1 = "#E76E5C";
 const TagsLightColorSchemeErrorIcon$1 = "mix(#E76E5C, rgba(black, 0.05))";
 const TagsLightColorSchemeErrorStatesHoverIcon$1 = "#E04D36";
 const TagsLightColorSchemeErrorStatesFocused$1 = "#E76E5C";
@@ -831,6 +834,7 @@ const TagsLightColorSchemeErrorStatesDisabledText$1 = "mix(#E76E5C, transparent,
 const TagsLightColorSchemeErrorStatesDisabledBackground$1 = "mix(#E76E5C, transparent, 10%)";
 const TagsDarkColorSchemePrimaryBackground$1 = "#114E77";
 const TagsDarkColorSchemePrimaryBorder$1 = "#114E77";
+const TagsDarkColorSchemePrimaryText$1 = "#AAD1EC";
 const TagsDarkColorSchemePrimaryIcon$1 = "mix(#57A4D7, rgba(black, 0.05))";
 const TagsDarkColorSchemePrimaryStatesHoverIcon$1 = "#338FCC";
 const TagsDarkColorSchemePrimaryStatesFocused$1 = "#57A4D7";
@@ -838,6 +842,7 @@ const TagsDarkColorSchemePrimaryStatesDisabledText$1 = "mix(#57A4D7, transparent
 const TagsDarkColorSchemePrimaryStatesDisabledBackground$1 = "mix(#57A4D7, transparent, 10%)";
 const TagsDarkColorSchemeSecondBackground$1 = "#4D4D4D";
 const TagsDarkColorSchemeSecondBorder$1 = "#4D4D4D";
+const TagsDarkColorSchemeSecondText$1 = "#CCCCCC";
 const TagsDarkColorSchemeSecondIcon$1 = "mix(#999999, rgba(black, 0.05))";
 const TagsDarkColorSchemeSecondStatesHoverIcon$1 = "#E6E6E6";
 const TagsDarkColorSchemeSecondStatesFocused$1 = "#57A4D7";
@@ -845,6 +850,7 @@ const TagsDarkColorSchemeSecondStatesDisabledText$1 = "mix(#999999, transparent,
 const TagsDarkColorSchemeSecondStatesDisabledBackground$1 = "mix(#999999, transparent, 10%)";
 const TagsDarkColorSchemeErrorBackground$1 = "#832112";
 const TagsDarkColorSchemeErrorBorder$1 = "#832112";
+const TagsDarkColorSchemeErrorText$1 = "#F4B7AE";
 const TagsDarkColorSchemeErrorIcon$1 = "mix(#E76E5C, rgba(black, 0.05))";
 const TagsDarkColorSchemeErrorStatesHoverIcon$1 = "#F4B7AE";
 const TagsDarkColorSchemeErrorStatesFocused$1 = "#E76E5C";
@@ -1756,6 +1762,7 @@ var tokens = /*#__PURE__*/Object.freeze({
 	TabsFontDefault: TabsFontDefault$1,
 	TagsLightColorSchemePrimaryBackground: TagsLightColorSchemePrimaryBackground$1,
 	TagsLightColorSchemePrimaryBorder: TagsLightColorSchemePrimaryBorder$1,
+	TagsLightColorSchemePrimaryText: TagsLightColorSchemePrimaryText$1,
 	TagsLightColorSchemePrimaryIcon: TagsLightColorSchemePrimaryIcon$1,
 	TagsLightColorSchemePrimaryStatesHoverIcon: TagsLightColorSchemePrimaryStatesHoverIcon$1,
 	TagsLightColorSchemePrimaryStatesFocused: TagsLightColorSchemePrimaryStatesFocused$1,
@@ -1763,6 +1770,7 @@ var tokens = /*#__PURE__*/Object.freeze({
 	TagsLightColorSchemePrimaryStatesDisabledBackground: TagsLightColorSchemePrimaryStatesDisabledBackground$1,
 	TagsLightColorSchemeSecondBackground: TagsLightColorSchemeSecondBackground$1,
 	TagsLightColorSchemeSecondBorder: TagsLightColorSchemeSecondBorder$1,
+	TagsLightColorSchemeSecondText: TagsLightColorSchemeSecondText$1,
 	TagsLightColorSchemeSecondIcon: TagsLightColorSchemeSecondIcon$1,
 	TagsLightColorSchemeSecondStatesHoverIcon: TagsLightColorSchemeSecondStatesHoverIcon$1,
 	TagsLightColorSchemeSecondStatesFocused: TagsLightColorSchemeSecondStatesFocused$1,
@@ -1770,6 +1778,7 @@ var tokens = /*#__PURE__*/Object.freeze({
 	TagsLightColorSchemeSecondStatesDisabledBackground: TagsLightColorSchemeSecondStatesDisabledBackground$1,
 	TagsLightColorSchemeErrorBackground: TagsLightColorSchemeErrorBackground$1,
 	TagsLightColorSchemeErrorBorder: TagsLightColorSchemeErrorBorder$1,
+	TagsLightColorSchemeErrorText: TagsLightColorSchemeErrorText$1,
 	TagsLightColorSchemeErrorIcon: TagsLightColorSchemeErrorIcon$1,
 	TagsLightColorSchemeErrorStatesHoverIcon: TagsLightColorSchemeErrorStatesHoverIcon$1,
 	TagsLightColorSchemeErrorStatesFocused: TagsLightColorSchemeErrorStatesFocused$1,
@@ -1777,6 +1786,7 @@ var tokens = /*#__PURE__*/Object.freeze({
 	TagsLightColorSchemeErrorStatesDisabledBackground: TagsLightColorSchemeErrorStatesDisabledBackground$1,
 	TagsDarkColorSchemePrimaryBackground: TagsDarkColorSchemePrimaryBackground$1,
 	TagsDarkColorSchemePrimaryBorder: TagsDarkColorSchemePrimaryBorder$1,
+	TagsDarkColorSchemePrimaryText: TagsDarkColorSchemePrimaryText$1,
 	TagsDarkColorSchemePrimaryIcon: TagsDarkColorSchemePrimaryIcon$1,
 	TagsDarkColorSchemePrimaryStatesHoverIcon: TagsDarkColorSchemePrimaryStatesHoverIcon$1,
 	TagsDarkColorSchemePrimaryStatesFocused: TagsDarkColorSchemePrimaryStatesFocused$1,
@@ -1784,6 +1794,7 @@ var tokens = /*#__PURE__*/Object.freeze({
 	TagsDarkColorSchemePrimaryStatesDisabledBackground: TagsDarkColorSchemePrimaryStatesDisabledBackground$1,
 	TagsDarkColorSchemeSecondBackground: TagsDarkColorSchemeSecondBackground$1,
 	TagsDarkColorSchemeSecondBorder: TagsDarkColorSchemeSecondBorder$1,
+	TagsDarkColorSchemeSecondText: TagsDarkColorSchemeSecondText$1,
 	TagsDarkColorSchemeSecondIcon: TagsDarkColorSchemeSecondIcon$1,
 	TagsDarkColorSchemeSecondStatesHoverIcon: TagsDarkColorSchemeSecondStatesHoverIcon$1,
 	TagsDarkColorSchemeSecondStatesFocused: TagsDarkColorSchemeSecondStatesFocused$1,
@@ -1791,6 +1802,7 @@ var tokens = /*#__PURE__*/Object.freeze({
 	TagsDarkColorSchemeSecondStatesDisabledBackground: TagsDarkColorSchemeSecondStatesDisabledBackground$1,
 	TagsDarkColorSchemeErrorBackground: TagsDarkColorSchemeErrorBackground$1,
 	TagsDarkColorSchemeErrorBorder: TagsDarkColorSchemeErrorBorder$1,
+	TagsDarkColorSchemeErrorText: TagsDarkColorSchemeErrorText$1,
 	TagsDarkColorSchemeErrorIcon: TagsDarkColorSchemeErrorIcon$1,
 	TagsDarkColorSchemeErrorStatesHoverIcon: TagsDarkColorSchemeErrorStatesHoverIcon$1,
 	TagsDarkColorSchemeErrorStatesFocused: TagsDarkColorSchemeErrorStatesFocused$1,
