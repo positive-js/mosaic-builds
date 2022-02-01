@@ -869,29 +869,24 @@ class DateFormatter {
         if (!this.adapter.isDateInstance(date)) {
             throw new Error(this.invalidDateErrorText);
         }
-        const isBeforeYesterday = this.adapter.diffNow(date, 'days') <= -2;
-        const isYesterday = this.adapter.diffNow(date, 'days') <= -1 && this.adapter.diffNow(date, 'days') > -2;
-        const isToday = this.adapter.hasSame(this.adapter.today(), date, 'days');
-        const isTomorrow = this.adapter.diffNow(date, 'days') >= 1 && this.adapter.diffNow(date, 'days') < 2;
-        const isAfterTomorrow = this.adapter.diffNow(date, 'days') > 1;
-        const templateVariables = { ...this.adapter.config.variables, ...template.variables };
-        const variables = this.compileVariables(date, templateVariables);
         let newTemplate;
-        if (isBeforeYesterday) {
+        if (this.isBeforeYesterday(date)) {
             newTemplate = template.BEFORE_YESTERDAY;
         }
-        else if (isYesterday) {
+        else if (this.isYesterday(date)) {
             newTemplate = template.YESTERDAY;
         }
-        else if (isToday) {
+        else if (this.isToday(date)) {
             newTemplate = template.TODAY;
         }
-        else if (isTomorrow) {
+        else if (this.isTomorrow(date)) {
             newTemplate = template.TOMORROW;
         }
-        else if (isAfterTomorrow) {
+        else if (this.isAfterTomorrow(date)) {
             newTemplate = template.AFTER_TOMORROW;
         }
+        const templateVariables = { ...this.adapter.config.variables, ...template.variables };
+        const variables = this.compileVariables(date, templateVariables);
         return this.messageFormat.compile(newTemplate)(variables);
     }
     /**
@@ -1140,6 +1135,23 @@ class DateFormatter {
         }
         compiledVariables.CURRENT_YEAR = this.hasSame(date, this.adapter.today(), 'year');
         return compiledVariables;
+    }
+    isBeforeYesterday(date) {
+        return this.adapter.daysFromToday(date) <= -2;
+    }
+    isYesterday(date) {
+        const interval = this.adapter.daysFromToday(date);
+        return interval > -2 && interval <= -1;
+    }
+    isToday(date) {
+        return this.adapter.daysFromToday(date) === 0;
+    }
+    isTomorrow(date) {
+        const interval = this.adapter.daysFromToday(date);
+        return interval >= 1 && interval < 2;
+    }
+    isAfterTomorrow(date) {
+        return this.adapter.daysFromToday(date) >= 2;
     }
     hasSame(startDate, endDate, unit) {
         return this.adapter.hasSame(startDate, endDate, unit) ? 'yes' : 'no';

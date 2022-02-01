@@ -173,6 +173,11 @@ export declare class DateFormatter<D> {
      */
     rangeMiddleDateTime(startDate: D, endDate: D): string;
     private compileVariables;
+    private isBeforeYesterday;
+    private isYesterday;
+    private isToday;
+    private isTomorrow;
+    private isAfterTomorrow;
     private hasSame;
     static ɵfac: i0.ɵɵFactoryDeclaration<DateFormatter<any>, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<DateFormatter<any>>;
