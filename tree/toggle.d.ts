@@ -24,5 +24,5 @@ export declare class McTreeNodeToggleComponent<T> extends McTreeNodeToggleBaseDi
 }
 export declare class McTreeNodeToggleDirective<T> extends McTreeNodeToggleBaseDirective<T> {
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeNodeToggleDirective<any>, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeNodeToggleDirective<any>, "[mcTreeNodeToggle]", ["mcTreeNodeToggle"], {}, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTreeNodeToggleDirective<any>, "[mc-tree-node-toggle], [mcTreeNodeToggle]", ["mcTreeNodeToggle"], {}, {}, never>;
 }
