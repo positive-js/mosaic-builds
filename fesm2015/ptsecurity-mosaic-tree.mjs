@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
 import { Directive, Input, ViewChild, ContentChildren, forwardRef, Inject, Optional, Component, ViewEncapsulation, ChangeDetectionStrategy, InjectionToken, EventEmitter, ContentChild, Output, QueryList, Attribute, NgModule } from '@angular/core';
 import * as i1 from '@ptsecurity/mosaic/core';
-import { mixinDisabled, MC_OPTION_ACTION_PARENT, McOptionActionComponent, MultipleMode, getMcSelectNonArrayValueError, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
+import { mixinDisabled, MC_OPTION_ACTION_PARENT, McPseudoCheckbox, McOptionActionComponent, MultipleMode, getMcSelectNonArrayValueError, McPseudoCheckboxModule } from '@ptsecurity/mosaic/core';
 import { coerceNumberProperty, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { TreeSizePaddingLeft } from '@ptsecurity/mosaic/design-tokens';
 import { BehaviorSubject, Subject, Observable, of, merge } from 'rxjs';
@@ -545,6 +545,9 @@ class McTreeOption extends McTreeNode {
         this._id = `mc-tree-option-${uniqueIdCounter++}`;
         this.hasFocus = false;
     }
+    get externalPseudoCheckbox() {
+        return !!this.pseudoCheckbox;
+    }
     get value() {
         return this._value;
     }
@@ -645,12 +648,12 @@ class McTreeOption extends McTreeNode {
         }
         return 0;
     }
-    select() {
+    select(setFocus = true) {
         if (this._selected) {
             return;
         }
         this._selected = true;
-        if (!this.hasFocus) {
+        if (setFocus && !this.hasFocus) {
             this.focus();
         }
         this.changeDetectorRef.markForCheck();
@@ -696,7 +699,7 @@ class McTreeOption extends McTreeNode {
 /** @nocollapse */ /** @nocollapse */ McTreeOption.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.0", type: McTreeOption, selector: "mc-tree-option", inputs: { disabled: "disabled", showCheckbox: "showCheckbox" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "focusin": "focus()", "blur": "blur()", "click": "selectViaInteraction($event)", "keydown": "onKeydown($event)" }, properties: { "class.mc-selected": "selected", "class.mc-focused": "hasFocus", "class.mc-action-button-focused": "actionButton?.active", "attr.id": "id", "attr.tabindex": "-1", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-option" }, providers: [
         { provide: McTreeNode, useExisting: McTreeOption },
         { provide: MC_OPTION_ACTION_PARENT, useExisting: McTreeOption }
-    ], queries: [{ propertyName: "toggleElement", first: true, predicate: ["mcTreeNodeToggle"], descendants: true }, { propertyName: "actionButton", first: true, predicate: McOptionActionComponent, descendants: true }, { propertyName: "tooltipTrigger", first: true, predicate: McTooltipTrigger, descendants: true }, { propertyName: "dropdownTrigger", first: true, predicate: McDropdownTrigger, descendants: true }], exportAs: ["mcTreeOption"], usesInheritance: true, ngImport: i0, template: "<ng-content select=\"mc-tree-node-toggle, [mc-tree-node-toggle], [mcTreeNodeToggle]\"></ng-content>\n\n<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<ng-content select=\"mc-checkbox\"></ng-content>\n\n<ng-content select=\"[mc-icon]\"></ng-content>\n\n<ng-content select=\"mc-progress-spinner\"></ng-content>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<ng-content select=\"mc-option-action\"></ng-content>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-tree-option{box-sizing:border-box;display:flex;align-items:center;height:32px;height:var(--mc-tree-size-node-height, 32px);word-wrap:break-word;border:2px solid transparent}.mc-tree-option .mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-right:16px;margin-right:var(--mc-tree-size-padding-right, 16px)}.mc-tree-option>.mc-icon{margin-right:8px;cursor:pointer}.mc-tree-option>.mc-progress-spinner{margin-right:8px}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option>.mc-pseudo-checkbox,.mc-tree-option>.mc-checkbox{margin-right:8px}.mc-tree-option .mc-option-action{display:none}.mc-tree-option:not([disabled]):hover .mc-option-action,.mc-tree-option:not([disabled]).mc-focused .mc-option-action,.mc-tree-option:not([disabled]).mc-action-button-focused .mc-option-action{display:flex}\n"], components: [{ type: i1.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+    ], queries: [{ propertyName: "toggleElement", first: true, predicate: ["mcTreeNodeToggle"], descendants: true }, { propertyName: "pseudoCheckbox", first: true, predicate: McPseudoCheckbox, descendants: true }, { propertyName: "actionButton", first: true, predicate: McOptionActionComponent, descendants: true }, { propertyName: "tooltipTrigger", first: true, predicate: McTooltipTrigger, descendants: true }, { propertyName: "dropdownTrigger", first: true, predicate: McDropdownTrigger, descendants: true }], exportAs: ["mcTreeOption"], usesInheritance: true, ngImport: i0, template: "<ng-content select=\"mc-tree-node-toggle, [mc-tree-node-toggle], [mcTreeNodeToggle]\"></ng-content>\n\n<ng-container [ngSwitch]=\"externalPseudoCheckbox\">\n    <ng-content *ngSwitchCase=\"true\" select=\"mc-pseudo-checkbox\"></ng-content>\n\n    <ng-container *ngSwitchCase=\"false\">\n        <mc-pseudo-checkbox\n            *ngIf=\"showCheckbox\"\n            [state]=\"selected ? 'checked' : 'unchecked'\"\n            [disabled]=\"disabled\">\n        </mc-pseudo-checkbox>\n    </ng-container>\n</ng-container>\n\n<ng-content select=\"mc-checkbox\"></ng-content>\n\n<ng-content select=\"[mc-icon]\"></ng-content>\n\n<ng-content select=\"mc-progress-spinner\"></ng-content>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<ng-content select=\"mc-option-action\"></ng-content>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-tree-option{box-sizing:border-box;display:flex;align-items:center;height:32px;height:var(--mc-tree-size-node-height, 32px);word-wrap:break-word;border:2px solid transparent}.mc-tree-option .mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-right:16px;margin-right:var(--mc-tree-size-padding-right, 16px)}.mc-tree-option>.mc-icon{margin-right:8px;cursor:pointer}.mc-tree-option>.mc-progress-spinner{margin-right:8px}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option>.mc-pseudo-checkbox,.mc-tree-option>.mc-checkbox{margin-right:8px}.mc-tree-option .mc-option-action{display:none}.mc-tree-option:not([disabled]):hover .mc-option-action,.mc-tree-option:not([disabled]).mc-focused .mc-option-action,.mc-tree-option:not([disabled]).mc-action-button-focused .mc-option-action{display:flex}\n"], components: [{ type: i1.McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2$1.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i2$1.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }, { type: i2$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeOption, decorators: [{
             type: Component,
             args: [{ selector: 'mc-tree-option', exportAs: 'mcTreeOption', host: {
@@ -714,7 +717,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
                     }, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, providers: [
                         { provide: McTreeNode, useExisting: McTreeOption },
                         { provide: MC_OPTION_ACTION_PARENT, useExisting: McTreeOption }
-                    ], template: "<ng-content select=\"mc-tree-node-toggle, [mc-tree-node-toggle], [mcTreeNodeToggle]\"></ng-content>\n\n<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<ng-content select=\"mc-checkbox\"></ng-content>\n\n<ng-content select=\"[mc-icon]\"></ng-content>\n\n<ng-content select=\"mc-progress-spinner\"></ng-content>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<ng-content select=\"mc-option-action\"></ng-content>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-tree-option{box-sizing:border-box;display:flex;align-items:center;height:32px;height:var(--mc-tree-size-node-height, 32px);word-wrap:break-word;border:2px solid transparent}.mc-tree-option .mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-right:16px;margin-right:var(--mc-tree-size-padding-right, 16px)}.mc-tree-option>.mc-icon{margin-right:8px;cursor:pointer}.mc-tree-option>.mc-progress-spinner{margin-right:8px}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option>.mc-pseudo-checkbox,.mc-tree-option>.mc-checkbox{margin-right:8px}.mc-tree-option .mc-option-action{display:none}.mc-tree-option:not([disabled]):hover .mc-option-action,.mc-tree-option:not([disabled]).mc-focused .mc-option-action,.mc-tree-option:not([disabled]).mc-action-button-focused .mc-option-action{display:flex}\n"] }]
+                    ], template: "<ng-content select=\"mc-tree-node-toggle, [mc-tree-node-toggle], [mcTreeNodeToggle]\"></ng-content>\n\n<ng-container [ngSwitch]=\"externalPseudoCheckbox\">\n    <ng-content *ngSwitchCase=\"true\" select=\"mc-pseudo-checkbox\"></ng-content>\n\n    <ng-container *ngSwitchCase=\"false\">\n        <mc-pseudo-checkbox\n            *ngIf=\"showCheckbox\"\n            [state]=\"selected ? 'checked' : 'unchecked'\"\n            [disabled]=\"disabled\">\n        </mc-pseudo-checkbox>\n    </ng-container>\n</ng-container>\n\n<ng-content select=\"mc-checkbox\"></ng-content>\n\n<ng-content select=\"[mc-icon]\"></ng-content>\n\n<ng-content select=\"mc-progress-spinner\"></ng-content>\n\n<span class=\"mc-option-text mc-no-select\"><ng-content></ng-content></span>\n\n<ng-content select=\"mc-option-action\"></ng-content>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-tree-option{box-sizing:border-box;display:flex;align-items:center;height:32px;height:var(--mc-tree-size-node-height, 32px);word-wrap:break-word;border:2px solid transparent}.mc-tree-option .mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-right:16px;margin-right:var(--mc-tree-size-padding-right, 16px)}.mc-tree-option>.mc-icon{margin-right:8px;cursor:pointer}.mc-tree-option>.mc-progress-spinner{margin-right:8px}.mc-tree-option:focus{outline:none}.mc-tree-option:not([disabled]){cursor:pointer}.mc-tree-option>.mc-pseudo-checkbox,.mc-tree-option>.mc-checkbox{margin-right:8px}.mc-tree-option .mc-option-action{display:none}.mc-tree-option:not([disabled]):hover .mc-option-action,.mc-tree-option:not([disabled]).mc-focused .mc-option-action,.mc-tree-option:not([disabled]).mc-action-button-focused .mc-option-action{display:flex}\n"] }]
         }], ctorParameters: function () {
         return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: i0.NgZone }, { type: undefined, decorators: [{
                         type: Inject,
@@ -723,6 +726,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
     }, propDecorators: { toggleElement: [{
                 type: ContentChild,
                 args: ['mcTreeNodeToggle']
+            }], pseudoCheckbox: [{
+                type: ContentChild,
+                args: [McPseudoCheckbox]
             }], actionButton: [{
                 type: ContentChild,
                 args: [McOptionActionComponent]
@@ -894,7 +900,7 @@ class McTreeSelection extends McTreeBase {
             this.updateTabIndex();
             options.forEach((option) => {
                 if (this.getSelectedValues().includes(option.value)) {
-                    option.select();
+                    option.select(false);
                 }
                 else {
                     option.deselect();

@@ -75,7 +75,6 @@ export declare class McTreeSelect extends McTreeSelectMixinBase implements After
      */
     positions: ConnectedPosition[];
     options: QueryList<McTreeOption>;
-    optionsArray: McTreeOption[];
     trigger: ElementRef;
     panel: ElementRef;
     overlayDir: CdkConnectedOverlay;

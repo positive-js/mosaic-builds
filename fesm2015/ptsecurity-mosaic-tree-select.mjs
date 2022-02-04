@@ -20,7 +20,7 @@ import { DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, ENTER, SPACE, HOME, END,
 import * as i5 from '@ptsecurity/mosaic/form-field';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject, defer, merge, Subscription } from 'rxjs';
-import { filter, map, startWith, switchMap, take, distinctUntilChanged, takeUntil, first } from 'rxjs/operators';
+import { filter, map, startWith, switchMap, take, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import * as i3 from '@angular/cdk/bidi';
 
 let nextUniqueId = 0;
@@ -110,7 +110,6 @@ class McTreeSelect extends McTreeSelectMixinBase {
                 overlayY: 'bottom'
             }
         ];
-        this.optionsArray = [];
         this.hiddenItemsText = '...ещё';
         /** Event emitted when the select panel has been toggled. */
         this.openedChange = new EventEmitter();
@@ -275,11 +274,11 @@ class McTreeSelect extends McTreeSelectMixinBase {
         }
         this.tree.resetFocusedItemOnBlur = false;
         this.selectionModel = this.tree.selectionModel = new SelectionModel(this.multiple);
+        this.selectionModel.changed
+            .subscribe(() => this.onChange(this.selectedValues));
         this.tree.ngAfterContentInit();
         this.initKeyManager();
         this.options = this.tree.renderedOptions;
-        this.options.changes.pipe(first((options) => options.length))
-            .subscribe(() => this.optionsArray = this.options.toArray());
         this.tree.autoSelect = this.autoSelect;
         if (this.tree.multipleMode === null) {
             this.tree.multipleMode = this.multiple ? MultipleMode.CHECKBOX : null;
@@ -459,7 +458,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
             return [];
         }
         return this.selectedValues
-            .map((value) => this.optionsArray.find((option) => option.value === value))
+            .map((value) => this.options.find((option) => option.value === value))
             .filter((option) => option);
     }
     get empty() {

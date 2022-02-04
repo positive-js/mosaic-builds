@@ -1,6 +1,6 @@
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { ChangeDetectorRef, EventEmitter, ElementRef, InjectionToken, AfterContentInit, NgZone } from '@angular/core';
-import { McOptionActionComponent } from '@ptsecurity/mosaic/core';
+import { McOptionActionComponent, McPseudoCheckbox } from '@ptsecurity/mosaic/core';
 import { McDropdownTrigger } from '@ptsecurity/mosaic/dropdown';
 import { McTooltipTrigger } from '@ptsecurity/mosaic/tooltip';
 import { Subject } from 'rxjs';
@@ -26,9 +26,11 @@ export declare class McTreeOption extends McTreeNode<McTreeOption> implements Af
     readonly onFocus: Subject<McTreeOptionEvent>;
     readonly onBlur: Subject<McTreeOptionEvent>;
     toggleElement: McTreeNodeToggleBaseDirective<McTreeOption>;
+    pseudoCheckbox: McPseudoCheckbox;
     actionButton: McOptionActionComponent;
     tooltipTrigger: McTooltipTrigger;
     dropdownTrigger: McDropdownTrigger;
+    get externalPseudoCheckbox(): boolean;
     get value(): any;
     set value(value: any);
     private _value;
@@ -54,7 +56,7 @@ export declare class McTreeOption extends McTreeNode<McTreeOption> implements Af
     focus(focusOrigin?: FocusOrigin): void;
     blur(): void;
     getHeight(): number;
-    select(): void;
+    select(setFocus?: boolean): void;
     deselect(): void;
     onKeydown($event: any): void;
     selectViaInteraction($event?: KeyboardEvent): void;
@@ -62,5 +64,5 @@ export declare class McTreeOption extends McTreeNode<McTreeOption> implements Af
     getHostElement(): HTMLElement;
     markForCheck(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTreeOption, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, ["toggleElement", "actionButton", "tooltipTrigger", "dropdownTrigger"], ["mc-tree-node-toggle, [mc-tree-node-toggle], [mcTreeNodeToggle]", "mc-checkbox", "[mc-icon]", "mc-progress-spinner", "*", "mc-option-action"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McTreeOption, "mc-tree-option", ["mcTreeOption"], { "disabled": "disabled"; "showCheckbox": "showCheckbox"; }, { "onSelectionChange": "onSelectionChange"; }, ["toggleElement", "pseudoCheckbox", "actionButton", "tooltipTrigger", "dropdownTrigger"], ["mc-tree-node-toggle, [mc-tree-node-toggle], [mcTreeNodeToggle]", "mc-pseudo-checkbox", "mc-checkbox", "[mc-icon]", "mc-progress-spinner", "*", "mc-option-action"]>;
 }
