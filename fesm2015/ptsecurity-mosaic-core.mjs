@@ -292,21 +292,32 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
             args: [{ providedIn: 'root' }]
         }] });
 
+const SECONDS_TEMPLATE$1 = `{
+    SHOW_MILLISECONDS,
+    select,
+        yes{:{SECONDS}{MILLISECONDS}}
+        other{{
+            SHOW_SECONDS,
+            select,
+                yes{:{SECONDS}}
+                other{}
+        }}
+}`;
 const enUS = {
     relativeTemplates: {
         short: {
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}',
-            YESTERDAY: 'Yesterday, {TIME}',
-            TODAY: 'Today, {TIME}',
-            TOMORROW: 'Tomorrow, {TIME}',
-            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}'
+            BEFORE_YESTERDAY: `{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}${SECONDS_TEMPLATE$1}`,
+            YESTERDAY: `Yesterday, {TIME}${SECONDS_TEMPLATE$1}`,
+            TODAY: `Today, {TIME}${SECONDS_TEMPLATE$1}`,
+            TOMORROW: `Tomorrow, {TIME}${SECONDS_TEMPLATE$1}`,
+            AFTER_TOMORROW: `{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE}, {YEAR}}}${SECONDS_TEMPLATE$1}`
         },
         long: {
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}',
-            YESTERDAY: 'Yesterday, {TIME}',
-            TODAY: 'Today, {TIME}',
-            TOMORROW: 'Tomorrow, {TIME}',
-            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}'
+            BEFORE_YESTERDAY: `{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}${SECONDS_TEMPLATE$1}`,
+            YESTERDAY: `Yesterday, {TIME}${SECONDS_TEMPLATE$1}`,
+            TODAY: `Today, {TIME}${SECONDS_TEMPLATE$1}`,
+            TOMORROW: `Tomorrow, {TIME}${SECONDS_TEMPLATE$1}`,
+            AFTER_TOMORROW: `{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE}, {YEAR}}}${SECONDS_TEMPLATE$1}`
         }
     },
     absoluteTemplates: {
@@ -317,12 +328,7 @@ const enUS = {
                 select,
                     yes{{SHORT_DATE}, {TIME}}
                     other{{SHORT_DATE}, {YEAR}, {TIME}}
-            }{
-                SHOW_MILLISECONDS,
-                select,
-                    yes{:{SECONDS}{MILLISECONDS}}
-                    other{}
-            }`
+            }${SECONDS_TEMPLATE$1}`
         },
         long: {
             DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE}, {YEAR}}}',
@@ -331,12 +337,7 @@ const enUS = {
                 select,
                     yes{{DATE}, {TIME}}
                     other{{DATE}, {YEAR}, {TIME}}
-            }{
-                SHOW_MILLISECONDS,
-                select,
-                    yes{:{SECONDS}{MILLISECONDS}}
-                    other{}
-            }`
+            }${SECONDS_TEMPLATE$1}`
         }
     },
     rangeTemplates: {
@@ -370,22 +371,22 @@ const enUS = {
                                 yes{{SHORT_DATE}, {TIME}}
                                 other{{SHORT_DATE}, {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE$1}`,
                 END_DATETIME: `{
                     SAME_DAY,
                     select,
                         yes{{
                             CURRENT_YEAR,
                             select,
-                                yes{{TIME}, {SHORT_DATE}}
-                                other{{TIME}, {SHORT_DATE}, {YEAR}}
+                                yes{{TIME}${SECONDS_TEMPLATE$1}, {SHORT_DATE}}
+                                other{{TIME}${SECONDS_TEMPLATE$1}, {SHORT_DATE}, {YEAR}}
                         }}
                         other{{
                             CURRENT_YEAR,
                             select,
                                 yes{{SHORT_DATE}, {TIME}}
                                 other{{SHORT_DATE}, {YEAR}, {TIME}}
-                        }}
+                        }${SECONDS_TEMPLATE$1}}
                 }`,
                 DATETIME: `{
                     SAME_DAY,
@@ -423,22 +424,22 @@ const enUS = {
                                 yes{{DATE}, {TIME}}
                                 other{{DATE}, {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE$1}`,
                 END_DATETIME: `{
                     SAME_DAY,
                     select,
                         yes{{
                             CURRENT_YEAR,
                             select,
-                                yes{{TIME}, {DATE}}
-                                other{{TIME}, {DATE}, {YEAR}}
+                                yes{{TIME}${SECONDS_TEMPLATE$1}, {DATE}}
+                                other{{TIME}${SECONDS_TEMPLATE$1}, {DATE}, {YEAR}}
                         }}
                         other{{
                             CURRENT_YEAR,
                             select,
                                 yes{{DATE}, {TIME}}
                                 other{{DATE}, {YEAR}, {TIME}}
-                        }}
+                        }${SECONDS_TEMPLATE$1}}
                 }`,
                 DATETIME: `{
                     SAME_DAY,
@@ -481,7 +482,7 @@ const enUS = {
                                 yes{{DATE}, {TIME}}
                                 other{{DATE}, {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE$1}`,
                 END_DATETIME: `{
                     SAME_DAY,
                     select,
@@ -492,7 +493,7 @@ const enUS = {
                                 yes{{DATE}, {TIME}}
                                 other{{DATE}, {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE$1}`,
                 DATETIME: `{
                     SAME_DAY,
                     select,
@@ -521,13 +522,13 @@ const enUS = {
                     select,
                         yes{{SHORT_DATE}, {TIME}}
                         other{{SHORT_DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE$1}`,
                 END_DATETIME: `{
                     CURRENT_YEAR,
                     select,
                         yes{{SHORT_DATE}, {TIME}}
                         other{{SHORT_DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE$1}`,
                 DATETIME: `{
                     RANGE_TYPE,
                     select,
@@ -554,13 +555,13 @@ const enUS = {
                     select,
                         yes{{DATE}, {TIME}}
                         other{{DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE$1}`,
                 END_DATETIME: `{
                     CURRENT_YEAR,
                     select,
                         yes{{DATE}, {TIME}}
                         other{{DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE$1}`,
                 DATETIME: `{
                     RANGE_TYPE,
                     select,
@@ -572,21 +573,32 @@ const enUS = {
     }
 };
 
+const SECONDS_TEMPLATE = `{
+    SHOW_MILLISECONDS,
+    select,
+        yes{:{SECONDS}{MILLISECONDS}}
+        other{{
+            SHOW_SECONDS,
+            select,
+                yes{:{SECONDS}}
+                other{}
+        }}
+}`;
 const ruRU = {
     relativeTemplates: {
         short: {
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}',
-            YESTERDAY: 'Вчера, {TIME}',
-            TODAY: 'Сегодня, {TIME}',
-            TOMORROW: 'Завтра, {TIME}',
-            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}'
+            BEFORE_YESTERDAY: `{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}${SECONDS_TEMPLATE}`,
+            YESTERDAY: `Вчера, {TIME}${SECONDS_TEMPLATE}`,
+            TODAY: `Сегодня, {TIME}${SECONDS_TEMPLATE}`,
+            TOMORROW: `Завтра, {TIME}${SECONDS_TEMPLATE}`,
+            AFTER_TOMORROW: `{CURRENT_YEAR, select, yes{{SHORT_DATE}, {TIME}} other{{SHORT_DATE} {YEAR}}}${SECONDS_TEMPLATE}`
         },
         long: {
-            BEFORE_YESTERDAY: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}',
-            YESTERDAY: 'Вчера, {TIME}',
-            TODAY: 'Сегодня, {TIME}',
-            TOMORROW: 'Завтра, {TIME}',
-            AFTER_TOMORROW: '{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}'
+            BEFORE_YESTERDAY: `{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}${SECONDS_TEMPLATE}`,
+            YESTERDAY: `Вчера, {TIME}${SECONDS_TEMPLATE}`,
+            TODAY: `Сегодня, {TIME}${SECONDS_TEMPLATE}`,
+            TOMORROW: `Завтра, {TIME}${SECONDS_TEMPLATE}`,
+            AFTER_TOMORROW: `{CURRENT_YEAR, select, yes{{DATE}, {TIME}} other{{DATE} {YEAR}}}${SECONDS_TEMPLATE}`
         }
     },
     absoluteTemplates: {
@@ -597,12 +609,7 @@ const ruRU = {
                 select,
                     yes{{SHORT_DATE}, {TIME}}
                     other{{SHORT_DATE} {YEAR}, {TIME}}
-            }{
-                SHOW_MILLISECONDS,
-                select,
-                    yes{:{SECONDS}{MILLISECONDS}}
-                    other{}
-            }`
+            }${SECONDS_TEMPLATE}`
         },
         long: {
             DATE: '{CURRENT_YEAR, select, yes{{DATE}} other{{DATE} {YEAR}}}',
@@ -611,12 +618,7 @@ const ruRU = {
                 select,
                     yes{{DATE}, {TIME}}
                     other{{DATE} {YEAR}, {TIME}}
-            }{
-                SHOW_MILLISECONDS,
-                select,
-                    yes{:{SECONDS}{MILLISECONDS}}
-                    other{}
-            }`
+            }${SECONDS_TEMPLATE}`
         }
     },
     rangeTemplates: {
@@ -650,22 +652,22 @@ const ruRU = {
                                 yes{{SHORT_DATE}, {TIME}}
                                 other{{SHORT_DATE} {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     SAME_DAY,
                     select,
                         yes{{
                             CURRENT_YEAR,
                             select,
-                                yes{{TIME}, {SHORT_DATE}}
-                                other{{TIME}, {SHORT_DATE} {YEAR}}
+                                yes{{TIME}${SECONDS_TEMPLATE}, {SHORT_DATE}}
+                                other{{TIME}${SECONDS_TEMPLATE}, {SHORT_DATE} {YEAR}}
                         }}
                         other{{
                             CURRENT_YEAR,
                             select,
                                 yes{{SHORT_DATE}, {TIME}}
                                 other{{SHORT_DATE} {YEAR}, {TIME}}
-                        }}
+                        }${SECONDS_TEMPLATE}}
                 }`,
                 DATETIME: `{
                     SAME_DAY,
@@ -703,22 +705,22 @@ const ruRU = {
                                 yes{{DATE}, {TIME}}
                                 other{{DATE} {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     SAME_DAY,
                     select,
                         yes{{
                             CURRENT_YEAR,
                             select,
-                                yes{{TIME}, {DATE}}
-                                other{{TIME}, {DATE} {YEAR}}
+                                yes{{TIME}${SECONDS_TEMPLATE}, {DATE}}
+                                other{{TIME}${SECONDS_TEMPLATE}, {DATE} {YEAR}}
                         }}
                         other{{
                             CURRENT_YEAR,
                             select,
                                 yes{{DATE}, {TIME}}
                                 other{{DATE} {YEAR}, {TIME}}
-                        }}
+                        }${SECONDS_TEMPLATE}}
                 }`,
                 DATETIME: `{
                     SAME_DAY,
@@ -761,7 +763,7 @@ const ruRU = {
                                 yes{{DATE}, {TIME}}
                                 other{{DATE} {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     SAME_DAY,
                     select,
@@ -772,7 +774,7 @@ const ruRU = {
                                 yes{{DATE}, {TIME}}
                                 other{{DATE} {YEAR}, {TIME}}
                         }}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 DATETIME: `{
                     SAME_DAY,
                     select,
@@ -801,13 +803,13 @@ const ruRU = {
                     select,
                         yes{{SHORT_DATE}, {TIME}}
                         other{{SHORT_DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     CURRENT_YEAR,
                     select,
                         yes{{SHORT_DATE}, {TIME}}
                         other{{SHORT_DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 DATETIME: `{
                     RANGE_TYPE,
                     select,
@@ -834,13 +836,13 @@ const ruRU = {
                     select,
                         yes{{DATE}, {TIME}}
                         other{{DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 END_DATETIME: `{
                     CURRENT_YEAR,
                     select,
                         yes{{DATE}, {TIME}}
                         other{{DATE} {YEAR}, {TIME}}
-                }`,
+                }${SECONDS_TEMPLATE}`,
                 DATETIME: `{
                     RANGE_TYPE,
                     select,
@@ -869,11 +871,12 @@ class DateFormatter {
      * @param template - template
      * @returns relative date by template
      */
-    relativeDate(date, template) {
+    relativeDate(date, template, seconds = false, milliseconds = false) {
         if (!this.adapter.isDateInstance(date)) {
             throw new Error(this.invalidDateErrorText);
         }
         let newTemplate;
+        const templateVariables = Object.assign(Object.assign({}, this.adapter.config.variables), template.variables);
         if (this.isBeforeYesterday(date)) {
             newTemplate = template.BEFORE_YESTERDAY;
         }
@@ -889,8 +892,9 @@ class DateFormatter {
         else if (this.isAfterTomorrow(date)) {
             newTemplate = template.AFTER_TOMORROW;
         }
-        const templateVariables = Object.assign(Object.assign({}, this.adapter.config.variables), template.variables);
         const variables = this.compileVariables(date, templateVariables);
+        variables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
         return this.messageFormat.compile(newTemplate)(variables);
     }
     /**
@@ -909,16 +913,34 @@ class DateFormatter {
     }
     /**
      * @param date - date
+     * @param options - DateTimeOptions
+     * @returns relative date in short format with time
+     */
+    relativeShortDateTime(date, options) {
+        return this.relativeDate(date, this.config.relativeTemplates.short, options === null || options === void 0 ? void 0 : options.seconds, options === null || options === void 0 ? void 0 : options.milliseconds);
+    }
+    /**
+     * @param date - date
+     * @param options - DateTimeOptions
+     * @returns relative date in long format with time
+     */
+    relativeLongDateTime(date, options) {
+        return this.relativeDate(date, this.config.relativeTemplates.long, options === null || options === void 0 ? void 0 : options.seconds, options === null || options === void 0 ? void 0 : options.milliseconds);
+    }
+    /**
+     * @param date - date
      * @param params - parameters
      * @param datetime - should time be shown as well
+     * @param seconds - should time with seconds be shown as well
      * @param milliseconds - should time with milliseconds be shown as well
      * @returns absolute date in common format
      */
-    absoluteDate(date, params, datetime = false, milliseconds = false) {
+    absoluteDate(date, params, datetime = false, seconds = false, milliseconds = false) {
         if (!this.adapter.isDateInstance(date)) {
             throw new Error(this.invalidDateErrorText);
         }
         const variables = this.compileVariables(date, Object.assign(Object.assign({}, this.adapter.config.variables), params.variables));
+        variables.SHOW_SECONDS = seconds ? 'yes' : 'no';
         variables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
         const template = datetime ? params.DATETIME : params.DATE;
         return this.messageFormat.compile(template)(variables);
@@ -932,11 +954,11 @@ class DateFormatter {
     }
     /**
      * @param date - date
-     * @param options - AbsoluteDateTimeOptions
+     * @param options - DateTimeOptions
      * @returns absolute date in short format with time
      */
     absoluteShortDateTime(date, options) {
-        return this.absoluteDate(date, this.config.absoluteTemplates.short, true, options === null || options === void 0 ? void 0 : options.milliseconds);
+        return this.absoluteDate(date, this.config.absoluteTemplates.short, true, options === null || options === void 0 ? void 0 : options.seconds, options === null || options === void 0 ? void 0 : options.milliseconds);
     }
     /**
      * @param date - date
@@ -947,11 +969,11 @@ class DateFormatter {
     }
     /**
      * @param date - date
-     * @param options - AbsoluteDateTimeOptions
+     * @param options - DateTimeOptions
      * @returns absolute date in long format with time
      */
     absoluteLongDateTime(date, options) {
-        return this.absoluteDate(date, this.config.absoluteTemplates.long, true, options === null || options === void 0 ? void 0 : options.milliseconds);
+        return this.absoluteDate(date, this.config.absoluteTemplates.long, true, options === null || options === void 0 ? void 0 : options.seconds, options === null || options === void 0 ? void 0 : options.milliseconds);
     }
     /**
      * @param startDate - start date
@@ -979,9 +1001,11 @@ class DateFormatter {
      * @param startDate - start date
      * @param endDate - end date
      * @param template - template
+     * @param seconds - should time with seconds be shown as well
+     * @param milliseconds - should time with milliseconds be shown as well
      * @returns opened date
      */
-    openedRangeDateTime(startDate, endDate, template) {
+    openedRangeDateTime(startDate, endDate, template, seconds = false, milliseconds = false) {
         if (!this.adapter.isDateInstance(startDate) && !this.adapter.isDateInstance(endDate)) {
             throw new Error(this.invalidDateErrorText);
         }
@@ -989,10 +1013,14 @@ class DateFormatter {
         let params = {};
         if (startDate) {
             const startDateVariables = this.compileVariables(startDate, variables);
+            startDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+            startDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
             params = Object.assign(Object.assign({}, variables), { START_DATETIME: this.messageFormat.compile(template.START_DATETIME)(startDateVariables), RANGE_TYPE: 'onlyStart' });
         }
         else if (endDate) {
             const endDateVariables = this.compileVariables(endDate, variables);
+            endDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+            endDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
             params = Object.assign(Object.assign({}, variables), { END_DATETIME: this.messageFormat.compile(template.END_DATETIME)(endDateVariables), RANGE_TYPE: 'onlyEnd' });
         }
         return this.messageFormat.compile(template.DATETIME)(params);
@@ -1025,7 +1053,7 @@ class DateFormatter {
      * @param template - template
      * @returns range date in template format with time
      */
-    rangeDateTime(startDate, endDate, template) {
+    rangeDateTime(startDate, endDate, template, seconds = false, milliseconds = false) {
         if (!this.adapter.isDateInstance(startDate) || !this.adapter.isDateInstance(endDate)) {
             throw new Error(this.invalidDateErrorText);
         }
@@ -1035,9 +1063,13 @@ class DateFormatter {
         const startDateVariables = this.compileVariables(startDate, variables);
         startDateVariables.SAME_MONTH = sameMonth;
         startDateVariables.SAME_DAY = sameDay;
+        startDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        startDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
         const endDateVariables = this.compileVariables(endDate, variables);
         endDateVariables.SAME_MONTH = sameMonth;
         endDateVariables.SAME_DAY = sameDay;
+        endDateVariables.SHOW_SECONDS = seconds ? 'yes' : 'no';
+        endDateVariables.SHOW_MILLISECONDS = milliseconds ? 'yes' : 'no';
         const bothCurrentYear = startDateVariables.CURRENT_YEAR === 'yes' && endDateVariables.CURRENT_YEAR === 'yes';
         startDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
         endDateVariables.CURRENT_YEAR = bothCurrentYear ? 'yes' : 'no';
@@ -1059,14 +1091,15 @@ class DateFormatter {
     /**
      * @param startDate - start date
      * @param endDate - end date
+     * @param options - DateTimeOptions
      * @returns range date in short format with time
      */
-    rangeShortDateTime(startDate, endDate) {
+    rangeShortDateTime(startDate, endDate, options) {
         const rangeTemplates = this.config.rangeTemplates;
         if (startDate && endDate) {
-            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.short);
+            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.short, options === null || options === void 0 ? void 0 : options.seconds, options === null || options === void 0 ? void 0 : options.milliseconds);
         }
-        return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.short);
+        return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.short, options === null || options === void 0 ? void 0 : options.seconds, options === null || options === void 0 ? void 0 : options.milliseconds);
     }
     /**
      * @param startDate - start date
@@ -1083,22 +1116,24 @@ class DateFormatter {
     /**
      * @param startDate - start date
      * @param endDate - end date
+     * @param options - DateTimeOptions
      * @returns range date in long format with time
      */
-    rangeLongDateTime(startDate, endDate) {
+    rangeLongDateTime(startDate, endDate, options) {
         const rangeTemplates = this.config.rangeTemplates;
         if (startDate && endDate) {
-            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.long);
+            return this.rangeDateTime(startDate, endDate, rangeTemplates.closedRange.long, options === null || options === void 0 ? void 0 : options.seconds, options === null || options === void 0 ? void 0 : options.milliseconds);
         }
         return this.openedRangeDateTime(startDate, endDate || null, rangeTemplates.openedRange.long);
     }
     /**
      * @param startDate - start date
      * @param endDate - end date
+     * @param options - DateTimeOptions
      * @returns range middle date with time
      */
-    rangeMiddleDateTime(startDate, endDate) {
-        return this.rangeDateTime(startDate, endDate, this.config.rangeTemplates.closedRange.middle);
+    rangeMiddleDateTime(startDate, endDate, options) {
+        return this.rangeDateTime(startDate, endDate, this.config.rangeTemplates.closedRange.middle, options === null || options === void 0 ? void 0 : options.seconds, options === null || options === void 0 ? void 0 : options.milliseconds);
     }
     compileVariables(date, variables) {
         const compiledVariables = {};

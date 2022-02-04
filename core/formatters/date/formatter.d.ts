@@ -37,7 +37,8 @@ export interface FormatterRelativeTemplate {
     TOMORROW: string;
     AFTER_TOMORROW: string;
 }
-export interface AbsoluteDateTimeOptions {
+export interface DateTimeOptions {
+    seconds?: boolean;
     milliseconds?: boolean;
 }
 export interface FormatterConfig {
@@ -73,7 +74,7 @@ export declare class DateFormatter<D> {
      * @param template - template
      * @returns relative date by template
      */
-    relativeDate(date: D, template: FormatterRelativeTemplate): string;
+    relativeDate(date: D, template: FormatterRelativeTemplate, seconds?: boolean, milliseconds?: boolean): string;
     /**
      * @param date - date
      * @returns relative date in short format
@@ -86,12 +87,25 @@ export declare class DateFormatter<D> {
     relativeLongDate(date: D): string;
     /**
      * @param date - date
+     * @param options - DateTimeOptions
+     * @returns relative date in short format with time
+     */
+    relativeShortDateTime(date: D, options?: DateTimeOptions): string;
+    /**
+     * @param date - date
+     * @param options - DateTimeOptions
+     * @returns relative date in long format with time
+     */
+    relativeLongDateTime(date: D, options?: DateTimeOptions): string;
+    /**
+     * @param date - date
      * @param params - parameters
      * @param datetime - should time be shown as well
+     * @param seconds - should time with seconds be shown as well
      * @param milliseconds - should time with milliseconds be shown as well
      * @returns absolute date in common format
      */
-    absoluteDate(date: D, params: FormatterAbsoluteTemplate, datetime?: boolean, milliseconds?: boolean): string;
+    absoluteDate(date: D, params: FormatterAbsoluteTemplate, datetime?: boolean, seconds?: boolean, milliseconds?: boolean): string;
     /**
      * @param date - date
      * @returns absolute date in short format
@@ -99,10 +113,10 @@ export declare class DateFormatter<D> {
     absoluteShortDate(date: D): string;
     /**
      * @param date - date
-     * @param options - AbsoluteDateTimeOptions
+     * @param options - DateTimeOptions
      * @returns absolute date in short format with time
      */
-    absoluteShortDateTime(date: D, options?: AbsoluteDateTimeOptions): string;
+    absoluteShortDateTime(date: D, options?: DateTimeOptions): string;
     /**
      * @param date - date
      * @returns absolute date in long format
@@ -110,10 +124,10 @@ export declare class DateFormatter<D> {
     absoluteLongDate(date: D): string;
     /**
      * @param date - date
-     * @param options - AbsoluteDateTimeOptions
+     * @param options - DateTimeOptions
      * @returns absolute date in long format with time
      */
-    absoluteLongDateTime(date: D, options?: AbsoluteDateTimeOptions): string;
+    absoluteLongDateTime(date: D, options?: DateTimeOptions): string;
     /**
      * @param startDate - start date
      * @param endDate - end date
@@ -125,9 +139,11 @@ export declare class DateFormatter<D> {
      * @param startDate - start date
      * @param endDate - end date
      * @param template - template
+     * @param seconds - should time with seconds be shown as well
+     * @param milliseconds - should time with milliseconds be shown as well
      * @returns opened date
      */
-    openedRangeDateTime(startDate: D | null, endDate: D | null, template: FormatterRangeTemplate): string;
+    openedRangeDateTime(startDate: D | null, endDate: D | null, template: FormatterRangeTemplate, seconds?: boolean, milliseconds?: boolean): string;
     /**
      * @param startDate - start date
      * @param endDate - end date
@@ -141,7 +157,7 @@ export declare class DateFormatter<D> {
      * @param template - template
      * @returns range date in template format with time
      */
-    rangeDateTime(startDate: D, endDate: D, template: FormatterRangeTemplate): string;
+    rangeDateTime(startDate: D, endDate: D, template: FormatterRangeTemplate, seconds?: boolean, milliseconds?: boolean): string;
     /**
      * @param startDate - start date
      * @param endDate - end date
@@ -151,27 +167,30 @@ export declare class DateFormatter<D> {
     /**
      * @param startDate - start date
      * @param endDate - end date
+     * @param options - DateTimeOptions
      * @returns range date in short format with time
      */
-    rangeShortDateTime(startDate: D | null, endDate?: D): string;
+    rangeShortDateTime(startDate: D | null, endDate?: D | null, options?: DateTimeOptions): string;
     /**
      * @param startDate - start date
      * @param endDate - end date
      * @returns range date in long format
      */
-    rangeLongDate(startDate: D | null, endDate?: D): string;
+    rangeLongDate(startDate: D | null, endDate?: D | null): string;
     /**
      * @param startDate - start date
      * @param endDate - end date
+     * @param options - DateTimeOptions
      * @returns range date in long format with time
      */
-    rangeLongDateTime(startDate: D | null, endDate?: D): string;
+    rangeLongDateTime(startDate: D | null, endDate?: D, options?: DateTimeOptions): string;
     /**
      * @param startDate - start date
      * @param endDate - end date
+     * @param options - DateTimeOptions
      * @returns range middle date with time
      */
-    rangeMiddleDateTime(startDate: D, endDate: D): string;
+    rangeMiddleDateTime(startDate: D, endDate: D, options?: DateTimeOptions): string;
     private compileVariables;
     private isBeforeYesterday;
     private isYesterday;
