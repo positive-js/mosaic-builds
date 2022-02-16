@@ -44,6 +44,7 @@ class McModalControlService {
             const afterOpenSubscription = modalRef.afterOpen.subscribe(() => this.openModals.push(modalRef));
             const afterCloseSubscription = modalRef.afterClose.subscribe(() => this.removeOpenModal(modalRef));
             this.registeredMetaMap.set(modalRef, { modalRef, afterOpenSubscription, afterCloseSubscription });
+            this.handleMultipleMasks(modalRef);
         }
     }
     hasRegistered(modalRef) {
@@ -63,6 +64,27 @@ class McModalControlService {
             if (!this.openModals.length) {
                 this.afterAllClose.next();
             }
+        }
+    }
+    handleMultipleMasks(modalRef) {
+        const modals = Array.from(this.registeredMetaMap.values()).map((v) => v.modalRef);
+        if (modals.filter((modal) => modal.mcVisible).length > 1) {
+            const otherModals = modals.splice(0, modals.length - 1)
+                .filter((modal) => modal.mcVisible && modal.mcMask);
+            // hide other masks
+            setTimeout(() => {
+                otherModals.forEach((modal) => {
+                    modal.getInstance().mcMask = false;
+                    modal.markForCheck();
+                });
+            });
+            // show other masks on close
+            modalRef.afterClose.subscribe(() => {
+                otherModals.forEach((modal) => {
+                    modal.getInstance().mcMask = true;
+                    modal.markForCheck();
+                });
+            });
         }
     }
 }

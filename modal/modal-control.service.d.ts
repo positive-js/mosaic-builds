@@ -14,6 +14,7 @@ export declare class McModalControlService {
     hasRegistered(modalRef: McModalRef): boolean;
     closeAll(): void;
     private removeOpenModal;
+    private handleMultipleMasks;
     static ɵfac: i0.ɵɵFactoryDeclaration<McModalControlService, [{ optional: true; skipSelf: true; }]>;
     static ɵprov: i0.ɵɵInjectableDeclaration<McModalControlService>;
 }
