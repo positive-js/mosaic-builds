@@ -66,13 +66,12 @@ class McListOption {
         this._showCheckbox = coerceBooleanProperty(value);
     }
     get selected() {
-        return this.listSelection.selectionModel && this.listSelection.selectionModel.isSelected(this) || false;
+        return this.listSelection.selectionModel?.isSelected(this) || false;
     }
     set selected(value) {
         const isSelected = toBoolean(value);
         if (isSelected !== this._selected) {
             this.setSelected(isSelected);
-            this.listSelection.reportValueChange();
         }
     }
     get tabIndex() {
@@ -126,10 +125,7 @@ class McListOption {
     }
     getHeight() {
         const clientRects = this.elementRef.nativeElement.getClientRects();
-        if (clientRects.length) {
-            return clientRects[0].height;
-        }
-        return 0;
+        return clientRects.length ? clientRects[0].height : 0;
     }
     handleClick($event) {
         if (this.disabled) {
@@ -495,22 +491,20 @@ class McListSelection extends McListSelectionMixinBase {
     }
     getHeight() {
         const clientRects = this.elementRef.nativeElement.getClientRects();
-        if (clientRects.length) {
-            return clientRects[0].height;
-        }
-        return 0;
+        return clientRects.length ? clientRects[0].height : 0;
     }
     // Removes an option from the selection list and updates the active item.
     removeOptionFromList(option) {
-        if (option.hasFocus) {
-            const optionIndex = this.getOptionIndex(option);
-            // Check whether the option is the last item
-            if (optionIndex > 0) {
-                this.keyManager.setPreviousItemActive();
-            }
-            else if (optionIndex === 0 && this.options.length > 1) {
-                this.keyManager.setNextItemActive();
-            }
+        if (!option.hasFocus) {
+            return;
+        }
+        const optionIndex = this.getOptionIndex(option);
+        // Check whether the option is the last item
+        if (optionIndex > 0) {
+            this.keyManager.setPreviousItemActive();
+        }
+        else if (optionIndex === 0 && this.options.length > 1) {
+            this.keyManager.setNextItemActive();
         }
     }
     onKeyDown(event) {
