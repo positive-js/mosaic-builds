@@ -1,6 +1,6 @@
 {
     "name": "@ptsecurity/mosaic",
-    "version": "13.1.0-4f5ddb24",
+    "version": "13.1.0-fd8fb32f",
     "description": "Mosaic",
     "repository": {
         "type": "git",
@@ -17,14 +17,14 @@
     },
     "homepage": "https://github.com/positive-js/mosaic#readme",
     "peerDependencies": {
-        "@angular/animations": "^13.1.0-4f5ddb24",
-        "@angular/cdk": "^13.1.0-4f5ddb24",
-        "@angular/core": "^13.1.0-4f5ddb24",
-        "@angular/common": "^13.1.0-4f5ddb24",
-        "@angular/forms": "^13.1.0-4f5ddb24",
-        "@ptsecurity/cdk": "^13.1.0-4f5ddb24",
-        "@ptsecurity/mosaic-moment-adapter": "^13.1.0-4f5ddb24",
-        "@ptsecurity/mosaic-luxon-adapter": "^13.1.0-4f5ddb24",
+        "@angular/animations": "^13.1.0-fd8fb32f",
+        "@angular/cdk": "^13.1.0-fd8fb32f",
+        "@angular/core": "^13.1.0-fd8fb32f",
+        "@angular/common": "^13.1.0-fd8fb32f",
+        "@angular/forms": "^13.1.0-fd8fb32f",
+        "@ptsecurity/cdk": "^13.1.0-fd8fb32f",
+        "@ptsecurity/mosaic-moment-adapter": "^13.1.0-fd8fb32f",
+        "@ptsecurity/mosaic-luxon-adapter": "^13.1.0-fd8fb32f",
         "@ptsecurity/mosaic-icons": "^5.0.0"
     },
     "dependencies": {

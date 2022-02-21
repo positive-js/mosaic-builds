@@ -27,6 +27,7 @@ export declare abstract class McPopUp implements OnDestroy {
     /** Returns an observable that notifies when the tooltip has been hidden from view. */
     afterHidden(): Observable<void>;
     markForCheck(): void;
+    detectChanges(): void;
     animationStart(): void;
     animationDone({ toState }: AnimationEvent): void;
     handleBodyInteraction(): void;

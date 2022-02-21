@@ -2449,6 +2449,9 @@ class McPopUp {
     markForCheck() {
         this.changeDetectorRef.markForCheck();
     }
+    detectChanges() {
+        this.changeDetectorRef.detectChanges();
+    }
     animationStart() {
         this.closeOnInteraction = false;
     }
@@ -2514,11 +2517,7 @@ class McPopUpTrigger {
             });
             this.placementChange.emit(newPlacement);
             this.updateClassMap(newPlacement);
-            if ($event.scrollableViewProperties.isOverlayClipped && this.instance.isVisible()) {
-                // After position changes occur and the overlay is clipped by
-                // a parent scrollable then close the tooltip.
-                this.ngZone.run(() => this.hide());
-            }
+            this.instance.detectChanges();
         };
         this.addEventListener = (listener, event) => {
             this.elementRef.nativeElement.addEventListener(event, listener);
@@ -2615,7 +2614,8 @@ class McPopUpTrigger {
             return this.overlayRef;
         }
         // Create connected position strategy that listens for scroll events to reposition.
-        const strategy = this.overlay.position()
+        const strategy = this.overlay
+            .position()
             .flexibleConnectedTo(this.elementRef)
             .withTransformOriginOn(this.originSelector)
             .withFlexibleDimensions(false)
