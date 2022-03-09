@@ -48,6 +48,9 @@ class McTooltipComponent extends McPopUp {
         this.prefix = 'mc-tooltip';
     }
     show(delay) {
+        if (!this.content) {
+            return;
+        }
         // tslint:disable-next-line:no-magic-numbers
         super.show(Date.now() - this.openTime.value < MIN_TIME_FOR_DELAY ? 0 : delay);
         this.openTime.value = Date.now();
