@@ -2515,8 +2515,6 @@ class McPopUpTrigger {
         this.placement = PopUpPlacements.Top;
         this.placementPriority = null;
         this.visible = false;
-        // tslint:disable-next-line:naming-convention orthodox-getter-and-setter
-        this._disabled = false;
         this.listeners = new Map();
         this.destroyed = new Subject();
         this.detach = () => {

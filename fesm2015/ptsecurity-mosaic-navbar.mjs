@@ -693,7 +693,13 @@ class McNavbarItem extends McTooltipTrigger {
         return ((_a = this.subTitle) === null || _a === void 0 ? void 0 : _a.text) || null;
     }
     get disabled() {
+        if (this._disabled !== undefined) {
+            return this._disabled;
+        }
         return (!this.collapsed && !this.hasCroppedText) || !this.title;
+    }
+    set disabled(value) {
+        this._disabled = coerceBooleanProperty(value);
     }
     get hasDropDownTrigger() {
         return !!this.dropdownTrigger;

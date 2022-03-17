@@ -110,6 +110,7 @@ export declare class McNavbarItem extends McTooltipTrigger {
     get titleText(): string | null;
     get subTitleText(): string | null;
     get disabled(): boolean;
+    set disabled(value: boolean);
     get hasDropDownTrigger(): boolean;
     get showVerticalDropDownAngle(): boolean;
     get showHorizontalDropDownAngle(): boolean;
