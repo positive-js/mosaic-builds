@@ -356,6 +356,7 @@ class McSplitterComponent {
         this._isDragging = false;
         this.updateGutter();
         this.gutterPositionChange.emit();
+        this.changeDetectorRef.markForCheck();
     }
     setStyle(property, value) {
         this.renderer.setStyle(this.elementRef.nativeElement, property, value);
@@ -393,6 +394,9 @@ class McSplitterAreaDirective {
         this.renderer = renderer;
         this.splitter = splitter;
         this.sizeChange = new EventEmitter();
+        this.emitSizeChange = () => {
+            this.sizeChange.emit(this.getSize());
+        };
     }
     isResizing() {
         return this.splitter.isDragging;
@@ -411,7 +415,8 @@ class McSplitterAreaDirective {
             this.setStyle("height" /* Height */, '100%');
             this.removeStyle("width" /* Width */);
         }
-        this.splitter.gutterPositionChange.subscribe(() => this.emitSizeChange());
+        this.splitter.gutterPositionChange
+            .subscribe(this.emitSizeChange);
     }
     ngOnDestroy() {
         this.splitter.removeArea(this);
@@ -420,10 +425,10 @@ class McSplitterAreaDirective {
         this.setStyle("order" /* Order */, order);
     }
     setSize(size) {
-        if (!isNaN(size)) {
-            const sz = coerceNumberProperty(size);
-            this.setStyle(this.getSizeProperty(), coerceCssPixelValue(sz));
+        if (isNaN(size)) {
+            return;
         }
+        this.setStyle(this.getSizeProperty(), coerceCssPixelValue(coerceNumberProperty(size)));
     }
     getSize() {
         return this.elementRef.nativeElement[this.getOffsetSizeProperty()];
@@ -461,9 +466,6 @@ class McSplitterAreaDirective {
     }
     removeStyle(style) {
         this.renderer.removeStyle(this.elementRef.nativeElement, style);
-    }
-    emitSizeChange() {
-        this.sizeChange.emit(this.getSize());
     }
 }
 /** @nocollapse */ /** @nocollapse */ McSplitterAreaDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McSplitterAreaDirective, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }, { token: McSplitterComponent }], target: i0.ɵɵFactoryTarget.Directive });
