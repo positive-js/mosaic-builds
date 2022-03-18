@@ -5,10 +5,10 @@ import { McCheckboxRequiredValidator } from './checkbox-required-validator';
 import * as i0 from "@angular/core";
 export class McCheckboxModule {
 }
-/** @nocollapse */ /** @nocollapse */ McCheckboxModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCheckboxModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McCheckboxModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCheckboxModule, declarations: [McCheckbox, McCheckboxRequiredValidator], imports: [CommonModule], exports: [McCheckbox, McCheckboxRequiredValidator] });
-/** @nocollapse */ /** @nocollapse */ McCheckboxModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCheckboxModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCheckboxModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McCheckboxModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCheckboxModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McCheckboxModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCheckboxModule, declarations: [McCheckbox, McCheckboxRequiredValidator], imports: [CommonModule], exports: [McCheckbox, McCheckboxRequiredValidator] });
+/** @nocollapse */ /** @nocollapse */ McCheckboxModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCheckboxModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCheckboxModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],

@@ -2,9 +2,9 @@ import { Directive } from '@angular/core';
 import * as i0 from "@angular/core";
 export class McModalTitle {
 }
-/** @nocollapse */ /** @nocollapse */ McModalTitle.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalTitle, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McModalTitle.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McModalTitle, selector: "[mc-modal-title], mc-modal-title, [mcModalTitle]", host: { classAttribute: "mc-modal-header mc-modal-title" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalTitle, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McModalTitle.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McModalTitle, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McModalTitle.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McModalTitle, selector: "[mc-modal-title], mc-modal-title, [mcModalTitle]", host: { classAttribute: "mc-modal-header mc-modal-title" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McModalTitle, decorators: [{
             type: Directive,
             args: [{
                     selector: `[mc-modal-title], mc-modal-title, [mcModalTitle]`,
@@ -15,9 +15,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
         }] });
 export class McModalBody {
 }
-/** @nocollapse */ /** @nocollapse */ McModalBody.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalBody, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McModalBody.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McModalBody, selector: "[mc-modal-body], mc-modal-body, [mcModalBody]", host: { classAttribute: "mc-modal-body" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalBody, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McModalBody.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McModalBody, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McModalBody.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McModalBody, selector: "[mc-modal-body], mc-modal-body, [mcModalBody]", host: { classAttribute: "mc-modal-body" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McModalBody, decorators: [{
             type: Directive,
             args: [{
                     selector: `[mc-modal-body], mc-modal-body, [mcModalBody]`,
@@ -28,9 +28,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
         }] });
 export class McModalFooter {
 }
-/** @nocollapse */ /** @nocollapse */ McModalFooter.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalFooter, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McModalFooter.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McModalFooter, selector: "[mc-modal-footer], mc-modal-footer, [mcModalFooter]", host: { classAttribute: "mc-modal-footer" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalFooter, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McModalFooter.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McModalFooter, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McModalFooter.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McModalFooter, selector: "[mc-modal-footer], mc-modal-footer, [mcModalFooter]", host: { classAttribute: "mc-modal-footer" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McModalFooter, decorators: [{
             type: Directive,
             args: [{
                     selector: `[mc-modal-footer], mc-modal-footer, [mcModalFooter]`,
@@ -41,9 +41,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
         }] });
 export class McModalMainAction {
 }
-/** @nocollapse */ /** @nocollapse */ McModalMainAction.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalMainAction, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McModalMainAction.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McModalMainAction, selector: "[mc-modal-main-action]", ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McModalMainAction, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McModalMainAction.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McModalMainAction, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McModalMainAction.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McModalMainAction, selector: "[mc-modal-main-action]", ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McModalMainAction, decorators: [{
             type: Directive,
             args: [{
                     selector: `[mc-modal-main-action]`

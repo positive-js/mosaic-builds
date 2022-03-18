@@ -5,19 +5,19 @@ import { McTooltipComponent, McTooltipTrigger, McExtendedTooltipTrigger, McWarni
 import * as i0 from "@angular/core";
 export class McToolTipModule {
 }
-/** @nocollapse */ /** @nocollapse */ McToolTipModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McToolTipModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McToolTipModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McToolTipModule, declarations: [McTooltipComponent,
+/** @nocollapse */ /** @nocollapse */ McToolTipModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McToolTipModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McToolTipModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McToolTipModule, declarations: [McTooltipComponent,
         McTooltipTrigger,
         McExtendedTooltipTrigger,
         McWarningTooltipTrigger], imports: [CommonModule, OverlayModule], exports: [McTooltipComponent,
         McTooltipTrigger,
         McExtendedTooltipTrigger,
         McWarningTooltipTrigger] });
-/** @nocollapse */ /** @nocollapse */ McToolTipModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McToolTipModule, providers: [
+/** @nocollapse */ /** @nocollapse */ McToolTipModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McToolTipModule, providers: [
         MC_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
         MC_TOOLTIP_OPEN_TIME_PROVIDER
     ], imports: [[CommonModule, OverlayModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McToolTipModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McToolTipModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [

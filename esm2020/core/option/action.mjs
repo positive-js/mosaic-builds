@@ -87,14 +87,14 @@ export class McOptionActionComponent extends McOptionActionMixinBase {
         setTimeout(() => this.option.tooltipTrigger.disabled = false);
     }
 }
-/** @nocollapse */ /** @nocollapse */ McOptionActionComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionActionComponent, deps: [{ token: i0.ElementRef }, { token: i1.FocusMonitor }, { token: MC_OPTION_ACTION_PARENT }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McOptionActionComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.0", type: McOptionActionComponent, selector: "mc-option-action", inputs: { disabled: "disabled" }, host: { listeners: { "focus": "onFocus($event)", "blur": "onBlur()", "click": "onClick($event)", "keydown": "onKeyDown($event)" }, properties: { "class.mc-expanded": "false", "attr.disabled": "disabled || null", "attr.tabIndex": "-1" }, classAttribute: "mc-option-action" }, queries: [{ propertyName: "customIcon", first: true, predicate: ["customIcon"], descendants: true }], exportAs: ["mcOptionAction"], usesInheritance: true, ngImport: i0, template: `
+/** @nocollapse */ /** @nocollapse */ McOptionActionComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionActionComponent, deps: [{ token: i0.ElementRef }, { token: i1.FocusMonitor }, { token: MC_OPTION_ACTION_PARENT }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McOptionActionComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McOptionActionComponent, selector: "mc-option-action", inputs: { disabled: "disabled" }, host: { listeners: { "focus": "onFocus($event)", "blur": "onBlur()", "click": "onClick($event)", "keydown": "onKeyDown($event)" }, properties: { "class.mc-expanded": "false", "attr.disabled": "disabled || null", "attr.tabIndex": "-1" }, classAttribute: "mc-option-action" }, queries: [{ propertyName: "customIcon", first: true, predicate: ["customIcon"], descendants: true }], exportAs: ["mcOptionAction"], usesInheritance: true, ngImport: i0, template: `
         <ng-container [ngSwitch]="!!customIcon">
             <i class="mc mc-icon mc-ellipsis_16" *ngSwitchCase="false"></i>
             <ng-content select="[mc-icon]" *ngSwitchCase="true"></ng-content>
         </ng-container>
     `, isInline: true, styles: [".mc-option-action{box-sizing:unset;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:-2px;width:28px;height:100%;cursor:pointer;outline:none;border:2px solid transparent;background:transparent}.mc-option-action[disabled]{cursor:default}\n"], directives: [{ type: i2.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i2.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionActionComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionActionComponent, decorators: [{
             type: Component,
             args: [{ selector: 'mc-option-action', exportAs: 'mcOptionAction', template: `
         <ng-container [ngSwitch]="!!customIcon">

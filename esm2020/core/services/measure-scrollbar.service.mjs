@@ -34,9 +34,9 @@ export class McMeasureScrollbarService {
         this._scrollBarWidth = width;
     }
 }
-/** @nocollapse */ /** @nocollapse */ McMeasureScrollbarService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McMeasureScrollbarService, deps: [{ token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
-/** @nocollapse */ /** @nocollapse */ McMeasureScrollbarService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McMeasureScrollbarService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McMeasureScrollbarService, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McMeasureScrollbarService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McMeasureScrollbarService, deps: [{ token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
+/** @nocollapse */ /** @nocollapse */ McMeasureScrollbarService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McMeasureScrollbarService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McMeasureScrollbarService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'

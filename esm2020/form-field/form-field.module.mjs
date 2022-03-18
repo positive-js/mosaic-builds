@@ -10,8 +10,8 @@ import { McSuffix } from './suffix';
 import * as i0 from "@angular/core";
 export class McFormFieldModule {
 }
-/** @nocollapse */ /** @nocollapse */ McFormFieldModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormFieldModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McFormFieldModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormFieldModule, declarations: [McFormField,
+/** @nocollapse */ /** @nocollapse */ McFormFieldModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormFieldModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McFormFieldModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormFieldModule, declarations: [McFormField,
         McFormFieldWithoutBorders,
         McHint,
         McPrefix,
@@ -24,8 +24,8 @@ export class McFormFieldModule {
         McSuffix,
         McCleaner,
         McStepper] });
-/** @nocollapse */ /** @nocollapse */ McFormFieldModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormFieldModule, imports: [[CommonModule, McIconModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormFieldModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McFormFieldModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormFieldModule, imports: [[CommonModule, McIconModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormFieldModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [

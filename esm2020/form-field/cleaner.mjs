@@ -7,9 +7,9 @@ export class McCleaner {
         this.themePalette = ThemePalette;
     }
 }
-/** @nocollapse */ /** @nocollapse */ McCleaner.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCleaner, deps: [], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McCleaner.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.0", type: McCleaner, selector: "mc-cleaner", host: { classAttribute: "mc-cleaner" }, exportAs: ["mcCleaner"], ngImport: i0, template: `<i class="mc-icon_light" mc-icon="mc-close-circle_16" [color]="themePalette.Second"></i>`, isInline: true, components: [{ type: i1.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i1.McIconCSSStyler, selector: "[mc-icon]" }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCleaner, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McCleaner.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCleaner, deps: [], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McCleaner.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McCleaner, selector: "mc-cleaner", host: { classAttribute: "mc-cleaner" }, exportAs: ["mcCleaner"], ngImport: i0, template: `<i class="mc-icon_light" mc-icon="mc-close-circle_16" [color]="themePalette.Second"></i>`, isInline: true, components: [{ type: i1.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i1.McIconCSSStyler, selector: "[mc-icon]" }] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCleaner, decorators: [{
             type: Component,
             args: [{
                     selector: 'mc-cleaner',

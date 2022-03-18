@@ -12,8 +12,8 @@ import { McSidepanelService } from './sidepanel.service';
 import * as i0 from "@angular/core";
 export class McSidepanelModule {
 }
-/** @nocollapse */ /** @nocollapse */ McSidepanelModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McSidepanelModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McSidepanelModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McSidepanelModule, declarations: [McSidepanelContainerComponent,
+/** @nocollapse */ /** @nocollapse */ McSidepanelModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McSidepanelModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McSidepanelModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McSidepanelModule, declarations: [McSidepanelContainerComponent,
         McSidepanelClose,
         McSidepanelHeader,
         McSidepanelBody,
@@ -30,7 +30,7 @@ export class McSidepanelModule {
         McSidepanelBody,
         McSidepanelFooter,
         McSidepanelActions] });
-/** @nocollapse */ /** @nocollapse */ McSidepanelModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McSidepanelModule, providers: [McSidepanelService], imports: [[
+/** @nocollapse */ /** @nocollapse */ McSidepanelModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McSidepanelModule, providers: [McSidepanelService], imports: [[
             CommonModule,
             OverlayModule,
             PortalModule,
@@ -39,7 +39,7 @@ export class McSidepanelModule {
             McIconModule,
             A11yModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McSidepanelModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McSidepanelModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

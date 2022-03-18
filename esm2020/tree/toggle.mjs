@@ -39,9 +39,9 @@ export class McTreeNodeToggleBaseDirective extends McTreeNodeToggleMixinBase {
         event.stopPropagation();
     }
 }
-/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleBaseDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeNodeToggleBaseDirective, deps: [{ token: i1.McTreeBase }, { token: i1.McTreeNode }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleBaseDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McTreeNodeToggleBaseDirective, inputs: { node: "node", recursive: ["mcTreeNodeToggleRecursive", "recursive"] }, usesInheritance: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeNodeToggleBaseDirective, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleBaseDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTreeNodeToggleBaseDirective, deps: [{ token: i1.McTreeBase }, { token: i1.McTreeNode }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleBaseDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McTreeNodeToggleBaseDirective, inputs: { node: "node", recursive: ["mcTreeNodeToggleRecursive", "recursive"] }, usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTreeNodeToggleBaseDirective, decorators: [{
             type: Directive
         }], ctorParameters: function () { return [{ type: i1.McTreeBase }, { type: i1.McTreeNode }]; }, propDecorators: { node: [{
                 type: Input
@@ -51,9 +51,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
             }] } });
 export class McTreeNodeToggleComponent extends McTreeNodeToggleBaseDirective {
 }
-/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeNodeToggleComponent, deps: null, target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.0", type: McTreeNodeToggleComponent, selector: "mc-tree-node-toggle", inputs: { disabled: "disabled" }, host: { listeners: { "click": "toggle($event)" }, properties: { "class.mc-expanded": "iconState", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-node-toggle" }, exportAs: ["mcTreeNodeToggle"], usesInheritance: true, ngImport: i0, template: `<i class="mc mc-icon mc-angle-down-S_16"></i>`, isInline: true, styles: [".mc-tree-node-toggle{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:24px;height:100%;cursor:pointer}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-expanded .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeNodeToggleComponent, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTreeNodeToggleComponent, deps: null, target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McTreeNodeToggleComponent, selector: "mc-tree-node-toggle", inputs: { disabled: "disabled" }, host: { listeners: { "click": "toggle($event)" }, properties: { "class.mc-expanded": "iconState", "attr.disabled": "disabled || null" }, classAttribute: "mc-tree-node-toggle" }, exportAs: ["mcTreeNodeToggle"], usesInheritance: true, ngImport: i0, template: `<i class="mc mc-icon mc-angle-down-S_16"></i>`, isInline: true, styles: [".mc-tree-node-toggle{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:24px;height:100%;cursor:pointer}.mc-tree-node-toggle .mc-icon{transform:rotate(-90deg)}.mc-tree-node-toggle.mc-expanded .mc-icon{transform:rotate(0)}.mc-tree-node-toggle[disabled]{cursor:default}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTreeNodeToggleComponent, decorators: [{
             type: Component,
             args: [{ selector: 'mc-tree-node-toggle', exportAs: 'mcTreeNodeToggle', template: `<i class="mc mc-icon mc-angle-down-S_16"></i>`, host: {
                         class: 'mc-tree-node-toggle',
@@ -64,9 +64,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
         }] });
 export class McTreeNodeToggleDirective extends McTreeNodeToggleBaseDirective {
 }
-/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeNodeToggleDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McTreeNodeToggleDirective, selector: "[mc-tree-node-toggle], [mcTreeNodeToggle]", host: { listeners: { "click": "toggle($event)" }, properties: { "attr.disabled": "disabled || null" } }, exportAs: ["mcTreeNodeToggle"], usesInheritance: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTreeNodeToggleDirective, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTreeNodeToggleDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McTreeNodeToggleDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McTreeNodeToggleDirective, selector: "[mc-tree-node-toggle], [mcTreeNodeToggle]", host: { listeners: { "click": "toggle($event)" }, properties: { "attr.disabled": "disabled || null" } }, exportAs: ["mcTreeNodeToggle"], usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTreeNodeToggleDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mc-tree-node-toggle], [mcTreeNodeToggle]',

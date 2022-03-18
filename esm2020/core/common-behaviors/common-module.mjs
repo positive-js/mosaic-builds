@@ -65,10 +65,10 @@ export class McCommonModule {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCommonModule, deps: [{ token: MC_SANITY_CHECKS, optional: true }], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCommonModule, imports: [BidiModule], exports: [BidiModule] });
-/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCommonModule, imports: [[BidiModule], BidiModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCommonModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCommonModule, deps: [{ token: MC_SANITY_CHECKS, optional: true }], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCommonModule, imports: [BidiModule], exports: [BidiModule] });
+/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCommonModule, imports: [[BidiModule], BidiModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCommonModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [BidiModule],

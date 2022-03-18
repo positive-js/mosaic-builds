@@ -7,10 +7,10 @@ import { McOption } from './option';
 import * as i0 from "@angular/core";
 export class McOptionModule {
 }
-/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionModule, declarations: [McOption, McOptgroup, McOptionActionComponent], imports: [CommonModule, McPseudoCheckboxModule], exports: [McOption, McOptgroup, McOptionActionComponent] });
-/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionModule, imports: [[CommonModule, McPseudoCheckboxModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionModule, declarations: [McOption, McOptgroup, McOptionActionComponent], imports: [CommonModule, McPseudoCheckboxModule], exports: [McOption, McOptgroup, McOptionActionComponent] });
+/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionModule, imports: [[CommonModule, McPseudoCheckboxModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, McPseudoCheckboxModule],

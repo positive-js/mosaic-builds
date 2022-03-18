@@ -16,8 +16,8 @@ import { McTab } from './tab.component';
 import * as i0 from "@angular/core";
 export class McTabsModule {
 }
-/** @nocollapse */ /** @nocollapse */ McTabsModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTabsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McTabsModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTabsModule, declarations: [McTabGroup,
+/** @nocollapse */ /** @nocollapse */ McTabsModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTabsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McTabsModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTabsModule, declarations: [McTabGroup,
         McTabLabel,
         McTab,
         McTabLabelWrapper,
@@ -48,7 +48,7 @@ export class McTabsModule {
         McAlignTabsEndCssStyler,
         McStretchTabsCssStyler,
         McVerticalTabsCssStyler] });
-/** @nocollapse */ /** @nocollapse */ McTabsModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTabsModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McTabsModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTabsModule, imports: [[
             CommonModule,
             PortalModule,
             A11yModule,
@@ -56,7 +56,7 @@ export class McTabsModule {
             McIconModule,
             McToolTipModule
         ], McCommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTabsModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTabsModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

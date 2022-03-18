@@ -89,10 +89,10 @@ class McCommonModule {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCommonModule, deps: [{ token: MC_SANITY_CHECKS, optional: true }], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCommonModule, imports: [BidiModule], exports: [BidiModule] });
-/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCommonModule, imports: [[BidiModule], BidiModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McCommonModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCommonModule, deps: [{ token: MC_SANITY_CHECKS, optional: true }], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCommonModule, imports: [BidiModule], exports: [BidiModule] });
+/** @nocollapse */ /** @nocollapse */ McCommonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCommonModule, imports: [[BidiModule], BidiModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McCommonModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [BidiModule],
@@ -205,9 +205,9 @@ function mixinErrorState(base) {
  */
 class McLine {
 }
-/** @nocollapse */ /** @nocollapse */ McLine.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McLine, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McLine.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McLine, selector: "[mc-line], [mcLine]", host: { classAttribute: "mc-line" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McLine, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McLine.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McLine, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McLine.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McLine, selector: "[mc-line], [mcLine]", host: { classAttribute: "mc-line" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McLine, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mc-line], [mcLine]',
@@ -254,10 +254,10 @@ class McLineSetter {
 }
 class McLineModule {
 }
-/** @nocollapse */ /** @nocollapse */ McLineModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McLineModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McLineModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McLineModule, declarations: [McLine], exports: [McLine] });
-/** @nocollapse */ /** @nocollapse */ McLineModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McLineModule, imports: [[]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McLineModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McLineModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McLineModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McLineModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McLineModule, declarations: [McLine], exports: [McLine] });
+/** @nocollapse */ /** @nocollapse */ McLineModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McLineModule, imports: [[]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McLineModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [],
@@ -272,9 +272,9 @@ class ShowOnDirtyErrorStateMatcher {
         return !!(control && control.invalid && (control.dirty || (form && form.submitted)));
     }
 }
-/** @nocollapse */ /** @nocollapse */ ShowOnDirtyErrorStateMatcher.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: ShowOnDirtyErrorStateMatcher, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-/** @nocollapse */ /** @nocollapse */ ShowOnDirtyErrorStateMatcher.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: ShowOnDirtyErrorStateMatcher });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: ShowOnDirtyErrorStateMatcher, decorators: [{
+/** @nocollapse */ /** @nocollapse */ ShowOnDirtyErrorStateMatcher.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: ShowOnDirtyErrorStateMatcher, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+/** @nocollapse */ /** @nocollapse */ ShowOnDirtyErrorStateMatcher.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: ShowOnDirtyErrorStateMatcher });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: ShowOnDirtyErrorStateMatcher, decorators: [{
             type: Injectable
         }] });
 /** Provider that defines how form controls behave with regards to displaying error messages. */
@@ -283,9 +283,9 @@ class ErrorStateMatcher {
         return !!(control && control.invalid && (control.touched || (form && form.submitted)));
     }
 }
-/** @nocollapse */ /** @nocollapse */ ErrorStateMatcher.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: ErrorStateMatcher, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-/** @nocollapse */ /** @nocollapse */ ErrorStateMatcher.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: ErrorStateMatcher, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: ErrorStateMatcher, decorators: [{
+/** @nocollapse */ /** @nocollapse */ ErrorStateMatcher.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: ErrorStateMatcher, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+/** @nocollapse */ /** @nocollapse */ ErrorStateMatcher.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: ErrorStateMatcher, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: ErrorStateMatcher, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
@@ -1194,9 +1194,9 @@ class DateFormatter {
         return this.adapter.hasSame(startDate, endDate, unit) ? 'yes' : 'no';
     }
 }
-/** @nocollapse */ /** @nocollapse */ DateFormatter.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: DateFormatter, deps: [{ token: i1.DateAdapter }, { token: MC_DATE_LOCALE }], target: i0.ɵɵFactoryTarget.Injectable });
-/** @nocollapse */ /** @nocollapse */ DateFormatter.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: DateFormatter });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: DateFormatter, decorators: [{
+/** @nocollapse */ /** @nocollapse */ DateFormatter.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: DateFormatter, deps: [{ token: i1.DateAdapter }, { token: MC_DATE_LOCALE }], target: i0.ɵɵFactoryTarget.Injectable });
+/** @nocollapse */ /** @nocollapse */ DateFormatter.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: DateFormatter });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: DateFormatter, decorators: [{
             type: Injectable
         }], ctorParameters: function () { return [{ type: i1.DateAdapter }, { type: undefined, decorators: [{
                     type: Inject,
@@ -1290,10 +1290,10 @@ class McDecimalPipe {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McDecimalPipe, deps: [{ token: MC_LOCALE_ID, optional: true }], target: i0.ɵɵFactoryTarget.Pipe });
-/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McDecimalPipe, name: "mcNumber" });
-/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McDecimalPipe, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McDecimalPipe, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McDecimalPipe, deps: [{ token: MC_LOCALE_ID, optional: true }], target: i0.ɵɵFactoryTarget.Pipe });
+/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McDecimalPipe, name: "mcNumber" });
+/** @nocollapse */ /** @nocollapse */ McDecimalPipe.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McDecimalPipe, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McDecimalPipe, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }, {
@@ -1308,10 +1308,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
 
 class McFormattersModule {
 }
-/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormattersModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormattersModule, declarations: [McDecimalPipe], exports: [McDecimalPipe] });
-/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormattersModule, providers: [DateFormatter] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormattersModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormattersModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormattersModule, declarations: [McDecimalPipe], exports: [McDecimalPipe] });
+/** @nocollapse */ /** @nocollapse */ McFormattersModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormattersModule, providers: [DateFormatter] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormattersModule, decorators: [{
             type: NgModule,
             args: [{
                     exports: [McDecimalPipe],
@@ -1410,19 +1410,19 @@ class McHighlightPipe {
         return value.replace(new RegExp(`(${args})`, 'gi'), '<mark class="mc-highlight">$1</mark>');
     }
 }
-/** @nocollapse */ /** @nocollapse */ McHighlightPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McHighlightPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
-/** @nocollapse */ /** @nocollapse */ McHighlightPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McHighlightPipe, name: "mcHighlight" });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McHighlightPipe, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McHighlightPipe.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McHighlightPipe, deps: [], target: i0.ɵɵFactoryTarget.Pipe });
+/** @nocollapse */ /** @nocollapse */ McHighlightPipe.ɵpipe = i0.ɵɵngDeclarePipe({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McHighlightPipe, name: "mcHighlight" });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McHighlightPipe, decorators: [{
             type: Pipe,
             args: [{ name: 'mcHighlight' }]
         }] });
 
 class McHighlightModule {
 }
-/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McHighlightModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McHighlightModule, declarations: [McHighlightPipe], imports: [CommonModule], exports: [McHighlightPipe] });
-/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McHighlightModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McHighlightModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McHighlightModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McHighlightModule, declarations: [McHighlightPipe], imports: [CommonModule], exports: [McHighlightPipe] });
+/** @nocollapse */ /** @nocollapse */ McHighlightModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McHighlightModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McHighlightModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],
@@ -1816,16 +1816,16 @@ class McPseudoCheckbox {
         this.disabled = false;
     }
 }
-/** @nocollapse */ /** @nocollapse */ McPseudoCheckbox.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPseudoCheckbox, deps: [], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McPseudoCheckbox.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.0", type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: { state: "state", disabled: "disabled" }, host: { properties: { "class.mc-indeterminate": "state === \"indeterminate\"", "class.mc-checked": "state === \"checked\"", "class.mc-disabled": "disabled" }, classAttribute: "mc-pseudo-checkbox" }, ngImport: i0, template: "<i class=\"mc-checkbox-checkmark mc mc-check_16\"></i>\n<i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>\n", styles: [".mc-pseudo-checkbox{position:relative;display:inline-block;box-sizing:border-box;width:16px;width:var(--mc-checkbox-size-width, 16px);height:16px;height:var(--mc-checkbox-size-width, 16px);border-radius:3px;border-width:1px;border-width:var(--mc-checkbox-size-border-width, 1px);border-style:solid;cursor:pointer;vertical-align:middle;flex-shrink:0}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;top:calc(-1 * var(--mc-checkbox-size-border-width, 1px));left:-1px;left:calc(-1 * var(--mc-checkbox-size-border-width, 1px))}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark,.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPseudoCheckbox, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McPseudoCheckbox.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPseudoCheckbox, deps: [], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McPseudoCheckbox.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: { state: "state", disabled: "disabled" }, host: { properties: { "class.mc-indeterminate": "state === \"indeterminate\"", "class.mc-checked": "state === \"checked\"", "class.mc-disabled": "disabled" }, classAttribute: "mc-pseudo-checkbox" }, ngImport: i0, template: "<i class=\"mc-checkbox-checkmark mc mc-check_16\"></i>\n<i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>\n", styles: [".mc-pseudo-checkbox{position:relative;display:inline-block;box-sizing:border-box;width:var(--mc-checkbox-size-width, 16px);height:var(--mc-checkbox-size-width, 16px);border-radius:3px;border-width:var(--mc-checkbox-size-border-width, 1px);border-style:solid;cursor:pointer;vertical-align:middle;flex-shrink:0}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;position:absolute;top:calc(-1 * var(--mc-checkbox-size-border-width, 1px));left:calc(-1 * var(--mc-checkbox-size-border-width, 1px))}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark,.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPseudoCheckbox, decorators: [{
             type: Component,
             args: [{ selector: 'mc-pseudo-checkbox', host: {
                         class: 'mc-pseudo-checkbox',
                         '[class.mc-indeterminate]': 'state === "indeterminate"',
                         '[class.mc-checked]': 'state === "checked"',
                         '[class.mc-disabled]': 'disabled'
-                    }, preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, template: "<i class=\"mc-checkbox-checkmark mc mc-check_16\"></i>\n<i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>\n", styles: [".mc-pseudo-checkbox{position:relative;display:inline-block;box-sizing:border-box;width:16px;width:var(--mc-checkbox-size-width, 16px);height:16px;height:var(--mc-checkbox-size-width, 16px);border-radius:3px;border-width:1px;border-width:var(--mc-checkbox-size-border-width, 1px);border-style:solid;cursor:pointer;vertical-align:middle;flex-shrink:0}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;position:absolute;top:-1px;top:calc(-1 * var(--mc-checkbox-size-border-width, 1px));left:-1px;left:calc(-1 * var(--mc-checkbox-size-border-width, 1px))}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark,.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}\n"] }]
+                    }, preserveWhitespaces: false, changeDetection: ChangeDetectionStrategy.OnPush, encapsulation: ViewEncapsulation.None, template: "<i class=\"mc-checkbox-checkmark mc mc-check_16\"></i>\n<i class=\"mc-checkbox-mixedmark mc mc-minus_16\"></i>\n", styles: [".mc-pseudo-checkbox{position:relative;display:inline-block;box-sizing:border-box;width:var(--mc-checkbox-size-width, 16px);height:var(--mc-checkbox-size-width, 16px);border-radius:3px;border-width:var(--mc-checkbox-size-border-width, 1px);border-style:solid;cursor:pointer;vertical-align:middle;flex-shrink:0}.mc-pseudo-checkbox .mc-checkbox-checkmark,.mc-pseudo-checkbox .mc-checkbox-mixedmark{display:none;position:absolute;top:calc(-1 * var(--mc-checkbox-size-border-width, 1px));left:calc(-1 * var(--mc-checkbox-size-border-width, 1px))}.mc-pseudo-checkbox.mc-pseudo-checkbox-checked,.mc-pseudo-checkbox.mc-pseudo-checkbox-indeterminate{border-color:transparent}.mc-pseudo-checkbox.mc-checked .mc-checkbox-checkmark,.mc-pseudo-checkbox.mc-indeterminate .mc-checkbox-mixedmark{display:inline-block}.mc-pseudo-checkbox.mc-disabled{cursor:default}\n"] }]
         }], propDecorators: { state: [{
                 type: Input
             }], disabled: [{
@@ -1834,10 +1834,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
 
 class McPseudoCheckboxModule {
 }
-/** @nocollapse */ /** @nocollapse */ McPseudoCheckboxModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPseudoCheckboxModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McPseudoCheckboxModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPseudoCheckboxModule, declarations: [McPseudoCheckbox], imports: [CommonModule], exports: [McPseudoCheckbox] });
-/** @nocollapse */ /** @nocollapse */ McPseudoCheckboxModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPseudoCheckboxModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPseudoCheckboxModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McPseudoCheckboxModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPseudoCheckboxModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McPseudoCheckboxModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPseudoCheckboxModule, declarations: [McPseudoCheckbox], imports: [CommonModule], exports: [McPseudoCheckbox] });
+/** @nocollapse */ /** @nocollapse */ McPseudoCheckboxModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPseudoCheckboxModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPseudoCheckboxModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule],
@@ -1879,9 +1879,9 @@ class McMeasureScrollbarService {
         this._scrollBarWidth = width;
     }
 }
-/** @nocollapse */ /** @nocollapse */ McMeasureScrollbarService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McMeasureScrollbarService, deps: [{ token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
-/** @nocollapse */ /** @nocollapse */ McMeasureScrollbarService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McMeasureScrollbarService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McMeasureScrollbarService, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McMeasureScrollbarService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McMeasureScrollbarService, deps: [{ token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable });
+/** @nocollapse */ /** @nocollapse */ McMeasureScrollbarService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McMeasureScrollbarService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McMeasureScrollbarService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
@@ -1907,14 +1907,14 @@ class McOptgroup extends McOptgroupMixinBase {
         this.labelId = `mc-optgroup-label-${uniqueOptgroupIdCounter++}`;
     }
 }
-/** @nocollapse */ /** @nocollapse */ McOptgroup.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptgroup, deps: null, target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McOptgroup.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.0", type: McOptgroup, selector: "mc-optgroup", inputs: { disabled: "disabled", label: "label" }, host: { properties: { "class.mc-disabled": "disabled" }, classAttribute: "mc-optgroup" }, exportAs: ["mcOptgroup"], usesInheritance: true, ngImport: i0, template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label>\n<ng-content select=\"mc-option, mc-list-option, ng-container\"></ng-content>\n", styles: [".mc-optgroup-label{padding-left:17px;padding-left:var(--mc-optgroup-size-padding-left, 17px);-webkit-user-select:none;user-select:none;cursor:default}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptgroup, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McOptgroup.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptgroup, deps: null, target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McOptgroup.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McOptgroup, selector: "mc-optgroup", inputs: { disabled: "disabled", label: "label" }, host: { properties: { "class.mc-disabled": "disabled" }, classAttribute: "mc-optgroup" }, exportAs: ["mcOptgroup"], usesInheritance: true, ngImport: i0, template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label>\n<ng-content select=\"mc-option, mc-list-option, ng-container\"></ng-content>\n", styles: [".mc-optgroup-label{padding-left:var(--mc-optgroup-size-padding-left, 17px);-webkit-user-select:none;user-select:none;cursor:default}\n"], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptgroup, decorators: [{
             type: Component,
             args: [{ selector: 'mc-optgroup', exportAs: 'mcOptgroup', encapsulation: ViewEncapsulation.None, changeDetection: ChangeDetectionStrategy.OnPush, inputs: ['disabled'], host: {
                         class: 'mc-optgroup',
                         '[class.mc-disabled]': 'disabled'
-                    }, template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label>\n<ng-content select=\"mc-option, mc-list-option, ng-container\"></ng-content>\n", styles: [".mc-optgroup-label{padding-left:17px;padding-left:var(--mc-optgroup-size-padding-left, 17px);-webkit-user-select:none;user-select:none;cursor:default}\n"] }]
+                    }, template: "<label class=\"mc-optgroup-label\" [id]=\"labelId\">{{ label }}</label>\n<ng-content select=\"mc-option, mc-list-option, ng-container\"></ng-content>\n", styles: [".mc-optgroup-label{padding-left:var(--mc-optgroup-size-padding-left, 17px);-webkit-user-select:none;user-select:none;cursor:default}\n"] }]
         }], propDecorators: { label: [{
                 type: Input
             }] } });
@@ -2093,9 +2093,9 @@ class McOption {
         this.onSelectionChange.emit(new McOptionSelectionChange(this, isUserInput));
     }
 }
-/** @nocollapse */ /** @nocollapse */ McOption.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOption, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: MC_OPTION_PARENT_COMPONENT, optional: true }, { token: McOptgroup, optional: true }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McOption.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.0", type: McOption, selector: "mc-option", inputs: { value: "value", showCheckbox: "showCheckbox", disabled: "disabled" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "click": "selectViaInteraction()", "keydown": "handleKeydown($event)" }, properties: { "attr.tabindex": "getTabIndex()", "class.mc-selected": "selected", "class.mc-option-multiple": "multiple", "class.mc-active": "active", "class.mc-disabled": "disabled", "id": "id" }, classAttribute: "mc-option" }, exportAs: ["mcOption"], ngImport: i0, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);border:2px solid transparent;border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:-2px;top:calc(-1 * var(--mc-option-size-border-width, 2px));left:-2px;left:calc(-1 * var(--mc-option-size-border-width, 2px));right:-2px;right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:-2px;bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}\n"], components: [{ type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOption, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McOption.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOption, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: MC_OPTION_PARENT_COMPONENT, optional: true }, { token: McOptgroup, optional: true }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McOption.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McOption, selector: "mc-option", inputs: { value: "value", showCheckbox: "showCheckbox", disabled: "disabled" }, outputs: { onSelectionChange: "onSelectionChange" }, host: { listeners: { "click": "selectViaInteraction()", "keydown": "handleKeydown($event)" }, properties: { "attr.tabindex": "getTabIndex()", "class.mc-selected": "selected", "class.mc-option-multiple": "multiple", "class.mc-active": "active", "class.mc-disabled": "disabled", "id": "id" }, classAttribute: "mc-option" }, exportAs: ["mcOption"], ngImport: i0, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:var(--mc-option-size-height, 32px);border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}\n"], components: [{ type: McPseudoCheckbox, selector: "mc-pseudo-checkbox", inputs: ["state", "disabled"] }], directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOption, decorators: [{
             type: Component,
             args: [{ selector: 'mc-option', exportAs: 'mcOption', host: {
                         '[attr.tabindex]': 'getTabIndex()',
@@ -2107,7 +2107,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
                         '[id]': 'id',
                         '(click)': 'selectViaInteraction()',
                         '(keydown)': 'handleKeydown($event)'
-                    }, encapsulation: ViewEncapsulation.None, changeDetection: ChangeDetectionStrategy.OnPush, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:32px;height:var(--mc-option-size-height, 32px);border:2px solid transparent;border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:16px;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:16px;padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:-2px;top:calc(-1 * var(--mc-option-size-border-width, 2px));left:-2px;left:calc(-1 * var(--mc-option-size-border-width, 2px));right:-2px;right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:-2px;bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}\n"] }]
+                    }, encapsulation: ViewEncapsulation.None, changeDetection: ChangeDetectionStrategy.OnPush, template: "<mc-pseudo-checkbox\n    *ngIf=\"showCheckbox\"\n    [state]=\"selected ? 'checked' : 'unchecked'\"\n    [disabled]=\"disabled\">\n</mc-pseudo-checkbox>\n\n<span class=\"mc-option-text\"><ng-content></ng-content></span>\n\n<div class=\"mc-option-overlay\"></div>\n", styles: [".mc-option{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;position:relative;max-width:100%;height:var(--mc-option-size-height, 32px);border:var(--mc-option-size-border-width, 2px) solid transparent;cursor:pointer;outline:none;padding-left:var(--mc-option-size-horizontal-padding, 16px);padding-right:var(--mc-option-size-horizontal-padding, 16px);-webkit-tap-highlight-color:transparent}.mc-option.mc-disabled{cursor:default}.mc-option .mc-pseudo-checkbox{margin-right:8px}.mc-option .mc-option-overlay{position:absolute;top:calc(-1 * var(--mc-option-size-border-width, 2px));left:calc(-1 * var(--mc-option-size-border-width, 2px));right:calc(-1 * var(--mc-option-size-border-width, 2px));bottom:calc(-1 * var(--mc-option-size-border-width, 2px));pointer-events:none;border-radius:inherit}.mc-option-text{display:inline-block;flex-grow:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}\n"] }]
         }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: undefined, decorators: [{
                     type: Optional
                 }, {
@@ -2244,14 +2244,14 @@ class McOptionActionComponent extends McOptionActionMixinBase {
         setTimeout(() => this.option.tooltipTrigger.disabled = false);
     }
 }
-/** @nocollapse */ /** @nocollapse */ McOptionActionComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionActionComponent, deps: [{ token: i0.ElementRef }, { token: i1$1.FocusMonitor }, { token: MC_OPTION_ACTION_PARENT }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McOptionActionComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.0", type: McOptionActionComponent, selector: "mc-option-action", inputs: { disabled: "disabled" }, host: { listeners: { "focus": "onFocus($event)", "blur": "onBlur()", "click": "onClick($event)", "keydown": "onKeyDown($event)" }, properties: { "class.mc-expanded": "false", "attr.disabled": "disabled || null", "attr.tabIndex": "-1" }, classAttribute: "mc-option-action" }, queries: [{ propertyName: "customIcon", first: true, predicate: ["customIcon"], descendants: true }], exportAs: ["mcOptionAction"], usesInheritance: true, ngImport: i0, template: `
+/** @nocollapse */ /** @nocollapse */ McOptionActionComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionActionComponent, deps: [{ token: i0.ElementRef }, { token: i1$1.FocusMonitor }, { token: MC_OPTION_ACTION_PARENT }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McOptionActionComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McOptionActionComponent, selector: "mc-option-action", inputs: { disabled: "disabled" }, host: { listeners: { "focus": "onFocus($event)", "blur": "onBlur()", "click": "onClick($event)", "keydown": "onKeyDown($event)" }, properties: { "class.mc-expanded": "false", "attr.disabled": "disabled || null", "attr.tabIndex": "-1" }, classAttribute: "mc-option-action" }, queries: [{ propertyName: "customIcon", first: true, predicate: ["customIcon"], descendants: true }], exportAs: ["mcOptionAction"], usesInheritance: true, ngImport: i0, template: `
         <ng-container [ngSwitch]="!!customIcon">
             <i class="mc mc-icon mc-ellipsis_16" *ngSwitchCase="false"></i>
             <ng-content select="[mc-icon]" *ngSwitchCase="true"></ng-content>
         </ng-container>
     `, isInline: true, styles: [".mc-option-action{box-sizing:unset;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:-2px;width:28px;height:100%;cursor:pointer;outline:none;border:2px solid transparent;background:transparent}.mc-option-action[disabled]{cursor:default}\n"], directives: [{ type: i2.NgSwitch, selector: "[ngSwitch]", inputs: ["ngSwitch"] }, { type: i2.NgSwitchCase, selector: "[ngSwitchCase]", inputs: ["ngSwitchCase"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionActionComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionActionComponent, decorators: [{
             type: Component,
             args: [{ selector: 'mc-option-action', exportAs: 'mcOptionAction', template: `
         <ng-container [ngSwitch]="!!customIcon">
@@ -2278,10 +2278,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
 
 class McOptionModule {
 }
-/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionModule, declarations: [McOption, McOptgroup, McOptionActionComponent], imports: [CommonModule, McPseudoCheckboxModule], exports: [McOption, McOptgroup, McOptionActionComponent] });
-/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionModule, imports: [[CommonModule, McPseudoCheckboxModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McOptionModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionModule, declarations: [McOption, McOptgroup, McOptionActionComponent], imports: [CommonModule, McPseudoCheckboxModule], exports: [McOption, McOptgroup, McOptionActionComponent] });
+/** @nocollapse */ /** @nocollapse */ McOptionModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionModule, imports: [[CommonModule, McPseudoCheckboxModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McOptionModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, McPseudoCheckboxModule],
@@ -2309,9 +2309,9 @@ class McFormElement {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McFormElement.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormElement, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McFormElement.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McFormElement, selector: ".mc-form__row, .mc-form__fieldset, .mc-form__legend", host: { properties: { "class.mc-form-row_margin": "margin" } }, queries: [{ propertyName: "elements", predicate: McFormElement }], exportAs: ["mcFormElement"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormElement, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McFormElement.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormElement, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McFormElement.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McFormElement, selector: ".mc-form__row, .mc-form__fieldset, .mc-form__legend", host: { properties: { "class.mc-form-row_margin": "margin" } }, queries: [{ propertyName: "elements", predicate: McFormElement }], exportAs: ["mcFormElement"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormElement, decorators: [{
             type: Directive,
             args: [{
                     selector: '.mc-form__row, .mc-form__fieldset, .mc-form__legend',
@@ -2338,9 +2338,9 @@ class McForm {
         });
     }
 }
-/** @nocollapse */ /** @nocollapse */ McForm.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McForm, deps: [], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McForm.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McForm, selector: ".mc-form-vertical, .mc-form-horizontal", host: { classAttribute: "mc-form" }, queries: [{ propertyName: "elements", predicate: McFormElement }], exportAs: ["mcForm"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McForm, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McForm.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McForm, deps: [], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McForm.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McForm, selector: ".mc-form-vertical, .mc-form-horizontal", host: { classAttribute: "mc-form" }, queries: [{ propertyName: "elements", predicate: McFormElement }], exportAs: ["mcForm"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McForm, decorators: [{
             type: Directive,
             args: [{
                     selector: '.mc-form-vertical, .mc-form-horizontal',
@@ -2356,12 +2356,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
 
 class McFormsModule {
 }
-/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormsModule, declarations: [McForm,
+/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormsModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormsModule, declarations: [McForm,
         McFormElement], exports: [McForm,
         McFormElement] });
-/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormsModule });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McFormsModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McFormsModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormsModule });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormsModule, decorators: [{
             type: NgModule,
             args: [{
                     exports: [
@@ -2493,9 +2493,9 @@ class McPopUp {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McPopUp.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPopUp, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McPopUp.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McPopUp, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPopUp, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McPopUp.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPopUp, deps: [{ token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McPopUp.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McPopUp, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPopUp, decorators: [{
             type: Directive
         }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }]; } });
 
@@ -2719,9 +2719,9 @@ class McPopUpTrigger {
         this.listeners.clear();
     }
 }
-/** @nocollapse */ /** @nocollapse */ McPopUpTrigger.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPopUpTrigger, deps: "invalid", target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McPopUpTrigger.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McPopUpTrigger, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McPopUpTrigger, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McPopUpTrigger.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPopUpTrigger, deps: "invalid", target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McPopUpTrigger.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McPopUpTrigger, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPopUpTrigger, decorators: [{
             type: Directive
         }], ctorParameters: function () { return [{ type: i1$2.Overlay }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i1$2.ScrollDispatcher }, { type: i0.ViewContainerRef }, { type: undefined }, { type: i2$1.Directionality }]; } });
 

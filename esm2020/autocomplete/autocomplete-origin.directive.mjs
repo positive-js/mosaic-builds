@@ -9,9 +9,9 @@ export class McAutocompleteOrigin {
         this.elementRef = elementRef;
     }
 }
-/** @nocollapse */ /** @nocollapse */ McAutocompleteOrigin.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McAutocompleteOrigin, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McAutocompleteOrigin.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McAutocompleteOrigin, selector: "[mcAutocompleteOrigin]", exportAs: ["mcAutocompleteOrigin"], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McAutocompleteOrigin, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McAutocompleteOrigin.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McAutocompleteOrigin, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McAutocompleteOrigin.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McAutocompleteOrigin, selector: "[mcAutocompleteOrigin]", exportAs: ["mcAutocompleteOrigin"], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McAutocompleteOrigin, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mcAutocompleteOrigin]',

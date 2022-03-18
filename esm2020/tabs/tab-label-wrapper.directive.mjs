@@ -58,9 +58,9 @@ export class McTabLabelWrapper extends McTabLabelWrapperMixinBase {
         }
     }
 }
-/** @nocollapse */ /** @nocollapse */ McTabLabelWrapper.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTabLabelWrapper, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McTabLabelWrapper.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: { disabled: "disabled", tab: "tab" }, host: { properties: { "attr.disabled": "disabled || null" } }, queries: [{ propertyName: "labelContent", first: true, predicate: ["labelContent"], descendants: true }], usesInheritance: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTabLabelWrapper, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTabLabelWrapper.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTabLabelWrapper, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McTabLabelWrapper.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McTabLabelWrapper, selector: "[mcTabLabelWrapper]", inputs: { disabled: "disabled", tab: "tab" }, host: { properties: { "attr.disabled": "disabled || null" } }, queries: [{ propertyName: "labelContent", first: true, predicate: ["labelContent"], descendants: true }], usesInheritance: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTabLabelWrapper, decorators: [{
             type: Directive,
             args: [{
                     selector: '[mcTabLabelWrapper]',

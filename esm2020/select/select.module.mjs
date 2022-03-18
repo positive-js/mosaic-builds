@@ -9,8 +9,8 @@ import { McSelect, McSelectSearch, McSelectSearchEmptyResult, McSelectTrigger } 
 import * as i0 from "@angular/core";
 export class McSelectModule {
 }
-/** @nocollapse */ /** @nocollapse */ McSelectModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McSelectModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McSelectModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McSelectModule, declarations: [McSelect,
+/** @nocollapse */ /** @nocollapse */ McSelectModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McSelectModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McSelectModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McSelectModule, declarations: [McSelect,
         McSelectSearch,
         McSelectSearchEmptyResult,
         McSelectTrigger], imports: [CommonModule,
@@ -24,7 +24,7 @@ export class McSelectModule {
         McSelectTrigger,
         McOptionModule,
         CommonModule] });
-/** @nocollapse */ /** @nocollapse */ McSelectModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McSelectModule, providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER], imports: [[
+/** @nocollapse */ /** @nocollapse */ McSelectModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McSelectModule, providers: [MC_SELECT_SCROLL_STRATEGY_PROVIDER], imports: [[
             CommonModule,
             OverlayModule,
             McOptionModule,
@@ -33,7 +33,7 @@ export class McSelectModule {
         ], McFormFieldModule,
         McOptionModule,
         CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McSelectModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McSelectModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

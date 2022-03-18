@@ -202,9 +202,9 @@ class McTextarea extends McTextareaMixinBase {
         return validity && validity.badInput;
     }
 }
-/** @nocollapse */ /** @nocollapse */ McTextarea.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTextarea, deps: [{ token: i0.ElementRef }, { token: i1.NgControl, optional: true, self: true }, { token: i1.NgForm, optional: true }, { token: NG_VALIDATORS, optional: true, self: true }, { token: MC_VALIDATION, optional: true }, { token: i1.NgModel, optional: true, self: true }, { token: i1.FormGroupDirective, optional: true }, { token: i2.ErrorStateMatcher }, { token: MC_TEXTAREA_VALUE_ACCESSOR, optional: true, self: true }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McTextarea.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.2.0", type: McTextarea, selector: "textarea[mcTextarea]", inputs: { canGrow: "canGrow", errorStateMatcher: "errorStateMatcher", disabled: "disabled", id: "id", placeholder: "placeholder", required: "required", value: "value" }, host: { listeners: { "blur": "focusChanged(false)", "focus": "focusChanged(true)" }, properties: { "class.mc-textarea-resizable": "!canGrow", "attr.id": "id", "attr.placeholder": "placeholder", "attr.aria-invalid": "errorState", "attr.disabled": "disabled || null", "attr.required": "required" }, classAttribute: "mc-textarea" }, providers: [{ provide: McFormFieldControl, useExisting: McTextarea }], exportAs: ["mcTextarea"], usesInheritance: true, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTextarea, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTextarea.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTextarea, deps: [{ token: i0.ElementRef }, { token: i1.NgControl, optional: true, self: true }, { token: i1.NgForm, optional: true }, { token: NG_VALIDATORS, optional: true, self: true }, { token: MC_VALIDATION, optional: true }, { token: i1.NgModel, optional: true, self: true }, { token: i1.FormGroupDirective, optional: true }, { token: i2.ErrorStateMatcher }, { token: MC_TEXTAREA_VALUE_ACCESSOR, optional: true, self: true }, { token: i0.NgZone }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McTextarea.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McTextarea, selector: "textarea[mcTextarea]", inputs: { canGrow: "canGrow", errorStateMatcher: "errorStateMatcher", disabled: "disabled", id: "id", placeholder: "placeholder", required: "required", value: "value" }, host: { listeners: { "blur": "focusChanged(false)", "focus": "focusChanged(true)" }, properties: { "class.mc-textarea-resizable": "!canGrow", "attr.id": "id", "attr.placeholder": "placeholder", "attr.aria-invalid": "errorState", "attr.disabled": "disabled || null", "attr.required": "required" }, classAttribute: "mc-textarea" }, providers: [{ provide: McFormFieldControl, useExisting: McTextarea }], exportAs: ["mcTextarea"], usesInheritance: true, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTextarea, decorators: [{
             type: Directive,
             args: [{
                     selector: 'textarea[mcTextarea]',
@@ -273,10 +273,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImpor
 
 class McTextareaModule {
 }
-/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTextareaModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTextareaModule, declarations: [McTextarea], imports: [CommonModule, A11yModule, McCommonModule, FormsModule], exports: [McTextarea] });
-/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTextareaModule, imports: [[CommonModule, A11yModule, McCommonModule, FormsModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTextareaModule, decorators: [{
+/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTextareaModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTextareaModule, declarations: [McTextarea], imports: [CommonModule, A11yModule, McCommonModule, FormsModule], exports: [McTextarea] });
+/** @nocollapse */ /** @nocollapse */ McTextareaModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTextareaModule, imports: [[CommonModule, A11yModule, McCommonModule, FormsModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTextareaModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CommonModule, A11yModule, McCommonModule, FormsModule],

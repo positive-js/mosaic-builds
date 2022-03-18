@@ -5,14 +5,14 @@ import { McProgressSpinner } from './progress-spinner.component';
 import * as i0 from "@angular/core";
 export class McProgressSpinnerModule {
 }
-/** @nocollapse */ /** @nocollapse */ McProgressSpinnerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McProgressSpinnerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McProgressSpinnerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McProgressSpinnerModule, declarations: [McProgressSpinner], imports: [CommonModule,
+/** @nocollapse */ /** @nocollapse */ McProgressSpinnerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McProgressSpinnerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McProgressSpinnerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McProgressSpinnerModule, declarations: [McProgressSpinner], imports: [CommonModule,
         PlatformModule], exports: [McProgressSpinner] });
-/** @nocollapse */ /** @nocollapse */ McProgressSpinnerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McProgressSpinnerModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McProgressSpinnerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McProgressSpinnerModule, imports: [[
             CommonModule,
             PlatformModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McProgressSpinnerModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McProgressSpinnerModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [

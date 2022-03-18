@@ -7,18 +7,18 @@ import { McTimepicker } from './timepicker.directive';
 import * as i0 from "@angular/core";
 export class McTimepickerModule {
 }
-/** @nocollapse */ /** @nocollapse */ McTimepickerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTimepickerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McTimepickerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTimepickerModule, declarations: [McTimepicker], imports: [CommonModule,
+/** @nocollapse */ /** @nocollapse */ McTimepickerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTimepickerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+/** @nocollapse */ /** @nocollapse */ McTimepickerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTimepickerModule, declarations: [McTimepicker], imports: [CommonModule,
         A11yModule,
         PlatformModule,
         FormsModule], exports: [McTimepicker] });
-/** @nocollapse */ /** @nocollapse */ McTimepickerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTimepickerModule, imports: [[
+/** @nocollapse */ /** @nocollapse */ McTimepickerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTimepickerModule, imports: [[
             CommonModule,
             A11yModule,
             PlatformModule,
             FormsModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.0", ngImport: i0, type: McTimepickerModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTimepickerModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [
