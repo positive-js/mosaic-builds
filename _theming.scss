@@ -108,6 +108,8 @@ $light-color-scheme-warning-default: #a26e0c;
 $light-color-scheme-foreground-text: #19252f;
 $light-color-scheme-foreground-text-less-contrast: #6d7a86;
 $light-color-scheme-foreground-text-disabled: #8c99a5;
+$light-color-scheme-foreground-text-error: #db3c55;
+$light-color-scheme-foreground-text-success: #016b37;
 $light-color-scheme-foreground-divider: #d7dee4;
 $light-color-scheme-foreground-border: #bdc7d1;
 $light-color-scheme-foreground-icon: #8c99a5;
@@ -130,6 +132,8 @@ $dark-color-scheme-warning-default: #7e5406;
 $dark-color-scheme-foreground-text: #f2f5f9;
 $dark-color-scheme-foreground-text-less-contrast: #8c99a5;
 $dark-color-scheme-foreground-text-disabled: #6d7a86;
+$dark-color-scheme-foreground-text-error: #ea5868;
+$dark-color-scheme-foreground-text-success: #319d5c;
 $dark-color-scheme-foreground-divider: #333f4a;
 $dark-color-scheme-foreground-border: #515e69;
 $dark-color-scheme-foreground-icon: #8c99a5;
@@ -630,6 +634,21 @@ $form-field-size-button-width: 32px;
 $form-field-font-default: body;
 $form-field-hint-size-margin-top: 4px;
 $form-field-hint-font-default: caption;
+$form-field-password-hint-light-color-scheme-text-color: #19252f;
+$form-field-password-hint-light-color-scheme-icon-color: #19252f;
+$form-field-password-hint-light-color-scheme-states-invalid-icon-color: #db3c55;
+$form-field-password-hint-light-color-scheme-states-invalid-text-color: #19252f;
+$form-field-password-hint-light-color-scheme-states-valid-text-color: #016b37;
+$form-field-password-hint-light-color-scheme-states-valid-icon-color: #016b37;
+$form-field-password-hint-dark-color-scheme-text-color: #f2f5f9;
+$form-field-password-hint-dark-color-scheme-icon-color: #f2f5f9;
+$form-field-password-hint-dark-color-scheme-states-invalid-icon-color: #ea5868;
+$form-field-password-hint-dark-color-scheme-states-invalid-text-color: #f2f5f9;
+$form-field-password-hint-dark-color-scheme-states-valid-text-color: #319d5c;
+$form-field-password-hint-dark-color-scheme-states-valid-icon-color: #319d5c;
+$form-field-password-hint-size-margin-top: 8px;
+$form-field-password-hint-size-icon-margin: 4px;
+$form-field-password-hint-font-default: caption;
 $forms-light-color-scheme-label: #6d7a86;
 $forms-light-color-scheme-legend: #19252f;
 $forms-dark-color-scheme-label: #8c99a5;
@@ -2579,6 +2598,17 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
         state-invalid-background: $form-field-light-color-scheme-states-invalid-background
     );
 
+    $form-field-password-hint: (
+        text-color: $form-field-password-hint-light-color-scheme-text-color,
+        icon-color: $form-field-password-hint-light-color-scheme-text-color,
+
+        state-invalid-text-color: $form-field-password-hint-light-color-scheme-states-invalid-text-color,
+        state-invalid-icon-color: $form-field-password-hint-light-color-scheme-states-invalid-icon-color,
+
+        state-valid-text-color: $form-field-password-hint-light-color-scheme-states-valid-text-color,
+        state-valid-icon-color: $form-field-password-hint-light-color-scheme-states-valid-icon-color
+    );
+
     $forms: (
         label: $forms-light-color-scheme-label,
         legend: $forms-light-color-scheme-legend,
@@ -2751,6 +2781,7 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
         checkbox: $checkbox,
         datepicker: $datepicker,
         form-field: $form-field,
+        form-field-password-hint: $form-field-password-hint,
         forms: $forms,
         link: $link,
         modal: $modal,
@@ -2965,6 +2996,17 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
         state-invalid-background: $form-field-dark-color-scheme-states-invalid-background
     );
 
+    $form-field-password-hint: (
+        text-color: $form-field-password-hint-dark-color-scheme-text-color,
+        icon-color: $form-field-password-hint-dark-color-scheme-text-color,
+
+        state-invalid-text-color: $form-field-password-hint-dark-color-scheme-states-invalid-text-color,
+        state-invalid-icon-color: $form-field-password-hint-dark-color-scheme-states-invalid-icon-color,
+
+        state-valid-text-color: $form-field-password-hint-dark-color-scheme-states-valid-text-color,
+        state-valid-icon-color: $form-field-password-hint-dark-color-scheme-states-valid-icon-color
+    );
+
     $forms: (
         label: $forms-dark-color-scheme-label,
         legend: $forms-dark-color-scheme-legend,
@@ -3137,6 +3179,7 @@ $swift-linear: all $swift-linear-duration $swift-linear-timing-function !default
         checkbox: $checkbox,
         datepicker: $datepicker,
         form-field: $form-field,
+        form-field-password-hint: $form-field-password-hint,
         forms: $forms,
         link: $link,
         modal: $modal,
@@ -4389,12 +4432,12 @@ $mc-datepicker-today-fade-amount: 0.2;
                     }
                 }
 
-                & .mc-form-field__hint {
+                & .mc-hint {
                     color: mc-color($error);
                 }
             }
 
-            &.mc-focused {
+            &.cdk-focused {
                 &:not(.ng-invalid) .mc-form-field__container {
                     border-color: map-get(map-get($theme, states), focused-color);
                     box-shadow: 0 0 0 1px map-get(map-get($theme, states), focused-color);
@@ -4424,6 +4467,32 @@ $mc-datepicker-today-fade-amount: 0.2;
             /* stylelint-enable no-descending-specificity */
         }
     }
+
+    .mc-password-hint {
+        $password-hint: map-get(map-get($theme, components), form-field-password-hint);
+
+        color: map-get($password-hint, text-color);
+
+        & .mc-password-hint__icon {
+            color: map-get($password-hint, icon-color);
+        }
+
+        &.mc-password-hint_valid {
+            color: map-get($password-hint, state-valid-text-color);
+
+            & .mc-password-hint__icon {
+                color: map-get($password-hint, state-valid-icon-color);
+            }
+        }
+
+        &.mc-password-hint_invalid {
+            color: map-get($password-hint, state-invalid-text-color);
+
+            & .mc-password-hint__icon {
+                color: map-get($password-hint, state-invalid-icon-color);
+            }
+        }
+    }
 }
 
 @mixin mc-form-field-typography($config) {
@@ -4446,6 +4515,7 @@ $mc-datepicker-today-fade-amount: 0.2;
 
 @mixin mc-input-theme($theme) {
     $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
 
     .mc-input {
         color: map-get($foreground, text);
@@ -4460,6 +4530,25 @@ $mc-datepicker-today-fade-amount: 0.2;
 
         &::-webkit-input-placeholder {
             color: map-get($foreground, text-disabled);
+        }
+    }
+
+    .mc-password-toggle {
+        color: map-get($foreground, icon);
+
+        &:hover {
+            color: map-get($foreground, text);
+        }
+
+        &[disabled] {
+            cursor: default;
+
+            color: map-get($foreground, text-disabled);
+        }
+
+        &.cdk-keyboard-focused {
+            border-color: map-get(map-get($theme, states), focused-color);
+            box-shadow: 0 0 0 1px map-get(map-get($theme, states), focused-color);
         }
     }
 }

@@ -1,13 +1,14 @@
-import * as i1$1 from '@angular/common';
+import * as i3 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { Component, Directive, Input, EventEmitter, Output, ViewEncapsulation, ChangeDetectionStrategy, ContentChild, ContentChildren, ViewChild, NgModule } from '@angular/core';
+import { Component, Directive, Input, ChangeDetectionStrategy, EventEmitter, Output, ViewEncapsulation, ContentChild, ContentChildren, ViewChild, NgModule } from '@angular/core';
 import * as i1 from '@ptsecurity/mosaic/icon';
 import { McIconModule } from '@ptsecurity/mosaic/icon';
 import { ThemePalette, mixinColor } from '@ptsecurity/mosaic/core';
-import { ESCAPE } from '@ptsecurity/cdk/keycodes';
+import { F8, ESCAPE } from '@ptsecurity/cdk/keycodes';
 import { Subject, EMPTY, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
+import * as i1$1 from '@angular/cdk/a11y';
 
 class McCleaner {
     constructor() {
@@ -40,10 +41,10 @@ function getMcFormFieldYouCanNotUseCleanerInNumberInputError() {
     return Error(`You can't use mc-cleaner with input that have type="number"`);
 }
 
-let nextUniqueId$1 = 0;
+let nextHintUniqueId = 0;
 class McHint {
     constructor() {
-        this.id = `mc-hint-${nextUniqueId$1++}`;
+        this.id = `mc-hint-${nextHintUniqueId++}`;
     }
 }
 /** @nocollapse */ /** @nocollapse */ McHint.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McHint, deps: [], target: i0.ɵɵFactoryTarget.Directive });
@@ -58,6 +59,116 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
                     }
                 }]
         }], propDecorators: { id: [{
+                type: Input
+            }] } });
+
+let nextPasswordHintUniqueId = 0;
+var PasswordRules;
+(function (PasswordRules) {
+    PasswordRules[PasswordRules["Length"] = 0] = "Length";
+    PasswordRules[PasswordRules["UpperLatin"] = 1] = "UpperLatin";
+    PasswordRules[PasswordRules["LowerLatin"] = 2] = "LowerLatin";
+    PasswordRules[PasswordRules["Digit"] = 3] = "Digit";
+    PasswordRules[PasswordRules["SpecialSymbols"] = 4] = "SpecialSymbols";
+})(PasswordRules || (PasswordRules = {}));
+const regExpPasswordValidator = {
+    [PasswordRules.LowerLatin]: RegExp(/^(?=.*?[a-z])/),
+    [PasswordRules.UpperLatin]: RegExp(/^(?=.*?[A-Z])/),
+    [PasswordRules.Digit]: RegExp(/^(?=.*?[0-9])/),
+    [PasswordRules.SpecialSymbols]: RegExp(/^(?=.*?[" !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"])/)
+};
+class McPasswordHint {
+    constructor(changeDetectorRef, formField) {
+        this.changeDetectorRef = changeDetectorRef;
+        this.formField = formField;
+        this.id = `mc-hint-${nextPasswordHintUniqueId++}`;
+        this.hasError = false;
+        this.checked = false;
+        this.checkValue = () => {
+            if (this.control.focused && this.isValueChanged()) {
+                this.hasError = false;
+                this.checked = this.checkRule(this.control.value);
+            }
+            else if (!this.control.focused && !this.isValueChanged()) {
+                this.hasError = !this.checkRule(this.control.value);
+            }
+            this.lastControlValue = this.control.value;
+            this.changeDetectorRef.markForCheck();
+        };
+    }
+    get control() {
+        return this.formField.control;
+    }
+    ngAfterContentInit() {
+        if (this.rule === null) {
+            throw Error('You should set [rule] name');
+        }
+        if (this.rule === PasswordRules.Length && (this.min || this.max) === null) {
+            throw Error('For [rule] "Length" need set [min] and [max]');
+        }
+        if (this.rule === PasswordRules.Length) {
+            this.checkRule = this.checkLengthRule;
+        }
+        else if ([PasswordRules.UpperLatin, PasswordRules.LowerLatin, PasswordRules.Digit, PasswordRules.SpecialSymbols]
+            .includes(this.rule)) {
+            this.regex = this.regex || regExpPasswordValidator[this.rule];
+            this.checkRule = this.checkRegexRule;
+        }
+        else {
+            throw Error(`Unknown [rule]=${this.rule}`);
+        }
+        this.formField.control.stateChanges
+            .subscribe(this.checkValue);
+    }
+    checkLengthRule(value) {
+        return value.length >= this.min && value.length <= this.max;
+    }
+    checkRegexRule(value) {
+        var _a;
+        return !!((_a = this.regex) === null || _a === void 0 ? void 0 : _a.test(value));
+    }
+    isValueChanged() {
+        return this.lastControlValue !== this.formField.control.value;
+    }
+}
+/** @nocollapse */ /** @nocollapse */ McPasswordHint.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPasswordHint, deps: [{ token: i0.ChangeDetectorRef }, { token: McFormField }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McPasswordHint.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McPasswordHint, selector: "mc-password-hint", inputs: { id: "id", rule: "rule", min: "min", max: "max", regex: "regex" }, host: { properties: { "class.mc-password-hint_valid": "checked", "class.mc-password-hint_invalid": "hasError", "attr.id": "id" }, classAttribute: "mc-password-hint" }, ngImport: i0, template: `
+        <i *ngIf="!checked" class="mc-password-hint__icon" mc-icon="mc-close-M_16"></i>
+        <i *ngIf="checked" class="mc-password-hint__icon" mc-icon="mc-check_16"></i>
+
+        <span class="mc-password-hint__text">
+            <ng-content></ng-content>
+        </span>
+    `, isInline: true, components: [{ type: i1.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i3.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i1.McIconCSSStyler, selector: "[mc-icon]" }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPasswordHint, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'mc-password-hint',
+                    template: `
+        <i *ngIf="!checked" class="mc-password-hint__icon" mc-icon="mc-close-M_16"></i>
+        <i *ngIf="checked" class="mc-password-hint__icon" mc-icon="mc-check_16"></i>
+
+        <span class="mc-password-hint__text">
+            <ng-content></ng-content>
+        </span>
+    `,
+                    host: {
+                        class: 'mc-password-hint',
+                        '[class.mc-password-hint_valid]': 'checked',
+                        '[class.mc-password-hint_invalid]': 'hasError',
+                        '[attr.id]': 'id'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ChangeDetectorRef }, { type: McFormField }]; }, propDecorators: { id: [{
+                type: Input
+            }], rule: [{
+                type: Input
+            }], min: [{
+                type: Input
+            }], max: [{
+                type: Input
+            }], regex: [{
                 type: Input
             }] } });
 
@@ -146,25 +257,35 @@ class McFormFieldBase {
 // tslint:disable-next-line:naming-convention
 const McFormFieldMixinBase = mixinColor(McFormFieldBase);
 class McFormField extends McFormFieldMixinBase {
+    constructor(
     // tslint:disable-next-line:naming-convention
-    constructor(_elementRef, _changeDetectorRef) {
+    _elementRef, _changeDetectorRef, focusMonitor) {
         super(_elementRef);
         this._elementRef = _elementRef;
         this._changeDetectorRef = _changeDetectorRef;
+        this.focusMonitor = focusMonitor;
         // Unique id for the internal form field label.
         this.labelId = `mc-form-field-label-${nextUniqueId++}`;
         this.hovered = false;
         this.canCleanerClearByEsc = true;
         this.$unsubscribe = new Subject();
+        this.runFocusMonitor();
     }
     get hasHint() {
-        return this.hint && this.hint.length > 0;
+        var _a;
+        return ((_a = this.hint) === null || _a === void 0 ? void 0 : _a.length) > 0;
+    }
+    get hasPasswordStrengthError() {
+        var _a;
+        return (_a = this.passwordHints) === null || _a === void 0 ? void 0 : _a.some((hint) => hint.hasError);
     }
     get hasSuffix() {
-        return this.suffix && this.suffix.length > 0;
+        var _a;
+        return ((_a = this.suffix) === null || _a === void 0 ? void 0 : _a.length) > 0;
     }
     get hasPrefix() {
-        return this.prefix && this.prefix.length > 0;
+        var _a;
+        return ((_a = this.prefix) === null || _a === void 0 ? void 0 : _a.length) > 0;
     }
     get hasCleaner() {
         return !!this.cleaner;
@@ -173,14 +294,15 @@ class McFormField extends McFormFieldMixinBase {
         return !!this.stepper;
     }
     get canShowCleaner() {
+        var _a;
         return this.hasCleaner &&
-            this.control &&
-            this.control.ngControl
+            ((_a = this.control) === null || _a === void 0 ? void 0 : _a.ngControl)
             ? this.control.ngControl.value && !this.control.disabled
             : false;
     }
     get disabled() {
-        return this.control && this.control.disabled;
+        var _a;
+        return (_a = this.control) === null || _a === void 0 ? void 0 : _a.disabled;
     }
     get canShowStepper() {
         var _a;
@@ -189,6 +311,7 @@ class McFormField extends McFormFieldMixinBase {
             (((_a = this.control) === null || _a === void 0 ? void 0 : _a.focused) || this.hovered);
     }
     ngAfterContentInit() {
+        var _a;
         if (this.control.numberInput && this.hasCleaner) {
             this.cleaner = null;
             throw getMcFormFieldYouCanNotUseCleanerInNumberInputError();
@@ -200,14 +323,18 @@ class McFormField extends McFormFieldMixinBase {
         // Subscribe to changes in the child control state in order to update the form field UI.
         this.control.stateChanges
             .pipe(startWith())
-            .subscribe(() => {
+            .subscribe((state) => {
+            var _a, _b;
+            if (!(state === null || state === void 0 ? void 0 : state.focused) && this.hasPasswordStrengthError) {
+                (_b = (_a = this.control.ngControl) === null || _a === void 0 ? void 0 : _a.control) === null || _b === void 0 ? void 0 : _b.setErrors({ passwordStrength: true });
+            }
             this._changeDetectorRef.markForCheck();
         });
         if (this.hasStepper) {
             this.stepper.connectTo(this.control.numberInput);
         }
         // Run change detection if the value changes.
-        const valueChanges = this.control.ngControl && this.control.ngControl.valueChanges || EMPTY;
+        const valueChanges = ((_a = this.control.ngControl) === null || _a === void 0 ? void 0 : _a.valueChanges) || EMPTY;
         merge(valueChanges)
             .pipe(takeUntil(this.$unsubscribe))
             .subscribe(() => this._changeDetectorRef.markForCheck());
@@ -220,11 +347,10 @@ class McFormField extends McFormFieldMixinBase {
         this._changeDetectorRef.detectChanges();
     }
     clearValue($event) {
+        var _a, _b, _c;
         $event.stopPropagation();
-        if (this.control && this.control.ngControl) {
-            this.control.ngControl.reset();
-            this.control.focus();
-        }
+        (_b = (_a = this.control) === null || _a === void 0 ? void 0 : _a.ngControl) === null || _b === void 0 ? void 0 : _b.reset();
+        (_c = this.control) === null || _c === void 0 ? void 0 : _c.focus();
     }
     onContainerClick($event) {
         if (this.control.onContainerClick) {
@@ -232,11 +358,14 @@ class McFormField extends McFormFieldMixinBase {
         }
     }
     onKeyDown(event) {
+        var _a, _b;
+        // tslint:disable-next-line:deprecation
+        if (this.control.controlType === 'input-password' && event.altKey && event.keyCode === F8) {
+            this.control.toggleType();
+        }
         // tslint:disable-next-line:deprecation
         if (this.canCleanerClearByEsc && event.keyCode === ESCAPE && this.control.focused && this.hasCleaner) {
-            if (this.control && this.control.ngControl) {
-                this.control.ngControl.reset();
-            }
+            (_b = (_a = this.control) === null || _a === void 0 ? void 0 : _a.ngControl) === null || _b === void 0 ? void 0 : _b.reset();
             event.preventDefault();
         }
     }
@@ -261,6 +390,7 @@ class McFormField extends McFormFieldMixinBase {
     ngOnDestroy() {
         this.$unsubscribe.next();
         this.$unsubscribe.complete();
+        this.stopFocusMonitor();
     }
     /** Throws an error if the form field's control is missing. */
     validateControlChild() {
@@ -268,9 +398,15 @@ class McFormField extends McFormFieldMixinBase {
             throw getMcFormFieldMissingControlError();
         }
     }
+    runFocusMonitor() {
+        this.focusMonitor.monitor(this._elementRef.nativeElement, true);
+    }
+    stopFocusMonitor() {
+        this.focusMonitor.stopMonitoring(this._elementRef.nativeElement);
+    }
 }
-/** @nocollapse */ /** @nocollapse */ McFormField.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormField, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }], target: i0.ɵɵFactoryTarget.Component });
-/** @nocollapse */ /** @nocollapse */ McFormField.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McFormField, selector: "mc-form-field", inputs: { color: "color" }, host: { listeners: { "keydown": "onKeyDown($event)", "mouseenter": "onHoverChanged(true)", "mouseleave": "onHoverChanged(false)" }, properties: { "class.mc-form-field_invalid": "control.errorState", "class.mc-form-field_has-prefix": "hasPrefix", "class.mc-form-field_has-suffix": "hasSuffix", "class.mc-form-field_has-cleaner": "canShowCleaner", "class.mc-form-field_has-stepper": "canShowStepper", "class.mc-disabled": "control.disabled", "class.mc-focused": "control.focused", "class.ng-untouched": "shouldForward(\"untouched\")", "class.ng-touched": "shouldForward(\"touched\")", "class.ng-pristine": "shouldForward(\"pristine\")", "class.ng-dirty": "shouldForward(\"dirty\")", "class.ng-valid": "shouldForward(\"valid\")", "class.ng-invalid": "shouldForward(\"invalid\")", "class.ng-pending": "shouldForward(\"pending\")" }, classAttribute: "mc-form-field" }, queries: [{ propertyName: "control", first: true, predicate: McFormFieldControl, descendants: true }, { propertyName: "stepper", first: true, predicate: McStepper, descendants: true }, { propertyName: "cleaner", first: true, predicate: McCleaner, descendants: true }, { propertyName: "hint", predicate: McHint }, { propertyName: "suffix", predicate: McSuffix }, { propertyName: "prefix", predicate: McPrefix }], viewQueries: [{ propertyName: "connectionContainerRef", first: true, predicate: ["connectionContainer"], descendants: true, static: true }], exportAs: ["mcFormField"], usesInheritance: true, ngImport: i0, template: "<div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\">\n\n    <div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\">\n        <ng-content select=\"[mcPrefix]\"></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__infix\">\n        <ng-content></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\">\n        <ng-content select=\"[mcSuffix]\"></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__cleaner\"\n         *ngIf=\"canShowCleaner && !hasSuffix\"\n         (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <ng-content *ngIf=\"canShowStepper\" select=\"mc-stepper\"></ng-content>\n</div>\n\n<div class=\"mc-form-field__hint\">\n    <ng-content select=\"mc-hint\"></ng-content>\n</div>\n", styles: [".mc-form-field{position:relative;display:inline-block;width:100%;border-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-form-field:hover{z-index:1}.mc-form-field.mc-focused{z-index:2}.mc-hint{display:block}.mc-form-field__hint>.mc-hint{margin-top:var(--mc-form-field-hint-size-margin-top, 4px)}.mc-form-field__container{position:relative;border-width:var(--mc-form-field-size-border-width, 1px);border-style:solid;border-color:transparent;border-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-suffix .mc-input,.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input{padding-right:var(--mc-form-field-size-button-width, 32px)}.mc-form-field_has-prefix .mc-input{padding-left:var(--mc-form-field-size-button-width, 32px)}.mc-cleaner{display:flex;width:var(--mc-form-field-size-button-width, 32px);height:100%;cursor:pointer}.mc-cleaner .mc-icon{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.mc-form-field__cleaner .mc-cleaner{position:absolute;top:0;bottom:0;right:0}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:var(--mc-form-field-size-button-width, 32px)}mc-stepper .mc-stepper-step-up,mc-stepper .mc-stepper-step-down{cursor:pointer;width:var(--mc-form-field-size-button-width, 32px);text-align:center}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)}\n", ".mc-input{background:transparent;padding:0;margin:0;border:none;outline:none;box-sizing:border-box;padding:var(--mc-input-size-padding, 5px 16px);width:var(--mc-input-size-width, 100%);min-height:var(--mc-input-size-min-height, 30px)}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset}\n", ".mc-timepicker{padding-right:calc(var(--mc-timepicker-size-padding-right, 16px) - var(--mc-form-field-size-border-width, 1px))}.mc-form-field-type-timepicker{width:auto}\n", ".mc-form-field-type-datepicker{width:auto}.mc-datepicker{width:var(--mc-datepicker-input-size-width, 130px)}\n", ".mc-textarea{background:transparent;margin:0;border:none;outline:none;resize:none;overflow:auto;width:100%;box-sizing:border-box;padding:var(--mc-textarea-size-padding, 5px 16px)}.mc-textarea{display:inline-block;-webkit-appearance:none;vertical-align:bottom}.mc-textarea:not(.mc-textarea-resizable){box-sizing:border-box;overflow-y:hidden}.mc-textarea.mc-textarea-resizable{resize:vertical;min-height:var(--mc-textarea-size-min-height, 50px)}.mc-textarea:invalid{box-shadow:unset}\n"], directives: [{ type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+/** @nocollapse */ /** @nocollapse */ McFormField.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormField, deps: [{ token: i0.ElementRef }, { token: i0.ChangeDetectorRef }, { token: i1$1.FocusMonitor }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McFormField.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McFormField, selector: "mc-form-field", inputs: { color: "color" }, host: { listeners: { "keydown": "onKeyDown($event)", "mouseenter": "onHoverChanged(true)", "mouseleave": "onHoverChanged(false)" }, properties: { "class.mc-form-field_invalid": "control.errorState", "class.mc-form-field_has-prefix": "hasPrefix", "class.mc-form-field_has-suffix": "hasSuffix", "class.mc-form-field_has-cleaner": "canShowCleaner", "class.mc-form-field_has-stepper": "canShowStepper", "class.mc-disabled": "control.disabled", "class.ng-untouched": "shouldForward(\"untouched\")", "class.ng-touched": "shouldForward(\"touched\")", "class.ng-pristine": "shouldForward(\"pristine\")", "class.ng-dirty": "shouldForward(\"dirty\")", "class.ng-valid": "shouldForward(\"valid\")", "class.ng-invalid": "shouldForward(\"invalid\")", "class.ng-pending": "shouldForward(\"pending\")" }, classAttribute: "mc-form-field" }, queries: [{ propertyName: "control", first: true, predicate: McFormFieldControl, descendants: true }, { propertyName: "stepper", first: true, predicate: McStepper, descendants: true }, { propertyName: "cleaner", first: true, predicate: McCleaner, descendants: true }, { propertyName: "hint", predicate: McHint }, { propertyName: "passwordHints", predicate: McPasswordHint }, { propertyName: "suffix", predicate: McSuffix }, { propertyName: "prefix", predicate: McPrefix }], viewQueries: [{ propertyName: "connectionContainerRef", first: true, predicate: ["connectionContainer"], descendants: true, static: true }], exportAs: ["mcFormField"], usesInheritance: true, ngImport: i0, template: "<div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\">\n\n    <div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\">\n        <ng-content select=\"[mcPrefix]\"></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__infix\">\n        <ng-content></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\">\n        <ng-content select=\"[mcSuffix]\"></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__cleaner\"\n         *ngIf=\"canShowCleaner && !hasSuffix\"\n         (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <ng-content select=\"mc-password-toggle\"></ng-content>\n\n    <ng-content *ngIf=\"canShowStepper\" select=\"mc-stepper\"></ng-content>\n</div>\n\n<div class=\"mc-form-field__hint\">\n    <ng-content select=\"mc-hint, mc-password-hint\"></ng-content>\n</div>\n", styles: [".mc-form-field{position:relative;display:inline-block;width:100%;border-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-form-field:hover{z-index:1}.mc-form-field.mc-focused{z-index:2}.mc-form-field-type-input-password .mc-input{padding-right:var(--mc-form-field-size-button-width, 32px)}.mc-hint{display:block}.mc-password-hint{display:block;padding-left:calc(16px + var(--mc-form-field-password-hint-size-icon-margin, 4px))}.mc-password-hint .mc-icon{position:absolute;left:0}.mc-form-field__hint>.mc-password-hint{margin-top:var(--mc-form-field-password-hint-size-margin-top, 8px)}.mc-form-field__hint>.mc-hint{margin-top:var(--mc-form-field-hint-size-margin-top, 4px)}.mc-form-field__container{position:relative;border-width:var(--mc-form-field-size-border-width, 1px);border-style:solid;border-color:transparent;border-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-suffix .mc-input,.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input{padding-right:var(--mc-form-field-size-button-width, 32px)}.mc-form-field_has-prefix .mc-input{padding-left:var(--mc-form-field-size-button-width, 32px)}.mc-cleaner{display:flex;width:var(--mc-form-field-size-button-width, 32px);height:100%;cursor:pointer}.mc-cleaner .mc-icon{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.mc-form-field__cleaner .mc-cleaner{position:absolute;top:0;bottom:0;right:0}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:var(--mc-form-field-size-button-width, 32px)}mc-stepper .mc-stepper-step-up,mc-stepper .mc-stepper-step-down{cursor:pointer;width:var(--mc-form-field-size-button-width, 32px);text-align:center}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)}\n", ".mc-input{background:transparent;padding:0;margin:0;border:none;outline:none;box-sizing:border-box;padding:var(--mc-input-size-padding, 5px 16px);width:var(--mc-input-size-width, 100%);min-height:var(--mc-input-size-min-height, 30px)}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset}.mc-password-toggle{display:flex;position:absolute;top:-1px;right:-1px;border:1px solid transparent;width:32px;height:32px;align-items:center;justify-content:center;cursor:pointer;border-top-right-radius:var(--mc-form-field-size-border-radius, 3px);border-bottom-right-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-password-toggle::-moz-focus-inner{border:0}.mc-password-toggle:focus{outline:none}\n", ".mc-timepicker{padding-right:calc(var(--mc-timepicker-size-padding-right, 16px) - var(--mc-form-field-size-border-width, 1px))}.mc-form-field-type-timepicker{width:auto}\n", ".mc-form-field-type-datepicker{width:auto}.mc-datepicker{width:var(--mc-datepicker-input-size-width, 130px)}\n", ".mc-textarea{background:transparent;margin:0;border:none;outline:none;resize:none;overflow:auto;width:100%;box-sizing:border-box;padding:var(--mc-textarea-size-padding, 5px 16px)}.mc-textarea{display:inline-block;-webkit-appearance:none;vertical-align:bottom}.mc-textarea:not(.mc-textarea-resizable){box-sizing:border-box;overflow-y:hidden}.mc-textarea.mc-textarea-resizable{resize:vertical;min-height:var(--mc-textarea-size-min-height, 50px)}.mc-textarea:invalid{box-shadow:unset}\n"], directives: [{ type: i3.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormField, decorators: [{
             type: Component,
             args: [{ selector: 'mc-form-field', exportAs: 'mcFormField', host: {
@@ -281,7 +417,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
                         '[class.mc-form-field_has-cleaner]': 'canShowCleaner',
                         '[class.mc-form-field_has-stepper]': 'canShowStepper',
                         '[class.mc-disabled]': 'control.disabled',
-                        '[class.mc-focused]': 'control.focused',
                         '[class.ng-untouched]': 'shouldForward("untouched")',
                         '[class.ng-touched]': 'shouldForward("touched")',
                         '[class.ng-pristine]': 'shouldForward("pristine")',
@@ -292,8 +427,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
                         '(keydown)': 'onKeyDown($event)',
                         '(mouseenter)': 'onHoverChanged(true)',
                         '(mouseleave)': 'onHoverChanged(false)'
-                    }, inputs: ['color'], encapsulation: ViewEncapsulation.None, changeDetection: ChangeDetectionStrategy.OnPush, template: "<div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\">\n\n    <div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\">\n        <ng-content select=\"[mcPrefix]\"></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__infix\">\n        <ng-content></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\">\n        <ng-content select=\"[mcSuffix]\"></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__cleaner\"\n         *ngIf=\"canShowCleaner && !hasSuffix\"\n         (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <ng-content *ngIf=\"canShowStepper\" select=\"mc-stepper\"></ng-content>\n</div>\n\n<div class=\"mc-form-field__hint\">\n    <ng-content select=\"mc-hint\"></ng-content>\n</div>\n", styles: [".mc-form-field{position:relative;display:inline-block;width:100%;border-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-form-field:hover{z-index:1}.mc-form-field.mc-focused{z-index:2}.mc-hint{display:block}.mc-form-field__hint>.mc-hint{margin-top:var(--mc-form-field-hint-size-margin-top, 4px)}.mc-form-field__container{position:relative;border-width:var(--mc-form-field-size-border-width, 1px);border-style:solid;border-color:transparent;border-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-suffix .mc-input,.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input{padding-right:var(--mc-form-field-size-button-width, 32px)}.mc-form-field_has-prefix .mc-input{padding-left:var(--mc-form-field-size-button-width, 32px)}.mc-cleaner{display:flex;width:var(--mc-form-field-size-button-width, 32px);height:100%;cursor:pointer}.mc-cleaner .mc-icon{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.mc-form-field__cleaner .mc-cleaner{position:absolute;top:0;bottom:0;right:0}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:var(--mc-form-field-size-button-width, 32px)}mc-stepper .mc-stepper-step-up,mc-stepper .mc-stepper-step-down{cursor:pointer;width:var(--mc-form-field-size-button-width, 32px);text-align:center}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)}\n", ".mc-input{background:transparent;padding:0;margin:0;border:none;outline:none;box-sizing:border-box;padding:var(--mc-input-size-padding, 5px 16px);width:var(--mc-input-size-width, 100%);min-height:var(--mc-input-size-min-height, 30px)}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset}\n", ".mc-timepicker{padding-right:calc(var(--mc-timepicker-size-padding-right, 16px) - var(--mc-form-field-size-border-width, 1px))}.mc-form-field-type-timepicker{width:auto}\n", ".mc-form-field-type-datepicker{width:auto}.mc-datepicker{width:var(--mc-datepicker-input-size-width, 130px)}\n", ".mc-textarea{background:transparent;margin:0;border:none;outline:none;resize:none;overflow:auto;width:100%;box-sizing:border-box;padding:var(--mc-textarea-size-padding, 5px 16px)}.mc-textarea{display:inline-block;-webkit-appearance:none;vertical-align:bottom}.mc-textarea:not(.mc-textarea-resizable){box-sizing:border-box;overflow-y:hidden}.mc-textarea.mc-textarea-resizable{resize:vertical;min-height:var(--mc-textarea-size-min-height, 50px)}.mc-textarea:invalid{box-shadow:unset}\n"] }]
-        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }]; }, propDecorators: { control: [{
+                    }, inputs: ['color'], encapsulation: ViewEncapsulation.None, changeDetection: ChangeDetectionStrategy.OnPush, template: "<div class=\"mc-form-field__container\" (click)=\"onContainerClick($event)\">\n\n    <div class=\"mc-form-field__prefix\" *ngIf=\"hasPrefix\">\n        <ng-content select=\"[mcPrefix]\"></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__infix\">\n        <ng-content></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__suffix\" *ngIf=\"hasSuffix\">\n        <ng-content select=\"[mcSuffix]\"></ng-content>\n    </div>\n\n    <div class=\"mc-form-field__cleaner\"\n         *ngIf=\"canShowCleaner && !hasSuffix\"\n         (click)=\"clearValue($event)\">\n        <ng-content select=\"mc-cleaner\"></ng-content>\n    </div>\n\n    <ng-content select=\"mc-password-toggle\"></ng-content>\n\n    <ng-content *ngIf=\"canShowStepper\" select=\"mc-stepper\"></ng-content>\n</div>\n\n<div class=\"mc-form-field__hint\">\n    <ng-content select=\"mc-hint, mc-password-hint\"></ng-content>\n</div>\n", styles: [".mc-form-field{position:relative;display:inline-block;width:100%;border-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-form-field:hover{z-index:1}.mc-form-field.mc-focused{z-index:2}.mc-form-field-type-input-password .mc-input{padding-right:var(--mc-form-field-size-button-width, 32px)}.mc-hint{display:block}.mc-password-hint{display:block;padding-left:calc(16px + var(--mc-form-field-password-hint-size-icon-margin, 4px))}.mc-password-hint .mc-icon{position:absolute;left:0}.mc-form-field__hint>.mc-password-hint{margin-top:var(--mc-form-field-password-hint-size-margin-top, 8px)}.mc-form-field__hint>.mc-hint{margin-top:var(--mc-form-field-hint-size-margin-top, 4px)}.mc-form-field__container{position:relative;border-width:var(--mc-form-field-size-border-width, 1px);border-style:solid;border-color:transparent;border-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-form-field_without-borders .mc-form-field__container{border-color:transparent}.mc-form-field__prefix,.mc-form-field__suffix{position:absolute;top:0;bottom:0;width:32px;display:flex;flex-direction:row;justify-content:center;align-items:center}.mc-form-field__prefix{left:0}.mc-form-field__suffix{right:0}.mc-form-field_has-suffix .mc-input,.mc-form-field_has-cleaner .mc-input,.mc-form-field_has-stepper .mc-input{padding-right:var(--mc-form-field-size-button-width, 32px)}.mc-form-field_has-prefix .mc-input{padding-left:var(--mc-form-field-size-button-width, 32px)}.mc-cleaner{display:flex;width:var(--mc-form-field-size-button-width, 32px);height:100%;cursor:pointer}.mc-cleaner .mc-icon{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.mc-form-field__cleaner .mc-cleaner{position:absolute;top:0;bottom:0;right:0}mc-stepper{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;top:0;bottom:0;right:0;width:var(--mc-form-field-size-button-width, 32px)}mc-stepper .mc-stepper-step-up,mc-stepper .mc-stepper-step-down{cursor:pointer;width:var(--mc-form-field-size-button-width, 32px);text-align:center}mc-stepper .mc-stepper-step-up{transform:scaleY(-1)}\n", ".mc-input{background:transparent;padding:0;margin:0;border:none;outline:none;box-sizing:border-box;padding:var(--mc-input-size-padding, 5px 16px);width:var(--mc-input-size-width, 100%);min-height:var(--mc-input-size-min-height, 30px)}.mc-input::-ms-clear{display:none;width:0;height:0}.mc-input::-ms-reveal{display:none;width:0;height:0}.mc-input::-webkit-search-decoration,.mc-input::-webkit-search-cancel-button,.mc-input::-webkit-search-results-button,.mc-input::-webkit-search-results-decoration{display:none}.mc-input{display:inline-block}input.mc-input[type=number]{-moz-appearance:textfield}input.mc-input[type=number]::-webkit-inner-spin-button,input.mc-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}input.mc-input:invalid{box-shadow:unset}.mc-password-toggle{display:flex;position:absolute;top:-1px;right:-1px;border:1px solid transparent;width:32px;height:32px;align-items:center;justify-content:center;cursor:pointer;border-top-right-radius:var(--mc-form-field-size-border-radius, 3px);border-bottom-right-radius:var(--mc-form-field-size-border-radius, 3px)}.mc-password-toggle::-moz-focus-inner{border:0}.mc-password-toggle:focus{outline:none}\n", ".mc-timepicker{padding-right:calc(var(--mc-timepicker-size-padding-right, 16px) - var(--mc-form-field-size-border-width, 1px))}.mc-form-field-type-timepicker{width:auto}\n", ".mc-form-field-type-datepicker{width:auto}.mc-datepicker{width:var(--mc-datepicker-input-size-width, 130px)}\n", ".mc-textarea{background:transparent;margin:0;border:none;outline:none;resize:none;overflow:auto;width:100%;box-sizing:border-box;padding:var(--mc-textarea-size-padding, 5px 16px)}.mc-textarea{display:inline-block;-webkit-appearance:none;vertical-align:bottom}.mc-textarea:not(.mc-textarea-resizable){box-sizing:border-box;overflow-y:hidden}.mc-textarea.mc-textarea-resizable{resize:vertical;min-height:var(--mc-textarea-size-min-height, 50px)}.mc-textarea:invalid{box-shadow:unset}\n"] }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i0.ChangeDetectorRef }, { type: i1$1.FocusMonitor }]; }, propDecorators: { control: [{
                 type: ContentChild,
                 args: [McFormFieldControl, { static: false }]
             }], stepper: [{
@@ -305,6 +440,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
             }], hint: [{
                 type: ContentChildren,
                 args: [McHint]
+            }], passwordHints: [{
+                type: ContentChildren,
+                args: [McPasswordHint]
             }], suffix: [{
                 type: ContentChildren,
                 args: [McSuffix]
@@ -334,12 +472,14 @@ class McFormFieldModule {
 /** @nocollapse */ /** @nocollapse */ McFormFieldModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McFormFieldModule, declarations: [McFormField,
         McFormFieldWithoutBorders,
         McHint,
+        McPasswordHint,
         McPrefix,
         McSuffix,
         McCleaner,
         McStepper], imports: [CommonModule, McIconModule], exports: [McFormField,
         McFormFieldWithoutBorders,
         McHint,
+        McPasswordHint,
         McPrefix,
         McSuffix,
         McCleaner,
@@ -352,6 +492,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
                         McFormField,
                         McFormFieldWithoutBorders,
                         McHint,
+                        McPasswordHint,
                         McPrefix,
                         McSuffix,
                         McCleaner,
@@ -362,6 +503,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
                         McFormField,
                         McFormFieldWithoutBorders,
                         McHint,
+                        McPasswordHint,
                         McPrefix,
                         McSuffix,
                         McCleaner,
@@ -374,5 +516,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { McCleaner, McFormField, McFormFieldBase, McFormFieldControl, McFormFieldMixinBase, McFormFieldModule, McFormFieldWithoutBorders, McHint, McPrefix, McStepper, McSuffix, getMcFormFieldMissingControlError, getMcFormFieldYouCanNotUseCleanerInNumberInputError };
+export { McCleaner, McFormField, McFormFieldBase, McFormFieldControl, McFormFieldMixinBase, McFormFieldModule, McFormFieldWithoutBorders, McHint, McPasswordHint, McPrefix, McStepper, McSuffix, PasswordRules, getMcFormFieldMissingControlError, getMcFormFieldYouCanNotUseCleanerInNumberInputError, regExpPasswordValidator };
 //# sourceMappingURL=ptsecurity-mosaic-form-field.mjs.map

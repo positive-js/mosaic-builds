@@ -1,9 +1,11 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { AfterContentChecked, AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, OnDestroy, QueryList } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { CanColor, CanColorCtor } from '@ptsecurity/mosaic/core';
 import { McCleaner } from './cleaner';
 import { McFormFieldControl } from './form-field-control';
 import { McHint } from './hint';
+import { McPasswordHint } from './password-hint';
 import { McPrefix } from './prefix';
 import { McStepper } from './stepper';
 import { McSuffix } from './suffix';
@@ -16,10 +18,12 @@ export declare const McFormFieldMixinBase: CanColorCtor & typeof McFormFieldBase
 export declare class McFormField extends McFormFieldMixinBase implements AfterContentInit, AfterContentChecked, AfterViewInit, CanColor, OnDestroy {
     _elementRef: ElementRef;
     private _changeDetectorRef;
+    private focusMonitor;
     control: McFormFieldControl<any>;
     stepper: McStepper;
     cleaner: McCleaner | null;
     hint: QueryList<McHint>;
+    passwordHints: QueryList<McPasswordHint>;
     suffix: QueryList<McSuffix>;
     prefix: QueryList<McPrefix>;
     connectionContainerRef: ElementRef;
@@ -28,6 +32,7 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     canCleanerClearByEsc: boolean;
     private $unsubscribe;
     get hasHint(): boolean;
+    get hasPasswordStrengthError(): boolean;
     get hasSuffix(): boolean;
     get hasPrefix(): boolean;
     get hasCleaner(): boolean;
@@ -35,7 +40,7 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     get canShowCleaner(): boolean;
     get disabled(): boolean;
     get canShowStepper(): boolean;
-    constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef);
+    constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, focusMonitor: FocusMonitor);
     ngAfterContentInit(): void;
     ngAfterContentChecked(): void;
     ngAfterViewInit(): void;
@@ -53,8 +58,10 @@ export declare class McFormField extends McFormFieldMixinBase implements AfterCo
     ngOnDestroy(): void;
     /** Throws an error if the form field's control is missing. */
     protected validateControlChild(): void;
+    private runFocusMonitor;
+    private stopFocusMonitor;
     static ɵfac: i0.ɵɵFactoryDeclaration<McFormField, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<McFormField, "mc-form-field", ["mcFormField"], { "color": "color"; }, {}, ["control", "stepper", "cleaner", "hint", "suffix", "prefix"], ["[mcPrefix]", "*", "[mcSuffix]", "mc-cleaner", "mc-stepper", "mc-hint"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<McFormField, "mc-form-field", ["mcFormField"], { "color": "color"; }, {}, ["control", "stepper", "cleaner", "hint", "passwordHints", "suffix", "prefix"], ["[mcPrefix]", "*", "[mcSuffix]", "mc-cleaner", "mc-password-toggle", "mc-stepper", "mc-hint, mc-password-hint"]>;
 }
 export declare class McFormFieldWithoutBorders {
     static ɵfac: i0.ɵɵFactoryDeclaration<McFormFieldWithoutBorders, never>;

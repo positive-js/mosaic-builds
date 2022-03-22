@@ -1,16 +1,21 @@
+import * as i3$1 from '@angular/cdk/a11y';
 import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { Directive, Optional, Self, Attribute, Input, InjectionToken, Inject, forwardRef, NgModule } from '@angular/core';
+import { Directive, Optional, Self, Attribute, Input, InjectionToken, Inject, forwardRef, Component, ChangeDetectionStrategy, ViewEncapsulation, NgModule } from '@angular/core';
 import * as i1 from '@angular/forms';
 import { NG_VALIDATORS, Validators, FormsModule } from '@angular/forms';
 import * as i3 from '@ptsecurity/mosaic/core';
-import { mixinErrorState, setMosaicValidation, MC_VALIDATION, McCommonModule } from '@ptsecurity/mosaic/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { mixinErrorState, setMosaicValidation, MC_VALIDATION, PopUpTriggers, McCommonModule } from '@ptsecurity/mosaic/core';
+import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { getSupportedInputTypes } from '@angular/cdk/platform';
+import * as i4 from '@ptsecurity/mosaic/form-field';
 import { McFormFieldControl } from '@ptsecurity/mosaic/form-field';
 import { Subject } from 'rxjs';
 import { A, C, V, X, Z, F1, F12, ZERO, NINE, NUMPAD_ZERO, NUMPAD_NINE, NUMPAD_MINUS, DASH, FF_MINUS, DELETE, BACKSPACE, TAB, ESCAPE, ENTER, LEFT_ARROW, RIGHT_ARROW, HOME, END, UP_ARROW, DOWN_ARROW } from '@ptsecurity/cdk/keycodes';
+import * as i2 from '@angular/cdk/bidi';
+import * as i1$1 from '@angular/cdk/overlay';
+import { McTooltipTrigger, MC_TOOLTIP_SCROLL_STRATEGY } from '@ptsecurity/mosaic/tooltip';
 
 function getMcInputUnsupportedTypeError(inputType) {
     return Error(`Input type "${inputType}" isn't supported by mcInput.`);
@@ -186,7 +191,7 @@ const MC_INPUT_INVALID_TYPES = [
     'reset',
     'submit'
 ];
-let nextUniqueId = 0;
+let nextUniqueId$1 = 0;
 class McInputBase {
     constructor(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
         this.defaultErrorStateMatcher = defaultErrorStateMatcher;
@@ -222,7 +227,7 @@ class McInput extends McInputMixinBase {
          * @docs-private
          */
         this.controlType = 'input';
-        this.uid = `mc-input-${nextUniqueId++}`;
+        this.uid = `mc-input-${nextUniqueId$1++}`;
         this.neverEmptyInputTypes = [
             'date',
             'datetime',
@@ -583,17 +588,406 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
                 type: Input
             }] } });
 
+let nextUniqueId = 0;
+class McPasswordToggle extends McTooltipTrigger {
+    constructor(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction, focusMonitor, formField) {
+        super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
+        this.focusMonitor = focusMonitor;
+        this.formField = formField;
+        this._tabIndex = 0;
+        this.trigger = `${PopUpTriggers.Hover}`;
+        this.runFocusMonitor();
+    }
+    get content() {
+        return this.formField.control.elementType === 'password' ?
+            this.mcTooltipHidden :
+            this._content;
+    }
+    set content(content) {
+        this._content = content;
+        this.updateData();
+    }
+    get disabled() {
+        return this._disabled === undefined ? this.formField.disabled : this._disabled;
+    }
+    set disabled(value) {
+        this._disabled = coerceBooleanProperty(value);
+        this._disabled ? this.stopFocusMonitor() : this.runFocusMonitor();
+    }
+    get tabIndex() {
+        return this.disabled ? -1 : this._tabIndex;
+    }
+    set tabIndex(value) {
+        // If the specified tabIndex value is null or undefined, fall back to the default value.
+        this._tabIndex = value != null ? coerceNumberProperty(value) : 0;
+    }
+    get hidden() {
+        return this.formField.control.elementType === 'password';
+    }
+    ngOnDestroy() {
+        this.stopFocusMonitor();
+    }
+    toggle() {
+        if (this.disabled) {
+            return;
+        }
+        this.hide();
+        const input = this.formField.control;
+        input.toggleType();
+        this.updateData();
+    }
+    runFocusMonitor() {
+        this.focusMonitor.monitor(this.elementRef)
+            .subscribe((origin) => {
+            if (origin === 'keyboard') {
+                this.show();
+            }
+            else if (origin === null) {
+                this.hide();
+            }
+        });
+    }
+    stopFocusMonitor() {
+        this.focusMonitor.stopMonitoring(this.elementRef);
+    }
+}
+/** @nocollapse */ /** @nocollapse */ McPasswordToggle.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPasswordToggle, deps: [{ token: i1$1.Overlay }, { token: i0.ElementRef }, { token: i0.NgZone }, { token: i1$1.ScrollDispatcher }, { token: i0.ViewContainerRef }, { token: MC_TOOLTIP_SCROLL_STRATEGY }, { token: i2.Directionality, optional: true }, { token: i3$1.FocusMonitor }, { token: i4.McFormField }], target: i0.ɵɵFactoryTarget.Component });
+/** @nocollapse */ /** @nocollapse */ McPasswordToggle.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.0", type: McPasswordToggle, selector: "mc-password-toggle", inputs: { content: ["mcTooltipNotHidden", "content"], mcTooltipHidden: "mcTooltipHidden", disabled: "disabled", tabIndex: "tabIndex" }, host: { listeners: { "click": "toggle()", "keydown.ENTER": "toggle()", "keydown.SPACE": "toggle()" }, properties: { "class.mc-eye_16": "hidden", "class.mc-eye-crossed_16": "!hidden", "attr.tabindex": "disabled ? null : tabIndex", "attr.disabled": "disabled || null" }, classAttribute: "mc-password-toggle mc" }, exportAs: ["mcPasswordToggle"], usesInheritance: true, ngImport: i0, template: '<ng-content></ng-content>', isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush, encapsulation: i0.ViewEncapsulation.None });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McPasswordToggle, decorators: [{
+            type: Component,
+            args: [{
+                    selector: `mc-password-toggle`,
+                    exportAs: 'mcPasswordToggle',
+                    template: '<ng-content></ng-content>',
+                    host: {
+                        class: 'mc-password-toggle mc',
+                        '[class.mc-eye_16]': 'hidden',
+                        '[class.mc-eye-crossed_16]': '!hidden',
+                        '[attr.tabindex]': 'disabled ? null : tabIndex',
+                        '[attr.disabled]': 'disabled || null',
+                        '(click)': 'toggle()',
+                        '(keydown.ENTER)': 'toggle()',
+                        '(keydown.SPACE)': 'toggle()'
+                    },
+                    changeDetection: ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None
+                }]
+        }], ctorParameters: function () { return [{ type: i1$1.Overlay }, { type: i0.ElementRef }, { type: i0.NgZone }, { type: i1$1.ScrollDispatcher }, { type: i0.ViewContainerRef }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [MC_TOOLTIP_SCROLL_STRATEGY]
+                }] }, { type: i2.Directionality, decorators: [{
+                    type: Optional
+                }] }, { type: i3$1.FocusMonitor }, { type: i4.McFormField }]; }, propDecorators: { content: [{
+                type: Input,
+                args: ['mcTooltipNotHidden']
+            }], mcTooltipHidden: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], tabIndex: [{
+                type: Input
+            }] } });
+class McInputPassword extends McInputMixinBase {
+    // tslint:disable-next-line: naming-convention
+    constructor(elementRef, rawValidators, mcValidation, ngControl, ngModel, formControlName, parentForm, parentFormGroup, defaultErrorStateMatcher, inputValueAccessor) {
+        super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
+        this.elementRef = elementRef;
+        this.rawValidators = rawValidators;
+        this.mcValidation = mcValidation;
+        this.ngModel = ngModel;
+        this.formControlName = formControlName;
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        this.focused = false;
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        this.stateChanges = new Subject();
+        /**
+         * Implemented as part of McFormFieldControl.
+         * @docs-private
+         */
+        this.controlType = 'input-password';
+        this.elementType = 'password';
+        this.uid = `mc-input-${nextUniqueId++}`;
+        this._disabled = false;
+        this._required = false;
+        // If no input value accessor was explicitly specified, use the element as the input value
+        // accessor.
+        this._inputValueAccessor = inputValueAccessor || this.elementRef.nativeElement;
+        this.previousNativeValue = this.value;
+        // Force setter to be called in case id was not specified.
+        this.id = this.id;
+    }
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    get disabled() {
+        if (this.ngControl?.disabled !== null) {
+            return this.ngControl.disabled;
+        }
+        return this._disabled;
+    }
+    set disabled(value) {
+        this._disabled = coerceBooleanProperty(value);
+        // Browsers may not fire the blur event if the input is disabled too quickly.
+        // Reset from here to ensure that the element doesn't become stuck.
+        if (this.focused) {
+            this.focused = false;
+            this.stateChanges.next();
+        }
+    }
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    get id() {
+        return this._id;
+    }
+    set id(value) {
+        this._id = value || this.uid;
+    }
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    get required() {
+        return this._required;
+    }
+    set required(value) {
+        this._required = coerceBooleanProperty(value);
+    }
+    // this.elementRef.nativeElement.type = this._type;
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    get value() {
+        return this._inputValueAccessor.value;
+    }
+    set value(value) {
+        if (value === this.value) {
+            return;
+        }
+        this._inputValueAccessor.value = value;
+        this.stateChanges.next();
+    }
+    ngAfterContentInit() {
+        if (!this.ngControl) {
+            return;
+        }
+        if (this.mcValidation.useValidation) {
+            setMosaicValidation(this);
+        }
+    }
+    ngOnChanges() {
+        this.stateChanges.next();
+    }
+    ngOnDestroy() {
+        this.stateChanges.complete();
+    }
+    ngDoCheck() {
+        if (this.ngControl) {
+            // We need to re-evaluate this on every change detection cycle, because there are some
+            // error triggers that we can't subscribe to (e.g. parent form submissions). This means
+            // that whatever logic is in here has to be super lean or we risk destroying the performance.
+            this.updateErrorState();
+        }
+        // We need to dirty-check the native element's value, because there are some cases where
+        // we won't be notified when it changes (e.g. the consumer isn't using forms or they're
+        // updating the value using `emitEvent: false`).
+        this.dirtyCheckNativeValue();
+    }
+    toggleType() {
+        this.elementType = this.elementType === 'password' ? 'text' : 'password';
+    }
+    /** Focuses the input. */
+    focus() {
+        this.elementRef.nativeElement.focus();
+    }
+    onBlur() {
+        if (this.ngControl?.control) {
+            const control = this.ngControl.control;
+            control.updateValueAndValidity({ emitEvent: false });
+            control.statusChanges.emit(control.status);
+        }
+        this.focusChanged(false);
+    }
+    /** Callback for the cases where the focused state of the input changes. */
+    focusChanged(isFocused) {
+        if (isFocused === this.focused) {
+            return;
+        }
+        this.focused = isFocused;
+        this.stateChanges.next({ focused: this.focused });
+    }
+    onInput() {
+        // This is a noop function and is used to let Angular know whenever the value changes.
+        // Angular will run a new change detection each time the `input` event has been dispatched.
+        // It's necessary that Angular recognizes the value change, because when floatingLabel
+        // is set to false and Angular forms aren't used, the placeholder won't recognize the
+        // value changes and will not disappear.
+        // Listening to the input event wouldn't be necessary when the input is using the
+        // FormsModule or ReactiveFormsModule, because Angular forms also listens to input events.
+    }
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    get empty() {
+        return !this.elementRef.nativeElement.value && !this.isBadInput();
+    }
+    /**
+     * Implemented as part of McFormFieldControl.
+     * @docs-private
+     */
+    onContainerClick() {
+        this.focus();
+    }
+    /** Does some manual dirty checking on the native input `value` property. */
+    dirtyCheckNativeValue() {
+        if (this.previousNativeValue !== this.value) {
+            this.previousNativeValue = this.value;
+            this.stateChanges.next();
+        }
+    }
+    /** Checks whether the input is invalid based on the native validation. */
+    isBadInput() {
+        // The `validity` property won't be present on platform-server.
+        return this.elementRef.nativeElement.validity?.badInput;
+    }
+}
+/** @nocollapse */ /** @nocollapse */ McInputPassword.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McInputPassword, deps: [{ token: i0.ElementRef }, { token: NG_VALIDATORS, optional: true, self: true }, { token: MC_VALIDATION, optional: true }, { token: i1.NgControl, optional: true, self: true }, { token: i1.NgModel, optional: true, self: true }, { token: i1.FormControlName, optional: true, self: true }, { token: i1.NgForm, optional: true }, { token: i1.FormGroupDirective, optional: true }, { token: i3.ErrorStateMatcher }, { token: MC_INPUT_VALUE_ACCESSOR, optional: true, self: true }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McInputPassword.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McInputPassword, selector: "input[mcInputPassword]", inputs: { errorStateMatcher: "errorStateMatcher", placeholder: "placeholder", disabled: "disabled", id: "id", required: "required", value: "value" }, host: { listeners: { "blur": "onBlur()", "focus": "focusChanged(true)", "input": "onInput()" }, properties: { "attr.id": "id", "attr.type": "elementType", "attr.placeholder": "placeholder", "attr.disabled": "disabled || null", "required": "required" }, classAttribute: "mc-input mc-input-password" }, providers: [{
+            provide: McFormFieldControl, useExisting: McInputPassword
+        }], exportAs: ["mcInputPassword"], usesInheritance: true, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McInputPassword, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: `input[mcInputPassword]`,
+                    exportAs: 'mcInputPassword',
+                    host: {
+                        class: 'mc-input mc-input-password',
+                        // Native input properties that are overwritten by Angular inputs need to be synced with
+                        // the native input element. Otherwise property bindings for those don't work.
+                        '[attr.id]': 'id',
+                        '[attr.type]': 'elementType',
+                        '[attr.placeholder]': 'placeholder',
+                        '[attr.disabled]': 'disabled || null',
+                        '[required]': 'required',
+                        '(blur)': 'onBlur()',
+                        '(focus)': 'focusChanged(true)',
+                        '(input)': 'onInput()'
+                    },
+                    providers: [{
+                            provide: McFormFieldControl, useExisting: McInputPassword
+                        }]
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Self
+                }, {
+                    type: Inject,
+                    args: [NG_VALIDATORS]
+                }] }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [MC_VALIDATION]
+                }] }, { type: i1.NgControl, decorators: [{
+                    type: Optional
+                }, {
+                    type: Self
+                }] }, { type: i1.NgModel, decorators: [{
+                    type: Optional
+                }, {
+                    type: Self
+                }] }, { type: i1.FormControlName, decorators: [{
+                    type: Optional
+                }, {
+                    type: Self
+                }] }, { type: i1.NgForm, decorators: [{
+                    type: Optional
+                }] }, { type: i1.FormGroupDirective, decorators: [{
+                    type: Optional
+                }] }, { type: i3.ErrorStateMatcher }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Self
+                }, {
+                    type: Inject,
+                    args: [MC_INPUT_VALUE_ACCESSOR]
+                }] }]; }, propDecorators: { errorStateMatcher: [{
+                type: Input
+            }], placeholder: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], id: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], value: [{
+                type: Input
+            }] } });
+
 class McInputModule {
 }
 /** @nocollapse */ /** @nocollapse */ McInputModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McInputModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-/** @nocollapse */ /** @nocollapse */ McInputModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McInputModule, declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator], imports: [CommonModule, A11yModule, McCommonModule, FormsModule], exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator] });
-/** @nocollapse */ /** @nocollapse */ McInputModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McInputModule, imports: [[CommonModule, A11yModule, McCommonModule, FormsModule]] });
+/** @nocollapse */ /** @nocollapse */ McInputModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McInputModule, declarations: [McInput,
+        McNumberInput,
+        McInputPassword,
+        McPasswordToggle,
+        McInputMono,
+        MinValidator,
+        MaxValidator], imports: [CommonModule,
+        A11yModule,
+        McCommonModule,
+        FormsModule], exports: [McInput,
+        McNumberInput,
+        McInputPassword,
+        McPasswordToggle,
+        McInputMono,
+        MinValidator,
+        MaxValidator] });
+/** @nocollapse */ /** @nocollapse */ McInputModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McInputModule, imports: [[
+            CommonModule,
+            A11yModule,
+            McCommonModule,
+            FormsModule
+        ]] });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McInputModule, decorators: [{
             type: NgModule,
             args: [{
-                    imports: [CommonModule, A11yModule, McCommonModule, FormsModule],
-                    exports: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator],
-                    declarations: [McInput, McNumberInput, McInputMono, MinValidator, MaxValidator]
+                    imports: [
+                        CommonModule,
+                        A11yModule,
+                        McCommonModule,
+                        FormsModule
+                    ],
+                    declarations: [
+                        McInput,
+                        McNumberInput,
+                        McInputPassword,
+                        McPasswordToggle,
+                        McInputMono,
+                        MinValidator,
+                        MaxValidator
+                    ],
+                    exports: [
+                        McInput,
+                        McNumberInput,
+                        McInputPassword,
+                        McPasswordToggle,
+                        McInputMono,
+                        MinValidator,
+                        MaxValidator
+                    ]
                 }]
         }] });
 
@@ -601,5 +995,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { BIG_STEP, MAX_VALIDATOR, MC_INPUT_VALUE_ACCESSOR, MIN_VALIDATOR, MaxValidator, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McNumberInput, MinValidator, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter };
+export { BIG_STEP, MAX_VALIDATOR, MC_INPUT_VALUE_ACCESSOR, MIN_VALIDATOR, MaxValidator, McInput, McInputBase, McInputMixinBase, McInputModule, McInputMono, McInputPassword, McNumberInput, McPasswordToggle, MinValidator, SMALL_STEP, add, getPrecision, isDigit, isFloat, isInt, normalizeSplitter };
 //# sourceMappingURL=ptsecurity-mosaic-input.mjs.map
