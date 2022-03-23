@@ -436,7 +436,7 @@ class McSidepanelHeader {
         </div>
         <button *ngIf="closeable" mc-sidepanel-close>
             <span class="mc-sidepanel-close-x">
-                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="themePalette.Primary"></i>
+                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="themePalette.Second"></i>
             </span>
         </button>
     `, isInline: true, components: [{ type: i3$1.McIcon, selector: "[mc-icon]", inputs: ["color"] }], directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: McSidepanelClose, selector: "button[mc-sidepanel-close], button[mcSidepanelClose]", inputs: ["mc-sidepanel-close", "mcSidepanelClose"] }, { type: i3$1.McIconCSSStyler, selector: "[mc-icon]" }] });
@@ -450,7 +450,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
         </div>
         <button *ngIf="closeable" mc-sidepanel-close>
             <span class="mc-sidepanel-close-x">
-                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="themePalette.Primary"></i>
+                <i mc-icon="mc-close-L_16" class="mc-icon mc-icon_light" [color]="themePalette.Second"></i>
             </span>
         </button>
     `,
