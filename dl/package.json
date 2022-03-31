@@ -1,0 +1,10 @@
+{
+  "module": "../fesm2015/ptsecurity-mosaic-dl.mjs",
+  "es2020": "../fesm2020/ptsecurity-mosaic-dl.mjs",
+  "esm2020": "../esm2020/dl/ptsecurity-mosaic-dl.mjs",
+  "fesm2020": "../fesm2020/ptsecurity-mosaic-dl.mjs",
+  "fesm2015": "../fesm2015/ptsecurity-mosaic-dl.mjs",
+  "typings": "ptsecurity-mosaic-dl.d.ts",
+  "sideEffects": false,
+  "name": "@ptsecurity/mosaic/dl"
+}
