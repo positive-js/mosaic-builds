@@ -638,6 +638,54 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
             }], disabled: [{
                 type: Input
             }] } });
+class McNavbarRectangleElement {
+    constructor(elementRef) {
+        this.elementRef = elementRef;
+        this.state = new Subject();
+    }
+    get horizontal() {
+        return this._horizontal;
+    }
+    set horizontal(value) {
+        this._horizontal = value;
+        this.state.next();
+    }
+    get vertical() {
+        return this._vertical;
+    }
+    set vertical(value) {
+        this._vertical = value;
+        this.state.next();
+    }
+    get collapsed() {
+        return this._collapsed;
+    }
+    set collapsed(value) {
+        this._collapsed = value;
+        this.state.next();
+    }
+    getOuterElementWidth() {
+        const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
+        return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item), 0);
+    }
+}
+/** @nocollapse */ /** @nocollapse */ McNavbarRectangleElement.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McNavbarRectangleElement, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McNavbarRectangleElement.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McNavbarRectangleElement, selector: "mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]", host: { properties: { "class.mc-vertical": "vertical", "class.mc-horizontal": "horizontal", "class.mc-expanded": "vertical && !collapsed", "class.mc-collapsed": "vertical && collapsed" } }, queries: [{ propertyName: "button", first: true, predicate: McButtonCssStyler, descendants: true }], ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McNavbarRectangleElement, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
+                    host: {
+                        '[class.mc-vertical]': 'vertical',
+                        '[class.mc-horizontal]': 'horizontal',
+                        '[class.mc-expanded]': 'vertical && !collapsed',
+                        '[class.mc-collapsed]': 'vertical && collapsed'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }]; }, propDecorators: { button: [{
+                type: ContentChild,
+                args: [McButtonCssStyler]
+            }] } });
 class McNavbarItem extends McTooltipTrigger {
     constructor(rectangleElement, changeDetectorRef, overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction, dropdownTrigger, bento) {
         super(overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction);
@@ -766,54 +814,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
                 type: Input
             }], collapsable: [{
                 type: Input
-            }] } });
-class McNavbarRectangleElement {
-    constructor(elementRef) {
-        this.elementRef = elementRef;
-        this.state = new Subject();
-    }
-    get horizontal() {
-        return this._horizontal;
-    }
-    set horizontal(value) {
-        this._horizontal = value;
-        this.state.next();
-    }
-    get vertical() {
-        return this._vertical;
-    }
-    set vertical(value) {
-        this._vertical = value;
-        this.state.next();
-    }
-    get collapsed() {
-        return this._collapsed;
-    }
-    set collapsed(value) {
-        this._collapsed = value;
-        this.state.next();
-    }
-    getOuterElementWidth() {
-        const { width, marginLeft, marginRight } = window.getComputedStyle(this.elementRef.nativeElement);
-        return [width, marginLeft, marginRight].reduce((acc, item) => acc + parseInt(item), 0);
-    }
-}
-/** @nocollapse */ /** @nocollapse */ McNavbarRectangleElement.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McNavbarRectangleElement, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McNavbarRectangleElement.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McNavbarRectangleElement, selector: "mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]", host: { properties: { "class.mc-vertical": "vertical", "class.mc-horizontal": "horizontal", "class.mc-expanded": "vertical && !collapsed", "class.mc-collapsed": "vertical && collapsed" } }, queries: [{ propertyName: "button", first: true, predicate: McButtonCssStyler, descendants: true }], ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McNavbarRectangleElement, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: 'mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]',
-                    host: {
-                        '[class.mc-vertical]': 'vertical',
-                        '[class.mc-horizontal]': 'horizontal',
-                        '[class.mc-expanded]': 'vertical && !collapsed',
-                        '[class.mc-collapsed]': 'vertical && collapsed'
-                    }
-                }]
-        }], ctorParameters: function () { return [{ type: i0.ElementRef }]; }, propDecorators: { button: [{
-                type: ContentChild,
-                args: [McButtonCssStyler]
             }] } });
 class McNavbarToggle extends McTooltipTrigger {
     constructor(navbar, changeDetectorRef, overlay, elementRef, ngZone, scrollDispatcher, hostView, scrollStrategy, direction, document) {

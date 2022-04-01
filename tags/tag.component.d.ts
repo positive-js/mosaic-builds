@@ -30,26 +30,6 @@ export declare class McTagTrailingIcon {
     static ɵfac: i0.ɵɵFactoryDeclaration<McTagTrailingIcon, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<McTagTrailingIcon, "mc-tag-trailing-icon, [mcTagTrailingIcon]", never, {}, {}, never>;
 }
-/**
- *
- * Example:
- *
- *     `<mc-tag>
- *       <mc-icon mcTagRemove>cancel</mc-icon>
- *     </mc-tag>`
- *
- * You *may* use a custom icon, but you may need to override the `mc-tag-remove` positioning
- * styles to properly center the icon within the tag.
- */
-export declare class McTagRemove {
-    protected parentTag: McTag;
-    constructor(parentTag: McTag);
-    focus($event: any): void;
-    /** Calls the parent tag's public `remove()` method if applicable. */
-    handleClick(event: Event): void;
-    static ɵfac: i0.ɵɵFactoryDeclaration<McTagRemove, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McTagRemove, "[mcTagRemove]", never, {}, {}, never>;
-}
 export declare class McTagBase {
     _elementRef: ElementRef;
     constructor(_elementRef: ElementRef);
@@ -132,4 +112,24 @@ export declare class McTag extends McTagMixinBase implements IFocusableOption, O
     private dispatchSelectionChange;
     static ɵfac: i0.ɵɵFactoryDeclaration<McTag, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<McTag, "mc-tag, [mc-tag], mc-basic-tag, [mc-basic-tag]", ["mcTag"], { "color": "color"; "selected": "selected"; "value": "value"; "selectable": "selectable"; "removable": "removable"; "disabled": "disabled"; }, { "selectionChange": "selectionChange"; "destroyed": "destroyed"; "removed": "removed"; }, ["avatar", "trailingIcon", "removeIcon", "contentChildren"], ["*", "[mc-icon]"]>;
+}
+/**
+ *
+ * Example:
+ *
+ *     `<mc-tag>
+ *       <mc-icon mcTagRemove>cancel</mc-icon>
+ *     </mc-tag>`
+ *
+ * You *may* use a custom icon, but you may need to override the `mc-tag-remove` positioning
+ * styles to properly center the icon within the tag.
+ */
+export declare class McTagRemove {
+    protected parentTag: McTag;
+    constructor(parentTag: McTag);
+    focus($event: any): void;
+    /** Calls the parent tag's public `remove()` method if applicable. */
+    handleClick(event: Event): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McTagRemove, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McTagRemove, "[mcTagRemove]", never, {}, {}, never>;
 }

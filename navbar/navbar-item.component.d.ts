@@ -91,6 +91,24 @@ export declare class McNavbarFocusableItem implements IFocusableOption, AfterCon
     static ɵfac: i0.ɵɵFactoryDeclaration<McNavbarFocusableItem, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<McNavbarFocusableItem, "mc-navbar-item, [mc-navbar-item], mc-navbar-brand, [mc-navbar-brand], mc-navbar-toggle", never, { "disabled": "disabled"; }, {}, ["title", "button"]>;
 }
+export declare class McNavbarRectangleElement {
+    elementRef: ElementRef;
+    readonly state: Subject<void>;
+    get horizontal(): boolean;
+    set horizontal(value: boolean);
+    private _horizontal;
+    get vertical(): boolean;
+    set vertical(value: boolean);
+    private _vertical;
+    get collapsed(): boolean;
+    set collapsed(value: boolean);
+    private _collapsed;
+    button: McButtonCssStyler;
+    constructor(elementRef: ElementRef);
+    getOuterElementWidth(): number;
+    static ɵfac: i0.ɵɵFactoryDeclaration<McNavbarRectangleElement, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<McNavbarRectangleElement, "mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]", never, {}, {}, ["button"]>;
+}
 export declare class McNavbarItem extends McTooltipTrigger {
     rectangleElement: McNavbarRectangleElement;
     private changeDetectorRef;
@@ -122,24 +140,6 @@ export declare class McNavbarItem extends McTooltipTrigger {
     onKeyDown($event: KeyboardEvent): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<McNavbarItem, [null, null, null, null, null, null, null, null, { optional: true; }, { optional: true; }, { optional: true; }]>;
     static ɵcmp: i0.ɵɵComponentDeclaration<McNavbarItem, "mc-navbar-item, [mc-navbar-item]", ["mcNavbarItem"], { "collapsedText": "collapsedText"; "collapsed": "collapsed"; "collapsable": "collapsable"; }, {}, ["title", "subTitle", "icon"], ["[mc-icon]", "mc-navbar-title, [mc-navbar-title]", "mc-navbar-subtitle, [mc-navbar-subtitle]", "*"]>;
-}
-export declare class McNavbarRectangleElement {
-    elementRef: ElementRef;
-    readonly state: Subject<void>;
-    get horizontal(): boolean;
-    set horizontal(value: boolean);
-    private _horizontal;
-    get vertical(): boolean;
-    set vertical(value: boolean);
-    private _vertical;
-    get collapsed(): boolean;
-    set collapsed(value: boolean);
-    private _collapsed;
-    button: McButtonCssStyler;
-    constructor(elementRef: ElementRef);
-    getOuterElementWidth(): number;
-    static ɵfac: i0.ɵɵFactoryDeclaration<McNavbarRectangleElement, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<McNavbarRectangleElement, "mc-navbar-item, [mc-navbar-item], mc-navbar-divider, mc-navbar-brand, [mc-navbar-brand]", never, {}, {}, ["button"]>;
 }
 export declare class McNavbarToggle extends McTooltipTrigger implements OnDestroy {
     navbar: McVerticalNavbar;

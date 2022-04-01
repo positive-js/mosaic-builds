@@ -2,7 +2,7 @@ import { PlatformModule } from '@angular/cdk/platform';
 import * as i4 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { InjectionToken, Directive, forwardRef, Inject, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ContentChildren, ContentChild, Output, Input, Optional, Self, NgModule } from '@angular/core';
+import { InjectionToken, Directive, EventEmitter, Component, ChangeDetectionStrategy, ViewEncapsulation, ContentChildren, ContentChild, forwardRef, Output, Input, Inject, Optional, Self, NgModule } from '@angular/core';
 import { SPACE, BACKSPACE, DELETE, HOME, END, ENTER, TAB, COMMA, hasModifierKey } from '@ptsecurity/cdk/keycodes';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import * as i3 from '@angular/forms';
@@ -59,55 +59,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
                     host: { class: 'mc-tag-trailing-icon' }
                 }]
         }] });
-/**
- *
- * Example:
- *
- *     `<mc-tag>
- *       <mc-icon mcTagRemove>cancel</mc-icon>
- *     </mc-tag>`
- *
- * You *may* use a custom icon, but you may need to override the `mc-tag-remove` positioning
- * styles to properly center the icon within the tag.
- */
-class McTagRemove {
-    constructor(parentTag) {
-        this.parentTag = parentTag;
-    }
-    focus($event) {
-        $event.stopPropagation();
-    }
-    /** Calls the parent tag's public `remove()` method if applicable. */
-    handleClick(event) {
-        if (this.parentTag.removable) {
-            this.parentTag.hasFocus = true;
-            this.parentTag.remove();
-        }
-        // We need to stop event propagation because otherwise the event will bubble up to the
-        // form field and cause the `onContainerClick` method to be invoked. This method would then
-        // reset the focused tag that has been focused after tag removal. Usually the parent
-        // the parent click listener of the `McTag` would prevent propagation, but it can happen
-        // that the tag is being removed before the event bubbles up.
-        event.stopPropagation();
-    }
-}
-/** @nocollapse */ /** @nocollapse */ McTagRemove.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTagRemove, deps: [{ token: forwardRef(() => McTag) }], target: i0.ɵɵFactoryTarget.Directive });
-/** @nocollapse */ /** @nocollapse */ McTagRemove.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McTagRemove, selector: "[mcTagRemove]", host: { listeners: { "click": "handleClick($event)", "focus": "focus($event)" }, properties: { "attr.tabindex": "-1" }, classAttribute: "mc-tag-remove mc-tag-trailing-icon" }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTagRemove, decorators: [{
-            type: Directive,
-            args: [{
-                    selector: '[mcTagRemove]',
-                    host: {
-                        class: 'mc-tag-remove mc-tag-trailing-icon',
-                        '[attr.tabindex]': '-1',
-                        '(click)': 'handleClick($event)',
-                        '(focus)': 'focus($event)'
-                    }
-                }]
-        }], ctorParameters: function () { return [{ type: McTag, decorators: [{
-                    type: Inject,
-                    args: [forwardRef(() => McTag)]
-                }] }]; } });
 class McTagBase {
     // tslint:disable-next-line:naming-convention
     constructor(_elementRef) {
@@ -388,6 +339,55 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImpor
             }], disabled: [{
                 type: Input
             }] } });
+/**
+ *
+ * Example:
+ *
+ *     `<mc-tag>
+ *       <mc-icon mcTagRemove>cancel</mc-icon>
+ *     </mc-tag>`
+ *
+ * You *may* use a custom icon, but you may need to override the `mc-tag-remove` positioning
+ * styles to properly center the icon within the tag.
+ */
+class McTagRemove {
+    constructor(parentTag) {
+        this.parentTag = parentTag;
+    }
+    focus($event) {
+        $event.stopPropagation();
+    }
+    /** Calls the parent tag's public `remove()` method if applicable. */
+    handleClick(event) {
+        if (this.parentTag.removable) {
+            this.parentTag.hasFocus = true;
+            this.parentTag.remove();
+        }
+        // We need to stop event propagation because otherwise the event will bubble up to the
+        // form field and cause the `onContainerClick` method to be invoked. This method would then
+        // reset the focused tag that has been focused after tag removal. Usually the parent
+        // the parent click listener of the `McTag` would prevent propagation, but it can happen
+        // that the tag is being removed before the event bubbles up.
+        event.stopPropagation();
+    }
+}
+/** @nocollapse */ /** @nocollapse */ McTagRemove.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTagRemove, deps: [{ token: forwardRef(() => McTag) }], target: i0.ɵɵFactoryTarget.Directive });
+/** @nocollapse */ /** @nocollapse */ McTagRemove.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.0", type: McTagRemove, selector: "[mcTagRemove]", host: { listeners: { "click": "handleClick($event)", "focus": "focus($event)" }, properties: { "attr.tabindex": "-1" }, classAttribute: "mc-tag-remove mc-tag-trailing-icon" }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.0", ngImport: i0, type: McTagRemove, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[mcTagRemove]',
+                    host: {
+                        class: 'mc-tag-remove mc-tag-trailing-icon',
+                        '[attr.tabindex]': '-1',
+                        '(click)': 'handleClick($event)',
+                        '(focus)': 'focus($event)'
+                    }
+                }]
+        }], ctorParameters: function () { return [{ type: McTag, decorators: [{
+                    type: Inject,
+                    args: [forwardRef(() => McTag)]
+                }] }]; } });
 
 class McTagListBase {
     constructor(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl) {
