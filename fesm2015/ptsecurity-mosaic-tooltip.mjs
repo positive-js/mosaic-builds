@@ -158,6 +158,7 @@ class McTooltipTrigger extends McPopUpTrigger {
             return;
         }
         this.instance.content = this.content;
+        this.instance.detectChanges();
     }
     closingActions() {
         return merge(this.overlayRef.outsidePointerEvents(), this.overlayRef.detachments());
