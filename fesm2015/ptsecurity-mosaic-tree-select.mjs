@@ -215,7 +215,7 @@ class McTreeSelect extends McTreeSelectMixinBase {
         }
     }
     get value() {
-        return this.multiple ? this.tree.getSelectedValues() : this.tree.getSelectedValues()[0];
+        return this.tree.getSelectedValues();
     }
     get id() {
         return this._id;

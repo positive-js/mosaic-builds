@@ -898,8 +898,9 @@ class McTreeSelection extends McTreeBase {
             this.resetOptions();
             // Check to see if we need to update our tab index
             this.updateTabIndex();
+            const selectedValues = this.multiple ? this.getSelectedValues() : [this.getSelectedValues()];
             options.forEach((option) => {
-                if (this.getSelectedValues().includes(option.value)) {
+                if (selectedValues.includes(option.value)) {
                     option.select(false);
                 }
                 else {
@@ -1116,7 +1117,8 @@ class McTreeSelection extends McTreeBase {
         this.selectionModel.select(...valuesToSelect);
     }
     getSelectedValues() {
-        return this.selectionModel.selected.map((selected) => this.treeControl.getValue(selected));
+        const selectedValues = this.selectionModel.selected.map((selected) => this.treeControl.getValue(selected));
+        return this.multiple ? selectedValues : selectedValues[0];
     }
     getItemHeight() {
         return this.renderedOptions.first ? this.renderedOptions.first.getHeight() : 0;
